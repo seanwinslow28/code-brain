@@ -1,0 +1,21 @@
+{
+  "name": "core-features",
+  "description": "Foundational Claude Code architecture: skill system, hooks, subagents, MCP servers, settings, CLI, and headless automation",
+  "version": "3.0.0",
+  "dependencies": [],
+  "skills": [
+    "team-styleguide",
+    "commit-checklist",
+    "org-definition-of-done",
+    "cli-mastery",
+    "config-settings",
+    "headless-automation",
+    "hooks-configuration",
+    "mcp-integration",
+    "skill-system-mastery",
+    "subagent-orchestration",
+    "subagent-driven-development"
+  ],
+  "agents": [],
+  "hooks": []
+}

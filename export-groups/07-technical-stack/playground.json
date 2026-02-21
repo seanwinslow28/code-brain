@@ -1,0 +1,24 @@
+{
+  "name": "technical-stack",
+  "description": "Primary tech stack mastery: React, Vite, Tailwind, Python automation, Supabase, Git workflows, Docker, and IDE integration",
+  "version": "3.0.0",
+  "dependencies": [
+    "core-features"
+  ],
+  "skills": [
+    "personal-app-patterns",
+    "rn-architecture",
+    "rn-debug",
+    "prototype-scaffold",
+    "cursor-integration",
+    "docker-devops",
+    "git-github-workflows",
+    "python-automation",
+    "react-vite-tailwind",
+    "supabase-backend"
+  ],
+  "agents": [
+    "code-reviewer"
+  ],
+  "hooks": []
+}

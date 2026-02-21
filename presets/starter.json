@@ -1,0 +1,9 @@
+{
+  "name": "starter",
+  "description": "Safe defaults for beginners. Core features and community resources for learning Claude Code.",
+  "export_groups": [
+    "01-core-features",
+    "09-community-resources"
+  ],
+  "security": "standard"
+}

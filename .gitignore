@@ -1,0 +1,54 @@
+# Local Claude Code settings (never commit)
+**/.claude/settings.local.json
+
+# Tool usage logs
+**/.claude/tool-use.log
+**/.claude/*.log
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Test outputs
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Obsidian vault (local workspace state)
+vault/.obsidian/workspace*.json
+vault/.obsidian/plugins/
+vault/.obsidian/themes/
+vault/.trash/
+vault/.smart-env/
+vault/50_sources/finance/*.csv
+
+# Life Systems data (private)
+life-systems/finance/*.csv
+life-systems/health/*.csv
+life-systems/tasks/*.csv

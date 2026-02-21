@@ -1,0 +1,71 @@
+{
+  "name": "claude-code-superuser-pack",
+  "version": "3.0.0",
+  "description": "Personal command center with 89 skills, 11 agents, 6 domain workspaces, and Obsidian vault for Claude Code",
+  "author": "Sean Winslow",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seanwinslow/claude-code-superuser-pack"
+  },
+  "keywords": [
+    "claude-code",
+    "productivity",
+    "skills",
+    "agents",
+    "hooks",
+    "export-groups"
+  ],
+  "export_groups": {
+    "01-core-features": {
+      "description": "CLI, hooks, subagents, MCP, settings, skill system",
+      "skills": 12
+    },
+    "02-pm-workflows": {
+      "description": "PRDs, tickets, stakeholder updates, data analysis",
+      "skills": 13
+    },
+    "03-creative-projects": {
+      "description": "Phaser 3, sprites, pixel art, AI creative tools",
+      "skills": 7
+    },
+    "04-advanced-techniques": {
+      "description": "Multi-instance, context management, Plan Mode, security",
+      "skills": 7
+    },
+    "05-life-optimization": {
+      "description": "Finance, tasks, learning, health, time management",
+      "skills": 8
+    },
+    "06-obsidian-integration": {
+      "description": "Vault architecture, MCP setup, semantic search",
+      "skills": 6
+    },
+    "07-technical-stack": {
+      "description": "React, Python, Supabase, Git, Docker, Cursor",
+      "skills": 9
+    },
+    "08-domain-specific": {
+      "description": "Crypto, education, API PM, RevOps, AI-native",
+      "skills": 5
+    },
+    "09-community-resources": {
+      "description": "Learning paths, troubleshooting, case studies",
+      "skills": 6
+    },
+    "10-master-designer": {
+      "description": "Animations, micro-interactions, Tailwind, Figma",
+      "skills": 8
+    },
+    "11-remotion-mastery": {
+      "description": "Video creation, typography, data viz, transitions",
+      "skills": 8
+    }
+  },
+  "presets": ["starter", "power", "enterprise", "creative"],
+  "plugin": {
+    "description": "Safe, universal components for Claude Code plugin distribution",
+    "skills": ["team-styleguide", "commit-checklist", "safe-ops"],
+    "agents": ["security-reviewer"],
+    "hooks": ["block-secrets", "log-tool-use"]
+  }
+}

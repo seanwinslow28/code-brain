@@ -1,0 +1,19 @@
+{
+  "name": "domain-specific",
+  "description": "Industry and role-specific applications: crypto/Web3 product context, education platforms, API product management, RevOps/AdOps, and AI-native products",
+  "version": "3.0.0",
+  "dependencies": [
+    "core-features",
+    "pm-workflows"
+  ],
+  "skills": [
+    "ai-native-products",
+    "api-product-management",
+    "campus-education",
+    "crypto-web3-context",
+    "etf-page-creator",
+    "revops-adops-automation"
+  ],
+  "agents": [],
+  "hooks": []
+}

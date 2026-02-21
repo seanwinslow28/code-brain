@@ -1,0 +1,18 @@
+{
+  "name": "power",
+  "description": "Full productivity across all domains. Includes every export group with standard security.",
+  "export_groups": [
+    "01-core-features",
+    "02-pm-workflows",
+    "03-creative-projects",
+    "04-advanced-techniques",
+    "05-life-optimization",
+    "06-obsidian-integration",
+    "07-technical-stack",
+    "08-domain-specific",
+    "09-community-resources",
+    "10-master-designer",
+    "11-remotion-mastery"
+  ],
+  "security": "standard"
+}

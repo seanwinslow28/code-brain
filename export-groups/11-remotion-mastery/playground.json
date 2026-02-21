@@ -1,0 +1,21 @@
+{
+  "name": "remotion-mastery",
+  "description": "AI-assisted programmatic video creation: Remotion fundamentals, text/typography animations, data visualization, transitions, social media formats, audio/3D/AI media, and performance tuning",
+  "version": "3.0.0",
+  "dependencies": [
+    "core-features",
+    "technical-stack"
+  ],
+  "skills": [
+    "remotion-advanced",
+    "remotion-claude-config",
+    "remotion-data-viz",
+    "remotion-fundamentals",
+    "remotion-social-output",
+    "remotion-transitions",
+    "remotion-troubleshooting",
+    "remotion-typography"
+  ],
+  "agents": [],
+  "hooks": []
+}

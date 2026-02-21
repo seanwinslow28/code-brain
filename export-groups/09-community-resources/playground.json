@@ -1,0 +1,17 @@
+{
+  "name": "community-resources",
+  "description": "Meta-learning and community knowledge: troubleshooting guides, learning paths, changelog navigation, community guides, and case studies",
+  "version": "3.0.0",
+  "dependencies": [
+    "core-features"
+  ],
+  "skills": [
+    "case-studies",
+    "changelog-navigator",
+    "community-navigation",
+    "learning-path",
+    "troubleshooting-guide"
+  ],
+  "agents": [],
+  "hooks": []
+}

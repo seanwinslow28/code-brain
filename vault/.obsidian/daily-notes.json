@@ -1,0 +1,5 @@
+{
+  "folder": "10_timeline/daily",
+  "format": "YYYY-MM-DD",
+  "template": "90_system/templates/tpl-daily"
+}
