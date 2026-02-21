@@ -1,0 +1,22 @@
+{
+  "name": "advanced-techniques",
+  "description": "Power-user productivity: multi-instance development, context window management, CLAUDE.md optimization, verification loops, Plan Mode, security hardening, and Chrome integration",
+  "version": "3.0.0",
+  "dependencies": [
+    "core-features"
+  ],
+  "skills": [
+    "chrome-workflows",
+    "context-management",
+    "parallel-instances",
+    "plan-and-think",
+    "security-hardening",
+    "verification-loops",
+    "systematic-debugging",
+    "verification-before-completion",
+    "zapier-chrome-automation",
+    "zapier-mcp-automation"
+  ],
+  "agents": [],
+  "hooks": []
+}

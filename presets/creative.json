@@ -1,0 +1,12 @@
+{
+  "name": "creative",
+  "description": "Creative and design-focused development. Game dev, design systems, animations, and video production.",
+  "export_groups": [
+    "01-core-features",
+    "03-creative-projects",
+    "07-technical-stack",
+    "10-master-designer",
+    "11-remotion-mastery"
+  ],
+  "security": "standard"
+}

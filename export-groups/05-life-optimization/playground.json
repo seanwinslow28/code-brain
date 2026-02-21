@@ -1,0 +1,21 @@
+{
+  "name": "life-optimization",
+  "description": "Personal life automation: daily planning, finance tracking, subscription auditing, task management, learning acceleration, and habit tracking",
+  "version": "3.4.0",
+  "dependencies": [
+    "core-features"
+  ],
+  "skills": [
+    "career-transition",
+    "daily-driver",
+    "health-habits",
+    "learning-accelerator",
+    "life-admin",
+    "personal-finance",
+    "personal-task-management",
+    "subscription-audit",
+    "time-management"
+  ],
+  "agents": [],
+  "hooks": []
+}

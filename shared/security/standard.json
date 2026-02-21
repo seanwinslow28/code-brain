@@ -1,0 +1,20 @@
+{
+  "description": "Standard security profile. Blocks writes to sensitive files.",
+  "permissions": {
+    "default": "ask",
+    "rules": [
+      { "pattern": "**/.env*", "permission": "deny" },
+      { "pattern": "**/secrets/**", "permission": "deny" },
+      { "pattern": "**/*secret*", "permission": "deny" }
+    ]
+  },
+  "hooks": {
+    "preToolUse": [
+      { "command": ".claude/hooks/block-secrets.py", "event": "PreToolUse" }
+    ],
+    "postToolUse": [
+      { "command": ".claude/hooks/log-tool-use.sh", "event": "PostToolUse" }
+    ],
+    "postStop": []
+  }
+}

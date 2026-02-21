@@ -1,0 +1,74 @@
+{
+  "version": "1.0.0",
+  "description": "Power pack - Enhanced productivity with PM, creative, and life automation skills",
+  "permissions": {
+    "default": "ask",
+    "rules": [
+      {
+        "pattern": "**/.env*",
+        "action": "deny"
+      },
+      {
+        "pattern": "**/secrets/**",
+        "action": "deny"
+      },
+      {
+        "pattern": "**/*secret*",
+        "action": "deny"
+      }
+    ]
+  },
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "script",
+        "path": ".claude/hooks/block-secrets.py",
+        "interpreter": "python3"
+      }
+    ],
+    "postToolUse": [
+      {
+        "type": "script",
+        "path": ".claude/hooks/log-tool-use.sh",
+        "interpreter": "bash"
+      },
+      {
+        "type": "script",
+        "path": ".claude/hooks/format-on-edit.sh",
+        "interpreter": "bash"
+      }
+    ],
+    "postStop": [
+      {
+        "type": "script",
+        "path": ".claude/hooks/run-tests-on-stop.sh",
+        "interpreter": "bash"
+      }
+    ]
+  },
+  "skills": {
+    "enabled": [
+      "team-styleguide",
+      "commit-checklist",
+      "safe-ops",
+      "pm-prd",
+      "pm-jira",
+      "pm-stakeholder-update",
+      "react-native-phaser",
+      "supabase-python",
+      "life-budget"
+    ]
+  },
+  "agents": {
+    "enabled": [
+      "pm-tech-writer",
+      "security-reviewer",
+      "game-design-advisor",
+      "data-analyst"
+    ]
+  },
+  "notes": {
+    "settingsPrecedence": "Settings precedence (highest to lowest): Enterprise managed settings > Project local overrides (settings.local.json) > Project settings (this file) > User settings (~/.claude/claude.json)",
+    "permissionEvaluation": "Permission evaluation order: Deny → Ask → Allow (first match wins)"
+  }
+}

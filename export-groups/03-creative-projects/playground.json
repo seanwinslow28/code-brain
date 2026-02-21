@@ -1,0 +1,26 @@
+{
+  "name": "creative-projects",
+  "description": "Game development and creative asset production: Phaser 3, React Native integration, sprite pipelines, AI creative tools, and pixel art",
+  "version": "3.0.0",
+  "dependencies": [
+    "core-features",
+    "technical-stack"
+  ],
+  "skills": [
+    "2d-animation-principles",
+    "ai-creative-tools",
+    "animation-pipeline",
+    "comfyui-workflows",
+    "creative-writing",
+    "phaser-game-patterns",
+    "pixel-art-retro-style",
+    "script-writing",
+    "sprite-asset-pipeline",
+    "video-animation-production"
+  ],
+  "agents": [
+    "animation-director",
+    "game-design-advisor"
+  ],
+  "hooks": []
+}

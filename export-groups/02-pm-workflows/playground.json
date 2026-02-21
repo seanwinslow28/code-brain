@@ -1,0 +1,28 @@
+{
+  "name": "pm-workflows",
+  "description": "Product management acceleration: PRDs, tickets, stakeholder updates, specs, data analysis, and user research synthesis",
+  "version": "3.0.0",
+  "dependencies": [
+    "core-features"
+  ],
+  "skills": [
+    "analytics-workarounds",
+    "ticket-batch",
+    "tech-spec",
+    "technical-writing",
+    "meeting-prep",
+    "decision-doc",
+    "data-analysis",
+    "doc-workflows",
+    "jira-automation",
+    "prd-generator",
+    "research-synthesis",
+    "sprint-roadmap",
+    "stakeholder-update"
+  ],
+  "agents": [
+    "doc-reviewer",
+    "data-analyst"
+  ],
+  "hooks": []
+}

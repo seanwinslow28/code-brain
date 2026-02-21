@@ -1,0 +1,22 @@
+# Obsidian workspace state (changes constantly, not useful to track)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Obsidian plugins and themes (installed locally per machine)
+.obsidian/plugins/
+.obsidian/themes/
+
+# Obsidian trash
+.trash/
+
+# Smart Connections cache (rebuilds on open)
+.smart-env/
+
+# macOS
+.DS_Store
+
+# Temp files
+*.tmp
+
+# Sensitive financial data
+50_sources/finance/*.csv

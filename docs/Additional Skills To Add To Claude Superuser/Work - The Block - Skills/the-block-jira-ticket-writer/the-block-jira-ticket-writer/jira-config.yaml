@@ -1,0 +1,187 @@
+ # The Block Jira Configuration
+# Use this file to keep component and label mappings up to date
+
+## Components
+# Map features to their appropriate Jira components
+
+components:
+  # Primary product components
+  campus:
+    id: "10071"
+    name: "Campus"
+    description: "LMS/education platform"
+    use_for:
+      - Course features
+      - Learning paths
+      - Quiz/assessment
+      - Certificates
+      - Student progress
+      - Instructor tools
+      
+  theblock_co:
+    id: "10068"
+    name: "theblock.co"
+    description: "Free site"
+    use_for:
+      - Homepage
+      - Articles
+      - Navigation
+      - Public pages
+      - Job board
+      - Learn page (public)
+      
+  pro_research:
+    name: "Pro Research"
+    use_for:
+      - Research reports
+      - Research tools
+      - Pro research features
+      
+  pro_news:
+    name: "Pro News"
+    use_for:
+      - Premium news features
+      - Pro subscriber content
+      
+  pro_deals:
+    name: "Pro Deals"
+    use_for:
+      - Deal tracking
+      - Deal alerts
+      
+  pro_data:
+    name: "Pro Data"
+    use_for:
+      - Data dashboards
+      - Analytics features
+      - Market data
+      
+  pro_api:
+    name: "Pro API"
+    use_for:
+      - External API integrations
+      - API endpoints
+      - Third-party data
+      
+  launchpad:
+    name: "Launchpad"
+    use_for:
+      - Launchpad product features
+      
+  pro_connect:
+    name: "Pro Connect"
+    use_for:
+      - Networking features
+      
+  wordpress:
+    name: "Wordpress"
+    use_for:
+      - CMS changes
+      - Content publishing
+      - Editorial tools
+      
+  rss:
+    name: "RSS"
+    use_for:
+      - RSS feed features
+
+## Labels
+
+labels:
+  workflow:
+    - name: "NeedsDesign"
+      description: "Story requires design work before implementation can begin"
+      
+    - name: "ToGroom"
+      description: "Ticket needs to be groomed by product team"
+      
+  technical:
+    - name: "frontend"
+      description: "Story involves UI/frontend development work"
+      
+    - name: "BACKEND"
+      description: "Story involves backend/API/database work"
+
+## Project Keys
+
+project_keys:
+  primary:
+    PRO:
+      name: "Team 1"
+      description: "Main Product & Engineering project"
+      
+  secondary:
+    GD:
+      name: "Design"
+      description: "Design requests"
+      
+    DE:
+      name: "Data Engineering"
+      description: "Data pipeline work"
+      
+    OP:
+      name: "Infrastructure"
+      description: "DevOps/Infrastructure"
+      
+    BE:
+      name: "Block Engineering"
+      description: "Engineering-specific tasks"
+
+## Priority Mapping
+
+priorities:
+  - name: "Highest"
+    id: "1"
+    use_for: "Critical path, launch blockers, security issues"
+    
+  - name: "High"
+    id: "2"
+    use_for: "Core functionality, significant user impact, MVP features"
+    
+  - name: "Medium"
+    id: "3"
+    use_for: "Important enhancements, quality improvements"
+    
+  - name: "Low"
+    id: "4"
+    use_for: "Nice to have, future consideration"
+    
+  - name: "Lowest"
+    id: "5"
+    use_for: "Backlog items, someday/maybe"
+
+## Issue Types
+
+issue_types:
+  epic:
+    id: "10000"
+    description: "A big user story that needs to be broken down"
+    title_format: "{Feature Name}"
+    
+  story:
+    id: "10001"
+    description: "Functionality or a feature expressed as a user goal"
+    title_formats:
+      design: "[Design] {Feature Name}"
+      implementation: "[Implementation] {Feature Name}"
+      database: "DB > {Feature Name}"
+      
+  task:
+    id: "10002"
+    description: "A small, distinct piece of work"
+    title_format: "[Implementation] {Task Name}"
+    
+  bug:
+    id: "10003"
+    description: "A problem which impairs or prevents functionality"
+    title_format: "[Bug] {Issue Description}"
+    
+  subtask:
+    id: "10004"
+    description: "Sub-task of a parent issue"
+
+## Jira Instance
+
+jira:
+  base_url: "https://theblockcrypto.atlassian.net"
+  browse_url: "https://theblockcrypto.atlassian.net/browse/"

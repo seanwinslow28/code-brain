@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "obsidian-vault": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@mauricio.wolff/mcp-obsidian@latest",
+        "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault"
+      ],
+      "env": {}
+    }
+  }
+}

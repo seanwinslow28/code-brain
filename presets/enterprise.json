@@ -1,0 +1,10 @@
+{
+  "name": "enterprise",
+  "description": "Core productivity with maximum security. Enterprise-grade deny patterns and high-risk command blocking.",
+  "export_groups": [
+    "01-core-features",
+    "02-pm-workflows",
+    "08-domain-specific"
+  ],
+  "security": "enterprise"
+}

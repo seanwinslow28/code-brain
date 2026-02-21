@@ -1,0 +1,18 @@
+{
+  "name": "adobe-creative",
+  "description": "Adobe Creative Cloud automation via adb-mcp: Creative Director planning, Photoshop, Premiere, After Effects, Illustrator execution, and cross-app workflows.",
+  "version": "3.2.0",
+  "dependencies": [
+    "creative-projects"
+  ],
+  "skills": [
+    "creative-director",
+    "adobe-photoshop-mcp",
+    "adobe-premiere-mcp",
+    "adobe-aftereffects-mcp",
+    "adobe-illustrator-mcp",
+    "adobe-cross-app-workflows"
+  ],
+  "agents": [],
+  "hooks": []
+}

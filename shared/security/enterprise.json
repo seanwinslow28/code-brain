@@ -1,0 +1,52 @@
+{
+  "description": "Enterprise security profile. Extended deny patterns plus high-risk command blocking.",
+  "permissions": {
+    "default": "ask",
+    "rules": [
+      {
+        "pattern": "**/.env*",
+        "permission": "deny"
+      },
+      {
+        "pattern": "**/secrets/**",
+        "permission": "deny"
+      },
+      {
+        "pattern": "**/*secret*",
+        "permission": "deny"
+      },
+      {
+        "pattern": "**/*password*",
+        "permission": "deny"
+      },
+      {
+        "pattern": "**/*key*",
+        "permission": "deny"
+      }
+    ]
+  },
+  "hooks": {
+    "preToolUse": [
+      {
+        "command": ".claude/hooks/block-secrets.py",
+        "event": "PreToolUse"
+      },
+      {
+        "command": ".claude/hooks/require-confirm-highrisk.sh",
+        "event": "PreToolUse"
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": ".claude/hooks/log-tool-use.sh",
+        "event": "PostToolUse"
+      }
+    ],
+    "postStop": [
+      {
+        "command": ".claude/hooks/run-tests-on-stop.sh",
+        "event": "PostStop"
+      }
+    ]
+  }
+}

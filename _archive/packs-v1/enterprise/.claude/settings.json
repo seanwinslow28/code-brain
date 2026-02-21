@@ -1,0 +1,75 @@
+{
+  "version": "1.0.0",
+  "description": "Enterprise pack - Maximum safety with logging, compliance, and strict guardrails",
+  "permissions": {
+    "default": "ask",
+    "rules": [
+      {
+        "pattern": "**/.env*",
+        "action": "deny"
+      },
+      {
+        "pattern": "**/secrets/**",
+        "action": "deny"
+      },
+      {
+        "pattern": "**/*secret*",
+        "action": "deny"
+      },
+      {
+        "pattern": "**/*password*",
+        "action": "deny"
+      },
+      {
+        "pattern": "**/*key*",
+        "action": "deny"
+      }
+    ]
+  },
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "script",
+        "path": ".claude/hooks/block-secrets.py",
+        "interpreter": "python3"
+      },
+      {
+        "type": "script",
+        "path": ".claude/hooks/require-confirm-highrisk.sh",
+        "interpreter": "bash"
+      }
+    ],
+    "postToolUse": [
+      {
+        "type": "script",
+        "path": ".claude/hooks/log-tool-use.sh",
+        "interpreter": "bash"
+      }
+    ],
+    "postStop": [
+      {
+        "type": "script",
+        "path": ".claude/hooks/run-tests-on-stop.sh",
+        "interpreter": "bash"
+      }
+    ]
+  },
+  "skills": {
+    "enabled": [
+      "org-security",
+      "org-definition-of-done",
+      "pm-prd"
+    ]
+  },
+  "agents": {
+    "enabled": [
+      "security-reviewer",
+      "compliance-summarizer"
+    ]
+  },
+  "notes": {
+    "settingsPrecedence": "Settings precedence (highest to lowest): Enterprise managed settings > Project local overrides (settings.local.json) > Project settings (this file) > User settings (~/.claude/claude.json)",
+    "permissionEvaluation": "Permission evaluation order: Deny → Ask → Allow (first match wins)",
+    "testBlocking": "run-tests-on-stop.sh can be configured to block (set CLAUDE_TEST_BLOCKING=true) or run non-blocking (default). Document your organization's preference."
+  }
+}

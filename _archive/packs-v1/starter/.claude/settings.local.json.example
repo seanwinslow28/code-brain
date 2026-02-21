@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "description": "Local overrides - Copy this to settings.local.json and customize (never commit)",
+  "permissions": {
+    "default": "ask",
+    "rules": [
+      {
+        "pattern": "**/my-custom-sensitive-path/**",
+        "action": "deny"
+      }
+    ]
+  },
+  "hooks": {
+    "preToolUse": [],
+    "postToolUse": []
+  },
+  "notes": {
+    "instructions": "This file is for local-only customizations. Copy to settings.local.json and modify as needed. This file should be in .gitignore and never committed."
+  }
+}

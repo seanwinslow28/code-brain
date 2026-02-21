@@ -1,0 +1,18 @@
+{
+  "name": "obsidian-integration",
+  "description": "Bidirectional Obsidian vault and Claude Code knowledge management: MCP setup, vault architecture, semantic search, and automation",
+  "version": "3.0.0",
+  "dependencies": [
+    "core-features"
+  ],
+  "skills": [
+    "knowledge-graph-nav",
+    "obsidian-mcp-setup",
+    "obsidian-semantic-search",
+    "vault-architecture",
+    "vault-automation",
+    "vault-read-write"
+  ],
+  "agents": [],
+  "hooks": []
+}

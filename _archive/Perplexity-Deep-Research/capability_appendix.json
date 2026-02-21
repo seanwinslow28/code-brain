@@ -1,0 +1,339 @@
+{
+  "metadata": {
+    "report_title": "Claude Code Canonical Capability Map",
+    "generated_date": "2026-01-29",
+    "total_sources": 152,
+    "source_types": [
+      "official_docs",
+      "community_guides",
+      "github",
+      "reddit",
+      "youtube"
+    ],
+    "research_depth": "comprehensive"
+  },
+  "superuser_moves_top_25": [
+    {
+      "rank": 1,
+      "move": "CLAUDE.md Project Memory",
+      "what": "Auto-loaded context file defining project facts, architecture, commands",
+      "trigger": "/init to generate, # key to add entries during session",
+      "when": "Start of every project, updated continuously as project evolves",
+      "pitfalls": "Token bloat if too verbose; use @imports and .claude/rules/ for modularity",
+      "sources": [
+        "web:2",
+        "web:65",
+        "web:69"
+      ]
+    },
+    {
+      "rank": 2,
+      "move": "Plan Mode Before Execution",
+      "what": "Claude creates detailed plan for approval before making any changes",
+      "trigger": "Shift+Tab twice, or /plan command",
+      "when": "Complex tasks, unfamiliar codebases, high-stakes changes",
+      "pitfalls": "May auto-enable acceptEdits mode after approval; explicitly disable if unwanted",
+      "sources": [
+        "web:74",
+        "web:80",
+        "web:83"
+      ]
+    },
+    {
+      "rank": 3,
+      "move": "Background Tasks (Ctrl+B)",
+      "what": "Run long-running commands in background while Claude continues working",
+      "trigger": "Ctrl+B when command is running (press twice for tmux users)",
+      "when": "Dev servers, build tools, test runners, docker, terraform",
+      "pitfalls": "Need to retrieve output manually via TaskOutput tool",
+      "sources": [
+        "web:4",
+        "web:63"
+      ]
+    },
+    {
+      "rank": 4,
+      "move": "Custom Slash Commands with Arguments",
+      "what": "Reusable prompt templates invoked with /command-name, supports $ARGUMENTS",
+      "trigger": "Create .md file in ~/.claude/commands/ or .claude/commands/",
+      "when": "Frequent atomic tasks: testing, commits, scaffolding, project-specific workflows",
+      "pitfalls": "Restart Claude after creating/editing commands",
+      "sources": [
+        "web:6",
+        "web:86",
+        "web:92"
+      ]
+    },
+    {
+      "rank": 5,
+      "move": "Headless Mode for CI/CD",
+      "what": "Non-interactive mode for piping and automation",
+      "trigger": "claude -p \"query\" --output-format stream-json",
+      "when": "Code reviews in pipelines, automation scripts, data processing workflows",
+      "pitfalls": "No interactive clarifications; must provide complete context upfront",
+      "sources": [
+        "web:47",
+        "web:140",
+        "web:149"
+      ]
+    },
+    {
+      "rank": 6,
+      "move": "Subagent Delegation",
+      "what": "Specialized Claude instances with restricted tools and separate context",
+      "trigger": "/agents to configure, Claude auto-delegates based on description",
+      "when": "Code review, security scans, testing - isolated tasks that pollute main context",
+      "pitfalls": "Cannot spawn other subagents; background subagents can't ask clarifying questions",
+      "sources": [
+        "web:18",
+        "web:21",
+        "web:24"
+      ]
+    },
+    {
+      "rank": 7,
+      "move": "Permission Presets via allowedTools",
+      "what": "Pre-approve specific tools/commands to eliminate permission prompts",
+      "trigger": "Add to settings.json: permissions.allow array, or --allowedTools flag",
+      "when": "Trusted operations, workflow automation, team standards",
+      "pitfalls": "Deny rules override allow; order matters in permission hierarchy",
+      "sources": [
+        "web:78",
+        "web:141",
+        "web:144"
+      ]
+    },
+    {
+      "rank": 8,
+      "move": "Sandboxed Development",
+      "what": "Filesystem + network isolation for autonomous operation without risk",
+      "trigger": "/sandbox command",
+      "when": "Prompt injection concerns, untrusted repos, autonomous agent workflows",
+      "pitfalls": "May need to allow specific paths/domains; reduces prompts by 84% but adds config overhead",
+      "sources": [
+        "web:34",
+        "web:37",
+        "web:43"
+      ]
+    },
+    {
+      "rank": 9,
+      "move": "Extended Thinking for Complex Problems",
+      "what": "Claude spends more reasoning tokens before responding",
+      "trigger": "Tab key to toggle, or include 'think' in prompt",
+      "when": "Complex refactors, multi-step reasoning, formal verification, algorithm design",
+      "pitfalls": "Higher token cost, slower responses; overkill for routine tasks",
+      "sources": [
+        "web:114",
+        "web:117",
+        "web:120"
+      ]
+    },
+    {
+      "rank": 10,
+      "move": "@ File Mentions for Precision",
+      "what": "Directly reference files without waiting for Claude to search",
+      "trigger": "Type @ and use autocomplete to select file path",
+      "when": "Specific file edits, focused analysis, avoiding context pollution",
+      "pitfalls": "None - pure efficiency gain",
+      "sources": [
+        "web:4",
+        "web:119",
+        "web:122"
+      ]
+    },
+    {
+      "rank": 11,
+      "move": "Task Dependencies for Multi-Session Work",
+      "what": "Persistent task tracking with blockers and dependencies across sessions",
+      "trigger": "Set CLAUDE_CODE_TASK_LIST_ID env var, use TaskCreate/TaskUpdate tools",
+      "when": "Complex projects, parallel workstreams, multi-agent orchestration",
+      "pitfalls": "Tasks persist in ~/.claude/tasks/, not project-specific unless configured",
+      "sources": [
+        "web:126",
+        "web:131",
+        "web:137"
+      ]
+    },
+    {
+      "rank": 12,
+      "move": "Compact Conversations Strategically",
+      "what": "Summarize conversation to reduce token usage while preserving key decisions",
+      "trigger": "/compact [optional focus instruction]",
+      "when": "Before long tasks, near context limits, to maintain session continuity",
+      "pitfalls": "Early instructions may be lost; prefer CLAUDE.md for persistent rules",
+      "sources": [
+        "web:99",
+        "web:105",
+        "web:108"
+      ]
+    },
+    {
+      "rank": 13,
+      "move": "Hooks for Deterministic Actions",
+      "what": "Auto-run commands at lifecycle events (e.g., format on PostToolUse)",
+      "trigger": "/hooks command or edit settings.json hooks field",
+      "when": "Auto-formatting, linting, testing, commit message validation",
+      "pitfalls": "Stop/SubagentStop hooks use blocking:false by default to prevent loops",
+      "sources": [
+        "web:32",
+        "web:38",
+        "web:41"
+      ]
+    },
+    {
+      "rank": 14,
+      "move": "MCP Servers for External Tools",
+      "what": "Integrate external APIs, databases, docs via Model Context Protocol",
+      "trigger": "claude mcp add server-name, or /mcp command in session",
+      "when": "Access live data, proprietary APIs, specialized tools not built-in",
+      "pitfalls": "OAuth required for many remote servers; stdio transport more reliable than HTTP",
+      "sources": [
+        "web:19",
+        "web:22",
+        "web:25"
+      ]
+    },
+    {
+      "rank": 15,
+      "move": "Skills for Domain Expertise",
+      "what": "Auto-loaded knowledge packages triggered by context",
+      "trigger": "Create SKILL.md in ~/.claude/skills/ with descriptive frontmatter",
+      "when": "Security patterns, API design, testing conventions - expertise that applies conditionally",
+      "pitfalls": "Description field is critical for auto-loading; keep focused to avoid loading irrelevant skills",
+      "sources": [
+        "web:29",
+        "web:23",
+        "web:88"
+      ]
+    },
+    {
+      "rank": 16,
+      "move": "Chrome Integration for Build-Test-Verify",
+      "what": "Claude navigates browser, reads console, tests UIs without manual verification",
+      "trigger": "claude --chrome, then /chrome to confirm connection",
+      "when": "Frontend development, UI testing, design verification vs Figma",
+      "pitfalls": "Requires paid plan, no WSL support, needs Chrome extension installed",
+      "sources": [
+        "web:49",
+        "web:52",
+        "web:54"
+      ]
+    },
+    {
+      "rank": 17,
+      "move": "GitHub Actions Integration",
+      "what": "@claude mentions in PR/issue comments trigger automated implementations",
+      "trigger": "Add anthropics/claude-code-action@v1 to .github/workflows/",
+      "when": "PR feedback automation, issue-to-PR conversion, CI error fixes",
+      "pitfalls": "Requires ANTHROPIC_API_KEY secret; respects CLAUDE.md for standards",
+      "sources": [
+        "web:51",
+        "web:48",
+        "web:56"
+      ]
+    },
+    {
+      "rank": 18,
+      "move": "Output Styles for Custom Behavior",
+      "what": "Replace system prompt to change tone, personality, teaching style",
+      "trigger": "/output-style:new [name] [description] to create custom",
+      "when": "Pair programming (Learning), documentation (Explanatory), custom workflows",
+      "pitfalls": "Loses default coding instructions unless keep-coding-instructions:true",
+      "sources": [
+        "web:98",
+        "web:104",
+        "web:107"
+      ]
+    },
+    {
+      "rank": 19,
+      "move": "Rewind for Undo/Redo",
+      "what": "Roll back conversation and/or code state to previous point",
+      "trigger": "Esc+Esc (double escape), or /rewind command",
+      "when": "Bad generation, wrong direction, experimental changes to undo",
+      "pitfalls": "Code rewind may not catch all file system changes",
+      "sources": [
+        "web:4",
+        "web:66",
+        "web:119"
+      ]
+    },
+    {
+      "rank": 20,
+      "move": "Vim Mode for Power Editing",
+      "what": "Modal editing for prompt crafting with h/j/k/l navigation",
+      "trigger": "/vim to enable, or configure via /config",
+      "when": "Vim users who want muscle memory in prompts",
+      "pitfalls": "Subset of Vim - not all commands supported",
+      "sources": [
+        "web:115",
+        "web:118",
+        "web:124"
+      ]
+    },
+    {
+      "rank": 21,
+      "move": "Bash Mode for Direct Commands",
+      "what": "Run shell commands directly without Claude interpreting",
+      "trigger": "Prefix input with ! (e.g., !git status)",
+      "when": "Quick shell access, adding command output to context",
+      "pitfalls": "Output added to conversation - can bloat context with verbose commands",
+      "sources": [
+        "web:4",
+        "web:119"
+      ]
+    },
+    {
+      "rank": 22,
+      "move": "Context Visualization",
+      "what": "See exactly what's consuming your token budget as colored grid",
+      "trigger": "/context command",
+      "when": "Debugging context issues, optimizing token usage, before compaction",
+      "pitfalls": "None - pure insight tool",
+      "sources": [
+        "web:99",
+        "web:102",
+        "web:119"
+      ]
+    },
+    {
+      "rank": 23,
+      "move": "Multi-Session via Git Worktrees",
+      "what": "Run parallel Claude sessions on different branches/features",
+      "trigger": "git worktree add ../feature-a, then cd and run claude in each",
+      "when": "Parallel feature development, A/B testing approaches",
+      "pitfalls": "Each session has separate context; use CLAUDE_CODE_TASK_LIST_ID to share tasks",
+      "sources": [
+        "web:2",
+        "web:103"
+      ]
+    },
+    {
+      "rank": 24,
+      "move": "IDE Integration (VS Code/Cursor)",
+      "what": "Claude highlights active file, syncs with editor state",
+      "trigger": "/ide command after starting claude in IDE terminal",
+      "when": "Prefer graphical IDE but want Claude's power",
+      "pitfalls": "VS Code extension vs terminal mode have different UX; choose one workflow",
+      "sources": [
+        "web:125",
+        "web:128",
+        "web:133"
+      ]
+    },
+    {
+      "rank": 25,
+      "move": "Agent SDK for Custom Agents",
+      "what": "Programmatic access to Claude Code's agent loop, tools, context management",
+      "trigger": "Import @anthropic-ai/claude-agent-sdk, use query() function",
+      "when": "Building custom agents: email assistant, code reviewer, research agent",
+      "pitfalls": "V2 SDK in development; V1 stable but may have breaking changes",
+      "sources": [
+        "web:139",
+        "web:142",
+        "web:148"
+      ]
+    }
+  ]
+}

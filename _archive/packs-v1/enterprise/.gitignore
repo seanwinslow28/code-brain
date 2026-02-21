@@ -1,0 +1,15 @@
+# Local Claude Code settings (never commit)
+.claude/settings.local.json
+
+# Tool usage logs
+.claude/tool-use.log
+.claude/*.log
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+Thumbs.db

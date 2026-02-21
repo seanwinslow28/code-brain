@@ -1,0 +1,11 @@
+{
+  "promptDelete": false,
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "folder",
+  "newFileFolderPath": "00_inbox",
+  "attachmentFolderPath": "50_sources/assets",
+  "showLineNumber": true,
+  "strictLineBreaks": true,
+  "readableLineLength": true,
+  "openBehavior": "file:Home"
+}

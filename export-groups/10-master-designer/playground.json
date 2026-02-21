@@ -1,0 +1,21 @@
+{
+  "name": "master-designer",
+  "description": "Design excellence and premium UI production: animation libraries, micro-interactions, design systems, Tailwind advanced patterns, React Native animations, Figma workflows, and visual polish",
+  "version": "3.0.0",
+  "dependencies": [
+    "core-features",
+    "technical-stack"
+  ],
+  "skills": [
+    "animation-library-mastery",
+    "design-system-claude-md",
+    "figma-to-code-workflow",
+    "micro-interaction-patterns",
+    "prompting-beautiful-ui",
+    "react-native-animations",
+    "tailwind-advanced-patterns",
+    "visual-polish-checklist"
+  ],
+  "agents": [],
+  "hooks": []
+}
