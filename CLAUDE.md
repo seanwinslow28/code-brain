@@ -4,13 +4,13 @@ This is Sean's personal command center — a second brain for Claude Code.
 
 ## What This Repo Is
 
-102 skills, 13 agents, 7 hooks, 6 domain workspaces, and an Obsidian vault. Everything is active and auto-loaded. The installer exports subsets to other projects.
+106 skills, 13 agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
 
 ## Domain Workspaces
 
 | Domain | Purpose | Skills |
 |--------|---------|--------|
-| `claude-mastery/` | CLI, hooks, MCP, settings, tech stack | 36 |
+| `claude-mastery/` | CLI, hooks, MCP, settings, tech stack, prompt engineering | 37 |
 | `product-management/` | PRDs, sprints, stakeholder comms, data analysis, technical writing | 20 |
 | `creative-studio/` | Phaser game dev, Remotion video, pixel art, Adobe MCP, animation, writing | 25 |
 | `life-systems/` | Finance, health, learning, tasks, time, career | 9 |
@@ -40,14 +40,48 @@ python3 scripts/validate.py
 ./scripts/install.sh --list
 ```
 
+## Agents SDK (Autonomous Layer)
+
+The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Claude Agent SDK. These run **outside** Claude Code sessions on macOS launchd schedules. Skills are loaded as system prompts — no duplication.
+
+| Agent | Schedule | Skills Loaded |
+|-------|----------|---------------|
+| Daily Driver (morning) | 6:00 AM | daily-driver, vault-read-write |
+| Daily Driver (evening) | 5:00 PM | daily-driver, vault-read-write |
+| Daily Driver (weekly) | Friday 4:00 PM | daily-driver, vault-read-write |
+
+```bash
+# Dry run (free, prints prompt)
+cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode morning --dry-run
+
+# Live run
+cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode morning
+
+# Install/remove launchd schedules
+./agents-sdk/schedules/install_schedules.sh
+./agents-sdk/schedules/install_schedules.sh --remove
+
+# Run tests
+cd agents-sdk && PYTHONPATH=. pytest tests/ -v
+```
+
+Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key needed). Safety: max 30 turns, $0.50/run cap. Full docs: `docs/agents-sdk.md`.
+
 ## Architecture
 
 ```
 .claude/
-├── skills/          # ALL 102 skills (canonical, auto-loaded)
+├── skills/          # ALL 106 skills (canonical, auto-loaded)
 ├── agents/          # ALL 13 agents (9 domain + 4 design team)
 ├── hooks/           # 7 hooks (block-secrets, log-tool-use, network-access, etc.)
 └── settings.json    # Standard security profile
+
+agents-sdk/          # Autonomous agents (Claude Agent SDK, Python)
+├── agents/          # Agent scripts (daily_driver.py, more planned)
+├── lib/             # Shared modules (config, skill loader, vault I/O, logging)
+├── schedules/       # launchd plists + installer
+├── tests/           # pytest suite (33 tests)
+└── config.toml      # Agent config, paths, safety limits
 
 {6 domain dirs}/     # Working files, templates, reference, active projects
 vault/               # Obsidian vault (PARA + MOCs + Prompts + RAG)
@@ -80,4 +114,7 @@ plugin/              # Marketplace distribution
 - Skills live in `.claude/skills/` (not export-groups)
 - Agents live in `.claude/agents/` (not shared/agents/)
 - Update `export-groups/*/playground.json` manifests when adding/removing skills
-- Update `CHANGELOG.md` for version tracking
+- **Mandatory doc updates**: When creating a new Skill, Agent, Sub-Agent, Hook, or Script, you MUST update all three of these files:
+  - `CHANGELOG.md` — Add entry under the current version's Added section
+  - `CLAUDE.md` — Update counts (skill/agent/hook totals, domain table, architecture comment)
+  - `README.md` — Update counts and any affected tables

@@ -4,5 +4,6 @@
   "dataview",
   "obsidian-linter",
   "obsidian-local-rest-api",
-  "remotely-save"
+  "remotely-save",
+  "homepage"
 ]

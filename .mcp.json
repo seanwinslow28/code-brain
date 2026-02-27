@@ -8,6 +8,10 @@
         "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault"
       ],
       "env": {}
+    },
+    "zapier": {
+      "type": "sse",
+      "url": "https://mcp.zapier.com/api/v1/connect"
     }
   }
 }
