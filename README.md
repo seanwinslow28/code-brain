@@ -1,6 +1,6 @@
 # Claude Code Superuser Pack
 
-A personal command center and second brain for Claude Code. 89 skills, 11 agents, 6 domain workspaces, and an Obsidian vault — all active and auto-loaded.
+A personal command center and second brain for Claude Code. 106 skills, 13 interactive agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
 
 ## What's Inside
 
@@ -24,7 +24,32 @@ A personal command center and second brain for Claude Code. 89 skills, 11 agents
 
 All read-only. They audit, you fix.
 
-### 89 Skills Across 11 Domains
+### Agents SDK (Autonomous Layer)
+
+The `agents-sdk/` directory adds scheduled, autonomous agents powered by the [Claude Agent SDK](https://docs.claude.com/en/api/agent-sdk/overview). These run **outside** Claude Code sessions on macOS launchd schedules — no human required.
+
+| Agent | Schedule | What It Does |
+|-------|----------|-------------|
+| Daily Driver (morning) | 6:00 AM | Read yesterday's note, create today's, write 1-3-5 priorities |
+| Daily Driver (evening) | 5:00 PM | Summarize day, write reflection, carry forward items |
+| Daily Driver (weekly) | Friday 4:00 PM | Aggregate 7 daily notes into weekly review |
+
+**Key design:** Skills are prompts, agents are runners. SKILL.md files are loaded as system prompts — no content duplication. Skill improvements automatically flow to autonomous agents.
+
+```bash
+# Dry run (free)
+cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode morning --dry-run
+
+# Live run
+cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode morning
+
+# Install/remove launchd schedules
+./agents-sdk/schedules/install_schedules.sh
+```
+
+Safety: 30 turn cap, $0.50/run budget, inherits block-secrets hook, no Bash access. Auth: uses existing `claude login` session (no API key needed). Full docs: [docs/agents-sdk.md](docs/agents-sdk.md).
+
+### 106 Skills Across 12 Domains
 
 All skills auto-load from `.claude/skills/`. Reference them naturally in prompts.
 
@@ -41,6 +66,7 @@ All skills auto-load from `.claude/skills/`. Reference them naturally in prompts
 | community-resources | 6 | Learning paths, troubleshooting, case studies |
 | master-designer | 8 | Animations, micro-interactions, Tailwind, Figma |
 | remotion-mastery | 8 | Programmatic video, typography, data viz |
+| adobe-creative | 6 | Photoshop, Premiere, After Effects, Illustrator |
 
 ## Export to Other Projects
 

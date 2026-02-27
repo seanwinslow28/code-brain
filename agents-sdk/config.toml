@@ -1,0 +1,45 @@
+[paths]
+repo_root = "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack"
+vault_root = "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault"
+skills_dir = ".claude/skills"
+life_systems_scripts = "life-systems/scripts"
+
+[agents.daily_driver]
+enabled = true
+skills = ["daily-driver", "vault-read-write"]
+morning_time = "06:00"
+evening_time = "17:00"
+weekly_day = "Friday"
+weekly_time = "16:00"
+
+[agents.preserve_session]
+enabled = true
+skills = ["preserve-session", "vault-read-write"]
+
+[agents.spending_analysis]
+enabled = true
+skills = ["subscription-audit", "vault-read-write"]
+input_dir = "life-systems/finance"
+output_dir = "vault/50_sources/finance"
+
+[agents.process_inbox]
+enabled = false
+skills = ["process-inbox", "vault-read-write"]
+confirmation_threshold = 10
+
+[agents.health_audit]
+enabled = false
+skills = ["health-habits", "vault-read-write"]
+
+[agents.md_to_anki]
+enabled = false
+skills = ["vault-read-write"]
+
+[safety]
+max_turns_default = 30
+max_budget_default = 0.50
+permission_mode = "acceptEdits"
+
+[logging]
+log_dir = "vault/90_system/agent-logs"
+log_level = "INFO"

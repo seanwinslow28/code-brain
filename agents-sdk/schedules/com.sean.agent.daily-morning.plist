@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sean.agent.daily-morning</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/bin/python3</string>
+        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/daily_driver.py</string>
+        <string>--mode</string>
+        <string>morning</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>6</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack</string>
+    <key>StandardOutPath</key>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/daily-morning-stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/daily-morning-stderr.log</string>
+</dict>
+</plist>

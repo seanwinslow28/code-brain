@@ -5,6 +5,35 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.9.0] - 2026-02-22
+
+### Added
+
+- `prompt-engineering` — Prompt engineering skill applying Anthropic's official 9-technique checklist. Covers clarity, multishot examples, chain of thought, XML tags, role prompting, prefilling, chaining, long context, and validation loops. Includes detailed techniques-guide.md reference.
+- **Agents SDK layer** (`agents-sdk/`) — Autonomous agents powered by the Claude Agent SDK (Python). Runs outside Claude Code sessions on macOS launchd schedules. Skills are loaded as system prompts — no content duplication.
+- `agents-sdk/agents/daily_driver.py` — Daily Driver agent with three modes:
+  - **Morning** (6:00 AM): Read yesterday's note, create today's from template, write 1-3-5 priority plan
+  - **Evening** (5:00 PM): Summarize day's progress, write Evening Reflection (Win/Lesson/Carry Forward)
+  - **Weekly** (Friday 4:00 PM): Aggregate 7 daily notes into weekly review at `vault/10_timeline/weekly/`
+- `agents-sdk/lib/config.py` — Configuration loader: reads `config.toml` + `.env`, returns typed `Config` dataclass with per-agent settings and safety limits
+- `agents-sdk/lib/skill_loader.py` — Skill-to-prompt bridge: reads `.claude/skills/*/SKILL.md`, strips YAML frontmatter, concatenates multiple skills with headers
+- `agents-sdk/lib/vault_io.py` — Vault I/O utilities: path conventions (daily/weekly notes), anchor injection (`inject_at_anchor`), template creation, frontmatter reading
+- `agents-sdk/lib/logging_setup.py` — Structured logging: per-run log files + append-only `agent-run-history.csv` with cost/duration/turns tracking
+- `agents-sdk/lib/custom_tools.py` — MCP tool definitions: `vault_inject` tool for PATCH-style writes to vault anchors
+- `agents-sdk/config.toml` — Central configuration: vault paths, per-agent settings (enabled, skills, max_turns, max_budget_usd), safety limits, logging config
+- `agents-sdk/schedules/` — 3 launchd `.plist` files (morning, evening, weekly) + `install_schedules.sh` installer
+- `agents-sdk/tests/` — 33 pytest tests covering config, skill loading, vault I/O, and logging
+- `agents-sdk/pyproject.toml` — Python package with deps: `claude-agent-sdk>=0.1.39`, `python-dotenv`, `pandas`, `tomli`
+- `docs/agents-sdk.md` — Comprehensive guide: architecture, usage, expansion, recommended integrations, troubleshooting
+
+### Changed
+
+- `CLAUDE.md` — Added Agents SDK section with commands, architecture diagram updated to include `agents-sdk/`
+- `README.md` — Added Agents SDK section, updated skill count (89 → 106), added adobe-creative export group
+- Skill count: 102 → 106 (+1 prompt-engineering, +3 from plugin/superpower installations)
+- `CLAUDE.md` — Added mandatory doc-update rule: CHANGELOG.md, CLAUDE.md, and README.md must be updated whenever a new Skill, Agent, Sub-Agent, Hook, or Script is created
+- Authentication: SDK uses Claude Code CLI's existing OAuth auth (`claude login`) — no separate API key required
+
 ## [3.8.1] - 2026-02-19
 
 ### Fixed
