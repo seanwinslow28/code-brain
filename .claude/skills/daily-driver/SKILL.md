@@ -91,7 +91,7 @@ Appended to vault/10_timeline/daily/2026-02-20.md
 
 1. Read yesterday's daily note from `vault/10_timeline/daily/`
 2. Read any active project notes referenced in yesterday's log from `vault/20_projects/`
-3. Check calendar (via Zapier MCP if configured, or ask user)
+3. Check calendar via Google Calendar MCP — query BOTH `sean.winslow28@gmail.com` (personal) AND `swinslow@theblock.co` (The Block work) calendars in parallel. Use `claude.ai Google Calendar` (gcal_list_events) or `google-workspace` (get_events) tools.
 4. Ask: "Anything new on your plate today?"
 
 ### Step 2: Prioritize with the 1-3-5 Rule

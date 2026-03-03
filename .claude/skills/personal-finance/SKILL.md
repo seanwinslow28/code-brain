@@ -365,7 +365,7 @@ Track these dates — set Google Calendar reminders when connected:
 
 **Vault:** Monthly reports to `vault/Areas/Finance/monthly/`, debt dashboard to `vault/Areas/Finance/debt-tracker.md`
 
-**Google Sheets (via Zapier MCP):** Export categorized transactions to a tracking spreadsheet for visual dashboards.
+**Google Sheets (via google-workspace MCP):** Export categorized transactions to a tracking spreadsheet for visual dashboards. Use `modify_sheet_values`, `create_spreadsheet_row`, etc.
 
 **Future: Custom Rocket Money replacement app** — local-first or Cloudflare/Netlify hosted. The personal-finance skill provides the data pipeline; the UI is a separate project.
 

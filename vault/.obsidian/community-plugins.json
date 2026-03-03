@@ -5,5 +5,6 @@
   "obsidian-linter",
   "obsidian-local-rest-api",
   "remotely-save",
-  "homepage"
+  "homepage",
+  "granola-sync"
 ]

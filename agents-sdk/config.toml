@@ -12,6 +12,18 @@ evening_time = "17:00"
 weekly_day = "Friday"
 weekly_time = "16:00"
 
+[agents.daily_driver.modes.morning]
+max_turns = 15
+max_budget_usd = 0.25
+
+[agents.daily_driver.modes.evening]
+max_turns = 10
+max_budget_usd = 0.25
+
+[agents.daily_driver.modes.weekly]
+max_turns = 20
+max_budget_usd = 0.50
+
 [agents.preserve_session]
 enabled = true
 skills = ["preserve-session", "vault-read-write"]

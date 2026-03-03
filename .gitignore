@@ -47,7 +47,10 @@ vault/.obsidian/plugins/
 vault/.obsidian/themes/
 vault/.trash/
 vault/.smart-env/
-vault/50_sources/finance/*.csv
+vault/50_sources/finance/**
+!vault/50_sources/finance/.gitkeep
+!vault/50_sources/finance/**/.gitkeep
+!vault/50_sources/finance/ref-*.md
 
 # Life Systems data (private)
 life-systems/finance/*.csv

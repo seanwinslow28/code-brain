@@ -5,6 +5,27 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.10.0] - 2026-02-28
+
+### Added
+
+- `intent-engineering` — Intent specification design, review, and retrofit skill for AI agents. 9-section unified template (Objective, User Goal, Outcomes, Health Metrics, Strategic Context, Constraints, Decision Authority, Edge Cases, Stop Rules), 4 autonomy levels mapped to architecture (full-autonomous/guarded-autonomous/proposal-first/human-required), Minimum Viable Retrofit guide (3 conversion levels for existing 107 skills), 5 fatal anti-patterns (Klarna Intent Gap, prompt-based hard constraints, activity vs outcome confusion, vibe-coded edge cases, missing stop rules), validation checklist. Includes `references/intent-spec-template.md` with blank YAML template and completed daily-driver worked example.
+
+### Changed
+
+- `agents-sdk/agents/daily_driver.py` — Enhanced `build_preamble()` with Zero-Interaction Mandate (formalized with schedule time from config), Safe Deferral Protocol (max 2 retries, error note at `<!-- agent-error -->` anchor), and Health Metric Awareness (data non-destruction, truth anchoring, content integrity). Added mode-aware execution limits in `build_options()` — reads per-mode overrides from `config.toml [agents.daily_driver.modes.*]`.
+- `agents-sdk/config.toml` — Added per-mode execution limits for daily_driver: morning (15 turns/$0.25), evening (10 turns/$0.25), weekly (20 turns/$0.50).
+- Skill count: 106 → 107
+
+## [3.9.1] - 2026-03-01
+
+### Changed
+
+- **Native MCP preference over Zapier** — Updated 6 skills and Agent SDK docs to prefer native MCPs over Zapier equivalents where both exist. Skills updated: `daily-driver`, `time-management`, `meeting-prep`, `personal-finance`, `data-analysis`. Agent SDK docs (`docs/agents-adk-docs/agents-sdk.md`) "Tools, APIs, and MCPs" section fully rewritten with current connected MCP inventory and native-vs-Zapier preference table.
+- **Slack plugin installed** — Native Slack MCP plugin (`plugin:slack:slack`) installed and authenticated via OAuth. Replaces Zapier Slack tools for interactive sessions. Pending: The Block workspace admin approval for full access.
+- **Standalone Context7 MCP removed** — Redundant standalone `context7` MCP removed; `plugin:context7:context7` is the sole instance.
+- **`.env` cleaned** — Removed stale command on line 43, orphaned bare key on line 61, fixed doubled Runware key, standardized variable naming (`Gemini_API` → `GEMINI_API_KEY`, consolidated ElevenLabs keys).
+
 ## [3.9.0] - 2026-02-22
 
 ### Added
@@ -25,6 +46,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `agents-sdk/tests/` — 33 pytest tests covering config, skill loading, vault I/O, and logging
 - `agents-sdk/pyproject.toml` — Python package with deps: `claude-agent-sdk>=0.1.39`, `python-dotenv`, `pandas`, `tomli`
 - `docs/agents-sdk.md` — Comprehensive guide: architecture, usage, expansion, recommended integrations, troubleshooting
+
+- **Granola meeting sync** — Installed `obsidian-granola-sync` community plugin for automatic meeting transcript sync from Granola into the vault. Notes land in `vault/30_domains/product-management/the-block-meetings-granola-notes/` with subfolders: `adops-revops`, `daily-standup`, `david-sean-one-on-ones`, `design-sync`, `ed-sean-one-on-ones`, `other`. Plugin syncs to a single destination folder; manual sorting into subfolders for now. **TODO**: Build auto-sort script/automation that routes Granola notes into subfolders based on meeting title keywords.
 
 ### Changed
 

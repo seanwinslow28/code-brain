@@ -351,17 +351,18 @@ The vault opens to `Home.md`, which uses Dataview queries to show:
 
 ## Obsidian Plugins
 
-Seven community plugins are installed:
+Eight community plugins are installed:
 
 | Plugin | Purpose | Key Config |
 |--------|---------|------------|
 | **Dataview** | Query engine for MOCs and dashboards | DQL + DataviewJS enabled, inline fields enabled |
 | **Templater** | Smart note templates with dynamic content | Folder-template mapping, `tp.*` functions |
-| **Obsidian Git** | Auto-sync to git repository | 10-second auto-commit, 5-second auto-pull, `vault: auto-commit {{date}}` format |
+| **Obsidian Git** | Auto-sync to git repository | 10-second auto-commit, 5-second auto-pull, `vault: auto-commit {{date}}` format. **Only active on Mac Mini** — MacBook Pro accesses vault via Google Drive without Git. |
 | **Obsidian Linter** | Markdown formatting and YAML automation | Auto-adds `created`/`updated` timestamps, auto-adds title from H1, ignores `70_apple-notes/` and `60_archive/` |
 | **Local REST API** | MCP server endpoint for AI access | HTTPS on port 27124, self-signed SSL |
 | **Remotely Save** | Cloud sync (encrypted config) | Encrypted credentials |
 | **Homepage** | Opens vault to Home.md | Set to `Home` note |
+| **Granola Sync** | Syncs meeting transcripts from [Granola](https://granola.ai/) | Destination: `30_domains/product-management/the-block-meetings-granola-notes/`. Desktop only. |
 
 ### Obsidian App Settings
 
@@ -437,11 +438,23 @@ The Local REST API plugin exposes vault operations over HTTPS on port 27124. An 
 - **Direct filesystem** (Read/Write/Edit/Grep/Glob): Faster for bulk operations, available in all Claude Code environments, no dependency on Obsidian running
 - **MCP**: Required for semantic search, patch operations, and when Obsidian-specific features are needed (tag management, frontmatter extraction)
 
-### Channel 3: Hooks (Automatic)
+### Channel 3: Native MCP Integrations
+
+As of 2026-03-01, Claude Code connects to external services via native MCPs (preferred over Zapier). Key integrations for vault workflows:
+
+- **Google Calendar** (`claude.ai Google Calendar` / `google-workspace`) — Pull meeting schedules for daily notes. Always query both `sean.winslow28@gmail.com` and `swinslow@theblock.co` in parallel.
+- **Jira** (`mcp-atlassian`) — Query tickets for standup prep, inject activity summaries at `<!-- jira-log -->` anchors.
+- **Slack** (Slack plugin, pending Block admin approval) — Post summaries, read DMs. Falls back to Zapier Slack tools if plugin unavailable.
+- **Gmail** (`claude.ai Gmail` / `google-workspace`) — Email digests for inbox processing.
+- **Google Sheets** (`google-workspace`) — Export financial data, analytics reports.
+
+These replace earlier Zapier-only recommendations. Zapier is retained only for Salesforce, GA4, Webhooks, and cloud code execution.
+
+### Channel 4: Hooks (Automatic)
 
 The `daily-note-appender.sh` hook runs automatically when Claude Code stops, appending a session summary to today's daily note. See the [Hooks](#hooks) section for details.
 
-### Channel 4: Skills (On-Demand)
+### Channel 5: Skills (On-Demand)
 
 Seven vault-specific skills provide structured workflows for common operations. See the [Skills Reference](#skills-reference) section.
 
@@ -787,10 +800,34 @@ As of 2026-02-21:
 5. **Review your daily note** — the morning focus and evening reflection take < 2 minutes each
 6. **Check Home.md** — the dashboard shows active projects and blockers at a glance
 
+### Granola Meeting Sync
+
+[Granola](https://granola.ai/) is a meeting transcription app that runs on Sean's MacBook Pro during Google Meetings at The Block. The `obsidian-granola-sync` community plugin ([GitHub](https://github.com/tomelliot/obsidian-granola-sync)) automatically syncs transcribed meeting notes into the vault.
+
+**Destination folder:** `vault/30_domains/product-management/the-block-meetings-granola-notes/`
+
+**Subfolder structure (manually sorted):**
+
+| Subfolder | Meeting Type |
+|-----------|-------------|
+| `adops-revops/` | AdOps and RevOps meetings |
+| `daily-standup/` | Daily standups |
+| `david-sean-one-on-ones/` | 1:1s with David |
+| `design-sync/` | Design sync meetings |
+| `ed-sean-one-on-ones/` | 1:1s with Ed |
+| `other/` | Uncategorized meetings |
+
+**Current workflow:** The plugin syncs all Granola notes into the configured destination folder (flat). Sean manually sorts notes into the appropriate subfolder after sync.
+
+**TODO — Auto-sort automation:** Build a script or Templater automation that routes Granola-synced notes into the correct subfolder based on keywords in the meeting title (e.g., "standup" -> `daily-standup/`, "design" -> `design-sync/`, "Ed" -> `ed-sean-one-on-ones/`, "David" -> `david-sean-one-on-ones/`, "AdOps"/"RevOps"/"Salesforce" -> `adops-revops/`). Unmatched notes go to `other/`.
+
+**Multi-device note:** Granola runs on the MacBook Pro only (work laptop for meetings). The plugin is desktop-only and does not work on mobile.
+
 ### Git and Sync
 
 - Obsidian Git auto-commits every 10 seconds (format: `vault: auto-commit YYYY-MM-DD HH:mm:ss`)
 - Obsidian Git auto-pulls every 5 seconds
+- **Obsidian Git is only active on the Mac Mini** — the MacBook Pro accesses the vault through Google Drive and does not run Git operations (to avoid `.git/` directory corruption from dual-machine sync)
 - Financial CSVs in `50_sources/finance/` are gitignored
 - Obsidian workspace state, plugin installations, and Smart Connections cache are gitignored
 - The `daily-note-appender.sh` hook writes to the vault but does not commit — Obsidian Git handles that
