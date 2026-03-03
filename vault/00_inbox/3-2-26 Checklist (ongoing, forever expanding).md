@@ -1,0 +1,14 @@
+- [x] Rent a Car or Van
+- [ ] Change perplexity and Claude to be focused on AI fluency. Or maybe perplexity is focused on research and PM work along with AI fluency
+- [ ] Email Dr Kat
+- [ ] Turn Off Verizon Bill for March move
+- [ ] Learn more about obsidian and how to use
+- [x] Build out UI’s — PM, Agent Hub, Life Systems.
+- [ ] Build out agent SDK
+- [ ] Build creative writing skill for tech -> jack karouac writes about ai - have Claude code interview you and do writing exercises for emails and creative technical writing to understand what you want and provide context (Do the same with 2d animation and other creative work)
+- [ ] Set up Claude Cowork with personal PM plug ins
+- [ ] Test out PRD>prototype generator
+- [ ] Do deep research on ways to get your Apple Watch Fitness app data onto your Mac Mini
+- [ ] Move any subscriptions from credit card over to 115 Elm.
+- [ ] Look at RipplingxFidelity
+- [ ] Granola notes have been sunk. For now, set everything up manually, and then work on script to put everything into their respective folders. Also, look into making sure EVERYTHING gets put in there

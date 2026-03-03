@@ -604,98 +604,93 @@ Tips for autonomous-friendly skills:
 
 ---
 
-## Tools, APIs, and MCPs to Connect
+## Tools, APIs, and MCPs — Current State
 
-### High-Priority Integrations
+> **Updated 2026-02-28.** Most high-priority integrations are now connected via native MCPs, replacing earlier Zapier-dependent recommendations.
 
-#### 1. Jira MCP (`mcp-atlassian`)
+### Connected and Ready (Native MCPs)
 
-**Why:** The Superuser Pack already has deep Jira integration (jira-automation, ticket-batch, sprint-roadmap skills). Connecting the Jira MCP to autonomous agents enables:
-- Morning standup prep — agent reads yesterday's Jira activity, writes summary to daily note
-- Sprint burndown tracking — weekly agent generates burndown data
-- Auto-ticket creation — agents can create tickets from vault notes tagged `#jira`
+| # | Service | MCP Server | Status | Key Tools |
+|---|---------|-----------|--------|-----------|
+| 1 | **Jira + Confluence** | `mcp-atlassian` (local) | Connected | `jira_search`, `jira_create_issue`, `jira_transition_issue`, `confluence_search`, `confluence_create_page` |
+| 2 | **Jira + Confluence** | `claude.ai Atlassian` (cloud) | Connected | Read-heavy operations, quick lookups |
+| 3 | **Google Calendar** | `claude.ai Google Calendar` | Connected | `gcal_list_events`, `gcal_find_my_free_time`, `gcal_create_event` |
+| 4 | **Google Workspace** | `google-workspace` (local) | Connected | Calendar, Gmail, Drive, Docs, Sheets, Chat, Forms, Slides, Tasks, Contacts |
+| 5 | **Gmail** | `claude.ai Gmail` | Connected | `gmail_search_messages`, `gmail_read_message`, `gmail_create_draft` |
+| 6 | **GitHub** | `github` (Docker MCP) | Connected | `search_issues`, `list_pull_requests`, `create_pull_request`, `search_code` |
+| 7 | **Obsidian Vault** | `obsidian-vault` | Connected | `search_notes`, `read_note`, `write_note`, `list_directory` |
+| 8 | **NotebookLM** | `notebooklm-mcp` | Connected | `notebook_query`, `source_add`, `studio_create` (audio/video) |
+| 9 | **Hugging Face** | `claude.ai Hugging Face` | Connected | `hub_repo_search`, `paper_search`, `hf_doc_search` |
+| 10 | **Figma** | `claude.ai Figma` | Connected | `get_design_context`, `get_screenshot`, `get_metadata` |
+| 11 | **Slack** | Slack plugin (user-level) | Installed | Pending admin approval for The Block workspace |
+| 12 | **Cloudflare** | `claude.ai Cloudflare` | Connected | Workers, KV, R2, D1 |
+| 13 | **Playwright** | `plugin:playwright` | Connected | Browser automation, screenshots, testing |
+| 14 | **Context7** | `plugin:context7` | Connected | Library documentation lookup |
+| 15 | **Remotion** | `remotion-docs` | Connected | Remotion documentation |
 
-**How:** Add to `lib/custom_tools.py` or configure as external MCP server in `ClaudeAgentOptions.mcp_servers`.
+**IMPORTANT — Google Calendar:** Always query BOTH calendars in parallel:
+- `sean.winslow28@gmail.com` (personal/primary)
+- `swinslow@theblock.co` (The Block work)
 
-#### 2. Google Calendar MCP (via Zapier)
+Google Calendar API only supports one calendarId per request — must make parallel calls.
 
-**Why:** The `time-management` and `daily-driver` skills reference calendar data. Connecting Google Calendar enables:
-- Morning planning with today's actual meeting schedule
-- Time-block suggestions based on meeting gaps
-- Conflict detection between planned deep work and meetings
+### Preferred MCP Selection (Native over Zapier)
 
-**How:** Use the Zapier MCP tools already available (`google_calendar_find_events`, `google_calendar_get_calendar_information`).
+When a service is available through both native MCP and Zapier, **always prefer the native MCP**:
 
-#### 3. Slack MCP (via Zapier)
+| Service | Native MCP (preferred) | Zapier (fallback) |
+|---------|----------------------|-------------------|
+| Google Calendar | `claude.ai Google Calendar` or `google-workspace` | `google_calendar_find_events` |
+| Gmail | `claude.ai Gmail` or `google-workspace` | `gmail_find_email`, `gmail_send_email` |
+| Google Sheets | `google-workspace` (`modify_sheet_values`) | `google_sheets_*` |
+| Google Docs | `google-workspace` (`get_doc_content`) | `google_docs_*` |
+| Google Drive | `google-workspace` (`search_drive_files`) | `google_drive_*` |
+| Jira | `mcp-atlassian` (`jira_search`) | `jira_software_cloud_*` |
+| Confluence | `mcp-atlassian` (`confluence_search`) | `confluence_cloud_*` |
+| Slack | Slack plugin (when authorized) | `slack_send_channel_message` |
+| GitHub | `github` MCP | N/A (not via Zapier) |
 
-**Why:** The `stakeholder-update` skill generates reports that need distribution. Connecting Slack enables:
-- Auto-posting standup summaries to team channel
-- Sending EOD status updates
-- Alerting on missed deadlines or carry-forward accumulation
+### Still Zapier-Only (No Native Alternative)
 
-**How:** Use Zapier MCP tools (`slack_send_channel_message`, `slack_send_direct_message`).
+Keep Zapier for these services:
 
-#### 4. GitHub CLI (`gh`)
+| Service | Why Zapier | Zapier Tools |
+|---------|-----------|-------------|
+| **Salesforce** | No standalone MCP exists | `salesforce_find_record`, `salesforce_create_record` |
+| **Google Analytics 4** | No standalone MCP exists | `google_analytics_4_run_report_for_a_property` |
+| **Webhooks** | Custom HTTP requests | `webhooks_by_zapier_post`, `webhooks_by_zapier_get` |
+| **Code execution** | Cloud-side Python/JS | `code_by_zapier_run_python` |
 
-**Why:** Code review and PR management are core PM/engineering workflows. Connecting GitHub enables:
-- Daily PR digest — agent summarizes open PRs requiring review
-- Stale PR alerts — flag PRs with no activity for 3+ days
-- Release notes generation from merged PRs
+### Pending / Future Integrations
 
-**How:** Add `Bash` to allowed tools with specific `gh` commands, or create a custom MCP tool wrapper for safety.
+| Service | Status | Notes |
+|---------|--------|-------|
+| **Slack (The Block)** | Awaiting admin approval | Plugin installed; need workspace admin to authorize |
+| **Apple Reminders/Notes** | Researching | Community `apple-mcp` exists; would feed personal tasks to daily-driver |
+| **Supabase** | Plugin available | Keys in `.env`; install plugin for direct DB access |
 
-### Medium-Priority Integrations
+### Integration Architecture for Agent SDK
 
-#### 5. Obsidian MCP Server
-
-**Why:** Direct vault interaction via MCP instead of file I/O. Provides search, tag queries, and graph traversal.
-
-**How:** Configure `obsidian-vault` MCP server in agent options. Already available as a deferred tool.
-
-#### 6. Google Sheets MCP (via Zapier)
-
-**Why:** The spending analysis agent could write financial summaries directly to a shared Google Sheet for tracking trends over time.
-
-**How:** Use Zapier MCP tools (`google_sheets_create_spreadsheet_row`, `google_sheets_update_spreadsheet_row`).
-
-#### 7. NotebookLM MCP
-
-**Why:** Weekly reviews could be synthesized into audio briefings. The `notebook_query` tool can produce rich summaries from source materials.
-
-**How:** Configure `notebooklm-mcp` server. Use `source_add` to feed weekly notes, then `studio_create` for audio.
-
-### Lower-Priority but Interesting
-
-#### 8. Hugging Face MCP
-
-**Why:** AI model search and inference for creative agents (image generation, text analysis).
-
-#### 9. Confluence MCP (`mcp-atlassian`)
-
-**Why:** Sync vault project notes with Confluence pages for team visibility.
-
-#### 10. Gmail MCP (via Zapier)
-
-**Why:** Email digest agent — summarize unread emails, draft responses, flag action items.
-
-### Integration Architecture
-
-When connecting new services, follow this pattern:
+When connecting MCPs to autonomous agents, follow this pattern:
 
 ```python
-# In lib/custom_tools.py — for custom wrappers
-@tool("jira_standup_prep", "Get yesterday's Jira activity for standup",
-      {"project_key": str})
-async def jira_standup_prep(args):
-    # Implementation here
-    ...
-
-# In agent's build_options() — for external MCP servers
+# In agent's build_options() — configure MCP servers
 mcp_servers={
     "vault-tools": create_vault_mcp_server(),
-    "jira": {"type": "stdio", "command": "mcp-atlassian", ...},
+    "mcp-atlassian": {"type": "stdio", "command": "uvx", "args": ["mcp-atlassian"]},
+    "obsidian": {"type": "stdio", "command": "npx", "args": ["@mauricio.wolff/mcp-obsidian@latest", vault_path]},
 }
+
+# Whitelist specific tools per agent
+allowed_tools=[
+    "Read", "Write", "Edit", "Glob", "Grep",
+    "mcp__vault-tools__vault_inject",
+    "mcp__mcp-atlassian__jira_search",
+    "mcp__mcp-atlassian__jira_get_issue",
+]
 ```
+
+**Safety rule:** Autonomous agents should use explicit `allowed_tools` whitelists. Never give an unattended agent access to all tools from a service — scope to the minimum needed.
 
 ---
 

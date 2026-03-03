@@ -43,23 +43,49 @@ def build_preamble(mode: str, config) -> str:
     today = date.today().isoformat()
     yesterday = (date.today() - timedelta(days=1)).isoformat()
 
+    # Mode-to-schedule-time mapping for Zero-Interaction Mandate
+    mode_times = {
+        "morning": config.agents.get("daily_driver", {}).get("morning_time", "06:00"),
+        "evening": config.agents.get("daily_driver", {}).get("evening_time", "17:00"),
+        "weekly": config.agents.get("daily_driver", {}).get("weekly_time", "16:00"),
+    }
+    schedule_time = mode_times.get(mode, "scheduled time")
+
     base = (
         f"You are Sean's autonomous daily driver agent running in {mode} mode.\n"
         f"Current date: {today}\n"
         f"Vault root: {config.vault_root}\n"
         f"Repo root: {config.repo_root}\n"
         f"\n"
-        f"IMPORTANT — AUTONOMOUS MODE:\n"
-        f"- No human is present. Do NOT ask questions or wait for input.\n"
-        f"- Make best-judgment decisions on priorities and content.\n"
-        f"- Write all output to vault files, not to stdout.\n"
-        f"- Follow the skill protocols exactly.\n"
-        f"\n"
         f"Key paths:\n"
         f"- Yesterday's daily note: {daily_note_path(config.vault_root, date.today() - timedelta(days=1))}\n"
         f"- Today's daily note: {daily_note_path(config.vault_root)}\n"
         f"- Daily note template: {config.vault_root / '90_system/templates/tpl-daily.md'}\n"
         f"- Weekly note template: {config.vault_root / '90_system/templates/tpl-weekly.md'}\n"
+        f"\n"
+        f"ZERO-INTERACTION MANDATE:\n"
+        f"You are running at {schedule_time} via macOS launchd. No human is available.\n"
+        f"Any attempt to ask a clarifying question will cause a silent timeout hang.\n"
+        f"You MUST make best-judgment decisions autonomously.\n"
+        f"If you cannot proceed, create an error note and halt — never wait for input.\n"
+        f"\n"
+        f"SAFE DEFERRAL PROTOCOL:\n"
+        f"If any MCP tool or file operation fails:\n"
+        f"1. Log the error with full context.\n"
+        f"2. If today's daily note exists, append an error entry below the\n"
+        f"   <!-- agent-error --> anchor with: timestamp, mode, error description.\n"
+        f"   If the note doesn't exist yet, create a minimal one first.\n"
+        f"3. Continue with remaining tasks if possible, or halt gracefully.\n"
+        f"4. Never retry a failed operation more than 2 times.\n"
+        f"\n"
+        f"HEALTH METRICS:\n"
+        f"- Data Non-Destruction: Never overwrite existing text in any vault note.\n"
+        f"  Use PATCH operations only — inject at anchors, append sections.\n"
+        f"  If a note already exists for today, read it first and only add new content.\n"
+        f"- Truth Anchoring: Do not hallucinate calendar events or task completions.\n"
+        f"  If a source is unavailable, note the gap explicitly with [ERROR] tag.\n"
+        f"- Content Integrity: All frontmatter must remain valid YAML.\n"
+        f"  If existing frontmatter cannot be parsed, do NOT modify it — log the error.\n"
     )
 
     return base
@@ -144,14 +170,35 @@ def build_prompt(mode: str, config) -> str:
         raise ValueError(f"Unknown mode: {mode}. Use morning, evening, or weekly.")
 
 
-def build_options(config) -> ClaudeAgentOptions:
-    """Build ClaudeAgentOptions for the daily driver agent."""
-    skills_prompt = load_skills(
-        config.agent_config("daily_driver").skills,
-        config.skills_dir,
-    )
+def build_options(config, mode: str | None = None) -> ClaudeAgentOptions:
+    """Build ClaudeAgentOptions for the daily driver agent.
+
+    Args:
+        config: Loaded Config object.
+        mode: Optional mode name (morning/evening/weekly) for per-mode
+              execution limits from config.toml [agents.daily_driver.modes.*].
+    """
+    agent_cfg = config.agent_config("daily_driver")
+    skills_prompt = load_skills(agent_cfg.skills, config.skills_dir)
 
     vault_server = create_vault_mcp_server()
+
+    # Mode-specific overrides from config.toml [agents.daily_driver.modes.{mode}]
+    mode_cfg = {}
+    if mode:
+        raw_agent = config.agents.get("daily_driver", {})
+        mode_cfg = raw_agent.get("modes", {}).get(mode, {})
+
+    max_turns = (
+        mode_cfg.get("max_turns")
+        or agent_cfg.max_turns
+        or config.safety.max_turns_default
+    )
+    max_budget = (
+        mode_cfg.get("max_budget_usd")
+        or agent_cfg.max_budget_usd
+        or config.safety.max_budget_default
+    )
 
     # Only pass API key if explicitly set; otherwise the SDK uses
     # Claude Code CLI's existing auth (e.g., `claude login` OAuth)
@@ -170,8 +217,8 @@ def build_options(config) -> ClaudeAgentOptions:
             "mcp__vault-tools__vault_inject",
         ],
         permission_mode=config.safety.permission_mode,
-        max_turns=config.agent_config("daily_driver").max_turns or config.safety.max_turns_default,
-        max_budget_usd=config.agent_config("daily_driver").max_budget_usd or config.safety.max_budget_default,
+        max_turns=max_turns,
+        max_budget_usd=max_budget,
         cwd=str(config.repo_root),
         mcp_servers={"vault-tools": vault_server},
         setting_sources=["project"],
@@ -193,7 +240,7 @@ async def run(mode: str, dry_run: bool = False) -> None:
 
     preamble = build_preamble(mode, config)
     prompt = preamble + "\n\n" + build_prompt(mode, config)
-    options = build_options(config)
+    options = build_options(config, mode=mode)
 
     if dry_run:
         print("=== DRY RUN — Daily Driver Agent ===")

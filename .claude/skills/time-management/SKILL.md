@@ -250,19 +250,23 @@ Generate in `vault/Areas/Productivity/weekly/`:
 
 ### 5. Google Calendar Integration
 
-**Current state:** Will connect personal Google Calendar via OAuth (work calendar is synced to personal).
+**Current state:** Google Calendar is connected via native MCPs (no Zapier needed).
 
-**When connected:**
+**Capabilities (live now):**
 - Pull events directly for `/today` planning
 - Run automated weekly time audits
-- Set reminders for subscription renewals (from personal-finance skill)
 - Detect meeting creep early (alert if meetings exceed 35% weekly)
+- Find free time slots and schedule deep work blocks
 
-**Setup steps (when ready):**
-1. Configure Google Calendar MCP server or Zapier Google Calendar tools
-2. Grant read access to primary calendar
-3. Test with: "What's on my calendar today?"
-4. Enable weekly audit automation
+**Available now via native MCPs (no Zapier needed):**
+- `claude.ai Google Calendar` — gcal_list_events, gcal_find_my_free_time, gcal_find_meeting_times
+- `google-workspace` — get_events, list_calendars, query_freebusy
+
+**IMPORTANT:** Always query BOTH calendars in parallel:
+- `sean.winslow28@gmail.com` (personal/primary)
+- `swinslow@theblock.co` (The Block work)
+
+Google Calendar API only supports one calendarId per request — make parallel calls.
 
 ### 6. Vault Integration
 

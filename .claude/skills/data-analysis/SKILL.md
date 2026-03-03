@@ -25,10 +25,10 @@ Enables Sean to analyze The Block's key metrics, build reports for stakeholders,
 |------|-------------|------------|
 | GA4 | View access (no admin) | Zapier MCP: `google_analytics_4_run_report_for_a_property` |
 | Looker | View access (no admin/API) | Browser only — export CSV, then analyze with Claude |
-| Jira | Full access | Atlassian MCP: `searchJiraIssuesUsingJql` |
-| Google Sheets | Full access | Zapier MCP: Google Sheets tools |
+| Jira | Full access | `mcp-atlassian`: `jira_search` (preferred) or `claude.ai Atlassian` |
+| Google Sheets | Full access | `google-workspace`: `read_sheet_values`, `modify_sheet_values` (preferred) or Zapier fallback |
 
-**Key constraint:** No API keys for GA4 or Looker. Zapier MCP bridges GA4. Looker data must be exported as CSV first.
+**Key constraint:** No API keys for GA4 or Looker. Zapier MCP bridges GA4 (no native GA4 MCP exists). Looker data must be exported as CSV first. Google Sheets now has native access via `google-workspace` MCP.
 
 ### Key Metrics Sean Tracks
 

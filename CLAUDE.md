@@ -4,18 +4,18 @@ This is Sean's personal command center — a second brain for Claude Code.
 
 ## What This Repo Is
 
-106 skills, 13 agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
+107 skills, 13 agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
 
 ## Domain Workspaces
 
 | Domain | Purpose | Skills |
 |--------|---------|--------|
-| `claude-mastery/` | CLI, hooks, MCP, settings, tech stack, prompt engineering | 37 |
+| `claude-mastery/` | CLI, hooks, MCP, settings, tech stack, prompt engineering | 38 |
 | `product-management/` | PRDs, sprints, stakeholder comms, data analysis, technical writing | 20 |
 | `creative-studio/` | Phaser game dev, Remotion video, pixel art, Adobe MCP, animation, writing | 25 |
 | `life-systems/` | Finance, health, learning, tasks, time, career | 9 |
 | `design-team/` | Design system + 4 review agents | 8 |
-| `vault/` | Obsidian vault (notes, prompts, RAG) | 6 |
+| `vault/` | Obsidian vault (notes, prompts, RAG, Granola meeting sync) | 6 |
 
 ## Design Team Agents
 
@@ -27,6 +27,23 @@ This is Sean's personal command center — a second brain for Claude Code.
 | Visual Polish Auditor | Animations, loading/empty/error states, polish |
 
 All read-only (disallowedTools: Edit, Write, Bash).
+
+## Connected MCPs (Native — No Zapier)
+
+Skills and agents prefer native MCPs over Zapier. When both exist, always use native first.
+
+| Service | Native MCP | Zapier Fallback |
+|---------|-----------|----------------|
+| Google Calendar | `claude.ai Google Calendar` / `google-workspace` | `google_calendar_*` |
+| Gmail | `claude.ai Gmail` / `google-workspace` | `gmail_*` |
+| Google Sheets/Docs/Drive | `google-workspace` | `google_sheets_*` / `google_docs_*` |
+| Jira + Confluence | `mcp-atlassian` / `claude.ai Atlassian` | `jira_software_cloud_*` |
+| Slack | Slack plugin (pending Block admin approval) | `slack_*` |
+| GitHub | `github` MCP (Docker) | N/A |
+
+**Still Zapier-only:** Salesforce, GA4, Webhooks, Code execution.
+
+**Calendar rule:** Always query BOTH `sean.winslow28@gmail.com` AND `swinslow@theblock.co` in parallel.
 
 ## Commands
 
@@ -71,7 +88,7 @@ Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key ne
 
 ```
 .claude/
-├── skills/          # ALL 106 skills (canonical, auto-loaded)
+├── skills/          # ALL 107 skills (canonical, auto-loaded)
 ├── agents/          # ALL 13 agents (9 domain + 4 design team)
 ├── hooks/           # 7 hooks (block-secrets, log-tool-use, network-access, etc.)
 └── settings.json    # Standard security profile

@@ -1,6 +1,6 @@
 # Claude Code Superuser Pack
 
-A personal command center and second brain for Claude Code. 106 skills, 13 interactive agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
+A personal command center and second brain for Claude Code. 107 skills, 13 interactive agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
 
 ## What's Inside
 
@@ -49,7 +49,26 @@ cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode mo
 
 Safety: 30 turn cap, $0.50/run budget, inherits block-secrets hook, no Bash access. Auth: uses existing `claude login` session (no API key needed). Full docs: [docs/agents-sdk.md](docs/agents-sdk.md).
 
-### 106 Skills Across 12 Domains
+### Native MCP Integrations
+
+Skills and agents prefer native MCPs over Zapier where both exist. Currently connected:
+
+| Service | MCP | Status |
+|---------|-----|--------|
+| Google Calendar | `claude.ai Google Calendar` + `google-workspace` | Connected |
+| Gmail | `claude.ai Gmail` + `google-workspace` | Connected |
+| Google Sheets/Docs/Drive | `google-workspace` | Connected |
+| Jira + Confluence | `mcp-atlassian` + `claude.ai Atlassian` | Connected |
+| Slack | Slack plugin (OAuth) | Installed, pending workspace admin |
+| GitHub | `github` MCP (Docker) | Connected |
+| Obsidian Vault | `obsidian-vault` | Connected |
+| NotebookLM | `notebooklm-mcp` | Connected |
+| Figma | `claude.ai Figma` | Connected |
+| Hugging Face | `claude.ai Hugging Face` | Connected |
+
+Zapier retained only for services with no native MCP: Salesforce, GA4, Webhooks, Code execution.
+
+### 107 Skills Across 12 Domains
 
 All skills auto-load from `.claude/skills/`. Reference them naturally in prompts.
 

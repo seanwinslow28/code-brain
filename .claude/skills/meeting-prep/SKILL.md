@@ -165,7 +165,7 @@ share summary in Slack, follow up at next standup.
 Sean leads standup via round-robin through each team member's Jira board.
 
 **Before standup:**
-1. Query Jira for in-progress tickets by assignee (use Atlassian MCP or Zapier MCP)
+1. Query Jira for in-progress tickets by assignee (use `mcp-atlassian` jira_search preferred, or `claude.ai Atlassian` as fallback)
 2. Check for any flagged/impeded tickets
 3. Note any PRDs or design tickets that need discussion
 4. Prepare Sean's own status update
