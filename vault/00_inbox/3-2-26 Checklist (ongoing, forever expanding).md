@@ -14,3 +14,4 @@
 - [ ] Move any subscriptions from credit card over to 115 Elm.
 - [ ] Look at RipplingxFidelity
 - [ ] Granola notes have been sunk. For now, set everything up manually, and then work on script to put everything into their respective folders. Also, look into making sure EVERYTHING gets put in there
+- [ ] Look at fidelity plan and ask Claude what to invest in - Use prompt engineering to make it look into stocks and bonds -- do perplexity as well
