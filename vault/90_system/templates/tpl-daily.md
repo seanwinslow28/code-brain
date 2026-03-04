@@ -6,6 +6,9 @@ mood: null
 ---
 # <% tp.file.title %>
 
+## Slack Overnight
+<!-- slack-overnight -->
+
 ## Morning Focus (Manual — <2 min)
 > What's the ONE thing that makes today successful?
 
