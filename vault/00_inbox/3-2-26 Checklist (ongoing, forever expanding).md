@@ -1,6 +1,7 @@
 - [x] Rent a Car or Van
 - [ ] Change perplexity and Claude to be focused on AI fluency. Or maybe perplexity is focused on research and PM work along with AI fluency
 - [ ] Email Dr Kat
+- [ ] Work on Fidelity Enrollment
 - [ ] Turn Off Verizon Bill for March move
 - [ ] Learn more about obsidian and how to use
 - [x] Build out UI’s — PM, Agent Hub, Life Systems.
