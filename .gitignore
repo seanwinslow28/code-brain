@@ -56,3 +56,6 @@ vault/50_sources/finance/**
 life-systems/finance/*.csv
 life-systems/health/*.csv
 life-systems/tasks/*.csv
+
+# Portfolio & Hubs project (has its own git repo)
+sw-portfolio-and-hubs-designs/
