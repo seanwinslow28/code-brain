@@ -4,7 +4,8 @@
 - [ ] Turn Off Verizon Bill for March move
 - [ ] Learn more about obsidian and how to use
 - [x] Build out UI’s — PM, Agent Hub, Life Systems.
-- [ ] Build out agent SDK
+- [ ] Build out agent SDK 
+- [ ] See if you should move the UX/UI project into Claude SuperUser pack
 - [ ] Build creative writing skill for tech -> jack karouac writes about ai - have Claude code interview you and do writing exercises for emails and creative technical writing to understand what you want and provide context (Do the same with 2d animation and other creative work)
 - [ ] Set up Claude Cowork with personal PM plug ins
 - [ ] Test out PRD>prototype generator
