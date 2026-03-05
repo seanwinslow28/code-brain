@@ -17,12 +17,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `agents-sdk/config.toml` — Added per-mode execution limits for daily_driver: morning (15 turns/$0.25), evening (10 turns/$0.25), weekly (20 turns/$0.50).
 - Skill count: 106 → 107
 
-## [3.9.1] - 2026-03-01
+## [3.9.2] - 2026-03-04
+
+### Changed
+
+- **`daily-driver` Slack overnight scan** — Added Step 1b to morning planning protocol. Scans DMs, @mentions, and key channels since last EOD (~5 PM). Classifies messages as Action Required / FYI / Skip. Writes digest to new `<!-- slack-overnight -->` anchor in daily notes. Filters out Jira bot noise and already-replied messages. Uses native Slack plugin (`plugin:slack:slack`), not Zapier.
+- **Daily note template** — Added `## Slack Overnight` section with `<!-- slack-overnight -->` anchor to `vault/90_system/templates/tpl-daily.md`, positioned above Morning Focus.
+
+## [3.9.1] - 2026-03-04
 
 ### Changed
 
 - **Native MCP preference over Zapier** — Updated 6 skills and Agent SDK docs to prefer native MCPs over Zapier equivalents where both exist. Skills updated: `daily-driver`, `time-management`, `meeting-prep`, `personal-finance`, `data-analysis`. Agent SDK docs (`docs/agents-adk-docs/agents-sdk.md`) "Tools, APIs, and MCPs" section fully rewritten with current connected MCP inventory and native-vs-Zapier preference table.
-- **Slack plugin installed** — Native Slack MCP plugin (`plugin:slack:slack`) installed and authenticated via OAuth. Replaces Zapier Slack tools for interactive sessions. Pending: The Block workspace admin approval for full access.
+- **Slack plugin installed and authenticated** — Native Slack MCP plugin (`plugin:slack:slack`) installed and OAuth-authenticated to The Block Crypto Inc workspace. No admin approval required. Replaces Zapier Slack tools for interactive sessions.
 - **Standalone Context7 MCP removed** — Redundant standalone `context7` MCP removed; `plugin:context7:context7` is the sole instance.
 - **`.env` cleaned** — Removed stale command on line 43, orphaned bare key on line 61, fixed doubled Runware key, standardized variable naming (`Gemini_API` → `GEMINI_API_KEY`, consolidated ElevenLabs keys).
 

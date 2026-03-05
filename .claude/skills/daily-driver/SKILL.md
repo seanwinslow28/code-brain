@@ -31,6 +31,7 @@ Daily notes use these anchors for programmatic injection (PATCH, not PUT):
 
 | Anchor | Section | What Gets Injected |
 |--------|---------|-------------------|
+| `<!-- slack-overnight -->` | Slack Overnight | DMs, @mentions, and channel activity since last EOD |
 | `<!-- jira-log -->` | Work Log | Jira activity summaries |
 | `<!-- claude-sessions -->` | Claude Code Sessions | Session entries with inline Dataview fields |
 | `<!-- side-projects -->` | Side Project Notes | Creative/R&D progress |
@@ -92,7 +93,43 @@ Appended to vault/10_timeline/daily/2026-02-20.md
 1. Read yesterday's daily note from `vault/10_timeline/daily/`
 2. Read any active project notes referenced in yesterday's log from `vault/20_projects/`
 3. Check calendar via Google Calendar MCP — query BOTH `sean.winslow28@gmail.com` (personal) AND `swinslow@theblock.co` (The Block work) calendars in parallel. Use `claude.ai Google Calendar` (gcal_list_events) or `google-workspace` (get_events) tools.
-4. Ask: "Anything new on your plate today?"
+4. Scan Slack for overnight activity (see Step 1b below)
+5. Ask: "Anything new on your plate today?"
+
+### Step 1b: Slack Overnight Scan
+
+Scan Slack for messages that arrived since last EOD (~5 PM yesterday). Uses the native Slack plugin (not Zapier). Sean's Slack user ID is `U09SC58MYDN`.
+
+**Run these searches in parallel:**
+
+1. **DMs to you** — `slack_search_public_and_private` with query `to:me`, channel_types `im`, sorted by timestamp desc, filtered to after 5 PM yesterday
+2. **@mentions** — `slack_search_public_and_private` with query `<@U09SC58MYDN>`, sorted by timestamp desc, filtered to after 5 PM yesterday
+3. **Key channels** — `slack_read_channel` on high-priority channels (check recent messages for anything urgent)
+
+**Classify each message as:**
+- **Action Required** — needs a reply, decision, or task from Sean
+- **FYI** — informational, no action needed but good to know
+- **Skip** — bot noise, automated notifications, irrelevant threads
+
+**Write to daily note** at the `<!-- slack-overnight -->` anchor:
+
+```markdown
+## Slack Overnight
+<!-- slack-overnight -->
+### Action Required
+- **Matt Vitebsky** (DM, 4:02 PM): Campus bug triage process — needs response about backend access
+- **Karla Vallecillo** (DM, 3:25 PM): Assigned Salesforce Campus case — review needed
+
+### FYI
+- **Claudine Daumur** (DM, 10:55 AM): Confirmed design approach works, no changes needed
+- **#campus-eng**: 3 new messages about deploy timeline
+```
+
+**Rules:**
+- Do NOT include Jira bot notifications (those go in `<!-- jira-log -->`)
+- Do NOT include messages Sean already replied to (check for Sean's replies in context)
+- Group by priority (Action Required first), then by sender
+- Include channel name or "DM" prefix, sender name, time, and a 1-line summary
 
 ### Step 2: Prioritize with the 1-3-5 Rule
 
@@ -115,6 +152,7 @@ Categorize tasks by type:
 Create or update `vault/10_timeline/daily/YYYY-MM-DD.md` using the template at `vault/90_system/templates/tpl-daily.md`. The template includes:
 
 - YAML frontmatter: `type: daily`, `date`, `energy-peak`, `mood`
+- Slack Overnight with `<!-- slack-overnight -->` anchor
 - Morning Focus section with single-priority prompt
 - Dataview task query from `20_projects/`
 - Work Log with `<!-- jira-log -->` anchor
@@ -179,6 +217,8 @@ On Friday or Sunday, prompt:
 ## Success Criteria
 
 - [ ] Morning planning produces a prioritized daily note
+- [ ] Slack overnight scan classifies messages as Action Required / FYI / Skip
+- [ ] Slack digest written to `<!-- slack-overnight -->` anchor (excludes Jira bot noise and already-replied messages)
 - [ ] EOD review captures open loops and stages tomorrow
 - [ ] Carry-over tasks are tracked (not silently dropped)
 - [ ] Weekly review synthesizes patterns from daily notes
