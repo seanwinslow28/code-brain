@@ -13,6 +13,6 @@
 - [x] Do deep research on ways to get your Apple Watch Fitness app data onto your Mac Mini
 - [ ] Move any subscriptions from credit card over to 115 Elm.
 - [x] Look at RipplingxFidelity
-- [ ] Granola notes have been sunk. For now, set everything up manually, and then work on script to put everything into their respective folders. Also, look into making sure EVERYTHING gets put in there -- Talk to Claude about Granola and including in the README.md and VAULT_GUIDE
+- [ ] Granola notes have been sunk. For now, set everything up manually, and then work on script to put everything into their respective folders. Also, look into making sure EVERYTHING gets put in there -- Talk to Claude about Granola and including in the README.md and VAULT_GUIDE - Add Granola to desktop as well
 - [ ] Look at fidelity plan and ask Claude what to invest in - Use prompt engineering to make it look into stocks and bonds -- do perplexity as well
 - [ ] Talk to Claude about Granola
