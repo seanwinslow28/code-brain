@@ -22,3 +22,32 @@ Latest bi-weekly update is here. Here's what shipped in the past 2 weeks:
 - **.**[**Co**](https://www.theblock.co/podcasts/the-white-papers) - The White Papers podcast page launched 
 - **GAM** - Ads' programmatic bid support  
 - **.Co & Campus** - Visual bugs, UX improvements, SEO fixes
+
+
+**PREVIOUS WEEK**
+# **Mar 6, 2026**
+
+**Things we've done in the past two weeks:**
+- **.Co - Polymarket homepage widget is officially live!**
+- **.Co - Prices, ETFs, Stocks & Data Dashboard pages Nuxt4 migration complete**
+- **Campus - Self Service Flow for Individual Users**
+- **.Co & Campus - Visual bugs, UX improvements, SEO fixes**
+
+**Things being worked on, likely to be released in the next few weeks:**
+- **.Co** - Election Hub landing page (in progress)
+- **Campus** - Multi-course marketing site support for Individuals (in progress)
+- **Campus** - Individuals payment flows Stripe update (in progress)
+- **.Co** - iOS app (in test)
+- .**Co** - Report Cards — Social sharing & Open Graph cards (in progress)
+- **.Co** - Video Pipeline — Mux video uploader & content type integration (in progress)
+- **.Co** - Spanish language spike (in progress)
+- .**Co** - Pro Data awareness banner on Data pages (in progress)
+- **.Co** - Price Pages content improvement & FAQ sections (in progress)
+- **Campus** - In-platform subscription upgrade & management (in progress)
+- Chart improvements & bug fixes
+
+**A few of the things we're focused on for upcoming months:**
+- .Co - 'Sponsored Courses' funnel into Campus
+- Campus - Prerequisite Schema & Knowledge Token Taxonomy
+- Multi-language support on .co
+- Tech Debt
