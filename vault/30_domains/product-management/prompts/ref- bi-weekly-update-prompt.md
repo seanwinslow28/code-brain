@@ -20,9 +20,9 @@ Latest bi-weekly update is here. Here's what shipped in the past 2 weeks:
 https://theblockcrypto.atlassian.net/wiki/x/IwCCE
 - **.Co** - [Polymarket](https://polymarket.com/) Homepage and article widgets are officially live!
 - **.Co** - Prices, ETFs, Stocks & Data Dashboard pages Nuxt4 migration complete
-- Price Pages content improvement & FAQ section support (faq content is in progress)
+	- Price Pages content improvement & FAQ section support (faq content is in progress)
 - **GAM** - Sticky Footer migrated 
-• • **.Co & Campus** - Visual bugs, UX improvements, SEO fixes
+•  **.Co & Campus** - Visual bugs, UX improvements, SEO fixes
 
 
 **PREVIOUS WEEK**
