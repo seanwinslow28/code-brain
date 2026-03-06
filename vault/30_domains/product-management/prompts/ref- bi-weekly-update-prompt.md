@@ -15,33 +15,34 @@ Based on previous bi-weekly update examples, please condense or leave out the un
 
 **SLACK MESSAGE TEMPLATE**
 @here
+
 Latest bi-weekly update is here. Here's what shipped in the past 2 weeks:
-[https://theblockcrypto.atlassian.net/wiki/x/IwCCE](https://theblockcrypto.atlassian.net/wiki/x/IwCCE) 
-- [**Campus**](https://www.theblock.co/campus) - Multi-Course Enterprise 201 is live! 
-- **SFMC** - Marketo migration complete — all forms replaced across .Co, Campus, and Pro
-- **.**[**Co**](https://www.theblock.co/podcasts/the-white-papers) - The White Papers podcast page launched 
-- **GAM** - Ads' programmatic bid support  
-- **.Co & Campus** - Visual bugs, UX improvements, SEO fixes
+https://theblockcrypto.atlassian.net/wiki/x/IwCCE
+- **.Co** - [Polymarket](https://polymarket.com/) Homepage and article widgets are officially live!
+- **.Co** - Prices, ETFs, Stocks & Data Dashboard pages Nuxt4 migration complete
+- Price Pages content improvement & FAQ section support (faq content is in progress)
+- **GAM** - Sticky Footer migrated 
+• • **.Co & Campus** - Visual bugs, UX improvements, SEO fixes
 
 
 **PREVIOUS WEEK**
 # **Mar 6, 2026**
-**Things we've done in the past two weeks:**
-- **.Co** - Polymarket homepage widget is officially live!
-- **.Co** **-** Prices, ETFs, Stocks & Data Dashboard pages Nuxt4 migration complete
-- **GAM** - Sticky Footer implemented 
+Things we’ve done in the past two weeks:
+- **.Co** - Polymarket homepage and article widgets are officially live!
+- **.Co** - Prices, ETFs, Stocks & Data Dashboard pages. Nuxt4 migration complete!
+    - Price Pages content improvement & FAQ section support (faq content is in progress)
+- **GAM** - Sticky Footer migrated
 - **.Co & Campus** - Visual bugs, UX improvements, SEO fixes
-**Things being worked on, likely to be released in the next few weeks:**
-- **.Co** - Election Hub landing page & Report Cards social media sharing (in progress)
-- **Campus** - Multi-course marketing site support for Individuals (in progress)
-- **Campus** - Individuals payment flows Stripe update (in progress)
+Things being worked on, likely to be released in the next few weeks:
+- **.Co** - Election Hub landing page & Report Cards social media sharing
+- **Campus** - Multi-course marketing site support for Individuals
+- **Campus** - Individuals payment flows Stripe update
 - **.Co** - iOS app (in test)
-- **.Co** - Video Pipeline — Mux video uploader & content type integration (in progress)
-- **.Co** - Spanish language integration (in progress)
-- .**Co** - Pro Data awareness banner on Data pages (in progress)
-- **.Co** - Price Pages content improvement & FAQ sections (in progress)
+- **.Co** - Job boards (in test)
+- **.Co** - Video support - Mux video uploader & content type integration
+- **.Co** - Pro Data awareness banner on Data pages
 - Chart improvements & bug fixes
-**A few of the things we're focused on for upcoming months:**
+A few of the things we’re focused on for upcoming months:
 - .Co - 'Sponsored Courses' funnel into Campus
 - Campus - Prerequisite Schema & Knowledge Token Taxonomy
 - Multi-language support on .co
