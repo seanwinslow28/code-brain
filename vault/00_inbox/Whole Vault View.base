@@ -1,0 +1,7 @@
+views:
+  - type: table
+    name: Table
+    sort: []
+  - type: cards
+    name: View
+    cardSize: 300
