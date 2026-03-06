@@ -30,7 +30,7 @@ Latest bi-weekly update is here. Here's what shipped in the past 2 weeks:
 **Things we've done in the past two weeks:**
 - **.Co - Polymarket homepage widget is officially live!**
 - **.Co - Prices, ETFs, Stocks & Data Dashboard pages Nuxt4 migration complete**
-- **Campus - Self Service Flow for Individual Users**
+- GAM - **Sticky Footer implemented** 
 - **.Co & Campus - Visual bugs, UX improvements, SEO fixes**
 
 **Things being worked on, likely to be released in the next few weeks:**
@@ -40,7 +40,7 @@ Latest bi-weekly update is here. Here's what shipped in the past 2 weeks:
 - **.Co** - iOS app (in test)
 - .**Co** - Report Cards — Social sharing & Open Graph cards (in progress)
 - **.Co** - Video Pipeline — Mux video uploader & content type integration (in progress)
-- **.Co** - Spanish language spike (in progress)
+- **.Co** - Spanish language integration (in progress)
 - .**Co** - Pro Data awareness banner on Data pages (in progress)
 - **.Co** - Price Pages content improvement & FAQ sections (in progress)
 - **Campus** - In-platform subscription upgrade & management (in progress)
