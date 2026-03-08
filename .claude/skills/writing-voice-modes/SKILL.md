@@ -172,6 +172,26 @@ Voice intensity adjusts by context. Sarcasm is ALWAYS present.
 | Conference talk / presentation | Vonnegut (short chips, story shapes) | Sedaris (live-tested timing) |
 | Poems / micro-format | Vonnegut (compression) | Sedaris (punchline placement) |
 
+## Integration Rules
+
+This skill controls HOW writing sounds. `creative-writing` controls FORMAT (structure, word count, platform constraints). `technical-writing` controls CLARITY (audience awareness, progressive disclosure, front-loaded conclusions). When loaded together:
+
+**Voice modes operate WITHIN format constraints, not over them.**
+- If `creative-writing` says a Twitter thread is 5-10 tweets at 280 chars max, Gonzo mode doesn't get to blow past that. It adapts its cold open and escalation loop to fit the constraint.
+- If `technical-writing` says front-load the conclusion, Beat Flow mode doesn't bury it under a sensory cascade. It delivers the conclusion first, THEN runs the cascade as supporting texture.
+
+**When modes and formats conflict, resolve by content type:**
+
+| Conflict | Resolution |
+|----------|-----------|
+| Mode wants a long cold open, format says hook in 1-2 sentences | Compress the cold open into 1-2 sentences. Gonzo can cold-open in 12 words: "I DEPLOYED TO PRODUCTION at 11:47 PM on a Wednesday." |
+| Mode wants flowing rhythm, format says scannable with headers | Use the mode's rhythm WITHIN each section. Headers provide structure; voice lives between them. |
+| Mode wants humor, format says professional (API docs, runbooks) | Dial to 20-40%. Dry wit in examples and asides. Never in the critical path (commands, warnings, steps). |
+| Mode wants sensory detail, format says brevity (tweet, Slack) | One sensory image maximum. Pick the jewel center. Cut the cascade. |
+| Mode wants a refrain, format is short-form | Deploy the refrain twice maximum (setup + payoff). Three needs runway. |
+
+**The one exception:** Personal essays and blog posts on Sean's own site. Here, voice modes lead and format follows. The mode shapes the structure. `creative-writing` provides the skeleton (hook, sections, closer), but the mode can reshape that skeleton if the piece demands it.
+
 ## Complementary Technique Pairs
 
 Use these when combining modes within a single piece.
