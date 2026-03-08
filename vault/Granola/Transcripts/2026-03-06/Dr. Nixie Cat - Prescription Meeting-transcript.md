@@ -1,14 +1,14 @@
 ---
 granola_id: 63c31ff9-06cd-41ce-91b9-f45146921f83
-title: "Busy - Transcript"
+title: "Dr. Nixie Cat - Prescription Meeting - Transcript"
 type: transcript
 created: 2026-03-06T16:00:07.783Z
-updated: 2026-03-06T16:20:54.203Z
+updated: 2026-03-08T15:51:14.291Z
 attendees: []
-note: "[[2026-03-06#Busy]]"
+note: "[[2026-03-06#Dr. Nixie Cat - Prescription Meeting]]"
 ---
 
-# Transcript for: Busy
+# Transcript for: Dr. Nixie Cat - Prescription Meeting
 
 ### Guest (2026-03-06T16:03:46.133Z)
 
