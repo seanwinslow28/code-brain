@@ -1,3 +1,14 @@
+---
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: AdOps/RevOps meeting about salesforce meeting transcript 2-26-2026.
+context: the-block
+created: 2026-02-26
+source: granola-manual
+---
+
 Meeting Title: Case Queue
 Date: Feb 26
 Meeting participants: Kvallecillo, Ldanowski

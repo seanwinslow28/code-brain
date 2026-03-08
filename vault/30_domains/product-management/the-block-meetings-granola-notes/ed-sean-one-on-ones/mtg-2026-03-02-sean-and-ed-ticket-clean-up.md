@@ -1,3 +1,14 @@
+---
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: "1:1 with Ed covering sean and ed - ticket clean up."
+context: the-block
+created: 2026-03-02
+source: granola-manual
+---
+
 # **Ticket cleanup**
 
 Mon, 02 Mar 26 · erupkus@theblock.co

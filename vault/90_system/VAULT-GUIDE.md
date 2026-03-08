@@ -306,7 +306,7 @@ Claude Code injects content **below** the anchor using Edit or sed, leaving the 
 
 | Template | Anchors |
 |----------|---------|
-| `tpl-daily` | `<!-- jira-log -->`, `<!-- claude-sessions -->`, `<!-- side-projects -->` |
+| `tpl-daily` | `<!-- slack-overnight -->`, `<!-- meetings -->`, `<!-- jira-log -->`, `<!-- claude-sessions -->`, `<!-- side-projects -->` |
 | `tpl-weekly` | `<!-- auto-wins -->`, `<!-- auto-blockers -->`, `<!-- auto-decisions -->` |
 | `tpl-project` | `<!-- status-update -->`, `<!-- git-commits -->` |
 
@@ -362,7 +362,7 @@ Eight community plugins are installed:
 | **Local REST API** | MCP server endpoint for AI access | HTTPS on port 27124, self-signed SSL |
 | **Remotely Save** | Cloud sync (encrypted config) | Encrypted credentials |
 | **Homepage** | Opens vault to Home.md | Set to `Home` note |
-| **Granola Sync** | Syncs meeting transcripts from [Granola](https://granola.ai/) | Destination: `30_domains/product-management/the-block-meetings-granola-notes/`. Desktop only. |
+| **Granola Sync** | Syncs meeting notes + transcripts from [Granola](https://granola.ai/) | Individual files with `linkFromDailyNotes: true`. Processed by `process-granola-notes.py`. Desktop only. |
 
 ### Obsidian App Settings
 
@@ -802,24 +802,61 @@ As of 2026-02-21:
 
 ### Granola Meeting Sync
 
-[Granola](https://granola.ai/) is a meeting transcription app that runs on Sean's MacBook Pro during Google Meetings at The Block. The `obsidian-granola-sync` community plugin ([GitHub](https://github.com/tomelliot/obsidian-granola-sync)) automatically syncs transcribed meeting notes into the vault.
+[Granola](https://granola.ai/) is a meeting transcription app that runs on Sean's MacBook Pro during Google Meetings at The Block. The `obsidian-granola-sync` community plugin ([GitHub](https://github.com/tomelliot/obsidian-granola-sync)) automatically syncs both TLDR notes and full transcripts into the vault.
 
-**Destination folder:** `vault/30_domains/product-management/the-block-meetings-granola-notes/`
+**Plugin config** (`vault/.obsidian/plugins/granola-sync/data.json`):
+- `saveAsIndividualFiles: true` — each meeting gets its own file
+- `linkFromDailyNotes: true` — daily notes get `[[wiki-links]]` under `## Meetings`
+- `customBaseFolder: "30_domains/product-management/the-block-meetings-granola-notes"` — landing zone
+- `transcriptHandling: "same-location"` — transcripts co-locate with notes
+- `syncDaysBack: 7` — re-syncs recent files (processing script waits 7 days before processing)
 
-**Subfolder structure (manually sorted):**
+**Processing script:** `vault/90_system/scripts/process-granola-notes.py`
 
-| Subfolder | Meeting Type |
-|-----------|-------------|
-| `adops-revops/` | AdOps and RevOps meetings |
-| `daily-standup/` | Daily standups |
-| `david-sean-one-on-ones/` | 1:1s with David |
-| `design-sync/` | Design sync meetings |
-| `ed-sean-one-on-ones/` | 1:1s with Ed |
-| `other/` | Uncategorized meetings |
+The processing script post-processes Granola-synced files:
+1. Injects vault-schema YAML frontmatter (resolves `type` collision: Granola's `type: note` → `granola_type: note`, vault `type: meeting`)
+2. Renames to kebab-case: `Unified Daily Standup.md` → `mtg-2026-03-03-unified-daily-standup.md`
+3. Auto-sorts into subfolders by title/attendee keyword matching
+4. Resolves speaker names in transcripts (`You` → `Sean`, `Guest` → actual name for 1:1 meetings)
+5. Updates transcript↔note cross-links after rename
 
-**Current workflow:** The plugin syncs all Granola notes into the configured destination folder (flat). Sean manually sorts notes into the appropriate subfolder after sync.
+```bash
+python3 vault/90_system/scripts/process-granola-notes.py              # Process files older than 7 days
+python3 vault/90_system/scripts/process-granola-notes.py --dry-run    # Preview changes
+python3 vault/90_system/scripts/process-granola-notes.py --migrate    # One-time migration (all files)
+```
 
-**TODO — Auto-sort automation:** Build a script or Templater automation that routes Granola-synced notes into the correct subfolder based on keywords in the meeting title (e.g., "standup" -> `daily-standup/`, "design" -> `design-sync/`, "Ed" -> `ed-sean-one-on-ones/`, "David" -> `david-sean-one-on-ones/`, "AdOps"/"RevOps"/"Salesforce" -> `adops-revops/`). Unmatched notes go to `other/`.
+**Subfolder structure (auto-sorted):**
+
+| Subfolder | Keywords | Meeting Type |
+|-----------|----------|-------------|
+| `adops-revops/` | adops, salesforce, case queue, revenue, sales | AdOps and RevOps meetings |
+| `all-hands/` | all hands, town hall, 401k, company | Company-wide meetings |
+| `campus-conversations/` | campus, sponsored course, .co > campus | Campus team syncs |
+| `daily-standup/` | standup, unified daily | Daily standups |
+| `david-sean-one-on-ones/` | david (+ ≤2 attendees) | 1:1s with David |
+| `design-sync/` | design sync, product + design, design weekly | Design sync meetings |
+| `ed-sean-one-on-ones/` | ed, biweekly update (+ ≤2 attendees) | 1:1s with Ed |
+| `other/` | *(no match)* | Uncategorized meetings |
+
+**Frontmatter schema (processed meeting notes):**
+```yaml
+---
+granola_id: 17f84a9f-...        # Preserved from Granola (dedup key)
+granola_type: note               # Original Granola type (note or transcript)
+type: meeting                    # Vault type (resolves collision)
+domain:
+  - product-management
+status: active
+ai-context: "Daily standup covering unified daily standup."
+context: the-block
+created: 2026-03-03
+source: granola-sync             # "granola-manual" for pre-plugin notes
+attendees:
+  - bmendoza@theblock.co
+transcript: "[[mtg-2026-03-03-unified-daily-standup-transcript]]"
+---
+```
 
 **Multi-device note:** Granola runs on the MacBook Pro only (work laptop for meetings). The plugin is desktop-only and does not work on mobile.
 
@@ -841,6 +878,7 @@ These files in the parent `claude-code-superuser-pack` repository support vault 
 | File | Purpose |
 |------|---------|
 | `scripts/classify-apple-notes.py` | Regex-based note pre-classifier (used in Phase 3) |
+| `vault/90_system/scripts/process-granola-notes.py` | Granola meeting note post-processor (auto-sort, frontmatter, speaker names) |
 | `.claude/skills/vault-read-write/SKILL.md` | Read/write workflow skill |
 | `.claude/skills/vault-architecture/SKILL.md` | Architecture design skill |
 | `.claude/skills/vault-automation/SKILL.md` | Templater + Dataview automation skill |

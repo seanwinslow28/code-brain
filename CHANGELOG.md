@@ -10,10 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `writing-voice-modes` — 5 writing voice modes calibrated to Sean's personal style through interview and writing exercises. Modes: Domestic Observer (Sedaris-tuned), Gonzo Technical (Thompson-tuned), Beat Flow (Kerouac-tuned), Minimalist Absurdist (Vonnegut-tuned), and Sean Mode (calibrated hybrid default). Includes signature moves (Hard Cut/Deflation, Rule of Three with Emotional Pivot, Callback Closers, Sensory Before Numbers, Screenwriting Cut-To), professional dial (20-100% intensity by context), content type → mode mapping, complementary technique pairs, and anti-patterns. Works alongside `creative-writing` (format) and `technical-writing` (audience). References `vault/40_knowledge/references/ref-voice-mechanics-research.md` for deep author mechanics.
+- `vault/90_system/scripts/process-granola-notes.py` — Granola meeting note post-processor. Auto-sorts into subfolders by title keywords, injects vault-schema YAML frontmatter (resolves Granola `type` collision), renames to `mtg-YYYY-MM-DD-title.md` convention, resolves speaker names in transcripts (You→Sean, Guest→name for 1:1s), updates cross-links. Supports `--dry-run` and `--migrate` modes. Migrated 10 embedded notes, 12 transcripts, 4 manual notes.
 
 ### Changed
 
 - Skill count: 107 → 108
+- Reconfigured `obsidian-granola-sync` plugin: `saveAsIndividualFiles: true`, `linkFromDailyNotes: true`, `transcriptHandling: "same-location"`
+- Updated `tpl-daily.md` with `## Meetings` section and `<!-- meetings -->` anchor
+- Updated `VAULT-GUIDE.md` Granola section with processing script docs, auto-sort rules, frontmatter schema
 
 ## [3.10.0] - 2026-02-28
 

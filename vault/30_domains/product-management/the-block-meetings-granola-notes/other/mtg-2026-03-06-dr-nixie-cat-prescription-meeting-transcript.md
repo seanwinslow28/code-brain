@@ -1,11 +1,15 @@
 ---
 granola_id: 63c31ff9-06cd-41ce-91b9-f45146921f83
-title: "Dr. Nixie Cat - Prescription Meeting - Transcript"
-type: transcript
-created: 2026-03-06T16:00:07.783Z
-updated: 2026-03-08T15:51:14.291Z
-attendees: []
-note: "[[2026-03-06#Dr. Nixie Cat - Prescription Meeting]]"
+granola_type: transcript
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Full transcript of dr. nixie cat - prescription meeting - transcript.
+context: the-block
+created: 2026-03-06
+source: granola-sync
+note: "[[mtg-2026-03-06-dr-nixie-cat-prescription-meeting]]"
 ---
 
 # Transcript for: Dr. Nixie Cat - Prescription Meeting
@@ -14,7 +18,7 @@ note: "[[2026-03-06#Dr. Nixie Cat - Prescription Meeting]]"
 
 Hello. How are you?
 
-### You (2026-03-06T16:03:50.393Z)
+### Sean (2026-03-06T16:03:50.393Z)
 
 John, how are you doing?
 
@@ -22,7 +26,7 @@ John, how are you doing?
 
 Batshit crazy. You got an email about me.
 
-### You (2026-03-06T16:03:56.943Z)
+### Sean (2026-03-06T16:03:56.943Z)
 
 Yeah.
 
@@ -30,7 +34,7 @@ Yeah.
 
 Not my idea. Company has a new chief medical officer. He's changing things. And so he decided that they didn't want me to be part of the company. I don't know what the reasons are, didn't invite me to the meetings. I don't know if it's just, basically, I got an email saying, like, hey. We're gonna terminate your contract in thirty days. So do something about that. Right? And no no no conversation, just an email. I approached someone I know at the company in trust, and I was like, hey. What the hell? And she was no. You know, it's just business. It's just like, nothing about personality, nothing about like, performance. Just, you know, we're changing some stuff, and you're a change.
 
-### You (2026-03-06T16:04:46.093Z)
+### Sean (2026-03-06T16:04:46.093Z)
 
 Oh, Jesus.
 
@@ -38,7 +42,7 @@ Oh, Jesus.
 
 Right? Like, fucking cold.
 
-### You (2026-03-06T16:04:49.553Z)
+### Sean (2026-03-06T16:04:49.553Z)
 
 Yeah Barry
 
@@ -46,7 +50,7 @@ Yeah Barry
 
 But that's okay because I understood I decided I was gonna work in corporate medicine that I was working Like, I I was doing a deal with the devil. I understood this. I knew that this could happen.
 
-### You (2026-03-06T16:04:58.703Z)
+### Sean (2026-03-06T16:04:58.703Z)
 
 Mhmm.
 
@@ -54,7 +58,7 @@ Mhmm.
 
 So, I was just taking my time Each patient I got to see being like, hey. This is what's going on. Sorry. Medvidia is still gonna be here. They can take care of you. I don't know where I'm going next. They kinda pulled the rug out from under me. I have no idea what the fuck I'm doing. But it's cool. I'll figure me out. Let me make sure you're okay. Right?
 
-### You (2026-03-06T16:05:21.653Z)
+### Sean (2026-03-06T16:05:21.653Z)
 
 Yeah.
 
@@ -62,7 +66,7 @@ Yeah.
 
 And that was the conversation I got to have for about two weeks. And then this last weekend, they sent email to, like, 700 people saying,
 
-### You (2026-03-06T16:05:28.363Z)
+### Sean (2026-03-06T16:05:28.363Z)
 
 Yeah.
 
@@ -70,7 +74,7 @@ Yeah.
 
 you know, hey. Your doctor's gone.
 
-### You (2026-03-06T16:05:31.633Z)
+### Sean (2026-03-06T16:05:31.633Z)
 
 Yeah. And then I I was
 
@@ -78,7 +82,7 @@ Yeah. And then I I was
 
 And so
 
-### You (2026-03-06T16:05:34.983Z)
+### Sean (2026-03-06T16:05:34.983Z)
 
 scrambled. I was looking. I was like, what?
 
@@ -86,7 +90,7 @@ scrambled. I was looking. I was like, what?
 
 and they made it sound like it was my idea.
 
-### You (2026-03-06T16:05:39.603Z)
+### Sean (2026-03-06T16:05:39.603Z)
 
 Yeah.
 
@@ -94,7 +98,7 @@ Yeah.
 
 Like, it was all, you know, he's going to go pursue other opportunities. Fuck. Yeah. I'm gonna pursue other opportunities. I gotta pay a mortgage. Right?
 
-### You (2026-03-06T16:05:45.453Z)
+### Sean (2026-03-06T16:05:45.453Z)
 
 Yeah. Exactly.
 
@@ -102,7 +106,7 @@ Yeah. Exactly.
 
 But like, that was not the plan.
 
-### You (2026-03-06T16:05:48.473Z)
+### Sean (2026-03-06T16:05:48.473Z)
 
 Against my will. Yeah.
 
@@ -110,7 +114,7 @@ Against my will. Yeah.
 
 It was it was definitely not the plan, and it it really pissed me off that they essentially were terminating me by email and then that they doxed me to like, because people found my face oh, whatever. My My name is Nixie Cat. It's very easy to find me. Right? So people found every social media account, including ones I didn't remember I had. Somebody called my Internet service provider and demanded to it was a medical emergency. They had to have my cell phone number.
 
-### You (2026-03-06T16:06:22.703Z)
+### Sean (2026-03-06T16:06:22.703Z)
 
 What?
 
@@ -118,7 +122,7 @@ What?
 
 Because they told 700 psych patients that they were losing their mental health provider.
 
-### You (2026-03-06T16:06:29.233Z)
+### Sean (2026-03-06T16:06:29.233Z)
 
 Doctor yeah.
 
@@ -126,7 +130,7 @@ Doctor yeah.
 
 On a weekend. And so everybody fucking, like, turned out like it was
 
-### You (2026-03-06T16:06:31.333Z)
+### Sean (2026-03-06T16:06:31.333Z)
 
 Yeah. Oh my god.
 
@@ -134,7 +138,7 @@ Yeah. Oh my god.
 
 traumatizing.
 
-### You (2026-03-06T16:06:36.793Z)
+### Sean (2026-03-06T16:06:36.793Z)
 
 So
 
@@ -142,7 +146,7 @@ So
 
 But that was what pissed me off. Like, I was okay, and it was just business until they
 
-### You (2026-03-06T16:06:39.093Z)
+### Sean (2026-03-06T16:06:39.093Z)
 
 yeah.
 
@@ -150,7 +154,7 @@ yeah.
 
 told people I was leaving on purpose and then set, like, hundreds of people to chase me down and be like, oh, you're going somewhere else. We're gonna go with you.
 
-### You (2026-03-06T16:06:48.263Z)
+### Sean (2026-03-06T16:06:48.263Z)
 
 Yeah.
 
@@ -158,7 +162,7 @@ Yeah.
 
 So everybody asks, no. I don't have a new job yet. I don't know what I'm doing. I I didn't know what I was doing. Now they've pissed me off. So now, sure, I'm gonna make a private practice. That's gonna happen.
 
-### You (2026-03-06T16:07:05.283Z)
+### Sean (2026-03-06T16:07:05.283Z)
 
 Good.
 
@@ -166,7 +170,7 @@ Good.
 
 Do I have it today? No. Thank god. Because if I had it today, then I could get sued. I would be telling people, yeah. Sure. Come come be with me. But I can't say that something that doesn't exist yet. So
 
-### You (2026-03-06T16:07:16.343Z)
+### Sean (2026-03-06T16:07:16.343Z)
 
 Yep.
 
@@ -174,7 +178,7 @@ Yep.
 
 I'm abiding by my contract. My contract says I will not try to solicit you to join a private practice Can't do it. Doesn't exist. Could just be an idea in my head right now. That's all I know. But I do tell people and people have shown that they know how to find me.
 
-### You (2026-03-06T16:07:33.083Z)
+### Sean (2026-03-06T16:07:33.083Z)
 
 Yeah.
 
@@ -182,7 +186,7 @@ Yeah.
 
 So I do tell people, like, yeah, get in touch. If there's anything I can do for you ever, if it is within my power to do it, I'm not gonna tell you no.
 
-### You (2026-03-06T16:07:41.563Z)
+### Sean (2026-03-06T16:07:41.563Z)
 
 Okay.
 
@@ -190,7 +194,7 @@ Okay.
 
 So I can't can't try to steal you but if you need something, I'm gonna help you.
 
-### You (2026-03-06T16:07:46.803Z)
+### Sean (2026-03-06T16:07:46.803Z)
 
 Yeah. Well, I very much appreciate it. Yeah. I'm I'm sorry that that happened. Can you do anything about the fact that they emailed everybody and
 
@@ -198,7 +202,7 @@ Yeah. Well, I very much appreciate it. Yeah. I'm I'm sorry that that happened. C
 
 No.
 
-### You (2026-03-06T16:07:57.663Z)
+### Sean (2026-03-06T16:07:57.663Z)
 
 because that because this could be considered harassment. No?
 
@@ -206,7 +210,7 @@ because that because this could be considered harassment. No?
 
 No. No. No. No. No. Because they're the the part that is frustrating, like, they they have a there is a requirement to inform patients if if you're if a doctor's going away. They if they're sticking to, like, the letter of the law, they need to give you thirty days warning. They didn't do that.
 
-### You (2026-03-06T16:08:20.163Z)
+### Sean (2026-03-06T16:08:20.163Z)
 
 Yeah.
 
@@ -214,7 +218,7 @@ Yeah.
 
 But if their their way of getting around that is that the practice is still gonna be here. You're not my patient. You're Medvidi's patient. I am merely a contractor that they brought in to perform the work
 
-### You (2026-03-06T16:08:36.163Z)
+### Sean (2026-03-06T16:08:36.163Z)
 
 Mhmm.
 
@@ -222,7 +226,7 @@ Mhmm.
 
 but you are Medvede's patient, not mine.
 
-### You (2026-03-06T16:08:37.613Z)
+### Sean (2026-03-06T16:08:37.613Z)
 
 Gotcha.
 
@@ -230,7 +234,7 @@ Gotcha.
 
 And that is how they see it. That's how their lawyers see it. And that's how it's okay for them to swap in another contractor or another anybody They they see the person doing the the actual care as just, you know, a plug and play replaceable
 
-### You (2026-03-06T16:08:55.203Z)
+### Sean (2026-03-06T16:08:55.203Z)
 
 Yeah.
 
@@ -238,7 +242,7 @@ Yeah.
 
 piece. Right? But that's not the experience that human beings have with one another.
 
-### You (2026-03-06T16:09:02.003Z)
+### Sean (2026-03-06T16:09:02.003Z)
 
 Exactly. Yeah.
 
@@ -246,7 +250,7 @@ Exactly. Yeah.
 
 So
 
-### You (2026-03-06T16:09:03.813Z)
+### Sean (2026-03-06T16:09:03.813Z)
 
 You you definitely you you you tend to build a relationship with somebody that you've been seeing over and over again, and then you have communications with. And
 
@@ -254,7 +258,7 @@ You you definitely you you you tend to build a relationship with somebody that y
 
 Yeah.
 
-### You (2026-03-06T16:09:12.563Z)
+### Sean (2026-03-06T16:09:12.563Z)
 
 yeah. That's that's a bummer. But so on my end, it's kinda serendipitous because I will be moving to Boston in about a month, which
 
@@ -262,7 +266,7 @@ yeah. That's that's a bummer. But so on my end, it's kinda serendipitous because
 
 Mhmm.
 
-### You (2026-03-06T16:09:22.823Z)
+### Sean (2026-03-06T16:09:22.823Z)
 
 I I believe Medivi it it I I wouldn't be able to see you anyway. Right?
 
@@ -270,7 +274,7 @@ I I believe Medivi it it I I wouldn't be able to see you anyway. Right?
 
 You wouldn't be able to see me. You'd be able to still see
 
-### You (2026-03-06T16:09:27.123Z)
+### Sean (2026-03-06T16:09:27.123Z)
 
 Yeah.
 
@@ -278,7 +282,7 @@ Yeah.
 
 MedVity. They're still gonna exist, so you can absolutely at least as far as I know, they're still gonna exist. They are shooting themselves in the foot really bad right now. But
 
-### You (2026-03-06T16:09:36.183Z)
+### Sean (2026-03-06T16:09:36.183Z)
 
 Yeah.
 
@@ -286,7 +290,7 @@ Yeah.
 
 like, they they should be able to help you there. That is a thing that should happen. It is true. My license only exists in New York state. I do not have a a Massachusetts license. And so if you were in Massachusetts and you did reach out to me and did say you wanted to be a private patient, I wouldn't be able to do that if you were across a state line. That I didn't have a
 
-### You (2026-03-06T16:10:01.293Z)
+### Sean (2026-03-06T16:10:01.293Z)
 
 Okay. Damn.
 
@@ -294,7 +298,7 @@ Okay. Damn.
 
 a license in.
 
-### You (2026-03-06T16:10:03.353Z)
+### Sean (2026-03-06T16:10:03.353Z)
 
 Okay. Alright. Understood.
 
@@ -302,7 +306,7 @@ Okay. Alright. Understood.
 
 Should I pursue a license for
 
-### You (2026-03-06T16:10:07.263Z)
+### Sean (2026-03-06T16:10:07.263Z)
 
 I I I would I would I would love that.
 
@@ -310,7 +314,7 @@ I I I would I would I would love that.
 
 that'll take a minute. It would take a minute. But everything isn't always about who can write prescriptions for you.
 
-### You (2026-03-06T16:10:20.363Z)
+### Sean (2026-03-06T16:10:20.363Z)
 
 Mhmm.
 
@@ -318,7 +322,7 @@ Mhmm.
 
 Right? Medvidi can write prescriptions for you, but like, I actually care about you and would love to hear from you
 
-### You (2026-03-06T16:10:27.003Z)
+### Sean (2026-03-06T16:10:27.003Z)
 
 Yeah.
 
@@ -326,7 +330,7 @@ Yeah.
 
 as a human being that you just you're okay. And if you needed anything, you could me know. And if it were within my power to do it, I would. And if it were not within my power to do I could help you track down who could. So you that is
 
-### You (2026-03-06T16:10:39.563Z)
+### Sean (2026-03-06T16:10:39.563Z)
 
 Yeah.
 
@@ -334,7 +338,7 @@ Yeah.
 
 that is the reason why I am giving my number to people. It is not so that I can steal them to a practice that doesn't exist. I'm giving you my number so that we can be humans who have a relationship that needs to be able to continue.
 
-### You (2026-03-06T16:10:51.913Z)
+### Sean (2026-03-06T16:10:51.913Z)
 
 I agree. I mean, we've been talking about every every single visit. It's just, you know, when you're coming to Staten Island, where where can I go to eat? And then it would just be like, oh, we should, keep that
 
@@ -342,7 +346,7 @@ I agree. I mean, we've been talking about every every single visit. It's just, y
 
 Yeah.
 
-### You (2026-03-06T16:11:04.683Z)
+### Sean (2026-03-06T16:11:04.683Z)
 
 you know, like, that little block. But I would I would love that.
 
@@ -350,7 +354,7 @@ you know, like, that little block. But I would I would love that.
 
 So
 
-### You (2026-03-06T16:11:08.213Z)
+### Sean (2026-03-06T16:11:08.213Z)
 
 Doctor Cadd, please.
 
@@ -358,7 +362,7 @@ Doctor Cadd, please.
 
 I I think you were at (917) 886-1251.
 
-### You (2026-03-06T16:11:13.793Z)
+### Sean (2026-03-06T16:11:13.793Z)
 
 Correct.
 
@@ -366,7 +370,7 @@ Correct.
 
 Cool. So I think you'll get an a text from me to let you know that you know, you have a way to reach me.
 
-### You (2026-03-06T16:11:21.173Z)
+### Sean (2026-03-06T16:11:21.173Z)
 
 Yep. Got it.
 
@@ -374,7 +378,7 @@ Yep. Got it.
 
 And that is that is entirely appropriate
 
-### You (2026-03-06T16:11:24.073Z)
+### Sean (2026-03-06T16:11:24.073Z)
 
 Perfect.
 
@@ -382,7 +386,7 @@ Perfect.
 
 They may not think so. I might get sued. I don't care.
 
-### You (2026-03-06T16:11:31.113Z)
+### Sean (2026-03-06T16:11:31.113Z)
 
 Your secret's safe for me. I'm not gonna, you know,
 
@@ -390,7 +394,7 @@ Your secret's safe for me. I'm not gonna, you know,
 
 Oh, there's no secret. Like,
 
-### You (2026-03-06T16:11:34.753Z)
+### Sean (2026-03-06T16:11:34.753Z)
 
 First first off, after yeah.
 
@@ -398,7 +402,7 @@ First first off, after yeah.
 
 AI listens. I'm sure this is recorded. Yeah. There's no secrets here.
 
-### You (2026-03-06T16:11:37.533Z)
+### Sean (2026-03-06T16:11:37.533Z)
 
 Well, there. Yeah. But yeah. So after the after the idea of moving, I didn't really necessarily want to stay with med Medvede because I was like, I don't know. I enjoyed my provider. And then I got that
 
@@ -406,7 +410,7 @@ Well, there. Yeah. But yeah. So after the after the idea of moving, I didn't rea
 
 Yeah.
 
-### You (2026-03-06T16:11:54.573Z)
+### Sean (2026-03-06T16:11:54.573Z)
 
 email. So I was like, oh, then this is perfect. So I like, I have an official reason to leave So I was gonna ask you if there's like, when it comes to a referral or anything like that, when I do find a new doctor there, is that a possibility? Or, like, I don't I don't really understand how it works.
 
@@ -414,7 +418,7 @@ email. So I was like, oh, then this is perfect. So I like, I have an official re
 
 If it's something that you yeah. So you would be able to get your records from MedVity. That wouldn't be a problem. They owe you that. That's
 
-### You (2026-03-06T16:12:15.463Z)
+### Sean (2026-03-06T16:12:15.463Z)
 
 Okay.
 
@@ -422,7 +426,7 @@ Okay.
 
 a thing that they should do is they should be able to provide records. The doctor that you would go see will be able to look in the state's database. They're required to look in the state's database to see, like, you've been being prescribed a medication for x amount of time. Like, that usually is enough to to be like, oh, you have been being prescribed this. Okay. Cool. We should probably continue that for you. Right?
 
-### You (2026-03-06T16:12:38.723Z)
+### Sean (2026-03-06T16:12:38.723Z)
 
 Okay.
 
@@ -430,7 +434,7 @@ Okay.
 
 If you if you had trouble find like, that can be a problem. It's that, like, would you be able to just, like, waltz right into a an office right away and find somebody? Like, there can be waiting lists to get in to see psych. Family medicine, internal medicine are weird.
 
-### You (2026-03-06T16:12:55.783Z)
+### Sean (2026-03-06T16:12:55.783Z)
 
 Yeah.
 
@@ -438,7 +442,7 @@ Yeah.
 
 Like, if you see an I'm doctor as a primary care doctor, sometimes they're like, oh, I don't do psych. Family med because it's more like we do we do everything.
 
-### You (2026-03-06T16:13:10.583Z)
+### Sean (2026-03-06T16:13:10.583Z)
 
 Mhmm.
 
@@ -446,7 +450,7 @@ Mhmm.
 
 So since we do everything, we're more likely to if somebody comes in saying like, hey. Can you continue my ADHD medicine? Especially ADHD. FamilyMed treats kids. They're familiar with ADHD meds.
 
-### You (2026-03-06T16:13:22.383Z)
+### Sean (2026-03-06T16:13:22.383Z)
 
 Yeah. Mhmm.
 
@@ -454,7 +458,7 @@ Yeah. Mhmm.
 
 So, like, you could even get a primary care doctor to write this most likely. Some of them might be like, no. I'd really prefer you to see psych, but you could still be like, okay. That's great. I'll go see psych. Psych. Can you write me a prescription to, you know, help me get to that point? Like, can you manage me until then? Because I've moved to your area and you're my new doctor, and please help.
 
-### You (2026-03-06T16:13:43.673Z)
+### Sean (2026-03-06T16:13:43.673Z)
 
 Mhmm.
 
@@ -462,7 +466,7 @@ Mhmm.
 
 So family med, very helpful. Internal med, sometimes.
 
-### You (2026-03-06T16:13:46.223Z)
+### Sean (2026-03-06T16:13:46.223Z)
 
 Okay.
 
@@ -470,7 +474,7 @@ Okay.
 
 If if if you were in any kind of a bind, you are somebody I have taken care of previously, and I care about you, and I would be as useful as I could be.
 
-### You (2026-03-06T16:14:00.083Z)
+### Sean (2026-03-06T16:14:00.083Z)
 
 Okay.
 
@@ -478,7 +482,7 @@ Okay.
 
 Yeah. That is the thing else
 
-### You (2026-03-06T16:14:03.343Z)
+### Sean (2026-03-06T16:14:03.343Z)
 
 Yep.
 
@@ -486,7 +490,7 @@ Yep.
 
 say. So if you find yourself in any sort of a pickle, let me know it.
 
-### You (2026-03-06T16:14:04.563Z)
+### Sean (2026-03-06T16:14:04.563Z)
 
 Great. Okay. I will. Thank you.
 
@@ -494,7 +498,7 @@ Great. Okay. I will. Thank you.
 
 Another thing with the stress of this move and potentially not, you know, not being able to have your doctor anymore, I could see how you might need an extra tablet in a day. It could be a thing. So you might need three tablets in a day. If you did, I should send you ninety. To make a thirty day supply.
 
-### You (2026-03-06T16:14:28.913Z)
+### Sean (2026-03-06T16:14:28.913Z)
 
 That was actually, a part of my list just in case there was an issue, with finding a new doctor.
 
@@ -502,7 +506,7 @@ That was actually, a part of my list just in case there was an issue, with findi
 
 Yes.
 
-### You (2026-03-06T16:14:35.743Z)
+### Sean (2026-03-06T16:14:35.743Z)
 
 Right away. So I appreciate that.
 
@@ -510,7 +514,7 @@ Right away. So I appreciate that.
 
 Yes. Yeah. I also have ADHD, so I I I know these things.
 
-### You (2026-03-06T16:14:42.803Z)
+### Sean (2026-03-06T16:14:42.803Z)
 
 You get it.
 
@@ -518,7 +522,7 @@ You get it.
 
 I do. Tablet three times daily as direct so we don't like as directed The pharmacist don't like as directed. So we're gonna say one tablet three times daily as needed. For ADHD, max daily dose equals three tablets. Cool. So that way, all the elements of it are there that need to be there. And it goes to Rosebank.
 
-### You (2026-03-06T16:15:08.273Z)
+### Sean (2026-03-06T16:15:08.273Z)
 
 Yes.
 
@@ -526,7 +530,7 @@ Yes.
 
 So I'm gonna make that start happening. What else is on your list?
 
-### You (2026-03-06T16:15:10.773Z)
+### Sean (2026-03-06T16:15:10.773Z)
 
 Perfect. That's honestly that that was the biggest thing. I was very curious as to what the process was when it comes to, you know, migrating over to a new doctor and what what's needed exactly. It's like I did my research, but I wasn't
 
@@ -534,7 +538,7 @@ Perfect. That's honestly that that was the biggest thing. I was very curious as 
 
 Yep.
 
-### You (2026-03-06T16:15:24.823Z)
+### Sean (2026-03-06T16:15:24.823Z)
 
 100% sure. Like, you would from from your mouth would be more preferable. So
 
@@ -542,7 +546,7 @@ Yep.
 
 I think that you you can request your records. Your records are very barebone. Like, there there's not a ton of info in it. Since the AI started doing charting, there's more detail than there probably used to be. But it it's not like it's gonna it it doesn't go into deep, deep detail. There's still things you're gonna need to tell the new person, but
 
-### You (2026-03-06T16:15:54.873Z)
+### Sean (2026-03-06T16:15:54.873Z)
 
 Mhmm.
 
@@ -550,7 +554,7 @@ Mhmm.
 
 it at least shows you were seeing somebody consistently and they were prescribing meds for you. And so maybe that means you actually need those meds.
 
-### You (2026-03-06T16:16:05.013Z)
+### Sean (2026-03-06T16:16:05.013Z)
 
 Okay. Good.
 
@@ -558,7 +562,7 @@ Okay. Good.
 
 Let me see. Yeah. I'm making the chart for today. We'll let it start doing its thing. I am saying that I sent over does help if I put the correct information in here. Ninety of the twenty milligram instant release is what I sent.
 
-### You (2026-03-06T16:16:29.993Z)
+### Sean (2026-03-06T16:16:29.993Z)
 
 Yep. Got it.
 
@@ -566,7 +570,7 @@ Yep. Got it.
 
 T I d Can't spell. That's terrible. Much better. Okay. So we have a lovely chart that says more or less true things about you. You've been seeing MedVinny for a while because this thing still says you're a 31 year old. There. Now it says 33.
 
-### You (2026-03-06T16:16:54.413Z)
+### Sean (2026-03-06T16:16:54.413Z)
 
 There we go.
 
@@ -574,7 +578,7 @@ There we go.
 
 I just want everything to be accurate if it gonna be shared with anybody else.
 
-### You (2026-03-06T16:17:10.373Z)
+### Sean (2026-03-06T16:17:10.373Z)
 
 Oh, thank you.
 
@@ -582,7 +586,7 @@ Oh, thank you.
 
 Meds help you be productive. You used to see doctor Griggs. Cool. A lot of noise inserted by the AI, but it's
 
-### You (2026-03-06T16:17:28.423Z)
+### Sean (2026-03-06T16:17:28.423Z)
 
 Not a nonsense.
 
@@ -590,7 +594,7 @@ Not a nonsense.
 
 it creates a chart.
 
-### You (2026-03-06T16:17:29.893Z)
+### Sean (2026-03-06T16:17:29.893Z)
 
 Boom. Oh, man. Thank you so much. So so yeah, so you're in the process of looking and, you know but when does the contract officially end?
 
@@ -598,7 +602,7 @@ Boom. Oh, man. Thank you so much. So so yeah, so you're in the process of lookin
 
 That's a great question.
 
-### You (2026-03-06T16:17:40.753Z)
+### Sean (2026-03-06T16:17:40.753Z)
 
 Yeah.
 
@@ -606,7 +610,7 @@ Yeah.
 
 It was supposed to be sometime next week, but they cleared my schedule for week. So I don't know whether I pissed them off by
 
-### You (2026-03-06T16:17:48.363Z)
+### Sean (2026-03-06T16:17:48.363Z)
 
 Yeah. That's
 
@@ -614,7 +618,7 @@ Yeah. That's
 
 you know, being honest with people or whether that I I have no idea. What they're doing. They are not speaking to me.
 
-### You (2026-03-06T16:17:56.383Z)
+### Sean (2026-03-06T16:17:56.383Z)
 
 That's and the person that you're close with is just, like,
 
@@ -622,7 +626,7 @@ That's and the person that you're close with is just, like,
 
 Is the chief operations officer, and so
 
-### You (2026-03-06T16:18:02.943Z)
+### Sean (2026-03-06T16:18:02.943Z)
 
 sorry.
 
@@ -630,7 +634,7 @@ sorry.
 
 she, you know, she was like, nope. It's not anything, you know, personal. Yes. She's very happy to be a reference for me.
 
-### You (2026-03-06T16:18:13.743Z)
+### Sean (2026-03-06T16:18:13.743Z)
 
 Mhmm.
 
@@ -638,7 +642,7 @@ Mhmm.
 
 But, like, you you know, very, very professional, but no information. Which this is not the first time I have left a health care organization. They get weird and adversarial when you leave because they understand that, like, the patients don't love MedVity. The patients love their doctor. And so
 
-### You (2026-03-06T16:18:35.823Z)
+### Sean (2026-03-06T16:18:35.823Z)
 
 Yeah.
 
@@ -646,7 +650,7 @@ Yeah.
 
 it becomes like a weird cold war thing where they don't wanna share information I don't wanna share information with them. Like, we are both kind of, like, doing this
 
-### You (2026-03-06T16:18:42.273Z)
+### Sean (2026-03-06T16:18:42.273Z)
 
 Mhmm.
 
@@ -654,7 +658,7 @@ Mhmm.
 
 careful dance of, like, who's gonna sue who first.
 
-### You (2026-03-06T16:18:49.303Z)
+### Sean (2026-03-06T16:18:49.303Z)
 
 Yeah.
 
@@ -662,7 +666,7 @@ Yeah.
 
 So
 
-### You (2026-03-06T16:18:50.903Z)
+### Sean (2026-03-06T16:18:50.903Z)
 
 Yeah. Oh, man. Yeah. That's a shame.
 
@@ -670,7 +674,7 @@ Yeah. Oh, man. Yeah. That's a shame.
 
 but yeah, it is what it is. I I think that today is my last day of seeing patients.
 
-### You (2026-03-06T16:19:01.163Z)
+### Sean (2026-03-06T16:19:01.163Z)
 
 Okay.
 
@@ -678,7 +682,7 @@ Okay.
 
 And so they freed up next week for me to do maybe do some interviewing with maybe working for another corporation, but I really think I'm gonna end up having to do this myself because I I'm so fucking tired of dealing with companies instead of humans.
 
-### You (2026-03-06T16:19:19.523Z)
+### Sean (2026-03-06T16:19:19.523Z)
 
 I agree. And I think I mean, kinda stressful what just happened to you. Everyone was, like, searching for your Facebook, but I think that's goes to show that people care.
 
@@ -686,7 +690,7 @@ I agree. And I think I mean, kinda stressful what just happened to you. Everyone
 
 It does. I like, I am humbled by it. And at the same time, it it should make me feel better, but it really makes me very sad because I I don't want to I don't wanna work in a health care system where people are that desperate. I want it to be better for everybody. I want
 
-### You (2026-03-06T16:19:47.753Z)
+### Sean (2026-03-06T16:19:47.753Z)
 
 Mhmm.
 
@@ -694,7 +698,7 @@ Mhmm.
 
 everybody to feel like they can get the care they need without having to go to those kinds of measures.
 
-### You (2026-03-06T16:19:56.093Z)
+### Sean (2026-03-06T16:19:56.093Z)
 
 Yeah.
 
@@ -702,7 +706,7 @@ Yeah.
 
 So no. You're right. It it is incredibly like, gratifying and humbling and all of those things, and at the same time, like, I just I wish it were better out there for people.
 
-### You (2026-03-06T16:20:04.733Z)
+### Sean (2026-03-06T16:20:04.733Z)
 
 Yeah. Yeah. It's kind of kind of a thunderstorm occurring. So
 
@@ -710,7 +714,7 @@ Yeah. Yeah. It's kind of kind of a thunderstorm occurring. So
 
 Well,
 
-### You (2026-03-06T16:20:11.253Z)
+### Sean (2026-03-06T16:20:11.253Z)
 
 just a tidal wave.
 
@@ -718,7 +722,7 @@ just a tidal wave.
 
 I will be as big an umbrella as I can be and I can be for you. And if you need anything if you need anything to make this go more smoothly, do not hesitate. Anything I can do for you, I am happy to do it.
 
-### You (2026-03-06T16:20:25.613Z)
+### Sean (2026-03-06T16:20:25.613Z)
 
 Thank you so much, doctor Kett. And, yeah, I mean, same goes for you. Like, hey. You're able to do whatever you wanna do now. Whenever I'm back in New York, grab some Staten Island pizza.
 
@@ -726,7 +730,7 @@ Thank you so much, doctor Kett. And, yeah, I mean, same goes for you. Like, hey.
 
 Yes, sir. I love that.
 
-### You (2026-03-06T16:20:36.193Z)
+### Sean (2026-03-06T16:20:36.193Z)
 
 Alright?
 
@@ -734,7 +738,7 @@ Alright?
 
 Now you have an easy way to, you know, hold me accountable and make me do
 
-### You (2026-03-06T16:20:39.113Z)
+### Sean (2026-03-06T16:20:39.113Z)
 
 Exactly.
 
@@ -742,7 +746,7 @@ Exactly.
 
 Love you.
 
-### You (2026-03-06T16:20:43.903Z)
+### Sean (2026-03-06T16:20:43.903Z)
 
 Alright. Thank you. Love you too. Thank you. Good luck out there.
 
@@ -750,7 +754,7 @@ Alright. Thank you. Love you too. Thank you. Good luck out there.
 
 Be safe. Thank you. Thank you.
 
-### You (2026-03-06T16:20:48.063Z)
+### Sean (2026-03-06T16:20:48.063Z)
 
 Thank you.
 

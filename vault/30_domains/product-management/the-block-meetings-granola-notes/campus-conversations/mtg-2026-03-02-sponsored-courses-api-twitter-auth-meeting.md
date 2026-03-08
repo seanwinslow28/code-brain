@@ -1,3 +1,14 @@
+---
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Campus team sync on sponsored courses - api twitter auth meeting.
+context: the-block
+created: 2026-03-02
+source: granola-manual
+---
+
 # **SUMMARY NOTES**
 
 # **.Co \> Campus Auth**

@@ -1,12 +1,17 @@
 ---
 granola_id: dce70678-3728-41ad-bcf5-f79efc795c1b
-title: "Get started with Granola - Transcript"
-type: transcript
-created: 2026-02-26T19:24:50.574Z
-updated: 2026-02-26T19:25:47.405Z
-attendees: 
+granola_type: transcript
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Full transcript of get started with granola - transcript.
+context: the-block
+created: 2026-02-26
+source: granola-sync
+attendees:
   - Sam Stephenson
-note: "[[2026-02-26#Get started with Granola]]"
+note: "[[mtg-2026-02-26-get-started-with-granola]]"
 ---
 
 # Transcript for: Get started with Granola
