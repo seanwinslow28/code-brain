@@ -1,6 +1,6 @@
 # Claude Code Superuser Pack
 
-A personal command center and second brain for Claude Code. 107 skills, 13 interactive agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
+A personal command center and second brain for Claude Code. 108 skills, 13 interactive agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
 
 ## What's Inside
 

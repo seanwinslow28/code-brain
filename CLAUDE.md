@@ -4,7 +4,7 @@ This is Sean's personal command center — a second brain for Claude Code.
 
 ## What This Repo Is
 
-107 skills, 13 agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
+108 skills, 13 agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
 
 ## Domain Workspaces
 
@@ -12,7 +12,7 @@ This is Sean's personal command center — a second brain for Claude Code.
 |--------|---------|--------|
 | `claude-mastery/` | CLI, hooks, MCP, settings, tech stack, prompt engineering | 38 |
 | `product-management/` | PRDs, sprints, stakeholder comms, data analysis, technical writing | 20 |
-| `creative-studio/` | Phaser game dev, Remotion video, pixel art, Adobe MCP, animation, writing | 25 |
+| `creative-studio/` | Phaser game dev, Remotion video, pixel art, Adobe MCP, animation, writing | 26 |
 | `life-systems/` | Finance, health, learning, tasks, time, career | 9 |
 | `design-team/` | Design system + 4 review agents | 8 |
 | `vault/` | Obsidian vault (notes, prompts, RAG, Granola meeting sync) | 6 |
