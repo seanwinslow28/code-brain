@@ -9,6 +9,9 @@ mood: null
 ## Slack Overnight
 <!-- slack-overnight -->
 
+## Meetings
+<!-- meetings -->
+
 ## Morning Focus (Manual — <2 min)
 > What's the ONE thing that makes today successful?
 

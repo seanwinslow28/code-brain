@@ -228,12 +228,12 @@ I never intended to outsource my career to an invisible line of text. It started
 
 ### Conflicting Approaches
 
-| Conflict | Resolution |
-|---|---|
-| **Kerouac's 40–100+ word runs vs. Vonnegut's 10–12 word max** | Use Vonnegut for anchors (grounding facts), switch to Kerouac for builds (sensory overload), return to Vonnegut for the short devastating punch. This is Thompson's wave shape applied as a switching protocol. |
-| **Thompson's outward-projected rage vs. Sedaris's inward-projected self-deprecation** | Criticize the system (Thompson), but ensure you are the primary victim of your own incompetence within that system (Sedaris). Outward critique + inward blame = credible and funny. |
-| **Kerouac's dash-everything vs. Sedaris's engineered commas** | Context-switch: dashes during action or complex technical flow; commas for dialogue and comedic punchlines. |
-| **Vonnegut's anti-suspense (tell the ending first) vs. Thompson's cold open (withhold context)** | Both reject the traditional slow build. They just do it differently. Choose based on whether you want the reader focused on meaning (Vonnegut) or on experience (Thompson). |
+| Conflict                                                                                         | Resolution                                                                                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Kerouac's 40–100+ word runs vs. Vonnegut's 10–12 word max**                                    | Use Vonnegut for anchors (grounding facts), switch to Kerouac for builds (sensory overload), return to Vonnegut for the short devastating punch. This is Thompson's wave shape applied as a switching protocol. |
+| **Thompson's outward-projected rage vs. Sedaris's inward-projected self-deprecation**            | Criticize the system (Thompson), but ensure you are the primary victim of your own incompetence within that system (Sedaris). Outward critique + inward blame = credible and funny.                             |
+| **Kerouac's dash-everything vs. Sedaris's engineered commas**                                    | Context-switch: dashes during action or complex technical flow; commas for dialogue and comedic punchlines.                                                                                                     |
+| **Vonnegut's anti-suspense (tell the ending first) vs. Thompson's cold open (withhold context)** | Both reject the traditional slow build. They just do it differently. Choose based on whether you want the reader focused on meaning (Vonnegut) or on experience (Thompson).                                     |
 
 ### The Hybrid Voice Starting Point
 
