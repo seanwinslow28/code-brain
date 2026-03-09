@@ -245,9 +245,12 @@ def resolve_speakers(body: str, attendees: list) -> str:
 
 def is_processed(meta: dict) -> bool:
     """Check if a file has already been processed by this script."""
-    return (meta.get("source") == "granola-sync"
-            and "granola_type" in meta
-            and meta.get("type") in ("meeting", "transcript"))
+    source = meta.get("source", "")
+    if source in ("granola-sync", "granola-manual") and meta.get("type") == "meeting":
+        return True
+    if source == "granola-sync" and "granola_type" in meta:
+        return True
+    return False
 
 
 def inject_vault_frontmatter(meta: dict, title: str, subfolder: str,
@@ -329,13 +332,13 @@ def process_file(filepath, dry_run=False, force=False):
     # Generate new filename
     new_filename = make_filename(title, date, is_transcript)
 
-    # Avoid collision
+    # Skip if target already exists and is processed (re-sync dedup)
     target_path = target_dir / new_filename
-    counter = 2
-    while target_path.exists() and target_path != filepath:
-        stem = new_filename.replace(".md", "")
-        target_path = target_dir / f"{stem}-{counter}.md"
-        counter += 1
+    if target_path.exists() and target_path != filepath:
+        existing_content = target_path.read_text(encoding="utf-8")
+        existing_meta, _ = parse_frontmatter(existing_content)
+        if is_processed(existing_meta):
+            return None
 
     # Build new frontmatter
     new_meta = inject_vault_frontmatter(meta, title, subfolder, is_transcript)
@@ -430,12 +433,14 @@ def extract_from_daily_notes(dry_run: bool = False) -> list[dict]:
             target_dir = GRANOLA_BASE / subfolder
             target_path = target_dir / new_filename
 
-            # Avoid collision
-            counter = 2
-            while target_path.exists():
-                stem = new_filename.replace(".md", "")
-                target_path = target_dir / f"{stem}-{counter}.md"
-                counter += 1
+            # Skip if already extracted (idempotent re-runs)
+            if target_path.exists():
+                existing_content = target_path.read_text(encoding="utf-8")
+                existing_meta, _ = parse_frontmatter(existing_content)
+                if is_processed(existing_meta):
+                    wiki_name = target_path.stem
+                    extracted_links.append(f"- [[{wiki_name}]]")
+                    continue
 
             new_meta = inject_vault_frontmatter(meta, meeting_title, subfolder)
             wiki_name = target_path.stem  # filename without .md
