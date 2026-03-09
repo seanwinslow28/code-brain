@@ -25,7 +25,7 @@ related:
 - [ ] Call/email Urby management — see [[#Questions for Urby (One Call)]]
 - [ ] Fill out and email Notice to Vacate PDF to Urby
 - [ ] Submit forwarding address to Urby (115 Elm St, Apt 1, Charlestown, MA 02129)
-- [ ] Link Moved.com account through Urby Resident Portal
+- [x] Link Moved.com account through Urby Resident Portal
 - [ ] Pick up 90-count prescription from Rosebank pharmacy (if not already done)
 - [ ] Notify manager about March 20 move day (available but no meetings 1–4 PM)
 - [ ] Start packing non-essentials
