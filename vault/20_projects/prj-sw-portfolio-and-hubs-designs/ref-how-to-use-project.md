@@ -53,5 +53,5 @@ When you're ready to work on the portfolio projects:
 
 Open Claude Code from claude-code-superuser-pack/ (the root, not the subfolder)
 Tell Claude: "Read sw-portfolio-and-hubs-designs/design-system-spec.md and sw-portfolio-and-hubs-designs/sw-portfolio-and-hubs-context.md, then help me work on [agent-control-center / life-systems-hub / sw-portfolio]"
-All 107 skills, 13 agents, and 7 hooks auto-load. The portfolio CLAUDE.md layers on top with the design rules.
+All 108 skills, 13 agents, and 7 hooks auto-load. The portfolio CLAUDE.md layers on top with the design rules.
 The one gotcha to remember: always start sessions from the superuser pack root, not the portfolio subfolder, so Claude Code finds the parent .claude/ directory with all your skills.

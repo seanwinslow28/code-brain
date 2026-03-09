@@ -21,13 +21,13 @@ related:
 ## Timeline View
 
 ### This Week (Mar 9–14) — Do Now
-- [ ] Cancel Verizon wifi service
-- [ ] Call/email Urby management — see [[#Questions for Urby (One Call)]]
+- [x] Cancel Verizon wifi service
+- [x] Call/email Urby management — see [[#Questions for Urby (One Call)]]
 - [ ] Fill out and email Notice to Vacate PDF to Urby
-- [ ] Submit forwarding address to Urby (115 Elm St, Apt 1, Charlestown, MA 02129)
+- [x] Submit forwarding address to Urby (115 Elm St, Apt 1, Charlestown, MA 02129)
 - [x] Link Moved.com account through Urby Resident Portal
-- [ ] Pick up 90-count prescription from Rosebank pharmacy (if not already done)
-- [ ] Notify manager about March 20 move day (available but no meetings 1–4 PM)
+- [x] Pick up 90-count prescription from Rosebank pharmacy (if not already done)
+- [x] Notify manager about March 20 move day (available but no meetings 1–4 PM)
 - [ ] Start packing non-essentials
 
 ### Move Week (Mar 15–21) — The Move
@@ -38,7 +38,7 @@ related:
 - [ ] Cancel Lemonade renter's insurance — Mar 20 *(calendar event set)*
 - [ ] Pick up Hertz rental car — Mar 20, 9:00 AM, 543 Cary Ave, Staten Island
 - [ ] Pack rental car — Mar 20, 1:00–4:00 PM (elevator slot)
-- [ ] Dispose of / donate large items: couch, mattress, leg rest, bed frame (coordinate with Urby)
+- [ ] Dispose of / donate large items: couch, mattress, leg rest, bed frame (coordinate with Urby) UPDATE: Look into Cobu to see if anyone wants the furniture. If not, it will be disposed of within the garage dumpter
 - [ ] Final walkthrough of apartment
 - [ ] Drive to Boston — morning of Mar 21
 - [ ] Return last key fob (confirm drop-off method with Urby)
@@ -68,15 +68,15 @@ related:
 
 ## Urby Apartment Requirements
 - [x] USPS mail forwarding set up
-- [ ] Submit forwarding address to Urby
+- [x] Submit forwarding address to Urby
 - [ ] Fill out and email Notice to Vacate PDF
-- [ ] Link Moved.com on Urby Resident Portal
+- [x] Link Moved.com on Urby Resident Portal
 - [x] Moved app tasks — all 6/6 complete
 - [x] Move-out inspection scheduled (Mar 19, 3:00–3:30 PM)
 - [x] Elevator/loading reserved (Mar 20, 1:00–4:00 PM)
 - [x] Resident Portal balance paid
 - [x] Auto Pay cancelled
-- [ ] Cancel Verizon wifi
+- [x] Cancel Verizon wifi
 - [ ] Cancel Lemonade renter's insurance (Mar 20)
 - [x] No wall holes to patch
 - [x] Bathroom cleaned
@@ -88,11 +88,12 @@ related:
 - [x] No Littleman Parking
 
 ## Questions for Urby (One Call)
-- [ ] Lease ends Mar 25 but moving out Mar 20–21 — any issues or prorated credits?
-- [ ] Donation options for unwanted items (couch, mattress, leg rest, bed frame), or just refuse room?
-- [ ] How to coordinate large item disposal/bulk pickup timing?
-- [ ] Can I return 1 fob + mail key at inspection (Mar 19) and keep 1 fob until Mar 21? Where to drop off the last fob?
-- [ ] Confirm no additional charges between move-out day and lease end
+- [x] Lease ends Mar 25 but moving out Mar 20–21 — any issues or prorated credits?
+- [x] Donation options for unwanted items (couch, mattress, leg rest, bed frame), or just refuse room?
+- [x] How to coordinate large item disposal/bulk pickup timing?
+- [x] Can I return 1 fob + mail key at inspection (Mar 19) and keep 1 fob until Mar 21? Where to drop off the last fob?
+- [x] Confirm no additional charges between move-out day and lease end 
+- [ ] Look into Cobu, change inspection date to 23rd, electric bill will be on Urby portal. After that's paid, I'll be good
 
 ## Moving Logistics
 - [x] Hertz rental car booked: 7-passenger SUV (Nissan Pathfinder), confirmation L5151252687
@@ -121,7 +122,7 @@ related:
 
 ## Health & Medical
 - [x] Prescription: 90 tablets 20mg IR sent to Rosebank pharmacy (30-day supply at 3x/day)
-- [ ] Pick up prescription from Rosebank pharmacy before leaving
+- [x] Pick up prescription from Rosebank pharmacy before leaving
 - [ ] Request medical records from Medvidi
 - [ ] Find family medicine PCP in Boston (Dr. Cat recommends family med over internal med for ADHD rx continuity)
 - [ ] Cancel dentist appointment (June 19) and request records transfer
@@ -130,16 +131,16 @@ related:
 - Dr. Cat's contact info available if needed during transition
 
 ## Utilities & Services
-- [ ] Cancel Verizon wifi (target: this week)
+- [x] Cancel Verizon wifi (target: this week)
 - [ ] Cancel Lemonade renter's insurance (Mar 20)
 - [x] Boston apartment: internet, electric, gas, water — all set up
-- [ ] Set up renter's insurance for Boston apartment
+- [x] Set up renter's insurance for Boston apartment
 - [ ] Consider upgrading Boston wifi
 
 ## Work (The Block)
 - [x] The Block notified of move
 - [x] Tax withholdings updated
-- [ ] Notify manager about Mar 20 (available but no meetings 1–4 PM)
+- [x] Notify manager about Mar 20 (available but no meetings 1–4 PM)
 - [ ] Double-check Rippling for remaining updates
 - [ ] New desk — shopping with girlfriend (current desk as backup)
 - [x] Work equipment transporting self
