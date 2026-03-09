@@ -19,3 +19,5 @@
 - [x] Talk to Claude about Granola
 - [ ] Create move out check list with Claude
 - [ ] ***rework the Campus tracker and get it ready for Wednesday meeting -- Check what's been completed and add a date logged section
+- [ ] update context file based on all the changes and make move out check list
+- [ ] add career transition skill to portfolio project
