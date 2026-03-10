@@ -225,6 +225,11 @@ On Friday or Sunday, prompt:
 - [ ] Daily notes follow the vault frontmatter schema
 - [ ] Claude Code session entries use Dataview inline fields
 
+## Temporary Recurring Commitments
+
+### Apartment Cleanup — Daily through March 20, 2026
+Sean is cleaning up/throwing away items from a section of his apartment every day through March 20th (packing for the Boston move). Each morning plan should include an afternoon cleanup task targeting a specific area. Remove this section after March 20, 2026.
+
 ## Copy/Paste Ready
 
 ```
