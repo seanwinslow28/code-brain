@@ -17,7 +17,7 @@
 - [x] Granola notes have been sunk. For now, set everything up manually, and then work on script to put everything into their respective folders. Also, look into making sure EVERYTHING gets put in there -- Talk to Claude about Granola and including in the README.md and VAULT_GUIDE - Add Granola to desktop as well
 - [ ] Look at fidelity plan and ask Claude what to invest in - Use prompt engineering to make it look into stocks and bonds -- do perplexity as well
 - [x] Talk to Claude about Granola
-- [ ] Create move out check list with Claude
+- [x] Create move out check list with Claude
 - [ ] ***rework the Campus tracker and get it ready for Wednesday meeting -- Check what's been completed and add a date logged section
 - [ ] update context file based on all the changes and make move out check list
 - [ ] add career transition skill to portfolio project
