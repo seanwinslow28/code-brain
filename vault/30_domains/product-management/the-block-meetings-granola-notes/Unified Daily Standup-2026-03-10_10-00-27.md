@@ -3,7 +3,7 @@ granola_id: ffd5e31c-7738-4d7a-96ae-fcb1aa366157
 title: "Unified Daily Standup"
 type: note
 created: 2026-03-10T14:00:27.536Z
-updated: 2026-03-10T15:31:53.098Z
+updated: 2026-03-10T19:48:24.659Z
 attendees: 
   - bmendoza@theblock.co
   - mprice@theblock.co
