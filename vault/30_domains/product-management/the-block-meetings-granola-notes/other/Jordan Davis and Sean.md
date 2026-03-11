@@ -1,13 +1,13 @@
 ---
 granola_id: b8b7c507-be2c-4c3d-876f-3ae753e4044c
-title: "Jordan Davis and Sean"
+title: Jordan Davis and Sean
 type: note
 created: 2026-03-09T21:29:36.715Z
 updated: 2026-03-09T22:41:07.534Z
-attendees: 
+attendees:
   - dquinton@theblock.co
   - jleech@theblock.co
-transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Jordan Davis and Sean-transcript.md]]"
+transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/other/Jordan Davis and Sean-transcript]]"
 ---
 ### Around The Block Project Status
 

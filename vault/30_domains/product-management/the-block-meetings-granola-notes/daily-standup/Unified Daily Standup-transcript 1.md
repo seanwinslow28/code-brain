@@ -1,10 +1,10 @@
 ---
 granola_id: 40d3cd4c-521f-4b51-95aa-85003ac83710
-title: "Unified Daily Standup - Transcript"
+title: Unified Daily Standup - Transcript
 type: transcript
 created: 2026-03-11T13:58:14.269Z
-updated: 2026-03-11T14:22:35.790Z
-attendees: 
+updated: 2026-03-11T14:35:16.745Z
+attendees:
   - bmendoza@theblock.co
   - mprice@theblock.co
   - npivcevic@theblock.co
@@ -25,7 +25,7 @@ attendees:
   - sho@theblock.co
   - koliva@theblock.co
   - ramuald.vishneuski@ventionteams.com
-note: "[[30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup.md]]"
+note: "[[Unified Daily Standup 1]]"
 ---
 
 # Transcript for: Unified Daily Standup
