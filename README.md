@@ -1,6 +1,6 @@
 # Claude Code Superuser Pack
 
-A personal command center and second brain for Claude Code. 108 skills, 13 interactive agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
+A personal command center and second brain for Claude Code. 109 skills, 13 interactive agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
 
 ## What's Inside
 
@@ -68,7 +68,7 @@ Skills and agents prefer native MCPs over Zapier where both exist. Currently con
 
 Zapier retained only for services with no native MCP: Salesforce, GA4, Webhooks, Code execution.
 
-### 107 Skills Across 12 Domains
+### 109 Skills Across 12 Domains
 
 All skills auto-load from `.claude/skills/`. Reference them naturally in prompts.
 
@@ -83,7 +83,7 @@ All skills auto-load from `.claude/skills/`. Reference them naturally in prompts
 | technical-stack | 9 | React/Vite/Tailwind, Python, Supabase, Git, Docker |
 | domain-specific | 5 | Crypto/Web3, education, API PM, RevOps |
 | community-resources | 6 | Learning paths, troubleshooting, case studies |
-| master-designer | 8 | Animations, micro-interactions, Tailwind, Figma |
+| master-designer | 9 | Animations, micro-interactions, Tailwind, Figma, design arena |
 | remotion-mastery | 8 | Programmatic video, typography, data viz |
 | adobe-creative | 6 | Photoshop, Premiere, After Effects, Illustrator |
 
