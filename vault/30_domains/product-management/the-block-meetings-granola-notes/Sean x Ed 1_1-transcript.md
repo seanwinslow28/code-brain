@@ -3,7 +3,7 @@ granola_id: 31a8f745-98ff-4d46-b3a5-f8d5ddb83031
 title: "Sean x Ed 1:1 - Transcript"
 type: transcript
 created: 2026-03-12T16:59:27.877Z
-updated: 2026-03-12T17:32:33.871Z
+updated: 2026-03-12T17:55:59.507Z
 attendees: 
   - erupkus@theblock.co
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1.md]]"
@@ -674,4 +674,20 @@ previous roadmap and, like, this the the way in which we have described the diff
 ### You (2026-03-12T17:32:22.044Z)
 
 Sounds good, man. Thank you very
+
+### Guest (2026-03-12T17:32:27.223Z)
+
+Alright. Sweet.
+
+### You (2026-03-12T17:32:27.714Z)
+
+Later, dude.
+
+### Guest (2026-03-12T17:32:28.213Z)
+
+Yeah. Thanks, Sean. Okay.
+
+### You (2026-03-12T17:32:30.184Z)
+
+Bye.
 
