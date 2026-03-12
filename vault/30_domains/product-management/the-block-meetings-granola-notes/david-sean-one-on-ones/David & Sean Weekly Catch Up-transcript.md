@@ -1,12 +1,12 @@
 ---
 granola_id: 5b9be241-b9e5-40ad-8bc2-b693496633a6
-title: "David & Sean Weekly Catch Up - Transcript"
+title: David & Sean Weekly Catch Up - Transcript
 type: transcript
 created: 2026-03-12T12:01:48.645Z
 updated: 2026-03-12T12:33:30.571Z
-attendees: 
+attendees:
   - ddebreczeni@theblock.co
-note: "[[30_domains/product-management/the-block-meetings-granola-notes/David & Sean Weekly Catch Up.md]]"
+note: "[[David & Sean Weekly Catch Up]]"
 ---
 
 # Transcript for: David & Sean Weekly Catch Up
