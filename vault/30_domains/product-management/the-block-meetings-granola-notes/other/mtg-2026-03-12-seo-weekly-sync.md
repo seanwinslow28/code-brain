@@ -1,10 +1,15 @@
 ---
 granola_id: b0b3be12-f750-4760-849e-de9b4243649d
-title: "SEO Weekly Sync"
-type: note
-created: 2026-03-12T14:59:55.922Z
-updated: 2026-03-12T15:25:49.004Z
-attendees: 
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Meeting about seo weekly sync.
+context: the-block
+created: 2026-03-12
+source: granola-sync
+attendees:
   - mvitebsky@theblock.co
   - kbaspinar@theblock.co
   - erupkus@theblock.co
@@ -16,6 +21,7 @@ attendees:
   - bmendoza@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync-transcript.md]]"
 ---
+
 ### February Performance Overview
 
 - Organic traffic increased 16% month-over-month

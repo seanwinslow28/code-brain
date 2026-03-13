@@ -1,3 +1,14 @@
+---
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Campus team sync on campus roadmap tracker check in  - 2026_03_11 08_57 edt - notes by gemini.
+context: the-block
+created: 2026-03-13
+source: granola-manual
+---
+
 # 📝 Notes
 
 Mar 11, 2026

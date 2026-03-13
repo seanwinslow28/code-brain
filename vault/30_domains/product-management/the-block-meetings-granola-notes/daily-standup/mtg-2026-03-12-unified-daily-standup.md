@@ -1,10 +1,15 @@
 ---
 granola_id: c9ec03bb-c9b3-4878-a6de-243936db3d06
-title: "Unified Daily Standup"
-type: note
-created: 2026-03-12T13:59:16.478Z
-updated: 2026-03-12T14:27:59.222Z
-attendees: 
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Daily standup covering unified daily standup.
+context: the-block
+created: 2026-03-12
+source: granola-sync
+attendees:
   - bmendoza@theblock.co
   - mprice@theblock.co
   - npivcevic@theblock.co
@@ -27,6 +32,7 @@ attendees:
   - ramuald.vishneuski@ventionteams.com
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript.md]]"
 ---
+
 ### SEO & Technical Issues
 
 - Ahrefs flagging empty pages returning 200 instead of 404

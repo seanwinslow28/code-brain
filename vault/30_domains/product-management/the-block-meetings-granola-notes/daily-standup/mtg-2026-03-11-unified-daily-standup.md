@@ -1,9 +1,14 @@
 ---
 granola_id: 40d3cd4c-521f-4b51-95aa-85003ac83710
-title: Unified Daily Standup
-type: note
-created: 2026-03-11T13:58:14.269Z
-updated: 2026-03-11T14:35:16.745Z
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Daily standup covering unified daily standup.
+context: the-block
+created: 2026-03-11
+source: granola-sync
 attendees:
   - bmendoza@theblock.co
   - mprice@theblock.co
@@ -27,6 +32,7 @@ attendees:
   - ramuald.vishneuski@ventionteams.com
 transcript: "[[Unified Daily Standup-transcript 1]]"
 ---
+
 ## Private Notes
 
 Koray is not feeling well - He's out

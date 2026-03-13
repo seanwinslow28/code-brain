@@ -1,14 +1,20 @@
 ---
 granola_id: ddbc8f49-8110-4262-accc-a43127a0d9cc
-title: "Crypto Knowledge AMA"
-type: note
-created: 2026-03-12T15:34:08.660Z
-updated: 2026-03-12T15:48:34.016Z
-attendees: 
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Meeting about crypto knowledge ama.
+context: the-block
+created: 2026-03-12
+source: granola-sync
+attendees:
   - lcermak@theblock.co
   - The Block Company
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Crypto Knowledge AMA-transcript.md]]"
 ---
+
 ### Bitcoin Investment Philosophy
 
 - Bitcoin maximalists generally insecure about other cryptocurrencies

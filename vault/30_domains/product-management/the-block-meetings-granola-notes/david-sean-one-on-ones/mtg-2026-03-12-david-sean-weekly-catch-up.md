@@ -1,13 +1,19 @@
 ---
 granola_id: 5b9be241-b9e5-40ad-8bc2-b693496633a6
-title: David & Sean Weekly Catch Up
-type: note
-created: 2026-03-12T12:01:48.645Z
-updated: 2026-03-12T12:33:30.571Z
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: "1:1 with David covering david & sean weekly catch up."
+context: the-block
+created: 2026-03-12
+source: granola-sync
 attendees:
   - ddebreczeni@theblock.co
 transcript: "[[David & Sean Weekly Catch Up-transcript]]"
 ---
+
 ### Personal Updates & Moving Plans
 
 - Sean moving to new location next Friday (March 21st)

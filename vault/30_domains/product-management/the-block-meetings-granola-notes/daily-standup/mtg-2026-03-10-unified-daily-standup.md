@@ -1,9 +1,14 @@
 ---
 granola_id: ffd5e31c-7738-4d7a-96ae-fcb1aa366157
-title: Unified Daily Standup
-type: note
-created: 2026-03-10T14:00:27.536Z
-updated: 2026-03-10T19:48:24.659Z
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Daily standup covering unified daily standup.
+context: the-block
+created: 2026-03-10
+source: granola-sync
 attendees:
   - bmendoza@theblock.co
   - mprice@theblock.co
@@ -27,6 +32,7 @@ attendees:
   - ramuald.vishneuski@ventionteams.com
 transcript: "[[Unified Daily Standup-transcript 1]]"
 ---
+
 ### Team Updates & Progress
 
 - Alex (Akryvanosau): Finalized banner for data charts, created dev box

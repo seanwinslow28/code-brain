@@ -1,9 +1,14 @@
 ---
 granola_id: 9bfb4e80-e8ae-430b-b38f-d7ae3bc3ca04
-title: "Campus Roadmap Tracker Check in "
-type: note
-created: 2026-03-11T11:53:18.531Z
-updated: 2026-03-11T14:35:54.243Z
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Campus team sync on campus roadmap tracker check in .
+context: the-block
+created: 2026-03-11
+source: granola-sync
 attendees:
   - erupkus@theblock.co
   - mhulis@theblock.co
@@ -12,6 +17,7 @@ attendees:
   - cdaumur@theblock.co
 transcript: "[[Campus Roadmap Tracker Check in-transcript]]"
 ---
+
 ### Current Status & Bug Resolution
 
 - Critical bugs resolved as of yesterday

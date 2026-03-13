@@ -1,10 +1,15 @@
 ---
 granola_id: b0b3be12-f750-4760-849e-de9b4243649d
-title: "SEO Weekly Sync - Transcript"
-type: transcript
-created: 2026-03-12T14:59:55.922Z
-updated: 2026-03-12T15:00:05.972Z
-attendees: 
+granola_type: transcript
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Full transcript of seo weekly sync - transcript.
+context: the-block
+created: 2026-03-12
+source: granola-sync
+attendees:
   - mvitebsky@theblock.co
   - kbaspinar@theblock.co
   - erupkus@theblock.co
@@ -18,6 +23,17 @@ note: "[[30_domains/product-management/the-block-meetings-granola-notes/SEO Week
 ---
 
 # Transcript for: SEO Weekly Sync
+
+## Attendees
+- Matt Vitebsky (mvitebsky@theblock.co)
+- Koray Baspinar (kbaspinar@theblock.co)
+- Ed Rupkus (erupkus@theblock.co)
+- Mike Price (mprice@theblock.co)
+- Nikita Pivcevic (npivcevic@theblock.co)
+- tcopeland (tcopeland@theblock.co)
+- ajames (ajames@theblock.co)
+- tim (tim@theblock.co)
+- Ben Mendoza (bmendoza@theblock.co)
 
 ### Guest (2026-03-12T15:02:00.998Z)
 

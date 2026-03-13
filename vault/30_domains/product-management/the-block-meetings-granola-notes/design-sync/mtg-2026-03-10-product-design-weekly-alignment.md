@@ -1,10 +1,15 @@
 ---
 granola_id: b3ed5811-95ab-4422-8773-d6dfbd771e37
-title: "Product + Design Weekly Alignment"
-type: note
-created: 2026-03-10T17:00:14.649Z
-updated: 2026-03-10T17:31:53.974Z
-attendees: 
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Design sync discussing product + design weekly alignment.
+context: the-block
+created: 2026-03-10
+source: granola-sync
+attendees:
   - jgragg@theblock.co
   - erupkus@theblock.co
   - cdaumur@theblock.co
@@ -14,6 +19,7 @@ attendees:
   - jcarusi@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-transcript.md]]"
 ---
+
 ### Video Production Priorities & Resource Allocation
 
 - App Store video no longer needed per Matt’s decision

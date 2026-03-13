@@ -1,10 +1,15 @@
 ---
 granola_id: b3ed5811-95ab-4422-8773-d6dfbd771e37
-title: "Product + Design Weekly Alignment - Transcript"
-type: transcript
-created: 2026-03-10T17:00:14.649Z
-updated: 2026-03-10T17:31:53.974Z
-attendees: 
+granola_type: transcript
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Full transcript of product + design weekly alignment - transcript.
+context: the-block
+created: 2026-03-10
+source: granola-sync
+attendees:
   - jgragg@theblock.co
   - erupkus@theblock.co
   - cdaumur@theblock.co
@@ -17,11 +22,20 @@ note: "[[30_domains/product-management/the-block-meetings-granola-notes/Product 
 
 # Transcript for: Product + Design Weekly Alignment
 
+## Attendees
+- Jeff Gragg (jgragg@theblock.co)
+- Ed Rupkus (erupkus@theblock.co)
+- Claudine Daumur (cdaumur@theblock.co)
+- Mohamed Elshahat (melshahat@theblock.co)
+- Matt Vitebsky (mvitebsky@theblock.co)
+- Serena Ho (sho@theblock.co)
+- Joe Carusi (jcarusi@theblock.co)
+
 ### Guest (2026-03-10T17:01:01.523Z)
 
 Last week about the ad on mobile and tablet, and I cannot believe I missed that to begin with. That is crazy. All good, dude. Fuck it. Like, send it for desktop only. I don't know what I was thinking. So I do apologize there. But No worries. How's everybody's weeks going this week so far?
 
-### You (2026-03-10T17:01:23.613Z)
+### Sean (2026-03-10T17:01:23.613Z)
 
 So far so good.
 
@@ -29,7 +43,7 @@ So far so good.
 
 Yes.
 
-### You (2026-03-10T17:01:27.603Z)
+### Sean (2026-03-10T17:01:27.603Z)
 
 Yeah.
 
@@ -37,7 +51,7 @@ Yeah.
 
 So far, so good. New York City still beautiful. You're in New York, aren't you, Sean? Yeah.
 
-### You (2026-03-10T17:01:32.823Z)
+### Sean (2026-03-10T17:01:32.823Z)
 
 Yeah. New York, yeah, it's, still beautiful, and the weather has gotten a lot better All the snow's gone, so it's just that's the one thing. Like, it's, like, like, the snow in New York, it's like, you know, beautiful as it's happening, but then it
 
@@ -45,7 +59,7 @@ Yeah. New York, yeah, it's, still beautiful, and the weather has gotten a lot be
 
 Oh, that is disgusting. Yeah. Yeah. Right. Oh god. I can't even imagine the big piles of black
 
-### You (2026-03-10T17:01:52.223Z)
+### Sean (2026-03-10T17:01:52.223Z)
 
 Yeah.
 
@@ -53,7 +67,7 @@ Yeah.
 
 sludge that just accumulate on the sidewalks. Yeah. It's pretty gross. Cool. Cool. And supposed to come up next week. I think I'm gonna be in New York. We'll but I'll let you know for sure, and maybe we can kinda finally meet in person if I'm a
 
-### You (2026-03-10T17:02:08.183Z)
+### Sean (2026-03-10T17:02:08.183Z)
 
 Oh, yeah.
 
@@ -61,7 +75,7 @@ Oh, yeah.
 
 that way. So are you in Manhattan, Brooklyn? Where are you?
 
-### You (2026-03-10T17:02:11.923Z)
+### Sean (2026-03-10T17:02:11.923Z)
 
 Me know. Staten Island. So it's just
 
@@ -69,7 +83,7 @@ Me know. Staten Island. So it's just
 
 Staten Island. Okay. Yeah. Yeah. Yeah. Yeah. Right. Sure. Well, I'll be up there. If I'm up there, I'll let, I'll let you know, and we'll we'll we'll catch Have you met with Matt yet?
 
-### You (2026-03-10T17:02:24.033Z)
+### Sean (2026-03-10T17:02:24.033Z)
 
 Yeah.
 
@@ -77,7 +91,7 @@ Yeah.
 
 Oh, okay. Cool. Cool. Cool. Awesome.
 
-### You (2026-03-10T17:02:25.293Z)
+### Sean (2026-03-10T17:02:25.293Z)
 
 Yeah. Yeah. Mhmm.
 
@@ -85,7 +99,7 @@ Yeah. Yeah. Mhmm.
 
 Alright. Is this this is the group. Right. Matt's out today, so he won't be joining us. Jamie and I just did a long catch up, but what was, sort of the first thing to address, Ed, is and and Sean, Oh, and there's Michael right on top. Nice. Is the priorities Jamie, Zishwan, and Michael's sort of time right now. It it is sort of relevant to you all because of the the video work that you all had been requesting, requested, originally, an App Store video, and then that other video to promote the features within the election hub page. Right? And then Gareth started, last week. I don't know if you all are familiar with Gareth, yet, but he's, like, a new media personality. They are spinning up to to begin in throughout three weeks now, a daily live stream, Monday through Friday. They are going to be recording, when he was Cointelegraph, he had a a product called Chain Reaction, he and his cohost would, every single day, you know, sort of, like, radio style format, live show about the crypto markets. It was I guess it was highly successful at Cointelegraph. We're basically creating a version here at The block, of the same sort of concept. So Michael, Jamie, and have got to prioritize that. That said, I've already spoken with Matt and and I'm sure you have as well. He's actually not of the opinion anymore that the app requires a video at all. So I am working on apps Store graphics, which is what Jamie and I were just reviewing was sort of, like, my approach there or the approach there. I say all of that to say Michael, Zishwahat, and Jamie have got to prioritize the branding and motion elements for the new daily livestream called tentatively named The Starting Block. They will be able to hopefully spend some time on a election hub video prom promo video. But what I do need from you all is a script. So, like, what are the the features you wanna highlight? What's the story you wanna tell around that product, And then b, I can send these over. I didn't send them yet, Jamie. She sent them to me yesterday. When we were first dropping campus, we had Kelvin do some promos where, like, he read a little bit about what campus was about, some of the value propositions, and then some screens, like, quickly kinda, like, popped up. And that takes a lot of the burden off of the motion and brand team because it's like, Kelvin's face doing some of the upfront sort of, like, legwork and describing this thing and then just showing some of the features in the UI, So it's, like, less intense and involved than if we were to produce like, a whole product sort of promo video that was all reliant on graphics, So that's the situation of what we're looking at now is, like, we would prefer leverage Calvin, which I I'll need to double check with with Jordan and Calvin their time. But we would prefer to do something similar to what we did with campus then we could get it to you probably in a much speedier turnaround We would just need a script from you all to actually execute something like that. And then the design team can pull the UI. They can work with Jamie and Sean and Jordan and Kelvin to, like, produce a quick video. And and I think you also get a face on screen, which might be more compelling than just jumping into, like, a product. Promo video. So that sounds great. I'll I'll get the script. To Awesome. In my earliest. So yeah. Good. I appreciate it, man. Thank you. Yeah. I think that'll be probably the the best way to go. And then, then once you get me that, you know, Jamie, you and I can talk, and we'll the like, what timing looks like. Because by that point, you, Michael, Zishwan, we're kicking off. The branded discussion for Michael, I just added you a thread that we've got going with Gareth and others. Around this daily livestream and, kind of the stuff that Gareth would like us to use as inspiration there for that call that we have scheduled for Thursday. Awesome. Alright. Well, that's out of the way. Yeah. Yeah. Quick question on the the daily podcast. What who's gonna do that? Obviously, Garrett and Wills. So the cohost is still TBD. He's not exactly sure. I think he's looking at Kelvin as a potential cohost. It would be released released or streamed, I should say, sorry, live every day, 08:30AM eastern time. Gareth is based in The Netherlands. So by that point, it's 02:00 his afternoon, so pretty convenient for him. But I don't know who his cohost's gonna be. He mentioned poaching Robert Bags, which was his cohost on coin, on chain reaction. He said because that would effectively kill Cointelegraph's opportunity to even do this at all. But I think that that might even be you know, on a need to know basis. But I guess you guys all need to know. So I'm not sure what we're doing there yet. Yeah. Or do we have to consider this for the homepage CTO as well? Because I mean, we're working on video support, so we're already sort of ahead of that. Oh, oh, oh, yeah. That came up at the end of my and Jamie's call with Garrett yesterday. Gareth doesn't think we need it. Like, he's not he said it's not something we would need from day one. But we should be thinking, and, obviously, we agree, how can we integrate this into our web experience? Because it is gonna be premium fresh, daily video content that is related to the market moving stories of the day. So, like, from a product standpoint, this 100% is something that we should be trying to integrate into our, our website. To your point, since we're looking at project CTO, Serena, Claudine, a good idea to think about, like, where would this unit be housed on that home page, you know, and and how can we prioritize that. Of a daily stream knowing that Saturdays and Sundays this doesn't go live. Yeah. Whether it's the media box or the news the news box, whatever it may be. Yeah. So good stuff, though. I mean, honestly, it's gonna be good for the brand. Garrett, if you all have not seen Garrett yet, you can watch Chain Reaction, or you can actually see his own that he produces called Lumen. He's only done two episodes, but he's he's pretty charismatic, a great interviewer, and a likable dude. All around, I think. Yeah. And he has experience like, he's, like, done broadcast radio forever. So, like, he feels very it's like the one scenario where he presents and you're like, what the fuck? But, like, he's like, oh, I've done it all before. So you're like, okay. Because it's, like, ambitious. Very ambitious, but he is cool as a cucumber about it. So Yeah. Yeah. Yeah. But he he has a very rigid and structured plan for how this show is going to be executed. And but but he's confident that, like, he wants to do a twenty eight minute interview with a different person five days a week. And I was like, bro, that sounds like fucking wild to me to book five guests every single week and and have a compelling conversation, but he's like, it it won't be a problem. So okay. Alrighty. Yeah. So If I could see his plan, like, I just wanted to see through the per perspective. Maybe I can hit him up myself. And just see, you know, what I what I can anticipate I mean, Yeah. Yeah. Absolutely. I'll ask him. I I don't imagine it would it would be a problem. Let me actually something if I can anyone in this group can open. I think you'll probably be able to see. Let's see. Much longer until Theblock has a strip that goes along the bottom of the screen that shows the, like, you know, BBC like news and ticker information. That's actually what we were just talking about. We brought that up. And so this show probably will have that, and they're discussing the technology enabled to do that. In our private chat here. I believe that's what this technology that they're discussing is. It's like live streaming. Package so that we'll be able to stream tokens. Okay. Well, this stuff is getting really excited now. Yeah. Yeah. I think that we're gonna have exactly that. Sweet. So alright. On project CTO then, every Thursday, the product designers of Theblock, Claudia and Serena and myself, we get together and we sort of, like, just have a check-in. This Thursday, I've asked the the three of us to have some more ideas on how we can fulfill the the project CTO sort of you know, requirements or at least sort of start to take some shots. I, for my part, haven't accomplished anything yet, so no pressure, Serena or Claudine, But if we could begin to be thinking about like, those documents and really starting to facilitate some, like, ideas around them, then then I think that would be great. And so beyond that, Claudine, know you've been working independently with, the team here on your question around the I think it's the campus. I don't know if it's the the crossover between .co and the campus site and the login experience for sponsored courses, is all that been sort of resolved? Yes. Yes. Absolutely. Thank you for all the information, and and also thanks, Sho, for updating the ticket. So now I understand all the know, the context and the and the specs. So I I'm currently updating my my login flow. And once I'm finished, I will send a a comment in the in the ticket. Sean, should we have join the call tomorrow morning?
 
-### You (2026-03-10T17:13:16.233Z)
+### Sean (2026-03-10T17:13:16.233Z)
 
 Yeah. I can I can invite you? We're just gonna go over, some of the deadlines, that are approaching for campus. Or just so that everyone's
 
@@ -93,7 +107,7 @@ Yeah. I can I can invite you? We're just gonna go over, some of the deadlines, t
 
 Yep.
 
-### You (2026-03-10T17:13:25.963Z)
+### Sean (2026-03-10T17:13:25.963Z)
 
 on the same page. So, yeah, I'll send that. It's tomorrow at 9AM eastern. So just send it your way.
 
@@ -101,7 +115,7 @@ on the same page. So, yeah, I'll send that. It's tomorrow at 9AM eastern. So jus
 
 Okay, great. Thank you.
 
-### You (2026-03-10T17:13:33.423Z)
+### Sean (2026-03-10T17:13:33.423Z)
 
 You're welcome.
 
