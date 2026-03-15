@@ -1,9 +1,9 @@
 ---
-granola_id: 8c772a7f-5a6a-4e8f-8d2e-1cac3b6cccab
+granola_id: b3ed5811-95ab-4422-8773-d6dfbd771e37
 title: "Product + Design Weekly Alignment"
 type: note
-created: 2026-03-03T18:01:15.880Z
-updated: 2026-03-03T18:36:22.084Z
+created: 2026-03-10T17:00:14.649Z
+updated: 2026-03-10T17:31:53.974Z
 attendees: 
   - jgragg@theblock.co
   - erupkus@theblock.co
@@ -14,53 +14,44 @@ attendees:
   - jcarusi@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-transcript.md]]"
 ---
-## Private Notes
+### Video Production Priorities & Resource Allocation
 
-Look at implementation tickets for pricing and checkout flow
+- App Store video no longer needed per Matt’s decision
+- Election hub promo video still required
+	- Need script from product team highlighting key features
+	- Will use Kelvin-hosted format similar to campus promos (face + UI screens)
+	- Less resource-intensive than full graphics-based video
+- New daily livestream “The Starting Block” takes priority
+	- Gareth hosting Monday-Friday 8:30AM ET (2PM Netherlands time)
+	- 28-minute format with daily guest interviews
+	- Cohost TBD (considering Kelvin or poaching Robert Bags from Cointelegraph)
+	- Jamie, Michael, Zishwan prioritizing branding/motion elements
+	- Will include news ticker technology for live streaming
 
-## Enhanced Notes
+### Homepage Integration & Project CTO Updates
 
-### Campus Sponsored Course Development
+- Daily livestream integration into web experience under discussion
+	- Premium daily video content related to market stories
+	- Potential placement in media box or news box on homepage
+- Language selector implementation for article pages
+	- Spanish translation option initially
+	- Serena designed placement on right side of article header
+	- Will extend to full site later if successful
+- Research report CTA redesign
+	- Changed from underlined text to blue pill button
+	- Significantly improved visibility and click-through potential
+- Election coverage homepage module consideration
+	- Current nav bar placement may not be sufficient
+	- Polymarket widgets already live on homepage
+	- Waiting for voting block index content before implementation
 
-- Claudine completed call with product/engineering earlier today
-- Next steps for Claudine:
-	- Update Compass course catalog design from few months ago
-	- Add sponsored courses to dashboard
-	- Design completion page with CTAs (Twitter/LinkedIn sharing, Polymarket link)
-- Most related tickets already finished and moved to review:
-	- Home page module
-	- Learn page module
-	- Course description page
-	- Recirculation component
-- Parent ticket remains open until completion page work finished
+### Action Items
 
-### Subscription Management & Individual Access
+- Ed: Write script for election hub promo video
+- Sean: Send calendar invite for campus deadlines meeting (tomorrow 9AM ET)
+- Serena: Add dark mode version to language selector and CTA designs
+- Claudine: Complete login flow updates and comment on ticket
+- Ed: Create ticket for election coverage homepage module after content review
+- Michael: Review Gareth’s livestream plan and branding thread
 
-- Serena previously completed subscription upgrade management designs
-- Scope was reduced to meet deadline, now expanding for full B2 implementation
-- Outstanding questions need resolution:
-	- Pricing structure clarity
-	- Discount offerings for existing customers
-	- Prorated upgrades from single course to all-access
-- Current production issue: Caleb still listed as CEO on campus individuals page
-	- Alex assigned small task to update individual marketing page
-	- Will be synchronized with enterprise page design
-- Action item: Look at implementation tickets for pricing and checkout flow
-- Need sync with development team on current project status
-
-### Election Hub & Voting Block Index
-
-- Serena presented updated designs for Polymarket integration
-- Voting Block Index data visualization progress:
-	- Single tab system controlling both widgets (preferred direction)
-	- Historical 14-day view + current snapshot breakdown
-	- Tabs for Congress/Senate/House switching
-	- Color scheme: green/red instead of blue/red (avoid party confusion)
-- Design considerations:
-	- Pro/anti positioning: anti-left, pro-right on dial
-	- Mobile prioritization decision needed (snapshot vs historical view)
-	- Branding discussion: “Voting Block Index” may need explanatory subtext
-	- SEO/AI optimization potential for branded product queries
-- Next steps: Meet with research team on data calculation methodology
-
-Chat with meeting transcript: https://notes.granola.ai/t/e2de60af-5d66-4e19-bb4f-2fa755c6e770
+Chat with meeting transcript: https://notes.granola.ai/t/80e8ddd7-66ff-43af-863d-25e9e33aae0a
