@@ -6,3 +6,4 @@ Make Claude Code Plug Ins for PM work and learn more about Claude on the PC to h
 x402 - dive deeper and talk to Mike about possibilities
 Personalizing The Block (like the app) - It's a huge site with massive amounts of info and data. The profile will allow the user to focus on their specific data charts, podcast episodes, media episodes, and so and so forth
 Integrate Simon AI into their profiles - Look into opensource alternatives to ChatGPT that currently looks at all of the blocks data and gives the user a response to whatever question they have and point them to the specific article 
+Prompt perplexity to look for UI/UX of the type of automated sprite sheet/2D animated workflows for inspiration 
