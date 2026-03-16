@@ -1,10 +1,15 @@
 ---
 granola_id: c0f86a63-ff50-4e0b-96c7-70a9d5f7d838
-title: "Sponsored Course Implementation Kick-off"
-type: note
-created: 2026-03-16T13:12:55.058Z
-updated: 2026-03-16T14:48:42.823Z
-attendees: 
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Campus team sync on sponsored course implementation kick-off.
+context: the-block
+created: 2026-03-16
+source: granola-sync
+attendees:
   - akryvanosau@theblock.co
   - erupkus@theblock.co
   - mhulis@theblock.co
@@ -13,6 +18,7 @@ attendees:
   - bmendoza@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Sponsored Course Implementation Kick-off-transcript.md]]"
 ---
+
 ## Private Notes
 
 Write up a follow up to ticket to Nikita's question on enterprise orgs

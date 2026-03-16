@@ -1,12 +1,17 @@
 ---
 granola_id: 1872b406-750f-458b-a11b-f4e835e8486e
-title: "Ramuald - Campus Bug Fix"
-type: note
-created: 2026-03-16T16:35:03.028Z
-updated: 2026-03-16T16:39:39.191Z
-attendees: []
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Campus team sync on ramuald - campus bug fix.
+context: the-block
+created: 2026-03-16
+source: granola-sync
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Ramuald - Campus Bug Fix-transcript.md]]"
 ---
+
 ### Campus Bug Issue
 
 - Bug appears when users added through CMS vs. regular UI flow

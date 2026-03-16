@@ -1,3 +1,14 @@
+---
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Daily standup covering unified daily standup - 2026_01_29 16_55 eet - notes by gemini.
+context: the-block
+created: 2026-03-16
+source: granola-manual
+---
+
 # 📝 Notes
 
 Jan 29, 2026

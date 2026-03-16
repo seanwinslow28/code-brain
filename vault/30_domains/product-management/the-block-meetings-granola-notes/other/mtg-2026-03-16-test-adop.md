@@ -1,15 +1,21 @@
 ---
 granola_id: 1183da1a-a24d-43cf-b4e4-160b487ab4d2
-title: "Test AdOp"
-type: note
-created: 2026-03-16T17:30:00.272Z
-updated: 2026-03-16T17:57:53.714Z
-attendees: 
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Meeting about test adop.
+context: the-block
+created: 2026-03-16
+source: granola-sync
+attendees:
   - kvallecillo@theblock.co
   - ldanowski@theblock.co
   - erupkus@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Test AdOp-transcript.md]]"
 ---
+
 ### Zapier Ad Ops Automation Testing
 
 - Created test deals in Salesforce to validate automation workflow

@@ -1,3 +1,14 @@
+---
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Campus team sync on sponsored courses on .co_campus refinement - 2026_02_26 06_13 pst - notes by gemini.
+context: the-block
+created: 2026-03-16
+source: granola-manual
+---
+
 # 📝 Notes
 
 Feb 26, 2026
