@@ -3,7 +3,7 @@ granola_id: 8c75f627-0a20-41ab-8e1c-83cf6dedb050
 title: "Sean / Edvinas - Transcript"
 type: transcript
 created: 2026-03-16T15:03:43.832Z
-updated: 2026-03-16T15:30:38.558Z
+updated: 2026-03-16T16:34:50.236Z
 attendees: 
   - erupkus@theblock.co
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Sean _ Edvinas.md]]"
@@ -546,4 +546,620 @@ So we're not gonna have a product design sync tomorrow. Be a product sync.
 ### Guest (2026-03-16T15:58:33.682Z)
 
 Yeah. It won't it won't But, honestly, I wanna go with something there's something important here.
+
+### You (2026-03-16T15:59:56.634Z)
+
+Serenaz?
+
+### Guest (2026-03-16T15:59:56.702Z)
+
+She's gone Monday through Wednesday. Yeah.
+
+### You (2026-03-16T16:00:00.734Z)
+
+She So right there, do we just have zero designers now?
+
+### Guest (2026-03-16T16:00:20.862Z)
+
+Yeah. Sorry.
+
+### You (2026-03-16T16:01:16.724Z)
+
+You good?
+
+### Guest (2026-03-16T16:01:17.952Z)
+
+I'm Jackson in the Okay. K. Election coverage, we won. And QA in April. B two would be kicked off in May. That makes sense. We probably would have the formula finalized by then. Okay. Mark, iOS app in QA we would have the Android app and dev in May. Makes sense. Job boards, basically ready for release. Nothing else. No more notes on that.
+
+### You (2026-03-16T16:03:19.154Z)
+
+Yeah. Are we just waiting for, like, the go ahead? What is the
+
+### Guest (2026-03-16T16:03:24.862Z)
+
+Yeah. For the actual jobs list.
+
+### You (2026-03-16T16:03:28.894Z)
+
+Yeah.
+
+### Guest (2026-03-16T16:03:32.802Z)
+
+Okay. So Looking ahead, we have these two things and these two things. And then the and then the those two ideas that we had.
+
+### You (2026-03-16T16:03:55.674Z)
+
+What about any, particular, SEO project that Corey's working on? Like the g l l m, whatever what it's called.
+
+### Guest (2026-03-16T16:04:04.332Z)
+
+Yeah. That's a lot of the stuff is just, like,
+
+### You (2026-03-16T16:04:04.834Z)
+
+Okay.
+
+### Guest (2026-03-16T16:04:07.312Z)
+
+maintenance. It's, like, you don't even I mean, technically, it should you should plan them and include them What what was it specifically that he was referring to? To the LLM ones? Is it just a schema? The pages?
+
+### You (2026-03-16T16:04:25.994Z)
+
+GEO optimization for LearnPages AI LLM extracted extractability improvements. So it was, like, GEO instead of SEO.
+
+### Guest (2026-03-16T16:04:37.382Z)
+
+Yeah. But there there's no design changes that would require. Right? Like, it's just basically
+
+### You (2026-03-16T16:04:44.094Z)
+
+Yeah.
+
+### Guest (2026-03-16T16:04:45.132Z)
+
+dedicating the resources. Yeah. It's just another angle Yeah. I I don't know. We I don't think we've ever really, like, even although we had it here,
+
+### You (2026-03-16T16:04:56.384Z)
+
+Any SEO stuff?
+
+### Guest (2026-03-16T16:05:00.362Z)
+
+on page SEO enhancements. Maybe you're onto something.
+
+### You (2026-03-16T16:05:05.904Z)
+
+I feel like that's
+
+### Guest (2026-03-16T16:05:10.262Z)
+
+Yeah.
+
+### You (2026-03-16T16:05:10.404Z)
+
+so I was reviewing the all hands, like, from like, a month ago,
+
+### Guest (2026-03-16T16:05:15.112Z)
+
+Mhmm.
+
+### You (2026-03-16T16:05:16.724Z)
+
+was just trying to dig into what Larry was saying, like, specifically that they wanna work on. And that was, like, SEO and the combination of
+
+### Guest (2026-03-16T16:05:25.862Z)
+
+Yeah.
+
+### You (2026-03-16T16:05:26.094Z)
+
+like, sales and product and, yeah, like, data pages, like, that an improvement of pro or just, like,
+
+### Guest (2026-03-16T16:05:34.202Z)
+
+Right.
+
+### You (2026-03-16T16:05:35.214Z)
+
+utilizing the data that we have.
+
+### Guest (2026-03-16T16:05:39.582Z)
+
+Yeah. That's a helpful list, actually, to refer to. In this conversation. So k. Where should we put the SEO then? Kick off maybe in April? Because he's looking at it right now. Right?
+
+### You (2026-03-16T16:05:55.104Z)
+
+Mhmm. Yes. Remember he mentioned it at the last meeting that we had, like, the last overview. And it's in progress.
+
+### Guest (2026-03-16T16:06:10.112Z)
+
+K. Let's put it here. GEO optimization?
+
+### You (2026-03-16T16:06:19.464Z)
+
+Yeah.
+
+### Guest (2026-03-16T16:06:20.022Z)
+
+What it probably stands for. Right?
+
+### You (2026-03-16T16:06:20.334Z)
+
+Yeah. He said specifically for learn pages right now. That's what he's And oddly enough, who makes the learn articles? Is that also, like, research or something?
+
+### Guest (2026-03-16T16:06:35.632Z)
+
+All of them have the author listed. But I think it's a combination. Some of them are editorial. Some of our
+
+### You (2026-03-16T16:06:44.414Z)
+
+Gotcha. Yeah. Because I when I was playing with the app this morning,
+
+### Guest (2026-03-16T16:06:44.572Z)
+
+researchers.
+
+### You (2026-03-16T16:06:49.124Z)
+
+to test for bugs, I saw the learn page had an x four zero two like, learn article.
+
+### Guest (2026-03-16T16:06:56.852Z)
+
+Mhmm. Yeah. It had just come out. Yeah. One of those. Like, viral everywhere.
+
+### You (2026-03-16T16:07:02.224Z)
+
+Mhmm.
+
+### Guest (2026-03-16T16:07:05.052Z)
+
+Probably should read that. Okay. A good catch on geo. Media hub landing page. Feel like that would so I they would follow-up the the data CTO over video hub. Are conflicted.
+
+### You (2026-03-16T16:07:34.234Z)
+
+I I think so. I mean, I can I I'll probably look into, like, different aspects of the media hub and then, like, talk to the actual media team and
+
+### Guest (2026-03-16T16:07:45.082Z)
+
+Mhmm.
+
+### You (2026-03-16T16:07:45.484Z)
+
+like, hear their ideas and kind of sift through them? I think article pages and homepage are, like, the go tos right now. Like, people aren't necessarily searching for the media as as often. Like, wouldn't you say, like, if you go to the you go to GA four, like, the biggest things that people visit are article pages and
+
+### Guest (2026-03-16T16:08:08.222Z)
+
+Yeah.
+
+### You (2026-03-16T16:08:08.964Z)
+
+the home
+
+### Guest (2026-03-16T16:08:10.342Z)
+
+Biggest biggest impact. I mean, it's sort of like a different it it is a strategy that doesn't fit into the things that Larry listed. Like, we wanna it's increased traffic and increased sales. So I guess, technically, I could roll it in under under increased traffic because the more in in broaden the audience, the more you broaden your reach, the more you the the more traffic you'll you'll get because you'll have loyal visitors.
+
+### You (2026-03-16T16:08:42.004Z)
+
+Yeah.
+
+### Guest (2026-03-16T16:08:43.572Z)
+
+Because if if you have, like, very prominent newsletter and other media, like, presence on that call, which we don't have right now, that would help grow that audience. So it's like
+
+### You (2026-03-16T16:08:54.514Z)
+
+I mean,
+
+### Guest (2026-03-16T16:08:55.762Z)
+
+it's like, which one do we once we get to have them both here, because they're both, I think, equally as
+
+### You (2026-03-16T16:09:02.734Z)
+
+I was gonna say, I think, like,
+
+### Guest (2026-03-16T16:09:03.072Z)
+
+needed.
+
+### You (2026-03-16T16:09:06.264Z)
+
+if you take on data and I take on media, then it would make sense.
+
+### Guest (2026-03-16T16:09:10.282Z)
+
+Yeah. Right. Yeah. We also also have to, like, remember that mid April, we're losing half of not basically half of our debt resources. So it'll we'll be, like, limited, but yeah, I think this is this is good. So okay. The design is gonna be busy with in April, they'll be busy with, hopefully, the article adjustments as well as Wonder if we can do it both at the same time.
+
+### You (2026-03-16T16:10:06.034Z)
+
+What media and
+
+### Guest (2026-03-16T16:10:07.802Z)
+
+Like, article and, like, you know, media. One of those.
+
+### You (2026-03-16T16:10:17.494Z)
+
+But we'd have to see, like, how much media they they have to distribute outside of, like,
+
+### Guest (2026-03-16T16:10:23.632Z)
+
+There's there's some yeah. There there I mean, the podcast, the around the block is gonna eventually be the the series will eventually be shown and and also, like, we wanna have a page that, like, you get taken to Like, let's say you go on the show notes. Right? Like, the show notes of the of the park like, new pack podcast comes out. Write an article about it, like, new podcast, the crypto beat whatever. John Doe visited us. Listened to this conversation. And then the show notes, technically, on that show notes article, we should have
+
+### You (2026-03-16T16:11:05.684Z)
+
+Yeah.
+
+### Guest (2026-03-16T16:11:06.372Z)
+
+media hub recirculation unit. Which people will be enticed to click on because they'd be like, oh, media by Theblock. Like, I like this podcast. Okay. So big press there. And it's like, you have this very thorough like, brand page of all the different things, and you want you have Instagram there, you have Twitter there, you have all these pages. And it's just like a self fulfilling prophecy. You know? The more people view the podcast, the more they visit them, etcetera, etcetera. So, like,
+
+### You (2026-03-16T16:11:43.704Z)
+
+Yeah. Did did they mention when they wanna do the livestream? When is that gonna start with the
+
+### Guest (2026-03-16T16:11:49.962Z)
+
+Dude, that's Garrett. He's new. He's just starting, so he's making plans. Yeah. That's probably gonna be part of it too, actually. That's a good call out.
+
+### You (2026-03-16T16:12:00.844Z)
+
+Yeah. If if we wanna make a push for the media hub, we should definitely list out the things that the media team has in the works
+
+### Guest (2026-03-16T16:12:09.562Z)
+
+Mhmm.
+
+### You (2026-03-16T16:12:11.104Z)
+
+just to put emphasis on it. Like, we have the livestream around Theblock.
+
+### Guest (2026-03-16T16:12:12.392Z)
+
+Mhmm.
+
+### You (2026-03-16T16:12:16.724Z)
+
+I know I mean, they definitely have various, like, Davis has just, a shit ton of ideas.
+
+### Guest (2026-03-16T16:12:26.562Z)
+
+Yeah. This if you ever lack of ideas, can visit. His meeting hours. I'm gonna un underline stuff that's not that's still, like, that's still not concrete. Everything else here is concrete stuff. This is not like, for me to have it's just like words on the page.
+
+### You (2026-03-16T16:13:02.404Z)
+
+Yeah.
+
+### Guest (2026-03-16T16:13:04.602Z)
+
+For Matt. Project CTO. We I haven't even, like, spent any time
+
+### You (2026-03-16T16:13:09.304Z)
+
+Yeah.
+
+### Guest (2026-03-16T16:13:10.492Z)
+
+with that
+
+### You (2026-03-16T16:13:10.704Z)
+
+Yeah. The rest already on the board, essentially.
+
+### Guest (2026-03-16T16:13:12.862Z)
+
+No. Yeah. So, basically, we'll Matt will say that one of these I I feel like this should go out of here because we we feel like it's a lot bigger bigger impact more involved. And I'll put that in May. I wanna put this as third. As least important. Oops. Okay. Okay. So we basically, we'll just we'll have one of the one of these kicked off at some point in April and well, maybe it should be kicked off now. Yeah. Can discuss it. We can we can provide. But, basically, we just say that in April, we will start requiring the writing design requirements for one of these things. Whatever it is, we have we can
+
+### You (2026-03-16T16:14:28.914Z)
+
+Mhmm.
+
+### Guest (2026-03-16T16:14:31.282Z)
+
+prioritize. So then we would have the CTO and the article or of the article and one of these things in design. Home page, geo, basically ready for dev. We'll be finalizing the sponsored courses. And translations. Hopefully, and, like, home page is ready to be in dev. At this point. So we'll have basically these three things, essentially, that we're mainly focused in addition of any other, like, SEO, geo things. Yeah. That seems that seems plenty, and we're I could expect to have the election coverage Well, election coverage will be still in dev in April as well. Yeah. So we'll have plenty of things to work on
+
+### You (2026-03-16T16:15:31.294Z)
+
+I was gonna say because
+
+### Guest (2026-03-16T16:15:32.622Z)
+
+And
+
+### You (2026-03-16T16:15:34.504Z)
+
+it's the midterms, and then it'll transition into the primaries. Right? So just
+
+### Guest (2026-03-16T16:15:39.702Z)
+
+The primary is intimate terms.
+
+### You (2026-03-16T16:15:39.914Z)
+
+Oh, yeah. Yeah. So it's
+
+### Guest (2026-03-16T16:15:41.722Z)
+
+Yeah. So that that will election coverage will be kicked off And in May. After we're done with this, basically, we'll start arriving specific requirements In yeah. So, hopefully, in QA, we have sponsored courses for release election coverage. Ready for release, regulations ready for release, and anything else that we're done, that would be awesome. Any any of these? May. So I think this this needs basically a similar approach as this. Like, this needs like, a lot of space and
+
+### You (2026-03-16T16:16:36.774Z)
+
+Yeah.
+
+### Guest (2026-03-16T16:16:37.622Z)
+
+doing many things that are all up to it. Besides that, at this point, we should have CTO data and design. We should have some sort of video support for The Daily Show that's InDesign.
+
+### You (2026-03-16T16:16:58.234Z)
+
+The mux
+
+### Guest (2026-03-16T16:17:00.522Z)
+
+Yeah. Like that. The the the the mux
+
+### You (2026-03-16T16:17:00.534Z)
+
+four
+
+### Guest (2026-03-16T16:17:04.172Z)
+
+integration should happen with election coverage. We should have videos.
+
+### You (2026-03-16T16:17:05.734Z)
+
+Yeah.
+
+### Guest (2026-03-16T16:17:07.782Z)
+
+Hosted and then
+
+### You (2026-03-16T16:17:13.954Z)
+
+I guess for the live live stream, I would think they would do it on YouTube. So it's just a matter of being able to connect it like connect the YouTube account into dot co
+
+### Guest (2026-03-16T16:17:32.182Z)
+
+Yeah. I don't know what kind of
+
+### You (2026-03-16T16:17:33.714Z)
+
+Yeah.
+
+### Guest (2026-03-16T16:17:34.942Z)
+
+service you would be using. I'd love to dream big and, like, make make life changes interactable where, like, you know, we can you watching a stream Obviously, most of the time, are, like, referring to Twitch or YouTube right now. But, like, imagine you have a video playing in front of you. We're able to showcase, like, we're talking about polymarketer, we're talking about, like, the recent prices in crypto, right, and they're just quickly covering it, and then you have a a a scripted like, pop up within the video that you could press on, and you get to the Bitcoin price on that call. Like,
+
+### You (2026-03-16T16:18:17.804Z)
+
+Oh, yeah.
+
+### Guest (2026-03-16T16:18:18.972Z)
+
+I would not would love to get go towards that direction at least and make those make those shows sort of well, one of the I I just have to build all first and make make those shows successful, but then, like, you can monetize so well.
+
+### You (2026-03-16T16:18:36.454Z)
+
+Yeah.
+
+### Guest (2026-03-16T16:18:37.662Z)
+
+If you have sort of capabilities. You know? Because right now, it's just like it's so boring. People just pay for an ad. Then this show is presented to you by the it's like fucking shoot me.
+
+### You (2026-03-16T16:18:48.214Z)
+
+Yeah.
+
+### Guest (2026-03-16T16:18:49.872Z)
+
+So I think of, like, you know, trying to think of more innovative ways to push the envelope forward and, like, actually stand out from the crowd, you know.
+
+### You (2026-03-16T16:19:01.094Z)
+
+Yeah. Agreed.
+
+### Guest (2026-03-16T16:19:03.702Z)
+
+Daily show, and we'll have Media Hub. So depending on which gets prioritized when.
+
+### You (2026-03-16T16:19:15.584Z)
+
+Yeah. I think, the media hub should definitely be thought of, like, as we start to think about, like, the dot co unified authentication strategy, like, just, like, starting to create the profiles and stuff because that would be a bit a a big aspect of it. Like, being able to save the videos and podcasts that you like so you could just, like, view them
+
+### Guest (2026-03-16T16:19:36.702Z)
+
+Yeah. Require thing What else do we say?
+
+### You (2026-03-16T16:19:54.664Z)
+
+Bookmark well, there's bookmarks, favorites, Let me look at app. I suppose wallet integration at that point.
+
+### Guest (2026-03-16T16:20:21.542Z)
+
+Yeah.
+
+### You (2026-03-16T16:20:29.134Z)
+
+Because right now, even even the blocks profile, like, on the app is kind of just basic just notifications, my watch list, saved filters, Oh, filters. Check that out. And then, like, legal stuff. So the actual features of, like, a profile is that's what has to be brainstormed a little bit more. And I'm currently in the process of doing that, like, looking at Bloomberg and, like, other competitors, see seeing what they do. Because they were able to expand to, like, a bunch of different like like, cooking and a whole bunch of shit. But like, we obviously
+
+### Guest (2026-03-16T16:21:09.452Z)
+
+Mhmm.
+
+### You (2026-03-16T16:21:10.294Z)
+
+specific niche and a specific market so we can tailor those tailor those aspects of it. Like, just, like, take what they did and just, like, make it our own
+
+### Guest (2026-03-16T16:21:25.362Z)
+
+Dude, what the fuck? I I can't access the fucking pro the the platforms, the CEOs. Oh my god.
+
+### You (2026-03-16T16:21:43.244Z)
+
+What happened?
+
+### Guest (2026-03-16T16:21:50.442Z)
+
+Scarlet can access. Their fucking account either. Fuck your name, man.
+
+### You (2026-03-16T16:22:01.074Z)
+
+Is this a thing that remote pointed out on Friday?
+
+### Guest (2026-03-16T16:22:06.502Z)
+
+Well, he said that he said that test, right, like, where is it?
+
+### You (2026-03-16T16:22:16.234Z)
+
+40 no.
+
+### Guest (2026-03-16T16:22:17.762Z)
+
+Where is that text? What's what's where he apologized?
+
+### You (2026-03-16T16:22:18.494Z)
+
+Yeah. The
+
+### Guest (2026-03-16T16:22:23.032Z)
+
+Completely forgot about that.
+
+### You (2026-03-16T16:22:29.314Z)
+
+45 That was big ass
+
+### Guest (2026-03-16T16:22:33.182Z)
+
+Yeah. It's between you and me. Between you, me, and Roma.
+
+### You (2026-03-16T16:22:33.974Z)
+
+Yeah. If user added to any Oregon CLMSS in CLMS course is not available him. It's still not marked in green. You want me to forward this to you?
+
+### Guest (2026-03-16T16:22:53.332Z)
+
+Now I see you confirming. People fucking me. Asking me about calendar shit. Like, leave me alone. Yes. Like,
+
+### You (2026-03-16T16:23:20.544Z)
+
+Calendar shit.
+
+### Guest (2026-03-16T16:23:24.352Z)
+
+such useless things that I could bring about about
+
+### You (2026-03-16T16:23:28.444Z)
+
+Like, is
+
+### Guest (2026-03-16T16:23:31.482Z)
+
+They they they don't they don't have access to campus The they said they don't have access to campus. Where is the chat? My god. Let's see. I go to take the test. I can't click the button. But the pro but the the campus thing, okay. We we haven't we have a whatever. But the pro stuff, like, why is that?
+
+### You (2026-03-16T16:24:52.534Z)
+
+Pro they're not able to access pro either?
+
+### Guest (2026-03-16T16:24:52.692Z)
+
+Nope. They said there's a blank It's a blank page.
+
+### You (2026-03-16T16:25:01.144Z)
+
+Would you take that would Nicola be able to help out with that?
+
+### Guest (2026-03-16T16:25:04.072Z)
+
+Your mic is no. He's here. He's in the chat.
+
+### You (2026-03-16T16:25:08.724Z)
+
+Mike's up. We're gonna I have to go to the bathroom. I'll be right back.
+
+### Guest (2026-03-16T16:25:26.792Z)
+
+Alright.
+
+### You (2026-03-16T16:27:01.024Z)
+
+For the not sure about pro, but for the campus thing, are we able to just give them access to an enterprise license like what we have? You think? Because Matt said individuals, but, obviously, that's also not ready to go out. So oh, but it's this is one zero one. I don't I don't understand.
+
+### Guest (2026-03-16T16:31:07.282Z)
+
+When is this gonna end?
+
+### You (2026-03-16T16:31:12.014Z)
+
+What did you say?
+
+### Guest (2026-03-16T16:31:13.332Z)
+
+When is this madness gonna end?
+
+### You (2026-03-16T16:31:24.054Z)
+
+Probably when two zero one mult multicourse gets released. So TBD,
+
+### Guest (2026-03-16T16:32:18.982Z)
+
+Okay. Returning to this We will probably be done with election coverage. In May. Yeah. Probably put that in June with that. And the home page will be done. In May.
+
+### You (2026-03-16T16:33:05.224Z)
+
+Yeah. I would just answer. I think he's he's confused.
+
+### Guest (2026-03-16T16:33:17.032Z)
+
+What I don't understand why he's what is there to become confused about?
+
+### You (2026-03-16T16:33:21.584Z)
+
+Because I think because the between org organizations, like, that's a totally different thing. Like, the organization thing within the back end was like, for testing. Like, that was a completely separate page. So, like, when we added them to the org, it was, like, the block upscale organization. And then when you go in, that's when you start adding the like, campus DEA one one o one two zero one or all access.
+
+### Guest (2026-03-16T16:33:59.752Z)
+
+So now Roma, what do you mean, man?
+
+### You (2026-03-16T16:34:27.824Z)
+
+You wanna sign off, talk to him?
+
+### Guest (2026-03-16T16:34:28.902Z)
+
+Alright.
+
+### You (2026-03-16T16:34:30.954Z)
+
+Yeah.
+
+### Guest (2026-03-16T16:34:31.432Z)
+
+I'll yeah, I'll just finish this and
+
+### You (2026-03-16T16:34:35.514Z)
+
+Okay. And
+
+### Guest (2026-03-16T16:34:36.812Z)
+
+I'll send you it's finished. I can't
+
+### You (2026-03-16T16:34:40.114Z)
+
+I I've been putting together a bunch of shit, so I'll send it to you.
+
+### Guest (2026-03-16T16:34:41.172Z)
+
+let's Alright.
+
+### You (2026-03-16T16:34:43.234Z)
+
+Sounds good.
+
+### Guest (2026-03-16T16:34:44.542Z)
+
+Let's huddle with him.
 
