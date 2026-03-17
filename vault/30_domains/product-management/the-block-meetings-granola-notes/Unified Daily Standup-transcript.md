@@ -3,7 +3,7 @@ granola_id: 8d5c0665-402f-4070-9535-4c1a6a7315ec
 title: "Unified Daily Standup - Transcript"
 type: transcript
 created: 2026-03-17T13:59:20.641Z
-updated: 2026-03-17T13:59:59.304Z
+updated: 2026-03-17T14:22:08.134Z
 attendees: 
   - bmendoza@theblock.co
   - mprice@theblock.co
@@ -188,5 +188,165 @@ Thank you, Maria. Marina.
 
 ### Guest (2026-03-17T14:09:04.071Z)
 
-Hello. As for me, I work on the polymarket stat for election and switched to the issue for dealings, which Akry provided with. So working on it. Basically. And when I finished, I will switch to the point of marketing then again. That's it. Do you have an estimated date for when we could see that on, the dev log? Those Like, the block with key races already? I've created the PR for it. But for the chart, I'm still in the pro in the progress. Okay. Would you say next week? Probably the the landing page? Probably about next week. I will be on vacation. So I'm not sure whether how to finalize it. K. Akryvan Akryvan sorry. Go ahead. We'll do my best to finalize prior to vacation. Okay. Thank you. Alright. Remind me on the on what that 200 pages what is yeah. What is that one? Yeah. And they are empty. Like, there is nothing in it. But it's crawled crawled crawled by Google. It should be four zero four. You know? They need to be removed from indexing and crawling. Yeah. False false positives. Yeah. Yeah. Okay. But some some of the pages might be redirected to existing pages. So today, I've discussed with Nicolas the possible workaround. So I'm working on the logic the redirection
+Hello. As for me, I work on the polymarket stat for election and switched to the issue for dealings, which Akry provided with. So working on it. Basically. And when I finished, I will switch to the point of marketing then again. That's it. Do you have an estimated date for when we could see that on, the dev log? Those Like, the block with key races already? I've created the PR for it. But for the chart, I'm still in the pro in the progress. Okay. Would you say next week? Probably the the landing page? Probably about next week. I will be on vacation. So I'm not sure whether how to finalize it. K. Akryvan Akryvan sorry. Go ahead. We'll do my best to finalize prior to vacation. Okay. Thank you. Alright. Remind me on the on what that 200 pages what is yeah. What is that one? Yeah. And they are empty. Like, there is nothing in it. But it's crawled crawled crawled by Google. It should be four zero four. You know? They need to be removed from indexing and crawling. Yeah. False false positives. Yeah. Yeah. Okay. But some some of the pages might be redirected to existing pages. So today, I've discussed with Nicolas the possible workaround. So I'm working on the logic the redirection because some data data individual data pages can be redirected on existing one. Got it. Okay.
+
+### You (2026-03-17T14:10:57.131Z)
+
+Thank you, Marina.
+
+### Guest (2026-03-17T14:10:57.281Z)
+
+Sounds good. Thank you.
+
+### You (2026-03-17T14:11:05.741Z)
+
+Mike.
+
+### Guest (2026-03-17T14:11:09.581Z)
+
+I'm working on talk with Jeff about pricing on the Pro API and getting Pro API finalized pricing and getting self-service up and running. It's already mostly working. I have one person using it. Then some in AI, push some fixes and updates to that. I'm mostly right now, I'm focused on campus auth integration with the iOS app. Getting that finalized. I think I should have that wrapped up today. That's mostly everything I'm working on right now.
+
+### You (2026-03-17T14:11:43.651Z)
+
+Nice. Alright. Remember a while ago, I was, I brought up the open source LLM idea
+
+### Guest (2026-03-17T14:11:49.691Z)
+
+Yeah.
+
+### You (2026-03-17T14:11:51.981Z)
+
+for for potential using with Simon AI Or so that's something that I might bring up later. I said,
+
+### Guest (2026-03-17T14:12:01.831Z)
+
+Say again?
+
+### You (2026-03-17T14:12:04.011Z)
+
+know if you recall a few weeks ago, I brought up the idea of, bringing in open source LLMs instead of using ChatGPT for Simon AI for Pro.
+
+### Guest (2026-03-17T14:12:11.001Z)
+
+Oh, yeah.
+
+### You (2026-03-17T14:12:12.831Z)
+
+But I've been yeah, I've been doing research on that. So I might like, whenever I finalize that, I might just, like, bring it up to you, but it would be know, fully fleshed out, not necessarily asking you for any heavy lifting. So
+
+### Guest (2026-03-17T14:12:22.821Z)
+
+Okay.
+
+### You (2026-03-17T14:12:25.701Z)
+
+just wanted to put put it on your radar again.
+
+### Guest (2026-03-17T14:12:26.851Z)
+
+Yeah. Let me know about it.
+
+### You (2026-03-17T14:12:28.141Z)
+
+Sweet.
+
+### Guest (2026-03-17T14:12:29.751Z)
+
+Cool. Yeah.
+
+### You (2026-03-17T14:12:30.151Z)
+
+Thank you. Nikita.
+
+### Guest (2026-03-17T14:12:36.671Z)
+
+Yep. Request preparations, basically, are if there are some outstanding marks that needs to be fixed for the current release. Seems like front end wise at this point, it is no. Next thing is preparing the at this point, I think it's ready, the sort of pre release of the payment flow with the older version of the design, cleaned up the cleaned up partial styles there and check whether or not it's still functioning together with gita o. Made some adjustments here and there basically, leftovers from the time that we hidden it completely from the release. And this point on, moving towards the what's it called? Sponsored courses. And about it.
+
+### You (2026-03-17T14:13:39.271Z)
+
+See. Thank you. Yeah. I was I was taking a look. Lot of the stuff see that's mostly on David's end. Right? Because I I was I was previewing the test, and a lot of it seems to be within the like, actual courses themselves. Or or are you finding other bugs as well? Yeah.
+
+### Guest (2026-03-17T14:13:56.251Z)
+
+If it is inside of the iframe, then, yes, it is. Entirely on the site. We've been having discussions about it. Today with the rest of the team as well.
+
+### You (2026-03-17T14:14:03.841Z)
+
+Okay. Thank you, Nikita. Nikita.
+
+### Guest (2026-03-17T14:14:09.201Z)
+
+Yep. We were we were investigating the bugs with the Walmart regarding the course specifically two zero one and preparing the fix of for for the prod and also for the dev regarding the user courses issue that may introduce the problems with starting the course. If you onboarded through the admin panel. So finalizing it, then we'll pass to testing and hopefully, we will be able to release it today. Just separately aside from all other fixes we already prepared. And, yeah, most of the bugs right now about the two one on the David's end. So I'm just waiting once the new source files will be published, so I will re upload them to our waste free storage. And some of them will be resolved. Or maybe all of them.
+
+### You (2026-03-17T14:15:18.191Z)
+
+Awesome. Thank you. Very much. Nikola.
+
+### Guest (2026-03-17T14:15:26.661Z)
+
+Yeah. Hello, everyone. So today, I deployed this FAQ schema fix for rating pages and data pages. That was reported by Tim. And then we yesterday, with the help of Caesar, so we published fix for the broken links notifier. So now it's the broken links are, not sent about to the publication channel and not the publication pro channel anymore. And we are now using this Cloudflare bypass headers which is kinda more robust way to to to handle the issue that our crawler we were blocking our own crawler. Yeah. And then, also fixed yesterday the bit why bit wire feed. The issue was that we were fetching the refreshing the press releases from Bitwire on all our dev boxes, and they were not happy about it. And, yeah, so we kinda cleaned cleaned it up with Caesar. Removed this flag that prevents it now from from fetching on new dev boxes, and I cleaned it up from all the existing running dev boxes. Add I'm hoping, like, it won't happen again. But, like, maybe, like, if there was, like, an existing dev box that was stopped and then we start it again, maybe, like, it will happen again. Like, I don't know. Yeah. Go ahead. They replied, and they said that it stopped. So Okay. For now. So maybe maybe, like, hoping I'm hoping, like, it won't happen again, but, yeah, let's Yeah. What I'm Okay. Yeah. I can I don't know if I should I should I let them know, like, I don't know? It's probably a bad look to say it might happen again, so I'll just wait. If they Yeah. Like, yeah. Let's yeah. Like, if they report it again, I will. But it's like, yeah, that was Vishne. Like, we were accidentally, we were fetching the feed from all our dev boxes. Right? Alright. And which know, on the other hand, like, it's still, like, kinda it's 10 requests. Maybe I know how much running is. 10 requests every five minute, and they were like, oh, like, servers cannot handle that load. Yeah. Okay. Anyway, yeah, that's it. I'm continue working on translations. And that's my focus.
+
+### You (2026-03-17T14:18:07.061Z)
+
+Sweet. Thank you, Nick.
+
+### Guest (2026-03-17T14:18:09.591Z)
+
+I still owe you the I still owe you the applicant and the tickets for that. Sorry. I'm waiting.
+
+### You (2026-03-17T14:18:21.981Z)
+
+Ramuald.
+
+### Guest (2026-03-17T14:18:23.641Z)
+
+Hello, everybody. So So I'm continue with campus. And to resolve all of those bugs. Found. And also signed to complete crypto jobs. That's all.
+
+### You (2026-03-17T14:18:45.991Z)
+
+Thank you very much, Roman.
+
+### Guest (2026-03-17T14:18:49.411Z)
+
+Yeah. Appreciate your help yesterday trying to get those people onboarded. It seemed like,
+
+### You (2026-03-17T14:18:53.151Z)
+
+Yeah.
+
+### Guest (2026-03-17T14:18:56.681Z)
+
+once you I don't know about campus. We had didn't hear anything, so I think everything was okay with the solution that we sort of landed on. For a pro, whatever we did like, creating the password, fixed it. I saw that they logged in successfully. I think we had three of our potential candidates fully logged in onto Pro. Yesterday, midafternoon. US time. So no no no bad news this morning from Leanne. So that means that probably smooth sailing.
+
+### You (2026-03-17T14:19:33.481Z)
+
+Nice. Alright. Good to hear. Anything else you wanna bring up, Ben? Any updates?
+
+### Guest (2026-03-17T14:19:48.731Z)
+
+No. Yesterday was just I couldn't didn't do anything Yesterday, it was just it was just the campus in pro.
+
+### You (2026-03-17T14:19:54.801Z)
+
+Yeah. New
+
+### Guest (2026-03-17T14:19:55.471Z)
+
+The whole day. So I'm have to catch up on a lot of tickets and desks. But, for for, Alex, I'd say that we probably should let me know what makes sense the most, but I feel like the onboarding, like, the off flow with x. Would probably make sense the most for him. Correct me if I'm wrong. We'll have a we'll have a meeting between us three and discern it into different parts whether or not it makes sense for Alex to start there or some other portion of it and reallocate what allocate the tasks there. Do not worry. We'll do that Sweet. Yeah. We're meeting with Matt today also to talk like initiatives and, like, road map stuff. So we'll chat about, like, the sponsored quarter release meaning do we want to have the updated marketing page? Like, how much much do you wanna release basically with those sponsored courses. So I'll keep you posted on the on that discussion. Thank you.
+
+### You (2026-03-17T14:21:16.541Z)
+
+Cool.
+
+### Guest (2026-03-17T14:21:16.791Z)
+
+That's all my stuff.
+
+### You (2026-03-17T14:21:17.381Z)
+
+Yeah. I'm I'm in a similar boat. Responding to some of the stuff for Brian, and I have another comment on that And just, yeah, just going through some of the campus stuff, trying to check check out the bugs on David's end, Well, on my end, so I will be working on that. And then just, yeah, prepping for the meeting with Matt. So does anybody else have anything that they wanna discuss before we head out? Alright. Sweet. Enjoy the rest of your evenings, everybody. I'll talk to you tomorrow. Later, guys. Thanks.
+
+### Guest (2026-03-17T14:21:58.141Z)
+
+Same. See you, Thank you. Bye.
 
