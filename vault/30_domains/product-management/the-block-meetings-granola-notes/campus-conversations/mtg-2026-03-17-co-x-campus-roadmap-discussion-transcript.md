@@ -1,0 +1,43 @@
+---
+granola_id: b1513851-3e3f-4461-b0b2-5c0a2936eb5d
+granola_type: transcript
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Full transcript of .co x campus roadmap discussion - transcript.
+context: the-block
+created: 2026-03-17
+source: granola-sync
+attendees:
+  - mvitebsky@theblock.co
+  - erupkus@theblock.co
+note: "[[30_domains/product-management/the-block-meetings-granola-notes/.Co x Campus Roadmap discussion.md]]"
+---
+
+# Transcript for: .Co x Campus Roadmap discussion
+
+## Attendees
+- Matt Vitebsky (mvitebsky@theblock.co)
+- Ed Rupkus (erupkus@theblock.co)
+
+### Guest (2026-03-17T19:30:26.443Z)
+
+Hey, Sean.
+
+### Sean (2026-03-17T19:30:27.093Z)
+
+'Sup, dude?
+
+### Guest (2026-03-17T19:31:23.583Z)
+
+Hey, Matt. What up, boys?
+
+### Sean (2026-03-17T19:31:26.533Z)
+
+What you gonna do?
+
+### Guest (2026-03-17T19:31:30.213Z)
+
+Are doing? Not too bad. Ready to talk road map. Let's do it. Alright. So we sat down and chatted about this with the assumptions that mid April, we'll be losing basically half of our devs more or less. And that going forward after individuals or just after this point of courses will basically stop focusing on campus. So the main two core pillars is traffic growth and increasing revenue by either building on the current revenue arms or adding new new new revenue arms, new new avenues. So by looking at, like, where we're right now, obviously, March is almost more than halfway in. I don't know. Do you wanna go, like, month by month? What we would have put down? Or what would you prefer? We're talking about specific specific items such as, like, translations and looking at how that was gonna progress. Yeah. Let's do the progression route. Okay. So for translations right now, Nikita or Nicolas is sort of playing with them as local. He's working on it. I owe him tickets and the epic for that. I we I suspect that we'll basically with MVP version, we'll we'll be in dev and in QA April at some point. He's obviously had a lot of other stuff today, like SEO and and other optimizations that he's working on. But I I'd expect that to be in QA by in April at some point. CTO, I think that CTO has I think it's super imperative that we continue and, like, actually see through all of these optimizations because that's, like, lowest hanging fruit. I think our we both we both agree that the experience is not ideal on the home page and article in terms of throughs, etcetera. So CTO article, requirements are scoped out sort of, like, scoped out right now. I have like, what the numbers and examples of where I'm where I'm seeing the CTO for articles going. We need to sit down and, like, decide if that's the right direction, what need we what we need to edit, etcetera. And we probably would hand it off to design the article part in April right after the done list the homepage, which is currently InDesign. So then, obviously so, you know, both of them sort of move parallel with each other. Probably, see the homepage one, we would move into dev, hopefully, at some point, either this month or beginning of next month. And know, we would, like, kick it off basically to the development, I guess, April. And then the CTO for article, would, like, basically trail one month behind what I would expect. And then hopefully, in May, we can ship the new homepage And then this and the following month for article CTO. I have data listed as well because I think data I mean, it's basically performing as well as our home page with how many page views it gets. So clearly, people use it and we have to make sure that we don't break. That whole experience, but also that we could make that a lot better. So same idea for data. It's just trailing one month again. Obviously, we can prioritize deprioritize as needed, but I think we should not forget about that for sure. But that's CTO Currently, what's what else is in dev? Like, right now, obviously, we just shifted to sponsored courses. We spoke with the devs What what's here in the italics is that if we're talking about mid April, late April, release date, they'd think that there is a there's a version of two zero one individual access that we could, like, sort of like a v 0.5 of two zero one individual access that we could strive for. And they see an angle there, but part of me just think that that that's probably just like, easier to just like, pause for now. And then if we want to focus on it, we can continue doing that after our sponsored courses are live and working. I also, like, Yeah. I would say full full core press on sponsored courses and then will, like we'll eventually finish two zero one. So you can put that into, like, May or June. Gotcha. K. K. Okay. Yeah. Well, part of me, I have, like we have ideas and, like, sort of notes as well that we'll incorporate into the eventual slideshow, but my personal take on campus is that we have to narrow the scope if we if if we're gonna continue, like, supporting and and trying to sell this I think that we need to just forget about the individual access and just, like, completely narrow down to enterprise and, like, hiring and upskilling. And just try to, like, ace that and and you know, not overcomplicate stuff for us. Because it's clearly, like, for individuals and. We need to make it work first for anyone. Exactly. Yeah. So asked to be cleaned up which you know, Sean and David are going through the whole course. A lot of those bugs and everything that we see is on the actual, like, interface of of the Articulate So the platform itself seems to be working. It's just there's many bugs that have not been addressed. K. So that's where sponsored courses so, yeah, we probably as we talked whatever this version is, what it entails, it'll probably just be just, you know, the full sponsored courses integration from .co to campus. We would hope to be in QA in April mid April. Was the preliminary date that we spoke about. Brian is working on that on the .co side, and campus devs are working on that right now. And additional to the bugs that still have That's for campus election coverage. It's in dev. It's like, 80% ish ton. From the v one. We'll have the v two start. Basically, we'll kick it off in May. As we finalize the formulas and we get more clarity from standard crypto. So it's in dev in March. We expect it to be in QA April you know, as soon as Marina comes back from work, basically, before they both get LEGO Maria and Marina. So the v one should be live in April. V two starts. Yeah. We kick it off, basically. Essentially, as as soon as we can, we'll start kicking it off. They'll we wanna make sure we we get it right with the voting block index. The formula is, like, 90%, if not more than And, yeah, I just gotta make sure that we have, like, all the share buttons, We have all the branding around all those graphs so that we we cap capture the whole, you know, opportunity to get to go viral. That stuff eventually. That's election coverage and and, you know, it probably will probably could if we wanted to, could go live in May, but you know, midterms probably become more of a topic in June. Just as the election cycle goes. So some planning for somewhere in June probably is Yeah. It has to be after all the primaries. Yeah. Block iOS app. Is in QA essentially this month. Right? Like, I think we're nearing the release. So obviously, we we should probably have to, like, dedicate some sort of dev resources to the upkeep and making sure that, you know, if there are any bugs that we clean it up at post launch. But then Block app on Android if we succeed and if if it's has traction it's almost a necessity. So depending on how quickly we can launch the iOS app, we probably would start with Android. Right after. So I have it marked as in dev in May. Then job boards is ready for release. QA just I think last few things of QA are are being done. So the whole flow is finalized or adding your email to a newsletter, list through, you know, reaching out
+
