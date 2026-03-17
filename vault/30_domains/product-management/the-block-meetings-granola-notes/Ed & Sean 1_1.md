@@ -1,0 +1,63 @@
+---
+granola_id: ac0849e5-df14-4e96-ad0e-06d1f2739ebb
+title: "Ed & Sean 1:1"
+type: note
+created: 2026-03-17T16:59:23.844Z
+updated: 2026-03-17T17:43:53.709Z
+attendees: 
+  - jgragg@theblock.co
+  - erupkus@theblock.co
+  - cdaumur@theblock.co
+  - melshahat@theblock.co
+  - mvitebsky@theblock.co
+  - sho@theblock.co
+  - jcarusi@theblock.co
+transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Ed & Sean 1_1-transcript.md]]"
+---
+### Sponsored Course Development & Design Updates
+
+- Brian working on front-end for sponsored course dot co implementation
+	- Current designs link to campus courses (Ethereum, layer ones) assuming completion
+	- Only Polymarket course needs immediate focus for MVP
+	- Other cards can remain as current Learn page format
+- Card redesign across Learn page
+	- Tags moved from bottom to top for unified appearance
+	- Simple change affecting all course cards
+	- Supports different course types: campus electives, sponsored courses, beginner articles
+- Campus 201 individual course development on hold
+	- Waiting for completion before advertising learning paths
+	- Future state could include paid course previews on Learn page
+
+### Product Roadmap Discussion
+
+- Two core strategic pillars driving roadmap:
+- Key initiatives aligned with goals:
+	- Translations and CTO initiatives
+	- Media hub and Daily Show expansion
+	- Sponsored courses (foundation for future partnerships)
+	- Unified authentication strategy for power user conversion
+	- Block bites (weakest value prop for core pillars)
+	- Community engagement events and crypto quizzes
+	- Block iOS/Android apps (lowest hanging fruit if attainable)
+	- API revenue potential and cost-saving opportunities
+- Campus pivot consideration: Focus purely on enterprise hiring
+	- Target crypto-literate talent for traditional and crypto companies
+	- Leverage research expertise for certification programs
+	- Include job boards and ATS system integration
+
+### Team Changes & CEO Transition
+
+- Significant team reduction after April
+	- Sean and colleague taking on more prototyping responsibilities
+	- Shift toward AI-assisted development and local environment demos
+	- Focus on smaller complexity projects initially
+- Campus development challenges
+	- CMI-5 support miscommunication caused major delays
+	- Wasted months due to requirements misalignment
+	- Current status: 101 and 201 courses proceeding, sponsored course support included
+- CEO interviews happening this week in New York
+	- Potential candidates have crypto and legacy media experience
+	- Results-focused leadership expected
+	- Competition declining (Decrypt layoffs, Blockworks stopped news coverage)
+
+Chat with meeting transcript: https://notes.granola.ai/t/8e4debc1-6f93-4cbb-8c01-e69eb7da164d
