@@ -5,6 +5,19 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.12.0] - 2026-03-18
+
+### Added
+
+- `shadcn-ui-patterns` — shadcn/ui component library patterns for accessible React UIs. Full import from giuseppe-trisciuoglio/developer-kit community skill, adapted to pack format. Covers installation, Radix UI primitives, CSS variable theming (light/dark), React Hook Form + Zod validation, and 11 component patterns (Button, Input, Form, Card, Dialog, Select, Sheet, Menubar, Table, Toast, Charts/Recharts). Includes Next.js App Router integration, CVA variant customization, and common combinations.
+- `ux-design-guidelines` — 99 priority-ranked UX design rules extracted from nextlevelbuilder/ui-ux-pro-max community skill (lightweight version, no Python/CSV dependencies). 10 categories by impact: Accessibility (CRITICAL, 14 rules), Touch & Interaction (CRITICAL, 17), Performance (HIGH, 19), Style Selection (HIGH, 13), Layout & Responsive (HIGH, 16), Typography & Color (MEDIUM, 15), Animation (MEDIUM, 25), Forms & Feedback (MEDIUM, 30), Navigation (HIGH, 27), Charts & Data (LOW, 30). Includes professional standards tables (icons, light/dark mode, layout) and pre-delivery checklist.
+
+### Changed
+
+- Skill count: 109 → 111
+- Export group `10-master-designer` updated with both new skills
+- Design-team domain: 8 → 10 skills
+
 ## [3.11.0] - 2026-03-08
 
 ### Added

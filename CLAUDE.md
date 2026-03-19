@@ -4,7 +4,7 @@ This is Sean's personal command center — a second brain for Claude Code.
 
 ## What This Repo Is
 
-109 skills, 13 agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
+111 skills, 13 agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
 
 ## Domain Workspaces
 
@@ -14,7 +14,7 @@ This is Sean's personal command center — a second brain for Claude Code.
 | `product-management/` | PRDs, sprints, stakeholder comms, data analysis, technical writing | 20 |
 | `creative-studio/` | Phaser game dev, Remotion video, pixel art, Adobe MCP, animation, writing | 26 |
 | `life-systems/` | Finance, health, learning, tasks, time, career | 9 |
-| `design-team/` | Design system + 4 review agents + design arena | 9 |
+| `design-team/` | Design system + 4 review agents + design arena | 11 |
 | `vault/` | Obsidian vault (notes, prompts, RAG, Granola meeting sync) | 6 |
 
 ## Design Team Agents
@@ -88,7 +88,7 @@ Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key ne
 
 ```
 .claude/
-├── skills/          # ALL 107 skills (canonical, auto-loaded)
+├── skills/          # ALL 111 skills (canonical, auto-loaded)
 ├── agents/          # ALL 13 agents (9 domain + 4 design team)
 ├── hooks/           # 7 hooks (block-secrets, log-tool-use, network-access, etc.)
 └── settings.json    # Standard security profile

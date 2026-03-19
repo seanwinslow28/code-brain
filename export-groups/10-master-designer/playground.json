@@ -13,7 +13,9 @@
     "micro-interaction-patterns",
     "prompting-beautiful-ui",
     "react-native-animations",
+    "shadcn-ui-patterns",
     "tailwind-advanced-patterns",
+    "ux-design-guidelines",
     "visual-polish-checklist"
   ],
   "agents": [],
