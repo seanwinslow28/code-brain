@@ -1,5 +1,5 @@
 ---
-name: design-system-claude-md
+name: design-system-claude
 description: Design system encoding for CLAUDE.md to ensure on-brand, consistent UI generation. Create and maintain design tokens, typography scales, spacing systems, shadow depths, animation defaults, and dark mode rules in CLAUDE.md. Use when setting up a new project design system, enforcing brand consistency, defining color tokens, typography scale, or component interaction patterns.
 ---
 
