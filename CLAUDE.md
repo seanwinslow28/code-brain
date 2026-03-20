@@ -10,12 +10,12 @@ This is Sean's personal command center — a second brain for Claude Code.
 
 | Domain | Purpose | Skills |
 |--------|---------|--------|
-| `claude-mastery/` | CLI, hooks, MCP, settings, tech stack, prompt engineering | 38 |
-| `product-management/` | PRDs, sprints, stakeholder comms, data analysis, technical writing | 20 |
-| `creative-studio/` | Phaser game dev, Remotion video, pixel art, Adobe MCP, animation, writing | 26 |
+| `claude-mastery/` | CLI, hooks, MCP, settings, tech stack, prompt engineering | 40 |
+| `product-management/` | PRDs, sprints, stakeholder comms, data analysis, technical writing | 19 |
+| `creative-studio/` | Phaser game dev, Remotion video, pixel art, Adobe MCP, animation, writing | 25 |
 | `life-systems/` | Finance, health, learning, tasks, time, career | 9 |
 | `design-team/` | Design system + 4 review agents + design arena | 11 |
-| `vault/` | Obsidian vault (notes, prompts, RAG, Granola meeting sync) | 6 |
+| `vault/` | Obsidian vault (notes, prompts, RAG, Granola meeting sync) | 7 |
 
 ## Design Team Agents
 
