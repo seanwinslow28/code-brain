@@ -2,13 +2,13 @@
 - [ ] Change perplexity and Claude to be focused on AI fluency. Or maybe perplexity is focused on research and PM work along with AI fluency
 - [x] Email Dr Kat
 - [x] Work on Fidelity Enrollment
-- [ ] Turn Off Verizon Bill for March move
+- [x] Turn Off Verizon Bill for March move
 - [ ] Learn more about obsidian and how to use
 - [x] Build out UI’s — PM, Agent Hub, Life Systems.
 - [ ] Build out agent SDK 
 - [x] See if you should move the UX/UI project into Claude SuperUser pack
 - [x] Build creative writing skill for tech -> jack karouac writes about ai - have Claude code interview you and do writing exercises for emails and creative technical writing to understand what you want and provide context (Do the same with 2d animation and other creative work)
-- [ ] Create other creative skills using the same method
+- [ ] Create other creative skills using the same method ^
 - [ ] Set up Claude Cowork with personal PM plug ins
 - [ ] Test out PRD>prototype generator
 - [x] Do deep research on ways to get your Apple Watch Fitness app data onto your Mac Mini
@@ -18,6 +18,6 @@
 - [ ] Look at fidelity plan and ask Claude what to invest in - Use prompt engineering to make it look into stocks and bonds -- do perplexity as well
 - [x] Talk to Claude about Granola
 - [x] Create move out check list with Claude
-- [ ] ***rework the Campus tracker and get it ready for Wednesday meeting -- Check what's been completed and add a date logged section
+- [x] ***rework the Campus tracker and get it ready for Wednesday meeting -- Check what's been completed and add a date logged section
 - [ ] update context file based on all the changes and make move out check list
 - [ ] add career transition skill to portfolio project

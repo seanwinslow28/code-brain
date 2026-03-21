@@ -23,22 +23,22 @@ related:
 ### This Week (Mar 9–14) — Do Now
 - [x] Cancel Verizon wifi service
 - [x] Call/email Urby management — see [[#Questions for Urby (One Call)]]
-- [ ] Fill out and email Notice to Vacate PDF to Urby
+- [x] Fill out and email Notice to Vacate PDF to Urby
 - [x] Submit forwarding address to Urby (115 Elm St, Apt 1, Charlestown, MA 02129)
 - [x] Link Moved.com account through Urby Resident Portal
 - [x] Pick up 90-count prescription from Rosebank pharmacy (if not already done)
 - [x] Notify manager about March 20 move day (available but no meetings 1–4 PM)
-- [ ] Start packing non-essentials
+- [x] Start packing non-essentials
 
 ### Move Week (Mar 15–21) — The Move
 - [ ] Deep clean apartment: oven, microwave, fridge, general wipe-down (finish by Mar 19)
-- [ ] Confirm Hertz reservation — L5151252687 (by Mar 18) *(calendar event set)*
+- [x] Confirm Hertz reservation — L5151252687 (by Mar 18) *(calendar event set)*
 - [x] Move-out inspection — Mar 19, 3:00–3:30 PM *(scheduled)*
 - [ ] Return 2 keys at inspection (1 fob + mail key) — confirm plan with Urby
-- [ ] Cancel Lemonade renter's insurance — Mar 20 *(calendar event set)*
-- [ ] Pick up Hertz rental car — Mar 20, 9:00 AM, 543 Cary Ave, Staten Island
-- [ ] Pack rental car — Mar 20, 1:00–4:00 PM (elevator slot)
-- [ ] Dispose of / donate large items: couch, mattress, leg rest, bed frame (coordinate with Urby) UPDATE: Look into Cobu to see if anyone wants the furniture. If not, it will be disposed of within the garage dumpter
+- [x] Cancel Lemonade renter's insurance — Mar 20 *(calendar event set)*
+- [x] Pick up Hertz rental car — Mar 20, 9:00 AM, 543 Cary Ave, Staten Island
+- [x] Pack rental car — Mar 20, 1:00–4:00 PM (elevator slot)
+- [x] Dispose of / donate large items: couch, mattress, leg rest, bed frame (coordinate with Urby) UPDATE: Look into Cobu to see if anyone wants the furniture. If not, it will be disposed of within the garage dumpter
 - [ ] Final walkthrough of apartment
 - [ ] Drive to Boston — morning of Mar 21
 - [ ] Return last key fob (confirm drop-off method with Urby)
