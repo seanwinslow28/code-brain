@@ -3,7 +3,7 @@ granola_id: 6f7f52fa-4c37-4e92-a770-2be0a6519399
 title: "Ticket cleanup"
 type: note
 created: 2026-03-23T15:05:34.166Z
-updated: 2026-03-23T15:42:33.136Z
+updated: 2026-03-23T16:15:29.987Z
 attendees: 
   - erupkus@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Ticket cleanup-transcript.md]]"
