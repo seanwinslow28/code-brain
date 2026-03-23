@@ -3,7 +3,7 @@ granola_id: e3865223-064c-467c-bc19-04240b8d8318
 title: "Sean / Edvinas"
 type: note
 created: 2026-03-23T17:00:25.125Z
-updated: 2026-03-23T18:28:30.755Z
+updated: 2026-03-23T19:07:30.929Z
 attendees: 
   - erupkus@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Sean _ Edvinas-transcript.md]]"
