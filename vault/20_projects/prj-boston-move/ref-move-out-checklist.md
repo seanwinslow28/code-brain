@@ -62,14 +62,14 @@ related:
 - [ ] Find a barber nearby
 - [ ] Ask parents to send SS card and birth certificate to Boston address
 - [ ] Look into health insurance coverage in MA (confirm network works)
-- [ ] Shop for new desk with girlfriend
+- [x] Shop for new desk with girlfriend
 
 ---
 
 ## Urby Apartment Requirements
 - [x] USPS mail forwarding set up
 - [x] Submit forwarding address to Urby
-- [ ] Fill out and email Notice to Vacate PDF
+- [x] Fill out and email Notice to Vacate PDF
 - [x] Link Moved.com on Urby Resident Portal
 - [x] Moved app tasks — all 6/6 complete
 - [x] Move-out inspection scheduled (Mar 19, 3:00–3:30 PM)
@@ -77,7 +77,7 @@ related:
 - [x] Resident Portal balance paid
 - [x] Auto Pay cancelled
 - [x] Cancel Verizon wifi
-- [ ] Cancel Lemonade renter's insurance (Mar 20)
+- [x] Cancel Lemonade renter's insurance (Mar 20)
 - [x] No wall holes to patch
 - [x] Bathroom cleaned
 - [ ] Finish cleaning: oven, microwave, fridge, general wipe-down
@@ -93,7 +93,7 @@ related:
 - [x] How to coordinate large item disposal/bulk pickup timing?
 - [x] Can I return 1 fob + mail key at inspection (Mar 19) and keep 1 fob until Mar 21? Where to drop off the last fob?
 - [x] Confirm no additional charges between move-out day and lease end 
-- [ ] Look into Cobu, change inspection date to 23rd, electric bill will be on Urby portal. After that's paid, I'll be good
+- [x] Look into Cobu, change inspection date to 23rd, electric bill will be on Urby portal. After that's paid, I'll be good
 
 ## Moving Logistics
 - [x] Hertz rental car booked: 7-passenger SUV (Nissan Pathfinder), confirmation L5151252687
@@ -101,7 +101,7 @@ related:
 - [x] Drop-off: Mar 22, 11 AM — Boston Logan Airport, 156 Tomahawk Drive (24/7)
 - [x] Elevator slot reserved: Mar 20, 1–4 PM
 - [x] COI provided to building
-- [ ] Confirm Hertz reservation 2 days before (by Mar 18)
+- [x] Confirm Hertz reservation 2 days before (by Mar 18)
 - [ ] Pack blankets/towels around TV and electronics for transport
 - [x] No storage needed
 
@@ -132,7 +132,7 @@ related:
 
 ## Utilities & Services
 - [x] Cancel Verizon wifi (target: this week)
-- [ ] Cancel Lemonade renter's insurance (Mar 20)
+- [x] Cancel Lemonade renter's insurance (Mar 20)
 - [x] Boston apartment: internet, electric, gas, water — all set up
 - [x] Set up renter's insurance for Boston apartment
 - [ ] Consider upgrading Boston wifi
@@ -142,7 +142,7 @@ related:
 - [x] Tax withholdings updated
 - [x] Notify manager about Mar 20 (available but no meetings 1–4 PM)
 - [ ] Double-check Rippling for remaining updates
-- [ ] New desk — shopping with girlfriend (current desk as backup)
+- [x] New desk — shopping with girlfriend (current desk as backup)
 - [x] Work equipment transporting self
 
 ## Tech & Backups
