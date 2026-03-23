@@ -80,9 +80,9 @@ related:
 - [x] Cancel Lemonade renter's insurance (Mar 20)
 - [x] No wall holes to patch
 - [x] Bathroom cleaned
-- [ ] Finish cleaning: oven, microwave, fridge, general wipe-down
-- [ ] Return keys: 2 fobs + 1 mail key ($50 each if not returned)
-- [ ] Coordinate large item disposal (couch, mattress, leg rest, bed frame)
+- [x] Finish cleaning: oven, microwave, fridge, general wipe-down
+- [x] Return keys: 2 fobs + 1 mail key ($50 each if not returned)
+- [x] Coordinate large item disposal (couch, mattress, leg rest, bed frame)
 - [x] No bicycle in storage
 - [x] No storage unit
 - [x] No Littleman Parking
@@ -102,7 +102,7 @@ related:
 - [x] Elevator slot reserved: Mar 20, 1–4 PM
 - [x] COI provided to building
 - [x] Confirm Hertz reservation 2 days before (by Mar 18)
-- [ ] Pack blankets/towels around TV and electronics for transport
+- [x] Pack blankets/towels around TV and electronics for transport
 - [x] No storage needed
 
 **Items to transport:** computers (Mac Mini, MacBook Pro, Alienware), monitors, TV, computer chair, clothes/shoes, plastic drawer tower, kitchen supplies, desk (disassembled as backup)
@@ -152,7 +152,7 @@ related:
 **Devices to transport:** Mac Mini, MacBook Pro, Alienware desktop, monitors, TV
 
 ## Personal & Life Admin
-- [ ] Find a gym in Charlestown/Boston
+- [x] Find a gym in Charlestown/Boston
 - [ ] Find a barber nearby
 - [ ] Ask parents to send SS card and birth certificate to Boston
 - [x] Passport — accessible, bringing to Boston
