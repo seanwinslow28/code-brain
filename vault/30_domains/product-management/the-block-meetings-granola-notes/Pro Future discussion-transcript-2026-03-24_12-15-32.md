@@ -3,10 +3,8 @@ granola_id: 20cd0f6c-946c-4bf9-94a1-9147eaaa2e34
 title: "Pro Future discussion - Transcript"
 type: transcript
 created: 2026-03-24T16:15:32.097Z
-updated: 2026-03-24T16:15:32.203Z
-attendees: 
-  - mvitebsky@theblock.co
-  - erupkus@theblock.co
+updated: 2026-03-24T16:47:21.352Z
+attendees: []
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Pro Future discussion.md]]"
 ---
 
@@ -54,5 +52,29 @@ I still didn't have my thing. No, actually, I haven't spoken to him. Though.
 
 ### You (2026-03-24T16:18:08.858Z)
 
-Of course. You know, if. There's ever. Any. Capital. That you. Or whatever. Issues. Cancel. On another. Laugh. And then. I definitely. Know. What you should do. So. Wanted to rip. Those too. High. That's when you first. Watch. Me. In there. Before. Anywhere. Some. Of their people might be. Subserv. Ed. To. Amount. Of time. So. Providers will. Pick them up. Or shut the. Car. We have. One on. Women's mental health. Changes. Online. March. Of, I mean. We're. Getting natural. Monitor. Population. Weight. Management. To. Use sleek tone. Quantum pain. Cancer. Things like. Our. Graph that Block. Service. Which I'll go. Into a couple. Of. Months. To. Special. Ty. Block. S. What. Are some color. S. A little bit. Of. Activ. E. Male. S. So it said. What. Can be. So I. Have them. In a. Virtual web. Inar. Around stress. Management bas. Ics. The event. Will be available. On Block. Work. And. So. We're going to. Be. In. April. Slides. On. The. Heart. Series. I. Don't know if the drive gets. Information. On a group. But. Here's what the male. And we look. Like. Over. Again. All. Set there.
+Of course. You know, if. There's ever. Any. Capital. That you. Or whatever. Issues. Cancel. On another. Laugh. And then. I definitely. Know. What you should do. So. Wanted to rip. Those too. High. That's when you first. Watch. Me. In there. Before. Anywhere. Some. Of their people might be. Subserv. Ed. To. Amount. Of time. So. Providers will. Pick them up. Or shut the. Car. We have. One on. Women's mental health. Changes. Online. March. Of, I mean. We're. Getting natural. Monitor. Population. Weight. Management. To. Use sleek tone. Quantum pain. Cancer. Things like. Our. Graph that Block. Service. Which I'll go. Into a couple. Of. Months. To. Special. Ty. Block. S. What. Are some color. S. A little bit. Of. Activ. E. Male. S. So it said. What. Can be. So I. Have them. In a. Virtual web. Inar. Around stress. Management bas. Ics. The event. Will be available. On Block. Work. And. So. We're going to. Be. In. April. Slides. On. The. Heart. Series. I. Don't know if the drive gets. Information. On a group. But. Here's what the male. And we look. Like. Over. Again. All. Set there. It was. A couple different. Things. Irrigation. To economy quarant. Ine. So. This. Month. Related. Stuff. Like.
+
+### Guest (2026-03-24T16:23:19.114Z)
+
+I don't know. He's not replying. So maybe we can just hop on whenever he's ready to talk or to talk. Okay, just send us.
+
+### You (2026-03-24T16:23:29.178Z)
+
+Gotcha. Cool. Yeah, I want to read up some more anyway.
+
+### Guest (2026-03-24T16:23:32.714Z)
+
+Out.
+
+### You (2026-03-24T16:23:33.498Z)
+
+So.
+
+### Guest (2026-03-24T16:23:35.034Z)
+
+From you.
+
+### You (2026-03-24T16:23:35.658Z)
+
+Wait, sounds good. Thank you. Later, man.
 
