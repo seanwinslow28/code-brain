@@ -3,7 +3,7 @@ granola_id: ab964489-c963-49ad-8fdd-aa923f00af4d
 title: "Roadmap Deck - Transcript"
 type: transcript
 created: 2026-03-20T16:58:07.690Z
-updated: 2026-03-20T17:45:38.515Z
+updated: 2026-03-25T14:49:06.633Z
 attendees: 
   - erupkus@theblock.co
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Roadmap Deck.md]]"

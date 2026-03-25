@@ -3,7 +3,7 @@ granola_id: 2052d167-5ee0-44cb-b4bd-9037c7349033
 title: "Pro Future discussion - Transcript"
 type: transcript
 created: 2026-03-20T15:00:44.169Z
-updated: 2026-03-20T16:07:26.906Z
+updated: 2026-03-25T14:47:47.863Z
 attendees: 
   - erupkus@theblock.co
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Pro Future discussion.md]]"
