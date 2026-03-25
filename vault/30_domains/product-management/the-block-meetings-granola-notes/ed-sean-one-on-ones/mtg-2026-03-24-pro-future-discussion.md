@@ -1,14 +1,20 @@
 ---
 granola_id: 20cd0f6c-946c-4bf9-94a1-9147eaaa2e34
-title: "Pro Future discussion"
-type: note
-created: 2026-03-24T16:15:32.097Z
-updated: 2026-03-24T17:01:12.669Z
-attendees: 
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: "1:1 with Ed covering pro future discussion."
+context: the-block
+created: 2026-03-24
+source: granola-sync
+attendees:
   - mvitebsky@theblock.co
   - erupkus@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Pro Future discussion-transcript.md]]"
 ---
+
 ### Slide Deck Review & Edits
 
 - Edits completed on presentation deck

@@ -1,72 +1,45 @@
 ---
-granola_id: 2052d167-5ee0-44cb-b4bd-9037c7349033
+granola_id: 20cd0f6c-946c-4bf9-94a1-9147eaaa2e34
 title: "Pro Future discussion"
 type: note
-created: 2026-03-20T15:00:44.169Z
-updated: 2026-03-20T16:07:26.906Z
+created: 2026-03-24T16:15:32.097Z
+updated: 2026-03-24T17:01:12.669Z
 attendees: 
+  - mvitebsky@theblock.co
   - erupkus@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Pro Future discussion-transcript.md]]"
 ---
-### Pro Platform Future Strategy Discussion
+### Slide Deck Review & Edits
 
-- Sean moving this weekend, meeting timing confirmed for today
-- Need to review sponsored course content David sent
-	- Check for broken elements or needed edits
-	- Course appears finalized after David’s polishing
+- Edits completed on presentation deck
+- Claude AI used for most content generation
+	- Some issues with large slide deck size
+	- Fixed Montserrat font inconsistencies from previous presentation
+	- Background graphics corrected
+- Minor tweaks still needed for final polish
 
-### Current Pro Platform Assessment
+### COVID Systems Implementation
 
-- Design needs major updating but Figma v2 already in progress
-	- Josh recently returned to work on redesigns
-	- Previous focus shifted to Gotco, now renewed Pro interest
-- Bento layout structure is solid foundation
-- Key missing elements:
-	- Personalized dashboards that save user preferences
-	- Persistent filter settings (avoid daily reset)
-	- Better Simon AI integration and visibility
+- Rolling out 4 COVID systems for member awareness
+- Goal achievement milestone reached for November suite
+- Multiple choice options available for members
+	- Anxiety tracking
+	- Depression monitoring
+	- General wellness assessment
 
-### Three Strategic Directions Proposed
+### Health Program Initiatives
 
-#### Option 1: Enhanced Personalization Layer
-
-- Modular drag-and-drop dashboard components
-	- Charts, funding data, news headlines
-	- Bloomberg Terminal-style customization
-- Improved notification system for overnight developments
-- Simon AI as central feature vs. hidden chat icon
-- Challenge: High development cost, uncertain ROI
-
-#### Option 2: Intelligence Layer Focus
-
-- Revamped Simon AI tool as primary product
-- Three-tier package structure:
-- Enhanced data ingestion:
-	- Campus/Learn content integration
-	- Real-time data dashboard connectivity
-	- Foundational crypto education queries
-- Move away from traditional dashboard to utility tool
-
-#### Option 3: Integrated Ecosystem
-
-- Combined Simon AI and Block Bytes feeds
-- Tabbed access to individual products (news, research, data)
-- API access based on subscription tier
-- Researcher commentary as key differentiator
-
-### Technical Considerations
-
-- Simon AI currently limited to news/research content
-- Need better generative/brainstorming capabilities
-- Chart generation potential using system prompts
-- MCP (Model Context Protocol) integration for workflow embedding
-- Previous social features (Connect) showed minimal adoption
+- Women’s mental health program launching online in March
+- Weight management program using sleek tone quantum pain technology
+- Virtual webinar on stress management basics
+	- Event available on Block Work platform
+- Heart series slides planned for April rollout
 
 ### Next Steps
 
-- Reconvene Monday to finalize presentation approach
-- Incorporate client feedback from Cam about Pro usage patterns
-- Develop slide deck with three strategic options
-- “Dream bigger” before constraining to practical implementation
+- Continue reading/preparation before next discussion
+- Coordinate with Matt when he becomes available
+	- Currently not responding to messages
+	- Will schedule follow-up when ready
 
-Chat with meeting transcript: https://notes.granola.ai/t/41cceb2b-89b0-40d5-b6c7-5982cbb4f412
+Chat with meeting transcript: https://notes.granola.ai/t/66668a45-0a4e-46fa-8748-4376cfb31907
