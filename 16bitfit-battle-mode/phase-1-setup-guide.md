@@ -41,10 +41,12 @@ All of these steps are local installs that don't need the mesh system. Do all th
 | 3. Download Qwen3-14B | `mlx_lm.download --model mlx-community/Qwen3-14B-4bit` | **Yes** — run it for you (will take a while) | The "heavy analysis" model. Handles financial analysis, complex synthesis. The `-4bit` means it's quantized (compressed) to fit in memory while staying capable. |
 | 4. Download Qwen2.5-Coder-32B | `mlx_lm.download --model mlx-community/Qwen2.5-Coder-32B-Instruct-4bit` | **Yes** — run it for you (largest download) | Specialized for code review and programming tasks. This is the biggest model in your setup — the download may take some time. |
 | 5. Quick test MLX-LM | `mlx_lm.generate --model mlx-community/Qwen3-14B-4bit --prompt "Hello" --max-tokens 20` | **Yes** — run and confirm output | If you see generated text, MLX-LM works. If it crashes, Claude Code can check your Python version and MLX install. |
-| 6. Verify Node.js 20+ | `node --version` | **Yes** — check output | The Pixel Quantizer (Task 5 in the Claude Code prompt) uses Node.js/TypeScript with the Sharp image library. Needs v20+. If you're behind, Claude Code can run `brew install node` for you. |
+| 6. Upgrade Node.js to v22 LTS | `nvm install 22 && nvm alias default 22` | **Yes** — run it for you | v20 is end-of-life (no security patches). v22 is the current Active LTS — widest compatibility. Don't go to v24 yet, it's too new and some packages (like Sharp) may not support it. The `alias default 22` makes it persist across terminal sessions. |
 
 **Tell Claude Code on MacBook Pro:**
-> "Clone the superuser pack repo if not already here, then install mlx-lm and download both Qwen3-14B-4bit and Qwen2.5-Coder-32B-Instruct-4bit models. Test that MLX-LM works. Also verify Node.js is v20+."
+> "Clone the superuser pack repo if not already here, then install mlx-lm and download both Qwen3-14B-4bit and Qwen2.5-Coder-32B-Instruct-4bit models. Test that MLX-LM works. Upgrade Node.js to v22 LTS via nvm and set it as default."
+
+> **Note (non-blocking):** MLX-LM installed under Python 3.9 (system Python), which triggers OpenSSL warnings. It works fine for now. Consider eventually installing Python 3.13 via Homebrew and reinstalling mlx-lm under it for cleaner long-term support.
 
 ---
 
