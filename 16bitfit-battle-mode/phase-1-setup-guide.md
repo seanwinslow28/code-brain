@@ -34,19 +34,19 @@ All of these steps are local installs that don't need the mesh system. Do all th
 
 > **Important: Git clone the repo here, don't rely on Google Drive sync.** Claude Code's Phase 1 prompt will write new files (keychain.py, hybrid_router.py, safety hooks) that need proper git tracking. Google Drive sync can corrupt `.git` internals when two machines sync the same repo simultaneously. Clone the repo independently on the MacBook Pro and use `git push`/`git pull` to sync changes between machines. Google Drive is great for backups and large assets, but git repos should live separately on each machine.
 
-| Step | Command | Claude Code can help? | What it does & why |
-|---|---|---|---|
-| 1. Clone the superuser pack repo | `cd ~/Code-Brain && git clone <your-repo-url>` | **Yes** — run it for you | Gets the full repo onto the MacBook Pro with its own independent `.git` folder. If you already have it cloned, run `git pull` instead. |
-| 2. Install MLX-LM | `pip install mlx-lm` | **Yes** — run it for you | MLX-LM is Apple's framework for running LLMs on Apple Silicon. Chosen over Ollama here because MLX is optimized specifically for M-series chips and handles bigger models more efficiently on your 48GB machine. |
-| 3. Download Qwen3-14B | `mlx_lm.download --model mlx-community/Qwen3-14B-4bit` | **Yes** — run it for you (will take a while) | The "heavy analysis" model. Handles financial analysis, complex synthesis. The `-4bit` means it's quantized (compressed) to fit in memory while staying capable. |
-| 4. Download Qwen2.5-Coder-32B | `mlx_lm.download --model mlx-community/Qwen2.5-Coder-32B-Instruct-4bit` | **Yes** — run it for you (largest download) | Specialized for code review and programming tasks. This is the biggest model in your setup — the download may take some time. |
-| 5. Quick test MLX-LM | `mlx_lm.generate --model mlx-community/Qwen3-14B-4bit --prompt "Hello" --max-tokens 20` | **Yes** — run and confirm output | If you see generated text, MLX-LM works. If it crashes, Claude Code can check your Python version and MLX install. |
-| 6. Upgrade Node.js to v22 LTS | `nvm install 22 && nvm alias default 22` | **Yes** — run it for you | v20 is end-of-life (no security patches). v22 is the current Active LTS — widest compatibility. Don't go to v24 yet, it's too new and some packages (like Sharp) may not support it. The `alias default 22` makes it persist across terminal sessions. |
+| Step | Command | Status |
+|---|---|---|
+| ~~1. Clone the superuser pack repo~~ | — | **Pending** — clone via git, not Google Drive sync |
+| ~~2. Install Python 3.13~~ | `brew install python@3.13` | **Done.** Python 3.13.12 installed. |
+| ~~3. Create MLX-LM venv~~ | `python3.13 -m venv ~/Code-Brain/mlx-lm-env` | **Done.** Venv at `~/Code-Brain/mlx-lm-env`. |
+| ~~4. Install MLX-LM~~ | `pip install mlx-lm` (inside venv) | **Done.** MLX-LM v0.31.1 (latest). |
+| ~~5. Download Qwen3-14B~~ | — | **Done.** Tested at 31 tok/s, 8.4 GB peak memory. |
+| ~~6. Download Qwen2.5-Coder-32B~~ | — | **Done.** Downloaded and cached. |
+| ~~7. Add mlxenv alias~~ | — | **Done.** `alias mlxenv="source ~/Code-Brain/mlx-lm-env/bin/activate"` in `~/.zshrc`. |
+| ~~8. Clean up old Python 3.9 mlx-lm~~ | — | **Done.** Uninstalled, PATH removed, old model cache deleted. |
+| 9. Upgrade Node.js to v22 LTS | `nvm install 22 && nvm alias default 22` | **Remaining** — v20 is end-of-life. v22 is the current Active LTS with widest compatibility. |
 
-**Tell Claude Code on MacBook Pro:**
-> "Clone the superuser pack repo if not already here, then install mlx-lm and download both Qwen3-14B-4bit and Qwen2.5-Coder-32B-Instruct-4bit models. Test that MLX-LM works. Upgrade Node.js to v22 LTS via nvm and set it as default."
-
-> **Note (non-blocking):** MLX-LM installed under Python 3.9 (system Python), which triggers OpenSSL warnings. It works fine for now. Consider eventually installing Python 3.13 via Homebrew and reinstalling mlx-lm under it for cleaner long-term support.
+> **MLX-LM usage:** Run `mlxenv` to activate the venv, then `mlx_lm.chat --model mlx-community/Qwen3-14B-4bit` etc. The `hybrid_router.py` built in Phase 1 will reference this venv path in `config.toml`.
 
 ---
 
