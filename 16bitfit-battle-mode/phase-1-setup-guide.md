@@ -11,43 +11,50 @@ All of these steps are local installs that don't need the mesh system. Do all th
 
 ### Mac Mini (Always-On Orchestrator)
 
-> **Already done:** Ollama installed, models pulled, LAN access configured (permanent via LaunchAgent plist), WiFi IP is `10.0.0.45` on `en1`.
+> **Already done:** Ollama installed, models pulled, LAN access configured (permanent via LaunchAgent plist), WiFi IP is `10.0.0.45` on `en1`. Repo already cloned at `~/Code-Brain/claude-code-superuser-pack/`. The `.venv` folder already exists in `agents-sdk/`.
 
-| Step | Command | Claude Code can help? | What it does & why |
+| Step | Command | Claude Code can help? | Status |
 |---|---|---|---|
-| 1. Install Python 3.12 | `brew install python@3.12` | **Yes** — run it for you | The Agent SDK needs Python 3.12. Homebrew handles the install cleanly. If you don't have Homebrew, Claude Code can install that first too. |
-| 2. Verify Python | `python3.12 --version` | **Yes** — run and check output | Confirms the install worked. You want to see `3.12.x`. |
-| 3. Clone/sync the superuser pack repo | `cd ~/Code-Brain && git clone <your-repo-url>` (or `git pull` if already cloned) | **Yes** — can run git commands for you | Gets the agents-sdk code onto the Mac Mini. |
-| 4. Create virtual environment | `cd ~/Code-Brain/claude-code-superuser-pack/agents-sdk && python3.12 -m venv .venv` | **Yes** — run it for you | A venv is an isolated Python sandbox. Packages you install here won't conflict with system Python. Standard practice for any Python project. |
-| 5. Install SDK + dependencies | `source .venv/bin/activate && pip install claude-agent-sdk filelock toml httpx` | **Yes** — run it for you | Installs four packages: the Claude Agent SDK itself, `filelock` (prevents multiple agents writing to the same file), `toml` (reads config files), `httpx` (async HTTP client for talking to other machines). |
-| 6. Verify SDK | `source .venv/bin/activate && python3 -c "from claude_agent_sdk import ClaudeAgentOptions; print('OK')"` | **Yes** — run and confirm output | If it prints "OK," you're good. If it errors, the SDK didn't install correctly and Claude Code can troubleshoot. |
-| 7. Make OLLAMA_HOST permanent | Already done ✅ | — | LaunchAgent plist was created in your earlier session. |
+| ~~1. Install Python 3.12~~ | — | — | **Likely done** — venv exists, which means Python was available to create it. Have Claude Code verify: `python3.12 --version` |
+| ~~2. Verify Python~~ | `python3.12 --version` | **Yes** | Quick confirmation. |
+| ~~3. Clone/sync repo~~ | — | — | **Done.** Repo lives at `~/Code-Brain/claude-code-superuser-pack/` on Mac Mini. |
+| ~~4. Create venv~~ | — | — | **Done.** `.venv` folder exists in `agents-sdk/`. |
+| 5. Install missing packages | `source .venv/bin/activate && pip install filelock toml` | **Yes** — run it for you | **Verified via Cowork audit:** `claude-agent-sdk` (v0.1.39) and `httpx` are already installed. Only `filelock` and `toml` are missing. |
+| ~~6. Verify SDK import~~ | — | — | **Done.** Verified via Cowork — `ClaudeAgentOptions` imports correctly from `claude_agent_sdk`. |
+| ~~7. Make OLLAMA_HOST permanent~~ | — | — | **Done.** LaunchAgent plist created in earlier session. |
+
+> **Note:** Venv uses Python 3.13 (not 3.12 as originally spec'd). This is fine — the SDK works with 3.13.
 
 **Tell Claude Code on Mac Mini:**
-> "Walk me through steps 1-6 in this order. Run each command, check the output, and move on. If anything fails, troubleshoot before continuing."
+> "Install filelock and toml into the agents-sdk venv: `cd ~/Code-Brain/claude-code-superuser-pack/agents-sdk && source .venv/bin/activate && pip install filelock toml`"
 
 ---
 
 ### MacBook Pro (Dev Machine — Where You'll Paste the Phase 1 Prompt)
 
+> **Important: Git clone the repo here, don't rely on Google Drive sync.** Claude Code's Phase 1 prompt will write new files (keychain.py, hybrid_router.py, safety hooks) that need proper git tracking. Google Drive sync can corrupt `.git` internals when two machines sync the same repo simultaneously. Clone the repo independently on the MacBook Pro and use `git push`/`git pull` to sync changes between machines. Google Drive is great for backups and large assets, but git repos should live separately on each machine.
+
 | Step | Command | Claude Code can help? | What it does & why |
 |---|---|---|---|
-| 1. Install MLX-LM | `pip install mlx-lm` | **Yes** — run it for you | MLX-LM is Apple's framework for running LLMs on Apple Silicon. Chosen over Ollama here because MLX is optimized specifically for M-series chips and handles bigger models more efficiently on your 48GB machine. |
-| 2. Download Qwen3-14B | `mlx_lm.download --model mlx-community/Qwen3-14B-4bit` | **Yes** — run it for you (will take a while) | The "heavy analysis" model. Handles financial analysis, complex synthesis. The `-4bit` means it's quantized (compressed) to fit in memory while staying capable. |
-| 3. Download Qwen2.5-Coder-32B | `mlx_lm.download --model mlx-community/Qwen2.5-Coder-32B-Instruct-4bit` | **Yes** — run it for you (largest download) | Specialized for code review and programming tasks. This is the biggest model in your setup — the download may take some time. |
-| 4. Quick test MLX-LM | `mlx_lm.generate --model mlx-community/Qwen3-14B-4bit --prompt "Hello" --max-tokens 20` | **Yes** — run and confirm output | If you see generated text, MLX-LM works. If it crashes, Claude Code can check your Python version and MLX install. |
-| 5. Verify Node.js 20+ | `node --version` | **Yes** — check output | The Pixel Quantizer (Task 5 in the Claude Code prompt) uses Node.js/TypeScript with the Sharp image library. Needs v20+. If you're behind, Claude Code can run `brew install node` for you. |
-| 6. Update superuser pack | `cd ~/Code-Brain/claude-code-superuser-pack && git pull` | **Yes** — run it for you | Makes sure you have the latest code before Phase 1. |
+| 1. Clone the superuser pack repo | `cd ~/Code-Brain && git clone <your-repo-url>` | **Yes** — run it for you | Gets the full repo onto the MacBook Pro with its own independent `.git` folder. If you already have it cloned, run `git pull` instead. |
+| 2. Install MLX-LM | `pip install mlx-lm` | **Yes** — run it for you | MLX-LM is Apple's framework for running LLMs on Apple Silicon. Chosen over Ollama here because MLX is optimized specifically for M-series chips and handles bigger models more efficiently on your 48GB machine. |
+| 3. Download Qwen3-14B | `mlx_lm.download --model mlx-community/Qwen3-14B-4bit` | **Yes** — run it for you (will take a while) | The "heavy analysis" model. Handles financial analysis, complex synthesis. The `-4bit` means it's quantized (compressed) to fit in memory while staying capable. |
+| 4. Download Qwen2.5-Coder-32B | `mlx_lm.download --model mlx-community/Qwen2.5-Coder-32B-Instruct-4bit` | **Yes** — run it for you (largest download) | Specialized for code review and programming tasks. This is the biggest model in your setup — the download may take some time. |
+| 5. Quick test MLX-LM | `mlx_lm.generate --model mlx-community/Qwen3-14B-4bit --prompt "Hello" --max-tokens 20` | **Yes** — run and confirm output | If you see generated text, MLX-LM works. If it crashes, Claude Code can check your Python version and MLX install. |
+| 6. Verify Node.js 20+ | `node --version` | **Yes** — check output | The Pixel Quantizer (Task 5 in the Claude Code prompt) uses Node.js/TypeScript with the Sharp image library. Needs v20+. If you're behind, Claude Code can run `brew install node` for you. |
 
 **Tell Claude Code on MacBook Pro:**
-> "Walk me through steps 1-6. The model downloads might take a while — start them and let me know when each finishes. Verify each step before moving on."
+> "Clone the superuser pack repo if not already here, then install mlx-lm and download both Qwen3-14B-4bit and Qwen2.5-Coder-32B-Instruct-4bit models. Test that MLX-LM works. Also verify Node.js is v20+."
 
 ---
 
 ### Alienware (CUDA Specialist — Windows)
 
+> **Same as MacBook Pro:** Clone the repo via git on the Alienware too, rather than syncing through Google Drive. Claude Code can help: `git clone <your-repo-url>` in your preferred directory.
+
 | Step | Command | Claude Code can help? | What it does & why |
 |---|---|---|---|
+| 0. Clone the superuser pack repo | `git clone <your-repo-url>` in your preferred directory | **Yes** — run it for you | Independent git clone, same reason as MacBook Pro. |
 | 1. Install Ollama for Windows | Download from https://ollama.com/download/windows | **No** — manual download/installer | Same tool as Mac Mini, just the Windows version. Download and run the `.exe` installer. |
 | 2. Set OLLAMA_HOST env var | System Properties → Advanced → Environment Variables → New System Variable: `OLLAMA_HOST` = `0.0.0.0:11434` | **Partially** — Claude Code can set it via `setx OLLAMA_HOST "0.0.0.0:11434"` in Command Prompt, but a restart of Ollama is still needed | Allows LAN access. By default Ollama only listens locally. `0.0.0.0` means "listen on all network interfaces" so your MacBook can reach it. |
 | 3. Set OLLAMA_KEEP_ALIVE env var | Same location: `OLLAMA_KEEP_ALIVE` = `2m` | **Partially** — `setx OLLAMA_KEEP_ALIVE "2m"` works, but needs Ollama restart | Keeps models loaded in VRAM for 2 minutes after the last request, then unloads. This frees GPU memory for ComfyUI when Ollama isn't actively serving. |
