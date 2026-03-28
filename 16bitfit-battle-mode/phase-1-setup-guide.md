@@ -52,18 +52,23 @@ All of these steps are local installs that don't need the mesh system. Do all th
 
 ### Alienware (CUDA Specialist — Windows)
 
-> **Same as MacBook Pro:** Clone the repo via git on the Alienware too, rather than syncing through Google Drive. Claude Code can help: `git clone <your-repo-url>` in your preferred directory.
+> **All steps complete.** Verified via Claude Code session on March 28, 2026.
 
-| Step | Command | Claude Code can help? | What it does & why |
-|---|---|---|---|
-| 0. Clone the superuser pack repo | `git clone <your-repo-url>` in your preferred directory | **Yes** — run it for you | Independent git clone, same reason as MacBook Pro. |
-| 1. Install Ollama for Windows | Download from https://ollama.com/download/windows | **No** — manual download/installer | Same tool as Mac Mini, just the Windows version. Download and run the `.exe` installer. |
-| 2. Set OLLAMA_HOST env var | System Properties → Advanced → Environment Variables → New System Variable: `OLLAMA_HOST` = `0.0.0.0:11434` | **Partially** — Claude Code can set it via `setx OLLAMA_HOST "0.0.0.0:11434"` in Command Prompt, but a restart of Ollama is still needed | Allows LAN access. By default Ollama only listens locally. `0.0.0.0` means "listen on all network interfaces" so your MacBook can reach it. |
-| 3. Set OLLAMA_KEEP_ALIVE env var | Same location: `OLLAMA_KEEP_ALIVE` = `2m` | **Partially** — `setx OLLAMA_KEEP_ALIVE "2m"` works, but needs Ollama restart | Keeps models loaded in VRAM for 2 minutes after the last request, then unloads. This frees GPU memory for ComfyUI when Ollama isn't actively serving. |
-| 4. Restart Ollama | Close the Ollama system tray icon → reopen | **No** — manual GUI action | Picks up the new environment variables. |
-| 5. Pull vision model | `ollama pull qwen3-vl:7b` | **Yes** — run it for you | Qwen3-VL-7B is a vision-language model — it can look at images and analyze them. Your pipeline uses this for sprite quality checking ("Sprite Vision QA" in the routing table). |
-| 6. Verify model | `ollama run qwen3-vl:7b "Describe this test." /bye` | **Yes** — run and confirm output | Should output some text and exit. If it errors about CUDA, Claude Code can help check your NVIDIA driver version. |
-| 7. Update ComfyUI to v0.18.2+ | Depends on your install method (git pull, or ComfyUI Manager) | **Yes** — if installed via git, Claude Code can run `git pull` and check the version | Launch with `--fp16-intermediates` flag — this uses half-precision for intermediate calculations, saving VRAM. You won't need ComfyUI until Phase 2+ but better to have it ready. |
+| Step | Status |
+|---|---|
+| ~~0. Clone superuser pack repo~~ | **Done.** `C:\Users\seanw\Documents\Code-Brain\claude-code-superuser-pack`, main branch, clean. |
+| ~~1. Install Ollama~~ | **Done.** Ollama v0.18.3. |
+| ~~2. Set OLLAMA_HOST~~ | **Done.** `0.0.0.0:11434` via setx. |
+| ~~3. Set OLLAMA_KEEP_ALIVE~~ | **Done.** `2m` via setx. |
+| ~~4. Restart Ollama~~ | **Done.** |
+| ~~5. Pull vision model~~ | **Done.** `qwen3-vl:8b` (note: Ollama tags this as `:8b`, not `:7b`). |
+| ~~6. Verify model~~ | **Done.** Working on GPU, Q4_K_M quantization, 8.8B params. |
+| ~~7. Update ComfyUI~~ | **Done.** Updated via desktop app. Launch with `--fp16-intermediates`. |
+| ~~8. Firewall rule~~ | **Done.** "Ollama LAN Access" — TCP 11434 inbound, all profiles. |
+
+> **Alienware LAN IP (current, pre-mesh):** `10.0.0.219` — this will change after Deco mesh setup tomorrow.
+> **GPU:** RTX 5080, 16 GB VRAM, NVIDIA driver 581.95, CUDA 13.0.
+> **Important:** Never install xformers on this machine. SDPA (default) is correct for sm_120.
 
 **Tell Claude Code on Alienware:**
 > "Help me set the OLLAMA_HOST and OLLAMA_KEEP_ALIVE environment variables via setx, then pull the qwen3-vl:7b model and verify it works. Also check my ComfyUI version."

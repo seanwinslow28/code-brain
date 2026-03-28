@@ -33,7 +33,7 @@ This is the project command center for 16BitFit Battle Mode: a 12-week build spa
 |---|---|---|---|
 | Mac Mini M4 Pro (24GB) | Always-on orchestrator, launchd host | phi4-mini-reasoning, nomic-embed-text via Ollama | LAN: `{MINI_IP}:11434` |
 | MacBook Pro M4 Pro (48GB) | Heavyweight local inference, development | Qwen3-14B, Qwen2.5-Coder-32B via MLX-LM | Local only |
-| Alienware RTX 5080 (16GB VRAM) | CUDA: ComfyUI, LoRA training, vision QA | Qwen3-VL-7B via Ollama CUDA, ComfyUI REST | LAN: `{ALIENWARE_IP}:11434`, WOL |
+| Alienware RTX 5080 (16GB VRAM) | CUDA: ComfyUI, LoRA training, vision QA | Qwen3-VL-8B (`qwen3-vl:8b`) via Ollama CUDA, ComfyUI REST | LAN: `{ALIENWARE_IP}:11434`, WOL |
 
 ## Model-to-Machine Routing
 
@@ -44,7 +44,7 @@ This is the project command center for 16BitFit Battle Mode: a 12-week build spa
 | Financial analysis | MacBook Pro | Qwen3-14B via MLX-LM |
 | Code review / PR digest | MacBook Pro | Qwen2.5-Coder-32B via MLX-LM |
 | Heavy synthesis | MacBook Pro | Qwen3.5 (evaluate 122B MoE or 9B) via MLX-LM |
-| Sprite vision QA | Alienware | Qwen3-VL-7B via Ollama CUDA |
+| Sprite vision QA | Alienware | Qwen3-VL-8B (`qwen3-vl:8b`) via Ollama CUDA |
 | ComfyUI orchestration | Alienware | N/A (REST API to ComfyUI) |
 | Complex / fallback | Any → Claude API | Opus 4.6 ($5/$25 per MTok) or Sonnet |
 

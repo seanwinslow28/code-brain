@@ -42,8 +42,8 @@ Complete these on each machine before starting Claude Code. They take ~2-3 hours
 - [ ] Set env vars (System Properties → Environment Variables):
   - `OLLAMA_HOST` = `0.0.0.0:11434`
   - `OLLAMA_KEEP_ALIVE` = `2m`
-- [ ] Pull model: `ollama pull qwen3-vl:7b`
-- [ ] Verify: `ollama run qwen3-vl:7b "Describe this test." /bye`
+- [x] Pull model: `ollama pull qwen3-vl:8b` (note: Ollama tags this as 8b, not 7b)
+- [x] Verify: `ollama run qwen3-vl:8b "Describe this test." /bye`
 - [ ] Update ComfyUI to v0.18.2+. Launch with `--fp16-intermediates` flag
 - [ ] Verify LAN: from MacBook, `curl http://{ALIENWARE_IP}:11434/api/tags` → should list model
 - [ ] Note the Alienware's LAN IP → write it down
