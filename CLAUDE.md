@@ -4,7 +4,7 @@ This is Sean's personal command center — a second brain for Claude Code.
 
 ## What This Repo Is
 
-111 skills, 13 agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
+111 skills, 13 agents, 7 hooks, 7 domain workspaces, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
 
 ## Domain Workspaces
 
@@ -16,6 +16,7 @@ This is Sean's personal command center — a second brain for Claude Code.
 | `life-systems/` | Finance, health, learning, tasks, time, career | 9 |
 | `design-team/` | Design system + 4 review agents + design arena | 11 |
 | `vault/` | Obsidian vault (notes, prompts, RAG, Granola meeting sync) | 7 |
+| `16bitfit-battle-mode/` | 16BitFit Battle Mode: sprite pipeline, agent fleet, autoresearch | Project CLAUDE.md |
 
 ## Design Team Agents
 
@@ -100,6 +101,7 @@ agents-sdk/          # Autonomous agents (Claude Agent SDK, Python)
 ├── tests/           # pytest suite (33 tests)
 └── config.toml      # Agent config, paths, safety limits
 
+16bitfit-battle-mode/ # 16BitFit Battle Mode project (sprite pipeline + agent fleet + autoresearch)
 {6 domain dirs}/     # Working files, templates, reference, active projects
 vault/               # Obsidian vault (PARA + MOCs + Prompts + RAG)
 export-groups/       # Metadata-only manifests (for installer export)
