@@ -83,8 +83,8 @@ After reading, confirm you understand the three-machine topology, the model rout
 </context>
 
 <machine_ips>
-Mac Mini LAN IP: {REPLACE_WITH_MINI_IP}
-Alienware LAN IP: {REPLACE_WITH_ALIENWARE_IP}
+Mac Mini LAN IP: 192.168.68.200
+Alienware LAN IP: 192.168.68.201
 MacBook Pro: localhost (this machine)
 </machine_ips>
 

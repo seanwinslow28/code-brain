@@ -75,7 +75,7 @@ All of these steps are local installs that don't need the mesh system. Do all th
 
 ---
 
-## TOMORROW (March 29) — After Deco 7 Pro Mesh Setup
+## COMPLETED (March 30) — Deco 7 Pro Mesh Setup
 
 ### Step 1: Set Up the Mesh
 
