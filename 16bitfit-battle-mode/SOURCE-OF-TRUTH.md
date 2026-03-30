@@ -230,25 +230,31 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 
 ### Phase 1: Foundation (Weeks 1-2 — Mar 27 - Apr 10)
 
-**Workstream A — Three-Machine Setup:**
-- [ ] Install Ollama 0.5.x on Mac Mini: pull `phi4-mini-reasoning` (3.8B) + nomic-embed-text. Configure as launchd host.
-- [ ] Install MLX-LM on MacBook Pro (`pip install mlx-lm`): pull Qwen3-14B + Qwen2.5-Coder-32B. Benchmark MLX-LM vs Ollama (expect ~3x speed improvement).
-- [ ] Install Ollama 0.5.x on Alienware: pull Qwen3-VL-7B. Set `OLLAMA_HOST=0.0.0.0:11434`, `OLLAMA_KEEP_ALIVE=2m`.
-- [ ] Update ComfyUI to v0.18.2 on Alienware. Launch with `--fp16-intermediates` flag.
-- [ ] Build `lib/hybrid_router.py` (three-tier: Mini → MacBook → Alienware → Claude API fallback + WOL).
-- [ ] Build safety hooks: loop-detector, cost-watchdog, vault-integrity.
-- [ ] Set up macOS Keychain credential helper.
+**Workstream A — Three-Machine Setup:** ✅ COMPLETED March 28-30, 2026
+- [x] Ollama on Mac Mini: `phi4-mini-reasoning` (3.8B) + `nomic-embed-text`. LAN access permanent via LaunchAgent plist.
+- [x] MLX-LM v0.31.1 on MacBook Pro (Python 3.13 venv): `Qwen3-14B-4bit` (31 tok/s) + `Qwen2.5-Coder-32B-Instruct-4bit`.
+- [x] Ollama on Alienware: `qwen3-vl:8b` (note: tagged `:8b` not `:7b`). `OLLAMA_HOST=0.0.0.0:11434`, `OLLAMA_KEEP_ALIVE=2m`.
+- [x] ComfyUI updated on Alienware. Launch with `--fp16-intermediates`.
+- [x] Deco 7 Pro BE63 mesh network: Mac Mini `192.168.68.200`, Alienware `192.168.68.201` (static IPs, wired to bedroom Deco).
+- [x] Built `lib/hybrid_router.py` — three-tier routing with WOL, fallback chain, async health checks. 10/10 tests pass.
+- [x] Built safety hooks: loop-detector (exit 2 on 3rd dup), cost-watchdog ($0.50 default), vault-integrity (filelock + anchor check).
+- [x] Built `lib/keychain.py` — macOS Keychain credential helper with CLI.
+- [x] Updated `config.toml` with `[routing]` section for all 3 machines + 8 task mappings.
+- [x] Smoke test: 14/14 checks pass in dry-run mode.
 - [ ] Audit skills for interactive language ("ask me", "confirm with user") → replace with autonomous decision criteria.
 - [ ] Update all SDK imports: `claude-agent-sdk` package, `ClaudeAgentOptions` class.
 
 **Workstream B — Pixel Quantizer Gate Check + New Tool Evaluation:**
-- [ ] Build standalone `pixel-quantizer.ts` (7-step processing pipeline).
-- [ ] Test with synthetic video frames (manually create high-res sprite frames as input).
+- [x] Built Pixel Quantizer prototype at `16bitfit-battle-mode/pixel-quantizer/` — 13 unit tests pass, all 7 steps working.
+- [x] Tested with 3 synthetic frames: 512x512 → 128x128, 0 off-palette pixels, <30ms total, palette-compliant.
+- [x] **GATE CHECK: PASS** — algorithms are sound, architecture is solid. Caveat: needs testing with real video model output (Pika/Kling/Veo frames) to confirm with non-synthetic input.
+- **NOTE:** Alpha recovery runs before palette quantization (reordered from original spec for better results — green background pixels don't get snapped to palette colors).
+- **NOTE:** "Grid alignment" (Step 6 in SOT) is implemented as "Baseline Registration" (vertical sprite alignment). Standardize naming.
 - [ ] Install GENKAIx PixelArt Processing Nodes in ComfyUI — test as alternative to custom quantizer steps 1-2.
 - [ ] **Test Retro Diffusion rd-animation** via Replicate API — does it produce acceptable SF2-style sprites? If YES → could bypass quantizer for many animations.
 - [ ] **Test PixelLab "Animate with Text" v3** — native pixel art animation output. If quality meets SF2 standard, simplifies pipeline dramatically.
 - [ ] **Test Ludo.ai combat presets** via MCP API — fighting game animation presets with Y-offset alignment.
-- [ ] **GATE CHECK:** Does the quantizer produce acceptable pixel art from video-like input? If NO → hybrid approach needs rethinking (but rd-animation/PixelLab may provide alternative paths). If YES → proceed to Phase 2.
+- [ ] Move Pixel Quantizer to sprite pipeline repo (`16BitFit-V3` or `16BitFit-Asset-Creation`) when available.
 
 ### Phase 2: First Agents + Video Model Testing (Weeks 3-4 — Apr 10 - Apr 24)
 

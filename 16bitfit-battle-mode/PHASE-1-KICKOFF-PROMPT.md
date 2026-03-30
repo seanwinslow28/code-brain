@@ -10,49 +10,45 @@
 
 Complete these on each machine before starting Claude Code. They take ~2-3 hours total and can all be done in parallel.
 
-### Mac Mini (always-on orchestrator)
+### Mac Mini (always-on orchestrator) — COMPLETED March 28-30, 2026
 
-- [ ] Install Ollama: `curl -fsSL https://ollama.com/install.sh | sh`
-- [ ] Verify: `ollama --version` → expect `0.5.x`
-- [ ] Pull models: `ollama pull phi4-mini-reasoning && ollama pull nomic-embed-text`
-- [ ] Set LAN access: `launchctl setenv OLLAMA_HOST "0.0.0.0:11434"` → restart Ollama
-- [ ] Verify LAN: from MacBook, `curl http://{MINI_IP}:11434/api/tags` → should list models
-- [ ] Install Python 3.12: `brew install python@3.12`
-- [ ] Clone/sync the superuser pack repo to Mac Mini
-- [ ] Create venv: `cd ~/Code-Brain/claude-code-superuser-pack/agents-sdk && python3.12 -m venv .venv`
-- [ ] Install SDK: `source .venv/bin/activate && pip install claude-agent-sdk filelock toml httpx`
-- [ ] Verify SDK: `python3 -c "from claude_agent_sdk import ClaudeAgentOptions; print('OK')"`
-- [ ] Note the Mac Mini's LAN IP: `ipconfig getifaddr en0` → write it down
+- [x] Install Ollama (v0.18+)
+- [x] Pull models: `phi4-mini-reasoning` + `nomic-embed-text`
+- [x] Set LAN access: permanent via LaunchAgent plist (`OLLAMA_HOST=0.0.0.0:11434`)
+- [x] Verify LAN: confirmed from MacBook via `curl http://192.168.68.200:11434/api/tags`
+- [x] Install Python 3.13 (via Homebrew)
+- [x] Repo already cloned at `~/Code-Brain/claude-code-superuser-pack/`
+- [x] Venv created (Python 3.13) with `claude-agent-sdk`, `filelock`, `toml`, `httpx`
+- [x] SDK verified: `ClaudeAgentOptions` imports correctly
+- [x] **Static LAN IP: `192.168.68.200`** (Deco address reservation, wired to bedroom Deco)
 
-### MacBook Pro (your dev machine — where Claude Code runs)
+### MacBook Pro (dev machine) — COMPLETED March 28-30, 2026
 
-- [ ] Install MLX-LM: `pip install mlx-lm`
-- [ ] Pull models:
-  ```bash
-  mlx_lm.download --model mlx-community/Qwen3-14B-4bit
-  mlx_lm.download --model mlx-community/Qwen2.5-Coder-32B-Instruct-4bit
-  ```
-- [ ] Quick test: `mlx_lm.generate --model mlx-community/Qwen3-14B-4bit --prompt "Hello" --max-tokens 20`
-- [ ] Ensure Node.js 20+ is installed: `node --version`
-- [ ] Ensure the superuser pack repo is up to date
+- [x] Install Python 3.13 via Homebrew
+- [x] MLX-LM v0.31.1 in dedicated venv (`~/Code-Brain/mlx-lm-env`, alias: `mlxenv`)
+- [x] Models downloaded: `Qwen3-14B-4bit` (31 tok/s), `Qwen2.5-Coder-32B-Instruct-4bit`
+- [x] Node.js upgraded to v22 LTS via nvm
+- [x] Repo up to date
+- [x] Connected to Deco mesh via WiFi
 
-### Alienware (CUDA specialist)
+### Alienware (CUDA specialist) — COMPLETED March 28-30, 2026
 
-- [ ] Install Ollama for Windows: https://ollama.com/download/windows
-- [ ] Set env vars (System Properties → Environment Variables):
-  - `OLLAMA_HOST` = `0.0.0.0:11434`
-  - `OLLAMA_KEEP_ALIVE` = `2m`
-- [x] Pull model: `ollama pull qwen3-vl:8b` (note: Ollama tags this as 8b, not 7b)
-- [x] Verify: `ollama run qwen3-vl:8b "Describe this test." /bye`
-- [ ] Update ComfyUI to v0.18.2+. Launch with `--fp16-intermediates` flag
-- [ ] Verify LAN: from MacBook, `curl http://{ALIENWARE_IP}:11434/api/tags` → should list model
-- [ ] Note the Alienware's LAN IP → write it down
+- [x] Ollama v0.18.3 installed
+- [x] Env vars set: `OLLAMA_HOST=0.0.0.0:11434`, `OLLAMA_KEEP_ALIVE=2m`
+- [x] Model pulled: `qwen3-vl:8b` (Ollama tags as `:8b`, not `:7b`)
+- [x] Model verified: working on GPU, Q4_K_M, 8.8B params
+- [x] ComfyUI updated (launch with `--fp16-intermediates`)
+- [x] Firewall rule: "Ollama LAN Access" TCP 11434, all profiles
+- [x] Network set to Private
+- [x] Verified LAN from MacBook: `curl http://192.168.68.201:11434/api/tags`
+- [x] **Static LAN IP: `192.168.68.201`** (Deco address reservation, wired to bedroom Deco)
 
-### After All Machines Are Online
+### Cross-Machine Verification — COMPLETED March 30, 2026
 
-- [ ] Confirm you can reach Mac Mini from MacBook: `curl http://{MINI_IP}:11434/api/tags`
-- [ ] Confirm you can reach Alienware from MacBook: `curl http://{ALIENWARE_IP}:11434/api/tags`
-- [ ] Store any API keys in macOS Keychain (fal.ai, etc.) — Claude Code will build the helper
+- [x] MacBook → Mac Mini: `curl http://192.168.68.200:11434/api/tags` → `phi4-mini-reasoning` + `nomic-embed-text`
+- [x] MacBook → Alienware: `curl http://192.168.68.201:11434/api/tags` → `qwen3-vl:8b`
+- [x] Deco 7 Pro BE63 mesh: Living room (main) + Bedroom (satellite, wired backhaul to machines)
+- [x] Static IPs assigned via Address Reservation
 
 ---
 
