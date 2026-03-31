@@ -1,13 +1,19 @@
 ---
 granola_id: 6441e0c0-855d-4d4a-be96-41bd778d526c
-title: "Ticket cleanup"
-type: note
-created: 2026-03-30T15:24:31.889Z
-updated: 2026-03-30T15:34:38.589Z
-attendees: 
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: "1:1 with Ed covering ticket cleanup."
+context: the-block
+created: 2026-03-30
+source: granola-sync
+attendees:
   - erupkus@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Ticket cleanup-transcript.md]]"
 ---
+
 ### Bug Fixes and Ticket Review
 
 - Change functionality issue identified

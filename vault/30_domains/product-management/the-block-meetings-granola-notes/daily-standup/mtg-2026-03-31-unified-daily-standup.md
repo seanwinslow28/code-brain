@@ -1,10 +1,15 @@
 ---
 granola_id: fc99f844-7059-4b04-a723-b7e0ff3749a1
-title: "Unified Daily Standup"
-type: note
-created: 2026-03-31T14:00:33.606Z
-updated: 2026-03-31T18:33:21.098Z
-attendees: 
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Daily standup covering unified daily standup.
+context: the-block
+created: 2026-03-31
+source: granola-sync
+attendees:
   - bmendoza@theblock.co
   - mprice@theblock.co
   - npivcevic@theblock.co
@@ -27,6 +32,7 @@ attendees:
   - ramuald.vishneuski@ventionteams.com
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript.md]]"
 ---
+
 ### Team Updates & Progress
 
 - Alex: Fixed jobs bugs but found more issues than resolved

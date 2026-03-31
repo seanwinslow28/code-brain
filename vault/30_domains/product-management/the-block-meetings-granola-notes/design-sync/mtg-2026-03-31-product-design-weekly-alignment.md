@@ -1,10 +1,15 @@
 ---
 granola_id: 535edff8-6985-411b-a319-95c0b5fe0dbc
-title: "Product + Design Weekly Alignment"
-type: note
-created: 2026-03-31T16:59:04.935Z
-updated: 2026-03-31T17:24:02.826Z
-attendees: 
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: Design sync discussing product + design weekly alignment.
+context: the-block
+created: 2026-03-31
+source: granola-sync
+attendees:
   - jgragg@theblock.co
   - erupkus@theblock.co
   - melshahat@theblock.co
@@ -13,6 +18,7 @@ attendees:
   - jcarusi@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-transcript.md]]"
 ---
+
 ### Step 4 (Jira Software Cloud — Update Issue) has its Description field stuck in the "Extra Fields" section, making it read-only. I need you to delete Step 4 and recreate it as a fresh step.
 
 HERE IS WHAT TO DO:
