@@ -3,7 +3,7 @@ granola_id: 535edff8-6985-411b-a319-95c0b5fe0dbc
 title: "Product + Design Weekly Alignment - Transcript"
 type: transcript
 created: 2026-03-31T16:59:04.935Z
-updated: 2026-03-31T16:59:59.305Z
+updated: 2026-03-31T17:24:02.826Z
 attendees: 
   - jgragg@theblock.co
   - erupkus@theblock.co
@@ -294,5 +294,41 @@ But. I just put out. There.
 
 ### Guest (2026-03-31T17:16:06.698Z)
 
-Code to design. I know that I would get it exactly right if. If that's the case, if it's needed, if it's helped. Yeah. I think it depends on. Like, the priorities and when we start working on stuff, like I had, Brian mentally reserved for the homepage takeover. So homepage CTO. Yeah, but, like, if. If we're, like, a couple of weeks away from development. Then, you know, why not? We met in terms of the singular and starting Block. I met with the devs. We met with the deaths on Friday. This last Friday. So it was sort of, like, scoped it out on, like, you know, what are the requirements, what we need to. Feed into the singular app so that we have the data to. To populate those designs. And it's nothing crazy. I think the. The biggest thing is.
+Code to design. I know that I would get it exactly right if. If that's the case, if it's needed, if it's helped. Yeah. I think it depends on. Like, the priorities and when we start working on stuff, like I had, Brian mentally reserved for the homepage takeover. So homepage CTO. Yeah, but, like, if. If we're, like, a couple of weeks away from development. Then, you know, why not? We met in terms of the singular and starting Block. I met with the devs. We met with the deaths on Friday. This last Friday. So it was sort of, like, scoped it out on, like, you know, what are the requirements, what we need to. Feed into the singular app so that we have the data to. To populate those designs. And it's nothing crazy. I think the. The biggest thing is. The lmax, the price ticker. Yeah. Like, just to make sure what to. To be sure what we want, how often we want those prices updated and, like, you know, how live we want to look. But other than that, I think even if we use the lmax API, that actually will be even better. So, like, if we had lmax branding, I think we can kill two birds with one stone. But, yeah. So, nickel, I had nicola. Sort of mentally reserved for working on that data delivery aspect. Got it. Yeah. Like a WordPress because we don't need a WordPress page. So, like, sort of make each episode so. So you can, like, select the headlines you want, select the. The people, you know, their names and their titles at their who are supposed to appear on the screen. Because there's a. You need to manage all the. Content, basically. And, yeah, I guess. Yeah, Brian. I'm not sure, like, are we done with the design? Are we, like, all finished? And. No. Oh, from a conceptual standpoint. Yes, more or less from a. It's not been designed. It's not been developed in singular, though, like at the. The design level. So. So we need, like. So we'd need, like. Like, either yours or Brian's help in putting that figma design into the singular app. I think so. Yeah, exactly. Are we ready? I think so. I think that I could go ahead and take some of what Jamie has put together. Maybe. Maybe I'll put that on me and then in the short term and try to figure out. I'd love to be adding actual value more than just sort of talking in meetings. So if possible. That would. That would give me something to really accomplish and feel good about. I think that would be fantastic if you took. Maybe just focus on the lower thirds for now. And just because you can animate them in the software. So it's like I haven't looked at it yet, but if you wanted to take a look, and I think. You're able to kind of interpret those videos better than I was, that would be huge, because then we know we can achieve everything we've been working on. Okay. That's kind of why I brought it up. Because. Sorry. If I just wanted to make sure Brian wasn't already, like, working on that stuff or doing anything in there because I don't want to. I don't want to spend, like, four hours looking at something. And then for my time to have been, like, not useful at all, that that would be a bummer. So I'll. I will dig into that. But I have acs module. I'll make sure that Serena and Claudine have something really sort of more meaty to share. Although Serena's done a shitload of work on cto, but I'll make sure that there's something more like update worthy by Monday. And then I will dig back into singular and make sure we're good there. What else do we have as a priority from. From this product team that I've not been mentioning? If anything. That's basically what I'm thinking. Like the election Hub is basically all ready to go. So the video is, like, the only thing. Well, it's in QA now, but once QA is done and poly market gives us a go ahead, we'll be ready. And, you know, for the social push, we'll need the video. So maybe, you know, I don't know if that happens next week or whenever. Probably before mid April, I would say. Matt, I don't know. Did we promise them a date at all for the election hub? Early to mid April? Yeah. And then I'll make sure you have the screens you need, Matt. For the App Store as well. I just have to hunt that down. This is like tripping me out that I don't see my work. All right. Is everybody. So then we're good, I guess. We don't. Yeah. Sean also DM me the thread where we were talking about the sponsored course promo video as well. This is a little bit. Don't know why. Maybe like, I don't know. A few weeks from now. But that I guess would. But it would also want to promo video for that as well. And over the slack and our slack thread in our product design team channel.
+
+### You (2026-03-31T17:21:32.859Z)
+
+Yeah, Josh, it's just basically, it would be similar to the campus like intro video where it's just kind of like an introduction of what this course is. Type of a deal. So it should be very quick. I don't know who would do it. Kelvin or whoever or there's a voiceover. Honestly, we could, we could play, play around with it. But yeah, like I said, it wouldn't be for a little while. So the elections hub is, is more important right now.
+
+### Guest (2026-03-31T17:21:54.298Z)
+
+Yeah. Okay. Gotcha. Gotcha. That. That was what I was conflating with the election Hub video earlier was the poly market sponsored course video. And I did think it would just be like kelvin sitting in his studio being, like, exciting news from campus and poly market or whatever, and then it would have a few, like. Like a few little UI animations, but it would be very subtle. Kind of like you're saying, Sean, exactly. The campus video that we produced. Cool. But it sounds like that that not only the election hover coverage one is more pressing, but it sounds like that one's a little bit more involved based on the current script. So we can talk about that tomorrow. But davis and Jamie have that script. I'm sure I have it as well, but. So I'll make sure that we discuss that tomorrow at our stand up. With that team.
+
+### You (2026-03-31T17:22:46.219Z)
+
+Thank you.
+
+### Guest (2026-03-31T17:22:47.898Z)
+
+Yeah. Thank you all. And thanks again for your patience for the last three weeks as I've been. Cool. All right. That's it for me. If anybody wants to see that video, I have it. I'll send it of my crash. It's gnarly. Would you. Would you like to see that for real? All right, I'll send you that, Sean. Cool. Cool. So it's all first person, but it's. It's worth watching. All right, I'll send it to you, too, Matt.
+
+### You (2026-03-31T17:23:17.179Z)
+
+Yeah, I'm interested.
+
+### Guest (2026-03-31T17:23:19.338Z)
+
+Yeah, it's. It's really. It's pretty crazy. So, yeah, I'll send them over. That way you guys can see how serious it is. Okay, cool. I love this. All right. Just not me. I don't want. All right, all right. Well, don't watch it, but. Or do. But cool. That way you can. You can see I'm not just full of anyway. All right, well, I appreciate you all. I think we have some marching orders here. And we will. We'll meet with. I know we'll see some of you tomorrow. Certainly you. You seem to show up to those brand calls, so I appreciate it. All right. Thanks, everyone.
+
+### You (2026-03-31T17:23:55.499Z)
+
+Thank you guys.
+
+### Guest (2026-03-31T17:23:56.698Z)
+
+See ya. Thanks.
+
+### You (2026-03-31T17:23:57.179Z)
+
+Later.
 
