@@ -1,6 +1,8 @@
 # Creative Brief Library
 
 > Reusable agent personas organized by project type. Select 3-4 briefs per arena session. Mix and match across categories — a dashboard project might benefit from one dashboard-specific brief and one borrowed from the editorial category for fresh perspective.
+>
+> **DNA Pairing:** Each layout brief is now paired with an Aesthetic DNA profile (see `references/aesthetic-dna-library.md`) to create the full agent identity. The layout brief determines WHERE things go. The DNA profile determines HOW they look, move, and feel. See the pairing guidance table in the DNA library for recommended and unexpected combinations.
 
 ---
 
