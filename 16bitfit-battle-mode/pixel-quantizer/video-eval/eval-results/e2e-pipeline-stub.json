@@ -1,0 +1,43 @@
+{
+  "mode": "stub",
+  "date": "2026-04-01T14:33:59.323101",
+  "steps": {
+    "1_routing": {
+      "status": "PASS",
+      "strategy": "hybrid",
+      "keyframe_adapter": "Nano Banana 2",
+      "interpolation_adapter": "GMFSS Fortuna (Local)"
+    },
+    "2_keyframes": {
+      "status": "PASS",
+      "source": "stub synthetic",
+      "count": 3
+    },
+    "3_interpolation": {
+      "status": "PASS",
+      "adapter": "stub",
+      "video_size": 3145728
+    },
+    "4_extraction": {
+      "status": "PASS",
+      "frame_count": 8
+    },
+    "5_scoring": {
+      "status": "PASS",
+      "frames_scored": 8,
+      "avg_palette": 1.0,
+      "avg_outline": 0.0,
+      "avg_background": 0.875,
+      "avg_character": 0.417,
+      "avg_overall": 0.646,
+      "gate_check": "PASS"
+    },
+    "6_packing": {
+      "status": "NOT WIRED - separate repo"
+    },
+    "7_validation": {
+      "status": "NOT WIRED - separate repo"
+    }
+  },
+  "overall": "PASS"
+}

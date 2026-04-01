@@ -1,0 +1,108 @@
+{
+  "prompt": {
+    "1": {
+      "class_type": "LoadImage",
+      "inputs": {
+        "image": "{{INPUT_IMAGE}}"
+      }
+    },
+    "2": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "{{POSITIVE_PROMPT}}",
+        "clip": ["5", 1]
+      }
+    },
+    "3": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "blurry, low quality, distorted, deformed, anti-aliased, gradient background, watermark, text",
+        "clip": ["5", 1]
+      }
+    },
+    "4": {
+      "class_type": "CheckpointLoaderSimple",
+      "inputs": {
+        "ckpt_name": "wan2.2_i2v_high_noise_14B_fp16.safetensors"
+      }
+    },
+    "5": {
+      "class_type": "LoraLoader",
+      "inputs": {
+        "lora_name": "wan22_pixel_animate.safetensors",
+        "strength_model": 0.85,
+        "strength_clip": 0.85,
+        "model": ["4", 0],
+        "clip": ["4", 1]
+      },
+      "_meta": {
+        "title": "Pixel Animation LoRA (styly-agents/Wan2-2-pixel-animate)"
+      }
+    },
+    "6": {
+      "class_type": "Wan_I2V_Conditioning",
+      "inputs": {
+        "image": ["1", 0],
+        "positive": ["2", 0],
+        "negative": ["3", 0],
+        "vae": ["4", 2],
+        "width": 480,
+        "height": 480,
+        "length": 49
+      },
+      "_meta": {
+        "title": "Wan I2V Conditioning — 49 frames = ~2 seconds at 24fps"
+      }
+    },
+    "7": {
+      "class_type": "KSampler",
+      "inputs": {
+        "seed": 42,
+        "steps": 30,
+        "cfg": 6.0,
+        "sampler_name": "euler_ancestral",
+        "scheduler": "normal",
+        "denoise": 0.85,
+        "model": ["5", 0],
+        "positive": ["6", 0],
+        "negative": ["6", 1],
+        "latent_image": ["6", 2]
+      },
+      "_meta": {
+        "title": "KSampler — SDPA attention (NO xformers on RTX 5080 sm_120)"
+      }
+    },
+    "8": {
+      "class_type": "VAEDecode",
+      "inputs": {
+        "samples": ["7", 0],
+        "vae": ["4", 2]
+      }
+    },
+    "9": {
+      "class_type": "VHS_VideoCombine",
+      "inputs": {
+        "images": ["8", 0],
+        "frame_rate": 24,
+        "format": "video/h264-mp4",
+        "filename_prefix": "wan22_pixel_animate",
+        "quality": 90
+      },
+      "_meta": {
+        "title": "Save as MP4 — 24fps"
+      }
+    }
+  },
+  "_meta": {
+    "workflow_name": "Wan 2.2 I2V + Pixel Animation LoRA",
+    "description": "Static sprite → Wan 2.2 I2V with pixel animation LoRA → animated video. Uses SDPA attention (not xformers). RTX 5080 compatible.",
+    "target_machine": "Alienware (192.168.68.201:8188)",
+    "lora_source": "https://huggingface.co/styly-agents/Wan2-2-pixel-animate",
+    "constraints": {
+      "attention": "SDPA only — NO xformers (crashes on sm_120)",
+      "precision": "--force-fp16",
+      "vram": "16GB RTX 5080",
+      "green_screen": "Input image should have #00FF00 chroma key background"
+    }
+  }
+}

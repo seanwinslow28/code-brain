@@ -1,0 +1,35 @@
+{
+  "pipeline": "E2E Hybrid (NB2 keyframes \u2192 Wan 2.2 5B \u2192 Pixel Quantizer)",
+  "date": "2026-04-01",
+  "steps_completed": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "steps_deferred": [
+    6,
+    7
+  ],
+  "keyframe_source": "NB2 (Phase 2)",
+  "video_model": "Wan 2.2 ti2v 5B fp16",
+  "video_resolution": "480x480",
+  "video_frames": 25,
+  "scored_frames": 8,
+  "metrics": {
+    "palette": 0.84,
+    "outline": 0.533,
+    "background": 0.763,
+    "character": 0.751,
+    "overall": 0.737
+  },
+  "gate_check": "PASS",
+  "visual_assessment": {
+    "character_identity": "PRESERVED \u2014 Sean character maintained across all frames",
+    "green_screen": "PRESERVED \u2014 #00FF00 background intact",
+    "pixel_art_style": "GOOD \u2014 bold outlines, cel shading, minimal anti-aliasing",
+    "animation_motion": "SUBTLE \u2014 idle bounce, not full walk cycle locomotion",
+    "sf2_quality": "CLOSE \u2014 needs Pixel Quantizer cleanup but base quality is strong"
+  }
+}

@@ -43,6 +43,21 @@ max_turns = 15
 max_budget_usd = 0.25
 confidence_threshold = 80
 
+[agents.sprint_health]
+enabled = true
+skills = ["sprint-roadmap", "vault-read-write"]
+max_turns = 15
+max_budget_usd = 0.50
+project_key = "BE"
+schedule = "Friday 15:00"
+
+[agents.meeting_defender]
+enabled = true
+skills = ["meeting-prep", "vault-read-write"]
+max_turns = 10
+max_budget_usd = 0.25
+schedule = "Monday 07:00"
+
 [agents.health_audit]
 enabled = false
 skills = ["health-habits", "vault-read-write"]

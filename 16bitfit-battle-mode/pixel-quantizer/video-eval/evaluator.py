@@ -277,12 +277,92 @@ def extract_frames_from_video(video: GeneratedVideo, target_count: int = 8) -> l
             for i in indices
         ]
 
-    # For real video files, we'd use ffmpeg
-    # This is a placeholder for when real adapters are connected
+    if video.format == "mp4":
+        return _extract_frames_ffmpeg(video, target_count)
+
     raise NotImplementedError(
-        f"Frame extraction for {video.format} not yet implemented. "
-        f"Requires ffmpeg subprocess integration."
+        f"Frame extraction for {video.format} not yet implemented."
     )
+
+
+def _extract_frames_ffmpeg(video: GeneratedVideo, target_count: int) -> list[GeneratedFrame]:
+    """Extract frames from an MP4 video using ffmpeg.
+
+    Writes the video to a temp file, extracts frames as PNGs,
+    reads them back as RGBA GeneratedFrame objects.
+    """
+    import subprocess
+    import tempfile
+
+    with tempfile.TemporaryDirectory(prefix="video_eval_") as tmpdir:
+        tmp = Path(tmpdir)
+        video_path = tmp / "input.mp4"
+        video_path.write_bytes(video.data)
+
+        # Extract frames as PNG
+        frame_pattern = str(tmp / "frame_%04d.png")
+
+        # Use fps filter to get evenly-spaced frames
+        total_frames_est = int(video.duration_secs * video.fps)
+        if total_frames_est <= 0:
+            total_frames_est = target_count
+        fps_filter = target_count / video.duration_secs if video.duration_secs > 0 else 8
+
+        result = subprocess.run(
+            [
+                "ffmpeg", "-i", str(video_path),
+                "-vf", f"fps={fps_filter:.2f}",
+                "-frames:v", str(target_count),
+                frame_pattern,
+            ],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+
+        if result.returncode != 0:
+            raise RuntimeError(f"ffmpeg frame extraction failed: {result.stderr[:300]}")
+
+        # Read extracted frames and convert to RGBA
+        frames: list[GeneratedFrame] = []
+        for i in range(1, target_count + 1):
+            frame_path = tmp / f"frame_{i:04d}.png"
+            if not frame_path.exists():
+                break
+
+            png_data = frame_path.read_bytes()
+
+            # Convert PNG to raw RGBA using ffmpeg
+            rgba_result = subprocess.run(
+                [
+                    "ffmpeg", "-i", str(frame_path),
+                    "-pix_fmt", "rgba",
+                    "-f", "rawvideo",
+                    "pipe:1",
+                ],
+                capture_output=True,
+                timeout=10,
+            )
+
+            if rgba_result.returncode == 0 and rgba_result.stdout:
+                frames.append(GeneratedFrame(
+                    data=rgba_result.stdout,
+                    width=video.width,
+                    height=video.height,
+                    format="rgba",
+                    metadata={"frame_index": i - 1, "source": "ffmpeg_extracted"},
+                ))
+            else:
+                # Fallback: store PNG data (can't score RGBA metrics but preserves frame)
+                frames.append(GeneratedFrame(
+                    data=png_data,
+                    width=video.width,
+                    height=video.height,
+                    format="png",
+                    metadata={"frame_index": i - 1, "source": "ffmpeg_extracted_png"},
+                ))
+
+    return frames
 
 
 async def evaluate_model(
