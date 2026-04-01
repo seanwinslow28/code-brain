@@ -1,0 +1,207 @@
+{
+  "source_file": "test-chase-statement.csv",
+  "sanitized_at": "2026-03-31T18:29:43.843305",
+  "transaction_count": 20,
+  "transactions": [
+    {
+      "tx_hash": "7a4b3ef02af6",
+      "date": "03/01/2026",
+      "description": "CLAUDE.AI SUBSCRIPTION",
+      "category": "Shopping",
+      "type": "Sale",
+      "amount": 217.75,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "1019c0675301",
+      "date": "03/01/2026",
+      "description": "PERPLEXITY AI",
+      "category": "Shopping",
+      "type": "Sale",
+      "amount": 200.0,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "f3d74a2801ef",
+      "date": "03/03/2026",
+      "description": "WHOLE FOODS MARKET",
+      "category": "Groceries",
+      "type": "Sale",
+      "amount": 87.32,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "bb9d4de05d46",
+      "date": "03/05/2026",
+      "description": "TST* DISHOOM BOSTON",
+      "category": "Food & Drink",
+      "type": "Sale",
+      "amount": 124.5,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "5edf37b604a3",
+      "date": "03/07/2026",
+      "description": "UBER *TRIP",
+      "category": "Travel",
+      "type": "Sale",
+      "amount": 23.45,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "98b240690202",
+      "date": "03/08/2026",
+      "description": "SEED.COM 8446463586 CA",
+      "category": "Health & Wellness",
+      "type": "Sale",
+      "amount": 134.97,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "56bda18fa80a",
+      "date": "03/10/2026",
+      "description": "ADOBE CREATIVE CLOUD",
+      "category": "Shopping",
+      "type": "Sale",
+      "amount": 32.0,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "6ebd2ee5a665",
+      "date": "03/10/2026",
+      "description": "AP VAPE SHOP",
+      "category": "Shopping",
+      "type": "Sale",
+      "amount": 156.0,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "eae3f1879f56",
+      "date": "03/12/2026",
+      "description": "INTEREST CHARGE ON PURCHASES",
+      "category": "Fee",
+      "type": "Fee",
+      "amount": 198.5,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "e0cbec08145f",
+      "date": "03/14/2026",
+      "description": "NETFLIX",
+      "category": "Entertainment",
+      "type": "Sale",
+      "amount": 22.99,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "e0a28a05a47f",
+      "date": "03/15/2026",
+      "description": "SUPABASE INC",
+      "category": "Shopping",
+      "type": "Sale",
+      "amount": 25.0,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "563c85b83776",
+      "date": "03/16/2026",
+      "description": "GOOGLE *Google One",
+      "category": "Shopping",
+      "type": "Sale",
+      "amount": 272.18,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "84933f9ad70e",
+      "date": "03/18/2026",
+      "description": "FIGMA INC",
+      "category": "Shopping",
+      "type": "Sale",
+      "amount": 17.42,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "c13d45c1b920",
+      "date": "03/20/2026",
+      "description": "TRADER JOE'S",
+      "category": "Groceries",
+      "type": "Sale",
+      "amount": 62.15,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "5e5916da18b6",
+      "date": "03/22/2026",
+      "description": "UBER *EATS",
+      "category": "Food & Drink",
+      "type": "Sale",
+      "amount": 45.8,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "76a218c92779",
+      "date": "03/25/2026",
+      "description": "Payment Thank You - Web",
+      "category": "Payment",
+      "type": "Payment",
+      "amount": 2500.0,
+      "is_charge": false,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "d9d93be9bea0",
+      "date": "03/27/2026",
+      "description": "GRAYMATTERCO",
+      "category": "Health & Wellness",
+      "type": "Sale",
+      "amount": 47.5,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "4a009e51299f",
+      "date": "03/28/2026",
+      "description": "STARBUCKS",
+      "category": "Food & Drink",
+      "type": "Sale",
+      "amount": 6.75,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "c66d2d33424a",
+      "date": "03/29/2026",
+      "description": "NATE AI NEWS",
+      "category": "Shopping",
+      "type": "Sale",
+      "amount": 20.0,
+      "is_charge": true,
+      "source": "Chase"
+    },
+    {
+      "tx_hash": "35f7e84851af",
+      "date": "03/30/2026",
+      "description": "YMCA MEMBERSHIP",
+      "category": "Recreation",
+      "type": "Sale",
+      "amount": 50.0,
+      "is_charge": true,
+      "source": "Chase"
+    }
+  ]
+}

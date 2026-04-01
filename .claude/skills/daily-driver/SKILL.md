@@ -64,7 +64,7 @@ Reading your calendar (if available)... 3 meetings today.
 3. [Meeting Prep] Sprint planning at 2pm - review board first
 4. [Creative] Continue animation prototype if time permits
 
-Which should be your #1 focus today?
+Based on carry-overs and Focus.md priorities, your #1 focus today is: PR review for Campus auth.
 ```
 
 **Example 2: EOD Review**
@@ -94,7 +94,7 @@ Appended to vault/10_timeline/daily/2026-02-20.md
 2. Read any active project notes referenced in yesterday's log from `vault/20_projects/`
 3. Check calendar via Google Calendar MCP — query BOTH `sean.winslow28@gmail.com` (personal) AND `swinslow@theblock.co` (The Block work) calendars in parallel. Use `claude.ai Google Calendar` (gcal_list_events) or `google-workspace` (get_events) tools.
 4. Scan Slack for overnight activity (see Step 1b below)
-5. Ask: "Anything new on your plate today?"
+5. Check `vault/02_Areas/Focus.md` for current focus areas and priority goals. Use these to inform today's priorities instead of asking.
 
 ### Step 1b: Slack Overnight Scan
 
@@ -175,7 +175,7 @@ When injecting content at an anchor, find the `<!-- anchor-name -->` comment and
 ### Step 1: Review
 
 1. Read today's daily note from `vault/10_timeline/daily/`
-2. Ask: "What did you actually get done today?" (or review conversation history)
+2. Review today's daily note entries (claude-sessions, jira-log, side-projects anchors) to determine what was accomplished. Do NOT ask — infer from the written record.
 3. Mark tasks complete/incomplete
 
 ### Step 2: Capture

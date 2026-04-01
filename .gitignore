@@ -36,6 +36,9 @@ desktop.ini
 .coverage
 htmlcov/
 
+# Dependencies
+node_modules/
+
 # Build artifacts
 dist/
 build/
