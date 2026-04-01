@@ -1,0 +1,73 @@
+{
+  "prompt": {
+    "1": {
+      "class_type": "LoadImage",
+      "inputs": {
+        "image": "{{KEYFRAME_1}}"
+      }
+    },
+    "2": {
+      "class_type": "LoadImage",
+      "inputs": {
+        "image": "{{KEYFRAME_2}}"
+      }
+    },
+    "3": {
+      "class_type": "LoadImage",
+      "inputs": {
+        "image": "{{KEYFRAME_3}}"
+      }
+    },
+    "4": {
+      "class_type": "ImageBatch",
+      "inputs": {
+        "image1": ["1", 0],
+        "image2": ["2", 0]
+      }
+    },
+    "5": {
+      "class_type": "ImageBatch",
+      "inputs": {
+        "image1": ["4", 0],
+        "image2": ["3", 0]
+      }
+    },
+    "6": {
+      "class_type": "GMFSS_Fortuna_VFI",
+      "inputs": {
+        "frames": ["5", 0],
+        "multiplier": 4,
+        "optional_interpolation_states": null
+      },
+      "_meta": {
+        "title": "GMFSS Fortuna — anime-optimized frame interpolation (4x = inserts 3 frames between each keyframe pair)"
+      }
+    },
+    "7": {
+      "class_type": "VHS_VideoCombine",
+      "inputs": {
+        "images": ["6", 0],
+        "frame_rate": 12,
+        "format": "video/h264-mp4",
+        "filename_prefix": "gmfss_interpolated",
+        "quality": 90
+      },
+      "_meta": {
+        "title": "Save as MP4 — 12fps (pixel art friendly frame rate)"
+      }
+    }
+  },
+  "_meta": {
+    "workflow_name": "GMFSS Fortuna Frame Interpolation",
+    "description": "Takes 3-4 keyframes and interpolates between them using GMFSS Fortuna. Anime-optimized, works well for pixel art style. LOCAL + FREE.",
+    "target_machine": "Alienware (192.168.68.201:8188)",
+    "node_pack": "Fannovel16/ComfyUI-Frame-Interpolation",
+    "install_command": "cd /path/to/ComfyUI/custom_nodes && git clone https://github.com/Fannovel16/ComfyUI-Frame-Interpolation",
+    "constraints": {
+      "attention": "SDPA only",
+      "min_keyframes": 2,
+      "max_keyframes": 5,
+      "multiplier_range": "2-8 (4 recommended for sprite animation)"
+    }
+  }
+}

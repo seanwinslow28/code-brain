@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sean.agent.sprint-health</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/bin/python3</string>
+        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/sprint_health.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PYTHONPATH</key>
+        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk</string>
+    </dict>
+
+    <!-- Friday 3:00 PM -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key>
+        <integer>5</integer>
+        <key>Hour</key>
+        <integer>15</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/sprint-health-stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/sprint-health-stderr.log</string>
+</dict>
+</plist>
