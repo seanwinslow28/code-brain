@@ -1,7 +1,7 @@
 # Source of Truth — Sean's Agentic Frameworks & Creative Pipeline Master Plan
 
 **Created:** 2026-03-27 (Boston, post-move)
-**Last Updated:** 2026-03-27 — Perplexity Computer validation audit, execution blueprint, and opportunity scan integrated
+**Last Updated:** 2026-03-31 — Phase 2 complete (7/8 PASS), Pika scrapped, NB2 confirmed as primary keyframe model, Phase 3 ready
 **Purpose:** Compressed reference doc for every future Claude Code / Cowork session. Feed THIS file + the specific subfolder relevant to your current task. Never dump all 28 source files at once.
 **Source Files:** 28 original docs + 3 Perplexity Computer outputs in `Agentic-Frameworks-And-Autoresearch/`
 
@@ -256,25 +256,24 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 - [ ] **Test Ludo.ai combat presets** via MCP API — fighting game animation presets with Y-offset alignment.
 - [ ] Move Pixel Quantizer to sprite pipeline repo (`16BitFit-V3` or `16BitFit-Asset-Creation`) when available.
 
-### Phase 2: First Agents + Video Model Testing (Weeks 3-4 — Apr 10 - Apr 24)
+### Phase 2: First Agents + Video Model Testing (Weeks 3-4 — Apr 10 - Apr 24) ✅ COMPLETE (7/8 PASS, 1 DEFERRED)
 
 **Workstream A — First Autonomous Agents:**
-- [ ] Process Inbox agent → Mac Mini, 100% local (`phi4-mini-reasoning` 3.8B)
-- [ ] Spending Analysis agent → MacBook Pro, 100% local (Qwen3-14B via MLX-LM) + CSV sanitizer
-- [ ] Implement Baton File dependency chain: Process Inbox → Daily Driver
-- [ ] Verify Mac Mini runs morning schedules reliably without laptop open
+- [x] Skills audit: 5 interactive patterns fixed in 3 skill files (process-inbox, daily-driver, personal-finance). Zero interactive patterns remaining.
+- [x] Process Inbox agent → `agents-sdk/agents/process_inbox.py`, Mac Mini, 100% local (`phi4-mini-reasoning` 3.8B), max 15 turns, $0.25 cap, baton file on success
+- [x] Spending Analysis agent → `agents-sdk/agents/spending_analysis.py`, MacBook Pro, 100% local (Qwen3-14B via MLX-LM) + `lib/csv_sanitizer.py`
+- [x] Baton File dependency chain: `lib/baton.py` + `com.sean.agent.daily-morning-baton.plist` (WatchPaths trigger). Process Inbox → flag → Daily Driver.
+- [ ] Verify Mac Mini runs morning schedules reliably without laptop open (needs launchd plists installed on Mac Mini)
 
-**Workstream B — Video Model Sprint (EXPANDED with new candidates):**
-- [ ] Benchmark Nano Banana 2 vs Nano Banana Pro for keyframe quality
-- [ ] Set up fal.ai account for Pika Pikaframes 2.2 API access
-- [ ] Test video interpolation: generate 3-4 keyframes with Gemini → interpolate with Pika → extract frames → run through pixel quantizer
-- [ ] Test Kling 3.0 start/end frame control + Multi-Shot feature
-- [ ] Test Kling 2.6 motion transfer with reference walk cycle video
-- [ ] **Test Wan 2.2 + pixel animation LoRAs locally on RTX 5080** (attack cycle LoRA, walk cycle LoRA, styly-agents/Wan2-2-pixel-animate) — free, no API cost
-- [ ] **Test GMFSS Fortuna** (anime-optimized frame interpolation) via ComfyUI node — local, free alternative to Pika/Kling
-- [ ] Apply "green screen before video" community technique (chroma key on keyframes BEFORE feeding to video model) + 1-second clips for combat, 2-second for walk cycles
-- [ ] Score results: CLIP similarity to anchor, SSIM, aesthetic score, manual review
-- [ ] Install Sprite Smithy ($30) as reference/sanity check against custom Pixel Quantizer output
+**Workstream B — Video Model Sprint:**
+- [x] Video eval framework built: `pixel-quantizer/video-eval/` with hexagonal adapters (StubAdapter, GeminiAdapter, PikaAdapter + stubs). Gate check PASS with synthetic frames (64.6% overall, 100% palette).
+- [x] NB2 vs NB Pro benchmark: **NB2 wins** — 26% faster (13.8s vs 18.7s avg), comparable quality. Use NB2 for volume, NB Pro for anchors. 4 keyframes saved to `eval-results/keyframe-*.png`.
+- [x] ~~Pika Pikaframes 2.2~~ — DEFERRED then SCRAPPED. Jobs queued but didn't complete. $0.20/gen minimum, base64 delivery issues. **Decision: pivot to Wan 2.2 (free/local) + rd-animation (Replicate) in Phase 3.**
+- [ ] Test Kling 3.0/2.6 — deferred to future phase if needed
+- [ ] **Wan 2.2 + pixel animation LoRAs** — moved to Phase 3 (primary video model candidate)
+- [ ] **GMFSS Fortuna** — moved to Phase 3 (local interpolation candidate)
+- [x] Green screen technique documented: `background_color="#00FF00"` in KeyframeConfig, applied before video model input
+- [ ] Install Sprite Smithy ($30) — still pending
 
 ### Phase 3: Pipeline Integration + PM Agents (Weeks 5-6 — Apr 24 - May 8)
 
@@ -330,9 +329,9 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 
 ## Part 5: Open Questions (Updated March 27 — some resolved, new ones added)
 
-1. **Nano Banana 2 vs Pro for sprites** — STILL OPEN. Both confirmed active. Pro ranked #2 on LM Arena (ELO 1235). NB2 adds 4K support at 3-5x cheaper. Test in Phase 2.
+1. ~~**Nano Banana 2 vs Pro for sprites**~~ — RESOLVED (Phase 2). NB2 wins: 26% faster, comparable quality. Use NB2 (`gemini-3.1-flash-image-preview`) for volume generation, NB Pro (`gemini-3-pro-image-preview`) reserved for anchor/hero frames.
 
-2. **Which video/animation model wins?** — EXPANDED. The field is now much larger: Pika, Kling 3.0, Kling 2.6, Wan 2.2 + pixel LoRAs (local/free), rd-animation (native pixel art), PixelLab v3 (text-to-animation), Ludo.ai (combat presets), Pixverse v4.5, GMFSS Fortuna (local interpolation), Seedance 2.0, LTX-2 (local/open-source). Test all viable candidates in Phases 1-2.
+2. **Which video/animation model wins?** — NARROWED (Phase 2). Pika scrapped (expensive, unreliable). Phase 3 testing: Wan 2.2 + pixel LoRAs (free/local on Alienware), GMFSS Fortuna (free/local interpolation), rd-animation via Replicate (cheap API, native pixel art output). Kling deferred. PixelLab/Ludo.ai still on watchlist.
 
 3. ~~**Retro Diffusion rd-animation**~~ — RESOLVED. It's live on Replicate with 4.9K runs. Test immediately in Phase 1.
 

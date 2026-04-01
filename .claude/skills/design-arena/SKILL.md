@@ -85,7 +85,7 @@ If no design spec exists, run the **Condensed Design Interview** (see below).
 
 **Step 1.5 — Aesthetic DNA Assignment**
 
-Each agent needs a unique visual identity — not just a different layout. Assign an **Aesthetic DNA profile** from `references/aesthetic-dna-library.md` to each agent. DNA profiles define 7 dimensions of visual identity:
+Each agent needs a unique visual identity — not just a different layout. Assign an **Aesthetic DNA profile** from `references/aesthetic-dna-library.md` to each agent. DNA profiles define 6 dimensions of visual identity (the 7th — layout — comes from the layout brief):
 
 | Dimension | What It Controls |
 |-----------|-----------------|
