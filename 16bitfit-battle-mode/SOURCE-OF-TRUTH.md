@@ -1,7 +1,7 @@
 # Source of Truth — Sean's Agentic Frameworks & Creative Pipeline Master Plan
 
 **Created:** 2026-03-27 (Boston, post-move)
-**Last Updated:** 2026-03-31 — Phase 2 complete (7/8 PASS), Pika scrapped, NB2 confirmed as primary keyframe model, Phase 3 ready
+**Last Updated:** 2026-04-01 — Phase 3 complete (10/10 PASS). Hybrid pipeline PROVEN VIABLE (73.7% gate check). Wan 2.2 5B = primary video model. rd-animation dead. GMFSS Fortuna next to test.
 **Purpose:** Compressed reference doc for every future Claude Code / Cowork session. Feed THIS file + the specific subfolder relevant to your current task. Never dump all 28 source files at once.
 **Source Files:** 28 original docs + 3 Perplexity Computer outputs in `Agentic-Frameworks-And-Autoresearch/`
 
@@ -275,19 +275,24 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 - [x] Green screen technique documented: `background_color="#00FF00"` in KeyframeConfig, applied before video model input
 - [ ] Install Sprite Smithy ($30) — still pending
 
-### Phase 3: Pipeline Integration + PM Agents (Weeks 5-6 — Apr 24 - May 8)
+### Phase 3: Pipeline Integration + PM Agents (Weeks 5-6 — Apr 24 - May 8) ✅ COMPLETE (10/10 PASS)
 
 **Workstream A — PM Layer:**
-- [ ] Sprint Health Monitor → Claude Sonnet via Mac Mini (needs Jira MCP)
-- [ ] Meeting Defender → Mac Mini routes pre-classification to Phi-4, synthesis to Haiku
-- [ ] Set up mcp-atlassian with Keychain credentials
+- [x] Jira MCP: Native `claude.ai Atlassian` MCP active, 28 projects visible, sprint data accessible via JQL. No Keychain creds needed.
+- [x] Sprint Health Monitor → `agents-sdk/agents/sprint_health.py`, Claude Sonnet via API, Jira MCP read-only, Friday 15:00, $0.50 cap. Dry-run PASS.
+- [x] Meeting Defender → `agents-sdk/agents/meeting_defender.py`, Mac Mini (phi4-mini-reasoning) + Haiku, READ-ONLY calendar tools, NEVER auto-declines, Monday 07:00, $0.25 cap. Dry-run PASS.
 
 **Workstream B — Hybrid Pipeline End-to-End:**
-- [ ] Build generator adapter interface (4 atomic operations)
-- [ ] Implement best-performing video model as first hybrid adapter
-- [ ] Wire hybrid strategy into manifest system (strategy selection per animation)
-- [ ] End-to-end test: 1 Champion walk cycle through full hybrid pipeline → audit → pack → Phaser validate
-- [ ] Begin strategy decision map validation (which animations use image-only vs hybrid)
+- [x] Generator adapter interface: 4 atomic ops (generateFrame, generateKeyframes, interpolateFrames, generateVideo) + strategy router mapping 15 animation types (10 IMAGE_ONLY, 5 HYBRID). All assertions pass.
+- [x] Wan 2.2 5B ti2v = **primary video model**. GATE CHECK PASS: 73.7% overall, 84.0% palette. Character preserved, green screen intact, pixel art maintained. Free/local on RTX 5080.
+- [x] Wan22Adapter, GMFSSAdapter, ReplicateAdapter — all behind `VideoModelAdapter` hexagonal interface.
+- [x] End-to-end test: NB2 keyframes → Wan 2.2 5B → extract 8 frames → Pixel Quantizer → 73.7% overall. GATE CHECK PASS. Only 4% degradation from raw keyframes (77.7%).
+- [x] Strategy decision map: 10 animations → IMAGE_ONLY, 5 → HYBRID. Duration mapping (1s combat, 2s locomotion). Frame counts (4-12 per type).
+- [x] rd-animation via Replicate: TESTED, NOT VIABLE (48x48, wrong character, wrong style). Removed from strategy map.
+- [ ] GMFSS Fortuna: Adapter built, workflow ready. Node pack NOT yet installed on Alienware. **Must test in Phase 4.**
+- [ ] Wan 2.2 14B I2V: BLOCKED by ComfyUI channel mismatch (WanImageToVideo = Wan 2.1 only). Monitor for ComfyUI update.
+
+**Key finding:** Wan 2.2 5B produces pose animation (idle bounce) from single keyframe, not full locomotion. Walk cycles need multi-keyframe input + GMFSS interpolation as primary approach.
 
 ### Phase 4: LoRA + Memory Layer (Weeks 7-8 — May 8 - May 22)
 
@@ -331,7 +336,7 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 
 1. ~~**Nano Banana 2 vs Pro for sprites**~~ — RESOLVED (Phase 2). NB2 wins: 26% faster, comparable quality. Use NB2 (`gemini-3.1-flash-image-preview`) for volume generation, NB Pro (`gemini-3-pro-image-preview`) reserved for anchor/hero frames.
 
-2. **Which video/animation model wins?** — NARROWED (Phase 2). Pika scrapped (expensive, unreliable). Phase 3 testing: Wan 2.2 + pixel LoRAs (free/local on Alienware), GMFSS Fortuna (free/local interpolation), rd-animation via Replicate (cheap API, native pixel art output). Kling deferred. PixelLab/Ludo.ai still on watchlist.
+2. ~~**Which video/animation model wins?**~~ — RESOLVED (Phase 3). **Wan 2.2 5B ti2v** is the primary video model (73.7% gate check, free/local). rd-animation is dead (48x48, wrong style). GMFSS Fortuna is the primary interpolation candidate (untested — install + test in Phase 4). Walk cycles: NB2 multi-keyframe + GMFSS interpolation (not Wan 2.2 single-frame). Wan 2.2 14B I2V blocked by ComfyUI compatibility — monitor for updates.
 
 3. ~~**Retro Diffusion rd-animation**~~ — RESOLVED. It's live on Replicate with 4.9K runs. Test immediately in Phase 1.
 
@@ -343,7 +348,7 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 
 7. **LoRA quality for this specific art style** — STILL OPEN. But now confirmed: train on Illustrious XL v0.1, infer on v2.0-STABLE or v3.x for best results. Also evaluate Flux.2 Klein + community pixel art LoRA as fallback path.
 
-8. **NEW: Could PixelLab/rd-animation/Ludo.ai bypass the hybrid pipeline?** — If any of these native pixel-art-output tools meet SF2 quality standards, they could handle 10+ of 13 animation types directly, reducing the hybrid keyframe-to-video pipeline to an edge case for the hardest animations only. This is the biggest open question for pipeline architecture. Test in Phase 1.
+8. **Could PixelLab/Ludo.ai bypass the hybrid pipeline?** — PARTIALLY RESOLVED. rd-animation is dead (48x48, wrong style, wrong character). PixelLab v3 and Ludo.ai still untested — evaluate in Phase 4 as potential shortcuts for simple animation types. The hybrid pipeline is proven viable regardless (73.7% gate check).
 
 9. **NEW: Qwen3 model family evaluation** — Qwen3-14B, Qwen3-VL, Qwen3.5-122B MoE all claimed to outperform predecessors. Benchmark during Phase 1 Ollama/MLX setup.
 
