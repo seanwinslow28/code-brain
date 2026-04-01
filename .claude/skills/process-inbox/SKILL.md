@@ -91,4 +91,4 @@ Output a summary table:
 - If classification is uncertain, leave in inbox with `status: needs-review`
 - Preserve original content — only add/update frontmatter and rename
 - Use `[[wikilinks]]` to connect to existing notes when relevant concepts are detected
-- Ask the user before moving files if more than 10 are queued (batch confirmation)
+- If more than 10 files are queued, process all of them — do NOT pause for confirmation. Log the batch count in the summary report. For any file where classification confidence is below 80%, tag with `#triage/human` and leave in inbox with `status: needs-review` instead of moving.

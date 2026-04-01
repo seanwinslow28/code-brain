@@ -1,0 +1,18 @@
+[
+  { "hex": "#F5D6C6", "r": 245, "g": 214, "b": 198, "name": "skin" },
+  { "hex": "#C2A769", "r": 194, "g": 167, "b": 105, "name": "hair" },
+  { "hex": "#4682B4", "r": 70, "g": 130, "b": 180, "name": "eyes" },
+  { "hex": "#F2F0EF", "r": 242, "g": 240, "b": 239, "name": "tank_top" },
+  { "hex": "#2323FF", "r": 35, "g": 35, "b": 255, "name": "pants" },
+  { "hex": "#F5F5F5", "r": 245, "g": 245, "b": 245, "name": "shoes" },
+  { "hex": "#272929", "r": 39, "g": 41, "b": 41, "name": "outline" },
+  { "hex": "#000000", "r": 0, "g": 0, "b": 0, "name": "black" },
+  { "hex": "#FFFFFF", "r": 255, "g": 255, "b": 255, "name": "white" },
+  { "hex": "#D4B5A5", "r": 212, "g": 181, "b": 165, "name": "skin_shadow" },
+  { "hex": "#B89A58", "r": 184, "g": 154, "b": 88, "name": "hair_shadow" },
+  { "hex": "#3A6B94", "r": 58, "g": 107, "b": 148, "name": "eyes_shadow" },
+  { "hex": "#D4D2D0", "r": 212, "g": 210, "b": 208, "name": "tank_top_shadow" },
+  { "hex": "#1A1ABF", "r": 26, "g": 26, "b": 191, "name": "pants_shadow" },
+  { "hex": "#D4D4D4", "r": 212, "g": 212, "b": 212, "name": "shoes_shadow" },
+  { "hex": "#00FF00", "r": 0, "g": 255, "b": 0, "name": "chroma_key" }
+]

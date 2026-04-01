@@ -288,6 +288,8 @@ def detect_anomalies(df: pd.DataFrame, threshold=3.0) -> pd.DataFrame:
     return anomalies[['date', 'description', 'amount', 'category', 'z_score']]
 ```
 
+**Autonomous mode:** Do NOT ask the user to review anomalies. Instead, output all anomalies as a structured markdown table in the report with a `## Flagged Anomalies` section. Tag each anomaly with a severity (HIGH: z>5, MEDIUM: z>3) and include the category average for context. The user will review the table asynchronously.
+
 ### 5. Reporting Templates
 
 **Monthly report** — generate to `vault/Areas/Finance/monthly/`:

@@ -1,0 +1,27 @@
+{
+  "name": "pixel-quantizer",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/cli.ts",
+  "scripts": {
+    "test": "vitest run",
+    "generate-test-data": "tsx test/generate-test-data.ts",
+    "quantize": "tsx src/cli.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "pino": "^10.3.1",
+    "sharp": "^0.34.5",
+    "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "@types/yargs": "^17.0.35",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.2",
+    "vitest": "^4.1.2"
+  }
+}
