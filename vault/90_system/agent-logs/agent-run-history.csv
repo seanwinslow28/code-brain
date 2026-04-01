@@ -1,0 +1,2 @@
+date,time,agent,mode,status,cost_usd,duration_ms,turns,notes
+2026-04-01,17:00:09,daily-driver,evening,error,,,,unhandled errors in a TaskGroup (1 sub-exception)
