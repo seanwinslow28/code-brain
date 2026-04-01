@@ -161,7 +161,7 @@ Map the three-file architecture to ComfyUI: `prepare.py` = input images + evalua
 - **Scoring:** ImageReward ComfyUI node (ZaneA/ComfyUI-ImageReward) as primary fitness function — already proven in ComfyGI
 - **Starting workflow:** Use the official NB2 Animated Sprite Sheet ComfyUI template (Mar 7, 2026) as the mutable artifact
 - **Quality metrics upgrade:** Replace CLIP+SSIM+aesthetic with four-stage gate: (1) hard gates (palette, size), (2) DISTS + DINOv2 cosine for perceptual consistency, (3) CLIP + EDOKS for style/color, (4) cross-frame SSIM + DINOv2 identity. Add Qwen3-VL LLM-as-Judge for structured rubric grading with failure tags.
-- ~60-120 experiments/hour on RTX 5080. Use `--fp16-intermediates` flag for reduced VRAM.
+- ~60-120 experiments/hour on RTX 5080. Use `--force-fp16` flag for reduced VRAM.
 
 **This depends on Workstream A infrastructure:** The Mac Mini orchestrates, the Alienware runs ComfyUI + scoring, WOL wakes the Alienware for overnight runs.
 
@@ -177,7 +177,7 @@ Map the three-file architecture to ComfyUI: `prepare.py` = input images + evalua
 | Dataset | 30-50 PNGs of your art style, 1024px+ | Nearest-neighbor upscaling only |
 | Training time | 30-90 minutes | 10 epochs, 10-15 repeats |
 
-**Critical RTX 5080 requirements:** PyTorch ≥2.7.0 stable cu128 (nightly no longer needed), CUDA 12.8+, cuDNN 9.x, NO xformers (use SDPA), kohya_ss dev branch only. ComfyUI v0.18.2+ with `--fp16-intermediates` flag for VRAM savings.
+**Critical RTX 5080 requirements:** PyTorch ≥2.7.0 stable cu128 (nightly no longer needed), CUDA 12.8+, cuDNN 9.x, NO xformers (use SDPA), kohya_ss dev branch only. ComfyUI v0.18.2+ with `--force-fp16` flag for VRAM savings.
 
 **VRAM Budget (16GB):**
 
@@ -234,7 +234,7 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 - [x] Ollama on Mac Mini: `phi4-mini-reasoning` (3.8B) + `nomic-embed-text`. LAN access permanent via LaunchAgent plist.
 - [x] MLX-LM v0.31.1 on MacBook Pro (Python 3.13 venv): `Qwen3-14B-4bit` (31 tok/s) + `Qwen2.5-Coder-32B-Instruct-4bit`.
 - [x] Ollama on Alienware: `qwen3-vl:8b` (note: tagged `:8b` not `:7b`). `OLLAMA_HOST=0.0.0.0:11434`, `OLLAMA_KEEP_ALIVE=2m`.
-- [x] ComfyUI updated on Alienware. Launch with `--fp16-intermediates`.
+- [x] ComfyUI updated on Alienware. Launch with `--force-fp16`.
 - [x] Deco 7 Pro BE63 mesh network: Mac Mini `192.168.68.200`, Alienware `192.168.68.201` (static IPs, wired to bedroom Deco).
 - [x] Built `lib/hybrid_router.py` — three-tier routing with WOL, fallback chain, async health checks. 10/10 tests pass.
 - [x] Built safety hooks: loop-detector (exit 2 on 3rd dup), cost-watchdog ($0.50 default), vault-integrity (filelock + anchor check).

@@ -19,7 +19,7 @@
 - [ ] Confirm machines are online:
   - `curl http://192.168.68.200:11434/api/tags` → Mac Mini
   - `curl http://192.168.68.201:11434/api/tags` → Alienware
-- [ ] Verify ComfyUI launches on the Alienware with `--fp16-intermediates` flag
+- [ ] Verify ComfyUI launches on the Alienware with `--force-fp16` flag (from `C:\Users\seanw\Documents\Code-Brain\ComfyUI`)
 
 ---
 
@@ -80,7 +80,7 @@ CRITICAL — all previous constraints still apply, plus:
 - Class name is `ClaudeAgentOptions` (NOT `ClaudeCodeOptions`)
 - Never use `dangerouslySkipPermissions`
 - Credentials come from macOS Keychain via `lib/keychain.py`
-- RTX 5080: SDPA only (NO xformers — crashes on sm_120). Use `--fp16-intermediates` with ComfyUI.
+- RTX 5080: SDPA only (NO xformers — crashes on sm_120). Use `--force-fp16` with ComfyUI.
 - Wan 2.2 is the latest OPEN SOURCE version. Do NOT use Wan 2.5 — it is NOT open source.
 - Mac Mini runs `phi4-mini-reasoning` (3.8B), NOT "phi4" (14B)
 - Alienware vision model is `qwen3-vl:8b` (NOT `qwen3-vl:7b`)

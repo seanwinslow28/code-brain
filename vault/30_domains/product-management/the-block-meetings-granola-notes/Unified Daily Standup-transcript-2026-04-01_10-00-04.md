@@ -3,7 +3,7 @@ granola_id: defb5e37-f079-4d73-a7b4-f5dcdec369cf
 title: "Unified Daily Standup - Transcript"
 type: transcript
 created: 2026-04-01T14:00:04.312Z
-updated: 2026-04-01T14:00:04.924Z
+updated: 2026-04-01T14:24:24.801Z
 attendees: 
   - bmendoza@theblock.co
   - mprice@theblock.co
@@ -335,5 +335,21 @@ Thank you.
 
 ### You (2026-04-01T14:23:31.071Z)
 
-And. Yeah, so we went through everybody. No updates on my end. Pretty much working on the same things that I was working on yesterday. I will. I will get back to you, Nikita, about everything that you were just talking about when it comes to the new UI. I'll look into it. And make sure that we're actually following the, you know, what's. What's better for you guys? What. What makes it easier?
+And. Yeah, so we went through everybody. No updates on my end. Pretty much working on the same things that I was working on yesterday. I will. I will get back to you, Nikita, about everything that you were just talking about when it comes to the new UI. I'll look into it. And make sure that we're actually following the, you know, what's. What's better for you guys? What. What makes it easier? So that's it from my end. Does anybody else have anything they want to discuss before we head out? All right.
+
+### Guest (2026-04-01T14:24:10.830Z)
+
+So.
+
+### You (2026-04-01T14:24:12.271Z)
+
+All right. Thank you, everybody. I'll talk to you tomorrow.
+
+### Guest (2026-04-01T14:24:14.350Z)
+
+Thank you. Bye guys. Thank you.
+
+### You (2026-04-01T14:24:18.431Z)
+
+Howdy, guys.
 
