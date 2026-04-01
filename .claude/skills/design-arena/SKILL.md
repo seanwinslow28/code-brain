@@ -83,33 +83,130 @@ If a design spec exists, summarize it and confirm with the user: *"I found your 
 
 If no design spec exists, run the **Condensed Design Interview** (see below).
 
-**Step 2 — Creative Brief Configuration**
-Propose 3-4 agent briefs based on the project type. Pull from `references/creative-brief-library.md` and customize to the specific project.
+**Step 1.5 — Aesthetic DNA Assignment**
 
-Present briefs to the user for approval. The user may:
-- Approve all briefs as-is
-- Swap out a brief for a different one
-- Modify a brief's creative direction
+Each agent needs a unique visual identity — not just a different layout. Assign an **Aesthetic DNA profile** from `references/aesthetic-dna-library.md` to each agent. DNA profiles define 7 dimensions of visual identity:
+
+| Dimension | What It Controls |
+|-----------|-----------------|
+| Design Movement | Overall visual philosophy (Editorial Swiss, Neobrutalist, etc.) |
+| Typography | Specific fonts with weights — NON-NEGOTIABLE, agents must use their assigned fonts |
+| Color Application | How shared palette tokens get applied (monochromatic vs gradient-heavy vs functional-only) |
+| Texture & Materiality | Surface treatment (grain, glass, scanlines, dot-grid, or intentionally flat) |
+| Motion Language | Easing, physics, entrance choreography, timing |
+| Signature Interaction | One mandatory bespoke moment that makes someone screenshot the design |
+
+**DNA selection rules:**
+- No two agents in the same session share a DNA profile
+- Pick profiles that are maximally different from each other (different font families, different texture approaches, different motion languages)
+- Default to 2 natural pairings + 1-2 unexpected pairings for creative range
+- If the user named reference sites in the interview, bias one profile toward that aesthetic and make the others deliberately different
+
+Quick reference (full profiles in `references/aesthetic-dna-library.md`):
+
+| DNA Profile | Feels Like | Key Differentiator |
+|-------------|-----------|-------------------|
+| Editorial Swiss | Magazine spread | Typography IS the design; extreme restraint |
+| Neobrutalist | Zine / poster | Thick borders, offset shadows, raw energy |
+| Glassmorphism Aurora | Premium fintech at 2am | Frosted glass, luminous borders, aurora orbs |
+| Terminal Operator | Beautiful Bloomberg | All-monospace, CRT scanlines, ticker data |
+| Minimal Luxury | Aesop product page | Extreme whitespace, whisper-quiet animation |
+| Data Brutalism | Bloomberg meets FT | Numbers are oversized art, functional color |
+| Kinetic Scroll | Apple product launch | Scroll IS the interaction, pinned sections |
+| Bento Garden | Apple comparison page | Mixed-size card grid, 3D tilt hover |
+| Retro Digital | Modern Game Boy | Pixel grid, stepped animation, limited palette |
+| Dark Cinematic | Nolan title sequence | Film grain, clip-path reveals, spotlight hover |
+
+**Step 2 — Creative Brief Configuration**
+Propose 3-4 agent assignments, each combining a **layout brief** (from `references/creative-brief-library.md`) with an **Aesthetic DNA profile** (from `references/aesthetic-dna-library.md`). Present both together, e.g.:
+
+> - **Agent A:** Dense Operator layout + Terminal Operator DNA
+> - **Agent B:** Narrative Flow layout + Editorial Swiss DNA
+> - **Agent C:** Split Cockpit layout + Dark Cinematic DNA
+> - **Agent D:** Command Center layout + Glassmorphism Aurora DNA
+
+Present assignments to the user for approval. The user may:
+- Approve all assignments as-is
+- Swap a DNA profile for a different one
+- Swap a layout brief for a different one
+- Request an unexpected pairing for creative tension
+- Modify a brief or DNA's creative direction
 - Add or remove agents (3-4 is the sweet spot)
 
 **Step 3 — Agent Team Deployment**
-Create the Agent Team. The lead agent (you) coordinates. Each creative agent receives:
+Create the Agent Team. The lead agent (you) coordinates. Each creative agent receives a structured prompt built from their layout brief + Aesthetic DNA profile.
 
-1. **Shared context** (identical for all agents):
-   - The project's design constraint document (existing spec or interview output)
-   - Anti-patterns list (what NOT to do)
-   - Target tech stack and component library
-   - Instruction to reference `prompting-beautiful-ui` skill for visual vocabulary
-   - Instruction to reference `micro-interaction-patterns` skill for motion design
+**Agent Prompt Template** (fill in per agent from their assignments):
 
-2. **Unique context** (different per agent):
-   - Their specific creative brief (layout philosophy, density, hierarchy emphasis)
-   - A unique design frame name in the `.pen` file (e.g., `arena-agent-a-dense`, `arena-agent-b-spacious`)
-   - Instruction: "Your design must be meaningfully different from the other agents. You share the same color palette, typography, and spacing tokens. Your creative freedom is in composition, layout, information hierarchy, component arrangement, and interaction patterns."
+~~~markdown
+# Agent [X]: [Layout Brief Name] — [DNA Profile Name]
 
-3. **Output target**:
-   - **Pencil mode (default):** Each agent designs on a separate frame in the Pencil canvas using the Pencil MCP tools. Designs are visible to you in real-time.
-   - **Code mode (fallback):** Each agent generates a standalone React + Tailwind page in a `/design-arena/` subdirectory. Run `npm run dev` to view.
+## Your Design Identity
+You are designing with the **[DNA Profile Name]** aesthetic. This is your
+visual worldview. Everything you create must feel like it belongs to this
+movement. Read your full DNA profile in `references/aesthetic-dna-library.md`.
+
+### Design Movement
+[Movement description from DNA profile]
+
+### Typography (NON-NEGOTIABLE — use these exact fonts)
+- Headings: [Font] [Weight]
+- Body: [Font] [Weight]
+- Data/Mono: [Font] [Weight]
+
+### Color Application (same palette, YOUR interpretation)
+[Color application strategy from DNA profile — ratios, where primary
+appears, neutral tinting approach]
+
+### Texture & Materiality
+[Texture approach from DNA profile — technique, opacity, blend mode]
+
+### Motion Language
+[Motion approach from DNA profile — easing, duration, stagger, physics]
+
+### Signature Interaction (REQUIRED — this is your showpiece)
+[Signature interaction from DNA profile — MUST be implemented, not just
+described. This is the thing that makes someone screenshot your design.]
+
+## Layout Brief
+[Layout philosophy from creative-brief-library.md — structure, density,
+information hierarchy approach]
+
+## Banned Patterns (violating these = failed design)
+- Inter/Roboto/Arial as your only font
+- Purple/indigo gradients
+- Cards nested inside cards with uniform padding
+- Pure gray text (#666, #888) — use tinted neutrals
+- Pure black (#000000) backgrounds — use near-black with tint
+- shadow-lg on everything without elevation hierarchy
+- "transition: all 0.3s ease" as the only animation
+- Symmetric hero sections with even accent distribution
+- Everything looking equally important (no hierarchy)
+- Looking like the other agents' designs
+
+## Anti-Convergence Self-Check
+Before finalizing, verify:
+1. Could someone tell your design apart from the others in under 2 seconds?
+2. Is your signature interaction implemented and functional?
+3. Are you using YOUR assigned fonts, not system defaults?
+4. Is your texture/materiality approach visible in the output?
+If any answer is "no," revise until all are "yes."
+
+## Shared Constraints
+- Project design tokens: [from spec or interview — palette, spacing scale]
+- Tech stack: [React/Tailwind/etc.]
+- Accessibility: WCAG AA, 44px touch targets, prefers-reduced-motion
+- Performance: only animate transform and opacity, 60fps target
+- Reference: `prompting-beautiful-ui` skill for techniques, `micro-interaction-patterns` for motion code
+~~~
+
+Each agent also receives:
+- A unique design frame name in the `.pen` file (e.g., `arena-agent-a-terminal-operator`, `arena-agent-b-editorial-swiss`)
+- The project's design constraint document (existing spec or interview output)
+
+**Output target:**
+- **Pencil mode (default):** Each agent designs on a separate frame in the Pencil canvas using the Pencil MCP tools. Designs are visible to you in real-time.
+- **Code mode (fallback):** Each agent generates a standalone React + Tailwind page in a `/design-arena/` subdirectory. Run `npm run dev` to view.
 
 **Step 4 — Live Steering**
 While agents work, you can:
@@ -216,9 +313,10 @@ Compile answers into a constraint brief. This becomes the shared context for all
 
 This skill orchestrates other skills — it does not duplicate their content.
 
-| Phase | Skills Referenced | Assigned To |
+| Phase | Skills Referenced | Role |
 |---|---|---|
-| Act 1 (Creative) | `prompting-beautiful-ui`, `micro-interaction-patterns` | Creative agents |
+| Act 1 (DNA Assignment) | `prompting-beautiful-ui` | **Core dependency** — DNA profiles draw from its design movements, font pairings, texture techniques, and banned patterns list |
+| Act 1 (Creative) | `prompting-beautiful-ui`, `micro-interaction-patterns` | Creative agents reference for implementation techniques |
 | Act 2 (Evaluate) | `creative-director`, `visual-polish-checklist` | Lead agent (you + Claude) |
 | Act 3 (Build) | `react-vite-tailwind`, `tailwind-advanced-patterns`, `animation-library-mastery` | Build agents |
 | Act 3 (Review) | Design team agents (UI Reviewer, Accessibility, Enforcer, Polish) | Read-only reviewers |
@@ -231,8 +329,12 @@ For evaluation criteria and scoring, see `references/evaluation-rubric.md`.
 ## Success Criteria
 
 - [ ] Context assessment completed before any agent deployment
-- [ ] User approved all creative briefs before agents started
-- [ ] Each agent produced a meaningfully different layout interpretation
+- [ ] User approved all layout brief + Aesthetic DNA assignments before agents started
+- [ ] Each agent used its assigned typography (not Inter/system defaults)
+- [ ] Each agent's signature interaction is implemented and functional
+- [ ] No two agents share the same Aesthetic DNA profile
+- [ ] Banned patterns list was enforced (no AI slop indicators)
+- [ ] Each agent produced a meaningfully different visual interpretation (not just layout variation)
 - [ ] User evaluated every agent's output with specific keep/reject decisions
 - [ ] A `design-direction.md` document was saved to the project directory
 - [ ] Option B prototype was offered for interaction-heavy projects
