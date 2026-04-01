@@ -1,0 +1,1 @@
+/Users/seanwinslow/.claude/plugins/marketplaces/last30days-skill/SKILL.md
