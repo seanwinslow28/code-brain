@@ -30,14 +30,18 @@ skills = ["preserve-session", "vault-read-write"]
 
 [agents.spending_analysis]
 enabled = true
-skills = ["subscription-audit", "vault-read-write"]
+skills = ["personal-finance", "subscription-audit", "vault-read-write"]
 input_dir = "life-systems/finance"
 output_dir = "vault/50_sources/finance"
+max_turns = 20
+max_budget_usd = 0.25
 
 [agents.process_inbox]
-enabled = false
+enabled = true
 skills = ["process-inbox", "vault-read-write"]
-confirmation_threshold = 10
+max_turns = 15
+max_budget_usd = 0.25
+confidence_threshold = 80
 
 [agents.health_audit]
 enabled = false
@@ -55,3 +59,46 @@ permission_mode = "acceptEdits"
 [logging]
 log_dir = "vault/90_system/agent-logs"
 log_level = "INFO"
+
+# ─── Three-Machine Routing ───────────────────────────────────────────
+
+[routing]
+health_check_timeout_secs = 3
+health_check_interval_secs = 60
+fallback_to_api = true
+
+[routing.machines.mac_mini]
+host = "192.168.68.200"
+port = 11434
+tier = 1
+runtime = "ollama"
+always_on = true
+models = ["phi4-mini-reasoning", "phi4-mini", "nomic-embed-text"]
+
+[routing.machines.macbook_pro]
+host = "127.0.0.1"
+port = 8080
+tier = 2
+runtime = "mlx-lm"
+always_on = false
+models = ["Qwen3-14B", "Qwen2.5-Coder-32B", "Qwen3.5"]
+
+[routing.machines.alienware]
+host = "192.168.68.201"
+port = 11434
+tier = 3
+runtime = "ollama"
+always_on = false
+wol_mac = "B4:E9:B8:F7:71:47"
+models = ["Qwen3-VL-7B"]
+
+# Task → model → machine mapping
+[routing.task_map]
+inbox_triage = { model = "phi4-mini-reasoning", machine = "mac_mini" }
+vault_embeddings = { model = "nomic-embed-text", machine = "mac_mini" }
+anki_cards = { model = "phi4-mini", machine = "mac_mini" }
+financial_analysis = { model = "Qwen3-14B", machine = "macbook_pro" }
+code_review = { model = "Qwen2.5-Coder-32B", machine = "macbook_pro" }
+heavy_synthesis = { model = "Qwen3.5", machine = "macbook_pro" }
+sprite_vision_qa = { model = "Qwen3-VL-7B", machine = "alienware" }
+comfyui_orchestration = { model = "none", machine = "alienware" }
