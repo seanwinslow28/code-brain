@@ -1,98 +1,144 @@
 ---
 name: etf-page-creator
-description: WordPress ETF page creation assistant for The Block. Guides data collection, validates inputs, and formats output for copy-paste into WordPress custom fields. Handles Track Insight IDs, TradingView symbols, issuers, fees, categories, and SEO metadata. Use when asked to "create an ETF page", "add a new ETF", "update ETF data", "ETF page", or any crypto ETF page workflow.
+description: Streamline WordPress ETF (Exchange-Traded Fund) page creation for The Block's website. Use when user needs to create or update ETF pages with structured data including Track Insight IDs, symbols, issuers, trading data, categories, and SEO metadata. Guides data collection, validates inputs, and formats output for copy-paste into WordPress fields.
 ---
 
-# ETF Page Creator — The Block
+# ETF Page Creator
 
-## Purpose
+Create properly formatted WordPress ETF pages for The Block's website with structured data collection and validation.
 
-Streamline creation of WordPress ETF (Exchange-Traded Fund) pages for The Block's website. Guides data collection for all required fields, validates inputs, auto-generates SEO metadata, and produces a copy-paste ready checklist matching WordPress field order.
+## Workflow Overview
 
-## When to Use
+1. **Determine mode**: New ETF or update existing
+2. **Collect data**: Guide user through all required fields
+3. **Validate & enrich**: Check data format, optionally search for missing info
+4. **Format output**: Generate copy-paste ready checklist matching WordPress field order
 
-- **New ETF page:** "Create an ETF page for [fund name]"
-- **Update existing:** "Update the GBTC ETF page fee"
-- **Batch creation:** "Create pages for these 5 new Bitcoin ETFs"
-- **Data enrichment:** "Find the Track Insight ID for [ETF]"
+## Step 1: Determine Mode
 
-## Workflow
+Ask user: "Are you creating a **new ETF page** or **updating an existing one**?"
 
-### Step 1: Determine Mode
+**If updating**: Ask which fields need updating, skip straight to those fields in data collection.
 
-Ask: "Are you creating a **new ETF page** or **updating an existing one**?"
+**If creating new**: Proceed with full data collection workflow below.
 
-- **New:** Full data collection workflow below
-- **Update:** Ask which fields need updating, skip to those fields
+## Step 2: Data Collection
 
-### Step 2: Collect Data
+Collect data systematically using the form below. If user doesn't have certain data, offer to search for it using web_search.
 
-Collect systematically. If user doesn't have data, offer to search for it.
+### Required Fields (always collect)
 
-#### Required Fields
+**Page Title** (ETF full name)
+- Example: "Grayscale Bitcoin Trust"
+- Validation: Should be the official ETF name
 
-| Field | Format | Example | Validation |
-|-------|--------|---------|------------|
-| **Page Title** | ETF full name | Grayscale Bitcoin Trust | Official ETF name |
-| **Symbol** | Ticker (all caps) | GBTC | 3-5 characters, uppercase |
-| **Type** | Dropdown | Spot / Futures / Other | Select one |
-| **Status** | Dropdown | Pending / Approved / Live | Select one |
+**Symbol** (ticker/short name)
+- Example: "GBTC"
+- Validation: All caps, typically 3-5 characters
+- Data source hint: TwelveData API (https://api.twelvedata.com/etf)
 
-#### External Integration Fields
+**Type** (dropdown selection)
+- Options: Spot / Futures / Other
+- Default: Spot for most Bitcoin/Ethereum ETFs
 
-| Field | Where to Find | Format |
-|-------|--------------|--------|
-| **Track Insight ID** | `https://cloud.datasets.sh/e/trackinsight-web/v0/shares` | Alphanumeric `share_id` from API |
-| **TradingView Symbol** | TradingView widget configurator | `EXCHANGE:SYMBOL` (e.g., `NASDAQ:GBTC`) |
+**Status** (dropdown selection)
+- Options: Pending / Approved / Live
+- Use: "Pending" for applications, "Live" for trading ETFs
 
-TradingView Symbol is optional — leave empty if not available (chart will be hidden).
+### External Integration Fields
 
-#### ETF Details
+**Track Insight ID**
+- Where to find: https://cloud.datasets.sh/e/trackinsight-web/v0/shares?key=your-api-key
+- Format: share_id from the API response
+- Validation: Alphanumeric string
+- Note: User needs Track Insight API key
 
-| Field | Format | Example |
-|-------|--------|---------|
-| **Issuer** | Company name | Grayscale, BlackRock, Fidelity |
-| **Fee** | With % or $ | 0.25%, $50 |
-| **URL** | Full https:// URL | Official issuer page |
-| **Custodian** | Company name (optional) | Coinbase Custody, Fidelity Digital Assets |
+**TradingView Symbol** (optional)
+- Where to find: https://www.tradingview.com/widget/advanced-chart/
+- Format: Exchange:SYMBOL (e.g., "NASDAQ:GBTC")
+- Leave empty if: Token not available in TradingView (chart will be hidden)
 
-#### Categories (multi-select)
+### ETF Details
 
-Available: Bitcoin, Dogecoin, Ethereum, Litecoin, Solana, XRP, Other
+**Issuer** (company name)
+- Example: "Grayscale", "BlackRock", "Fidelity"
+- Data source hint: Track Insight API or web search
 
-Most ETFs have 1-2 categories.
+**Fee** (expense ratio or flat fee)
+- Format examples: "0.25%", "$50", "1.5%"
+- Validation: Must include % or $ symbol
 
-### Step 3: Auto-Generate SEO
+**URL** (official ETF page)
+- Format: Full URL starting with https://
+- Validation: Must be valid URL to issuer's official page
 
-Always generate these automatically from collected data:
+**Custodian** (optional)
+- Example: "Coinbase Custody", "Fidelity Digital Assets"
+- Leave empty if: Not applicable or unknown
 
-**SEO Title format:**
-```
-[ETF Name] ([Symbol]) [Live Status/Status] & Key Details | The Block
-```
+### Categories (multi-select checkboxes)
 
-Examples:
-- `Grayscale Cardano Trust (GADA) Live Status and Key Details | The Block`
-- `Fidelity Solana Fund (FSOL) Status & Key Details | The Block`
+Available categories:
+- Bitcoin
+- Dogecoin
+- Ethereum
+- Litecoin
+- Solana
+- XRP
+- Other
 
-**Meta Description format:**
-```
-[ETF Name] ([Symbol]) is a [type] [asset] ETF [launched/proposed] by [Issuer]. See [status keyword], [statistics,] and details.
-```
+Ask user which categories apply. Most ETFs will have 1-2 categories.
 
-- Use "proposed" for Pending ETFs, "launched" for Live/Approved
-- Include "statistics" for Live ETFs
+### Content & SEO
 
-Examples:
-- **Pending:** "The Grayscale Cardano Trust is a potential spot Cardano (ADA) ETF proposed by Grayscale. See live status and details."
-- **Live (Spot):** "Fidelity Solana Fund (FSOL) is a spot SOL ETF launched by Fidelity. See ETF live status, statistics, and details."
-- **Live (Futures):** "The 21Shares 2x Long Dogecoin ETF (TXXD) is a Dogecoin ETF launched by 21Shares. See the latest status, details and statistics here."
+**Main Content** (page body)
+- Use rich text editor in WordPress
+- Always write 3 short paragraphs:
+  1. **Fund overview**: What the ETF is, issuer, what asset it holds, exchange, ticker, and structure (e.g., Delaware statutory trust). Mention staking if applicable.
+  2. **Underlying asset/network**: Brief description of the blockchain or asset the ETF tracks — what it does, key stats, notable adopters or use cases.
+  3. **Structure & risk**: Regulatory status (e.g., not registered under 1940 Act), fee/expense ratio, custodian(s), administrator, and risk disclaimers (volatility, staking not guaranteed, etc.).
+- If user wants help: Offer to search for ETF information and draft content
 
-**Slug:** Auto-generate from title (lowercase, hyphens). Example: `grayscale-bitcoin-trust`
+**SEO Title** (optional but recommended)
+- Default: Same as page title if not provided
+- **The Block's Standard Format**: `[ETF Name] ([Symbol]) [Status] & Key Details | The Block`
+- Status keywords: "Live Status" or "Status" (both acceptable)
+- Examples:
+  - "Grayscale Cardano Trust (GADA) Live Status and Key Details | The Block"
+  - "Fidelity Solana Fund (FSOL) Status & Key Details | The Block"
+  - "ARK 21 Shares Ethereum Futures Strategy ETF (ARKZ) Live Status and Key Details | The Block"
 
-### Step 4: Format Output
+**Slug** (URL-friendly name, optional)
+- WordPress auto-generates from title if not provided
+- Format: lowercase, hyphens for spaces (e.g., "grayscale-bitcoin-trust")
 
-Generate a copy-paste checklist matching WordPress field order:
+**Meta Description** (optional but recommended)
+- Length: 150-160 characters optimal
+- **The Block's Standard Format**: 
+  - `[ETF Name] ([Symbol]) is a [type] [asset] ETF [launched/proposed] by [Issuer]. See [status keyword], [statistics,] and details.`
+- Use "proposed" for pending ETFs, "launched" for live/approved ETFs
+- Optionally include "statistics" for live ETFs
+- Examples:
+  - **Pending**: "The Grayscale Cardano Trust is a potential spot Cardano (ADA) ETF proposed by Grayscale. See live status and details."
+  - **Live (Spot)**: "Fidelity Solana Fund (FSOL) is a spot SOL ETF launched by Fidelity. See ETF live status, statistics, and details."
+  - **Live (Futures)**: "The 21Shares 2x Long Dogecoin ETF (TXXD) is a Dogecoin ETF launched by 21Shares. See the latest status, details and statistics here."
+  - **Overview style**: "An overview of the ARK 21 Shares Active Ethereum Futures Strategy ETF (ARKZ) with live chart, latest price, market info and related ETF data."
+
+## Step 3: Validate & Enrich (Optional)
+
+If user is missing data, offer: "I can search for [missing field] using web search. Would you like me to find this information?"
+
+**Key data sources for web search**:
+- Official issuer websites (prospectus, fact sheets)
+- SEC filings for US ETFs
+- TradingView for chart symbols
+- Financial news (The Block, CoinDesk, Bloomberg)
+
+## Step 4: Format Output
+
+**Always auto-generate SEO Title and Meta Description** using The Block's standard formats (shown in Step 2). Don't ask user if they want these - just create them automatically based on the ETF data collected.
+
+Generate a **numbered checklist** matching exact WordPress field order for easy copy-paste:
 
 ```
 ## ETF Page Data - Copy-Paste Checklist
@@ -128,16 +174,16 @@ Generate a copy-paste checklist matching WordPress field order:
 [value] (Select from dropdown: Pending/Approved/Live)
 
 **Charts:**
-[Select from dropdown after page is created]
+[instruction: "Select from dropdown after page is created"]
 
 **Categories (check all that apply):**
 - [ ] Bitcoin
-- [ ] Ethereum
-- [ ] Solana
-- [ ] XRP
 - [ ] Dogecoin
+- [ ] Ethereum
 - [ ] Litecoin
 - [ ] Other
+- [ ] Solana
+- [ ] XRP
 
 **Main Content:**
 [content or "Add using WordPress rich text editor"]
@@ -147,92 +193,33 @@ Generate a copy-paste checklist matching WordPress field order:
 ## SEO Settings
 
 **SEO Title:**
-[auto-generated]
+[ETF Name] ([Symbol]) [Live Status/Status] & Key Details | The Block
 
 **Slug:**
-[auto-generated]
+[auto-generated-slug or custom slug]
 
 **Meta Description:**
-[auto-generated]
+[Generated using The Block's standard format based on ETF type and status]
 ```
 
-## Data Sources for Enrichment
+## Tips for User
 
-If user is missing data, search these:
+**After generating checklist:**
+- "Open your WordPress 'Add ETF Page' in another tab"
+- "Copy each value and paste into the corresponding WordPress field"
+- "For dropdowns (Type, Status), select the matching option"
+- "For categories, check the relevant boxes"
+- "Use the rich text editor for Main Content section"
 
-| Data | Source |
-|------|--------|
-| Track Insight ID | Track Insight API (requires API key) |
-| TradingView Symbol | TradingView widget configurator |
-| Issuer, Fee, Custodian | Official issuer website, SEC filings |
-| General ETF info | The Block, CoinDesk, Bloomberg |
+**Validation reminders:**
+- URLs must start with https://
+- Fees must include % or $ symbol
+- Symbols are typically uppercase
+- TradingView Symbol format: EXCHANGE:SYMBOL
 
-## Validation Rules
+## References
 
-- URLs must start with `https://`
-- Fees must include `%` or `$` symbol
-- Symbols are uppercase, 3-5 characters
-- TradingView Symbol format: `EXCHANGE:SYMBOL`
-- Meta Description: 150-160 characters optimal
-- SEO Title: include `| The Block` suffix
-
-## Examples
-
-**Example 1: New ETF page**
-```
-User: "Create an ETF page for the new BlackRock Solana ETF"
-Claude: [Uses etf-page-creator]
-
-I'll collect the data for this ETF page. Let me start:
-
-1. Page Title: BlackRock Solana Trust
-2. Symbol: BSOL (confirm?)
-3. Type: Spot
-4. Status: Pending (since it's new)
-
-What's the Track Insight ID? I can search for it if needed.
-...
-
-[After collecting all data, generates copy-paste checklist with auto-generated SEO]
-```
-
-**Example 2: Update existing**
-```
-User: "Update the GBTC page - status changed to Live and fee is now 1.5%"
-Claude: [Uses etf-page-creator]
-
-Updated fields for GBTC:
-- Status: Live (select from dropdown)
-- Fee: 1.5%
-
-SEO updates needed:
-- Meta Description: Update "proposed" to "launched" and add "statistics"
-```
-
-## Post-Creation Instructions
-
-After generating the checklist, remind user:
-1. Open WordPress "Add ETF Page" in another tab
-2. Copy each value into the corresponding field
-3. For dropdowns (Type, Status), select the matching option
-4. For categories, check the relevant boxes
-5. Use the rich text editor for Main Content
-6. Publish and verify the page renders correctly
-
-## Success Criteria
-
-- [ ] All required fields collected and validated
-- [ ] SEO Title and Meta Description auto-generated using Block formats
-- [ ] Output formatted as copy-paste checklist matching WordPress field order
-- [ ] Validation rules applied (URLs, fees, symbols)
-- [ ] Categories correctly identified for the asset type
-
-## Copy/Paste Ready
-
-```
-"Create an ETF page for [fund name]"
-"Add a new [asset] ETF page"
-"Update the [symbol] ETF page"
-"Find the Track Insight ID for [ETF]"
-"Create ETF pages for these funds: [list]"
-```
+For detailed field explanations and data sources, see:
+- `references/field-definitions.md` - Complete field documentation
+- `references/data-sources.md` - APIs and websites for finding ETF data
+- `references/seo-writing-guide.md` - Complete SEO title and meta description patterns with examples
