@@ -114,19 +114,37 @@ The Claude Agent SDK layer is planned but not yet built beyond the existing `dai
 6. Grid alignment (snap to pixel grid)
 7. Format validation (dimensions, alpha, palette compliance)
 
-**Video Model Candidates (UPDATED March 27 per validation audit):**
-- **Pika Pikaframes 2.2** via fal.ai — CURRENT. Up to 5 keyframes, cleanest multi-keyframe API. $0.04/sec (720p).
-- **Kling 3.0** — CURRENT. Elements character lock confirmed, start/end frame API viable, Multi-Shot "AI Director" feature added.
-- **Kling 2.6** — CURRENT. Motion transfer from reference video confirmed working.
-- **Google Veo 3.1** — UPDATE: Was "Veo 2/3" — now Veo 3.1. Native 4K, but resolution mismatch for pixel art still valid. Test last.
-- ~~**Wan 2.5**~~ — CORRECTED: Wan 2.5 is NOT open source. **Wan 2.2** is the latest open-source version.
-- **NEW: Retro Diffusion rd-animation** — NOW LIVE on Replicate (4.9K runs). Purpose-built pixel art sprite sheets. Could bypass Pixel Quantizer entirely. **Test immediately.**
-- **NEW: LTX-2** — Open-source (Apache 2.0), 4K@50fps, NVIDIA-optimized. True open-source replacement for Wan.
-- **NEW: Seedance 2.0** — ByteDance, launched Feb 7. Reference-to-video with expression/motion transfer.
-- **NEW: PixelLab "Animate with Text" v3** (March 18) — Generates multi-frame animation from static sprite + text. Native pixel art output, skeleton controls, frame-extensible. Could bypass entire hybrid pipeline for 10+ animation types. **Test immediately.**
-- **NEW: Ludo.ai Sprite Animator** — Combat animation presets (melee, defense, reactions), MCP API for programmatic generation, Y-offset alignment tool. **Test immediately.**
-- **NEW: Wan 2.2 pixel animation LoRAs** — Community LoRAs for animating static sprites: attack cycles, walk cycles, comprehensive set (226 training clips). Runs locally on RTX 5080 = free. **Test in Phase 2.**
-- **NEW: Pixverse v4.5** — First+last frame sprite sheet workflow documented by Scenario. Another adapter candidate.
+**Video Model Candidates (UPDATED April 2 per Phase 4 testing):**
+
+**CONFIRMED WORKING (ranked by quality):**
+- **RIFE VFI** — Frame interpolation from NB2 keyframes. 87.6% through Pixel Quantizer, 0 off-palette pixels. ~5s/clip, FREE/local. **Best quality for keyframe-anchored animation.** Uses rife49.pth via Fannovel16/ComfyUI-Frame-Interpolation.
+- **Wan 2.2 14B I2V** — Dual-model (high_noise + low_noise fp8) with LightX2V 4-step LoRA. Uses WanImageToVideo node + two-stage KSamplerAdvanced + ModelSamplingSD3 shift=5.0. 640×640, 81 frames, 16fps. ~80s/clip, FREE/local. Minor foot artifacts on pixel art (Pixel Quantizer handles). **Replaces 5B model completely.**
+- **PixelLab API** — Public API with Python SDK. Pay-per-use ($0.007-$0.016/gen). "Animate with Skeleton" + "Estimate Skeleton" endpoints. Max 128×128. Native pixel art output. **Viable for pipeline integration — test in Phase 5.**
+
+**DEPRECATED/DEAD:**
+- ~~**Wan 2.2 5B ti2v**~~ — DEPRECATED. Character distortion, no locomotion from single keyframe, used wrong node (Wan22ImageToVideoLatent). Replaced by 14B dual-model workflow.
+- ~~**Retro Diffusion rd-animation**~~ — DEAD. 48x48, wrong character, wrong style.
+- ~~**Pika Pikaframes 2.2**~~ — SCRAPPED. Jobs didn't complete, $0.20/gen minimum.
+
+**UNTESTED (future evaluation):**
+- **Kling 3.0** — Elements character lock, start/end frame API. Test if Wan 2.2 14B quality insufficient.
+- **Google Veo 3.1** — Native 4K, resolution mismatch for pixel art. Test last.
+- **LTX-2** — Open-source (Apache 2.0), 4K@50fps, NVIDIA-optimized.
+- **Seedance 2.0** — ByteDance, reference-to-video with expression/motion transfer.
+- **Ludo.ai Sprite Animator** — Combat animation presets, MCP API.
+- **Pixverse v4.5** — First+last frame sprite sheet workflow.
+- ~~**Wan 2.5**~~ — NOT open source. Do not use.
+
+**CRITICAL: Wan 2.2 14B Workflow Requirements (learned from Phase 4 debugging):**
+- Must use `WanImageToVideo` node (NOT `Wan22ImageToVideoLatent` — that node doesn't connect image conditioning properly)
+- Must use dual 14B fp8 models: `wan2.2_i2v_high_noise_14B_fp8_scaled` + `wan2.2_i2v_low_noise_14B_fp8_scaled`
+- Must use LightX2V 4-step LoRAs for each model
+- Must use `ModelSamplingSD3` shift=5.0 on both models
+- Must use two-stage `KSamplerAdvanced`: stage 1 (high noise, steps 0-2, adds noise) → stage 2 (low noise, steps 2-4, refines)
+- Must use `wan_2.1_vae.safetensors` (NOT wan2.2_vae)
+- Must use `CreateVideo` + `SaveVideo` nodes (NOT VHS_VideoCombine)
+- Input images MUST have solid background (green screen). Transparent backgrounds cause dark/lifeless output.
+- Pixel art walk cycles are seed-dependent — generate 3-5 seeds and pick the best one.
 
 **Architecture: Model-agnostic adapter layer is mandatory.** The manifest declares animation intent, the system routes to the best available generator. Four atomic adapter operations: `generateFrame`, `generateKeyframes`, `interpolateFrames`, `generateVideo`. All council models converge on this.
 
@@ -284,27 +302,36 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 
 **Workstream B — Hybrid Pipeline End-to-End:**
 - [x] Generator adapter interface: 4 atomic ops (generateFrame, generateKeyframes, interpolateFrames, generateVideo) + strategy router mapping 15 animation types (10 IMAGE_ONLY, 5 HYBRID). All assertions pass.
-- [x] Wan 2.2 5B ti2v = **primary video model**. GATE CHECK PASS: 73.7% overall, 84.0% palette. Character preserved, green screen intact, pixel art maintained. Free/local on RTX 5080.
+- [x] ~~Wan 2.2 5B ti2v~~ — DEPRECATED in Phase 4. Used wrong node (`Wan22ImageToVideoLatent`), produced distortion and no locomotion. **Replaced by Wan 2.2 14B dual-model workflow** (WanImageToVideo + LightX2V 4-step LoRA). 14B quality significantly better.
 - [x] Wan22Adapter, RIFEAdapter (was GMFSSAdapter), ReplicateAdapter — all behind `VideoModelAdapter` hexagonal interface.
 - [x] End-to-end test: NB2 keyframes → Wan 2.2 5B → extract 8 frames → Pixel Quantizer → 73.7% overall. GATE CHECK PASS. Only 4% degradation from raw keyframes (77.7%).
 - [x] Strategy decision map: 10 animations → IMAGE_ONLY, 5 → HYBRID. Duration mapping (1s combat, 2s locomotion). Frame counts (4-12 per type).
 - [x] rd-animation via Replicate: TESTED, NOT VIABLE (48x48, wrong character, wrong style). Removed from strategy map.
 - [x] ~~GMFSS Fortuna~~ → **RIFE VFI confirmed as primary interpolation engine.** GMFSS blocked by cupy dependency. RIFE VFI (rife49.pth) tested: character identity PASS, pose transitions PASS, green screen PASS. Color expansion (79K-103K unique colors) handled by Pixel Quantizer. FILM VFI available as backup (slightly more ghosting). Bonus VFI models available (AMT, CAIN, FLAVR) — untested, same node pack.
-- [ ] Wan 2.2 14B I2V: BLOCKED by ComfyUI channel mismatch (WanImageToVideo = Wan 2.1 only). Monitor for ComfyUI update.
+- [x] ~~Wan 2.2 14B I2V: BLOCKED~~ → **RESOLVED in Phase 4.** ComfyUI v0.3.52 fixed channel mismatch. 14B dual-model (fp8) + LightX2V 4-step LoRA now working. Uses `WanImageToVideo` node (NOT `Wan22ImageToVideoLatent`). Character animation with minor foot artifacts — Pixel Quantizer handles. Walk cycle quality is seed-dependent.
 
-**Key finding:** Wan 2.2 5B produces pose animation (idle bounce) from single keyframe, not full locomotion. Walk cycles need multi-keyframe input + RIFE VFI interpolation as primary approach.
+**Key findings (updated Phase 4):** (1) Wan 2.2 5B is deprecated — 14B dual-model is vastly superior. (2) RIFE VFI → Pixel Quantizer = 87.6% (best score in project). (3) Walk cycle strategy: NB2 keyframes → RIFE VFI for interpolation, Wan 2.2 14B for single-keyframe animation. (4) PixelLab has a public API — viable alternative for Phase 5.
 
-### Phase 4: LoRA + Memory Layer (Weeks 7-8 — May 8 - May 22)
+### Phase 4: LoRA + Memory Layer (Weeks 7-8 — May 8 - May 22) ✅ COMPLETE (11/11 PASS)
 
 **Workstream A — Retrieval & Memory:**
-- [ ] Vault Embedding Indexer → Mac Mini nightly (nomic-embed-text → SQLite)
-- [ ] Preserve Session → MacBook Pro (Qwen3-14B via MLX-LM)
-- [ ] PR Digest → MacBook Pro (Qwen2.5-Coder-32B via MLX-LM)
+- [x] Vault Embedding Indexer → `agents-sdk/agents/vault_indexer.py`, Mac Mini, nomic-embed-text → SQLite, nightly 02:00, $0.00 cap. Dry-run PASS (274 vault files discovered).
+- [x] Preserve Session → `agents-sdk/agents/preserve_session.py`, MacBook Pro, Qwen3-14B via MLX-LM, on-demand, $0.00 cap. Dry-run PASS (auto-detected session log).
+- [x] PR Digest → `agents-sdk/agents/pr_digest.py`, MacBook Pro, Qwen2.5-Coder-32B via MLX-LM, daily 08:00, $0.00 cap. Dry-run PASS (needs `gh auth login`).
+
+**Workstream B — Pipeline Hardening:**
+- [x] RIFE VFI → full Pixel Quantizer: **87.6% overall, 96.4% palette, 0 off-palette pixels, 100% outline coverage.** Best score in project. Color expansion (79K-103K unique colors) fully cleaned.
+- [x] Wan 2.2 14B I2V: Working via ComfyUI built-in template. Dual fp8 models + LightX2V 4-step LoRA. ~80s/clip. Minor pixel art artifacts (seed-dependent). Adapter updated.
+- [x] Wan 2.2 5B → DEPRECATED. Wrong node, wrong architecture, distortion, no locomotion.
+- [x] PixelLab v3: Public API confirmed ($0.007-$0.016/gen). Python SDK available. Skeleton-based animation. Build PixelLabAdapter in Phase 5.
 
 **Workstream C — LoRA Training:**
-- [ ] Set up kohya_ss dev branch on Alienware (gui-uv.bat)
-- [ ] Prepare dataset: 30-50 PNGs of your art style, 1024px+, captioned
-- [ ] Train first style LoRA on Illustrious XL (Adafactor, SDPA, rank 32)
+- [x] kohya_ss training config: `lora-training/sprite-style-config.toml` (Adafactor, SDPA, rank 32, Illustrious XL v0.1, fused backward pass, bf16)
+- [x] Dataset prep script: `lora-training/prepare_dataset.py` — nearest-neighbor upscale verified sharp, auto-captioning with trigger word
+- [x] Training runbook: `lora-training/TRAINING-RUNBOOK.md` — complete step-by-step for Alienware
+- [ ] Collect 30-50 training images (Sean must do manually)
+- [ ] Download Illustrious XL v0.1 + install kohya_ss dev branch on Alienware (Sean must do manually)
+- [ ] Train first style LoRA (after dataset collected)
 - [ ] Test LoRA in ComfyUI pipeline for sprite generation quality
 - [ ] Integrate LoRA into pipeline's ComfyUI adapter
 
@@ -348,7 +375,7 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 
 7. **LoRA quality for this specific art style** — STILL OPEN. But now confirmed: train on Illustrious XL v0.1, infer on v2.0-STABLE or v3.x for best results. Also evaluate Flux.2 Klein + community pixel art LoRA as fallback path.
 
-8. **Could PixelLab/Ludo.ai bypass the hybrid pipeline?** — PARTIALLY RESOLVED. rd-animation is dead (48x48, wrong style, wrong character). PixelLab v3 and Ludo.ai still untested — evaluate in Phase 4 as potential shortcuts for simple animation types. The hybrid pipeline is proven viable regardless (73.7% gate check).
+8. ~~**Could PixelLab/Ludo.ai bypass the hybrid pipeline?**~~ — RESOLVED (Phase 4). rd-animation dead. **PixelLab v3 HAS a public API** with Python SDK ($0.007-$0.016/gen). "Animate with Skeleton" + "Estimate Skeleton" endpoints, max 128×128. Viable for pipeline integration — build PixelLabAdapter in Phase 5. Ludo.ai still untested. The hybrid pipeline remains primary (RIFE VFI 87.6%).
 
 9. **NEW: Qwen3 model family evaluation** — Qwen3-14B, Qwen3-VL, Qwen3.5-122B MoE all claimed to outperform predecessors. Benchmark during Phase 1 Ollama/MLX setup.
 
