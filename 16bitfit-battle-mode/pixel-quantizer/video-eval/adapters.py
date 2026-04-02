@@ -886,28 +886,42 @@ class Wan22Adapter(VideoModelAdapter):
             )
 
 
-class GMFSSAdapter(VideoModelAdapter):
-    """Adapter for GMFSS Fortuna frame interpolation via ComfyUI on Alienware.
+class RIFEAdapter(VideoModelAdapter):
+    """Adapter for RIFE VFI frame interpolation via ComfyUI on Alienware.
 
-    Uses Fannovel16/ComfyUI-Frame-Interpolation node pack.
+    Uses Fannovel16/ComfyUI-Frame-Interpolation node pack with RIFE VFI.
+    Pure PyTorch — no cupy dependency (unlike GMFSS Fortuna which is blocked).
     Takes 2+ keyframes and interpolates smooth frames between them.
     LOCAL + FREE — no API costs.
+
+    Confirmed results (Phase 3):
+      - Character identity: PASS
+      - Pose transitions: PASS
+      - Green screen: PASS
+      - Color expansion: 79K-103K unique colors (Pixel Quantizer handles this)
     """
 
     COMFYUI_HOST = "192.168.68.201"
     COMFYUI_PORT = 8188
-    WORKFLOW_PATH = Path(__file__).parent / "workflows" / "gmfss_fortuna_interpolation.json"
+    WORKFLOW_PATH = Path(__file__).parent / "workflows" / "rife_interpolation.json"
+    CHECKPOINT = "rife49.pth"
 
-    def __init__(self, multiplier: int = 4):
+    def __init__(self, multiplier: int = 4, host: str | None = None, port: int | None = None):
         """Args:
             multiplier: Frames to insert between each keyframe pair.
                         4 = inserts 3 frames (4x total).
+            host: ComfyUI host override.
+            port: ComfyUI port override.
         """
         self._multiplier = multiplier
+        if host:
+            self.COMFYUI_HOST = host
+        if port:
+            self.COMFYUI_PORT = port
 
     @property
     def name(self) -> str:
-        return "GMFSS Fortuna (Local)"
+        return "RIFE VFI (Local)"
 
     @property
     def supports_keyframe_input(self) -> bool:
@@ -919,7 +933,7 @@ class GMFSSAdapter(VideoModelAdapter):
 
     async def generate_keyframes(self, config: KeyframeConfig) -> list[GeneratedFrame]:
         raise NotImplementedError(
-            "GMFSS Fortuna interpolates between existing keyframes. "
+            "RIFE VFI interpolates between existing keyframes. "
             "Use GeminiAdapter for keyframe generation first."
         )
 
@@ -929,7 +943,7 @@ class GMFSSAdapter(VideoModelAdapter):
         duration_secs: float = 1.0,
         fps: int = 12,
     ) -> GeneratedVideo:
-        """Interpolate between keyframes using GMFSS Fortuna.
+        """Interpolate between keyframes using RIFE VFI (rife49.pth).
 
         Args:
             keyframes: 2-5 keyframes to interpolate between.
@@ -944,7 +958,7 @@ class GMFSSAdapter(VideoModelAdapter):
         import uuid
 
         if len(keyframes) < 2:
-            raise ValueError("GMFSS Fortuna needs at least 2 keyframes")
+            raise ValueError("RIFE VFI needs at least 2 keyframes")
 
         base_url = f"http://{self.COMFYUI_HOST}:{self.COMFYUI_PORT}"
 
@@ -952,7 +966,7 @@ class GMFSSAdapter(VideoModelAdapter):
             # Step 1: Upload all keyframes
             uploaded_names: list[str] = []
             for i, kf in enumerate(keyframes):
-                filename = f"gmfss_kf_{i}_{uuid.uuid4().hex[:8]}.png"
+                filename = f"rife_kf_{i}_{uuid.uuid4().hex[:8]}.png"
                 upload_resp = await client.post(
                     f"{base_url}/upload/image",
                     files={"image": (filename, kf.data, "image/png")},
@@ -965,7 +979,6 @@ class GMFSSAdapter(VideoModelAdapter):
                 uploaded_names.append(upload_resp.json().get("name", filename))
 
             # Step 2: Build dynamic workflow
-            # For N keyframes, we chain ImageBatch nodes then feed to GMFSS
             workflow_prompt: dict[str, Any] = {}
             node_id = 1
 
@@ -1015,13 +1028,17 @@ class GMFSSAdapter(VideoModelAdapter):
 
                 batch_id = prev_batch
 
-            # GMFSS Fortuna VFI node
-            gmfss_id = node_id
-            workflow_prompt[str(gmfss_id)] = {
-                "class_type": "GMFSS_Fortuna_VFI",
+            # RIFE VFI node (pure PyTorch, no cupy needed)
+            rife_id = node_id
+            workflow_prompt[str(rife_id)] = {
+                "class_type": "RIFE VFI",
                 "inputs": {
+                    "ckpt_name": self.CHECKPOINT,
                     "frames": [str(batch_id), 0],
+                    "clear_cache_after_n_frames": 10,
                     "multiplier": self._multiplier,
+                    "fast_mode": True,
+                    "ensemble": True,
                     "optional_interpolation_states": None,
                 },
             }
@@ -1031,10 +1048,10 @@ class GMFSSAdapter(VideoModelAdapter):
             workflow_prompt[str(node_id)] = {
                 "class_type": "VHS_VideoCombine",
                 "inputs": {
-                    "images": [str(gmfss_id), 0],
+                    "images": [str(rife_id), 0],
                     "frame_rate": fps,
                     "format": "video/h264-mp4",
-                    "filename_prefix": "gmfss_interpolated",
+                    "filename_prefix": "rife_interpolated",
                     "quality": 90,
                 },
             }
@@ -1047,13 +1064,13 @@ class GMFSSAdapter(VideoModelAdapter):
             )
             if queue_resp.status_code != 200:
                 raise RuntimeError(
-                    f"ComfyUI GMFSS queue failed: {queue_resp.status_code} "
+                    f"ComfyUI RIFE queue failed: {queue_resp.status_code} "
                     f"{queue_resp.text}"
                 )
 
             prompt_id = queue_resp.json().get("prompt_id")
 
-            # Step 4: Poll for completion (GMFSS is fast — 30s max)
+            # Step 4: Poll for completion (RIFE is fast — 30s max)
             for _ in range(30):
                 history_resp = await client.get(f"{base_url}/history/{prompt_id}")
                 if history_resp.status_code == 200:
@@ -1065,7 +1082,7 @@ class GMFSSAdapter(VideoModelAdapter):
                 await __import__("asyncio").sleep(1)
             else:
                 raise RuntimeError(
-                    f"ComfyUI GMFSS timed out after 30s. Prompt ID: {prompt_id}"
+                    f"ComfyUI RIFE timed out after 30s. Prompt ID: {prompt_id}"
                 )
 
             # Step 5: Download output
@@ -1085,7 +1102,7 @@ class GMFSSAdapter(VideoModelAdapter):
                     break
 
             if not video_data:
-                raise RuntimeError("No video output from GMFSS Fortuna")
+                raise RuntimeError("No video output from RIFE VFI")
 
         total_frames = (len(keyframes) - 1) * self._multiplier + 1
         actual_duration = total_frames / fps if fps > 0 else duration_secs
@@ -1097,13 +1114,18 @@ class GMFSSAdapter(VideoModelAdapter):
             height=keyframes[0].height,
             format="mp4",
             metadata={
-                "adapter": "gmfss_fortuna",
+                "adapter": "rife_vfi",
+                "checkpoint": self.CHECKPOINT,
                 "multiplier": self._multiplier,
                 "keyframe_count": len(keyframes),
                 "total_frames": total_frames,
                 "prompt_id": prompt_id,
             },
         )
+
+
+# Backward-compatible alias
+GMFSSAdapter = RIFEAdapter
 
 
 def _create_synthetic_frame(
