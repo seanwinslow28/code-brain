@@ -28,6 +28,7 @@ from adapters import (
     GMFSSAdapter,
     KeyframeConfig,
     ReplicateAdapter,
+    RIFEAdapter,
     VideoModelAdapter,
     Wan22Adapter,
 )
@@ -164,8 +165,9 @@ class StrategyRouter:
 
         if interpolation_backend == "wan22":
             self._interpolation_adapter = Wan22Adapter()
-        elif interpolation_backend == "gmfss":
-            self._interpolation_adapter = GMFSSAdapter()
+        elif interpolation_backend in ("rife", "gmfss"):
+            # "gmfss" kept for backward compat — GMFSSAdapter is now an alias for RIFEAdapter
+            self._interpolation_adapter = RIFEAdapter()
         elif interpolation_backend == "replicate":
             self._interpolation_adapter = ReplicateAdapter()
         else:

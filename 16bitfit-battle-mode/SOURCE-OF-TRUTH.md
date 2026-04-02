@@ -1,7 +1,7 @@
 # Source of Truth — Sean's Agentic Frameworks & Creative Pipeline Master Plan
 
 **Created:** 2026-03-27 (Boston, post-move)
-**Last Updated:** 2026-04-01 — Phase 3 complete (10/10 PASS). Hybrid pipeline PROVEN VIABLE (73.7% gate check). Wan 2.2 5B = primary video model. rd-animation dead. GMFSS Fortuna next to test.
+**Last Updated:** 2026-04-02 — Phase 4 in progress. RIFE VFI confirmed as primary interpolation engine (GMFSS blocked by cupy). Walk cycle strategy locked: NB2 → RIFE VFI → Pixel Quantizer. Building memory/retrieval agents + LoRA training setup.
 **Purpose:** Compressed reference doc for every future Claude Code / Cowork session. Feed THIS file + the specific subfolder relevant to your current task. Never dump all 28 source files at once.
 **Source Files:** 28 original docs + 3 Perplexity Computer outputs in `Agentic-Frameworks-And-Autoresearch/`
 
@@ -285,14 +285,14 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 **Workstream B — Hybrid Pipeline End-to-End:**
 - [x] Generator adapter interface: 4 atomic ops (generateFrame, generateKeyframes, interpolateFrames, generateVideo) + strategy router mapping 15 animation types (10 IMAGE_ONLY, 5 HYBRID). All assertions pass.
 - [x] Wan 2.2 5B ti2v = **primary video model**. GATE CHECK PASS: 73.7% overall, 84.0% palette. Character preserved, green screen intact, pixel art maintained. Free/local on RTX 5080.
-- [x] Wan22Adapter, GMFSSAdapter, ReplicateAdapter — all behind `VideoModelAdapter` hexagonal interface.
+- [x] Wan22Adapter, RIFEAdapter (was GMFSSAdapter), ReplicateAdapter — all behind `VideoModelAdapter` hexagonal interface.
 - [x] End-to-end test: NB2 keyframes → Wan 2.2 5B → extract 8 frames → Pixel Quantizer → 73.7% overall. GATE CHECK PASS. Only 4% degradation from raw keyframes (77.7%).
 - [x] Strategy decision map: 10 animations → IMAGE_ONLY, 5 → HYBRID. Duration mapping (1s combat, 2s locomotion). Frame counts (4-12 per type).
 - [x] rd-animation via Replicate: TESTED, NOT VIABLE (48x48, wrong character, wrong style). Removed from strategy map.
-- [ ] GMFSS Fortuna: Adapter built, workflow ready. Node pack NOT yet installed on Alienware. **Must test in Phase 4.**
+- [x] ~~GMFSS Fortuna~~ → **RIFE VFI confirmed as primary interpolation engine.** GMFSS blocked by cupy dependency. RIFE VFI (rife49.pth) tested: character identity PASS, pose transitions PASS, green screen PASS. Color expansion (79K-103K unique colors) handled by Pixel Quantizer. FILM VFI available as backup (slightly more ghosting). Bonus VFI models available (AMT, CAIN, FLAVR) — untested, same node pack.
 - [ ] Wan 2.2 14B I2V: BLOCKED by ComfyUI channel mismatch (WanImageToVideo = Wan 2.1 only). Monitor for ComfyUI update.
 
-**Key finding:** Wan 2.2 5B produces pose animation (idle bounce) from single keyframe, not full locomotion. Walk cycles need multi-keyframe input + GMFSS interpolation as primary approach.
+**Key finding:** Wan 2.2 5B produces pose animation (idle bounce) from single keyframe, not full locomotion. Walk cycles need multi-keyframe input + RIFE VFI interpolation as primary approach.
 
 ### Phase 4: LoRA + Memory Layer (Weeks 7-8 — May 8 - May 22)
 
@@ -336,7 +336,7 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 
 1. ~~**Nano Banana 2 vs Pro for sprites**~~ — RESOLVED (Phase 2). NB2 wins: 26% faster, comparable quality. Use NB2 (`gemini-3.1-flash-image-preview`) for volume generation, NB Pro (`gemini-3-pro-image-preview`) reserved for anchor/hero frames.
 
-2. ~~**Which video/animation model wins?**~~ — RESOLVED (Phase 3). **Wan 2.2 5B ti2v** is the primary video model (73.7% gate check, free/local). rd-animation is dead (48x48, wrong style). GMFSS Fortuna is the primary interpolation candidate (untested — install + test in Phase 4). Walk cycles: NB2 multi-keyframe + GMFSS interpolation (not Wan 2.2 single-frame). Wan 2.2 14B I2V blocked by ComfyUI compatibility — monitor for updates.
+2. ~~**Which video/animation model wins?**~~ — RESOLVED (Phase 3-4). **Wan 2.2 5B ti2v** is the primary video model (73.7% gate check, free/local). **RIFE VFI** (rife49.pth) is the confirmed primary interpolation engine — character identity PASS, pose transitions PASS, green screen PASS. GMFSS Fortuna blocked by cupy. rd-animation dead (48x48, wrong style). Walk cycles: NB2 multi-keyframe → RIFE VFI 4x interpolation → Pixel Quantizer. FILM VFI available as backup. Wan 2.2 14B I2V blocked by ComfyUI compatibility — monitor for updates.
 
 3. ~~**Retro Diffusion rd-animation**~~ — RESOLVED. It's live on Replicate with 4.9K runs. Test immediately in Phase 1.
 

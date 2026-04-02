@@ -58,6 +58,24 @@ max_turns = 10
 max_budget_usd = 0.25
 schedule = "Monday 07:00"
 
+[agents.vault_indexer]
+enabled = true
+skills = ["vault-read-write"]
+max_turns = 20
+max_budget_usd = 0.00
+schedule = "02:00"
+embedding_model = "nomic-embed-text"
+target_machine = "mac_mini"
+
+[agents.pr_digest]
+enabled = true
+skills = ["vault-read-write"]
+max_turns = 15
+max_budget_usd = 0.00
+schedule = "08:00"
+repos = ["seanwinslow28/16BitFit-V3", "seanwinslow28/sprite-sheet-automation-2026", "seanwinslow28/claude-code-superuser-pack"]
+target_machine = "macbook_pro"
+
 [agents.health_audit]
 enabled = false
 skills = ["health-habits", "vault-read-write"]
