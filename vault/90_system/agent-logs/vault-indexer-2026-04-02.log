@@ -1,0 +1,24 @@
+2026-04-02 09:02:48,455 [INFO] Starting vault embedding indexer
+2026-04-02 09:02:48,476 [INFO] Discovered 274 vault files, 274 need indexing, 0 deleted
+2026-04-02 09:02:48,476 [INFO] DRY RUN — would index these files:
+2026-04-02 09:02:48,476 [INFO]   00_inbox/2026-02-20.md (mtime: 2026-03-28T14:17:05.813217)
+2026-04-02 09:02:48,476 [INFO]   00_inbox/3-2-26 Checklist (ongoing, forever expanding).md (mtime: 2026-03-28T14:17:05.813307)
+2026-04-02 09:02:48,476 [INFO]   00_inbox/Q2 Roadmap thoughts.md (mtime: 2026-03-28T14:17:05.813387)
+2026-04-02 09:02:48,476 [INFO]   00_inbox/idea- for a SaaS app..md (mtime: 2026-03-28T14:17:05.813576)
+2026-04-02 09:02:48,476 [INFO]   00_inbox/prj-dr-nixi-cat-new-doctor-info.md (mtime: 2026-03-28T14:17:05.813691)
+2026-04-02 09:02:48,477 [INFO]   05_atlas/moc-claude-mastery.md (mtime: 2026-03-28T14:17:05.813815)
+2026-04-02 09:02:48,477 [INFO]   05_atlas/moc-creative-studio.md (mtime: 2026-03-28T14:17:05.813884)
+2026-04-02 09:02:48,477 [INFO]   05_atlas/moc-design-team.md (mtime: 2026-03-28T14:17:05.813966)
+2026-04-02 09:02:48,477 [INFO]   05_atlas/moc-life-systems.md (mtime: 2026-03-28T14:17:05.814090)
+2026-04-02 09:02:48,477 [INFO]   05_atlas/moc-product-management.md (mtime: 2026-03-28T14:17:05.814230)
+2026-04-02 09:02:48,477 [INFO]   05_atlas/moc-vault.md (mtime: 2026-03-28T14:17:05.814322)
+2026-04-02 09:02:48,477 [INFO]   10_timeline/daily/2026-02-26.md (mtime: 2026-03-28T14:17:05.814614)
+2026-04-02 09:02:48,477 [INFO]   10_timeline/daily/2026-03-01.md (mtime: 2026-03-28T14:17:05.814717)
+2026-04-02 09:02:48,477 [INFO]   10_timeline/daily/2026-03-02.md (mtime: 2026-03-28T14:17:05.814782)
+2026-04-02 09:02:48,477 [INFO]   10_timeline/daily/2026-03-03.md (mtime: 2026-03-28T14:17:05.814862)
+2026-04-02 09:02:48,477 [INFO]   10_timeline/daily/2026-03-04.md (mtime: 2026-03-28T14:17:05.814944)
+2026-04-02 09:02:48,477 [INFO]   10_timeline/daily/2026-03-05.md (mtime: 2026-03-28T14:17:05.815065)
+2026-04-02 09:02:48,477 [INFO]   10_timeline/daily/2026-03-06.md (mtime: 2026-03-28T14:17:05.815215)
+2026-04-02 09:02:48,477 [INFO]   10_timeline/daily/2026-03-09.md (mtime: 2026-03-28T14:17:05.815366)
+2026-04-02 09:02:48,477 [INFO]   10_timeline/daily/2026-03-10.md (mtime: 2026-03-28T14:17:05.815482)
+2026-04-02 09:02:48,477 [INFO]   ... and 254 more
