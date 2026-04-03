@@ -5,3 +5,4 @@ date,time,agent,mode,status,cost_usd,duration_ms,turns,notes
 2026-04-02,17:00:06,daily-driver,evening,error,,,,unhandled errors in a TaskGroup (1 sub-exception)
 2026-04-03,02:02:57,vault-indexer,,success,0.0000,172069,,"chunks=2638, embeddings=2638, errors=0"
 2026-04-03,05:30:08,process-inbox,,error,,,,unhandled errors in a TaskGroup (1 sub-exception)
+2026-04-03,06:00:05,daily-driver,morning,error,,,,unhandled errors in a TaskGroup (1 sub-exception)
