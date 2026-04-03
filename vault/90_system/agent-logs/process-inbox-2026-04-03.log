@@ -1,0 +1,2 @@
+2026-04-03 05:30:05,071 [INFO] Starting process inbox agent
+2026-04-03 05:30:08,143 [ERROR] Agent failed: unhandled errors in a TaskGroup (1 sub-exception)

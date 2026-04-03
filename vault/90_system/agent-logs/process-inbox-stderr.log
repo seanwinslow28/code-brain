@@ -55,3 +55,60 @@
     |     raise CLIConnectionError("ProcessTransport is not ready for writing")
     | claude_agent_sdk._errors.CLIConnectionError: ProcessTransport is not ready for writing
     +------------------------------------
+[INFO] Starting process inbox agent
+[ERROR] Agent failed: unhandled errors in a TaskGroup (1 sub-exception)
+  + Exception Group Traceback (most recent call last):
+  |   File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/process_inbox.py", line 231, in <module>
+  |     main()
+  |     ~~~~^^
+  |   File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/process_inbox.py", line 227, in main
+  |     asyncio.run(run(dry_run=args.dry_run))
+  |     ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/opt/homebrew/Cellar/python@3.13/3.13.11/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+  |     return runner.run(main)
+  |            ~~~~~~~~~~^^^^^^
+  |   File "/opt/homebrew/Cellar/python@3.13/3.13.11/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+  |     return self._loop.run_until_complete(task)
+  |            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  |   File "/opt/homebrew/Cellar/python@3.13/3.13.11/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
+  |     return future.result()
+  |            ~~~~~~~~~~~~~^^
+  |   File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/process_inbox.py", line 173, in run
+  |     async for message in query(prompt=prompt, options=options):
+  |     ...<6 lines>...
+  |             )
+  |   File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/query.py", line 123, in query
+  |     async for message in client.process_query(
+  |     ...<2 lines>...
+  |         yield message
+  |   File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_internal/client.py", line 144, in process_query
+  |     await query.close()
+  |   File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_internal/query.py", line 621, in close
+  |     with suppress(anyio.get_cancelled_exc_class()):
+  |          ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/opt/homebrew/Cellar/python@3.13/3.13.11/Frameworks/Python.framework/Versions/3.13/lib/python3.13/contextlib.py", line 468, in __exit__
+  |     raise rest
+  |   File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_internal/query.py", line 622, in close
+  |     await self._tg.__aexit__(None, None, None)
+  |   File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/lib/python3.13/site-packages/anyio/_backends/_asyncio.py", line 783, in __aexit__
+  |     raise BaseExceptionGroup(
+  |         "unhandled errors in a TaskGroup", self._exceptions
+  |     ) from None
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_internal/query.py", line 330, in _handle_control_request
+    |     await self.transport.write(json.dumps(success_response) + "\n")
+    |   File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_internal/transport/subprocess_cli.py", line 486, in write
+    |     raise CLIConnectionError("ProcessTransport is not ready for writing")
+    | claude_agent_sdk._errors.CLIConnectionError: ProcessTransport is not ready for writing
+    | 
+    | During handling of the above exception, another exception occurred:
+    | 
+    | Traceback (most recent call last):
+    |   File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_internal/query.py", line 342, in _handle_control_request
+    |     await self.transport.write(json.dumps(error_response) + "\n")
+    |   File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_internal/transport/subprocess_cli.py", line 486, in write
+    |     raise CLIConnectionError("ProcessTransport is not ready for writing")
+    | claude_agent_sdk._errors.CLIConnectionError: ProcessTransport is not ready for writing
+    +------------------------------------
