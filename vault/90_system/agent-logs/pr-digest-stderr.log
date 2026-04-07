@@ -1,0 +1,2 @@
+[INFO] Starting PR digest agent
+[ERROR] gh CLI not installed or not authenticated. Run: gh auth login
