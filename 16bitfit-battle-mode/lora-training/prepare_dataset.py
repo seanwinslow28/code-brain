@@ -109,29 +109,49 @@ def generate_caption(filename: str) -> str:
     pose_desc = "standing pose"
     bg_desc = "transparent background"
 
-    if "idle" in stem:
+    if "fighting-stance" in stem or "fighting_stance" in stem:
+        pose_desc = "fighting stance, fists raised, weight on back foot"
+    elif "menacing-idle" in stem or "menacing_idle" in stem:
+        pose_desc = "menacing idle stance, fists clenched, intimidating"
+    elif "idle" in stem:
         pose_desc = "idle stance, arms at sides"
     elif "walk" in stem:
         pose_desc = "walking forward, mid-stride"
-    elif "punch" in stem or "attack" in stem:
-        pose_desc = "throwing a punch, dynamic pose"
+    elif "uppercut" in stem:
+        pose_desc = "throwing a rising uppercut, fist driving upward"
+    elif "punch" in stem or "jab" in stem:
+        pose_desc = "throwing a punch, arm extended forward"
+    elif "ground-slam" in stem or "ground_slam" in stem:
+        pose_desc = "slamming fists into the ground, bent forward"
+    elif "energy-blast" in stem or "energy_blast" in stem:
+        pose_desc = "firing energy blast from outstretched hands"
+    elif "attack-windup" in stem or "attack_windup" in stem:
+        pose_desc = "winding up for a heavy attack, arm pulled back"
     elif "kick" in stem:
         pose_desc = "executing a kick, leg extended"
     elif "block" in stem or "defend" in stem:
-        pose_desc = "blocking stance, arms raised"
-    elif "crouch" in stem:
-        pose_desc = "crouching, defensive posture"
-    elif "jump" in stem:
-        pose_desc = "jumping, airborne pose"
+        pose_desc = "blocking stance, arms raised to protect"
+    elif "crouch" in stem or "duck" in stem:
+        pose_desc = "crouching low, ducking under attack"
+    elif "jump" in stem or "airborne" in stem:
+        pose_desc = "jumping, airborne mid-air pose"
     elif "hit" in stem or "hurt" in stem:
-        pose_desc = "taking a hit, recoiling"
+        pose_desc = "taking a hit, recoiling backward in pain"
     elif "victory" in stem or "win" in stem:
-        pose_desc = "victory pose, celebrating"
+        pose_desc = "victory pose, arms raised celebrating"
+    elif "charging" in stem or "charge" in stem:
+        pose_desc = "charging forward aggressively, head lowered"
+    elif "flexing" in stem or "taunt" in stem:
+        pose_desc = "flexing muscles, taunting arrogantly"
+    elif "vanishing" in stem or "dodge" in stem:
+        pose_desc = "dodging with ethereal vanishing effect"
+    elif "facing-right" in stem or "facing_right" in stem:
+        pose_desc = "standing pose, facing right, neutral stance"
     elif "defeat" in stem or "ko" in stem:
         pose_desc = "defeated, falling down"
 
-    if "green" in stem:
-        bg_desc = "chroma key green background"
+    # All generated images have green backgrounds; only override if filename says otherwise
+    bg_desc = "chroma key green background"
 
     return DEFAULT_CAPTION_TEMPLATE.format(
         trigger=TRIGGER_WORD, pose_desc=pose_desc, bg_desc=bg_desc
