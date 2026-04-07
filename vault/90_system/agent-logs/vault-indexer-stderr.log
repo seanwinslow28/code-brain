@@ -282,3 +282,15 @@
 [INFO] Indexed Home.md: 1 chunks
 [INFO] Indexed Sean-Winslow-Full-Personal-Context-v1.1.md: 7 chunks
 [INFO] Indexing complete: 2638 chunks, 2638 embeddings, 0 errors, 172069ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 289 vault files, 9 need indexing, 0 deleted
+[INFO] Indexed 10_timeline/daily/2026-04-03.md: 3 chunks
+[INFO] Indexed 10_timeline/daily/2026-04-06.md: 1 chunks
+[INFO] Indexed 30_domains/product-management/prompts/ref- bi-weekly-update-prompt.md: 3 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Project CTO (Homepage) Discussion-transcript.md: 17 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Project CTO (Homepage) Discussion.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Sean _ Edvinas-transcript.md: 9 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Sean _ Edvinas.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Untitled Granola Note at 2026-04-06 14-47-14-transcript.md: 13 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Untitled Granola Note at 2026-04-06 14-47-14.md: 1 chunks
+[INFO] Indexing complete: 51 chunks, 51 embeddings, 0 errors, 4781ms
