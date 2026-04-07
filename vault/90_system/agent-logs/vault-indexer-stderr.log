@@ -282,3 +282,15 @@
 [INFO] Indexed Home.md: 1 chunks
 [INFO] Indexed Sean-Winslow-Full-Personal-Context-v1.1.md: 7 chunks
 [INFO] Indexing complete: 2638 chunks, 2638 embeddings, 0 errors, 172069ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 289 vault files, 9 need indexing, 0 deleted
+[INFO] Indexed 10_timeline/daily/2026-04-03.md: 3 chunks
+[INFO] Indexed 10_timeline/daily/2026-04-06.md: 1 chunks
+[INFO] Indexed 30_domains/product-management/prompts/ref- bi-weekly-update-prompt.md: 3 chunks
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[INFO] Indexing complete: 51 chunks, 51 embeddings, 0 errors, 4781ms
