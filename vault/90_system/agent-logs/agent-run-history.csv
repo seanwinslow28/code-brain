@@ -11,3 +11,4 @@ date,time,agent,mode,status,cost_usd,duration_ms,turns,notes
 2026-04-07,05:37:29,process-inbox,,error,,,,unhandled errors in a TaskGroup (1 sub-exception)
 2026-04-07,06:09:02,daily-driver,morning,error,,,,unhandled errors in a TaskGroup (1 sub-exception)
 2026-04-07,08:05:06,pr-digest,,error,0.0000,6,,gh CLI not available
+2026-04-07,17:01:24,daily-driver,evening,error,,,,unhandled errors in a TaskGroup (1 sub-exception)
