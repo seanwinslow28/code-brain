@@ -36,8 +36,9 @@ mixed_precision = "bf16"
 full_fp16 = false
 full_bf16 = true
 
-# Fused backward pass — CRITICAL for 16GB VRAM (~10GB with Adafactor)
-fused_backward_pass = true
+# NOTE: fused_backward_pass only works with sdxl_train.py (full fine-tune),
+# NOT with train_network.py (LoRA). Removed after Training Run 001.
+# fused_backward_pass = true
 
 # Cache latents to save VRAM during training
 cache_latents = true
@@ -61,7 +62,7 @@ network_dim = 32          # rank 32 = sweet spot for style LoRAs (~20-40MB)
 network_alpha = 32        # same as rank for 1.0 scaling
 
 [dataset]
-train_data_dir = "C:\\Users\\seanw\\Documents\\Code-Brain\\lora-training\\dataset\\10_16bitfit_style"
+train_data_dir = "C:\\Users\\seanw\\Documents\\Code-Brain\\lora-training\\dataset"
 resolution = "1024,1024"
 enable_bucket = true
 bucket_reso_steps = 64

@@ -1,0 +1,5 @@
+2026-04-08 08:00:01,438 [INFO] Starting PR digest agent
+2026-04-08 08:00:03,302 [INFO] Fetched 0 PRs from seanwinslow28/16BitFit-V3
+2026-04-08 08:00:03,610 [INFO] Fetched 0 PRs from seanwinslow28/sprite-sheet-automation-2026
+2026-04-08 08:00:03,974 [INFO] Fetched 0 PRs from seanwinslow28/claude-code-superuser-pack
+2026-04-08 08:00:03,976 [INFO] PR digest written to /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/02_Areas/Work/pr-digest-2026-04-08.md: 0 PRs across 3 repos, 2537ms

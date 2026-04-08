@@ -5,6 +5,28 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.12.2] - 2026-04-08
+
+### Fixed
+
+- **Daily driver morning agent hitting budget cap** — The 2026-04-08 morning run connected successfully (PATH fix confirmed working) but failed with `error_max_budget_usd` after 9 turns / $0.29 spent, exceeding the $0.25 cap. Bumped morning budget from $0.25 to $0.50.
+
+### Changed
+
+- Daily driver morning schedule: 6:00 AM → 8:45 AM (config.toml + launchd plist)
+- Daily driver morning budget: $0.25 → $0.50 (config.toml)
+
+## [3.12.1] - 2026-04-07
+
+### Fixed
+
+- **launchd agents failing with `TaskGroup` / `CLIConnectionError`** — All Claude Agent SDK agents (daily-driver, process-inbox, pr-digest, etc.) had been failing since 2026-04-01. Root cause: macOS launchd runs jobs with a minimal PATH that doesn't include `~/.local/bin` where the `claude` CLI lives. The SDK spawns `claude` as a subprocess, and when launchd couldn't find the binary, the process died immediately, surfacing as `CLIConnectionError: ProcessTransport is not ready for writing` (wrapped in an unhelpful `TaskGroup` error). Added `EnvironmentVariables` with full `PATH` to all 9 launchd plists. See `agents-sdk/BUGFIX-2026-04-07-launchd-path.md` for full writeup.
+
+### Changed
+
+- Upgraded `claude-agent-sdk` from `0.1.39` to `0.1.56`
+- All 9 launchd plists in `agents-sdk/schedules/` now include `PATH` in `EnvironmentVariables` (includes `~/.local/bin` for `claude` CLI and `/opt/homebrew/bin` for `gh` and other Homebrew tools)
+
 ## [3.12.0] - 2026-03-18
 
 ### Added

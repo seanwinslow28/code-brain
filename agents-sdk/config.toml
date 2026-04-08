@@ -7,14 +7,14 @@ life_systems_scripts = "life-systems/scripts"
 [agents.daily_driver]
 enabled = true
 skills = ["daily-driver", "vault-read-write"]
-morning_time = "06:00"
+morning_time = "08:45"
 evening_time = "17:00"
 weekly_day = "Friday"
 weekly_time = "16:00"
 
 [agents.daily_driver.modes.morning]
 max_turns = 15
-max_budget_usd = 0.25
+max_budget_usd = 0.50
 
 [agents.daily_driver.modes.evening]
 max_turns = 10
