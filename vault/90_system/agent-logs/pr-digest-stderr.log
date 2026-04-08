@@ -1,2 +1,7 @@
 [INFO] Starting PR digest agent
 [ERROR] gh CLI not installed or not authenticated. Run: gh auth login
+[INFO] Starting PR digest agent
+[INFO] Fetched 0 PRs from seanwinslow28/16BitFit-V3
+[INFO] Fetched 0 PRs from seanwinslow28/sprite-sheet-automation-2026
+[INFO] Fetched 0 PRs from seanwinslow28/claude-code-superuser-pack
+[INFO] PR digest written to /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/02_Areas/Work/pr-digest-2026-04-08.md: 0 PRs across 3 repos, 2537ms

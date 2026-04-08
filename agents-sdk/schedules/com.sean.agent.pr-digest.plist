@@ -16,6 +16,11 @@
         <key>Minute</key>
         <integer>0</integer>
     </dict>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/Users/seanwinslow/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
     <key>WorkingDirectory</key>
     <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack</string>
     <key>StandardOutPath</key>

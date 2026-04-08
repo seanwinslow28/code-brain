@@ -60,5 +60,8 @@ life-systems/finance/*.csv
 life-systems/health/*.csv
 life-systems/tasks/*.csv
 
+# LoRA training output (large model files)
+16bitfit-battle-mode/lora-output/
+
 # Portfolio & Hubs project (has its own git repo)
 sw-portfolio-and-hubs-designs/

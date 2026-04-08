@@ -1,0 +1,4 @@
+2026-04-08 05:30:14,632 [INFO] Starting process inbox agent
+2026-04-08 05:31:08,038 [INFO] Completed: status=error_max_budget_usd, turns=9, cost=$0.33416324999999997
+2026-04-08 05:31:08,364 [ERROR] Agent failed: Command failed with exit code 1 (exit code: 1)
+Error output: Check stderr output for details

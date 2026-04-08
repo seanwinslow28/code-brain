@@ -1,0 +1,11 @@
+2026-04-08 02:11:26,133 [INFO] Starting vault embedding indexer
+2026-04-08 02:11:29,680 [INFO] Discovered 298 vault files, 9 need indexing, 0 deleted
+2026-04-08 02:11:34,410 [INFO] Indexed 10_timeline/daily/2026-04-07.md: 4 chunks
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+2026-04-08 02:11:38,798 [INFO] Indexing complete: 64 chunks, 64 embeddings, 0 errors, 12641ms

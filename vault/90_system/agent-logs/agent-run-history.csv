@@ -12,3 +12,11 @@ date,time,agent,mode,status,cost_usd,duration_ms,turns,notes
 2026-04-07,06:09:02,daily-driver,morning,error,,,,unhandled errors in a TaskGroup (1 sub-exception)
 2026-04-07,08:05:06,pr-digest,,error,0.0000,6,,gh CLI not available
 2026-04-07,17:01:24,daily-driver,evening,error,,,,unhandled errors in a TaskGroup (1 sub-exception)
+2026-04-07,18:38:44,daily-driver,evening,error,,,,"Command failed with exit code 1 (exit code: 1)
+Error output: Check stderr output for details"
+2026-04-08,02:11:38,vault-indexer,,success,0.0000,12641,,"chunks=64, embeddings=64, errors=0"
+2026-04-08,05:31:08,process-inbox,,error,,,,"Command failed with exit code 1 (exit code: 1)
+Error output: Check stderr output for details"
+2026-04-08,06:11:17,daily-driver,morning,error,,,,"Command failed with exit code 1 (exit code: 1)
+Error output: Check stderr output for details"
+2026-04-08,08:00:03,pr-digest,,success,0.0000,2537,,"prs=0, repos=3"
