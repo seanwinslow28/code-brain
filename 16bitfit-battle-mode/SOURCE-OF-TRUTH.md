@@ -1,7 +1,7 @@
 # Source of Truth — Sean's Agentic Frameworks & Creative Pipeline Master Plan
 
 **Created:** 2026-03-27 (Boston, post-move)
-**Last Updated:** 2026-04-02 — Phase 4 in progress. RIFE VFI confirmed as primary interpolation engine (GMFSS blocked by cupy). Walk cycle strategy locked: NB2 → RIFE VFI → Pixel Quantizer. Building memory/retrieval agents + LoRA training setup.
+**Last Updated:** 2026-04-08 — Phase 4 COMPLETE (11/11 PASS). LoRA training completed + tested → ABANDONED (Gemini NB2 keyframes confirmed superior). RIFE VFI primary interpolation engine. Walk cycle strategy LOCKED: NB2 → RIFE VFI → Pixel Quantizer. 8 agents built. Phase 5 planning in progress.
 **Purpose:** Compressed reference doc for every future Claude Code / Cowork session. Feed THIS file + the specific subfolder relevant to your current task. Never dump all 28 source files at once.
 **Source Files:** 28 original docs + 3 Perplexity Computer outputs in `Agentic-Frameworks-And-Autoresearch/`
 
@@ -183,17 +183,14 @@ Map the three-file architecture to ComfyUI: `prepare.py` = input images + evalua
 
 **This depends on Workstream A infrastructure:** The Mac Mini orchestrates, the Alienware runs ComfyUI + scoring, WOL wakes the Alienware for overnight runs.
 
-**LoRA Training (ready to execute):**
+**LoRA Training — ABANDONED (April 8, 2026):**
 
-| Decision | Choice | Why |
-|----------|--------|-----|
-| Framework | kohya_ss (dev branch, gui-uv.bat) | Best SDXL support, RTX 5080 compatible |
-| Base model | Illustrious XL v0.1 (CONFIRMED — train on v0.1, infer on v2.0/v3.x) | Community consensus: LoRAs trained on v2.0+ have reduced cross-compatibility. v0.1 LoRAs work across ecosystem. |
-| Optimizer | Adafactor | Required for fused backward pass (~10GB VRAM) |
-| Attention | SDPA (PyTorch native) | xformers crashes on sm_120 |
-| LoRA rank | 32 | Sweet spot for style LoRAs |
-| Dataset | 30-50 PNGs of your art style, 1024px+ | Nearest-neighbor upscaling only |
-| Training time | 30-90 minutes | 10 epochs, 10-15 repeats |
+Training Run 001 completed successfully (61 images, 3,050 steps, loss 0.080, 2h 12m on RTX 5080). 33-image ComfyUI test matrix showed the LoRA shifts Illustrious XL v2.0 toward pixel art but produces anime-proportioned characters with HUD artifacts — not the SF2 arcade aesthetic needed. Multiple prior attempts across the project also failed. **Decision: LoRA path abandoned. Gemini NB2 keyframes produce the correct style natively and score 87.6% through RIFE+Quantizer.** Training infrastructure (kohya_ss, scripts, configs) remains on Alienware if ever needed for a different use case.
+
+| What Was Tried | Result |
+|----------------|--------|
+| kohya_ss dev, Illustrious XL v0.1, Adafactor, SDPA, rank 32, 61 images, 10 epochs | Loss 0.080 (healthy), but output style wrong for SF2 sprites |
+| Inference on Illustrious XL v2.0, strength sweep 0.5-1.0, 3 poses | Best results at 0.9-1.0 but still anime-hybrid, not arcade pixel art |
 
 **Critical RTX 5080 requirements:** PyTorch ≥2.7.0 stable cu128 (nightly no longer needed), CUDA 12.8+, cuDNN 9.x, NO xformers (use SDPA), kohya_ss dev branch only. ComfyUI v0.18.2+ with `--force-fp16` flag for VRAM savings.
 
@@ -329,11 +326,11 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 - [x] kohya_ss training config: `lora-training/sprite-style-config.toml` (Adafactor, SDPA, rank 32, Illustrious XL v0.1, fused backward pass, bf16)
 - [x] Dataset prep script: `lora-training/prepare_dataset.py` — nearest-neighbor upscale verified sharp, auto-captioning with trigger word
 - [x] Training runbook: `lora-training/TRAINING-RUNBOOK.md` — complete step-by-step for Alienware
-- [ ] Collect 30-50 training images (Sean must do manually)
-- [ ] Download Illustrious XL v0.1 + install kohya_ss dev branch on Alienware (Sean must do manually)
-- [ ] Train first style LoRA (after dataset collected)
-- [ ] Test LoRA in ComfyUI pipeline for sprite generation quality
-- [ ] Integrate LoRA into pipeline's ComfyUI adapter
+- [x] ~~Collect 30-50 training images~~ → Collected 61 images (36 original + 15 supplement + extras) via Gemini NB2
+- [x] ~~Download Illustrious XL v0.1 + install kohya_ss dev branch on Alienware~~ → Done. kohya_ss v25.2.1, PyTorch 2.7.0+cu128.
+- [x] ~~Train first style LoRA~~ → Training Run 001 complete: 3,050 steps, 2h 12m, loss 0.080. Two checkpoints (epoch 5 + 10).
+- [x] ~~Test LoRA in ComfyUI pipeline~~ → 33-image test matrix on Illustrious XL v2.0. Results: recognizable characters but anime-proportioned, multi-character, HUD artifacts. Not SF2-quality.
+- [x] **DECISION: LoRA path ABANDONED.** Multiple training attempts across project history produced consistently poor results for SF2-style pixel art. Gemini NB2 keyframes are confirmed superior (77.7% raw, 87.6% through RIFE+Quantizer). LoRA adds complexity for worse output. Workstream C refocused on autoresearch (ComfyUI workflow optimization) only.
 
 ### Phase 5: Autoresearch + Scale (Weeks 9-12 — May 22 - Jun 19)
 
@@ -342,7 +339,7 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 - [ ] Begin batch generation: 2nd and 3rd Champions through pipeline
 - [ ] Build sprite pipeline dashboard (reference: Perplexity UI/UX research prompt already written)
 
-**Workstream C — Autoresearch Loop (built on proven components):**
+**Workstream C — Autoresearch Loop (built on proven components, LoRA-free):**
 - [ ] Fork ComfyGI mutation operators (checkpoint, ksampler, prompt_word, prompt_llm)
 - [ ] Implement Optuna TPE sampler for parameter search (numerical/categorical). Reserve LLM agent for prompt optimization (DSPy-style, Tier 2).
 - [ ] Install ImageReward ComfyUI node as primary fitness function
@@ -350,7 +347,8 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 - [ ] Implement upgraded quality metrics: DISTS + DINOv2 + EDOKS + Qwen3-VL LLM-as-Judge
 - [ ] Configure overnight runs: Mac Mini orchestrates, Alienware runs ComfyUI + scoring
 - [ ] Evaluate ComfyUI CacheProvider API for parallel experiments (multiple worker instances sharing model cache)
-- [ ] First optimization target: find optimal sampler/CFG/steps for your LoRA + Illustrious XL combo
+- [ ] First optimization target: find optimal NB2 prompt templates + RIFE interpolation params for each animation type (LoRA abandoned — focus on prompt + pipeline optimization)
+- [ ] Build PixelLabAdapter behind VideoModelAdapter interface ($0.007-$0.016/gen, 128×128 max, skeleton-based animation)
 
 **Workstream A — Meta:**
 - [ ] Meta-Agent / Chief of Staff → Mac Mini orchestrates, MacBook runs summaries, Opus synthesizes
@@ -373,7 +371,7 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 
 6. ~~**Agent Teams vs Subagents**~~ — RESOLVED. Agent Teams are now production-ready (no longer experimental). Use for complex multi-agent work; subagents for focused tasks.
 
-7. **LoRA quality for this specific art style** — STILL OPEN. But now confirmed: train on Illustrious XL v0.1, infer on v2.0-STABLE or v3.x for best results. Also evaluate Flux.2 Klein + community pixel art LoRA as fallback path.
+7. ~~**LoRA quality for this specific art style**~~ — RESOLVED (April 8). **LoRA path abandoned.** Training Run 001 (61 images, rank 32, Illustrious XL v0.1→v2.0 inference) produced anime-proportioned characters with HUD artifacts — not SF2-quality pixel art. Multiple prior attempts also failed. Root cause: SDXL LoRA training cannot reliably learn the specific SF2 arcade sprite aesthetic from small datasets. **Decision: Gemini NB2 keyframes are the production path.** NB2→RIFE VFI→Pixel Quantizer scores 87.6% and produces the correct style natively.
 
 8. ~~**Could PixelLab/Ludo.ai bypass the hybrid pipeline?**~~ — RESOLVED (Phase 4). rd-animation dead. **PixelLab v3 HAS a public API** with Python SDK ($0.007-$0.016/gen). "Animate with Skeleton" + "Estimate Skeleton" endpoints, max 128×128. Viable for pipeline integration — build PixelLabAdapter in Phase 5. Ludo.ai still untested. The hybrid pipeline remains primary (RIFE VFI 87.6%).
 
