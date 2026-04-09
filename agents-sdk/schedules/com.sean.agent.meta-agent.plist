@@ -13,7 +13,7 @@
         <string>--max-turns</string>
         <string>10</string>
         <string>--budget</string>
-        <string>0.10</string>
+        <string>0.30</string>
     </array>
 
     <key>WorkingDirectory</key>
@@ -28,9 +28,9 @@
     <key>StartCalendarInterval</key>
     <dict>
         <key>Hour</key>
-        <integer>6</integer>
+        <integer>8</integer>
         <key>Minute</key>
-        <integer>30</integer>
+        <integer>35</integer>
     </dict>
 
     <key>StandardOutPath</key>
