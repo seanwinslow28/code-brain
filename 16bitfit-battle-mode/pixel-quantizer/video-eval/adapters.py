@@ -1136,7 +1136,10 @@ class RIFEAdapter(VideoModelAdapter):
                     "multiplier": self._multiplier,
                     "fast_mode": True,
                     "ensemble": True,
-                    "optional_interpolation_states": None,
+                    "scale_factor": 1.0,
+                    "dtype": "float16",
+                    "torch_compile": False,
+                    "batch_size": 1,
                 },
             }
             node_id += 1
@@ -1149,7 +1152,9 @@ class RIFEAdapter(VideoModelAdapter):
                     "frame_rate": fps,
                     "format": "video/h264-mp4",
                     "filename_prefix": "rife_interpolated",
-                    "quality": 90,
+                    "loop_count": 0,
+                    "pingpong": False,
+                    "save_output": True,
                 },
             }
 
@@ -1182,20 +1187,23 @@ class RIFEAdapter(VideoModelAdapter):
                     f"ComfyUI RIFE timed out after 30s. Prompt ID: {prompt_id}"
                 )
 
-            # Step 5: Download output
+            # Step 5: Download output (VHS_VideoCombine stores under "gifs" key)
             video_data = b""
             for node_out in outputs.values():
-                if "videos" in node_out:
-                    video_info = node_out["videos"][0]
-                    video_resp = await client.get(
-                        f"{base_url}/view",
-                        params={
-                            "filename": video_info["filename"],
-                            "subfolder": video_info.get("subfolder", ""),
-                            "type": video_info.get("type", "output"),
-                        },
-                    )
-                    video_data = video_resp.content
+                for key in ("gifs", "videos"):
+                    if key in node_out:
+                        video_info = node_out[key][0]
+                        video_resp = await client.get(
+                            f"{base_url}/view",
+                            params={
+                                "filename": video_info["filename"],
+                                "subfolder": video_info.get("subfolder", ""),
+                                "type": video_info.get("type", "output"),
+                            },
+                        )
+                        video_data = video_resp.content
+                        break
+                if video_data:
                     break
 
             if not video_data:
