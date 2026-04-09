@@ -1174,3 +1174,271 @@ def _create_synthetic_frame(
         format="rgba",
         metadata={"synthetic": True, "frame_index": frame_index},
     )
+
+
+# ─── PixelLab Adapter ────────────────────────────────────────────────
+
+
+class PixelLabAdapter(VideoModelAdapter):
+    """Adapter for PixelLab API — native pixel art generation + animation.
+
+    PixelLab offers:
+    - "Generate Sprite": single-frame pixel art from text/image prompt
+    - "Animate with Skeleton": skeleton-based animation between poses
+    - "Estimate Skeleton": extract pose skeleton from an image
+    - Max output: 128×128 (matches Champion tile size)
+    - Pricing: $0.007-$0.016 per generation
+    - Native pixel art output — may NOT need Pixel Quantizer post-processing
+
+    API docs: https://api.pixellab.ai/v1/docs
+    API key from macOS Keychain as 'pixel_lab_api_key'.
+    """
+
+    BASE_URL = "https://api.pixellab.ai/v1"
+
+    def __init__(self, api_key: str | None = None):
+        self._api_key = api_key
+
+    @property
+    def name(self) -> str:
+        return "PixelLab"
+
+    @property
+    def supports_keyframe_input(self) -> bool:
+        return True  # Supports start/end skeleton for animation
+
+    @property
+    def max_keyframes(self) -> int:
+        return 2  # Animate with Skeleton: start + end pose
+
+    def _get_api_key(self) -> str:
+        if self._api_key:
+            return self._api_key
+        from lib.keychain import get_credential
+        key = get_credential("pixel_lab_api_key")
+        if not key:
+            raise RuntimeError("pixel_lab_api_key not found in Keychain")
+        return key
+
+    async def generate_keyframes(
+        self, config: KeyframeConfig
+    ) -> list[GeneratedFrame]:
+        """Generate keyframe sprites using PixelLab's 'Generate Sprite' endpoint."""
+        import base64
+        import httpx
+
+        api_key = self._get_api_key()
+        frames: list[GeneratedFrame] = []
+
+        for pose_desc in [config.start_pose, config.end_pose]:
+            prompt = (
+                f"A {config.width}x{config.height} pixel art sprite of {config.character_name}, "
+                f"{config.style} style, {pose_desc}, "
+                f"solid green (#00FF00) background, facing right, "
+                f"bold dark outlines"
+            )
+
+            async with httpx.AsyncClient(timeout=60.0) as client:
+                resp = await client.post(
+                    f"{self.BASE_URL}/generate-sprite",
+                    headers={
+                        "Authorization": f"Bearer {api_key}",
+                        "Content-Type": "application/json",
+                    },
+                    json={
+                        "description": prompt,
+                        "image_size": {"width": config.width, "height": config.height},
+                        "style": "pixel_art",
+                        "background_color": config.background_color,
+                        # TODO: Verify exact API field names when SDK is available
+                    },
+                )
+                resp.raise_for_status()
+                data = resp.json()
+
+                # TODO: Adapt response parsing to actual API response format
+                image_data = base64.b64decode(data.get("image", data.get("data", "")))
+
+                frames.append(GeneratedFrame(
+                    data=image_data,
+                    width=config.width,
+                    height=config.height,
+                    metadata={"adapter": "pixellab", "pose": pose_desc},
+                ))
+
+        return frames
+
+    async def interpolate_frames(
+        self,
+        keyframes: list[GeneratedFrame],
+        duration_secs: float = 1.0,
+        fps: int = 12,
+    ) -> GeneratedVideo:
+        """Animate between keyframes using 'Animate with Skeleton' endpoint.
+
+        PixelLab takes start/end frame + skeleton data and generates
+        in-between frames with proper pixel art interpolation.
+        """
+        import base64
+        import httpx
+
+        if len(keyframes) < 2:
+            raise ValueError("PixelLab animation requires at least 2 keyframes")
+
+        api_key = self._get_api_key()
+        target_frames = int(duration_secs * fps)
+
+        start_b64 = base64.b64encode(keyframes[0].data).decode()
+        end_b64 = base64.b64encode(keyframes[-1].data).decode()
+
+        async with httpx.AsyncClient(timeout=120.0) as client:
+            resp = await client.post(
+                f"{self.BASE_URL}/animate-with-skeleton",
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "start_image": start_b64,
+                    "end_image": end_b64,
+                    "num_frames": target_frames,
+                    "style": "pixel_art",
+                    # TODO: Verify exact API field names — "Estimate Skeleton"
+                    # may need to be called first to get skeleton data
+                },
+            )
+            resp.raise_for_status()
+            data = resp.json()
+
+            # TODO: Adapt response parsing to actual API format
+            # Expected: list of frame images in base64
+            frame_images = data.get("frames", [])
+            frames_data = [base64.b64decode(f) for f in frame_images]
+
+        video_data = b"".join(frames_data)
+        return GeneratedVideo(
+            data=video_data,
+            duration_secs=duration_secs,
+            fps=fps,
+            width=keyframes[0].width,
+            height=keyframes[0].height,
+            format="raw_frames",
+            metadata={
+                "adapter": "pixellab",
+                "frame_count": len(frames_data),
+                "frames": frames_data,
+            },
+        )
+
+    async def generate_video(
+        self,
+        reference_image: GeneratedFrame,
+        motion_description: str,
+        duration_secs: float = 1.0,
+    ) -> GeneratedVideo:
+        """Generate animation from a single reference image + motion description.
+
+        Uses 'Animate with Skeleton' with auto-estimated end pose.
+        """
+        import base64
+        import httpx
+
+        api_key = self._get_api_key()
+        ref_b64 = base64.b64encode(reference_image.data).decode()
+        target_frames = int(duration_secs * 12)
+
+        async with httpx.AsyncClient(timeout=120.0) as client:
+            # Step 1: Estimate skeleton from reference
+            skel_resp = await client.post(
+                f"{self.BASE_URL}/estimate-skeleton",
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json",
+                },
+                json={"image": ref_b64},
+            )
+            skel_resp.raise_for_status()
+            skeleton = skel_resp.json()
+
+            # Step 2: Animate with skeleton + motion description
+            resp = await client.post(
+                f"{self.BASE_URL}/animate-with-skeleton",
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "start_image": ref_b64,
+                    "skeleton": skeleton,
+                    "motion_description": motion_description,
+                    "num_frames": target_frames,
+                    "style": "pixel_art",
+                },
+            )
+            resp.raise_for_status()
+            data = resp.json()
+
+            frame_images = data.get("frames", [])
+            frames_data = [base64.b64decode(f) for f in frame_images]
+
+        video_data = b"".join(frames_data)
+        return GeneratedVideo(
+            data=video_data,
+            duration_secs=duration_secs,
+            fps=12,
+            width=reference_image.width,
+            height=reference_image.height,
+            format="raw_frames",
+            metadata={
+                "adapter": "pixellab",
+                "motion": motion_description,
+                "frame_count": len(frames_data),
+                "frames": frames_data,
+            },
+        )
+
+
+class StubPixelLabAdapter(VideoModelAdapter):
+    """Stub PixelLab adapter for dry-run testing. Returns synthetic frames."""
+
+    @property
+    def name(self) -> str:
+        return "PixelLab (stub)"
+
+    @property
+    def supports_keyframe_input(self) -> bool:
+        return True
+
+    @property
+    def max_keyframes(self) -> int:
+        return 2
+
+    async def generate_keyframes(self, config: KeyframeConfig) -> list[GeneratedFrame]:
+        frames = []
+        for i in range(2):
+            frame = _create_synthetic_frame(config.width, config.height, config.background_color, i)
+            frame.metadata["adapter"] = "pixellab-stub"
+            frames.append(frame)
+        return frames
+
+    async def interpolate_frames(
+        self,
+        keyframes: list[GeneratedFrame],
+        duration_secs: float = 1.0,
+        fps: int = 12,
+    ) -> GeneratedVideo:
+        total = int(duration_secs * fps)
+        frames_data = []
+        for i in range(total):
+            f = _create_synthetic_frame(128, 128, "#00FF00", i)
+            frames_data.append(f.data)
+
+        return GeneratedVideo(
+            data=b"".join(frames_data),
+            duration_secs=duration_secs,
+            fps=fps,
+            width=128,
+            height=128,
+            format="raw_frames",
+            metadata={"adapter": "pixellab-stub", "frame_count": total, "frames": frames_data},
+        )

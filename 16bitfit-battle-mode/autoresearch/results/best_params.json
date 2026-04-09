@@ -1,0 +1,19 @@
+{
+  "animation_type": "walk_forward",
+  "character_name": "sean",
+  "best_params": {
+    "style_descriptor": "arcade fighter pixel art",
+    "pose_phrasing": "reference_based",
+    "negative_emphasis": "strict_pixel",
+    "rife_multiplier": 2,
+    "rife_model": "rife49.pth",
+    "palette_size": 32,
+    "outline_thickness": 3,
+    "temporal_smoothing_window": 5,
+    "ksampler_steps": 30,
+    "ksampler_cfg": 9.0
+  },
+  "best_score": 74.35,
+  "total_trials": 3,
+  "timestamp": 1775747996.238741
+}

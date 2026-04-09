@@ -76,6 +76,14 @@ schedule = "08:00"
 repos = ["seanwinslow28/16BitFit-V3", "seanwinslow28/sprite-sheet-automation-2026", "seanwinslow28/claude-code-superuser-pack"]
 target_machine = "macbook_pro"
 
+[agents.meta_agent]
+enabled = true
+skills = ["vault-read-write"]
+max_turns = 10
+max_budget_usd = 0.10
+schedule = "06:30"
+target_machine = "mac_mini"
+
 [agents.health_audit]
 enabled = false
 skills = ["health-habits", "vault-read-write"]

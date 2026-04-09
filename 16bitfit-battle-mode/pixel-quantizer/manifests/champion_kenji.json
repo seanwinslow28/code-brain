@@ -1,0 +1,28 @@
+{
+  "name": "Kenji",
+  "tile_size": 128,
+  "type": "champion",
+  "description": "Lean build, black hair in bun, gray gi top, dark gray pants, white shoes",
+  "anchor_images": [
+    "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/champions/Kenji/champion_kenji_anchor-1.png",
+    "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/champions/Kenji/champion_kenji_anchor-2.png",
+    "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/champions/Kenji/champion_kenji_anchor-3.png"
+  ],
+  "animations": [
+    "idle",
+    "walk_forward",
+    "walk_backward",
+    "jump",
+    "crouch",
+    "light_punch",
+    "medium_punch",
+    "heavy_punch",
+    "light_kick",
+    "heavy_kick",
+    "block",
+    "take_hit",
+    "victory",
+    "defeat",
+    "special_move"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "total_characters": 12,
+  "champions": [
+    "champion_sean.json",
+    "champion_aria.json",
+    "champion_kenji.json",
+    "champion_marcus.json",
+    "champion_mary.json",
+    "champion_zara.json"
+  ],
+  "bosses": [
+    "boss_gym_bully.json",
+    "boss_procrastination_phantom.json",
+    "boss_sloth_demon.json",
+    "boss_stress_titan.json",
+    "boss_training_dummy.json",
+    "boss_ultimate_slump.json"
+  ],
+  "animations_per_character": 15,
+  "total_animations": 180
+}
