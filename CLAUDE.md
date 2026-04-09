@@ -62,11 +62,16 @@ python3 scripts/validate.py
 
 The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Claude Agent SDK. These run **outside** Claude Code sessions on macOS launchd schedules. Skills are loaded as system prompts — no duplication.
 
-| Agent | Schedule | Skills Loaded |
-|-------|----------|---------------|
-| Daily Driver (morning) | 6:00 AM | daily-driver, vault-read-write |
-| Daily Driver (evening) | 5:00 PM | daily-driver, vault-read-write |
-| Daily Driver (weekly) | Friday 4:00 PM | daily-driver, vault-read-write |
+**Active agents (2 of 10):**
+
+| Agent | Schedule | Skills Loaded | Cost/Run |
+|-------|----------|---------------|----------|
+| Vault Indexer | 2:00 AM daily | vault-read-write | $0.00 (local Ollama) |
+| Daily Driver (morning) | 8:45 AM daily | daily-driver, vault-read-write | ~$0.40 |
+
+**All other agents disabled as of v3.12.3** (2026-04-09). See `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md` for rationale. Do NOT re-enable without Sean's explicit approval.
+
+**Key limitation:** Headless SDK agents cannot access MCP servers (Slack, Google Calendar, Gmail, etc.) — those require browser-based OAuth only available in interactive sessions. The morning agent creates the daily note skeleton; Slack/calendar data is backfilled when Sean starts an interactive session.
 
 ```bash
 # Dry run (free, prints prompt)

@@ -1,2 +1,0 @@
-2026-04-07 08:05:06,736 [INFO] Starting PR digest agent
-2026-04-07 08:05:06,743 [ERROR] gh CLI not installed or not authenticated. Run: gh auth login

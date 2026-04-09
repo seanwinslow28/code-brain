@@ -5,6 +5,20 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.12.3] - 2026-04-09
+
+### Changed
+
+- **Agent fleet audit and downsizing** — Disabled 8 of 10 scheduled agents after a full audit of `agent-run-history.csv` and all agent logs from April 1–9. Only `vault-indexer` (100% success, $0 cost) and `daily-driver morning` (working since v3.12.2, ~$0.40/run) remain active. See `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md` for full reasoning.
+- Unloaded 6 launchd schedules: `daily-evening`, `process-inbox`, `pr-digest`, `sprint-health`, `meeting-defender`, `weekly-review`
+- Set `enabled = false` in `config.toml` for: `process-inbox`, `pr-digest`, `sprint-health`, `meeting-defender`, `preserve-session`, `spending-analysis` (daily-driver evening/weekly were already only controlled by launchd)
+- Cleaned `vault/90_system/agent-logs/`: removed all logs for disabled agents, truncated stderr rolling logs, trimmed `agent-run-history.csv` to active agents only. Reduced from 44 files to 12.
+- Updated Agents SDK table in `CLAUDE.md` to reflect 2-agent fleet
+
+### Fixed
+
+- **process-inbox burning ~$0.31/day on failures** — Agent hit `error_max_budget_usd` every run since April 1 due to `CLIConnectionError`, wasting ~$9.30/month. Disabled.
+
 ## [3.12.2] - 2026-04-08
 
 ### Fixed
