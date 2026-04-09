@@ -305,3 +305,16 @@
 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-07_10-01-09.md: 2 chunks
 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-07_10-01-09.md: 15 chunks
 [INFO] Indexing complete: 64 chunks, 64 embeddings, 0 errors, 12641ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 308 vault files, 11 need indexing, 0 deleted
+[INFO] Indexed 02_Areas/Work/pr-digest-2026-04-08.md: 1 chunks
+[INFO] Indexed 10_timeline/daily/2026-04-08.md: 4 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Brand, Media, Design Weekly Sync-transcript.md: 17 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Brand, Media, Design Weekly Sync.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Sean _ Edvinas-2026-04-08_12-12-53.md: 1 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Sean _ Edvinas-transcript-2026-04-08_12-12-53.md: 18 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Singular.live discussion_refinement-transcript.md: 34 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Singular.live discussion_refinement.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-08_09-31-26.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-08_09-31-26.md: 9 chunks
+[INFO] Indexing complete: 90 chunks, 90 embeddings, 0 errors, 12954ms
