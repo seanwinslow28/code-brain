@@ -556,48 +556,58 @@ class ReplicateAdapter(VideoModelAdapter):
 
 
 class Wan22Adapter(VideoModelAdapter):
-    """Adapter for Wan 2.2 + pixel animation LoRA via local ComfyUI on Alienware.
+    """Adapter for Wan 2.2 14B Image-to-Video via local ComfyUI on Alienware.
 
-    Connects to ComfyUI REST API at 192.168.68.201:8188.
-    Uses Wan 2.2 I2V checkpoint with styly-agents/Wan2-2-pixel-animate LoRA.
+    Uses the ComfyUI built-in template "Wan 2.2 14B Image to Video":
+    - Dual 14B models (high_noise + low_noise) in fp8
+    - LightX2V 4-step LoRA for fast generation
+    - Two-stage KSamplerAdvanced (high noise → low noise)
+    - WanImageToVideo node (NOT Wan22ImageToVideoLatent)
+    - ModelSamplingSD3 shift=5.0
+    - 640×640 resolution, 81 frames, 16 FPS
+
     SDPA attention only (NO xformers — crashes on RTX 5080 sm_120).
     """
 
     DEFAULT_HOST = "192.168.68.201"
     DEFAULT_PORT = 8188
-    WORKFLOW_PATH = Path(__file__).parent / "workflows" / "wan22_i2v_pixel_animate.json"
+    WORKFLOW_PATH = Path(__file__).parent / "workflows" / "wan22_14b_i2v_template.json"
 
-    # Model filenames confirmed on Alienware (April 2026)
-    # 5B ti2v model works with Wan22ImageToVideoLatent node
-    # 14B i2v models have channel mismatches with current ComfyUI node implementations
-    CHECKPOINT = "wan2.2_ti2v_5B_fp16.safetensors"
-    CHECKPOINT_14B_HIGH = "wan2.2_i2v_high_noise_14B_fp16.safetensors"
-    CHECKPOINT_14B_LOW = "wan2.2_i2v_low_noise_14B_fp16.safetensors"
-    VAE = "wan2.2_vae.safetensors"
+    # 14B fp8 models (confirmed working with ComfyUI v0.3.52 template)
+    CHECKPOINT_HIGH = "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors"
+    CHECKPOINT_LOW = "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors"
+    LORA_HIGH = "wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors"
+    LORA_LOW = "wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors"
+    CLIP = "umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+    VAE = "wan_2.1_vae.safetensors"
 
     def __init__(
         self,
-        lora_strength: float = 0.85,
         host: str | None = None,
         port: int | None = None,
-        use_lora: bool = True,
+        width: int = 832,
+        height: int = 480,
+        num_frames: int = 81,
+        fps: int = 16,
     ):
-        self._lora_strength = lora_strength
         self.COMFYUI_HOST = host or self.DEFAULT_HOST
         self.COMFYUI_PORT = port or self.DEFAULT_PORT
-        self._use_lora = use_lora
+        self._width = width
+        self._height = height
+        self._num_frames = num_frames
+        self._fps = fps
 
     @property
     def name(self) -> str:
-        return "Wan 2.2 (Local ComfyUI)"
+        return "Wan 2.2 14B I2V (Local ComfyUI)"
 
     @property
     def supports_keyframe_input(self) -> bool:
-        return True  # Takes a static image and animates it
+        return True
 
     @property
     def max_keyframes(self) -> int:
-        return 1  # Wan 2.2 I2V takes a single input image
+        return 1
 
     async def generate_keyframes(self, config: KeyframeConfig) -> list[GeneratedFrame]:
         raise NotImplementedError(
@@ -608,23 +618,28 @@ class Wan22Adapter(VideoModelAdapter):
     async def interpolate_frames(
         self,
         keyframes: list[GeneratedFrame],
-        duration_secs: float = 2.0,
-        fps: int = 24,
+        duration_secs: float = 5.0,
+        fps: int = 16,
     ) -> GeneratedVideo:
-        """Send a keyframe to ComfyUI for Wan 2.2 I2V animation.
+        """Animate a keyframe using Wan 2.2 14B dual-model I2V pipeline.
 
-        Builds the workflow programmatically using ComfyUI's built-in
-        Wan nodes (confirmed installed: comfy_extras/nodes_wan.py).
+        Uses the confirmed-working ComfyUI template architecture:
+        - Dual 14B models (high_noise + low_noise) in fp8
+        - LightX2V 4-step LoRA for fast generation
+        - Two-stage KSamplerAdvanced
+        - WanImageToVideo node with proper conditioning
+        - ModelSamplingSD3 shift=5.0
 
         Args:
             keyframes: List with at least one keyframe (first is used).
-            duration_secs: Target duration (maps to frame count: 2s = 49 frames).
-            fps: Target FPS (24 default).
+            duration_secs: Target duration (~5s for 81 frames at 16fps).
+            fps: Target FPS (16 default, matching template).
 
         Returns:
             GeneratedVideo with the animated output.
         """
         import httpx
+        import random
         import uuid
 
         if not keyframes:
@@ -633,13 +648,9 @@ class Wan22Adapter(VideoModelAdapter):
         input_frame = keyframes[0]
         base_url = f"http://{self.COMFYUI_HOST}:{self.COMFYUI_PORT}"
 
-        # Calculate frame count from duration (Wan 2.2 uses 49 frames for ~2s)
-        frame_count = max(25, int(duration_secs * fps) + 1)
-
-        async with httpx.AsyncClient(timeout=300.0) as client:
-            # Step 1: Upload input image to ComfyUI
+        async with httpx.AsyncClient(timeout=600.0) as client:
+            # Step 1: Upload input image
             input_filename = f"wan22_input_{uuid.uuid4().hex[:8]}.png"
-
             upload_resp = await client.post(
                 f"{base_url}/upload/image",
                 files={"image": (input_filename, input_frame.data, "image/png")},
@@ -650,136 +661,163 @@ class Wan22Adapter(VideoModelAdapter):
                 )
             uploaded_name = upload_resp.json().get("name", input_filename)
 
-            # Step 2: Build workflow using confirmed Alienware nodes
-            # UNETLoader + CLIPLoader + VAELoader → WanImageToVideo → KSampler → VAEDecode → VHS_VideoCombine
-            positive_prompt = (
-                "pixel art sprite animation, smooth walk cycle motion, "
-                "chroma key green background preserved, bold dark outlines, "
-                "SF2 fighting game style, no anti-aliasing"
-            )
-            negative_prompt = (
-                "blurry, low quality, distorted, deformed, anti-aliased, "
-                "gradient background, watermark, text"
-            )
+            # Step 2: Build the 14B dual-model workflow
+            # This matches the ComfyUI built-in "Wan 2.2 14B Image to Video" template
+            seed = random.randint(1, 2**53)
 
             prompt_data: dict[str, Any] = {
-                # Load UNet (diffusion model)
-                "1": {
+                # CLIP text encoder
+                "84": {
+                    "class_type": "CLIPLoader",
+                    "inputs": {
+                        "clip_name": self.CLIP,
+                        "type": "wan",
+                        "device": "default",
+                    },
+                },
+                # VAE (uses wan_2.1_vae, NOT wan2.2_vae)
+                "90": {
+                    "class_type": "VAELoader",
+                    "inputs": {"vae_name": self.VAE},
+                },
+                # Dual UNet loaders (14B fp8)
+                "95": {
                     "class_type": "UNETLoader",
                     "inputs": {
-                        "unet_name": self.CHECKPOINT,
+                        "unet_name": self.CHECKPOINT_HIGH,
                         "weight_dtype": "default",
                     },
                 },
-                # Load CLIP text encoder
-                "2": {
-                    "class_type": "CLIPLoader",
+                "96": {
+                    "class_type": "UNETLoader",
                     "inputs": {
-                        "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
-                        "type": "wan",
+                        "unet_name": self.CHECKPOINT_LOW,
+                        "weight_dtype": "default",
                     },
                 },
-                # Load VAE
-                "3": {
-                    "class_type": "VAELoader",
-                    "inputs": {
-                        "vae_name": self.VAE,
-                    },
-                },
-                # Load input image
-                "4": {
+                # Input image
+                "97": {
                     "class_type": "LoadImage",
-                    "inputs": {
-                        "image": uploaded_name,
-                    },
+                    "inputs": {"image": uploaded_name},
                 },
-                # Positive prompt
-                "5": {
+                # Positive prompt (keep it simple — template style)
+                "93": {
                     "class_type": "CLIPTextEncode",
                     "inputs": {
-                        "text": positive_prompt,
-                        "clip": ["2", 0],
+                        "text": "pixel art character walking forward",
+                        "clip": ["84", 0],
                     },
                 },
                 # Negative prompt
-                "6": {
+                "89": {
                     "class_type": "CLIPTextEncode",
                     "inputs": {
-                        "text": negative_prompt,
-                        "clip": ["2", 0],
+                        "text": "morphing, anti-aliasing",
+                        "clip": ["84", 0],
                     },
                 },
-                # Wan 2.2 Image-to-Video latent (NOT WanImageToVideo — that's 2.1)
-                "7": {
-                    "class_type": "Wan22ImageToVideoLatent",
+                # WanImageToVideo — the CORRECT I2V node
+                "98": {
+                    "class_type": "WanImageToVideo",
                     "inputs": {
-                        "vae": ["3", 0],
-                        "width": 480,
-                        "height": 480,
-                        "length": frame_count,
+                        "width": self._width,
+                        "height": self._height,
+                        "length": self._num_frames,
                         "batch_size": 1,
-                        "start_image": ["4", 0],
+                        "positive": ["93", 0],
+                        "negative": ["89", 0],
+                        "vae": ["90", 0],
+                        "start_image": ["97", 0],
                     },
                 },
-                # KSampler — SDPA attention only (NO xformers on RTX 5080 sm_120)
-                # Wan22ImageToVideoLatent outputs [0]=LATENT only
-                # Conditioning comes from CLIPTextEncode nodes 5 (positive) and 6 (negative)
-                "8": {
-                    "class_type": "KSampler",
+                # LightX2V 4-step LoRAs
+                "101": {
+                    "class_type": "LoraLoaderModelOnly",
                     "inputs": {
-                        "seed": 42,
-                        "steps": 20,
-                        "cfg": 5.0,
+                        "lora_name": self.LORA_HIGH,
+                        "strength_model": 1.0,
+                        "model": ["95", 0],
+                    },
+                },
+                "102": {
+                    "class_type": "LoraLoaderModelOnly",
+                    "inputs": {
+                        "lora_name": self.LORA_LOW,
+                        "strength_model": 1.0,
+                        "model": ["96", 0],
+                    },
+                },
+                # ModelSamplingSD3 shift=5.0
+                "104": {
+                    "class_type": "ModelSamplingSD3",
+                    "inputs": {"shift": 5.0, "model": ["101", 0]},
+                },
+                "103": {
+                    "class_type": "ModelSamplingSD3",
+                    "inputs": {"shift": 5.0, "model": ["102", 0]},
+                },
+                # Two-stage KSamplerAdvanced
+                # Stage 1: High noise model, steps 0-2, adds noise
+                "86": {
+                    "class_type": "KSamplerAdvanced",
+                    "inputs": {
+                        "add_noise": "enable",
+                        "noise_seed": seed,
+                        "steps": 4,
+                        "cfg": 1.0,
                         "sampler_name": "euler",
-                        "scheduler": "normal",
-                        "denoise": 1.0,
-                        "model": ["1", 0],
-                        "positive": ["5", 0],
-                        "negative": ["6", 0],
-                        "latent_image": ["7", 0],
+                        "scheduler": "simple",
+                        "start_at_step": 0,
+                        "end_at_step": 2,
+                        "return_with_leftover_noise": "enable",
+                        "model": ["104", 0],
+                        "positive": ["98", 0],
+                        "negative": ["98", 1],
+                        "latent_image": ["98", 2],
+                    },
+                },
+                # Stage 2: Low noise model, steps 2-4, refines
+                "85": {
+                    "class_type": "KSamplerAdvanced",
+                    "inputs": {
+                        "add_noise": "disable",
+                        "noise_seed": 0,
+                        "steps": 4,
+                        "cfg": 1.0,
+                        "sampler_name": "euler",
+                        "scheduler": "simple",
+                        "start_at_step": 2,
+                        "end_at_step": 4,
+                        "return_with_leftover_noise": "disable",
+                        "model": ["103", 0],
+                        "positive": ["98", 0],
+                        "negative": ["98", 1],
+                        "latent_image": ["86", 0],
                     },
                 },
                 # VAE Decode
-                "9": {
+                "87": {
                     "class_type": "VAEDecode",
-                    "inputs": {
-                        "samples": ["8", 0],
-                        "vae": ["3", 0],
-                    },
+                    "inputs": {"samples": ["85", 0], "vae": ["90", 0]},
                 },
-                # Save as video via VHS (confirmed installed)
-                "10": {
-                    "class_type": "VHS_VideoCombine",
+                # Create + Save Video
+                "94": {
+                    "class_type": "CreateVideo",
+                    "inputs": {"fps": float(self._fps), "images": ["87", 0]},
+                },
+                "108": {
+                    "class_type": "SaveVideo",
                     "inputs": {
-                        "images": ["9", 0],
-                        "frame_rate": fps,
-                        "loop_count": 0,
-                        "filename_prefix": "wan22_sprite",
-                        "format": "video/h264-mp4",
-                        "pingpong": False,
-                        "save_output": True,
+                        "filename_prefix": "wan22_14b_sprite",
+                        "format": "mp4",
+                        "codec": "h264",
+                        "video-preview": "",
+                        "video": ["94", 0],
                     },
                 },
             }
 
-            # Optionally add LoRA if enabled and available
-            if self._use_lora:
-                prompt_data["20"] = {
-                    "class_type": "LoraLoader",
-                    "inputs": {
-                        "lora_name": "pixel-000020.safetensors",
-                        "strength_model": self._lora_strength,
-                        "strength_clip": self._lora_strength,
-                        "model": ["1", 0],
-                        "clip": ["2", 0],
-                    },
-                }
-                # Rewire: prompts and sampler use LoRA-modified model/clip
-                prompt_data["5"]["inputs"]["clip"] = ["20", 1]
-                prompt_data["6"]["inputs"]["clip"] = ["20", 1]
-                prompt_data["8"]["inputs"]["model"] = ["20", 0]
-
-            # Step 3: Queue the workflow
+            # Step 3: Queue
             client_id = uuid.uuid4().hex
             queue_resp = await client.post(
                 f"{base_url}/prompt",
@@ -792,98 +830,74 @@ class Wan22Adapter(VideoModelAdapter):
 
             prompt_id = queue_resp.json().get("prompt_id")
 
-            # Step 4: Poll for completion
-            for _ in range(300):  # Max 10 min for video gen on RTX 5080 (14B model is large)
+            # Step 4: Poll for completion (14B takes ~60-240s)
+            for _ in range(300):
                 history_resp = await client.get(f"{base_url}/history/{prompt_id}")
                 if history_resp.status_code == 200:
                     history = history_resp.json()
                     if prompt_id in history:
+                        status = history[prompt_id].get("status", {})
+                        status_str = status.get("status_str", "")
+                        if status_str == "error":
+                            raise RuntimeError(
+                                f"ComfyUI execution error: {json.dumps(status)[:500]}"
+                            )
                         outputs = history[prompt_id].get("outputs", {})
                         if outputs:
                             break
                 await __import__("asyncio").sleep(2)
             else:
                 raise RuntimeError(
-                    f"ComfyUI Wan 2.2 generation timed out after 6 minutes. "
-                    f"Prompt ID: {prompt_id}"
+                    f"ComfyUI Wan 2.2 14B timed out after 10 min. Prompt: {prompt_id}"
                 )
 
-            # Step 5: Download output — handle both images and video
-            frames_data: list[bytes] = []
+            # Step 5: Download video output
+            # SaveVideo node stores output under "images" key (with animated=true),
+            # VHS_VideoCombine uses "gifs" or "videos" key
             video_data = b""
-            output_format = "raw_frames"
-
             for node_id, node_output in outputs.items():
-                # Try video output first (VHS_VideoCombine uses "gifs" key, not "videos")
-                video_key = "videos" if "videos" in node_output else "gifs" if "gifs" in node_output else None
-                if video_key:
-                    video_info = node_output[video_key][0]
-                    video_resp = await client.get(
-                        f"{base_url}/view",
-                        params={
-                            "filename": video_info["filename"],
-                            "subfolder": video_info.get("subfolder", ""),
-                            "type": video_info.get("type", "output"),
-                        },
-                    )
-                    video_data = video_resp.content
-                    output_format = "mp4"
+                for key in ("videos", "gifs", "images"):
+                    if key in node_output:
+                        for item in node_output[key]:
+                            fn = item.get("filename", "")
+                            if fn.endswith((".mp4", ".webm", ".gif")):
+                                video_resp = await client.get(
+                                    f"{base_url}/view",
+                                    params={
+                                        "filename": fn,
+                                        "subfolder": item.get("subfolder", ""),
+                                        "type": item.get("type", "output"),
+                                    },
+                                )
+                                video_data = video_resp.content
+                                break
+                    if video_data:
+                        break
+                if video_data:
                     break
 
-                # Fallback: image output (SaveImage — individual frames)
-                if "images" in node_output:
-                    for img_info in node_output["images"]:
-                        img_resp = await client.get(
-                            f"{base_url}/view",
-                            params={
-                                "filename": img_info["filename"],
-                                "subfolder": img_info.get("subfolder", ""),
-                                "type": img_info.get("type", "output"),
-                            },
-                        )
-                        if img_resp.status_code == 200:
-                            frames_data.append(img_resp.content)
-
-            if not video_data and not frames_data:
+            if not video_data:
                 raise RuntimeError(
-                    f"No output from ComfyUI. Outputs: {json.dumps(outputs)[:300]}"
+                    f"No video output from Wan 2.2 14B. Outputs: {json.dumps(outputs)[:300]}"
                 )
 
-        if output_format == "mp4":
-            return GeneratedVideo(
-                data=video_data,
-                duration_secs=duration_secs,
-                fps=fps,
-                width=480,
-                height=480,
-                format="mp4",
-                metadata={
-                    "adapter": "wan22",
-                    "lora": "Wan2-2-pixel-animate" if self._use_lora else "none",
-                    "lora_strength": self._lora_strength if self._use_lora else 0,
-                    "frame_count": frame_count,
-                    "prompt_id": prompt_id,
-                },
-            )
-        else:
-            # Individual frames from SaveImage
-            combined = b"".join(frames_data)
-            return GeneratedVideo(
-                data=combined,
-                duration_secs=duration_secs,
-                fps=fps,
-                width=480,
-                height=480,
-                format="raw_frames",
-                metadata={
-                    "adapter": "wan22",
-                    "lora": "Wan2-2-pixel-animate" if self._use_lora else "none",
-                    "lora_strength": self._lora_strength if self._use_lora else 0,
-                    "frame_count": len(frames_data),
-                    "prompt_id": prompt_id,
-                    "frames": frames_data,
-                },
-            )
+        return GeneratedVideo(
+            data=video_data,
+            duration_secs=self._num_frames / self._fps,
+            fps=self._fps,
+            width=self._width,
+            height=self._height,
+            format="mp4",
+            metadata={
+                "adapter": "wan22_14b",
+                "models": "dual 14B fp8 (high_noise + low_noise)",
+                "lora": "LightX2V 4-step",
+                "resolution": f"{self._width}x{self._height}",
+                "frames": self._num_frames,
+                "prompt_id": prompt_id,
+                "seed": seed,
+            },
+        )
 
 
 class RIFEAdapter(VideoModelAdapter):

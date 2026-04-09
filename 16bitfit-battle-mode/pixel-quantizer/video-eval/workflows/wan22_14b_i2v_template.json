@@ -1,0 +1,195 @@
+{
+  "_meta": {
+    "workflow_name": "Wan 2.2 14B Image-to-Video (from ComfyUI built-in template)",
+    "description": "The CORRECT Wan 2.2 I2V workflow. Uses dual 14B models (high_noise + low_noise) with LightX2V 4-step LoRA for speed. Two-stage KSamplerAdvanced: high_noise does steps 0-2, low_noise does steps 2-4.",
+    "source": "ComfyUI built-in template 'Wan 2.2 14B Image to Video'",
+    "confirmed_working": "2026-04-02, RTX 5080, ComfyUI v0.3.52, --force-fp16",
+    "key_differences_from_our_broken_workflow": [
+      "Uses WanImageToVideo (NOT Wan22ImageToVideoLatent)",
+      "Uses 14B fp8 models (NOT 5B fp16)",
+      "Uses two-stage KSamplerAdvanced (NOT single KSampler)",
+      "Uses LightX2V 4-step LoRA for speed (4 steps total, not 20-30)",
+      "Uses ModelSamplingSD3 shift=5.0 on both models",
+      "640x640 resolution (NOT 480x480 or 1280x720)",
+      "Uses wan_2.1_vae (NOT wan2.2_vae)"
+    ],
+    "required_models": {
+      "unet_high_noise": "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+      "unet_low_noise": "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+      "clip": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+      "vae": "wan_2.1_vae.safetensors",
+      "lora_high_noise": "wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors",
+      "lora_low_noise": "wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors"
+    }
+  },
+  "prompt": {
+    "84": {
+      "class_type": "CLIPLoader",
+      "inputs": {
+        "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+        "type": "wan",
+        "device": "default"
+      },
+      "_meta": { "title": "Load CLIP" }
+    },
+    "90": {
+      "class_type": "VAELoader",
+      "inputs": {
+        "vae_name": "wan_2.1_vae.safetensors"
+      },
+      "_meta": { "title": "Load VAE" }
+    },
+    "95": {
+      "class_type": "UNETLoader",
+      "inputs": {
+        "unet_name": "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+        "weight_dtype": "default"
+      },
+      "_meta": { "title": "Load Diffusion Model (High Noise)" }
+    },
+    "96": {
+      "class_type": "UNETLoader",
+      "inputs": {
+        "unet_name": "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+        "weight_dtype": "default"
+      },
+      "_meta": { "title": "Load Diffusion Model (Low Noise)" }
+    },
+    "97": {
+      "class_type": "LoadImage",
+      "inputs": {
+        "image": "{{INPUT_IMAGE}}"
+      },
+      "_meta": { "title": "Load Image" }
+    },
+    "93": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "{{POSITIVE_PROMPT}}",
+        "clip": ["84", 0]
+      },
+      "_meta": { "title": "CLIP Text Encode (Positive Prompt)" }
+    },
+    "89": {
+      "class_type": "CLIPTextEncode",
+      "inputs": {
+        "text": "morphing, anti-aliasing",
+        "clip": ["84", 0]
+      },
+      "_meta": { "title": "CLIP Text Encode (Negative Prompt)" }
+    },
+    "98": {
+      "class_type": "WanImageToVideo",
+      "inputs": {
+        "width": 640,
+        "height": 640,
+        "length": 81,
+        "batch_size": 1,
+        "positive": ["93", 0],
+        "negative": ["89", 0],
+        "vae": ["90", 0],
+        "start_image": ["97", 0]
+      },
+      "_meta": { "title": "WanImageToVideo" }
+    },
+    "101": {
+      "class_type": "LoraLoaderModelOnly",
+      "inputs": {
+        "lora_name": "wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors",
+        "strength_model": 1.0,
+        "model": ["95", 0]
+      },
+      "_meta": { "title": "LightX2V LoRA (High Noise)" }
+    },
+    "102": {
+      "class_type": "LoraLoaderModelOnly",
+      "inputs": {
+        "lora_name": "wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors",
+        "strength_model": 1.0,
+        "model": ["96", 0]
+      },
+      "_meta": { "title": "LightX2V LoRA (Low Noise)" }
+    },
+    "104": {
+      "class_type": "ModelSamplingSD3",
+      "inputs": {
+        "shift": 5.0,
+        "model": ["101", 0]
+      },
+      "_meta": { "title": "ModelSamplingSD3 (High Noise)" }
+    },
+    "103": {
+      "class_type": "ModelSamplingSD3",
+      "inputs": {
+        "shift": 5.0,
+        "model": ["102", 0]
+      },
+      "_meta": { "title": "ModelSamplingSD3 (Low Noise)" }
+    },
+    "86": {
+      "class_type": "KSamplerAdvanced",
+      "inputs": {
+        "add_noise": "enable",
+        "noise_seed": 411904203065434,
+        "steps": 4,
+        "cfg": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "start_at_step": 0,
+        "end_at_step": 2,
+        "return_with_leftover_noise": "enable",
+        "model": ["104", 0],
+        "positive": ["98", 0],
+        "negative": ["98", 1],
+        "latent_image": ["98", 2]
+      },
+      "_meta": { "title": "KSampler Stage 1 (High Noise, Steps 0-2)" }
+    },
+    "85": {
+      "class_type": "KSamplerAdvanced",
+      "inputs": {
+        "add_noise": "disable",
+        "noise_seed": 0,
+        "steps": 4,
+        "cfg": 1.0,
+        "sampler_name": "euler",
+        "scheduler": "simple",
+        "start_at_step": 2,
+        "end_at_step": 4,
+        "return_with_leftover_noise": "disable",
+        "model": ["103", 0],
+        "positive": ["98", 0],
+        "negative": ["98", 1],
+        "latent_image": ["86", 0]
+      },
+      "_meta": { "title": "KSampler Stage 2 (Low Noise, Steps 2-4)" }
+    },
+    "87": {
+      "class_type": "VAEDecode",
+      "inputs": {
+        "samples": ["85", 0],
+        "vae": ["90", 0]
+      },
+      "_meta": { "title": "VAE Decode" }
+    },
+    "94": {
+      "class_type": "CreateVideo",
+      "inputs": {
+        "fps": 16.0,
+        "images": ["87", 0]
+      },
+      "_meta": { "title": "Create Video" }
+    },
+    "108": {
+      "class_type": "SaveVideo",
+      "inputs": {
+        "filename_prefix": "wan22_14b_sprite",
+        "format": "mp4",
+        "codec": "h264",
+        "video-preview": "",
+        "video": ["94", 0]
+      },
+      "_meta": { "title": "Save Video" }
+    }
+  }
+}
