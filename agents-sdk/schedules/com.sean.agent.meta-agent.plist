@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sean.agent.meta-agent</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/seanwinslow/.local/bin/claude</string>
+        <string>-p</string>
+        <string>Run the meta-agent fleet health check. Check vault-indexer and daily-driver morning agent health, infrastructure status (Mac Mini, Alienware, ComfyUI), and generate the daily fleet status report.</string>
+        <string>--max-turns</string>
+        <string>10</string>
+        <string>--budget</string>
+        <string>0.10</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/Users/seanwinslow/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>6</integer>
+        <key>Minute</key>
+        <integer>30</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/meta-agent-stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/meta-agent-stderr.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>
