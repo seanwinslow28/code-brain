@@ -1,0 +1,28 @@
+{
+  "name": "Ultimate Slump",
+  "tile_size": 256,
+  "type": "boss",
+  "description": "Hulking figure, pale green-gray skin, long dark hair, hunched posture, minimal clothing",
+  "anchor_images": [
+    "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/bosses/Ultimate Slump/boss_ultimate_slump_anchor-1.png",
+    "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/bosses/Ultimate Slump/boss_ultimate_slump_anchor-2.png",
+    "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/bosses/Ultimate Slump/boss_ultimate_slump_anchor-3.png"
+  ],
+  "animations": [
+    "idle",
+    "walk_forward",
+    "walk_backward",
+    "jump",
+    "crouch",
+    "light_punch",
+    "medium_punch",
+    "heavy_punch",
+    "light_kick",
+    "heavy_kick",
+    "block",
+    "take_hit",
+    "victory",
+    "defeat",
+    "special_move"
+  ]
+}
