@@ -25,7 +25,13 @@
         "ckpt_name": "rife49.pth",
         "frames": ["4", 0],
         "clear_cache_after_n_frames": 10,
-        "multiplier": 4
+        "multiplier": 4,
+        "fast_mode": true,
+        "ensemble": true,
+        "scale_factor": 1.0,
+        "dtype": "float16",
+        "torch_compile": false,
+        "batch_size": 1
       },
       "_meta": {
         "title": "RIFE VFI — pure PyTorch, no cupy needed. Primary interpolation engine."
@@ -44,6 +50,7 @@
     "description": "Takes 2+ keyframes and interpolates between them using RIFE VFI (4x). Pure PyTorch — no cupy dependency.",
     "target_machine": "Alienware RTX 5080 (192.168.68.201:8188)",
     "node_pack": "Fannovel16/ComfyUI-Frame-Interpolation",
+    "last_updated": "2026-04-09 — Added required RIFE VFI inputs (dtype, scale_factor, torch_compile, batch_size, fast_mode, ensemble) for current node version",
     "confirmed_results": {
       "character_identity": "PASS — character preserved across interpolated frames",
       "pose_transitions": "PASS — smooth transitions between keyframe poses",
@@ -62,7 +69,8 @@
       "min_keyframes": 2,
       "max_keyframes": 5,
       "multiplier_range": "2-8 (4 recommended for sprite animation)",
-      "checkpoint": "rife49.pth (latest RIFE model in the node pack)"
+      "checkpoint": "rife49.pth (latest RIFE model in the node pack)",
+      "dtype": "float16 for RTX 5080 VRAM savings (--force-fp16)"
     }
   }
 }
