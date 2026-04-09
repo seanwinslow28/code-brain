@@ -55,8 +55,9 @@ Read these files in this exact order before writing any code:
 5. `16bitfit-battle-mode/pixel-quantizer/video-eval/strategy_router.py` — Strategy map (10 IMAGE_ONLY + 5 HYBRID)
 6. `16bitfit-battle-mode/docs/lora-autoresearch/autoresearch-overview.md` — Autoresearch concept (ComfyGI, Optuna, ImageReward)
 7. `16bitfit-battle-mode/docs/validation/opportunity-scan.md` — ComfyGI details, Optuna TPE, quality metrics upgrade
+8. `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md` — Agent fleet audit: only 2 of 8 agents active, root causes, do NOT re-enable disabled agents
 
-After reading, confirm you understand: (a) the locked pipeline (NB2 → RIFE VFI → Pixel Quantizer, 87.6%), (b) the four atomic adapter operations, (c) the strategy decision map, and (d) the autoresearch architecture before proceeding.
+After reading, confirm you understand: (a) the locked pipeline (NB2 → RIFE VFI → Pixel Quantizer, 87.6%), (b) the four atomic adapter operations, (c) the strategy decision map, (d) the autoresearch architecture, and (e) only vault-indexer and daily-driver morning are active agents before proceeding.
 </context>
 
 <machine_ips>
@@ -71,7 +72,7 @@ These were built in Phases 1-4 and are available for use:
 - `agents-sdk/lib/keychain.py` — macOS Keychain credential helper
 - `agents-sdk/lib/hybrid_router.py` — three-tier routing with WOL, fallback chain
 - `agents-sdk/lib/baton.py` — inter-agent dependency utility
-- `agents-sdk/agents/` — 8 agents: daily_driver, process_inbox, spending_analysis, sprint_health, meeting_defender, vault_indexer, preserve_session, pr_digest
+- `agents-sdk/agents/` — 8 agents built, but only 2 ACTIVE (vault_indexer + daily_driver morning). The other 6 are DISABLED per `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md` — do NOT re-enable without Sean's approval.
 - `.claude/hooks/` — loop-detector, cost-watchdog, vault-integrity (exit code 2 to block)
 - `pixel-quantizer/` — 7-step Pixel Quantizer (13 tests passing)
 - `pixel-quantizer/video-eval/adapters.py` — VideoModelAdapter ABC + GeminiAdapter, Wan22Adapter, RIFEAdapter, ReplicateAdapter, GMFSSAdapter (alias)
@@ -275,31 +276,37 @@ TASK 6: Build PixelLabAdapter
 
 TASK 7: Build Meta-Agent / Chief of Staff
 - Location: `agents-sdk/agents/meta_agent.py`
-- Purpose: Orchestrates the entire agent fleet. Runs on Mac Mini, checks health of all agents, surfaces issues, generates daily fleet status summary.
+- Purpose: Monitors the ACTIVE agent fleet, checks infrastructure health, and generates a daily fleet status summary.
+- IMPORTANT: Read `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md` first. Only 2 agents are currently active:
+  - **vault-indexer** — 2:00 AM daily, Mac Mini, $0.00/run (local Ollama nomic-embed-text)
+  - **daily-driver (morning)** — 8:45 AM daily, Mac Mini → Claude API, ~$0.40/run
+  - All other agents (process-inbox, evening/weekly daily-driver, pr-digest, sprint-health, meeting-defender, preserve-session, spending-analysis) are DISABLED due to CLIConnectionError + MCP limitations. Do NOT monitor or attempt to restart them.
 - Reads fleet state from `vault/02_Areas/Agent-Fleet/fleet-state.md` (create this if it doesn't exist)
 - Checks:
-  - Which agents ran in the last 24h (check baton files in `~/.claude/batons/`)
-  - Which agents failed or timed out (check agent log files)
-  - Mac Mini, MacBook Pro, Alienware online status (ping Ollama endpoints)
-  - ComfyUI status on Alienware (check REST API)
-  - Disk space on all machines (if accessible)
+  - Whether vault-indexer ran successfully in the last 24h (check its log file + baton files in `~/.claude/batons/`)
+  - Whether daily-driver morning ran successfully (check log file + vault daily note existence)
+  - Mac Mini and Alienware online status (ping Ollama endpoints at 192.168.68.200 and 192.168.68.201)
+  - ComfyUI status on Alienware (check REST API at 192.168.68.201:8188)
+  - Report disabled agent count as a reminder (read from config.toml `enabled` flags), but do NOT attempt to run or fix them
 - Outputs:
   - Fleet status summary to vault: `vault/02_Areas/Agent-Fleet/daily-fleet-status-YYYY-MM-DD.md`
-  - If any agent failed: create a baton file `~/.claude/batons/fleet_alert.flag`
+  - If either active agent failed: create a baton file `~/.claude/batons/fleet_alert.flag`
 - Machine: Mac Mini (phi4-mini-reasoning for summary generation)
 - Schedule: Daily at 06:30 (before Daily Driver at 08:45)
 - Safety: max 10 turns, $0.10 budget cap (mostly local inference)
 - Create launchd plist: `agents-sdk/schedules/com.sean.agent.meta-agent.plist`
-- VERIFY: Run with `--dry-run`. Confirm it checks all endpoints, generates a status template, and writes the fleet state note structure.
+- VERIFY: Run with `--dry-run`. Confirm it only checks the 2 active agents, generates a status template, and writes the fleet state note structure.
 
-TASK 8: Full Fleet Token Audit
+TASK 8: Active Fleet Token Audit
 - Location: `agents-sdk/audit/token_audit.py`
-- Purpose: Analyze all 9 agents (8 existing + Meta-Agent) for token usage efficiency
-- For each agent: estimate prompt size (skill file + system prompt + typical context), expected output size, cost per run
-- Flag any agents where prompt exceeds 4K tokens (compression opportunity)
-- Flag any agents using Claude API where a local model might suffice
+- Purpose: Analyze the 3 ACTIVE agents (vault-indexer, daily-driver morning, + new Meta-Agent) for token usage efficiency
+- IMPORTANT: Read `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md` first. Only audit active agents — the other 6 are disabled and not consuming resources.
+- For each active agent: estimate prompt size (skill file + system prompt + typical context), expected output size, cost per run
+- Include a summary section noting: 6 agents disabled, root causes (CLIConnectionError, MCP headless limitation), conditions under which they could be re-enabled
+- Flag the daily-driver morning specifically: at ~$0.40/run × 30 days = ~$12/month — is there a way to reduce this (prompt compression, switching to local model if MCP not needed)?
+- Flag any opportunities to move daily-driver to local inference (vault-only tasks don't need Claude API)
 - Output: `agents-sdk/audit/token_audit_report.md` with per-agent breakdown and recommendations
-- VERIFY: Run the audit and confirm it covers all 9 agents with reasonable estimates
+- VERIFY: Run the audit and confirm it covers exactly 3 active agents (vault-indexer, daily-driver, meta-agent) with reasonable estimates
 
 TASK 9: Write Phase 5 Completion Summary
 - Location: `16bitfit-battle-mode/phase-5-completion-summary.md`
