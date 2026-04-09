@@ -60,6 +60,8 @@ class KeyframeConfig:
     style: str = "SF2 pixel art"
     background_color: str = "#00FF00"  # Chroma key green
     palette: dict[str, str] = field(default_factory=dict)
+    anchor_images: list[str] = field(default_factory=list)  # Paths to reference PNGs (MUST be provided)
+    description: str = ""  # Text description fallback when anchors unavailable
 
 
 class VideoModelAdapter(ABC):
@@ -183,10 +185,19 @@ class GeminiAdapter(VideoModelAdapter):
 
     Uses Google AI API for keyframe generation.
     Key from Keychain as 'google-ai-key'.
+
+    GOLDEN RULE: Anchor reference images MUST be provided in KeyframeConfig.
+    Every generation request includes the character's anchor PNGs so Gemini
+    maintains character identity across frames. Text-only prompts produce
+    inconsistent characters — never skip the anchors.
     """
+
+    MAX_RETRIES = 3
+    RETRY_BACKOFF_SECS = [5, 15, 30]  # Exponential-ish backoff
 
     def __init__(self, model_id: str = "gemini-3-pro-image-preview"):
         self._model_id = model_id
+        self._anchor_cache: dict[str, list[dict]] = {}  # char_name → loaded anchor parts
 
     @property
     def name(self) -> str:
@@ -211,44 +222,116 @@ class GeminiAdapter(VideoModelAdapter):
             raise RuntimeError("google-ai-key not found in Keychain")
         return key
 
+    def _load_anchor_parts(self, config: KeyframeConfig) -> list[dict]:
+        """Load anchor images as Gemini API parts. Cached per character.
+
+        Returns list of inlineData parts ready for the API payload.
+        Raises RuntimeError if no anchors are provided or found.
+        """
+        import base64
+
+        cache_key = config.character_name
+        if cache_key in self._anchor_cache:
+            return self._anchor_cache[cache_key]
+
+        if not config.anchor_images:
+            raise RuntimeError(
+                f"GOLDEN RULE VIOLATION: No anchor_images provided for {config.character_name}. "
+                f"Every Gemini generation MUST include reference images for character consistency."
+            )
+
+        parts = []
+        for img_path in config.anchor_images:
+            p = Path(img_path)
+            # Try both absolute and relative to repo root
+            if not p.exists():
+                p = REPO_ROOT / img_path
+            if not p.exists():
+                continue
+
+            img_b64 = base64.b64encode(p.read_bytes()).decode()
+            suffix = p.suffix.lower()
+            mime = "image/png" if suffix == ".png" else "image/jpeg"
+            parts.append({"inlineData": {"mimeType": mime, "data": img_b64}})
+
+        if not parts:
+            raise RuntimeError(
+                f"GOLDEN RULE VIOLATION: None of the anchor images found for {config.character_name}: "
+                f"{config.anchor_images}"
+            )
+
+        self._anchor_cache[cache_key] = parts
+        return parts
+
+    async def _call_with_retry(self, client, url: str, params: dict, payload: dict) -> dict:
+        """Call Gemini API with retry + exponential backoff for 503/429 errors."""
+        import asyncio as _asyncio
+
+        last_error = None
+        for attempt in range(self.MAX_RETRIES + 1):
+            try:
+                resp = await client.post(url, params=params, json=payload)
+                if resp.status_code in (503, 429):
+                    wait = self.RETRY_BACKOFF_SECS[min(attempt, len(self.RETRY_BACKOFF_SECS) - 1)]
+                    print(f"    Gemini {resp.status_code}, retrying in {wait}s (attempt {attempt + 1}/{self.MAX_RETRIES + 1})")
+                    await _asyncio.sleep(wait)
+                    continue
+                resp.raise_for_status()
+                return resp.json()
+            except Exception as e:
+                last_error = e
+                if attempt < self.MAX_RETRIES:
+                    wait = self.RETRY_BACKOFF_SECS[min(attempt, len(self.RETRY_BACKOFF_SECS) - 1)]
+                    print(f"    Gemini error: {e}, retrying in {wait}s")
+                    await _asyncio.sleep(wait)
+                    continue
+        raise last_error
+
     async def generate_keyframes(
         self, config: KeyframeConfig
     ) -> list[GeneratedFrame]:
-        """Generate keyframes using Gemini image generation API."""
+        """Generate keyframes using Gemini image generation API.
+
+        ALWAYS sends anchor reference images alongside the text prompt.
+        Uses retry with backoff for rate limiting (503/429).
+        """
         import httpx
 
         api_key = self._get_api_key()
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{self._model_id}:generateContent"
 
-        palette_desc = ", ".join(f"{k}: {v}" for k, v in config.palette.items())
+        # GOLDEN RULE: Load anchor images — every request includes them
+        anchor_parts = self._load_anchor_parts(config)
+
+        char_desc = config.description or config.character_name
 
         frames: list[GeneratedFrame] = []
         for pose_desc in [config.start_pose, config.end_pose]:
             prompt = (
-                f"Generate a {config.width}x{config.height} pixel art sprite of a fighting game character "
-                f"in {config.style} style. Character: {config.character_name}. "
+                f"Generate a pixel art sprite of THIS EXACT CHARACTER shown in the reference images. "
+                f"Match the character's appearance exactly: {char_desc}. "
+                f"Same hair, clothing, body type, and color palette as the reference. "
                 f"Pose: {pose_desc}. "
+                f"Style: {config.style}, bold #272929 dark outlines (2-3px), 3-4 tone cel shading. "
                 f"Background: solid chroma key green ({config.background_color}). "
-                f"Bold #272929 dark outlines (2-3px). 3-4 tone cel shading. "
-                f"No anti-aliasing, no gradients. "
-                f"Color palette: {palette_desc}. "
-                f"Character facing RIGHT."
+                f"Character facing RIGHT. "
+                f"No anti-aliasing, no gradients, no background scenery."
             )
 
-            async with httpx.AsyncClient(timeout=60.0) as client:
-                resp = await client.post(
-                    url,
+            # Build multi-modal payload: anchor images + text prompt
+            parts = list(anchor_parts) + [{"text": prompt}]
+
+            async with httpx.AsyncClient(timeout=90.0) as client:
+                data = await self._call_with_retry(
+                    client, url,
                     params={"key": api_key},
-                    json={
-                        "contents": [{"parts": [{"text": prompt}]}],
+                    payload={
+                        "contents": [{"parts": parts}],
                         "generationConfig": {
                             "responseModalities": ["IMAGE", "TEXT"],
-                            "responseMimeType": "image/png",
                         },
                     },
                 )
-                resp.raise_for_status()
-                data = resp.json()
 
                 # Extract image from response
                 image_data = None

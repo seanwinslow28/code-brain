@@ -213,6 +213,8 @@ class BatchOrchestrator:
                                 end_pose=poses[frame_idx] if frame_idx < len(poses) else "",
                                 width=self.tile_size,
                                 height=self.tile_size,
+                                anchor_images=self.anchor_images,
+                                description=self.description,
                             )
                             frames = await plan.keyframe_adapter.generate_keyframes(config)
                             # Save frame
@@ -241,6 +243,8 @@ class BatchOrchestrator:
                             end_pose=kf_prompts[-1]["pose"],
                             width=self.tile_size,
                             height=self.tile_size,
+                            anchor_images=self.anchor_images,
+                            description=self.description,
                         )
                         keyframes = await plan.keyframe_adapter.generate_keyframes(config)
                         video = await plan.interpolation_adapter.interpolate_frames(

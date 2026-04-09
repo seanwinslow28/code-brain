@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Aria",
+    "type": "champion",
+    "tile_size": 128,
+    "status": "pass",
+    "output_path": "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/16bitfit-battle-mode/pixel-quantizer/output/_character_tests/champion_aria_sheet.png",
+    "duration_ms": 11959.227,
+    "error": ""
+  },
+  {
+    "name": "Kenji",
+    "type": "champion",
+    "tile_size": 128,
+    "status": "pass",
+    "output_path": "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/16bitfit-battle-mode/pixel-quantizer/output/_character_tests/champion_kenji_sheet.png",
+    "duration_ms": 14166.061749999997,
+    "error": ""
+  },
+  {
+    "name": "Marcus",
+    "type": "champion",
+    "tile_size": 128,
+    "status": "pass",
+    "output_path": "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/16bitfit-battle-mode/pixel-quantizer/output/_character_tests/champion_marcus_sheet.png",
+    "duration_ms": 12641.753999999999,
+    "error": ""
+  },
+  {
+    "name": "Mary",
+    "type": "champion",
+    "tile_size": 128,
+    "status": "pass",
+    "output_path": "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/16bitfit-battle-mode/pixel-quantizer/output/_character_tests/champion_mary_sheet.png",
+    "duration_ms": 16053.14091599999,
+    "error": ""
+  },
+  {
+    "name": "Sean",
+    "type": "champion",
+    "tile_size": 128,
+    "status": "pass",
+    "output_path": "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/16bitfit-battle-mode/pixel-quantizer/output/_character_tests/champion_sean_sheet.png",
+    "duration_ms": 19845.862374999997,
+    "error": ""
+  },
+  {
+    "name": "Zara",
+    "type": "champion",
+    "tile_size": 128,
+    "status": "pass",
+    "output_path": "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/16bitfit-battle-mode/pixel-quantizer/output/_character_tests/champion_zara_sheet.png",
+    "duration_ms": 14004.274875000006,
+    "error": ""
+  },
+  {
+    "name": "Gym Bully",
+    "type": "boss",
+    "tile_size": 256,
+    "status": "pass",
+    "output_path": "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/16bitfit-battle-mode/pixel-quantizer/output/_character_tests/boss_gym_bully_sheet.png",
+    "duration_ms": 13771.406750000011,
+    "error": ""
+  },
+  {
+    "name": "Procrastination Phantom",
+    "type": "boss",
+    "tile_size": 256,
+    "status": "pass",
+    "output_path": "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/16bitfit-battle-mode/pixel-quantizer/output/_character_tests/boss_procrastination_phantom_sheet.png",
+    "duration_ms": 16368.529666,
+    "error": ""
+  },
+  {
+    "name": "Sloth Demon",
+    "type": "boss",
+    "tile_size": 256,
+    "status": "pass",
+    "output_path": "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/16bitfit-battle-mode/pixel-quantizer/output/_character_tests/boss_sloth_demon_sheet.png",
+    "duration_ms": 20556.462291999993,
+    "error": ""
+  },
+  {
+    "name": "Stress Titan",
+    "type": "boss",
+    "tile_size": 256,
+    "status": "pass",
+    "output_path": "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/16bitfit-battle-mode/pixel-quantizer/output/_character_tests/boss_stress_titan_sheet.png",
+    "duration_ms": 15247.54254200002,
+    "error": ""
+  },
+  {
+    "name": "Training Dummy",
+    "type": "boss",
+    "tile_size": 256,
+    "status": "pass",
+    "output_path": "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/16bitfit-battle-mode/pixel-quantizer/output/_character_tests/boss_training_dummy_sheet.png",
+    "duration_ms": 12029.90787500002,
+    "error": ""
+  },
+  {
+    "name": "Ultimate Slump",
+    "type": "boss",
+    "tile_size": 256,
+    "status": "pass",
+    "output_path": "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/16bitfit-battle-mode/pixel-quantizer/output/_character_tests/boss_ultimate_slump_sheet.png",
+    "duration_ms": 16601.53037500004,
+    "error": ""
+  }
+]
