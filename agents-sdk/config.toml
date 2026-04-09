@@ -25,11 +25,11 @@ max_turns = 20
 max_budget_usd = 0.50
 
 [agents.preserve_session]
-enabled = true
+enabled = false
 skills = ["preserve-session", "vault-read-write"]
 
 [agents.spending_analysis]
-enabled = true
+enabled = false
 skills = ["personal-finance", "subscription-audit", "vault-read-write"]
 input_dir = "life-systems/finance"
 output_dir = "vault/50_sources/finance"
@@ -37,14 +37,14 @@ max_turns = 20
 max_budget_usd = 0.25
 
 [agents.process_inbox]
-enabled = true
+enabled = false
 skills = ["process-inbox", "vault-read-write"]
 max_turns = 15
 max_budget_usd = 0.25
 confidence_threshold = 80
 
 [agents.sprint_health]
-enabled = true
+enabled = false
 skills = ["sprint-roadmap", "vault-read-write"]
 max_turns = 15
 max_budget_usd = 0.50
@@ -52,7 +52,7 @@ project_key = "BE"
 schedule = "Friday 15:00"
 
 [agents.meeting_defender]
-enabled = true
+enabled = false
 skills = ["meeting-prep", "vault-read-write"]
 max_turns = 10
 max_budget_usd = 0.25
@@ -68,7 +68,7 @@ embedding_model = "nomic-embed-text"
 target_machine = "mac_mini"
 
 [agents.pr_digest]
-enabled = true
+enabled = false
 skills = ["vault-read-write"]
 max_turns = 15
 max_budget_usd = 0.00
