@@ -17,10 +17,7 @@
   launchctl load ~/Library/LaunchAgents/com.sean.agent.vault-indexer.plist
   launchctl load ~/Library/LaunchAgents/com.sean.agent.pr-digest.plist
   ```
-- [ ] Install gh CLI and authenticate:
-  ```bash
-  brew install gh && gh auth login
-  ```
+- [x] ~~Install gh CLI and authenticate~~ — DONE
 
 ### Cross-Machine Verification
 
@@ -28,10 +25,10 @@
 - [ ] Alienware online: `curl http://192.168.68.201:11434/api/tags`
 - [ ] ComfyUI running on Alienware with `--force-fp16`
 
-### PixelLab API (Optional — for Task 6)
+### PixelLab API
 
-- [ ] Sign up at https://pixellab.ai/ and get an API key
-- [ ] Store key on MacBook: `cd agents-sdk && .venv/bin/python3 lib/keychain.py set pixellab-key YOUR_KEY`
+- [x] ~~Sign up and get API key~~ — DONE
+- [x] ~~Store key in Keychain~~ — DONE (`pixellab-key`)
 
 ---
 
@@ -113,8 +110,27 @@ CRITICAL — same constraints as all previous phases:
 - Green screen (#00FF00) on keyframes BEFORE feeding to video/interpolation models
 - Sprite tiles: Champions 128×128, Bosses 256×256
 - Sprites generated facing RIGHT
-- Full scope: 12 fighters × 13 animations × 4-12 frames = ~900-1,400 total frames
-- Character reference colors — Sean: Skin #F5D6C6, Hair #C2A769, Eyes #4682B4, Tank Top #F2F0EF, Pants #2323FF, Shoes #F5F5F5
+- Full scope: 12 fighters (6 Champions + 6 Bosses) × 13 animations × 4-12 frames = ~900-1,400 total frames
+- Each character has 3 anchor reference images (anchor-1, anchor-2, anchor-3) for NB2 to reference
+- Anchor images path (same on all machines): `16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/`
+
+FULL CHARACTER ROSTER:
+
+Champions (128×128):
+  - Sean: `champions/Sean/champion_sean_anchor-{1,2,3}.png` — Muscular build, blonde hair, white tank top, blue pants, white shoes
+  - Aria: `champions/Aria/champion_aria_anchor-{1,2,3}.png` — Athletic build, brown hair in ponytail, purple crop top, light jeans, white shoes
+  - Kenji: `champions/Kenji/champion_kenji_anchor-{1,2,3}.png` — Lean build, black hair in bun, gray gi top, dark gray pants, white shoes
+  - Marcus: `champions/Marcus/champion_marcus_anchor-{1,2,3}.png` — Heavy muscular build, dark skin, short hair, gray tank top, yellow boxing gloves, gray pants, gray shoes
+  - Mary: `champions/Mary/champion_mary_anchor-{1,2,3}.png` — Athletic build, brown hair in ponytail, purple headband, purple sports bra, purple shorts, gray shoes
+  - Zara: `champions/Zara/champion_zara_anchor-{1,2,3}.png` — Athletic build, dark hair in low bun, dark gray tank top, dark cargo pants, white shoes
+
+Bosses (256×256):
+  - Gym Bully: `bosses/Gym Bully/boss_gym_bully_anchor-{1,2,3}.png` — Muscular build, dark hair, sunglasses, olive tank top, red wristbands, gray pants, gray shoes
+  - Procrastination Phantom: `bosses/Procrastination Phantom/boss_procrastination_phantom_anchor-{1,2,3}.png` — Ghostly figure, white hoodie, blue-gray skin, glowing orange eyes, spectral tail (no legs)
+  - Sloth Demon: `bosses/Sloth Demon/boss_sloth_demon_anchor-{1,2,3}.png` — Stocky beast, brown fur, gray armor plates, yellow eyes, clawed feet
+  - Stress Titan: `bosses/Stress Titan/boss_stress_titan_anchor-{1,2,3}.png` — Tall armored figure, gray skin, white hair, black and orange power suit
+  - Training Dummy: `bosses/Training Dummy/boss_training_dummy_anchor-{1,2,3}.png` — Wooden/leather training dummy, metal face plate, brown leather straps, bolted construction
+  - Ultimate Slump: `bosses/Ultimate Slump/boss_ultimate_slump_anchor-{1,2,3}.png` — Hulking figure, pale green-gray skin, long dark hair, hunched posture, minimal clothing
 </constraints>
 
 <tasks>
@@ -130,10 +146,16 @@ TASK 1: Build Batch Generation Orchestrator
     "name": "Sean",
     "tile_size": 128,
     "type": "champion",
-    "palette": {"skin": "#F5D6C6", "hair": "#C2A769", "eyes": "#4682B4", ...},
-    "anchor_image": "path/to/anchor.png",
+    "description": "Muscular build, blonde hair, white tank top, blue pants, white shoes",
+    "anchor_images": [
+      "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/champions/Sean/champion_sean_anchor-1.png",
+      "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/champions/Sean/champion_sean_anchor-2.png",
+      "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/champions/Sean/champion_sean_anchor-3.png"
+    ],
     "animations": ["idle", "walk", "run", "light_punch", ...]
   }
+- The `anchor_images` array gives NB2 multiple reference angles for better character consistency. The prompt library should reference the anchor images when building generation prompts (GeminiAdapter supports image input alongside text prompts).
+- The `description` field is the text fallback when image-conditioning is not available.
 - For each animation:
   - Look up strategy in DEFAULT_STRATEGY_MAP
   - Look up frame count and duration from strategy_router.py
@@ -168,14 +190,18 @@ TASK 2: Build NB2 Prompt Template Library
 - Write at least the following animation templates: idle (4 frames), walk (8 frames), run (8 frames), light_punch (6 frames), medium_punch (6 frames), heavy_punch (8 frames), light_kick (6 frames), jump (8 frames), block (4 frames), hit_stun (4 frames), knockdown (6 frames), special_1 (10 frames), victory (12 frames)
 - VERIFY: Generate prompts for all 13 animation types for the "Sean" character. Print the first and last frame prompt for each. Confirm: (a) every prompt contains the trigger tokens and green screen directive, (b) walk/run/jump/special/victory route through HYBRID keyframe prompts, (c) frame descriptions actually change between frames (not duplicated)
 
-TASK 3: Build Champion #2 Manifest
-- Location: `16bitfit-battle-mode/pixel-quantizer/manifests/champion_02.json`
-- This is a SECOND fighter character to test the pipeline's ability to handle different designs
-- Character: "Kai" — a different body type and color palette from Sean
-  - Skin: #8D5524, Hair: #1A1A2E, Eyes: #E94560, Gi Top: #E94560, Gi Pants: #F5F5F5, Belt: #1A1A2E, Shoes: #333333
-  - Style: martial artist, lean build, darker skin tone
-- Include all 13 animations
-- VERIFY: Validate the JSON schema matches what batch_orchestrator.py expects. Run the orchestrator in `--dry-run` mode with this manifest.
+TASK 3: Build Manifests for ALL 12 Characters
+- Location: `16bitfit-battle-mode/pixel-quantizer/manifests/`
+- Create one JSON manifest per character using the schema from Task 1
+- Each manifest must include:
+  - `name`, `tile_size` (128 for champions, 256 for bosses), `type` ("champion" or "boss")
+  - `description` (text description of the character's appearance — use the descriptions from the <constraints> FULL CHARACTER ROSTER section above)
+  - `anchor_images` (array of 3 paths to the character's anchor PNGs in `16BitFit-Reference-Images/`)
+  - `animations` (all 13 animation types)
+- File naming: `champion_sean.json`, `champion_aria.json`, `champion_kenji.json`, `champion_marcus.json`, `champion_mary.json`, `champion_zara.json`, `boss_gym_bully.json`, `boss_procrastination_phantom.json`, `boss_sloth_demon.json`, `boss_stress_titan.json`, `boss_training_dummy.json`, `boss_ultimate_slump.json`
+- IMPORTANT: For non-humanoid bosses (Procrastination Phantom has no legs, Sloth Demon has clawed feet, Training Dummy is wooden), the prompt library may need character-specific overrides for walk/run/jump animations. Add a `pose_overrides` field to the manifest schema for this — e.g., Procrastination Phantom's "walk" should be described as "floating forward" not "legs striding."
+- Also create `all_characters.json` — a manifest list that references all 12 character files, for running the full batch
+- VERIFY: Validate all 12 manifests load correctly. Run the orchestrator in `--dry-run` mode with `champion_sean.json` AND `boss_sloth_demon.json` (one champion, one boss) to confirm both tile sizes and character types route properly.
 
 === THREAD 2: AUTORESEARCH LOOP ===
 
@@ -326,7 +352,7 @@ Once Claude Code completes these 9 tasks, you'll have:
 **Built by Claude Code:**
 - `pixel-quantizer/batch/batch_orchestrator.py` — Batch generation engine with resumable progress
 - `pixel-quantizer/prompts/prompt_library.py` — 13 animation prompt templates with per-frame pose descriptions
-- `pixel-quantizer/manifests/champion_02.json` — Second character manifest (Kai)
+- `pixel-quantizer/manifests/` — 12 character manifests (6 champions + 6 bosses) + `all_characters.json`
 - `autoresearch/search_space.py` — Mutable parameter definitions
 - `autoresearch/scorer.py` — Fitness function (Pixel Quantizer score + frame consistency)
 - `autoresearch/optimizer.py` — Optuna TPE search wrapper with SQLite persistence
@@ -338,8 +364,8 @@ Once Claude Code completes these 9 tasks, you'll have:
 - Phase 5 completion summary
 
 **Your next manual steps after Claude Code finishes:**
-1. Generate the anchor image for Champion #2 "Kai" using Gemini NB2 (paste into your image gen skill)
-2. Run the first REAL batch generation: `python batch_orchestrator.py --manifest manifests/champion_01_sean.json` (you'll need Sean's anchor image and the existing keyframes from earlier phases)
+1. Run the first REAL batch generation with Sean: `python batch_orchestrator.py --manifest manifests/champion_sean.json` (anchor images are already in place)
+2. Run a second batch with a boss to test 256×256: `python batch_orchestrator.py --manifest manifests/boss_sloth_demon.json`
 3. Run the first autoresearch experiment: `python runner.py --animation-type walk --character sean --max-trials 20`
 4. Install Meta-Agent launchd plist on Mac Mini:
    ```bash
@@ -347,6 +373,6 @@ Once Claude Code completes these 9 tasks, you'll have:
    launchctl load ~/Library/LaunchAgents/com.sean.agent.meta-agent.plist
    ```
 5. Review the token audit report and apply any compression recommendations
-6. If PixelLab adapter was stubbed (no API key yet), sign up and test with real API
+6. Test PixelLabAdapter with real API (key already in Keychain)
 7. Schedule first overnight autoresearch run on Alienware (Mac Mini orchestrates via hybrid_router)
-8. After autoresearch finds optimal params, use them for batch generation of remaining Champions
+8. After autoresearch finds optimal params, run full roster batch: `python batch_orchestrator.py --manifest manifests/all_characters.json`
