@@ -5,3 +5,7 @@ date,time,agent,mode,status,cost_usd,duration_ms,turns,notes
 2026-04-09,02:06:30,vault-indexer,,success,0.0000,12954,,"chunks=90, embeddings=90, errors=0"
 2026-04-09,08:46:20,daily-driver,morning,success,0.3957,50638,10,Morning planning complete.
 2026-04-10,02:07:49,vault-indexer,,success,0.0000,15217,,"chunks=39, embeddings=39, errors=0"
+2026-04-10,08:45:52,daily-driver,morning,success,0.3213,44319,6,"**Morning planning complete — 2026-04-10 daily note created.**
+
+**Summary:**
+- **Critical priority:** Rewrite Zapier workflow docs (4th carry-over — yesterday's lesson: timebox creative work to protec"
