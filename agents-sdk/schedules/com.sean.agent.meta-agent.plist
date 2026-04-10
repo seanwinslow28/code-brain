@@ -12,7 +12,7 @@
         <string>Run the meta-agent fleet health check. Check vault-indexer and daily-driver morning agent health, infrastructure status (Mac Mini, Alienware, ComfyUI), and generate the daily fleet status report.</string>
         <string>--max-turns</string>
         <string>10</string>
-        <string>--budget</string>
+        <string>--max-budget-usd</string>
         <string>0.30</string>
     </array>
 
