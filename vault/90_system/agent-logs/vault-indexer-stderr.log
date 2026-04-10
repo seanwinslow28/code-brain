@@ -10,3 +10,13 @@
 [INFO] Starting vault embedding indexer
 [INFO] Discovered 308 vault files, 11 need indexing, 0 deleted
 [INFO] Indexing complete: 90 chunks, 90 embeddings, 0 errors, 12954ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 315 vault files, 8 need indexing, 0 deleted
+[INFO] Indexed 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-09.md: 1 chunks
+[INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 1 chunks
+[INFO] Indexed 10_timeline/daily/2026-04-09.md: 4 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-2026-04-09_12-59-20.md: 1 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-09_12-59-20.md: 11 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-09_09-59-24.md: 3 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-09_09-59-24.md: 18 chunks
+[INFO] Indexing complete: 39 chunks, 39 embeddings, 0 errors, 15217ms
