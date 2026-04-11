@@ -20,3 +20,8 @@
 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-09_09-59-24.md: 3 chunks
 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-09_09-59-24.md: 18 chunks
 [INFO] Indexing complete: 39 chunks, 39 embeddings, 0 errors, 15217ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 317 vault files, 3 need indexing, 0 deleted
+[INFO] Indexed 10_timeline/daily/2026-04-10.md: 3 chunks
+[INFO] Indexed 10_timeline/weekly/2026-W15.md: 4 chunks
+[INFO] Indexing complete: 7 chunks, 7 embeddings, 0 errors, 1564ms
