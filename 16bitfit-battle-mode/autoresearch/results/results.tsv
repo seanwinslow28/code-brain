@@ -1,0 +1,4 @@
+experiment_id	round	params_changed	composite_score	vlm_walk_score	dino_identity	hard_gates_pass	cost_usd	generation_time_s	timestamp
+0	1	baseline	0.6559	0.7100	0.8734	True	0.0000	0.0	1775945477
+1	1	include_pose_names	0.7457	0.5200	0.7904	True	0.0000	0.0	1775945477
+2	1	additional_constraints	0.4799	0.4200	0.7572	True	0.0000	0.0	1775945477

@@ -1,0 +1,43 @@
+# Autoresearch Run Summary
+
+**Date:** 2026-04-11 18:11
+**Total experiments:** 3
+**Total cost:** $0.00
+
+## Scores
+- **Best:** 0.7457 (experiment 1)
+- **Worst:** 0.4799 (experiment 2)
+- **Mean:** 0.6272
+- **Median:** 0.6559
+
+## Best Configuration
+```json
+{
+  "version": 2,
+  "character": "sean",
+  "animation_type": "walk_forward",
+  "generation": {
+    "model": "gemini-3.1-flash-image-preview",
+    "prompt_template": "Generate a pixel art sprite sheet of THIS EXACT CHARACTER from the reference images. The sprite sheet must show {frame_count} frames of the 'walk_forward' animation, arranged in a {cols}x{rows} grid. Each cell is {tile_size}x{tile_size} pixels.",
+    "negative_prompt": "blurry, anti-aliased, gradient, smooth shading, 3D render, realistic, photographic, watermark, text, HUD, UI elements, anime proportions, chibi, background scenery, multiple characters",
+    "reference_strategy": "3_anchors",
+    "sheet_layout": "full_sheet",
+    "frame_count": 4,
+    "include_pose_names": true,
+    "include_animation_principles": false,
+    "include_walk_cycle_reference": false,
+    "additional_constraints": []
+  },
+  "scoring": {
+    "skip_dino": false,
+    "skip_vlm": false,
+    "alienware_host": "192.168.68.201",
+    "vlm_timeout_s": 30
+  }
+}
+```
+
+## Top Findings
+1. Experiment 1 — score 0.7457 (changed: include_pose_names)
+2. Experiment 0 — score 0.6559
+3. Experiment 2 — score 0.4799 (changed: additional_constraints)
