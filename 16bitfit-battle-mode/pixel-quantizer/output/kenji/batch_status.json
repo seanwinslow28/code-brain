@@ -1,0 +1,160 @@
+{
+  "character_name": "Kenji",
+  "character_type": "champion",
+  "tile_size": 128,
+  "total_animations": 15,
+  "completed": 15,
+  "failed": 0,
+  "animations": {
+    "idle": {
+      "animation_type": "idle",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 4,
+      "frames_generated": 4,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 14095.103792
+    },
+    "walk_forward": {
+      "animation_type": "walk_forward",
+      "status": "complete",
+      "strategy": "hybrid",
+      "frame_count": 8,
+      "frames_generated": 4,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 11209.105916000002
+    },
+    "walk_backward": {
+      "animation_type": "walk_backward",
+      "status": "complete",
+      "strategy": "hybrid",
+      "frame_count": 8,
+      "frames_generated": 4,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 12367.424666999994
+    },
+    "jump": {
+      "animation_type": "jump",
+      "status": "complete",
+      "strategy": "hybrid",
+      "frame_count": 4,
+      "frames_generated": 4,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 11403.923124999992
+    },
+    "crouch": {
+      "animation_type": "crouch",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 4,
+      "frames_generated": 4,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 12295.535375
+    },
+    "light_punch": {
+      "animation_type": "light_punch",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 6,
+      "frames_generated": 6,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 12967.244792000003
+    },
+    "medium_punch": {
+      "animation_type": "medium_punch",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 8,
+      "frames_generated": 8,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 12413.929458999974
+    },
+    "heavy_punch": {
+      "animation_type": "heavy_punch",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 8,
+      "frames_generated": 8,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 14784.872667000001
+    },
+    "light_kick": {
+      "animation_type": "light_kick",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 6,
+      "frames_generated": 6,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 18114.061916999988
+    },
+    "heavy_kick": {
+      "animation_type": "heavy_kick",
+      "status": "complete",
+      "strategy": "hybrid",
+      "frame_count": 8,
+      "frames_generated": 4,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 12693.503208999999
+    },
+    "block": {
+      "animation_type": "block",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 6,
+      "frames_generated": 6,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 14568.309
+    },
+    "take_hit": {
+      "animation_type": "take_hit",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 6,
+      "frames_generated": 6,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 12006.968083000003
+    },
+    "victory": {
+      "animation_type": "victory",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 8,
+      "frames_generated": 8,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 12175.025250000033
+    },
+    "defeat": {
+      "animation_type": "defeat",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 8,
+      "frames_generated": 8,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 20723.594875000003
+    },
+    "special_move": {
+      "animation_type": "special_move",
+      "status": "complete",
+      "strategy": "hybrid",
+      "frame_count": 12,
+      "frames_generated": 5,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 10660.023582999998
+    }
+  }
+}

@@ -193,28 +193,31 @@ def detect_grid(image_data: bytes, requested_frames: int) -> tuple[int, int]:
     """Auto-detect grid layout from image dimensions.
 
     Gemini often generates more cells than requested (e.g., 4x2=8 for 4 requested).
-    Detect the actual grid by checking if the image is wider than tall (landscape)
-    and finding the best-fit grid.
+    Detect the actual grid by checking cell aspect ratios and penalizing grids
+    that have far more cells than requested.
     """
     from PIL import Image
 
     img = Image.open(BytesIO(image_data))
     w, h = img.width, img.height
-    aspect = w / h
 
-    # Try common grids and pick the one whose aspect ratio best matches
     candidates = []
     for cols in range(1, 8):
         for rows in range(1, 5):
-            if cols * rows < requested_frames:
+            total_cells = cols * rows
+            if total_cells < requested_frames:
                 continue
-            grid_aspect = cols / rows
-            # Each cell should be roughly square (character sprites)
             cell_w = w / cols
             cell_h = h / rows
             cell_aspect = cell_w / cell_h
-            # Prefer grids where cells are close to square
-            score = abs(cell_aspect - 1.0) + abs(grid_aspect - aspect) * 0.5
+            # Prefer cells close to square
+            aspect_penalty = abs(cell_aspect - 1.0)
+            # Lightly penalize excess cells — Gemini often produces 2x the requested count
+            excess_penalty = (total_cells - requested_frames) / requested_frames * 0.1
+            # Prefer cells that are reasonably large (not tiny sub-divisions)
+            min_cell_dim = min(cell_w, cell_h)
+            size_penalty = 0.5 if min_cell_dim < 100 else 0.0
+            score = aspect_penalty + excess_penalty + size_penalty
             candidates.append((score, cols, rows))
 
     if candidates:
@@ -222,7 +225,6 @@ def detect_grid(image_data: bytes, requested_frames: int) -> tuple[int, int]:
         _, best_cols, best_rows = candidates[0]
         return best_cols, best_rows
 
-    # Fallback to requested layout
     return get_grid_layout(requested_frames)
 
 

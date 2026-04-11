@@ -1,18 +1,36 @@
 [
-  { "hex": "#F5D6C6", "r": 245, "g": 214, "b": 198, "name": "skin" },
-  { "hex": "#C2A769", "r": 194, "g": 167, "b": 105, "name": "hair" },
+  { "hex": "#E8B489", "r": 232, "g": 180, "b": 137, "name": "skin_highlight" },
+  { "hex": "#E2AB7E", "r": 226, "g": 171, "b": 126, "name": "skin_base" },
+  { "hex": "#CA906E", "r": 202, "g": 144, "b": 110, "name": "skin_mid" },
+  { "hex": "#B37D62", "r": 179, "g": 125, "b": 98, "name": "skin_shadow" },
+  { "hex": "#956A50", "r": 149, "g": 106, "b": 80, "name": "skin_deep_shadow" },
+
+  { "hex": "#B0964B", "r": 176, "g": 150, "b": 75, "name": "hair_highlight" },
+  { "hex": "#77593E", "r": 119, "g": 89, "b": 62, "name": "hair_base" },
+  { "hex": "#584528", "r": 88, "g": 69, "b": 40, "name": "hair_shadow" },
+
   { "hex": "#4682B4", "r": 70, "g": 130, "b": 180, "name": "eyes" },
-  { "hex": "#F2F0EF", "r": 242, "g": 240, "b": 239, "name": "tank_top" },
-  { "hex": "#2323FF", "r": 35, "g": 35, "b": 255, "name": "pants" },
-  { "hex": "#F5F5F5", "r": 245, "g": 245, "b": 245, "name": "shoes" },
+
+  { "hex": "#E8E9D9", "r": 232, "g": 233, "b": 217, "name": "tank_top_highlight" },
+  { "hex": "#D4D3BD", "r": 212, "g": 211, "b": 189, "name": "tank_top_base" },
+  { "hex": "#B0AD99", "r": 176, "g": 173, "b": 153, "name": "tank_top_mid" },
+  { "hex": "#848170", "r": 132, "g": 129, "b": 112, "name": "tank_top_shadow" },
+
+  { "hex": "#4F54D5", "r": 79, "g": 84, "b": 213, "name": "pants_highlight" },
+  { "hex": "#3F3EAE", "r": 63, "g": 62, "b": 174, "name": "pants_base" },
+  { "hex": "#38368C", "r": 56, "g": 54, "b": 140, "name": "pants_mid" },
+  { "hex": "#2E2F77", "r": 46, "g": 47, "b": 119, "name": "pants_shadow" },
+  { "hex": "#21275C", "r": 33, "g": 39, "b": 92, "name": "pants_deep_shadow" },
+
+  { "hex": "#D8D6C1", "r": 216, "g": 214, "b": 193, "name": "shoes_highlight" },
+  { "hex": "#9A9886", "r": 154, "g": 152, "b": 134, "name": "shoes_base" },
+  { "hex": "#6B6B5E", "r": 107, "g": 107, "b": 94, "name": "shoes_shadow" },
+
   { "hex": "#272929", "r": 39, "g": 41, "b": 41, "name": "outline" },
+  { "hex": "#151E17", "r": 21, "g": 30, "b": 23, "name": "outline_dark" },
+  { "hex": "#2B2A23", "r": 43, "g": 42, "b": 35, "name": "outline_detail" },
+
   { "hex": "#000000", "r": 0, "g": 0, "b": 0, "name": "black" },
   { "hex": "#FFFFFF", "r": 255, "g": 255, "b": 255, "name": "white" },
-  { "hex": "#D4B5A5", "r": 212, "g": 181, "b": 165, "name": "skin_shadow" },
-  { "hex": "#B89A58", "r": 184, "g": 154, "b": 88, "name": "hair_shadow" },
-  { "hex": "#3A6B94", "r": 58, "g": 107, "b": 148, "name": "eyes_shadow" },
-  { "hex": "#D4D2D0", "r": 212, "g": 210, "b": 208, "name": "tank_top_shadow" },
-  { "hex": "#1A1ABF", "r": 26, "g": 26, "b": 191, "name": "pants_shadow" },
-  { "hex": "#D4D4D4", "r": 212, "g": 212, "b": 212, "name": "shoes_shadow" },
   { "hex": "#00FF00", "r": 0, "g": 255, "b": 0, "name": "chroma_key" }
 ]

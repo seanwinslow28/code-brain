@@ -7,6 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const BUILT_IN: Record<string, string> = {
   sean: resolve(__dirname, 'sean.json'),
+  sf2_pixel_art: resolve(__dirname, 'sf2_pixel_art.json'),
 };
 
 export function loadPalette(nameOrPath: string): PaletteColor[] {

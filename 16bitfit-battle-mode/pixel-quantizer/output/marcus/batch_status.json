@@ -1,0 +1,160 @@
+{
+  "character_name": "Marcus",
+  "character_type": "champion",
+  "tile_size": 128,
+  "total_animations": 15,
+  "completed": 15,
+  "failed": 0,
+  "animations": {
+    "idle": {
+      "animation_type": "idle",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 4,
+      "frames_generated": 4,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 14350.608916000001
+    },
+    "walk_forward": {
+      "animation_type": "walk_forward",
+      "status": "complete",
+      "strategy": "hybrid",
+      "frame_count": 8,
+      "frames_generated": 4,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 16223.154625
+    },
+    "walk_backward": {
+      "animation_type": "walk_backward",
+      "status": "complete",
+      "strategy": "hybrid",
+      "frame_count": 8,
+      "frames_generated": 4,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 12579.249708999996
+    },
+    "jump": {
+      "animation_type": "jump",
+      "status": "complete",
+      "strategy": "hybrid",
+      "frame_count": 4,
+      "frames_generated": 4,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 12890.777499999998
+    },
+    "crouch": {
+      "animation_type": "crouch",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 4,
+      "frames_generated": 4,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 13822.057458000003
+    },
+    "light_punch": {
+      "animation_type": "light_punch",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 6,
+      "frames_generated": 6,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 13692.187458000006
+    },
+    "medium_punch": {
+      "animation_type": "medium_punch",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 8,
+      "frames_generated": 8,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 14202.696624999988
+    },
+    "heavy_punch": {
+      "animation_type": "heavy_punch",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 8,
+      "frames_generated": 8,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 17805.08758299999
+    },
+    "light_kick": {
+      "animation_type": "light_kick",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 6,
+      "frames_generated": 6,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 14286.549666000014
+    },
+    "heavy_kick": {
+      "animation_type": "heavy_kick",
+      "status": "complete",
+      "strategy": "hybrid",
+      "frame_count": 8,
+      "frames_generated": 4,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 11807.077834000012
+    },
+    "block": {
+      "animation_type": "block",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 6,
+      "frames_generated": 6,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 14485.889333000017
+    },
+    "take_hit": {
+      "animation_type": "take_hit",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 6,
+      "frames_generated": 6,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 12420.39108299997
+    },
+    "victory": {
+      "animation_type": "victory",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 8,
+      "frames_generated": 8,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 12733.60337500003
+    },
+    "defeat": {
+      "animation_type": "defeat",
+      "status": "complete",
+      "strategy": "image_only",
+      "frame_count": 8,
+      "frames_generated": 8,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 12118.321207999998
+    },
+    "special_move": {
+      "animation_type": "special_move",
+      "status": "complete",
+      "strategy": "hybrid",
+      "frame_count": 12,
+      "frames_generated": 5,
+      "score": 0.0,
+      "error": "",
+      "duration_ms": 12478.83729199998
+    }
+  }
+}
