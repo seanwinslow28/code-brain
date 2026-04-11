@@ -1,7 +1,7 @@
 # Source of Truth — Sean's Agentic Frameworks & Creative Pipeline Master Plan
 
 **Created:** 2026-03-27 (Boston, post-move)
-**Last Updated:** 2026-04-08 — Phase 4 COMPLETE (11/11 PASS). LoRA training completed + tested → ABANDONED (Gemini NB2 keyframes confirmed superior). RIFE VFI primary interpolation engine. Walk cycle strategy LOCKED: NB2 → RIFE VFI → Pixel Quantizer. 8 agents built. Phase 5 planning in progress.
+**Last Updated:** 2026-04-11 — Phase 5 COMPLETE. 12/12 characters, 180/180 animations, 1020 IMAGE_ONLY + 815 HYBRID frames, 0 failures, ~$12.60. Sheet→split approach LOCKED. Anchor image Golden Rule enforced. RIFE VFI connectivity fixed. Palette expanded (Sean 27, generic 38). 3 idle animations need re-gen (Marcus, Gym Bully, Procrastination Phantom). Autoresearch plan in revision.
 **Purpose:** Compressed reference doc for every future Claude Code / Cowork session. Feed THIS file + the specific subfolder relevant to your current task. Never dump all 28 source files at once.
 **Source Files:** 28 original docs + 3 Perplexity Computer outputs in `Agentic-Frameworks-And-Autoresearch/`
 
@@ -92,6 +92,41 @@ The Claude Agent SDK layer is planned but not yet built beyond the existing `dai
 **Goal:** Evolve the working v0.1.0 pipeline into a hybrid keyframe-to-video system that solves the walk cycle problem, then scale to all 12 fighters × 13 animations.
 
 **NON-NEGOTIABLE: Google's image generation models stay in the pipeline.** Nano Banana Pro (`gemini-3-pro-image-preview`) and/or Nano Banana 2 (`gemini-3.1-flash-image-preview`) are the proven best-in-class for single-frame sprite generation. Cost is not a concern here — quality and speed are. These models serve as both the primary image-only generator AND the keyframe generator feeding the hybrid pipeline.
+
+**Phase 5 Results — Full Roster Generation COMPLETE (2026-04-11):**
+
+The sprite sheet→split approach replaced per-frame Gemini generation. Instead of calling Gemini once per frame (which produced inconsistent characters), ALL frames for an animation are generated as a single sprite sheet in one API call, then split programmatically. This is 5x faster, 6x cheaper, and solves character consistency. Every Gemini NB2 call MUST include 3 character reference PNGs as inline image data (the "Golden Rule") — enforced with `RuntimeError`, zero violations across 180 animations.
+
+**15 animation types mapped:** 10 IMAGE_ONLY (idle, crouch, light_punch, medium_punch, heavy_punch, light_kick, heavy_kick, block, take_hit, victory) + 5 HYBRID (walk_forward, walk_backward, jump, defeat, special_move). IMAGE_ONLY: 4-7 frames each. HYBRID: 4-5 keyframes → RIFE 4x interpolation → 13-17 frames each.
+
+| Character | Type | Tile | Anims | Frames | IMAGE_ONLY | HYBRID (KF) | Status |
+|-----------|------|------|-------|--------|------------|-------------|--------|
+| Sean | champion | 128 | 15/15 | 85 | 10 | 5 | OK |
+| Aria | champion | 128 | 15/15 | 85 | 10 | 5 | OK |
+| Kenji | champion | 128 | 15/15 | 85 | 10 | 5 | OK |
+| Marcus | champion | 128 | 15/15 | 85 | 10 | 5 | OK |
+| Mary | champion | 128 | 15/15 | 85 | 10 | 5 | OK |
+| Zara | champion | 128 | 15/15 | 85 | 10 | 5 | OK |
+| Gym Bully | boss | 256 | 15/15 | 85 | 10 | 5 | OK |
+| Procrastination Phantom | boss | 256 | 15/15 | 85 | 10 | 5 | OK |
+| Sloth Demon | boss | 256 | 15/15 | 85 | 10 | 5 | OK |
+| Stress Titan | boss | 256 | 15/15 | 85 | 10 | 5 | OK |
+| Training Dummy | boss | 256 | 15/15 | 85 | 10 | 5 | OK |
+| Ultimate Slump | boss | 256 | 15/15 | 85 | 10 | 5 | OK |
+| **TOTAL** | | | **180/180** | **1,020** | **120** | **60** | **0 fail** |
+
+**Palette:** Sean's palette expanded from 16 to 27 colors via k-means extraction (5 skin tones, 3 hair, 4 tank top, 5 pants, 3 shoes, 3 outline, 4 fixed). Generic `sf2_pixel_art` palette (38 colors) created from all 12 characters' anchor images. Outline weight 1 is the new standard (weight 2 was too aggressive at 128×128 — 77% of pixels become outline).
+
+**Cost:** ~$12.60 total (180 Gemini API calls × ~$0.07/call). ~55 minutes generation time with 10s delays.
+
+**RIFE VFI Results:** All 60 HYBRID animations (5 per character × 12 characters) interpolated via RIFE VFI on RTX 5080. 815 total interpolated frames, 0 failures. Root cause of earlier connectivity failure: corporate VPN (utun4) was blocking LAN access to Alienware. Fix: VPN disabled + httpx retries + pre-flight health check + Windows Firewall rule for port 8188.
+
+**Pixel Quantizer:** Verified on 7/12 characters (Sean, Aria, Kenji, Marcus, Gym Bully, Procrastination Phantom, Sloth Demon) — 100% pass rate, 0 off-palette pixels across all tested frames.
+
+**3 animations needing re-generation:**
+1. Marcus idle — "Idle Neutral" text burned into frame_00 (Gemini prompt artifact). Fix: add "no text, no labels, no captions" to negative prompt.
+2. Gym Bully idle — Multiple characters per cell. Fix: add "exactly ONE character per cell" constraint.
+3. Procrastination Phantom idle — Same multi-character issue. All other animations for these characters are clean.
 
 **Model Update (March 2026):** Nano Banana 2 (`gemini-3.1-flash-image-preview`) is now available — Flash-tier pricing ($0.50/$3.00 text, $0.0672/image output) with "pro-level visual intelligence." Benchmark both against Nano Banana Pro ($2.00/$12.00 text, $0.134/image) to determine if Flash quality is sufficient for sprite work, or if Pro remains necessary for anchor/keyframe generation while Flash handles volume.
 
@@ -332,28 +367,40 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 - [x] ~~Test LoRA in ComfyUI pipeline~~ → 33-image test matrix on Illustrious XL v2.0. Results: recognizable characters but anime-proportioned, multi-character, HUD artifacts. Not SF2-quality.
 - [x] **DECISION: LoRA path ABANDONED.** Multiple training attempts across project history produced consistently poor results for SF2-style pixel art. Gemini NB2 keyframes are confirmed superior (77.7% raw, 87.6% through RIFE+Quantizer). LoRA adds complexity for worse output. Workstream C refocused on autoresearch (ComfyUI workflow optimization) only.
 
-### Phase 5: Autoresearch + Scale (Weeks 9-12 — May 22 - Jun 19)
+### Phase 5: Autoresearch + Scale (Weeks 9-12 — May 22 - Jun 19) ✅ COMPLETE (9/9 PASS, 2026-04-11)
 
 **Workstream B — Scale:**
-- [ ] Expand to full strategy decision map (all 13 animations × image-only/hybrid/motion-transfer)
-- [ ] Begin batch generation: 2nd and 3rd Champions through pipeline
+- [x] Expand to full strategy decision map (15 animation types × IMAGE_ONLY/HYBRID routing)
+- [x] Sheet→split approach for IMAGE_ONLY generation (replaces per-frame — 5x faster, 6x cheaper)
+- [x] Full roster: 12/12 characters, 180/180 animations, 1,020 frames, 0 failures
+- [x] HYBRID pipeline: 60/60 animations interpolated via RIFE VFI (815 frames)
+- [x] Palette expansion: Sean 16→27, generic sf2_pixel_art 38 colors
+- [x] Grid detection bug fixed (excess_penalty + size_penalty)
+- [x] RIFE connectivity fixed (VPN root cause, httpx retries, pre-flight health check)
+- [x] Pixel Quantizer verified on 7/12 characters (100% pass, 0 off-palette)
+- [x] PixelLabAdapter built behind VideoModelAdapter interface
+- [ ] Re-generate 3 problematic idle animations (Marcus text overlay, Gym Bully + Procrastination Phantom multi-character)
+- [ ] Run Pixel Quantizer on full roster (remaining 5 characters)
+- [ ] Autoresearch plan revision (remove LoRA, focus on Gemini prompt optimization + LoRA-free ComfyUI optimization)
 - [ ] Build sprite pipeline dashboard (reference: Perplexity UI/UX research prompt already written)
 
 **Workstream C — Autoresearch Loop (built on proven components, LoRA-free):**
+- [x] Autoresearch framework built: Optuna TPE study, dry-run trials, SQLite resume, JSONL logging
+- [x] ComfyUI workflow mutator: loads RIFE workflow, mutates KSampler + RIFE params, targets Alienware
 - [ ] Fork ComfyGI mutation operators (checkpoint, ksampler, prompt_word, prompt_llm)
-- [ ] Implement Optuna TPE sampler for parameter search (numerical/categorical). Reserve LLM agent for prompt optimization (DSPy-style, Tier 2).
 - [ ] Install ImageReward ComfyUI node as primary fitness function
 - [ ] Use official NB2 Animated Sprite Sheet template as starting workflow JSON
 - [ ] Implement upgraded quality metrics: DISTS + DINOv2 + EDOKS + Qwen3-VL LLM-as-Judge
 - [ ] Configure overnight runs: Mac Mini orchestrates, Alienware runs ComfyUI + scoring
 - [ ] Evaluate ComfyUI CacheProvider API for parallel experiments (multiple worker instances sharing model cache)
 - [ ] First optimization target: find optimal NB2 prompt templates + RIFE interpolation params for each animation type (LoRA abandoned — focus on prompt + pipeline optimization)
-- [ ] Build PixelLabAdapter behind VideoModelAdapter interface ($0.007-$0.016/gen, 128×128 max, skeleton-based animation)
 
 **Workstream A — Meta:**
-- [ ] Meta-Agent / Chief of Staff → Mac Mini orchestrates, MacBook runs summaries, Opus synthesizes
-- [ ] Full fleet token audit
+- [x] Meta-Agent built: fleet health monitor, 06:30 daily, $0.10 cap, dry-run PASS
+- [x] Full fleet token audit: ~$15/mo current → $6/mo recommended → $0/mo possible (local inference)
 - [ ] Implement prompt caching scheduling (cluster API agents in 5-min windows)
+
+**Agent fleet status (April 9 downsizing audit):** 2 active agents (vault-indexer + daily-driver morning). 6 disabled due to CLIConnectionError and MCP headless limitations. Meta-agent built but not yet deployed. Do NOT re-enable disabled agents without Sean's explicit approval.
 
 ---
 
@@ -361,7 +408,7 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 
 1. ~~**Nano Banana 2 vs Pro for sprites**~~ — RESOLVED (Phase 2). NB2 wins: 26% faster, comparable quality. Use NB2 (`gemini-3.1-flash-image-preview`) for volume generation, NB Pro (`gemini-3-pro-image-preview`) reserved for anchor/hero frames.
 
-2. ~~**Which video/animation model wins?**~~ — RESOLVED (Phase 3-4). **Wan 2.2 5B ti2v** is the primary video model (73.7% gate check, free/local). **RIFE VFI** (rife49.pth) is the confirmed primary interpolation engine — character identity PASS, pose transitions PASS, green screen PASS. GMFSS Fortuna blocked by cupy. rd-animation dead (48x48, wrong style). Walk cycles: NB2 multi-keyframe → RIFE VFI 4x interpolation → Pixel Quantizer. FILM VFI available as backup. Wan 2.2 14B I2V blocked by ComfyUI compatibility — monitor for updates.
+2. ~~**Which video/animation model wins?**~~ — RESOLVED (Phase 3-5). **RIFE VFI** (rife49.pth) is the confirmed primary interpolation engine — 60/60 HYBRID animations, 815 interpolated frames, 0 failures, character identity preserved. **Production pipeline: NB2 keyframes → RIFE VFI 4x → Pixel Quantizer.** Wan 2.2 14B I2V available for single-keyframe animation (dual fp8 + LightX2V LoRA, ~80s/clip). Wan 2.2 5B DEPRECATED. GMFSS blocked by cupy. rd-animation dead. FILM VFI available as backup. PixelLab API ($0.007-$0.016/gen) viable alternative — adapter built, pending API verification.
 
 3. ~~**Retro Diffusion rd-animation**~~ — RESOLVED. It's live on Replicate with 4.9K runs. Test immediately in Phase 1.
 
