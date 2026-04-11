@@ -1059,7 +1059,19 @@ class RIFEAdapter(VideoModelAdapter):
 
         base_url = f"http://{self.COMFYUI_HOST}:{self.COMFYUI_PORT}"
 
-        async with httpx.AsyncClient(timeout=120.0) as client:
+        transport = httpx.AsyncHTTPTransport(retries=3)
+        async with httpx.AsyncClient(
+            timeout=httpx.Timeout(120.0, connect=10.0),
+            transport=transport,
+        ) as client:
+            # Pre-flight health check
+            try:
+                health = await client.get(f"{base_url}/system_stats")
+                health.raise_for_status()
+            except Exception as e:
+                raise RuntimeError(
+                    f"Alienware ComfyUI unreachable at {self.COMFYUI_HOST}:{self.COMFYUI_PORT}: {e}"
+                )
             # Step 1: Upload all keyframes
             uploaded_names: list[str] = []
             for i, kf in enumerate(keyframes):

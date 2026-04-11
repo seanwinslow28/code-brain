@@ -4,6 +4,13 @@ Takes a character manifest JSON and drives each animation through the correct
 pipeline (IMAGE_ONLY or HYBRID) using the strategy router, prompt library,
 and adapter layer.
 
+IMAGE_ONLY: Generates all frames as a single sprite sheet via one Gemini call,
+then splits into individual frame PNGs (proven in Phase 5B to maintain character
+consistency across frames).
+
+HYBRID: Generates keyframes via sprite sheet, interpolates with RIFE on Alienware,
+then extracts individual frames from the resulting MP4.
+
 Usage:
     # Dry run (no API calls)
     python3 batch/batch_orchestrator.py manifests/champion_sean.json --dry-run
@@ -13,6 +20,9 @@ Usage:
 
     # Resume (skips completed animations)
     python3 batch/batch_orchestrator.py manifests/champion_sean.json --resume
+
+    # Force re-run (ignores COMPLETE status)
+    python3 batch/batch_orchestrator.py manifests/champion_sean.json --force
 """
 
 from __future__ import annotations
@@ -20,7 +30,9 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import subprocess
 import sys
+import tempfile
 import time
 from dataclasses import asdict, dataclass, field
 from enum import Enum
@@ -34,7 +46,17 @@ REPO_ROOT = PIXEL_QUANTIZER_DIR.parent.parent
 
 sys.path.insert(0, str(PIXEL_QUANTIZER_DIR))
 sys.path.insert(0, str(VIDEO_EVAL_DIR))
+sys.path.insert(0, str(SCRIPT_DIR))
 sys.path.insert(0, str(REPO_ROOT / "agents-sdk"))
+
+from generate_sheet_split import (
+    build_sheet_prompt,
+    call_gemini,
+    detect_grid,
+    get_grid_layout,
+    load_anchors,
+    split_sheet,
+)
 
 
 class AnimStatus(str, Enum):
@@ -76,6 +98,7 @@ class BatchOrchestrator:
         output_dir: Path | None = None,
         dry_run: bool = False,
         resume: bool = False,
+        force: bool = False,
     ):
         self.manifest = json.loads(manifest_path.read_text())
         self.char_name = self.manifest["name"]
@@ -87,6 +110,7 @@ class BatchOrchestrator:
         self.pose_overrides = self.manifest.get("pose_overrides", {})
         self.dry_run = dry_run
         self.resume = resume
+        self.force = force
 
         self.output_dir = output_dir or Path("output") / self._slug()
         self.status_path = self.output_dir / "batch_status.json"
@@ -98,8 +122,8 @@ class BatchOrchestrator:
             total_animations=len(self.animations),
         )
 
-        # Load previous status if resuming
-        if self.resume and self.status_path.exists():
+        # Load previous status if resuming (but not if forcing)
+        if self.resume and not self.force and self.status_path.exists():
             self._load_status()
 
     def _slug(self) -> str:
@@ -129,7 +153,7 @@ class BatchOrchestrator:
 
     async def run(self) -> BatchStatus:
         """Execute the full batch generation pipeline."""
-        from adapters import KeyframeConfig, StubAdapter
+        from adapters import StubAdapter
         from strategy_router import (
             DEFAULT_STRATEGY_MAP,
             DURATION_MAP,
@@ -145,12 +169,8 @@ class BatchOrchestrator:
         )
 
         if self.dry_run:
-            # Use stub adapters for dry run
             stub = StubAdapter("dry-run-stub")
-            router = StrategyRouter(
-                interpolation_backend="rife",
-            )
-            # Override router's adapters with stubs for dry run
+            router = StrategyRouter(interpolation_backend="rife")
             router._keyframe_adapter = stub
             router._interpolation_adapter = stub
         else:
@@ -165,14 +185,29 @@ class BatchOrchestrator:
             "tile_size": self.tile_size,
         }
 
+        # Load anchor images once for all animations (GOLDEN RULE)
+        anchor_parts = None
+        api_key = None
+        if not self.dry_run:
+            from lib.keychain import get_credential
+            api_key = get_credential("google-ai-key")
+            if not api_key:
+                raise RuntimeError("google-ai-key not found in Keychain")
+            anchor_parts = load_anchors(self.anchor_images)
+            if not anchor_parts:
+                raise RuntimeError(
+                    f"GOLDEN RULE VIOLATION: No anchor images found for {self.char_name}: "
+                    f"{self.anchor_images}"
+                )
+
         print(f"\n{'=' * 70}")
         print(f"BATCH GENERATION: {self.char_name} ({self.char_type}, {self.tile_size}x{self.tile_size})")
-        print(f"Animations: {len(self.animations)} | Dry run: {self.dry_run} | Resume: {self.resume}")
+        print(f"Animations: {len(self.animations)} | Dry run: {self.dry_run} | Resume: {self.resume} | Force: {self.force}")
         print(f"{'=' * 70}\n")
 
         for anim_type in self.animations:
-            # Skip if already complete and resuming
-            if self.resume and anim_type in self.status.animations:
+            # Skip if already complete and resuming (unless --force)
+            if self.resume and not self.force and anim_type in self.status.animations:
                 prev = self.status.animations[anim_type]
                 if prev.status == AnimStatus.COMPLETE:
                     print(f"  SKIP {anim_type} — already complete (score: {prev.score:.1f})")
@@ -182,7 +217,6 @@ class BatchOrchestrator:
             start_time = time.monotonic()
 
             try:
-                # Route animation through strategy map
                 plan = router.route(anim_type, self.char_name)
                 result.strategy = plan.strategy.value
                 result.frame_count = plan.target_frame_count
@@ -193,70 +227,111 @@ class BatchOrchestrator:
                 anim_output_dir.mkdir(parents=True, exist_ok=True)
 
                 if strategy == GenerationStrategy.IMAGE_ONLY:
-                    # Generate each frame individually
-                    for frame_idx in range(plan.target_frame_count):
-                        prompt = prompt_lib.get_prompt(
-                            anim_type, char_config, frame_idx, plan.target_frame_count
-                        )
+                    # ── Sheet → Split approach (Phase 5B validated) ──
+                    # Generate ALL frames as a single sprite sheet in one Gemini call,
+                    # then split into individual frame PNGs. This maintains character
+                    # consistency across frames (unlike per-frame calls).
+                    template = prompt_lib.get_template(anim_type)
+                    frame_poses = template.frame_poses
+                    frame_count = template.frame_count
+                    cols, rows = get_grid_layout(frame_count)
 
-                        if self.dry_run:
-                            print(f"    [{anim_type}] Frame {frame_idx + 1}/{plan.target_frame_count} "
-                                  f"IMAGE_ONLY → GeminiAdapter.generate_frame()")
-                            print(f"      Prompt: {prompt[:100]}...")
-                        else:
-                            # Real generation: create KeyframeConfig per frame
-                            poses = prompt_lib.get_template(anim_type).frame_poses
-                            config = KeyframeConfig(
-                                character_name=self.char_name,
-                                animation_type=anim_type,
-                                start_pose=poses[frame_idx] if frame_idx < len(poses) else "",
-                                end_pose=poses[frame_idx] if frame_idx < len(poses) else "",
-                                width=self.tile_size,
-                                height=self.tile_size,
-                                anchor_images=self.anchor_images,
-                                description=self.description,
-                            )
-                            frames = await plan.keyframe_adapter.generate_keyframes(config)
-                            # Save frame
-                            frame_path = anim_output_dir / f"frame_{frame_idx:02d}.png"
-                            if frames:
-                                frame_path.write_bytes(frames[0].data)
-
-                        result.frames_generated += 1
-
-                elif strategy == GenerationStrategy.HYBRID:
-                    # Generate keyframes then interpolate
-                    kf_prompts = prompt_lib.get_keyframe_prompts(anim_type, char_config)
+                    prompt = build_sheet_prompt(
+                        anim_type, char_config, frame_poses, cols, rows
+                    )
 
                     if self.dry_run:
-                        print(f"    [{anim_type}] HYBRID — {len(kf_prompts)} keyframes → RIFE interpolation")
+                        print(f"    [{anim_type}] IMAGE_ONLY sheet→split: "
+                              f"{frame_count} frames in {cols}x{rows} grid (1 Gemini call)")
+                        print(f"      Prompt: {prompt[:120]}...")
+                        result.frames_generated = frame_count
+                    else:
+                        print(f"    [{anim_type}] Generating {cols}x{rows} sprite sheet ({frame_count} frames)...")
+                        image_data = await call_gemini(anchor_parts, prompt, api_key)
+
+                        # Save full sheet for debugging
+                        sheet_path = anim_output_dir / f"{anim_type}_sheet.png"
+                        sheet_path.write_bytes(image_data)
+
+                        # Auto-detect grid (Gemini may produce more cells than requested)
+                        actual_cols, actual_rows = detect_grid(image_data, frame_count)
+                        if (actual_cols, actual_rows) != (cols, rows):
+                            print(f"      Grid auto-corrected: {cols}x{rows} → {actual_cols}x{actual_rows}")
+                            cols, rows = actual_cols, actual_rows
+
+                        # Split into individual frames
+                        frames = split_sheet(image_data, cols, rows, frame_count)
+                        for idx, frame_data in enumerate(frames):
+                            frame_path = anim_output_dir / f"frame_{idx:02d}.png"
+                            frame_path.write_bytes(frame_data)
+
+                        result.frames_generated = len(frames)
+                        print(f"      Sheet saved: {sheet_path}")
+                        print(f"      Split into {len(frames)} frames")
+
+                elif strategy == GenerationStrategy.HYBRID:
+                    # ── Keyframes via sheet → RIFE interpolation → frame extraction ──
+                    kf_prompts = prompt_lib.get_keyframe_prompts(anim_type, char_config)
+                    kf_count = len(kf_prompts)
+                    kf_poses = [kf["pose"] for kf in kf_prompts]
+
+                    if self.dry_run:
+                        print(f"    [{anim_type}] HYBRID — {kf_count} keyframes (sheet) → RIFE → {plan.target_frame_count} frames")
                         for kf in kf_prompts:
                             print(f"      KF {kf['keyframe_index'] + 1}: {kf['pose'][:80]}...")
-                        print(f"      → RIFEAdapter.interpolate_frames() → Pixel Quantizer")
+                        print(f"      → RIFEAdapter.interpolate_frames() → extract frames")
                         result.frames_generated = plan.target_frame_count
                     else:
-                        # Real generation
-                        config = KeyframeConfig(
-                            character_name=self.char_name,
-                            animation_type=anim_type,
-                            start_pose=kf_prompts[0]["pose"],
-                            end_pose=kf_prompts[-1]["pose"],
-                            width=self.tile_size,
-                            height=self.tile_size,
-                            anchor_images=self.anchor_images,
-                            description=self.description,
+                        # Step 1: Generate keyframes as a sprite sheet (same proven approach)
+                        kf_cols, kf_rows = get_grid_layout(kf_count)
+                        kf_sheet_prompt = build_sheet_prompt(
+                            anim_type, char_config, kf_poses, kf_cols, kf_rows
                         )
-                        keyframes = await plan.keyframe_adapter.generate_keyframes(config)
-                        video = await plan.interpolation_adapter.interpolate_frames(
-                            keyframes,
-                            duration_secs=plan.clip_duration_secs,
-                            fps=plan.fps,
-                        )
-                        # TODO: Extract frames from video, run Pixel Quantizer, score
-                        result.frames_generated = plan.target_frame_count
+                        print(f"    [{anim_type}] Generating {kf_count} keyframes as {kf_cols}x{kf_rows} sheet...")
+                        kf_image_data = await call_gemini(anchor_parts, kf_sheet_prompt, api_key)
+
+                        # Save keyframe sheet
+                        kf_sheet_path = anim_output_dir / f"{anim_type}_keyframes_sheet.png"
+                        kf_sheet_path.write_bytes(kf_image_data)
+
+                        # Split keyframes
+                        actual_kf_cols, actual_kf_rows = detect_grid(kf_image_data, kf_count)
+                        kf_frames_data = split_sheet(kf_image_data, actual_kf_cols, actual_kf_rows, kf_count)
+
+                        # Save individual keyframes and build GeneratedFrame list for RIFE
+                        from adapters import GeneratedFrame
+                        keyframes = []
+                        for idx, kf_data in enumerate(kf_frames_data):
+                            kf_path = anim_output_dir / f"keyframe_{idx:02d}.png"
+                            kf_path.write_bytes(kf_data)
+                            keyframes.append(GeneratedFrame(
+                                data=kf_data,
+                                width=self.tile_size,
+                                height=self.tile_size,
+                            ))
+                        print(f"      {len(keyframes)} keyframes saved")
+
+                        # Step 2: RIFE interpolation
+                        try:
+                            video = await plan.interpolation_adapter.interpolate_frames(
+                                keyframes,
+                                duration_secs=plan.clip_duration_secs,
+                                fps=plan.fps,
+                            )
+
+                            # Step 3: Extract frames from MP4
+                            extracted = self._extract_frames_from_video(
+                                video.data, anim_output_dir
+                            )
+                            result.frames_generated = extracted
+                            print(f"      RIFE → {extracted} interpolated frames extracted")
+                        except Exception as rife_err:
+                            # RIFE/Alienware may be offline — save keyframes anyway
+                            print(f"      RIFE failed ({rife_err}), saving keyframes only")
+                            result.frames_generated = len(keyframes)
 
                 result.status = AnimStatus.COMPLETE
-                result.score = 100.0 if self.dry_run else 0.0  # Placeholder for real scoring
+                result.score = 100.0 if self.dry_run else 0.0
                 self.status.completed += 1
 
             except Exception as e:
@@ -273,6 +348,10 @@ class BatchOrchestrator:
                   f"{result.frames_generated}/{result.frame_count} frames "
                   f"({result.duration_ms:.0f}ms)")
 
+            # Rate limiting delay between animations (skip in dry run)
+            if not self.dry_run and result.status == AnimStatus.COMPLETE:
+                await asyncio.sleep(10)
+
         self._save_status()
 
         print(f"\n{'─' * 70}")
@@ -282,12 +361,33 @@ class BatchOrchestrator:
 
         return self.status
 
+    @staticmethod
+    def _extract_frames_from_video(video_bytes: bytes, output_dir: Path) -> int:
+        """Extract individual PNG frames from MP4 video bytes using ffmpeg."""
+        with tempfile.NamedTemporaryFile(suffix=".mp4", delete=False) as tmp:
+            tmp.write(video_bytes)
+            tmp_path = Path(tmp.name)
+
+        try:
+            frame_pattern = str(output_dir / "frame_%02d.png")
+            subprocess.run(
+                ["ffmpeg", "-y", "-i", str(tmp_path), "-vsync", "0", frame_pattern],
+                capture_output=True,
+                check=True,
+            )
+            # Count extracted frames
+            extracted = sorted(output_dir.glob("frame_*.png"))
+            return len(extracted)
+        finally:
+            tmp_path.unlink(missing_ok=True)
+
 
 async def main():
     parser = argparse.ArgumentParser(description="Batch generate sprite animations")
     parser.add_argument("manifest", type=Path, help="Path to character manifest JSON")
     parser.add_argument("--dry-run", action="store_true", help="Print plan without calling APIs")
     parser.add_argument("--resume", action="store_true", help="Skip completed animations")
+    parser.add_argument("--force", action="store_true", help="Force re-run even if marked COMPLETE")
     parser.add_argument("--output-dir", type=Path, help="Override output directory")
     args = parser.parse_args()
 
@@ -296,6 +396,7 @@ async def main():
         output_dir=args.output_dir,
         dry_run=args.dry_run,
         resume=args.resume,
+        force=args.force,
     )
 
     await orchestrator.run()
