@@ -432,19 +432,21 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 
 ## Part 6: Key Numbers
 
-| Metric | Target |
-|--------|--------|
-| Total autonomous agents at steady state | 15-18 |
-| Agents running 100% local | 10-12 |
-| Monthly API cost | $3-8 (recalculate — Opus 4.6 now $5/$25, may be worth using more) |
-| Monthly electricity (all 3 machines) | ~$4 |
-| Total monthly system cost | $6-10 |
-| Full sprite production scope | 12 fighters × 13 animations × 4-12 frames = ~900-1,400 frames |
-| Champion tile size | 128×128 |
-| Boss tile size | 256×256 |
-| Pipeline tech stack | Node.js / TypeScript / Oclif / Zod / Pino / Sharp / Puppeteer |
-| Agent SDK language | Python 3.10+ |
-| LoRA training time | 30-90 minutes per style |
+| Metric | Target | Actual (Phase 5) |
+|--------|--------|------------------|
+| Total autonomous agents at steady state | 15-18 | **2 active** (vault-indexer + daily-driver morning). 6 disabled — CLIConnectionError + MCP headless limitation. See April 9 audit. |
+| Agents running 100% local | 10-12 | 1 (vault-indexer) |
+| Monthly API cost | $3-8 | ~$12/mo (daily-driver morning ~$0.40/day) |
+| Monthly electricity (all 3 machines) | ~$4 | ~$4 |
+| Total monthly system cost | $6-10 | ~$16 |
+| Total frames generated | ~900-1,400 | **1,835** (1,020 IMAGE_ONLY + 815 HYBRID) |
+| Animations | — | **180** (15 per character × 12 characters) |
+| Generation cost | — | **~$12.60** (180 Gemini calls × ~$0.07) |
+| Full sprite production scope | 12 fighters × 15 animations × 4-17 frames | 12 fighters × 15 animations = 180 animations COMPLETE |
+| Champion tile size | 128×128 | 128×128 ✅ |
+| Boss tile size | 256×256 | 256×256 ✅ |
+| Pipeline tech stack | Node.js / TypeScript / Oclif / Zod / Pino / Sharp / Puppeteer | + Python batch orchestrator |
+| Agent SDK language | Python 3.10+ | Python 3.10+ |
 
 ---
 
