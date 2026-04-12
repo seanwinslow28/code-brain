@@ -11,10 +11,8 @@
     "frame_count": 4,
     "include_pose_names": false,
     "include_animation_principles": false,
-    "include_walk_cycle_reference": false,
-    "additional_constraints": [
-      "Show 4 distinct walking poses: Contact, Down, Passing, Up"
-    ]
+    "include_walk_cycle_reference": true,
+    "additional_constraints": []
   },
   "scoring": {
     "skip_dino": false,
