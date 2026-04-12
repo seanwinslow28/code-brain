@@ -201,6 +201,10 @@ def detect_grid(image_data: bytes, requested_frames: int) -> tuple[int, int]:
     img = Image.open(BytesIO(image_data))
     w, h = img.width, img.height
 
+    # First, try the requested grid layout (from get_grid_layout).
+    # This is what we ASKED Gemini to produce, so it's the best default.
+    expected_cols, expected_rows = get_grid_layout(requested_frames)
+
     candidates = []
     for cols in range(1, 8):
         for rows in range(1, 5):
@@ -209,15 +213,27 @@ def detect_grid(image_data: bytes, requested_frames: int) -> tuple[int, int]:
                 continue
             cell_w = w / cols
             cell_h = h / rows
+
+            # Strongly prefer the exact grid layout we requested from Gemini
+            if cols == expected_cols and rows == expected_rows:
+                layout_penalty = 0.0
+            elif total_cells == requested_frames:
+                # Right number of cells but different arrangement
+                layout_penalty = 0.3
+            else:
+                # Excess cells — almost certainly a wrong grid
+                excess = total_cells - requested_frames
+                layout_penalty = 1.0 + excess * 0.5
+
+            # Mild preference for cells closer to square (tiebreaker only)
             cell_aspect = cell_w / cell_h
-            # Prefer cells close to square
-            aspect_penalty = abs(cell_aspect - 1.0)
-            # Lightly penalize excess cells — Gemini often produces 2x the requested count
-            excess_penalty = (total_cells - requested_frames) / requested_frames * 0.1
-            # Prefer cells that are reasonably large (not tiny sub-divisions)
+            aspect_penalty = abs(cell_aspect - 1.0) * 0.1
+
+            # Penalize tiny cells (likely over-subdivided)
             min_cell_dim = min(cell_w, cell_h)
             size_penalty = 0.5 if min_cell_dim < 100 else 0.0
-            score = aspect_penalty + excess_penalty + size_penalty
+
+            score = layout_penalty + aspect_penalty + size_penalty
             candidates.append((score, cols, rows))
 
     if candidates:
