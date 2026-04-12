@@ -208,19 +208,31 @@ class OllamaVLMAdapter:
         import httpx
 
         comparison_b64 = base64.b64encode(comparison_image).decode()
-        anchor_b64 = base64.b64encode(anchor_image).decode()
+
+        # Qwen3-VL 8B quirks:
+        # - /no_think must prefix the prompt to suppress reasoning mode
+        # - JSON output format triggers extended thinking that consumes all tokens
+        # - Plain text with "X/5" scoring works reliably
+        # - num_predict must be 4096+ to exhaust thinking tokens and get output
+        # - Image must be sent at original resolution (2x+ causes empty responses)
+        compact_prompt = (
+            "/no_think Rate this walk cycle sprite sheet. "
+            "Score leg variety 1-5, pose flow 1-5, weight shift 1-5, "
+            "arm swing 1-5, character consistency 1-5, size consistency 1-5. "
+            "Give scores and one biggest issue. Be brief."
+        )
 
         payload = {
             "model": self.model,
             "messages": [
                 {
                     "role": "user",
-                    "content": VLM_WALK_CYCLE_PROMPT,
-                    "images": [comparison_b64, anchor_b64],
+                    "content": compact_prompt,
+                    "images": [comparison_b64],
                 }
             ],
             "stream": False,
-            "options": {"temperature": 0.1},
+            "options": {"temperature": 0.1, "num_predict": 4096},
         }
 
         try:
@@ -232,6 +244,13 @@ class OllamaVLMAdapter:
             resp.raise_for_status()
             data = resp.json()
             content = data.get("message", {}).get("content", "")
+            if not content:
+                logger.warning(
+                    "VLM returned empty content (eval_count=%s, done_reason=%s)",
+                    data.get("eval_count"), data.get("done_reason"),
+                )
+                return {}
+            logger.info("VLM response (%d chars): %s", len(content), content[:200])
             return self._parse_vlm_response(content)
         except httpx.ConnectError:
             logger.warning("Alienware/Ollama unreachable at %s — skipping VLM tier", self.base_url)
@@ -244,28 +263,81 @@ class OllamaVLMAdapter:
             return {}
 
     def _parse_vlm_response(self, content: str) -> dict[str, Any]:
-        """Parse JSON from VLM response, handling markdown code blocks."""
-        # Strip markdown code blocks if present
-        text = content.strip()
-        if text.startswith("```"):
-            lines = text.split("\n")
-            # Remove first line (```json) and last line (```)
-            lines = [l for l in lines if not l.strip().startswith("```")]
-            text = "\n".join(lines)
+        """Parse plain-text VLM response with 'X/5' scores.
 
-        try:
-            return json.loads(text)
-        except json.JSONDecodeError:
-            # Try to find JSON object in the response
-            start = text.find("{")
-            end = text.rfind("}") + 1
-            if start >= 0 and end > start:
-                try:
+        Qwen3-VL 8B returns scores as plain text like:
+            Leg variety: 2/5 (reason)
+            Pose flow: 3/5 (reason)
+            ...
+            Biggest issue: description
+
+        We map these to the standard criterion keys.
+        """
+        import re
+
+        text = content.strip()
+        result: dict[str, Any] = {}
+
+        # Map text labels to criterion keys
+        label_map = {
+            "leg": "leg_differentiation",
+            "pose": "pose_progression",
+            "weight": "weight_shift",
+            "arm": "arm_swing",
+            "character": "character_consistency",
+            "size": "height_consistency",
+            "height": "height_consistency",
+        }
+
+        # Extract N/5 scores
+        for line in text.split("\n"):
+            line_lower = line.lower().strip()
+            if not line_lower:
+                continue
+
+            # Match "label: N/5" or "label: N," or "label: N." (bare number)
+            score_match = re.search(r"(\d)/5", line)
+            if not score_match:
+                # Try bare number after colon: "Leg variety: 3," or "Leg variety: 3."
+                score_match = re.search(r":\s*(\d)\b", line)
+            if score_match:
+                score = int(score_match.group(1))
+                if 1 <= score <= 5:
+                    for label, key in label_map.items():
+                        if label in line_lower and key not in result:
+                            result[key] = {"score": score, "reasoning": line.strip()}
+                            break
+
+            # Extract primary issue
+            if "issue" in line_lower or "problem" in line_lower or "biggest" in line_lower:
+                result["primary_issue"] = line.strip()
+
+        # Compute composite from extracted scores
+        if result:
+            scores = [
+                v["score"] for v in result.values()
+                if isinstance(v, dict) and "score" in v
+            ]
+            if scores:
+                result["composite_score"] = sum(scores) / (len(scores) * 5.0)
+
+        if "primary_issue" not in result:
+            result["primary_issue"] = "none"
+        if "suggested_fix" not in result:
+            result["suggested_fix"] = "none"
+
+        # Fall back to JSON parse if plain text parsing got nothing
+        if not any(isinstance(v, dict) for v in result.values()):
+            try:
+                start = text.find("{")
+                end = text.rfind("}") + 1
+                if start >= 0 and end > start:
                     return json.loads(text[start:end])
-                except json.JSONDecodeError:
-                    pass
-            logger.warning("Could not parse VLM response as JSON")
-            return {}
+            except (json.JSONDecodeError, ValueError):
+                pass
+            logger.warning("Could not parse VLM response: %s", text[:200])
+
+        return result
 
 
 class GeminiEscalationAdapter:
@@ -426,6 +498,39 @@ class AutoresearchScorer:
         cls_embedding = outputs.last_hidden_state[:, 0, :].cpu().numpy().flatten()
         return cls_embedding
 
+    def _preprocess_frames(self, frames: list[Path]) -> list[Path]:
+        """Preprocess raw Gemini output: downscale to tile size via nearest-neighbor.
+
+        Raw Gemini output is typically 344x384 or similar — much larger than the
+        target 128x128 (champions) or 256x256 (bosses). Downscaling is required
+        before hard gate checks, just as the production pipeline does via the
+        Pixel Quantizer's first step.
+
+        Preprocessed frames are saved alongside originals with a _processed suffix.
+        """
+        processed = []
+        for frame_path in frames:
+            try:
+                img = Image.open(frame_path)
+                if img.width != self.tile_size or img.height != self.tile_size:
+                    img_resized = img.resize(
+                        (self.tile_size, self.tile_size),
+                        Image.Resampling.NEAREST,
+                    )
+                    out_path = frame_path.parent / f"{frame_path.stem}_processed.png"
+                    img_resized.save(out_path)
+                    processed.append(out_path)
+                    logger.info(
+                        "Preprocessed %s: %dx%d -> %dx%d",
+                        frame_path.name, img.width, img.height, self.tile_size, self.tile_size,
+                    )
+                else:
+                    processed.append(frame_path)
+            except Exception as e:
+                logger.warning("Could not preprocess %s: %s", frame_path.name, e)
+                processed.append(frame_path)  # Pass through, let hard gates catch it
+        return processed
+
     def score_sheet(self, sheet_path: Path, frames: list[Path]) -> ScoreResult:
         """Score a generated sprite sheet through all 5 tiers.
 
@@ -437,6 +542,9 @@ class AutoresearchScorer:
             ScoreResult with composite score and per-tier details.
         """
         timestamp = time.time()
+
+        # ── Preprocess: downscale raw Gemini output to tile size ──
+        frames = self._preprocess_frames(frames)
 
         # ── Tier 1: Hard Gates ──
         hard_gates = self._tier1_hard_gates(frames)
@@ -515,7 +623,7 @@ class AutoresearchScorer:
 
         return ScoreResult(
             composite=round(random.uniform(0.3, 0.8), 4),
-            hard_gates={"dimensions": True, "palette": True, "background": True, "non_empty": True},
+            hard_gates={"dimensions": True, "background": True, "non_empty": True},
             dino_identity=round(random.uniform(0.7, 0.95), 4),
             deterministic={
                 "frame_count": 1.0,
@@ -543,10 +651,15 @@ class AutoresearchScorer:
     # ── Tier 1: Hard Gates ───────────────────────────────────────────
 
     def _tier1_hard_gates(self, frames: list[Path]) -> dict[str, bool]:
-        """Check each frame: dimensions, palette, background, non-empty."""
+        """Check each frame: dimensions, background, non-empty.
+
+        Note: Palette compliance is checked in Tier 3 as a soft score, not a
+        hard gate. Raw Gemini output uses continuous colors — the Pixel
+        Quantizer snaps to palette in production. Blocking on palette here
+        would fail 100% of experiments.
+        """
         results = {
             "dimensions": True,
-            "palette": True,
             "background": True,
             "non_empty": True,
         }
@@ -602,29 +715,6 @@ class AutoresearchScorer:
                     if transparent_mask.sum() / (img.width * img.height) < 0.2:
                         results["background"] = False
 
-            # Palette compliance (soft check — within tolerance)
-            if content_pixels.sum() > 0:
-                char_colors = rgb[content_pixels]
-                # Sample up to 1000 pixels for speed
-                if len(char_colors) > 1000:
-                    indices = np.random.choice(len(char_colors), 1000, replace=False)
-                    char_colors = char_colors[indices]
-
-                palette_arr = np.array(self.palette)
-                off_palette = 0
-                for color in char_colors:
-                    distances = np.sqrt(np.sum((palette_arr - color.astype(float)) ** 2, axis=1))
-                    if distances.min() > PALETTE_TOLERANCE:
-                        off_palette += 1
-
-                off_ratio = off_palette / len(char_colors)
-                if off_ratio > 0.15:  # More than 15% off-palette
-                    logger.info(
-                        "Frame %s: %.1f%% off-palette pixels",
-                        frame_path.name, off_ratio * 100,
-                    )
-                    results["palette"] = False
-
         return results
 
     # ── Tier 2: DINOv2 Identity ──────────────────────────────────────
@@ -676,7 +766,7 @@ class AutoresearchScorer:
     # ── Tier 3: Deterministic Checks ─────────────────────────────────
 
     def _tier3_deterministic(self, frames: list[Path]) -> dict[str, float]:
-        """Frame count, outline weight, character presence, size consistency."""
+        """Frame count, outline weight, character presence, size consistency, palette proximity."""
         results = {}
 
         # Frame count check
@@ -757,60 +847,62 @@ class AutoresearchScorer:
         else:
             results["size_consistency"] = 1.0
 
+        # Palette proximity (soft score — raw Gemini output won't be palette-perfect)
+        # Measures how close the generated colors are to the target palette.
+        # Higher = closer to palette = less work for the Pixel Quantizer.
+        palette_scores = []
+        palette_arr = np.array(self.palette, dtype=float)
+        for frame_path in frames:
+            try:
+                img = Image.open(frame_path).convert("RGBA")
+                pixels = np.array(img)
+                rgb = pixels[:, :, :3]
+                alpha = pixels[:, :, 3]
+                opaque = alpha > 128
+                green = (
+                    (np.abs(rgb[:, :, 0].astype(int) - GREEN_SCREEN[0]) < 20)
+                    & (np.abs(rgb[:, :, 1].astype(int) - GREEN_SCREEN[1]) < 20)
+                    & (np.abs(rgb[:, :, 2].astype(int) - GREEN_SCREEN[2]) < 20)
+                )
+                content = opaque & ~green
+                if content.sum() > 0:
+                    char_colors = rgb[content]
+                    # Sample for speed
+                    if len(char_colors) > 500:
+                        indices = np.random.choice(len(char_colors), 500, replace=False)
+                        char_colors = char_colors[indices]
+                    # Average min-distance to palette
+                    distances = []
+                    for color in char_colors:
+                        d = np.sqrt(np.sum((palette_arr - color.astype(float)) ** 2, axis=1))
+                        distances.append(d.min())
+                    avg_dist = np.mean(distances)
+                    # Normalize: 0 = perfect match, 60+ = very far. Score 0-1.
+                    palette_scores.append(max(0.0, 1.0 - avg_dist / 60.0))
+            except Exception:
+                pass
+        results["palette_proximity"] = float(np.mean(palette_scores)) if palette_scores else 0.5
+
         return results
 
     # ── Tier 4: VLM Walk Cycle Judge ─────────────────────────────────
 
     def _tier4_vlm_judge(self, sheet_path: Path, frames: list[Path]) -> dict[str, Any]:
-        """VLM evaluation of walk cycle quality."""
-        # 1. Upscale each frame 4x via nearest-neighbor
-        # 2. Compose comparison image: walk ref (left) | gap | generated sheet (right)
-        # 3. Upscale anchor-1 for identity context
-        # 4. Send to VLM
+        """VLM evaluation of walk cycle quality.
 
-        # Load and upscale the generated sheet
+        Sends the generated sheet at original resolution to Qwen3-VL 8B.
+        No upscaling — Qwen3-VL 8B context fills up with large images,
+        causing empty responses. The original Gemini output (~1376x768)
+        is large enough for the VLM to evaluate.
+        """
         try:
             sheet_img = Image.open(sheet_path).convert("RGB")
-            sheet_upscaled = upscale_nearest(sheet_img)
+            sheet_bytes = image_to_bytes(sheet_img)
         except Exception as e:
             logger.warning("Could not load sheet for VLM: %s", e)
             return {}
 
-        # Load best walk cycle reference
-        if not self.walk_ref_paths:
-            logger.warning("No walk cycle references found — skipping VLM")
-            return {}
-
-        try:
-            ref_img = Image.open(self.walk_ref_paths[0]).convert("RGB")
-            # Scale reference to match generated sheet height
-            scale = sheet_upscaled.height / max(ref_img.height, 1)
-            ref_resized = ref_img.resize(
-                (int(ref_img.width * scale), sheet_upscaled.height),
-                Image.Resampling.NEAREST,
-            )
-        except Exception as e:
-            logger.warning("Could not load walk reference: %s", e)
-            return {}
-
-        # Compose side-by-side: reference (left) | gap | generated (right)
-        comparison = compose_side_by_side(ref_resized, sheet_upscaled)
-        comparison_bytes = image_to_bytes(comparison)
-
-        # Load anchor-1 upscaled
-        anchor_bytes = b""
-        if self.anchor_paths:
-            try:
-                anchor_img = Image.open(self.anchor_paths[0]).convert("RGB")
-                anchor_upscaled = upscale_nearest(anchor_img)
-                anchor_bytes = image_to_bytes(anchor_upscaled)
-            except Exception as e:
-                logger.warning("Could not load anchor for VLM: %s", e)
-
-        if not anchor_bytes:
-            anchor_bytes = comparison_bytes  # Fallback
-
-        return self.vlm_adapter.score_walk_cycle(comparison_bytes, anchor_bytes)
+        return self.vlm_adapter.score_walk_cycle(sheet_bytes, b"")
 
     def _compute_vlm_composite(self, vlm_result: dict[str, Any]) -> float:
         """Compute weighted VLM score from individual criteria."""
