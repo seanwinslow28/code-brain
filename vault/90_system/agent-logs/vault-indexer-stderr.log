@@ -25,3 +25,7 @@
 [INFO] Indexed 10_timeline/daily/2026-04-10.md: 3 chunks
 [INFO] Indexed 10_timeline/weekly/2026-W15.md: 4 chunks
 [INFO] Indexing complete: 7 chunks, 7 embeddings, 0 errors, 1564ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 318 vault files, 2 need indexing, 0 deleted
+[INFO] Indexed 10_timeline/daily/2026-04-11.md: 2 chunks
+[INFO] Indexing complete: 2 chunks, 2 embeddings, 0 errors, 907ms
