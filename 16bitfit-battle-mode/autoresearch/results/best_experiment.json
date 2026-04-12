@@ -1,7 +1,7 @@
 {
-  "best_score": 0.8446,
+  "best_score": 0.8448,
   "config": {
-    "version": 3,
+    "version": 4,
     "character": "sean",
     "animation_type": "walk_forward",
     "generation": {
@@ -12,13 +12,10 @@
       "sheet_layout": "full_sheet",
       "frame_count": 4,
       "include_pose_names": true,
-      "include_animation_principles": false,
+      "include_animation_principles": true,
       "include_walk_cycle_reference": false,
       "additional_constraints": [
-        "Frame 1: CONTACT pose \u2014 right heel strikes ground, left leg trails behind, arms at maximum spread",
-        "Frame 2: DOWN pose \u2014 body at lowest point, front knee bends absorbing weight",
-        "Frame 3: PASSING pose \u2014 legs together, rear leg swings past planted leg",
-        "Frame 4: UP pose \u2014 body at highest point, rear leg pushes off"
+        "4 distinct walk cycle phases: heel strike, weight drop, leg pass, push up"
       ]
     },
     "scoring": {
