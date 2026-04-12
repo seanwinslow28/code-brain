@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "character": "sean",
   "animation_type": "walk_forward",
   "generation": {
@@ -12,7 +12,12 @@
     "include_pose_names": true,
     "include_animation_principles": false,
     "include_walk_cycle_reference": false,
-    "additional_constraints": []
+    "additional_constraints": [
+      "Frame 1: CONTACT pose \u2014 right heel strikes ground, left leg trails behind, arms at maximum spread",
+      "Frame 2: DOWN pose \u2014 body at lowest point, front knee bends absorbing weight",
+      "Frame 3: PASSING pose \u2014 legs together, rear leg swings past planted leg",
+      "Frame 4: UP pose \u2014 body at highest point, rear leg pushes off"
+    ]
   },
   "scoring": {
     "skip_dino": false,
