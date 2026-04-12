@@ -1,14 +1,14 @@
 # Autoresearch Run Summary
 
-**Date:** 2026-04-11 18:11
-**Total experiments:** 3
+**Date:** 2026-04-12 09:48
+**Total experiments:** 5
 **Total cost:** $0.00
 
 ## Scores
-- **Best:** 0.7457 (experiment 1)
-- **Worst:** 0.4799 (experiment 2)
-- **Mean:** 0.6272
-- **Median:** 0.6559
+- **Best:** 0.7375 (experiment 1)
+- **Worst:** 0.5671 (experiment 4)
+- **Mean:** 0.6655
+- **Median:** 0.6677
 
 ## Best Configuration
 ```json
@@ -38,6 +38,8 @@
 ```
 
 ## Top Findings
-1. Experiment 1 — score 0.7457 (changed: include_pose_names)
-2. Experiment 0 — score 0.6559
-3. Experiment 2 — score 0.4799 (changed: additional_constraints)
+1. Experiment 1 — score 0.7375 (changed: include_pose_names)
+2. Experiment 2 — score 0.6956 (changed: additional_constraints)
+3. Experiment 3 — score 0.6677 (changed: include_animation_principles)
+4. Experiment 0 — score 0.6594
+5. Experiment 4 — score 0.5671 (changed: include_animation_principles, additional_constraints)

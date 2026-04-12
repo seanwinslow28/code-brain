@@ -31,12 +31,14 @@ from pathlib import Path
 # ─── Path Setup ──────────────────────────────────────────────────────
 
 SCRIPT_DIR = Path(__file__).parent
-REPO_ROOT = SCRIPT_DIR.parent
+REPO_ROOT = SCRIPT_DIR.parent  # 16bitfit-battle-mode/
+SUPERUSER_ROOT = REPO_ROOT.parent  # claude-code-superuser-pack/
 PQ_DIR = REPO_ROOT / "pixel-quantizer"
 
 sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(PQ_DIR))
 sys.path.insert(0, str(PQ_DIR / "video-eval"))
+sys.path.insert(0, str(SUPERUSER_ROOT / "agents-sdk"))  # lib/keychain.py lives here
 
 logging.basicConfig(
     level=logging.INFO,
@@ -634,8 +636,8 @@ async def generate_sprite_sheet(
 
     # Get API key
     try:
-        from lib.keychain import get_secret
-        api_key = get_secret("google-ai-key")
+        from lib.keychain import get_credential
+        api_key = get_credential("google-ai-key")
     except Exception:
         import os
         api_key = os.environ.get("GOOGLE_AI_KEY", "")
