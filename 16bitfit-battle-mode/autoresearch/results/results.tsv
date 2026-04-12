@@ -27,3 +27,4 @@ experiment_id	round	params_changed	composite_score	vlm_walk_score	dino_identity	
 17	1	include_walk_cycle_reference	0.0000	0.7600	0.9447	True	0.0700	0.0	1776001943
 18	1	include_walk_cycle_reference	0.0000	0.5100	0.8579	True	0.0700	0.0	1776001953
 19	1	include_walk_cycle_reference|include_animation_principles	0.0000	0.7100	0.7435	True	0.0700	0.0	1776001963
+0	1	baseline	0.7327	0.4300	0.8379	True	0.0000	0.0	1776002709
