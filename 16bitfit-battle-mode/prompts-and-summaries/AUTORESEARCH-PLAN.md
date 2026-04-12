@@ -364,4 +364,82 @@ These are tracked but NOT started until autoresearch produces results:
 
 ---
 
-*This plan was collaboratively designed by Sean and Claude during a Cowork session on 2026-04-11. It replaces the previous draft which included LoRA training (abandoned April 8).*
+## Phase 0 Results (2026-04-12)
+
+**Status:** COMPLETE. 100 experiments, $7.00 total cost, ~33 minutes runtime.
+
+### Key Numbers
+
+| Metric | Value |
+|--------|-------|
+| Baseline score (experiment 0) | 0.7412 |
+| Best score (experiment 75) | **0.8448** (+14% over baseline) |
+| Mean score | 0.7425 |
+| Worst score | 0.5937 |
+| VLM walk score ceiling | **0.8000** (24/30 — no experiment exceeded this) |
+| Hard gate pass rate | 100% |
+| VLM empty responses | 5/100 (5%) |
+
+### Winning Configuration
+
+```json
+{
+  "include_pose_names": true,
+  "include_animation_principles": true,
+  "additional_constraints": ["4 distinct walk cycle phases: heel strike, weight drop, leg pass, push up"]
+}
+```
+
+All other settings default (3 anchors, full sheet, 4 frames, Gemini NB2).
+
+### What Worked
+
+1. **`sheet_layout` changes** — Most consistent parameter. 100% hit rate above 0.80 (avg 0.8406).
+2. **`additional_constraints` with explicit phase names** — "heel strike, weight drop, leg pass, push up" was the single biggest prompt lever.
+3. **`include_pose_names`** — Improved leg_differentiation from 2/5 to 4/5 in first experiment.
+
+### What Failed
+
+1. **`include_walk_cycle_reference`** — Sending walk cycle reference images actively HURT scores in every combination. Removed from winning config.
+2. **Multi-parameter combos (3+ changes)** — More complexity = worse results. Simple single-param changes dominated.
+3. **`additional_constraints + reference_strategy` combos** — Worst-performing category (avg 0.6568).
+
+### VLM Feedback Summary
+
+| Criterion | Avg Score | Bottleneck? |
+|-----------|-----------|-------------|
+| Character Consistency | 5.0/5 | No — anchors work perfectly |
+| Height Consistency | 5.0/5 | No — no size drift |
+| Arm Swing | 2.91/5 | Moderate — often mechanical |
+| Leg Differentiation | **2.76/5** | **YES — core bottleneck, never reaches 5** |
+| Pose Progression | 2.62/5 | Yes — poses often random |
+| Weight Shift | **2.58/5** | **YES — worst criterion, body floats** |
+
+Top issues flagged: arm swing (50x), leg differentiation (34x), weight shift (5x).
+
+### Critical Finding: Prompt Engineering Ceiling
+
+The VLM walk score capped at 0.80 (24/30) across ALL 100 experiments. Baseline variance alone spans 0.615–0.834 (Round 5: 20 identical baseline runs). This means:
+
+- Gemini NB2 **cannot** produce 5/5 leg differentiation or weight shift through any prompt
+- The 0.84 best score is partly luck (within baseline variance)
+- Further prompt tweaking will produce diminishing returns
+- The bottleneck is model capability, not prompt quality
+
+### Debugging Lessons (see AUTORESEARCH-DEBUGGING-LOG.md)
+
+1. Hard gates must match the pipeline stage being evaluated (raw Gemini output ≠ post-quantizer output)
+2. Palette compliance is invalid as a hard gate before quantization — moved to soft score
+3. Qwen3-VL 8B: JSON output format triggers extended thinking; use plain text N/5 scoring
+4. Qwen3-VL 8B: images must stay under ~1400px longest side or context fills silently
+5. Qwen3-VL 8B: `num_predict` must be 4096+ to survive thinking token consumption
+
+### Recommended Next Steps
+
+1. **Best-of-N strategy (quick win)**: Generate 3-5 sheets per config, keep highest scorer. Given baseline variance, best-of-5 should reliably hit 0.83+. Cost: ~$0.35/character.
+2. **Phase 1 (ComfyUI)**: ControlNet can provide explicit pose guidance — the path to breaking the 0.80 VLM ceiling. IP-Adapter for identity. Cost: $0.
+3. **Do NOT**: Run more prompt experiments, use `include_walk_cycle_reference`, or attempt 3+ parameter combos.
+
+---
+
+*This plan was collaboratively designed by Sean and Claude during a Cowork session on 2026-04-11. It replaces the previous draft which included LoRA training (abandoned April 8). Phase 0 results added 2026-04-12.*
