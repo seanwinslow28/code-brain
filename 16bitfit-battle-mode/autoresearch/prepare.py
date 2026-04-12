@@ -196,7 +196,7 @@ class OllamaVLMAdapter:
 
     def __init__(self, host: str = "192.168.68.201", port: int = 11434, timeout: int = 30):
         self.base_url = f"http://{host}:{port}"
-        self.model = "qwen2.5-vl:7b"
+        self.model = "qwen3-vl:8b"
         self.timeout = timeout
 
     def score_walk_cycle(

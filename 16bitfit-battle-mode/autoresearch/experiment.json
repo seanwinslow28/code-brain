@@ -9,10 +9,12 @@
     "reference_strategy": "3_anchors",
     "sheet_layout": "full_sheet",
     "frame_count": 4,
-    "include_pose_names": true,
+    "include_pose_names": false,
     "include_animation_principles": false,
     "include_walk_cycle_reference": false,
-    "additional_constraints": []
+    "additional_constraints": [
+      "Show 4 distinct walking poses: Contact, Down, Passing, Up"
+    ]
   },
   "scoring": {
     "skip_dino": false,
