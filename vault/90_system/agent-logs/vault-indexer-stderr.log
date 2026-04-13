@@ -29,3 +29,7 @@
 [INFO] Discovered 318 vault files, 2 need indexing, 0 deleted
 [INFO] Indexed 10_timeline/daily/2026-04-11.md: 2 chunks
 [INFO] Indexing complete: 2 chunks, 2 embeddings, 0 errors, 907ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 319 vault files, 2 need indexing, 0 deleted
+[INFO] Indexed 10_timeline/daily/2026-04-12.md: 3 chunks
+[INFO] Indexing complete: 3 chunks, 3 embeddings, 0 errors, 864ms
