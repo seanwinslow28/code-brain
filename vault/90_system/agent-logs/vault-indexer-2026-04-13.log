@@ -1,0 +1,4 @@
+2026-04-13 02:00:02,772 [INFO] Starting vault embedding indexer
+2026-04-13 02:00:02,851 [INFO] Discovered 319 vault files, 2 need indexing, 0 deleted
+2026-04-13 02:00:03,632 [INFO] Indexed 10_timeline/daily/2026-04-12.md: 3 chunks
+2026-04-13 02:00:03,637 [INFO] Indexing complete: 3 chunks, 3 embeddings, 0 errors, 864ms
