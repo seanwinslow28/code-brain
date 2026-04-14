@@ -1,0 +1,33 @@
+---
+type: reference
+domain: [life-systems]
+status: active
+ai-context: "Ongoing personal checklist from Q1 2026 covering Boston move prep, Claude Code setup, financial tasks, and creative skill development."
+created: 2026-03-02
+---
+
+# Move & Setup Checklist (Q1 2026)
+
+- [x] Rent a Car or Van
+- [ ] Change perplexity and Claude to be focused on AI fluency. Or maybe perplexity is focused on research and PM work along with AI fluency
+- [x] Email Dr Kat
+- [x] Work on Fidelity Enrollment
+- [x] Turn Off Verizon Bill for March move
+- [ ] Learn more about obsidian and how to use
+- [x] Build out UI's — PM, Agent Hub, Life Systems.
+- [ ] Build out agent SDK 
+- [x] See if you should move the UX/UI project into Claude SuperUser pack
+- [x] Build creative writing skill for tech -> jack karouac writes about ai - have Claude code interview you and do writing exercises for emails and creative technical writing to understand what you want and provide context (Do the same with 2d animation and other creative work)
+- [ ] Create other creative skills using the same method ^
+- [ ] Set up Claude Cowork with personal PM plug ins
+- [ ] Test out PRD>prototype generator
+- [x] Do deep research on ways to get your Apple Watch Fitness app data onto your Mac Mini
+- [ ] Move any subscriptions from credit card over to 115 Elm.
+- [x] Look at RipplingxFidelity
+- [x] Granola notes have been sunk. For now, set everything up manually, and then work on script to put everything into their respective folders. Also, look into making sure EVERYTHING gets put in there -- Talk to Claude about Granola and including in the README.md and VAULT_GUIDE - Add Granola to desktop as well
+- [ ] Look at fidelity plan and ask Claude what to invest in - Use prompt engineering to make it look into stocks and bonds -- do perplexity as well
+- [x] Talk to Claude about Granola
+- [x] Create move out check list with Claude
+- [x] ***rework the Campus tracker and get it ready for Wednesday meeting -- Check what's been completed and add a date logged section
+- [ ] update context file based on all the changes and make move out check list
+- [ ] add career transition skill to portfolio project

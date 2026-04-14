@@ -1,13 +1,19 @@
 ---
 granola_id: 677e8d9c-b579-4972-ad70-917d5f3e51e0
-title: "Sean / Edvinas"
-type: note
-created: 2026-04-08T16:12:53.204Z
-updated: 2026-04-08T16:56:48.425Z
-attendees: 
+granola_type: note
+type: meeting
+domain:
+  - product-management
+status: active
+ai-context: "1:1 with Ed covering sean / edvinas."
+context: the-block
+created: 2026-04-08
+source: granola-sync
+attendees:
   - erupkus@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Sean _ Edvinas-transcript.md]]"
 ---
+
 ### AI ETF Analysis Tool Demo
 
 - Demonstrated Claude-based ETF research skill for Morgan Stanley Bitcoin Trust (MSBT)
