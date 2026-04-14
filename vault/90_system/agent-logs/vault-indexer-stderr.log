@@ -33,3 +33,10 @@
 [INFO] Discovered 319 vault files, 2 need indexing, 0 deleted
 [INFO] Indexed 10_timeline/daily/2026-04-12.md: 3 chunks
 [INFO] Indexing complete: 3 chunks, 3 embeddings, 0 errors, 864ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 323 vault files, 5 need indexing, 0 deleted
+[INFO] Indexed 00_inbox/Best (potential) AI Animation Technique.md: 1 chunks
+[INFO] Indexed 10_timeline/daily/2026-04-13.md: 3 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins-transcript.md: 30 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins.md: 2 chunks
+[INFO] Indexing complete: 36 chunks, 36 embeddings, 0 errors, 3151ms
