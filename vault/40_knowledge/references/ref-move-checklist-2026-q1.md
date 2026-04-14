@@ -1,10 +1,20 @@
+---
+type: reference
+domain: [life-systems]
+status: active
+ai-context: "Ongoing personal checklist from Q1 2026 covering Boston move prep, Claude Code setup, financial tasks, and creative skill development."
+created: 2026-03-02
+---
+
+# Move & Setup Checklist (Q1 2026)
+
 - [x] Rent a Car or Van
 - [ ] Change perplexity and Claude to be focused on AI fluency. Or maybe perplexity is focused on research and PM work along with AI fluency
 - [x] Email Dr Kat
 - [x] Work on Fidelity Enrollment
 - [x] Turn Off Verizon Bill for March move
 - [ ] Learn more about obsidian and how to use
-- [x] Build out UI’s — PM, Agent Hub, Life Systems.
+- [x] Build out UI's — PM, Agent Hub, Life Systems.
 - [ ] Build out agent SDK 
 - [x] See if you should move the UX/UI project into Claude SuperUser pack
 - [x] Build creative writing skill for tech -> jack karouac writes about ai - have Claude code interview you and do writing exercises for emails and creative technical writing to understand what you want and provide context (Do the same with 2d animation and other creative work)

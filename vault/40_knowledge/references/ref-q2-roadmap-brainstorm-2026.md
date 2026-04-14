@@ -1,3 +1,13 @@
+---
+type: reference
+domain: [product-management]
+status: draft
+ai-context: "Q2 2026 roadmap brainstorm notes for The Block — x402 crypto payments, personalization, Simon AI integration, and data consortium dashboard pivot."
+created: 2026-03-26
+---
+
+# Q2 Roadmap Thoughts
+
 . **Perplexity Max** — use before it expires Mon 3/16 (Davis media ideas research?)
 Used Perplexity Max to work on Davis Media research. Currently local, but after finish working on it, push to this github: https://github.com/seanwinslow28/around-the-block-3D-glob-mvp.git
 Make Claude Code Plug Ins for PM work and learn more about Claude on the PC to help Ed
