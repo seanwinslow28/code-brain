@@ -13,7 +13,7 @@
         <string>--max-turns</string>
         <string>10</string>
         <string>--max-budget-usd</string>
-        <string>0.30</string>
+        <string>0.50</string>
     </array>
 
     <key>WorkingDirectory</key>
