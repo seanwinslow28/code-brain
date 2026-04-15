@@ -1,0 +1,96 @@
+2026-04-15 02:13:26,547 [INFO] Starting vault embedding indexer
+2026-04-15 02:13:26,661 [INFO] Discovered 347 vault files, 68 need indexing, 26 deleted
+[redacted: granola archive path]
+2026-04-15 02:13:26,662 [INFO] Removed deleted file from index: 00_inbox/Q2 Roadmap thoughts.md
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+2026-04-15 02:13:26,662 [INFO] Removed deleted file from index: 00_inbox/3-2-26 Checklist (ongoing, forever expanding).md
+[redacted: granola archive path]
+2026-04-15 02:13:26,662 [INFO] Removed deleted file from index: 00_inbox/2026-02-20.md
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+2026-04-15 02:13:26,663 [INFO] Removed deleted file from index: 00_inbox/prj-dr-nixi-cat-new-doctor-info.md
+[redacted: granola archive path]
+2026-04-15 02:13:26,663 [INFO] Removed deleted file from index: 00_inbox/idea- for a SaaS app..md
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+2026-04-15 02:13:26,663 [INFO] Removed deleted file from index: 00_inbox/Best (potential) AI Animation Technique.md
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+2026-04-15 02:13:27,457 [INFO] Indexed 10_timeline/daily/2026-02-20.md: 1 chunks
+2026-04-15 02:13:27,716 [INFO] Indexed 10_timeline/daily/2026-04-08.md: 4 chunks
+2026-04-15 02:13:28,018 [INFO] Indexed 10_timeline/daily/2026-04-09.md: 4 chunks
+2026-04-15 02:13:28,335 [INFO] Indexed 10_timeline/daily/2026-04-14.md: 4 chunks
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+2026-04-15 02:14:10,752 [INFO] Indexed 40_knowledge/concepts/ref-ai-animation-nb2-seedance-workflow.md: 1 chunks
+2026-04-15 02:14:10,821 [INFO] Indexed 40_knowledge/concepts/ref-idea-ga4-analytics-saas.md: 1 chunks
+2026-04-15 02:14:10,975 [INFO] Indexed 40_knowledge/references/ref-dr-cat-medical-transition-boston.md: 2 chunks
+2026-04-15 02:14:11,051 [INFO] Indexed 40_knowledge/references/ref-move-checklist-2026-q1.md: 1 chunks
+2026-04-15 02:14:11,115 [INFO] Indexed 40_knowledge/references/ref-q2-roadmap-brainstorm-2026.md: 1 chunks
+2026-04-15 02:14:11,119 [INFO] Indexing complete: 634 chunks, 634 embeddings, 0 errors, 44569ms
