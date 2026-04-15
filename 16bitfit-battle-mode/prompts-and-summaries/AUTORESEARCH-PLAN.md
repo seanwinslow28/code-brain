@@ -436,10 +436,18 @@ The VLM walk score capped at 0.80 (24/30) across ALL 100 experiments. Baseline v
 
 ### Recommended Next Steps
 
-1. **Best-of-N strategy (quick win)**: Generate 3-5 sheets per config, keep highest scorer. Given baseline variance, best-of-5 should reliably hit 0.83+. Cost: ~$0.35/character.
+1. ~~**Best-of-N strategy (quick win)**: Generate 3-5 sheets per config, keep highest scorer. Given baseline variance, best-of-5 should reliably hit 0.83+. Cost: ~$0.35/character.~~ **DEFERRED** — see below.
 2. **Phase 1 (ComfyUI)**: ControlNet can provide explicit pose guidance — the path to breaking the 0.80 VLM ceiling. IP-Adapter for identity. Cost: $0.
 3. **Do NOT**: Run more prompt experiments, use `include_walk_cycle_reference`, or attempt 3+ parameter combos.
 
+### Best-of-N: Sean Only, Remaining Characters Deferred (2026-04-15)
+
+**`--best-of N` mode was implemented and validated** on 2026-04-15. The runner now supports `--best-of 5` to generate N sheets with the locked winning config and keep the highest scorer. Infrastructure is ready for all 12 characters (`char_configs` expanded to full roster).
+
+**Sean best-of-5 results:** 4 runs completed ($0.28), best score 0.7131 (run 2). Scores lower than Phase 0's 0.8448 due to DINOv2 unavailable on MacBook (no torch) and VLM cold-start timeouts on first 2 runs. VLM feedback on successful runs: leg differentiation 1-2/5, character consistency 5/5 — consistent with the prompt engineering ceiling finding.
+
+**Decision: Defer remaining 11 characters.** Running best-of-N across all characters would cost ~$3.85 and produce marginal gains within the known Gemini NB2 ceiling. Phase 1 (ComfyUI with ControlNet pose guidance) is the path to breaking through that ceiling and is a better use of time. Best-of-N for the full roster can be revisited after Phase 1 establishes whether ComfyUI produces superior walk cycles.
+
 ---
 
-*This plan was collaboratively designed by Sean and Claude during a Cowork session on 2026-04-11. It replaces the previous draft which included LoRA training (abandoned April 8). Phase 0 results added 2026-04-12.*
+*This plan was collaboratively designed by Sean and Claude during a Cowork session on 2026-04-11. It replaces the previous draft which included LoRA training (abandoned April 8). Phase 0 results added 2026-04-12. Best-of-N deferral added 2026-04-15.*

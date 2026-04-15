@@ -1,0 +1,17 @@
+{
+  "character": "sean",
+  "animation": "walk_forward",
+  "n": 5,
+  "scores": [
+    0.7081,
+    0.7131,
+    0.6576,
+    0.6532
+  ],
+  "best_score": 0.7131,
+  "best_run_index": 1,
+  "phase0_best_score": 0.8448,
+  "improvement": -0.1317,
+  "timestamp": "2026-04-15T16:33:03",
+  "cost_usd": 0.35
+}
