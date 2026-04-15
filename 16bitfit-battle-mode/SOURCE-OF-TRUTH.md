@@ -1,7 +1,7 @@
 # Source of Truth — Sean's Agentic Frameworks & Creative Pipeline Master Plan
 
 **Created:** 2026-03-27 (Boston, post-move)
-**Last Updated:** 2026-04-11 — Phase 5 COMPLETE. 12/12 characters, 180/180 animations, 1020 IMAGE_ONLY + 815 HYBRID frames, 0 failures, ~$12.60. Sheet→split approach LOCKED. Anchor image Golden Rule enforced. RIFE VFI connectivity fixed. Palette expanded (Sean 27, generic 38). 3 idle animations need re-gen (Marcus, Gym Bully, Procrastination Phantom). Autoresearch plan in revision.
+**Last Updated:** 2026-04-15 — Phase 5 COMPLETE. 12/12 characters, 180/180 animations, 1020 IMAGE_ONLY + 815 HYBRID frames, 0 failures, ~$12.60. Sheet→split approach LOCKED. Anchor image Golden Rule enforced. RIFE VFI connectivity fixed. Palette expanded (Sean 27, generic 38). 3 idle animations need re-gen (Marcus, Gym Bully, Procrastination Phantom). Autoresearch plan in revision. **Phase 6 PLANNED** (Gemma 4 benchmarking + Knowledge Compounding Loop). New Workstream D adds SessionEnd flush hook, Vault Synthesizer, Knowledge Lint agent, and autoresearch feedback loop. 3 new agents planned (11 total built → 14 at Phase 6 completion). Inspired by Karpathy's LLM Wiki pattern + claude-memory-compiler.
 **Purpose:** Compressed reference doc for every future Claude Code / Cowork session. Feed THIS file + the specific subfolder relevant to your current task. Never dump all 28 source files at once.
 **Source Files:** 28 original docs + 3 Perplexity Computer outputs in `Agentic-Frameworks-And-Autoresearch/`
 
@@ -72,15 +72,19 @@ The Claude Agent SDK layer is planned but not yet built beyond the existing `dai
 - Never use `dangerouslySkipPermissions` for autonomous agents
 - Opus 4.6 pricing dropped to $5/$25 per MTok (67% cheaper than Opus 4.1) — now viable for more agent tasks
 
-**Model-to-Machine Routing (UPDATED):**
+**Model-to-Machine Routing (UPDATED — Phase 6 additions marked):**
 
 | Task | Machine | Model | Change from Original |
 |------|---------|-------|---------------------|
-| Inbox triage | Mac Mini | `phi4-mini-reasoning` (3.8B) via Ollama | Was "Phi-4 7B" — that model doesn't exist |
+| Inbox triage | Mac Mini | `phi4-mini-reasoning` (3.8B) via Ollama → **benchmark Gemma 4 27B MoE (Phase 6.A)** | Was "Phi-4 7B" — Gemma 4 MoE activates 3.8B with native function calling |
 | Vault embeddings | Mac Mini | nomic-embed-text via Ollama | No change |
+| Vault synthesis | MacBook Pro | **Qwen3-14B** via MLX-LM | **NEW (Phase 6.D.2)** — concept + connection article generation |
+| Daily flush | Mac Mini or MacBook Pro | **phi4-mini** (simple sessions) or **Qwen3-14B** (complex sessions >100 msgs) | **NEW (Phase 6.D.1)** — session knowledge extraction |
+| Knowledge Lint (Tier 1) | Mac Mini | **phi4-mini-reasoning** (3.8B) | **NEW (Phase 6.D.3)** — structural checks (broken links, orphans) |
+| Knowledge Lint (Tier 2) | MacBook Pro | **Qwen3-14B** via MLX-LM | **NEW (Phase 6.D.3)** — semantic checks (contradictions, staleness) |
 | Anki cards | Mac Mini | `phi4-mini` (3.8B) via Ollama | Was "Phi-4 7B" |
-| Financial analysis | MacBook Pro | **Qwen3-14B** via MLX-LM | Was DeepSeek-R1:14B — Qwen3 outperforms on MATH, LiveCodeBench |
-| Code review / PR digest | MacBook Pro | **Qwen2.5-Coder-32B** via MLX-LM | Was 14B — 32B fits in 48GB via MLX, meaningfully better |
+| Financial analysis | MacBook Pro | **Qwen3-14B** via MLX-LM → **benchmark Gemma 4 31B (Phase 6.A)** | Was DeepSeek-R1:14B — Gemma 4 31B is benchmark candidate |
+| Code review / PR digest | MacBook Pro | **Qwen2.5-Coder-32B** via MLX-LM | Was 14B — 32B fits in 48GB via MLX, likely stays (Qwen's coding strength) |
 | Heavy synthesis | MacBook Pro | **Qwen3.5** (evaluate 122B MoE 10B-active or 9B) via MLX-LM | Was Qwen2.5-32B — Qwen3.5 MoE is faster + smarter |
 | Sprite vision QA | Alienware | **Qwen3-VL-7B** via Ollama CUDA | Was Qwen2.5-VL — Qwen3-VL has better spatial encoding |
 | ComfyUI orchestration | Alienware | N/A (REST API) | No change |
@@ -250,26 +254,30 @@ Training Run 001 completed successfully (61 images, 3,050 steps, loss 0.080, 2h 
 ## Part 3: Dependency Chain
 
 ```
-Workstream A (Agent SDK Infrastructure)
+Workstream A (Agent SDK Infrastructure)                       [COMPLETE — Phase 1-4]
     ├── hybrid_router.py (three-machine routing)
     ├── Mac Mini as always-on orchestrator
     ├── WOL for Alienware
     ├── Safety hooks (loop-detector, cost-watchdog, vault-integrity)
     └── launchd schedules on Mac Mini
          │
-         ▼
-Workstream B (Sprite Pipeline Upgrade)  ←── CAN START IN PARALLEL (Pixel Quantizer doesn't need Agent SDK)
-    ├── Phase 0: Pixel Quantizer prototype (GATE CHECK — do this first)
-    ├── Phase 1: Video model evaluation sprint (test Pika, Kling, Veo)
-    ├── Phase 2: Hybrid pipeline end-to-end (1 walk cycle)
-    ├── Phase 3: Adapter layer + strategy router
-    └── Scale to full roster
-         │
-         ▼
-Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
-    ├── LoRA training (needs Alienware set up, ComfyUI configured)
-    ├── Autoresearch loop (needs Agent SDK infra + ComfyUI pipeline)
-    └── Overnight optimization runs
+         ├──────────────────────────────────────┐
+         ▼                                      ▼
+Workstream B (Sprite Pipeline)           Workstream D (Knowledge Compounding)  ←── NEW Phase 6
+    [COMPLETE — Phase 1-4]                   ├── Gemma 4 benchmarking + model routing updates (6.A)
+    ├── Pixel Quantizer ✅                    ├── SessionEnd hook → flush.py → daily logs (6.D.1)
+    ├── Video model eval ✅                   ├── Vault Indexer v2 + synthesis loop (6.D.2)
+    ├── Hybrid pipeline E2E ✅                ├── Knowledge Lint agent (6.D.3)
+    ├── Adapter layer ✅                      └── Autoresearch feedback loop (6.D.4)
+    └── Scale to full roster                       │
+         │                                         │  ◄── FEEDS BACK INTO ──►
+         ▼                                         │
+Workstream C (Autoresearch + Scale)        ────────┘
+    [IN PROGRESS — Phase 5]
+    ├── ComfyGI mutation operators + Optuna TPE
+    ├── ImageReward + quality metrics
+    ├── Overnight runs: Mac Mini orchestrates, Alienware scores
+    └── Knowledge articles from D improve next night's prompts (virtuous cycle)
 ```
 
 **Key insight:** Workstreams A and B can start in parallel. The Pixel Quantizer prototype is pure Node.js/TypeScript — it doesn't need the Agent SDK at all. You can be building the quantizer on your MacBook while setting up Ollama on the Mac Mini.
@@ -402,6 +410,170 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 
 **Agent fleet status (April 9 downsizing audit):** 2 active agents (vault-indexer + daily-driver morning). 6 disabled due to CLIConnectionError and MCP headless limitations. Meta-agent built but not yet deployed. Do NOT re-enable disabled agents without Sean's explicit approval.
 
+### Phase 6: Gemma 4 Benchmarking + Knowledge Compounding Loop (Weeks 13-16 — Jun 19 - Jul 17)
+
+**Why this phase exists:** Phases 1-5 built agents, infrastructure, and the sprite pipeline. Phase 6 adds the meta-layer — model currency (Gemma 4 benchmarking) and a self-improving knowledge system (SessionEnd capture → vault synthesis → knowledge lint → autoresearch feedback). The core idea comes from Karpathy's LLM Wiki pattern and cole's claude-memory-compiler: your vault should be a living knowledge graph that the LLM maintains, not a static archive that the LLM searches. Phase 5's autoresearch generates experimental results nightly; Phase 6 captures those results into synthesized concept articles that feed back into the next night's autoresearch — a virtuous cycle.
+
+**Can start in parallel with Phase 5 (Week 10+).** Gemma 4 benchmarking and SessionEnd hook have zero dependencies on autoresearch. Vault synthesis benefits from autoresearch output but doesn't require it.
+
+**Gate Check (Phase 6 success criteria):**
+- Gemma 4 benchmarks complete on all 3 routing tasks with head-to-head scoring
+- At least 1 model swap approved and deployed based on winning benchmark
+- SessionEnd hook active and capturing ≥3 sessions/week into daily logs
+- Vault Indexer synthesis producing ≥2 concept articles + ≥1 connection article per nightly run
+- Knowledge Lint detecting structural issues with ≥95% recall on synthetic test vault
+- Autoresearch convergence improves ≥10% (measured by Optuna trials-to-best-fitness)
+
+**Workstream A — Gemma 4 Model Benchmarking & Integration:**
+
+Gemma 4 has native function calling with 6 dedicated tokens (purpose-built for agentic tool-use, not prompt-engineered like Qwen). 256K context window, fully multimodal (text/image/video/audio), outperforms Llama 4 on math/code/agentic benchmarks. The 27B MoE variant activates only 3.8B parameters (same active count as phi4-mini but from a larger model). The 31B dense variant is the benchmark target for MacBook Pro tasks.
+
+- [ ] Download Gemma 4 27B MoE via Ollama on Mac Mini: `ollama pull gemma4:27b`. Verify function calling tokens work in test prompts. Compare startup time vs phi4-mini-reasoning.
+- [ ] Download Gemma 4 31B via MLX-LM on MacBook Pro. Benchmark startup time and tok/s vs Qwen3-14B-4bit (current: 31 tok/s).
+- [ ] Build benchmark harness: `agents-sdk/lib/gemma4_benchmark.py`. Framework for testing same prompt + context across multiple models with metrics: latency (p50/p95 across 10 runs), tok/s throughput, quality score (Jaccard similarity on extracted entities vs golden set).
+- [ ] Create golden test sets (20 samples each): (1) Inbox triage — classify email into 5 categories + extract 3 action items via function calling. (2) Financial analysis — parse CSV row → categorize expense + suggest budget adjustment. (3) Code review — read 50-line Python snippet → identify issues + rate 1-5.
+- [ ] Run 60 benchmark samples (20 per task × 3 models) on same hardware/timing. Output: `results/gemma4-benchmark-YYYY-MM-DD.json` + human-readable summary table.
+- [ ] Swap decision (veto gate: if Gemma 4 quality ≥5% worse than incumbent, keep incumbent — quality over speed):
+  - Expected: Gemma 4 27B MoE replaces phi4-mini-reasoning on Mac Mini for inbox triage + Anki cards
+  - Possible: Gemma 4 31B replaces Qwen3-14B on MacBook Pro for financial analysis IF quality ≥99% of Qwen3-14B
+  - Unlikely: Keep Qwen2.5-Coder-32B for code review (code understanding is Qwen's strength)
+- [ ] Update `config.toml` `[routing]` section with new model assignments. Test all launchd agents with new routing (5/5 must pass).
+- [ ] (Optional, Week 16) If Gemma 4 27B MoE is swapped into Mac Mini orchestrator role, test autoresearch loop function calling reliability. Hypothesis: native function tokens reduce prompt engineering overhead → ≥10% faster Optuna convergence. Metrics: function calls executed correctly / total attempted (target: ≥98%).
+
+**Workstream D — Knowledge Compounding Loop (NEW WORKSTREAM):**
+
+Four components: SessionEnd hook (capture) → Vault Indexer v2 (synthesize) → Knowledge Lint (health check) → Autoresearch feedback (virtuous cycle). All run 100% local. Together they transform the vault from a static archive into a self-maintaining knowledge graph.
+
+*D.1 — SessionEnd Hook + Daily Flush (auto-capture session knowledge):*
+
+Currently sessions evaporate unless you manually write notes. The existing Preserve Session agent (`preserve_session.py`) works but is on-demand only. This makes it automatic.
+
+- [ ] Create SessionEnd hook at `.claude/hooks/session-end-flush.sh`. Hook spawns `agents-sdk/agents/flush.py` as a detached background process with the session transcript path. Guard against recursion: check `CLAUDE_INVOKED_BY` env var — if set, skip (flush.py itself may start sub-sessions).
+- [ ] Build `agents-sdk/agents/flush.py` — Knowledge extraction agent. Input: session transcript. Output: appends to `vault/daily/YYYY-MM-DD.md`. Extracts 5 sections: Decisions Made, Lessons Learned, Action Items, Patterns Noticed, Key Quotes (2-3 verbatim snippets). Model: phi4-mini-reasoning on Mac Mini for speed (~5-10s per session). Route complex sessions (>100 messages) to Qwen3-14B on MacBook Pro via hybrid_router for quality.
+- [ ] Daily log format:
+  ```markdown
+  # Daily Log — 2026-06-20
+
+  ## Sessions
+  - Claude Code: 2h 15m, 180 messages, tag: sprite-pipeline
+  - Cowork: 45m, 32 messages, tag: pm-planning
+
+  ## Decisions
+  - Chose Gemma 4 27B MoE for Mac Mini inbox triage (benchmarks: 18% speedup)
+
+  ## Lessons
+  - Native function calling tokens in Gemma 4 reduce prompt engineering overhead
+  - Wan 2.2 14B requires WanImageToVideo node, NOT Wan22ImageToVideoLatent
+
+  ## Action Items
+  - [ ] Deploy Gemma 4 MoE to production launchd schedule
+  - [ ] Test PixelLab skeleton API on 5 animations
+
+  ## Patterns
+  - Session lengths >2h often indicate architectural clarity moment before implementation
+  - Video model selection keeps hitting node/LoRA compatibility — pin ComfyUI versions
+
+  ## Quotes
+  > "RIFE VFI pipes 87.6% through Pixel Quantizer — that's our quality floor"
+  ```
+- [ ] Auto-trigger compile: After 6 PM, if daily log was updated since last compile, trigger Vault Synthesizer (D.2).
+- [ ] Place daily logs inside vault at `vault/daily/` (not parallel structure) so MOCs can link to them and Obsidian metadata panel shows recent logs. Create `vault/daily/INDEX.md` MOC listing all logs by date.
+- [ ] Filelock: flush.py acquires lock on `vault/daily/` before writing, releases after close. Uses existing `lib/filelock` from Phase 1.
+- [ ] Add `vault/daily/*.md` to Vault Indexer exclusion list (don't re-embed daily logs — they feed synthesis, not search).
+- Machine: Mac Mini (phi4-mini) or MacBook Pro (Qwen3-14B for complex sessions)
+- Schedule: Immediate on session end, async/detached
+- Cost: $0.00 (local)
+- Success: Hook fires on ≥5 session closes, flush.py completes without errors, recursion guard blocks self-calls
+
+*D.2 — Vault Indexer v2: Synthesis Loop (upgrade existing agent):*
+
+Currently the Vault Indexer (2 AM, Mac Mini, nomic-embed-text) only creates embeddings. This upgrade adds a synthesis pass that produces concept and connection articles — the core of the "living knowledge graph."
+
+- [ ] Update `agents-sdk/agents/vault_indexer.py`: After embedding pass, run change detection. Implement hash-based state tracking in `vault/.indexer-state.json` (`{filepath: sha256_hash, last_processed_timestamp}`). Compare hashes: changed file = hash mismatch, new file = hash not in state. Filter: exclude `vault/daily/`, `vault/.obsidian/`, `.indexer-state.json`, PDFs, media.
+- [ ] Route synthesis tasks to MacBook Pro via `hybrid_router.py`. Schedule: Mac Mini detects changes at 2:15 AM → WOL wakes MacBook Pro → synthesis runs at 2:30 AM → completes by 3:15 AM. Fallback: if MacBook unreachable, defer synthesis to next night (log warning, don't block).
+- [ ] Build `agents-sdk/agents/vault_synthesizer.py` — Concept + connection article generator. Model: Qwen3-14B via MLX-LM (or Gemma 4 31B if it wins Phase 6 benchmarks). Max turns: 25. Max runtime: 45 min.
+- [ ] Synthesizer logic per changed file: (1) Read changed file + retrieve 5 semantically similar vault files via nomic-embed-text SQLite index. (2) Extract 2-5 key concepts via LLM. (3) For each concept: search vault for 2+ related files. If found, generate concept article at `vault/knowledge/concepts/concept-name.md`. (4) Identify cross-cutting themes across 3+ concepts → generate connection article at `vault/knowledge/connections/theme-name.md`. (5) Every article must include wikilinks to ≥2 other articles (graph requirement — no isolated nodes).
+- [ ] Concept article template:
+  ```yaml
+  ---
+  title: "Concept Name"
+  type: concept
+  sources: [list of 2+ source files]
+  tags: [auto-generated]
+  created: 2026-06-20
+  updated: 2026-06-20
+  ---
+  ```
+  Sections: Definition (2-3 sentences), Context (why it matters), Examples (2 concrete from source material), Related Concepts (wikilinked).
+- [ ] Connection article template:
+  ```yaml
+  ---
+  title: "Theme: Concept A + Concept B + Concept C"
+  type: connection
+  connects: [list of 3+ concepts/files]
+  created: 2026-06-20
+  ---
+  ```
+  Sections: Synthesis (1-2 sentences explaining the relationship), one thread per concept with evidence, Implications (how this informs future work).
+- [ ] Auto-maintain `vault/knowledge/index.md` — master catalog with article paths, summaries, source links, date. Regenerated after each synthesis run.
+- [ ] Add `[vault_indexer]` section to `config.toml`:
+  ```toml
+  [vault_indexer]
+  enabled = true
+  embedding_model = "nomic-embed-text"
+  synthesis_enabled = true
+  synthesis_machine = "macbook-pro"
+  synthesis_model = "qwen3-14b"
+  synthesis_max_minutes = 45
+  exclude_paths = ["vault/daily", "vault/.obsidian", "*.pdf"]
+  state_file = "vault/.indexer-state.json"
+  ```
+- Machine: Mac Mini (orchestrator + embeddings) → MacBook Pro (synthesis via WOL)
+- Schedule: Nightly 2:00 AM (embedding) → 2:30 AM (synthesis)
+- Cost: $0.00 (local)
+- Success: ≥2 concept articles + ≥1 connection article per run, all articles have ≥2 wikilinks, index.md auto-updates
+
+*D.3 — Knowledge Lint Agent (weekly health checks):*
+
+Without health checks, knowledge rot is inevitable at 274+ vault files. This agent catches contradictions, stale info, orphan notes, and broken wikilinks before they compound.
+
+- [ ] Build `agents-sdk/agents/knowledge_lint.py`. Two-tier checks:
+  - **Tier 1 (Mac Mini, phi4-mini-reasoning, ~5 min):** Structural — broken wikilinks (regex scan `[[...]]` → verify target exists), orphan files (0 inbound links), missing YAML frontmatter in `vault/knowledge/`, file naming consistency (kebab-case enforcement).
+  - **Tier 2 (MacBook Pro, Qwen3-14B, triggered only if Tier 1 finds issues OR weekly full scan):** Semantic — contradiction detection (compare claims across related articles), staleness detection (flag articles >30 days old referencing time-sensitive info like model releases or API changes), SOT drift check (does SOURCE-OF-TRUTH.md Part 1-2 align with vault articles?).
+- [ ] Output: `vault/health/YYYY-MM-DD-lint-report.md` with severity levels (CRITICAL / HIGH / MEDIUM / LOW) and specific recommendations.
+- [ ] Dry-run testing: Create synthetic 20-file vault with planted issues (broken links, orphans, contradictions, stale dates). Verify lint catches ≥95%.
+- [ ] Update `agents-sdk/agents/daily_driver.py`: Check for lint report with CRITICAL or HIGH issues → surface in morning briefing with "Vault Health" section + deep link to full report. No issues = brief "Vault health: PASS ✓" line.
+- Machine: Mac Mini (Tier 1) + MacBook Pro (Tier 2 via hybrid_router)
+- Schedule: Sunday 22:00 weekly
+- Cost: $0.00 (local)
+- Max turns: 20 (Tier 1) + 30 (Tier 2)
+- Success: ≥95% recall on synthetic test vault, report formats correctly, Daily Driver surfaces alerts
+
+*D.4 — Knowledge → Autoresearch Feedback Loop (the virtuous cycle):*
+
+This is the connective tissue between Phase 5 (autoresearch) and Phase 6 (knowledge compounding). Vault synthesis captures what autoresearch learns each night; the next night's autoresearch reads those articles for better-informed optimization.
+
+- [ ] Update autoresearch orchestrator to read `vault/knowledge/concepts/` at startup (23:30, before overnight run). Filter for articles tagged `#autoresearch`, `#comfyui`, `#optimization`, `#rife`, `#pixel-quantizer`. Extract code snippets + lessons into Optuna DSPy-style optimizer prompt context.
+- [ ] Log which articles were used per run (`articles_used: N` in run metadata) for traceability.
+- [ ] Measure: Compare Optuna trials-to-best-fitness before and after knowledge injection. Hypothesis: ≥10% faster convergence (e.g., 45 trials vs 50 to reach same fitness score).
+- [ ] The cycle: Night 1 autoresearch runs 50 Optuna trials → Morning flush captures "RIFE temporal_smoothing=0.8 beats 0.6 by 8%" → Night 2 synthesizer creates [[RIFE Interpolation Hyperparameters]] concept article → Night 3 autoresearch reads article, searches around 0.8 instead of uniform 0.5-1.0 → faster convergence → repeat.
+- Machine: Mac Mini (orchestrator reads vault) + Alienware (autoresearch payload)
+- Schedule: Continuous after both Phase 5 autoresearch and Phase 6 synthesis are live
+- Cost: $0.00 (no new API calls — just reads vault)
+- Success: `articles_used > 0` in autoresearch logs, convergence speed metric improves ≥10% in side-by-side comparison
+
+**Phase 6 Cost & Effort Summary:**
+
+| Category | Estimate |
+|----------|----------|
+| Dev hours | 45-55h (Gemma 4 setup 4h, benchmark harness 10h, SessionEnd hook 6h, Vault Indexer v2 3h, Synthesizer 12h, Knowledge Lint 14h, integration 5h) |
+| Testing hours | 20-25h (benchmark runs 8h, synthetic vault testing 6h, integration 8h) |
+| New agents | 3 (flush.py, vault_synthesizer.py, knowledge_lint.py) |
+| New hooks | 1 (session-end-flush.sh) |
+| API cost | $0.00 (all agents 100% local) |
+| Electricity | ~$1-2/month (nightly WOL for MacBook Pro synthesis) |
+| Monthly system cost | Unchanged: $7-10 total |
+
 ---
 
 ## Part 5: Open Questions (Updated March 27 — some resolved, new ones added)
@@ -428,25 +600,38 @@ Workstream C (Autoresearch + LoRA)  ←── DEPENDS ON BOTH A AND B
 
 11. **NEW: Gas Town agent orchestrator** — Steve Yegge's tool (`brew install gastown`) provides structured multi-agent coordination for Claude Code. Evaluate if needed beyond native Agent Teams.
 
+12. **NEW: Gemma 4 native function calling benefit for autoresearch** — Phase 6 Task A.5 will test if 6 dedicated function tokens reduce prompt engineering overhead in Optuna search. Hypothesis: ≥10% faster convergence. Benchmark required before committing.
+
+13. **NEW: Where should daily logs live — inside vault or parallel?** Recommendation: inside `vault/daily/` for Obsidian MOC cross-linking. Requires filelock coordination with Vault Indexer. Decision point in Phase 6 Task D.1.
+
+14. **NEW: Should flush agent run on Mac Mini (fast, phi4-mini) or MacBook Pro (quality, Qwen3-14B)?** Likely hybrid: phi4 for simple sessions, route complex sessions (>100 messages) to Qwen3-14B. Test both, measure extraction accuracy. Phase 6 Task D.1.
+
+15. **NEW: Hermes Agent evaluation** — SKIPPED. Hermes Agent (NousResearch) solves problems already solved by our Agent SDK + hybrid_router + baton files. Its "learns about you" memory is just MEMORY.md + USER.md (2,200 + 1,375 chars) — less capable than our vault embeddings. Multi-platform gateway (Telegram/Discord/Slack) is dead weight for headless batch agents. **One idea worth stealing:** Honcho's "dialectic user modeling" as a pattern for vault synthesis — implement within existing infrastructure, not as a Hermes dependency.
+
+16. **NEW: How to measure autoresearch convergence improvement from vault articles?** Phase 6 Task D.4 proposes comparing Optuna trial counts to best fitness. Alternative: compare final fitness scores directly. Test both metrics during Phase 5-6 overlap.
+
 ---
 
 ## Part 6: Key Numbers
 
 | Metric | Target | Actual (Phase 5) |
 |--------|--------|------------------|
-| Total autonomous agents at steady state | 15-18 | **2 active** (vault-indexer + daily-driver morning). 6 disabled — CLIConnectionError + MCP headless limitation. See April 9 audit. |
-| Agents running 100% local | 10-12 | 1 (vault-indexer) |
-| Monthly API cost | $3-8 | ~$12/mo (daily-driver morning ~$0.40/day) |
-| Monthly electricity (all 3 machines) | ~$4 | ~$4 |
-| Total monthly system cost | $6-10 | ~$16 |
+| Total autonomous agents at steady state | 15-18 (Phase 6 adds 3: flush.py, vault_synthesizer.py, knowledge_lint.py → 14 total) | **2 active** (vault-indexer + daily-driver morning). 6 disabled — CLIConnectionError + MCP headless limitation. See April 9 audit. |
+| Agents running 100% local | 10-12 (all 3 new Phase 6 agents are 100% local) | 1 (vault-indexer) |
+| Monthly API cost | $3-8 (recalculate — Opus 4.6 now $5/$25, may be worth using more) | ~$12/mo (daily-driver morning ~$0.40/day) |
+| Monthly electricity (all 3 machines) | ~$5-6 (nightly WOL for MacBook Pro synthesis adds ~$1-2) | ~$4 |
+| Total monthly system cost | $7-12 | ~$16 |
 | Total frames generated | ~900-1,400 | **1,835** (1,020 IMAGE_ONLY + 815 HYBRID) |
 | Animations | — | **180** (15 per character × 12 characters) |
 | Generation cost | — | **~$12.60** (180 Gemini calls × ~$0.07) |
 | Full sprite production scope | 12 fighters × 15 animations × 4-17 frames | 12 fighters × 15 animations = 180 animations COMPLETE |
-| Champion tile size | 128×128 | 128×128 ✅ |
-| Boss tile size | 256×256 | 256×256 ✅ |
+| Champion tile size | 128×128 | 128×128 |
+| Boss tile size | 256×256 | 256×256 |
 | Pipeline tech stack | Node.js / TypeScript / Oclif / Zod / Pino / Sharp / Puppeteer | + Python batch orchestrator |
 | Agent SDK language | Python 3.10+ | Python 3.10+ |
+| LoRA training time | 30-90 minutes per style (ABANDONED — Gemini NB2 is production path) | — |
+| Vault knowledge articles (Phase 6 target) | ≥2 concepts + ≥1 connection per nightly synthesis run | — |
+| Knowledge compounding loop | SessionEnd → flush → synthesize → lint → autoresearch feedback | — |
 
 ---
 
@@ -471,6 +656,11 @@ When starting a new Claude Code or Cowork session, load THIS doc plus only the f
 | Detailed step-by-step execution | Part 4 | `16bitfit-execution-blueprint.md` (~102.5h total, exact commands per task) |
 | Validate tool/model currency | Part 8 | `validation-audit-march-2026.md` |
 | Find new tools/opportunities | Part 8 | `creative-tech-opportunity-scan.md` |
+| Gemma 4 benchmarking | Phase 6 Workstream A | `agents-sdk/lib/gemma4_benchmark.py` + `config.toml` |
+| Build SessionEnd flush hook | Phase 6 D.1 | `agents-sdk/agents/flush.py` + `.claude/hooks/session-end-flush.sh` |
+| Build Vault Synthesizer | Phase 6 D.2 | `agents-sdk/agents/vault_synthesizer.py` + `agents-sdk/agents/vault_indexer.py` |
+| Build Knowledge Lint agent | Phase 6 D.3 | `agents-sdk/agents/knowledge_lint.py` |
+| Knowledge → autoresearch loop | Phase 6 D.4 | `vault/knowledge/concepts/` + autoresearch orchestrator |
 | Autoresearch loop foundation | Part 2 Workstream C | `Autoresearch-ComfyUI-Overview.md` + `creative-tech-opportunity-scan.md` (ComfyGI, Optuna, ImageReward sections) |
 | Test new sprite animation tools | Part 5 Q8 | `creative-tech-opportunity-scan.md` (PixelLab, rd-animation, Ludo.ai, Wan 2.2 LoRAs sections) |
 
@@ -490,4 +680,4 @@ Three Perplexity Computer tasks were run against the full research corpus. Their
 
 ---
 
-*This document synthesizes 28 original source files + 3 Perplexity Computer outputs. Last updated: 2026-03-27. Update this doc whenever a major decision changes or a gate check completes.*
+*This document synthesizes 28 original source files + 3 Perplexity Computer outputs. Last updated: 2026-04-14. Phase 6 added (Gemma 4 + Knowledge Compounding Loop). Update this doc whenever a major decision changes or a gate check completes.*
