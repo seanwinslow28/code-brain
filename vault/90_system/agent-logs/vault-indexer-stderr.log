@@ -40,3 +40,99 @@
 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins-transcript.md: 30 chunks
 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins.md: 2 chunks
 [INFO] Indexing complete: 36 chunks, 36 embeddings, 0 errors, 3151ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 347 vault files, 68 need indexing, 26 deleted
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-2026-04-07_12-59-28.md
+[INFO] Removed deleted file from index: 00_inbox/Q2 Roadmap thoughts.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Untitled Granola Note at 2026-04-06 14-47-14-transcript.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-transcript-2026-04-07_12-59-28.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Pro Future Discussion.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Untitled Granola Note at 2026-04-06 14-47-14.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Sean _ Edvinas-transcript-2026-04-08_12-12-53.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-02_09-59-59.md
+[INFO] Removed deleted file from index: 00_inbox/3-2-26 Checklist (ongoing, forever expanding).md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Job Boards Prep for Client.md
+[INFO] Removed deleted file from index: 00_inbox/2026-02-20.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Project CTO (Homepage) Discussion-transcript.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-01_10-00-04.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Sean _ Edvinas-2026-04-08_12-12-53.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-02_09-59-59.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Pro Future Discussion-transcript.md
+[INFO] Removed deleted file from index: 00_inbox/prj-dr-nixi-cat-new-doctor-info.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-01_10-00-04.md
+[INFO] Removed deleted file from index: 00_inbox/idea- for a SaaS app..md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Project CTO (Homepage) Discussion.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Google Ad Manager Operations Sync-transcript.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-07_10-01-09.md
+[INFO] Removed deleted file from index: 00_inbox/Best (potential) AI Animation Technique.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Job Boards Prep for Client-transcript.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-02_13-01-14.md
+[INFO] Removed deleted file from index: 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-2026-04-02_13-01-14.md
+[INFO] Indexed 10_timeline/daily/2026-02-20.md: 1 chunks
+[INFO] Indexed 10_timeline/daily/2026-04-08.md: 4 chunks
+[INFO] Indexed 10_timeline/daily/2026-04-09.md: 4 chunks
+[INFO] Indexed 10_timeline/daily/2026-04-14.md: 4 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Brand, Media, Design Weekly Sync-transcript.md: 17 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Brand, Media, Design Weekly Sync.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-2026-04-14_13-00-31.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-transcript-2026-04-14_13-00-31.md: 8 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins-transcript.md: 30 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Sean _ Edvinas-transcript.md: 18 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Sean _ Edvinas.md: 1 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-2026-04-09_12-59-20.md: 1 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-09_12-59-20.md: 11 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Singular.live discussion_refinement-transcript.md: 34 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Singular.live discussion_refinement.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-08_09-31-26.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-09_09-59-24.md: 3 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-14_10-03-52.md: 3 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-07_10-01-09.md: 15 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-08_09-31-26.md: 9 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-09_09-59-24.md: 18 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-14_10-03-52.md: 39 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/daily-standup/mtg-2026-04-01-unified-daily-standup-transcript.md: 12 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/daily-standup/mtg-2026-04-01-unified-daily-standup.md: 3 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/daily-standup/mtg-2026-04-02-unified-daily-standup-transcript.md: 13 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/daily-standup/mtg-2026-04-02-unified-daily-standup.md: 3 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/daily-standup/mtg-2026-04-07-unified-daily-standup-transcript.md: 16 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/daily-standup/mtg-2026-04-07-unified-daily-standup.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/daily-standup/mtg-2026-04-08-unified-daily-standup-transcript.md: 9 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/daily-standup/mtg-2026-04-08-unified-daily-standup.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/daily-standup/mtg-2026-04-09-unified-daily-standup-transcript.md: 19 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/daily-standup/mtg-2026-04-09-unified-daily-standup.md: 3 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/daily-standup/mtg-2026-04-14-unified-daily-standup-transcript.md: 40 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/daily-standup/mtg-2026-04-14-unified-daily-standup.md: 3 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/design-sync/mtg-2026-04-07-product-design-weekly-alignment-transcript.md: 16 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/design-sync/mtg-2026-04-07-product-design-weekly-alignment.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/design-sync/mtg-2026-04-08-brand-media-design-weekly-sync-transcript.md: 18 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/design-sync/mtg-2026-04-08-brand-media-design-weekly-sync.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/design-sync/mtg-2026-04-14-product-design-weekly-alignment-transcript.md: 8 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/design-sync/mtg-2026-04-14-product-design-weekly-alignment.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/ed-sean-one-on-ones/mtg-2026-03-31-pro-future-discussion-transcript.md: 28 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/ed-sean-one-on-ones/mtg-2026-03-31-pro-future-discussion.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/ed-sean-one-on-ones/mtg-2026-04-02-sean-x-ed-11-transcript.md: 22 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/ed-sean-one-on-ones/mtg-2026-04-02-sean-x-ed-11.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/ed-sean-one-on-ones/mtg-2026-04-06-sean-edvinas-transcript.md: 10 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/ed-sean-one-on-ones/mtg-2026-04-06-sean-edvinas.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/ed-sean-one-on-ones/mtg-2026-04-08-sean-edvinas-transcript.md: 19 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/ed-sean-one-on-ones/mtg-2026-04-08-sean-edvinas.md: 1 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/ed-sean-one-on-ones/mtg-2026-04-09-sean-x-ed-11-transcript.md: 11 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/ed-sean-one-on-ones/mtg-2026-04-09-sean-x-ed-11.md: 1 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/other/mtg-2026-04-06-project-cto-homepage-discussion-transcript.md: 17 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/other/mtg-2026-04-06-project-cto-homepage-discussion.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/other/mtg-2026-04-06-untitled-granola-note-at-2026-04-06-14-47-14-transcript.md: 13 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/other/mtg-2026-04-06-untitled-granola-note-at-2026-04-06-14-47-14.md: 1 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/other/mtg-2026-04-07-google-ad-manager-operations-sync-transcript.md: 17 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/other/mtg-2026-04-07-job-boards-prep-for-client-transcript.md: 8 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/other/mtg-2026-04-07-job-boards-prep-for-client.md: 1 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/other/mtg-2026-04-08-singularlive-discussionrefinement-transcript.md: 34 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/other/mtg-2026-04-08-singularlive-discussionrefinement.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/other/mtg-2026-04-13-project-cto-design-check-ins-transcript.md: 30 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/other/mtg-2026-04-13-project-cto-design-check-ins.md: 2 chunks
+[INFO] Indexed 40_knowledge/concepts/ref-ai-animation-nb2-seedance-workflow.md: 1 chunks
+[INFO] Indexed 40_knowledge/concepts/ref-idea-ga4-analytics-saas.md: 1 chunks
+[INFO] Indexed 40_knowledge/references/ref-dr-cat-medical-transition-boston.md: 2 chunks
+[INFO] Indexed 40_knowledge/references/ref-move-checklist-2026-q1.md: 1 chunks
+[INFO] Indexed 40_knowledge/references/ref-q2-roadmap-brainstorm-2026.md: 1 chunks
+[INFO] Indexing complete: 634 chunks, 634 embeddings, 0 errors, 44569ms
