@@ -1,0 +1,7 @@
+{
+  "openExternalURLs": true,
+  "enableAdblocking": true,
+  "homepage": "vault",
+  "searchEngine": "google",
+  "markdownPath": "00_inbox"
+}
