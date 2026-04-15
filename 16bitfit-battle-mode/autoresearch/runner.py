@@ -55,6 +55,72 @@ PROGRAM_FILE = SCRIPT_DIR / "program.md"
 COST_PER_EXPERIMENT = 0.07  # ~$0.07 per Gemini NB2 API call
 RATE_LIMIT_DELAY = 10  # Seconds between Gemini API calls
 
+# All 12 characters: 6 champions (128×128) + 6 bosses (256×256)
+CHAR_CONFIGS = {
+    # Champions
+    "sean": {
+        "name": "Sean",
+        "description": "Muscular build, blonde hair, white tank top, blue pants, white shoes",
+        "tile_size": 128,
+    },
+    "aria": {
+        "name": "Aria",
+        "description": "Athletic build, dark skin, purple sports bra, black leggings, white sneakers",
+        "tile_size": 128,
+    },
+    "kenji": {
+        "name": "Kenji",
+        "description": "Lean build, black spiky hair, white karate gi, black belt, bare feet",
+        "tile_size": 128,
+    },
+    "marcus": {
+        "name": "Marcus",
+        "description": "Tall muscular build, dark skin, red headband, red boxing gloves, black shorts, black boots",
+        "tile_size": 128,
+    },
+    "mary": {
+        "name": "Mary",
+        "description": "Petite build, red hair in ponytail, green crop top, white shorts, green sneakers",
+        "tile_size": 128,
+    },
+    "zara": {
+        "name": "Zara",
+        "description": "Tall athletic build, dark skin, braided hair, yellow sports bra, black yoga pants, yellow sneakers",
+        "tile_size": 128,
+    },
+    # Bosses
+    "gym_bully": {
+        "name": "Gym Bully",
+        "description": "Massive muscular build, bald head, red tank top, camo shorts, heavy chains, black combat boots",
+        "tile_size": 256,
+    },
+    "procrastination_phantom": {
+        "name": "Procrastination Phantom",
+        "description": "Ghostly translucent figure, hooded cloak, ethereal purple glow, floating, no visible feet",
+        "tile_size": 256,
+    },
+    "sloth_demon": {
+        "name": "Sloth Demon",
+        "description": "Obese demonic figure, grey-green skin, horns, tattered brown cloth, clawed feet",
+        "tile_size": 256,
+    },
+    "stress_titan": {
+        "name": "Stress Titan",
+        "description": "Enormous rocky figure, cracked magma skin, glowing red veins, stone fists, lava dripping",
+        "tile_size": 256,
+    },
+    "training_dummy": {
+        "name": "Training Dummy",
+        "description": "Wooden practice dummy, circular head, cross-shaped body, spring base, red target circles",
+        "tile_size": 256,
+    },
+    "ultimate_slump": {
+        "name": "Ultimate Slump",
+        "description": "Amorphous dark mass, multiple shadowy tendrils, glowing red eyes, dripping black ooze",
+        "tile_size": 256,
+    },
+}
+
 
 # ─── Experiment Config Manager ───────────────────────────────────────
 
@@ -531,24 +597,7 @@ async def generate_sprite_sheet(
         return None, []
 
     # Character config
-    char_configs = {
-        "sean": {
-            "name": "Sean",
-            "description": "Muscular build, blonde hair, white tank top, blue pants, white shoes",
-            "tile_size": 128,
-        },
-        "aria": {
-            "name": "Aria",
-            "description": "Athletic build, dark skin, purple sports bra, black leggings, white sneakers",
-            "tile_size": 128,
-        },
-        "kenji": {
-            "name": "Kenji",
-            "description": "Lean build, black spiky hair, white karate gi, black belt, bare feet",
-            "tile_size": 128,
-        },
-    }
-    char_config = char_configs.get(character.lower(), char_configs["sean"])
+    char_config = CHAR_CONFIGS.get(character.lower(), CHAR_CONFIGS["sean"])
 
     # Get frame count from config (may be mutated)
     frame_count = gen.get("frame_count", len(template.keyframe_indices) or template.frame_count)
@@ -887,6 +936,154 @@ async def run_phase0(
     print(f"{'=' * 60}")
 
 
+# ─── Best-of-N Runner ──────────────────────────────────────────────
+
+async def run_best_of_n(
+    character: str,
+    animation_type: str,
+    n: int,
+    budget: float,
+    dry_run: bool,
+) -> None:
+    """Generate N sprite sheets with the locked winning config, keep the best."""
+    from autoresearch.prepare import AutoresearchScorer
+
+    # Load winning config
+    best_experiment_path = RESULTS_DIR / "best_experiment.json"
+    if not best_experiment_path.exists():
+        print("ERROR: results/best_experiment.json not found. Run Phase 0 first.")
+        sys.exit(1)
+
+    best_data = json.loads(best_experiment_path.read_text())
+    locked_config = best_data["config"]
+    phase0_best_score = best_data["best_score"]
+
+    print(f"\n{'=' * 60}")
+    print(f"BEST-OF-{n} — {character} / {animation_type}")
+    print(f"Phase 0 best score: {phase0_best_score:.4f} | Budget: ${budget:.2f} | Dry run: {dry_run}")
+    print(f"{'=' * 60}\n")
+
+    # Budget check
+    estimated_cost = n * COST_PER_EXPERIMENT
+    if not dry_run and estimated_cost > budget + 0.001:
+        print(f"ERROR: {n} runs would cost ~${estimated_cost:.2f}, exceeding budget ${budget:.2f}")
+        sys.exit(1)
+
+    # Initialize scorer
+    scoring_cfg = locked_config.get("scoring", {})
+    scorer = AutoresearchScorer(
+        character=character,
+        animation_type=animation_type,
+        skip_dino=scoring_cfg.get("skip_dino", False),
+        skip_vlm=scoring_cfg.get("skip_vlm", False) or dry_run,
+        alienware_host=scoring_cfg.get("alienware_host", "192.168.68.201"),
+        vlm_timeout=scoring_cfg.get("vlm_timeout_s", 30),
+    )
+
+    # Output directory
+    output_base = RESULTS_DIR / "best-of-N" / f"{character}_{animation_type}"
+    output_base.mkdir(parents=True, exist_ok=True)
+
+    # Generate and score N sheets
+    scores: list[float] = []
+    run_dirs: list[Path] = []
+    cumulative_cost = 0.0
+    start_time = time.time()
+
+    for run_idx in range(n):
+        print(f"\n{'─' * 40}")
+        print(f"Run {run_idx + 1}/{n}")
+
+        run_dir = output_base / f"run_{run_idx:02d}"
+
+        if dry_run:
+            sheet_path, frame_paths = _generate_dry_run(run_dir)
+            score_result = scorer.score_dry_run()
+            cost = 0.0
+        else:
+            sheet_path, frame_paths = await generate_sprite_sheet(
+                locked_config, character, animation_type, run_dir, dry_run=False,
+            )
+            cost = COST_PER_EXPERIMENT
+            cumulative_cost += cost
+
+            if cumulative_cost > budget:
+                print(f"  Budget exceeded (${cumulative_cost:.2f} / ${budget:.2f}) — stopping early")
+                break
+
+            if sheet_path and frame_paths:
+                score_result = scorer.score_sheet(sheet_path, frame_paths)
+            else:
+                logger.warning("Generation failed for run %d — scoring as 0", run_idx)
+                score_result = scorer.score_dry_run()
+                score_result.composite = 0.0
+
+        scores.append(score_result.composite)
+        run_dirs.append(run_dir)
+        print(f"  Score: {score_result.composite:.4f} (tier {score_result.tier_reached})")
+
+        # Rate limit between runs
+        if not dry_run and run_idx < n - 1:
+            print(f"  Waiting {RATE_LIMIT_DELAY}s (rate limit)...")
+            await asyncio.sleep(RATE_LIMIT_DELAY)
+
+    if not scores:
+        print("ERROR: No runs completed.")
+        return
+
+    # Find the best run
+    best_idx = int(max(range(len(scores)), key=lambda i: scores[i]))
+    best_score = scores[best_idx]
+    best_run_dir = run_dirs[best_idx]
+
+    # Copy best run artifacts to the output directory
+    best_sheet_src = best_run_dir / "experiment_sheet.png"
+    if best_sheet_src.exists():
+        shutil.copy2(best_sheet_src, output_base / "best_sheet.png")
+
+    # Copy best frames
+    for frame_src in sorted(best_run_dir.glob("frame_*.png")):
+        shutil.copy2(frame_src, output_base / frame_src.name)
+
+    # Delete non-winning run directories to save disk
+    for idx, run_dir in enumerate(run_dirs):
+        if idx != best_idx and run_dir.exists():
+            shutil.rmtree(run_dir, ignore_errors=True)
+    # Also clean up the winning run dir (artifacts are already copied)
+    if best_run_dir.exists():
+        shutil.rmtree(best_run_dir, ignore_errors=True)
+
+    # Save result.json
+    result = {
+        "character": character,
+        "animation": animation_type,
+        "n": n,
+        "scores": scores,
+        "best_score": best_score,
+        "best_run_index": best_idx,
+        "phase0_best_score": phase0_best_score,
+        "improvement": round(best_score - phase0_best_score, 4),
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "cost_usd": round(cumulative_cost, 4),
+    }
+    (output_base / "result.json").write_text(json.dumps(result, indent=2) + "\n")
+
+    # Print summary
+    print(f"\n{'=' * 60}")
+    print(f"BEST-OF-{n} COMPLETE — {character} / {animation_type}")
+    print(f"  Runs completed: {len(scores)}")
+    print(f"  Scores: {', '.join(f'{s:.4f}' for s in scores)}")
+    print(f"  Best score: {best_score:.4f} (run {best_idx + 1})")
+    print(f"  Phase 0 best: {phase0_best_score:.4f}")
+    improvement = best_score - phase0_best_score
+    sign = "+" if improvement >= 0 else ""
+    print(f"  Improvement: {sign}{improvement:.4f}")
+    print(f"  Total cost: ${cumulative_cost:.2f}")
+    print(f"  Runtime: {(time.time() - start_time) / 60:.1f} minutes")
+    print(f"  Output: {output_base}/")
+    print(f"{'=' * 60}")
+
+
 # ─── CLI ─────────────────────────────────────────────────────────────
 
 def main():
@@ -898,21 +1095,34 @@ Examples:
   python3 runner.py --phase 0 --character sean --animation walk_forward --max-experiments 100
   python3 runner.py --phase 0 --character sean --animation walk_forward --max-experiments 5 --dry-run
   python3 runner.py --phase 0 --character sean --animation walk_forward --resume
+  python3 runner.py --phase 0 --character sean --animation walk_forward --best-of 5 --budget 0.35
         """,
     )
     parser.add_argument("--phase", type=int, required=True, choices=[0, 1], help="Phase (0=Gemini, 1=ComfyUI)")
-    parser.add_argument("--character", required=True, help="Character name (e.g. sean)")
+    parser.add_argument("--character", required=True, help="Character name (e.g. sean, gym_bully)")
     parser.add_argument("--animation", required=True, help="Animation type (e.g. walk_forward)")
     parser.add_argument("--max-experiments", type=int, default=100, help="Maximum experiments (default: 100)")
     parser.add_argument("--budget", type=float, default=7.00, help="Budget cap in USD (default: $7.00)")
     parser.add_argument("--timeout-hours", type=float, default=2.0, help="Max runtime in hours (default: 2.0)")
     parser.add_argument("--dry-run", action="store_true", help="No API calls, mock scores")
     parser.add_argument("--resume", action="store_true", help="Resume from last experiment")
+    parser.add_argument("--best-of", type=int, default=0, dest="best_of",
+                        help="Generate N sheets with locked config, keep best (0=disabled)")
     args = parser.parse_args()
 
     if args.phase == 1:
         print("Phase 1 (ComfyUI) is not yet implemented. Use --phase 0.")
         sys.exit(1)
+
+    if args.best_of > 0:
+        asyncio.run(run_best_of_n(
+            character=args.character,
+            animation_type=args.animation,
+            n=args.best_of,
+            budget=args.budget,
+            dry_run=args.dry_run,
+        ))
+        return
 
     asyncio.run(run_phase0(
         character=args.character,
