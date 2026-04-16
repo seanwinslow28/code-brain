@@ -136,3 +136,14 @@
 [INFO] Indexed 40_knowledge/references/ref-move-checklist-2026-q1.md: 1 chunks
 [INFO] Indexed 40_knowledge/references/ref-q2-roadmap-brainstorm-2026.md: 1 chunks
 [INFO] Indexing complete: 634 chunks, 634 embeddings, 0 errors, 44569ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 355 vault files, 9 need indexing, 0 deleted
+[INFO] Indexed 00_inbox/Autoresearch and agentic Polymarket & Crypto cash flow.md: 1 chunks
+[INFO] Indexed 10_timeline/daily/2026-04-15.md: 4 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Brand, Media, Design Weekly Sync-2026-04-15_09-29-41.md: 1 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Brand, Media, Design Weekly Sync-transcript-2026-04-15_09-29-41.md: 16 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Product __ Legal Sync-transcript.md: 9 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Product __ Legal Sync.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-15_10-02-13.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-15_10-02-13.md: 12 chunks
+[INFO] Indexing complete: 47 chunks, 47 embeddings, 0 errors, 4406ms

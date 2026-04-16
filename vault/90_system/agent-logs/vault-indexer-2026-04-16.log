@@ -1,0 +1,11 @@
+2026-04-16 02:01:08,018 [INFO] Starting vault embedding indexer
+2026-04-16 02:01:08,133 [INFO] Discovered 355 vault files, 9 need indexing, 0 deleted
+2026-04-16 02:01:09,404 [INFO] Indexed 00_inbox/Autoresearch and agentic Polymarket & Crypto cash flow.md: 1 chunks
+2026-04-16 02:01:09,645 [INFO] Indexed 10_timeline/daily/2026-04-15.md: 4 chunks
+2026-04-16 02:01:09,704 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Brand, Media, Design Weekly Sync-2026-04-15_09-29-41.md: 1 chunks
+2026-04-16 02:01:10,834 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Brand, Media, Design Weekly Sync-transcript-2026-04-15_09-29-41.md: 16 chunks
+2026-04-16 02:01:11,454 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Product __ Legal Sync-transcript.md: 9 chunks
+2026-04-16 02:01:11,584 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Product __ Legal Sync.md: 2 chunks
+2026-04-16 02:01:11,739 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-15_10-02-13.md: 2 chunks
+2026-04-16 02:01:12,421 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-15_10-02-13.md: 12 chunks
+2026-04-16 02:01:12,424 [INFO] Indexing complete: 47 chunks, 47 embeddings, 0 errors, 4406ms
