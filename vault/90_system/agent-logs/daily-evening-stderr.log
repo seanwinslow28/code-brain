@@ -36,3 +36,41 @@ Traceback (most recent call last):
     raise Exception(message.get("error", "Unknown error"))
 Exception: Command failed with exit code 1 (exit code: 1)
 Error output: Check stderr output for details
+[INFO] Starting daily driver in evening mode
+[INFO] Completed: status=error_max_budget_usd, turns=2, cost=$0.25408425
+Fatal error in message reader: Command failed with exit code 1 (exit code: 1)
+Error output: Check stderr output for details
+[ERROR] Agent failed: Command failed with exit code 1 (exit code: 1)
+Error output: Check stderr output for details
+Traceback (most recent call last):
+  File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/daily_driver.py", line 316, in <module>
+    main()
+    ~~~~^^
+  File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/daily_driver.py", line 312, in main
+    asyncio.run(run(args.mode, dry_run=args.dry_run))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.11/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.11/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.11/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/daily_driver.py", line 262, in run
+    async for message in query(prompt=prompt, options=options):
+    ...<6 lines>...
+            )
+  File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/query.py", line 122, in query
+    async for message in client.process_query(
+    ...<2 lines>...
+        yield message
+  File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_internal/client.py", line 147, in process_query
+    async for data in query.receive_messages():
+    ...<2 lines>...
+            yield message
+  File "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/lib/python3.13/site-packages/claude_agent_sdk/_internal/query.py", line 726, in receive_messages
+    raise Exception(message.get("error", "Unknown error"))
+Exception: Command failed with exit code 1 (exit code: 1)
+Error output: Check stderr output for details
