@@ -136,3 +136,14 @@
 [INFO] Indexed 40_knowledge/references/ref-move-checklist-2026-q1.md: 1 chunks
 [INFO] Indexed 40_knowledge/references/ref-q2-roadmap-brainstorm-2026.md: 1 chunks
 [INFO] Indexing complete: 634 chunks, 634 embeddings, 0 errors, 44569ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 355 vault files, 9 need indexing, 0 deleted
+[INFO] Indexed 00_inbox/Autoresearch and agentic Polymarket & Crypto cash flow.md: 1 chunks
+[INFO] Indexed 10_timeline/daily/2026-04-15.md: 4 chunks
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[INFO] Indexing complete: 47 chunks, 47 embeddings, 0 errors, 4406ms

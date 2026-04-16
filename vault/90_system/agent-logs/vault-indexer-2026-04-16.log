@@ -1,0 +1,11 @@
+2026-04-16 02:01:08,018 [INFO] Starting vault embedding indexer
+2026-04-16 02:01:08,133 [INFO] Discovered 355 vault files, 9 need indexing, 0 deleted
+2026-04-16 02:01:09,404 [INFO] Indexed 00_inbox/Autoresearch and agentic Polymarket & Crypto cash flow.md: 1 chunks
+2026-04-16 02:01:09,645 [INFO] Indexed 10_timeline/daily/2026-04-15.md: 4 chunks
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+2026-04-16 02:01:12,424 [INFO] Indexing complete: 47 chunks, 47 embeddings, 0 errors, 4406ms
