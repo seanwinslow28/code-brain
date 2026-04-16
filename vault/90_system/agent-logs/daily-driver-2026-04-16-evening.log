@@ -1,0 +1,4 @@
+2026-04-16 17:00:02,143 [INFO] Starting daily driver in evening mode
+2026-04-16 17:00:17,671 [INFO] Completed: status=error_max_budget_usd, turns=2, cost=$0.25408425
+2026-04-16 17:00:18,030 [ERROR] Agent failed: Command failed with exit code 1 (exit code: 1)
+Error output: Check stderr output for details
