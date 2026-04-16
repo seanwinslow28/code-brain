@@ -3,7 +3,7 @@ granola_id: 9486d258-640a-4952-ae8b-ecea5d3e44bf
 title: "Sean x Ed 1:1 - Transcript"
 type: transcript
 created: 2026-04-16T17:00:39.897Z
-updated: 2026-04-16T17:35:27.681Z
+updated: 2026-04-16T18:10:45.754Z
 attendees: 
   - erupkus@theblock.co
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1.md]]"
