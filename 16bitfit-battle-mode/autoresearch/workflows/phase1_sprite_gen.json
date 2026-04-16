@@ -1,0 +1,42 @@
+{
+  "1": { "class_type": "CheckpointLoaderSimple", "inputs": { "ckpt_name": "Illustrious-XL-v2.0.safetensors" } },
+  "2": { "class_type": "LoraLoader", "inputs": {
+      "model": ["1", 0], "clip": ["1", 1],
+      "lora_name": "SpaceCandy_SpriteSheet_v1_ILXL.safetensors",
+      "strength_model": 0.5, "strength_clip": 0.5
+  }},
+  "3": { "class_type": "CLIPTextEncode", "inputs": {
+      "text": "pixel art sprite of a man, arcade fighter, walk cycle contact pose, legs apart stepping forward, facing right, full body, single character, white background, game sprite",
+      "clip": ["2", 1]
+  }},
+  "4": { "class_type": "CLIPTextEncode", "inputs": {
+      "text": "anime, chibi, 3D, smooth shading, blurry, text, watermark, skeleton, colored lines, circle, ring",
+      "clip": ["2", 1]
+  }},
+  "5": { "class_type": "IPAdapterUnifiedLoaderFaceID", "inputs": {
+      "model": ["2", 0], "preset": "FACEID PLUS V2", "lora_strength": 0.6, "provider": "CUDA"
+  }},
+  "15": { "class_type": "IPAdapterInsightFaceLoader", "inputs": { "provider": "CUDA", "model_name": "buffalo_l" } },
+  "6": { "class_type": "LoadImage", "inputs": { "image": "sean_anchor_1.png" } },
+  "7": { "class_type": "IPAdapterFaceID", "inputs": {
+      "model": ["5", 0], "ipadapter": ["5", 1], "image": ["6", 0],
+      "weight": 0.6, "weight_faceidv2": 0.6, "weight_type": "linear",
+      "combine_embeds": "average", "start_at": 0.0, "end_at": 1.0,
+      "embeds_scaling": "V only", "insightface": ["15", 0]
+  }},
+  "8": { "class_type": "ControlNetLoader", "inputs": { "control_net_name": "thibaud_openpose_sdxl_1.0.safetensors" } },
+  "9": { "class_type": "LoadImage", "inputs": { "image": "ryu_walk_contact.png" } },
+  "10": { "class_type": "ControlNetApplyAdvanced", "inputs": {
+      "positive": ["3", 0], "negative": ["4", 0], "control_net": ["8", 0],
+      "image": ["9", 0], "strength": 0.4, "start_percent": 0.0, "end_percent": 0.5
+  }},
+  "11": { "class_type": "EmptyLatentImage", "inputs": { "width": 1024, "height": 1024, "batch_size": 1 } },
+  "12": { "class_type": "KSampler", "inputs": {
+      "model": ["7", 0], "seed": 42, "steps": 25, "cfg": 7.0,
+      "sampler_name": "dpmpp_2m", "scheduler": "karras",
+      "positive": ["10", 0], "negative": ["10", 1],
+      "latent_image": ["11", 0], "denoise": 1.0
+  }},
+  "13": { "class_type": "VAEDecode", "inputs": { "samples": ["12", 0], "vae": ["1", 2] } },
+  "14": { "class_type": "SaveImage", "inputs": { "images": ["13", 0], "filename_prefix": "phase1_cn_early" } }
+}
