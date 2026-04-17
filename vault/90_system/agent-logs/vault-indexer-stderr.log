@@ -147,3 +147,97 @@
 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-15_10-02-13.md: 2 chunks
 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-15_10-02-13.md: 12 chunks
 [INFO] Indexing complete: 47 chunks, 47 embeddings, 0 errors, 4406ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 365 vault files, 11 need indexing, 0 deleted
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 0: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 1: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 2: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 3: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 4: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 5: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 6: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 7: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 8: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 9: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 10: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 11: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 12: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 13: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 14: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 15: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 16: All connection attempts failed
+[WARNING] Embedding failed for 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md chunk 17: All connection attempts failed
+[INFO] Indexed 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md: 18 chunks
+[WARNING] Embedding failed for 10_timeline/daily/2026-04-16.md chunk 0: All connection attempts failed
+[WARNING] Embedding failed for 10_timeline/daily/2026-04-16.md chunk 1: All connection attempts failed
+[WARNING] Embedding failed for 10_timeline/daily/2026-04-16.md chunk 2: All connection attempts failed
+[WARNING] Embedding failed for 10_timeline/daily/2026-04-16.md chunk 3: All connection attempts failed
+[INFO] Indexed 10_timeline/daily/2026-04-16.md: 4 chunks
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/David & Sean Bi-Weekly Catch Up-transcript.md chunk 0: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/David & Sean Bi-Weekly Catch Up-transcript.md chunk 1: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/David & Sean Bi-Weekly Catch Up-transcript.md chunk 2: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/David & Sean Bi-Weekly Catch Up-transcript.md chunk 3: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/David & Sean Bi-Weekly Catch Up-transcript.md chunk 4: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/David & Sean Bi-Weekly Catch Up-transcript.md chunk 5: All connection attempts failed
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/David & Sean Bi-Weekly Catch Up-transcript.md: 6 chunks
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/David & Sean Bi-Weekly Catch Up.md chunk 0: All connection attempts failed
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/David & Sean Bi-Weekly Catch Up.md: 1 chunks
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync-transcript.md chunk 0: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync-transcript.md chunk 1: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync-transcript.md chunk 2: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync-transcript.md chunk 3: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync-transcript.md chunk 4: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync-transcript.md chunk 5: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync-transcript.md chunk 6: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync-transcript.md chunk 7: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync-transcript.md chunk 8: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync-transcript.md chunk 9: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync-transcript.md chunk 10: All connection attempts failed
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync-transcript.md: 11 chunks
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync.md chunk 0: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync.md chunk 1: All connection attempts failed
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/SEO Weekly Sync.md: 2 chunks
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-2026-04-16_13-00-39.md chunk 0: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-2026-04-16_13-00-39.md chunk 1: All connection attempts failed
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-2026-04-16_13-00-39.md: 2 chunks
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 0: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 1: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 2: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 3: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 4: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 5: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 6: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 7: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 8: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 9: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 10: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 11: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 12: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 13: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 14: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 15: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 16: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md chunk 17: All connection attempts failed
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript-2026-04-16_13-00-39.md: 18 chunks
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-16_10-00-30.md chunk 0: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-16_10-00-30.md chunk 1: All connection attempts failed
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-16_10-00-30.md: 2 chunks
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 0: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 1: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 2: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 3: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 4: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 5: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 6: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 7: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 8: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 9: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 10: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 11: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 12: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 13: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 14: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 15: All connection attempts failed
+[WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 16: All connection attempts failed
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md: 17 chunks
+[INFO] Indexing complete: 81 chunks, 0 embeddings, 0 errors, 516ms
