@@ -8,9 +8,12 @@ created: 2026-04-16
 description: "Watch now | Every agent product is solving the wrong problem — and the right one sits upstream of all of them."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - agents
+  - prompt-engineering
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Nate Jones's argument that the real agent bottleneck is users not being able to describe their own work, plus his 45-minute elicitation prompt that writes a SOUL.md for your agent."
 ---
 The most expensive problem in the agent space right now isn’t infrastructure, model selection, or security. It’s that the people adopting these tools can’t describe what they actually do all day — not in the resolution an agent needs.
 
