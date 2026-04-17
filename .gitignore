@@ -63,5 +63,8 @@ life-systems/tasks/*.csv
 # LoRA training output (large model files)
 16bitfit-battle-mode/lora-output/
 
+# Autoresearch intermediate frame extractions (regenerable from source video)
+16bitfit-battle-mode/autoresearch/references/walk_cycle/frames_all/
+
 # Portfolio & Hubs project (has its own git repo)
 sw-portfolio-and-hubs-designs/
