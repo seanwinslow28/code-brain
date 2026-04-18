@@ -1,0 +1,28 @@
+{
+  "task": "financial_analysis",
+  "description": "Given a bank/credit-card CSV row, categorize the expense and suggest a budget action if the category is trending hot.",
+  "categories": ["groceries", "dining", "transport", "subscriptions", "utilities", "housing", "entertainment", "health", "shopping", "travel", "income", "transfer", "other"],
+  "extractor_hint": "Expected list contains the category + any budget-action verbs (reduce, cancel, review, flag).",
+  "samples": [
+    {"id": 0, "prompt": "Row: 2026-04-01 | TRADER JOE'S #478 | -$87.42 | VISA ****1234\nCategorize + budget suggestion if hot.", "expected": ["groceries"]},
+    {"id": 1, "prompt": "Row: 2026-04-02 | NETFLIX.COM | -$22.99 | VISA ****1234\nCategorize + budget suggestion.", "expected": ["subscriptions", "review"]},
+    {"id": 2, "prompt": "Row: 2026-04-03 | UBER *TRIP 3HR4X | -$18.55 | VISA ****1234\nCategorize + budget suggestion.", "expected": ["transport"]},
+    {"id": 3, "prompt": "Row: 2026-04-03 | COMCAST CABLE 800-555 | -$142.00 | ACH\nCategorize + budget suggestion.", "expected": ["utilities"]},
+    {"id": 4, "prompt": "Row: 2026-04-04 | CHIPOTLE 1043 NYC | -$14.62 | VISA ****1234\nCategorize + budget suggestion.", "expected": ["dining"]},
+    {"id": 5, "prompt": "Row: 2026-04-05 | APPLE.COM/BILL | -$9.99 | VISA ****1234\nCategorize + budget suggestion.", "expected": ["subscriptions", "review"]},
+    {"id": 6, "prompt": "Row: 2026-04-06 | ZELLE TO ALICE SMITH | -$300.00 | CHK\nCategorize + budget suggestion.", "expected": ["transfer"]},
+    {"id": 7, "prompt": "Row: 2026-04-07 | PELOTON INTERACTIVE | -$44.00 | VISA ****1234\nCategorize + budget suggestion.", "expected": ["subscriptions", "review"]},
+    {"id": 8, "prompt": "Row: 2026-04-08 | AMC ONLINE #307 | -$28.00 | VISA ****1234\nCategorize + budget suggestion.", "expected": ["entertainment"]},
+    {"id": 9, "prompt": "Row: 2026-04-09 | CVS/PHARMACY #483 | -$36.18 | VISA ****1234\nCategorize + budget suggestion.", "expected": ["health"]},
+    {"id": 10, "prompt": "Row: 2026-04-10 | DELTA AIR LINES | -$412.60 | VISA ****1234\nCategorize + budget suggestion.", "expected": ["travel"]},
+    {"id": 11, "prompt": "Row: 2026-04-11 | SQ *STARBUCKS 2734 | -$6.45 | VISA ****1234\nCategorize + budget suggestion.", "expected": ["dining"]},
+    {"id": 12, "prompt": "Row: 2026-04-12 | CON EDISON 800-752-6633 | -$118.37 | ACH\nCategorize + budget suggestion.", "expected": ["utilities"]},
+    {"id": 13, "prompt": "Row: 2026-04-13 | AMAZON.COM*1X8B9 | -$53.77 | VISA ****1234\nCategorize + budget suggestion.", "expected": ["shopping"]},
+    {"id": 14, "prompt": "Row: 2026-04-14 | SPOTIFY USA | -$10.99 | VISA ****1234\nCategorize + budget suggestion.", "expected": ["subscriptions", "review"]},
+    {"id": 15, "prompt": "Row: 2026-04-15 | PAYCHEX DIRECT DEPOSIT | +$5,840.22 | CHK\nCategorize + budget suggestion.", "expected": ["income"]},
+    {"id": 16, "prompt": "Row: 2026-04-16 | THE BLOCK RENT - APT 4B | -$3,250.00 | CHK\nCategorize + budget suggestion.", "expected": ["housing"]},
+    {"id": 17, "prompt": "Row: 2026-04-17 | SHELL OIL 57283 | -$54.20 | VISA ****1234\nCategorize + budget suggestion.", "expected": ["transport"]},
+    {"id": 18, "prompt": "Row: 2026-04-18 | WHOLEFDS WHOLE FOODS | -$124.85 | VISA ****1234\nCategorize + budget suggestion.", "expected": ["groceries"]},
+    {"id": 19, "prompt": "Row: 2026-04-19 | ADOBE *CREATIVE CLOUD | -$54.99 | VISA ****1234\nCategorize + budget suggestion.", "expected": ["subscriptions", "review"]}
+  ]
+}
