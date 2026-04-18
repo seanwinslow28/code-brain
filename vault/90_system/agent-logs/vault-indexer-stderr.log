@@ -241,3 +241,14 @@
 [WARNING] Embedding failed for 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md chunk 16: All connection attempts failed
 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md: 17 chunks
 [INFO] Indexing complete: 81 chunks, 0 embeddings, 0 errors, 516ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 369 vault files, 7 need indexing, 2 deleted
+[INFO] Removed deleted file from index: 00_inbox/Autoresearch and agentic Polymarket & Crypto cash flow.md
+[INFO] Removed deleted file from index: 00_inbox/Your agent needs a SOUL.md you can't write from scratch. I built a 45-minute prompt that writes it for you..md
+[INFO] Indexed 10_timeline/daily/2026-04-17.md: 4 chunks
+[INFO] Indexed 10_timeline/weekly/2026-W16.md: 5 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Singular.live discussion_refinement-2026-04-17_10-00-48.md: 1 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Singular.live discussion_refinement-transcript-2026-04-17_10-00-48.md: 27 chunks
+[INFO] Indexed 40_knowledge/concepts/idea-autoresearch-agentic-polymarket-crypto.md: 1 chunks
+[INFO] Indexed 40_knowledge/references/ref-agent-soul-md-prompt.md: 18 chunks
+[INFO] Indexing complete: 56 chunks, 56 embeddings, 0 errors, 11223ms

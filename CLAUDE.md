@@ -72,7 +72,7 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Cla
 | Knowledge Lint | Sunday 22:00 | Tier 1 phi4-mini (Mac Mini), Tier 2 Qwen3-14B (MBP) | $0.00 (local) |
 | Flush (SessionEnd) | hook-triggered | phi4-mini or Qwen3-14B (by msg count) | $0.00 (local) |
 
-Phase 6 (v3.13.0) added the knowledge compounding loop: SessionEnd flush → Vault Synthesizer v2 → Knowledge Lint → autoresearch feedback. All three new agents run 100% local.
+Phase 6 (v3.14.0) added the knowledge compounding loop: SessionEnd flush → Vault Synthesizer v2 → Knowledge Lint → autoresearch feedback. All three new agents run 100% local.
 
 **The 6 agents disabled in v3.12.3** (2026-04-09) remain disabled. See `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md` for rationale. Do NOT re-enable without Sean's explicit approval.
 
