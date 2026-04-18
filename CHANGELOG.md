@@ -5,6 +5,92 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.14.3] - 2026-04-18
+
+Phase 6 reconciliation — commit to Mac Mini as the single always-on agent driver; retire the cross-machine WOL path that v3.14.0 added.
+
+The parallel MBP-side A.6 run (branch `phase6-mbp-results`, closed unmerged after PR review) produced an independent N=20 benchmark that directionally agreed on `inbox_triage` (both SWAP) and `financial_analysis` (both KEEP the non-gemma4 incumbent), and disagreed on `code_review` in a way that pointed at the Jaccard extractor rather than the models. With Mac Mini chosen as the canonical driver, the MBP-sourced numbers live in git history for forensic record; the Mac Mini numbers in `A6-swap-decision-mac-mini-2026-04-18.md` are production-of-record.
+
+### Changed
+
+- `agents-sdk/config.toml`:
+  - `[routing.machines.macbook_pro]` — `wol_mac` removed. `models` updated to `google/gemma-4-31b` (matches what LM Studio's `/v1/models` actually returns; the prior `gemma4-31b` was incorrect and silently 400'd MBP-sourced benchmark calls until the MBP-branch harness caught it). Host stays at MBP LAN IP for occasional cross-machine use.
+  - `[routing.task_map]`:
+    - `financial_analysis` rerouted from `qwen3-14b @ macbook_pro` to `phi4-mini-reasoning @ mac_mini`. Mac Mini is always on; MBP is not. The N=20 Mac Mini benchmark showed phi4-mini-reasoning scoring q=0.900 on this task — same quality as the prior MBP-hosted qwen3-14b incumbent — so the stack loses nothing by moving it onto the always-on host.
+    - `code_review` stays on `qwen2.5-coder-32b-instruct @ macbook_pro` pending a scorer fix (both models scored below 0.2 in the MBP run / literally 0.000 in the Mac Mini run — points at the Jaccard-over-hyphenated-tags extractor, not the models).
+  - `[notifications] notify_on` — `wol_failure` removed (no agent wakes the MBP anymore).
+- MacBook Pro `launchctl` state — `com.sean.agent.vault-synthesizer` and `com.sean.agent.knowledge-lint` unloaded on the MBP. Mac Mini remains the sole launchd host for nightly agents.
+
+### Rationale
+
+v3.14.0 added a WOL-based cross-machine path so scheduled Mac Mini jobs could wake the MBP for heavy inference. Field experience showed the MBP's Private Wi-Fi Address randomizes the MAC seen by DHCP, so a fixed `wol_mac` in config wasn't reliably hitting the right interface. Rather than fight that, the stack is rescoped: agents that *need* heavy inference either run on the MBP interactively (unchanged) or fall back to Claude API on the rare paths where MBP-class capacity is required. Every scheduled agent in v3.14.3 resolves to a Mac-Mini-resident model or tolerates a missing MBP gracefully.
+
+### Known follow-ups (not blocking this release)
+
+- `[agents.vault_synthesizer].target_machine = "macbook_pro"` and `[routing.task_map].vault_synthesis` still point at the MBP. The nightly 02:30 run from Mac Mini will succeed only when MBP is awake, else log and exit. Future cleanup: either move synthesis to a Mac-Mini-resident model (Mac Mini can host `qwen3-14b` at 24 GB if pulled) or accept intermittent synthesis.
+- `code_review` scorer rebuild — replace Jaccard-over-hyphenated-tags with either an LLM-judge rubric or a code-review-specific entity extractor. Re-run A.6 on code_review only afterward and let the veto gate decide.
+- `wakeonlan>=3.1,<4` dep in `pyproject.toml` and `tests/test_route_to_macbook.py` are dead code. Leave for now; prune in a future housekeeping pass if WOL never comes back.
+
+## [3.14.2] - 2026-04-18
+
+Phase 6 housekeeping + scope-cut. 100% local ($0.00 API).
+
+### Added
+
+- `agents-sdk/scripts/phase6_gatecheck.py` Gate #7 — Meta-Agent fleet-status
+  coverage check (≥5 artifacts/7d with ≥1 actionable alert) per Super Plan §E.5
+- Workstream E (Meta-Agent / Fleet Self-Monitoring) adopted retroactively into
+  the Phase 6 Super Plan as §E; plist invocation corrected to call
+  `agents/meta_agent.py` via venv python (commit `9f7d85b`)
+- `§10.1 Descope Log` in the Phase 6 Super Plan documenting D.4 removal with a
+  fully-specified re-open plan, dependencies, and preserved artifacts
+
+### Changed
+
+- `agents-sdk/agents/knowledge_lint.py` — calibrated wikilink resolver to
+  accept Obsidian path-style links `[[dir/sub/file]]`, added orphan-exclusion
+  set for auto-generated directories (Granola notes, transcripts, `60_archive`,
+  `00_inbox`, `90_system`, `70_apple-notes`, `daily`), strip fenced code blocks
+  before scanning. **Real-vault issue count: 500 → 110** without sacrificing
+  synthetic-vault recall (100% Tier 1, 0 FPs)
+- `CLAUDE.md` intro line corrected to reflect actual file counts
+  (13 subagents, 11 hooks, 13 SDK agents — 6 active) instead of the aspirational
+  "16 agents, 8 hooks" that anticipated Phase 6 doc-update checklist counts
+- Loaded meta-agent schedule (08:35 daily); unloaded the 6 audit-disabled
+  launchd schedules that `install_schedules.sh` re-loaded by default
+  (process-inbox, daily-evening, weekly-review, pr-digest, sprint-health,
+  meeting-defender) per `AUDIT-2026-04-09-agent-downsizing.md`
+- Unloaded `daily-morning-baton` plist (dead wait on disabled process-inbox
+  flag); `daily-morning` continues to serve 8:45 AM daily brief
+
+### Descoped
+
+- **D.4 Autoresearch Feedback Loop** — the knowledge-graph consumer side of
+  the Phase 6 knowledge-compounding loop (`vault/knowledge/concepts/` →
+  autoresearch orchestrator read + `articles_used` logging + 7-night
+  Wilcoxon A/B) is deferred. Rationale: upstream autoresearch convergence
+  harness is in flight on a separate plan; integrating against a moving
+  target would block Phase 6 indefinitely or generate refactor churn.
+  D.1–D.3 (the producer side) remain live; the graph will accumulate data
+  and sit ready when D.4 is re-opened. Gate #6 marked `DESCOPED` in
+  `phase6_gatecheck.py`. Re-open spec: Super Plan §10.1.
+
+### Gate-check status
+
+| Gate | v3.14.0 | v3.14.2 |
+|---|---|---|
+| 1. Gemma 4 benchmarks on 3 tasks | PASS | PASS |
+| 2. ≥1 model swap deployed | PASS | PASS |
+| 3. SessionEnd ≥3 captures/week | FAIL (hook never fired) | FAIL (awaiting production runs) |
+| 4. Synthesis ≥2 concepts/night | FAIL (dirs missing) | FAIL (dirs now exist, awaiting 2:30 AM MBP run) |
+| 5. Lint ≥95% recall | PASS | PASS |
+| 6. Autoresearch ≥10% convergence | PARTIAL | **DESCOPED** |
+| 7. Meta-Agent ≥5 fleet-status/week | — (not in script) | PARTIAL (1/5, 0 alerts) |
+
+Gates 3, 4, 7 self-resolve with accrued production data over the next 7 days.
+
+---
+
 ## [3.14.1] - 2026-04-18
 
 Phase 6 A.6 re-run at N=20 + WOL dependency-pin. 100% local ($0.00 API).

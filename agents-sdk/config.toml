@@ -153,13 +153,18 @@ always_on = true
 models = ["phi4-mini-reasoning", "phi4-mini", "nomic-embed-text", "gemma4:e4b"]
 
 [routing.machines.macbook_pro]
+# v3.14.3 (2026-04-18): Mac Mini is the always-on agent driver. WOL path
+# dropped — scheduled agents run on the Mac Mini and no enabled agent wakes
+# the MBP. Host stays at MBP's LAN IP so that any cross-machine call (e.g.
+# the still-enabled vault_synthesizer hitting MBP when it happens to be up,
+# or ad-hoc benchmarking) hits the right machine. When MBP is asleep the
+# call fails health-check → falls back to Claude API or errors cleanly.
 host = "192.168.68.50"
 port = 1234
 tier = 2
-runtime = "lm-studio"   # LM Studio OpenAI-compatible API (NOT raw mlx_lm package)
-always_on = false        # Phase 6 Option B — WOL path (MBP can sleep; router wakes it)
-wol_mac = "50:F2:65:EF:AC:3D"  # Hardware MAC (not the Private Wi-Fi randomized address)
-models = ["qwen3-14b", "qwen2.5-coder-32b-instruct", "gemma4-31b"]
+runtime = "lm-studio"
+always_on = false
+models = ["qwen3-14b", "qwen2.5-coder-32b-instruct", "google/gemma-4-31b"]
 
 [routing.machines.alienware]
 host = "192.168.68.201"
@@ -178,7 +183,16 @@ models = ["Qwen3-VL-7B"]
 inbox_triage = { model = "gemma4:e4b", machine = "mac_mini" }
 vault_embeddings = { model = "nomic-embed-text", machine = "mac_mini" }
 anki_cards = { model = "phi4-mini", machine = "mac_mini" }
-financial_analysis = { model = "qwen3-14b", machine = "macbook_pro" }
+# financial_analysis rerouted 2026-04-18 (v3.14.3): Mac Mini is now the
+# always-on agent driver. qwen3-14b @ MBP would fail whenever MBP sleeps.
+# phi4-mini-reasoning @ mac_mini scored q=0.900 on this task in the N=20
+# Mac Mini benchmark — matches the prior incumbent's quality while staying
+# entirely on the always-on host. No MBP dependency.
+financial_analysis = { model = "phi4-mini-reasoning", machine = "mac_mini" }
+# code_review stays routed to MBP pending scorer fix: both models scored
+# below 0.2 in MBP run / literally 0.000 in Mac Mini run, which points at
+# the Jaccard extractor (expects hyphenated tags vs prose output) rather
+# than at the models. When the extractor is fixed, re-bench and decide.
 code_review = { model = "qwen2.5-coder-32b-instruct", machine = "macbook_pro" }
 heavy_synthesis = { model = "qwen3-14b", machine = "macbook_pro" }
 vault_synthesis = { model = "qwen3-14b", machine = "macbook_pro" }  # Phase 6 D.2 — model resolved at runtime via this key
@@ -195,5 +209,6 @@ pushover_user_key_keychain = "pushover_user_key"
 # App/API token — stored in macOS Keychain (never commit plaintext tokens)
 # Retrieve via: lib/keychain.py get pushover_app_token
 pushover_app_token_keychain = "pushover_app_token"
-# Events that trigger a push (WOL failure is mandatory for Phase 6 D.2)
-notify_on = ["wol_failure", "agent_error", "gate_check_fail"]
+# Events that trigger a push. `wol_failure` removed in v3.14.3 — Mac Mini
+# is the always-on agent driver; no agent wakes the MBP anymore.
+notify_on = ["agent_error", "gate_check_fail"]

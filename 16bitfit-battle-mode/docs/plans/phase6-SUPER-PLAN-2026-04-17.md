@@ -5,7 +5,9 @@
 **Execution host:** MacBook Pro M4 Pro 48GB (this machine) for all dev, tests, and MLX-LM synthesis/benchmarks. Mac Mini hosts launchd + Ollama + always-on orchestration. Alienware is a read-only D.4 consumer.
 **Plan authors:** Claude Opus 4.7 · merge of `phase6-gemma4-benchmarking-and-knowledge-compounding-loop.md` (Apr 16) + `phase6-implementation-plan-2026-04-17.md` (Apr 17).
 
-**Revision note (2026-04-18):** Workstream E (Fleet Self-Monitoring / Meta-Agent) retroactively adopted into this plan. The meta-agent was built and deployed between the Apr 17 plan authoring and the Apr 18 audit; it is the natural complement to Workstream D (D writes knowledge; E observes fleet health). See §E.
+**Revision notes:**
+- **2026-04-18 (AM):** Workstream E (Fleet Self-Monitoring / Meta-Agent) retroactively adopted. The meta-agent was built and deployed between the Apr 17 plan authoring and the Apr 18 audit; it is the natural complement to Workstream D (D writes knowledge; E observes fleet health). See §E.
+- **2026-04-18 (PM):** **D.4 (Autoresearch Feedback Loop) DESCOPED.** Blocked on upstream autoresearch work that is in flight on a separate plan and would require ≥1 week to reach readiness. Decision: ship Phase 6 without D.4 and revisit when autoresearch convergence harness is ready. Gate #6 marked DESCOPED in `phase6_gatecheck.py`. All D.1–D.3 infrastructure remains live; the knowledge graph will simply not feed autoresearch until a future phase wires it in. See §7.10 Decision and §10 Descope Log.
 
 ---
 
@@ -32,7 +34,7 @@ All Phase 6 code runs 100% local ($0.00 API). Adds 4 agents + 1 hook to the flee
 3. SessionEnd hook capturing ≥3 sessions/week
 4. Vault Indexer v2 producing ≥2 concept + ≥1 connection article per nightly run
 5. Knowledge Lint ≥95% recall on synthetic test vault
-6. Autoresearch convergence improves ≥10% (trials-to-best-fitness)
+6. ~~Autoresearch convergence improves ≥10% (trials-to-best-fitness)~~ **DESCOPED 2026-04-18** — see §10
 7. **Meta-Agent produces ≥5 fleet-status artifacts in any 7-day window, with ≥1 containing an actionable alert that surfaced in the Daily Driver morning brief.**
 
 Every bullet maps to ≥1 task below.
@@ -102,10 +104,11 @@ Plan assumes **(b)** — safer for robustness. Easy to simplify to (a) if Sean p
 └──────────────────────────────┬───────────────────────────────────┘
                                ▼
 ┌─── WEEK 16 ──────────────────────────────────────────────────────┐
-│   D.4.a orchestrator reads vault/knowledge/concepts/ (needs Ph5) │
-│   D.4.b articles_used logging                                    │
-│   D.4.c 7-night A/B: trials-to-best-fitness Wilcoxon ≥10% gate   │
-│   Gate check + doc updates + v3.13.0 tag                         │
+│   ~~D.4.a orchestrator reads vault/knowledge/concepts/~~ DESCOPED│
+│   ~~D.4.b articles_used logging~~                        DESCOPED│
+│   ~~D.4.c 7-night A/B + Wilcoxon~~                       DESCOPED│
+│   Gate check (6 of 7 gates, #6 parked) + doc updates             │
+│   + v3.14.0 tag (re-numbered from 3.13.0 during merge)           │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
@@ -318,6 +321,7 @@ Plan assumes **(b)** — safer for robustness. Easy to simplify to (a) if Sean p
 | 7.7 | Synthesis model | D.2 uses whatever A.6 picks | **Read from `routing.task_map["vault_synthesis"]` — never hardcoded.** | — |
 | 7.8 | Hook registration | SessionEnd event reliability | Plan adds `hooks.SessionEnd` to settings.json. | If `claude --debug` shows SessionEnd doesn't fire reliably, fallback: wrapper tailing `~/.claude/logs/` for session-close. |
 | 7.9 | P0.2 | MBP always-on vs WOL | **Plan assumes WOL (safer).** | If Sean confirms lid-open + caffeinate is reliable → simplify to `always_on = true`, remove `lib/wol.py` MBP path. |
+| 7.10 | D.4 | Autoresearch feedback loop | **DESCOPED 2026-04-18.** Upstream autoresearch convergence harness is on a separate plan and not ready in the Phase 6 window. Knowledge graph ships without consumer; will be wired in a future phase when autoresearch is stable. | When autoresearch Phase 1+ lands a stable convergence harness with paired-nights data, re-open D.4 as a standalone mini-plan (est. ≤1 week: orchestrator read + `articles_used` logging + 7-night A/B + Wilcoxon). |
 
 ---
 
@@ -468,10 +472,48 @@ When coding begins, load in this order on the MacBook Pro:
 
 ---
 
+## 10. Descope Log
+
+Items removed from Phase 6 scope mid-execution. Each retains a fully-specified re-open path so it can be picked up cleanly as a follow-on mini-plan.
+
+### 10.1 D.4 — Autoresearch Feedback Loop (descoped 2026-04-18)
+
+**Status:** Code not written. Knowledge graph (D.1–D.3) ships without a consumer.
+
+**Reason for descope:** The upstream autoresearch convergence harness is being iterated on a separate plan and is not in a stable state. Integrating against a moving target would either:
+- block Phase 6 indefinitely (wait for harness stability), or
+- generate churn as we refactor against each new harness version.
+
+Instead, we ship D.1–D.3 now, let the knowledge graph accumulate data nightly, and re-wire D.4 as a standalone one-week mini-plan once autoresearch is ready.
+
+**What was planned (for when this is re-opened):**
+- D.4.a: autoresearch orchestrator reads `vault/knowledge/concepts/index.json` at 23:30 nightly
+- D.4.b: `articles_used` counter logged per autoresearch trial
+- D.4.c: 7-night baseline (no articles) + 7-night treatment (articles injected) A/B
+- Success metric: paired Wilcoxon signed-rank, ≥10% improvement in trials-to-best-fitness, p<0.1
+- Rollback: revert orchestrator vault-read step; `articles_used` drops to 0
+
+**Dependencies for re-opening:**
+1. Autoresearch convergence harness lands on main with a stable API
+2. Phase 6 D.2 has produced ≥14 concept articles and ≥7 connection articles (Gate #4 PASS for real)
+3. Baseline convergence data exists for ≥7 nights
+
+**Artifacts preserved:**
+- `agents-sdk/scripts/compare_convergence.py` — already written, ready to use
+- §3 of this plan still documents the intended file-change list
+- Gate #6 marked `DESCOPED` in `phase6_gatecheck.py` (stays as a non-PASS indicator until the mini-plan executes)
+
+**Impact on Phase 6 exit:**
+- Phase 6 ships with 5 of 7 gates PASSing (1, 2, 5, plus 3, 4 once production runs accrue data) + Gate 7 PASSing after one week of meta-agent runs. Gate 6 parked.
+- No blocker for v3.14.0 tag. CHANGELOG v3.14.0 explicitly calls out D.4 descope.
+
+---
+
 ## Verification (this plan is ready when…)
 
 - [x] All SOT tasks A.1–A.7 and D.1–D.4 covered with a specific file or action
 - [x] Workstream E (Meta-Agent / Fleet Self-Monitoring) documented with spec, tests, gate, and rollback (retroactive adoption 2026-04-18)
+- [x] D.4 descope documented with re-open plan, dependency list, and preserved artifacts (§10.1, 2026-04-18)
 - [x] Every new agent is 100% local ($0.00 API)
 - [x] Zero new MCP dependencies for launchd agents (April 9 audit respected)
 - [x] Hooks use correct exit codes (0=continue, 2=deny) per CLAUDE.md
