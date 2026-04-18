@@ -25,7 +25,17 @@ from typing import Any
 
 import httpx
 
+from lib.pushover import notify_wol_failure
+
 logger = logging.getLogger(__name__)
+
+
+class WOLUnavailable(Exception):
+    """Raised when a required wake target (or always-on machine) is unreachable.
+
+    Callers decide whether to retry, defer, or silently skip. Always fires
+    a Pushover notification at raise time so Sean is aware.
+    """
 
 
 class MachineStatus(Enum):
@@ -133,7 +143,9 @@ class HybridRouter:
         try:
             if mc.runtime == "ollama":
                 health = await self._check_ollama(mc)
-            elif mc.runtime == "mlx-lm":
+            elif mc.runtime in ("mlx-lm", "lm-studio"):
+                # Both raw mlx_lm server and LM Studio expose the same
+                # OpenAI-compatible /v1/models endpoint on their configured port.
                 health = await self._check_mlx(mc)
             else:
                 health = MachineHealth(status=MachineStatus.UNHEALTHY)
@@ -327,6 +339,71 @@ class HybridRouter:
             )
 
         raise RuntimeError(f"No available machine for task '{task}' and API fallback disabled")
+
+    async def route_to_macbook(
+        self,
+        *,
+        task: str,
+        wake_timeout_s: float = 60.0,
+    ) -> RoutingDecision:
+        """Phase 6 cross-machine transport for MacBook-Pro-hosted tasks.
+
+        Resolves the task through task_map (must map to `macbook_pro`),
+        optionally fires WOL if `wol_mac` is configured, health-checks, and
+        returns a RoutingDecision. If the MacBook Pro is unreachable after
+        `wake_timeout_s`, fires a Pushover notification and raises
+        WOLUnavailable.
+
+        With the always-on path (pre-flight default) `wol_mac` is empty and
+        no WOL packet is sent — we only health-check and fail fast.
+        """
+        mapping = self.task_map.get(task)
+        if not mapping:
+            raise ValueError(f"No task mapping for '{task}'")
+        if mapping["machine"] != "macbook_pro":
+            raise ValueError(
+                f"Task '{task}' is not mapped to macbook_pro "
+                f"(mapped to {mapping['machine']})"
+            )
+
+        mc = self.machines["macbook_pro"]
+
+        if mc.wol_mac:
+            self.send_wol("macbook_pro")
+
+        # Poll for health up to wake_timeout_s, then give up.
+        deadline = time.monotonic() + wake_timeout_s
+        last_reason = "initial"
+        first = True
+        while True:
+            health = await self.check_health("macbook_pro")
+            if health.status == MachineStatus.HEALTHY:
+                return RoutingDecision(
+                    machine="macbook_pro",
+                    model=mapping["model"],
+                    base_url=mc.base_url,
+                    runtime=mc.runtime,
+                    reason="route_to_macbook: healthy",
+                )
+            last_reason = f"status={health.status.value} latency={health.latency_ms:.0f}ms"
+            if time.monotonic() >= deadline:
+                break
+            # After the first failed check, invalidate cache so subsequent
+            # polls actually hit the wire (check_health skips within the
+            # health_check_interval window).
+            if first:
+                self._health["macbook_pro"].last_check = 0.0
+                first = False
+            await asyncio.sleep(2.0)
+
+        detail = (
+            f"task={task} waited {wake_timeout_s:.0f}s; {last_reason}. "
+            f"If LM Studio is installed, flip the local-server toggle ON."
+        )
+        notify_wol_failure(task=task, machine="macbook_pro", detail=detail)
+        raise WOLUnavailable(
+            f"macbook_pro unreachable for task '{task}' after {wake_timeout_s:.0f}s"
+        )
 
     def set_machine_status(self, machine_name: str, status: MachineStatus) -> None:
         """Manually override a machine's health status (for testing).

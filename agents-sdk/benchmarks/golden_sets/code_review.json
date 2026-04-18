@@ -1,0 +1,27 @@
+{
+  "task": "code_review",
+  "description": "Read a ~50-line Python snippet and identify issues. Expected entities are short issue tags (sql-injection, race-condition, bare-except, unbounded-loop, etc.).",
+  "extractor_hint": "Pull short kebab-case issue tags from the review (bare-except, mutable-default, missing-type-hint, resource-leak, etc.).",
+  "samples": [
+    {"id": 0, "prompt": "Review for issues:\n\n```python\ndef get_user(conn, user_id):\n    q = f\"SELECT * FROM users WHERE id = {user_id}\"\n    return conn.execute(q).fetchone()\n```\nList issue tags.", "expected": ["sql-injection"]},
+    {"id": 1, "prompt": "Review for issues:\n\n```python\ndef append_item(item, items=[]):\n    items.append(item)\n    return items\n```\nList issue tags.", "expected": ["mutable-default"]},
+    {"id": 2, "prompt": "Review for issues:\n\n```python\ntry:\n    do_work()\nexcept:\n    pass\n```\nList issue tags.", "expected": ["bare-except", "swallowed-exception"]},
+    {"id": 3, "prompt": "Review for issues:\n\n```python\ndef read_config(path):\n    f = open(path)\n    return f.read()\n```\nList issue tags.", "expected": ["resource-leak"]},
+    {"id": 4, "prompt": "Review for issues:\n\n```python\nimport time\n\ncount = 0\nwhile True:\n    count += 1\n    time.sleep(1)\n```\nList issue tags.", "expected": ["unbounded-loop", "no-exit-condition"]},
+    {"id": 5, "prompt": "Review for issues:\n\n```python\ndef divide(a, b):\n    return a / b\n```\nList issue tags.", "expected": ["missing-zero-check", "missing-type-hint"]},
+    {"id": 6, "prompt": "Review for issues:\n\n```python\nimport pickle\n\ndef load(path):\n    with open(path, 'rb') as f:\n        return pickle.load(f)\n```\nList issue tags.", "expected": ["pickle-unsafe"]},
+    {"id": 7, "prompt": "Review for issues:\n\n```python\nimport subprocess\n\ndef run(cmd_str):\n    subprocess.run(cmd_str, shell=True)\n```\nList issue tags.", "expected": ["shell-injection"]},
+    {"id": 8, "prompt": "Review for issues:\n\n```python\nimport threading\n\ncounter = 0\ndef inc():\n    global counter\n    counter += 1\n\nfor _ in range(10):\n    threading.Thread(target=inc).start()\n```\nList issue tags.", "expected": ["race-condition", "missing-lock"]},
+    {"id": 9, "prompt": "Review for issues:\n\n```python\npassword = \"hunter2\"\n\ndef authenticate(pw):\n    return pw == password\n```\nList issue tags.", "expected": ["hardcoded-secret"]},
+    {"id": 10, "prompt": "Review for issues:\n\n```python\ndef fetch_all(url):\n    import requests\n    return requests.get(url).json()\n```\nList issue tags.", "expected": ["no-timeout", "no-error-handling"]},
+    {"id": 11, "prompt": "Review for issues:\n\n```python\ndef process(items):\n    for i in range(len(items)):\n        items[i] = items[i] * 2\n    return items\n```\nList issue tags.", "expected": ["in-place-mutation"]},
+    {"id": 12, "prompt": "Review for issues:\n\n```python\nimport random\n\ndef token():\n    return str(random.randint(0, 99999999))\n```\nList issue tags.", "expected": ["insecure-random"]},
+    {"id": 13, "prompt": "Review for issues:\n\n```python\ndef load_yaml(path):\n    import yaml\n    return yaml.load(open(path).read())\n```\nList issue tags.", "expected": ["yaml-unsafe-load", "resource-leak"]},
+    {"id": 14, "prompt": "Review for issues:\n\n```python\ndef parse_int(s):\n    try:\n        return int(s)\n    except Exception as e:\n        raise\n```\nList issue tags.", "expected": ["broad-except", "pointless-wrap"]},
+    {"id": 15, "prompt": "Review for issues:\n\n```python\ndef total(xs):\n    s = 0\n    for x in xs: s = s + x\n    return s\n```\nList issue tags.", "expected": ["reinvents-sum", "missing-type-hint"]},
+    {"id": 16, "prompt": "Review for issues:\n\n```python\nimport os\n\ndef rm(path):\n    os.system(f'rm -rf {path}')\n```\nList issue tags.", "expected": ["shell-injection", "dangerous-call"]},
+    {"id": 17, "prompt": "Review for issues:\n\n```python\nclass Foo:\n    data = {}\n    def add(self, k, v):\n        self.data[k] = v\n```\nList issue tags.", "expected": ["class-mutable-state", "shared-default"]},
+    {"id": 18, "prompt": "Review for issues:\n\n```python\ndef compare(a, b):\n    if a is \"hello\" and b is 1:\n        return True\n    return False\n```\nList issue tags.", "expected": ["is-literal-comparison"]},
+    {"id": 19, "prompt": "Review for issues:\n\n```python\nimport logging\n\ndef log_user(user):\n    logging.info('user=' + user.email + ' pw=' + user.password)\n```\nList issue tags.", "expected": ["logs-secret", "string-concat-log"]}
+  ]
+}
