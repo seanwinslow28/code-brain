@@ -1,6 +1,6 @@
 # Claude Code Superuser Pack
 
-A personal command center and second brain for Claude Code. 111 skills, 13 interactive agents, 7 hooks, 6 domain workspaces, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
+A personal command center and second brain for Claude Code. 111 skills, 16 agents, 8 hooks, 6 domain workspaces, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
 
 ## What's Inside
 
@@ -30,11 +30,15 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the [Cl
 
 | Agent | Schedule | What It Does |
 |-------|----------|-------------|
-| Daily Driver (morning) | 6:00 AM | Read yesterday's note, create today's, write 1-3-5 priorities |
-| Daily Driver (evening) | 5:00 PM | Summarize day, write reflection, carry forward items |
-| Daily Driver (weekly) | Friday 4:00 PM | Aggregate 7 daily notes into weekly review |
+| Daily Driver (morning) | 8:45 AM | Read yesterday's note, create today's, write 1-3-5 priorities, surface Vault Health |
+| Vault Indexer | 2:00 AM daily | Incremental nomic-embed-text index of all vault notes |
+| Vault Synthesizer | 2:30 AM daily | Generates concept + connection articles from changed vault files (100% local, Qwen3-14B on MBP) |
+| Knowledge Lint | Sunday 22:00 | Two-tier vault health scan (structural + semantic). Reports surface in the morning brief. |
+| Flush (SessionEnd) | on session close | Extracts decisions/lessons/actions/quotes from transcripts into `vault/daily/YYYY-MM-DD.md` |
 
 **Key design:** Skills are prompts, agents are runners. SKILL.md files are loaded as system prompts — no content duplication. Skill improvements automatically flow to autonomous agents.
+
+**Phase 6 knowledge compounding loop** (v3.13.0): SessionEnd flush → Vault Synthesizer v2 → Knowledge Lint → autoresearch feedback. The vault becomes a living graph the LLM maintains instead of a static archive.
 
 ```bash
 # Dry run (free)

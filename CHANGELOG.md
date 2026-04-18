@@ -5,6 +5,53 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.13.0] - 2026-04-17
+
+Phase 6 — Gemma 4 benchmarking + Knowledge Compounding Loop. 100% local ($0.00 API).
+
+### Added
+
+- `agents-sdk/lib/filelock.py` — fcntl-based LOCK_EX/LOCK_SH context manager with timeout (P0.1 blocker resolved)
+- `agents-sdk/lib/session_transcript.py` — CC JSONL session transcript parser
+- `agents-sdk/lib/pushover.py` — Pushover push-notification helper (keychain-backed, no plaintext tokens)
+- `agents-sdk/lib/lint_report.py` — parses knowledge-lint reports for daily_driver surfacing
+- `agents-sdk/lib/gemma4_benchmark.py` — multi-model benchmark harness (p50/p95, Jaccard, veto gate)
+- `agents-sdk/agents/flush.py` — SessionEnd daily-log extractor; routes by message count (<100 → phi4-mini, ≥100 → Qwen3-14B); filelocked append to `vault/daily/YYYY-MM-DD.md`; recursion-guarded on `CLAUDE_INVOKED_BY`
+- `agents-sdk/agents/vault_synthesizer.py` — nightly concept + connection article generator on MBP via `route_to_macbook`; ≥2 wikilink invariant; 45-min budget; auto-regenerates `vault/knowledge/index.md`
+- `agents-sdk/agents/knowledge_lint.py` — two-tier vault health scan (Tier 1 structural on Mac Mini, Tier 2 semantic on MBP); synthetic 30-file vault with 20 planted issues for ≥95% recall gate
+- `agents-sdk/scripts/run_gemma4_benchmark.py` — A.5 driver for head-to-head model runs
+- `agents-sdk/scripts/phase6_gatecheck.py` — one-liner that runs all 6 gate-check criteria and emits PASS/PARTIAL/FAIL
+- `agents-sdk/scripts/compare_convergence.py` — D.4 A/B harness (trials-to-best-fitness, paired Wilcoxon, ≥10% + p<0.1 gate)
+- `agents-sdk/benchmarks/golden_sets/{inbox_triage,financial_analysis,code_review}.json` — 20 samples each
+- `agents-sdk/schedules/com.sean.agent.vault-synthesizer.plist` — nightly 02:30
+- `agents-sdk/schedules/com.sean.agent.knowledge-lint.plist` — Sunday 22:00
+- `.claude/hooks/session-end-flush.sh` — SessionEnd hook, <100ms non-blocking, fire-and-forget via `nohup`, recursion-guarded
+- Pushover credentials in macOS Keychain (`pushover_user_key`, `pushover_app_token`) for WOL / agent-error / gate-check-fail notifications
+- `WOLUnavailable` exception + `HybridRouter.route_to_macbook()` with WOL + Pushover fallback
+
+### Changed
+
+- `agents-sdk/agents/vault_indexer.py` — SHA-256 hash-based state tracking in `vault/.indexer-state.json`; `detect_changed_files()` surface for synthesizer handoff; `vault/daily/` excluded from embed index (SOT D.1 line 482)
+- `agents-sdk/agents/daily_driver.py` — morning mode surfaces Vault Health (CRITICAL/HIGH counts or PASS ✓)
+- `agents-sdk/lib/hybrid_router.py` — recognizes `lm-studio` runtime alongside `mlx-lm`; adds `route_to_macbook()`
+- `agents-sdk/config.toml`:
+  - MacBook Pro port 8080 → **1234** (LM Studio default)
+  - MacBook Pro models aligned to `/v1/models` IDs (`qwen3-14b`, `qwen2.5-coder-32b-instruct`, `gemma4-31b`)
+  - `[routing.task_map]` `vault_synthesis` entry (Phase 6 synthesizer model resolution)
+  - `[notifications]` section referencing Pushover keychain keys
+  - `[agents.flush]`, `[agents.vault_synthesizer]`, `[agents.knowledge_lint]` sections added
+  - `[agents.vault_indexer]` extended with synthesis + hash-state options
+- `.claude/settings.json` — registers SessionEnd hook pointing at `session-end-flush.sh`
+- **Agent fleet:** 2 → 5 active (vault-indexer, daily-driver morning, flush, vault-synthesizer, knowledge-lint). Hook count: 7 → 8. All new agents run 100% local; monthly cost unchanged.
+
+### Phase 6 substitution note
+
+Ollama's registry names Gemma 4 as `gemma4:26b` (26B MoE with 3.8B active) and `gemma4:31b` (31B dense). The super-plan used `gemma4:27b` which does not exist; the 26B MoE is the same model class and was pulled instead. LM Studio MBP path pulled `google/gemma-4-31b` as the MLX 4-bit variant (`gemma4-31b` identifier).
+
+### Tests
+
+- 106 pytest cases, 100% pass — new coverage: filelock (6), session_transcript (6), pushover (5), gemma4_benchmark (6), route_to_macbook (4), flush (9), vault_indexer hash-state (7), vault_synthesizer (9), knowledge_lint (7 incl. 95% recall gate against 20-issue oracle), daily_driver vault-health (4)
+
 ## [3.12.3] - 2026-04-09
 
 ### Changed
