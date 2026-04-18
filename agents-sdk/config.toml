@@ -153,11 +153,12 @@ always_on = true
 models = ["phi4-mini-reasoning", "phi4-mini", "nomic-embed-text"]
 
 [routing.machines.macbook_pro]
-host = "127.0.0.1"
+host = "192.168.68.50"
 port = 1234
 tier = 2
 runtime = "lm-studio"   # LM Studio OpenAI-compatible API (NOT raw mlx_lm package)
-always_on = true         # caffeinate -dimsu keeps MBP awake; no WOL needed
+always_on = false        # Phase 6 Option B — WOL path (MBP can sleep; router wakes it)
+wol_mac = "50:F2:65:EF:AC:3D"  # Hardware MAC (not the Private Wi-Fi randomized address)
 models = ["qwen3-14b", "qwen2.5-coder-32b-instruct", "gemma4-31b"]
 
 [routing.machines.alienware]
