@@ -48,6 +48,12 @@ Phase 6 — Gemma 4 benchmarking + Knowledge Compounding Loop. 100% local ($0.00
 
 Ollama's registry names Gemma 4 as `gemma4:26b` (26B MoE with 3.8B active) and `gemma4:31b` (31B dense). The super-plan used `gemma4:27b` which does not exist; the 26B MoE is the same model class and was pulled instead. LM Studio MBP path pulled `google/gemma-4-31b` as the MLX 4-bit variant (`gemma4-31b` identifier).
 
+### A.5 / A.6 result
+
+A.5 benchmark run: inbox_triage head-to-head completed (5 samples/model). Gemma 4 31B on MBP scored **0.567 quality / 32.3s p50** versus incumbent phi4-mini-reasoning on Mac Mini at **0.667 / 21.2s**. Gemma 4 26B on Mac Mini failed every sample (>120s) due to MoE dispatch overhead on 24 GB RAM. Veto gate (≥5% quality regression = KEEP) fires on both challengers → **NO SWAP**. financial_analysis and code_review runs were deferred after LM Studio RAM guardrail blocked JIT-load during the incumbent phase; per plan §7.1, further challenger tests are optional once inbox_triage veto fires. Full report: `agents-sdk/benchmarks/results/A6-swap-decision-2026-04-17.md`. `[routing.task_map]` unchanged.
+
+Gate-check criteria #1 and #2 land as **PARTIAL** under plan §5's fallback path ("If Gemma 4 loses all: commit benchmark doc + mark this bullet PARTIAL"). The P6 veto gate itself is functioning correctly — that is the phase deliverable.
+
 ### Tests
 
 - 106 pytest cases, 100% pass — new coverage: filelock (6), session_transcript (6), pushover (5), gemma4_benchmark (6), route_to_macbook (4), flush (9), vault_indexer hash-state (7), vault_synthesizer (9), knowledge_lint (7 incl. 95% recall gate against 20-issue oracle), daily_driver vault-health (4)
