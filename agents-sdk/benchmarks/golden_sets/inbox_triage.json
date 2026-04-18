@@ -1,0 +1,28 @@
+{
+  "task": "inbox_triage",
+  "description": "Classify email into category + extract action items. Expected entities are lowercase, deduplicated.",
+  "categories": ["urgent", "followup", "newsletter", "promotional", "archive"],
+  "extractor_hint": "Extract the assigned category + any imperative action verbs (schedule, reply, review, cancel, pay, etc.) from the model's response.",
+  "samples": [
+    {"id": 0, "prompt": "From: ceo@theblock.co\nSubject: Board deck review — need by 5pm\n\nSean, I need your slides on the Q2 roadmap integrated into the board deck by end of day. Can you send over the latest?\n\n---\nClassify into one of: urgent, followup, newsletter, promotional, archive. Then list up to 3 action items (one-word verbs).", "expected": ["urgent", "send", "integrate"]},
+    {"id": 1, "prompt": "From: newsletter@stratechery.com\nSubject: Weekly update — Apple's AI strategy\n\nThis week we dig into Apple's evolving stance on on-device inference...\n\n---\nClassify and extract actions.", "expected": ["newsletter", "read"]},
+    {"id": 2, "prompt": "From: billing@aws.amazon.com\nSubject: Your AWS bill for March is due tomorrow\n\nYour account ending in 4821 has a balance of $247.31 due by Apr 18.\n\n---\nClassify and extract actions.", "expected": ["urgent", "pay"]},
+    {"id": 3, "prompt": "From: marketing@spotify.com\nSubject: 3 months of Premium on us!\n\nGet 3 months free when you upgrade today...\n\n---\nClassify and extract actions.", "expected": ["promotional", "archive"]},
+    {"id": 4, "prompt": "From: alice@theblock.co\nSubject: Can we reschedule Thursday's 1:1?\n\nSomething came up — can we move our 1:1 to Friday morning?\n\n---\nClassify and extract actions.", "expected": ["followup", "reschedule", "reply"]},
+    {"id": 5, "prompt": "From: github-actions@github.com\nSubject: [seanwinslow28/repo] CI failed on main\n\nWorkflow 'tests' failed on commit abc123...\n\n---\nClassify and extract actions.", "expected": ["urgent", "investigate", "fix"]},
+    {"id": 6, "prompt": "From: calendar@google.com\nSubject: Reminder: Team standup in 15 min\n\nTuesday 9:30am — Team standup (weekly)\n\n---\nClassify and extract actions.", "expected": ["urgent", "attend"]},
+    {"id": 7, "prompt": "From: linkedin@linkedin.com\nSubject: You appeared in 12 searches this week\n\nSee who's been looking at your profile...\n\n---\nClassify and extract actions.", "expected": ["promotional", "archive"]},
+    {"id": 8, "prompt": "From: jira@atlassian.com\nSubject: BLOCK-1847 assigned to you\n\nSean, you've been assigned BLOCK-1847: 'Draft PRD for Campus v2'. Due date: Apr 24.\n\n---\nClassify and extract actions.", "expected": ["followup", "draft", "schedule"]},
+    {"id": 9, "prompt": "From: noreply@dropbox.com\nSubject: Storage almost full\n\nYou are using 2.0 TB of 2.0 TB. Upgrade to keep syncing...\n\n---\nClassify and extract actions.", "expected": ["followup", "review", "upgrade"]},
+    {"id": 10, "prompt": "From: bob@externalvendor.com\nSubject: Contract redline returned\n\nPlease find attached our redlines to the MSA. Key changes on §4 and §7.\n\n---\nClassify and extract actions.", "expected": ["followup", "review", "reply"]},
+    {"id": 11, "prompt": "From: pmnewsletter@lennysnewsletter.com\nSubject: The interview that changed my career\n\nThis week: a conversation with Julie Zhuo...\n\n---\nClassify and extract actions.", "expected": ["newsletter", "read"]},
+    {"id": 12, "prompt": "From: security@1password.com\nSubject: New sign-in from an unrecognized device\n\nA new device signed in to your account from San Francisco, CA...\n\n---\nClassify and extract actions.", "expected": ["urgent", "verify"]},
+    {"id": 13, "prompt": "From: deals@nike.com\nSubject: 40% off running shoes this weekend only\n\nLimited-time sale...\n\n---\nClassify and extract actions.", "expected": ["promotional", "archive"]},
+    {"id": 14, "prompt": "From: ops@theblock.co\nSubject: Office closure on May 27 for Memorial Day\n\nReminder that the office will be closed...\n\n---\nClassify and extract actions.", "expected": ["archive", "read"]},
+    {"id": 15, "prompt": "From: recruiter@headhunt.co\nSubject: Senior PM role at stealth crypto startup\n\nWould you be open to a 15-min call this week?\n\n---\nClassify and extract actions.", "expected": ["followup", "reply"]},
+    {"id": 16, "prompt": "From: ci-alerts@pagerduty.com\nSubject: [P1] Production API 500s elevated\n\nError rate 8.2% vs baseline 0.4%. Service: public-data-api.\n\n---\nClassify and extract actions.", "expected": ["urgent", "investigate", "page"]},
+    {"id": 17, "prompt": "From: research@arxiv.org\nSubject: Weekly digest — cs.CL\n\n15 new papers in your feed this week...\n\n---\nClassify and extract actions.", "expected": ["newsletter", "read"]},
+    {"id": 18, "prompt": "From: accounting@theblock.co\nSubject: Expense report for March needs review\n\nYour March expense report is awaiting manager approval. Please check entries...\n\n---\nClassify and extract actions.", "expected": ["followup", "review", "submit"]},
+    {"id": 19, "prompt": "From: zoom@zoom.us\nSubject: Cloud recording available: Design sync 2026-04-15\n\nYour recording is ready for download...\n\n---\nClassify and extract actions.", "expected": ["archive", "download"]}
+  ]
+}

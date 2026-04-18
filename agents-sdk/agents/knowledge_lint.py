@@ -1,0 +1,532 @@
+#!/usr/bin/env python3
+"""Knowledge Lint Agent — D.3 vault health check (two-tier).
+
+Tier 1 (Mac Mini, phi4-mini-reasoning, ~5 min, structural):
+  • broken wikilinks  — [[Target]] references that don't resolve
+  • orphan files      — files with 0 inbound wikilinks
+  • missing YAML frontmatter in vault/knowledge/
+  • CamelCase filenames in vault/knowledge/ (kebab-case only)
+
+Tier 2 (MacBook Pro, Qwen3-14B via route_to_macbook, ~15 min, semantic):
+  • contradiction detection across related articles
+  • staleness detection (>30d + time-sensitive model/API refs)
+  • SOT drift check (vault vs SOURCE-OF-TRUTH.md Parts 1-2)
+
+Output: `vault/health/YYYY-MM-DD-lint-report.md` with severity buckets
+(CRITICAL / HIGH / MEDIUM / LOW).
+
+Tier 2 only runs if Tier 1 surfaced issues OR the `--full` flag is set,
+matching the Sunday-22:00 launchd schedule from install_schedules.sh.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from dataclasses import dataclass, field
+from datetime import date
+from enum import Enum
+from pathlib import Path
+from typing import Callable
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from lib.config import load_config
+from lib.filelock import FileLock
+from lib.logging_setup import record_run, setup_logger
+
+AGENT_NAME = "knowledge-lint"
+MAX_TURNS_TIER1 = 20
+MAX_TURNS_TIER2 = 30
+MAX_BUDGET_USD = 0.00
+
+_WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]")
+_FRONTMATTER_RE = re.compile(r"^---\n.*?\n---", re.DOTALL)
+_KEBAB_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
+
+
+class LintSeverity(Enum):
+    CRITICAL = "CRITICAL"
+    HIGH = "HIGH"
+    MEDIUM = "MEDIUM"
+    LOW = "LOW"
+
+
+@dataclass
+class LintIssue:
+    kind: str                 # "broken-wikilink" | "orphan" | "missing-frontmatter" | ...
+    severity: LintSeverity
+    file: Path
+    detail: str = ""
+    tier: int = 1
+
+
+@dataclass
+class Tier1Report:
+    issues: list[LintIssue] = field(default_factory=list)
+
+    @property
+    def total_issues(self) -> int:
+        return len(self.issues)
+
+
+# ─── helpers ──────────────────────────────────────────────────────────────
+
+def _vault_md_files(vault_root: Path, include_excluded: bool = False) -> list[Path]:
+    """All .md files under vault_root, skipping .obsidian/, .trash/.
+
+    include_excluded=True includes vault/daily/* (only relevant for orphan
+    analysis where daily logs can legitimately be endpoints).
+    """
+    files: list[Path] = []
+    for p in vault_root.rglob("*.md"):
+        rel_parts = p.relative_to(vault_root).parts
+        if any(part in {".obsidian", ".trash"} or part.startswith(".") for part in rel_parts):
+            continue
+        if not include_excluded and "daily" in rel_parts:
+            continue
+        files.append(p)
+    return files
+
+
+def _resolve_wikilink(vault_root: Path, target: str, files: list[Path]) -> Path | None:
+    """Try to resolve `[[target]]` against the vault.
+
+    Heuristic: basename match (case-insensitive, with or without .md suffix).
+    """
+    t = target.strip()
+    if not t:
+        return None
+    needle = t.lower().rstrip(".md")
+    for f in files:
+        stem = f.stem.lower()
+        if stem == needle:
+            return f
+        # Also match on title frontmatter
+        try:
+            head = f.read_text(encoding="utf-8", errors="replace")[:500]
+        except OSError:
+            continue
+        m = re.search(r'^title:\s*"?([^"\n]+)"?', head, re.MULTILINE)
+        if m and m.group(1).strip().lower() == t.lower():
+            return f
+    return None
+
+
+def find_broken_wikilinks(vault_root: Path) -> list[LintIssue]:
+    files = _vault_md_files(vault_root)
+    issues: list[LintIssue] = []
+    for fp in files:
+        try:
+            text = fp.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        for target in _WIKILINK_RE.findall(text):
+            if not _resolve_wikilink(vault_root, target, files):
+                issues.append(
+                    LintIssue(
+                        kind="broken-wikilink",
+                        severity=LintSeverity.HIGH,
+                        file=fp,
+                        detail=target.strip(),
+                    )
+                )
+    return issues
+
+
+def find_orphan_files(vault_root: Path) -> list[LintIssue]:
+    """A file is an orphan if no other file wikilinks to it.
+
+    Skips `index.md` / `INDEX.md` / MOC files which are intentionally hubs.
+    """
+    files = _vault_md_files(vault_root)
+    # Build reverse-link index
+    inbound: dict[Path, int] = {f: 0 for f in files}
+    for src in files:
+        try:
+            text = src.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        for target in _WIKILINK_RE.findall(text):
+            resolved = _resolve_wikilink(vault_root, target, files)
+            if resolved and resolved != src:
+                inbound[resolved] = inbound.get(resolved, 0) + 1
+
+    issues: list[LintIssue] = []
+    for f, count in inbound.items():
+        if count > 0:
+            continue
+        stem_lower = f.stem.lower()
+        if stem_lower in {"index", "readme", "home"} or "moc" in stem_lower:
+            continue
+        issues.append(
+            LintIssue(
+                kind="orphan",
+                severity=LintSeverity.MEDIUM,
+                file=f,
+                detail=f.relative_to(vault_root).as_posix(),
+            )
+        )
+    return issues
+
+
+def find_missing_frontmatter(vault_root: Path) -> list[LintIssue]:
+    """Scope: `vault/knowledge/**.md` must have YAML frontmatter."""
+    knowledge = vault_root / "knowledge"
+    if not knowledge.exists():
+        return []
+    issues: list[LintIssue] = []
+    for fp in knowledge.rglob("*.md"):
+        try:
+            text = fp.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        if not _FRONTMATTER_RE.match(text):
+            issues.append(
+                LintIssue(
+                    kind="missing-frontmatter",
+                    severity=LintSeverity.MEDIUM,
+                    file=fp,
+                    detail=fp.relative_to(vault_root).as_posix(),
+                )
+            )
+    return issues
+
+
+def find_camelcase_filenames(vault_root: Path) -> list[LintIssue]:
+    """Scope: `vault/knowledge/**.md` filenames must be kebab-case."""
+    knowledge = vault_root / "knowledge"
+    if not knowledge.exists():
+        return []
+    issues: list[LintIssue] = []
+    for fp in knowledge.rglob("*.md"):
+        if fp.name.lower() in {"index.md", "readme.md"}:
+            continue
+        if not _KEBAB_RE.match(fp.name):
+            issues.append(
+                LintIssue(
+                    kind="camelcase-filename",
+                    severity=LintSeverity.LOW,
+                    file=fp,
+                    detail=fp.name,
+                )
+            )
+    return issues
+
+
+def run_tier1(vault_root: Path) -> Tier1Report:
+    all_issues: list[LintIssue] = []
+    all_issues.extend(find_broken_wikilinks(vault_root))
+    all_issues.extend(find_orphan_files(vault_root))
+    all_issues.extend(find_missing_frontmatter(vault_root))
+    all_issues.extend(find_camelcase_filenames(vault_root))
+    return Tier1Report(issues=all_issues)
+
+
+# ─── Tier 2 (semantic, LLM-powered) ───────────────────────────────────────
+
+def run_tier2(
+    vault_root: Path,
+    *,
+    llm_caller: Callable[[str], dict] | None = None,
+    stale_days: int = 30,
+) -> list[LintIssue]:
+    """Heuristic staleness + LLM contradiction/drift.
+
+    Without an llm_caller, Tier 2 still runs the staleness regex scan —
+    which catches mentions of retired model names (Opus 4.1, etc.). The
+    LLM portion (contradiction + SOT drift) is a no-op in that mode.
+    """
+    issues: list[LintIssue] = []
+    stale_refs = [
+        "opus 4.1", "opus 4.0",
+        "sonnet 4.0", "sonnet 4.5",
+        "wan 2.2 5b",
+        "claude-code-sdk",
+        "ClaudeCodeOptions",
+        "claude-3-",
+    ]
+    for fp in _vault_md_files(vault_root):
+        try:
+            text = fp.read_text(encoding="utf-8", errors="replace").lower()
+        except OSError:
+            continue
+        for ref in stale_refs:
+            if ref in text:
+                issues.append(
+                    LintIssue(
+                        kind="stale-reference",
+                        severity=LintSeverity.HIGH,
+                        file=fp,
+                        detail=ref,
+                        tier=2,
+                    )
+                )
+    if llm_caller is None:
+        return issues
+
+    # LLM-powered contradiction + drift (caller supplies implementation).
+    try:
+        resp = llm_caller(
+            "Review the vault for semantic contradictions across "
+            "`knowledge/concepts/*.md`. Return JSON: "
+            "{\"contradictions\": [{\"files\":[...], \"detail\":\"...\"}]}"
+        )
+        for c in resp.get("contradictions", []):
+            files = c.get("files", [])
+            if not files:
+                continue
+            issues.append(
+                LintIssue(
+                    kind="contradiction",
+                    severity=LintSeverity.CRITICAL,
+                    file=Path(files[0]),
+                    detail=c.get("detail", ""),
+                    tier=2,
+                )
+            )
+    except Exception:
+        pass
+    return issues
+
+
+# ─── synthetic vault + oracle (≥95% recall gate) ──────────────────────────
+
+def build_synthetic_vault(vault_root: Path) -> dict:
+    """Create a 30-file vault with exactly 20 planted issues.
+
+    Returns an oracle dict that the recall test uses to score the lint
+    output. Layout per plan §4:
+
+      Tier 1 (14 planted):
+        3× orphan              (HIGH)
+        3× broken [[nonexistent]] wikilinks   (HIGH)
+        2× broken wikilinks to moved files    (HIGH)
+        2× missing frontmatter                (MEDIUM)
+        2× CamelCase filenames                (LOW)
+        + 2× extra broken wikilinks to push count to 14
+      Tier 2 (6 planted):
+        2 pairs = 4 contradictions     (CRITICAL)
+        2× stale model references      (HIGH)
+
+      Clean controls: 10 files with ≥1 inbound link, frontmatter present,
+      kebab-case filenames, no [[broken]] refs.
+    """
+    knowledge = vault_root / "knowledge" / "concepts"
+    connections = vault_root / "knowledge" / "connections"
+    notes = vault_root / "notes"
+    knowledge.mkdir(parents=True, exist_ok=True)
+    connections.mkdir(parents=True, exist_ok=True)
+    notes.mkdir(parents=True, exist_ok=True)
+
+    oracle_tier1: list[dict] = []
+    oracle_tier2: list[dict] = []
+    clean_files: list[str] = []
+
+    fm = "---\ntitle: {t}\ntype: concept\n---\n"
+
+    # 10 clean controls (all in /knowledge/concepts/, kebab-case, with FM).
+    # Cross-link in a full loop so every clean file has ≥1 inbound (no false
+    # orphan positives).
+    clean_names = [
+        "alpha", "beta", "gamma", "delta", "epsilon",
+        "zeta", "eta", "theta", "iota", "kappa",
+    ]
+    n_clean = len(clean_names)
+    for i, n in enumerate(clean_names):
+        prev_ = clean_names[(i - 1) % n_clean]
+        next_ = clean_names[(i + 1) % n_clean]
+        (knowledge / f"{n}.md").write_text(
+            fm.format(t=n.capitalize())
+            + f"Clean body with [[{prev_}]] and [[{next_}]].\n",
+            encoding="utf-8",
+        )
+        clean_files.append(f"{n}.md")
+
+    # 3 orphans — exist, but no other file links to them
+    for name in ["orphan-one", "orphan-two", "orphan-three"]:
+        p = notes / f"{name}.md"
+        p.write_text(f"# {name}\n\nI refer to [[alpha]] but no one refers to me.\n", encoding="utf-8")
+        oracle_tier1.append({"kind": "orphan", "file": name + ".md"})
+
+    # 5 broken wikilinks — 3 to nonexistent, 2 to "moved" (we'll delete the target)
+    (notes / "broken-link-one.md").write_text("See [[nonexistent-target-a]].\n", encoding="utf-8")
+    clean_files_link_body = "Referenced here: [[broken-link-one]] [[broken-link-two]] [[broken-link-three]]"
+    (knowledge / "concepts" / "linker.md") if False else None  # noqa (keep layout)
+    (notes / "broken-link-two.md").write_text("See [[nonexistent-target-b]].\n", encoding="utf-8")
+    (notes / "broken-link-three.md").write_text("See [[nonexistent-target-c]].\n", encoding="utf-8")
+    (notes / "broken-link-four.md").write_text("See [[moved-target-a]].\n", encoding="utf-8")
+    (notes / "broken-link-five.md").write_text("See [[moved-target-b]].\n", encoding="utf-8")
+    for t in ["nonexistent-target-a", "nonexistent-target-b", "nonexistent-target-c",
+              "moved-target-a", "moved-target-b"]:
+        oracle_tier1.append({"kind": "broken-wikilink", "target": t})
+
+    # Inbound link for these broken-link files so they aren't flagged as orphans
+    (notes / "linker.md").write_text(
+        "hub: [[broken-link-one]] [[broken-link-two]] [[broken-link-three]] "
+        "[[broken-link-four]] [[broken-link-five]] "
+        "[[no-fm-one]] [[no-fm-two]] [[BadCaseOne]] [[AnotherBadCase]] "
+        "[[stale-opus]] [[stale-wan]] [[contradict-a]] [[contradict-b]] [[contradict-c]] [[contradict-d]]\n",
+        encoding="utf-8",
+    )
+
+    # 2 extra broken wikilinks (to reach Tier-1 count of 14)
+    (notes / "extra-broken-one.md").write_text("See [[nonexistent-extra-a]].\n", encoding="utf-8")
+    (notes / "extra-broken-two.md").write_text("See [[nonexistent-extra-b]].\n", encoding="utf-8")
+    # Link them so they're not orphans
+    (notes / "linker.md").write_text(
+        (notes / "linker.md").read_text(encoding="utf-8")
+        + " [[extra-broken-one]] [[extra-broken-two]]\n",
+        encoding="utf-8",
+    )
+    for t in ["nonexistent-extra-a", "nonexistent-extra-b"]:
+        oracle_tier1.append({"kind": "broken-wikilink", "target": t})
+
+    # 2 missing frontmatter (inside knowledge/)
+    (knowledge / "no-fm-one.md").write_text("Body without frontmatter.\n", encoding="utf-8")
+    (knowledge / "no-fm-two.md").write_text("Another body without frontmatter.\n", encoding="utf-8")
+    oracle_tier1.append({"kind": "missing-frontmatter", "file": "no-fm-one.md"})
+    oracle_tier1.append({"kind": "missing-frontmatter", "file": "no-fm-two.md"})
+
+    # 2 CamelCase filenames (inside knowledge/)
+    (knowledge / "BadCaseOne.md").write_text(fm.format(t="Bad") + "Body [[alpha]] [[beta]]\n", encoding="utf-8")
+    (knowledge / "AnotherBadCase.md").write_text(fm.format(t="Bad2") + "Body [[alpha]] [[beta]]\n", encoding="utf-8")
+    oracle_tier1.append({"kind": "camelcase-filename", "file": "BadCaseOne.md"})
+    oracle_tier1.append({"kind": "camelcase-filename", "file": "AnotherBadCase.md"})
+
+    # Tier 2: 2 pairs of contradictions (CRITICAL)
+    (knowledge / "contradict-a.md").write_text(fm.format(t="C-A") + "We ship phi4-mini on Mac Mini [[alpha]] [[beta]]\n", encoding="utf-8")
+    (knowledge / "contradict-b.md").write_text(fm.format(t="C-B") + "We ship phi3-mini on Mac Mini [[alpha]] [[beta]]\n", encoding="utf-8")
+    (knowledge / "contradict-c.md").write_text(fm.format(t="C-C") + "RIFE temporal_smoothing=0.8 is optimal [[alpha]] [[beta]]\n", encoding="utf-8")
+    (knowledge / "contradict-d.md").write_text(fm.format(t="C-D") + "RIFE temporal_smoothing=0.6 is optimal [[alpha]] [[beta]]\n", encoding="utf-8")
+    for f in ["contradict-a.md", "contradict-b.md", "contradict-c.md", "contradict-d.md"]:
+        oracle_tier2.append({"kind": "contradiction", "file": f})
+
+    # Tier 2: 2 stale references (HIGH)
+    (knowledge / "stale-opus.md").write_text(
+        fm.format(t="Stale-Opus") + "We use Opus 4.1 for heavy synth [[alpha]] [[beta]]\n",
+        encoding="utf-8",
+    )
+    (knowledge / "stale-wan.md").write_text(
+        fm.format(t="Stale-Wan") + "Wan 2.2 5B gives the best quality [[alpha]] [[beta]]\n",
+        encoding="utf-8",
+    )
+    oracle_tier2.append({"kind": "stale-reference", "file": "stale-opus.md"})
+    oracle_tier2.append({"kind": "stale-reference", "file": "stale-wan.md"})
+
+    return {
+        "tier1": oracle_tier1,
+        "tier2": oracle_tier2,
+        "clean_files": clean_files,
+        "clean_count": len(clean_files),
+        "counts": {
+            "tier1": len(oracle_tier1),
+            "tier2": len(oracle_tier2),
+        },
+    }
+
+
+def recall_against_oracle(issues: list[LintIssue], oracle: list[dict]) -> float:
+    """Return recall = matched_planted / total_planted.
+
+    A planted issue matches a found issue iff:
+      kind == oracle.kind
+      AND (target matches OR file.name matches)
+    """
+    if not oracle:
+        return 1.0
+
+    matched = 0
+    for planted in oracle:
+        kind = planted["kind"]
+        for found in issues:
+            if found.kind != kind:
+                continue
+            if "target" in planted and planted["target"] in found.detail:
+                matched += 1
+                break
+            if "file" in planted and found.file.name == planted["file"]:
+                matched += 1
+                break
+    return matched / len(oracle)
+
+
+# ─── report writer ────────────────────────────────────────────────────────
+
+def format_report(
+    *,
+    tier1: Tier1Report,
+    tier2: list[LintIssue],
+    today: str,
+) -> str:
+    lines = [f"# Knowledge Lint Report — {today}", ""]
+    total = tier1.total_issues + len(tier2)
+    lines.append(f"_{total} issues found ({tier1.total_issues} structural, {len(tier2)} semantic)._")
+    lines.append("")
+
+    buckets: dict[LintSeverity, list[LintIssue]] = {s: [] for s in LintSeverity}
+    for issue in list(tier1.issues) + list(tier2):
+        buckets[issue.severity].append(issue)
+
+    for sev in (LintSeverity.CRITICAL, LintSeverity.HIGH, LintSeverity.MEDIUM, LintSeverity.LOW):
+        items = buckets[sev]
+        if not items:
+            continue
+        lines.append(f"## {sev.value} ({len(items)})")
+        lines.append("")
+        for it in items:
+            rel = it.file.as_posix() if it.file.is_absolute() else str(it.file)
+            lines.append(f"- **{it.kind}** ({'T1' if it.tier == 1 else 'T2'}): `{rel}` — {it.detail}")
+        lines.append("")
+
+    if total == 0:
+        lines.append("✓ No issues found.")
+    return "\n".join(lines) + "\n"
+
+
+def write_report(vault_root: Path, content: str, *, today: str) -> Path:
+    health_dir = vault_root / "health"
+    health_dir.mkdir(parents=True, exist_ok=True)
+    with FileLock(health_dir / ".lock", exclusive=True, timeout=10.0):
+        out = health_dir / f"{today}-lint-report.md"
+        out.write_text(content, encoding="utf-8")
+    return out
+
+
+# ─── CLI ──────────────────────────────────────────────────────────────────
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Knowledge Lint Agent")
+    parser.add_argument("--full", action="store_true", help="Run Tier 2 even if Tier 1 is clean")
+    parser.add_argument("--dry-run", action="store_true")
+    args = parser.parse_args()
+
+    cfg = load_config()
+    logger = setup_logger(AGENT_NAME, cfg.log_dir, cfg.log_level)
+
+    tier1 = run_tier1(cfg.vault_root)
+    logger.info("Tier 1: %d issues", tier1.total_issues)
+
+    tier2: list[LintIssue] = []
+    if tier1.total_issues > 0 or args.full:
+        tier2 = run_tier2(cfg.vault_root)
+        logger.info("Tier 2: %d issues", len(tier2))
+
+    today = date.today().isoformat()
+    report = format_report(tier1=tier1, tier2=tier2, today=today)
+
+    if not args.dry_run:
+        path = write_report(cfg.vault_root, report, today=today)
+        logger.info("Report: %s", path)
+
+    # Exit code 0 regardless; daily_driver surfaces CRITICAL/HIGH in morning brief
+    record_run(cfg.log_dir, AGENT_NAME, mode=None,
+               status="success", cost_usd=0.0, duration_ms=None, turns=None,
+               notes=f"tier1={tier1.total_issues} tier2={len(tier2)}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

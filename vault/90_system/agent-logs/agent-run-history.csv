@@ -78,6 +78,8 @@ Summary:
 **9 wins** — Pro deck shipped (4-day carry-over resolved), 16bitfit Phase 5 closed (12/12 chars, 180 anims, 1835 frames), Phase 6 execution start"
 2026-04-17,17:00:32,daily-driver,evening,error,,,,"Command failed with exit code 1 (exit code: 1)
 Error output: Check stderr output for details"
+2026-04-17,20:40:35,flush,,recursion-guard,0.0000,,,0 msgs
+2026-04-17,21:23:32,knowledge-lint,,success,0.0000,,,tier1=496 tier2=4
 2026-04-18,02:00:13,vault-indexer,,success,0.0000,11223,,"chunks=56, embeddings=56, errors=0"
 2026-04-18,08:56:40,daily-driver,morning,success,0.3151,40338,6,"Morning planning complete.
 
