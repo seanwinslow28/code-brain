@@ -7,13 +7,8 @@
 
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/seanwinslow/.local/bin/claude</string>
-        <string>-p</string>
-        <string>Run the meta-agent fleet health check. Check vault-indexer and daily-driver morning agent health, infrastructure status (Mac Mini, Alienware, ComfyUI), and generate the daily fleet status report.</string>
-        <string>--max-turns</string>
-        <string>10</string>
-        <string>--max-budget-usd</string>
-        <string>0.50</string>
+        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/bin/python3</string>
+        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/meta_agent.py</string>
     </array>
 
     <key>WorkingDirectory</key>
@@ -23,6 +18,8 @@
     <dict>
         <key>PATH</key>
         <string>/Users/seanwinslow/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>PYTHONPATH</key>
+        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk</string>
     </dict>
 
     <key>StartCalendarInterval</key>

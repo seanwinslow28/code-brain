@@ -62,12 +62,13 @@ python3 scripts/validate.py
 
 The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Claude Agent SDK. These run **outside** Claude Code sessions on macOS launchd schedules. Skills are loaded as system prompts — no duplication.
 
-**Active agents (5 of 13):**
+**Active agents (6 of 13):**
 
 | Agent | Schedule | Skills/Model | Cost/Run |
 |-------|----------|---------------|----------|
 | Vault Indexer | 2:00 AM daily | nomic-embed-text (Mac Mini Ollama) | $0.00 (local) |
 | Vault Synthesizer | 2:30 AM daily | Qwen3-14B via route_to_macbook | $0.00 (local) |
+| Meta-Agent (fleet health) | 8:35 AM daily | phi4-mini (Mac Mini), local checks only | $0.00 (local) |
 | Daily Driver (morning) | 8:45 AM daily | daily-driver, vault-read-write | ~$0.40 |
 | Knowledge Lint | Sunday 22:00 | Tier 1 phi4-mini (Mac Mini), Tier 2 Qwen3-14B (MBP) | $0.00 (local) |
 | Flush (SessionEnd) | hook-triggered | phi4-mini or Qwen3-14B (by msg count) | $0.00 (local) |
