@@ -344,7 +344,7 @@ class HybridRouter:
         self,
         *,
         task: str,
-        wake_timeout_s: float = 60.0,
+        wake_timeout_s: float = 90.0,
     ) -> RoutingDecision:
         """Phase 6 cross-machine transport for MacBook-Pro-hosted tasks.
 
@@ -356,6 +356,11 @@ class HybridRouter:
 
         With the always-on path (pre-flight default) `wol_mac` is empty and
         no WOL packet is sent — we only health-check and fail fast.
+
+        Default timeout bumped 60→90s on 2026-04-18 (Phase 6 P0.2): a cold
+        wake from deep sleep plus LM Studio server startup can exceed 60s,
+        especially on Wi-Fi where the first magic packet may be dropped
+        during initial radio reassociation.
         """
         mapping = self.task_map.get(task)
         if not mapping:
