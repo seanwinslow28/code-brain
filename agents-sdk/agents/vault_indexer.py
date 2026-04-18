@@ -44,6 +44,9 @@ CHUNK_SIZE = 500  # tokens (~2000 chars)
 CHUNK_OVERLAP = 50  # tokens (~200 chars)
 CHARS_PER_TOKEN = 4  # rough approximation
 
+# D.2.a hash-state: vault-relative file path → {hash: sha256, indexed_at: iso}
+INDEXER_STATE_FILENAME = ".indexer-state.json"
+
 
 def get_db_path(vault_root: Path) -> Path:
     """Return path to the SQLite vector store."""
@@ -88,16 +91,92 @@ def get_indexed_mtimes(conn: sqlite3.Connection) -> dict[str, float]:
 
 
 def discover_vault_files(vault_root: Path) -> list[Path]:
-    """Find all markdown files in the vault, excluding system dirs."""
-    exclude_dirs = {".obsidian", ".trash", ".vault-index.db", "90_system", "node_modules"}
+    """Find all markdown files in the vault, excluding system dirs.
+
+    Phase 6 D.2.a: `daily/` is excluded from the embed index — daily logs
+    feed synthesis, not search. Concept/connection articles under
+    `knowledge/` ARE indexed (they are synthesis output, so a late-night
+    synthesizer can retrieve yesterday's concepts for tonight's run).
+    """
+    exclude_dirs = {
+        ".obsidian",
+        ".trash",
+        ".vault-index.db",
+        "90_system",
+        "node_modules",
+        "daily",       # D.2.a — Phase 6 SOT line 482
+    }
     files = []
     for md_file in vault_root.rglob("*.md"):
-        # Skip excluded directories
         parts = md_file.relative_to(vault_root).parts
         if any(part in exclude_dirs or part.startswith(".") for part in parts):
             continue
         files.append(md_file)
     return sorted(files)
+
+
+# ─── D.2.a hash-state tracking ──────────────────────────────────────────
+
+def compute_file_hash(path: Path, chunk: int = 65536) -> str:
+    """SHA-256 hex digest of a file's contents."""
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        while True:
+            b = f.read(chunk)
+            if not b:
+                break
+            h.update(b)
+    return h.hexdigest()
+
+
+def read_indexer_state(state_path: Path) -> dict[str, dict[str, str]]:
+    """Load the indexer-state JSON. Missing/corrupt → empty dict."""
+    try:
+        data = json.loads(state_path.read_text(encoding="utf-8"))
+        if isinstance(data, dict):
+            return data
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        pass
+    return {}
+
+
+def write_indexer_state(state_path: Path, state: dict[str, dict[str, str]]) -> None:
+    """Write indexer-state JSON atomically."""
+    state_path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = state_path.with_suffix(state_path.suffix + ".tmp")
+    tmp.write_text(json.dumps(state, indent=2, sort_keys=True), encoding="utf-8")
+    tmp.replace(state_path)
+
+
+def detect_changed_files(
+    vault_root: Path,
+    prior_state: dict[str, dict[str, str]],
+) -> tuple[list[Path], dict[str, dict[str, str]]]:
+    """Walk the vault, return (changed_files, new_state).
+
+    A file is "changed" iff its SHA-256 differs from `prior_state[rel]["hash"]`,
+    OR the file is not in `prior_state`. Deleted files are removed from the
+    returned state. Previously unchanged files retain their prior `indexed_at`.
+
+    `changed_files` is a list of absolute Paths; `new_state` keys are
+    POSIX-style vault-relative paths.
+    """
+    now_iso = datetime.now().isoformat(timespec="seconds")
+    new_state: dict[str, dict[str, str]] = {}
+    changed: list[Path] = []
+
+    for fp in discover_vault_files(vault_root):
+        rel = fp.relative_to(vault_root).as_posix()
+        h = compute_file_hash(fp)
+        prior = prior_state.get(rel)
+        if prior and prior.get("hash") == h:
+            # unchanged — keep old indexed_at
+            new_state[rel] = prior
+        else:
+            new_state[rel] = {"hash": h, "indexed_at": now_iso}
+            changed.append(fp)
+
+    return changed, new_state
 
 
 def chunk_text(text: str, chunk_size: int = CHUNK_SIZE, overlap: int = CHUNK_OVERLAP) -> list[str]:
