@@ -118,11 +118,11 @@ models = ["phi4-mini-reasoning", "phi4-mini", "nomic-embed-text"]
 
 [routing.machines.macbook_pro]
 host = "127.0.0.1"
-port = 8080
+port = 1234
 tier = 2
-runtime = "mlx-lm"
-always_on = false
-models = ["Qwen3-14B", "Qwen2.5-Coder-32B", "Qwen3.5"]
+runtime = "lm-studio"   # LM Studio OpenAI-compatible API (NOT raw mlx_lm package)
+always_on = true         # caffeinate -dimsu keeps MBP awake; no WOL needed
+models = ["qwen3-14b", "qwen2.5-coder-32b-instruct", "gemma4-31b"]
 
 [routing.machines.alienware]
 host = "192.168.68.201"
@@ -138,8 +138,22 @@ models = ["Qwen3-VL-7B"]
 inbox_triage = { model = "phi4-mini-reasoning", machine = "mac_mini" }
 vault_embeddings = { model = "nomic-embed-text", machine = "mac_mini" }
 anki_cards = { model = "phi4-mini", machine = "mac_mini" }
-financial_analysis = { model = "Qwen3-14B", machine = "macbook_pro" }
-code_review = { model = "Qwen2.5-Coder-32B", machine = "macbook_pro" }
-heavy_synthesis = { model = "Qwen3.5", machine = "macbook_pro" }
+financial_analysis = { model = "qwen3-14b", machine = "macbook_pro" }
+code_review = { model = "qwen2.5-coder-32b-instruct", machine = "macbook_pro" }
+heavy_synthesis = { model = "qwen3-14b", machine = "macbook_pro" }
+vault_synthesis = { model = "qwen3-14b", machine = "macbook_pro" }  # Phase 6 D.2 — model resolved at runtime via this key
 sprite_vision_qa = { model = "Qwen3-VL-7B", machine = "alienware" }
 comfyui_orchestration = { model = "none", machine = "alienware" }
+
+# ─── Notifications ───────────────────────────────────────────────────────────
+
+[notifications]
+provider = "pushover"
+# Pushover user key (identifies Sean's account / sean-phone device)
+# Stored in macOS Keychain — retrieve via: lib/keychain.py get pushover_user_key
+pushover_user_key_keychain = "pushover_user_key"
+# App/API token — stored in macOS Keychain (never commit plaintext tokens)
+# Retrieve via: lib/keychain.py get pushover_app_token
+pushover_app_token_keychain = "pushover_app_token"
+# Events that trigger a push (WOL failure is mandatory for Phase 6 D.2)
+notify_on = ["wol_failure", "agent_error", "gate_check_fail"]

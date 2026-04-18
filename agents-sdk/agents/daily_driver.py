@@ -37,6 +37,9 @@ from lib.vault_io import (
 
 AGENT_NAME = "daily-driver"
 
+# Re-exported for backwards compatibility; canonical home is lib.lint_report.
+from lib.lint_report import latest_lint_report, vault_health_summary  # noqa: E402
+
 
 def build_preamble(mode: str, config) -> str:
     """Build the autonomous agent preamble for the system prompt."""
@@ -87,6 +90,10 @@ def build_preamble(mode: str, config) -> str:
         f"- Content Integrity: All frontmatter must remain valid YAML.\n"
         f"  If existing frontmatter cannot be parsed, do NOT modify it — log the error.\n"
     )
+
+    # Phase 6 D.3.d — surface Vault Health in morning mode only.
+    if mode == "morning":
+        base += "\n" + vault_health_summary(config.vault_root) + "\n"
 
     return base
 
