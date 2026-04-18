@@ -46,6 +46,43 @@ _WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]")
 _FRONTMATTER_RE = re.compile(r"^---\n.*?\n---", re.DOTALL)
 _KEBAB_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
 
+# Directories whose contents are auto-generated or ephemeral and should NOT
+# be flagged as orphans just because nothing wikilinks to them.
+_ORPHAN_EXCLUDE_DIRS = {
+    "_archive",
+    "60_archive",
+    "00_inbox",
+    "90_system",
+    "70_apple-notes",
+    "the-block-meetings-granola-notes",
+    "media-team-ideas",
+    "daily",
+}
+
+# Strip fenced code blocks and inline code before wikilink scanning so that
+# documentation examples (e.g. vault/90_system/VAULT-GUIDE.md) don't register
+# as broken references.
+_FENCE_RE = re.compile(r"```.*?```", re.DOTALL)
+_INLINE_CODE_RE = re.compile(r"`[^`\n]+`")
+
+
+def _strip_code(text: str) -> str:
+    text = _FENCE_RE.sub("", text)
+    text = _INLINE_CODE_RE.sub("", text)
+    return text
+
+# Filename patterns excluded from orphan checks (Granola transcripts etc.)
+_ORPHAN_EXCLUDE_SUFFIXES = ("-transcript.md",)
+
+
+def _is_orphan_excluded(rel_parts: tuple[str, ...], name: str) -> bool:
+    """Return True if a file should be skipped by orphan detection."""
+    if any(part in _ORPHAN_EXCLUDE_DIRS for part in rel_parts):
+        return True
+    if any(name.endswith(sfx) for sfx in _ORPHAN_EXCLUDE_SUFFIXES):
+        return True
+    return False
+
 
 class LintSeverity(Enum):
     CRITICAL = "CRITICAL"
@@ -94,17 +131,35 @@ def _vault_md_files(vault_root: Path, include_excluded: bool = False) -> list[Pa
 def _resolve_wikilink(vault_root: Path, target: str, files: list[Path]) -> Path | None:
     """Try to resolve `[[target]]` against the vault.
 
-    Heuristic: basename match (case-insensitive, with or without .md suffix).
+    Resolution order (matches Obsidian's "shortest path when possible" +
+    full-path behavior):
+      1. Path-style `[[foo/bar/name]]` — exact relative-path match, with or
+         without .md suffix.
+      2. Basename match — file stem equals the last path segment.
+      3. Frontmatter title match.
     """
     t = target.strip()
     if not t:
         return None
-    needle = t.lower().rstrip(".md")
+
+    # Strip .md from whatever the user wrote
+    t_norm = t[:-3] if t.lower().endswith(".md") else t
+    last_segment = t_norm.rsplit("/", 1)[-1].lower()
+    full_path_lower = t_norm.lower().replace("\\", "/")
+    has_path_prefix = "/" in t_norm
+
     for f in files:
-        stem = f.stem.lower()
-        if stem == needle:
+        # Path-style match: compare full relative path (no .md) to target
+        rel = f.relative_to(vault_root).as_posix()
+        rel_no_ext = rel[:-3] if rel.lower().endswith(".md") else rel
+        if has_path_prefix and rel_no_ext.lower() == full_path_lower:
             return f
-        # Also match on title frontmatter
+        # Basename match (default Obsidian behavior)
+        if f.stem.lower() == last_segment:
+            return f
+
+    # Title frontmatter fallback (only if nothing else matched)
+    for f in files:
         try:
             head = f.read_text(encoding="utf-8", errors="replace")[:500]
         except OSError:
@@ -123,7 +178,8 @@ def find_broken_wikilinks(vault_root: Path) -> list[LintIssue]:
             text = fp.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
-        for target in _WIKILINK_RE.findall(text):
+        scan = _strip_code(text)
+        for target in _WIKILINK_RE.findall(scan):
             if not _resolve_wikilink(vault_root, target, files):
                 issues.append(
                     LintIssue(
@@ -149,7 +205,8 @@ def find_orphan_files(vault_root: Path) -> list[LintIssue]:
             text = src.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
-        for target in _WIKILINK_RE.findall(text):
+        scan = _strip_code(text)
+        for target in _WIKILINK_RE.findall(scan):
             resolved = _resolve_wikilink(vault_root, target, files)
             if resolved and resolved != src:
                 inbound[resolved] = inbound.get(resolved, 0) + 1
@@ -160,6 +217,9 @@ def find_orphan_files(vault_root: Path) -> list[LintIssue]:
             continue
         stem_lower = f.stem.lower()
         if stem_lower in {"index", "readme", "home"} or "moc" in stem_lower:
+            continue
+        rel_parts = f.relative_to(vault_root).parts
+        if _is_orphan_excluded(rel_parts, f.name):
             continue
         issues.append(
             LintIssue(
