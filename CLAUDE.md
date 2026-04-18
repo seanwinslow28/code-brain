@@ -4,7 +4,7 @@ This is Sean's personal command center — a second brain for Claude Code.
 
 ## What This Repo Is
 
-111 skills, 16 agents, 8 hooks, 7 domain workspaces, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
+111 skills, 13 Claude Code subagents, 11 hooks, 13 autonomous SDK agents (6 active), 7 domain workspaces, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
 
 ## Domain Workspaces
 
@@ -104,8 +104,10 @@ Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key ne
 .claude/
 ├── skills/          # ALL 111 skills (canonical, auto-loaded)
 ├── agents/          # ALL 13 agents (9 domain + 4 design team)
-├── hooks/           # 8 hooks (block-secrets, log-tool-use, network-access,
-│                    #          session-end-flush, run-tests-on-stop, …)
+├── hooks/           # 11 hooks (block-secrets, cost-watchdog, daily-note-appender,
+│                    #           format-on-edit, log-tool-use, loop-detector,
+│                    #           network-access-control, require-confirm-highrisk,
+│                    #           run-tests-on-stop, session-end-flush, vault-integrity)
 └── settings.json    # Standard security profile
 
 agents-sdk/          # Autonomous agents (Claude Agent SDK, Python)
