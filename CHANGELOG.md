@@ -5,6 +5,34 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.14.1] - 2026-04-18
+
+Phase 6 A.6 re-run at N=20 + WOL dependency-pin. 100% local ($0.00 API).
+
+### Added
+
+- `agents-sdk/benchmarks/results/A6-swap-decision-2026-04-18.md` — re-run report covering all 3 tasks × 2 models × 20 samples on Mac Mini Ollama (no MBP dependency)
+- `agents-sdk/benchmarks/results/gemma4-benchmark-2026-04-18.json` — raw JSON with per-sample latency + extraction
+- `wakeonlan>=3.1,<4` pinned in `agents-sdk/pyproject.toml` so `tests/test_route_to_macbook.py` can resolve `patch("wakeonlan.send_magic_packet")` (production code already had a stdlib fallback via `_send_raw_wol`)
+
+### Changed
+
+- `agents-sdk/config.toml` [routing.task_map]: `inbox_triage` swapped from `phi4-mini-reasoning` → **`gemma4:e4b`** on Mac Mini. N=20 head-to-head: +7.5 pp quality, +57% p50 speedup. `machines.mac_mini.models` extended to include `gemma4:e4b`.
+- `agents-sdk/scripts/run_gemma4_benchmark.py`: challenger matrix re-scoped from `gemma4-31b @ macbook_pro` to `gemma4:e4b @ mac_mini` across all 3 tasks. Added `INCUMBENT_OVERRIDES` so financial_analysis + code_review test on Mac Mini regardless of config.toml's production routing. Documented WOL deferral reasoning in header.
+
+### Deferred
+
+- `financial_analysis` swap — gemma4:e4b regressed −10 pp on quality. Veto gate (§A.6) fires; kept phi4-mini-reasoning.
+- `code_review` swap — both models scored 0.000 due to an extractor bug (hyphenated tags like `sql-injection` don't match model output text). Follow-up: fix extractor to treat `-`/` `/`_` as equivalent, then re-bench this task only.
+- MBP WOL production use — live verify failed because MBP's Private Wi-Fi Address hands out the config's IP (.50) under a randomized MAC. Code (`route_to_macbook`, tests, `verify_mbp_wol.py`) stays in place; no currently-enabled agent blocks on it.
+
+### Gate-check status
+
+| Gate | Before | After |
+|---|---|---|
+| 1. Gemma 4 benchmarks on 3 tasks | PARTIAL | PASS |
+| 2. ≥1 model swap deployed | PARTIAL | PASS |
+
 ## [3.14.0] - 2026-04-17
 
 Phase 6 — Gemma 4 benchmarking + Knowledge Compounding Loop. 100% local ($0.00 API).
