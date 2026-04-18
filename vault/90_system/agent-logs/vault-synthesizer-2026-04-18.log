@@ -1,0 +1,21 @@
+2026-04-18 13:04:55,481 [INFO] synthesis: 330 changed files (budget 2700s, dry_run=True)
+2026-04-18 13:04:55,481 [INFO]   - 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-09.md
+2026-04-18 13:04:55,481 [INFO]   - 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-18.md
+2026-04-18 13:04:55,481 [INFO]   - 02_Areas/Agent-Fleet/fleet-state.md
+2026-04-18 13:04:55,481 [INFO]   - 02_Areas/Work/pr-digest-2026-04-08.md
+2026-04-18 13:04:55,481 [INFO]   - 05_atlas/moc-claude-mastery.md
+2026-04-18 13:04:55,481 [INFO]   - 05_atlas/moc-creative-studio.md
+2026-04-18 13:04:55,481 [INFO]   - 05_atlas/moc-design-team.md
+2026-04-18 13:04:55,481 [INFO]   - 05_atlas/moc-life-systems.md
+2026-04-18 13:04:55,481 [INFO]   - 05_atlas/moc-product-management.md
+2026-04-18 13:04:55,481 [INFO]   - 05_atlas/moc-vault.md
+2026-04-18 13:04:55,481 [INFO]   - 10_timeline/weekly/2026-W10.md
+2026-04-18 13:04:55,482 [INFO]   - 10_timeline/weekly/2026-W11.md
+2026-04-18 13:04:55,482 [INFO]   - 10_timeline/weekly/2026-W12.md
+2026-04-18 13:04:55,482 [INFO]   - 10_timeline/weekly/2026-W13.md
+2026-04-18 13:04:55,482 [INFO]   - 10_timeline/weekly/2026-W15.md
+2026-04-18 13:04:55,482 [INFO]   - 10_timeline/weekly/2026-W16.md
+2026-04-18 13:04:55,482 [INFO]   - 20_projects/prj-16bitfit/prj-16bit-fit-color-palette.md
+2026-04-18 13:04:55,482 [INFO]   - 20_projects/prj-16bitfit/prj-16bitfit-2.md
+2026-04-18 13:04:55,482 [INFO]   - 20_projects/prj-16bitfit/prj-16bitfit.md
+2026-04-18 13:04:55,482 [INFO]   - 20_projects/prj-animation-pipeline/prj-animation-pipeline.md
