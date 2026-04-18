@@ -67,13 +67,13 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Cla
 | Agent | Schedule | Skills/Model | Cost/Run |
 |-------|----------|---------------|----------|
 | Vault Indexer | 2:00 AM daily | nomic-embed-text (Mac Mini Ollama) | $0.00 (local) |
-| Vault Synthesizer | 2:30 AM daily | Qwen3-14B via route_to_macbook | $0.00 (local) |
+| Vault Synthesizer | 2:30 AM daily | Qwen3-14B on MBP (intermittent — succeeds only when MBP awake; v3.14.3 retired WOL) | $0.00 (local) |
 | Meta-Agent (fleet health) | 8:35 AM daily | phi4-mini (Mac Mini), local checks only | $0.00 (local) |
 | Daily Driver (morning) | 8:45 AM daily | daily-driver, vault-read-write | ~$0.40 |
-| Knowledge Lint | Sunday 22:00 | Tier 1 phi4-mini (Mac Mini), Tier 2 Qwen3-14B (MBP) | $0.00 (local) |
-| Flush (SessionEnd) | hook-triggered | phi4-mini or Qwen3-14B (by msg count) | $0.00 (local) |
+| Knowledge Lint | Sunday 22:00 | Tier 1 phi4-mini (Mac Mini); Tier 2 Qwen3-14B on MBP if awake | $0.00 (local) |
+| Flush (SessionEnd) | hook-triggered | phi4-mini (Mac Mini) always; ≥100-msg sessions attempt Qwen3-14B on MBP if awake | $0.00 (local) |
 
-Phase 6 (v3.14.0) added the knowledge compounding loop: SessionEnd flush → Vault Synthesizer v2 → Knowledge Lint → autoresearch feedback. All three new agents run 100% local.
+Phase 6 (v3.14.3) shipped the knowledge compounding loop producer side: SessionEnd flush → Vault Synthesizer v2 → Knowledge Lint. The consumer side (autoresearch feedback, D.4) was **descoped** pending upstream autoresearch harness — re-open spec in `16bitfit-battle-mode/docs/plans/phase6-SUPER-PLAN-2026-04-17.md` §10.1. All agents run 100% local.
 
 **The 6 agents disabled in v3.12.3** (2026-04-09) remain disabled. See `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md` for rationale. Do NOT re-enable without Sean's explicit approval.
 

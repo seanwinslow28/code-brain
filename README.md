@@ -1,6 +1,6 @@
 # Claude Code Superuser Pack
 
-A personal command center and second brain for Claude Code. 111 skills, 16 agents, 8 hooks, 6 domain workspaces, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
+A personal command center and second brain for Claude Code. 111 skills, 13 Claude Code subagents, 11 hooks, 13 autonomous SDK agents (6 active), 7 domain workspaces, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
 
 ## What's Inside
 
@@ -30,15 +30,16 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the [Cl
 
 | Agent | Schedule | What It Does |
 |-------|----------|-------------|
-| Daily Driver (morning) | 8:45 AM | Read yesterday's note, create today's, write 1-3-5 priorities, surface Vault Health |
 | Vault Indexer | 2:00 AM daily | Incremental nomic-embed-text index of all vault notes |
-| Vault Synthesizer | 2:30 AM daily | Generates concept + connection articles from changed vault files (100% local, Qwen3-14B on MBP) |
+| Vault Synthesizer | 2:30 AM daily | Generates concept + connection articles from changed vault files (100% local, Qwen3-14B on MBP when awake; intermittent since v3.14.3) |
+| Meta-Agent | 8:35 AM daily | Fleet self-monitoring — checks active-agent recency + infra health, writes fleet-status note that feeds Daily Driver |
+| Daily Driver (morning) | 8:45 AM | Read yesterday's note, create today's, write 1-3-5 priorities, surface Vault Health + fleet alerts |
 | Knowledge Lint | Sunday 22:00 | Two-tier vault health scan (structural + semantic). Reports surface in the morning brief. |
 | Flush (SessionEnd) | on session close | Extracts decisions/lessons/actions/quotes from transcripts into `vault/daily/YYYY-MM-DD.md` |
 
 **Key design:** Skills are prompts, agents are runners. SKILL.md files are loaded as system prompts — no content duplication. Skill improvements automatically flow to autonomous agents.
 
-**Phase 6 knowledge compounding loop** (v3.13.0): SessionEnd flush → Vault Synthesizer v2 → Knowledge Lint → autoresearch feedback. The vault becomes a living graph the LLM maintains instead of a static archive.
+**Phase 6 knowledge compounding loop** (v3.14.3): SessionEnd flush → Vault Synthesizer v2 → Knowledge Lint. The vault becomes a living graph the LLM maintains instead of a static archive. The autoresearch-feedback consumer side (D.4) is descoped pending upstream autoresearch-harness stability — re-open spec in the Phase 6 Super Plan §10.1.
 
 ```bash
 # Dry run (free)
@@ -72,7 +73,7 @@ Skills and agents prefer native MCPs over Zapier where both exist. Currently con
 
 Zapier retained only for services with no native MCP: Salesforce, GA4, Webhooks, Code execution.
 
-### 109 Skills Across 12 Domains
+### 111 Skills Across 12 Domains
 
 All skills auto-load from `.claude/skills/`. Reference them naturally in prompts.
 

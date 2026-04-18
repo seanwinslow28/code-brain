@@ -31,19 +31,20 @@ This is the project command center for 16BitFit Battle Mode: a 12-week build spa
 
 | Machine | Role | Models | Access |
 |---|---|---|---|
-| Mac Mini M4 Pro (24GB) | Always-on orchestrator, launchd host | phi4-mini-reasoning, nomic-embed-text via Ollama | LAN: `{MINI_IP}:11434` |
-| MacBook Pro M4 Pro (48GB) | Heavyweight local inference, development | Qwen3-14B, Qwen2.5-Coder-32B via MLX-LM | Local only |
+| Mac Mini M4 Pro (24GB) | Always-on orchestrator, launchd host, sole agent driver (v3.14.3) | phi4-mini-reasoning, phi4-mini, nomic-embed-text, gemma4:e4b via Ollama | LAN: `{MINI_IP}:11434` |
+| MacBook Pro M4 Pro (48GB) | Heavyweight local inference (interactive use), development | qwen3-14b, qwen2.5-coder-32b-instruct, google/gemma-4-31b via LM Studio (port 1234) | LAN `{MBP_IP}:1234` — no auto-wake; must be awake to serve |
 | Alienware RTX 5080 (16GB VRAM) | CUDA: ComfyUI, LoRA training, vision QA | Qwen3-VL-8B (`qwen3-vl:8b`) via Ollama CUDA, ComfyUI REST | LAN: `{ALIENWARE_IP}:11434`, WOL |
 
 ## Model-to-Machine Routing
 
 | Task | Machine | Model |
 |---|---|---|
-| Inbox triage | Mac Mini | phi4-mini-reasoning (3.8B) via Ollama |
+| Inbox triage | Mac Mini | **gemma4:e4b** (4.5B effective) via Ollama — v3.14.1 swap |
+| Anki cards | Mac Mini | phi4-mini via Ollama |
 | Vault embeddings | Mac Mini | nomic-embed-text via Ollama |
-| Financial analysis | MacBook Pro | Qwen3-14B via MLX-LM |
-| Code review / PR digest | MacBook Pro | Qwen2.5-Coder-32B via MLX-LM |
-| Heavy synthesis | MacBook Pro | Qwen3.5 (evaluate 122B MoE or 9B) via MLX-LM |
+| Financial analysis | Mac Mini | **phi4-mini-reasoning** via Ollama — v3.14.3 rerouting (was MBP) |
+| Code review / PR digest | MacBook Pro | qwen2.5-coder-32b-instruct via LM Studio — kept; scorer rebuild pending (v3.14.3 known follow-up) |
+| Vault synthesis (nightly) | MacBook Pro | qwen3-14b via LM Studio — intermittent (MBP must be awake; v3.14.3) |
 | Sprite vision QA | Alienware | Qwen3-VL-8B (`qwen3-vl:8b`) via Ollama CUDA |
 | ComfyUI orchestration | Alienware | N/A (REST API to ComfyUI) |
 | Complex / fallback | Any → Claude API | Opus 4.6 ($5/$25 per MTok) or Sonnet |
