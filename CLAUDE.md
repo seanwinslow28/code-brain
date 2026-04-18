@@ -4,7 +4,7 @@ This is Sean's personal command center — a second brain for Claude Code.
 
 ## What This Repo Is
 
-111 skills, 13 agents, 7 hooks, 7 domain workspaces, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
+111 skills, 16 agents, 8 hooks, 7 domain workspaces, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
 
 ## Domain Workspaces
 
@@ -62,14 +62,19 @@ python3 scripts/validate.py
 
 The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Claude Agent SDK. These run **outside** Claude Code sessions on macOS launchd schedules. Skills are loaded as system prompts — no duplication.
 
-**Active agents (2 of 10):**
+**Active agents (5 of 13):**
 
-| Agent | Schedule | Skills Loaded | Cost/Run |
+| Agent | Schedule | Skills/Model | Cost/Run |
 |-------|----------|---------------|----------|
-| Vault Indexer | 2:00 AM daily | vault-read-write | $0.00 (local Ollama) |
+| Vault Indexer | 2:00 AM daily | nomic-embed-text (Mac Mini Ollama) | $0.00 (local) |
+| Vault Synthesizer | 2:30 AM daily | Qwen3-14B via route_to_macbook | $0.00 (local) |
 | Daily Driver (morning) | 8:45 AM daily | daily-driver, vault-read-write | ~$0.40 |
+| Knowledge Lint | Sunday 22:00 | Tier 1 phi4-mini (Mac Mini), Tier 2 Qwen3-14B (MBP) | $0.00 (local) |
+| Flush (SessionEnd) | hook-triggered | phi4-mini or Qwen3-14B (by msg count) | $0.00 (local) |
 
-**All other agents disabled as of v3.12.3** (2026-04-09). See `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md` for rationale. Do NOT re-enable without Sean's explicit approval.
+Phase 6 (v3.13.0) added the knowledge compounding loop: SessionEnd flush → Vault Synthesizer v2 → Knowledge Lint → autoresearch feedback. All three new agents run 100% local.
+
+**The 6 agents disabled in v3.12.3** (2026-04-09) remain disabled. See `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md` for rationale. Do NOT re-enable without Sean's explicit approval.
 
 **Key limitation:** Headless SDK agents cannot access MCP servers (Slack, Google Calendar, Gmail, etc.) — those require browser-based OAuth only available in interactive sessions. The morning agent creates the daily note skeleton; Slack/calendar data is backfilled when Sean starts an interactive session.
 
@@ -98,7 +103,8 @@ Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key ne
 .claude/
 ├── skills/          # ALL 111 skills (canonical, auto-loaded)
 ├── agents/          # ALL 13 agents (9 domain + 4 design team)
-├── hooks/           # 7 hooks (block-secrets, log-tool-use, network-access, etc.)
+├── hooks/           # 8 hooks (block-secrets, log-tool-use, network-access,
+│                    #          session-end-flush, run-tests-on-stop, …)
 └── settings.json    # Standard security profile
 
 agents-sdk/          # Autonomous agents (Claude Agent SDK, Python)

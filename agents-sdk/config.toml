@@ -67,6 +67,42 @@ schedule = "02:00"
 embedding_model = "nomic-embed-text"
 target_machine = "mac_mini"
 
+# ─── Phase 6 D.2.a extensions ──────────────────────────────────────────
+synthesis_enabled = true
+synthesis_machine = "macbook_pro"
+synthesis_model_task = "vault_synthesis"  # resolves via routing.task_map
+synthesis_max_minutes = 45
+state_file = ".indexer-state.json"
+exclude_paths = ["daily", ".obsidian", "90_system"]
+
+[agents.flush]
+# Phase 6 D.1 — SessionEnd flush. Triggered by hook, NOT launchd.
+enabled = true
+skills = []
+max_turns = 15
+max_budget_usd = 0.00
+complex_message_threshold = 100
+
+[agents.vault_synthesizer]
+# Phase 6 D.2.b — nightly concept + connection article generator.
+enabled = true
+skills = []
+max_turns = 25
+max_budget_usd = 0.00
+schedule = "02:30"
+target_machine = "macbook_pro"
+budget_seconds = 2700
+
+[agents.knowledge_lint]
+# Phase 6 D.3 — weekly two-tier vault health scan.
+enabled = true
+skills = []
+max_turns_tier1 = 20
+max_turns_tier2 = 30
+max_budget_usd = 0.00
+schedule = "Sunday 22:00"
+stale_days = 30
+
 [agents.pr_digest]
 enabled = false
 skills = ["vault-read-write"]
