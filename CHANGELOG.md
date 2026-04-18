@@ -5,6 +5,66 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.14.2] - 2026-04-18
+
+Phase 6 housekeeping + scope-cut. 100% local ($0.00 API).
+
+### Added
+
+- `agents-sdk/scripts/phase6_gatecheck.py` Gate #7 — Meta-Agent fleet-status
+  coverage check (≥5 artifacts/7d with ≥1 actionable alert) per Super Plan §E.5
+- Workstream E (Meta-Agent / Fleet Self-Monitoring) adopted retroactively into
+  the Phase 6 Super Plan as §E; plist invocation corrected to call
+  `agents/meta_agent.py` via venv python (commit `9f7d85b`)
+- `§10.1 Descope Log` in the Phase 6 Super Plan documenting D.4 removal with a
+  fully-specified re-open plan, dependencies, and preserved artifacts
+
+### Changed
+
+- `agents-sdk/agents/knowledge_lint.py` — calibrated wikilink resolver to
+  accept Obsidian path-style links `[[dir/sub/file]]`, added orphan-exclusion
+  set for auto-generated directories (Granola notes, transcripts, `60_archive`,
+  `00_inbox`, `90_system`, `70_apple-notes`, `daily`), strip fenced code blocks
+  before scanning. **Real-vault issue count: 500 → 110** without sacrificing
+  synthetic-vault recall (100% Tier 1, 0 FPs)
+- `CLAUDE.md` intro line corrected to reflect actual file counts
+  (13 subagents, 11 hooks, 13 SDK agents — 6 active) instead of the aspirational
+  "16 agents, 8 hooks" that anticipated Phase 6 doc-update checklist counts
+- Loaded meta-agent schedule (08:35 daily); unloaded the 6 audit-disabled
+  launchd schedules that `install_schedules.sh` re-loaded by default
+  (process-inbox, daily-evening, weekly-review, pr-digest, sprint-health,
+  meeting-defender) per `AUDIT-2026-04-09-agent-downsizing.md`
+- Unloaded `daily-morning-baton` plist (dead wait on disabled process-inbox
+  flag); `daily-morning` continues to serve 8:45 AM daily brief
+
+### Descoped
+
+- **D.4 Autoresearch Feedback Loop** — the knowledge-graph consumer side of
+  the Phase 6 knowledge-compounding loop (`vault/knowledge/concepts/` →
+  autoresearch orchestrator read + `articles_used` logging + 7-night
+  Wilcoxon A/B) is deferred. Rationale: upstream autoresearch convergence
+  harness is in flight on a separate plan; integrating against a moving
+  target would block Phase 6 indefinitely or generate refactor churn.
+  D.1–D.3 (the producer side) remain live; the graph will accumulate data
+  and sit ready when D.4 is re-opened. Gate #6 marked `DESCOPED` in
+  `phase6_gatecheck.py`. Re-open spec: Super Plan §10.1.
+
+### Gate-check status
+
+| Gate | v3.14.0 | v3.14.2 |
+|---|---|---|
+| 1. Gemma 4 benchmarks on 3 tasks | PASS | PASS |
+| 2. ≥1 model swap deployed | PASS | PASS |
+| 3. SessionEnd ≥3 captures/week | FAIL (hook never fired) | FAIL (awaiting production runs) |
+| 4. Synthesis ≥2 concepts/night | FAIL (dirs missing) | FAIL (dirs now exist, awaiting 2:30 AM MBP run) |
+| 5. Lint ≥95% recall | PASS | PASS |
+| 6. Autoresearch ≥10% convergence | PARTIAL | **DESCOPED** |
+| 7. Meta-Agent ≥5 fleet-status/week | — (not in script) | PARTIAL (1/5, 0 alerts) |
+
+Gates 3, 4, 7 self-resolve with accrued production data over the next 7 days.
+
+---
+
 ## [3.14.1] - 2026-04-18
 
 Phase 6 A.6 re-run at N=20 + WOL dependency-pin. 100% local ($0.00 API).

@@ -1,0 +1,20 @@
+
+=== inbox_triage — 20 samples ===
+  incumbent: phi4-mini-reasoning @ mac_mini
+    quality=0.325 p50=56246ms p95=140634ms
+  challenger: gemma4:e4b @ mac_mini
+    quality=0.400 p50=24175ms p95=68382ms
+
+=== financial_analysis — 20 samples ===
+  incumbent: phi4-mini-reasoning @ mac_mini
+    quality=0.900 p50=24599ms p95=80590ms
+  challenger: gemma4:e4b @ mac_mini
+    quality=0.800 p50=17787ms p95=23438ms
+
+=== code_review — 20 samples ===
+  incumbent: phi4-mini-reasoning @ mac_mini
+    quality=0.000 p50=50768ms p95=126950ms
+  challenger: gemma4:e4b @ mac_mini
+    quality=0.000 p50=19139ms p95=23034ms
+
+Wrote /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/benchmarks/results/gemma4-benchmark-2026-04-18.json

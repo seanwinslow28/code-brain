@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Phase 6 gate-check: run all 6 criteria and print PASS/FAIL/PARTIAL.
 
-Criteria (super-plan §5):
+Criteria (super-plan §5 + §E.5):
   1. Gemma 4 benchmarks on 3 tasks with head-to-head scoring
   2. ≥1 model swap approved and deployed (may be PARTIAL if Gemma loses)
   3. SessionEnd hook capturing ≥3 sessions/week
   4. ≥2 concept + ≥1 connection article per nightly run (avg of 7 nights)
   5. Lint ≥95% recall on synthetic vault
   6. Autoresearch convergence ≥10% improvement (Wilcoxon, p<0.1)
+  7. Meta-Agent ≥5 fleet-status artifacts/week + ≥1 with actionable alert
 
 Exits 0 if all criteria PASS or PARTIAL; non-zero if any FAIL.
 """
@@ -144,7 +145,45 @@ def _check_criterion_6() -> tuple[str, str]:
         if "PASS" in text or "≥10%" in text:
             return ("PASS", f"convergence AB report at {candidate.name}")
         return ("PARTIAL", f"report exists but not clearly passing")
-    return ("PARTIAL", "blocked on autoresearch Phase 1 (expected)")
+    # D.4 descoped 2026-04-18: autoresearch integration blocked pending
+    # dependency rework. Tracked in CHANGELOG v3.14.x.
+    return ("DESCOPED", "D.4 descoped — autoresearch integration deferred")
+
+
+def _check_criterion_7(vault_root: Path) -> tuple[str, str]:
+    """Meta-Agent fleet-status artifacts in last 7 days (§E.5).
+
+    PASS:     ≥5 daily-fleet-status-*.md in last 7 days AND ≥1 contains alerts
+    PARTIAL:  ≥1 artifact exists but either <5 total or no alert-bearing ones
+    FAIL:     directory missing or zero artifacts
+    """
+    fleet_dir = vault_root / "02_Areas" / "Agent-Fleet"
+    if not fleet_dir.exists():
+        return ("FAIL", "vault/02_Areas/Agent-Fleet/ does not exist")
+    cutoff = date.today() - timedelta(days=7)
+    recent: list[Path] = []
+    for p in fleet_dir.glob("daily-fleet-status-*.md"):
+        stem_date = _parse_date(p.stem.replace("daily-fleet-status-", ""))
+        if stem_date and stem_date >= cutoff:
+            recent.append(p)
+    if not recent:
+        return ("FAIL", "no fleet-status artifacts in last 7 days")
+    # Count how many contain an actionable "## Alerts" section (and are not
+    # just "No alerts — all active agents healthy")
+    alerting = 0
+    for p in recent:
+        try:
+            text = p.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        if "## Alerts" in text and "No alerts" not in text:
+            alerting += 1
+    if len(recent) >= 5 and alerting >= 1:
+        return ("PASS", f"{len(recent)} artifacts, {alerting} with alerts")
+    return (
+        "PARTIAL",
+        f"{len(recent)} artifacts, {alerting} with alerts (need ≥5 + ≥1)",
+    )
 
 
 def main() -> int:
@@ -157,6 +196,7 @@ def main() -> int:
         ("4. Synthesis ≥2 concepts/night",    _check_criterion_4(cfg.vault_root)),
         ("5. Lint ≥95% recall",               _check_criterion_5()),
         ("6. Autoresearch ≥10% convergence",  _check_criterion_6()),
+        ("7. Meta-Agent fleet-status/week",   _check_criterion_7(cfg.vault_root)),
     ]
 
     print("=" * 70)
@@ -164,17 +204,22 @@ def main() -> int:
     print("=" * 70)
     fail = 0
     partial = 0
+    descoped = 0
+    markers = {"PASS": "✓", "PARTIAL": "~", "FAIL": "✗", "DESCOPED": "—"}
     for label, (status, note) in results:
-        marker = {"PASS": "✓", "PARTIAL": "~", "FAIL": "✗"}.get(status, "?")
+        marker = markers.get(status, "?")
         print(f" {marker} {status:8s} {label}")
         print(f"              {note}")
         if status == "FAIL":
             fail += 1
         elif status == "PARTIAL":
             partial += 1
+        elif status == "DESCOPED":
+            descoped += 1
     print("=" * 70)
-    passed = len(results) - fail - partial
-    print(f" {passed} PASS · {partial} PARTIAL · {fail} FAIL")
+    passed = len(results) - fail - partial - descoped
+    tail = f" · {descoped} DESCOPED" if descoped else ""
+    print(f" {passed} PASS · {partial} PARTIAL · {fail} FAIL{tail}")
     print("=" * 70)
     return 0 if fail == 0 else 1
 
