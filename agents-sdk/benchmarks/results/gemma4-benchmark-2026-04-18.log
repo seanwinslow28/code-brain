@@ -1,0 +1,25 @@
+
+=== inbox_triage — 20 samples ===
+  incumbent: phi4-mini-reasoning @ mac_mini
+    quality=0.333 p50=52913ms p95=90784ms
+  challenger: google/gemma-4-31b @ macbook_pro
+    [unload] path=lms-cli
+    quality=0.342 p50=35933ms p95=57162ms
+
+=== financial_analysis — 20 samples ===
+  incumbent: qwen3-14b @ macbook_pro
+    [unload] path=lms-cli
+    quality=0.900 p50=25996ms p95=39429ms
+  challenger: google/gemma-4-31b @ macbook_pro
+    [unload] path=lms-cli
+    quality=0.850 p50=56663ms p95=71356ms
+
+=== code_review — 20 samples ===
+  incumbent: qwen2.5-coder-32b-instruct @ macbook_pro
+    [unload] path=lms-cli
+    quality=0.100 p50=26295ms p95=39650ms
+  challenger: google/gemma-4-31b @ macbook_pro
+    [unload] path=lms-cli
+    quality=0.175 p50=59796ms p95=91748ms
+
+Wrote /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/benchmarks/results/gemma4-benchmark-2026-04-18.json

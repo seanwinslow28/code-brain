@@ -5,6 +5,36 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.14.1] - 2026-04-18
+
+Phase 6 finish — abandoned cross-machine WOL path, re-ran A.6 at N=20, and moved Gemma 4 into the production stack for two tasks.
+
+### Changed
+
+- `agents-sdk/config.toml`:
+  - `[routing.machines.macbook_pro]` reverted from `192.168.68.50 / WOL` back to `127.0.0.1 / lm-studio`, `always_on = true`, `wol_mac` removed. Agents that need heavyweight MBP inference now run *on* the MBP — no cross-machine hop, no WOL path to wake.
+  - `[routing.task_map]` — A.6 N=20 verdicts applied:
+    - `inbox_triage` → `google/gemma-4-31b @ macbook_pro` (was `phi4-mini-reasoning @ mac_mini`; within ±5pp quality, 32% faster p50)
+    - `code_review` → `google/gemma-4-31b @ macbook_pro` (was `qwen2.5-coder-32b-instruct`; +7.5pp quality, caveat below)
+    - `financial_analysis` kept on `qwen3-14b @ macbook_pro` (exactly 5pp regression + 118% slower triggers the veto gate)
+  - Model ID corrected: LM Studio exposes Gemma 4 as `google/gemma-4-31b`, not `gemma4-31b`. The mismatch is what caused the April 17 5-sample run's deferred tasks.
+  - `[notifications] notify_on` — dropped `"wol_failure"`; there is no cross-machine wake path left to fail.
+- `agents-sdk/scripts/run_gemma4_benchmark.py` — new `_unload_lm_studio(base_url)` helper called at the start of every `macbook_pro`-targeted run. Primary path `subprocess.run(["lms", "unload", "--all"])`; fallback `POST /v1/models/unload`. Logs which path succeeded per call. Fixes the RAM guardrail bug that blocked financial_analysis + code_review in the April 17 run. With LM Studio "JIT models auto-evict" ON this is belt-and-suspenders; it still helps at task boundaries.
+
+### Added
+
+- `agents-sdk/benchmarks/results/gemma4-benchmark-2026-04-18.json` — full N=20 × 3 tasks × 2 models. 0 failures across 120 calls.
+- `agents-sdk/benchmarks/results/A6-swap-decision-2026-04-18.md` — per-task verdicts with the April 17 5-sample comparison row; gate criterion #2 now PASS.
+
+### Known caveat — code_review scoring
+
+Both code_review models scored below 0.2 quality at N=20 (`qwen2.5-coder-32b-instruct` at 0.10, `google/gemma-4-31b` at 0.175). A coder-first model scoring 0.10 is implausible by human standards, which points at the Jaccard-entity extractor as the wrong fit for code review output rather than at the model. The swap is technically correct per the veto gate rules but merits a scorer revisit (LLM-judge rubric or code-review-specific entity extractor) before the production routing is trusted.
+
+### Tests
+
+- 109 pytest cases, 100% pass. Repo-wide `scripts/validate.py` PASSED (40 pre-existing secret-pattern warnings in unrelated skill docs).
+- Phase 6 gate-check: criteria 1 and 2 flipped from PARTIAL → PASS.
+
 ## [3.14.0] - 2026-04-17
 
 Phase 6 — Gemma 4 benchmarking + Knowledge Compounding Loop. 100% local ($0.00 API).

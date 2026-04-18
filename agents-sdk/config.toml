@@ -153,13 +153,12 @@ always_on = true
 models = ["phi4-mini-reasoning", "phi4-mini", "nomic-embed-text"]
 
 [routing.machines.macbook_pro]
-host = "192.168.68.50"
+host = "127.0.0.1"
 port = 1234
 tier = 2
 runtime = "lm-studio"   # LM Studio OpenAI-compatible API (NOT raw mlx_lm package)
-always_on = false        # Phase 6 Option B — WOL path (MBP can sleep; router wakes it)
-wol_mac = "50:F2:65:EF:AC:3D"  # Hardware MAC (not the Private Wi-Fi randomized address)
-models = ["qwen3-14b", "qwen2.5-coder-32b-instruct", "gemma4-31b"]
+always_on = true         # Agents that need MBP models now run ON the MBP (v3.14.1); no WOL hop
+models = ["qwen3-14b", "qwen2.5-coder-32b-instruct", "google/gemma-4-31b"]
 
 [routing.machines.alienware]
 host = "192.168.68.201"
@@ -172,11 +171,15 @@ models = ["Qwen3-VL-7B"]
 
 # Task → model → machine mapping
 [routing.task_map]
-inbox_triage = { model = "phi4-mini-reasoning", machine = "mac_mini" }
+# A.6 N=20 verdicts (2026-04-18, v3.14.1):
+#   inbox_triage: SWAP → gemma-4-31b (within ±5pp quality, 32% faster p50)
+#   financial_analysis: KEEP qwen3-14b (exactly 5pp regression + 118% slower)
+#   code_review: SWAP → gemma-4-31b (+7.5pp quality; NB both scores <0.2 — extractor fit is weak, revisit scorer)
+inbox_triage = { model = "google/gemma-4-31b", machine = "macbook_pro" }
 vault_embeddings = { model = "nomic-embed-text", machine = "mac_mini" }
 anki_cards = { model = "phi4-mini", machine = "mac_mini" }
 financial_analysis = { model = "qwen3-14b", machine = "macbook_pro" }
-code_review = { model = "qwen2.5-coder-32b-instruct", machine = "macbook_pro" }
+code_review = { model = "google/gemma-4-31b", machine = "macbook_pro" }
 heavy_synthesis = { model = "qwen3-14b", machine = "macbook_pro" }
 vault_synthesis = { model = "qwen3-14b", machine = "macbook_pro" }  # Phase 6 D.2 — model resolved at runtime via this key
 sprite_vision_qa = { model = "Qwen3-VL-7B", machine = "alienware" }
@@ -192,5 +195,6 @@ pushover_user_key_keychain = "pushover_user_key"
 # App/API token — stored in macOS Keychain (never commit plaintext tokens)
 # Retrieve via: lib/keychain.py get pushover_app_token
 pushover_app_token_keychain = "pushover_app_token"
-# Events that trigger a push (WOL failure is mandatory for Phase 6 D.2)
-notify_on = ["wol_failure", "agent_error", "gate_check_fail"]
+# Events that trigger a push. `wol_failure` removed in v3.14.1 — agents now
+# run directly on the MBP, so there is no cross-machine wake path left to fail.
+notify_on = ["agent_error", "gate_check_fail"]

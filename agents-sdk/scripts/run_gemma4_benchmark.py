@@ -22,6 +22,7 @@ import argparse
 import asyncio
 import json
 import re
+import subprocess
 import sys
 from datetime import date
 from pathlib import Path
@@ -47,13 +48,13 @@ TASKS = ["inbox_triage", "financial_analysis", "code_review"]
 # Only the MBP-resident gemma4-31b is still a live challenger here.
 CHALLENGERS: dict[str, list[tuple[str, str]]] = {
     "inbox_triage": [
-        ("gemma4-31b", "macbook_pro"),
+        ("google/gemma-4-31b", "macbook_pro"),
     ],
     "financial_analysis": [
-        ("gemma4-31b", "macbook_pro"),
+        ("google/gemma-4-31b", "macbook_pro"),
     ],
     "code_review": [
-        ("gemma4-31b", "macbook_pro"),
+        ("google/gemma-4-31b", "macbook_pro"),
     ],
 }
 
@@ -202,6 +203,48 @@ def _pct(result: BenchmarkResult, pct: int) -> float:
     return ls[idx]
 
 
+async def _unload_lm_studio(base_url: str) -> str:
+    """Force LM Studio to unload whatever model is currently resident.
+
+    LM Studio's RAM guardrail will refuse a JIT-load if the new model would
+    push memory past the safe threshold. Between incumbent/challenger runs we
+    unload explicitly so the next JIT-load starts from a clean slate.
+
+    With "JIT models auto-evict" ON in Developer settings, LM Studio normally
+    unloads the previous model on its own when a new model is requested —
+    this call is a belt-and-suspenders safety net for task boundaries.
+
+    Returns a short label describing which path succeeded, or "noop" if
+    neither worked (proceed anyway; auto-evict will handle it).
+    """
+    import httpx
+
+    # Path 1 — `lms` CLI is the sanctioned LM Studio entrypoint.
+    try:
+        proc = subprocess.run(
+            ["lms", "unload", "--all"],
+            capture_output=True,
+            text=True,
+            timeout=20,
+            check=False,
+        )
+        if proc.returncode == 0:
+            return "lms-cli"
+    except (FileNotFoundError, subprocess.TimeoutExpired):
+        pass
+
+    # Path 2 — OpenAI-compat unload endpoint (LM Studio 0.3.9+).
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            resp = await client.post(f"{base_url}/v1/models/unload")
+            if resp.status_code < 400:
+                return "http-unload"
+    except Exception:
+        pass
+
+    return "noop"
+
+
 async def run_benchmark_with_text(
     router: HybridRouter,
     task: str,
@@ -219,6 +262,9 @@ async def run_benchmark_with_text(
         router.task_map[task] = {"model": model, "machine": machine}
     try:
         decision = await router.route(task)
+        if decision.machine == "macbook_pro":
+            label = await _unload_lm_studio(decision.base_url)
+            print(f"    [unload] path={label}")
         results: list[SampleResult] = []
         for rec in samples:
             prompt = rec.get("prompt", "")
