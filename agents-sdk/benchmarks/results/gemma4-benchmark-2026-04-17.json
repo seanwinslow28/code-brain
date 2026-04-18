@@ -1,0 +1,41 @@
+{
+  "run_date": "2026-04-17",
+  "window": "Phase 6 A.5 — executed same-day as P0.1 per ahead-of-schedule directive",
+  "samples_per_task": 5,
+  "notes": [
+    "Gemma 4 had to be substituted: super-plan said `gemma4:27b` but Ollama registry lists `gemma4:26b` (26B MoE with 3.8B active) and `gemma4:31b` (31B dense). Both were pulled; 26B lives on Mac Mini, 31B on MacBook Pro via LM Studio MLX 4-bit (identifier `gemma4-31b`).",
+    "gemma4:26b on Mac Mini M4 Pro 24GB was benched in a prior pass and exceeded the 120s per-sample timeout on every request. Cold-prompt inference ≈100s; long prompts >120s. Per plan §A.6 veto (≥5% regression = KEEP), gemma4:26b → NOT a viable challenger for Mac Mini routing.",
+    "financial_analysis incumbent run hit LM Studio RAM exhaustion: with gemma4-31b holding 28GB, qwen3-14b's 8GB JIT-load failed. Benchmark captured partial data (inbox_triage only); financial_analysis + code_review runs require sequential model load/unload, deferred."
+  ],
+  "inbox_triage": {
+    "phi4-mini-reasoning": {
+      "machine": "mac_mini",
+      "samples": 5,
+      "quality": 0.667,
+      "p50_ms": 21152,
+      "p95_ms": 27594,
+      "mean_ms": null,
+      "note": "Incumbent"
+    },
+    "gemma4-31b": {
+      "machine": "macbook_pro",
+      "samples": 5,
+      "quality": 0.567,
+      "p50_ms": 32347,
+      "p95_ms": 37563,
+      "mean_ms": null,
+      "note": "Challenger — LOST (-15% quality, +53% p50 latency)"
+    }
+  },
+  "financial_analysis": {
+    "_partial": "Incumbent qwen3-14b: 0/5 samples succeeded (LM Studio RAM guardrail blocked JIT-load while gemma4-31b held 28GB). Re-run with sequential model loading needed."
+  },
+  "code_review": {
+    "_not_run": "Skipped after financial_analysis RAM failure. Per plan §7.1, further challenger tests are optional after inbox_triage veto fires."
+  },
+  "veto_gate_decisions": {
+    "inbox_triage":        "KEEP INCUMBENT — gemma4-31b is 15% below phi4-mini-reasoning quality; veto gate (≥5% regression) fires cleanly.",
+    "financial_analysis":  "DEFERRED — incumbent incomplete due to infra, not model quality.",
+    "code_review":         "DEFERRED — not tested."
+  }
+}

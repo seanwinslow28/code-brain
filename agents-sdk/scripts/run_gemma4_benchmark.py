@@ -40,14 +40,17 @@ from lib.hybrid_router import HybridRouter, RoutingDecision  # noqa: E402
 TASKS = ["inbox_triage", "financial_analysis", "code_review"]
 
 # Challenger matrix per task — incumbent is read from config.toml at runtime.
+# Note: gemma4:26b on Mac Mini was tested in an earlier pass and timed out
+# on every sample (Mac Mini M4 Pro 24GB cannot fit the 26B MoE with usable
+# latency — cold-prompt infer ~100s, long-prompt inferences exceed 120s).
+# Per the plan §7.1 veto gate, that's a >5% regression → keep incumbent.
+# Only the MBP-resident gemma4-31b is still a live challenger here.
 CHALLENGERS: dict[str, list[tuple[str, str]]] = {
     "inbox_triage": [
-        ("gemma4:26b", "mac_mini"),
         ("gemma4-31b", "macbook_pro"),
     ],
     "financial_analysis": [
         ("gemma4-31b", "macbook_pro"),
-        ("gemma4:26b", "mac_mini"),
     ],
     "code_review": [
         ("gemma4-31b", "macbook_pro"),
@@ -222,7 +225,7 @@ async def run_benchmark_with_text(
             expected = list(rec.get("expected", []))
             t0 = time.monotonic()
             try:
-                async with httpx.AsyncClient(timeout=120.0) as client:
+                async with httpx.AsyncClient(timeout=300.0) as client:
                     if decision.runtime == "ollama":
                         resp = await client.post(
                             f"{decision.base_url}/api/generate",
