@@ -39,22 +39,28 @@ from lib.hybrid_router import HybridRouter, RoutingDecision  # noqa: E402
 
 TASKS = ["inbox_triage", "financial_analysis", "code_review"]
 
-# Challenger matrix per task — incumbent is read from config.toml at runtime.
-# Note: gemma4:26b on Mac Mini was tested in an earlier pass and timed out
-# on every sample (Mac Mini M4 Pro 24GB cannot fit the 26B MoE with usable
-# latency — cold-prompt infer ~100s, long-prompt inferences exceed 120s).
-# Per the plan §7.1 veto gate, that's a >5% regression → keep incumbent.
-# Only the MBP-resident gemma4-31b is still a live challenger here.
+# 2026-04-18 rewrite: MBP WOL path deferred (Sean's MBP is rarely on the
+# LAN in a wakeable state). A.6 is re-scoped to a Mac-Mini-only shootout —
+# phi4-mini-reasoning (incumbent) vs gemma4:e4b (challenger, 4.5B effective
+# / 8B-with-embeddings, Ollama gemma4 library, 128K ctx, native function-
+# calling tokens). Both models run on mac_mini Ollama so there is no cross-
+# machine transport, no LM Studio RAM guardrail to fight, and the decision
+# doesn't hinge on MBP availability.
+#
+# INCUMBENT_OVERRIDES forces all 3 tasks through phi4-mini-reasoning on the
+# Mac Mini for this run, regardless of what config.toml [routing.task_map]
+# says. This is test-harness scope only — config.toml is unchanged unless
+# the veto gate approves a swap in A.7.
+INCUMBENT_OVERRIDES: dict[str, tuple[str, str]] = {
+    "inbox_triage": ("phi4-mini-reasoning", "mac_mini"),
+    "financial_analysis": ("phi4-mini-reasoning", "mac_mini"),
+    "code_review": ("phi4-mini-reasoning", "mac_mini"),
+}
+
 CHALLENGERS: dict[str, list[tuple[str, str]]] = {
-    "inbox_triage": [
-        ("gemma4-31b", "macbook_pro"),
-    ],
-    "financial_analysis": [
-        ("gemma4-31b", "macbook_pro"),
-    ],
-    "code_review": [
-        ("gemma4-31b", "macbook_pro"),
-    ],
+    "inbox_triage": [("gemma4:e4b", "mac_mini")],
+    "financial_analysis": [("gemma4:e4b", "mac_mini")],
+    "code_review": [("gemma4:e4b", "mac_mini")],
 }
 
 
@@ -162,11 +168,14 @@ async def main() -> int:
         samples = _load_golden(repo_root, task, args.samples)
         print(f"\n=== {task} — {len(samples)} samples ===")
 
-        # Incumbent (as configured in config.toml)
-        inc = router.task_map.get(task, {})
-        print(f"  incumbent: {inc.get('model')} @ {inc.get('machine')}")
+        # Incumbent — forced to phi4-mini-reasoning @ mac_mini per A.6 rewrite.
+        # Config.toml still routes financial_analysis + code_review to MBP, but
+        # this harness bypasses that so we can compare apples-to-apples on Mac
+        # Mini with no MBP dependency.
+        inc_override = INCUMBENT_OVERRIDES.get(task)
+        print(f"  incumbent: {inc_override[0]} @ {inc_override[1]}")
         try:
-            inc_result = await run_benchmark_with_text(router, task, samples, override=None)
+            inc_result = await run_benchmark_with_text(router, task, samples, override=inc_override)
             all_results.append(inc_result)
             print(f"    quality={inc_result.mean_quality:.3f} "
                   f"p50={_pct(inc_result, 50):.0f}ms p95={_pct(inc_result, 95):.0f}ms")

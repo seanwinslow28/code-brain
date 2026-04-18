@@ -1,0 +1,105 @@
+{
+  "inbox_triage": {
+    "phi4-mini-reasoning": {
+      "machine": "mac_mini",
+      "samples": 3,
+      "quality": 0.6667,
+      "p50_ms": 28425.28,
+      "p95_ms": 35048.67,
+      "mean_ms": 27910.63,
+      "min_ms": 20257.93,
+      "max_ms": 35048.67,
+      "per_sample": [
+        {
+          "sample_id": 0,
+          "latency_ms": 28425.279999995837,
+          "tokens_out": 1167,
+          "extracted": [
+            "integrate",
+            "send",
+            "urgent"
+          ],
+          "expected": [
+            "urgent",
+            "send",
+            "integrate"
+          ]
+        },
+        {
+          "sample_id": 1,
+          "latency_ms": 35048.67216700222,
+          "tokens_out": 1184,
+          "extracted": [
+            "newsletter"
+          ],
+          "expected": [
+            "newsletter",
+            "read"
+          ]
+        },
+        {
+          "sample_id": 2,
+          "latency_ms": 20257.932292006444,
+          "tokens_out": 702,
+          "extracted": [
+            "pay"
+          ],
+          "expected": [
+            "urgent",
+            "pay"
+          ]
+        }
+      ]
+    },
+    "gemma4:e4b": {
+      "machine": "mac_mini",
+      "samples": 3,
+      "quality": 0.6667,
+      "p50_ms": 17861.09,
+      "p95_ms": 18091.65,
+      "mean_ms": 15121.26,
+      "min_ms": 9411.04,
+      "max_ms": 18091.65,
+      "per_sample": [
+        {
+          "sample_id": 0,
+          "latency_ms": 17861.09191599826,
+          "tokens_out": 404,
+          "extracted": [
+            "integrate",
+            "send",
+            "urgent"
+          ],
+          "expected": [
+            "urgent",
+            "send",
+            "integrate"
+          ]
+        },
+        {
+          "sample_id": 1,
+          "latency_ms": 9411.035708006239,
+          "tokens_out": 394,
+          "extracted": [
+            "newsletter",
+            "read"
+          ],
+          "expected": [
+            "newsletter",
+            "read"
+          ]
+        },
+        {
+          "sample_id": 2,
+          "latency_ms": 18091.651583003113,
+          "tokens_out": 768,
+          "extracted": [],
+          "expected": [
+            "urgent",
+            "pay"
+          ]
+        }
+      ]
+    }
+  }
+}
