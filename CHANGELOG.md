@@ -26,6 +26,11 @@ Phase 6 finish — abandoned cross-machine WOL path, re-ran A.6 at N=20, and mov
 - `agents-sdk/benchmarks/results/gemma4-benchmark-2026-04-18.json` — full N=20 × 3 tasks × 2 models. 0 failures across 120 calls.
 - `agents-sdk/benchmarks/results/A6-swap-decision-2026-04-18.md` — per-task verdicts with the April 17 5-sample comparison row; gate criterion #2 now PASS.
 
+### Ops
+
+- `com.sean.agent.vault-synthesizer.plist` and `com.sean.agent.knowledge-lint.plist` installed on the MacBook Pro via `~/Library/LaunchAgents` symlinks. Mac Mini copies remain loaded at Sean's request — the two machines run the nightly agents in parallel while he compares Gemma 4 outputs across different quantizations. Vault writes are filelocked (v3.14.0 P0.1), so duplicate scheduling is safe at the file level.
+- If the MBP is asleep at 02:30 / Sunday 22:00, launchd queues the job and fires it on next wake. This is intended launchd behavior.
+
 ### Known caveat — code_review scoring
 
 Both code_review models scored below 0.2 quality at N=20 (`qwen2.5-coder-32b-instruct` at 0.10, `google/gemma-4-31b` at 0.175). A coder-first model scoring 0.10 is implausible by human standards, which points at the Jaccard-entity extractor as the wrong fit for code review output rather than at the model. The swap is technically correct per the veto gate rules but merits a scorer revisit (LLM-judge rubric or code-review-specific entity extractor) before the production routing is trusted.
