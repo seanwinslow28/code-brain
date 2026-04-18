@@ -2,18 +2,18 @@
   "inbox_triage": {
     "phi4-mini-reasoning": {
       "machine": "mac_mini",
-      "samples": 3,
-      "quality": 0.6667,
-      "p50_ms": 28425.28,
-      "p95_ms": 35048.67,
-      "mean_ms": 27910.63,
-      "min_ms": 20257.93,
-      "max_ms": 35048.67,
+      "samples": 20,
+      "quality": 0.325,
+      "p50_ms": 56245.59,
+      "p95_ms": 140633.68,
+      "mean_ms": 67341.2,
+      "min_ms": 20878.56,
+      "max_ms": 173144.75,
       "per_sample": [
         {
           "sample_id": 0,
-          "latency_ms": 28425.279999995837,
-          "tokens_out": 1167,
+          "latency_ms": 130325.10379201267,
+          "tokens_out": 2992,
           "extracted": [
             "integrate",
             "send",
@@ -27,8 +27,8 @@
         },
         {
           "sample_id": 1,
-          "latency_ms": 35048.67216700222,
-          "tokens_out": 1184,
+          "latency_ms": 49969.87379199709,
+          "tokens_out": 1157,
           "extracted": [
             "newsletter"
           ],
@@ -39,32 +39,229 @@
         },
         {
           "sample_id": 2,
-          "latency_ms": 20257.932292006444,
-          "tokens_out": 702,
-          "extracted": [
-            "pay"
-          ],
+          "latency_ms": 140633.68016699678,
+          "tokens_out": 4507,
+          "extracted": [],
           "expected": [
             "urgent",
             "pay"
+          ]
+        },
+        {
+          "sample_id": 3,
+          "latency_ms": 173144.75374999165,
+          "tokens_out": 1137,
+          "extracted": [
+            "promotional"
+          ],
+          "expected": [
+            "promotional",
+            "archive"
+          ]
+        },
+        {
+          "sample_id": 4,
+          "latency_ms": 73284.49379099766,
+          "tokens_out": 1230,
+          "extracted": [
+            "reply",
+            "reschedule"
+          ],
+          "expected": [
+            "followup",
+            "reschedule",
+            "reply"
+          ]
+        },
+        {
+          "sample_id": 5,
+          "latency_ms": 38603.81933300232,
+          "tokens_out": 1193,
+          "extracted": [],
+          "expected": [
+            "urgent",
+            "investigate",
+            "fix"
+          ]
+        },
+        {
+          "sample_id": 6,
+          "latency_ms": 20878.559500008123,
+          "tokens_out": 776,
+          "extracted": [
+            "attend",
+            "urgent"
+          ],
+          "expected": [
+            "urgent",
+            "attend"
+          ]
+        },
+        {
+          "sample_id": 7,
+          "latency_ms": 33564.744582996354,
+          "tokens_out": 1209,
+          "extracted": [],
+          "expected": [
+            "promotional",
+            "archive"
+          ]
+        },
+        {
+          "sample_id": 8,
+          "latency_ms": 24511.378833005438,
+          "tokens_out": 937,
+          "extracted": [
+            "draft"
+          ],
+          "expected": [
+            "followup",
+            "draft",
+            "schedule"
+          ]
+        },
+        {
+          "sample_id": 9,
+          "latency_ms": 49003.90254199738,
+          "tokens_out": 829,
+          "extracted": [
+            "upgrade"
+          ],
+          "expected": [
+            "followup",
+            "review",
+            "upgrade"
+          ]
+        },
+        {
+          "sample_id": 10,
+          "latency_ms": 80638.44683299249,
+          "tokens_out": 1567,
+          "extracted": [],
+          "expected": [
+            "followup",
+            "review",
+            "reply"
+          ]
+        },
+        {
+          "sample_id": 11,
+          "latency_ms": 43993.47979199956,
+          "tokens_out": 917,
+          "extracted": [],
+          "expected": [
+            "newsletter",
+            "read"
+          ]
+        },
+        {
+          "sample_id": 12,
+          "latency_ms": 45710.11941599136,
+          "tokens_out": 866,
+          "extracted": [],
+          "expected": [
+            "urgent",
+            "verify"
+          ]
+        },
+        {
+          "sample_id": 13,
+          "latency_ms": 80917.43316699285,
+          "tokens_out": 1807,
+          "extracted": [
+            "promotional"
+          ],
+          "expected": [
+            "promotional",
+            "archive"
+          ]
+        },
+        {
+          "sample_id": 14,
+          "latency_ms": 60496.35779100936,
+          "tokens_out": 761,
+          "extracted": [],
+          "expected": [
+            "archive",
+            "read"
+          ]
+        },
+        {
+          "sample_id": 15,
+          "latency_ms": 83238.16879199876,
+          "tokens_out": 2030,
+          "extracted": [],
+          "expected": [
+            "followup",
+            "reply"
+          ]
+        },
+        {
+          "sample_id": 16,
+          "latency_ms": 56016.308749996824,
+          "tokens_out": 1310,
+          "extracted": [
+            "investigate"
+          ],
+          "expected": [
+            "urgent",
+            "investigate",
+            "page"
+          ]
+        },
+        {
+          "sample_id": 17,
+          "latency_ms": 73467.52512500098,
+          "tokens_out": 1485,
+          "extracted": [
+            "read"
+          ],
+          "expected": [
+            "newsletter",
+            "read"
+          ]
+        },
+        {
+          "sample_id": 18,
+          "latency_ms": 56245.58500001149,
+          "tokens_out": 1184,
+          "extracted": [
+            "review"
+          ],
+          "expected": [
+            "followup",
+            "review",
+            "submit"
+          ]
+        },
+        {
+          "sample_id": 19,
+          "latency_ms": 32180.308374998276,
+          "tokens_out": 809,
+          "extracted": [
+            "download"
+          ],
+          "expected": [
+            "archive",
+            "download"
           ]
         }
       ]
     },
     "gemma4:e4b": {
       "machine": "mac_mini",
-      "samples": 3,
-      "quality": 0.6667,
-      "p50_ms": 17861.09,
-      "p95_ms": 18091.65,
-      "mean_ms": 15121.26,
-      "min_ms": 9411.04,
-      "max_ms": 18091.65,
+      "samples": 20,
+      "quality": 0.4,
+      "p50_ms": 24174.59,
+      "p95_ms": 68382.2,
+      "mean_ms": 36836.94,
+      "min_ms": 7815.83,
+      "max_ms": 225779.28,
       "per_sample": [
         {
           "sample_id": 0,
-          "latency_ms": 17861.09191599826,
-          "tokens_out": 404,
+          "latency_ms": 37482.805542007554,
+          "tokens_out": 459,
           "extracted": [
             "integrate",
             "send",
@@ -78,8 +275,129 @@
         },
         {
           "sample_id": 1,
-          "latency_ms": 9411.035708006239,
-          "tokens_out": 394,
+          "latency_ms": 41780.405790996156,
+          "tokens_out": 638,
+          "extracted": [
+            "newsletter"
+          ],
+          "expected": [
+            "newsletter",
+            "read"
+          ]
+        },
+        {
+          "sample_id": 2,
+          "latency_ms": 52848.06729199772,
+          "tokens_out": 586,
+          "extracted": [
+            "pay"
+          ],
+          "expected": [
+            "urgent",
+            "pay"
+          ]
+        },
+        {
+          "sample_id": 3,
+          "latency_ms": 68382.19858299999,
+          "tokens_out": 353,
+          "extracted": [
+            "promotional"
+          ],
+          "expected": [
+            "promotional",
+            "archive"
+          ]
+        },
+        {
+          "sample_id": 4,
+          "latency_ms": 43548.50558299222,
+          "tokens_out": 443,
+          "extracted": [
+            "reschedule"
+          ],
+          "expected": [
+            "followup",
+            "reschedule",
+            "reply"
+          ]
+        },
+        {
+          "sample_id": 5,
+          "latency_ms": 50482.688957999926,
+          "tokens_out": 789,
+          "extracted": [],
+          "expected": [
+            "urgent",
+            "investigate",
+            "fix"
+          ]
+        },
+        {
+          "sample_id": 6,
+          "latency_ms": 37138.9034169988,
+          "tokens_out": 630,
+          "extracted": [
+            "attend"
+          ],
+          "expected": [
+            "urgent",
+            "attend"
+          ]
+        },
+        {
+          "sample_id": 7,
+          "latency_ms": 225779.28258301108,
+          "tokens_out": 649,
+          "extracted": [],
+          "expected": [
+            "promotional",
+            "archive"
+          ]
+        },
+        {
+          "sample_id": 8,
+          "latency_ms": 39612.78037499869,
+          "tokens_out": 378,
+          "extracted": [
+            "draft"
+          ],
+          "expected": [
+            "followup",
+            "draft",
+            "schedule"
+          ]
+        },
+        {
+          "sample_id": 9,
+          "latency_ms": 10140.229541008011,
+          "tokens_out": 467,
+          "extracted": [
+            "upgrade"
+          ],
+          "expected": [
+            "followup",
+            "review",
+            "upgrade"
+          ]
+        },
+        {
+          "sample_id": 10,
+          "latency_ms": 13217.865958999027,
+          "tokens_out": 635,
+          "extracted": [
+            "review"
+          ],
+          "expected": [
+            "followup",
+            "review",
+            "reply"
+          ]
+        },
+        {
+          "sample_id": 11,
+          "latency_ms": 9227.907833002973,
+          "tokens_out": 431,
           "extracted": [
             "newsletter",
             "read"
@@ -90,13 +408,977 @@
           ]
         },
         {
-          "sample_id": 2,
-          "latency_ms": 18091.651583003113,
-          "tokens_out": 768,
+          "sample_id": 12,
+          "latency_ms": 9425.710874987999,
+          "tokens_out": 428,
+          "extracted": [
+            "verify"
+          ],
+          "expected": [
+            "urgent",
+            "verify"
+          ]
+        },
+        {
+          "sample_id": 13,
+          "latency_ms": 7815.8344170078635,
+          "tokens_out": 360,
+          "extracted": [
+            "promotional"
+          ],
+          "expected": [
+            "promotional",
+            "archive"
+          ]
+        },
+        {
+          "sample_id": 14,
+          "latency_ms": 11005.748374998802,
+          "tokens_out": 516,
+          "extracted": [],
+          "expected": [
+            "archive",
+            "read"
+          ]
+        },
+        {
+          "sample_id": 15,
+          "latency_ms": 8473.664999997709,
+          "tokens_out": 389,
+          "extracted": [],
+          "expected": [
+            "followup",
+            "reply"
+          ]
+        },
+        {
+          "sample_id": 16,
+          "latency_ms": 24174.58695798996,
+          "tokens_out": 1139,
           "extracted": [],
           "expected": [
             "urgent",
-            "pay"
+            "investigate",
+            "page"
+          ]
+        },
+        {
+          "sample_id": 17,
+          "latency_ms": 20311.39033299405,
+          "tokens_out": 938,
+          "extracted": [
+            "read"
+          ],
+          "expected": [
+            "newsletter",
+            "read"
+          ]
+        },
+        {
+          "sample_id": 18,
+          "latency_ms": 12000.111625005957,
+          "tokens_out": 556,
+          "extracted": [
+            "review",
+            "submit"
+          ],
+          "expected": [
+            "followup",
+            "review",
+            "submit"
+          ]
+        },
+        {
+          "sample_id": 19,
+          "latency_ms": 13890.188791003311,
+          "tokens_out": 634,
+          "extracted": [
+            "download"
+          ],
+          "expected": [
+            "archive",
+            "download"
+          ]
+        }
+      ]
+    }
+  },
+  "financial_analysis": {
+    "phi4-mini-reasoning": {
+      "machine": "mac_mini",
+      "samples": 20,
+      "quality": 0.9,
+      "p50_ms": 24598.61,
+      "p95_ms": 80590.3,
+      "mean_ms": 30873.16,
+      "min_ms": 10685.0,
+      "max_ms": 85622.57,
+      "per_sample": [
+        {
+          "sample_id": 0,
+          "latency_ms": 25577.678082991042,
+          "tokens_out": 826,
+          "extracted": [
+            "groceries"
+          ],
+          "expected": [
+            "groceries"
+          ]
+        },
+        {
+          "sample_id": 1,
+          "latency_ms": 27667.33108399785,
+          "tokens_out": 1303,
+          "extracted": [
+            "review",
+            "subscriptions"
+          ],
+          "expected": [
+            "subscriptions",
+            "review"
+          ]
+        },
+        {
+          "sample_id": 2,
+          "latency_ms": 19907.67645800952,
+          "tokens_out": 820,
+          "extracted": [
+            "transport"
+          ],
+          "expected": [
+            "transport"
+          ]
+        },
+        {
+          "sample_id": 3,
+          "latency_ms": 27479.674375004834,
+          "tokens_out": 819,
+          "extracted": [
+            "utilities"
+          ],
+          "expected": [
+            "utilities"
+          ]
+        },
+        {
+          "sample_id": 4,
+          "latency_ms": 24598.613750000368,
+          "tokens_out": 641,
+          "extracted": [
+            "dining"
+          ],
+          "expected": [
+            "dining"
+          ]
+        },
+        {
+          "sample_id": 5,
+          "latency_ms": 43200.50791700487,
+          "tokens_out": 1124,
+          "extracted": [
+            "review",
+            "subscriptions"
+          ],
+          "expected": [
+            "subscriptions",
+            "review"
+          ]
+        },
+        {
+          "sample_id": 6,
+          "latency_ms": 80590.29870899394,
+          "tokens_out": 1700,
+          "extracted": [
+            "transfer"
+          ],
+          "expected": [
+            "transfer"
+          ]
+        },
+        {
+          "sample_id": 7,
+          "latency_ms": 18487.717916999827,
+          "tokens_out": 467,
+          "extracted": [
+            "review",
+            "subscriptions"
+          ],
+          "expected": [
+            "subscriptions",
+            "review"
+          ]
+        },
+        {
+          "sample_id": 8,
+          "latency_ms": 85622.57395900087,
+          "tokens_out": 1923,
+          "extracted": [
+            "entertainment"
+          ],
+          "expected": [
+            "entertainment"
+          ]
+        },
+        {
+          "sample_id": 9,
+          "latency_ms": 73365.11475000589,
+          "tokens_out": 1815,
+          "extracted": [],
+          "expected": [
+            "health"
+          ]
+        },
+        {
+          "sample_id": 10,
+          "latency_ms": 23978.368957992643,
+          "tokens_out": 1039,
+          "extracted": [
+            "travel"
+          ],
+          "expected": [
+            "travel"
+          ]
+        },
+        {
+          "sample_id": 11,
+          "latency_ms": 14784.840207998059,
+          "tokens_out": 789,
+          "extracted": [
+            "dining"
+          ],
+          "expected": [
+            "dining"
+          ]
+        },
+        {
+          "sample_id": 12,
+          "latency_ms": 13467.166332993656,
+          "tokens_out": 729,
+          "extracted": [
+            "utilities"
+          ],
+          "expected": [
+            "utilities"
+          ]
+        },
+        {
+          "sample_id": 13,
+          "latency_ms": 16619.790666009067,
+          "tokens_out": 876,
+          "extracted": [
+            "shopping"
+          ],
+          "expected": [
+            "shopping"
+          ]
+        },
+        {
+          "sample_id": 14,
+          "latency_ms": 10685.0021249993,
+          "tokens_out": 581,
+          "extracted": [
+            "review",
+            "subscriptions"
+          ],
+          "expected": [
+            "subscriptions",
+            "review"
+          ]
+        },
+        {
+          "sample_id": 15,
+          "latency_ms": 12626.77029200131,
+          "tokens_out": 674,
+          "extracted": [
+            "income"
+          ],
+          "expected": [
+            "income"
+          ]
+        },
+        {
+          "sample_id": 16,
+          "latency_ms": 14727.440832997672,
+          "tokens_out": 792,
+          "extracted": [
+            "housing"
+          ],
+          "expected": [
+            "housing"
+          ]
+        },
+        {
+          "sample_id": 17,
+          "latency_ms": 25657.678458999726,
+          "tokens_out": 1292,
+          "extracted": [],
+          "expected": [
+            "transport"
+          ]
+        },
+        {
+          "sample_id": 18,
+          "latency_ms": 17481.984499987448,
+          "tokens_out": 926,
+          "extracted": [
+            "groceries"
+          ],
+          "expected": [
+            "groceries"
+          ]
+        },
+        {
+          "sample_id": 19,
+          "latency_ms": 40937.04020899895,
+          "tokens_out": 1547,
+          "extracted": [
+            "review",
+            "subscriptions"
+          ],
+          "expected": [
+            "subscriptions",
+            "review"
+          ]
+        }
+      ]
+    },
+    "gemma4:e4b": {
+      "machine": "mac_mini",
+      "samples": 20,
+      "quality": 0.8,
+      "p50_ms": 17787.46,
+      "p95_ms": 23438.42,
+      "mean_ms": 17331.03,
+      "min_ms": 8789.76,
+      "max_ms": 29195.25,
+      "per_sample": [
+        {
+          "sample_id": 0,
+          "latency_ms": 29195.253208003123,
+          "tokens_out": 852,
+          "extracted": [
+            "groceries"
+          ],
+          "expected": [
+            "groceries"
+          ]
+        },
+        {
+          "sample_id": 1,
+          "latency_ms": 17401.74937499978,
+          "tokens_out": 760,
+          "extracted": [
+            "review",
+            "subscriptions"
+          ],
+          "expected": [
+            "subscriptions",
+            "review"
+          ]
+        },
+        {
+          "sample_id": 2,
+          "latency_ms": 16416.01833299501,
+          "tokens_out": 776,
+          "extracted": [],
+          "expected": [
+            "transport"
+          ]
+        },
+        {
+          "sample_id": 3,
+          "latency_ms": 15798.938666994218,
+          "tokens_out": 684,
+          "extracted": [
+            "utilities"
+          ],
+          "expected": [
+            "utilities"
+          ]
+        },
+        {
+          "sample_id": 4,
+          "latency_ms": 17880.948416990577,
+          "tokens_out": 827,
+          "extracted": [
+            "dining"
+          ],
+          "expected": [
+            "dining"
+          ]
+        },
+        {
+          "sample_id": 5,
+          "latency_ms": 13910.331833001692,
+          "tokens_out": 646,
+          "extracted": [
+            "review",
+            "subscriptions"
+          ],
+          "expected": [
+            "subscriptions",
+            "review"
+          ]
+        },
+        {
+          "sample_id": 6,
+          "latency_ms": 16941.619125005673,
+          "tokens_out": 759,
+          "extracted": [
+            "transfer"
+          ],
+          "expected": [
+            "transfer"
+          ]
+        },
+        {
+          "sample_id": 7,
+          "latency_ms": 8789.75820800406,
+          "tokens_out": 376,
+          "extracted": [],
+          "expected": [
+            "subscriptions",
+            "review"
+          ]
+        },
+        {
+          "sample_id": 8,
+          "latency_ms": 17511.52645899856,
+          "tokens_out": 791,
+          "extracted": [
+            "entertainment"
+          ],
+          "expected": [
+            "entertainment"
+          ]
+        },
+        {
+          "sample_id": 9,
+          "latency_ms": 13842.343792013708,
+          "tokens_out": 640,
+          "extracted": [],
+          "expected": [
+            "health"
+          ]
+        },
+        {
+          "sample_id": 10,
+          "latency_ms": 19814.83987500542,
+          "tokens_out": 917,
+          "extracted": [
+            "travel"
+          ],
+          "expected": [
+            "travel"
+          ]
+        },
+        {
+          "sample_id": 11,
+          "latency_ms": 19353.96970900183,
+          "tokens_out": 850,
+          "extracted": [
+            "dining"
+          ],
+          "expected": [
+            "dining"
+          ]
+        },
+        {
+          "sample_id": 12,
+          "latency_ms": 18170.620250006323,
+          "tokens_out": 934,
+          "extracted": [
+            "utilities"
+          ],
+          "expected": [
+            "utilities"
+          ]
+        },
+        {
+          "sample_id": 13,
+          "latency_ms": 17800.275208006497,
+          "tokens_out": 944,
+          "extracted": [
+            "shopping"
+          ],
+          "expected": [
+            "shopping"
+          ]
+        },
+        {
+          "sample_id": 14,
+          "latency_ms": 17787.46200000751,
+          "tokens_out": 938,
+          "extracted": [
+            "review",
+            "subscriptions"
+          ],
+          "expected": [
+            "subscriptions",
+            "review"
+          ]
+        },
+        {
+          "sample_id": 15,
+          "latency_ms": 23438.415249998798,
+          "tokens_out": 1238,
+          "extracted": [
+            "income"
+          ],
+          "expected": [
+            "income"
+          ]
+        },
+        {
+          "sample_id": 16,
+          "latency_ms": 11797.791208999115,
+          "tokens_out": 620,
+          "extracted": [
+            "housing"
+          ],
+          "expected": [
+            "housing"
+          ]
+        },
+        {
+          "sample_id": 17,
+          "latency_ms": 19454.12054201006,
+          "tokens_out": 1034,
+          "extracted": [],
+          "expected": [
+            "transport"
+          ]
+        },
+        {
+          "sample_id": 18,
+          "latency_ms": 11341.311209005653,
+          "tokens_out": 599,
+          "extracted": [
+            "groceries"
+          ],
+          "expected": [
+            "groceries"
+          ]
+        },
+        {
+          "sample_id": 19,
+          "latency_ms": 19973.21091699996,
+          "tokens_out": 1056,
+          "extracted": [
+            "review",
+            "subscriptions"
+          ],
+          "expected": [
+            "subscriptions",
+            "review"
+          ]
+        }
+      ]
+    }
+  },
+  "code_review": {
+    "phi4-mini-reasoning": {
+      "machine": "mac_mini",
+      "samples": 20,
+      "quality": 0.0,
+      "p50_ms": 50767.65,
+      "p95_ms": 126950.02,
+      "mean_ms": 55052.0,
+      "min_ms": 18985.62,
+      "max_ms": 137949.41,
+      "per_sample": [
+        {
+          "sample_id": 0,
+          "latency_ms": 63866.43791600363,
+          "tokens_out": 1615,
+          "extracted": [],
+          "expected": [
+            "sql-injection"
+          ]
+        },
+        {
+          "sample_id": 1,
+          "latency_ms": 18985.623917003977,
+          "tokens_out": 608,
+          "extracted": [],
+          "expected": [
+            "mutable-default"
+          ]
+        },
+        {
+          "sample_id": 2,
+          "latency_ms": 26592.840291006723,
+          "tokens_out": 820,
+          "extracted": [],
+          "expected": [
+            "bare-except",
+            "swallowed-exception"
+          ]
+        },
+        {
+          "sample_id": 3,
+          "latency_ms": 36962.46441701078,
+          "tokens_out": 1158,
+          "extracted": [],
+          "expected": [
+            "resource-leak"
+          ]
+        },
+        {
+          "sample_id": 4,
+          "latency_ms": 75695.20637500682,
+          "tokens_out": 2242,
+          "extracted": [],
+          "expected": [
+            "unbounded-loop",
+            "no-exit-condition"
+          ]
+        },
+        {
+          "sample_id": 5,
+          "latency_ms": 19068.055916999583,
+          "tokens_out": 677,
+          "extracted": [],
+          "expected": [
+            "missing-zero-check",
+            "missing-type-hint"
+          ]
+        },
+        {
+          "sample_id": 6,
+          "latency_ms": 53904.9125409947,
+          "tokens_out": 1662,
+          "extracted": [],
+          "expected": [
+            "pickle-unsafe"
+          ]
+        },
+        {
+          "sample_id": 7,
+          "latency_ms": 44701.332666998496,
+          "tokens_out": 1434,
+          "extracted": [],
+          "expected": [
+            "shell-injection"
+          ]
+        },
+        {
+          "sample_id": 8,
+          "latency_ms": 68311.54612501268,
+          "tokens_out": 2078,
+          "extracted": [],
+          "expected": [
+            "race-condition",
+            "missing-lock"
+          ]
+        },
+        {
+          "sample_id": 9,
+          "latency_ms": 47218.71708400431,
+          "tokens_out": 1552,
+          "extracted": [],
+          "expected": [
+            "hardcoded-secret"
+          ]
+        },
+        {
+          "sample_id": 10,
+          "latency_ms": 45791.68749999371,
+          "tokens_out": 1497,
+          "extracted": [],
+          "expected": [
+            "no-timeout",
+            "no-error-handling"
+          ]
+        },
+        {
+          "sample_id": 11,
+          "latency_ms": 53393.5456249892,
+          "tokens_out": 2116,
+          "extracted": [],
+          "expected": [
+            "in-place-mutation"
+          ]
+        },
+        {
+          "sample_id": 12,
+          "latency_ms": 43068.996791000245,
+          "tokens_out": 1625,
+          "extracted": [],
+          "expected": [
+            "insecure-random"
+          ]
+        },
+        {
+          "sample_id": 13,
+          "latency_ms": 137949.41133300017,
+          "tokens_out": 3955,
+          "extracted": [],
+          "expected": [
+            "yaml-unsafe-load",
+            "resource-leak"
+          ]
+        },
+        {
+          "sample_id": 14,
+          "latency_ms": 126950.02208399819,
+          "tokens_out": 3434,
+          "extracted": [],
+          "expected": [
+            "broad-except",
+            "pointless-wrap"
+          ]
+        },
+        {
+          "sample_id": 15,
+          "latency_ms": 50767.65195799817,
+          "tokens_out": 1557,
+          "extracted": [],
+          "expected": [
+            "reinvents-sum",
+            "missing-type-hint"
+          ]
+        },
+        {
+          "sample_id": 16,
+          "latency_ms": 53348.86583300249,
+          "tokens_out": 1706,
+          "extracted": [],
+          "expected": [
+            "shell-injection",
+            "dangerous-call"
+          ]
+        },
+        {
+          "sample_id": 17,
+          "latency_ms": 58868.24312500539,
+          "tokens_out": 1820,
+          "extracted": [],
+          "expected": [
+            "class-mutable-state",
+            "shared-default"
+          ]
+        },
+        {
+          "sample_id": 18,
+          "latency_ms": 36951.11475000158,
+          "tokens_out": 1270,
+          "extracted": [],
+          "expected": [
+            "is-literal-comparison"
+          ]
+        },
+        {
+          "sample_id": 19,
+          "latency_ms": 38643.379000001005,
+          "tokens_out": 1321,
+          "extracted": [],
+          "expected": [
+            "logs-secret",
+            "string-concat-log"
+          ]
+        }
+      ]
+    },
+    "gemma4:e4b": {
+      "machine": "mac_mini",
+      "samples": 20,
+      "quality": 0.0,
+      "p50_ms": 19138.88,
+      "p95_ms": 23033.82,
+      "mean_ms": 18302.73,
+      "min_ms": 9687.95,
+      "max_ms": 34783.07,
+      "per_sample": [
+        {
+          "sample_id": 0,
+          "latency_ms": 20057.143957994413,
+          "tokens_out": 666,
+          "extracted": [],
+          "expected": [
+            "sql-injection"
+          ]
+        },
+        {
+          "sample_id": 1,
+          "latency_ms": 19787.379333007266,
+          "tokens_out": 976,
+          "extracted": [],
+          "expected": [
+            "mutable-default"
+          ]
+        },
+        {
+          "sample_id": 2,
+          "latency_ms": 19138.88408400817,
+          "tokens_out": 886,
+          "extracted": [],
+          "expected": [
+            "bare-except",
+            "swallowed-exception"
+          ]
+        },
+        {
+          "sample_id": 3,
+          "latency_ms": 14473.459665998234,
+          "tokens_out": 685,
+          "extracted": [],
+          "expected": [
+            "resource-leak"
+          ]
+        },
+        {
+          "sample_id": 4,
+          "latency_ms": 17802.578791000997,
+          "tokens_out": 819,
+          "extracted": [],
+          "expected": [
+            "unbounded-loop",
+            "no-exit-condition"
+          ]
+        },
+        {
+          "sample_id": 5,
+          "latency_ms": 9687.946542006102,
+          "tokens_out": 440,
+          "extracted": [],
+          "expected": [
+            "missing-zero-check",
+            "missing-type-hint"
+          ]
+        },
+        {
+          "sample_id": 6,
+          "latency_ms": 22367.02329199761,
+          "tokens_out": 1065,
+          "extracted": [],
+          "expected": [
+            "pickle-unsafe"
+          ]
+        },
+        {
+          "sample_id": 7,
+          "latency_ms": 34783.07454100286,
+          "tokens_out": 1619,
+          "extracted": [],
+          "expected": [
+            "shell-injection"
+          ]
+        },
+        {
+          "sample_id": 8,
+          "latency_ms": 14334.091625001747,
+          "tokens_out": 639,
+          "extracted": [],
+          "expected": [
+            "race-condition",
+            "missing-lock"
+          ]
+        },
+        {
+          "sample_id": 9,
+          "latency_ms": 10785.598375005065,
+          "tokens_out": 504,
+          "extracted": [],
+          "expected": [
+            "hardcoded-secret"
+          ]
+        },
+        {
+          "sample_id": 10,
+          "latency_ms": 23033.81537500536,
+          "tokens_out": 1070,
+          "extracted": [],
+          "expected": [
+            "no-timeout",
+            "no-error-handling"
+          ]
+        },
+        {
+          "sample_id": 11,
+          "latency_ms": 20836.8044589879,
+          "tokens_out": 964,
+          "extracted": [],
+          "expected": [
+            "in-place-mutation"
+          ]
+        },
+        {
+          "sample_id": 12,
+          "latency_ms": 20311.131541995564,
+          "tokens_out": 907,
+          "extracted": [],
+          "expected": [
+            "insecure-random"
+          ]
+        },
+        {
+          "sample_id": 13,
+          "latency_ms": 22459.312834005686,
+          "tokens_out": 1065,
+          "extracted": [],
+          "expected": [
+            "yaml-unsafe-load",
+            "resource-leak"
+          ]
+        },
+        {
+          "sample_id": 14,
+          "latency_ms": 12907.296040997608,
+          "tokens_out": 598,
+          "extracted": [],
+          "expected": [
+            "broad-except",
+            "pointless-wrap"
+          ]
+        },
+        {
+          "sample_id": 15,
+          "latency_ms": 18093.81420900172,
+          "tokens_out": 797,
+          "extracted": [],
+          "expected": [
+            "reinvents-sum",
+            "missing-type-hint"
+          ]
+        },
+        {
+          "sample_id": 16,
+          "latency_ms": 18194.08512499649,
+          "tokens_out": 763,
+          "extracted": [],
+          "expected": [
+            "shell-injection",
+            "dangerous-call"
+          ]
+        },
+        {
+          "sample_id": 17,
+          "latency_ms": 13185.001332996762,
+          "tokens_out": 556,
+          "extracted": [],
+          "expected": [
+            "class-mutable-state",
+            "shared-default"
+          ]
+        },
+        {
+          "sample_id": 18,
+          "latency_ms": 21647.526542001287,
+          "tokens_out": 991,
+          "extracted": [],
+          "expected": [
+            "is-literal-comparison"
+          ]
+        },
+        {
+          "sample_id": 19,
+          "latency_ms": 12168.699375004508,
+          "tokens_out": 529,
+          "extracted": [],
+          "expected": [
+            "logs-secret",
+            "string-concat-log"
           ]
         }
       ]

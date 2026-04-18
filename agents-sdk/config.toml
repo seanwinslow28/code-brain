@@ -150,7 +150,7 @@ port = 11434
 tier = 1
 runtime = "ollama"
 always_on = true
-models = ["phi4-mini-reasoning", "phi4-mini", "nomic-embed-text"]
+models = ["phi4-mini-reasoning", "phi4-mini", "nomic-embed-text", "gemma4:e4b"]
 
 [routing.machines.macbook_pro]
 host = "192.168.68.50"
@@ -172,7 +172,10 @@ models = ["Qwen3-VL-7B"]
 
 # Task → model → machine mapping
 [routing.task_map]
-inbox_triage = { model = "phi4-mini-reasoning", machine = "mac_mini" }
+# inbox_triage swapped 2026-04-18 (Phase 6 A.7): gemma4:e4b beat phi4-mini-
+# reasoning +7.5pp quality / +57% p50 speedup on the N=20 golden set. Both
+# stay on Mac Mini via Ollama — no MBP dependency.
+inbox_triage = { model = "gemma4:e4b", machine = "mac_mini" }
 vault_embeddings = { model = "nomic-embed-text", machine = "mac_mini" }
 anki_cards = { model = "phi4-mini", machine = "mac_mini" }
 financial_analysis = { model = "qwen3-14b", machine = "macbook_pro" }
