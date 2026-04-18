@@ -5,6 +5,77 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.13.1] - 2026-04-18
+
+### Results — Phase 1 Autoresearch (150 trials, Illustrious XL v2.0)
+
+Full 150-trial run completed overnight on the Alienware RTX 5080. All trials succeeded (0 failures, 0 timeouts). Total runtime ~5.3 hrs.
+
+**Best trial (#16): composite 0.8163** — SpaceCandy LoRA (str_model 0.556, str_clip 0.389), IP-Adapter FaceID weight 0.76, weight_faceidv2 1.20, weight_type `composition`, ControlNet strength 0.86 / end_percent 0.37, pose `ryu_walk_up.png`, sampler `euler`, scheduler `exponential`, CFG 6.0, steps 25, seed 2662995976.
+
+**Score distribution:** mean 0.6357, median 0.6358, range 0.4207–0.8163.
+
+**Convergence signals (top 20 trials):**
+- `ipadapter_weight_type = composition` — 20/20 (100%, hard winner)
+- `lora_name = SpaceCandy_SpriteSheet_v1_ILXL` — 18/20 (90%)
+- `pose_frame = ryu_walk_up.png` — 13/20 (65%)
+- `sampler_name = euler` — 11/20
+- `scheduler = exponential` — 10/20
+
+**Systemic ceiling — character consistency stuck at 1–2/5:** Every top-scoring trial earned 5/5 on silhouette, pose accuracy, pixel art discipline, proportions, and line work — but capped at 2/5 on character consistency against Sean's anchor. VLM feedback across trials: "different gender," "wrong outfit/hair," "robot vs human," "tail," etc. Root cause almost certainly the anchor itself (`champion_sean_anchor-1.png` is 2752×1536, likely a sprite sheet not a face crop) — IP-Adapter FaceID wants a clean face crop for InsightFace to extract a usable embedding. Composite ceiling is ~0.82 until character grounding is fixed. Phase 0 best was 0.8448.
+
+### Decision — Pausing SDXL-era autoresearch
+
+After eyeballing the top-5 sprites from this run, Sean's judgment: **output quality looks like 2019–2020-era image generation**. Not worth further investment in optimizing SDXL / Illustrious XL / SDXL-based LoRAs within this autoresearch loop. Community praise for these models doesn't outweigh the visible quality gap against modern foundation models.
+
+**No more SDXL-era autoresearch.** The 14-parameter search space was a correct optimization target for the wrong underlying model. The autoresearch infrastructure itself (Optuna loop, workflow mutator, 5-tier scorer, VLM judge with face-grounded rubric) is sound and transferable.
+
+### Next direction — Evaluate newer open-source image models
+
+Candidates to investigate before restarting any autoresearch:
+
+- **Z-Image-Turbo** (Tongyi-MAI / Alibaba) — https://huggingface.co/Tongyi-MAI/Z-Image-Turbo
+- **ERNIE-Image-Turbo (GGUF)** (Unsloth quantization of Baidu's ERNIE) — https://huggingface.co/unsloth/ERNIE-Image-Turbo-GGUF. SETUP-NOTES previously flagged ERNIE as not viable due to 24 GB VRAM requirement and no ComfyUI integration; GGUF quantization may change the VRAM calculus, and ComfyUI support may have landed since that evaluation. Worth re-checking.
+- Closed-source comparison targets for quality calibration (not for pipeline use): Nano Banana 2, GPT Image 1.5.
+
+For each candidate, before building any mutator/search space, verify:
+1. RTX 5080 (16 GB VRAM, sm_120, no xformers) compatibility
+2. ComfyUI node support (or alternative runtime — diffusers direct, custom API)
+3. ControlNet + character-conditioning equivalents (IP-Adapter FaceID, reference image support)
+4. LoRA / fine-tuning ecosystem maturity (for Sean-specific training later)
+
+### Kept (infrastructure, not deprecated)
+
+- `autoresearch/runner.py` Phase 1 branch, preflight, Optuna loop, CSV/DB lockstep — reusable for any new model backend.
+- `autoresearch/workflow_mutator.py` mutate function — reusable pattern for any ComfyUI-based workflow.
+- `autoresearch/prepare.py` 5-tier scorer with face-grounded VLM rubric — reusable regardless of which image model generates the sprite.
+- 150 trial artifacts at `results/phase1/` — keep as ground truth for "SDXL/Illustrious XL ceiling on this workflow, at this hardware, judged by this rubric" benchmark. Do not delete.
+
+## [3.13.0] - 2026-04-17
+
+### Changed
+
+- **Autoresearch Phase 1 scoring rubric reworked for single-pose sprites.** Phase 0 used a walk-cycle rubric in `prepare.py` (leg variety, pose flow, weight shift, arm swing, character consistency, size consistency) because its outputs were multi-frame sheets. Phase 1 generates one posed sprite per trial via ControlNet+IP-Adapter, so motion-progression axes are unscorable — the VLM was giving arbitrary low scores on arm swing / weight shift regardless of sprite quality, adding ~half-noise to the VLM signal. Rubric replaced with six Phase 1-appropriate axes: **silhouette readability, pose accuracy, pixel art discipline, character consistency, proportions, line work**. Three coordinated changes in `16bitfit-battle-mode/autoresearch/prepare.py`:
+  - `WALK_WEIGHTS` dict updated with new keys and weights (silhouette 0.25, pose 0.20, pixel 0.20, character 0.15, proportions 0.10, line 0.10)
+  - `OllamaVLMAdapter.score_walk_cycle` compact_prompt rewritten (kept terse to stay under the 180s Qwen3-VL:8b timeout; a verbose first draft ran past 180s)
+  - `_parse_vlm_response` label_map updated so the keyword→key mapping matches new axes
+- **Autoresearch Phase 1 downscale bypass.** `prepare.py::_preprocess_frames` nearest-neighbor-resizes frames to `tile_size` (128 for champions) before scoring. That masked quality differences between 1024×1024 ComfyUI outputs. Phase 1 runner now sets `scorer.tile_size` to the workflow's native latent resolution, making preprocess a no-op so the optimizer judges full-quality sprites. Downscale to production tiles is handled manually in Photoshop downstream.
+- **Autoresearch Phase 1 VLM host + timeout.** `AutoresearchScorer(...)` call in `runner.run_phase1` now passes `alienware_host="127.0.0.1"` (loopback — scorer runs on the Alienware itself) and `vlm_timeout=300` (was 30, which timed out on every call; bumped from an intermediate 180 after anchor image was added, which pushed latency to ~160–210s per call).
+- **VLM now receives the character anchor image.** `OllamaVLMAdapter.score_walk_cycle` was accepting an `anchor_image` bytes arg but never sending it; `_tier4_vlm_judge` was passing `b""`. Fixed both: scorer loads the first anchor from `references/anchors/champions/<Character>/`, Lanczos-downscales to ≤768px longest edge (gold-standard photo downscale — preserves edges without ringing or blur; 768 keeps Sean's face at ~200px), caches bytes on the scorer instance. Adapter sends anchor + generated sprite as two images and uses a branched prompt that labels them ("Image 1 is the character reference. Image 2 is the generated sprite.") so character_consistency is evaluated against Sean's actual reference instead of the model's imagined character from the text prompt. In a verification trial, character_consistency went from a blind 5/5 to a grounded 1/5 with specific actionable feedback ("tank top vs. shirtless, blue pants vs. tan, blonde vs. brown hair") — the exact signal the optimizer needs.
+
+### Added
+
+- **Autoresearch Phase 1 Optuna loop** (`autoresearch/runner.py` `run_phase1`). 14-param search space (LoRA selection + strengths, IP-Adapter weights, ControlNet strength/end_percent, sampler/scheduler/CFG/steps/seed, pose frame) defined in `autoresearch/search_space.py` (`PHASE1_PARAMS` + `suggest_phase1`). Workflow mutator in `autoresearch/workflow_mutator.py` (`mutate_phase1_sprite_gen`) targets the exact node IDs in `phase1_sprite_gen.json` per `SETUP-NOTES.md`. Hard rules enforced: SF3XL LoRA banned (broken on Illustrious XL v2.0 at strength > 0.15), `cn_end_percent` capped at 0.7 (higher renders skeleton literally into output), `lora_name="none"` bypasses LoRA by zeroing strengths.
+- **Pre-flight health check** in Phase 1 runner: ComfyUI `/system_stats` reachability, VRAM free ≥10 GB warning, pose-skeleton sync into `ComfyUI/input/`, model-file presence check for LoRAs / ControlNet / IP-Adapter.
+- **Resumable Optuna study** at `results/phase1/phase1.db` (study name `phase1_sprite_v1`). Supports `--resume` flag.
+- **Per-trial artifacts** at `results/phase1/trials/trial_NNNN/`: `sprite.png` (1024×1024 ComfyUI output), `params.json` (sampled Optuna params), `score.json` (all 5 scoring tiers). Plus aggregate `trials.csv`.
+- **CSV writes moved to Optuna post-persist callback** so `trials.csv` and `phase1.db` stay in lockstep even if the process is killed mid-trial. Previously a crash between CSV write and Optuna's DB flush could leave CSV one row ahead of DB, causing duplicate rows on `--resume`.
+
+### Known Limitations
+
+- Phase 0 scoring is no longer backward-compatible after the `WALK_WEIGHTS` key rename. Phase 0's best-of-N run artifacts already exist with the old rubric — re-scoring them would require reverting this commit.
+- Only the first of three available Sean anchors (`champion_sean_anchor-1.png`) is sent to the VLM. Multi-anchor comparison would give the VLM more angles to judge against but would also multiply per-call latency. Deferred.
+
 ## [3.12.3] - 2026-04-09
 
 ### Changed
