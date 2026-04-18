@@ -5,6 +5,8 @@
 **Execution host:** MacBook Pro M4 Pro 48GB (this machine) for all dev, tests, and MLX-LM synthesis/benchmarks. Mac Mini hosts launchd + Ollama + always-on orchestration. Alienware is a read-only D.4 consumer.
 **Plan authors:** Claude Opus 4.7 · merge of `phase6-gemma4-benchmarking-and-knowledge-compounding-loop.md` (Apr 16) + `phase6-implementation-plan-2026-04-17.md` (Apr 17).
 
+**Revision note (2026-04-18):** Workstream E (Fleet Self-Monitoring / Meta-Agent) retroactively adopted into this plan. The meta-agent was built and deployed between the Apr 17 plan authoring and the Apr 18 audit; it is the natural complement to Workstream D (D writes knowledge; E observes fleet health). See §E.
+
 ---
 
 ## Context
@@ -13,8 +15,9 @@ Phases 1–5 shipped the agent fleet (2 active after the April 9 downsizing), th
 
 1. **Workstream A — Gemma 4 model swap.** Gemma 4's 6 native function-calling tokens and 27B-MoE/3.8B-active efficiency make it a credible replacement for `phi4-mini-reasoning` (Mac Mini) and benchmark challenger to `Qwen3-14B` (MacBook Pro). Veto gate: ≥5% quality regression = keep incumbent.
 2. **Workstream D — Knowledge Compounding Loop.** Four components (SessionEnd flush → Vault Synthesizer v2 → Knowledge Lint → autoresearch feedback) convert the vault from static archive into a living knowledge graph (Karpathy LLM-Wiki + claude-memory-compiler pattern) that feeds Phase 5 autoresearch.
+3. **Workstream E — Fleet Self-Monitoring (added 2026-04-18).** A local, zero-cost Meta-Agent that runs each morning before Daily Driver, verifies agent-fleet and infrastructure health, and publishes a fleet-status note that surfaces in the morning brief. Closes the observability gap left by the April 9 downsizing. See §E.
 
-All Phase 6 code runs 100% local ($0.00 API). Adds 3 agents + 1 hook to the fleet (14 steady-state). Respects April 9 audit: no new launchd MCP dependencies.
+All Phase 6 code runs 100% local ($0.00 API). Adds 4 agents + 1 hook to the fleet (15 steady-state: 2 pre-existing + flush + synthesizer + lint + meta-agent). Respects April 9 audit: no new launchd MCP dependencies.
 
 **Previously-resolved ambiguities (locked):**
 - A and D run in **parallel**, not serially.
@@ -30,6 +33,7 @@ All Phase 6 code runs 100% local ($0.00 API). Adds 3 agents + 1 hook to the flee
 4. Vault Indexer v2 producing ≥2 concept + ≥1 connection article per nightly run
 5. Knowledge Lint ≥95% recall on synthetic test vault
 6. Autoresearch convergence improves ≥10% (trials-to-best-fitness)
+7. **Meta-Agent produces ≥5 fleet-status artifacts in any 7-day window, with ≥1 containing an actionable alert that surfaced in the Daily Driver morning brief.**
 
 Every bullet maps to ≥1 task below.
 
@@ -317,6 +321,89 @@ Plan assumes **(b)** — safer for robustness. Easy to simplify to (a) if Sean p
 
 ---
 
+## E. Workstream E — Fleet Self-Monitoring (Meta-Agent)
+
+**Status at adoption (2026-04-18):** Already implemented, deployed, dry-run verified. This section retroactively documents the component to match the rigor of A and D.
+
+### E.0 Motivation
+
+The April 9 audit left two active agents (`vault_indexer`, `daily_driver`) and six disabled. Phase 6 D adds three more writers (`flush`, `vault_synthesizer`, `knowledge_lint`) — growing the fleet to five active. Without a monitor, silent failures (the same class of failure that produced the April 9 audit) will recur.
+
+Meta-Agent closes the loop: a morning health check that verifies each active agent ran successfully in the last 24 hours, checks the three-machine infrastructure (Mac Mini Ollama, Alienware Ollama + ComfyUI), and writes a human-readable status note into the vault. The Daily Driver morning brief surfaces any alerts.
+
+### E.1 Spec
+
+| Field | Value |
+|---|---|
+| Path | [agents-sdk/agents/meta_agent.py](../../../agents-sdk/agents/meta_agent.py) |
+| Plist | [agents-sdk/schedules/com.sean.agent.meta-agent.plist](../../../agents-sdk/schedules/com.sean.agent.meta-agent.plist) |
+| Machine | Mac Mini |
+| Model | `phi4-mini-reasoning` (Ollama, local) — inference only for summary polish; most logic is deterministic Python |
+| Schedule | 08:35 daily (10 minutes before Daily Driver at 08:45) |
+| Safety | MAX_TURNS=10, MAX_BUDGET_USD=$0.10 (hard-coded in script; plist invokes script directly — no CLI budget flags) |
+| Cost | $0.00 (local) |
+| Deliverable | `vault/02_Areas/Agent-Fleet/daily-fleet-status-YYYY-MM-DD.md` + update `vault/02_Areas/Agent-Fleet/fleet-state.md` |
+| Config section | `[agents.meta_agent]` in [agents-sdk/config.toml](../../../agents-sdk/config.toml), `enabled = true` |
+
+### E.2 Health Checks
+
+1. **Per-agent 24h recency check** — reads `vault/90_system/agent-logs/agent-run-history.csv`, confirms each `ACTIVE_AGENTS` entry ran in the last 24h with `status=success`.
+2. **Infrastructure probes** — HTTP HEAD `{MINI_IP}:11434` (Mac Mini Ollama), `{ALIENWARE_IP}:11434` (Alienware Ollama), `{ALIENWARE_IP}:8188` (ComfyUI). Times out at 3s. Alienware being asleep is not an alert — WOL-on-demand is expected.
+3. **Disabled-agent drift guard** — hard-coded `DISABLED_AGENT_COUNT = 6` per audit. If any disabled agent shows a `status=success` within 24h, raise a CRITICAL alert (someone re-enabled an agent without updating the audit).
+4. **Alert surface** — any non-healthy finding → write to fleet-status note's "## Alerts" section → Daily Driver morning preamble pulls the most recent status file's alerts.
+
+### E.3 Dependencies & Integration
+
+- **Upstream:** depends on [agents-sdk/lib/logging_setup.py](../../../agents-sdk/lib/logging_setup.py)'s `record_run` CSV schema (already present).
+- **Downstream (small modification to D.1 D.2 D.3):** each new Phase 6 agent's `record_run` call must include a consistent `agent_name` so Meta-Agent's per-agent recency check can match. Already satisfied — all three use the `AGENT_NAME` module constant.
+- **No MCP dependencies** — pure file-reads + `httpx` for local LAN probes. Aligns with April 9 audit rule.
+- **No WOL trigger** — Meta-Agent does not wake Alienware or MacBook Pro. Not finding them up is just "asleep, skipping probe" in the report, not a failure.
+
+### E.4 Test Strategy
+
+| Test file | Cases |
+|---|---|
+| `tests/test_meta_agent.py` | `test_recency_check_detects_stale_agent`, `test_recency_check_passes_on_fresh_run`, `test_infra_probe_timeouts_handled`, `test_disabled_agent_drift_raises_critical`, `test_fleet_status_markdown_structure`, `test_dry_run_does_not_write` |
+
+Fixtures: synthetic `agent-run-history.csv` with mixed timestamps; mock `httpx` for infra probes.
+
+### E.5 Gate #7 Verification
+
+```bash
+# Gate: ≥5 fleet-status artifacts in any 7-day window
+find vault/02_Areas/Agent-Fleet -name "daily-fleet-status-*.md" -mtime -7 | wc -l  # ≥ 5
+
+# Gate: ≥1 artifact in the window contains an actionable alert
+grep -l "## Alerts" $(find vault/02_Areas/Agent-Fleet -name "daily-fleet-status-*.md" -mtime -7) | \
+  xargs grep -L "No alerts" | wc -l  # ≥ 1
+```
+
+Added to `agents-sdk/scripts/phase6_gatecheck.py` as criterion #7.
+
+### E.6 Rollback
+
+- `launchctl bootout gui/$(id -u) com.sean.agent.meta-agent` to unload the schedule
+- Set `enabled = false` in `[agents.meta_agent]`
+- Daily Driver preamble must degrade gracefully when no fleet-status note exists for today — falls through to the existing "no fleet status" branch (already handled by "if report exists" guard pattern from D.3.d)
+
+### E.7 Known Deviations from Pre-Existing Implementation
+
+| Item | Planned here | Current state | Action |
+|---|---|---|---|
+| Plist invocation | Script via venv python | Previously called `claude -p` with invalid flags (exit 1) | **FIXED** 2026-04-18 in commit `9f7d85b` — plist now invokes `agents/meta_agent.py` via venv, PYTHONPATH set. Verified: `python3 agents/meta_agent.py --dry-run` → exit 0. |
+| Active agents list | `["vault_indexer", "daily_driver"]` | Matches current script (line 41) | — |
+| Disabled count | 6 | Matches current script (line 42) | If Phase 6 D ships, meta_agent.py needs update: `ACTIVE_AGENTS` gains `flush`, `vault_synthesizer`, `knowledge_lint`; disabled count stays 6. Track as **§E Week 16 task**. |
+
+### E.8 Week 16 Task (post-D.3 ship)
+
+Update [agents-sdk/agents/meta_agent.py](../../../agents-sdk/agents/meta_agent.py):
+```python
+ACTIVE_AGENTS = ["vault_indexer", "daily_driver", "flush", "vault_synthesizer", "knowledge_lint", "meta_agent"]
+```
+Plus a `test_active_agents_matches_config` that reads `config.toml` and fails if divergent. ~15 min of work; gates on Week 16 D.3 completion.
+
+---
+
 ## 8. Doc-Update Checklist
 
 Per [CLAUDE.md](../../../CLAUDE.md) "When Modifying" rules:
@@ -330,7 +417,7 @@ Per [CLAUDE.md](../../../CLAUDE.md) "When Modifying" rules:
 - lib/wol.py — Wake-on-LAN + MBP health check + PushNotification helper
 - lib/gemma4_benchmark.py — multi-model benchmark harness
 - 3 golden sets (inbox_triage, financial_analysis, code_review)
-- 3 new agents: flush.py, vault_synthesizer.py, knowledge_lint.py (all $0.00 API)
+- 4 new agents: flush.py, vault_synthesizer.py, knowledge_lint.py, meta_agent.py (all $0.00 API)
 - 1 new hook: session-end-flush.sh (SessionEnd, detached, recursion-guarded)
 - Knowledge compounding loop: vault/daily/, vault/knowledge/concepts/, connections/, vault/health/
 - scripts/compare_convergence.py + scripts/phase6_gatecheck.py
@@ -345,8 +432,8 @@ Per [CLAUDE.md](../../../CLAUDE.md) "When Modifying" rules:
 
 ### `CLAUDE.md`
 
-- Intro line: **111 skills, 13 agents, 7 hooks** → **111 skills, 16 agents, 8 hooks**
-- Agents SDK table: add 3 rows (flush, vault_synthesizer, knowledge_lint) with schedule + $0.00 cost
+- Intro line: **111 skills, 13 agents, 7 hooks** → **111 skills, 13 Claude Code subagents, 11 hooks, 13 autonomous SDK agents (6 active)** (updated 2026-04-18 to reflect actual file counts)
+- Agents SDK table: add 4 rows (flush, vault_synthesizer, knowledge_lint, meta_agent) with schedule + $0.00 cost
 - [16bitfit-battle-mode/CLAUDE.md](../../CLAUDE.md) Model-to-Machine Routing: update per A.7
 
 ### `README.md`
@@ -384,6 +471,7 @@ When coding begins, load in this order on the MacBook Pro:
 ## Verification (this plan is ready when…)
 
 - [x] All SOT tasks A.1–A.7 and D.1–D.4 covered with a specific file or action
+- [x] Workstream E (Meta-Agent / Fleet Self-Monitoring) documented with spec, tests, gate, and rollback (retroactive adoption 2026-04-18)
 - [x] Every new agent is 100% local ($0.00 API)
 - [x] Zero new MCP dependencies for launchd agents (April 9 audit respected)
 - [x] Hooks use correct exit codes (0=continue, 2=deny) per CLAUDE.md
