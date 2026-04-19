@@ -1,0 +1,32 @@
+{
+  "name": "Sloth Demon",
+  "tile_size": 256,
+  "type": "boss",
+  "description": "Stocky beast, brown fur, gray armor plates, yellow eyes, clawed feet",
+  "anchor_images": [
+    "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/bosses/Sloth Demon/boss_sloth_demon_anchor-1.png",
+    "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/bosses/Sloth Demon/boss_sloth_demon_anchor-2.png",
+    "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/bosses/Sloth Demon/boss_sloth_demon_anchor-3.png"
+  ],
+  "animations": [
+    "idle",
+    "walk_forward",
+    "walk_backward",
+    "jump",
+    "crouch",
+    "light_punch",
+    "medium_punch",
+    "heavy_punch",
+    "light_kick",
+    "heavy_kick",
+    "block",
+    "take_hit",
+    "victory",
+    "defeat",
+    "special_move"
+  ],
+  "pose_overrides": {
+    "walk_forward": "lumbering forward with heavy clawed steps instead of walking",
+    "jump": "powerful beast leap with claws spread instead of standard jump"
+  }
+}

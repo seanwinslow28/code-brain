@@ -1,0 +1,3 @@
+16bitfit_style, pixel art fighting game character, idle stance, bold outlines, flat cel shading, green background, SF2 style, 128x128 sprite --n blurry, anti-aliased, gradient --w 1024 --h 1024 --l 7 --s 28
+16bitfit_style, pixel art warrior, walking forward, side view, dark outlines, retro arcade style, chroma key green --n blurry, low quality --w 1024 --h 1024 --l 7 --s 28
+16bitfit_style, pixel art fighter throwing a punch, dynamic pose, bold outlines, limited color palette, transparent background --n watermark, text, gradient --w 1024 --h 1024 --l 7 --s 28

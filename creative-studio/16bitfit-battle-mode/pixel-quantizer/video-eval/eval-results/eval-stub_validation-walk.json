@@ -1,0 +1,91 @@
+{
+  "model_name": "stub_validation",
+  "animation_type": "walk",
+  "character_name": "Sean",
+  "timestamp": "2026-04-01T14:16:20.424801",
+  "metrics": {
+    "keyframe_count": 3,
+    "extracted_frame_count": 8,
+    "avg_palette_compliance": 1.0,
+    "avg_outline_quality": 0.0,
+    "avg_background_purity": 0.875,
+    "avg_character_consistency": 0.417,
+    "overall_score": 0.646
+  },
+  "timing": {
+    "keyframe_gen_ms": 5.4,
+    "interpolation_ms": 80.8,
+    "scoring_ms": 1040.2,
+    "total_ms": 1126.4
+  },
+  "gate_check": {
+    "passed": true,
+    "reason": "Overall 64.6% >= 50%, palette 100.0% >= 60%"
+  },
+  "frame_scores": [
+    {
+      "frame": 0,
+      "palette": 1.0,
+      "outline": 0.0,
+      "background": 0.875,
+      "character": 0.417,
+      "overall": 0.646
+    },
+    {
+      "frame": 6,
+      "palette": 1.0,
+      "outline": 0.0,
+      "background": 0.875,
+      "character": 0.417,
+      "overall": 0.646
+    },
+    {
+      "frame": 12,
+      "palette": 1.0,
+      "outline": 0.0,
+      "background": 0.875,
+      "character": 0.417,
+      "overall": 0.646
+    },
+    {
+      "frame": 18,
+      "palette": 1.0,
+      "outline": 0.0,
+      "background": 0.875,
+      "character": 0.417,
+      "overall": 0.646
+    },
+    {
+      "frame": 24,
+      "palette": 1.0,
+      "outline": 0.0,
+      "background": 0.875,
+      "character": 0.417,
+      "overall": 0.646
+    },
+    {
+      "frame": 30,
+      "palette": 1.0,
+      "outline": 0.0,
+      "background": 0.875,
+      "character": 0.417,
+      "overall": 0.646
+    },
+    {
+      "frame": 36,
+      "palette": 1.0,
+      "outline": 0.0,
+      "background": 0.875,
+      "character": 0.417,
+      "overall": 0.646
+    },
+    {
+      "frame": 42,
+      "palette": 1.0,
+      "outline": 0.0,
+      "background": 0.875,
+      "character": 0.417,
+      "overall": 0.646
+    }
+  ]
+}

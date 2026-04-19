@@ -1,0 +1,33 @@
+{
+  "name": "Procrastination Phantom",
+  "tile_size": 256,
+  "type": "boss",
+  "description": "Ghostly figure, white hoodie, blue-gray skin, glowing orange eyes, spectral tail (no legs)",
+  "anchor_images": [
+    "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/bosses/Procrastination Phantom/boss_procrastination_phantom_anchor-1.png",
+    "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/bosses/Procrastination Phantom/boss_procrastination_phantom_anchor-2.png",
+    "16bitfit-battle-mode/lora-training/dataset/16BitFit-Reference-Images/bosses/Procrastination Phantom/boss_procrastination_phantom_anchor-3.png"
+  ],
+  "animations": [
+    "idle",
+    "walk_forward",
+    "walk_backward",
+    "jump",
+    "crouch",
+    "light_punch",
+    "medium_punch",
+    "heavy_punch",
+    "light_kick",
+    "heavy_kick",
+    "block",
+    "take_hit",
+    "victory",
+    "defeat",
+    "special_move"
+  ],
+  "pose_overrides": {
+    "walk_forward": "floating forward with spectral trail instead of walking",
+    "walk_backward": "floating backward with ghostly retreat instead of stepping",
+    "jump": "surging upward with spectral energy instead of jumping"
+  }
+}

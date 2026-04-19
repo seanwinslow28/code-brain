@@ -1,0 +1,22 @@
+{
+  "nano_banana_pro": {
+    "model": "Nano Banana Pro",
+    "start_ok": true,
+    "end_ok": true,
+    "start_bytes": 458737,
+    "end_bytes": 475905,
+    "start_ms": 18538.269874989055,
+    "end_ms": 18856.999124982394,
+    "avg_ms": 18697.634499985725
+  },
+  "nano_banana_2": {
+    "model": "Nano Banana 2",
+    "start_ok": true,
+    "end_ok": true,
+    "start_bytes": 462787,
+    "end_bytes": 496842,
+    "start_ms": 10876.924040989252,
+    "end_ms": 16670.30862500542,
+    "avg_ms": 13773.616332997335
+  }
+}

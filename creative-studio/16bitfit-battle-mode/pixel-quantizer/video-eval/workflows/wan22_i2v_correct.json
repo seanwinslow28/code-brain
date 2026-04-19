@@ -1,0 +1,127 @@
+{
+  "last_node_id": 12,
+  "last_link_id": 14,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [100, 100],
+      "size": [300, 80],
+      "properties": {},
+      "widgets_values": ["wan2.2_ti2v_5B_fp16.safetensors", "default"]
+    },
+    {
+      "id": 2,
+      "type": "CLIPLoader",
+      "pos": [100, 230],
+      "size": [300, 80],
+      "properties": {},
+      "widgets_values": ["umt5_xxl_fp8_e4m3fn_scaled.safetensors", "wan"]
+    },
+    {
+      "id": 3,
+      "type": "VAELoader",
+      "pos": [100, 360],
+      "size": [300, 80],
+      "properties": {},
+      "widgets_values": ["wan2.2_vae.safetensors"]
+    },
+    {
+      "id": 4,
+      "type": "LoadImage",
+      "pos": [100, 490],
+      "size": [300, 310],
+      "properties": {},
+      "widgets_values": ["phase4_retest_9016e3d1.png", "image"]
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncode",
+      "pos": [480, 100],
+      "size": [350, 120],
+      "properties": {},
+      "widgets_values": ["Walk cycle forward"]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [480, 270],
+      "size": [350, 120],
+      "properties": {},
+      "widgets_values": ["Anti-aliasing, morphing"]
+    },
+    {
+      "id": 7,
+      "type": "CLIPVisionLoader",
+      "pos": [100, 850],
+      "size": [300, 60],
+      "properties": {},
+      "widgets_values": ["model.safetensors"]
+    },
+    {
+      "id": 8,
+      "type": "CLIPVisionEncode",
+      "pos": [480, 750],
+      "size": [250, 100],
+      "properties": {},
+      "widgets_values": ["center"]
+    },
+    {
+      "id": 9,
+      "type": "WanImageToVideo",
+      "pos": [480, 440],
+      "size": [300, 240],
+      "properties": {},
+      "widgets_values": [832, 480, 81, 1]
+    },
+    {
+      "id": 10,
+      "type": "KSampler",
+      "pos": [870, 100],
+      "size": [300, 280],
+      "properties": {},
+      "widgets_values": [881595, "randomize", 30, 5.0, "euler", "normal", 1.0]
+    },
+    {
+      "id": 11,
+      "type": "VAEDecode",
+      "pos": [870, 430],
+      "size": [200, 60],
+      "properties": {},
+      "widgets_values": []
+    },
+    {
+      "id": 12,
+      "type": "VHS_VideoCombine",
+      "pos": [1130, 100],
+      "size": [400, 400],
+      "properties": {},
+      "widgets_values": [16, 0, "wan22_correct_test", "video/h264-mp4", false, true, "", "", 3, true]
+    }
+  ],
+  "links": [
+    [1, 2, 0, 5, 0, "CLIP"],
+    [2, 2, 0, 6, 0, "CLIP"],
+    [3, 5, 0, 9, 0, "CONDITIONING"],
+    [4, 6, 0, 9, 1, "CONDITIONING"],
+    [5, 3, 0, 9, 2, "VAE"],
+    [6, 7, 0, 8, 0, "CLIP_VISION"],
+    [7, 4, 0, 8, 1, "IMAGE"],
+    [8, 8, 0, 9, 5, "CLIP_VISION_OUTPUT"],
+    [9, 4, 0, 9, 6, "IMAGE"],
+    [10, 1, 0, 10, 0, "MODEL"],
+    [11, 9, 0, 10, 3, "LATENT"],
+    [12, 10, 0, 11, 0, "LATENT"],
+    [13, 3, 0, 11, 1, "VAE"],
+    [14, 11, 0, 12, 0, "IMAGE"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8,
+      "offset": [0, 0]
+    }
+  },
+  "version": 0.4
+}
