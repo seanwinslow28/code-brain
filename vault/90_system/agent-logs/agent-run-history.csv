@@ -96,3 +96,4 @@ Error output: Check stderr output for details"
 2026-04-18,15:48:43,flush,,recursion-guard,0.0000,,,0 msgs
 2026-04-18,15:48:45,flush,,recursion-guard,0.0000,,,0 msgs
 2026-04-18,17:22:58,knowledge-lint,,success,0.0000,,,tier1=110 tier2=4
+2026-04-19,02:00:08,vault-indexer,,success,0.0000,2561,,"chunks=19, embeddings=19, errors=0"

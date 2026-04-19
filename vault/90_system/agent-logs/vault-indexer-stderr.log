@@ -252,3 +252,49 @@
 [INFO] Indexed 40_knowledge/concepts/idea-autoresearch-agentic-polymarket-crypto.md: 1 chunks
 [INFO] Indexed 40_knowledge/references/ref-agent-soul-md-prompt.md: 18 chunks
 [INFO] Indexing complete: 56 chunks, 56 embeddings, 0 errors, 11223ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 331 vault files, 4 need indexing, 40 deleted
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-04.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-14.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-12.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-01.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-11.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-02.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-13.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-20.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-02.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-31.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-08.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-10.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-11.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-06.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-19.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-13.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-23.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-10.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-17.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-12.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-09.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-01.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-02-20.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-26.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-02-26.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-16.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-18.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-30.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-17.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-16.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-24.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-07.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-27.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-03.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-05.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-06.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-09.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-15.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-03.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-25.md
+[INFO] Indexed 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-18.md: 1 chunks
+[INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 1 chunks
+[INFO] Indexed health/2026-04-18-lint-report.md: 17 chunks
+[INFO] Indexing complete: 19 chunks, 19 embeddings, 0 errors, 2561ms
