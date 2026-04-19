@@ -17,7 +17,7 @@ import uuid
 from pathlib import Path
 
 # Add agents-sdk to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent / "agents-sdk"))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent.parent / "agents-sdk"))  # post-v3.15.0: 16bitfit nested under creative-studio/
 
 COMFYUI_HOST = "192.168.68.201"
 COMFYUI_PORT = 8188

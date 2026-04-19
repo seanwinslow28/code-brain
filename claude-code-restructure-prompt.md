@@ -1,10 +1,5 @@
 # Claude Code Restructure Prompt — Superuser Pack Reorganization
 
-**How to use:** Open Claude Code inside your `claude-code-superuser-pack` directory. Confirm model is Opus 4.7. Enable high-effort reasoning (`ultrathink` keyword is included below). Paste everything between the triple backticks into a single message. Claude Code will enter Plan Mode on its own per the instructions.
-
----
-
-```
 <role>
 You are a senior systems architect auditing a mature, production-grade personal Claude Code ecosystem. You have deep expertise in:
 
@@ -35,16 +30,17 @@ IMMEDIATELY enter Plan Mode before taking any action that writes, edits, or crea
 
 You are inside `claude-code-superuser-pack` — Sean's personal Claude Code command center. It is a mature ecosystem built over months of iteration. Read the root `CLAUDE.md` first; it has the authoritative architecture overview. Also read `README.md` and `CHANGELOG.md` to understand current state and history.
 
-Key facts from the root CLAUDE.md:
-- 112 skills in `.claude/skills/` (canonical location, auto-loaded)
-- 13 agents in `.claude/agents/` (9 domain + 4 design team)
-- 8 hooks in `.claude/hooks/`
+Key facts from the root CLAUDE.md (current as of v3.14.3, 2026-04-18 — verify against CHANGELOG.md when you read it):
+- 111 skills in `.claude/skills/` (canonical location, auto-loaded)
+- 13 subagents in `.claude/agents/` (9 domain + 4 design team)
+- 11 hooks in `.claude/hooks/`
 - 7 domain workspaces: `claude-mastery/`, `product-management/`, `creative-studio/`, `life-systems/`, `design-team/`, `vault/`, `16bitfit-battle-mode/`
 - Obsidian vault at `vault/` with PARA structure (`00_inbox`, `02_Areas`, `05_atlas`, `10_timeline`, `20_projects`, `30_domains`, `40_knowledge`, `50_sources`, `60_archive`, `70_apple-notes`, `90_system`)
-- Agent SDK layer at `agents-sdk/` with 5 active autonomous agents on launchd schedules
+- Agent SDK layer at `agents-sdk/` with 13 total autonomous agents, 6 currently active on launchd schedules
 - Installer at `scripts/install.sh` exports subsets to other projects via presets (`starter`, `power`, `enterprise`, `creative`)
 - Validator at `scripts/validate.py` — MUST PASS after any change
-- Phase 6 (Knowledge Compounding Loop) is planned: SessionEnd flush → Vault Synthesizer v2 → Knowledge Lint → autoresearch feedback
+- Phase 6 (Knowledge Compounding Loop) is partly live, partly descoped: producer side D.1–D.3 (SessionEnd flush, Vault Synthesizer v2, Knowledge Lint) is in production; consumer side D.4 (autoresearch feedback) is DESCOPED per CHANGELOG v3.14.2 §10.1 (deferred, not abandoned)
+- Three-machine topology has shifted: as of v3.14.3, **Mac Mini is the sole always-on launchd driver**. The MBP-side cross-machine WOL path was retired. MBP is still used opportunistically for `code_review` and `vault_synthesis` when awake; agents tolerate a missing MBP gracefully. WOL infrastructure (deps, tests, `route_to_macbook`) is dead code retained for forensic purposes — do not remove it.
 
 ## The Owner's Current Situation (Conversation Context)
 
@@ -199,12 +195,13 @@ These come from Sean's root CLAUDE.md and from the conversation. Do NOT violate 
 6. **Plan Mode vs Extended Thinking distinction:** Plan Mode = double Shift+Tab or `/plan`. Extended Thinking = single Tab. You are invoking Plan Mode.
 7. **Hook blocking uses exit code 2** (not 0 or 1). Don't touch hooks unless you must.
 8. **Agent tool restrictions use `disallowedTools` (deny-list), not allow-list.** Don't modify agents' allow-list patterns.
-9. **Don't break the 5 active launchd agents.** They are: Vault Indexer (2:00 AM), Vault Synthesizer (2:30 AM), Daily Driver (8:45 AM), Knowledge Lint (Sunday 22:00), Flush (SessionEnd hook). Read `agents-sdk/config.toml` and the launchd plists in `agents-sdk/schedules/` to understand dependencies before moving anything.
-10. **Don't re-enable the 6 agents disabled in v3.12.3.** They remain disabled per audit at `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md`.
-11. **Phase 6 Knowledge Compounding Loop is in flight.** Don't disrupt planning or scaffolding for it. Read any Phase 6 docs you find before making changes that touch the vault or session-end flush hook.
-12. **`product-management/` is a generic PM workspace and stays as-is.** "The Block" is Sean's employer and is different from generic PM. If you create `the-block/` as a new workspace, it must coexist with `product-management/`, not replace it.
-13. **Never commit changes.** Leave the working tree dirty for Sean to review and commit himself.
-14. **No emojis in files** unless Sean explicitly asked for them. He didn't.
+9. **Don't break the 6 active launchd agents.** They are: Vault Indexer (2:00 AM), Vault Synthesizer (2:30 AM — runs on Mac Mini, reaches MBP when awake), Meta-Agent (8:35 AM), Daily Driver (8:45 AM), Knowledge Lint (Sunday 22:00), Flush (SessionEnd hook, fire-and-forget). Read `agents-sdk/config.toml` and the launchd plists in `agents-sdk/schedules/` to understand dependencies before moving anything.
+10. **Don't re-enable the 6 agents disabled in v3.12.3.** They remain disabled per audit at `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md`. Those are: `process-inbox`, `daily-evening`, `weekly-review`, `pr-digest`, `sprint-health`, `meeting-defender`. Also leave `daily-morning-baton` unloaded (v3.14.2 retired it — it was a dead wait on the disabled `process-inbox` flag).
+11. **Phase 6 Knowledge Compounding Loop is partly live, partly descoped.** Producer side (D.1 flush, D.2 vault synthesizer, D.3 knowledge lint, E meta-agent) is in production — don't disrupt. Consumer side (D.4 autoresearch feedback) is DESCOPED per v3.14.2 Super Plan §10.1 — not blocking, not active, don't try to "finish" it. Read any Phase 6 docs you find before making changes that touch the vault or session-end flush hook.
+12. **Mac Mini is the sole always-on driver (v3.14.3).** Don't "fix" the fact that `[agents.vault_synthesizer].target_machine = "macbook_pro"` and `[routing.task_map].vault_synthesis` still point at the MBP — that's an intentional known follow-up, documented in CHANGELOG v3.14.3 "Known follow-ups." Agents tolerate a missing MBP. Don't touch WOL dead code (`wakeonlan` dep, `tests/test_route_to_macbook.py`, `verify_mbp_wol.py`) — it's retained for forensic purposes.
+13. **`product-management/` is a generic PM workspace and stays as-is.** "The Block" is Sean's employer and is different from generic PM. If you create `the-block/` as a new workspace, it must coexist with `product-management/`, not replace it.
+14. **Never commit changes.** Leave the working tree dirty for Sean to review and commit himself.
+15. **No emojis in files** unless Sean explicitly asked for them. He didn't.
 
 </non_negotiables>
 
@@ -355,4 +352,3 @@ Using the 9-technique checklist from the skill:
 
 [View the prompt](computer:///sessions/wonderful-practical-mayer/mnt/claude-code-superuser-pack/claude-code-restructure-prompt.md)
 
-Open Claude Code inside your superuser pack, confirm it's on Opus 4.7, paste the code block (everything between the triple backticks), and let it enter Plan Mode. Review the plan before approving — that's your quality gate.

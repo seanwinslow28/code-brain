@@ -28,7 +28,7 @@ import sys
 from pathlib import Path
 
 # Add agents-sdk to path for keychain access
-REPO_ROOT = Path(__file__).parent.parent.parent.parent
+REPO_ROOT = Path(__file__).parent.parent.parent.parent.parent  # post-v3.15.0: 16bitfit nested under creative-studio/
 sys.path.insert(0, str(REPO_ROOT / "agents-sdk"))
 
 from adapters import (

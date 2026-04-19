@@ -32,7 +32,7 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).parent
 REPO_ROOT = SCRIPT_DIR.parent  # 16bitfit-battle-mode/
-SUPERUSER_ROOT = REPO_ROOT.parent  # claude-code-superuser-pack/
+SUPERUSER_ROOT = REPO_ROOT.parent.parent  # claude-code-superuser-pack/ (post-v3.15.0 nested under creative-studio/)
 PQ_DIR = REPO_ROOT / "pixel-quantizer"
 
 sys.path.insert(0, str(REPO_ROOT))

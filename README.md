@@ -1,19 +1,27 @@
 # Claude Code Superuser Pack
 
-A personal command center and second brain for Claude Code. 111 skills, 13 Claude Code subagents, 11 hooks, 13 autonomous SDK agents (6 active), 7 domain workspaces, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
+A personal command center and second brain for Claude Code. 113 skills, 13 Claude Code subagents, 11 hooks, 13 autonomous SDK agents (6 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
 
 ## What's Inside
 
-### Domain Workspaces
+### Domain Workspaces (v3.15.0 structure)
 
-| Domain | What Lives There |
+The repo is organized so domain-owned folders live inside their domain. Open one folder, find everything for that domain.
+
+| Domain | CLAUDE.md | What Lives There |
+|--------|-----------|-----------------|
+| **the-block/** | `the-block/CLAUDE.md` | Day-job PM work at The Block (crypto/ETF). Nested: `product-management/` (PRD templates, sprint frameworks, stakeholder comms templates) |
+| **creative-studio/** | `creative-studio/CLAUDE.md` | Phaser game dev, Remotion video production, pixel art, sprite pipelines, animation, writing. Nested: `16bitfit-battle-mode/` (project), `design-team/` (design system + 5 review agent support) |
+| **life-systems/** | `life-systems/CLAUDE.md` | Finance tracking, health habits, learning drills, task management, time, career transition |
+
+Cross-cutting (no domain CLAUDE.md):
+
+| Folder | What Lives There |
 |--------|-----------------|
-| **claude-mastery/** | CLI shortcuts, hooks, MCP, settings, tech stack reference |
-| **product-management/** | PRD templates, sprint frameworks, stakeholder comms, active projects |
-| **creative-studio/** | Phaser game dev, Remotion video production, pixel art, sprite pipelines |
-| **life-systems/** | Finance tracking, health habits, learning drills, task management, automation scripts |
-| **design-team/** | Design system, brand guidelines, 4 read-only review agents |
-| **vault/** | Obsidian vault with PARA structure, MOCs, prompt library, RAG knowledge |
+| **claude-mastery/** | CLI shortcuts, hooks, MCP, settings, tech stack reference (used by all domains) |
+| **vault/** | Obsidian vault with PARA structure, MOCs, prompt library, RAG knowledge, operating-model artifacts |
+| **agents-sdk/** | Autonomous Claude Agent SDK layer (Python + launchd) |
+| **.claude/** | Canonical skills, agents, hooks, settings (auto-loaded) |
 
 ### Design Team (4 Review Agents)
 
@@ -73,7 +81,7 @@ Skills and agents prefer native MCPs over Zapier where both exist. Currently con
 
 Zapier retained only for services with no native MCP: Salesforce, GA4, Webhooks, Code execution.
 
-### 111 Skills Across 12 Domains
+### 113 Skills Across 12 Export Groups
 
 All skills auto-load from `.claude/skills/`. Reference them naturally in prompts.
 

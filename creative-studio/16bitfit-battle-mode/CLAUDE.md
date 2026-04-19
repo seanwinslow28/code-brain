@@ -12,7 +12,7 @@ This is the project command center for 16BitFit Battle Mode: a 12-week build spa
 
 | Workstream | What | Where Code Lives |
 |---|---|---|
-| A: Agent SDK Infrastructure | Three-machine orchestration, autonomous agents, safety hooks | `../agents-sdk/` (sibling directory in superuser pack) |
+| A: Agent SDK Infrastructure | Three-machine orchestration, autonomous agents, safety hooks | `../../agents-sdk/` (post-v3.15.0 — 16bitfit nested under `creative-studio/`) |
 | B: Sprite Pipeline Upgrade | Hybrid keyframe-to-video, Pixel Quantizer, adapter layer | Separate repo (`16BitFit-V3` or `16BitFit-Asset-Creation`) |
 | C: Autoresearch + LoRA | ComfyUI workflow optimization, style LoRA training | Alienware local (ComfyUI), orchestrated by agents-sdk |
 
@@ -76,7 +76,7 @@ This is the project command center for 16BitFit Battle Mode: a 12-week build spa
 ## File Reference
 
 ```
-16bitfit-battle-mode/
+creative-studio/16bitfit-battle-mode/    ← post-v3.15.0 location
 ├── CLAUDE.md               ← You are here
 ├── SOURCE-OF-TRUTH.md      ← Master reference (read first, always)
 ├── execution-blueprint.md  ← Exact terminal commands, ~102.5h total

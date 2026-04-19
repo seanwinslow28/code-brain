@@ -24,7 +24,7 @@ from pathlib import Path
 SCRIPT_DIR = Path(__file__).parent
 PIXEL_QUANTIZER_DIR = SCRIPT_DIR.parent
 VIDEO_EVAL_DIR = PIXEL_QUANTIZER_DIR / "video-eval"
-REPO_ROOT = PIXEL_QUANTIZER_DIR.parent.parent
+REPO_ROOT = PIXEL_QUANTIZER_DIR.parent.parent.parent  # post-v3.15.0: 16bitfit nested under creative-studio/
 MANIFESTS_DIR = PIXEL_QUANTIZER_DIR / "manifests"
 OUTPUT_DIR = PIXEL_QUANTIZER_DIR / "output" / "_character_tests"
 

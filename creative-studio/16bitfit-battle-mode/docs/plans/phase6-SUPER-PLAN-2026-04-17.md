@@ -47,7 +47,7 @@ Both of these were discovered by searching the current codebase; SOT language as
 
 ### P0.1 — Build `agents-sdk/lib/filelock.py`
 
-**Finding:** SOT line 481 says "Uses existing `lib/filelock` from Phase 1." A grep across [agents-sdk/lib/](../../../agents-sdk/lib/) and [agents-sdk/lib/vault_io.py](../../../agents-sdk/lib/vault_io.py) returns **zero hits** for `filelock`, `FileLock`, `flock`. It does not exist.
+**Finding:** SOT line 481 says "Uses existing `lib/filelock` from Phase 1." A grep across [agents-sdk/lib/](../../../../agents-sdk/lib/) and [agents-sdk/lib/vault_io.py](../../../../agents-sdk/lib/vault_io.py) returns **zero hits** for `filelock`, `FileLock`, `flock`. It does not exist.
 
 **Action:** Create `agents-sdk/lib/filelock.py` (~40 lines) using `fcntl.flock(LOCK_EX)` with a context manager. Must support both `LOCK_EX` (synthesizer writes) and `LOCK_SH` (lint Tier 2 reads). Add `test_filelock.py` with contention tests.
 
@@ -55,11 +55,11 @@ Both of these were discovered by searching the current codebase; SOT language as
 
 ### P0.2 — MacBook Pro WOL path
 
-**Finding:** [agents-sdk/config.toml:119-125](../../../agents-sdk/config.toml) has `wol_mac` only on Alienware. MacBook Pro has `always_on = false` but no MAC address.
+**Finding:** [agents-sdk/config.toml:119-125](../../../../agents-sdk/config.toml) has `wol_mac` only on Alienware. MacBook Pro has `always_on = false` but no MAC address.
 
 **Action:** Two options — decide with Sean:
 - **(a) Always-on path:** If Sean keeps the MacBook Pro lid open with `caffeinate -dimsu` running a daemon, mark `always_on = true` in config. No WOL needed. Simpler.
-- **(b) WOL path:** Add `wol_mac = "<MBP-MAC>"` to config, extend [hybrid_router.py](../../../agents-sdk/lib/hybrid_router.py) with MBP WOL trigger (reuse Alienware pattern), create new `lib/wol.py` helper (see §3).
+- **(b) WOL path:** Add `wol_mac = "<MBP-MAC>"` to config, extend [hybrid_router.py](../../../../agents-sdk/lib/hybrid_router.py) with MBP WOL trigger (reuse Alienware pattern), create new `lib/wol.py` helper (see §3).
 
 Plan assumes **(b)** — safer for robustness. Easy to simplify to (a) if Sean prefers.
 
@@ -162,9 +162,9 @@ Plan assumes **(b)** — safer for robustness. Easy to simplify to (a) if Sean p
 
 | Path | State | ~Lines | Purpose | Imports |
 |------|-------|--------|---------|---------|
-| [agents-sdk/agents/flush.py](../../../agents-sdk/agents/flush.py) | **NEW** | 280 | Session transcript → daily log extractor (5-section structured output). Routes by message count. | `lib.config`, `lib.vault_io`, `lib.hybrid_router`, `lib.logging_setup`, `lib.filelock`, `lib.session_transcript`, `lib.skill_loader` (loads `preserve-session` skill) |
-| [agents-sdk/agents/vault_synthesizer.py](../../../agents-sdk/agents/vault_synthesizer.py) | **NEW** | 420 | Concept + connection article generator. Reads changed files + nomic retrieval → LLM synthesis → writes `vault/knowledge/concepts/*.md` and `connections/*.md`. ≥2 wikilinks invariant enforced. | `lib.config`, `lib.vault_io`, `lib.hybrid_router`, `lib.filelock`, `lib.logging_setup`, `agents.vault_indexer` (reuses `search()` + `blob_to_embedding()`) |
-| [agents-sdk/agents/knowledge_lint.py](../../../agents-sdk/agents/knowledge_lint.py) | **NEW** | 360 | Two-tier vault health scan. Tier 1 structural, Tier 2 semantic via hybrid_router. | `lib.config`, `lib.vault_io`, `lib.hybrid_router`, `lib.filelock`, `lib.logging_setup` |
+| [agents-sdk/agents/flush.py](../../../../agents-sdk/agents/flush.py) | **NEW** | 280 | Session transcript → daily log extractor (5-section structured output). Routes by message count. | `lib.config`, `lib.vault_io`, `lib.hybrid_router`, `lib.logging_setup`, `lib.filelock`, `lib.session_transcript`, `lib.skill_loader` (loads `preserve-session` skill) |
+| [agents-sdk/agents/vault_synthesizer.py](../../../../agents-sdk/agents/vault_synthesizer.py) | **NEW** | 420 | Concept + connection article generator. Reads changed files + nomic retrieval → LLM synthesis → writes `vault/knowledge/concepts/*.md` and `connections/*.md`. ≥2 wikilinks invariant enforced. | `lib.config`, `lib.vault_io`, `lib.hybrid_router`, `lib.filelock`, `lib.logging_setup`, `agents.vault_indexer` (reuses `search()` + `blob_to_embedding()`) |
+| [agents-sdk/agents/knowledge_lint.py](../../../../agents-sdk/agents/knowledge_lint.py) | **NEW** | 360 | Two-tier vault health scan. Tier 1 structural, Tier 2 semantic via hybrid_router. | `lib.config`, `lib.vault_io`, `lib.hybrid_router`, `lib.filelock`, `lib.logging_setup` |
 
 ### New library / tooling
 
@@ -175,7 +175,7 @@ Plan assumes **(b)** — safer for robustness. Easy to simplify to (a) if Sean p
 | `agents-sdk/lib/wol.py` | **NEW** | 90 | Wake-on-LAN + MBP health check + PushNotification fallback. Wraps `wakeonlan` binary. | `httpx`, `subprocess`, push-notification helper |
 | `agents-sdk/lib/gemma4_benchmark.py` | **NEW** | 340 | Multi-model benchmark harness. p50/p95 latency, tok/s, Jaccard entity-similarity vs golden set. Writes `results/gemma4-benchmark-YYYY-MM-DD.json`. | `lib.hybrid_router`, `lib.config`, `httpx`, `time` |
 | `agents-sdk/benchmarks/golden_sets/inbox_triage.json` | **NEW** | — | 20 email samples + expected categories + action items. |
-| `agents-sdk/benchmarks/golden_sets/financial_analysis.json` | **NEW** | — | 20 CSV rows + expected categorization. Seed from Sean's sanitized finance CSVs via [lib/csv_sanitizer.py](../../../agents-sdk/lib/csv_sanitizer.py). |
+| `agents-sdk/benchmarks/golden_sets/financial_analysis.json` | **NEW** | — | 20 CSV rows + expected categorization. Seed from Sean's sanitized finance CSVs via [lib/csv_sanitizer.py](../../../../agents-sdk/lib/csv_sanitizer.py). |
 | `agents-sdk/benchmarks/golden_sets/code_review.json` | **NEW** | — | 20 ~50-line Python snippets + expected issue lists. |
 | `agents-sdk/scripts/phase6_gatecheck.py` | **NEW** | 150 | One-liner that runs all 6 gate-check verifications and emits pass/fail per criterion + overall verdict. |
 | `agents-sdk/scripts/compare_convergence.py` | **NEW** | 120 | D.4 A/B harness. Wilcoxon signed-rank, paired nights, ≥10% gate. |
@@ -184,20 +184,20 @@ Plan assumes **(b)** — safer for robustness. Easy to simplify to (a) if Sean p
 
 | Path | State | ~Lines | Purpose |
 |------|-------|--------|---------|
-| `.claude/hooks/session-end-flush.sh` | **NEW** | 40 | SessionEnd hook. Checks `$CLAUDE_INVOKED_BY` for recursion guard (exit 0 if set). Else spawns `flush.py` detached via `nohup … &`. Hook returns <100ms so session close isn't blocked. Follows [run-tests-on-stop.sh](../../../.claude/hooks/run-tests-on-stop.sh) pattern (non-blocking bash, `exit 0` on success). Uses **exit code 2** only in recursion-guard-can't-log corner cases per [CLAUDE.md](../../../CLAUDE.md) hook rules. |
+| `.claude/hooks/session-end-flush.sh` | **NEW** | 40 | SessionEnd hook. Checks `$CLAUDE_INVOKED_BY` for recursion guard (exit 0 if set). Else spawns `flush.py` detached via `nohup … &`. Hook returns <100ms so session close isn't blocked. Follows [run-tests-on-stop.sh](../../../../.claude/hooks/run-tests-on-stop.sh) pattern (non-blocking bash, `exit 0` on success). Uses **exit code 2** only in recursion-guard-can't-log corner cases per [CLAUDE.md](../../../../CLAUDE.md) hook rules. |
 
 ### Modified files
 
 | Path | Delta | Purpose |
 |------|-------|---------|
-| [agents-sdk/agents/vault_indexer.py](../../../agents-sdk/agents/vault_indexer.py) | +130 lines | Hash-based state tracking (`vault/.indexer-state.json`), change detection, exclusion of `vault/daily/*` (extend `exclude_dirs` at [line 92](../../../agents-sdk/agents/vault_indexer.py#L92)), trigger synthesizer via hybrid_router when changes detected. |
-| [agents-sdk/agents/daily_driver.py](../../../agents-sdk/agents/daily_driver.py) | +60 lines | In `build_preamble()` for `morning` mode, add Vault Health section: read latest `vault/health/YYYY-MM-DD-lint-report.md`, surface CRITICAL/HIGH counts + deep link. No report or all PASS → "Vault health: PASS ✓". Also surface WOL-failure PushNotifications since last run. |
-| [agents-sdk/config.toml](../../../agents-sdk/config.toml) | +50 lines | Add `[agents.flush]`, `[agents.vault_synthesizer]`, `[agents.knowledge_lint]`. Add `[vault_indexer]` sub-config per SOT D.2 schema. Add `machines.macbook_pro.wol_mac` (P0.2). Update `[routing.task_map]` with `vault_synthesis`, `daily_flush_simple`, `daily_flush_complex`, `lint_tier1`, `lint_tier2`. Post-A.7: flip `inbox_triage` + (maybe) `financial_analysis`. |
-| [agents-sdk/lib/hybrid_router.py](../../../agents-sdk/lib/hybrid_router.py) | +40 lines | Add `route_to_macbook(task_name, payload, timeout_s)` wrapper: WOL → health-check → POST. On WOL failure: call `wol.notify_wol_failure()` → raise `WOLUnavailable`. Callers handle: flush.py retries next session; synthesizer defers one night; lint Tier 2 skips. |
-| [agents-sdk/schedules/install_schedules.sh](../../../agents-sdk/schedules/install_schedules.sh) | +30 lines | Add 2 plists: `com.sean.vault-synthesizer.plist` (02:30 daily), `com.sean.knowledge-lint.plist` (Sun 22:00). Flush is hook-triggered, NOT launchd. |
-| [.claude/settings.json](../../../.claude/settings.json) | +8 lines | Register SessionEnd hook under `hooks.SessionEnd`. Path: `.claude/hooks/session-end-flush.sh`. |
+| [agents-sdk/agents/vault_indexer.py](../../../../agents-sdk/agents/vault_indexer.py) | +130 lines | Hash-based state tracking (`vault/.indexer-state.json`), change detection, exclusion of `vault/daily/*` (extend `exclude_dirs` at [line 92](../../../../agents-sdk/agents/vault_indexer.py#L92)), trigger synthesizer via hybrid_router when changes detected. |
+| [agents-sdk/agents/daily_driver.py](../../../../agents-sdk/agents/daily_driver.py) | +60 lines | In `build_preamble()` for `morning` mode, add Vault Health section: read latest `vault/health/YYYY-MM-DD-lint-report.md`, surface CRITICAL/HIGH counts + deep link. No report or all PASS → "Vault health: PASS ✓". Also surface WOL-failure PushNotifications since last run. |
+| [agents-sdk/config.toml](../../../../agents-sdk/config.toml) | +50 lines | Add `[agents.flush]`, `[agents.vault_synthesizer]`, `[agents.knowledge_lint]`. Add `[vault_indexer]` sub-config per SOT D.2 schema. Add `machines.macbook_pro.wol_mac` (P0.2). Update `[routing.task_map]` with `vault_synthesis`, `daily_flush_simple`, `daily_flush_complex`, `lint_tier1`, `lint_tier2`. Post-A.7: flip `inbox_triage` + (maybe) `financial_analysis`. |
+| [agents-sdk/lib/hybrid_router.py](../../../../agents-sdk/lib/hybrid_router.py) | +40 lines | Add `route_to_macbook(task_name, payload, timeout_s)` wrapper: WOL → health-check → POST. On WOL failure: call `wol.notify_wol_failure()` → raise `WOLUnavailable`. Callers handle: flush.py retries next session; synthesizer defers one night; lint Tier 2 skips. |
+| [agents-sdk/schedules/install_schedules.sh](../../../../agents-sdk/schedules/install_schedules.sh) | +30 lines | Add 2 plists: `com.sean.vault-synthesizer.plist` (02:30 daily), `com.sean.knowledge-lint.plist` (Sun 22:00). Flush is hook-triggered, NOT launchd. |
+| [.claude/settings.json](../../../../.claude/settings.json) | +8 lines | Register SessionEnd hook under `hooks.SessionEnd`. Path: `.claude/hooks/session-end-flush.sh`. |
 | [CHANGELOG.md](../../../CHANGELOG.md) | +30 lines | v3.13.0 entry (see §8). |
-| [CLAUDE.md](../../../CLAUDE.md) | +15 lines | Counts 13→16 agents, 7→8 hooks. Active-agents table. Architecture note. |
+| [CLAUDE.md](../../../../CLAUDE.md) | +15 lines | Counts 13→16 agents, 7→8 hooks. Active-agents table. Architecture note. |
 | [README.md](../../../README.md) | +10 lines | Counts + table rows matching CLAUDE.md. Knowledge compounding loop mention. |
 | [SOURCE-OF-TRUTH.md](../../SOURCE-OF-TRUTH.md) | **NOT MODIFIED** | Spec is source of truth, not output. Open Questions 12–16 resolved here; SOT update deferred to post-phase-6 per "After finishing a Phase" rule in [16bitfit-battle-mode/CLAUDE.md](../../CLAUDE.md). |
 
@@ -302,8 +302,8 @@ Plan assumes **(b)** — safer for robustness. Easy to simplify to (a) if Sean p
 |---|---|
 | P0.1 filelock.py | Delete file. No agent will import it if P0.1 is rolled back pre-D.1. |
 | P0.2 MBP WOL | Remove `wol_mac` from config. If always-on proves reliable, this is the happy path. |
-| Gemma 4 swap (A.7) | Revert [config.toml](../../../agents-sdk/config.toml) `[routing.task_map]` to phi4/Qwen3. No schema change. |
-| flush.py + SessionEnd hook | Remove `SessionEnd` block from [.claude/settings.json](../../../.claude/settings.json). Agent silent; daily logs are append-only (no downstream breakage). |
+| Gemma 4 swap (A.7) | Revert [config.toml](../../../../agents-sdk/config.toml) `[routing.task_map]` to phi4/Qwen3. No schema change. |
+| flush.py + SessionEnd hook | Remove `SessionEnd` block from [.claude/settings.json](../../../../.claude/settings.json). Agent silent; daily logs are append-only (no downstream breakage). |
 | vault_synthesizer.py | Set `synthesis_enabled = false` in `[vault_indexer]`. v2 falls back to v1 embedding-only. Existing articles preserved. |
 | knowledge_lint.py | `launchctl bootout` the Sunday plist. Daily Driver integration guarded by "if report exists" — no report, no UI change. |
 | D.4 wiring | Revert autoresearch orchestrator's vault-read step. `articles_used` counter drops to 0. |
@@ -339,15 +339,15 @@ Meta-Agent closes the loop: a morning health check that verifies each active age
 
 | Field | Value |
 |---|---|
-| Path | [agents-sdk/agents/meta_agent.py](../../../agents-sdk/agents/meta_agent.py) |
-| Plist | [agents-sdk/schedules/com.sean.agent.meta-agent.plist](../../../agents-sdk/schedules/com.sean.agent.meta-agent.plist) |
+| Path | [agents-sdk/agents/meta_agent.py](../../../../agents-sdk/agents/meta_agent.py) |
+| Plist | [agents-sdk/schedules/com.sean.agent.meta-agent.plist](../../../../agents-sdk/schedules/com.sean.agent.meta-agent.plist) |
 | Machine | Mac Mini |
 | Model | `phi4-mini-reasoning` (Ollama, local) — inference only for summary polish; most logic is deterministic Python |
 | Schedule | 08:35 daily (10 minutes before Daily Driver at 08:45) |
 | Safety | MAX_TURNS=10, MAX_BUDGET_USD=$0.10 (hard-coded in script; plist invokes script directly — no CLI budget flags) |
 | Cost | $0.00 (local) |
 | Deliverable | `vault/02_Areas/Agent-Fleet/daily-fleet-status-YYYY-MM-DD.md` + update `vault/02_Areas/Agent-Fleet/fleet-state.md` |
-| Config section | `[agents.meta_agent]` in [agents-sdk/config.toml](../../../agents-sdk/config.toml), `enabled = true` |
+| Config section | `[agents.meta_agent]` in [agents-sdk/config.toml](../../../../agents-sdk/config.toml), `enabled = true` |
 
 ### E.2 Health Checks
 
@@ -358,7 +358,7 @@ Meta-Agent closes the loop: a morning health check that verifies each active age
 
 ### E.3 Dependencies & Integration
 
-- **Upstream:** depends on [agents-sdk/lib/logging_setup.py](../../../agents-sdk/lib/logging_setup.py)'s `record_run` CSV schema (already present).
+- **Upstream:** depends on [agents-sdk/lib/logging_setup.py](../../../../agents-sdk/lib/logging_setup.py)'s `record_run` CSV schema (already present).
 - **Downstream (small modification to D.1 D.2 D.3):** each new Phase 6 agent's `record_run` call must include a consistent `agent_name` so Meta-Agent's per-agent recency check can match. Already satisfied — all three use the `AGENT_NAME` module constant.
 - **No MCP dependencies** — pure file-reads + `httpx` for local LAN probes. Aligns with April 9 audit rule.
 - **No WOL trigger** — Meta-Agent does not wake Alienware or MacBook Pro. Not finding them up is just "asleep, skipping probe" in the report, not a failure.
@@ -400,7 +400,7 @@ Added to `agents-sdk/scripts/phase6_gatecheck.py` as criterion #7.
 
 ### E.8 Week 16 Task (post-D.3 ship)
 
-Update [agents-sdk/agents/meta_agent.py](../../../agents-sdk/agents/meta_agent.py):
+Update [agents-sdk/agents/meta_agent.py](../../../../agents-sdk/agents/meta_agent.py):
 ```python
 ACTIVE_AGENTS = ["vault_indexer", "daily_driver", "flush", "vault_synthesizer", "knowledge_lint", "meta_agent"]
 ```
@@ -410,7 +410,7 @@ Plus a `test_active_agents_matches_config` that reads `config.toml` and fails if
 
 ## 8. Doc-Update Checklist
 
-Per [CLAUDE.md](../../../CLAUDE.md) "When Modifying" rules:
+Per [CLAUDE.md](../../../../CLAUDE.md) "When Modifying" rules:
 
 ### `CHANGELOG.md` — add under `## [3.13.0] - 2026-07-17`
 
@@ -461,14 +461,14 @@ Per [CLAUDE.md](../../../CLAUDE.md) "When Modifying" rules:
 When coding begins, load in this order on the MacBook Pro:
 
 1. [SOURCE-OF-TRUTH.md](../../SOURCE-OF-TRUTH.md) lines 413–577 (spec re-read)
-2. [agents-sdk/lib/vault_io.py](../../../agents-sdk/lib/vault_io.py) (confirm no hidden filelock before writing P0.1)
-3. [agents-sdk/agents/vault_indexer.py](../../../agents-sdk/agents/vault_indexer.py) (the v1 you'll extend)
-4. [agents-sdk/agents/daily_driver.py](../../../agents-sdk/agents/daily_driver.py) lines 1–120 (preamble pattern)
-5. [agents-sdk/lib/hybrid_router.py](../../../agents-sdk/lib/hybrid_router.py) (extending with route_to_macbook)
-6. [agents-sdk/lib/config.py](../../../agents-sdk/lib/config.py) (AgentConfig shape for new sections)
-7. [agents-sdk/lib/baton.py](../../../agents-sdk/lib/baton.py) (dependency chain for indexer → synthesizer handoff)
-8. [.claude/hooks/run-tests-on-stop.sh](../../../.claude/hooks/run-tests-on-stop.sh) (hook pattern to copy)
-9. [agents-sdk/config.toml](../../../agents-sdk/config.toml) (sections you'll extend)
+2. [agents-sdk/lib/vault_io.py](../../../../agents-sdk/lib/vault_io.py) (confirm no hidden filelock before writing P0.1)
+3. [agents-sdk/agents/vault_indexer.py](../../../../agents-sdk/agents/vault_indexer.py) (the v1 you'll extend)
+4. [agents-sdk/agents/daily_driver.py](../../../../agents-sdk/agents/daily_driver.py) lines 1–120 (preamble pattern)
+5. [agents-sdk/lib/hybrid_router.py](../../../../agents-sdk/lib/hybrid_router.py) (extending with route_to_macbook)
+6. [agents-sdk/lib/config.py](../../../../agents-sdk/lib/config.py) (AgentConfig shape for new sections)
+7. [agents-sdk/lib/baton.py](../../../../agents-sdk/lib/baton.py) (dependency chain for indexer → synthesizer handoff)
+8. [.claude/hooks/run-tests-on-stop.sh](../../../../.claude/hooks/run-tests-on-stop.sh) (hook pattern to copy)
+9. [agents-sdk/config.toml](../../../../agents-sdk/config.toml) (sections you'll extend)
 
 ---
 
