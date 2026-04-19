@@ -126,22 +126,93 @@ _Only I can close these out:_
 ## Part B — Institutional Knowledge (Layer 4)
 
 ### Internal Vocabulary
-_To be filled by interview (Layer 4)._
+| Term | Meaning |
+|---|---|
+| `.Co` | theblock.co (the free public site) |
+| `Campus` | The Block's LMS / education platform |
+| `Pro` | The Block Pro (paid subscription tier — biggest revenue line) |
+| `Pro Research` / `Pro News` / `Pro Data` / `Pro Deals` / `Pro API` | Sub-products inside Pro |
+| `Launchpad` | Launchpad product |
+| `Sponsored Courses` | Campus monetization stream |
+| `Block iOS app` | Native app launching to App Store soon — expect ticket load |
+| `Marketing Site Update` | Current marketing-site rework |
+| `Stripe Integration` | Campus individuals payment flow (tax-compliance revamp) |
+| `Twitter/X Auth` | Twitter/X OAuth work |
+| `Crypto IQ` | Product codename |
+| `Election Hub` / `Voting Block Index` | Election-coverage landing + data product (v1 live, v2 in planning) |
+| `Report Cards` | `.Co` social-sharing feature |
+| `The Starting Block` | Product with Singular.live data feed |
+| `Knowledge Token Taxonomy` / `Prerequisite Schema` | Campus curriculum-graph work |
+| `ToGroom` | Jira label — ticket needs product grooming |
+| `NeedsDesign` | Jira label — story needs design before implementation |
+| `/llms.txt` | Machine-readable site index (shipped for Campus) |
+| `x402 protocol` | Agent-payments protocol — Sean actively championing for future Block integration; research archive in `_inputs/x402 Deep Research/` |
+| `#research-etf` | Slack channel (C09EXM9FYAG) where the ETF pipeline starts |
+
+(Further terms are best surfaced live from Jira / Granola when they appear — don't try to enumerate exhaustively.)
 
 ### Sacred Cows
-_To be filled by interview (Layer 4)._
+- **Always use the simple Figma slides template** for presentations. Canonical live example: [Product Roadmap 2026 Draft](https://www.figma.com/slides/V7KnGbiTK0yiCY4SKYj4dv/Product-Roadmap-2026-Draft?node-id=0-20&t=qhRmjsD9GVOglaTV-0).
+- **Presentation structure is always `Context → Problem → Solution`.**
+- **Jira tickets follow the `jira-automation` skill's templates + quality checklist.** Don't invent new formats.
+- **User journey first** on any new product / page pitch. Clunky multi-step flows that risk user drop-off get pushed back.
+- **Roadmap ambition (pre-new-CEO):** Matt's signal — pitch a revamp of a product that already makes money (The Block Pro), tuned to current market. Keep moonshots for explicit blue-sky / ideation phases; otherwise scale ideas to what's fundable and shippable.
+- **Never give agent write access to WordPress or GitHub** (see USER.md).
 
 ### Unwritten Communication Rules
-_To be filled by interview (Layer 4)._
+- **Slack is default**; email is rare (external parties only; Sean rarely involved today).
+- **Paper-trail comments** go on Jira, Figma, or Confluence — decisions you might have to re-litigate belong in writing against the artifact.
+- **Ed DM (`D09RWHRC9HC`) → respond ASAP.** He's Portland, OR (Pacific). Only soft exception is mid-activity overlap (lunch, etc.). Otherwise immediate.
+- **No universal response-time expectation across the distributed team.** Send when you think of it; don't expect fast replies unless the person is in your timezone.
+- **`@here` is reserved for the bi-weekly P&E update post** in `#ask-product-management` (C02N3UFMTEC). Don't `@here` casually. Example format (2026-04-17 post): short `@here` + Confluence link + 4–6 bullet headline list of shipped items.
 
 ### Ask X About Y
-_To be filled by interview (Layer 4)._
+| Topic | Go-to person(s) |
+|---|---|
+| The Block's internal data API | Mike Price (access pending) |
+| Campus compliance / Sponsored Courses | David |
+| SEO on Learn / Data pages | Koray Baspinar |
+| DevOps / staging envs / Jira-Slack plumbing | Cesar Paz |
+| Design system / Figma design questions | Josh Gragg (director) + Claudine Daumur + Serena Ho |
+| ETF research signal | Steven Zheng's team via `#research-etf` (C09EXM9FYAG) |
+| AI-adjacent experimentation / fellow AI obsessive | Krystof Oliva (intern) + Jordan Leech (media + AI) |
+| AdOps / RevOps tooling help | Lil Danowski + Karla Vallecillo |
+| Media / video production | Gareth Jenkinson, Jordan Leech, Davis Quinton |
+| Go-to dev bench (tickets, architecture, clarifications) | Mike Price, Brian Mendoza, Ramuald Vishneuski, Nikola Pivcevic |
+| P&E wording preferences | Ed Rupkus |
+| Universal fallback ("I don't know, but Ed will know who does") | Ed Rupkus |
 
 ### Past Landmines
-_To be filled by interview (Layer 4)._
+- **David ↔ devs alignment — 2 incidents** where Campus-side misalignment caused rushed execution and downstream mistakes. Both of Sean's CYA communication logs trace back to this pattern.
+- **Remediation in-flight:** new **weekly Campus team sync (Tue 09:30 ET, starting 2026-04-28)** with Sean, Ed, David, and Campus-focused devs.
 
 ### Week-One Tacit Knowledge
-_To be filled by interview (Layer 4)._
+For a sharp new PM joining Ed's team:
+- **Take notes aggressively** — use Granola, Gemini meeting transcripts, or both.
+- **Read the relevant Confluence best-practices docs** early.
+- **Don't hesitate to ask Ed or Sean questions** — async Slack is fine.
+- **Take initiative on projects** without waiting for explicit assignment; surface in the next meeting.
+- **Subscribe to these 10 Slack channels on day one:**
+  - `#ask-product-management` (C02N3UFMTEC)
+  - `#dev` (C07DNU1MQBZ)
+  - `#deployment-approval` (C0590T88MUM)
+  - `#product-design-team` (C04EU3840M8)
+  - `#research-etf` (C09EXM9FYAG)
+  - `#social-media-marketing` (C09L89LQAT0)
+  - `#tech-seo` (C029B19JPQ8)
+  - `#tech-support` (C0259QCR34G)
+  - `#general` (CR5D2HQ13)
+  - `#ped-team` (C02PHB06BS6)
 
 ### Things Collaborators Have Learned About Sean
-_To be filled by interview (Layer 4)._
+**Known / visible to the team:**
+- Sean is the AI / Anthropic tools person. Uses Claude for ticket writing and research. Go to him for anything AI / agentic / Claude-adjacent.
+- Sean responds quickly regardless of "break" windows — stepping away just moves the conversation to phone.
+
+**Not known (deliberately):**
+- That Sean uses **Granola** for his meeting notes layer.
+- That Sean drafts Slack messages and comments in **Claude** before editing and sending.
+
+**Personal north star:**
+- Ed is Sean's aspirational model for PM work ethic — reliable, omnipresent on Slack, across every Block project.
+- Sean's long-term target: "hard-working PM like Ed + my own creative / technical edge."
