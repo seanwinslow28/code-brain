@@ -30,3 +30,35 @@ META-AGENT COMPLETE
 - **Last run:** N/A
 - **Details:** No baton files or logs found
 - **Daily note exists:** No (`/Users/seanwinslow/Code-Brain/cla
+============================================================
+META-AGENT — Fleet Health Monitor
+Active agents: 2 | Disabled: 6
+Budget cap: $0.10 | Max turns: 10
+Dry run: False
+============================================================
+
+Fleet status saved: /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-20.md
+Fleet state updated: /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/02_Areas/Agent-Fleet/fleet-state.md
+  ALERT: vault_indexer status is no-data
+  ALERT: daily_driver status is no-data
+  Alert baton created: /Users/seanwinslow/.claude/batons/fleet_alert.flag
+
+────────────────────────────────────────────────────────────
+META-AGENT COMPLETE
+# Fleet Status — 2026-04-20
+
+**Generated:** 2026-04-20 08:35 by Meta-Agent
+**Active agents:** 2 of 8 | **Disabled:** 6
+
+## Active Agent Health
+
+### vault-indexer (2:00 AM daily, Mac Mini, $0.00/run)
+- **Status:** no-data
+- **Last run:** N/A
+- **Details:** No baton files or logs found
+
+### daily-driver morning (8:45 AM daily, Claude API, ~$0.40/run)
+- **Status:** no-data
+- **Last run:** N/A
+- **Details:** No baton files or logs found
+- **Daily note exists:** No (`/Users/seanwinslow/Code-Brain/cla
