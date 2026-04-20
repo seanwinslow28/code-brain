@@ -1,0 +1,7 @@
+2026-04-20 02:00:01,688 [INFO] Starting vault embedding indexer
+2026-04-20 02:00:01,790 [INFO] Discovered 334 vault files, 5 need indexing, 0 deleted
+2026-04-20 02:00:03,008 [INFO] Indexed 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-19.md: 1 chunks
+2026-04-20 02:00:03,080 [INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 1 chunks
+2026-04-20 02:00:04,393 [INFO] Indexed health/2026-04-19-lint-report.md: 18 chunks
+2026-04-20 02:00:04,426 [INFO] Indexed knowledge/index.md: 1 chunks
+2026-04-20 02:00:04,429 [INFO] Indexing complete: 21 chunks, 21 embeddings, 0 errors, 2740ms

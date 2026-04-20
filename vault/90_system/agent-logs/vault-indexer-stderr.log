@@ -298,3 +298,10 @@
 [INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 1 chunks
 [INFO] Indexed health/2026-04-18-lint-report.md: 17 chunks
 [INFO] Indexing complete: 19 chunks, 19 embeddings, 0 errors, 2561ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 334 vault files, 5 need indexing, 0 deleted
+[INFO] Indexed 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-19.md: 1 chunks
+[INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 1 chunks
+[INFO] Indexed health/2026-04-19-lint-report.md: 18 chunks
+[INFO] Indexed knowledge/index.md: 1 chunks
+[INFO] Indexing complete: 21 chunks, 21 embeddings, 0 errors, 2740ms
