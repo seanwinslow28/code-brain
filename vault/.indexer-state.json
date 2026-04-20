@@ -7,9 +7,13 @@
     "hash": "c2878806438bf83503d63364809bc2a00082e3e740ca8201eeca3258015393fb",
     "indexed_at": "2026-04-19T02:30:02"
   },
+  "02_Areas/Agent-Fleet/daily-fleet-status-2026-04-19.md": {
+    "hash": "8ca93342d4890252986efcca39e75b9ddb234d8ee99aa01ada5e33149026e507",
+    "indexed_at": "2026-04-20T02:30:04"
+  },
   "02_Areas/Agent-Fleet/fleet-state.md": {
-    "hash": "c2878806438bf83503d63364809bc2a00082e3e740ca8201eeca3258015393fb",
-    "indexed_at": "2026-04-19T02:30:02"
+    "hash": "8ca93342d4890252986efcca39e75b9ddb234d8ee99aa01ada5e33149026e507",
+    "indexed_at": "2026-04-20T02:30:04"
   },
   "02_Areas/Work/pr-digest-2026-04-08.md": {
     "hash": "448faaa6f30b70d705e116f9c16331ddbe8cb119166fab272ccd56d66f3214d1",
@@ -1322,5 +1326,13 @@
   "health/2026-04-18-lint-report.md": {
     "hash": "bdca41ca7bbc7059b62d40553b6eee1e827b5306c4449097653cc8b7639197d6",
     "indexed_at": "2026-04-19T02:30:02"
+  },
+  "health/2026-04-19-lint-report.md": {
+    "hash": "aa321ea76cdf8493ba7ba38fb4864e4e208a522b0835ed7aa921fbad1211cfe3",
+    "indexed_at": "2026-04-20T02:30:04"
+  },
+  "knowledge/index.md": {
+    "hash": "0453c7900822bb7156d48e295d3f88293dec3c1d5510df2f96eeee91655195c4",
+    "indexed_at": "2026-04-20T02:30:04"
   }
 }
