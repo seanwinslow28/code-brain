@@ -108,3 +108,4 @@ Summary:
 2026-04-19,08:46:06,flush,,recursion-guard,0.0000,,,0 msgs
 2026-04-19,22:00:05,knowledge-lint,,success,0.0000,,,tier1=113 tier2=5
 2026-04-20,02:00:04,vault-indexer,,success,0.0000,2740,,"chunks=21, embeddings=21, errors=0"
+2026-04-20,02:36:08,vault-synthesizer,,success,0.0000,363499,,concepts=0 connections=0 rejected=0
