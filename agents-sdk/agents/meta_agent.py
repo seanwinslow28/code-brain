@@ -7,7 +7,7 @@ IMPORTANT: Only 2 agents are active per AUDIT-2026-04-09-agent-downsizing.md.
 Do NOT attempt to monitor, restart, or re-enable disabled agents.
 
 Machine: Mac Mini (phi4-mini-reasoning for summary generation)
-Schedule: Daily at 06:30 (before Daily Driver at 08:45)
+Schedule: Daily at 08:35 (before Daily Driver at 08:45)
 Safety: max 10 turns, $0.10 budget cap
 
 Usage:
@@ -38,8 +38,19 @@ from lib.config import load_config
 
 # ─── Constants ────────────────────────────────────────────────────────
 
-ACTIVE_AGENTS = ["vault_indexer", "daily_driver"]
+ACTIVE_AGENTS = ["vault_indexer", "vault_synthesizer", "daily_driver", "knowledge_lint", "flush", "meta_agent"]
 DISABLED_AGENT_COUNT = 6  # process_inbox, daily_driver evening/weekly, pr_digest, sprint_health, meeting_defender
+
+# Descriptive metadata per active agent — drives the fleet report template.
+# Tuple order: (display_name, schedule, machine, cost_label, monthly_cost_usd)
+AGENT_METADATA: dict[str, dict[str, str | float]] = {
+    "vault_indexer":     {"display": "vault-indexer",         "schedule": "2:00 AM daily",     "machine": "Mac Mini",        "cost_label": "$0.00/run",   "monthly_usd": 0.00},
+    "vault_synthesizer": {"display": "vault-synthesizer",     "schedule": "2:30 AM daily",     "machine": "MBP (when awake)","cost_label": "$0.00/run",   "monthly_usd": 0.00},
+    "daily_driver":      {"display": "daily-driver morning",  "schedule": "8:45 AM daily",     "machine": "Claude API",      "cost_label": "~$0.40/run",  "monthly_usd": 12.00},
+    "knowledge_lint":    {"display": "knowledge-lint",        "schedule": "Sunday 22:00",      "machine": "Mac Mini / MBP",  "cost_label": "$0.00/run",   "monthly_usd": 0.00},
+    "flush":             {"display": "session-end-flush",     "schedule": "hook-triggered",    "machine": "Mac Mini / MBP",  "cost_label": "$0.00/run",   "monthly_usd": 0.00},
+    "meta_agent":        {"display": "meta-agent",            "schedule": "8:35 AM daily",     "machine": "local",           "cost_label": "$0.00/run",   "monthly_usd": 0.00},
+}
 BATON_DIR = Path.home() / ".claude" / "batons"
 LOG_DIR_BASE = Path.home() / "Code-Brain" / "claude-code-superuser-pack" / "vault" / "90_system" / "agent-logs"
 VAULT_ROOT = Path.home() / "Code-Brain" / "claude-code-superuser-pack" / "vault"
@@ -70,9 +81,12 @@ def check_agent_health(agent_name: str, config: dict, dry_run: bool = False) -> 
         result["details"] = "Dry run — skipping actual log check"
         return result
 
-    # Check for recent baton files
-    baton_pattern = f"{agent_name}*.baton"
-    baton_files = sorted(BATON_DIR.glob(baton_pattern), key=lambda p: p.stat().st_mtime, reverse=True)
+    # Check for recent baton files (baton names may use either separator)
+    baton_glob = [f"{agent_name}*.baton", f"{agent_name.replace('_', '-')}*.baton"]
+    baton_files: list = []
+    for pattern in baton_glob:
+        baton_files.extend(BATON_DIR.glob(pattern))
+    baton_files = sorted(set(baton_files), key=lambda p: p.stat().st_mtime, reverse=True)
 
     if baton_files:
         latest = baton_files[0]
@@ -88,8 +102,14 @@ def check_agent_health(agent_name: str, config: dict, dry_run: bool = False) -> 
             result["last_run"] = mtime.isoformat()
             result["details"] = f"Latest baton: {latest.name} ({age_hours:.1f}h ago — exceeds 24h window)"
     else:
-        # Fallback: check log files
-        log_files = sorted(LOG_DIR_BASE.glob(f"*{agent_name}*"), key=lambda p: p.stat().st_mtime, reverse=True)
+        # Fallback: check log files. Log filenames use hyphens (e.g. vault-indexer-*.log),
+        # but agent_name uses underscores, so glob on both forms.
+        hyphen_name = agent_name.replace("_", "-")
+        log_files = sorted(
+            set(LOG_DIR_BASE.glob(f"*{agent_name}*")) | set(LOG_DIR_BASE.glob(f"*{hyphen_name}*")),
+            key=lambda p: p.stat().st_mtime,
+            reverse=True,
+        )
         if log_files:
             latest = log_files[0]
             mtime = datetime.fromtimestamp(latest.stat().st_mtime)
@@ -106,7 +126,7 @@ def check_agent_health(agent_name: str, config: dict, dry_run: bool = False) -> 
 def check_daily_note_exists(dry_run: bool = False) -> dict[str, Any]:
     """Check if today's daily note was created (indicates daily-driver ran)."""
     today = datetime.now().strftime("%Y-%m-%d")
-    daily_note = VAULT_ROOT / "01_Journals" / "Daily Notes" / f"{today}.md"
+    daily_note = VAULT_ROOT / "10_timeline" / "daily" / f"{today}.md"
 
     if dry_run:
         return {"exists": True, "path": str(daily_note), "dry_run": True}
@@ -159,9 +179,10 @@ def generate_fleet_report(dry_run: bool = False) -> str:
     except Exception:
         pass
 
-    # Check active agents
-    vault_indexer = check_agent_health("vault_indexer", config, dry_run)
-    daily_driver = check_agent_health("daily_driver", config, dry_run)
+    # Check each active agent
+    agent_health: dict[str, dict[str, Any]] = {
+        name: check_agent_health(name, config, dry_run) for name in ACTIVE_AGENTS
+    }
     daily_note = check_daily_note_exists(dry_run)
 
     # Check infrastructure
@@ -169,24 +190,55 @@ def generate_fleet_report(dry_run: bool = False) -> str:
     alienware = check_machine_online(ALIENWARE_OLLAMA, dry_run)
     comfyui = check_comfyui(dry_run)
 
+    # Build per-agent sections
+    agent_sections: list[str] = []
+    for name in ACTIVE_AGENTS:
+        meta = AGENT_METADATA.get(name, {})
+        h = agent_health[name]
+        display = meta.get("display", name)
+        header = f"### {display} ({meta.get('schedule', '—')}, {meta.get('machine', '—')}, {meta.get('cost_label', '—')})"
+        lines = [
+            header,
+            f"- **Status:** {h['status']}",
+            f"- **Last run:** {h['last_run'] or 'N/A'}",
+            f"- **Details:** {h['details']}",
+        ]
+        # Extra signal only meaningful for daily_driver
+        if name == "daily_driver":
+            lines.append(
+                f"- **Daily note exists:** {'Yes' if daily_note['exists'] else 'No'} (`{daily_note['path']}`)"
+            )
+        agent_sections.append("\n".join(lines))
+
+    agents_block = "\n\n".join(agent_sections)
+
+    # Cost projection
+    cost_lines: list[str] = []
+    total_monthly = 0.0
+    for name in ACTIVE_AGENTS:
+        meta = AGENT_METADATA.get(name, {})
+        monthly = float(meta.get("monthly_usd", 0.0))
+        total_monthly += monthly
+        label = (
+            f"~${monthly:.2f}/month"
+            if monthly > 0
+            else "$0.00/month (local)"
+        )
+        cost_lines.append(f"- {meta.get('display', name)}: {label}")
+    cost_block = "\n".join(cost_lines)
+
+    active_count = len(ACTIVE_AGENTS)
+    total_count = active_count + DISABLED_AGENT_COUNT
+
     # Build report
     report = f"""# Fleet Status — {today}
 
 **Generated:** {today} {now} by Meta-Agent
-**Active agents:** 2 of {2 + DISABLED_AGENT_COUNT} | **Disabled:** {DISABLED_AGENT_COUNT}
+**Active agents:** {active_count} of {total_count} | **Disabled:** {DISABLED_AGENT_COUNT}
 
 ## Active Agent Health
 
-### vault-indexer (2:00 AM daily, Mac Mini, $0.00/run)
-- **Status:** {vault_indexer['status']}
-- **Last run:** {vault_indexer['last_run'] or 'N/A'}
-- **Details:** {vault_indexer['details']}
-
-### daily-driver morning (8:45 AM daily, Claude API, ~$0.40/run)
-- **Status:** {daily_driver['status']}
-- **Last run:** {daily_driver['last_run'] or 'N/A'}
-- **Details:** {daily_driver['details']}
-- **Daily note exists:** {'Yes' if daily_note['exists'] else 'No'} (`{daily_note['path']}`)
+{agents_block}
 
 ## Infrastructure
 
@@ -205,10 +257,8 @@ def generate_fleet_report(dry_run: bool = False) -> str:
 
 ## Cost Projection
 
-- vault-indexer: $0.00/month (local Ollama)
-- daily-driver morning: ~$12.00/month ($0.40/day x 30)
-- meta-agent: ~$3.00/month ($0.10/day x 30)
-- **Total active fleet:** ~$15.00/month
+{cost_block}
+- **Total active fleet:** ~${total_monthly:.2f}/month
 """
 
     return report
