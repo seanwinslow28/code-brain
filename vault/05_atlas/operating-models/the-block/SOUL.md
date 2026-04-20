@@ -2,7 +2,7 @@
 type: operating-model
 artifact: SOUL
 domain: [the-block]
-status: draft
+status: confirmed
 last_interviewed: 2026-04-19
 created: 2026-04-18
 review-date: null
@@ -19,7 +19,7 @@ ai-context: "People, tools, and tacit/tribal knowledge for The Block. Populated 
 | **Ed Rupkus** | Product Manager (my manager) | Priority signal, P&E wording review, career guidance, tiebreaker on non-Campus calls | Most decisions I stall on; daily overlap |
 | **Matt Vitebsky** | VP P&E / CPO | P&E update sign-off, exec-level escalation | Bi-weekly P&E post cannot ship without his nod |
 | **Larry Cermak** | President of The Block; **Interim CEO** until the new CEO is announced (announcement expected 2026-05-01) | Exec-level roadmap signal in the interim period | Top-of-org strategic alignment until the new CEO lands |
-| **New CEO (TBA)** | Incoming CEO, starts 2026-05-01 (name not yet known — update this row on announcement) | Roadmap direction, Block Pro revamp approval (post-start) | Roadmap/strategic choices will increasingly route through them |
+| **Steve W. Chung** | Incoming CEO, starts 2026-05-01. Tech + media + global-scale executive. Most recently at Azuki (anime-NFT / web3, LA); prior: Co-CEO CJ ENM America & Chief Global Officer of CJ ENM; Chief Growth Officer at FOX Corporation (launched LiveNOW and FOX SOUL FAST channels); founder of OTT platform Frankly (reverse-IPO). Stanford MBA, Harvard AB. | Roadmap direction, Block Pro revamp approval (post-start), strategic CEO sign-off on everything downstream | All top-of-org strategic choices route through him from 2026-05-01 onward |
 | **Mike Price** | Lead Developer / Lead Software Engineer | The Block's API access (pending), deepest tech-architecture calls | API access is the current gated item — deliberately not pushing |
 | **Josh Gragg** | Director of Design | Design-team direction, design-system questions, escalation on design disagreements | Design approvals that the individual designers can't green-light |
 | **Claudine Daumur** | Product Designer | Design handoffs, Figma-level clarification on tickets I wrote | Specific design-Q resolutions |
@@ -101,7 +101,8 @@ I attend the Wed 10:45 AM sync to learn and look for ways to bring Block revenue
 | QA (Ramuald, Ana) | Per-release | Acceptance criteria clarity |
 | David | Bi-weekly + ad-hoc | Campus + Sponsored Courses PM coverage |
 | Matt / CPO | Bi-weekly | P&E update for sign-off |
-| Larry (Interim CEO / President) + incoming CEO | Ongoing; new CEO takes the handoff 2026-05-01 | Roadmap clarity, Block Pro direction |
+| Larry Cermak (President / interim CEO) | Through 2026-04-30 | Exec-level roadmap signal in the interim window |
+| Steve W. Chung (incoming CEO) | Ongoing from 2026-05-01 | Roadmap clarity, Block Pro direction, approval gate for Ed + Sean's pitches |
 | Media team (Gareth, Jordan, Davis) | Weekly (Wed 10:45 AM) | Future-facing support, idea sparring |
 | RevOps / AdOps (Lil, Karla) | Bi-weekly + ad-hoc | Claude/Zapier/AI-tool help, Salesforce Campus user email handling |
 

@@ -2,7 +2,7 @@
 type: operating-model
 artifact: USER
 domain: [the-block]
-status: draft
+status: confirmed
 last_interviewed: 2026-04-19
 created: 2026-04-18
 review-date: null

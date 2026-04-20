@@ -2,7 +2,7 @@
 type: operating-model
 artifact: HEARTBEAT
 domain: [the-block]
-status: draft
+status: confirmed
 last_interviewed: 2026-04-19
 created: 2026-04-18
 review-date: null
@@ -46,7 +46,7 @@ Also recurring (day varies): weekly 1:1 with Ed; bi-weekly 1:1 with David (Campu
 - **ETF pipeline:** monitor `#research-etf` (C09EXM9FYAG) for researcher posts → run `etf-page-creator` skill → manually paste WordPress fields → update the ETF tracker spreadsheet. No compliance or market-open gating.
 
 ## Monthly / Quarterly
-- **New CEO starts 2026-05-01.** Ed + Sean prepping a roadmap; The Block Pro revamp is the flagship pitch (biggest revenue line, not worked on in years).
+- **Steve W. Chung starts as CEO 2026-05-01** (tech + media + global executive — ex-CJ ENM, FOX Corporation, Frankly, Azuki). Larry Cermak (President) serves as interim CEO through 2026-04-30. Ed + Sean are prepping a roadmap; The Block Pro revamp is the flagship pitch (biggest revenue line, not worked on in years).
 - **OKRs:** Not owned yet (new-hire exemption from Nov 10 start). Expected Q2 or Q3 2026. Logged in Rippling (currently messy, pending CEO direction).
 
 ## Seasonal Shifts
