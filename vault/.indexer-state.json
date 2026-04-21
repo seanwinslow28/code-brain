@@ -11,9 +11,13 @@
     "hash": "8ca93342d4890252986efcca39e75b9ddb234d8ee99aa01ada5e33149026e507",
     "indexed_at": "2026-04-20T02:30:04"
   },
+  "02_Areas/Agent-Fleet/daily-fleet-status-2026-04-20.md": {
+    "hash": "0964ade5c091a977c8ad0d93c7d744a7fa836cfc776aa51794c0ace6266eba49",
+    "indexed_at": "2026-04-21T02:30:05"
+  },
   "02_Areas/Agent-Fleet/fleet-state.md": {
-    "hash": "8ca93342d4890252986efcca39e75b9ddb234d8ee99aa01ada5e33149026e507",
-    "indexed_at": "2026-04-20T02:30:04"
+    "hash": "0964ade5c091a977c8ad0d93c7d744a7fa836cfc776aa51794c0ace6266eba49",
+    "indexed_at": "2026-04-21T02:30:05"
   },
   "02_Areas/Work/pr-digest-2026-04-08.md": {
     "hash": "448faaa6f30b70d705e116f9c16331ddbe8cb119166fab272ccd56d66f3214d1",
@@ -278,6 +282,14 @@
   "30_domains/product-management/the-block-meetings-granola-notes/Product __ Legal Sync.md": {
     "hash": "67a3ba384b9865d697774ac62dac5829ce6cbd9786edcd94cf1a2ae4a1fc3240",
     "indexed_at": "2026-04-19T02:30:02"
+  },
+  "30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins-2026-04-20_10-01-23.md": {
+    "hash": "a84e7366140685d6263df5ee69238a80c2fc276d773393329c53e93de786695f",
+    "indexed_at": "2026-04-21T02:30:05"
+  },
+  "30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins-transcript-2026-04-20_10-01-23.md": {
+    "hash": "eb80dd18a88404edf4ed6be08da83bfc55529f37ffad62959e2037da4f5edd4c",
+    "indexed_at": "2026-04-21T02:30:05"
   },
   "30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins-transcript.md": {
     "hash": "950b6ba7e3db4c3704f3c3a2ca113feaee12a6b5a84e660db89557eee3ae6c8c",
