@@ -118,3 +118,10 @@ Summary:
 2026-04-20,08:45:41,flush,,recursion-guard,0.0000,,,0 msgs
 2026-04-21,02:00:06,vault-indexer,,success,0.0000,3816,,"chunks=39, embeddings=39, errors=0"
 2026-04-21,02:36:08,vault-synthesizer,,success,0.0000,363513,,concepts=0 connections=0 rejected=0
+2026-04-21,08:45:57,flush,,recursion-guard,0.0000,,,0 msgs
+2026-04-21,08:45:57,daily-driver,morning,success,0.3598,45833,7,"Morning planning complete.
+
+**Daily note created:** `vault/10_timeline/daily/2026-04-21.md`
+
+**Summary:**
+- **Yesterday (4/20):** No evening reflection filled — all 5 carry-over items assumed incomple"
