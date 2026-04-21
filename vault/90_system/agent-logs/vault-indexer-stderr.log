@@ -305,3 +305,11 @@
 [INFO] Indexed health/2026-04-19-lint-report.md: 18 chunks
 [INFO] Indexed knowledge/index.md: 1 chunks
 [INFO] Indexing complete: 21 chunks, 21 embeddings, 0 errors, 2740ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 337 vault files, 6 need indexing, 0 deleted
+[INFO] Indexed 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-20.md: 2 chunks
+[INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins-2026-04-20_10-01-23.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins-transcript-2026-04-20_10-01-23.md: 32 chunks
+[INFO] Indexed knowledge/index.md: 1 chunks
+[INFO] Indexing complete: 39 chunks, 39 embeddings, 0 errors, 3816ms
