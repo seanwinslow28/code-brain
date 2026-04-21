@@ -116,3 +116,4 @@ Summary:
 - 5 carry-over items from 4/19 (no evening reflection was filled — assumed most tasks didn't land)
 - **Key fl"
 2026-04-20,08:45:41,flush,,recursion-guard,0.0000,,,0 msgs
+2026-04-21,02:00:06,vault-indexer,,success,0.0000,3816,,"chunks=39, embeddings=39, errors=0"
