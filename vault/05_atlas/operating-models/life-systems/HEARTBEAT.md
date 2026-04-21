@@ -30,16 +30,18 @@ Weekday (Boston, post-move):
 | 17:15–~21:00 | Evening | Dinner with girlfriend, relax, optional learning/research/creative |
 | 21:00–22:00 | Bed | Target sleep window |
 
-**45/35/20 split (life-systems lens)**:
-- 45% deep work (9–2)
-- 35% comms/admin/planning (3–5:15)
-- 20% learning/creative (lunch + evening, woven in)
+**Life-systems windows around the workday** (the 45/35/20 split is a work-time rule — see [the-block/CLAUDE.md](../../../../the-block/CLAUDE.md); life-systems needs the *inverse* — when life-systems time actually happens):
+- Pre-work 05:30–08:45 — sacred first hour + gym + breakfast (life-systems anchor block)
+- Lunch 11:30–12:30 — learning (AI news / tools / workflows on YouTube)
+- Decompress 14:00–15:00 — walk or couch, no computer (protected life-systems slot)
+- Evening 17:15–21:00 — dinner w/ girlfriend, relaxed learning/creative woven in
+- Work displaces life-systems during 09:00–14:00 and 15:00–17:15
 
 **Weekend**: No gym — body needs recovery. Walk for movement. Focus is recovery, relaxation, quality time with girlfriend/friends/family, and personal creative + agentic workflow projects.
 
 ## Weekly Cadence
 
-**Calendar (sean.winslow28@gmail.com)**: Sparse. Mostly notification noise from subscribed sites and past purchases — not real recurring events.
+**Calendar (sean.winslow28@gmail.com)**: Essentially empty — no recurring life-systems calendar events. Gmail *inbox* gets heavy notification noise from subscribed sites and past purchases, but those are emails, not calendar events.
 
 **Off-calendar weekly rituals (current + aspirational)**:
 - `/daily-driver` weekly review — currently work-focused, want to extend to life-systems
@@ -61,7 +63,7 @@ Weekday (Boston, post-move):
 
 **Quarterly**: No estimated tax payments — W-2 at The Block since November 2025. Taxes withheld via Rippling.
 
-**Subscription audit**: Last full audit 2026-02-27 → [financial-review-2026-02-27.md](../../../50_sources/finance/financial-review-2026-02-27.md). Heavy cuts already applied. Re-audit due (rolling).
+**Subscription audit**: Last full audit 2026-02-27 → [financial-review-2026-02-27.md](../../../50_sources/finance/financial-review-2026-02-27.md). Heavy cuts already applied. Re-audit pending — Sean flagged in April 2026 as due soon.
 
 ## Seasonal Shifts
 
@@ -87,4 +89,4 @@ Weekday (Boston, post-move):
 ## Email Split
 
 - **sean.winslow28@gmail.com**: ~100% of life-systems traffic — personal, financial, subscriptions
-- **swinslow@theblock.co**: only life-systems-adjacent item is Rippling pay stub notifications. Redundant with bank statements — generally ignorable for personal finance tracking
+- **swinslow@theblock.co**: only life-systems-adjacent item is Rippling pay stub notifications. Redundant with bank statements — probably not load-bearing for personal finance tracking, but Sean hasn't firmly decided (flag open)
