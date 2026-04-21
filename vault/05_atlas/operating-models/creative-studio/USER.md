@@ -2,7 +2,7 @@
 type: operating-model
 artifact: USER
 domain: [creative-studio]
-status: draft
+status: confirmed
 last_interviewed: 2026-04-20
 created: 2026-04-18
 review-date: null
