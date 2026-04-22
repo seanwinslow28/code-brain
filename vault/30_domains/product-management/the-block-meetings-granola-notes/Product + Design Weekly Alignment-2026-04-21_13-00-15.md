@@ -3,7 +3,7 @@ granola_id: 5a621dc0-bd1c-4afd-8512-d66c76109507
 title: "Product + Design Weekly Alignment"
 type: note
 created: 2026-04-21T17:00:15.018Z
-updated: 2026-04-21T17:20:48.384Z
+updated: 2026-04-22T10:36:47.997Z
 attendees: 
   - jgragg@theblock.co
   - erupkus@theblock.co

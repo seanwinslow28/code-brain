@@ -3,7 +3,7 @@ granola_id: 1a0e3546-a15a-43ae-8636-c7acbc6011ce
 title: "Google Ad Manager Operations Sync - Transcript"
 type: transcript
 created: 2026-04-21T15:32:13.466Z
-updated: 2026-04-21T16:12:00.294Z
+updated: 2026-04-22T10:36:48.396Z
 attendees: 
   - kvallecillo@theblock.co
   - vlu@theblock.co
