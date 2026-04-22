@@ -55,7 +55,7 @@ Money-making research surfaces are **capture-and-defer**, not drop-everything. T
 ## Agent Delegation
 
 **Already trusted (today):**
-- Transaction categorization via local models (gemma3, phi4-mini — personal data stays local)
+- Transaction categorization via local models (gemma4, phi4-mini — personal data stays local)
 - Habit-log assist
 - Subscription scanning / flagging
 - Research summarization
