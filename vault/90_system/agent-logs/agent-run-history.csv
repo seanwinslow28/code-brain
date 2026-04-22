@@ -129,3 +129,4 @@ Summary:
 2026-04-21,13:36:51,flush,,recursion-guard,0.0000,,,0 msgs
 2026-04-21,13:36:52,flush,,recursion-guard,0.0000,,,0 msgs
 2026-04-22,02:00:07,vault-indexer,,success,0.0000,4460,,"chunks=55, embeddings=55, errors=0"
+2026-04-22,02:43:41,vault-synthesizer,,success,0.0000,818917,,concepts=0 connections=0 rejected=0
