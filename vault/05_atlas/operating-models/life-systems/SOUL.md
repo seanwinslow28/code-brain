@@ -2,7 +2,7 @@
 type: operating-model
 artifact: SOUL
 domain: [life-systems]
-status: draft
+status: confirmed
 last_interviewed: 2026-04-22
 created: 2026-04-18
 review-date: null
@@ -56,7 +56,7 @@ Exploratory: additional finance-focused apps on the radar; actively looking.
 **Open workstream:** full audit of free/paid APIs + free/paid MCPs to maximize research firepower. Sean has flagged this as a "help me figure this out" item.
 
 ### Three-Machine Topology (life-systems lens — minimal coupling)
-- **Mac Mini**: Agents SDK hub. Life-systems agents run here (vault synthesizer, knowledge lint, daily-driver autonomous runs, session-end flush). **Pivotable** — if it halts, Sean can relocate orchestration to another machine; nothing is strictly pinned to Mac Mini hardware.
+- **Mac Mini**: Agents SDK hub. All 6 active autonomous agents run here (vault indexer, vault synthesizer, meta-agent, daily-driver autonomous run, knowledge lint, session-end flush). **Pivotable** — if it halts, Sean can relocate orchestration to another machine; nothing is strictly pinned to Mac Mini hardware.
 - **MacBook Pro**: work machine. No life-systems load.
 - **Alienware**: creative-studio generation node. No life-systems load.
 - **iPhone + Apple Watch**: **only life-systems hard dependency** is fitness tracking (Apple Health/Workouts). If both are lost for a day, fitness logging halts — everything else (finance apps, Claude Code, vault) is reachable from another machine.

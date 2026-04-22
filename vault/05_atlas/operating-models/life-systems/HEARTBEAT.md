@@ -2,8 +2,8 @@
 type: operating-model
 artifact: HEARTBEAT
 domain: [life-systems]
-status: draft
-last_interviewed: 2026-04-21
+status: confirmed
+last_interviewed: 2026-04-22
 created: 2026-04-18
 review-date: null
 ai-context: "Operating rhythms for personal systems — finance, health, learning, tasks, time, career transition. Populated by the work-operating-model skill. Consumed by meeting-defender and daily-driver."
@@ -85,6 +85,7 @@ Weekday (Boston, post-move):
 3. **09:00–14:00 — Deep work**: protected from meetings whenever possible.
 4. **14:00–15:00 — Decompress**: away from computer. Walk or couch.
 5. **Evening with girlfriend**: dinner + decompression. Creative/learning work is layered in only when relaxed.
+6. **21:00 bed window**: target sleep is 21:00–22:00. Auto-no on any commitment that crosses 21:00.
 
 ## Email Split
 

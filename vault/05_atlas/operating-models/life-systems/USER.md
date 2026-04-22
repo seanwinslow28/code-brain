@@ -2,8 +2,8 @@
 type: operating-model
 artifact: USER
 domain: [life-systems]
-status: draft
-last_interviewed: 2026-04-21
+status: confirmed
+last_interviewed: 2026-04-22
 created: 2026-04-18
 review-date: null
 ai-context: "Sean's recurring decisions and prioritization patterns for personal systems. Life-systems is centered on personal financial advisory + research; habits and quick-capture are supporting layers. Consumed by daily-driver, process-inbox."
