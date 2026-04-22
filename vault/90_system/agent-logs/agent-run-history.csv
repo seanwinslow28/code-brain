@@ -128,3 +128,4 @@ Summary:
 2026-04-21,13:36:51,flush,,recursion-guard,0.0000,,,0 msgs
 2026-04-21,13:36:51,flush,,recursion-guard,0.0000,,,0 msgs
 2026-04-21,13:36:52,flush,,recursion-guard,0.0000,,,0 msgs
+2026-04-22,02:00:07,vault-indexer,,success,0.0000,4460,,"chunks=55, embeddings=55, errors=0"

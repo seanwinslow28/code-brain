@@ -313,3 +313,16 @@
 [redacted: granola archive path]
 [INFO] Indexed knowledge/index.md: 1 chunks
 [INFO] Indexing complete: 39 chunks, 39 embeddings, 0 errors, 3816ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 345 vault files, 11 need indexing, 0 deleted
+[INFO] Indexed 00_inbox/Welcome to AgentKit.md: 1 chunks
+[INFO] Indexed 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-21.md: 2 chunks
+[INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 2 chunks
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[INFO] Indexed knowledge/index.md: 1 chunks
+[INFO] Indexing complete: 55 chunks, 55 embeddings, 0 errors, 4460ms
