@@ -1,4 +1,8 @@
 {
+  "00_inbox/Welcome to AgentKit.md": {
+    "hash": "1ad9e95e637512cc90d53491164d86ff44f79d1675cfbbeb833db0402e719a56",
+    "indexed_at": "2026-04-22T02:30:02"
+  },
   "02_Areas/Agent-Fleet/daily-fleet-status-2026-04-09.md": {
     "hash": "7a2e7f9026a5a72b1bcb225a645d0d94b0b6bfbf2257f72ecf5da5f95b06397c",
     "indexed_at": "2026-04-19T02:30:02"
@@ -15,9 +19,13 @@
     "hash": "0964ade5c091a977c8ad0d93c7d744a7fa836cfc776aa51794c0ace6266eba49",
     "indexed_at": "2026-04-21T02:30:05"
   },
+  "02_Areas/Agent-Fleet/daily-fleet-status-2026-04-21.md": {
+    "hash": "1be5ef70afa21b1d3e1647f170aab53b5f2fad0b86c4885eb88cde3fb24cd421",
+    "indexed_at": "2026-04-22T02:30:02"
+  },
   "02_Areas/Agent-Fleet/fleet-state.md": {
-    "hash": "0964ade5c091a977c8ad0d93c7d744a7fa836cfc776aa51794c0ace6266eba49",
-    "indexed_at": "2026-04-21T02:30:05"
+    "hash": "1be5ef70afa21b1d3e1647f170aab53b5f2fad0b86c4885eb88cde3fb24cd421",
+    "indexed_at": "2026-04-22T02:30:02"
   },
   "02_Areas/Work/pr-digest-2026-04-08.md": {
     "hash": "448faaa6f30b70d705e116f9c16331ddbe8cb119166fab272ccd56d66f3214d1",
@@ -251,6 +259,14 @@
     "hash": "d5cc72696ab152c8f005c256d3ee18b29a196a66a9773f6f6b902f0094d27a7c",
     "indexed_at": "2026-04-19T02:30:02"
   },
+  "30_domains/product-management/the-block-meetings-granola-notes/Google Ad Manager Operations Sync-transcript.md": {
+    "hash": "765caa79b15ce8bb0a609c97ad4a270e6e8fd1fa3a6445437d579513bd191be0",
+    "indexed_at": "2026-04-22T02:30:02"
+  },
+  "30_domains/product-management/the-block-meetings-granola-notes/Google Ad Manager Operations Sync.md": {
+    "hash": "a2baa061feb94d629754b62de45ca8c0ad7cc64ecfde216d304e2d72e3bb7917",
+    "indexed_at": "2026-04-22T02:30:02"
+  },
   "30_domains/product-management/the-block-meetings-granola-notes/MattxEdxSean Meeting-transcript.md": {
     "hash": "13b4ef3c35268f6e5b0990691e18e0ab094c0e2ca53874a45a91426f1fa97716",
     "indexed_at": "2026-04-19T02:30:02"
@@ -263,9 +279,17 @@
     "hash": "511228863a8d92cf099f03207c8beee7b8c893d3c3191a93627d2d3ed3c34926",
     "indexed_at": "2026-04-19T02:30:02"
   },
+  "30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-2026-04-21_13-00-15.md": {
+    "hash": "651d548a3c9254e9cb6a0571df8de49f1156dce1fe6ae5fd760249f4943fef1d",
+    "indexed_at": "2026-04-22T02:30:02"
+  },
   "30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-transcript-2026-04-14_13-00-31.md": {
     "hash": "4e235722887ac781b53db8d5aab21d18f619eaf848abe78709f4c8c49b2b567c",
     "indexed_at": "2026-04-19T02:30:02"
+  },
+  "30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-transcript-2026-04-21_13-00-15.md": {
+    "hash": "0b7b7d3178e8e012a8cd03ca27948e98245878f65a26d1cb3f1c643a81275f1d",
+    "indexed_at": "2026-04-22T02:30:02"
   },
   "30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-transcript.md": {
     "hash": "e05991e33a40cdd40ac09e084eeadd90b0aeff4f1ba6918d8e499bc281de9285",
@@ -415,6 +439,10 @@
     "hash": "e4d4d5a97dd4b99a45c0c955f1a47194d0acf4512a3de68cf024b9bbaa300a8e",
     "indexed_at": "2026-04-19T02:30:02"
   },
+  "30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-21_09-58-57.md": {
+    "hash": "910f1d9d040aed39297b26387874ec03e25185cb201d405dc2ec6f71c196d35b",
+    "indexed_at": "2026-04-22T02:30:02"
+  },
   "30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-03-25_09-50-06.md": {
     "hash": "020db085e35b9a61a255c17e5e475f259bc565cb9edbb7eccf87f1a477d6397e",
     "indexed_at": "2026-04-19T02:30:02"
@@ -446,6 +474,10 @@
   "30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-16_10-00-30.md": {
     "hash": "d7e2c8cd32b6cd77911070b7fd1087cc18aaa58774744f1cdaafcb471d6655ee",
     "indexed_at": "2026-04-19T02:30:02"
+  },
+  "30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-21_09-58-57.md": {
+    "hash": "2e5d08727ab18bf2cbe2837f18a17bd62982fc76ea7cf7c1f91a4daeb0f741e2",
+    "indexed_at": "2026-04-22T02:30:02"
   },
   "30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript.md": {
     "hash": "81bdfded36f818e22a0621a0314e55a6d3e595a2dcfcdac33a2cb2b22261c24d",
