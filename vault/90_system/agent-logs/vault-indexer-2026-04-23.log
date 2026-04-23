@@ -1,0 +1,16 @@
+2026-04-23 02:00:05,388 [INFO] Starting vault embedding indexer
+2026-04-23 02:00:05,507 [INFO] Discovered 350 vault files, 14 need indexing, 0 deleted
+2026-04-23 02:00:06,278 [INFO] Indexed 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-22.md: 2 chunks
+2026-04-23 02:00:06,408 [INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 2 chunks
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+[redacted: granola archive path]
+2026-04-23 02:00:12,145 [INFO] Indexed knowledge/index.md: 1 chunks
+2026-04-23 02:00:12,147 [INFO] Indexing complete: 97 chunks, 97 embeddings, 0 errors, 6759ms
