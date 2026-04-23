@@ -56,3 +56,32 @@ META-AGENT COMPLETE
 - **Status:** log-only
 - **Last run:** 2026-04-22T02:43:41.849140
 - **Details:** No baton foun
+============================================================
+META-AGENT — Fleet Health Monitor
+Active agents: 6 | Disabled: 6
+Budget cap: $0.10 | Max turns: 10
+Dry run: False
+============================================================
+
+Fleet status saved: /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-23.md
+Fleet state updated: /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/02_Areas/Agent-Fleet/fleet-state.md
+  No alerts — all active agents healthy
+
+────────────────────────────────────────────────────────────
+META-AGENT COMPLETE
+# Fleet Status — 2026-04-23
+
+**Generated:** 2026-04-23 08:35 by Meta-Agent
+**Active agents:** 6 of 12 | **Disabled:** 6
+
+## Active Agent Health
+
+### vault-indexer (2:00 AM daily, Mac Mini, $0.00/run)
+- **Status:** log-only
+- **Last run:** 2026-04-23T02:00:12.147961
+- **Details:** No baton found, but log exists: vault-indexer-stderr.log
+
+### vault-synthesizer (2:30 AM daily, MBP (when awake), $0.00/run)
+- **Status:** log-only
+- **Last run:** 2026-04-23T02:48:12.456649
+- **Details:** No baton foun
