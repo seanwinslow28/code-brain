@@ -1,25 +1,25 @@
-# Fleet Status — 2026-04-23
+# Fleet Status — 2026-04-22
 
-**Generated:** 2026-04-23 08:35 by Meta-Agent
+**Generated:** 2026-04-22 08:35 by Meta-Agent
 **Active agents:** 6 of 12 | **Disabled:** 6
 
 ## Active Agent Health
 
 ### vault-indexer (2:00 AM daily, Mac Mini, $0.00/run)
 - **Status:** log-only
-- **Last run:** 2026-04-23T02:00:12.147961
+- **Last run:** 2026-04-22T02:00:07.075018
 - **Details:** No baton found, but log exists: vault-indexer-stderr.log
 
 ### vault-synthesizer (2:30 AM daily, MBP (when awake), $0.00/run)
 - **Status:** log-only
-- **Last run:** 2026-04-23T02:48:12.456649
+- **Last run:** 2026-04-22T02:43:41.849140
 - **Details:** No baton found, but log exists: vault-synthesizer-stderr.log
 
 ### daily-driver morning (8:45 AM daily, Claude API, ~$0.40/run)
 - **Status:** log-only
-- **Last run:** 2026-04-22T08:46:03.656713
-- **Details:** No baton found, but log exists: daily-driver-2026-04-22-morning.log
-- **Daily note exists:** No (`/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/10_timeline/daily/2026-04-23.md`)
+- **Last run:** 2026-04-21T08:45:57.615062
+- **Details:** No baton found, but log exists: daily-driver-2026-04-21-morning.log
+- **Daily note exists:** No (`/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/10_timeline/daily/2026-04-22.md`)
 
 ### knowledge-lint (Sunday 22:00, Mac Mini / MBP, $0.00/run)
 - **Status:** log-only
@@ -28,12 +28,12 @@
 
 ### session-end-flush (hook-triggered, Mac Mini / MBP, $0.00/run)
 - **Status:** log-only
-- **Last run:** 2026-04-22T12:19:00.716453
+- **Last run:** 2026-04-21T13:36:52.106784
 - **Details:** No baton found, but log exists: session-end-flush.log
 
 ### meta-agent (8:35 AM daily, local, $0.00/run)
 - **Status:** log-only
-- **Last run:** 2026-04-22T08:35:09.715224
+- **Last run:** 2026-04-21T08:35:08.327001
 - **Details:** No baton found, but log exists: meta-agent-stdout.log
 
 ## Infrastructure
