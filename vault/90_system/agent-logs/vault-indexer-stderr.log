@@ -326,3 +326,19 @@
 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-21_09-58-57.md: 10 chunks
 [INFO] Indexed knowledge/index.md: 1 chunks
 [INFO] Indexing complete: 55 chunks, 55 embeddings, 0 errors, 4460ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 350 vault files, 14 need indexing, 0 deleted
+[INFO] Indexed 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-22.md: 2 chunks
+[INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Brand, Media, Design Weekly Sync-2026-04-22_09-31-01.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Brand, Media, Design Weekly Sync-transcript-2026-04-22_09-31-01.md: 23 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Google Ad Manager Operations Sync-transcript.md: 21 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Google Ad Manager Operations Sync.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-2026-04-21_13-00-15.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-transcript-2026-04-21_13-00-15.md: 11 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/The Starting Block Sync-transcript.md: 17 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/The Starting Block Sync.md: 1 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-21_09-58-57.md: 3 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-21_09-58-57.md: 10 chunks
+[INFO] Indexed knowledge/index.md: 1 chunks
+[INFO] Indexing complete: 97 chunks, 97 embeddings, 0 errors, 6759ms
