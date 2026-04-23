@@ -166,6 +166,7 @@ docs/                # Ecosystem documentation
 5. **Settings precedence** (highest wins): Enterprise managed > Project local > Project settings > User settings
 6. **Permission evaluation** (first match wins): Deny > Ask > Allow
 7. **3-domain structure (v3.15.0)**: `the-block/`, `creative-studio/`, `life-systems/` are the only workspace folders that house domain-specific content. `product-management/` lives nested inside `the-block/`; `design-team/` and `16bitfit-battle-mode/` live nested inside `creative-studio/`. The prior rule that `product-management/` stayed at the root is **explicitly waived as of v3.15.0**.
+8. **Vault sync owner (issue #22, 2026-04-23)**: The shell-level auto-commit hook is the **sole** owner of vault git operations. Obsidian-Git plugin auto-features (backup interval, auto-pull, auto-push, commit-on-change) must stay disabled on every machine — do not re-enable them. Running two auto-commit systems against the same vault caused the v3.15.0 merge conflicts. Obsidian-Git can be used for manual commits from the command palette if desired; it must never run automatically.
 
 ## Hook Exit Codes
 
