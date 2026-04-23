@@ -81,7 +81,7 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Cla
 | Vault Indexer | 2:00 AM daily | nomic-embed-text (Mac Mini Ollama) | $0.00 (local) |
 | Vault Synthesizer | 2:30 AM daily | Qwen3-14B on MBP (intermittent — succeeds only when MBP awake; v3.14.3 retired WOL) | $0.00 (local) |
 | Meta-Agent (fleet health) | 8:35 AM daily | phi4-mini (Mac Mini), local checks only | $0.00 (local) |
-| Daily Driver (morning) | 8:45 AM daily | daily-driver, vault-read-write | ~$0.40 |
+| Daily Driver (morning) | 8:45 AM daily | daily-driver, vault-read-write + operating-model HEARTBEAT awareness (v3.16.0) | ~$0.40 (cap $0.60) |
 | Knowledge Lint | Sunday 22:00 | Tier 1 phi4-mini (Mac Mini); Tier 2 Qwen3-14B on MBP if awake | $0.00 (local) |
 | Flush (SessionEnd) | hook-triggered | phi4-mini (Mac Mini) always; ≥100-msg sessions attempt Qwen3-14B on MBP if awake | $0.00 (local) |
 
@@ -106,7 +106,9 @@ cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode mo
 cd agents-sdk && PYTHONPATH=. pytest tests/ -v
 ```
 
-Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key needed). Safety: max 30 turns, $0.50/run cap. SDK version: `0.1.63` (pinned in `agents-sdk/pyproject.toml` as of v3.15.0). Morning schedule: 8:45 AM (was 6:00 AM as of v3.12.2). Full docs: `docs/agents-sdk.md`.
+Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key needed). Safety: max 30 turns, default $0.50/run cap (daily-driver morning bumped to $0.60 in v3.16.0 to absorb the operating-model artifact preamble). SDK version: `0.1.63` (pinned in `agents-sdk/pyproject.toml` as of v3.15.0). Morning schedule: 8:45 AM (was 6:00 AM as of v3.12.2). Full docs: `docs/agents-sdk.md`.
+
+**Operating-model artifact wiring (v3.16.0 Phase 1):** `agents-sdk/lib/artifact_loader.py` reads `vault/05_atlas/operating-models/{domain}/{kind}.md` artifacts on-demand with mtime-keyed caching. Daily-driver morning mode injects all three HEARTBEATs into the preamble plus on-demand Read pointers for USER / SOUL / operating-model / schedule-recommendations. Controlled by `[artifacts]` in `config.toml`; instant rollback = `enabled = false`. Phase 2 (meta-agent / flush / knowledge-lint) and Phase 3 (meeting-defender / sprint-health) are specified but not yet shipped.
 
 **launchd requirement:** All plists must include `EnvironmentVariables` with `PATH` set to `/Users/seanwinslow/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin`. Without this, the `claude` CLI is not discoverable and agents fail with `CLIConnectionError`. See `agents-sdk/BUGFIX-2026-04-07-launchd-path.md`.
 
@@ -124,7 +126,7 @@ Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key ne
 
 agents-sdk/          # Autonomous agents (Claude Agent SDK, Python)
 ├── agents/          # Agent scripts (daily_driver.py + scheduled launchd agents)
-├── lib/             # Shared modules (config, skill loader, vault I/O, logging)
+├── lib/             # Shared modules (config, skill loader, artifact loader, vault I/O, logging)
 ├── schedules/       # launchd plists + installer
 ├── tests/           # pytest suite
 └── config.toml      # Agent config, paths, safety limits

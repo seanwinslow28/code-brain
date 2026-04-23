@@ -50,6 +50,7 @@ class Config:
     safety: SafetyConfig
     agents: dict[str, dict]
     anthropic_api_key: str | None
+    artifacts: dict = field(default_factory=dict)
 
     def agent_config(self, name: str) -> AgentConfig:
         """Get configuration for a named agent."""
@@ -60,6 +61,16 @@ class Config:
             max_turns=raw.get("max_turns"),
             max_budget_usd=raw.get("max_budget_usd"),
         )
+
+    def artifact_config(self, agent_name: str) -> dict:
+        """Per-agent artifact config from [artifacts.per_agent.{agent_name}].
+
+        Returns an empty dict when artifacts are globally disabled, missing,
+        or when the agent has no per-agent entry.
+        """
+        if not self.artifacts.get("enabled", False):
+            return {}
+        return self.artifacts.get("per_agent", {}).get(agent_name, {})
 
 
 def load_config(
@@ -107,6 +118,7 @@ def load_config(
     )
 
     agents = raw.get("agents", {})
+    artifacts = raw.get("artifacts", {})
 
     # API key is optional — if not set, the SDK falls back to
     # Claude Code CLI's existing auth (e.g., `claude login` OAuth)
@@ -122,4 +134,5 @@ def load_config(
         safety=safety,
         agents=agents,
         anthropic_api_key=api_key,
+        artifacts=artifacts,
     )

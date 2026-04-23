@@ -24,6 +24,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from claude_agent_sdk import ClaudeAgentOptions, ResultMessage, query
 
+from lib.artifact_loader import load_heartbeats
 from lib.config import load_config
 from lib.custom_tools import create_vault_mcp_server
 from lib.logging_setup import record_run, setup_logger
@@ -39,6 +40,72 @@ AGENT_NAME = "daily-driver"
 
 # Re-exported for backwards compatibility; canonical home is lib.lint_report.
 from lib.lint_report import latest_lint_report, vault_health_summary  # noqa: E402
+
+
+def build_artifact_preamble(config) -> str:
+    """Build the operating-model artifact context block.
+
+    Two sections:
+      1. Always-loaded HEARTBEAT bodies for all three domains (small,
+         always relevant for morning prioritization).
+      2. On-demand pointer to full artifact paths for USER / SOUL /
+         operating-model / schedule-recommendations, plus the
+         life-systems tone rule and capture-and-defer default.
+
+    Returns "" when [artifacts].enabled is false or the per-agent entry
+    is missing, so disabling the section is a one-config-flip rollback.
+    """
+    agent_cfg = config.artifact_config("daily_driver")
+    if not agent_cfg:
+        return ""
+
+    sections: list[str] = []
+
+    if agent_cfg.get("heartbeats", False):
+        subpath = config.artifacts.get("vault_subpath", "05_atlas/operating-models")
+        require_confirmed = config.artifacts.get("require_confirmed", True)
+        hb = load_heartbeats(
+            config.vault_root,
+            subpath=subpath,
+            require_confirmed=require_confirmed,
+        )
+
+        heartbeat_lines = ["OPERATING-MODEL CONTEXT (always loaded — HEARTBEATs for today's rhythm):", ""]
+        for domain, body in hb.items():
+            heartbeat_lines.append(f"## {domain}")
+            if body is None:
+                heartbeat_lines.append(f"_(artifact unavailable — fall back to general judgment for {domain})_")
+            else:
+                heartbeat_lines.append(body.strip())
+            heartbeat_lines.append("")
+        sections.append("\n".join(heartbeat_lines))
+
+    on_demand = agent_cfg.get("on_demand", [])
+    if on_demand:
+        subpath = config.artifacts.get("vault_subpath", "05_atlas/operating-models")
+        artifact_base = config.vault_root / subpath
+        pointer_lines = [
+            "OPERATING-MODEL CONTEXT (on-demand — use the Read tool on these paths when the task requires deeper context):",
+        ]
+        for domain in ("the-block", "creative-studio", "life-systems"):
+            kinds_csv = ",".join(on_demand)
+            pointer_lines.append(f"- {artifact_base}/{domain}/{{{kinds_csv}}}.md")
+        sections.append("\n".join(pointer_lines))
+
+    # Tone rule + capture-and-defer default are authored here (not dumped
+    # from SOUL.md) because they are short, stable, and life-systems SOUL
+    # is otherwise local-only per the Phase 1 decision matrix.
+    sections.append(
+        "TONE RULE: calm, factual, zen. No scolding. No imperatives aimed at "
+        "the reader. No nagging on missed habits. Treat any resume or restart "
+        "as a neutral next step."
+    )
+    sections.append(
+        "CAPTURE-AND-DEFER DEFAULT: new ideas go to the inbox; do not promise "
+        "to act on them today."
+    )
+
+    return "\n\n".join(sections)
 
 
 def build_preamble(mode: str, config) -> str:
@@ -94,6 +161,9 @@ def build_preamble(mode: str, config) -> str:
     # Phase 6 D.3.d — surface Vault Health in morning mode only.
     if mode == "morning":
         base += "\n" + vault_health_summary(config.vault_root) + "\n"
+        artifact_block = build_artifact_preamble(config)
+        if artifact_block:
+            base += "\n" + artifact_block + "\n"
 
     return base
 
