@@ -1,8 +1,0 @@
-2026-04-21 02:00:02,205 [INFO] Starting vault embedding indexer
-2026-04-21 02:00:02,322 [INFO] Discovered 337 vault files, 6 need indexing, 0 deleted
-2026-04-21 02:00:03,618 [INFO] Indexed 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-20.md: 2 chunks
-2026-04-21 02:00:03,745 [INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 2 chunks
-2026-04-21 02:00:03,854 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins-2026-04-20_10-01-23.md: 2 chunks
-2026-04-21 02:00:05,949 [INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins-transcript-2026-04-20_10-01-23.md: 32 chunks
-2026-04-21 02:00:06,019 [INFO] Indexed knowledge/index.md: 1 chunks
-2026-04-21 02:00:06,022 [INFO] Indexing complete: 39 chunks, 39 embeddings, 0 errors, 3816ms
