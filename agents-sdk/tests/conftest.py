@@ -99,6 +99,56 @@ def tmp_skills(tmp_path: Path) -> Path:
 
 
 @pytest.fixture
+def tmp_artifacts(tmp_path: Path) -> Path:
+    """Create a minimal operating-model artifact tree for testing.
+
+    Returns the vault root (not the artifacts subdir) so tests can
+    pass the same path the real loader expects.
+    """
+    subpath = "05_atlas/operating-models"
+    domains = ("the-block", "creative-studio", "life-systems")
+
+    # Domain-flavored HEARTBEAT bodies so tests can distinguish them.
+    heartbeat_bodies = {
+        "the-block": (
+            "# HEARTBEAT — The Block\n\n"
+            "## Daily Rhythm\n"
+            "- Sacred first hour 8:45-9:45.\n"
+            "- Deep work 9-2. Decompress 2-3 PM.\n"
+        ),
+        "creative-studio": (
+            "# HEARTBEAT — Creative Studio\n\n"
+            "## Daily Rhythm\n"
+            "- Block work through 3 PM. Evenings and weekends for creative.\n"
+        ),
+        "life-systems": (
+            "# HEARTBEAT — Life Systems\n\n"
+            "## Daily Rhythm\n"
+            "- Sacred first hour 5:30-6:30 AM. Gym 7-8. Monthly finance 15th.\n"
+        ),
+    }
+
+    for domain in domains:
+        domain_dir = tmp_path / subpath / domain
+        domain_dir.mkdir(parents=True)
+        # All five kinds, all status: confirmed by default.
+        for kind in ("HEARTBEAT", "USER", "SOUL", "operating-model", "schedule-recommendations"):
+            body = heartbeat_bodies[domain] if kind == "HEARTBEAT" else f"# {kind} — {domain}\n\nTest body.\n"
+            (domain_dir / f"{kind}.md").write_text(
+                f"---\n"
+                f"type: operating-model\n"
+                f"artifact: {kind}\n"
+                f"domain: [{domain}]\n"
+                f"status: confirmed\n"
+                f"---\n\n"
+                f"{body}",
+                encoding="utf-8",
+            )
+
+    return tmp_path
+
+
+@pytest.fixture
 def tmp_config(tmp_path: Path, tmp_vault: Path, tmp_skills: Path) -> Path:
     """Create a config.toml for testing."""
     config_file = tmp_path / "config.toml"

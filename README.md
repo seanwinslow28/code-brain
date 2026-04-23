@@ -41,7 +41,7 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the [Cl
 | Vault Indexer | 2:00 AM daily | Incremental nomic-embed-text index of all vault notes |
 | Vault Synthesizer | 2:30 AM daily | Generates concept + connection articles from changed vault files (100% local, Qwen3-14B on MBP when awake; intermittent since v3.14.3) |
 | Meta-Agent | 8:35 AM daily | Fleet self-monitoring — checks active-agent recency + infra health, writes fleet-status note that feeds Daily Driver |
-| Daily Driver (morning) | 8:45 AM | Read yesterday's note, create today's, write 1-3-5 priorities, surface Vault Health + fleet alerts |
+| Daily Driver (morning) | 8:45 AM | Read yesterday's note, create today's, write 1-3-5 priorities, surface Vault Health + fleet alerts. v3.16.0: loads operating-model HEARTBEATs for all 3 domains + on-demand USER/SOUL/schedule-recs reads |
 | Knowledge Lint | Sunday 22:00 | Two-tier vault health scan (structural + semantic). Reports surface in the morning brief. |
 | Flush (SessionEnd) | on session close | Extracts decisions/lessons/actions/quotes from transcripts into `vault/daily/YYYY-MM-DD.md` |
 
@@ -60,7 +60,7 @@ cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode mo
 ./agents-sdk/schedules/install_schedules.sh
 ```
 
-Safety: 30 turn cap, $0.50/run budget, inherits block-secrets hook, no Bash access. Auth: uses existing `claude login` session (no API key needed). Full docs: [docs/agents-sdk.md](docs/agents-sdk.md).
+Safety: 30 turn cap, default $0.50/run budget (daily-driver morning is $0.60 in v3.16.0 to absorb the operating-model preamble), inherits block-secrets hook, no Bash access. Auth: uses existing `claude login` session (no API key needed). Full docs: [docs/agents-sdk.md](docs/agents-sdk.md).
 
 ### Native MCP Integrations
 

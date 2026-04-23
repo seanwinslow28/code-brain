@@ -5,6 +5,46 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.16.0] - 2026-04-23
+
+Phase 1 of the agent-wiring rollout — the `v3.15.0` Known Follow-up for wiring operating-model artifacts into the active agent fleet is now underway. This release wires `daily-driver` morning mode; `meta_agent` / `flush` / `knowledge_lint` arrive in Phase 2; `meeting_defender` / `sprint_health` remain frozen per the 2026-04-09 audit.
+
+### Added
+
+- `agents-sdk/lib/artifact_loader.py` — new module (~150 lines). `load_artifact(domain, kind, vault_root, *, strip_frontmatter, require_confirmed)` and `load_heartbeats(vault_root)` read operating-model artifacts from `vault/05_atlas/operating-models/{domain}/{kind}.md`, strip YAML frontmatter, and return `None` on missing / unconfirmed / unreadable files rather than raising. Module-level cache keyed on `(domain, kind, file_mtime_ns)` — a single agent run never re-reads the same artifact, and any edit between runs auto-invalidates. Mirrors the conventions in `lib/skill_loader.py`.
+- `agents-sdk/tests/test_artifact_loader.py` — 15 tests covering happy-path reads, frontmatter stripping, missing-file graceful degradation, `status: draft` filtering, mtime-invalidated cache, and the `load_heartbeats()` convenience.
+- `agents-sdk/tests/test_daily_driver_artifacts.py` — 10 tests covering `build_artifact_preamble()` content, global + per-agent toggles, morning-mode integration with `build_preamble()`, and a tone-guard that scans the preamble for forbidden scolding phrases (Risk #9 from the plan).
+- `agents-sdk/tests/conftest.py` — new `tmp_artifacts` fixture. Builds a 3-domain × 5-kind temp vault with `status: confirmed` frontmatter for loader and daily-driver artifact tests.
+- `agents-sdk/agents/daily_driver.py` — `build_artifact_preamble(config)` helper. Emits three sections: all-three HEARTBEATs (always-on), on-demand Read-tool pointer paths for the remaining four kinds × three domains, and the life-systems tone + capture-and-defer rules. Called from `build_preamble()` inside the existing morning-only branch — evening and weekly modes are unaffected.
+
+### Changed
+
+- `agents-sdk/config.toml` — new `[artifacts]` section with a global `enabled = true` kill-switch and a `[artifacts.per_agent]` block. `daily_driver` wired to load HEARTBEATs + list `USER / SOUL / operating-model / schedule-recommendations` as on-demand Read targets. Phase 2 entries for `meta_agent` / `flush` / `knowledge_lint` scaffolded as commented placeholders.
+- `agents-sdk/config.toml` — `[agents.daily_driver.modes.morning].max_budget_usd` bumped from `0.50` → `0.60`. Phase 1 adds ~+680 always-on / ~+3,100 worst-case one-shot tokens per morning run; estimated new worst case is ~$0.44 / run, cap lifted for ~50% headroom matching the v3.12.2 pattern.
+- `agents-sdk/lib/config.py` — `Config` gains an `artifacts: dict` field populated from `raw.get("artifacts", {})`, plus a `config.artifact_config(agent_name)` helper that returns the per-agent dict (or `{}` when artifacts are globally disabled or the agent has no entry).
+
+### Decisions locked 2026-04-23 (from the rollout plan)
+
+- **life-systems `USER.md` is cloud-readable by daily-driver.** Non-negotiable #7 (no cloud egress of life-systems personal data) is waived for this specific artifact × agent pair; SOUL.md stays local-only via Phase 2 agents. Trade-off accepted for richer morning prioritization.
+- **Morning cap $0.50 → $0.60.** Rollback path: flip `[artifacts].enabled = false`, which makes `build_artifact_preamble()` return `""` and the run falls back under $0.50.
+- **Phase 2 flush will always load all three SOULs** (no domain-inference helper). Phase 2 not shipped in this release.
+
+### Gate-check status
+
+| Gate | v3.15.0 | v3.16.0 |
+|------|---------|---------|
+| `python3 scripts/validate.py` | PASS | PASS |
+| `pytest agents-sdk/tests/` | 109 passed | 134 passed (+25 new) |
+| `python3 agents-sdk/agents/daily_driver.py --mode morning --dry-run` | PASS | PASS — preamble renders all 3 HEARTBEATs + on-demand pointer + tone rule; `Max budget: $0.6` |
+| Three-morning live soak | n/a | Pending 2026-04-24..26 |
+| Phase 6 producer loop (flush → synthesizer → lint) untouched | PASS | PASS |
+
+### Known follow-ups
+
+- **Three-morning live soak** (2026-04-24 through 2026-04-26). Gate-check criteria per the plan's Section 3.6: ≥1 carry-forward task reordered by sacred-block timing, zero `<!-- agent-error -->` entries, `cost_usd < 0.50` per run for the three runs (cap allows up to $0.60 but $0.50 is the healthy-soak signal), tone confirmed calm/factual/zen.
+- **Phase 2** wires `meta_agent` / `flush` / `knowledge_lint` to consume `schedule-recommendations.md` and `SOUL.md` from their local-model prompt paths (zero cloud egress). Gated on Phase 1 soak being clean.
+- **Phase 3** — `meeting_defender` and `sprint_health` wiring specs are written in the plan file but both agents remain `enabled = false`. Re-enablement is a separate, explicit decision per the 2026-04-09 audit.
+
 ## [3.15.0] - 2026-04-18
 
 Internal restructure to a 3-domain folder layout and addition of the `work-operating-model` skill (Nate B. Jones's 5-layer operating-model elicitation pattern, ported as a local-markdown-only skill — no OB1/Postgres/Supabase). The aim: open one folder and find everything for that domain; downstream agents get a real per-domain context layer instead of generic defaults.
