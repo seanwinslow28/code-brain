@@ -252,3 +252,93 @@
 [INFO] Indexed 40_knowledge/concepts/idea-autoresearch-agentic-polymarket-crypto.md: 1 chunks
 [INFO] Indexed 40_knowledge/references/ref-agent-soul-md-prompt.md: 18 chunks
 [INFO] Indexing complete: 56 chunks, 56 embeddings, 0 errors, 11223ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 331 vault files, 4 need indexing, 40 deleted
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-04.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-14.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-12.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-01.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-11.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-02.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-13.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-20.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-02.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-31.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-08.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-10.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-11.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-06.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-19.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-13.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-23.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-10.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-17.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-12.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-09.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-01.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-02-20.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-26.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-02-26.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-16.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-18.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-30.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-17.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-16.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-24.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-07.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-27.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-03.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-05.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-06.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-09.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-04-15.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-03.md
+[INFO] Removed deleted file from index: 10_timeline/daily/2026-03-25.md
+[INFO] Indexed 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-18.md: 1 chunks
+[INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 1 chunks
+[INFO] Indexed health/2026-04-18-lint-report.md: 17 chunks
+[INFO] Indexing complete: 19 chunks, 19 embeddings, 0 errors, 2561ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 334 vault files, 5 need indexing, 0 deleted
+[INFO] Indexed 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-19.md: 1 chunks
+[INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 1 chunks
+[INFO] Indexed health/2026-04-19-lint-report.md: 18 chunks
+[INFO] Indexed knowledge/index.md: 1 chunks
+[INFO] Indexing complete: 21 chunks, 21 embeddings, 0 errors, 2740ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 337 vault files, 6 need indexing, 0 deleted
+[INFO] Indexed 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-20.md: 2 chunks
+[INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins-2026-04-20_10-01-23.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Project CTO Design Check-ins-transcript-2026-04-20_10-01-23.md: 32 chunks
+[INFO] Indexed knowledge/index.md: 1 chunks
+[INFO] Indexing complete: 39 chunks, 39 embeddings, 0 errors, 3816ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 345 vault files, 11 need indexing, 0 deleted
+[INFO] Indexed 00_inbox/Welcome to AgentKit.md: 1 chunks
+[INFO] Indexed 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-21.md: 2 chunks
+[INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Google Ad Manager Operations Sync-transcript.md: 21 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Google Ad Manager Operations Sync.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-2026-04-21_13-00-15.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-transcript-2026-04-21_13-00-15.md: 11 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-21_09-58-57.md: 3 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-21_09-58-57.md: 10 chunks
+[INFO] Indexed knowledge/index.md: 1 chunks
+[INFO] Indexing complete: 55 chunks, 55 embeddings, 0 errors, 4460ms
+[INFO] Starting vault embedding indexer
+[INFO] Discovered 350 vault files, 14 need indexing, 0 deleted
+[INFO] Indexed 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-22.md: 2 chunks
+[INFO] Indexed 02_Areas/Agent-Fleet/fleet-state.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Brand, Media, Design Weekly Sync-2026-04-22_09-31-01.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Brand, Media, Design Weekly Sync-transcript-2026-04-22_09-31-01.md: 23 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Google Ad Manager Operations Sync-transcript.md: 21 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Google Ad Manager Operations Sync.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-2026-04-21_13-00-15.md: 2 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-transcript-2026-04-21_13-00-15.md: 11 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/The Starting Block Sync-transcript.md: 17 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/The Starting Block Sync.md: 1 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-2026-04-21_09-58-57.md: 3 chunks
+[INFO] Indexed 30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup-transcript-2026-04-21_09-58-57.md: 10 chunks
+[INFO] Indexed knowledge/index.md: 1 chunks
+[INFO] Indexing complete: 97 chunks, 97 embeddings, 0 errors, 6759ms

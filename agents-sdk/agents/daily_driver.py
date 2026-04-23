@@ -56,7 +56,7 @@ def build_preamble(mode: str, config) -> str:
 
     base = (
         f"You are Sean's autonomous daily driver agent running in {mode} mode.\n"
-        f"Current date: {today}\n"
+        f"Current date: {today} ({date.today().strftime('%A')})\n"
         f"Vault root: {config.vault_root}\n"
         f"Repo root: {config.repo_root}\n"
         f"\n"
