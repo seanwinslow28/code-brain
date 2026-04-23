@@ -1,0 +1,14 @@
+{
+  "model": "Wan 2.2 ti2v 5B (no LoRA)",
+  "status": "SUCCESS",
+  "frames_total": 25,
+  "frames_scored": 8,
+  "resolution": "480x480",
+  "avg_palette": 0.84,
+  "avg_outline": 0.533,
+  "avg_background": 0.763,
+  "avg_character": 0.751,
+  "avg_overall": 0.737,
+  "gate_check": "PASS",
+  "notes": "Character identity preserved. Green screen preserved. Motion is subtle idle bounce, not walk cycle."
+}

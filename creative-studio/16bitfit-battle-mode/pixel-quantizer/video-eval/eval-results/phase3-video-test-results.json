@@ -1,0 +1,61 @@
+{
+  "phase": 3,
+  "date": "2026-04-01",
+  "tests": {
+    "test_1_wan22": {
+      "model": "Wan 2.2 + pixel animate LoRA (local ComfyUI)",
+      "status": "BLOCKED",
+      "reason": "Alienware not reachable (192.168.68.201). ComfyUI needs manual start.",
+      "adapter_built": true,
+      "workflow_json_built": true,
+      "lora_source": "styly-agents/Wan2-2-pixel-animate",
+      "manual_steps_needed": [
+        "Start Alienware and ComfyUI (--force-fp16 --fp16-intermediates)",
+        "Download Wan 2.2 I2V checkpoint",
+        "Download pixel animate LoRA from HuggingFace",
+        "Install ComfyUI-VideoHelperSuite custom node",
+        "Run: python3 run_video_tests.py --test wan22"
+      ]
+    },
+    "test_2_gmfss": {
+      "model": "GMFSS Fortuna (local ComfyUI)",
+      "status": "BLOCKED",
+      "reason": "Alienware not reachable. Same dependency as Wan 2.2.",
+      "adapter_built": true,
+      "workflow_json_built": true,
+      "node_pack": "Fannovel16/ComfyUI-Frame-Interpolation",
+      "manual_steps_needed": [
+        "Start Alienware and ComfyUI",
+        "Install ComfyUI-Frame-Interpolation node pack",
+        "Run: python3 run_video_tests.py --test gmfss"
+      ]
+    },
+    "test_3_replicate": {
+      "model": "rd-animation (Replicate)",
+      "status": "COMPLETED - NOT VIABLE FOR PIPELINE",
+      "api_call_succeeded": true,
+      "output_format": "GIF",
+      "output_resolution": "48x48",
+      "frame_count": 16,
+      "character_consistency": "FAIL - generated generic character, not Sean",
+      "style_match": "FAIL - chibi/retro style, not SF2 quality",
+      "resolution_match": "FAIL - 48x48 vs required 128x128",
+      "background": "FAIL - black background, not green chroma key",
+      "animation_quality": "PARTIAL PASS - actual walk cycle motion detected",
+      "pixel_art_native": true,
+      "verdict": "Proves concept but output is unusable for the pipeline. Wrong resolution, character, and style. Could serve as animation reference or rapid prototyping tool.",
+      "cost_per_run": "~/bin/zsh.02"
+    }
+  },
+  "pipeline_validation": {
+    "stub_test": "PASS (64.6% overall, 100% palette)",
+    "ffmpeg_extraction": "NOT AVAILABLE (ffmpeg not installed on MacBook Pro)",
+    "pillow_extraction": "PASS (used for GIF frame extraction)"
+  },
+  "keychain_credentials": {
+    "replicate-key": "PRESENT",
+    "google-ai-key": "PRESENT",
+    "fal-ai-key": "PRESENT",
+    "huggingface-token": "PRESENT"
+  }
+}

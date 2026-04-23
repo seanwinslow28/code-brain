@@ -1,0 +1,8 @@
+{
+  "model": "rd-animation (Replicate)",
+  "overall": 0.0,
+  "palette_compliance": 0.0,
+  "passed": false,
+  "frame_count": 1,
+  "note": "rd-animation may produce native pixel art \u2014 may bypass quantizer"
+}

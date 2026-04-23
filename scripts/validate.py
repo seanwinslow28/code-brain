@@ -36,11 +36,15 @@ REQUIRED_PLAYGROUND_FIELDS = ["name", "description", "version", "dependencies", 
 REQUIRED_PRESET_FIELDS = ["name", "description", "export_groups", "security"]
 
 EXPECTED_DOMAINS = [
-    "claude-mastery",
-    "product-management",
+    "the-block",
     "creative-studio",
     "life-systems",
-    "design-team",
+]
+
+# Cross-cutting workspaces that don't qualify as a primary domain but should
+# still be scanned for secrets. Existence is NOT enforced.
+ADDITIONAL_WORKSPACES_TO_SCAN = [
+    "claude-mastery",
 ]
 
 EXPECTED_VAULT_DIRS = [
@@ -249,18 +253,26 @@ def validate_export_groups(repo_root):
 
 
 def validate_domains(repo_root):
-    """Validate the 6 domain workspace directories."""
+    """Validate the 3 primary domain workspace directories (v3.15.0)."""
     errors = []
     warnings = []
 
     for domain in EXPECTED_DOMAINS:
         domain_dir = repo_root / domain
         if not domain_dir.exists():
-            errors.append(f"Domain workspace '{domain}/' not found")
+            errors.append(f"Primary domain workspace '{domain}/' not found")
             continue
         readme = domain_dir / "README.md"
         if not readme.exists():
             warnings.append(f"Domain '{domain}/' missing README.md")
+        claude_md = domain_dir / "CLAUDE.md"
+        if not claude_md.exists():
+            warnings.append(f"Domain '{domain}/' missing CLAUDE.md (router)")
+
+    for workspace in ADDITIONAL_WORKSPACES_TO_SCAN:
+        ws_dir = repo_root / workspace
+        if not ws_dir.exists():
+            warnings.append(f"Cross-cutting workspace '{workspace}/' not found")
 
     return errors, warnings
 
@@ -400,8 +412,8 @@ def scan_secrets(repo_root):
         repo_root / "shared",
         repo_root / "plugin",
     ]
-    # Also scan domain workspaces
-    for domain in EXPECTED_DOMAINS:
+    # Also scan domain workspaces and cross-cutting workspaces (v3.15.0)
+    for domain in EXPECTED_DOMAINS + ADDITIONAL_WORKSPACES_TO_SCAN:
         d = repo_root / domain
         if d.exists():
             scan_dirs.append(d)

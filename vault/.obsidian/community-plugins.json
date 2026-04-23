@@ -6,5 +6,8 @@
   "obsidian-local-rest-api",
   "remotely-save",
   "homepage",
-  "granola-sync"
+  "granola-sync",
+  "calendar",
+  "obsidian-excalidraw-plugin",
+  "image-converter"
 ]

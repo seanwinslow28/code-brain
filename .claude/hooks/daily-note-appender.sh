@@ -33,16 +33,28 @@ if [ ! -d "$DAILY_NOTES_DIR" ]; then
     exit 0
 fi
 
-# Detect domain from working directory name
+# Detect domain from working directory name.
+# v3.15.0 structure: 3 primary domains (the-block, creative-studio, life-systems)
+# nested under the repo root. Order matters — most-specific patterns first so
+# they win against the generic repo-wide claude-mastery fallback.
 WORK_DIR=$(pwd)
 DOMAIN="unknown"
 case "$WORK_DIR" in
-    *claude-mastery*|*superuser-pack*|*claude-code*) DOMAIN="claude-mastery" ;;
-    *product-management*|*campus*|*block*) DOMAIN="product-management" ;;
-    *creative-studio*|*16bitfit*|*animation*|*remotion*) DOMAIN="creative-studio" ;;
+    # --- Most-specific: nested project paths ---
+    *creative-studio/16bitfit-battle-mode*|*16bitfit*|*16BitFit*) DOMAIN="creative-studio" ;;
+    *creative-studio/design-team*) DOMAIN="creative-studio" ;;
+    *the-block/product-management*) DOMAIN="the-block" ;;
+    # --- Domain roots ---
+    *the-block*|*theblock*) DOMAIN="the-block" ;;
+    *creative-studio*|*animation*|*remotion*) DOMAIN="creative-studio" ;;
     *life-systems*|*finance*|*health*) DOMAIN="life-systems" ;;
-    *design-team*|*design*) DOMAIN="design-team" ;;
+    # --- Block-specific keywords (route to the-block, not generic PM) ---
+    *campus*|*etf*) DOMAIN="the-block" ;;
+    # --- Vault path (specific) ---
     *vault*) DOMAIN="vault" ;;
+    # --- Cross-cutting / generic fallback (LAST so specific patterns win) ---
+    *claude-mastery*) DOMAIN="claude-mastery" ;;
+    *superuser-pack*|*claude-code*) DOMAIN="claude-mastery" ;;
 esac
 
 # Detect project context from directory name

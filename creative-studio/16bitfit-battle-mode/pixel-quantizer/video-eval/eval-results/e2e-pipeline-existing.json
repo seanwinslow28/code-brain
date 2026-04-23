@@ -1,0 +1,42 @@
+{
+  "mode": "existing",
+  "date": "2026-04-01T14:34:30.793997",
+  "steps": {
+    "1_routing": {
+      "status": "PASS",
+      "strategy": "hybrid",
+      "keyframe_adapter": "Nano Banana 2",
+      "interpolation_adapter": "GMFSS Fortuna (Local)"
+    },
+    "2_keyframes": {
+      "status": "PASS",
+      "source": "Phase 2 existing keyframes",
+      "count": 3
+    },
+    "3_interpolation": {
+      "status": "BLOCKED",
+      "reason": "Alienware offline \u2014 ComfyUI not reachable"
+    },
+    "4_extraction": {
+      "status": "SKIP - using keyframes directly",
+      "frame_count": 3
+    },
+    "5_scoring": {
+      "status": "PASS",
+      "frames_scored": 3,
+      "avg_palette": 0.824,
+      "avg_outline": 0.692,
+      "avg_background": 0.738,
+      "avg_character": 0.848,
+      "avg_overall": 0.777,
+      "gate_check": "PASS"
+    },
+    "6_packing": {
+      "status": "NOT WIRED - separate repo"
+    },
+    "7_validation": {
+      "status": "NOT WIRED - separate repo"
+    }
+  },
+  "overall": "BLOCKED on steps: 3_interpolation"
+}
