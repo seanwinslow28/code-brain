@@ -5,6 +5,66 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.15.0] - 2026-04-18
+
+Internal restructure to a 3-domain folder layout and addition of the `work-operating-model` skill (Nate B. Jones's 5-layer operating-model elicitation pattern, ported as a local-markdown-only skill — no OB1/Postgres/Supabase). The aim: open one folder and find everything for that domain; downstream agents get a real per-domain context layer instead of generic defaults.
+
+### Added
+
+- `.claude/skills/work-operating-model/` — new skill with `SKILL.md`, `interview-questions.md`, and `artifact-templates.md`. Takes a `domain` argument (`the-block`, `creative-studio`, or `life-systems`) and runs the 5-layer interview into vault artifacts. Personal-only — intentionally NOT added to any export-group preset.
+- `vault/05_atlas/operating-models/` — new folder with index `README.md` and three subfolders (`the-block/`, `creative-studio/`, `life-systems/`), each holding 5 placeholder artifacts (`HEARTBEAT.md`, `USER.md`, `SOUL.md`, `operating-model.md`, `schedule-recommendations.md`) at `status: awaiting-interview`.
+- `the-block/` — new top-level domain workspace for Sean's day job at The Block. Contains `CLAUDE.md` (domain router), `README.md`, and the moved `product-management/` workspace.
+- Three new domain `CLAUDE.md` routers at `the-block/CLAUDE.md`, `creative-studio/CLAUDE.md`, `life-systems/CLAUDE.md`. Each lists primary skills, primary agents, active MCPs, domain-specific non-negotiables, and links to the operating-model bundle.
+- New "Domain Routing" table in root `CLAUDE.md` mapping task types to the correct domain `CLAUDE.md`.
+- Non-Negotiable Rule #7 documenting the 3-domain structure and explicitly waiving the prior "product-management stays at root" rule.
+
+### Changed
+
+- **Folder moves (3):**
+  - `16bitfit-battle-mode/` → `creative-studio/16bitfit-battle-mode/`
+  - `product-management/` → `the-block/product-management/`
+  - `design-team/` → `creative-studio/design-team/`
+  - All three preserved as `git mv` to keep history. Untracked files inside `16bitfit-battle-mode/docs/plans/phase-6-plan-info/` (two PNGs) moved with the folder.
+- **Path patches (11 files inside the moved 16bitfit folder):**
+  - 8 Python files updated their `Path(__file__).parent` chains by +1 level so `REPO_ROOT` and `SUPERUSER_ROOT` still resolve to the actual `claude-code-superuser-pack/` root: `autoresearch/runner.py`, `pixel-quantizer/batch/batch_orchestrator.py`, `pixel-quantizer/batch/test_all_characters.py`, `pixel-quantizer/batch/generate_sheet_split.py`, `pixel-quantizer/video-eval/adapters.py`, `pixel-quantizer/video-eval/run_video_tests.py`, `pixel-quantizer/video-eval/run_e2e_pipeline.py`, `pixel-quantizer/video-eval/run_phase4_tests.py`.
+  - 3 markdown files updated relative path references by +1 level: `creative-studio/16bitfit-battle-mode/CLAUDE.md` (`../agents-sdk/` → `../../agents-sdk/`); `creative-studio/16bitfit-battle-mode/docs/plans/phase6-SUPER-PLAN-2026-04-17.md` (~20 hits of `../../../{agents-sdk,.claude,CLAUDE.md}`); `creative-studio/16bitfit-battle-mode/docs/plans/phase-6-followup-claude-code-prompt.md` (3 hits).
+- `.gitignore` — both `16bitfit-battle-mode/lora-output/` and `16bitfit-battle-mode/autoresearch/references/walk_cycle/frames_all/` rewritten to `creative-studio/16bitfit-battle-mode/...`.
+- `scripts/validate.py` — `EXPECTED_DOMAINS` reduced from 5 to 3 (`the-block`, `creative-studio`, `life-systems`); missing → ERROR. Added new `ADDITIONAL_WORKSPACES_TO_SCAN = ["claude-mastery"]` so claude-mastery still gets secret-scanned without being required to exist as a primary domain. `validate_domains()` now also checks for a `CLAUDE.md` per domain (warning). `scan_secrets()` iterates `EXPECTED_DOMAINS + ADDITIONAL_WORKSPACES_TO_SCAN`.
+- Root `CLAUDE.md` — refactored as a router. Preserved verbatim: Non-Negotiable Rules, Hook Exit Codes, When Modifying, Commands, Connected MCPs, Agents SDK section. Updated: skill count (111 → 113), Domain Workspaces table (3-domain layout), architecture diagram (3-domain tree), added Domain Routing section. SDK version bumped from `0.1.56` reference to `0.1.63` (now pinned).
+- Root `README.md` — updated skill count (111 → 113), Domain Workspaces table rewritten to show the 3-domain layout with nested workspaces.
+- `.claude/hooks/daily-note-appender.sh` — rewrote the domain-routing case statement (lines 36–58). Two bugs fixed: (1) `*block*` no longer routes to `product-management` — Block-domain paths (`the-block/`, `theblock`, plus Block products `campus`, `etf`) now route to `the-block`. (2) Pre-existing priority bug where `*superuser-pack*` was in the FIRST case caused every session in this repo to log as `claude-mastery` regardless of actual domain. Reordered to specific-first: nested project paths → domain roots → keyword fallbacks → repo-wide claude-mastery fallback last. Verified with 11-case routing test (the-block, creative-studio, life-systems, vault, claude-mastery, repo-root, campus, etf — all route correctly).
+- `agents-sdk/pyproject.toml` — pinned `claude-agent-sdk` from `>=0.1.39` to `==0.1.63` for reproducibility. Matches what's now installed in the venv.
+- `agents-sdk/.venv` — reinstalled missing dependencies (`claude-agent-sdk==0.1.63` + transitive `mcp`, `pydantic`, `httpx-sse`, `pandas`, `numpy`, etc.). The venv had been left in a partial state — only `wakeonlan` was present — which broke `daily_driver.py --dry-run` (and any agent that imports the SDK). `pip install -e .` failed because the project layout doesn't auto-discover packages; deps installed directly via `pip install` instead. Editable install isn't needed because agents are run via `PYTHONPATH=. .venv/bin/python3 agents/...` rather than via the `[project.scripts]` console-script entry points.
+
+### Rationale
+
+The root CLAUDE.md was approaching a readability ceiling and Sean's mental model (three clean domains) wasn't surfaced in the repo structure. The aggressive consolidation makes "where does this belong?" trivial for both Sean and downstream agents. The `work-operating-model` skill is the upstream prerequisite for the autonomous agent fleet to act with real context — none of the downstream agents (`meeting-defender`, `daily-driver`, `sprint-health`, etc.) can be sharply tuned without operating-model artifacts to read.
+
+The decision to waive non-negotiable #13 (product-management stays at root) was made explicitly during planning: the only PM work Sean is doing is at The Block, so co-locating the workspace inside `the-block/` matches reality. If Sean later takes on PM work for a non-Block project, the workspace can be promoted back to root or duplicated.
+
+OB1 (Nate B. Jones's Open Brain) was evaluated and rejected: Postgres + Supabase + MCP is architecturally incompatible with this pack's local-first, Keychain-based, three-machine substrate. The 5-layer interview pattern was ported as a single skill writing markdown to the vault. No infrastructure dependency added.
+
+### Known follow-ups (not blocking this release)
+
+- `vault/05_atlas/Sean-Winslow-Full-Personal-Context-v1.1.md` should bump to v2.0 once all three operating-model bundles are populated and confirmed.
+- Wiring the `work-operating-model` artifacts into active agents (`daily-driver` reads `HEARTBEAT.md` for sacred-block awareness, etc.) is a future task — placeholders are scaffolded so the wiring can be added incrementally as artifacts get filled in.
+- Design-team agent count was reconciled during this restructure: 5 design-team agents (`accessibility-checker`, `animation-director`, `design-system-enforcer`, `ui-reviewer`, `visual-polish-auditor`), not 4. Architecture comment in root CLAUDE.md updated accordingly.
+- Add `vault/05_atlas/moc-the-block.md` — the new `the-block` domain currently has no dedicated Obsidian MOC. `moc-product-management.md` still exists and covers the generic PM tag; a new Block-specific MOC would surface the-block-tagged operating-model artifacts + Granola meeting notes + Block-specific project pages via Dataview. Low-priority — not blocking, but worth doing before populating the operating-model bundle.
+- Add runtime artifact paths to `.gitignore`: `vault/90_system/agent-logs/*.csv` and `vault/90_system/agent-logs/*.log`. These files drift continuously as autonomous agents run and shouldn't show up as "modified" in every `git status`. They were intentionally left out of the v3.15.0 commit but remain tracked. A follow-up should either (a) `.gitignore` them and `git rm --cached` the tracked versions, or (b) move them under a path that's already ignored.
+- ~~Three-domain interviews not yet run. The 15 operating-model placeholders are all at `status: awaiting-interview`. Run the skill three times (`Run the work-operating-model interview for the-block`, same for `creative-studio` and `life-systems`) to populate them. Interview results will be added to the `v3.15.0-restructure` branch as separate commits before merge.~~ **DONE** 2026-04-23 — all 15 artifacts at `status: confirmed` (the-block 2026-04-19 `0da643a`, creative-studio 2026-04-21 `ed3b9b5`, life-systems 2026-04-22 `7a17c0e`).
+
+### Gate-check status
+
+| Gate | v3.14.3 | v3.15.0 |
+|------|---------|---------|
+| `python3 scripts/validate.py` | PASS | PASS |
+| Skill loaded by agents (work-operating-model) | n/a | PASS (registered in skill list) |
+| Folder moves preserve git history | n/a | PASS (git mv used) |
+| Relative paths in moved 16bitfit code | n/a | PASS (8 Python + 3 markdown patched) |
+| Root CLAUDE.md preserves load-bearing sections | n/a | PASS (Non-Negotiable Rules / Hook Exit Codes / When Modifying / Commands all intact) |
+| Daily Driver dry-run still works | PASS | PASS (after `claude-agent-sdk==0.1.63` reinstall in venv) |
+| `daily-note-appender.sh` routes domains correctly | (latent bug — every session logged as claude-mastery) | PASS (11-case routing test) |
+
 ## [3.14.3] - 2026-04-18
 
 Phase 6 reconciliation — commit to Mac Mini as the single always-on agent driver; retire the cross-machine WOL path that v3.14.0 added.
