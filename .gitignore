@@ -68,3 +68,16 @@ creative-studio/16bitfit-battle-mode/autoresearch/references/walk_cycle/frames_a
 
 # Portfolio & Hubs project (has its own git repo)
 sw-portfolio-and-hubs-designs/
+
+# Autonomous agent runtime artifacts — per CHANGELOG.md v3.15.0 follow-up.
+# These are written continuously by launchd-scheduled agents on the Mac Mini
+# (vault-indexer, vault-synthesizer, knowledge-lint, meta-agent, daily-driver,
+# session-end flush). Tracking them caused merge conflicts between the
+# shell-level vault auto-commit hook and Obsidian-git plugin.
+vault/90_system/agent-logs/*.csv
+vault/90_system/agent-logs/*.log
+vault/.vault-index.db
+vault/.indexer-state.json
+vault/knowledge/.lock
+.claude/scheduled_tasks.lock
+vault/conflict-files-obsidian-git.md
