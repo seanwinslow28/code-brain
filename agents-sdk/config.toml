@@ -234,3 +234,15 @@ pushover_app_token_keychain = "pushover_app_token"
 # Events that trigger a push. `wol_failure` removed in v3.14.3 — Mac Mini
 # is the always-on agent driver; no agent wakes the MBP anymore.
 notify_on = ["agent_error", "gate_check_fail"]
+
+# ─── Knowledge-Loop Consumer Activation (Phase B, 2026-04-25) ──────────
+# Read by `.claude/hooks/session-start-inject-index.sh` to gate the
+# SessionStart `additionalContext` injection of vault/knowledge/index.md.
+# Setting `inject_on_session_start = false` is an instant rollback — the
+# hook can also be removed from `.claude/settings.json` SessionStart for
+# a code-level rollback. Independent of `[artifacts]` above.
+
+[knowledge_index]
+inject_on_session_start = true
+max_chars = 15000
+path = "vault/knowledge/index.md"
