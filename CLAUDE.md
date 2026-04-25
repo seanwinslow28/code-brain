@@ -4,7 +4,7 @@ This is Sean's personal command center — a second brain for Claude Code.
 
 ## What This Repo Is
 
-113 skills, 13 Claude Code subagents, 11 hooks, 13 autonomous SDK agents (6 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
+113 skills, 13 Claude Code subagents, 12 hooks, 13 autonomous SDK agents (6 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
 
 As of v3.15.0, the repo is organized so that domain-owned folders live inside their domain. `the-block/` is Sean's day-job workspace (with `product-management/` nested inside). `creative-studio/` owns 16BitFit and the design-team workspace. `life-systems/` owns personal systems. Cross-cutting infra (`.claude/`, `agents-sdk/`, `vault/`, `claude-mastery/`, installer dirs) stays at root.
 
@@ -110,6 +110,8 @@ Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key ne
 
 **Operating-model artifact wiring (v3.16.0 Phase 1):** `agents-sdk/lib/artifact_loader.py` reads `vault/05_atlas/operating-models/{domain}/{kind}.md` artifacts on-demand with mtime-keyed caching. Daily-driver morning mode injects all three HEARTBEATs into the preamble plus on-demand Read pointers for USER / SOUL / operating-model / schedule-recommendations. Controlled by `[artifacts]` in `config.toml`; instant rollback = `enabled = false`. Phase 2 (meta-agent / flush / knowledge-lint) and Phase 3 (meeting-defender / sprint-health) are specified but not yet shipped.
 
+**Knowledge-loop consumer activation (Phase B, 2026-04-25):** The `.claude/hooks/session-start-inject-index.sh` SessionStart hook reads `vault/knowledge/index.md` and injects it as `additionalContext` on every new Claude Code session, so Claude opens each session knowing the vault's concept and connection articles before you type anything. File-read-only, 5-second timeout, 15,000-char cap. Controlled by `[knowledge_index]` in `agents-sdk/config.toml`; instant rollback = remove the SessionStart block from `.claude/settings.json`. This pairs with the producer side (Phase 6 SessionEnd flush → nightly synthesizer → weekly knowledge_lint) to close the consumer loop.
+
 **launchd requirement:** All plists must include `EnvironmentVariables` with `PATH` set to `/Users/seanwinslow/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin`. Without this, the `claude` CLI is not discoverable and agents fail with `CLIConnectionError`. See `agents-sdk/BUGFIX-2026-04-07-launchd-path.md`.
 
 ## Architecture
@@ -118,10 +120,11 @@ Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key ne
 .claude/
 ├── skills/          # ALL 113 skills (canonical, auto-loaded)
 ├── agents/          # ALL 13 agents (8 domain + 5 design team)
-├── hooks/           # 11 hooks (block-secrets, cost-watchdog, daily-note-appender,
+├── hooks/           # 12 hooks (block-secrets, cost-watchdog, daily-note-appender,
 │                    #           format-on-edit, log-tool-use, loop-detector,
 │                    #           network-access-control, require-confirm-highrisk,
-│                    #           run-tests-on-stop, session-end-flush, vault-integrity)
+│                    #           run-tests-on-stop, session-end-flush,
+│                    #           session-start-inject-index, vault-integrity)
 └── settings.json    # Standard security profile
 
 agents-sdk/          # Autonomous agents (Claude Agent SDK, Python)

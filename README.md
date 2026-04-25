@@ -1,6 +1,6 @@
 # Claude Code Superuser Pack
 
-A personal command center and second brain for Claude Code. 113 skills, 13 Claude Code subagents, 11 hooks, 13 autonomous SDK agents (6 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
+A personal command center and second brain for Claude Code. 113 skills, 13 Claude Code subagents, 12 hooks, 13 autonomous SDK agents (6 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
 
 ## What's Inside
 
@@ -47,7 +47,7 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the [Cl
 
 **Key design:** Skills are prompts, agents are runners. SKILL.md files are loaded as system prompts — no content duplication. Skill improvements automatically flow to autonomous agents.
 
-**Phase 6 knowledge compounding loop** (v3.14.3): SessionEnd flush → Vault Synthesizer v2 → Knowledge Lint. The vault becomes a living graph the LLM maintains instead of a static archive. The autoresearch-feedback consumer side (D.4) is descoped pending upstream autoresearch-harness stability — re-open spec in the Phase 6 Super Plan §10.1.
+**Phase 6 knowledge compounding loop** (v3.14.3): SessionEnd flush → Vault Synthesizer v2 → Knowledge Lint. The vault becomes a living graph the LLM maintains instead of a static archive. The autoresearch-feedback consumer side (D.4) is descoped pending upstream autoresearch-harness stability — re-open spec in the Phase 6 Super Plan §10.1. **Knowledge-loop Phase B** (2026-04-25, branch `knowledge-loop/phase-b`) adds a SessionStart hook that injects the synthesizer-produced `vault/knowledge/index.md` as `additionalContext` on every new Claude Code session, closing the consumer loop on the read side.
 
 ```bash
 # Dry run (free)

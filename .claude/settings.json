@@ -78,6 +78,17 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/session-start-inject-index.sh",
+            "timeout": 5000
+          }
+        ]
+      }
     ]
   }
 }

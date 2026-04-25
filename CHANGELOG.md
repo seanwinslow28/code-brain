@@ -51,6 +51,16 @@ A second plan, `vault/20_projects/prj-superuser-pack/prj-knowledge-loop-consumer
 
 Branches `knowledge-loop/phase-a` and `knowledge-loop/phase-b` were created from `main` at `f4df51f` on 2026-04-25 so the lowest-risk consumer phases (PreCompact safety net + SessionStart index injection) can be developed in parallel without touching the active Phase 1 soak. Merges held until agent-wiring Phase 2 ships post-soak (Mon 2026-04-27). Knowledge-loop Phase D is gated last because it modifies `daily_driver.py` morning brief — the file currently under soak.
 
+### Knowledge-loop Phase B — SessionStart index injection (branch `knowledge-loop/phase-b`, 2026-04-25)
+
+Activates the consumer side of the Phase 6 knowledge loop — every new Claude Code session in this repo starts with `vault/knowledge/index.md` pre-loaded as `additionalContext`, so Claude knows which concept and connection articles exist before you type anything. Develops on a feature branch held until agent-wiring Phase 2 ships.
+
+- **Added:** `.claude/hooks/session-start-inject-index.sh` — bash hook that reads `vault/knowledge/index.md`, truncates to 15,000 chars, and emits the SessionStart `additionalContext` JSON contract on stdout. File-read-only (no LLM calls), graceful empty-state stub when the index is missing or contains only the `_(none yet)_` placeholder rows, exit-0 policy, completes well under the 5-second hook timeout. Test override via `KNOWLEDGE_INDEX_PATH` and `KNOWLEDGE_INDEX_MAX_CHARS` env vars.
+- **Added:** `agents-sdk/tests/test_session_start_inject.py` — 5 tests covering missing-index empty stub, placeholder-only index empty stub, populated index full content, oversize truncation to exactly the configured `max_chars`, and JSON output schema validation against the plan's `hookSpecificOutput.{hookEventName, additionalContext}` contract.
+- **Changed:** `.claude/settings.json` — new `SessionStart` hook block with `timeout: 5000` (5 s).
+- **Changed:** `agents-sdk/config.toml` — new `[knowledge_index]` block with `inject_on_session_start = true`, `max_chars = 15000`, `path = "vault/knowledge/index.md"`. Independent of `[artifacts]`; this hook does not touch artifact-loader state.
+- **Changed:** Hook count 11 → 12 in `CLAUDE.md` and `README.md` on this branch (independent from `main`). When `knowledge-loop/phase-a` also lands (PreCompact hook), the merged state will be 13 hooks; whichever branch lands second resolves the count to 13 in its merge commit.
+
 ## [3.15.0] - 2026-04-18
 
 Internal restructure to a 3-domain folder layout and addition of the `work-operating-model` skill (Nate B. Jones's 5-layer operating-model elicitation pattern, ported as a local-markdown-only skill — no OB1/Postgres/Supabase). The aim: open one folder and find everything for that domain; downstream agents get a real per-domain context layer instead of generic defaults.
