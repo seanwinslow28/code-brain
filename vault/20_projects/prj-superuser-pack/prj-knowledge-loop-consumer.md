@@ -6,13 +6,14 @@ domain:
 status: in-progress
 context: superuser-pack
 created: 2026-04-23
-updated: 2026-04-25
+updated: 2026-04-25 (added coordination section with prj-agent-wiring-rollout.md; branches `knowledge-loop/phase-a` + `knowledge-loop/phase-b` created)
 source: claude-code-plan-mode
 references:
   - https://github.com/coleam00/claude-memory-compiler
   - https://github.com/NateBJones-Projects/OB1
   - creative-studio/16bitfit-battle-mode/docs/plans/phase6-SUPER-PLAN-2026-04-17.md
   - vault/00_inbox/Karpathy's-viral-AI-wiki-has-a-flaw-most-of-the-100K-people-who-bookmarked-it-haven't-noticed-yet.md
+  - vault/20_projects/prj-superuser-pack/prj-agent-wiring-rollout.md
 ---
 
 # Knowledge Loop — Consumer-Side Rollout + Hybrid Adds (v2)
@@ -30,6 +31,37 @@ Approved plan canonical copy. Originating plan file: `~/.claude/plans/please-pla
 **v2 update (2026-04-25):** A side-by-side architectural review of OB1 (Nate B Jones's structured-storage system) against Phase 6 produced verdict **(b) — ship A/B/C as approved, with two surgical OB1-inspired adds in Phase C, then ship Phase D as a small follow-on**. OB1's wiki-compiler script itself is *not* a fit (it reads Postgres → writes markdown, opposite direction from Sean's vault-as-source-of-truth setup), but three OB1 patterns are worth porting: per-run manifests, source-fingerprint citations, and typed reasoning edges as a queryable SQL table. The first two land in Phase C; the third lands in Phase D.
 
 This plan adds all four phases. It's a consumer-side complement to Phase 6, not a replacement. Producer-side behavior is enhanced (Phase D adds a side-effect write to a new SQLite table) but never broken. Delivered in four independently-shippable phases (A → B → C → D) with explicit gates and rollback per phase. Phase E is a research-only placeholder for future agent tool-use exploration.
+
+---
+
+## Coordination with `prj-agent-wiring-rollout.md` (added 2026-04-25)
+
+This plan and `prj-agent-wiring-rollout.md` operate on the **same agentic workflow** and modify overlapping files (`flush.py`, `knowledge_lint.py`, `daily_driver.py`, `config.toml`). Read this section before touching any phase — running these plans out of sequence will produce avoidable rebase conflicts and may invalidate the active Phase 1 soak in the wiring rollout.
+
+### Active state as of 2026-04-25
+
+- Agent-wiring **Phase 1 SHIPPED** 2026-04-23 (commit `a081f02`, v3.16.0). Currently in soak through 2026-04-27 09:30 EDT.
+- Agent-wiring **Phase 2** ships immediately after the soak clears (Mon 2026-04-27).
+- Knowledge-loop **branches created** 2026-04-25: `knowledge-loop/phase-a` and `knowledge-loop/phase-b`. Both branched from `main` at `f4df51f`. Develop in parallel; do **not** merge during the soak.
+
+### Merge order (canonical)
+
+1. Agent-wiring Phase 1 — DONE.
+2. Knowledge-loop **Phase A** + **Phase B** — develop now in parallel branches. Zero conflict with the soak (no overlap on `daily_driver.py` morning path or `artifact_loader.py`). Hold merges until Phase 2 ships.
+3. Agent-wiring Phase 2 — first to land after soak. Modifies `flush.py` (EXTRACTION_PROMPT prepend) + `knowledge_lint.py` (Tier 2 SOUL context + new `soul-tier-a-conflict` issue kind) + `meta_agent.py` (schedule-recs).
+4. Knowledge-loop **Phase C** — after Phase 2 lands. Adds `query.py` + qa/ tier; light extensions to `vault_synthesizer.py` and `knowledge_lint.py`.
+5. Knowledge-loop **Phase D** — after Phase C lands. Highest-conflict phase: it modifies `daily_driver.py` morning brief Vault Health section AND is the third change to `knowledge_lint.py`. Single-session feasible but rebase deliberately.
+
+### Two file-conflict watch points
+
+- **`flush.py`** — agent-wiring Phase 2 prepends a SOUL block to `EXTRACTION_PROMPT` (around `flush.py:60-79`). Knowledge-loop Phase A adds a `--trigger {session-end,pre-compact,manual}` argparse arg and threads it into the daily-log tag field. Both are additive to different sections; whichever ships second rebases cleanly.
+- **`knowledge_lint.py`** — touched **three times** across the two plans (Phase 2 → C → D). Land in that exact order. Each adds a distinct concern (Phase 2: SOUL Tier-A conflict kind. C: qa/ in orphan/stale/sparse checks. D: SQL fast-path against `concept_edges`). No pair overlaps semantically, but order matters because each rebases onto the prior.
+
+### Soak-safety rule
+
+Anything that modifies `agents-sdk/agents/daily_driver.py` morning path or `agents-sdk/lib/artifact_loader.py` invalidates the active Phase 1 soak. **Phase D of this plan is the only phase that touches those files; do not merge it until Phase 2 has shipped and Phase 1 soak is closed.**
+
+---
 
 ## Architecture After Rollout
 
@@ -576,11 +608,13 @@ cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode mo
 
 ## Execution order
 
+See the **Coordination with `prj-agent-wiring-rollout.md`** section above for the canonical merge order across both plans. Within this plan only:
+
 1. **Step 0 (this file):** v2 plan saved to vault. ✓
-2. **Phase A** (~3h) — PreCompact safety net. Lowest risk; ship and verify before B.
-3. **Phase B** (~3.5h) — SessionStart index injection. Verify no session-start regression with 5 consecutive launches.
-4. **Phase C** (~10.5h) — query.py + qa/ + OB1 provenance adds (C.M1 chunk_id frontmatter + C.M2 manifest JSONL). Pair with a read-through of `agents-sdk/lib/hybrid_router.py` and `vault_synthesizer.py` before starting.
-5. **Phase D** (~8h) — Typed reasoning edges + synth manifest. Single-session feasible. Pair with a read of `vault_indexer.py:56-82` (the schema-extension pattern).
+2. **Phase A** (~3h) — PreCompact safety net. Lowest risk; ship and verify before B. Develop on branch `knowledge-loop/phase-a` (created 2026-04-25). Hold merge until agent-wiring Phase 2 ships.
+3. **Phase B** (~3.5h) — SessionStart index injection. Verify no session-start regression with 5 consecutive launches. Develop on branch `knowledge-loop/phase-b` (created 2026-04-25). Hold merge until agent-wiring Phase 2 ships.
+4. **Phase C** (~10.5h) — query.py + qa/ + OB1 provenance adds (C.M1 chunk_id frontmatter + C.M2 manifest JSONL). Pair with a read-through of `agents-sdk/lib/hybrid_router.py` and `vault_synthesizer.py` before starting. Branch when ready (after Phase 2 lands).
+5. **Phase D** (~8h) — Typed reasoning edges + synth manifest. Single-session feasible. Pair with a read of `vault_indexer.py:56-82` (the schema-extension pattern). **Highest-conflict phase** — see watch points above.
 6. **Final:** Update this file `status: in-progress` → `status: complete` with a brief retrospective section.
 7. **Phase E:** parked — separate research session, separate plan, no current scope.
 

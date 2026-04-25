@@ -45,6 +45,12 @@ Phase 1 of the agent-wiring rollout — the `v3.15.0` Known Follow-up for wiring
 - **Phase 2** wires `meta_agent` / `flush` / `knowledge_lint` to consume `schedule-recommendations.md` and `SOUL.md` from their local-model prompt paths (zero cloud egress). Gated on Phase 1 soak being clean.
 - **Phase 3** — `meeting_defender` and `sprint_health` wiring specs are written in the plan file but both agents remain `enabled = false`. Re-enablement is a separate, explicit decision per the 2026-04-09 audit.
 
+### Coordination — knowledge-loop consumer plan (added 2026-04-25)
+
+A second plan, `vault/20_projects/prj-superuser-pack/prj-knowledge-loop-consumer.md`, operates on the same agentic workflow and modifies overlapping files (`flush.py`, `knowledge_lint.py`, `daily_driver.py`, `config.toml`). Both plan files now carry a "Coordination" section documenting the canonical merge order and two file-conflict watch points (`flush.py` two-section additive merge; `knowledge_lint.py` touched three times — Phase 2 → C → D, must land in that order).
+
+Branches `knowledge-loop/phase-a` and `knowledge-loop/phase-b` were created from `main` at `f4df51f` on 2026-04-25 so the lowest-risk consumer phases (PreCompact safety net + SessionStart index injection) can be developed in parallel without touching the active Phase 1 soak. Merges held until agent-wiring Phase 2 ships post-soak (Mon 2026-04-27). Knowledge-loop Phase D is gated last because it modifies `daily_driver.py` morning brief — the file currently under soak.
+
 ## [3.15.0] - 2026-04-18
 
 Internal restructure to a 3-domain folder layout and addition of the `work-operating-model` skill (Nate B. Jones's 5-layer operating-model elicitation pattern, ported as a local-markdown-only skill — no OB1/Postgres/Supabase). The aim: open one folder and find everything for that domain; downstream agents get a real per-domain context layer instead of generic defaults.

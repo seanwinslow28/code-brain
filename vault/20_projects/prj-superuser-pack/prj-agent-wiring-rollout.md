@@ -8,7 +8,7 @@ domain:
 status: in-progress
 context: superuser-pack
 created: 2026-04-23
-updated: 2026-04-25
+updated: 2026-04-25 (added coordination section with prj-knowledge-loop-consumer.md)
 source: claude-code-plan-mode
 phase-1-status: shipped 2026-04-23 (commit a081f02, v3.16.0)
 phase-2-status: not-started (gated on Phase 1 soak clean 2026-04-27)
@@ -18,6 +18,7 @@ references:
   - agent-wiring-plan-prompt.md
   - agents-sdk/AUDIT-2026-04-09-agent-downsizing.md
   - vault/05_atlas/operating-models/
+  - vault/20_projects/prj-superuser-pack/prj-knowledge-loop-consumer.md
   - https://claude.ai/code/routines/trig_01Xu9fvaxMRDfSr7rwSb5fYE
 ---
 
@@ -392,3 +393,26 @@ Fill in cost / error / tone columns as each morning's daily note + agent-logs su
 ## No blockers remaining
 
 All three blocking decisions resolved 2026-04-23 (Section 9). Phase 1 shipped same day. Phase 2 ready to dev whenever soak gate clears.
+
+---
+
+## Coordination with `prj-knowledge-loop-consumer.md` (added 2026-04-25)
+
+This plan and `prj-knowledge-loop-consumer.md` operate on the **same agentic workflow** and modify overlapping files (`flush.py`, `knowledge_lint.py`, `daily_driver.py`, `config.toml`). Future agents must respect the merge order below — running these plans out of sequence will produce avoidable rebase conflicts and may invalidate the Phase 1 soak signal.
+
+### Merge order (canonical)
+
+1. **Agent-wiring Phase 1** — SHIPPED 2026-04-23 (commit `a081f02`). Currently in soak through 2026-04-27 09:30 EDT.
+2. **Knowledge-loop Phase A + Phase B** — develop now in parallel branches `knowledge-loop/phase-a` and `knowledge-loop/phase-b` (created 2026-04-25). Zero conflict with the soak — neither phase touches `daily_driver.py` morning path or `artifact_loader.py`. Hold merges until Phase 2 ships.
+3. **Agent-wiring Phase 2** — ships after soak clears. Modifies `flush.py` (EXTRACTION_PROMPT prepend) + `knowledge_lint.py` (Tier 2 SOUL context + new `soul-tier-a-conflict` issue kind) + `meta_agent.py` (schedule-recs).
+4. **Knowledge-loop Phase C** — after Phase 2 lands. Adds `query.py` + qa/ tier; light extensions to `vault_synthesizer.py` and `knowledge_lint.py`.
+5. **Knowledge-loop Phase D** — after Phase C lands. Highest-conflict phase: it modifies `daily_driver.py` morning brief Vault Health section AND is the third change to `knowledge_lint.py`. Single-session feasible but rebase deliberately.
+
+### Two file-conflict watch points
+
+- **`flush.py`** — agent-wiring Phase 2 prepends a SOUL block to `EXTRACTION_PROMPT` (around `flush.py:60-79`). Knowledge-loop Phase A adds a `--trigger {session-end,pre-compact,manual}` argparse arg and threads it into the daily-log tag field. Both are additive to different sections of the file; whichever ships second rebases cleanly.
+- **`knowledge_lint.py`** — touched **three times** across the two plans (Phase 2 → C → D). Land in that exact order. Each adds a distinct concern (Phase 2: SOUL Tier-A conflict kind. C: qa/ in orphan/stale/sparse checks. D: SQL fast-path against `concept_edges`). No pair overlaps semantically, but order matters because each rebases onto the prior.
+
+### Soak-safety rule
+
+Anything that modifies `agents-sdk/agents/daily_driver.py` morning path or `agents-sdk/lib/artifact_loader.py` invalidates the active Phase 1 soak. **Do not merge knowledge-loop Phase D until Phase 2 has shipped and Phase 1 soak is closed.**
