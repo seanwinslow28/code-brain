@@ -5,6 +5,57 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.17.0] - 2026-04-27
+
+Phase 2 of the agent-wiring rollout. After the 4-day Phase 1 soak closed clean (all four gates PASS, mean cost $0.44 / run, zero forbidden-tone hits), three of the still-active fleet agents (`meta_agent`, `flush`, `knowledge_lint`) now consume operating-model artifacts so their local-model prompts are domain-aware. Phase 3 (`meeting_defender`, `sprint_health`) stays spec-only and frozen per the 2026-04-09 audit.
+
+All Phase 2 work is **local-only** — the three agents call `gemma4:e4b` on Mac Mini (or Qwen3-14B on MacBook Pro for ≥100-msg flush sessions). No cloud egress of SOUL or schedule-recommendations content. Pre-flight against five historical session transcripts with the SOUL prepend produced 5 / 5 valid JSON on `gemma4:e4b` — Risk #5 from the rollout plan cleared.
+
+### Added
+
+- `agents-sdk/agents/meta_agent.py` — `build_schedule_recs_context(config)` loads all three domain `schedule-recommendations.md` bodies via `artifact_loader`. New gemma4:e4b summarization path on Mac Mini (`_default_summary_caller`, `_SUMMARY_PROMPT_TEMPLATE`, `_parse_summary_json`, `render_domain_aware_section`, `generate_domain_aware_summary`) produces a "Domain-Aware Insights" section that ranks fleet activity against Sean's Protect / Automate / Decline lists per domain. Section is spliced between Active Agent Health and Infrastructure; LLM failures fall back to a sentinel line so the static report still ships intact.
+- `agents-sdk/agents/flush.py` — `build_soul_prepend(config)` prepends all three domain SOUL bodies to `EXTRACTION_PROMPT` when `[artifacts.per_agent.flush]` lists `SOUL` in its `on_demand` array. Locked decision per plan §9 Q3 (2026-04-23): always load all three, no domain-inference helper. Framing markers (`--- BEGIN OPERATING-MODEL SOUL CONTEXT ---` / `--- BEGIN SESSION TRANSCRIPT EXTRACTION ---`) keep the regions visually separable. JSON output schema, recursion guard, FileLock, and routing-tier logic are unchanged.
+- `agents-sdk/agents/knowledge_lint.py` — `build_soul_context(config)` and `_build_tier2_prompt(soul_context)` plumb three-domain SOUL bodies into the Tier-2 LLM prompt. New `LintIssue` kind `soul-tier-a-conflict` at severity `HIGH` flags vault articles whose claims contradict any Tier-A SOUL item. `run_tier2()` parses both `contradictions` and `soul_conflicts` from the LLM response.
+- `agents-sdk/tests/test_meta_agent_artifacts.py` — 17 tests covering schedule-recs context loading, JSON parsing, render fallbacks, dry-run path, and end-to-end LLM-caller integration with mock callers.
+- `agents-sdk/tests/test_flush.py` — +11 tests under `TestBuildSoulPrepend` and `TestRunFlushSoulPrepend` covering toggle paths, SOUL prepend ordering, framing markers, missing per-domain artifacts, and JSON-output-shape stability.
+- `agents-sdk/tests/test_knowledge_lint.py` — +12 tests under `TestBuildSoulContext`, `TestBuildTier2Prompt`, and `TestRunTier2SoulConflicts` covering toggle paths, the new `soul-tier-a-conflict` issue kind at HIGH severity, exception safety, and skip-on-empty-file handling.
+
+### Changed
+
+- `agents-sdk/config.toml` — `[artifacts.per_agent]` Phase 2 entries uncommented: `meta_agent = { on_demand = ["schedule-recommendations"] }`, `flush = { on_demand = ["SOUL"] }`, `knowledge_lint = { on_demand = ["SOUL"] }`. Same instant rollback as Phase 1: flip `[artifacts].enabled = false` to disable all artifact wiring fleet-wide.
+- `agents-sdk/agents/flush.py` — `run_flush()` gains an optional `config: Config | None = None` parameter. When `None`, behavior matches pre-Phase-2 exactly (no SOUL prepend) so existing callers and tests are unaffected. `main()` passes `cfg` through.
+- `agents-sdk/agents/meta_agent.py` — `generate_fleet_report()` gains optional `config` and `summary_caller` parameters. Health-check helper now receives an empty dict (`health_cfg`) so the legacy signature is unchanged. `main()` loads `Config` once and threads it through.
+- `agents-sdk/agents/knowledge_lint.py` — `run_tier2()` gains a `soul_context: str = ""` parameter. `main()` builds the context via `build_soul_context(cfg)` and passes it through; production `llm_caller` default stays `None` (Tier-2 LLM remains opt-in via the existing injection point — wiring a default caller is downstream work).
+
+### Stale-comment cleanup (gemma4:e4b production routing — v3.14.3 inbox_triage swap)
+
+- `agents-sdk/agents/flush.py` — module docstring, `RoutingTier.SIMPLE` enum comment, `_concat_messages` window note, and the `router.route("inbox_triage")` inline comment now correctly say `gemma4:e4b on Mac Mini`. Prior `phi4-mini` references were stale relative to the 2026-04-18 routing swap.
+- `agents-sdk/agents/meta_agent.py` — module docstring updated from `phi4-mini-reasoning for summary generation` to `gemma4:e4b for summary generation, local Ollama`.
+- `agents-sdk/agents/knowledge_lint.py` — Tier 1 docstring no longer claims `phi4-mini-reasoning`; Tier 1 is and always was pure-Python structural checks.
+- Live `task_map` entries for other tasks (`anki_cards = phi4-mini`, `financial_analysis = phi4-mini-reasoning`) are unchanged — the v3.14.3 swap was scoped to `inbox_triage`.
+
+### Decisions locked 2026-04-27
+
+- **Production model for Phase 2 = `gemma4:e4b`.** Pre-flight diagnostic against five historical transcripts produced 5 / 5 valid JSON with SOUL prepend (vs 0 / 5 against `phi4-mini-reasoning`, whose `<think>` chain-of-thought behavior fights structured-output prompts). The production routing already targets `gemma4:e4b` via `inbox_triage`, so flush carries no behavior change for the SIMPLE tier.
+- **`meta_agent` newly calls `gemma4:e4b`.** Today's meta-agent has no LLM path; this release wires one for the domain-aware insights section. Local-only, no cloud egress.
+- **`knowledge_lint` Tier-2 `llm_caller` stays opt-in.** Phase 2 delivers the SOUL context plumbing and new issue kind; wiring a default caller into production is intentionally out of scope.
+
+### Gate-check status
+
+| Gate | v3.16.0 | v3.17.0 |
+|------|---------|---------|
+| `python3 scripts/validate.py` | PASS | PASS (58 warnings, all pre-existing) |
+| `pytest agents-sdk/tests/` | 134 passed | **177 passed** (+43 new / extended) |
+| Pre-flight JSON-shape guard (5 transcripts × gemma4:e4b + SOUL) | n/a | **5 / 5 PASS** |
+| Phase 6 producer-side loop (flush → synthesizer → knowledge-lint) untouched | PASS | PASS — flush JSON shape preserved; vault_synthesizer not modified |
+| No regression in disabled agents | PASS | PASS — 6 disabled agents stay disabled |
+
+### Rollback
+
+- **Instant (config-level):** flip `[artifacts].enabled = false`. All three Phase 2 prepends + the meta_agent insights section become no-ops.
+- **Per-agent:** remove the agent's entry from `[artifacts.per_agent]`.
+- **Code-level:** revert this release's commits.
+
 ## [3.16.0] - 2026-04-23
 
 Phase 1 of the agent-wiring rollout — the `v3.15.0` Known Follow-up for wiring operating-model artifacts into the active agent fleet is now underway. This release wires `daily-driver` morning mode; `meta_agent` / `flush` / `knowledge_lint` arrive in Phase 2; `meeting_defender` / `sprint_health` remain frozen per the 2026-04-09 audit.
