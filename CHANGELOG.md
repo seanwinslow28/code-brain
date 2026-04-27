@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.17.0] - 2026-04-27
 
+Two independent features landed in a single merge commit (`19a805e`): **agent-wiring Phase 2** (the headline) and **knowledge-loop Phase B** (consumer-side activation). They have zero file overlap and were sequenced this way because Phase B was held on its branch until Phase 2 cleared the Phase 1 soak. A new soak window now runs through **2026-05-01** to validate Phase 2 in production; **knowledge-loop Phase A is held until that soak closes**. See "Pending merges" below.
+
+### Agent-Wiring Phase 2 — domain-aware local-model prompts
+
 Phase 2 of the agent-wiring rollout. After the 4-day Phase 1 soak closed clean (all four gates PASS, mean cost $0.44 / run, zero forbidden-tone hits), three of the still-active fleet agents (`meta_agent`, `flush`, `knowledge_lint`) now consume operating-model artifacts so their local-model prompts are domain-aware. Phase 3 (`meeting_defender`, `sprint_health`) stays spec-only and frozen per the 2026-04-09 audit.
 
 All Phase 2 work is **local-only** — the three agents call `gemma4:e4b` on Mac Mini (or Qwen3-14B on MacBook Pro for ≥100-msg flush sessions). No cloud egress of SOUL or schedule-recommendations content. Pre-flight against five historical session transcripts with the SOUL prepend produced 5 / 5 valid JSON on `gemma4:e4b` — Risk #5 from the rollout plan cleared.
@@ -56,6 +60,40 @@ All Phase 2 work is **local-only** — the three agents call `gemma4:e4b` on Mac
 - **Per-agent:** remove the agent's entry from `[artifacts.per_agent]`.
 - **Code-level:** revert this release's commits.
 
+### Knowledge-Loop Phase B — SessionStart index injection (consumer-side activation)
+
+Activates the consumer side of the Phase 6 knowledge loop. Every new Claude Code session in this repo now starts with `vault/knowledge/index.md` pre-loaded as `additionalContext`, so Claude opens each session knowing which concept and connection articles exist before you type anything. This pairs with the producer side (SessionEnd flush → nightly synthesizer → weekly knowledge_lint) to close the read-side loop.
+
+Merged ahead of knowledge-loop Phase A because it has **zero file overlap** with the active Phase 2 soak — only a new hook, a new `SessionStart` block in `settings.json`, and a new `[knowledge_index]` block in `config.toml`. None of those touch the three Phase-2 agents.
+
+#### Added (Phase B)
+
+- `.claude/hooks/session-start-inject-index.sh` — bash hook that reads `vault/knowledge/index.md`, truncates to `KNOWLEDGE_INDEX_MAX_CHARS` (default 15,000), and emits the SessionStart `additionalContext` JSON contract on stdout. File-read-only (no LLM calls), graceful empty-state stub when the index is missing or contains only the `_(none yet)_` placeholder rows, exit-0 policy. Test override via `KNOWLEDGE_INDEX_PATH` and `KNOWLEDGE_INDEX_MAX_CHARS` env vars. The current live `vault/knowledge/index.md` only has placeholder rows, so the hook emits the empty stub today; it switches to full content automatically on the next vault_synthesizer run that produces real articles.
+- `agents-sdk/tests/test_session_start_inject.py` — 5 tests covering missing-index empty stub, placeholder-only index empty stub, populated index full content, oversize truncation to exactly the configured `max_chars`, and JSON output schema validation against the `hookSpecificOutput.{hookEventName, additionalContext}` contract.
+
+#### Changed (Phase B)
+
+- `.claude/settings.json` — new `SessionStart` hook block with `timeout: 5000` (5 s).
+- `agents-sdk/config.toml` — new `[knowledge_index]` block with `inject_on_session_start = true`, `max_chars = 15000`, `path = "vault/knowledge/index.md"`. Independent of `[artifacts]`; this hook does not touch artifact-loader state.
+- Hook count `11 → 12` in `CLAUDE.md` and `README.md`. New paragraph in `CLAUDE.md` under Architecture documents the consumer-side activation alongside the existing operating-model artifact wiring note.
+
+#### Rollback (Phase B)
+
+- **Instant:** remove the `SessionStart` block from `.claude/settings.json` (or set `[knowledge_index].inject_on_session_start = false` for the documented kill-switch). Index injection stops on the next session start.
+- **Code-level:** delete `.claude/hooks/session-start-inject-index.sh` and the `[knowledge_index]` block.
+
+### Pending merges — Knowledge-Loop Phase A
+
+**Held until 2026-05-01.** `knowledge-loop/phase-a` (commit `4ca4413`) carries the PreCompact safety-net flush — a new `.claude/hooks/pre-compact-flush.sh` hook plus a `--trigger {session-end,pre-compact,manual}` argparse argument on `agents-sdk/agents/flush.py` that flows into the daily-log session `tag` field.
+
+**Why we're waiting.** Phase A modifies `flush.py`, the same file Phase 2 just modified with the SOUL prepend. Phase 2's soak observes flush.py behavior in production through 2026-05-01 (Friday). Even though Phase A's changes (argparse + tag field) and Phase 2's changes (`EXTRACTION_PROMPT` body) are in different code paths and don't conflict semantically, merging Phase A mid-soak would:
+1. Shift every daily-log session entry's `tag` field from the legacy hard-coded `"auto"` to a real trigger value (`"session-end"`, `"pre-compact"`, etc.). Soak observers reading daily logs would have to mentally separate "is this difference from Phase 2 or from Phase A?"
+2. Add a new event source (PreCompact-fired flushes) that the Phase 2 soak isn't designed to evaluate.
+
+By precedent (the Phase 1 soak-safety rule that held both knowledge-loop branches off `main` until Phase 2 shipped), we hold Phase A through this second soak window. Phase A will land cleanly after the 2026-05-01 review — its `flush.py` change is additive to a different section of the file and rebases trivially onto post-Phase-2 main.
+
+**Hook count after Phase A merges:** `12 → 13`. The Phase A merge commit will resolve that bump.
+
 ## [3.16.0] - 2026-04-23
 
 Phase 1 of the agent-wiring rollout — the `v3.15.0` Known Follow-up for wiring operating-model artifacts into the active agent fleet is now underway. This release wires `daily-driver` morning mode; `meta_agent` / `flush` / `knowledge_lint` arrive in Phase 2; `meeting_defender` / `sprint_health` remain frozen per the 2026-04-09 audit.
@@ -100,17 +138,7 @@ Phase 1 of the agent-wiring rollout — the `v3.15.0` Known Follow-up for wiring
 
 A second plan, `vault/20_projects/prj-superuser-pack/prj-knowledge-loop-consumer.md`, operates on the same agentic workflow and modifies overlapping files (`flush.py`, `knowledge_lint.py`, `daily_driver.py`, `config.toml`). Both plan files now carry a "Coordination" section documenting the canonical merge order and two file-conflict watch points (`flush.py` two-section additive merge; `knowledge_lint.py` touched three times — Phase 2 → C → D, must land in that order).
 
-Branches `knowledge-loop/phase-a` and `knowledge-loop/phase-b` were created from `main` at `f4df51f` on 2026-04-25 so the lowest-risk consumer phases (PreCompact safety net + SessionStart index injection) can be developed in parallel without touching the active Phase 1 soak. Merges held until agent-wiring Phase 2 ships post-soak (Mon 2026-04-27). Knowledge-loop Phase D is gated last because it modifies `daily_driver.py` morning brief — the file currently under soak.
-
-### Knowledge-loop Phase B — SessionStart index injection (branch `knowledge-loop/phase-b`, 2026-04-25)
-
-Activates the consumer side of the Phase 6 knowledge loop — every new Claude Code session in this repo starts with `vault/knowledge/index.md` pre-loaded as `additionalContext`, so Claude knows which concept and connection articles exist before you type anything. Develops on a feature branch held until agent-wiring Phase 2 ships.
-
-- **Added:** `.claude/hooks/session-start-inject-index.sh` — bash hook that reads `vault/knowledge/index.md`, truncates to 15,000 chars, and emits the SessionStart `additionalContext` JSON contract on stdout. File-read-only (no LLM calls), graceful empty-state stub when the index is missing or contains only the `_(none yet)_` placeholder rows, exit-0 policy, completes well under the 5-second hook timeout. Test override via `KNOWLEDGE_INDEX_PATH` and `KNOWLEDGE_INDEX_MAX_CHARS` env vars.
-- **Added:** `agents-sdk/tests/test_session_start_inject.py` — 5 tests covering missing-index empty stub, placeholder-only index empty stub, populated index full content, oversize truncation to exactly the configured `max_chars`, and JSON output schema validation against the plan's `hookSpecificOutput.{hookEventName, additionalContext}` contract.
-- **Changed:** `.claude/settings.json` — new `SessionStart` hook block with `timeout: 5000` (5 s).
-- **Changed:** `agents-sdk/config.toml` — new `[knowledge_index]` block with `inject_on_session_start = true`, `max_chars = 15000`, `path = "vault/knowledge/index.md"`. Independent of `[artifacts]`; this hook does not touch artifact-loader state.
-- **Changed:** Hook count 11 → 12 in `CLAUDE.md` and `README.md` on this branch (independent from `main`). When `knowledge-loop/phase-a` also lands (PreCompact hook), the merged state will be 13 hooks; whichever branch lands second resolves the count to 13 in its merge commit.
+Branches `knowledge-loop/phase-a` and `knowledge-loop/phase-b` were created from `main` at `f4df51f` on 2026-04-25 so the lowest-risk consumer phases (PreCompact safety net + SessionStart index injection) could be developed in parallel without touching the active Phase 1 soak. Merges held until agent-wiring Phase 2 cleared. **Phase B landed in v3.17.0 alongside Phase 2; Phase A is held until the 2026-05-01 Phase 2 soak review** — see v3.17.0 "Pending merges" for the rationale. Knowledge-loop Phase D will be gated last because it modifies `daily_driver.py` morning brief.
 
 ## [3.15.0] - 2026-04-18
 
