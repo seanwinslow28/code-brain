@@ -3,9 +3,16 @@
 
 Triggered by `.claude/hooks/session-end-flush.sh` on every Claude Code
 session close, passed the transcript path. Parses the JSONL, routes by
-message count (<100 → phi4-mini on Mac Mini; ≥100 → Qwen3-14B on MacBook
-Pro), asks the LLM for a 5-section structured summary, and appends a
-new block to `vault/daily/YYYY-MM-DD.md` (creating the file if missing).
+message count (<100 → gemma4:e4b on Mac Mini via inbox_triage routing;
+≥100 → Qwen3-14B on MacBook Pro), asks the LLM for a 5-section structured
+summary, and appends a new block to `vault/daily/YYYY-MM-DD.md` (creating
+the file if missing).
+
+Phase 2 (2026-04-27): when `[artifacts.per_agent.flush]` lists `SOUL` in
+its `on_demand` array, the prompt is prefixed with all three domain SOUL
+bodies (the-block, creative-studio, life-systems) so the local model can
+cross-reference new entries against established Tier-A items. ~46K-char
+prepend, well within both gemma4:e4b's 32K and Qwen3-14B's 40K+ windows.
 
 All writes serialize through a FileLock on `vault/daily/.lock`.
 
@@ -37,7 +44,8 @@ import httpx
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from lib.config import load_config
+from lib.artifact_loader import DOMAINS, load_artifact
+from lib.config import Config, load_config
 from lib.filelock import FileLock
 from lib.hybrid_router import HybridRouter, RoutingDecision, WOLUnavailable
 from lib.logging_setup import record_run, setup_logger
@@ -80,7 +88,7 @@ Respond with ONLY the JSON object, no prose.
 
 
 class RoutingTier(Enum):
-    SIMPLE = "simple"   # <100 msg → phi4-mini on Mac Mini
+    SIMPLE = "simple"   # <100 msg → gemma4:e4b on Mac Mini (inbox_triage routing)
     COMPLEX = "complex"  # ≥100 msg → Qwen3-14B on MacBook Pro
 
 
@@ -100,10 +108,41 @@ def pick_routing_tier(n_messages: int) -> RoutingTier:
     return RoutingTier.SIMPLE if n_messages < COMPLEX_MESSAGE_THRESHOLD else RoutingTier.COMPLEX
 
 
+def build_soul_prepend(config: Config | None) -> str:
+    """Three-domain SOUL bodies, framed as a reference block.
+
+    Locked decision (2026-04-23, plan §9 Q3): every flush run prepends
+    all three domain SOULs. No domain-inference helper. Returns "" when
+    `[artifacts].enabled = false`, when the meta_agent has no per-agent
+    entry, or when `flush.on_demand` doesn't include `SOUL` — that path
+    is the instant-rollback per `[artifacts.per_agent.flush] = {}`.
+    """
+    if config is None:
+        return ""
+    cfg = config.artifact_config("flush")
+    if not cfg or "SOUL" not in cfg.get("on_demand", []):
+        return ""
+
+    sections: list[str] = []
+    for domain in DOMAINS:
+        body = load_artifact(domain, "SOUL", config.vault_root)
+        if body is None:
+            sections.append(f"## SOUL — {domain}\n\n[unavailable]\n")
+            continue
+        sections.append(f"## SOUL — {domain}\n\n{body.rstrip()}\n")
+    return (
+        "--- BEGIN OPERATING-MODEL SOUL CONTEXT (reference) ---\n\n"
+        + "\n".join(sections)
+        + "\n--- END OPERATING-MODEL SOUL CONTEXT ---\n\n"
+        "--- BEGIN SESSION TRANSCRIPT EXTRACTION ---\n\n"
+    )
+
+
 def _concat_messages(messages: list[TranscriptMessage], max_chars: int = 40000) -> str:
     """Flatten transcript to plain text for the extractor prompt.
 
-    Truncates to `max_chars` so the prompt stays within phi4-mini's window.
+    Truncates to `max_chars` so the combined prompt (SOUL prepend + body)
+    stays within both gemma4:e4b's 32K and Qwen3-14B's 40K+ context windows.
     """
     parts: list[str] = []
     total = 0
@@ -193,7 +232,9 @@ def _default_llm_caller(prompt: str, tier: RoutingTier) -> dict[str, list[str]]:
 
         if tier == RoutingTier.SIMPLE:
             async def go() -> RoutingDecision:
-                return await router.route("inbox_triage")  # uses Mac Mini phi4-mini
+                # inbox_triage routes to gemma4:e4b on Mac Mini per
+                # config.toml task_map (swapped 2026-04-18, v3.14.3).
+                return await router.route("inbox_triage")
             decision = asyncio.run(go())
         else:
             async def go2() -> RoutingDecision:
@@ -251,12 +292,17 @@ def run_flush(
     vault_daily_dir: Path,
     llm_caller: Callable[[str, RoutingTier], dict[str, list[str]]] | None = None,
     dry_run: bool = False,
+    config: Config | None = None,
 ) -> FlushResult:
     """Top-level flush entrypoint (sync, easy to test).
 
     Recursion-guards on CLAUDE_INVOKED_BY. Parses transcript. Picks tier.
     Calls `llm_caller(prompt, tier)` (defaults to hitting local models over
     HTTP — can be overridden for tests). Appends to the daily log.
+
+    When `config` is provided and the artifacts wiring is on, the prompt
+    is prefixed with all three domain SOUL bodies. `config=None` keeps the
+    pre-Phase-2 behavior (no SOUL prepend) — used by existing tests.
     """
     start_ns = time.monotonic_ns()
 
@@ -278,7 +324,8 @@ def run_flush(
     n = len(messages)
     tier = pick_routing_tier(n)
     transcript_text = _concat_messages(messages)
-    prompt = EXTRACTION_PROMPT.format(transcript_text=transcript_text)
+    soul_prepend = build_soul_prepend(config)
+    prompt = soul_prepend + EXTRACTION_PROMPT.format(transcript_text=transcript_text)
 
     caller = llm_caller or _default_llm_caller
 
@@ -358,6 +405,7 @@ def main() -> int:
         vault_daily_dir=vault_daily_dir,
         llm_caller=None,
         dry_run=args.dry_run,
+        config=cfg,
     )
     duration_ms = (time.monotonic_ns() - start_ns) // 1_000_000
 

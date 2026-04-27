@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Knowledge Lint Agent — D.3 vault health check (two-tier).
 
-Tier 1 (Mac Mini, phi4-mini-reasoning, ~5 min, structural):
+Tier 1 (Mac Mini, structural Python checks, ~5 min):
   • broken wikilinks  — [[Target]] references that don't resolve
   • orphan files      — files with 0 inbound wikilinks
   • missing YAML frontmatter in vault/knowledge/
@@ -11,6 +11,10 @@ Tier 2 (MacBook Pro, Qwen3-14B via route_to_macbook, ~15 min, semantic):
   • contradiction detection across related articles
   • staleness detection (>30d + time-sensitive model/API refs)
   • SOT drift check (vault vs SOURCE-OF-TRUTH.md Parts 1-2)
+  • Phase 2 (2026-04-27): soul-tier-a-conflict — flags articles whose
+    claims contradict any Tier-A SOUL item across the three domains
+    (the-block, creative-studio, life-systems). Activated when a Tier-2
+    `llm_caller` is supplied; SOUL context is prepended to the prompt.
 
 Output: `vault/health/YYYY-MM-DD-lint-report.md` with severity buckets
 (CRITICAL / HIGH / MEDIUM / LOW).
@@ -33,7 +37,8 @@ from typing import Callable
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from lib.config import load_config
+from lib.artifact_loader import DOMAINS, load_artifact
+from lib.config import Config, load_config
 from lib.filelock import FileLock
 from lib.logging_setup import record_run, setup_logger
 
@@ -287,17 +292,66 @@ def run_tier1(vault_root: Path) -> Tier1Report:
 
 # ─── Tier 2 (semantic, LLM-powered) ───────────────────────────────────────
 
+def build_soul_context(config: Config | None) -> str:
+    """Concatenated SOUL bodies for all three domains, framed as reference.
+
+    Returns "" when artifacts are globally disabled, the knowledge_lint
+    agent has no per-agent entry, or `SOUL` isn't in its `on_demand` list.
+    Per-domain unconfirmed/missing artifacts map to a placeholder so the
+    LLM still sees structure.
+    """
+    if config is None:
+        return ""
+    cfg = config.artifact_config("knowledge_lint")
+    if not cfg or "SOUL" not in cfg.get("on_demand", []):
+        return ""
+
+    sections: list[str] = []
+    for domain in DOMAINS:
+        body = load_artifact(domain, "SOUL", config.vault_root)
+        if body is None:
+            sections.append(f"## SOUL — {domain}\n\n[unavailable]\n")
+            continue
+        sections.append(f"## SOUL — {domain}\n\n{body.rstrip()}\n")
+    return (
+        "--- BEGIN OPERATING-MODEL SOUL CONTEXT (Tier-A reference) ---\n\n"
+        + "\n".join(sections)
+        + "\n--- END OPERATING-MODEL SOUL CONTEXT ---\n\n"
+    )
+
+
+def _build_tier2_prompt(soul_context: str) -> str:
+    """Tier-2 LLM prompt — semantic contradictions + Tier-A SOUL conflicts."""
+    instructions = (
+        "Review the vault for two things:\n"
+        "  1. Semantic contradictions across `knowledge/concepts/*.md`.\n"
+        "  2. Articles whose claims contradict any Tier-A SOUL item across "
+        "the-block, creative-studio, or life-systems (use the SOUL context "
+        "above as the canonical reference).\n\n"
+        "Return ONLY a JSON object with two keys:\n"
+        '  "contradictions": [{"files": ["..."], "detail": "..."}],\n'
+        '  "soul_conflicts": [{"file": "...", "tier_a_item": "...", "detail": "..."}]\n'
+    )
+    if soul_context:
+        return soul_context + instructions
+    return instructions
+
+
 def run_tier2(
     vault_root: Path,
     *,
     llm_caller: Callable[[str], dict] | None = None,
     stale_days: int = 30,
+    soul_context: str = "",
 ) -> list[LintIssue]:
-    """Heuristic staleness + LLM contradiction/drift.
+    """Heuristic staleness + LLM contradiction / SOUL Tier-A conflict scan.
 
     Without an llm_caller, Tier 2 still runs the staleness regex scan —
     which catches mentions of retired model names (Opus 4.1, etc.). The
-    LLM portion (contradiction + SOT drift) is a no-op in that mode.
+    LLM portion (contradiction + soul-tier-a-conflict) is a no-op in
+    that mode. When `soul_context` is supplied, it is prepended to the
+    LLM prompt so the model can flag Tier-A conflicts grounded in the
+    canonical operating-model artifacts.
     """
     issues: list[LintIssue] = []
     stale_refs = [
@@ -327,13 +381,9 @@ def run_tier2(
     if llm_caller is None:
         return issues
 
-    # LLM-powered contradiction + drift (caller supplies implementation).
+    # LLM-powered contradiction + SOUL Tier-A conflict (caller supplies impl).
     try:
-        resp = llm_caller(
-            "Review the vault for semantic contradictions across "
-            "`knowledge/concepts/*.md`. Return JSON: "
-            "{\"contradictions\": [{\"files\":[...], \"detail\":\"...\"}]}"
-        )
+        resp = llm_caller(_build_tier2_prompt(soul_context))
         for c in resp.get("contradictions", []):
             files = c.get("files", [])
             if not files:
@@ -344,6 +394,24 @@ def run_tier2(
                     severity=LintSeverity.CRITICAL,
                     file=Path(files[0]),
                     detail=c.get("detail", ""),
+                    tier=2,
+                )
+            )
+        for sc in resp.get("soul_conflicts", []):
+            file_str = sc.get("file", "")
+            if not file_str:
+                continue
+            tier_a = sc.get("tier_a_item", "")
+            detail = sc.get("detail", "")
+            combined = (
+                f"tier_a_item={tier_a!r}: {detail}" if tier_a else detail
+            )
+            issues.append(
+                LintIssue(
+                    kind="soul-tier-a-conflict",
+                    severity=LintSeverity.HIGH,
+                    file=Path(file_str),
+                    detail=combined,
                     tier=2,
                 )
             )
@@ -571,8 +639,13 @@ def main() -> int:
 
     tier2: list[LintIssue] = []
     if tier1.total_issues > 0 or args.full:
-        tier2 = run_tier2(cfg.vault_root)
-        logger.info("Tier 2: %d issues", len(tier2))
+        soul_context = build_soul_context(cfg)
+        tier2 = run_tier2(cfg.vault_root, soul_context=soul_context)
+        logger.info(
+            "Tier 2: %d issues (soul_context=%s)",
+            len(tier2),
+            "loaded" if soul_context else "off",
+        )
 
     today = date.today().isoformat()
     report = format_report(tier1=tier1, tier2=tier2, today=today)

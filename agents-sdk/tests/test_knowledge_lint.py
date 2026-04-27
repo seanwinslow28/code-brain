@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import pytest
@@ -10,6 +11,8 @@ from agents.knowledge_lint import (
     LintIssue,
     LintSeverity,
     Tier1Report,
+    _build_tier2_prompt,
+    build_soul_context,
     build_synthetic_vault,
     find_broken_wikilinks,
     find_camelcase_filenames,
@@ -17,7 +20,39 @@ from agents.knowledge_lint import (
     find_orphan_files,
     recall_against_oracle,
     run_tier1,
+    run_tier2,
 )
+from lib.artifact_loader import clear_cache
+
+
+@pytest.fixture(autouse=True)
+def _reset_artifact_cache():
+    clear_cache()
+    yield
+    clear_cache()
+
+
+@dataclass
+class _FakeConfig:
+    """Stand-in for lib.config.Config — fields knowledge_lint touches."""
+
+    vault_root: Path
+    artifacts: dict = field(default_factory=dict)
+
+    def artifact_config(self, name: str) -> dict:
+        if not self.artifacts.get("enabled", False):
+            return {}
+        return self.artifacts.get("per_agent", {}).get(name, {})
+
+
+def _kl_config(tmp_artifacts: Path, *, enabled: bool = True, on_demand=("SOUL",)) -> _FakeConfig:
+    return _FakeConfig(
+        vault_root=tmp_artifacts,
+        artifacts={
+            "enabled": enabled,
+            "per_agent": {"knowledge_lint": {"on_demand": list(on_demand)}},
+        },
+    )
 
 
 def _touch(p: Path, text: str) -> None:
@@ -100,6 +135,127 @@ def test_build_synthetic_vault_has_20_planted_issues(tmp_path: Path) -> None:
     # Full directory listing ~30 files
     md_files = list(vault.rglob("*.md"))
     assert len(md_files) >= 30
+
+
+# ─── Phase 2: SOUL context + soul-tier-a-conflict ────────────────────────
+
+
+class TestBuildSoulContext:
+    def test_returns_empty_when_config_is_none(self):
+        assert build_soul_context(None) == ""
+
+    def test_returns_empty_when_artifacts_disabled(self, tmp_artifacts: Path):
+        cfg = _kl_config(tmp_artifacts, enabled=False)
+        assert build_soul_context(cfg) == ""
+
+    def test_returns_empty_when_no_per_agent_entry(self, tmp_artifacts: Path):
+        cfg = _FakeConfig(
+            vault_root=tmp_artifacts,
+            artifacts={"enabled": True, "per_agent": {}},
+        )
+        assert build_soul_context(cfg) == ""
+
+    def test_returns_empty_when_soul_not_in_on_demand(self, tmp_artifacts: Path):
+        cfg = _kl_config(tmp_artifacts, on_demand=("USER",))
+        assert build_soul_context(cfg) == ""
+
+    def test_includes_all_three_domain_souls(self, tmp_artifacts: Path):
+        ctx = build_soul_context(_kl_config(tmp_artifacts))
+        assert "## SOUL — the-block" in ctx
+        assert "## SOUL — creative-studio" in ctx
+        assert "## SOUL — life-systems" in ctx
+        assert ctx.startswith("--- BEGIN OPERATING-MODEL SOUL CONTEXT")
+        assert "--- END OPERATING-MODEL SOUL CONTEXT ---" in ctx
+
+
+class TestBuildTier2Prompt:
+    def test_includes_soul_context_when_supplied(self):
+        soul = "--- BEGIN OPERATING-MODEL SOUL CONTEXT ---\n\n## SOUL — the-block\nbody\n--- END ---\n\n"
+        prompt = _build_tier2_prompt(soul)
+        assert prompt.startswith("--- BEGIN OPERATING-MODEL SOUL CONTEXT")
+        assert "soul_conflicts" in prompt
+        assert "tier_a_item" in prompt
+
+    def test_omits_soul_section_when_empty(self):
+        prompt = _build_tier2_prompt("")
+        assert not prompt.startswith("---")
+        assert "soul_conflicts" in prompt  # instructions still ask for it
+
+
+class TestRunTier2SoulConflicts:
+    def test_emits_soul_tier_a_conflict_issue_at_high_severity(self, tmp_path: Path):
+        vault = tmp_path / "vault"
+        vault.mkdir()
+
+        def fake_llm(prompt: str) -> dict:
+            assert "## SOUL — the-block" in prompt
+            return {
+                "contradictions": [],
+                "soul_conflicts": [
+                    {
+                        "file": "knowledge/concepts/sample.md",
+                        "tier_a_item": "GitHub write is hard never",
+                        "detail": "Article asserts GitHub write workflow is OK.",
+                    }
+                ],
+            }
+
+        soul_ctx = (
+            "--- BEGIN OPERATING-MODEL SOUL CONTEXT ---\n\n"
+            "## SOUL — the-block\n\nGitHub write is hard never.\n"
+            "## SOUL — creative-studio\n\nbody\n"
+            "## SOUL — life-systems\n\nbody\n"
+            "--- END OPERATING-MODEL SOUL CONTEXT ---\n\n"
+        )
+        issues = run_tier2(vault, llm_caller=fake_llm, soul_context=soul_ctx)
+        soul_issues = [i for i in issues if i.kind == "soul-tier-a-conflict"]
+        assert len(soul_issues) == 1
+        i = soul_issues[0]
+        assert i.severity == LintSeverity.HIGH
+        assert i.tier == 2
+        assert "GitHub write is hard never" in i.detail
+        assert i.file == Path("knowledge/concepts/sample.md")
+
+    def test_no_false_positives_when_soul_conflicts_empty(self, tmp_path: Path):
+        vault = tmp_path / "vault"
+        vault.mkdir()
+
+        def fake_llm(prompt: str) -> dict:
+            return {"contradictions": [], "soul_conflicts": []}
+
+        issues = run_tier2(vault, llm_caller=fake_llm, soul_context="")
+        soul_issues = [i for i in issues if i.kind == "soul-tier-a-conflict"]
+        assert soul_issues == []
+
+    def test_skips_entries_with_missing_file_field(self, tmp_path: Path):
+        vault = tmp_path / "vault"
+        vault.mkdir()
+
+        def fake_llm(prompt: str) -> dict:
+            return {
+                "contradictions": [],
+                "soul_conflicts": [
+                    {"file": "", "tier_a_item": "x", "detail": "skipped"},
+                    {"file": "k/concepts/real.md", "tier_a_item": "y", "detail": "kept"},
+                ],
+            }
+
+        issues = run_tier2(vault, llm_caller=fake_llm, soul_context="")
+        soul_issues = [i for i in issues if i.kind == "soul-tier-a-conflict"]
+        assert len(soul_issues) == 1
+        assert soul_issues[0].file == Path("k/concepts/real.md")
+
+    def test_caller_exception_does_not_break_run(self, tmp_path: Path):
+        vault = tmp_path / "vault"
+        vault.mkdir()
+
+        def boom(prompt: str) -> dict:
+            raise RuntimeError("simulated network failure")
+
+        # Should not raise; staleness scan still runs (returns whatever it finds)
+        issues = run_tier2(vault, llm_caller=boom, soul_context="")
+        soul_issues = [i for i in issues if i.kind == "soul-tier-a-conflict"]
+        assert soul_issues == []
 
 
 def test_tier1_recall_on_synthetic_vault(tmp_path: Path) -> None:
