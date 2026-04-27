@@ -49,6 +49,8 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the [Cl
 
 **Phase 6 knowledge compounding loop** (v3.14.3): SessionEnd flush → Vault Synthesizer v2 → Knowledge Lint. The vault becomes a living graph the LLM maintains instead of a static archive. The autoresearch-feedback consumer side (D.4) is descoped pending upstream autoresearch-harness stability — re-open spec in the Phase 6 Super Plan §10.1. **Knowledge-loop Phase B** (2026-04-25, branch `knowledge-loop/phase-b`) adds a SessionStart hook that injects the synthesizer-produced `vault/knowledge/index.md` as `additionalContext` on every new Claude Code session, closing the consumer loop on the read side.
 
+**Agent-wiring Phase 2** (v3.17.0, 2026-04-27): `meta_agent` / `flush` / `knowledge_lint` consume operating-model artifacts so their local-model prompts are domain-aware. `meta_agent` calls gemma4:e4b on Mac Mini with all three `schedule-recommendations.md` bodies to produce a "Domain-Aware Insights" section ranking fleet activity against Sean's Protect / Automate / Decline lists. `flush.py` prepends all three domain SOULs to its extraction prompt; `knowledge_lint.py` Tier-2 gains a SOUL context block and a new `soul-tier-a-conflict` issue kind at HIGH severity. All local-only, no cloud egress. Pre-flight against five historical session transcripts produced 5 / 5 valid JSON with the SOUL prepend.
+
 ```bash
 # Dry run (free)
 cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode morning --dry-run

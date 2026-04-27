@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+from dataclasses import dataclass, field
 from pathlib import Path
 from unittest.mock import patch
 
@@ -11,13 +12,46 @@ import pytest
 
 from agents.flush import (
     DAILY_LOG_TEMPLATE_HEADER,
+    EXTRACTION_PROMPT,
     FlushResult,
     RoutingTier,
     append_to_daily_log,
+    build_soul_prepend,
     format_daily_log_body,
     pick_routing_tier,
     run_flush,
 )
+from lib.artifact_loader import clear_cache
+
+
+@pytest.fixture(autouse=True)
+def _reset_artifact_cache():
+    clear_cache()
+    yield
+    clear_cache()
+
+
+@dataclass
+class _FakeConfig:
+    """Stand-in for lib.config.Config — fields the flush path touches."""
+
+    vault_root: Path
+    artifacts: dict = field(default_factory=dict)
+
+    def artifact_config(self, name: str) -> dict:
+        if not self.artifacts.get("enabled", False):
+            return {}
+        return self.artifacts.get("per_agent", {}).get(name, {})
+
+
+def _flush_config(tmp_artifacts: Path, *, enabled: bool = True, on_demand=("SOUL",)) -> _FakeConfig:
+    return _FakeConfig(
+        vault_root=tmp_artifacts,
+        artifacts={
+            "enabled": enabled,
+            "per_agent": {"flush": {"on_demand": list(on_demand)}},
+        },
+    )
 
 
 def _make_transcript(path: Path, n_messages: int) -> Path:
@@ -153,6 +187,124 @@ def test_run_flush_missing_transcript_returns_error(tmp_path: Path) -> None:
     )
     assert result.status == "error"
     assert "transcript" in result.error.lower()
+
+
+# ─── Phase 2: SOUL prepend ────────────────────────────────────────────────
+
+
+class TestBuildSoulPrepend:
+    def test_returns_empty_when_config_is_none(self):
+        assert build_soul_prepend(None) == ""
+
+    def test_returns_empty_when_artifacts_disabled(self, tmp_artifacts: Path):
+        cfg = _flush_config(tmp_artifacts, enabled=False)
+        assert build_soul_prepend(cfg) == ""
+
+    def test_returns_empty_when_no_per_agent_entry(self, tmp_artifacts: Path):
+        cfg = _FakeConfig(
+            vault_root=tmp_artifacts,
+            artifacts={"enabled": True, "per_agent": {}},
+        )
+        assert build_soul_prepend(cfg) == ""
+
+    def test_returns_empty_when_soul_not_in_on_demand(self, tmp_artifacts: Path):
+        cfg = _flush_config(tmp_artifacts, on_demand=("USER",))
+        assert build_soul_prepend(cfg) == ""
+
+    def test_includes_all_three_domain_souls(self, tmp_artifacts: Path):
+        block = build_soul_prepend(_flush_config(tmp_artifacts))
+        assert "## SOUL — the-block" in block
+        assert "## SOUL — creative-studio" in block
+        assert "## SOUL — life-systems" in block
+
+    def test_uses_framing_markers(self, tmp_artifacts: Path):
+        block = build_soul_prepend(_flush_config(tmp_artifacts))
+        assert block.startswith("--- BEGIN OPERATING-MODEL SOUL CONTEXT")
+        assert "--- END OPERATING-MODEL SOUL CONTEXT ---" in block
+        assert block.rstrip().endswith("--- BEGIN SESSION TRANSCRIPT EXTRACTION ---")
+
+    def test_missing_domain_soul_maps_to_unavailable(self, tmp_artifacts: Path):
+        (tmp_artifacts / "05_atlas" / "operating-models" / "life-systems" / "SOUL.md").unlink()
+        block = build_soul_prepend(_flush_config(tmp_artifacts))
+        assert "## SOUL — life-systems\n\n[unavailable]" in block
+        # Other two still load
+        assert "## SOUL — the-block" in block
+
+
+class TestRunFlushSoulPrepend:
+    def test_no_config_keeps_existing_behavior(self, tmp_path: Path) -> None:
+        """Phase-1 callers pass no config — prompt has NO SOUL prepend."""
+        transcript = _make_transcript(tmp_path / "t.jsonl", 30)
+        captured = {"prompt": ""}
+
+        def fake_llm(prompt: str, tier: RoutingTier) -> dict:
+            captured["prompt"] = prompt
+            return {"decisions": ["d"], "lessons": [], "actions": [], "patterns": [], "quotes": []}
+
+        run_flush(
+            transcript_path=transcript,
+            vault_daily_dir=tmp_path / "vault" / "daily",
+            llm_caller=fake_llm,
+        )
+        assert "BEGIN OPERATING-MODEL SOUL CONTEXT" not in captured["prompt"]
+        # The base prompt body must still be present and unchanged
+        assert captured["prompt"].startswith(
+            "You are summarizing a single Claude Code session"
+        )
+
+    def test_config_enabled_prepends_soul_above_existing_prompt(
+        self, tmp_path: Path, tmp_artifacts: Path
+    ) -> None:
+        transcript = _make_transcript(tmp_path / "t.jsonl", 30)
+        captured = {"prompt": ""}
+
+        def fake_llm(prompt: str, tier: RoutingTier) -> dict:
+            captured["prompt"] = prompt
+            return {"decisions": ["d"], "lessons": [], "actions": [], "patterns": [], "quotes": []}
+
+        cfg = _flush_config(tmp_artifacts)
+        run_flush(
+            transcript_path=transcript,
+            vault_daily_dir=tmp_path / "vault" / "daily",
+            llm_caller=fake_llm,
+            config=cfg,
+        )
+        prompt = captured["prompt"]
+        # SOUL prepend lands first
+        assert prompt.startswith("--- BEGIN OPERATING-MODEL SOUL CONTEXT")
+        # All three domain SOULs present
+        assert "## SOUL — the-block" in prompt
+        assert "## SOUL — creative-studio" in prompt
+        assert "## SOUL — life-systems" in prompt
+        # And the existing prompt body lands AFTER the prepend, unchanged
+        idx = prompt.find("You are summarizing a single Claude Code session")
+        assert idx > 0
+        assert "BEGIN SESSION TRANSCRIPT EXTRACTION" in prompt[:idx]
+
+    def test_json_output_shape_unchanged_with_soul(self, tmp_path: Path, tmp_artifacts: Path) -> None:
+        """JSON shape (5-key dict, lists) does NOT regress when SOUL is on."""
+        transcript = _make_transcript(tmp_path / "t.jsonl", 30)
+
+        def fake_llm(prompt: str, tier: RoutingTier) -> dict:
+            return {
+                "decisions": ["D1"],
+                "lessons": ["L1"],
+                "actions": ["A1"],
+                "patterns": ["P1"],
+                "quotes": ["Q1"],
+            }
+
+        result = run_flush(
+            transcript_path=transcript,
+            vault_daily_dir=tmp_path / "vault" / "daily",
+            llm_caller=fake_llm,
+            config=_flush_config(tmp_artifacts),
+        )
+        assert result.status == "ok"
+        assert result.sections_written == 5
+        text = (tmp_path / "vault" / "daily" / f"{result.date}.md").read_text(encoding="utf-8")
+        for marker in ("D1", "L1", "A1", "P1", "Q1"):
+            assert marker in text
 
 
 def test_run_flush_daily_log_append_idempotent(tmp_path: Path) -> None:
