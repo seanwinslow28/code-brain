@@ -8,6 +8,7 @@ attendees:
   - erupkus@theblock.co
   - szheng@theblock.co
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Research (Pro Future).md]]"
+domain: [product-management]
 ---
 
 # Transcript for: Research (Pro Future)

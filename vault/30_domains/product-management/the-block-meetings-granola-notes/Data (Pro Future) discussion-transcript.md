@@ -8,6 +8,7 @@ attendees:
   - erupkus@theblock.co
   - scousaert@theblock.co
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Data (Pro Future) discussion.md]]"
+domain: [product-management]
 ---
 
 # Transcript for: Data (Pro Future) discussion

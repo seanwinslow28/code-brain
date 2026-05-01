@@ -7,6 +7,7 @@ updated: 2026-03-26T12:32:07.869Z
 attendees: 
   - ddebreczeni@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/David & Sean Weekly Catch Up-transcript.md]]"
+domain: [product-management]
 ---
 ### Personal Updates & Relocation
 

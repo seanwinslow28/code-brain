@@ -7,6 +7,7 @@ updated: 2026-03-26T17:26:50.561Z
 attendees: 
   - erupkus@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1-transcript.md]]"
+domain: [product-management]
 ---
 ### Polymarket Sponsored Course Launch
 

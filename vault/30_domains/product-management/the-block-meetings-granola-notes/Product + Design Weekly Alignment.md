@@ -12,6 +12,7 @@ attendees:
   - sho@theblock.co
   - jcarusi@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment-transcript.md]]"
+domain: [product-management]
 ---
 ### Step 4 (Jira Software Cloud — Update Issue) has its Description field stuck in the "Extra Fields" section, making it read-only. I need you to delete Step 4 and recreate it as a fresh step.
 

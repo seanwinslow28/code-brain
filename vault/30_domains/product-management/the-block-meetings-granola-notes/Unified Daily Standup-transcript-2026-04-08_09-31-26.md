@@ -25,6 +25,7 @@ attendees:
   - koliva@theblock.co
   - ramuald.vishneuski@ventionteams.com
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Unified Daily Standup.md]]"
+domain: [product-management]
 ---
 
 # Transcript for: Unified Daily Standup

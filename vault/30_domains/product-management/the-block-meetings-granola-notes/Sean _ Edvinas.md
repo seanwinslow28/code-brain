@@ -7,6 +7,7 @@ updated: 2026-04-08T16:56:48.425Z
 attendees: 
   - erupkus@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Sean _ Edvinas-transcript.md]]"
+domain: [product-management]
 ---
 ### AI ETF Analysis Tool Demo
 

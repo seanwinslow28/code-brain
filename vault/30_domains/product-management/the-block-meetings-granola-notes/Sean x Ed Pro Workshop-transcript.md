@@ -7,6 +7,7 @@ updated: 2026-03-27T17:52:49.704Z
 attendees: 
   - erupkus@theblock.co
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed Pro Workshop.md]]"
+domain: [product-management]
 ---
 
 # Transcript for: Sean x Ed Pro Workshop

@@ -10,6 +10,7 @@ attendees:
   - mprice@theblock.co
   - npivcevic@theblock.co
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/The Starting Block (New .co daily show) Data reqs.md]]"
+domain: [product-management]
 ---
 
 # Transcript for: The Starting Block (New .co daily show) Data reqs

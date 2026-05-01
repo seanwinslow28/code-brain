@@ -7,6 +7,7 @@ updated: 2026-03-27T17:52:49.704Z
 attendees: 
   - erupkus@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed Pro Workshop-transcript.md]]"
+domain: [product-management]
 ---
 ### Pro Platform Development Strategy
 

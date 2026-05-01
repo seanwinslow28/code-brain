@@ -7,6 +7,7 @@ updated: 2026-04-09T17:23:43.782Z
 attendees: 
   - erupkus@theblock.co
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Sean x Ed 1_1.md]]"
+domain: [product-management]
 ---
 
 # Transcript for: Sean x Ed 1:1

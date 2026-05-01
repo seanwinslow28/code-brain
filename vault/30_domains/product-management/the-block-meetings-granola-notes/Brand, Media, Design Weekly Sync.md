@@ -19,6 +19,7 @@ attendees:
   - zwang@theblock.co
   - gjenkinson@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Brand, Media, Design Weekly Sync-transcript.md]]"
+domain: [product-management]
 ---
 ### Singular Live Broadcasting Software - Lower Thirds Development
 

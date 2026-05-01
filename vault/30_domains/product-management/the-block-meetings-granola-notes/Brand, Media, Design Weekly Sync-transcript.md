@@ -19,6 +19,7 @@ attendees:
   - zwang@theblock.co
   - gjenkinson@theblock.co
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Brand, Media, Design Weekly Sync.md]]"
+domain: [product-management]
 ---
 
 # Transcript for: Brand, Media, Design Weekly Sync

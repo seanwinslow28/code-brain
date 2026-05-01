@@ -7,6 +7,7 @@ updated: 2026-03-30T15:34:38.589Z
 attendees: 
   - erupkus@theblock.co
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Ticket cleanup.md]]"
+domain: [product-management]
 ---
 
 # Transcript for: Ticket cleanup

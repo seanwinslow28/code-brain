@@ -10,6 +10,7 @@ attendees:
   - mprice@theblock.co
   - npivcevic@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/The Starting Block (New .co daily show) Data reqs-transcript.md]]"
+domain: [product-management]
 ---
 ### Data Requirements for Singular Integration
 

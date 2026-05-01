@@ -14,6 +14,7 @@ attendees:
   - gjenkinson@theblock.co
   - dquinton@theblock.co
 transcript: "[[30_domains/product-management/the-block-meetings-granola-notes/Singular.live discussion_refinement-transcript.md]]"
+domain: [product-management]
 ---
 ### Project Overview & Status
 

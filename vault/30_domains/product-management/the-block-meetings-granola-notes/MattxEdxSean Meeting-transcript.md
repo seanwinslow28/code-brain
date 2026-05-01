@@ -6,6 +6,7 @@ created: 2026-03-25T16:34:37.220Z
 updated: 2026-03-25T17:16:27.044Z
 attendees: []
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/MattxEdxSean Meeting.md]]"
+domain: [product-management]
 ---
 
 # Transcript for: MattxEdxSean Meeting

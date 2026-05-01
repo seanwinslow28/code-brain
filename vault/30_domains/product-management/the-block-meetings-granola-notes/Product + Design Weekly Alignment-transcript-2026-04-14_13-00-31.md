@@ -13,6 +13,7 @@ attendees:
   - sho@theblock.co
   - jcarusi@theblock.co
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Product + Design Weekly Alignment.md]]"
+domain: [product-management]
 ---
 
 # Transcript for: Product + Design Weekly Alignment

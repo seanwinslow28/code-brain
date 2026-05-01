@@ -7,6 +7,7 @@ updated: 2026-04-08T16:56:48.425Z
 attendees: 
   - erupkus@theblock.co
 note: "[[30_domains/product-management/the-block-meetings-granola-notes/Sean _ Edvinas.md]]"
+domain: [product-management]
 ---
 
 # Transcript for: Sean / Edvinas
