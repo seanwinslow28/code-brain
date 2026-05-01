@@ -5,14 +5,14 @@ domain:
   - the-block
   - creative-studio
   - life-systems
-status: in-progress
+status: complete
 context: superuser-pack
 created: 2026-04-23
-updated: 2026-04-25 (added coordination section with prj-knowledge-loop-consumer.md)
+updated: 2026-05-01 (Phase 2 production soak CLOSED — PARTIAL by observation gap, no regression; rollout complete across all 3 phases)
 source: claude-code-plan-mode
-phase-1-status: shipped 2026-04-23 (commit a081f02, v3.16.0)
-phase-2-status: not-started (gated on Phase 1 soak clean 2026-04-27)
-phase-3-status: spec-only (frozen — re-enablement requires explicit approval)
+phase-1-status: shipped 2026-04-23 (commit a081f02, v3.16.0); soak CLOSED 2026-04-27 (4/4 gates PASS)
+phase-2-status: shipped 2026-04-27 (merge `19a805e`, v3.17.0); pre-flight JSON-shape guard PASS (5/5 historical transcripts × gemma4:e4b + SOUL prepend); production soak CLOSED 2026-05-01 — 5/7 gates PASS, 2/7 PARTIAL (G4 flush + G5 lint, both unexercised by soak window conditions, no regression observed; opportunistic confirmation only)
+phase-3-status: closed 2026-04-27 — meeting_defender deleted; sprint_health autonomous wiring abandoned in favor of sprint-health skill
 references:
   - ~/.claude/plans/please-read-through-agent-wiring-plan-pr-rustling-wreath.md
   - agent-wiring-plan-prompt.md
@@ -46,7 +46,7 @@ Three phases, each independently shippable, reversible, and gated. Default loadi
 
 - **Phase 1 (Wedge):** `daily_driver.py` morning mode loads 3 × `HEARTBEAT.md` into the preamble; exposes on-demand reads for other artifacts via a new loader. **SHIPPED 2026-04-23.**
 - **Phase 2 (Fleet consumers):** `meta_agent.py` consults `schedule-recommendations.md`; `flush.py` and `knowledge_lint.py` consult `SOUL.md` — all reads go into **local-model prompts** (phi4-mini / Qwen3-14B), zero cloud egress.
-- **Phase 3 (Specified, frozen):** wiring spec for `meeting_defender` and `sprint_health` written but **not enabled**. Stays dormant until explicit approval.
+- **Phase 3 (Closed 2026-04-27):** wiring spec abandoned. `meeting_defender` was deleted entirely (Daily Driver already covers the calendar surfacing; the auto-decline workflow had no demand). `sprint_health` autonomous wiring superseded by the `sprint-health` skill — same value delivered as an interactive Block Jira status check, no MCP-in-headless gymnastics needed.
 
 After each phase: daily-driver keeps its 8:45 AM launchd slot, 30-turn max, `<!-- agent-error -->` anchor, vault-health header. Phase 6 producer loop untouched. None of the 6 disabled agents re-enabled.
 
@@ -251,24 +251,42 @@ Per-agent: remove the agent's entry from `[artifacts.per_agent]`. Same instant-k
 
 ---
 
-## Section 5 — Phase 3: Specified, Frozen (`meeting_defender`, `sprint_health`)
+## Section 5 — Phase 3: Closed 2026-04-27
 
-**Wiring spec only. Neither agent re-enabled as part of this plan.**
+**Phase 3 is no longer a wiring task.** After re-evaluating both agents against the post-v3.17.0 reality (Daily Driver already surfaces calendar context; operating-model artifacts now flow through the live agent fleet; browser-OAuth MCP in headless mode is still the binding constraint), the autonomous-agent shape is the wrong shape for both. Decisions locked 2026-04-27:
 
-### 5.1 `meeting_defender` (the-block)
+### 5.1 `meeting_defender` — DELETED
 
-- **Primary context:** `the-block/HEARTBEAT.md` + `the-block/schedule-recommendations.md`.
-- **Loading:** system-prompt-loaded HEARTBEAT; on-demand schedule-recs.
-- **Activation trigger when re-enabled:** `[artifacts.per_agent.meeting_defender] = { heartbeats = ["the-block"], on_demand = ["schedule-recommendations"] }`.
+Removed completely from the repo. Daily Driver morning mode already lists the day's meetings via interactive MCP, and there's no Sean-side demand for an auto-decline / draft-Slack-DM workflow.
 
-### 5.2 `sprint_health` (the-block)
+| Action | Path |
+|---|---|
+| Delete agent | `agents-sdk/agents/meeting_defender.py` |
+| Delete schedule | `agents-sdk/schedules/com.sean.agent.meeting-defender.plist` |
+| Remove config block | `[agents.meeting_defender]` in `agents-sdk/config.toml` |
+| Update audit | `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md` left unchanged — historical record stands |
 
-- **Primary context:** `the-block/USER.md` + `the-block/schedule-recommendations.md`.
-- **Loading:** both on-demand.
+The autonomous SDK agent count drops from **13 → 12** (still 6 active).
+
+### 5.2 `sprint_health` — superseded by `sprint-health` skill
+
+The valuable shape isn't a Friday-3PM autonomous report — it's an ad-hoc "where are we on Epic X?" status check, which Sean's own `the-block/schedule-recommendations.md` flagged as a gap ("No `sprint-health` skill yet"). Built as a skill instead.
+
+| Action | Path |
+|---|---|
+| New skill | `.claude/skills/sprint-health/SKILL.md` |
+| Block-specific | Reuses `jira-automation` Block Jira config (PRO / RBS / BE / Cloud ID `9660d87e-…`) |
+| Triggers | "where are we on PRO-XXXX", "sprint health", "what's stuck", "anything stale" |
+| Read-only | Atlassian MCP read tools only; never auto-comments / auto-transitions |
+| Cadence fit | Pre-standup, pre-1:1 with Ed, pre-bi-weekly P&E, ad-hoc Epic / Story spot-checks |
+
+The skill picks up operating-model artifacts via the standard Read pattern when invoked interactively (the user already has the artifact-loader-injected pointers from Daily Driver morning), so no new artifact wiring is required.
+
+The dormant `agents-sdk/agents/sprint_health.py` and `com.sean.agent.sprint-health.plist` remain in the repo as `enabled = false` artifacts. They're not loaded into launchd, never produced output even when enabled (per the 2026-04-09 audit), and add no maintenance cost. Future cleanup is one git rm away if desired.
 
 ### 5.3 What stays out of Phase 3
 
-`process_inbox`, `daily_driver evening/weekly`, `pr_digest`, `preserve_session`, `spending_analysis`, `health_audit`, `md_to_anki` — disabled for unrelated reasons.
+`process_inbox`, `daily_driver evening/weekly`, `pr_digest`, `preserve_session`, `spending_analysis`, `health_audit`, `md_to_anki` — disabled for unrelated reasons per the 2026-04-09 audit; not in scope here.
 
 ---
 
@@ -286,9 +304,11 @@ Per-agent: remove the agent's entry from `[artifacts.per_agent]`. Same instant-k
 - `CLAUDE.md`: update three affected agent rows with `+ SOUL / schedule-recs context` marker.
 - `README.md`: no-op expected.
 
-### Phase 3 (only once activated — not now)
+### Phase 3 (Closed 2026-04-27)
 
-- Zero doc updates as part of this plan.
+- `CHANGELOG.md`: entry under v3.17.x — meeting_defender deleted, sprint-health skill added, Phase 3 wiring closed.
+- `CLAUDE.md`: skill count 113 → 114; autonomous SDK agent count 13 → 12; Phase 3 line in the operating-model wiring paragraph updated to reflect closure.
+- `README.md`: same skill / agent count updates.
 
 ---
 
@@ -315,7 +335,7 @@ Per-agent: remove the agent's entry from `[artifacts.per_agent]`. Same instant-k
 | 7 | Sean edits artifact mid-run; cached stale content | Very Low | One run reads stale file | mtime-keyed cache catches on next access | None needed; auto-recovers |
 | 8 | `scripts/validate.py` breaks on `lib/artifact_loader.py` | Very Low | CI/local validation fail | Validate in Phase 1 gate check | Revert commit |
 | 9 | Tone drift — agent output reads as scolding despite rule | Medium | Low-trust daily notes | Tone assertion in tests grep forbidden phrases | Remove tone rule; keep structural context |
-| 10 | Scope creep into re-enabling disabled agents | Low | Violates non-negotiable #9 | Phase 3 labeled "spec only"; audit file re-read at any activation | None — plan explicitly freezes Phase 3 |
+| 10 | Scope creep into re-enabling disabled agents | Low | Violates non-negotiable #9 | Phase 3 closed 2026-04-27 — meeting_defender deleted, sprint_health re-shaped as skill; audit file remains the canonical "do not re-enable" record | None — re-enablement of any other disabled agent is out of scope |
 
 ---
 
@@ -333,9 +353,9 @@ Per-agent: remove the agent's entry from `[artifacts.per_agent]`. Same instant-k
 
 **Decision: Always load all three.** Every flush run prepends the-block + creative-studio + life-systems SOUL context. Simpler than domain inference; ~5K tokens fits both local model windows.
 
-### Q4 — Phase 3 freeze timing
+### Q4 — Phase 3 disposition (revised 2026-04-27)
 
-Frozen indefinitely. Sean activates `meeting_defender` or `sprint_health` in a separate session when ready.
+**Decision: Phase 3 closed.** `meeting_defender` deleted; Daily Driver morning already covers the calendar surfacing and the auto-decline / draft-Slack-DM workflow had no demand. `sprint_health` reshaped as the `sprint-health` skill — same value as an ad-hoc "where are we on Epic X?" interactive query. No autonomous Phase 3 work pending. The original 2026-04-23 "frozen indefinitely" framing is superseded.
 
 ---
 
@@ -365,34 +385,60 @@ Frozen indefinitely. Sean activates `meeting_defender` or `sprint_health` in a s
 | Local-model regression soak | 1 week observation, no dev time |
 | Doc updates | 20 min |
 
-### Phase 3
+### Phase 3 — Closed 2026-04-27 (~1 hr)
 
-**0 hours.** Spec-only. Activation is a separate, explicit decision.
+| Step | Effort |
+|---|---|
+| Delete `meeting_defender.py` + plist + config block | 5 min |
+| Write `.claude/skills/sprint-health/SKILL.md` | 30 min |
+| Update Section 5 + frontmatter + risk row + Q4 decision | 15 min |
+| CHANGELOG / CLAUDE.md / README.md count + line updates | 10 min |
+| `python3 scripts/validate.py` | 1 min |
 
 ---
 
-## Live status — updated 2026-04-25
+## Live status — updated 2026-05-01
 
-- **Phase 1:** shipped 2026-04-23 as commit `a081f02` (v3.16.0). All 5 deterministic gates PASS; soak gate in progress (4 morning runs scheduled 2026-04-24 → 2026-04-27).
-- **Phase 2:** held until soak review clears.
-- **Phase 3:** frozen; no work scheduled.
+- **Phase 1:** shipped 2026-04-23 as commit `a081f02` (v3.16.0). Soak CLOSED 2026-04-27 — all 4 gates PASS.
+- **Phase 2:** shipped 2026-04-27 as merge `19a805e` (v3.17.0). **Production soak CLOSED 2026-05-01 — 5/7 gates PASS, 2/7 PARTIAL by observation gap (no regression observed).** Soak conclusion: do not block. The two PARTIAL gates (G4 flush SOUL prepend, G5 Sunday knowledge_lint) failed only because production conditions during the 4-day window did not exercise those code paths — flush hit the recursion guard on all 21 invocations (sessions had no extractable content), and the next scheduled `knowledge_lint --full` run fell outside the window. Pre-flight JSON guard already validated the SOUL prepend against 5 historical transcripts at ship time. Domain-Aware Insights output: 4/4 days populated, 0 fallbacks, output cross-references real Protect/Automate/Decline items by name. Full review: [phase-2-soak-closeout-2026-05-01.md](phase-2-soak-closeout-2026-05-01.md). Rollout complete.
+- **Phase 3:** closed 2026-04-27. `meeting_defender` deleted; `sprint_health` re-shaped as the `sprint-health` skill. See Section 5.
 
 ### Soak observation log
 
-| Date | Morning run | cost_usd | agent-error count | Tone notes |
-|---|---|---|---|---|
-| 2026-04-24 | TBD | TBD | TBD | TBD |
-| 2026-04-25 | TBD | TBD | TBD | TBD |
-| 2026-04-26 | TBD | TBD | TBD | TBD |
-| 2026-04-27 | (review fires 09:30 EDT) | — | — | — |
+| Date | Morning run | cost_usd | turns | agent-error count | Tone hits | Notes |
+|---|---|---|---|---|---|---|
+| 2026-04-24 (Fri) | success | **$0.4502** | 10 | 0 | 0 | Big Thing = weekly sweep (matches the-block HEARTBEAT "Fri lighter day"); creative deep work deferred to weekend |
+| 2026-04-25 (Sat) | success | **$0.4681** | 9 | 0 | 0 | Big Thing = Pencil Test pipeline (matches creative-studio HEARTBEAT "Weekends = implementation mode") |
+| 2026-04-26 (Sun) | success | **$0.4248** | 8 | 0 | 0 | Big Thing = Pencil Test continues |
+| 2026-04-27 (Mon) | success | **$0.4169** | 9 | 0 | 0 | Block deep work in 10:30–14:00 (HEARTBEAT deep-work block); Pencil Test parked in "weekday = research only" lot — direct lift of creative-studio HEARTBEAT weekday rule. References CEO transition (5/1) from the-block HEARTBEAT Monthly/Quarterly section |
 
-Fill in cost / error / tone columns as each morning's daily note + agent-logs surface. Remote review automated at https://claude.ai/code/routines/trig_01Xu9fvaxMRDfSr7rwSb5fYE.
+### Phase 1 closeout — gate check (2026-04-27)
+
+| Gate | Status | Evidence |
+|---|---|---|
+| G1. cost_usd < $0.50/run | **PASS (4/4)** | $0.4502 / $0.4681 / $0.4248 / $0.4169. Mean $0.4400, max $0.4681. None approached the $0.60 cap. Delta vs. baseline ~$0.40 = +~10% per run, matching the Section 3.5 estimate of +$0.02–$0.06. |
+| G2. zero agent-error entries | **PASS** | Zero `<!-- agent-error -->` anchors across all 4 daily notes. All 4 morning runs `success` in `agent-run-history.csv`. Zero error/exception/traceback hits in the four `daily-driver-2026-04-2{4,5,6,7}-morning.log` files. |
+| G3. sacred-block awareness | **PASS — strong** | Friday weekly-sweep, weekend Pencil Test, weekday Block-deep-work, no 21:00+ commitments, nothing in 14:00–15:00 decompress. Monday note cites HEARTBEAT verbatim ("weekday = research mode only, not implementation") and surfaces the CEO transition from the Monthly/Quarterly section. Small-things list explicitly references "Monday ritual per HEARTBEAT". |
+| G4. tone calm/factual/zen | **PASS** | Zero hits for "you should" / "you need to" / "make sure to" / "don't forget" / "you missed" / "you haven't" across all 4 notes. Carry-over discipline (12 → 13 → 14 → 15 iterations of the same descope task) is framed as factual auto-descope threshold logic, never scolding. |
+
+**Recommendation:** All four gates PASS. Phase 1 soak clean. Operating-model context is doing real work in morning runs — agent reaches into HEARTBEATs, schedule rules, and Monthly/Quarterly facts to rank priorities. Safe to proceed to Phase 2.
+
+Remote-review trigger fired 2026-04-27 13:30 UTC and auto-disabled (`run_once_fired`). Routine: https://claude.ai/code/routines/trig_01Xu9fvaxMRDfSr7rwSb5fYE.
+
+### Carry-over signals worth flagging (not gating)
+
+- The animated-short descope task hit its 15th carry-over on 2026-04-27. The agent's framing is correct (factual + auto-descope threshold language), but the underlying item really should be closed manually or excluded from the carry-over scan. This is **task-list hygiene**, not a Phase 1 defect.
+- Daily notes show consistent `[DEFERRED] MCP unavailable in headless mode` messaging — matches the documented headless limitation. No regression.
 
 ---
 
-## No blockers remaining
+## Rollout complete — 2026-05-01
 
-All three blocking decisions resolved 2026-04-23 (Section 9). Phase 1 shipped same day. Phase 2 ready to dev whenever soak gate clears.
+All three phases shipped or closed. Phase 1 soak closed 2026-04-27 (4/4 PASS). Phase 2 soak closed 2026-05-01 (5/7 PASS, 2/7 PARTIAL by observation gap, no regression). Phase 3 closed 2026-04-27 — `meeting_defender` deleted, `sprint-health` skill replaces the autonomous wiring. Plan status flipped `in-progress` → `complete` 2026-05-01.
+
+Opportunistic post-close confirmation (not gating, do not block on these):
+- **G4** (flush SOUL prepend in production): the next non-trivial Claude Code session that produces a real flush extraction will exercise the SOUL prepend on a fresh transcript. Rollback path stays `[artifacts.per_agent.flush] = {}` if anything looks off.
+- **G5** (Sunday `knowledge_lint --full` run): 2026-05-03 22:00 ET fires the first post-soak Sunday lint pass with the `soul-tier-a-conflict` issue kind active.
 
 ---
 
