@@ -4,7 +4,7 @@ This is Sean's personal command center — a second brain for Claude Code.
 
 ## What This Repo Is
 
-113 skills, 13 Claude Code subagents, 12 hooks, 13 autonomous SDK agents (6 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
+114 skills, 13 Claude Code subagents, 12 hooks, 12 autonomous SDK agents (6 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
 
 As of v3.15.0, the repo is organized so that domain-owned folders live inside their domain. `the-block/` is Sean's day-job workspace (with `product-management/` nested inside). `creative-studio/` owns 16BitFit and the design-team workspace. `life-systems/` owns personal systems. Cross-cutting infra (`.claude/`, `agents-sdk/`, `vault/`, `claude-mastery/`, installer dirs) stays at root.
 
@@ -74,7 +74,7 @@ python3 scripts/validate.py
 
 The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Claude Agent SDK. These run **outside** Claude Code sessions on macOS launchd schedules. Skills are loaded as system prompts — no duplication.
 
-**Active agents (6 of 13):**
+**Active agents (6 of 12):**
 
 | Agent | Schedule | Skills/Model | Cost/Run |
 |-------|----------|---------------|----------|
@@ -85,9 +85,11 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Cla
 | Knowledge Lint | Sunday 22:00 | Tier 1 structural Python checks (Mac Mini); Tier 2 Qwen3-14B on MBP if awake; + 3-domain SOUL context for `soul-tier-a-conflict` issue kind (v3.17.0) | $0.00 (local) |
 | Flush (SessionEnd) | hook-triggered | gemma4:e4b on Mac Mini via `inbox_triage` routing for <100-msg sessions; ≥100-msg sessions attempt Qwen3-14B on MBP if awake; + 3-domain SOUL prepend (v3.17.0) | $0.00 (local) |
 
+**Process Inbox: paused 2026-04-29 (v3.17.4) pending Path B rewrite to local `gemma4:e4b`.** Cloud-Sonnet path validated as functionally working (~3 files/run) but cost-inefficient ($1.16/file vs $0/file local). Manual triage via the `process-inbox` skill in an interactive Claude Code session is the working alternative. See `agents-sdk/AUDIT-2026-04-28-process-inbox-reenable.md` for full history + Path B scope.
+
 Phase 6 (v3.14.3) shipped the knowledge compounding loop producer side: SessionEnd flush → Vault Synthesizer v2 → Knowledge Lint. The consumer side (autoresearch feedback, D.4) was **descoped** pending upstream autoresearch harness — re-open spec in `creative-studio/16bitfit-battle-mode/docs/plans/phase6-SUPER-PLAN-2026-04-17.md` §10.1. All agents run 100% local.
 
-**The 6 agents disabled in v3.12.3** (2026-04-09) remain disabled. See `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md` for rationale. Do NOT re-enable without Sean's explicit approval.
+**6 of the 6 agents disabled in v3.12.3** (2026-04-09) remain disabled. `process_inbox` was briefly re-enabled 2026-04-28 → 2026-04-29 (v3.17.2 / v3.17.3) but paused again on 2026-04-29 in v3.17.4 — the cloud-Sonnet path works but at ~$1.16/file is cost-prohibitive vs the planned local-`gemma4:e4b` rewrite (~$0/file). See `agents-sdk/AUDIT-2026-04-28-process-inbox-reenable.md` for the full re-enable + pause cycle and Path B rewrite scope. The other 5 (`daily-driver` evening, `daily-driver` weekly, `pr-digest`, `spending-analysis`, `health-audit`, `md-to-anki`) remain disabled — see `agents-sdk/AUDIT-2026-04-09-agent-downsizing.md`. Do NOT re-enable without Sean's explicit approval.
 
 **Key limitation:** Headless SDK agents cannot access MCP servers (Slack, Google Calendar, Gmail, etc.) — those require browser-based OAuth only available in interactive sessions. The morning agent creates the daily note skeleton; Slack/calendar data is backfilled when Sean starts an interactive session.
 
@@ -108,7 +110,7 @@ cd agents-sdk && PYTHONPATH=. pytest tests/ -v
 
 Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key needed). Safety: max 30 turns, default $0.50/run cap (daily-driver morning bumped to $0.60 in v3.16.0 to absorb the operating-model artifact preamble). SDK version: `0.1.63` (pinned in `agents-sdk/pyproject.toml` as of v3.15.0). Morning schedule: 8:45 AM (was 6:00 AM as of v3.12.2). Full docs: `docs/agents-sdk.md`.
 
-**Operating-model artifact wiring (v3.16.0 Phase 1 + v3.17.0 Phase 2):** `agents-sdk/lib/artifact_loader.py` reads `vault/05_atlas/operating-models/{domain}/{kind}.md` artifacts on-demand with mtime-keyed caching. Daily-driver morning mode injects all three HEARTBEATs into the preamble plus on-demand Read pointers for USER / SOUL / operating-model / schedule-recommendations (Phase 1). Phase 2 wires three more agents — all local-only, no cloud egress: `meta_agent` calls gemma4:e4b on Mac Mini with all three `schedule-recommendations.md` bodies to produce a "Domain-Aware Insights" section ranking fleet activity against Sean's Protect / Automate / Decline lists; `flush.py` prepends all three domain SOULs to its `EXTRACTION_PROMPT` so the local model can cross-reference new entries against Tier-A items; `knowledge_lint.py` Tier-2 prompt gains a 3-domain SOUL context block plus a new `soul-tier-a-conflict` `LintIssue` kind at HIGH severity. Controlled by `[artifacts]` in `config.toml`; instant rollback = `enabled = false`. Phase 3 (meeting-defender / sprint-health) remains spec-only and frozen.
+**Operating-model artifact wiring (v3.16.0 Phase 1 + v3.17.0 Phase 2):** `agents-sdk/lib/artifact_loader.py` reads `vault/05_atlas/operating-models/{domain}/{kind}.md` artifacts on-demand with mtime-keyed caching. Daily-driver morning mode injects all three HEARTBEATs into the preamble plus on-demand Read pointers for USER / SOUL / operating-model / schedule-recommendations (Phase 1). Phase 2 wires three more agents — all local-only, no cloud egress: `meta_agent` calls gemma4:e4b on Mac Mini with all three `schedule-recommendations.md` bodies to produce a "Domain-Aware Insights" section ranking fleet activity against Sean's Protect / Automate / Decline lists; `flush.py` prepends all three domain SOULs to its `EXTRACTION_PROMPT` so the local model can cross-reference new entries against Tier-A items; `knowledge_lint.py` Tier-2 prompt gains a 3-domain SOUL context block plus a new `soul-tier-a-conflict` `LintIssue` kind at HIGH severity. Controlled by `[artifacts]` in `config.toml`; instant rollback = `enabled = false`. Phase 3 was closed 2026-04-27: `meeting_defender` deleted (Daily Driver morning already covers calendar surfacing); `sprint_health` autonomous wiring superseded by the new `sprint-health` skill (ad-hoc Block Jira status checks via interactive Atlassian MCP, no headless-MCP gymnastics required).
 
 **Knowledge-loop consumer activation (Phase B, 2026-04-25):** The `.claude/hooks/session-start-inject-index.sh` SessionStart hook reads `vault/knowledge/index.md` and injects it as `additionalContext` on every new Claude Code session, so Claude opens each session knowing the vault's concept and connection articles before you type anything. File-read-only, 5-second timeout, 15,000-char cap. Controlled by `[knowledge_index]` in `agents-sdk/config.toml`; instant rollback = remove the SessionStart block from `.claude/settings.json`. This pairs with the producer side (Phase 6 SessionEnd flush → nightly synthesizer → weekly knowledge_lint) to close the consumer loop.
 
@@ -118,7 +120,7 @@ Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key ne
 
 ```
 .claude/
-├── skills/          # ALL 113 skills (canonical, auto-loaded)
+├── skills/          # ALL 114 skills (canonical, auto-loaded)
 ├── agents/          # ALL 13 agents (8 domain + 5 design team)
 ├── hooks/           # 12 hooks (block-secrets, cost-watchdog, daily-note-appender,
 │                    #           format-on-edit, log-tool-use, loop-detector,
