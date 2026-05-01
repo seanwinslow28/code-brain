@@ -5,6 +5,35 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.18.0] - 2026-05-01
+
+### Added — knowledge-loop Phase A: PreCompact safety net
+
+- **`.claude/hooks/pre-compact-flush.sh`** (NEW). Mirror of `session-end-flush.sh`; the only diff is `--trigger pre-compact` so the daily-log session block tags are distinguishable. Hook count `12 → 13`.
+- **`PreCompact` block in `.claude/settings.json`.** Fires the new hook when Claude Code auto-compacts a long session, so pre-compact knowledge isn't silently lost.
+- **`--trigger {session-end,pre-compact,manual}` argparse arg in `agents-sdk/agents/flush.py`.** Default `session-end` (backwards-compatible). Threads into `session_summary["tag"]` so `vault/10_timeline/daily/*.md` session blocks now show `tag: session-end` / `tag: pre-compact` / `tag: manual` instead of the prior `tag: auto`.
+- **`agents-sdk/tests/test_flush_trigger.py`** (NEW, 5 tests). Verifies the default tag, all three known triggers thread correctly into the daily-log block, argparse accepts known triggers, and rejects unknown ones with exit 2.
+
+### Changed
+
+- **`run_flush()` signature** gained a `trigger: str = "session-end"` keyword arg. Existing call sites in tests pass without change (default preserves prior behavior).
+- **`flush.py` docstring** notes the trigger flow into the daily-log tag field.
+
+### Re-applied fresh, not merged
+
+The original `knowledge-loop/phase-a` branch (commit `4ca4413`, authored 2026-04-25) was too stale to rebase — it predated agent-wiring Phase 2 and would have regressed `flush.py` SOUL prepend, CLAUDE.md content, and the `flush.py` docstring. v3.18.0 ships the same intent on a fresh `knowledge-loop/phase-a-v2` branch layered on top of Phase 2 instead of regressing it. Stale branch deleted post-merge.
+
+### Gates
+
+- `pytest agents-sdk/tests/` 182 / 182 PASS.
+- `python3 scripts/validate.py` PASSED (58 pre-existing warnings, no new ones).
+
+### Rollback
+
+- Remove the `PreCompact` block from `.claude/settings.json` — instant kill.
+- Delete `.claude/hooks/pre-compact-flush.sh` (optional, leaves it inert).
+- The `--trigger` arg is backwards-compatible — leaving it in place keeps existing daily logs valid.
+
 ## [3.17.5] - 2026-05-01
 
 ### Closed

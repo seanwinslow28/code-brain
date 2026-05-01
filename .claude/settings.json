@@ -79,6 +79,16 @@
         ]
       }
     ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/pre-compact-flush.sh"
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [
