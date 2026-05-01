@@ -27,7 +27,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import re
+import sqlite3
 import sys
 from dataclasses import dataclass, field
 from datetime import date
@@ -37,6 +39,7 @@ from typing import Callable
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+from lib import concept_edges
 from lib.artifact_loader import DOMAINS, load_artifact
 from lib.config import Config, load_config
 from lib.filelock import FileLock
@@ -348,23 +351,106 @@ def _build_tier2_prompt(soul_context: str) -> str:
     return instructions
 
 
+def _slugs_from_contradiction_files(files: list[str]) -> tuple[str, str] | None:
+    """Best-effort extract (from_slug, to_slug) from an LLM contradiction
+    `files` payload for dedupe against the SQL fast path.
+
+    LLM contradictions list affected file paths; the slug is the file
+    stem of the first two paths. Returns None if fewer than two distinct
+    file basenames are present (means we can't form a pair to dedupe).
+    """
+    stems: list[str] = []
+    seen: set[str] = set()
+    for path_str in files:
+        if not path_str:
+            continue
+        stem = Path(path_str).stem
+        if not stem or stem in seen:
+            continue
+        seen.add(stem)
+        stems.append(stem)
+        if len(stems) == 2:
+            return stems[0], stems[1]
+    return None
+
+
+def _read_sql_contradictions(
+    vault_root: Path,
+    log: logging.Logger,
+) -> list[LintIssue]:
+    """Phase D — SQL fast path against `concept_edges`. Returns CRITICAL
+    contradiction issues sourced directly from the synthesizer's typed
+    edges. Zero LLM cost. No-op when `vault/.vault-index.db` is missing
+    (fresh vault before vault_indexer ran).
+    """
+    db_path = vault_root / ".vault-index.db"
+    if not db_path.exists():
+        return []
+    issues: list[LintIssue] = []
+    try:
+        conn = sqlite3.connect(str(db_path))
+    except sqlite3.Error as exc:
+        log.warning("SQL fast path skipped: cannot open %s (%s)", db_path, exc)
+        return []
+    try:
+        # Defensive: probe for the table — if vault_indexer has never run
+        # against this DB, concept_edges may not exist yet (and we must
+        # not call get_connection here, which would mutate the schema as
+        # a side effect of a read-only lint pass).
+        probe = conn.execute(
+            "SELECT name FROM sqlite_master "
+            "WHERE type='table' AND name='concept_edges'"
+        ).fetchone()
+        if not probe:
+            return []
+        for from_slug, to_slug in concept_edges.find_contradictions(conn):
+            log.info(
+                "Tier 2 contradiction: source=sql %s contradicts %s",
+                from_slug, to_slug,
+            )
+            issues.append(
+                LintIssue(
+                    kind="contradiction",
+                    severity=LintSeverity.CRITICAL,
+                    file=Path(f"knowledge/concepts/{from_slug}.md"),
+                    detail=f"contradicts {to_slug} (source=sql)",
+                    tier=2,
+                )
+            )
+    finally:
+        conn.close()
+    return issues
+
+
 def run_tier2(
     vault_root: Path,
     *,
     llm_caller: Callable[[str], dict] | None = None,
     stale_days: int = 30,
     soul_context: str = "",
+    logger: logging.Logger | None = None,
 ) -> list[LintIssue]:
-    """Heuristic staleness + LLM contradiction / SOUL Tier-A conflict scan.
+    """Heuristic staleness + SQL fast path + LLM contradiction / SOUL scan.
 
-    Without an llm_caller, Tier 2 still runs the staleness regex scan —
-    which catches mentions of retired model names (Opus 4.1, etc.). The
-    LLM portion (contradiction + soul-tier-a-conflict) is a no-op in
-    that mode. When `soul_context` is supplied, it is prepended to the
-    LLM prompt so the model can flag Tier-A conflicts grounded in the
-    canonical operating-model artifacts.
+    Without an llm_caller, Tier 2 still runs (a) the staleness regex scan
+    (catches mentions of retired model names like Opus 4.1) and (b) the
+    Phase D SQL fast path against `concept_edges` for synthesizer-flagged
+    contradictions. With an llm_caller, the existing LLM pass also runs
+    for contradiction discovery the synthesizer missed AND for
+    `soul-tier-a-conflict` (Phase 2).
+
+    Phase D dedupe rule: contradictions are deduplicated across SQL and
+    LLM by `frozenset({from_slug, to_slug})`. SQL hits win when both
+    paths surface the same pair (SQL row carries source provenance).
+    LLM-only contradictions still surface — synthesizer didn't catch
+    them. Documented in CHANGELOG v3.20.0.
+
+    `stale_days` is reserved for a future mtime-based staleness pass —
+    today the staleness check is keyword-based via `stale_refs`.
     """
+    log = logger or logging.getLogger(AGENT_NAME)
     issues: list[LintIssue] = []
+    _ = stale_days  # reserved; see docstring
     stale_refs = [
         "opus 4.1", "opus 4.0",
         "sonnet 4.0", "sonnet 4.5",
@@ -389,16 +475,42 @@ def run_tier2(
                         tier=2,
                     )
                 )
+
+    # Phase D — SQL fast path. Always runs; no-ops cleanly when the DB
+    # or table is missing. Track the (from, to) pairs we've seen so the
+    # subsequent LLM pass can dedupe against them.
+    sql_issues = _read_sql_contradictions(vault_root, log)
+    seen_contradiction_pairs: set[frozenset[str]] = set()
+    for issue in sql_issues:
+        # detail format: "contradicts {to_slug} (source=sql)" — extract
+        # the to_slug for the pair key.
+        from_slug = issue.file.stem
+        to_match = re.match(r"contradicts\s+(\S+)", issue.detail)
+        to_slug = to_match.group(1) if to_match else ""
+        if from_slug and to_slug:
+            seen_contradiction_pairs.add(frozenset({from_slug, to_slug}))
+    issues.extend(sql_issues)
+
     if llm_caller is None:
         return issues
 
     # LLM-powered contradiction + SOUL Tier-A conflict (caller supplies impl).
+    # Phase D: contradictions are deduped against the SQL fast path; SOUL
+    # conflicts have no SQL substitute and always surface from the LLM.
     try:
         resp = llm_caller(_build_tier2_prompt(soul_context))
         for c in resp.get("contradictions", []):
             files = c.get("files", [])
             if not files:
                 continue
+            pair = _slugs_from_contradiction_files(files)
+            if pair and frozenset(pair) in seen_contradiction_pairs:
+                log.info(
+                    "Tier 2 contradiction: source=llm dropped (sql had it) "
+                    "%s vs %s", pair[0], pair[1],
+                )
+                continue
+            log.info("Tier 2 contradiction: source=llm %s", files[0])
             issues.append(
                 LintIssue(
                     kind="contradiction",
@@ -651,7 +763,11 @@ def main() -> int:
     tier2: list[LintIssue] = []
     if tier1.total_issues > 0 or args.full:
         soul_context = build_soul_context(cfg)
-        tier2 = run_tier2(cfg.vault_root, soul_context=soul_context)
+        tier2 = run_tier2(
+            cfg.vault_root,
+            soul_context=soul_context,
+            logger=logger,
+        )
         logger.info(
             "Tier 2: %d issues (soul_context=%s)",
             len(tier2),
