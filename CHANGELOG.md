@@ -5,6 +5,20 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.17.5] - 2026-05-01
+
+### Closed
+
+- **Agent-wiring Phase 2 production soak — CLOSED.** 4-day window 2026-04-28 → 2026-05-01. Result: 5/7 gates PASS, 2/7 PARTIAL by observation gap, no regression observed. Rollout doc flipped `status: in-progress` → `status: complete`. Full review: `vault/20_projects/prj-superuser-pack/phase-2-soak-closeout-2026-05-01.md`.
+  - **G1–G3, G6, G7 PASS:** full pytest suite green (177 passed); `python3 scripts/validate.py` passes; pre-flight JSON guard already validated 5/5 historical transcripts at ship time; producer-side loop (vault-indexer + vault-synthesizer) ran 4/4 nights with zero errors; zero new errors in `agent-run-history.csv` from any Phase 2 modified agent.
+  - **G4 PARTIAL (flush SOUL prepend):** all 21 flush invocations during the window hit the recursion guard — sessions had no extractable content. Integration is structurally wired; soak window simply did not exercise the code path.
+  - **G5 PARTIAL (Sunday `knowledge_lint --full`):** last run was 2026-04-26 (pre-Phase-2); next scheduled run is 2026-05-03. No `--full` run inside the window.
+  - **Domain-Aware Insights signal (G4-adjacent):** 4/4 days populated, 0 fallbacks. gemma4:e4b output cross-references real Protect / Automate / Decline items by name across all three domain `schedule-recommendations.md` files. This is the strongest live evidence of Phase 2 working as intended.
+
+### Decided
+
+- **No more synthetic soak holds.** Operating preference, set 2026-05-01: ship validated work and observe in production. Rollback paths remain (`[artifacts].enabled = false`, hook removal, per-agent config disable). The G4 + G5 PARTIAL gates convert opportunistically — next non-trivial flush extraction confirms G4; 2026-05-03 Sunday lint confirms G5. They do not block downstream work.
+
 ## [3.17.4] - 2026-04-29
 
 ### Changed

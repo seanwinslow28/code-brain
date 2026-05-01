@@ -6,7 +6,7 @@ domain:
 status: in-progress
 context: superuser-pack
 created: 2026-04-23
-updated: 2026-04-25 (added coordination section with prj-agent-wiring-rollout.md; branches `knowledge-loop/phase-a` + `knowledge-loop/phase-b` created)
+updated: 2026-05-01 (Phase 2 soak CLOSED 2026-05-01 — PARTIAL by observation gap, no regression; Phase A re-applied fresh on `knowledge-loop/phase-a-v2` and shipped in v3.18.0; Phases C and D not started; no more soak-driven holds)
 source: claude-code-plan-mode
 references:
   - https://github.com/coleam00/claude-memory-compiler
@@ -38,28 +38,34 @@ This plan adds all four phases. It's a consumer-side complement to Phase 6, not 
 
 This plan and `prj-agent-wiring-rollout.md` operate on the **same agentic workflow** and modify overlapping files (`flush.py`, `knowledge_lint.py`, `daily_driver.py`, `config.toml`). Read this section before touching any phase — running these plans out of sequence will produce avoidable rebase conflicts and may invalidate the active Phase 1 soak in the wiring rollout.
 
-### Active state as of 2026-04-25
+### Active state as of 2026-05-01
 
-- Agent-wiring **Phase 1 SHIPPED** 2026-04-23 (commit `a081f02`, v3.16.0). Currently in soak through 2026-04-27 09:30 EDT.
-- Agent-wiring **Phase 2** ships immediately after the soak clears (Mon 2026-04-27).
-- Knowledge-loop **branches created** 2026-04-25: `knowledge-loop/phase-a` and `knowledge-loop/phase-b`. Both branched from `main` at `f4df51f`. Develop in parallel; do **not** merge during the soak.
+- Agent-wiring **Phase 1 SHIPPED** 2026-04-23 (commit `a081f02`, v3.16.0). Soak **CLOSED** 2026-04-27 — all 4 gates PASS.
+- Agent-wiring **Phase 2 SHIPPED** 2026-04-27 (merge `19a805e`, v3.17.0). Pre-flight JSON-shape guard PASS (5/5 historical transcripts × `gemma4:e4b` + SOUL prepend). **Production soak CLOSED 2026-05-01 — 5/7 gates PASS, 2/7 PARTIAL by observation gap, no regression.** Full review: [phase-2-soak-closeout-2026-05-01.md](phase-2-soak-closeout-2026-05-01.md).
+- Agent-wiring **Phase 3 CLOSED** 2026-04-27 — `meeting_defender` deleted; `sprint_health` autonomous wiring re-shaped as the `sprint-health` skill. Not a future merge.
+- Knowledge-loop **Phase B SHIPPED** 2026-04-27 alongside Phase 2 (paired in v3.17.0; zero file overlap, so safe to land together).
+- Knowledge-loop **Phase A SHIPPED** 2026-05-01 (v3.18.0). The original `knowledge-loop/phase-a` branch (commit `4ca4413`, authored 2026-04-25) was too stale to rebase — it predated Phase 2 and would have regressed `flush.py` SOUL prepend + CLAUDE.md content. Re-applied fresh on `knowledge-loop/phase-a-v2`: same intent (PreCompact hook + `--trigger` argparse arg + tag-field threading) but layered on top of Phase 2 instead of regressing it. Stale branch deleted post-merge.
+- Knowledge-loop **Phases C and D** — not started.
 
 ### Merge order (canonical)
 
-1. Agent-wiring Phase 1 — DONE.
-2. Knowledge-loop **Phase A** + **Phase B** — develop now in parallel branches. Zero conflict with the soak (no overlap on `daily_driver.py` morning path or `artifact_loader.py`). Hold merges until Phase 2 ships.
-3. Agent-wiring Phase 2 — first to land after soak. Modifies `flush.py` (EXTRACTION_PROMPT prepend) + `knowledge_lint.py` (Tier 2 SOUL context + new `soul-tier-a-conflict` issue kind) + `meta_agent.py` (schedule-recs).
-4. Knowledge-loop **Phase C** — after Phase 2 lands. Adds `query.py` + qa/ tier; light extensions to `vault_synthesizer.py` and `knowledge_lint.py`.
-5. Knowledge-loop **Phase D** — after Phase C lands. Highest-conflict phase: it modifies `daily_driver.py` morning brief Vault Health section AND is the third change to `knowledge_lint.py`. Single-session feasible but rebase deliberately.
+1. Agent-wiring Phase 1 — DONE 2026-04-23.
+2. Agent-wiring Phase 2 — DONE 2026-04-27 (v3.17.0, merge `19a805e`). Modified `flush.py` (EXTRACTION_PROMPT SOUL prepend) + `knowledge_lint.py` (Tier 2 SOUL context + new `soul-tier-a-conflict` issue kind) + `meta_agent.py` (schedule-recs).
+3. Knowledge-loop **Phase B** — DONE 2026-04-27 (v3.17.0). Paired with Phase 2 due to zero file overlap.
+4. Knowledge-loop **Phase A** — pending; merges after the 2026-05-01 Phase 2 soak review. Adds `--trigger` arg to `flush.py` (additive, different section than the Phase 2 SOUL prepend; rebases cleanly).
+5. Knowledge-loop **Phase C** — after Phase A lands. Adds `query.py` + qa/ tier; light extensions to `vault_synthesizer.py` and `knowledge_lint.py`.
+6. Knowledge-loop **Phase D** — after Phase C lands. Highest-conflict phase: it modifies `daily_driver.py` morning brief Vault Health section AND is the third change to `knowledge_lint.py`. Single-session feasible but rebase deliberately.
 
 ### Two file-conflict watch points
 
 - **`flush.py`** — agent-wiring Phase 2 prepends a SOUL block to `EXTRACTION_PROMPT` (around `flush.py:60-79`). Knowledge-loop Phase A adds a `--trigger {session-end,pre-compact,manual}` argparse arg and threads it into the daily-log tag field. Both are additive to different sections; whichever ships second rebases cleanly.
 - **`knowledge_lint.py`** — touched **three times** across the two plans (Phase 2 → C → D). Land in that exact order. Each adds a distinct concern (Phase 2: SOUL Tier-A conflict kind. C: qa/ in orphan/stale/sparse checks. D: SQL fast-path against `concept_edges`). No pair overlaps semantically, but order matters because each rebases onto the prior.
 
-### Soak-safety rule
+### Soak-safety rule (closed 2026-05-01)
 
-Anything that modifies `agents-sdk/agents/daily_driver.py` morning path or `agents-sdk/lib/artifact_loader.py` invalidates the active Phase 1 soak. **Phase D of this plan is the only phase that touches those files; do not merge it until Phase 2 has shipped and Phase 1 soak is closed.**
+The Phase 1 soak closed clean on 2026-04-27. The Phase 2 production soak closed 2026-05-01 (PARTIAL by observation gap, no regression). **No active soak is in flight as of 2026-05-01.** Phase A shipped same day as v3.18.0; the prior "hold Phase A until 2026-05-01" rule is obsolete. Future merges no longer block on soak windows — the operating preference, set 2026-05-01, is to ship and observe in production rather than impose synthetic soak holds. Rollback paths remain (`[artifacts].enabled = false`, hook removal, etc.).
+
+- **Phase D remains the highest-risk phase** — it modifies `daily_driver.py` morning brief Vault Health and is the third change to `knowledge_lint.py`. Land only after Phase C. No soak required, but rebase deliberately and run the full pytest + validate.py before merging.
 
 ---
 
@@ -148,9 +154,11 @@ Anything that modifies `agents-sdk/agents/daily_driver.py` morning path or `agen
 
 ---
 
-## Phase B — SessionStart index injection
+## Phase B — SessionStart index injection — SHIPPED 2026-04-27
 
-**Goal:** Activate the consumer side. Every new Claude Code session begins with awareness of the synthesized knowledge graph.
+**Status: shipped 2026-04-27 in v3.17.0 alongside agent-wiring Phase 2.** Hook count `11 → 12`. Today the live `vault/knowledge/index.md` only has placeholder rows, so the hook emits the empty-state stub on every session start; it switches to full content automatically the first nightly synthesizer run that produces real concept / connection articles.
+
+**Goal (original):** Activate the consumer side. Every new Claude Code session begins with awareness of the synthesized knowledge graph.
 
 ### Changes
 
@@ -611,10 +619,10 @@ cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode mo
 See the **Coordination with `prj-agent-wiring-rollout.md`** section above for the canonical merge order across both plans. Within this plan only:
 
 1. **Step 0 (this file):** v2 plan saved to vault. ✓
-2. **Phase A** (~3h) — PreCompact safety net. Lowest risk; ship and verify before B. Develop on branch `knowledge-loop/phase-a` (created 2026-04-25). Hold merge until agent-wiring Phase 2 ships.
-3. **Phase B** (~3.5h) — SessionStart index injection. Verify no session-start regression with 5 consecutive launches. Develop on branch `knowledge-loop/phase-b` (created 2026-04-25). Hold merge until agent-wiring Phase 2 ships.
-4. **Phase C** (~10.5h) — query.py + qa/ + OB1 provenance adds (C.M1 chunk_id frontmatter + C.M2 manifest JSONL). Pair with a read-through of `agents-sdk/lib/hybrid_router.py` and `vault_synthesizer.py` before starting. Branch when ready (after Phase 2 lands).
-5. **Phase D** (~8h) — Typed reasoning edges + synth manifest. Single-session feasible. Pair with a read of `vault_indexer.py:56-82` (the schema-extension pattern). **Highest-conflict phase** — see watch points above.
+2. **Phase B** — DONE 2026-04-27 (v3.17.0, paired with agent-wiring Phase 2). SessionStart hook live; emits empty-state stub against the current placeholder index; will switch to full content on the next synthesizer run that produces real articles.
+3. **Phase A** (~3h) — PreCompact safety net, on branch `knowledge-loop/phase-a` (commit `4ca4413`, created 2026-04-25). Held until the 2026-05-01 Phase 2 soak review; merges first thereafter.
+4. **Phase C** (~10.5h) — query.py + qa/ + OB1 provenance adds (C.M1 chunk_id frontmatter + C.M2 manifest JSONL). Pair with a read-through of `agents-sdk/lib/hybrid_router.py` and `vault_synthesizer.py` before starting. Branch when ready (after Phase A lands).
+5. **Phase D** (~8h) — Typed reasoning edges + synth manifest. Single-session feasible. Pair with a read of `vault_indexer.py:56-82` (the schema-extension pattern). **Highest-conflict phase** — see watch points above. Do not land while any active soak is in flight.
 6. **Final:** Update this file `status: in-progress` → `status: complete` with a brief retrospective section.
 7. **Phase E:** parked — separate research session, separate plan, no current scope.
 
