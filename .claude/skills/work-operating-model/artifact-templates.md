@@ -15,7 +15,7 @@ status: draft                       # or "confirmed" after final read-through
 last_interviewed: {{YYYY-MM-DD}}
 created: {{original-created-date, preserve}}
 review-date: {{optional}}
-ai-context: "Operating rhythms for Sean in the {{domain}} domain. Consumed by meeting-defender, daily-driver."
+ai-context: "Operating rhythms for Sean in the {{domain}} domain. Consumed by daily-driver."
 ---
 
 # HEARTBEAT — {{Domain Display Name}}
@@ -243,7 +243,7 @@ domain: [{{domain}}]
 status: draft
 last_interviewed: {{YYYY-MM-DD}}
 created: {{preserve}}
-ai-context: "Actionable schedule and friction-reduction rules for {{domain}}. Consumed by meeting-defender and future calendar agents."
+ai-context: "Actionable schedule and friction-reduction rules for {{domain}}. Consumed by daily-driver, meta-agent, and future calendar agents."
 ---
 
 # Schedule Recommendations — {{Domain Display Name}}

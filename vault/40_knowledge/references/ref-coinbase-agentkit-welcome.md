@@ -8,8 +8,9 @@ description:
 tags:
   - "source/web-clip"
 type: "source"
-status: "unprocessed"
-domain:
+status: draft
+domain: [product-management]
+ai-context: "Coinbase AgentKit overview — toolkit for AI agents to securely manage wallets and perform onchain actions across EVM and Solana with any AI framework."
 ---
 AgentKit is a toolkit enabling AI agents to interact with blockchain networks with secure wallet management and comprehensive onchain capabilities. Built on the Coinbase Developer Platform (CDP) SDK, it provides everything needed to create autonomous agents that can perform sophisticated blockchain operations.
 
