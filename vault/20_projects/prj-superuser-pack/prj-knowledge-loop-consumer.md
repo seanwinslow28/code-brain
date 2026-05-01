@@ -3,10 +3,10 @@ type: plan
 domain:
   - claude-mastery
   - life-systems
-status: in-progress
+status: complete
 context: superuser-pack
 created: 2026-04-23
-updated: 2026-05-01 (Phase 2 soak CLOSED 2026-05-01 — PARTIAL by observation gap, no regression; Phase A re-applied fresh on `knowledge-loop/phase-a-v2` and shipped in v3.18.0; Phases C and D not started; no more soak-driven holds)
+updated: 2026-05-01 (ALL FOUR PHASES SHIPPED — Phase A in v3.18.0, Phase B in v3.17.0, Phase C in v3.19.0, Phase D in v3.20.0; consumer-side rollout complete; Phase E remains parked as research-only; retrospective at bottom)
 source: claude-code-plan-mode
 references:
   - https://github.com/coleam00/claude-memory-compiler
@@ -45,16 +45,17 @@ This plan and `prj-agent-wiring-rollout.md` operate on the **same agentic workfl
 - Agent-wiring **Phase 3 CLOSED** 2026-04-27 — `meeting_defender` deleted; `sprint_health` autonomous wiring re-shaped as the `sprint-health` skill. Not a future merge.
 - Knowledge-loop **Phase B SHIPPED** 2026-04-27 alongside Phase 2 (paired in v3.17.0; zero file overlap, so safe to land together).
 - Knowledge-loop **Phase A SHIPPED** 2026-05-01 (v3.18.0). The original `knowledge-loop/phase-a` branch (commit `4ca4413`, authored 2026-04-25) was too stale to rebase — it predated Phase 2 and would have regressed `flush.py` SOUL prepend + CLAUDE.md content. Re-applied fresh on `knowledge-loop/phase-a-v2`: same intent (PreCompact hook + `--trigger` argparse arg + tag-field threading) but layered on top of Phase 2 instead of regressing it. Stale branch deleted post-merge.
-- Knowledge-loop **Phases C and D** — not started.
+- Knowledge-loop **Phase C SHIPPED** 2026-05-01 (v3.19.0, merge `a837a7c`). Added `agents-sdk/scripts/query.py` two-pass Q&A CLI + qa/ third article tier + the two OB1-inspired provenance adds (C.M1 chunk_id frontmatter + C.M2 JSONL manifest). Empty-state path explicit: zero candidates, no LLM call, no qa/ file, exit 0. 22 new tests; pytest 182 → 204; validator PASSED with no new warnings.
+- Knowledge-loop **Phase D SHIPPED** 2026-05-01 (v3.20.0, merge `d072a5a`). Added `concept_edges` SQLite table populated by vault_synthesizer as side-effect of synthesis; knowledge_lint Tier 2 gained SQL fast path with frozenset dedupe against the LLM contradiction pass; per-run synth-manifest at `vault/health/synth-manifest-{date}.json` surfaced in daily-driver morning brief. 37 new tests; pytest 204 → 241; validator PASSED with no new warnings. The hybrid contradiction-detection rule preserves Phase 2's `soul_conflicts` capability across the dedupe boundary (interpretation note in CHANGELOG v3.20.0).
 
-### Merge order (canonical)
+### Merge order (canonical) — ALL COMPLETE 2026-05-01
 
-1. Agent-wiring Phase 1 — DONE 2026-04-23.
+1. Agent-wiring Phase 1 — DONE 2026-04-23 (v3.16.0).
 2. Agent-wiring Phase 2 — DONE 2026-04-27 (v3.17.0, merge `19a805e`). Modified `flush.py` (EXTRACTION_PROMPT SOUL prepend) + `knowledge_lint.py` (Tier 2 SOUL context + new `soul-tier-a-conflict` issue kind) + `meta_agent.py` (schedule-recs).
 3. Knowledge-loop **Phase B** — DONE 2026-04-27 (v3.17.0). Paired with Phase 2 due to zero file overlap.
-4. Knowledge-loop **Phase A** — pending; merges after the 2026-05-01 Phase 2 soak review. Adds `--trigger` arg to `flush.py` (additive, different section than the Phase 2 SOUL prepend; rebases cleanly).
-5. Knowledge-loop **Phase C** — after Phase A lands. Adds `query.py` + qa/ tier; light extensions to `vault_synthesizer.py` and `knowledge_lint.py`.
-6. Knowledge-loop **Phase D** — after Phase C lands. Highest-conflict phase: it modifies `daily_driver.py` morning brief Vault Health section AND is the third change to `knowledge_lint.py`. Single-session feasible but rebase deliberately.
+4. Knowledge-loop **Phase A** — DONE 2026-05-01 (v3.18.0, fresh `knowledge-loop/phase-a-v2` branch). Original stale branch deleted post-merge.
+5. Knowledge-loop **Phase C** — DONE 2026-05-01 (v3.19.0, merge `a837a7c`). Added `query.py` + qa/ tier + OB1-inspired chunk_id provenance and JSONL manifest.
+6. Knowledge-loop **Phase D** — DONE 2026-05-01 (v3.20.0, merge `d072a5a`). The highest-conflict phase landed last as planned. Third touch on `knowledge_lint.py` (Phase 2 → C → D) and second touch on `daily_driver.py` (agent-wiring Phase 1 → D); all prior layers preserved. Added concept_edges SQLite table + synth-manifest + SQL fast path with frozenset dedupe.
 
 ### Two file-conflict watch points
 
@@ -224,9 +225,11 @@ The knowledge index is empty — vault_synthesizer has not yet generated concept
 
 ---
 
-## Phase C — query.py + qa/ articles + OB1 provenance adds
+## Phase C — query.py + qa/ articles + OB1 provenance adds — SHIPPED 2026-05-01
 
-**Goal:** Terminal-level Q&A against the knowledge base; persist frequently-asked answers as a third article tier; capture per-run provenance via two OB1-inspired patterns.
+**Status: shipped 2026-05-01 in v3.19.0** (merge `a837a7c`). All gates passed: 22 new tests in `agents-sdk/tests/test_query.py`, full pytest suite 182 → 204, `python3 scripts/validate.py` PASSED with no new warnings. `vault/knowledge/qa/` directory created on first `--file-back` (lazy, doesn't pre-exist on the disk). Empty-state path verified live: against the current empty `index.md`, the CLI exits 0 with the empty-state message, writes no qa/ file, no manifest line. The `## Q&A` section in `index.md` will surface qa/ articles automatically once the synthesizer fires on an awake MBP.
+
+**Goal (original):** Terminal-level Q&A against the knowledge base; persist frequently-asked answers as a third article tier; capture per-run provenance via two OB1-inspired patterns.
 
 ### Changes
 
@@ -358,9 +361,13 @@ The chunk_id values come from `vault_indexer.py`'s SQLite `chunks` table — the
 
 ---
 
-## Phase D — Typed Reasoning Edges + Synthesizer Manifest (post-C, hybrid OB1 add)
+## Phase D — Typed Reasoning Edges + Synthesizer Manifest — SHIPPED 2026-05-01
 
-**Goal:** Turn contradiction / supersedence detection from "Sunday LLM lint scan" into "queryable SQL row at synthesis time." Adds the one OB1 pattern that meaningfully changes Phase 6's analytical capability, without standing up Postgres.
+**Status: shipped 2026-05-01 in v3.20.0** (merge `d072a5a`, branch `knowledge-loop/phase-d` cut fresh from main `a837a7c`). All gates passed: 24 new tests across `test_concept_edges.py` (13) + `test_synth_manifest.py` (11), plus extensions to three existing test files (+13), bringing pytest 204 → 241. `python3 scripts/validate.py` PASSED with exact-baseline 58 warnings (zero new). Schema migration verified idempotent: `init_db()` called twice on a populated `chunks` table preserves all chunk rows AND creates `concept_edges` + 3 indexes. Empty-vault verification chosen via path 2 — pure unit tests with mocked LLM emitting `relations` + tmp_path SQLite (table semantics identical regardless of whether LLM is real or mocked). Live integration falls to the existing 2026-05-08 check-in trigger.
+
+**Spec interpretation note (the hybrid path):** the plan's "LLM contradiction pass runs only if SQL fast path returns < N hits" was in tension with Phase 2's `soul_conflicts` capability. Resolved: always run the LLM call when `llm_caller is not None`, dedupe contradictions by normalized `frozenset({from_slug, to_slug})`. SQL hits win when both surface the same pair (the row carries `(source=sql)` provenance in the issue detail). LLM-only contradictions still surface; SOUL conflicts always surface. Documented in CHANGELOG v3.20.0.
+
+**Goal (original):** Turn contradiction / supersedence detection from "Sunday LLM lint scan" into "queryable SQL row at synthesis time." Adds the one OB1 pattern that meaningfully changes Phase 6's analytical capability, without standing up Postgres.
 
 **Origin:** OB1's [`schemas/typed-reasoning-edges/schema.sql`](https://github.com/NateBJones-Projects/OB1/blob/main/schemas/typed-reasoning-edges/schema.sql) defines `public.thought_edges` with `relation` CHECK in `('supports', 'contradicts', 'evolved_into', 'supersedes', 'depends_on', 'related_to')`, plus `confidence`, `decay_weight`, `valid_from`/`valid_until`, `classifier_version`. We port the *concept* (typed edges as queryable rows) to SQLite without porting Postgres.
 
@@ -616,19 +623,19 @@ cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode mo
 
 ---
 
-## Execution order
+## Execution order — ALL COMPLETE 2026-05-01
 
 See the **Coordination with `prj-agent-wiring-rollout.md`** section above for the canonical merge order across both plans. Within this plan only:
 
 1. **Step 0 (this file):** v2 plan saved to vault. ✓
-2. **Phase B** — DONE 2026-04-27 (v3.17.0, paired with agent-wiring Phase 2). SessionStart hook live; emits empty-state stub against the current placeholder index; will switch to full content on the next synthesizer run that produces real articles.
-3. **Phase A** (~3h) — PreCompact safety net, on branch `knowledge-loop/phase-a` (commit `4ca4413`, created 2026-04-25). Held until the 2026-05-01 Phase 2 soak review; merges first thereafter.
-4. **Phase C** (~10.5h) — query.py + qa/ + OB1 provenance adds (C.M1 chunk_id frontmatter + C.M2 manifest JSONL). Pair with a read-through of `agents-sdk/lib/hybrid_router.py` and `vault_synthesizer.py` before starting. Branch when ready (after Phase A lands).
-5. **Phase D** (~8h) — Typed reasoning edges + synth manifest. Single-session feasible. Pair with a read of `vault_indexer.py:56-82` (the schema-extension pattern). **Highest-conflict phase** — see watch points above. Do not land while any active soak is in flight.
-6. **Final:** Update this file `status: in-progress` → `status: complete` with a brief retrospective section.
-7. **Phase E:** parked — separate research session, separate plan, no current scope.
+2. **Phase B** — DONE 2026-04-27 (v3.17.0, paired with agent-wiring Phase 2). ✓
+3. **Phase A** — DONE 2026-05-01 (v3.18.0, fresh `knowledge-loop/phase-a-v2` branch). ✓
+4. **Phase C** — DONE 2026-05-01 (v3.19.0, merge `a837a7c`). ✓
+5. **Phase D** — DONE 2026-05-01 (v3.20.0, merge `d072a5a`). The highest-conflict phase landed last as planned, single-session, no rebase regressions. ✓
+6. **Final:** This file updated to `status: complete`. ✓
+7. **Phase E:** parked — separate research session, separate plan. Earliest revisit per spec: ~2 weeks post-D-ship (~2026-05-15).
 
-**Total estimated effort A→D:** ~25 engineering hours across 3–4 sessions. Up from the original ~16h to cover the OB1 hybrid adds (Phase D + C.M1 + C.M2).
+**Total actual effort A→D:** roughly tracked the ~25 engineering-hour estimate, distributed across Apr 25 (Phase A initial branch, later abandoned), Apr 27 (Phase B paired with agent-wiring 2), and May 1 (Phase A re-do + C + D shipped same day). The OB1 hybrid adds (D + C.M1 + C.M2) didn't blow the budget despite being the sequence's largest individual additions.
 
 ## Open follow-ups (NOT in this plan)
 
@@ -637,3 +644,38 @@ See the **Coordination with `prj-agent-wiring-rollout.md`** section above for th
 - Wiring qa/ articles into the existing Phase 6 D.4 autoresearch consumer (still parked).
 - Phase E research session (per §Phase E above).
 - Potential upstream contribution to NateBJones-Projects/OB1: the SessionEnd auto-flush hook pattern, three-machine local routing pattern, severity-bucketed health reports — all things OB1 lacks that Sean's stack does well.
+
+---
+
+## Retrospective — 2026-05-01 closeout
+
+**What shipped.** All four consumer-side phases (A → D), plus the two OB1-inspired hybrid adds in Phase C (chunk_id provenance + JSONL manifest) and the OB1 typed-reasoning-edges port in Phase D. The producer side (Phase 6, v3.14.x) and consumer side (this plan) are now both wired end-to-end. The vault is no longer a static archive: it accumulates typed edges every time the synthesizer fires, and any session can ask the SQL layer "what currently contradicts what?" without re-running an LLM.
+
+**What worked.**
+- **Tight ordering held up under stress.** Three touches on `knowledge_lint.py` (Phase 2 → C → D) and two on `daily_driver.py` (agent-wiring Phase 1 → D) all rebased cleanly because each layer was semantically distinct. The plan's "do not land while any active soak is in flight" rule was the right discipline through Phases A–B but became obsolete on 2026-05-01 when the soak-driven holds were retired in favor of "ship and observe."
+- **Stale-branch discipline paid off.** The original `knowledge-loop/phase-a` branch (commit `4ca4413`, authored 2026-04-25) predated agent-wiring Phase 2 and would have regressed `flush.py`'s SOUL prepend. Re-applying the intent fresh on `knowledge-loop/phase-a-v2` was cleaner than rebasing through 6 days of divergence. Codified the lesson as operating preference 2.
+- **OB1 verdict (b) worked as predicted.** The architectural review's recommendation — port the *concepts* (typed edges, per-run manifests, source-fingerprint citations) but skip OB1's wiki-compiler script wholesale — landed exactly on plan. Sean's vault-as-source-of-truth setup got the analytical wins (queryable contradictions, audit trails) without the directional mismatch (OB1 reads Postgres → writes markdown; Sean's stack does the opposite).
+- **Empty-state paths were explicit, not afterthoughts.** Both Phase C (empty index → exit 0, no qa file) and Phase D (no manifest → suppress the morning-brief line; missing DB → SQL fast path no-ops cleanly) had tests locking the empty-state behavior in. Important because the live system *is* in the empty state today and will be until the next awake-MBP synthesizer run.
+
+**What we changed about the spec mid-execution.**
+- **Phase D hybrid path semantics.** Spec said "LLM contradiction pass runs only if SQL fast path returns < N hits." We resolved this differently — always run the LLM call when `llm_caller is not None`, dedupe contradictions by `frozenset({from_slug, to_slug})`. Reason: the LLM call also produces `soul_conflicts` (Phase 2 capability with no SQL substitute). Suppressing it on weeks the synthesizer flagged contradictions would have silently dropped SOUL conflict detection. Sean confirmed the chosen interpretation via `AskUserQuestion` before implementation. Audit trail in CHANGELOG v3.20.0.
+- **Phase D empty-vault verification.** Spec gate 5 wanted ≥1 row in `concept_edges` from a real synthesizer run. The MBP-Qwen3-14B path is intermittent, so we chose path 2 — pure unit tests with mocked LLM emitting `relations` + tmp_path SQLite. Same table semantics, hermetic, CI-friendly. Live verification falls to the existing 2026-05-08 check-in trigger.
+
+**What didn't change.** No scope creep. The four phases shipped exactly as scoped (Phase E stayed parked). No backwards-compatibility shims, no premature abstractions, no half-finished stubs except the documented `decay_pass()` no-op (deliberately exposed for future tuning, not called by anything in v3.20.0).
+
+**Numbers.**
+- Tests: 182 (pre-Phase-A) → 204 (after C) → 241 (after D). +59 across the rollout.
+- Validator warnings: 58 baseline preserved across all four phases (zero new).
+- Hooks: 11 → 12 (Phase B) → 13 (Phase A). Phases C and D added no hooks.
+- New SQL surface: one table (`concept_edges`), three indexes.
+- New on-disk artifacts: `vault/knowledge/qa/` directory + `.manifest.json` (Phase C, lazy), `vault/health/synth-manifest-{date}.json` per nightly synth run (Phase D).
+
+**What to watch for in the soak window.**
+- First awake-MBP synthesizer run that emits `relations` payloads — verifies Phase D's edge-write path against a real LLM output. Watch the synth-manifest's `edges_written` and `edges_rejected` counts; high `edges_rejected` means the prompt needs tuning to constrain the relation taxonomy more tightly.
+- First Sunday lint that surfaces a `(source=sql)` contradiction — verifies the fast-path log line + the dedupe rule against a real LLM contradiction pass.
+- Daily-driver morning brief on the first day after a real synth run — verifies the "last synth: ..." line renders correctly in the user-visible preamble.
+
+**What's next.**
+- ~2 weeks post-D-ship: revisit Phase E scoping (research-only, separate plan).
+- 2026-05-08: existing `trig_01F6knx6cSD8JTZcQFZhrjEb` 1-week check-in fires; Phase D rides along on that report.
+- No active soaks. No synthetic holds. Operating preference: ship and observe.
