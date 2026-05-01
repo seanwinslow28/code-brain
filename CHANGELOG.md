@@ -5,6 +5,67 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.20.0] - 2026-05-01
+
+### Added — knowledge-loop Phase D: typed reasoning edges + synthesizer manifest
+
+- **`concept_edges` SQLite table** (NEW). Extends `vault/.vault-index.db` with a queryable typed-edge layer alongside the existing `chunks` table. Schema lives in `agents-sdk/agents/vault_indexer.py`'s `init_db()`; idempotent `CREATE TABLE IF NOT EXISTS` so a second invocation on a populated chunks table is a no-op (verified by `test_init_db_idempotent_preserves_chunks`). Six allowed relation values mirroring OB1's `thought_edges` taxonomy: `supports`, `contradicts`, `evolved_into`, `supersedes`, `depends_on`, `related_to`. CHECK constraint rejects bad values; UNIQUE(from_slug, to_slug, relation) makes `INSERT OR IGNORE` cheap; partial index on `valid_until IS NULL` keeps the "currently-valid" reads fast.
+- **`agents-sdk/lib/concept_edges.py`** (NEW). Stdlib-only helper module exposing `get_connection()`, `insert_edge()`, `find_contradictions()`, `find_superseded()`, and a stubbed `decay_pass()`. `insert_edge` raises `ValueError` (not bare `IntegrityError`) on bad input so the synthesizer can distinguish "drop this edge, log it, keep going" from "the DB is broken, abort." All functions accept an externally-managed `sqlite3.Connection` so they can be unit-tested with `:memory:`.
+- **`vault/health/synth-manifest-{date}.json`** (NEW per-run record). Mirrors OB1's per-run manifest pattern. Captures `run_id`, `files_processed`, `concepts_written`, `connections_written`, `edges_written`, `edges_rejected`, `rejected_count`, `duration_seconds`, `model_used`, `wol_status`, `status`. Atomic write via tmp-then-rename so partial files never surface.
+- **`write_synth_manifest()`** in `agents-sdk/agents/vault_synthesizer.py` (NEW pure helper). Pure function — no I/O state outside the named output path. Independent of `run_synthesis` so it can be tested without standing up a full synthesis run.
+- **`latest_synth_manifest()` + `synth_health_summary()`** in `agents-sdk/lib/lint_report.py` (NEW siblings to the existing lint helpers). `synth_health_summary` returns `""` when no manifest exists, when JSON is malformed, or when the file is unreadable — daily-driver morning brief never crashes on a broken manifest.
+- **`agents-sdk/tests/test_concept_edges.py`** (NEW, 13 tests). Schema migration, idempotency on populated chunks, indexes present, insert happy path, UNIQUE → `INSERT OR IGNORE` returns False, invalid relation → `ValueError`, self-edge rejection, confidence range guard, `find_contradictions` filters `valid_until IS NULL`, contradiction fan-out (3 contradictions from one concept), `find_superseded`, `decay_pass` no-op, `get_connection` idempotency.
+- **`agents-sdk/tests/test_synth_manifest.py`** (NEW, 11 tests). `write_synth_manifest` directory creation, payload shape, JSON round-trip, atomic overwrite (no `.tmp` leftover), `latest_synth_manifest` name-sort precedence, `synth_health_summary` empty/formatted/malformed-JSON/non-dict-JSON/missing-keys variants.
+
+### Changed
+
+- **`agents-sdk/agents/vault_synthesizer.py`** — `SynthesisResult` gains `edges_written`, `edges_rejected`, `model_used`, `wol_status`, `run_id` fields. Synthesis prompt extended to ask for an OPTIONAL `relations` array per connection (typed edges between concept pairs); same LLM call, richer parsing only — no extra round-trip. After each connection article writes, `run_synthesis` walks `relations` and calls `concept_edges.insert_edge()` inside the existing FileLock window. Bad relations are logged at WARNING level via the synthesizer's logger and increment `result.edges_rejected`; the article still writes. New optional `db_conn`, `classifier_version`, `logger` parameters preserve the test path (`db_conn=None` skips edge writes silently). `_default_llm_caller_factory` accepts a `manifest_state` dict that captures `model_used` + `wol_status` from the first successful routing decision; `main()` writes the synth-manifest after `run_synthesis` returns and on the WOL-unavailable deferral path so the daily-driver brief sees deferrals as data.
+- **`agents-sdk/agents/knowledge_lint.py`** — Tier 2 contradiction detection becomes hybrid (third touch on this file: Phase 2 added soul-tier-a-conflict, Phase C added qa/ to `_ORPHAN_EXCLUDE_DIRS`, Phase D adds the SQL fast path). New `_read_sql_contradictions()` helper queries `concept_edges` for `relation='contradicts' AND valid_until IS NULL`, emits one CRITICAL `LintIssue` per row with `(source=sql)` in the detail, and logs `Tier 2 contradiction: source=sql ...`. SQL fast path always runs when `vault/.vault-index.db` exists — gracefully no-ops on missing file or missing table (with explicit test coverage so a stale legacy DB doesn't crash the lint run; the read path also will NOT mutate the schema as a side effect). LLM slow path still runs when `llm_caller is not None`, preserving Phase 2's `soul_conflicts` discovery; LLM contradictions are deduplicated against SQL hits by normalized `frozenset({from_slug, to_slug})`. Logged with `source=llm` or `source=llm dropped (sql had it)`.
+- **`agents-sdk/agents/daily_driver.py`** — Morning preamble (second touch on this file: agent-wiring Phase 1 added `build_artifact_preamble`, Phase D adds the synth line). `synth_health_summary()` is appended under the existing `vault_health_summary()` line in `morning` mode only. Empty string from `synth_health_summary` (no manifest yet) suppresses the line entirely so a fresh vault doesn't render a stub.
+- **`agents-sdk/tests/test_vault_synthesizer.py`** — +4 tests. Edge-write happy path with a mocked LLM that emits `relations`, invalid-relation drop-but-don't-crash, `db_conn=None` silent skip, `run_id` ISO-shape verification.
+- **`agents-sdk/tests/test_knowledge_lint.py`** — +5 tests in a new `TestSqlFastPath` class. SQL emits CRITICAL per row, no-DB path skipped silently, missing-table path no-ops without schema mutation, SQL+LLM dedupe by slug pair, soul_conflicts preserved across the dedupe boundary.
+- **`agents-sdk/tests/test_daily_driver_vault_health.py`** — +4 tests. `latest_synth_manifest` name-sort, `synth_health_summary` count formatting, `build_preamble("morning")` includes the synth line when a manifest exists, `build_preamble("morning")` omits the line when no manifest exists.
+
+### Spec interpretation note (the hybrid path)
+
+The plan's "the existing LLM contradiction pass runs only if the fast path returns < N expected hits" was in tension with Phase 2's `soul_conflicts` capability — the Tier-2 LLM call also produces SOUL conflict findings, which have no SQL substitute. Suppressing the entire LLM call when SQL has hits would silently drop SOUL conflict detection on weeks the synthesizer flagged contradictions. **Resolution: always run the LLM call when `llm_caller is not None`, and dedupe contradictions by normalized `frozenset({from_slug, to_slug})`.** SQL hits win when both paths surface the same pair (the row carries source provenance). LLM-only contradictions still surface — the synthesizer didn't catch them. The `--full` flag has no semantic change in Phase D — both paths still run. The "zero LLM cost" axis lands when `llm_caller is None` (e.g., MBP asleep / Tier-2 staleness-only mode); contradictions still surface from the DB without any model invocation.
+
+### Empty-vault verification path (documented, not faked)
+
+Spec gate 5 wants ≥1 row in `concept_edges` from a real `vault_synthesizer` run, but the MBP-Qwen3-14B path is intermittent ("succeeds only when MBP awake" per CLAUDE.md). Two acceptable verification paths: (1) live synthesizer run with mocked LLM output, (2) pure unit tests with mocked LLM caller + tmp_path SQLite. **Chose path 2.** Rationale: the table semantics are identical regardless of whether the LLM is real or mocked; unit tests are hermetic and CI-friendly; live integration falls to the 1-week check-in agent firing 2026-05-08. No fake "live output" anywhere — the empty-state path (zero edges written, zero rows in the table) renders cleanly through the daily-driver brief because `synth_health_summary` returns `""` when no manifest exists.
+
+### Verification
+
+- `cd agents-sdk && PYTHONPATH=. .venv/bin/python3 -m pytest tests/test_concept_edges.py -v` → 13/13 PASS
+- `cd agents-sdk && PYTHONPATH=. .venv/bin/python3 -m pytest tests/test_synth_manifest.py -v` → 11/11 PASS
+- Full pytest suite: 241/241 PASS (was 204; +37 from this phase)
+- `python3 scripts/validate.py` → PASSED, 58 warnings (zero new ones, exact baseline match)
+- Schema migration smoke: `init_db()` called on a fresh tmp DB creates `concept_edges` + 3 indexes; called a second time on a populated chunks table preserves all chunk rows.
+
+### Files
+
+- NEW: `agents-sdk/lib/concept_edges.py`
+- NEW: `agents-sdk/tests/test_concept_edges.py` (13 tests)
+- NEW: `agents-sdk/tests/test_synth_manifest.py` (11 tests)
+- MODIFY: `agents-sdk/agents/vault_indexer.py` — `concept_edges` table + 3 indexes in `init_db()`
+- MODIFY: `agents-sdk/agents/vault_synthesizer.py` — `SynthesisResult` extension, prompt `relations` field, edge inserts inside FileLock window, `write_synth_manifest()`, `_default_llm_caller_factory` `manifest_state` capture, `main()` synth-manifest write
+- MODIFY: `agents-sdk/lib/lint_report.py` — `latest_synth_manifest()` + `synth_health_summary()` siblings
+- MODIFY: `agents-sdk/agents/knowledge_lint.py` — `_read_sql_contradictions()` helper, hybrid path with frozenset dedupe in `run_tier2`
+- MODIFY: `agents-sdk/agents/daily_driver.py` — `synth_health_summary` import + 3-line morning-preamble extension
+- MODIFY: `agents-sdk/tests/test_vault_synthesizer.py` — +4 Phase D tests
+- MODIFY: `agents-sdk/tests/test_knowledge_lint.py` — +5 `TestSqlFastPath` tests
+- MODIFY: `agents-sdk/tests/test_daily_driver_vault_health.py` — +4 synth-line tests
+- MODIFY: `CHANGELOG.md`, `CLAUDE.md`, `README.md`, `docs/agents-sdk-docs/agents-sdk.md`
+
+### Rollback
+
+- `sqlite3 vault/.vault-index.db "DROP TABLE concept_edges"` — drops the table; idempotent re-creation on next vault_indexer run.
+- Revert `vault_synthesizer.py` edge-insert lines (LLM still writes connection articles unchanged with bare prompt — `relations` is OPTIONAL in the prompt schema).
+- Revert `knowledge_lint.py` Tier 2 to LLM-only contradiction pass (preserve Phase 2 SOUL path + Phase C qa/ exclusion).
+- Revert `daily_driver.py` morning-brief synth line (preserve Phase 1 artifact preamble).
+- Delete `agents-sdk/lib/concept_edges.py`.
+- Delete `vault/health/synth-manifest-*.json` files (or leave — inert).
+
 ## [3.19.0] - 2026-05-01
 
 ### Added — knowledge-loop Phase C: query.py + qa/ tier + OB1 provenance

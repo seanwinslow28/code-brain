@@ -26,16 +26,19 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import logging
 import re
+import sqlite3
 import sys
 import time
 from dataclasses import dataclass, field
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any, Callable
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
+from lib import concept_edges
 from lib.config import load_config
 from lib.filelock import FileLock
 from lib.hybrid_router import HybridRouter, WOLUnavailable
@@ -70,6 +73,12 @@ class SynthesisResult:
     duration_seconds: float = 0.0
     error: str = ""
     warnings: list[str] = field(default_factory=list)
+    # Phase D (v3.20.0, 2026-05-01) — typed reasoning edges + manifest.
+    edges_written: int = 0
+    edges_rejected: int = 0
+    model_used: str = ""
+    wol_status: str = ""              # "mbp_awake" | "api_fallback" | "wol_deferred"
+    run_id: str = ""                  # ISO timestamp; matches synth-manifest run_id
 
 
 # ─── pure helpers ──────────────────────────────────────────────────────────
@@ -185,6 +194,45 @@ def regenerate_index(knowledge_root: Path) -> Path:
     return index_path
 
 
+def write_synth_manifest(
+    *,
+    vault_root: Path,
+    result: "SynthesisResult",
+    today: str,
+) -> Path:
+    """Write `vault/health/synth-manifest-{today}.json` from a result.
+
+    Phase D — mirrors OB1's per-run manifest pattern. The synth-manifest
+    is the canonical "what did the synthesizer do this run?" record. The
+    daily-driver morning brief reads the latest one via `lib.lint_report`.
+
+    Pure function — no I/O state outside the named output path. Atomic
+    write via tmp-then-rename so partial files never surface.
+    """
+    health = vault_root / "health"
+    health.mkdir(parents=True, exist_ok=True)
+    path = health / f"synth-manifest-{today}.json"
+    payload = {
+        "run_id": result.run_id,
+        "files_processed": result.files_processed,
+        "concepts_written": result.concepts_written,
+        "connections_written": result.connections_written,
+        "edges_written": result.edges_written,
+        "edges_rejected": result.edges_rejected,
+        "rejected_count": result.rejected_count,
+        "duration_seconds": round(result.duration_seconds, 2),
+        "model_used": result.model_used,
+        "wol_status": result.wol_status,
+        "status": result.status,
+    }
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(
+        json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8"
+    )
+    tmp.replace(path)
+    return path
+
+
 # ─── orchestration ────────────────────────────────────────────────────────
 
 def _build_synthesis_prompt(
@@ -219,13 +267,24 @@ def _build_synthesis_prompt(
         "      \"title\": string,\n"
         "      \"synthesis\": string,      // 1-2 sentences\n"
         "      \"concepts\": [string],     // exact titles, ≥3\n"
-        "      \"implications\": [string]  // how this informs future work\n"
+        "      \"implications\": [string], // how this informs future work\n"
+        "      \"relations\": [           // OPTIONAL — typed edges between concept pairs\n"
+        "        {\n"
+        "          \"from\": string,       // exact concept title\n"
+        "          \"to\": string,         // exact concept title (must differ from `from`)\n"
+        "          \"relation\": \"supports|contradicts|evolved_into|supersedes|depends_on|related_to\",\n"
+        "          \"confidence\": number  // optional, 0.0-1.0\n"
+        "        }\n"
+        "      ]\n"
         "    }\n"
         "  ]\n"
         "}\n\n"
         "CRITICAL: every concept MUST list ≥2 related titles and every\n"
         "connection MUST list ≥3 concept titles — articles without enough\n"
-        "wikilinks will be discarded."
+        "wikilinks will be discarded.\n\n"
+        "If you cannot identify a clear typed relation between two concepts,\n"
+        "omit the pair from `relations` rather than guessing — invalid\n"
+        "relation values are silently dropped."
     )
 
 
@@ -238,11 +297,21 @@ def run_synthesis(
     now_iso: str | None = None,
     budget_seconds: int = DEFAULT_BUDGET_SECONDS,
     top_k: int = 5,
+    db_conn: sqlite3.Connection | None = None,
+    classifier_version: str | None = None,
+    logger: logging.Logger | None = None,
 ) -> SynthesisResult:
     """Drive the synthesis pass end-to-end.
 
     `llm_caller(prompt)` must return a dict with `concepts` and `connections`.
     `retriever(query, top_k)` returns [{file_path, chunk_text, similarity}].
+
+    Phase D (v3.20.0): when `db_conn` is provided, parses each connection's
+    `relations` payload and inserts typed edges into `concept_edges` via
+    `lib.concept_edges.insert_edge()`. Bad relation values are logged and
+    dropped — articles still write. When `db_conn=None`, edge writes are
+    skipped silently (pure unit-test path / fresh-vault path before
+    vault_indexer has run).
     """
     start = time.monotonic()
     today = now_iso or date.today().isoformat()
@@ -252,8 +321,13 @@ def run_synthesis(
     concepts_dir.mkdir(parents=True, exist_ok=True)
     connections_dir.mkdir(parents=True, exist_ok=True)
     lock_path = knowledge_root / ".lock"
+    log = logger or logging.getLogger(AGENT_NAME)
 
     result = SynthesisResult(status="ok")
+    # Phase D: a single ISO timestamp for the whole run, used as the
+    # `source_synth_run` value on every edge row written by this run AND
+    # as the `run_id` field in the synth-manifest. They match by construction.
+    result.run_id = datetime.now().isoformat(timespec="seconds")
 
     if budget_seconds <= 0 or not changed_files:
         result.status = "budget-exhausted" if budget_seconds <= 0 else "ok"
@@ -336,6 +410,54 @@ def run_synthesis(
                 (connections_dir / f"{_slugify(title)}.md").write_text(body, encoding="utf-8")
                 result.connections_written += 1
 
+                # Phase D — typed reasoning edges. After the article writes,
+                # parse the LLM's typed `relations` and INSERT OR IGNORE
+                # rows into concept_edges. Each bad relation is logged and
+                # dropped; the article still writes. db_conn=None means
+                # the caller opted out of edge writes (test path / fresh
+                # vault before vault_indexer ran).
+                if db_conn is None:
+                    continue
+                for edge in conn.get("relations", []) or []:
+                    raw_from = (edge.get("from") or "").strip()
+                    raw_to = (edge.get("to") or "").strip()
+                    relation = (edge.get("relation") or "").strip()
+                    if not (raw_from and raw_to and relation):
+                        continue
+                    from_slug = _slugify(raw_from)
+                    to_slug = _slugify(raw_to)
+                    if from_slug == to_slug:
+                        # Self-edge — silently skip rather than count as
+                        # rejected, since this is usually a slug-collision
+                        # artefact of the LLM emitting near-duplicate titles.
+                        continue
+                    confidence_raw = edge.get("confidence")
+                    try:
+                        confidence = (
+                            float(confidence_raw) if confidence_raw is not None else None
+                        )
+                    except (TypeError, ValueError):
+                        confidence = None
+                    try:
+                        inserted = concept_edges.insert_edge(
+                            db_conn,
+                            from_slug=from_slug,
+                            to_slug=to_slug,
+                            relation=relation,
+                            confidence=confidence,
+                            classifier_version=classifier_version,
+                            source_synth_run=result.run_id,
+                        )
+                    except ValueError as exc:
+                        result.edges_rejected += 1
+                        log.warning(
+                            "edge rejected (from=%s to=%s relation=%s): %s",
+                            from_slug, to_slug, relation, exc,
+                        )
+                        continue
+                    if inserted:
+                        result.edges_written += 1
+
     with FileLock(lock_path, exclusive=True, timeout=10.0):
         regenerate_index(knowledge_root)
 
@@ -345,7 +467,18 @@ def run_synthesis(
 
 # ─── CLI entry point (production path) ────────────────────────────────────
 
-def _default_llm_caller_factory(router: HybridRouter) -> Callable[..., dict]:
+def _default_llm_caller_factory(
+    router: HybridRouter,
+    manifest_state: dict[str, str] | None = None,
+) -> Callable[..., dict]:
+    """Return an LLM caller that hits the routed MacBook Pro endpoint.
+
+    Phase D: when `manifest_state` is provided, the first successful
+    routing decision mutates `model_used` and `wol_status` on the dict
+    so the synthesizer can later persist them in the synth-manifest.
+    Caller path: main() builds the dict, passes it in, and reads from
+    it after run_synthesis returns.
+    """
     import httpx
 
     def _call(prompt: str, max_tokens: int = 2000) -> dict:
@@ -354,6 +487,12 @@ def _default_llm_caller_factory(router: HybridRouter) -> Callable[..., dict]:
                 task="vault_synthesis", wake_timeout_s=90.0
             )
         decision = asyncio.run(go())
+        if manifest_state is not None and not manifest_state.get("model_used"):
+            manifest_state["model_used"] = decision.model
+            manifest_state["wol_status"] = (
+                "mbp_awake" if decision.machine == "macbook_pro"
+                else "api_fallback"
+            )
         resp = httpx.post(
             f"{decision.base_url}/v1/chat/completions",
             json={
@@ -424,8 +563,18 @@ def main() -> int:
         logger.error("Router init failed: %s", exc)
         return 1
 
-    llm = _default_llm_caller_factory(router)
+    # Phase D — capture model_used / wol_status for the synth-manifest.
+    manifest_state: dict[str, str] = {}
+    llm = _default_llm_caller_factory(router, manifest_state=manifest_state)
     retriever = _default_retriever_factory(cfg.vault_root)
+
+    # Phase D — open the .vault-index.db connection so run_synthesis can
+    # write concept_edges rows. concept_edges.get_connection() applies
+    # init_db() (idempotent) so the table exists even on a fresh vault.
+    from agents.vault_indexer import get_db_path
+    db_path = get_db_path(cfg.vault_root)
+    db_conn = concept_edges.get_connection(db_path)
+    today_iso = date.today().isoformat()
 
     start_ns = time.monotonic_ns()
     try:
@@ -435,33 +584,77 @@ def main() -> int:
             llm_caller=llm,
             retriever=retriever,
             budget_seconds=args.budget_seconds,
+            db_conn=db_conn,
+            classifier_version=(
+                f"{manifest_state.get('model_used', 'unknown')}/{today_iso}"
+            ),
+            logger=logger,
         )
     except WOLUnavailable as exc:
         logger.warning("WOL unavailable — deferring: %s", exc)
+        # Phase D: still write a manifest so the daily-driver brief sees
+        # the deferral, not silent absence.
+        deferred_result = SynthesisResult(status="wol-deferred")
+        deferred_result.run_id = datetime.now().isoformat(timespec="seconds")
+        deferred_result.wol_status = "wol_deferred"
+        try:
+            write_synth_manifest(
+                vault_root=cfg.vault_root, result=deferred_result, today=today_iso
+            )
+        except OSError as werr:
+            logger.warning("synth-manifest write failed on deferral: %s", werr)
+        db_conn.close()
         record_run(cfg.log_dir, AGENT_NAME, mode=None, status="deferred",
                    cost_usd=0.0, duration_ms=None, turns=None,
                    notes="wol-unavailable")
         return 0
     except Exception as exc:
         logger.error("synthesis failed: %s", exc)
+        db_conn.close()
         record_run(cfg.log_dir, AGENT_NAME, mode=None, status="error",
                    cost_usd=0.0, duration_ms=None, turns=None, notes=str(exc)[:200])
         return 1
+    finally:
+        # Idempotent close — safe even after the except branches above.
+        try:
+            db_conn.close()
+        except Exception:
+            pass
 
     duration_ms = (time.monotonic_ns() - start_ns) // 1_000_000
+
+    # Phase D — copy model_used / wol_status into the result, write manifest.
+    result.model_used = manifest_state.get("model_used", "")
+    result.wol_status = manifest_state.get("wol_status", "")
+    try:
+        manifest_path = write_synth_manifest(
+            vault_root=cfg.vault_root, result=result, today=today_iso
+        )
+        logger.info("synth-manifest written: %s", manifest_path)
+    except OSError as werr:
+        logger.warning("synth-manifest write failed: %s", werr)
 
     # Persist new state only on a successful / partial run
     if result.status in {"ok", "partial"}:
         write_indexer_state(state_path, new_state)
 
-    logger.info("synthesis %s concepts=%d connections=%d rejected=%d duration=%.1fs",
-                result.status, result.concepts_written, result.connections_written,
-                result.rejected_count, result.duration_seconds)
+    logger.info(
+        "synthesis %s concepts=%d connections=%d rejected=%d "
+        "edges=%d edges_rejected=%d duration=%.1fs",
+        result.status, result.concepts_written, result.connections_written,
+        result.rejected_count, result.edges_written, result.edges_rejected,
+        result.duration_seconds,
+    )
 
     record_run(cfg.log_dir, AGENT_NAME, mode=None,
                status="success" if result.status in {"ok", "partial"} else result.status,
                cost_usd=0.0, duration_ms=duration_ms, turns=None,
-               notes=f"concepts={result.concepts_written} connections={result.connections_written} rejected={result.rejected_count}")
+               notes=(
+                   f"concepts={result.concepts_written} "
+                   f"connections={result.connections_written} "
+                   f"rejected={result.rejected_count} "
+                   f"edges={result.edges_written}"
+               ))
 
     return 0
 

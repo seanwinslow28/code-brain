@@ -278,3 +278,148 @@ def test_tier1_recall_on_synthetic_vault(tmp_path: Path) -> None:
         assert clean_name not in flagged, (
             f"False positive on clean file {clean_name}"
         )
+
+
+# ─── Phase D — SQL fast path on concept_edges ─────────────────────────────
+
+
+class TestSqlFastPath:
+    """Phase D (v3.20.0) — knowledge_lint Tier 2 reads concept_edges
+    directly for `relation='contradicts'` rows. Documented dedupe rule:
+    SQL hits win when both paths surface the same pair."""
+
+    @staticmethod
+    def _seed_db(vault_root: Path, pairs: list[tuple[str, str]]) -> None:
+        """Create vault/.vault-index.db with the Phase D schema and seed
+        contradiction rows. Uses init_db so the schema matches production."""
+        from agents.vault_indexer import init_db
+        from lib import concept_edges as ce
+
+        db_path = vault_root / ".vault-index.db"
+        conn = init_db(db_path)
+        for from_slug, to_slug in pairs:
+            ce.insert_edge(
+                conn,
+                from_slug=from_slug,
+                to_slug=to_slug,
+                relation="contradicts",
+                source_synth_run="2026-05-01T00:00:00",
+            )
+        conn.close()
+
+    def test_sql_fast_path_emits_critical_for_each_row(self, tmp_path: Path) -> None:
+        vault = tmp_path / "vault"
+        vault.mkdir()
+        self._seed_db(vault, [("alpha", "beta"), ("gamma", "delta")])
+
+        issues = run_tier2(vault)  # llm_caller=None — exercises ONLY the SQL path
+        contradictions = [i for i in issues if i.kind == "contradiction"]
+        assert len(contradictions) == 2
+        for issue in contradictions:
+            assert issue.severity == LintSeverity.CRITICAL
+            assert issue.tier == 2
+            assert "(source=sql)" in issue.detail
+
+    def test_sql_fast_path_skipped_silently_when_db_missing(
+        self, tmp_path: Path
+    ) -> None:
+        """Fresh vault: no DB file. Must NOT raise; must NOT emit
+        contradictions; LLM-less Tier 2 still completes."""
+        vault = tmp_path / "vault"
+        vault.mkdir()
+        # No DB seeded.
+        issues = run_tier2(vault)
+        contradictions = [i for i in issues if i.kind == "contradiction"]
+        assert contradictions == []
+
+    def test_sql_fast_path_skipped_when_table_missing(self, tmp_path: Path) -> None:
+        """DB exists (from a hypothetical legacy vault_indexer that didn't
+        have the Phase D schema) but concept_edges table is absent. Must
+        no-op cleanly, not crash, and not mutate the schema."""
+        import sqlite3 as _sqlite3
+
+        vault = tmp_path / "vault"
+        vault.mkdir()
+        db_path = vault / ".vault-index.db"
+        # Hand-roll the chunks table only — no concept_edges.
+        conn = _sqlite3.connect(str(db_path))
+        conn.execute(
+            "CREATE TABLE chunks (id INTEGER PRIMARY KEY, file_path TEXT)"
+        )
+        conn.commit()
+        conn.close()
+
+        issues = run_tier2(vault)
+        assert [i for i in issues if i.kind == "contradiction"] == []
+
+        # Verify we did NOT mutate the schema as a side effect of the read pass.
+        check = _sqlite3.connect(str(db_path))
+        try:
+            row = check.execute(
+                "SELECT name FROM sqlite_master "
+                "WHERE type='table' AND name='concept_edges'"
+            ).fetchone()
+            assert row is None, "Tier 2 must not create concept_edges as a side effect"
+        finally:
+            check.close()
+
+    def test_sql_and_llm_dedupe_by_slug_pair(self, tmp_path: Path) -> None:
+        """Phase D dedupe rule — when both paths surface the same
+        (from_slug, to_slug) pair, the SQL row wins and the LLM duplicate
+        is dropped. LLM-only contradictions still surface."""
+        vault = tmp_path / "vault"
+        vault.mkdir()
+        self._seed_db(vault, [("alpha", "beta")])
+
+        # LLM emits the same alpha-beta pair (should be deduped) AND a new
+        # gamma-delta pair (should surface as source=llm).
+        def llm(prompt: str) -> dict:
+            return {
+                "contradictions": [
+                    {"files": ["knowledge/concepts/alpha.md",
+                               "knowledge/concepts/beta.md"],
+                     "detail": "would be a dupe of SQL"},
+                    {"files": ["knowledge/concepts/gamma.md",
+                               "knowledge/concepts/delta.md"],
+                     "detail": "synthesizer missed this one"},
+                ],
+                "soul_conflicts": [],
+            }
+
+        issues = run_tier2(vault, llm_caller=llm)
+        contradictions = [i for i in issues if i.kind == "contradiction"]
+        # 1 SQL hit (alpha-beta) + 1 LLM-unique (gamma-delta) = 2 total.
+        assert len(contradictions) == 2
+        sources = {i.detail for i in contradictions}
+        # SQL row carries (source=sql); LLM row keeps the LLM's prose detail.
+        assert any("(source=sql)" in d for d in sources)
+        assert any("synthesizer missed this one" in d for d in sources)
+        # The LLM dupe of alpha-beta did NOT survive.
+        assert not any(
+            "would be a dupe of SQL" in d for d in sources
+        )
+
+    def test_sql_fast_path_preserves_soul_conflicts_from_llm(
+        self, tmp_path: Path
+    ) -> None:
+        """Phase D dedupe targets contradictions only — soul-tier-a-conflict
+        is a Phase 2 capability with no SQL substitute and must always
+        surface from the LLM, even when SQL fast path has hits."""
+        vault = tmp_path / "vault"
+        vault.mkdir()
+        self._seed_db(vault, [("alpha", "beta")])
+
+        def llm(prompt: str) -> dict:
+            return {
+                "contradictions": [],
+                "soul_conflicts": [
+                    {"file": "knowledge/concepts/x.md",
+                     "tier_a_item": "Protect deep-work mornings",
+                     "detail": "article suggests scheduling meetings before 10am"},
+                ],
+            }
+
+        issues = run_tier2(vault, llm_caller=llm)
+        soul_issues = [i for i in issues if i.kind == "soul-tier-a-conflict"]
+        assert len(soul_issues) == 1
+        assert "Protect deep-work mornings" in soul_issues[0].detail

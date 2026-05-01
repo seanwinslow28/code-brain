@@ -39,7 +39,12 @@ from lib.vault_io import (
 AGENT_NAME = "daily-driver"
 
 # Re-exported for backwards compatibility; canonical home is lib.lint_report.
-from lib.lint_report import latest_lint_report, vault_health_summary  # noqa: E402
+# Phase D (v3.20.0): synth_health_summary added alongside vault_health_summary.
+from lib.lint_report import (  # noqa: E402
+    latest_lint_report,
+    synth_health_summary,
+    vault_health_summary,
+)
 
 
 def build_artifact_preamble(config) -> str:
@@ -159,8 +164,14 @@ def build_preamble(mode: str, config) -> str:
     )
 
     # Phase 6 D.3.d — surface Vault Health in morning mode only.
+    # Phase D (v3.20.0, 2026-05-01) — append the latest synth-manifest
+    # summary line under Vault Health when one exists. Empty string when
+    # no manifest yet (suppresses the line entirely on a fresh vault).
     if mode == "morning":
         base += "\n" + vault_health_summary(config.vault_root) + "\n"
+        synth_line = synth_health_summary(config.vault_root)
+        if synth_line:
+            base += synth_line + "\n"
         artifact_block = build_artifact_preamble(config)
         if artifact_block:
             base += "\n" + artifact_block + "\n"
