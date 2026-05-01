@@ -9,7 +9,7 @@ The questions below are the superset across all three domains. Domain-specific t
 ## Layer 1 — Operating Rhythms
 
 **Feeds:** `HEARTBEAT.md`
-**Consumed by:** `meeting-defender`, `daily-driver`
+**Consumed by:** `daily-driver`
 
 1. Walk me through an ideal weekday in this domain — where are the protected creative/deep-work blocks, where are the execution/meeting blocks, where does inbox triage live?
 2. Which recurring events are fixed on your calendar for this domain, and on which day/time?
@@ -71,7 +71,7 @@ The questions below are the superset across all three domains. Domain-specific t
 ## Layer 5 — Friction
 
 **Feeds:** `schedule-recommendations.md`
-**Consumed by:** `meeting-defender`, future calendar agents
+**Consumed by:** `daily-driver`, `meta-agent`, future calendar agents
 
 1. What takes 20+ minutes today that should take 2?
 2. Which context switches are most expensive for you in this domain?

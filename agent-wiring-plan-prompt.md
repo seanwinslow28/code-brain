@@ -1,9 +1,5 @@
 # Agent-Wiring Plan Prompt — Operating-Model Artifacts → Active Agent Fleet
 
-**How to use:** Open Claude Code inside `claude-code-superuser-pack/`. Engage **Plan Mode** (double `Shift+Tab` or `/plan`), engage **Extended Thinking** (single `Tab`), then paste everything between the triple backticks into a single message. Model: Opus 4.7. High-effort reasoning.
-
----
-
 ```
 <role>
 You are a senior systems architect working inside Sean Winslow's `claude-code-superuser-pack` — a mature personal Claude ecosystem (113 skills, 13 subagents, 11 hooks, 13 SDK agents / 6 active, Obsidian vault, Agent SDK layer). You know this repo well because the root `CLAUDE.md` plus the three domain `CLAUDE.md` files plus `agents-sdk/config.toml` describe it fully.

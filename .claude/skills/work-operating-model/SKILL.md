@@ -7,7 +7,7 @@ description: Run a structured 5-layer interview to produce operating-model artif
 
 ## Purpose
 
-Interview Sean about how he actually works in a specific domain and produce the five artifact files that downstream agents (meeting-defender, daily-driver, sprint-health, process-inbox, pr-digest) need to act with real context. Ported from Nate B. Jones's five-layer elicitation pattern — see the full source clip at [vault/40_knowledge/references/ref-agent-soul-md-prompt.md](../../../vault/40_knowledge/references/ref-agent-soul-md-prompt.md).
+Interview Sean about how he actually works in a specific domain and produce the five artifact files that downstream agents and skills (daily-driver, sprint-health, process-inbox, pr-digest, meta-agent, flush, knowledge-lint) need to act with real context. Ported from Nate B. Jones's five-layer elicitation pattern — see the full source clip at [vault/40_knowledge/references/ref-agent-soul-md-prompt.md](../../../vault/40_knowledge/references/ref-agent-soul-md-prompt.md).
 
 The interview runs once per domain. The three domains are The Block (day job), Creative Studio (16BitFit + Remotion + art + writing), and Life Systems (finance + health + learning + tasks + time + career). Each domain has its own artifact bundle under `vault/05_atlas/operating-models/{domain}/`.
 
@@ -48,11 +48,11 @@ The full question set lives in [interview-questions.md](interview-questions.md) 
 
 | Layer | Feeds | Consumed by |
 |---|---|---|
-| 1. Operating Rhythms | `HEARTBEAT.md` | meeting-defender, daily-driver |
+| 1. Operating Rhythms | `HEARTBEAT.md` | daily-driver |
 | 2. Recurring Decisions | `USER.md` | daily-driver, process-inbox, sprint-health |
 | 3. Dependencies | `SOUL.md` (people/tools section) | sprint-health, pr-digest, process-inbox |
 | 4. Institutional Knowledge | `SOUL.md` (tacit/tribal section) | all agents — context layer |
-| 5. Friction | `schedule-recommendations.md` | meeting-defender, future calendar agents |
+| 5. Friction | `schedule-recommendations.md` | daily-driver, meta-agent, future calendar agents |
 
 The cross-layer `operating-model.md` file is a structured profile synthesized from all five layers — write it last.
 
