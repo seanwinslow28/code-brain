@@ -53,6 +53,16 @@ _KEBAB_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
 
 # Directories whose contents are auto-generated or ephemeral and should NOT
 # be flagged as orphans just because nothing wikilinks to them.
+#
+# Phase C (2026-05-01): `qa/` is the third article tier — answer endpoints
+# produced by `scripts/query.py --file-back`. They cite outward via
+# `[[wikilinks]]` (which gives concepts/connections inbound links) but are
+# never themselves the target of a wikilink, so they would otherwise show
+# up as orphan-MEDIUM noise on every Sunday lint. The other knowledge/
+# Tier-1 checks (missing-frontmatter, camelcase-filename) already include
+# qa/ via `knowledge.rglob`, and the Tier-2 stale-reference scan covers it
+# via `_vault_md_files`, so excluding it from orphan detection is the only
+# change needed for the qa/ tier to stay clean under lint.
 _ORPHAN_EXCLUDE_DIRS = {
     "_archive",
     "60_archive",
@@ -62,6 +72,7 @@ _ORPHAN_EXCLUDE_DIRS = {
     "the-block-meetings-granola-notes",
     "media-team-ideas",
     "daily",
+    "qa",
 }
 
 # Strip fenced code blocks and inline code before wikilink scanning so that
