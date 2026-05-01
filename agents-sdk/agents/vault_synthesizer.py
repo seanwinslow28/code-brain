@@ -50,6 +50,11 @@ MIN_WIKILINKS_PER_ARTICLE = 2
 KNOWLEDGE_SUBDIR = "knowledge"
 CONCEPTS_SUBDIR = "concepts"
 CONNECTIONS_SUBDIR = "connections"
+# Phase C (2026-05-01): qa/ is the third article tier, populated by
+# `scripts/query.py --file-back`. The synthesizer doesn't write qa/
+# articles itself, but it lists them in `index.md` so SessionStart
+# injection and downstream consumers see them alongside concepts/connections.
+QA_SUBDIR = "qa"
 
 _WIKILINK_RE = re.compile(r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]")
 _SLUG_RE = re.compile(r"[^a-z0-9]+")
@@ -144,10 +149,16 @@ def format_connection_article(
 
 
 def regenerate_index(knowledge_root: Path) -> Path:
-    """Rebuild `vault/knowledge/index.md` from disk."""
+    """Rebuild `vault/knowledge/index.md` from disk.
+
+    Phase C (2026-05-01): includes a third `## Q&A` section listing files
+    in `qa/`, which `scripts/query.py --file-back` populates. qa/ is
+    skipped silently if the directory does not exist yet.
+    """
     index_path = knowledge_root / "index.md"
     concepts_dir = knowledge_root / CONCEPTS_SUBDIR
     connections_dir = knowledge_root / CONNECTIONS_SUBDIR
+    qa_dir = knowledge_root / QA_SUBDIR
 
     def _collect(sub: Path, label: str) -> list[str]:
         if not sub.exists():
@@ -166,6 +177,9 @@ def regenerate_index(knowledge_root: Path) -> Path:
     body += _collect(concepts_dir, "concept") or ["- _(none yet)_"]
     body.append("\n## Connections\n")
     body += _collect(connections_dir, "connection") or ["- _(none yet)_"]
+    if qa_dir.exists():
+        body.append("\n## Q&A\n")
+        body += _collect(qa_dir, "qa") or ["- _(none yet)_"]
 
     index_path.write_text("\n".join(body) + "\n", encoding="utf-8")
     return index_path

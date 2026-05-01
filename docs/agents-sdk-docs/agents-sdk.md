@@ -827,3 +827,109 @@ log_level = "INFO"
 | `build_options` | `(config)` | `ClaudeAgentOptions` |
 | `run` | `(mode, dry_run?)` | `None` (async) |
 | `main` | `()` | `None` |
+
+---
+
+## Knowledge-Loop Phase C — `scripts/query.py` Reference (v3.19.0)
+
+Terminal-level Q&A against the synthesized vault knowledge base. Pairs with the producer side (SessionEnd flush → nightly vault_synthesizer → weekly knowledge_lint) and the Phase B SessionStart index injection to close the consumer loop on the read + ad-hoc-query sides.
+
+### CLI
+
+```bash
+# Basic query (prints answer to stdout)
+cd agents-sdk && PYTHONPATH=. .venv/bin/python3 scripts/query.py "What's my error handling pattern?"
+
+# Save answer as a vault/knowledge/qa/ article and append a manifest line
+... scripts/query.py "What's my error handling pattern?" --file-back
+
+# Force a model
+... scripts/query.py "..." --model api    # always Anthropic API (Sonnet 4.6)
+... scripts/query.py "..." --model local  # Qwen3-14B only, fail if MBP asleep
+... scripts/query.py "..." --model auto   # local-first, API fallback (default)
+
+# Tune retrieval
+... scripts/query.py "..." --max-articles 5
+```
+
+### Two-pass orchestration
+
+1. **Selection pass.** Read `vault/knowledge/index.md`. Send the index entries + the question to the LLM. Ask for up to N article paths most likely to contain the answer, each with a similarity score in `[0, 1]`. Returns strict JSON.
+2. **Answer pass.** Read the selected article files via `lib/vault_io` paths. Send the article bodies + the question to the LLM. Ask for an answer that cites at least one `[[<knowledge-relative-path>]]` wikilink so the qa/ article connects back to the graph.
+
+This mirrors the [coleam00/claude-memory-compiler](https://github.com/coleam00/claude-memory-compiler) design and avoids loading the full KB into context.
+
+### `vault/knowledge/qa/<slug>.md` frontmatter (C.M1)
+
+```yaml
+---
+title: "Q: What's my error handling pattern?"
+question: "What's my error handling pattern?"
+filed: 2026-05-01
+type: qa
+synth_run: 2026-05-01T14:30:12-04:00
+model: qwen3-14b           # or claude-sonnet-4-6 if API path
+consulted:
+  - path: knowledge/concepts/error-handling.md
+    chunk_id: a3f8b1c2d4e5    # SHA-256 prefix-12 of (file_path, chunk_index) tuple
+    similarity: 0.83          # selection-pass score, clamped to [0, 1]
+  - path: knowledge/connections/error-cache-link.md
+    chunk_id: 7b9c4f2e1a8d
+    similarity: 0.71
+---
+```
+
+`chunk_id` values come from `vault/.vault-index.db`'s `chunks` table (the same `(file_path, chunk_index)` UNIQUE key written by `vault_indexer.init_db`), hashed for stable identity. When the chunk lookup misses (file not yet indexed, or the embedding pipeline hasn't run since the file was added), a deterministic fallback is computed against `chunk_index = 0` so the frontmatter is never empty.
+
+### `vault/knowledge/qa/.manifest.json` (C.M2)
+
+Append-only JSONL — one record per `--file-back` run.
+
+```json
+{"answer_chars":1842,"consulted":[{"chunk_id":"a3f8b1c2d4e5","path":"concepts/error-handling.md","similarity":0.83}],"duration_ms":4231,"model":"qwen3-14b","model_route":"auto→local","qa_file":"knowledge/qa/whats-my-error-handling-pattern.md","question":"What's my error handling pattern?","run_id":"2026-05-01T14:30:12-04:00"}
+```
+
+Why JSONL not JSON: appendable without re-reading the file (matches the `lib/logging_setup.py:record_run` CSV pattern). Downstream readers (`scripts/qa_stats.py`, lint reports, future morning-brief surfacing) `tail -n` the file or stream-parse line-by-line.
+
+### Configuration — `[agents.query]` in `config.toml`
+
+```toml
+[agents.query]
+default_model = "auto"          # CLI --model overrides
+max_articles = 10               # CLI --max-articles overrides
+selection_max_tokens = 600
+answer_max_tokens = 1500
+task_key = "vault_synthesis"    # routing.task_map key for the local leg
+qa_dir = "vault/knowledge/qa"
+manifest_path = "vault/knowledge/qa/.manifest.json"
+```
+
+### Empty-state behavior
+
+When `vault/knowledge/index.md` is the empty stub (no concept/connection articles yet — current state, since vault_synthesizer requires the MBP to be awake to produce real articles):
+
+- The selection pass returns `[]` without invoking the LLM.
+- The answer pass is skipped.
+- `query.py` prints `"No knowledge articles match this question yet."` and exits 0.
+- Even with `--file-back`, no qa/ file is created and no manifest line is appended.
+
+Three unit tests lock this behavior in (`test_run_selection_pass_returns_empty_on_empty_index`, `test_run_query_empty_index_produces_clean_report_no_qa_file`, `test_run_query_missing_index_file_returns_helpful_message`).
+
+### Key functions (testable surface)
+
+| Function | Signature | Returns |
+|----------|-----------|---------|
+| `slugify` | `(text, max_len=80)` | `str` |
+| `compute_chunk_id` | `(file_path, chunk_index)` | `str` (12 hex chars) |
+| `lookup_chunk_id_for_file` | `(db_path, vault_rel_path)` | `str \| None` |
+| `parse_index` | `(index_text)` | `list[dict[path, title]]` |
+| `is_empty_index` | `(entries)` | `bool` |
+| `build_selection_prompt` | `(question, index_entries, max_articles)` | `str` |
+| `build_answer_prompt` | `(question, articles)` | `str` |
+| `run_selection_pass` | `(...)` | `(consulted, entries)` |
+| `load_articles` | `(knowledge_root, consulted, db_path)` | `list[(path, body)]`, mutates consulted in place |
+| `run_answer_pass` | `(...)` | `str` |
+| `format_qa_article` | `(...)` | `str` |
+| `write_qa_article` | `(...)` | `Path` |
+| `append_manifest` | `(manifest_path, record)` | `None` |
+| `run_query` | `(...)` | `QueryResult` |

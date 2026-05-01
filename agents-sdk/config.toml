@@ -268,3 +268,21 @@ notify_on = ["agent_error", "gate_check_fail"]
 inject_on_session_start = true
 max_chars = 15000
 path = "vault/knowledge/index.md"
+
+# ─── Knowledge-Loop Consumer Activation (Phase C, 2026-05-01) ──────────
+# Read by `agents-sdk/scripts/query.py` for two-pass terminal Q&A against
+# the knowledge base. `default_model = "auto"` mirrors vault_synthesizer's
+# local-first routing — Qwen3-14B on MBP if awake, Anthropic Sonnet 4.6 on
+# fallback. `task_key` resolves through routing.task_map for the local leg.
+# `manifest_path` is the C.M2 JSONL append target; one line per --file-back
+# run captures run_id, question, model, route, consulted articles + chunk
+# IDs + similarities, duration, qa_file. CLI flags override these defaults.
+
+[agents.query]
+default_model = "auto"
+max_articles = 10
+selection_max_tokens = 600
+answer_max_tokens = 1500
+task_key = "vault_synthesis"
+qa_dir = "vault/knowledge/qa"
+manifest_path = "vault/knowledge/qa/.manifest.json"
