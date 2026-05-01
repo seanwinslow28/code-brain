@@ -1,4 +1,9 @@
-"""Tests for agents.vault_synthesizer — D.2.b concept + connection articles."""
+"""Tests for agents.vault_synthesizer — D.2.b concept + connection articles.
+
+Phase D (v3.20.0, 2026-05-01) extensions: edge-write side effects via
+the new `db_conn` parameter, including invalid-relation rejection that
+must NOT abort the synthesis run.
+"""
 
 from __future__ import annotations
 
@@ -8,6 +13,7 @@ from unittest.mock import patch
 
 import pytest
 
+from agents.vault_indexer import init_db
 from agents.vault_synthesizer import (
     MIN_WIKILINKS_PER_ARTICLE,
     SynthesisResult,
@@ -213,3 +219,148 @@ def test_run_synthesis_respects_budget(tmp_path: Path) -> None:
     )
     assert result.status == "budget-exhausted"
     assert result.concepts_written == 0
+
+
+# ─── Phase D — typed reasoning edges via db_conn ──────────────────────────
+
+
+def _phase_d_llm_factory(relations: list[dict]):
+    """Build an LLM caller that returns a single connection with `relations`."""
+
+    def _call(prompt: str, max_tokens: int = 2000) -> dict:
+        return {
+            "concepts": [
+                {
+                    "title": "Concept Alpha",
+                    "definition": "Alpha is a thing.",
+                    "context": "test",
+                    "examples": ["x"],
+                    "related": ["Concept Beta", "Concept Gamma"],
+                },
+                {
+                    "title": "Concept Beta",
+                    "definition": "Beta is a thing.",
+                    "context": "test",
+                    "examples": ["y"],
+                    "related": ["Concept Alpha", "Concept Gamma"],
+                },
+            ],
+            "connections": [
+                {
+                    "title": "Alpha-Beta-Gamma Triangle",
+                    "synthesis": "Three things that interact.",
+                    "concepts": ["Concept Alpha", "Concept Beta", "Concept Gamma"],
+                    "implications": ["something"],
+                    "relations": relations,
+                }
+            ],
+        }
+
+    return _call
+
+
+def test_run_synthesis_writes_edges_when_db_conn_provided(tmp_path: Path) -> None:
+    """Phase D — mock LLM emits a `relations` payload; run_synthesis should
+    INSERT typed edges into concept_edges. Pure unit-test path per the
+    chosen empty-vault verification approach (CHANGELOG v3.20.0)."""
+    vault = _make_vault(tmp_path, {"x.md": "seed"})
+    db_conn = init_db(tmp_path / "test.db")
+
+    llm = _phase_d_llm_factory([
+        {"from": "Concept Alpha", "to": "Concept Beta", "relation": "contradicts",
+         "confidence": 0.9},
+        {"from": "Concept Beta", "to": "Concept Gamma", "relation": "supports"},
+    ])
+
+    result = run_synthesis(
+        vault_root=vault,
+        changed_files=[vault / "x.md"],
+        llm_caller=llm,
+        retriever=lambda q, top_k=5: [],
+        now_iso="2026-05-01",
+        budget_seconds=300,
+        db_conn=db_conn,
+    )
+
+    assert result.edges_written == 2
+    assert result.edges_rejected == 0
+    rows = db_conn.execute(
+        "SELECT from_slug, to_slug, relation FROM concept_edges "
+        "ORDER BY from_slug, to_slug"
+    ).fetchall()
+    assert ("concept-alpha", "concept-beta", "contradicts") in rows
+    assert ("concept-beta", "concept-gamma", "supports") in rows
+    db_conn.close()
+
+
+def test_run_synthesis_drops_invalid_relations_but_writes_article(tmp_path: Path) -> None:
+    """Phase D watchpoint — invalid relation values must NOT abort the run.
+    Article still writes; bad edge is logged + counted as rejected."""
+    vault = _make_vault(tmp_path, {"x.md": "seed"})
+    db_conn = init_db(tmp_path / "test.db")
+
+    llm = _phase_d_llm_factory([
+        {"from": "Concept Alpha", "to": "Concept Beta", "relation": "not-a-real-relation"},
+        {"from": "Concept Alpha", "to": "Concept Gamma", "relation": "contradicts"},
+    ])
+
+    result = run_synthesis(
+        vault_root=vault,
+        changed_files=[vault / "x.md"],
+        llm_caller=llm,
+        retriever=lambda q, top_k=5: [],
+        now_iso="2026-05-01",
+        budget_seconds=300,
+        db_conn=db_conn,
+    )
+
+    # Article still wrote.
+    assert result.connections_written == 1
+    # One bad relation rejected, one good relation written.
+    assert result.edges_written == 1
+    assert result.edges_rejected == 1
+    rows = db_conn.execute("SELECT relation FROM concept_edges").fetchall()
+    assert rows == [("contradicts",)]
+    db_conn.close()
+
+
+def test_run_synthesis_db_conn_none_skips_edges_silently(tmp_path: Path) -> None:
+    """Phase D — passing db_conn=None (pure unit-test path / fresh-vault
+    path before vault_indexer ran) MUST NOT crash and MUST still write
+    articles. Edge counts stay at 0."""
+    vault = _make_vault(tmp_path, {"x.md": "seed"})
+
+    llm = _phase_d_llm_factory([
+        {"from": "Concept Alpha", "to": "Concept Beta", "relation": "contradicts"},
+    ])
+
+    result = run_synthesis(
+        vault_root=vault,
+        changed_files=[vault / "x.md"],
+        llm_caller=llm,
+        retriever=lambda q, top_k=5: [],
+        now_iso="2026-05-01",
+        budget_seconds=300,
+        db_conn=None,
+    )
+
+    assert result.connections_written == 1
+    assert result.edges_written == 0
+    assert result.edges_rejected == 0
+
+
+def test_run_synthesis_sets_run_id(tmp_path: Path) -> None:
+    """run_id is populated at synthesis start so synth-manifest + edge rows
+    share the same source_synth_run anchor."""
+    vault = _make_vault(tmp_path, {"x.md": "seed"})
+    result = run_synthesis(
+        vault_root=vault,
+        changed_files=[vault / "x.md"],
+        llm_caller=lambda p, max_tokens=2000: {"concepts": [], "connections": []},
+        retriever=lambda q, top_k=5: [],
+        now_iso="2026-05-01",
+        budget_seconds=300,
+    )
+    # ISO 8601 with seconds precision — contains 'T' and at least one ':'.
+    assert "T" in result.run_id
+    assert result.run_id.count(":") >= 2

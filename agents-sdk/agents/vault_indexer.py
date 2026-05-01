@@ -78,6 +78,39 @@ def init_db(db_path: Path) -> sqlite3.Connection:
             value TEXT NOT NULL
         )
     """)
+    # Phase D (v3.20.0, 2026-05-01) — typed reasoning edges. Side-effect
+    # write target for vault_synthesizer; queryable read target for
+    # knowledge_lint Tier 2 contradiction detection.
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS concept_edges (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            from_slug TEXT NOT NULL,
+            to_slug TEXT NOT NULL,
+            relation TEXT NOT NULL CHECK (relation IN (
+                'supports','contradicts','evolved_into','supersedes','depends_on','related_to'
+            )),
+            confidence REAL CHECK (confidence IS NULL OR (confidence >= 0 AND confidence <= 1)),
+            valid_until TEXT,
+            classifier_version TEXT,
+            source_synth_run TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            UNIQUE(from_slug, to_slug, relation),
+            CHECK (from_slug != to_slug)
+        )
+    """)
+    conn.execute("""
+        CREATE INDEX IF NOT EXISTS idx_concept_edges_relation
+        ON concept_edges(relation)
+    """)
+    conn.execute("""
+        CREATE INDEX IF NOT EXISTS idx_concept_edges_from
+        ON concept_edges(from_slug, relation)
+    """)
+    conn.execute("""
+        CREATE INDEX IF NOT EXISTS idx_concept_edges_current
+        ON concept_edges(from_slug, to_slug)
+        WHERE valid_until IS NULL
+    """)
     conn.commit()
     return conn
 
