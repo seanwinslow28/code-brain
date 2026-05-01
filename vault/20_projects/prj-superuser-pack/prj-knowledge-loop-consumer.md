@@ -115,9 +115,11 @@ The Phase 1 soak closed clean on 2026-04-27. The Phase 2 production soak closed 
 
 ---
 
-## Phase A — PreCompact safety net
+## Phase A — PreCompact safety net — SHIPPED 2026-05-01
 
-**Goal:** Stop silent knowledge loss when long sessions auto-compact mid-flow.
+**Status: shipped 2026-05-01 in v3.18.0** on a fresh `knowledge-loop/phase-a-v2` branch (not the original stale `knowledge-loop/phase-a`, which predated agent-wiring Phase 2 and would have regressed `flush.py` SOUL prepend + `CLAUDE.md` content). All 5 new tests in `agents-sdk/tests/test_flush_trigger.py` pass; full pytest suite stays green at 182 / 182; `python3 scripts/validate.py` passes with no new warnings. Hook count `12 → 13`. The `tag: auto` value in daily-log session blocks is replaced with `tag: session-end` / `tag: pre-compact` / `tag: manual` going forward.
+
+**Goal (original):** Stop silent knowledge loss when long sessions auto-compact mid-flow.
 
 ### Changes
 
