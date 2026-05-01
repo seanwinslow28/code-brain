@@ -46,7 +46,7 @@ from lib.config import Config, load_config
 # ─── Constants ────────────────────────────────────────────────────────
 
 ACTIVE_AGENTS = ["vault_indexer", "vault_synthesizer", "daily_driver", "knowledge_lint", "flush", "meta_agent"]
-DISABLED_AGENT_COUNT = 6  # process_inbox, daily_driver evening/weekly, pr_digest, sprint_health, meeting_defender
+DISABLED_AGENT_COUNT = 5  # process_inbox, daily_driver evening/weekly, pr_digest, sprint_health
 
 # Descriptive metadata per active agent — drives the fleet report template.
 # Tuple order: (display_name, schedule, machine, cost_label, monthly_cost_usd)
@@ -462,7 +462,7 @@ def generate_fleet_report(
 ## Disabled Agents Reminder
 
 {DISABLED_AGENT_COUNT} agents disabled per AUDIT-2026-04-09-agent-downsizing.md:
-- process-inbox, daily-driver evening/weekly, pr-digest, sprint-health, meeting-defender
+- process-inbox, daily-driver evening/weekly, pr-digest, sprint-health
 - **Root causes:** CLIConnectionError in SDK transport, MCP servers unavailable in headless mode
 - **Do NOT re-enable** without Sean's explicit approval and fixing the underlying SDK bug
 

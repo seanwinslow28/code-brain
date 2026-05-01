@@ -37,10 +37,27 @@ max_turns = 20
 max_budget_usd = 0.25
 
 [agents.process_inbox]
+# DISABLED 2026-04-29 pending Path B rewrite. Cloud-Sonnet path validated as
+# functionally working (6 of 9 files moved across two manual runs) but cost-
+# inefficient: ~$1.50-$1.80/run for ~3 files, with consistent cap trips on
+# real-load runs. Total cloud spend across 6 SDK invocations on 2026-04-28
+# / 2026-04-29: ~$6.97 for 6 files moved. The remaining 3 files were cleared
+# manually via the process-inbox skill in an interactive session ($0).
+#
+# Path B: rewrite to local gemma4:e4b via routing.task_map.inbox_triage
+# (line 200 of this file). Existing pattern in flush.py / vault_synthesizer.py
+# / knowledge_lint.py — uses lib/hybrid_router.py instead of
+# claude_agent_sdk.query. Validated +7.5pp quality vs phi4-mini in Phase 6
+# A.7 benchmarks. Estimated rewrite effort: 3-4 hours. $0.00/run after
+# rewrite. Until Path B ships, manual triage via the `process-inbox` skill
+# in interactive Claude Code is the working alternative.
+#
+# To re-enable cloud-Sonnet path (NOT recommended): set enabled = true and
+# either bump max_turns/max_budget_usd higher OR accept partial-batch runs.
 enabled = false
 skills = ["process-inbox", "vault-read-write"]
-max_turns = 15
-max_budget_usd = 0.25
+max_turns = 40
+max_budget_usd = 1.80
 confidence_threshold = 80
 
 [agents.sprint_health]
@@ -50,13 +67,6 @@ max_turns = 15
 max_budget_usd = 0.50
 project_key = "BE"
 schedule = "Friday 15:00"
-
-[agents.meeting_defender]
-enabled = false
-skills = ["meeting-prep", "vault-read-write"]
-max_turns = 10
-max_budget_usd = 0.25
-schedule = "Monday 07:00"
 
 [agents.vault_indexer]
 enabled = true
@@ -160,6 +170,16 @@ daily_driver = { heartbeats = true, on_demand = ["USER", "SOUL", "operating-mode
 meta_agent     = { on_demand = ["schedule-recommendations"] }
 flush          = { on_demand = ["SOUL"] }
 knowledge_lint = { on_demand = ["SOUL"] }
+
+# process-inbox (cloud, 2026-04-28; on-demand dropped 2026-04-29):
+# 3 domain HEARTBEATs always-on for domain routing decisions. on-demand
+# SOUL/operating-model pointers were dropped after 2026-04-29 first-fire
+# burned $1.23 / 30 turns moving zero files — the agent over-read those
+# pointers before touching the inbox. HEARTBEATs alone give 80% of the
+# routing value at 30% of the cost. The research-candidate flag rule
+# (in build_artifact_preamble) carries forward without needing the
+# on-demand artifact bodies inline.
+process_inbox  = { heartbeats = true }
 
 # ─── Three-Machine Routing ───────────────────────────────────────────
 

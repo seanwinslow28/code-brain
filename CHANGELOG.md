@@ -5,6 +5,111 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.17.4] - 2026-04-29
+
+### Changed
+
+- **`process-inbox` SDK agent disabled pending Path B rewrite.** Round 2 followup runs validated that the cloud-Sonnet path is functionally working (6 of 9 files moved across two manual runs) but cost-inefficient (~$1.16/file × 3 files/run × twice-weekly = unsustainable for the ~3-files/day steady-state arrival rate). Total cloud spend across 6 SDK invocations: ~$6.97 for 6 files moved. The audit doc's "if round 2 also trips, switch to Path B" threshold was crossed.
+- **launchd job unloaded** via `launchctl bootout` — no more scheduled fires until Path B ships.
+- **Active SDK agent count `7 → 6`** (back to v3.17.1 state minus `meeting_defender`/`sprint_health`).
+- **Manual fallback documented:** the `process-inbox` skill in an interactive Claude Code session is the working alternative — same machinery that cleared `vault/00_inbox/` on 2026-04-25 and the final 3 files on 2026-04-29.
+- Cost trajectory recorded in `agents-sdk/AUDIT-2026-04-28-process-inbox-reenable.md` "Round 2 followup runs" + "Decision: Pause cloud path, switch to Path B" sections.
+
+### Path B scope (next)
+
+Estimated 3-4 hours of focused work:
+1. Replace `claude_agent_sdk.query()` in `agents/process_inbox.py` with a `lib/hybrid_router.py` call routed via `routing.task_map.inbox_triage` (already defined at `config.toml:200`, validated `gemma4:e4b` on Mac Mini at +7.5pp quality vs `phi4-mini` in Phase 6 A.7 benchmarks).
+2. Convert the multi-turn agentic loop into a deterministic Python loop: per inbox file, single local-model call with classification schema, JSON-parse response, apply move via `pathlib`. No turn caps to manage with local inference.
+3. Inline the `#triage/research-candidate` flag rule into the single-turn prompt (small enough to fit).
+4. Re-enable `[agents.process_inbox] enabled = true`; rerun `agents-sdk/schedules/install_schedules.sh`.
+5. Test on a fresh inbox.
+
+Cost after Path B: **$0.00/run** regardless of file count, pattern matches existing `flush.py` / `vault_synthesizer.py` / `meta_agent.py` agents.
+
+## [3.17.3] - 2026-04-29
+
+### Changed
+
+- **`process-inbox` round 2 adjustments after first scheduled fire trip-cap.** First scheduled run on 2026-04-29 09:00 ET burned $1.23 / 30 turns moving zero files (the agent over-read on-demand artifact pointers before touching the inbox). Three surgical fixes applied: (a) on-demand SOUL/operating-model pointers dropped from `[artifacts.per_agent.process_inbox]` — HEARTBEATs alone preserved for routing context; (b) `max_turns` 25 → 40 and `max_budget_usd` $1.20 → $1.80 (matches Past Landmine #4 in `life-systems/SOUL.md` — "raise the cap, don't retry harder"); (c) task prompt now leads with a `BUDGET DISCIPLINE` block and `PROCESS FILES SERIALLY — one at a time` directive, capping tool calls per file at ~4 (Read → Edit → Write → optional confirm).
+- `#triage/research-candidate` flag rule preserved in `build_artifact_preamble` — research-fleet tagging still works without the on-demand artifact bodies inline.
+- Empty-inbox Python short-circuit unchanged ($0 cost when nothing to process).
+
+### Cost trajectory
+
+| Run | Inbox state | Turns | Cost | Files moved |
+|---|---|---|---|---|
+| 2026-04-28 dev test #1 | empty | 21 | $0.65 | 0 (cap trip) |
+| 2026-04-28 dev test #2 | empty | 19 | $0.91 | 0 (cap trip) |
+| 2026-04-28 dev test #3 | 9 files | 22 | $0.87 | 0 (cap trip) |
+| 2026-04-29 first scheduled | 9 files | 30 | $1.23 | 0 (cap trip) |
+| **Target** (round 2): | 9 files | ≤40 | ≤$1.80 | 9 |
+
+If round 2 also trips: next move is NOT another bump — it's a Path B rewrite to local `gemma4:e4b` via `routing.task_map.inbox_triage` ($0/run, validated +7.5pp quality vs phi4-mini in Phase 6 A.7).
+
+### Pending soak gate (revised)
+
+- Sunday 2026-05-03 09:00 ET — first round-2 fire. Watch `vault/90_system/agent-logs/process-inbox-2026-05-03.log` for `status=success`, `cost < $1.80`, and files actually moved out of inbox.
+
+## [3.17.2] - 2026-04-28
+
+### Added
+
+- **`process-inbox` SDK agent re-enabled** with operating-model artifact wiring. Disabled since 2026-04-09 due to SDK v0.1.56 transport bug; re-enabled now that v0.1.63 closes that bug. Schedule moved daily 05:30 → twice weekly Sundays + Wednesdays at 09:00 ET (`StartCalendarInterval` array of two dicts). Active SDK agent count `6 → 7`.
+- **Operating-model wiring for `process_inbox`.** `[artifacts.per_agent.process_inbox] = { heartbeats = true, on_demand = ["SOUL", "operating-model"] }` — all 3 domain HEARTBEATs always-on for routing decisions; on-demand reads of `life-systems/SOUL.md` (named consumer per its frontmatter) and `life-systems/operating-model.md` (Active Leverage Points → research fleet awareness).
+- **`#triage/research-candidate` tag.** When inbox items match the future-research-fleet topic register (crypto, prediction markets, x402, agentic commerce, AI tooling, autoresearch), the agent now adds this tag for downstream consumption by Sean's planned research agents (Perplexity API, Gemini Deep Research MCP, NotebookLM MCP, agentkit).
+- **Python empty-inbox short-circuit.** `run()` now skips the SDK call entirely when the inbox has no non-dotfiles (apart from `.gitkeep`). Empty runs cost $0; previous tests showed an LLM-based empty check spending $0.65–$0.91 over 19–21 turns reading on-demand artifacts unnecessarily.
+- **`AUDIT-2026-04-28-process-inbox-reenable.md`** — full re-enable record (test runs, cost projections, rollback ladder, soak gates).
+
+### Changed
+
+- `agents-sdk/agents/process_inbox.py`: bumped `MAX_TURNS` 15 → 25 and `MAX_BUDGET_USD` $0.25 → $1.20 to absorb the artifact preamble + per-file routing context. Real-load test (9 files) hit the prior 0.85 cap at turn 22 — the bump aligns with `life-systems/SOUL.md` Past Landmine #4 ("when a useful agent is bumping a cap, raise the cap"). Corrected docstring claim from "100% local via phi4-mini-reasoning" to honest "Cloud Sonnet via `claude_agent_sdk.query()`".
+- `agents-sdk/schedules/com.sean.agent.process-inbox.plist`: schedule changed from single `StartCalendarInterval` dict (daily 05:30) to array of two dicts (Sun + Wed 09:00 ET). `plutil -lint` passes.
+- Cost ceiling delta: pre-disable burned ~$9.30/month for 0/6 success rate. Worst-case after re-enable: $1.20 × 8 runs/month = $9.60. Realistic mix (some empty, some heavy): ~$3–5/month for actual triage output.
+
+### Pending soak gates
+
+- First scheduled fire: Wednesday 2026-04-29 09:00 ET. First three runs (through Sunday 2026-05-10) under cap = stable.
+- launchd plist needs `launchctl bootout` + `bootstrap` to pick up the new schedule. Rerun `agents-sdk/schedules/install_schedules.sh` from a fresh shell.
+
+## [3.17.1] - 2026-04-27
+
+Phase 3 of the agent-wiring rollout closed. `meeting_defender` deleted; `sprint_health` autonomous wiring superseded by a new `sprint-health` skill. Skill total `113 → 114`; autonomous SDK agent total `13 → 12` (still 6 active). The 2026-04-09 audit remains the canonical record for the still-disabled fleet — no other agent re-enabled.
+
+### Rationale
+
+Re-evaluating Phase 3 against the post-v3.17.0 reality: Daily Driver morning already lists the day's meetings via interactive MCP and there is no Sean-side demand for an auto-decline / draft-Slack-DM workflow, so `meeting_defender` was removed completely. Sprint health's valuable shape isn't a Friday-3PM autonomous report — it's an ad-hoc "where are we on Epic X?" status check, which Sean's own `vault/05_atlas/operating-models/the-block/schedule-recommendations.md` flagged as a gap ("No `sprint-health` skill yet"). Built as a skill instead, sidestepping the browser-OAuth-MCP-in-headless constraint that originally blocked the autonomous form.
+
+### Added
+
+- `.claude/skills/sprint-health/SKILL.md` — Block-specific ad-hoc Jira status check. Triggers: "where are we on PRO-XXXX", "sprint health", "what's stuck", "anything stale", pre-standup / pre-1:1 / pre-bi-weekly P&E sanity checks. Reuses the Block Jira config from `jira-automation` (PRO / RBS / BE projects, Cloud ID `9660d87e-3943-45c9-82bd-ce963410b29e`). Read-only Atlassian MCP — `searchJiraIssuesUsingJql` for rollups, `getJiraIssue` for Story detail; never auto-comments / auto-transitions. Computes percent complete, stale (>3d sprint / >5d cross-project), at-risk (stale | unassigned | NeedsDesign on non-Design story), blocker / dependency-risk signals. Output format leads with the headline metric, summarizes Done lists, and only spells out items needing attention. Closes with one recommendation. Added to the `pm-workflows` export-group manifest (count `13 → 14`).
+
+### Removed
+
+- `agents-sdk/agents/meeting_defender.py` — autonomous Monday-7AM calendar audit / draft-Slack-DM agent. Never produced output (per the 2026-04-09 audit) and superseded by Daily Driver morning's existing calendar surfacing.
+- `agents-sdk/schedules/com.sean.agent.meeting-defender.plist` — orphaned launchd schedule (was not loaded; not referenced in `install_schedules.sh`).
+- `[agents.meeting_defender]` config block in `agents-sdk/config.toml`.
+
+### Retained (dormant)
+
+- `agents-sdk/agents/sprint_health.py` and `agents-sdk/schedules/com.sean.agent.sprint-health.plist` remain in the repo at `enabled = false`. Not loaded into launchd and never produced output even when enabled. Zero maintenance cost; future cleanup is one `git rm` away if desired. The active form of "sprint health" is now the skill above.
+
+### Changed
+
+- `vault/20_projects/prj-superuser-pack/prj-agent-wiring-rollout.md` — Section 5 rewritten ("Phase 3: Closed 2026-04-27"). Frontmatter `phase-3-status` updated. Section 1 executive summary, Section 6 doc-update list, Section 8 Risk #10, Section 9 Q4 decision, Section 10 effort estimate, and the live-status block all updated to reflect closure.
+- `CLAUDE.md` — skill count `113 → 114`; autonomous SDK agent count `13 → 12`; the operating-model wiring paragraph's Phase 3 line now describes the closure rather than the freeze.
+- `README.md` — same skill / agent count updates; `pm-workflows` row count `13 → 14` with "Jira status checks" added to the highlights.
+
+### Doc updates verified
+
+- [x] `CHANGELOG.md` — this entry
+- [x] `CLAUDE.md` — counts + Phase 3 line in operating-model paragraph
+- [x] `README.md` — counts + pm-workflows table row
+
+### Rollback
+
+- Restore `meeting_defender.py` + plist + config block from `git show 56decb0~1:` and run `launchctl bootstrap` if Sean ever wants the autonomous version back. (No reason to expect this.)
+- The skill is additive; removal is `rm -rf .claude/skills/sprint-health` plus dropping it from `export-groups/02-pm-workflows/playground.json`.
+
 ## [3.17.0] - 2026-04-27
 
 Two independent features landed in a single merge commit (`19a805e`): **agent-wiring Phase 2** (the headline) and **knowledge-loop Phase B** (consumer-side activation). They have zero file overlap and were sequenced this way because Phase B was held on its branch until Phase 2 cleared the Phase 1 soak. A new soak window now runs through **2026-05-01** to validate Phase 2 in production; **knowledge-loop Phase A is held until that soak closes**. See "Pending merges" below.
