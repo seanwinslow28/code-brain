@@ -5,6 +5,44 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.19.0] - 2026-05-01
+
+### Added — knowledge-loop Phase C: query.py + qa/ tier + OB1 provenance
+
+- **`agents-sdk/scripts/query.py`** (NEW). Terminal Q&A against the synthesized knowledge base. Two-pass orchestration: a selection pass reads `vault/knowledge/index.md` + the question and asks the LLM for 3-N article paths with similarity scores; an answer pass reads the selected article bodies and asks for a `[[wikilink]]`-citing answer. Local-first model routing via `lib.hybrid_router.HybridRouter` (Qwen3-14B on MBP through the `vault_synthesis` task) with Anthropic Sonnet 4.6 fallback. CLI flags: `--file-back`, `--model {auto,local,api}`, `--max-articles N`. Reuses `load_config`, `setup_logger`, `record_run`, `FileLock`, `vault_io` paths.
+- **`vault/knowledge/qa/`** (NEW article tier). Created on first `--file-back` run. Synthesizer `regenerate_index` now emits a `## Q&A` section listing qa/ articles alongside concepts/connections (Phase B SessionStart injection picks them up automatically).
+- **`vault/knowledge/qa/.manifest.json`** (NEW, C.M2 OB1-inspired). Append-only JSONL — one record per `--file-back` run capturing `run_id`, `question`, `model`, `model_route`, `consulted` (path + chunk_id + similarity), `duration_ms`, `answer_chars`, `qa_file`. JSONL chosen over JSON for lock-friendly append semantics matching the `lib/logging_setup.py` `record_run` pattern.
+- **C.M1 chunk_id + similarity in qa/ frontmatter** (OB1-inspired). Each consulted article entry in the qa/ frontmatter ships a 12-char SHA-256 prefix of `(file_path, chunk_index)` from `vault/.vault-index.db`'s `chunks` table plus the selection-pass similarity score. Origin: OB1's `derived_from` UUID provenance pattern, ported to file-path + chunk identity for Sean's vault-as-source-of-truth setup.
+- **`agents-sdk/tests/test_query.py`** (NEW, 22 tests). Mocks the LLM via dependency-injected callers; covers slugify, chunk_id stability, index parsing (populated + empty stub + missing index), selection-pass filtering / similarity clamping / max-articles cap / LLM-exception-swallowing, `load_articles` chunk_id stamping (DB-backed and fallback paths), qa/ frontmatter shape, manifest append (one line per run), and end-to-end `run_query` happy path / empty-index / no-`--file-back` / two-consecutive-runs.
+- **`[agents.query]` block in `agents-sdk/config.toml`.** `default_model = "auto"`, `max_articles = 10`, `task_key = "vault_synthesis"`, plus selection/answer max-tokens, qa_dir, manifest_path. CLI flags override these defaults.
+
+### Changed
+
+- **`agents-sdk/agents/vault_synthesizer.py`** — `QA_SUBDIR` constant added; `regenerate_index()` emits a `## Q&A` section listing `qa/*.md` articles when the directory exists. Idempotent / silent when qa/ is absent.
+- **`agents-sdk/agents/knowledge_lint.py`** — `qa` added to `_ORPHAN_EXCLUDE_DIRS`. qa/ articles are intentional answer endpoints (cite outward but receive no inbound wikilinks by design); without this, every qa/ article would surface as orphan-MEDIUM noise on every Sunday lint. Existing recursive `knowledge.rglob("*.md")` checks (missing-frontmatter, camelcase-filename) and Tier 2 stale-reference scan already cover qa/, so no other lint changes were needed for the qa/ tier to stay clean.
+
+### Spec interpretation note
+
+The plan's "include qa/ in orphan + stale + sparse checks" is in tension with the gate "knowledge_lint Tier 1 reports zero new issues against qa/". The implementation resolves this by treating qa/ as a first-class article tier whose visibility in lint is governed by *intent*: it inherits the missing-frontmatter / camelcase-filename / stale-reference checks via existing rglob recursion and `_vault_md_files`, but is excluded from orphan detection because qa/ articles are answer endpoints by construction. No new "sparse" check kind was introduced — the term has no prior definition in `knowledge_lint.py` and the gate only requires zero new qa/ issues, which the orphan-exclusion approach delivers.
+
+### Empty-state behavior (documented, not faked)
+
+`vault/knowledge/index.md` is currently the empty-state stub (vault_synthesizer's Mac Mini fallback emits zero articles when the MBP-hosted Qwen3-14B is asleep — CLAUDE.md "intermittent — succeeds only when MBP awake"). Phase C handles the empty index explicitly: the selection pass returns zero candidates without invoking the LLM, the answer pass reports `"No knowledge articles match this question yet."`, and `--file-back` writes nothing (no qa/ file, no manifest line). Three unit tests lock this behavior in (`test_run_selection_pass_returns_empty_on_empty_index`, `test_run_query_empty_index_produces_clean_report_no_qa_file`, `test_run_query_missing_index_file_returns_helpful_message`). Live smoke confirmed: `query.py "..." --file-back` against the live empty index exits 0, prints the empty-state message, creates no files. Once the synthesizer produces real concept/connection articles, the same CLI works without changes.
+
+### Gates
+
+- `pytest agents-sdk/tests/test_query.py -v` → 22 / 22 PASS.
+- `pytest agents-sdk/tests/` → 204 / 204 PASS (was 182, +22 from this phase).
+- `python3 scripts/validate.py` → PASSED, 58 warnings (zero new ones — all 58 are pre-existing secret-pattern false positives carried over from v3.18.0).
+- End-to-end smoke against a synthetic populated vault: `--file-back` produced a valid `vault/knowledge/qa/<slug>.md` with `chunk_id` + `similarity` per consulted article; `vault/knowledge/qa/.manifest.json` gained exactly one new line; subsequent `regenerate_index` ran without error and the new `## Q&A` section appeared in `index.md`; `knowledge_lint.run_tier1` reported zero qa/ issues.
+
+### Rollback
+
+- Delete `agents-sdk/scripts/query.py` (or leave it — inert without invocation).
+- Delete `vault/knowledge/qa/` (or leave it — orphaned).
+- Revert the qa/ inclusion in `regenerate_index()` and the qa/ entry in `_ORPHAN_EXCLUDE_DIRS` (small, surgical reverts).
+- Remove the `[agents.query]` block from `agents-sdk/config.toml`.
+
 ## [3.18.0] - 2026-05-01
 
 ### Added — knowledge-loop Phase A: PreCompact safety net
