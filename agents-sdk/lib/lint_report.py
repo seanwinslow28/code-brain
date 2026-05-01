@@ -3,10 +3,17 @@
 Phase 6 D.3.d: pull the latest `vault/health/YYYY-MM-DD-lint-report.md`,
 return a one-line summary with CRITICAL + HIGH counts, and a deep link.
 No report or all-PASS → 'PASS ✓'.
+
+Phase D (v3.20.0, 2026-05-01): adds `latest_synth_manifest` +
+`synth_health_summary` for the same morning-brief slot. The two functions
+are siblings — `vault_health_summary` reports lint findings, the new
+`synth_health_summary` reports the most recent vault_synthesizer run's
+counts (concepts, connections, edges, rejected). Daily-driver wires both.
 """
 
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
@@ -42,4 +49,48 @@ def vault_health_summary(vault_root: Path) -> str:
     return (
         f"VAULT HEALTH: {critical} CRITICAL, {high} HIGH issues. "
         f"See {report.as_posix()} for the full report."
+    )
+
+
+def latest_synth_manifest(vault_root: Path) -> Path | None:
+    """Return newest `vault/health/synth-manifest-*.json` or None.
+
+    Sorts by name; the manifest filenames embed an ISO date so name-sort
+    matches chronological order without inspecting file mtimes (which
+    can drift on git checkout).
+    """
+    health_dir = vault_root / "health"
+    if not health_dir.exists():
+        return None
+    manifests = sorted(health_dir.glob("synth-manifest-*.json"))
+    return manifests[-1] if manifests else None
+
+
+def synth_health_summary(vault_root: Path) -> str:
+    """One-line summary of the latest synth-manifest, or '' when missing.
+
+    Returns '' when:
+      - no manifest exists (caller suppresses the line)
+      - manifest is malformed JSON
+      - manifest is unreadable
+
+    Tolerates broken manifests so the daily-driver morning brief never
+    crashes on a bad file. Format intentionally short — the caller
+    appends it to the existing VAULT HEALTH line.
+    """
+    manifest = latest_synth_manifest(vault_root)
+    if not manifest:
+        return ""
+    try:
+        data = json.loads(manifest.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return ""
+    if not isinstance(data, dict):
+        return ""
+    return (
+        f"last synth: {data.get('concepts_written', 0)} concepts, "
+        f"{data.get('connections_written', 0)} connections, "
+        f"{data.get('edges_written', 0)} edges, "
+        f"{data.get('rejected_count', 0)} rejected "
+        f"(see {manifest.as_posix()})"
     )

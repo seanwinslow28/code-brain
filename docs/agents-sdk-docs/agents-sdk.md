@@ -933,3 +933,126 @@ Three unit tests lock this behavior in (`test_run_selection_pass_returns_empty_o
 | `write_qa_article` | `(...)` | `Path` |
 | `append_manifest` | `(manifest_path, record)` | `None` |
 | `run_query` | `(...)` | `QueryResult` |
+
+---
+
+## Knowledge-Loop Phase D — `concept_edges` SQL Layer + Synthesizer Manifest (v3.20.0)
+
+### What landed
+
+Phase D promotes contradiction / supersedence detection from a Sunday LLM lint scan to a queryable SQL row at synthesis time. Adds two artefacts:
+
+1. **`concept_edges` table** in `vault/.vault-index.db` — populated by `vault_synthesizer.py` as a side-effect of each connection article; read by `knowledge_lint.py` Tier 2 as a zero-LLM-cost contradiction fast path.
+2. **`vault/health/synth-manifest-{date}.json`** — per-run record of synthesizer counts (concepts, connections, edges, rejected, duration, model_used, wol_status). Surfaces in the daily-driver morning brief as a "last synth: ..." line under Vault Health.
+
+Origin: OB1's [`schemas/typed-reasoning-edges/schema.sql`](https://github.com/NateBJones-Projects/OB1/blob/main/schemas/typed-reasoning-edges/schema.sql) defines `public.thought_edges` with the same six-relation taxonomy. We port the *concept* (typed edges as queryable rows) to SQLite without standing up Postgres.
+
+### `concept_edges` schema
+
+```sql
+CREATE TABLE IF NOT EXISTS concept_edges (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  from_slug TEXT NOT NULL,
+  to_slug TEXT NOT NULL,
+  relation TEXT NOT NULL CHECK (relation IN (
+    'supports','contradicts','evolved_into','supersedes','depends_on','related_to'
+  )),
+  confidence REAL CHECK (confidence IS NULL OR (confidence >= 0 AND confidence <= 1)),
+  valid_until TEXT,                  -- ISO date; NULL = currently valid
+  classifier_version TEXT,           -- e.g. "qwen3-14b/2026-05-01"
+  source_synth_run TEXT NOT NULL,    -- ISO timestamp matching synth-manifest run_id
+  created_at TEXT NOT NULL,
+  UNIQUE(from_slug, to_slug, relation),
+  CHECK (from_slug != to_slug)
+);
+
+CREATE INDEX IF NOT EXISTS idx_concept_edges_relation ON concept_edges(relation);
+CREATE INDEX IF NOT EXISTS idx_concept_edges_from ON concept_edges(from_slug, relation);
+CREATE INDEX IF NOT EXISTS idx_concept_edges_current
+  ON concept_edges(from_slug, to_slug)
+  WHERE valid_until IS NULL;
+```
+
+### Relation taxonomy (mapped from OB1)
+
+| relation | Meaning | Knowledge-lint surfaces? |
+|----------|---------|--------------------------|
+| `supports` | Concept A reinforces Concept B | No (informational) |
+| `contradicts` | Concept A directly contradicts Concept B | **Yes — CRITICAL** via SQL fast path |
+| `evolved_into` | Concept A is a precursor of B; both still relevant | No |
+| `supersedes` | Concept A is replaced by B; A's outbound edges get `valid_until` stamped | Future (decay_pass stub) |
+| `depends_on` | Concept A presupposes Concept B | No |
+| `related_to` | Loose-but-noted association | No |
+
+Bad `relation` values are rejected by the CHECK constraint. The `lib.concept_edges.insert_edge` helper raises `ValueError` *before* hitting SQL so the synthesizer can log + drop without aborting the run.
+
+### `synth-manifest-{date}.json` format
+
+```json
+{
+  "run_id": "2026-05-01T02:31:00",
+  "files_processed": 7,
+  "concepts_written": 12,
+  "connections_written": 4,
+  "edges_written": 9,
+  "edges_rejected": 1,
+  "rejected_count": 2,
+  "duration_seconds": 184.32,
+  "model_used": "qwen3-14b",
+  "wol_status": "mbp_awake",
+  "status": "ok"
+}
+```
+
+`wol_status` is one of `mbp_awake`, `api_fallback`, `wol_deferred`. The deferred case still writes a manifest so the daily-driver brief sees the deferral as data instead of a silent absence.
+
+### Hybrid contradiction detection (the Phase D dedupe rule)
+
+`knowledge_lint.py` Tier 2 contradiction detection is hybrid:
+
+1. **SQL fast path** — `find_contradictions(conn)` returns `(from_slug, to_slug)` pairs where `relation='contradicts' AND valid_until IS NULL`. Each becomes a CRITICAL `LintIssue` with `(source=sql)` in the detail. Always runs when `vault/.vault-index.db` exists; no-ops cleanly when the file or table is missing.
+2. **LLM slow path** (preserved from Phase 2) — when an `llm_caller` is provided, the existing semantic prompt still runs for `soul_conflicts` discovery (no SQL substitute) and as a fallback for contradictions the synthesizer missed.
+3. **Dedupe** — LLM contradictions are deduplicated against SQL hits by normalized `frozenset({from_slug, to_slug})`. SQL hits win when both paths surface the same pair (the row carries source provenance). LLM-only contradictions still surface; SOUL conflicts always surface.
+
+Logged with `Tier 2 contradiction: source=sql ...`, `source=llm ...`, or `source=llm dropped (sql had it)`.
+
+### Key functions (testable surface)
+
+| Module | Function | Purpose |
+|--------|----------|---------|
+| `lib.concept_edges` | `get_connection(db_path)` | Open + apply init_db (idempotent) |
+| `lib.concept_edges` | `insert_edge(conn, *, from_slug, to_slug, relation, source_synth_run, confidence=None, ...)` | INSERT OR IGNORE; raises ValueError on bad relation / self-edge / out-of-range confidence |
+| `lib.concept_edges` | `find_contradictions(conn)` | List `(from_slug, to_slug)` for currently-valid contradictions |
+| `lib.concept_edges` | `find_superseded(conn, slug)` | List slugs that supersede `slug` |
+| `lib.concept_edges` | `decay_pass(conn, *, now_iso, half_life_days=90)` | Stub (returns 0); reserved for future tuning |
+| `agents.vault_synthesizer` | `write_synth_manifest(*, vault_root, result, today)` | Atomic write of `vault/health/synth-manifest-{today}.json` |
+| `lib.lint_report` | `latest_synth_manifest(vault_root)` | Newest manifest by name-sort; None when none exist |
+| `lib.lint_report` | `synth_health_summary(vault_root)` | One-line summary; `""` when no manifest / malformed JSON |
+
+### Verification
+
+```bash
+# Inspect the schema against the live vault DB (read-only)
+sqlite3 vault/.vault-index.db ".schema concept_edges"
+
+# Manual SQL fast-path smoke test
+sqlite3 vault/.vault-index.db "INSERT INTO concept_edges
+  (from_slug, to_slug, relation, source_synth_run, created_at)
+  VALUES ('test-a', 'test-b', 'contradicts',
+          '2026-05-01T00:00:00', '2026-05-01T00:00:00')"
+cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/knowledge_lint.py --full
+# Expected log line: "Tier 2 contradiction: source=sql test-a contradicts test-b"
+sqlite3 vault/.vault-index.db "DELETE FROM concept_edges WHERE from_slug='test-a'"
+
+# Daily-driver morning preamble — synth line under Vault Health when manifest exists
+cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode morning --dry-run
+```
+
+### Rollback
+
+- `sqlite3 vault/.vault-index.db "DROP TABLE concept_edges"` — idempotent re-creation on next vault_indexer run.
+- Revert `vault_synthesizer.py` edge-insert lines (LLM still writes connection articles unchanged because `relations` is OPTIONAL in the prompt schema).
+- Revert `knowledge_lint.py` Tier 2 to LLM-only contradiction pass (preserve Phase 2 SOUL path + Phase C qa/ exclusion).
+- Revert `daily_driver.py` morning-brief synth line (preserve Phase 1 artifact preamble).
+- Delete `agents-sdk/lib/concept_edges.py`.
+- Delete `vault/health/synth-manifest-*.json` files (or leave — inert).
