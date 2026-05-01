@@ -293,6 +293,7 @@ def run_flush(
     llm_caller: Callable[[str, RoutingTier], dict[str, list[str]]] | None = None,
     dry_run: bool = False,
     config: Config | None = None,
+    trigger: str = "session-end",
 ) -> FlushResult:
     """Top-level flush entrypoint (sync, easy to test).
 
@@ -303,6 +304,10 @@ def run_flush(
     When `config` is provided and the artifacts wiring is on, the prompt
     is prefixed with all three domain SOUL bodies. `config=None` keeps the
     pre-Phase-2 behavior (no SOUL prepend) — used by existing tests.
+
+    `trigger` flows into the daily-log session block's `tag:` field so
+    post-hoc analysis can distinguish session-end from pre-compact (Phase A)
+    and manual flushes.
     """
     start_ns = time.monotonic_ns()
 
@@ -346,7 +351,7 @@ def run_flush(
         "tool": "claude-code",
         "duration": f"{len(messages)} msg",
         "messages": n,
-        "tag": "auto",
+        "tag": trigger,
         "time": datetime.now().strftime("%H:%M"),
     }
     body = format_daily_log_body(
@@ -385,6 +390,12 @@ def main() -> int:
     parser.add_argument("--transcript", type=Path, default=None, help="Path to session JSONL transcript")
     parser.add_argument("--latest", action="store_true", help="Auto-discover most recent transcript")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument(
+        "--trigger",
+        choices=["session-end", "pre-compact", "manual"],
+        default="session-end",
+        help="What event invoked this flush; flows into the daily-log session tag.",
+    )
     args = parser.parse_args()
 
     cfg = load_config()
@@ -406,6 +417,7 @@ def main() -> int:
         llm_caller=None,
         dry_run=args.dry_run,
         config=cfg,
+        trigger=args.trigger,
     )
     duration_ms = (time.monotonic_ns() - start_ns) // 1_000_000
 
