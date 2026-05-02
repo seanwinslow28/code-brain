@@ -34,4 +34,4 @@ The skill walks the [5-layer interview](../../../.claude/skills/work-operating-m
 
 ## Tier-0 identity
 
-Sits above all three domain bundles: [[../Sean-Winslow-Full-Personal-Context-v1.1|Full Personal Context v1.1]]. To be updated to v2.0 once all three operating-model bundles are confirmed.
+Sits above all three domain bundles: [[Sean-Winslow-Full-Personal-Context-v2.0|Full Personal Context v2.0]]. Bumped from v1.1 on 2026-05-02 (interview-driven refresh — see [_archive/Sean-Winslow-Profiles-For-Context/](../../../_archive/Sean-Winslow-Profiles-For-Context/) for the v1.1 archive).

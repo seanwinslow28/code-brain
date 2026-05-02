@@ -228,7 +228,7 @@ _(Things Sean himself noted during the interview as "I should figure this out.")
 - USER: [[USER]]
 - SOUL: [[SOUL]]
 - Schedule rules: [[schedule-recommendations]]
-- Tier-0 identity: [[../../Sean-Winslow-Full-Personal-Context-v1.1|Full Personal Context]]
+- Tier-0 identity: [[Sean-Winslow-Full-Personal-Context-v2.0|Full Personal Context]]
 ```
 
 ---
