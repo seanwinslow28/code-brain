@@ -138,6 +138,26 @@ skills = ["health-habits", "vault-read-write"]
 enabled = false
 skills = ["vault-read-write"]
 
+[agents.deep_researcher]
+# Phase 5 (2026-04-26) — local deep research via LDR + SearXNG + LM Studio (Qwen3-14B MLX 4-bit).
+# Pure-Python wrapper (no Claude SDK in the loop) — LDR is the synthesis engine.
+# `skills` and `max_budget_usd` are decorative for parity with the daily-driver
+# pattern; budget cap exists as a guard against unintended cloud fallback.
+enabled = true
+skills = ["research-synthesis", "vault-read-write"]
+max_turns = 30
+max_budget_usd = 0.10
+queue_path = "vault/00_inbox/research-queue.md"
+output_anchor = "research-digest"
+output_dir = "vault/20_projects/research"
+target_machine = "macbook_pro"
+ldr_base_url = "http://localhost:5050"
+ldr_search_engines = ["searxng"]
+ldr_iterations = 2
+ldr_questions_per_iteration = 2
+ldr_timeout_seconds = 900
+schedule = "02:45"
+
 [safety]
 max_turns_default = 30
 max_budget_default = 0.50
@@ -240,6 +260,7 @@ financial_analysis = { model = "phi4-mini-reasoning", machine = "mac_mini" }
 code_review = { model = "qwen2.5-coder-32b-instruct", machine = "macbook_pro" }
 heavy_synthesis = { model = "qwen3-14b", machine = "macbook_pro" }
 vault_synthesis = { model = "qwen3-14b", machine = "macbook_pro" }  # Phase 6 D.2 — model resolved at runtime via this key
+deep_research = { model = "qwen3-14b", machine = "macbook_pro" }  # Phase 5 (2026-04-26) — routed via LDR HTTP, not direct LM Studio call
 sprite_vision_qa = { model = "Qwen3-VL-7B", machine = "alienware" }
 comfyui_orchestration = { model = "none", machine = "alienware" }
 
