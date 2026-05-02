@@ -87,6 +87,6 @@ Things Sean himself flagged as "I should figure this out":
 - USER (Layer 2 — recurring decisions): [[USER]]
 - SOUL (Layers 3+4 — dependencies + institutional knowledge): [[SOUL]]
 - Schedule rules (Layer 5 — friction-derived recommendations): [[schedule-recommendations]]
-- Tier-0 identity: [Sean-Winslow-Full-Personal-Context-v1.1](../../../../docs/Sean-Winslow-Full-Personal-Context-v1.1.md)
+- Tier-0 identity: [[Sean-Winslow-Full-Personal-Context-v2.0|Full Personal Context]]
 - Domain CLAUDE.md: [life-systems/CLAUDE.md](../../../../life-systems/CLAUDE.md)
 - Sister-domain operating models: [the-block](../the-block/), [creative-studio](../creative-studio/)

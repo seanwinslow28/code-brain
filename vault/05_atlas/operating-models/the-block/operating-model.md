@@ -72,4 +72,4 @@ Internal vocabulary spans `.Co`, `Campus`, the `Pro` tier and its sub-products, 
 - USER: [[USER]]
 - SOUL: [[SOUL]]
 - Schedule rules: [[schedule-recommendations]]
-- Tier-0 identity: [[../../Sean-Winslow-Full-Personal-Context-v1.1|Full Personal Context]]
+- Tier-0 identity: [[Sean-Winslow-Full-Personal-Context-v2.0|Full Personal Context]]

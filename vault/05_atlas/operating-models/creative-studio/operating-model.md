@@ -71,4 +71,4 @@ Project vocabulary comes from `sw-portfolio-animation-pipeline`: **Pencil Test (
 - Paused project (16BitFit): [[prj-16bitfit]]
 - Load-bearing workflow reference: [[ref-ai-animation-nb2-seedance-workflow]]
 - Creative-studio MOC: [[moc-creative-studio]]
-- Tier-0 identity: [[Sean-Winslow-Full-Personal-Context-v1.1|Full Personal Context]]
+- Tier-0 identity: [[Sean-Winslow-Full-Personal-Context-v2.0|Full Personal Context]]

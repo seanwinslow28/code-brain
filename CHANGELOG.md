@@ -5,6 +5,36 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.22.0] - 2026-05-02
+
+Tier-0 personal-context refresh — `Sean-Winslow-Full-Personal-Context` bumped from v1.1 → v2.0 via the interview-driven workflow in [personal-context-v2-interview-prompt.md](personal-context-v2-interview-prompt.md). v2.0 lives at a single canonical path inside the vault; v1.1 archived alongside historical profiles.
+
+### Added
+
+- `vault/Sean-Winslow-Full-Personal-Context-v2.0.md` — new canonical Tier-0 identity file (~290 lines). 11 sections: Identity & Background, Career, Values & Motivations (centerpiece: verbatim financial-cushion north-star quote), Key Relationships (Mary Alice McKee + parents Kenneth & Valerie Winslow + Ed Rupkus + Nate B Jones, with names and birthdates), Communication Baseline (10 explicit Sean-level rules), Daily Routine & Health (post-Boston-move 5:15–5:30 wake / 7–8 gym / 21:00 bed), Tools Machines & Hard Constraints (three-machine topology + two-Google-account wall + Mac-Mini-only finance docs + hard nevers), Active Projects (Tier-0 view), Goals (30-90 / 6-12 / 2-3 yr), Cross-Domain Connections, "Success" vision. Frontmatter `status: confirmed`, `supersedes: v1.1`, `updated: 2026-05-02`.
+
+### Changed
+
+- `vault/05_atlas/operating-models/the-block/operating-model.md:75` — Tier-0 wikilink bumped `v1.1 → v2.0` and path simplified (basename-only).
+- `vault/05_atlas/operating-models/creative-studio/operating-model.md:74` — same.
+- `vault/05_atlas/operating-models/life-systems/operating-model.md:90` — converted from hardcoded `docs/` Markdown link to vault wikilink (now consistent with the other two domains).
+- `vault/05_atlas/operating-models/life-systems/SOUL.md:139` — same conversion (hardcoded `docs/` → wikilink, version bumped).
+- `vault/05_atlas/operating-models/README.md:37` — Tier-0 reference bumped to v2.0; archive pointer added.
+- `.claude/skills/work-operating-model/artifact-templates.md:231` — template's Tier-0 wikilink bumped to v2.0 so future operating-model interviews emit v2.0-pointing artifacts.
+
+### Removed / Archived
+
+- `docs/Sean-Winslow-Full-Personal-Context-v1.1.md` — moved to `_archive/Sean-Winslow-Profiles-For-Context/Sean-Winslow-Full-Personal-Context-v1.1.md` (preserved for lineage).
+- `vault/Sean-Winslow-Full-Personal-Context-v1.1.md` — deleted (was a duplicate of `docs/` copy per `diff`; vault tier was orphaned per Phase 6 lint reports).
+
+### Notes
+
+- **Single canonical location.** Per Sean's call, v2.0 lives in vault only; the prior dual-location pattern is retired.
+- **Provenance-preserving diff callouts** are inline in the v2.0 body (`(was: ... )(now: ... ) — source: ...` blocks). They can be stripped on a future read-through if Sean wants a "clean" Tier-0 artifact; left in for now as PR-reviewable evidence of every material change.
+- v2.0 was assembled across Steps 1–4 of the interview prompt (silent discovery → coverage map → 6-question gap interview → draft → approval → save).
+
+---
+
 ## [3.21.0] - 2026-05-02
 
 Local open-source deep research stack — replaces / reduces paid Perplexity DR + Gemini DR usage. New autonomous SDK agent (`deep_researcher`) drives LearningCircuit Local Deep Research (LDR) v1.5.6 against a self-hosted SearXNG container and a local Qwen3-14B MLX 4-bit model in LM Studio, writing reports into the Obsidian vault. 100% local; $0/run.
