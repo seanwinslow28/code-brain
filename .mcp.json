@@ -12,6 +12,12 @@
     "zapier": {
       "type": "sse",
       "url": "https://mcp.zapier.com/api/v1/connect"
+    },
+    "ldr": {
+      "type": "stdio",
+      "command": "/Users/seanwinslow/Code-Brain/local-deep-research-stack/bin/ldr-mcp-wrapper.py",
+      "args": [],
+      "env": {}
     }
   }
 }

@@ -10,7 +10,7 @@ tags: [agents, crypto, polymarket, autoresearch]
 
 # Autoresearch and Agentic Polymarket & Crypto Cash Flow
 
-I've been hearing stories of people making a decent amount of money through giving agents a wallet, extensive data/knowledge, and a set of tasks that have lead to people making some serious money through crypto markets and betting on polymarket. I'd like to see if I can build out my second brain with data, use it to build agentic knowledge, provide my agent with a wallet through coinbase (https://docs.cdp.coinbase.com/agent-kit/welcome) or something similar, do some autoresearch on how the agent should study the markey and autoresearch on the markets themselves.
+I've been hearing stories of people making a decent amount of money through giving agents a wallet, extensive data/knowledge, and a set of tasks that have lead to people making some serious money through crypto markets and betting on polymarket. I'd like to see if I can build out my second brain with data, use it to build agentic knowledge, provide my agent with a wallet through coinbase (https://docs.cdp.coinbase.com/agent-kit/welcome) or something similar, do some autoresearch on how the agent should study the market and autoresearch on the markets themselves.
 
 This is just a random thought, but I think it's time I start finding ways to feed agents information and see if I can make some money. Even if it's just bit by bit. I've been mainly learning about this stuff for the sake of learning them and using them in my day to day, but I haven't really expanded upon that.
 
