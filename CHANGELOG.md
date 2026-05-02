@@ -5,6 +5,79 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.21.0] - 2026-05-02
+
+Local open-source deep research stack — replaces / reduces paid Perplexity DR + Gemini DR usage. New autonomous SDK agent (`deep_researcher`) drives LearningCircuit Local Deep Research (LDR) v1.5.6 against a self-hosted SearXNG container and a local Qwen3-14B MLX 4-bit model in LM Studio, writing reports into the Obsidian vault. 100% local; $0/run.
+
+> **Merge note:** Originally developed on the MBP on 2026-04-26 as a local v3.17.0 candidate; renumbered to **v3.21.0** at merge time (2026-05-02) because v3.17.0 was used in parallel on `main` for the agent-wiring Phase 2 release. No semantic change — same code, same scope, new version label.
+
+### Added
+
+- `agents-sdk/agents/deep_researcher.py` — new agent (~250 lines). Pure-Python wrapper (no Claude Agent SDK in the loop) that drives LDR via httpx REST. Modes: `--mode queue` (pick first unchecked from `vault/00_inbox/research-queue.md`) and `--mode oneshot --query "..."`. Pulls credentials via `lib.keychain.get_credential("ldr_username"|"ldr_password")`. Replicates LDRClient.quick_research's REST endpoints (`/auth/login` → `/research/api/start` → `/research/api/status/<id>` → `/api/report/<id>`) using httpx (already in agents-sdk venv) instead of cross-venv-importing LDRClient (LDR runs Python 3.11; agents-sdk runs Python 3.13). Writes a topical report to `vault/20_projects/research/{YYYY-MM-DD}-{slug}.md` and injects a one-line digest under `<!-- research-digest -->` in today's daily note (with append-section fallback if the anchor is missing). Marks the queue item done with timestamp + wikilink backlink.
+- `agents-sdk/schedules/com.sean.agent.deep-researcher.plist` — launchd schedule. Nightly **02:45** (after vault-indexer 02:00 and vault-synthesizer 02:30, before any morning agent). Mirrors the daily-morning plist's PATH env var requirement.
+- `vault/00_inbox/research-queue.md` — new markdown queue file. Format: `- [ ] question` per line; agent rewrites to `- [x] question — done {timestamp} → [[topical-note-path]]`.
+- `vault/20_projects/research/` — new directory; auto-created by the agent on first write.
+- `<!-- research-digest -->` anchor block in `vault/90_system/templates/tpl-daily.md` so all future daily notes ship with the injection point.
+- `~/Code-Brain/local-deep-research-stack/` (outside repo) — Python 3.11 venv with `local-deep-research[mcp]` v1.5.6, plus a SearXNG settings volume.
+- SearXNG container (`searxng/searxng:latest`) running on `localhost:8080` with `json` added to `search.formats` for API access.
+- macOS Keychain credentials `com.sean.agents.ldr_username` and `com.sean.agents.ldr_password` (stored via `agents-sdk/lib/keychain.py` — same pattern as Pushover, Anthropic API key, etc.).
+
+### Changed
+
+- `agents-sdk/config.toml` — new `[agents.deep_researcher]` block (`enabled = true`, `max_budget_usd = 0.10` as a guard against unintended cloud fallback, `queue_path`, `output_dir`, `output_anchor = "research-digest"`, `ldr_base_url = "http://localhost:5050"`, plus LDR call shape: `ldr_search_engines = ["searxng"]`, `ldr_iterations = 2`, `ldr_questions_per_iteration = 2`, `ldr_timeout_seconds = 900`).
+- `agents-sdk/config.toml` — new `[routing.task_map].deep_research = { model = "qwen3-14b", machine = "macbook_pro" }`. Routing target is informational (the agent talks to LDR over HTTP, not LM Studio directly), but documents intent for future Mac Mini migration.
+- `vault/90_system/templates/tpl-daily.md` — added `## Deep Research` section with the `<!-- research-digest -->` anchor between `## Side Project Notes` and `## Evening Reflection`.
+
+### Configuration deviations from the original plan (captured during execution)
+
+- **LDR port: 5050, not 5000.** macOS AirPlay Receiver claims port 5000 (`Server: AirTunes/...`). Plan's `ldr-web` invocation now requires `LDR_WEB_PORT=5050 LDR_BOOTSTRAP_ALLOW_UNENCRYPTED=true`. Agent config + plist updated.
+- **LDR settings live in an SQLCipher-encrypted per-user DB**, not the `~/.config/local_deep_research/settings.toml` file the plan called out (LDR v1.5.6 architecture). Settings configured via `PUT /settings/api/<key>` after first user registration. The five critical keys: `llm.provider=LMSTUDIO`, `llm.lmstudio.url=http://localhost:1234/v1` (must include `/v1`), `llm.model=qwen3-14b` (no `qwen/` HuggingFace-style prefix), `search.tool=searxng`, `search.iterations=2`.
+- **Qwen3-14B "thinking mode" disabled** via `/no_think` system-prompt directive in LM Studio's Inference tab per-model preset. Without this, Qwen3 emits ~50 reasoning tokens before content; with this, generation is 1-2s for short prompts. Anticipated in plan §6 risk #2.
+- **LDR rate limiter is aggressive on `/auth/login`** (5 attempts in ~5 minutes triggers 429s with sliding window). Agent caches a session per run; do not re-login per request.
+- **mode=quick is a trap for headless calls.** Submitting `{query, mode: "quick"}` to `/api/start_research` returns in ~40s with **zero sources** and hallucinated prose citations. The agent uses `/research/api/start` (LDRClient's endpoint) with explicit `search_engines=["searxng"]`, `iterations`, `questions_per_iteration` instead.
+
+### Phase 4 hard-gate evidence (smoke test)
+
+| Plan §4 criterion | Target | Actual |
+|---|---|---|
+| Length | 600–1500 words | 695 |
+| ≥3 distinct URL sources | yes | 9 numbered sources, 15 unique domains in body |
+| Spot-check 2 URLs resolve | 200 OK both | apxml.com/... → 200, famstack.dev/... → 200 |
+| ≥2 explicit tok/sec figures | yes | 5 figures captured (45–55, 35–40, 57, 3, etc.) |
+| Wall time < 15 min | yes | 320s (5m20s) |
+
+### Phase 5 verification (this release)
+
+- Queue → live run: 561s (9m21s) wall, 2243-word topical report, daily digest injected at `<!-- research-digest -->` anchor, queue line rewritten to `[x]` with timestamp + wikilink.
+- Empty-queue path: clean exit 0, recorded in `agent-run-history.csv` with status `empty-queue`.
+- Both runs visible in `vault/90_system/agent-logs/agent-run-history.csv`.
+
+### Phase 6 — MCP server hookup (shipped this release)
+
+- **New file:** `~/Code-Brain/local-deep-research-stack/bin/ldr-mcp-wrapper.py` (outside repo, ~70 lines). The `ldr-mcp` binary that ships with `local-deep-research[mcp]` runs the MCP server **in-process** with default settings — it does NOT read the per-user encrypted SQLCipher DB the LDR Web UI writes to, and the MCP tool args don't expose `llm.provider` or `llm.model` overrides. The wrapper monkey-patches `local_deep_research.api.settings_utils.create_settings_snapshot` BEFORE importing `local_deep_research.mcp`, injecting `LMSTUDIO + qwen3-14b + searxng + lmstudio.url=:1234/v1 + searxng instance=:8080` overrides into every snapshot. Caller-supplied tool overrides still win because they merge after.
+- **`.mcp.json`** — added `ldr` entry (stdio transport, command points at the wrapper, no env block needed since stdio MCP runs in-process and requires no LDR auth).
+- **`.claude/settings.local.json`** — added `"ldr"` to `enabledMcpjsonServers` allowlist.
+- **Verified:** Manual stdio handshake (`initialize` + `notifications/initialized` + `tools/list`) returns 8 tools (`quick_research`, `detailed_research`, `generate_report`, `analyze_documents`, `search`, `list_search_engines`, `list_strategies`, `get_configuration`) with proper input/output schemas. Server reports `serverInfo.name = "local-deep-research"`, version 1.27.0 (FastMCP version, distinct from LDR's 1.5.6).
+- **No credentials in the repo.** Plan §3 Phase 6 anticipated `LDR_USER` / `LDR_PASS` env vars in `.claude/settings.json`; the actual MCP architecture has no auth layer (stdio = local-only by definition; security via OS user permissions per LDR's own security notice). Zero plaintext anywhere.
+- **Next step requires Sean:** Restart Claude Code, then `/mcp` should list `ldr`. First tool call (e.g., asking Claude to "use the ldr tool to research X") will take 1-5 min and produce results equivalent to the deep_researcher agent.
+
+### Maintenance debt introduced by the wrapper
+
+- The wrapper monkey-patches LDR internals (`settings_utils.create_settings_snapshot`). If LDR refactors that module across versions, the patch will silently break (worst case: MCP falls back to `OLLAMA + gemma3:12b`, tool call fails with `connection_error` because Ollama isn't running on this MBP). When upgrading LDR (`uv pip install --upgrade local-deep-research`), re-run the wrapper smoke-test from the v3.21.0 release notes before trusting nightly runs.
+- A future LDR version may expose env-var or config-file overrides for `llm.provider` / `llm.model`. When it does, retire the wrapper and configure via the documented mechanism instead.
+
+### Out of scope (deferred)
+
+- **Phase 7** (Qwen3.6 27B/35B-A3B A/B benchmark vs Qwen3-14B baseline) — gated on ≥1 week of real usage; do not start until Phases 0–6 are complete and trusted.
+- **Mac Mini migration** of the LDR stack (plan §5) — MBP must stay plugged-in for nightly 02:45 runs until migration. Mac Mini lacks LM Studio MLX; the migration moves to Ollama Q5_K_M GGUF.
+- **URL-checker post-processor** (plan §6 risk #5 mitigation) — not built. Cited URLs are not auto-validated for 404s in the topical note.
+- **launchd registration** — the new plist is in place but NOT yet `launchctl load`ed. Run `./agents-sdk/schedules/install_schedules.sh` when ready to enable nightly runs.
+
+### Known follow-ups
+
+- Sean's LDR password was pasted into a Claude Code conversation transcript on 2026-04-26 to seed the Keychain. Consider rotating after this release if the conversation log is sensitive (the credential only protects a local-only LDR DB on this MBP).
+- Plan files (`vault/20_projects/prj-superuser-pack/open-source-deep-research/you-are-a-senior-modular-pelican.md` and `~/.claude/plans/you-are-a-senior-modular-pelican.md`) still reference port 5000 + `~/.config/local_deep_research/settings.toml` in §3 Phase 3/5/6. Pending sync to both copies.
+
 ## [3.20.0] - 2026-05-01
 
 ### Added — knowledge-loop Phase D: typed reasoning edges + synthesizer manifest

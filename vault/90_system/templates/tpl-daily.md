@@ -33,6 +33,9 @@ SORT file.name ASC
 ## Side Project Notes
 <!-- side-projects -->
 
+## Deep Research
+<!-- research-digest -->
+
 ## Evening Reflection (Manual — <2 min)
 > What worked? What didn't? Carry forward?
 
