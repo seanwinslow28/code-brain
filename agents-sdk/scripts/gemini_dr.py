@@ -357,12 +357,18 @@ def poll_interaction(
                 usage = interaction.usage
 
             if status == "completed":
-                # Extract text from the last output
+                # Concatenate ALL outputs that carry .text (skips ThoughtContent
+                # which has no text attribute — that's Gemini's internal reasoning).
+                # Deep Research returns 3 outputs: [ThoughtContent, TextContent
+                # (answer), TextContent (sources)]. Earlier code grabbed
+                # outputs[-1] which is the sources block only — answer body
+                # was silently discarded. See Phase 4 night 1 handoff TD5.
                 outputs = getattr(interaction, "outputs", None) or []
-                report_text = None
-                if outputs:
-                    last = outputs[-1]
-                    report_text = getattr(last, "text", None)
+                text_parts = [
+                    out.text for out in outputs
+                    if getattr(out, "text", None)
+                ]
+                report_text = "\n\n".join(text_parts) if text_parts else None
                 return status, report_text, usage
             else:
                 error = getattr(interaction, "error", None)
