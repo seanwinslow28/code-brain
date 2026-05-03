@@ -1,6 +1,6 @@
 # Claude Code Superuser Pack
 
-A personal command center and second brain for Claude Code. 116 skills, 13 Claude Code subagents, 13 hooks, 13 autonomous SDK agents (7 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
+A personal command center and second brain for Claude Code. **117** skills, 13 Claude Code subagents, 13 hooks, **14** autonomous SDK agents (7 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
 
 ## What's Inside
 
@@ -84,14 +84,14 @@ Skills and agents prefer native MCPs over Zapier where both exist. Currently con
 
 Zapier retained only for services with no native MCP: Salesforce, GA4, Webhooks, Code execution.
 
-### 116 Skills Across 12 Export Groups
+### 117 Skills Across 12 Export Groups
 
 All skills auto-load from `.claude/skills/`. Reference them naturally in prompts.
 
 | Export Group | Skills | Highlights |
 |-------------|--------|------------|
 | core-features | 12 | CLI mastery, hooks, subagents, MCP, settings |
-| pm-workflows | 14 | PRDs, tickets, stakeholder updates, data analysis, Jira status checks |
+| pm-workflows | 15 | PRDs, tickets, stakeholder updates, data analysis, Jira status checks, Gemini DR |
 | creative-projects | 8 | Phaser 3, sprite pipelines, pixel art, AI tools, Gemini image gen |
 | advanced-techniques | 7 | Multi-instance, context management, Plan Mode |
 | life-optimization | 8 | Finance, tasks, learning, health tracking |

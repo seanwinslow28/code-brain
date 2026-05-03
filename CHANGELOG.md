@@ -5,6 +5,40 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.25.0] - 2026-05-03
+
+Gemini Deep Research integration — ships a new `gemini-deep-research` skill, an autonomous SDK agent (`gemini_researcher`, **default disabled**), and a Python helper (`agents-sdk/scripts/gemini_dr.py`) with self-policing cost caps. The cap stack is: $7 per-task hard ceiling, $10 per-day circuit breaker, $20 per-month governor — meaning worst-case spend on a queue-stuffing accident is $10/day, not unbounded. The skill teaches interactive sessions when and how to delegate to Gemini DR vs. run a local LDR query. The agent is committed and plist-shipped but intentionally not loaded by `install_schedules.sh` unless the operator passes `INSTALL_GEMINI=1`. Spend is tracked in a rolling ledger at `vault/health/gemini-spend-{YYYY-MM}.json` (created on first call).
+
+> **Version note:** The integration plan was authored as "v3.24.0" but that version slot was taken by the `gemini-image-gen` skill (commit `ded36fb`). This release is v3.25.0 with no semantic change to scope.
+
+### Added
+
+- `.claude/skills/gemini-deep-research/SKILL.md` — new skill teaching when to use Gemini Deep Research vs. local LDR, how to trigger it interactively, prompt-framing guidelines, and result interpretation. Skill count `116 → 117`.
+- `.claude/skills/gemini-deep-research/decision-table.md` — routing decision table (task type × latency × cost × privacy) for choosing between Gemini DR, local LDR, and in-session synthesis.
+- `agents-sdk/agents/gemini_researcher.py` — new autonomous SDK agent (**default disabled**). Pulls unchecked items from `vault/00_inbox/gemini-research-queue.md`, calls `gemini_dr.run()` with per-task / daily / monthly cap enforcement, and writes reports to `vault/20_projects/research/`. Not loaded by `install_schedules.sh` unless `INSTALL_GEMINI=1` env var is set.
+- `agents-sdk/scripts/gemini_dr.py` — Python helper wrapping `google-genai` SDK. Enforces the three-layer cap stack ($7 task / $10 day / $20 month), reads/writes the rolling spend ledger, and returns a structured `ResearchResult` with full citation metadata.
+- `vault/00_inbox/gemini-research-queue.md` — new queue file for Gemini DR tasks (same `- [ ] question` format as `research-queue.md`).
+- `vault/health/gemini-spend-{YYYY-MM}.json` — rolling spend ledger (created on first call by `gemini_dr.py`; format: `{date, task_id, model, cost_usd, query_slug}[]`).
+- `agents-sdk/schedules/com.sean.agent.gemini-researcher.plist` — launchd plist for nightly 03:30 execution. Committed to repo but **not loaded** by `install_schedules.sh` without `INSTALL_GEMINI=1` opt-in gate.
+- Keychain entries: `com.sean.agents.gemini_api_key` (Gemini DR), `openai_api_key`, `openrouter_api_key` — stashed in macOS Keychain during Phase 0 setup.
+- `[gemini]`, `[gemini.budget]`, `[agents.gemini_researcher]` config blocks in `agents-sdk/config.toml`.
+- `google-genai>=1.74.0,<2.0.0` dependency added to `agents-sdk/pyproject.toml`.
+- 49 new pytest tests: 32 in `tests/test_gemini_dr.py` (cap enforcement, ledger I/O, error paths), 17 in `tests/test_gemini_researcher.py` (agent lifecycle, queue parsing, result writing). Full pytest suite `239 → 288` (+49).
+- `vault/90_system/agent-logs/gemini-baseline-2026-05-03.txt` — pre-integration baseline diagnostic (Keychain verification, API reachability, model listing, cap-stack smoke test).
+
+### Changed
+
+- `.claude/skills/last30days/SKILL.md` — appended a 1-line cross-reference to `gemini-deep-research` under a new `## Related` section.
+- `.claude/skills/deep-research-queue/SKILL.md` — appended a 1-line cross-reference to `gemini-deep-research` in the existing `## Related` section.
+- `agents-sdk/schedules/install_schedules.sh` — added `INSTALL_GEMINI=1` opt-in gate: the `gemini-researcher` plist is loaded only when the env var is present, keeping the agent disabled-by-default without requiring a separate file deletion.
+
+### Notes
+
+- **Stream A queue load + 5-night execution** (running `gemini_researcher` on a live populated queue for five consecutive nights to validate cap enforcement in production) is parked as a follow-up maintenance task. The ledger and caps mean worst-case scenario is $10/day even on queue-stuffing accidents.
+- **v1 direct-SDK path is intentional.** Phase 0 inventory found no Gemini CLI extensions in the existing MCP/tool chain (per plan D9). The `google-genai` SDK is the cleanest integration point and avoids the headless-MCP limitation that affects other agents.
+
+---
+
 ## [3.24.0] - 2026-05-03
 
 New universal image-generation skill — `gemini-image-gen` — added to `.claude/skills/`. Catch-all generator that wraps Google Gemini's Nano Banana 2 (`gemini-3.1-flash-image-preview`) for any image type that is NOT pixel art or pencil animation (those remain on the specialized `gemini-pixel-image-gen` and `gemini-pencil-animation-image-gen` skills). Optimizes user prompts via the 7-Layer Prompt Framework before calling the API. Skill includes its own `scripts/` and `references/` (e.g., `nano-banana-2-capabilities.md`, `universal-prompt-templates.md`).

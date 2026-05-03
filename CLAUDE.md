@@ -4,7 +4,7 @@ This is Sean's personal command center — a second brain for Claude Code.
 
 ## What This Repo Is
 
-116 skills, 13 Claude Code subagents, 13 hooks, 13 autonomous SDK agents (7 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
+117 skills, 13 Claude Code subagents, 13 hooks, 14 autonomous SDK agents (7 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
 
 As of v3.15.0, the repo is organized so that domain-owned folders live inside their domain. `the-block/` is Sean's day-job workspace (with `product-management/` nested inside). `creative-studio/` owns 16BitFit and the design-team workspace. `life-systems/` owns personal systems. Cross-cutting infra (`.claude/`, `agents-sdk/`, `vault/`, `claude-mastery/`, installer dirs) stays at root.
 
@@ -58,6 +58,10 @@ Skills and agents prefer native MCPs over Zapier. When both exist, always use na
 
 **Calendar rule:** Always query BOTH `sean.winslow28@gmail.com` AND `swinslow@theblock.co` in parallel.
 
+## Connected External Research APIs
+
+**Gemini Deep Research** is available via `agents-sdk/scripts/gemini_dr.py` (wrapping the `google-genai` SDK) and the `.claude/skills/gemini-deep-research` skill. The API key is stored in macOS Keychain as `com.sean.agents.gemini_api_key`. Use the `gemini-deep-research` skill to decide when to delegate to Gemini DR vs. run a local LDR query. Cost is self-policing: $7 per-task hard cap, $10 per-day circuit breaker, $20 per-month governor — tracked in `vault/health/gemini-spend-{YYYY-MM}.json`. The autonomous agent (`gemini_researcher.py`) is default disabled; opt in with `INSTALL_GEMINI=1` when running `install_schedules.sh`.
+
 ## Commands
 
 ```bash
@@ -74,7 +78,7 @@ python3 scripts/validate.py
 
 The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Claude Agent SDK. These run **outside** Claude Code sessions on macOS launchd schedules. Skills are loaded as system prompts — no duplication.
 
-**Active agents (7 of 13):**
+**Active agents (7 of 14):**
 
 | Agent | Schedule | Skills/Model | Cost/Run |
 |-------|----------|---------------|----------|
@@ -85,6 +89,7 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Cla
 | Daily Driver (morning) | 8:45 AM daily | daily-driver, vault-read-write + operating-model HEARTBEAT awareness (v3.16.0) | ~$0.40 (cap $0.60) |
 | Knowledge Lint | Sunday 22:00 | Tier 1 structural Python checks (Mac Mini); Tier 2 Qwen3-14B on MBP if awake; + 3-domain SOUL context for `soul-tier-a-conflict` issue kind (v3.17.0) | $0.00 (local) |
 | Flush (SessionEnd) | hook-triggered | gemma4:e4b on Mac Mini via `inbox_triage` routing for <100-msg sessions; ≥100-msg sessions attempt Qwen3-14B on MBP if awake; + 3-domain SOUL prepend (v3.17.0) | $0.00 (local) |
+| Gemini Researcher (NEW, **default disabled**) | 03:30 daily (when opted in via `INSTALL_GEMINI=1`) | Gemini Deep Research / DR Max via `gemini_dr.run` | $0–7/run; capped $7 task / $10 day / $20 month |
 
 **Process Inbox: paused 2026-04-29 (v3.17.4) pending Path B rewrite to local `gemma4:e4b`.** Cloud-Sonnet path validated as functionally working (~3 files/run) but cost-inefficient ($1.16/file vs $0/file local). Manual triage via the `process-inbox` skill in an interactive Claude Code session is the working alternative. See `agents-sdk/AUDIT-2026-04-28-process-inbox-reenable.md` for full history + Path B scope.
 
@@ -127,8 +132,8 @@ Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key ne
 
 ```
 .claude/
-├── skills/          # ALL 116 skills (canonical, auto-loaded)
-├── agents/          # ALL 13 agents (8 domain + 5 design team) — Claude Code subagents, separate from the 13 SDK agents
+├── skills/          # ALL 117 skills (canonical, auto-loaded)
+├── agents/          # ALL 13 agents (8 domain + 5 design team) — Claude Code subagents, separate from the 14 SDK agents
 ├── hooks/           # 13 hooks (block-secrets, cost-watchdog, daily-note-appender,
 │                    #           format-on-edit, log-tool-use, loop-detector,
 │                    #           network-access-control, pre-compact-flush,
