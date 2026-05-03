@@ -8,9 +8,11 @@ created: 2026-04-26
 description: "Learn how agent harnesses transform AI models into autonomous work engines. Explore core components: filesystems, sandboxes, and memory."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "topic/agent-harness"
+type: reference
+status: active
+domain: [claude-mastery]
+ai-context: "LangChain's Vivek Trivedy on Agent = Model + Harness — derives core harness components (planning, subagent spawning, filesystems, sandboxes, memory) by working backwards from desired behavior; conceptual baseline for evaluating Sean's agents-sdk vs Hermes."
 ---
 ## Key Takeaways
 
