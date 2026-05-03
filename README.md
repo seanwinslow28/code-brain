@@ -1,6 +1,6 @@
 # Claude Code Superuser Pack
 
-A personal command center and second brain for Claude Code. 114 skills, 13 Claude Code subagents, 13 hooks, 13 autonomous SDK agents (7 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
+A personal command center and second brain for Claude Code. 115 skills, 13 Claude Code subagents, 13 hooks, 13 autonomous SDK agents (7 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
 
 ## What's Inside
 
@@ -40,7 +40,7 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the [Cl
 |-------|----------|-------------|
 | Vault Indexer | 2:00 AM daily | Incremental nomic-embed-text index of all vault notes |
 | Vault Synthesizer | 2:30 AM daily | Generates concept + connection articles from changed vault files (100% local, Qwen3-14B on MBP when awake; intermittent since v3.14.3) |
-| Deep Researcher (v3.17.0) | 2:45 AM daily | Pulls one question from `vault/00_inbox/research-queue.md`, runs LearningCircuit LDR locally (SearXNG + Qwen3-14B MLX on MBP `:5050`), writes a topical note + injects digest into today's daily note. 100% local, $0/run |
+| Deep Researcher (v3.23.0) | 2:45 AM daily | Pulls one question from `vault/00_inbox/research-queue.md`, runs LearningCircuit LDR locally (SearXNG + Qwen3-14B GGUF Q4_K_M `qwen3-14b-research:latest` Modelfile via Ollama on **Mac Mini** `:5050`), writes a topical note + injects digest into today's daily note. 100% local, $0/run |
 | Meta-Agent | 8:35 AM daily | Fleet self-monitoring — checks active-agent recency + infra health, writes fleet-status note that feeds Daily Driver |
 | Daily Driver (morning) | 8:45 AM | Read yesterday's note, create today's, write 1-3-5 priorities, surface Vault Health + fleet alerts. v3.16.0: loads operating-model HEARTBEATs for all 3 domains + on-demand USER/SOUL/schedule-recs reads |
 | Knowledge Lint | Sunday 22:00 | Two-tier vault health scan (structural + semantic). Reports surface in the morning brief. |
@@ -84,7 +84,7 @@ Skills and agents prefer native MCPs over Zapier where both exist. Currently con
 
 Zapier retained only for services with no native MCP: Salesforce, GA4, Webhooks, Code execution.
 
-### 114 Skills Across 12 Export Groups
+### 115 Skills Across 12 Export Groups
 
 All skills auto-load from `.claude/skills/`. Reference them naturally in prompts.
 

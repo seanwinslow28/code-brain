@@ -4,7 +4,7 @@ This is Sean's personal command center — a second brain for Claude Code.
 
 ## What This Repo Is
 
-114 skills, 13 Claude Code subagents, 13 hooks, 13 autonomous SDK agents (7 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
+115 skills, 13 Claude Code subagents, 13 hooks, 13 autonomous SDK agents (7 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
 
 As of v3.15.0, the repo is organized so that domain-owned folders live inside their domain. `the-block/` is Sean's day-job workspace (with `product-management/` nested inside). `creative-studio/` owns 16BitFit and the design-team workspace. `life-systems/` owns personal systems. Cross-cutting infra (`.claude/`, `agents-sdk/`, `vault/`, `claude-mastery/`, installer dirs) stays at root.
 
@@ -80,7 +80,7 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Cla
 |-------|----------|---------------|----------|
 | Vault Indexer | 2:00 AM daily | nomic-embed-text (Mac Mini Ollama) | $0.00 (local) |
 | Vault Synthesizer | 2:30 AM daily | Qwen3-14B on MBP (intermittent — succeeds only when MBP awake; v3.14.3 retired WOL) | $0.00 (local) |
-| Deep Researcher (v3.21.0) | 2:45 AM daily | LDR + SearXNG + Qwen3-14B MLX on MBP via `localhost:5050` | $0.00 (local) |
+| Deep Researcher (v3.23.0) | 2:45 AM daily | LDR + SearXNG + Qwen3-14B GGUF (Q4_K_M, `qwen3-14b-research:latest` Modelfile with `/no_think` patched into TEMPLATE) via Ollama on **Mac Mini** at `localhost:5050` | $0.00 (local) |
 | Meta-Agent (fleet health) | 8:35 AM daily | gemma4:e4b (Mac Mini Ollama) for domain-aware insights summary + local health checks; + schedule-recommendations context (v3.17.0) | $0.00 (local) |
 | Daily Driver (morning) | 8:45 AM daily | daily-driver, vault-read-write + operating-model HEARTBEAT awareness (v3.16.0) | ~$0.40 (cap $0.60) |
 | Knowledge Lint | Sunday 22:00 | Tier 1 structural Python checks (Mac Mini); Tier 2 Qwen3-14B on MBP if awake; + 3-domain SOUL context for `soul-tier-a-conflict` issue kind (v3.17.0) | $0.00 (local) |
@@ -127,7 +127,7 @@ Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key ne
 
 ```
 .claude/
-├── skills/          # ALL 114 skills (canonical, auto-loaded)
+├── skills/          # ALL 115 skills (canonical, auto-loaded)
 ├── agents/          # ALL 13 agents (8 domain + 5 design team) — Claude Code subagents, separate from the 13 SDK agents
 ├── hooks/           # 13 hooks (block-secrets, cost-watchdog, daily-note-appender,
 │                    #           format-on-edit, log-tool-use, loop-detector,
