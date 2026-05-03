@@ -3,7 +3,7 @@ type: plan
 domain:
   - claude-mastery
   - life-systems
-status: proposed
+status: in-progress
 context: superuser-pack
 created: 2026-05-03
 source: claude-code-plan-mode
