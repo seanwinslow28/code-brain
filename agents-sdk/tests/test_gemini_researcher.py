@@ -263,6 +263,10 @@ def test_mark_done_rewrites_queue_line(tmp_path: Path):
     assert "[[" in content and "]]" in content
     # "done" with timestamp must be present
     assert "done" in content
+    # C1: wikilink must be vault-relative (no "vault/" prefix inside the brackets)
+    assert "20_projects/research/" in content
+    assert "vault/20_projects" not in content  # guard against repo-relative regression
+    assert "[[20_projects/research/" in content  # exact vault-relative wikilink prefix
 
 
 def test_mark_done_not_called_on_empty_queue(tmp_path: Path):
@@ -344,6 +348,14 @@ def test_cli_tier_dr_overrides_queue_marker_max(tmp_path: Path):
     assert captured.get("tier") == "dr", (
         f"CLI --tier dr should override queue marker, got {captured.get('tier')!r}"
     )
+    # I1: query must NOT contain the tier marker — raw queue item was "tier: max Extended..."
+    captured_query = captured.get("query", "")
+    assert "tier:" not in captured_query, (
+        f"CLI --tier override must strip marker from query, got {captured_query!r}"
+    )
+    assert "Extended synthesis question" in captured_query, (
+        f"Query should contain the question text, got {captured_query!r}"
+    )
 
 
 # ─── 8. no_confirm=True is always passed ─────────────────────────────────────
@@ -399,6 +411,41 @@ def test_dry_run_no_api_call_no_vault_write(tmp_path: Path):
     assert result == 0
     assert len(run_calls) == 0, "Dry run must not call gemini_dr.run"
     assert queue.read_text(encoding="utf-8") == original_content, "Dry run must not modify queue"
+
+
+# ─── 10. Marker-only queue line refused (m3) ─────────────────────────────────
+
+
+def test_marker_only_query_refuses(tmp_path: Path):
+    """Queue line with only a tier marker and no question text exits non-zero.
+
+    A line like '- [ ] tier: dr-max' strips to an empty query — the agent
+    must refuse with status='empty-query' rather than sending garbage to the API.
+    """
+    queue = _make_queue(tmp_path, ["tier: dr-max"])
+    mock_config = _make_config(tmp_path, queue, enabled=True)
+
+    run_calls = []
+
+    with (
+        patch("agents.gemini_researcher.load_config", return_value=mock_config),
+        patch("agents.gemini_researcher.setup_logger", return_value=MagicMock()),
+        patch("agents.gemini_researcher.record_run") as mock_record,
+        patch("agents.gemini_researcher.run_research", side_effect=lambda **kw: run_calls.append(kw) or 0),
+        patch("builtins.open", side_effect=_patch_open_for_toml(tmp_path)),
+    ):
+        from agents.gemini_researcher import run
+        result = run(mode="queue", dry_run=False)
+
+    # Must exit non-zero (2 = usage/guard refusal)
+    assert result != 0, f"Marker-only queue item should refuse, but exited {result}"
+    # Must NOT have called run_research — no API spend
+    assert len(run_calls) == 0, "run_research must not be called for marker-only queue item"
+    # Must have recorded status=empty-query in the CSV log
+    assert mock_record.called, "record_run should be called even on refusal"
+    args, kwargs = mock_record.call_args
+    status = kwargs.get("status") or args[3]
+    assert status == "empty-query", f"Expected status='empty-query', got {status!r}"
 
 
 # ─── Helpers for config.toml mocking ─────────────────────────────────────────

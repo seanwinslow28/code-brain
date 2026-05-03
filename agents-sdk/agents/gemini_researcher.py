@@ -76,7 +76,7 @@ def _extract_tier(queue_item: str, default_tier: str) -> tuple[str, str]:
         tier = _TIER_MAP.get(raw, default_tier)
         # Strip the tier marker from the query
         clean = _TIER_PATTERN.sub("", queue_item).strip().strip("-").strip()
-        return tier, clean or queue_item
+        return tier, clean  # may be empty string — caller must guard
     return default_tier, queue_item
 
 
@@ -96,8 +96,10 @@ def _mark_done(
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
     today = date.today().isoformat()
     slug = slugify(query)
-    # Relative wikilink matching gemini_dr output path
-    rel_link = f"vault/20_projects/research/{today}-{slug}"
+    # Vault-relative wikilink — Obsidian resolves [[wikilinks]] relative to
+    # vault root, so we must strip the leading "vault/" prefix.
+    topical_path = vault_root / "20_projects" / "research" / f"{today}-{slug}.md"
+    rel_link = topical_path.relative_to(vault_root).with_suffix("").as_posix()
     note_link = f"[[{rel_link}]]"
     needle = re.compile(
         r"^(\s*-\s*\[)\s(\]\s+" + re.escape(queue_item) + r")\s*$",
@@ -158,12 +160,25 @@ def run(
             )
             return 0
 
-        # CLI --tier flag overrides the queue marker for one-off queue runs too
+        # CLI --tier flag overrides the queue marker for one-off queue runs too.
+        # Always strip the tier marker from the queue item so the API receives
+        # a clean question (not "tier: max Extended question...").
         if cli_tier:
             tier = _TIER_MAP.get(cli_tier, cli_tier)
-            query = queue_item
+            _, query = _extract_tier(queue_item, default_tier)  # strip marker; ignore extracted tier
         else:
             tier, query = _extract_tier(queue_item, default_tier)
+
+    # Guard against marker-only queue lines (e.g. "tier: dr-max" with no question).
+    # _extract_tier returns empty string in that case — refuse rather than waste spend.
+    if not query:
+        logger.error(f"Queue item has no query after stripping tier marker: {queue_item!r}")
+        record_run(
+            config.log_dir, AGENT_NAME, mode,
+            status="empty-query", cost_usd=0.0, duration_ms=0, turns=0,
+            notes=f"queue item: {queue_item!r}",
+        )
+        return 2
 
     logger.info(f"Selected query: {query!r}  tier={tier}  mode={mode}")
 
