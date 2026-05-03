@@ -450,6 +450,45 @@ def test_polling_happy_path():
     assert mock_client.interactions.get.call_count == 3
 
 
+def test_polling_concatenates_multiple_text_outputs():
+    """Regression for Phase 4 night 1 TD5 bug: Deep Research returns
+    [ThoughtContent (no text), TextContent (answer), TextContent (sources)].
+    Helper must concatenate ALL .text-bearing outputs; earlier code grabbed
+    outputs[-1] which lost the answer body. See Phase 4 handoff TD5."""
+    mock_client = MagicMock()
+
+    completed = MagicMock()
+    completed.status = "completed"
+
+    thought = MagicMock(spec=['summary', 'type'])  # no .text
+    answer = MagicMock()
+    answer.text = "# The Answer\n\nThis is the actual research body."
+    sources = MagicMock()
+    sources.text = "**Sources:**\n1. example.com"
+
+    completed.outputs = [thought, answer, sources]
+    completed.usage = None
+    mock_client.interactions.get.return_value = completed
+
+    import logging
+    logger = logging.getLogger("test")
+
+    with patch("time.sleep"):
+        status, report_text, usage = poll_interaction(
+            mock_client,
+            interaction_id="test-iid",
+            poll_interval=0,
+            max_poll_seconds=60,
+            logger=logger,
+        )
+
+    assert status == "completed"
+    assert "The Answer" in report_text
+    assert "actual research body" in report_text
+    assert "Sources:" in report_text
+    assert report_text == "# The Answer\n\nThis is the actual research body.\n\n**Sources:**\n1. example.com"
+
+
 # ─── 9. Polling — timeout ────────────────────────────────────────────────────
 
 
