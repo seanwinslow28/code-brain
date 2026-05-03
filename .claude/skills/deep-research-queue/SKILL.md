@@ -141,3 +141,4 @@ Skill action:
 - Plan: `vault/20_projects/prj-superuser-pack/open-source-deep-research/macmini-migration-plan-2026-05-02.md`
 - Sibling skill: `research-synthesis` (synthesizes EXISTING research artifacts; this skill QUEUES new research)
 - Anchor target in daily note: `<!-- research-digest -->` at `vault/90_system/templates/tpl-daily.md:37`
+- For paid cloud research (Gemini DR / DR Max) when local LDR is too thin, see `gemini-deep-research`.
