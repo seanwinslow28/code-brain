@@ -7,7 +7,6 @@
   ],
   "skills": [
     "analytics-workarounds",
-    "gemini-deep-research",
     "ticket-batch",
     "tech-spec",
     "technical-writing",
@@ -15,6 +14,7 @@
     "decision-doc",
     "data-analysis",
     "deep-research-queue",
+    "gemini-deep-research",
     "doc-workflows",
     "jira-automation",
     "prd-generator",
