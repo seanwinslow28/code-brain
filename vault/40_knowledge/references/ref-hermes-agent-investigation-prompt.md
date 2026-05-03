@@ -1,3 +1,15 @@
+---
+title: "Hermes Agent Investigation — Claude Code Prompt"
+type: reference
+status: active
+domain: [claude-mastery]
+tags:
+  - "type/prompt-template"
+  - "topic/agents-sdk"
+created: 2026-05-02
+ai-context: "Reusable Claude Code prompt (Plan Mode + Extended Thinking) for investigating NousResearch/hermes-agent and producing an evidence-based integration plan against Sean's agents-sdk; complements ref-langchain-anatomy-of-agent-harness."
+---
+
 # Hermes Agent Investigation — Claude Code Prompt
 
 > **How to use:** Open Claude Code in the `claude-code-superuser-pack/` repo root.

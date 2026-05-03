@@ -9,5 +9,6 @@ Drop research questions here as `- [ ] question`. The nightly `deep-researcher` 
 
 ## Pending
 
+- [x] What are the practical differences between Ollama Modelfile SYSTEM prompts and runtime system messages for Qwen3? — done 2026-05-03 10:52 → [[20_projects/research/2026-05-03-what-are-the-practical-differences-between-ollama-modelfile]]
 - [x] What are the key differences between Apple's MLX and GGUF formats for 14B LLMs in 2026? — done 2026-04-26 09:56 → [[20_projects/research/2026-04-26-what-are-the-key-differences-between-apples-mlx-and-gguf-for]]
 ## Done
