@@ -250,6 +250,8 @@ deep_research = { model = "qwen3-14b", machine = "macbook_pro" }
 
 ## 5. Migration to Mac Mini (later)
 
+> **2026-05-02:** Migration plan written and saved as a sibling doc — see [[macmini-migration-plan-2026-05-02]]. That plan supersedes this section's high-level table with a phased execution plan, a 24 GB memory headroom budget, and a re-scoped Phase 7 model A/B (Qwen3.6 27B / Gemma 4 26B / Ministral 3 14B) calibrated against the current Ollama landscape. Read it before kicking off the migration. The summary table below remains useful as a quick "what changes between machines" reference.
+
 Mac Mini is the always-on agent driver, has 24 GB unified memory and runs Ollama (per `config.toml`). What changes:
 
 | Concern | MBP today | Mac Mini target |

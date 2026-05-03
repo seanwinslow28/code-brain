@@ -5,6 +5,47 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.23.0] - 2026-05-03
+
+Mac Mini migration of the v3.21.0 deep-research stack — the autonomous `deep_researcher` agent now runs nightly at 02:45 on the always-on Mac Mini (M4 Pro, 24 GB) instead of the intermittently-available MBP. Same shipped Python agent (`agents-sdk/agents/deep_researcher.py`), same plist, same vault anchors — but the runtime layer swaps **LM Studio + MLX** for **Ollama + GGUF (Q4_K_M)** to fit the Mac Mini's 24 GB ceiling. New `deep-research-queue` skill teaches Claude how to add good queries during interactive sessions. Plan: `vault/20_projects/prj-superuser-pack/open-source-deep-research/macmini-migration-plan-2026-05-02.md`.
+
+### Added
+
+- `.claude/skills/deep-research-queue/SKILL.md` — interactive write-side companion to the autonomous agent. Decision tree for "queue vs answer in session", question-quality rules, anti-patterns, expected behavior post-queue. Allowed tools: `Read`, `Edit` on `vault/00_inbox/research-queue.md` only. Skill count `114 → 115`.
+- Mac Mini SearXNG container — `searxng/searxng:latest` on `:8080` with `--restart unless-stopped` and `formats: [html, json]` enabled. Settings volume at `~/Code-Brain/local-deep-research-stack/searxng-settings/`.
+- Mac Mini Ollama model `qwen3-14b-research:latest` — built via `ollama create -f qwen3-14b-research.Modelfile`. Custom TEMPLATE patches the stock `qwen3:14b` chat template to **unconditionally** inject `/no_think` at the end of the last user message and pre-fill an empty `<think></think>` block in the assistant prefix. This makes the model behave as non-thinking by default for ANY caller (including LDR, which doesn't pass the `think` API field). `PARAMETER think false` is not supported in Ollama 0.22.1. Modelfile + base config at `~/Code-Brain/local-deep-research-stack/qwen3-14b-research.Modelfile`.
+- Mac Mini LDR v1.5.6 install at `~/Code-Brain/local-deep-research-stack/.venv/` (Python 3.11 via `uv venv`; `uv pip install "local-deep-research[mcp]"`).
+- Mac Mini macOS Keychain entries: `com.sean.agents.ldr_username` (= `sean`) and `com.sean.agents.ldr_password` (40-char strong, generated at install time).
+- `~/Code-Brain/local-deep-research-stack/configure_ldr.py` — one-shot Python helper that logs into LDR via REST and applies the seven required settings. Mirrors the agent's CSRF + cookie dance. Idempotent; skips already-correct values.
+- `~/Code-Brain/local-deep-research-stack/bin/ldr-mcp-wrapper.py` — Mac Mini variant of the v3.21.0 MBP wrapper, swapping `LMSTUDIO + qwen3-14b` overrides for `OLLAMA + qwen3-14b-research:latest`. Monkey-patches `local_deep_research.api.settings_utils.create_settings_snapshot` BEFORE importing `local_deep_research.mcp.server` so the bound symbol picks up our patched version. 8 tools exposed (`quick_research`, `detailed_research`, `generate_report`, `analyze_documents`, `search`, `list_search_engines`, `list_strategies`, `get_configuration`); FastMCP 1.27.0.
+- `~/Library/LaunchAgents/com.sean.agent.deep-researcher.plist` — symlink to `agents-sdk/schedules/com.sean.agent.deep-researcher.plist`. Loaded via `launchctl load`. Sean.agent loaded count: `11 → 12`.
+- `vault/90_system/agent-logs/macmini-deepresearch-baseline-2026-05-02.txt` — pre-install Mac Mini state snapshot + every execution delta hit during install (Modelfile thinking-mode patch, LDR settings-key schema shift in v1.5.6, exact-match model lookup needing `:latest` suffix, auth rate limiter, register-form `acknowledge=true` value).
+- `vault/20_projects/prj-superuser-pack/open-source-deep-research/macmini-migration-plan-2026-05-02.md` — the source-of-truth migration plan (v3.23.0 §9 below appends execution deltas inline).
+
+### Changed
+
+- `agents-sdk/config.toml:153` — `[agents.deep_researcher].target_machine` `"macbook_pro" → "mac_mini"`. Honest reflection of where the agent now runs (the agent itself talks to `localhost:5050` regardless of host; this field is informational).
+- `agents-sdk/config.toml:263` — `[routing.task_map].deep_research` model `"qwen3-14b" → "qwen3-14b-research"`, machine `"macbook_pro" → "mac_mini"`. Trail comment updated to v3.23.0.
+- `agents-sdk/agents/deep_researcher.py:96` — topical-note frontmatter attribution string `"model qwen3-14b" → "model qwen3-14b-research"` so reports are honestly attributed to the patched Modelfile tag.
+- `CLAUDE.md` — header skill count `114 → 115`; architecture comment `(114 skills) → (115 skills)`; `Deep Researcher` row in the active-SDK-agents table updated from `Qwen3-14B MLX on MBP` to `Qwen3-14B GGUF (Q4_K_M, qwen3-14b-research Modelfile) via Ollama on Mac Mini`, version bumped `v3.21.0 → v3.23.0`.
+- `README.md` — header skill count `114 → 115`; "### 114 Skills Across 12 Export Groups" → "### 115 Skills Across 12 Export Groups".
+- `export-groups/02-pm-workflows/playground.json` — added `"deep-research-queue"` to the skills list, sibling to `"research-synthesis"` (alphabetical insertion).
+
+### Notes
+
+- **Memory headroom budget on 24 GB:** plan §1 documents the math — peak ~22 GB during the LDR run (14B model + KV cache + Docker/SearXNG + Ollama daemon + macOS), ~1.4-1.9 GB margin. Schedule chosen for zero overlap with other Mac-Mini-resident agents (vault-indexer 02:00 finishes by 02:15; deep-researcher 02:45 caps at 15 min so frees by ~03:00; meta-agent 06:30 is 4 hr later; daily-driver morning 08:45 is 5 hr later). Future operators adding any agent in 02:00-04:00 must re-run this math.
+- **Q4_K_M, not Q5_K_M:** the Ollama registry's `qwen3:14b` tag is Q4_K_M (≈9.3 GB) by default; no separate Q5_K_M tag is exposed. Q4 actually gives more headroom than the plan's Q5 estimate (~3 GB peak vs ~1.9 GB); strictly safer.
+- **The MBP install is intentionally NOT decommissioned.** Per plan "Out of Scope" — MBP setup remains as ad-hoc-daytime fallback (e.g., MCP from a session opened on MBP). Re-evaluate after 30 days of clean Mac Mini schedule history.
+- **MCP wrapper maintenance debt** carries over from v3.21.0 — it monkey-patches LDR's internal `settings_utils` module. After every `pip install --upgrade local-deep-research`, re-run a wrapper smoke query and confirm the model name in the response metadata still reads `qwen3-14b-research:latest`.
+
+### Verified at install time
+
+- Phase 4 oneshot smoke test: `Compare GGUF vs MLX inference speed on Apple M4 Pro for 14B-class language models` → 1014 words, 23 distinct citations, 8 numeric tok/s figures, 0 `<think>` tags, **wall 217s** (well under plan's 8-14 min budget — patched Modelfile suppresses thinking entirely, so no reasoning overhead).
+- Phase 8 launchd manual fire on empty queue → `agent-run-history.csv` row `2026-05-03,10:16:50,deep-researcher,queue,empty-queue,0.0000,,,no unchecked items` confirms launchd → venv python3 → agent → `record_run` path is wired.
+- Phase 9 stdio handshake against `ldr-mcp-wrapper.py` → MCP `initialize` returns FastMCP 1.27.0; `tools/list` returns 8 tools; default snapshot reflects all five Mac Mini overrides.
+
+---
+
 ## [3.22.0] - 2026-05-02
 
 Tier-0 personal-context refresh — `Sean-Winslow-Full-Personal-Context` bumped from v1.1 → v2.0 via the interview-driven workflow in [personal-context-v2-interview-prompt.md](personal-context-v2-interview-prompt.md). v2.0 lives at a single canonical path inside the vault; v1.1 archived alongside historical profiles.

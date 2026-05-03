@@ -1,0 +1,155 @@
+Mac Mini Deep Research baseline — 2026-05-02
+==============================================
+Captured at start of Mac Mini migration of v3.21.0 deep-research stack.
+
+Host
+----
+hostname:  Seans-Mac-mini.local
+hw.model:  Mac16,11 (M4 Pro)
+hw.memsize: 25,769,803,776 bytes (24.0 GiB)
+LAN IP (en0): 192.168.68.200   (matches config.toml:212 [routing.machines.mac_mini].host)
+
+Disk
+----
+/ free: 146 GiB on /dev/disk3s1s1 (8% used)
+
+Working tree
+------------
+branch: main, in sync with origin/main
+modified: vault/20_projects/prj-superuser-pack/open-source-deep-research/you-are-a-senior-modular-pelican.md
+untracked: vault/20_projects/prj-superuser-pack/open-source-deep-research/macmini-migration-plan-2026-05-02.md
+(Both files predate this session — left in place from plan-writing session.)
+
+Toolchain
+---------
+docker:   29.3.1 daemon up
+ollama:   serving on :11434
+          installed models: gemma4:e4b (9.6 GB), gemma4:26b (17 GB),
+                            nomic-embed-text:latest (274 MB), phi4-mini-reasoning:latest (3.2 GB)
+          qwen3:14b: ABSENT — Phase 2 will pull
+uv:       0.10.3 at ~/.local/bin/uv
+python3.11: NOT on PATH — Phase 3 will use `uv venv --python 3.11`
+
+LDR install
+-----------
+~/Code-Brain/local-deep-research-stack/: does not exist (fresh install in Phase 3)
+
+launchd
+-------
+12 com.sean.agent.* plists in ~/Library/LaunchAgents/, 11 loaded.
+Mismatch: meeting-defender.plist on disk but unloaded — matches CLAUDE.md's
+note that meeting_defender was retired 2026-04-27 (Daily Driver morning
+covers calendar surfacing). Stale symlink, not a blocker for this migration.
+
+deep-researcher: NOT loaded (expected — plist exists in repo but not symlinked).
+
+vm_stat baseline (16 KB page size — Apple Silicon)
+--------------------------------------------------
+                       pages       MB
+free                    3,965       62
+active                325,536    5,086    ← part of resident
+inactive              318,625    4,978    ← reclaimable
+speculative             6,364       99    ← reclaimable
+wired                 229,277    3,582    ← part of resident
+
+Resident (active+wired):  ~8,668 MB ≈ 8.5 GB
+Readily reclaimable:      ~5,140 MB ≈ 5.0 GB
+Effective baseline RSS:   ~8.5 GB  (matches plan §1 estimate of ~8.7 GB)
+
+Notes vs plan
+-------------
+- Plan §1 lists "vm_stat | head -10 — record baseline free pages × 4 KB". On
+  Apple Silicon page size is 16 KB, not 4 KB. Conclusion (~8.7 GB baseline,
+  ~22 GB peak under 14B+KV+Docker, ~1.9 GB headroom) holds.
+- gemma4:26b already on disk uses ~17 GB — Phase 2 won't conflict; the
+  qwen3:14b pull (~10 GB) lands on top of plenty of free disk (146 GB).
+- Memory peak math validated: 24 GB - 8.5 GB baseline = 15.5 GB margin
+  going into the LDR run; subtract 10.5 GB qwen3-14b Q5 + 2.5 GB KV cache
+  + 0.6 GB LDR venv + 0.2 GB agent + 0.3 GB SearXNG = 14.1 GB needed.
+  Headroom during peak: ~1.4 GB. Tight but consistent with plan estimate.
+
+Phase 0 status: PASS. Proceeding to Phase 1.
+
+Phase 2 execution delta (2026-05-02 13:24)
+------------------------------------------
+The plan §3 Phase 2 Modelfile spec used `SYSTEM """/no_think"""`. On Ollama
+0.22.1 this does NOT disable Qwen3's thinking mode. Ollama models thinking as
+a separate top-level `thinking` field on the chat response, not as inline
+`<think>` tags. The qwen3:14b stock template injects `/no_think` ONLY when
+the API request includes `"think": false` — generic Ollama clients (LDR
+included) don't pass that field, so the model defaults to thinking ON.
+
+First two test calls measured: 502 then 330 tokens generated for a "say hi
+in 5 words" prompt, all routed to a `thinking` field hidden from the user.
+Wall time ~21s and ~14s respectively at 24 tok/s. For a 4-call research
+synthesis run that's ~80s of pure thinking overhead per query.
+
+Fix: patched the Modelfile to (a) unconditionally append `/no_think` at the
+end of the last user message, and (b) pre-fill an empty `<think></think>`
+block in the assistant prefix. This makes the model behave as non-thinking
+by default for ANY caller, regardless of whether they pass the `think` API
+field. `PARAMETER think false` is not supported in Ollama 0.22.1 (returns
+"unknown parameter 'think'").
+
+Post-patch verification:
+  * "Say hi in 5 words" → "Hello, how are you today?" — 8 tokens, 282 ms,
+    28.4 tok/s, thinking field empty.
+  * "What is the capital of France?" → "The capital of France is Paris." —
+    8 tokens, no thinking.
+
+Tok/s 28.4 is within plan §3 Phase 2 expectation (25-35 on M4 base, faster
+on M4 Pro). The Modelfile lives at:
+  ~/Code-Brain/local-deep-research-stack/qwen3-14b-research.Modelfile
+
+Add this finding as an execution delta to the macmini migration plan during
+Phase 10 doc updates (mirroring the v3.21.0 §8 "thinking mode at LM Studio"
+delta in you-are-a-senior-modular-pelican.md).
+
+Phase 3 execution deltas (2026-05-02 13:30-13:39)
+-------------------------------------------------
+1. SETTINGS KEY SCHEMA SHIFT (LDR v1.5.6).
+   Plan §3 Phase 3 step 8 listed `search.searxng_url` and
+   `search.max_results_per_query`. Both return HTTP 404 in v1.5.6 — the
+   per-engine schema moved them under
+   `search.engine.web.searxng.default_params.{instance_url,max_results}`.
+   Remaining keys (`llm.provider`, `llm.ollama.url`, `llm.model`,
+   `search.tool`, `search.iterations`) keep the plan's names.
+
+2. LLM.PROVIDER VALUE CASE.
+   The /settings/api/llm.provider options list uses lowercase "ollama"
+   even though LDR ships with the value defaulting to uppercase "OLLAMA".
+   Setting to "ollama" is accepted (HTTP 200) and matches the canonical
+   options-list value.
+
+3. LDR EXACT-MATCH MODEL LOOKUP.
+   Setting `llm.model = "qwen3-14b-research"` produces a research-start
+   failure at t≈4s with metadata.error =
+   "Model 'qwen3-14b-research' not found in Ollama". Ollama's /api/tags
+   reports the model as `qwen3-14b-research:latest` (the `:latest` suffix
+   is auto-appended on `ollama create`); LDR does an exact-string lookup,
+   so the bare name doesn't match. Setting `llm.model =
+   "qwen3-14b-research:latest"` succeeds. Recorded in configure_ldr.py
+   as the canonical value.
+
+4. AUTH RATE LIMITER (already documented in v3.21.0 §8).
+   Multiple login attempts during register-debug → HTTP 429 sliding window.
+   Cleared by `pkill -f ldr-web` + restart. Subsequent flow used a single
+   login + cookie reuse for all calls. Recorded as confirmed gotcha.
+
+5. CHECKBOX VALUE FORMAT.
+   The /auth/register form has `<input name="acknowledge" value="true">`.
+   `acknowledge=y` and `acknowledge=on` both yield HTTP 400 with "You must
+   acknowledge that password recovery is not possible". Only the literal
+   string `acknowledge=true` is accepted (matches the input's value attr).
+
+Phase 3 smoke result
+--------------------
+Query: "What is SearXNG and what is it used for?" (1 iteration, 1 q/iter)
+Wall time: 171s (within plan's "<5 min for quick research" target)
+Output: 810 words, 48 HTTP citations, 31 numbered sources, 0 <think> tags.
+Stack proven end-to-end: LDR → qwen3-14b-research → SearXNG → report.
+Phase 3 status: PASS.
+
+Credentials: ldr_username / ldr_password stored in macOS Keychain via
+agents-sdk/lib/keychain.py (overwriting any prior entries; Mac-Mini-local).
+
