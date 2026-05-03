@@ -95,3 +95,32 @@ Keychain entry) at the cost of less control over polling / cost
 gating / ledger writes.
 
 End of baseline.
+
+
+Phase 3 schedule check (2026-05-03, v3.25.0)
+=============================================
+Verified non-overlapping schedule for com.sean.agent.gemini-researcher (03:30 daily):
+
+  02:00  vault-indexer      Mac Mini / nomic-embed-text, ~15 min, frees ~02:15  ✓
+  02:30  vault-synthesizer   MBP (intermittent, local-only), ~45 min budget, frees ≤03:15  ✓
+  02:45  deep-researcher    Mac Mini / LDR + Qwen3-14B, 15-min cap, frees ≤03:00  ✓
+  03:30  gemini-researcher  NEW — pure cloud-API client (httpx polling loop only,
+                            ~0.2 GB local memory, NO local model loaded).
+                            Worst-case: 65 min poll ceiling → frees ≤04:35.     ✓
+  06:30  meta-agent         Mac Mini / gemma4:e4b, ~5 min — 1h55m gap after
+                            worst-case gemini-researcher finish.                 ✓
+  08:45  daily-driver (morning) — 4h15m gap after worst-case finish.            ✓
+
+Memory contention verdict:
+  gemini-researcher loads NO local model (pure httpx polling of Gemini cloud API).
+  Even if deep-researcher (02:45) overruns into 03:30, the 24 GB Mac Mini ceiling
+  math from macmini-migration-plan §1 is unaffected. The two agents never share
+  local VRAM at the same time.
+
+Default-disabled disposition:
+  - com.sean.agent.gemini-researcher.plist ships with RunAtLoad=false.
+  - install_schedules.sh skips this plist unless INSTALL_GEMINI=1 env var is set.
+  - [agents.gemini_researcher].enabled = false in config.toml (belt-and-suspenders).
+  - To opt in: edit config.toml (enabled=true), then INSTALL_GEMINI=1 ./schedules/install_schedules.sh
+
+End of Phase 3 schedule check.
