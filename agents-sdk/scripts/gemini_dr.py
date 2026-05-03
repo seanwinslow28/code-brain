@@ -49,9 +49,10 @@ from lib.vault_io import daily_note_path, inject_at_anchor
 AGENT_NAME = "gemini-dr"
 ANCHOR_FALLBACK_HEADING = "## Gemini Research"
 
-# Terminal statuses from the Interactions API (v1.74.0)
+# Terminal statuses from the Interactions API (v1.74.0).
+# Anything NOT in _TERMINAL_STATUSES is treated as still-running, including
+# unknown future status values (e.g. "queued", "requires_action", "running").
 _TERMINAL_STATUSES = {"completed", "failed", "cancelled", "incomplete"}
-_IN_PROGRESS_STATUSES = {"in_progress", "requires_action", "queued", "running"}
 
 
 # ─── Config loading ─────────────────────────────────────────────────────────
@@ -112,13 +113,17 @@ def ledger_totals(entries: list[dict], today_iso: str) -> tuple[float, float]:
     mtd = 0.0
     today_total = 0.0
     for entry in entries:
-        # Prefer actual > predicted > legacy single-field
-        cost = (
-            entry.get("cost_actual_usd")
-            or entry.get("cost_predicted_usd")
-            or entry.get("cost_usd")
-            or 0.0
-        )
+        # Prefer actual > predicted > legacy single-field.
+        # Use explicit is-not-None checks so that 0.0 (free/cancelled run) is
+        # treated as $0, not silently fallen through to the next field.
+        if entry.get("cost_actual_usd") is not None:
+            cost = entry["cost_actual_usd"]
+        elif entry.get("cost_predicted_usd") is not None:
+            cost = entry["cost_predicted_usd"]
+        elif entry.get("cost_usd") is not None:
+            cost = entry["cost_usd"]
+        else:
+            cost = 0.0
         created = entry.get("created", "")
         if created.startswith(month_prefix):
             mtd += cost
@@ -217,11 +222,15 @@ def append_ledger(
         entries = read_ledger(ledger_path)
         entries.append(entry)
         tmp_path = ledger_path.with_suffix(".tmp")
-        tmp_path.write_text(
-            json.dumps(entries, indent=2, default=str),
-            encoding="utf-8",
-        )
-        os.replace(tmp_path, ledger_path)
+        try:
+            tmp_path.write_text(
+                json.dumps(entries, indent=2, default=str),
+                encoding="utf-8",
+            )
+            os.replace(tmp_path, ledger_path)
+        except Exception:
+            tmp_path.unlink(missing_ok=True)
+            raise
 
 
 # ─── Slug + note helpers ─────────────────────────────────────────────────────
@@ -435,8 +444,9 @@ def run(
         tier, gemini_cfg, ledger_path, today_iso
     )
 
-    # Warn if approaching cap
-    warn_if_approaching_cap(mtd, gemini_cfg, logger)
+    # Warn if approaching cap — include this run's predicted cost so the alert
+    # fires when *this run* would push spend toward the cap, not just prior runs.
+    warn_if_approaching_cap(mtd + pred_cost, gemini_cfg, logger)
 
     if not ok:
         print(f"ERROR: Refused — {cap_msg}", file=sys.stderr)

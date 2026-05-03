@@ -23,6 +23,7 @@ from scripts.gemini_dr import (
     append_ledger,
     build_topical_note,
     check_caps,
+    ledger_totals,
     poll_interaction,
     predicted_cost,
     run,
@@ -652,3 +653,121 @@ def test_cap_order_per_task_first(tmp_path: Path, gemini_cfg_default: dict):
     # DR predicted = $2.80 > max_per_task = $1.00
     assert not ok
     assert "per-task cap" in msg
+
+
+# ─── 16. C1: cost_actual_usd=0.0 is treated as $0, not fallen through ────────
+
+
+def test_ledger_totals_zero_actual_not_falsy():
+    """C1: cost_actual_usd=0.0 (free/cancelled run) sums as $0, not $2.80.
+
+    The old `or`-chain treated 0.0 as falsy and fell through to cost_predicted_usd,
+    overcounting spend. Explicit is-not-None checks fix this.
+    """
+    entries = [
+        {
+            "cost_actual_usd": 0.0,       # free run (e.g. cancelled before billing)
+            "cost_predicted_usd": 2.80,   # would have been $2.80 if it ran
+            "created": "2026-05-03T10:00:00Z",
+        }
+    ]
+    mtd, today = ledger_totals(entries, "2026-05-03")
+    assert mtd == pytest.approx(0.0), f"Expected $0 mtd, got ${mtd}"
+    assert today == pytest.approx(0.0), f"Expected $0 today, got ${today}"
+
+
+# ─── 17. C2: tmp file is cleaned up when write_text raises ───────────────────
+
+
+def test_append_ledger_tmp_cleaned_on_write_error(tmp_path: Path, monkeypatch):
+    """C2: .tmp file does not persist when write_text raises (e.g. disk full)."""
+    ledger = tmp_path / "gemini-spend-2026-05.json"
+    entry = {
+        "interaction_id": "tmp-leak-test",
+        "tier": "dr",
+        "cost_predicted_usd": 2.80,
+        "cost_actual_usd": None,
+        "cost_usd": 2.80,
+        "created": "2026-05-03T10:00:00Z",
+    }
+
+    original_write_text = Path.write_text
+
+    def raising_write_text(self, *args, **kwargs):
+        # Only raise for .tmp files to simulate disk-full on the tmp write
+        if self.suffix == ".tmp":
+            raise OSError("Simulated disk full")
+        return original_write_text(self, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "write_text", raising_write_text)
+
+    with pytest.raises(OSError, match="Simulated disk full"):
+        append_ledger(ledger, entry)
+
+    tmp_path_candidate = ledger.with_suffix(".tmp")
+    assert not tmp_path_candidate.exists(), ".tmp file leaked after write_text failure"
+
+
+# ─── 18. I2: run() passes mtd + pred_cost to warn_if_approaching_cap ─────────
+
+
+def test_run_warn_called_with_mtd_plus_pred(tmp_path: Path):
+    """I2: warn_if_approaching_cap receives mtd + pred_cost, not just mtd."""
+    ledger = tmp_path / "gemini-spend-2026-05.json"
+    # Pre-populate ledger so mtd > 0 (makes the test distinguishable from mtd=0)
+    existing = [{"cost_usd": 10.00, "created": "2026-05-03T08:00:00Z"}]
+    ledger.write_text(json.dumps(existing), encoding="utf-8")
+
+    warn_calls = []
+
+    def capture_warn(value, _cfg, _logger):
+        warn_calls.append(value)
+
+    with (
+        patch("scripts.gemini_dr._load_gemini_cfg") as mock_cfg,
+        patch("scripts.gemini_dr.load_config") as mock_load_config,
+        patch("scripts.gemini_dr.setup_logger") as mock_logger,
+        patch("scripts.gemini_dr.record_run"),
+        patch("scripts.gemini_dr.warn_if_approaching_cap", side_effect=capture_warn),
+    ):
+        mock_cfg.return_value = {
+            "agent_id_dr": "deep-research-preview-04-2026",
+            "agent_id_max": "deep-research-max-preview-04-2026",
+            "poll_interval_seconds": 10,
+            "max_poll_seconds": 3900,
+            "output_dir": "vault/20_projects/research",
+            "output_anchor": "research-digest",
+            "ledger_dir": "vault/health",
+            "budget": {
+                "max_per_task_usd": 7.00,
+                "monthly_cap_usd": 20.00,
+                "daily_cap_usd": 10.00,
+                "dr_predicted_usd": 2.00,
+                "max_predicted_usd": 5.00,
+                "prediction_multiplier": 1.4,
+            },
+        }
+        mock_config = MagicMock()
+        mock_config.repo_root = tmp_path
+        mock_config.vault_root = tmp_path
+        mock_config.log_dir = tmp_path / "90_system" / "agent-logs"
+        (mock_config.log_dir).mkdir(parents=True, exist_ok=True)
+        mock_config.log_level = "INFO"
+        mock_load_config.return_value = mock_config
+        mock_logger.return_value = MagicMock()
+
+        # This will hit the daily cap (10.00 + 2.80 > 10.00) and return exit 1,
+        # but warn_if_approaching_cap is called before the cap-refusal branch.
+        run(
+            query="warn threshold test",
+            tier="dr",
+            dry_run=False,
+            no_confirm=False,
+            ledger_path_override=ledger,
+        )
+
+    assert len(warn_calls) == 1, "warn_if_approaching_cap should be called exactly once"
+    # DR predicted = $2.00 * 1.4 = $2.80; mtd = $10.00 → expected arg = $12.80
+    assert warn_calls[0] == pytest.approx(12.80), (
+        f"Expected warn called with mtd+pred=$12.80, got ${warn_calls[0]}"
+    )
