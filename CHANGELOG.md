@@ -5,6 +5,23 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.24.0] - 2026-05-03
+
+New universal image-generation skill — `gemini-image-gen` — added to `.claude/skills/`. Catch-all generator that wraps Google Gemini's Nano Banana 2 (`gemini-3.1-flash-image-preview`) for any image type that is NOT pixel art or pencil animation (those remain on the specialized `gemini-pixel-image-gen` and `gemini-pencil-animation-image-gen` skills). Optimizes user prompts via the 7-Layer Prompt Framework before calling the API. Skill includes its own `scripts/` and `references/` (e.g., `nano-banana-2-capabilities.md`, `universal-prompt-templates.md`).
+
+### Added
+
+- `.claude/skills/gemini-image-gen/SKILL.md` — universal image generator. Triggers on "generate image", "create image", "make a picture", "image of", "illustration of", "photo of", "render", "visualize", "design an image", "draw", "concept art", "mockup image", "product shot", "portrait of", "landscape of". Produces photorealistic images, illustrations, concept art, UI mockups, infographics, product photos, portraits, landscapes, architectural visualizations, social media graphics, abstract art, food photography, and diagrams.
+- `.claude/skills/gemini-image-gen/scripts/` and `.claude/skills/gemini-image-gen/references/` — supporting prompt templates and Nano Banana 2 capability reference.
+
+### Changed
+
+- `CLAUDE.md` — header skill count `115 → 116`; architecture comment `(115 skills) → (116 skills)`.
+- `README.md` — header skill count `115 → 116`; "### 115 Skills Across 12 Export Groups" → "### 116 Skills Across 12 Export Groups"; `creative-projects` row in the export-groups table bumped `7 → 8` with `Gemini image gen` added to highlights.
+- `export-groups/03-creative-projects/playground.json` — added `"gemini-image-gen"` to the skills list (alphabetical insertion between `creative-writing` and `phaser-game-patterns`).
+
+---
+
 ## [3.23.0] - 2026-05-03
 
 Mac Mini migration of the v3.21.0 deep-research stack — the autonomous `deep_researcher` agent now runs nightly at 02:45 on the always-on Mac Mini (M4 Pro, 24 GB) instead of the intermittently-available MBP. Same shipped Python agent (`agents-sdk/agents/deep_researcher.py`), same plist, same vault anchors — but the runtime layer swaps **LM Studio + MLX** for **Ollama + GGUF (Q4_K_M)** to fit the Mac Mini's 24 GB ceiling. New `deep-research-queue` skill teaches Claude how to add good queries during interactive sessions. Plan: `vault/20_projects/prj-superuser-pack/open-source-deep-research/macmini-migration-plan-2026-05-02.md`.
