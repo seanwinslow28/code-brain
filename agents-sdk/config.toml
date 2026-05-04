@@ -5,7 +5,11 @@ skills_dir = ".claude/skills"
 life_systems_scripts = "life-systems/scripts"
 
 [agents.daily_driver]
-enabled = true
+# DISABLED 2026-05-04 (Mon PM) — Block-to-job-hunt migration. Re-enable Tue PM
+# (5/5) after Chunk 2 ships (daily-driver skill repointed at job-hunt + deep-
+# work brief). See vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/
+# 2026-05-05-block-to-job-hunt-migration.md (Chunk 1).
+enabled = false
 skills = ["daily-driver", "vault-read-write"]
 morning_time = "08:45"
 evening_time = "17:00"
