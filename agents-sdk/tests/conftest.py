@@ -102,20 +102,27 @@ def tmp_skills(tmp_path: Path) -> Path:
 def tmp_artifacts(tmp_path: Path) -> Path:
     """Create a minimal operating-model artifact tree for testing.
 
+    Uses the production domain set (creative-studio / life-systems /
+    job-hunt-2026) so the integration tests for build_soul_prepend,
+    build_soul_context, build_schedule_recs_context, and the daily-driver
+    artifact preamble assert behavior against real-system literals — the
+    names that production code iterates via the imported `DOMAINS` tuple.
+
+    Lower-level loader tests (test_artifact_loader.py) use generic
+    `test-domain-a` / `-b` / `-c` names locally inside their assertions;
+    those names are not part of the fixture tree. (Option B fixture
+    strategy adapted, 2026-05-04 migration: integration tests assert
+    against production literals; unit-of-loader tests use local generic
+    names where useful.)
+
     Returns the vault root (not the artifacts subdir) so tests can
     pass the same path the real loader expects.
     """
     subpath = "05_atlas/operating-models"
-    domains = ("the-block", "creative-studio", "life-systems")
+    domains = ("creative-studio", "life-systems", "job-hunt-2026")
 
     # Domain-flavored HEARTBEAT bodies so tests can distinguish them.
     heartbeat_bodies = {
-        "the-block": (
-            "# HEARTBEAT — The Block\n\n"
-            "## Daily Rhythm\n"
-            "- Sacred first hour 8:45-9:45.\n"
-            "- Deep work 9-2. Decompress 2-3 PM.\n"
-        ),
         "creative-studio": (
             "# HEARTBEAT — Creative Studio\n\n"
             "## Daily Rhythm\n"
@@ -125,6 +132,12 @@ def tmp_artifacts(tmp_path: Path) -> Path:
             "# HEARTBEAT — Life Systems\n\n"
             "## Daily Rhythm\n"
             "- Sacred first hour 5:30-6:30 AM. Gym 7-8. Monthly finance 15th.\n"
+        ),
+        "job-hunt-2026": (
+            "# HEARTBEAT — Job Hunt 2026\n\n"
+            "## Daily Rhythm\n"
+            "- Sacred first hour 8:45-9:45.\n"
+            "- Deep work 9-2. Decompress 2-3 PM.\n"
         ),
     }
 

@@ -12,8 +12,8 @@ Tier 2 (MacBook Pro, Qwen3-14B via route_to_macbook, ~15 min, semantic):
   • staleness detection (>30d + time-sensitive model/API refs)
   • SOT drift check (vault vs SOURCE-OF-TRUTH.md Parts 1-2)
   • Phase 2 (2026-04-27): soul-tier-a-conflict — flags articles whose
-    claims contradict any Tier-A SOUL item across the three domains
-    (the-block, creative-studio, life-systems). Activated when a Tier-2
+    claims contradict any Tier-A SOUL item across the active domains
+    (creative-studio, life-systems, job-hunt-2026). Activated when a Tier-2
     `llm_caller` is supplied; SOUL context is prepended to the prompt.
 
 Output: `vault/health/YYYY-MM-DD-lint-report.md` with severity buckets
@@ -307,7 +307,7 @@ def run_tier1(vault_root: Path) -> Tier1Report:
 # ─── Tier 2 (semantic, LLM-powered) ───────────────────────────────────────
 
 def build_soul_context(config: Config | None) -> str:
-    """Concatenated SOUL bodies for all three domains, framed as reference.
+    """Concatenated SOUL bodies for all active domains, framed as reference.
 
     Returns "" when artifacts are globally disabled, the knowledge_lint
     agent has no per-agent entry, or `SOUL` isn't in its `on_demand` list.
@@ -340,7 +340,7 @@ def _build_tier2_prompt(soul_context: str) -> str:
         "Review the vault for two things:\n"
         "  1. Semantic contradictions across `knowledge/concepts/*.md`.\n"
         "  2. Articles whose claims contradict any Tier-A SOUL item across "
-        "the-block, creative-studio, or life-systems (use the SOUL context "
+        "creative-studio, life-systems, or job-hunt-2026 (use the SOUL context "
         "above as the canonical reference).\n\n"
         "Return ONLY a JSON object with two keys:\n"
         '  "contradictions": [{"files": ["..."], "detail": "..."}],\n'

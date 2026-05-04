@@ -17,7 +17,7 @@ from pathlib import Path
 
 logger = logging.getLogger("artifact_loader")
 
-DOMAINS: tuple[str, ...] = ("the-block", "creative-studio", "life-systems")
+DOMAINS: tuple[str, ...] = ("creative-studio", "life-systems", "job-hunt-2026")
 KINDS: tuple[str, ...] = (
     "HEARTBEAT",
     "USER",
@@ -57,7 +57,7 @@ def load_artifact(
     """Load one operating-model artifact body.
 
     Args:
-        domain: "the-block" | "creative-studio" | "life-systems".
+        domain: "creative-studio" | "life-systems" | "job-hunt-2026".
         kind: "HEARTBEAT" | "USER" | "SOUL" | "operating-model" | "schedule-recommendations".
         vault_root: Absolute path to the vault root.
         subpath: Relative path under vault_root where artifacts live.
