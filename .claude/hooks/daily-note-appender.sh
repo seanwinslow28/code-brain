@@ -48,6 +48,8 @@ case "$WORK_DIR" in
     *the-block*|*theblock*) DOMAIN="the-block" ;;
     *creative-studio*|*animation*|*remotion*) DOMAIN="creative-studio" ;;
     *life-systems*|*finance*|*health*) DOMAIN="life-systems" ;;
+    # --- Job hunt 2026 (post-Block) ---
+    *job-hunt-2026*|*job-hunt*|*onwards-and-upwards*) DOMAIN="job-hunt" ;;
     # --- Block-specific keywords (route to the-block, not generic PM) ---
     *campus*|*etf*) DOMAIN="the-block" ;;
     # --- Vault path (specific) ---

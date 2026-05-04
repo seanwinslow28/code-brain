@@ -6,7 +6,7 @@ Domain context for Sean's personal systems — finance, health, learning, tasks,
 
 **In:** Personal finance (Bilt + Chase categorization, monthly reports, debt paydown, subscription audits, budgets), health and habit tracking (workouts, streaks, XP/level-up gamification, fitness vault entries), learning (study plans, Socratic drills, Anki flashcards), personal task management (GTD, Socratic prioritization matrix, weekly reviews), time management (4:45 AM routine, 45/35/20 work split, calendar audits), career transition (PM → Animation Production), Boston move logistics, life admin (medical providers, address changes, renewals).
 
-**Out:** The Block day-job work, creative projects. Those route to [the-block/CLAUDE.md](../the-block/CLAUDE.md) or [creative-studio/CLAUDE.md](../creative-studio/CLAUDE.md).
+**Out:** Creative projects, job-hunt logistics. Those route to [creative-studio/CLAUDE.md](../creative-studio/CLAUDE.md) or `vault/20_projects/prj-job-hunt-2026/`. The-block templates are archived (see [the-block/CLAUDE.md](../the-block/CLAUDE.md) for prior-role reference patterns).
 
 ## Operating Model
 
@@ -45,15 +45,15 @@ No domain-specific agents. Uses general-purpose agents (`general-purpose`, `Plan
 
 ## Active MCPs Used Here
 
-- **Gmail** + **Google Calendar** — primarily personal `sean.winslow28@gmail.com` (calendar rule from root CLAUDE.md still applies — query both accounts)
+- **Gmail** + **Google Calendar** — single account `sean.winslow28@gmail.com` (the-block work calendar archived 2026-05)
 - **Obsidian Vault** — daily notes, finance reports, health logs, task lists
 - **Zapier** — Bilt / Chase via Sheets bridge when needed (no native MCP)
 
 ## Non-Negotiable Rules Specific to This Domain
 
 1. **Personal data stays local.** Finance and health data lives in vault and on local machines — don't ship to external APIs without explicit Sean approval. Local models (gemma4 / phi4-mini on Mac Mini) handle financial categorization where possible.
-2. **No cross-contamination with The Block domain.** Personal Gmail content does not get summarized into Block stakeholder updates, and vice versa. The two email accounts stay segmented.
-3. **Sleep window and gym blocks are sacred.** Daily-driver and meeting-defender treat them as protected. Don't propose tasks that violate them.
+2. **No cross-contamination with the job-hunt project.** Personal life-systems Gmail content does not get summarized into job-hunt application narratives or recruiter outreach drafts, and vice versa. Use Gmail labels for separation.
+3. **Sleep window and gym blocks are sacred.** Daily-driver treats them as protected. Don't propose tasks that violate them.
 4. **Health-habits XP is gamified — don't backfill.** Streaks must be earned in real time. Logging a missed workout retroactively breaks the gamification contract.
 5. **Boston move context is time-bounded.** Sean is moving from NYC to Boston. Several life-admin items are tied to that arc — once complete, prune them rather than letting them linger as stale checklist items.
 

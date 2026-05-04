@@ -46,7 +46,7 @@ Apply these to every document:
 User: "Write a getting-started guide for our data API"
 Claude: [Uses technical-writing]
 
-# Getting Started with The Block Data API
+# Getting Started with the Crypto Market Data API
 
 Get live and historical crypto market data in under 5 minutes.
 
@@ -57,7 +57,7 @@ Get live and historical crypto market data in under 5 minutes.
 
 ```bash
 curl -H "Authorization: Bearer YOUR_KEY" \
-  https://api.theblock.co/v1/prices/BTC
+  https://api.example-crypto.com/v1/prices/BTC
 ```
 
 3. Parse the response:
