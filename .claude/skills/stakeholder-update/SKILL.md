@@ -1,38 +1,35 @@
 ---
 name: stakeholder-update
-description: Stakeholder communication generator for The Block's Product & Engineering team. Primary use case is the bi-weekly P&E status update (Jira → Confluence → Slack). Also generates executive summaries, cross-functional updates, and standup notes. Use when asked for "bi-weekly update", "stakeholder update", "status report", "biweekly", "update for Ed", "what shipped", "P&E update", or "leadership update".
+description: Stakeholder communication generator for Product & Engineering teams. Primary use case is the bi-weekly status update (Jira → Confluence → Slack). Also generates executive summaries, cross-functional updates, and standup notes. Use when asked for "bi-weekly update", "stakeholder update", "status report", "biweekly", "what shipped", or "leadership update".
 ---
 
-# Stakeholder Update — The Block
+# Stakeholder Update
+
+> **Configure:** Set `<PROJECT_KEYS>` to your team's Jira project keys, fill in the team roster, and adjust product/area prefixes for your organization.
 
 ## Purpose
 
-Generates The Block's recurring Product & Engineering bi-weekly status updates and other stakeholder communications. The primary workflow queries Jira for completed, in-progress, and upcoming work, then formats it for Confluence publication with a Slack summary. Also handles executive summaries, cross-functional updates, and ad hoc communications.
+Generates recurring Product & Engineering bi-weekly status updates and other stakeholder communications. The primary workflow queries Jira for completed, in-progress, and upcoming work, then formats it for Confluence publication with a Slack summary. Also handles executive summaries, cross-functional updates, and ad hoc communications.
 
 ## When to Use
 
 - **Bi-weekly update:** "Generate the bi-weekly update" / "What shipped in the last 2 weeks?"
-- **Status report:** "Write a status report for Ed" / "P&E update"
-- **Executive summary:** "Summarize this sprint for Matt"
+- **Status report:** "Write a status report for [manager]" / "P&E update"
+- **Executive summary:** "Summarize this sprint for [VP]"
 - **Cross-functional:** "Write an update for the design team"
 - **Ad hoc:** "Generate a standup update from my recent work"
 
-## The Block Bi-Weekly Update
+## The Bi-Weekly Update
 
 ### Overview
 
-The bi-weekly update is Sean and Ed's primary stakeholder communication. It summarizes P&E work in three sections: completed, in-progress, and upcoming. Posted to Confluence with a Slack summary.
+The bi-weekly update is the primary stakeholder communication shape: a Done / In-flight / Upcoming structure plus a Slack summary. Posted to Confluence with a Slack summary. Done / In-flight / Upcoming is a universal PM communication primitive.
 
 ### Team Scope
 
-Include tickets assigned to these P&E team members:
+Configure the team roster in your project context. Include tickets assigned to the active P&E team members. The skill consults the roster to filter results.
 
-- Aliaksandr Kryvanosau, Ana Benitez, Bohdan Panasenko, Brian Mendoza
-- Cesar Paz, Claudine Daumur, Edvinas Rupkus, Josh Gragg
-- Koray Baspinar, Maria Zhynko, Marina Ardytskaya, Nikita Gulis
-- Nikita Orobenko, Nikola Pivcevic, Ramuald Vishneuski, Serena Ho
-
-**Projects to search:** PRO, RBS, CM (primary focus on PRO and RBS)
+**Projects to search:** `<PROJECT_KEYS>` (set in project context)
 
 ### Status Mappings
 
@@ -46,7 +43,7 @@ Include tickets assigned to these P&E team members:
 
 **Query 1 — Completed Work:**
 ```jql
-project IN (PRO, RBS, CM)
+project IN (<PROJECT_KEYS>)
 AND status IN (Done, Closed, Completed)
 AND updated >= -14d
 ORDER BY updated DESC
@@ -54,14 +51,14 @@ ORDER BY updated DESC
 
 **Query 2 — In-Progress Work:**
 ```jql
-project IN (PRO, RBS, CM)
+project IN (<PROJECT_KEYS>)
 AND status IN ("In Progress", "Ready for Review", "Ready for Testing", "In Test", "Awaiting Deploy")
 ORDER BY status ASC, updated DESC
 ```
 
 **Query 3 — Upcoming Work:**
 ```jql
-project IN (PRO, RBS, CM)
+project IN (<PROJECT_KEYS>)
 AND status IN ("To Do", Backlog)
 ORDER BY priority DESC, created DESC
 ```
@@ -70,16 +67,8 @@ All queries: `maxResults=100`. Use **only** `Atlassian:searchJiraIssuesUsingJql`
 
 ### Formatting Rules
 
-**Product/Area Prefixes:**
-- `.Co` — Main website (theblock.co)
-- `Campus` — Education platform
-- `SFMC` — Salesforce Marketing Cloud
-- `Ad Server` / `GAM` — Google Ad Manager
-- `Crypto IQ` — Competition/quiz feature
-- `Analytics` / `Looker` — Data/analytics work
-- `Wordpress` / `SEO` — CMS/SEO work
-- `Sendgrid` — Email infrastructure
-- `Ratings Pages` / `Indices` / `Charts` — Data features
+**Product/Area Prefixes (configure for your team):**
+Use short prefixes per surface — e.g. `Web`, `App`, `LMS`, `Ad Server`, `Analytics`, `CMS`, `Email`. Whatever maps cleanly to your stakeholders' mental model.
 
 **Status Tags (inline):**
 - "in test" — for Ready for Testing, In Test, Ready for Review
@@ -95,7 +84,7 @@ All queries: `maxResults=100`. Use **only** `Atlassian:searchJiraIssuesUsingJql`
 Things we've done in the past two weeks:
 ● [Product] - [Accomplishment]
 ● [Product] - [Accomplishment]
-● .Co & Campus - Visual bugs, UX improvements, SEO fixes
+● [Cross-cutting] - Visual bugs, UX improvements, SEO fixes
 
 Things being worked on, likely to be released in the next few weeks:
 ● [Product] - [Feature], in test
@@ -110,19 +99,9 @@ A few of the things we're focused on for upcoming months:
 ```
 
 **Section rules:**
-- **Section 1 (Done):** Always include ".Co & Campus - Visual bugs, UX improvements, SEO fixes"
-- **Section 2 (In Progress):** Typically longest (10-15 items). Always include "Chart improvements & bug fixes"
+- **Section 1 (Done):** Always include a "visual bugs, UX improvements, SEO fixes" catch-all bullet
+- **Section 2 (In Progress):** Typically longest (10-15 items). Always include a "bug fixes" bullet
 - **Section 3 (Upcoming):** Higher-level initiatives (3-5 items). Always end with "Tech Debt"
-
-### Recurring Patterns
-
-Items that appear frequently across updates:
-- Nuxt 3/4 migration → GAM Ad support
-- Multi-course support, CMI-5
-- Tech Debt (always in upcoming)
-- Chart improvements & bug fixes (always in progress)
-- Visual bugs, UX improvements (always in completed)
-- Additional Indices, Job Boards, Sponsored Courses
 
 ### Quality Checks
 
@@ -141,51 +120,50 @@ Claude: [Uses stakeholder-update]
 
 Running 3 Jira queries...
 
-Feb 18, 2026
+[Date]
 
 Things we've done in the past two weeks:
-● Campus - Multi-course support backend complete
-● .Co - Job Board v1 launched
-● Analytics - Monthly reporting dashboard for LMAX
-● .Co & Campus - Visual bugs, UX improvements, SEO fixes
+● [Product] - [Feature] backend complete
+● Web - [Feature] launched
+● Analytics - Monthly reporting dashboard
+● Cross-cutting - Visual bugs, UX improvements, SEO fixes
 
 Things being worked on, likely to be released in the next few weeks:
-● Campus - Marketing site Stripe checkout, in test
-● .Co - Sponsored Courses homepage module, in test
-● .Co - Nuxt 4 migration, remaining pages → GAM Ad support
+● [Product] - Stripe checkout, in test
+● Web - [Feature] homepage module, in test
+● Web - Framework migration, remaining pages
 ● Ad Server - New ad hosting experience, awaiting deploy
-● SFMC - Migration of Marketo forms
 ● Chart improvements & bug fixes
 
 A few of the things we're focused on for upcoming months:
-● Campus - Prerequisite Schema & Knowledge Token Taxonomy
-● .Co - Multi-language support
+● [Product] - [Initiative]
+● Web - Multi-language support
 ● Tech Debt
 
 Ready to post? I'll format this for Confluence and draft
 a Slack summary.
 ```
 
-**Example 2: Executive summary for Matt**
+**Example 2: Executive summary for a VP**
 ```
-User: "Summarize this sprint for Matt"
+User: "Summarize this sprint for the VP"
 Claude: [Uses stakeholder-update]
 
-## P&E Executive Summary — Feb 18, 2026
+## P&E Executive Summary — [Date]
 
 ### Highlights
-- Campus multi-course support shipped (enables revenue diversification)
-- Job Board v1 live (new revenue stream, 50+ listings target)
-- Nuxt 4 migration 85% complete (enables GAM ad support)
+- [Feature] shipped (enables revenue diversification)
+- [Feature] live (new revenue stream)
+- Framework migration 85% complete
 
 ### Risks
-- Campus 201 public launch depends on Stripe checkout (in test)
-- Nuxt 4 migration affecting some page load times (monitoring)
+- [Feature] launch depends on [Dependency] (in test)
+- Migration affecting some page load times (monitoring)
 
 ### Next 30 Days
-- Sponsored Courses MVP launch
-- Campus 201 public launch (if Stripe clears QA)
-- Complete Nuxt 4 migration + GAM full rollout
+- [MVP launch]
+- [Feature launch] (if [Dependency] clears QA)
+- Complete framework migration
 ```
 
 ## General Communication Templates
@@ -194,13 +172,13 @@ Claude: [Uses stakeholder-update]
 
 | Layer | What (Technical) | Why (Business Value) | How (Process) |
 |-------|-------------------|---------------------|---------------|
-| Executive (Matt) | "Launched Job Board v1" | "New revenue stream targeting crypto employers" | "50+ listings in pipeline" |
-| Manager (Ed) | "Job Board search and filter complete" | "Users can now find relevant jobs" | "Indexed by location, company, role type" |
-| Cross-functional | "Job Board is live on .Co" | "Sales can now pitch job listings to clients" | "Share posting flow with sales team" |
+| Executive | "Launched [Feature] v1" | "New revenue stream targeting [segment]" | "[N] in pipeline" |
+| Manager | "Search and filter complete" | "Users can now find relevant items" | "Indexed by location, type" |
+| Cross-functional | "[Feature] is live" | "Sales can now pitch [Feature] to clients" | "Share posting flow with sales team" |
 
 ### Audience Rules
 
-- **Ed/Matt:** Lead with business metrics and risk. Include asks.
+- **Executives:** Lead with business metrics and risk. Include asks.
 - **Engineering:** Include Jira ticket keys, architecture decisions, trade-offs.
 - **Design/Sales:** Focus on timelines, deliverables, dependencies.
 - **Slack summary:** 3-4 bullets max with Confluence link.
@@ -211,9 +189,9 @@ Use this table to select which metrics to highlight for each audience. Avoid dro
 
 | Audience | Primary Metrics | Secondary Metrics | Avoid |
 |:---------|:----------------|:------------------|:------|
-| **Matt (VP)** | Revenue impact, subscriber growth, launch dates | Sprint velocity, major risks | Individual ticket details, technical jargon |
-| **Ed (PM)** | Sprint completion %, blocker count, scope changes | Feature adoption (post-launch), bug escape rate | Low-level implementation details |
-| **Design (Josh, Claudine, Serena)** | Design ticket throughput, handoff queue depth | Figma coverage, NeedsDesign backlog size | Backend metrics, revenue numbers |
+| **VP / Executive** | Revenue impact, growth, launch dates | Sprint velocity, major risks | Individual ticket details, technical jargon |
+| **PM / Manager** | Sprint completion %, blocker count, scope changes | Feature adoption (post-launch), bug escape rate | Low-level implementation details |
+| **Design** | Design ticket throughput, handoff queue depth | Figma coverage, NeedsDesign backlog size | Backend metrics, revenue numbers |
 | **Sales/Revenue** | Feature launch timelines, customer-facing changes | API uptime, data freshness | Sprint internals, tech debt items |
 | **Engineering** | Ticket count by status, deploy frequency, bug rate | PR cycle time, test coverage delta | Business strategy, revenue projections |
 | **Full Team (Slack)** | Top 3 shipped items, top blocker, next milestone | — | Anything requiring >30 seconds to read |
@@ -223,13 +201,13 @@ Use this table to select which metrics to highlight for each audience. Avoid dro
 ### Tone Templates
 
 **Formal (Leadership):**
-> "The Nuxt 4 migration remains on track. Key milestone: article pages fully migrated. Primary risk: GAM ad support requires final Nuxt 4 pages to complete."
+> "The framework migration remains on track. Key milestone: article pages fully migrated. Primary risk: ad-server support requires final pages to complete."
 
 **Casual (Slack):**
-> "Bi-weekly update is up! TL;DR: Job Board launched, Campus multi-course is done, Nuxt 4 almost there. Full details: [Confluence link]"
+> "Bi-weekly update is up! TL;DR: [Feature] launched, [Feature 2] is done, migration almost there. Full details: [Confluence link]"
 
 **Urgent (Escalation):**
-> "BLOCKED: Stripe checkout integration for Campus 201 public launch. Need Stripe support escalation. Impact: delays public launch by 1-2 weeks if not resolved by Friday."
+> "BLOCKED: [Dependency] integration for [Feature] launch. Need [Vendor] support escalation. Impact: delays public launch by 1-2 weeks if not resolved by Friday."
 
 ### Standup Update
 
@@ -269,8 +247,8 @@ Use this table to select which metrics to highlight for each audience. Avoid dro
 ```
 "Generate the bi-weekly update"
 "What shipped in the last 2 weeks?"
-"Write a status report for Ed"
-"Summarize this sprint for Matt"
+"Write a status report for [manager]"
+"Summarize this sprint for the VP"
 "Write an update for the design team"
 "Generate my standup update"
 "Draft a Slack summary for the bi-weekly"

@@ -1,15 +1,15 @@
 ---
 name: jira-automation
-description: Jira automation for The Block's Product & Engineering team. Creates Epics, Design Stories ([Design] prefix), and Implementation Stories ([Implementation] prefix) from PRDs or natural language. Runs JQL queries, manages sprints, and handles bulk operations via Atlassian MCP. Use when asked to "create a ticket", "write Jira tickets", "break down this PRD", "JQL query", "bulk create", "sprint management", or any Jira workflow task.
+description: Jira automation for Product & Engineering teams. Creates Epics, Design Stories ([Design] prefix), and Implementation Stories ([Implementation] prefix) from PRDs or natural language. Runs JQL queries, manages sprints, and handles bulk operations via Atlassian MCP. Use when asked to "create a ticket", "write Jira tickets", "break down this PRD", "JQL query", "bulk create", "sprint management", or any Jira workflow task.
 ---
 
-# Jira Automation — The Block
+# Jira Automation
 
-> **Note:** This skill is configured for The Block. If exporting to another project, customize the project keys, components, labels, team roster, and Jira instance URL for your organization.
+> **Configure:** Set the project keys, components, labels, team roster, and Jira instance URL for your organization in your project context (CLAUDE.md or local profile). Patterns below are organization-agnostic.
 
 ## Purpose
 
-Automate Jira workflows for The Block's Product & Engineering team. Create properly formatted Epics, Design Stories, and Implementation Stories following Block conventions. Run JQL queries, manage sprints, and handle bulk operations — all via Atlassian MCP without leaving Claude Code.
+Automate Jira workflows for Product & Engineering teams. Create properly formatted Epics, Design Stories, and Implementation Stories following team conventions. Run JQL queries, manage sprints, and handle bulk operations — all via Atlassian MCP without leaving Claude Code.
 
 ## When to Use
 
@@ -19,42 +19,39 @@ Automate Jira workflows for The Block's Product & Engineering team. Create prope
 - **Sprint management:** "Move these to Sprint 24" / "Sprint health check"
 - **Templates:** "Create a Design story for [feature]" / "Write an Implementation ticket"
 
-## The Block Jira Configuration
+## Jira Configuration (set per project)
 
 ### Instance
 
-- **URL:** `https://theblockcrypto.atlassian.net`
-- **Browse:** `https://theblockcrypto.atlassian.net/browse/`
+- **URL:** `https://<your-instance>.atlassian.net`
+- **Browse:** `https://<your-instance>.atlassian.net/browse/`
 
-### Project Keys
+### Project Keys (configure)
 
 | Key | Name | Use |
 |-----|------|-----|
-| **PRO** | Team 1 | Primary P&E project (most tickets go here) |
-| **RBS** | — | Secondary P&E project |
-| **CM** | — | Content/marketing project |
-| **GD** | Design | Design requests |
-| **DE** | Data Engineering | Data pipeline work |
-| **OP** | Infrastructure | DevOps/Infrastructure |
-| **BE** | Block Engineering | Engineering-specific tasks |
+| **<PROJECT_KEY>** | Primary P&E project | Most tickets go here (set as default) |
+| **<SECONDARY_KEY>** | Secondary P&E project | Cross-team work |
+| **<CONTENT_KEY>** | Content/marketing | Editorial / CMS |
+| **<DESIGN_KEY>** | Design | Design requests |
+| **<DATA_KEY>** | Data Engineering | Data pipeline work |
+| **<INFRA_KEY>** | Infrastructure | DevOps / Infra |
 
-**Default project:** PRO (unless user specifies otherwise).
+**Default project:** `<PROJECT_KEY>` (unless user specifies otherwise).
 
-### Components
+### Components (configure)
 
-| Component | ID | Description | Use When |
-|-----------|----|-------------|----------|
-| `Campus` | 10071 | LMS/education platform | Course features, learning paths, quiz/assessment, certificates, student progress |
-| `theblock.co` | 10068 | Free site | Homepage, articles, navigation, public pages, job board, learn page |
-| `Pro Research` | — | Pro tier research | Research reports, tools |
-| `Pro News` | — | Pro tier news | Premium news features |
-| `Pro Data` | — | Pro tier data | Data dashboards, analytics, market data |
-| `Pro Deals` | — | Pro tier deals | Deal tracking, alerts |
-| `Pro API` | — | API integrations | External API work, endpoints |
-| `Launchpad` | — | Launchpad product | Launchpad features |
-| `Wordpress` | — | CMS | Content management, publishing, editorial |
+Components are team-specific. Common shapes:
 
-**Rule:** If a feature spans both Campus AND theblock.co, add BOTH components.
+| Component | Description | Use When |
+|-----------|-------------|----------|
+| `<surface-1>` | LMS / education platform | Course features, learning paths, certificates |
+| `<surface-2>` | Public site | Homepage, articles, navigation, public pages |
+| `<surface-3>` | Premium tier | Subscriber-gated features |
+| `<surface-4>` | API | External API endpoints |
+| `<surface-5>` | CMS | Content management |
+
+**Rule:** If a feature spans multiple surfaces, add all relevant components.
 
 ### Labels
 
@@ -208,37 +205,22 @@ Each story should be completable by one developer in roughly one sprint or less.
 ### Step 4: Link Everything
 
 - All stories link to the parent Epic via Epic Link
-- Add appropriate components (Campus, theblock.co, or both)
+- Add appropriate components (per your team's surfaces — see Components table)
 - Add labels (NeedsDesign for design, frontend/BACKEND for implementation)
 - Set priority consistently with the Epic
 
-## Real Examples from The Block
-
-### Sponsored Courses Integration (PRO-4354)
+## Example Epic Breakdown
 
 ```
-Epic: Sponsored/Elective Courses Integration
-+-- [Design] Sponsored Courses Integration (PRO-4355)
-+-- [Implementation] Homepage Sponsored Course Module (PRO-4361)
-+-- [Implementation] Learn Page Courses Module (PRO-4362)
-+-- [Implementation] In-Article Course Recirculation Component (PRO-4363)
-+-- [Implementation] Course Description Page (PRO-4364)
-+-- [Implementation] X Authentication Integration (PRO-4365)
-+-- [Implementation] Campus Deep Linking and Entitlements (PRO-4366)
-+-- [Implementation] Sponsor Lead Data Export (PRO-4367)
-+-- [Implementation] Completion Shareable Social Card (PRO-4368)
-```
-
-### .CO Job Board (PRO-3513)
-
-```
-Epic: .CO Job Board
-+-- [Design] .CO Job board aggregate & individual pages (PRO-3517)
-+-- DB > Jobs database on Laravel (PRO-3518)
-+-- [Implementation] Aggregate job board (PRO-3514)
-+-- [Implementation] Job Board Homepage presence (PRO-3515)
-+-- [Implementation] Individual job page (PRO-3516)
-+-- [Implementation] Adding email to SendGrid contact list (PRO-4207)
+Epic: <Feature Name>
++-- [Design] <Feature> design deliverables (<PROJECT_KEY>-NNNN)
++-- [Implementation] Homepage Module (<PROJECT_KEY>-NNNN)
++-- [Implementation] Detail Page (<PROJECT_KEY>-NNNN)
++-- [Implementation] Recirculation Component (<PROJECT_KEY>-NNNN)
++-- [Implementation] Auth Integration (<PROJECT_KEY>-NNNN)
++-- [Implementation] Deep Linking (<PROJECT_KEY>-NNNN)
++-- [Implementation] Lead Data Export (<PROJECT_KEY>-NNNN)
++-- [Implementation] Completion Shareable Social Card (<PROJECT_KEY>-NNNN)
 ```
 
 ## MCP Integration
@@ -261,13 +243,13 @@ Already configured. Use these tools:
 
 ```json
 {
-  "projectKey": "PRO",
-  "summary": "[Implementation] Homepage Sponsored Course Module",
-  "description": "As a user, I want to see a sponsored course promotion...",
+  "projectKey": "<PROJECT_KEY>",
+  "summary": "[Implementation] Homepage Module",
+  "description": "As a user, I want to see [feature] so I can [benefit]...",
   "issueType": "Story",
   "priority": "High",
   "labels": ["frontend"],
-  "components": ["theblock.co"]
+  "components": ["<surface>"]
 }
 ```
 
@@ -277,14 +259,14 @@ Already configured. Use these tools:
 
 | Goal | JQL |
 |------|-----|
-| My open items | `project = PRO AND assignee = currentUser() AND status != Done ORDER BY priority DESC` |
-| Stale tickets | `project IN (PRO, RBS) AND status NOT IN (Done, Closed) AND updated < -14d` |
+| My open items | `project = <PROJECT_KEY> AND assignee = currentUser() AND status != Done ORDER BY priority DESC` |
+| Stale tickets | `project IN (<PROJECT_KEYS>) AND status NOT IN (Done, Closed) AND updated < -14d` |
 | Sprint blockers | `sprint IN openSprints() AND priority = High AND flagged = impediment` |
-| Unassigned work | `project = PRO AND sprint IN openSprints() AND assignee IS EMPTY` |
+| Unassigned work | `project = <PROJECT_KEY> AND sprint IN openSprints() AND assignee IS EMPTY` |
 | Scope creep | `sprint IN openSprints() AND created > startOfDay("-5d")` |
-| Epic progress | `parent = PRO-4354 AND status != Done` |
-| NeedsDesign tickets | `project = PRO AND labels = NeedsDesign AND status NOT IN (Done, Closed)` |
-| In-flight work | `project IN (PRO, RBS, CM) AND status IN ("In Progress", "Ready for Review", "Ready for Testing", "In Test") ORDER BY status ASC` |
+| Epic progress | `parent = <PROJECT_KEY>-NNNN AND status != Done` |
+| NeedsDesign tickets | `project = <PROJECT_KEY> AND labels = NeedsDesign AND status NOT IN (Done, Closed)` |
+| In-flight work | `project IN (<PROJECT_KEYS>) AND status IN ("In Progress", "Ready for Review", "Ready for Testing", "In Test") ORDER BY status ASC` |
 
 ### Bi-Weekly Update Queries
 
@@ -308,7 +290,7 @@ For batch updates (e.g., commenting on stale tickets):
 
 ## Relationship to ticket-batch
 
-This skill is **Block-specific** — it knows project keys, components, labels, and team conventions. For **Linear**, **GitHub Issues**, or **generic multi-platform** ticket batching, use `ticket-batch` instead. For the full PRD-to-launch pipeline connecting this skill with `prd-generator` and `sprint-roadmap`, see `product-management/templates/prd-to-launch.md`.
+This skill is **Jira-specific** — it knows the conventions of a configured Jira project (keys, components, labels). For **Linear**, **GitHub Issues**, or **generic multi-platform** ticket batching, use `ticket-batch` instead. For the full PRD-to-launch pipeline connecting this skill with `prd-generator` and `sprint-roadmap`, see `the-block/product-management/templates/prd-to-launch.md`.
 
 ## Quality Checklist
 
@@ -333,9 +315,9 @@ User: "Create a Jira ticket for the new ratings page redesign"
 Claude: [Uses jira-automation]
 
 Before creating, let me confirm:
-- Project: PRO (default)
+- Project: <PROJECT_KEY> (default)
 - Type: Epic (since this sounds like a multi-story feature)
-- Component: theblock.co
+- Component: <surface>
 
 Creating Epic: "Ratings Page Redesign"
 
@@ -348,19 +330,19 @@ Want me to proceed?
 
 **Example 2: PRD to tickets**
 ```
-User: "Here's a PRD for Campus multi-language support. Break it down."
+User: "Here's a PRD for multi-language support. Break it down."
 Claude: [Uses jira-automation]
 
 Reading PRD... Creating ticket structure:
 
-Epic: Campus Multi-Language Support
+Epic: Multi-Language Support
 +-- [Design] Multi-Language UI Components
 +-- [Implementation] Language Selector Component
 +-- [Implementation] Content Translation Pipeline
 +-- [Implementation] i18n Framework Integration
 +-- [Implementation] RTL Layout Support
 
-Creating 5 tickets in PRO with component: Campus...
+Creating 5 tickets in <PROJECT_KEY>...
 ```
 
 **Example 3: JQL query**
@@ -373,9 +355,9 @@ Running: sprint IN openSprints() AND status NOT IN (Done, Closed) AND updated < 
 Found 3 stale issues:
 | Key | Summary | Assignee | Last Updated |
 |-----|---------|----------|-------------|
-| PRO-4401 | [Implementation] Chart tooltip fix | Koray | 12 days ago |
-| PRO-4389 | [Implementation] Campus nav update | Nikita O. | 9 days ago |
-| PRO-4412 | [Bug] Mobile menu overlap | Maria | 8 days ago |
+| <PROJECT_KEY>-NNNN | [Implementation] Chart tooltip fix | [name] | 12 days ago |
+| <PROJECT_KEY>-NNNN | [Implementation] Nav update | [name] | 9 days ago |
+| <PROJECT_KEY>-NNNN | [Bug] Mobile menu overlap | [name] | 8 days ago |
 
 Want me to add a comment to these asking for status updates?
 ```
@@ -383,8 +365,8 @@ Want me to add a comment to these asking for status updates?
 ## Success Criteria
 
 - [ ] Tickets created with all required fields populated
-- [ ] Block templates (Epic/Design/Implementation) applied correctly
-- [ ] Components and labels match Block conventions
+- [ ] Templates (Epic/Design/Implementation) applied correctly
+- [ ] Components and labels match the configured project's conventions
 - [ ] PRD-to-tickets workflow produces complete Epic structures
 - [ ] JQL queries return expected results
 - [ ] All tickets linked to correct Epics
