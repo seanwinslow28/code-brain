@@ -1,13 +1,13 @@
 ---
 name: campus-education
-description: Education platform and LMS development patterns for The Block's Campus crypto education product. Generates course structures, lesson outlines, quiz rubrics, student progress tracking, and curriculum automation. Use when building education features, creating course content, designing learning paths, generating quizzes or assessments, or working on Campus platform specifications.
+description: Education platform and LMS development patterns for a crypto education / LMS platform. Generates course structures, lesson outlines, quiz rubrics, student progress tracking, and curriculum automation. Use when building education features, creating course content, designing learning paths, generating quizzes or assessments, or working on Campus platform specifications.
 ---
 
 # Campus Education Platform Patterns
 
 ## Purpose
 
-Provide LMS development patterns, content generation workflows, and assessment rubrics tailored for The Block's Campus crypto education platform. Enable Claude to generate properly structured courses, quizzes, and curriculum specifications with crypto-domain accuracy.
+Provide LMS development patterns, content generation workflows, and assessment rubrics tailored for a crypto education / LMS platform. Enable Claude to generate properly structured courses, quizzes, and curriculum specifications with crypto-domain accuracy.
 
 ## When to Use
 
