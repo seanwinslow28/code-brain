@@ -1,6 +1,8 @@
 # CLAUDE.md — The Block (Domain: PM Day Job)
 
-Domain context for Sean's day job at **The Block**, a crypto/ETF data company where Sean is a Product Manager. For ecosystem-wide rules (non-negotiables, hook exit codes, agents-sdk, MCPs), see root [CLAUDE.md](../CLAUDE.md).
+> **ARCHIVED 2026-05.** This domain is the prior role at The Block. Templates and patterns retained for portfolio + future reference. Calendar / Atlassian / Slack rules below are no longer enforced.
+
+Domain context for Sean's prior day job at **The Block**, a crypto/ETF data company where Sean was a Product Manager from Nov 2025 – May 2026. For ecosystem-wide rules (non-negotiables, hook exit codes, agents-sdk, MCPs), see root [CLAUDE.md](../CLAUDE.md). For the active job-hunt workspace, see `vault/20_projects/prj-job-hunt-2026/`.
 
 ## Scope of This Domain
 

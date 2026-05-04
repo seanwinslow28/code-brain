@@ -1,6 +1,8 @@
 # the-block/
 
-Domain workspace for Sean's day job at **The Block** — a crypto/ETF data company where Sean is a Product Manager.
+> **ARCHIVED 2026-05.** This domain is the prior role at The Block. Templates and patterns retained for portfolio + future reference. Calendar / Atlassian / Slack rules below are no longer enforced.
+
+Domain workspace for Sean's prior day job at **The Block** — a crypto/ETF data company where Sean was a Product Manager (Nov 2025 – May 2026).
 
 ## What lives here
 

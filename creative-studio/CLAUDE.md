@@ -6,7 +6,7 @@ Domain context for Sean's creative work — 16BitFit Battle Mode, Remotion video
 
 **In:** 16BitFit Battle Mode (game + sprite pipeline + autoresearch + LoRA), Remotion programmatic video, pixel art, animation production (with eye toward animated short films), creative writing across formats, Adobe app pipelines (Photoshop, Premiere, After Effects, Illustrator), design system work, ComfyUI workflows, AI creative tooling.
 
-**Out:** Block day-job PM work, personal finance/health/learning. Those route to [the-block/CLAUDE.md](../the-block/CLAUDE.md) or [life-systems/CLAUDE.md](../life-systems/CLAUDE.md).
+**Out:** Personal finance/health/learning, job-hunt logistics. Those route to [life-systems/CLAUDE.md](../life-systems/CLAUDE.md) or `vault/20_projects/prj-job-hunt-2026/`. The-block templates are archived (see [the-block/CLAUDE.md](../the-block/CLAUDE.md) for reference patterns from the prior role).
 
 ## Operating Model
 

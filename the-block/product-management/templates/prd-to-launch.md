@@ -36,14 +36,14 @@ This guide documents the handoff flow from PRD approval to sprint delivery. It's
 2. Create **[Design] story** covering all UI/UX deliverables
 3. Create **[Implementation] stories** broken down by surface or system
 4. Link all stories to the Epic
-5. Assign components (Campus, theblock.co, etc.) and labels (NeedsDesign, frontend, BACKEND)
+5. Assign components (e.g., a primary product, a marketing site) and labels (NeedsDesign, frontend, BACKEND)
 
 **Quality check before proceeding:**
 - [ ] Epic has Problem, Solution, Scope, and Success Metrics
 - [ ] Design story covers all UI deliverables with Figma handoff requirement
 - [ ] Each Implementation story has user story format and acceptance criteria
 - [ ] Stories are right-sized (completable in ~1 sprint)
-- [ ] Components and labels match Block conventions
+- [ ] Components and labels match your team's conventions
 - [ ] All stories linked to parent Epic
 
 **Handoff to Stage 3:** "Load these tickets into the next sprint"
@@ -70,14 +70,14 @@ This guide documents the handoff flow from PRD approval to sprint delivery. It's
 ## Full Pipeline Example
 
 ```
-User: "Write a PRD for Campus prerequisite courses"
+User: "Write a PRD for [feature]"
 → prd-generator: Generates PRD with user stories, metrics, scope
 
 User: "Break this down into Jira tickets"
-→ jira-automation: Creates Epic + Design story + 5 Implementation stories in PRO
+→ jira-automation: Creates Epic + Design story + 5 Implementation stories in your project
 
 User: "Plan the sprint"
-→ sprint-roadmap: Loads Design story into Sprint 25, Implementation into Sprint 26
+→ sprint-roadmap: Loads Design story into Sprint N, Implementation into Sprint N+1
 
 User: "Generate the bi-weekly update"
 → stakeholder-update: Reports progress against the Epic
