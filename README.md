@@ -10,9 +10,10 @@ The repo is organized so domain-owned folders live inside their domain. Open one
 
 | Domain | CLAUDE.md | What Lives There |
 |--------|-----------|-----------------|
-| **the-block/** | `the-block/CLAUDE.md` | Day-job PM work at The Block (crypto/ETF). Nested: `product-management/` (PRD templates, sprint frameworks, stakeholder comms templates) |
+| **the-block/** | `the-block/CLAUDE.md` | **Archived 2026-05** — reference templates from prior PM role at The Block (crypto/ETF). |
 | **creative-studio/** | `creative-studio/CLAUDE.md` | Phaser game dev, Remotion video production, pixel art, sprite pipelines, animation, writing. Nested: `16bitfit-battle-mode/` (project), `design-team/` (design system + 5 review agent support) |
 | **life-systems/** | `life-systems/CLAUDE.md` | Finance tracking, health habits, learning drills, task management, time, career transition |
+| **vault/20_projects/prj-job-hunt-2026/** | (project, not a domain workspace) | Active 8-week job-hunt sprint (post-Block, 2026-05-04). Master plan + migration plan + status tracker. |
 
 Cross-cutting (no domain CLAUDE.md):
 
