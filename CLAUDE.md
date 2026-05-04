@@ -12,11 +12,11 @@ As of v3.15.0, the repo is organized so that domain-owned folders live inside th
 
 | Domain | CLAUDE.md | What lives here |
 |--------|-----------|----------------|
-| `the-block/` | [the-block/CLAUDE.md](the-block/CLAUDE.md) | Day-job PM work. Nested: `product-management/` (PRD templates, sprint frameworks, stakeholder comms templates) |
+| `the-block/` | [the-block/CLAUDE.md](the-block/CLAUDE.md) | **Archived 2026-05** — reference templates from prior role at The Block. |
 | `creative-studio/` | [creative-studio/CLAUDE.md](creative-studio/CLAUDE.md) | Phaser game dev, Remotion video, pixel art, Adobe MCP, animation, writing. Nested: `16bitfit-battle-mode/` (project), `design-team/` (design system + review agent support) |
 | `life-systems/` | [life-systems/CLAUDE.md](life-systems/CLAUDE.md) | Finance, health, learning, tasks, time, career transition |
 | `claude-mastery/` | (no CLAUDE.md — cross-cutting reference) | CLI, hooks, MCP, settings, tech stack, prompt-engineering reference |
-| `vault/` | (Obsidian, not a workspace) | PARA notes, prompts, RAG, Granola meeting sync, operating-model artifacts |
+| `vault/` | (Obsidian, not a workspace) | PARA notes, prompts, RAG, Granola meeting sync, operating-model artifacts. Active job-hunt project at `vault/20_projects/prj-job-hunt-2026/` |
 
 ## Domain Routing
 
@@ -24,10 +24,11 @@ Use this table to decide which CLAUDE.md to load for a given task:
 
 | Task type | Load this CLAUDE.md |
 |---|---|
-| PM / day-job / Block work | [the-block/CLAUDE.md](the-block/CLAUDE.md) |
+| PM / day-job / Block work *(archived)* | [the-block/CLAUDE.md](the-block/CLAUDE.md) |
 | Creative work (Remotion, art, writing, animation) | [creative-studio/CLAUDE.md](creative-studio/CLAUDE.md) |
 | 16BitFit Battle Mode specifically | [creative-studio/16bitfit-battle-mode/CLAUDE.md](creative-studio/16bitfit-battle-mode/CLAUDE.md) |
 | Personal systems (finance, health, learning, time) | [life-systems/CLAUDE.md](life-systems/CLAUDE.md) |
+| Job-hunt work | `vault/20_projects/prj-job-hunt-2026/` |
 | Claude Code CLI / hooks / MCP / settings reference | [claude-mastery/](claude-mastery/) |
 
 ## Design Team Agents
@@ -56,7 +57,7 @@ Skills and agents prefer native MCPs over Zapier. When both exist, always use na
 
 **Still Zapier-only:** Salesforce, GA4, Webhooks, Code execution.
 
-**Calendar rule:** Always query BOTH `sean.winslow28@gmail.com` AND `swinslow@theblock.co` in parallel.
+**Calendar rule:** Single calendar — `sean.winslow28@gmail.com`. The Block work calendar archived 2026-05.
 
 ## Connected External Research APIs
 
