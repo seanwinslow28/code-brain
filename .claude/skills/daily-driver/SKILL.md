@@ -46,25 +46,25 @@ Weekly notes use:
 
 ## Examples
 
-**Example 1: Morning Start**
+**Example 1: Morning Start (Job-Hunt + Deep-Work mode)**
 ```
 User: "Start my day"
 Claude: [Uses daily-driver]
 Good morning! Let me pull up your context.
 
 Reading yesterday's daily note... Found 2 open loops:
-1. PR review for Campus auth flow (assigned yesterday)
-2. Draft subscription audit email to finance
+1. Follow up on Anthropic AI PM application (sent 3 days ago, no response)
+2. Finish v0 of intent-engineering MCP server (60% done)
 
-Reading your calendar (if available)... 3 meetings today.
+Reading your calendar... 1 recruiter screen today at 2pm.
 
 ## Today's Plan
-1. [Deep Work] PR review for Campus auth - 45 min (carry-over)
-2. [Quick Win] Draft subscription audit email - 15 min (carry-over)
-3. [Meeting Prep] Sprint planning at 2pm - review board first
-4. [Creative] Continue animation prototype if time permits
+1. [Deep Work] Intent-engineering MCP server v0 — analyze_intent_spec tool (90 min)
+2. [Pipeline] 2 quality applications to Tier-1 targets (60 min)
+3. [Meeting Prep] 1:45pm — read recruiter's LinkedIn, prep 5 questions to ask (15 min)
+4. [Quick Win] Reply to 2 warm-20 contacts awaiting >5 days (15 min)
 
-Based on carry-overs and Focus.md priorities, your #1 focus today is: PR review for Campus auth.
+Based on prj-job-hunt-2026/README.md, your #1 focus today is: ship the analyze_intent_spec tool — that's the Track-C unblocker for the public MCP server release.
 ```
 
 **Example 2: EOD Review**
@@ -91,19 +91,34 @@ Appended to vault/10_timeline/daily/2026-02-20.md
 ### Step 1: Gather Context
 
 1. Read yesterday's daily note from `vault/10_timeline/daily/`
-2. Read any active project notes referenced in yesterday's log from `vault/20_projects/`
-3. Check calendar via Google Calendar MCP — query BOTH `sean.winslow28@gmail.com` (personal) AND `swinslow@theblock.co` (The Block work) calendars in parallel. Use `claude.ai Google Calendar` (gcal_list_events) or `google-workspace` (get_events) tools.
-4. Scan Slack for overnight activity (see Step 1b below)
-5. Check `vault/02_Areas/Focus.md` for current focus areas and priority goals. Use these to inform today's priorities instead of asking.
+2. Read `vault/20_projects/prj-job-hunt-2026/README.md` for current job-hunt status, weekly retro, and any Status checkboxes due in the next 7 days
+3. Read any other active project notes referenced in yesterday's log from `vault/20_projects/`
+4. Check calendar via Google Calendar MCP — query `sean.winslow28@gmail.com` only. (The Block work calendar `swinslow@theblock.co` was archived 2026-05; access has been or is being revoked.) Use `claude.ai Google Calendar` (gcal_list_events) or `google-workspace` (get_events) tools.
+5. Scan Slack for overnight activity (see Step 1b below — currently no-op pending personal Slack workspace)
+6. Check `vault/02_Areas/Focus.md` for current focus areas and priority goals. Use these to inform today's priorities instead of asking.
+
+### Step 1a: Job-Hunt + Deep-Work Morning Brief (job-hunt-2026 active phase)
+
+The 8:45 AM agent surfaces five things while Sean is in active job hunt:
+
+1. **Job-hunt status** — applications submitted yesterday, follow-ups due today, warm-20 messages awaiting reply > 5 days. Pull from `vault/20_projects/prj-job-hunt-2026/applications.md` (when it exists) and `warm-20.md`.
+2. **Today's interview-related calendar events** — anything tagged `interview`, `recruiter`, `screen`, or with a target-company name from `target-companies.md`. Surface these first, before any other meetings.
+3. **Deep-work focus** — pick from current week's MCP server task (Track C in `2026-05-04-onwards-and-upwards-plan.md` Phase 4) + master plan checklist + portfolio-piece work (June 11 short, animation pipeline). Default block: 8:30 AM–12:30 PM Mon–Fri.
+4. **Status checkboxes due** — anything in `prj-job-hunt-2026/README.md` "Status" or "Migration checklist" sections due in next 7 days.
+5. **Yesterday's wins** — what got shipped (counterbalance to the application-rejection emotional ride). Pull from yesterday's daily note "Completed" section.
+
+When the job hunt closes (offer accepted), this Step 1a is retired or rewritten for the new role's rhythm.
 
 ### Step 1b: Slack Overnight Scan
 
-Scan Slack for messages that arrived since last EOD (~5 PM yesterday). Uses the native Slack plugin (not Zapier). Sean's Slack user ID is `U09SC58MYDN`.
+> **2026-05 status:** No-op for the job-hunt domain. Sean's Block Slack workspace was archived with the rest of his Block access; no personal Slack workspace is wired in yet. Skip this step entirely until either a personal Slack workspace is configured or a new role brings a new workspace ID.
+
+When this step is re-enabled (new workspace exists), the historical pattern is preserved below for reference:
 
 **Run these searches in parallel:**
 
 1. **DMs to you** — `slack_search_public_and_private` with query `to:me`, channel_types `im`, sorted by timestamp desc, filtered to after 5 PM yesterday
-2. **@mentions** — `slack_search_public_and_private` with query `<@U09SC58MYDN>`, sorted by timestamp desc, filtered to after 5 PM yesterday
+2. **@mentions** — `slack_search_public_and_private` with query `<@USER_ID>` (replace with active workspace user ID), sorted by timestamp desc, filtered to after 5 PM yesterday
 3. **Key channels** — `slack_read_channel` on high-priority channels (check recent messages for anything urgent)
 
 **Classify each message as:**
@@ -111,25 +126,11 @@ Scan Slack for messages that arrived since last EOD (~5 PM yesterday). Uses the 
 - **FYI** — informational, no action needed but good to know
 - **Skip** — bot noise, automated notifications, irrelevant threads
 
-**Write to daily note** at the `<!-- slack-overnight -->` anchor:
+**Write to daily note** at the `<!-- slack-overnight -->` anchor, grouped by priority (Action Required first), then by sender. Include channel name or "DM" prefix, sender name, time, and a 1-line summary.
 
-```markdown
-## Slack Overnight
-<!-- slack-overnight -->
-### Action Required
-- **Matt Vitebsky** (DM, 4:02 PM): Campus bug triage process — needs response about backend access
-- **Karla Vallecillo** (DM, 3:25 PM): Assigned Salesforce Campus case — review needed
-
-### FYI
-- **Claudine Daumur** (DM, 10:55 AM): Confirmed design approach works, no changes needed
-- **#campus-eng**: 3 new messages about deploy timeline
-```
-
-**Rules:**
+**Rules (when active):**
 - Do NOT include Jira bot notifications (those go in `<!-- jira-log -->`)
 - Do NOT include messages Sean already replied to (check for Sean's replies in context)
-- Group by priority (Action Required first), then by sender
-- Include channel name or "DM" prefix, sender name, time, and a 1-line summary
 
 ### Step 2: Prioritize with the 1-3-5 Rule
 
@@ -217,18 +218,13 @@ On Friday or Sunday, prompt:
 ## Success Criteria
 
 - [ ] Morning planning produces a prioritized daily note
-- [ ] Slack overnight scan classifies messages as Action Required / FYI / Skip
-- [ ] Slack digest written to `<!-- slack-overnight -->` anchor (excludes Jira bot noise and already-replied messages)
+- [ ] Job-hunt + deep-work brief surfaces the five Step 1a signals (status / interview events / deep-work focus / status-checkboxes due / yesterday's wins) when the job hunt is active
+- [ ] Slack overnight scan no-op is honored (no errors against revoked workspaces); when re-enabled, classifies messages as Action Required / FYI / Skip and writes to `<!-- slack-overnight -->` anchor (excludes bot noise + already-replied messages)
 - [ ] EOD review captures open loops and stages tomorrow
 - [ ] Carry-over tasks are tracked (not silently dropped)
 - [ ] Weekly review synthesizes patterns from daily notes
 - [ ] Daily notes follow the vault frontmatter schema
 - [ ] Claude Code session entries use Dataview inline fields
-
-## Temporary Recurring Commitments
-
-### Apartment Cleanup — Daily through March 20, 2026
-Sean is cleaning up/throwing away items from a section of his apartment every day through March 20th (packing for the Boston move). Each morning plan should include an afternoon cleanup task targeting a specific area. Remove this section after March 20, 2026.
 
 ## Copy/Paste Ready
 
