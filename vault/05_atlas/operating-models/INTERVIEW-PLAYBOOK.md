@@ -1,9 +1,9 @@
 ---
 type: reference
-domain: [the-block, creative-studio, life-systems]
+domain: [creative-studio, life-systems, job-hunt-2026]
 status: active
 created: 2026-04-18
-ai-context: "Step-by-step playbook for running the three work-operating-model interviews and committing each result to PR #20 on the v3.15.0-restructure branch. Self-contained — paste-able prompts, no prior conversation context needed."
+ai-context: "Step-by-step playbook for running the work-operating-model interviews. As of 2026-05, the active set is creative-studio, life-systems, and job-hunt-2026. Interview 1 (the-block) is archived following Sean's layoff but preserved here as a re-runnable historical reference. Self-contained — paste-able prompts, no prior conversation context needed."
 ---
 
 # Interview Playbook — Work Operating Model
@@ -24,17 +24,21 @@ Then before each interview:
 - Be honest, not aspirational — the skill captures how you *actually* work, not how you think you should
 - Have your calendar handy (Layer 1 asks about recurring meetings)
 
-## Recommended order
+## Recommended order (as of 2026-05)
 
-1. **the-block** first — day-job tuning has the highest immediate downstream impact (jira-automation, meeting-defender become smarter)
+1. **job-hunt-2026** first — active during Sean's 8-week post-Block search; the daily-driver morning brief leans on the new HEARTBEAT directly
 2. **creative-studio** second — three-machine topology and pipeline friction surface here
 3. **life-systems** third — pulls in cross-domain context (sleep/gym/sacred-blocks constrain everything else)
 
-You can do all three in one sitting (~2.5 hr) or stretch over several days. Mid-layer breaks are fine — the skill saves after each layer; resume by saying *"resume the {domain} interview at Layer N."*
+Interview 1 (**the-block**) is **archived** as of 2026-05 following the layoff. Don't re-run it as part of a fresh-onboarding sequence; it's preserved below for reference and for the rare case where Sean wants to re-interview the historical role for a portfolio narrative.
+
+You can do all three active interviews in one sitting (~2.5 hr) or stretch over several days. Mid-layer breaks are fine — the skill saves after each layer; resume by saying *"resume the {domain} interview at Layer N."*
 
 ---
 
-## Interview 1 — The Block (day job)
+## Interview 1 — The Block (day job) — ARCHIVED 2026-05
+
+> **Archived 2026-05.** The Block role ended 2026-05-04 (cost-cutting layoff). The bundle moved to `vault/40_archive/operating-models-the-block-2026-05/`. Interview content preserved below; do not re-run as part of a fresh-onboarding sequence. If Sean does want to re-interview historical-context (e.g., for a portfolio narrative), the prompts still work — the work-operating-model skill points the the-block argument at the archive folder.
 
 ### Prompt to start
 
@@ -135,24 +139,71 @@ Stage only the life-systems operating-model folder. Report commit SHA and push s
 
 ---
 
-## After all 3 interviews — wrap-up prompt
+## Interview 4 — Job Hunt 2026 (NEW 2026-05)
 
-Use this once all three are committed to PR #20:
+### Prompt to start
 
 ```
-All three operating-model interviews are complete and pushed to PR #20.
+Run the work-operating-model interview for job-hunt-2026.
+
+Read the existing files at vault/05_atlas/operating-models/job-hunt-2026/ first to confirm they're at status: awaiting-interview (this is a fresh interview, not a delta).
+
+Walk me through all 5 layers — Operating Rhythms, Recurring Decisions, Dependencies, Institutional Knowledge, Friction. After each layer, summarize back what I said in 5-8 bullets, show me the proposed artifact updates, and wait for my explicit "confirm" before writing to disk.
+
+Domain-specific tuning to lean into:
+- Layer 1: weekly application + outreach batches (Tue/Thu mornings, 5/week target), interview-cycle scheduling, Friday 4:30 PM weekly retro per vault/20_projects/prj-job-hunt-2026/README.md, default 8:30 AM–12:30 PM deep-work block Mon–Fri, 5:30 PM hard stop.
+- Layer 1, Q5: most flow through sean.winslow28@gmail.com (the-block address archived 2026-05). Track recruiter / interview emails separately or via Gmail labels if needed.
+- Layer 2: auto-yes for warm-intro outreach; auto-no for cold-recruiter spam below walk-away salary or outside Boston-metro / remote. Target archetype priority: AI PM > Tech PM > Creative PM.
+- Layer 3, Q1: Larry Cermak (primary reference, ex-President of The Block), Matt Vitebsky (peer, contacted personally), the 9 P&E peers per vault/20_projects/prj-job-hunt-2026/The-Block-Contacts-After-Layoff.md, plus the warm-network 20.
+- Layer 3, Q3: Track-C work — the intent-engineering MCP server is the differentiator artifact. Ask what specifically blocks shipping v0.
+- Layer 5: application fatigue, interview-prep collisions, offer-decision paralysis are the prime friction points. Look for automations that turn 20+ min admin tasks into 2 min.
+
+After the final layer, do a full read-through of all 5 artifacts and ask me to confirm. Then bump status from "draft" to "confirmed" on each file.
+```
+
+### Prompt to commit + push
+
+```
+The job-hunt-2026 operating-model interview is complete. Please:
+
+1. Verify all 5 files at vault/05_atlas/operating-models/job-hunt-2026/ have status: confirmed (or status: draft if I deferred final review)
+2. Run a cross-file consistency check per .claude/skills/work-operating-model/artifact-templates.md
+3. git add vault/05_atlas/operating-models/job-hunt-2026/
+4. git commit -m "interview(job-hunt-2026): populate 5-layer operating model"
+5. git push
+
+Stage only the job-hunt-2026 operating-model folder. Report commit SHA and push status.
+```
+
+### Prompt to cross-check after morning brief picks it up
+
+```
+The job-hunt-2026 HEARTBEAT.md is now confirmed. Please run:
+
+cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode morning --dry-run | grep -A 6 "job-hunt-2026"
+
+Confirm the HEARTBEAT body surfaces in the preamble (not the awaiting-interview placeholder), and that no the-block references appear, and no "_(artifact unavailable...)_" lines. Report the matched output snippet.
+```
+
+---
+
+## After all 3 active interviews — wrap-up prompt
+
+Use this once the three active interviews (creative-studio, life-systems, job-hunt-2026) are all committed:
+
+```
+All three active operating-model interviews are complete (creative-studio, life-systems, job-hunt-2026).
 
 Please do the following:
 
 1. Run python3 scripts/validate.py and confirm it still exits 0
-2. Run cd agents-sdk && PYTHONPATH=. .venv/bin/pytest tests/ -q
-3. Cross-check that the 15 artifacts (5 files × 3 domains) all have status: confirmed (or draft) and none are still at status: awaiting-interview
-4. Look for cross-domain bleed mentioned in any operating-model.md file — if domain X mentions a person/tool/pattern from domain Y, surface it as a bullet so I can verify the cross-references are accurate
-5. Update CHANGELOG.md v3.15.0 entry — under "Known follow-ups," strike through "Three-domain interviews not yet run" since it's now done
-6. Update PR #20 description: change the "Run 3 operating-model interviews" checkbox to checked, and add the 3 interview commit SHAs
-7. Mark PR #20 as Ready for Review (gh pr ready 20)
+2. Run cd agents-sdk && PYTHONPATH=. .venv/bin/pytest tests/ -q (the WOL test failures in tests/test_route_to_macbook.py are pre-existing)
+3. Run cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode morning --dry-run | grep -A 6 "creative-studio\|life-systems\|job-hunt-2026"
+4. Cross-check that the 15 active artifacts (5 files × 3 domains) all have status: confirmed (or draft) and none are still at status: awaiting-interview. The the-block archive bundle at vault/40_archive/operating-models-the-block-2026-05/ is excluded from this check.
+5. Look for cross-domain bleed mentioned in any operating-model.md file — if domain X mentions a person/tool/pattern from domain Y, surface it as a bullet so I can verify the cross-references are accurate
+6. Confirm the daily-driver morning brief leans on the job-hunt-2026 HEARTBEAT body for Step 1a signals and contains no the-block references and no "_(artifact unavailable...)_" lines
 
-Report results. Don't merge — wait for Mac Mini cross-machine review pass before merging to main.
+Report results.
 ```
 
 ---
@@ -179,6 +230,6 @@ If any artifact reads like it could apply to a generic PM / generic creative / g
 
 ## Honest > aspirational reminder
 
-The downstream agents — `meeting-defender`, `daily-driver`, `sprint-health`, `process-inbox`, `pr-digest` — will trust whatever lands in these files. If you write "I never check email after 6pm" but actually do, meeting-defender will defend a window you don't actually protect, and you'll learn to ignore it.
+The downstream agents — `daily-driver`, `meta_agent`, `flush`, `knowledge_lint` — will trust whatever lands in these files. If you write "I never check email after 6pm" but actually do, the morning brief will protect a window you don't actually protect, and you'll learn to ignore it.
 
 The operating model is for capturing reality. Aspirations belong somewhere else.
