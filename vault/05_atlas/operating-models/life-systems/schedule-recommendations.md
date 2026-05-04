@@ -41,8 +41,7 @@ Calendar-level and interaction-level defenses. Rules take the form *When X, then
 - **When** communicating tone, **then** calm / factual / zen. Never nag. Never scold. Never "you should."
 - **When** disagreeing with Sean, **then** phrase as "here's an alternative to consider." Never confident "you're wrong, do this instead."
 - **When** working with personal financial or health data, **then** route through local models (`gemma4`, `phi4-mini` on Mac Mini). Never ship to cloud without explicit approval.
-- **When** a calendar pull is needed, **then** query BOTH `sean.winslow28@gmail.com` AND `swinslow@theblock.co` in parallel. Single-calendar pulls have bitten the morning agent before.
-- **When** summarizing between calendars, **then** keep outputs segmented — no cross-contamination between personal and Block contexts.
+- **When** a calendar pull is needed, **then** query `sean.winslow28@gmail.com` only. The prior `swinslow@theblock.co` work calendar was archived 2026-05 with the Block layoff. Do not query it.
 
 ## Automate
 

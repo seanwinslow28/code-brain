@@ -5,6 +5,63 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.26.0] - 2026-05-04
+
+Block-to-job-hunt migration — repurposes the repo from a 3-domain world (the-block / creative-studio / life-systems) to a 4-domain world (creative-studio / life-systems / job-hunt-2026 — with the-block bundle archived 2026-05). Sean was laid off from The Block on 2026-05-04 (cost-cutting layoff delivered by Larry Cermak + Vicky Lu). The migration sanitizes Block-specific instructions out of the agent fleet, repoints the daily-driver morning brief at job-hunt + deep-work signals, archives the the-block operating-model bundle without deleting it, extends the work-operating-model skill to a 4th domain (Path C — minimal in-place fork), and stands up an awaiting-interview job-hunt-2026 operating-model bundle ready for Sean to populate via the new Interview 4 prompt.
+
+> **Migration philosophy:** Sanitize-in-place where possible (skills); archive-don't-delete where sanitization isn't appropriate (Block-confidential operating-model artifacts). No skills/agents/hooks deleted. None of the validator-protected workspace folders moved.
+
+### Added
+
+- `vault/05_atlas/operating-models/job-hunt-2026/` — new 4th domain bundle. 5 placeholder artifacts (HEARTBEAT, USER, SOUL, operating-model, schedule-recommendations) at `status: awaiting-interview`, ready for Sean to populate via the work-operating-model skill.
+- `vault/40_archive/operating-models-the-block-2026-05/` — archived the-block bundle (`git mv` from `vault/05_atlas/operating-models/the-block/`). 5 artifacts preserved + new `README.md` documenting provenance and re-runnability.
+- `.claude/skills/daily-driver/SKILL.md` — new "Step 1a: Job-Hunt + Deep-Work Morning Brief" section. The 8:45 AM SDK agent now surfaces 5 job-hunt + deep-work signals: applications submitted yesterday, today's interview events, deep-work focus (Track-C MCP server), Status checkboxes due in next 7 days, yesterday's wins.
+- `.claude/skills/work-operating-model/SKILL.md` — new "Job Hunt 2026" subsection in Domain-Specific Tuning Notes. New 4th row in Domain Argument Handling table. New routing rule for "job hunt" / "hunt" / "search" / "onwards" → job-hunt-2026.
+- `.claude/skills/work-operating-model/interview-questions.md` — Layer 1 Q2 sub-bullet for Job Hunt 2026 (weekly app/outreach batches, interview cycles, Friday weekly retro).
+- `vault/05_atlas/operating-models/INTERVIEW-PLAYBOOK.md` — new "Interview 4 — Job Hunt 2026" section with start prompt, commit prompt, and cross-check prompt mirroring Interviews 2 + 3. Interview 1 (The Block) banner-marked archived 2026-05.
+- `.claude/hooks/daily-note-appender.sh` — new domain-classification pattern: `*job-hunt-2026*\|*job-hunt*\|*onwards-and-upwards*) DOMAIN="job-hunt"`. Existing patterns kept.
+- `vault/Sean-Winslow-Full-Personal-Context-v2.0.md` — new top section `## Career Status (2026-05-04)` documenting layoff context, 8-week job hunt, AI/Tech/Creative PM target priority, Larry Cermak as primary reference. Ed-as-reporting-line moved to Prior Role archive subsection.
+
+### Changed
+
+- **DOMAINS tuple updated across 6 production files** in `agents-sdk/`: `lib/artifact_loader.py`, `agents/daily_driver.py`, `agents/meta_agent.py`, `agents/flush.py`, `agents/knowledge_lint.py`, `agents/process_inbox.py`. From `("the-block", "creative-studio", "life-systems")` to `("creative-studio", "life-systems", "job-hunt-2026")`. Test fixtures updated correspondingly.
+- **9 Block-themed skills sanitized in place** (Chunk 4 of migration plan + Karpathy synthesis "consolidate" sweep): `analytics-workarounds`, `api-product-management`, `campus-education`, `etf-page-creator`, `jira-automation`, `meeting-prep`, `revops-adops-automation`, `sprint-health`, `stakeholder-update`. Strip Block specifics; keep PM patterns. None deleted.
+- **`crypto-web3-context` KEPT UNCHANGED** — domain knowledge useful for AI/crypto PM target sector.
+- `daily-driver` skill: dropped `swinslow@theblock.co` from calendar parallel-query. Single calendar (`sean.winslow28@gmail.com`). Slack overnight scan no-op'd until personal Slack workspace exists. Apartment-cleanup section removed (March 20 deadline already passed).
+- `time-management` skill **full rewrite** for job-hunt rhythm: 5:30 AM wake (was 4:45 AM), Track A/B/C weekly structure (replaces 45/35/20 split), 8:30 AM–12:30 PM deep work, Friday 4:30–5:30 PM weekly retro, 5:30 PM hard stop (non-negotiable per master plan).
+- `intent-engineering` + `technical-writing` + `zapier-chrome-automation`: incidental Block sample data → generic equivalents.
+- Root `CLAUDE.md`: domain table the-block row → "Archived 2026-05"; routing table marked the-block (archived); new row "Job-hunt work → vault/20_projects/prj-job-hunt-2026/"; calendar rule replaced with single-calendar instruction.
+- Root `README.md`: mirrors CLAUDE.md domain-table edits.
+- `the-block/CLAUDE.md` + `the-block/README.md`: archive banner at top. Workspace folder kept in place at root per `scripts/validate.py` rule #7 (validator hard-enforces the-block/ exists).
+- `creative-studio/CLAUDE.md` + `life-systems/CLAUDE.md`: incidental Block refs removed; routing reroutes to prj-job-hunt-2026/.
+- `vault/05_atlas/operating-models/README.md` + `INTERVIEW-PLAYBOOK.md`: 3-active-domain framing (creative-studio, life-systems, job-hunt-2026); the-block archive note.
+- `agents-sdk/config.toml`: daily-driver agent `enabled` flipped temporarily for migration; `sprint_health.project_key` generalized from `BE` to `TBD` (agent dormant; project key gets set when re-activated for new role's Jira instance).
+- `agents-sdk/benchmarks/golden_sets/inbox_triage.json`: Block sample data → generic equivalents.
+- `MEMORY.md` (auto-memory): single-calendar rule; new "Block-to-Job-Hunt Migration (2026-05-04)" project memory; Block Jira config moved to `## Archived` section.
+
+### Migration plan + audit plan
+
+Plan documents (vault, source of truth for this release):
+
+- `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-04-onwards-and-upwards-plan.md` — 8-phase master plan (Track A runway / Track B pipeline / Track C MCP-server differentiator)
+- `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-05-block-to-job-hunt-migration.md` — 5-day migration plan (Chunks 1–5)
+- `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-05-block-to-job-hunt-audit-plan.md` — file-level audit (P0/P1/P2 tables) + operating-model recommendation (Path C) + Sean's resolutions to the 8 open questions
+
+### Counts
+
+- 117 skills (no change — sanitized in place, none deleted)
+- 13 subagents (no change)
+- 13 hooks (no change)
+- 14 SDK agents (7 active — no change)
+- **3 active operating-model domains** (was 3; the-block archived; job-hunt-2026 added)
+- pytest suite **stays green** (modulo 2 pre-existing WOL test orphans in `tests/test_route_to_macbook.py` from the v3.14.3 WOL drop)
+
+### Known follow-ups
+
+- **Interview 4 not yet run** — Sean needs to run the work-operating-model skill against `domain=job-hunt-2026` interactively (~45 min) to populate the placeholder bundle. Until then, the daily-driver morning brief gets job-hunt context from `vault/20_projects/prj-job-hunt-2026/README.md` (which IS populated) instead of from the HEARTBEAT body. Cross-check prompt is in INTERVIEW-PLAYBOOK Interview 4.
+- **Slack overnight scan stays no-op** until Sean has a personal Slack workspace wired in.
+- **Atlassian + Block calendar MCP cleanup** (migration Chunk 5) deferred to Mon 5/11 per the migration plan calendar.
+
 ## [3.25.0] - 2026-05-03
 
 Gemini Deep Research integration — ships a new `gemini-deep-research` skill, an autonomous SDK agent (`gemini_researcher`, **default disabled**), and a Python helper (`agents-sdk/scripts/gemini_dr.py`) with self-policing cost caps. The cap stack is: $7 per-task hard ceiling, $10 per-day circuit breaker, $20 per-month governor — meaning worst-case spend on a queue-stuffing accident is $10/day, not unbounded. The skill teaches interactive sessions when and how to delegate to Gemini DR vs. run a local LDR query. The agent is committed and plist-shipped but intentionally not loaded by `install_schedules.sh` unless the operator passes `INSTALL_GEMINI=1`. Spend is tracked in a rolling ledger at `vault/health/gemini-spend-{YYYY-MM}.json` (created on first call).

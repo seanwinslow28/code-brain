@@ -89,5 +89,4 @@ Weekday (Boston, post-move):
 
 ## Email Split
 
-- **sean.winslow28@gmail.com**: ~100% of life-systems traffic — personal, financial, subscriptions
-- **swinslow@theblock.co**: only life-systems-adjacent item is Rippling pay stub notifications. Redundant with bank statements — probably not load-bearing for personal finance tracking, but Sean hasn't firmly decided (flag open)
+- **sean.winslow28@gmail.com**: 100% of life-systems traffic — personal, financial, subscriptions. The prior Block work account was archived 2026-05 with the layoff; its only pre-archive life-systems-adjacent traffic was Rippling pay-stub notifications (redundant with bank statements). No active life-systems queries hit a Block-era address any longer.
