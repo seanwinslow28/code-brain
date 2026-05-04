@@ -5,11 +5,14 @@ skills_dir = ".claude/skills"
 life_systems_scripts = "life-systems/scripts"
 
 [agents.daily_driver]
-# DISABLED 2026-05-04 (Mon PM) — Block-to-job-hunt migration. Re-enable Tue PM
-# (5/5) after Chunk 2 ships (daily-driver skill repointed at job-hunt + deep-
-# work brief). See vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/
-# 2026-05-05-block-to-job-hunt-migration.md (Chunk 1).
-enabled = false
+# Re-enabled 2026-05-04 after Block-to-job-hunt migration Steps 1-8 + the
+# Step 11 sanitization sweep landed. The 8:45 AM SDK agent now surfaces
+# the job-hunt + deep-work brief (see daily-driver/SKILL.md Step 1a) and
+# loads the 3 active operating-model HEARTBEATs (creative-studio,
+# life-systems, job-hunt-2026 — no the-block). The job-hunt-2026 HEARTBEAT
+# is in awaiting-interview state until Sean runs Interview 4; until then
+# the brief pulls job-hunt status from prj-job-hunt-2026/README.md.
+enabled = true
 skills = ["daily-driver", "vault-read-write"]
 morning_time = "08:45"
 evening_time = "17:00"
