@@ -9,8 +9,8 @@ summary, and appends a new block to `vault/daily/YYYY-MM-DD.md` (creating
 the file if missing).
 
 Phase 2 (2026-04-27): when `[artifacts.per_agent.flush]` lists `SOUL` in
-its `on_demand` array, the prompt is prefixed with all three domain SOUL
-bodies (the-block, creative-studio, life-systems) so the local model can
+its `on_demand` array, the prompt is prefixed with all active domain SOUL
+bodies (creative-studio, life-systems, job-hunt-2026) so the local model can
 cross-reference new entries against established Tier-A items. ~46K-char
 prepend, well within both gemma4:e4b's 32K and Qwen3-14B's 40K+ windows.
 
@@ -109,10 +109,10 @@ def pick_routing_tier(n_messages: int) -> RoutingTier:
 
 
 def build_soul_prepend(config: Config | None) -> str:
-    """Three-domain SOUL bodies, framed as a reference block.
+    """Active-domain SOUL bodies, framed as a reference block.
 
     Locked decision (2026-04-23, plan §9 Q3): every flush run prepends
-    all three domain SOULs. No domain-inference helper. Returns "" when
+    all active domain SOULs. No domain-inference helper. Returns "" when
     `[artifacts].enabled = false`, when the meta_agent has no per-agent
     entry, or when `flush.on_demand` doesn't include `SOUL` — that path
     is the instant-rollback per `[artifacts.per_agent.flush] = {}`.
@@ -302,7 +302,7 @@ def run_flush(
     HTTP — can be overridden for tests). Appends to the daily log.
 
     When `config` is provided and the artifacts wiring is on, the prompt
-    is prefixed with all three domain SOUL bodies. `config=None` keeps the
+    is prefixed with all active domain SOUL bodies. `config=None` keeps the
     pre-Phase-2 behavior (no SOUL prepend) — used by existing tests.
 
     `trigger` flows into the daily-log session block's `tag:` field so

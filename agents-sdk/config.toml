@@ -69,7 +69,10 @@ enabled = false
 skills = ["sprint-roadmap", "vault-read-write"]
 max_turns = 15
 max_budget_usd = 0.50
-project_key = "BE"
+# Agent is dormant; project key gets set when it's re-activated for a new
+# role's Jira instance (was "BE" for The Block prior to the 2026-05-04
+# layoff / job-hunt migration).
+project_key = "TBD"
 schedule = "Friday 15:00"
 
 [agents.vault_indexer]

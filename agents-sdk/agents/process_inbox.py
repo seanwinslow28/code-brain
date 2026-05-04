@@ -101,7 +101,7 @@ def build_artifact_preamble(config) -> str:
         pointer_lines = [
             "OPERATING-MODEL CONTEXT (on-demand — Read these when an inbox item needs deeper routing context):",
         ]
-        for domain in ("the-block", "creative-studio", "life-systems"):
+        for domain in ("creative-studio", "life-systems", "job-hunt-2026"):
             kinds_csv = ",".join(on_demand)
             pointer_lines.append(f"- {artifact_base}/{domain}/{{{kinds_csv}}}.md")
         pointer_lines.append(

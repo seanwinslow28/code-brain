@@ -213,9 +213,9 @@ class TestBuildSoulPrepend:
 
     def test_includes_all_three_domain_souls(self, tmp_artifacts: Path):
         block = build_soul_prepend(_flush_config(tmp_artifacts))
-        assert "## SOUL — the-block" in block
         assert "## SOUL — creative-studio" in block
         assert "## SOUL — life-systems" in block
+        assert "## SOUL — job-hunt-2026" in block
 
     def test_uses_framing_markers(self, tmp_artifacts: Path):
         block = build_soul_prepend(_flush_config(tmp_artifacts))
@@ -224,11 +224,11 @@ class TestBuildSoulPrepend:
         assert block.rstrip().endswith("--- BEGIN SESSION TRANSCRIPT EXTRACTION ---")
 
     def test_missing_domain_soul_maps_to_unavailable(self, tmp_artifacts: Path):
-        (tmp_artifacts / "05_atlas" / "operating-models" / "life-systems" / "SOUL.md").unlink()
+        (tmp_artifacts / "05_atlas" / "operating-models" / "job-hunt-2026" / "SOUL.md").unlink()
         block = build_soul_prepend(_flush_config(tmp_artifacts))
-        assert "## SOUL — life-systems\n\n[unavailable]" in block
+        assert "## SOUL — job-hunt-2026\n\n[unavailable]" in block
         # Other two still load
-        assert "## SOUL — the-block" in block
+        assert "## SOUL — creative-studio" in block
 
 
 class TestRunFlushSoulPrepend:
@@ -273,9 +273,9 @@ class TestRunFlushSoulPrepend:
         # SOUL prepend lands first
         assert prompt.startswith("--- BEGIN OPERATING-MODEL SOUL CONTEXT")
         # All three domain SOULs present
-        assert "## SOUL — the-block" in prompt
         assert "## SOUL — creative-studio" in prompt
         assert "## SOUL — life-systems" in prompt
+        assert "## SOUL — job-hunt-2026" in prompt
         # And the existing prompt body lands AFTER the prepend, unchanged
         idx = prompt.find("You are summarizing a single Claude Code session")
         assert idx > 0
