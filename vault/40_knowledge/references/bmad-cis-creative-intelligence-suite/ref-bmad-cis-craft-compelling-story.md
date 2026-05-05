@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "Use the storytelling workflow to create narratives that persuade and inspire"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "How-to guide for the CIS `storytelling` workflow — narrative crafting via proven story frameworks for product/brand stories, pitch decks, user stories, change communication, and marketing content."
 ---
 Use the `storytelling` workflow to craft compelling narratives using proven story frameworks, emotional psychology, and platform-specific adaptation.
 

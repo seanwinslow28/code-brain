@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "The five phases of human-centered design"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "Explanation of the five design-thinking phases (Empathize, Define, Ideate, Prototype, Test) as guided by Maya's CIS workflow — non-linear iteration centered on humans."
 ---
 Design thinking is a non-linear, iterative process for creative problem-solving that puts humans at the center. Maya’s workflow guides you through all five phases.
 

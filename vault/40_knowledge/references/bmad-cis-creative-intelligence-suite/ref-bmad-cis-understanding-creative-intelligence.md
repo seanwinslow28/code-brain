@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "How CIS applies structured creativity to innovation and problem-solving"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "Conceptual explanation behind CIS — creative intelligence as a learnable skill set (divergent thinking, pattern recognition, reframing, synthesis) rather than an innate trait."
 ---
 Creative intelligence combines systematic methods with creative thinking to produce breakthrough ideas and solutions. CIS makes this capability accessible through guided workflows.
 

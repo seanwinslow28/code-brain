@@ -7,9 +7,12 @@ created: 2026-05-05
 description: "Google's approach to email"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "ollama"
+  - "claude-desktop"
+type: "reference"
+status: processed
+domain: [claude-mastery]
+ai-context: "Ollama 0.23 release announcement — Cloud models can now serve Claude Desktop's third-party inference, making Ollama Cloud usable inside Claude Cowork and Claude Code via `ollama launch claude-desktop`."
 ---
 Ollama 0.23 now supports Claude Desktop’s built-in third party inference.
 

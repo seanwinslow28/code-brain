@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "Learn to brainstorm, innovate, and solve problems with Creative Intelligence Suite"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "BMad CIS getting-started tutorial — install/initialize the suite, run a first brainstorming session with Carson, and step through design thinking, innovation strategy, problem-solving, and storytelling workflows."
 ---
 -Unlock creative breakthroughs using AI-powered workflows with specialized agents that guide you through ideation, design thinking, innovation strategy, and systematic problem-solving.
 

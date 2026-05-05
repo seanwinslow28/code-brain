@@ -8,9 +8,13 @@ created: 2026-05-05
 description: "Watch now | The standard career advice in 2026 is to build a portfolio."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "nates-newsletter"
+  - "career-transition"
+  - "job-hunt-2026"
+type: "reference"
+status: processed
+domain: [life-systems, product-management]
+ai-context: "Nate's Newsletter (2026-04-19) — comprehension as the new scarce signal: a four-question explanation-artifact template + the case for Nate's TalentBoard as a public proof-of-understanding profile vs. static resumes."
 ---
 The standard career advice in 2026 is to build a portfolio. Learn the tools. Ship projects. Show, don’t tell. And that advice isn’t wrong, exactly, but it does lead all of us toward the one thing AI already accelerates better than we do: producing stuff. More projects, more demos, more prototypes, everyone generating faster, shipping more, adding to a pile that grows at machine speed and never stops.
 

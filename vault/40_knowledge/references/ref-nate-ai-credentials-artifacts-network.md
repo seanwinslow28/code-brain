@@ -8,9 +8,13 @@ created: 2026-05-05
 description: "If you're trying to get hired in AI, artifacts > resumes."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "nates-newsletter"
+  - "career-transition"
+  - "job-hunt-2026"
+type: "reference"
+status: processed
+domain: [life-systems, product-management]
+ai-context: "Nate's Newsletter (2026-03-25) — argues that AI hiring is artifact-driven, not credential-driven, and lists the seven concrete skills employers actually hire for; relevant input to Sean's job-hunt portfolio strategy."
 ---
 Nobody is admitting this publicly, so I will: **there are essentially infinite AI jobs right now.** Not “growing demand.” Not “a hot sector.” Infinite, as in every company I work with has an uncapped budget for AI talent and will hire as many qualified people as they can find, and they still can’t find enough. I’ve been kicking around tech for decades and I have never seen a labor market this lopsided. Accenture is training 700,000 people on agentic AI. The ManpowerGroup survey of 39,000 employers across 41 countries says AI skills are now the single hardest capability to find on Earth. Not among the hardest. The hardest.
 
