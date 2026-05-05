@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "Configure CIS workflows, output locations, and agent behavior"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "CIS configuration reference — settings in `_bmad/cis/config.yaml` (output_folder, user_name, communication_language) and how they shape workflow output behavior."
 ---
 Configure Creative Intelligence Suite workflows, output behavior, and agent preferences.
 

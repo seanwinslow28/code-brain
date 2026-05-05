@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "Use the innovation strategy workflow to find disruption opportunities"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "How-to guide for the CIS `innovation-strategy` workflow — finding disruption opportunities and architecting business model innovation using strategic frameworks."
 ---
 Use the `innovation-strategy` workflow to identify disruption opportunities and architect business model innovation using proven strategic frameworks.
 

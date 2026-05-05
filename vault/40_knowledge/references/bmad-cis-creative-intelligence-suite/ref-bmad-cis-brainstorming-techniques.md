@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "Overview of the 36 brainstorming techniques in CIS"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "Overview of Carson's 36 brainstorming techniques across 7 categories (collaborative, wild, creative, theatrical, deep, introspective, structured) and which goal each category serves."
 ---
 Carson’s brainstorming workflow offers 36 techniques across seven categories, drawing from decades of facilitation research and practice.
 

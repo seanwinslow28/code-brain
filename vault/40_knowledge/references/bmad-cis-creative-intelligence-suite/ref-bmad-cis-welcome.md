@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "Creative Intelligence Suite - Innovation, brainstorming, and problem-solving"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "Landing page for BMad's Creative Intelligence Suite — catalog of agents (Carson, Maya, Victor, Dr. Quinn, Sophia) and workflows for brainstorming, design thinking, innovation strategy, problem-solving, and storytelling."
 ---
 ## Creative Intelligence Suite
 
