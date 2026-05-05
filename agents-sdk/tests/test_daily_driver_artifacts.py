@@ -65,21 +65,21 @@ class TestArtifactPreambleContent:
     def test_includes_all_three_heartbeats(self, tmp_artifacts: Path):
         cfg = _make_config(tmp_artifacts)
         block = build_artifact_preamble(cfg)
-        assert "## the-block" in block
         assert "## creative-studio" in block
         assert "## life-systems" in block
+        assert "## job-hunt-2026" in block
         # Body content from fixture
-        assert "Sacred first hour 8:45-9:45" in block
         assert "Block work through 3 PM" in block
         assert "Sacred first hour 5:30-6:30 AM" in block
+        assert "Sacred first hour 8:45-9:45" in block
 
     def test_lists_on_demand_paths_for_all_domains(self, tmp_artifacts: Path):
         cfg = _make_config(tmp_artifacts)
         block = build_artifact_preamble(cfg)
         assert "USER,SOUL,operating-model,schedule-recommendations" in block
-        assert "the-block/" in block
         assert "creative-studio/" in block
         assert "life-systems/" in block
+        assert "job-hunt-2026/" in block
 
     def test_includes_tone_and_capture_rules(self, tmp_artifacts: Path):
         cfg = _make_config(tmp_artifacts)
@@ -103,19 +103,19 @@ class TestArtifactPreambleToggles:
             per_agent={"daily_driver": {"heartbeats": False, "on_demand": ["USER"]}},
         )
         block = build_artifact_preamble(cfg)
-        assert "## the-block" not in block
-        assert "the-block/{USER}.md" in block
+        assert "## creative-studio" not in block
+        assert "creative-studio/{USER}.md" in block
         assert "calm, factual, zen" in block
 
     def test_missing_heartbeat_does_not_crash(self, tmp_artifacts: Path):
-        (tmp_artifacts / "05_atlas/operating-models/creative-studio/HEARTBEAT.md").unlink()
+        (tmp_artifacts / "05_atlas/operating-models/life-systems/HEARTBEAT.md").unlink()
         cfg = _make_config(tmp_artifacts)
         block = build_artifact_preamble(cfg)
         # Other two domains still render; the missing one surfaces a gap marker.
-        assert "## the-block" in block
         assert "## creative-studio" in block
-        assert "artifact unavailable" in block
         assert "## life-systems" in block
+        assert "artifact unavailable" in block
+        assert "## job-hunt-2026" in block
 
 
 class TestBuildPreambleIntegration:
@@ -142,7 +142,7 @@ class TestBuildPreambleIntegration:
         out = build_preamble("morning", cfg)
         assert "ZERO-INTERACTION MANDATE" in out
         assert "OPERATING-MODEL CONTEXT (always loaded" in out
-        assert "## the-block" in out
+        assert "## creative-studio" in out
 
     def test_evening_mode_does_not_inject_artifact_block(self, tmp_artifacts: Path):
         cfg = _FakeConfig(

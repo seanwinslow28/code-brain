@@ -343,17 +343,17 @@ Run this against every intent spec before shipping.
 
 ## Domain Examples
 
-### Example 1: PM Work — Campus 201 Course Creator
+### Example 1: PM Work — Education Course Creator
 
 *Focus: Alignment to user value and strict verification.*
 
-- **Objective:** Create Campus 201 cryptocurrency education courses that teach
+- **Objective:** Create education courses for a learning platform that teach
   complex concepts accessibly. Prioritize educational accuracy over content volume.
-- **Desired Outcome:** Course page published on Campus with all required fields
-  populated and SEO metadata generated per Block standards.
-- **Health Metric:** Never publish content with unverified crypto price data
+- **Desired Outcome:** Course page published with all required fields
+  populated and SEO metadata generated per the platform's standards.
+- **Health Metric:** Never publish content with unverified domain data
   or claims. If uncertain, flag with `[NEEDS REVIEW]` tags.
-- **Stop Rule:** Halt if Jira API rate limit (PRO project) is reached. Do not
+- **Stop Rule:** Halt if the ticket-tracker API rate limit is reached. Do not
   retry more than 3 times.
 - **Hard Constraint:** All content changes require PR review before merge
   (enforced via GitHub branch protection, not prompt).
@@ -384,8 +384,7 @@ Run this against every intent spec before shipping.
   meetings over creatively brainstorming new tasks.
 - **Desired Outcomes:**
   - A daily note exists at `vault/10_timeline/daily/YYYY-MM-DD.md` with 1-3-5 priorities
-  - The note contains a schedule block from both Google Calendars
-    (`sean.winslow28@gmail.com` and `swinslow@theblock.co`)
+  - The note contains a schedule block from the user's primary Google Calendar
   - Carry-forward items from yesterday are captured
 - **Health Metrics:**
   - Data Non-Destruction: Never overwrite existing text. Use PATCH at

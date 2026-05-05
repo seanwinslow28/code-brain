@@ -109,12 +109,12 @@ This is non-negotiable. Never skip this step even if "we just checked" or "it's 
 
 ### Steps
 
-1. Ensure Chrome is connected (if not, prompt: "Please run `/chrome` or launch with `claude --chrome` and ensure your **swinslow@theblock** Chrome profile is the active window.")
+1. Ensure Chrome is connected (if not, prompt: "Please run `/chrome` or launch with `claude --chrome` and ensure your **your-zapier-account** Chrome profile is the active window.")
 2. Navigate to `https://zapier.com/app/zaps`
 3. Read the page to identify the logged-in account
-4. Verify the account is **swinslow@theblock**
+4. Verify the account is **your-zapier-account**
 5. If the account does NOT match, **STOP immediately** and alert:
-   > "Wrong Zapier account detected. Please close other Chrome profiles and ensure only your swinslow@theblock profile is open, then re-run `/chrome`."
+   > "Wrong Zapier account detected. Please close other Chrome profiles and ensure only your your-zapier-account profile is open, then re-run `/chrome`."
 6. Only proceed after verification passes
 
 ### Re-verification Triggers

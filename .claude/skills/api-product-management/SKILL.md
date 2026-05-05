@@ -1,13 +1,13 @@
 ---
 name: api-product-management
-description: API product management for data API products like The Block Data. Generates API documentation (OpenAPI/Swagger), endpoint specifications, SDK scaffolding, developer portal content, rate limiting docs, versioning strategies, and DX optimization. Use when writing API specs, designing developer portals, creating endpoint documentation, planning API versioning, or specifying data API features.
+description: API product management for data API products like a crypto market data API. Generates API documentation (OpenAPI/Swagger), endpoint specifications, SDK scaffolding, developer portal content, rate limiting docs, versioning strategies, and DX optimization. Use when writing API specs, designing developer portals, creating endpoint documentation, planning API versioning, or specifying data API features.
 ---
 
 # API Product Management
 
 ## Purpose
 
-Provide API product management patterns for data API products. Enable Claude to generate API specifications, developer documentation, SDK scaffolding, and DX-optimized portal content. Tailored for data APIs in the crypto/financial data space like The Block Data's API.
+Provide API product management patterns for data API products. Enable Claude to generate API specifications, developer documentation, SDK scaffolding, and DX-optimized portal content. Tailored for data APIs in the crypto/financial data space like a crypto market data API's API.
 
 ## When to Use
 
@@ -71,7 +71,7 @@ Claude: [Uses api-product-management]
 
 **Example 2: Developer portal quick-start**
 ```
-User: "Write a quick-start guide for The Block Data API"
+User: "Write a quick-start guide for a crypto market data API API"
 Claude: [Uses api-product-management]
 
 # Quick Start Guide
@@ -82,7 +82,7 @@ Sign up at developer.theblock.co and generate an API key from your dashboard.
 ## 2. Make Your First Request
 ```bash
 curl -H "Authorization: Bearer YOUR_API_KEY" \
-  "https://api.theblock.co/v2/tokens/ETH/prices?interval=1d&start=2024-01-01"
+  "https://api.example-crypto.com/v2/tokens/ETH/prices?interval=1d&start=2024-01-01"
 ```
 
 ## 3. Install the SDK
@@ -173,7 +173,7 @@ For every new endpoint, document:
 // Client configuration
 interface ClientConfig {
   apiKey: string;
-  baseUrl?: string;       // Default: "https://api.theblock.co"
+  baseUrl?: string;       // Default: "https://api.example-crypto.com"
   version?: string;       // Default: "v2"
   timeout?: number;       // Default: 30000ms
   retries?: number;       // Default: 3
@@ -348,7 +348,7 @@ const dataApiMcp = createSdkMcpServer({
 ## Copy/Paste Ready
 
 ```
-"Write an API spec for a new endpoint on The Block Data"
+"Write an API spec for a new endpoint on a crypto market data API"
 "Generate OpenAPI documentation for our token metrics API"
 "Design the rate limiting tiers for our data API"
 "Create a quick-start guide for developers using our API"

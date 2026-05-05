@@ -21,15 +21,15 @@ Enable product managers to access, analyze, and report on analytics data even wh
 
 **Example 1: GA4 via Zapier MCP**
 ```
-User: "Pull last week's page views for Campus"
+User: "Pull last week's page views for the courses section"
 Claude: [Uses analytics-workarounds]
 Using Zapier MCP → Google Analytics 4 → Run Report...
 
-Campus pageviews (Feb 10-16, 2026):
+Courses pageviews (Feb 10-16, 2026):
 | Page                  | Views  | Avg Time | Bounce |
 |:----------------------|:-------|:---------|:-------|
 | /courses              | 12,450 | 2:34     | 32%    |
-| /courses/defi-101     | 8,230  | 4:12     | 18%    |
+| /courses/intro-101    | 8,230  | 4:12     | 18%    |
 | /dashboard            | 6,890  | 1:45     | 41%    |
 
 Week-over-week: +8% total views, -3% bounce rate.
@@ -179,7 +179,7 @@ When data already lives in Sheets but Zapier isn't available:
 | Page views by section | GA4 | Weekly | Content performance |
 | Subscriber count | Internal sheet | Monthly | Growth tracking |
 | API usage | Internal dashboard | Weekly | Product adoption |
-| Course enrollment | Campus DB | Weekly | Education engagement |
+| Course enrollment | LMS DB | Weekly | Education engagement |
 | Bounce rate by page | GA4 | Monthly | UX quality signal |
 | Conversion rate | GA4 | Monthly | Funnel health |
 

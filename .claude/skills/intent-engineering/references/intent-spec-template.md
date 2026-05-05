@@ -147,7 +147,7 @@ user_goal: >
 desired_outcomes:
   - "A daily note exists at vault/10_timeline/daily/YYYY-MM-DD.md for the current date"
   - "The note contains a 1-3-5 priority plan (1 big, 3 medium, 5 small)"
-  - "Calendar events from both sean.winslow28@gmail.com and swinslow@theblock.co are included"
+  - "Calendar events from the user's primary Google Calendar are included"
   - "Carry-forward items from yesterday's note are captured"
 
 # 4. HEALTH METRICS

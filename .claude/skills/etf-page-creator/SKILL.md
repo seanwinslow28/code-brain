@@ -1,11 +1,11 @@
 ---
 name: etf-page-creator
-description: Streamline WordPress ETF (Exchange-Traded Fund) page creation for The Block's website. Use when user needs to create or update ETF pages with structured data including Track Insight IDs, symbols, issuers, trading data, categories, and SEO metadata. Guides data collection, validates inputs, and formats output for copy-paste into WordPress fields.
+description: Streamline WordPress ETF (Exchange-Traded Fund) page creation for a publishing platform. Use when user needs to create or update ETF pages with structured data including Track Insight IDs, symbols, issuers, trading data, categories, and SEO metadata. Guides data collection, validates inputs, and formats output for copy-paste into WordPress fields.
 ---
 
 # ETF Page Creator
 
-Create properly formatted WordPress ETF pages for The Block's website with structured data collection and validation.
+Create properly formatted WordPress ETF pages for a publishing platform with structured data collection and validation.
 
 ## Workflow Overview
 

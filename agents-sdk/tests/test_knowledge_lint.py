@@ -161,16 +161,16 @@ class TestBuildSoulContext:
 
     def test_includes_all_three_domain_souls(self, tmp_artifacts: Path):
         ctx = build_soul_context(_kl_config(tmp_artifacts))
-        assert "## SOUL — the-block" in ctx
         assert "## SOUL — creative-studio" in ctx
         assert "## SOUL — life-systems" in ctx
+        assert "## SOUL — job-hunt-2026" in ctx
         assert ctx.startswith("--- BEGIN OPERATING-MODEL SOUL CONTEXT")
         assert "--- END OPERATING-MODEL SOUL CONTEXT ---" in ctx
 
 
 class TestBuildTier2Prompt:
     def test_includes_soul_context_when_supplied(self):
-        soul = "--- BEGIN OPERATING-MODEL SOUL CONTEXT ---\n\n## SOUL — the-block\nbody\n--- END ---\n\n"
+        soul = "--- BEGIN OPERATING-MODEL SOUL CONTEXT ---\n\n## SOUL — creative-studio\nbody\n--- END ---\n\n"
         prompt = _build_tier2_prompt(soul)
         assert prompt.startswith("--- BEGIN OPERATING-MODEL SOUL CONTEXT")
         assert "soul_conflicts" in prompt
@@ -188,7 +188,7 @@ class TestRunTier2SoulConflicts:
         vault.mkdir()
 
         def fake_llm(prompt: str) -> dict:
-            assert "## SOUL — the-block" in prompt
+            assert "## SOUL — creative-studio" in prompt
             return {
                 "contradictions": [],
                 "soul_conflicts": [
@@ -202,9 +202,9 @@ class TestRunTier2SoulConflicts:
 
         soul_ctx = (
             "--- BEGIN OPERATING-MODEL SOUL CONTEXT ---\n\n"
-            "## SOUL — the-block\n\nGitHub write is hard never.\n"
-            "## SOUL — creative-studio\n\nbody\n"
+            "## SOUL — creative-studio\n\nGitHub write is hard never.\n"
             "## SOUL — life-systems\n\nbody\n"
+            "## SOUL — job-hunt-2026\n\nbody\n"
             "--- END OPERATING-MODEL SOUL CONTEXT ---\n\n"
         )
         issues = run_tier2(vault, llm_caller=fake_llm, soul_context=soul_ctx)

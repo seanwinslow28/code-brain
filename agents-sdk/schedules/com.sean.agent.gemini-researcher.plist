@@ -3,20 +3,20 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.sean.agent.daily-evening</string>
+    <string>com.sean.agent.gemini-researcher</string>
     <key>ProgramArguments</key>
     <array>
         <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/bin/python3</string>
-        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/daily_driver.py</string>
+        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/gemini_researcher.py</string>
         <string>--mode</string>
-        <string>evening</string>
+        <string>queue</string>
     </array>
     <key>StartCalendarInterval</key>
     <dict>
         <key>Hour</key>
-        <integer>17</integer>
+        <integer>3</integer>
         <key>Minute</key>
-        <integer>0</integer>
+        <integer>30</integer>
     </dict>
     <key>EnvironmentVariables</key>
     <dict>
@@ -25,9 +25,11 @@
     </dict>
     <key>WorkingDirectory</key>
     <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack</string>
+    <key>RunAtLoad</key>
+    <false/>
     <key>StandardOutPath</key>
-    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/daily-evening-stdout.log</string>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/gemini-researcher-stdout.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/daily-evening-stderr.log</string>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/gemini-researcher-stderr.log</string>
 </dict>
 </plist>

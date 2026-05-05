@@ -93,7 +93,7 @@ def _build_topical_note(question: str, summary: str, run_meta: dict) -> str:
         f"---\n\n"
         f"# {question}\n\n"
         f"> Generated {datetime.now().strftime('%Y-%m-%d %H:%M')} by `deep-researcher` "
-        f"(LDR {run_meta.get('ldr_version', '?')} · model qwen3-14b · "
+        f"(LDR {run_meta.get('ldr_version', '?')} · model qwen3-14b-research · "
         f"iterations={run_meta.get('iterations', '?')}).\n\n"
         f"{body}\n"
     )
