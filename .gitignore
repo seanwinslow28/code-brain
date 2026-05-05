@@ -80,4 +80,5 @@ vault/.vault-index.db
 vault/.indexer-state.json
 vault/knowledge/.lock
 .claude/scheduled_tasks.lock
+vault/health/.gemini-ledger.lock
 vault/conflict-files-obsidian-git.md
