@@ -5,6 +5,50 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.26.2] - 2026-05-05
+
+`job-hunt-2026` operating-model interview completed. All five artifacts at `vault/05_atlas/operating-models/job-hunt-2026/` advanced from `status: awaiting-interview` (the v3.26.0 placeholder state) to `status: confirmed` via the `work-operating-model` skill, walking Sean through the 5 interview layers (Operating Rhythms → Recurring Decisions → Dependencies → Institutional Knowledge → Friction) with summarize → confirm → write checkpoints per layer. The bundle is now consumable by the agent fleet — daily-driver morning preamble, meta-agent Domain-Aware Insights, flush.py SOUL-prepend, and knowledge_lint Tier 2 `soul-tier-a-conflict` detection will all start picking up the populated content on their next runs.
+
+> **Resolves the v3.26.0 "Known follow-up: Interview 4 not yet run."** That blocker is closed.
+
+### Changed
+
+- `vault/05_atlas/operating-models/job-hunt-2026/HEARTBEAT.md` — `awaiting-interview → confirmed`. Documents the 8:30–5:30 fluid container, sacred 8:30–9:30 AM learning hour, mandatory 1–2 PM break, Friday 4:30–5:30 PM retro, 5:30 PM hard stop on active job-hunt admin, and the 8-week phase arc.
+- `vault/05_atlas/operating-models/job-hunt-2026/USER.md` — `awaiting-interview → confirmed`. Codifies prioritization stack (geo → warm intro → brand → archetype → ≥$100k → learn-and-grow → energy), auto-yes / auto-no rules, **walk-away salary $100,000/yr base**, agent-delegation boundaries (drafts only — no outbound human messages from agents), tiebreakers, and per-unit definition-of-done.
+- `vault/05_atlas/operating-models/job-hunt-2026/SOUL.md` — `awaiting-interview → confirmed`. Critical-path collaborators (Mary, Matt Vitebsky, Larry Cermak); broader 9 P&E peers + warm-20 as opportunistic. Tool surface broader than the v3.26.0 seed list: adds **Pi Coding Agent** (pi.dev), **Google Anti-Gravity** (main IDE), **Figma + Claude Design**, **NotebookLM**, **Codex app**. 3-machine topology (Mac Mini primary / MBP cross-over / Alienware OSS-test). Single source of truth confirmed = `vault/20_projects/prj-job-hunt-2026/README.md`. Vocabulary, sacred cows, comms norms, Ask-X-About-Y (Larry / Matt / Mary / Jordan Leech / Nate B Jones / Matt Wolfe), past landmines, week-one tacit knowledge. **5 Tier-A truths** + **2 relocation-exception clauses** ($250k+/yr OR Anthropic specifically override remote-preferred) for `knowledge_lint` Tier 2 `soul-tier-a-conflict` checks.
+- `vault/05_atlas/operating-models/job-hunt-2026/schedule-recommendations.md` — `awaiting-interview → confirmed`. 7 Protect rules ("when X, then Y"), 11 Automate targets, 6 Decline rules, 7 20-min→2-min candidates, context-switch costs, agent-fleet audit + Mac-Mini migration explicitly logged as friction. **Extra-hour north star** = (1) agentic-workflow + agent-harness fundamentals, (2) Agent Evals fluency, (3) enterprise-level building patterns. Automations that don't move toward those three are deprioritized.
+- `vault/05_atlas/operating-models/job-hunt-2026/operating-model.md` — `awaiting-interview → confirmed`. Synthesized profile: TL;DR, Identity, four 1-paragraph compressions of HEARTBEAT / USER / SOUL Part A / SOUL Part B, Active Leverage Points, Known Bottlenecks, Cross-Domain Bleed (life-systems / creative-studio / claude-mastery), 7 Open Questions Sean himself flagged as "I should figure this out."
+- `vault/20_projects/prj-job-hunt-2026/README.md` — Status block: "Operating-model interview" `[ ] NEXT → [x] DONE 2026-05-05`. New decision-log entry with the bundle pointer.
+- `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-04-migration-completion-handoff.md` — "What to do next" Step 1 marked DONE; "What's NOT yet done" item 1 (Interview 4) removed; new "Operating-model interview completed" section pointing at the bundle.
+- `MEMORY.md` (auto-memory) — appended pointer to new memory file `project_job_hunt_2026_operating_model.md` documenting the bundle's confirmed state, Tier-A truths, relocation overrides, agent-message boundary rule, and the open work items the bundle surfaced.
+
+### Open work items surfaced by the bundle
+
+These are explicit pile-ups the interview exposed. They're not blockers on the bundle being usable — they're the actual work the bundle now points the agent fleet toward.
+
+1. **Track-C MCP cold-start chain** (`intent-engineering` server) — no name, no repo, no README, no plan of action yet. Required steps: name → repo → README → plan. Target ship date 2026-05-25 (per master plan Phase 4) means this kickoff happens this week. Highest-priority self-blocking decision in the bundle.
+2. **Substack voice + build-in-public format decisions** — both gate the public-surface track. Substack creation is named the top-of-pile-up alongside build-in-public format / cadence.
+3. **Target list of 30 companies** — gates the application volume ramp-up scheduled for weeks 3–4.
+4. **Agent-fleet audit + Mac-Mini migration** — Sean explicitly flagged this as Layer-5 friction. Daily-driver + deep_researcher are the keepers; everything else needs an audit pass for relevance, reliability, and host dependency. Anything depending on MBP or Alienware being awake should move to the Mac Mini or be retired. The migration in v3.26.1 (LDR daemon + 6 stale plist deletions) is the start, not the end, of this work.
+5. **Gmail labeling pipeline** — Sean wants Claude to set up labels (`recruiter`, `interview-loop`, `reference-request`, `network`) and a pipeline that pulls labeled threads → markdown in `vault/30_domains/job-hunt-2026/email/` so Claude Code has fast file-system access without needing live MCP every session.
+6. **YouTube yes/no decision** — undecided whether YouTube is part of the public-surface bundle.
+7. **Second portfolio artifact** — what ships after MCP v0 is unspecified.
+8. **Agent Evals fluency** — Sean flagged this as one of the three extra-hour learning vectors. Needs a concrete learning loop, not just "read about it."
+9. **Enterprise-level build patterns** — bridge from "local prototype" to "company would trust me to ship + manage teams against this." Pattern-level, not tool-level.
+
+### Counts
+
+- 117 skills (no change)
+- 13 subagents (no change)
+- 13 hooks (no change)
+- 14 SDK agents — **7 active** (no change). Bundle is content authoring, not an agent change.
+- **3 active operating-model domains, all populated** — `creative-studio`, `life-systems`, `job-hunt-2026`. (Was 3 active with `job-hunt-2026` placeholder; now 3 active with all three populated.)
+- pytest suite stays green (no code changes).
+
+### Why this is a CHANGELOG entry
+
+The operating-model bundle is content, but agent fleet behavior changes the moment these files flip from `awaiting-interview` to `confirmed` — the artifact loader (`agents-sdk/lib/artifact_loader.py`) reads them at runtime and they shape daily-driver / meta-agent / flush / knowledge-lint output. Recording the state change in CHANGELOG keeps the audit trail intact for downstream sessions.
+
 ## [3.26.1] - 2026-05-05
 
 Fleet reinstall on Seans-Mac-mini.local. Topic 1a missed the overnight 02:45 cron on 2026-05-04 → 2026-05-05 (and the prior night). Diagnosis: `launchctl list | grep "sean.agent"` returned empty; `~/Library/LaunchAgents/` had only one stale `meeting-defender` symlink (target deleted in v3.17.0 Phase 3); the LDR `:5050` web daemon (a hard dependency for `deep_researcher`) had been started by hand from a foreground terminal that exited, leaving no persistence story. SearXNG (`:8080`, Docker `unless-stopped`) and Ollama were already healthy.

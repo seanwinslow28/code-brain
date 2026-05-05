@@ -8,7 +8,7 @@ ai-context: "Resume-here pointer for fresh Claude Code sessions. The Block-to-jo
 
 # Migration Completion + Handoff (2026-05-04)
 
-> **Read this first if you're a fresh Claude Code session pointed at this folder.** The Block-to-job-hunt migration of the repo is **done**. Don't re-run any of it. The next human-in-the-loop step is the work-operating-model interview for `job-hunt-2026` (~45 min interactive).
+> **Read this first if you're a fresh Claude Code session pointed at this folder.** The Block-to-job-hunt migration of the repo is **done**. The work-operating-model interview for `job-hunt-2026` is **also done** (2026-05-05; CHANGELOG v3.26.2). Don't re-run either. The next steps are the open work items the interview surfaced (see "Operating-model interview completed" section below) and the master plan's Phase 1 personal-logistics work.
 
 ## What was completed (2026-05-04 evening)
 
@@ -41,29 +41,63 @@ The full audit + migration ran in a single session. 13 commits on `feat/gemini-d
 
 - `python3 scripts/validate.py`: **PASSED** (60 warnings, all pre-existing secret-pattern false positives in unrelated vendor/example files).
 - `cd agents-sdk && PYTHONPATH=. .venv/bin/pytest tests/`: **284 passed, 2 failed**. The 2 failures are pre-existing WOL test orphans in `tests/test_route_to_macbook.py` from the v3.14.3 WOL drop — unrelated to this migration. Confirmed by stash-test pre-migration.
-- `cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode morning --dry-run`: **clean**. Zero `@theblock.co` references, zero `the-block` paths, zero `_(artifact unavailable)_` for the-block. One expected `_(artifact unavailable — fall back to general judgment for job-hunt-2026)_` line because the `job-hunt-2026/HEARTBEAT.md` is at `status: awaiting-interview` until you run the interview. 6 job-hunt + deep-work signal mentions confirm Step 1a is loading correctly.
+- `cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode morning --dry-run`: **clean**. Zero `@theblock.co` references, zero `the-block` paths, zero `_(artifact unavailable)_` for the-block. **Update 2026-05-05:** the `_(artifact unavailable — fall back to general judgment for job-hunt-2026)_` line is now also gone because the `job-hunt-2026/HEARTBEAT.md` is at `status: confirmed` post-interview. 6 job-hunt + deep-work signal mentions confirm Step 1a is loading correctly.
+
+## Operating-model interview completed (2026-05-05)
+
+✅ **DONE.** All 5 artifacts at `vault/05_atlas/operating-models/job-hunt-2026/` are at `status: confirmed` (CHANGELOG v3.26.2). The agent fleet (daily-driver / meta-agent / flush.py / knowledge_lint Tier 2) will start consuming the populated bundle on next runs.
+
+**Bundle pointers:**
+- Synthesis: [[../../05_atlas/operating-models/job-hunt-2026/operating-model|operating-model.md]]
+- Operating rhythms: [[../../05_atlas/operating-models/job-hunt-2026/HEARTBEAT|HEARTBEAT.md]]
+- Recurring decisions: [[../../05_atlas/operating-models/job-hunt-2026/USER|USER.md]]
+- Dependencies + tacit: [[../../05_atlas/operating-models/job-hunt-2026/SOUL|SOUL.md]]
+- Friction → schedule rules: [[../../05_atlas/operating-models/job-hunt-2026/schedule-recommendations|schedule-recommendations.md]]
+
+**Tier-A truths locked into SOUL.md** (knowledge_lint Tier 2 will flag contradictions):
+1. Walk-away salary = $100,000/yr base; below = auto-no.
+2. 5-days-in-office = non-negotiable no.
+3. Agents do not message humans on Sean's behalf — drafts only.
+4. Track-C MCP (intent-engineering) is the differentiator — protected, even in offer weeks.
+5. Friday retro is the only mandatory ritual.
+
+**Relocation override clauses:** Anthropic specifically OR any role with $250k+/yr base override the remote-preferred default.
+
+**9 open work items the bundle surfaced** (these are the actual next moves):
+1. **Track-C MCP cold-start chain** — name → repo → README → plan of action. Target ship 2026-05-25 means kickoff this week. Highest priority.
+2. **Substack voice + build-in-public format** — both gate the public surface.
+3. **Target list of 30 companies** — gates application volume in weeks 3–4.
+4. **Agent-fleet audit + Mac-Mini migration** — daily-driver + deep_researcher are keepers; everything else needs an audit pass; anything depending on MBP/Alienware-awake should move to Mac Mini or retire. v3.26.1 fleet reinstall was the start, not the end.
+5. **Gmail labeling pipeline** — labels (`recruiter` / `interview-loop` / `reference-request` / `network`) + threads-to-markdown pipe to `vault/30_domains/job-hunt-2026/email/`.
+6. **YouTube yes/no decision.**
+7. **Second portfolio artifact post-MCP-v0.**
+8. **Agent Evals fluency** — needs a concrete learning loop.
+9. **Enterprise-level build patterns** — bridge from local prototype to "company would trust me to ship + manage teams."
+
+**North star for automation work** (per schedule-recommendations.md): every automation should free time toward (a) agentic-workflow + agent-harness fundamentals, (b) Agent Evals fluency, (c) enterprise-level build patterns. If a proposed automation doesn't, deprioritize it.
 
 ## What to do next (priority order)
 
-### 1. Run Interview 4 — `job-hunt-2026` operating model (~45 min interactive)
-
-Open `vault/05_atlas/operating-models/INTERVIEW-PLAYBOOK.md` → "Interview 4 — Job Hunt 2026" section → paste the **start prompt** into a fresh Claude Code session. Walk all 5 layers with checkpoints (summarize → confirm → write per layer). Skill writes 5 artifacts at `vault/05_atlas/operating-models/job-hunt-2026/`, status moves `awaiting-interview` → `draft` → `confirmed`.
-
-Then paste the **commit prompt** to stage + commit + push the interview output. Then paste the **cross-check prompt** to verify the morning brief picks up the populated HEARTBEAT body and emits zero unavailable lines.
-
-### 2. Watch Tuesday 5/5 8:45 AM brief
+### 1. Watch Tuesday 5/5 8:45 AM brief
 
 The first re-enabled run with the new skill. If anything looks off (missing signals, residual Block refs, the brief isn't surfacing job-hunt status), flag it and we adjust. Brief writes to `vault/10_timeline/daily/2026-05-05.md`.
 
-### 3. Master plan Phase 1 (Sean runs this — week 1 logistics)
+### 2. Master plan Phase 1 (Sean runs this — week 1 logistics)
 
 These are personal logistics, not repo work. Driven by `2026-05-04-onwards-and-upwards-plan.md` Phase 1.
 
 - File MA unemployment claim (target: 2026-05-05)
-- Severance review with MA employment attorney (deadline: ~2026-05-11)
+- ✅ **Severance signed and sent to Leanne 2026-05-05.** Claude review (5-flag analysis covering CIIA Section 5 non-solicit, ADEA exposure if 40+, NY forum-selection, laptop reset, FLSA representation) substituted for paid attorney review given the 2026-05-07 signing deadline. Tenure recalibrated post-CIIA review: ~6 months service starting 11/10/2025, so $8,333.33 = one month is fair, not lowball. Pending: Leanne to send fully counter-signed PDF for the file.
+- **401(k) rollover — open Fidelity Rollover IRA THIS WEEK.** $1,398.70 in The Block 401(k) at Fidelity (under Justworks PEO wrap plan). Balance falls in the SECURE 2.0 mandatory force-out band ($1k–$7k → auto-roll to plan's default IRA), so pre-empt by opening Sean's own Rollover IRA at Fidelity (10 min, no funding needed). When Fidelity sends the Distribution Election Notice in 30–90 days, elect "Direct Rollover to IRA" — never a check made out to Sean. Add beneficiaries on NetBenefits while access still works. Confirm vesting in `Justworks_Wrap_Plan_SPD.pdf` — at 6 months tenure, employer match likely 0% vested. Cashing out = ~50% effective tax/penalty hit; don't.
 - ACA Marketplace vs COBRA decision (deadline: ~2026-07-03 SEP — but lock by 5/18)
 - Runway math at `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/runway-math.md` (file doesn't exist yet)
-- Block offboarding logistics (data extraction, equipment return)
+- Block offboarding logistics (data extraction, equipment return). **Laptop factory reset** (severance Section 8) is a parallel obligation tied to the May 5 separation date — confirm complete or in progress.
+- Three Block-named skills (`the-block-jira-ticket-writer`, `etf-page-creator`, `biweekly-jira-update`) **must be scrubbed from the public Superuser Pack repo** before any LinkedIn / public push (CIIA Section 2.3 assigns them as Company Inventions). Either remove from public tree or keep the repo private until cleanup is done. Action gates the Phase 4 / Phase 3 public-announcement work.
+- Confirm with Leanne in writing that no equity grants (RSUs, options, ESPP) exist beyond the 401(k) — severance Section 2(c) extinguishes any stock-related claims.
+
+### 3. Master plan Phase 4 — Track-C MCP cold-start (target kickoff this week)
+
+The operating-model interview surfaced this as the highest-priority self-blocking decision. The differentiator artifact is gated on a 4-step chain: **name → repo → README → plan of action.** Target ship date 2026-05-25 (per master plan Phase 4) means the kickoff happens this week, not week 2. This is the first work item the schedule-recommendations.md file will pressure you back about.
 
 ### 4. Migration Chunk 5 — MCP cleanup (deferred to ~5/11)
 
@@ -71,11 +105,12 @@ Per the migration plan calendar, week-2 work. Comment out Atlassian + Slack MCP 
 
 ## What's NOT yet done (intentional, post-migration)
 
-- **Interview 4 hasn't run yet.** Until you run it, the daily-driver morning brief gets job-hunt context from `vault/20_projects/prj-job-hunt-2026/README.md` Status section instead of from the HEARTBEAT body. That's fine — the README is populated.
+- ~~**Interview 4 hasn't run yet.**~~ ✅ DONE 2026-05-05 — see "Operating-model interview completed" section above.
 - **Slack overnight scan stays no-op** until Sean has a personal Slack workspace wired in (no decision needed yet — `daily-driver/SKILL.md` Step 1b explicitly handles this).
 - **Atlassian + Block calendar MCP cleanup** — Chunk 5 work, deferred to 5/11.
-- **Branch not pushed.** 13 migration commits are local on `feat/gemini-deep-research-v3.25.0`. Push when ready (`git push origin feat/gemini-deep-research-v3.25.0`); the branch was already remote so there's a tracking relationship.
-- **PR not opened.** Open one when ready to merge to `main` (`gh pr create`); the v3.25.0 Gemini DR work + this v3.26.0 migration ride together.
+- **Branch not pushed.** Migration + v3.26.1 + v3.26.2 commits are local on `feat/gemini-deep-research-v3.25.0`. Push when ready (`git push origin feat/gemini-deep-research-v3.25.0`); the branch was already remote so there's a tracking relationship.
+- **PR not opened.** Open one when ready to merge to `main` (`gh pr create`); the v3.25.0 Gemini DR work + v3.26.0 migration + v3.26.1 fleet reinstall + v3.26.2 operating-model interview ride together.
+- **9 open work items from the operating-model interview** — see the "Operating-model interview completed" section above for the prioritized list. Track-C MCP cold-start (item 1) is the most time-sensitive; agent-fleet audit (item 4) is the largest-blast-radius repo work item.
 
 ## Where the agents-sdk fleet stands
 
