@@ -7,9 +7,11 @@ created: 2026-05-05
 description:
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "claude-cowork"
+type: "reference"
+status: processed
+domain: [claude-mastery]
+ai-context: "Official Claude support article — how plugins bundle skills/connectors/sub-agents in Claude Cowork (Pro/Max/Team/Enterprise), the built-in plugin library by function, and the cloud-vs-private-network connector caveat."
 ---
 Plugins are available to all Claude Cowork users on paid plans (Pro, Max, Team, Enterprise).
 

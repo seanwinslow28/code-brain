@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "Reference for all Creative Intelligence Suite workflows"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "CIS workflows technical reference — invocation methods, inputs, and outputs for brainstorming, design-thinking, innovation-strategy, problem-solving, and storytelling workflows."
 ---
 Technical reference for all CIS workflows including inputs, outputs, and invocation methods.
 

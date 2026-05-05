@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "Practical guides for CIS tasks"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "Index of CIS how-to guides — links to brainstorming, design thinking, innovation strategy, problem solving, and storytelling task walkthroughs."
 ---
 ## How-To Guides
 

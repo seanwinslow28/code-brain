@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "Strategic frameworks for finding and capturing new value"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "Strategic innovation frameworks used by Victor's CIS workflow — Jobs-to-be-Done, Blue Ocean Strategy, Disruptive Innovation, Business Model Canvas — and the primary question each one answers."
 ---
 Victor’s innovation strategy workflow applies proven business and innovation frameworks to identify disruption opportunities and design sustainable competitive advantage.
 

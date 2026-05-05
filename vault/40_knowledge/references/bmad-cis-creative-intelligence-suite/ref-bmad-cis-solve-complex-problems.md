@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "Use the problem-solving workflow to diagnose root causes and find solutions"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "How-to guide for the CIS `problem-solving` workflow — systematic root-cause analysis for complex/persistent challenges using Dr. Quinn's analytical frameworks."
 ---
 Use the `problem-solving` workflow to systematically diagnose problems, identify root causes, and develop effective solutions using proven analytical frameworks.
 

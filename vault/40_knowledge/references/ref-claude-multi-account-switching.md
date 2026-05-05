@@ -1,3 +1,16 @@
+---
+title: "Managing Multiple Claude Accounts — Claude Conversation"
+source: "Claude conversation transcript (2026-04-02)"
+created: 2026-05-05
+tags:
+  - "source/conversation"
+  - "claude-account-management"
+type: "reference"
+status: processed
+domain: [claude-mastery]
+ai-context: "Saved Claude conversation answering whether/how to run two Claude accounts on the desktop app — same-email Pro+Team switcher works natively; separate emails require browser workaround until multi-account support ships."
+---
+
 ## You said: The dev team at my company has access to a Claude Max subscription account that the product team is able to access and utilize for our PM tasks.
 
 The dev team at my company has access to a Claude Max subscription account that the product team is able to access and utilize for our PM tasks. Is it possible for me to have 2 Claude accounts and switch between them on the desktop app? Or just in general?
