@@ -38,6 +38,26 @@ Fleet reinstall on Seans-Mac-mini.local. Topic 1a missed the overnight 02:45 cro
 
 CLAUDE.md's "**Active agents (7 of 14):**" line remains correct (5 launchd-scheduled + daily-morning + flush hook = 7). No CLAUDE.md / README.md count edits required by this release.
 
+### Vault organization (post-execution cleanup)
+
+Audited `vault/20_projects/prj-superuser-pack/open-source-deep-research/` after the fleet-reinstall plan landed. Folder had grown to 11 files mixing canonical specs, executed plans, and pre-migration scoping reference docs — making it non-obvious which doc was the source of truth for the 7 active research topics.
+
+- **Active folder reduced 11 → 5 files.** Kept: `phase-4-night-1-2026-05-03.md` (canonical 7-topic spec — the source of truth for which topics exist, what they ask, and which queue/cost tier they belong to), `you-are-a-senior-modular-pelican.md` (kept as ongoing gotcha-reference for future LDR / Mac Mini work), and the 3 fleet-reinstall artifacts from this release.
+- **Moved to `archive/` subfolder (6 files):** `2026-05-04-deep-researcher-fleet-reinstall-prompt.md` (the prompt that kicked off this session), `gemini-deep-research-integration-plan-2026-05-03.md` (v3.25.0 implementation plan, shipped), `macmini-migration-plan-2026-05-02.md` (Mac Mini migration plan, executed), `Claude-Synthesis-of-Deep-Research-Reports.md` + `Gemini-Local-Autonomous-Research-Agent-Landscape.md` + `Perplexity-Local-Open-Source-Deep-Research-Agent-Stack.md` (Apr 28 early scoping research, superseded by the migration + integration plans). All 6 were untracked, so no git history was lost; archive folder is the durable retention path.
+- **`vault/00_inbox/gemini-research-queue.md` truthed** to match reality:
+  - **Topic 2 marked `[x]`** — the manual `gemini-dr` run on 2026-05-04 17:22 ($2.80, recorded in `agent-run-history.csv`) produced the report at `vault/20_projects/research/2026-05-04-you-are-a-senior-research-analyst-specializing-in-ai-develop.md`. The agent didn't fire it (the autonomous `gemini_researcher` is `enabled = false` by intent), so the queue still showed `[ ]` despite the work being done. Now reflects ground truth.
+  - **Topic 4 moved to a new `## Deferred (post-severance review)` section** with explicit rationale linking to the layoff (2026-05-04) and the portfolio-priority logic from `vault/20_projects/prj-job-hunt-2026/README.md`. The DR Max ($3–7) call is the single most expensive in the project; deferring until severance lands AND until Topic 2's findings are read is the cost-disciplined path.
+
+### How to navigate this folder going forward
+
+1. **Source of truth for research topics:** [`phase-4-night-1-2026-05-03.md`](vault/20_projects/prj-superuser-pack/open-source-deep-research/phase-4-night-1-2026-05-03.md). Has the 7 topics, prompts, queue assignment, expected cost.
+2. **Live queues** (truthed with done-marks + backlinks):
+   - LDR free tier (02:45 daily on Mac Mini): [`vault/00_inbox/research-queue.md`](vault/00_inbox/research-queue.md)
+   - Gemini paid tier (manual or opt-in autonomous): [`vault/00_inbox/gemini-research-queue.md`](vault/00_inbox/gemini-research-queue.md)
+3. **Topic 1a is done; Topics 1b/3/5/7 will auto-process via the 02:45 cron starting 2026-05-06.**
+4. **Topic 2 is done (manual run 5/4); Topic 4 is deferred post-severance.**
+5. **Any pre-migration / pre-integration scoping docs live under `archive/`** — keep but don't read first.
+
 ## [3.26.0] - 2026-05-04
 
 Block-to-job-hunt migration — repurposes the repo from a 3-domain world (the-block / creative-studio / life-systems) to a 4-domain world (creative-studio / life-systems / job-hunt-2026 — with the-block bundle archived 2026-05). Sean was laid off from The Block on 2026-05-04 (cost-cutting layoff delivered by Larry Cermak + Vicky Lu). The migration sanitizes Block-specific instructions out of the agent fleet, repoints the daily-driver morning brief at job-hunt + deep-work signals, archives the the-block operating-model bundle without deleting it, extends the work-operating-model skill to a 4th domain (Path C — minimal in-place fork), and stands up an awaiting-interview job-hunt-2026 operating-model bundle ready for Sean to populate via the new Interview 4 prompt.
