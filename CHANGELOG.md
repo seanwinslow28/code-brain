@@ -5,6 +5,39 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.26.1] - 2026-05-05
+
+Fleet reinstall on Seans-Mac-mini.local. Topic 1a missed the overnight 02:45 cron on 2026-05-04 → 2026-05-05 (and the prior night). Diagnosis: `launchctl list | grep "sean.agent"` returned empty; `~/Library/LaunchAgents/` had only one stale `meeting-defender` symlink (target deleted in v3.17.0 Phase 3); the LDR `:5050` web daemon (a hard dependency for `deep_researcher`) had been started by hand from a foreground terminal that exited, leaving no persistence story. SearXNG (`:8080`, Docker `unless-stopped`) and Ollama were already healthy.
+
+### Removed
+
+- 6 stale launchd plists from `agents-sdk/schedules/`: `daily-evening`, `daily-morning-baton`, `pr-digest`, `process-inbox`, `sprint-health`, `weekly-review`. Citations: `AUDIT-2026-04-09-agent-downsizing.md` (5 of 6) and `AUDIT-2026-04-28-process-inbox-reenable.md` (process-inbox paused 2026-04-29 pending Path B local-`gemma4:e4b` rewrite). Net plist count `13 → 7` (5 active SDK + 1 daily-morning + 1 gated `gemini-researcher`).
+- Dangling `~/Library/LaunchAgents/com.sean.agent.meeting-defender.plist` symlink (target deleted in v3.17.0 Phase 3, April 18).
+
+### Added
+
+- **`agents-sdk/schedules/com.sean.service.ldr-web.plist`** — first non-`agent.*` plist in the fleet. Label: `com.sean.service.ldr-web`. Persistent daemon for the Local Deep Research web server (`~/Code-Brain/local-deep-research-stack/.venv/bin/ldr-web`). `RunAtLoad=true`, `KeepAlive=true`, `ThrottleInterval=60s`. Env vars: `LDR_WEB_PORT=5050` (port 5000 collides with macOS AirPlay Receiver), `LDR_BOOTSTRAP_ALLOW_UNENCRYPTED=true`, plus the standard PATH per `BUGFIX-2026-04-07-launchd-path.md`. Establishes the `service.*` label namespace alongside `agent.*` — agents are scheduled SDK runs, services are persistent dependencies. `install_schedules.sh` already globs `*.plist` so this gets installed automatically (no script change required).
+
+### Operational
+
+- Reinstalled launchd schedules on Seans-Mac-mini.local. **6 active SDK agent jobs loaded** (`vault-indexer`, `vault-synthesizer`, `deep-researcher`, `meta-agent`, `knowledge-lint`, `daily-morning`) + **1 LDR service daemon** (`ldr-web`). `gemini-researcher` correctly skipped (default disabled, opt-in via `INSTALL_GEMINI=1`).
+- Smoke test: `deep_researcher.py --mode queue` consumed Topic 1a from `vault/00_inbox/research-queue.md`, ran in 280s wall-clock against the now-persistent LDR + SearXNG stack, wrote `vault/20_projects/research/2026-05-05-topic-1a-mcp-sdk-toolkit-survey-catalog-mcp-cli-mcp-bridge-m.md` (11,284 bytes, 939 words), marked the queue item done with backlink, and recorded `success` in `agent-run-history.csv` at $0.00 cost. Daily-note digest skipped because `2026-05-05.md` doesn't exist yet (daily-driver morning hadn't run today; this is the same pattern that normal 02:45 cron runs will hit before the 08:45 daily-note creation).
+
+### Why a service daemon, not a fix-the-script
+
+`install_schedules.sh` was already correct in shape — it failed only because the directory contained 6 stale plists that a clean install would re-symlink. After the deletions, the script installs the right set with no behavior change. The wider gap was the LDR dependency lacking a persistence guarantee, which masquerades as a fleet-wiring bug whenever LDR happens to be down. Codifying LDR as a launchd service closes the loop.
+
+### Files
+
+- Plist deletions: `agents-sdk/schedules/com.sean.agent.{daily-evening,daily-morning-baton,pr-digest,process-inbox,sprint-health,weekly-review}.plist`
+- Plist added: `agents-sdk/schedules/com.sean.service.ldr-web.plist`
+- Plan + summary: `vault/20_projects/prj-superuser-pack/open-source-deep-research/2026-05-04-fleet-reinstall-{plan,summary}.md`
+- Smoke-test artifact: `vault/20_projects/research/2026-05-05-topic-1a-mcp-sdk-toolkit-survey-catalog-mcp-cli-mcp-bridge-m.md`
+
+### Active-agent count
+
+CLAUDE.md's "**Active agents (7 of 14):**" line remains correct (5 launchd-scheduled + daily-morning + flush hook = 7). No CLAUDE.md / README.md count edits required by this release.
+
 ## [3.26.0] - 2026-05-04
 
 Block-to-job-hunt migration — repurposes the repo from a 3-domain world (the-block / creative-studio / life-systems) to a 4-domain world (creative-studio / life-systems / job-hunt-2026 — with the-block bundle archived 2026-05). Sean was laid off from The Block on 2026-05-04 (cost-cutting layoff delivered by Larry Cermak + Vicky Lu). The migration sanitizes Block-specific instructions out of the agent fleet, repoints the daily-driver morning brief at job-hunt + deep-work signals, archives the the-block operating-model bundle without deleting it, extends the work-operating-model skill to a 4th domain (Path C — minimal in-place fork), and stands up an awaiting-interview job-hunt-2026 operating-model bundle ready for Sean to populate via the new Interview 4 prompt.
