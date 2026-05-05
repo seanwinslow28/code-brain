@@ -8,9 +8,12 @@ created: 2026-05-03
 description: "Watch now | Karri Saarinen, the CEO of Linear, declared issue tracking dead in March."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "nates-newsletter"
+  - "agent-infrastructure"
+type: "reference"
+status: processed
+domain: [claude-mastery, product-management]
+ai-context: "Nate's Newsletter (2026-05-01) — five structural tests that determine whether a tool becomes agent infrastructure or gets routed around, with Linear/Symphony as the reference case study and a diagnostic for stack tools (CRMs, ERPs, calendars, spreadsheets)."
 ---
 Karri Saarinen, the CEO of Linear, declared issue tracking dead in March. His argument was reasonable. Issue trackers were built for a world where coordination between humans was the bottleneck, and when agents can interpret context directly, that translation step is friction. It was a clean thesis from a designer who had spent his career making the category better.
 

@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "Use the brainstorming workflow to generate diverse ideas with Carson"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "How-to guide for the CIS `brainstorming` workflow — generate diverse ideas with Carson using 36 techniques across 7 categories, with use/skip criteria."
 ---
 Use the `brainstorming` workflow to generate diverse, creative ideas using 36 proven techniques across 7 categories.
 

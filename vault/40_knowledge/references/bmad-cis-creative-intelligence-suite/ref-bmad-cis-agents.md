@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "Reference for all Creative Intelligence Suite agents"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "CIS agents reference — full catalog of Carson (brainstorming), Maya (design thinking), Victor (innovation strategy), Dr. Quinn (problem-solving), and Sophia (storytelling) with commands, triggers, and capabilities."
 ---
 Catalog of all CIS agents with their commands, purposes, and key capabilities.
 

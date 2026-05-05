@@ -7,9 +7,11 @@ created: 2026-05-04
 description: "Use the design thinking workflow to create human-centered solutions"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "bmad-cis"
+type: "reference"
+status: processed
+domain: [creative-studio]
+ai-context: "How-to guide for the CIS `design-thinking` workflow — when to use it (human-centered design problems, UX work) vs. when to skip, and how to move from empathy to testable prototypes."
 ---
 Use the `design-thinking` workflow to create solutions deeply rooted in user needs through empathy, ideation, and rapid prototyping.
 

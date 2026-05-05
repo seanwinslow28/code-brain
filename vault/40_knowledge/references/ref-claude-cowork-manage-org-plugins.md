@@ -7,9 +7,11 @@ created: 2026-05-05
 description:
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "claude-cowork"
+type: "reference"
+status: processed
+domain: [claude-mastery]
+ai-context: "Official Claude support article — how Team/Enterprise plan owners create plugin marketplaces in Claude Cowork, with manual upload vs. GitHub-sync paths and visibility controls."
 ---
 Plugin marketplaces allow Team and Enterprise plan owners to distribute curated plugins to everyone in their organization through Claude Cowork. You create a marketplace, add plugins to it, and control exactly which plugins your team members can see and use.
 
