@@ -173,8 +173,7 @@ If a new agent took over life-systems tomorrow, these are the load-bearing thing
 - **Credit-card payments are manual.** Sean sets the amount each time. Don't automate.
 - **Health-habit XP / streaks are real-time only.** No retroactive backfill — breaks the gamification contract.
 - **Personal data stays local.** Finance + health on Mac Mini + vault. External APIs only with explicit approval.
-- **No cross-contamination `sean.winslow28@gmail.com` ↔ `swinslow@theblock.co`.** Hard wall. Both calendars queried in parallel; outputs stay segmented.
-- **Query both calendars in parallel** — Google Calendar API is single-calendarId-per-request; single-pulls have bitten the morning agent before.
+- **Single calendar — `sean.winslow28@gmail.com`.** The prior `swinslow@theblock.co` work calendar was archived 2026-05 with the Block layoff. No cross-account queries; no parallel pulls; one calendarId per request.
 - **Sacred blocks non-negotiable** (05:30–06:30, 07:00–08:00, 14:00–15:00, 21:00 bed).
 - **Auto-No list (outright reject):** new subscription w/o cooldown; same-day financial commitment; late-night past 21:00; sacred-first-hour violation; investing without a research pass.
 - **Never delegated:** final spend decisions, medical, relationship, career-direction.

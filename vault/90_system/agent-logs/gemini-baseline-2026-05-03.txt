@@ -1,0 +1,126 @@
+Gemini DR Integration — Phase 0 Baseline
+==========================================
+Captured: 2026-05-03
+Plan: vault/20_projects/prj-superuser-pack/open-source-deep-research/gemini-deep-research-integration-plan-2026-05-03.md
+Branch: feat/gemini-deep-research-v3.25.0
+Target version: v3.25.0 (note: plan reads v3.24.0; corrected to v3.25.0 because
+                gemini-image-gen claimed v3.24.0 in commit ded36fb on 2026-05-03)
+
+
+1. launchd schedule snapshot (12 plists, 03:30 slot UNCLAIMED)
+--------------------------------------------------------------
+$ launchctl list | grep com.sean
+-       0       com.sean.agent.weekly-review
+-       0       com.sean.agent.vault-synthesizer
+-       0       com.sean.agent.sprint-health
+-       0       com.sean.agent.vault-indexer
+-       0       com.sean.agent.daily-morning
+-       0       com.sean.agent.deep-researcher              # 02:45 daily, 15 min cap
+-       1       com.sean.agent.daily-evening
+-       0       com.sean.agent.meta-agent                    # 06:30 daily
+-       0       com.sean.agent.daily-morning-baton
+-       0       com.sean.agent.knowledge-lint
+-       0       com.sean.agent.process-inbox
+-       0       com.sean.agent.pr-digest
+
+Verdict: 03:30 slot for new com.sean.agent.gemini-researcher is clear.
+         No memory contention concern — gemini-researcher loads NO local
+         model (pure httpx polling loop, ~0.2 GB), so even if a 02:45
+         deep-researcher run overruns into 03:30 the 24 GB ceiling math
+         (macmini-migration-plan §1) is unaffected.
+
+
+2. google-genai SDK install
+---------------------------
+Resolved version: 1.74.0
+Pinned in pyproject.toml: "google-genai>=1.74.0,<2.0.0"
+Install date: 2026-05-03
+Install path: agents-sdk/.venv/lib/python3.13/site-packages/google/genai/
+
+Smoke test (no API call):
+$ .venv/bin/python3 -c "from google import genai; ..."
+  Client OK. Type: Client
+  Module: google.genai.client
+
+
+3. Keychain entries
+-------------------
+Service prefix: com.sean.agents
+New entries this phase:
+  - gemini_api_key      (length 39, prefix AIzaSy...)  — READ from .env
+  - openai_api_key      (length 164, prefix sk-proj...)  — READ from .env (per D8 optional add)
+  - openrouter_api_key  (length 73, prefix sk-or-v1...)  — bonus stash for future last30days fallback
+
+Pre-existing related entries (not modified):
+  - google-ai-key       (note: stale-looking duplicate of gemini key from earlier setup; leaving alone)
+
+
+4. Gemini CLI ecosystem inventory (Phase 0 step 7)
+--------------------------------------------------
+$ which gemini
+/opt/homebrew/bin/gemini
+
+$ gemini --version
+0.40.1
+
+$ gemini extensions list
+(empty — exit 0)
+
+Verdict per plan D9: no Deep Research–shaped extension installed locally.
+                    The v1 direct-SDK path stands. v2 swap candidate
+                    remains conditional on Sean discovering one via the
+                    https://geminicli.com/extensions/ gallery (deferred —
+                    JS-rendered page best browsed manually by Sean before
+                    Topic 1b LDR run prompts go in).
+
+
+5. OpenAI key disposition (Phase 0 step 8)
+------------------------------------------
+$ python3 lib/keychain.py list | grep openai
+  openai_api_key
+
+Stashed during this phase. last30days's secondary Reddit-discovery
+fallback (when SCRAPECREATORS_API_KEY is unset, which it is not — Sean
+has SC) is now backed by Keychain instead of plaintext .env. Note:
+last30days reads from process env not Keychain, so the active code
+path still uses .env until last30days is migrated (out of scope here).
+
+
+6. v2 swap candidates (parking lot)
+-----------------------------------
+None turned up in Phase 0. If a future browse of
+https://geminicli.com/extensions/ surfaces a Deep Research extension,
+swap rationale per plan D9: inherits Gemini CLI auth (one less
+Keychain entry) at the cost of less control over polling / cost
+gating / ledger writes.
+
+End of baseline.
+
+
+Phase 3 schedule check (2026-05-03, v3.25.0)
+=============================================
+Verified non-overlapping schedule for com.sean.agent.gemini-researcher (03:30 daily):
+
+  02:00  vault-indexer      Mac Mini / nomic-embed-text, ~15 min, frees ~02:15  ✓
+  02:30  vault-synthesizer   MBP (intermittent, local-only), ~45 min budget, frees ≤03:15  ✓
+  02:45  deep-researcher    Mac Mini / LDR + Qwen3-14B, 15-min cap, frees ≤03:00  ✓
+  03:30  gemini-researcher  NEW — pure cloud-API client (httpx polling loop only,
+                            ~0.2 GB local memory, NO local model loaded).
+                            Worst-case: 65 min poll ceiling → frees ≤04:35.     ✓
+  06:30  meta-agent         Mac Mini / gemma4:e4b, ~5 min — 1h55m gap after
+                            worst-case gemini-researcher finish.                 ✓
+  08:45  daily-driver (morning) — 4h15m gap after worst-case finish.            ✓
+
+Memory contention verdict:
+  gemini-researcher loads NO local model (pure httpx polling of Gemini cloud API).
+  Even if deep-researcher (02:45) overruns into 03:30, the 24 GB Mac Mini ceiling
+  math from macmini-migration-plan §1 is unaffected. The two agents never share
+  local VRAM at the same time.
+
+Default-disabled disposition:
+  - com.sean.agent.gemini-researcher.plist ships with RunAtLoad=false.
+  - install_schedules.sh skips this plist unless INSTALL_GEMINI=1 env var is set.
+  - [agents.gemini_researcher].enabled = false in config.toml (belt-and-suspenders).
+  - To opt in: edit config.toml (enabled=true), then INSTALL_GEMINI=1 ./schedules/install_schedules.sh
+
+End of Phase 3 schedule check.

@@ -5,6 +5,13 @@ skills_dir = ".claude/skills"
 life_systems_scripts = "life-systems/scripts"
 
 [agents.daily_driver]
+# Re-enabled 2026-05-04 after Block-to-job-hunt migration Steps 1-8 + the
+# Step 11 sanitization sweep landed. The 8:45 AM SDK agent now surfaces
+# the job-hunt + deep-work brief (see daily-driver/SKILL.md Step 1a) and
+# loads the 3 active operating-model HEARTBEATs (creative-studio,
+# life-systems, job-hunt-2026 — no the-block). The job-hunt-2026 HEARTBEAT
+# is in awaiting-interview state until Sean runs Interview 4; until then
+# the brief pulls job-hunt status from prj-job-hunt-2026/README.md.
 enabled = true
 skills = ["daily-driver", "vault-read-write"]
 morning_time = "08:45"
@@ -65,7 +72,10 @@ enabled = false
 skills = ["sprint-roadmap", "vault-read-write"]
 max_turns = 15
 max_budget_usd = 0.50
-project_key = "BE"
+# Agent is dormant; project key gets set when it's re-activated for a new
+# role's Jira instance (was "BE" for The Block prior to the 2026-05-04
+# layoff / job-hunt migration).
+project_key = "TBD"
 schedule = "Friday 15:00"
 
 [agents.vault_indexer]
@@ -150,7 +160,7 @@ max_budget_usd = 0.10
 queue_path = "vault/00_inbox/research-queue.md"
 output_anchor = "research-digest"
 output_dir = "vault/20_projects/research"
-target_machine = "macbook_pro"
+target_machine = "mac_mini"
 ldr_base_url = "http://localhost:5050"
 ldr_search_engines = ["searxng"]
 ldr_iterations = 2
@@ -260,7 +270,7 @@ financial_analysis = { model = "phi4-mini-reasoning", machine = "mac_mini" }
 code_review = { model = "qwen2.5-coder-32b-instruct", machine = "macbook_pro" }
 heavy_synthesis = { model = "qwen3-14b", machine = "macbook_pro" }
 vault_synthesis = { model = "qwen3-14b", machine = "macbook_pro" }  # Phase 6 D.2 — model resolved at runtime via this key
-deep_research = { model = "qwen3-14b", machine = "macbook_pro" }  # Phase 5 (2026-04-26) — routed via LDR HTTP, not direct LM Studio call
+deep_research = { model = "qwen3-14b-research", machine = "mac_mini" }  # Phase 5 (2026-04-26) → Mac Mini migration v3.23.0 (2026-05-02): routed via LDR HTTP at :5050, custom Modelfile tag with /no_think baked into TEMPLATE
 sprite_vision_qa = { model = "Qwen3-VL-7B", machine = "alienware" }
 comfyui_orchestration = { model = "none", machine = "alienware" }
 
@@ -307,3 +317,35 @@ answer_max_tokens = 1500
 task_key = "vault_synthesis"
 qa_dir = "vault/knowledge/qa"
 manifest_path = "vault/knowledge/qa/.manifest.json"
+
+# ─── Gemini Deep Research (Phase 1, v3.25.0, 2026-05-03) ────────────────────
+# Calls Gemini DR / DR Max via the Interactions API with background polling.
+# Used by the gemini-deep-research skill (Phase 2) and gemini_researcher
+# agent (Phase 3). Budget caps enforce per-task / daily / monthly limits.
+# Real API status values: "in_progress", "completed", "failed", "cancelled".
+
+[gemini]
+agent_id_dr = "deep-research-preview-04-2026"
+agent_id_max = "deep-research-max-preview-04-2026"
+default_tier = "dr"
+poll_interval_seconds = 10
+max_poll_seconds = 3900                 # 65 min hard wall (Gemini ceiling ~60 min + 5 min cushion)
+output_dir = "vault/20_projects/research"
+output_anchor = "research-digest"
+ledger_dir = "vault/health"
+
+[gemini.budget]
+max_per_task_usd = 7.00
+monthly_cap_usd = 20.00
+daily_cap_usd = 10.00
+dr_predicted_usd = 2.00                 # DR tier midpoint (range $1-$4)
+max_predicted_usd = 5.00                # DR Max tier midpoint (range $3-$7)
+prediction_multiplier = 1.4             # DR predicts $2.80; DR Max predicts $7.00
+
+[agents.gemini_researcher]
+# Phase 1: config block only — agent script ships in Phase 3 (v3.27.0).
+# Real cap enforcement lives in [gemini.budget] above; max_budget_usd here
+# is decorative for fleet-state parity with other agent config blocks.
+enabled = false
+queue_path = "vault/00_inbox/gemini-research-queue.md"
+max_budget_usd = 0.00

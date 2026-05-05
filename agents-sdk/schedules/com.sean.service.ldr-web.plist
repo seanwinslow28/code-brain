@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sean.service.ldr-web</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/seanwinslow/Code-Brain/local-deep-research-stack/.venv/bin/ldr-web</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>ThrottleInterval</key>
+    <integer>60</integer>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/Users/seanwinslow/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>LDR_WEB_PORT</key>
+        <string>5050</string>
+        <key>LDR_BOOTSTRAP_ALLOW_UNENCRYPTED</key>
+        <string>true</string>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>/Users/seanwinslow/Code-Brain/local-deep-research-stack</string>
+    <key>StandardOutPath</key>
+    <string>/Users/seanwinslow/Code-Brain/local-deep-research-stack/logs/ldr-web-stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/seanwinslow/Code-Brain/local-deep-research-stack/logs/ldr-web-stderr.log</string>
+</dict>
+</plist>

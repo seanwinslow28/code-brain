@@ -1,143 +1,144 @@
 ---
 name: time-management
-description: Time management and calendar optimization assistant. Plans daily schedules around Sean's 4:45 AM routine and 45/35/20 work split, audits calendar for meeting overload, facilitates daily planning (`/today`), and resolves scheduling conflicts using energy mapping. Use this skill when the user mentions "calendar", "audit my time", "schedule", "plan my day", "today", "time blocking", "meetings", "deep work", or "when should I".
+description: Time management and calendar optimization assistant for Sean's job-hunt sprint (post-Block, 2026-05). Plans daily schedules around the 5:30 AM wake / 8:30 AM–12:30 PM deep-work block / 5:30 PM hard stop, organizes the week into Track A (logistics) / Track B (pipeline) / Track C (MCP server) shape, and runs the Friday weekly retro. Use this skill when the user mentions "calendar", "audit my time", "schedule", "plan my day", "today", "time blocking", "weekly retro", "deep work", or "when should I".
 ---
 
-# Time Management & Calendar Optimization
+# Time Management & Calendar Optimization (Job-Hunt Mode)
 
 ## Purpose
 
-Optimizes Sean's most scarce resource — attention. Built around his actual daily structure (4:45 AM anchor, PPL gym split, 8-4/9-5 remote work block), energy patterns, and 45/35/20 work split at The Block. Audits calendar data for meeting creep, automates daily planning, and protects deep work windows.
+Optimizes Sean's most scarce resource — attention — during the 8-week job-hunt sprint that started 2026-05-04 (post-Block layoff). Calibrated to the rhythm in `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-04-onwards-and-upwards-plan.md` Phase 7 (the master plan's daily/weekly rhythm section is the source of truth). When Sean signs an offer and enters a new role, this skill should be re-rewritten then.
 
 ## When to Use
 
 - **Daily Planning:** "Plan my day" / `/today`
-- **Time Audit:** "Where did my time go last week?" / "Am I in too many meetings?"
-- **Conflict Resolution:** "I have overlapping meetings" / "Should I skip this meeting?"
-- **Deep Work:** "When should I schedule focused work?" / "Protect my morning"
-- **Weekly Review:** "How was my time split this week?"
+- **Weekly Retro:** "Run the Friday retro" / "Weekly review"
+- **Time Audit:** "Where did my time go last week?" / "Am I drowning in applications?"
+- **Conflict Resolution:** "I have an interview that conflicts with deep-work block"
+- **Deep Work Protection:** "Protect my morning"
+- **Hard-stop enforcement:** "What should I drop after 5:30 PM?"
 
-## Sean's Actual Schedule
+## Sean's Schedule (Job-Hunt Mode)
 
-### Daily Structure (Weekdays)
+### Daily Rhythm (Weekdays)
 
 ```
-4:45 AM  — Wake up, coffee
-5:15 AM  — Gym (PPL split, 60-70 min)
-~6:30 AM — Post-gym: shower, breakfast
-~7:00 AM — Pre-work window (1-2 hours)
-           Side projects, meal prep, learning, AI news/tutorials
-8:00/9:00 AM — Work starts (flexible, depends on meeting schedule)
-           8 hours remote at The Block
-~1:00 PM — Energy lull (post-meeting fatigue)
-~2:00 PM — Energy returns
-4:00/5:00 PM — Work ends
-5:00-6:00 PM — Lounge, decompress
-6:00-9:00 PM — TV, personal projects/research on laptop,
-               quality time with girlfriend
-~9:00 PM — Bed (target 6-8 hours sleep)
+5:30 AM   — Wake
+5:30–6:30 AM — Sacred first hour (coffee, breakfast prep, green juice, vitamins)
+6:30–7:00 AM — Movement / gym (when energy allows)
+7:00–8:30 AM — Morning routine completion + intent review
+8:30 AM–12:30 PM — DEEP WORK BLOCK (track-of-the-day work)
+12:30–1:30 PM — Lunch
+1:30–5:30 PM — Flexible PM (interviews, async work, lighter tasks)
+5:30 PM   — HARD STOP (non-negotiable)
+5:30–9:30 PM — Mary / dinner / decompression / optional creative
+~9:30 PM  — Bed
 ```
 
-### Energy Map
+**The 8:30 AM–12:30 PM block is sacred.** If a recruiter or interview can't be moved out of this window, accept it but flag the displacement and reschedule the deep work to a flexible PM slot.
 
-| Time Block | Energy Level | Best For |
-|-----------|-------------|----------|
-| 5:15-6:30 AM | HIGH (gym) | Physical training |
-| 7:00-9:00 AM | PEAK (post-workout) | Deep work, creative tasks, side projects |
-| 9:00-12:00 PM | HIGH | Focused work, building, automation |
-| 12:00-1:00 PM | MEDIUM | Lunch, light admin |
-| 1:00-2:00 PM | LOW (post-meeting lull) | Low-stakes tasks, email, Slack |
-| 2:00-4:00 PM | MEDIUM-HIGH | Meetings, collaboration, code review |
-| 5:00-9:00 PM | MEDIUM | Personal projects, learning, relaxation |
+**5:30 PM hard stop is non-negotiable.** The daily-driver agent should respect this — no proposing tasks past 5:30 PM, no nag-style reminders that breach it. Job-hunt logistics that arrive after 5:30 PM go on tomorrow's plan.
 
-### Work Week Pattern (The Block)
+### Weekly Track Structure
 
-**45/35/20 Split:**
-- **45% Building** — Zapier automations, Campus 201 features, dev coordination, Claude Skills for work
-- **35% Meetings** — Concentrated Tue-Thu, ~7-8 per week, leads daily standup
-- **20% Firefighting** — Reactive issue resolution, Slack fires
+Don't try to multitask the three tracks in a single day. Each day has one dominant track.
 
-**Day Types:**
+| Day | Track | Focus |
+|-----|-------|-------|
+| **Monday** | Track A logistics + Track B positioning | Severance / health / runway admin AM. PM: refine resume / LinkedIn / portfolio narrative for the week's applications. |
+| **Tuesday** | Track B applications | Apply to N companies (target 5-10 quality apps). Tailor each cover letter to the role. |
+| **Wednesday** | Track A + Track B positioning | Same shape as Monday — second logistics window mid-week, second positioning pass for late-week apps. |
+| **Thursday** | Track B applications | Second weekly application batch. Outreach to warm-20 list (LinkedIn DMs, intro asks). |
+| **Friday** | Track C MCP server + retro | MCP server / portfolio differentiation work AM. **Weekly retro 4:30–5:30 PM.** |
 
-| Day | Type | Character |
-|-----|------|-----------|
-| Monday | Focus Day | Meeting-light. Deep work on automation, Jira, tickets, Campus ops, side projects |
-| Tuesday | Meeting Day | Meeting-heavy. Standup + scheduled syncs |
-| Wednesday | Meeting Day | Meeting-heavy. Standup + scheduled syncs |
-| Thursday | Meeting Day | Meeting-heavy. Standup + scheduled syncs |
-| Friday | Focus Day | Meeting-light. Wrap-up, side projects, planning |
+Weekend: rest. Optional creative if energy is high. No application-pushing on weekends — applicants get reviewed Monday anyway.
 
-### Current Task Management
+### Weekly Retro (Friday 4:30–5:30 PM)
 
-- **Current system:** Mental list + Apple Notes (migrating to Obsidian vault)
-- **Target system:** Obsidian daily notes + Claude Code `/today` planning
-- **Calendar:** Personal Google Calendar with work calendar synced (Google Calendar OAuth planned)
+The cadence anchor for the entire job hunt. Three numbers + three reflections + one headline goal:
+
+**Three numbers (the leading indicators):**
+1. **Applications submitted this week:** N
+2. **Conversations had** (recruiter calls, intros, networking coffees): N
+3. **Interviews booked / completed:** N
+
+**Three reflections:**
+1. **What worked this week?**
+2. **What didn't work?**
+3. **One non-job-hunt win** (creative ship, family time, health milestone, learning) — keep the cushion-quote north-star alive.
+
+**One thing for next week:**
+- **Headline goal for next week:** [single sentence]
+
+Write the output to `vault/20_projects/prj-job-hunt-2026/retros/YYYY-WW.md` (create the folder if needed).
 
 ## Examples
 
-**Example 1: Daily Planning (`/today`)**
+**Example 1: Daily Planning (Tuesday — Track B applications day)**
 ```
 User: "Plan my day"
 Claude: [Uses time-management]
 
-It's Tuesday — Meeting Day. Here's your plan:
+It's Tuesday — Track B (Applications). Here's your plan:
 
-PEAK ENERGY (7:00-9:00 AM) - Pre-work window
-  [1] Side project: 16BitFit sprint work (60 min)
-  [2] Review Jira board for standup prep (15 min)
+MORNING ROUTINE (5:30–8:30 AM)
+  Sacred first hour, gym, intent review
 
-MORNING BLOCK (9:00-12:00)
-  [3] Daily standup (leads) — 9:30
-  [4] Deep work: Campus 201 ticket writing (90 min)
-  [5] Sprint sync — 11:00
+DEEP WORK BLOCK (8:30 AM–12:30 PM) — Applications
+  [1] Tailor cover letters for 5 target roles (90 min)
+  [2] Submit applications via company portals (60 min)
+  [3] Update prj-job-hunt-2026/applications.md tracker (30 min)
+  [4] Buffer / energy reset (30 min)
 
-MIDDAY (12:00-1:00)
-  [6] Lunch + light Slack catch-up
+LUNCH (12:30–1:30 PM)
 
-LOW ENERGY (1:00-2:00)
-  [7] Email triage, Slack responses, admin
+FLEXIBLE PM (1:30–5:30 PM)
+  - Recruiter calls if scheduled
+  - Warm-20 outreach (LinkedIn DMs, intro asks)
+  - Light admin
 
-AFTERNOON (2:00-4:00)
-  [8] 1:1 with PM manager — 2:00
-  [9] Zapier automation build (remaining time)
+HARD STOP (5:30 PM)
+  Mary, decompression, optional creative
 
-3 meetings today | 2.5 hours deep work protected
+Today's headline: 5+ quality apps submitted by 12:30.
 ```
 
-**Example 2: Time Audit**
+**Example 2: Weekly Retro**
 ```
-User: "How was my time split this week?"
+User: "Run the Friday retro"
 Claude: [Uses time-management]
 
-Week of Feb 10-14:
-Building:  [==================--] 42% (target: 45%)
-Meetings:  [================----] 38% (target: 35%) -- slightly over
-Firefight: [========------------] 20% (target: 20%)
+Weekly Retro — Week of [start date]–[end date]
 
-Meeting Load: 9 meetings (target: 7-8)
-Deep Work Blocks: 4 (Mon AM, Mon PM, Fri AM, Fri PM)
-Fragmentation: 2 "Swiss Cheese" days (gaps < 30 min between meetings)
+Three numbers:
+1. Applications submitted: ___
+2. Conversations: ___
+3. Interviews booked / completed: ___
 
-Recommendation: Wednesday has 4 back-to-back meetings with
-15-min gaps. Consider consolidating or declining the 2pm optional sync.
+Reflect:
+1. What worked this week?
+2. What didn't?
+3. One non-job-hunt win:
+
+Next week's headline goal:
+
+Writing to vault/20_projects/prj-job-hunt-2026/retros/...
 ```
 
-**Example 3: Pre-work Window Protection**
+**Example 3: Conflict — interview during deep-work block**
 ```
-User: "Someone wants to schedule a 7:30 AM meeting tomorrow"
+User: "Recruiter wants a screen Wednesday at 10:30 AM"
 Claude: [Uses time-management]
 
-That's your pre-work window (PEAK energy).
-This is your best deep work time — post-workout, before meetings start.
+Wednesday 10:30 AM is inside your sacred deep-work block (8:30–12:30).
+Track A logistics + Track B positioning is Wednesday's shape — interrupted by a 30-min screen, you'll lose ~90 min total to context switching.
 
 Options:
-1. Decline and offer 9:30 AM instead (after standup)
-2. Accept only if it's a hard external dependency
-3. Accept but block 2:00-3:30 PM as replacement deep work
+1. Counter-propose Wednesday 1:30 PM or 2:00 PM (your flexible PM is wide open)
+2. Counter-propose Tuesday 1:30 PM (Tuesday is applications day, but PM is flexible)
+3. Accept 10:30 AM if it's a hard external constraint, and reschedule Wednesday's positioning work to Wednesday PM
 
-Recommendation: Option 1. Your pre-work window is sacred.
-Tomorrow is Wednesday (meeting-heavy day), so protecting morning
-focus time is critical.
+Recommendation: Option 1. Recruiters are generally flexible inside business hours and asking for 1:30 PM signals you have other commitments.
 ```
 
 ## Core Workflows
@@ -146,169 +147,110 @@ focus time is critical.
 
 When Sean says "plan my day" or `/today`:
 
-1. **Check the day type** (Focus Day or Meeting Day)
-2. **Pull calendar events** (from Google Calendar when connected, or ask Sean to list them)
-3. **Identify P0 task** — the single most important thing for today
-4. **Slot P0 into peak energy** (7:00-9:00 AM pre-work or first available deep block)
-5. **Fill remaining blocks** based on energy map
-6. **Output** the plan with time blocks and meeting count
+1. **Identify the day's track** (A logistics + B positioning / B applications / C + retro)
+2. **Pull calendar events** from `sean.winslow28@gmail.com` (single calendar — the Block work calendar archived 2026-05)
+3. **Confirm 8:30 AM–12:30 PM is protected** for the track's deep work
+4. **List interviews / recruiter calls** in the flexible PM slot (1:30–5:30 PM)
+5. **Today's headline** — one sentence, what makes today successful
+6. **Hard stop reminder** — 5:30 PM, non-negotiable
 
 **Planning rules:**
-- P0 task ALWAYS goes in peak energy slot (post-workout, pre-work window or early morning)
-- Never schedule creative work during the 1-2 PM lull
-- Mon/Fri: Protect at least 4 hours of uninterrupted deep work
-- Tue-Thu: Accept meeting reality, but batch meetings and protect at least 1.5 hours deep work
-- Evening personal project time is optional — don't over-schedule it
+- Deep work goes in 8:30 AM–12:30 PM. If displaced by an interview, reschedule to PM and flag the displacement count for the weekly retro.
+- Friday retro (4:30–5:30 PM) is non-negotiable. Block the rest of Friday afternoon if needed to make room.
+- Don't book recruiter calls past 5:00 PM (gives a 30-min buffer to the hard stop).
+- Weekend planning: rest by default. Only schedule weekend tasks if Sean explicitly asks.
 
-### 2. Calendar Audit
+### 2. Calendar Audit (Job-Hunt Mode)
 
-Analyze calendar data (CSV/ICS export or Google Calendar API) using Python:
+The relevant signal in this mode is application + interview throughput, not meetings-as-percentage-of-week. Reframe the audit:
 
-```python
-import pandas as pd
+- **Interviews this week:** count
+- **Recruiter conversations:** count
+- **Applications submitted:** count
+- **Deep-work-block completion ratio:** (# of days protected) / (5)
+- **Hard-stop violations:** how many days went past 5:30 PM (target: 0)
+- **Weekend non-job-hunt time:** target 100% recovery / Mary / creative
 
-def audit_calendar(df: pd.DataFrame) -> dict:
-    """Analyze calendar for time allocation and meeting load."""
-    df['start'] = pd.to_datetime(df['start'])
-    df['end'] = pd.to_datetime(df['end'])
-    df['duration_hours'] = (df['end'] - df['start']).dt.total_seconds() / 3600
+When Sean asks "where did my time go last week?", report against these dimensions, not against the old 45/35/20 split.
 
-    meetings = df[df['event_type'] == 'meeting']
-    deep_work = df[df['event_type'] == 'focus']
+### 3. Protect / Automate / Decline Triage
 
-    total_work_hours = 40  # 8 hours x 5 days
+Same shape as the prior life-systems schedule-recommendations exercise, recalibrated for job-hunt mode:
 
-    return {
-        'meeting_hours': meetings['duration_hours'].sum(),
-        'meeting_pct': meetings['duration_hours'].sum() / total_work_hours * 100,
-        'deep_work_hours': deep_work['duration_hours'].sum(),
-        'meeting_count': len(meetings),
-        'fragmented_days': count_fragmented_days(df),
-    }
+**Protect (don't move under any circumstances):**
+- 8:30 AM–12:30 PM deep work
+- Friday 4:30–5:30 PM retro
+- 5:30 PM hard stop
 
-def count_fragmented_days(df: pd.DataFrame) -> int:
-    """Count days with gaps < 30 min between meetings (Swiss Cheese days)."""
-    fragmented = 0
-    for date, day_events in df.groupby(df['start'].dt.date):
-        meetings = day_events.sort_values('start')
-        for i in range(1, len(meetings)):
-            gap = (meetings.iloc[i]['start'] - meetings.iloc[i-1]['end']).total_seconds() / 60
-            if 0 < gap < 30:
-                fragmented += 1
-                break
-    return fragmented
-```
+**Automate (delegate to the daily-driver / vault flow):**
+- Daily note skeleton creation
+- Application tracker updates after submission
+- Retro skeleton generation Friday afternoon
 
-### 3. The PEARL Conflict Resolution
+**Decline (say no, even if it stings):**
+- Networking coffees that don't move toward target archetype (AI PM > Tech PM > Creative PM)
+- Cold-recruiter spam for roles outside Boston metro / remote
+- Anything that breaches the 5:30 PM hard stop
 
-When schedule conflicts arise:
+### 4. PEARL Conflict Resolution (post-Block)
 
-1. **P**rinciples: Health > Deep Work > External Meetings > Internal Meetings > Admin
-2. **E**xternal: Is the other party outside The Block? (Hard constraint — keep it)
-3. **A**genda: Does the meeting have a clear purpose? (No agenda = decline)
-4. **R**anking: Rank by "Cost of Cancellation" (stakeholder impact, deadline proximity)
-5. **L**ogistics: Propose specific alternative slots
+1. **P**rinciples: Health > Mary > Deep Work > Interviews > Recruiter calls > Admin > Networking coffees > Cold outreach
+2. **E**xternal: Is the other party a hiring manager / signed-on recruiter? (Hard constraint — keep it)
+3. **A**genda: Is there a clear decision or info exchange? (No agenda = decline)
+4. **R**anking: Rank by "Cost of Cancellation" (target-archetype companies > tier-2 companies > generic recruiter screens)
+5. **L**ogistics: Propose specific alternative slots inside the flexible PM window
 
-**Sean's priority hierarchy:**
-- Pre-work window (7-9 AM) > Standup (non-negotiable) > 1:1 with manager > Sprint ceremonies > Optional syncs
+### 5. Weekly Retro Workflow
 
-### 4. Weekly Review Template
+Every Friday 4:30–5:30 PM:
 
-Generate in `vault/Areas/Productivity/weekly/`:
+1. Open the retros folder (`vault/20_projects/prj-job-hunt-2026/retros/`)
+2. Create `YYYY-WW.md` from the template
+3. Pull this week's numbers from the applications tracker
+4. Sean fills in the three reflections
+5. Sean writes next week's headline goal
+6. Save + commit
 
-```markdown
-# Week Review: [Date Range]
+The retro is the consumer side of the weekly loop — it tells Monday-morning Sean what to focus on.
 
-## Time Split
-- Building: XX% (target: 45%)
-- Meetings: XX% (target: 35%)
-- Firefighting: XX% (target: 20%)
+## Vault Integration
 
-## Meeting Load
-- Total meetings: X (target: 7-8)
-- Standup: 5x (daily)
-- Other: Xx
-
-## Deep Work Score
-- Total deep work hours: XX
-- Deep work blocks (>90 min): X
-- Fragmented days: X
-
-## Energy Alignment
-- Peak energy tasks in AM: X/5 days
-- Low-energy lull (1-2 PM) used for admin: X/5 days
-
-## Wins
--
-
-## Friction Points
--
-
-## Next Week Adjustments
-- [ ]
-```
-
-### 5. Google Calendar Integration
-
-**Current state:** Google Calendar is connected via native MCPs (no Zapier needed).
-
-**Capabilities (live now):**
-- Pull events directly for `/today` planning
-- Run automated weekly time audits
-- Detect meeting creep early (alert if meetings exceed 35% weekly)
-- Find free time slots and schedule deep work blocks
-
-**Available now via native MCPs (no Zapier needed):**
-- `claude.ai Google Calendar` — gcal_list_events, gcal_find_my_free_time, gcal_find_meeting_times
-- `google-workspace` — get_events, list_calendars, query_freebusy
-
-**IMPORTANT:** Always query BOTH calendars in parallel:
-- `sean.winslow28@gmail.com` (personal/primary)
-- `swinslow@theblock.co` (The Block work)
-
-Google Calendar API only supports one calendarId per request — make parallel calls.
-
-### 6. Vault Integration
-
-**Daily note** — append time plan to `vault/Daily/`:
+**Daily note** — append today's plan to `vault/10_timeline/daily/YYYY-MM-DD.md`:
 ```markdown
 ## Today's Plan
-- **Day type:** Tuesday (Meeting Day)
-- **P0:** Campus 201 ticket writing
-- **Meetings:** 3 scheduled
-- **Deep work:** 2.5 hours protected
+- **Track:** Tuesday — B (Applications)
+- **Headline:** 5+ quality apps submitted by 12:30
+- **Interviews:** 0 scheduled
+- **Deep-work block protected:** Yes / [displaced + new slot]
 
 ## Time Blocks
-- 7:00-8:30: Side project (pre-work)
-- 9:00-9:30: Standup
-- 9:30-11:00: Deep work — Campus 201
-- 11:00-12:00: Sprint sync
-- 12:00-1:00: Lunch
-- 1:00-2:00: Admin/Slack (low energy)
-- 2:00-2:30: 1:1
-- 2:30-4:00: Zapier automation build
+- 5:30–8:30: Morning routine
+- 8:30–12:30: Deep work — applications
+- 12:30–1:30: Lunch
+- 1:30–5:30: Flex PM (recruiter calls + outreach)
+- 5:30: HARD STOP
 ```
+
+**Retro note** — `vault/20_projects/prj-job-hunt-2026/retros/YYYY-WW.md`.
 
 ## Success Criteria
 
-- [ ] `/today` generates a plan respecting energy map and day type
-- [ ] P0 task is always scheduled in peak energy window
-- [ ] Time audit correctly calculates 45/35/20 split
-- [ ] Fragmentation detection identifies Swiss Cheese days
-- [ ] PEARL conflict resolution explains reasoning
-- [ ] Weekly review template populated with actual data
-- [ ] Pre-work window (7-9 AM) flagged as protected when conflicts arise
-- [ ] Google Calendar integration documented for setup
+- [ ] `/today` plan reflects the day's track (A+B / B / B / B / C+retro)
+- [ ] 8:30 AM–12:30 PM deep-work block is always blocked
+- [ ] 5:30 PM hard stop is enforced (nothing scheduled past it without explicit override)
+- [ ] Friday retro fires every Friday 4:30–5:30 PM
+- [ ] Weekly retro captures 3 numbers + 3 reflections + 1 headline goal
+- [ ] Single-calendar query (`sean.winslow28@gmail.com` only — no Block work calendar)
+- [ ] Audit reframed to job-hunt-mode dimensions, not 45/35/20
 
 ## Copy/Paste Ready
 
 ```
 "Plan my day"
 "What's on my calendar today?"
-"How was my time split this week?"
-"Am I in too many meetings?"
-"Audit my calendar for fragmentation"
-"Resolve this scheduling conflict"
+"Run the Friday retro"
+"Where did my time go last week?"
 "Protect my morning deep work"
-"Generate weekly time review"
+"Resolve this scheduling conflict"
+"What should I drop after 5:30?"
 ```

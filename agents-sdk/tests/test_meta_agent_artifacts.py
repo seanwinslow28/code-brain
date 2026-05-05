@@ -48,9 +48,9 @@ def _config(tmp_artifacts: Path, *, enabled: bool = True, per_agent: dict | None
 class TestBuildScheduleRecsContext:
     def test_concatenates_all_three_domains(self, tmp_artifacts: Path):
         ctx = build_schedule_recs_context(_config(tmp_artifacts))
-        assert "## schedule-recommendations — the-block" in ctx
         assert "## schedule-recommendations — creative-studio" in ctx
         assert "## schedule-recommendations — life-systems" in ctx
+        assert "## schedule-recommendations — job-hunt-2026" in ctx
 
     def test_returns_empty_when_artifacts_disabled(self, tmp_artifacts: Path):
         cfg = _config(tmp_artifacts, enabled=False)
@@ -69,11 +69,11 @@ class TestBuildScheduleRecsContext:
 
     def test_missing_per_domain_artifact_maps_to_unavailable(self, tmp_artifacts: Path):
         # Remove one domain's schedule-recommendations file
-        (tmp_artifacts / "05_atlas" / "operating-models" / "the-block" / "schedule-recommendations.md").unlink()
+        (tmp_artifacts / "05_atlas" / "operating-models" / "creative-studio" / "schedule-recommendations.md").unlink()
         ctx = build_schedule_recs_context(_config(tmp_artifacts))
-        assert "## schedule-recommendations — the-block\n\n[unavailable]" in ctx
+        assert "## schedule-recommendations — creative-studio\n\n[unavailable]" in ctx
         # Other two still present
-        assert "## schedule-recommendations — creative-studio" in ctx
+        assert "## schedule-recommendations — life-systems" in ctx
 
 
 class TestParseSummaryJSON:
@@ -155,7 +155,7 @@ class TestGenerateDomainAwareSummary:
             fleet_snapshot="SNAPSHOT-MARKER",
             summary_caller=fake_caller,
         )
-        assert "schedule-recommendations — the-block" in seen["prompt"]
+        assert "schedule-recommendations — creative-studio" in seen["prompt"]
         assert "SNAPSHOT-MARKER" in seen["prompt"]
         assert "- x" in out
 

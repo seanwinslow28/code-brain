@@ -2,19 +2,30 @@
 version: 2.0
 status: confirmed
 created: 2026-02-15
-updated: 2026-05-02
+updated: 2026-05-04
 supersedes: v1.1
 related:
-  - the-block/HEARTBEAT, the-block/USER, the-block/SOUL
   - creative-studio/HEARTBEAT, creative-studio/USER, creative-studio/SOUL
   - life-systems/HEARTBEAT, life-systems/USER, life-systems/SOUL
   - life-systems/schedule-recommendations
-ai-context: "Tier-0 identity, values, key relationships, and cross-cutting baselines for Sean Winslow. Read at the start of every session. Stable layer that sits above the three domain operating models (the-block, creative-studio, life-systems). Updates rarely; domain rhythm/decision/SOUL artifacts capture everything else."
+  - 20_projects/prj-job-hunt-2026/README
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-04-onwards-and-upwards-plan
+ai-context: "Tier-0 identity, values, key relationships, and cross-cutting baselines for Sean Winslow. Read at the start of every session. Stable layer that sits above the active domain operating models (creative-studio, life-systems) plus the live job-hunt-2026 project (post-Block, 2026-05-04). The-block operating-model artifacts are archived. Updates rarely; domain rhythm/decision/SOUL artifacts capture everything else."
 ---
 
 # Sean Winslow — Personal Context
 
-**Version:** 2.0 | **Last Updated:** May 2, 2026 | **Status:** Living document
+**Version:** 2.0 | **Last Updated:** May 4, 2026 | **Status:** Living document
+
+## Career Status (2026-05-04)
+
+Sean was **laid off from The Block on 2026-05-04** as part of a cost-cutting layoff (not performance-related). The termination call was delivered by **Larry Cermak (President)** and **Vicky Lu (HR)** — Alex Lebedyev's email scheduled the meeting but Larry ran it.
+
+- **Mode:** 8-week job hunt running through ~2026-07-04.
+- **Target priority:** AI PM > Tech PM > Creative PM. Boston metro or remote.
+- **Primary reference:** Larry Cermak.
+- **Live tracker:** `vault/20_projects/prj-job-hunt-2026/` (master plan + migration plan + status README).
+- **Posture:** Track A logistics (severance / health / runway), Track B pipeline (applications + outreach + interviews), Track C MCP server / portfolio differentiation. Friday weekly retro is the cadence anchor.
 
 ## Contents
 1. [Identity & Background](#identity--background)
@@ -49,10 +60,13 @@ A decade running multimedia projects in NYC as a freelancer, paired with persona
 
 ## Career
 
-**Current role:**
-Associate Product Manager (Technical) at The Block since November 10, 2025; reports to Ed Rupkus. **As of May 2026, the org is mid-shuffle — Matt Vitebsky left, Ed is being promoted, and a promotion path for Sean is being discussed under incoming CEO Steve W. Chung (started 2026-05-01).** Sean's posture: he wants the promotion. Once Steve sets north-stars / goals, Sean will share them with Claude and the two of them will execute toward becoming worthy of it.
+**Current status (2026-05-04):**
+Job hunt mode — see Career Status section above. Active workspace at `vault/20_projects/prj-job-hunt-2026/`. Target archetypes prioritized AI PM > Tech PM > Creative PM. Boston metro or remote.
 
-> *(was: static "Associate PM started Nov 10 2025") (now: in-transition framing with active promotion goal) — source: Sean's Step 3 answers + the-block SOUL post-Matt-departure update.*
+### Prior Role: The Block (Nov 2025 – May 2026)
+Associate Product Manager (Technical) at The Block from November 10, 2025 through May 4, 2026; reported to Ed Rupkus. The org went through significant turnover in early 2026 (Matt Vitebsky left, incoming CEO Steve W. Chung started 2026-05-01); the role ended via cost-cutting layoff on 2026-05-04 (delivered by Larry Cermak + Vicky Lu — not performance-related). Templates, frameworks, and patterns from this role are retained at `the-block/` for portfolio + future-reference use.
+
+> *(updated 2026-05-04 to reflect end of Block role.)*
 
 **Long-term dream (2–3 yrs):**
 Remote PM in the animation / creative industry — combining technical PM skills with animation / storytelling abilities.
@@ -103,7 +117,8 @@ Remote PM in the animation / creative industry — combining technical PM skills
 | **Mary Alice McKee** | Girlfriend (b. September 24, 1992) | The love of Sean's life. Together since September 27, 2025 (official anniversary). Lives with Sean in Charlestown, MA. Goal: marry, adventure, buy a house together. Children TBD — not the highest priority right now. |
 | **Kenneth Winslow** | Father (b. June 25, 1961) | Lives in Staten Island, NY. |
 | **Valerie Winslow** | Mother (b. April 17, 1958) | Lives in Staten Island, NY. |
-| **Ed Rupkus** | Manager at The Block + cross-domain north-star | Sean's day-to-day reporting line AND his aspirational PM model — "hard-working PM like Ed, with my own creative + technical edge." Currently Sean's biggest collaborator at The Block. Ed is starting to dig into Claude / AI; Sean is well ahead and shares what he learns. |
+| **Ed Rupkus** | Former manager at The Block (Nov 2025 – May 2026); cross-domain north-star | Sean's prior reporting line AND aspirational PM model — "hard-working PM like Ed, with my own creative + technical edge." Active relationship as a peer / sounding board post-layoff; Ed is digging into Claude / AI and Sean shares what he learns. Reference role: see `vault/20_projects/prj-job-hunt-2026/The-Block-Contacts-After-Layoff.md`. |
+| **Larry Cermak** | Primary post-Block reference; President of The Block | Cordially delivered the layoff call on 2026-05-04. Designated as Sean's primary reference for the job hunt. |
 | **Nate B Jones** | Mentor / influencer (YouTube + Substack: natesnewsletter.substack.com) | Sean watches every release. Trusted because "very intelligent and gives important information without overhyping." Cross-domain agentic-AI oracle. |
 
 **Family note:** Sean is an only child. Both parents are in their late 60s — future-dependency is expected and will be architected when the time comes; not load-bearing today.
@@ -175,11 +190,10 @@ How Sean wants Claude (and any agent) to talk to him — across every domain, ev
 - **Knowledge:** Obsidian vault (canonical for tasks/notes), NotebookLM, Apple Notes (quick-capture only — promote to vault).
 - **Hardware peripherals:** iPad + Procreate (illustration / hand-drawn animation practice). iPhone + Apple Watch (Apple Health / Fitness — only life-systems hard dependency).
 
-### Two-Account Separation (HARD WALL)
-- `sean.winslow28@gmail.com` — personal life-systems + creative-studio. Owns Mac Mini / MBP / Alienware GitHub + Google services.
-- `swinslow@theblock.co` — 100% Block work. Meetings, Slack, Jira, Confluence, Rippling.
-- Inbound: a third Claude-Code account via The Block (for PM tasks) is expected; will compound context-switch cost.
-- **Rule:** Always query BOTH calendars in parallel; outputs stay segmented; no cross-contamination.
+### Single-Account Setup (post-Block, 2026-05)
+- `sean.winslow28@gmail.com` — primary account for life-systems, creative-studio, and the job hunt. Owns Mac Mini / MBP / Alienware GitHub + Google services.
+- The prior `swinslow@theblock.co` work account is archived as of the 2026-05-04 layoff. No agent should query it.
+- **Rule:** Single calendar. Job-hunt logistics (interviews, recruiter calls, networking coffees) all flow through `sean.winslow28@gmail.com` with Gmail labels for separation.
 
 ### Personal Data Stays Local
 Finance + health processed by local models (`gemma4`, `phi4-mini`) on Mac Mini. External APIs only with explicit per-task approval.
@@ -203,8 +217,8 @@ Finance + health processed by local models (`gemma4`, `phi4-mini`) on Mac Mini. 
 ### Active focus
 - **2D animation pipeline** (`sw-portfolio-animation-pipeline`) — portfolio short by June 11, 2026. Establishes the reusable agentic + human creative collaboration that all future creative work runs on.
 - **Agentic financial-research fleet** (life-systems) — multi-agent setup spanning Perplexity API + Gemini Deep Research MCP + NotebookLM MCP + The Block's crypto API + GitHub/Reddit/YouTube/blog scraping. Produces research briefs (summary + recommended action + path to execution). Unblocks the biggest pile-up: investment / savings decisions.
-- **Block roadmap prep** with Ed — The Block Pro revamp as the flagship pitch under incoming CEO Steve W. Chung.
-- **Superuser Pack** — 114 skills, 13 subagents, 13 hooks, 13 SDK agents (7 active), 3 primary domains. Actively maintained (currently v3.20.0).
+- **Job hunt 2026** — 8-week sprint targeting AI PM > Tech PM > Creative PM (Boston metro or remote). Track A logistics + Track B applications + Track C MCP-server differentiation. Live status at `vault/20_projects/prj-job-hunt-2026/README.md`.
+- **Superuser Pack** — 117 skills, 13 subagents, 13 hooks, 14 SDK agents (7 active), 3 primary domain folders. Actively maintained.
 
 ### Paused
 - **16BitFit** (paused 2026-04-20) — returns once the 2D animation pipeline is dialed in; will be simplified from v3.
@@ -225,17 +239,17 @@ Finance + health processed by local models (`gemma4`, `phi4-mini`) on Mac Mini. 
 ## Goals
 
 ### 30–90 Days
-1. Lock down the 2D animation pipeline; complete portfolio short before June 11.
-2. Stand up the agentic financial-research fleet (Perplexity + Gemini DR + NotebookLM MCPs wired into Claude Code).
-3. Build out vault as the cross-domain SSoT (consumer side of the knowledge loop).
-4. Be visibly worthy of the Block promotion under Steve's first-90-day agenda.
+1. Land an AI PM / Tech PM / Creative PM role within the 8-week job-hunt window (post-2026-05-04).
+2. Ship Track C MCP server as the portfolio differentiator (reusable for interview demos).
+3. Lock down the 2D animation pipeline; complete portfolio short before June 11.
+4. Build out vault as the cross-domain SSoT (consumer side of the knowledge loop).
 
 ### 6–12 Months
 1. **Multiple income streams generating consistent income** — even small amounts, compounding, in service of the cushion north-star.
 2. Animation pipeline operational and reusable across multiple shorts (not just the portfolio piece).
 3. Claude Code functioning as a true second brain + financial partner + creative partner.
 4. Credit card debt reduced; savings established.
-5. Promotion at The Block (if the path opens).
+5. Stable footing in the new role; runway extended past the immediate severance window.
 
 ### 2–3 Years
 1. PM role in the animation / creative industry (remote).

@@ -43,5 +43,4 @@ ai-context: "Operating rhythms for Sean's creative work — active focus is the 
 - **Informal rule:** do *something* creative each day — learning, tweaking, researching, or implementing. Driven by enjoyment, not obligation.
 
 ## Email Split (this domain)
-- `sean.winslow28@gmail.com`: primary and effectively sole email for creative-studio work.
-- `swinslow@theblock.co`: not used for creative-studio unless something crosses over (rare).
+- `sean.winslow28@gmail.com`: primary and sole email for creative-studio work. (The prior Block work account was archived 2026-05 with the layoff and was rarely used for creative anyway.)

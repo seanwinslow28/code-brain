@@ -879,3 +879,7 @@ Want another prompt? Just tell me what you're creating next.
 **Bundled scripts:** `scripts/last30days.py` (main research engine), `scripts/lib/` (search, enrichment, rendering modules), `scripts/lib/vendor/bird-search/` (vendored X search client, MIT licensed)
 
 Review scripts before first use to verify behavior.
+
+## Related
+
+- For citation-grounded synthesis questions (not social-trend questions), see `gemini-deep-research`.

@@ -7,7 +7,7 @@ description: Revenue operations and ad operations automation for media and data 
 
 ## Purpose
 
-Provide revenue operations and ad operations automation patterns for media and data companies like The Block. Enable Claude to generate pipeline analyses, campaign audits, forecast models, CRM integration specs, and operations dashboards. Frame everything as PM-level specifications and workflows, not engineering implementation.
+Provide revenue operations and ad operations automation patterns for media and data companies (crypto / fintech / publishing). Enable Claude to generate pipeline analyses, campaign audits, forecast models, CRM integration specs, and operations dashboards. Frame everything as PM-level specifications and workflows, not engineering implementation.
 
 ## When to Use
 

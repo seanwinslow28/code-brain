@@ -1,14 +1,14 @@
 ---
 type: moc
-domain: [the-block, creative-studio, life-systems]
+domain: [creative-studio, life-systems, job-hunt-2026]
 status: index
 created: 2026-04-18
-ai-context: "Index for the operating-model artifact bundles. One subfolder per domain, five artifacts per bundle. Populated by the work-operating-model skill."
+ai-context: "Index for the operating-model artifact bundles. One subfolder per domain, five artifacts per bundle. Populated by the work-operating-model skill. The the-block bundle was archived 2026-05 to vault/40_archive/operating-models-the-block-2026-05/ following Sean's layoff."
 ---
 
 # Operating Models
 
-This folder holds five-artifact bundles per domain that capture how Sean actually works — operating rhythms, decision patterns, dependencies, institutional knowledge, and friction. Downstream agents (`meeting-defender`, `daily-driver`, `sprint-health`, `process-inbox`, `pr-digest`) load these to act with real context.
+This folder holds five-artifact bundles per domain that capture how Sean actually works — operating rhythms, decision patterns, dependencies, institutional knowledge, and friction. Downstream agents (`daily-driver`, `meta_agent`, `flush`, `knowledge_lint`) load these to act with real context.
 
 The five artifact types per domain:
 
@@ -22,13 +22,14 @@ The five artifact types per domain:
 
 ## Domain bundles
 
-- [[the-block/HEARTBEAT|The Block — day job (PM at crypto/ETF company)]]
 - [[creative-studio/HEARTBEAT|Creative Studio — 16BitFit, Remotion, art, writing]]
 - [[life-systems/HEARTBEAT|Life Systems — finance, health, learning, time, career]]
+- [[job-hunt-2026/HEARTBEAT|Job Hunt 2026 — 8-week post-Block search, AI/Tech/Creative PM]]
+- *Archived 2026-05:* The Block bundle moved to `vault/40_archive/operating-models-the-block-2026-05/` after Sean's layoff. Selectable for re-running historical interviews; not loaded by active agents.
 
 ## How to populate
 
-Run the skill: `Run the work-operating-model interview for the-block` (or `creative-studio`, `life-systems`).
+Run the skill: `Run the work-operating-model interview for creative-studio` (or `life-systems`, `job-hunt-2026`).
 
 The skill walks the [5-layer interview](../../../.claude/skills/work-operating-model/interview-questions.md) and writes outputs to the matching subfolder. Each artifact starts with `status: awaiting-interview` → `draft` → `confirmed`.
 

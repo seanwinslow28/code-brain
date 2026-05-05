@@ -5,6 +5,252 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.26.2] - 2026-05-05
+
+`job-hunt-2026` operating-model interview completed. All five artifacts at `vault/05_atlas/operating-models/job-hunt-2026/` advanced from `status: awaiting-interview` (the v3.26.0 placeholder state) to `status: confirmed` via the `work-operating-model` skill, walking Sean through the 5 interview layers (Operating Rhythms → Recurring Decisions → Dependencies → Institutional Knowledge → Friction) with summarize → confirm → write checkpoints per layer. The bundle is now consumable by the agent fleet — daily-driver morning preamble, meta-agent Domain-Aware Insights, flush.py SOUL-prepend, and knowledge_lint Tier 2 `soul-tier-a-conflict` detection will all start picking up the populated content on their next runs.
+
+> **Resolves the v3.26.0 "Known follow-up: Interview 4 not yet run."** That blocker is closed.
+
+### Changed
+
+- `vault/05_atlas/operating-models/job-hunt-2026/HEARTBEAT.md` — `awaiting-interview → confirmed`. Documents the 8:30–5:30 fluid container, sacred 8:30–9:30 AM learning hour, mandatory 1–2 PM break, Friday 4:30–5:30 PM retro, 5:30 PM hard stop on active job-hunt admin, and the 8-week phase arc.
+- `vault/05_atlas/operating-models/job-hunt-2026/USER.md` — `awaiting-interview → confirmed`. Codifies prioritization stack (geo → warm intro → brand → archetype → ≥$100k → learn-and-grow → energy), auto-yes / auto-no rules, **walk-away salary $100,000/yr base**, agent-delegation boundaries (drafts only — no outbound human messages from agents), tiebreakers, and per-unit definition-of-done.
+- `vault/05_atlas/operating-models/job-hunt-2026/SOUL.md` — `awaiting-interview → confirmed`. Critical-path collaborators (Mary, Matt Vitebsky, Larry Cermak); broader 9 P&E peers + warm-20 as opportunistic. Tool surface broader than the v3.26.0 seed list: adds **Pi Coding Agent** (pi.dev), **Google Anti-Gravity** (main IDE), **Figma + Claude Design**, **NotebookLM**, **Codex app**. 3-machine topology (Mac Mini primary / MBP cross-over / Alienware OSS-test). Single source of truth confirmed = `vault/20_projects/prj-job-hunt-2026/README.md`. Vocabulary, sacred cows, comms norms, Ask-X-About-Y (Larry / Matt / Mary / Jordan Leech / Nate B Jones / Matt Wolfe), past landmines, week-one tacit knowledge. **5 Tier-A truths** + **2 relocation-exception clauses** ($250k+/yr OR Anthropic specifically override remote-preferred) for `knowledge_lint` Tier 2 `soul-tier-a-conflict` checks.
+- `vault/05_atlas/operating-models/job-hunt-2026/schedule-recommendations.md` — `awaiting-interview → confirmed`. 7 Protect rules ("when X, then Y"), 11 Automate targets, 6 Decline rules, 7 20-min→2-min candidates, context-switch costs, agent-fleet audit + Mac-Mini migration explicitly logged as friction. **Extra-hour north star** = (1) agentic-workflow + agent-harness fundamentals, (2) Agent Evals fluency, (3) enterprise-level building patterns. Automations that don't move toward those three are deprioritized.
+- `vault/05_atlas/operating-models/job-hunt-2026/operating-model.md` — `awaiting-interview → confirmed`. Synthesized profile: TL;DR, Identity, four 1-paragraph compressions of HEARTBEAT / USER / SOUL Part A / SOUL Part B, Active Leverage Points, Known Bottlenecks, Cross-Domain Bleed (life-systems / creative-studio / claude-mastery), 7 Open Questions Sean himself flagged as "I should figure this out."
+- `vault/20_projects/prj-job-hunt-2026/README.md` — Status block: "Operating-model interview" `[ ] NEXT → [x] DONE 2026-05-05`. New decision-log entry with the bundle pointer.
+- `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-04-migration-completion-handoff.md` — "What to do next" Step 1 marked DONE; "What's NOT yet done" item 1 (Interview 4) removed; new "Operating-model interview completed" section pointing at the bundle.
+- `MEMORY.md` (auto-memory) — appended pointer to new memory file `project_job_hunt_2026_operating_model.md` documenting the bundle's confirmed state, Tier-A truths, relocation overrides, agent-message boundary rule, and the open work items the bundle surfaced.
+
+### Open work items surfaced by the bundle
+
+These are explicit pile-ups the interview exposed. They're not blockers on the bundle being usable — they're the actual work the bundle now points the agent fleet toward.
+
+1. **Track-C MCP cold-start chain** (`intent-engineering` server) — no name, no repo, no README, no plan of action yet. Required steps: name → repo → README → plan. Target ship date 2026-05-25 (per master plan Phase 4) means this kickoff happens this week. Highest-priority self-blocking decision in the bundle.
+2. **Substack voice + build-in-public format decisions** — both gate the public-surface track. Substack creation is named the top-of-pile-up alongside build-in-public format / cadence.
+3. **Target list of 30 companies** — gates the application volume ramp-up scheduled for weeks 3–4.
+4. **Agent-fleet audit + Mac-Mini migration** — Sean explicitly flagged this as Layer-5 friction. Daily-driver + deep_researcher are the keepers; everything else needs an audit pass for relevance, reliability, and host dependency. Anything depending on MBP or Alienware being awake should move to the Mac Mini or be retired. The migration in v3.26.1 (LDR daemon + 6 stale plist deletions) is the start, not the end, of this work.
+5. **Gmail labeling pipeline** — Sean wants Claude to set up labels (`recruiter`, `interview-loop`, `reference-request`, `network`) and a pipeline that pulls labeled threads → markdown in `vault/30_domains/job-hunt-2026/email/` so Claude Code has fast file-system access without needing live MCP every session.
+6. **YouTube yes/no decision** — undecided whether YouTube is part of the public-surface bundle.
+7. **Second portfolio artifact** — what ships after MCP v0 is unspecified.
+8. **Agent Evals fluency** — Sean flagged this as one of the three extra-hour learning vectors. Needs a concrete learning loop, not just "read about it."
+9. **Enterprise-level build patterns** — bridge from "local prototype" to "company would trust me to ship + manage teams against this." Pattern-level, not tool-level.
+
+### Counts
+
+- 117 skills (no change)
+- 13 subagents (no change)
+- 13 hooks (no change)
+- 14 SDK agents — **7 active** (no change). Bundle is content authoring, not an agent change.
+- **3 active operating-model domains, all populated** — `creative-studio`, `life-systems`, `job-hunt-2026`. (Was 3 active with `job-hunt-2026` placeholder; now 3 active with all three populated.)
+- pytest suite stays green (no code changes).
+
+### Why this is a CHANGELOG entry
+
+The operating-model bundle is content, but agent fleet behavior changes the moment these files flip from `awaiting-interview` to `confirmed` — the artifact loader (`agents-sdk/lib/artifact_loader.py`) reads them at runtime and they shape daily-driver / meta-agent / flush / knowledge-lint output. Recording the state change in CHANGELOG keeps the audit trail intact for downstream sessions.
+
+## [3.26.1] - 2026-05-05
+
+Fleet reinstall on Seans-Mac-mini.local. Topic 1a missed the overnight 02:45 cron on 2026-05-04 → 2026-05-05 (and the prior night). Diagnosis: `launchctl list | grep "sean.agent"` returned empty; `~/Library/LaunchAgents/` had only one stale `meeting-defender` symlink (target deleted in v3.17.0 Phase 3); the LDR `:5050` web daemon (a hard dependency for `deep_researcher`) had been started by hand from a foreground terminal that exited, leaving no persistence story. SearXNG (`:8080`, Docker `unless-stopped`) and Ollama were already healthy.
+
+### Removed
+
+- 6 stale launchd plists from `agents-sdk/schedules/`: `daily-evening`, `daily-morning-baton`, `pr-digest`, `process-inbox`, `sprint-health`, `weekly-review`. Citations: `AUDIT-2026-04-09-agent-downsizing.md` (5 of 6) and `AUDIT-2026-04-28-process-inbox-reenable.md` (process-inbox paused 2026-04-29 pending Path B local-`gemma4:e4b` rewrite). Net plist count `13 → 7` (5 active SDK + 1 daily-morning + 1 gated `gemini-researcher`).
+- Dangling `~/Library/LaunchAgents/com.sean.agent.meeting-defender.plist` symlink (target deleted in v3.17.0 Phase 3, April 18).
+
+### Added
+
+- **`agents-sdk/schedules/com.sean.service.ldr-web.plist`** — first non-`agent.*` plist in the fleet. Label: `com.sean.service.ldr-web`. Persistent daemon for the Local Deep Research web server (`~/Code-Brain/local-deep-research-stack/.venv/bin/ldr-web`). `RunAtLoad=true`, `KeepAlive=true`, `ThrottleInterval=60s`. Env vars: `LDR_WEB_PORT=5050` (port 5000 collides with macOS AirPlay Receiver), `LDR_BOOTSTRAP_ALLOW_UNENCRYPTED=true`, plus the standard PATH per `BUGFIX-2026-04-07-launchd-path.md`. Establishes the `service.*` label namespace alongside `agent.*` — agents are scheduled SDK runs, services are persistent dependencies. `install_schedules.sh` already globs `*.plist` so this gets installed automatically (no script change required).
+
+### Operational
+
+- Reinstalled launchd schedules on Seans-Mac-mini.local. **6 active SDK agent jobs loaded** (`vault-indexer`, `vault-synthesizer`, `deep-researcher`, `meta-agent`, `knowledge-lint`, `daily-morning`) + **1 LDR service daemon** (`ldr-web`). `gemini-researcher` correctly skipped (default disabled, opt-in via `INSTALL_GEMINI=1`).
+- Smoke test: `deep_researcher.py --mode queue` consumed Topic 1a from `vault/00_inbox/research-queue.md`, ran in 280s wall-clock against the now-persistent LDR + SearXNG stack, wrote `vault/20_projects/research/2026-05-05-topic-1a-mcp-sdk-toolkit-survey-catalog-mcp-cli-mcp-bridge-m.md` (11,284 bytes, 939 words), marked the queue item done with backlink, and recorded `success` in `agent-run-history.csv` at $0.00 cost. Daily-note digest skipped because `2026-05-05.md` doesn't exist yet (daily-driver morning hadn't run today; this is the same pattern that normal 02:45 cron runs will hit before the 08:45 daily-note creation).
+
+### Why a service daemon, not a fix-the-script
+
+`install_schedules.sh` was already correct in shape — it failed only because the directory contained 6 stale plists that a clean install would re-symlink. After the deletions, the script installs the right set with no behavior change. The wider gap was the LDR dependency lacking a persistence guarantee, which masquerades as a fleet-wiring bug whenever LDR happens to be down. Codifying LDR as a launchd service closes the loop.
+
+### Files
+
+- Plist deletions: `agents-sdk/schedules/com.sean.agent.{daily-evening,daily-morning-baton,pr-digest,process-inbox,sprint-health,weekly-review}.plist`
+- Plist added: `agents-sdk/schedules/com.sean.service.ldr-web.plist`
+- Plan + summary: `vault/20_projects/prj-superuser-pack/open-source-deep-research/2026-05-04-fleet-reinstall-{plan,summary}.md`
+- Smoke-test artifact: `vault/20_projects/research/2026-05-05-topic-1a-mcp-sdk-toolkit-survey-catalog-mcp-cli-mcp-bridge-m.md`
+
+### Active-agent count
+
+CLAUDE.md's "**Active agents (7 of 14):**" line remains correct (5 launchd-scheduled + daily-morning + flush hook = 7). No CLAUDE.md / README.md count edits required by this release.
+
+### Vault organization (post-execution cleanup)
+
+Audited `vault/20_projects/prj-superuser-pack/open-source-deep-research/` after the fleet-reinstall plan landed. Folder had grown to 11 files mixing canonical specs, executed plans, and pre-migration scoping reference docs — making it non-obvious which doc was the source of truth for the 7 active research topics.
+
+- **Active folder reduced 11 → 5 files.** Kept: `phase-4-night-1-2026-05-03.md` (canonical 7-topic spec — the source of truth for which topics exist, what they ask, and which queue/cost tier they belong to), `you-are-a-senior-modular-pelican.md` (kept as ongoing gotcha-reference for future LDR / Mac Mini work), and the 3 fleet-reinstall artifacts from this release.
+- **Moved to `archive/` subfolder (6 files):** `2026-05-04-deep-researcher-fleet-reinstall-prompt.md` (the prompt that kicked off this session), `gemini-deep-research-integration-plan-2026-05-03.md` (v3.25.0 implementation plan, shipped), `macmini-migration-plan-2026-05-02.md` (Mac Mini migration plan, executed), `Claude-Synthesis-of-Deep-Research-Reports.md` + `Gemini-Local-Autonomous-Research-Agent-Landscape.md` + `Perplexity-Local-Open-Source-Deep-Research-Agent-Stack.md` (Apr 28 early scoping research, superseded by the migration + integration plans). All 6 were untracked, so no git history was lost; archive folder is the durable retention path.
+- **`vault/00_inbox/gemini-research-queue.md` truthed** to match reality:
+  - **Topic 2 marked `[x]`** — the manual `gemini-dr` run on 2026-05-04 17:22 ($2.80, recorded in `agent-run-history.csv`) produced the report at `vault/20_projects/research/2026-05-04-you-are-a-senior-research-analyst-specializing-in-ai-develop.md`. The agent didn't fire it (the autonomous `gemini_researcher` is `enabled = false` by intent), so the queue still showed `[ ]` despite the work being done. Now reflects ground truth.
+  - **Topic 4 moved to a new `## Deferred (post-severance review)` section** with explicit rationale linking to the layoff (2026-05-04) and the portfolio-priority logic from `vault/20_projects/prj-job-hunt-2026/README.md`. The DR Max ($3–7) call is the single most expensive in the project; deferring until severance lands AND until Topic 2's findings are read is the cost-disciplined path.
+
+### How to navigate this folder going forward
+
+1. **Source of truth for research topics:** [`phase-4-night-1-2026-05-03.md`](vault/20_projects/prj-superuser-pack/open-source-deep-research/phase-4-night-1-2026-05-03.md). Has the 7 topics, prompts, queue assignment, expected cost.
+2. **Live queues** (truthed with done-marks + backlinks):
+   - LDR free tier (02:45 daily on Mac Mini): [`vault/00_inbox/research-queue.md`](vault/00_inbox/research-queue.md)
+   - Gemini paid tier (manual or opt-in autonomous): [`vault/00_inbox/gemini-research-queue.md`](vault/00_inbox/gemini-research-queue.md)
+3. **Topic 1a is done; Topics 1b/3/5/7 will auto-process via the 02:45 cron starting 2026-05-06.**
+4. **Topic 2 is done (manual run 5/4); Topic 4 is deferred post-severance.**
+5. **Any pre-migration / pre-integration scoping docs live under `archive/`** — keep but don't read first.
+
+## [3.26.0] - 2026-05-04
+
+Block-to-job-hunt migration — repurposes the repo from a 3-domain world (the-block / creative-studio / life-systems) to a 4-domain world (creative-studio / life-systems / job-hunt-2026 — with the-block bundle archived 2026-05). Sean was laid off from The Block on 2026-05-04 (cost-cutting layoff delivered by Larry Cermak + Vicky Lu). The migration sanitizes Block-specific instructions out of the agent fleet, repoints the daily-driver morning brief at job-hunt + deep-work signals, archives the the-block operating-model bundle without deleting it, extends the work-operating-model skill to a 4th domain (Path C — minimal in-place fork), and stands up an awaiting-interview job-hunt-2026 operating-model bundle ready for Sean to populate via the new Interview 4 prompt.
+
+> **Migration philosophy:** Sanitize-in-place where possible (skills); archive-don't-delete where sanitization isn't appropriate (Block-confidential operating-model artifacts). No skills/agents/hooks deleted. None of the validator-protected workspace folders moved.
+
+### Added
+
+- `vault/05_atlas/operating-models/job-hunt-2026/` — new 4th domain bundle. 5 placeholder artifacts (HEARTBEAT, USER, SOUL, operating-model, schedule-recommendations) at `status: awaiting-interview`, ready for Sean to populate via the work-operating-model skill.
+- `vault/40_archive/operating-models-the-block-2026-05/` — archived the-block bundle (`git mv` from `vault/05_atlas/operating-models/the-block/`). 5 artifacts preserved + new `README.md` documenting provenance and re-runnability.
+- `.claude/skills/daily-driver/SKILL.md` — new "Step 1a: Job-Hunt + Deep-Work Morning Brief" section. The 8:45 AM SDK agent now surfaces 5 job-hunt + deep-work signals: applications submitted yesterday, today's interview events, deep-work focus (Track-C MCP server), Status checkboxes due in next 7 days, yesterday's wins.
+- `.claude/skills/work-operating-model/SKILL.md` — new "Job Hunt 2026" subsection in Domain-Specific Tuning Notes. New 4th row in Domain Argument Handling table. New routing rule for "job hunt" / "hunt" / "search" / "onwards" → job-hunt-2026.
+- `.claude/skills/work-operating-model/interview-questions.md` — Layer 1 Q2 sub-bullet for Job Hunt 2026 (weekly app/outreach batches, interview cycles, Friday weekly retro).
+- `vault/05_atlas/operating-models/INTERVIEW-PLAYBOOK.md` — new "Interview 4 — Job Hunt 2026" section with start prompt, commit prompt, and cross-check prompt mirroring Interviews 2 + 3. Interview 1 (The Block) banner-marked archived 2026-05.
+- `.claude/hooks/daily-note-appender.sh` — new domain-classification pattern: `*job-hunt-2026*\|*job-hunt*\|*onwards-and-upwards*) DOMAIN="job-hunt"`. Existing patterns kept.
+- `vault/Sean-Winslow-Full-Personal-Context-v2.0.md` — new top section `## Career Status (2026-05-04)` documenting layoff context, 8-week job hunt, AI/Tech/Creative PM target priority, Larry Cermak as primary reference. Ed-as-reporting-line moved to Prior Role archive subsection.
+
+### Changed
+
+- **DOMAINS tuple updated across 6 production files** in `agents-sdk/`: `lib/artifact_loader.py`, `agents/daily_driver.py`, `agents/meta_agent.py`, `agents/flush.py`, `agents/knowledge_lint.py`, `agents/process_inbox.py`. From `("the-block", "creative-studio", "life-systems")` to `("creative-studio", "life-systems", "job-hunt-2026")`. Test fixtures updated correspondingly.
+- **9 Block-themed skills sanitized in place** (Chunk 4 of migration plan + Karpathy synthesis "consolidate" sweep): `analytics-workarounds`, `api-product-management`, `campus-education`, `etf-page-creator`, `jira-automation`, `meeting-prep`, `revops-adops-automation`, `sprint-health`, `stakeholder-update`. Strip Block specifics; keep PM patterns. None deleted.
+- **`crypto-web3-context` KEPT UNCHANGED** — domain knowledge useful for AI/crypto PM target sector.
+- `daily-driver` skill: dropped `swinslow@theblock.co` from calendar parallel-query. Single calendar (`sean.winslow28@gmail.com`). Slack overnight scan no-op'd until personal Slack workspace exists. Apartment-cleanup section removed (March 20 deadline already passed).
+- `time-management` skill **full rewrite** for job-hunt rhythm: 5:30 AM wake (was 4:45 AM), Track A/B/C weekly structure (replaces 45/35/20 split), 8:30 AM–12:30 PM deep work, Friday 4:30–5:30 PM weekly retro, 5:30 PM hard stop (non-negotiable per master plan).
+- `intent-engineering` + `technical-writing` + `zapier-chrome-automation`: incidental Block sample data → generic equivalents.
+- Root `CLAUDE.md`: domain table the-block row → "Archived 2026-05"; routing table marked the-block (archived); new row "Job-hunt work → vault/20_projects/prj-job-hunt-2026/"; calendar rule replaced with single-calendar instruction.
+- Root `README.md`: mirrors CLAUDE.md domain-table edits.
+- `the-block/CLAUDE.md` + `the-block/README.md`: archive banner at top. Workspace folder kept in place at root per `scripts/validate.py` rule #7 (validator hard-enforces the-block/ exists).
+- `creative-studio/CLAUDE.md` + `life-systems/CLAUDE.md`: incidental Block refs removed; routing reroutes to prj-job-hunt-2026/.
+- `vault/05_atlas/operating-models/README.md` + `INTERVIEW-PLAYBOOK.md`: 3-active-domain framing (creative-studio, life-systems, job-hunt-2026); the-block archive note.
+- `agents-sdk/config.toml`: daily-driver agent `enabled` flipped temporarily for migration; `sprint_health.project_key` generalized from `BE` to `TBD` (agent dormant; project key gets set when re-activated for new role's Jira instance).
+- `agents-sdk/benchmarks/golden_sets/inbox_triage.json`: Block sample data → generic equivalents.
+- `MEMORY.md` (auto-memory): single-calendar rule; new "Block-to-Job-Hunt Migration (2026-05-04)" project memory; Block Jira config moved to `## Archived` section.
+
+### Migration plan + audit plan
+
+Plan documents (vault, source of truth for this release):
+
+- `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-04-onwards-and-upwards-plan.md` — 8-phase master plan (Track A runway / Track B pipeline / Track C MCP-server differentiator)
+- `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-05-block-to-job-hunt-migration.md` — 5-day migration plan (Chunks 1–5)
+- `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-05-block-to-job-hunt-audit-plan.md` — file-level audit (P0/P1/P2 tables) + operating-model recommendation (Path C) + Sean's resolutions to the 8 open questions
+
+### Counts
+
+- 117 skills (no change — sanitized in place, none deleted)
+- 13 subagents (no change)
+- 13 hooks (no change)
+- 14 SDK agents (7 active — no change)
+- **3 active operating-model domains** (was 3; the-block archived; job-hunt-2026 added)
+- pytest suite **stays green** (modulo 2 pre-existing WOL test orphans in `tests/test_route_to_macbook.py` from the v3.14.3 WOL drop)
+
+### Known follow-ups
+
+- **Interview 4 not yet run** — Sean needs to run the work-operating-model skill against `domain=job-hunt-2026` interactively (~45 min) to populate the placeholder bundle. Until then, the daily-driver morning brief gets job-hunt context from `vault/20_projects/prj-job-hunt-2026/README.md` (which IS populated) instead of from the HEARTBEAT body. Cross-check prompt is in INTERVIEW-PLAYBOOK Interview 4.
+- **Slack overnight scan stays no-op** until Sean has a personal Slack workspace wired in.
+- **Atlassian + Block calendar MCP cleanup** (migration Chunk 5) deferred to Mon 5/11 per the migration plan calendar.
+
+## [3.25.0] - 2026-05-03
+
+Gemini Deep Research integration — ships a new `gemini-deep-research` skill, an autonomous SDK agent (`gemini_researcher`, **default disabled**), and a Python helper (`agents-sdk/scripts/gemini_dr.py`) with self-policing cost caps. The cap stack is: $7 per-task hard ceiling, $10 per-day circuit breaker, $20 per-month governor — meaning worst-case spend on a queue-stuffing accident is $10/day, not unbounded. The skill teaches interactive sessions when and how to delegate to Gemini DR vs. run a local LDR query. The agent is committed and plist-shipped but intentionally not loaded by `install_schedules.sh` unless the operator passes `INSTALL_GEMINI=1`. Spend is tracked in a rolling ledger at `vault/health/gemini-spend-{YYYY-MM}.json` (created on first call).
+
+> **Version note:** The integration plan was authored as "v3.24.0" but that version slot was taken by the `gemini-image-gen` skill (commit `ded36fb`). This release is v3.25.0 with no semantic change to scope.
+
+### Added
+
+- `.claude/skills/gemini-deep-research/SKILL.md` — new skill teaching when to use Gemini Deep Research vs. local LDR, how to trigger it interactively, prompt-framing guidelines, and result interpretation. Skill count `116 → 117`.
+- `.claude/skills/gemini-deep-research/decision-table.md` — routing decision table (task type × latency × cost × privacy) for choosing between Gemini DR, local LDR, and in-session synthesis.
+- `agents-sdk/agents/gemini_researcher.py` — new autonomous SDK agent (**default disabled**). Pulls unchecked items from `vault/00_inbox/gemini-research-queue.md`, calls `gemini_dr.run()` with per-task / daily / monthly cap enforcement, and writes reports to `vault/20_projects/research/`. Not loaded by `install_schedules.sh` unless `INSTALL_GEMINI=1` env var is set.
+- `agents-sdk/scripts/gemini_dr.py` — Python helper wrapping `google-genai` SDK. Enforces the three-layer cap stack ($7 task / $10 day / $20 month), reads/writes the rolling spend ledger, and returns a structured `ResearchResult` with full citation metadata.
+- `vault/00_inbox/gemini-research-queue.md` — new queue file for Gemini DR tasks (same `- [ ] question` format as `research-queue.md`).
+- `vault/health/gemini-spend-{YYYY-MM}.json` — rolling spend ledger (created on first call by `gemini_dr.py`; format: `{date, task_id, model, cost_usd, query_slug}[]`).
+- `agents-sdk/schedules/com.sean.agent.gemini-researcher.plist` — launchd plist for nightly 03:30 execution. Committed to repo but **not loaded** by `install_schedules.sh` without `INSTALL_GEMINI=1` opt-in gate.
+- Keychain entries: `com.sean.agents.gemini_api_key` (Gemini DR), `openai_api_key`, `openrouter_api_key` — stashed in macOS Keychain during Phase 0 setup.
+- `[gemini]`, `[gemini.budget]`, `[agents.gemini_researcher]` config blocks in `agents-sdk/config.toml`.
+- `google-genai>=1.74.0,<2.0.0` dependency added to `agents-sdk/pyproject.toml`.
+- 49 new pytest tests: 32 in `tests/test_gemini_dr.py` (cap enforcement, ledger I/O, error paths), 17 in `tests/test_gemini_researcher.py` (agent lifecycle, queue parsing, result writing). Full pytest suite `239 → 288` (+49).
+- `vault/90_system/agent-logs/gemini-baseline-2026-05-03.txt` — pre-integration baseline diagnostic (Keychain verification, API reachability, model listing, cap-stack smoke test).
+
+### Changed
+
+- `.claude/skills/last30days/SKILL.md` — appended a 1-line cross-reference to `gemini-deep-research` under a new `## Related` section.
+- `.claude/skills/deep-research-queue/SKILL.md` — appended a 1-line cross-reference to `gemini-deep-research` in the existing `## Related` section.
+- `agents-sdk/schedules/install_schedules.sh` — added `INSTALL_GEMINI=1` opt-in gate: the `gemini-researcher` plist is loaded only when the env var is present, keeping the agent disabled-by-default without requiring a separate file deletion.
+
+### Notes
+
+- **Stream A queue load + 5-night execution** (running `gemini_researcher` on a live populated queue for five consecutive nights to validate cap enforcement in production) is parked as a follow-up maintenance task. The ledger and caps mean worst-case scenario is $10/day even on queue-stuffing accidents.
+- **v1 direct-SDK path is intentional.** Phase 0 inventory found no Gemini CLI extensions in the existing MCP/tool chain (per plan D9). The `google-genai` SDK is the cleanest integration point and avoids the headless-MCP limitation that affects other agents.
+
+---
+
+## [3.24.0] - 2026-05-03
+
+New universal image-generation skill — `gemini-image-gen` — added to `.claude/skills/`. Catch-all generator that wraps Google Gemini's Nano Banana 2 (`gemini-3.1-flash-image-preview`) for any image type that is NOT pixel art or pencil animation (those remain on the specialized `gemini-pixel-image-gen` and `gemini-pencil-animation-image-gen` skills). Optimizes user prompts via the 7-Layer Prompt Framework before calling the API. Skill includes its own `scripts/` and `references/` (e.g., `nano-banana-2-capabilities.md`, `universal-prompt-templates.md`).
+
+### Added
+
+- `.claude/skills/gemini-image-gen/SKILL.md` — universal image generator. Triggers on "generate image", "create image", "make a picture", "image of", "illustration of", "photo of", "render", "visualize", "design an image", "draw", "concept art", "mockup image", "product shot", "portrait of", "landscape of". Produces photorealistic images, illustrations, concept art, UI mockups, infographics, product photos, portraits, landscapes, architectural visualizations, social media graphics, abstract art, food photography, and diagrams.
+- `.claude/skills/gemini-image-gen/scripts/` and `.claude/skills/gemini-image-gen/references/` — supporting prompt templates and Nano Banana 2 capability reference.
+
+### Changed
+
+- `CLAUDE.md` — header skill count `115 → 116`; architecture comment `(115 skills) → (116 skills)`.
+- `README.md` — header skill count `115 → 116`; "### 115 Skills Across 12 Export Groups" → "### 116 Skills Across 12 Export Groups"; `creative-projects` row in the export-groups table bumped `7 → 8` with `Gemini image gen` added to highlights.
+- `export-groups/03-creative-projects/playground.json` — added `"gemini-image-gen"` to the skills list (alphabetical insertion between `creative-writing` and `phaser-game-patterns`).
+
+---
+
+## [3.23.0] - 2026-05-03
+
+Mac Mini migration of the v3.21.0 deep-research stack — the autonomous `deep_researcher` agent now runs nightly at 02:45 on the always-on Mac Mini (M4 Pro, 24 GB) instead of the intermittently-available MBP. Same shipped Python agent (`agents-sdk/agents/deep_researcher.py`), same plist, same vault anchors — but the runtime layer swaps **LM Studio + MLX** for **Ollama + GGUF (Q4_K_M)** to fit the Mac Mini's 24 GB ceiling. New `deep-research-queue` skill teaches Claude how to add good queries during interactive sessions. Plan: `vault/20_projects/prj-superuser-pack/open-source-deep-research/macmini-migration-plan-2026-05-02.md`.
+
+### Added
+
+- `.claude/skills/deep-research-queue/SKILL.md` — interactive write-side companion to the autonomous agent. Decision tree for "queue vs answer in session", question-quality rules, anti-patterns, expected behavior post-queue. Allowed tools: `Read`, `Edit` on `vault/00_inbox/research-queue.md` only. Skill count `114 → 115`.
+- Mac Mini SearXNG container — `searxng/searxng:latest` on `:8080` with `--restart unless-stopped` and `formats: [html, json]` enabled. Settings volume at `~/Code-Brain/local-deep-research-stack/searxng-settings/`.
+- Mac Mini Ollama model `qwen3-14b-research:latest` — built via `ollama create -f qwen3-14b-research.Modelfile`. Custom TEMPLATE patches the stock `qwen3:14b` chat template to **unconditionally** inject `/no_think` at the end of the last user message and pre-fill an empty `<think></think>` block in the assistant prefix. This makes the model behave as non-thinking by default for ANY caller (including LDR, which doesn't pass the `think` API field). `PARAMETER think false` is not supported in Ollama 0.22.1. Modelfile + base config at `~/Code-Brain/local-deep-research-stack/qwen3-14b-research.Modelfile`.
+- Mac Mini LDR v1.5.6 install at `~/Code-Brain/local-deep-research-stack/.venv/` (Python 3.11 via `uv venv`; `uv pip install "local-deep-research[mcp]"`).
+- Mac Mini macOS Keychain entries: `com.sean.agents.ldr_username` (= `sean`) and `com.sean.agents.ldr_password` (40-char strong, generated at install time).
+- `~/Code-Brain/local-deep-research-stack/configure_ldr.py` — one-shot Python helper that logs into LDR via REST and applies the seven required settings. Mirrors the agent's CSRF + cookie dance. Idempotent; skips already-correct values.
+- `~/Code-Brain/local-deep-research-stack/bin/ldr-mcp-wrapper.py` — Mac Mini variant of the v3.21.0 MBP wrapper, swapping `LMSTUDIO + qwen3-14b` overrides for `OLLAMA + qwen3-14b-research:latest`. Monkey-patches `local_deep_research.api.settings_utils.create_settings_snapshot` BEFORE importing `local_deep_research.mcp.server` so the bound symbol picks up our patched version. 8 tools exposed (`quick_research`, `detailed_research`, `generate_report`, `analyze_documents`, `search`, `list_search_engines`, `list_strategies`, `get_configuration`); FastMCP 1.27.0.
+- `~/Library/LaunchAgents/com.sean.agent.deep-researcher.plist` — symlink to `agents-sdk/schedules/com.sean.agent.deep-researcher.plist`. Loaded via `launchctl load`. Sean.agent loaded count: `11 → 12`.
+- `vault/90_system/agent-logs/macmini-deepresearch-baseline-2026-05-02.txt` — pre-install Mac Mini state snapshot + every execution delta hit during install (Modelfile thinking-mode patch, LDR settings-key schema shift in v1.5.6, exact-match model lookup needing `:latest` suffix, auth rate limiter, register-form `acknowledge=true` value).
+- `vault/20_projects/prj-superuser-pack/open-source-deep-research/macmini-migration-plan-2026-05-02.md` — the source-of-truth migration plan (v3.23.0 §9 below appends execution deltas inline).
+
+### Changed
+
+- `agents-sdk/config.toml:153` — `[agents.deep_researcher].target_machine` `"macbook_pro" → "mac_mini"`. Honest reflection of where the agent now runs (the agent itself talks to `localhost:5050` regardless of host; this field is informational).
+- `agents-sdk/config.toml:263` — `[routing.task_map].deep_research` model `"qwen3-14b" → "qwen3-14b-research"`, machine `"macbook_pro" → "mac_mini"`. Trail comment updated to v3.23.0.
+- `agents-sdk/agents/deep_researcher.py:96` — topical-note frontmatter attribution string `"model qwen3-14b" → "model qwen3-14b-research"` so reports are honestly attributed to the patched Modelfile tag.
+- `CLAUDE.md` — header skill count `114 → 115`; architecture comment `(114 skills) → (115 skills)`; `Deep Researcher` row in the active-SDK-agents table updated from `Qwen3-14B MLX on MBP` to `Qwen3-14B GGUF (Q4_K_M, qwen3-14b-research Modelfile) via Ollama on Mac Mini`, version bumped `v3.21.0 → v3.23.0`.
+- `README.md` — header skill count `114 → 115`; "### 114 Skills Across 12 Export Groups" → "### 115 Skills Across 12 Export Groups".
+- `export-groups/02-pm-workflows/playground.json` — added `"deep-research-queue"` to the skills list, sibling to `"research-synthesis"` (alphabetical insertion).
+
+### Notes
+
+- **Memory headroom budget on 24 GB:** plan §1 documents the math — peak ~22 GB during the LDR run (14B model + KV cache + Docker/SearXNG + Ollama daemon + macOS), ~1.4-1.9 GB margin. Schedule chosen for zero overlap with other Mac-Mini-resident agents (vault-indexer 02:00 finishes by 02:15; deep-researcher 02:45 caps at 15 min so frees by ~03:00; meta-agent 06:30 is 4 hr later; daily-driver morning 08:45 is 5 hr later). Future operators adding any agent in 02:00-04:00 must re-run this math.
+- **Q4_K_M, not Q5_K_M:** the Ollama registry's `qwen3:14b` tag is Q4_K_M (≈9.3 GB) by default; no separate Q5_K_M tag is exposed. Q4 actually gives more headroom than the plan's Q5 estimate (~3 GB peak vs ~1.9 GB); strictly safer.
+- **The MBP install is intentionally NOT decommissioned.** Per plan "Out of Scope" — MBP setup remains as ad-hoc-daytime fallback (e.g., MCP from a session opened on MBP). Re-evaluate after 30 days of clean Mac Mini schedule history.
+- **MCP wrapper maintenance debt** carries over from v3.21.0 — it monkey-patches LDR's internal `settings_utils` module. After every `pip install --upgrade local-deep-research`, re-run a wrapper smoke query and confirm the model name in the response metadata still reads `qwen3-14b-research:latest`.
+
+### Verified at install time
+
+- Phase 4 oneshot smoke test: `Compare GGUF vs MLX inference speed on Apple M4 Pro for 14B-class language models` → 1014 words, 23 distinct citations, 8 numeric tok/s figures, 0 `<think>` tags, **wall 217s** (well under plan's 8-14 min budget — patched Modelfile suppresses thinking entirely, so no reasoning overhead).
+- Phase 8 launchd manual fire on empty queue → `agent-run-history.csv` row `2026-05-03,10:16:50,deep-researcher,queue,empty-queue,0.0000,,,no unchecked items` confirms launchd → venv python3 → agent → `record_run` path is wired.
+- Phase 9 stdio handshake against `ldr-mcp-wrapper.py` → MCP `initialize` returns FastMCP 1.27.0; `tools/list` returns 8 tools; default snapshot reflects all five Mac Mini overrides.
+
+---
+
 ## [3.22.0] - 2026-05-02
 
 Tier-0 personal-context refresh — `Sean-Winslow-Full-Personal-Context` bumped from v1.1 → v2.0 via the interview-driven workflow in [personal-context-v2-interview-prompt.md](personal-context-v2-interview-prompt.md). v2.0 lives at a single canonical path inside the vault; v1.1 archived alongside historical profiles.

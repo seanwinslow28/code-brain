@@ -113,7 +113,7 @@ Anchored in the `sw-portfolio-animation-pipeline` project and the creative-studi
 - Every nailed-down workflow gets a Skill.
 - Creative taste is Sean's, always. 90/10 delegation.
 - One-person team — no tool choice that adds social overhead.
-- Personal Gmail (`sean.winslow28@gmail.com`) for creative — never `swinslow@theblock.co`.
+- Personal Gmail (`sean.winslow28@gmail.com`) for all creative communications. (The prior `swinslow@theblock.co` was archived 2026-05 with the layoff and was never used for creative.)
 - **Always be willing to pivot.** AI evolves fast; "staple" model names will rotate. No religious attachment.
 - **Create for ourselves.** Not for audience expectation. We build because we love it and want to put things into the world we wish already existed.
 - **Enjoyment is non-negotiable.** If it stops being fun, pivot before burning out.
