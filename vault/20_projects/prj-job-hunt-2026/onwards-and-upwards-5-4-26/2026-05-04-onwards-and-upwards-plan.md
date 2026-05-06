@@ -100,7 +100,7 @@ Active items that don't fit neatly inside a single Phase task. Check this list e
 **Files:**
 - Create: `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/unemployment-claim.md`
 
-- [ ] **Step 1: File the day after your last day (May 5).** MA Department of Unemployment Assistance: mass.gov/unemployment. Online filing takes ~30 minutes.
+- [x] **Step 1: File the day after your last day (May 5).** MA Department of Unemployment Assistance: mass.gov/unemployment. Online filing takes ~30 minutes.
 
 - [ ] **Step 2: Have ready:** SSN, driver's license, Block's full legal name + address (find on a recent paystub), employment dates, gross earnings per quarter for the last 4 quarters, reason for separation = "Lack of work / layoff."
 
@@ -140,9 +140,9 @@ Active items that don't fit neatly inside a single Phase task. Check this list e
   - Calendar events with personal-network people → already exported in Task 0.2
   - Browser bookmarks if you used a Block-managed browser → export
 
-- [ ] **Step 2: Equipment return.** Wait for HR's instructions; don't ship anything until you have a return label and confirmation. Document model + serial of laptop, monitor, peripherals before you return them.
+- [x] **Step 2: Equipment return.** Wait for HR's instructions; don't ship anything until you have a return label and confirmation. Document model + serial of laptop, monitor, peripherals before you return them.
 
-- [ ] **Step 3: Final paystub + W-2 expectations.** Confirm address on file is correct so the W-2 mails to you in January. Confirm last paycheck timing.
+- [x] **Step 3: Final paystub + W-2 expectations.** Confirm address on file is correct so the W-2 mails to you in January. Confirm last paycheck timing.
 
 - [ ] **Step 4: 401(k) — open Fidelity Rollover IRA THIS WEEK; complete direct rollover when distribution form arrives.** Current state (NetBenefits, 2026-05-04): $1,398.70 in **THE BLOCK 401K PLAN** (account 401(k):6851X), administered by Fidelity under the Justworks PEO wrap plan. Action plan:
     - **Sub-step A — TODAY/TOMORROW: Open a Fidelity Rollover IRA online** (10 min at fidelity.com → Open Account → Rollover IRA). Free; no funding needed. This is the empty destination bucket.
@@ -153,7 +153,7 @@ Active items that don't fit neatly inside a single Phase task. Check this list e
     - **Why NOT cash out:** Math on $1,398.70 cashed at age <59½ = 20% federal withholding (-$280) + 10% early withdrawal penalty (-$140) + ordinary income tax in 2026 (~22% bracket with severance + UI ≈ -$300). Net ≈ $680 from $1,398. ~50% effective hit. Don't.
     - **One related ask for Leanne:** confirm in writing that no equity grants (RSUs, options, ESPP) exist beyond the 401(k) — Section 2(c) of the severance releases all claims for "stock awards, stock options," so anything not surfaced before the Effective Date is gone.
 
-- [ ] **Step 5: Reference letter from Alex.** Send him a Telegram message **this week**, friendly and short, saying thank you and asking if he's still up for being a reference. He volunteered — take him up on it. Sample: "Alex — really appreciated the way you handled today. Wanted to take you up on the reference offer. Happy to send a one-pager on what I'm looking for whenever you have a sec. Thanks."
+- [ ] **Step 5: Reference letter from Larry.** Send him a Telegram message **this week**, friendly and short, saying thank you and asking if he's still up for being a reference. He volunteered — take him up on it. Sample: "Larry — really appreciated the way you handled today. Wanted to take you up on the reference offer. Happy to send a one-pager on what I'm looking for whenever you have a sec. Thanks."
 
 ---
 
