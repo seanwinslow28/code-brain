@@ -3,7 +3,7 @@ type: moc
 domain: [creative-studio, life-systems, job-hunt-2026]
 status: index
 created: 2026-04-18
-ai-context: "Index for the operating-model artifact bundles. One subfolder per domain, five artifacts per bundle. Populated by the work-operating-model skill. The the-block bundle was archived 2026-05 to vault/40_archive/operating-models-the-block-2026-05/ following Sean's layoff."
+ai-context: "Index for the operating-model artifact bundles. One subfolder per domain, five artifacts per bundle. Populated by the work-operating-model skill. The the-block bundle was archived 2026-05 to vault/60_archive/operating-models-the-block-2026-05/ following Sean's layoff."
 ---
 
 # Operating Models
@@ -25,7 +25,7 @@ The five artifact types per domain:
 - [[creative-studio/HEARTBEAT|Creative Studio — 16BitFit, Remotion, art, writing]]
 - [[life-systems/HEARTBEAT|Life Systems — finance, health, learning, time, career]]
 - [[job-hunt-2026/HEARTBEAT|Job Hunt 2026 — 8-week post-Block search, AI/Tech/Creative PM]]
-- *Archived 2026-05:* The Block bundle moved to `vault/40_archive/operating-models-the-block-2026-05/` after Sean's layoff. Selectable for re-running historical interviews; not loaded by active agents.
+- *Archived 2026-05:* The Block bundle moved to `vault/60_archive/operating-models-the-block-2026-05/` after Sean's layoff. Selectable for re-running historical interviews; not loaded by active agents.
 
 ## How to populate
 

@@ -77,7 +77,7 @@ Claude: [Uses api-product-management]
 # Quick Start Guide
 
 ## 1. Get Your API Key
-Sign up at developer.theblock.co and generate an API key from your dashboard.
+Sign up at developer.example-data-co and generate an API key from your dashboard.
 
 ## 2. Make Your First Request
 ```bash
@@ -87,14 +87,14 @@ curl -H "Authorization: Bearer YOUR_API_KEY" \
 
 ## 3. Install the SDK
 ```bash
-npm install @theblock/data-sdk
+npm install @example-data-co/data-sdk
 ```
 
 ## 4. TypeScript Example
 ```typescript
-import { TheBlockClient } from "@theblock/data-sdk";
+import { ExampleDataClient } from "@example-data-co/data-sdk";
 
-const client = new TheBlockClient({ apiKey: "YOUR_API_KEY" });
+const client = new ExampleDataClient({ apiKey: "YOUR_API_KEY" });
 const prices = await client.tokens.prices("ETH", {
   interval: "1d",
   start: "2024-01-01",
@@ -310,7 +310,7 @@ import { tool, createSdkMcpServer } from "@anthropic-ai/claude-agent-sdk";
 import { z } from "zod";
 
 const dataApiMcp = createSdkMcpServer({
-  name: "theblock-data",
+  name: "example-data",
   version: "1.0.0",
   tools: [
     tool(

@@ -5,6 +5,36 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.26.3] - 2026-05-06
+
+Meta-Agent registration fix + research routing rule. The deep-researcher agent has been running on schedule since v3.23.0, but `meta_agent.py` was never updated to monitor it — `ACTIVE_AGENTS` listed only 6 entries, so today's 08:35 fleet status report wrote "Active agents: 6 of 11" with no row for deep-researcher. Discovered while triaging today's `daily-fleet-status-2026-05-06.md` after Topic 1b's 02:45 run timed out at 900s (LDR stalled at 90 % from t=209s → t=900s on a heavy compound prompt).
+
+### Fixed
+
+- `agents-sdk/agents/meta_agent.py` — added `deep_researcher` to `ACTIVE_AGENTS` (now 7 entries) and to `AGENT_METADATA` (display `deep-researcher`, schedule `2:45 AM daily`, machine `Mac Mini`, cost `$0.00/run`). Header docstring updated `6 currently-active → 7 currently-active`. Tomorrow's 08:35 fleet status report will include deep-researcher's health row. Verified with `meta_agent.py --dry-run`: header line correctly prints `Active agents: 7 | Disabled: 5`.
+
+### Added
+
+- **Research routing rule (sharpened, two reasons not one)** — documented in `CLAUDE.md` (Deep Researcher row + standalone paragraph), `vault/00_inbox/research-queue.md` (header callout), and the auto-memory feedback file. **Heavy multi-target topics route to Gemini DR / DR Max, not the LDR queue.** The two independent reasons:
+  1. **Timeout** — LDR has a 900s hard budget; compound prompts stall around 90 % and produce no output. Canonical case: Topic 1b on 2026-05-06 (3 GitHub repos × 4 axes + extension catalog + 3 pinning-pattern recipes) timed out at t=209s → t=900s; same prompt completed on Gemini DR in 406s.
+  2. **Citation quality collapse** — even when LDR completes, Qwen3-14B can't ground citations across multiple targets and confidently writes fabricated entities/owners/URLs. Canonical case: Topic 1a on 2026-05-05 finished cleanly at 280s but produced a report citing `PureMCPClient`, `MCPCatalog (Central)`, `MCP ADK` (none real), `github.com/microsoft/mcp` as MCP's home (actual: `modelcontextprotocol`), and fabricated `learn.microsoft.com` docs URLs. The flawed file is retained with `status: superseded` frontmatter as the canonical bad-output specimen.
+
+### Manual research runs (Gemini DR)
+
+- **Topic 1b** — re-run on Gemini DR tier `dr` after the LDR timeout. 406s wall, $2.80, output at `vault/20_projects/research/2026-05-06-topic-1b-cli-driven-agentic-workflow-repo-audit-pinning-patt.md`. One small render-glitch fix applied post-DR: a `cd "$FLEET_DIR" || exit 1` line had been mangled across three lines as a `||`-vs-table-cell artifact.
+- **Topic 1a** — re-run on Gemini DR tier `dr` after the LDR run was reviewed and found unciteable. The 2026-05-05 LDR-version file at `vault/20_projects/research/2026-05-05-topic-1a-mcp-sdk-toolkit-survey-catalog-mcp-cli-mcp-bridge-m.md` gained `status: superseded` + `superseded_by:` frontmatter and a top-of-body callout warning future agents off; original content preserved below for forensic value. New Gemini DR rerun filed alongside.
+
+### Known caveat
+
+- `meta_agent.py --dry-run` still writes `vault/02_Areas/Agent-Fleet/daily-fleet-status-{date}.md` (every-run side effect, predates this fix). During verification today's 08:35 report was overwritten with the dry-run "healthy (dry-run)" placeholder text and then restored from the original. Future hardening: gate the file-write on `not args.dry_run`. Out of scope for v3.26.3.
+
+### Counts
+
+- 117 skills (no change)
+- 13 subagents (no change)
+- 13 hooks (no change)
+- 14 SDK agents — **7 active** (no change in count; meta-agent now correctly reports the 7th).
+
 ## [3.26.2] - 2026-05-05
 
 `job-hunt-2026` operating-model interview completed. All five artifacts at `vault/05_atlas/operating-models/job-hunt-2026/` advanced from `status: awaiting-interview` (the v3.26.0 placeholder state) to `status: confirmed` via the `work-operating-model` skill, walking Sean through the 5 interview layers (Operating Rhythms → Recurring Decisions → Dependencies → Institutional Knowledge → Friction) with summarize → confirm → write checkpoints per layer. The bundle is now consumable by the agent fleet — daily-driver morning preamble, meta-agent Domain-Aware Insights, flush.py SOUL-prepend, and knowledge_lint Tier 2 `soul-tier-a-conflict` detection will all start picking up the populated content on their next runs.

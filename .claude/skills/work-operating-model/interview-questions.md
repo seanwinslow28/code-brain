@@ -2,7 +2,7 @@
 
 Five layers. Each layer has 6-8 questions. Work through them in order. After each layer, summarize → confirm → write.
 
-The questions below are the superset across all four domains. Domain-specific tuning (The Block's sprint cadence — archived 2026-05, Creative Studio's three-machine topology, Life Systems' Boston life, Job Hunt 2026's weekly application + interview cycle) is noted inline or in the SKILL.md `Domain-Specific Tuning Notes` section.
+The questions below are the superset across all four domains. Domain-specific tuning (the archived employer's sprint cadence — archived 2026-05, Creative Studio's three-machine topology, Life Systems' Boston life, Job Hunt 2026's weekly application + interview cycle) is noted inline or in the SKILL.md `Domain-Specific Tuning Notes` section.
 
 ---
 
@@ -13,13 +13,13 @@ The questions below are the superset across all four domains. Domain-specific tu
 
 1. Walk me through an ideal weekday in this domain — where are the protected creative/deep-work blocks, where are the execution/meeting blocks, where does inbox triage live?
 2. Which recurring events are fixed on your calendar for this domain, and on which day/time?
-   - **The Block (archived):** sprint ceremonies + bi-weekly Product & Engineering update cadence.
+   - **Archived employer (archived):** sprint ceremonies + bi-weekly Product & Engineering update cadence.
    - **Creative Studio:** any writing/recording rhythms, render cycles, gate checks.
    - **Life Systems:** any weekly finance/health reviews.
    - **Job Hunt 2026:** weekly application + outreach batches (Tue/Thu mornings, 5/week target), interview cycles, Friday 4:30 PM weekly retro per `vault/20_projects/prj-job-hunt-2026/README.md`.
 3. What happens weekly in this domain that isn't on a calendar but should be?
 4. What monthly/quarterly rhythms matter?
-5. How does this domain's work flow split across your active email accounts? (Note: `swinslow@theblock.co` is being archived 2026-05 with the Block layoff; default is `sean.winslow28@gmail.com`. Track recruiter / interview emails separately or via Gmail labels if needed.)
+5. How does this domain's work flow split across your active email accounts? (Note: the prior work email is being archived 2026-05 with the prior-employer layoff; default is `sean.winslow28@gmail.com`. Track recruiter / interview emails separately or via Gmail labels if needed.)
 6. Are there seasonal shifts? (crypto cycles, year-end, conference weeks, Boston winter, festival submission seasons)
 7. What's your "sacred first hour" rule for this domain?
 

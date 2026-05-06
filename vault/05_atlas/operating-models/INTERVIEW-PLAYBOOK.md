@@ -38,7 +38,7 @@ You can do all three active interviews in one sitting (~2.5 hr) or stretch over 
 
 ## Interview 1 — The Block (day job) — ARCHIVED 2026-05
 
-> **Archived 2026-05.** The Block role ended 2026-05-04 (cost-cutting layoff). The bundle moved to `vault/40_archive/operating-models-the-block-2026-05/`. Interview content preserved below; do not re-run as part of a fresh-onboarding sequence. If Sean does want to re-interview historical-context (e.g., for a portfolio narrative), the prompts still work — the work-operating-model skill points the the-block argument at the archive folder.
+> **Archived 2026-05.** The Block role ended 2026-05-04 (cost-cutting layoff). The bundle moved to `vault/60_archive/operating-models-the-block-2026-05/`. Interview content preserved below; do not re-run as part of a fresh-onboarding sequence. If Sean does want to re-interview historical-context (e.g., for a portfolio narrative), the prompts still work — the work-operating-model skill points the the-block argument at the archive folder.
 
 ### Prompt to start
 
@@ -199,7 +199,7 @@ Please do the following:
 1. Run python3 scripts/validate.py and confirm it still exits 0
 2. Run cd agents-sdk && PYTHONPATH=. .venv/bin/pytest tests/ -q (the WOL test failures in tests/test_route_to_macbook.py are pre-existing)
 3. Run cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode morning --dry-run | grep -A 6 "creative-studio\|life-systems\|job-hunt-2026"
-4. Cross-check that the 15 active artifacts (5 files × 3 domains) all have status: confirmed (or draft) and none are still at status: awaiting-interview. The the-block archive bundle at vault/40_archive/operating-models-the-block-2026-05/ is excluded from this check.
+4. Cross-check that the 15 active artifacts (5 files × 3 domains) all have status: confirmed (or draft) and none are still at status: awaiting-interview. The the-block archive bundle at vault/60_archive/operating-models-the-block-2026-05/ is excluded from this check.
 5. Look for cross-domain bleed mentioned in any operating-model.md file — if domain X mentions a person/tool/pattern from domain Y, surface it as a bullet so I can verify the cross-references are accurate
 6. Confirm the daily-driver morning brief leans on the job-hunt-2026 HEARTBEAT body for Step 1a signals and contains no the-block references and no "_(artifact unavailable...)_" lines
 
