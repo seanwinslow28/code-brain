@@ -9,7 +9,7 @@ description: Run a structured 5-layer interview to produce operating-model artif
 
 Interview Sean about how he actually works in a specific domain and produce the five artifact files that downstream agents and skills (daily-driver, sprint-health, process-inbox, pr-digest, meta-agent, flush, knowledge-lint) need to act with real context. Ported from Nate B. Jones's five-layer elicitation pattern — see the full source clip at [vault/40_knowledge/references/ref-agent-soul-md-prompt.md](../../../vault/40_knowledge/references/ref-agent-soul-md-prompt.md).
 
-The interview runs once per domain. The four domains are Archived Employer (archived 2026-05 — prior PM role; bundle moved to `vault/40_archive/operating-models-the-block-2026-05/` but the domain remains selectable so historical interviews can be re-run if needed), Creative Studio (16BitFit + Remotion + art + writing), Life Systems (finance + health + learning + tasks + time + career), and Job Hunt 2026 (Sean's 8-week post-employment search for AI/Tech/Creative PM roles, Boston metro or remote). Each domain has its own artifact bundle under `vault/05_atlas/operating-models/{domain}/` (or `vault/40_archive/...` for archived-employer).
+The interview runs once per domain. The four domains are Archived Employer (archived 2026-05 — prior PM role; bundle moved to `vault/60_archive/operating-models-the-block-2026-05/` but the domain remains selectable so historical interviews can be re-run if needed), Creative Studio (16BitFit + Remotion + art + writing), Life Systems (finance + health + learning + tasks + time + career), and Job Hunt 2026 (Sean's 8-week post-employment search for AI/Tech/Creative PM roles, Boston metro or remote). Each domain has its own artifact bundle under `vault/05_atlas/operating-models/{domain}/` (or `vault/60_archive/...` for archived-employer).
 
 ## When to Use
 
@@ -20,8 +20,8 @@ The interview runs once per domain. The four domains are Archived Employer (arch
 
 ## Before Starting (required)
 
-1. Confirm the `domain` argument is one of `archived-employer` (archived 2026-05; bundle now under `vault/40_archive/operating-models-the-block-2026-05/`), `creative-studio`, `life-systems`, or `job-hunt-2026`. If not provided, ask Sean which domain this interview is for.
-2. Read the five target files under `vault/05_atlas/operating-models/{domain}/` (or `vault/40_archive/operating-models-the-block-2026-05/` for archived-employer):
+1. Confirm the `domain` argument is one of `archived-employer` (archived 2026-05; bundle now under `vault/60_archive/operating-models-the-block-2026-05/`), `creative-studio`, `life-systems`, or `job-hunt-2026`. If not provided, ask Sean which domain this interview is for.
+2. Read the five target files under `vault/05_atlas/operating-models/{domain}/` (or `vault/60_archive/operating-models-the-block-2026-05/` for archived-employer):
    - `HEARTBEAT.md`
    - `USER.md`
    - `SOUL.md`
@@ -36,7 +36,7 @@ The interview runs once per domain. The four domains are Archived Employer (arch
 
 | Argument | Target folder | Identity lens |
 |---|---|---|
-| `archived-employer` (archived 2026-05) | `vault/40_archive/operating-models-the-block-2026-05/` | Sean as PM at a prior employer — Boston-area role (Nov 2025 – May 2026; role eliminated in cost-cutting layoff). Selectable so historical interviews can be re-run; not active. |
+| `archived-employer` (archived 2026-05) | `vault/60_archive/operating-models-the-block-2026-05/` | Sean as PM at a prior employer — Boston-area role (Nov 2025 – May 2026; role eliminated in cost-cutting layoff). Selectable so historical interviews can be re-run; not active. |
 | `creative-studio` | `vault/05_atlas/operating-models/creative-studio/` | Sean as creative — 16BitFit founder, filmmaker, pixel artist, writer |
 | `life-systems` | `vault/05_atlas/operating-models/life-systems/` | Sean as a person — finance, health, learning, relationship, Boston life |
 | `job-hunt-2026` | `vault/05_atlas/operating-models/job-hunt-2026/` | Sean executing his 8-week post-Block job hunt — AI PM > Tech PM > Creative PM, Boston metro or remote. See `vault/20_projects/prj-job-hunt-2026/` |
@@ -82,7 +82,7 @@ Read [artifact-templates.md](artifact-templates.md) for the exact structure of e
 ## Domain-Specific Tuning Notes
 
 ### Archived Employer (archived 2026-05)
-> Role ended 2026-05-04 (cost-cutting layoff). Bundle preserved at `vault/40_archive/operating-models-the-block-2026-05/`. Tuning notes below preserved for re-running historical interviews; not for active use.
+> Role ended 2026-05-04 (cost-cutting layoff). Bundle preserved at `vault/60_archive/operating-models-the-block-2026-05/`. Tuning notes below preserved for re-running historical interviews; not for active use.
 
 - Layer 1, Q2: Sprint ceremonies + bi-weekly P&E update cadence. ETF compliance windows and crypto market-open implications.
 - Layer 1, Q5: Email split — the prior work email is archived, `sean.winslow28@gmail.com` is personal. Calendar queries no longer hit the archived work account.
