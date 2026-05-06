@@ -297,6 +297,7 @@ Local open-source deep research stack — replaces / reduces paid Perplexity DR 
 - `~/Code-Brain/local-deep-research-stack/` (outside repo) — Python 3.11 venv with `local-deep-research[mcp]` v1.5.6, plus a SearXNG settings volume.
 - SearXNG container (`searxng/searxng:latest`) running on `localhost:8080` with `json` added to `search.formats` for API access.
 - macOS Keychain credentials `com.sean.agents.ldr_username` and `com.sean.agents.ldr_password` (stored via `agents-sdk/lib/keychain.py` — same pattern as Pushover, Anthropic API key, etc.).
+- `~/Code-Brain/local-deep-research-stack/bin/ldr-up.sh` (outside repo, ~200 lines bash). One-command lifecycle tool for the LDR stack: launches Docker Desktop if down, starts the `searxng` container, detects LM Studio, starts `ldr-web` in the background, applies `--restart unless-stopped` to the searxng container on first run so it auto-resurrects with Docker. Symlinked at `~/.local/bin/ldr-up` for PATH convenience. Subcommands: `ldr-up` (start, idempotent), `ldr-up --status`, `ldr-up --down`, `ldr-up --help`. Validated end-to-end: cold-start → status check → idempotent re-run → teardown → status check → recovery → status check, all 8 phases green.
 
 ### Changed
 
