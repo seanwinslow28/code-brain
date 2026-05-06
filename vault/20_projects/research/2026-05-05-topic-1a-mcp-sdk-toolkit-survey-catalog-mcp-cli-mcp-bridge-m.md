@@ -5,8 +5,24 @@ question: "Topic 1a — MCP / SDK toolkit survey: catalog mcp-cli, mcp-bridge, m
 source: deep-researcher-agent
 ldr_research_id: e1e8e8af-b52b-4ccc-a81b-c88722863cbe
 wall_seconds: 280
-tags: [research, deep-research, autogen]
+status: superseded
+superseded_by: "[[2026-05-06-topic-1a-mcp-sdk-toolkit-survey-catalog-mcp-cli-mcp-bridge-m]]"
+superseded_reason: "LDR + Qwen3-14B output contains hallucinated entities (PureMCPClient, MCPCatalog Central, MCP ADK), wrong owners (Microsoft as MCP host org instead of modelcontextprotocol), fabricated docs URLs, and missed the explicit 'Anthropic Agent SDK changelog since 0.1.63' deliverable. Re-run on Gemini DR 2026-05-06."
+tags: [research, deep-research, autogen, superseded]
 ---
+
+> ## ⚠ SUPERSEDED — DO NOT CITE
+>
+> This LDR-generated report failed the citation-quality bar on review (2026-05-06). Specific defects:
+> - **Hallucinated entities** ranked as if real: `PureMCPClient`, `MCPCatalog (Central)`, `MCP ADK`.
+> - **Wrong owners**: treats `github.com/microsoft/mcp` as the MCP home — actual home is `github.com/modelcontextprotocol`.
+> - **Fabricated docs URLs**: `learn.microsoft.com/en-us/azure/ai-agents/agent-development-kit` (ADK is Google's), `adk.dev/mcp/`, `learn.microsoft.com/.../mcpserver-teams-sdk`.
+> - **Missed the named deliverable**: the explicit ask "Anthropic Agent SDK features added since 0.1.63" got generic boilerplate, no version-specific changelog.
+> - **Self-talk leaked**: trailing "Would you like me to update the original comparison table…" model question left in the body.
+>
+> **Use the Gemini DR rerun instead:** [[2026-05-06-topic-1a-mcp-sdk-toolkit-survey-catalog-mcp-cli-mcp-bridge-m]]. Same prompt expanded to demand canonical-repo verification + the Anthropic SDK changelog deliverable, properly grounded against real sources.
+>
+> File retained for forensic value — it's the canonical example of why heavy multi-target prompts must route to Gemini DR not local LDR. See routing rule in `CLAUDE.md` and `vault/00_inbox/research-queue.md`.
 
 # Topic 1a — MCP / SDK toolkit survey: catalog mcp-cli, mcp-bridge, mcp-proxy, third-party MCP gateways (e.g., MCP-Hub patterns), and Anthropic Agent SDK features added since 0.1.63 (current pin) that bear on headless tool access. For each: license, last-commit recency, open-issue velocity, headless-friendliness. Output a comparison table ranked by headless-friendliness for personal autonomous agent fleets running on macOS launchd.
 
