@@ -290,7 +290,7 @@ For batch updates (e.g., commenting on stale tickets):
 
 ## Relationship to ticket-batch
 
-This skill is **Jira-specific** — it knows the conventions of a configured Jira project (keys, components, labels). For **Linear**, **GitHub Issues**, or **generic multi-platform** ticket batching, use `ticket-batch` instead. For the full PRD-to-launch pipeline connecting this skill with `prd-generator` and `sprint-roadmap`, see `the-block/product-management/templates/prd-to-launch.md`.
+This skill is **Jira-specific** — it knows the conventions of a configured Jira project (keys, components, labels). For **Linear**, **GitHub Issues**, or **generic multi-platform** ticket batching, use `ticket-batch` instead. For the full PRD-to-launch pipeline connecting this skill with `prd-generator` and `sprint-roadmap`, see your team's PRD-to-launch template.
 
 ## Quality Checklist
 
@@ -301,7 +301,7 @@ Before finalizing tickets, verify:
 - [ ] Each Implementation story has user story format ("As a user, I want...")
 - [ ] Each Implementation story has clear, testable acceptance criteria
 - [ ] Technical Notes included where implementation details matter
-- [ ] Components correctly assigned (Campus vs theblock.co vs both)
+- [ ] Components correctly assigned (`{primary_component}` vs `{secondary_component}` vs both)
 - [ ] Labels assigned (NeedsDesign, frontend, BACKEND)
 - [ ] Stories are sized appropriately (break down if >1 sprint of work)
 - [ ] All stories linked to parent Epic

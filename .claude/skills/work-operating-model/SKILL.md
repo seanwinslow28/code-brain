@@ -1,6 +1,6 @@
 ---
 name: work-operating-model
-description: Run a structured 5-layer interview to produce operating-model artifacts (HEARTBEAT, USER, SOUL, operating-model, schedule-recommendations) for a named domain. Use when the user says "run the work operating model interview", "profile my work", "build my operating model", "interview me about [domain]", "update my operating model", "run the job-hunt-2026 interview", or "run the-block interview". Takes a required `domain` argument: one of "the-block" (archived 2026-05), "creative-studio", "life-systems", "job-hunt-2026".
+description: Run a structured 5-layer interview to produce operating-model artifacts (HEARTBEAT, USER, SOUL, operating-model, schedule-recommendations) for a named domain. Use when the user says "run the work operating model interview", "profile my work", "build my operating model", "interview me about [domain]", "update my operating model", "run the job-hunt-2026 interview", or "run the archived-employer interview". Takes a required `domain` argument: one of "archived-employer" (archived 2026-05), "creative-studio", "life-systems", "job-hunt-2026".
 ---
 
 # Work Operating Model
@@ -9,19 +9,19 @@ description: Run a structured 5-layer interview to produce operating-model artif
 
 Interview Sean about how he actually works in a specific domain and produce the five artifact files that downstream agents and skills (daily-driver, sprint-health, process-inbox, pr-digest, meta-agent, flush, knowledge-lint) need to act with real context. Ported from Nate B. Jones's five-layer elicitation pattern — see the full source clip at [vault/40_knowledge/references/ref-agent-soul-md-prompt.md](../../../vault/40_knowledge/references/ref-agent-soul-md-prompt.md).
 
-The interview runs once per domain. The four domains are The Block (archived 2026-05 — prior PM role; bundle moved to `vault/40_archive/operating-models-the-block-2026-05/` but the domain remains selectable so historical interviews can be re-run if needed), Creative Studio (16BitFit + Remotion + art + writing), Life Systems (finance + health + learning + tasks + time + career), and Job Hunt 2026 (Sean's 8-week post-Block search for AI/Tech/Creative PM roles, Boston metro or remote). Each domain has its own artifact bundle under `vault/05_atlas/operating-models/{domain}/` (or `vault/40_archive/...` for the-block).
+The interview runs once per domain. The four domains are Archived Employer (archived 2026-05 — prior PM role; bundle moved to `vault/40_archive/operating-models-the-block-2026-05/` but the domain remains selectable so historical interviews can be re-run if needed), Creative Studio (16BitFit + Remotion + art + writing), Life Systems (finance + health + learning + tasks + time + career), and Job Hunt 2026 (Sean's 8-week post-employment search for AI/Tech/Creative PM roles, Boston metro or remote). Each domain has its own artifact bundle under `vault/05_atlas/operating-models/{domain}/` (or `vault/40_archive/...` for archived-employer).
 
 ## When to Use
 
-- Sean says "run the work operating model interview", "interview me about the-block", "profile my creative-studio work", "build my operating model", "update my life-systems profile"
+- Sean says "run the work operating model interview", "interview me about archived-employer", "profile my creative-studio work", "build my operating model", "update my life-systems profile"
 - An agent's output is generic or misaligned because it lacks operating context — the interview fills that gap
 - Sean has gone through a major shift in work (new role, new rhythm, new stakeholders) and the existing operating model is stale
-- Sean explicitly asks for a delta update ("my sprint cadence changed, update the-block HEARTBEAT")
+- Sean explicitly asks for a delta update ("my sprint cadence changed, update archived-employer HEARTBEAT")
 
 ## Before Starting (required)
 
-1. Confirm the `domain` argument is one of `the-block` (archived 2026-05; bundle now under `vault/40_archive/operating-models-the-block-2026-05/`), `creative-studio`, `life-systems`, or `job-hunt-2026`. If not provided, ask Sean which domain this interview is for.
-2. Read the five target files under `vault/05_atlas/operating-models/{domain}/` (or `vault/40_archive/operating-models-the-block-2026-05/` for the-block):
+1. Confirm the `domain` argument is one of `archived-employer` (archived 2026-05; bundle now under `vault/40_archive/operating-models-the-block-2026-05/`), `creative-studio`, `life-systems`, or `job-hunt-2026`. If not provided, ask Sean which domain this interview is for.
+2. Read the five target files under `vault/05_atlas/operating-models/{domain}/` (or `vault/40_archive/operating-models-the-block-2026-05/` for archived-employer):
    - `HEARTBEAT.md`
    - `USER.md`
    - `SOUL.md`
@@ -36,12 +36,12 @@ The interview runs once per domain. The four domains are The Block (archived 202
 
 | Argument | Target folder | Identity lens |
 |---|---|---|
-| `the-block` (archived 2026-05) | `vault/40_archive/operating-models-the-block-2026-05/` | Sean as PM at The Block — crypto/ETF company, Boston (Nov 2025 – May 2026; role eliminated in cost-cutting layoff). Selectable so historical interviews can be re-run; not active. |
+| `archived-employer` (archived 2026-05) | `vault/40_archive/operating-models-the-block-2026-05/` | Sean as PM at a prior employer — Boston-area role (Nov 2025 – May 2026; role eliminated in cost-cutting layoff). Selectable so historical interviews can be re-run; not active. |
 | `creative-studio` | `vault/05_atlas/operating-models/creative-studio/` | Sean as creative — 16BitFit founder, filmmaker, pixel artist, writer |
 | `life-systems` | `vault/05_atlas/operating-models/life-systems/` | Sean as a person — finance, health, learning, relationship, Boston life |
 | `job-hunt-2026` | `vault/05_atlas/operating-models/job-hunt-2026/` | Sean executing his 8-week post-Block job hunt — AI PM > Tech PM > Creative PM, Boston metro or remote. See `vault/20_projects/prj-job-hunt-2026/` |
 
-If Sean says "the Block" or "Block" → `the-block` (archived). If "creative" or "16bit" alone → `creative-studio`. If "life" or "personal" → `life-systems`. If "job hunt", "hunt", "search", or "onwards" → `job-hunt-2026`. If ambiguous, ask.
+If Sean refers to the prior PM role or the archived employer → `archived-employer` (archived). If "creative" or "16bit" alone → `creative-studio`. If "life" or "personal" → `life-systems`. If "job hunt", "hunt", "search", or "onwards" → `job-hunt-2026`. If ambiguous, ask.
 
 ## The Five-Layer Interview
 
@@ -81,12 +81,12 @@ Read [artifact-templates.md](artifact-templates.md) for the exact structure of e
 
 ## Domain-Specific Tuning Notes
 
-### The Block (archived 2026-05)
-> Role ended 2026-05-04 (cost-cutting layoff delivered by Larry Cermak + Vicky Lu). Bundle preserved at `vault/40_archive/operating-models-the-block-2026-05/`. Tuning notes below preserved for re-running historical interviews; not for active use.
+### Archived Employer (archived 2026-05)
+> Role ended 2026-05-04 (cost-cutting layoff). Bundle preserved at `vault/40_archive/operating-models-the-block-2026-05/`. Tuning notes below preserved for re-running historical interviews; not for active use.
 
 - Layer 1, Q2: Sprint ceremonies + bi-weekly P&E update cadence. ETF compliance windows and crypto market-open implications.
-- Layer 1, Q5: Email split — `swinslow@theblock.co` was work (now archived), `sean.winslow28@gmail.com` is personal. Calendar queries no longer hit the Block account.
-- Layer 3, Q5: Granola-synced meetings at `vault/30_domains/product-management/the-block-meetings-granola-notes/` are the historical record of meetings during the Block tenure.
+- Layer 1, Q5: Email split — the prior work email is archived, `sean.winslow28@gmail.com` is personal. Calendar queries no longer hit the archived work account.
+- Layer 3, Q5: Granola-synced meetings archived during the prior tenure remain available under `vault/30_domains/product-management/` as the historical record.
 - Layer 5: Decisions delayed because they're annoying were prime Jira-automation candidates while the role was active.
 
 ### Creative Studio
@@ -103,9 +103,9 @@ Read [artifact-templates.md](artifact-templates.md) for the exact structure of e
 > Active during Sean's 8-week post-Block search (started 2026-05-04). Once an offer is signed, retire this domain or evolve into a new role-specific bundle.
 
 - Layer 1, Q2: Weekly application + outreach batches (5 quality applications/week, Tue + Thu mornings); interview-cycle scheduling; Friday weekly retro per `vault/20_projects/prj-job-hunt-2026/README.md`.
-- Layer 1, Q5: Most flow through `sean.winslow28@gmail.com` (the-block address being archived 2026-05). Track recruiter / interview emails separately or via Gmail labels.
+- Layer 1, Q5: Most flow through `sean.winslow28@gmail.com` (the prior-employer address was archived 2026-05). Track recruiter / interview emails separately or via Gmail labels.
 - Layer 2: Auto-yes for warm-intro outreach; auto-no for cold-recruiter spam below walk-away salary or outside Boston-metro / remote. Target archetype priority: AI PM > Tech PM > Creative PM.
-- Layer 3, Q1: Larry Cermak (primary reference, ex-President of The Block), Matt Vitebsky (peer, contacted personally), 9 P&E peers per `vault/20_projects/prj-job-hunt-2026/The-Block-Contacts-After-Layoff.md`.
+- Layer 3, Q1: Larry Cermak (primary reference, ex-President of the prior employer), Matt Vitebsky (peer, contacted personally), 9 P&E peers per the post-employment contacts file in `vault/20_projects/prj-job-hunt-2026/`.
 - Layer 3, Q3: Track-C work — the intent-engineering MCP server is the differentiator artifact. Ask what specifically blocks shipping v0.
 - Layer 5: Application fatigue, interview prep collisions, offer-decision paralysis are the prime friction points. Look for automations that turn 20+ min admin tasks into 2 min.
 
@@ -123,9 +123,9 @@ At the end of an interview, the agent should be able to verify:
 Sean can invoke this skill with any of:
 
 ```
-Run the work-operating-model interview for the-block
+Run the work-operating-model interview for archived-employer
 Interview me about creative-studio
 Profile my life-systems work
-Update my the-block operating model — just layer 5
+Update my archived-employer operating model — just layer 5
 Delta update: my sprint cadence changed, update HEARTBEAT
 ```
