@@ -93,7 +93,7 @@ Appended to vault/10_timeline/daily/2026-02-20.md
 1. Read yesterday's daily note from `vault/10_timeline/daily/`
 2. Read `vault/20_projects/prj-job-hunt-2026/README.md` for current job-hunt status, weekly retro, and any Status checkboxes due in the next 7 days
 3. Read any other active project notes referenced in yesterday's log from `vault/20_projects/`
-4. Check calendar via Google Calendar MCP — query `sean.winslow28@gmail.com` only. (The Block work calendar `swinslow@theblock.co` was archived 2026-05; access has been or is being revoked.) Use `claude.ai Google Calendar` (gcal_list_events) or `google-workspace` (get_events) tools.
+4. Check calendar via Google Calendar MCP — query `sean.winslow28@gmail.com` only. (The prior work calendar was archived 2026-05 and access has been or is being revoked.) Use `claude.ai Google Calendar` (gcal_list_events) or `google-workspace` (get_events) tools.
 5. Scan Slack for overnight activity (see Step 1b below — currently no-op pending personal Slack workspace)
 6. Check `vault/02_Areas/Focus.md` for current focus areas and priority goals. Use these to inform today's priorities instead of asking.
 

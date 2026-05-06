@@ -1,6 +1,6 @@
 ---
 name: etf-page-creator
-description: Streamline WordPress ETF (Exchange-Traded Fund) page creation for a publishing platform. Use when user needs to create or update ETF pages with structured data including Track Insight IDs, symbols, issuers, trading data, categories, and SEO metadata. Guides data collection, validates inputs, and formats output for copy-paste into WordPress fields.
+description: Streamline WordPress ETF (Exchange-Traded Fund) page creation for a publishing platform. Use when user needs to create or update ETF pages with structured data including external data provider IDs, symbols, issuers, trading data, categories, and SEO metadata. Guides data collection, validates inputs, and formats output for copy-paste into WordPress fields.
 ---
 
 # ETF Page Creator
@@ -47,11 +47,11 @@ Collect data systematically using the form below. If user doesn't have certain d
 
 ### External Integration Fields
 
-**Track Insight ID**
-- Where to find: https://cloud.datasets.sh/e/trackinsight-web/v0/shares?key=your-api-key
-- Format: share_id from the API response
+**External Data Provider ID**
+- Where to find: your data provider's portal — configure the base URL + path in your project context
+- Format: share_id (or the equivalent identifier from the provider's API response)
 - Validation: Alphanumeric string
-- Note: User needs Track Insight API key
+- Note: User needs the data provider's API key
 
 **TradingView Symbol** (optional)
 - Where to find: https://www.tradingview.com/widget/advanced-chart/
@@ -62,7 +62,7 @@ Collect data systematically using the form below. If user doesn't have certain d
 
 **Issuer** (company name)
 - Example: "Grayscale", "BlackRock", "Fidelity"
-- Data source hint: Track Insight API or web search
+- Data source hint: external data provider API or web search
 
 **Fee** (expense ratio or flat fee)
 - Format examples: "0.25%", "$50", "1.5%"
@@ -101,12 +101,12 @@ Ask user which categories apply. Most ETFs will have 1-2 categories.
 
 **SEO Title** (optional but recommended)
 - Default: Same as page title if not provided
-- **The Block's Standard Format**: `[ETF Name] ([Symbol]) [Status] & Key Details | The Block`
+- **Publisher Standard Format**: `[ETF Name] ([Symbol]) [Status] & Key Details | {publisher_name}`
 - Status keywords: "Live Status" or "Status" (both acceptable)
-- Examples:
-  - "Grayscale Cardano Trust (GADA) Live Status and Key Details | The Block"
-  - "Fidelity Solana Fund (FSOL) Status & Key Details | The Block"
-  - "ARK 21 Shares Ethereum Futures Strategy ETF (ARKZ) Live Status and Key Details | The Block"
+- Examples (substitute `{publisher_name}` at publish time):
+  - "Grayscale Cardano Trust (GADA) Live Status and Key Details | {publisher_name}"
+  - "Fidelity Solana Fund (FSOL) Status & Key Details | {publisher_name}"
+  - "ARK 21 Shares Ethereum Futures Strategy ETF (ARKZ) Live Status and Key Details | {publisher_name}"
 
 **Slug** (URL-friendly name, optional)
 - WordPress auto-generates from title if not provided
@@ -114,7 +114,7 @@ Ask user which categories apply. Most ETFs will have 1-2 categories.
 
 **Meta Description** (optional but recommended)
 - Length: 150-160 characters optimal
-- **The Block's Standard Format**: 
+- **Publisher Standard Format**: 
   - `[ETF Name] ([Symbol]) is a [type] [asset] ETF [launched/proposed] by [Issuer]. See [status keyword], [statistics,] and details.`
 - Use "proposed" for pending ETFs, "launched" for live/approved ETFs
 - Optionally include "statistics" for live ETFs
@@ -132,11 +132,11 @@ If user is missing data, offer: "I can search for [missing field] using web sear
 - Official issuer websites (prospectus, fact sheets)
 - SEC filings for US ETFs
 - TradingView for chart symbols
-- Financial news (The Block, CoinDesk, Bloomberg)
+- Financial news ({publisher_news_source}, CoinDesk, Bloomberg)
 
 ## Step 4: Format Output
 
-**Always auto-generate SEO Title and Meta Description** using The Block's standard formats (shown in Step 2). Don't ask user if they want these - just create them automatically based on the ETF data collected.
+**Always auto-generate SEO Title and Meta Description** using the publisher standard formats (shown in Step 2). Don't ask user if they want these - just create them automatically based on the ETF data collected.
 
 Generate a **numbered checklist** matching exact WordPress field order for easy copy-paste:
 
@@ -146,7 +146,7 @@ Generate a **numbered checklist** matching exact WordPress field order for easy 
 **Page Title:**
 [value]
 
-**Track Insight ID:**
+**External Data Provider ID:**
 [value]
 
 **Symbol:**
@@ -193,13 +193,13 @@ Generate a **numbered checklist** matching exact WordPress field order for easy 
 ## SEO Settings
 
 **SEO Title:**
-[ETF Name] ([Symbol]) [Live Status/Status] & Key Details | The Block
+[ETF Name] ([Symbol]) [Live Status/Status] & Key Details | {publisher_name}
 
 **Slug:**
 [auto-generated-slug or custom slug]
 
 **Meta Description:**
-[Generated using The Block's standard format based on ETF type and status]
+[Generated using the publisher standard format based on ETF type and status]
 ```
 
 ## Tips for User

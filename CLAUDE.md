@@ -85,12 +85,21 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Cla
 |-------|----------|---------------|----------|
 | Vault Indexer | 2:00 AM daily | nomic-embed-text (Mac Mini Ollama) | $0.00 (local) |
 | Vault Synthesizer | 2:30 AM daily | Qwen3-14B on MBP (intermittent — succeeds only when MBP awake; v3.14.3 retired WOL) | $0.00 (local) |
-| Deep Researcher (v3.23.0) | 2:45 AM daily | LDR + SearXNG + Qwen3-14B GGUF (Q4_K_M, `qwen3-14b-research:latest` Modelfile with `/no_think` patched into TEMPLATE) via Ollama on **Mac Mini** at `localhost:5050` | $0.00 (local) |
+| Deep Researcher (v3.23.0) | 2:45 AM daily | LDR + SearXNG + Qwen3-14B GGUF (Q4_K_M, `qwen3-14b-research:latest` Modelfile with `/no_think` patched into TEMPLATE) via Ollama on **Mac Mini** at `localhost:5050`. Hard 900s LDR timeout — heavy compound topics (≥3 sub-questions, multi-source cross-reference, due-diligence matrices) **must** route to Gemini DR / DR Max instead. See routing rule below. | $0.00 (local) |
 | Meta-Agent (fleet health) | 8:35 AM daily | gemma4:e4b (Mac Mini Ollama) for domain-aware insights summary + local health checks; + schedule-recommendations context (v3.17.0) | $0.00 (local) |
 | Daily Driver (morning) | 8:45 AM daily | daily-driver, vault-read-write + operating-model HEARTBEAT awareness (v3.16.0) | ~$0.40 (cap $0.60) |
 | Knowledge Lint | Sunday 22:00 | Tier 1 structural Python checks (Mac Mini); Tier 2 Qwen3-14B on MBP if awake; + 3-domain SOUL context for `soul-tier-a-conflict` issue kind (v3.17.0) | $0.00 (local) |
 | Flush (SessionEnd) | hook-triggered | gemma4:e4b on Mac Mini via `inbox_triage` routing for <100-msg sessions; ≥100-msg sessions attempt Qwen3-14B on MBP if awake; + 3-domain SOUL prepend (v3.17.0) | $0.00 (local) |
 | Gemini Researcher (NEW, **default disabled**) | 03:30 daily (when opted in via `INSTALL_GEMINI=1`) | Gemini Deep Research / DR Max via `gemini_dr.run` | $0–7/run; capped $7 task / $10 day / $20 month |
+
+**Research routing rule (v3.26.3, 2026-05-06):** Heavy multi-target research belongs on Gemini DR or DR Max, **not** local LDR. There are two independent reasons, both observed in the same week:
+
+1. **Timeout** — local LDR has a hard 900s budget. Compound prompts (≥3 sub-questions, multi-target evaluations, due-diligence matrices) routinely exceed it. Topic 1b on 2026-05-06 stalled at 90 % from t=209s → t=900s and produced no output. Same prompt completed on Gemini DR in 406s.
+2. **Citation quality collapse** — even when local LDR *does* finish, Qwen3-14B on the LDR loop can't ground citations across multiple targets at once. Topic 1a on 2026-05-05 finished cleanly at 280s and produced a confidently-formatted report containing fabricated entities (`PureMCPClient`, `MCPCatalog (Central)`, `MCP ADK`), the wrong owner for MCP (`github.com/microsoft/mcp` instead of `modelcontextprotocol`), fabricated `learn.microsoft.com` docs URLs, and missed the explicit "Anthropic Agent SDK changelog since 0.1.63" deliverable. The flawed file at [`vault/20_projects/research/2026-05-05-topic-1a-mcp-sdk-toolkit-survey-catalog-mcp-cli-mcp-bridge-m.md`](vault/20_projects/research/2026-05-05-topic-1a-mcp-sdk-toolkit-survey-catalog-mcp-cli-mcp-bridge-m.md) is retained with a `status: superseded` frontmatter as the canonical bad-output specimen.
+
+**Triage rule when adding to `vault/00_inbox/research-queue.md`:** if the topic compounds three or more independent investigations, drop it via the `gemini-deep-research` skill (or `gemini_dr.py --tier dr|max`) rather than the queue. The queue is for single-shape topics (one target, one question, one pattern) — those Qwen3-14B + SearXNG can ground reliably at $0.
+
+
 
 **Process Inbox: paused 2026-04-29 (v3.17.4) pending Path B rewrite to local `gemma4:e4b`.** Cloud-Sonnet path validated as functionally working (~3 files/run) but cost-inefficient ($1.16/file vs $0/file local). Manual triage via the `process-inbox` skill in an interactive Claude Code session is the working alternative. See `agents-sdk/AUDIT-2026-04-28-process-inbox-reenable.md` for full history + Path B scope.
 
