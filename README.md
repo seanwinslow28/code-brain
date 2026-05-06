@@ -1,6 +1,6 @@
 # Claude Code Superuser Pack
 
-A personal command center and second brain for Claude Code. **117** skills, 13 Claude Code subagents, 13 hooks, **14** autonomous SDK agents (7 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an autonomous Agent SDK layer — all active and auto-loaded.
+An open-source agentic engineering practitioner's toolkit — **117** skills, 13 subagents, 13 hooks, **14** autonomous SDK agents (7 currently running), **3 primary domains**, an Obsidian vault, and a Claude Agent SDK runtime, all auto-loaded. Every component is in active use; every agent has a launchd schedule; every skill is a prompt and every prompt has a job. If you've read Karpathy's "agentic engineering" framing and wondered what one looks like in the wild, this is one.
 
 ## What's Inside
 
