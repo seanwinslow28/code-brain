@@ -17,7 +17,7 @@ ai-context: "DR Max prompt for the Week-2 target-30 list + application customiza
 <role>
 You are a talent intelligence analyst with deep coverage of AI-native PM and Forward Deployed Engineer hiring at frontier and rising AI companies. You read JDs, hiring manager podcasts, and Levels.fyi; you track who recently joined where, what they shipped before, and what the actual interview shape is — not what marketing says it is. You speak with the precision of someone whose recommendations have been independently verified by candidates who got offers.
 
-Your job is to produce a grounded role-intelligence document for a 35-year-old PM (8 years experience, currently in AI-native PM job-hunt mode, Boston-metro / remote-flexible) with a specific portfolio shape. The document feeds (a) the PM's Week-2 target-30 company list, (b) application customization, and (c) interview-prep priority sequencing.
+Your job is to produce a grounded role-intelligence document for a 33-year-old PM (2 years experience, currently in AI-native PM job-hunt mode, Boston-metro / remote-flexible) with a specific portfolio shape. The document feeds (a) the PM's Week-2 target-30 company list, (b) application customization, and (c) interview-prep priority sequencing.
 </role>
 
 <context>
@@ -46,6 +46,15 @@ Your job is to produce a grounded role-intelligence document for a 35-year-old P
 4. Phase 6 knowledge loop — SessionEnd flush → nightly synthesizer → weekly lint → SessionStart re-injection.
 5. Sanitized agentic financial-research fleet — multi-agent retrieval + synthesis, daily-note pipeline.
 6. Animation pipeline — June 11 short-film ship, ComfyUI + Remotion + LoRA workflow.
+
+**Seniority calibration (critical for tier sorting):**
+The candidate has 2 years of titled PM experience but a portfolio demonstrating 4-6 years of agentic-engineering signal. This portfolio-vs-tenure asymmetry drives role targeting:
+
+- **Tier-1 (realistic-fit):** AI APM / rotational tracks, Product Manager I/II at AI-native companies, Forward Deployed Product IC, Agent Ops L3-L4. Roles where 2-3 years is the stated bar OR where the JD weights demonstrated work over tenure.
+- **Tier-2 (stretch):** Senior PM at small AI startups (Series A-B) where portfolio can outweigh years-of-experience. PM at growth-stage AI shops with flexible tenure requirements.
+- **Tier-3 (wildcards):** Roles where the public JD floor is "5+ years" but the hiring manager's posts indicate portfolio-weighted hiring (Anthropic FDE is the canonical example). Reaches but not impossible.
+
+**Avoid (don't include even as wildcards):** Senior Group PM, Director of Product, Principal PM, Staff PM, anything with a hard "minimum 5 years" floor and no portfolio-substitution language, anything implying multi-team management.
 </context>
 
 <task>
@@ -102,13 +111,15 @@ ai-context: "Role intelligence for the Week-2 target-30 list and application cus
 # Target Role Specs 2026-05 — Anthropic FDE / Glean / Sierra / Decagon / Scale + Adjacent
 
 ## 1. Tier-1 Roles — Apply First (4-6 roles)
+**Calibration:** Tier-1 = realistic-fit per the seniority calibration in `<context>`. AI APM / rotational tracks, Product Manager I/II at AI-native companies, Forward Deployed Product IC roles, Agent Ops L3-L4. NOT Senior PM / Staff PM / Group PM unless the JD explicitly weights portfolio over tenure.
+
 For each: company, exact role title, location / remote-policy, JD URL, comp range with source, the 2-3 things the JD wants that the candidate's portfolio uniquely answers, and the 1-2 things the JD wants that the candidate does NOT have (and how big a deal it is). Order by best-fit-first.
 
 ## 2. Tier-2 Roles — Apply in Wave 2 (8-12 roles)
 Same schema as Tier-1, lighter detail. These are the "good fit but lower probability" or "stretch but still realistic" roles.
 
 ## 3. Tier-3 Roles — Wildcards (3-5 roles)
-Reaches and oddballs that have asymmetric upside. Anthropic FDE itself probably lives here.
+Reaches where the public JD says "5+ years" but the hiring manager weights portfolio over tenure (Anthropic FDE is canonical — explicitly portfolio-weighted in its public framing). Asymmetric upside. For each: surface the specific signal that suggests portfolio-substitution is realistic (hiring manager post URL, recent hire backgrounds, role description language).
 
 ## 4. Interview Shape by Role Family
 Group roles into 3-4 families (e.g., AI PM at frontier model labs, Agent PM at AI-native startups, Forward Deployed Engineer/Product at infra companies, Agent Ops at platform shops). For each family, document:
@@ -142,7 +153,8 @@ Before delivering, run this self-check:
 3. **Hire verification**: Every "recent hire" gets LinkedIn-verified. Remove any unverifiable.
 4. **Mapping discipline**: Re-read §5. For each artifact-to-role match, verify the role's JD actually requests something in that category. Tighten or remove weak matches.
 5. **Tier-A check**: Every recommended role respects the candidate's $100k floor and ≤3-day-in-office cap. Flag any role that violates this and explain why it's still on the list.
-6. **Word count**: Target 4,000-6,500 words. Below 4,000 means under-researched; above 6,500 means padding.
+6. **Seniority discipline**: Re-read §1. If any Tier-1 role has a stated "minimum 5 years PM experience" floor without explicit portfolio-substitution language in the JD, demote to Tier-3 or remove. Tier-1 should be APM / PM I-II / FDP-IC tracks where 2 years is acceptable.
+7. **Word count**: Target 4,000-6,500 words. Below 4,000 means under-researched; above 6,500 means padding.
 </validation>
 
 --- PROMPT END ---
