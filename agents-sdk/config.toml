@@ -336,8 +336,8 @@ ledger_dir = "vault/health"
 
 [gemini.budget]
 max_per_task_usd = 7.00
-monthly_cap_usd = 20.00
-daily_cap_usd = 10.00
+monthly_cap_usd = 50.00
+daily_cap_usd = 20.00
 dr_predicted_usd = 2.00                 # DR tier midpoint (range $1-$4)
 max_predicted_usd = 5.00                # DR Max tier midpoint (range $3-$7)
 prediction_multiplier = 1.4             # DR predicts $2.80; DR Max predicts $7.00

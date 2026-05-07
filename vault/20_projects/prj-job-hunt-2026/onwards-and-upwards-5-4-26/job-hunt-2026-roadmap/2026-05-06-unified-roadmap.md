@@ -173,9 +173,11 @@ The master plan's Phase 0–8 stays canonical. These tasks add the explanation-a
 
 ---
 
-### Task 0 — Block IP scrub (gates everything public; finishes Phase 3 + Phase 4)
+### Task 0 — Block IP scrub (gates everything public; finishes Phase 3 + Phase 4) ✅ CLOSED 2026-05-07
 
-**Maps to:** Master plan Phase 1 [Open Threads] + Phase 4 Task 4.3 Step 9.
+> **STATUS:** All 5 steps complete. Public-push gate satisfied. Verified 2026-05-07 against repo state (audit file, sanitization commit, grep, `validate.py`, git log). The single intentional deviation from "zero hits" is the protected physical archive path (`vault/{40,60}_archive/operating-models-the-block-2026-05/`) preserved by Sean's locked Plan A decision so historical operating-model interviews still resolve to the on-disk bundle.
+
+**Maps to:** Master plan Phase 1 [Open Threads] + Phase 4 Task 4.3 Step 9 (both also marked closed 2026-05-07).
 
 **Files:**
 - Modify: [`the-block/product-management/the-block-jira-ticket-writer/`](../../../../the-block/product-management/the-block-jira-ticket-writer/) (sanitize → generic `pm-ticket-writer-with-style-guide`)
@@ -183,27 +185,17 @@ The master plan's Phase 0–8 stays canonical. These tasks add the explanation-a
 - Modify: [`the-block/product-management/biweekly-jira-update/`](../../../../the-block/product-management/biweekly-jira-update/) → generic `biweekly-stakeholder-update`
 - Modify: [`CHANGELOG.md`](../../../../CHANGELOG.md), [`CLAUDE.md`](../../../../CLAUDE.md), [`README.md`](../../../../README.md) — count updates per project rule
 
-**- [ ] Step 1: Audit each Block-named skill for transferable vs. Block-specific IP.**
-For each of the 3 skills, read top-to-bottom. Mark every line as either (a) transferable (e.g., "PM tickets need acceptance criteria") or (b) Block-specific (e.g., "use Track Insight URL pattern X"). Save the audit as `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-08-block-skills-audit.md`.
+**- [x] Step 1: Audit each Block-named skill for transferable vs. Block-specific IP.** ✅ Completed 2026-05-06. Audit at [`2026-05-08-block-skills-audit.md`](../2026-05-08-block-skills-audit.md) — 11 kB line-by-line audit. Surfaced that the original 3-skill scope was incomplete: `the-block-jira-ticket-writer` had been merged into `jira-automation/` pre-audit, `biweekly-jira-update` had been merged into `stakeholder-update/` cleanly, and 4 additional contaminated skills (`api-product-management`, `jira-automation`, `work-operating-model` [3 files], `daily-driver`) were live in `.claude/skills/`. Plan A (full clean, 30 → 0) locked.
 
-**- [ ] Step 2: Rewrite each skill's frontmatter and body to remove Block-specific names.**
-Replace `the-block-` prefix with the generic equivalent. Strip Track Insight, WordPress field names, Pending ETF List Sheet references. Replace with parameterized placeholders (`{publisher_style_guide}`, `{cms_field_schema}`).
+**- [x] Step 2: Rewrite each skill's frontmatter and body to remove Block-specific names.** ✅ Completed 2026-05-06 in commit `5a84069`. Sanitized 30 hits → 5 across 7 files: `etf-page-creator/SKILL.md` (Track Insight + Block SEO templates parameterized), `api-product-management/SKILL.md` (developer.theblock.co + @theblock/data-sdk → generic), `jira-automation/SKILL.md` (dead path + Campus/theblock.co example sanitized), `work-operating-model/{SKILL.md, artifact-templates.md, interview-questions.md}` (`the-block` slug renamed to `archived-employer` across 4-domain selectable list), `daily-driver/SKILL.md` (calendar archive line parameterized). `etf-page-creator` kept its name per audit deviation note (skill is ETF-specific in mechanics, the *Block-ness* is what got stripped, not the ETF-ness).
 
-**- [ ] Step 3: Verify zero Block-string contamination.**
-Run: `grep -ri "theblock\|the-block\|track insight\|@theblock\|swinslow@theblock" .claude/skills/ | grep -v ".git/" | grep -v "the-block/"`
-Expected: zero hits. (Hits inside `the-block/` are fine; that folder is archive.)
+**- [x] Step 3: Verify zero Block-string contamination.** ✅ Verified 2026-05-07. Grep returns 5 hits in 1 file: `.claude/skills/work-operating-model/SKILL.md`. All 5 are the protected physical archive path string preserved by Sean's locked Plan A decision (commit `5a84069` body explicitly documents this). Functional capability of historical-interview resolution preserved; literal CIIA-protected strings removed everywhere they could be.
 
-**- [ ] Step 4: Run validate.py.**
-Run: `python3 scripts/validate.py`
-Expected: 0 errors.
+**- [x] Step 4: Run validate.py.** ✅ Verified 2026-05-07. `python3 scripts/validate.py` → "Validation PASSED (60 warning(s))." All 60 warnings are pre-existing secret-pattern false-positives in unrelated skills (`last30days`, `gemini-image-gen`, `react-vite-tailwind`, `mcp-integration`), not Block-related. 0 errors.
 
-**- [ ] Step 5: Commit.**
-```bash
-git add -A
-git commit -m "chore(skills): sanitize 3 Block-named skills for public push (CIIA Section 2.3 compliance)"
-```
+**- [x] Step 5: Commit.** ✅ Commit `5a84069` (2026-05-06): `chore(skills): full Block-string scrub across .claude/skills/ (CIIA §2.3 compliance + public-push readiness)`.
 
-**Verification gate:** Until this task is closed, the public Superuser Pack repo stays private OR the 3 skills stay out of `.claude/skills/`. This explicitly gates [Master plan Phase 3 Task 3.3](../2026-05-04-onwards-and-upwards-plan.md) and [Phase 4 Task 4.3 Step 9](../2026-05-04-onwards-and-upwards-plan.md).
+**Verification gate:** ✅ **CLOSED 2026-05-07.** [Master plan Phase 3 Task 3.3](../2026-05-04-onwards-and-upwards-plan.md) (LinkedIn announcement) and [Phase 4 Task 4.3 Step 9](../2026-05-04-onwards-and-upwards-plan.md) (publish MCP server / pin Superuser Pack on profile) are no longer gated by this task. The 3 originally-named skills (`the-block-jira-ticket-writer`, `etf-page-creator`, `biweekly-jira-update`) are all addressed: first two via merges that pre-dated the scrub, third via in-place parameterization. Plus 4 additional contaminated skills caught by the broader audit, all sanitized in the same commit.
 
 ---
 
