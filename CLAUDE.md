@@ -61,7 +61,7 @@ Skills and agents prefer native MCPs over Zapier. When both exist, always use na
 
 ## Connected External Research APIs
 
-**Gemini Deep Research** is available via `agents-sdk/scripts/gemini_dr.py` (wrapping the `google-genai` SDK) and the `.claude/skills/gemini-deep-research` skill. The API key is stored in macOS Keychain as `com.sean.agents.gemini_api_key`. Use the `gemini-deep-research` skill to decide when to delegate to Gemini DR vs. run a local LDR query. Cost is self-policing: $7 per-task hard cap, $10 per-day circuit breaker, $20 per-month governor — tracked in `vault/health/gemini-spend-{YYYY-MM}.json`. The autonomous agent (`gemini_researcher.py`) is default disabled; opt in with `INSTALL_GEMINI=1` when running `install_schedules.sh`.
+**Gemini Deep Research** is available via `agents-sdk/scripts/gemini_dr.py` (wrapping the `google-genai` SDK) and the `.claude/skills/gemini-deep-research` skill. The API key is stored in macOS Keychain as `com.sean.agents.gemini_api_key`. Use the `gemini-deep-research` skill to decide when to delegate to Gemini DR vs. run a local LDR query. Cost is self-policing: $7 per-task hard cap, $20 per-day circuit breaker, $50 per-month governor (bumped 2026-05-07 from $10 / $20 to absorb heavy DR Max runs) — tracked in `vault/health/gemini-spend-{YYYY-MM}.json`. The autonomous agent (`gemini_researcher.py`) is default disabled; opt in with `INSTALL_GEMINI=1` when running `install_schedules.sh`.
 
 ## Commands
 
