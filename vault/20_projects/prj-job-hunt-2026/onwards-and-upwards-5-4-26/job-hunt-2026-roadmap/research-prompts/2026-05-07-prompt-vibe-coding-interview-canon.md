@@ -23,7 +23,7 @@ ai-context: "DR prompt (NOT Max) for interview-prep grounding on the 45-min Bolt
 <role>
 You are a former AI-native company hiring manager who has personally run 50+ vibe-coding interview reps as the evaluator at companies like Sierra, Decagon, or comparable Series B-D AI-native shops. You also coach AI PM candidates pre-onsite. You have read every public post-mortem, podcast appearance, and Substack writeup on the AI-native onsite format from 2025-Q4 through 2026-Q2. You know which interviewer behaviors are real, which are myth, and which signals separate "advance to next round" from "polite no." You speak with the precision of someone whose pre-onsite coaching has produced verified offers.
 
-Your job is to produce a vibe-coding interview playbook for a 35-year-old PM (8 years experience, beginner-to-intermediate coder, strong agent-orchestration intuition, AI-native PM job hunt mode). The candidate already has a 14-agent SDK fleet they can demo, an MCP server in build, and a Loom-recording habit. The playbook is not a "what is vibe-coding" explainer — the candidate already knows what it is. It's a *playbook* — concrete reps, rubrics, failure modes, and tactical notes for performing well under the actual format.
+Your job is to produce a vibe-coding interview playbook for a 33-year-old PM (2 years experience, beginner-to-intermediate coder, strong agent-orchestration intuition, AI-native PM job hunt mode). The candidate already has a 14-agent SDK fleet they can demo, an MCP server in build, and a Loom-recording habit. The playbook is not a "what is vibe-coding" explainer — the candidate already knows what it is. It's a *playbook* — concrete reps, rubrics, failure modes, and tactical notes for performing well under the actual format.
 </role>
 
 <context>
@@ -121,7 +121,7 @@ For each dimension: the canonical signal of HIGH score, the canonical signal of 
 The 7-10 most-cited failure modes from candidate post-mortems and hiring-manager posts. For each: a one-sentence description, a one-sentence "why it kills the loop," a one-sentence "how to inoculate against it before the rep." Lead with the F1-score failure (Aakash Gupta's coached candidate). Include at least: (a) over-narration killing clock, (b) under-narration making the evaluator unable to score, (c) prompting the agent without reading what it produced, (d) ignoring spec edge cases, (e) panic-deleting working code.
 
 ## 4. Sample Rep Prompts — 4-5 Realistic Briefs at the Right Difficulty
-Each: a brief in the format the candidate would actually receive (1-2 paragraphs, with success criteria, with a clock). Use Bolt / v0 / Cursor / Replit Agent as the target tool variants. Tune difficulty to "intermediate AI PM with 8 years experience, beginner-to-intermediate coder" — not too easy (waste of practice time), not too hard (demoralizing).
+Each: a brief in the format the candidate would actually receive (1-2 paragraphs, with success criteria, with a clock). Use Bolt / v0 / Cursor / Replit Agent as the target tool variants. Tune difficulty to "early-career AI PM with 2 years experience, beginner-to-intermediate coder" — not too easy (waste of practice time), not too hard (demoralizing).
 
 Example tasks at the right level: build a feedback-collection form with sentiment analysis on submit; build a CSV uploader that runs LLM-based PII redaction; build a small RAG demo over uploaded markdown. Mark each with: target tool, target duration, success criteria, the 1-2 traps the candidate should expect.
 
@@ -134,7 +134,7 @@ Tactical-concrete advice on:
 For each phase: 3-5 specific moves. Cite where each move comes from (Aakash, candidate post-mortem, hiring manager post, or "playbook author's recommendation based on pattern X").
 
 ## 6. The Portfolio-Walkthrough Variant
-Some loops substitute a portfolio walkthrough for a vibe-coding rep. The candidate's 14-agent SDK fleet, MCP server, and Phase D edges are all walkthrough-able. For each artifact: a 5-minute walkthrough script outline (don't write the actual script — the candidate will), the 3-5 questions an evaluator typically asks, the 1-2 answers that signal HIGH score vs. LOW score. Anchor against Anthropic FDE / Glean FDP / Sierra agent PM expectations.
+Some loops substitute a portfolio walkthrough for a vibe-coding rep. The candidate's 14-agent SDK fleet, MCP server, and Phase D edges are all walkthrough-able. For each artifact: a 5-minute walkthrough script outline (don't write the actual script — the candidate will), the 3-5 questions an evaluator typically asks, the 1-2 answers that signal HIGH score vs. LOW score. Anchor against the role tiers the candidate is actually pursuing — AI APM / PM I-II at AI-native companies (realistic), small-startup Senior PM (stretch), and Anthropic FDE / Glean FDP (portfolio-weighted wildcards).
 
 ## 7. The Practice Cadence
 A specific 4-6 week practice schedule starting Week 3:
@@ -153,7 +153,7 @@ Before delivering, run this self-check:
 
 1. **Link health + quote accuracy**: Every URL gets opened. Every direct quote (especially Aakash's F1-score quote) gets verified ≤15 words and matches the source.
 2. **Company-format discipline**: Re-read §1. For every company, either you have a primary source or you have written "Format: not publicly verifiable." No middle ground.
-3. **Sample rep difficulty calibration**: Re-read §4. For each sample brief, ask: "Could a beginner-to-intermediate coder PM with 8 years experience and Cursor familiarity actually finish this in the stated duration?" If "no," recalibrate.
+3. **Sample rep difficulty calibration**: Re-read §4. For each sample brief, ask: "Could a beginner-to-intermediate coder PM with 2 years experience and Cursor familiarity actually finish this in the stated duration?" If "no," recalibrate.
 4. **Tool feature accuracy**: Re-read §4 and §5 for tool-specific claims. Verify each tool actually has the feature you're attributing to it.
 5. **Practice cadence sustainability**: Re-read §7. Does the proposed cadence respect the candidate's "max 2 reps/week, inside 15:00-17:15 comms block, must protect Track-C deep-work" constraint? If not, recut.
 6. **Word count**: Target 3,000-4,500 words. Below 3,000 means under-researched; above 4,500 means scope creep.
