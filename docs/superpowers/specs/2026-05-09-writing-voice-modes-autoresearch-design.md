@@ -72,7 +72,7 @@ Stored in `evals.sealed.yaml`. The mutation subagent's read scope explicitly exc
 | ID | Mode | Prompt |
 |---|---|---|
 | `surprise_sean_obsidian` | Sean Mode | Write a 250-word Substack intro about throwing away your second-brain Notion vault and starting from zero in Obsidian. |
-| `surprise_sedaris_treadmill` | Domestic Observer + Gonzo escalation | Write a 250-word Substack intro in Domestic Observer mode, with one Gonzo escalation passage in the middle. Topic: the absurdity of buying a treadmill desk. |
+| `surprise_sedaris_ai_stack` | Domestic Observer + Gonzo escalation | Write a 250-word Substack intro in Domestic Observer mode, with one Gonzo escalation passage in the middle. Topic: the absurdity of having an AI stack — fourteen autonomous agents, three local models, more MCPs than friends — that knows your morning routine better than anyone in your life. |
 | `surprise_kerouac_drive` | Beat Flow | Write a 250-word Substack intro in Beat Flow mode about driving from New York to Boston the day you accepted your move. |
 
 ### 4.2 Criteria — 3 structural + 3 LLM-judge
@@ -276,7 +276,10 @@ TRIPWIRES = {
 
 1. **60% dial samples added to `voice-samples.md`** — Sean writes 2 short real samples (one ~80-word professional Slack message, one ~150-word stakeholder-update intro) at 60% professional dial. Add under a new "## Professional Dial — 60%" section in `voice-samples.md`.
 2. **N-gram extraction from voice-samples.md** — one-time prep step. Run `python -m agents_sdk.lib.skill_optimizer.stylometry --extract-ngrams` to populate `stylometry_baseline.json` with the top ~30 Sean-distinctive n-grams + baseline feature distributions.
-3. **Hand-labeled calibration set** — Sean labels 30 examples (15 real Sean writing pulled from voice-samples.md and prior Substack drafts; 15 generic AI outputs from a quick generation run with the current skill). Used to calibrate stylometric threshold + verify Qwen3-14B judge agreement on the criteria. ~30 minutes of Sean's time, one-shot.
+3. **Hand-labeled calibration set** — 30 examples for tuning the stylometric threshold and verifying Qwen3-14B judge agreement. Sourced as:
+   - **15 real-Sean samples** drawn from `voice-samples.md`: split the 4 full mode-applied passages (~300-450 words each) into ~100-word chunks (~10-12 chunks) + add the 5 raw voice snippets + add the 2 pre-flight 60%-dial samples Sean writes. We use ALL real-Sean writing we have. There is no existing Substack archive to pull from — `voice-samples.md` plus the pre-flight additions IS the full real-Sean corpus.
+   - **15 generic AI samples** generated fresh by running the current `writing-voice-modes` skill against varied AI/tech/PM-themed prompts before any optimization runs. These represent the baseline Sean is trying to beat.
+   - Sean reviews the labeling for ~30 minutes; once locked, the threshold is calibrated against this set and never re-tuned during the optimization loop.
 4. **Branch created** — `git checkout -b autoresearch/writing-voice-modes-2026-05-09`
 5. **Cost watchdog configured** — `[agents.skill_optimizer]` block in `config.toml` with hard cap `$200`, soft cap `$50` (alert).
 
