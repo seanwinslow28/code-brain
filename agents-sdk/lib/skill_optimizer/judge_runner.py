@@ -108,3 +108,30 @@ class JudgeRunner:
             yes_count=yes_count,
             no_count=no_count,
         )
+
+    def compute_sonnet_agreement(
+        self,
+        outputs: list[str],
+        anchors_per_output: list[list[str]],
+        question: str,
+        mode: str,
+        local_results: list[bool],
+    ) -> float:
+        """Re-judge a sample with Sonnet 4.6 and return agreement rate vs local_results."""
+        if not self.sonnet:
+            raise RuntimeError("Sonnet client not configured")
+        if len(outputs) != len(local_results):
+            raise ValueError("outputs and local_results must align")
+        agreements = 0
+        for i, (out, anchors) in enumerate(zip(outputs, anchors_per_output)):
+            sonnet_r = self.judge_single(
+                output=out,
+                anchors=anchors,
+                question=question,
+                mode=mode,
+                use_sonnet=True,
+                seed=0,
+            )
+            if sonnet_r.passed == local_results[i]:
+                agreements += 1
+        return agreements / len(outputs) if outputs else 0.0
