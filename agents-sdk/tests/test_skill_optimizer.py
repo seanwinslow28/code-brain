@@ -500,3 +500,53 @@ class TestSonnetCheck:
             mock_anchors.return_value = {"sean": ["a", "b", "c", "d"]}
             agreement = _sonnet_check(judge, outputs, evals, sample_rate=1.0)
         assert agreement == 0.8
+
+
+from agents.skill_optimizer import _parse_mutation_response
+
+
+class TestParseMutationResponse:
+    def test_delimited_block_with_multiline_markdown(self):
+        # The whole point: multi-line markdown body with quotes, backslashes,
+        # and unescaped newlines must round-trip without JSON encoding.
+        raw = (
+            "SECTION_HEADING: ## Sean's Signature Moves\n"
+            "RATIONALE: tightened the table — clearer 'tells' per move\n"
+            "<<<MODIFIED_SKILL_MD>>>\n"
+            "---\n"
+            'name: writing-voice-modes\n'
+            "---\n\n"
+            "# Body with \"quotes\" and \\backslashes\\ and\n"
+            "literal newlines and a — em dash.\n"
+            "<<<END_MODIFIED_SKILL_MD>>>\n"
+        )
+        heading, rationale, body = _parse_mutation_response(raw)
+        assert heading == "## Sean's Signature Moves"
+        assert "tightened" in rationale
+        assert '"quotes"' in body
+        assert "\\backslashes\\" in body
+        assert body.count("\n") >= 4
+
+    def test_falls_back_to_legacy_json(self):
+        raw = '{"section_heading": "## A", "rationale": "r", "modified_skill_md_full_text": "x"}'
+        heading, rationale, body = _parse_mutation_response(raw)
+        assert (heading, rationale, body) == ("## A", "r", "x")
+
+    def test_falls_back_through_markdown_fence(self):
+        raw = '```json\n{"section_heading": "## A", "rationale": "r", "modified_skill_md_full_text": "x"}\n```'
+        heading, _r, body = _parse_mutation_response(raw)
+        assert heading == "## A" and body == "x"
+
+    def test_raises_on_garbage_input(self):
+        with pytest.raises((ValueError, Exception)):  # JSONDecodeError or ValueError
+            _parse_mutation_response("not a mutation response at all")
+
+    def test_delimited_block_missing_heading_raises(self):
+        raw = (
+            "RATIONALE: r\n"
+            "<<<MODIFIED_SKILL_MD>>>\n"
+            "body\n"
+            "<<<END_MODIFIED_SKILL_MD>>>\n"
+        )
+        with pytest.raises(ValueError):
+            _parse_mutation_response(raw)
