@@ -268,6 +268,7 @@ def run_optimization_loop(config: SkillOptimizerConfig, dry_run: bool = False) -
 
     best_binary_array: list[int] = []
     train_scores: list[float] = []
+    holdout_scores: list[float] = []
     iter1_snapshot: Optional[dict] = None
     cumulative_cost = 0.0
 
@@ -334,9 +335,21 @@ def run_optimization_loop(config: SkillOptimizerConfig, dry_run: bool = False) -
         ma = moving_average(train_scores, window=3)
         decision, info = keep_or_revert(train["binary_array"], best_binary_array)
 
-        # 8. Trip-wires
-        snapshot = _build_snapshot(iteration, train_score, holdout_score, train, iter1_snapshot, sonnet_agreement, modified_md)
+        # 8. Trip-wires (holdout_scores at this point holds PRIOR iters; current appended below)
+        diversity = _diversity(train_outputs)
+        snapshot = _build_snapshot(
+            iteration=iteration,
+            train_score=train_score,
+            holdout_score=holdout_score,
+            train_result=train,
+            iter1_snapshot=iter1_snapshot,
+            sonnet_agreement=sonnet_agreement,
+            skill_md_text=modified_md,
+            holdout_history=holdout_scores,
+            diversity=diversity,
+        )
         triggered = check_all_tripwires(snapshot)
+        holdout_scores.append(holdout_score)
 
         # 9. Apply decision (after tripwires for logging)
         if decision == "keep":
@@ -349,7 +362,7 @@ def run_optimization_loop(config: SkillOptimizerConfig, dry_run: bool = False) -
         write_results_row(results_path, _build_row(iteration, section, rationale, train_score, holdout_score, surprise_outputs, train, ma, info, decision, triggered, sonnet_agreement, time.time() - start, cumulative_cost))
 
         if iter1_snapshot is None:
-            iter1_snapshot = {"train_score": train_score, "criterion_scores": train["per_criterion"], "skill_md_token_count": len(modified_md.split()), "stylometric_score": train["per_criterion"].get("stylometric_distance", 0), "llm_judge_score": _llm_judge_avg(train["per_criterion"]), "avg_inter_run_similarity": _diversity(train_outputs)}
+            iter1_snapshot = {"train_score": train_score, "criterion_scores": train["per_criterion"], "skill_md_token_count": len(modified_md.split()), "stylometric_score": train["per_criterion"].get("stylometric_distance", 0), "llm_judge_score": _llm_judge_avg(train["per_criterion"]), "avg_inter_run_similarity": diversity}
 
         # 11. Halt checks
         if iteration >= 4 and triggered:
