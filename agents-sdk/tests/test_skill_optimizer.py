@@ -9,6 +9,8 @@ from agents.skill_optimizer import (
     score_outputs,
     git_commit_mutation,
     git_revert_skill_md,
+    write_results_row,
+    RESULTS_HEADER,
 )
 
 
@@ -136,3 +138,24 @@ class TestGitOps:
         f.write_text("modified")
         git_revert_skill_md(tmp_path, f)
         assert f.read_text() == "original"
+
+
+class TestResultsTSV:
+    def test_writes_header_on_first_row(self, tmp_path):
+        path = tmp_path / "results.tsv"
+        row = {f: "" for f in RESULTS_HEADER}
+        row["iteration"] = 1
+        row["mutation_summary"] = "test mutation"
+        write_results_row(path, row)
+        contents = path.read_text()
+        assert contents.split("\n")[0] == "\t".join(RESULTS_HEADER)
+        assert "test mutation" in contents.split("\n")[1]
+
+    def test_appends_without_duplicating_header(self, tmp_path):
+        path = tmp_path / "results.tsv"
+        for i in range(3):
+            row = {f: "" for f in RESULTS_HEADER}
+            row["iteration"] = i + 1
+            write_results_row(path, row)
+        lines = path.read_text().rstrip().split("\n")
+        assert len(lines) == 4  # header + 3 rows
