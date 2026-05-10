@@ -11,6 +11,10 @@ from agents.skill_optimizer import (
     git_revert_skill_md,
     write_results_row,
     RESULTS_HEADER,
+    _plateau,
+    _llm_judge_avg,
+    _diversity,
+    _worst_criteria,
 )
 
 
@@ -159,3 +163,83 @@ class TestResultsTSV:
             write_results_row(path, row)
         lines = path.read_text().rstrip().split("\n")
         assert len(lines) == 4  # header + 3 rows
+
+
+class TestPlateau:
+    def test_returns_false_below_window(self):
+        assert _plateau([0.7, 0.7], n=3) is False
+
+    def test_returns_true_when_flat(self):
+        assert _plateau([0.7, 0.7, 0.7], n=3) is True
+
+    def test_returns_true_within_tolerance(self):
+        # Spread of 0.003 is below the 0.005 default tolerance.
+        assert _plateau([0.700, 0.701, 0.703], n=3) is True
+
+    def test_returns_false_with_real_movement(self):
+        assert _plateau([0.70, 0.75, 0.80], n=3) is False
+
+
+class TestLLMJudgeAvg:
+    def test_averages_only_judge_criteria(self):
+        per = {
+            "substack_format_intro": 1.0,        # structural — ignored
+            "anti_pattern_overreference": 1.0,   # structural — ignored
+            "stylometric_distance": 1.0,          # structural — ignored
+            "signature_move_present": 0.6,
+            "sounds_like_sean": 0.4,
+            "no_anti_pattern_violation": 0.8,
+        }
+        assert _llm_judge_avg(per) == pytest.approx((0.6 + 0.4 + 0.8) / 3)
+
+    def test_handles_missing_keys_as_zero(self):
+        assert _llm_judge_avg({}) == 0.0
+
+
+class TestDiversity:
+    def test_high_similarity_when_outputs_identical(self):
+        outputs = {
+            "p1": [
+                {"text": "the quick brown fox jumps over the lazy dog every morning"},
+                {"text": "the quick brown fox jumps over the lazy dog every morning"},
+            ]
+        }
+        assert _diversity(outputs) > 0.95
+
+    def test_low_similarity_when_outputs_diverse(self):
+        outputs = {
+            "p1": [
+                {"text": "the quick brown fox jumps over the lazy dog"},
+                {"text": "completely unrelated prose with different vocabulary words entirely"},
+            ]
+        }
+        assert _diversity(outputs) < 0.5
+
+    def test_returns_zero_when_only_one_run_per_prompt(self):
+        outputs = {"p1": [{"text": "only one run here"}]}
+        assert _diversity(outputs) == 0.0
+
+
+class TestWorstCriteria:
+    def test_returns_top_n_worst_from_last_row(self):
+        rows = [{
+            "criterion_substack_format_intro": "0.95",
+            "criterion_anti_pattern_overreference": "0.90",
+            "criterion_stylometric_distance": "0.50",
+            "criterion_signature_move_present": "0.70",
+            "criterion_sounds_like_sean": "0.40",
+            "criterion_no_anti_pattern_violation": "0.85",
+        }]
+        worst = _worst_criteria(rows)
+        # Three lowest: sounds_like_sean (0.40), stylometric_distance (0.50), signature_move_present (0.70)
+        assert worst[0] == "sounds_like_sean"
+        assert worst[1] == "stylometric_distance"
+        assert worst[2] == "signature_move_present"
+
+    def test_returns_empty_for_no_rows(self):
+        assert _worst_criteria([]) == []
+
+    def test_skips_non_numeric_columns(self):
+        rows = [{"criterion_substack_format_intro": "0.95", "iteration": "5"}]
+        worst = _worst_criteria(rows)
+        assert worst == ["substack_format_intro"]

@@ -5,6 +5,7 @@ See docs/superpowers/specs/2026-05-09-writing-voice-modes-autoresearch-design.md
 from __future__ import annotations
 
 import json
+import math
 import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -365,8 +366,21 @@ def _build_ollama_client(config):
 def _read_recent_rows(path, n):
     raise NotImplementedError("implemented in Task 4.8")
 
-def _worst_criteria(rows):
-    raise NotImplementedError("implemented in Task 4.7")
+def _worst_criteria(rows: list[dict]) -> list[str]:
+    """Return the 3 criterion names with the lowest scores in the most recent row."""
+    if not rows:
+        return []
+    last = rows[-1]
+    scored = []
+    for k, v in last.items():
+        if not k.startswith("criterion_"):
+            continue
+        try:
+            scored.append((float(v), k.removeprefix("criterion_")))
+        except (ValueError, TypeError):
+            continue
+    scored.sort()  # ascending — worst (lowest) first
+    return [name for _, name in scored[:3]]
 
 def _run_structural_checks(outputs, baseline):
     raise NotImplementedError("implemented in Task 4.9")
@@ -386,14 +400,53 @@ def _build_snapshot(*args, **kwargs):
 def _build_row(*args, **kwargs):
     raise NotImplementedError("implemented in Task 4.8")
 
-def _llm_judge_avg(per_criterion):
-    raise NotImplementedError("implemented in Task 4.7")
+def _llm_judge_avg(per_criterion: dict[str, float]) -> float:
+    """Mean of just the LLM-judge criteria (excludes structural)."""
+    keys = ("signature_move_present", "sounds_like_sean", "no_anti_pattern_violation")
+    vals = [per_criterion.get(k, 0.0) for k in keys]
+    return sum(vals) / len(vals) if vals else 0.0
 
-def _diversity(outputs):
-    raise NotImplementedError("implemented in Task 4.7")
 
-def _plateau(scores, n):
-    raise NotImplementedError("implemented in Task 4.7")
+def _char_trigram_bag(text: str) -> dict[str, int]:
+    text = text.lower()
+    bag: dict[str, int] = {}
+    for i in range(len(text) - 2):
+        tri = text[i : i + 3]
+        bag[tri] = bag.get(tri, 0) + 1
+    return bag
+
+
+def _cosine(a: dict[str, int], b: dict[str, int]) -> float:
+    common = set(a.keys()) & set(b.keys())
+    dot = sum(a[k] * b[k] for k in common)
+    na = math.sqrt(sum(v * v for v in a.values()))
+    nb = math.sqrt(sum(v * v for v in b.values()))
+    return dot / (na * nb) if na and nb else 0.0
+
+
+def _diversity(outputs: dict[str, list[dict]]) -> float:
+    """Average inter-run cosine similarity over character trigrams.
+
+    Higher = more similar (entropy collapse — a tripwire signal). Returns 0.0
+    when no prompt has at least 2 runs to compare.
+    """
+    sims = []
+    for _prompt_id, runs in outputs.items():
+        if len(runs) < 2:
+            continue
+        bags = [_char_trigram_bag(r["text"]) for r in runs]
+        for i in range(len(bags)):
+            for j in range(i + 1, len(bags)):
+                sims.append(_cosine(bags[i], bags[j]))
+    return sum(sims) / len(sims) if sims else 0.0
+
+
+def _plateau(scores: list[float], n: int = 3, tol: float = 0.005) -> bool:
+    """True when the last `n` scores are within `tol` of each other (no improvement)."""
+    if len(scores) < n:
+        return False
+    tail = scores[-n:]
+    return max(tail) - min(tail) <= tol
 
 
 class _DummyClient:
