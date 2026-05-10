@@ -71,3 +71,61 @@ class TestSingleJudgeCall:
         )
         assert result.passed is False
         assert "ambiguous" in result.reason.lower()
+
+
+class TestEnsembleJudge:
+    def test_majority_yes_passes(self):
+        client = MagicMock()
+        # Three calls return YES, YES, NO → majority YES.
+        client.complete.side_effect = ["...\nYES", "...\nYES", "...\nNO"]
+        runner = JudgeRunner(
+            local_client=client,
+            sonnet_client=None,
+            prompt_template=PROMPT_TEMPLATE,
+        )
+        result = runner.judge_ensemble(
+            output="x",
+            anchors=["a", "b", "c", "d"],
+            question="?",
+            mode="sean",
+            n_judges=3,
+        )
+        assert result.passed is True
+        assert result.yes_count == 2 and result.no_count == 1
+
+    def test_majority_no_fails(self):
+        client = MagicMock()
+        client.complete.side_effect = ["...\nNO", "...\nNO", "...\nYES"]
+        runner = JudgeRunner(
+            local_client=client,
+            sonnet_client=None,
+            prompt_template=PROMPT_TEMPLATE,
+        )
+        result = runner.judge_ensemble(
+            output="x",
+            anchors=["a", "b", "c", "d"],
+            question="?",
+            mode="sean",
+            n_judges=3,
+        )
+        assert result.passed is False
+        assert result.yes_count == 1 and result.no_count == 2
+
+    def test_uses_different_anchor_orders_per_judge(self):
+        client = MagicMock()
+        client.complete.side_effect = ["x\nYES"] * 3
+        runner = JudgeRunner(
+            local_client=client,
+            sonnet_client=None,
+            prompt_template=PROMPT_TEMPLATE,
+        )
+        runner.judge_ensemble(
+            output="x",
+            anchors=["a1", "a2", "a3", "a4"],
+            question="?",
+            mode="sean",
+            n_judges=3,
+        )
+        prompts_sent = [call.kwargs["prompt"] for call in client.complete.call_args_list]
+        # The three prompts should not all be identical (anchor order differs).
+        assert len(set(prompts_sent)) > 1
