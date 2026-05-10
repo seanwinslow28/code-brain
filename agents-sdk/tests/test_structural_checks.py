@@ -2,6 +2,7 @@
 import pytest
 from lib.skill_optimizer.structural_checks import (
     substack_format_intro,
+    anti_pattern_overreference,
 )
 
 
@@ -54,3 +55,39 @@ class TestSubstackFormatIntro:
         passed, reason = substack_format_intro(text)
         assert passed is False
         assert "closer" in reason.lower()
+
+
+class TestAntiPatternOverreference:
+    def test_passes_when_no_noun_overused(self):
+        text = (
+            "I sat down with my coffee and stared at the screen.\n\n"
+            "The terminal blinked back at me.\n\n"
+            "It was a Tuesday."
+        )
+        passed, reason = anti_pattern_overreference(text)
+        assert passed is True, reason
+
+    def test_fails_when_coffee_appears_three_times(self):
+        text = (
+            "I made coffee. Then more coffee. Then I drank the coffee.\n\n"
+            "End scene."
+        )
+        passed, reason = anti_pattern_overreference(text)
+        assert passed is False
+        assert "coffee" in reason.lower()
+
+    def test_passes_with_callback_pattern(self):
+        # Opening word and closing callback may legitimately re-use an image.
+        # The function should allow up to 2 instances; 2 instances pass.
+        text = (
+            "The ferry horn cut through the morning fog.\n\n"
+            "Twelve paragraphs later, we are back to where we started.\n\n"
+            "The ferry horn sounds the same as it always did."
+        )
+        passed, reason = anti_pattern_overreference(text)
+        assert passed is True
+
+    def test_case_insensitive(self):
+        text = "Coffee and COFFEE and coffee."
+        passed, reason = anti_pattern_overreference(text)
+        assert passed is False
