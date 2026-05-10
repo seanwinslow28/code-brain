@@ -188,3 +188,23 @@ def git_revert_skill_md(repo_root: Path, skill_md_path: Path) -> None:
         ["git", "-C", str(repo_root), "checkout", "--", str(skill_md_path)],
         check=True, capture_output=True,
     )
+
+
+RESULTS_HEADER = (
+    "iteration", "timestamp", "mutation_section", "mutation_summary",
+    "train_score", "holdout_score", "surprise_score",
+    "criterion_substack_format_intro", "criterion_anti_pattern_overreference",
+    "criterion_stylometric_distance", "criterion_signature_move_present",
+    "criterion_sounds_like_sean", "criterion_no_anti_pattern_violation",
+    "moving_avg", "delta_vs_best", "kept_or_reverted",
+    "tripwires_triggered", "sonnet_qwen_agreement", "duration_sec", "cost_usd",
+)
+
+
+def write_results_row(path: Path, row: dict) -> None:
+    """Append one row to results.tsv. Writes the header on first invocation."""
+    write_header = not path.exists()
+    with open(path, "a") as f:
+        if write_header:
+            f.write("\t".join(RESULTS_HEADER) + "\n")
+        f.write("\t".join(str(row.get(k, "")) for k in RESULTS_HEADER) + "\n")
