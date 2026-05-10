@@ -57,3 +57,35 @@ def preflight_checks(config: SkillOptimizerConfig) -> tuple[bool, str]:
         return False, "stylometric threshold not yet calibrated (run calibrate_stylometry_threshold.py)"
 
     return True, "ok"
+
+
+def generate_outputs(
+    client,
+    skill_md_text: str,
+    prompts: list[dict],
+    runs_per_prompt: int,
+    model: str = "claude-opus-4-7",
+    max_tokens: int = 600,
+) -> dict[str, list[dict]]:
+    """Run `runs_per_prompt` generations for each prompt; return outputs keyed by prompt id.
+
+    Each output: {"text": str, "input_tokens": int, "output_tokens": int}
+    The skill_md_text is loaded as a system prompt so the generation model behaves
+    as if it had loaded the writing-voice-modes skill.
+    """
+    outputs: dict[str, list[dict]] = {}
+    for prompt in prompts:
+        outputs[prompt["id"]] = []
+        for _ in range(runs_per_prompt):
+            msg = client.messages.create(
+                model=model,
+                max_tokens=max_tokens,
+                system=skill_md_text,
+                messages=[{"role": "user", "content": prompt["prompt"]}],
+            )
+            outputs[prompt["id"]].append({
+                "text": msg.content[0].text,
+                "input_tokens": msg.usage.input_tokens,
+                "output_tokens": msg.usage.output_tokens,
+            })
+    return outputs
