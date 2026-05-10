@@ -7,6 +7,8 @@ from agents.skill_optimizer import (
     SkillOptimizerConfig,
     generate_outputs,
     score_outputs,
+    git_commit_mutation,
+    git_revert_skill_md,
 )
 
 
@@ -120,3 +122,17 @@ class TestScoreOutputs:
         assert score["max_score"] == 12
         assert score["per_criterion"]["substack_format_intro"] == 1.0
         assert score["per_criterion"]["anti_pattern_overreference"] == 0.0
+
+
+class TestGitOps:
+    def test_revert_restores_original(self, tmp_path):
+        subprocess.run(["git", "init", str(tmp_path)], check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(tmp_path), "config", "user.email", "x@x.com"], check=True)
+        subprocess.run(["git", "-C", str(tmp_path), "config", "user.name", "x"], check=True)
+        f = tmp_path / "skill.md"
+        f.write_text("original")
+        subprocess.run(["git", "-C", str(tmp_path), "add", "skill.md"], check=True, capture_output=True)
+        subprocess.run(["git", "-C", str(tmp_path), "commit", "-m", "init"], check=True, capture_output=True)
+        f.write_text("modified")
+        git_revert_skill_md(tmp_path, f)
+        assert f.read_text() == "original"
