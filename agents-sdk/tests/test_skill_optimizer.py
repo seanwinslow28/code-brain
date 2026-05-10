@@ -1,6 +1,6 @@
 """Integration-shaped tests for skill_optimizer agent."""
 import subprocess
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 import pytest
 from agents.skill_optimizer import (
     preflight_checks,
@@ -19,6 +19,10 @@ from agents.skill_optimizer import (
     _load_anchors,
     _build_row,
     _build_snapshot,
+    _build_ollama_client,
+    _run_structural_checks,
+    _run_judge,
+    _sonnet_check,
 )
 
 
@@ -406,3 +410,93 @@ class TestBuildSnapshot:
         assert snap.score_gain_vs_baseline == pytest.approx(0.20)
         assert snap.skill_md_token_count == 600
         assert snap.skill_md_token_count_baseline == 400
+
+
+class TestBuildOllamaClient:
+    def test_returns_object_with_complete_method(self):
+        config = MagicMock()
+        config.ollama_base_url = "http://localhost:5050"
+        client = _build_ollama_client(config)
+        assert hasattr(client, "complete")
+
+    @patch("agents.skill_optimizer.httpx")
+    def test_complete_calls_ollama_generate_endpoint(self, mock_httpx):
+        mock_httpx.post.return_value.json.return_value = {"response": "YES"}
+        mock_httpx.post.return_value.raise_for_status = MagicMock()
+        config = MagicMock()
+        config.ollama_base_url = "http://localhost:5050"
+        client = _build_ollama_client(config)
+        result = client.complete(prompt="test", model="qwen3-14b-research:latest", temperature=0.0, seed=0)
+        assert result == "YES"
+        # Verify URL pattern.
+        call_args = mock_httpx.post.call_args
+        assert "/api/generate" in call_args[0][0]
+
+
+class TestRunStructuralChecks:
+    def test_returns_per_prompt_per_run_results(self):
+        outputs = {
+            "p1": [{"text": "First paragraph " * 30 + ".\n\nSecond para.\n\nClose it."}],
+            "p2": [{"text": "Too short.\n\nx."}],
+        }
+        baseline = {
+            "sentence_length_mean": 10.0,
+            "sentence_length_stdev": 3.0,
+            "comma_density_per_100w": 5.0,
+            "em_dash_density_per_100w": 1.0,
+            "first_person_freq_per_100w": 3.0,
+            "_stdevs": {
+                "sentence_length_mean": 2.0,
+                "sentence_length_stdev": 1.0,
+                "comma_density_per_100w": 1.5,
+                "em_dash_density_per_100w": 0.5,
+                "first_person_freq_per_100w": 1.0,
+            },
+            "_ngrams": [],
+            "_threshold": 100.0,  # very lenient threshold
+        }
+        results = _run_structural_checks(outputs, baseline)
+        assert "p1" in results and "p2" in results
+        # p1's output has good first paragraph; p2's is too short → fails substack_format.
+        assert results["p2"][0]["substack_format_intro"] is False
+
+
+class TestRunJudge:
+    def test_invokes_single_judge_for_non_ensemble_criterion(self):
+        judge = MagicMock()
+        judge.judge_single.return_value = MagicMock(passed=True)
+        judge.judge_ensemble.return_value = MagicMock(passed=False)
+        outputs = {"p1": [{"text": "x"}]}
+        evals = {
+            "training_prompts": [{"id": "p1", "prompt": "...", "mode": "sean"}],
+            "holdout_prompts": [],
+            "llm_judge_criteria": [
+                {"id": "signature_move_present", "ensemble": False, "question": "?"},
+                {"id": "sounds_like_sean", "ensemble": True, "n_judges": 3, "question": "?"},
+            ],
+        }
+        anchors = {"sean": ["a", "b", "c", "d"]}
+        results = _run_judge(judge, outputs, evals, anchors)
+        # signature_move_present: True (single); sounds_like_sean: False (ensemble).
+        assert results["p1"][0]["signature_move_present"] is True
+        assert results["p1"][0]["sounds_like_sean"] is False
+
+
+class TestSonnetCheck:
+    def test_returns_agreement_rate(self):
+        judge = MagicMock()
+        # Judge returns True for the local sample, then compute_sonnet_agreement returns 0.8.
+        judge.judge_single.return_value = MagicMock(passed=True)
+        judge.compute_sonnet_agreement.return_value = 0.8
+        outputs = {"p1": [{"text": "x"}, {"text": "y"}, {"text": "z"}]}
+        evals = {
+            "training_prompts": [{"id": "p1", "prompt": "...", "mode": "sean"}],
+            "holdout_prompts": [],
+            "llm_judge_criteria": [
+                {"id": "sounds_like_sean", "ensemble": True, "n_judges": 3, "question": "Q"},
+            ],
+        }
+        with patch("agents.skill_optimizer._load_anchors") as mock_anchors:
+            mock_anchors.return_value = {"sean": ["a", "b", "c", "d"]}
+            agreement = _sonnet_check(judge, outputs, evals, sample_rate=1.0)
+        assert agreement == 0.8

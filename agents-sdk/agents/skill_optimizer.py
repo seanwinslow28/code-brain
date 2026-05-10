@@ -220,7 +220,9 @@ def write_results_row(path: Path, row: dict) -> None:
 
 
 import datetime
+import random as _random
 import time
+import httpx
 import yaml
 from anthropic import Anthropic
 
@@ -366,8 +368,36 @@ def run_optimization_loop(config: SkillOptimizerConfig, dry_run: bool = False) -
 # Helper function placeholders — fully implemented in Tasks 4.7, 4.8, 4.9.
 # These NotImplementedError stubs let skill_optimizer.py import cleanly so other
 # tests can exercise pre-flight + scoring + git ops independently.
-def _build_ollama_client(config):
-    raise NotImplementedError("implemented in Task 4.9")
+class _OllamaClient:
+    """Minimal Ollama HTTP client exposing a `.complete(...)` method matching JudgeRunner's protocol."""
+
+    def __init__(self, base_url: str):
+        self.base_url = base_url.rstrip("/")
+
+    def complete(
+        self,
+        prompt: str,
+        model: str = "qwen3-14b-research:latest",
+        temperature: float = 0.0,
+        seed: int = 0,
+    ) -> str:
+        response = httpx.post(
+            f"{self.base_url}/api/generate",
+            json={
+                "model": model,
+                "prompt": prompt,
+                "stream": False,
+                "options": {"temperature": temperature, "seed": seed},
+            },
+            timeout=120,
+        )
+        response.raise_for_status()
+        return response.json()["response"]
+
+
+def _build_ollama_client(config) -> "_OllamaClient":
+    base_url = getattr(config, "ollama_base_url", "http://localhost:5050")
+    return _OllamaClient(base_url=base_url)
 
 def _read_recent_rows(path: Path, n: int) -> list[dict]:
     """Return the last `n` rows from a TSV with header. Empty list if missing."""
@@ -402,11 +432,73 @@ def _worst_criteria(rows: list[dict]) -> list[str]:
     scored.sort()  # ascending — worst (lowest) first
     return [name for _, name in scored[:3]]
 
-def _run_structural_checks(outputs, baseline):
-    raise NotImplementedError("implemented in Task 4.9")
+def _run_structural_checks(
+    outputs: dict[str, list[dict]],
+    baseline: dict,
+) -> dict[str, list[dict[str, bool]]]:
+    """Apply the 3 structural checks to every output. Returns results keyed by prompt_id."""
+    threshold = baseline["_threshold"]
+    results: dict[str, list[dict[str, bool]]] = {}
+    for prompt_id, runs in outputs.items():
+        results[prompt_id] = []
+        for run in runs:
+            text = run["text"]
+            r1, _ = substack_format_intro(text)
+            r2, _ = anti_pattern_overreference(text)
+            r3, _ = stylometric_distance(text, baseline, threshold)
+            results[prompt_id].append({
+                "substack_format_intro": r1,
+                "anti_pattern_overreference": r2,
+                "stylometric_distance": r3,
+            })
+    return results
 
-def _run_judge(judge, outputs, evals, mode_anchors):
-    raise NotImplementedError("implemented in Task 4.9")
+
+def _run_judge(
+    judge: JudgeRunner,
+    outputs: dict[str, list[dict]],
+    evals: dict,
+    mode_anchors: dict[str, list[str]],
+) -> dict[str, list[dict[str, bool]]]:
+    """Apply LLM-judge criteria to every output. Mixes single + ensemble judges per criterion config."""
+    prompt_modes = {
+        p["id"]: p["mode"]
+        for p in (evals.get("training_prompts", []) + evals.get("holdout_prompts", []))
+    }
+    judge_criteria = evals["llm_judge_criteria"]
+
+    results: dict[str, list[dict[str, bool]]] = {}
+    for prompt_id, runs in outputs.items():
+        results[prompt_id] = []
+        mode = prompt_modes.get(prompt_id, "sean")
+        anchors = list(mode_anchors.get(mode, []))
+        if len(anchors) < 4:
+            anchors.extend(mode_anchors.get("sean", []))
+        anchors = anchors[:8]  # cap to keep token cost bounded
+
+        for run in runs:
+            text = run["text"]
+            run_result: dict[str, bool] = {}
+            for crit in judge_criteria:
+                if crit.get("ensemble"):
+                    er = judge.judge_ensemble(
+                        output=text,
+                        anchors=anchors,
+                        question=crit["question"],
+                        mode=mode,
+                        n_judges=crit.get("n_judges", 3),
+                    )
+                    run_result[crit["id"]] = er.passed
+                else:
+                    jr = judge.judge_single(
+                        output=text,
+                        anchors=anchors[:2],
+                        question=crit["question"],
+                        mode=mode,
+                    )
+                    run_result[crit["id"]] = jr.passed
+            results[prompt_id].append(run_result)
+    return results
 
 def _load_anchors() -> dict[str, list[str]]:
     """Parse voice-samples.md and group anchor snippets by mode.
@@ -448,8 +540,58 @@ def _load_anchors() -> dict[str, list[str]]:
 
     return by_mode
 
-def _sonnet_check(judge, outputs, evals):
-    raise NotImplementedError("implemented in Task 4.9")
+def _sonnet_check(
+    judge: JudgeRunner,
+    outputs: dict[str, list[dict]],
+    evals: dict,
+    sample_rate: float = 0.10,
+) -> float:
+    """Re-judge a `sample_rate` fraction of outputs with Sonnet on the most-subjective criterion.
+
+    Returns the agreement rate (1.0 = perfect agreement, 0.0 = total disagreement).
+    Uses `sounds_like_sean` as the canonical subjective criterion per spec.
+    """
+    flat: list[tuple[str, str]] = []
+    for prompt_id, runs in outputs.items():
+        for run in runs:
+            flat.append((prompt_id, run["text"]))
+    if not flat:
+        return 1.0
+
+    sample_n = max(1, int(len(flat) * sample_rate))
+    sample = _random.sample(flat, sample_n)
+
+    sounds_q = next(
+        (c["question"] for c in evals["llm_judge_criteria"] if c["id"] == "sounds_like_sean"),
+        None,
+    )
+    if not sounds_q:
+        return 1.0
+
+    anchors_by_mode = _load_anchors()
+    prompt_modes = {
+        p["id"]: p["mode"]
+        for p in (evals["training_prompts"] + evals.get("holdout_prompts", []))
+    }
+
+    local_results: list[bool] = []
+    sample_outputs: list[str] = []
+    sample_anchors: list[list[str]] = []
+    for prompt_id, text in sample:
+        mode = prompt_modes.get(prompt_id, "sean")
+        anchors = anchors_by_mode.get(mode, anchors_by_mode.get("sean", []))[:2]
+        local_jr = judge.judge_single(text, anchors, sounds_q, mode)
+        local_results.append(local_jr.passed)
+        sample_outputs.append(text)
+        sample_anchors.append(anchors)
+
+    return judge.compute_sonnet_agreement(
+        outputs=sample_outputs,
+        anchors_per_output=sample_anchors,
+        question=sounds_q,
+        mode="sean",
+        local_results=local_results,
+    )
 
 def _build_snapshot(
     iteration: int,
