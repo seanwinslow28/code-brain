@@ -130,6 +130,41 @@ def score_outputs(
     }
 
 
+_MUTATION_BODY_RE = re.compile(
+    r"<<<MODIFIED_SKILL_MD>>>\s*\n(.*?)\n<<<END_MODIFIED_SKILL_MD>>>",
+    re.DOTALL,
+)
+_MUTATION_HEADING_RE = re.compile(r"^SECTION_HEADING:\s*(.+?)\s*$", re.MULTILINE)
+_MUTATION_RATIONALE_RE = re.compile(r"^RATIONALE:\s*(.+?)\s*$", re.MULTILINE)
+
+
+def _parse_mutation_response(raw: str) -> tuple[str, str, str]:
+    """Parse a propose_mutation response. Tries the delimited-block format first,
+    falls back to the old JSON format. Raises ValueError if neither shape matches.
+
+    Delimited format (preferred — multi-line markdown body never needs JSON-escaping):
+        SECTION_HEADING: <heading>
+        RATIONALE: <≤200 chars>
+        <<<MODIFIED_SKILL_MD>>>
+        <full SKILL.md>
+        <<<END_MODIFIED_SKILL_MD>>>
+    """
+    body_m = _MUTATION_BODY_RE.search(raw)
+    if body_m:
+        heading_m = _MUTATION_HEADING_RE.search(raw)
+        rationale_m = _MUTATION_RATIONALE_RE.search(raw)
+        if not heading_m or not rationale_m:
+            raise ValueError("delimited-format response missing SECTION_HEADING or RATIONALE")
+        return heading_m.group(1), rationale_m.group(1), body_m.group(1)
+
+    # Fallback: legacy JSON shape.
+    raw = raw.strip()
+    if raw.startswith("```"):
+        raw = raw.split("```", 2)[1].lstrip("json").strip()
+    parsed = json.loads(raw)
+    return parsed["section_heading"], parsed["rationale"], parsed["modified_skill_md_full_text"]
+
+
 def propose_mutation(
     optimizer_client,
     program_md: str,
@@ -149,7 +184,7 @@ def propose_mutation(
         f"{json.dumps(recent_results, indent=2)}\n\n"
         f"## Worst-scoring criteria last iteration\n\n"
         f"{', '.join(worst_criteria)}\n\n"
-        f"Propose ONE mutation. Respond with the JSON object specified in your instructions."
+        f"Propose ONE mutation. Use the delimited-block format from your instructions."
     )
     msg = optimizer_client.messages.create(
         model=model,
@@ -157,12 +192,8 @@ def propose_mutation(
         system=program_md,
         messages=[{"role": "user", "content": user_msg}],
     )
-    raw = msg.content[0].text.strip()
-    # Strip optional markdown fence.
-    if raw.startswith("```"):
-        raw = raw.split("```", 2)[1].lstrip("json").strip()
-    parsed = json.loads(raw)
-    return parsed["section_heading"], parsed["rationale"], parsed["modified_skill_md_full_text"]
+    raw = msg.content[0].text
+    return _parse_mutation_response(raw)
 
 
 def git_commit_mutation(
