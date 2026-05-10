@@ -20,10 +20,10 @@
 | 1 | Pure-function lib modules (structural checks, stylometry, mutation guard, decision, trip-wires) — TDD | 8 | After Phase 1 — full pytest green before judge work |
 | 2 | LLM-judge runner (Qwen3-14B local + Sonnet sample-check + 3-judge ensemble) | 3 | After Phase 2 — judge calibrated against hand-labels |
 | 3 | Eval data + judge templates (evals.yaml, sealed.yaml, program.md, judge_prompt.txt, baselines) | 6 | After Phase 3 — all pre-flight data files locked |
-| 4 | Orchestrator (skill_optimizer.py — pre-flight checks → generation → score → decide → log → halt) | 6 | After Phase 4 — dry-run completes end-to-end |
+| 4 | Orchestrator skeleton + 12 helpers (preflight, generation, scoring, mutation/git, results.tsv, main loop, utility helpers, data-layer helpers, external-call helpers) | 9 | After Phase 4 — dry-run completes end-to-end |
 | 5 | Integration validation + docs + first live run | 3 | Final |
 
-**Total: 30 tasks, ~12-16 hours of implementation work** (excluding the wall-clock time of the optimization run itself, which is ~9-13 hours).
+**Total: 33 tasks, ~14-18 hours of implementation work** (excluding the wall-clock time of the optimization run itself, which is ~9-13 hours).
 
 ---
 
@@ -3104,20 +3104,44 @@ def run_optimization_loop(config: SkillOptimizerConfig, dry_run: bool = False) -
     print(f"loop complete after {iteration} iterations")
 
 
-# Helper stubs (full implementations omitted from task — these are straightforward
-# wiring calls; implement them as you encounter usage). Each is < 30 lines.
-def _build_ollama_client(config): ...
-def _read_recent_rows(path, n): ...
-def _worst_criteria(rows): ...
-def _run_structural_checks(outputs, baseline): ...
-def _run_judge(judge, outputs, evals, mode_anchors): ...
-def _load_anchors(): ...
-def _sonnet_check(judge, outputs, evals): ...
-def _build_snapshot(*args, **kwargs): ...
-def _build_row(*args, **kwargs): ...
-def _llm_judge_avg(per_criterion): ...
-def _diversity(outputs): ...
-def _plateau(scores, n): ...
+# Helper function placeholders — fully implemented in Tasks 4.7, 4.8, 4.9.
+# These NotImplementedError stubs let skill_optimizer.py import cleanly so other
+# tests can exercise pre-flight + scoring + git ops independently.
+def _build_ollama_client(config):
+    raise NotImplementedError("implemented in Task 4.9")
+
+def _read_recent_rows(path, n):
+    raise NotImplementedError("implemented in Task 4.8")
+
+def _worst_criteria(rows):
+    raise NotImplementedError("implemented in Task 4.7")
+
+def _run_structural_checks(outputs, baseline):
+    raise NotImplementedError("implemented in Task 4.9")
+
+def _run_judge(judge, outputs, evals, mode_anchors):
+    raise NotImplementedError("implemented in Task 4.9")
+
+def _load_anchors():
+    raise NotImplementedError("implemented in Task 4.8")
+
+def _sonnet_check(judge, outputs, evals):
+    raise NotImplementedError("implemented in Task 4.9")
+
+def _build_snapshot(*args, **kwargs):
+    raise NotImplementedError("implemented in Task 4.8")
+
+def _build_row(*args, **kwargs):
+    raise NotImplementedError("implemented in Task 4.8")
+
+def _llm_judge_avg(per_criterion):
+    raise NotImplementedError("implemented in Task 4.7")
+
+def _diversity(outputs):
+    raise NotImplementedError("implemented in Task 4.7")
+
+def _plateau(scores, n):
+    raise NotImplementedError("implemented in Task 4.7")
 
 
 class _DummyClient:
@@ -3155,36 +3179,873 @@ if __name__ == "__main__":
     run_optimization_loop(config, dry_run=args.dry_run)
 ```
 
-> **Note on the helper stubs:** The 12 `...` stubs (`_build_ollama_client`, `_read_recent_rows`, etc.) are intentionally listed as a checklist. Each is a small wiring function (< 30 lines). Implement them as a single follow-up commit by replacing each stub with its straightforward body. Don't skip the stubs — they are part of this task. Use TDD: each stub gets a small unit test. The test file already imports them via `from agents_sdk.agents.skill_optimizer import run_optimization_loop` once they exist.
+> **Note:** The 12 helper functions (`_build_ollama_client`, `_read_recent_rows`, etc.) are stubs raising `NotImplementedError`. They are fully implemented in Tasks 4.7, 4.8, and 4.9 with TDD. This task only ships the `run_optimization_loop` skeleton + CLI entry; the helpers come next.
 
-- [ ] **Step 2: Implement each helper stub one at a time, writing a small test for each**
+- [ ] **Step 2: Verify the file imports cleanly with NotImplementedError stubs**
 
-For each of the 12 stubs, write a focused test (1-3 cases each), implement the body, run pytest, commit. Example for `_plateau`:
+Run: `cd agents-sdk && PYTHONPATH=. python3 -c "from agents.skill_optimizer import run_optimization_loop, SkillOptimizerConfig; print('imports ok')"`
+Expected: `imports ok`
 
-Test:
-```python
-def test_plateau_detects_three_flat_iterations():
-    from agents_sdk.agents.skill_optimizer import _plateau
-    assert _plateau([0.7, 0.7, 0.7], n=3) is True
-    assert _plateau([0.7, 0.71, 0.7], n=3) is False
+- [ ] **Step 3: Commit the main loop skeleton**
+
+```bash
+git add agents-sdk/agents/skill_optimizer.py agents-sdk/tests/test_skill_optimizer.py
+git commit -m "feat(skill_optimizer): run_optimization_loop skeleton with helper stubs + CLI entry"
 ```
 
-Implementation:
+---
+
+### Task 4.7: Utility helpers (`_plateau`, `_llm_judge_avg`, `_diversity`, `_worst_criteria`)
+
+**Files:**
+- Modify: `agents-sdk/agents/skill_optimizer.py`
+- Modify: `agents-sdk/tests/test_skill_optimizer.py`
+
+These are pure functions — no I/O, no external dependencies. Test all four together; implement all four together.
+
+- [ ] **Step 1: Write the failing tests (append to test file)**
+
+Append to `agents-sdk/tests/test_skill_optimizer.py`:
 ```python
+from agents_sdk.agents.skill_optimizer import (
+    _plateau,
+    _llm_judge_avg,
+    _diversity,
+    _worst_criteria,
+)
+
+
+class TestPlateau:
+    def test_returns_false_below_window(self):
+        assert _plateau([0.7, 0.7], n=3) is False
+
+    def test_returns_true_when_flat(self):
+        assert _plateau([0.7, 0.7, 0.7], n=3) is True
+
+    def test_returns_true_within_tolerance(self):
+        # Spread of 0.003 is below the 0.005 default tolerance.
+        assert _plateau([0.700, 0.701, 0.703], n=3) is True
+
+    def test_returns_false_with_real_movement(self):
+        assert _plateau([0.70, 0.75, 0.80], n=3) is False
+
+
+class TestLLMJudgeAvg:
+    def test_averages_only_judge_criteria(self):
+        per = {
+            "substack_format_intro": 1.0,        # structural — ignored
+            "anti_pattern_overreference": 1.0,   # structural — ignored
+            "stylometric_distance": 1.0,          # structural — ignored
+            "signature_move_present": 0.6,
+            "sounds_like_sean": 0.4,
+            "no_anti_pattern_violation": 0.8,
+        }
+        assert _llm_judge_avg(per) == pytest.approx((0.6 + 0.4 + 0.8) / 3)
+
+    def test_handles_missing_keys_as_zero(self):
+        assert _llm_judge_avg({}) == 0.0
+
+
+class TestDiversity:
+    def test_high_similarity_when_outputs_identical(self):
+        outputs = {
+            "p1": [
+                {"text": "the quick brown fox jumps over the lazy dog every morning"},
+                {"text": "the quick brown fox jumps over the lazy dog every morning"},
+            ]
+        }
+        assert _diversity(outputs) > 0.95
+
+    def test_low_similarity_when_outputs_diverse(self):
+        outputs = {
+            "p1": [
+                {"text": "the quick brown fox jumps over the lazy dog"},
+                {"text": "completely unrelated prose with different vocabulary words entirely"},
+            ]
+        }
+        assert _diversity(outputs) < 0.5
+
+    def test_returns_zero_when_only_one_run_per_prompt(self):
+        outputs = {"p1": [{"text": "only one run here"}]}
+        assert _diversity(outputs) == 0.0
+
+
+class TestWorstCriteria:
+    def test_returns_top_n_worst_from_last_row(self):
+        rows = [{
+            "criterion_substack_format_intro": "0.95",
+            "criterion_anti_pattern_overreference": "0.90",
+            "criterion_stylometric_distance": "0.50",
+            "criterion_signature_move_present": "0.70",
+            "criterion_sounds_like_sean": "0.40",
+            "criterion_no_anti_pattern_violation": "0.85",
+        }]
+        worst = _worst_criteria(rows)
+        # Three lowest: sounds_like_sean (0.40), stylometric_distance (0.50), signature_move_present (0.70)
+        assert worst[0] == "sounds_like_sean"
+        assert worst[1] == "stylometric_distance"
+        assert worst[2] == "signature_move_present"
+
+    def test_returns_empty_for_no_rows(self):
+        assert _worst_criteria([]) == []
+
+    def test_skips_non_numeric_columns(self):
+        rows = [{"criterion_substack_format_intro": "0.95", "iteration": "5"}]
+        worst = _worst_criteria(rows)
+        assert worst == ["substack_format_intro"]
+```
+
+- [ ] **Step 2: Run tests to verify failure**
+
+Run: `cd agents-sdk && PYTHONPATH=. pytest tests/test_skill_optimizer.py -v -k "Plateau or LLMJudgeAvg or Diversity or WorstCriteria"`
+Expected: FAIL — `NotImplementedError` raised.
+
+- [ ] **Step 3: Replace each NotImplementedError stub with the real implementation**
+
+In `agents-sdk/agents/skill_optimizer.py`, replace the four utility stubs:
+
+```python
+import math
+
+
 def _plateau(scores: list[float], n: int = 3, tol: float = 0.005) -> bool:
+    """True when the last `n` scores are within `tol` of each other (no improvement)."""
     if len(scores) < n:
         return False
     tail = scores[-n:]
     return max(tail) - min(tail) <= tol
+
+
+def _llm_judge_avg(per_criterion: dict[str, float]) -> float:
+    """Mean of just the LLM-judge criteria (excludes structural)."""
+    keys = ("signature_move_present", "sounds_like_sean", "no_anti_pattern_violation")
+    vals = [per_criterion.get(k, 0.0) for k in keys]
+    return sum(vals) / len(vals) if vals else 0.0
+
+
+def _char_trigram_bag(text: str) -> dict[str, int]:
+    text = text.lower()
+    bag: dict[str, int] = {}
+    for i in range(len(text) - 2):
+        tri = text[i : i + 3]
+        bag[tri] = bag.get(tri, 0) + 1
+    return bag
+
+
+def _cosine(a: dict[str, int], b: dict[str, int]) -> float:
+    common = set(a.keys()) & set(b.keys())
+    dot = sum(a[k] * b[k] for k in common)
+    na = math.sqrt(sum(v * v for v in a.values()))
+    nb = math.sqrt(sum(v * v for v in b.values()))
+    return dot / (na * nb) if na and nb else 0.0
+
+
+def _diversity(outputs: dict[str, list[dict]]) -> float:
+    """Average inter-run cosine similarity over character trigrams.
+
+    Higher = more similar (entropy collapse — a tripwire signal). Returns 0.0
+    when no prompt has at least 2 runs to compare.
+    """
+    sims = []
+    for _prompt_id, runs in outputs.items():
+        if len(runs) < 2:
+            continue
+        bags = [_char_trigram_bag(r["text"]) for r in runs]
+        for i in range(len(bags)):
+            for j in range(i + 1, len(bags)):
+                sims.append(_cosine(bags[i], bags[j]))
+    return sum(sims) / len(sims) if sims else 0.0
+
+
+def _worst_criteria(rows: list[dict]) -> list[str]:
+    """Return the 3 criterion names with the lowest scores in the most recent row."""
+    if not rows:
+        return []
+    last = rows[-1]
+    scored = []
+    for k, v in last.items():
+        if not k.startswith("criterion_"):
+            continue
+        try:
+            scored.append((float(v), k.removeprefix("criterion_")))
+        except (ValueError, TypeError):
+            continue
+    scored.sort()  # ascending — worst (lowest) first
+    return [name for _, name in scored[:3]]
 ```
 
-Repeat for: `_build_ollama_client`, `_read_recent_rows`, `_worst_criteria`, `_run_structural_checks`, `_run_judge`, `_load_anchors`, `_sonnet_check`, `_build_snapshot`, `_build_row`, `_llm_judge_avg`, `_diversity`. Each stub is a self-contained mini-task; budget ~5-10 minutes per stub.
+- [ ] **Step 4: Run tests to verify they pass**
 
-- [ ] **Step 3: Final commit when all helpers are implemented + tested**
+Run: `cd agents-sdk && PYTHONPATH=. pytest tests/test_skill_optimizer.py -v -k "Plateau or LLMJudgeAvg or Diversity or WorstCriteria"`
+Expected: 12 PASS
+
+- [ ] **Step 5: Commit**
 
 ```bash
 git add agents-sdk/agents/skill_optimizer.py agents-sdk/tests/test_skill_optimizer.py
-git commit -m "feat(skill_optimizer): main loop + 12 helper functions + CLI entry"
+git commit -m "feat(skill_optimizer): implement utility helpers (plateau, judge_avg, diversity, worst_criteria)"
+```
+
+---
+
+### Task 4.8: Data layer helpers (`_read_recent_rows`, `_load_anchors`, `_build_row`, `_build_snapshot`)
+
+**Files:**
+- Modify: `agents-sdk/agents/skill_optimizer.py`
+- Modify: `agents-sdk/tests/test_skill_optimizer.py`
+
+These touch files (results.tsv, voice-samples.md) and shape dicts for downstream consumers (results.tsv writer, IterationSnapshot).
+
+- [ ] **Step 1: Write the failing tests**
+
+Append to `agents-sdk/tests/test_skill_optimizer.py`:
+```python
+from agents_sdk.agents.skill_optimizer import (
+    _read_recent_rows,
+    _load_anchors,
+    _build_row,
+    _build_snapshot,
+    RESULTS_HEADER,
+)
+
+
+class TestReadRecentRows:
+    def test_returns_empty_when_file_missing(self, tmp_path):
+        assert _read_recent_rows(tmp_path / "missing.tsv", n=5) == []
+
+    def test_returns_last_n_rows(self, tmp_path):
+        path = tmp_path / "r.tsv"
+        path.write_text("a\tb\n1\t2\n3\t4\n5\t6\n")
+        rows = _read_recent_rows(path, n=2)
+        assert len(rows) == 2
+        assert rows[-1]["a"] == "5"
+
+    def test_returns_all_rows_when_n_exceeds_count(self, tmp_path):
+        path = tmp_path / "r.tsv"
+        path.write_text("a\tb\n1\t2\n")
+        rows = _read_recent_rows(path, n=10)
+        assert len(rows) == 1
+
+
+class TestLoadAnchors:
+    def test_returns_dict_with_all_modes(self, tmp_path, monkeypatch):
+        # Fake voice-samples.md with one section per mode.
+        fake_samples = tmp_path / "voice-samples.md"
+        fake_samples.write_text(
+            "# Samples\n\n"
+            "### Sedaris Sample One\n"
+            "> Mundane accumulation example with enough words to count as content easily here.\n\n"
+            "**Why it works:** explanation\n\n"
+            "### Thompson Gonzo Example\n"
+            "I DEPLOYED TO PRODUCTION at 11:47 PM and everything broke instantly afterwards.\n\n"
+            "### Kerouac Beat Flow Sample\n"
+            "And the ferry — the slow gray crossing — and the cold coffee in my hand.\n\n"
+            "### Vonnegut Minimalist Closer\n"
+            "It sounds the same as it always did. I sound different. I have begun.\n\n"
+        )
+        # Patch the module-level path constant.
+        from agents_sdk.agents import skill_optimizer
+        monkeypatch.setattr(
+            skill_optimizer,
+            "_VOICE_SAMPLES_PATH",
+            fake_samples,
+        )
+        anchors = _load_anchors()
+        assert "sedaris" in anchors and len(anchors["sedaris"]) >= 1
+        assert "gonzo" in anchors and len(anchors["gonzo"]) >= 1
+        assert "kerouac" in anchors and len(anchors["kerouac"]) >= 1
+        assert "vonnegut" in anchors and len(anchors["vonnegut"]) >= 1
+
+    def test_pads_thin_modes_with_sean_fallback(self, tmp_path, monkeypatch):
+        fake_samples = tmp_path / "voice-samples.md"
+        fake_samples.write_text(
+            "# Samples\n\n"
+            "### Sean general voice sample\n"
+            "Some Sean voice prose here that has at least thirty words so the parser keeps it.\n\n"
+            "Another Sean snippet that the parser will treat as separate from above one.\n\n"
+        )
+        from agents_sdk.agents import skill_optimizer
+        monkeypatch.setattr(skill_optimizer, "_VOICE_SAMPLES_PATH", fake_samples)
+        anchors = _load_anchors()
+        # Even though no Sedaris-tagged samples exist, sedaris key is non-empty (padded).
+        assert len(anchors["sedaris"]) >= 2
+
+
+class TestBuildRow:
+    def test_includes_all_header_fields(self):
+        train_result = {
+            "per_criterion": {
+                "substack_format_intro": 0.9,
+                "anti_pattern_overreference": 0.8,
+                "stylometric_distance": 0.7,
+                "signature_move_present": 0.6,
+                "sounds_like_sean": 0.5,
+                "no_anti_pattern_violation": 0.4,
+            },
+        }
+        row = _build_row(
+            iteration=3,
+            section="### Beat Flow Mode",
+            rationale="tightened jewel-center bullet",
+            train_score=0.65,
+            holdout_score=0.60,
+            surprise_outputs={},
+            train_result=train_result,
+            moving_avg=0.62,
+            decision_info={"delta_mean": 0.05},
+            decision="keep",
+            tripwires=[],
+            sonnet_agreement=0.92,
+            duration_sec=420.5,
+            cost_usd=4.15,
+        )
+        for k in RESULTS_HEADER:
+            assert k in row
+        assert row["iteration"] == 3
+        assert row["mutation_section"] == "### Beat Flow Mode"
+        assert row["kept_or_reverted"] == "keep"
+        assert row["tripwires_triggered"] == ""
+
+    def test_truncates_long_rationale_to_200_chars(self):
+        long_rationale = "x" * 500
+        row = _build_row(
+            iteration=1, section="x", rationale=long_rationale, train_score=0.5,
+            holdout_score=0.5, surprise_outputs={},
+            train_result={"per_criterion": {}}, moving_avg=0.5,
+            decision_info={"delta_mean": 0}, decision="revert", tripwires=[],
+            sonnet_agreement=1.0, duration_sec=1.0, cost_usd=0.0,
+        )
+        assert len(row["mutation_summary"]) == 200
+
+
+class TestBuildSnapshot:
+    def test_uses_current_as_baseline_when_iter1(self):
+        train_result = {
+            "per_criterion": {
+                "stylometric_distance": 0.7,
+                "signature_move_present": 0.6,
+                "sounds_like_sean": 0.5,
+                "no_anti_pattern_violation": 0.5,
+            },
+            "binary_array": [],
+        }
+        snap = _build_snapshot(
+            iteration=1, train_score=0.6, holdout_score=0.55,
+            train_result=train_result, iter1_snapshot=None,
+            sonnet_agreement=0.9, skill_md_text="word " * 500,
+            holdout_history=[], diversity=0.4,
+        )
+        # When iter1, baseline equals current.
+        assert snap.score_gain_vs_baseline == 0.0
+        assert snap.skill_md_token_count == snap.skill_md_token_count_baseline
+
+    def test_carries_iter1_baseline_through(self):
+        iter1 = {
+            "train_score": 0.50,
+            "criterion_scores": {"signature_move_present": 0.5},
+            "skill_md_token_count": 400,
+            "stylometric_score": 0.6,
+            "llm_judge_score": 0.5,
+            "avg_inter_run_similarity": 0.3,
+        }
+        train_result = {
+            "per_criterion": {
+                "stylometric_distance": 0.7,
+                "signature_move_present": 0.7,
+                "sounds_like_sean": 0.7,
+                "no_anti_pattern_violation": 0.7,
+            },
+            "binary_array": [],
+        }
+        snap = _build_snapshot(
+            iteration=5, train_score=0.70, holdout_score=0.65,
+            train_result=train_result, iter1_snapshot=iter1,
+            sonnet_agreement=0.85, skill_md_text="word " * 600,
+            holdout_history=[0.66, 0.65, 0.64], diversity=0.4,
+        )
+        assert snap.score_gain_vs_baseline == pytest.approx(0.20)
+        assert snap.skill_md_token_count == 600
+        assert snap.skill_md_token_count_baseline == 400
+```
+
+- [ ] **Step 2: Run tests to verify failure**
+
+Run: `cd agents-sdk && PYTHONPATH=. pytest tests/test_skill_optimizer.py -v -k "ReadRecentRows or LoadAnchors or BuildRow or BuildSnapshot"`
+Expected: FAIL — `NotImplementedError` or `AttributeError`.
+
+- [ ] **Step 3: Implement the four helpers**
+
+Add the path constant near the top of `agents-sdk/agents/skill_optimizer.py` (just below imports, before any function definitions):
+
+```python
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+_VOICE_SAMPLES_PATH = _REPO_ROOT / ".claude/skills/writing-voice-modes/references/voice-samples.md"
+```
+
+Then replace each NotImplementedError stub:
+
+```python
+import csv
+import re
+from typing import Optional
+
+
+def _read_recent_rows(path: Path, n: int) -> list[dict]:
+    """Return the last `n` rows from a TSV with header. Empty list if missing."""
+    if not path.exists():
+        return []
+    with open(path, newline="") as f:
+        reader = csv.DictReader(f, delimiter="\t")
+        rows = list(reader)
+    return rows[-n:]
+
+
+_MODE_KEYWORDS = {
+    "sedaris": ("sedaris", "domestic observer"),
+    "gonzo": ("thompson", "gonzo"),
+    "kerouac": ("kerouac", "beat flow"),
+    "vonnegut": ("vonnegut", "minimalist"),
+}
+
+
+def _load_anchors() -> dict[str, list[str]]:
+    """Parse voice-samples.md and group anchor snippets by mode.
+
+    Splits on `### ` headings, infers mode from heading text via keyword match,
+    keeps prose snippets ≥ 30 words, truncates to ~150 words. Modes that end up
+    with fewer than 2 anchors are padded with sean-tagged fallbacks so ensemble
+    judges always have ≥ 2 to choose from.
+    """
+    text = _VOICE_SAMPLES_PATH.read_text()
+    sections = re.split(r"\n###\s+", text)
+    by_mode: dict[str, list[str]] = {"sean": [], "sedaris": [], "gonzo": [], "kerouac": [], "vonnegut": []}
+
+    for section in sections[1:]:  # skip preamble
+        heading_line, *rest = section.split("\n", 1)
+        body = rest[0] if rest else ""
+        # Strip "**Why it works:**" annotations and blockquote markers.
+        body = re.sub(r"^\*\*Why.*$", "", body, flags=re.MULTILINE)
+        body = body.replace("> ", "").strip()
+        if len(body.split()) < 30:
+            continue
+        snippet = " ".join(body.split()[:150])
+
+        heading_lower = heading_line.lower()
+        matched = False
+        for mode, kws in _MODE_KEYWORDS.items():
+            if any(kw in heading_lower for kw in kws):
+                by_mode[mode].append(snippet)
+                matched = True
+                break
+        if not matched:
+            by_mode["sean"].append(snippet)
+
+    # Pad thin modes with sean fallback so each mode has ≥ 2 anchors.
+    fallback = by_mode["sean"][:2] if by_mode["sean"] else []
+    for mode in by_mode:
+        while len(by_mode[mode]) < 2 and fallback:
+            by_mode[mode].append(fallback[len(by_mode[mode]) % len(fallback)])
+
+    return by_mode
+
+
+def _build_row(
+    iteration: int,
+    section: str,
+    rationale: str,
+    train_score: float,
+    holdout_score: float,
+    surprise_outputs: dict,
+    train_result: dict,
+    moving_avg: float,
+    decision_info: dict,
+    decision: str,
+    tripwires: list[str],
+    sonnet_agreement: float,
+    duration_sec: float,
+    cost_usd: float,
+) -> dict:
+    """Build a results.tsv row dict matching RESULTS_HEADER."""
+    per = train_result["per_criterion"]
+    surprise_score = ""
+    if surprise_outputs:
+        # Caller computes surprise score externally and passes it in via surprise_outputs["__score"].
+        surprise_score = f"{surprise_outputs.get('__score', 0):.4f}"
+
+    return {
+        "iteration": iteration,
+        "timestamp": datetime.datetime.now().isoformat(timespec="seconds"),
+        "mutation_section": section,
+        "mutation_summary": rationale[:200],
+        "train_score": f"{train_score:.4f}",
+        "holdout_score": f"{holdout_score:.4f}",
+        "surprise_score": surprise_score,
+        "criterion_substack_format_intro": f"{per.get('substack_format_intro', 0):.4f}",
+        "criterion_anti_pattern_overreference": f"{per.get('anti_pattern_overreference', 0):.4f}",
+        "criterion_stylometric_distance": f"{per.get('stylometric_distance', 0):.4f}",
+        "criterion_signature_move_present": f"{per.get('signature_move_present', 0):.4f}",
+        "criterion_sounds_like_sean": f"{per.get('sounds_like_sean', 0):.4f}",
+        "criterion_no_anti_pattern_violation": f"{per.get('no_anti_pattern_violation', 0):.4f}",
+        "moving_avg": f"{moving_avg:.4f}",
+        "delta_vs_best": f"{decision_info.get('delta_mean', 0):.4f}",
+        "kept_or_reverted": decision,
+        "tripwires_triggered": ",".join(tripwires),
+        "sonnet_qwen_agreement": f"{sonnet_agreement:.3f}",
+        "duration_sec": f"{duration_sec:.1f}",
+        "cost_usd": f"{cost_usd:.4f}",
+    }
+
+
+def _build_snapshot(
+    iteration: int,
+    train_score: float,
+    holdout_score: float,
+    train_result: dict,
+    iter1_snapshot: Optional[dict],
+    sonnet_agreement: float,
+    skill_md_text: str,
+    holdout_history: list[float],
+    diversity: float,
+) -> "IterationSnapshot":
+    """Construct an IterationSnapshot for tripwire checks. iter1=None means snapshot self-references."""
+    iter1 = iter1_snapshot or {}
+    current_token_count = len(skill_md_text.split())
+    return IterationSnapshot(
+        iteration=iteration,
+        train_score=train_score,
+        holdout_score=holdout_score,
+        prior_holdout_scores=holdout_history[-3:],
+        criterion_scores=train_result["per_criterion"],
+        criterion_scores_iter1=iter1.get("criterion_scores", train_result["per_criterion"]),
+        stylometric_score=train_result["per_criterion"].get("stylometric_distance", 0.0),
+        stylometric_score_baseline=iter1.get(
+            "stylometric_score",
+            train_result["per_criterion"].get("stylometric_distance", 0.0),
+        ),
+        llm_judge_score=_llm_judge_avg(train_result["per_criterion"]),
+        llm_judge_score_baseline=iter1.get(
+            "llm_judge_score",
+            _llm_judge_avg(train_result["per_criterion"]),
+        ),
+        avg_inter_run_similarity=diversity,
+        avg_inter_run_similarity_baseline=iter1.get("avg_inter_run_similarity", diversity),
+        sonnet_qwen_agreement=sonnet_agreement,
+        skill_md_token_count=current_token_count,
+        skill_md_token_count_baseline=iter1.get("skill_md_token_count", current_token_count),
+        score_gain_vs_baseline=train_score - iter1.get("train_score", train_score),
+    )
+```
+
+- [ ] **Step 4: Run tests to verify they pass**
+
+Run: `cd agents-sdk && PYTHONPATH=. pytest tests/test_skill_optimizer.py -v -k "ReadRecentRows or LoadAnchors or BuildRow or BuildSnapshot"`
+Expected: 9 PASS
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add agents-sdk/agents/skill_optimizer.py agents-sdk/tests/test_skill_optimizer.py
+git commit -m "feat(skill_optimizer): implement data-layer helpers (read_recent_rows, load_anchors, build_row, build_snapshot)"
+```
+
+---
+
+### Task 4.9: External-call helpers (`_build_ollama_client`, `_run_structural_checks`, `_run_judge`, `_sonnet_check`)
+
+**Files:**
+- Modify: `agents-sdk/agents/skill_optimizer.py`
+- Modify: `agents-sdk/tests/test_skill_optimizer.py`
+
+These touch the Ollama HTTP API, the structural_checks module, the judge_runner module, and Sonnet via the Anthropic SDK. All external interactions are mocked in tests.
+
+- [ ] **Step 1: Write the failing tests**
+
+Append to `agents-sdk/tests/test_skill_optimizer.py`:
+```python
+from unittest.mock import MagicMock, patch
+from agents_sdk.agents.skill_optimizer import (
+    _build_ollama_client,
+    _run_structural_checks,
+    _run_judge,
+    _sonnet_check,
+)
+
+
+class TestBuildOllamaClient:
+    def test_returns_object_with_complete_method(self):
+        config = MagicMock()
+        config.ollama_base_url = "http://localhost:5050"
+        client = _build_ollama_client(config)
+        assert hasattr(client, "complete")
+
+    @patch("agents_sdk.agents.skill_optimizer.httpx")
+    def test_complete_calls_ollama_generate_endpoint(self, mock_httpx):
+        mock_httpx.post.return_value.json.return_value = {"response": "YES"}
+        mock_httpx.post.return_value.raise_for_status = MagicMock()
+        config = MagicMock()
+        config.ollama_base_url = "http://localhost:5050"
+        client = _build_ollama_client(config)
+        result = client.complete(prompt="test", model="qwen3-14b-research:latest", temperature=0.0, seed=0)
+        assert result == "YES"
+        # Verify URL pattern.
+        call_args = mock_httpx.post.call_args
+        assert "/api/generate" in call_args[0][0]
+
+
+class TestRunStructuralChecks:
+    def test_returns_per_prompt_per_run_results(self):
+        outputs = {
+            "p1": [{"text": "First paragraph " * 30 + ".\n\nSecond para.\n\nClose it."}],
+            "p2": [{"text": "Too short.\n\nx."}],
+        }
+        baseline = {
+            "sentence_length_mean": 10.0,
+            "sentence_length_stdev": 3.0,
+            "comma_density_per_100w": 5.0,
+            "em_dash_density_per_100w": 1.0,
+            "first_person_freq_per_100w": 3.0,
+            "_stdevs": {
+                "sentence_length_mean": 2.0,
+                "sentence_length_stdev": 1.0,
+                "comma_density_per_100w": 1.5,
+                "em_dash_density_per_100w": 0.5,
+                "first_person_freq_per_100w": 1.0,
+            },
+            "_ngrams": [],
+            "_threshold": 100.0,  # very lenient threshold
+        }
+        results = _run_structural_checks(outputs, baseline)
+        assert "p1" in results and "p2" in results
+        # p1's output has good first paragraph; p2's is too short → fails substack_format.
+        assert results["p2"][0]["substack_format_intro"] is False
+
+
+class TestRunJudge:
+    def test_invokes_single_judge_for_non_ensemble_criterion(self):
+        judge = MagicMock()
+        judge.judge_single.return_value = MagicMock(passed=True)
+        judge.judge_ensemble.return_value = MagicMock(passed=False)
+        outputs = {"p1": [{"text": "x"}]}
+        evals = {
+            "training_prompts": [{"id": "p1", "prompt": "...", "mode": "sean"}],
+            "holdout_prompts": [],
+            "llm_judge_criteria": [
+                {"id": "signature_move_present", "ensemble": False, "question": "?"},
+                {"id": "sounds_like_sean", "ensemble": True, "n_judges": 3, "question": "?"},
+            ],
+        }
+        anchors = {"sean": ["a", "b", "c", "d"]}
+        results = _run_judge(judge, outputs, evals, anchors)
+        # signature_move_present: True (single); sounds_like_sean: False (ensemble).
+        assert results["p1"][0]["signature_move_present"] is True
+        assert results["p1"][0]["sounds_like_sean"] is False
+
+
+class TestSonnetCheck:
+    def test_returns_agreement_rate(self):
+        judge = MagicMock()
+        # Judge returns True for the local sample, then compute_sonnet_agreement returns 0.8.
+        judge.judge_single.return_value = MagicMock(passed=True)
+        judge.compute_sonnet_agreement.return_value = 0.8
+        outputs = {"p1": [{"text": "x"}, {"text": "y"}, {"text": "z"}]}
+        evals = {
+            "training_prompts": [{"id": "p1", "prompt": "...", "mode": "sean"}],
+            "holdout_prompts": [],
+            "llm_judge_criteria": [
+                {"id": "sounds_like_sean", "ensemble": True, "n_judges": 3, "question": "Q"},
+            ],
+        }
+        with patch("agents_sdk.agents.skill_optimizer._load_anchors") as mock_anchors:
+            mock_anchors.return_value = {"sean": ["a", "b", "c", "d"]}
+            agreement = _sonnet_check(judge, outputs, evals, sample_rate=1.0)
+        assert agreement == 0.8
+```
+
+- [ ] **Step 2: Run tests to verify failure**
+
+Run: `cd agents-sdk && PYTHONPATH=. pytest tests/test_skill_optimizer.py -v -k "BuildOllamaClient or RunStructuralChecks or RunJudge or SonnetCheck"`
+Expected: FAIL — `NotImplementedError` raised.
+
+- [ ] **Step 3: Implement the four helpers**
+
+In `agents-sdk/agents/skill_optimizer.py`, add `import httpx` near the top imports (alongside `import yaml`).
+
+Replace the four NotImplementedError stubs:
+
+```python
+import random as _random
+
+
+class _OllamaClient:
+    """Minimal Ollama HTTP client exposing a `.complete(...)` method matching JudgeRunner's protocol."""
+
+    def __init__(self, base_url: str):
+        self.base_url = base_url.rstrip("/")
+
+    def complete(
+        self,
+        prompt: str,
+        model: str = "qwen3-14b-research:latest",
+        temperature: float = 0.0,
+        seed: int = 0,
+    ) -> str:
+        response = httpx.post(
+            f"{self.base_url}/api/generate",
+            json={
+                "model": model,
+                "prompt": prompt,
+                "stream": False,
+                "options": {"temperature": temperature, "seed": seed},
+            },
+            timeout=120,
+        )
+        response.raise_for_status()
+        return response.json()["response"]
+
+
+def _build_ollama_client(config) -> _OllamaClient:
+    base_url = getattr(config, "ollama_base_url", "http://localhost:5050")
+    return _OllamaClient(base_url=base_url)
+
+
+def _run_structural_checks(
+    outputs: dict[str, list[dict]],
+    baseline: dict,
+) -> dict[str, list[dict[str, bool]]]:
+    """Apply the 3 structural checks to every output. Returns results keyed by prompt_id."""
+    threshold = baseline["_threshold"]
+    results: dict[str, list[dict[str, bool]]] = {}
+    for prompt_id, runs in outputs.items():
+        results[prompt_id] = []
+        for run in runs:
+            text = run["text"]
+            r1, _ = substack_format_intro(text)
+            r2, _ = anti_pattern_overreference(text)
+            r3, _ = stylometric_distance(text, baseline, threshold)
+            results[prompt_id].append({
+                "substack_format_intro": r1,
+                "anti_pattern_overreference": r2,
+                "stylometric_distance": r3,
+            })
+    return results
+
+
+def _run_judge(
+    judge: JudgeRunner,
+    outputs: dict[str, list[dict]],
+    evals: dict,
+    mode_anchors: dict[str, list[str]],
+) -> dict[str, list[dict[str, bool]]]:
+    """Apply LLM-judge criteria to every output. Mixes single + ensemble judges per criterion config."""
+    prompt_modes = {
+        p["id"]: p["mode"]
+        for p in (evals.get("training_prompts", []) + evals.get("holdout_prompts", []))
+    }
+    judge_criteria = evals["llm_judge_criteria"]
+
+    results: dict[str, list[dict[str, bool]]] = {}
+    for prompt_id, runs in outputs.items():
+        results[prompt_id] = []
+        mode = prompt_modes.get(prompt_id, "sean")
+        anchors = list(mode_anchors.get(mode, []))
+        if len(anchors) < 4:
+            anchors.extend(mode_anchors.get("sean", []))
+        anchors = anchors[:8]  # cap to keep token cost bounded
+
+        for run in runs:
+            text = run["text"]
+            run_result: dict[str, bool] = {}
+            for crit in judge_criteria:
+                if crit.get("ensemble"):
+                    er = judge.judge_ensemble(
+                        output=text,
+                        anchors=anchors,
+                        question=crit["question"],
+                        mode=mode,
+                        n_judges=crit.get("n_judges", 3),
+                    )
+                    run_result[crit["id"]] = er.passed
+                else:
+                    jr = judge.judge_single(
+                        output=text,
+                        anchors=anchors[:2],
+                        question=crit["question"],
+                        mode=mode,
+                    )
+                    run_result[crit["id"]] = jr.passed
+            results[prompt_id].append(run_result)
+    return results
+
+
+def _sonnet_check(
+    judge: JudgeRunner,
+    outputs: dict[str, list[dict]],
+    evals: dict,
+    sample_rate: float = 0.10,
+) -> float:
+    """Re-judge a `sample_rate` fraction of outputs with Sonnet on the most-subjective criterion.
+
+    Returns the agreement rate (1.0 = perfect agreement, 0.0 = total disagreement).
+    Uses `sounds_like_sean` as the canonical subjective criterion per spec.
+    """
+    flat: list[tuple[str, str]] = []
+    for prompt_id, runs in outputs.items():
+        for run in runs:
+            flat.append((prompt_id, run["text"]))
+    if not flat:
+        return 1.0
+
+    sample_n = max(1, int(len(flat) * sample_rate))
+    sample = _random.sample(flat, sample_n)
+
+    sounds_q = next(
+        (c["question"] for c in evals["llm_judge_criteria"] if c["id"] == "sounds_like_sean"),
+        None,
+    )
+    if not sounds_q:
+        return 1.0
+
+    anchors_by_mode = _load_anchors()
+    prompt_modes = {
+        p["id"]: p["mode"]
+        for p in (evals["training_prompts"] + evals.get("holdout_prompts", []))
+    }
+
+    local_results: list[bool] = []
+    sample_outputs: list[str] = []
+    sample_anchors: list[list[str]] = []
+    for prompt_id, text in sample:
+        mode = prompt_modes.get(prompt_id, "sean")
+        anchors = anchors_by_mode.get(mode, anchors_by_mode.get("sean", []))[:2]
+        local_jr = judge.judge_single(text, anchors, sounds_q, mode)
+        local_results.append(local_jr.passed)
+        sample_outputs.append(text)
+        sample_anchors.append(anchors)
+
+    return judge.compute_sonnet_agreement(
+        outputs=sample_outputs,
+        anchors_per_output=sample_anchors,
+        question=sounds_q,
+        mode="sean",
+        local_results=local_results,
+    )
+```
+
+- [ ] **Step 4: Run tests to verify they pass**
+
+Run: `cd agents-sdk && PYTHONPATH=. pytest tests/test_skill_optimizer.py -v -k "BuildOllamaClient or RunStructuralChecks or RunJudge or SonnetCheck"`
+Expected: 6 PASS
+
+- [ ] **Step 5: Run full pytest suite to confirm nothing regressed**
+
+Run: `cd agents-sdk && PYTHONPATH=. pytest tests/ -v`
+Expected: all PASS (~70+ unit tests across all modules).
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add agents-sdk/agents/skill_optimizer.py agents-sdk/tests/test_skill_optimizer.py
+git commit -m "feat(skill_optimizer): implement external-call helpers (ollama_client, structural_checks runner, judge runner, sonnet_check)"
 ```
 
 ---
