@@ -4,12 +4,18 @@ See docs/superpowers/specs/2026-05-09-writing-voice-modes-autoresearch-design.md
 """
 from __future__ import annotations
 
+import csv
 import json
 import math
+import re
 import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
+
+
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+_VOICE_SAMPLES_PATH = _REPO_ROOT / ".claude/skills/writing-voice-modes/references/voice-samples.md"
 
 
 @dataclass
@@ -363,8 +369,22 @@ def run_optimization_loop(config: SkillOptimizerConfig, dry_run: bool = False) -
 def _build_ollama_client(config):
     raise NotImplementedError("implemented in Task 4.9")
 
-def _read_recent_rows(path, n):
-    raise NotImplementedError("implemented in Task 4.8")
+def _read_recent_rows(path: Path, n: int) -> list[dict]:
+    """Return the last `n` rows from a TSV with header. Empty list if missing."""
+    if not path.exists():
+        return []
+    with open(path, newline="") as f:
+        reader = csv.DictReader(f, delimiter="\t")
+        rows = list(reader)
+    return rows[-n:]
+
+
+_MODE_KEYWORDS = {
+    "sedaris": ("sedaris", "domestic observer"),
+    "gonzo": ("thompson", "gonzo"),
+    "kerouac": ("kerouac", "beat flow"),
+    "vonnegut": ("vonnegut", "minimalist"),
+}
 
 def _worst_criteria(rows: list[dict]) -> list[str]:
     """Return the 3 criterion names with the lowest scores in the most recent row."""
@@ -388,17 +408,134 @@ def _run_structural_checks(outputs, baseline):
 def _run_judge(judge, outputs, evals, mode_anchors):
     raise NotImplementedError("implemented in Task 4.9")
 
-def _load_anchors():
-    raise NotImplementedError("implemented in Task 4.8")
+def _load_anchors() -> dict[str, list[str]]:
+    """Parse voice-samples.md and group anchor snippets by mode.
+
+    Splits on `### ` headings, infers mode from heading text via keyword match,
+    keeps prose snippets ≥ 30 words, truncates to ~150 words. Modes that end up
+    with fewer than 2 anchors are padded with sean-tagged fallbacks so ensemble
+    judges always have ≥ 2 to choose from.
+    """
+    text = _VOICE_SAMPLES_PATH.read_text()
+    sections = re.split(r"\n###\s+", text)
+    by_mode: dict[str, list[str]] = {"sean": [], "sedaris": [], "gonzo": [], "kerouac": [], "vonnegut": []}
+
+    for section in sections[1:]:  # skip preamble
+        heading_line, *rest = section.split("\n", 1)
+        body = rest[0] if rest else ""
+        # Strip "**Why it works:**" annotations and blockquote markers.
+        body = re.sub(r"^\*\*Why.*$", "", body, flags=re.MULTILINE)
+        body = body.replace("> ", "").strip()
+        if len(body.split()) < 10:
+            continue
+        snippet = " ".join(body.split()[:150])
+
+        heading_lower = heading_line.lower()
+        matched = False
+        for mode, kws in _MODE_KEYWORDS.items():
+            if any(kw in heading_lower for kw in kws):
+                by_mode[mode].append(snippet)
+                matched = True
+                break
+        if not matched:
+            by_mode["sean"].append(snippet)
+
+    # Pad thin modes with sean fallback so each mode has ≥ 2 anchors.
+    fallback = by_mode["sean"][:2] if by_mode["sean"] else []
+    for mode in by_mode:
+        while len(by_mode[mode]) < 2 and fallback:
+            by_mode[mode].append(fallback[len(by_mode[mode]) % len(fallback)])
+
+    return by_mode
 
 def _sonnet_check(judge, outputs, evals):
     raise NotImplementedError("implemented in Task 4.9")
 
-def _build_snapshot(*args, **kwargs):
-    raise NotImplementedError("implemented in Task 4.8")
+def _build_snapshot(
+    iteration: int,
+    train_score: float,
+    holdout_score: float,
+    train_result: dict,
+    iter1_snapshot: Optional[dict],
+    sonnet_agreement: float,
+    skill_md_text: str,
+    holdout_history: list[float],
+    diversity: float,
+) -> "IterationSnapshot":
+    """Construct an IterationSnapshot for tripwire checks. iter1=None means snapshot self-references."""
+    iter1 = iter1_snapshot or {}
+    current_token_count = len(skill_md_text.split())
+    return IterationSnapshot(
+        iteration=iteration,
+        train_score=train_score,
+        holdout_score=holdout_score,
+        prior_holdout_scores=holdout_history[-3:],
+        criterion_scores=train_result["per_criterion"],
+        criterion_scores_iter1=iter1.get("criterion_scores", train_result["per_criterion"]),
+        stylometric_score=train_result["per_criterion"].get("stylometric_distance", 0.0),
+        stylometric_score_baseline=iter1.get(
+            "stylometric_score",
+            train_result["per_criterion"].get("stylometric_distance", 0.0),
+        ),
+        llm_judge_score=_llm_judge_avg(train_result["per_criterion"]),
+        llm_judge_score_baseline=iter1.get(
+            "llm_judge_score",
+            _llm_judge_avg(train_result["per_criterion"]),
+        ),
+        avg_inter_run_similarity=diversity,
+        avg_inter_run_similarity_baseline=iter1.get("avg_inter_run_similarity", diversity),
+        sonnet_qwen_agreement=sonnet_agreement,
+        skill_md_token_count=current_token_count,
+        skill_md_token_count_baseline=iter1.get("skill_md_token_count", current_token_count),
+        score_gain_vs_baseline=train_score - iter1.get("train_score", train_score),
+    )
 
-def _build_row(*args, **kwargs):
-    raise NotImplementedError("implemented in Task 4.8")
+
+def _build_row(
+    iteration: int,
+    section: str,
+    rationale: str,
+    train_score: float,
+    holdout_score: float,
+    surprise_outputs: dict,
+    train_result: dict,
+    moving_avg: float,
+    decision_info: dict,
+    decision: str,
+    tripwires: list[str],
+    sonnet_agreement: float,
+    duration_sec: float,
+    cost_usd: float,
+) -> dict:
+    """Build a results.tsv row dict matching RESULTS_HEADER."""
+    per = train_result["per_criterion"]
+    surprise_score = ""
+    if surprise_outputs:
+        # Caller computes surprise score externally and passes it in via surprise_outputs["__score"].
+        surprise_score = f"{surprise_outputs.get('__score', 0):.4f}"
+
+    return {
+        "iteration": iteration,
+        "timestamp": datetime.datetime.now().isoformat(timespec="seconds"),
+        "mutation_section": section,
+        "mutation_summary": rationale[:200],
+        "train_score": f"{train_score:.4f}",
+        "holdout_score": f"{holdout_score:.4f}",
+        "surprise_score": surprise_score,
+        "criterion_substack_format_intro": f"{per.get('substack_format_intro', 0):.4f}",
+        "criterion_anti_pattern_overreference": f"{per.get('anti_pattern_overreference', 0):.4f}",
+        "criterion_stylometric_distance": f"{per.get('stylometric_distance', 0):.4f}",
+        "criterion_signature_move_present": f"{per.get('signature_move_present', 0):.4f}",
+        "criterion_sounds_like_sean": f"{per.get('sounds_like_sean', 0):.4f}",
+        "criterion_no_anti_pattern_violation": f"{per.get('no_anti_pattern_violation', 0):.4f}",
+        "moving_avg": f"{moving_avg:.4f}",
+        "delta_vs_best": f"{decision_info.get('delta_mean', 0):.4f}",
+        "kept_or_reverted": decision,
+        "tripwires_triggered": ",".join(tripwires),
+        "sonnet_qwen_agreement": f"{sonnet_agreement:.3f}",
+        "duration_sec": f"{duration_sec:.1f}",
+        "cost_usd": f"{cost_usd:.4f}",
+    }
 
 def _llm_judge_avg(per_criterion: dict[str, float]) -> float:
     """Mean of just the LLM-judge criteria (excludes structural)."""
