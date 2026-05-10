@@ -129,3 +129,35 @@ class TestEnsembleJudge:
         prompts_sent = [call.kwargs["prompt"] for call in client.complete.call_args_list]
         # The three prompts should not all be identical (anchor order differs).
         assert len(set(prompts_sent)) > 1
+
+
+class TestSonnetSampleCheck:
+    def test_high_agreement_when_judges_match(self):
+        local = MagicMock()
+        sonnet = MagicMock()
+        # Both return same labels for same outputs.
+        local.complete.side_effect = ["...\nYES", "...\nNO", "...\nYES"]
+        sonnet.complete.side_effect = ["...\nYES", "...\nNO", "...\nYES"]
+        runner = JudgeRunner(local_client=local, sonnet_client=sonnet, prompt_template=PROMPT_TEMPLATE)
+        agreement = runner.compute_sonnet_agreement(
+            outputs=["o1", "o2", "o3"],
+            anchors_per_output=[["a", "b"]] * 3,
+            question="?",
+            mode="sean",
+            local_results=[True, False, True],
+        )
+        assert agreement == pytest.approx(1.0)
+
+    def test_low_agreement_when_judges_disagree(self):
+        local = MagicMock()
+        sonnet = MagicMock()
+        sonnet.complete.side_effect = ["...\nNO", "...\nYES", "...\nNO"]
+        runner = JudgeRunner(local_client=local, sonnet_client=sonnet, prompt_template=PROMPT_TEMPLATE)
+        agreement = runner.compute_sonnet_agreement(
+            outputs=["o1", "o2", "o3"],
+            anchors_per_output=[["a", "b"]] * 3,
+            question="?",
+            mode="sean",
+            local_results=[True, False, True],  # all 3 disagree with sonnet
+        )
+        assert agreement == pytest.approx(0.0)
