@@ -1,7 +1,10 @@
 """Tests for stylometry module."""
 import math
 import pytest
-from lib.skill_optimizer.stylometry import extract_features
+from lib.skill_optimizer.stylometry import (
+    extract_features,
+    extract_distinctive_ngrams,
+)
 
 
 class TestExtractFeatures:
@@ -43,3 +46,23 @@ class TestExtractFeatures:
         features = extract_features("")
         assert features["sentence_length_mean"] == 0.0
         assert features["comma_density_per_100w"] == 0.0
+
+
+class TestExtractDistinctiveNgrams:
+    def test_returns_top_n_results(self):
+        target = "the kind of thing that happens on a Tuesday and we never talk about it"
+        baseline = "the the the the the the the the the the"
+        ngrams = extract_distinctive_ngrams(target, [baseline], top_n=5, ns=(2, 3))
+        assert len(ngrams) <= 5
+
+    def test_returns_target_specific_ngrams(self):
+        target = "kind of thing kind of thing kind of thing"
+        baseline = "the dog ran fast and the cat slept slowly in the sun"
+        ngrams = extract_distinctive_ngrams(target, [baseline], top_n=10, ns=(2, 3))
+        # "kind of" should appear in the distinctive set
+        ngram_strings = [" ".join(ng) for ng in ngrams]
+        assert any("kind of" in s for s in ngram_strings)
+
+    def test_handles_empty_target(self):
+        ngrams = extract_distinctive_ngrams("", ["any baseline"], top_n=5, ns=(2,))
+        assert ngrams == []
