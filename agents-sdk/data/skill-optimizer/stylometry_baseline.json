@@ -1,0 +1,144 @@
+{
+  "sentence_length_mean": 14.920454545454545,
+  "sentence_length_stdev": 17.90816036873156,
+  "comma_density_per_100w": 3.2368621477532367,
+  "em_dash_density_per_100w": 1.408987052551409,
+  "first_person_freq_per_100w": 3.8461538461538463,
+  "_stdevs": {
+    "sentence_length_mean": 12.6509576360238,
+    "sentence_length_stdev": 10.86569430413244,
+    "comma_density_per_100w": 2.760780745001312,
+    "em_dash_density_per_100w": 0.9020888651137878,
+    "first_person_freq_per_100w": 2.1790638384822443
+  },
+  "_ngrams": [
+    [
+      "in",
+      "the"
+    ],
+    [
+      "the",
+      "same"
+    ],
+    [
+      "and",
+      "the"
+    ],
+    [
+      "of",
+      "the"
+    ],
+    [
+      "i",
+      "was"
+    ],
+    [
+      "why",
+      "it"
+    ],
+    [
+      "on",
+      "a"
+    ],
+    [
+      "in",
+      "my"
+    ],
+    [
+      "it",
+      "s"
+    ],
+    [
+      "the",
+      "right",
+      "people"
+    ],
+    [
+      "the",
+      "right"
+    ],
+    [
+      "sean",
+      "s"
+    ],
+    [
+      "right",
+      "people"
+    ],
+    [
+      "nine",
+      "years"
+    ],
+    [
+      "it",
+      "was"
+    ],
+    [
+      "in",
+      "a"
+    ],
+    [
+      "i",
+      "had"
+    ],
+    [
+      "like",
+      "a"
+    ],
+    [
+      "and",
+      "i"
+    ],
+    [
+      "york",
+      "life"
+    ],
+    [
+      "with",
+      "the"
+    ],
+    [
+      "why",
+      "it",
+      "works"
+    ],
+    [
+      "why",
+      "it",
+      "s",
+      "better"
+    ],
+    [
+      "why",
+      "it",
+      "s"
+    ],
+    [
+      "the",
+      "ferry"
+    ],
+    [
+      "sean",
+      "rewrote"
+    ],
+    [
+      "s",
+      "better"
+    ],
+    [
+      "on",
+      "the"
+    ],
+    [
+      "new",
+      "york",
+      "life"
+    ],
+    [
+      "new",
+      "york"
+    ]
+  ],
+  "_threshold": null,
+  "_corpus_word_count": 2672
+}
