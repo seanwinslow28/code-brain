@@ -3,6 +3,7 @@ import pytest
 from lib.skill_optimizer.structural_checks import (
     substack_format_intro,
     anti_pattern_overreference,
+    stylometric_distance,
 )
 
 
@@ -91,3 +92,33 @@ class TestAntiPatternOverreference:
         text = "Coffee and COFFEE and coffee."
         passed, reason = anti_pattern_overreference(text)
         assert passed is False
+
+
+class TestStylometricDistance:
+    def _baseline(self) -> dict:
+        return {
+            "sentence_length_mean": 12.0,
+            "sentence_length_stdev": 5.0,
+            "comma_density_per_100w": 7.0,
+            "em_dash_density_per_100w": 2.0,
+            "first_person_freq_per_100w": 5.0,
+            "_stdevs": {
+                "sentence_length_mean": 2.0,
+                "sentence_length_stdev": 1.0,
+                "comma_density_per_100w": 1.5,
+                "em_dash_density_per_100w": 0.5,
+                "first_person_freq_per_100w": 1.0,
+            },
+            "_ngrams": [],
+        }
+
+    def test_passes_when_close_to_baseline(self):
+        text = "I went, and I came back, and the day was long. I drank coffee."
+        passed, _ = stylometric_distance(text, self._baseline(), threshold=40.0)
+        assert passed is True
+
+    def test_fails_when_far_from_baseline(self):
+        text = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do."
+        passed, reason = stylometric_distance(text, self._baseline(), threshold=2.0)
+        assert passed is False
+        assert "threshold" in reason

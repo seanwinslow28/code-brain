@@ -113,3 +113,53 @@ def extract_distinctive_ngrams(
 
     scored.sort(reverse=True)
     return [ng for _, ng in scored[:top_n]]
+
+
+def compute_distance(
+    target_features: dict[str, float],
+    baseline: dict,
+    target_text: str,
+) -> float:
+    """Compute total absolute z-score distance + n-gram-mismatch penalty.
+
+    Lower = closer to Sean's distribution. Pass threshold is calibrated externally
+    against a hand-labeled set (15 real Sean / 15 generic AI) at pre-flight time.
+    """
+    stdevs = baseline.get("_stdevs", {})
+    feature_keys = (
+        "sentence_length_mean",
+        "sentence_length_stdev",
+        "comma_density_per_100w",
+        "em_dash_density_per_100w",
+        "first_person_freq_per_100w",
+    )
+
+    z_total = 0.0
+    for key in feature_keys:
+        std = stdevs.get(key, 1.0) or 1.0
+        z = abs(target_features.get(key, 0.0) - baseline.get(key, 0.0)) / std
+        z_total += z
+
+    # N-gram component: count target n-grams from baseline._ngrams that appear in target_text.
+    baseline_ngrams: list[tuple[str, ...]] = baseline.get("_ngrams", [])
+    if baseline_ngrams:
+        target_lower = target_text.lower()
+        hits = sum(
+            1 for ng in baseline_ngrams if " ".join(ng) in target_lower
+        )
+        # Penalty rises as match rate falls. 0 hits → +5.0, all hits → +0.
+        match_rate = hits / max(len(baseline_ngrams), 1)
+        z_total += 5.0 * (1.0 - match_rate)
+
+    return z_total
+
+
+def load_baseline(path: Path | str) -> dict:
+    """Load stylometry baseline JSON. Raises FileNotFoundError if missing."""
+    with open(path, "r") as f:
+        return json.load(f)
+
+
+def save_baseline(baseline: dict, path: Path | str) -> None:
+    with open(path, "w") as f:
+        json.dump(baseline, f, indent=2, default=lambda x: list(x) if isinstance(x, tuple) else x)

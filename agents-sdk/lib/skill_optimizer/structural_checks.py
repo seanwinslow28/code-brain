@@ -67,3 +67,25 @@ def anti_pattern_overreference(text: str) -> Tuple[bool, str]:
         if count > 2:
             return False, f"{noun!r} appears {count} times (max 2)"
     return True, "ok"
+
+
+def stylometric_distance(
+    text: str,
+    baseline: dict,
+    threshold: float,
+) -> Tuple[bool, str]:
+    """Pass if stylometric distance to Sean's baseline is below threshold.
+
+    Threshold is calibrated at pre-flight time against a hand-labeled set
+    (15 real Sean / 15 generic AI) to maximize ROC AUC. Stored in baseline JSON.
+    """
+    from lib.skill_optimizer.stylometry import (
+        compute_distance,
+        extract_features,
+    )
+
+    features = extract_features(text)
+    distance = compute_distance(features, baseline, target_text=text)
+    if distance > threshold:
+        return False, f"stylometric distance {distance:.2f} > threshold {threshold:.2f}"
+    return True, f"distance {distance:.2f} ≤ threshold {threshold:.2f}"
