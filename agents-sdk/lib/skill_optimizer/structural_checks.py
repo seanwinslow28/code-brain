@@ -51,3 +51,19 @@ def substack_format_intro(text: str) -> Tuple[bool, str]:
         return False, f"closer too long: {closer_wc} words (Sean closer pattern is ≤12)"
 
     return True, "ok"
+
+
+def anti_pattern_overreference(text: str) -> Tuple[bool, str]:
+    """Fail if any watched sensory noun appears more than 2 times (case-insensitive).
+
+    Two instances are allowed because a callback closer (returning to an opening
+    image, transformed) is a documented Sean signature move. Three or more is
+    the anti-pattern Sean called "Bad Sean" — falling in love with your own material.
+    """
+    lower = text.lower()
+    for noun in SENSORY_OVERREFERENCE_NOUNS:
+        # Word-boundary count to avoid false matches inside other words.
+        count = len(re.findall(rf"\b{re.escape(noun)}\b", lower))
+        if count > 2:
+            return False, f"{noun!r} appears {count} times (max 2)"
+    return True, "ok"
