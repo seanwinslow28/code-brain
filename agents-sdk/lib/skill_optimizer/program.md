@@ -38,14 +38,14 @@ You are an optimization agent. Your job is to propose ONE meaningful, coherent m
 
 ## Output format
 
-Respond with EXACTLY this JSON:
+Respond with EXACTLY this delimited block. The body of the modified SKILL.md goes between the two fence markers VERBATIM — no escaping, no JSON encoding, no surrounding fence. Multi-line markdown is fine; literal newlines, double quotes, and backslashes are preserved as-is.
 
-```json
-{
-  "section_heading": "<exact heading you are editing>",
-  "rationale": "<≤200 chars explaining why this mutation should improve scores>",
-  "modified_skill_md_full_text": "<full SKILL.md after your edit>"
-}
+```
+SECTION_HEADING: <exact heading you are editing>
+RATIONALE: <≤200 chars explaining why this mutation should improve scores>
+<<<MODIFIED_SKILL_MD>>>
+<full SKILL.md after your edit, raw markdown, no escaping>
+<<<END_MODIFIED_SKILL_MD>>>
 ```
 
-Return ONLY the JSON. No prose. No markdown fence around the outer object.
+Return ONLY this block. No prose before `SECTION_HEADING`. No prose after the closing `<<<END_MODIFIED_SKILL_MD>>>`. The two fence markers must appear on their own lines.
