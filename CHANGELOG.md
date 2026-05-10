@@ -60,6 +60,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 13 hooks (no change)
 - **15 SDK agents — 7 active (launchd) + 1 manual-trigger** (skill_optimizer is the new 15th).
 
+## [3.26.4] - 2026-05-07
+
+Meta-Agent health check rewritten to read `agent-run-history.csv` instead of looking for `.baton` files in `~/.claude/batons/`. The baton-based check was a long-standing false-negative source: only `process_inbox` ever wrote batons (per `lib/baton.py:4` — batons were designed for inter-process signaling, not health monitoring), so every other active agent fell through to the "log-only / No baton found" fallback. Today's `daily-fleet-status-2026-05-07.md` reported all 7 active agents as "log-only" even though deep-researcher had successfully completed a 640s run on Topic 3 at 02:55 and recorded `status=success` in the CSV. Discovered while Sean was checking why deep-researcher looked broken in the daily report.
+
+### Fixed
+
+- `agents-sdk/agents/meta_agent.py` — `check_agent_health` now reads `vault/90_system/agent-logs/agent-run-history.csv` (written by `lib.logging_setup.record_run`) as the single source of truth. Status mapping: `success` / `empty-queue` / `recursion-guard` → `healthy`; `error` → `error`; unknown values pass through. Surface details upgraded — the report now shows `mode`, age, cost (when non-zero), and a truncated `notes` snippet for each agent instead of the bare `"No baton found"` string. `meta_agent` reports itself as healthy-running-now to avoid flagging the agent that just generated the report. Alert filter in `main()` updated to drop the obsolete `"log-only"` allowlist entry.
+- Per-agent stale thresholds added (`_STALE_AFTER_HOURS`) so the unified 26h window doesn't false-alarm on non-daily agents: `knowledge_lint` → 192h (Sunday 22:00 weekly + 24h buffer); `flush` → 72h (hook-triggered, absorbs quiet weekends). Other agents use the 26h default.
+
+### Added
+
+- `agents-sdk/tests/test_meta_agent_health.py` — 16 new test cases covering: dry-run short-circuit, meta_agent self-report, missing CSV / missing-row → no-data, recent success → healthy, hyphen↔underscore name normalization (CSV uses hyphens, ACTIVE_AGENTS uses underscores), error / empty-queue / recursion-guard status mapping, stale-flag with default and per-agent thresholds, latest-row picking, cost/duration/mode surfacing, unknown-status passthrough, and notes truncation. All 33 meta-agent tests pass; full agents-sdk suite is 303 passed / 2 unrelated WOL-routing failures (pre-existing per v3.14.3 WOL retirement).
+
+### Verified
+
+- Live `generate_fleet_report()` against today's CSV correctly identifies all 6 non-meta agents as `healthy` with full status detail, plus knowledge-lint as `stale` (last run 2026-04-26, 259h ago — beyond the 192h weekly threshold). Deep-researcher row now reads: `status=success · mode=queue · 14.2h ago · notes='id=092a7d0d wall=640s digest=skipped-no-note'` instead of the prior `No baton found, but log exists`.
+
 ## [3.26.3] - 2026-05-06
 
 Meta-Agent registration fix + research routing rule. The deep-researcher agent has been running on schedule since v3.23.0, but `meta_agent.py` was never updated to monitor it — `ACTIVE_AGENTS` listed only 6 entries, so today's 08:35 fleet status report wrote "Active agents: 6 of 11" with no row for deep-researcher. Discovered while triaging today's `daily-fleet-status-2026-05-06.md` after Topic 1b's 02:45 run timed out at 900s (LDR stalled at 90 % from t=209s → t=900s on a heavy compound prompt).
