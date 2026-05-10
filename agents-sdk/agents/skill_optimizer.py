@@ -89,3 +89,33 @@ def generate_outputs(
                 "output_tokens": msg.usage.output_tokens,
             })
     return outputs
+
+
+def score_outputs(
+    structural_results: dict[str, list[dict[str, bool]]],
+    judge_results: dict[str, list[dict[str, bool]]],
+) -> dict:
+    """Aggregate per-criterion scores.
+
+    Returns {"total_passes": int, "max_score": int, "per_criterion": {id: pass_rate}, "binary_array": list[int]}.
+    The binary_array is the flat list of all pass/fail outcomes for bootstrap CI.
+    """
+    binary_array: list[int] = []
+    per_criterion_passes: dict[str, list[int]] = {}
+    for prompt_id, results in structural_results.items():
+        for r in results:
+            for cid, passed in r.items():
+                binary_array.append(1 if passed else 0)
+                per_criterion_passes.setdefault(cid, []).append(1 if passed else 0)
+    for prompt_id, results in judge_results.items():
+        for r in results:
+            for cid, passed in r.items():
+                binary_array.append(1 if passed else 0)
+                per_criterion_passes.setdefault(cid, []).append(1 if passed else 0)
+    per_criterion = {cid: sum(vs) / len(vs) for cid, vs in per_criterion_passes.items()}
+    return {
+        "total_passes": sum(binary_array),
+        "max_score": len(binary_array),
+        "per_criterion": per_criterion,
+        "binary_array": binary_array,
+    }

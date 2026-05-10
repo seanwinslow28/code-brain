@@ -6,6 +6,7 @@ from agents.skill_optimizer import (
     preflight_checks,
     SkillOptimizerConfig,
     generate_outputs,
+    score_outputs,
 )
 
 
@@ -96,3 +97,26 @@ class TestGenerateOutputs:
         )
         assert set(outputs.keys()) == {"a", "b"}
         assert len(outputs["a"]) == 2 and len(outputs["b"]) == 2
+
+
+class TestScoreOutputs:
+    def test_aggregates_structural_and_judge_scores(self):
+        # Stub structural checks: every output passes substack format, fails anti-pattern.
+        structural_results = {
+            "p1": [
+                {"substack_format_intro": True, "anti_pattern_overreference": False, "stylometric_distance": True},
+                {"substack_format_intro": True, "anti_pattern_overreference": False, "stylometric_distance": True},
+            ]
+        }
+        judge_results = {
+            "p1": [
+                {"signature_move_present": True, "sounds_like_sean": True, "no_anti_pattern_violation": False},
+                {"signature_move_present": True, "sounds_like_sean": False, "no_anti_pattern_violation": True},
+            ]
+        }
+        score = score_outputs(structural_results, judge_results)
+        # 2 outputs x 6 criteria = 12 trials. Pass count: structural 2+0+2=4, judge 2+1+1=4 -> 8.
+        assert score["total_passes"] == 8
+        assert score["max_score"] == 12
+        assert score["per_criterion"]["substack_format_intro"] == 1.0
+        assert score["per_criterion"]["anti_pattern_overreference"] == 0.0
