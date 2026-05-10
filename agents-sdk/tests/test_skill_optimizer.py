@@ -15,6 +15,10 @@ from agents.skill_optimizer import (
     _llm_judge_avg,
     _diversity,
     _worst_criteria,
+    _read_recent_rows,
+    _load_anchors,
+    _build_row,
+    _build_snapshot,
 )
 
 
@@ -243,3 +247,162 @@ class TestWorstCriteria:
         rows = [{"criterion_substack_format_intro": "0.95", "iteration": "5"}]
         worst = _worst_criteria(rows)
         assert worst == ["substack_format_intro"]
+
+
+class TestReadRecentRows:
+    def test_returns_empty_when_file_missing(self, tmp_path):
+        assert _read_recent_rows(tmp_path / "missing.tsv", n=5) == []
+
+    def test_returns_last_n_rows(self, tmp_path):
+        path = tmp_path / "r.tsv"
+        path.write_text("a\tb\n1\t2\n3\t4\n5\t6\n")
+        rows = _read_recent_rows(path, n=2)
+        assert len(rows) == 2
+        assert rows[-1]["a"] == "5"
+
+    def test_returns_all_rows_when_n_exceeds_count(self, tmp_path):
+        path = tmp_path / "r.tsv"
+        path.write_text("a\tb\n1\t2\n")
+        rows = _read_recent_rows(path, n=10)
+        assert len(rows) == 1
+
+
+class TestLoadAnchors:
+    def test_returns_dict_with_all_modes(self, tmp_path, monkeypatch):
+        # Fake voice-samples.md with one section per mode.
+        fake_samples = tmp_path / "voice-samples.md"
+        fake_samples.write_text(
+            "# Samples\n\n"
+            "### Sedaris Sample One\n"
+            "> Mundane accumulation example with enough words to count as content easily here.\n\n"
+            "**Why it works:** explanation\n\n"
+            "### Thompson Gonzo Example\n"
+            "I DEPLOYED TO PRODUCTION at 11:47 PM and everything broke instantly afterwards.\n\n"
+            "### Kerouac Beat Flow Sample\n"
+            "And the ferry — the slow gray crossing — and the cold coffee in my hand.\n\n"
+            "### Vonnegut Minimalist Closer\n"
+            "It sounds the same as it always did. I sound different. I have begun.\n\n"
+        )
+        # Patch the module-level path constant.
+        from agents import skill_optimizer
+        monkeypatch.setattr(
+            skill_optimizer,
+            "_VOICE_SAMPLES_PATH",
+            fake_samples,
+        )
+        anchors = _load_anchors()
+        assert "sedaris" in anchors and len(anchors["sedaris"]) >= 1
+        assert "gonzo" in anchors and len(anchors["gonzo"]) >= 1
+        assert "kerouac" in anchors and len(anchors["kerouac"]) >= 1
+        assert "vonnegut" in anchors and len(anchors["vonnegut"]) >= 1
+
+    def test_pads_thin_modes_with_sean_fallback(self, tmp_path, monkeypatch):
+        fake_samples = tmp_path / "voice-samples.md"
+        fake_samples.write_text(
+            "# Samples\n\n"
+            "### Sean general voice sample\n"
+            "Some Sean voice prose here that has at least thirty words so the parser keeps it.\n\n"
+            "Another Sean snippet that the parser will treat as separate from above one.\n\n"
+        )
+        from agents import skill_optimizer
+        monkeypatch.setattr(skill_optimizer, "_VOICE_SAMPLES_PATH", fake_samples)
+        anchors = _load_anchors()
+        # Even though no Sedaris-tagged samples exist, sedaris key is non-empty (padded).
+        assert len(anchors["sedaris"]) >= 2
+
+
+class TestBuildRow:
+    def test_includes_all_header_fields(self):
+        train_result = {
+            "per_criterion": {
+                "substack_format_intro": 0.9,
+                "anti_pattern_overreference": 0.8,
+                "stylometric_distance": 0.7,
+                "signature_move_present": 0.6,
+                "sounds_like_sean": 0.5,
+                "no_anti_pattern_violation": 0.4,
+            },
+        }
+        row = _build_row(
+            iteration=3,
+            section="### Beat Flow Mode",
+            rationale="tightened jewel-center bullet",
+            train_score=0.65,
+            holdout_score=0.60,
+            surprise_outputs={},
+            train_result=train_result,
+            moving_avg=0.62,
+            decision_info={"delta_mean": 0.05},
+            decision="keep",
+            tripwires=[],
+            sonnet_agreement=0.92,
+            duration_sec=420.5,
+            cost_usd=4.15,
+        )
+        for k in RESULTS_HEADER:
+            assert k in row
+        assert row["iteration"] == 3
+        assert row["mutation_section"] == "### Beat Flow Mode"
+        assert row["kept_or_reverted"] == "keep"
+        assert row["tripwires_triggered"] == ""
+
+    def test_truncates_long_rationale_to_200_chars(self):
+        long_rationale = "x" * 500
+        row = _build_row(
+            iteration=1, section="x", rationale=long_rationale, train_score=0.5,
+            holdout_score=0.5, surprise_outputs={},
+            train_result={"per_criterion": {}}, moving_avg=0.5,
+            decision_info={"delta_mean": 0}, decision="revert", tripwires=[],
+            sonnet_agreement=1.0, duration_sec=1.0, cost_usd=0.0,
+        )
+        assert len(row["mutation_summary"]) == 200
+
+
+class TestBuildSnapshot:
+    def test_uses_current_as_baseline_when_iter1(self):
+        train_result = {
+            "per_criterion": {
+                "stylometric_distance": 0.7,
+                "signature_move_present": 0.6,
+                "sounds_like_sean": 0.5,
+                "no_anti_pattern_violation": 0.5,
+            },
+            "binary_array": [],
+        }
+        snap = _build_snapshot(
+            iteration=1, train_score=0.6, holdout_score=0.55,
+            train_result=train_result, iter1_snapshot=None,
+            sonnet_agreement=0.9, skill_md_text="word " * 500,
+            holdout_history=[], diversity=0.4,
+        )
+        # When iter1, baseline equals current.
+        assert snap.score_gain_vs_baseline == 0.0
+        assert snap.skill_md_token_count == snap.skill_md_token_count_baseline
+
+    def test_carries_iter1_baseline_through(self):
+        iter1 = {
+            "train_score": 0.50,
+            "criterion_scores": {"signature_move_present": 0.5},
+            "skill_md_token_count": 400,
+            "stylometric_score": 0.6,
+            "llm_judge_score": 0.5,
+            "avg_inter_run_similarity": 0.3,
+        }
+        train_result = {
+            "per_criterion": {
+                "stylometric_distance": 0.7,
+                "signature_move_present": 0.7,
+                "sounds_like_sean": 0.7,
+                "no_anti_pattern_violation": 0.7,
+            },
+            "binary_array": [],
+        }
+        snap = _build_snapshot(
+            iteration=5, train_score=0.70, holdout_score=0.65,
+            train_result=train_result, iter1_snapshot=iter1,
+            sonnet_agreement=0.85, skill_md_text="word " * 600,
+            holdout_history=[0.66, 0.65, 0.64], diversity=0.4,
+        )
+        assert snap.score_gain_vs_baseline == pytest.approx(0.20)
+        assert snap.skill_md_token_count == 600
+        assert snap.skill_md_token_count_baseline == 400
