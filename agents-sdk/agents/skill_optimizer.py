@@ -306,29 +306,33 @@ def run_optimization_loop(config: SkillOptimizerConfig, dry_run: bool = False) -
         # 3. Apply in-memory (write to disk; will revert on bad score)
         config.target_skill_md.write_text(modified_md)
 
-        # 4. Generate
-        train_outputs = generate_outputs(anthropic, modified_md, evals["training_prompts"], config.runs_per_prompt)
-        holdout_outputs = generate_outputs(anthropic, modified_md, evals["holdout_prompts"], config.runs_per_prompt)
-        surprise_outputs = {}
-        if iteration % 5 == 0:
-            surprise_outputs = generate_outputs(anthropic, modified_md, sealed["surprise_prompts"], config.runs_per_prompt)
+        # 4-6. Generate + score + sonnet check — wrapped in try/except so a transient
+        #      Ollama timeout or HTTP error skips the iteration instead of killing the
+        #      whole run. SKILL.md is reverted to the prior committed state on failure.
+        try:
+            train_outputs = generate_outputs(anthropic, modified_md, evals["training_prompts"], config.runs_per_prompt)
+            holdout_outputs = generate_outputs(anthropic, modified_md, evals["holdout_prompts"], config.runs_per_prompt)
+            surprise_outputs = {}
+            if iteration % 5 == 0:
+                surprise_outputs = generate_outputs(anthropic, modified_md, sealed["surprise_prompts"], config.runs_per_prompt)
 
-        # 5. Score
-        structural = _run_structural_checks(train_outputs, baseline)
-        judge_outputs = _run_judge(judge, train_outputs, evals, mode_anchors=_load_anchors())
-        train = score_outputs(structural, judge_outputs)
-        train_score = train["total_passes"] / train["max_score"]
+            structural = _run_structural_checks(train_outputs, baseline)
+            judge_outputs = _run_judge(judge, train_outputs, evals, mode_anchors=_load_anchors())
+            train = score_outputs(structural, judge_outputs)
+            train_score = train["total_passes"] / train["max_score"]
 
-        # Holdout score (no decision-rule role; trip-wire only)
-        ho_structural = _run_structural_checks(holdout_outputs, baseline)
-        ho_judge = _run_judge(judge, holdout_outputs, evals, mode_anchors=_load_anchors())
-        holdout = score_outputs(ho_structural, ho_judge)
-        holdout_score = holdout["total_passes"] / holdout["max_score"]
+            ho_structural = _run_structural_checks(holdout_outputs, baseline)
+            ho_judge = _run_judge(judge, holdout_outputs, evals, mode_anchors=_load_anchors())
+            holdout = score_outputs(ho_structural, ho_judge)
+            holdout_score = holdout["total_passes"] / holdout["max_score"]
 
-        # 6. Sonnet sample-check (every 5 iters)
-        sonnet_agreement = 1.0
-        if iteration % config.sonnet_check_every_n_iterations == 0:
-            sonnet_agreement = _sonnet_check(judge, train_outputs, evals)
+            sonnet_agreement = 1.0
+            if iteration % config.sonnet_check_every_n_iterations == 0:
+                sonnet_agreement = _sonnet_check(judge, train_outputs, evals)
+        except Exception as e:
+            print(f"[iter {iteration}] generation/scoring failed: {type(e).__name__}: {e}; reverting and skipping")
+            git_revert_skill_md(config.repo_root, config.target_skill_md)
+            continue
 
         # 7. Decide keep/revert
         train_scores.append(train_score)
@@ -394,18 +398,29 @@ class _OllamaClient:
         temperature: float = 0.0,
         seed: int = 0,
     ) -> str:
-        response = httpx.post(
-            f"{self.base_url}/api/generate",
-            json={
-                "model": model,
-                "prompt": prompt,
-                "stream": False,
-                "options": {"temperature": temperature, "seed": seed},
-            },
-            timeout=120,
-        )
-        response.raise_for_status()
-        return response.json()["response"]
+        # Mac Mini Qwen3-14B: cold-start + judge prompts can occasionally exceed 120s.
+        # Retry up to 2 times on ReadTimeout (5s, 30s backoff) before raising.
+        last_exc: Exception | None = None
+        for backoff in (0, 5, 30):
+            if backoff:
+                time.sleep(backoff)
+            try:
+                response = httpx.post(
+                    f"{self.base_url}/api/generate",
+                    json={
+                        "model": model,
+                        "prompt": prompt,
+                        "stream": False,
+                        "options": {"temperature": temperature, "seed": seed},
+                    },
+                    timeout=300,
+                )
+                response.raise_for_status()
+                return response.json()["response"]
+            except httpx.ReadTimeout as e:
+                last_exc = e
+                continue
+        raise last_exc  # type: ignore[misc]
 
 
 def _build_ollama_client(config) -> "_OllamaClient":
