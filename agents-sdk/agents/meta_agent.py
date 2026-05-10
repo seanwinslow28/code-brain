@@ -25,6 +25,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import sys
 import time
@@ -61,6 +62,23 @@ AGENT_METADATA: dict[str, dict[str, str | float]] = {
 }
 BATON_DIR = Path.home() / ".claude" / "batons"
 LOG_DIR_BASE = Path.home() / "Code-Brain" / "claude-code-superuser-pack" / "vault" / "90_system" / "agent-logs"
+HISTORY_FILE_NAME = "agent-run-history.csv"
+HEALTH_WINDOW_HOURS = 26  # default: 24h + 2h buffer for schedule variance
+
+# Per-agent overrides for HEALTH_WINDOW_HOURS. Daily agents take the default;
+# weekly knowledge-lint needs 168h + buffer; hook-triggered flush has no
+# fixed cadence so we widen the window enough to absorb a quiet weekend.
+_STALE_AFTER_HOURS: dict[str, int] = {
+    "knowledge_lint": 192,  # Sunday 22:00 weekly + 24h buffer
+    "flush":          72,   # hook-triggered, allows quiet stretches
+}
+
+# Status values written by lib.logging_setup.record_run, mapped to fleet
+# health. recursion-guard rows come from flush.py self-protecting against
+# re-entry on rapid SessionEnd hook fires — that's normal idle behavior.
+# empty-queue is deep-researcher with no work to do.
+_HEALTHY_CSV_STATUSES = {"success", "empty-queue", "recursion-guard"}
+_ERROR_CSV_STATUSES = {"error"}
 VAULT_ROOT = Path.home() / "Code-Brain" / "claude-code-superuser-pack" / "vault"
 FLEET_STATE_DIR = VAULT_ROOT / "02_Areas" / "Agent-Fleet"
 
@@ -80,13 +98,54 @@ MAX_BUDGET_USD = 0.10
 
 # ─── Health Checks ───────────────────────────────────────────────────
 
+def _read_run_history(history_file: Path) -> list[dict[str, str]]:
+    """Read all rows from agent-run-history.csv.
+
+    Returns an empty list if the file is missing.
+    """
+    if not history_file.exists():
+        return []
+    with open(history_file, newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+def _latest_row_for_agent(rows: list[dict[str, str]], agent_name: str) -> dict[str, str] | None:
+    """Return the most recent CSV row for `agent_name`.
+
+    The CSV stores agent names with hyphens (deep-researcher, vault-indexer);
+    callers may pass either hyphen or underscore form.
+    """
+    candidates = {agent_name, agent_name.replace("_", "-"), agent_name.replace("-", "_")}
+    matching = [r for r in rows if (r.get("agent") or "") in candidates]
+    if not matching:
+        return None
+    # CSV is append-only chronologically, but parse the timestamp
+    # explicitly so out-of-order rows (or test fixtures) still pick the
+    # latest one.
+    def _ts(r: dict[str, str]) -> str:
+        return f"{r.get('date', '')} {r.get('time', '')}"
+    return max(matching, key=_ts)
+
+
 def check_agent_health(agent_name: str, config: dict, dry_run: bool = False) -> dict[str, Any]:
-    """Check if an agent ran successfully in the last 24 hours."""
-    result = {
+    """Check if an agent ran successfully recently per agent-run-history.csv.
+
+    The CSV (written by `lib.logging_setup.record_run`) is the single source
+    of truth: one row per agent run with status, cost, duration, turns, and
+    notes. We pick the latest row for the agent and check both status and
+    age against `HEALTH_WINDOW_HOURS`.
+
+    `meta_agent` itself is special — it doesn't `record_run` on itself, so
+    we report it as healthy-running-now to avoid the report flagging the
+    very agent that just generated it.
+    """
+    result: dict[str, Any] = {
         "agent": agent_name,
         "status": "unknown",
         "last_run": None,
         "details": "",
+        "cost_usd": None,
+        "duration_ms": None,
     }
 
     if dry_run:
@@ -95,44 +154,69 @@ def check_agent_health(agent_name: str, config: dict, dry_run: bool = False) -> 
         result["details"] = "Dry run — skipping actual log check"
         return result
 
-    # Check for recent baton files (baton names may use either separator)
-    baton_glob = [f"{agent_name}*.baton", f"{agent_name.replace('_', '-')}*.baton"]
-    baton_files: list = []
-    for pattern in baton_glob:
-        baton_files.extend(BATON_DIR.glob(pattern))
-    baton_files = sorted(set(baton_files), key=lambda p: p.stat().st_mtime, reverse=True)
+    if agent_name == "meta_agent":
+        result["status"] = "healthy"
+        result["last_run"] = datetime.now().isoformat()
+        result["details"] = "Generating this report now"
+        return result
 
-    if baton_files:
-        latest = baton_files[0]
-        mtime = datetime.fromtimestamp(latest.stat().st_mtime)
-        age_hours = (datetime.now() - mtime).total_seconds() / 3600
+    rows = _read_run_history(LOG_DIR_BASE / HISTORY_FILE_NAME)
+    row = _latest_row_for_agent(rows, agent_name)
 
-        if age_hours < 26:  # Allow 2h buffer for schedule variance
-            result["status"] = "healthy"
-            result["last_run"] = mtime.isoformat()
-            result["details"] = f"Latest baton: {latest.name} ({age_hours:.1f}h ago)"
-        else:
+    if row is None:
+        result["status"] = "no-data"
+        result["details"] = f"No rows in {HISTORY_FILE_NAME} for {agent_name}"
+        return result
+
+    csv_status = (row.get("status") or "").strip()
+    mode = (row.get("mode") or "").strip()
+    cost_raw = (row.get("cost_usd") or "").strip()
+    duration_raw = (row.get("duration_ms") or "").strip()
+    notes = (row.get("notes") or "").strip()
+
+    if cost_raw:
+        try:
+            result["cost_usd"] = float(cost_raw)
+        except ValueError:
+            pass
+    if duration_raw:
+        try:
+            result["duration_ms"] = int(duration_raw)
+        except ValueError:
+            pass
+
+    age_hours: float | None
+    try:
+        ts = datetime.strptime(f"{row['date']} {row['time']}", "%Y-%m-%d %H:%M:%S")
+        result["last_run"] = ts.isoformat()
+        age_hours = (datetime.now() - ts).total_seconds() / 3600
+        age_str = f"{age_hours:.1f}h ago"
+    except (KeyError, ValueError):
+        age_hours = None
+        age_str = "age unknown"
+
+    stale_threshold = _STALE_AFTER_HOURS.get(agent_name, HEALTH_WINDOW_HOURS)
+    if csv_status in _ERROR_CSV_STATUSES:
+        result["status"] = "error"
+    elif csv_status in _HEALTHY_CSV_STATUSES:
+        if age_hours is not None and age_hours > stale_threshold:
             result["status"] = "stale"
-            result["last_run"] = mtime.isoformat()
-            result["details"] = f"Latest baton: {latest.name} ({age_hours:.1f}h ago — exceeds 24h window)"
-    else:
-        # Fallback: check log files. Log filenames use hyphens (e.g. vault-indexer-*.log),
-        # but agent_name uses underscores, so glob on both forms.
-        hyphen_name = agent_name.replace("_", "-")
-        log_files = sorted(
-            set(LOG_DIR_BASE.glob(f"*{agent_name}*")) | set(LOG_DIR_BASE.glob(f"*{hyphen_name}*")),
-            key=lambda p: p.stat().st_mtime,
-            reverse=True,
-        )
-        if log_files:
-            latest = log_files[0]
-            mtime = datetime.fromtimestamp(latest.stat().st_mtime)
-            result["status"] = "log-only"
-            result["last_run"] = mtime.isoformat()
-            result["details"] = f"No baton found, but log exists: {latest.name}"
         else:
-            result["status"] = "no-data"
-            result["details"] = "No baton files or logs found"
+            result["status"] = "healthy"
+    else:
+        result["status"] = csv_status or "unknown"
+
+    detail_bits = [f"status={csv_status}", age_str]
+    if mode:
+        detail_bits.insert(1, f"mode={mode}")
+    if cost_raw and cost_raw not in ("0.0000", "0", ""):
+        detail_bits.append(f"cost=${cost_raw}")
+    if notes:
+        snippet = notes.replace("\n", " ").strip()
+        if len(snippet) > 80:
+            snippet = snippet[:77] + "..."
+        detail_bits.append(f"notes='{snippet}'")
+    result["details"] = " · ".join(detail_bits)
 
     return result
 
@@ -516,7 +600,7 @@ def main():
     alert_needed = False
     for agent_name in ACTIVE_AGENTS:
         health = check_agent_health(agent_name, {}, args.dry_run)
-        if health["status"] not in ("healthy", "healthy (dry-run)", "log-only"):
+        if health["status"] not in ("healthy", "healthy (dry-run)"):
             alert_needed = True
             print(f"  ALERT: {agent_name} status is {health['status']}")
 

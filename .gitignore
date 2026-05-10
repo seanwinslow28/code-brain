@@ -69,6 +69,9 @@ creative-studio/16bitfit-battle-mode/autoresearch/references/walk_cycle/frames_a
 # Portfolio & Hubs project (has its own git repo)
 sw-portfolio-and-hubs-designs/
 
+# The Block resume info (private — historical employer materials)
+vault/30_domains/product-management/the-block-resume-info/
+
 # Autonomous agent runtime artifacts — per CHANGELOG.md v3.15.0 follow-up.
 # These are written continuously by launchd-scheduled agents on the Mac Mini
 # (vault-indexer, vault-synthesizer, knowledge-lint, meta-agent, daily-driver,
