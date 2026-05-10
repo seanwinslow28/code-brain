@@ -62,3 +62,54 @@ def extract_features(text: str) -> dict[str, float]:
         "em_dash_density_per_100w": em_dash_count / words * 100.0,
         "first_person_freq_per_100w": fp_count / words * 100.0,
     }
+
+
+def _tokenize_lower(text: str) -> list[str]:
+    return re.findall(r"\b\w+\b", text.lower())
+
+
+def _ngrams(tokens: list[str], n: int) -> Iterable[tuple[str, ...]]:
+    return (tuple(tokens[i : i + n]) for i in range(len(tokens) - n + 1))
+
+
+def extract_distinctive_ngrams(
+    target_corpus: str,
+    baseline_corpora: list[str],
+    top_n: int = 30,
+    ns: tuple[int, ...] = (2, 3, 4),
+) -> list[tuple[str, ...]]:
+    """Extract n-grams over-represented in target vs. baseline.
+
+    Distinctiveness = log( (target_freq + smoothing) / (baseline_freq + smoothing) ).
+    Returns top_n n-grams sorted by distinctiveness, descending.
+    """
+    target_tokens = _tokenize_lower(target_corpus)
+    if not target_tokens:
+        return []
+
+    target_counts: Counter[tuple[str, ...]] = Counter()
+    for n in ns:
+        target_counts.update(_ngrams(target_tokens, n))
+
+    baseline_counts: Counter[tuple[str, ...]] = Counter()
+    baseline_total = 0
+    for corpus in baseline_corpora:
+        tokens = _tokenize_lower(corpus)
+        baseline_total += len(tokens)
+        for n in ns:
+            baseline_counts.update(_ngrams(tokens, n))
+
+    target_total = len(target_tokens)
+    smoothing = 1e-6
+
+    scored = []
+    for ngram, t_count in target_counts.items():
+        if t_count < 2:  # require ≥2 in target to filter noise
+            continue
+        t_freq = t_count / target_total
+        b_freq = (baseline_counts.get(ngram, 0) + smoothing) / (baseline_total + smoothing)
+        score = t_freq / b_freq
+        scored.append((score, ngram))
+
+    scored.sort(reverse=True)
+    return [ng for _, ng in scored[:top_n]]
