@@ -4,6 +4,7 @@ import pytest
 from lib.skill_optimizer.stylometry import (
     extract_features,
     extract_distinctive_ngrams,
+    compute_distance,
 )
 
 
@@ -66,3 +67,57 @@ class TestExtractDistinctiveNgrams:
     def test_handles_empty_target(self):
         ngrams = extract_distinctive_ngrams("", ["any baseline"], top_n=5, ns=(2,))
         assert ngrams == []
+
+
+class TestComputeDistance:
+    def test_zero_distance_when_identical(self):
+        baseline = {
+            "sentence_length_mean": 10.0,
+            "sentence_length_stdev": 2.0,
+            "comma_density_per_100w": 5.0,
+            "em_dash_density_per_100w": 1.0,
+            "first_person_freq_per_100w": 3.0,
+            "_stdevs": {  # required for z-score
+                "sentence_length_mean": 1.0,
+                "sentence_length_stdev": 0.5,
+                "comma_density_per_100w": 1.0,
+                "em_dash_density_per_100w": 0.3,
+                "first_person_freq_per_100w": 0.5,
+            },
+            "_ngrams": [],
+        }
+        target_features = {
+            "sentence_length_mean": 10.0,
+            "sentence_length_stdev": 2.0,
+            "comma_density_per_100w": 5.0,
+            "em_dash_density_per_100w": 1.0,
+            "first_person_freq_per_100w": 3.0,
+        }
+        d = compute_distance(target_features, baseline, target_text="hello")
+        assert d == pytest.approx(0.0, abs=0.5)  # may include n-gram component
+
+    def test_increases_with_feature_divergence(self):
+        baseline = {
+            "sentence_length_mean": 10.0,
+            "sentence_length_stdev": 2.0,
+            "comma_density_per_100w": 5.0,
+            "em_dash_density_per_100w": 1.0,
+            "first_person_freq_per_100w": 3.0,
+            "_stdevs": {
+                "sentence_length_mean": 1.0,
+                "sentence_length_stdev": 0.5,
+                "comma_density_per_100w": 1.0,
+                "em_dash_density_per_100w": 0.3,
+                "first_person_freq_per_100w": 0.5,
+            },
+            "_ngrams": [],
+        }
+        close = {"sentence_length_mean": 10.5, "sentence_length_stdev": 2.0,
+                 "comma_density_per_100w": 5.0, "em_dash_density_per_100w": 1.0,
+                 "first_person_freq_per_100w": 3.0}
+        far = {"sentence_length_mean": 25.0, "sentence_length_stdev": 8.0,
+               "comma_density_per_100w": 0.5, "em_dash_density_per_100w": 0.0,
+               "first_person_freq_per_100w": 0.5}
+        d_close = compute_distance(close, baseline, target_text="x")
+        d_far = compute_distance(far, baseline, target_text="x")
+        assert d_far > d_close
