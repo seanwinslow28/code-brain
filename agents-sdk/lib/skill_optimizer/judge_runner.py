@@ -70,3 +70,41 @@ class JudgeRunner:
         if parsed is None:
             return JudgeResult(passed=False, raw_response=raw, reason=reason)
         return JudgeResult(passed=parsed, raw_response=raw, reason=reason)
+
+    def judge_ensemble(
+        self,
+        output: str,
+        anchors: list[str],
+        question: str,
+        mode: str,
+        n_judges: int = 3,
+        rng_seed: int = 0,
+    ) -> EnsembleResult:
+        """Run n_judges independent judge calls with shuffled anchor pairs + seeds.
+
+        Anchor pool: caller passes ≥4 anchors. Each judge call samples 2 distinct
+        anchors and a different seed.
+        """
+        if len(anchors) < 2:
+            raise ValueError("ensemble judge requires ≥ 2 anchors")
+        rng = random.Random(rng_seed)
+        results: list[JudgeResult] = []
+        for i in range(n_judges):
+            pair = rng.sample(anchors, 2)
+            rng.shuffle(pair)
+            r = self.judge_single(
+                output=output,
+                anchors=pair,
+                question=question,
+                mode=mode,
+                seed=rng.randint(0, 2**32 - 1),
+            )
+            results.append(r)
+        yes_count = sum(1 for r in results if r.passed)
+        no_count = n_judges - yes_count
+        return EnsembleResult(
+            passed=(yes_count > no_count),
+            individual_results=results,
+            yes_count=yes_count,
+            no_count=no_count,
+        )
