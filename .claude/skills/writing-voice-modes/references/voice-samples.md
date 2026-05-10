@@ -123,3 +123,17 @@ These are the most valuable samples — they show where Sean's instincts overrid
 > I now wake up at 4:45 AM on purpose. I build things in a terminal. I talk to machines and the machines talk back. Sometimes they are more helpful than the consultants were. They are always cheaper. I began again.
 >
 > The ferry still runs. I hear it from across the Hudson some mornings, if the coffee hasn't kicked in yet and the apartment is quiet enough. It sounds the same as it always did. I sound different... I have begun.
+
+---
+
+## Professional Dial — 60%
+
+Real Sean voice dialed down for cross-functional / professional contexts. Sarcasm survives, wild anecdotes don't. Dry humor in examples; never in the critical path.
+
+### Sample 1 — Slack message about a delayed feature launch (~80 words)
+> Hey team — quick update on the computer use rollout. We're pushing it back a week. The agent works beautifully in our test environments, which based on prior experience means it will find novel ways to misclick its way through someone's personal inbox and start emailing previous coworkers about their anal warts medication. Latency on screenshot loops is hovering 200ms over target, and we'd rather ship something that doesn't summon a support ticket avalanche on day one. New target: next Friday. Updating the roadmap and beta tester comms now. Let me know if you have any questions.... Also, on a side note, ignore any of my previous emails.
+
+### Sample 2 — Stakeholder update intro about a sprint outcome (~150 words)
+> Sprint 14 closed Friday with /buddy in production, on schedule, and somehow under budget — three things that have not happened simultaneously in the recorded history of this team. The team shipped a feature whose entire pitch is "what if your terminal had a digital ferret" which sounded ridiculous in planning and feels marginally less ridiculous now that 1,247 users have invoked it in the first 48 hours. The word "buddy" appears in our internal docs 316 times. Engineering hit every milestone, including two I had privately bet against in the standup chat. Design caught two edge cases QA missed, including one where /buddy responded to existential prompts with a recipe for cornbread. We patched it. It is, by every reasonable definition, a buddy. Full metrics, post-mortem notes, and the cornbread recipe below. Who knew a ferret could bake?
+
+---
