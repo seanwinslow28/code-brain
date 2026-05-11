@@ -6,7 +6,7 @@ import pytest
 import respx
 import httpx
 
-from lib.job_sources import RemoteOKAdapter
+from lib.job_sources import RemoteOKAdapter, HNWhoIsHiringAdapter
 from lib.job_types import Posting
 
 FIXTURES = Path(__file__).parent / "fixtures" / "job_feed"
@@ -62,3 +62,35 @@ async def test_remoteok_adapter_handles_empty_salary():
             adapter = RemoteOKAdapter(client=client)
             postings = await adapter.fetch(since=None)
     assert postings[0].salary_disclosed is None
+
+
+@pytest.mark.asyncio
+async def test_hn_adapter_parses_pipe_delimited_postings():
+    thread = (FIXTURES / "hn_thread.json").read_text()
+    comments = (FIXTURES / "hn_comments.json").read_text()
+    with respx.mock(base_url="https://hn.algolia.com") as mock:
+        mock.get("/api/v1/search").mock(return_value=httpx.Response(200, content=thread))
+        mock.get("/api/v1/search_by_date").mock(return_value=httpx.Response(200, content=comments))
+        async with httpx.AsyncClient() as client:
+            adapter = HNWhoIsHiringAdapter(client=client)
+            postings = await adapter.fetch(since=None)
+
+    # The pipe-delimited Anthropic ad is parsed; the non-pipe comment is dropped.
+    assert len(postings) == 1
+    p = postings[0]
+    assert p.source == "hn"
+    assert p.source_role_id == "40000002"
+    assert p.company == "Anthropic"
+    assert "Product Manager" in p.title
+    assert p.url == "https://anthropic.com/careers/pm"
+    assert "REMOTE (US)" in (p.location or "")
+
+
+@pytest.mark.asyncio
+async def test_hn_adapter_returns_empty_when_no_thread():
+    with respx.mock(base_url="https://hn.algolia.com") as mock:
+        mock.get("/api/v1/search").mock(return_value=httpx.Response(200, json={"hits": []}))
+        async with httpx.AsyncClient() as client:
+            adapter = HNWhoIsHiringAdapter(client=client)
+            postings = await adapter.fetch(since=None)
+    assert postings == []
