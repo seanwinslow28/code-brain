@@ -87,7 +87,7 @@ def _append_job_feed_summary(config, today: str) -> str:
         return (
             f"\n## Job Feed ({today}) · Scoring deferred\n"
             f"MBP was asleep at 8 AM. Agent will retry hourly until 11 AM.\n"
-            f"{fm.get('total_surfaced', 0)} postings fetched and rules-filtered; "
+            f"{fm.get('unscored', 0)} postings fetched and rules-filtered; "
             f"LLM scoring pending.\n"
             f"[Refresh the roll-up after MBP wakes →]({rel_link})\n"
         )
