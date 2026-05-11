@@ -6,10 +6,17 @@ Each adapter implements:
 
 All adapters take an injected httpx.AsyncClient so the orchestrator can apply
 a shared per-host semaphore (1 req/sec/host) and rate-limit politely.
+
+# web3.career requires a free API token. One-time setup:
+#   python3 agents-sdk/lib/keychain.py set web3career_token <token>
+# Followed by:
+#   security find-generic-password -s com.sean.agents.web3career_token  # verify
+# If the token is missing, the adapter logs a warning and returns [] (does not raise).
 """
 
 from __future__ import annotations
 
+import logging
 import re
 from datetime import datetime
 from typing import Any
@@ -18,8 +25,10 @@ import httpx
 from markdownify import markdownify
 
 from lib.job_types import Posting
+from lib.keychain import get_credential
 
 USER_AGENT = "SeanWinslow-JobFeed/1.0 (personal job-hunt agent)"
+_logger = logging.getLogger(__name__)
 
 
 def _html_to_md(html: str | None) -> str:
@@ -142,5 +151,45 @@ class HNWhoIsHiringAdapter:
                 salary_disclosed=None,
                 posted_at=posted,
                 description=md,
+            ))
+        return postings
+
+
+class Web3CareerAdapter:
+    name = "web3career"
+    base_url = "https://web3.career/api/v1"
+
+    def __init__(self, client: httpx.AsyncClient) -> None:
+        self.client = client
+
+    async def fetch(self, since: datetime | None) -> list[Posting]:
+        token = get_credential("web3career_token")
+        if not token:
+            _logger.warning("web3career_token missing from Keychain — skipping web3.career fetch")
+            return []
+
+        r = await self.client.get(
+            self.base_url,
+            params={"token": token},
+            headers={"User-Agent": USER_AGENT},
+        )
+        r.raise_for_status()
+        rows = r.json().get("jobs", [])
+
+        postings: list[Posting] = []
+        for row in rows:
+            posted = _parse_iso(row.get("created_at"))
+            if since and posted and posted < since:
+                continue
+            postings.append(Posting(
+                source=self.name,
+                source_role_id=str(row.get("id") or row.get("slug")),
+                url=row.get("url", ""),
+                company=row.get("company", ""),
+                title=row.get("title", ""),
+                location=row.get("location"),
+                salary_disclosed=row.get("salary"),
+                posted_at=posted,
+                description=_html_to_md(row.get("description", "")),
             ))
         return postings
