@@ -16,6 +16,7 @@ a shared per-host semaphore (1 req/sec/host) and rate-limit politely.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import re
 from datetime import datetime, timezone
@@ -370,3 +371,51 @@ async def fetch_ats(
             raise
         return postings, label
     return [], None
+
+
+async def fetch_all(
+    watchlist_slugs: list[str],
+    http_timeout_sec: int = 10,
+) -> tuple[list[Posting], list[str]]:
+    """Run all 4 feed adapters + ATS pollers for each watchlist slug in parallel.
+
+    Returns: (combined_postings, failed_poller_labels)
+    """
+    failed: list[str] = []
+    transport = httpx.AsyncHTTPTransport(retries=2)
+    timeout = httpx.Timeout(http_timeout_sec)
+
+    async with httpx.AsyncClient(transport=transport, timeout=timeout, follow_redirects=True) as client:
+        feed_adapters = [
+            RemoteOKAdapter(client=client),
+            HNWhoIsHiringAdapter(client=client),
+            Web3CareerAdapter(client=client),
+            WeWorkRemotelyAdapter(client=client),
+        ]
+
+        async def _safe_feed(adapter):
+            try:
+                return await adapter.fetch(since=None)
+            except Exception as exc:
+                _logger.warning("Feed adapter %s failed: %s", adapter.name, exc)
+                failed.append(adapter.name)
+                return []
+
+        async def _safe_ats(slug):
+            try:
+                postings, label = await fetch_ats(slug, client=client)
+                if label is None:
+                    failed.append(f"ats:{slug} (all 404)")
+                return postings
+            except Exception as exc:
+                _logger.warning("ATS poll %s failed: %s", slug, exc)
+                failed.append(f"ats:{slug} ({type(exc).__name__})")
+                return []
+
+        feed_results = await asyncio.gather(*[_safe_feed(a) for a in feed_adapters])
+        ats_results = await asyncio.gather(*[_safe_ats(s) for s in watchlist_slugs])
+
+    combined: list[Posting] = []
+    for batch in feed_results + ats_results:
+        combined.extend(batch)
+    return combined, failed

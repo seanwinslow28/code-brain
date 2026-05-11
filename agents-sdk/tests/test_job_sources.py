@@ -6,7 +6,7 @@ import pytest
 import respx
 import httpx
 
-from lib.job_sources import RemoteOKAdapter, HNWhoIsHiringAdapter, Web3CareerAdapter, WeWorkRemotelyAdapter, GreenhouseAdapter, LeverAdapter, AshbyAdapter, fetch_ats
+from lib.job_sources import RemoteOKAdapter, HNWhoIsHiringAdapter, Web3CareerAdapter, WeWorkRemotelyAdapter, GreenhouseAdapter, LeverAdapter, AshbyAdapter, fetch_ats, fetch_all
 from lib.job_types import Posting
 
 FIXTURES = Path(__file__).parent / "fixtures" / "job_feed"
@@ -225,3 +225,27 @@ async def test_fetch_ats_returns_empty_when_all_404():
             postings, source_used = await fetch_ats("nope", client=client)
     assert postings == []
     assert source_used is None
+
+
+@pytest.mark.asyncio
+async def test_fetch_all_aggregates_feeds_and_ats(monkeypatch):
+    monkeypatch.setattr("lib.job_sources.get_credential", lambda n: None)  # no web3 token
+    remoteok_body = (FIXTURES / "remoteok.json").read_text()
+    gh_body = (FIXTURES / "greenhouse.json").read_text()
+
+    with respx.mock(assert_all_called=False) as mock:
+        mock.get("https://remoteok.com/api").mock(return_value=httpx.Response(200, content=remoteok_body))
+        mock.get("https://hn.algolia.com/api/v1/search").mock(return_value=httpx.Response(200, json={"hits": []}))
+        mock.get("https://weworkremotely.com/categories/remote-product-jobs.rss").mock(return_value=httpx.Response(200, text=""))
+        mock.get("https://boards-api.greenhouse.io/v1/boards/anthropic/jobs").mock(return_value=httpx.Response(200, content=gh_body))
+        mock.get("https://api.lever.co/v0/postings/anthropic").mock(return_value=httpx.Response(404))
+        mock.get("https://api.ashbyhq.com/posting-api/job-board/anthropic").mock(return_value=httpx.Response(404))
+
+        postings, failed = await fetch_all(
+            watchlist_slugs=["anthropic"],
+            http_timeout_sec=10,
+        )
+
+    assert any(p.source == "remoteok" for p in postings)
+    assert any(p.source.startswith("greenhouse:") for p in postings)
+    assert failed == []  # no failed pollers
