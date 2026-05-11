@@ -21,6 +21,7 @@ import re
 from datetime import datetime
 from typing import Any
 
+import feedparser
 import httpx
 from markdownify import markdownify
 
@@ -191,5 +192,48 @@ class Web3CareerAdapter:
                 salary_disclosed=row.get("salary"),
                 posted_at=posted,
                 description=_html_to_md(row.get("description", "")),
+            ))
+        return postings
+
+
+class WeWorkRemotelyAdapter:
+    name = "wwr"
+    rss_url = "https://weworkremotely.com/categories/remote-product-jobs.rss"
+
+    def __init__(self, client: httpx.AsyncClient) -> None:
+        self.client = client
+
+    async def fetch(self, since: datetime | None) -> list[Posting]:
+        r = await self.client.get(self.rss_url, headers={"User-Agent": USER_AGENT})
+        r.raise_for_status()
+        feed = feedparser.parse(r.text)
+
+        postings: list[Posting] = []
+        for entry in feed.entries:
+            # WWR titles are formatted "Company: Title" — split on first colon
+            raw_title = entry.get("title", "")
+            if ":" in raw_title:
+                company, _, title = raw_title.partition(":")
+                company = company.strip()
+                title = title.strip()
+            else:
+                company, title = "", raw_title.strip()
+
+            link = entry.get("link", "")
+            posted_struct = entry.get("published_parsed")
+            posted = datetime(*posted_struct[:6]) if posted_struct else None
+            if since and posted and posted < since:
+                continue
+
+            postings.append(Posting(
+                source=self.name,
+                source_role_id=link or entry.get("id", ""),
+                url=link,
+                company=company,
+                title=title,
+                location=None,
+                salary_disclosed=None,
+                posted_at=posted,
+                description=_html_to_md(entry.get("description", "")),
             ))
         return postings

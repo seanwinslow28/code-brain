@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>WeWorkRemotely — Product</title>
+    <item>
+      <title>Acme: Product Manager</title>
+      <link>https://weworkremotely.com/remote-jobs/acme-pm-5001</link>
+      <guid>https://weworkremotely.com/remote-jobs/acme-pm-5001</guid>
+      <pubDate>Fri, 09 May 2026 12:00:00 +0000</pubDate>
+      <description>&lt;p&gt;Remote PM role at Acme.&lt;/p&gt;</description>
+      <category>Remote</category>
+    </item>
+  </channel>
+</rss>

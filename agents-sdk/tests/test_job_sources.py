@@ -6,7 +6,7 @@ import pytest
 import respx
 import httpx
 
-from lib.job_sources import RemoteOKAdapter, HNWhoIsHiringAdapter, Web3CareerAdapter
+from lib.job_sources import RemoteOKAdapter, HNWhoIsHiringAdapter, Web3CareerAdapter, WeWorkRemotelyAdapter
 from lib.job_types import Posting
 
 FIXTURES = Path(__file__).parent / "fixtures" / "job_feed"
@@ -125,3 +125,23 @@ async def test_web3career_adapter_skips_when_token_missing(monkeypatch, caplog):
         adapter = Web3CareerAdapter(client=client)
         postings = await adapter.fetch(since=None)
     assert postings == []
+
+
+@pytest.mark.asyncio
+async def test_wwr_adapter_parses_rss():
+    body = (FIXTURES / "wwr.rss").read_text()
+    with respx.mock(base_url="https://weworkremotely.com") as mock:
+        mock.get("/categories/remote-product-jobs.rss").mock(
+            return_value=httpx.Response(200, content=body)
+        )
+        async with httpx.AsyncClient() as client:
+            adapter = WeWorkRemotelyAdapter(client=client)
+            postings = await adapter.fetch(since=None)
+
+    assert len(postings) == 1
+    p = postings[0]
+    assert p.source == "wwr"
+    assert p.company == "Acme"
+    assert p.title == "Product Manager"
+    assert p.url == "https://weworkremotely.com/remote-jobs/acme-pm-5001"
+    assert p.source_role_id == "https://weworkremotely.com/remote-jobs/acme-pm-5001"
