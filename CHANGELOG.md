@@ -5,6 +5,28 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.28.0] - 2026-05-11
+
+Job-feed agent — autonomous PM/APM role discovery wired into the morning brief.
+
+### Added
+
+- **Job-feed agent (autonomous SDK agent #8)** — daily PM/APM role discovery from 4 free public feeds (RemoteOK, HN "Who's Hiring", web3.career, WeWorkRemotely) plus a ~40-company ATS watchlist (Greenhouse/Lever/Ashby auto-detect). Rules-filters with regex/YOE/geo/salary hard cuts, scores survivors with Qwen3-14B on MBP via HybridRouter (`fallback_disabled=true`; no cloud egress on MBP-asleep — postings carry over to next run), persists to standalone `vault/.job-feed.db`, renders Markdown roll-up to `vault/20_projects/prj-job-hunt-2026/job-feed/<today>.md`, and surfaces a 3-line summary block in the daily-driver morning brief. launchd schedules 7 fires from 8:00–11:00 AM ET to handle MBP-asleep catch-up via the roll-up's `complete: true` idempotency frontmatter. $0/run.
+  - New SDK agent: `agents-sdk/agents/job_feed.py`
+  - New lib modules: `agents-sdk/lib/job_types.py`, `job_sources.py`, `job_rules.py`, `job_db.py`, `job_scoring.py`, `job_renderer.py`
+  - New CLI helper: `agents-sdk/scripts/update_status.py`
+  - New launchd plist: `agents-sdk/schedules/com.sean.job-feed.plist`
+  - New seed file: `vault/20_projects/prj-job-hunt-2026/job-feed/watchlist.yaml` (~40 companies)
+  - Spec: `docs/superpowers/specs/2026-05-09-job-feed-agent-design.md`
+  - Plan: `docs/superpowers/plans/2026-05-11-job-feed-agent.md`
+
+### Counts
+
+- 117 skills (no change)
+- 13 subagents (no change)
+- 13 hooks (no change)
+- 15 SDK agents — **8 active** on launchd (job-feed added; was 7 of 14).
+
 ## [3.26.3] - 2026-05-06
 
 Meta-Agent registration fix + research routing rule. The deep-researcher agent has been running on schedule since v3.23.0, but `meta_agent.py` was never updated to monitor it — `ACTIVE_AGENTS` listed only 6 entries, so today's 08:35 fleet status report wrote "Active agents: 6 of 11" with no row for deep-researcher. Discovered while triaging today's `daily-fleet-status-2026-05-06.md` after Topic 1b's 02:45 run timed out at 900s (LDR stalled at 90 % from t=209s → t=900s on a heavy compound prompt).
