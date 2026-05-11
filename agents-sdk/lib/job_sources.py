@@ -10,6 +10,7 @@ a shared per-host semaphore (1 req/sec/host) and rate-limit politely.
 
 from __future__ import annotations
 
+import re
 from datetime import datetime
 from typing import Any
 
@@ -74,5 +75,72 @@ class RemoteOKAdapter:
                 salary_disclosed=_format_salary(row.get("salary_min"), row.get("salary_max")),
                 posted_at=posted,
                 description=_html_to_md(row.get("description", "")),
+            ))
+        return postings
+
+
+# Pipe-delimited "Company | Title | Location | Type" — the de-facto HN format
+_HN_HEAD_RE = re.compile(r"^([^|]+)\s*\|\s*([^|]+)\s*\|\s*([^|]+?)(?:\s*\|\s*(.+))?\s*$")
+_URL_RE = re.compile(r'https?://[^\s<>"\']+')
+
+
+class HNWhoIsHiringAdapter:
+    name = "hn"
+    search_url = "https://hn.algolia.com/api/v1/search"
+    by_date_url = "https://hn.algolia.com/api/v1/search_by_date"
+
+    def __init__(self, client: httpx.AsyncClient) -> None:
+        self.client = client
+
+    async def fetch(self, since: datetime | None) -> list[Posting]:
+        # 1. Find current month's "Who is hiring" thread
+        r = await self.client.get(
+            self.search_url,
+            params={"tags": "story", "query": "Ask HN Who is hiring"},
+            headers={"User-Agent": USER_AGENT},
+        )
+        r.raise_for_status()
+        hits = r.json().get("hits", [])
+        if not hits:
+            return []
+        # Most recent thread first
+        thread = sorted(hits, key=lambda h: h.get("created_at", ""), reverse=True)[0]
+        thread_id = thread["objectID"]
+
+        # 2. Pull top-level comments under that thread
+        r = await self.client.get(
+            self.by_date_url,
+            params={"tags": f"comment,story_{thread_id}", "hitsPerPage": 1000},
+            headers={"User-Agent": USER_AGENT},
+        )
+        r.raise_for_status()
+        comments = r.json().get("hits", [])
+
+        postings: list[Posting] = []
+        for c in comments:
+            text = c.get("comment_text") or ""
+            md = _html_to_md(text)
+            # Look at the first non-blank line
+            first_line = next((ln.strip() for ln in md.splitlines() if ln.strip()), "")
+            m = _HN_HEAD_RE.match(first_line)
+            if not m:
+                continue  # Not a pipe-delimited job ad — drop (heuristic 70-80% precision)
+            company, title, location, _kind = m.group(1, 2, 3, 4)
+            url_match = _URL_RE.search(md)
+            if not url_match:
+                continue
+            posted = _parse_iso(c.get("created_at"))
+            if since and posted and posted < since:
+                continue
+            postings.append(Posting(
+                source=self.name,
+                source_role_id=str(c["objectID"]),
+                url=url_match.group(0),
+                company=company.strip(),
+                title=title.strip(),
+                location=location.strip(),
+                salary_disclosed=None,
+                posted_at=posted,
+                description=md,
             ))
         return postings
