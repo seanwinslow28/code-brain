@@ -110,3 +110,52 @@ def test_status_mutation(db: JobDB):
             "SELECT status FROM job_postings WHERE id=?", (row_id,)
         ).fetchone()[0]
     assert status == "applied"
+
+
+import subprocess
+
+
+def test_update_status_cli_end_to_end(tmp_path, monkeypatch):
+    """The CLI script reads config, opens the live DB, mutates status, prints OK."""
+    # Set up a temp DB with one row
+    p = _p(source="x", source_role_id="cli-1")
+    db = JobDB(tmp_path / "test.db")
+    db.persist_rules_passed(p, scored=None)
+    row_id = db.row_id(p)
+
+    script = Path(__file__).parent.parent / "scripts" / "update_status.py"
+    result = subprocess.run(
+        ["python3", str(script), str(row_id), "applied", "--db", str(tmp_path / "test.db")],
+        capture_output=True, text=True,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "applied" in result.stdout
+
+    import sqlite3
+    with sqlite3.connect(tmp_path / "test.db") as conn:
+        status = conn.execute("SELECT status FROM job_postings WHERE id=?", (row_id,)).fetchone()[0]
+    assert status == "applied"
+
+
+def test_update_status_cli_rejects_invalid_status(tmp_path):
+    db = JobDB(tmp_path / "test.db")
+    script = Path(__file__).parent.parent / "scripts" / "update_status.py"
+    result = subprocess.run(
+        ["python3", str(script), "1", "garbage", "--db", str(tmp_path / "test.db")],
+        capture_output=True, text=True,
+    )
+    assert result.returncode != 0
+    assert "invalid" in (result.stderr + result.stdout).lower()
+
+
+def test_update_status_cli_rejects_unknown_row_id(tmp_path):
+    """If db_id doesn't exist in the DB, the CLI must error out (not silently succeed).
+    Resolves the Task 10 code-review note about update_status silently succeeding on bad rows."""
+    db = JobDB(tmp_path / "test.db")
+    script = Path(__file__).parent.parent / "scripts" / "update_status.py"
+    result = subprocess.run(
+        ["python3", str(script), "9999", "applied", "--db", str(tmp_path / "test.db")],
+        capture_output=True, text=True,
+    )
+    assert result.returncode != 0
+    assert "not found" in result.stderr.lower() or "not found" in result.stdout.lower() or "no row" in (result.stderr + result.stdout).lower()
