@@ -1,0 +1,25 @@
+[
+  {"legal": "RemoteOK API"},
+  {
+    "id": "remoteok-1001",
+    "url": "https://remoteok.com/remote-jobs/1001",
+    "company": "Acme",
+    "position": "Product Manager",
+    "location": "Worldwide",
+    "salary_min": 110000,
+    "salary_max": 140000,
+    "date": "2026-05-09T08:00:00+00:00",
+    "description": "<p>We're hiring a PM.</p>"
+  },
+  {
+    "id": "remoteok-1002",
+    "url": "https://remoteok.com/remote-jobs/1002",
+    "company": "Beta",
+    "position": "Director of Product",
+    "location": "London",
+    "salary_min": null,
+    "salary_max": null,
+    "date": "2026-05-09T09:00:00+00:00",
+    "description": "<p>Senior leadership role.</p>"
+  }
+]

@@ -1,0 +1,63 @@
+# Job-feed agent watchlist — edit freely. Re-read on every run.
+# ATS auto-detection: agent tries Greenhouse → Lever → Ashby for each slug.
+# Slugs are best-guesses; week-1 will surface missing/wrong ones via the run manifest.
+
+ai_native:
+  - anthropic
+  - openai
+  - huggingface
+  - cohere
+  - mistral
+  - perplexity
+  - glean
+  - sierra
+  - scale
+  - replicate
+  - together-ai
+  - cursor
+  - replit
+  - lovable
+  - modal
+  - pinecone
+  - langchain
+  - vercel
+  - supabase
+
+ai_creative_crossover:
+  - elevenlabs
+  - suno
+  - pika
+  - krea
+  - tome
+  - gamma
+  - heygen
+  - synthesia
+  - runway
+  - descript
+
+creative_design:
+  - figma
+  - canva
+  - linear
+  - notion
+  - webflow
+  - framer
+  - spline
+
+creator_economy:
+  - beehiiv
+  - fourthwall
+
+boston_metro:
+  - hubspot
+  - draftkings
+  - toast
+  - klaviyo
+  - datarobot
+  - hopper
+  - circle
+
+crypto_warm_network:
+  - messari
+  - coinbase
+  - kraken

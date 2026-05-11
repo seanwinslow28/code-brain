@@ -5,6 +5,27 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.28.0] - 2026-05-11
+
+Job-feed agent — autonomous PM/APM role discovery wired into the morning brief.
+
+### Added
+
+- **Job-feed agent (autonomous SDK agent #8 on launchd)** — daily PM/APM role discovery from 4 free public feeds (RemoteOK, HN "Who's Hiring", web3.career, WeWorkRemotely) plus a ~40-company ATS watchlist (Greenhouse/Lever/Ashby auto-detect). Rules-filters with regex/YOE/geo/salary hard cuts, scores survivors with Qwen3-14B on MBP via HybridRouter (`fallback_disabled=true`; no cloud egress on MBP-asleep — postings carry over to next run), persists to standalone `vault/.job-feed.db`, renders Markdown roll-up to `vault/20_projects/prj-job-hunt-2026/job-feed/<today>.md`, and surfaces a 3-line summary block in the daily-driver morning brief. launchd schedules 7 fires from 8:00–11:00 AM ET to handle MBP-asleep catch-up via the roll-up's `complete: true` idempotency frontmatter. $0/run.
+  - New SDK agent: `agents-sdk/agents/job_feed.py`
+  - New lib modules: `agents-sdk/lib/job_types.py`, `job_sources.py`, `job_rules.py`, `job_db.py`, `job_scoring.py`, `job_renderer.py`
+  - New CLI helper: `agents-sdk/scripts/update_status.py`
+  - New launchd plist: `agents-sdk/schedules/com.sean.job-feed.plist`
+  - New seed file: `vault/20_projects/prj-job-hunt-2026/job-feed/watchlist.yaml` (~40 companies)
+  - Spec: `docs/superpowers/specs/2026-05-09-job-feed-agent-design.md`
+  - Plan: `docs/superpowers/plans/2026-05-11-job-feed-agent.md`
+
+### Changed
+
+- `CLAUDE.md`: SDK agent count `15 → 16`; added Job Feed row to the active-agents table; "Active agents (7 of 15 on launchd; 1 manual-trigger)" → "Active agents (8 of 16 on launchd; 1 manual-trigger)".
+- `README.md`: same count bump in the masthead paragraph.
+- `agents-sdk/agents/daily_driver.py`: morning preamble now appends a Job Feed summary block (top-3 fits or "scoring deferred" banner) before the vault-health section when a roll-up exists for the day.
+
 ## [3.27.0] - 2026-05-10
 
 **`skill_optimizer.py` — autoresearch optimization harness for Claude Code skills.** First one-skill prototype validated against `.claude/skills/writing-voice-modes/SKILL.md`. Adapted from Karpathy's autoresearch pattern (March 2026): mutable artifact (the body of `SKILL.md` with frontmatter + example outputs + meta-navigation sections protected by a pre-write diff guard), fixed infrastructure (orchestrator + eval YAML + judge prompt template + structural-check Python), and English-language instructions for a mutation subagent. Generation runs on Opus 4.7; LLM judging runs locally on Qwen3-14B (via Ollama on Mac Mini) with Sonnet 4.6 sample-checks every 5 iterations. Decision rule is 3-iteration moving average with bootstrap-CI keep/revert. Six anti-Goodhart trip-wires + held-out validation set + sealed surprise prompts to detect drift.
@@ -58,7 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 117 skills (no change)
 - 13 subagents (no change)
 - 13 hooks (no change)
-- **15 SDK agents — 7 active (launchd) + 1 manual-trigger** (skill_optimizer is the new 15th).
+- **16 SDK agents — 8 active (launchd) + 1 manual-trigger** (job-feed added in v3.28.0; skill_optimizer added in v3.27.0).
 
 ## [3.26.4] - 2026-05-07
 

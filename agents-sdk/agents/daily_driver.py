@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import re
 import sys
 from datetime import date, timedelta
 from pathlib import Path
@@ -45,6 +46,65 @@ from lib.lint_report import (  # noqa: E402
     synth_health_summary,
     vault_health_summary,
 )
+
+
+def _parse_top_n_from_roll_up(path: Path, n: int = 3) -> list[tuple[str, str, str, str, str]]:
+    """Return up to n entries from the roll-up's '## Top Fits' section.
+
+    Each tuple: (idx, company, title, location, score_str).
+    """
+    if not path.exists():
+        return []
+    text = path.read_text(encoding="utf-8")
+    # Slice from '## Top Fits' to the next '##' header
+    m = re.search(r"## Top Fits[^\n]*\n(.*?)(?=\n## |\Z)", text, re.DOTALL)
+    if not m:
+        return []
+    block = m.group(1)
+    out: list[tuple[str, str, str, str, str]] = []
+    for line in block.splitlines():
+        hm = re.match(r"### (\d+)\. ([^—]+?) — (.+?) · ⭐ (\d+/\d+)", line)
+        if hm:
+            idx, company, title, score = hm.group(1, 2, 3, 4)
+            out.append((idx.strip(), company.strip(), title.strip(), "", score.strip()))
+            if len(out) >= n:
+                break
+    return out
+
+
+def _append_job_feed_summary(config, today: str) -> str:
+    """Return a Markdown block summarizing today's job-feed roll-up, or '' if none."""
+    feed_path = Path(config.vault_root) / "20_projects/prj-job-hunt-2026/job-feed" / f"{today}.md"
+    if not feed_path.exists():
+        return ""
+
+    from lib.job_renderer import read_roll_up_frontmatter
+    fm = read_roll_up_frontmatter(feed_path) or {}
+
+    rel_link = f"./job-feed/{today}.md"
+
+    if fm.get("complete") is False:
+        return (
+            f"\n## Job Feed ({today}) · Scoring deferred\n"
+            f"MBP was asleep at 8 AM. Agent will retry hourly until 11 AM.\n"
+            f"{fm.get('unscored', 0)} postings fetched and rules-filtered; "
+            f"LLM scoring pending.\n"
+            f"[Refresh the roll-up after MBP wakes →]({rel_link})\n"
+        )
+
+    top_3 = _parse_top_n_from_roll_up(feed_path, n=3)
+    strong = fm.get("top_fits", 0)
+    medium = fm.get("medium_fits", 0)
+    weak = fm.get("weak_fits", 0)
+
+    lines = [
+        f"\n## Job Feed ({today}) · {strong} strong / {medium} medium / {weak} weak\n"
+    ]
+    for idx, company, title, _loc, score in top_3:
+        anchor = f"#{idx}-" + company.lower().replace(" ", "-")
+        lines.append(f"- **{company}** — {title} · {score} · [→]({rel_link}{anchor})\n")
+    lines.append(f"\n[Full roll-up →]({rel_link})\n")
+    return "".join(lines)
 
 
 def build_artifact_preamble(config) -> str:
@@ -168,6 +228,10 @@ def build_preamble(mode: str, config) -> str:
     # summary line under Vault Health when one exists. Empty string when
     # no manifest yet (suppresses the line entirely on a fresh vault).
     if mode == "morning":
+        today_iso = date.today().isoformat()
+        job_feed_block = _append_job_feed_summary(config, today_iso)
+        if job_feed_block:
+            base += job_feed_block
         base += "\n" + vault_health_summary(config.vault_root) + "\n"
         synth_line = synth_health_summary(config.vault_root)
         if synth_line:
