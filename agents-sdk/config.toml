@@ -270,6 +270,7 @@ financial_analysis = { model = "phi4-mini-reasoning", machine = "mac_mini" }
 code_review = { model = "qwen2.5-coder-32b-instruct", machine = "macbook_pro" }
 heavy_synthesis = { model = "qwen3-14b", machine = "macbook_pro" }
 vault_synthesis = { model = "qwen3-14b", machine = "macbook_pro" }  # Phase 6 D.2 — model resolved at runtime via this key
+job_scoring = { model = "qwen3-14b", machine = "macbook_pro" }
 deep_research = { model = "qwen3-14b-research", machine = "mac_mini" }  # Phase 5 (2026-04-26) → Mac Mini migration v3.23.0 (2026-05-02): routed via LDR HTTP at :5050, custom Modelfile tag with /no_think baked into TEMPLATE
 sprite_vision_qa = { model = "Qwen3-VL-7B", machine = "alienware" }
 comfyui_orchestration = { model = "none", machine = "alienware" }
