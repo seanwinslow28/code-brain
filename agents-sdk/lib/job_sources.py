@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import logging
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any
 
 import feedparser
@@ -299,7 +299,7 @@ class LeverAdapter:
             sr = row.get("salaryRange") or {}
             salary = _format_salary(sr.get("min"), sr.get("max"))
             ts = row.get("createdAt")
-            posted = datetime.fromtimestamp(ts / 1000) if ts else None
+            posted = datetime.fromtimestamp(ts / 1000, tz=timezone.utc) if ts else None
             if since and posted and posted < since:
                 continue
             cats = row.get("categories") or {}
