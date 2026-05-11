@@ -70,6 +70,36 @@ def test_find_broken_wikilinks(tmp_path: Path) -> None:
     assert not any("b" == t.strip() for t in targets)
 
 
+def test_find_broken_wikilinks_skips_numeric_citation_markers(tmp_path: Path) -> None:
+    """[[10]] / [[42]]-style citation markers from research LLM output
+    must not be flagged as broken wikilinks."""
+    v = tmp_path / "vault"
+    _touch(v / "research.md", "per [[10]] and [[42]], also [[missing-real]]")
+    issues = find_broken_wikilinks(v)
+    targets = {i.detail for i in issues}
+    assert "10" not in targets
+    assert "42" not in targets
+    assert any("missing-real" in t for t in targets)
+
+
+def test_find_broken_wikilinks_skips_granola_archive(tmp_path: Path) -> None:
+    """Files inside the-block-meetings-granola-notes/ must be skipped
+    entirely — that archive is read-only and full of stale slug-rename
+    cross-references."""
+    v = tmp_path / "vault"
+    _touch(
+        v / "30_domains" / "product-management" / "the-block-meetings-granola-notes" / "mtg-foo.md",
+        "links to [[Alex_Sean sync]] which no longer exists",
+    )
+    _touch(v / "outside.md", "this links to [[also-missing]]")
+    issues = find_broken_wikilinks(v)
+    targets_by_file = {(i.file.name, i.detail) for i in issues}
+    # The granola archive file's broken link is skipped...
+    assert not any(name == "mtg-foo.md" for name, _ in targets_by_file)
+    # ...but the file outside the archive is still scanned.
+    assert any(detail == "also-missing" for _, detail in targets_by_file)
+
+
 def test_find_orphan_files(tmp_path: Path) -> None:
     v = tmp_path / "vault"
     # index.md is the MOC hub (skip-listed), linked files cross-reference

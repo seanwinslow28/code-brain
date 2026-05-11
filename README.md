@@ -1,6 +1,6 @@
 # Claude Code Superuser Pack
 
-An open-source agentic engineering practitioner's toolkit — **117** skills, 13 subagents, 13 hooks, **16** autonomous SDK agents (8 currently running on launchd, 1 manual-trigger), **3 primary domains**, an Obsidian vault, and a Claude Agent SDK runtime, all auto-loaded. Every component is in active use; every scheduled agent has a launchd schedule; every skill is a prompt and every prompt has a job. If you've read Karpathy's "agentic engineering" framing and wondered what one looks like in the wild, this is one.
+An open-source agentic engineering practitioner's toolkit — **117** skills, 13 subagents, **14** hooks, **16** autonomous SDK agents (8 currently running on launchd, 1 manual-trigger), **3 primary domains**, an Obsidian vault, and a Claude Agent SDK runtime, all auto-loaded. Every component is in active use; every scheduled agent has a launchd schedule; every skill is a prompt and every prompt has a job. If you've read Karpathy's "agentic engineering" framing and wondered what one looks like in the wild, this is one.
 
 ## What's Inside
 
@@ -43,7 +43,7 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the [Cl
 | Vault Synthesizer | 2:30 AM daily | Generates concept + connection articles from changed vault files (100% local, Qwen3-14B on MBP when awake; intermittent since v3.14.3) |
 | Deep Researcher (v3.23.0) | 2:45 AM daily | Pulls one question from `vault/00_inbox/research-queue.md`, runs LearningCircuit LDR locally (SearXNG + Qwen3-14B GGUF Q4_K_M `qwen3-14b-research:latest` Modelfile via Ollama on **Mac Mini** `:5050`), writes a topical note + injects digest into today's daily note. 100% local, $0/run |
 | Meta-Agent | 8:35 AM daily | Fleet self-monitoring — checks active-agent recency + infra health, writes fleet-status note that feeds Daily Driver |
-| Daily Driver (morning) | 8:45 AM | Read yesterday's note, create today's, write 1-3-5 priorities, surface Vault Health + fleet alerts. v3.16.0: loads operating-model HEARTBEATs for all 3 domains + on-demand USER/SOUL/schedule-recs reads |
+| Daily Driver (morning) | 8:45 AM | Read yesterday's note, create today's, write 1-3-5 priorities, surface Vault Health + fleet alerts. v3.16.0: loads operating-model HEARTBEATs for all 3 domains + on-demand USER/SOUL/schedule-recs reads. v3.27.0: injects a 7-line Fleet Overnight Digest under `<!-- fleet-overnight -->` and the daily-note template carries four live Dataview blocks (today's fleet status, new knowledge, new research, latest lint report) |
 | Knowledge Lint | Sunday 22:00 | Two-tier vault health scan (structural + semantic). Reports surface in the morning brief. |
 | Flush (SessionEnd) | on session close | Extracts decisions/lessons/actions/quotes from transcripts into `vault/daily/YYYY-MM-DD.md` |
 | Job Feed (v3.28.0) | 8:00–11:00 AM (7 fires) | Scrapes 4 public feeds + ~40-company ATS watchlist, scores PM/APM roles with Qwen3-14B, writes daily roll-up to `vault/20_projects/prj-job-hunt-2026/job-feed/` and surfaces 3-line summary in morning brief. 100% local, $0/run |

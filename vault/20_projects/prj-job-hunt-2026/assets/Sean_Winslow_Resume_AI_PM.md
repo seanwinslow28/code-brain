@@ -6,7 +6,7 @@
 
 ## Summary
 
-AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, MCP servers, and autonomous agent fleets. Most recently at The Block, delivered 3 Claude Skills, a Polymarket B2B revenue integration, and the Campus 201 AI media generation pipeline. Maintains the open-source 117-skill Claude Code Superuser Pack and a 14-agent autonomous SDK fleet.
+AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, MCP servers, and autonomous agent fleets. Most recently at The Block, delivered 3 Claude Skills, co-authored the Block Pro 2.0 product audit and competitive analysis, and authored the x402 / A2A / MCP integration strategy memo positioning Block Pro for the agent economy. Maintains the open-source 117-skill Claude Code Superuser Pack and a 14-agent autonomous SDK fleet.
 
 ---
 
@@ -16,11 +16,13 @@ AI Product Manager and agentic-engineering practitioner. Ships production Claude
 
 **Product Manager** | *November 2025 – May 2026*
 
-- Built and shipped 3 production Claude Skills (`etf-page-creator`, `stakeholder-update`, `jira-automation`) and a Zapier RevOps automation pipeline for the AdOps department — automating WordPress ETF page generation, Jira ticket creation, and biweekly stakeholder updates.  
+- Shipped 3 production Claude Skills (`etf-page-creator`, `stakeholder-update`, `jira-automation`) automating WordPress ETF page generation, biweekly executive updates, and per-product Jira ticket scaffolding — direct delivery against the P\&E Q2 Objective 5 KR3 ("Ship 1–3 Claude Skills").  
+- Built the AdOps RevOps automation pipeline — 11 Zapier workflows + 10 product-specific intake forms + central Tables database — turning a Salesforce "Closed Won" trigger into auto-created parent/child Jira tickets, personalized client intake emails, and routed Slack notifications, eliminating 7 manual handoff steps per deal.  
+- Co-authored the Block Pro 2.0 product audit + competitive analysis (9 enterprise data/research platforms benchmarked) and conducted 3 internal stakeholder interviews (sales, research, head of data) to scope the pitch deck delivered to the incoming CEO — including a structured pre-mortem (11 risks across launch-blocking, fast-follow, and track tiers) that surfaced engineering-capacity and renewal-cliff dependencies before the proposal landed.  
 - Automated image, video, and voiceover generation for the Campus 201 enterprise course launch using Nano Banana Pro, Veo 3.1 / Kling 3.0, and ElevenLabs APIs.  
-- Drafted the PRD and shipped the Polymarket × Campus Sponsored Courses integration end-to-end — The Block's first sponsored-microcourse B2B revenue vertical, including X/Twitter auth flow and full user-flow QA.  
-- Performed competitive research, stakeholder interviews, A/B-session analysis, and built the demo-ready prototype for the Pro 2.0 platform proposal delivered to the incoming CEO.  
-- Authored the 10-week P\&E Department 2.0 execution plan, consolidating 7 competing team-doc hubs and 25+ orphaned meeting-note pages into a per-product Confluence structure with a centralized Templates Library.
+- Authored the PRD (v1→v3) and shipped The Block's first sponsored-microcourse B2B revenue vertical (Polymarket × Campus) — a 5-component build (homepage module, Learn page hub, in-article recirculation, embedded course player, sponsor data layer) connecting The Block's editorial audience to Campus education content, plus a sales one-pager template that productized the partnership for repeatable revenue-team sale.  
+- Built the .co homepage redesign competitive visual audit — 50+ site benchmark across 8 categories (crypto-native, premium news, financial/data, modular newsletter formats, editorial design, bento layouts, crypto data, wildcards) with a structured "one to steal / one to never do" capture methodology — feeding blue-sky design exploration with the design team.  
+- Authored the 10-week P\&E Department 2.0 execution plan consolidating 7 competing team-doc hubs, ~25 orphaned Developer Sync pages, and 5+ overlapping onboarding pages into a per-product Confluence architecture with a centralized Templates Library — framed as operational-maturity proof for the incoming CEO and direct delivery against P\&E Q2 OKR Objective 5 (Operational Excellence & AI-Assisted Efficiency).
 
 ### New York Life Insurance — Multimedia And Design | New York, NY
 
@@ -29,8 +31,7 @@ AI Product Manager and agentic-engineering practitioner. Ships production Claude
 - Led enterprise rollout of a SaaS DAM platform across 50+ locations, leading requirements gathering and translating business needs into actionable technical documentation within the Atlassian suite.  
 - Increased media asset productivity by 40% through onboarding programs and custom training for 100+ users.  
 - Boosted asset discoverability by 60% using prompt-engineered metadata via ChatGPT, Claude, and Gemini.  
-- Reduced UX friction and system response time by 50% by analyzing Jira support tickets and refining workflows.  
-- Acted as the cross-functional liaison between engineering, creative, and leadership teams, aligning features with business goals.
+- Reduced UX friction and system response time by 50% by analyzing Jira support tickets and refining workflows.
 
 ---
 
@@ -40,8 +41,8 @@ AI Product Manager and agentic-engineering practitioner. Ships production Claude
 
 **Product Manager** | *November 2025 – May 2026*
 
+- Authored the x402 / A2A / Block Pro MCP integration strategy memo — mapping 6 monetization vectors (per-chart dashboard micropayments, API pay-per-request, AI agent data feeds, index access, education micropayments, content-crawl revenue) to Coinbase's HTTP-native payment protocol — positioning Block Pro as default data infrastructure for the emerging agent economy.  
 - Onboarded fellow Product Managers on Claude Code and agentic-engineering workflows; built a P\&E Claude Skills library covering Jira automation, ETF page creation, stakeholder updates, and design system enforcement.  
-- Mapped the integration of the X402 protocol, A2A (agent-to-agent), and The Block Pro MCP into a unified agentic-wallet transaction strategy, positioning Block Pro for the agent economy under the incoming CEO.  
 - Created the PRD-to-Prototype Lab project — an in-product reference giving designers and engineers shared access to user flows, PRD details, and the Block design system.  
 - Led daily P\&E standups and drove cross-functional execution across engineering, design, and revenue operations in Slack, Confluence, Jira, and Figma.
 
@@ -51,7 +52,6 @@ AI Product Manager and agentic-engineering practitioner. Ships production Claude
 
 - Managed a team of 8 to deliver AI-based automation features in digital asset management pipelines.  
 - Led stakeholder communication and alignment to integrate AI tools into core workflows.  
-- Drove cross-functional communication to ensure timely delivery of updates and successful platform adoption across teams.  
 - Mentored junior staff on prompt engineering and AI tool usage aligned to roadmap objectives.
 
 ---
@@ -81,8 +81,6 @@ AI Product Manager and agentic-engineering practitioner. Ships production Claude
 ## Education & Certification
 
 **College of Staten Island** — Staten Island, NY *Bachelor of Arts in Media Studies* | 2010 – 2014
-
-**HelloPM** *Certification in AI Product Management* | *In Progress*
 
 ---
 

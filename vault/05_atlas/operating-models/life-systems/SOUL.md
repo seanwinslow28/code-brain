@@ -136,7 +136,7 @@ Non-negotiable conventions every proposal must respect:
 | AI tooling / workflow context | [claude-mastery/](../../../../claude-mastery/) + `last30days` skill output |
 | 16BitFit, Remotion, creative assets | [creative-studio operating-model](../creative-studio/) (not life-systems) |
 | Day-job / PM context | [the-block operating-model](../the-block/) (not life-systems) |
-| Sean's full identity / tier-0 context | [[Sean-Winslow-Full-Personal-Context-v2.0\|Full Personal Context]] |
+| Sean's full identity / tier-0 context | [[Sean-Winslow-Full-Personal-Context-v2.0|Full Personal Context]] |
 
 **North-star vision:** Obsidian vault as the single source of truth where agents + Sean grow, create, invest, research, and learn together — and agents learn about Sean over time.
 

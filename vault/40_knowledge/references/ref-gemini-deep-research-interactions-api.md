@@ -2,14 +2,18 @@
 title: "Gemini Deep Research Agent  |  Gemini API"
 source: "https://ai.google.dev/gemini-api/docs/deep-research"
 author:
+  - "Google"
 published:
 created: 2026-05-07
 description: "Deep Research is an agent designed to perform complex, long-running context gathering and synthesis tasks."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "gemini-deep-research"
+  - "agent-fleet"
+type: reference
+status: processed
+domain: [claude-mastery]
+ai-context: "Official Gemini API docs for the Deep Research agent — Interactions API with background mode, polling pattern, and Python/JS examples for long-running multi-step research tasks."
 ---
 The Gemini Deep Research Agent autonomously plans, executes, and synthesizes multi-step research tasks. Powered by Gemini, it navigates complex information landscapes to produce detailed, cited reports. New capabilities allow you to collaboratively plan with the agent, connect to external tools using MCP servers, include visualizations (like charts and graphs), and provide documents directly as input.
 

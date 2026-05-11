@@ -1,4 +1,5 @@
 ---
+title: "prj-job-hunt-2026"
 type: project
 project: prj-job-hunt-2026
 status: active
@@ -30,7 +31,7 @@ The dashboard. Plan and migration docs are linked below; this file is the live t
 
 ## Plan + key docs
 
-All launch-day artifacts live in [[onwards-and-upwards-5-4-26]] (sibling folder to this README).
+All launch-day artifacts live in the `onwards-and-upwards-5-4-26/` sibling folder. Master plan: [[2026-05-04-onwards-and-upwards-plan]].
 
 - **🟢 RESUME-HERE handoff (read first in a fresh session):** [[onwards-and-upwards-5-4-26/2026-05-04-migration-completion-handoff|2026-05-04-migration-completion-handoff.md]]
 - **Master plan:** [[onwards-and-upwards-5-4-26/2026-05-04-onwards-and-upwards-plan|2026-05-04-onwards-and-upwards-plan.md]]

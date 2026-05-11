@@ -5,6 +5,92 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.32.0] - 2026-05-11
+
+SessionEnd auto-stub for new person wikilinks. Closes the regression risk Sean asked about: "if a new article lands with a new `[[Author Name]]` not in the people folder, will it show up in the broken-wikilink section every Sunday?" Answer is now no — at the end of every Claude Code session, a fire-and-forget hook scans the vault for unresolved `[[Name]]` wikilinks in `author:` YAML frontmatter fields and creates minimal stubs before the next morning's Daily Driver fire.
+
+### Added
+
+- `agents-sdk/scripts/auto_stub_people.py` — pure-Python utility, no Claude SDK in the loop. Two filters protect against creating garbage stubs:
+  1. **Author-field signal**: the wikilink must appear inside a `author:` YAML frontmatter list (single-value inline form `author: "[[X]]"` or multi-line list form). Body-text wikilinks, `related:` fields, and any other location are ignored. This is the structured signal that the value is a person and not a typo / citation marker / folder reference.
+  2. **Person-name shape**: target must match `^[A-ZÀ-Ý][A-Za-zÀ-ÿ.'\-]*( [A-ZÀ-Ý][A-Za-zÀ-ÿ.'\-]*){0,2}$` — 1-3 capitalized tokens with optional middle initials, hyphens, apostrophes, and latin diacritics. Accepts "Ali Çevik", "RT Watson", "Mary-Alice McKee", "J.J. Smith". Rejects "stage", "intent-engineering", "10", "prj-job-hunt-2026", lowercase strings, empty targets.
+  Stubs land at `vault/40_knowledge/people/<slug>.md` (slug = ASCII-folded lowercase with hyphens). Existence dedup checks both filename (`<slug>.md`) and `title:` frontmatter, so the same person under a different filename slug is never duplicated. Self-recursion guard: the scan skips the `40_knowledge/people/` folder so stubs referencing other people don't generate cascading stubs. Per-run safety cap: `_MAX_STUBS_PER_RUN = 10` — if exceeded, the run logs and creates nothing (defends against bulk-import scenarios where the filters might over-fire). Stub frontmatter includes `status: unverified` and a body line prompting Sean to fill in identity when he next encounters the person.
+- `.claude/hooks/session-end-auto-stub.sh` — SessionEnd hook wrapper. Fire-and-forget detached background process via `nohup ... &` + `disown`. Returns <100ms so session close isn't blocked. Recursion guard via `CLAUDE_INVOKED_BY=auto-stub` matches the existing `session-end-flush.sh` pattern. Output captured at `vault/90_system/agent-logs/session-end-auto-stub.log` (last-run stdout/stderr) plus a structured append-only log at `vault/90_system/agent-logs/auto-stub-people.log` (timestamped CREATED / WOULD CREATE / SAFETY entries).
+- `.claude/settings.json` — second entry in `SessionEnd.hooks[].hooks[]` registering the new wrapper alongside the existing flush. Both fire on the same event; flush extracts knowledge from the just-ended transcript, auto-stub patches up the wikilink graph based on what's accumulated in the vault. Hook count `13 → 14`.
+- `agents-sdk/tests/test_auto_stub_people.py` — 15 new test cases covering both filters (positive + negative for author-field detection and person-name shape), dedup against existing stubs (filename + title), recursion skip of `40_knowledge/people/`, `node_modules` exclusion, dry-run mode, per-run safety cap engagement, and slugification of diacritics. Full suite passes 15 / 15.
+
+### Verified live
+
+- Initial dry-run against the live vault surfaced one new candidate I'd missed in the v3.31.0 manual sweep: `[[Lenny Rachitsky]]`, referenced from three `vault/00_inbox/` clips (Not all AI agents are created equal, How I built LennyRPG, Your Couch-to-5K for AI). Live run created `vault/40_knowledge/people/lenny-rachitsky.md` with the unverified-stub template. `find_broken_wikilinks(vault)` still returns 0 — the new clips' wikilinks now resolve through the stub. Confirms the script does what v3.31.0 did manually, but automatically.
+
+### Rollback
+
+Disabling is a one-line change: remove the `session-end-auto-stub.sh` entry from `.claude/settings.json` SessionEnd block. Existing stubs stay. Re-enable with a one-line add. Or set the safety cap to 0 for a softer kill-switch.
+
+### Note on numbering
+
+This entry was authored on the Mac Mini as v3.28.0 in parallel with the MBP's v3.28.0 (job-feed agent). On 2026-05-11 sync, the local 3.27.0 → 3.28.0 stack was renumbered to 3.29.0 → 3.32.0 to clear the MBP's already-pushed version numbers.
+
+## [3.31.0] - 2026-05-11
+
+Broken-wikilink cleanup sweep. Took the lint signal from 37 (post-filter from v3.30.0) → 0 by fixing the remaining real issues and adding one more lint exclusion. Net result of v3.30.0 + v3.31.0 together: **348 → 0 broken wikilinks**, every link in the vault now resolves and every previously-orphan target is a real node the synthesizer can cluster on.
+
+### Added
+
+- `vault/40_knowledge/concepts/intent-engineering.md` — concept hub. Pointer to the `.claude/skills/intent-engineering/SKILL.md` source + listing of the 10+ inbound `ref-*` notes in `vault/40_knowledge/references/intent-engineering/`. Resolves all 11 stale `[[intent-engineering]]` wikilinks in one file.
+- `vault/40_knowledge/concepts/writing-voice-modes.md` — concept hub. Pointer to the `.claude/skills/writing-voice-modes/SKILL.md` source. Resolves the 1 stale `[[writing-voice-modes]]` wikilink from `vault/05_atlas/operating-models/job-hunt-2026/operating-model.md`.
+- `vault/40_knowledge/people/` — new folder with 10 person stubs: `nate.md` (Nate Jones / OB1 author — primary external thought-leader cited in Sean's research, 8 inbound refs), `rt-watson.md` (The Block, 2 refs), `daniel-kuhn.md` (crypto journalism, 2 refs), `yogita-khatri.md` (The Block, 1 ref), `ali-cevik.md` (Google Gemini API, 1 ref), `lukas-haas.md` (Google DR Max, 1 ref), `vivek-trivedy.md` (LangChain, 1 ref), `timmy-shen.md` (The Block, 1 ref), `callum-howe.md` (1 ref), `brian-danga.md` (Stripe, 1 ref). Each stub uses `title:` frontmatter matching the wikilink target so `[[Nate]]` / `[[RT Watson]]` etc. resolve via the existing title-fallback resolver. Resolves the 24 person-name `broken-wikilink` flags. Anyone whose identity wasn't confidently derivable from byline context is marked "Identity beyond the byline is unverified."
+
+### Fixed
+
+- `agents-sdk/agents/knowledge_lint.py:_vault_md_files` — added `node_modules` to the directory exclusion set alongside `.obsidian` / `.trash` / dotfiles. Kills the `[[String]]` false positive coming from a vendored npm package README inside `30_domains/product-management/the-block-resume-info/.../data-explorer-server/node_modules/optionator/`. Prevents future pollution from any vendored JS dependencies left in the archive.
+- `vault/05_atlas/operating-models/life-systems/SOUL.md:139` — removed stray `\` before `|` in `[[Sean-Winslow-Full-Personal-Context-v2.0\|Full Personal Context]]`. The backslash was a Markdown escape that the lint regex captured as part of the target. Obsidian was rendering correctly; lint was wrong about brokenness, but cleaning the link is more durable than special-casing the regex.
+- `vault/40_knowledge/concepts/research-hermes-agent-investigation-2026-04-26.md:10` — `[[hermes-agent-investigation-prompt]]` → `[[ref-hermes-agent-investigation-prompt]]`. Real target lives at `vault/40_knowledge/references/ref-hermes-agent-investigation-prompt.md`; the inbound link was missing the `ref-` prefix.
+- `vault/20_projects/prj-job-hunt-2026/README.md` — two changes: (1) added `title: "prj-job-hunt-2026"` frontmatter so `[[prj-job-hunt-2026]]` resolves via title-fallback (the README is the project hub); (2) rewrote the broken folder-target link `[[onwards-and-upwards-5-4-26]]` on line 33 to `[[2026-05-04-onwards-and-upwards-plan]]`, pointing at the actual canonical master plan inside that folder.
+- `vault/40_knowledge/references/intent-engineering/ref-personal-agentic-intent-engineering.md:19` — `[[20_projects/prj-job-hunt-2026]]` → `[[prj-job-hunt-2026]]`. The path-style target was a wrong shape for Obsidian's resolver; the basename form now resolves through the title frontmatter added to the README.
+- `vault/40_knowledge/references/ref-stripe-2025-annual-letter-agentic-commerce.md:5` — replaced `author: - "[[stage]]"` with `author: - "Stripe"`. The `[[stage]]` was a web-clip artifact (the clipper grabbed "stage" from page metadata as the author), not a real wikilink.
+
+### Verified
+
+- `find_broken_wikilinks(vault)` on the live vault returns `0` issues. Down from 348 pre-v3.30.0.
+- 25/25 knowledge_lint tests pass (no regressions to existing test cases).
+
+## [3.30.0] - 2026-05-11
+
+Knowledge Lint broken-wikilink scan tightened — dropped 348 issues to 37 (89% reduction) by filtering out two well-understood noise sources that swamped the signal.
+
+### Fixed
+
+- `agents-sdk/agents/knowledge_lint.py` — `find_broken_wikilinks` now skips two categories of false-positive `[[X]]` matches before reporting:
+  - **Numeric citation markers** (`[[10]]`, `[[42]]`, etc.): research notes from Gemini DR and the local LDR pipeline write footnote/bibliography references in `[[N]]` form. The regex `\[\[([^\]|#]+)...\]\]` can't tell `[[Sponsored Course Implementation Kick-off]]` from `[[10]]`. New `_CITATION_TARGET_RE = re.compile(r"^\d+$")` filters them out at scan time. This bucket was 255 of the 348 issues (73%) — almost entirely concentrated in `vault/20_projects/research/`.
+  - **Granola meeting archive**: new `_BROKEN_LINK_EXCLUDE_DIRS = {"the-block-meetings-granola-notes"}` plus `_is_broken_link_excluded(rel_parts)` helper skips this folder entirely. The Granola transcripts were slug-renamed at some point (e.g. `Alex_Sean sync.md` → `mtg-2026-03-XX-alex-sean-sync.md`) but the internal cross-references inside each note still point at the pre-rename names. This archive is read-only post-2026-05-04 Block layoff — fixing the lint scope is the right call, not rewriting archived data. 57 of the 348 issues (16%).
+
+### Added
+
+- Two new tests in `agents-sdk/tests/test_knowledge_lint.py`: `test_find_broken_wikilinks_skips_numeric_citation_markers` and `test_find_broken_wikilinks_skips_granola_archive`. Existing test for real broken wikilinks unchanged. All 25 knowledge_lint tests pass.
+
+### Diagnosed (no code change)
+
+- **Missing 2026-05-03 Sunday lint run** investigated. Root cause: Mac Mini was powered off / asleep from Sunday 2026-05-03 17:09 through Monday 2026-05-04 ~08:54 — confirmed via `vault/90_system/agent-logs/agent-run-history.csv` showing zero scheduled-agent activity in that window. Five overnight jobs missed (knowledge-lint Sun 22:00; vault-indexer / synthesizer / deep-researcher Mon 02:00-02:45; daily-driver morning Mon 08:45) — the gap is bracketed by the 5/3 17:09 gemini-dr run and the first 5/4 08:54 SessionEnd flush. The launchd plist (`~/Library/LaunchAgents/com.sean.agent.knowledge-lint.plist`) and stderr log (`vault/90_system/agent-logs/knowledge-lint-stderr.log`) are both clean — only two clean runs logged (4/26 and 5/10), no crash trace for 5/3. macOS `LaunchAgents` with `StartCalendarInterval` do NOT catch up missed windows when the machine is unavailable, so the 5/3 slot is gone. Timing matches the 2026-05-04 Block layoff day disruption — this is a one-time event, not a recurring fault. All subsequent Sundays (5/10) have fired correctly.
+
+## [3.29.0] - 2026-05-11
+
+Fleet output consolidation — the daily note now surfaces every agent's overnight activity in one glance. Sean keeps the daily note open on his desktop all day, but until now the only fleet output visible there was the Daily Driver's own morning brief; everything else (synthesizer manifest, knowledge lint report, fleet status snapshot, new research notes, new concept/connection articles) was scattered across `vault/health/`, `vault/02_Areas/Agent-Fleet/`, `vault/knowledge/`, and `vault/20_projects/research/` with no breadcrumbs back into the daily note. This change routes everything through the daily note.
+
+### Added
+
+- `agents-sdk/lib/fleet_summary.py` — new helper. `build_fleet_overnight_digest(repo_root, vault_root)` reads the last 24h of `vault/90_system/agent-logs/agent-run-history.csv`, the latest `vault/health/synth-manifest-*.json`, and the latest `vault/health/*-lint-report.md` to produce a 7-line markdown digest (one line per active agent with status badge + notes snippet) plus a "Deep links" footer. Meta-agent is special-cased — it reads the CSV but doesn't write to it, so the helper uses today's `daily-fleet-status-*.md` existence as the success proxy. Empty/missing inputs degrade gracefully (no run → "no run in last 24h"; missing manifest/report → footer line omitted).
+- `vault/90_system/templates/tpl-daily.md` — two new top-of-note sections. **Fleet Overnight Digest** (`<!-- fleet-overnight -->` anchor) gets filled by Daily Driver at 08:45 with the helper's output. **Fleet Activity Today** holds four Dataview blocks that auto-refresh as agents write files throughout the day: (1) today's `daily-fleet-status-*.md`, (2) new files in `knowledge/concepts/` or `knowledge/connections/` (last 24h), (3) new files in `20_projects/research/` (last 24h), (4) the latest `vault/health/*-lint-report.md`.
+- `vault/10_timeline/daily/2026-05-11.md` — backfilled with the new sections so the change is visible immediately (without waiting for tomorrow's 8:45 Daily Driver fire).
+
+### Changed
+
+- `agents-sdk/agents/daily_driver.py` — morning mode now computes the fleet digest via `build_fleet_overnight_digest` and adds a Step 4 to the task prompt: "Locate the placeholder line under `<!-- fleet-overnight -->` and REPLACE it with this exact block, verbatim." Block is fenced by `<<<FLEET_DIGEST_BEGIN>>>` / `<<<FLEET_DIGEST_END>>>` markers so Claude has unambiguous boundaries. Existing Steps 4 → 5 renumbered (1-3-5 plan is now Step 5). Prompt cost increase: ~150 tokens — well within the $0.60 morning cap (last run was $0.5513).
+
+### Rationale
+
+The producer side of the fleet (the 7 active agents) is currently well-tuned and the consumer side (Sean reading their output) was the bottleneck. Putting every agent's output one scroll away on the always-open daily note closes that gap without adding any new agents, schedules, or notification channels. Dataview blocks were chosen over file-watcher / notification approaches because they're already installed in Sean's Obsidian, render live on the desktop, and require zero new moving parts.
+
 ## [3.28.0] - 2026-05-11
 
 Job-feed agent — autonomous PM/APM role discovery wired into the morning brief.

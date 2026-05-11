@@ -3,8 +3,11 @@ type: roadmap
 project: prj-job-hunt-2026
 status: draft
 created: 2026-05-06
+last_updated: 2026-05-10
 synthesis_sources: [karpathy-sequoia, nate-credentials-opus, nate-credentials-gpt, nate-comprehension-opus, nate-comprehension-gpt]
-ai-context: "Unified roadmap synthesizing Karpathy + Nate × 2 articles × 2 models, mapped onto the existing Phase 0–8 master plan. Portfolio project ideas + concrete implementation plans through 2026-07-04."
+amendments:
+  - 2026-05-10: Added Task 8 (Eval Suite ship Week 2) + Task 9 (Substack-Drafter agent post-employment). Upgraded Task 6 §I from fluency-only to planned ship. Added Kerouac voice variant test to Decision 4. Updated portfolio count from 5+2 to 6+2+1. See [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md).
+ai-context: "Unified roadmap synthesizing Karpathy + Nate × 2 articles × 2 models, mapped onto the existing Phase 0–8 master plan. Portfolio project ideas + concrete implementation plans through 2026-07-04. Amended 2026-05-10 with eval-suite + Substack-drafter additions after Step-0 error-analysis surfaced a 9-day silent regression that reshaped the eval scope."
 ---
 
 # Unified Roadmap — Karpathy × Nate × 2 × 2
@@ -286,16 +289,39 @@ git commit -m "docs: add 4Q comprehension artifacts for Phase D typed edges + Ph
 
 **Maps to:** Master plan Phase 4 Tasks 4.1–4.3 (already detailed; this task adds the explanation wrapper).
 
-**Files:**
-- Already specified in master plan: `~/Code/sw-mcp-intent-engineering/` (new repo)
-- Add: `~/Code/sw-mcp-intent-engineering/EXPLANATION.md` (4Q artifact for the MCP server itself)
-- Add: `<personal-site>/src/pages/transactions/intent-engineering-mcp.astro` (deep-dive page)
+**STATUS — as of 2026-05-08 (Day 2 of 19, ~7 days ahead of build calendar):** Phases 0–3 (partial) complete. 7 commits pushed to `github.com/seanwinslow28/sw-mcp-intent-engineering`.
 
-**- [ ] Step 1–10: Execute master plan [Phase 4 Tasks 4.1–4.3](../2026-05-04-onwards-and-upwards-plan.md) as written.**
-The master plan's task decomposition is correct as-is. Don't rewrite it; execute it.
+| Build Phase | Status | Commits | Notes |
+|---|---|---|---|
+| 0 — Read + plan | ✅ approved 2026-05-08 | (no code) | Implementation plan reviewed against scope-lock §2–§9, approved |
+| 1 — Scaffold + `ping` tool | ✅ verified 2026-05-08 | `24e4047` | Smoke-tested in Claude Desktop, `ping` returns `pong`. SDK pinned to `1.29.0`, Stdio transport, MIT license, npm scope `@swins/intent-engineering-mcp` (fallback used because `@swinslow` was taken) |
+| 2 — Three real tools | ✅ verified 2026-05-08 | `b0ae1ce`, `ae5deaa`, `5835bcb`, `abad1d4` | All three tools tested in Claude Desktop with §4–§6 example inputs. Audit returned 4/25 + 3 anti-patterns on §4 spec (ship-gate item 4 ✅); scaffold returned correct YAML for all 3 `kind` values (ship-gate item 5 ✅); retrofit returned differentiated reasoning across 3 distinct SKILL.md files (ship-gate item 6 ✅) |
+| 3 — Hardening Gate A | ✅ done 2026-05-08 | `bc4caa9`, `7bf479a` | Parser autonomous-loop heuristic tightened; scope-lock §6 path fix; MCP Inspector pass clean; 30k pagination round-trip works (token chain `null → 10000 → 20000 → 30000 → null` — ship-gate item 8 ✅); 5-skill audit shows real findings; `prepublishOnly` grep guard active (ship-gate item 13 ✅). **No `console.log` anywhere in `src/`** |
+| 3 — Hardening Gate B | ⏳ pending | — | **Next session:** README per §8 item 9 + `docs/EXPLANATION.md` 4Q artifact + Loom recording (Sean owns recording) |
+| 4 — 117-skill CSV + publish + registry + posts | ⏳ not started | — | Days 14–19 of original calendar. Sean is ahead. |
+
+**Repo location (locked):** `~/Code-Brain/sw-mcp-intent-engineering/` — pushed to `github.com/seanwinslow28/sw-mcp-intent-engineering`. (Note: original roadmap referenced `~/Code/` — corrected per scope-lock §1 path note.)
+
+**Test artifacts archived at:** [`~/Code-Brain/sw-mcp-intent-engineering/docs/claude-code-responses-and-tests/`](../../../../../sw-mcp-intent-engineering/docs/claude-code-responses-and-tests/) — all phase verification outputs from 5/7–5/8 saved there for traceability and future Loom-narration material.
+
+**Two scope-lock corrections shipped during the build (CHANGELOG.md in the new repo):**
+1. **Validation checklist count:** §3 + §4 corrected from "40-item" to "25-item" to match SKILL.md's actual structure (commit `b0ae1ce`). The "40" claim was a documentation error in scope-lock; SKILL.md is canonical per §3.
+2. **§6 example path:** corrected from non-existent `format-on-edit/SKILL.md` (a hook, not a skill) to `personal-task-management/SKILL.md` (commit `bc4caa9`).
+
+**Files:**
+- Already specified in master plan: `~/Code-Brain/sw-mcp-intent-engineering/` (path corrected from `~/Code/` 2026-05-07)
+- Add: `~/Code-Brain/sw-mcp-intent-engineering/docs/EXPLANATION.md` (4Q artifact) — **next session**
+- Add: `<personal-site>/src/pages/transactions/intent-engineering-mcp.astro` (deep-dive page) — parallel critical-path
+
+**- [x] Step 1–10: Execute master plan [Phase 4 Tasks 4.1–4.3](../2026-05-04-onwards-and-upwards-plan.md) as written.** ✅ Substantially complete through Phase 3 Gate A. Remaining items (README, EXPLANATION.md, Loom, embed, npm publish, registry submit, announcement posts) tracked in Step 11–14 below.
 
 **- [ ] Step 11: Add the pre-drafted 4Q `EXPLANATION.md` from Claude-Nate-2 §5.1.**
 Source: [`claude-nate-prompt-2-analysis.md`](reference-synthesis-docs/claude-nate-prompt-2-analysis.md) §5.1 "MCP Server: vault-knowledge-mcp" block, adapted to `intent-engineering` (swap `find_contradictions` → `analyze_intent_spec`, etc.). The 4Q structure transfers; only the tool names change.
+
+**Two Phase 3 audit findings to incorporate** (captured 2026-05-08 — DO NOT LOSE; these are the highest-leverage talking points uncovered during Phase 3 verification):
+
+1. **Dogfood result:** `intent-engineering/SKILL.md` scored 23/25 with zero anti-patterns when audited by its own MCP server. Two minor warns (outcome measurability, health-metric behavioral adjustments). Strong Loom + README hook — "the tool eats its own dog food." Lands naturally as a 4Q "What did I learn?" answer, or as a Loom Beat 4 swap if the daily-driver retrofit doesn't pop on screen.
+2. **Opinionated heading boundary:** the v0 audit requires explicit `## Objective` / `## Desired Outcomes` headings. 4 of 5 skills tested scored 1/25 because they use different heading vocabularies (`## When to Use`, `## How to Apply`). Not a bug — it's a v0 design choice — but worth naming in README under "Limitations" so a recruiter doesn't ding you for it. v0.2 could add a heading-vocabulary mapper. Lands naturally in the 4Q "What would break?" answer AND a README "Limitations" section that demonstrates judgment about scope.
 
 Actual draft for `intent-engineering` (paste this into `EXPLANATION.md`):
 ```markdown
@@ -406,7 +432,7 @@ Each gets a concrete decision now or a deferred-to-week-N flag.
 
 **§B — Agent-fleet audit verdict.** **DECIDED THIS WEEK.** Audit pass scheduled for Saturday 2026-05-09 evening (one hour, off-the-clock-but-not-job-hunt-work). Verdict criteria: anything dependent on MBP-awake → either move to Mac Mini or retire. Specifically: the Vault Synthesizer and the Knowledge Lint Tier-2 path. Migration plan target completion: 2026-05-18.
 
-**§C — Substack voice + first-post topic.** **DECIDED THIS WEEK.** Voice: comedic / story-driven Sean Mode (per [`writing-voice-modes`](../../../../.claude/skills/writing-voice-modes/SKILL.md), per Claude-Nate-2 Decision 4). First post topic: the 14-agent fleet Loom with editorial framing — "What 14 launchd agents look like when one of them gets laid off" or similar. Ships Friday Week 2 alongside Task 5 Step 1.
+**§C — Substack voice + first-post topic.** **DECIDED THIS WEEK; AMENDED 2026-05-10.** Voice: comedic / story-driven Sean Mode (per [`writing-voice-modes`](../../../../.claude/skills/writing-voice-modes/SKILL.md), per Claude-Nate-2 Decision 4). **First post topic AMENDED:** "The Night My Vault Said Nothing" — the eval-suite discovery story. Sedaris-tuned primary draft at [`2026-05-10-the-night-my-vault-said-nothing.md`](../substack-drafts/2026-05-10-the-night-my-vault-said-nothing.md); Kerouac variant at [`2026-05-10-the-night-my-vault-said-nothing-kerouac-variant.md`](../substack-drafts/2026-05-10-the-night-my-vault-said-nothing-kerouac-variant.md). Ships Friday Week 2 (2026-05-22) alongside the eval suite (Task 8). The 14-agent fleet Loom topic is bumped to Friday Week 3 (2026-05-29) as the follow-up post arc (post-synthesizer-fix). Rationale: the eval-suite discovery is a stronger lead piece because it dramatizes the rigor (error-analysis-first) the canon insists on, AND it pairs with a shipped artifact, where the fleet Loom is a tour without a ship.
 
 **§D — Build-in-public cadence + format.** **DECIDED THIS WEEK.** Cadence: one Substack post per Friday by 5 PM, syndicated to LinkedIn the following Wednesday. Format: ~600 words, one artifact featured, one paragraph of editorial framing, one link to the canonical `/transactions/` page. Eight posts in eight weeks.
 
@@ -418,9 +444,67 @@ Each gets a concrete decision now or a deferred-to-week-N flag.
 
 **§H — Second portfolio artifact (after MCP v0).** **DECIDED THIS WEEK.** The June 11 animation pipeline + production diary is the second flagship artifact (ChatGPT-Nate-2 §4 "By June 11"). Already on the master plan as a non-negotiable creative deadline. The 4Q draft is Claude-Nate-2 §2d.
 
-**§I — Agent Evals fluency.** **DECIDED — this is the Week 5 deep-work focus.** Read [Hamel Husain's evals canon](https://hamel.dev) (1.5 hours), one Anthropic engineering post on evals (30 min), then build a small `evals/` directory in the Superuser Pack with 10–15 cases for the vault synthesizer (per Claude-Nate-2 §5.4). Don't over-scope this — the goal is fluency, not a published eval framework. The published version becomes a Week-7 artifact if there's time.
+**§I — Agent Evals fluency.** ~~**DECIDED — this is the Week 5 deep-work focus.** Read Hamel Husain's evals canon (1.5 hours), one Anthropic engineering post on evals (30 min), then build a small `evals/` directory in the Superuser Pack with 10–15 cases for the vault synthesizer. Don't over-scope this — the goal is fluency, not a published eval framework. The published version becomes a Week-7 artifact if there's time.~~ **AMENDED 2026-05-10: UPGRADED FROM FLUENCY-ONLY TO PLANNED SHIP.** Reading + research already done (Anthropic [`Demystifying Evals`](../../../../40_knowledge/references/ref-anthropic-demystifying-agent-evals.md), Gemini DR + Perplexity primers at [`vault/20_projects/research/2026-05-09-*-ai-eval-fluency-primer-and-reference-cases.md`](../../research/)). Step-0 error analysis on real synthesizer logs already done at [`2026-05-10-evals-error-analysis-real-logs.md`](2026-05-10-evals-error-analysis-real-logs.md) — surfaced a 9-day live silent regression in the synthesizer that reshaped the eval scope. Full build plan at [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md) is ready for Claude Code + `obra/superpowers` Plan Mode execution. This becomes **Task 8** below — shipped Friday Week 2 as the 6th flagship portfolio artifact.
 
 **§J — Enterprise-build patterns.** **DEFERRED to Week 6+.** This is interview-prep territory, not a build-track item. When an interview lands, the relevant patterns get studied for that loop's prep block (master plan Phase 6 Task 6.1). Don't try to learn enterprise patterns in the abstract.
+
+---
+
+### Task 8 — Vault Synthesizer Eval Suite (NEW 2026-05-10 — ships Friday Week 2, 2026-05-22)
+
+> **Status:** Step 0 (error analysis) ✅ complete 2026-05-10. Substack drafts ✅ complete (Sedaris primary + Kerouac variant). Full build plan ✅ at [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md). Phases 1–7 ready for Claude Code + `obra/superpowers` execution.
+
+**Maps to:** Master plan Phase 2 Task 2.4 (publish what already exists) + this roadmap's Task 6 §I (now upgraded to planned ship) + Karpathy synthesis Claim D (eval design as underbuilt next-frontier portfolio piece).
+
+**Why this was unscoped originally and why it ships now:** The unified roadmap (2026-05-06) deferred eval publication to "Week 7 if there's time." Three things changed between 2026-05-06 and 2026-05-10: (1) the Gemini DR + Perplexity research primers delivered 15 pre-drafted YAML cases, eliminating the unknown-unknowns time cost; (2) doing the error-analysis-first step on real synthesizer logs surfaced a 9-day live silent regression — the failure mode the eval catches is no longer hypothetical, it's a real bug the suite would have caught on day one; (3) the resulting artifact is dramatically more interview-grade because it's grounded in a specific observed failure with a clear narrative arc, not a generic library of cases.
+
+**Files (per build plan):**
+- Create: `evals/vault-synthesizer/{README,cases.yaml,deferred-cases.yaml,runner.py,failure-modes.md,EXPLANATION.md,references.md}` + `traces/coded-traces.md`
+- Modify: [`CHANGELOG.md`](../../../../CHANGELOG.md), [`CLAUDE.md`](../../../../CLAUDE.md), [`README.md`](../../../../README.md) — count updates per mandatory doc rule
+
+**- [x] Step 0: Error analysis on real production logs.** ✅ Complete 2026-05-10 at [`2026-05-10-evals-error-analysis-real-logs.md`](2026-05-10-evals-error-analysis-real-logs.md). Six-mode failure taxonomy grounded in 17 days of synthesizer logs + stderr. Surfaced the silent-regression discovery that reshaped the eval scope.
+
+**- [x] Step 1: Substack drafts in 2 voice modes.** ✅ Complete 2026-05-10. Sedaris primary at [`2026-05-10-the-night-my-vault-said-nothing.md`](../substack-drafts/2026-05-10-the-night-my-vault-said-nothing.md); Kerouac variant at [`2026-05-10-the-night-my-vault-said-nothing-kerouac-variant.md`](../substack-drafts/2026-05-10-the-night-my-vault-said-nothing-kerouac-variant.md).
+
+**- [ ] Step 2: Bring [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md) into Claude Code + `obra/superpowers` Plan Mode.** Plan Mode produces execution graph from the build plan's Phases 0–7. Review, approve, execute phase-by-phase with verification gates.
+
+**- [ ] Step 3: Synthesizer fix (between Friday Week 2 and Friday Week 3).** Patch [`agents-sdk/agents/vault_synthesizer.py`](../../../../agents-sdk/agents/vault_synthesizer.py) status taxonomy + per-file exception promotion + `model_used` enum + Pushover credential health check + Daily Driver brief consumer warning path. Per build-plan Part A Phase 2.
+
+**- [ ] Step 4: Re-run eval suite against patched synthesizer.** Confirm baseline pass rate jumps from intentionally-low Phase-4 number (~10%) to the post-fix real number (~70%+). Lock the regression suite. Publish follow-up Substack post Friday Week 3 (2026-05-29) — voice mode TBD per Decision 4 amendment.
+
+**Verification gate:** 2026-05-22 ship. Eval suite directory exists with 7 files + 1 traces directory. `python evals/vault-synthesizer/runner.py` runs without infra errors. `EXPLANATION.md` is recruiter-readable cold in <90 seconds. Loom plays (5 min, unedited). Substack post syndicates the Sedaris draft. This is the **6th flagship portfolio artifact**, slotting between Intent-Engineering MCP (5/25) and Animation Pipeline (6/11).
+
+---
+
+### Task 9 — Substack-Drafter Agent (NEW 2026-05-10 — POST-EMPLOYMENT BUILD, specced now)
+
+> **Status:** Specced, default-disabled. Becomes the 7th flagship portfolio artifact when it ships post-employment Q3. Lives at `agents-sdk/agents/substack_drafter.py` — design doc at [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md) Part B.
+
+**Maps to:** Operating-model Tier-A truth "agents draft / Sean sends" + Claim G from Part 1 synthesis (live demonstration as non-fakeable interview asset) + Task 9 closes the publishing-cadence loop that Tasks 5 + 6 §D + Task 8 establish.
+
+**Why specced now, built later:** The eval-suite work (Task 8) and the synthesizer fix make this agent possible — the synthesizer must be alive again before there's any synthesis worth drafting from. The publishing-cadence problem is real (8 weeks × 1 post/week needs ~8 hours of writing time on top of an already-tight schedule). The agent closes that loop. But shipping the agent before the 8-week sprint ends violates Tier-A protection of Track-C and the 5:30 PM hard stop. So: spec now (because the spec informs the eval suite's voice-rotation surface), build post-employment.
+
+**Files (per build plan Part B):**
+- Create (post-employment): `agents-sdk/agents/substack_drafter.py`
+- Create (post-employment): `agents-sdk/schedules/com.sean.substack-drafter.plist`
+- Modify (post-employment): [`agents-sdk/config.toml`](../../../../agents-sdk/config.toml) — `[substack_drafter]` table, default `enabled = false`
+- Modify (post-employment): [`agents-sdk/schedules/install_schedules.sh`](../../../../agents-sdk/schedules/install_schedules.sh) — `INSTALL_SUBSTACK_DRAFTER=1` opt-in flag
+
+**Behavior summary:**
+1. Schedule: Thursday 18:00 weekly (gives Friday morning for review + publish)
+2. Default: disabled. Opt-in via env flag at install time.
+3. Reads: last 7 synth-manifests + last 14 days of `vault/knowledge/concepts/`, `connections/`, `qa/` + similarity-matched references from `vault/40_knowledge/` and `vault/20_projects/research/`
+4. Voice mode rotates on a 5-week cycle through Sedaris / Kerouac / Thompson / Vonnegut / Sean Mode (per [`writing-voice-modes`](../../../../.claude/skills/writing-voice-modes/SKILL.md))
+5. Cost cap: $0.10/run hard
+6. Output: draft markdown in `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/YYYY-MM-DD-agent-draft-{slug}.md`
+7. Never publishes autonomously. Pushover ping informs Sean a draft is ready.
+8. Graceful no-op when synthesizer has been dry for 3+ nights.
+
+**Tier-A check:** Walk-away $100k N/A. AI-PM track ✅ (this is a canonical "build agents that close your own loops" demonstration). Agents draft / Sean sends ✅ explicit. Track-C protected ✅ (post-employment). 5:30 PM hard stop ✅ (agent runs on its own schedule).
+
+**Verification gate (when implementing):** dry-run prints complete prompt; real run produces a draft file with valid frontmatter; voice mode is recognizable in 2/3 sanity-check drafts; cost <$0.10 across 5 real runs; graceful no-op when synthesizer dry; one-command disable works.
+
+**Pre-shipping risk:** None. Spec exists. Nothing on the critical path depends on this agent shipping inside the 8-week sprint.
 
 ---
 
@@ -466,6 +550,7 @@ Format matches the [operating-model SOUL convention](../../../05_atlas/operating
 **Decision 4 — Substack voice.**
 **Default:** Story-driven Sean Mode (Sedaris-tuned, per `writing-voice-modes`). Comedic register where it lands. Don't compete with Nate's strategic-sober voice.
 **Switch only if:** After 3 posts, engagement is <10% of comparable strategic-PM Substacks AND no inbound recruiter signal in 21 days — then test sober voice for posts 4–6.
+**Voice rotation amendment (2026-05-10):** Kerouac (Beat Flow) variant drafted alongside Sedaris primary at [`2026-05-10-the-night-my-vault-said-nothing-kerouac-variant.md`](../substack-drafts/2026-05-10-the-night-my-vault-said-nothing-kerouac-variant.md). The Sedaris draft ships first (Friday Week 2). If readers respond strongly, run Kerouac for the follow-up post (Friday Week 3) to validate a 2-mode rotation. Long-term: voice rotation becomes the configurable parameter of the Substack-Drafter agent (Task 9).
 
 **Decision 5 — Application volume cadence.**
 **Default:** 5 quality applications per week starting Week 3 (master plan Phase 5 Task 5.2). Each tailored to the JD with one custom artifact link. Tuesday + Thursday morning slots.
@@ -478,6 +563,17 @@ Format matches the [operating-model SOUL convention](../../../05_atlas/operating
 ## Self-Review
 
 **Spec coverage:** Phase 1 synthesis covers all 5 required headers. Phase 2 plan covers: existing-Phase-0–8 mapping ✓, Track-C 2026-05-25 anchor ✓, 3–5 portfolio projects with 4Q artifacts ✓ (5 portfolio-grade artifacts: intent-engineering MCP, Phase D `EXPLANATION.md`, Phase 6 `EXPLANATION.md`, sanitized financial-research fleet, animation pipeline + production diary; plus 14-agent fleet Loom + token cost calculator), 9 open work items resolved ✓, Tier-A respected ✓, STOP-doing list with 5 items ✓, "5 decisions this week" in operating-model format ✓.
+
+**Amendment 2026-05-10 — portfolio count updated:** 6 flagship artifacts + 2 supporting + 1 post-employment Q3:
+1. Intent-Engineering MCP server v0 (Track-C, ships 2026-05-25)
+2. Phase D Typed Reasoning Edges `EXPLANATION.md` (ships Friday Week 1)
+3. Phase 6 Knowledge Loop `EXPLANATION.md` (ships Friday Week 1)
+4. Sanitized Agentic Financial-Research Fleet artifact (ships Friday Week 4)
+5. 2D Animation Pipeline + production diary (ships 6/11)
+6. **(NEW)** Vault Synthesizer Eval Suite + 2-post Substack arc (ships Friday Week 2, 2026-05-22; follow-up Friday Week 3, 2026-05-29)
+- Supporting #1: 14-Agent Fleet Loom (Friday Week 2 → bumped to Friday Week 3 post-fix per Task 6 §C amendment)
+- Supporting #2: Token Cost Calculator (Friday Week 3)
+- **(NEW post-employment Q3)** Substack-Drafter Agent (Task 9, specced not built)
 
 **Placeholder scan:** The 4Q drafts in Tasks 2, 3, 4 reference Claude-Nate-2 §2 source blocks, but the actual paste-ready text is in those source blocks (verified). The token-cost-calculator 4Q is fully drafted inline. No "TODO" / "TBD" / "fill in details" patterns. Task 6 §G defers YouTube to Week 5 with a concrete switch condition. Task 6 §J defers enterprise patterns to Week 6+ tied to interview loops.
 
@@ -506,12 +602,14 @@ This document is the unified roadmap. The master plan stays canonical; this laye
 
 1. **This week (May 6–11):** Task 0 (Block IP scrub), Task 1 (canonical home + 4Q template), and Decision 1 (Track-C scope lock by Wednesday). Task 2 (Phase D + Phase 6 `EXPLANATION.md` commits) ships Friday Week 1.
 
-2. **Week 2 (May 12–18):** Task 5 Step 1 (14-agent fleet Loom) Friday. Task 6 §B + §F (agent-fleet audit + Gmail labels) Saturday. Task 6 §E (target-30 list) by 2026-05-18. Substack post 1 syndicates the Loom.
+2. **Week 2 (May 12–22):** **AMENDED 2026-05-10.** Primary deliverable Friday Week 2 is now the **Vault Synthesizer Eval Suite (Task 8)** + Substack post 1 ("The Night My Vault Said Nothing" — Sedaris draft). Bring [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md) into Claude Code + `obra/superpowers` Plan Mode early in the week; execute Phases 1–7 across the week's deep-work blocks. Task 6 §B + §F (agent-fleet audit + Gmail labels) Saturday 2026-05-09 (already past — slipped to Saturday 2026-05-16). Task 6 §E (target-30 list) still due 2026-05-18. The 14-Agent Fleet Loom (Task 5 Step 1) bumps to Friday Week 3 as the follow-up post.
 
 3. **Weeks 3–4:** Master plan Phase 4 Tasks 4.1–4.3 (the actual MCP server build). This roadmap's Task 3 wraps it. Ship 2026-05-25.
 
 4. **Weeks 5–8:** Inherit master plan as written. Animation pipeline ships June 11. Phase 8 (offers) lands as it lands.
 
 The plan respects every Tier-A truth, fills the 9 operating-model gaps, and produces 5 flagship artifacts + 2 supporting artifacts in 8 weeks — all of which are publications of work Sean has already done. No new skills to learn. No credentials to chase. No platform bets that aren't reversible.
+
+**Amendment 2026-05-10:** The plan now produces **6 flagship + 2 supporting + 1 post-employment-specced** — the eval-suite addition (Task 8) and the Substack-Drafter agent spec (Task 9). The eval suite shipped because doing the error-analysis Step 0 cheaply (one afternoon of log-reading) turned a hypothetical "Week 5 fluency" item into a concrete Week-2 ship with a stronger interview narrative than any other artifact in the set. The Substack-Drafter agent was specced because designing it now informs the voice-rotation surface of the eval-suite's published artifact and closes a real publishing-cadence risk; building it stays post-employment to protect Track-C.
 
 Onwards.
