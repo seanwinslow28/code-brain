@@ -41,6 +41,7 @@ AGENT_NAME = "daily-driver"
 
 # Re-exported for backwards compatibility; canonical home is lib.lint_report.
 # Phase D (v3.20.0): synth_health_summary added alongside vault_health_summary.
+from lib.fleet_summary import build_fleet_overnight_digest  # noqa: E402
 from lib.lint_report import (  # noqa: E402
     latest_lint_report,
     synth_health_summary,
@@ -249,6 +250,10 @@ def build_prompt(mode: str, config) -> str:
     yesterday = (date.today() - timedelta(days=1)).isoformat()
 
     if mode == "morning":
+        fleet_digest = build_fleet_overnight_digest(
+            repo_root=Path(config.repo_root),
+            vault_root=config.vault_root,
+        )
         return (
             f"Execute the Morning Planning Protocol from the daily-driver skill.\n"
             f"\n"
@@ -263,7 +268,18 @@ def build_prompt(mode: str, config) -> str:
             f"  - Use the template at {config.vault_root / '90_system/templates/tpl-daily.md'}\n"
             f"  - Replace '<% tp.file.title %>' with '{today}'\n"
             f"\n"
-            f"Step 4: Write the 1-3-5 priority plan in the Morning Focus section.\n"
+            f"Step 4: Inject the Fleet Overnight Digest. Locate the line\n"
+            f"  '_Auto-filled by Daily Driver at 08:45. Do not edit manually._'\n"
+            f"  in today's daily note (directly under the <!-- fleet-overnight --> anchor)\n"
+            f"  and REPLACE it with the following block, verbatim. Do not paraphrase,\n"
+            f"  summarize, or reformat — copy the markdown exactly as shown between\n"
+            f"  the BEGIN/END markers (excluding the markers themselves):\n"
+            f"\n"
+            f"  <<<FLEET_DIGEST_BEGIN>>>\n"
+            f"{fleet_digest}\n"
+            f"  <<<FLEET_DIGEST_END>>>\n"
+            f"\n"
+            f"Step 5: Write the 1-3-5 priority plan in the Morning Focus section.\n"
             f"  - 1 big thing (deep work)\n"
             f"  - 3 medium things\n"
             f"  - 5 small things\n"
