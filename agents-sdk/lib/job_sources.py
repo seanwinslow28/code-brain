@@ -20,10 +20,12 @@ import asyncio
 import logging
 import re
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any
 
 import feedparser
 import httpx
+import yaml
 from markdownify import markdownify
 
 from lib.job_types import Posting
@@ -419,3 +421,16 @@ async def fetch_all(
     for batch in feed_results + ats_results:
         combined.extend(batch)
     return combined, failed
+
+
+def load_watchlist_slugs(path: Path) -> list[str]:
+    """Read the watchlist YAML and return a flat list of all company slugs."""
+    if not path.exists():
+        raise FileNotFoundError(f"Watchlist not found: {path}")
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    slugs: list[str] = []
+    for bucket, items in data.items():
+        if not isinstance(items, list):
+            continue
+        slugs.extend(s.strip() for s in items if isinstance(s, str) and s.strip())
+    return slugs
