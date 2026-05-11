@@ -26,8 +26,6 @@ Budget caps from `agents-sdk/config.toml [gemini.budget]`:
 
 ## Deferred (post-severance review)
 
-- [ ] tier: max Topic 4 — **DEFERRED 2026-05-04 pending post-severance financial check-in.** Rationale: $3–7 single-call spend is the most expensive item in the queue, and the layoff (2026-05-04) means no income until severance lands. The portfolio-build priority (first public MCP server by 2026-05-25 per [[20_projects/prj-job-hunt-2026/README]]) is informed first by Topic 2's headless-OAuth findings — if Topic 2 surfaces the right auth mode for the personal MCP server, Topic 4's full 7-services × 6-axes matrix can be scoped down or replaced. Re-evaluate after severance lands AND after Topic 2's report is read.
-  - Original prompt text (auth-mode + key-generation matrix for Slack, Google Calendar, Gmail, Jira, Confluence, GitHub, Linear; six axes per service: auth modes, generation URL/path, scope/permission picker, rotation/expiration, headless-friendliness, admin restrictions; ranks headless-friendliest path per service).
-  - Recommended re-engineering before firing per `phase-4-night-1-2026-05-03.md` §"Topic 4 prompt" — current line is plan-spec language, not prompt-engineered. DR Max output quality scales with prompt precision.
+- [x] tier: max Topic 4 — Auth-mode + key-generation matrix across 7 services (Slack, Google Calendar, Gmail, Jira, Confluence, GitHub, Linear) on six axes (auth modes, generation URL, scope picker, rotation/expiration, headless-friendliness, admin restrictions) with master ranked comparison table for personal-account headless agents. _Originally deferred 2026-05-04 for $3–7 API cost; unblocked 2026-05-08 after severance landed._ — done 2026-05-08 14:27 (manual gemini-dr run, DR Max, 719s, $7.00) → [[20_projects/research/2026-05-08-topic-4-you-are-a-senior-security-architect-specializing-in-headless]]
 
 ## Done
