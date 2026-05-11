@@ -6,7 +6,7 @@ import pytest
 import respx
 import httpx
 
-from lib.job_sources import RemoteOKAdapter, HNWhoIsHiringAdapter, Web3CareerAdapter, WeWorkRemotelyAdapter, GreenhouseAdapter, LeverAdapter, AshbyAdapter, fetch_ats, fetch_all
+from lib.job_sources import RemoteOKAdapter, HNWhoIsHiringAdapter, Web3CareerAdapter, WeWorkRemotelyAdapter, GreenhouseAdapter, LeverAdapter, AshbyAdapter, fetch_ats, fetch_all, load_watchlist_slugs
 from lib.job_types import Posting
 
 FIXTURES = Path(__file__).parent / "fixtures" / "job_feed"
@@ -249,3 +249,18 @@ async def test_fetch_all_aggregates_feeds_and_ats(monkeypatch):
     assert any(p.source == "remoteok" for p in postings)
     assert any(p.source.startswith("greenhouse:") for p in postings)
     assert failed == []  # no failed pollers
+
+
+def test_load_watchlist_flattens_all_buckets(tmp_path):
+    f = tmp_path / "watchlist.yaml"
+    f.write_text(
+        "ai_native:\n  - anthropic\n  - openai\n"
+        "boston_metro:\n  - hopper\n  - hubspot\n"
+    )
+    slugs = load_watchlist_slugs(f)
+    assert set(slugs) == {"anthropic", "openai", "hopper", "hubspot"}
+
+
+def test_load_watchlist_missing_file_raises(tmp_path):
+    with pytest.raises(FileNotFoundError):
+        load_watchlist_slugs(tmp_path / "nope.yaml")
