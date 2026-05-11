@@ -349,3 +349,24 @@ prediction_multiplier = 1.4             # DR predicts $2.80; DR Max predicts $7.
 enabled = false
 queue_path = "vault/00_inbox/gemini-research-queue.md"
 max_budget_usd = 0.00
+
+[agents.job_feed]
+# v1 — daily PM/APM role discovery from free public feeds + ~40-company ATS watchlist.
+# Scores survivors via Qwen3-14B on MBP via HybridRouter. fallback_disabled=true
+# preserves $0/run cost integrity — MBP-asleep ⇒ scoring deferred, never cloud.
+# Schedule: 7 launchd fires 8:00–11:00 AM ET; idempotency in agents/job_feed.py.
+enabled = true
+max_cost_usd = 0.10
+http_timeout_sec = 10
+rate_limit_per_host_per_sec = 1
+mbp_probe_timeout_sec = 2
+mbp_probe_url = "http://192.168.68.50:1234/v1/models"  # LM Studio on MBP
+fetch_skip_if_within_hours = 4
+fallback_disabled = true
+log_level = "INFO"
+
+[agents.job_feed.paths]
+db = "vault/.job-feed.db"
+watchlist = "vault/20_projects/prj-job-hunt-2026/job-feed/watchlist.yaml"
+roll_up_dir = "vault/20_projects/prj-job-hunt-2026/job-feed"
+manifest_dir = "vault/health"

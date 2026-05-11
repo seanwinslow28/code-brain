@@ -55,3 +55,19 @@ class TestLoadLogging:
     def test_log_dir_from_config(self, tmp_config: Path, tmp_vault: Path):
         config = load_config(config_path=tmp_config)
         assert config.log_dir == tmp_vault / "90_system" / "agent-logs"
+
+
+class TestJobFeedConfig:
+    def test_job_feed_config_loads(self):
+        cfg = load_config()
+        jf = cfg.agents.get("job_feed", {})
+        assert jf.get("enabled") is True
+        assert jf.get("max_cost_usd") == 0.10
+        assert jf.get("fallback_disabled") is True
+        assert jf.get("fetch_skip_if_within_hours") == 4
+        assert jf.get("mbp_probe_url", "").startswith("http://")
+        paths = jf.get("paths", {})
+        assert paths.get("db") == "vault/.job-feed.db"
+        assert paths.get("watchlist", "").endswith("watchlist.yaml")
+        assert paths.get("roll_up_dir", "").endswith("job-feed")
+        assert paths.get("manifest_dir") == "vault/health"
