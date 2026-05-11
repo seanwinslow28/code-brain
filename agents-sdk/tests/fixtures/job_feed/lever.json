@@ -1,0 +1,11 @@
+[
+  {
+    "id": "8001",
+    "hostedUrl": "https://jobs.lever.co/figma/8001",
+    "text": "Product Manager",
+    "categories": {"location": "Remote — US", "commitment": "Full-time"},
+    "createdAt": 1715000000000,
+    "descriptionPlain": "PM role.",
+    "salaryRange": {"min": 140000, "max": 180000, "currency": "USD"}
+  }
+]
