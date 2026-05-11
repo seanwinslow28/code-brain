@@ -6,7 +6,7 @@ import pytest
 import respx
 import httpx
 
-from lib.job_sources import RemoteOKAdapter, HNWhoIsHiringAdapter, Web3CareerAdapter, WeWorkRemotelyAdapter
+from lib.job_sources import RemoteOKAdapter, HNWhoIsHiringAdapter, Web3CareerAdapter, WeWorkRemotelyAdapter, GreenhouseAdapter, LeverAdapter, AshbyAdapter, fetch_ats
 from lib.job_types import Posting
 
 FIXTURES = Path(__file__).parent / "fixtures" / "job_feed"
@@ -145,3 +145,83 @@ async def test_wwr_adapter_parses_rss():
     assert p.title == "Product Manager"
     assert p.url == "https://weworkremotely.com/remote-jobs/acme-pm-5001"
     assert p.source_role_id == "https://weworkremotely.com/remote-jobs/acme-pm-5001"
+
+
+@pytest.mark.asyncio
+async def test_greenhouse_adapter_parses():
+    body = (FIXTURES / "greenhouse.json").read_text()
+    with respx.mock(base_url="https://boards-api.greenhouse.io") as mock:
+        mock.get("/v1/boards/anthropic/jobs").mock(
+            return_value=httpx.Response(200, content=body)
+        )
+        async with httpx.AsyncClient() as client:
+            adapter = GreenhouseAdapter("anthropic", client=client)
+            postings = await adapter.fetch(since=None)
+    assert len(postings) == 1
+    p = postings[0]
+    assert p.source == "greenhouse:anthropic"
+    assert p.company == "Anthropic"
+    assert p.salary_disclosed == "$180k-$220k"
+
+
+@pytest.mark.asyncio
+async def test_lever_adapter_parses():
+    body = (FIXTURES / "lever.json").read_text()
+    with respx.mock(base_url="https://api.lever.co") as mock:
+        mock.get("/v0/postings/figma").mock(
+            return_value=httpx.Response(200, content=body)
+        )
+        async with httpx.AsyncClient() as client:
+            adapter = LeverAdapter("figma", client=client)
+            postings = await adapter.fetch(since=None)
+    assert postings[0].source == "lever:figma"
+    assert postings[0].company == "Figma"
+    assert postings[0].salary_disclosed == "$140000-$180000"
+
+
+@pytest.mark.asyncio
+async def test_ashby_adapter_parses():
+    body = (FIXTURES / "ashby.json").read_text()
+    with respx.mock(base_url="https://api.ashbyhq.com") as mock:
+        mock.get("/posting-api/job-board/hopper").mock(
+            return_value=httpx.Response(200, content=body)
+        )
+        async with httpx.AsyncClient() as client:
+            adapter = AshbyAdapter("hopper", client=client)
+            postings = await adapter.fetch(since=None)
+    assert postings[0].source == "ashby:hopper"
+
+
+@pytest.mark.asyncio
+async def test_fetch_ats_walks_greenhouse_then_lever_then_ashby():
+    """Greenhouse 404 -> Lever 200 wins; Ashby is never called."""
+    body = (FIXTURES / "lever.json").read_text()
+    with respx.mock() as mock:
+        mock.get("https://boards-api.greenhouse.io/v1/boards/figma/jobs").mock(
+            return_value=httpx.Response(404)
+        )
+        mock.get("https://api.lever.co/v0/postings/figma").mock(
+            return_value=httpx.Response(200, content=body)
+        )
+        async with httpx.AsyncClient() as client:
+            postings, source_used = await fetch_ats("figma", client=client)
+    assert source_used == "lever"
+    assert len(postings) == 1
+
+
+@pytest.mark.asyncio
+async def test_fetch_ats_returns_empty_when_all_404():
+    with respx.mock() as mock:
+        mock.get("https://boards-api.greenhouse.io/v1/boards/nope/jobs").mock(
+            return_value=httpx.Response(404)
+        )
+        mock.get("https://api.lever.co/v0/postings/nope").mock(
+            return_value=httpx.Response(404)
+        )
+        mock.get("https://api.ashbyhq.com/posting-api/job-board/nope").mock(
+            return_value=httpx.Response(404)
+        )
+        async with httpx.AsyncClient() as client:
+            postings, source_used = await fetch_ats("nope", client=client)
+    assert postings == []
+    assert source_used is None

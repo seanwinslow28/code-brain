@@ -237,3 +237,136 @@ class WeWorkRemotelyAdapter:
                 description=_html_to_md(entry.get("description", "")),
             ))
         return postings
+
+
+class GreenhouseAdapter:
+    base = "https://boards-api.greenhouse.io/v1/boards"
+
+    def __init__(self, slug: str, client: httpx.AsyncClient) -> None:
+        self.slug = slug
+        self.client = client
+        self.name = f"greenhouse:{slug}"
+
+    async def fetch(self, since: datetime | None) -> list[Posting]:
+        r = await self.client.get(
+            f"{self.base}/{self.slug}/jobs",
+            params={"content": "true"},
+            headers={"User-Agent": USER_AGENT},
+        )
+        r.raise_for_status()  # 404 raises httpx.HTTPStatusError; fetch_ats walks on that
+        rows = r.json().get("jobs", [])
+        postings: list[Posting] = []
+        for row in rows:
+            salary = next(
+                (m["value"] for m in row.get("metadata") or [] if m.get("name") == "Salary"),
+                None,
+            )
+            posted = _parse_iso(row.get("updated_at"))
+            if since and posted and posted < since:
+                continue
+            postings.append(Posting(
+                source=self.name,
+                source_role_id=str(row["id"]),
+                url=row.get("absolute_url", ""),
+                company=row.get("company_name") or self.slug.title(),
+                title=row.get("title", ""),
+                location=(row.get("location") or {}).get("name"),
+                salary_disclosed=salary,
+                posted_at=posted,
+                description=_html_to_md(row.get("content", "")),
+            ))
+        return postings
+
+
+class LeverAdapter:
+    base = "https://api.lever.co/v0/postings"
+
+    def __init__(self, slug: str, client: httpx.AsyncClient) -> None:
+        self.slug = slug
+        self.client = client
+        self.name = f"lever:{slug}"
+
+    async def fetch(self, since: datetime | None) -> list[Posting]:
+        r = await self.client.get(
+            f"{self.base}/{self.slug}",
+            params={"mode": "json"},
+            headers={"User-Agent": USER_AGENT},
+        )
+        r.raise_for_status()
+        rows = r.json()
+        postings: list[Posting] = []
+        for row in rows:
+            sr = row.get("salaryRange") or {}
+            salary = _format_salary(sr.get("min"), sr.get("max"))
+            ts = row.get("createdAt")
+            posted = datetime.fromtimestamp(ts / 1000) if ts else None
+            if since and posted and posted < since:
+                continue
+            cats = row.get("categories") or {}
+            postings.append(Posting(
+                source=self.name,
+                source_role_id=str(row.get("id")),
+                url=row.get("hostedUrl", ""),
+                company=self.slug.title(),
+                title=row.get("text", ""),
+                location=cats.get("location"),
+                salary_disclosed=salary,
+                posted_at=posted,
+                description=_html_to_md(row.get("descriptionPlain", "")),
+            ))
+        return postings
+
+
+class AshbyAdapter:
+    base = "https://api.ashbyhq.com/posting-api/job-board"
+
+    def __init__(self, slug: str, client: httpx.AsyncClient) -> None:
+        self.slug = slug
+        self.client = client
+        self.name = f"ashby:{slug}"
+
+    async def fetch(self, since: datetime | None) -> list[Posting]:
+        r = await self.client.get(
+            f"{self.base}/{self.slug}",
+            params={"includeCompensation": "true"},
+            headers={"User-Agent": USER_AGENT},
+        )
+        r.raise_for_status()
+        rows = r.json().get("jobs", [])
+        postings: list[Posting] = []
+        for row in rows:
+            posted = _parse_iso(row.get("publishedDate"))
+            if since and posted and posted < since:
+                continue
+            postings.append(Posting(
+                source=self.name,
+                source_role_id=str(row.get("id")),
+                url=row.get("applyUrl", ""),
+                company=self.slug.title(),
+                title=row.get("title", ""),
+                location=row.get("locationName"),
+                salary_disclosed=(row.get("compensation") or {}).get("compensationTierSummary"),
+                posted_at=posted,
+                description=_html_to_md(row.get("descriptionHtml", "")),
+            ))
+        return postings
+
+
+async def fetch_ats(
+    slug: str, client: httpx.AsyncClient
+) -> tuple[list[Posting], str | None]:
+    """Try Greenhouse -> Lever -> Ashby; first non-404 wins. Returns ([], None) if all 404."""
+    for cls, label in [
+        (GreenhouseAdapter, "greenhouse"),
+        (LeverAdapter, "lever"),
+        (AshbyAdapter, "ashby"),
+    ]:
+        adapter = cls(slug, client=client)
+        try:
+            postings = await adapter.fetch(since=None)
+        except httpx.HTTPStatusError as e:
+            if e.response.status_code == 404:
+                continue
+            raise
+        return postings, label
+    return [], None
