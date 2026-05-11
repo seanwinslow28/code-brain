@@ -6,7 +6,7 @@ import pytest
 import respx
 import httpx
 
-from lib.job_sources import RemoteOKAdapter, HNWhoIsHiringAdapter
+from lib.job_sources import RemoteOKAdapter, HNWhoIsHiringAdapter, Web3CareerAdapter
 from lib.job_types import Posting
 
 FIXTURES = Path(__file__).parent / "fixtures" / "job_feed"
@@ -93,4 +93,35 @@ async def test_hn_adapter_returns_empty_when_no_thread():
         async with httpx.AsyncClient() as client:
             adapter = HNWhoIsHiringAdapter(client=client)
             postings = await adapter.fetch(since=None)
+    assert postings == []
+
+
+@pytest.mark.asyncio
+async def test_web3career_adapter_uses_token(monkeypatch):
+    monkeypatch.setattr("lib.job_sources.get_credential", lambda name: "fake-token")
+    body = (FIXTURES / "web3career.json").read_text()
+    captured = {}
+
+    def _capture(request):
+        captured["url"] = str(request.url)
+        return httpx.Response(200, content=body)
+
+    with respx.mock(base_url="https://web3.career") as mock:
+        mock.get("/api/v1").mock(side_effect=_capture)
+        async with httpx.AsyncClient() as client:
+            adapter = Web3CareerAdapter(client=client)
+            postings = await adapter.fetch(since=None)
+
+    assert "token=fake-token" in captured["url"]
+    assert len(postings) == 1
+    assert postings[0].company == "Messari"
+    assert postings[0].source == "web3career"
+
+
+@pytest.mark.asyncio
+async def test_web3career_adapter_skips_when_token_missing(monkeypatch, caplog):
+    monkeypatch.setattr("lib.job_sources.get_credential", lambda name: None)
+    async with httpx.AsyncClient() as client:
+        adapter = Web3CareerAdapter(client=client)
+        postings = await adapter.fetch(since=None)
     assert postings == []
