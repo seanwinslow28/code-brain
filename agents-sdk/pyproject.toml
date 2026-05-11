@@ -12,7 +12,7 @@ dependencies = [
     "google-genai>=1.74.0,<2.0.0",
     "feedparser==6.0.12",
     "markdownify==1.2.2",
-    "pyyaml>=6.0",
+    "pyyaml==6.0.3",
     "respx==0.23.1",
 ]
 
