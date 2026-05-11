@@ -53,6 +53,10 @@ MAX_BUDGET_USD = 0.00
 _WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]")
 _FRONTMATTER_RE = re.compile(r"^---\n.*?\n---", re.DOTALL)
 _KEBAB_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
+# `[[10]]` / `[[42]]` patterns from LLM-generated research notes (Gemini DR,
+# LDR) are footnote / citation markers, not wikilinks. Filter them out
+# before broken-link reporting.
+_CITATION_TARGET_RE = re.compile(r"^\d+$")
 
 # Directories whose contents are auto-generated or ephemeral and should NOT
 # be flagged as orphans just because nothing wikilinks to them.
@@ -93,6 +97,17 @@ def _strip_code(text: str) -> str:
 # Filename patterns excluded from orphan checks (Granola transcripts etc.)
 _ORPHAN_EXCLUDE_SUFFIXES = ("-transcript.md",)
 
+# Directories skipped during broken-wikilink scanning. The Granola meeting
+# archive was slug-renamed (e.g. `Alex_Sean sync.md` →
+# `mtg-2026-03-XX-alex-sean-sync.md`) but the internal cross-references
+# inside each note still point to the pre-rename names. The archive is
+# read-only post-2026-05-04 Block layoff — fix the lint scope, not the
+# data. Re-enable scanning here only if you rewrite the stale link
+# targets in a one-shot migration pass.
+_BROKEN_LINK_EXCLUDE_DIRS = {
+    "the-block-meetings-granola-notes",
+}
+
 
 def _is_orphan_excluded(rel_parts: tuple[str, ...], name: str) -> bool:
     """Return True if a file should be skipped by orphan detection."""
@@ -101,6 +116,11 @@ def _is_orphan_excluded(rel_parts: tuple[str, ...], name: str) -> bool:
     if any(name.endswith(sfx) for sfx in _ORPHAN_EXCLUDE_SUFFIXES):
         return True
     return False
+
+
+def _is_broken_link_excluded(rel_parts: tuple[str, ...]) -> bool:
+    """Return True if a file should be skipped by broken-wikilink scanning."""
+    return any(part in _BROKEN_LINK_EXCLUDE_DIRS for part in rel_parts)
 
 
 class LintSeverity(Enum):
@@ -139,7 +159,7 @@ def _vault_md_files(vault_root: Path, include_excluded: bool = False) -> list[Pa
     files: list[Path] = []
     for p in vault_root.rglob("*.md"):
         rel_parts = p.relative_to(vault_root).parts
-        if any(part in {".obsidian", ".trash"} or part.startswith(".") for part in rel_parts):
+        if any(part in {".obsidian", ".trash", "node_modules"} or part.startswith(".") for part in rel_parts):
             continue
         if not include_excluded and "daily" in rel_parts:
             continue
@@ -193,19 +213,25 @@ def find_broken_wikilinks(vault_root: Path) -> list[LintIssue]:
     files = _vault_md_files(vault_root)
     issues: list[LintIssue] = []
     for fp in files:
+        rel_parts = fp.relative_to(vault_root).parts
+        if _is_broken_link_excluded(rel_parts):
+            continue
         try:
             text = fp.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
         scan = _strip_code(text)
         for target in _WIKILINK_RE.findall(scan):
-            if not _resolve_wikilink(vault_root, target, files):
+            target_stripped = target.strip()
+            if _CITATION_TARGET_RE.match(target_stripped):
+                continue
+            if not _resolve_wikilink(vault_root, target_stripped, files):
                 issues.append(
                     LintIssue(
                         kind="broken-wikilink",
                         severity=LintSeverity.HIGH,
                         file=fp,
-                        detail=target.strip(),
+                        detail=target_stripped,
                     )
                 )
     return issues

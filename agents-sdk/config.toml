@@ -165,7 +165,7 @@ ldr_base_url = "http://localhost:5050"
 ldr_search_engines = ["searxng"]
 ldr_iterations = 2
 ldr_questions_per_iteration = 2
-ldr_timeout_seconds = 900
+ldr_timeout_seconds = 1800
 schedule = "02:45"
 
 [safety]

@@ -75,6 +75,10 @@
           {
             "type": "command",
             "command": ".claude/hooks/session-end-flush.sh"
+          },
+          {
+            "type": "command",
+            "command": ".claude/hooks/session-end-auto-stub.sh"
           }
         ]
       }

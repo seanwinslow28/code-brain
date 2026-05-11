@@ -16,7 +16,7 @@ tags:
   - sean-specific
 related:
   - "[[intent-engineering]]"
-  - "[[20_projects/prj-job-hunt-2026]]"
+  - "[[prj-job-hunt-2026]]"
 source-pdf: "Personal-Agentic-Intent-Engineering.pdf"
 ---
 
