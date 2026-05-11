@@ -2,7 +2,7 @@
 title: "Stripe publishes 2025 annual letter and announces tender offer to provide liquidity to current and former employees"
 source: "https://stripe.com/newsroom/news/stripe-2025-update"
 author:
-  - "[[stage]]"
+  - "Stripe"
 published: 2026-02-24
 created: 2026-04-28
 description: "Stripe announces tender offer to provide liquidity to current and former employees; publishes 2025 annual letter"

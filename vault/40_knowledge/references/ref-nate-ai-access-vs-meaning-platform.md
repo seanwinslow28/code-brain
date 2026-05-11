@@ -8,9 +8,13 @@ created: 2026-05-07
 description: "Watch now | Why access without meaning is the most expensive mistake in AI right now."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "nates-newsletter"
+  - "ai-product-strategy"
+  - "job-hunt-2026"
+type: reference
+status: processed
+domain: [product-management, claude-mastery]
+ai-context: "Nate's Newsletter (2026-05-05) — access vs. meaning as the next AI platform fight: why semantic control beats computer-use reach, the Stripe/Salesforce/SAP/Perplexity comparisons, and three diagnostic prompts for evaluating AI products."
 ---
 Agents can finally use computers like humans do — open browsers, click forms, move calendar invites, run commands. The spectacle is real. It is also a distraction.
 

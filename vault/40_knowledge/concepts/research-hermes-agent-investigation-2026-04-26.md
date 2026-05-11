@@ -7,7 +7,7 @@ question: "Should Sean port any design patterns from NousResearch/hermes-agent i
 source: claude-code-investigation
 tags: [research, hermes-agent, agents-sdk, integration-review]
 links:
-  - "[[hermes-agent-investigation-prompt]]"
+  - "[[ref-hermes-agent-investigation-prompt]]"
 ---
 
 # Hermes Agent — Integration Investigation
