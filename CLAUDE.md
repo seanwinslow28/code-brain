@@ -4,7 +4,7 @@ This is Sean's personal command center — a second brain for Claude Code.
 
 ## What This Repo Is
 
-117 skills, 13 Claude Code subagents, 13 hooks, 14 autonomous SDK agents (7 active), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
+117 skills, 13 Claude Code subagents, 13 hooks, 15 autonomous SDK agents (7 active on launchd, 1 manual-trigger), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
 
 As of v3.15.0, the repo is organized so that domain-owned folders live inside their domain. `the-block/` is Sean's day-job workspace (with `product-management/` nested inside). `creative-studio/` owns 16BitFit and the design-team workspace. `life-systems/` owns personal systems. Cross-cutting infra (`.claude/`, `agents-sdk/`, `vault/`, `claude-mastery/`, installer dirs) stays at root.
 
@@ -61,7 +61,7 @@ Skills and agents prefer native MCPs over Zapier. When both exist, always use na
 
 ## Connected External Research APIs
 
-**Gemini Deep Research** is available via `agents-sdk/scripts/gemini_dr.py` (wrapping the `google-genai` SDK) and the `.claude/skills/gemini-deep-research` skill. The API key is stored in macOS Keychain as `com.sean.agents.gemini_api_key`. Use the `gemini-deep-research` skill to decide when to delegate to Gemini DR vs. run a local LDR query. Cost is self-policing: $7 per-task hard cap, $10 per-day circuit breaker, $20 per-month governor — tracked in `vault/health/gemini-spend-{YYYY-MM}.json`. The autonomous agent (`gemini_researcher.py`) is default disabled; opt in with `INSTALL_GEMINI=1` when running `install_schedules.sh`.
+**Gemini Deep Research** is available via `agents-sdk/scripts/gemini_dr.py` (wrapping the `google-genai` SDK) and the `.claude/skills/gemini-deep-research` skill. The API key is stored in macOS Keychain as `com.sean.agents.gemini_api_key`. Use the `gemini-deep-research` skill to decide when to delegate to Gemini DR vs. run a local LDR query. Cost is self-policing: $7 per-task hard cap, $20 per-day circuit breaker, $50 per-month governor (bumped 2026-05-07 from $10 / $20 to absorb heavy DR Max runs) — tracked in `vault/health/gemini-spend-{YYYY-MM}.json`. The autonomous agent (`gemini_researcher.py`) is default disabled; opt in with `INSTALL_GEMINI=1` when running `install_schedules.sh`.
 
 ## Commands
 
@@ -79,7 +79,7 @@ python3 scripts/validate.py
 
 The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Claude Agent SDK. These run **outside** Claude Code sessions on macOS launchd schedules. Skills are loaded as system prompts — no duplication.
 
-**Active agents (8 of 15):**
+**Active agents (8 of 16 on launchd; 1 manual-trigger):**
 
 | Agent | Schedule | Skills/Model | Cost/Run |
 |-------|----------|---------------|----------|
@@ -92,6 +92,7 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Cla
 | Flush (SessionEnd) | hook-triggered | gemma4:e4b on Mac Mini via `inbox_triage` routing for <100-msg sessions; ≥100-msg sessions attempt Qwen3-14B on MBP if awake; + 3-domain SOUL prepend (v3.17.0) | $0.00 (local) |
 | Gemini Researcher (NEW, **default disabled**) | 03:30 daily (when opted in via `INSTALL_GEMINI=1`) | Gemini Deep Research / DR Max via `gemini_dr.run` | $0–7/run; capped $7 task / $10 day / $20 month |
 | Job Feed (NEW v3.28.0) | 8:00–11:00 AM (7 fires) | Qwen3-14B on MBP via HybridRouter (`fallback_disabled=true`); 4 free public feeds + ~40-company ATS watchlist; SQLite + Markdown roll-up | $0.00 |
+| Skill Optimizer (v3.27.0, **manual-trigger only**) | manual (`agents-sdk/agents/skill_optimizer.py`) | Opus 4.7 generation + Qwen3-14B local judge (Ollama on Mac Mini) + Sonnet 4.6 sample-check every 5 iters; autoresearch loop on a single SKILL.md | $20–145/run (cap $200) |
 
 **Research routing rule (v3.26.3, 2026-05-06):** Heavy multi-target research belongs on Gemini DR or DR Max, **not** local LDR. There are two independent reasons, both observed in the same week:
 

@@ -4,12 +4,18 @@
 
 > **Status update (2026-05-05):** Operating-model interview completed for `job-hunt-2026` (CHANGELOG v3.26.2). All 5 artifacts at `vault/05_atlas/operating-models/job-hunt-2026/` at `status: confirmed`. Tier-A truths locked: walk-away $100k, 5-days-in-office = no, agents draft / Sean sends, Track-C protected, Friday retro non-negotiable. Relocation overrides: Anthropic OR $250k+/yr. **Phase rhythm refinement from interview** — the day is now framed as one fluid 8:30–5:30 container with parallel activities (not block-scheduled per phase day-of-week), with a sacred 8:30–9:30 AM learning hour and a mandatory 1–2 PM break. The phase arc (Phase 1–8 below) still holds; only the intra-day shape changed. **Open work items the bundle surfaced are tracked in [[2026-05-04-migration-completion-handoff#Operating-model interview completed (2026-05-05)|the migration-completion handoff doc]].** Phase 4 (MCP server) is the time-sensitive one — interview surfaced the cold-start chain (name → repo → README → plan) as the top self-blocking decision; target ship date 2026-05-25 means kickoff this week.
 
+> **Priority shift (2026-05-07):**
+> - Claude Code-assisted work going forward is portfolio projects, portfolio website creation, and build-in-public strategy. Resume + LinkedIn are Sean-owned, off the Claude track.
+> - The unified roadmap at [`2026-05-06-unified-roadmap.md`](job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md) is the operative plan. Its Tasks 0–7 + the "This Week's 5 Decisions" block supersede the master plan's Phase 2 / Phase 4 ordering.
+> - Track-C (MCP server v0 ship 2026-05-25 — `intent-engineering`) remains Tier-A protected per the operating-model. The portfolio website (`/transactions/` route, Astro 5 + React islands per unified roadmap Decision 2) and build-in-public cadence (one Substack post per Friday + LinkedIn syndication per unified roadmap Task 6 §C / §D) join Track-C as the protected work.
+> - All other Tier-A protections from the operating-model still hold.
+
 **Goal:** Convert the May 4, 2026 layoff at The Block into a deliberately-shaped 8–14 week sprint that lands a new role (AI PM, Technical PM, or Creative PM) — Boston metro or remote — while shipping the portable career artifacts that the Karpathy synthesis identified as the highest-compounding moves.
 
 **Architecture:** Three concurrent tracks running off one shared rhythm.
 - **Track A — Runway:** Severance, unemployment, health insurance, finances. Non-negotiable. Done in week 1, then maintained.
-- **Track B — Pipeline:** Positioning artifacts (resume, LinkedIn, GitHub, talk track), target list, applications, interviews. The job-hunt machine.
-- **Track C — Differentiator:** One MCP server shipped public + one written artifact. Karpathy's single-top-rec and the thing that separates you from every other PM in the funnel.
+- **Track B — Pipeline:** Applications, interviews, target list, network outreach. The job-hunt machine.
+- **Track C — Differentiator:** MCP server (`intent-engineering` v0, ship 2026-05-25) + portfolio website (`/transactions/` route) + build-in-public artifacts (Substack + LinkedIn syndication + GitHub `EXPLANATION.md` files). The work that survives every market scenario.
 
 Tracks A and B run hot in weeks 1–2; Track C ramps in week 2 and runs to week 6. Daily rhythm (Phase 7) is the connective tissue.
 
@@ -23,10 +29,10 @@ Tracks A and B run hot in weeks 1–2; Track C ramps in week 2 and runs to week 
 
 ## Open Threads (carry forward — do not let these slip)
 
-Active items that don't fit neatly inside a single Phase task. Check this list every Friday retro until both are closed.
+Both items closed 2026-05-07. Kept here for historical traceability; Friday-retro check no longer required.
 
-- [ ] **Counter-signed severance PDF from Leanne.** Severance was signed and sent 2026-05-05 (Task 1.1 ✅). Block still owes the fully executed PDF back. If not received by ~2026-05-12, send Leanne a one-line follow-up. Save to `severance-agreement-signed.pdf` in this folder when it lands.
-- [ ] **Block-named skills scrub before any public Superuser Pack push.** Three skills are now Block-owned IP under the reaffirmed CIIA Section 2.3: `the-block-jira-ticket-writer`, `etf-page-creator`, `biweekly-jira-update`. They must be removed (or sanitized to non-Block-named generic equivalents per Phase 4 plan) **before** the LinkedIn announcement (Phase 3) or any public Superuser Pack visibility push. Until then: keep the public repo private, OR confirm those skills aren't currently in the public tree. This gates Phase 3 Task 3.3 (public announcement) and Phase 4 Task 4.3 Step 9 (publish MCP server / pin Superuser Pack on profile).
+- [x] **Counter-signed severance PDF from Leanne.** ✅ Closed 2026-05-07 — fully executed PDF received from Block.
+- [x] **Block-named skills scrub before any public Superuser Pack push.** ✅ Closed 2026-05-07 — the three CIIA-protected skills (`the-block-jira-ticket-writer`, `etf-page-creator`, `biweekly-jira-update`) have been handled per the Phase 4 plan. Phase 3 Task 3.3 (public announcement) and Phase 4 Task 4.3 Step 9 (publish MCP server / pin Superuser Pack on profile) are no longer gated by this item.
 
 ---
 
@@ -38,24 +44,24 @@ Active items that don't fit neatly inside a single Phase task. Check this list e
 - Create: `vault/10_timeline/daily/2026-05-04.md` (likely already exists — append a layoff section)
 - Create: `vault/20_projects/prj-job-hunt-2026/README.md`
 
-- [ ] **Step 1: Write the day down.** Append a short section to today's daily note titled "Layoff — what happened, how I feel, what I did about it." Five bullets max. This is for you in 6 weeks when the lens flips from "this is awful" to "this is when I pivoted." Stop after five bullets — no spiraling on paper.
+- [x] **Step 1: Write the day down.** Append a short section to today's daily note titled "Layoff — what happened, how I feel, what I did about it." Five bullets max. This is for you in 6 weeks when the lens flips from "this is awful" to "this is when I pivoted." Stop after five bullets — no spiraling on paper.
 
-- [ ] **Step 2: Set up the project hub.** Create `vault/20_projects/prj-job-hunt-2026/README.md` with three sections: `## Pipeline` (companies + status), `## Artifacts` (resume v, LinkedIn v, MCP server v, essay v), `## Weekly Retro` (one line per week). This is the dashboard.
+- [x] **Step 2: Set up the project hub.** Create `vault/20_projects/prj-job-hunt-2026/README.md` with three sections: `## Pipeline` (companies + status), `## Artifacts` (resume v, LinkedIn v, MCP server v, essay v), `## Weekly Retro` (one line per week). This is the dashboard.
 
-- [ ] **Step 3: Tell three people who matter, no more, today.** Maryalice (already), one close friend, one professional ally outside The Block. Not your parents yet unless you want to. Not LinkedIn — that's a Phase 3 decision after positioning is set. Public announcement is a strategic move; don't make it an emotional one.
+- [x] **Step 3: Tell three people who matter, no more, today.** Maryalice (already), one close friend, one professional ally outside The Block. Not your parents yet unless you want to. Not LinkedIn — that's a Phase 3 decision after positioning is set. Public announcement is a strategic move; don't make it an emotional one.
 
-- [ ] **Step 4: Stop work at a reasonable hour. Eat. Sleep.** No grand strategy tonight. Tomorrow morning is when the plan starts. Tonight is for being a person.
+- [x] **Step 4: Stop work at a reasonable hour. Eat. Sleep.** No grand strategy tonight. Tomorrow morning is when the plan starts. Tonight is for being a person.
 
 ### Task 0.2: Lock the calendar
 
 **Files:**
 - Modify: Google Calendar (both `sean.winslow28@gmail.com` and `swinslow@theblock.co` — although Block calendar access may be revoked at any moment)
 
-- [ ] **Step 1: Export the Block calendar today.** While you still have access. File → Export from Google Calendar settings, save the .ics. You'll lose access soon and there are reference contacts and meeting context buried in there.
+- [x] **Step 1: Export the Block calendar today.** While you still have access. File → Export from Google Calendar settings, save the .ics. You'll lose access soon and there are reference contacts and meeting context buried in there.
 
-- [ ] **Step 2: Block your calendar 8:30 AM–12:30 PM Mon–Fri for the next 4 weeks.** Title: "Job Hunt — Deep Work." This is your new morning shift. Afternoons stay flexible for interviews, errands, life.
+- [x] **Step 2: Block your calendar 8:30 AM–12:30 PM Mon–Fri for the next 4 weeks.** Title: "Job Hunt — Deep Work." This is your new morning shift. Afternoons stay flexible for interviews, errands, life.
 
-- [ ] **Step 3: Block 4:30–5:30 PM Fri** as "Weekly Retro" — non-negotiable check-in with yourself.
+- [x] **Step 3: Block 4:30–5:30 PM Fri** as "Weekly Retro" — non-negotiable check-in with yourself.
 
 ---
 
@@ -78,7 +84,7 @@ Active items that don't fit neatly inside a single Phase task. Check this list e
 
 - [x] **Step 4: Decide and sign by the deadline.** Signed and sent to Leanne 2026-05-05.
 
-- [ ] **Step 5: Save fully counter-signed copy.** Pending: ask Leanne to send the fully executed PDF back; save to `severance-agreement-signed.pdf` in this folder when received.
+- [x] **Step 5: Save fully counter-signed copy.** ✅ Received 2026-05-07; counter-signed PDF saved.
 
 ### Task 1.2: Health insurance — COBRA decision and ACA marketplace
 
@@ -177,7 +183,41 @@ Active items that don't fit neatly inside a single Phase task. Check this list e
 
 - [ ] **Step 4: Salary anchor.** Compute three numbers: walk-away (you won't take less), target (your real ask), reach (top of the range you'd quote with confidence). Use levels.fyi + Glassdoor for AI PM / Technical PM in Boston metro and remote. Write them down. You'll need them in 4 weeks.
 
-### Task 2.2: Resume rewrite — one master + three tailored
+### Task 2.2: Resume rewrite — one master + three tailored 🟡 V1 master + 3 variants drafted 2026-05-07
+
+> **🟢 Sean-owned · off the Claude Code track (2026-05-07).** Resume work is Sean's lane. Future iterations happen on Sean's own time without Claude in the loop. The methodology callout below stays as a reference for any future iteration.
+
+> **STATUS (2026-05-07):** Master resume rewritten V1→V3 + 3 tailored variants (AI PM, Tech PM, Creative PM) drafted in one ~90-min session. Variants are reorder + Summary swap of the master with no new content invented (per Step 5). **Pending on Sean's side:** read each aloud (Step 7), cut what sounds robotic, decide whether NYL bullets need modernization for 2026-target recruiters, decide whether the HelloPM cert listing is still active.
+>
+> **Actual files (supersede the planned paths in the Files block below):**
+> - Master: [`../assets/Sean_Winslow_Resume.md`](../assets/Sean_Winslow_Resume.md)
+> - AI PM variant: [`../assets/Sean_Winslow_Resume_AI_PM.md`](../assets/Sean_Winslow_Resume_AI_PM.md)
+> - Tech PM variant: [`../assets/Sean_Winslow_Resume_Tech_PM.md`](../assets/Sean_Winslow_Resume_Tech_PM.md)
+> - Creative PM variant: [`../assets/Sean_Winslow_Resume_Creative_PM.md`](../assets/Sean_Winslow_Resume_Creative_PM.md)
+>
+> **Methodology — how the V1 was sourced:** Sean self-dumped a 14-bullet workstream summary at [`the-block-resume-additions-2026.md`](../../../30_domains/product-management/the-block-resume-info/the-block-resume-additions-2026.md), with each bullet pointing at its evidence artifact inline. Six evidence files were read in parallel to ground the bullets in measured outcomes + JD competency coverage:
+>
+> 1. [`P&E-Q2-OKRs.md`](../../../30_domains/product-management/the-block-resume-info/SeanxEd-Q2-OKRs-Roadmap-2026/P&E-Q2-OKRs.md) — Q2 OKR backbone (Objs 1–5 with KRs); the role's actual quantifiable goals.
+> 2. [`Bi-Weekly-Update-May-1-2026.md`](../../../30_domains/product-management/the-block-resume-info/The%20Block%20-%20Bi-Weekly%20Update/Bi-Weekly-Update-May-1-2026.md) — most recent shipped-work catalogue, pre-written.
+> 3. [`Bi-Weekly-Update-April-17-2026.md`](../../../30_domains/product-management/the-block-resume-info/The%20Block%20-%20Bi-Weekly%20Update/Bi-Weekly-Update-April-17-2026.md) — mid-tenure shipped work.
+> 4. [`P&E-Department-2.0-Execution-Plan.md`](../../../30_domains/product-management/the-block-resume-info/SeanxEd-Q2-OKRs-Roadmap-2026/P&E-Department-2.0-Execution-Plan.md) — strategic leadership evidence (the 10-week Confluence overhaul Sean authored).
+> 5. [`TASKS.md`](../../../30_domains/product-management/the-block-resume-info/SeanxEd-Q2-OKRs-Roadmap-2026/TASKS.md) — line-item evidence + Project CTO scope context.
+> 6. [`The-Block-Job-Description.md`](../../../30_domains/product-management/the-block-resume-info/The-Block-Job-Description.md) — JD competencies for cross-checking bullet coverage.
+>
+> Selected Projects section was sourced directly from repo files (`CHANGELOG.md`, `CLAUDE.md`, the unified roadmap) — no CIIA gate since those are Sean's own open-source artifacts.
+>
+> **Forward pointer — `the-block-resume-info/` folder:** [`vault/30_domains/product-management/the-block-resume-info/`](../../../30_domains/product-management/the-block-resume-info/) contains a substantial unprocessed archive beyond the 6 files used in this V1 pass. Material likely useful for future resume iterations, portfolio breakdowns, talk-track stories, and the unified roadmap's Tasks 4–5:
+>
+> - **Polymarket Sponsored Courses PRD evolution** — 4+ versioned `.docx` files in [`The Block - PRD/`](../../../30_domains/product-management/the-block-resume-info/The%20Block%20-%20PRD/) (Sponsored Courses PRD Confluence v1 / v2 / v3, Campus_Sponsored_MicroCourses_PRD_v3, Matt-aligned variant), plus the user-flow diagram, Ed's annotated PDF notes, the Sponsored Courses Sales One-Pager, the user-flow JPEG, and the Slack-conversation export with Ed about PRD reassessment. Flagship-quality material for a future portfolio breakdown.
+> - **x402 / agentic-wallet research** — 4 PDFs in [`The Block-x402-Research/`](../../../30_domains/product-management/the-block-resume-info/The%20Block-x402-Research/) (Strategy, Implementation Guide, Competitive Landscape, Agentic Economy framing). The Block Leadership-Experience X402 / A2A / Pro MCP bullet is grounded in these. Strong Phase 6 interview-prep fuel and a clean Karpathy-aligned "agent economy" portfolio piece.
+> - **AdOps automation walkthrough** — [`AdOps-Automation-Walkthrough.docx`](../../../30_domains/product-management/the-block-resume-info/AdOps-Automation-Walkthrough.docx). Concrete Zapier RevOps automation evidence; could let the Zapier line in Work Experience bullet 1 become a deeper portfolio piece.
+> - **Granola meeting transcripts** — 40+ files in [`vault/30_domains/product-management/the-block-meetings-granola-notes/`](../../../30_domains/product-management/the-block-meetings-granola-notes/). Includes the Larry Cermak final meeting, the Matt × Ed × Sean meeting, weekly Sean × Ed 1:1s, Brand / Media / Design Weekly Syncs, Project CTO Design Check-ins, Pro Future research / data discussions, App Store rejection thread, Confluence Cleanup syncs, and the Sean × Ed Pro Workshop. Story-bank fuel for master plan Task 2.5 (8 STAR stories).
+> - **JD competency breakdowns** — 13 files in [`The Block Job Description Breakdowns - ChatGPT/`](../../../30_domains/product-management/the-block-resume-info/The%20Block%20Job%20Description%20Breakdowns%20-%20ChatGPT/), one per JD line. Useful as a coverage cross-check on tailored variants and as direct cover-letter input.
+> - **Design assets + diagrams** — PNG / JPEG mockups, sponsored-courses user-flow visuals, Mermaid diagrams (`.md`), Block PRD visual, recess example image, GA4 screenshot.
+> - **Additional bi-weekly updates** — beyond the 2 read in this pass, others may exist in [`The Block - Bi-Weekly Update/`](../../../30_domains/product-management/the-block-resume-info/The%20Block%20-%20Bi-Weekly%20Update/).
+> - **Block + Campus overviews** — [`TheBlock-And-Campus-Overviews.md`](../../../30_domains/product-management/the-block-resume-info/TheBlock-And-Campus-Overviews.md). Useful for talk-track context and "company you worked at" framing on cover letters.
+>
+> **Recommended follow-up — deep audit + markdown conversion (~90 min, not yet scheduled):** Schedule a one-shot audit pass on this folder that (1) inventories every file with a one-line description + which downstream artifact (resume variant, portfolio breakdown, story-bank entry, x402 essay, talk track) it can feed; (2) converts the high-value `.docx` files (Polymarket PRD versions, AdOps walkthrough, Sponsored Courses One-Pager) to markdown so Claude Code agents can read them directly without `pandoc` overhead — none of these are vault-indexed today because most files lack YAML frontmatter and many are non-text formats; (3) adds YAML frontmatter to every markdown file in the folder for the nightly vault-indexer; (4) flags any file containing Block-protected IP per CIIA §2.3 that needs sanitization before any public surfacing — particularly anything with proprietary client lists, internal Pro revenue figures, unannounced partnership names, or financial projections from the Pro 2.0 deck. Best run before the Phase 5 Week-3 application surge or before any portfolio piece starts referencing these artifacts. Daily-note breadcrumb for this V1 session: [`vault/10_timeline/daily/2026-05-07.md`](../../../10_timeline/daily/2026-05-07.md) Claude Code Sessions block.
 
 **Files:**
 - Create: `vault/20_projects/prj-job-hunt-2026/resume-master-2026-05.md`
@@ -206,6 +246,8 @@ Active items that don't fit neatly inside a single Phase task. Check this list e
 - [ ] **Step 7: Read out loud.** Anything that sounds like it was written by a robot, rewrite. Anything you can't defend in an interview, cut.
 
 ### Task 2.3: LinkedIn refresh
+
+> **🟢 Sean-owned · off the Claude Code track (2026-05-07).** LinkedIn refresh is Sean's lane. Future iterations happen on Sean's own time without Claude in the loop.
 
 **Files:**
 - (No file — directly on LinkedIn)
@@ -328,6 +370,8 @@ Active items that don't fit neatly inside a single Phase task. Check this list e
 ---
 
 ## Phase 4: Differentiator — Ship Your First MCP Server (Weeks 2–4) — Track C
+
+> **Active Claude-collaboration zone (2026-05-07).** Per the priority shift at the top of this file, Phase 4 is the protected zone for Claude-Code-assisted work. Active deliverables: (a) the `intent-engineering` MCP server v0 ship on 2026-05-25 (unified roadmap Task 3); (b) the portfolio website `/transactions/` route work (unified roadmap Decision 2 — Astro 5 + React islands); (c) the unified roadmap's flagship-artifact lineup — Phase D + Phase 6 `EXPLANATION.md` files (unified roadmap Task 2), the sanitized financial-research fleet 4Q artifact (unified roadmap Task 4), the 14-agent fleet Loom + token-cost calculator (unified roadmap Task 5), and the animation pipeline portfolio short shipping June 11. The unified roadmap holds execution detail; Tasks 4.1–4.4 below remain the deeper specification for the MCP server.
 
 > Karpathy's single-top-recommendation, restated: "Convert your highest-leverage skills to MCP servers, open-source them, and use that ecosystem as your career's portable artifact." This is the move that survives every market scenario.
 

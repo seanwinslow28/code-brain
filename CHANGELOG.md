@@ -11,7 +11,7 @@ Job-feed agent — autonomous PM/APM role discovery wired into the morning brief
 
 ### Added
 
-- **Job-feed agent (autonomous SDK agent #8)** — daily PM/APM role discovery from 4 free public feeds (RemoteOK, HN "Who's Hiring", web3.career, WeWorkRemotely) plus a ~40-company ATS watchlist (Greenhouse/Lever/Ashby auto-detect). Rules-filters with regex/YOE/geo/salary hard cuts, scores survivors with Qwen3-14B on MBP via HybridRouter (`fallback_disabled=true`; no cloud egress on MBP-asleep — postings carry over to next run), persists to standalone `vault/.job-feed.db`, renders Markdown roll-up to `vault/20_projects/prj-job-hunt-2026/job-feed/<today>.md`, and surfaces a 3-line summary block in the daily-driver morning brief. launchd schedules 7 fires from 8:00–11:00 AM ET to handle MBP-asleep catch-up via the roll-up's `complete: true` idempotency frontmatter. $0/run.
+- **Job-feed agent (autonomous SDK agent #8 on launchd)** — daily PM/APM role discovery from 4 free public feeds (RemoteOK, HN "Who's Hiring", web3.career, WeWorkRemotely) plus a ~40-company ATS watchlist (Greenhouse/Lever/Ashby auto-detect). Rules-filters with regex/YOE/geo/salary hard cuts, scores survivors with Qwen3-14B on MBP via HybridRouter (`fallback_disabled=true`; no cloud egress on MBP-asleep — postings carry over to next run), persists to standalone `vault/.job-feed.db`, renders Markdown roll-up to `vault/20_projects/prj-job-hunt-2026/job-feed/<today>.md`, and surfaces a 3-line summary block in the daily-driver morning brief. launchd schedules 7 fires from 8:00–11:00 AM ET to handle MBP-asleep catch-up via the roll-up's `complete: true` idempotency frontmatter. $0/run.
   - New SDK agent: `agents-sdk/agents/job_feed.py`
   - New lib modules: `agents-sdk/lib/job_types.py`, `job_sources.py`, `job_rules.py`, `job_db.py`, `job_scoring.py`, `job_renderer.py`
   - New CLI helper: `agents-sdk/scripts/update_status.py`
@@ -20,12 +20,83 @@ Job-feed agent — autonomous PM/APM role discovery wired into the morning brief
   - Spec: `docs/superpowers/specs/2026-05-09-job-feed-agent-design.md`
   - Plan: `docs/superpowers/plans/2026-05-11-job-feed-agent.md`
 
+### Changed
+
+- `CLAUDE.md`: SDK agent count `15 → 16`; added Job Feed row to the active-agents table; "Active agents (7 of 15 on launchd; 1 manual-trigger)" → "Active agents (8 of 16 on launchd; 1 manual-trigger)".
+- `README.md`: same count bump in the masthead paragraph.
+- `agents-sdk/agents/daily_driver.py`: morning preamble now appends a Job Feed summary block (top-3 fits or "scoring deferred" banner) before the vault-health section when a roll-up exists for the day.
+
+## [3.27.0] - 2026-05-10
+
+**`skill_optimizer.py` — autoresearch optimization harness for Claude Code skills.** First one-skill prototype validated against `.claude/skills/writing-voice-modes/SKILL.md`. Adapted from Karpathy's autoresearch pattern (March 2026): mutable artifact (the body of `SKILL.md` with frontmatter + example outputs + meta-navigation sections protected by a pre-write diff guard), fixed infrastructure (orchestrator + eval YAML + judge prompt template + structural-check Python), and English-language instructions for a mutation subagent. Generation runs on Opus 4.7; LLM judging runs locally on Qwen3-14B (via Ollama on Mac Mini) with Sonnet 4.6 sample-checks every 5 iterations. Decision rule is 3-iteration moving average with bootstrap-CI keep/revert. Six anti-Goodhart trip-wires + held-out validation set + sealed surprise prompts to detect drift.
+
+### Added
+
+- **`agents-sdk/agents/skill_optimizer.py`** (~510 lines) — orchestrator + CLI entry. Loads `[agents.skill_optimizer]` config from `agents-sdk/config.toml`, runs the optimize→measure→keep-or-revert loop. Each kept iteration writes one row to `data/skill-optimizer/writing-voice-modes-results.tsv` and one git commit on the `autoresearch/writing-voice-modes-2026-05-09` branch. Manual-trigger (no launchd plist).
+- **`agents-sdk/lib/skill_optimizer/`** — six pure-function modules:
+  - `structural_checks.py` — 3 deterministic eval criteria: `substack_format_intro` (60-180 word first paragraph + ≤12 word closer), `anti_pattern_overreference` (no sensory noun >2 times), `stylometric_distance` (z-score distance from Sean's corpus + n-gram match penalty).
+  - `stylometry.py` — feature extraction (sentence length, comma density, em-dash density, first-person frequency), distinctive n-gram extraction, distance computation, baseline JSON I/O.
+  - `mutation_guard.py` — pre-write diff validator: rejects edits to protected line ranges (frontmatter + example outputs), protected sections (References, Related Skills, Copy/Paste Ready), whitespace-only diffs, and headings introduced that match a criterion ID verbatim (anti-gaming).
+  - `decision.py` — moving average + bootstrap CI + keep/revert decision rule.
+  - `tripwire.py` — 6 anti-Goodhart safety checks (train-holdout divergence, criterion uneven drift, stylometric drift, diversity collapse, judge disagreement, complexity ratchet).
+  - `judge_runner.py` — `JudgeRunner` class wrapping Qwen3-14B (via Ollama HTTP, 300s timeout, 2 retries on `ReadTimeout`) and Sonnet 4.6, with `judge_single`, `judge_ensemble` (3-judge majority vote with shuffled anchor pairs + seeds), and `compute_sonnet_agreement`.
+- **`.claude/skills/writing-voice-modes/evals.yaml`** — 5 training prompts + 2 holdout prompts + 3 structural criteria + 3 LLM-judge criteria + scoring config.
+- **`.claude/skills/writing-voice-modes/evals.sealed.yaml`** — 3 sealed surprise prompts the optimizer never sees, scored every 5 iterations.
+- **`agents-sdk/lib/skill_optimizer/program.md`** — natural-language instructions for the mutation subagent. Uses a delimited-block output format (`<<<MODIFIED_SKILL_MD>>>...<<<END_MODIFIED_SKILL_MD>>>`) so multi-line markdown bodies don't need JSON-escaping.
+- **`agents-sdk/lib/skill_optimizer/judge_prompt.txt`** — judge template with output-first / anchors-after-output ordering to reduce anchor-priming bias.
+- **`agents-sdk/scripts/build_stylometry_baseline.py`** + **`agents-sdk/scripts/calibrate_stylometry_threshold.py`** — pre-flight builders. Calibration uses 13 real-Sean corpus chunks + 15 generic-AI Opus generations; threshold tuned via TPR-FPR maximization to **7.57** with TPR-FPR = 0.62 (well above the 0.4 floor).
+- **`agents-sdk/data/skill-optimizer/`** — `stylometry_baseline.json` (5 features + 30 distinctive n-grams + threshold), `calibration_set.jsonl` (28 labeled examples Sean reviewed and approved 2026-05-09), `writing-voice-modes-results.tsv` (one row per kept iteration).
+- **`[agents.skill_optimizer]` block in `agents-sdk/config.toml`** — 26 keys covering paths, models, iteration cap, runs/prompt, cost caps.
+- **89 unit tests** total across 7 module test files.
+- **2 60%-professional-dial samples** appended to `.claude/skills/writing-voice-modes/references/voice-samples.md` (Slack delayed-launch + sprint-outcome stakeholder update) for cross-functional dial calibration.
+
+### First live run results (2026-05-10, branch `autoresearch/writing-voice-modes-2026-05-09`)
+
+- **`max_iterations=10, runs_per_prompt=15`** (option-1 budget; the plan's 25-iter / 15-runs default would have been ~25-50 hours wall-clock).
+- **1 kept iteration** (commit `173e1c6`), **9 mutation-proposal failures** caught by fail-soft handling. Wall-clock 127 min.
+- **Iteration 1 score**: train 0.7267 / holdout 0.7778 / decision keep. Mutation: tightening `## Sean's Signature Moves` table.
+- **Per-criterion**: `substack_format_intro` 0.36 and `stylometric_distance` 0.40 below the 0.60 floor (real signal — the optimizer has work to do here); `anti_pattern_overreference` 0.79; LLM-judge criteria all 1.00 (likely Qwen3-14B leniency; Sonnet sample-check at iter 5 would have flagged this but iters 2-10 didn't reach scoring).
+- **Halt reason**: iteration cap (10 reached). No tripwires fired.
+- **Three real bugs surfaced + fixed during validation**:
+  1. `_build_snapshot` call site was missing `holdout_history` and `diversity` args (commit `92ad279`, caught by Task 5.1 dry-run).
+  2. `_OllamaClient.complete` had a hardcoded 120s timeout with no retry — caught by a 49-min `httpx.ReadTimeout` in the first live attempt; bumped to 300s + 2 retries with exponential backoff (commit `0f09e9c`). Same commit wraps the iteration body in try/except for fail-soft on transient errors.
+  3. `propose_mutation` JSON parser broke on un-escaped multi-line markdown — caught by the 9-of-10 iteration failures in the second live attempt; replaced with a delimited-block format that never asks Opus to JSON-escape body content (commit `190c686`, with 5 new unit tests). Backward-compatible JSON fallback retained.
+
+### Changed
+
+- `CLAUDE.md`: SDK agent count `14 → 15`; added Skill Optimizer row to the active-agents table; "Active agents (7 of 14)" → "Active agents (7 of 15 on launchd; 1 manual-trigger)".
+- `README.md`: same count bump in the masthead paragraph.
+
+### Known limitations
+
+- `cumulative_cost` field in results.tsv is hardcoded `0.0000` — the orchestrator never parses Anthropic response usage objects to compute spend. Cost caps (`cost_cap_usd_hard=200`, `cost_cap_usd_soft=50`) in config are decorative until that's wired. Mitigated for this prototype by `max_iterations` bounding the worst case (~$3.25/iter × 10 iters ≈ $32). The first live run cost ~$2-4 actual (mostly iter 1's 105 generations).
+- `runs_per_prompt=15` against Mac Mini Qwen3-14B is the wall-clock bottleneck (~735 judge calls per fully-scored iteration at ~10s each ≈ 2 hours). The plan's "9-13 hour for 25 iters" estimate looks optimistic for this hardware; a 25-iter full run would more realistically take 25-50 hours.
+- The Sonnet sample-check fires every 5 iterations — iter 1 of the live run didn't trigger it, so the perfect 1.000 LLM-judge scores haven't been validated against Sonnet's stricter judgment. Future runs at iter 5+ will surface this.
+- `ollama_base_url` is not a field on `SkillOptimizerConfig` — the live-run wrapper sets it via monkey-patch to `http://192.168.68.200:11434` (Mac Mini direct address). The config.toml still says `localhost:5050` (a stale tunnel-mapping). Promoting `ollama_base_url` to a real field is a follow-up.
+
 ### Counts
 
 - 117 skills (no change)
 - 13 subagents (no change)
 - 13 hooks (no change)
-- 15 SDK agents — **8 active** on launchd (job-feed added; was 7 of 14).
+- **16 SDK agents — 8 active (launchd) + 1 manual-trigger** (job-feed added in v3.28.0; skill_optimizer added in v3.27.0).
+
+## [3.26.4] - 2026-05-07
+
+Meta-Agent health check rewritten to read `agent-run-history.csv` instead of looking for `.baton` files in `~/.claude/batons/`. The baton-based check was a long-standing false-negative source: only `process_inbox` ever wrote batons (per `lib/baton.py:4` — batons were designed for inter-process signaling, not health monitoring), so every other active agent fell through to the "log-only / No baton found" fallback. Today's `daily-fleet-status-2026-05-07.md` reported all 7 active agents as "log-only" even though deep-researcher had successfully completed a 640s run on Topic 3 at 02:55 and recorded `status=success` in the CSV. Discovered while Sean was checking why deep-researcher looked broken in the daily report.
+
+### Fixed
+
+- `agents-sdk/agents/meta_agent.py` — `check_agent_health` now reads `vault/90_system/agent-logs/agent-run-history.csv` (written by `lib.logging_setup.record_run`) as the single source of truth. Status mapping: `success` / `empty-queue` / `recursion-guard` → `healthy`; `error` → `error`; unknown values pass through. Surface details upgraded — the report now shows `mode`, age, cost (when non-zero), and a truncated `notes` snippet for each agent instead of the bare `"No baton found"` string. `meta_agent` reports itself as healthy-running-now to avoid flagging the agent that just generated the report. Alert filter in `main()` updated to drop the obsolete `"log-only"` allowlist entry.
+- Per-agent stale thresholds added (`_STALE_AFTER_HOURS`) so the unified 26h window doesn't false-alarm on non-daily agents: `knowledge_lint` → 192h (Sunday 22:00 weekly + 24h buffer); `flush` → 72h (hook-triggered, absorbs quiet weekends). Other agents use the 26h default.
+
+### Added
+
+- `agents-sdk/tests/test_meta_agent_health.py` — 16 new test cases covering: dry-run short-circuit, meta_agent self-report, missing CSV / missing-row → no-data, recent success → healthy, hyphen↔underscore name normalization (CSV uses hyphens, ACTIVE_AGENTS uses underscores), error / empty-queue / recursion-guard status mapping, stale-flag with default and per-agent thresholds, latest-row picking, cost/duration/mode surfacing, unknown-status passthrough, and notes truncation. All 33 meta-agent tests pass; full agents-sdk suite is 303 passed / 2 unrelated WOL-routing failures (pre-existing per v3.14.3 WOL retirement).
+
+### Verified
+
+- Live `generate_fleet_report()` against today's CSV correctly identifies all 6 non-meta agents as `healthy` with full status detail, plus knowledge-lint as `stale` (last run 2026-04-26, 259h ago — beyond the 192h weekly threshold). Deep-researcher row now reads: `status=success · mode=queue · 14.2h ago · notes='id=092a7d0d wall=640s digest=skipped-no-note'` instead of the prior `No baton found, but log exists`.
 
 ## [3.26.3] - 2026-05-06
 

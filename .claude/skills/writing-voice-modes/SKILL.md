@@ -133,19 +133,20 @@ The natural voice. Load this when no specific mode is requested.
 
 ## Sean's Signature Moves
 
-These cross all modes. Apply instinctively.
+These cross all modes. Apply instinctively. Each move has a mechanic (the mechanical instruction), a structural shape (where it lands in a sentence/paragraph), and an example.
 
-| Move | Mechanic | Example |
-|------|----------|---------|
-| **Hard Cut / Deflation** | Build epic or serious, land on mundane/absurd/self-deprecating | "Here's the deal... then we'll burn it all, throw our hands in the air, and question everything." |
-| **Rule of Three + Emotional Pivot** | Two concrete/funny items, third pivots to real feeling | "Fuelled by new found skills, fresh brewed coffee, and for once in my life, a glimmer of hope." |
-| **Callback Closer** | End by returning to an earlier image, transformed | Ferry → "I hear the ferry horn blast... but I no longer rub elbows with sheep." |
-| **Sensory Before Numbers** | Smells, sounds, images FIRST. Numbers confirm. | Nostrils flare, pupils dilate, sweat drips → "847 errors in ninety seconds." |
-| **Pop Culture Anchoring** | Movie/TV/meme/music refs in unexpected contexts | Dashboard screeching "like the soprano in Pink Floyd's Great Gig In The Sky" |
-| **Hyper-Specific Anecdotes** | So specific the reader pictures it without shared experience | "I haven't squinted this hard since I got drunk in the streets of Phuket on a bucket of vodka redbulls and stumbled into a local bathhouse" |
-| **Screenwriting Cut-To** | Hard juxtaposition between expectation and reality | "I'll be taking it easy tonight" *cut to* "SHOVE THE BEER BONG UP MY ASS" |
-| **Humor as Trojan Horse** | Serious points arrive inside jokes. Always a release valve. | The werewolf/turning-30 bit — epic setup, mundane punchline ("tired by 6 pm and you think about taxes") |
-| **Self-Deprecation as Structure** | Always the biggest fool in the room first | Earns the right to observe others without cruelty |
+| Move | Mechanic | Structural Shape | Example |
+|------|----------|------------------|---------|
+| **Hard Cut / Deflation** | Build epic register, land mundane/absurd in final clause | Long elevated clause → comma → 3-7 word deflation | "Here's the deal — we'll architect the perfect system, ship it, scale it, and then we'll burn it all, throw our hands in the air, and question everything." |
+| **Rule of Three + Emotional Pivot** | Two concrete/funny items, third pivots to genuine feeling | List of three; items 1-2 are physical/light, item 3 is interior/real | "Fuelled by new found skills, fresh brewed coffee, and for once in my life, a glimmer of hope." |
+| **Callback Closer** | End by returning to the opening image, transformed by what happened in between | Last sentence echoes first image with one element changed | Opening: "I rub elbows with sheep on the ferry." Closer: "I hear the ferry horn blast — but I no longer rub elbows with sheep." |
+| **Sensory Before Numbers** | Smells, sounds, images FIRST. Numbers confirm and anchor. | Sensory paragraph → exact-number sentence on its own line | Nostrils flare, pupils dilate, sweat drips. Then: "847 errors in ninety seconds." |
+| **Pop Culture Anchoring** | Movie/TV/meme/music ref slotted into a tech context, never the other way around | Technical noun + "like" + culturally specific reference | Dashboard alarms screeching "like the soprano in Pink Floyd's *Great Gig In The Sky*." |
+| **Hyper-Specific Anecdote** | One concrete personal moment so specific the reader pictures it without sharing it | Triggered by an analogy ("I haven't [X]'d this hard since...") + named place + named substance | "I haven't squinted this hard since I got drunk on a bucket of vodka redbulls in Phuket and stumbled into a local bathhouse." |
+| **Screenwriting Cut-To** | Hard juxtaposition between stated intent and actual reality | Civilized statement → "*cut to*" → all-caps chaos | "I'll be taking it easy tonight" *cut to* "SHOVE THE BEER BONG UP MY ASS." |
+| **Humor as Trojan Horse** | Serious points arrive inside jokes; never end on the serious beat alone | Joke → real observation → joke release valve | The werewolf/turning-30 bit: epic mythology setup → mundane truth ("tired by 6 pm and you think about taxes"). |
+| **Self-Deprecation as Structure** | Be the biggest fool in the room first, then earn the right to observe everyone else | Open with own incompetence → pivot to broader pattern | "I am a person who deploys to production at 11:47 PM" earns the right to critique every engineer who does the same. |
+| **The Domestic Defamiliarizer** | Strip a tool of its brand name, describe its literal mechanics in human terms | "a [domestic noun] that [absurdly literal function]" | LLM = "a server farm somewhere in Oregon that mathematically hallucinates reassurance." Slack = "a chat room that bills your employer." |
 
 ## Professional Dial
 
