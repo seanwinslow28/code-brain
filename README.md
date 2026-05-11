@@ -1,6 +1,6 @@
 # Claude Code Superuser Pack
 
-An open-source agentic engineering practitioner's toolkit — **117** skills, 13 subagents, 13 hooks, **15** autonomous SDK agents (7 currently running on launchd, 1 manual-trigger), **3 primary domains**, an Obsidian vault, and a Claude Agent SDK runtime, all auto-loaded. Every component is in active use; every scheduled agent has a launchd schedule; every skill is a prompt and every prompt has a job. If you've read Karpathy's "agentic engineering" framing and wondered what one looks like in the wild, this is one.
+An open-source agentic engineering practitioner's toolkit — **117** skills, 13 subagents, 13 hooks, **16** autonomous SDK agents (8 currently running on launchd, 1 manual-trigger), **3 primary domains**, an Obsidian vault, and a Claude Agent SDK runtime, all auto-loaded. Every component is in active use; every scheduled agent has a launchd schedule; every skill is a prompt and every prompt has a job. If you've read Karpathy's "agentic engineering" framing and wondered what one looks like in the wild, this is one.
 
 ## What's Inside
 
@@ -46,6 +46,7 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the [Cl
 | Daily Driver (morning) | 8:45 AM | Read yesterday's note, create today's, write 1-3-5 priorities, surface Vault Health + fleet alerts. v3.16.0: loads operating-model HEARTBEATs for all 3 domains + on-demand USER/SOUL/schedule-recs reads |
 | Knowledge Lint | Sunday 22:00 | Two-tier vault health scan (structural + semantic). Reports surface in the morning brief. |
 | Flush (SessionEnd) | on session close | Extracts decisions/lessons/actions/quotes from transcripts into `vault/daily/YYYY-MM-DD.md` |
+| Job Feed (v3.28.0) | 8:00–11:00 AM (7 fires) | Scrapes 4 public feeds + ~40-company ATS watchlist, scores PM/APM roles with Qwen3-14B, writes daily roll-up to `vault/20_projects/prj-job-hunt-2026/job-feed/` and surfaces 3-line summary in morning brief. 100% local, $0/run |
 
 **Key design:** Skills are prompts, agents are runners. SKILL.md files are loaded as system prompts — no content duplication. Skill improvements automatically flow to autonomous agents.
 

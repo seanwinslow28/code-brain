@@ -1,0 +1,14 @@
+{
+  "jobs": [
+    {
+      "id": 7001,
+      "absolute_url": "https://boards.greenhouse.io/anthropic/jobs/7001",
+      "title": "Product Manager, Claude",
+      "company_name": "Anthropic",
+      "location": {"name": "Remote (US)"},
+      "updated_at": "2026-05-08T12:00:00Z",
+      "content": "<p>PM role.</p>",
+      "metadata": [{"name": "Salary", "value": "$180k-$220k"}]
+    }
+  ]
+}
