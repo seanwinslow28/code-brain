@@ -257,3 +257,83 @@ def test_compose_prompt_handles_empty_references():
     # Should not crash; user prompt should still be coherent
     assert "vonnegut" in out["user"].lower()
     assert len(out["user"]) > 100  # not empty/trivial
+
+
+# --- HybridRouter wrapper + draft writer (Task C6) ---
+
+def test_write_draft_creates_file_with_frontmatter(tmp_path, monkeypatch):
+    from agents import substack_drafter
+    captured = {}
+    def fake_route(*, task, system, user, max_cost_usd=None):
+        captured["task"] = task
+        captured["system"] = system
+        captured["user"] = user
+        return {
+            "text": "# The Night My Vault Said Nothing\n\nDraft body here ending with [[some-concept]].",
+            "model_used": "qwen3-14b",
+            "cost_usd": 0.0,
+        }
+    monkeypatch.setattr(substack_drafter, "_route", fake_route)
+
+    out_dir = tmp_path / "drafts"
+    out_dir.mkdir()
+    path = substack_drafter.write_draft(
+        out_dir=out_dir,
+        slug="vault-said-nothing",
+        voice_mode="sean",
+        cluster_slugs=["a", "b"],
+        prompt={"system": "sys", "user": "user"},
+        max_cost_usd=0.10,
+    )
+    assert path.exists()
+    content = path.read_text()
+    # Frontmatter
+    assert "voice: sean" in content
+    assert "source_concepts:" in content
+    assert "'a'" in content or "a," in content or "- a" in content  # source_concepts list format flexible
+    assert "model_used: qwen3-14b" in content
+    assert "cost_usd: 0.0" in content
+    assert "status: pending-review" in content
+    # Body
+    assert "# The Night My Vault Said Nothing" in content
+    # Filename pattern
+    assert path.name.endswith("-agent-draft-vault-said-nothing.md")
+    # _route was called with the prompt
+    assert captured["task"] == "substack_draft"
+    assert captured["system"] == "sys"
+    assert captured["user"] == "user"
+
+
+def test_write_draft_handles_route_returning_long_text(tmp_path, monkeypatch):
+    """A real draft is ~1300 words — make sure persistence handles it."""
+    from agents import substack_drafter
+    long_text = "# Title\n\n" + ("Long paragraph body. " * 200)  # ~1200 words
+    monkeypatch.setattr(substack_drafter, "_route", lambda **kw: {
+        "text": long_text, "model_used": "claude-sonnet-4-6", "cost_usd": 0.05,
+    })
+    out_dir = tmp_path / "drafts"
+    out_dir.mkdir()
+    path = substack_drafter.write_draft(
+        out_dir=out_dir, slug="long-test", voice_mode="kerouac",
+        cluster_slugs=["x"], prompt={"system": "s", "user": "u"}, max_cost_usd=0.10,
+    )
+    content = path.read_text()
+    assert "model_used: claude-sonnet-4-6" in content
+    assert "cost_usd: 0.05" in content
+    assert long_text in content
+
+
+def test_write_draft_handles_missing_optional_fields(tmp_path, monkeypatch):
+    """If _route() returns a result without all keys, write_draft degrades gracefully."""
+    from agents import substack_drafter
+    monkeypatch.setattr(substack_drafter, "_route", lambda **kw: {"text": "minimal"})
+    out_dir = tmp_path / "drafts"
+    out_dir.mkdir()
+    path = substack_drafter.write_draft(
+        out_dir=out_dir, slug="min", voice_mode="vonnegut",
+        cluster_slugs=["a"], prompt={"system": "s", "user": "u"}, max_cost_usd=0.10,
+    )
+    content = path.read_text()
+    assert "model_used: unknown" in content  # graceful default
+    assert "cost_usd: 0.0" in content  # graceful default
+    assert "minimal" in content
