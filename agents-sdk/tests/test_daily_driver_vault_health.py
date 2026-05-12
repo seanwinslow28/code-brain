@@ -105,10 +105,12 @@ def test_build_preamble_morning_includes_synth_line_when_manifest_exists(
     )
     (health / "synth-manifest-2026-05-01.json").write_text(
         json.dumps({
+            "status": "ok",
             "concepts_written": 5,
             "connections_written": 2,
             "edges_written": 3,
             "rejected_count": 0,
+            "duration_s": 12.3,
         }),
         encoding="utf-8",
     )
@@ -127,9 +129,9 @@ def test_build_preamble_morning_includes_synth_line_when_manifest_exists(
     from agents.daily_driver import build_preamble
     preamble = build_preamble("morning", _StubConfig())
     assert "VAULT HEALTH" in preamble
-    assert "last synth:" in preamble
-    assert "5 concepts" in preamble
-    assert "3 edges" in preamble
+    # render_vault_health() produces "✅ ok — N concepts written in Xs." for status=ok
+    assert "5 concepts written" in preamble
+    assert "12.3s" in preamble
 
 
 def test_build_preamble_morning_omits_synth_line_when_no_manifest(
