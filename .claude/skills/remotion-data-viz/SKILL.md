@@ -21,7 +21,7 @@ Provide complete data visualization animation patterns for Remotion. Cover bar c
 **Example 1: Crypto bar chart**
 ```
 User: "Create an animated bar chart comparing crypto market caps"
-Claude: [Uses remotion-data-viz] Creates a BarChart component with staggered spring animations (frame - index * 5), feeds data via calculateMetadata from CoinGecko API, renders bars growing from zero with The Block brand colors.
+Claude: [Uses remotion-data-viz] Creates a BarChart component with staggered spring animations (frame - index * 5), feeds data via calculateMetadata from CoinGecko API, renders bars growing from zero with brand colors.
 ```
 
 **Example 2: Counter animation**

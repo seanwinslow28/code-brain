@@ -9,7 +9,7 @@ description: Batch-create Jira/Linear tickets from PRDs, meeting notes, or brain
 
 Convert unstructured input (PRD, notes, ideas) into structured, ready-to-paste tickets for Jira or Linear. No manual reformatting needed.
 
-> **Note:** For Jira ticket creation at **The Block**, use `jira-automation` instead — it knows Block project keys, components, labels, and ticket conventions. Use this skill for **Linear**, **GitHub Issues**, or **generic multi-platform** ticket batching.
+> **Note:** For Jira ticket creation in a configured organization context, use `jira-automation` instead — it knows your project keys, components, labels, and ticket conventions. Use this skill for **Linear**, **GitHub Issues**, or **generic multi-platform** ticket batching.
 
 ## Clarifying Interview
 

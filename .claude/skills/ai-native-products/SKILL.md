@@ -1,13 +1,13 @@
 ---
 name: ai-native-products
-description: AI-native product development patterns for building AI-powered features and assistants like The Block's Simon. Covers prompt engineering workflows for production features, LLM integration patterns (agentic loops, streaming, error handling), evaluation frameworks (adversarial grounding, rubric-based evals), and human-in-the-loop design. Use when designing AI features, writing prompt specifications, planning LLM integrations, building evaluation pipelines, or specifying AI assistant behavior.
+description: AI-native product development patterns for building AI-powered features and production AI research assistants. Covers prompt engineering workflows for production features, LLM integration patterns (agentic loops, streaming, error handling), evaluation frameworks (adversarial grounding, rubric-based evals), and human-in-the-loop design. Use when designing AI features, writing prompt specifications, planning LLM integrations, building evaluation pipelines, or specifying AI assistant behavior.
 ---
 
 # AI-Native Product Development
 
 ## Purpose
 
-Provide patterns for building AI-powered product features from a PM perspective. Enable Claude to generate AI feature specifications, prompt engineering workflows, evaluation frameworks, and human-in-the-loop designs. Tailored for AI assistants like The Block's Simon and AI-augmented data products.
+Provide patterns for building AI-powered product features from a PM perspective. Enable Claude to generate AI feature specifications, prompt engineering workflows, evaluation frameworks, and human-in-the-loop designs. Tailored for production AI research assistants and AI-augmented data products.
 
 ## When to Use
 
@@ -22,7 +22,7 @@ Provide patterns for building AI-powered product features from a PM perspective.
 
 **Example 1: AI feature specification**
 ```
-User: "Spec out an AI-powered article summarizer for The Block"
+User: "Spec out an AI-powered article summarizer for a crypto news platform"
 Claude: [Uses ai-native-products]
 
 # AI Article Summarizer - Feature Spec
@@ -34,7 +34,7 @@ Claude: [Uses ai-native-products]
 - Source attribution: Summary must only use content from the article
 
 ## Prompt Specification
-System: "You are a crypto news analyst at The Block. Summarize articles
+System: "You are a crypto news analyst at a crypto media platform. Summarize articles
 for professional investors. Be precise with numbers and terminology."
 
 User: "<article>{article_text}</article>
@@ -54,15 +54,15 @@ Provide: 1) A 3-sentence summary. 2) 3 key takeaways as bullets."
 
 **Example 2: Eval pipeline design**
 ```
-User: "How should we evaluate Simon's answer quality?"
+User: "How should we evaluate the AI assistant's answer quality?"
 Claude: [Uses ai-native-products]
 
-## Simon Evaluation Framework
+## AI Assistant Evaluation Framework
 
 ### Automated Evals (run on every deploy)
 1. Adversarial Grounding: Inject fake data + real data, verify
-   Simon cites the correct source (target: 95% accuracy)
-2. Refusal Rate: Ensure Simon refuses out-of-scope questions
+   the assistant cites the correct source (target: 95% accuracy)
+2. Refusal Rate: Ensure the assistant refuses out-of-scope questions
    (e.g., personal advice) at >98% rate
 3. Hallucination Check: Compare extracted claims against source
    documents using NLI (Natural Language Inference)
@@ -328,7 +328,7 @@ Define AI features as modular skills that non-engineers can update:
 ## Copy/Paste Ready
 
 ```
-"Write a feature spec for an AI-powered [feature] in Simon"
+"Write a feature spec for an AI-powered [feature] in the AI assistant"
 "Design an evaluation pipeline for our AI summarizer"
 "Create a prompt specification for [AI task]"
 "How should we handle confidence scoring for AI responses?"
