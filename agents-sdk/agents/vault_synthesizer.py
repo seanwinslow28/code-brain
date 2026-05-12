@@ -62,6 +62,28 @@ QA_SUBDIR = "qa"
 _WIKILINK_RE = re.compile(r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]")
 _SLUG_RE = re.compile(r"[^a-z0-9]+")
 
+# --- model_used enum (vs-018) ---
+# The valid set of values for SynthesisResult.model_used. The "none" sentinel
+# is used when no LLM call completed during the run (e.g., MBP asleep, network
+# refused). Downstream consumers (daily-driver brief, manifest readers) can
+# branch on the enum without the empty-string sentinel.
+MODEL_USED_VALUES = frozenset({"qwen3-14b", "claude-sonnet-4-6", "claude-haiku-4-5", "none"})
+MODEL_USED_NONE = "none"
+
+
+def _normalize_model_name(name: str) -> str:
+    """Map raw model strings (which may include version suffixes) to the eval enum."""
+    if not name:
+        return MODEL_USED_NONE
+    n = name.lower()
+    if "qwen" in n:
+        return "qwen3-14b"
+    if "haiku" in n:
+        return "claude-haiku-4-5"
+    if "sonnet" in n:
+        return "claude-sonnet-4-6"
+    return MODEL_USED_NONE
+
 
 @dataclass
 class SynthesisResult:
@@ -76,7 +98,7 @@ class SynthesisResult:
     # Phase D (v3.20.0, 2026-05-01) — typed reasoning edges + manifest.
     edges_written: int = 0
     edges_rejected: int = 0
-    model_used: str = ""
+    model_used: str = MODEL_USED_NONE
     wol_status: str = ""              # "mbp_awake" | "api_fallback" | "wol_deferred"
     run_id: str = ""                  # ISO timestamp; matches synth-manifest run_id
 
@@ -488,7 +510,7 @@ def _default_llm_caller_factory(
             )
         decision = asyncio.run(go())
         if manifest_state is not None and not manifest_state.get("model_used"):
-            manifest_state["model_used"] = decision.model
+            manifest_state["model_used"] = _normalize_model_name(decision.model)
             manifest_state["wol_status"] = (
                 "mbp_awake" if decision.machine == "macbook_pro"
                 else "api_fallback"
@@ -624,7 +646,7 @@ def main() -> int:
     duration_ms = (time.monotonic_ns() - start_ns) // 1_000_000
 
     # Phase D — copy model_used / wol_status into the result, write manifest.
-    result.model_used = manifest_state.get("model_used", "")
+    result.model_used = manifest_state.get("model_used", MODEL_USED_NONE)
     result.wol_status = manifest_state.get("wol_status", "")
     try:
         manifest_path = write_synth_manifest(
