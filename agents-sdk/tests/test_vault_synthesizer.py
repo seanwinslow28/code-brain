@@ -27,6 +27,18 @@ from agents.vault_synthesizer import (
 )
 
 
+@pytest.fixture(autouse=True)
+def _stub_pushover_creds(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Inject dummy Pushover env vars so ensure_credentials_or_raise() passes.
+
+    Added in B4 (vs-019): run_synthesis() now calls ensure_credentials_or_raise()
+    at boot. Unit tests don't have keychain access, so we set non-empty stubs.
+    This fixture is autouse so every test in this module gets it automatically.
+    """
+    monkeypatch.setenv("PUSHOVER_USER_KEY", "test-stub-user")
+    monkeypatch.setenv("PUSHOVER_API_TOKEN", "test-stub-token")
+
+
 def _make_vault(tmp_path: Path, files: dict[str, str]) -> Path:
     vault = tmp_path / "vault"
     for rel, content in files.items():
@@ -197,7 +209,10 @@ def test_run_synthesis_rejects_articles_without_two_wikilinks(tmp_path: Path) ->
         now_iso="2026-04-17",
         budget_seconds=300,
     )
-    assert result.status in {"ok", "partial"}
+    # All files processed successfully but no articles survived validation →
+    # status is now "success-empty" (previously would have been "ok", which
+    # masked the silent-empty regression fixed in vs-015/vs-016/vs-017).
+    assert result.status == "success-empty"
     assert result.concepts_written == 0
     assert result.rejected_count >= 1
 
