@@ -1,0 +1,180 @@
+# evals/vault-synthesizer/deferred-cases.yaml
+#
+# These 11 cases test hallucination, edge-confidence, relation-tag drift, and
+# temporal confusion. All are valid; none can fire on the current system because
+# the LLM call did not successfully complete during the error-analysis window
+# (2026-04-24 → 2026-05-10).
+#
+# Re-enable when the synthesizer produces ≥1 concept article in a clean run.
+# At that point, move 2–3 cases at a time into cases.yaml and rebaseline.
+#
+# See ../failure-modes.md for the open-coded evidence behind why these are
+# deferred-not-deleted.
+
+# (cases follow — vs-001 through vs-011, verbatim from
+#  vault/20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md
+#  preserving its native schema)
+
+- id: vs-001
+  category: hallucination-check
+  description: "Synthesizer must not generate concept articles for phases not present in source notes."
+  input:
+    notes:
+      - "2026-04-01.md: Started reviewing the Phase 6 knowledge loop architecture."
+      - "2026-04-02.md: Phase 6 has a producer side (SessionEnd flush → synthesizer) and a consumer side (SessionStart index injection)."
+  expected_output:
+    concepts_must_include: ["Phase 6 knowledge loop"]
+    concepts_must_exclude: ["Phase 7 knowledge loop", "Phase 6.5 knowledge loop", "Phase 5 knowledge loop"]
+  judge_type: rubric
+  pass_criteria: "All required concepts present; no excluded concepts present in any emitted article."
+  failure_mode_under_test: "Hallucinated phase numbers (the Phase D edges work was mislabeled 'Phase 5' in an early run)."
+
+- id: vs-002
+  category: hallucination-check
+  description: "Synthesizer must not invent agent names not present in source notes."
+  input:
+    notes:
+      - "2026-04-10.md: SessionWatcher detects MBP wake event and triggers the nightly synthesizer."
+      - "2026-04-11.md: Ran a manual synthesizer trigger; output landed in vault/concepts/."
+  expected_output:
+    concepts_must_include: ["SessionWatcher"]
+    concepts_must_exclude: ["SessionMonitor", "WakeDetector", "ContextCollector"]
+  judge_type: exact-match
+  pass_criteria: "Emitted articles reference 'SessionWatcher' and do not reference any excluded agent aliases."
+  failure_mode_under_test: "Hallucinated agent aliases — synthesizer renames entities slightly when paraphrasing source notes."
+
+- id: vs-003
+  category: hallucination-check
+  description: "A concept article body must cite at least one source note filename."
+  input:
+    notes:
+      - "2026-04-15.md: HybridRouter falls back to Sonnet 4.6 when Qwen3-14B is unavailable."
+      - "2026-04-16.md: HybridRouter logs fallback events to hybrid_router.log."
+  expected_output:
+    every_concept_article_cites_at_least_one_source: true
+  judge_type: rubric
+  pass_criteria: "Each emitted concept article includes at least one in-text or footnote reference to a source note filename (e.g., '2026-04-15.md')."
+  failure_mode_under_test: "Source-attribution loss — synthesizer generates plausible-sounding concept articles that cannot be traced back to any specific note."
+
+- id: vs-004
+  category: hallucination-check
+  description: "Synthesizer must not emit concept articles for undocumented tool names."
+  input:
+    notes:
+      - "2026-04-20.md: Built a Zapier zap to push Jira ticket completions to a Slack channel."
+      - "2026-04-21.md: Zapier trigger confirmed working; no issues."
+  expected_output:
+    concepts_must_exclude: ["Make.com", "n8n", "Activepieces", "Tray.io"]
+  judge_type: exact-match
+  pass_criteria: "No concept article references an automation tool other than Zapier when Zapier is the only tool mentioned in source notes."
+  failure_mode_under_test: "Category-level hallucination — synthesizer substitutes a similar-category tool for the one actually mentioned."
+
+- id: vs-005
+  category: hallucination-check
+  description: "Synthesizer must not create a concept article for a project referenced only in passing."
+  input:
+    notes:
+      - "2026-04-25.md: Quick note — might explore 16BitFit gamification mechanics later this quarter."
+  expected_output:
+    concepts_must_exclude: ["16BitFit gamification system", "16BitFit mechanics spec"]
+  judge_type: rubric
+  pass_criteria: "Synthesizer does not emit a full concept article for 16BitFit; may emit at most a single-sentence connection mention if relevant."
+  failure_mode_under_test: "Thin-source hallucination — synthesizer expands a passing mention into a full concept article."
+
+- id: vs-006
+  category: overstated-edge-confidence
+  description: "A connection article between two sparsely-documented concepts must not claim a 'strong' or 'definitive' relationship."
+  input:
+    notes:
+      - "2026-03-05.md: Thinking about how the vault RAG pipeline might connect to the MCP server design."
+  expected_output:
+    connection_article_confidence_markers_must_not_include: ["definitively", "strongly connected", "directly causes", "proven relationship"]
+    connection_article_must_include_hedging: true
+  judge_type: llm-judge
+  pass_criteria: "Connection article uses hedged language (e.g., 'may relate to', 'suggests a possible link', 'warrants further investigation') and does not claim certainty from a single note."
+  failure_mode_under_test: "Overstated edge confidence — synthesizer asserts a strong directional relationship from a single exploratory note."
+
+- id: vs-007
+  category: overstated-edge-confidence
+  description: "A 'supports' relation edge must require at least two corroborating source notes."
+  input:
+    notes:
+      - "2026-03-10.md: RAG injection on SessionStart seems to be helping context continuity."
+    edges_emitted:
+      - subject: "RAG injection"
+        relation: "supports"
+        object: "context continuity"
+        source_note_count: 1
+  expected_output:
+    edge_must_be_downgraded_to_related_to_if_single_source: true
+  judge_type: rubric
+  pass_criteria: "A 'supports' edge is only emitted when at least two source notes corroborate the relationship; with a single note, the relation should be 'related_to'."
+  failure_mode_under_test: "Overstated edge confidence — 'supports' tag applied based on a single positive observation in one note."
+
+- id: vs-008
+  category: overstated-edge-confidence
+  description: "Phase D relation edges must include a confidence score; low-evidence edges must have low confidence."
+  input:
+    notes:
+      - "2026-03-15.md: The synthesizer output format might evolve as the Phase D schema matures."
+    edges_emitted:
+      - subject: "synthesizer output format"
+        relation: "evolved_into"
+        object: "Phase D schema"
+        confidence: 0.9
+  expected_output:
+    confidence_must_be_below_threshold: 0.5
+  judge_type: exact-match
+  pass_criteria: "Edge emitted from a speculative single-note observation has confidence < 0.5."
+  failure_mode_under_test: "Confidence score inflation — synthesizer assigns high confidence to edges grounded in speculative language."
+
+- id: vs-009
+  category: relation-tag-drift
+  description: "When a note provides evidence that A causes or leads to B, relation tag must be 'supports', not 'related_to'."
+  input:
+    notes:
+      - "2026-04-03.md: Turning on the Phase 6 knowledge loop directly improved session continuity in two consecutive tests."
+    expected_edge:
+      subject: "Phase 6 knowledge loop"
+      relation: "supports"
+      object: "session continuity"
+  expected_output:
+    relation_tag_must_equal: "supports"
+    relation_tag_must_not_equal: "related_to"
+  judge_type: exact-match
+  pass_criteria: "Emitted relation tag is 'supports', not 'related_to', given directional causal evidence in the note."
+  failure_mode_under_test: "Relation-tag drift — synthesizer defaults to 'related_to' when 'supports' is warranted because the relationship is directional."
+
+- id: vs-010
+  category: relation-tag-drift
+  description: "When one note explicitly revises a prior design decision, relation tag must be 'supersedes'."
+  input:
+    notes:
+      - "2026-04-05.md: Replaced the old flat-file concept store with the new SQLite edges table. The old approach is retired."
+    expected_edge:
+      subject: "SQLite edges table"
+      relation: "supersedes"
+      object: "flat-file concept store"
+  expected_output:
+    relation_tag_must_equal: "supersedes"
+    relation_tag_must_not_equal: ["evolved_into", "related_to", "depends_on"]
+  judge_type: exact-match
+  pass_criteria: "Emitted relation tag is 'supersedes'; 'evolved_into' is acceptable only if the object is explicitly described as a predecessor, not a retired approach."
+  failure_mode_under_test: "Supersedes vs. evolved_into confusion — synthesizer uses 'evolved_into' when the note clearly indicates replacement and retirement."
+
+- id: vs-011
+  category: relation-tag-drift
+  description: "A 'contradicts' edge must only be emitted when two notes make incompatible claims about the same subject."
+  input:
+    notes:
+      - "2026-02-10.md: Qwen3-14B handles long context reliably."
+      - "2026-04-12.md: Qwen3-14B truncated a 4K-token note; HybridRouter fallback triggered."
+    expected_edge:
+      subject: "2026-02-10 Qwen3 reliability claim"
+      relation: "contradicts"
+      object: "2026-04-12 Qwen3 truncation observation"
+  expected_output:
+    relation_tag_must_equal: "contradicts"
+  judge_type: rubric
+  pass_criteria: "Synthesizer correctly identifies the two notes as making incompatible empirical claims about the same model behavior and emits a 'contradicts' edge."
+  failure_mode_under_test: "Contradicts suppression — synthesizer avoids emitting 'contradicts' edges because the tag feels aggressive, defaulting to 'related_to'."
