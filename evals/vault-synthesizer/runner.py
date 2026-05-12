@@ -242,32 +242,3 @@ def _write_last_run(report_lines: list[str]) -> None:
 
 if __name__ == "__main__":
     sys.exit(pytest.main([__file__, "-v"]))
-
-
-_RESULTS: list[tuple[str, str, str]] = []
-
-def pytest_runtest_logreport(report):
-    if report.when != "call":
-        return
-    case_id = report.nodeid.split("[", 1)[-1].rstrip("]")
-    if report.passed:
-        _RESULTS.append((case_id, "✅ PASS", ""))
-    elif report.skipped:
-        _RESULTS.append((case_id, "⏸️ SKIPPED", str(report.longrepr).splitlines()[-1] if report.longrepr else ""))
-    else:
-        _RESULTS.append((case_id, "❌ FAIL", str(report.longrepr).splitlines()[-1] if report.longrepr else ""))
-
-
-def pytest_sessionfinish(session, exitstatus):
-    if not _RESULTS:
-        return
-    cases_by_id = {c["id"]: c for c in _load_cases()}
-    lines = []
-    for case_id, status, notes in _RESULTS:
-        cat = cases_by_id.get(case_id, {}).get("category", "?")
-        lines.append(f"| {case_id} | {cat} | {status} | {notes} |")
-    pass_count = sum(1 for _, s, _ in _RESULTS if "PASS" in s)
-    total = len(_RESULTS)
-    lines.append("")
-    lines.append(f"**Baseline pass rate: {pass_count}/{total} ({100*pass_count//total}%) — by design.**")
-    _write_last_run(lines)

@@ -1,4 +1,4 @@
-# Vault Synthesizer Eval Run — 2026-05-12T (baseline, manually written — see anomaly note in traces/baseline-run-2026-05-12.md)
+# Vault Synthesizer Eval Run — 2026-05-12T16:14:50.553631+00:00
 
 > **Read this first.** This suite ships intentionally red. Each ❌ below is a
 > real production failure mode this suite catches — not a broken eval. The
@@ -7,15 +7,15 @@
 
 | ID | Category | Result | Notes |
 |---|---|---|---|
-| vs-014 | output-completeness | ❌ FAIL | vs-014: result.concepts_written >= 1 evaluated False |
-| vs-015 | output-completeness | ❌ FAIL | vs-015: not (result.status == 'ok' and result.concepts_written == 0) evaluated False |
-| vs-016 | status-misreport | ❌ FAIL | vs-016: result.status != 'ok' evaluated False |
-| vs-017 | status-misreport | ❌ FAIL | vs-017: result.status == 'partial-empty' evaluated False |
-| vs-018 | schema-integrity | ❌ FAIL | vs-018: result.model_used in {'qwen3-14b', 'claude-sonnet-4-6', 'claude-haiku-4-5', 'none'} evaluated False |
-| vs-019 | config-fail-loud | ❌ FAIL | vs-019: PushoverConfigurationError class does not exist yet (Workstream B adds it) |
-| vs-020 | index-integrity | ✅ PASS | |
-| vs-021 | downstream-consumer | ❌ FAIL | vs-021: daily_driver.render_vault_health does not exist yet (Workstream B adds it) |
-| vs-012 | source-attribution | ⏸️ SKIPPED | requires live synthesizer output; skipped until Workstream B |
-| vs-013 | stale-overweighting | ⏸️ SKIPPED | requires live synthesizer output; skipped until Workstream B |
+| vs-014 | output-completeness | ❌ FAIL | ../evals/vault-synthesizer/runner.py:220: Failed |
+| vs-015 | output-completeness | ❌ FAIL | ../evals/vault-synthesizer/runner.py:220: Failed |
+| vs-016 | status-misreport | ❌ FAIL | ../evals/vault-synthesizer/runner.py:220: Failed |
+| vs-017 | status-misreport | ❌ FAIL | ../evals/vault-synthesizer/runner.py:220: Failed |
+| vs-018 | schema-integrity | ❌ FAIL | ../evals/vault-synthesizer/runner.py:220: Failed |
+| vs-019 | config-fail-loud | ❌ FAIL | ../evals/vault-synthesizer/runner.py:179: Failed |
+| vs-020 | index-integrity | ✅ PASS |  |
+| vs-021 | downstream-consumer | ❌ FAIL | ../evals/vault-synthesizer/runner.py:159: Failed |
+| vs-012 | source-attribution | ⏸️ SKIPPED | ('/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/evals/vault-synthesizer/runner.py', 153, 'Skipped: requires live synthesizer output; skipped until Workstream B') |
+| vs-013 | stale-overweighting | ⏸️ SKIPPED | ('/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/evals/vault-synthesizer/runner.py', 153, 'Skipped: requires live synthesizer output; skipped until Workstream B') |
 
 **Baseline pass rate: 1/10 (10%) — by design.**
