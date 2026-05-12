@@ -4,10 +4,11 @@ project: prj-job-hunt-2026
 artifact: vault-synthesizer-evals
 created: 2026-05-10
 status: ready-for-execution
-target_ship_date: 2026-05-22  # Friday Week 2 of the 8-week sprint
+sprint_epoch: 2026-05-04  # Monday Sean was laid off; Week 1 = 2026-05-04..2026-05-10
+target_ship_date: 2026-05-22  # Friday Week 3 of the 8-week sprint (CORRECTED — was labeled "Week 2"; see "Sprint week math" note below)
 target_loom_date: 2026-05-21
-target_substack_date: 2026-05-22  # paired with the Sedaris draft
-target_followup_substack_date: 2026-05-29  # after synthesizer fix lands
+target_substack_date: 2026-05-22  # paired with the Sedaris draft (Friday Week 3)
+target_followup_substack_date: 2026-05-29  # Friday Week 4 — gated on 5 consecutive nights of concepts_written > 0 (see Phase 7)
 companion_artifacts:
   - 2026-05-10-evals-error-analysis-real-logs.md   # the data foundation
   - 2026-05-10-the-night-my-vault-said-nothing.md   # Sedaris draft
@@ -50,13 +51,36 @@ Claude Code must read these files (in this order) before producing a Phase-Mode 
 
 After reading these, Claude Code should produce a phase-by-phase execution plan against the structure below. **Do not start work without producing the plan first.**
 
+### Phase 0.5 — Synthesizer-loop spike test (15 min, do this before writing any cases)
+
+The build plan asserts that vs-016, vs-017, and vs-018 fail on the current synthesizer code AS WRITTEN. This is the central regression-suite claim. Verify it explicitly before locking the runner — if any of these three actually pass today, the failure mode is different from what the error-analysis surfaced and the case needs to be re-written.
+
+Open a Python REPL with `agents-sdk/.venv` active and run, in order:
+
+```python
+from agents_sdk.agents.vault_synthesizer import run_synthesis, SynthesisResult
+
+# vs-016 probe — every-file LLM failure; does status stay "ok"?
+def always_raise(prompt): raise ConnectionRefusedError("synthetic LLM failure")
+result_016 = run_synthesis(llm_caller=always_raise, ...)  # use whatever minimal args the signature needs
+print("vs-016 probe — status:", result_016.status, "concepts:", result_016.concepts_written)
+# Expectation: status == "ok" or "partial" with concepts_written == 0 → vs-016 will fail today (good)
+# If status already escalates to "error" → vs-016 has nothing to catch; rewrite the case.
+
+# vs-018 probe — does model_used default to empty string after a no-success run?
+print("vs-018 probe — model_used:", repr(result_016.model_used))
+# Expectation: "" → vs-018 will fail today (good).
+```
+
+Record the actual values in `traces/phase-0.5-spike.md`. Only after the spike confirms the failure modes are real do you write the case YAML. If the spike contradicts the expected behavior for any case, update that case's `pass_criteria` to assert what the synthesizer actually does wrong — don't assert against a fiction.
+
 ---
 
 ## Scope Lock — what ships, what doesn't
 
-### Ships in Phase 1 (Eval Suite — Friday Week 2, 2026-05-22)
+### Ships in Workstream A — Eval Suite (Friday Week 2, 2026-05-22)
 
-1. New directory: `.claude/skills/agents-sdk/evals/vault-synthesizer/` (or `evals/vault-synthesizer/` at repo root — Claude Code decides on the conventional location; see Phase 1 below)
+1. New directory: `evals/vault-synthesizer/` at repo root (location locked; see Phase 1 below)
 2. `README.md` — what this is, how to run, current baseline pass rate
 3. `cases.yaml` — 10 binary pass/fail cases (6 new + 4 retained from pre-drafts)
 4. `deferred-cases.yaml` — 11 hallucination/drift cases set aside until the synthesizer is alive again
@@ -67,16 +91,18 @@ After reading these, Claude Code should produce a phase-by-phase execution plan 
 9. `references.md` — sources index + interview-vocabulary cheat-sheet
 10. Updates to: [`CHANGELOG.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/CHANGELOG.md), [`CLAUDE.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/CLAUDE.md), [`README.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/README.md) — per non-negotiable rule "Mandatory doc updates"
 
-### Ships in Phase 2 (Synthesizer Fix — between Friday Week 2 and Friday Week 3)
+### Ships in Workstream B — Synthesizer Fix (between Friday Week 2 and Friday Week 3)
 
 1. Patch `agents-sdk/agents/vault_synthesizer.py` — status taxonomy adds `success-empty` and `partial-empty`; per-file LLM-failure exceptions promote the run-level status; `model_used` becomes a proper enum; warnings surface in the result
 2. Patch the Pushover notify path — boot-time credential check; missing creds = `ConfigurationError`, not silent-log-and-continue
 3. Patch the Daily Driver morning brief — when synth manifest has `status == "success-empty"` or `concepts_written == 0`, surface as a WARNING, not "ok"
-4. Run the eval suite once against the patched synthesizer — confirm pass rate jumps from the Phase-1 baseline (which is intentionally low) to a real number
+4. Run the eval suite once against the patched synthesizer — confirm pass rate jumps from the Workstream-A baseline (which is intentionally low) to a real number
 
-### Ships in Phase 3 (Substack-Drafter Agent — POST-EMPLOYMENT priority, specced here for completeness)
+### Ships in Workstream C — Substack-Drafter Agent (POST-EMPLOYMENT priority, specced here for completeness)
 
 See full spec in §B below.
+
+> **Naming convention.** Three workstreams (A / B / C) at the build-plan level; within Workstream A, the implementation sub-steps are numbered Phase 1 → Phase 7 (and a Phase 0 for pre-execution reads). Cross-references like "Workstream B fix" mean the synthesizer patch, not an eval-suite sub-phase.
 
 ### Does NOT ship — the don't-build list
 
@@ -92,7 +118,7 @@ These are all real temptations. Each is post-employment Q3 work per both researc
 
 ---
 
-# PART A — EVAL SUITE BUILD PHASES
+# PART A — WORKSTREAM A: EVAL SUITE BUILD PHASES (Phase 0 → Phase 7)
 
 ## Phase 1 — Directory + Scaffolding (estimated 60 min)
 
@@ -111,27 +137,27 @@ evals/vault-synthesizer/
 └── references.md
 ```
 
-### Decision: where does `evals/` live?
+### Decision: `evals/` lives at repo root — LOCKED
 
-Two reasonable options. Claude Code should pick one in Plan Mode and stick with it:
+**`evals/vault-synthesizer/` at repo root.** No alternatives, no Plan-Mode re-litigation. First thing a recruiter sees when they open the GitHub page; matches Anthropic-canonical convention. Update the `CLAUDE.md` architecture diagram accordingly when the directory lands.
 
-- **Option A:** `evals/vault-synthesizer/` at repo root. Cleaner discoverability for recruiters browsing the repo. Matches Anthropic-canonical convention.
-- **Option B:** `.claude/skills/agents-sdk-evals/vault-synthesizer/` nested under skills. Keeps the eval suite co-located with the agent stack it tests.
-
-**Recommendation:** Option A (repo root). It's the first thing a recruiter sees when they open the GitHub page. Update `CLAUDE.md` architecture diagram accordingly.
+(An earlier draft considered `.claude/skills/agents-sdk-evals/vault-synthesizer/` nested under skills. Rejected — discoverability beats co-location for a portfolio artifact.)
 
 ### README.md content checklist
 
 - [ ] Opening paragraph in Sean Mode at 60% (per `writing-voice-modes`): what this is, why it exists, who it's for
-- [ ] Quickstart: `python evals/vault-synthesizer/runner.py`
-- [ ] Current baseline pass rate (filled in after Phase 4)
+- [ ] **Framing block immediately under the opening paragraph, above the quickstart** (mandatory, do not bury): *"This suite ships intentionally red. ~80% of cases fail today by design — each ❌ is a real production failure mode the suite catches, not a broken eval. The pass rate jumps after the Workstream B synthesizer fix lands. See `EXPLANATION.md` for the why."*
+- [ ] Quickstart (CWD-pinned, do NOT shorten): `cd agents-sdk && PYTHONPATH=. .venv/bin/python3 -m pytest ../evals/vault-synthesizer/runner.py -v` — running from any other CWD breaks the `agents_sdk` import
+- [ ] Current baseline pass rate — ship Phase 1 with placeholder `<!-- BASELINE PENDING -->`; fill in after Phase 4
 - [ ] Brief note on the failure taxonomy → link to `failure-modes.md`
 - [ ] Link to `EXPLANATION.md` for the 4Q
 - [ ] Sources block
 
 ### Verification gate
 
-`ls evals/vault-synthesizer/` returns the 7 expected files + 1 directory. README opens with a recruiter-readable cold paragraph.
+- `ls evals/vault-synthesizer/` returns the 7 expected files + 1 directory.
+- README opens with a recruiter-readable cold paragraph followed by the mandatory framing block (see content checklist above).
+- **Baseline pass rate is INTENTIONALLY ABSENT** at this gate — Phase 1 ships with `<!-- BASELINE PENDING -->` and that placeholder is the correct state until Phase 4 fills it in. Do not gate Phase 1 on a number that doesn't exist yet.
 
 ---
 
@@ -159,7 +185,7 @@ Each case is binary pass/fail. Each has: `id`, `category`, `description`, `failu
 | vs-018 | Empty-string `model_used` rejection — assert `model_used` is one of the valid enum values, never `""` | exact-match |
 | vs-019 | Pushover credentials health check — on synthesizer boot with missing creds, assert `ConfigurationError` raised before any LLM call attempt | exact-match |
 | vs-020 | Knowledge-index integrity — assert `vault/knowledge/index.md` count of concept entries matches the count of files in `vault/knowledge/concepts/` | rubric |
-| vs-021 | Daily-driver brief consumer check — mocked synth-manifest with `status="success-empty"`; assert morning brief surfaces it as WARNING | llm-judge |
+| vs-021 | Daily-driver brief consumer check — mocked synth-manifest with `status="success-empty"`; assert morning brief output string contains both `"WARNING"` and a synth-empty signal (e.g. `"concepts_written: 0"` or `"empty"`) | rubric |
 
 ### `deferred-cases.yaml` — the 11 cases set aside
 
@@ -168,15 +194,17 @@ Lift vs-001 → vs-011 verbatim from the Perplexity primer §6 and Gemini primer
 ```yaml
 # Deferred cases — re-enable when synthesizer produces ≥1 concept article in a clean run.
 # These test hallucination, edge-confidence, relation-tag drift, and temporal confusion.
-# All are valid; none can fire on the current system because the LLM call has not
-# successfully completed in at least 9 nights (see ../failure-modes.md).
+# All are valid; none can fire on the current system because the LLM call did not
+# successfully complete during the error-analysis window (2026-04-24 → 2026-05-10).
+# See ../failure-modes.md for the open-coded evidence.
 ```
 
 ### Verification gate
 
 - All 10 active cases parse as valid YAML.
 - Each case has every required field.
-- The mocked inputs for vs-016, vs-017, vs-018 are tight enough to fail the current synthesizer code AS WRITTEN (this is the point — they're a regression suite for the fix that's coming in Phase 2 of the broader build).
+- `traces/phase-0.5-spike.md` exists with recorded REPL output (see Phase 0.5), and the `pass_criteria` for vs-016, vs-017, vs-018 are written to assert the *actual* current-code behavior captured by the spike — not the assumed behavior. If the spike showed vs-017 already escalates status, vs-017's assertion must be rewritten to target the actual gap.
+- The mocked inputs for vs-016, vs-017, vs-018 are tight enough to fail the current synthesizer code AS WRITTEN (this is the point — they're a regression suite for the fix that's coming in Workstream B). The Phase 0.5 spike IS the verification of this claim — do not skip it.
 
 ---
 
@@ -186,13 +214,19 @@ Lift vs-001 → vs-011 verbatim from the Perplexity primer §6 and Gemini primer
 
 ~100 lines of Python. Pytest-compatible. No external dependencies beyond `pyyaml`, `pytest`, and whatever is already in `agents-sdk/.venv`.
 
+**CWD + invocation (pinned):**
+- Run from inside `agents-sdk/` so the `agents_sdk` package resolves: `cd agents-sdk && PYTHONPATH=. .venv/bin/python3 -m pytest ../evals/vault-synthesizer/runner.py -v`
+- Standalone form (for the Loom demo): `cd agents-sdk && PYTHONPATH=. .venv/bin/python3 ../evals/vault-synthesizer/runner.py`
+- README quickstart MUST show the `cd agents-sdk` prefix — without it the imports fail.
+
 ```python
 # runner.py — pseudocode
 import yaml
 import pytest
 from pathlib import Path
 from agents_sdk.agents import vault_synthesizer
-from agents_sdk.lib.hybrid_router import HybridRouter
+# NOTE: do NOT import HybridRouter — the runner mocks llm_caller directly and
+# never touches the router. Any router-related imports here are dead weight.
 
 CASES = yaml.safe_load(Path("cases.yaml").read_text())
 
@@ -211,7 +245,7 @@ def test_case(case):
 
 1. **Code-based (exact-match)** — direct Python assertion. ~70% of cases. Fast, deterministic, free.
 2. **Rubric** — structured Python check over the synthesizer output (e.g. "every concept article body contains at least one filename reference"). ~20% of cases.
-3. **LLM-as-judge (Claude Haiku with critique-shadowing)** — for the one or two cases that genuinely need semantic judgment (vs-021's "is this WARNING text clear?"). ~10% of cases.
+3. **LLM-as-judge (Claude Haiku with critique-shadowing)** — reserved for cases that genuinely need semantic judgment. **No active case uses this grader at v1 ship.** vs-021 was originally specced as llm-judge but converted to deterministic rubric (string-contains check on the brief output) to keep the portfolio artifact's pass rate stable across runs — a recruiter cloning the repo on Tuesday vs. Wednesday must get the same result. If a future case truly needs semantic judgment, pin the model ID explicitly (e.g. `claude-haiku-4-5-20251001`), ship the judge prompt verbatim inside the case YAML, and add a `--skip-llm-judge` flag for offline runs.
 
 ### Mocking strategy
 
@@ -226,9 +260,14 @@ A markdown results table written to `evals/vault-synthesizer/last-run.md` after 
 ```markdown
 # Vault Synthesizer Eval Run — 2026-05-22T14:31:02
 
+> **Read this first.** This suite ships intentionally red. Each ❌ below is a real
+> production failure mode this suite catches — not a broken eval. The pass rate
+> jumps after the Workstream B synthesizer fix lands. See `EXPLANATION.md` for
+> the design rationale and `failure-modes.md` for what each failure means.
+
 | ID | Category | Result | Notes |
 |---|---|---|---|
-| vs-014 | output-completeness | ❌ FAIL | (expected — synthesizer can't emit; will pass after Phase 2 fix) |
+| vs-014 | output-completeness | ❌ FAIL | (expected — synthesizer can't emit; will pass after Workstream B fix) |
 | vs-015 | output-completeness | ❌ FAIL | (expected — load-bearing case) |
 | vs-016 | status-misreport | ❌ FAIL | status field promoted to "ok" despite all-file LLM failures |
 | vs-017 | status-misreport | ❌ FAIL | status taxonomy missing `partial-empty` value |
@@ -236,8 +275,8 @@ A markdown results table written to `evals/vault-synthesizer/last-run.md` after 
 | vs-019 | config-fail-loud | ❌ FAIL | Pushover missing creds logged-and-ignored, no ConfigurationError raised |
 | vs-020 | index-integrity | ✅ PASS | index.md and disk both empty — consistent |
 | vs-021 | downstream-consumer | ❌ FAIL | morning brief reads status="ok", surfaces as healthy |
-| vs-012 | source-attribution | ⏸️ SKIPPED | requires live synthesizer output; deferred until Phase 2 fix |
-| vs-013 | stale-overweighting | ⏸️ SKIPPED | requires live synthesizer output; deferred until Phase 2 fix |
+| vs-012 | source-attribution | ⏸️ SKIPPED | requires live synthesizer output; deferred until Workstream B fix |
+| vs-013 | stale-overweighting | ⏸️ SKIPPED | requires live synthesizer output; deferred until Workstream B fix |
 
 **Baseline pass rate: 1/10 (10%) — by design.** The 8 failures are the failure modes the fix needs to address.
 ```
@@ -340,13 +379,23 @@ Decide before publishing: Sedaris primary OR Kerouac variant. The Kerouac varian
 
 Adapt the same post to LinkedIn format (~600 words, scannable). Drop the section breaks. Keep the JSON snippet.
 
-### Friday 2026-05-29 — follow-up post
+### Friday 2026-05-29 — follow-up post (gated, not scheduled)
 
-After Phase 2 (synthesizer fix) lands, publish the resolution post. Voice: try Kerouac if Sean is comfortable. Title candidates: "The Night My Vault Started Talking Again" / "Three Layers, Patched."
+**Precondition before publishing — do not skip:**
+
+1. Workstream B (synthesizer fix) has landed.
+2. **5 consecutive nightly synth-manifests show `concepts_written > 0`** (check `vault/health/synth-manifest-*.json` for the 5 days preceding 2026-05-29). This is the fresh-verification rule: a "we fixed it" post that publishes while the synthesizer is still empty becomes immediately dishonest.
+3. The eval suite passes ≥7/10 cases on the fixed synthesizer (vs-014 through vs-021 should now mostly pass; vs-012 and vs-013 unskipped).
+
+If precondition #2 fails, **do not publish on 2026-05-29.** Either delay to the following Friday or write a different post (the "I thought I fixed it but…" post is also a valid Substack — just don't claim victory). Voice for the resolution post: try Kerouac if Sean is comfortable. Title candidates: "The Night My Vault Started Talking Again" / "Three Layers, Patched."
+
+### Sprint week math — verify before publishing
+
+The frontmatter says `target_ship_date: 2026-05-22 # Friday Week 3` and `target_followup_substack_date: 2026-05-29 # Friday Week 4`, where `sprint_epoch = 2026-05-04` (the Monday Sean was laid off). The original draft called 2026-05-22 "Friday Week 2"; that was off-by-one. Confirm against the unified roadmap before scheduling promo posts.
 
 ---
 
-# PART B — SUBSTACK-DRAFTER AGENT SPEC (post-employment build)
+# PART B — WORKSTREAM C: SUBSTACK-DRAFTER AGENT SPEC (post-employment build)
 
 ## Why this agent exists
 
@@ -378,17 +427,24 @@ When enabled: **Thursday 18:00 weekly.** This gives Sean Friday morning to revie
 
 ### Voice rotation
 
-The agent rotates through the 5 voice modes on a 5-week cycle to keep the Substack from feeling monotone:
+The agent rotates through the 5 voice modes on a 5-week cycle to keep the Substack from feeling monotone. Rotation index uses absolute weeks since a fixed epoch — **not** week-of-year, which skews across year boundaries (some years hit the same mode twice in a row).
 
-| Week of year mod 5 | Voice mode | Use case |
+```python
+from datetime import date
+EPOCH = date(2026, 5, 4)  # Monday Sean was laid off — sprint_epoch
+weeks_since = (date.today() - EPOCH).days // 7
+mode_index = weeks_since % 5
+```
+
+| `mode_index` | Voice mode | Use case |
 |---|---|---|
-| 0 | Sedaris (Domestic Observer) | Default — comedic, narrative-driven |
-| 1 | Kerouac (Beat Flow) | Discovery-heavy posts, sensory-rich |
-| 2 | Thompson (Gonzo Technical) | Post-mortems, product reviews |
-| 3 | Vonnegut (Minimalist Absurdist) | Short-form, refrain-driven |
-| 4 | Sean Mode (Hybrid default) | Anything else |
+| 0 | **Sean Mode (Hybrid default)** | Default — the calibrated hybrid; covers most weeks |
+| 1 | Sedaris (Domestic Observer) | Comedic, narrative-driven |
+| 2 | Kerouac (Beat Flow) | Discovery-heavy posts, sensory-rich |
+| 3 | Thompson (Gonzo Technical) | Post-mortems, product reviews |
+| 4 | Vonnegut (Minimalist Absurdist) | Short-form, refrain-driven |
 
-Override: a `voice:` field in the run config can pin a specific mode.
+There is exactly one default — Sean Mode at index 0. Per the `writing-voice-modes` SKILL, Sean Mode IS the calibrated hybrid; the other four are signature variants used when the post's shape benefits from a specific signature move. Override: a `voice:` field in the run config pins a specific mode for a given run.
 
 ### Process
 
@@ -527,7 +583,7 @@ Goes into the unified roadmap as **Task 9 — Substack-Drafter Agent (post-emplo
 
 **Honest flags:**
 - Phase 3's runner.py assumes the synthesizer's `run_synthesis()` test surface is clean. It is (the `llm_caller` parameter is dependency-injected). If `agents-sdk` evolves before Phase 3 lands, refactor before writing the runner.
-- The Substack-Drafter agent (Part B) depends on the synthesizer being alive again. Don't try to ship it before Phase 2 (synthesizer fix) lands and `vault/knowledge/concepts/` starts populating.
+- The Substack-Drafter agent (Part B / Workstream C) depends on the synthesizer being alive again. Don't try to ship it before Workstream B (synthesizer fix) lands and `vault/knowledge/concepts/` starts populating.
 - The Kerouac variant is a voice test, not a publish decision. Sean reviews both drafts and decides which Substack rhythm he wants. The Sedaris draft is the safer first publication; Kerouac is the higher-risk-higher-reward second.
 
 **The single most important decision in this plan:** Where `evals/` lives. Repo root vs. nested under `.claude/skills/agents-sdk-evals/`. Decide in Plan Mode, then commit. Don't drift.
