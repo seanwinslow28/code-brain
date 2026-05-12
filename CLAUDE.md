@@ -79,7 +79,7 @@ python3 scripts/validate.py
 
 The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Claude Agent SDK. These run **outside** Claude Code sessions on macOS launchd schedules. Skills are loaded as system prompts — no duplication.
 
-**Active agents (8 of 16 on launchd; 1 manual-trigger):**
+**Active agents (8 of 17 on launchd by default; 2 opt-in disabled-by-default; 1 manual-trigger):**
 
 | Agent | Schedule | Skills/Model | Cost/Run |
 |-------|----------|---------------|----------|
@@ -93,6 +93,7 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Cla
 | Gemini Researcher (NEW, **default disabled**) | 03:30 daily (when opted in via `INSTALL_GEMINI=1`) | Gemini Deep Research / DR Max via `gemini_dr.run` | $0–7/run; capped $7 task / $10 day / $20 month |
 | Job Feed (NEW v3.28.0) | 8:00–11:00 AM (7 fires) | Qwen3-14B on MBP via HybridRouter (`fallback_disabled=true`); 4 free public feeds + ~40-company ATS watchlist; SQLite + Markdown roll-up | $0.00 |
 | Skill Optimizer (v3.27.0, **manual-trigger only**) | manual (`agents-sdk/agents/skill_optimizer.py`) | Opus 4.7 generation + Qwen3-14B local judge (Ollama on Mac Mini) + Sonnet 4.6 sample-check every 5 iters; autoresearch loop on a single SKILL.md | $20–145/run (cap $200) |
+| Substack-Drafter (NEW v3.33.0, **default disabled**) | Thursday 18:00 weekly (when opted in via `INSTALL_SUBSTACK_DRAFTER=1`) | HybridRouter (Qwen3-14B local → Sonnet 4.6 fallback); reads writing-voice-modes SKILL.md verbatim; 5-week voice rotation (sean/sedaris/kerouac/thompson/vonnegut) | $0–0.10/run (cap $0.10) |
 
 **Research routing rule (v3.26.3, 2026-05-06):** Heavy multi-target research belongs on Gemini DR or DR Max, **not** local LDR. There are two independent reasons, both observed in the same week:
 
