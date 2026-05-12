@@ -353,6 +353,12 @@ def run_synthesis(
     skipped silently (pure unit-test path / fresh-vault path before
     vault_indexer has run).
     """
+    # Fail loud if Pushover creds are missing — the notification subsystem is
+    # how this agent communicates failures. Without creds, downstream failures
+    # become invisible (vs-019).
+    from lib.pushover import ensure_credentials_or_raise
+    ensure_credentials_or_raise()
+
     start = time.monotonic()
     today = now_iso or date.today().isoformat()
     knowledge_root = vault_root / KNOWLEDGE_SUBDIR
