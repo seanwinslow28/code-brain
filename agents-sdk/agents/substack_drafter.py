@@ -159,3 +159,72 @@ def pick_densest_cluster(*, concepts_dir: Path, min_shared: int = 3) -> list[str
         if len(component) > len(best):
             best = component
     return sorted(best)[:5]
+
+
+# --- Prompt composer (Task C5) ---
+
+def compose_prompt(*, voice_mode: str, voice_skill_path: Path,
+                   cluster_slugs: list[str], cluster_bodies: list[str],
+                   reference_excerpts: list[str], word_count_target: int = 1350) -> dict[str, str]:
+    """Return {'system': ..., 'user': ...} ready for HybridRouter.
+
+    The system prompt loads writing-voice-modes/SKILL.md verbatim so the LLM
+    follows the actual voice spec instead of an LLM-paraphrased version. If
+    the skill file is missing (moved or renamed), the prompt degrades
+    gracefully: it still names the voice mode but acknowledges the spec is
+    missing rather than crashing the run.
+
+    The user prompt asks for a word_count_target-word draft about the cluster,
+    grounded in the references, with a hook in the first 2 sentences. The
+    final sentence reminds the model not to publish — drafts land in the
+    vault for Sean to review.
+
+    Args:
+        voice_mode: One of VOICE_MODES (sean / sedaris / kerouac / thompson / vonnegut)
+        voice_skill_path: Path to .claude/skills/writing-voice-modes/SKILL.md
+        cluster_slugs: List of concept slugs from pick_densest_cluster()
+        cluster_bodies: Parallel list of concept article bodies (str)
+        reference_excerpts: List of grounding source excerpts from similarity pull
+        word_count_target: Default 1350 (midpoint of 1200-1500 SPEC range)
+
+    Returns:
+        {'system': str, 'user': str}
+    """
+    # System prompt — load voice spec verbatim
+    try:
+        voice_skill_text = voice_skill_path.read_text()
+        system = (
+            f"You are drafting a Substack post in {voice_mode!r} voice. "
+            f"The full voice spec is below — follow its signature moves exactly.\n\n"
+            f"---\n{voice_skill_text}\n---"
+        )
+    except (FileNotFoundError, OSError):
+        # Graceful degradation: voice spec file is missing or unreadable.
+        # Still produce a usable prompt; Sean will notice the draft feels
+        # generic and can investigate why the spec didn't load.
+        system = (
+            f"You are drafting a Substack post in {voice_mode!r} voice. "
+            f"The writing-voice-modes spec file at {voice_skill_path} could "
+            f"not be loaded (missing or not found). Draft in your understanding "
+            f"of {voice_mode!r} voice anyway; flag in the draft that the spec "
+            f"was missing so Sean can investigate."
+        )
+
+    # User prompt — cluster + references + constraints
+    cluster_block = "\n\n".join(
+        f"## Source concept: {slug}\n\n{body}"
+        for slug, body in zip(cluster_slugs, cluster_bodies)
+    )
+    refs_block = "\n\n".join(f"- {r}" for r in reference_excerpts) if reference_excerpts else "(no similarity-matched references available)"
+    user = (
+        f"Draft a {word_count_target}-word Substack post in {voice_mode} voice "
+        f"about the connections between: {', '.join(cluster_slugs)}.\n\n"
+        f"Ground in these sources:\n\n{refs_block}\n\n"
+        f"Source concept bodies:\n\n{cluster_block}\n\n"
+        f"Constraints:\n"
+        f"- Hook in the first 2 sentences.\n"
+        f"- Use {voice_mode}'s signature moves from the skill spec above.\n"
+        f"- Cite sources by wikilink, not by URL.\n"
+        f"- Do not publish to Substack — this is a draft for Sean to review.\n"
+    )
+    return {"system": system, "user": user}
