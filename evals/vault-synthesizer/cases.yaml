@@ -15,6 +15,7 @@
     concepts_written: ">= 1"
   judge_type: rubric
   pass_criteria: "result.concepts_written >= 1"
+  skip_reason: "requires a live (or richly-mocked) LLM caller that returns a well-formed concept dict with >= 2 wikilinks; offline mocks can't faithfully test this output-side regression. Defer to Workstream C live runs."
 
 - id: vs-015
   category: output-completeness
