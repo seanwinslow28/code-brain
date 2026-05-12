@@ -22,6 +22,7 @@ Cross-cutting (no domain CLAUDE.md):
 | **claude-mastery/** | CLI shortcuts, hooks, MCP, settings, tech stack reference (used by all domains) |
 | **vault/** | Obsidian vault with PARA structure, MOCs, prompt library, RAG knowledge, operating-model artifacts |
 | **agents-sdk/** | Autonomous Claude Agent SDK layer (Python + launchd) |
+| **evals/vault-synthesizer/** | 10-case binary eval suite for the vault synthesizer agent (v3.30.1) |
 | **.claude/** | Canonical skills, agents, hooks, settings (auto-loaded) |
 
 ### Design Team (4 Review Agents)

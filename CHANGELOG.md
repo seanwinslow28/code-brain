@@ -55,6 +55,17 @@ Broken-wikilink cleanup sweep. Took the lint signal from 37 (post-filter from v3
 - `find_broken_wikilinks(vault)` on the live vault returns `0` issues. Down from 348 pre-v3.30.0.
 - 25/25 knowledge_lint tests pass (no regressions to existing test cases).
 
+## [3.30.1] - 2026-05-12
+
+### Added
+- **Vault Synthesizer Eval Suite (`evals/vault-synthesizer/`)** — 10-case binary
+  pass/fail eval suite + companion synthesizer-fix workstream. Ships intentionally
+  red: 6 new cases (vs-016..vs-021) grounded in 17 days of real production logs
+  drive the regression-test discipline that Workstream B's patches will turn
+  green. 4 retained cases (vs-012..vs-015) from pre-drafted research. 11 deferred
+  cases (vs-001..vs-011) waiting on the synthesizer fix. Baseline pass rate at
+  ship: 1/10 (10%) — by design. Target post-fix: 7+/10.
+
 ## [3.30.0] - 2026-05-11
 
 Knowledge Lint broken-wikilink scan tightened — dropped 348 issues to 37 (89% reduction) by filtering out two well-understood noise sources that swamped the signal.

@@ -187,6 +187,8 @@ life-systems/                         # DOMAIN 3 — personal systems
 └── (existing reference/)
 
 claude-mastery/      # cross-cutting Claude Code meta-reference (stays at root)
+evals/
+└── vault-synthesizer/   # NEW v3.30.1 — 10-case eval suite for the nightly synthesizer
 vault/               # Obsidian vault (PARA + MOCs + operating-models + Prompts + RAG)
 export-groups/       # Metadata-only manifests (for installer export)
 shared/hooks/        # Hook source files (for installer)
