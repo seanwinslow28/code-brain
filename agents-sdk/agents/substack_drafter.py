@@ -13,6 +13,8 @@ See agents-sdk/config.toml [substack_drafter] for defaults.
 """
 from __future__ import annotations
 import json
+import re
+from collections import defaultdict
 from datetime import date
 from pathlib import Path
 
@@ -87,3 +89,73 @@ def is_synthesizer_dry(*, health_dir: Path, threshold: int = 3) -> bool:
             return True  # unreadable manifest = treat as dry to be safe
     # All manifests readable — dry only if none had any output
     return not any(d.get("concepts_written", 0) > 0 for d in parsed)
+
+
+# --- Cluster picker (Task C4) ---
+
+_WIKILINK_RE = re.compile(r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]")
+
+
+def _extract_wikilinks(text: str) -> set[str]:
+    """Return the set of unique wikilink targets in `text`. Strips aliases.
+
+    `[[target|display]]` → "target".
+    `[[plain]]` → "plain".
+    """
+    return {m.group(1).strip() for m in _WIKILINK_RE.finditer(text)}
+
+
+def pick_densest_cluster(*, concepts_dir: Path, min_shared: int = 3) -> list[str]:
+    """Return the slugs of the cluster with the densest wikilink overlap.
+
+    Algorithm:
+      1. Read every `.md` in `concepts_dir`; extract its outbound wikilinks.
+      2. Build an undirected graph: edge a–b iff |links[a] ∩ links[b]| >= min_shared.
+      3. Find the largest connected component (BFS).
+      4. Return up to 5 slugs from that component (sorted alphabetically for
+         determinism).
+
+    Args:
+        concepts_dir: Directory containing concept-article markdown files.
+            Typically `vault/knowledge/concepts/`.
+        min_shared: Minimum wikilink-overlap count for two concepts to be
+            considered connected. Default 3 per SPEC.
+
+    Returns:
+        list[str] of 0 to 5 concept slugs. Empty list if `concepts_dir` is empty.
+        Singleton list of one slug if no concepts share enough wikilinks
+        (each concept is its own component; we still return the largest = 1).
+    """
+    paths = sorted(concepts_dir.glob("*.md"))
+    if not paths:
+        return []
+    links_by_slug: dict[str, set[str]] = {}
+    for p in paths:
+        links_by_slug[p.stem] = _extract_wikilinks(p.read_text())
+
+    # Build adjacency: connect a,b if |links[a] & links[b]| >= min_shared
+    adj: dict[str, set[str]] = defaultdict(set)
+    slugs = list(links_by_slug)
+    for i, a in enumerate(slugs):
+        for b in slugs[i + 1:]:
+            if len(links_by_slug[a] & links_by_slug[b]) >= min_shared:
+                adj[a].add(b)
+                adj[b].add(a)
+
+    # Find largest connected component (iterative BFS to avoid recursion limits)
+    seen: set[str] = set()
+    best: list[str] = []
+    for slug in slugs:
+        if slug in seen:
+            continue
+        stack, component = [slug], []
+        while stack:
+            node = stack.pop()
+            if node in seen:
+                continue
+            seen.add(node)
+            component.append(node)
+            stack.extend(adj[node] - seen)
+        if len(component) > len(best):
+            best = component
+    return sorted(best)[:5]
