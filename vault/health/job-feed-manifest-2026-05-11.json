@@ -1,0 +1,69 @@
+{
+  "date": "2026-05-11",
+  "runs": [
+    {
+      "fired_at": "2026-05-11T18:49:02.445373",
+      "fetch_total": 4061,
+      "rules_passed": 160,
+      "rules_rejected": 3901,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 15.91,
+      "failed_pollers": [
+        "ats:replicate (all 404)",
+        "ats:framer (all 404)",
+        "ats:glean (all 404)",
+        "ats:together-ai (all 404)",
+        "ats:huggingface (all 404)",
+        "ats:beehiiv (all 404)",
+        "ats:canva (all 404)",
+        "ats:coinbase (all 404)",
+        "ats:circle (all 404)",
+        "ats:spline (all 404)",
+        "ats:scale (all 404)",
+        "ats:fourthwall (all 404)",
+        "ats:datarobot (all 404)",
+        "ats:tome (all 404)",
+        "ats:draftkings (all 404)"
+      ],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-05-11T19:09:21.165750",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 160,
+      "llm_failed": 0,
+      "mbp_reachable": true,
+      "duration_sec": 2.88,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-05-11T19:13:24.218276",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 160,
+      "mbp_reachable": true,
+      "duration_sec": 11.61,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-05-11T19:14:49.311786",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 160,
+      "llm_failed": 0,
+      "mbp_reachable": true,
+      "duration_sec": 707.67,
+      "failed_pollers": [],
+      "short_circuited": false
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "concepts_written": 32,
+  "connections_written": 19,
+  "duration_seconds": 351.52,
+  "edges_rejected": 8,
+  "edges_written": 37,
+  "files_processed": 6,
+  "model_used": "qwen3-14b",
+  "rejected_count": 0,
+  "run_id": "2026-05-12T16:52:36",
+  "status": "ok",
+  "wol_status": "mbp_awake"
+}
