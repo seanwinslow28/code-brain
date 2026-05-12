@@ -27,6 +27,51 @@ class PushoverError(Exception):
     """Raised when a Pushover send fails."""
 
 
+class PushoverConfigurationError(RuntimeError):
+    """Raised when Pushover credentials are missing at agent boot.
+
+    Designed to fail loud at startup instead of silent-logging at notify time —
+    a silent failure in the system whose job is surfacing failures is exactly
+    the regression vs-019 catches.
+    """
+
+
+def ensure_credentials_or_raise() -> None:
+    """Load Pushover keychain creds; raise PushoverConfigurationError if missing.
+
+    Call this at the top of any agent's main entrypoint, before any LLM call,
+    so a credential misconfiguration crashes the run early rather than producing
+    a quiet-fail cascade of ~40 missing-creds log lines per run.
+
+    Lookup honors environment overrides (PUSHOVER_USER_KEY, PUSHOVER_API_TOKEN)
+    first, then falls back to macOS keychain (pushover_user_key / pushover_app_token).
+    """
+    import os
+
+    # Env-var override first (test fixtures can clear these to force the failure)
+    user = os.environ.get("PUSHOVER_USER_KEY")
+    token = os.environ.get("PUSHOVER_API_TOKEN")
+
+    if not user or not token:
+        # Fall back to keychain using the same lookup as send_push()
+        try:
+            user = user or get_credential("pushover_user_key")
+            token = token or get_credential("pushover_app_token")
+        except Exception:
+            # Keychain access can fail in test/CI environments — treat as missing
+            pass
+
+    if not user or not token:
+        missing = [
+            name
+            for name, value in [("user_key", user), ("api_token", token)]
+            if not value
+        ]
+        raise PushoverConfigurationError(
+            f"Pushover credentials missing from environment + keychain: {missing}"
+        )
+
+
 def send_push(
     *,
     title: str,

@@ -109,11 +109,16 @@ def _invoke_synthesizer(case) -> object:
             shutil.copy(src, dst)
             changed_files.append(dst)
 
-    # Pushover-removed scenario for vs-019 — clear keychain-source env vars
+    import os
+    # Pushover credential handling:
+    # - vs-019 sets pushover_keychain="removed" → clear env vars so ensure_credentials_or_raise() fails
+    # - all other cases → inject dummy stubs so the boot check passes without touching the real keychain
     if inp.get("pushover_keychain") == "removed":
-        import os
         os.environ.pop("PUSHOVER_USER_KEY", None)
         os.environ.pop("PUSHOVER_API_TOKEN", None)
+    else:
+        os.environ.setdefault("PUSHOVER_USER_KEY", "eval-stub-user")
+        os.environ.setdefault("PUSHOVER_API_TOKEN", "eval-stub-token")
 
     return vs.run_synthesis(
         vault_root=vault_root,
@@ -180,8 +185,31 @@ def test_case(case):
                 "vs-019: PushoverConfigurationError class does not exist yet (Workstream B adds it)"
             )
             return
-        with pytest.raises(PushoverConfigurationError):
-            _invoke_synthesizer(case)
+        import os
+        import lib.keychain as _kc
+
+        # Clear env-var overrides so ensure_credentials_or_raise() can't use them
+        _prev_user = os.environ.pop("PUSHOVER_USER_KEY", None)
+        _prev_token = os.environ.pop("PUSHOVER_API_TOKEN", None)
+        # Stub keychain lookup — env-var clearing alone won't suffice if Sean has
+        # real creds in his macOS keychain on this machine.
+        _orig_get_credential = _kc.get_credential
+        _kc.get_credential = lambda name: None
+        # Also patch the reference already imported inside lib.pushover
+        import lib.pushover as _pw
+        _orig_pw_get_credential = _pw.get_credential
+        _pw.get_credential = lambda name: None
+        try:
+            with pytest.raises(PushoverConfigurationError):
+                _invoke_synthesizer(case)
+        finally:
+            # Restore everything unconditionally
+            _kc.get_credential = _orig_get_credential
+            _pw.get_credential = _orig_pw_get_credential
+            if _prev_user is not None:
+                os.environ["PUSHOVER_USER_KEY"] = _prev_user
+            if _prev_token is not None:
+                os.environ["PUSHOVER_API_TOKEN"] = _prev_token
         return
 
     elif case["id"] == "vs-020":

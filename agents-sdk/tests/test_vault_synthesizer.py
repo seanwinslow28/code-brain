@@ -27,6 +27,18 @@ from agents.vault_synthesizer import (
 )
 
 
+@pytest.fixture(autouse=True)
+def _stub_pushover_creds(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Inject dummy Pushover env vars so ensure_credentials_or_raise() passes.
+
+    Added in B4 (vs-019): run_synthesis() now calls ensure_credentials_or_raise()
+    at boot. Unit tests don't have keychain access, so we set non-empty stubs.
+    This fixture is autouse so every test in this module gets it automatically.
+    """
+    monkeypatch.setenv("PUSHOVER_USER_KEY", "test-stub-user")
+    monkeypatch.setenv("PUSHOVER_API_TOKEN", "test-stub-token")
+
+
 def _make_vault(tmp_path: Path, files: dict[str, str]) -> Path:
     vault = tmp_path / "vault"
     for rel, content in files.items():
