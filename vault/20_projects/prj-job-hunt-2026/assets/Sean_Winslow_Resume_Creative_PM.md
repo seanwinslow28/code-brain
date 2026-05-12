@@ -66,7 +66,7 @@ Creative Product Manager. 12+ years of illustration and animation craft, now app
 
 ### Claude Code Superuser Pack — Open-Source Toolkit
 
-- Open-source agentic engineering toolkit for Claude Code: 117 skills, 13 subagents, 13 hooks, 14 autonomous Claude Agent SDK agents (7 active on local-first launchd schedules).  
+- Open-source agentic engineering toolkit for Claude Code: 118 skills, 13 subagents, 13 hooks, 14 autonomous Claude Agent SDK agents (7 active on local-first launchd schedules).  
 - Includes a `writing-voice-modes` skill calibrated to a personal narrative voice and a full design-team subagent suite (UI Reviewer, Accessibility Checker, Design System Enforcer, Visual Polish Auditor).  
 - Demonstrates Karpathy-style "agentic engineering practitioner" architecture — agents own decomposition; human owns creative judgment.
 

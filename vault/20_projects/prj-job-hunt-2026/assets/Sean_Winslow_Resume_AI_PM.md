@@ -60,7 +60,7 @@ AI Product Manager and agentic-engineering practitioner. Ships production Claude
 
 ### Claude Code Superuser Pack — Open-Source Toolkit
 
-- Open-source agentic engineering toolkit for Claude Code: 117 skills, 13 subagents, 13 hooks, 14 autonomous Claude Agent SDK agents (7 active on local-first launchd schedules).  
+- Open-source agentic engineering toolkit for Claude Code: 118 skills, 13 subagents, 13 hooks, 14 autonomous Claude Agent SDK agents (7 active on local-first launchd schedules).  
 - Used in production for daily PM workflows, vault automation, and content generation across crypto, creative, and personal-systems domains.  
 - Demonstrates Karpathy-style "agentic engineering practitioner" architecture — agents own decomposition; human owns judgment.
 
