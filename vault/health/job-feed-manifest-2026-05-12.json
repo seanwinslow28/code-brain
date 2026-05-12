@@ -1,0 +1,81 @@
+{
+  "date": "2026-05-12",
+  "runs": [
+    {
+      "fired_at": "2026-05-12T08:00:02.099908",
+      "fetch_total": 4070,
+      "rules_passed": 0,
+      "rules_rejected": 20,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 12.77,
+      "failed_pollers": [
+        "ats:glean (all 404)",
+        "ats:replicate (all 404)",
+        "ats:spline (all 404)",
+        "ats:huggingface (all 404)",
+        "ats:draftkings (all 404)",
+        "ats:canva (all 404)",
+        "ats:together-ai (all 404)",
+        "ats:tome (all 404)",
+        "ats:coinbase (all 404)",
+        "ats:datarobot (all 404)",
+        "ats:circle (all 404)",
+        "ats:fourthwall (all 404)",
+        "ats:beehiiv (all 404)",
+        "ats:framer (all 404)",
+        "ats:scale (all 404)"
+      ],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-05-12T08:30:03.160223",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.03,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-05-12T09:00:01.800092",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.06,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-05-12T09:30:03.785951",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.05,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-05-12T10:00:00.871145",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": true,
+      "duration_sec": 0.11,
+      "failed_pollers": [],
+      "short_circuited": false
+    }
+  ]
+}
