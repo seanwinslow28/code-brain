@@ -23,9 +23,14 @@ prefix is mandatory.)
 
 ## Current baseline
 
-**1/10 (10%) — by design.** The 7 failures are the failure modes the Workstream
-B synthesizer fix needs to address. After the fix lands, target pass rate is
-7+/10. See `traces/baseline-run-2026-05-12.md` for the per-case classification.
+**Pre-fix (Workstream A ship, 2026-05-22): 1/10 (10%).** 7 cases red by design + vs-020 passing on the static fixture parity check. Each red case named a specific failure mode the synthesizer fix needed to address. See [`traces/baseline-run-2026-05-12.md`](traces/baseline-run-2026-05-12.md) for the per-case classification.
+
+**Post-fix (Workstream B complete, 2026-05-12): 7/10 (70%).** vs-015, vs-016, vs-017, vs-018, vs-019, vs-021 all flipped green via targeted patches to `agents-sdk/agents/vault_synthesizer.py`, `agents-sdk/lib/pushover.py`, and `agents-sdk/agents/daily_driver.py`. Three cases remain skipped with explicit `skip_reason` fields in [`cases.yaml`](cases.yaml):
+
+- **vs-012, vs-013** — `pass_criteria` are English prose, not Python expressions; the runner has no concept-body reader path; vs-013 also needs an `age_distribution` fixture and a `cluster_link_ages_days` field on `SynthesisResult`. All three are post-Workstream-B follow-ups.
+- **vs-014** — requires a live (or richly-mocked) LLM caller that returns a well-formed concept dict with >= 2 wikilinks; offline mocks can't faithfully test this output-side regression. Deferred to Workstream C live runs.
+
+The 1 → 7 jump documents what the synthesizer fix accomplished. The three remaining skips are honest deferrals, not silent failures — each names the specific eval-mechanics or fixture-infrastructure blocker.
 
 ## The failure taxonomy
 
