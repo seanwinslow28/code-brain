@@ -120,7 +120,7 @@
     each_concept_cites_source: true
   judge_type: rubric
   pass_criteria: "every concept article body contains >= 1 wikilink to a source note"
-  skip_reason: "requires live synthesizer output; skipped until Workstream B"
+  skip_reason: "pass_criteria is English not Python; runner has no concept-body reader path; both are post-Workstream-B follow-ups"
 
 - id: vs-013
   category: stale-overweighting
@@ -134,4 +134,4 @@
     recent_cluster_weight: ">= 0.5"
   judge_type: rubric
   pass_criteria: "majority of cluster wikilinks point to notes < 30 days old"
-  skip_reason: "requires live synthesizer output; skipped until Workstream B"
+  skip_reason: "pass_criteria is English not Python; age_distribution fixture unimplemented; result has no cluster_link_ages_days field; all three are post-Workstream-B follow-ups"
