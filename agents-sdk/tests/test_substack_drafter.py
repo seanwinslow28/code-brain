@@ -114,3 +114,60 @@ def test_dryness_gate_handles_unreadable_manifest(tmp_path):
     (tmp_path / "synth-manifest-2026-06-01.json").write_text("not valid json{")
     # Unreadable in the window → treat as dry to be safe
     assert is_synthesizer_dry(health_dir=tmp_path, threshold=3) is True
+
+
+# --- Cluster picker (Task C4) ---
+
+def _write_concept(d: Path, slug: str, wikilinks: list[str]) -> None:
+    body = f"---\ntype: concept\nslug: {slug}\n---\n\n# {slug}\n\n"
+    body += " ".join(f"[[{w}]]" for w in wikilinks)
+    (d / f"{slug}.md").write_text(body)
+
+
+def test_cluster_picker_returns_densest_3_to_5(tmp_path):
+    from agents.substack_drafter import pick_densest_cluster
+    # Cluster A: three concepts that share >= 3 wikilinks pairwise
+    _write_concept(tmp_path, "a", ["x", "y", "z", "shared"])
+    _write_concept(tmp_path, "b", ["x", "y", "shared", "extra"])
+    _write_concept(tmp_path, "c", ["y", "z", "shared"])
+    # Cluster B: one isolated concept
+    _write_concept(tmp_path, "lonely", ["nothing-shared"])
+    cluster = pick_densest_cluster(concepts_dir=tmp_path, min_shared=3)
+    assert {"a", "b", "c"} <= set(cluster)
+    assert "lonely" not in cluster
+    assert 3 <= len(cluster) <= 5
+
+
+def test_cluster_picker_empty_dir_returns_empty(tmp_path):
+    from agents.substack_drafter import pick_densest_cluster
+    assert pick_densest_cluster(concepts_dir=tmp_path, min_shared=3) == []
+
+
+def test_cluster_picker_no_overlap_returns_singleton(tmp_path):
+    from agents.substack_drafter import pick_densest_cluster
+    # Each concept has unique wikilinks → no edges meet min_shared
+    _write_concept(tmp_path, "a", ["x", "y"])
+    _write_concept(tmp_path, "b", ["w", "z"])
+    _write_concept(tmp_path, "c", ["m", "n"])
+    cluster = pick_densest_cluster(concepts_dir=tmp_path, min_shared=3)
+    # With no edges, every node is its own connected component. The largest is size 1.
+    assert len(cluster) == 1
+
+
+def test_cluster_picker_clips_to_5(tmp_path):
+    from agents.substack_drafter import pick_densest_cluster
+    # 7 concepts all sharing >= 3 wikilinks → should clip to 5
+    shared = ["a1", "a2", "a3"]
+    for slug in ["n1", "n2", "n3", "n4", "n5", "n6", "n7"]:
+        _write_concept(tmp_path, slug, shared + [f"unique-{slug}"])
+    cluster = pick_densest_cluster(concepts_dir=tmp_path, min_shared=3)
+    assert len(cluster) == 5
+
+
+def test_cluster_picker_ignores_aliased_wikilinks(tmp_path):
+    from agents.substack_drafter import pick_densest_cluster
+    # [[target|display]] notation — extract target, not display
+    (tmp_path / "a.md").write_text("# a\n[[shared|display 1]] [[shared|display 2]] [[other|x]]")
+    (tmp_path / "b.md").write_text("# b\n[[shared|y]] [[other|z]] [[third|w]]")
+    cluster = pick_densest_cluster(concepts_dir=tmp_path, min_shared=2)
+    assert set(cluster) >= {"a", "b"}
