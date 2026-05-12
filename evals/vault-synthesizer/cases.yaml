@@ -1,0 +1,137 @@
+# evals/vault-synthesizer/cases.yaml
+# Schema: {id, category, description, failure_mode_under_test, input, expected_output,
+#          judge_type, pass_criteria}
+# Judge types: exact-match (Python assertion) | rubric (structured check) | llm-judge (Claude Haiku, not used at v1)
+# This file is canonical. deferred-cases.yaml holds the 11 cases waiting on the synthesizer fix.
+
+- id: vs-014
+  category: output-completeness
+  description: "Synthesizer fails to emit a concept article on a 5+ note corpus"
+  failure_mode_under_test: "Mode 1 — silent empty output"
+  input:
+    fixtures: traces/fixtures
+    note_count: 6
+  expected_output:
+    concepts_written: ">= 1"
+  judge_type: rubric
+  pass_criteria: "result.concepts_written >= 1"
+
+- id: vs-015
+  category: output-completeness
+  description: "Synthesizer reports status=ok with zero outputs (the load-bearing case)"
+  failure_mode_under_test: "Mode 1 — silent empty output"
+  input:
+    fixtures: traces/fixtures
+    note_count: 6
+  expected_output:
+    status: not "ok"  # if no outputs were produced, status must not be "ok"
+  judge_type: exact-match
+  pass_criteria: "not (result.status == 'ok' and result.concepts_written == 0)"
+
+- id: vs-016
+  category: status-misreport
+  description: "All-file LLM failure must escalate the run-level status"
+  failure_mode_under_test: "Mode 2 — status-field misreport"
+  input:
+    llm_caller_mock: "raises ConnectionRefusedError on every call"
+    fixtures: traces/fixtures
+    note_count: 3
+  expected_output:
+    status: "in {\"error\", \"partial-empty\"}"
+  judge_type: exact-match
+  pass_criteria: "result.status != 'ok'"
+
+- id: vs-017
+  category: status-misreport
+  description: "Status taxonomy must distinguish partial-some-output from partial-empty"
+  failure_mode_under_test: "Mode 3 — missing status taxonomy"
+  input:
+    llm_caller_mock: "raises on file 1 + 2, succeeds with empty body on file 3"
+    fixtures: traces/fixtures
+    note_count: 3
+  expected_output:
+    status: "partial-empty"
+  judge_type: exact-match
+  pass_criteria: "result.status == 'partial-empty'"
+
+- id: vs-018
+  category: schema-integrity
+  description: "model_used must be one of the documented enum values, never empty string"
+  failure_mode_under_test: "Mode 4 — model_used schema"
+  input:
+    llm_caller_mock: "raises ConnectionRefusedError on every call"
+    fixtures: traces/fixtures
+    note_count: 1
+  expected_output:
+    model_used: "in {\"qwen3-14b\", \"claude-sonnet-4-6\", \"claude-haiku-4-5\", \"none\"}"
+  judge_type: exact-match
+  pass_criteria: "result.model_used in {'qwen3-14b', 'claude-sonnet-4-6', 'claude-haiku-4-5', 'none'}"
+
+- id: vs-019
+  category: config-fail-loud
+  description: "Missing Pushover credentials must raise at synthesizer boot, before any LLM call"
+  failure_mode_under_test: "Mode 5 — Pushover fail-quiet"
+  input:
+    pushover_keychain: "removed"
+    fixtures: traces/fixtures
+    note_count: 1
+  expected_output:
+    exception: "PushoverConfigurationError"
+    raised_before_llm_call: true
+  judge_type: exact-match
+  pass_criteria: "raises PushoverConfigurationError before any llm_caller invocation"
+
+- id: vs-020
+  category: index-integrity
+  description: "Concept count in vault/knowledge/index.md matches file count in vault/knowledge/concepts/"
+  failure_mode_under_test: "Mode 6 — downstream-consumer misread"
+  input:
+    fixture_concepts_dir: traces/fixtures/concepts_3files
+    fixture_index_md: traces/fixtures/index_lists_3.md
+  expected_output:
+    consistent: true
+  judge_type: rubric
+  pass_criteria: "count(index.md '## Concepts' entries) == count(concepts/*.md)"
+
+- id: vs-021
+  category: downstream-consumer
+  description: "Daily-driver morning brief must surface success-empty as a WARNING, not as healthy"
+  failure_mode_under_test: "Mode 6 — downstream-consumer misread"
+  input:
+    fake_manifest:
+      status: "success-empty"
+      concepts_written: 0
+      duration_s: 12.4
+  expected_output:
+    brief_text: contains "WARNING"
+    brief_text_alt: "contains one of (\"concepts_written: 0\", \"empty\")"
+  judge_type: rubric
+  pass_criteria: "'WARNING' in brief and ('concepts_written: 0' in brief or 'empty' in brief)"
+
+# Retained from pre-drafts — deferred-semantics, kept active per SPEC §Scope Lock
+- id: vs-012
+  category: source-attribution
+  description: "Concept articles cite at least one source note by wikilink"
+  failure_mode_under_test: "Source-attribution loss (Gemini §6)"
+  input:
+    fixtures: traces/fixtures
+    note_count: 6
+  expected_output:
+    each_concept_cites_source: true
+  judge_type: rubric
+  pass_criteria: "every concept article body contains >= 1 wikilink to a source note"
+  skip_reason: "requires live synthesizer output; skipped until Workstream B"
+
+- id: vs-013
+  category: stale-overweighting
+  description: "Concept clustering does not over-weight stale notes vs recent ones"
+  failure_mode_under_test: "Stale-content overweighting (Gemini §6)"
+  input:
+    fixtures: traces/fixtures
+    note_count: 6
+    age_distribution: "3 from last 7 days, 3 from > 60 days"
+  expected_output:
+    recent_cluster_weight: ">= 0.5"
+  judge_type: rubric
+  pass_criteria: "majority of cluster wikilinks point to notes < 30 days old"
+  skip_reason: "requires live synthesizer output; skipped until Workstream B"
