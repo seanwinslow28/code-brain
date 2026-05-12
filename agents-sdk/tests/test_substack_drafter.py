@@ -171,3 +171,89 @@ def test_cluster_picker_ignores_aliased_wikilinks(tmp_path):
     (tmp_path / "b.md").write_text("# b\n[[shared|y]] [[other|z]] [[third|w]]")
     cluster = pick_densest_cluster(concepts_dir=tmp_path, min_shared=2)
     assert set(cluster) >= {"a", "b"}
+
+
+# --- Prompt composer (Task C5) ---
+
+def test_compose_prompt_includes_voice_skill(tmp_path):
+    from agents.substack_drafter import compose_prompt
+    voice_skill = tmp_path / "SKILL.md"
+    voice_skill.write_text("# Voice Modes\n\nSean Mode signature moves: short, blunt, narrative.")
+    out = compose_prompt(
+        voice_mode="sean",
+        voice_skill_path=voice_skill,
+        cluster_slugs=["pushover-fail-quiet", "silent-empty-output"],
+        cluster_bodies=["Body A about Pushover.", "Body B about silent empty."],
+        reference_excerpts=["ref about Hamel evals", "ref about Anthropic playbook"],
+        word_count_target=1350,
+    )
+    assert "Sean Mode signature moves" in out["system"]
+    assert "pushover-fail-quiet" in out["user"]
+    assert "silent-empty-output" in out["user"]
+    assert "1350" in out["user"]
+    assert "Hook in the first 2 sentences" in out["user"]
+
+
+def test_compose_prompt_returns_two_strings():
+    """The shape is {'system': str, 'user': str} — HybridRouter takes both."""
+    from agents.substack_drafter import compose_prompt
+    from pathlib import Path
+    out = compose_prompt(
+        voice_mode="sedaris",
+        voice_skill_path=Path("/nonexistent-but-read-tolerant-here"),
+        cluster_slugs=["a"],
+        cluster_bodies=["body"],
+        reference_excerpts=[],
+    )
+    assert isinstance(out, dict)
+    assert set(out.keys()) == {"system", "user"}
+    assert isinstance(out["system"], str) and isinstance(out["user"], str)
+
+
+def test_compose_prompt_handles_missing_voice_skill(tmp_path):
+    """If voice_skill_path doesn't exist, the system prompt should degrade
+    gracefully (fall back to a minimal voice-mode-named prompt). The agent
+    should not crash mid-run if the skill file moves."""
+    from agents.substack_drafter import compose_prompt
+    missing = tmp_path / "definitely-not-here.md"
+    out = compose_prompt(
+        voice_mode="kerouac",
+        voice_skill_path=missing,
+        cluster_slugs=["a", "b"],
+        cluster_bodies=["x", "y"],
+        reference_excerpts=["r"],
+    )
+    # System prompt still mentions the voice mode by name even when the
+    # spec file is missing — graceful degradation.
+    assert "kerouac" in out["system"].lower()
+    assert "missing" in out["system"].lower() or "not found" in out["system"].lower() or len(out["system"]) > 50
+
+
+def test_compose_prompt_includes_all_cluster_bodies(tmp_path):
+    from agents.substack_drafter import compose_prompt
+    voice_skill = tmp_path / "SKILL.md"
+    voice_skill.write_text("voice spec")
+    out = compose_prompt(
+        voice_mode="thompson",
+        voice_skill_path=voice_skill,
+        cluster_slugs=["a", "b", "c"],
+        cluster_bodies=["UNIQUE-MARKER-A", "UNIQUE-MARKER-B", "UNIQUE-MARKER-C"],
+        reference_excerpts=[],
+    )
+    for marker in ["UNIQUE-MARKER-A", "UNIQUE-MARKER-B", "UNIQUE-MARKER-C"]:
+        assert marker in out["user"]
+
+
+def test_compose_prompt_handles_empty_references():
+    from agents.substack_drafter import compose_prompt
+    from pathlib import Path
+    out = compose_prompt(
+        voice_mode="vonnegut",
+        voice_skill_path=Path("/nonexistent"),
+        cluster_slugs=["a"],
+        cluster_bodies=["body"],
+        reference_excerpts=[],  # empty list
+    )
+    # Should not crash; user prompt should still be coherent
+    assert "vonnegut" in out["user"].lower()
+    assert len(out["user"]) > 100  # not empty/trivial
