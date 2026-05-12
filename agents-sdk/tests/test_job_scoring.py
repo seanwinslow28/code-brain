@@ -42,7 +42,7 @@ async def test_score_posting_routes_via_hybrid_router_and_parses():
         "fit_dimensions": {"role_band_fit": 4, "geo_fit": 5, "industry_fit": 4, "yoe_fit": 3},
     }
 
-    async def fake_completion(base_url, model, prompt):
+    async def fake_completion(base_url, model, prompt, runtime="ollama"):
         return json.dumps(fake_response)
 
     result = await score_posting(_p(), router=router, completion_fn=fake_completion)
