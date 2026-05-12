@@ -12,7 +12,9 @@ Default-disabled at three kill-switch layers per SPEC:
 See agents-sdk/config.toml [substack_drafter] for defaults.
 """
 from __future__ import annotations
+import json
 from datetime import date
+from pathlib import Path
 
 # Voice rotation: 5-week cycle. Index 0 = Sean Mode (the Hybrid default per
 # .claude/skills/writing-voice-modes/SKILL.md). Indices 1-4 are the signature
@@ -48,3 +50,40 @@ def pick_voice_mode(*, today: date, epoch: date, override: str | None = None) ->
         return override
     weeks_since = (today - epoch).days // 7
     return VOICE_MODES[weeks_since % len(VOICE_MODES)]
+
+
+# --- Synthesizer-dryness gate (Task C3) ---
+
+
+def is_synthesizer_dry(*, health_dir: Path, threshold: int = 3) -> bool:
+    """Return True iff the last `threshold` synth manifests had concepts_written == 0.
+
+    The check is conservative: "dry" means we can't safely produce a draft.
+    Edge cases all return True (dry):
+      - Health directory is empty or has fewer than `threshold` manifests
+      - Any manifest in the window can't be read as JSON
+    If any manifest in the last `threshold` has concepts_written > 0,
+    we have something to draft from → returns False (not dry).
+
+    Args:
+        health_dir: Directory containing synth-manifest-YYYY-MM-DD.json files.
+            Typically `vault/health/`.
+        threshold: How many of the most recent manifests to inspect.
+            Default 3, configurable via [substack_drafter].synthesizer_dry_threshold
+            in config.toml.
+
+    Returns:
+        bool. True = dry (skip the draft), False = wet (proceed).
+    """
+    manifests = sorted(health_dir.glob("synth-manifest-*.json"))
+    if len(manifests) < threshold:
+        return True
+    recent = manifests[-threshold:]
+    parsed: list[dict] = []
+    for path in recent:
+        try:
+            parsed.append(json.loads(path.read_text()))
+        except (json.JSONDecodeError, OSError):
+            return True  # unreadable manifest = treat as dry to be safe
+    # All manifests readable — dry only if none had any output
+    return not any(d.get("concepts_written", 0) > 0 for d in parsed)
