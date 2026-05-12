@@ -1,6 +1,6 @@
 # Claude Code Superuser Pack
 
-An open-source agentic engineering practitioner's toolkit — **118** skills, 13 subagents, **14** hooks, **16** autonomous SDK agents (8 currently running on launchd, 1 manual-trigger), **3 primary domains**, an Obsidian vault, and a Claude Agent SDK runtime, all auto-loaded. Every component is in active use; every scheduled agent has a launchd schedule; every skill is a prompt and every prompt has a job. If you've read Karpathy's "agentic engineering" framing and wondered what one looks like in the wild, this is one.
+An open-source agentic engineering practitioner's toolkit — **118** skills, 13 subagents, **14** hooks, **17** autonomous SDK agents (8 currently running on launchd by default, 2 opt-in disabled-by-default, 1 manual-trigger), **3 primary domains**, an Obsidian vault, and a Claude Agent SDK runtime, all auto-loaded. Every component is in active use; every scheduled agent has a launchd schedule; every skill is a prompt and every prompt has a job. If you've read Karpathy's "agentic engineering" framing and wondered what one looks like in the wild, this is one.
 
 ## What's Inside
 

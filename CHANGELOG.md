@@ -5,6 +5,42 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.33.0] - 2026-05-12
+
+Vault Synthesizer Eval Suite — Workstream B (synthesizer patches) + Workstream C (Substack-Drafter agent). Builds on v3.30.1's Workstream A eval-suite ship. The suite went from baseline 1/10 (the regression suite working as designed at A's ship) to post-fix 7/10 in one work session. The Substack-Drafter agent is a new SDK agent that closes the publishing-cadence loop for Sean's job-hunt sprint — default-disabled at three kill-switch layers so it ships ahead of the original "post-employment" schedule without risk.
+
+### Added
+
+- **Substack-Drafter agent** (`agents-sdk/agents/substack_drafter.py`) — Thursday-18:00 weekly agent (default-disabled, opt-in via `INSTALL_SUBSTACK_DRAFTER=1`) that reads post-fix synthesizer output, picks the densest concept cluster via wikilink density (≥3 shared wikilinks pairwise), and drafts a Substack post in a rotating 5-mode voice cycle (sean → sedaris → kerouac → thompson → vonnegut, indexed by absolute weeks since `voice_epoch = 2026-05-04`). Never publishes; drafts land in `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/` for hand review. Three kill-switch layers: (1) `enabled = false` default in `[substack_drafter]` config table; (2) opt-in launchd install via `INSTALL_SUBSTACK_DRAFTER=1` env var; (3) `--dry-run` CLI flag prints the composed prompt without calling the model. 33 TDD tests covering voice rotation, dryness gate (no-op when last N synth-manifests show `concepts_written == 0`), cluster picker (largest connected component with wikilink overlap), prompt composer (loads `writing-voice-modes/SKILL.md` verbatim, graceful degradation if missing), draft writer (frontmatter: type/voice/source_concepts/generated_at/model_used/cost_usd/status), and main() flow with all branches covered. `_route()` is wired to the real HybridRouter API: loads config, creates `HybridRouter.from_config()`, calls `asyncio.run(router.route(task))`, handles both ollama (`/api/generate`) and OpenAI-compatible (`/v1/chat/completions`) runtimes via httpx.
+
+- **`[substack_drafter]` config table** (`agents-sdk/config.toml`) — defaults pinned for Sean's local-Qwen3-14B-first / Sonnet-fallback HybridRouter cost profile: `max_cost_usd = 0.10` hard cap, Thursday 18:00 schedule, `synthesizer_dry_threshold = 3` nights for graceful no-op, `voice_epoch = 2026-05-04`, output_dir pointing at the existing substack-drafts/ folder.
+
+- **`agents-sdk/schedules/com.sean.agents.substack_drafter.plist`** + opt-in install path in `install_schedules.sh`. Mirrors the `INSTALL_GEMINI=1` pattern. Schedule: Thursday 18:00 weekly (`Weekday=4, Hour=18, Minute=0`). `EnvironmentVariables.PATH` preserved per CLAUDE.md non-negotiable.
+
+- **Vault Synthesizer Eval Suite — Workstream B completion** (`evals/vault-synthesizer/`) — suite went from baseline 1/10 (10%) at Workstream A ship to **7/10 (70%) post-fix**. Three cases explicitly skipped with `skip_reason` fields naming the real blockers: vs-014 needs live-LLM infrastructure (output-completeness can't be faithfully mocked); vs-012/013 need eval-mechanics work (English-prose `pass_criteria` → Python, runner concept-body reader path, age-fixture machinery). README baseline section updated with pre-fix vs post-fix narrative. Roadmap Task 8 (build plan) marked ✅ for Steps 2+3; Step 4 rephrased with concrete 5-night gate dates. Roadmap Task 9 (Substack-Drafter) status changed from "POST-EMPLOYMENT BUILD" to "EARLY-BUILD APPROVED 2026-05-12" with rationale.
+
+### Changed
+
+- **Vault synthesizer status taxonomy** (`agents-sdk/agents/vault_synthesizer.py`) — added `STATUS_SUCCESS_EMPTY` and `STATUS_PARTIAL_EMPTY` to the `STATUS_VALUES` frozenset, distinguishing "healthy and quiet" (all per-file calls succeeded but no articles passed validation) from "broken and quiet" (some calls failed AND no articles produced). New per-file `files_attempted` / `files_succeeded` counters drive an end-of-loop run-level status promotion: `0 succeeded → STATUS_ERROR`, `partial + zero output → STATUS_PARTIAL_EMPTY`, `partial + some output → STATUS_PARTIAL`, `all succeeded + zero output → STATUS_SUCCESS_EMPTY`, `all succeeded + output → STATUS_OK`. Composes correctly with the existing budget-timeout path. Turns eval cases vs-015, vs-016, vs-017 green.
+
+- **`SynthesisResult.model_used`** (`agents-sdk/agents/vault_synthesizer.py`) — defaults to `"none"` instead of empty string. Valid enum exposed as `MODEL_USED_VALUES` frozenset: `{"qwen3-14b", "claude-sonnet-4-6", "claude-haiku-4-5", "none"}`. New `_normalize_model_name()` helper maps raw model strings (with version suffixes like `claude-sonnet-4-6-20251029`) into the enum on successful calls. Turns eval case vs-018 green.
+
+- **Pushover boot-time credential check** (`agents-sdk/lib/pushover.py`) — added `PushoverConfigurationError` class + `ensure_credentials_or_raise()` function. Called at the top of `run_synthesis()`. Honors `PUSHOVER_USER_KEY` / `PUSHOVER_API_TOKEN` env-var overrides first, then falls back to macOS keychain. Missing creds now fail loud at boot instead of producing ~40 silent-log retries per night (the original Mode 5 regression). Turns eval case vs-019 green. ⚠️ **Operator action required**: macOS keychain must contain Pushover credentials (or env vars must be set in the launchd plist) before merging — otherwise the live synthesizer will fail at boot every night. This is the correct failure mode (the whole point of the fix) but needs operator awareness.
+
+- **Daily-driver Vault Health WARNING** (`agents-sdk/agents/daily_driver.py`) — new `render_vault_health(manifest: dict) -> str` standalone helper surfaces `success-empty` / `partial-empty` status values OR `concepts_written == 0` manifests as `⚠️ WARNING` blocks in the morning brief. Replaces the prior count-only inline rendering inside `build_preamble()`. Turns eval case vs-021 green.
+
+- **CLAUDE.md agent count** updated from "16 autonomous SDK agents" / "8 of 16 on launchd" to "17 autonomous SDK agents" / "8 of 17 on launchd" reflecting the Substack-Drafter addition.
+
+### Fixed
+
+- **Eval runner conftest hooks** (`evals/vault-synthesizer/conftest.py`) — `pytest_runtest_logreport` and `pytest_sessionfinish` moved out of `runner.py` (where pytest doesn't auto-register hooks from a parametrized test module) into `conftest.py` (where it does). `last-run.md` now auto-generates on every invocation instead of requiring manual capture.
+
+- **Existing synthesizer/pushover/daily_driver tests** — 8 tests across `test_vault_synthesizer.py` and `test_daily_driver.py` updated to assert the post-fix corrected behavior (one was asserting the old silent-empty bug; the others needed the `_stub_pushover_creds` autouse fixture so they don't trip the new boot check). Full suite: 504 passing, 3 pre-existing failures unrelated to this work (`test_job_feed_e2e`, `test_route_to_macbook` x2).
+
+### Branch and merge state
+
+This entry summarizes 23 commits on branch `eval-suite-2026-05-12` (Workstream B's 8 + Workstream C's 8 + 7 doc/scaffold/baseline commits). The branch is ready to merge once Sean accepts the Pushover operator-action requirement.
+
 ## [3.32.0] - 2026-05-11
 
 SessionEnd auto-stub for new person wikilinks. Closes the regression risk Sean asked about: "if a new article lands with a new `[[Author Name]]` not in the people folder, will it show up in the broken-wikilink section every Sunday?" Answer is now no — at the end of every Claude Code session, a fire-and-forget hook scans the vault for unresolved `[[Name]]` wikilinks in `author:` YAML frontmatter fields and creates minimal stubs before the next morning's Daily Driver fire.
