@@ -1,9 +1,9 @@
 ---
 name: campus-education
-description: Education platform and LMS development patterns for a crypto education / LMS platform. Generates course structures, lesson outlines, quiz rubrics, student progress tracking, and curriculum automation. Use when building education features, creating course content, designing learning paths, generating quizzes or assessments, or working on Campus platform specifications.
+description: Education platform and LMS development patterns for a crypto education / LMS platform. Generates course structures, lesson outlines, quiz rubrics, student progress tracking, and curriculum automation. Use when building education features, creating course content, designing learning paths, generating quizzes or assessments, or working on LMS platform specifications.
 ---
 
-# Campus Education Platform Patterns
+# Education Platform Patterns
 
 ## Purpose
 
@@ -11,18 +11,18 @@ Provide LMS development patterns, content generation workflows, and assessment r
 
 ## When to Use
 
-- Designing course structures or learning paths for Campus
+- Designing course structures or learning paths for the LMS
 - Generating lesson outlines, quiz questions, or assessment rubrics
 - Specifying student progress tracking features
 - Building onboarding flows for education products
 - Automating curriculum content from crypto research
-- Writing PRDs for Campus platform features
+- Writing PRDs for LMS platform features
 
 ## Examples
 
 **Example 1: Course structure generation**
 ```
-User: "Create a course outline for 'Introduction to DeFi' on Campus"
+User: "Create a course outline for 'Introduction to DeFi' on the LMS"
 Claude: [Uses campus-education]
 
 # Introduction to DeFi - Course Structure
@@ -51,7 +51,7 @@ Claude: [Uses campus-education]
 
 **Example 2: Quiz generation with rubric**
 ```
-User: "Generate a quiz on staking for Campus"
+User: "Generate a quiz on staking for the LMS"
 Claude: [Uses campus-education]
 
 ## Quiz: Proof of Stake Fundamentals
@@ -69,7 +69,7 @@ produce an invalid block?
 
 ## Course Structure Template
 
-### Standard Campus Course Format
+### Standard LMS Course Format
 
 ```markdown
 # [Course Title]
@@ -102,7 +102,7 @@ produce an invalid block?
 
 ### CIDPP Five-Dimensional Evaluation
 
-Use this rubric framework for all Campus assessments. Score each dimension 1-5:
+Use this rubric framework for all LMS assessments. Score each dimension 1-5:
 
 | Dimension | What it Measures | 1 (Poor) | 3 (Adequate) | 5 (Excellent) |
 |-----------|-----------------|----------|---------------|----------------|
@@ -132,7 +132,7 @@ Use this rubric framework for all Campus assessments. Score each dimension 1-5:
 Use this prompt structure for LLM-graded free-response questions:
 
 ```markdown
-**System:** You are a grading assistant for Campus by The Block.
+**System:** You are a grading assistant for an education platform.
 Grade submissions based on the rubric. Be encouraging but accurate.
 
 **User:**
@@ -266,7 +266,7 @@ const defiSkillTree: SkillNode[] = [
 
 ## Success Criteria
 
-- [ ] Course structures follow the standard Campus template
+- [ ] Course structures follow the standard LMS template
 - [ ] All quizzes include grading rubrics with partial credit guidance
 - [ ] Assessment rubrics use the CIDPP framework
 - [ ] Crypto terminology is accurate and current
@@ -276,9 +276,9 @@ const defiSkillTree: SkillNode[] = [
 ## Copy/Paste Ready
 
 ```
-"Create a course outline for Campus on [topic]"
+"Create a course outline for the LMS on [topic]"
 "Generate a quiz with rubric for the [topic] module"
 "Design a learning path for beginner crypto students"
 "Write assessment criteria for a DeFi analysis project"
-"Spec out the student progress dashboard for Campus"
+"Spec out the student progress dashboard for the LMS"
 ```

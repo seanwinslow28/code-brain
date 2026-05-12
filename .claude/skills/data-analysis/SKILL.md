@@ -1,13 +1,13 @@
 ---
 name: data-analysis
-description: Data analysis and reporting assistant for The Block's Product & Engineering team. Processes GA4 analytics, builds metric reports, analyzes article CTR, data page sources, and ad revenue. Accesses GA4 via Zapier MCP, Looker via browser, and Jira for sprint data. Use when asked to "analyze data", "create a report", "review metrics", "process CSV", "trend analysis", "build a dashboard", "GA4", "Looker", "impressions", "page views", or "ad revenue".
+description: Data analysis and reporting assistant for a Product & Engineering team. Processes GA4 analytics, builds metric reports, analyzes article CTR, data page sources, and ad revenue. Accesses GA4 via Zapier MCP, Looker via browser, and Jira for sprint data. Use when asked to "analyze data", "create a report", "review metrics", "process CSV", "trend analysis", "build a dashboard", "GA4", "Looker", "impressions", "page views", or "ad revenue".
 ---
 
-# Data Analysis & Reporting — The Block
+# Data Analysis & Reporting
 
 ## Purpose
 
-Enables Sean to analyze The Block's key metrics, build reports for stakeholders, and answer Ed's analytics questions — all without admin-level tool access. Uses GA4 via Zapier MCP for data extraction, Python (pandas) for analysis, and Confluence/Slack for report distribution. Covers article performance, data page engagement, ad revenue, and Campus analytics (coming soon).
+Enables Sean to analyze key product metrics, build reports for stakeholders, and answer the PM's analytics questions — all without admin-level tool access. Uses GA4 via Zapier MCP for data extraction, Python (pandas) for analysis, and Confluence/Slack for report distribution. Covers article performance, data page engagement, ad revenue, and LMS analytics (coming soon).
 
 ## When to Use
 
@@ -37,7 +37,7 @@ Enables Sean to analyze The Block's key metrics, build reports for stakeholders,
 | Content | Page views, impressions, article CTR | GA4 |
 | Data Pages | Page views, exit rate, source analysis | GA4 |
 | Advertising | Ad revenue, ad impressions, click rates | GAM / GA4 |
-| Campus | Enrollment, completion rates, quiz scores | Campus LMS (future) |
+| LMS | Enrollment, completion rates, quiz scores | LMS platform (future) |
 | SEO | Organic search traffic, page indexing | GA4 / Search Console |
 
 ### Ed's Analytics Questions
@@ -56,7 +56,7 @@ These are the types of questions Ed asks Sean to investigate:
 **Who Sean reports to:** Ed Rupkus (PM)
 **Ed reports to:** Matt Vitebsky (VP of P&E) → broader leadership
 **Format:** Confluence write-up → Slack summary with link
-**Frequency:** Ad hoc now; will increase when Campus 201 goes fully live
+**Frequency:** Ad hoc now; will increase when the LMS goes fully live
 
 ## Examples
 
@@ -237,7 +237,7 @@ def analyze_csv(filepath: str, question: str) -> dict:
 - Ad CTR: [X%]
 - Top-performing ad placements: [list]
 
-## Campus (when live)
+## LMS (when live)
 - Enrollments: [X]
 - Completion rate: [X%]
 - Revenue: $[X]
@@ -284,7 +284,7 @@ After generating a report:
 - [ ] Ed's 6 analytics question types answerable
 - [ ] Visualizations use appropriate chart types
 - [ ] Null values and outliers explicitly handled
-- [ ] Campus analytics ready for when Campus 201 launches publicly
+- [ ] LMS analytics ready for when the LMS launches publicly
 
 ## Copy/Paste Ready
 

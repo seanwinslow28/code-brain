@@ -24,7 +24,7 @@ Sean's personal finance command center. Processes Chase and Bilt CSV exports int
 
 - **Gross:** $4,166.67/semi-monthly ($8,333.34/month, ~$100K/year)
 - **Net take-home:** $2,870.63/semi-monthly (**$5,741.26/month**)
-- **Employer:** The Block (paid via Rippling)
+- **Employer:** (configure; paid via Rippling)
 - **Deductions:** Medical, dental, vision, life, disability, taxes (NY state + NYC)
 - **Note:** NY taxes will shift to MA after Boston move (March 21, 2026). Tax withholding change pending HR.
 

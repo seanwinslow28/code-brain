@@ -60,7 +60,7 @@ built by humans who believe their own staging environments.
 User: "Write a Slack message about a delayed feature launch"
 Claude: [Uses writing-voice-modes — Sean Mode at 60%]
 
-Hey team — quick update on the Campus 201 launch. We're pushing to next
+Hey team — quick update on the LMS 201 launch. We're pushing to next
 Thursday. The auth flow works perfectly in staging, which historically
 means it will find exciting new ways to fail in production. QA caught
 two edge cases we hadn't accounted for, so we're fixing those before
