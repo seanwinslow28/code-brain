@@ -84,30 +84,65 @@ def build_scoring_prompt(posting: Posting) -> str:
     )
 
 
-CompletionFn = Callable[[str, str, str], Awaitable[str]]
+CompletionFn = Callable[..., Awaitable[str]]
 
 
-async def _default_completion(base_url: str, model: str, prompt: str) -> str:
-    """Default LLM completion via Ollama or LM Studio (both expose OpenAI-compat).
+_SCORING_JSON_SCHEMA = {
+    "name": "ScoringResult",
+    "strict": "true",
+    "schema": {
+        "type": "object",
+        "properties": {
+            "fit_score": {"type": "integer", "minimum": 0, "maximum": 5},
+            "role_band": {
+                "type": "string",
+                "enum": ["PM", "APM", "Sr_PM_stretch", "Principal_stretch", "Other"],
+            },
+            "rationale": {"type": "string"},
+            "concerns": {"type": "array", "items": {"type": "string"}},
+            "fit_dimensions": {
+                "type": "object",
+                "properties": {
+                    "role_band_fit": {"type": "integer"},
+                    "geo_fit": {"type": "integer"},
+                    "industry_fit": {"type": "integer"},
+                    "yoe_fit": {"type": "integer"},
+                },
+                "required": ["role_band_fit", "geo_fit", "industry_fit", "yoe_fit"],
+            },
+        },
+        "required": ["fit_score", "role_band", "rationale", "concerns", "fit_dimensions"],
+    },
+}
 
-    Tries Ollama /api/generate first (Ollama default), falls back to /v1/chat/completions.
+
+async def _default_completion(
+    base_url: str, model: str, prompt: str, runtime: str = "ollama"
+) -> str:
+    """LLM completion dispatched by runtime.
+
+    Ollama → /api/generate with format=json. LM Studio / mlx-lm → /v1/chat/completions
+    with response_format=json_schema. LM Studio rejects json_object (400 — only
+    json_schema or text), and returns 200 + {"error": ...} for unknown paths,
+    which is why the prior "try /api/generate, fall through on non-200" pattern
+    silently produced empty scores against MBP.
     """
-    async with httpx.AsyncClient(timeout=60.0) as client:
-        # Try Ollama /api/generate
-        r = await client.post(
-            f"{base_url}/api/generate",
-            json={"model": model, "prompt": prompt, "stream": False, "format": "json"},
-        )
-        if r.status_code == 200:
+    async with httpx.AsyncClient(timeout=120.0) as client:
+        if runtime == "ollama":
+            r = await client.post(
+                f"{base_url}/api/generate",
+                json={"model": model, "prompt": prompt, "stream": False, "format": "json"},
+            )
+            r.raise_for_status()
             return r.json().get("response", "")
-        # Fall through to OpenAI-compat
+        # lm-studio, mlx-lm, anything else OpenAI-compat
         r = await client.post(
             f"{base_url}/v1/chat/completions",
             json={
                 "model": model,
                 "messages": [{"role": "user", "content": prompt}],
                 "temperature": 0.2,
-                "response_format": {"type": "json_object"},
+                "response_format": {"type": "json_schema", "json_schema": _SCORING_JSON_SCHEMA},
             },
         )
         r.raise_for_status()
@@ -157,7 +192,9 @@ async def score_posting(
 
     fn = completion_fn or _default_completion
     try:
-        raw = await fn(decision.base_url, decision.model, build_scoring_prompt(posting))
+        raw = await fn(
+            decision.base_url, decision.model, build_scoring_prompt(posting), decision.runtime
+        )
     except Exception as exc:
         logger.warning("Scoring HTTP call failed for %s: %s", posting.source_role_id, exc)
         raise JobScoringUnavailable(str(exc)) from exc
