@@ -319,6 +319,129 @@ def _route(*, task: str, system: str, user: str, max_cost_usd: float = 0.10) -> 
     }
 
 
+# --- main() + CLI (Task C7) ---
+import argparse
+import sys
+
+
+def main(*, health_dir: Path, concepts_dir: Path, out_dir: Path,
+         voice_skill_path: Path, dry_run: bool = False,
+         today: date | None = None, epoch: date | None = None,
+         voice_override: str | None = None,
+         max_cost_usd: float = 0.10) -> int:
+    """Agent entrypoint. Returns process exit code (always 0 for graceful no-ops).
+
+    Sequence:
+      1. Gate on synthesizer dryness (no concept articles to draft from)
+      2. Pick the densest concept cluster
+      3. Choose voice mode (rotation or override)
+      4. Compose system+user prompt
+      5. Short-circuit on dry_run (kill-switch layer 3)
+      6. Route + write draft
+      7. Pushover ping (informational; failure is non-fatal)
+    """
+    today = today or date.today()
+    epoch = epoch or date(2026, 5, 4)
+
+    # 1. Gate on synthesizer dryness
+    if is_synthesizer_dry(health_dir=health_dir, threshold=3):
+        print(f"[substack_drafter] synthesizer dry — no draft generated ({today})")
+        return 0
+
+    # 2. Pick a cluster
+    cluster = pick_densest_cluster(concepts_dir=concepts_dir, min_shared=3)
+    if len(cluster) < 2:
+        print(f"[substack_drafter] no dense cluster found — no-op ({today})")
+        return 0
+
+    # 3. Pick voice mode
+    voice = pick_voice_mode(today=today, epoch=epoch, override=voice_override)
+
+    # 4. Load cluster bodies (similarity-matched references = empty for now;
+    #    similarity pull is a Workstream C real-runs enhancement once vault-index
+    #    has been re-baselined with post-fix synthesizer output)
+    cluster_bodies = [(concepts_dir / f"{s}.md").read_text() for s in cluster]
+    reference_excerpts: list[str] = []
+
+    # 5. Compose
+    prompt = compose_prompt(
+        voice_mode=voice,
+        voice_skill_path=voice_skill_path,
+        cluster_slugs=cluster,
+        cluster_bodies=cluster_bodies,
+        reference_excerpts=reference_excerpts,
+    )
+
+    # 6. Dry-run short-circuit (kill-switch layer 3)
+    if dry_run:
+        print(f"[substack_drafter] DRY-RUN")
+        print(f"  voice: {voice}")
+        print(f"  cluster: {cluster}")
+        print(f"  system prompt: {len(prompt['system'])} chars")
+        print(f"  user prompt:   {len(prompt['user'])} chars")
+        return 0
+
+    # 7. Route + write
+    slug = "-".join(cluster[:2])[:50]
+    out_dir.mkdir(parents=True, exist_ok=True)
+    path = write_draft(
+        out_dir=out_dir, slug=slug, voice_mode=voice,
+        cluster_slugs=cluster, prompt=prompt, max_cost_usd=max_cost_usd,
+    )
+    print(f"[substack_drafter] draft written: {path}")
+
+    # 8. Pushover ping (informational; non-fatal)
+    try:
+        from lib.pushover import ensure_credentials_or_raise
+        ensure_credentials_or_raise()
+        print(f"[substack_drafter] (notify_info hook would fire here if implemented)")
+    except Exception as exc:  # noqa: BLE001 — notification path never blocks the run
+        print(f"[substack_drafter] notify skipped (non-fatal): {exc}")
+
+    return 0
+
+
+def _cli() -> int:
+    """argparse wrapper. Honors [substack_drafter].enabled in config.toml
+    (kill-switch layer 1) — exits 0 with a message if disabled."""
+    import tomllib
+    repo_root = Path(__file__).resolve().parents[2]
+    config_path = repo_root / "agents-sdk" / "config.toml"
+    try:
+        with open(config_path, "rb") as f:
+            cfg = tomllib.load(f)
+    except (FileNotFoundError, OSError) as exc:
+        print(f"[substack_drafter] could not read config.toml: {exc}", file=sys.stderr)
+        return 1
+    sd = cfg.get("substack_drafter", {})
+    if not sd.get("enabled", False):
+        print("[substack_drafter] disabled in config.toml — exit 0 (set enabled = true to opt in)")
+        return 0
+
+    p = argparse.ArgumentParser(description="Substack-Drafter agent")
+    p.add_argument("--dry-run", action="store_true",
+                   help="Compose the prompt and print it, but do not call the model or write a draft")
+    p.add_argument("--voice", default=None,
+                   help="Pin voice mode (sean|sedaris|kerouac|thompson|vonnegut). Default: 5-week calendar rotation")
+    args = p.parse_args()
+
+    return main(
+        health_dir=repo_root / "vault" / "health",
+        concepts_dir=repo_root / "vault" / "knowledge" / "concepts",
+        out_dir=repo_root / sd.get("output_dir", "vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts"),
+        voice_skill_path=repo_root / ".claude" / "skills" / "writing-voice-modes" / "SKILL.md",
+        dry_run=args.dry_run,
+        voice_override=args.voice,
+        max_cost_usd=sd.get("max_cost_usd", 0.10),
+    )
+
+
+if __name__ == "__main__":
+    sys.exit(_cli())
+
+
+# --- Draft writer (Task C6, continued) ---
+
 def write_draft(*, out_dir: Path, slug: str, voice_mode: str,
                 cluster_slugs: list[str], prompt: dict[str, str],
                 max_cost_usd: float = 0.10) -> Path:

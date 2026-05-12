@@ -337,3 +337,137 @@ def test_write_draft_handles_missing_optional_fields(tmp_path, monkeypatch):
     assert "model_used: unknown" in content  # graceful default
     assert "cost_usd: 0.0" in content  # graceful default
     assert "minimal" in content
+
+
+# --- main() + --dry-run (Task C7) ---
+
+def test_main_dryrun_no_route_call(tmp_path, monkeypatch, capsys):
+    """In --dry-run mode, _route() must NOT be called. Kill-switch layer 3."""
+    from agents import substack_drafter
+    # Build scaffolding that would otherwise reach the prompt step:
+    health = tmp_path / "health"; health.mkdir()
+    concepts = tmp_path / "concepts"; concepts.mkdir()
+    drafts = tmp_path / "drafts"; drafts.mkdir()
+    # 3 nights of healthy synth manifests
+    for dstr in ["2026-06-01", "2026-06-02", "2026-06-03"]:
+        (health / f"synth-manifest-{dstr}.json").write_text(
+            '{"status":"ok","concepts_written":3}')
+    # 2 connected concepts (need >= 3 shared wikilinks for cluster to form)
+    (concepts / "a.md").write_text("# a\n[[x]] [[y]] [[shared]] [[extra]]")
+    (concepts / "b.md").write_text("# b\n[[x]] [[y]] [[shared]]")
+    voice_skill = tmp_path / "SKILL.md"; voice_skill.write_text("voice spec content")
+
+    called = {"n": 0}
+    def fake_route(**kw):
+        called["n"] += 1
+        return {"text": "draft", "model_used": "qwen3-14b", "cost_usd": 0.0}
+    monkeypatch.setattr(substack_drafter, "_route", fake_route)
+
+    rc = substack_drafter.main(
+        health_dir=health, concepts_dir=concepts, out_dir=drafts,
+        voice_skill_path=voice_skill, dry_run=True,
+    )
+    assert rc == 0
+    assert called["n"] == 0  # dry-run must NOT call the model
+    assert list(drafts.glob("*.md")) == []  # no draft written
+    out = capsys.readouterr().out
+    assert "DRY-RUN" in out
+    assert "voice:" in out
+
+
+def test_main_dry_synth_exits_zero_no_op(tmp_path, capsys):
+    """When the synthesizer is dry, main exits 0 with a no-op message."""
+    from agents import substack_drafter
+    health = tmp_path / "health"; health.mkdir()
+    for dstr in ["2026-06-01", "2026-06-02", "2026-06-03"]:
+        (health / f"synth-manifest-{dstr}.json").write_text(
+            '{"status":"ok","concepts_written":0}')
+    rc = substack_drafter.main(
+        health_dir=health, concepts_dir=tmp_path / "none",
+        out_dir=tmp_path / "out", voice_skill_path=tmp_path / "SKILL.md",
+        dry_run=False,
+    )
+    assert rc == 0
+    captured_out = capsys.readouterr().out
+    assert "synthesizer dry" in captured_out
+
+
+def test_main_writes_draft_when_synth_healthy_and_not_dryrun(tmp_path, monkeypatch, capsys):
+    """Happy path: synth healthy, cluster found, _route returns body, draft written."""
+    from agents import substack_drafter
+    health = tmp_path / "health"; health.mkdir()
+    concepts = tmp_path / "concepts"; concepts.mkdir()
+    drafts = tmp_path / "drafts"; drafts.mkdir()
+    for dstr in ["2026-06-01", "2026-06-02", "2026-06-03"]:
+        (health / f"synth-manifest-{dstr}.json").write_text(
+            '{"status":"ok","concepts_written":3}')
+    (concepts / "a.md").write_text("# a\n[[x]] [[y]] [[shared]] [[extra]]")
+    (concepts / "b.md").write_text("# b\n[[x]] [[y]] [[shared]]")
+    voice_skill = tmp_path / "SKILL.md"; voice_skill.write_text("voice spec")
+
+    monkeypatch.setattr(substack_drafter, "_route", lambda **kw: {
+        "text": "# DRAFT TITLE\n\nbody [[a]] [[b]]",
+        "model_used": "qwen3-14b",
+        "cost_usd": 0.0,
+    })
+
+    rc = substack_drafter.main(
+        health_dir=health, concepts_dir=concepts, out_dir=drafts,
+        voice_skill_path=voice_skill, dry_run=False,
+    )
+    assert rc == 0
+    drafts_written = list(drafts.glob("*.md"))
+    assert len(drafts_written) == 1
+    assert "DRAFT TITLE" in drafts_written[0].read_text()
+
+
+def test_main_no_cluster_exits_zero(tmp_path, monkeypatch, capsys):
+    """No dense cluster (e.g., empty concepts dir, or fewer than 2 connected) -> no-op."""
+    from agents import substack_drafter
+    health = tmp_path / "health"; health.mkdir()
+    concepts = tmp_path / "concepts"; concepts.mkdir()  # empty
+    drafts = tmp_path / "drafts"; drafts.mkdir()
+    for dstr in ["2026-06-01", "2026-06-02", "2026-06-03"]:
+        (health / f"synth-manifest-{dstr}.json").write_text(
+            '{"status":"ok","concepts_written":3}')
+    voice_skill = tmp_path / "SKILL.md"; voice_skill.write_text("voice spec")
+
+    monkeypatch.setattr(substack_drafter, "_route", lambda **kw: {"text": "x"})
+
+    rc = substack_drafter.main(
+        health_dir=health, concepts_dir=concepts, out_dir=drafts,
+        voice_skill_path=voice_skill, dry_run=False,
+    )
+    assert rc == 0
+    captured = capsys.readouterr().out
+    assert "no dense cluster" in captured.lower()
+    assert list(drafts.glob("*.md")) == []
+
+
+def test_main_voice_override_pins(tmp_path, monkeypatch):
+    """voice_override='sedaris' should override the calendar rotation."""
+    from agents import substack_drafter
+    health = tmp_path / "health"; health.mkdir()
+    concepts = tmp_path / "concepts"; concepts.mkdir()
+    drafts = tmp_path / "drafts"; drafts.mkdir()
+    for dstr in ["2026-06-01", "2026-06-02", "2026-06-03"]:
+        (health / f"synth-manifest-{dstr}.json").write_text(
+            '{"status":"ok","concepts_written":3}')
+    (concepts / "a.md").write_text("# a\n[[x]] [[y]] [[shared]] [[extra]]")
+    (concepts / "b.md").write_text("# b\n[[x]] [[y]] [[shared]]")
+    voice_skill = tmp_path / "SKILL.md"; voice_skill.write_text("voice spec")
+
+    captured = {}
+    def fake_route(**kw):
+        captured["system"] = kw["system"]
+        return {"text": "x", "model_used": "qwen3-14b", "cost_usd": 0.0}
+    monkeypatch.setattr(substack_drafter, "_route", fake_route)
+
+    rc = substack_drafter.main(
+        health_dir=health, concepts_dir=concepts, out_dir=drafts,
+        voice_skill_path=voice_skill, dry_run=False,
+        voice_override="sedaris",
+    )
+    assert rc == 0
+    # The system prompt must mention 'sedaris' (compose_prompt embeds the voice name)
+    assert "sedaris" in captured["system"].lower()
