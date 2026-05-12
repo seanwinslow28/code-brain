@@ -1,20 +1,20 @@
 ---
 name: crypto-web3-context
-description: Crypto and Web3 product context for a PM at The Block. Provides blockchain terminology (DeFi, L1/L2, TVL, MEV, staking), market data concepts (price feeds, order books, on-chain metrics), crypto-specific PRD vocabulary (tokenomics, governance, liquidity), and regulatory awareness. Use when working on crypto products, blockchain features, The Block data products, DeFi analysis, token specifications, or Web3 product requirements.
+description: Crypto and Web3 product context for a PM at a crypto media platform. Provides blockchain terminology (DeFi, L1/L2, TVL, MEV, staking), market data concepts (price feeds, order books, on-chain metrics), crypto-specific PRD vocabulary (tokenomics, governance, liquidity), and regulatory awareness. Use when working on crypto products, blockchain features, crypto data products, DeFi analysis, token specifications, or Web3 product requirements.
 ---
 
 # Crypto and Web3 Product Context
 
 ## Purpose
 
-Provide accurate crypto and Web3 domain knowledge for product management at The Block. Encode blockchain terminology, market data concepts, and crypto-specific PM patterns so Claude produces specifications, analyses, and documentation with correct industry vocabulary. Frame everything from a PM perspective, not an engineering perspective.
+Provide accurate crypto and Web3 domain knowledge for product management at a crypto media platform. Encode blockchain terminology, market data concepts, and crypto-specific PM patterns so Claude produces specifications, analyses, and documentation with correct industry vocabulary. Frame everything from a PM perspective, not an engineering perspective.
 
 ## When to Use
 
 - Writing PRDs or specs for crypto data products
 - Analyzing on-chain metrics or market data features
 - Creating requirements for DeFi, NFT, or token-related features
-- Discussing The Block's products (news, data dashboards, Campus, Simon)
+- Discussing the platform's products (news, data dashboards, LMS, AI assistant)
 - Reviewing or generating content involving blockchain terminology
 - Drafting regulatory-aware product documentation
 
@@ -22,18 +22,18 @@ Provide accurate crypto and Web3 domain knowledge for product management at The 
 
 **Example 1: Crypto data dashboard PRD**
 ```
-User: "Write a PRD for a new TVL tracking dashboard on The Block Data"
+User: "Write a PRD for a new TVL tracking dashboard on the data platform"
 Claude: [Uses crypto-web3-context]
 
 # TVL Tracking Dashboard PRD
 
 ## TL;DR
-Add a Total Value Locked (TVL) dashboard to The Block Data that tracks
+Add a Total Value Locked (TVL) dashboard to the data platform that tracks
 aggregate and per-protocol TVL across L1 and L2 chains with historical trends.
 
 ## Problem
 - Users currently rely on third-party tools (DefiLlama) for TVL data
-- No integrated view alongside The Block's existing market data
+- No integrated view alongside the platform's existing market data
 - Missing chain-level breakdowns (Ethereum L1 vs Arbitrum/Optimism L2)
 
 ## Solution
@@ -209,7 +209,7 @@ const defaultConfig: DataFeedConfig = {
 ## Copy/Paste Ready
 
 ```
-"Write a PRD for a new crypto data feature on The Block"
+"Write a PRD for a new crypto data feature on the platform"
 "Help me spec out a DeFi dashboard with TVL tracking"
 "Review this crypto product spec for regulatory issues"
 "What on-chain metrics should we track for this L2 feature?"
