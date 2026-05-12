@@ -197,7 +197,10 @@ def test_run_synthesis_rejects_articles_without_two_wikilinks(tmp_path: Path) ->
         now_iso="2026-04-17",
         budget_seconds=300,
     )
-    assert result.status in {"ok", "partial"}
+    # All files processed successfully but no articles survived validation →
+    # status is now "success-empty" (previously would have been "ok", which
+    # masked the silent-empty regression fixed in vs-015/vs-016/vs-017).
+    assert result.status == "success-empty"
     assert result.concepts_written == 0
     assert result.rejected_count >= 1
 
