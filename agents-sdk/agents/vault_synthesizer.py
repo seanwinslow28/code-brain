@@ -62,10 +62,50 @@ QA_SUBDIR = "qa"
 _WIKILINK_RE = re.compile(r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]")
 _SLUG_RE = re.compile(r"[^a-z0-9]+")
 
+# --- model_used enum (vs-018) ---
+# The valid set of values for SynthesisResult.model_used. The "none" sentinel
+# is used when no LLM call completed during the run (e.g., MBP asleep, network
+# refused). Downstream consumers (daily-driver brief, manifest readers) can
+# branch on the enum without the empty-string sentinel.
+MODEL_USED_VALUES = frozenset({"qwen3-14b", "claude-sonnet-4-6", "claude-haiku-4-5", "none"})
+MODEL_USED_NONE = "none"
+
+# --- status taxonomy (vs-015, vs-016, vs-017) ---
+# The valid set of values for SynthesisResult.status. New in v3.30: "success-empty"
+# (ran cleanly, produced no output) and "partial-empty" (some files processed,
+# none produced articles). These give downstream consumers (daily-driver brief,
+# manifest readers) the signal they need to distinguish "healthy and quiet" from
+# "broken and quiet" — which was the Mode 1 silent-empty regression.
+STATUS_OK = "ok"
+STATUS_PARTIAL = "partial"
+STATUS_PARTIAL_EMPTY = "partial-empty"
+STATUS_SUCCESS_EMPTY = "success-empty"
+STATUS_ERROR = "error"
+STATUS_BUDGET_EXHAUSTED = "budget-exhausted"
+STATUS_WOL_DEFERRED = "wol-deferred"
+STATUS_VALUES = frozenset({
+    STATUS_OK, STATUS_PARTIAL, STATUS_PARTIAL_EMPTY, STATUS_SUCCESS_EMPTY,
+    STATUS_ERROR, STATUS_BUDGET_EXHAUSTED, STATUS_WOL_DEFERRED,
+})
+
+
+def _normalize_model_name(name: str) -> str:
+    """Map raw model strings (which may include version suffixes) to the eval enum."""
+    if not name:
+        return MODEL_USED_NONE
+    n = name.lower()
+    if "qwen" in n:
+        return "qwen3-14b"
+    if "haiku" in n:
+        return "claude-haiku-4-5"
+    if "sonnet" in n:
+        return "claude-sonnet-4-6"
+    return MODEL_USED_NONE
+
 
 @dataclass
 class SynthesisResult:
-    status: str                       # "ok" | "partial" | "budget-exhausted" | "wol-deferred" | "error"
+    status: str                       # see STATUS_VALUES: "ok" | "partial" | "partial-empty" | "success-empty" | "budget-exhausted" | "wol-deferred" | "error"
     concepts_written: int = 0
     connections_written: int = 0
     rejected_count: int = 0
@@ -76,7 +116,7 @@ class SynthesisResult:
     # Phase D (v3.20.0, 2026-05-01) — typed reasoning edges + manifest.
     edges_written: int = 0
     edges_rejected: int = 0
-    model_used: str = ""
+    model_used: str = MODEL_USED_NONE
     wol_status: str = ""              # "mbp_awake" | "api_fallback" | "wol_deferred"
     run_id: str = ""                  # ISO timestamp; matches synth-manifest run_id
 
@@ -313,6 +353,12 @@ def run_synthesis(
     skipped silently (pure unit-test path / fresh-vault path before
     vault_indexer has run).
     """
+    # Fail loud if Pushover creds are missing — the notification subsystem is
+    # how this agent communicates failures. Without creds, downstream failures
+    # become invisible (vs-019).
+    from lib.pushover import ensure_credentials_or_raise
+    ensure_credentials_or_raise()
+
     start = time.monotonic()
     today = now_iso or date.today().isoformat()
     knowledge_root = vault_root / KNOWLEDGE_SUBDIR
@@ -337,11 +383,16 @@ def run_synthesis(
             regenerate_index(knowledge_root)
         return result
 
+    files_attempted = 0
+    files_succeeded = 0
+
     for fp in changed_files:
         if time.monotonic() - start >= budget_seconds:
-            result.status = "partial"
+            result.status = STATUS_PARTIAL
             result.warnings.append(f"budget ran out after {result.files_processed} files")
             break
+
+        files_attempted += 1
 
         try:
             primary_text = fp.read_text(encoding="utf-8", errors="replace")
@@ -366,6 +417,8 @@ def run_synthesis(
         except Exception as exc:
             result.warnings.append(f"LLM call failed for {fp.name}: {exc}")
             continue
+
+        files_succeeded += 1
 
         concepts = parsed.get("concepts", []) or []
         connections = parsed.get("connections", []) or []
@@ -461,6 +514,29 @@ def run_synthesis(
     with FileLock(lock_path, exclusive=True, timeout=10.0):
         regenerate_index(knowledge_root)
 
+    # --- run-level status promotion (vs-015, vs-016, vs-017) ---
+    # Promote result.status based on what actually happened during the per-file loop.
+    # Done at the end so the existing "set status=partial on budget timeout" path
+    # can compose with this (if status is already an error-class value, leave it).
+    if result.status not in {STATUS_ERROR, STATUS_BUDGET_EXHAUSTED, STATUS_WOL_DEFERRED}:
+        if files_attempted == 0:
+            # Nothing to do this run; no signal to promote
+            pass
+        elif files_succeeded == 0:
+            # Every per-file LLM call failed → run-level error
+            result.status = STATUS_ERROR
+        elif files_succeeded < files_attempted and result.concepts_written == 0:
+            # Some files processed, none produced articles → partial-empty
+            result.status = STATUS_PARTIAL_EMPTY
+        elif files_succeeded < files_attempted:
+            # Some files succeeded with output, some failed → partial
+            result.status = STATUS_PARTIAL
+        elif result.concepts_written == 0:
+            # All files succeeded but no concept articles were written → success-empty
+            result.status = STATUS_SUCCESS_EMPTY
+        else:
+            result.status = STATUS_OK
+
     result.duration_seconds = time.monotonic() - start
     return result
 
@@ -488,7 +564,7 @@ def _default_llm_caller_factory(
             )
         decision = asyncio.run(go())
         if manifest_state is not None and not manifest_state.get("model_used"):
-            manifest_state["model_used"] = decision.model
+            manifest_state["model_used"] = _normalize_model_name(decision.model)
             manifest_state["wol_status"] = (
                 "mbp_awake" if decision.machine == "macbook_pro"
                 else "api_fallback"
@@ -624,7 +700,7 @@ def main() -> int:
     duration_ms = (time.monotonic_ns() - start_ns) // 1_000_000
 
     # Phase D — copy model_used / wol_status into the result, write manifest.
-    result.model_used = manifest_state.get("model_used", "")
+    result.model_used = manifest_state.get("model_used", MODEL_USED_NONE)
     result.wol_status = manifest_state.get("wol_status", "")
     try:
         manifest_path = write_synth_manifest(

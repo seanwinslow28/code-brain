@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import json
 import re
 import sys
 from datetime import date, timedelta
@@ -41,12 +42,39 @@ AGENT_NAME = "daily-driver"
 
 # Re-exported for backwards compatibility; canonical home is lib.lint_report.
 # Phase D (v3.20.0): synth_health_summary added alongside vault_health_summary.
+# vs-021 (v3.31.x): synth_health_summary removed from preamble; render_vault_health() replaces it.
 from lib.fleet_summary import build_fleet_overnight_digest  # noqa: E402
 from lib.lint_report import (  # noqa: E402
     latest_lint_report,
-    synth_health_summary,
+    latest_synth_manifest,
     vault_health_summary,
 )
+
+
+def render_vault_health(manifest: dict) -> str:
+    """Render a Vault Health markdown block from a synth manifest dict.
+
+    Extracted as a standalone function so the eval suite (vs-021) can call it
+    without a full daily-driver run. Surfaces silent-empty regressions as
+    WARNING — both ``status == "success-empty"`` and ``concepts_written == 0``
+    produce a warning block, even if the run completed structurally successfully.
+    """
+    status = manifest.get("status", "unknown")
+    concepts = manifest.get("concepts_written", 0)
+    duration = manifest.get("duration_s", 0.0)
+
+    if status in {"success-empty", "partial-empty"} or concepts == 0:
+        return (
+            f"## Vault Health\n\n"
+            f"⚠️ **WARNING** — synth status `{status}`, concepts_written: {concepts}.\n"
+            f"The synthesizer reported structurally successful but produced no concept articles.\n"
+            f"Run: `cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/vault_synthesizer.py --once`\n"
+        )
+    if status == "ok":
+        return f"## Vault Health\n\n✅ ok — {concepts} concepts written in {duration:.1f}s.\n"
+    if status in {"error", "partial"}:
+        return f"## Vault Health\n\n❌ {status} — see manifest.\n"
+    return f"## Vault Health\n\n? unknown status `{status}`.\n"
 
 
 def _parse_top_n_from_roll_up(path: Path, n: int = 3) -> list[tuple[str, str, str, str, str]]:
@@ -228,15 +256,21 @@ def build_preamble(mode: str, config) -> str:
     # Phase D (v3.20.0, 2026-05-01) — append the latest synth-manifest
     # summary line under Vault Health when one exists. Empty string when
     # no manifest yet (suppresses the line entirely on a fresh vault).
+    # vs-021 (v3.31.x) — delegate to render_vault_health() so silent-empty
+    # regressions surface as WARNING in the brief.
     if mode == "morning":
         today_iso = date.today().isoformat()
         job_feed_block = _append_job_feed_summary(config, today_iso)
         if job_feed_block:
             base += job_feed_block
         base += "\n" + vault_health_summary(config.vault_root) + "\n"
-        synth_line = synth_health_summary(config.vault_root)
-        if synth_line:
-            base += synth_line + "\n"
+        manifest_path = latest_synth_manifest(config.vault_root)
+        if manifest_path:
+            try:
+                manifest_data = json.loads(manifest_path.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError):
+                manifest_data = {}
+            base += render_vault_health(manifest_data) + "\n"
         artifact_block = build_artifact_preamble(config)
         if artifact_block:
             base += "\n" + artifact_block + "\n"

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sean.agent.substack-drafter</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/bin/python3</string>
+        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/substack_drafter.py</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Weekday</key>
+        <integer>4</integer>
+        <key>Hour</key>
+        <integer>18</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/Users/seanwinslow/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>PYTHONPATH</key>
+        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk</string>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack</string>
+    <key>StandardOutPath</key>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/logs/substack-drafter.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/logs/substack-drafter.err.log</string>
+</dict>
+</plist>

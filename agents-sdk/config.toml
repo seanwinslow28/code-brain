@@ -399,3 +399,16 @@ evals_path = ".claude/skills/writing-voice-modes/evals.yaml"
 evals_sealed_path = ".claude/skills/writing-voice-modes/evals.sealed.yaml"
 program_md_path = "lib/skill_optimizer/program.md"
 judge_prompt_path = "lib/skill_optimizer/judge_prompt.txt"
+
+[substack_drafter]
+enabled = false  # default-disabled per SPEC kill-switch layer 1
+max_cost_usd = 0.10  # hard cap per run; Qwen3-14B local is free, Sonnet fallback ~$0.05/draft
+output_dir = "vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts"
+concepts_lookback_days = 14
+references_lookback_days = 30
+synthesizer_dry_threshold = 3  # exit no-op if last N synth manifests had concepts_written == 0
+draft_word_count_target = 1350  # midpoint of 1200-1500 SPEC range
+schedule_day = "Thursday"
+schedule_hour = 18
+voice_epoch = "2026-05-04"  # Monday of the sprint; rotation index zero
+# voice_override = "sedaris"  # uncomment to pin a mode for a specific run

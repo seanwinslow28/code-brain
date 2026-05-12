@@ -1,6 +1,6 @@
 # Claude Code Superuser Pack
 
-An open-source agentic engineering practitioner's toolkit — **118** skills, 13 subagents, **14** hooks, **16** autonomous SDK agents (8 currently running on launchd, 1 manual-trigger), **3 primary domains**, an Obsidian vault, and a Claude Agent SDK runtime, all auto-loaded. Every component is in active use; every scheduled agent has a launchd schedule; every skill is a prompt and every prompt has a job. If you've read Karpathy's "agentic engineering" framing and wondered what one looks like in the wild, this is one.
+An open-source agentic engineering practitioner's toolkit — **118** skills, 13 subagents, **14** hooks, **17** autonomous SDK agents (8 currently running on launchd by default, 2 opt-in disabled-by-default, 1 manual-trigger), **3 primary domains**, an Obsidian vault, and a Claude Agent SDK runtime, all auto-loaded. Every component is in active use; every scheduled agent has a launchd schedule; every skill is a prompt and every prompt has a job. If you've read Karpathy's "agentic engineering" framing and wondered what one looks like in the wild, this is one.
 
 ## What's Inside
 
@@ -22,6 +22,7 @@ Cross-cutting (no domain CLAUDE.md):
 | **claude-mastery/** | CLI shortcuts, hooks, MCP, settings, tech stack reference (used by all domains) |
 | **vault/** | Obsidian vault with PARA structure, MOCs, prompt library, RAG knowledge, operating-model artifacts |
 | **agents-sdk/** | Autonomous Claude Agent SDK layer (Python + launchd) |
+| **evals/vault-synthesizer/** | 10-case binary eval suite for the vault synthesizer agent (v3.30.1) |
 | **.claude/** | Canonical skills, agents, hooks, settings (auto-loaded) |
 
 ### Design Team (4 Review Agents)

@@ -3,10 +3,11 @@ type: roadmap
 project: prj-job-hunt-2026
 status: draft
 created: 2026-05-06
-last_updated: 2026-05-10
+last_updated: 2026-05-12
 synthesis_sources: [karpathy-sequoia, nate-credentials-opus, nate-credentials-gpt, nate-comprehension-opus, nate-comprehension-gpt]
 amendments:
   - 2026-05-10: Added Task 8 (Eval Suite ship Week 2) + Task 9 (Substack-Drafter agent post-employment). Upgraded Task 6 §I from fluency-only to planned ship. Added Kerouac voice variant test to Decision 4. Updated portfolio count from 5+2 to 6+2+1. See [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md).
+  - 2026-05-12: **Track-C v0 SHIPPED 13 days early.** npm publish + MCP registry publish both live. `@swins/intent-engineering-mcp@0.1.0` on registry.npmjs.org; `com.seanwinslow/intent-engineering@0.1.0` on registry.modelcontextprotocol.io via DNS-verified domain namespace. Task 3 ship-gate items 1–16 closed; 17–19 (Loom + LinkedIn + Substack) remain. Added "Publish + registry flow — frozen reference" subsection to Task 3 capturing the DNS auth mechanics (Ed25519 keypair + TXT record on apex) so the flow is reproducible for the next MCP server without re-derivation.
 ai-context: "Unified roadmap synthesizing Karpathy + Nate × 2 articles × 2 models, mapped onto the existing Phase 0–8 master plan. Portfolio project ideas + concrete implementation plans through 2026-07-04. Amended 2026-05-10 with eval-suite + Substack-drafter additions after Step-0 error-analysis surfaced a 9-day silent regression that reshaped the eval scope."
 ---
 
@@ -289,7 +290,7 @@ git commit -m "docs: add 4Q comprehension artifacts for Phase D typed edges + Ph
 
 **Maps to:** Master plan Phase 4 Tasks 4.1–4.3 (already detailed; this task adds the explanation wrapper).
 
-**STATUS — as of 2026-05-08 (Day 2 of 19, ~7 days ahead of build calendar):** Phases 0–3 (partial) complete. 7 commits pushed to `github.com/seanwinslow28/sw-mcp-intent-engineering`.
+**STATUS — as of 2026-05-12 (Day 6 of 19, 13 DAYS AHEAD of the 2026-05-25 ship date):** Build + publish complete. **npm AND MCP registry both live.** Ship-gate items 1–16 closed. Remaining items 17–19 are launch comms (Loom + LinkedIn + Substack) — Sean executes. 13 commits pushed to `github.com/seanwinslow28/sw-mcp-intent-engineering`.
 
 | Build Phase | Status | Commits | Notes |
 |---|---|---|---|
@@ -297,8 +298,9 @@ git commit -m "docs: add 4Q comprehension artifacts for Phase D typed edges + Ph
 | 1 — Scaffold + `ping` tool | ✅ verified 2026-05-08 | `24e4047` | Smoke-tested in Claude Desktop, `ping` returns `pong`. SDK pinned to `1.29.0`, Stdio transport, MIT license, npm scope `@swins/intent-engineering-mcp` (fallback used because `@swinslow` was taken) |
 | 2 — Three real tools | ✅ verified 2026-05-08 | `b0ae1ce`, `ae5deaa`, `5835bcb`, `abad1d4` | All three tools tested in Claude Desktop with §4–§6 example inputs. Audit returned 4/25 + 3 anti-patterns on §4 spec (ship-gate item 4 ✅); scaffold returned correct YAML for all 3 `kind` values (ship-gate item 5 ✅); retrofit returned differentiated reasoning across 3 distinct SKILL.md files (ship-gate item 6 ✅) |
 | 3 — Hardening Gate A | ✅ done 2026-05-08 | `bc4caa9`, `7bf479a` | Parser autonomous-loop heuristic tightened; scope-lock §6 path fix; MCP Inspector pass clean; 30k pagination round-trip works (token chain `null → 10000 → 20000 → 30000 → null` — ship-gate item 8 ✅); 5-skill audit shows real findings; `prepublishOnly` grep guard active (ship-gate item 13 ✅). **No `console.log` anywhere in `src/`** |
-| 3 — Hardening Gate B | ⏳ pending | — | **Next session:** README per §8 item 9 + `docs/EXPLANATION.md` 4Q artifact + Loom recording (Sean owns recording) |
-| 4 — 117-skill CSV + publish + registry + posts | ⏳ not started | — | Days 14–19 of original calendar. Sean is ahead. |
+| 3 — Hardening Gate B | ✅ done 2026-05-12 | `d101ae6`, `1d25a54`, `456d70d` | README per §8 item 9 (single-sentence pitch, copy-paste-able `claude_desktop_config.json` block, three-tool inventory, connected-server screenshot at `docs/screenshots/intent-engineering-mcp-connected.png`). `docs/EXPLANATION.md` 4Q artifact landed. 118-skill audit CSV (`examples/superuser-pack-retrofit-assessment.csv`) folded into README + EXPLANATION — 24% L1-mvr / 36% L2-structured / 40% L3-full, zero parse errors. **Dogfood result preserved:** intent-engineering SKILL.md scored 23/25 with zero anti-patterns when audited by its own server. |
+| 4 — Publish + registry | ✅ done 2026-05-12 | `95ab4b4`, `92ce6ca`, `123b324` | **npm published** at 2026-05-12T15:47:07Z: `@swins/intent-engineering-mcp@0.1.0` on registry.npmjs.org. Tarball 20.5 kB packed / 73.3 kB unpacked / 13 files. **MCP registry published** same session: `com.seanwinslow/intent-engineering@0.1.0` on registry.modelcontextprotocol.io via DNS-verified domain namespace (NOT `io.github.seanwinslow28/*` — per scope-lock §10.3). Three small fixups landed mid-publish: add `mcpName` + `server.json` (`95ab4b4`), normalize bin path (`92ce6ca`), schema corrections (`123b324`). Mechanics captured in "Publish + registry flow — frozen reference" subsection below — do not re-derive next time. |
+| 5 — Launch comms | ⏳ pending Sean | — | Ship-gate items 17 (90-sec Loom), 18 (Loom plays end-to-end clean), 19 (LinkedIn tagging Anthropic + MCP team + Substack syndication). Tier-A protected; due on or before 2026-05-25. |
 
 **Repo location (locked):** `~/Code-Brain/sw-mcp-intent-engineering/` — pushed to `github.com/seanwinslow28/sw-mcp-intent-engineering`. (Note: original roadmap referenced `~/Code/` — corrected per scope-lock §1 path note.)
 
@@ -313,9 +315,9 @@ git commit -m "docs: add 4Q comprehension artifacts for Phase D typed edges + Ph
 - Add: `~/Code-Brain/sw-mcp-intent-engineering/docs/EXPLANATION.md` (4Q artifact) — **next session**
 - Add: `<personal-site>/src/pages/transactions/intent-engineering-mcp.astro` (deep-dive page) — parallel critical-path
 
-**- [x] Step 1–10: Execute master plan [Phase 4 Tasks 4.1–4.3](../2026-05-04-onwards-and-upwards-plan.md) as written.** ✅ Substantially complete through Phase 3 Gate A. Remaining items (README, EXPLANATION.md, Loom, embed, npm publish, registry submit, announcement posts) tracked in Step 11–14 below.
+**- [x] Step 1–10: Execute master plan [Phase 4 Tasks 4.1–4.3](../2026-05-04-onwards-and-upwards-plan.md) as written.** ✅ Complete through Phase 4 (publish + registry). README, `EXPLANATION.md`, npm publish, and registry submit all landed 2026-05-12 — 13 days ahead of the 5/25 ship date. Remaining items (Loom, `/transactions/` embed, announcement posts) tracked in Step 12–14 below.
 
-**- [ ] Step 11: Add the pre-drafted 4Q `EXPLANATION.md` from Claude-Nate-2 §5.1.**
+**- [x] Step 11: Add the pre-drafted 4Q `EXPLANATION.md` from Claude-Nate-2 §5.1.** ✅ Landed in `d101ae6` (initial 4Q) and `456d70d` (118-skill audit results folded in). The dogfood result (23/25 zero anti-patterns) and the opinionated-heading limitation both made it into the README + EXPLANATION.
 Source: [`claude-nate-prompt-2-analysis.md`](reference-synthesis-docs/claude-nate-prompt-2-analysis.md) §5.1 "MCP Server: vault-knowledge-mcp" block, adapted to `intent-engineering` (swap `find_contradictions` → `analyze_intent_spec`, etc.). The 4Q structure transfers; only the tool names change.
 
 **Two Phase 3 audit findings to incorporate** (captured 2026-05-08 — DO NOT LOSE; these are the highest-leverage talking points uncovered during Phase 3 verification):
@@ -347,7 +349,150 @@ Deep-dive page at `<personal-site>/src/pages/transactions/intent-engineering-mcp
 **- [ ] Step 14: Commit + announce.**
 Master plan Phase 4 Task 4.3 Step 10 covers the announce. Don't over-announce — one focused LinkedIn post tagging Anthropic + MCP folks.
 
-**Verification gate:** 2026-05-25 ship. Loom plays. The MCP server runs in Claude Desktop end-to-end. The `EXPLANATION.md` is in the repo, the `/transactions/` page links to it. **This is the Tier-A protected artifact; ship even if applications slip in Week 3.**
+**Verification gate:** 2026-05-25 ship. Loom plays. The MCP server runs in Claude Desktop end-to-end. The `EXPLANATION.md` is in the repo, the `/transactions/` page links to it. **This is the Tier-A protected artifact; ship even if applications slip in Week 3.** Build + publish legs: ✅ done 2026-05-12. Loom + announce: pending.
+
+---
+
+#### Publish + registry flow — frozen reference (2026-05-12 worked walkthrough)
+
+> **Why this exists.** When `intent-engineering` shipped, the MCP registry publish leg surfaced two non-obvious gotchas (DNS-verified namespace requires a separate auth path from GitHub OAuth; `server.json` schema uses camelCase and caps `description` at 100 chars) plus one npm gotcha (npm 10+ rejects bin paths with `./` prefix). Capturing the exact sequence here so the next MCP server publish (post-employment, or v0.2 of this one) doesn't re-discover them. **If you're publishing a new MCP server, read this section first.**
+
+##### Namespace decision tree (do this BEFORE writing server.json)
+
+Two namespace shapes the registry supports. Pick one — it determines the auth flow.
+
+- **`io.github.<your-handle>/<server-name>`** — derived from GitHub username. Auth via `mcp-publisher login github` (OAuth device flow). Easiest. Use when the GitHub handle is also your brand, or when domain ownership isn't worth setting up.
+- **`com.<your-domain>/<server-name>`** (or `<rev-DNS>/...`) — verified via DNS TXT on a domain you control. Auth via `mcp-publisher login dns --domain <domain> --private-key <hex>`. Use when the GitHub handle has artifacts you don't want baked into a permanent public identifier (e.g., Sean's handle is `seanwinslow28` but the domain `seanwinslow.com` is the brand-facing surface). The intent-engineering MCP uses this path — locked in scope-lock §10.3.
+
+Whichever path you pick, the value goes in **three places that must match exactly**: the `name` field in `server.json`, the `mcpName` field in `package.json`, and (for DNS) the public key in your TXT record. `mcp-publisher` verifies all three links before accepting the payload.
+
+##### The two-leg publish (npm first, then MCP registry)
+
+The order is non-negotiable: npm publishes the actual code; the MCP registry publishes a *pointer* to that npm package. If you flip the order, `mcp-publisher publish` 404s on the npm lookup.
+
+###### Leg 1 — npm publish
+
+Five gotchas surfaced 2026-05-12, all small:
+
+1. **`package.json` must include `"mcpName": "<your-registry-name>"`** as a top-level field. This is what the MCP registry uses to verify the npm package belongs to the registry listing.
+2. **`bin` field paths cannot start with `./`** in npm 10+. Use `"bin": { "<command>": "build/index.js" }`, not `"./build/index.js"`. npm auto-normalizes and warns; cleaner to get it right upfront.
+3. **Scoped packages need `--access=public`** on first publish: `npm publish --access=public`. Without it, npm assumes you meant a private package and errors.
+4. **2FA "auth and writes"** is the secure default. npm will prompt for an OTP interactively, OR you can inline it with `--otp=<6-digit-code-from-authenticator>`. The code rotates every 30s; type fast or paste fast.
+5. **CDN propagation delay (~30s–5min) after publish.** `npm view <pkg>` may 404 immediately post-publish because edge nodes haven't refreshed. Don't panic. The website (`npmjs.com/package/<name>`) typically updates within seconds. `curl -s https://registry.npmjs.org/<pkg>` bypasses npm CLI's local cache.
+
+###### Leg 2 — MCP registry publish via DNS auth
+
+The flow is cryptographically rigorous (Ed25519 signature challenge), not just a shared-token TXT record. Five steps:
+
+**Step 1 — generate an Ed25519 keypair** (one-time per domain; back up the private key forever):
+
+```bash
+mkdir -p ~/.config/mcp-publisher && chmod 700 ~/.config/mcp-publisher
+
+node -e "
+const { generateKeyPairSync } = require('crypto');
+const fs = require('fs');
+const { publicKey, privateKey } = generateKeyPairSync('ed25519');
+const privRaw = privateKey.export({ type: 'pkcs8', format: 'der' }).subarray(-32);
+const pubRaw  = publicKey.export({ type: 'spki',  format: 'der' }).subarray(-32);
+fs.writeFileSync(process.env.HOME + '/.config/mcp-publisher/<your-domain>.key', privRaw.toString('hex'), { mode: 0o600 });
+console.log('Private key saved to: ~/.config/mcp-publisher/<your-domain>.key (chmod 600)');
+console.log('');
+console.log('Add this TXT record on <your-domain>:');
+console.log('  Type:    TXT');
+console.log('  Name:    @  (apex)');
+console.log('  Content: v=MCPv1; k=ed25519; p=' + pubRaw.toString('base64'));
+console.log('  TTL:     Auto');
+"
+```
+
+Format invariants:
+- Private key: **64-character hex string** (raw 32-byte Ed25519 seed, hex-encoded). NOT PEM, NOT base64.
+- Public key in TXT: **base64-encoded raw 32 bytes** (44 chars including `=` padding).
+- TXT record value: **`v=MCPv1; k=ed25519; p=<base64-pubkey>`** — DKIM-style triple, semicolons + spaces matter.
+
+**Step 2 — add the TXT record at the DNS provider** (apex, not a subdomain — per official docs).
+
+For Cloudflare specifically: dash.cloudflare.com → select domain → DNS → Records → Add → Type: TXT, Name: `@`, Content: paste the full `v=MCPv1; k=ed25519; p=...` value with no outer quotes (Cloudflare adds those itself), TTL: Auto. Cloudflare propagates in ~30 seconds.
+
+> **Hostname ambiguity (unresolved as of 2026-05-12):** the official MCP registry docs use the apex (`<your-domain>`). GitHub issue #385 shows a real-world user verifying at `_mcp-registry.<your-domain>`. Apex worked for `seanwinslow.com` 2026-05-12. If a future publish fails with "DNS verification failed" after the apex record propagates, fall back to `_mcp-registry.<your-domain>` as the host name.
+
+**Step 3 — verify propagation:**
+
+```bash
+dig TXT <your-domain> +short
+```
+
+Look for the `"v=MCPv1; k=ed25519; p=..."` line. Other TXT records on the apex (SPF, DMARC, verification tokens) are fine.
+
+**Step 4 — authenticate and publish:**
+
+```bash
+cd ~/Code-Brain/<repo>
+mcp-publisher login dns \
+  --domain <your-domain> \
+  --private-key "$(cat ~/.config/mcp-publisher/<your-domain>.key)"
+mcp-publisher publish
+```
+
+The `$(cat ...)` substitution keeps the raw hex out of shell history.
+
+**Step 5 — verify the listing:**
+
+```bash
+curl -s "https://registry.modelcontextprotocol.io/v0/servers/<your-namespace>/<server-name>" | python3 -m json.tool
+```
+
+(NOT `?name=<...>` as a query param on `/v0/servers` — that endpoint is paginated alphabetically and the param doesn't filter. Use the direct `/v0/servers/<name>` path.)
+
+##### `server.json` schema gotchas (caught by the validator)
+
+The registry validator returns 422 with explicit error messages on bad schemas. Three gotchas worth pre-baking:
+
+- **`description` is capped at 100 chars.** Tight. Don't write a marketing paragraph — write a sentence.
+- **Field names are camelCase, not snake_case.** Specifically `registryType` (not `registry_type`) inside `packages[]`. The shape is `packages: [{ registryType, identifier, version, transport: { type } }]`.
+- **`$schema` URL has a date segment** that the registry updates periodically. As of 2026-05-12 we used `https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json` and it worked. If a future publish hits "invalid schema URL," run `mcp-publisher init` in a scratch directory to see the current canonical URL.
+
+A working `server.json` template (npm/stdio shape):
+
+```json
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "com.<your-domain>/<server-name>",
+  "description": "<sentence under 100 chars>",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/<handle>/<repo>",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@<scope>/<package>",
+      "version": "0.1.0",
+      "transport": { "type": "stdio" }
+    }
+  ]
+}
+```
+
+##### Where the private key lives
+
+`~/.config/mcp-publisher/<your-domain>.key` (chmod 600). Treat it like an SSH private key:
+- **Back up to 1Password / Apple Keychain** immediately after generation. If lost, you must rotate the TXT record (generate new keypair → publish new public key → wait for propagation → re-auth).
+- **Never commit it** to any repo. The keypair-gen script writes it to `~/.config/...` specifically to keep it out of working trees.
+- **The same key authorizes ALL future MCP registry publishes under `com.<your-domain>/*`.** You don't re-generate per server. New server name + existing key + existing TXT record = working publish.
+
+##### Total time budget (worked 2026-05-12)
+
+- Keypair gen: <10 seconds
+- Cloudflare TXT record add + propagation: ~2 minutes
+- `dig` verification: <5 seconds
+- `mcp-publisher login dns`: <5 seconds
+- `mcp-publisher publish`: <5 seconds
+- **Total: ~3 minutes** of active work, gated on DNS propagation.
+
+The work isn't the rate-limiter once you've done it once. Knowing which buttons to press is.
 
 ---
 
@@ -452,7 +597,7 @@ Each gets a concrete decision now or a deferred-to-week-N flag.
 
 ### Task 8 — Vault Synthesizer Eval Suite (NEW 2026-05-10 — ships Friday Week 2, 2026-05-22)
 
-> **Status:** Step 0 (error analysis) ✅ complete 2026-05-10. Substack drafts ✅ complete (Sedaris primary + Kerouac variant). Full build plan ✅ at [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md). Phases 1–7 ready for Claude Code + `obra/superpowers` execution.
+> **Status:** Step 0 (error analysis) ✅ complete 2026-05-10. Substack drafts ✅ complete (Sedaris primary + Kerouac variant). Build plan ✅ at [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md). **Workstream A code shipped ✅ 2026-05-12** at [`evals/vault-synthesizer/`](../../../../evals/vault-synthesizer/) — branch `eval-suite-2026-05-12`. **Workstream B synthesizer patches shipped ✅ 2026-05-12** — suite at 7/10 post-fix (up from 1/10 pre-fix baseline). **Workstream C (Substack-Drafter agent) code shipped ✅ 2026-05-12** — C0-C8 + C10 complete; C9 (supervised pilot drafts) gated on B7. **Pushover keychain credentials added ✅ 2026-05-12** (Sean confirmed via `security add-generic-password` for `com.sean.agents.pushover_user_key` + `com.sean.agents.pushover_api_token`) — operator-action requirement for the new boot check is satisfied; live synthesizer will not fail at boot after merge. **Branch is merge-ready:** 32 commits total, all tests passing (504 unit tests + 33 substack_drafter tests + 7/10 eval suite), CHANGELOG/CLAUDE/README updated to v3.33.0. A13 (Loom) + A14 (Substack publish 2026-05-22) + C9 (3 pilot drafts after B7 gate closes) + B7 itself (5-night live-synth verification window) all remain in Sean's hands as calendar-time tasks.
 
 **Maps to:** Master plan Phase 2 Task 2.4 (publish what already exists) + this roadmap's Task 6 §I (now upgraded to planned ship) + Karpathy synthesis Claim D (eval design as underbuilt next-frontier portfolio piece).
 
@@ -466,29 +611,37 @@ Each gets a concrete decision now or a deferred-to-week-N flag.
 
 **- [x] Step 1: Substack drafts in 2 voice modes.** ✅ Complete 2026-05-10. Sedaris primary at [`2026-05-10-the-night-my-vault-said-nothing.md`](../substack-drafts/2026-05-10-the-night-my-vault-said-nothing.md); Kerouac variant at [`2026-05-10-the-night-my-vault-said-nothing-kerouac-variant.md`](../substack-drafts/2026-05-10-the-night-my-vault-said-nothing-kerouac-variant.md).
 
-**- [ ] Step 2: Bring [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md) into Claude Code + `obra/superpowers` Plan Mode.** Plan Mode produces execution graph from the build plan's Phases 0–7. Review, approve, execute phase-by-phase with verification gates.
+**- [x] Step 2: Bring [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md) into Claude Code + `obra/superpowers` Plan Mode.** Plan Mode produces execution graph from the build plan's Phases 0–7. Review, approve, execute phase-by-phase with verification gates. ✅ Complete 2026-05-12. 23 commits on branch `eval-suite-2026-05-12`. Build plan executed via `subagent-driven-development` skill: A0 (Phase 0 reads) → A0.5 (spike) → A1-A12 (scaffolding through doc updates). 10 cases load; runner.py is ~210 lines with conftest.py providing the agents-sdk import path; fixtures cover 6 mock notes + 3 concept stubs + index parity. CHANGELOG/CLAUDE/README updated per non-negotiable rule (v3.30.1).
 
-**- [ ] Step 3: Synthesizer fix (between Friday Week 2 and Friday Week 3).** Patch [`agents-sdk/agents/vault_synthesizer.py`](../../../../agents-sdk/agents/vault_synthesizer.py) status taxonomy + per-file exception promotion + `model_used` enum + Pushover credential health check + Daily Driver brief consumer warning path. Per build-plan Part A Phase 2.
+**- [x] Step 3: Synthesizer fix (between Friday Week 2 and Friday Week 3).** Patch [`agents-sdk/agents/vault_synthesizer.py`](../../../../agents-sdk/agents/vault_synthesizer.py) status taxonomy + per-file exception promotion + `model_used` enum + Pushover credential health check + Daily Driver brief consumer warning path. Per build-plan Part A Phase 2. ✅ Complete 2026-05-12. Workstream B turned 6 cases green in 5 commits — B1 (model_used enum: `58c23ff`), B2 (run-level status promotion incl. partial-empty taxonomy: `79598f8`), B4 (Pushover boot-time credential check: `b88d56f`), B5 (daily-driver Vault Health WARNING render: `6dda2d9`), B6 (skip_reason refresh for vs-012/013: `2b9f59c`). All 38 existing synthesizer/pushover/daily_driver unit tests still pass; two tests were legitimately updated to assert the corrected post-fix behavior.
 
-**- [ ] Step 4: Re-run eval suite against patched synthesizer.** Confirm baseline pass rate jumps from intentionally-low Phase-4 number (~10%) to the post-fix real number (~70%+). Lock the regression suite. Publish follow-up Substack post Friday Week 3 (2026-05-29) — voice mode TBD per Decision 4 amendment.
+**- [ ] Step 4: Re-run eval suite against live patched synthesizer for 5 consecutive nights.** 5-night gate window opens 2026-05-12; earliest close 2026-05-17, realistic close 2026-05-26+. Target: `concepts_written > 0` on 5 consecutive `vault/health/synth-manifest-*.json` files AND 7+/10 on the suite each morning. Once gate closes, publish the "vault said something again" follow-up post 2026-05-29 (voice TBD per Decision 4 amendment). vs-014/012/013 remain explicitly skipped pending live-LLM infra (vs-014) and runner-path follow-ups (vs-012, vs-013). Workstream C does not depend on this gate closing — it ships default-disabled per kill-switch design.
+
+**Execution log (2026-05-12) — FINAL:**
+- **Workstream A (14 commits):** `dc90f7e` plan ingest → `783bc31` CHANGELOG/CLAUDE/README at v3.30.1. Files at `evals/vault-synthesizer/`: cases.yaml (10 cases), deferred-cases.yaml (11 cases), runner.py (~210 lines), conftest.py, failure-modes.md, EXPLANATION.md, README.md, references.md, last-run.md (auto-generated), traces/{phase-0-reads.md, phase-0.5-spike.md, baseline-run-2026-05-12.md, coded-traces.md, fixtures/}.
+- **Workstream B (8 commits):** `58c23ff` model_used → `2b9f59c` skip_reason refresh. Synthesizer patches at `agents-sdk/agents/vault_synthesizer.py` (`STATUS_*` constants, `MODEL_USED_VALUES` frozenset, `_normalize_model_name`, files_attempted/succeeded counters, end-of-loop status promotion). Pushover boot check at `agents-sdk/lib/pushover.py` (`PushoverConfigurationError` + `ensure_credentials_or_raise`). Daily-driver helper at `agents-sdk/agents/daily_driver.py` (`render_vault_health` standalone, wired into `build_preamble`). All 38 existing synthesizer/pushover/daily_driver unit tests still pass; two legitimately updated to assert post-fix corrected behavior.
+- **Workstream C (10 commits):** `b1775cb` [substack_drafter] config table → `37b5fde` CHANGELOG/CLAUDE/README at v3.33.0. New agent at `agents-sdk/agents/substack_drafter.py` (~370 lines: voice rotation, dryness gate, cluster picker, prompt composer, HybridRouter wrapper, draft writer, main + CLI). 33 TDD tests in `agents-sdk/tests/test_substack_drafter.py`. launchd plist at `agents-sdk/schedules/com.sean.agents.substack_drafter.plist` (Thursday 18:00, opt-in via `INSTALL_SUBSTACK_DRAFTER=1`). `_route()` wired to real HybridRouter via httpx (ollama `/api/generate` + OpenAI-compatible `/v1/chat/completions` branches). Three kill-switch layers: config flag, launchd opt-in, `--dry-run` CLI.
+- **vs-014 skip rationale (decided 2026-05-12):** The output-completeness case (`concepts_written >= 1`) cannot be faithfully exercised with the offline runner. Mocking it to pass would test the formatter, not the synthesizer. Adding a hardcoded "valid concept" mock dict introduces a fake green that doesn't catch the regression the case was designed for. Honest deferral preserves the case as a real regression target for Workstream C's live-run tier. Final ship state: 7 PASS / 0 FAIL / 3 SKIP. Every skip has a `skip_reason` field naming the actual blocker.
+- **Pushover keychain (operator action, 2026-05-12):** Sean added `com.sean.agents.pushover_user_key` + `com.sean.agents.pushover_api_token` to the macOS keychain. The Workstream B boot check now finds creds at synthesizer startup and proceeds normally. Without this, the live nightly synthesizer would have failed at boot every night — which is the correct vs-019 behavior, but operator-action was required to unblock the live system after merge.
+- **Suite is reproducibly green at 7/10 across 5+ runs.** `last-run.md` autogenerates on every pytest invocation via the hooks in `evals/vault-synthesizer/conftest.py`.
 
 **Verification gate:** 2026-05-22 ship. Eval suite directory exists with 7 files + 1 traces directory. `python evals/vault-synthesizer/runner.py` runs without infra errors. `EXPLANATION.md` is recruiter-readable cold in <90 seconds. Loom plays (5 min, unedited). Substack post syndicates the Sedaris draft. This is the **6th flagship portfolio artifact**, slotting between Intent-Engineering MCP (5/25) and Animation Pipeline (6/11).
 
 ---
 
-### Task 9 — Substack-Drafter Agent (NEW 2026-05-10 — POST-EMPLOYMENT BUILD, specced now)
+### Task 9 — Substack-Drafter Agent (NEW 2026-05-10 — EARLY-BUILD APPROVED 2026-05-12)
 
-> **Status:** Specced, default-disabled. Becomes the 7th flagship portfolio artifact when it ships post-employment Q3. Lives at `agents-sdk/agents/substack_drafter.py` — design doc at [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md) Part B.
+> **Status:** Workstream C build approved 2026-05-12 ahead of original "post-employment" schedule. Hard precondition is Task 8 Step 4's 5-night gate (`concepts_written > 0` on 5 consecutive synth manifests), NOT employment status — once the gate closes, the agent has real concept articles to draft from. Default-disabled at three kill-switch layers (config flag, opt-in launchd install via `INSTALL_SUBSTACK_DRAFTER=1`, `--dry-run` flag) so the worst case is a draft sitting in the vault that Sean never reads. Becomes the 7th flagship portfolio artifact when it ships. Lives at `agents-sdk/agents/substack_drafter.py` — design doc at [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md) Part B.
 
 **Maps to:** Operating-model Tier-A truth "agents draft / Sean sends" + Claim G from Part 1 synthesis (live demonstration as non-fakeable interview asset) + Task 9 closes the publishing-cadence loop that Tasks 5 + 6 §D + Task 8 establish.
 
-**Why specced now, built later:** The eval-suite work (Task 8) and the synthesizer fix make this agent possible — the synthesizer must be alive again before there's any synthesis worth drafting from. The publishing-cadence problem is real (8 weeks × 1 post/week needs ~8 hours of writing time on top of an already-tight schedule). The agent closes that loop. But shipping the agent before the 8-week sprint ends violates Tier-A protection of Track-C and the 5:30 PM hard stop. So: spec now (because the spec informs the eval suite's voice-rotation surface), build post-employment.
+**Why early-build approved 2026-05-12:** The original "post-employment" framing was a constraint on Sean's time, not on the agent's design. The agent's real precondition is technical: the synthesizer must be alive and producing concept articles for the agent to have anything to draft from. That precondition is gated by Workstream B's 5-night live verification — not employment status. Once that gate closes, the agent makes the publishing cadence agent-assisted instead of hand-written, which is the rate-limiting step on the publishing strategy that drives the job hunt. Three kill-switch layers (default-disabled config flag, opt-in launchd install, `--dry-run` flag) preserve safety: the worst-case if something goes wrong is a draft file sitting in the vault that Sean never reads. The original spec (line 631-650 below) is unchanged.
 
 **Files (per build plan Part B):**
-- Create (post-employment): `agents-sdk/agents/substack_drafter.py`
-- Create (post-employment): `agents-sdk/schedules/com.sean.substack-drafter.plist`
-- Modify (post-employment): [`agents-sdk/config.toml`](../../../../agents-sdk/config.toml) — `[substack_drafter]` table, default `enabled = false`
-- Modify (post-employment): [`agents-sdk/schedules/install_schedules.sh`](../../../../agents-sdk/schedules/install_schedules.sh) — `INSTALL_SUBSTACK_DRAFTER=1` opt-in flag
+- Create: `agents-sdk/agents/substack_drafter.py`
+- Create: `agents-sdk/schedules/com.sean.substack-drafter.plist`
+- Modify: [`agents-sdk/config.toml`](../../../../agents-sdk/config.toml) — `[substack_drafter]` table, default `enabled = false`
+- Modify: [`agents-sdk/schedules/install_schedules.sh`](../../../../agents-sdk/schedules/install_schedules.sh) — `INSTALL_SUBSTACK_DRAFTER=1` opt-in flag
 
 **Behavior summary:**
 1. Schedule: Thursday 18:00 weekly (gives Friday morning for review + publish)
@@ -505,6 +658,12 @@ Each gets a concrete decision now or a deferred-to-week-N flag.
 **Verification gate (when implementing):** dry-run prints complete prompt; real run produces a draft file with valid frontmatter; voice mode is recognizable in 2/3 sanity-check drafts; cost <$0.10 across 5 real runs; graceful no-op when synthesizer dry; one-command disable works.
 
 **Pre-shipping risk:** None. Spec exists. Nothing on the critical path depends on this agent shipping inside the 8-week sprint.
+
+**Execution status (2026-05-12) — FINAL:**
+- **Branch:** `eval-suite-2026-05-12` (32 commits total: Workstream A's 14 + Workstream B's 8 + Workstream C's 10).
+- **Code complete:** C0 (preconditions check) ✅, C1 (`[substack_drafter]` config table) ✅, C2 (voice-rotation module, 8 tests) ✅, C3 (synthesizer-dryness gate, 7 tests) ✅, C4 (wikilink-density cluster picker, 5 tests) ✅, C5 (prompt composer with voice-skill injection + graceful degradation, 5 tests) ✅, C6 (`_route()` wired to real HybridRouter + `write_draft()` with frontmatter, 3 tests) ✅, C7 (`main()` + `--dry-run` + `_cli()` wrapper, 5 tests) ✅, C8 (launchd plist + `INSTALL_SUBSTACK_DRAFTER=1` opt-in install, plutil-lint clean) ✅, C10 (CHANGELOG/CLAUDE/README at v3.33.0) ✅.
+- **C9 (pilot drafts) pending:** Gated on B7's 5-night gate closing so `vault/knowledge/concepts/` has real concept articles to draft from. Plan: flip `enabled = true` in config.toml → run `python3 agents/substack_drafter.py --dry-run` → run real → repeat 2x with `--voice sedaris` and `--voice vonnegut` → Sean reads each draft cold → if all 3 publishable-with-edits, `INSTALL_SUBSTACK_DRAFTER=1 ./agents-sdk/schedules/install_schedules.sh` installs the launchd plist for Thursday-18:00 weekly cadence.
+- **Kill-switch verification:** CLI smoke-tested 2026-05-12 against the live vault. With `enabled = false` (current default), output is: `[substack_drafter] disabled in config.toml — exit 0 (set enabled = true to opt in)`. Kill-switch layer 1 works correctly.
 
 ---
 
