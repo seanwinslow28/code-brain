@@ -228,3 +228,140 @@ def compose_prompt(*, voice_mode: str, voice_skill_path: Path,
         f"- Do not publish to Substack — this is a draft for Sean to review.\n"
     )
     return {"system": system, "user": user}
+
+
+# --- HybridRouter wrapper + draft writer (Task C6) ---
+from datetime import datetime, timezone
+
+
+def _route(*, task: str, system: str, user: str, max_cost_usd: float = 0.10) -> dict:
+    """Wrap HybridRouter so tests can monkeypatch a single seam.
+
+    The agent's stable interface:
+      In:  task, system, user, max_cost_usd
+      Out: {"text": str, "model_used": str, "cost_usd": float}
+
+    The real HybridRouter pipeline:
+      1. HybridRouter.from_config() reads config.toml routing section.
+      2. router.route(task) → RoutingDecision(machine, model, base_url, runtime, …)
+         — routing only; no LLM call happens here.
+      3. We make the HTTP call to the resolved endpoint:
+         - Ollama (runtime=="ollama"): POST /api/generate with prompt string.
+         - OpenAI-compat (mlx-lm / api): POST /v1/chat/completions with messages.
+
+    Signature notes (from lib/hybrid_router.py):
+      - HybridRouter.route(task: str) is async → RoutingDecision (dataclass)
+      - RoutingDecision fields: machine, model, base_url, runtime, is_fallback, reason
+      - Cost tracking is NOT done by the router; we report 0.0 for local models
+        and a token-estimate stub for API paths.
+
+    The seam is this function: callers use (task, system, user, max_cost_usd);
+    router complexity (async, dataclass coercion, HTTP dispatch) stays here.
+    """
+    import asyncio
+    import tomllib
+
+    import httpx
+
+    from lib.hybrid_router import HybridRouter, WOLUnavailable
+
+    # max_cost_usd is part of the stable agent interface; cost-capping logic
+    # (e.g. token-count estimate for API paths) is a C7 enhancement.
+    _ = max_cost_usd  # noqa: F841
+
+    # Load config from the standard path (same pattern as other agents)
+    config_path = Path(__file__).parent.parent / "config.toml"
+    try:
+        with open(config_path, "rb") as f:
+            config = tomllib.load(f)
+    except (FileNotFoundError, OSError, tomllib.TOMLDecodeError) as exc:
+        raise RuntimeError(f"Could not load agents-sdk/config.toml: {exc}") from exc
+
+    router = HybridRouter.from_config(config)
+
+    # Route the task — async call, run synchronously (matches flush.py pattern)
+    try:
+        decision = asyncio.run(router.route(task))
+    except WOLUnavailable as exc:
+        raise RuntimeError(f"HybridRouter could not reach a machine for task {task!r}: {exc}") from exc
+
+    # Build the prompt payload based on runtime
+    if decision.runtime == "ollama":
+        # Ollama /api/generate takes a single prompt string;
+        # prepend system as a prefix block (same as flush.py pattern)
+        full_prompt = f"<system>\n{system}\n</system>\n\n{user}"
+        payload = {"model": decision.model, "prompt": full_prompt, "stream": False}
+        endpoint = f"{decision.base_url}/api/generate"
+        timeout = 300.0  # drafts can be long
+        resp = httpx.post(endpoint, json=payload, timeout=timeout)
+        resp.raise_for_status()
+        text = resp.json().get("response", "")
+    else:
+        # OpenAI-compatible: mlx-lm, lm-studio, or Claude API
+        messages = [
+            {"role": "system", "content": system},
+            {"role": "user", "content": user},
+        ]
+        payload = {"model": decision.model, "messages": messages, "stream": False}
+        endpoint = f"{decision.base_url}/v1/chat/completions"
+        timeout = 300.0
+        resp = httpx.post(endpoint, json=payload, timeout=timeout)
+        resp.raise_for_status()
+        text = resp.json()["choices"][0]["message"]["content"]
+
+    # Local models are $0.00; API cost tracking is a future enhancement
+    cost_usd = 0.0
+
+    return {
+        "text": text,
+        "model_used": decision.model,
+        "cost_usd": cost_usd,
+    }
+
+
+def write_draft(*, out_dir: Path, slug: str, voice_mode: str,
+                cluster_slugs: list[str], prompt: dict[str, str],
+                max_cost_usd: float = 0.10) -> Path:
+    """Call _route, persist the draft as a markdown file with frontmatter.
+
+    Filename pattern: YYYY-MM-DD-agent-draft-{slug}.md
+    Frontmatter fields: type, voice, source_concepts, generated_at,
+        model_used, cost_usd, status (always pending-review).
+
+    Args:
+        out_dir: Destination directory. Caller is responsible for ensuring it
+            exists; this function does not mkdir.
+        slug: Slug used in the filename. Caller picks (typically cluster_slugs[:2]
+            joined and truncated).
+        voice_mode: One of VOICE_MODES.
+        cluster_slugs: List of source concept slugs (for the frontmatter).
+        prompt: {'system': str, 'user': str} from compose_prompt().
+        max_cost_usd: Per-run cap forwarded to _route.
+
+    Returns:
+        Path to the written draft file.
+    """
+    result = _route(
+        task="substack_draft",
+        system=prompt["system"],
+        user=prompt["user"],
+        max_cost_usd=max_cost_usd,
+    )
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    path = out_dir / f"{today}-agent-draft-{slug}.md"
+    text = result.get("text", "")
+    model_used = result.get("model_used", "unknown")
+    cost_usd = result.get("cost_usd", 0.0)
+    frontmatter = (
+        f"---\n"
+        f"type: substack-draft\n"
+        f"voice: {voice_mode}\n"
+        f"source_concepts: {cluster_slugs}\n"
+        f"generated_at: {datetime.now(timezone.utc).isoformat()}\n"
+        f"model_used: {model_used}\n"
+        f"cost_usd: {cost_usd}\n"
+        f"status: pending-review\n"
+        f"---\n\n"
+    )
+    path.write_text(frontmatter + text)
+    return path
