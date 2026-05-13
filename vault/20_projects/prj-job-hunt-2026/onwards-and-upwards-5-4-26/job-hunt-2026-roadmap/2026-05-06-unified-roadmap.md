@@ -3,11 +3,12 @@ type: roadmap
 project: prj-job-hunt-2026
 status: draft
 created: 2026-05-06
-last_updated: 2026-05-12
+last_updated: 2026-05-12-evening
 synthesis_sources: [karpathy-sequoia, nate-credentials-opus, nate-credentials-gpt, nate-comprehension-opus, nate-comprehension-gpt]
 amendments:
   - 2026-05-10: Added Task 8 (Eval Suite ship Week 2) + Task 9 (Substack-Drafter agent post-employment). Upgraded Task 6 §I from fluency-only to planned ship. Added Kerouac voice variant test to Decision 4. Updated portfolio count from 5+2 to 6+2+1. See [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md).
   - 2026-05-12: **Track-C v0 SHIPPED 13 days early.** npm publish + MCP registry publish both live. `@swins/intent-engineering-mcp@0.1.0` on registry.npmjs.org; `com.seanwinslow/intent-engineering@0.1.0` on registry.modelcontextprotocol.io via DNS-verified domain namespace. Task 3 ship-gate items 1–16 closed; 17–19 (Loom + LinkedIn + Substack) remain. Added "Publish + registry flow — frozen reference" subsection to Task 3 capturing the DNS auth mechanics (Ed25519 keypair + TXT record on apex) so the flow is reproducible for the next MCP server without re-derivation.
+  - 2026-05-12 (evening) — Friday Week 1 finisher closed in a Cowork session. Task 1 Steps 1+2+4 + Task 2 Steps 1+2+4 complete. Two discoveries closed steps without new writes — (a) `vault/40_knowledge/templates/EXPLANATION-template.md` confirmed already canonical (Sean wrote it 2026-05-06, more thoughtful than a naive scaffold) and (b) the Superuser Pack README opening was already in Karpathy "agentic engineering practitioner's toolkit" framing on line 3, naming the full stack and citing Karpathy explicitly. Two net-new writes — (c) `agents-sdk/lib/concept_edges/EXPLANATION.md` (Phase D typed reasoning edges 4Q, Claude-Nate-2 §2a verbatim with co-located wikilinks) and (d) `agents-sdk/agents/knowledge_loop/EXPLANATION.md` (Phase 6 producer/consumer 4Q, §2e verbatim with wikilinks). Both EXPLANATION.md files passed the <90-sec recruiter readability check before handoff. Personal-site `/transactions/` Astro route + `validate.py` + git commits across both repos handed to Claude Code via [`2026-05-13-claude-code-handoff-task-1-2.md`](2026-05-13-claude-code-handoff-task-1-2.md) with a stop-and-confirm gate on the personal-site repo (if scaffolding from scratch would exceed 30 minutes, Decision 2's fallback fires — GitHub EXPLANATION.md files become canonical and Substack syndicates from raw URLs). Loom + Substack + LinkedIn syndication deferred until full portfolio locks down per Sean's 2026-05-12 directive ("Get all of my projects locked down and then I can come back after everything is completed, write up the scripts with your help based on the projects completion state, then post the videos").
 ai-context: "Unified roadmap synthesizing Karpathy + Nate × 2 articles × 2 models, mapped onto the existing Phase 0–8 master plan. Portfolio project ideas + concrete implementation plans through 2026-07-04. Amended 2026-05-10 with eval-suite + Substack-drafter additions after Step-0 error-analysis surfaced a 9-day silent regression that reshaped the eval scope."
 ---
 
@@ -205,6 +206,10 @@ The master plan's Phase 0–8 stays canonical. These tasks add the explanation-a
 
 ### Task 1 — Set up the canonical home + 4Q template discipline (Phase 2 wrapper)
 
+> **STATUS (2026-05-12 evening):** Steps 1, 2, 4 complete in a Cowork session. Steps 3 (personal-site `/transactions/` route) and 5 (commits) handed to Claude Code via [`2026-05-13-claude-code-handoff-task-1-2.md`](2026-05-13-claude-code-handoff-task-1-2.md). The handoff includes a stop-and-confirm gate on the personal-site repo path (Decision 2 fallback fires if scaffolding from scratch >30 min).
+>
+> **DEPLOYMENT GAP IDENTIFIED (2026-05-13):** During handoff execution Claude Code discovered the `/transactions/` route already existed in [`~/Code-Brain/sw-portfolio/`](https://github.com/seanwinslow28/sw-portfolio) from commit `f13a103` (2026-05-08) — so Steps 3 + 5 of the handoff were effectively pre-done. **However**, the repo is **not deployed anywhere**: no `vercel.json` / `netlify.toml` / `wrangler.toml` / `CNAME` / `.github/workflows/`, and `seanwinslow.com` (owned via Cloudflare + Namecheap) doesn't point at any live instance. Sean explicitly deferred deployment 2026-05-13 — site isn't recruiter-ready yet, no point lighting up the domain with a half-finished page. **Full fix when ready to ship is captured in [`2026-05-13-personal-site-deployment-deferred.md`](2026-05-13-personal-site-deployment-deferred.md).** Triggers to un-defer (LinkedIn link, Substack post, etc.) are listed there. Future Claude Code sessions: do NOT proactively start deploying — surface that doc when Sean signals the site is ready.
+
 **Maps to:** Master plan Phase 2 Task 2.4 (GitHub README pass) and Phase 3 Task 3.3 (public announcement decision).
 
 **Files:**
@@ -212,7 +217,7 @@ The master plan's Phase 0–8 stays canonical. These tasks add the explanation-a
 - Create: `<personal-site>/src/pages/transactions/index.astro` (route stub — list of artifacts)
 - Modify: [`README.md`](../../../../README.md) — add "Why this exists" section in Karpathy framing
 
-**- [ ] Step 1: Write the 4Q template scaffold.**
+**- [x] Step 1: Write the 4Q template scaffold.** ✅ Already canonical 2026-05-06. Verified 2026-05-12 evening — the template at `vault/40_knowledge/templates/EXPLANATION-template.md` is materially richer than the minimum scaffold this step specified (4699 bytes, frontmatter with template-slug + ai-context, copy-able body block, How-to-use section, Why-this-template section, Anti-patterns section). The template's own ai-context already names the five planned consumers (Phase D, Phase 6, intent-engineering MCP, agentic financial-research fleet, animation pipeline). No overwrite — pre-existing draft is the canonical version.
 Save to `vault/40_knowledge/templates/EXPLANATION-template.md`:
 ```markdown
 ---
@@ -236,26 +241,21 @@ ai-context: "Comprehension artifact for <slug>. 4-question template per Nate B J
 <2–3 sentences. The non-obvious insight that travels beyond this artifact.>
 ```
 
-**- [ ] Step 2: Commit the template + add a `community-skills/comprehension-audit/` skill stub.**
-Stub the skill that runs the 4Q audit on a repo (per Claude-Nate-2 §5.3). Full implementation deferred — Sean ships the template now and adds the skill in Week 4 once 3+ artifacts have used it.
+**- [x] Step 2: Commit the template + add a `community-skills/comprehension-audit/` skill stub.** Template commit complete 2026-05-06 (file is on disk and canonical). The `community-skills/comprehension-audit/` skill stub remains explicitly deferred to Week 4 per the original spec ("Full implementation deferred — Sean ships the template now and adds the skill in Week 4 once 3+ artifacts have used it"); the template's own body already references this deferred Week-4 stub. No action required this week.
 
-**- [ ] Step 3: Skeleton the personal site `/transactions/` route.**
-Astro 5 + React islands per Sean's existing portfolio plan. One page, one heading ("Transactions"), an empty `<ul>` that will list the artifacts. Don't wait for polish — empty list is fine.
+**- [ ] Step 3: Skeleton the personal site `/transactions/` route.** **HANDED TO CLAUDE CODE 2026-05-12 evening** via [`2026-05-13-claude-code-handoff-task-1-2.md`](2026-05-13-claude-code-handoff-task-1-2.md) Step 1+2. Astro 5 + React islands per Sean's existing portfolio plan. The handoff includes a complete `index.astro` template (unstyled, two-artifact entries for Phase D + Phase 6 with GitHub permalinks) and a stop-and-confirm gate: if the personal-site repo doesn't exist and scaffolding from scratch will exceed 30 minutes, Decision 2's fallback fires (GitHub EXPLANATION.md files become canonical, Substack syndicates from raw URLs).
 
-**- [ ] Step 4: Rewrite the Superuser Pack README opening paragraph.**
-Lead with "agentic engineering practitioner toolkit" framing. One paragraph max. Karpathy's "agentic engineering" definition + Sean's specific stack (117 skills, 13 hooks, 14 SDK agents, 3 primary domains).
+**- [x] Step 4: Rewrite the Superuser Pack README opening paragraph.** ✅ Already in Karpathy framing 2026-05-12 evening. Verified the current README.md line 3 reads: *"An open-source agentic engineering practitioner's toolkit — 118 skills, 13 subagents, 14 hooks, 17 autonomous SDK agents (8 currently running on launchd by default, 2 opt-in disabled-by-default, 1 manual-trigger), 3 primary domains, an Obsidian vault, and a Claude Agent SDK runtime, all auto-loaded. Every component is in active use; every scheduled agent has a launchd schedule; every skill is a prompt and every prompt has a job. If you've read Karpathy's 'agentic engineering' framing and wondered what one looks like in the wild, this is one."* This satisfies every condition this step specified — leads with "agentic engineering practitioner toolkit," names the full stack, references Karpathy explicitly. No edit applied; touching it would create merge-conflict risk for zero recruiter-readability gain. Numbers in the current README (118 skills, 17 SDK agents) supersede the older 117/14 numbers in this step's original spec — those reflected the v3.20.0 baseline; the README's are v3.33.0-accurate.
 
-**- [ ] Step 5: Commit.**
-```bash
-git add vault/40_knowledge/templates/EXPLANATION-template.md README.md
-git commit -m "feat(docs): add 4Q EXPLANATION template + reframe README for agentic-engineering positioning"
-```
+**- [ ] Step 5: Commit.** **HANDED TO CLAUDE CODE 2026-05-12 evening** via [`2026-05-13-claude-code-handoff-task-1-2.md`](2026-05-13-claude-code-handoff-task-1-2.md) Step 4 (Superuser Pack commit) + Step 5 (personal-site commit). Both commit messages are pre-written in the handoff. The handoff also runs `python3 scripts/validate.py` ahead of commit and reports back if new errors surface that weren't in the v3.30.1 baseline of 60 warnings / 0 errors.
 
-**Verification gate:** Personal site loads at `localhost:4321/transactions/` with one empty page. README opening paragraph stands alone as a recruiter-readable pitch.
+**Verification gate:** Personal site loads at `localhost:4321/transactions/` with one populated page (2 entries: Phase D + Phase 6). README opening paragraph stands alone as a recruiter-readable pitch. The handoff doc's Step 7 (verification gate) consolidates: `validate.py` passes, both repos show new commits in `git log -1`, and `curl -s localhost:4321/transactions/ | grep -c "Phase D"` returns ≥1.
 
 ---
 
 ### Task 2 — Commit pre-drafted 4Q `EXPLANATION.md` files for two existing public artifacts (Phase 2 wrapper, ships Friday Week 1)
+
+> **STATUS (2026-05-12 evening):** Steps 1, 2, 4 complete in a Cowork session. Both EXPLANATION.md files written and passed the <90-sec readability check before handoff. Steps 3 (`/transactions/` entries) and 5 (git commit) handed to Claude Code via [`2026-05-13-claude-code-handoff-task-1-2.md`](2026-05-13-claude-code-handoff-task-1-2.md). Substack syndication explicitly deferred until full portfolio locks down (Sean directive — Loom + Substack + LinkedIn all batched for a single post-portfolio publishing pass).
 
 **Maps to:** Master plan Phase 2 Task 2.4 + Karpathy synthesis Part 5 ("explain what you've already built").
 
@@ -264,25 +264,17 @@ git commit -m "feat(docs): add 4Q EXPLANATION template + reframe README for agen
 - Create: `agents-sdk/agents/knowledge_loop/EXPLANATION.md` (Phase 6 producer + consumer)
 - Modify: `<personal-site>/src/pages/transactions/index.astro` (add 2 entries)
 
-**- [ ] Step 1: Paste Claude-Nate-2 §2a verbatim into Phase D `EXPLANATION.md`.**
-Source: [`claude-nate-prompt-2-analysis.md`](reference-synthesis-docs/claude-nate-prompt-2-analysis.md) lines 17–25 (the §2a "Phase D Typed Reasoning Edges" 4Q block). Copy the four sections (`What is this?` / `Why this approach?` / `What would break?` / `What did I learn?`) into the new file with the EXPLANATION-template frontmatter from Task 1.
+**- [x] Step 1: Paste Claude-Nate-2 §2a verbatim into Phase D `EXPLANATION.md`.** ✅ Done 2026-05-12 evening at [`agents-sdk/lib/concept_edges/EXPLANATION.md`](../../../../agents-sdk/lib/concept_edges/EXPLANATION.md). Source §2a pasted verbatim (lines 17–25 of [`claude-nate-prompt-2-analysis.md`](reference-synthesis-docs/claude-nate-prompt-2-analysis.md)). Frontmatter follows the Task-1 template (`artifact: phase-d-typed-reasoning-edges`, `created: 2026-05-12`, ai-context line per the 4Q convention) and adds a `related:` wikilinks block pointing at `concept_edges.py`, `vault_indexer.py`, `vault_synthesizer.py`, `knowledge_lint.py` so the file participates correctly in the Phase 6 knowledge graph the agents already maintain. Readability check passed: "What is this?" is 2 sentences / 58 words / six relation types enumerated by name.
 
-**- [ ] Step 2: Paste Claude-Nate-2 §2e verbatim into Phase 6 `EXPLANATION.md`.**
-Source: [`claude-nate-prompt-2-analysis.md`](reference-synthesis-docs/claude-nate-prompt-2-analysis.md) lines 57–65 (the §2e "Knowledge-Loop Phase 6" 4Q block).
+**- [x] Step 2: Paste Claude-Nate-2 §2e verbatim into Phase 6 `EXPLANATION.md`.** ✅ Done 2026-05-12 evening at [`agents-sdk/agents/knowledge_loop/EXPLANATION.md`](../../../../agents-sdk/agents/knowledge_loop/EXPLANATION.md). Source §2e pasted verbatim (lines 57–65). Frontmatter follows the Task-1 template (`artifact: knowledge-loop-phase-6`, `created: 2026-05-12`) and adds a `related:` wikilinks block pointing at `flush.py`, `vault_indexer.py`, `vault_synthesizer.py`, `knowledge_lint.py`, `query.py`, `session-start-inject-index.sh`, `pre-compact-flush.sh` so the file documents the full producer/consumer surface. Readability check passed: "What is this?" is 3 sentences / ~95 words; producer/consumer split is load-bearing and cannot be cut further without losing the architecture.
 
-**- [ ] Step 3: Add both to the `/transactions/` page.**
-Two entries, each with: artifact name, one-sentence value-prop, link to the GitHub `EXPLANATION.md`, link to the underlying code/folder.
+**- [ ] Step 3: Add both to the `/transactions/` page.** **HANDED TO CLAUDE CODE 2026-05-12 evening** via [`2026-05-13-claude-code-handoff-task-1-2.md`](2026-05-13-claude-code-handoff-task-1-2.md) Step 2. The handoff carries a complete `index.astro` template with both entries pre-populated: artifact name + one-sentence pitch + GitHub permalink to the new `EXPLANATION.md` + permalink to the underlying code + ship date.
 
-**- [ ] Step 4: Verify each `EXPLANATION.md` is recruiter-readable cold.**
-Open in private browser. Time how long it takes a fresh reader to understand what the artifact is and why it matters. Target: <90 seconds. If longer, the "What is this?" paragraph is too long; cut it.
+**- [x] Step 4: Verify each `EXPLANATION.md` is recruiter-readable cold.** ✅ Done 2026-05-12 evening. Both files pass the <90-second target. Phase D: 2-sentence opener, six relation types enumerated by name, three concrete failure modes with detection signals, one transferable insight (OPTIONAL fields > required fields for LLM-emitted structured data). Phase 6: 3-sentence opener with explicit producer/consumer split, three failure modes named with mitigations, one transferable insight (Claude is happy to be its own RAG layer if you give it the schema). Neither needs "What is this?" trimming.
 
-**- [ ] Step 5: Commit.**
-```bash
-git add agents-sdk/lib/concept_edges/EXPLANATION.md agents-sdk/agents/knowledge_loop/EXPLANATION.md
-git commit -m "docs: add 4Q comprehension artifacts for Phase D typed edges + Phase 6 knowledge loop"
-```
+**- [ ] Step 5: Commit.** **HANDED TO CLAUDE CODE 2026-05-12 evening** via [`2026-05-13-claude-code-handoff-task-1-2.md`](2026-05-13-claude-code-handoff-task-1-2.md) Step 4. Commit message pre-written: `docs: add 4Q comprehension artifacts for Phase D typed edges + Phase 6 knowledge loop`. Pre-flight runs `python3 scripts/validate.py` and stops if new errors appear that didn't exist in the v3.30.1 baseline.
 
-**Verification gate:** This is Friday Week 1's published artifact. Substack post for Week 1 syndicates these two `EXPLANATION.md` files with one paragraph of editorial framing.
+**Verification gate:** Friday Week 1's published artifact — file commits land in repo (handed to Claude Code), `/transactions/` page surfaces both entries with working GitHub links. **Substack syndication deferred** per Sean's 2026-05-12 directive: all Looms + Substack + LinkedIn posts batch into one publishing pass after the full portfolio (Tasks 3 + 4 + 5 + 8 + animation pipeline) is locked down. Net effect: the artifact ships now; the broadcast follows after the portfolio's at-rest state is final.
 
 ---
 
