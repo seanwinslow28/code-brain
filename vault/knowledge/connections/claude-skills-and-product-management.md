@@ -4,9 +4,9 @@ type: connection
 connects:
   - Claude Skills
   - Product Management
-  - Automation Pipeline
-created: 2026-05-12
-updated: 2026-05-12
+  - Revenue Integration
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Synthesis
@@ -23,11 +23,11 @@ Evidence pending.
 
 Evidence pending.
 
-### [[Automation Pipeline]]
+### [[Revenue Integration]]
 
 Evidence pending.
 
 ## Implications
 
-- This connection highlights the importance of Product Management in implementing and maintaining automation solutions like Claude Skills.
-- It underscores how automation pipelines are integrated into broader product strategies.
+- Effective product management ensures that AI skills like Claude are developed and delivered in a way that supports business revenue goals.
+- This can shape future strategies for integrating AI products with core monetization strategies.

@@ -2,24 +2,24 @@
 title: "Daily-driver agent"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/README.md
+  - knowledge/connections/prj-job-hunt-2026-and-operating-model-interview.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-An agent designed to be a daily workhorse, integrated into the operating model interview.
+An agent designed to be a daily workhorse, integrated into the Operating-model interview.
 
 ## Context
 
-This agent is part of a broader suite of personal systems for job hunting and task management.
+This agent supports daily job hunting tasks and streamlines work within the Operating-model interview framework.
 
 ## Examples
 
-- Responsible for rendering WARNING messages
-- Part of the operating-model interview
+- Streamlining daily job hunting tasks
+- Integrated into the Operating-model interview
 
 ## Related Concepts
 

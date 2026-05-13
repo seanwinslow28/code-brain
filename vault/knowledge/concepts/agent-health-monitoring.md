@@ -2,10 +2,10 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-12.md
+  - knowledge/index.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
@@ -14,13 +14,13 @@ The process of tracking and evaluating the operational status, performance metri
 
 ## Context
 
-Effective agent health monitoring ensures the system runs smoothly by identifying failures, degraded performance, or misconfigurations early.
+Effective agent health monitoring ensures that autonomous systems remain functional, efficient, and aligned with operational goals.
 
 ## Examples
 
-- The 'vault-synthesizer' agent was healthy and had processed zero concepts, connections, edges, or rejections.
-- The 'knowledge-lint' agent maintained the separation of Tier 1 and Tier 2 concepts, ensuring proper categorization.
+- Daily health checks of agents in automation pipelines
+- Monitoring response times and error rates for agent fleets
 
 ## Related Concepts
 
-[[Fleet Status]] [[Automation Routines]]
+[[Agent Health]] [[Autonomous Agent Fleets]] [[Automation Pipeline]]

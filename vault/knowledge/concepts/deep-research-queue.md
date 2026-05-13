@@ -2,25 +2,25 @@
 title: "Deep Research Queue"
 type: concept
 sources:
-  - 00_inbox/research-queue.md
+  - knowledge/connections/research-workflow-integration.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-A structured list of research questions managed by the `deep-researcher` agent, which processes each question sequentially using Local Deep Research (LDR) with Qwen3-14B and SearXNG to generate topical notes and daily-digest lines.
+A system designed to manage and prioritize deep research tasks across different topics and sources.
 
 ## Context
 
-The Deep Research Queue ensures systematic exploration of topics by prioritizing single-shape questions, avoiding compound or multi-target queries to prevent timeout and citation quality issues.
+This system plays a critical role in organizing complex research workflows for structured data processing and retrieval.
 
 ## Examples
 
-- OpenRouter Python integration patterns for the `agents-sdk/` fleet.
-- Market prediction using historical financial data.
+- Research Workflow Integration
+- Local Deep Research (LDR)
 
 ## Related Concepts
 
-[[Local Deep Research (LDR)]] [[Gemini Deep Research]] [[Research Agents]]
+[[Research Workflow Integration]] [[Local Deep Research (LDR)]]

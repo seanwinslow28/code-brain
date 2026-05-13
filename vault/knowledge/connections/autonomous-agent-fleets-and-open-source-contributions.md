@@ -4,14 +4,14 @@ type: connection
 connects:
   - Autonomous Agent Fleets
   - Open-Source Contributions
-  - Product Management
-created: 2026-05-12
-updated: 2026-05-12
+  - Automation Routines
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Synthesis
 
-Sean's work with Autonomous Agent Fleets is complemented by his Open-Source Contributions, driving innovation and accessibility.
+Autonomous agent fleets can be leveraged to enhance and contribute to open-source projects through structured automation workflows.
 
 ## Threads
 
@@ -23,11 +23,11 @@ Evidence pending.
 
 Evidence pending.
 
-### [[Product Management]]
+### [[Automation Routines]]
 
 Evidence pending.
 
 ## Implications
 
-- This connection shows how Open-Source Contributions can promote the wider adoption and development of Autonomous Agent Fleets.
-- Product Management may leverage Open-Source Contributions to enhance automation strategies.
+- Leveraging agent fleets for open-source projects can improve efficiency in code review and issue resolution.
+- Automation routines ensure that these contributions follow consistent development standards.

@@ -2,24 +2,23 @@
 title: "Pushover keychain creds"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/README.md
+  - knowledge/connections/substack-drafter-agent-and-pushover-keychain-creds.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-A credential store for Pushover, a service used to send push notifications.
+Credentials used for integrating with Pushover, a notification service that provides real-time alerts to users.
 
 ## Context
 
-The secure handling of these credentials is essential for maintaining trust in personal systems and alerting mechanisms.
+These credentials are essential for alerting users about content drafts in real time, improving workflow efficiency.
 
 ## Examples
 
-- Done on 2026-05-12
-- Resides in com.sean.agents.pushover_user_
+- Used by Substack-Drafter agent for real-time notifications
 
 ## Related Concepts
 
