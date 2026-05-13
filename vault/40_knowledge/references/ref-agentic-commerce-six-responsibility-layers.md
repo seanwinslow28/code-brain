@@ -8,9 +8,13 @@ created: 2026-05-13
 description: "Watch now | For most of the internet’s history, a purchase has been a human action that everyone in the chain could see."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - agentic-commerce
+  - agent-architecture
+  - product-management
+type: reference
+status: draft
+domain: [product-management, claude-mastery]
+ai-context: "Nate Jones's breakdown of the six commercial responsibility layers (discovery, authorization, payment credential, settlement, merchant relationship, governance) that agentic commerce splits the old one-click purchase into, plus the ACP-vs-UCP protocol-war framing and a paste-ready responsibility-layer audit prompt."
 ---
 For most of the internet’s history, a purchase has been a human action that everyone in the chain could see. A person clicked a button on a merchant’s site. A payment credential moved through a processor. A network or wallet weighed the risk. The merchant took responsibility for the order. The records were imperfect, but everyone agreed on the shape of the evidence: a human was present, a page was shown, a credential was used, a final action was taken.
 
