@@ -2,24 +2,25 @@
 title: "Autonomous Agent Fleets"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_AI_PM.md
+  - knowledge/index.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-A group of autonomous agents that operate independently to perform specific tasks, often used for automation.
+A group of self-organizing agents that collaborate, scale dynamically, and execute complex tasks collectively.
 
 ## Context
 
-Autonomous Agent Fleets are essential in agentic engineering, where tasks can be executed without constant human supervision.
+Autonomous agent fleets are often used for deep research, automation pipelines, and open-source contributions.
 
 ## Examples
 
-- 14-agent autonomous SDK fleet
+- Fleets of agents contributing to Open-Source projects
+- Agent swarms for competitive analysis
 
 ## Related Concepts
 
-[[Open-Source Contributions]] [[Product Management]]
+[[Automation Pipeline]] [[Research Agents]] [[Open-Source Contributions]]

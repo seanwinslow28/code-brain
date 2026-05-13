@@ -2,25 +2,25 @@
 title: "Automation Routines"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-12.md
+  - knowledge/index.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-Scheduled or triggered tasks designed to maintain system functionality, including knowledge indexing, synthesis, research digestion, and linting.
+Predefined sequences of actions performed by agents to achieve specific goals or outcomes, often designed for efficiency and scalability.
 
 ## Context
 
-Automation routines are essential for uninterrupted knowledge management and daily operations, ensuring that manual effort is minimized.
+Automation routines form the basis of many AI-driven workflows, including daily routine automation and research pipelines.
 
 ## Examples
 
-- The 'vault-indexer' agent ran successfully on May 12, processing 722 chunks with no errors.
-- The 'deep-researcher' agent queued a digest of research data, maintaining continuous research flow.
+- Scheduled data-crawl routines
+- Agent-driven content synthesis
 
 ## Related Concepts
 
-[[Fleet Status]] [[Agent Health Monitoring]]
+[[Daily Routine Automation]] [[Automation Pipeline]] [[Agent Health]]

@@ -4,14 +4,14 @@ type: connection
 connects:
   - Agent Health
   - Daily Routine Automation
-  - Fleet Status
-created: 2026-05-12
-updated: 2026-05-12
+  - Automation Pipeline
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Synthesis
 
-The health of agents like daily-driver morning directly impacts the success of daily routines, such as generating a daily note.
+Maintaining agent health is crucial for supporting the consistent execution of daily routine automation tasks.
 
 ## Threads
 
@@ -23,11 +23,11 @@ Evidence pending.
 
 Evidence pending.
 
-### [[Fleet Status]]
+### [[Automation Pipeline]]
 
 Evidence pending.
 
 ## Implications
 
-- Improving daily-driver health ensures consistent generation of daily notes.
-- Monitoring fleet status helps identify issues in agent performance affecting routine automation.
+- A robust health monitoring system ensures that daily routine automation remains uninterrupted.
+- Poor agent health could lead to task failures and productivity drops in automation workflows.

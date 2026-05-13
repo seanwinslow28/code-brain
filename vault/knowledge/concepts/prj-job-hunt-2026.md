@@ -2,26 +2,25 @@
 title: "prj-job-hunt-2026"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/README.md
+  - knowledge/connections/vault-synthesizer-eval-suite-and-synthesizer-fix.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-A personal project to transition from The Block layoff to a new career, targeting AI PM / Technical PM / Creative PM roles in Boston or remote.
+A project focused on job hunting in 2026, likely involving elements like personal branding, networking, and optimizing professional tools.
 
 ## Context
 
-This is a strategic effort to move forward after a layoff, with plans for resume crafting, networking, and leveraging personal systems.
+This project is informed by the results of the Vault Synthesizer Eval Suite and is supported by the Synthesizer fix to meet performance benchmarks.
 
 ## Examples
 
-- Layoff occurred on 2026-05-04
-- Target roles: AI PM / Technical PM / Creative PM
-- Repo migration from Block to job-hunt completed on 2026-05-04
+- Informed by results from the Vault Synthesizer Eval Suite
+- Supported by improvements made via the Synthesizer fix
 
 ## Related Concepts
 
-[[Operating-model interview]] [[Vault Synthesizer Eval Suite]] [[Substack-Drafter agent]]
+[[Vault Synthesizer Eval Suite]] [[Synthesizer fix]]

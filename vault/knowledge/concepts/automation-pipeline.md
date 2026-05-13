@@ -2,25 +2,25 @@
 title: "Automation Pipeline"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_AI_PM.md
+  - knowledge/index.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-A system built to automate manual tasks through integrated tools such as Zapier and Jira.
+A structured workflow that enables agents to autonomously execute tasks in sequence, including data processing, analysis, and reporting.
 
 ## Context
 
-The Automation Pipeline is vital for reducing workload, streamlining operations, and enhancing productivity.
+Automation pipelines are essential for ensuring seamless execution of agent routines, especially in large-scale operations.
 
 ## Examples
 
-- AdOps RevOps automation pipeline
-- 11 Zapier workflows
+- Data ingestion and processing pipelines
+- Agent-driven reporting systems
 
 ## Related Concepts
 
-[[Product Management]] [[Claude Skills]]
+[[Automation Routines]] [[Autonomous Agent Fleets]] [[Agent Health Monitoring]]

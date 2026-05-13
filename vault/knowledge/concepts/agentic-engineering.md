@@ -2,25 +2,25 @@
 title: "Agentic-Engineering"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume.md
+  - knowledge/index.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-A field focused on building autonomous systems that can perform tasks with minimal human intervention, using AI agents and tools to execute complex workflows.
+The practice of designing, building, and managing autonomous agents that can self-configure, self-optimize, and execute tasks with minimal human oversight.
 
 ## Context
 
-Agentic-engineering is a rapidly growing domain due to its potential to streamline processes, reduce manual effort, and drive innovation in product development.
+Agentic-engineering is the backbone of modern automation and AI systems that operate autonomously, such as research agents or daily-note generation systems.
 
 ## Examples
 
-- Developed a 14-agent autonomous SDK fleet
-- Built the 117-skill Claude Code Superuser Pack.
+- Designing self-learning agent fleets
+- Building autonomous agents for daily-drive routines
 
 ## Related Concepts
 
-[[AI Product Manager]] [[Confluence Overhaul Plan]]
+[[Automation Routines]] [[Autonomous Agent Fleets]] [[AI Product Manager]]

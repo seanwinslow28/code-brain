@@ -2,25 +2,25 @@
 title: "Indexing and Synthesis"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/fleet-state.md
+  - knowledge/connections/vault-maintenance-and-knowledge-lint.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-The process of organizing raw data (indexing) into coherent knowledge chunks and combining them to form new insights or connections (synthesis).
+The process of organizing raw data into coherent knowledge chunks (indexing) and combining them to form new insights or connections (synthesis).
 
 ## Context
 
-Indexing ensures knowledge is searchable, while synthesis ensures it is applied and connected effectively to other parts of the knowledge base.
+Indexing and synthesis are core processes that ensure knowledge is well-structured, organized, and usable for further reasoning or application.
 
 ## Examples
 
-- vault-indexer - chunks=722, embeddings=722
-- vault-synthesizer - concepts=0 connections=0 edges=0
+- Organizing unstructured information into categorized knowledge chunks.
+- Combining indexed data to form complex insights.
 
 ## Related Concepts
 
-[[Vault Maintenance]] [[Agent Health]] [[Fleet Status]]
+[[Vault Maintenance]] [[knowledge-lint]]

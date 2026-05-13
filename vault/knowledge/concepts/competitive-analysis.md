@@ -2,25 +2,25 @@
 title: "Competitive Analysis"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_AI_PM.md
+  - knowledge/connections/system-constraints.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-The evaluation of competitors within a market or industry to identify strengths, weaknesses, and opportunities.
+Competitive Analysis involves studying competitors' strategies, products, and positioning to inform better business decisions.
 
 ## Context
 
-Competitive Analysis is important for positioning products effectively in the market, such as Block Pro 2.0.
+This analysis is vital for establishing an effective market positioning strategy that differentiates products from competitors.
 
 ## Examples
 
-- Block Pro 2.0 product audit
-- .co homepage redesign competitive visual audit
+- Foundation for Market Positioning
+- Informs business decisions
 
 ## Related Concepts
 
-[[Product Management]] [[Market Positioning]]
+[[Market Positioning]] [[Product Management]] [[System Constraints]]
