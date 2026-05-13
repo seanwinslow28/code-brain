@@ -2,24 +2,24 @@
 title: "Synthesizer fix"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/README.md
+  - knowledge/connections/vault-synthesizer-eval-suite-and-synthesizer-fix.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-A patch to the Vault Synthesizer agent in agents-sdk, addressing status taxonomy and model_used enum.
+A set of modifications or updates applied to a synthesizer to resolve issues identified by the Vault Synthesizer Eval Suite.
 
 ## Context
 
-The fix improves performance by allowing the Vault Synthesizer to pass 7/10 test cases post-fix.
+This fix is directly influenced by evaluations from the Vault Synthesizer Eval Suite and ensures that performance benchmarks are met for project goals.
 
 ## Examples
 
-- 8 commits applied on agents-sdk/agents/vault_synthesizer.py
-- Post-fix success rate jumps to 7/10
+- Addresses performance issues identified by the Vault Synthesizer Eval Suite
+- Ensures that project goals are met
 
 ## Related Concepts
 

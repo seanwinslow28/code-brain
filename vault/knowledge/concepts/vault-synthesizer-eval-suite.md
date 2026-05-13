@@ -2,25 +2,25 @@
 title: "Vault Synthesizer Eval Suite"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/README.md
+  - knowledge/connections/vault-synthesizer-eval-suite-and-synthesizer-fix.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-A suite of 10 test cases used to evaluate the Vault Synthesizer, a component in agents-sdk.
+A tool used to evaluate the performance of a synthesizer, identifying any issues or inefficiencies in its operation.
 
 ## Context
 
-This evaluation ensures that the Vault Synthesizer meets certain performance and accuracy benchmarks.
+This tool is essential for ensuring that synthesizers meet the required performance benchmarks, which supports project goals such as prj-job-hunt-2026.
 
 ## Examples
 
-- Code complete on 2026-05-12
-- Suite achieves baseline of 1/10 at ship-state
+- Identifies performance issues in synthesizers
+- Used to evaluate the Synthesizer fix
 
 ## Related Concepts
 
-[[prj-job-hunt-2026]] [[Synthesizer fix]]
+[[Synthesizer fix]] [[prj-job-hunt-2026]]

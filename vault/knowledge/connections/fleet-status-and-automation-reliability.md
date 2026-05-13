@@ -5,13 +5,13 @@ connects:
   - Fleet Status
   - Automation Reliability
   - Agent Health
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Synthesis
 
-The fleet status report highlights the operational health of agents, which directly correlates with automation reliability.
+The fleet status report highlights agent operational health, which directly correlates with automation reliability.
 
 ## Threads
 
@@ -29,5 +29,4 @@ Evidence pending.
 
 ## Implications
 
-- Ensuring high automation reliability requires consistent fleet status monitoring.
-- A low agent health score may indicate underlying issues affecting automation.
+- Improved fleet status monitoring can enhance automation reliability by identifying and resolving agent issues promptly.
