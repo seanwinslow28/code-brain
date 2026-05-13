@@ -1,0 +1,310 @@
+---
+type: retrofit-plan
+project: prj-job-hunt-2026
+artifact: vault-synthesizer-v2
+created: 2026-05-13
+status: tier-1-shipped-awaiting-nightly-run
+companion_artifacts:
+  - 2026-05-10-eval-suite-build-plan.md   # the eval suite this retrofit moves the needle on
+sprint_epoch: 2026-05-04
+related_intent_skill: .claude/skills/intent-engineering/SKILL.md
+ai-context: "Vault Synthesizer v2 retrofit plan. Born 2026-05-13 from a query.py diagnostic session that proved the v1 synthesizer produces shallow, cluster-biased, duplicate-prone output. Four-tier remediation grounded in 2025-2026 RAG research (TopClustRAG, EDC, Karpathy LLM Wiki, Anthropic quote-first prompting). Tier 1 ships first as a prompt + formatter fix. Future Claude sessions checking synthesizer progress should read this file's status block first."
+---
+
+# Vault Synthesizer v2 — Retrofit Tiers
+
+> **Future Claude / future Sean reading this:** check the **Status Tracker** at the bottom for what's done and what's next. The intent spec is the contract; the four tiers are sequenced implementations. Tier 1 is prompt + formatter only (low risk, instant rollback). Tiers 2-4 add new dependencies and execution stages — do not skip ahead.
+
+---
+
+## Why this exists
+
+On 2026-05-13 morning, after a clean nightly synth run (203 concepts, 111 connections, 186 typed edges, status=ok), Sean and Claude ran [`scripts/query.py`](../../../../../agents-sdk/scripts/query.py) with discovery questions designed to test whether the synthesizer was producing cross-domain insight or just dedup'd noise. **It was producing noise.**
+
+Specific evidence:
+
+1. **Cluster collapse.** Of 10 chunks retrieved per query, 6-7 always came from the agent-health/automation-reliability cluster — the densest region of the concept space. The cross-domain bridging the synthesizer is supposed to deliver (life-systems × creative-studio × job-hunt × Superuser Pack) never happened.
+2. **"Evidence pending" hardcoded.** Discovered while reading [`agents-sdk/agents/vault_synthesizer.py:183`](../../../../../agents-sdk/agents/vault_synthesizer.py#L183) — `format_connection_article` literally writes `"Evidence pending."` as the body of every connection thread. The LLM never gets to fill it. This is a formatter defect, not a prompt-engineering problem.
+3. **Slug duplication.** Same idea emitted under multiple slugs: `daily-drive-agent` vs `daily-driver-agent`, five vibe-coding variants, `daily-note-gener` (truncated mid-word), `agent-health` vs `agent-health-monitoring`. The synthesizer has no canonicalization step.
+4. **Vague output schema.** The current prompt asks for `"definition: 2-3 sentences"` and `"examples: concrete from source material"` — no verbatim-quote requirement, no source-citation anchor, no cross-domain preference. Output is generic-LLM-restating-prompt shape.
+5. **Weak retrieval query.** `retriever(primary_text[:2000], top_k=5)` uses the first 2000 chars of the source file — usually frontmatter + intro — as the embedding query. Pure cosine, no MMR or diversity.
+
+These four defects mean the synthesizer is producing the tidy-looking output Sean called "bare bones" — surface area without depth, breadth without bridges.
+
+## Research grounding (do not skip — these patterns inform every tier)
+
+Five named patterns from 2024-2026 production RAG / knowledge-synthesis work map onto our defects. Sources are linked so future-Claude can verify the technique rather than trusting this doc.
+
+| Defect | Pattern | Source |
+|---|---|---|
+| Densest-cluster retrieval bias | **TopClustRAG** — retrieve top-50 → HDBSCAN cluster → sample 2-3 per cluster | [SIGIR 2025](https://arxiv.org/html/2506.15246v1) |
+| Cluster-aware k-selection | **CAR** — dynamic k per query density | [arXiv 2511.14769](https://arxiv.org/abs/2511.14769) |
+| "Evidence pending" / shallow synthesis | **Quote-first `<quotes>` XML block** before any prose | [Anthropic prompting guide](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) |
+| Slug duplication | **EDC — Extract, Define, Canonicalize** — cosine-merge at >0.85 before write | [arXiv 2404.03868](https://arxiv.org/abs/2404.03868) |
+| No cross-domain discovery | **Karpathy LLM Wiki** — `cross_domain_connections[]` requiring different PARA folder | [Karpathy gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) · [LLM Wiki v2](https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2) |
+| Multi-pass synthesis topology | **MA-RAG** — Planner → Extractor → QA chain-of-thought | [arXiv 2505.20096](https://arxiv.org/abs/2505.20096) |
+
+The full research report is preserved in the session transcript at task `a5433f9b90fe46067` (2026-05-13).
+
+---
+
+## Intent Spec — Vault Synthesizer v2
+
+*Built using the [intent-engineering skill](../../../../../.claude/skills/intent-engineering/SKILL.md) 9-section template. This spec is the contract every tier implements against.*
+
+### 1. Objective
+
+Surface **non-obvious cross-domain patterns** across Sean's vault (life-systems × creative-studio × job-hunt × Superuser Pack infra) so Sean discovers ideas, contradictions, and project leverage he wouldn't notice manually. When facing trade-offs, **prioritize cross-domain discovery and evidentiary grounding** over breadth-of-coverage or output volume.
+
+### 2. User Goal
+
+Sean wants the vault to function as **a thinking partner that compounds knowledge over time** — connecting webclips, research, daily notes, references, and operating-model artifacts into a graph that surfaces things he didn't realize. Currently struggles with: shallow auto-generated concepts that read like restated prompts, duplicate slugs for the same idea, and zero cross-domain bridge articles.
+
+### 3. Desired Outcomes
+
+1. Every concept article contains **≥2 verbatim quotes** from distinct source files (no `"Evidence pending"` strings exist anywhere in `vault/knowledge/`).
+2. **≥30% of connection articles are cross-cluster** — they wikilink concepts that originate in different PARA folders (job-hunt × creative-studio, life-systems × Superuser Pack, etc.).
+3. **Zero near-duplicate slugs** — no two concept files have definition-embedding cosine similarity >0.85.
+4. Sean can run `query.py` on a discovery question (e.g., "what cross-domain pattern haven't I named?") and get an answer that cites chunks from **≥2 different top-level vault folders**.
+
+### 4. Health Metrics
+
+While pursuing the outcomes above, these must NOT degrade:
+
+- **Truth anchoring** — quotes must be byte-for-byte exact substrings of cited source files. If quote fails substring validation → article rejected, not written.
+- **Run duration** — must stay under 45 min/run (current ceiling). If cluster+per-cluster passes blow the budget → fall back to single-pass with quote-first prompt.
+- **Connection authenticity** — cross-cluster wikilinks must be semantically real. If a cross-link's chunk-pair cosine similarity is <0.30 → drop the connection. Catches "fake cross-domain" hallucinations.
+- **Cost** — stays at $0.00/run (Qwen3-14B local). If forced to Sonnet fallback >2 runs/week → alert Sean.
+
+### 5. Strategic Context
+
+- **System role:** Nightly producer in the knowledge loop (SessionEnd flush → indexer → synthesizer → lint → SessionStart inject). **The only place cross-domain synthesis happens.**
+- **Upstream:** `vault_indexer` (embed index over all `.md` except `daily/` + system dirs), `vault/.vault-index.db` chunks table.
+- **Downstream consumers:** `scripts/query.py` (Q&A tier), `knowledge_lint.py` (Sunday quality gates), `daily_driver.py` morning brief, SessionStart injection.
+- **Business context:** Vault-as-SSoT is *the* extra-hour leverage point named in both creative-studio + life-systems operating models. This agent's quality directly determines whether the vault is a thinking partner or a noisy dump.
+
+### 6. Constraints
+
+**Steering (prompt layer):**
+
+- Prefer cross-cluster connections over within-cluster ones when both are available.
+- When uncertain whether a concept already exists, **search first, write second**.
+- When a quote can't be extracted verbatim, **drop the claim** rather than paraphrase.
+
+**Hard (architecture layer):**
+
+- **Never write a concept file with definition-cosine >0.85 to an existing concept** — enforced by pre-write embedding check (Tier 3).
+- **Never write an article body containing the string `"Evidence pending"`** — enforced by post-LLM lint, body discarded (Tier 1).
+- **Never claim a quote that fails substring match against source** — enforced by validator, article rejected + logged (Tier 1).
+- Budget cap stays at 45 min wall-clock + $0.00 USD → enforced in `run_synthesis` ([line 338](../../../../../agents-sdk/agents/vault_synthesizer.py#L338)).
+
+### 7. Decision Authority
+
+- **Full autonomy:** writing concept/connection articles, regenerating index, inserting `concept_edges` rows, merging near-duplicate slugs at cosine >0.85.
+- **Guarded autonomy:** LLM-judge call on 0.70–0.85 cosine ambiguous pairs (logged, capped at 5/run).
+- **Proposal-first:** none — this agent is fully autonomous.
+- **Human-required:** changing corpus scope (which folders feed input), changing the intent spec itself, changing canonicalization thresholds.
+
+### 8. Edge Cases
+
+- **Cluster count <3 in candidate set** → fall back to single-pass with quote-first prompt; don't force fake clusters.
+- **All clusters live in one PARA folder** → write articles but skip cross-domain connection pass; log `"no cross-domain candidates this run"` to manifest.
+- **Quote substring validation fails for all candidate quotes** → reject the article, increment `rejected_count`, log source file for next-run debugging.
+- **Embedding similarity check fails (db missing or empty)** → fall back to slug-string-match canonicalization (Levenshtein on slug).
+- **MBP asleep / Qwen3-14B unreachable** → existing `WOLUnavailable` path, fall to Sonnet 4.6 with cost-cap; if cost-cap hits, write `status: success-empty` and exit.
+
+### 9. Stop Rules & Verification
+
+**Halt immediately when:**
+
+- Pushover creds missing ([line 360](../../../../../agents-sdk/agents/vault_synthesizer.py#L360)) — already enforced.
+- Budget exhausted mid-pass — write `status: partial-empty`, exit cleanly.
+
+**Verification:**
+
+- **Eval suite gate:** vs-014 (≥2 wikilinks) + new **vs-022** (no `Evidence pending` string in any vault/knowledge/ file) + new **vs-023** (cross-cluster connection rate ≥30%) must pass before run is marked OK.
+- **Per-run manifest checks:** `concepts_written > 0`, no slug-collision warnings, cross-cluster rate logged.
+- **Daily smoke test:** `daily_driver` morning brief reads manifest and surfaces if any health metric trended wrong.
+
+---
+
+## Four-Tier Implementation Plan
+
+### Tier 1 — Prompt + formatter retrofit (90 min, ships first)
+
+**What it changes:** Pure text/data — no new dependencies, no new code paths, instant rollback.
+
+**Files & line refs:**
+
+1. **[agents-sdk/agents/vault_synthesizer.py:278-328](../../../../../agents-sdk/agents/vault_synthesizer.py#L278)** — rewrite `_build_synthesis_prompt`:
+   - Add quote-first `<quotes>` block requirement (≥2 verbatim quotes per concept, ≥3 per connection)
+   - Add canonicalization instruction with current `vault/knowledge/index.md` titles injected: *"If a concept matches an existing one in this index, REUSE the exact slug — do not invent a new name."*
+   - Add cross-domain instruction: *"Prefer connections whose member concepts originate in different top-level vault folders (life-systems, creative-studio, job-hunt-2026, 40_knowledge, 05_atlas)."*
+   - Increase chunk excerpt from 200 → 800 chars (still cheap)
+   - Ban `"Evidence pending"` explicitly with a forbidden-phrase list
+
+2. **[agents-sdk/agents/vault_synthesizer.py:174-197](../../../../../agents-sdk/agents/vault_synthesizer.py#L174)** — fix `format_connection_article`:
+   - Add `evidence: dict[str, list[str]]` parameter — maps concept title → list of verbatim quotes from source files
+   - Replace `f"### [[{c}]]\n\nEvidence pending."` with rendered evidence quotes per thread
+   - **This is the actual structural fix** — "Evidence pending" was hardcoded, not LLM output.
+
+3. **[agents-sdk/agents/vault_synthesizer.py:134-135](../../../../../agents-sdk/agents/vault_synthesizer.py#L134)** — extend `validate_article_body`:
+   - Reject any body containing `"Evidence pending"` substring (defense in depth)
+   - Reject any body containing `"(to be filled)"` placeholder
+
+4. **Update JSON schema in prompt** to require per-concept `evidence` arrays in connection objects:
+   ```json
+   "connections": [{
+     "title": "...",
+     "synthesis": "...",
+     "concepts": ["Concept A", "Concept B", "Concept C"],
+     "evidence": {
+       "Concept A": ["verbatim quote from source", "another verbatim quote"],
+       "Concept B": ["verbatim quote", "..."]
+     },
+     "implications": [...]
+   }]
+   ```
+
+**Verification:**
+- Run existing eval suite locally: `cd agents-sdk && PYTHONPATH=. .venv/bin/python3 -m pytest tests/test_vault_synthesizer.py -v` — must stay green.
+- Wait for next nightly 2:30 AM synth run.
+- Re-run cluster-diversity query: `cd agents-sdk && PYTHONPATH=. .venv/bin/python3 scripts/query.py "Find 3 themes from THREE DIFFERENT concept clusters..."`
+- **Pass signal:** answer cites chunks from ≥2 different top-level vault folders; `grep -r "Evidence pending" vault/knowledge/` returns zero matches after the next synth run regenerates files.
+
+**Rollback:** `git checkout agents-sdk/agents/vault_synthesizer.py` — pure text revert.
+
+**Expected impact:** kills "Evidence pending" (structural). Kills shallow output (quote-first forcing). Kills most slug dupes (canonicalization instruction with index injection). Does NOT fix retrieval bias — that's Tier 2.
+
+---
+
+### Tier 2 — Cluster-and-sample retrieval (4 hrs, after Tier 1 stable)
+
+**Trigger:** Implement after Tier 1 has run successfully for ≥3 consecutive nights AND tomorrow's query.py re-run still shows agent-health-cluster dominance in the consulted chunks.
+
+**What it changes:** Adds `hdbscan` dependency. Modifies retrieval signature. Larger blast radius than Tier 1.
+
+**Pattern:** TopClustRAG ([SIGIR 2025](https://arxiv.org/html/2506.15246v1))
+
+**Files & changes:**
+
+1. **[agents-sdk/agents/vault_synthesizer.py:405](../../../../../agents-sdk/agents/vault_synthesizer.py#L405)** — replace single retriever call:
+   - Retrieve top-50 by cosine (not top-5)
+   - Cluster the 50 embeddings with HDBSCAN (`min_cluster_size=3`)
+   - Sample 2-3 chunks per cluster → diversified candidate set of ~10-15 chunks
+   - **Better query:** instead of `primary_text[:2000]`, extract H1/H2 headings + first paragraph + frontmatter `tags`/`type` from the primary file; concatenate as the embedding query.
+
+2. **New file: `agents-sdk/lib/retrieval_diversity.py`** — `cluster_and_sample(embeddings, k_per_cluster=2)` helper.
+
+3. **[agents-sdk/pyproject.toml](../../../../../agents-sdk/pyproject.toml)** — add `hdbscan>=0.8.40` to dependencies.
+
+4. **New test:** `agents-sdk/tests/test_retrieval_diversity.py` — fixture with 3 obvious clusters, assert that cluster_and_sample returns chunks from all 3.
+
+**Verification:**
+- Synth manifest gains a `clusters_sampled` field; must be ≥3.
+- Cross-cluster connection rate (logged in manifest) ≥30%.
+- Query.py answers cite ≥2 different vault top-level folders.
+
+**Rollback:** Revert the retriever call; remove `hdbscan` from pyproject.
+
+---
+
+### Tier 3 — EDC canonicalization (4 hrs, after Tier 2 stable)
+
+**Trigger:** Implement after Tier 2 has run for ≥3 consecutive nights AND `ls vault/knowledge/concepts/ | wc -l` shows continued slug-duplication (multiple near-synonyms surviving).
+
+**What it changes:** Adds a pre-write check that consults the embedding index. Modifies the concept-write path.
+
+**Pattern:** Extract-Define-Canonicalize ([arXiv 2404.03868](https://arxiv.org/abs/2404.03868))
+
+**Files & changes:**
+
+1. **[agents-sdk/agents/vault_synthesizer.py:427-445](../../../../../agents-sdk/agents/vault_synthesizer.py#L427)** — wrap the concept-write loop with canonicalization:
+   - Before writing `concepts_dir / f"{_slugify(title)}.md"`, compute the proposed definition's embedding.
+   - Cosine-match against every existing concept's definition embedding (cached in `vault/.vault-index.db` chunks table, or compute fresh).
+   - **>0.85** → merge: append source to existing file's `sources:` frontmatter, increment a new `merged_concepts` counter in `SynthesisResult`. Do not write a new file.
+   - **0.70-0.85** → LLM judge call (max 5/run per health metric).
+   - **<0.70** → new file.
+
+2. **New file: `agents-sdk/lib/concept_canonicalize.py`** — `find_canonical_slug(proposed_title, proposed_definition, existing_concepts_dir, db_conn) -> str | None`.
+
+3. **Schema addition:** `concept_edges` table gains an `alias_of` nullable column so historical aliases still resolve when queries reference old slugs.
+
+4. **New eval cases:** vs-024 (EDC cosine threshold honored), vs-025 (alias_of resolves correctly).
+
+**Verification:**
+- Manifest gains `merged_concepts` field; should be >0 after the first post-Tier-3 run if dupes existed.
+- `ls vault/knowledge/concepts/ | wc -l` should *decrease* on the first run (5 vibe-coding files merge to 1, etc.) and then stabilize.
+
+**Rollback:** Revert the wrap; `merged_concepts` field becomes inert.
+
+---
+
+### Tier 4 — Three-pass agentic synthesis (8 hrs, post-employment)
+
+**Trigger:** Only after Tiers 1-3 are stable and Sean has employment-side bandwidth. This is the biggest architectural change; do not ship it under sprint pressure.
+
+**Pattern:** MA-RAG ([arXiv 2505.20096](https://arxiv.org/abs/2505.20096)) / TopClustRAG full topology.
+
+**What it changes:** Replaces the single LLM call with three:
+
+1. **Per-cluster draft pass** — for each cluster from Tier 2, draft one concept article using only that cluster's chunks. Pure quote-first.
+2. **Cross-link pass** — read all draft articles from this run + the index; emit typed `concept_edges` only for pairs whose source clusters differ.
+3. **Lint pass** — reject any article with `Evidence pending`, <2 quotes, or zero cross-cluster wikilinks; re-queue for next run.
+
+**Expected impact:** the synthesizer becomes a real discovery engine. Cross-cluster connection rate climbs from 30% to ~70%. Articles read like Karpathy-LLM-Wiki entries, not LLM-restating-prompt fragments.
+
+---
+
+## Status Tracker
+
+> **Update this section after every meaningful change. Future Claude sessions: check here first.**
+
+| Tier | Status | Started | Shipped | Notes |
+|---|---|---|---|---|
+| Tier 1 — Prompt + formatter retrofit | **shipped-awaiting-nightly-run** | 2026-05-13 | 2026-05-13 | All 62 tests in synthesizer/manifest/concept_edges/knowledge_lint suites pass. Eval suite 7/10 (same skip set). First real signal: 2026-05-14 02:30 AM nightly run. |
+| Tier 2 — Cluster-and-sample retrieval | pending | — | — | Don't start until Tier 1 has 3 successful nightly runs AND query.py still shows cluster bias. |
+| Tier 3 — EDC canonicalization | pending | — | — | Don't start until Tier 2 stable AND slug-dupe count still trending up. |
+| Tier 4 — Three-pass agentic synthesis | pending (post-employment) | — | — | Do not ship under sprint pressure. |
+
+### Tier 1 shipped changes — exact diff summary
+
+| File | Lines (post-edit) | Change |
+|---|---|---|
+| [agents-sdk/agents/vault_synthesizer.py](../../../../../agents-sdk/agents/vault_synthesizer.py) | ~127-145 | Added `_FORBIDDEN_PLACEHOLDERS = ("Evidence pending", "(to be filled)")` and extended `validate_article_body` to reject any body containing either. |
+| [agents-sdk/agents/vault_synthesizer.py](../../../../../agents-sdk/agents/vault_synthesizer.py) | ~152-194 | Added optional `evidence: list[str] | None` param to `format_concept_article`; added a new `## Evidence` section that renders verbatim quotes as blockquotes. |
+| [agents-sdk/agents/vault_synthesizer.py](../../../../../agents-sdk/agents/vault_synthesizer.py) | ~200-240 | Rewrote `format_connection_article` — added `evidence: dict[str, list[str]] | None` param. Per-concept threads now render verbatim quotes per linked concept. **Removed the hardcoded `"Evidence pending."` string** that caused the regression. |
+| [agents-sdk/agents/vault_synthesizer.py](../../../../../agents-sdk/agents/vault_synthesizer.py) | ~315-345 | Added `_load_existing_concept_titles(knowledge_root)` helper — reads existing concept slugs from frontmatter for the canonicalization prompt block. |
+| [agents-sdk/agents/vault_synthesizer.py](../../../../../agents-sdk/agents/vault_synthesizer.py) | ~347-468 | Rewrote `_build_synthesis_prompt`: quote-first JSON schema, canonicalization block with injected existing titles, cross-domain preference rule, longer chunk excerpts (200 → 800), forbidden-phrase list, per-concept `evidence` field in connection schema. |
+| [agents-sdk/agents/vault_synthesizer.py](../../../../../agents-sdk/agents/vault_synthesizer.py) | ~539-543 | Added `existing_titles = _load_existing_concept_titles(knowledge_root)` one-time load at run start. |
+| [agents-sdk/agents/vault_synthesizer.py](../../../../../agents-sdk/agents/vault_synthesizer.py) | ~564 | `_build_synthesis_prompt` call now passes `existing_titles`. |
+| [agents-sdk/agents/vault_synthesizer.py](../../../../../agents-sdk/agents/vault_synthesizer.py) | ~590 | `format_concept_article` call now passes `evidence=list(c.get("evidence", []))`. |
+| [agents-sdk/agents/vault_synthesizer.py](../../../../../agents-sdk/agents/vault_synthesizer.py) | ~616-630 | Defensive parse of LLM `evidence: dict[concept_title, quotes]` payload, then passes to `format_connection_article`. |
+
+**Note for future sessions:** if you need to roll back Tier 1, the diff is contained entirely within `agents-sdk/agents/vault_synthesizer.py`. No new dependencies, no schema changes, no config changes. `git checkout agents-sdk/agents/vault_synthesizer.py` reverts cleanly.
+
+### Verification log (append-only — write here after each nightly synth)
+
+| Run date | Tier active | concepts_written | connections_written | cross-cluster rate | Evidence-pending count | Notes |
+|---|---|---|---|---|---|---|
+| 2026-05-13 02:30 | (baseline / pre-retrofit) | 203 | 111 | ~0% | 111 (every connection) | Baseline before Tier 1 ships. |
+
+---
+
+## How to use this doc in future sessions
+
+1. **Synthesizer healthy?** Run `cat vault/health/synth-manifest-$(date -v -1d +%Y-%m-%d).json | jq` and check `status: ok`, `concepts_written > 0`, `wol_status: mbp_awake`.
+2. **Tier 1 effective?** `grep -rn "Evidence pending" vault/knowledge/ | wc -l` — should be 0 after the first post-Tier-1 nightly run.
+3. **Cluster bias resolved?** Re-run the Tier-1 diagnostic: `cd agents-sdk && PYTHONPATH=. .venv/bin/python3 scripts/query.py "Find 3 themes from THREE DIFFERENT concept clusters..."` — look at the "Consulted" list. If ≥2 different vault top-level folders appear, Tier 1+2 are paying off.
+4. **Ready for next tier?** Check the trigger condition in each tier section above. Update the Status Tracker before starting work.
+
+## Companion docs
+
+- [Build plan that spawned this retrofit (eval suite + Workstream B/C)](2026-05-10-eval-suite-build-plan.md)
+- [Synthesizer source](../../../../../agents-sdk/agents/vault_synthesizer.py)
+- [Q&A tool that surfaced the diagnosis](../../../../../agents-sdk/scripts/query.py)
+- [Eval suite](../../../../../evals/vault-synthesizer/)
+- [Intent engineering skill (template for this spec)](../../../../../.claude/skills/intent-engineering/SKILL.md)
+- [Personal context v2.0 (the why behind cross-domain discovery)](../../../../Sean-Winslow-Full-Personal-Context-v2.0.md)
+- [Life-systems operating model — Agent research fleet leverage point](../../../../05_atlas/operating-models/life-systems/operating-model.md)
+- [Creative-studio operating model — Vault-as-SSoT extra-hour north star](../../../../05_atlas/operating-models/creative-studio/operating-model.md)

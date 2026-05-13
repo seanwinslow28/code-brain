@@ -22,6 +22,8 @@ ai_native:
   - langchain
   - vercel
   - supabase
+  - decagon       # added 2026-05-13 — DR Tier-3, Ashby ATS
+  - robinhood     # added 2026-05-13 — DR Tier-2, Care AI Platform PM
 
 ai_creative_crossover:
   - elevenlabs
@@ -56,6 +58,11 @@ boston_metro:
   - datarobot
   - hopper
   - circle
+  - liberate         # added 2026-05-13 — DR Tier-2, Greenhouse confirmed
+  - manifoldbio      # added 2026-05-13 — DR Tier-2, Boston biotech AI; slug TBD via run manifest
+  - pairteam         # added 2026-05-13 — DR Tier-1, remote-US; slug TBD via run manifest
+  # NOTE: BCG X (DR Tier-2) intentionally not added — uses custom careers system,
+  # not Greenhouse/Lever/Ashby. Manually tracked in target-companies.md.
 
 crypto_warm_network:
   - messari

@@ -3,12 +3,14 @@ type: roadmap
 project: prj-job-hunt-2026
 status: draft
 created: 2026-05-06
-last_updated: 2026-05-12-evening
+last_updated: 2026-05-13
 synthesis_sources: [karpathy-sequoia, nate-credentials-opus, nate-credentials-gpt, nate-comprehension-opus, nate-comprehension-gpt]
 amendments:
   - 2026-05-10: Added Task 8 (Eval Suite ship Week 2) + Task 9 (Substack-Drafter agent post-employment). Upgraded Task 6 §I from fluency-only to planned ship. Added Kerouac voice variant test to Decision 4. Updated portfolio count from 5+2 to 6+2+1. See [`2026-05-10-eval-suite-build-plan.md`](2026-05-10-eval-suite-build-plan.md).
   - 2026-05-12: **Track-C v0 SHIPPED 13 days early.** npm publish + MCP registry publish both live. `@swins/intent-engineering-mcp@0.1.0` on registry.npmjs.org; `com.seanwinslow/intent-engineering@0.1.0` on registry.modelcontextprotocol.io via DNS-verified domain namespace. Task 3 ship-gate items 1–16 closed; 17–19 (Loom + LinkedIn + Substack) remain. Added "Publish + registry flow — frozen reference" subsection to Task 3 capturing the DNS auth mechanics (Ed25519 keypair + TXT record on apex) so the flow is reproducible for the next MCP server without re-derivation.
   - 2026-05-12 (evening) — Friday Week 1 finisher closed in a Cowork session. Task 1 Steps 1+2+4 + Task 2 Steps 1+2+4 complete. Two discoveries closed steps without new writes — (a) `vault/40_knowledge/templates/EXPLANATION-template.md` confirmed already canonical (Sean wrote it 2026-05-06, more thoughtful than a naive scaffold) and (b) the Superuser Pack README opening was already in Karpathy "agentic engineering practitioner's toolkit" framing on line 3, naming the full stack and citing Karpathy explicitly. Two net-new writes — (c) `agents-sdk/lib/concept_edges/EXPLANATION.md` (Phase D typed reasoning edges 4Q, Claude-Nate-2 §2a verbatim with co-located wikilinks) and (d) `agents-sdk/agents/knowledge_loop/EXPLANATION.md` (Phase 6 producer/consumer 4Q, §2e verbatim with wikilinks). Both EXPLANATION.md files passed the <90-sec recruiter readability check before handoff. Personal-site `/transactions/` Astro route + `validate.py` + git commits across both repos handed to Claude Code via [`2026-05-13-claude-code-handoff-task-1-2.md`](2026-05-13-claude-code-handoff-task-1-2.md) with a stop-and-confirm gate on the personal-site repo (if scaffolding from scratch would exceed 30 minutes, Decision 2's fallback fires — GitHub EXPLANATION.md files become canonical and Substack syndicates from raw URLs). Loom + Substack + LinkedIn syndication deferred until full portfolio locks down per Sean's 2026-05-12 directive ("Get all of my projects locked down and then I can come back after everything is completed, write up the scripts with your help based on the projects completion state, then post the videos").
+  - 2026-05-13 — **Task 6 §E (target-30 companies list) CLOSED 5 days early.** Three deliverables landed in one Cowork session — (a) [`vault/20_projects/prj-job-hunt-2026/target-companies.md`](../../target-companies.md) created with 30 rows across 3 tiers, 16 pre-loaded from the 2026-05-07 Gemini DR-Max research (JD URLs + comp ranges + portfolio-to-role mapping all cited from DR §§1-5), 14 rounded out from the job_feed watchlist (frontier labs + Larry's network). Schema per master plan Phase 5 Task 5.1 Step 3 + cross-refs to `[[job_feed]]` and `[[warm-intros]]`. Tiers reorganized vs. DR's tenure-fit tiering — uses master plan's "yes please / would consider / safety net" framing weighted by Boston-metro + remote constraint + portfolio match. (b) [`vault/20_projects/prj-job-hunt-2026/warm-intros.md`](../../warm-intros.md) created — small file by design with Larry pre-populated for Messari (strong) + Coinbase (medium), three reusable outreach patterns (inside-contact ping, warm-intro request, reactivation message), LinkedIn-sweep prompt with all 26 target slugs paste-ready. (c) [`vault/20_projects/prj-job-hunt-2026/job-feed/watchlist.yaml`](../../job-feed/watchlist.yaml) patched — added 5 slugs (`decagon` + `robinhood` to `ai_native`; `liberate` + `manifoldbio` + `pairteam` to `boston_metro`). 36 → 38 slugs total, 6 buckets. BCG X intentionally excluded with inline comment (custom careers system, not Greenhouse/Lever/Ashby — manually tracked in target-companies.md instead). `python3 scripts/validate.py` → 58 warnings / 0 errors (2 cleaner than the v3.30.1 baseline). Phase 5 Task 5.2 (5/week application cadence starting Week 3, 2026-05-19) is now unblocked.
+  - 2026-05-13 (later) — **Task 10 + Task 11 SPECS added (research-pending).** Two new portfolio artifacts scoped via detailed build specs + deep-research prompt scaffolds, no code written yet. **Task 10:** [`2026-05-13-vault-knowledge-mcp-spec.md`](2026-05-13-vault-knowledge-mcp-spec.md) specs the second MCP server — three tools (`search_concepts`, `find_contradictions`, `get_article`) exposing the Phase D `concept_edges` SQLite table + Phase 6 knowledge_loop articles as queryable MCP surface. Reuses the existing DNS-verified `com.seanwinslow/*` namespace + Ed25519 publish key. 5–7 day build target. Designed as the 8th flagship artifact + the proof of MCP-pattern repeatability over `intent-engineering`. **Task 11:** [`2026-05-13-agent-fleet-dashboard-spec.md`](2026-05-13-agent-fleet-dashboard-spec.md) specs the Agent Fleet Observability Dashboard — single HTML file visualizing the 8-agent fleet's telemetry (cost trends, model mix, synthesizer pass counts, eval suite status, recent runs) with an explicit annotation on the 2026-05-01 → 2026-05-10 silent regression. 2–3 day build target post-research. Designed as the 3rd supporting artifact + the visual hero of Substack post 2 ("Vault said something again") + operational evidence for the Agent Ops / FDP backup track. Both specs include 10-question deep-research prompts (paste-ready for Gemini DR-Max) covering architecture, reference-implementation surveys, distribution surfaces, recruiter-resonance patterns, and an "outsized-impact recommendation" closer. **Status flips to `research-complete` only after DR results land at `vault/20_projects/research/2026-05-XX-vault-knowledge-mcp-research.md` and `2026-05-XX-agent-fleet-dashboard-research.md`.** Updated portfolio count target: **8 flagship + 3 supporting + 1 post-employment** (was 7+2+1 after 2026-05-12 Workstream C ship).
 ai-context: "Unified roadmap synthesizing Karpathy + Nate × 2 articles × 2 models, mapped onto the existing Phase 0–8 master plan. Portfolio project ideas + concrete implementation plans through 2026-07-04. Amended 2026-05-10 with eval-suite + Substack-drafter additions after Step-0 error-analysis surfaced a 9-day silent regression that reshaped the eval scope."
 ---
 
@@ -573,7 +575,7 @@ Each gets a concrete decision now or a deferred-to-week-N flag.
 
 **§D — Build-in-public cadence + format.** **DECIDED THIS WEEK.** Cadence: one Substack post per Friday by 5 PM, syndicated to LinkedIn the following Wednesday. Format: ~600 words, one artifact featured, one paragraph of editorial framing, one link to the canonical `/transactions/` page. Eight posts in eight weeks.
 
-**§E — Target list of 30 companies.** **DECIDED THIS WEEK as a Week-2 deliverable.** Owner: Sean. Deadline: 2026-05-18 (end of master plan Phase 2). Approach: one 90-min session in Week 2 reviewing Built In Boston + LinkedIn Jobs + Anthropic/Sierra/Decagon/Glean/Robinhood/Scale/Pair careers pages. Output: `vault/20_projects/prj-job-hunt-2026/target-companies.md` with 10 Tier-1 + 15 Tier-2 + 5 Tier-3 (master plan Phase 5 Task 5.1 schema).
+**§E — Target list of 30 companies.** ✅ **CLOSED 2026-05-13, 5 days ahead of deadline.** Three deliverables landed in one Cowork session: (1) [`vault/20_projects/prj-job-hunt-2026/target-companies.md`](../../target-companies.md) created with 30 rows across 3 tiers (10 + 15 + 5 per master plan Phase 5 Task 5.1 schema). 16 rows pre-loaded from the 2026-05-07 Gemini DR-Max research with verbatim JD URLs, comp ranges, and DR §5 portfolio-to-role mapping; 14 rows rounded out from the [`job_feed`](../../job-feed/) watchlist (frontier labs + Larry's network). Tiers reorganized vs. DR's tenure-fit tiering — uses master plan's "yes please / would consider / safety net" framing weighted by Boston-metro + remote constraint + portfolio match. Status legend defined (`not-applied` / `applied` / `talking` / `interview` / `offer` / `passed` / `rejected` / `tbd`) plus a week-by-week application sequence drawn from DR §7. (2) [`vault/20_projects/prj-job-hunt-2026/warm-intros.md`](../../warm-intros.md) created — small file by design with Larry pre-populated for Messari (strong) + Coinbase (medium), three reusable outreach patterns (inside-contact ping / warm-intro request / reactivation message), and a LinkedIn-sweep prompt enumerating all 26 target slugs for paste-search. (3) [`vault/20_projects/prj-job-hunt-2026/job-feed/watchlist.yaml`](../../job-feed/watchlist.yaml) patched: added 5 slugs (`decagon` + `robinhood` to `ai_native`; `liberate` + `manifoldbio` + `pairteam` to `boston_metro`). 36 → 38 slugs, 6 buckets. BCG X intentionally excluded with inline comment (custom careers system, not Greenhouse/Lever/Ashby — manually tracked in target-companies.md). `python3 scripts/validate.py` → 58 warnings / 0 errors (2 cleaner than v3.30.1 baseline). **Phase 5 Task 5.2 (5 applications/week, starting Week 3 2026-05-19) is unblocked.** Sean-owned follow-ups: LinkedIn-sweep against the 26-slug prompt → prospecting queue rows in `warm-intros.md`; Tier-1 inside-contact identification per master plan Phase 5 Task 5.1 Step 2; Larry ping to confirm Messari intro is still open and ask about Coinbase brokering.
 
 **§F — Gmail labels pipeline.** **DECIDED THIS WEEK.** Build it Saturday 2026-05-09 alongside §B. 5 labels: `Job-Hunt/Recruiter`, `Job-Hunt/Application`, `Job-Hunt/Reference`, `Job-Hunt/Network`, `Job-Hunt/Logistics`. Filters: regex on common subject lines + sender domains. Time-box: 60 min.
 
@@ -659,6 +661,92 @@ Each gets a concrete decision now or a deferred-to-week-N flag.
 
 ---
 
+### Task 10 — `vault-knowledge-mcp` (NEW 2026-05-13 — research-pending; 8th flagship artifact)
+
+> **Status:** Build spec + deep-research prompt scaffold at [`2026-05-13-vault-knowledge-mcp-spec.md`](2026-05-13-vault-knowledge-mcp-spec.md). **No code written yet.** Deep research must return before architecture is locked. Expected DR run: Gemini DR-Max, ~$7 cost cap (within `agents-sdk/config.toml` Gemini Researcher governor). Expected research-return file: `vault/20_projects/research/2026-05-XX-vault-knowledge-mcp-research.md`.
+
+**Maps to:** Karpathy synthesis Claim B ("MCP servers are the portable career artifact for 2026") + [[2026-05-07-target-role-specs]] §3 Anthropic FDE (literal JD ask for "MCP servers, sub-agents, agent skills") + unified roadmap Decision 1 follow-on ("two MCPs of different shapes proves the pattern is repeatable").
+
+**Why this exists in addition to `intent-engineering`:** `intent-engineering` wraps a *skill*. `vault-knowledge-mcp` wraps a *knowledge graph with typed reasoning edges over a 17-day production-grounded vault*. Different shapes of the same primitive. Two shipped MCPs of meaningfully different shapes is the load-bearing differentiator over candidates with one or zero. Also: Phase D + Phase 6 work currently has no customer-facing surface — this MCP makes the `concept_edges` table and the synthesizer output interactively queryable from any MCP-aware client.
+
+**Spec-level decisions already in:**
+- Three tools: `search_concepts(query, limit)`, `find_contradictions(scope)`, `get_article(slug)`
+- Stdio transport, TypeScript SDK 1.29.0, Node 22, MIT
+- Reuses DNS-verified `com.seanwinslow/*` namespace + the Ed25519 publish key from `intent-engineering`
+- npm: `@swins/vault-knowledge-mcp@0.1.0`; MCP registry: `com.seanwinslow/vault-knowledge@0.1.0`
+- Read-only, local-vault, no auth, no SaaS
+
+**Spec-level decisions OPEN — answered by deep research:**
+- Embedding strategy: JS-native (Transformers.js / ONNX Runtime Web) vs. Python sidecar over the existing nomic-embed-text Ollama pipeline
+- State management: read Sean's existing `vault/.vault-index.db` vs. own embedding index
+- Privacy boundary: allowlist by directory vs. blocklist vs. env-var-based
+- Naming: `vault-knowledge-mcp` vs. `vault-graph-mcp` vs. `comprehension-mcp` vs. `knowledge-edges-mcp`
+- Tool surface count: 3 vs. 6 (one per relation type in the typed-edges schema)
+- License + IP boundary: ship a public demo vault, or "bring your own vault"?
+
+**Files (post-research):**
+- Create: `~/Code-Brain/sw-mcp-vault-knowledge/` (new repo)
+- Create: `~/Code-Brain/sw-mcp-vault-knowledge/docs/EXPLANATION.md` (4Q artifact)
+- Modify: [`CHANGELOG.md`](../../../../CHANGELOG.md), [`CLAUDE.md`](../../../../CLAUDE.md), [`README.md`](../../../../README.md) — count updates
+
+**- [x] Step 0: Spec + research prompt drafted.** ✅ 2026-05-13 — see [`2026-05-13-vault-knowledge-mcp-spec.md`](2026-05-13-vault-knowledge-mcp-spec.md).
+
+**- [ ] Step 1: Run Gemini DR-Max with the §12 research prompt.** Output lands at `vault/20_projects/research/2026-05-XX-vault-knowledge-mcp-research.md`. Cost cap: $7.
+
+**- [ ] Step 2: Review DR results, lock the 6 open architectural decisions.** Update the spec's frontmatter `status` from `research-pending` → `research-complete`. Append a `## Scope-Lock` section to the spec capturing each locked decision.
+
+**- [ ] Step 3: Execute the build per the locked spec.** Mirror `intent-engineering`'s 5-phase build (scaffold → 3 real tools → hardening → publish → launch comms). Reuse the publish flow frozen in this roadmap's "Publish + registry flow — frozen reference" subsection.
+
+**- [ ] Step 4: Ship.** npm publish + MCP registry publish + README + 4Q `EXPLANATION.md` + 90-sec Loom + LinkedIn announcement tagging Anthropic + MCP team.
+
+**Verification gate:** 10 binary success criteria in the spec §8. Earliest start: Mon 2026-05-19 (post-research). Ship target: 2026-05-28 to 2026-06-04. Tier-A protected — slips do not block Track-C, animation pipeline (6/11), or eval suite Loom (5/22).
+
+---
+
+### Task 11 — Agent Fleet Observability Dashboard (NEW 2026-05-13 — research-pending; 3rd supporting artifact)
+
+> **Status:** Build spec + deep-research prompt scaffold at [`2026-05-13-agent-fleet-dashboard-spec.md`](2026-05-13-agent-fleet-dashboard-spec.md). **No code written yet.** Deep research must return before distribution surface is locked. Expected DR run: Gemini DR-Max, ~$7 cost cap. Expected research-return file: `vault/20_projects/research/2026-05-XX-agent-fleet-dashboard-research.md`.
+
+**Maps to:** Karpathy synthesis ("$20B 2026 funding for eval/agent-ops platforms") + ChatGPT-Nate-1 Agent Ops/FDP backup track + Claim F (cost economics as Sean's one beginner skill — closed by lived telemetry, not a separate calculator) + this roadmap's Decision 3 (backup track = Agent Ops / FDP).
+
+**Why this exists:** Sean operates a real 8-active-agent fleet with real instrumentation (`agent-run-history.csv`, `synth-manifest-*.json`, `gemini-spend-*.json`, `evals/vault-synthesizer/last-run.md`, `.job-feed.db`), but recruiters won't clone the repo to verify the claim. The dashboard converts "trust the repo" to "look at the screen for 30 seconds." Visually: 8 fleet tiles, cost trend chart, model mix donut, synthesizer telemetry line chart with the 2026-05-01 → 2026-05-10 silent regression explicitly annotated and linked to the Substack post that tells the story.
+
+**Spec-level decisions already in:**
+- Single HTML file, < 50 KB pre-data, Chart.js + Grid.js + inline SVG
+- 8 panels: fleet health tiles, cost trends, model mix, synthesizer telemetry, eval suite status, recent runs, optional job-hunt overlay, narrative annotation layer
+- Light mode primary, dark mode toggle, matches `[[sw-portfolio]]` V3 Teal/Amber tokens
+- Mobile-readable at 375px (iPhone screenshot survival)
+- Read-only, no auth, no real-time polling, no SaaS
+
+**Spec-level decisions OPEN — answered by deep research:**
+- Distribution surface: Vercel static vs. Astro page on personal site vs. Cowork artifact vs. GitHub Pages vs. hybrid
+- Data loading pattern: build-time static vs. fetch-at-load vs. live-poll
+- Anonymization: strip cost dollars vs. show them as part of the credibility signal
+- The three anchor panels for the 30-sec recruiter cold-open
+- Naming: "Agent Fleet Observability Dashboard" vs. "Agent Ops Dashboard" vs. "Fleet Telemetry" vs. other
+- Eval-suite integration shape: pass-count number vs. sparkline vs. full grid vs. all three
+- Substack hero format + whether a mobile/screenshot variant is needed
+- Two-purpose-one-surface: should the job-hunt tab actually be publicly visible?
+
+**Files (post-research):**
+- Create: `~/Code-Brain/sw-agent-fleet-dashboard/` OR `creative-studio/sw-portfolio/src/pages/transactions/agent-fleet/` (depending on Q2 verdict)
+- Create: `<repo>/docs/EXPLANATION.md` (4Q artifact)
+- Modify: [`CHANGELOG.md`](../../../../CHANGELOG.md), [`CLAUDE.md`](../../../../CLAUDE.md), [`README.md`](../../../../README.md) — count updates
+
+**- [x] Step 0: Spec + research prompt drafted.** ✅ 2026-05-13 — see [`2026-05-13-agent-fleet-dashboard-spec.md`](2026-05-13-agent-fleet-dashboard-spec.md).
+
+**- [ ] Step 1: Run Gemini DR-Max with the §12 research prompt.** Output lands at `vault/20_projects/research/2026-05-XX-agent-fleet-dashboard-research.md`. Cost cap: $7.
+
+**- [ ] Step 2: Review DR results, lock the 8 open positioning decisions.** Update the spec's frontmatter `status` from `research-pending` → `research-complete`. Append a `## Scope-Lock` section capturing each locked decision + the chosen distribution surface.
+
+**- [ ] Step 3: Execute the 2–3 day build.** Day 1: data loader + Chart.js panels. Day 2: Grid.js table + annotation layer + responsive layout + accessibility pass. Day 3: distribution-surface ship + README + EXPLANATION + 60-sec Loom.
+
+**- [ ] Step 4: Substack post 2 ("Vault said something again") ships with the dashboard as visual hero.** Target: Friday 2026-05-29 or the following Friday, depending on B7 gate timing (synthesizer needs 5 consecutive nights of `concepts_written > 0` for the post's "recovery" claim to be live-data-backed).
+
+**Verification gate:** 11 binary success criteria in the spec §8. Earliest start: Mon 2026-05-26 (post-eval-suite-Substack-post-1). Ship target: 2026-06-08 to 2026-06-15. Tier-A protected — slips do not block Track-C, Task 10, animation pipeline (6/11).
+
+---
+
 ### Task 7 — STOP-DOING list (3+ items)
 
 **Maps to:** Karpathy synthesis Part 5 "Stop investing in" + operating-model "self-blocking decisions pile up."
@@ -725,6 +813,12 @@ Format matches the [operating-model SOUL convention](../../../05_atlas/operating
 - Supporting #1: 14-Agent Fleet Loom (Friday Week 2 → bumped to Friday Week 3 post-fix per Task 6 §C amendment)
 - Supporting #2: Token Cost Calculator (Friday Week 3)
 - **(NEW post-employment Q3)** Substack-Drafter Agent (Task 9, specced not built)
+
+**Amendment 2026-05-13 — portfolio count updated again:** 8 flagship + 3 supporting + 1 post-employment (was 7+2+1 after 2026-05-12 Workstream C ship). Two new artifacts added as Tasks 10 + 11, both in `research-pending` status:
+
+7. **(2026-05-12 promoted)** Substack-Drafter Agent — was post-employment Q3 spec, code-complete on `eval-suite-2026-05-12` branch; activation gated on B7 5-night gate.
+8. **(NEW research-pending)** `vault-knowledge-mcp` — Sean's second MCP server, exposing the Phase D `concept_edges` SQLite + Phase 6 knowledge_loop articles as queryable MCP tools. Spec at [`2026-05-13-vault-knowledge-mcp-spec.md`](2026-05-13-vault-knowledge-mcp-spec.md). Ship target 2026-05-28 to 2026-06-04 pending DR-Max architecture validation.
+- Supporting #3: **(NEW research-pending)** Agent Fleet Observability Dashboard. Spec at [`2026-05-13-agent-fleet-dashboard-spec.md`](2026-05-13-agent-fleet-dashboard-spec.md). Pairs with Substack post 2 as visual hero. Ship target 2026-06-08 to 2026-06-15 pending DR-Max positioning validation.
 
 **Placeholder scan:** The 4Q drafts in Tasks 2, 3, 4 reference Claude-Nate-2 §2 source blocks, but the actual paste-ready text is in those source blocks (verified). The token-cost-calculator 4Q is fully drafted inline. No "TODO" / "TBD" / "fill in details" patterns. Task 6 §G defers YouTube to Week 5 with a concrete switch condition. Task 6 §J defers enterprise patterns to Week 6+ tied to interview loops.
 

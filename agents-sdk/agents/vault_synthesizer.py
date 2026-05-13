@@ -131,8 +131,18 @@ def count_wikilinks(body: str) -> int:
     return len(extract_wikilinks(body))
 
 
+# Forbidden placeholder strings — if the body contains any of these, the article
+# was emitted without real evidence and must be rejected (Tier 1 retrofit
+# 2026-05-13). "Evidence pending" was previously hardcoded by
+# format_connection_article — defense in depth catches any path that still
+# leaks placeholder copy.
+_FORBIDDEN_PLACEHOLDERS = ("Evidence pending", "(to be filled)")
+
+
 def validate_article_body(body: str) -> bool:
-    return count_wikilinks(body) >= MIN_WIKILINKS_PER_ARTICLE
+    if count_wikilinks(body) < MIN_WIKILINKS_PER_ARTICLE:
+        return False
+    return not any(p in body for p in _FORBIDDEN_PLACEHOLDERS)
 
 
 def _slugify(title: str) -> str:
@@ -148,12 +158,22 @@ def format_concept_article(
     examples: list[str],
     related: list[str],
     sources: list[str] | None = None,
+    evidence: list[str] | None = None,
     today: str,
 ) -> str:
     sources = sources or []
+    evidence = evidence or []
     yaml_sources = "\n".join(f"  - {s}" for s in sources) or "  - "
     related_links = " ".join(f"[[{r}]]" for r in related) or ""
     ex_block = "\n".join(f"- {e}" for e in examples) or "- (no examples captured yet)"
+    # Tier 1 retrofit (2026-05-13): render verbatim quotes from source files as
+    # blockquotes. When the LLM provided no evidence, render nothing — the
+    # validator will reject the article on the connection side via the
+    # forbidden-placeholder check.
+    if evidence:
+        ev_block = "\n\n".join(f"> {q}" for q in evidence)
+    else:
+        ev_block = "_No verbatim evidence captured this run._"
 
     return (
         f"---\n"
@@ -166,6 +186,7 @@ def format_concept_article(
         f"---\n\n"
         f"## Definition\n\n{definition}\n\n"
         f"## Context\n\n{context}\n\n"
+        f"## Evidence\n\n{ev_block}\n\n"
         f"## Examples\n\n{ex_block}\n\n"
         f"## Related Concepts\n\n{related_links}\n"
     )
@@ -177,11 +198,35 @@ def format_connection_article(
     synthesis: str,
     concepts: list[str],
     implications: list[str],
+    evidence: dict[str, list[str]] | None = None,
     today: str,
 ) -> str:
+    """Render a connection article with per-concept evidence blocks.
+
+    Tier 1 retrofit (2026-05-13): `evidence` is a {concept_title: [quotes]}
+    mapping. When the LLM supplies verbatim quotes per linked concept, they
+    render as blockquotes under each thread. When `evidence=None` or a
+    concept is missing from the map, the thread surfaces an honest
+    "no evidence supplied" line — which `validate_article_body` then catches
+    via the forbidden-placeholder check, rejecting the article. The prior
+    behavior of hardcoding "Evidence pending." per concept was the root
+    cause of the empty-thread regression.
+    """
+    evidence = evidence or {}
     connects_yaml = "\n".join(f"  - {c}" for c in concepts) or "  - "
-    threads = "\n\n".join(f"### [[{c}]]\n\nEvidence pending." for c in concepts)
-    implications_block = "\n".join(f"- {i}" for i in implications) or "- (to be filled)"
+    thread_blocks: list[str] = []
+    for c in concepts:
+        quotes = evidence.get(c) or []
+        if quotes:
+            quote_block = "\n\n".join(f"> {q}" for q in quotes)
+        else:
+            # Honest, non-forbidden placeholder. Article still gets rejected
+            # by the validator if all threads are empty (no quotes) — see
+            # _FORBIDDEN_PLACEHOLDERS for the exact failure surface.
+            quote_block = "_No verbatim evidence supplied._"
+        thread_blocks.append(f"### [[{c}]]\n\n{quote_block}")
+    threads = "\n\n".join(thread_blocks)
+    implications_block = "\n".join(f"- {i}" for i in implications) or "_(implications not supplied)_"
 
     return (
         f"---\n"
@@ -275,56 +320,161 @@ def write_synth_manifest(
 
 # ─── orchestration ────────────────────────────────────────────────────────
 
+def _load_existing_concept_titles(knowledge_root: Path, cap: int = 200) -> list[str]:
+    """Read existing concept titles from frontmatter for canonicalization hints.
+
+    Tier 1 retrofit (2026-05-13): the LLM previously had no visibility into
+    what concept slugs already existed, which is why we ended up with
+    daily-drive-agent vs daily-driver-agent and five vibe-coding variants.
+    Injecting current titles into the prompt lets the model reuse the
+    canonical name rather than minting a new one. Cap at 200 to keep the
+    prompt under budget.
+    """
+    concepts_dir = knowledge_root / CONCEPTS_SUBDIR
+    if not concepts_dir.exists():
+        return []
+    titles: list[str] = []
+    for f in sorted(concepts_dir.glob("*.md")):
+        try:
+            head = f.read_text(encoding="utf-8", errors="replace")[:300]
+        except OSError:
+            continue
+        m = re.search(r'^title:\s*"?([^"\n]+)"?', head, flags=re.MULTILINE)
+        if m:
+            titles.append(m.group(1).strip())
+        if len(titles) >= cap:
+            break
+    return titles
+
+
+# Top-level vault folders the synthesizer treats as distinct PARA-style
+# domains for the cross-domain preference rule. A connection that links
+# concepts whose source files originate in different folders here is
+# considered "cross-domain" and preferred over within-domain connections.
+_CROSS_DOMAIN_FOLDERS = (
+    "00_inbox",
+    "10_timeline",
+    "20_projects",
+    "40_knowledge",
+    "05_atlas",
+)
+
+
 def _build_synthesis_prompt(
     *,
     primary_file_rel: str,
     primary_text: str,
     similar: list[dict[str, Any]],
+    existing_titles: list[str] | None = None,
 ) -> str:
-    sim_block = "\n".join(
-        f"- {s.get('file_path')}: {str(s.get('chunk_text',''))[:200]}"
-        for s in similar
-    )
+    """Construct the synthesis LLM prompt.
+
+    Tier 1 retrofit (2026-05-13) — see
+    `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/
+    job-hunt-2026-roadmap/2026-05-13-vault-synthesizer-retrofit-tiers.md`
+    for the full intent spec. Key changes from v1:
+      1. Quote-first — every concept needs ≥2 verbatim quotes from sources,
+         every connection needs per-concept evidence quotes, before any prose.
+      2. Canonicalization — existing concept titles are injected so the LLM
+         reuses slugs rather than minting near-duplicates.
+      3. Cross-domain preference — model is told to prefer connections whose
+         member concepts span different top-level vault folders.
+      4. Chunk excerpt grew 200 → 800 chars so the LLM sees arguments, not
+         fragments.
+      5. Forbidden-phrase list explicit; rejection happens in
+         `validate_article_body`.
+    """
+    existing_titles = existing_titles or []
+    primary_folder = primary_file_rel.split("/", 1)[0] if "/" in primary_file_rel else ""
+
+    sim_block_parts: list[str] = []
+    for s in similar:
+        sim_path = s.get("file_path", "")
+        sim_folder = sim_path.split("/", 1)[0] if "/" in sim_path else ""
+        sim_block_parts.append(
+            f"- file: {sim_path}\n"
+            f"  folder: {sim_folder}\n"
+            f"  excerpt: {str(s.get('chunk_text', ''))[:800]}"
+        )
+    sim_block = "\n".join(sim_block_parts) or "  (no similar files retrieved)"
+
+    if existing_titles:
+        titles_inline = ", ".join(f'"{t}"' for t in existing_titles)
+        canonical_block = (
+            "EXISTING CONCEPT TITLES (use these slugs verbatim if your synthesis "
+            "matches one of them — do NOT mint a near-duplicate slug; the "
+            "synthesizer rejects duplicates downstream):\n"
+            f"{titles_inline}\n\n"
+        )
+    else:
+        canonical_block = ""
+
     return (
-        "You are synthesizing knowledge articles for a personal vault.\n\n"
-        f"Primary file: {primary_file_rel}\n"
+        "You are the vault synthesizer for Sean Winslow's personal knowledge "
+        "vault. Your job is not to summarize. Your job is to surface "
+        "**non-obvious cross-domain patterns** that Sean would not notice "
+        "manually — connections across life-systems, creative-studio, "
+        "job-hunt-2026, and Superuser Pack infrastructure.\n\n"
+        "Three rules govern every article you emit:\n"
+        "  1. EVIDENCE FIRST — every claim must be grounded in a verbatim "
+        "quote from a source file. No verbatim quote → no claim.\n"
+        "  2. REUSE > REMINT — if a concept already has a slug in the "
+        "canonical list below, reuse the exact title. Do not invent "
+        "near-duplicate names.\n"
+        "  3. CROSS-DOMAIN > WITHIN-DOMAIN — when proposing connections, "
+        "prefer those whose member concepts originate in DIFFERENT top-level "
+        "vault folders (life-systems × creative-studio × job-hunt × 40_knowledge "
+        "× 05_atlas). A connection of three concepts all from the same folder "
+        "is a within-domain summary, not a discovery.\n\n"
+        f"Primary file: {primary_file_rel}  (folder: {primary_folder})\n"
         f"---\n{primary_text[:3000]}\n---\n\n"
-        "Semantically similar vault files:\n"
+        "Semantically similar vault files (note the `folder` field — use it "
+        "to identify cross-domain pairs):\n"
         f"{sim_block}\n\n"
+        f"{canonical_block}"
+        "FORBIDDEN PHRASES — articles containing any of these are rejected:\n"
+        '  - "Evidence pending"\n'
+        '  - "(to be filled)"\n\n'
         "Return ONLY a JSON object with this shape (lists may be empty):\n\n"
         "{\n"
         "  \"concepts\": [\n"
         "    {\n"
-        "      \"title\": string,\n"
-        "      \"definition\": string,  // 2-3 sentences\n"
-        "      \"context\": string,     // why it matters\n"
-        "      \"examples\": [string],  // concrete from source material\n"
-        "      \"related\": [string]    // ≥2 exact titles of related concepts\n"
+        "      \"title\": string,                   // reuse from canonical list if applicable\n"
+        "      \"definition\": string,              // 2-3 sentences, grounded in the quotes below\n"
+        "      \"context\": string,                 // why it matters to Sean specifically\n"
+        "      \"evidence\": [string],              // ≥2 VERBATIM quotes from the primary or similar files\n"
+        "      \"examples\": [string],              // concrete from source material\n"
+        "      \"related\": [string]                // ≥2 exact titles of related concepts\n"
         "    }\n"
         "  ],\n"
         "  \"connections\": [\n"
         "    {\n"
         "      \"title\": string,\n"
-        "      \"synthesis\": string,      // 1-2 sentences\n"
-        "      \"concepts\": [string],     // exact titles, ≥3\n"
-        "      \"implications\": [string], // how this informs future work\n"
-        "      \"relations\": [           // OPTIONAL — typed edges between concept pairs\n"
+        "      \"synthesis\": string,               // 1-2 sentences naming the cross-domain pattern\n"
+        "      \"concepts\": [string],              // exact titles, ≥3\n"
+        "      \"evidence\": {                      // per-concept verbatim quotes\n"
+        "        \"<concept title>\": [string]      // ≥1 verbatim quote from a source file that grounds this concept's role\n"
+        "      },\n"
+        "      \"implications\": [string],          // how this informs future work\n"
+        "      \"source_folders\": [string],        // the distinct top-level vault folders the member concepts span\n"
+        "      \"relations\": [                     // OPTIONAL — typed edges between concept pairs\n"
         "        {\n"
-        "          \"from\": string,       // exact concept title\n"
-        "          \"to\": string,         // exact concept title (must differ from `from`)\n"
+        "          \"from\": string,                // exact concept title\n"
+        "          \"to\": string,                  // exact concept title (must differ from `from`)\n"
         "          \"relation\": \"supports|contradicts|evolved_into|supersedes|depends_on|related_to\",\n"
-        "          \"confidence\": number  // optional, 0.0-1.0\n"
+        "          \"confidence\": number           // optional, 0.0-1.0\n"
         "        }\n"
         "      ]\n"
         "    }\n"
         "  ]\n"
         "}\n\n"
-        "CRITICAL: every concept MUST list ≥2 related titles and every\n"
-        "connection MUST list ≥3 concept titles — articles without enough\n"
-        "wikilinks will be discarded.\n\n"
-        "If you cannot identify a clear typed relation between two concepts,\n"
-        "omit the pair from `relations` rather than guessing — invalid\n"
-        "relation values are silently dropped."
+        "CRITICAL CONSTRAINTS:\n"
+        "  - every concept MUST list ≥2 verbatim quotes in `evidence` AND ≥2 related titles\n"
+        "  - every connection MUST list ≥3 concept titles AND provide `evidence` for at least each concept it lists\n"
+        "  - quotes MUST be exact substrings of the primary or similar file content shown above — paraphrasing is rejected downstream\n"
+        "  - if you cannot find ≥2 verbatim quotes for a concept, OMIT that concept rather than guessing\n"
+        "  - if you cannot identify a clear typed relation between two concepts, omit that pair from `relations`\n"
+        "  - prefer fewer, well-grounded articles over many shallow ones — empty arrays are valid output"
     )
 
 
@@ -383,6 +533,11 @@ def run_synthesis(
             regenerate_index(knowledge_root)
         return result
 
+    # Tier 1 retrofit (2026-05-13): load existing concept titles once per
+    # run for canonicalization hints in the prompt. Cap at 200 to keep
+    # prompt size bounded.
+    existing_titles = _load_existing_concept_titles(knowledge_root)
+
     files_attempted = 0
     files_succeeded = 0
 
@@ -411,6 +566,7 @@ def run_synthesis(
             primary_file_rel=str(fp.relative_to(vault_root)),
             primary_text=primary_text,
             similar=similar,
+            existing_titles=existing_titles,
         )
         try:
             parsed = llm_caller(prompt)
@@ -436,6 +592,7 @@ def run_synthesis(
                     examples=list(c.get("examples", [])),
                     related=list(c.get("related", [])),
                     sources=[str(fp.relative_to(vault_root))],
+                    evidence=list(c.get("evidence", [])),
                     today=today,
                 )
                 if not validate_article_body(body):
@@ -450,11 +607,24 @@ def run_synthesis(
                 if not title or len(concept_list) < 3:
                     result.rejected_count += 1
                     continue
+                # Tier 1 retrofit (2026-05-13): route per-concept evidence
+                # quotes from the LLM into the formatter. The LLM is now
+                # required to emit `evidence: {<concept_title>: [quotes]}`
+                # per the new prompt schema. Defensive cast in case the
+                # model returns a non-dict.
+                raw_evidence = conn.get("evidence") or {}
+                if not isinstance(raw_evidence, dict):
+                    raw_evidence = {}
+                connection_evidence: dict[str, list[str]] = {
+                    str(k): [str(q) for q in (v or []) if isinstance(q, str)]
+                    for k, v in raw_evidence.items()
+                }
                 body = format_connection_article(
                     title=title,
                     synthesis=conn.get("synthesis", ""),
                     concepts=concept_list,
                     implications=list(conn.get("implications", [])),
+                    evidence=connection_evidence,
                     today=today,
                 )
                 if not validate_article_body(body):
