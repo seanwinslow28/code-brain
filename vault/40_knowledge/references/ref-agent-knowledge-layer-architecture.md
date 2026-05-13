@@ -8,9 +8,13 @@ created: 2026-05-13
 description: "Watch now | There’s a debate going on right now about whether vector search is obsolete."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - rag
+  - agent-architecture
+  - knowledge-layer
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Nate Jones's argument that vector search is being demoted from the whole RAG architecture to one component inside a broader knowledge layer for agents (retrieval + document structure + semantic data + access control + provenance + memory + write-back), with three paste-ready artifacts: a Retrieval Contract Spec, a Failure Triage, and a Stack ADR."
 ---
 There’s a debate going on right now about whether vector search is obsolete. That’s the wrong layer to be arguing about. The agents I’m watching fail in production aren’t failing because the retrieval method is wrong — they’re failing because the retrieval system can’t assemble what the agent actually needs before it starts acting.
 
