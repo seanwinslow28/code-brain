@@ -5,6 +5,53 @@ All notable changes to the Claude Code Superuser Pack will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.34.0] - 2026-05-13
+
+Vault Synthesizer v2 retrofit — Tier 1 (prompt + formatter + validator). Born from a 2026-05-13 morning diagnostic session where `scripts/query.py` proved the post-v3.33.0 synthesizer was producing shallow, cluster-biased, duplicate-prone output despite the eval suite passing 7/10. Root-cause read of `vault_synthesizer.py` surfaced a structural defect: `format_connection_article` hardcoded `"Evidence pending."` in every connection thread — the LLM was never given a chance to supply evidence. Tier 1 is the prompt-and-formatter-only fix that closes that gap; Tiers 2-4 (cluster-and-sample retrieval, EDC canonicalization, three-pass agentic synthesis) are specced and gated behind the Status Tracker in the retrofit plan doc.
+
+### Added
+
+- **Vault Synthesizer Retrofit Tier Plan** (`vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-synthesizer-retrofit-tiers.md`) — 9-section intent spec built using the `intent-engineering` skill template + four-tier implementation roadmap with file:line refs, exact diff summary, research citations (TopClustRAG SIGIR 2025, Anthropic quote-first prompting, Karpathy LLM Wiki, Extract-Define-Canonicalize, MA-RAG), and an append-only verification log for future Claude sessions to track nightly-run signal across tiers.
+
+- **`_FORBIDDEN_PLACEHOLDERS` constant** (`agents-sdk/agents/vault_synthesizer.py`) — `("Evidence pending", "(to be filled)")` — defense-in-depth so any code path that still tries to emit placeholder copy gets caught by the validator instead of writing a shallow article.
+
+- **`_load_existing_concept_titles(knowledge_root, cap=200)` helper** (`agents-sdk/agents/vault_synthesizer.py`) — reads frontmatter titles from `vault/knowledge/concepts/*.md` once per run for injection into the prompt's canonicalization block. Caps at 200 titles to bound prompt size. Loaded inside `run_synthesis()` before the per-file loop.
+
+- **`_CROSS_DOMAIN_FOLDERS` tuple** (`agents-sdk/agents/vault_synthesizer.py`) — the five top-level vault folders (`00_inbox`, `10_timeline`, `20_projects`, `40_knowledge`, `05_atlas`) the synthesizer treats as distinct PARA-style domains for the cross-domain preference rule.
+
+- **`evidence` parameter on both formatters** — `format_concept_article(evidence: list[str] | None = None)` renders verbatim quotes as a new `## Evidence` blockquote section. `format_connection_article(evidence: dict[str, list[str]] | None = None)` renders per-concept verbatim quotes under each thread.
+
+### Changed
+
+- **`_build_synthesis_prompt` rewritten end-to-end** (`agents-sdk/agents/vault_synthesizer.py`) — old prompt was ~50 lines, new prompt is ~110 lines. Three steering rules stated up top: **evidence-first** (every claim grounded in a verbatim quote, no quote → no claim), **reuse > remint** (existing concept titles injected verbatim into the prompt; LLM told to reuse the exact slug rather than mint a near-duplicate), **cross-domain > within-domain** (connections preferring concepts from different `_CROSS_DOMAIN_FOLDERS`). Similar-file excerpts grew 200 → 800 chars so the LLM sees arguments instead of fragments. Each similar file now carries an explicit `folder:` field so the model can identify cross-domain pairs. JSON schema gained `evidence` arrays per concept and per-concept-in-connection, plus a `source_folders: [string]` field on connections. Forbidden-phrase list (`Evidence pending`, `(to be filled)`) stated inline so the model knows what gets rejected downstream.
+
+- **`format_connection_article` no longer hardcodes `"Evidence pending."`** (`agents-sdk/agents/vault_synthesizer.py`) — the bug that caused 111 connection articles on 2026-05-13 to ship with `Evidence pending.` in every thread. Now reads the per-concept evidence dict and renders verbatim quotes as blockquotes; falls back to `"_No verbatim evidence supplied._"` when a concept's evidence is missing — honest empty-state surface that lints clean on Sunday.
+
+- **`format_concept_article` gained an `## Evidence` section** (`agents-sdk/agents/vault_synthesizer.py`) — renders verbatim quotes from source files between the existing `## Context` and `## Examples` sections. When `evidence=None`, surfaces `"_No verbatim evidence captured this run._"`.
+
+- **`validate_article_body` rejects placeholder strings** (`agents-sdk/agents/vault_synthesizer.py`) — was previously a one-liner counting `≥2 wikilinks`; now also rejects any body containing `Evidence pending` or `(to be filled)`. Existing wikilink test (`test_validate_article_body_requires_two_wikilinks`) still passes because its fixtures don't contain forbidden strings.
+
+- **`run_synthesis` call sites updated** (`agents-sdk/agents/vault_synthesizer.py`) — `_build_synthesis_prompt` now receives `existing_titles`; `format_concept_article` now receives `evidence=list(c.get("evidence", []))`; `format_connection_article` now receives a defensively-cast `connection_evidence: dict[str, list[str]]` parsed from the LLM's `evidence:` payload.
+
+### Verification
+
+- **All 13 `tests/test_vault_synthesizer.py` unit tests pass** including the existing format/validate/regenerate-index tests that don't pass the new `evidence` param (the optional parameter preserves backward compatibility at the call-site level).
+- **62 tests pass across the synthesizer's neighborhood** (`tests/test_vault_synthesizer.py` + `test_synth_manifest.py` + `test_concept_edges.py` + `test_knowledge_lint.py`).
+- **Eval suite stays at 7/10 (3 skipped)** — same baseline as v3.33.0. No regression.
+
+### Operator-action required
+
+- **None for Tier 1 itself.** The retrofit is contained entirely within `agents-sdk/agents/vault_synthesizer.py`. No new dependencies, no schema changes, no config changes. Rollback = `git checkout agents-sdk/agents/vault_synthesizer.py`.
+- **First real signal arrives 2026-05-14 02:30 AM** when launchd fires the nightly synth. Check `vault/health/synth-manifest-2026-05-14.json` (`status: ok`, `concepts_written > 0`), `grep -rn "Evidence pending" vault/knowledge/ | wc -l` should be 0 after regen, and re-run the cluster-diversity `query.py` diagnostic to see if consulted chunks now span ≥2 different top-level vault folders.
+
+### Tiers 2-4 (pending)
+
+- **Tier 2 — Cluster-and-sample retrieval (TopClustRAG)**: replace `retriever(primary_text[:2000], top_k=5)` with top-50 cosine → HDBSCAN clustering → 2-3 chunks per cluster. Adds `hdbscan` pip dependency. Estimated 4 hrs. Trigger: Tier 1 has 3 successful nightly runs AND `query.py` still shows densest-cluster bias.
+- **Tier 3 — EDC canonicalization**: pre-write embedding cosine check against existing concepts; merge at >0.85, LLM-judge at 0.70-0.85, new file at <0.70. Adds `concept_canonicalize.py` lib + `alias_of` column on `concept_edges`. Estimated 4 hrs. Trigger: Tier 2 stable AND slug-dupe count still trending up.
+- **Tier 4 — Three-pass agentic synthesis (MA-RAG / TopClustRAG full topology)**: per-cluster draft → cross-link → lint. Estimated 8 hrs. Trigger: post-employment only — do not ship under sprint pressure.
+
+Full plan + Status Tracker at [vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-synthesizer-retrofit-tiers.md](vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-synthesizer-retrofit-tiers.md).
+
 ## [3.33.0] - 2026-05-12
 
 Vault Synthesizer Eval Suite — Workstream B (synthesizer patches) + Workstream C (Substack-Drafter agent). Builds on v3.30.1's Workstream A eval-suite ship. The suite went from baseline 1/10 (the regression suite working as designed at A's ship) to post-fix 7/10 in one work session. The Substack-Drafter agent is a new SDK agent that closes the publishing-cadence loop for Sean's job-hunt sprint — default-disabled at three kill-switch layers so it ships ahead of the original "post-employment" schedule without risk.
