@@ -7,9 +7,14 @@ created: 2026-05-13
 description: "Discover the latest features, updates and improvements of Jitter, the fast and simple motion design tool on the web. Try Jitter for free now."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - animation
+  - motion-design
+  - jitter
+  - changelog
+type: reference
+status: draft
+domain: [creative-studio]
+ai-context: "Jitter's May 2026 changelog — most notably the launch of Jitter AI (prompt-to-effect creative tools generated inside the existing canvas/Animate tab), plus a new template set, artboard-to-PNG export, and other improvements to the browser-based motion design tool."
 ---
 [Skip to main content](https://jitter.video/changelog/#main-content)
 
