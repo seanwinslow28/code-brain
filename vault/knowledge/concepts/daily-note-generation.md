@@ -2,10 +2,10 @@
 title: "Daily Note Generation"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-12.md
+  - knowledge/concepts/daily-routine-automation.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
@@ -14,13 +14,12 @@ The process of generating a structured summary or task list for the day, typical
 
 ## Context
 
-Daily notes are essential for maintaining a consistent workflow and tracking progress across personal or professional domains like the creative studio, life systems, and job hunting.
+Daily notes are essential for tracking progress, aligning priorities, and maintaining a record of day-to-day activities.
 
 ## Examples
 
-- The daily-driver agent on 2026-05-11 successfully generated a note, but the system flagged that no daily note was created for 2026-05-12.
-- The absence of a daily note for May 12, 2026, disrupted the primary daily flow of operations.
+- (no examples captured yet)
 
 ## Related Concepts
 
-[[Fleet Status]] [[Daily-Drive Agent]]
+[[Daily Routine Automation]] [[Agent Health]]

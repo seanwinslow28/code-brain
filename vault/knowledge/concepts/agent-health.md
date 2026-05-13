@@ -2,25 +2,25 @@
 title: "Agent Health"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/fleet-state.md
+  - knowledge/index.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-A measure of the reliability and performance of individual agents, including their status (healthy or disabled), last run time, execution notes, and any associated costs.
+A measure of the status and efficiency of individual agents, including metrics like uptime, task completion rates, and resource usage.
 
 ## Context
 
-Agent health is essential to ensure that automated systems are functioning as expected, and it helps identify which agents need maintenance or optimization.
+Maintaining good agent health is essential for ensuring reliable execution of automation routines and research tasks.
 
 ## Examples
 
-- vault-indexer - status: healthy, last run: 2026-05-12T02:00:47
-- daily-driver morning - status: healthy, cost=$0.5513, note='Morning planning complete'
+- Health dashboards showing agent performance
+- Threshold-based alerts for poor-performing agents
 
 ## Related Concepts
 
-[[Fleet Status]] [[Automation Reliability]] [[Daily Routine Automation]]
+[[Agent Health Monitoring]] [[Automation Routines]] [[Vault Maintenance]]

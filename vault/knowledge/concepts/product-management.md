@@ -2,25 +2,25 @@
 title: "Product Management"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_AI_PM.md
+  - knowledge/connections/system-constraints.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-The practice of managing the development and lifecycle of products, ensuring alignment with business objectives.
+Product Management is the process of guiding a product's development, ensuring alignment with business goals and effective delivery to users.
 
 ## Context
 
-Product Management is central to Sean's role at The Block and drives the successful delivery of features like Claude Skills.
+Effective product management ensures successful delivery of features like Claude Skills and aligns research efforts with overall business strategies.
 
 ## Examples
 
-- Block Pro 2.0 product audit
-- Sponsored Microcourse B2B Revenue Vertical
+- Successfully delivered Claude Skills at The Block
+- Ensures alignment with business objectives
 
 ## Related Concepts
 
-[[Automation Pipeline]] [[Claude Skills]]
+[[Claude Skills]] [[Market Positioning]] [[System Constraints]]

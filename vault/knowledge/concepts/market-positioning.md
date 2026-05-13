@@ -2,25 +2,25 @@
 title: "Market Positioning"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_AI_PM.md
+  - knowledge/connections/system-constraints.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-The process of strategically placing a product or service in the market to appeal to its target audience.
+Market Positioning is the strategic approach to presenting a product or service in a way that differentiates it from competitors and aligns with target audience needs.
 
 ## Context
 
-Market Positioning helps establish a unique brand identity and differentiate offerings from competitors.
+Effective market positioning ensures products stand out in the market and meet customer expectations based on insights from competitive analysis.
 
 ## Examples
 
-- The Block's sponsored-microcourse B2B revenue vertical
-- .co homepage redesign competitive visual audit
+- Effective positioning of Claude Skills
+- Derives strategy from Competitive Analysis
 
 ## Related Concepts
 
-[[Competitive Analysis]] [[Product Management]]
+[[Competitive Analysis]] [[Product Management]] [[System Constraints]]

@@ -2,25 +2,25 @@
 title: "Research Agents"
 type: concept
 sources:
-  - 00_inbox/research-queue.md
+  - knowledge/connections/system-constraints.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-Automated systems that process and execute research tasks, including the `deep-researcher` agent and other specialized agents for scheduling, execution, or analysis.
+Research Agents are responsible for managing queues, execution timing, and workload distribution across different research systems, such as LDR and Gemini DR.
 
 ## Context
 
-Research Agents ensure consistent and automated exploration of research questions while adhering to constraints like timeouts or citation quality.
+Research Agents ensure that query prioritization, scheduling, and distribution are managed efficiently across constrained environments.
 
 ## Examples
 
-- The `deep-researcher` agent executing LDR nightly.
-- A due-diligence matrix evaluator for multi-target queries.
+- Manages queue handling
+- Coordinates execution timing for LDR and Gemini DR
 
 ## Related Concepts
 
-[[Deep Research Queue]] [[Local Deep Research (LDR)]] [[Gemini Deep Research]]
+[[System Constraints]] [[Local Deep Research (LDR)]] [[Gemini Deep Research]]
