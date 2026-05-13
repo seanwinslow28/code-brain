@@ -2,19 +2,22 @@
 title: "Research Workflow Integration"
 type: connection
 connects:
+  - Research Workflow Integration
   - Deep Research Queue
   - Local Deep Research (LDR)
-  - Gemini Deep Research
-  - Research Agents
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Synthesis
 
-The Deep Research Queue, Local Deep Research (LDR), Gemini Deep Research, and Research Agents form a cohesive system for managing complex, single-topic research questions.
+The integration of Deep Research Queue, LDR, Gemini DR, and Research Agents forms a comprehensive framework for managing complex research tasks
 
 ## Threads
+
+### [[Research Workflow Integration]]
+
+Evidence pending.
 
 ### [[Deep Research Queue]]
 
@@ -24,15 +27,7 @@ Evidence pending.
 
 Evidence pending.
 
-### [[Gemini Deep Research]]
-
-Evidence pending.
-
-### [[Research Agents]]
-
-Evidence pending.
-
 ## Implications
 
-- Single-topic research is handled efficiently via the Deep Research Queue and LDR.
-- Complex queries are routed to Gemini DR for multi-target analysis.
+- This system can be expanded to include other research systems for broader applicability.
+- Unified workflow models can improve efficiency in multi-target deep research scenarios.

@@ -2,25 +2,25 @@
 title: "Open-Source Contributions"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_AI_PM.md
+  - knowledge/connections/system-constraints.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-Contributions to publicly accessible projects that encourage collaboration and knowledge sharing.
+Open-source contributions refer to the collaborative development and sharing of software or research tools, which can be leveraged by systems like Autonomous Agent Fleets for innovation and accessibility.
 
 ## Context
 
-Open-source contributions demonstrate technical expertise, community engagement, and a commitment to knowledge-sharing.
+Open-source contributions drive innovation by making systems more accessible, flexible, and adaptable to new challenges.
 
 ## Examples
 
-- 117-skill Claude Code Superuser Pack
-- 14-agent autonomous SDK fleet
+- Complements Sean's work with Autonomous Agent Fleets
+- Used in system development for scalability
 
 ## Related Concepts
 
-[[Product Management]] [[Autonomous Agent Fleets]]
+[[Autonomous Agent Fleets]] [[Research Agents]] [[System Constraints]]

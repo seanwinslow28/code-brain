@@ -1,12 +1,12 @@
 ---
-title: "Daily-driver agent and Operating-model interview"
+title: "daily-driver-agent-and-operating-model-interview"
 type: connection
 connects:
   - Daily-driver agent
   - Operating-model interview
   - prj-job-hunt-2026
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Synthesis
@@ -29,4 +29,5 @@ Evidence pending.
 
 ## Implications
 
-- The operating model interview ensures that tools like the Daily-driver agent are well-integrated into job-hunt workflows.
+- The Daily-driver agent functions as a key artifact within the Operating-model interview framework to streamline daily tasks.
+- This streamlining supports the broader goals of the prj-job-hunt-2026 project.

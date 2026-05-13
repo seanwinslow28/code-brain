@@ -2,24 +2,24 @@
 title: "Operating-model interview"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/README.md
+  - knowledge/connections/prj-job-hunt-2026-and-operating-model-interview.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-A structured evaluation of personal systems for job hunting work, including artifacts such as daily-driver agent and knowledge-lint.
+A structured evaluation of personal systems for job hunting, including artifacts like the Daily-driver agent.
 
 ## Context
 
-This interview ensures that the job-hunt project is built on a strong foundation of personal systems.
+This interview ensures that work processes are effective, focused, and tailored for job hunting.
 
 ## Examples
 
-- Artifacts at vault/05_atlas/operating-models/job-hunt-2026/
-- Includes daily-driver agent
+- Evaluating personal systems
+- Including artifacts like the Daily-driver agent
 
 ## Related Concepts
 

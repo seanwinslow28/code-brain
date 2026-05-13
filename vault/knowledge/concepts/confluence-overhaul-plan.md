@@ -2,25 +2,25 @@
 title: "Confluence Overhaul Plan"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume.md
+  - knowledge/connections/revenue-integration-and-confluence-overhaul.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-A strategic initiative to consolidate and streamline documentation, workflows, and onboarding processes onto a unified platform such as Confluence.
+A strategy to improve internal documentation and knowledge management systems, ensuring teams have access to accurate information and resources.
 
 ## Context
 
-This is important for fostering collaboration, reducing documentation silos, and improving knowledge accessibility within cross-functional teams.
+This plan enhances operational efficiency by streamlining internal communication and documentation processes.
 
 ## Examples
 
-- 10-week P&E Department 2.0 execution plan consolidating competing team-doc hubs
-- Centralized Templates Library architecture.
+- Internal knowledge base updates
+- Team collaboration tools
 
 ## Related Concepts
 
-[[AI Product Manager]] [[Agentic-Engineering]]
+[[Revenue Integration]] [[AI Product Manager]]
