@@ -1,4 +1,4 @@
-# Vault Synthesizer Eval Run — 2026-05-12T20:41:48.451326+00:00
+# Vault Synthesizer Eval Run — 2026-05-13T21:32:00.993392+00:00
 
 > **Read this first.** This suite ships intentionally red. Each ❌ below is a
 > real production failure mode this suite catches — not a broken eval. The
