@@ -2,26 +2,25 @@
 title: "Claude Skills"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_AI_PM.md
+  - knowledge/connections/system-constraints.md
 tags: [auto-generated, phase-6]
-created: 2026-05-12
-updated: 2026-05-12
+created: 2026-05-13
+updated: 2026-05-13
 ---
 
 ## Definition
 
-Pre-built AI tools or functionalities that automate specific tasks within The Block, such as ETF page generation and Jira ticket scaffolding.
+Claude Skills are specific capabilities or features within the Claude system, which have been successfully delivered through effective product management strategies.
 
 ## Context
 
-Claude Skills are crucial for automating manual processes and improving efficiency in The Block's operations.
+Claude Skills demonstrate the importance of aligning technical development with business objectives to ensure product success.
 
 ## Examples
 
-- etf-page-creator
-- stakeholder-update
-- jira-automation
+- Successful delivery at The Block
+- Driven by effective Product Management
 
 ## Related Concepts
 
-[[Product Management]] [[Automation Pipeline]]
+[[Product Management]] [[System Constraints]] [[Market Positioning]]
