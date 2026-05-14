@@ -2,19 +2,25 @@
 title: "AI Prototyping"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-vibe-coding-playbook.md
+  - knowledge/concepts/ai-prototyping.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-The process of using AI tools to rapidly prototype or solve problems during interviews, often used in tech roles.
+The process of using AI tools to rapidly prototype or solve problems during interviews, often used in tech roles. This includes leveraging platforms like Cursor (Anysphere) or AI agents to demonstrate technical abilities in real time.
 
 ## Context
 
-This is an emerging trend where candidates use tools like Cursor (Anysphere) or AI agents to demonstrate their technical abilities.
+It matters for Sean because it aligns with his 2026 job-hunt strategy, particularly in tech interviews where AI fluency and rapid problem-solving are becoming critical evaluation criteria.
+
+## Evidence
+
+> The process of using AI tools to rapidly prototype or solve problems during interviews, often used in tech roles.
+
+> And [prototype with AI](https://www.news.aakashg.com/p/ai-prototyping-tutorial)
 
 ## Examples
 

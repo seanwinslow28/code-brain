@@ -2,26 +2,31 @@
 title: "Research Workflow Integration"
 type: concept
 sources:
-  - knowledge/connections/research-workflow-integration.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-knowledge-mcp-spec.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-A system that integrates various deep research tools, including queues and agents, to manage complex research tasks efficiently.
+The process of integrating deep research outputs into Sean's workflow, ensuring that findings from tools like Gemini Deep Research are systematically applied and acted upon.
 
 ## Context
 
-This integration ensures that multiple research components work together seamlessly for better outcomes in deep research.
+This is critical for Sean's job hunt as it ensures his knowledge graph and MCP servers are sustained with up-to-date research insights.
+
+## Evidence
+
+> This document IS the research input.
+
+> No code is written until deep research returns with architecture + reference-implementation validation.
 
 ## Examples
 
-- Deep Research Queue
-- Local Deep Research (LDR)
-- Gemini DR
+- 2026-05-07-target-role-specs
+- vault-knowledge-mcp
 
 ## Related Concepts
 
-[[Deep Research Queue]] [[Local Deep Research (LDR)]]
+[[Deep Research Queue]] [[Gemini Deep Research]]
