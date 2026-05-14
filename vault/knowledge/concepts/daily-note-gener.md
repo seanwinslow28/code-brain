@@ -2,19 +2,25 @@
 title: "Daily Note Gener"
 type: concept
 sources:
-  - knowledge/connections/automation-and-daily-drive-agent-interdependence.md
+  - knowledge/concepts/daily-note-gener.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-A routine task performed by the daily-driver agent to generate a note for the day, which is integral to tracking progress and activities.
+A routine task performed by the daily-driver agent to generate a note for the day, which is integral to tracking progress and activities. Its success relies heavily on the health of the agent and the automation routines in place.
 
 ## Context
 
-Its success relies heavily on the health of the agent and the automation routines in place.
+This concept is critical for Sean as it underpins his ability to track productivity and progress, which ties into both automation routines (job-hunt-2026) and personal systems support (life-systems).
+
+## Evidence
+
+> A routine task performed by the daily-driver agent to generate a note for the day, which is integral to tracking progress and activities.
+
+> Its success relies heavily on the health of the agent and the automation routines in place.
 
 ## Examples
 

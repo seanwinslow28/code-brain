@@ -2,10 +2,10 @@
 title: "Vault Maintenance"
 type: concept
 sources:
-  - knowledge/connections/vault-maintenance-and-knowledge-lint.md
+  - knowledge/concepts/knowledge-lint.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
@@ -14,12 +14,18 @@ The process of keeping the knowledge base updated and organized through indexing
 
 ## Context
 
-Vault maintenance is essential for maintaining the integrity and usability of a knowledge vault, ensuring that information remains accurate, consistent, and accessible.
+This concept is crucial for Sean's personal knowledge vault, ensuring that all domains such as job preparation, creative work, and infrastructure remain aligned with domain-specific rules.
+
+## Evidence
+
+> The process of keeping the knowledge base updated and organized through indexing, synthesizing information, and ensuring consistency with domain-specific rules.
+
+> The knowledge-lint agent ensures Tier 1 and Tier 2 concepts remain properly separated, which is essential for effective vault maintenance.
 
 ## Examples
 
-- Indexing raw data into structured knowledge chunks.
-- Synthesizing information to create new insights.
+- Indexing raw data into coherent knowledge chunks.
+- Synthesizing information from multiple sources.
 
 ## Related Concepts
 
