@@ -2,10 +2,10 @@
 title: "Interview Preparation Playbook"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-vibe-coding-playbook.md
+  - knowledge/concepts/interview-preparation-playbook.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
@@ -14,7 +14,13 @@ A structured guide that outlines how to approach and prepare for different types
 
 ## Context
 
-This is critical in reducing the cognitive load of interviews by predefining strategies, tools, and expectations.
+This is particularly important for Sean's job-hunt-2026 as it helps reduce cognitive load during interviews by providing predefined strategies and expectations.
+
+## Evidence
+
+> A structured guide that outlines how to approach and prepare for different types of interviews, focusing on efficiency and effectiveness.
+
+> This is critical in reducing the cognitive load of interviews by predefining strategies, tools, and expectations.
 
 ## Examples
 

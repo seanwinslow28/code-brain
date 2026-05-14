@@ -2,26 +2,30 @@
 title: "Target Role Specs for 2026"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-prompts/2026-05-08-prompt-crypto-pm-referral-targets.md
+  - 20_projects/prj-job-hunt-2026/target-companies.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-Specifications of roles that are specifically targeted by hiring seekers in the context of 2026, including domain-specific knowledge and hiring preferences.
+A detailed set of specifications for targeted roles, including compensation ranges, job descriptions, and required skills. These specs are derived from a combination of Gemini DR-Max research and Sean's personal evaluation.
 
 ## Context
 
-This is important to prioritize roles that have clear alignment with the seeker's background and target companies.
+This concept is essential for Sean as it provides clarity on what roles he should target and how to align his portfolio with those roles.
+
+## Evidence
+
+> "Role intelligence for the Week-2 target — [[2026-05-07-target-role-specs]] — Gemini DR-Max, 16 roles fully spec'd with JD URLs, comp ranges, hiring-manager telemetry, portfolio-to-role mapping."
+
+> The Target Companies — Strategic 30 document includes a detailed breakdown of roles, including compensation ranges and job description URLs.
 
 ## Examples
 
-- Blockchain protocol development
-- Data analytics for crypto research
-- Hiring with a remote-first culture
+- Anthropic's Forward Deployed Engineer role with compensation of $280–320k (NY equiv).
 
 ## Related Concepts
 
-[[Crypto PM/APM Targets That Convert The Block Referrals]] [[AI-PM Landscape for Boston/Remote Hiring]] [[Crypto PM/APM Role Specifications]]
+[[AI-PM Landscape for Boston/Remote Hiring]] [[Portfolio Projects]]

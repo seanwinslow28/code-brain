@@ -2,26 +2,30 @@
 title: "AI-PM Landscape for Boston/Remote Hiring"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-prompts/2026-05-08-prompt-crypto-pm-referral-targets.md
+  - knowledge/concepts/ai-pm-landscape-for-boston-remote-hiring.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-A comprehensive overview of companies in the AI and product management space that operate with remote or Boston-based hiring practices.
+A framework mapping AI-related product management roles in the Boston area and remote environments, focusing on companies like Glean, Pair Team, and Anthropic. It emphasizes roles aligned with AI development, deployment, and leadership.
 
 ## Context
 
-This is relevant to identify opportunities that align with geographic preferences and remote work flexibility, especially in the AI-Powered PM niche.
+This concept is crucial for Sean as he's targeting companies that value AI product management skills, which align with his portfolio and career goals.
+
+## Evidence
+
+> "AI-PM Landscape for Boston/Remote Hiring" — This framework is tailored to Sean's specific job hunt, emphasizing companies that are hiring for AI-related roles in his preferred locations.
+
+> "Glean" | Role: Forward Deployed PM | Loc / Policy: Remote-US | ... [Greenhouse](https://job-boards.greenhouse.io/gleanwork/jobs/4651950005)
 
 ## Examples
 
-- Companies like Aave or Lido offering remote roles
-- Institutions such as Chainalysis with Boston offices
-- AI startups in the Greater Boston area
+- Glean's Forward Deployed PM role (Remote-US) is an example of this landscape.
 
 ## Related Concepts
 
-[[Crypto PM/APM Targets That Convert The Block Referrals]] [[Target Role Specs for 2026]] [[Crypto PM/APM Role Specifications]]
+[[Portfolio Projects for Interview Prep]] [[Target Role Specs for 2026]]

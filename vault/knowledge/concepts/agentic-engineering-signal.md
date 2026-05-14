@@ -2,10 +2,10 @@
 title: "Agentic Engineering Signal"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-portfolio-projects-roadmap.md
+  - knowledge/concepts/ai-fluency.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
@@ -14,13 +14,18 @@ A clear, visible sign of engineering capability with agentic systems that can be
 
 ## Context
 
-This term refers to the ability of a candidate to exhibit their agentic engineering skills in a compelling way during interviews.
+This concept is central to Sean's job-hunt-2026 strategy, as it helps him stand out in engineering interviews by showcasing his hands-on experience with agentic systems.
+
+## Evidence
+
+> A clear, visible sign of engineering capability with agentic systems that can be quickly noticed by evaluators like FDEs or hiring managers.
+
+> This term refers to the ability
 
 ## Examples
 
-- MCP Server Visualizer
-- Publicly recorded Loom session
+- (no examples captured yet)
 
 ## Related Concepts
 
-[[Vibe-Coding Rep Familiarity]] [[Hiring-Manager Appeal]]
+[[AI Fluency]] [[Portfolio Projects for Interview Prep]]

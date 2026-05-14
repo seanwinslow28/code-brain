@@ -2,25 +2,31 @@
 title: "Open-Source Contributions"
 type: concept
 sources:
-  - knowledge/connections/system-constraints.md
+  - 20_projects/research/2026-05-13-topic-9-openrouter-free-tier-models-that-support-openai-form.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-Open-source contributions refer to the collaborative development and sharing of software or research tools, which can be leveraged by systems like Autonomous Agent Fleets for innovation and accessibility.
+The practice of contributing to open-source projects or using tools that are freely available and community-driven, which can provide scalable solutions for agentic systems.
 
 ## Context
 
-Open-source contributions drive innovation by making systems more accessible, flexible, and adaptable to new challenges.
+Sean needs open-source contributions to find alternatives like the Qwen3-Coder model that can replace a locally-hosted system when it is unreachable.
+
+## Evidence
+
+> Qwen3-Coder [...] ideal for headless tool-using agents [[1]](https://openrouter.ai/collections/free-models)
+
+> Qwen3-14B [...] supports tool calling efficiently [[5]](https://medium.com/codex/open-source-llm-platforms-in-2026-ollama-openrouter-groq-nvidia-nim-which-one-should-you-use-2f11c7ba60bc)
 
 ## Examples
 
-- Complements Sean's work with Autonomous Agent Fleets
-- Used in system development for scalability
+- Qwen3-Coder
+- Qwen3-14B
 
 ## Related Concepts
 
-[[Autonomous Agent Fleets]] [[Research Agents]] [[System Constraints]]
+[[Deep Research Queue]] [[Local Deep Research (LDR)]]

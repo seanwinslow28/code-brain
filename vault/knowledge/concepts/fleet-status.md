@@ -2,19 +2,25 @@
 title: "Fleet Status"
 type: concept
 sources:
-  - knowledge/connections/fleet-status-and-automation-reliability.md
+  - knowledge/concepts/fleet-status.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-The operational health of a fleet of autonomous agents, indicating their availability and performance.
+The operational health of a fleet of autonomous agents, indicating their availability and performance. This is crucial for ensuring automation reliability.
 
 ## Context
 
-Fleet status is essential for understanding the reliability of automation processes since it reflects whether agents are functioning as expected.
+Fleet status directly impacts Sean's ability to rely on automated systems for daily routines, research, and production workflows.
+
+## Evidence
+
+> The operational health of a fleet of autonomous agents, indicating their availability and performance.
+
+> Fleet status is essential for understanding the reliability of automation processes since it reflects whether agents are functioning as expected.
 
 ## Examples
 

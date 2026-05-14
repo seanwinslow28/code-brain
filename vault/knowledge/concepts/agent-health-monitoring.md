@@ -2,25 +2,31 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/index.md
+  - knowledge/concepts/daily-routine-automation.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-The process of tracking and evaluating the operational status, performance metrics, and reliability of individual agents within a fleet.
+A process of ensuring automation agents remain functional and reliable in their daily routine tasks.
 
 ## Context
 
-Effective agent health monitoring ensures that autonomous systems remain functional, efficient, and aligned with operational goals.
+This concept supports Sean’s ability to ensure that his automation systems remain robust, particularly in managing knowledge vault and portfolio projects.
+
+## Evidence
+
+> Agent Health Monitoring
+
+> Daily routine automation relies on daily note generation and agent health to maintain productivity and consistency.
 
 ## Examples
 
-- Daily health checks of agents in automation pipelines
-- Monitoring response times and error rates for agent fleets
+- Monitoring agent performance metrics
+- Ensuring automation agents are regularly updated and maintained
 
 ## Related Concepts
 
-[[Agent Health]] [[Autonomous Agent Fleets]] [[Automation Pipeline]]
+[[Daily Routine Automation]] [[Automation Routines]]

@@ -2,24 +2,30 @@
 title: "Daily Note Generation"
 type: concept
 sources:
-  - knowledge/concepts/daily-routine-automation.md
+  - knowledge/concepts/daily-note-generation.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-The process of generating a structured summary or task list for the day, typically initiated by an automation routine such as the 'daily-driver' agent.
+A systematic method for documenting daily progress, observations, and insights to support evidence-based work and interview preparation.
 
 ## Context
 
-Daily notes are essential for tracking progress, aligning priorities, and maintaining a record of day-to-day activities.
+This practice is crucial for Sean's operational tracking, ensuring that he maintains a continuous record of his work and progress during the job hunt and creative processes.
+
+## Evidence
+
+> The systematic creation of notes or summaries that document daily progress, observations, and insights.
+
+> Reporting on AI-native onsites
 
 ## Examples
 
-- (no examples captured yet)
+- The process of generating daily notes to capture system behavior and progress.
 
 ## Related Concepts
 
-[[Daily Routine Automation]] [[Agent Health]]
+[[Automation Routines]] [[Daily-Drive Agent]]

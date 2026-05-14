@@ -2,19 +2,25 @@
 title: "Deep Work"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/cowork-kickoffs/2026-05-07-kickoff-vibe-coding-playbook-synthesis.md
+  - knowledge/concepts/deep-work.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-A state of focused, distraction-free work that enables high-impact thinking and productivity.
+A state of focused, distraction-free work that enables high-impact thinking and productivity. It is particularly important for activities like building portfolio projects and researching companies during job hunting.
 
 ## Context
 
-In job hunting, deep work is essential for building portfolio projects, researching companies, and preparing for interviews.
+For Sean, deep work is critical in his job-hunt-2026 efforts to remain productive and competitive while navigating the post-layoff phase.
+
+## Evidence
+
+> A state of focused, distraction-free work that enables high-impact thinking and productivity.
+
+> In job hunting, deep work is essential for building portfolio projects, researching companies, and preparing for interviews.
 
 ## Examples
 

@@ -2,25 +2,30 @@
 title: "prj-job-hunt-2026"
 type: concept
 sources:
-  - knowledge/connections/vault-synthesizer-eval-suite-and-synthesizer-fix.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-claude-code-handoff-task-1-2.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-A project focused on job hunting in 2026, likely involving elements like personal branding, networking, and optimizing professional tools.
+A comprehensive project managing Sean's job search in 2026, integrating automation tools, daily routines, and knowledge synthesis for hiring process optimization.
 
 ## Context
 
-This project is informed by the results of the Vault Synthesizer Eval Suite and is supported by the Synthesizer fix to meet performance benchmarks.
+This project is central to Sean's professional development in 2026, tying together automation routines, knowledge management practices, and hiring strategy.
+
+## Evidence
+
+> The roadmap references `<personal-site>` without naming the path. Sean's portfolio plan calls for Astro 5 + React islands.
+
+> The handoff also runs `python3 scripts/validate.py` ahead of commit and reports back if new errors surface that weren't in the v3.30.1 baseline of 60 warnings / 0 errors.
 
 ## Examples
 
-- Informed by results from the Vault Synthesizer Eval Suite
-- Supported by improvements made via the Synthesizer fix
+- The project includes tasks such as developing a personal site with Astro and React, managing GitHub EXPLANATION.md files, and integrating knowledge synthesis workflows.
 
 ## Related Concepts
 
-[[Vault Synthesizer Eval Suite]] [[Synthesizer fix]]
+[[Daily Note Generation]] [[Automation Routines]]
