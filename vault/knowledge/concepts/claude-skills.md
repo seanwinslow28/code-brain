@@ -2,10 +2,10 @@
 title: "Claude Skills"
 type: concept
 sources:
-  - knowledge/connections/system-constraints.md
+  - knowledge/concepts/claude-skills.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
@@ -14,7 +14,13 @@ Claude Skills are specific capabilities or features within the Claude system, wh
 
 ## Context
 
-Claude Skills demonstrate the importance of aligning technical development with business objectives to ensure product success.
+Understanding Claude Skills helps Sean align his professional development with successful product management practices, particularly in the context of AI systems and feature delivery.
+
+## Evidence
+
+> Claude Skills are specific capabilities or features within the Claude system, which have been successfully delivered through effective product management strategies.
+
+> Driven by effective Product Management
 
 ## Examples
 
@@ -23,4 +29,4 @@ Claude Skills demonstrate the importance of aligning technical development with 
 
 ## Related Concepts
 
-[[Product Management]] [[System Constraints]] [[Market Positioning]]
+[[Product Management]] [[System Constraints]]

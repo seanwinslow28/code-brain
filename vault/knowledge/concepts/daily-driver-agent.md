@@ -2,25 +2,31 @@
 title: "Daily-driver agent"
 type: concept
 sources:
-  - knowledge/connections/prj-job-hunt-2026-and-operating-model-interview.md
+  - knowledge/concepts/daily-driver-agent.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-An agent designed to be a daily workhorse, integrated into the Operating-model interview.
+A personal or professional assistant agent that actively manages a user’s daily operations, from automation routines to critical tasks like job-hunt tracking.
 
 ## Context
 
-This agent supports daily job hunting tasks and streamlines work within the Operating-model interview framework.
+This agent is vital for Sean's 2026 job hunt, as it helps manage his roadmap, interview prep, and communication with hiring managers.
+
+## Evidence
+
+> The agent is being used for tasks that mimic human decision-making, from purchasing to settlement.
+
+> Here’s the artifact page.” In other words: transaction first, credentials second.
 
 ## Examples
 
-- Streamlining daily job hunting tasks
-- Integrated into the Operating-model interview
+- Managing daily routines and tracking job applications.
+- Automating credential usage for purchases or business processes.
 
 ## Related Concepts
 
-[[Operating-model interview]] [[prj-job-hunt-2026]]
+[[Automation Routines]] [[Agentic-Engineering]]
