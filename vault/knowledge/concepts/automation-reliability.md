@@ -2,24 +2,30 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - knowledge/connections/fleet-status-and-automation-reliability.md
+  - knowledge/concepts/fleet-status.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-The consistency and dependability of automation processes performed by autonomous agents.
+The consistency and dependability of automation processes performed by autonomous agents. This is a measure of how reliably tasks are completed.
 
 ## Context
 
-Automation reliability is crucial for ensuring that tasks, such as generating daily notes or managing schedules, are completed successfully and without interruption.
+Automation reliability ensures that Sean's workflows — such as daily note generation or research agents — are consistent and dependable.
+
+## Evidence
+
+> The consistency and dependability of automation processes performed by autonomous agents.
+
+> Fleet status report highlights agent operational health, which directly correlates with automation reliability.
 
 ## Examples
 
-- Improved fleet status monitoring enhances automation reliability
-- Automation reliability is impacted by agent health and fleet status
+- Fleet status report highlights agent operational health
+- Automation reliability is crucial for ensuring that tasks, such as generating daily notes, are completed consistently.
 
 ## Related Concepts
 

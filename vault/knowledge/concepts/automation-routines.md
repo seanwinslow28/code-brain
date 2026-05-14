@@ -2,25 +2,31 @@
 title: "Automation Routines"
 type: concept
 sources:
-  - knowledge/index.md
+  - knowledge/concepts/daily-routine-automation.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-Predefined sequences of actions performed by agents to achieve specific goals or outcomes, often designed for efficiency and scalability.
+A structured set of automated actions within daily routine automation, aimed at maintaining productivity and efficiency.
 
 ## Context
 
-Automation routines form the basis of many AI-driven workflows, including daily routine automation and research pipelines.
+This concept is important for Sean as it forms the backbone of his daily automation workflows, particularly those related to knowledge management and job-hunt activities.
+
+## Evidence
+
+> Routine task scheduling and tracking
+
+> Daily routine automation relies on daily note generation and agent health to maintain productivity and consistency.
 
 ## Examples
 
-- Scheduled data-crawl routines
-- Agent-driven content synthesis
+- Automated email sorting
+- Task scheduling and tracking
 
 ## Related Concepts
 
-[[Daily Routine Automation]] [[Automation Pipeline]] [[Agent Health]]
+[[Daily Routine Automation]] [[Daily Note Generation]]

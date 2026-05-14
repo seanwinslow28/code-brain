@@ -2,19 +2,25 @@
 title: "Confidence Rituals"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/cowork-kickoffs/2026-05-07-kickoff-vibe-coding-playbook-synthesis.md
+  - knowledge/concepts/confidence-rituals.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-Practices that help candidates manage self-doubt, maintain composure, and project confidence during interviews.
+Practices that help candidates manage self-doubt, maintain composure, and project confidence during interviews, particularly in vibe-coding formats that value transparency.
 
 ## Context
 
-In vibe-coding interviews, where transparency is valued, managing self-doubt is crucial to presenting as a strong collaborator.
+Critical for Sean as he navigates vibe-coding interviews in his job-hunt-2026, where projecting confidence is essential for success.
+
+## Evidence
+
+> Practices that help candidates manage self-doubt, maintain composure, and project confidence during interviews.
+
+> In vibe-coding interviews, where transparency is valued, managing self-doubt is crucial to presenting as a strong collaborator.
 
 ## Examples
 

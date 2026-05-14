@@ -2,19 +2,25 @@
 title: "Daily Routine Automation"
 type: concept
 sources:
-  - knowledge/index.md
+  - knowledge/concepts/daily-routine-automation.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-The application of automation agents to handle repetitive, routine tasks in an individual's or organization’s workflow.
+The application of automation agents to handle repetitive, routine tasks in an individual's or organization’s workflow. It ensures consistency and reduces manual overhead.
 
 ## Context
 
-Daily routine automation helps reduce manual overhead and ensures that critical tasks are executed consistently.
+This concept is vital for Sean as it supports his daily workflow, especially when managing both personal and professional responsibilities like the job-hunt-2026 roadmap.
+
+## Evidence
+
+> The application of automation agents to handle repetitive, routine tasks in an individual's or organization’s workflow.
+
+> Daily routine automation helps reduce manual overhead and ensures that critical tasks are executed consistently.
 
 ## Examples
 
@@ -23,4 +29,4 @@ Daily routine automation helps reduce manual overhead and ensures that critical 
 
 ## Related Concepts
 
-[[Daily-Drive Agent]] [[Agent Health Monitoring]] [[Automation Routines]]
+[[Automation Routines]] [[Agent Health Monitoring]]
