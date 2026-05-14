@@ -2,10 +2,10 @@
 title: "Citation Quality"
 type: concept
 sources:
-  - knowledge/connections/citation-quality.md
+  - knowledge/concepts/citation-quality.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
@@ -14,7 +14,13 @@ Citations are a critical concern in research workflows, referring to the accurac
 
 ## Context
 
-Ensuring citation quality is essential in maintaining the credibility of research outputs, especially with systems like LDR and Gemini DR.
+For Sean, ensuring citation quality is essential in his personal knowledge vault and research frameworks, especially as he evaluates tools like Gemini Deep Research and LDR for his workflows.
+
+## Evidence
+
+> Citations are a critical concern in research workflows, referring to the accuracy and reliability of sources used within deep research systems.
+
+> Citations are a critical concern in research workflows, with LDR being unable to manage multi-target citation quality effectively.
 
 ## Examples
 

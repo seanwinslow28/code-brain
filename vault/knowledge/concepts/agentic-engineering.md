@@ -2,25 +2,31 @@
 title: "Agentic-Engineering"
 type: concept
 sources:
-  - knowledge/index.md
+  - knowledge/concepts/agentic-engineering.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-The practice of designing, building, and managing autonomous agents that can self-configure, self-optimize, and execute tasks with minimal human oversight.
+The design and implementation of systems where software agents autonomously execute commercial actions like payments, authorization, and settlement. This layering of responsibility shifts the burden of trust from humans to algorithms.
 
 ## Context
 
-Agentic-engineering is the backbone of modern automation and AI systems that operate autonomously, such as research agents or daily-note generation systems.
+This is critical for Sean's job-hunt-2026 and creative-studio work, as agentic systems will redefine how he interacts with tools, products, and services in both his professional and creative workflows.
+
+## Evidence
+
+> Software is starting to hold wallets, sign authorizations, and pay merchants directly.
+
+> The question stops being 'can the customer pay?' and becomes 'how does everyone know the agent was allowed to do what it just did?'
 
 ## Examples
 
-- Designing self-learning agent fleets
-- Building autonomous agents for daily-drive routines
+- OpenAI and Stripe's Instant Checkout protocol, which was later scaled back.
+- Shopify and Google's competing agentic commerce protocols.
 
 ## Related Concepts
 
-[[Automation Routines]] [[Autonomous Agent Fleets]] [[AI Product Manager]]
+[[Automation Routines]] [[Daily-driver agent]]

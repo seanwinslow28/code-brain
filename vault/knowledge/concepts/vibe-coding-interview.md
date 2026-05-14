@@ -2,25 +2,30 @@
 title: "Vibe-Coding Interview"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/cowork-kickoffs/2026-05-07-kickoff-vibe-coding-playbook-synthesis.md
+  - knowledge/concepts/karpathy-single-top-rec.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-A situational interview format used by AI-native startups where candidates are asked to code in real time while discussing their approach, problem-solving process, and interpersonal dynamics.
+A structured interview format that involves demonstrating coding and problem-solving skills in a dynamic, real-time setting. It is used by companies like Sierra as part of their hiring process.
 
 ## Context
 
-This format tests not only technical ability but also cultural fit, communication skills, and how a candidate operates in ambiguity — essential for roles where PMs must collaborate closely with engineers.
+This format is critical for Sean during his job hunt in 2026, as it is a common stage in interviews for roles involving AI-native onsites.
+
+## Evidence
+
+> > Anthropic pays competitively for FDE roles. Sierra runs a vibe-coding interview as part of their loop.
+
+> # Gemini DR Prompt — Vibe-Coding Interview Canon 2026
 
 ## Examples
 
-- Sierra's use of vibe-coding during onsite interviews
-- Anthropic's focus on coding conversations with PM candidates
+- Sierra runs a vibe-coding interview as part of their loop.
 
 ## Related Concepts
 
-[[Cultural Fit Assessment]] [[Real-Time Problem Solving]]
+[[Karpathy Single-Top Rec]] [[Target Role Specs for 2026]]

@@ -2,25 +2,30 @@
 title: "Agent Ops / FDP Backup Track"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-vibe-coding-research-synthesis.md
+  - knowledge/concepts/karpathy-single-top-rec.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-A secondary focus in Sean’s job hunt strategy, involving companies and roles related to Agent Security & Governance, AI Quality, FDP, GenAI platforms, etc.
+A role or track within the Agent-PM domain that involves backup operations, likely involving fleet management and operational support.
 
 ## Context
 
-This track ensures Sean has backup targets in case Tier-1 roles are not secured.
+This track is related to the Karpathy Single-Top Rec, suggesting a connection between fleet operations and canonical career artifacts.
+
+## Evidence
+
+> Related Concepts: [[Vibe-Coding Interview]] [[Agent Ops / FDP Backup Track]]
+
+> The Karpathy Single-Top Rec serves as the canonical example to anchor Sean’s career artifact for interviews.
 
 ## Examples
 
-- Glean and Scale AI are named as Tier-2/3 targets in this backup track.
-- Sierra and Decagon are also part of the Agent PM focus.
+- Related Concepts: [[Vibe-Coding Interview]] [[Agent Ops / FDP Backup Track]]
 
 ## Related Concepts
 
-[[Vibe-Coding Interview]] [[Tier-A Relocation Exception Clauses]]
+[[Karpathy Single-Top Rec]] [[Fleet Status]]

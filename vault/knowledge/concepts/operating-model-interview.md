@@ -2,10 +2,10 @@
 title: "Operating-model interview"
 type: concept
 sources:
-  - knowledge/connections/prj-job-hunt-2026-and-operating-model-interview.md
+  - knowledge/concepts/daily-driver-agent.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
@@ -14,13 +14,18 @@ A structured evaluation of personal systems for job hunting, including artifacts
 
 ## Context
 
-This interview ensures that work processes are effective, focused, and tailored for job hunting.
+This interview ensures Sean’s work processes are effective during his job hunt, and the Daily-driver agent is an artifact used as part of this evaluation.
+
+## Evidence
+
+> A structured evaluation of personal systems for job hunting, including artifacts like the Daily-driver agent.
+
+> The Daily-driver agent is a part of the Operating-model interview artifacts designed to streamline daily work.
 
 ## Examples
 
-- Evaluating personal systems
-- Including artifacts like the Daily-driver agent
+- Evaluating how the Daily-driver agent integrates with Sean’s job-hunt process.
 
 ## Related Concepts
 
-[[prj-job-hunt-2026]] [[Daily-driver agent]]
+[[Daily-driver agent]] [[Automation Routines]]

@@ -2,10 +2,10 @@
 title: "Agent Health"
 type: concept
 sources:
-  - knowledge/index.md
+  - knowledge/concepts/indexing-and-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
@@ -14,13 +14,19 @@ A measure of the status and efficiency of individual agents, including metrics l
 
 ## Context
 
-Maintaining good agent health is essential for ensuring reliable execution of automation routines and research tasks.
+Critical to the operational efficiency of automation systems and daily routines, making it a key consideration for Sean in managing knowledge vaults.
+
+## Evidence
+
+> A measure of the status and efficiency of individual agents, including metrics like uptime, task completion rates, and resource usage.
+
+> Maintaining good agent health directly contributes to the operational efficiency of automation systems and daily routines.
 
 ## Examples
 
-- Health dashboards showing agent performance
-- Threshold-based alerts for poor-performing agents
+- Fleet status is closely tied to agent health, as it reflects the state of individual agents within a group.
+- The relationship between agent health and daily routine automation, such as generating a daily note.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Automation Routines]] [[Vault Maintenance]]
+[[Automation Routines]] [[Fleet Status]]

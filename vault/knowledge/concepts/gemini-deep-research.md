@@ -2,25 +2,33 @@
 title: "Gemini Deep Research"
 type: concept
 sources:
-  - knowledge/connections/system-constraints.md
+  - knowledge/concepts/gemini-deep-research.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-Gemini Deep Research is a secondary system used to handle complex queries that exceed the capabilities or time constraints of Local Deep Research (LDR).
+A structured approach to deep research, using tier-marked questions for iterative investigations. It helps manage complex, multi-step research tasks with clear prioritization and resource allocation.
 
 ## Context
 
-Gemini DR provides a scalable solution for managing complex research tasks, ensuring workflow efficiency in larger or more intricate queries.
+This concept supports Sean in managing complex research workflows, particularly for tasks that require prioritization and resource allocation across different domains such as job preparation, creative projects, and knowledge exploration.
+
+## Evidence
+
+> > # Gemini Deep Research Queue
+
+Drop research questions here as `- [ ] {tier} {refined question}`.
+
+> > **Tier markers:**
+- `dr` — Deep Research (~$2–4/query, ~20-30 min): standard iterative web research
 
 ## Examples
 
-- Handles complex queries redirected from LDR
-- Supports research agents in managing execution timing
+- - Tier-marked questions for prioritized research in Gemini Deep Research Queue.
 
 ## Related Concepts
 
-[[System Constraints]] [[Local Deep Research (LDR)]] [[Research Agents]]
+[[Deep Research Queue]] [[Local Deep Research (LDR)]]

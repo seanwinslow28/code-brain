@@ -2,25 +2,30 @@
 title: "Local Deep Research (LDR)"
 type: concept
 sources:
-  - knowledge/connections/system-constraints.md
+  - knowledge/concepts/deep-research-queue.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-14
+updated: 2026-05-14
 ---
 
 ## Definition
 
-Local Deep Research is a system component with a strict time constraint (900 seconds) for handling queries. If a query exceeds this limit, it is redirected to Gemini Deep Research.
+A method of performing deep research using local tools and models, such as Qwen3-14B, paired with external search engines like SearXNG.
 
 ## Context
 
-LDR's constraints ensure that tasks are completed within a set timeline, but complex queries require offloading to other systems.
+LDR is a critical component of Sean's research infrastructure, enabling him to perform in-depth investigations without relying on remote or less reliable resources.
+
+## Evidence
+
+> The nightly `deep-researcher` agent (02:45) picks the first unchecked item, runs Local Deep Research (LDR + Qwen3-14B + SearXNG
+
+> Local Deep Research (LDR) is used in combination with Qwen3-14B and SearXNG for iterative web research.
 
 ## Examples
 
-- Hard time limit (900 seconds)
-- Redirect complex queries to Gemini DR
+- Used in the nightly `deep-researcher` agent to execute tasks like model replacement for headless agents.
 
 ## Related Concepts
 
-[[System Constraints]] [[Gemini Deep Research]] [[Research Agents]]
+[[Deep Research Queue]] [[Research Agents]]
