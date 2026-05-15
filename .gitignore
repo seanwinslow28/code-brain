@@ -88,3 +88,6 @@ vault/knowledge/.lock
 vault/health/.gemini-ledger.lock
 vault/conflict-files-obsidian-git.md
 agents-sdk/logs/*.log
+
+# LLM Council spend tracking — private cost data
+vault/health/council-spend-*.json
