@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Skill count: 118 → 119
+- Skill count: 117 → 118 (the pre-existing `CLAUDE.md` / `README.md` claim of "118 skills" was already off-by-one against the actual `.claude/skills/` directory count of 117 — corrected this version while bumping for `llm-council`)
 - Root `.gitignore` adds `vault/health/council-spend-*.json` (private cost data)
 - `CLAUDE.md` architecture comment now lists `tools/` as a new top-level directory alongside `.claude/`, `agents-sdk/`, `vault/`, `claude-mastery/`, `the-block/`, `creative-studio/`, `life-systems/`, etc.
 
