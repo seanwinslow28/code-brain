@@ -117,9 +117,15 @@ def render_document(
     mp3_quality: int,
 ) -> RenderResult:
     """Preprocess → synthesize → encode. Returns RenderResult."""
-    text = source.read_text(encoding="utf-8", errors="replace")
+    # errors="strict": this is a verbatim pipeline — surface encoding corruption
+    # loudly rather than substitute replacement characters that would be spoken
+    # as "question mark" in the MP3. If a vault doc has malformed UTF-8 we want
+    # to fix the source, not narrate the corruption.
+    text = source.read_text(encoding="utf-8", errors="strict")
     elements: list[Element] = preprocess(text)
-    segment_count = sum(1 for e in elements if isinstance(e, Segment)) \
+    # Count both Segment and SectionBreak — every element either speaks text
+    # or inserts a silence+title cue, so both contribute to the audio output.
+    element_count = sum(1 for e in elements if isinstance(e, Segment)) \
         + sum(1 for e in elements if isinstance(e, SectionBreak))
 
     audio, sr = synthesize_elements(
@@ -131,7 +137,7 @@ def render_document(
     duration = float(audio.shape[0]) / float(sr) if sr else 0.0
     return RenderResult(
         source_path=source, output_path=output,
-        duration_sec=duration, segments_synthesized=segment_count,
+        duration_sec=duration, segments_synthesized=element_count,
         voice=voice, speed=speed,
     )
 
