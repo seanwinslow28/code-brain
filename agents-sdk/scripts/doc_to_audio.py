@@ -24,6 +24,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import tomllib
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -169,9 +170,7 @@ def _emit_json(payload: dict[str, Any]) -> None:
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     cfg = load_config()
-    tts_cfg = cfg.agents.get("doc_to_audio", {}) if isinstance(cfg.agents, dict) else {}
-    # The block lives at top-level [doc_to_audio], not under [agents.*]
-    import tomllib
+    # [doc_to_audio] sits at top-level (not under [agents.*]) — read directly.
     with open(Path(__file__).parent.parent / "config.toml", "rb") as f:
         raw = tomllib.load(f)
     tts_cfg = raw.get("doc_to_audio", {})
