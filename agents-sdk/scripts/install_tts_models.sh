@@ -35,7 +35,7 @@ fi
 # 4. Fetch model weights (only if missing)
 mkdir -p "${MODELS_DIR}"
 if [[ ! -f "${MODELS_DIR}/kokoro-v1.0.onnx" ]]; then
-  echo "[install_tts_models] Downloading kokoro-v1.0.onnx (~88MB)…"
+  echo "[install_tts_models] Downloading kokoro-v1.0.onnx (~310MB, fp32)…"
   curl -fL --retry 3 -o "${MODELS_DIR}/kokoro-v1.0.onnx" "${MODEL_URL}"
 else
   echo "[install_tts_models] kokoro-v1.0.onnx already present — skipping download."
