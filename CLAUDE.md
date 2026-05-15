@@ -65,6 +65,8 @@ Skills and agents prefer native MCPs over Zapier. When both exist, always use na
 
 **LLM Council** (NEW v3.35.0) is available via `tools/llm-council/council/` (a headless Python CLI wrapping OpenRouter) and the `.claude/skills/llm-council/` skill. Two profiles — `premium` (Claude Opus 4.7 + GPT-5.5 + Gemini Pro + Grok 4.20, chairman Opus 4.7, ~$0.29 typical) and `variance` (Claude Sonnet + GPT-5.4-mini + DeepSeek v4-pro + Qwen 3.5 Plus, chairman Sonnet, ~$0.12 typical). Cost-disciplined: per-query caps ($1.00 / $0.40), $7/day circuit breaker, $40/month governor — spend tracked atomically in `vault/health/council-spend-*.json`. Use for high-variance critique (voice-mode calibration, cover-letter critique, decision pre-mortem, PRD stress-test) where different vendor RLHF biases produce useful spread or independent blind-spot coverage. Inspired by [Andrej Karpathy's llm-council](https://github.com/karpathy/llm-council) — his original web app remains usable unmodified at `tools/llm-council/upstream/`. Phase C (separate public MCP server at `seanwinslow28/llm-council-mcp`) is deferred until 5–10 real runs validate the API surface.
 
+**Local TTS (NEW v3.36.0)** is available via [`agents-sdk/scripts/doc_to_audio.py`](agents-sdk/scripts/doc_to_audio.py) — verbatim narration of vault markdown using Kokoro-82M ONNX (Apache 2.0, ~310MB fp32 model, $0/run on Apple Silicon via `kokoro-onnx`). Single voice (default `af_heart`), strict UTF-8, sentence-level content preserved byte-for-byte; structural markdown (frontmatter, code fences, wikilinks, links, tables) is flattened or replaced with spoken cues. Output lands at `vault/90_system/audio/<source-stem>.mp3` and the CLI is idempotent on mtime. **Setup on a fresh machine (Mac Mini after `git pull`, or a re-clone): run [`agents-sdk/scripts/install_tts_models.sh`](agents-sdk/scripts/install_tts_models.sh)** — installs the two new Python deps, fetches the ~340MB model + voices binaries (gitignored), and verifies SHA-256 against the tracked `CHECKSUMS.txt`. Decision record + tradeoffs at [`agents-sdk/docs/local-tts-decision-record.md`](agents-sdk/docs/local-tts-decision-record.md). Rollback at [`agents-sdk/docs/local-tts-rollback.md`](agents-sdk/docs/local-tts-rollback.md). Spotify "Sean's Research Briefings" handoff sketched at [`agents-sdk/docs/local-tts-spotify-handoff.md`](agents-sdk/docs/local-tts-spotify-handoff.md), deferred until 10+ clean pipeline runs.
+
 ## Commands
 
 ```bash
@@ -75,6 +77,10 @@ python3 scripts/validate.py
 ./scripts/install.sh /path/to/project --preset starter|power|enterprise|creative
 ./scripts/install.sh /path/to/project pm-workflows remotion-mastery
 ./scripts/install.sh --list
+
+# Render a vault doc to a verbatim local-TTS MP3 (Kokoro-82M, $0/run, Apple Silicon)
+cd agents-sdk && PYTHONPATH=. .venv/bin/python3 scripts/doc_to_audio.py \
+  --source ../vault/20_projects/research/2026-05-13-foo.md
 ```
 
 ## Agents SDK (Autonomous Layer)
@@ -167,12 +173,15 @@ Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key ne
 │                    #           session-start-inject-index, vault-integrity)
 └── settings.json    # Standard security profile
 
-agents-sdk/          # Autonomous agents (Claude Agent SDK, Python)
+agents-sdk/          # Autonomous agents (Claude Agent SDK, Python) + local CLIs
 ├── agents/          # Agent scripts (daily_driver.py + scheduled launchd agents)
-├── lib/             # Shared modules (config, skill loader, artifact loader, vault I/O, logging)
+├── lib/             # Shared modules (config, skill loader, artifact loader, vault I/O, logging, markdown_to_speech, kokoro_synth)
+├── docs/            # Decision records, rollback guides, handoff sketches (e.g., local-tts-*)
+├── models/          # Local model weights (gitignored; populated by install_tts_models.sh)
+├── scripts/         # CLI tools (query.py, doc_to_audio.py, install_tts_models.sh, gemini_dr.py, etc.)
 ├── schedules/       # launchd plists + installer
 ├── tests/           # pytest suite
-└── config.toml      # Agent config, paths, safety limits
+└── config.toml      # Agent + CLI config, paths, safety limits
 
 the-block/                            # DOMAIN 1 — day job
 ├── CLAUDE.md
