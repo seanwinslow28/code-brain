@@ -4,7 +4,7 @@ This is Sean's personal command center — a second brain for Claude Code.
 
 ## What This Repo Is
 
-118 skills, 13 Claude Code subagents, 14 hooks, 16 autonomous SDK agents (8 active on launchd, 1 manual-trigger), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
+119 skills, 13 Claude Code subagents, 14 hooks, 16 autonomous SDK agents (8 active on launchd, 1 manual-trigger), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
 
 As of v3.15.0, the repo is organized so that domain-owned folders live inside their domain. `the-block/` is Sean's day-job workspace (with `product-management/` nested inside). `creative-studio/` owns 16BitFit and the design-team workspace. `life-systems/` owns personal systems. Cross-cutting infra (`.claude/`, `agents-sdk/`, `vault/`, `claude-mastery/`, installer dirs) stays at root.
 
@@ -62,6 +62,8 @@ Skills and agents prefer native MCPs over Zapier. When both exist, always use na
 ## Connected External Research APIs
 
 **Gemini Deep Research** is available via `agents-sdk/scripts/gemini_dr.py` (wrapping the `google-genai` SDK) and the `.claude/skills/gemini-deep-research` skill. The API key is stored in macOS Keychain as `com.sean.agents.gemini_api_key`. Use the `gemini-deep-research` skill to decide when to delegate to Gemini DR vs. run a local LDR query. Cost is self-policing: $7 per-task hard cap, $20 per-day circuit breaker, $50 per-month governor (bumped 2026-05-07 from $10 / $20 to absorb heavy DR Max runs) — tracked in `vault/health/gemini-spend-{YYYY-MM}.json`. The autonomous agent (`gemini_researcher.py`) is default disabled; opt in with `INSTALL_GEMINI=1` when running `install_schedules.sh`.
+
+**LLM Council** (NEW v3.35.0) is available via `tools/llm-council/council/` (a headless Python CLI wrapping OpenRouter) and the `.claude/skills/llm-council/` skill. Two profiles — `premium` (Claude Opus 4.7 + GPT-5.5 + Gemini Pro + Grok 4.20, chairman Opus 4.7, ~$0.29 typical) and `variance` (Claude Sonnet + GPT-5.4-mini + DeepSeek v4-pro + Qwen 3.5 Plus, chairman Sonnet, ~$0.12 typical). Cost-disciplined: per-query caps ($1.00 / $0.40), $7/day circuit breaker, $40/month governor — spend tracked atomically in `vault/health/council-spend-*.json`. Use for high-variance critique (voice-mode calibration, cover-letter critique, decision pre-mortem, PRD stress-test) where different vendor RLHF biases produce useful spread or independent blind-spot coverage. Inspired by [Andrej Karpathy's llm-council](https://github.com/karpathy/llm-council) — his original web app remains usable unmodified at `tools/llm-council/upstream/`. Phase C (separate public MCP server at `seanwinslow28/llm-council-mcp`) is deferred until 5–10 real runs validate the API surface.
 
 ## Commands
 
@@ -155,7 +157,7 @@ Config: `agents-sdk/config.toml`. Auth: uses `claude login` OAuth (no API key ne
 
 ```
 .claude/
-├── skills/          # ALL 118 skills (canonical, auto-loaded)
+├── skills/          # ALL 119 skills (canonical, auto-loaded)
 ├── agents/          # ALL 13 agents (8 domain + 5 design team) — Claude Code subagents, separate from the 14 SDK agents
 ├── hooks/           # 14 hooks (block-secrets, cost-watchdog, daily-note-appender,
 │                    #           format-on-edit, log-tool-use, loop-detector,
@@ -190,6 +192,10 @@ life-systems/                         # DOMAIN 3 — personal systems
 └── (existing reference/)
 
 claude-mastery/      # cross-cutting Claude Code meta-reference (stays at root)
+tools/                                # NEW v3.35.0 — sidecar tools (non-skill, non-agent)
+└── llm-council/                      # Multi-vendor LLM council (inspired by karpathy/llm-council)
+    ├── upstream/                     # Karpathy's reference web app, unmodified
+    └── council/                      # Headless CLI used by .claude/skills/llm-council/
 evals/
 └── vault-synthesizer/   # NEW v3.30.1 — 10-case eval suite for the nightly synthesizer
 vault/               # Obsidian vault (PARA + MOCs + operating-models + Prompts + RAG)
