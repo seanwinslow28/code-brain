@@ -20,9 +20,9 @@ Two viable Python packages wrap Kokoro-82M:
 |---|---|---|
 | Runtime | PyTorch + transformers | ONNX Runtime only |
 | Apple Silicon | Needs `PYTORCH_ENABLE_MPS_FALLBACK=1` | Native, no env vars |
-| G2P | `misaki[en]` + espeak-ng system binary | Built into ONNX graph |
+| G2P | `misaki[en]` + espeak-ng system binary | Bundled via `phonemizer-fork` + `espeakng-loader` wheels (pure Python) |
 | Venv footprint | +2GB (PyTorch wheels) | +80MB (onnxruntime) |
-| Model size | 327MB pth | 88MB int8 ONNX |
+| Model size | 327MB pth | 310MB fp32 ONNX (88MB int8 variant also available) |
 | Cold start | 3-5s | <1s |
 | Voices | All 54+ | All 54+ |
 | Voice blending | Yes | Yes |
