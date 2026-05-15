@@ -89,6 +89,8 @@ Zapier retained only for services with no native MCP: Salesforce, GA4, Webhooks,
 
 ### 118 Skills Across 12 Export Groups
 
+> The 12 export groups roll up 117 of the 118 skills. The new `llm-council` skill (v3.35.0) is not in any export group — it's a personal-use multi-vendor critique tool dependent on the in-tree `tools/llm-council/` Python CLI, so it doesn't ship via the installer. See [`tools/llm-council/README.md`](tools/llm-council/README.md) for details.
+
 All skills auto-load from `.claude/skills/`. Reference them naturally in prompts.
 
 | Export Group | Skills | Highlights |
