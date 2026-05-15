@@ -412,3 +412,20 @@ schedule_day = "Thursday"
 schedule_hour = 18
 voice_epoch = "2026-05-04"  # Monday of the sprint; rotation index zero
 # voice_override = "sedaris"  # uncomment to pin a mode for a specific run
+
+# ─── Local TTS Pipeline (v3.36.0, 2026-05-15) ───────────────────────────
+# Verbatim doc-to-audio via Kokoro-82M ONNX. CLI: scripts/doc_to_audio.py.
+# Cost: $0/run (pure local ONNX inference). Default host: Mac Mini.
+# Model files live under agents-sdk/models/kokoro/ (gitignored, checksum tracked).
+
+[doc_to_audio]
+model_path = "agents-sdk/models/kokoro/kokoro-v1.0.onnx"
+voices_path = "agents-sdk/models/kokoro/voices-v1.0.bin"
+default_voice = "af_heart"
+default_speed = 1.0
+default_lang = "en-us"
+sample_rate = 24000
+max_chars_per_chunk = 400
+section_silence_ms = 200
+output_dir = "vault/90_system/audio"
+mp3_quality = 2                          # ffmpeg libmp3lame -qscale:a 2 (~190 kbps VBR)
