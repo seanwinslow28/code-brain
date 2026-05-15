@@ -1,0 +1,19 @@
+# Karpathy's upstream — keep source, ignore build artifacts
+upstream/node_modules/
+upstream/data/
+upstream/frontend/dist/
+upstream/__pycache__/
+upstream/.venv/
+
+# Our package build artifacts
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+
+# Session output (real council runs)
+data/sessions/*.json
+
+# Local env override
+.env
+.env.local
