@@ -2,16 +2,20 @@
 type: spec
 project: prj-job-hunt-2026
 created: 2026-05-13
-status: research-pending
+status: research-complete
+superseded_by: "[[2026-05-15-agent-fleet-dashboard-design]]"
 artifact_target: supporting artifact #3 (closes the cost-economics gap + serves as Agent Ops resume evidence)
-ships: TBD pending deep research
+ships: 2026-05-29 to 2026-06-08 (per locked design doc)
 linked_artifacts:
   - "[[2026-05-06-unified-roadmap]]"
   - "[[vault-synthesizer eval suite]]"
   - "[[knowledge_loop]]"
+  - "[[2026-05-15-agent-fleet-dashboard-design]]"
 linked_research:
   - "[[2026-05-07-target-role-specs]]"
-ai-context: "Build spec + deep-research prompt scaffolding for the Agent Fleet Observability Dashboard — Sean's third supporting artifact (after the token cost calculator and 14-agent fleet Loom). Designed to be ingested by Gemini DR-Max or a Claude deep-research run to validate the distribution surface, comparison-study positioning, and recruiter-resonance hypothesis before any code is written. Status remains `research-pending` until DR results land at `vault/20_projects/research/2026-05-XX-agent-fleet-dashboard-research.md`."
+  - "[[2026-05-14-Agent-Fleet-Observability-Dashboard-ChatGPT]]"
+  - "[[2026-05-14-Agent-Fleet-Observability-Dashboard-Gemini-DR]]"
+ai-context: "Original build spec + deep-research prompt scaffolding for the Agent Fleet Observability Dashboard. Research returned 2026-05-14 from both Gemini DR and ChatGPT DR. Brainstorming session 2026-05-15 synthesized the two returns + locked all open questions. Locked design lives at [[2026-05-15-agent-fleet-dashboard-design]] — that doc is the implementation-ready source of truth, not this one. This spec retained for historical context + audit trail."
 ---
 
 # Agent Fleet Observability Dashboard — Build Spec + Research Prompt

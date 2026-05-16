@@ -1,0 +1,8 @@
+- [Alienware ICMP blocked](feedback_alienware_ping.md) — Use HTTP to check Alienware, not ping; httpx fails despite machine being up
+- [16BitFit paused](project_phase5c_complete.md) — paused 2026-04-20; Phase 5C was last active state; active focus is now animation pipeline
+- [Creative Studio operating model confirmed](project_creative_studio_operating_model.md) — 5 artifacts confirmed 2026-04-21 at vault/05_atlas/operating-models/creative-studio/; load operating-model.md first for creative work
+- [MBP-awake scheduling rule](feedback_mbp_awake_scheduling.md) — agents needing MBP-hosted Qwen3-14B must run during waking hours, not overnight; default slot 10 AM ET
+- [Substack pre-launch](project_substack_pre_launch.md) — voice corpus actively growing via AI-draft→Sean-rewrite cycles; agent-fleet Substack draft pending K/T/R; Sean wants more Substack iteration
+- [Autoresearch candidate survey owed](project_autoresearch_candidate_evaluation.md) — REMINDER: before next skill_optimizer run, survey 117 skills + 16 agents for ROI; writing-voice-modes was wrong target (corpus-thin); surface this whenever Sean returns to autoresearch
+- [Job-feed agent shipped](project_job_feed_agent_shipped.md) — SDK agent #8 merged 2026-05-11 (PR #33); daily roll-up at vault/20_projects/prj-job-hunt-2026/job-feed/<today>.md; status mutator at scripts/update_status.py; watchlist YAML user-editable; launchctl activation deferred to Sean
+- [Agent Fleet Dashboard Kanban v2 deferred](project_agent_fleet_dashboard_kanban_v2.md) — v1 read-only kanban ships with dashboard; interactive kanban with agent write-back deferred as own portfolio artifact post-v1-validation
