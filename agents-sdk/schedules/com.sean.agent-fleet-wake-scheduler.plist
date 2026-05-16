@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  com.sean.agent-fleet-wake-scheduler
+
+  Runs schedule_wakes.sh nightly at 23:30 to queue the next 7 days of
+  pmset wake events for the MBP agent fleet. LaunchDaemon (system-level,
+  runs as root) so the script does not need sudo internally.
+
+  Install:
+    sudo cp /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/schedules/com.sean.agent-fleet-wake-scheduler.plist /Library/LaunchDaemons/
+    sudo chown root:wheel /Library/LaunchDaemons/com.sean.agent-fleet-wake-scheduler.plist
+    sudo chmod 644        /Library/LaunchDaemons/com.sean.agent-fleet-wake-scheduler.plist
+    sudo launchctl bootstrap system /Library/LaunchDaemons/com.sean.agent-fleet-wake-scheduler.plist
+    sudo launchctl kickstart -k system/com.sean.agent-fleet-wake-scheduler   # run once now
+
+  Uninstall:
+    sudo launchctl bootout system /Library/LaunchDaemons/com.sean.agent-fleet-wake-scheduler.plist
+    sudo rm /Library/LaunchDaemons/com.sean.agent-fleet-wake-scheduler.plist
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.sean.agent-fleet-wake-scheduler</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/scripts/schedule_wakes.sh</string>
+  </array>
+
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key><integer>23</integer>
+    <key>Minute</key><integer>30</integer>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>StandardOutPath</key>
+  <string>/var/log/agent-fleet-wake-scheduler.log</string>
+  <key>StandardErrorPath</key>
+  <string>/var/log/agent-fleet-wake-scheduler.log</string>
+</dict>
+</plist>
