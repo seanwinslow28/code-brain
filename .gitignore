@@ -98,5 +98,7 @@ agents-sdk/models/**/*.bin
 vault/90_system/audio/*.mp3
 !vault/90_system/audio/.gitkeep
 
-# Superpowers brainstorming session files (ephemeral mockups)
+# superpowers:brainstorming runtime state — per-session local web server
+# (server.pid, server.log, events, server-stopped) plus regenerable HTML
+# scaffolding. Actual brainstorm outputs land in the vault, not here.
 .superpowers/
