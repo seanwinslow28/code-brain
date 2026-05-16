@@ -97,3 +97,6 @@ agents-sdk/models/**/*.onnx
 agents-sdk/models/**/*.bin
 vault/90_system/audio/*.mp3
 !vault/90_system/audio/.gitkeep
+
+# Superpowers brainstorming session files (ephemeral mockups)
+.superpowers/
