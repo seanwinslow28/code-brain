@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/ai-fluency.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
@@ -14,13 +14,13 @@ Strategically designed projects aimed at showcasing a candidate's skills, partic
 
 ## Context
 
-These projects are vital for Sean's job-hunt-2026 success, as they provide concrete evidence of his AI fluency and agentic engineering signal.
+Vital for Sean's job-hunt-2026, as these projects provide concrete demonstrations of his AI fluency and agentic engineering skills during interviews.
 
 ## Evidence
 
 > Strategically designed projects aimed at showcasing a candidate's skills, particularly with agentic systems like Bolt or v0.
 
-> These projects are tailored for interview preparation.
+> These projects are vital for Sean's job-hunt-2026.
 
 ## Examples
 

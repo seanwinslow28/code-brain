@@ -5,34 +5,34 @@ connects:
   - AI Fluency
   - Agentic Engineering Signal
   - Portfolio Projects for Interview Prep
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Synthesis
 
-These three concepts form a cross-domain pattern where AI Fluency is the foundational skill, Agentic Engineering Signal acts as an evaluative benchmark, and Portfolio Projects for Interview Prep serves as the demonstration vehicle.
+A cross-domain pattern where AI Fluency forms the foundational skill, Agentic Engineering Signal acts as an evaluative benchmark during interviews, and Portfolio Projects for Interview Prep provide practical evidence of these skills.
 
 ## Threads
 
 ### [[AI Fluency]]
 
-> Visible working vocabulary with current agentic tooling like Bolt, v0, Cursor, Replit Agent, and MCP.
+> The ability to demonstrate understanding of and experience with AI-driven tools like Bolt, v0, Cursor, Replit Agent, and MCP. It is essential for modern engineering roles that require working with agentic systems.
 
-> This concept refers to a candidate's ability to demonstrate understanding of and experience with AI-driven tools, which is essential in modern engineering roles.
+> A clear, visible sign of engineering capability with agentic systems that can be quickly noticed by evaluators like FDEs or hiring managers.
 
 ### [[Agentic Engineering Signal]]
 
 > A clear, visible sign of engineering capability with agentic systems that can be quickly noticed by evaluators like FDEs or hiring managers.
 
-> This term refers to the ability
+> This concept is central to Sean's job-hunt-2026, as it forms the evaluative benchmark during interviews.
 
 ### [[Portfolio Projects for Interview Prep]]
 
 > Strategically designed projects aimed at showcasing a candidate's skills, particularly with agentic systems like Bolt or v0.
 
-> These projects are tailored for interview preparation.
+> These projects are vital for Sean's job-hunt-2026.
 
 ## Implications
 
-- Sean should align his portfolio projects to highlight both AI Fluency and Agentic Engineering Signal, which are critical signals for evaluators in the job-hunt-2026 pipeline.
+- This pattern indicates that Sean should focus on building a strong foundation of AI Fluency, demonstrating it through an Agentic Engineering Signal, and showcasing this in strategically designed Portfolio Projects for Interview Prep.

@@ -1,0 +1,13 @@
+{
+  "concepts_written": 0,
+  "connections_written": 0,
+  "duration_seconds": 2783.65,
+  "edges_rejected": 0,
+  "edges_written": 0,
+  "files_processed": 23,
+  "model_used": "none",
+  "rejected_count": 0,
+  "run_id": "2026-05-15T02:30:05",
+  "status": "error",
+  "wol_status": ""
+}

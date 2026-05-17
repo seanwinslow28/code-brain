@@ -2,30 +2,30 @@
 title: "Local Deep Research (LDR)"
 type: concept
 sources:
-  - knowledge/concepts/deep-research-queue.md
+  - 00_inbox/research-queue.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-16
+updated: 2026-05-16
 ---
 
 ## Definition
 
-A method of performing deep research using local tools and models, such as Qwen3-14B, paired with external search engines like SearXNG.
+A research method that uses a specific model, Qwen3-14B, and data sources like SearXNG to process research questions from the Deep Research Queue.
 
 ## Context
 
-LDR is a critical component of Sean's research infrastructure, enabling him to perform in-depth investigations without relying on remote or less reliable resources.
+LDR is essential for Sean's daily research, but it has known constraints and limitations that prevent it from handling complex or multi-target questions effectively.
 
 ## Evidence
 
-> The nightly `deep-researcher` agent (02:45) picks the first unchecked item, runs Local Deep Research (LDR + Qwen3-14B + SearXNG
+> LDR has a 900s hard budget. Compound prompts stall around 90 % and produce no output.
 
-> Local Deep Research (LDR) is used in combination with Qwen3-14B and SearXNG for iterative web research.
+> Even when LDR completes, Qwen3-14B can't ground citations across multiple targets and confidently writes fabricated entities, owners, and URLs.
 
 ## Examples
 
-- Used in the nightly `deep-researcher` agent to execute tasks like model replacement for headless agents.
+- The LDR system is pinned to v1.5.6 awaiting upstream PR #4000.
 
 ## Related Concepts
 
-[[Deep Research Queue]] [[Research Agents]]
+[[Deep Research Queue]] [[System Constraints]]

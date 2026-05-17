@@ -2,30 +2,31 @@
 title: "Intent Engineering"
 type: concept
 sources:
-  - knowledge/concepts/intent-engineering.md
+  - 20_projects/prj-job-hunt-2026/substack-pre-launch/voice-mode-calibration-runs/2026-05-14-intent-engineering-mcp.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
 
-A process focused on designing and implementing AI systems that align with specific business or user intents, particularly in the context of agent-based solutions and roles such as Forward Deployed Engineer.
+The structured calibration of AI's intent generation to align with human tone, voice, and purpose. It focuses on ensuring models can mimic specific writing styles or modes with precision.
 
 ## Context
 
-This concept is directly relevant to Sean's job hunt, especially for roles at companies like Anthropic that explicitly require skills in intent engineering.
+This is crucial for Sean's job hunt, as he relies on AI platforms to produce high-quality content tailored to his voice for Substack posts and other professional outputs.
 
 ## Evidence
 
-> "JD literally asks for 'MCP servers, sub-agents, agent skills' — direct match. [Greenhouse](https://job-boards.greenhouse.io/anthropic/jobs/4985877008)"
+> 'You are critiquing a writing voice spec by trying to write IN it. The spec below is 'Sean Mode' — a calibrated hybrid voice from a personal `writing-voice-modes` SKILL.md file.'
 
-> "`intent-engineering` MCP server" — this phrase appears in the description of a role at Anthropic.
+> 'The author wants to know whether the spec is unambiguous enough that four different frontier models would read it the same way.'
 
 ## Examples
 
-- Anthropic's Forward Deployed Engineer role explicitly mentions 'MCP servers, sub-agents, agent skills.'
+- 'Here's the deal — we'll architect the perfect system, ship it, scale it, and then we'll burn it all...'
+- 'Fuelled by new found skills, fresh brewed coffee, and for once in my life, a glimmer of hope.'
 
 ## Related Concepts
 
-[[AI Fluency]] [[Agent Health Monitoring]]
+[[Creative Studio Workflows]] [[Substack-Drafter agent]]

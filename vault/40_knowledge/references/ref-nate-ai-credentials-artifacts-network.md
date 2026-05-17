@@ -247,8 +247,6 @@ When AWS launched cloud certifications in 2013, they were optional. By 2018 they
 
 The person who builds these skills now has a structural advantage, not because the knowledge is secret, but because the judgment that comes from building real systems, watching them fail, and knowing why they failed cannot be crammed in a weekend. Every week of practice compounds. The failure patterns become intuition. The specification precision becomes reflexive.
 
-![](https://substackcdn.com/image/fetch/$s_!a7wn!,w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F180c01ba-60cb-4f61-b88c-3df2b4f30359_1024x1024.png)
-
 ---
 *Clipped from [substack.com](https://natesnewsletter.substack.com/p/your-ai-credentials-dont-matter-your?utm_source=publication-search) on 2026-05-05T06:30:59-04:00*
 

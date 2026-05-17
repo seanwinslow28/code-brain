@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/ai-fluency.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
@@ -14,13 +14,13 @@ A clear, visible sign of engineering capability with agentic systems that can be
 
 ## Context
 
-This concept is central to Sean's job-hunt-2026 strategy, as it helps him stand out in engineering interviews by showcasing his hands-on experience with agentic systems.
+Central to Sean's job-hunt-2026, as it acts as an evaluative benchmark during interviews to showcase his agentic engineering skills.
 
 ## Evidence
 
 > A clear, visible sign of engineering capability with agentic systems that can be quickly noticed by evaluators like FDEs or hiring managers.
 
-> This term refers to the ability
+> This concept is central to Sean's job-hunt-2026, as it forms the evaluative benchmark during interviews.
 
 ## Examples
 

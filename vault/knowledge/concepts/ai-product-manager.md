@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/ai-product-manager.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
 
-An AI Product Manager is a role that combines product management with expertise in artificial intelligence, focusing on the development and launch of AI-driven products. They are responsible for aligning AI initiatives with business goals and ensuring user-centric solutions.
+A specialized role in product management focused on leveraging AI to shape and execute product strategies. This role is emphasized as a distinct hiring target for companies like Anthropic.
 
 ## Context
 
-This role is especially relevant to Sean as he navigates both the creative-studio and job-hunt-2026 domains, where aligning AI initiatives with business goals can be critical for innovation and professional positioning.
+This concept aligns with Sean's job-hunt-2026 strategy, which targets AI-native roles and the intersection of automation and agent systems.
 
 ## Evidence
 
-> An AI Product Manager is a role that combines product management with expertise in artificial intelligence, focusing on the development and launch of AI-driven products. They are responsible for aligning AI initiatives with business goals and ensuring user-centric solutions.
+> A specialized role in product management focused on leveraging AI to shape and execute product strategies. This is emphasized as a distinct hiring target for companies like Anthropic.
 
-> Leveraging agentic-engineering practices for automation.
+> Anthropic pays competitively for FDE roles. Sierra runs a vibe-coding interview as part of their loop.
 
 ## Examples
 
-- Leveraging agentic-engineering practices for automation.
-- Aligning AI initiatives with business objectives.
+- Anthropic's FDE roles
+- Sierra's vibe-coding interviews
 
 ## Related Concepts
 
-[[Agentic-Engineering]] [[Confluence Overhaul Plan]]
+[[Agent Health Monitoring]] [[Automation Routines]]

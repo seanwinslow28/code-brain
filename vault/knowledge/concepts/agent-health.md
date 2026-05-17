@@ -2,31 +2,31 @@
 title: "Agent Health"
 type: concept
 sources:
-  - knowledge/concepts/indexing-and-synthesis.md
+  - knowledge/concepts/agent-health.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
 
-A measure of the status and efficiency of individual agents, including metrics like uptime, task completion rates, and resource usage.
+The general state of agents within the system, such as whether they are active or disabled and if they have executed successfully. This directly affects Sean's ability to maintain his knowledge vault.
 
 ## Context
 
-Critical to the operational efficiency of automation systems and daily routines, making it a key consideration for Sean in managing knowledge vaults.
+Sean relies on agent health to ensure that all aspects of his personal knowledge vault, including automation routines and research consolidation, are operating as intended.
 
 ## Evidence
 
-> A measure of the status and efficiency of individual agents, including metrics like uptime, task completion rates, and resource usage.
+> > **Active agents:** 7 of 12 | **Disabled:** 5
 
-> Maintaining good agent health directly contributes to the operational efficiency of automation systems and daily routines.
+> > The vault-synthesizer failed to run today, inhibiting the automated consolidation of research findings.
 
 ## Examples
 
-- Fleet status is closely tied to agent health, as it reflects the state of individual agents within a group.
-- The relationship between agent health and daily routine automation, such as generating a daily note.
+- Active agents: 7 of 12
+- vault-synthesizer failed to run today
 
 ## Related Concepts
 
-[[Automation Routines]] [[Fleet Status]]
+[[Agent Health Monitoring]] [[Automation Reliability]]
