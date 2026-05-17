@@ -299,16 +299,29 @@ def cosine_similarity(a: list[float], b: list[float]) -> float:
     return dot / (norm_a * norm_b)
 
 
-async def search(query_text: str, db_path: Path, top_k: int = 5) -> list[dict[str, Any]]:
+async def search(
+    query_text: str,
+    db_path: Path,
+    top_k: int = 5,
+    *,
+    include_embeddings: bool = False,
+) -> list[dict[str, Any]]:
     """Search the vault index for semantically similar chunks.
 
     Args:
         query_text: The search query.
         db_path: Path to the SQLite database.
         top_k: Number of results to return.
+        include_embeddings: When True, each result dict includes the
+            stored embedding under key ``embedding`` (list[float]).
+            Enables downstream cluster-and-sample retrieval (Tier 2
+            retrofit, 2026-05-16) — the synthesizer needs vectors to
+            cluster the pool with HDBSCAN. Off by default to keep
+            payloads small for callers that only consume text.
 
     Returns:
-        List of dicts with file_path, chunk_text, and similarity score.
+        List of dicts with ``file_path``, ``chunk_text``, ``similarity``,
+        and (when ``include_embeddings=True``) ``embedding``.
     """
     query_embedding = await get_embedding(query_text)
 
@@ -321,11 +334,14 @@ async def search(query_text: str, db_path: Path, top_k: int = 5) -> list[dict[st
         if blob:
             stored_embedding = blob_to_embedding(blob)
             sim = cosine_similarity(query_embedding, stored_embedding)
-            results.append({
+            record: dict[str, Any] = {
                 "file_path": file_path,
                 "chunk_text": chunk_text_val[:200],
                 "similarity": sim,
-            })
+            }
+            if include_embeddings:
+                record["embedding"] = stored_embedding
+            results.append(record)
 
     conn.close()
     results.sort(key=lambda x: x["similarity"], reverse=True)

@@ -2,31 +2,31 @@
 title: "Automation Routines"
 type: concept
 sources:
-  - knowledge/concepts/daily-routine-automation.md
+  - knowledge/concepts/automation-routines.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
 
-A structured set of automated actions within daily routine automation, aimed at maintaining productivity and efficiency.
+Recurring, process-driven tasks that make use of APIs and models to generate assets or content automatically. This includes image generation, video frame rendering, and other creative and computational workflows.
 
 ## Context
 
-This concept is important for Sean as it forms the backbone of his daily automation workflows, particularly those related to knowledge management and job-hunt activities.
+Sean needs automation routines to streamline his creative-studio workflows, particularly when using models like those offered by OpenRouter for image generation.
 
 ## Evidence
 
-> Routine task scheduling and tracking
+> > OpenRouter free model can replace Qwen3-14B-on-Ollama for headless tool-using agents when the Mac Mini is unreachable.
 
-> Daily routine automation relies on daily note generation and agent health to maintain productivity and consistency.
+> > Catalog what image-gen endpoints OpenRouter exposes in 2026 (Closed-source models, latest open a sourced models, FLUX, SDXL, Imagen variants, Stable Diffusion forks)
 
 ## Examples
 
-- Automated email sorting
-- Task scheduling and tracking
+- Automated image generation using OpenRouter models to support creative projects
+- Scheduled generation of assets like watercolor art for design pipelines
 
 ## Related Concepts
 
-[[Daily Routine Automation]] [[Daily Note Generation]]
+[[Creative Studio Workflows]] [[Open-Source Contributions]]

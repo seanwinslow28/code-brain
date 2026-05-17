@@ -2,30 +2,30 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-agent-fleet-dashboard-spec.md
+  - knowledge/concepts/agent-fleet-observability-dashboard.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
 
-A proposed single-surface read-only visualization of Sean's active agent fleet and related telemetry data, designed to provide clear evidence of production readiness for potential employers.
+A zero-cost, static-build blueprint designed to equip an AI Product Manager with a tool for monitoring and managing autonomous agentic systems, closing the FDP cost-economics gap.
 
 ## Context
 
-This dashboard is crucial for Sean's resume and job-hunt strategy, as it visualizes the operational depth of his agent fleet in a way that aligns with the requirements for roles like Agent Ops / FDP.
+This supports Sean's job-hunt-2026 objectives by providing a portfolio artifact that demonstrates production-grade operational fluency in AgentOps.
 
 ## Evidence
 
-> The Agent Fleet Observability Dashboard is a proposed single-surface read-only visualization of Sean's 8-active-agent fleet... not weekend projects.
+> The primary objective is to equip a 33-year-old AI Product Manager with a zero-cost, static-build blueprint that guarantees maximum recruiter resonance for Forward Deployed Product (FDP) and Agent Ops roles.
 
-> The dashboard turns Sean's existing instrumentation (CSV, JSON, SQLite, markdown reports) into recruiter-readable evidence that he runs a real production fleet...
+> By evaluating deployment surfaces, anonymization strategies, and panel hierarchies against leading 2026 vendor platforms, this report establishes a portfolio artifact explicitly designed to close the FDP cost-economics gap and demonstrate production-grade operational fluency.
 
 ## Examples
 
-- Vault Indexer, Vault Synthesizer, Deep Researcher, Meta-Agent, Daily Driver, Knowledge Lint, Flush, Job Feed
+- A Fleet Status Grid and Live Event Stream are key anchor panels in the AxmeAI Fleet Dashboard.
 
 ## Related Concepts
 
-[[Agent Ops / FDP Backup Track]] [[Fleet Status]]
+[[Agent Ops / FDP Backup Track]] [[Portfolio Projects for Interview Prep]]

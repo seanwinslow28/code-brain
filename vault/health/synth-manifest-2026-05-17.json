@@ -1,0 +1,14 @@
+{
+  "clusters_sampled": 0,
+  "concepts_written": 41,
+  "connections_written": 26,
+  "duration_seconds": 2715.86,
+  "edges_rejected": 0,
+  "edges_written": 42,
+  "files_processed": 31,
+  "model_used": "qwen3-14b",
+  "rejected_count": 3,
+  "run_id": "2026-05-17T02:30:05",
+  "status": "partial",
+  "wol_status": "mbp_awake"
+}

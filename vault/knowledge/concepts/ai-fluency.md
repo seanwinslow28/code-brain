@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/ai-fluency.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
@@ -14,18 +14,17 @@ The ability to demonstrate understanding of and experience with AI-driven tools 
 
 ## Context
 
-For Sean, AI Fluency is crucial in the job-hunt-2026 domain as it equips him with the tools to showcase his skills during interviews. It is also relevant for creative-studio workflows involving AI prototyping and agentic engineering.
+Critical for Sean's job-hunt-2026, especially when demonstrating agentic engineering capabilities to evaluators like FDEs or hiring managers.
 
 ## Evidence
 
-> Visible working vocabulary with current agentic tooling like Bolt, v0, Cursor, Replit Agent, and MCP.
+> The ability to demonstrate understanding of and experience with AI-driven tools like Bolt, v0, Cursor, Replit Agent, and MCP. It is essential for modern engineering roles that require working with agentic systems.
 
-> This concept refers to a candidate's ability to demonstrate understanding of and experience with AI-driven tools, which is essential in modern engineering roles.
+> A clear, visible sign of engineering capability with agentic systems that can be quickly noticed by evaluators like FDEs or hiring managers.
 
 ## Examples
 
-- Working with agentic systems
-- Recording a session using Bolt or v0
+- (no examples captured yet)
 
 ## Related Concepts
 
