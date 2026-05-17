@@ -2,31 +2,31 @@
 title: "Distribution Surface"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-agent-fleet-dashboard-spec.md
+  - 20_projects/research/2026-05-14-Agent-Fleet-Observability-Dashboard-ChatGPT.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
 
-The method by which Sean's Agent Fleet Observability Dashboard will be deployed and made accessible to potential employers.
+The method by which Sean's Agent Fleet Observability Dashboard will be deployed and made accessible to potential employers, with a focus on personal domain hosting to ensure credibility.
 
 ## Context
 
-Choosing the right distribution surface is critical for ensuring recruiter discovery and minimizing infrastructure burden.
+Choosing the right distribution surface is crucial for ensuring that Sean's work appears professionally hosted, with Vercel and GitHub Pages as reliable options.
 
 ## Evidence
 
-> Distribution surface candidates: Vercel static, Astro page on personal site, Cowork artifact, GitHub Pages
+> The strongest v0 is **a static, recruiter-safe observability page on Sean’s personal domain, built as an Astro page and deployed on Vercel, with a GitHub Pages mirror as a quiet fallback**.
 
-> Each has different recruiter-discovery dynamics and different infrastructure burdens.
+> Vercel is the smoother “record a Loom, paste the link, done” path.
 
 ## Examples
 
-- Vercel static
-- Astro page on personal site
+- Vercel-hosted Astro page with GitHub Pages mirror.
+- Personal domain deployment for recruiter visibility.
 
 ## Related Concepts
 
-[[Agent Fleet Observability Dashboard]] [[Infrastructure Burden]]
+[[Agent Fleet Observability Dashboard]] [[Domain Ownership and Hosting Strategy]]

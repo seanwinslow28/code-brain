@@ -2,31 +2,31 @@
 title: "Autonomous Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/autonomous-agent-fleets.md
+  - 20_projects/research/2026-05-16-topic-12-openrouter-vs-direct-provider-economics-for-a-perso.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
 
-A collection of AI agents that operate independently, with predefined behavior rules to manage disruptions caused by external constraints such as network unavailability or hardware absence.
+A collection of AI agents, such as the daily-driver, vault-synthesizer, knowledge-lint, and deep-researcher agents, that operate on macOS launchd to perform tasks like knowledge indexing, research, and automation.
 
 ## Context
 
-This is crucial for Sean's system to remain functional during trips, ensuring productivity and data integrity are preserved without manual intervention.
+This concept is central to Sean's personal knowledge vault system. It involves managing a fleet of agents for daily operations and research.
 
 ## Evidence
 
-> `vault_synthesizer`, `job_feed`, and `flush` agents are hosted on the MBP, which is off the home LAN during travel
+> For each tier of model (frontier, mid, cheap, free), compare $/M-token + per-request markup between OpenRouter and the direct provider (Anthropic, OpenAI, Google AI Studio).
 
-> The system has no notion of scheduled MBP absences — every failure looks identical to 'MBP happened to be asleep.'
+> A personal autonomous-agent fleet running ~14 agents on macOS launchd (daily-driver, vault-synthesizer, knowledge-lint, deep-researcher, etc.).
 
 ## Examples
 
-- `vault_synthesizer` exits cleanly when MBP is unreachable during a trip
-- The `job_feed` agent skips scoring due to MBP being offline
+- daily-driver agent
+- vault-synthesizer
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Fleet Status]]
+[[Provider Fallback Mechanism]] [[Research Agents]]

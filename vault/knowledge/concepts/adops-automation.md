@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/adops-automation.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
 
-A fully automated system for managing ad-campaign asset intake, enhancing efficiency within The Block's AdOps team. It is vital for streamlining internal workflows and reducing manual workload.
+A fully automated system for managing ad-campaign asset intake, enhancing efficiency within The Block's AdOps team by reducing manual workload and streamlining internal workflows.
 
 ## Context
 
