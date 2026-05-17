@@ -31,7 +31,7 @@ PROFILES: dict[str, Profile] = {
             "~anthropic/claude-sonnet-latest",
             "openai/gpt-5.4-mini",
             "deepseek/deepseek-v4-pro",
-            "qwen/qwen3.5-plus-20260420",
+            "mistralai/mistral-medium-3-5",
         ),
         chairman="~anthropic/claude-sonnet-latest",
         max_cost_per_query=0.40,

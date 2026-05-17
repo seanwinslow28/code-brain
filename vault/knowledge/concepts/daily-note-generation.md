@@ -2,30 +2,31 @@
 title: "Daily Note Generation"
 type: concept
 sources:
-  - knowledge/concepts/daily-note-generation.md
+  - 20_projects/prj-job-hunt-2026/substack-pre-launch/posts/2026-05-14-post-1-introduction.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
 
-A systematic method for documenting daily progress, observations, and insights to support evidence-based work and interview preparation.
+The structured practice of creating daily summaries or reflections as a way to track progress and maintain focus during the job-hunt period.
 
 ## Context
 
-This practice is crucial for Sean's operational tracking, ensuring that he maintains a continuous record of his work and progress during the job hunt and creative processes.
+Sean's job hunt requires a disciplined approach, and Daily Note Generation can help maintain momentum and clarity over an 8-week period.
 
 ## Evidence
 
-> The systematic creation of notes or summaries that document daily progress, observations, and insights.
+> 'Fleet Status' (from concept titles)
 
-> Reporting on AI-native onsites
+> 'Daily Note Generators' (from concept titles)
 
 ## Examples
 
-- The process of generating daily notes to capture system behavior and progress.
+- Using automation routines for Daily Note Generation.
+- Tracking progress via weekly retros (Friday cadence).
 
 ## Related Concepts
 
-[[Automation Routines]] [[Daily-Drive Agent]]
+[[Daily-Drive Agent]] [[Automation Routines]]

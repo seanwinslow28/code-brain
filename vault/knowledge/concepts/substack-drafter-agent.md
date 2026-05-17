@@ -2,24 +2,30 @@
 title: "Substack-Drafter agent"
 type: concept
 sources:
-  - knowledge/connections/substack-drafter-agent-and-pushover-keychain-creds.md
+  - 40_knowledge/people/substack.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
 
-A new agent designed to draft content for Substack, with opt-in configuration and kill-switch layers.
+A conceptual agent or workflow designed to draft content for Substack, possibly integrating with existing automation frameworks.
 
 ## Context
 
-This agent is a flagship portfolio artifact, with pilot drafts (C9) providing real-world testing and evaluation.
+Relevant to Sean as he explores content creation and publishing mechanisms for his personal knowledge vault.
+
+## Evidence
+
+> Auto-stub created by `auto_stub_people.py` — fill in identity when convenient.
+
+> `[[Substack]]` appears as author of one `ref-*` note. Hub note so the reference resolves.
 
 ## Examples
 
-- Pilot drafts (C9) used for testing
+- The stub for Substack suggests it is commonly referenced in notes related to content creation and publishing.
 
 ## Related Concepts
 
-[[Pushover keychain creds]] [[prj-job-hunt-2026]]
+[[Daily Note Generation]] [[Automation Routines]]

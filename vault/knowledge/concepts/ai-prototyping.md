@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/ai-prototyping.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ The process of using AI tools to rapidly prototype or solve problems during inte
 
 ## Context
 
-It matters for Sean because it aligns with his 2026 job-hunt strategy, particularly in tech interviews where AI fluency and rapid problem-solving are becoming critical evaluation criteria.
+This is critical for Sean’s 2026 job-hunt strategy, particularly in tech interviews where AI fluency and rapid problem-solving are becoming critical evaluation criteria.
 
 ## Evidence
 
