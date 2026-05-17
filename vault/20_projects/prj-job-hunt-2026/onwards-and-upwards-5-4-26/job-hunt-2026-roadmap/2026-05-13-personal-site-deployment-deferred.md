@@ -2,15 +2,18 @@
 type: deferred-issue
 project: prj-job-hunt-2026
 created: 2026-05-13
-status: deferred
+status: superseded-by-gap-fill-3
+superseded_on: 2026-05-16
 unblocks: seanwinslow.com going live, Substack syndication of EXPLANATION.md files via GitHub raw URLs, LinkedIn "view my portfolio" CTA
 roadmap: 2026-05-06-unified-roadmap.md
-ai-context: "The personal site (sw-portfolio repo) is built and pushed to GitHub but NOT deployed anywhere. seanwinslow.com points at nothing live. Sean explicitly deferred deployment on 2026-05-13 — the site isn't recruiter-ready yet, no point lighting up the domain with a half-finished page. This doc captures everything needed to ship when the site IS ready. Future Claude Code sessions: do NOT proactively start deploying; surface this doc when Sean signals the site is ready."
+ai-context: "Superseded 2026-05-16 by Council Gap-Fill 3 (un-defers deployment). The 2026-05-13 deferral was correct for the gallery form of /transactions/; the council reframed the surface as a reverse-chronological ledger of shipped AI artifacts, which stands recruiter-ready today with 5 EXPLANATION.md files already on disk. Canonical deploy record lives at the Task 1 Step 3 expanded scope in 2026-05-06-unified-roadmap.md (ship target Mon 2026-05-19). This doc remains as historical context + retains the original step-by-step deploy mechanics, two of which were updated by the gap-fill: host is now Vercel (consistency with agent-fleet-observability), not Cloudflare Pages; Cloudflare DNS records for Vercel are set to DNS-only / orange-cloud OFF."
 ---
 
-# Personal Site Deployment — Deferred Until Site Is Ready
+# Personal Site Deployment — SUPERSEDED 2026-05-16 by Council Gap-Fill 3
 
-> **TL;DR:** [sw-portfolio](https://github.com/seanwinslow28/sw-portfolio) is built, pushed to GitHub, and has a working `/transactions/` route. It is **not deployed** to any host. **seanwinslow.com** is owned (Cloudflare + Namecheap) but points at nothing live. Sean deferred deployment 2026-05-13 because the site itself isn't recruiter-ready yet. This doc holds the full fix for when it is.
+> **STATUS:** Superseded 2026-05-16. Deployment is no longer deferred. Canonical deploy record is the **Task 1 Step 3 expanded scope** in [`2026-05-06-unified-roadmap.md`](2026-05-06-unified-roadmap.md) (ship target **Mon 2026-05-19**). Two deploy choices changed from this doc's original recommendation: (1) **host = Vercel**, not Cloudflare Pages — for consistency with the [`agent-fleet-observability`](../../../../agent-fleet-observability/) deploy already on Vercel; (2) **Cloudflare DNS records set to DNS-only / orange-cloud OFF** for the Vercel apex + www records, so Vercel's edge handles SSL without proxy interference. Steps 1–6 below are retained as historical reference + the residual mechanics still apply (build verification, custom-domain attach, optional repo push). Triggers + acceptance criteria are obsolete (superseded by the Gap-Fill 3 verification gate).
+>
+> **Original TL;DR (preserved for context):** [sw-portfolio](https://github.com/seanwinslow28/sw-portfolio) is built, pushed to GitHub, and has a working `/transactions/` route. It is **not deployed** to any host. **seanwinslow.com** is owned (Cloudflare + Namecheap) but points at nothing live. Sean deferred deployment 2026-05-13 because the site itself isn't recruiter-ready yet. This doc holds the full fix for when it is.
 
 ## Why deferred
 

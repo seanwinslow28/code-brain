@@ -2,30 +2,31 @@
 title: "AI-PM Landscape for Boston/Remote Hiring"
 type: concept
 sources:
-  - knowledge/concepts/ai-pm-landscape-for-boston-remote-hiring.md
+  - 20_projects/prj-job-hunt-2026/substack-pre-launch/posts/2026-05-14-post-1-introduction.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
 
-A framework mapping AI-related product management roles in the Boston area and remote environments, focusing on companies like Glean, Pair Team, and Anthropic. It emphasizes roles aligned with AI development, deployment, and leadership.
+A strategic mapping of the evolving AI Product Manager landscape in Boston and remote environments, including role expectations, hiring trends, and competitive differentiation.
 
 ## Context
 
-This concept is crucial for Sean as he's targeting companies that value AI product management skills, which align with his portfolio and career goals.
+Sean is actively seeking AI PM roles in Boston or remote, and the current hiring landscape requires him to be informed about both technical requirements and market positioning.
 
 ## Evidence
 
-> "AI-PM Landscape for Boston/Remote Hiring" — This framework is tailored to Sean's specific job hunt, emphasizing companies that are hiring for AI-related roles in his preferred locations.
+> 'Target priority: AI PM > Tech PM > Creative PM. Boston metro or remote.'
 
-> "Glean" | Role: Forward Deployed PM | Loc / Policy: Remote-US | ... [Greenhouse](https://job-boards.greenhouse.io/gleanwork/jobs/4651950005)
+> ''The Block' role ended via cost-cutting layoff on 2026-05-04 (delivered by Larry Cermak + Vicky Lu — not performance-related).'
 
 ## Examples
 
-- Glean's Forward Deployed PM role (Remote-US) is an example of this landscape.
+- Sean's focus on AI PM roles in Boston or remote environments.
+- Current hiring trends influenced by cost-cutting events at The Block.
 
 ## Related Concepts
 
-[[Portfolio Projects for Interview Prep]] [[Target Role Specs for 2026]]
+[[Cultural Fit Assessment]] [[Market Positioning]]

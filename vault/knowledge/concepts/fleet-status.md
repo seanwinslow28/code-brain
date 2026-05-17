@@ -2,31 +2,31 @@
 title: "Fleet Status"
 type: concept
 sources:
-  - knowledge/concepts/fleet-status.md
+  - 20_projects/research/2026-05-14-Agent-Fleet-Observability-Dashboard-ChatGPT.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
 
-The operational health of a fleet of autonomous agents, indicating their availability and performance. This is crucial for ensuring automation reliability.
+The operational state of an agent fleet, including its performance metrics and recovery from silent failures through automated evaluations.
 
 ## Context
 
-Fleet status directly impacts Sean's ability to rely on automated systems for daily routines, research, and production workflows.
+Fleet status is a critical signal to recruiters, showcasing Sean's ability to maintain agent fleets with reliability and operational maturity.
 
 ## Evidence
 
-> The operational health of a fleet of autonomous agents, indicating their availability and performance.
+> The cold-open needs **three things above the fold**: a visible fleet-state summary, a clearly annotated May 1–10 regression timeline showing that the eval suite caught a silent failure, and a compact economics view.
 
-> Fleet status is essential for understanding the reliability of automation processes since it reflects whether agents are functioning as expected.
+> The operator recovered it, and the dashboard preserves the incident as proof of operational maturity.
 
 ## Examples
 
-- Fleet status report highlights agent operational health
-- Issues with fleet status can prevent agents from accessing certain systems like MCP
+- Silent nine-day drift in an eight-agent fleet caught by the eval layer.
+- Recovery and preservation of incidents as proof of operational maturity.
 
 ## Related Concepts
 
-[[Automation Reliability]] [[Agent Health]]
+[[Agent Fleet Observability Dashboard]] [[Eval Vocabulary]]

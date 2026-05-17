@@ -2,10 +2,10 @@
 title: "Vibe-Coding Interview"
 type: concept
 sources:
-  - knowledge/concepts/karpathy-single-top-rec.md
+  - knowledge/concepts/ai-product-manager.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-16
+updated: 2026-05-16
 ---
 
 ## Definition
@@ -14,18 +14,18 @@ A structured interview format that involves demonstrating coding and problem-sol
 
 ## Context
 
-This format is critical for Sean during his job hunt in 2026, as it is a common stage in interviews for roles involving AI-native onsites.
+This interview format is relevant to Sean's job-hunt-2026 project as it helps assess technical competence in a live environment, particularly for roles that interface with automation and agent systems.
 
 ## Evidence
 
-> > Anthropic pays competitively for FDE roles. Sierra runs a vibe-coding interview as part of their loop.
+> A structured interview format that involves demonstrating coding and problem-solving skills in a dynamic, real-time setting. It is used by companies like Sierra as part of their hiring
 
-> # Gemini DR Prompt — Vibe-Coding Interview Canon 2026
+> Sierra runs a vibe-coding interview as part of their loop.
 
 ## Examples
 
-- Sierra runs a vibe-coding interview as part of their loop.
+- Sierra's vibe-coding interviews
 
 ## Related Concepts
 
-[[Karpathy Single-Top Rec]] [[Target Role Specs for 2026]]
+[[AI Product Manager]] [[Operating-model interview]]

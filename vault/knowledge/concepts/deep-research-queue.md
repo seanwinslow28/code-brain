@@ -2,30 +2,30 @@
 title: "Deep Research Queue"
 type: concept
 sources:
-  - knowledge/concepts/deep-research-queue.md
+  - 00_inbox/research-queue.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-16
+updated: 2026-05-16
 ---
 
 ## Definition
 
-A prioritized collection of research questions that are investigated using deep-research methods, often involving iterative web research with specific models and tools.
+A system for managing research questions that are processed by the deep-researcher agent, which uses Local Deep Research (LDR) to generate reports and write daily-digest lines.
 
 ## Context
 
-For Sean, it's essential as the backbone of his research operations when trying to find reliable models for agentic tasks, especially in the absence of local resources like a Mac Mini.
+This system is critical for Sean's workflow as it ensures that research questions are handled efficiently, with routing rules to prevent system overload and ensure quality results.
 
 ## Evidence
 
-> > Drop research questions here as `- [ ] {tier} {refined question}`.
+> The nightly `deep-researcher` agent (02:45) picks the first unchecked item, runs Local Deep Research (LDR + Qwen3-14B + SearXNG), writes the full report to `vault/20_projects/research/`, and marks the question done with a link.
 
-> The nightly `deep-researcher` agent (02:45) picks the first unchecked item, runs Local Deep Research (LDR + Qwen3-14B + SearXNG
+> Routing rule (v3.26.3, 2026-05-06): This queue is for **single-shape topics only** — one target, one question, one pattern.
 
 ## Examples
 
-- OpenRouter free model can replace Qwen3-14B-on-Ollama for headless tool-using agents when the Mac Mini is unreachable.
+- - [x] Topic 8 — OpenRouter Python integration patterns for the `agents-sdk/` fleet.
 
 ## Related Concepts
 
-[[Local Deep Research (LDR)]] [[Research Agents]]
+[[Local Deep Research (LDR)]] [[Gemini Deep Research]]

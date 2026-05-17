@@ -2,32 +2,29 @@
 title: "Gemini Deep Research"
 type: concept
 sources:
-  - knowledge/concepts/gemini-deep-research.md
+  - 00_inbox/research-queue.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-16
+updated: 2026-05-16
 ---
 
 ## Definition
 
-A structured approach to deep research, using tier-marked questions for iterative investigations. It helps manage complex, multi-step research tasks with clear prioritization and resource allocation.
+A research system that serves as an alternative to LDR for handling complex and compound topics, which LDR cannot process efficiently.
 
 ## Context
 
-This concept supports Sean in managing complex research workflows, particularly for tasks that require prioritization and resource allocation across different domains such as job preparation, creative projects, and knowledge exploration.
+Gemini DR is important for Sean as it allows him to handle complex research tasks that LDR cannot, ensuring scalability and quality.
 
 ## Evidence
 
-> > # Gemini Deep Research Queue
+> Both topics were re-run on Gemini DR successfully.
 
-Drop research questions here as `- [ ] {tier} {refined question}`.
-
-> > **Tier markers:**
-- `dr` — Deep Research (~$2–4/query, ~20-30 min): standard iterative web research
+> Gemini DR absorbs compound topics.
 
 ## Examples
 
-- - Tier-marked questions for prioritized research in Gemini Deep Research Queue.
+- The `gemini-deep-research` skill or `agents-sdk/scripts/gemini_dr.py --tier dr|max` is used for handling complex topics.
 
 ## Related Concepts
 

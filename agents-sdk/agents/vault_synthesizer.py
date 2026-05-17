@@ -43,11 +43,24 @@ from lib.config import load_config
 from lib.filelock import FileLock
 from lib.hybrid_router import HybridRouter, WOLUnavailable
 from lib.logging_setup import record_run, setup_logger
+from lib.retrieval_diversity import build_embedding_query, cluster_and_sample
 
 AGENT_NAME = "vault-synthesizer"
 MAX_TURNS = 25
 MAX_BUDGET_USD = 0.00
 DEFAULT_BUDGET_SECONDS = 45 * 60  # plan §3 (45 min)
+
+# Tier 2 retrofit (2026-05-16) — cluster-and-sample retrieval (TopClustRAG,
+# SIGIR 2025). Retrieve a larger pool, cluster with HDBSCAN, sample per
+# cluster so cross-domain content surfaces structurally instead of being
+# crowded out by the densest concept region (agent-health/fleet density).
+# See vault/20_projects/prj-job-hunt-2026/.../2026-05-13-vault-synthesizer-
+# retrofit-tiers.md §Tier 2 for the full intent spec.
+RETRIEVAL_POOL_SIZE = 50
+RETRIEVAL_K_PER_CLUSTER = 2
+RETRIEVAL_MIN_CLUSTER_SIZE = 3
+RETRIEVAL_MAX_NOISE = 3
+RETRIEVAL_MAX_TOTAL = 15
 
 MIN_WIKILINKS_PER_ARTICLE = 2
 KNOWLEDGE_SUBDIR = "knowledge"
@@ -119,6 +132,12 @@ class SynthesisResult:
     model_used: str = MODEL_USED_NONE
     wol_status: str = ""              # "mbp_awake" | "api_fallback" | "wol_deferred"
     run_id: str = ""                  # ISO timestamp; matches synth-manifest run_id
+    # Tier 2 retrofit (2026-05-16) — sum of real HDBSCAN clusters HDBSCAN
+    # found across every per-file retrieval pool this run. Surfaces in the
+    # synth-manifest as `clusters_sampled`. ≥3 per run is the verification
+    # gate that the cluster-and-sample path is doing real work (vs. always
+    # falling back to the top-rank slice).
+    clusters_sampled: int = 0
 
 
 # ─── pure helpers ──────────────────────────────────────────────────────────
@@ -309,6 +328,11 @@ def write_synth_manifest(
         "model_used": result.model_used,
         "wol_status": result.wol_status,
         "status": result.status,
+        # Tier 2 retrofit (2026-05-16) — total real clusters HDBSCAN found
+        # across all per-file retrieval pools. ≥3 means the cluster-and-
+        # sample path is doing work; 0 means every pool fell back to the
+        # top-rank slice (legacy v1 behaviour).
+        "clusters_sampled": result.clusters_sampled,
     }
     tmp = path.with_suffix(path.suffix + ".tmp")
     tmp.write_text(
@@ -556,11 +580,58 @@ def run_synthesis(
             continue
         result.files_processed += 1
 
+        # Tier 2 retrofit (2026-05-16) — cluster-and-sample retrieval.
+        # 1. Build a high-signal embedding query (headings + frontmatter +
+        #    first paragraph) instead of the raw first-2000-chars slice,
+        #    which used to be mostly frontmatter + intro.
+        # 2. Retrieve a wide pool (RETRIEVAL_POOL_SIZE chunks) instead of
+        #    top-K, asking the indexer to include embeddings so we can
+        #    cluster downstream.
+        # 3. Cluster + sample per cluster so the LLM sees cross-domain
+        #    candidates structurally, not just whatever the densest region
+        #    happens to be similar to. Falls back to the top-N-by-rank
+        #    slice cleanly when the retriever can't provide embeddings
+        #    (test mocks, degraded indexer), when the pool is too small,
+        #    or when HDBSCAN finds <2 real clusters.
+        retrieval_query = build_embedding_query(primary_text)
         try:
-            similar = retriever(primary_text[:2000], top_k)
+            pool = retriever(
+                retrieval_query,
+                RETRIEVAL_POOL_SIZE,
+                include_embeddings=True,
+            )
+        except TypeError:
+            # Backward-compat: caller-supplied retriever (legacy / test
+            # mock) doesn't accept include_embeddings. Fall back to the
+            # original positional call signature; the pool will be
+            # embedding-less and the cluster path will be skipped below.
+            try:
+                pool = retriever(retrieval_query, RETRIEVAL_POOL_SIZE)
+            except Exception as exc:
+                pool = []
+                result.warnings.append(f"retrieval failed for {fp.name}: {exc}")
         except Exception as exc:
-            similar = []
+            pool = []
             result.warnings.append(f"retrieval failed for {fp.name}: {exc}")
+
+        if pool and isinstance(pool[0].get("embedding"), (list, tuple)):
+            cluster_result = cluster_and_sample(
+                [p["embedding"] for p in pool],
+                k_per_cluster=RETRIEVAL_K_PER_CLUSTER,
+                min_cluster_size=RETRIEVAL_MIN_CLUSTER_SIZE,
+                max_noise=RETRIEVAL_MAX_NOISE,
+                max_total=RETRIEVAL_MAX_TOTAL,
+            )
+            similar = [pool[i] for i in cluster_result.indices]
+            # Strip embeddings before passing downstream — the prompt
+            # builder only consumes file_path / folder / chunk_text and
+            # 50 × 768-dim vectors would balloon the LLM context budget.
+            for chunk in similar:
+                chunk.pop("embedding", None)
+            result.clusters_sampled += cluster_result.clusters_found
+        else:
+            # No embeddings in pool → legacy top-K-by-rank behaviour.
+            similar = pool[:top_k]
 
         prompt = _build_synthesis_prompt(
             primary_file_rel=str(fp.relative_to(vault_root)),
@@ -764,14 +835,28 @@ def _default_llm_caller_factory(
 
 
 def _default_retriever_factory(vault_root: Path) -> Callable[..., list[dict[str, Any]]]:
-    """Re-use the existing vault_indexer search() against the live SQLite index."""
+    """Re-use the existing vault_indexer search() against the live SQLite index.
+
+    Accepts ``include_embeddings`` as a passthrough so the Tier 2 retrofit
+    (2026-05-16) cluster-and-sample path is reachable from the live agent.
+    Without this, the synthesizer's ``retriever(query, k, include_embeddings=True)``
+    call raised ``TypeError`` and silently fell back to legacy top-K — the
+    bug that left ``clusters_sampled=0`` in the 2026-05-17 manifest.
+    """
     from agents.vault_indexer import get_db_path, search
 
-    def _retrieve(query: str, top_k: int = 5) -> list[dict[str, Any]]:
+    def _retrieve(
+        query: str,
+        top_k: int = 5,
+        *,
+        include_embeddings: bool = False,
+    ) -> list[dict[str, Any]]:
         db = get_db_path(vault_root)
         if not db.exists():
             return []
-        return asyncio.run(search(query, db, top_k=top_k))
+        return asyncio.run(
+            search(query, db, top_k=top_k, include_embeddings=include_embeddings)
+        )
 
     return _retrieve
 
