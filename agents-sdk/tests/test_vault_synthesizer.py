@@ -379,3 +379,64 @@ def test_run_synthesis_sets_run_id(tmp_path: Path) -> None:
     # ISO 8601 with seconds precision — contains 'T' and at least one ':'.
     assert "T" in result.run_id
     assert result.run_id.count(":") >= 2
+
+
+def test_default_retriever_factory_accepts_include_embeddings_kwarg() -> None:
+    """Regression for the 2026-05-17 Tier-2 routing bug.
+
+    The v3.37.0 factory shim only accepted ``(query, top_k)``. The synthesizer's
+    new ``retriever(query, k, include_embeddings=True)`` call therefore raised
+    ``TypeError``; the silent fallback handler re-invoked positional-only and
+    the cluster path never fired — manifest reported ``clusters_sampled=0``.
+    Pinning the signature here so the seam can't regress.
+    """
+    import inspect
+
+    from agents.vault_synthesizer import _default_retriever_factory
+
+    retriever = _default_retriever_factory(Path("/nonexistent"))
+    sig = inspect.signature(retriever)
+    assert "include_embeddings" in sig.parameters
+    param = sig.parameters["include_embeddings"]
+    assert param.default is False
+    assert param.kind == inspect.Parameter.KEYWORD_ONLY
+
+
+def test_default_retriever_factory_forwards_include_embeddings(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The factory shim must thread ``include_embeddings`` through to
+    ``vault_indexer.search`` so Tier-2 actually receives embeddings.
+    """
+    from agents import vault_indexer as vi
+    from agents.vault_synthesizer import _default_retriever_factory
+
+    db_path = tmp_path / ".vault-index.db"
+    db_path.touch()
+    monkeypatch.setattr(vi, "get_db_path", lambda root: db_path)
+
+    captured: dict[str, object] = {}
+
+    async def fake_search(
+        query: str,
+        _db: Path,
+        top_k: int = 5,
+        *,
+        include_embeddings: bool = False,
+    ) -> list[dict[str, object]]:
+        captured["query"] = query
+        captured["top_k"] = top_k
+        captured["include_embeddings"] = include_embeddings
+        return [{"file_path": "f.md", "chunk_text": "x", "similarity": 0.9}]
+
+    monkeypatch.setattr(vi, "search", fake_search)
+
+    retriever = _default_retriever_factory(tmp_path)
+
+    # Kwarg path — Tier-2 reachable.
+    retriever("q", 50, include_embeddings=True)
+    assert captured == {"query": "q", "top_k": 50, "include_embeddings": True}
+
+    # Legacy positional path — backward compat preserved.
+    retriever("q2", 5)
+    assert captured["include_embeddings"] is False

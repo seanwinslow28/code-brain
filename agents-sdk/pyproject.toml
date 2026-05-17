@@ -16,6 +16,12 @@ dependencies = [
     "respx==0.23.1",
     "kokoro-onnx>=0.5.0,<0.6",
     "soundfile>=0.12,<0.14",
+    # Tier 2 retrofit (v3.37.0, 2026-05-16) — vault_synthesizer uses HDBSCAN
+    # to cluster the retrieval pool so the LLM sees cross-domain candidates
+    # instead of being crowded out by the densest concept region. Plan:
+    # vault/20_projects/prj-job-hunt-2026/.../2026-05-13-vault-synthesizer-
+    # retrofit-tiers.md §Tier 2.
+    "hdbscan>=0.8.40,<0.9",
 ]
 
 [project.optional-dependencies]

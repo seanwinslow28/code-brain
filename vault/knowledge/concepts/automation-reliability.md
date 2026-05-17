@@ -2,31 +2,31 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - knowledge/concepts/fleet-status.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-15-agent-fleet-dashboard-plan.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
 
-The consistency and dependability of automation processes performed by autonomous agents. This is a measure of how reliably tasks are completed.
+The ability of automated systems — such as agentic workers and orchestration processes — to consistently perform their designated tasks without interruption or degradation in quality.
 
 ## Context
 
-Automation reliability ensures that Sean's workflows — such as daily note generation or research agents — are consistent and dependable.
+This is critical for Sean's workflow, especially with his agentic workers handling high-volume, mission-critical tasks such as job application tracking and interview preparation.
 
 ## Evidence
 
-> The consistency and dependability of automation processes performed by autonomous agents.
+> Local cron at 06:00 ET daily.
 
-> Fleet status report highlights agent operational health, which directly correlates with automation reliability.
+> The build process relies on deterministic output to avoid page-weight and rendering inconsistencies.
 
 ## Examples
 
-- Fleet status report highlights agent operational health
-- Automation reliability is crucial for ensuring that tasks, such as generating daily notes, are completed consistently.
+- The daily cron job ensures routine processing of vault data.
+- Deterministic output is emphasized for inline SVG rendering to prevent inconsistencies.
 
 ## Related Concepts
 
-[[Fleet Status]] [[Agent Health]]
+[[Agent Fleet Observability Dashboard]] [[Automation Pipeline]]

@@ -2,31 +2,31 @@
 title: "Open-Source Contributions"
 type: concept
 sources:
-  - 20_projects/research/2026-05-13-topic-9-openrouter-free-tier-models-that-support-openai-form.md
+  - 20_projects/research/2026-05-15-topic-11-openrouter-image-generation-models-for-the-creative.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-16
+updated: 2026-05-16
 ---
 
 ## Definition
 
-The practice of contributing to open-source projects or using tools that are freely available and community-driven, which can provide scalable solutions for agentic systems.
+The practice of contributing to open-source projects often involves integrating tools and APIs like OpenRouter into workflows. This ensures accessibility, cost-efficiency, and community-driven innovation.
 
 ## Context
 
-Sean needs open-source contributions to find alternatives like the Qwen3-Coder model that can replace a locally-hosted system when it is unreachable.
+Sean may be interested in leveraging OpenRouter's image-generation models for creative workflows while contributing to open-source projects that require such tools.
 
 ## Evidence
 
-> Qwen3-Coder [...] ideal for headless tool-using agents [[1]](https://openrouter.ai/collections/free-models)
+> OpenRouter free model can replace Qwen3-14B-on-Ollama for headless tool-using agents when the Mac Mini is unreachable.
 
-> Qwen3-14B [...] supports tool calling efficiently [[5]](https://medium.com/codex/open-source-llm-platforms-in-2026-ollama-openrouter-groq-nvidia-nim-which-one-should-you-use-2f11c7ba60bc)
+> Catalog what image-gen endpoints OpenRouter exposes in 2026 (Closed-source models, latest open aourced models, FLUX, SDXL, Imagen variants, Stable Diffusion forks)
 
 ## Examples
 
-- Qwen3-Coder
-- Qwen3-14B
+- Integrating OpenRouter models into creative workflows for pixel art or cinematic stills
+- Using open-source image-generation APIs like OpenRouter to reduce costs for creative studios
 
 ## Related Concepts
 
-[[Deep Research Queue]] [[Local Deep Research (LDR)]]
+[[Creative Studio Workflows]] [[Automation Routines]]
