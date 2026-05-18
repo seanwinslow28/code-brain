@@ -2,30 +2,31 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/concepts/agent-health-monitoring.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-synthesizer-retrofit-tiers.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-18
+updated: 2026-05-18
 ---
 
 ## Definition
 
-The practice of ensuring agentic systems do not fall into infinite loops or hallucinate policies, which requires a new form of monitoring beyond traditional APM.
+The process of tracking and ensuring the health status of agents within Sean's knowledge vault infrastructure.
 
 ## Context
 
-This is crucial for Sean's job-hunt-2026, as it aligns with the growing demand in AgentOps and FDP roles for monitoring complex agentic systems.
+This concept is essential for ensuring the operational integrity of automation systems that power Sean's knowledge workflows.
 
 ## Evidence
 
-> > When a computational agent enters an infinite tool-calling loop, or hallucinates a business policy on step four of a seven-step reasoning chain, standard HTTP 200 OK statuses and latency metrics fail to capture the regression.
+> Agent health — the process of tracking and ensuring the health status of agents within Sean's knowledge vault infrastructure.
 
-> > Consequently, the discipline of 'AgentOps' has emerged in 2026 to address nested causality, multi-agent handoffs, and non-deterministic control flows.
+> Of 10 chunks retrieved per query, 6-7 always came from the agent-health/automation-reliability cluster
 
 ## Examples
 
-- The AxmeAI Fleet Dashboard tracks the sheer volume of operating a massive fleet (50+ agents) in a single consolidated view.
+- Agent health monitoring as a concept cluster
+- Health tracking for agent systems
 
 ## Related Concepts
 
-[[Agent Fleet Observability Dashboard]] [[Autonomous Agent Fleets]]
+[[Automation Reliability]] [[Agent Health and Daily Routine Automation]]

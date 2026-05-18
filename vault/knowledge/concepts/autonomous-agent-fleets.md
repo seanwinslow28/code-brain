@@ -2,31 +2,31 @@
 title: "Autonomous Agent Fleets"
 type: concept
 sources:
-  - 20_projects/research/2026-05-16-topic-12-openrouter-vs-direct-provider-economics-for-a-perso.md
+  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_council_input.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-18
+updated: 2026-05-18
 ---
 
 ## Definition
 
-A collection of AI agents, such as the daily-driver, vault-synthesizer, knowledge-lint, and deep-researcher agents, that operate on macOS launchd to perform tasks like knowledge indexing, research, and automation.
+A collection of 17 autonomous agents designed to perform tasks such as daily note generation, intent engineering, and other agentic operations. These agents are part of Sean's work with the Claude Code Superuser Pack.
 
 ## Context
 
-This concept is central to Sean's personal knowledge vault system. It involves managing a fleet of agents for daily operations and research.
+This concept is critical to Sean's goal of building open-source agentic tooling and demonstrates his hands-on experience with autonomous systems.
 
 ## Evidence
 
-> For each tier of model (frontier, mid, cheap, free), compare $/M-token + per-request markup between OpenRouter and the direct provider (Anthropic, OpenAI, Google AI Studio).
+> Builds open-source agentic-engineering tooling — the 118-skill Claude Code Superuser Pack and a 17-agent autonomous SDK fleet.
 
-> A personal autonomous-agent fleet running ~14 agents on macOS launchd (daily-driver, vault-synthesizer, knowledge-lint, deep-researcher, etc.).
+> Superuser Pack Selected Projects entry: hook count `13 → 14`, agent count `14 → 17`
 
 ## Examples
 
-- daily-driver agent
-- vault-synthesizer
+- Claude Code Superuser Pack
+- 17-agent SDK fleet
 
 ## Related Concepts
 
-[[Provider Fallback Mechanism]] [[Research Agents]]
+[[Agent Health Monitoring]] [[Intent Engineering]]

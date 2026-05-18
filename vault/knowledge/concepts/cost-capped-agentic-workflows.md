@@ -2,31 +2,31 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - knowledge/concepts/cost-capped-agentic-workflows.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-17-resume-council-plan.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-18
+updated: 2026-05-18
 ---
 
 ## Definition
 
-A strategy for managing personal agentic systems with strict daily budget constraints (~$5/day), often involving multiple agents and careful control over model choice, routing priority, and fallback mechanisms.
+A framework for executing agentic tasks with strict budget constraints, ensuring that workflows remain financially viable while maintaining quality.
 
 ## Context
 
-This is central to Sean's personal workflow optimization goals as he balances multiple agents with constrained computational costs, ensuring productivity without excessive financial burden.
+This matters to Sean because his resume optimization process is designed within a budgetary constraint, ensuring that the LLM Council review does not exceed $1.00 per query or $7/day.
 
 ## Evidence
 
-> what the recommended config is for cost-capped personal agentic workflows (~$5/day across ~14 agents)
+> Budget: ~$0.29 typical, $1.00 per-query cap, $7/day circuit breaker.
 
-> how to hard-cap spend per request and per day.
+> Sean's role is research synthesis, draft pressure-testing, council orchestration, and CIIA/keyword sanity checks — never final resume copy authorship.
 
 ## Examples
 
-- Optimizing provider choice using `sort_by price` to minimize per-agent costs.
-- Implementing fallback strategies (`allow_fallbacks`) to prevent system-wide failure due to a single agent's cost overruns.
+- The LLM Council review process is constrained by a $1.00 per-query cap.
+- Sean's role ensures that agentic workflows remain cost-effective.
 
 ## Related Concepts
 
-[[Provider Preference Configuration]] [[Automation Routines]]
+[[Agent Health Monitoring]] [[Automation Reliability]]

@@ -2,31 +2,31 @@
 title: "Automation Routines"
 type: concept
 sources:
-  - knowledge/concepts/automation-routines.md
+  - 20_projects/prj-job-hunt-2026/job-feed/2026-05-17.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-18
+updated: 2026-05-18
 ---
 
 ## Definition
 
-Recurring, process-driven tasks that make use of APIs and models to generate assets or content automatically. This includes image generation, video frame rendering, and other creative and computational workflows.
+A collection of automated processes that support Sean's job-hunting efforts, including status updates and application tracking.
 
 ## Context
 
-Sean needs automation routines to streamline his creative-studio workflows, particularly when using models like those offered by OpenRouter for image generation.
+This concept is relevant to Sean because it helps streamline his job-hunting process through automation.
 
 ## Evidence
 
-> > OpenRouter free model can replace Qwen3-14B-on-Ollama for headless tool-using agents when the Mac Mini is unreachable.
+> cd ~/Code-Brain/claude-code-superuser-pack/agents-sdk
 
-> > Catalog what image-gen endpoints OpenRouter exposes in 2026 (Closed-source models, latest open a sourced models, FLUX, SDXL, Imagen variants, Stable Diffusion forks)
+> PYTHONPATH=. .venv/bin/python3 scripts/update_status.py <db_id> applied
 
 ## Examples
 
-- Automated image generation using OpenRouter models to support creative projects
-- Scheduled generation of assets like watercolor art for design pipelines
+- cd ~/Code-Brain/claude-code-superuser-pack/agents-sdk
+- PYTHONPATH=. .venv/bin/python3 scripts/update_status.py <db_id> applied
 
 ## Related Concepts
 
-[[Creative Studio Workflows]] [[Open-Source Contributions]]
+[[Daily-Drive Agent]] [[Agent Health and Daily Routine Automation]]
