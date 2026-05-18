@@ -1188,6 +1188,97 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 
 ---
 
+### Task 16 — A1 Behavioral Story Bank (Phase A, ships private prep by 2026-06-08)
+
+**Maps to:** Aakash Gupta behavioral interview framework (5 categories × STAR+M structure). Closes the "no documented story bank" gap. Required input to Gate C (mock interview infrastructure).
+
+**Files:**
+- Create: `vault/20_projects/prj-job-hunt-2026/interview-prep/story-bank.md`
+- Create: `vault/20_projects/prj-job-hunt-2026/interview-prep/story-bank-source-material.md`
+
+**- [ ] Step 1: Audit raw material across solo Superuser Pack work + Block + NYL.** Pull 10 candidate stories from existing CLAUDE.md narratives (LDR grounding-collapse, Tier-1/Tier-2 retrofit, Judge Layer thinking, cluster-bias diagnostic, eval-suite intentional-red baseline, MCP server ship, Substack-Drafter design, Fleet Dashboard build, intent-engineering MCP DNS-auth flow, the 2026-05-04 layoff narrative + AI-evangelism backstory at NYL/Block).
+
+**- [ ] Step 2: Convert each candidate to STAR+M format.** For each, write: Situation (1 sentence), Task (PM accountability — 1 sentence), Action (3-4 bullets, named architectures + tools + metrics), Result (named outcomes), Metrics (M = precision/recall/F1/cost/latency/CTR equivalents where applicable).
+
+**- [ ] Step 3: Cull to 5–7 strongest.** Apply Aakash's 5-category coverage rule: 1 AI Product Experience story, 1 Technical AI Knowledge story, 1 Cross-Functional Collaboration story, 1 AI Ethics/Safety story, 1 AI Product Strategy story, + 1-2 swing stories (TMAY-eligible or trade-off-eligible).
+
+**- [ ] Step 4: Layer the AI-evangelist arc.** For each story sourced from solo work, layer the "AI evangelist in non-AI orgs" arc at the front. Result: every story answers "why are you pivoting hard into AI PM."
+
+**- [ ] Step 5: Drill three rounds.** Read each story aloud, time it (target 2:00-2:30 min), revise pacing.
+
+**Verification gate:** `story-bank.md` contains 5–7 stories. Each ≤ 2:30 spoken. Each has explicit M-line. Sean can recite story 1 cold without notes.
+
+---
+
+### Task 17 — A2 TMAY 2-Minute Script (Phase A, ships private prep by 2026-05-31)
+
+**Maps to:** Aakash Gupta TMAY framework (Hook → AI Inflection Point → Proof Points → Why Here). Sets the frame for every interview Sean takes through the gate. Tier-A: "AI evangelist in non-AI orgs → AI-native operator with proof artifacts" arc is load-bearing.
+
+**Files:**
+- Create: `vault/20_projects/prj-job-hunt-2026/interview-prep/tmay-script.md`
+- Create: `vault/20_projects/prj-job-hunt-2026/interview-prep/tmay-per-company-variations.md`
+
+**- [ ] Step 1: Draft Hook (15 sec).** Current state + AI focus. Format: "I'm an AI PM coming off 1 year as a named PM at a crypto media company, after 4 prior years at a financial-services org and the same media org where I was the lone AI evangelist. The thing I kept running into was..." [tie to AI Inflection].
+
+**- [ ] Step 2: Draft AI Inflection Point (30 sec).** Why AI specifically, why now. The "I built it myself because the orgs wouldn't" beat. Concrete moment of conversion (e.g., the day Sean shipped the eval suite intentionally red and watched the failures surface in production logs).
+
+**- [ ] Step 3: Draft Proof Points (45 sec).** 3 named artifacts with metrics: (a) intent-engineering MCP server (npm + MCP registry, DNS-verified) — "first concrete instance of my specification-engineering thesis"; (b) vault-synthesizer eval suite (10 cases, 6 failure modes, 1/10 → 7/10 progression) — "shipped intentionally red, fixed in public"; (c) Agent Fleet Observability Dashboard at fleet.seanwinslow.com — "single-page HTML, 85ms build, real telemetry across 8 agents."
+
+**- [ ] Step 4: Draft Why Here (30 sec).** Per-company. Default template: "Your work on [specific product surface] is exactly the kind of [agent platform / context-engineering / vendor-eval] work I've been trying to ship from the outside. The [Anthropic Skills / Forward Deployed / Agent Quality / NowAssist] role is where my evangelism arc graduates into named accountability."
+
+**- [ ] Step 5: Record, transcribe, grade.** Voice memo recording → Granola transcription → LLM Council interview-grader profile (Task 19) grading on 8 dimensions. Iterate until 8+/10 on all 8.
+
+**Verification gate:** `tmay-script.md` runs 2:00–2:30 spoken. Council grading hits 8+/10 on all 8 dimensions in 3 consecutive attempts.
+
+---
+
+### Task 18 — A3 AI Technical Vocabulary Drill (Phase A start, runs through gate as spaced repetition)
+
+**Maps to:** Aakash Gupta "the F1 score question" — every interviewer probes shallow vocabulary. DR-Max Q3 surfaces AgentOps vendor primitives + beyond-Nate failure patterns as additional vocab Sean must own.
+
+**Files:**
+- Create: `vault/20_projects/prj-job-hunt-2026/interview-prep/ai-vocab-drill.md`
+- Create: `vault/20_projects/prj-job-hunt-2026/interview-prep/ai-vocab-anki-deck.csv`
+
+**- [ ] Step 1: Cover the Aakash list.** Precision, recall, F1, AUC, embeddings, fine-tuning vs RAG vs few-shot, prompt engineering, model drift, feature engineering, A/B testing for ML, offline vs online evaluation, latency vs throughput tradeoffs, p95/p99 tail latency, time-to-first-token (TTFT), cost-per-inference, batch vs real-time.
+
+**- [ ] Step 2: Cover the DR-Max-surfaced AgentOps vendor list.** Datadog LLM Observability, LangSmith, LangFuse, Arize, Helicone, Mezmo, Galileo, Weights & Biases (Weave) — for each: functional scope (1 sentence), price model, ideal use case, anti-use case. (Source: `vault/20_projects/research/2026-05-18-enterprise-ai-pm-skill-gaps.md` §Q3.)
+
+**- [ ] Step 3: Cover the 9 failure patterns.** Nate's six (context degradation, specification drift, sycophantic confirmation, tool selection errors, cascade failures, silent failures) PLUS DR-Max's three additional (Planner / Intent-Plan Misalignment, Schema Violations / Drift, Brittle Prompt Dependencies / Context Bloat). For each: 1-sentence definition + 1 named real-world example.
+
+**- [ ] Step 4: Cover Enterprise PM accountability vocab.** SR-11-7 model risk tiering, EU AI Act Annex IV technical documentation, Article 50 transparency, Article 61 post-market monitoring, model card vs system card, "Trust Economics," Time-to-Trust, fallback-to-human rate, agent-override rate, agent-rejection rate.
+
+**- [ ] Step 5: Build the Anki deck.** Use `md-to-anki` workflow (existing skill). Each card: term on front, definition + 1 example + when-PM-would-use-it on back.
+
+**- [ ] Step 6: Drill 15 min/day, 5 days/week through gate.** Track adherence in `vault/health/vocab-drill-streak.json`.
+
+**Verification gate:** Anki deck has ≥60 cards. Sean can answer 90% of cards correctly cold after 4 weeks. Council mock interview grading shows no "I'd have to check" responses on vocabulary questions.
+
+---
+
+### Task 19 — A6 Mock Interview Infrastructure (Phase A, ships by 2026-05-26)
+
+**Maps to:** Aakash Gupta "record, transcribe, grade" workflow. Required to measure Gate C (3 consecutive 8+/10 mock interviews).
+
+**Files:**
+- Create: `tools/llm-council/profiles/interview_grader.py` (extends premium profile)
+- Create: `agents-sdk/scripts/mock_interview_loop.py` (record → transcribe → grade pipeline)
+- Create: `vault/20_projects/prj-job-hunt-2026/interview-prep/mock-log/.gitkeep`
+
+**- [ ] Step 1: Define the interview-grader Council profile.** Extend `tools/llm-council/council/profiles.py` with a new `interview_grader` profile: panelists = Claude Opus 4.7 + GPT-5.5 + Gemini Pro (drop Grok 4.20 for this profile — speed over variance); chairman = Opus 4.7; max_cost_per_query=$0.40; output schema = 8-dimension rubric (timing / structure / impact specificity / confidence signals / filler words / weakness flipping / information control / memorability), each 1–10 with 1-sentence justification.
+
+**- [ ] Step 2: Build the transcribe pipeline.** Sean records via macOS Voice Memos. `mock_interview_loop.py` watches `~/Voice Memos/` for new `.m4a`, calls Granola API (or Otter.ai free tier as fallback) for transcription, saves to `vault/20_projects/prj-job-hunt-2026/interview-prep/mock-log/YYYY-MM-DD-HH-MM.transcript.md`.
+
+**- [ ] Step 3: Wire the grade step.** After transcript lands, `mock_interview_loop.py` invokes the Council `interview_grader` profile with the transcript + question prompt. Output: `mock-log/YYYY-MM-DD-HH-MM.grade.md` with the 8-dimension scorecard + 3 specific revisions to make.
+
+**- [ ] Step 4: Test with the TMAY script (Task 17 output).** Run 3 mock TMAY attempts. Verify Council returns scored output. Verify cost stays under $0.40/query.
+
+**- [ ] Step 5: Document the loop in a README.** `tools/llm-council/profiles/INTERVIEW_GRADER.md` — Sean uses this to recall the workflow without re-reading the code.
+
+**Verification gate:** `python3 agents-sdk/scripts/mock_interview_loop.py --transcript <file> --question "Tell me about yourself"` returns a Council scorecard in <60s for <$0.40. Sean can run a full mock loop end-to-end in <10 min.
+
+---
+
 ### Task 7 — STOP-DOING list (3+ items)
 
 **Maps to:** Karpathy synthesis Part 5 "Stop investing in" + operating-model "self-blocking decisions pile up."
