@@ -6,7 +6,7 @@ status: active
 domain: [life-systems, career-transition]
 started: 2026-05-04
 target-completion: 2026-08-15
-last-updated: 2026-05-13
+last-updated: 2026-05-18
 ai-context: "Active job hunt after May 4, 2026 layoff from The Block. Targeting AI PM / Technical PM / Creative PM roles, Boston metro or remote. Canonical plan: vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-04-onwards-and-upwards-plan.md."
 ---
 
@@ -152,3 +152,4 @@ The 5/4 termination call was actually delivered by **Larry Cermak (President)** 
 - **2026-05-18 — Mock interview infrastructure extends LLM Council `premium` profile as new `interview_grader` profile.** Record → Granola transcribe → Council grade on 8 dimensions, $0.40/query cap. NO standalone Claude Skill.
 - **2026-05-18 — Sean's stack stays HORIZONTAL through gate.** No vertical AI eval suite. DR-Max Q4 finding (2026-05-18 enterprise-AI-PM skill-gap research, $7.00).
 - **2026-05-18 — `agentlens` flagship AgentOps observability layer deferred until post-gate inbound check.** Existing Task 11 Agent Fleet Observability Dashboard at fleet.seanwinslow.com partially fills the slot at zero marginal cost.
+- **2026-05-18 — Unified roadmap split into roadmap + companion completion log (conservative v1).** [[onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap|unified-roadmap.md]] dropped from 2091 lines / 276KB → 2073 lines / 262KB by lifting the 13-entry amendments YAML list + the body of Task 0 (the only fully-closed task at the time) into a new sibling [[onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/unified-roadmap-completion-log|unified-roadmap-completion-log.md]] (126 lines / 27KB). The parent retains a date+topic `amendments_index` pointer (14 entries) and a Task 0 stub linking back. **Going-forward convention:** new completion summaries land in the log, not on top of the roadmap; when a still-active task fully closes (Tasks 3/8/9/11 when their last steps land), its body follows Task 0's lift-and-stub shape. Triggered by every recent Claude Code session commenting on the roadmap's size at session open. validate.py still 60 warnings / 0 errors (baseline preserved); no broken wikilinks; relative paths resolve identically from both files (same directory). Pattern documented at the bottom of the new log under `## Going Forward — Where Completion Writes Land`.
