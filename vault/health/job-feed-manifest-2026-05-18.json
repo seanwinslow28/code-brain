@@ -29,6 +29,18 @@
         "ats:openai (ReadTimeout)"
       ],
       "short_circuited": false
+    },
+    {
+      "fired_at": "2026-05-18T08:30:02.360755",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 1,
+      "llm_failed": 0,
+      "mbp_reachable": true,
+      "duration_sec": 17.36,
+      "failed_pollers": [],
+      "short_circuited": false
     }
   ]
 }
