@@ -2,7 +2,7 @@
 type: spec
 project: prj-job-hunt-2026
 created: 2026-05-13
-status: research-pending
+status: research-complete
 artifact_target: 8th flagship portfolio artifact
 ships: TBD pending deep research
 linked_artifacts:
@@ -12,6 +12,7 @@ linked_artifacts:
   - "[[knowledge_loop]]"
 linked_research:
   - "[[2026-05-07-target-role-specs]]"
+  - "[[2026-05-18-vault-knowledge-mcp-research]]"
 ai-context: "Build spec + deep-research prompt scaffolding for `vault-knowledge-mcp` — Sean's second MCP server. Designed to be ingested by Gemini DR-Max or a Claude deep-research run to validate the architecture, reference-implementation choices, and recruiter-resonance hypothesis before any code is written. Status remains `research-pending` until DR results land at `vault/20_projects/research/2026-05-XX-vault-knowledge-mcp-research.md`."
 ---
 
