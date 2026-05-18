@@ -2,30 +2,31 @@
 title: "AI Fluency"
 type: concept
 sources:
-  - knowledge/concepts/ai-fluency.md
+  - 20_projects/prj-job-hunt-2026/nate-jones-portfolio-strategy-2026-05-17.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-18
+updated: 2026-05-18
 ---
 
 ## Definition
 
-The ability to demonstrate understanding of and experience with AI-driven tools like Bolt, v0, Cursor, Replit Agent, and MCP. It is essential for modern engineering roles that require working with agentic systems.
+The ability to understand, navigate, and contribute to AI-native workflows, typically through hands-on projects and artifacts.
 
 ## Context
 
-Critical for Sean's job-hunt-2026, especially when demonstrating agentic engineering capabilities to evaluators like FDEs or hiring managers.
+Closely tied to Sean's need to demonstrate expertise in Enterprise AI PM roles through concrete outputs rather than credentials.
 
 ## Evidence
 
-> The ability to demonstrate understanding of and experience with AI-driven tools like Bolt, v0, Cursor, Replit Agent, and MCP. It is essential for modern engineering roles that require working with agentic systems.
+> Credentials are largely worthless; artifacts are the credential.
 
-> A clear, visible sign of engineering capability with agentic systems that can be quickly noticed by evaluators like FDEs or hiring managers.
+> Inbound recruiter messages in Market Two follow published work — agent specs, failure post-mortems, evaluation frameworks, narrated working sessions — not certifications.
 
 ## Examples
 
-- (no examples captured yet)
+- Agent specs
+- Failure post-mortems
 
 ## Related Concepts
 
-[[Agentic Engineering Signal]] [[Portfolio Projects for Interview Prep]]
+[[Portfolio Projects for Interview Prep]] [[Agent Health Monitoring]]
