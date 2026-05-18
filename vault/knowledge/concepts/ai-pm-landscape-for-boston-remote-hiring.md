@@ -2,31 +2,31 @@
 title: "AI-PM Landscape for Boston/Remote Hiring"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/substack-pre-launch/posts/2026-05-14-post-1-introduction.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-17-resume-council-critique.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-18
+updated: 2026-05-18
 ---
 
 ## Definition
 
-A strategic mapping of the evolving AI Product Manager landscape in Boston and remote environments, including role expectations, hiring trends, and competitive differentiation.
+The landscape of AI Product Manager roles available in the Boston metro area and remote locations, focusing on Sean's target compensation range and relocation preferences.
 
 ## Context
 
-Sean is actively seeking AI PM roles in Boston or remote, and the current hiring landscape requires him to be informed about both technical requirements and market positioning.
+This concept is central to Sean's job search strategy, as he aims to target AI PM roles with relocation flexibility or high compensation.
 
 ## Evidence
 
-> 'Target priority: AI PM > Tech PM > Creative PM. Boston metro or remote.'
+> Target archetypes in priority order: AI PM > Tech PM > Creative PM.
 
-> ''The Block' role ended via cost-cutting layoff on 2026-05-04 (delivered by Larry Cermak + Vicky Lu — not performance-related).'
+> Compensation: walk-away floor $100K, target band $150–250K, relocation override = Anthropic specifically OR $250K+/yr. Boston metro or remote default.
 
 ## Examples
 
-- Sean's focus on AI PM roles in Boston or remote environments.
-- Current hiring trends influenced by cost-cutting events at The Block.
+- AI PM role at Anthropic with $250K+/yr
+- Remote AI PM role with $180K base salary
 
 ## Related Concepts
 
-[[Cultural Fit Assessment]] [[Market Positioning]]
+[[Target Role Specs for 2026]] [[Tier-A Relocation Exception Clauses]]

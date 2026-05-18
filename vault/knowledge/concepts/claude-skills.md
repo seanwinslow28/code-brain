@@ -2,31 +2,31 @@
 title: "Claude Skills"
 type: concept
 sources:
-  - knowledge/concepts/claude-skills.md
+  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_council_input.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-18
+updated: 2026-05-18
 ---
 
 ## Definition
 
-Claude Skills are specific capabilities or features within the Claude system, which have been successfully delivered through effective product management strategies.
+Specific AI-powered tools or functions developed using Claude to automate tasks like WordPress ETF page generation, biweekly executive updates, and Jira ticket scaffolding. These are part of Sean's work at The Block.
 
 ## Context
 
-Understanding Claude Skills helps Sean align his professional development with successful product management practices, particularly in the context of AI systems and feature delivery.
+This concept highlights Sean’s expertise in deploying Claude for product development and shows his contribution to specific business objectives.
 
 ## Evidence
 
-> Claude Skills are specific capabilities or features within the Claude system, which have been successfully delivered through effective product management strategies.
+> Shipped 3 production Claude Skills (`etf-page-creator`, `stakeholder-update`, `jira-automation`) automating WordPress ETF page generation, biweekly executive updates, and per-product Jira ticket scaffolding
 
-> Driven by effective Product Management
+> Direct delivery against the P&E Q2 Objective 5 KR3 ("Ship 1–3 Claude Skills")
 
 ## Examples
 
-- Successful delivery at The Block
-- Driven by effective Product Management
+- `etf-page-creator`
+- `jira-automation`
 
 ## Related Concepts
 
-[[Product Management]] [[System Constraints]]
+[[Automation Pipeline]] [[AdOps Automation]]

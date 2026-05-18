@@ -2,31 +2,31 @@
 title: "Creative Studio Workflows"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/substack-pre-launch/voice-mode-calibration-runs/2026-05-14-intent-engineering-mcp.md
+  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_Creative_PM.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-18
+updated: 2026-05-18
 ---
 
 ## Definition
 
-A system for generating content with specific stylistic and tonal targets, often involving AI tools to mimic a human voice or tone.
+A structured process for managing creative outputs using AI-native tooling, blending human creativity with agent-driven automation.
 
 ## Context
 
-This ties directly into Sean's job hunt and content strategy, as he is using AI to generate compelling Substack posts tailored to his personal brand.
+Sean applies his 12+ years of illustration and animation craft through AI-native production tools like Nano Banana Pro, Seedance 2.0, and Adobe MCP.
 
 ## Evidence
 
-> 'Write a 600-800 word Substack first-post in Sean Mode.'
+> - Agent-orchestrated 2D animation pipeline: humans own the creative ceiling, agents own the technical floor (asset generation, lip sync, render).
 
-> 'The author wants to know whether the spec is unambiguous enough that four different frontier models would read it the same way.'
+> - Applies 12+ years of illustration and animation craft through AI-native production tooling; portfolio short ships June 2026.
 
 ## Examples
 
-- 'Write a 600-800 word Substack first-post in Sean Mode.'
-- 'The natural voice. Load this when no specific mode is requested.'
+- 2D Animation Pipeline — Portfolio Short (June 2026)
+- Custom 2D-animation-principles skill governing timing and style.
 
 ## Related Concepts
 
-[[Intent Engineering]] [[Substack-Drafter agent]]
+[[Automation Pipeline]] [[AI-PM Landscape for Boston/Remote Hiring]]

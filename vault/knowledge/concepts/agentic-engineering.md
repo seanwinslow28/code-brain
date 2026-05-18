@@ -1,32 +1,31 @@
 ---
-title: "Agentic-Engineering"
+title: "Agentic Engineering"
 type: concept
 sources:
-  - knowledge/concepts/agentic-engineering.md
+  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_Tech_PM.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-18
+updated: 2026-05-18
 ---
 
 ## Definition
 
-The design and implementation of systems where software agents autonomously execute commercial actions like payments, authorization, and settlement. This layering of responsibility shifts the burden of trust from humans to algorithms.
+An approach where agents own decomposition tasks, while human judgment provides oversight. This methodology is demonstrated through Sean's development of the Claude Code Superuser Pack.
 
 ## Context
 
-This is critical for Sean's job-hunt-2026 and creative-studio work, as agentic systems will redefine how he interacts with tools, products, and services in both his professional and creative workflows.
+This approach is central to Sean's work in designing durable, scalable AI workflows and product management systems.
 
 ## Evidence
 
-> Software is starting to hold wallets, sign authorizations, and pay merchants directly.
+> Demonstrates Karpathy-style 'agentic engineering practitioner' architecture — agents own decomposition; human owns judgment.
 
-> The question stops being 'can the customer pay?' and becomes 'how does everyone know the agent was allowed to do what it just did?'
+> Used in production for daily PM workflows, vault automation, and content generation across crypto, creative, and personal-systems domains.
 
 ## Examples
 
-- OpenAI and Stripe's Instant Checkout protocol, which was later scaled back.
-- Shopify and Google's competing agentic commerce protocols.
+- Claude Code Superuser Pack — Open-Source Toolkit
 
 ## Related Concepts
 
-[[Automation Routines]] [[Daily-driver agent]]
+[[Agent Health and Daily Routine Automation]] [[Automation Pipeline]]

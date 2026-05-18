@@ -2,31 +2,31 @@
 title: "Daily Note Generation"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/substack-pre-launch/posts/2026-05-14-post-1-introduction.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-17-resume-council-critique.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-18
+updated: 2026-05-18
 ---
 
 ## Definition
 
-The structured practice of creating daily summaries or reflections as a way to track progress and maintain focus during the job-hunt period.
+A routine of capturing daily insights, tasks, and reflections to support Sean's productivity, knowledge management, and structured thinking.
 
 ## Context
 
-Sean's job hunt requires a disciplined approach, and Daily Note Generation can help maintain momentum and clarity over an 8-week period.
+This habit underpins Sean’s ability to synthesize complex information and prepare for interviews with confidence.
 
 ## Evidence
 
-> 'Fleet Status' (from concept titles)
+> 'Daily Note Generators' — a routine for capturing insights, tasks, and reflections.
 
-> 'Daily Note Generators' (from concept titles)
+> Daily Note Generation: routines that make Sean's thinking visible.
 
 ## Examples
 
-- Using automation routines for Daily Note Generation.
-- Tracking progress via weekly retros (Friday cadence).
+- Daily note for Substack post drafting
+- Note on AI PM role requirements from interview prep
 
 ## Related Concepts
 
-[[Daily-Drive Agent]] [[Automation Routines]]
+[[Spaced Repetition]] [[Interview Preparation Playbook]]

@@ -2,31 +2,31 @@
 title: "Open-Source Contributions"
 type: concept
 sources:
-  - 20_projects/research/2026-05-15-topic-11-openrouter-image-generation-models-for-the-creative.md
+  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_Tech_PM.md
 tags: [auto-generated, phase-6]
-created: 2026-05-16
-updated: 2026-05-16
+created: 2026-05-18
+updated: 2026-05-18
 ---
 
 ## Definition
 
-The practice of contributing to open-source projects often involves integrating tools and APIs like OpenRouter into workflows. This ensures accessibility, cost-efficiency, and community-driven innovation.
+Sean publishes tools to npm and the MCP registry, including agentic engineering toolkits like the Claude Code Superuser Pack. This reflects his emphasis on open-source, reusable components for AI and agent workflows.
 
 ## Context
 
-Sean may be interested in leveraging OpenRouter's image-generation models for creative workflows while contributing to open-source projects that require such tools.
+This plays a key role in Sean's professional identity as both a product manager and an open-source contributor, helping to shape AI workflow infrastructure.
 
 ## Evidence
 
-> OpenRouter free model can replace Qwen3-14B-on-Ollama for headless tool-using agents when the Mac Mini is unreachable.
+> Published the `@swins/intent-engineering-mcp` MCP server to npm and the MCP registry in May 2026.
 
-> Catalog what image-gen endpoints OpenRouter exposes in 2026 (Closed-source models, latest open aourced models, FLUX, SDXL, Imagen variants, Stable Diffusion forks)
+> Open-source agentic engineering toolkit for Claude Code: 118 skills, 13 subagents, 14 hooks, 17 autonomous Claude Agent SDK agents (8 in production on local-first launchd schedules).
 
 ## Examples
 
-- Integrating OpenRouter models into creative workflows for pixel art or cinematic stills
-- Using open-source image-generation APIs like OpenRouter to reduce costs for creative studios
+- intent-engineering MCP Server
+- Claude Code Superuser Pack — Open-Source Toolkit
 
 ## Related Concepts
 
-[[Creative Studio Workflows]] [[Automation Routines]]
+[[MCP Server / Portfolio Differentiation]] [[Agent Health Monitoring]]

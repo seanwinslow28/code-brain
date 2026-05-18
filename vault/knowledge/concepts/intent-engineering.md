@@ -2,31 +2,30 @@
 title: "Intent Engineering"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/substack-pre-launch/voice-mode-calibration-runs/2026-05-14-intent-engineering-mcp.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-18
+updated: 2026-05-18
 ---
 
 ## Definition
 
-The structured calibration of AI's intent generation to align with human tone, voice, and purpose. It focuses on ensuring models can mimic specific writing styles or modes with precision.
+A process of creating precise intent definitions and operational designs, often involving agentic workflows. This concept plays a role in both knowledge vault and job-hunt efforts.
 
 ## Context
 
-This is crucial for Sean's job hunt, as he relies on AI platforms to produce high-quality content tailored to his voice for Substack posts and other professional outputs.
+Sean is leveraging intent engineering to structure his knowledge vaults and streamline automation for job-interview preparation.
 
 ## Evidence
 
-> 'You are critiquing a writing voice spec by trying to write IN it. The spec below is 'Sean Mode' — a calibrated hybrid voice from a personal `writing-voice-modes` SKILL.md file.'
+> Track-C MCP Server / Portfolio Differentiation
 
-> 'The author wants to know whether the spec is unambiguous enough that four different frontier models would read it the same way.'
+> Personal Agentic Intent Engineering
 
 ## Examples
 
-- 'Here's the deal — we'll architect the perfect system, ship it, scale it, and then we'll burn it all...'
-- 'Fuelled by new found skills, fresh brewed coffee, and for once in my life, a glimmer of hope.'
+- A part of the unified roadmap includes intent engineering, which involves designing intent systems for automation.
 
 ## Related Concepts
 
-[[Creative Studio Workflows]] [[Substack-Drafter agent]]
+[[Unified Roadmap]] [[Track-C MCP Server / Portfolio Differentiation]]
