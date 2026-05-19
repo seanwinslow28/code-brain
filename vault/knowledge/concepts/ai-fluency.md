@@ -2,19 +2,19 @@
 title: "AI Fluency"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/nate-jones-portfolio-strategy-2026-05-17.md
+  - knowledge/concepts/ai-fluency.md
 tags: [auto-generated, phase-6]
-created: 2026-05-18
-updated: 2026-05-18
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition
 
-The ability to understand, navigate, and contribute to AI-native workflows, typically through hands-on projects and artifacts.
+The ability to understand, navigate, and contribute to AI-native workflows through hands-on projects and artifacts. This is particularly relevant for Sean as he seeks roles in Enterprise AI PM, where practical outputs are favored over credentials.
 
 ## Context
 
-Closely tied to Sean's need to demonstrate expertise in Enterprise AI PM roles through concrete outputs rather than credentials.
+Sean's need to demonstrate expertise in Enterprise AI PM roles through concrete outputs rather than credentials.
 
 ## Evidence
 

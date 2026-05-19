@@ -2,31 +2,31 @@
 title: "Daily-Drive Agent"
 type: concept
 sources:
-  - knowledge/concepts/daily-drive-agent.md
+  - knowledge/concepts/automation-routines.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition
 
-A specialized autonomous agent designed to manage daily tasks, routines, and schedules for users or organizations.
+An automated agent designed to drive Sean's daily routines, including job hunt tasks and knowledge synthesis. It ensures consistent productivity across his workflow.
 
 ## Context
 
-This agent is critical in maintaining Sean's personal productivity systems, especially as he balances job-hunting activities with creative and life-system priorities.
+The Daily-Drive Agent helps Sean maintain structure and momentum in his job search, especially when paired with automation routines.
 
 ## Evidence
 
-> A specialized autonomous agent designed to manage daily tasks, routines, and schedules for users or organizations.
+> > cd ~/Code-Brain/claude-code-superuser-pack/agents-sdk
 
-> Daily-drive agents are critical in ensuring that personal productivity systems remain robust and resilient.
+> Automation and Daily Drive Agent Interdependence
 
 ## Examples
 
-- Automated morning routine execution
-- Scheduling meetings with intelligent calendar agents
+- cd ~/Code-Brain/claude-code-superuser-pack/agents-sdk
+- scripts/update_status.py <db_id> applied
 
 ## Related Concepts
 
-[[Daily Routine Automation]] [[Automation Pipeline]]
+[[Automation Routines]] [[Agent Health and Daily Routine Automation]]

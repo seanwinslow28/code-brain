@@ -2,10 +2,10 @@
 title: "Agentic Engineering"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_Tech_PM.md
+  - knowledge/concepts/agentic-engineering.md
 tags: [auto-generated, phase-6]
-created: 2026-05-18
-updated: 2026-05-18
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition

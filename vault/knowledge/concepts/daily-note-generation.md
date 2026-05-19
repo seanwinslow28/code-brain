@@ -2,7 +2,7 @@
 title: "Daily Note Generation"
 type: concept
 sources:
-  - 20_projects/research/2026-05-18-enterprise-ai-pm-skill-gaps.md
+  - knowledge/concepts/automation-reliability.md
 tags: [auto-generated, phase-6]
 created: 2026-05-19
 updated: 2026-05-19
@@ -10,22 +10,23 @@ updated: 2026-05-19
 
 ## Definition
 
-The process of automatically generating notes or logs based on routines, system events, or user inputs to ensure transparency and accountability.
+A routine task performed by the daily-driver agent to generate a note for the day, which is integral to tracking progress and activities. Its success relies heavily on the health of the agent.
 
 ## Context
 
-This aligns with Sean's agentic system, which includes hooks like cost watchdogs and network controls — a potential model for AI PMs interested in daily-agent routines.
+For Sean, daily note generation is integral to his knowledge tracking and progress monitoring. It highlights the interplay between agent health and task reliability.
 
 ## Evidence
 
-> 13 active hooks including network-access-control and a $/session cost watchdog
+> A routine task performed by the daily-driver agent to generate a note for the day, which is integral to tracking progress and activities.
 
-> Daily Note Generation
+> The health of the daily-driver agent is a critical factor in determining automation success, especially for routine tasks.
 
 ## Examples
 
-- 13 active hooks including network-access-control and a $/session cost watchdog
+- Generating daily notes via automation
+- Agent health influencing the reliability of daily note generation
 
 ## Related Concepts
 
-[[Automation Routines]] [[Agent Health Monitoring]]
+[[Automation Reliability]] [[Agent Health and Daily Routine Automation]]
