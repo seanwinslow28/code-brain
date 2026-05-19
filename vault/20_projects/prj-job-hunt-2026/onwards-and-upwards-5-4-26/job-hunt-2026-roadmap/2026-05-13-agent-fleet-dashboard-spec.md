@@ -84,9 +84,9 @@ The dashboard surfaces the eval-suite pass count, which catches the regression t
 - **Data loading:** **Open question for research** — see §6 Q1
 - **Distribution surface:** **Open question for research** — see §6 Q2
 - **Anonymization:** **Open question for research** — see §6 Q3
-- **Theme:** Light mode primary, dark mode toggle, matches `[[sw-portfolio]]` V3 Teal/Amber tokens
+- **Theme:** Light mode primary, dark mode toggle, matches `[[sw-ai-pm-portfolio]]` V3 Teal/Amber tokens
 - **Typography:** Sora (headings) + Inter (body) + JetBrains Mono (numbers)
-- **Accessibility:** WCAG 2.1 AA — see `[[sw-portfolio/DESIGN-SPEC-V4]]` standards Sean already enforces
+- **Accessibility:** WCAG 2.1 AA — see `[[sw-ai-pm-portfolio/DESIGN-SPEC-V4]]` standards Sean already enforces
 
 ### 3c. The Narrative Annotation (load-bearing)
 
@@ -240,7 +240,7 @@ If the dashboard is the visual hero of Substack post 2, the post will be read on
 - [[knowledge_loop#EXPLANATION]] — the producer side the dashboard visualizes
 - [[concept_edges#EXPLANATION]] — the edge-write data the synthesizer telemetry surfaces
 - The eval suite at `evals/vault-synthesizer/` — the pass-count source
-- [[sw-portfolio/DESIGN-SPEC-V4]] — token / typography / color reference for visual consistency
+- [[sw-ai-pm-portfolio/DESIGN-SPEC-V4]] — token / typography / color reference for visual consistency
 - Helicone public demo, Braintrust dashboard tour, Langfuse demo, LangSmith trace viewer (URLs to verify in research)
 
 ---

@@ -19,7 +19,7 @@ identity_locked:
   registry_namespace: com.seanwinslow/intent-engineering  # domain-verified via DNS TXT, NOT io.github.* form
   license: MIT
   personal_site: seanwinslow.com
-  personal_site_repo: /Users/seanwinslow/Code-Brain/sw-portfolio
+  personal_site_repo: /Users/seanwinslow/Code-Brain/sw-ai-pm-portfolio
   canonical_deep_dive_url: https://seanwinslow.com/transactions/intent-engineering-mcp
   canonical_fallback: GitHub docs/EXPLANATION.md (per roadmap Decision 2 if site delays past 2026-05-20)
 ai-context: "Scope lock for the intent-engineering MCP server v0. This document is binding — Claude Code must implement against this exactly. All 10 open questions closed 2026-05-07. Decision 1 of the unified roadmap closes when this is committed to the new repo as docs/v0-scope.md."
@@ -31,7 +31,7 @@ ai-context: "Scope lock for the intent-engineering MCP server v0. This document 
 >
 > **Status.** Draft. To be moved to `~/Code-Brain/sw-mcp-intent-engineering/docs/v0-scope.md` on repo creation. Decision 1 of the [unified roadmap](2026-05-06-unified-roadmap.md) closes when this file is committed to the new repo.
 >
-> **Path note (2026-05-07):** Roadmap originally referenced `~/Code/sw-mcp-intent-engineering/`. Corrected to `~/Code-Brain/sw-mcp-intent-engineering/` to match Sean's existing convention (sibling to `claude-code-superuser-pack` and `sw-portfolio` inside `Code-Brain/`).
+> **Path note (2026-05-07):** Roadmap originally referenced `~/Code/sw-mcp-intent-engineering/`. Corrected to `~/Code-Brain/sw-mcp-intent-engineering/` to match Sean's existing convention (sibling to `claude-code-superuser-pack` and `sw-ai-pm-portfolio` inside `Code-Brain/`).
 
 ---
 
@@ -474,7 +474,7 @@ All seven open questions resolved. Listed here as a permanent record.
 4. **License:** MIT ✓.
 5. **Personal site:**
    - Production URL: `seanwinslow.com` (currently old, replacement in flight)
-   - Replacement portfolio repo: `/Users/seanwinslow/Code-Brain/sw-portfolio`
+   - Replacement portfolio repo: `/Users/seanwinslow/Code-Brain/sw-ai-pm-portfolio`
    - Canonical deep-dive page (target): `https://seanwinslow.com/transactions/intent-engineering-mcp`
    - **Schedule note:** finishing the new portfolio is now a parallel critical-path deliverable for the 2026-05-25 ship. ~60% of deep-work time → MCP server, ~40% → portfolio site. If the site is behind by 2026-05-20, fall back to GitHub `docs/EXPLANATION.md` as canonical (per roadmap Decision 2) and ship the site post-announce. The MCP server ship date does not slip for site polish. ✓
 6. **117-skill retrofit CSV side artifact:** YES. During Days 14–15 (polish phase), run `assess_retrofit_level` against every SKILL.md in `.claude/skills/`. Save raw output to `examples/superuser-pack-retrofit-assessment.csv` in the new repo. **Pruning of unused skills happens AFTER 5/25 as a separate post-employment cleanup project — do NOT add pruning to the 19-day window.** The CSV alone is the demo artifact. Before commit, scan for any skills containing residual Block IP that survived Task 0's scrub; exclude those rows. ✓

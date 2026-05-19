@@ -300,7 +300,7 @@ Vercel-deployment-log dark palette with full legibility, mono numbers, status-ev
 | `text-secondary` | `#8b949e` | Sub-text |
 | `text-tertiary` | `#6e7681` | Labels, timestamps |
 | `accent-green` | `#3fb950` | Healthy, OK, success — Vercel-green tier |
-| `accent-teal` | `#18b894` | sw-portfolio teal — used for synthesizer recovery line and emphasis |
+| `accent-teal` | `#18b894` | sw-ai-pm-portfolio teal — used for synthesizer recovery line and emphasis |
 | `accent-amber` | `#f0b429` | Warnings, regression callout, mascot arms |
 | `accent-purple` | `#c084fc` | Research tickets, private badge, mascot arms (gradient target) |
 | `accent-red` | `#f85149` | Errors, regression band, failure alerts |
@@ -628,7 +628,7 @@ Updated from the v1 spec's Section 8 with locked decisions.
 - ChatGPT DR: [[2026-05-14-Agent-Fleet-Observability-Dashboard-ChatGPT]]
 - Gemini DR: [[2026-05-14-Agent-Fleet-Observability-Dashboard-Gemini-DR]]
 - Roadmap: [[2026-05-06-unified-roadmap]] (Task 11 in roadmap needs to be updated post-design with locked ship date + distribution surface)
-- sw-portfolio design tokens: `[[sw-portfolio/DESIGN-SPEC-V4]]` (deferred — informs token choices; tokens here are stand-alone for v1)
+- sw-ai-pm-portfolio design tokens: `[[sw-ai-pm-portfolio/DESIGN-SPEC-V4]]` (deferred — informs token choices; tokens here are stand-alone for v1)
 - v2 kanban deferred-work memory: `project_agent_fleet_dashboard_kanban_v2.md`
 
 ---

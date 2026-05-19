@@ -215,7 +215,7 @@ Run: `grep -n "### Task 19" vault/20_projects/prj-job-hunt-2026/onwards-and-upwa
 
 **- [ ] Step 1: Update bio.** Format: "AI PM building [specific thing]. Shipping [specific cadence]. Lives at seanwinslow.com/transactions." Remove any "passionate about AI" / "AI enthusiast" / generic phrases.
 
-**- [ ] Step 2: Choose the 6 pinned repos.** Default selection: (1) intent-engineering-mcp, (2) vault-synthesizer-evals (after N1 Task 37 ships), (3) ldr-grounding-collapse (after N2 Task 25 ships), (4) agent-fleet-observability, (5) sw-portfolio, (6) claude-code-superuser-pack. Reorder by recruiter-impact: MCP server first.
+**- [ ] Step 2: Choose the 6 pinned repos.** Default selection: (1) intent-engineering-mcp, (2) vault-synthesizer-evals (after N1 Task 37 ships), (3) ldr-grounding-collapse (after N2 Task 25 ships), (4) agent-fleet-observability, (5) sw-ai-pm-portfolio, (6) claude-code-superuser-pack. Reorder by recruiter-impact: MCP server first.
 
 **- [ ] Step 3: Audit each pinned repo's README.** For each: Problem (who has this pain? be specific), Solution (what does the tool do? how does the user interact?), Tradeoffs and Decisions (1-2 decisions made + alternatives considered + why chosen), What I Learned (real insight that travels beyond this artifact). No "I learned a lot about APIs" — specific.
 
@@ -252,7 +252,7 @@ Run: `grep -n "### Task 20" vault/20_projects/prj-job-hunt-2026/onwards-and-upwa
 - Create: `<repo>/matrix.md` (the rubric)
 - Create: `<repo>/worked-example-fortune-500-content-co.md`
 - Create: `<repo>/EXPLANATION.md` (4Q artifact)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/enterprise-data-readiness-matrix.md` (ledger row)
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/enterprise-data-readiness-matrix.md` (ledger row)
 
 **- [ ] Step 1: Draft the 5 dimensions of data readiness.** (1) Canonical Entity IDs — does the customer have unified IDs across systems? (2) Lineage & Provenance — can outputs be traced to source documents? (3) Freshness Signals — are timestamps reliable? (4) Workflow Eligibility Tags / Governance — which docs is the agent allowed to read? (5) Deduplication + Embedding-Store Hygiene — are vector clusters poisoned by duplicates?
 
@@ -264,7 +264,7 @@ Run: `grep -n "### Task 20" vault/20_projects/prj-job-hunt-2026/onwards-and-upwa
 
 **- [ ] Step 5: Write the 4Q EXPLANATION.md.** What is this? / Why this approach? / What would break? / What did I learn?
 
-**- [ ] Step 6: Ship to standalone repo + ledger.** Push to github.com/seanwinslow28/enterprise-data-readiness-matrix. Add MDX entry to sw-portfolio/src/content/transactions/. Cross-post a teaser thread to LinkedIn.
+**- [ ] Step 6: Ship to standalone repo + ledger.** Push to github.com/seanwinslow28/enterprise-data-readiness-matrix. Add MDX entry to sw-ai-pm-portfolio/src/content/transactions/. Cross-post a teaser thread to LinkedIn.
 
 **Verification gate:** Standalone repo public. Ledger row live at seanwinslow.com/transactions/enterprise-data-readiness-matrix/. 4Q EXPLANATION.md passes the <90-sec recruiter readability check.
 ```
@@ -289,7 +289,7 @@ Run: `grep -n "### Task 21" vault/20_projects/prj-job-hunt-2026/onwards-and-upwa
 
 **Files:**
 - Create: `docs/SUPERUSER_SYSTEM_CARD.md`
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/superuser-system-card.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/superuser-system-card.md`
 
 **- [ ] Step 1: Map the existing fleet to SR-11-7 tiers.** For each of the 8 active SDK agents (vault_indexer, vault_synthesizer, deep_researcher, meta_agent, daily_driver, knowledge_lint, flush, gemini_researcher) + intent-engineering MCP + LLM Council + Substack-Drafter + Judge Layer: assign an SR-11-7 materiality tier (low / medium / high) with rationale.
 
@@ -330,7 +330,7 @@ Run: `grep -n "### Task 22" vault/20_projects/prj-job-hunt-2026/onwards-and-upwa
 - Read: `vault/20_projects/research/2026-05-18-mcp-prompt-injection-hardening.md` (LDR output, 1267 words, 20 citations)
 - Modify: `~/Code-Brain/sw-mcp-intent-engineering/src/server.ts` (apply hardening checklist)
 - Create: `~/Code-Brain/sw-mcp-intent-engineering/docs/SECURITY.md` (the audit writeup)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/mcp-security-audit.md` (ledger row)
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/mcp-security-audit.md` (ledger row)
 
 **- [ ] Step 1: Re-read the LDR research output.** Note the grounding caveat in the design doc — the LDR report incorrectly attributes EchoLeak (CVE-2025-32711) to "the Anthropic MCP server" when it's actually a Microsoft Copilot for M365 vuln. Fix this attribution in the audit writeup.
 
@@ -367,7 +367,7 @@ Run: `grep -n "### Task 23" vault/20_projects/prj-job-hunt-2026/onwards-and-upwa
 
 **Files:**
 - Create: `vault/20_projects/prj-job-hunt-2026/portfolio-artifacts/discovery-prd-ai-content-workflow.md`
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/discovery-prd-content-workflow.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/discovery-prd-content-workflow.md`
 
 **- [ ] Step 1: Choose the workflow.** A realistic AI product surface a content-team PM would propose to a skeptical org. Default choice: "AI-assisted article drafting + editorial review workflow for a 50-person content org." Sanitize Block-specific names — generic Fortune 500 content company framing.
 
@@ -413,7 +413,7 @@ Run: `grep -n "### Task 24" vault/20_projects/prj-job-hunt-2026/onwards-and-upwa
 - Create: `<repo>/the-diagnosis.md` (how Sean caught the fabrication)
 - Create: `<repo>/the-fix.md` (the v3.26.3 routing rule + Gemini DR-Max escalation pattern)
 - Create: `<repo>/eval-case.yaml` (a regression eval that catches this failure)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/ldr-grounding-collapse.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/ldr-grounding-collapse.md`
 - Create: Substack draft `vault/20_projects/prj-job-hunt-2026/substack-drafts/2026-05-29-ldr-grounding-collapse.md`
 
 **- [ ] Step 1: Lift the bad-output fixture.** Copy `vault/20_projects/research/2026-05-05-topic-1a-mcp-sdk-toolkit-survey-catalog-mcp-cli-mcp-bridge-m.md` (status: superseded) into the standalone repo as `the-failure.md`. Preserve the fabricated entities (PureMCPClient, MCPCatalog (Central), MCP ADK) and the fake learn.microsoft.com URLs. Add a header annotating each fabrication.
@@ -460,7 +460,7 @@ Tasks 26–35 are the Phase B batch. Each ships during Weeks 4–6 (2026-06-09 �
 - Create: `<repo>/cost-model.md` (5K invoices/mo scenario)
 - Create: `<repo>/build-vs-buy-memo.md`
 - Create: `<repo>/governance-mapping.md` (SOC 2 + SR-11-7 coverage)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/enterprise-ap-agent-spec.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/enterprise-ap-agent-spec.md`
 
 **- [ ] Step 1: Write the problem statement (300 words).** A realistic 200-person SaaS company processing 5K AP invoices/month. Manual tier-1 invoice approval takes 8 min average; agent target = 95% auto-approved + 5% escalated to human in <30 sec.
 
@@ -498,7 +498,7 @@ Tasks 26–35 are the Phase B batch. Each ships during Weeks 4–6 (2026-06-09 �
 - Create: `<repo>/worked-example.md` (apply to Task 26 AP agent)
 - Create: `<repo>/notion-template-export.md` (paste-into-Notion fork-able template)
 - Create: `<repo>/scorecard.csv`
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/build-vs-buy-framework.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/build-vs-buy-framework.md`
 
 **- [ ] Step 1: Define the 12 dimensions.** (1) Cost at scale, (2) Latency P99, (3) Vendor lock-in surface, (4) MCP support depth, (5) Audit-log primitives, (6) SSO/IAM integration depth, (7) Governance certifications (SOC 2, ISO 27001, HIPAA, EU AI Act conformity), (8) Prompt-injection hardening, (9) Eval tooling, (10) Support SLA, (11) Roadmap predictability, (12) Exit cost.
 
@@ -522,8 +522,8 @@ Tasks 26–35 are the Phase B batch. Each ships during Weeks 4–6 (2026-06-09 �
 
 **Files:**
 - Record: 35-min Loom video (unedited or lightly edited; messy parts left in)
-- Create: YouTube unlisted upload at github.com/seanwinslow28/sw-portfolio link target
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/narrated-working-session.md`
+- Create: YouTube unlisted upload at github.com/seanwinslow28/sw-ai-pm-portfolio link target
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/narrated-working-session.md`
 
 **- [ ] Step 1: Choose the diagnostic target.** Default: the 2026-05-16 cluster-diversity probe → HDBSCAN retrofit. Sean opens the synthesizer output, runs `scripts/query.py` to surface the cluster bias, hypothesizes that retrieval is cluster-collapsing, runs the embedding diagnostic, writes the test for `retrieval_diversity.py`, watches it fail, implements the fix, watches it pass. ~35 min.
 
@@ -552,7 +552,7 @@ Tasks 26–35 are the Phase B batch. Each ships during Weeks 4–6 (2026-06-09 �
 - Create: `<repo>/playbook.pdf` (the slide deck)
 - Create: `<repo>/playbook-source.md` (markdown source)
 - Create: `<repo>/case-studies.md` (Klarna / BofA / JPM / Walmart references)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/ai-adoption-playbook.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/ai-adoption-playbook.md`
 
 **- [ ] Step 1: Choose the workflow to apply the playbook to.** Default: rolling out the Substack-Drafter agent (from Task 9) to a 50-person content team. Sanitized — generic content org framing.
 
@@ -580,7 +580,7 @@ Tasks 26–35 are the Phase B batch. Each ships during Weeks 4–6 (2026-06-09 �
 
 **Files:**
 - Create: Figma file `seanwinslow-portfolio/hitl-escalation` (public link)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/hitl-escalation-wireframes.md` (embeds Figma link + screenshots)
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/hitl-escalation-wireframes.md` (embeds Figma link + screenshots)
 - Create: `vault/20_projects/prj-job-hunt-2026/portfolio-artifacts/hitl-design-rationale.md`
 
 **- [ ] Step 1: Define the workflow being escalated.** Default: the Substack-Drafter agent (Task 9 / Task 12). Agent generates draft → confidence-threshold check fires (judge layer from Task 12) → fallback to human review needed. Wireframe the human-in-the-loop UI surface.
@@ -607,7 +607,7 @@ Tasks 26–35 are the Phase B batch. Each ships during Weeks 4–6 (2026-06-09 �
 - Modify: `~/Code-Brain/agent-fleet-observability/lib/render.py` (add `render_executive()` function)
 - Create: `<fleet repo>/templates/executive-view.html`
 - Create: `<fleet repo>/lib/roi_translator.py` (maps technical metrics to dollar-equivalents)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/executive-roi-dashboard.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/executive-roi-dashboard.md`
 
 **- [ ] Step 1: Define the 5 executive-readable metrics.** (1) Hours Saved this month (sum of agent task minutes × human-equivalent time); (2) Escalation Cost Avoided ($ — count of auto-resolved tasks × avg human handling cost); (3) Estimated SLA Breach Cost if agents were offline ($); (4) Cost-per-task across the fleet ($); (5) Trust trajectory — Time-to-Trust trend over 30 days.
 
@@ -664,7 +664,7 @@ Tasks 26–35 are the Phase B batch. Each ships during Weeks 4–6 (2026-06-09 �
 **Files:**
 - Create: `vault/20_projects/prj-job-hunt-2026/vibe-coding-log/.gitkeep`
 - Create: `vault/20_projects/prj-job-hunt-2026/vibe-coding-log/log.md` (rolling log)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/vibe-coding-rep-NN.md` per rep
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/vibe-coding-rep-NN.md` per rep
 
 **- [ ] Step 1: Pick the alternating cadence.** Week 4: Bolt rep on Tuesday + v0 rep on Friday. Week 5: same. Week 6: same. Total: 6 reps in Phase B.
 
@@ -687,7 +687,7 @@ Tasks 26–35 are the Phase B batch. Each ships during Weeks 4–6 (2026-06-09 �
 **Files:**
 - Create: `vault/20_projects/prj-job-hunt-2026/substack-drafts/2026-06-12-ai-safety-judge-layer.md`
 - Modify: `vault/20_projects/prj-job-hunt-2026/interview-prep/story-bank.md` (add story #4)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/ai-safety-judge-layer.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/ai-safety-judge-layer.md`
 
 **- [ ] Step 1: Choose the narrative anchor.** Default: the Judge Layer retrofit (Task 12 from existing roadmap) + the LDR grounding-collapse incident → routing rule (v3.26.3). Frame: "What I learned when my own agent confidently fabricated Microsoft documentation, and the control architecture I built to make sure agents draft but I send."
 
@@ -710,7 +710,7 @@ Tasks 26–35 are the Phase B batch. Each ships during Weeks 4–6 (2026-06-09 �
 **Files:**
 - Create: `vault/20_projects/prj-job-hunt-2026/substack-drafts/2026-06-26-my-own-ml-engineer.md`
 - Modify: `vault/20_projects/prj-job-hunt-2026/interview-prep/story-bank.md` (add story #5)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/my-own-ml-engineer.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/my-own-ml-engineer.md`
 
 **- [ ] Step 1: Choose the diagnostic episode.** Default: the 2026-05-16 cluster-diversity probe via `scripts/query.py` → HDBSCAN retrofit (`retrieval_diversity.py`). This is the same episode as Task 28's Loom — different format.
 
@@ -750,7 +750,7 @@ Expected: 10 hits.
 - Create: `<repo>/README.md` (portfolio narrative)
 - Create: `<repo>/skills/` directory with 10–18 skills
 - Create: `<repo>/agents-sdk/scripts/` directory with daily-briefing scripts
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/job-search-os.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/job-search-os.md`
 
 **- [ ] Step 1: Define the 12 skills/scripts that compose the OS.** Resume-tailoring-per-JD, cover-letter-per-JD, outreach-draft-per-warm-contact, post-interview-debrief, mock-interview-grader (wraps Task 19), per-company-prep-packet-generator (wraps Task 32 template), application-log-writer, follow-up-reminder, referral-request-draft, recruiter-thread-summarizer, salary-research-per-JD, application-funnel-dashboard.
 
@@ -777,7 +777,7 @@ Expected: 10 hits.
 - Copy: `claude-code-superuser-pack/evals/vault-synthesizer/*` to new repo
 - Create: `<repo>/README.md` (portfolio narrative, NOT internal-engineering shape)
 - Create: `<repo>/EXPLANATION.md` (4Q artifact)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/vault-synthesizer-evals.md` (if not already present from prior Task 8 ship)
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/vault-synthesizer-evals.md` (if not already present from prior Task 8 ship)
 - Create: GitHub Actions workflow `.github/workflows/evals.yml` (run suite on PR)
 
 **- [ ] Step 1: Copy evals directory.** `cp -r claude-code-superuser-pack/evals/vault-synthesizer/* ~/Code-Brain/vault-synthesizer-evals/`. Preserve cases.yaml, failure-modes.md, runner.py, traces/, EXPLANATION.md.
@@ -806,7 +806,7 @@ Expected: 10 hits.
 - Create: `<repo>/prices.json` (community-PR-able token prices)
 - Create: `<repo>/README.md`
 - Create: DNS record for `cost.seanwinslow.com` (Cloudflare CNAME → Cloudflare Pages or Vercel)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/agent-cost-calculator.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/agent-cost-calculator.md`
 
 **- [ ] Step 1: Build the data file.** `prices.json` with current per-token costs (input / output / cache-write / cache-read) across: Anthropic Opus 4.7, Sonnet 4.6, Haiku 4.5; OpenAI GPT-5.5, GPT-5.4-mini; Google Gemini 2.5 Pro, Flash, Flash-Lite; DeepSeek v4-pro; Mistral medium-3-5; Groq Llama 3.1 70B.
 
@@ -838,7 +838,7 @@ Expected: 10 hits.
 - Create: `<repo>/README.md`
 - Create: `<repo>/example/` (working demo with a sample vault fixture)
 - Create: `vault/20_projects/prj-job-hunt-2026/substack-drafts/2026-07-03-defeating-cluster-bias.md`
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/defeating-cluster-bias.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/defeating-cluster-bias.md`
 
 **- [ ] Step 1: Extract the modules.** Copy `retrieval_diversity.py` (HDBSCAN cluster-and-sample) and `concept_edges.py` (OB1-inspired typed reasoning edges) to standalone repo. Strip Sean-vault-specific paths; parameterize.
 
@@ -1101,7 +1101,7 @@ Run: `git status` and confirm working tree clean (or only contains vault auto-co
 - "Tier 1" / "Tier 2" / "Tier 3" used consistently.
 - "Phase A" / "Phase B" / "Phase C" used consistently.
 - Task IDs 16-40 used consistently (no off-by-one).
-- File paths verified against the actual repo (vault/20_projects/prj-job-hunt-2026/, ~/Code-Brain/sw-portfolio/, etc.).
+- File paths verified against the actual repo (vault/20_projects/prj-job-hunt-2026/, ~/Code-Brain/sw-ai-pm-portfolio/, etc.).
 - Gate A and Gate C named consistently throughout (matches design doc §5).
 - "agents-draft / Sean-sends" Tier-A boundary preserved.
 

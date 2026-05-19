@@ -13,7 +13,7 @@ ai-context: "Superseded 2026-05-16 by Council Gap-Fill 3 (un-defers deployment).
 
 > **STATUS:** Superseded 2026-05-16. Deployment is no longer deferred. Canonical deploy record is the **Task 1 Step 3 expanded scope** in [`2026-05-06-unified-roadmap.md`](2026-05-06-unified-roadmap.md) (ship target **Mon 2026-05-19**). Two deploy choices changed from this doc's original recommendation: (1) **host = Vercel**, not Cloudflare Pages — for consistency with the [`agent-fleet-observability`](../../../../agent-fleet-observability/) deploy already on Vercel; (2) **Cloudflare DNS records set to DNS-only / orange-cloud OFF** for the Vercel apex + www records, so Vercel's edge handles SSL without proxy interference. Steps 1–6 below are retained as historical reference + the residual mechanics still apply (build verification, custom-domain attach, optional repo push). Triggers + acceptance criteria are obsolete (superseded by the Gap-Fill 3 verification gate).
 >
-> **Original TL;DR (preserved for context):** [sw-portfolio](https://github.com/seanwinslow28/sw-portfolio) is built, pushed to GitHub, and has a working `/transactions/` route. It is **not deployed** to any host. **seanwinslow.com** is owned (Cloudflare + Namecheap) but points at nothing live. Sean deferred deployment 2026-05-13 because the site itself isn't recruiter-ready yet. This doc holds the full fix for when it is.
+> **Original TL;DR (preserved for context):** [sw-ai-pm-portfolio](https://github.com/seanwinslow28/sw-ai-pm-portfolio) is built, pushed to GitHub, and has a working `/transactions/` route. It is **not deployed** to any host. **seanwinslow.com** is owned (Cloudflare + Namecheap) but points at nothing live. Sean deferred deployment 2026-05-13 because the site itself isn't recruiter-ready yet. This doc holds the full fix for when it is.
 
 ## Why deferred
 
@@ -36,11 +36,11 @@ Better to ship once, when the design + content + 4Q artifact set are at the bar 
 
 | Piece | State |
 |---|---|
-| Local `~/Code-Brain/sw-portfolio/` ↔ GitHub | ✅ In sync. Remote = [github.com/seanwinslow28/sw-portfolio](https://github.com/seanwinslow28/sw-portfolio). Last commit on `main` = `08731f9` from 2026-05-08. |
+| Local `~/Code-Brain/sw-ai-pm-portfolio/` ↔ GitHub | ✅ In sync. Remote = [github.com/seanwinslow28/sw-ai-pm-portfolio](https://github.com/seanwinslow28/sw-ai-pm-portfolio). Last commit on `main` = `08731f9` from 2026-05-08. |
 | Build stack | ✅ Astro 5 + React 19 islands + Tailwind v4 + GSAP + Lenis. `output: 'static'`, `npm run build` → `dist/`. |
 | `/transactions/` route | ✅ Shipped 2026-05-08 (commit `f13a103`). Uses Astro content collections + `TransactionCard.astro` component. Two entries: Phase D + Phase 6. |
 | Hosting config in repo | ❌ No `vercel.json`, `netlify.toml`, `wrangler.toml`, `_redirects`, `CNAME`, or `.github/workflows/` |
-| `site:` field in [astro.config.mjs](../../../../../sw-portfolio/astro.config.mjs) | ❌ Missing — needed for canonical URLs / sitemap / og:url |
+| `site:` field in [astro.config.mjs](../../../../../sw-ai-pm-portfolio/astro.config.mjs) | ❌ Missing — needed for canonical URLs / sitemap / og:url |
 | Custom domain | ❌ `seanwinslow.com` not yet pointed at any host |
 
 ## The full fix — execute in this order when ready to ship
@@ -57,7 +57,7 @@ Alternatives, in order of fastest path-to-live:
 - **Netlify** — equivalent posture to Vercel.
 - **GitHub Pages** — free but requires writing a `.github/workflows/deploy.yml` action because Astro needs a build step. Slower setup, more friction.
 
-### Step 2: Set production URL in [astro.config.mjs](../../../../../sw-portfolio/astro.config.mjs)
+### Step 2: Set production URL in [astro.config.mjs](../../../../../sw-ai-pm-portfolio/astro.config.mjs)
 
 Add `site: 'https://seanwinslow.com'` to the `defineConfig({...})` block. Tiny change, but Astro needs it before deploy or the sitemap, canonical tags, and og:url all generate wrong:
 
@@ -76,7 +76,7 @@ Commit with `chore(astro): set production site URL for canonical / sitemap`. Pus
 ### Step 3: Verify the build runs clean locally first
 
 ```bash
-cd ~/Code-Brain/sw-portfolio
+cd ~/Code-Brain/sw-ai-pm-portfolio
 npm run build
 # Expect: dist/ generated, no errors, content collection routes hydrated
 ls dist/transactions/
@@ -90,7 +90,7 @@ If the build fails, fix it before connecting to a host. Common Astro-5-with-cont
 In Cloudflare dashboard:
 
 1. Workers & Pages → Create application → Pages → Connect to Git
-2. Pick `seanwinslow28/sw-portfolio`
+2. Pick `seanwinslow28/sw-ai-pm-portfolio`
 3. Production branch: `main`
 4. Framework preset: **Astro** (auto-detected)
 5. Build command: `npm run build`
@@ -98,7 +98,7 @@ In Cloudflare dashboard:
 7. Environment variables: none needed for static build
 8. Deploy
 
-First build runs in ~90 seconds. You get a `sw-portfolio-XXXX.pages.dev` URL. Verify the site loads there, navigate to `/transactions/`, confirm both Phase D and Phase 6 entries render.
+First build runs in ~90 seconds. You get a `sw-ai-pm-portfolio-XXXX.pages.dev` URL. Verify the site loads there, navigate to `/transactions/`, confirm both Phase D and Phase 6 entries render.
 
 ### Step 5: Attach `seanwinslow.com` as custom domain
 
@@ -150,6 +150,6 @@ This issue moves from "deferred" to "active" when **any** of these fire:
 
 - [2026-05-06-unified-roadmap.md](2026-05-06-unified-roadmap.md) — parent roadmap, Decision 2 explains the Substack-from-GitHub-raw fallback
 - [2026-05-13-claude-code-handoff-task-1-2.md](2026-05-13-claude-code-handoff-task-1-2.md) — the handoff that surfaced this gap during execution
-- Local repo: `~/Code-Brain/sw-portfolio/`
-- GitHub repo: https://github.com/seanwinslow28/sw-portfolio
+- Local repo: `~/Code-Brain/sw-ai-pm-portfolio/`
+- GitHub repo: https://github.com/seanwinslow28/sw-ai-pm-portfolio
 - Domain registrar / DNS: Cloudflare + Namecheap (combined; exact arrangement to be confirmed at deploy time)

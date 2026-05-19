@@ -200,7 +200,7 @@ The master plan's Phase 0–8 stays canonical. These tasks add the explanation-a
 
 > **STATUS (2026-05-12 evening):** Steps 1, 2, 4 complete in a Cowork session. Steps 3 (personal-site `/transactions/` route) and 5 (commits) handed to Claude Code via [`2026-05-13-claude-code-handoff-task-1-2.md`](2026-05-13-claude-code-handoff-task-1-2.md). The handoff includes a stop-and-confirm gate on the personal-site repo path (Decision 2 fallback fires if scaffolding from scratch >30 min).
 >
-> **DEPLOYMENT GAP IDENTIFIED (2026-05-13):** During handoff execution Claude Code discovered the `/transactions/` route already existed in [`~/Code-Brain/sw-portfolio/`](https://github.com/seanwinslow28/sw-portfolio) from commit `f13a103` (2026-05-08) — so Steps 3 + 5 of the handoff were effectively pre-done. **However**, the repo is **not deployed anywhere**: no `vercel.json` / `netlify.toml` / `wrangler.toml` / `CNAME` / `.github/workflows/`, and `seanwinslow.com` (owned via Cloudflare + Namecheap) doesn't point at any live instance. Sean explicitly deferred deployment 2026-05-13 — site isn't recruiter-ready yet, no point lighting up the domain with a half-finished page. **Full fix when ready to ship is captured in [`2026-05-13-personal-site-deployment-deferred.md`](2026-05-13-personal-site-deployment-deferred.md).** Triggers to un-defer (LinkedIn link, Substack post, etc.) are listed there. Future Claude Code sessions: do NOT proactively start deploying — surface that doc when Sean signals the site is ready.
+> **DEPLOYMENT GAP IDENTIFIED (2026-05-13):** During handoff execution Claude Code discovered the `/transactions/` route already existed in [`~/Code-Brain/sw-ai-pm-portfolio/`](https://github.com/seanwinslow28/sw-ai-pm-portfolio) from commit `f13a103` (2026-05-08) — so Steps 3 + 5 of the handoff were effectively pre-done. **However**, the repo is **not deployed anywhere**: no `vercel.json` / `netlify.toml` / `wrangler.toml` / `CNAME` / `.github/workflows/`, and `seanwinslow.com` (owned via Cloudflare + Namecheap) doesn't point at any live instance. Sean explicitly deferred deployment 2026-05-13 — site isn't recruiter-ready yet, no point lighting up the domain with a half-finished page. **Full fix when ready to ship is captured in [`2026-05-13-personal-site-deployment-deferred.md`](2026-05-13-personal-site-deployment-deferred.md).** Triggers to un-defer (LinkedIn link, Substack post, etc.) are listed there. Future Claude Code sessions: do NOT proactively start deploying — surface that doc when Sean signals the site is ready.
 >
 > **STATUS (2026-05-16) — UN-DEFERRED by Council Gap-Fill 3:** Council (premium-profile LLM run, 2026-05-16 — see [`2026-05-16-council-nate-jones-digest.md`](2026-05-16-council-nate-jones-digest.md)) reframed `/transactions/` from "gallery awaiting more entries" → "reverse-chronological ledger of shipped AI artifacts." Five `EXPLANATION.md` files already exist on disk (intent-engineering MCP, vault-synthesizer eval suite, substack-drafter gate-b-drafts, phase D typed edges, phase 6 knowledge loop) — enough for a ledger that stands alone today. The 2026-05-13 deferral remains correct for the gallery form; this amendment ships the ledger form first. Architecture confirmed via visual mockup 2026-05-16: home-page V3 card gallery unchanged + intent-engineering MCP added as a 6th card; `/transactions/` becomes a flat reverse-chronological table; `/transactions/{slug}/` deep-dives keep the V3 card hero so the design system lives where it's actually read. Host: Vercel (consistency with `agent-fleet-observability` already deploying there); DNS: Cloudflare unchanged, set to **DNS-only / orange-cloud OFF** for the Vercel records so Vercel's edge handles SSL without proxy interference. [`2026-05-13-personal-site-deployment-deferred.md`](2026-05-13-personal-site-deployment-deferred.md) frontmatter flipped to `status: superseded-by-gap-fill-3`. Target: live at seanwinslow.com **Mon 2026-05-19** + LinkedIn refresh same-day.
 
@@ -237,19 +237,19 @@ ai-context: "Comprehension artifact for <slug>. 4-question template per Nate B J
 
 **- [x] Step 2: Commit the template + add a `community-skills/comprehension-audit/` skill stub.** Template commit complete 2026-05-06 (file is on disk and canonical). The `community-skills/comprehension-audit/` skill stub remains explicitly deferred to Week 4 per the original spec ("Full implementation deferred — Sean ships the template now and adds the skill in Week 4 once 3+ artifacts have used it"); the template's own body already references this deferred Week-4 stub. No action required this week.
 
-**- [x] Step 3 (original scope, 2026-05-08): Skeleton the personal site `/transactions/` route.** ✅ Complete via commit `f13a103` in [`~/Code-Brain/sw-portfolio/`](https://github.com/seanwinslow28/sw-portfolio) — discovered already-done during 2026-05-12 handoff execution. Route, `[slug].astro` deep-dive, content collection schema, and V3 card aesthetic all scaffolded. Two MDX entries at `src/content/transactions/` (phase-d-typed-edges + knowledge-loop-phase-6).
+**- [x] Step 3 (original scope, 2026-05-08): Skeleton the personal site `/transactions/` route.** ✅ Complete via commit `f13a103` in [`~/Code-Brain/sw-ai-pm-portfolio/`](https://github.com/seanwinslow28/sw-ai-pm-portfolio) — discovered already-done during 2026-05-12 handoff execution. Route, `[slug].astro` deep-dive, content collection schema, and V3 card aesthetic all scaffolded. Two MDX entries at `src/content/transactions/` (phase-d-typed-edges + knowledge-loop-phase-6).
 
 **- [ ] Step 3 (Gap-Fill 3 expanded scope, 2026-05-16): Ship `/transactions/` as the reverse-chronological ledger (≤4 days, target Mon 2026-05-19).**
 
 **Files for this step:**
-- Modify: [`~/Code-Brain/sw-portfolio/src/content/config.ts`](../../../../../sw-portfolio/src/content/config.ts) — extend schema with `surface` (required string), promote `shipped` from optional → required, add `repoUrl` + `explanationUrl` (optional GitHub permalinks)
-- Modify: `~/Code-Brain/sw-portfolio/src/pages/transactions/index.astro` — flat reverse-chronological table (replaces card-grid index)
-- Modify: `~/Code-Brain/sw-portfolio/src/pages/transactions/[slug].astro` — keep V3 card-hero deep-dive (verify rendering across all 5 entries)
-- Modify: `~/Code-Brain/sw-portfolio/src/pages/index.astro` — add 6th project card: `intent-engineering MCP` (links to `/transactions/intent-engineering-mcp/`)
-- Modify: `~/Code-Brain/sw-portfolio/astro.config.mjs` — `site: 'https://seanwinslow.com'` + `@astrojs/sitemap` + `@astrojs/rss` integrations
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/intent-engineering-mcp.md` (frontmatter sources [`~/Code-Brain/sw-mcp-intent-engineering/docs/EXPLANATION.md`](../../../../../sw-mcp-intent-engineering/docs/EXPLANATION.md))
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/vault-synthesizer-eval-suite.md` (sources [`evals/vault-synthesizer/EXPLANATION.md`](../../../../evals/vault-synthesizer/EXPLANATION.md))
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/substack-drafter.md` (sources [`gate-b-drafts/EXPLANATION.md`](../gate-b-drafts/EXPLANATION.md))
+- Modify: [`~/Code-Brain/sw-ai-pm-portfolio/src/content/config.ts`](../../../../../sw-ai-pm-portfolio/src/content/config.ts) — extend schema with `surface` (required string), promote `shipped` from optional → required, add `repoUrl` + `explanationUrl` (optional GitHub permalinks)
+- Modify: `~/Code-Brain/sw-ai-pm-portfolio/src/pages/transactions/index.astro` — flat reverse-chronological table (replaces card-grid index)
+- Modify: `~/Code-Brain/sw-ai-pm-portfolio/src/pages/transactions/[slug].astro` — keep V3 card-hero deep-dive (verify rendering across all 5 entries)
+- Modify: `~/Code-Brain/sw-ai-pm-portfolio/src/pages/index.astro` — add 6th project card: `intent-engineering MCP` (links to `/transactions/intent-engineering-mcp/`)
+- Modify: `~/Code-Brain/sw-ai-pm-portfolio/astro.config.mjs` — `site: 'https://seanwinslow.com'` + `@astrojs/sitemap` + `@astrojs/rss` integrations
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/intent-engineering-mcp.md` (frontmatter sources [`~/Code-Brain/sw-mcp-intent-engineering/docs/EXPLANATION.md`](../../../../../sw-mcp-intent-engineering/docs/EXPLANATION.md))
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/vault-synthesizer-eval-suite.md` (sources [`evals/vault-synthesizer/EXPLANATION.md`](../../../../evals/vault-synthesizer/EXPLANATION.md))
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/substack-drafter.md` (sources [`gate-b-drafts/EXPLANATION.md`](../gate-b-drafts/EXPLANATION.md))
 - Modify: [`2026-05-13-personal-site-deployment-deferred.md`](2026-05-13-personal-site-deployment-deferred.md) — frontmatter `status: superseded-by-gap-fill-3`
 
 **- [ ] Step 3.1: Schema extension + 3 new MDX entries.** Update `src/content/config.ts` with the new required + optional fields. Bring Phase D + Phase 6 frontmatter forward to the new shape (one-line updates each). Author the 3 new MDX entries from existing EXPLANATION.md files; pitch in `valueProp` ≤140 chars; `surface` values: `"MCP server"` / `"eval harness"` / `"SDK agent"`. ~90 minutes.
@@ -262,7 +262,7 @@ ai-context: "Comprehension artifact for <slug>. 4-question template per Nate B J
 
 **- [ ] Step 3.5: Production config.** `site: 'https://seanwinslow.com'` in `astro.config.mjs`. Add `@astrojs/sitemap` + `@astrojs/rss` (RSS feed at `/transactions/rss.xml`). `npm run build` → verify `dist/sitemap-index.xml` + `dist/transactions/rss.xml` generate with `seanwinslow.com` URLs (not `localhost:4321`). ~30 minutes.
 
-**- [ ] Step 3.6: Vercel deploy.** Push to `main`; Vercel dashboard → New Project → import `seanwinslow28/sw-portfolio` → framework auto-detects Astro → build command `npm run build` → output directory `dist/` → no environment variables needed → deploy. Verify the `*.vercel.app` preview URL loads: home shows 6 cards, `/transactions/` shows 5 ledger rows, all 5 deep-dives resolve cleanly. ~15 minutes.
+**- [ ] Step 3.6: Vercel deploy.** Push to `main`; Vercel dashboard → New Project → import `seanwinslow28/sw-ai-pm-portfolio` → framework auto-detects Astro → build command `npm run build` → output directory `dist/` → no environment variables needed → deploy. Verify the `*.vercel.app` preview URL loads: home shows 6 cards, `/transactions/` shows 5 ledger rows, all 5 deep-dives resolve cleanly. ~15 minutes.
 
 **- [ ] Step 3.7: Attach `seanwinslow.com` apex.** Vercel → Project Settings → Domains → add `seanwinslow.com` + `www.seanwinslow.com` (www → apex redirect). Vercel returns target CNAMEs / A records. Add the records in Cloudflare DNS dashboard with the Cloudflare proxy set to **DNS only** (orange-cloud OFF) for those records — Vercel handles its own edge + SSL; the Cloudflare proxy causes SSL handshake friction if left ON. Wait ~5 min for SSL provisioning. Verify `https://seanwinslow.com` resolves with a clean certificate. ~30 minutes.
 
@@ -840,7 +840,7 @@ Mac Mini cron (06:00 ET) → build.py
 - Modify: [`agents-sdk/config.toml`](../../../../agents-sdk/config.toml) — add `[judge_layer]` table (`enabled = false` default, `model = "gemma4:e4b"`, `host = "mac_mini_ollama"`, `max_retries_on_revise = 2`, `max_cost_usd = 0.05`); add `judge_enabled = false` flag to the existing `[substack_drafter]` table
 - Modify: HybridRouter task profile registry — add `judge_layer` profile routing to `gemma4:e4b` on Mac Mini Ollama with `fallback_disabled = true` (the fail-open path is explicit in `judge.py`, not a router fallback)
 - Modify: [`CHANGELOG.md`](../../../../CHANGELOG.md), [`CLAUDE.md`](../../../../CLAUDE.md), [`README.md`](../../../../README.md) — count updates per mandatory doc rule (judge layer becomes a new top-level module + adds a new launchd-adjacent capability)
-- Create (auto via Gap-Fill 3 ledger pipeline): `~/Code-Brain/sw-portfolio/src/content/transactions/judge-layer.md`
+- Create (auto via Gap-Fill 3 ledger pipeline): `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/judge-layer.md`
 
 **- [ ] Step 1 (Days 1–2, 2026-05-26 → 2026-05-27): Module scaffold + Pydantic schema + Outcome enum.**
 Create `agents-sdk/lib/judge/` with `__init__.py`, `schema.py`, and unit tests. `ActionProposal` Pydantic model with all 8 fields per Architecture B above; `evidence_used` and `rollback_path` typed `Optional` because substack-drafter can't always provide them. `Outcome` enum has 5 values (4 + `JUDGE_UNAVAILABLE`). `JudgeDecision` Pydantic model wraps an `Outcome` + optional `feedback: str` (used in `REVISE`) + optional `quarantine_reason: str` (used in `ESCALATE`) + `model_used: str` + `latency_ms: int` + `evaluated_at: datetime`. Tests cover required-field validation + serialization round-trip. ~6 hours.
@@ -864,7 +864,7 @@ Add `--demo-injection` flag to `_cli()` (mutually exclusive with `--voice-overri
 Author `agents-sdk/lib/judge/EXPLANATION.md` per the Task 1 Step 1 schema. Frontmatter: `artifact: judge-layer`, `created: 2026-06-XX`, `surface: control-plane`, `shipped: 2026-06-XX`, `repoUrl: https://github.com/seanwinslow28/CLAUDE-CODE-SUPERUSER-PACK/tree/main/agents-sdk/lib/judge`, `explanationUrl: <github-permalink>`, related wikilinks to `substack_drafter.py`, `policy.py`, `evaluate.py`, `ledger.py`. Body answers all 4 questions concretely — *What is this?* a Pydantic-typed control-plane interceptor for one production agent (the substack-drafter); *Why this approach?* actor-judge separation per Nate §3.5, intercept-don't-rebuild to ship in 9 days, local model for $0/decision; *What would break?* judge model unavailability (mitigated by fail-open + Pushover), policy YAML drift from actual code paths (mitigated by integration tests), judge becoming the bottleneck on the actor's retry loop; *What did I learn?* the gap between an agent that writes and an actor inside a control architecture is exactly one Pydantic schema + one YAML policy file. ~90 minutes.
 
 **- [ ] Step 8 (Day 9, 2026-06-04): 90-second Loom + ledger row + LinkedIn post.**
-Record the demo: `python3 agents-sdk/agents/substack_drafter.py --demo-injection --dry-run` → ActionProposal serialized to terminal → judge returns `REVISE` (or `ESCALATE` depending on fragment) with required-citation feedback → actor retries → `ALLOW` → JSONL ledger entry shown via `tail vault/health/judge_log/$(date +%F).jsonl` → local draft only, no Pushover (publishing gate untouched). Closing line of narration: *"Agents draft. I send. Every word."* Loom under 90 sec. Add ledger entry at `~/Code-Brain/sw-portfolio/src/content/transactions/judge-layer.md` per Gap-Fill 3's content collection schema (surface: `"control-plane interceptor"`). One LinkedIn post: ~120 words, tags Anthropic + FDE-Boston JD URL + links to seanwinslow.com/transactions/judge-layer/. Sean's hand — agents do not draft the LinkedIn copy. ~3 hours including the take + retakes.
+Record the demo: `python3 agents-sdk/agents/substack_drafter.py --demo-injection --dry-run` → ActionProposal serialized to terminal → judge returns `REVISE` (or `ESCALATE` depending on fragment) with required-citation feedback → actor retries → `ALLOW` → JSONL ledger entry shown via `tail vault/health/judge_log/$(date +%F).jsonl` → local draft only, no Pushover (publishing gate untouched). Closing line of narration: *"Agents draft. I send. Every word."* Loom under 90 sec. Add ledger entry at `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/judge-layer.md` per Gap-Fill 3's content collection schema (surface: `"control-plane interceptor"`). One LinkedIn post: ~120 words, tags Anthropic + FDE-Boston JD URL + links to seanwinslow.com/transactions/judge-layer/. Sean's hand — agents do not draft the LinkedIn copy. ~3 hours including the take + retakes.
 
 **- [ ] Step 9 (Day 9, end of day): Verification gate + commit.**
 Run the full test suite (`cd agents-sdk && PYTHONPATH=. pytest tests/ -v`); all new tests pass + zero regressions in the existing 550-passing baseline. Live one-shot dry-run with `--demo-injection` produces the expected `REVISE → retry → ALLOW` sequence + a JSONL ledger entry. CHANGELOG / CLAUDE / README updated (count bump for new module). `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Commit message: `feat(judge): ship judge layer v0 — Pydantic ActionProposal + YAML policy + JSONL ledger + substack-drafter integration (Council Gap-Fill 1)`. Tag `judge-layer-v0.1.0`. ~2 hours.
@@ -907,7 +907,7 @@ Run the full test suite (`cd agents-sdk && PYTHONPATH=. pytest tests/ -v`); all 
 **Why this works as Post 3, not Post 1 or 2:** Per council: *"theses get callbacks; tools get bookmarked."* This is Sean's **interview cold-open** — the post that lives in the email signature for the rest of the hunt. Council unanimity placed it #2 on the gap-fill priority list (behind Judge Layer), and the chairman's call was that it ships AFTER the Judge Layer + Authority/Recovery/Audit work generates the artifact map to point at. Drafting in Week 1 + publishing Week 5 gives the manifesto a richer artifact list to plot than if it shipped first.
 
 **Architecture (locked per council brief + 2026-05-17 reads):**
-- **Three companion files** — long-form essay + spectrum diagram + Substack cross-post — with the canonical Markdown source living at `docs/MEANING_OVER_ACCESS.md` and a syndicated MDX copy at `~/Code-Brain/sw-portfolio/src/content/essays/meaning-over-access.mdx` (new `/essays/` IA on the personal site — companion route to `/transactions/` + `/architecture/` + `/work/`).
+- **Three companion files** — long-form essay + spectrum diagram + Substack cross-post — with the canonical Markdown source living at `docs/MEANING_OVER_ACCESS.md` and a syndicated MDX copy at `~/Code-Brain/sw-ai-pm-portfolio/src/content/essays/meaning-over-access.mdx` (new `/essays/` IA on the personal site — companion route to `/transactions/` + `/architecture/` + `/work/`).
 - **Spectrum map is a Mermaid `quadrantChart`** (`access ↔ meaning` × `infrastructure ↔ workflow`), NOT a hand-authored SVG. Mermaid renders on GitHub + the Astro site (via `astro-mermaid`); Substack accepts the rendered PNG export. Zero Figma round-trip needed.
 - **Role map is a table**, not a paragraph block — scannable for recruiters who arrive cold from the email signature.
 - **Voice: thesis-forward with personal-voice opener + close**, sober/declarative middle. The manifesto genre doesn't suit pure Sedaris-mode comedy (Decision 4's default tone); the comedic register lands in the opening hook and the closing kicker, but the artifact-map + role-map sections read straight. Voice override at draft time if Sean's read says otherwise.
@@ -917,14 +917,14 @@ Run the full test suite (`cd agents-sdk && PYTHONPATH=. pytest tests/ -v`); all 
 - Create: [`docs/MEANING_OVER_ACCESS.md`](../../../../docs/) — canonical Markdown source (~1,500 words, 5 sections)
 - Create: `docs/diagrams/access-meaning-spectrum.mmd` — Mermaid `quadrantChart` source (embeddable + version-controlled)
 - Create: `docs/diagrams/access-meaning-spectrum.svg` — pre-rendered SVG export (via `mmdc` CLI) for Substack image embed
-- Create: `~/Code-Brain/sw-portfolio/src/content/essays/meaning-over-access.mdx` — Astro syndicated copy (re-imports the Mermaid source for in-site rendering)
-- Create: `~/Code-Brain/sw-portfolio/src/pages/essays/index.astro` — new `/essays/` landing page listing this + future essays
-- Create: `~/Code-Brain/sw-portfolio/src/pages/essays/[slug].astro` — dynamic essay route
-- Create: `~/Code-Brain/sw-portfolio/src/content/config.ts` schema update — new `essays` collection alongside `transactions` and `architecture`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/essays/meaning-over-access.mdx` — Astro syndicated copy (re-imports the Mermaid source for in-site rendering)
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/pages/essays/index.astro` — new `/essays/` landing page listing this + future essays
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/pages/essays/[slug].astro` — dynamic essay route
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/config.ts` schema update — new `essays` collection alongside `transactions` and `architecture`
 - Create: `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/2026-06-19-meaning-over-access-substack-cross.md` — Substack-formatted cross-post (Sean publishes from this when Post 3 slot opens)
 - Create: `docs/MEANING_OVER_ACCESS_EXPLANATION.md` — 4Q artifact for the manifesto (feeds Gap-Fill 3 ledger row)
 - Modify: [`CHANGELOG.md`](../../../../CHANGELOG.md), [`CLAUDE.md`](../../../../CLAUDE.md), [`README.md`](../../../../README.md) per mandatory doc rule
-- Create (auto via Gap-Fill 3 ledger pipeline): `~/Code-Brain/sw-portfolio/src/content/transactions/meaning-over-access.md`
+- Create (auto via Gap-Fill 3 ledger pipeline): `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/meaning-over-access.md`
 
 **- [ ] Step 1 (Day 1, 2026-05-19 or 2026-05-20 — slots in after Gap-Fill 3's Mon 5/19 deploy lands): Outline pass.**
 Lock the 5-section outline:
@@ -950,13 +950,13 @@ Author `docs/MEANING_OVER_ACCESS.md` to the outline. Use `agents-sdk/agents/subs
 Author `docs/diagrams/access-meaning-spectrum.mmd` as Mermaid `quadrantChart`. Embed inline in `MEANING_OVER_ACCESS.md`. Run `mmdc -i docs/diagrams/access-meaning-spectrum.mmd -o docs/diagrams/access-meaning-spectrum.svg -t neutral -b white` (install Mermaid CLI if needed: `npm install -g @mermaid-js/mermaid-cli`) — emit the PNG/SVG for Substack image embed. Verify rendering on GitHub preview + on a local Astro dev build. ~2 hours.
 
 **- [ ] Step 4 (Day 3, 2026-05-22): Personal-site `/essays/` IA + syndicated MDX.**
-Add `essays` collection to [`src/content/config.ts`](../../../../../sw-portfolio/src/content/config.ts) — schema: `title`, `subtitle`, `dateline`, `slug`, `excerpt`, `ogImage` (optional), `crossPostedTo` (optional URL list). Author `src/pages/essays/index.astro` (landing page listing essays, V3 design tokens) + `src/pages/essays/[slug].astro` (dynamic route, V3 card hero, body via Astro `<Content />`). Author `src/content/essays/meaning-over-access.mdx` syndicating `docs/MEANING_OVER_ACCESS.md` (build script `scripts/build_sync_essay.mjs` curls the raw GitHub URL at build time, similar to Task 15's `build_fetch_scorecard.mjs`). Wire `/essays/` into main nav alongside `/work/` + `/transactions/` + `/architecture/`. ~4 hours.
+Add `essays` collection to [`src/content/config.ts`](../../../../../sw-ai-pm-portfolio/src/content/config.ts) — schema: `title`, `subtitle`, `dateline`, `slug`, `excerpt`, `ogImage` (optional), `crossPostedTo` (optional URL list). Author `src/pages/essays/index.astro` (landing page listing essays, V3 design tokens) + `src/pages/essays/[slug].astro` (dynamic route, V3 card hero, body via Astro `<Content />`). Author `src/content/essays/meaning-over-access.mdx` syndicating `docs/MEANING_OVER_ACCESS.md` (build script `scripts/build_sync_essay.mjs` curls the raw GitHub URL at build time, similar to Task 15's `build_fetch_scorecard.mjs`). Wire `/essays/` into main nav alongside `/work/` + `/transactions/` + `/architecture/`. ~4 hours.
 
 **- [ ] Step 5 (Day 3 afternoon, 2026-05-22): Substack-formatted cross-post + LinkedIn TL;DR pin.**
 Author `vault/.../substack-drafts/2026-06-19-meaning-over-access-substack-cross.md` — same prose, Substack-specific formatting (image embeds rather than inline Mermaid, callout blocks instead of admonitions, footnotes shorter). Pre-draft a 280-character LinkedIn TL;DR + chart image for the day-of-publish pin. **Do NOT publish to Substack yet** — Post 3 slot opens after Posts 1 + 2 ship; Sean publishes from this file at slot time. ~3 hours.
 
 **- [ ] Step 6 (Day 3 evening, 2026-05-22 — Friday retro day): Draft-lock review + 4Q EXPLANATION.md.**
-Sean reads the full draft cold from `seanwinslow.com/essays/meaning-over-access/` (local dev build) — checks for: (a) personal-voice bookends don't feel like the analytical middle, (b) artifact map plots all five points correctly, (c) role map cites real JD URLs, (d) closing kicker is genuinely quotable, (e) no overclaiming beyond what the seven artifacts actually back. Iterate to **draft-locked** state. Author `docs/MEANING_OVER_ACCESS_EXPLANATION.md` per Task 1 Step 1 schema. *What is this?* a 1,500-word thesis statement framing seven shipped artifacts as a single meaning-over-access bet; *Why this approach?* "theses get callbacks; tools get bookmarked" — a manifesto is the recruiter-call cold-open; *What would break?* role map JD URLs going stale (mitigated by a quarterly review + `last_validated` field in essay frontmatter); the spectrum quadrant chart misreading on mobile (mitigated by image fallback for sub-768px viewports); over-claiming on the seven artifacts (mitigated by linking each plot point to its specific shipped commit); *What did I learn?* the manifesto wrote itself once Task 12 + Task 14 + Task 15 generated the artifact list — the thesis is downstream of the work, not upstream. Add ledger row at `~/Code-Brain/sw-portfolio/src/content/transactions/meaning-over-access.md` (Gap-Fill 3 schema; surface: `"manifesto / thesis"`). ~3 hours.
+Sean reads the full draft cold from `seanwinslow.com/essays/meaning-over-access/` (local dev build) — checks for: (a) personal-voice bookends don't feel like the analytical middle, (b) artifact map plots all five points correctly, (c) role map cites real JD URLs, (d) closing kicker is genuinely quotable, (e) no overclaiming beyond what the seven artifacts actually back. Iterate to **draft-locked** state. Author `docs/MEANING_OVER_ACCESS_EXPLANATION.md` per Task 1 Step 1 schema. *What is this?* a 1,500-word thesis statement framing seven shipped artifacts as a single meaning-over-access bet; *Why this approach?* "theses get callbacks; tools get bookmarked" — a manifesto is the recruiter-call cold-open; *What would break?* role map JD URLs going stale (mitigated by a quarterly review + `last_validated` field in essay frontmatter); the spectrum quadrant chart misreading on mobile (mitigated by image fallback for sub-768px viewports); over-claiming on the seven artifacts (mitigated by linking each plot point to its specific shipped commit); *What did I learn?* the manifesto wrote itself once Task 12 + Task 14 + Task 15 generated the artifact list — the thesis is downstream of the work, not upstream. Add ledger row at `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/meaning-over-access.md` (Gap-Fill 3 schema; surface: `"manifesto / thesis"`). ~3 hours.
 
 **- [ ] Step 7 (Day 3 night, 2026-05-22): Verification gate + commit (draft-lock).**
 Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Verify Mermaid renders on GitHub + Astro preview. Verify all role-map JD URLs return 200 OK. CHANGELOG / CLAUDE / README updated. Commit message: `feat(docs): draft-lock access-vs-meaning manifesto + spectrum chart (Council Gap-Fill 2)`. Tag `gap-fill-2-draft-locked`. ~1 hour.
@@ -983,7 +983,7 @@ Copy `vault/.../substack-drafts/2026-06-19-meaning-over-access-substack-cross.md
 - **Gives `vault-knowledge-mcp` (Task 10) its launch narrative for free** — Post 3 is the pre-published thesis the MCP plugs into when it ships ~2026-06-04.
 - **Becomes the pre-read link in every recruiter email** — converts cold-recruiter contact into a primed conversation about a published bet.
 - **Activates the distribution gap from §4.4** (the manifesto IS the missing distribution surface) with a single URL.
-- **The "essays" IA** (new `/essays/` collection on sw-portfolio) is permanent infrastructure — future thesis-shaped writing has a home; the Task 15 architecture essay + future engineering essays slot in without IA changes.
+- **The "essays" IA** (new `/essays/` collection on sw-ai-pm-portfolio) is permanent infrastructure — future thesis-shaped writing has a home; the Task 15 architecture essay + future engineering essays slot in without IA changes.
 
 **Demo shape (NOT a demo — the deliverable shape itself is the demo):**
 > *URL in the email signature.* Recruiter screen opens: *"Did you read the meaning-over-access post? Let me show you the seven artifacts that back it."* (Verbatim from chairman synthesis.)
@@ -1022,7 +1022,7 @@ Copy `vault/.../substack-drafts/2026-06-19-meaning-over-access-substack-cross.md
 - Create: `agents-sdk/config/authority.example.yaml` (sanitized declarative policy example showing the per-query/daily/monthly budget shape + keychain-gated key pattern + fallback_disabled flag pattern; mirrors the `[gemini_researcher]` and `[job_feed]` and `[llm_council]` config blocks structurally without leaking real cost numbers)
 - Create: `agents-sdk/docs/EXPLANATION.md` (4Q artifact for the control-architecture write-up — auto-feeds ledger row at `/transactions/control-architecture/` via Gap-Fill 3 content collection pipeline)
 - Modify: [`CHANGELOG.md`](../../../../CHANGELOG.md), [`CLAUDE.md`](../../../../CLAUDE.md), [`README.md`](../../../../README.md) per mandatory doc rule (new top-level docs dir + new `tools/governance-demo/` sidecar)
-- Create (auto via Gap-Fill 3 ledger pipeline): `~/Code-Brain/sw-portfolio/src/content/transactions/control-architecture.md`
+- Create (auto via Gap-Fill 3 ledger pipeline): `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/control-architecture.md`
 
 **- [ ] Step 1 (Day 1, 2026-06-08): Authority section.**
 Author the Authority section of `CONTROL_ARCHITECTURE.md`. Three subsections: **(a) per-query/daily/monthly budget caps as policy** — cite [`config.toml` line 340 monthly_cap_usd / line 341 daily_cap_usd](../../../../agents-sdk/config.toml#L340-L341) verbatim; explain the cascade (per-query cap fires first → daily aggregator catches the second-order overshoot → monthly governor is the safety net). **(b) Keychain-gated API keys** — cite [`agents-sdk/lib/keychain.py`](../../../../agents-sdk/lib/keychain.py); explain why secrets in macOS Keychain (not `.env`) is a design choice that maps to enterprise "authority over which agent holds which credential." **(c) `fallback_disabled = true` on Job Feed (config.toml line 366)** — frame as authority over which model is *not* allowed for which task; a positive-space example of routing-as-policy. Plus the **one-paragraph HybridRouter mention** — "authority over which brain runs which task" — and explicit deferral of any standalone runtime-architecture framing (link to Task 7 STOP-DOING entry as the canonical "why not"). ~6 hours including a 30-minute editorial pass.
@@ -1040,7 +1040,7 @@ Embed a Mermaid sequence diagram in `CONTROL_ARCHITECTURE.md` showing the four-c
 Author the sanitized example YAML mirroring the structure of the real `[gemini_researcher]` / `[job_feed]` / `[llm_council]` config blocks but with generic cost numbers (e.g., `$1.00 / $10.00 / $50.00` per-query/daily/monthly). Author `agents-sdk/docs/EXPLANATION.md`: *What is this?* a 1,500-word reframing of the existing cost-discipline pattern as the Authority/Recovery/Audit trinity FDE buyers look for; *Why this approach?* 80% of the work is already shipped, the artifact is the naming + worked example; *What would break?* the demo script's stubbed agent runner drifting from the real runner's exit-code semantics (mitigated by integration test reading actual exit codes from one real Job Feed run); *What did I learn?* that control architecture is mostly the discipline of writing down what's already implemented, not building new infrastructure. ~3 hours.
 
 **- [ ] Step 6 (Day 3 afternoon, 2026-06-10): 90-sec Loom + ledger row + LinkedIn post (Anthropic FDE-tagged).**
-Loom shooting list: terminal split-pane on the left running `python3 tools/governance-demo/replay_budget_breach.py --fixture over_budget`; on the right, `tail -f vault/health/council-spend-$(date +%Y-%m).json` showing the breach landing in the ledger in real time; bottom: phone showing the Pushover notification. Total demo time: 60–90 seconds. Narration closer: *"Authority. Recovery. Audit. Four control surfaces in three seconds. This is what control architecture means in practice."* Add ledger row at `~/Code-Brain/sw-portfolio/src/content/transactions/control-architecture.md` per Gap-Fill 3 schema (`surface: "control architecture (docs)"`). One LinkedIn post: ~150 words, tags **Anthropic Forward Deployed Engineer Boston JD** + cites the Loom + links to `seanwinslow.com/transactions/control-architecture/`. Sean's hand on every word. ~3 hours including the take + retakes.
+Loom shooting list: terminal split-pane on the left running `python3 tools/governance-demo/replay_budget_breach.py --fixture over_budget`; on the right, `tail -f vault/health/council-spend-$(date +%Y-%m).json` showing the breach landing in the ledger in real time; bottom: phone showing the Pushover notification. Total demo time: 60–90 seconds. Narration closer: *"Authority. Recovery. Audit. Four control surfaces in three seconds. This is what control architecture means in practice."* Add ledger row at `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/control-architecture.md` per Gap-Fill 3 schema (`surface: "control architecture (docs)"`). One LinkedIn post: ~150 words, tags **Anthropic Forward Deployed Engineer Boston JD** + cites the Loom + links to `seanwinslow.com/transactions/control-architecture/`. Sean's hand on every word. ~3 hours including the take + retakes.
 
 **- [ ] Step 7 (Day 3 evening, 2026-06-10): Verification gate + commit.**
 Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `pytest tools/governance-demo/test_replay.py` → green. Verify Mermaid diagram renders correctly on GitHub (preview the PR). Verify all four control surfaces fire in a one-shot `--fixture over_budget` run (output captured in `outputs/sample_ledger.jsonl`). CHANGELOG / CLAUDE / README updated. Commit message: `feat(docs): ship control-architecture trinity reframe — authority + recovery + audit (Council Gap-Fill 4)`. ~1 hour.
@@ -1094,10 +1094,10 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `pytest too
 - Create: `examples/public_vault_fixture/` — 10 synthetic notes + 15 synthetic edges in a stripped-down vault layout, fully off-thesis topic (e.g., a tiny vault about espresso brewing methods) so there is **zero risk** of private content leak
 - Create: `examples/public_vault_fixture/README.md` — explains the fixture is synthetic + how to load it into a test vault for `vault-knowledge-mcp` smoke tests
 - Create: `docs/VAULT_AS_AGENT_INFRASTRUCTURE_EXPLANATION.md` — 4Q artifact for the long-form essay (feeds Gap-Fill 3 ledger row)
-- Create: `~/Code-Brain/sw-portfolio/src/pages/architecture/vault-scorecard.astro` — Astro page rendering `vault/SCORECARD.md` (raw GitHub fetch + remark transform, or build-time read; site is static)
-- Create: `~/Code-Brain/sw-portfolio/src/pages/architecture/index.astro` — `/architecture/` landing page listing scorecard + future architecture artifacts
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/pages/architecture/vault-scorecard.astro` — Astro page rendering `vault/SCORECARD.md` (raw GitHub fetch + remark transform, or build-time read; site is static)
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/pages/architecture/index.astro` — `/architecture/` landing page listing scorecard + future architecture artifacts
 - Modify: [`CHANGELOG.md`](../../../../CHANGELOG.md), [`CLAUDE.md`](../../../../CLAUDE.md), [`README.md`](../../../../README.md) per mandatory doc rule (new top-level `examples/` dir + new `scripts/generate_schema.py` + new docs)
-- Create (auto via Gap-Fill 3 ledger pipeline): `~/Code-Brain/sw-portfolio/src/content/transactions/vault-scorecard.md`
+- Create (auto via Gap-Fill 3 ledger pipeline): `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/vault-scorecard.md`
 
 **- [ ] Step 1 (Day 1 morning, 2026-06-01): Author `vault/SCORECARD.md`.**
 The canonical short artifact. Five sections, one per Nate test:
@@ -1129,10 +1129,10 @@ Python script (no new deps; uses stdlib `sqlite3`) reading `vault/.vault-index.d
 Hand-author or LLM-generate (then hand-review) 10 fully-synthetic notes on a topic deliberately off Sean's thesis — **espresso brewing methods** is the working pick (concrete, non-political, no risk of leaking Sean's professional context). Each note has `[[wikilinks]]`; 15 edges total spread across all six `concept_edges` relation types (so the fixture exercises the full schema). Layout mirrors a stripped-down `vault/40_knowledge/concepts/` shape (no `20_projects/`, no `health/`, no `90_system/`). Add a `README.md` explaining: (a) this is synthetic, (b) how to load it (`cp -r examples/public_vault_fixture/ /tmp/test_vault && AGENT_VAULT_PATH=/tmp/test_vault python3 ...`), (c) what `vault-knowledge-mcp` smoke tests should run against it once Task 10 ships. **Sean line-by-line review before commit** is the explicit safety gate against private-vault leakage. ~3 hours.
 
 **- [ ] Step 5 (Day 2 evening / Day 3 morning, 2026-06-02/03): Personal-site `/architecture/vault-scorecard/` page.**
-Two new Astro routes in `sw-portfolio`: `/architecture/index.astro` (landing page listing scorecard + future architecture artifacts) and `/architecture/vault-scorecard.astro` (renders `vault/SCORECARD.md`). Build-time read pattern: at site build, `scripts/build_fetch_scorecard.mjs` curls the latest `SCORECARD.md` from the superuser-pack repo's raw GitHub URL and writes it into `src/content/architecture/vault-scorecard.md`; Astro renders it with the V3 design tokens. Wire `/architecture/` into the main nav. Verify the ER diagram embeds correctly (use `astro-mermaid` integration if needed, ~5 min add). ~3 hours.
+Two new Astro routes in `sw-ai-pm-portfolio`: `/architecture/index.astro` (landing page listing scorecard + future architecture artifacts) and `/architecture/vault-scorecard.astro` (renders `vault/SCORECARD.md`). Build-time read pattern: at site build, `scripts/build_fetch_scorecard.mjs` curls the latest `SCORECARD.md` from the superuser-pack repo's raw GitHub URL and writes it into `src/content/architecture/vault-scorecard.md`; Astro renders it with the V3 design tokens. Wire `/architecture/` into the main nav. Verify the ER diagram embeds correctly (use `astro-mermaid` integration if needed, ~5 min add). ~3 hours.
 
 **- [ ] Step 6 (Day 3 morning, 2026-06-03): 4Q EXPLANATION.md + ledger row.**
-Author `docs/VAULT_AS_AGENT_INFRASTRUCTURE_EXPLANATION.md` per Task 1 Step 1 schema. *What is this?* a 5-test architectural argument scoring four knowledge systems against Nate's structural tests; *Why this approach?* Nate's test framing is the load-bearing recruiter vocabulary for 2026; building the comparison earns the right to ship Task 10's MCP as "the MCP wrapping the only public PM vault that passes all five tests"; *What would break?* fixture drift if `concept_edges` schema evolves (mitigated by integration test against the live schema); reading my own architectural arguments as truth when they're really claims (mitigated by the explicit Linear-wins-here honesty); *What did I learn?* most "agent infrastructure" claims fail the persistent-state test on day one — the test discriminates. Add ledger row at `~/Code-Brain/sw-portfolio/src/content/transactions/vault-scorecard.md` (Gap-Fill 3 content collection; surface: `"architecture writeup"`). ~90 minutes.
+Author `docs/VAULT_AS_AGENT_INFRASTRUCTURE_EXPLANATION.md` per Task 1 Step 1 schema. *What is this?* a 5-test architectural argument scoring four knowledge systems against Nate's structural tests; *Why this approach?* Nate's test framing is the load-bearing recruiter vocabulary for 2026; building the comparison earns the right to ship Task 10's MCP as "the MCP wrapping the only public PM vault that passes all five tests"; *What would break?* fixture drift if `concept_edges` schema evolves (mitigated by integration test against the live schema); reading my own architectural arguments as truth when they're really claims (mitigated by the explicit Linear-wins-here honesty); *What did I learn?* most "agent infrastructure" claims fail the persistent-state test on day one — the test discriminates. Add ledger row at `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/vault-scorecard.md` (Gap-Fill 3 content collection; surface: `"architecture writeup"`). ~90 minutes.
 
 **- [ ] Step 7 (Day 3 afternoon, 2026-06-03): Loom segment + Substack candidate + LinkedIn.**
 Loom (60–90 sec): screen-record the SCORECARD.md table scoring (show the four rows + the closing "two failures" line) → cut to the ER diagram → cut to one synthetic-vault example query (e.g., `python3 scripts/query.py --vault examples/public_vault_fixture/ "what brewing methods compete with espresso?"` returning a `[[link]]`-cited answer using the fixture data). Closing line: *"Most people see Obsidian as content. I treat my vault as agent infrastructure. Five tests, five scores, code links to all of them. That's why my agents can write back into the vault and Lindy can't write back into yours."* Substack post **candidate** (per council Week 3 sequencing — actual ship gated on B7 + the post-2 calendar slot); pre-draft sketch at `vault/20_projects/prj-job-hunt-2026/.../substack-drafts/2026-06-03-vault-said-something-again-candidate.md` (Sean confirms voice mode before publish). LinkedIn post tagging Glean / Anthropic / the MCP team. Sean's hand on every word. ~3 hours.
@@ -1272,7 +1272,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 
 **- [ ] Step 1: Update bio.** Format: "AI PM building [specific thing]. Shipping [specific cadence]. Lives at seanwinslow.com/transactions." Remove any "passionate about AI" / "AI enthusiast" / generic phrases.
 
-**- [ ] Step 2: Choose the 6 pinned repos.** Default selection: (1) intent-engineering-mcp, (2) vault-synthesizer-evals (after N1 Task 37 ships), (3) ldr-grounding-collapse (after N2 Task 25 ships), (4) agent-fleet-observability, (5) sw-portfolio, (6) claude-code-superuser-pack. Reorder by recruiter-impact: MCP server first.
+**- [ ] Step 2: Choose the 6 pinned repos.** Default selection: (1) intent-engineering-mcp, (2) vault-synthesizer-evals (after N1 Task 37 ships), (3) ldr-grounding-collapse (after N2 Task 25 ships), (4) agent-fleet-observability, (5) sw-ai-pm-portfolio, (6) claude-code-superuser-pack. Reorder by recruiter-impact: MCP server first.
 
 **- [ ] Step 3: Audit each pinned repo's README.** For each: Problem (who has this pain? be specific), Solution (what does the tool do? how does the user interact?), Tradeoffs and Decisions (1-2 decisions made + alternatives considered + why chosen), What I Learned (real insight that travels beyond this artifact). No "I learned a lot about APIs" — specific.
 
@@ -1296,7 +1296,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 - Create: `<repo>/matrix.md` (the rubric)
 - Create: `<repo>/worked-example-fortune-500-content-co.md`
 - Create: `<repo>/EXPLANATION.md` (4Q artifact)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/enterprise-data-readiness-matrix.md` (ledger row)
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/enterprise-data-readiness-matrix.md` (ledger row)
 
 **- [ ] Step 1: Draft the 5 dimensions of data readiness.** (1) Canonical Entity IDs — does the customer have unified IDs across systems? (2) Lineage & Provenance — can outputs be traced to source documents? (3) Freshness Signals — are timestamps reliable? (4) Workflow Eligibility Tags / Governance — which docs is the agent allowed to read? (5) Deduplication + Embedding-Store Hygiene — are vector clusters poisoned by duplicates?
 
@@ -1308,7 +1308,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 
 **- [ ] Step 5: Write the 4Q EXPLANATION.md.** What is this? / Why this approach? / What would break? / What did I learn?
 
-**- [ ] Step 6: Ship to standalone repo + ledger.** Push to github.com/seanwinslow28/enterprise-data-readiness-matrix. Add MDX entry to sw-portfolio/src/content/transactions/. Cross-post a teaser thread to LinkedIn.
+**- [ ] Step 6: Ship to standalone repo + ledger.** Push to github.com/seanwinslow28/enterprise-data-readiness-matrix. Add MDX entry to sw-ai-pm-portfolio/src/content/transactions/. Cross-post a teaser thread to LinkedIn.
 
 **Verification gate:** Standalone repo public. Ledger row live at seanwinslow.com/transactions/enterprise-data-readiness-matrix/. 4Q EXPLANATION.md passes the <90-sec recruiter readability check.
 
@@ -1320,7 +1320,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 
 **Files:**
 - Create: `docs/SUPERUSER_SYSTEM_CARD.md`
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/superuser-system-card.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/superuser-system-card.md`
 
 **- [ ] Step 1: Map the existing fleet to SR-11-7 tiers.** For each of the 8 active SDK agents (vault_indexer, vault_synthesizer, deep_researcher, meta_agent, daily_driver, knowledge_lint, flush, gemini_researcher) + intent-engineering MCP + LLM Council + Substack-Drafter + Judge Layer: assign an SR-11-7 materiality tier (low / medium / high) with rationale.
 
@@ -1348,7 +1348,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 - Read: `vault/20_projects/research/2026-05-18-mcp-prompt-injection-hardening.md` (LDR output, 1267 words, 20 citations)
 - Modify: `~/Code-Brain/sw-mcp-intent-engineering/src/server.ts` (apply hardening checklist)
 - Create: `~/Code-Brain/sw-mcp-intent-engineering/docs/SECURITY.md` (the audit writeup)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/mcp-security-audit.md` (ledger row)
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/mcp-security-audit.md` (ledger row)
 
 **- [ ] Step 1: Re-read the LDR research output.** Note the grounding caveat in the design doc — the LDR report incorrectly attributes EchoLeak (CVE-2025-32711) to "the Anthropic MCP server" when it's actually a Microsoft Copilot for M365 vuln. Fix this attribution in the audit writeup.
 
@@ -1372,7 +1372,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 
 **Files:**
 - Create: `vault/20_projects/prj-job-hunt-2026/portfolio-artifacts/discovery-prd-ai-content-workflow.md`
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/discovery-prd-content-workflow.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/discovery-prd-content-workflow.md`
 
 **- [ ] Step 1: Choose the workflow.** A realistic AI product surface a content-team PM would propose to a skeptical org. Default choice: "AI-assisted article drafting + editorial review workflow for a 50-person content org." Sanitize Block-specific names — generic Fortune 500 content company framing.
 
@@ -1405,7 +1405,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 - Create: `<repo>/the-diagnosis.md` (how Sean caught the fabrication)
 - Create: `<repo>/the-fix.md` (the v3.26.3 routing rule + Gemini DR-Max escalation pattern)
 - Create: `<repo>/eval-case.yaml` (a regression eval that catches this failure)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/ldr-grounding-collapse.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/ldr-grounding-collapse.md`
 - Create: Substack draft `vault/20_projects/prj-job-hunt-2026/substack-drafts/2026-05-29-ldr-grounding-collapse.md`
 
 **- [ ] Step 1: Lift the bad-output fixture.** Copy `vault/20_projects/research/2026-05-05-topic-1a-mcp-sdk-toolkit-survey-catalog-mcp-cli-mcp-bridge-m.md` (status: superseded) into the standalone repo as `the-failure.md`. Preserve the fabricated entities (PureMCPClient, MCPCatalog (Central), MCP ADK) and the fake learn.microsoft.com URLs. Add a header annotating each fabrication.
@@ -1437,7 +1437,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 - Create: `<repo>/cost-model.md` (5K invoices/mo scenario)
 - Create: `<repo>/build-vs-buy-memo.md`
 - Create: `<repo>/governance-mapping.md` (SOC 2 + SR-11-7 coverage)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/enterprise-ap-agent-spec.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/enterprise-ap-agent-spec.md`
 
 **- [ ] Step 1: Write the problem statement (300 words).** A realistic 200-person SaaS company processing 5K AP invoices/month. Manual tier-1 invoice approval takes 8 min average; agent target = 95% auto-approved + 5% escalated to human in <30 sec.
 
@@ -1475,7 +1475,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 - Create: `<repo>/worked-example.md` (apply to Task 26 AP agent)
 - Create: `<repo>/notion-template-export.md` (paste-into-Notion fork-able template)
 - Create: `<repo>/scorecard.csv`
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/build-vs-buy-framework.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/build-vs-buy-framework.md`
 
 **- [ ] Step 1: Define the 12 dimensions.** (1) Cost at scale, (2) Latency P99, (3) Vendor lock-in surface, (4) MCP support depth, (5) Audit-log primitives, (6) SSO/IAM integration depth, (7) Governance certifications (SOC 2, ISO 27001, HIPAA, EU AI Act conformity), (8) Prompt-injection hardening, (9) Eval tooling, (10) Support SLA, (11) Roadmap predictability, (12) Exit cost.
 
@@ -1499,8 +1499,8 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 
 **Files:**
 - Record: 35-min Loom video (unedited or lightly edited; messy parts left in)
-- Create: YouTube unlisted upload at github.com/seanwinslow28/sw-portfolio link target
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/narrated-working-session.md`
+- Create: YouTube unlisted upload at github.com/seanwinslow28/sw-ai-pm-portfolio link target
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/narrated-working-session.md`
 
 **- [ ] Step 1: Choose the diagnostic target.** Default: the 2026-05-16 cluster-diversity probe → HDBSCAN retrofit. Sean opens the synthesizer output, runs `scripts/query.py` to surface the cluster bias, hypothesizes that retrieval is cluster-collapsing, runs the embedding diagnostic, writes the test for `retrieval_diversity.py`, watches it fail, implements the fix, watches it pass. ~35 min.
 
@@ -1529,7 +1529,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 - Create: `<repo>/playbook.pdf` (the slide deck)
 - Create: `<repo>/playbook-source.md` (markdown source)
 - Create: `<repo>/case-studies.md` (Klarna / BofA / JPM / Walmart references)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/ai-adoption-playbook.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/ai-adoption-playbook.md`
 
 **- [ ] Step 1: Choose the workflow to apply the playbook to.** Default: rolling out the Substack-Drafter agent (from Task 9) to a 50-person content team. Sanitized — generic content org framing.
 
@@ -1557,7 +1557,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 
 **Files:**
 - Create: Figma file `seanwinslow-portfolio/hitl-escalation` (public link)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/hitl-escalation-wireframes.md` (embeds Figma link + screenshots)
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/hitl-escalation-wireframes.md` (embeds Figma link + screenshots)
 - Create: `vault/20_projects/prj-job-hunt-2026/portfolio-artifacts/hitl-design-rationale.md`
 
 **- [ ] Step 1: Define the workflow being escalated.** Default: the Substack-Drafter agent (Task 9 / Task 12). Agent generates draft → confidence-threshold check fires (judge layer from Task 12) → fallback to human review needed. Wireframe the human-in-the-loop UI surface.
@@ -1584,7 +1584,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 - Modify: `~/Code-Brain/agent-fleet-observability/lib/render.py` (add `render_executive()` function)
 - Create: `<fleet repo>/templates/executive-view.html`
 - Create: `<fleet repo>/lib/roi_translator.py` (maps technical metrics to dollar-equivalents)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/executive-roi-dashboard.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/executive-roi-dashboard.md`
 
 **- [ ] Step 1: Define the 5 executive-readable metrics.** (1) Hours Saved this month (sum of agent task minutes × human-equivalent time); (2) Escalation Cost Avoided ($ — count of auto-resolved tasks × avg human handling cost); (3) Estimated SLA Breach Cost if agents were offline ($); (4) Cost-per-task across the fleet ($); (5) Trust trajectory — Time-to-Trust trend over 30 days.
 
@@ -1641,7 +1641,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 **Files:**
 - Create: `vault/20_projects/prj-job-hunt-2026/vibe-coding-log/.gitkeep`
 - Create: `vault/20_projects/prj-job-hunt-2026/vibe-coding-log/log.md` (rolling log)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/vibe-coding-rep-NN.md` per rep
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/vibe-coding-rep-NN.md` per rep
 
 **- [ ] Step 1: Pick the alternating cadence.** Week 4: Bolt rep on Tuesday + v0 rep on Friday. Week 5: same. Week 6: same. Total: 6 reps in Phase B.
 
@@ -1664,7 +1664,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 **Files:**
 - Create: `vault/20_projects/prj-job-hunt-2026/substack-drafts/2026-06-12-ai-safety-judge-layer.md`
 - Modify: `vault/20_projects/prj-job-hunt-2026/interview-prep/story-bank.md` (add story #4)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/ai-safety-judge-layer.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/ai-safety-judge-layer.md`
 
 **- [ ] Step 1: Choose the narrative anchor.** Default: the Judge Layer retrofit (Task 12 from existing roadmap) + the LDR grounding-collapse incident → routing rule (v3.26.3). Frame: "What I learned when my own agent confidently fabricated Microsoft documentation, and the control architecture I built to make sure agents draft but I send."
 
@@ -1687,7 +1687,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 **Files:**
 - Create: `vault/20_projects/prj-job-hunt-2026/substack-drafts/2026-06-26-my-own-ml-engineer.md`
 - Modify: `vault/20_projects/prj-job-hunt-2026/interview-prep/story-bank.md` (add story #5)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/my-own-ml-engineer.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/my-own-ml-engineer.md`
 
 **- [ ] Step 1: Choose the diagnostic episode.** Default: the 2026-05-16 cluster-diversity probe via `scripts/query.py` → HDBSCAN retrofit (`retrieval_diversity.py`). This is the same episode as Task 28's Loom — different format.
 
@@ -1712,7 +1712,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 - Create: `<repo>/README.md` (portfolio narrative)
 - Create: `<repo>/skills/` directory with 10–18 skills
 - Create: `<repo>/agents-sdk/scripts/` directory with daily-briefing scripts
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/job-search-os.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/job-search-os.md`
 
 **- [ ] Step 1: Define the 12 skills/scripts that compose the OS.** Resume-tailoring-per-JD, cover-letter-per-JD, outreach-draft-per-warm-contact, post-interview-debrief, mock-interview-grader (wraps Task 19), per-company-prep-packet-generator (wraps Task 32 template), application-log-writer, follow-up-reminder, referral-request-draft, recruiter-thread-summarizer, salary-research-per-JD, application-funnel-dashboard.
 
@@ -1739,7 +1739,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 - Copy: `claude-code-superuser-pack/evals/vault-synthesizer/*` to new repo
 - Create: `<repo>/README.md` (portfolio narrative, NOT internal-engineering shape)
 - Create: `<repo>/EXPLANATION.md` (4Q artifact)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/vault-synthesizer-evals.md` (if not already present from prior Task 8 ship)
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/vault-synthesizer-evals.md` (if not already present from prior Task 8 ship)
 - Create: GitHub Actions workflow `.github/workflows/evals.yml` (run suite on PR)
 
 **- [ ] Step 1: Copy evals directory.** `cp -r claude-code-superuser-pack/evals/vault-synthesizer/* ~/Code-Brain/vault-synthesizer-evals/`. Preserve cases.yaml, failure-modes.md, runner.py, traces/, EXPLANATION.md.
@@ -1768,7 +1768,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 - Create: `<repo>/prices.json` (community-PR-able token prices)
 - Create: `<repo>/README.md`
 - Create: DNS record for `cost.seanwinslow.com` (Cloudflare CNAME → Cloudflare Pages or Vercel)
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/agent-cost-calculator.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/agent-cost-calculator.md`
 
 **- [ ] Step 1: Build the data file.** `prices.json` with current per-token costs (input / output / cache-write / cache-read) across: Anthropic Opus 4.7, Sonnet 4.6, Haiku 4.5; OpenAI GPT-5.5, GPT-5.4-mini; Google Gemini 2.5 Pro, Flash, Flash-Lite; DeepSeek v4-pro; Mistral medium-3-5; Groq Llama 3.1 70B.
 
@@ -1800,7 +1800,7 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 - Create: `<repo>/README.md`
 - Create: `<repo>/example/` (working demo with a sample vault fixture)
 - Create: `vault/20_projects/prj-job-hunt-2026/substack-drafts/2026-07-03-defeating-cluster-bias.md`
-- Create: `~/Code-Brain/sw-portfolio/src/content/transactions/defeating-cluster-bias.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/defeating-cluster-bias.md`
 
 **- [ ] Step 1: Extract the modules.** Copy `retrieval_diversity.py` (HDBSCAN cluster-and-sample) and `concept_edges.py` (OB1-inspired typed reasoning edges) to standalone repo. Strip Sean-vault-specific paths; parameterize.
 
