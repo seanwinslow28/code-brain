@@ -2,30 +2,30 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/concepts/agent-fleet-observability-dashboard.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition
 
-A zero-cost, static-build blueprint designed to equip an AI Product Manager with a tool for monitoring and managing autonomous agentic systems, closing the FDP cost-economics gap.
+A comprehensive tool for monitoring the health and performance of autonomous agent fleets. It is part of a broader infrastructure development plan.
 
 ## Context
 
-This supports Sean's job-hunt-2026 objectives by providing a portfolio artifact that demonstrates production-grade operational fluency in AgentOps.
+This dashboard aids Sean in tracking the performance and reliability of his automation systems, which are central to his job hunt strategy.
 
 ## Evidence
 
-> The primary objective is to equip a 33-year-old AI Product Manager with a zero-cost, static-build blueprint that guarantees maximum recruiter resonance for Forward Deployed Product (FDP) and Agent Ops roles.
+> Task 11 v1 CODE COMPLETE (Agent Fleet Observability Dashboard)
 
-> By evaluating deployment surfaces, anonymization strategies, and panel hierarchies against leading 2026 vendor platforms, this report establishes a portfolio artifact explicitly designed to close the FDP cost-economics gap and demonstrate production-grade operational fluency.
+> Task 11 DEPLOY COMPLETE — fleet.seanwinslow.com LIVE
 
 ## Examples
 
-- A Fleet Status Grid and Live Event Stream are key anchor panels in the AxmeAI Fleet Dashboard.
+- The dashboard is now live and accessible at fleet.seanwinslow.com.
 
 ## Related Concepts
 
-[[Agent Ops / FDP Backup Track]] [[Portfolio Projects for Interview Prep]]
+[[Unified Roadmap]] [[Automation Reliability]]

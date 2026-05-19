@@ -2,31 +2,31 @@
 title: "Track C MCP Server / Portfolio Differentiation"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/substack-pre-launch/posts/2026-05-14-post-1-introduction.md
+  - 20_projects/research/2026-05-18-vault-knowledge-mcp-research-chatgpt.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition
 
-A strategic focus on maintaining a strong, differentiated portfolio through the Track C approach, leveraging the MCP server or other tools for differentiation.
+A benchmark for differentiating personal knowledge vaults using the Model Context Protocol (MCP). It emphasizes clarity in naming and purpose, allowing users to quickly understand what the server connects to or exposes.
 
 ## Context
 
-Sean’s career pivot to AI PM / Forward-Deployed Engineer roles requires a stand-out portfolio that differentiates him from other candidates in the market.
+This is important for Sean when showcasing his knowledge vault in job interviews or portfolio reviews, as clarity and focus are critical in differentiating personal systems from broader platforms.
 
 ## Evidence
 
-> 'Track C MCP server / portfolio differentiation.'
+> In all four cases, the name tells a stranger what the thing connects to or what it exposes before they ever read the README.
 
-> ''The creative practice didn't stop — it became the long-term north star.'
+> The server may optionally ask for client roots and intersect them with the configured allowlist, but it should never grant access based on roots alone.
 
 ## Examples
 
-- Work on portfolio projects to enhance visibility and differentiation.
-- Utilizing tools like Supabase, ComfyUI, or React to showcase technical skills.
+- `mcp-obsidian` by Markus Pfundstein
+- `obsidian-mcp` by eddmann
 
 ## Related Concepts
 
-[[Portfolio Projects for Interview Prep]] [[Automation Pipeline]]
+[[vault-knowledge-mcp]] [[Implementation Architecture]]

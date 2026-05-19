@@ -2,30 +2,30 @@
 title: "Intent Engineering"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md
+  - 20_projects/research/2026-05-18-vault-knowledge-mcp-research-gemini.md
 tags: [auto-generated, phase-6]
-created: 2026-05-18
-updated: 2026-05-18
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition
 
-A process of creating precise intent definitions and operational designs, often involving agentic workflows. This concept plays a role in both knowledge vault and job-hunt efforts.
+A previously published MCP server by Sean, containing three tools and focused on intent-based engineering workflows.
 
 ## Context
 
-Sean is leveraging intent engineering to structure his knowledge vaults and streamline automation for job-interview preparation.
+This concept serves as a foundation for Sean's subsequent MCP projects, including `vault-knowledge-mcp`, and demonstrates his ability to design and ship agentic systems.
 
 ## Evidence
 
-> Track-C MCP Server / Portfolio Differentiation
+> One MCP server already published: `intent-engineering` (3 tools, stdio, TypeScript, npm + MCP registry under `com.seanwinslow/intent-engineering@0.1.0`)
 
-> Personal Agentic Intent Engineering
+> The publish flow from `intent-engineering` will be reused for the new MCP server.
 
 ## Examples
 
-- A part of the unified roadmap includes intent engineering, which involves designing intent systems for automation.
+- Sean uses the same publishing infrastructure and key setup from `intent-engineering` to deploy `vault-knowledge-mcp`.
 
 ## Related Concepts
 
-[[Unified Roadmap]] [[Track-C MCP Server / Portfolio Differentiation]]
+[[Vault-knowledge-mcp]] [[MCP Server Production Patterns]]

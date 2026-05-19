@@ -2,10 +2,10 @@
 title: "Research Workflow Integration"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-knowledge-mcp-spec.md
+  - 20_projects/research/2026-05-18-vault-knowledge-mcp-research-gemini.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition
@@ -14,19 +14,20 @@ The process of integrating deep research outputs into Sean's workflow, ensuring 
 
 ## Context
 
-This is critical for Sean's job hunt as it ensures his knowledge graph and MCP servers are sustained with up-to-date research insights.
+This concept is key to how Sean's knowledge vault functions, as it ensures that research outputs are formalized and surfaced in his MCP servers like `vault-knowledge-mcp`.
 
 ## Evidence
 
-> This document IS the research input.
+> ## Definition
 
-> No code is written until deep research returns with architecture + reference-implementation validation.
+The process of integrating deep research outputs into Sean's workflow, ensuring that findings from tools like Gemini Deep Research are systematically applied and acted upon.
+
+> The 60-second demo: open Claude Desktop, call find_contradictions, watch the candidate's vault surface real contradictions in their engineering decisions
 
 ## Examples
 
-- 2026-05-07-target-role-specs
-- vault-knowledge-mcp
+- Sean leverages research from Gemini Deep Research to update his vault, which is then surfaced through the `vault-knowledge-mcp` server.
 
 ## Related Concepts
 
-[[Deep Research Queue]] [[Gemini Deep Research]]
+[[Gemini Deep Research]] [[Vault-knowledge-mcp]]

@@ -2,31 +2,30 @@
 title: "Daily Note Generation"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-17-resume-council-critique.md
+  - 20_projects/research/2026-05-18-enterprise-ai-pm-skill-gaps.md
 tags: [auto-generated, phase-6]
-created: 2026-05-18
-updated: 2026-05-18
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition
 
-A routine of capturing daily insights, tasks, and reflections to support Sean's productivity, knowledge management, and structured thinking.
+The process of automatically generating notes or logs based on routines, system events, or user inputs to ensure transparency and accountability.
 
 ## Context
 
-This habit underpins Sean’s ability to synthesize complex information and prepare for interviews with confidence.
+This aligns with Sean's agentic system, which includes hooks like cost watchdogs and network controls — a potential model for AI PMs interested in daily-agent routines.
 
 ## Evidence
 
-> 'Daily Note Generators' — a routine for capturing insights, tasks, and reflections.
+> 13 active hooks including network-access-control and a $/session cost watchdog
 
-> Daily Note Generation: routines that make Sean's thinking visible.
+> Daily Note Generation
 
 ## Examples
 
-- Daily note for Substack post drafting
-- Note on AI PM role requirements from interview prep
+- 13 active hooks including network-access-control and a $/session cost watchdog
 
 ## Related Concepts
 
-[[Spaced Repetition]] [[Interview Preparation Playbook]]
+[[Automation Routines]] [[Agent Health Monitoring]]

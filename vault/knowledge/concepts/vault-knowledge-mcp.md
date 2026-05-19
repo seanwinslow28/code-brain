@@ -2,32 +2,30 @@
 title: "vault-knowledge-mcp"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-knowledge-mcp-spec.md
+  - 20_projects/research/2026-05-18-vault-knowledge-mcp-research-gemini.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition
 
-A proposed second MCP server designed to expose Sean's existing vault knowledge graph (via concept_edges SQLite table and knowledge_loop pipeline) as queryable tools for MCP-aware clients like Claude Desktop, Cursor, or Anti-Gravity.
+A personal MCP server designed to expose Sean's knowledge vault as a read-only interface, allowing queries such as searching for concepts or finding contradictions within the vault.
 
 ## Context
 
-This artifact strengthens Sean's professional signal by demonstrating his ability to build and deploy a second MCP server of different shape, proving he understands the MCP pattern as a repeatable primitive rather than a one-off.
+This MCP server is part of Sean's job-hunt portfolio, designed to showcase his ability to design and ship agentic systems within the MCP ecosystem.
 
 ## Evidence
 
-> `vault-knowledge-mcp` is a proposed second MCP server exposing Sean's existing vault knowledge graph (the [[concept_edges]] typed-reasoning-edge SQLite table + the [[knowledge_loop]] producer/consumer pipeline) as queryable tools any MCP-aware client (Claude Desktop, Cursor, Anti-Gravity) can call.
+> Name (working): `vault-knowledge-mcp`
 
-> The recruiter-resonance hypothesis: this artifact converts 'Sean has knowledge graph experiments' from a static GitHub repo finding into a live, queryable demo that the recruiter / hiring manager can invoke from their own Claude Desktop in under 60 seconds.
+> 3 tools: `search_concepts(query, limit)`, `find_contradictions(scope)`, `get_article(slug)`
 
 ## Examples
 
-- vault-knowledge-mcp
-- concept_edges
-- knowledge_loop
+- The server would be published as `@swins/vault-knowledge-mcp` on npm and registered under `com.seanwinslow/vault-knowledge` in the MCP registry.
 
 ## Related Concepts
 
-[[Intent Engineering]] [[Research Workflow Integration]] [[MCP Server]]
+[[Intent Engineering]] [[Research Workflow Integration]]

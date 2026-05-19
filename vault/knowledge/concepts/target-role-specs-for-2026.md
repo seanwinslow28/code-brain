@@ -2,30 +2,30 @@
 title: "Target Role Specs for 2026"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/target-companies.md
+  - 20_projects/research/2026-05-18-vault-knowledge-mcp-research-gemini.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition
 
-A detailed set of specifications for targeted roles, including compensation ranges, job descriptions, and required skills. These specs are derived from a combination of Gemini DR-Max research and Sean's personal evaluation.
+A detailed mapping of the roles Sean is targeting in his job-hunt, including AI PMs at frontier labs and Agent PMs at AI-native startups.
 
 ## Context
 
-This concept is essential for Sean as it provides clarity on what roles he should target and how to align his portfolio with those roles.
+This concept is directly tied to Sean's career objectives and informs the design of his MCP servers, including `vault-knowledge-mcp`, to align with hiring managers' priorities.
 
 ## Evidence
 
-> "Role intelligence for the Week-2 target — [[2026-05-07-target-role-specs]] — Gemini DR-Max, 16 roles fully spec'd with JD URLs, comp ranges, hiring-manager telemetry, portfolio-to-role mapping."
+> Target roles: AI PM at frontier labs (Anthropic FDE, Glean FDP), Agent PM at AI-native startups (Sierra, Decagon), Forward Deployed Product at infra (Cohere, Liberate)
 
-> The Target Companies — Strategic 30 document includes a detailed breakdown of roles, including compensation ranges and job description URLs.
+> Anthropic pays competitively for FDE roles. Sierra runs a vibe-coding interview as part of their loop.
 
 ## Examples
 
-- Anthropic's Forward Deployed Engineer role with compensation of $280–320k (NY equiv).
+- The target roles include both technical and strategic positions across AI-native companies, which informs Sean's need to align his portfolio with hiring criteria.
 
 ## Related Concepts
 
-[[AI-PM Landscape for Boston/Remote Hiring]] [[Portfolio Projects]]
+[[Vault-knowledge-mcp]] [[Portfolio Projects for Interview Prep]]
