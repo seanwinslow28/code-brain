@@ -2,31 +2,30 @@
 title: "Eval Vocabulary"
 type: concept
 sources:
-  - knowledge/concepts/eval-vocabulary.md
+  - 20_projects/research/2026-05-18-enterprise-ai-pm-skill-gaps.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition
 
-A curated list of AI engineering interview metrics and terminology, including terms like precision, recall, F1 score, latency p50/p95/p99, and token cost/call.
+A structured framework for evaluating AI agents, focusing on performance baselines and failure modes.
 
 ## Context
 
-This is essential for Sean as he prepares for AI engineering interviews, allowing him to communicate complex concepts clearly and show mastery of technical vocabulary.
+Sean has built an eval suite at a baseline of 7/10 with six named failure modes, which demonstrates his deep understanding of AI evaluation — a key criterion for PM hiring managers.
 
 ## Evidence
 
-> A curated list of terms relevant to AI engineering interviews, including metrics like precision, recall, F1 score, and others.
+> eval suite at 7/10 baseline with 6 named failure modes grounded in 17 days of production logs
 
-> Mastery of eval vocabulary is critical for understanding and communicating complex AI concepts during interviews.
+> a Senior AI Engineering Manager who runs technical screens for PMs and has rejected candidates for shallow knowledge of evals, model routing
 
 ## Examples
 
-- Precision, recall, F1 score
-- Latency p50/p95/p99 and token cost/call
+- eval suite at 7/10 baseline with 6 named failure modes grounded in 17 days of production logs
 
 ## Related Concepts
 
-[[Practice & Confidence Plan]] [[Vibe-Coding Interview Canon]]
+[[Automation Failure and Daily Note Disruption]] [[Agent Health Monitoring]]
