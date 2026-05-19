@@ -2,7 +2,7 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - 20_projects/research/2026-05-18-enterprise-ai-pm-skill-gaps.md
+  - knowledge/concepts/automation-routines.md
 tags: [auto-generated, phase-6]
 created: 2026-05-19
 updated: 2026-05-19
@@ -10,23 +10,23 @@ updated: 2026-05-19
 
 ## Definition
 
-The practice of systematically monitoring the health, performance, and reliability of autonomous agents within a larger system.
+A monitoring system that ensures the reliability and performance of automation agents, particularly those involved in job hunt tasks. It helps identify issues before they disrupt workflows.
 
 ## Context
 
-This is directly relevant to Sean’s agentic system, where he has implemented hooks and monitoring tools for agent behavior.
+For Sean's job hunt, reliable automation is critical to avoid disruptions during key phases like application tracking and daily routine execution.
 
 ## Evidence
 
-> 13 active hooks including network-access-control and a $/session cost watchdog
+> The pattern shows that Agent Health Monitoring aligns with Sean's job-hunt-2026 goals by ensuring automation reliability, which is critical for modern AgentOps and FDP roles.
 
-> eval suite at 7/10 baseline with 6 named failure modes grounded in 17 days of production logs
+> Agent Health Monitoring
 
 ## Examples
 
-- 13 active hooks including network-access-control and a $/session cost watchdog
-- eval suite at 7/10 baseline with 6 named failure modes grounded in 17 days of production logs
+- scripts/update_status.py <db_id> applied
+- Agent Health and Daily Routine Automation
 
 ## Related Concepts
 
-[[Automation Reliability]] [[Agent Health and Daily Routine Automation]]
+[[Automation Routines]] [[Daily-Drive Agent]]

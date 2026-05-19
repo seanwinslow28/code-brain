@@ -2,10 +2,10 @@
 title: "Agent Health and Daily Routine Automation"
 type: concept
 sources:
-  - knowledge/concepts/agent-health-and-daily-routine-automation.md
+  - knowledge/concepts/automation-reliability.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition
@@ -14,19 +14,19 @@ This concept explores the interdependence between agent health, such as that of 
 
 ## Context
 
-For Sean, maintaining agent health is critical since it directly affects the consistency and reliability of daily automation tasks he depends on for productivity.
+This is important for Sean as it ties agent health directly to automation success and daily note generation, which supports his productivity goals.
 
 ## Evidence
 
-> This concept examines how the health of agents, such as the daily-driver agent, directly impacts the reliability of automation routines like generating a daily note.
+> This concept explores the interdependence between agent health, such as that of the daily-driver agent, and the reliability of automation routines like generating a daily note.
 
-> Fleet status report highlights agent operational health, which directly correlates with automation reliability.
+> The health of the daily-driver agent is a critical factor in determining automation success, especially for routine tasks.
 
 ## Examples
 
-- Fleet status report highlights agent operational health.
-- Automation reliability is crucial for ensuring that tasks, such as generating daily notes, are completed consistently.
+- Generating a daily note
+- Ensuring consistent task execution through agent health monitoring
 
 ## Related Concepts
 
-[[Fleet Status]] [[Daily Note Generation]]
+[[Daily Note Generation]] [[Automation Reliability]]

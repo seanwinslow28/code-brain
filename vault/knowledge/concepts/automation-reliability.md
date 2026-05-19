@@ -2,19 +2,19 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-synthesizer-retrofit-tiers.md
+  - knowledge/concepts/automation-reliability.md
 tags: [auto-generated, phase-6]
-created: 2026-05-18
-updated: 2026-05-18
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition
 
-A concept referring to the consistent performance of automated systems, particularly in the context of daily routines and agent operations.
+A concept referring to the consistent performance of automated systems, particularly in the context of daily routines and agent operations. It is crucial for ensuring that automation functions reliably across Sean's workflows.
 
 ## Context
 
-This concept is crucial for Sean as it directly affects the reliability of automation in his daily work and knowledge management workflows.
+This concept matters to Sean because it directly affects the reliability of automation in his daily work and knowledge management workflows, which are essential for productivity.
 
 ## Evidence
 
