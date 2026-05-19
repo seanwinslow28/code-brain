@@ -2,30 +2,30 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-synthesizer-retrofit-tiers.md
+  - 20_projects/research/2026-05-18-enterprise-ai-pm-skill-gaps.md
 tags: [auto-generated, phase-6]
-created: 2026-05-18
-updated: 2026-05-18
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition
 
-The process of tracking and ensuring the health status of agents within Sean's knowledge vault infrastructure.
+The practice of systematically monitoring the health, performance, and reliability of autonomous agents within a larger system.
 
 ## Context
 
-This concept is essential for ensuring the operational integrity of automation systems that power Sean's knowledge workflows.
+This is directly relevant to Sean’s agentic system, where he has implemented hooks and monitoring tools for agent behavior.
 
 ## Evidence
 
-> Agent health — the process of tracking and ensuring the health status of agents within Sean's knowledge vault infrastructure.
+> 13 active hooks including network-access-control and a $/session cost watchdog
 
-> Of 10 chunks retrieved per query, 6-7 always came from the agent-health/automation-reliability cluster
+> eval suite at 7/10 baseline with 6 named failure modes grounded in 17 days of production logs
 
 ## Examples
 
-- Agent health monitoring as a concept cluster
-- Health tracking for agent systems
+- 13 active hooks including network-access-control and a $/session cost watchdog
+- eval suite at 7/10 baseline with 6 named failure modes grounded in 17 days of production logs
 
 ## Related Concepts
 

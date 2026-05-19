@@ -2,31 +2,31 @@
 title: "Implementation Architecture"
 type: concept
 sources:
-  - 40_knowledge/references/ref-nate-implementation-architecture-six-components.md
+  - 20_projects/research/2026-05-18-vault-knowledge-mcp-research-chatgpt.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-19
+updated: 2026-05-19
 ---
 
 ## Definition
 
-The technical and operational framework that separates AI experiments from production workflows. It involves ensuring the model has a specific role in a workflow, with correct data, permissions, review processes, and success metrics.
+Refers to the underlying structure and functionality of how vaults are exposed and accessed through MCP, often involving tools like `list_files_in_vault`, `search`, or `get_file_contents`.
 
 ## Context
 
-This concept is critical for Sean as he navigates enterprise AI strategies, particularly in his job-hunt-2026 context. It aligns with how he needs to understand the bridge between AI deployment and actual workflow transformation.
+For Sean, understanding the architecture is essential for building tools that integrate with personal knowledge systems in job-hunt-2026, creative-studio workflows, or portfolio projects.
 
 ## Evidence
 
-> The technical and operational work that separates AI experiments from production workflows.
+> `mcp-obsidian` by Markus Pfundstein is the highest-signal 'direct vault access' benchmark. Its README shows a clear problem statement, concrete prompts, and a stdio-first `uvx` install path.
 
-> Value shows up when the model has a specific role in a specific workflow, with the right data, permissions, review process, and success metric.
+> What it gets right is immediacy: 'interacts with Obsidian,' obvious examples, and debugger guidance.
 
 ## Examples
 
-- Anthropic's new enterprise AI services company focusing on mid-sized businesses.
-- Implementation help like cloud migrations and ERP projects.
+- `list_files_in_vault`
+- `search`
 
 ## Related Concepts
 
-[[AI Product Manager]] [[Automation Reliability]]
+[[vault-knowledge-mcp]] [[Track C MCP Server / Portfolio Differentiation]]
