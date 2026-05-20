@@ -278,7 +278,7 @@ Both items closed 2026-05-07. Kept here for historical traceability; Friday-retr
 ### Task 2.4: GitHub README pass — the "this is who I am" surface
 
 **Files:**
-- Modify: `~/Code-Brain/claude-code-superuser-pack/README.md` (verify it's link-worthy for a hiring manager)
+- Modify: `~/Code-Brain/code-brain/README.md` (verify it's link-worthy for a hiring manager)
 - Create or modify: GitHub profile README at `github.com/<yourusername>/<yourusername>/README.md`
 
 - [ ] **Step 1: Read your Superuser Pack README as a hiring manager would.** Does the first paragraph make them want to look at the second? If not, rewrite the first paragraph. Lead with what it IS and what it DEMONSTRATES, not what it CONTAINS.

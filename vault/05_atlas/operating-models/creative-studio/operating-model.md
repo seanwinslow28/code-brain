@@ -43,7 +43,7 @@ Project vocabulary comes from `sw-portfolio-animation-pipeline`: **Pencil Test (
 - **Three-machine repo sync** — can't keep everything in parity without leaving all three on, and Obsidian Git on vault-only is still unresolved.
 - **MCP re-auth every session** — a recurring time sink.
 - **Adobe MCP setup cost** — high enough that Sean has deferred testing it.
-- **Creative Skills split across two repos** (`claude-code-superuser-pack` and `sw-portfolio-animation-pipeline`) with no sync signal.
+- **Creative Skills split across two repos** (`code-brain` and `sw-portfolio-animation-pipeline`) with no sync signal.
 - **Vault synthesizer intermittent** — succeeds only when MBP is awake (Qwen3-14B dependency).
 - **Handoff-prompt friction** — long threads require manual handoff drafting; no automated detection.
 - **Alienware ICMP-blocked** — HTTP checks only, ping fails. Already in auto-memory.

@@ -13,7 +13,7 @@ This is the operational playbook for populating the 15 placeholder artifacts in 
 ## Pre-flight (do once before the first interview)
 
 ```bash
-cd /Users/seanwinslow/Code-Brain/claude-code-superuser-pack
+cd /Users/seanwinslow/Code-Brain/code-brain
 git checkout v3.15.0-restructure   # confirm you're on the right branch
 git status                          # should be clean except agent-logs
 ```

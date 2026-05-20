@@ -30,6 +30,23 @@ LAUNCH_AGENTS="$HOME/Library/LaunchAgents"
 GEMINI_PLIST="com.sean.agent.gemini-researcher.plist"
 SUBSTACK_DRAFTER_PLIST="com.sean.agent.substack-drafter.plist"
 
+# LaunchDaemon-class plists (system-level, require sudo install at /Library/LaunchDaemons/)
+# These must NOT be loaded as user-level LaunchAgents — they reference paths like
+# /var/log/ that only root can write to, causing exit-78 failures in launchctl list.
+# Install manually with sudo per the install block at the top of each plist.
+LAUNCH_DAEMON_PLISTS=(
+    "com.sean.agent-fleet-wake-scheduler.plist"
+)
+
+is_launch_daemon() {
+    local name="$1"
+    local d
+    for d in "${LAUNCH_DAEMON_PLISTS[@]}"; do
+        [[ "$name" == "$d" ]] && return 0
+    done
+    return 1
+}
+
 # Ensure LaunchAgents directory exists
 mkdir -p "$LAUNCH_AGENTS"
 
@@ -41,6 +58,8 @@ if [[ "${1:-}" == "--list" ]]; then
             echo "  $name  (default disabled — INSTALL_GEMINI=1 to enable)"
         elif [[ "$name" == "$SUBSTACK_DRAFTER_PLIST" ]]; then
             echo "  $name  (default disabled — INSTALL_SUBSTACK_DRAFTER=1 to enable)"
+        elif is_launch_daemon "$name"; then
+            echo "  $name  (LaunchDaemon — install manually with sudo, see plist header)"
         else
             echo "  $name"
         fi
@@ -66,6 +85,13 @@ fi
 echo "Installing agent schedules..."
 for plist in "$SCHEDULES_DIR"/*.plist; do
     name=$(basename "$plist")
+
+    # Skip LaunchDaemon-class plists — they must be installed manually with sudo
+    # at /Library/LaunchDaemons/ (see install block at the top of each plist).
+    if is_launch_daemon "$name"; then
+        echo "  Skipping $name (LaunchDaemon — install manually with sudo, see plist header)"
+        continue
+    fi
 
     # Skip gemini-researcher unless INSTALL_GEMINI=1 is set
     if [[ "$name" == "$GEMINI_PLIST" ]]; then

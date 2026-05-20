@@ -70,7 +70,7 @@ Solo practice by design. 2D animation is partly chosen because it *doesn't* requ
 
 - **2D animation pipeline:** `sw-portfolio-animation-pipeline/CLAUDE.md` + `CHANGELOG.md` — project-scoped. Plan: extract the reusable pipeline into its own project so it serves multiple 2D animations, not just the current portfolio short's style.
 - **16BitFit:** `CLAUDE.md` in `16BitFit-V3/`, accessible on Mac Mini and via Google Drive mirror at `/Users/seanwinslow/Library/CloudStorage/GoogleDrive-sean.winslow28@gmail.com/Other computers/My Mac Mini/Code-Brain/16BitFit-V3/CLAUDE.md`. Currently stale relative to the planned simplification pivot.
-- **`claude-code-superuser-pack`:** hosts editing / motion-graphics / Adobe skills — distinct from `sw-portfolio-animation-pipeline` skills (2D animation + image gen). The two sets of creative Skills need differentiation so they don't compete or duplicate.
+- **`code-brain`:** hosts editing / motion-graphics / Adobe skills — distinct from `sw-portfolio-animation-pipeline` skills (2D animation + image gen). The two sets of creative Skills need differentiation so they don't compete or duplicate.
 - **Target:** build out the Vault as the creative-studio SSoT — connecting related projects by shared theme, tool, idea, or style. The Vault-as-SSoT is itself a work product.
 
 ### Who Depends On Me
@@ -104,7 +104,7 @@ Anchored in the `sw-portfolio-animation-pipeline` project and the creative-studi
 | **The 150-garbage-output incident** | An autoresearch run that produced 150 unusable outputs — the reason overnight batching is off the table until workflows are proven |
 
 **Canonical reference skills (treat as authoritative for their topics):**
-`2d-animation-principles`, `animation-pipeline`, `creative-director`, `gemini-pencil-animation-image-gen`, `image-generator-prompt-science`, `script-writing`, `writing-voice-modes`, `autoresearch`. Full skill catalogs live at `claude-code-superuser-pack/.claude/skills/` and `sw-portfolio-animation-pipeline/.claude/skills/`.
+`2d-animation-principles`, `animation-pipeline`, `creative-director`, `gemini-pencil-animation-image-gen`, `image-generator-prompt-science`, `script-writing`, `writing-voice-modes`, `autoresearch`. Full skill catalogs live at `code-brain/.claude/skills/` and `sw-portfolio-animation-pipeline/.claude/skills/`.
 
 ### Sacred Cows
 - SDPA only on the RTX 5080 — **never xformers**.

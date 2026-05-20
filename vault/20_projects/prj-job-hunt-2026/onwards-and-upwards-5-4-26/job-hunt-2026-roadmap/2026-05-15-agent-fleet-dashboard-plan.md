@@ -3699,8 +3699,8 @@ from pathlib import Path
 from lib import aggregations, kanban, readers, render
 
 
-VAULT = Path.home() / "Code-Brain/claude-code-superuser-pack/vault"
-EVALS = Path.home() / "Code-Brain/claude-code-superuser-pack/evals"
+VAULT = Path.home() / "Code-Brain/code-brain/vault"
+EVALS = Path.home() / "Code-Brain/code-brain/evals"
 PRIVATE_OUT = Path.home() / "Sites/agent-fleet-private"
 REPO = Path(__file__).resolve().parent
 
@@ -4268,7 +4268,7 @@ Open `https://fleet.seanwinslow.com` in Chrome incognito → DevTools → Networ
 Eyeball each tile. Cross-check timestamps with:
 
 ```bash
-tail -50 ~/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/agent-run-history.csv
+tail -50 ~/Code-Brain/code-brain/vault/90_system/agent-logs/agent-run-history.csv
 ```
 
 - [ ] **Step 5: Regression visible + annotated (criterion #4)**

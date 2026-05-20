@@ -1,6 +1,6 @@
 # Resume Revision Kickoff Prompt — apply the 2026-05-09 audit recommendations
 
-> Paste the block below into a fresh Claude Code thread (cwd: `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack`). Auto mode optional — the workflow has one explicit approval checkpoint before any file edits, so the thread will pause for Sean even in auto mode.
+> Paste the block below into a fresh Claude Code thread (cwd: `/Users/seanwinslow/Code-Brain/code-brain`). Auto mode optional — the workflow has one explicit approval checkpoint before any file edits, so the thread will pause for Sean even in auto mode.
 
 ---
 
@@ -144,7 +144,7 @@ Begin.
 
 ## How to use
 
-1. Open a fresh Claude Code thread in this repo (`/Users/seanwinslow/Code-Brain/claude-code-superuser-pack`).
+1. Open a fresh Claude Code thread in this repo (`/Users/seanwinslow/Code-Brain/code-brain`).
 2. Paste the block above (everything between the triple-backticks).
 3. The thread will read 6 files, then pause and show you the change-set plan as a table. Reply `apply` to greenlight, or call out specific rows to change/skip.
 4. After approval, the thread executes through to commit autonomously and reports back.

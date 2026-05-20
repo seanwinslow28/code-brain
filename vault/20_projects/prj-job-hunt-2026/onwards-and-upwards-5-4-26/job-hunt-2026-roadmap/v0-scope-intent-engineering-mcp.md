@@ -31,7 +31,7 @@ ai-context: "Scope lock for the intent-engineering MCP server v0. This document 
 >
 > **Status.** Draft. To be moved to `~/Code-Brain/sw-mcp-intent-engineering/docs/v0-scope.md` on repo creation. Decision 1 of the [unified roadmap](2026-05-06-unified-roadmap.md) closes when this file is committed to the new repo.
 >
-> **Path note (2026-05-07):** Roadmap originally referenced `~/Code/sw-mcp-intent-engineering/`. Corrected to `~/Code-Brain/sw-mcp-intent-engineering/` to match Sean's existing convention (sibling to `claude-code-superuser-pack` and `sw-ai-pm-portfolio` inside `Code-Brain/`).
+> **Path note (2026-05-07):** Roadmap originally referenced `~/Code/sw-mcp-intent-engineering/`. Corrected to `~/Code-Brain/sw-mcp-intent-engineering/` to match Sean's existing convention (sibling to `code-brain` and `sw-ai-pm-portfolio` inside `Code-Brain/`).
 
 ---
 
@@ -332,7 +332,7 @@ type AssessRetrofitLevelOutput = {
 {
   "name": "assess_retrofit_level",
   "arguments": {
-    "file_path": "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/.claude/skills/format-on-edit/SKILL.md"
+    "file_path": "/Users/seanwinslow/Code-Brain/code-brain/.claude/skills/format-on-edit/SKILL.md"
   }
 }
 ```

@@ -28,7 +28,7 @@ _Manual creative-pipeline steps that should become agent-triggered. Each one tra
 
 **Agentic vault navigation (Vault-as-SSoT for creative-studio)**
 - Build out the Obsidian vault as the central hub — inspired by Karpathy's `llm-wiki` gist (`gist.github.com/karpathy/442a6bf555914893e9891c11519de94f`) and `coleam00/claude-memory-compiler`. Verify whether Phase 6 (`phase6-SUPER-PLAN-2026-04-17.md`) already delivered parts of this; fold in what's missing.
-- Fix Obsidian Git sync to track the **vault folder only** — not the entire `claude-code-superuser-pack` repo. Currently I'm afraid to enable full sync because of scope.
+- Fix Obsidian Git sync to track the **vault folder only** — not the entire `code-brain` repo. Currently I'm afraid to enable full sync because of scope.
 - Investigate getting Obsidian working on the Alienware (previously blocked by mac-only plugin errors). If Vault is SSoT for all 3 machines, Alienware needs parity.
 - Use the Obsidian Web Clipper (Chrome extension) as the inbound content pipeline — articles, images, blogs, Substacks, tweets, GitHub repos, YouTube videos — all route into the vault, agents learn from them over time.
 
@@ -45,7 +45,7 @@ _Manual creative-pipeline steps that should become agent-triggered. Each one tra
 **Infrastructure**
 - **MCP authorization persistence** — find a way to keep MCP servers authorized across sessions (permanent install, CLI/API alternatives that don't require browser-based re-auth each time). Currently a time sink at the start of every session.
 - **Three-machine sync without always-on** — find a way for agents to reach Mac Mini / MBP / Alienware only when needed, not by requiring all three to stay powered on. Current state: no MCP connections, agents can't reach other machines reliably.
-- Skill-repo sync: when a Skill is updated in one of `claude-code-superuser-pack/.claude/skills/` or `sw-portfolio-animation-pipeline/.claude/skills/`, flag the divergence — decide consciously whether to mirror or keep distinct.
+- Skill-repo sync: when a Skill is updated in one of `code-brain/.claude/skills/` or `sw-portfolio-animation-pipeline/.claude/skills/`, flag the divergence — decide consciously whether to mirror or keep distinct.
 
 **Conversation hygiene**
 - **Handoff-prompt detection:** slash command or skill that warns when a thread hits ~20–30 turns and proposes a handoff prompt for a fresh session automatically.
@@ -82,7 +82,7 @@ High-leverage automation targets (traced from Layer 5 Q1 + Q3):
 - Headless SDK agents can't hit MCP servers (Adobe, Figma, Gemini interactive) — blocks interactive creative agents.
 - Overnight batching is off-limits on unproven workflows.
 - Vault synthesizer "intermittent — succeeds only when MBP awake" (Qwen3-14B dependency).
-- Creative Skills split across `claude-code-superuser-pack` and `sw-portfolio-animation-pipeline` with no sync signal.
+- Creative Skills split across `code-brain` and `sw-portfolio-animation-pipeline` with no sync signal.
 - Skill drift when prompts get iterated outside a skill.
 - Adobe MCP setup complexity blocking adoption.
 - Obsidian vault sync is partial — can't enable full Git because it would sync the entire repo, not just the vault.
