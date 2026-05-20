@@ -448,7 +448,7 @@ Audio rejection is the #1 festival QC failure. `ffmpeg-normalize` batch-normaliz
 
 2. **DaVinci Resolve free version API limitations.** Unknown what exactly is restricted. Test with the MCP server to discover boundaries before planning Resolve-dependent workflows.
 
-3. **ButterCut skill integration with Superuser Pack.** ButterCut has its own Claude Code skills. Evaluate whether to use them standalone or port patterns into your creative-studio domain.
+3. **ButterCut skill integration with Code-Brain.** ButterCut has its own Claude Code skills. Evaluate whether to use them standalone or port patterns into your creative-studio domain.
 
 4. **Error recovery and checkpointing.** What happens when step 3 fails on frame 7 of 16? Pipeline needs state saving after each successful frame for resume-on-failure.
 
@@ -489,7 +489,7 @@ Audio rejection is the #1 festival QC failure. `ffmpeg-normalize` batch-normaliz
 16. **Build full revised sprite pipeline** (if ComfyUI test passes) or Nano Banana fallback
 17. **Expand AE MCP commands** using Gemini-as-Architect, Claude-as-Builder pattern
 18. **Create Pipeline Test Suite** — Simple test operations for each app verifying MCP connection
-19. **Evaluate ButterCut integration** — Use standalone or port patterns into Superuser Pack
+19. **Evaluate ButterCut integration** — Use standalone or port patterns into Code-Brain
 20. **Add SVGO to Node.js proxy** as automatic SVG preprocessing step
 
 ### Decision Points

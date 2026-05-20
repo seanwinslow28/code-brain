@@ -4,7 +4,7 @@ domain:
   - claude-mastery
   - life-systems
 status: complete
-context: superuser-pack
+context: code-brain
 created: 2026-04-23
 updated: 2026-05-01 (ALL FOUR PHASES SHIPPED — Phase A in v3.18.0, Phase B in v3.17.0, Phase C in v3.19.0, Phase D in v3.20.0; consumer-side rollout complete; Phase E remains parked as research-only; retrospective at bottom)
 source: claude-code-plan-mode
@@ -13,7 +13,7 @@ references:
   - https://github.com/NateBJones-Projects/OB1
   - creative-studio/16bitfit-battle-mode/docs/plans/phase6-SUPER-PLAN-2026-04-17.md
   - vault/00_inbox/Karpathy's-viral-AI-wiki-has-a-flaw-most-of-the-100K-people-who-bookmarked-it-haven't-noticed-yet.md
-  - vault/20_projects/prj-superuser-pack/prj-agent-wiring-rollout.md
+  - vault/20_projects/prj-code-brain/prj-agent-wiring-rollout.md
 ---
 
 # Knowledge Loop — Consumer-Side Rollout + Hybrid Adds (v2)
