@@ -4,17 +4,17 @@ type: concept
 sources:
   - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md
 tags: [auto-generated, phase-6]
-created: 2026-05-19
-updated: 2026-05-19
+created: 2026-05-20
+updated: 2026-05-20
 ---
 
 ## Definition
 
-A comprehensive tool for monitoring the health and performance of autonomous agent fleets. It is part of a broader infrastructure development plan.
+A system designed to monitor and manage the status of autonomous agents, ensuring their reliability and efficiency.
 
 ## Context
 
-This dashboard aids Sean in tracking the performance and reliability of his automation systems, which are central to his job hunt strategy.
+This tool is crucial for Sean to maintain the health of his agentic systems, especially as they support his job hunt and knowledge management workflows.
 
 ## Evidence
 
@@ -24,7 +24,7 @@ This dashboard aids Sean in tracking the performance and reliability of his auto
 
 ## Examples
 
-- The dashboard is now live and accessible at fleet.seanwinslow.com.
+- The dashboard is now live at fleet.seanwinslow.com.
 
 ## Related Concepts
 
