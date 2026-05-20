@@ -1,9 +1,14 @@
 # Changelog
 
-All notable changes to the Claude Code Superuser Pack will be documented in this file.
+All notable changes to Code-Brain (formerly *Claude Code Superuser Pack*) will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [4.0.0] — 2026-05-20
+
+### Changed
+- **Renamed the project from *Claude Code Superuser Pack* to *Code-Brain*.** The previous name described the project's origin (a toolkit for mastering Claude Code) but no longer described what it had become: a personal agentic OS, a working second brain, and a published example of agentic engineering practice. New tagline: *"One engineer's working second brain — skills, an agent fleet, and a knowledge graph that thinks back."* GitHub repo slug renamed `seanwinslow28/claude-code-superuser-pack` → `seanwinslow28/code-brain`; auto-redirect preserves all existing URLs. Local + Mac Mini directories renamed `~/Code-Brain/claude-code-superuser-pack` → `~/Code-Brain/code-brain`. Launchd plist absolute paths updated on both machines via `sed` and `install_schedules.sh` re-bootstrap. Scope was deliberately "front-door only" — README H1 + tagline + intro, CLAUDE.md intro, CHANGELOG header, `.claude-plugin/marketplace.json`, `.mcp.json` vault path, and the 11 launchd plist paths. Historical CHANGELOG entries, AUDIT docs, kickoff prompts, and `_archive/` content stay untouched as authentic record. Spec at [docs/superpowers/specs/2026-05-20-code-brain-rename-design.md](docs/superpowers/specs/2026-05-20-code-brain-rename-design.md); plan at [docs/superpowers/plans/2026-05-20-code-brain-rename.md](docs/superpowers/plans/2026-05-20-code-brain-rename.md).
 
 ## [3.37.1] - 2026-05-16
 

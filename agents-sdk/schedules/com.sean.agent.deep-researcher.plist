@@ -6,8 +6,8 @@
     <string>com.sean.agent.deep-researcher</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/bin/python3</string>
-        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/deep_researcher.py</string>
+        <string>/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/.venv/bin/python3</string>
+        <string>/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/agents/deep_researcher.py</string>
         <string>--mode</string>
         <string>queue</string>
     </array>
@@ -24,10 +24,10 @@
         <string>/Users/seanwinslow/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
     </dict>
     <key>WorkingDirectory</key>
-    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack</string>
+    <string>/Users/seanwinslow/Code-Brain/code-brain</string>
     <key>StandardOutPath</key>
-    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/deep-researcher-stdout.log</string>
+    <string>/Users/seanwinslow/Code-Brain/code-brain/vault/90_system/agent-logs/deep-researcher-stdout.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/deep-researcher-stderr.log</string>
+    <string>/Users/seanwinslow/Code-Brain/code-brain/vault/90_system/agent-logs/deep-researcher-stderr.log</string>
 </dict>
 </plist>
