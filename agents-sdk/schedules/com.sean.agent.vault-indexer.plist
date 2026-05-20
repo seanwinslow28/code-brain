@@ -6,8 +6,8 @@
     <string>com.sean.agent.vault-indexer</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/bin/python3</string>
-        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/vault_indexer.py</string>
+        <string>/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/.venv/bin/python3</string>
+        <string>/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/agents/vault_indexer.py</string>
     </array>
     <key>StartCalendarInterval</key>
     <dict>
@@ -22,10 +22,10 @@
         <string>/Users/seanwinslow/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
     </dict>
     <key>WorkingDirectory</key>
-    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack</string>
+    <string>/Users/seanwinslow/Code-Brain/code-brain</string>
     <key>StandardOutPath</key>
-    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/vault-indexer-stdout.log</string>
+    <string>/Users/seanwinslow/Code-Brain/code-brain/vault/90_system/agent-logs/vault-indexer-stdout.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/vault-indexer-stderr.log</string>
+    <string>/Users/seanwinslow/Code-Brain/code-brain/vault/90_system/agent-logs/vault-indexer-stderr.log</string>
 </dict>
 </plist>

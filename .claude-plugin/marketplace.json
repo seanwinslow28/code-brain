@@ -1,11 +1,11 @@
 {
-  "name": "claude-code-superuser-pack",
+  "name": "code-brain",
   "version": "3.0.0",
   "description": "Personal command center with 89 skills, 11 agents, 6 domain workspaces, and Obsidian vault for Claude Code",
   "author": "Sean Winslow",
   "repository": {
     "type": "git",
-    "url": "https://github.com/seanwinslow/claude-code-superuser-pack"
+    "url": "https://github.com/seanwinslow28/code-brain"
   },
   "keywords": [
     "claude-code",
