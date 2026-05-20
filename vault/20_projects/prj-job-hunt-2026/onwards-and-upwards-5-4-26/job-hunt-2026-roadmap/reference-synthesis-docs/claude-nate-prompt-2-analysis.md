@@ -14,7 +14,7 @@
 
 Five existing artifacts, run through the template at recruiter-readable density. Each is a near-final draft Sean can paste into a `EXPLANATION.md` file in the corresponding repo or vault folder.
 
-#### **2a. Phase D Typed Reasoning Edges (Superuser Pack v3.20.0)**
+#### **2a. Phase D Typed Reasoning Edges (Code-Brain v3.20.0)**
 
 **What is this?** A `concept_edges` SQLite table layered on top of the vault's existing chunk index. Six relation types (`supports`, `contradicts`, `evolved_into`, `supersedes`, `depends_on`, `related_to`) populated by the nightly synthesizer as a side effect of writing connection articles, and read by the weekly knowledge-lint pass for zero-LLM-cost contradiction detection.
 
@@ -154,17 +154,17 @@ Five artifacts, ranked by signal-strength-per-hour-of-build. Each is hard to fak
 
 **Pre-written 4Q:** *What is this?* A skill that turns Nate's interview-loop prompt into a repo-aware audit, producing a commit-ready EXPLANATION.md. *Why this approach?* A skill (not a CLI, not a web app) because Claude Code is where the repos already live, and the skill auto-loads when triggered. *What would break?* Repos with sparse commit history give thin context; the skill should warn when it's running on a repo with \<10 commits. *What did I learn?* That the 4-question template's filter strength is structural — you cannot bullshit "what would break?" without genuine systems knowledge.
 
-**Where:** Public skill in the Superuser Pack `community-skills/` directory \+ Substack week 4\. **Who finds it:** Other Claude Code users — and through them, recruiters who notice the skill being used on candidate repos.
+**Where:** Public skill in the Code-Brain `community-skills/` directory \+ Substack week 4\. **Who finds it:** Other Claude Code users — and through them, recruiters who notice the skill being used on candidate repos.
 
 #### **5.4. `evals/` Portfolio for the Vault Knowledge Graph**
 
-**What:** A public `evals/` directory in the Superuser Pack that contains 30-50 evaluation cases for the vault synthesizer \+ knowledge-lint: golden-set inputs, expected outputs, rationale per case, plus a small adversarial set ("synthesizer should NOT generate a connection article between X and Y"). Inspired by what Anthropic / Cohere actually ask for in take-homes.
+**What:** A public `evals/` directory in the Code-Brain that contains 30-50 evaluation cases for the vault synthesizer \+ knowledge-lint: golden-set inputs, expected outputs, rationale per case, plus a small adversarial set ("synthesizer should NOT generate a connection article between X and Y"). Inspired by what Anthropic / Cohere actually ask for in take-homes.
 
 **Why hard to fake:** Evals are the most under-built portfolio artifact in 2026 because most people don't understand what they're for. A public eval suite says "I think like an AI PM."
 
 **Pre-written 4Q:** *What is this?* Eval suite with golden-set \+ adversarial cases for an LLM-driven synthesizer. *Why this approach?* Golden sets catch regressions; adversarial cases catch hallucination patterns the synthesizer *shouldn't* invent. *What would break?* Eval rot — when the synthesizer's prompt evolves, golden outputs need refreshing; need a versioning convention. *What did I learn?* That writing evals is the fastest way to discover what your prompt is *actually* doing vs. what you think it's doing.
 
-**Where:** Superuser Pack repo \+ Substack week 5\. **Who finds it:** AI PM hiring managers; Anthropic / OpenAI / Cohere applied teams.
+**Where:** Code-Brain repo \+ Substack week 5\. **Who finds it:** AI PM hiring managers; Anthropic / OpenAI / Cohere applied teams.
 
 #### **5.5. "From Block to Boston: Building My Own Operating System for the Job Hunt" (Live Build Diary)**
 
@@ -194,9 +194,9 @@ Five products at varying scope. Scored against Sean's "build don't buy / every w
 
 **What:** Weekly case study format. One real artifact per week (yours or a guest's), 4Q template applied, lessons extracted. Free tier: read-only. $8/mo: includes the actual templates \+ skill drops. **Who buys:** Career-changers, mid-career PMs, people who just got laid off and need both the framework and the community. **Build cost:** Sweat equity. Run cost: free (Substack revenue share). **Distribution:** The job-hunt diary (5.5) is the seed; convert readers to subscribers post-employment when the diary tonally needs to evolve. **Defensibility:** Tone \+ voice. Sean's comedic register is a moat; Nate's voice is sober/strategic — different audience. Don't compete head-on; complement.
 
-#### **6.4. `pack-builder` — Hosted SaaS that exports a personal Claude Code Superuser Pack from the user's GitHub \+ Obsidian vault**
+#### **6.4. `pack-builder` — Hosted SaaS that exports a personal Code-Brain from the user's GitHub \+ Obsidian vault**
 
-**What:** Web app where the user connects their GitHub \+ (optional) Obsidian vault, picks the skills they want, and gets a downloadable pack with proper structure, validation, install scripts. $29 one-time per pack export, or $9/mo for ongoing sync. **Who buys:** Claude Code power users who don't want to build the export-group/playground/validation infra Sean already built. **Build cost:** \~6-8 weeks (significant — extracts the existing scripts/install.sh \+ scripts/validate.py infrastructure into a hosted form). **Run cost:** \~$100-200/mo (hosting \+ LLM calls for skill suggestion). **Distribution:** Launch into Claude Code Discord, awesome-claude-code repo, Anthropic's developer Twitter. **Defensibility:** This is the highest-effort, highest-upside item. The Superuser Pack architecture (export-groups, playgrounds, validation, security profiles) is the moat — Sean has 8 months of opinionated decisions baked in.
+**What:** Web app where the user connects their GitHub \+ (optional) Obsidian vault, picks the skills they want, and gets a downloadable pack with proper structure, validation, install scripts. $29 one-time per pack export, or $9/mo for ongoing sync. **Who buys:** Claude Code power users who don't want to build the export-group/playground/validation infra Sean already built. **Build cost:** \~6-8 weeks (significant — extracts the existing scripts/install.sh \+ scripts/validate.py infrastructure into a hosted form). **Run cost:** \~$100-200/mo (hosting \+ LLM calls for skill suggestion). **Distribution:** Launch into Claude Code Discord, awesome-claude-code repo, Anthropic's developer Twitter. **Defensibility:** This is the highest-effort, highest-upside item. The Code-Brain architecture (export-groups, playgrounds, validation, security profiles) is the moat — Sean has 8 months of opinionated decisions baked in.
 
 #### **6.5. Workshop / Cohort: "Build Your First Production MCP Server in a Weekend"**
 

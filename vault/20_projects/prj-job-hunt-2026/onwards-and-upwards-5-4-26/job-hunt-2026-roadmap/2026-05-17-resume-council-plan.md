@@ -162,7 +162,7 @@ Three subagents synthesized the relevant corpora (this file is the consolidation
   SHIPPED 2026-05-12: intent-engineering MCP server v0 (npm + MCP registry,
     DNS-verified); Phase D Typed Reasoning Edges 4Q EXPLANATION.md; Phase 6
     Knowledge Loop 4Q EXPLANATION.md.
-  SHIPPED + PUBLIC: Claude Code Superuser Pack (118 skills, 13 subagents, 14 hooks,
+  SHIPPED + PUBLIC: Code-Brain (118 skills, 13 subagents, 14 hooks,
     17 SDK agents; Karpathy framing in README).
   CODE-COMPLETE, B7-GATED: Vault Synthesizer Eval Suite (10 binary cases, 7/10
     post-fix); Substack-Drafter; Agent Fleet Observability Dashboard v1.
@@ -383,7 +383,7 @@ Three subagents synthesized the relevant corpora (this file is the consolidation
 
 - [ ] **Step 1: For each resume file, grep for the banned terms.** Use a checklist run by Claude with `Grep` over each file: client names (Goldman / JPMorgan / Fidelity / Yale / Bain), ARR/churn figures, unshipped product names, internal executive names, "Project CTO" codename, Polymarket pre-launch specifics.
 
-- [ ] **Step 2: For each hit, decide:** is this Sean's own IP carve-out (CIIA §2.4 — Superuser Pack, agent fleet, animation pipeline, AdOps as architecture) or Block-protected? If Block-protected, edit out.
+- [ ] **Step 2: For each hit, decide:** is this Sean's own IP carve-out (CIIA §2.4 — Code-Brain, agent fleet, animation pipeline, AdOps as architecture) or Block-protected? If Block-protected, edit out.
 
 - [ ] **Step 3: Confirm zero hits remain** before proceeding. Document the grep output in the triage doc as the gate-1 receipt.
 

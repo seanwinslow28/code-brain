@@ -2,7 +2,7 @@
 
 ### **Executive Summary**
 
-Karpathy's December 2025 inflection is real and structural — agents crossed a coherence threshold and the unit of programming shifted from a function to a paragraph. The thesis with the most actionable consequences for you is **verifiability \+ lab attention** as the predictor of where AI will move next, because The Block sits on top of one of the most natively verifiable economic domains on earth (crypto data) and almost nobody has built proper RL environments for it yet. Two of your active projects are perfectly aligned with the trend (Superuser Pack as agentic-engineering scaffolding; agentic financial-research fleet as a verifiable RL loop in waiting); one (16BitFit's sprite-consistency blocker) is fighting a battle Karpathy's framework explicitly predicts is hard right now and your pause on April 20 was strategically correct. The single highest-leverage move I'd argue for: **stop building skills and start building MCP servers** — the Superuser Pack at 114 skills is hitting an architectural ceiling that Anthropic's December 2025 donation of MCP to the Linux Foundation made irrelevant. You should ride MCP, not skills, into the next 12 months.
+Karpathy's December 2025 inflection is real and structural — agents crossed a coherence threshold and the unit of programming shifted from a function to a paragraph. The thesis with the most actionable consequences for you is **verifiability \+ lab attention** as the predictor of where AI will move next, because The Block sits on top of one of the most natively verifiable economic domains on earth (crypto data) and almost nobody has built proper RL environments for it yet. Two of your active projects are perfectly aligned with the trend (Code-Brain as agentic-engineering scaffolding; agentic financial-research fleet as a verifiable RL loop in waiting); one (16BitFit's sprite-consistency blocker) is fighting a battle Karpathy's framework explicitly predicts is hard right now and your pause on April 20 was strategically correct. The single highest-leverage move I'd argue for: **stop building skills and start building MCP servers** — the Code-Brain at 114 skills is hitting an architectural ceiling that Anthropic's December 2025 donation of MCP to the Linux Foundation made irrelevant. You should ride MCP, not skills, into the next 12 months.
 
 ---
 
@@ -91,7 +91,7 @@ The talk underweights two things:
 
 Things you can apply this week, mined from the talk and his adjacent writing:
 
-* **Replace shell-script installers with copy-paste-into-agent instructions.** Your `claude-code-superuser-pack` install path should be a single Markdown block of instructions that a fresh Claude Code agent can execute, not `install.sh` with platform branching. (Currently you have both — kill the shell script as the canonical path.)  
+* **Replace shell-script installers with copy-paste-into-agent instructions.** Your `code-brain` install path should be a single Markdown block of instructions that a fresh Claude Code agent can execute, not `install.sh` with platform branching. (Currently you have both — kill the shell script as the canonical path.)  
 * **The right interview test for agentic engineers**: hand them a substantial brief, give them agents and a deploy target, give them a deadline, then have adversarial agents probe for breakage. Steal this for any contractor or future hire.  
 * **Spec the persistent IDs.** When delegating any system-design work to an agent, explicitly require unique persistent IDs for anything (user, transaction, asset, document). The agent will default to email or filename matching. This is the MenuGen bug pattern.  
 * **For undocumented or new tooling, write the instruction block first.** When you ship a new skill, the SKILL.md is the install instructions for the agent. Sean already does this — keep doing it; it's exactly the pattern Karpathy is endorsing.  
@@ -194,7 +194,7 @@ His "files over apps" \+ "throwaway custom apps" thesis. The verifiable reward: 
 
 #### **Wedge Assessment for Sean**
 
-If the answer is **\#1 (DevOps)**: You have a partial wedge. Your Superuser Pack is essentially an agent-DevOps toolkit. Your `daily-driver`, `meeting-defender`, `sprint-health` agents are deployment-and-operations pattern at the personal scale. But you're not in a position to build verifiable RL environments at scale; that's a $5M-funded-startup play. **Your contribution: be a thought-leader practitioner.** Document your three-machine topology \+ sparse-checkout workflow as a series of public Markdown skills. This is your PM-portfolio piece.
+If the answer is **\#1 (DevOps)**: You have a partial wedge. Your Code-Brain is essentially an agent-DevOps toolkit. Your `daily-driver`, `meeting-defender`, `sprint-health` agents are deployment-and-operations pattern at the personal scale. But you're not in a position to build verifiable RL environments at scale; that's a $5M-funded-startup play. **Your contribution: be a thought-leader practitioner.** Document your three-machine topology \+ sparse-checkout workflow as a series of public Markdown skills. This is your PM-portfolio piece.
 
 If **\#2 (Education)**: You have a moderate wedge through pattern-recognition. Your `creative-director`, `script-writing`, `prompt-engineering` skills are pedagogical scaffolding for AI agents. But Eureka and others are well ahead.
 
@@ -208,7 +208,7 @@ If **\#3 (Personal life-OS)**: You have the strongest wedge. Your three-domain o
 
 **Best-positioned: agentic financial-research fleet.** This is dead-on Karpathy's thesis. Crypto data is natively verifiable (prices, on-chain transactions, settlement). Multi-agent setup with Perplexity API \+ Gemini DR \+ NotebookLM \+ The Block's crypto API \+ scrapers is the canonical "sensors \+ actuators over a verifiable domain." If you build this properly, you have a real proof-of-thesis for both the cushion north-star and your PM portfolio. **Confidence: high.**
 
-**Best-positioned \#2: Superuser Pack.** Karpathy's "agentic engineering" definition is *literally* the discipline you're documenting in 114 skills. But you're at architectural risk (see below). **Confidence: high it stays valuable; medium it stays in current form.**
+**Best-positioned \#2: Code-Brain.** Karpathy's "agentic engineering" definition is *literally* the discipline you're documenting in 114 skills. But you're at architectural risk (see below). **Confidence: high it stays valuable; medium it stays in current form.**
 
 **Best-positioned \#3: 2D animation pipeline / sw-portfolio-animation-pipeline.** This is more nuanced. Animation pipeline labor is *jagged* per Karpathy — character design and key-frame creative direction have no verifiable reward, but tweening, in-betweening, lip-sync, color consistency, sprite-sheet packing, and render pipeline all have verifiable rewards. **Your thesis: humans own the creative ceiling; agents own the technical floor.** This is exactly Karpathy's vibe-coding-vs-agentic-engineering framing applied to animation. **Confidence: high it works; the June 11 deadline forces shipping over perfecting, which is correct.**
 
@@ -219,7 +219,7 @@ If **\#3 (Personal life-OS)**: You have the strongest wedge. Your three-domain o
 **Invest in:**
 
 1. **MCP server fluency.** Sean, this is the biggest call I'd make. You have 114 skills and 13 SDK agents. The Anthropic donation of MCP plus the 9,400-server registry plus Claude Opus 4.7's improved MCP-Atlas score means **the long-run portable artifact is the MCP server, not the SKILL.md**. Your skills work great inside Claude Code; an MCP server works inside *any* agent (Claude, ChatGPT, Gemini, Cursor, A2A bots). Take your 5-10 highest-leverage skills and ship them as MCP servers. Start with `process-granola-notes`, `etf-page-creator`, and `the-block-jira-ticket-writer` since they're domain-specific and reusable.  
-2. **Eval design as a craft.** This is the actual frontier skill, not "prompt engineering." Per the Q2 2026 funding data, the [agent-eval/agent-ops layer drew $20B](https://www.digitalapplied.com/blog/state-of-agentic-ai-q2-2026-quarterly-report) — that's where the agentic-engineering profession is consolidating. Add to your Superuser Pack: an `eval-design` skill explicitly. You already have `verification-before-completion` as a hook — that's the operational primitive. The missing piece is the design layer.  
+2. **Eval design as a craft.** This is the actual frontier skill, not "prompt engineering." Per the Q2 2026 funding data, the [agent-eval/agent-ops layer drew $20B](https://www.digitalapplied.com/blog/state-of-agentic-ai-q2-2026-quarterly-report) — that's where the agentic-engineering profession is consolidating. Add to your Code-Brain: an `eval-design` skill explicitly. You already have `verification-before-completion` as a hook — that's the operational primitive. The missing piece is the design layer.  
 3. **The animation pipeline as a Software 3.0 demonstrator.** When you ship the June 11 portfolio short, write the production diary as a public artifact: "How I produced X seconds of animation by directing N agents with Y skills." This is your single best PM-portfolio piece, because it shows agentic engineering applied to a creative domain — exactly the role you're trying to land.  
 4. **Production-grade context engineering for Ed and the Block roadmap.** Specs are the new code. Your `prd-generator`, `tech-spec`, `intent-engineering` skills are this discipline. Make Steve Chung's first 90 days the proving ground. Use `intent-engineering` to write a one-page intent spec for The Block Pro revamp before you build slides.
 
@@ -238,7 +238,7 @@ For *creative-industry* PM specifically, this maps to:
 
 * **Taste** — your 12 years of illustration/animation. **You already have this. Don't underweight it.**  
 * **Eval design** — for creative work specifically. This is "what does success look like for a 30-second short, and how do I tell an agent fleet?" Your `creative-director` skill is the foundation; expand it.  
-* **Agent orchestration** — your Superuser Pack proves you can do this.  
+* **Agent orchestration** — your Code-Brain proves you can do this.  
 * **System boundaries** — your three-domain operating model proves you understand this.
 
 What you're missing for the creative-industry PM target:
@@ -246,13 +246,13 @@ What you're missing for the creative-industry PM target:
 * **Industry artifacts that hiring managers can verify.** A festival-submitted short with a documented agentic pipeline beats a Notion page about what you're building. Ship the June 11 short, then the production diary, then submit to one or two festivals before end of 2026\.  
 * **A public credential as an "agentic creative" practitioner.** The portfolio is necessary but not sufficient. Pick one publication channel (your own Substack, or guest-posts to Latent Space, or a series on your portfolio site) and ship 1 essay/month for 12 months. Topics: how you produced specific work, lessons from the pipeline, frontier creative tooling. Your hiring leverage is being one of the few people doing this at all.
 
-#### **Superuser Pack restructuring**
+#### **Code-Brain restructuring**
 
-This is where I'm going to be most directive because the call is sharp. **The Superuser Pack should evolve in three stages:**
+This is where I'm going to be most directive because the call is sharp. **The Code-Brain should evolve in three stages:**
 
 **Stage 1 (next 30 days): Audit and consolidate.** 114 skills is past the working-memory ceiling. Run a usage audit. Anything not invoked in the last 60 days either gets archived or merged into a parent skill. Target: 60-80 skills.
 
-**Stage 2 (next 90 days): MCP-ify the high-leverage ones.** Identify the 5-8 skills that are domain-specific, reusable, and that you'd recommend to others. Convert each to an MCP server. Open-source them as `winslow/mcp-{name}`. This makes them runnable from *any* agent client, not just Claude Code, and turns the Superuser Pack into a multiplier of your professional brand. Specifically I'd start with:
+**Stage 2 (next 90 days): MCP-ify the high-leverage ones.** Identify the 5-8 skills that are domain-specific, reusable, and that you'd recommend to others. Convert each to an MCP server. Open-source them as `winslow/mcp-{name}`. This makes them runnable from *any* agent client, not just Claude Code, and turns the Code-Brain into a multiplier of your professional brand. Specifically I'd start with:
 
 * `etf-page-creator` (Block-specific, but can be sanitized into a "structured-content-publisher" pattern)  
 * `the-block-jira-ticket-writer` (sanitize → "PM-ticket-writer with style guide")  
@@ -526,8 +526,8 @@ Eight ideas across the requested mix. Each is grounded in a specific thesis, siz
 
 #### **This week**
 
-1. **Ship a pilot MCP server.** Take your existing `the-block-jira-ticket-writer` skill and convert it to an MCP server in TypeScript. Run it locally, point Claude Desktop at it. Time-box: one weekend. *This is the one move I'd make if you could only make one.* It's the on-ramp to everything else and the unlock for your Superuser Pack restructuring.  
-2. **Audit Superuser Pack invocations.** Write a quick script (or have Claude Code do it) that scans `daily-note-appender.sh` logs for which skills got invoked in the last 60 days. Anything not touched goes to candidate-for-archive list.  
+1. **Ship a pilot MCP server.** Take your existing `the-block-jira-ticket-writer` skill and convert it to an MCP server in TypeScript. Run it locally, point Claude Desktop at it. Time-box: one weekend. *This is the one move I'd make if you could only make one.* It's the on-ramp to everything else and the unlock for your Code-Brain restructuring.  
+2. **Audit Code-Brain invocations.** Write a quick script (or have Claude Code do it) that scans `daily-note-appender.sh` logs for which skills got invoked in the last 60 days. Anything not touched goes to candidate-for-archive list.  
 3. **Brief Ed on Karpathy's framing for The Block Pro revamp.** Not a slide deck. A single Markdown intent spec using your `intent-engineering` skill. "The Block Pro is an agent-native research interface; humans are one consumer among many." Get his read before Steve sees it.  
 4. **Read Karpathy's [Animals vs Ghosts essay](https://karpathy.bearblog.dev/animals-vs-ghosts/) and his [Verifiability essay](https://karpathy.bearblog.dev/verifiability/).** Both linked from his Sequoia post. They're under 30 minutes total. They sharpen the talk's framing into useable constructs.
 
@@ -535,7 +535,7 @@ Eight ideas across the requested mix. Each is grounded in a specific thesis, siz
 
 1. **Ship the June 11 portfolio short.** Non-negotiable. Document the production diary in real time as your portfolio piece.  
 2. **Convert 5-8 high-leverage skills to MCP servers** and open-source under your GitHub. Target the list in Part 5 Stage 2\.  
-3. **Cut Superuser Pack to 60-80 skills.** Archive don't delete — keep history. Each archive PR documents *why*.  
+3. **Cut Code-Brain to 60-80 skills.** Archive don't delete — keep history. Each archive PR documents *why*.  
 4. **Stand up the agentic financial-research fleet to "first useful brief" milestone.** Per your goal \#2. The cushion north-star translates to "did the system save you money or unlock a decision this month."  
 5. **Pitch the Block Pro agent-native angle to Steve in his first 60 days.** Use the MCP server prototype from idea \#1 in Part 6 as artifact, not concept.  
 6. **Publish one essay** — pick `intent-spec` Substack (idea \#6 in Part 7\) or "How I produced X with N agents" (the portfolio diary). One. Not both.
@@ -544,7 +544,7 @@ Eight ideas across the requested mix. Each is grounded in a specific thesis, siz
 
 1. **Land the Block promotion** if the path opens under Steve. Karpathy's framework gives you the language: you are an agentic engineer \+ product thinker, not just an APM. The Block Pro pitch is your land claim.  
 2. **Submit one festival short.** The June 11 piece \+ maybe one more by year-end. Festival rejection itself is signal; festival inclusion is portfolio-changing.  
-3. **Decide between two paths for the indie/sell side: tooling or creative.** Don't run both. Tooling \= Superuser Pack \+ MCP servers \+ intent-spec content. Creative \= animation pipeline \+ frame-keeper \+ pencil-test. Both are real bets aligned with your skills; running both will dilute.  
+3. **Decide between two paths for the indie/sell side: tooling or creative.** Don't run both. Tooling \= Code-Brain \+ MCP servers \+ intent-spec content. Creative \= animation pipeline \+ frame-keeper \+ pencil-test. Both are real bets aligned with your skills; running both will dilute.  
 4. **First income from a side project.** Even $50/month from a $5/month subscription product. Per your stated north-star: small consistent income \> one big jackpot.  
 5. **Two-of-three on**: cushion-savings goal, debt reduction goal, one tooling/creative product shipped at v1.
 
@@ -564,5 +564,5 @@ Of all the moves on this page, this is the single one that compounds across ever
 
 ---
 
-*Confidence calibration recap: I'm confident on the December 2025 inflection, MCP-as-standard-now, the Superuser Pack architectural ceiling argument, and the specific tactical recommendations. I'm moderately confident on the Easter egg ranking (deployment \> education \> personal-OS). I'm speculating on the timing of lab capability shifts that would unblock 16BitFit. Everything ranked is a real bet with calibrated downside, not a sure thing.*
+*Confidence calibration recap: I'm confident on the December 2025 inflection, MCP-as-standard-now, the Code-Brain architectural ceiling argument, and the specific tactical recommendations. I'm moderately confident on the Easter egg ranking (deployment \> education \> personal-OS). I'm speculating on the timing of lab capability shifts that would unblock 16BitFit. Everything ranked is a real bet with calibrated downside, not a sure thing.*
 

@@ -4,7 +4,7 @@ domain:
   - creative-studio
   - claude-mastery
 status: active
-context: superuser-pack
+context: code-brain
 ai-context: "/automode."
 created: 2026-02-20
 source: apple-notes-import

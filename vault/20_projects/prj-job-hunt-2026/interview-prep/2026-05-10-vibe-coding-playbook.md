@@ -366,12 +366,12 @@ Each story is framed around an artifact or moment, **never** around tenure miles
 - **S** (Situation): Two years of PM templates at The Block — Jira ticket writing, ETF page generation, biweekly stakeholder updates. Owned by Block per CIIA Section 2.3.
 - **T** (Task): Preserve the *pattern* without the *IP*. Specifically: extract the transferable PM craft from the Block-specific implementations.
 - **A** (Action): Audited all skills line-by-line (11 KB audit doc). Rewrote three skills to remove Block-specific names, vocabulary, and templates while keeping the structural patterns. Committed the sanitization with explicit reference to the CIIA clause. Validated with grep + `validate.py`. Kept the protected physical archive path in one file as a deliberate deviation, documented in the commit message.
-- **R** (Result): Public Superuser Pack is now CIIA-compliant. The patterns transfer cleanly to non-Block teams. The discipline of "what's the pattern vs. what's the IP" is a reusable PM skill.
+- **R** (Result): Public Code-Brain is now CIIA-compliant. The patterns transfer cleanly to non-Block teams. The discipline of "what's the pattern vs. what's the IP" is a reusable PM skill.
 
 ### Story 6 — The Phase 6 knowledge loop (closing a producer-consumer gap)
 
 - **Signals:** Systems thinking; willingness to leave 50% scope on the table to ship the 50% that matters; eval mindset.
-- **S** (Situation): The Superuser Pack had a producer side (SessionEnd flush, nightly synthesizer) that wrote knowledge articles, but no consumer side — the articles existed but new sessions didn't know about them.
+- **S** (Situation): The Code-Brain had a producer side (SessionEnd flush, nightly synthesizer) that wrote knowledge articles, but no consumer side — the articles existed but new sessions didn't know about them.
 - **T** (Task): Close the loop without over-engineering it.
 - **A** (Action): One hook — `session-start-inject-index.sh` — reads `vault/knowledge/index.md` and injects it as `additionalContext` on every new session. 5-second timeout. 15,000-char cap. File-read-only. No new infrastructure.
 - **R** (Result): The consumer side shipped in a day. The Phase 6 loop is closed. The autoresearch feedback layer (which would have been the heavier version) was descoped explicitly and parked for a future autoresearch harness. The discipline was: ship the cheap loop that closes the gap; defer the expensive loop until the cheap one proves the value.

@@ -221,7 +221,7 @@ Ollama confirms `qwen3:14b` is current — listed, not deprecated, no "supersede
   2. The agent reads `ldr_base_url = "http://localhost:5050"` (already correct — same on both machines).
   3. Run dry-run first:
      ```
-     cd /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk
+     cd /Users/seanwinslow/Code-Brain/code-brain/agents-sdk
      PYTHONPATH=. .venv/bin/python3 agents/deep_researcher.py --mode oneshot \
        --query "Compare GGUF vs MLX inference speed on Apple M4 Pro for 14B-class language models" \
        --dry-run

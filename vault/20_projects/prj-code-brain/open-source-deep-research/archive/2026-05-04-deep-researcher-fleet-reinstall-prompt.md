@@ -3,11 +3,11 @@ type: prompt-for-fresh-session
 domain:
   - claude-mastery
 status: ready-to-fire
-context: superuser-pack
+context: code-brain
 created: 2026-05-04
 intended-use: Paste into a fresh Claude Code session on the Mac Mini, then activate Plan Mode (double Shift+Tab) and run /writing-plans (the superpowers:writing-plans skill) before letting Claude execute.
 references:
-  - vault/20_projects/prj-superuser-pack/open-source-deep-research/phase-4-night-1-2026-05-03.md
+  - vault/20_projects/prj-code-brain/open-source-deep-research/phase-4-night-1-2026-05-03.md
   - agents-sdk/schedules/install_schedules.sh
   - agents-sdk/AUDIT-2026-04-09-agent-downsizing.md
   - agents-sdk/AUDIT-2026-04-28-process-inbox-reenable.md
@@ -25,9 +25,9 @@ You are an infrastructure engineer specializing in macOS launchd, Python autonom
 <context>
 **Machine:** I am on `Seans-Mac-mini.local` — the always-on Mac Mini. This is the canonical host for the autonomous SDK agent fleet (per [CLAUDE.md](CLAUDE.md)). My MBP has only a test deep_researcher; the Mac Mini is the production host. Verify hostname before doing anything: `hostname` should return `Seans-Mac-mini.local`.
 
-**Project state:** v3.25.0 of the Superuser Pack shipped yesterday (2026-05-03) on branch `feat/gemini-deep-research-v3.25.0`, 11 commits ahead of `main`, NOT pushed to remote. CLAUDE.md says 7 of 14 SDK agents are "active." The Phase 4 plan ([phase-4-night-1-2026-05-03.md](vault/20_projects/prj-superuser-pack/open-source-deep-research/phase-4-night-1-2026-05-03.md)) expected `deep_researcher` to auto-fire at 02:45 daily on the Mac Mini and process Topic 1a from `vault/00_inbox/research-queue.md` overnight.
+**Project state:** v3.25.0 of the Code-Brain shipped yesterday (2026-05-03) on branch `feat/gemini-deep-research-v3.25.0`, 11 commits ahead of `main`, NOT pushed to remote. CLAUDE.md says 7 of 14 SDK agents are "active." The Phase 4 plan ([phase-4-night-1-2026-05-03.md](vault/20_projects/prj-code-brain/open-source-deep-research/phase-4-night-1-2026-05-03.md)) expected `deep_researcher` to auto-fire at 02:45 daily on the Mac Mini and process Topic 1a from `vault/00_inbox/research-queue.md` overnight.
 
-**Life context (matters for cost decisions):** I was laid off from The Block on 2026-05-04. Severance ~1 month, separation deadline ~2026-05-11. The agent fleet is now also a job-hunt portfolio artifact (see `~/.claude/projects/-Users-seanwinslow-Code-Brain-claude-code-superuser-pack/memory/project_block_layoff_2026-05-04.md`). No income until severance lands. Treat any spend (Gemini API, paid services) as requiring explicit approval. The infrastructure work itself is free.
+**Life context (matters for cost decisions):** I was laid off from The Block on 2026-05-04. Severance ~1 month, separation deadline ~2026-05-11. The agent fleet is now also a job-hunt portfolio artifact (see `~/.claude/projects/-Users-seanwinslow-Code-Brain-code-brain/memory/project_block_layoff_2026-05-04.md`). No income until severance lands. Treat any spend (Gemini API, paid services) as requiring explicit approval. The infrastructure work itself is free.
 </context>
 
 <situation>
@@ -49,7 +49,7 @@ A prior session diagnosed why Topic 1a did not auto-process overnight 2026-05-03
 </situation>
 
 <your_task>
-Use the `superpowers:writing-plans` skill to produce an implementation plan for restoring the SDK agent fleet on this Mac Mini. Write the plan to `vault/20_projects/prj-superuser-pack/open-source-deep-research/2026-05-04-fleet-reinstall-plan.md` (or the canonical plan location the skill recommends — follow the skill's conventions).
+Use the `superpowers:writing-plans` skill to produce an implementation plan for restoring the SDK agent fleet on this Mac Mini. Write the plan to `vault/20_projects/prj-code-brain/open-source-deep-research/2026-05-04-fleet-reinstall-plan.md` (or the canonical plan location the skill recommends — follow the skill's conventions).
 
 **Step 1 — Verify the diagnosis (do not trust the prior session blindly).**
 Re-run the diagnostic commands and confirm:
@@ -92,7 +92,7 @@ Plan structure must include:
 Pause and surface progress to me at each sub-plan boundary. Do not blast through all 10 sub-plans in one shot. After each sub-plan: report what changed, what didn't, what surprised you, what risk popped up.
 
 **Step 4 — Final verification.**
-After Sub-plan F's smoke test passes, leave a brief written summary at `vault/20_projects/prj-superuser-pack/open-source-deep-research/2026-05-04-fleet-reinstall-summary.md` capturing: what was deleted/installed/changed, what to expect at 02:45 tomorrow, what to verify the next morning, what's still on the punch list.
+After Sub-plan F's smoke test passes, leave a brief written summary at `vault/20_projects/prj-code-brain/open-source-deep-research/2026-05-04-fleet-reinstall-summary.md` capturing: what was deleted/installed/changed, what to expect at 02:45 tomorrow, what to verify the next morning, what's still on the punch list.
 </your_task>
 
 <constraints>
@@ -118,10 +118,10 @@ After Sub-plan F's smoke test passes, leave a brief written summary at `vault/20
 </constraints>
 
 <deliverables>
-1. **A written plan file** at `vault/20_projects/prj-superuser-pack/open-source-deep-research/2026-05-04-fleet-reinstall-plan.md` (or wherever `superpowers:writing-plans` recommends), structured per the 10 sections in `<your_task>` Step 2.
+1. **A written plan file** at `vault/20_projects/prj-code-brain/open-source-deep-research/2026-05-04-fleet-reinstall-plan.md` (or wherever `superpowers:writing-plans` recommends), structured per the 10 sections in `<your_task>` Step 2.
 2. **A diagnosis-disagreement note** if your verification (Step 1) found anything different from the prior session's findings — embedded in the plan or surfaced inline before plan-writing.
 3. **Per-sub-plan checkpoints during execution** — short progress updates at each sub-plan boundary, not a single end-of-execution summary.
-4. **A summary file** at `vault/20_projects/prj-superuser-pack/open-source-deep-research/2026-05-04-fleet-reinstall-summary.md` after Sub-plan F passes.
+4. **A summary file** at `vault/20_projects/prj-code-brain/open-source-deep-research/2026-05-04-fleet-reinstall-summary.md` after Sub-plan F passes.
 5. **(If documentation changed) Proposed diffs to CHANGELOG.md, CLAUDE.md, README.md** — surfaced for my approval before applying.
 </deliverables>
 
@@ -129,15 +129,15 @@ After Sub-plan F's smoke test passes, leave a brief written summary at `vault/20
 Files and paths the fresh session should consult while writing/executing the plan (in priority order):
 
 1. **[CLAUDE.md](CLAUDE.md)** — Auto-loaded. Single source of truth for which agents are active, the architecture overview, and the non-negotiable rules (rules 6–8 are the most relevant: deny-list permissions, hook exit codes, settings precedence, vault sync owner).
-2. **[`vault/20_projects/prj-superuser-pack/open-source-deep-research/phase-4-night-1-2026-05-03.md`](vault/20_projects/prj-superuser-pack/open-source-deep-research/phase-4-night-1-2026-05-03.md)** — Original handoff. Read sections "Where we are (engineering state)", "Phase 4 Stream A — current state", "Open items", and the DO/DON'T list.
+2. **[`vault/20_projects/prj-code-brain/open-source-deep-research/phase-4-night-1-2026-05-03.md`](vault/20_projects/prj-code-brain/open-source-deep-research/phase-4-night-1-2026-05-03.md)** — Original handoff. Read sections "Where we are (engineering state)", "Phase 4 Stream A — current state", "Open items", and the DO/DON'T list.
 3. **[`agents-sdk/schedules/install_schedules.sh`](agents-sdk/schedules/install_schedules.sh)** — The current installer; understand its flow before deciding whether to harden it.
 4. **[`agents-sdk/AUDIT-2026-04-09-agent-downsizing.md`](agents-sdk/AUDIT-2026-04-09-agent-downsizing.md)** — Why the 6 agents are disabled. Authoritative.
 5. **[`agents-sdk/AUDIT-2026-04-28-process-inbox-reenable.md`](agents-sdk/AUDIT-2026-04-28-process-inbox-reenable.md)** — Why process_inbox is paused (cloud-Sonnet path works but cost-prohibitive).
 6. **[`agents-sdk/BUGFIX-2026-04-07-launchd-path.md`](agents-sdk/BUGFIX-2026-04-07-launchd-path.md)** — The PATH-in-EnvironmentVariables requirement. Worth re-checking the plists.
 7. **[`agents-sdk/config.toml`](agents-sdk/config.toml)** — `[agents.<name>] enabled` flags are the second source of truth (after CLAUDE.md). Check this before deciding which agents are active.
 8. **[`vault/00_inbox/research-queue.md`](vault/00_inbox/research-queue.md)** — The LDR queue. Topic 1a is the first unchecked item and is the smoke-test target.
-9. **`~/.claude/projects/-Users-seanwinslow-Code-Brain-claude-code-superuser-pack/memory/agents_sdk_mbp_first_pattern.md`** — The "MBP-first pattern" that explains why the Mac Mini install was deferred historically. Useful context, not a constraint.
-10. **`~/.claude/projects/-Users-seanwinslow-Code-Brain-claude-code-superuser-pack/memory/project_block_layoff_2026-05-04.md`** — The layoff context. Relevant only for the cost-rule constraint and for understanding why the fleet matters as a portfolio artifact.
+9. **`~/.claude/projects/-Users-seanwinslow-Code-Brain-code-brain/memory/agents_sdk_mbp_first_pattern.md`** — The "MBP-first pattern" that explains why the Mac Mini install was deferred historically. Useful context, not a constraint.
+10. **`~/.claude/projects/-Users-seanwinslow-Code-Brain-code-brain/memory/project_block_layoff_2026-05-04.md`** — The layoff context. Relevant only for the cost-rule constraint and for understanding why the fleet matters as a portfolio artifact.
 </references>
 
 <validation>

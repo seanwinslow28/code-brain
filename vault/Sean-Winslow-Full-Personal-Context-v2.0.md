@@ -218,7 +218,7 @@ Finance + health processed by local models (`gemma4`, `phi4-mini`) on Mac Mini. 
 - **2D animation pipeline** (`sw-portfolio-animation-pipeline`) — portfolio short by June 11, 2026. Establishes the reusable agentic + human creative collaboration that all future creative work runs on.
 - **Agentic financial-research fleet** (life-systems) — multi-agent setup spanning Perplexity API + Gemini Deep Research MCP + NotebookLM MCP + The Block's crypto API + GitHub/Reddit/YouTube/blog scraping. Produces research briefs (summary + recommended action + path to execution). Unblocks the biggest pile-up: investment / savings decisions.
 - **Job hunt 2026** — 8-week sprint targeting AI PM > Tech PM > Creative PM (Boston metro or remote). Track A logistics + Track B applications + Track C MCP-server differentiation. Live status at `vault/20_projects/prj-job-hunt-2026/README.md`.
-- **Superuser Pack** — 117 skills, 13 subagents, 13 hooks, 14 SDK agents (7 active), 3 primary domain folders. Actively maintained.
+- **Code-Brain** — 117 skills, 13 subagents, 13 hooks, 14 SDK agents (7 active), 3 primary domain folders. Actively maintained.
 
 ### Paused
 - **16BitFit** (paused 2026-04-20) — returns once the 2D animation pipeline is dialed in; will be simplified from v3.
@@ -232,7 +232,7 @@ Finance + health processed by local models (`gemma4`, `phi4-mini`) on Mac Mini. 
 ### Retired
 - Pocket PM (served its purpose, landed the Block role).
 
-> *(was: 16BitFit "~50% done", Superuser Pack "89 skills, just started," Obsidian "empty, setting up") (now: 16BitFit paused, Superuser Pack actively maintained at v3.20.0 with current counts, vault no longer empty — Phase 6 knowledge loop active) — source: root CLAUDE.md + memory entry + creative-studio operating-model.*
+> *(was: 16BitFit "~50% done", Code-Brain "89 skills, just started," Obsidian "empty, setting up") (now: 16BitFit paused, Code-Brain actively maintained at v3.20.0 with current counts, vault no longer empty — Phase 6 knowledge loop active) — source: root CLAUDE.md + memory entry + creative-studio operating-model.*
 
 ---
 

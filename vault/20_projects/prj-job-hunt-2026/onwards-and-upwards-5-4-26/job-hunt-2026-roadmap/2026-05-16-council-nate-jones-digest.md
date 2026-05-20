@@ -17,7 +17,7 @@ You are one of four frontier-model panelists in a premium LLM council (Claude Op
 
 ## §1 The Decision Question
 
-**Audit Sean's full stack — Superuser Pack, agents-sdk, portfolio MCP servers, explanation artifacts, distribution surfaces — against Nate's 10-article 2026 framing corpus. The roadmap is OFF the table for re-ranking. What 4–6 prioritized gap-fills, NOT yet on the roadmap, would convert Sean from "interesting candidate" to "Tier-1 AI PM / Forward-Deployed Engineer recruiter must talk to him" in the next four weeks? Plus: which Nate framings should Sean DEPRIORITIZE given his specific situation?**
+**Audit Sean's full stack — Code-Brain, agents-sdk, portfolio MCP servers, explanation artifacts, distribution surfaces — against Nate's 10-article 2026 framing corpus. The roadmap is OFF the table for re-ranking. What 4–6 prioritized gap-fills, NOT yet on the roadmap, would convert Sean from "interesting candidate" to "Tier-1 AI PM / Forward-Deployed Engineer recruiter must talk to him" in the next four weeks? Plus: which Nate framings should Sean DEPRIORITIZE given his specific situation?**
 
 The output is a gap audit, not a ranking of existing work. If your strongest move is to defer one of Nate's framings, say so explicitly — that negative-space signal is the rarest output of this run.
 
@@ -80,8 +80,8 @@ Seven framings from Nate's 2026 corpus, in strategic-load order. Each: one-sente
 
 ## §4 Current State Snapshots
 
-### §4.1 Superuser Pack
-Repo at `~/Code-Brain/claude-code-superuser-pack` (public on GitHub as `seanwinslow28/claude-code-superuser-pack`), v3.37.0. **118 skills, 13 Claude Code subagents** (8 domain + 5 design team), **14 hooks**, **17 SDK agents** (8 active on launchd, 2 opt-in disabled-by-default, 1 manual-trigger). Three primary domain folders: `the-block/` (archived 2026-05), `creative-studio/`, `life-systems/`. Cross-cutting infrastructure: `.claude/`, `agents-sdk/`, `vault/`, `claude-mastery/`, `tools/llm-council/`. README opens with Karpathy "agentic engineering practitioner's toolkit" framing. `python3 scripts/validate.py` passes. Sean uses this as daily driver across all three machines. **Recruiter-visibility: GitHub public, pinned on profile, has README + EXPLANATION.md scaffolding. No Loom narration, no "Why this exists" hero post outside README, no live-demo distribution surface, no `/transactions/` deployment.** Structurally a Linear-grade agent substrate; not publicly framed that way.
+### §4.1 Code-Brain
+Repo at `~/Code-Brain/code-brain` (public on GitHub as `seanwinslow28/code-brain`), v3.37.0. **118 skills, 13 Claude Code subagents** (8 domain + 5 design team), **14 hooks**, **17 SDK agents** (8 active on launchd, 2 opt-in disabled-by-default, 1 manual-trigger). Three primary domain folders: `the-block/` (archived 2026-05), `creative-studio/`, `life-systems/`. Cross-cutting infrastructure: `.claude/`, `agents-sdk/`, `vault/`, `claude-mastery/`, `tools/llm-council/`. README opens with Karpathy "agentic engineering practitioner's toolkit" framing. `python3 scripts/validate.py` passes. Sean uses this as daily driver across all three machines. **Recruiter-visibility: GitHub public, pinned on profile, has README + EXPLANATION.md scaffolding. No Loom narration, no "Why this exists" hero post outside README, no live-demo distribution surface, no `/transactions/` deployment.** Structurally a Linear-grade agent substrate; not publicly framed that way.
 
 ### §4.2 agents-sdk
 Autonomous-agent layer at `agents-sdk/`, Python, Claude Agent SDK 0.1.63. **Eight active on launchd:** Vault Indexer (02:00, nomic-embed-text local, $0), Vault Synthesizer (02:30, Qwen3-14B local MBP, $0 — Tier-2 cluster-and-sample retrieval shipped 5/16 yesterday, first signal tonight), Deep Researcher (02:45, LDR + SearXNG + Qwen3-14B local Mac Mini, $0), Meta-Agent (06:30, gemma4:e4b local, $0), Daily Driver morning (08:45, Sonnet 4.6, $0.40 typical / $0.60 cap), Knowledge Lint (Sun 22:00, Python + Qwen3-14B, $0), Job Feed (8–11 AM × 7 fires, Qwen3-14B with `fallback_disabled=true`, $0), Flush hook-triggered (gemma4:e4b, $0). **Two opt-in disabled:** Gemini Researcher ($7/$20/$50 caps), Substack-Drafter ($0.10/run, gated on B7 5-night live-synth gate, three kill-switches). **One manual:** Skill Optimizer ($20–$145/run capped $200). Knowledge loop closed: SessionEnd flush → nightly synthesizer → weekly lint → SessionStart `additionalContext` index injection. **LLM Council (v3.35.0)** at `tools/llm-council/council/` — premium + variance profiles, OpenRouter, per-query cost caps + daily $7 + monthly $40 governors. **Local TTS (v3.36.0)** Kokoro-82M, $0/run. HybridRouter routes by task across Mac Mini / MBP / Alienware. **No agent has a runtime judge layer. Eval suite is static, not a runtime evaluator of proposed agent actions. No agent has provenance-labeled memory write-back beyond the `concept_edges` table.**
@@ -190,7 +190,7 @@ End of brief. Audit honestly.
 - Closing section: "Why this matters for an agent fleet" — links to the 8 agents that consume vault state
 - No new infra. Documentation of existing infra, framed as architectural argument
 
-**Compounding payoff:** (1) Makes vault-knowledge-mcp's launch self-justifying — the MCP exposes infrastructure the scorecard has already proven. (2) Becomes the foundation for "OpenClaw-style runtime architecture" piece (latent Gap from §3.6 — see deprioritization note below). (3) Gives the Loom for the Superuser Pack a structure: 5 tests, 5 segments.
+**Compounding payoff:** (1) Makes vault-knowledge-mcp's launch self-justifying — the MCP exposes infrastructure the scorecard has already proven. (2) Becomes the foundation for "OpenClaw-style runtime architecture" piece (latent Gap from §3.6 — see deprioritization note below). (3) Gives the Loom for the Code-Brain a structure: 5 tests, 5 segments.
 
 **Demo shape:** "Open my GitHub. Scroll to vault/SCORECARD.md. Five tests, five passes, with code links. Now compare that row-by-row to the Notion column. That's why my agents can write back into the vault and Lindy can't write back into yours."
 
@@ -241,7 +241,7 @@ End of brief. Audit honestly.
 
 **Build sketch (1 day):**
 - Single Loom, 6 min, structured: (1) why 14 not 1, (2) the launchd cadence as a clock-face diagram, (3) the knowledge loop (flush → synth → lint → inject), (4) the cost envelope ($0 local vs. metered cloud, total monthly burn), (5) one failure I caught, (6) what I'd build next
-- Pin on personal site, LinkedIn, and as top section of Superuser Pack README
+- Pin on personal site, LinkedIn, and as top section of Code-Brain README
 - No new code. Pure narration of existing system
 
 **Compounding payoff:** (1) Same Loom doubles as the Substack post 1 companion video. (2) Becomes the default reply to "tell me about your agent work" in screens. (3) Gives the Agent Fleet Dashboard (Task 11) a built-in narration layer when it ships.
@@ -658,7 +658,7 @@ The strategy below attacks the core vulnerability in Sean’s current portfolio:
 
 **Recruiter-Need ROI:** High-leverage executive visibility for **all roles paying $150k+**. It shifts Sean from "guy learning to code" to "PM who understands where the commercial moat actually is." 
 
-**Build Sketch:** Sean's `intent-engineering-mcp` is shipped, but it lacks the strategic *Why*. Do not write new code. Update the `~/Code-Brain/sw-mcp-intent-engineering/` README. Change the positioning from "A tool for analyzing intent" to "An open-source Meaning-Layer MCP." Add a highly opinionated three-paragraph introduction that contrasts Access-layer agents (fragile, DOM-dependent, simulating clicks) against Meaning-layer agents (robust, API-governed, utilizing typed primitives). Map his 118-skill Superuser Pack to this specific theory. *Build time: 1 day.*
+**Build Sketch:** Sean's `intent-engineering-mcp` is shipped, but it lacks the strategic *Why*. Do not write new code. Update the `~/Code-Brain/sw-mcp-intent-engineering/` README. Change the positioning from "A tool for analyzing intent" to "An open-source Meaning-Layer MCP." Add a highly opinionated three-paragraph introduction that contrasts Access-layer agents (fragile, DOM-dependent, simulating clicks) against Meaning-layer agents (robust, API-governed, utilizing typed primitives). Map his 118-skill Code-Brain to this specific theory. *Build time: 1 day.*
 
 **Compounding Payoff:** 
 1. Gives him an immediate, highly opinionated talk-track for initial recruiter screens.
@@ -943,7 +943,7 @@ examples/public_vault_fixture/         # 10 notes, 15 edges, sanitized
 
 Five sections, one per Nate test. Each: (a) diagnostic question, (b) Sean's vault answer with code path, (c) comparison row scoring Notion / default Obsidian / Linear / Sean's vault, (d) screenshot evidence. **GPT-5.5's honesty contribution:** score Linear *above* the vault on ownership and permissions — naming that gap is exactly why vault-knowledge-mcp and the judge layer matter.
 
-**Compounding payoff:** Makes vault-knowledge-mcp self-justifying when it ships; gives the Superuser Pack Loom (if Sean records one) a 5-segment structure; foundation for any future "agent-operable knowledge" interview answer.
+**Compounding payoff:** Makes vault-knowledge-mcp self-justifying when it ships; gives the Code-Brain Loom (if Sean records one) a 5-segment structure; foundation for any future "agent-operable knowledge" interview answer.
 
 **Demo:** *"Most people see Obsidian as content. I treat my vault as agent infrastructure. Five tests, five passes, with code links. Compare row-by-row to Notion. That's why my agents can write back into the vault and Lindy can't write back into yours."*
 

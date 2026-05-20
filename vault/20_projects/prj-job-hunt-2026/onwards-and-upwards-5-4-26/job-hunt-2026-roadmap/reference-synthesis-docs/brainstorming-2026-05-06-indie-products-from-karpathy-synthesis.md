@@ -26,7 +26,7 @@ Generate 12+ indie product ideas that pressure-test the synthesis doc's existing
 
 3. **`evolving-wiki`** (vault-mcp v2) — Phase 6 loop, but synthesizer runs adversarially: each night it tries to *contradict* yesterday's articles. Only survivors persist. AutoResearch applied to personal knowledge.
 
-4. **`replicant-test`** — Hiring product. Candidate gets a sandboxed Superuser Pack + brief + 4 hours. Hooks capture HOW they work (prompt patterns, error recovery, security choices). Sells to seed-stage AI startups who can't tell senior agentic engineers from posers.
+4. **`replicant-test`** — Hiring product. Candidate gets a sandboxed Code-Brain + brief + 4 hours. Hooks capture HOW they work (prompt patterns, error recovery, security choices). Sells to seed-stage AI startups who can't tell senior agentic engineers from posers.
 
 5. **`lifeOS-bootstrap`** — Three-domain operating model (the-block / creative-studio / life-systems) as a paid setup-and-tune service. Per the doc: "your three-domain operating model is genuinely rare." Productize the rarity.
 

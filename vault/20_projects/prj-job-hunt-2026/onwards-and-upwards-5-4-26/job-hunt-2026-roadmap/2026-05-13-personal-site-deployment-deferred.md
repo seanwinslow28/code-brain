@@ -111,9 +111,9 @@ In the Cloudflare Pages project:
 
 If Namecheap is acting as registrar but Cloudflare is doing DNS (likely setup), no Namecheap action needed — Cloudflare handles the routing. If DNS is somehow split, point Namecheap nameservers at Cloudflare's first.
 
-### Step 6: Optional — push the superuser-pack EXPLANATION commit if not already pushed
+### Step 6: Optional — push the code-brain EXPLANATION commit if not already pushed
 
-Status as of 2026-05-13: commit `3909881` (Phase D + Phase 6 EXPLANATION.md files) is **pushed** to [github.com/seanwinslow28/CLAUDE-CODE-SUPERUSER-PACK](https://github.com/seanwinslow28/CLAUDE-CODE-SUPERUSER-PACK).
+Status as of 2026-05-13: commit `3909881` (Phase D + Phase 6 EXPLANATION.md files) is **pushed** to [github.com/seanwinslow28/code-brain](https://github.com/seanwinslow28/code-brain).
 
 This matters for the **Substack syndication fallback** (unified roadmap Decision 2): if the personal site is delayed past 2026-05-13, GitHub `EXPLANATION.md` files become canonical and Substack posts syndicate from GitHub raw URLs. Today the personal site doesn't link out to those URLs (the transactions content is inlined in the Astro content collection), but the URLs need to exist publicly anyway for the Decision-2 fallback.
 

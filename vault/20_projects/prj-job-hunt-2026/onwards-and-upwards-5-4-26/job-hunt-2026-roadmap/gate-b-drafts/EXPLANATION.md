@@ -8,7 +8,7 @@ A 4Q comprehension artifact for the `intent-engineering` MCP server. The 4Q fram
 
 An MCP server that exposes three tools — `audit_intent_spec`, `generate_intent_spec_scaffold`, and `assess_retrofit_level` — over the standard Model Context Protocol. Any MCP-aware client (Claude Desktop, Cursor, Anti-Gravity) can call them to review, scaffold, or triage agent intent specs against a 9-section unified template.
 
-The template, the 25-item validation checklist, the 5 fatal anti-patterns, and the 4 autonomy levels all come from the `intent-engineering` skill in my personal Claude Code Superuser Pack. The MCP server doesn't reinvent any of that — it's a thin protocol adapter that lets the skill's logic reach any agent harness, not just the one that ships it.
+The template, the 25-item validation checklist, the 5 fatal anti-patterns, and the 4 autonomy levels all come from the `intent-engineering` skill in my personal Code-Brain. The MCP server doesn't reinvent any of that — it's a thin protocol adapter that lets the skill's logic reach any agent harness, not just the one that ships it.
 
 ---
 

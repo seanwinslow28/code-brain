@@ -2,7 +2,7 @@
 
 ## Setup
 
-Start a Claude Code session in your `claude-code-superuser-pack` repo.
+Start a Claude Code session in your `code-brain` repo.
 Open with this single prompt that loads context and kicks off the interview:
 
 ---

@@ -12,7 +12,7 @@ related:
 # How to use
 
 1. Open a fresh Claude Cowork conversation.
-2. Make sure the same uploaded reference (`ref-nate-ai-credentials-artifacts-network.md`) is attached, and that Cowork has access to your `claude-code-superuser-pack` workspace.
+2. Make sure the same uploaded reference (`ref-nate-ai-credentials-artifacts-network.md`) is attached, and that Cowork has access to your `code-brain` workspace.
 3. Paste everything below the `--- PASTE BELOW THIS LINE ---` marker.
 
 ---
@@ -47,7 +47,7 @@ You have access to two things, both of which you MUST read in full before doing 
    - The four career tracks and the twelve-week learning path
    - His artifact recommendations (agent product spec, failure post-mortem, evaluation framework, narrated working session)
 
-2. **Sean's Claude Code Super User Pack** — at `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/`. Start with `CLAUDE.md`, then walk the structure: `.claude/skills/`, `.claude/agents/`, `.claude/hooks/`, `agents-sdk/agents/`, `agents-sdk/lib/`, `evals/vault-synthesizer/`, `tools/llm-council/`, `vault/05_atlas/operating-models/`, `vault/knowledge/`. Spend real time here. Don't skim the README — read the actual code, the actual agent prompts, the actual eval cases, the actual schema files.
+2. **Sean's Claude Code Super User Pack** — at `/Users/seanwinslow/Code-Brain/code-brain/`. Start with `CLAUDE.md`, then walk the structure: `.claude/skills/`, `.claude/agents/`, `.claude/hooks/`, `agents-sdk/agents/`, `agents-sdk/lib/`, `evals/vault-synthesizer/`, `tools/llm-council/`, `vault/05_atlas/operating-models/`, `vault/knowledge/`. Spend real time here. Don't skim the README — read the actual code, the actual agent prompts, the actual eval cases, the actual schema files.
 
 Read both. Then proceed.
 </inputs>
@@ -62,7 +62,7 @@ This is not a content-creation task. It is an analysis-and-strategy task that en
 
 <execution_plan>
 
-You will produce a single Markdown deliverable saved to `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-job-hunt-2026/nate-jones-portfolio-strategy-{TODAY}.md` with the four phases below. Use the exact section headings shown.
+You will produce a single Markdown deliverable saved to `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/nate-jones-portfolio-strategy-{TODAY}.md` with the four phases below. Use the exact section headings shown.
 
 Do the phases in order. Do not skip the thinking blocks. Each phase has a `<thinking>` step where you reason through the material before writing the section.
 
@@ -103,8 +103,8 @@ Write **Phase 1: Nate's Argument, Dissected** with three subsections:
 <thinking>
 Decide your research strategy first. Two routing rules:
 - If a sub-question is a single-shape topic (one target, one question), use WebSearch / WebFetch directly.
-- If a sub-question compounds three or more independent investigations (e.g., "compare the agentic-PM hiring criteria at five frontier labs and five enterprise SaaS companies"), use the `gemini-deep-research` skill (`/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/.claude/skills/gemini-deep-research/`) to delegate to Gemini DR. Self-policing cost: $7/task cap, $20/day circuit breaker. Use DR tier (not DR Max) unless the topic genuinely needs the deeper budget.
-- After producing the Phase 2 section, consider running it through the `llm-council` skill at `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/.claude/skills/llm-council/` on the `variance` profile (~$0.14) for a multi-vendor critique. Skip if total session spend is already > $10.
+- If a sub-question compounds three or more independent investigations (e.g., "compare the agentic-PM hiring criteria at five frontier labs and five enterprise SaaS companies"), use the `gemini-deep-research` skill (`/Users/seanwinslow/Code-Brain/code-brain/.claude/skills/gemini-deep-research/`) to delegate to Gemini DR. Self-policing cost: $7/task cap, $20/day circuit breaker. Use DR tier (not DR Max) unless the topic genuinely needs the deeper budget.
+- After producing the Phase 2 section, consider running it through the `llm-council` skill at `/Users/seanwinslow/Code-Brain/code-brain/.claude/skills/llm-council/` on the `variance` profile (~$0.14) for a multi-vendor critique. Skip if total session spend is already > $10.
 
 State your routing decisions explicitly in a "Research strategy" preamble at the top of Phase 2 so Sean can audit them.
 </thinking>

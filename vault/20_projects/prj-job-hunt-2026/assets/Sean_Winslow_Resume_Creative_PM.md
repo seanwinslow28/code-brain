@@ -24,7 +24,7 @@ Creative Product Manager. 12+ years of illustration and animation craft, now app
 - Shipped 2026-05-12, 13 days ahead of plan. Demoable in Claude Desktop with a single config change.
 - Operationalizes the intent-engineering framework — agent reads a spec and tells you what's missing — as a portable, reusable server.
 
-### Claude Code Superuser Pack — Open-Source Toolkit
+### Code-Brain — Open-Source Toolkit
 
 - Open-source agentic engineering toolkit for Claude Code: 118 skills, 13 subagents, 14 hooks, 17 autonomous Claude Agent SDK agents (8 in production on local-first launchd schedules).
 - Includes a `writing-voice-modes` skill calibrated to a personal narrative voice and a full design-team subagent suite (UI Reviewer, Accessibility Checker, Design System Enforcer, Visual Polish Auditor).

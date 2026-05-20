@@ -42,7 +42,7 @@ Per the plan: "If APPLY is >30 items, the council was too generous; if APPLY is 
 
 **A1. AI PM variant becomes the new master.** (Unanimous U1 + chairman 1.) Demote current master to fallback; produce Tech/Creative variants within 72 hours of swap per Opus's caveat.
 
-**A2. Section order: Header → Summary → Selected AI Artifacts (NEW) → Work Experience → Leadership Experience → Education → Skills.** (Chairman 1, GPT-5.5 strongest insight.) "Selected AI Artifacts" block lifts the shipped MCP server + Superuser Pack above Work Experience for the 20-second recruiter scan.
+**A2. Section order: Header → Summary → Selected AI Artifacts (NEW) → Work Experience → Leadership Experience → Education → Skills.** (Chairman 1, GPT-5.5 strongest insight.) "Selected AI Artifacts" block lifts the shipped MCP server + Code-Brain above Work Experience for the 20-second recruiter scan.
 
 **A3. Header URL: change `seanwinslow.com` → `seanwinslow.com/transactions`.** (Chairman 1, GPT-5.5.) The transactions ledger is the load-bearing portfolio surface per Sean's locked package decision.
 
@@ -50,7 +50,7 @@ Per the plan: "If APPLY is >30 items, the council was too generous; if APPLY is 
 
 **A4. New Summary text** (Chairman 2, hybrid Opus + GPT-5.5):
 
-> AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, MCP servers, and autonomous agent fleets with human-review gates and eval-driven acceptance criteria. At The Block, shipped 3 production Claude Skills against P&E OKR delivery, co-authored the Block Pro 2.0 product audit with an 11-risk structured pre-mortem, and authored the x402 / MCP integration strategy for the agent economy. Maintains the open-source 118-skill Claude Code Superuser Pack and a 17-agent Claude Agent SDK fleet; published `@swins/intent-engineering-mcp` to npm and the MCP registry.
+> AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, MCP servers, and autonomous agent fleets with human-review gates and eval-driven acceptance criteria. At The Block, shipped 3 production Claude Skills against P&E OKR delivery, co-authored the Block Pro 2.0 product audit with an 11-risk structured pre-mortem, and authored the x402 / MCP integration strategy for the agent economy. Maintains the open-source 118-skill Code-Brain and a 17-agent Claude Agent SDK fleet; published `@swins/intent-engineering-mcp` to npm and the MCP registry.
 
 (NO layoff mention — Unanimous U2.)
 
@@ -60,7 +60,7 @@ Per the plan: "If APPLY is >30 items, the council was too generous; if APPLY is 
 
 **A6. intent-engineering MCP project — add evals framing.** (Chairman 3b, Opus.) New bullet: *"Built on an evals-first methodology: the `audit_intent_spec` tool* is *the eval — it scores a spec against the framework's dimensions and tells the author what's missing before the spec ships to a coding agent. Operationalizes the 'evals are the new PRDs' thesis as a portable MCP server."*
 
-**A7. Superuser Pack — reframe Phase D as judge layer.** (Chairman 3c, Opus + Gemini converged.) Rewrite the existing 4th bullet: *"Architecture writeups for two production subsystems: Phase D Typed Reasoning Edges (SQLite-backed cross-domain contradiction detection — a lightweight judge layer surfacing factual conflicts across 6 relation types) and Phase 6 Knowledge Loop (SessionEnd flush → nightly synth → weekly lint → SessionStart re-inject, with eval-gated promotion)."*
+**A7. Code-Brain — reframe Phase D as judge layer.** (Chairman 3c, Opus + Gemini converged.) Rewrite the existing 4th bullet: *"Architecture writeups for two production subsystems: Phase D Typed Reasoning Edges (SQLite-backed cross-domain contradiction detection — a lightweight judge layer surfacing factual conflicts across 6 relation types) and Phase 6 Knowledge Loop (SessionEnd flush → nightly synth → weekly lint → SessionStart re-inject, with eval-gated promotion)."*
 
 ### Leadership Experience changes
 
@@ -99,7 +99,7 @@ Per the plan: "If APPLY is >30 items, the council was too generous; if APPLY is 
 **A16. Add "agent orchestration" to Financial Fleet bullet.** (Chairman 7.) Rewrite: *"Multi-agent orchestration: queue file → router → 3 retrieval agents..."*
 
 **Bonus micro-edits bundled into A14–A16 above:**
-- Add "in production" to Superuser Pack: change "8 active by default" → "8 in production on local-first launchd schedules" (Chairman 7).
+- Add "in production" to Code-Brain: change "8 active by default" → "8 in production on local-first launchd schedules" (Chairman 7).
 - 2D Animation Pipeline: CUT from AI PM master (Chairman 10, GPT-5.5 catch — future-dated June 2026 project weakens AI PM credibility). Keep "AI-assisted media production, animation" in Domains row to preserve creative-archetype signal.
 
 ---
@@ -167,7 +167,7 @@ Per the plan: "If APPLY is >30 items, the council was too generous; if APPLY is 
 1. 3 Claude Skills + the OKR KR they deliver against
 2. AdOps: 11 Zapier flows, 10 intake forms, 7 manual handoffs eliminated
 3. Pre-mortem: 11 risks, 3 tiers, 2 surfaced dependencies (engineering capacity, renewal cliff)
-4. Superuser Pack: 118 skills / 13 subagents / 14 hooks / 17 SDK agents (8 active by default)
+4. Code-Brain: 118 skills / 13 subagents / 14 hooks / 17 SDK agents (8 active by default)
 5. MCP server: 3 tools, npm + MCP registry, DNS-verified, shipped 13 days ahead of plan
 6. NYL: 60% discoverability via prompt-engineered metadata — *with reproducible baseline + window*
 7. Pro 2.0: 9 platforms benchmarked + 3 stakeholder interviews

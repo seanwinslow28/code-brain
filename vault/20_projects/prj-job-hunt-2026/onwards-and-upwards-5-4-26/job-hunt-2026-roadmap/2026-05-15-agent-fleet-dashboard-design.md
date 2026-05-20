@@ -424,7 +424,7 @@ Generated `index.html`, `kanban.html`, `data.json` ARE committed (yes, every cro
    Reads vault data, emits public/index.html (committed) + private file.
 """
 
-VAULT = Path.home() / "Code-Brain/claude-code-superuser-pack/vault"
+VAULT = Path.home() / "Code-Brain/code-brain/vault"
 PRIVATE_OUT = Path.home() / "Sites/agent-fleet-private"
 REPO = Path(__file__).parent
 

@@ -34,7 +34,7 @@ Sean Winslow is a Product Manager pivoting to AI PM roles after a **May 4, 2026 
 
 ## The resume's role in the funnel (Sean's locked decision, 2026-05-17)
 
-The resume is a **secondary artifact** inside a 4-piece pristine package: (1) AI PM Portfolio at `seanwinslow.com/transactions`, (2) build-in-public proof (Substack post 1 ships 2026-05-22, LinkedIn syndication Wednesdays), (3) GitHub repo presence (Superuser Pack + `sw-mcp-intent-engineering`), (4) the resume itself.
+The resume is a **secondary artifact** inside a 4-piece pristine package: (1) AI PM Portfolio at `seanwinslow.com/transactions`, (2) build-in-public proof (Substack post 1 ships 2026-05-22, LinkedIn syndication Wednesdays), (3) GitHub repo presence (Code-Brain + `sw-mcp-intent-engineering`), (4) the resume itself.
 
 The package coherence is the differentiator. The other three artifacts prove the resume isn't lying. The resume's job: **showcase prior professional work + personal passion projects + skills**, with ATS keywords earned not stuffed, and `seanwinslow.com/transactions` URL non-negotiable on the doc.
 
@@ -56,7 +56,7 @@ A prior premium-profile council pass on 2026-05-16 reached this unanimous verdic
 - Phase 6 Knowledge Loop 4Q `EXPLANATION.md` at `agents-sdk/agents/knowledge_loop/EXPLANATION.md`. SessionEnd flush → nightly synthesizer → weekly lint → SessionStart re-inject.
 
 **SHIPPED + PUBLIC:**
-- Claude Code Superuser Pack v3.37.0 — 118 skills, 13 subagents, 14 hooks, 17 SDK agents (8 active by default + 2 opt-in + 1 manual-trigger). Karpathy "agentic engineering practitioner's toolkit" framing in README line 3.
+- Code-Brain v3.37.0 — 118 skills, 13 subagents, 14 hooks, 17 SDK agents (8 active by default + 2 opt-in + 1 manual-trigger). Karpathy "agentic engineering practitioner's toolkit" framing in README line 3.
 
 **CODE-COMPLETE, B7-GATED (do NOT recommend as resume bullets yet — they ship after the 5-night live-synth gate closes):**
 - Vault Synthesizer Eval Suite — 10-case binary eval, 1/10 baseline → 7/10 post-fix. Lives at `evals/vault-synthesizer/`.
@@ -182,7 +182,7 @@ The candidate pre-answered all 8 questions before invoking the council. Treat th
 
 ## Summary
 
-AI Product Manager and agentic-engineering practitioner with 11+ years across crypto media, SaaS, and digital asset management. Most recently at The Block, shipped 3 production Claude Skills, a Polymarket B2B revenue integration, and a 10-week Confluence overhaul plan. Builds open-source agentic-engineering tooling — the 118-skill Claude Code Superuser Pack and a 17-agent autonomous SDK fleet.
+AI Product Manager and agentic-engineering practitioner with 11+ years across crypto media, SaaS, and digital asset management. Most recently at The Block, shipped 3 production Claude Skills, a Polymarket B2B revenue integration, and a 10-week Confluence overhaul plan. Builds open-source agentic-engineering tooling — the 118-skill Code-Brain and a 17-agent autonomous SDK fleet.
 
 ---
 
@@ -234,7 +234,7 @@ AI Product Manager and agentic-engineering practitioner with 11+ years across cr
 
 ## Selected Projects
 
-### Claude Code Superuser Pack — Open-Source Toolkit
+### Code-Brain — Open-Source Toolkit
 
 - Open-source agentic engineering toolkit for Claude Code: 118 skills, 13 subagents, 14 hooks, 17 autonomous Claude Agent SDK agents (8 active on local-first launchd schedules).
 - Used in production for daily PM workflows, vault automation, and content generation across crypto, creative, and personal-systems domains.
@@ -291,7 +291,7 @@ AI Product Manager and agentic-engineering practitioner with 11+ years across cr
 
 ## Summary
 
-AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, the `intent-engineering` MCP server, and autonomous agent fleets. Most recently at The Block, delivered 3 Claude Skills, co-authored the Block Pro 2.0 product audit and competitive analysis, and authored the x402 / A2A / MCP integration strategy memo positioning Block Pro for the agent economy. Maintains the open-source 118-skill Claude Code Superuser Pack and a 17-agent autonomous SDK fleet.
+AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, the `intent-engineering` MCP server, and autonomous agent fleets. Most recently at The Block, delivered 3 Claude Skills, co-authored the Block Pro 2.0 product audit and competitive analysis, and authored the x402 / A2A / MCP integration strategy memo positioning Block Pro for the agent economy. Maintains the open-source 118-skill Code-Brain and a 17-agent autonomous SDK fleet.
 
 ---
 
@@ -343,7 +343,7 @@ AI Product Manager and agentic-engineering practitioner. Ships production Claude
 
 ## Selected Projects, Education, and Skills
 
-*(Identical to MASTER above — Superuser Pack, intent-engineering MCP, Agentic Financial-Research Fleet, 2D Animation Pipeline, College of Staten Island, and the 4 Skills rows.)*
+*(Identical to MASTER above — Code-Brain, intent-engineering MCP, Agentic Financial-Research Fleet, 2D Animation Pipeline, College of Staten Island, and the 4 Skills rows.)*
 ```
 
 ---

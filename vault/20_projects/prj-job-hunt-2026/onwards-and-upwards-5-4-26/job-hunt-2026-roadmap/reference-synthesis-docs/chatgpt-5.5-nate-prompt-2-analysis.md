@@ -14,7 +14,7 @@
 
 The key difference between a normal portfolio bullet and a recruiter-grade explanation artifact is that the artifact exposes judgment. Below are five of Sean’s existing assets rewritten in that format, using his real inventory rather than invented projects. These are the pieces that already exist in substance and mostly need packaging. [Sean context] fileciteturn2file1L66-L81 fileciteturn2file1L217-L235 fileciteturn2file1L264-L280 [Nate template] fileciteturn2file0L83-L95
 
-**Superuser Pack v3.20.0**
+**Code-Brain v3.20.0**
 
 **What is this?**  
 A modular personal operating system for agent-assisted work: 117 skills, 13 subagents, 13 hooks, 14 SDK agents, and three primary domain folders. It exists to turn ad hoc prompting into reusable operating leverage across job search, finance, and creative work.
@@ -113,7 +113,7 @@ This week’s spend wants to stay tiny and owned: **$15–$20** for a domain if 
 
 The cadence is straightforward:
 
-**By May 10:** launch the skeleton site with one page called “Transactions” and one page called “How I work with AI.” Do not wait for polish. Anchor the first two artifacts there: Block PM templates and Superuser Pack. These are already real, and both are high confidence. [Sean context] fileciteturn2file1L66-L68 fileciteturn2file1L221-L235
+**By May 10:** launch the skeleton site with one page called “Transactions” and one page called “How I work with AI.” Do not wait for polish. Anchor the first two artifacts there: Block PM templates and Code-Brain. These are already real, and both are high confidence. [Sean context] fileciteturn2file1L66-L68 fileciteturn2file1L221-L235
 
 **By May 17:** publish the agentic financial-research fleet artifact and a short “What would break?” companion ADR. This becomes the flagship AI PM proof because it shows orchestration, multi-source reasoning, and decision support rather than mere prototype generation. [Sean context] fileciteturn2file1L217-L220
 
@@ -159,8 +159,8 @@ These are not hypothetical side quests. They are the publishable wrappers around
 **Who finds it:** creative-tech companies, consumer product teams, animation-adjacent PM searches.  
 **Recruiter-eye headline:** “Designed a repeatable AI-assisted animation pipeline instead of shipping a one-off demo.” [Sean context] fileciteturn2file1L71-L81
 
-**Meta-signal artifact: “Superuser Pack as a PM Operating System”**  
-**What it is:** a cleaned-up public case study of the Superuser Pack showing system boundaries, guardrails, and why the architecture is modular.  
+**Meta-signal artifact: “Code-Brain as a PM Operating System”**  
+**What it is:** a cleaned-up public case study of the Code-Brain showing system boundaries, guardrails, and why the architecture is modular.  
 **4Q explanation:** This is my reusable agent operating system for work across domains; I chose modular skills, subagents, and hooks over a monolith because maintainability matters more than wow-factor; it breaks when naming, governance, and dependency boundaries drift; I learned that agent design is product design when the user is your future self.  
 **Where it gets published:** personal site + GitHub docs.  
 **Who finds it:** AI-native startups, developer-tools teams, hiring managers who want evidence of real operator behavior.  

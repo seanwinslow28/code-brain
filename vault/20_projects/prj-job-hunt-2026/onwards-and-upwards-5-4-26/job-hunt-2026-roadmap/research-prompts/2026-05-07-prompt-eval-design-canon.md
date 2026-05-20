@@ -29,7 +29,7 @@ Your job is to produce a focused fluency primer for a 33-year-old PM (2 years ex
 
 **The PM's portfolio shape:** Already has a 14-agent SDK fleet, an MCP server in build, vault-RAG infrastructure. Beginner-to-intermediate Python coder. Strong agent-orchestration intuition. Limited prior eval-engineering experience.
 
-**The Week 5 deliverable:** A small `evals/` directory in the Superuser Pack repo with 10-15 cases for the vault synthesizer. Goal is fluency and a working artifact, NOT a published framework. Time budget: ~6-8 hours of deep work over Week 5.
+**The Week 5 deliverable:** A small `evals/` directory in the Code-Brain repo with 10-15 cases for the vault synthesizer. Goal is fluency and a working artifact, NOT a published framework. Time budget: ~6-8 hours of deep work over Week 5.
 
 **Why this matters for the job hunt:** Brendan Foody's "evals are the new PRDs" framing has propagated into Glean AI Quality, Scale GenAI Platform, Anthropic FDE, and Sierra/Decagon agent PM roles. Eval fluency is now table-stakes for AI PM interviews — and the PM currently rates this as a working-but-shallow skill area. The fluency upgrade and the working `evals/` artifact are the same intervention.
 </context>

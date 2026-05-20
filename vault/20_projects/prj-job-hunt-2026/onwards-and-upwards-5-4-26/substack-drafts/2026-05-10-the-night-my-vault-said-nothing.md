@@ -64,7 +64,7 @@ But the case I needed was the one that had been sitting at position fifteen in P
 
 That case wasn't an afterthought. That case was the *whole show.*
 
-So the eval suite I'm shipping — the one that becomes a directory called `evals/vault-synthesizer/` in my Superuser Pack repo by the end of the week — opens with the silent-empty-output case. Then it adds five more I wrote myself, every one of them grounded in a specific failure I just open-coded out of nine nights of real logs. Then it defers the eleven hallucination cases to a `deferred-cases.yaml` file with a one-line note: *"Re-enable when synthesizer produces ≥1 concept article in a clean run."*
+So the eval suite I'm shipping — the one that becomes a directory called `evals/vault-synthesizer/` in my Code-Brain repo by the end of the week — opens with the silent-empty-output case. Then it adds five more I wrote myself, every one of them grounded in a specific failure I just open-coded out of nine nights of real logs. Then it defers the eleven hallucination cases to a `deferred-cases.yaml` file with a one-line note: *"Re-enable when synthesizer produces ≥1 concept article in a clean run."*
 
 The sixth case is the one I'm proudest of. It checks that when the synthesizer's `model_used` field is the empty string, the run does not get reported as `ok`. In the schema as it stands today, `model_used: ""` is ambiguous between three states: not yet set, intentionally blank, and unset because the LLM call never fired. I am collapsing those three into an enum with four explicit values, and writing the eval that catches any future drift back to ambiguity.
 
@@ -84,4 +84,4 @@ I stayed up later than I meant to and rewrote the spec. The synthesizer, somewhe
 
 ---
 
-*The eval suite ships this week at `github.com/seanwinslow28/claude-code-superuser-pack/tree/main/evals/vault-synthesizer/`. The error-analysis-first methodology is the [Hamel Husain / Shreya Shankar canon](https://hamel.dev/blog/posts/evals/), refined by [Anthropic's eval engineering team](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents). The Swiss cheese metaphor is theirs, not mine. The lying chaperone is mine.*
+*The eval suite ships this week at `github.com/seanwinslow28/code-brain/tree/main/evals/vault-synthesizer/`. The error-analysis-first methodology is the [Hamel Husain / Shreya Shankar canon](https://hamel.dev/blog/posts/evals/), refined by [Anthropic's eval engineering team](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents). The Swiss cheese metaphor is theirs, not mine. The lying chaperone is mine.*

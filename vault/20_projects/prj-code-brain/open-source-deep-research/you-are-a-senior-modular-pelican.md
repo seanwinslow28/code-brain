@@ -217,7 +217,7 @@ deep_research = { model = "qwen3-14b", machine = "macbook_pro" }
   2. Pick **3 representative real queries** from the prior week's actual research-queue history (not synthetic — real questions you'd ask anyway). Mix one factual, one synthesis-heavy, one analytical.
   3. For each query, run the same LDR pipeline through all three models with identical settings (`iterations=2`, `max_results_per_query=5`, same SearXNG state). Capture per-run: wall-clock time, tok/sec, citation count, citation 404 rate, output length.
   4. Read the three reports for each query side-by-side. Score each on: factual accuracy (cross-check 2 claims), citation relevance, synthesis coherence, format compliance.
-  5. Document results in `vault/20_projects/prj-superuser-pack/open-source-deep-research/model-ab-results-YYYY-MM-DD.md`.
+  5. Document results in `vault/20_projects/prj-code-brain/open-source-deep-research/model-ab-results-YYYY-MM-DD.md`.
 - **Decision matrix:**
   | Outcome | Action |
   |---|---|

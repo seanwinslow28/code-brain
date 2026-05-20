@@ -9,7 +9,7 @@ ai-context: "Designed via prompt-engineering skill: clear role, XML-structured c
 
 # Continuation Prompt — Cowork Strategic Copilot for `sw-mcp-intent-engineering`
 
-> **How to use.** Open a fresh Cowork session with folder access to BOTH `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/` and `/Users/seanwinslow/Code-Brain/sw-mcp-intent-engineering/`. Paste everything below the horizontal rule as your first message.
+> **How to use.** Open a fresh Cowork session with folder access to BOTH `/Users/seanwinslow/Code-Brain/code-brain/` and `/Users/seanwinslow/Code-Brain/sw-mcp-intent-engineering/`. Paste everything below the horizontal rule as your first message.
 
 ---
 
@@ -32,27 +32,27 @@ You do NOT write code in the MCP server repo. Claude Code does that. You CAN rea
 Read these files in this order before your first response. Use the Read tool. Do not skim.
 
 1. **The binding scope lock (READ FIRST):**
-   `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/v0-scope-intent-engineering-mcp.md`
+   `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/v0-scope-intent-engineering-mcp.md`
    §2 = pinned tech stack. §4–§6 = the three tool contracts (locked schemas). §8 = 19-item ship gate. §9 = build discipline. §10 = locked identity decisions.
 
 2. **The strategic context:**
-   `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md`
+   `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md`
    Why this build matters. Tier-A truths in the Self-Review section. Decision log.
 
 3. **The build prompt (Claude Code's operating contract):**
-   `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/claude-code-build-prompt.md`
+   `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/claude-code-build-prompt.md`
    The phased gate structure Claude Code is following. Phase 1 done. Phases 2–4 ahead.
 
 4. **Source of truth for the tool logic:**
-   `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/.claude/skills/intent-engineering/SKILL.md`
+   `/Users/seanwinslow/Code-Brain/code-brain/.claude/skills/intent-engineering/SKILL.md`
    The 40-item validation checklist, 5 fatal anti-patterns, 4 retrofit levels, 4 autonomy levels, 9-section template. When verifying Claude Code's tool implementations, this is the substance check.
 
 5. **The new repo's current state:**
    `/Users/seanwinslow/Code-Brain/sw-mcp-intent-engineering/` — read top-level structure (`ls`-equivalent), `package.json`, `src/index.ts`, and `docs/v0-scope.md`. This is where Phase 1 already committed. You can read freely; do NOT write here.
 
 Optional but recommended for technical-detail questions:
-6. `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/research/2026-05-07-chatgpt-mcp-server-production-patterns.md`
-7. `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/research/2026-05-07-mcp-server-production-patterns.md`
+6. `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-07-chatgpt-mcp-server-production-patterns.md`
+7. `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-07-mcp-server-production-patterns.md`
 </required_reading>
 
 <current_state>
@@ -112,7 +112,7 @@ Every phase Claude Code completes is gated. Before Sean approves any phase, run 
 - Loom plays end-to-end — 90 seconds max, 4 demo moments (setup, audit, scaffold, retrofit).
 
 **Phase 4 specific:**
-- 117-skill retrofit CSV at `examples/superuser-pack-retrofit-assessment.csv` with no Block-IP rows.
+- 117-skill retrofit CSV at `examples/code-brain-retrofit-assessment.csv` with no Block-IP rows.
 - `server.json` uses `com.seanwinslow/intent-engineering` namespace.
 - DNS TXT record verified before `mcp-publisher publish`.
 - Sean executes `npm publish` and `mcp-publisher publish` himself (Tier-A: agents draft, Sean sends).

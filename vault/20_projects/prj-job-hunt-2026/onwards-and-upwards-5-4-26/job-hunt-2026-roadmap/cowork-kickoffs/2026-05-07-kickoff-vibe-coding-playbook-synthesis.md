@@ -8,7 +8,7 @@ ai-context: "Cowork session kickoff prompt — synthesizes Perplexity Pro + Gemi
 
 # Cowork Kickoff — Vibe-Coding Interview Playbook Synthesis + Build
 
-> Open a fresh Claude Cowork session in the `claude-code-superuser-pack/` repo. Make sure the two research output files are saved somewhere readable (vault, outputs folder, or attached). Then copy everything below the `--- PROMPT START ---` line into the session.
+> Open a fresh Claude Cowork session in the `code-brain/` repo. Make sure the two research output files are saved somewhere readable (vault, outputs folder, or attached). Then copy everything below the `--- PROMPT START ---` line into the session.
 
 > The prompt deliberately includes check-in pauses after Phase 1 and Phase 3 — don't let it run all four phases without your review. The receiving Claude is instructed to stop and surface findings.
 

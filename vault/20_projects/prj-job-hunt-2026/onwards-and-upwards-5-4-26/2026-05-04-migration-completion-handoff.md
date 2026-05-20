@@ -92,7 +92,7 @@ These are personal logistics, not repo work. Driven by `2026-05-04-onwards-and-u
 - ACA Marketplace vs COBRA decision (deadline: ~2026-07-03 SEP — but lock by 5/18)
 - Runway math at `vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/runway-math.md` (file doesn't exist yet)
 - Block offboarding logistics (data extraction, equipment return). **Laptop factory reset** (severance Section 8) is a parallel obligation tied to the May 5 separation date — confirm complete or in progress.
-- Three Block-named skills (`the-block-jira-ticket-writer`, `etf-page-creator`, `biweekly-jira-update`) **must be scrubbed from the public Superuser Pack repo** before any LinkedIn / public push (CIIA Section 2.3 assigns them as Company Inventions). Either remove from public tree or keep the repo private until cleanup is done. Action gates the Phase 4 / Phase 3 public-announcement work.
+- Three Block-named skills (`the-block-jira-ticket-writer`, `etf-page-creator`, `biweekly-jira-update`) **must be scrubbed from the public Code-Brain repo** before any LinkedIn / public push (CIIA Section 2.3 assigns them as Company Inventions). Either remove from public tree or keep the repo private until cleanup is done. Action gates the Phase 4 / Phase 3 public-announcement work.
 - Confirm with Leanne in writing that no equity grants (RSUs, options, ESPP) exist beyond the 401(k) — severance Section 2(c) extinguishes any stock-related claims.
 
 ### 3. Master plan Phase 4 — Track-C MCP cold-start (target kickoff this week)

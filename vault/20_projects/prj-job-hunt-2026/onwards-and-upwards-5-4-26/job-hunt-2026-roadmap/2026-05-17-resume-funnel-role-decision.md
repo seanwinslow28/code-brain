@@ -25,7 +25,7 @@ The resume is not a standalone artifact. It's one of four pieces of a single pri
 
 1. **AI PM Portfolio** — `seanwinslow.com/transactions` (going live Mon 2026-05-19 per unified roadmap Task 1 Step 3)
 2. **Proof of building in public** — Substack post 1 ships Fri 2026-05-22 (Sedaris voice); LinkedIn syndication Wed cadence
-3. **GitHub repo presence** — Superuser Pack (118 skills / 13 subagents / 14 hooks / 17 SDK agents, Karpathy framing in README L3) + `sw-mcp-intent-engineering` (live on npm + MCP registry as of 2026-05-12)
+3. **GitHub repo presence** — Code-Brain (118 skills / 13 subagents / 14 hooks / 17 SDK agents, Karpathy framing in README L3) + `sw-mcp-intent-engineering` (live on npm + MCP registry as of 2026-05-12)
 4. **Resume itself** — showcase of professional work + personal passion projects + skills
 
 **The package coherence is the differentiator.** The other three artifacts prove the resume isn't lying. Without all four, no single piece carries enough weight to clear the 2026 AI PM bar.

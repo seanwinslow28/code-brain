@@ -18,7 +18,7 @@ Technical Product Manager who reads code, writes specs engineers respect, and bu
 - Shipped 2026-05-12, 13 days ahead of plan. Demoable in Claude Desktop with a single config change.
 - Built on an evals-first methodology: the `audit_intent_spec` tool *is* the eval — it scores a spec against the framework's dimensions and tells the author what's missing before the spec ships to a coding agent. Operationalizes the "evals are the new PRDs" thesis as a portable MCP server.
 
-### Claude Code Superuser Pack — Open-Source Toolkit
+### Code-Brain — Open-Source Toolkit
 
 - Open-source agentic engineering toolkit for Claude Code: 118 skills, 13 subagents, 14 hooks, 17 autonomous Claude Agent SDK agents (8 in production on local-first launchd schedules).
 - Used in production for daily PM workflows, vault automation, and content generation across crypto, creative, and personal-systems domains.

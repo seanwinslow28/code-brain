@@ -4,12 +4,12 @@ domain:
   - claude-mastery
   - life-systems
 status: in-progress
-context: superuser-pack
+context: code-brain
 created: 2026-05-03
 source: claude-code-plan-mode
 references:
-  - vault/20_projects/prj-superuser-pack/prj-knowledge-loop-consumer.md (§Phase E)
-  - vault/20_projects/prj-superuser-pack/open-source-deep-research/macmini-migration-plan-2026-05-02.md
+  - vault/20_projects/prj-code-brain/prj-knowledge-loop-consumer.md (§Phase E)
+  - vault/20_projects/prj-code-brain/open-source-deep-research/macmini-migration-plan-2026-05-02.md
   - vault/40_knowledge/references/ref-gemini-deep-research-api.md
   - vault/40_knowledge/references/ref-deep-research-max-gemini.md
   - vault/40_knowledge/references/ref-google-interactions-api.md
@@ -301,7 +301,7 @@ Each phase: **Goal · Steps · Test · Time · Rollback.**
   6. **Night 3:** Topic 3 (LDR) auto-fires.
   7. **Night 4:** Topic 5 (LDR) auto-fires.
   8. **Night 5:** Topic 7 (LDR) auto-fires.
-  9. After all 7 land, produce a 1-page Phase E pre-read at `vault/20_projects/prj-superuser-pack/phase-e-research-prereads-2026-MM-DD.md` linking to all seven reports. Group by question shape: §"Tooling landscape" (1a + 1b), §"Anthropic API + OS-model tool-calling" (2 + 3), §"Cross-service auth matrix" (4), §"Gateway pattern" (5), §"Cost-benefit external lens" (7). **This is the artifact Sean reads on or after 2026-05-15** when revisiting Phase E scoping.
+  9. After all 7 land, produce a 1-page Phase E pre-read at `vault/20_projects/prj-code-brain/phase-e-research-prereads-2026-MM-DD.md` linking to all seven reports. Group by question shape: §"Tooling landscape" (1a + 1b), §"Anthropic API + OS-model tool-calling" (2 + 3), §"Cross-service auth matrix" (4), §"Gateway pattern" (5), §"Cost-benefit external lens" (7). **This is the artifact Sean reads on or after 2026-05-15** when revisiting Phase E scoping.
 - **Test:**
   - `find vault/20_projects/research -newer vault/00_inbox/research-queue.md -name '2026-*.md'` returns 7 reports (5 LDR + 2 Gemini).
   - Both queues' `## Pending` sections empty; `## Done` sections each have appropriate entries with timestamps + wikilinks.
@@ -586,7 +586,7 @@ cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode mo
 # Expected: Vault Health section now includes "gemini-spend-{YYYY-MM}: $X.XX of $20.00 cap".
 
 # 12. Phase E pre-read assembly
-#   File exists at vault/20_projects/prj-superuser-pack/phase-e-research-prereads-2026-MM-DD.md.
+#   File exists at vault/20_projects/prj-code-brain/phase-e-research-prereads-2026-MM-DD.md.
 #   Wikilinks resolve to all 6 expected reports + the topic-6 skip note.
 #   ls vault/20_projects/research/2026-* | wc -l shows ≥ 6 new files created post-Phase-4.
 

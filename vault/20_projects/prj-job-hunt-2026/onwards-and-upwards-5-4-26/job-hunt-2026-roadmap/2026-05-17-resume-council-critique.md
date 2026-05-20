@@ -45,7 +45,7 @@ Sean Winslow is a Product Manager pivoting to AI PM roles after a **May 4, 2026 
 
 ## The resume's role in the funnel (Sean's locked decision, 2026-05-17)
 
-The resume is a **secondary artifact** inside a 4-piece pristine package: (1) AI PM Portfolio at `seanwinslow.com/transactions`, (2) build-in-public proof (Substack post 1 ships 2026-05-22, LinkedIn syndication Wednesdays), (3) GitHub repo presence (Superuser Pack + `sw-mcp-intent-engineering`), (4) the resume itself.
+The resume is a **secondary artifact** inside a 4-piece pristine package: (1) AI PM Portfolio at `seanwinslow.com/transactions`, (2) build-in-public proof (Substack post 1 ships 2026-05-22, LinkedIn syndication Wednesdays), (3) GitHub repo presence (Code-Brain + `sw-mcp-intent-engineering`), (4) the resume itself.
 
 The package coherence is the differentiator. The other three artifacts prove the resume isn't lying. The resume's job: **showcase prior professional work + personal passion projects + skills**, with ATS keywords earned not stuffed, and `seanwinslow.com/transactions` URL non-negotiable on the doc.
 
@@ -67,7 +67,7 @@ A prior premium-profile council pass on 2026-05-16 reached this unanimous verdic
 - Phase 6 Knowledge Loop 4Q `EXPLANATION.md` at `agents-sdk/agents/knowledge_loop/EXPLANATION.md`. SessionEnd flush → nightly synthesizer → weekly lint → SessionStart re-inject.
 
 **SHIPPED + PUBLIC:**
-- Claude Code Superuser Pack v3.37.0 — 118 skills, 13 subagents, 14 hooks, 17 SDK agents (8 active by default + 2 opt-in + 1 manual-trigger). Karpathy "agentic engineering practitioner's toolkit" framing in README line 3.
+- Code-Brain v3.37.0 — 118 skills, 13 subagents, 14 hooks, 17 SDK agents (8 active by default + 2 opt-in + 1 manual-trigger). Karpathy "agentic engineering practitioner's toolkit" framing in README line 3.
 
 **CODE-COMPLETE, B7-GATED (do NOT recommend as resume bullets yet — they ship after the 5-night live-synth gate closes):**
 - Vault Synthesizer Eval Suite — 10-case binary eval, 1/10 baseline → 7/10 post-fix. Lives at `evals/vault-synthesizer/`.
@@ -193,7 +193,7 @@ The candidate pre-answered all 8 questions before invoking the council. Treat th
 
 ## Summary
 
-AI Product Manager and agentic-engineering practitioner with 11+ years across crypto media, SaaS, and digital asset management. Most recently at The Block, shipped 3 production Claude Skills, a Polymarket B2B revenue integration, and a 10-week Confluence overhaul plan. Builds open-source agentic-engineering tooling — the 118-skill Claude Code Superuser Pack and a 17-agent autonomous SDK fleet.
+AI Product Manager and agentic-engineering practitioner with 11+ years across crypto media, SaaS, and digital asset management. Most recently at The Block, shipped 3 production Claude Skills, a Polymarket B2B revenue integration, and a 10-week Confluence overhaul plan. Builds open-source agentic-engineering tooling — the 118-skill Code-Brain and a 17-agent autonomous SDK fleet.
 
 ---
 
@@ -245,7 +245,7 @@ AI Product Manager and agentic-engineering practitioner with 11+ years across cr
 
 ## Selected Projects
 
-### Claude Code Superuser Pack — Open-Source Toolkit
+### Code-Brain — Open-Source Toolkit
 
 - Open-source agentic engineering toolkit for Claude Code: 118 skills, 13 subagents, 14 hooks, 17 autonomous Claude Agent SDK agents (8 active on local-first launchd schedules).
 - Used in production for daily PM workflows, vault automation, and content generation across crypto, creative, and personal-systems domains.
@@ -302,7 +302,7 @@ AI Product Manager and agentic-engineering practitioner with 11+ years across cr
 
 ## Summary
 
-AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, the `intent-engineering` MCP server, and autonomous agent fleets. Most recently at The Block, delivered 3 Claude Skills, co-authored the Block Pro 2.0 product audit and competitive analysis, and authored the x402 / A2A / MCP integration strategy memo positioning Block Pro for the agent economy. Maintains the open-source 118-skill Claude Code Superuser Pack and a 17-agent autonomous SDK fleet.
+AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, the `intent-engineering` MCP server, and autonomous agent fleets. Most recently at The Block, delivered 3 Claude Skills, co-authored the Block Pro 2.0 product audit and competitive analysis, and authored the x402 / A2A / MCP integration strategy memo positioning Block Pro for the agent economy. Maintains the open-source 118-skill Code-Brain and a 17-agent autonomous SDK fleet.
 
 ---
 
@@ -354,7 +354,7 @@ AI Product Manager and agentic-engineering practitioner. Ships production Claude
 
 ## Selected Projects, Education, and Skills
 
-*(Identical to MASTER above — Superuser Pack, intent-engineering MCP, Agentic Financial-Research Fleet, 2D Animation Pipeline, College of Staten Island, and the 4 Skills rows.)*
+*(Identical to MASTER above — Code-Brain, intent-engineering MCP, Agentic Financial-Research Fleet, 2D Animation Pipeline, College of Staten Island, and the 4 Skills rows.)*
 ```
 
 ---
@@ -401,7 +401,7 @@ The disagreement to surface: if the candidate is sending ≥30% of applications 
 
 **Proposed Summary (AI PM variant, rewrite):**
 
-> AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, MCP servers, and autonomous agent fleets evaluated against golden-set evals. At The Block, shipped 3 production Claude Skills against P&E OKR delivery, authored the x402 / MCP integration strategy positioning Block Pro for the agent economy, and co-authored the Pro 2.0 product audit with an 11-risk structured pre-mortem. Maintains the open-source 118-skill Claude Code Superuser Pack and a 17-agent Claude Agent SDK fleet; published `@swins/intent-engineering-mcp` to npm and the MCP registry.
+> AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, MCP servers, and autonomous agent fleets evaluated against golden-set evals. At The Block, shipped 3 production Claude Skills against P&E OKR delivery, authored the x402 / MCP integration strategy positioning Block Pro for the agent economy, and co-authored the Pro 2.0 product audit with an 11-risk structured pre-mortem. Maintains the open-source 118-skill Code-Brain and a 17-agent Claude Agent SDK fleet; published `@swins/intent-engineering-mcp` to npm and the MCP registry.
 
 Why this works: opens with "ships" (the cross-cutting Tier-1 verb), names MCP and evals (Hamel/Aakash bar), names specific shipped artifacts (Karpathy thesis), preserves the 11+ years implicitly via The Block + the NYL section below. Reserve the layoff context for cover letters and screens — "the team was cut, not the role" is a 2-sentence verbal answer, not a resume line.
 
@@ -476,7 +476,7 @@ Path A (soften everything) abandons the metrics that *do* survive scrutiny. Path
 
 **Specific bullet additions (CIIA-clean, defensible from shipped evidence):**
 
-**Addition 1 — Add to Superuser Pack project bullet:**
+**Addition 1 — Add to Code-Brain project bullet:**
 > Architecture writeups for two production subsystems: Phase D Typed Reasoning Edges (SQLite-backed cross-domain contradiction detection — a lightweight judge layer surfacing factual conflicts across the vault) and Phase 6 Knowledge Loop (SessionEnd flush → nightly synth → weekly lint → SessionStart re-inject, with eval-gated promotion).
 
 The italicized adds threading without overclaiming. "Judge layer" + "eval-gated promotion" are the magic words for Anthropic/OpenAI/Google readers.
@@ -512,7 +512,7 @@ This is the keyword-density move that's *earned* — the candidate has the Vault
 | **"fine-tune" or "fine-tuned"** | Cross-cutting | NOT defensible from shipped evidence — DO NOT ADD | Skip |
 | **"agent orchestration"** | Sierra | 17-agent SDK fleet, financial-research fleet router | Rewrite Financial-Research Fleet bullet 1: *"Multi-agent orchestration: queue file → router → 3 retrieval agents..."* |
 | **"conversational AI"** | Sierra | Not defensible — skip | Skip |
-| **"AI agent workflows... into production"** | Liberate | 17-agent fleet running on launchd schedules, Claude Skills in production at Block | Rewrite Superuser Pack bullet 1: *"...17 autonomous Claude Agent SDK agents (8 in production on local-first launchd schedules)."* — change "active" → "in production" |
+| **"AI agent workflows... into production"** | Liberate | 17-agent fleet running on launchd schedules, Claude Skills in production at Block | Rewrite Code-Brain bullet 1: *"...17 autonomous Claude Agent SDK agents (8 in production on local-first launchd schedules)."* — change "active" → "in production" |
 | **"hands-on experience building... prototypes in production"** | Scale | Already covered if above changes land | — |
 | **"Python, SQL"** | Scale | Phase D is SQLite-backed; agents touch Python | Add to Skills row Tools: *"Python, SQL/SQLite, TypeScript"* — DEFENSIBLE because Phase D EXPLANATION.md is on GitHub with the SQL schema visible |
 | **"production" (as verb-modifier)** | All Tier-1 | Already present; double-down by changing "active" → "production" everywhere defensible | Throughout |
@@ -530,13 +530,13 @@ This is the keyword-density move that's *earned* — the candidate has the Vault
 ## The Numbered Punch List — Ordered by Impact on Tier-1 Phone Screen
 
 1. **Make the AI PM variant the new master.** Retire the role-agnostic master. (Q1)
-2. **Add "evals" language in 3 places** — intent-engineering project (Hamel citation), Superuser Pack project ("judge layer," "eval-gated promotion"), and Skills row. This is the single biggest gap. (Q7)
+2. **Add "evals" language in 3 places** — intent-engineering project (Hamel citation), Code-Brain project ("judge layer," "eval-gated promotion"), and Skills row. This is the single biggest gap. (Q7)
 3. **Rewrite the Summary** to lead with "Ships... evaluated against golden-set evals" and name MCP + Skills + SDK fleet explicitly. (Q2)
 4. **Add "human-in-the-loop review gate before publish"** to the 3-Claude-Skills bullet. Unlocks Anthropic/Microsoft/Google safety bar. (Q7)
 5. **Promote the pre-mortem to a standalone Leadership bullet**, top of section, above x402. (Q4)
 6. **Compress NYL Leadership 3 bullets → 1 bullet** with the "precursor work" bridge framing. (Q3)
 7. **CUT the NYL "50% UX friction" bullet.** Weakest of the three NYL metrics; reads as analyst not PM. (Q5)
-8. **Inject "0-to-1," "end-to-end," "agent orchestration," "in production"** as verb upgrades on existing bullets (Polymarket, AdOps, Financial-Research, Superuser Pack). All earned from existing evidence. (Q8)
+8. **Inject "0-to-1," "end-to-end," "agent orchestration," "in production"** as verb upgrades on existing bullets (Polymarket, AdOps, Financial-Research, Code-Brain). All earned from existing evidence. (Q8)
 9. **Add Python + SQL/SQLite to Skills row Tools** — defensible from the GitHub Phase D writeup. (Q8)
 10. **Drill the 7-metric set cold** before May 19. Methodology + baseline + window for each. (Q5, Path B)
 11. **Do not mention the layoff in Summary.** Reserve for cover letter. (Q2)
@@ -557,7 +557,7 @@ Brutal as requested. The resume is 80% there. The 20% is the eval language and t
 
 Use **AI PM as the master** for Tier-1 applications. The current “master” reads like a strong product-ops / creative-tech resume with AI projects appended. The AI PM variant is directionally right, but it still has three problems that will cost screens:
 
-1. **The best AI evidence is too low on the page.** The shipped MCP server and Superuser Pack should not wait until “Selected Projects” after two experience sections.
+1. **The best AI evidence is too low on the page.** The shipped MCP server and Code-Brain should not wait until “Selected Projects” after two experience sections.
 2. **Safety / eval language is too thin.** For Anthropic / OpenAI / Google-style bars, “agentic” without authority boundaries, review gates, eval criteria, or traceability reads immature.
 3. **Several bullets overreach or are future-facing.** The 2D animation pipeline is planned. The financial-research fleet has wording that invites technical grilling. The x402 / A2A / MCP strategy bullet sounds unshipped and potentially too strategic to defend as impact.
 
@@ -598,7 +598,7 @@ That URL is load-bearing. It should be visible in the header.
 ### REWRITE Summary
 
 ```markdown
-AI Product Manager and agentic-engineering practitioner with 11+ years turning ambiguous creative, data, and operational workflows into shipped tools. At The Block, shipped 3 production Claude Skills, an AdOps RevOps automation pipeline, and the Polymarket × Campus sponsored-microcourse revenue vertical. Independently shipped a DNS-verified TypeScript MCP server and maintain the open-source 118-skill Claude Code Superuser Pack. Strength: converting messy workflows into scoped agentic systems with human review, authority boundaries, and measurable operational lift.
+AI Product Manager and agentic-engineering practitioner with 11+ years turning ambiguous creative, data, and operational workflows into shipped tools. At The Block, shipped 3 production Claude Skills, an AdOps RevOps automation pipeline, and the Polymarket × Campus sponsored-microcourse revenue vertical. Independently shipped a DNS-verified TypeScript MCP server and maintain the open-source 118-skill Code-Brain. Strength: converting messy workflows into scoped agentic systems with human review, authority boundaries, and measurable operational lift.
 ```
 
 Why this is better:
@@ -623,7 +623,7 @@ Add this section after Summary and before Work Experience.
 ## Selected AI Artifacts
 
 - Shipped `intent-engineering` MCP server v0: 3-tool TypeScript server (`audit_intent_spec`, `generate_intent_spec_scaffold`, `assess_retrofit_level`) published to npm and the MCP registry under a DNS-verified namespace; demoable in Claude Desktop with one config change.
-- Maintain Claude Code Superuser Pack v3.37.0: open-source agentic-engineering toolkit with 118 skills, 13 subagents, 14 hooks, and 17 Claude Agent SDK agents for local-first PM, research, and content workflows.
+- Maintain Code-Brain v3.37.0: open-source agentic-engineering toolkit with 118 skills, 13 subagents, 14 hooks, and 17 Claude Agent SDK agents for local-first PM, research, and content workflows.
 - Published technical writeups for two production subsystems: SQLite-backed Typed Reasoning Edges for cross-domain contradiction detection across 6 relation types, and a Knowledge Loop that flushes session memory, synthesizes nightly, lints weekly, and re-injects context at session start.
 ```
 
@@ -839,7 +839,7 @@ Add:
 
 This is a strong Anthropic/OpenAI signal because it says: do not just build agents; constrain them.
 
-#### Superuser Pack
+#### Code-Brain
 
 Add:
 
@@ -1093,14 +1093,14 @@ Use softened version above.
 
 ## Selected Projects
 
-### Superuser Pack
+### Code-Brain
 
 **Status:** KEEP / REWRITE.
 
 Current is strong but “architecture” language risks STOP-DOING. Replace “architecture” with “technical writeups” or “implementation writeups.”
 
 ```markdown
-- Maintain open-source Claude Code Superuser Pack v3.37.0: 118 skills, 13 subagents, 14 hooks, and 17 Claude Agent SDK agents for local-first PM, research, and content workflows.
+- Maintain open-source Code-Brain v3.37.0: 118 skills, 13 subagents, 14 hooks, and 17 Claude Agent SDK agents for local-first PM, research, and content workflows.
 - Published technical writeups for two shipped subsystems: SQLite-backed Typed Reasoning Edges for contradiction detection across 6 relation types, and Knowledge Loop for session memory flush, nightly synthesis, weekly linting, and context re-injection.
 ```
 
@@ -1157,7 +1157,7 @@ No inline Loom. No Bolt/v0 URL. Do not reference forthcoming demos.
 
 The resume should not say “forthcoming.” That makes the package feel unfinished.
 
-Current “Cursor” in Skills + GitHub/header/site is sufficient for Round 1 **if** the resume surfaces the shipped MCP server and Superuser Pack above the fold.
+Current “Cursor” in Skills + GitHub/header/site is sufficient for Round 1 **if** the resume surfaces the shipped MCP server and Code-Brain above the fold.
 
 But the Skills section should be more explicit about build tools and coding comfort without overclaiming senior engineering.
 
@@ -1181,7 +1181,7 @@ Add a separate row:
 
 Current safety signal is **insufficient**.
 
-You have “human owns judgment” in the Superuser Pack bullet, but that is more philosophy than operational safety. For frontier AI PM roles, you need concrete control surfaces:
+You have “human owns judgment” in the Code-Brain bullet, but that is more philosophy than operational safety. For frontier AI PM roles, you need concrete control surfaces:
 
 - Authority boundaries.
 - Human review.
@@ -1204,7 +1204,7 @@ scoped each workflow for human review before publishing, sending, or ticket crea
 audits specs for missing goals, constraints, authority boundaries, acceptance criteria, and review steps
 ```
 
-### Superuser Pack
+### Code-Brain
 
 ```markdown
 local-first workflows with explicit human-judgment gates for publishing, external actions, and final decisions
@@ -1240,7 +1240,7 @@ Present. Strong. Move higher.
 
 ### “Agent orchestration”
 
-Present in Skills. Also supported by Superuser Pack and financial-research fleet.
+Present in Skills. Also supported by Code-Brain and financial-research fleet.
 
 ### “Technical artifacts for customers like MCP servers, sub-agents, and agent skills”
 
@@ -1409,7 +1409,7 @@ Yes, this is nontraditional. For an AI PM pivot, it is better. The resume’s jo
 - Polymarket bullet with sanitized reporting language.
 - Block Pro bullet split into audit + standalone pre-mortem.
 - x402 / A2A / MCP memo softened as internal strategy.
-- Superuser Pack bullets with technical writeups and human-judgment gates.
+- Code-Brain bullets with technical writeups and human-judgment gates.
 - Financial-research fleet without “fine-tuned.”
 
 ---
@@ -1420,7 +1420,7 @@ The resume is close, but right now it undersells the shipped AI artifacts and ov
 
 1. Shipped MCP server.
 2. Shipped Claude Skills.
-3. Public Superuser Pack.
+3. Public Code-Brain.
 4. Production/product metrics.
 5. Human review / authority boundaries.
 6. SQL / TypeScript / local-LLM / RAG fluency.
@@ -1478,7 +1478,7 @@ Do **not** preemptively mention the cost-cutting layoff in the summary. AI PMs a
 
 ### 7. [Q6] Vibe-Coding Evidence (Honor the Lock)
 The candidate is at Confidence 5 on refusing inline Loom/Bolt URLs. I agree with this lock. Links break ATS parsers, look cluttered, and a resume is a log of *shipped* reality, not a roadmap. 
-*   *Action:* Rely entirely on `seanwinslow.com` in the header. Do **not** mention the 14-agent fleet Loom or Token Cost Calculator as "forthcoming." In interview terms, if it’s not live by the time they click, it’s vaporware. Keep them off the resume until Week 3 when they deploy. The current open-source artifacts (Superuser Pack + MCP Server) already clear the Round 1 technical credibility bar. 
+*   *Action:* Rely entirely on `seanwinslow.com` in the header. Do **not** mention the 14-agent fleet Loom or Token Cost Calculator as "forthcoming." In interview terms, if it’s not live by the time they click, it’s vaporware. Keep them off the resume until Week 3 when they deploy. The current open-source artifacts (Code-Brain + MCP Server) already clear the Round 1 technical credibility bar. 
 
 ### Chairman Summary Note from this Panelist:
 I vote strictly in favor of the candidate's instincts on Q1, Q5 (Path B), and Q6. My proposed text for Q3, Q4, Q7, and Q8 directly maps existing, defensible evidence to the Tier-1 JD keywords without triggering CIIA traps or violating his technical self-coding boundary. Ship it by Monday.
@@ -1489,7 +1489,7 @@ I vote strictly in favor of the candidate's instincts on Q1, Q5 (Path B), and Q6
 
 **Q2:** Do not mention “post-layoff cost-cutting, not performance” in the Summary. It injects unnecessary risk and belongs in cover letters or late-stage discussion. Proposed Summary (for AI-PM master):
 
-> AI Product Manager and agentic-engineering practitioner who ships production MCP servers, Claude Skills, and autonomous agent fleets. Most recently at The Block, delivered 3 production Claude Skills and Block Pro 2.0 scoping while maintaining the open-source 118-skill Claude Code Superuser Pack and intent-engineering MCP server. Former technical founder with 10+ years building AI-native workflows in digital asset management and media production.
+> AI Product Manager and agentic-engineering practitioner who ships production MCP servers, Claude Skills, and autonomous agent fleets. Most recently at The Block, delivered 3 production Claude Skills and Block Pro 2.0 scoping while maintaining the open-source 118-skill Code-Brain and intent-engineering MCP server. Former technical founder with 10+ years building AI-native workflows in digital asset management and media production.
 
 **Q3:** Replace the generic NYL Leadership Experience bullets. Option (c). New single bullet that modernizes without fabricating metrics:
 
@@ -1506,12 +1506,12 @@ I vote strictly in favor of the candidate's instincts on Q1, Q5 (Path B), and Q6
 - **LANDMINE / needs cut or heavy soften:** “Boosted asset discoverability by 60% using prompt-engineered metadata” and “Increased media asset productivity by 40%” and “Reduced UX friction… by 50%” — candidate cannot defend exact numbers in interview. Replace with qualitative + process signal (see Q3 rewrite above).
 - All Selected Projects bullets currently survive because they are framed as shipped artifacts with verifiable links, not quantified performance claims.
 
-**Q6:** Cursor in Skills + GitHub link in header is sufficient for Round 1 given candidate’s locked decision (no inline Looms). Do not reference “forthcoming” fleet Loom or Token Cost Calculator. Mention of the shipped MCP server and Superuser Pack already signals vibe-coding fluency.
+**Q6:** Cursor in Skills + GitHub link in header is sufficient for Round 1 given candidate’s locked decision (no inline Looms). Do not reference “forthcoming” fleet Loom or Token Cost Calculator. Mention of the shipped MCP server and Code-Brain already signals vibe-coding fluency.
 
 **Q7:** Safety/responsible-AI thread is currently absent. Minimum for Anthropic/OpenAI/Google: at least one explicit safety/governance/alignment reference per major AI artifact. Add to existing bullets (do not create separate section):
 
 - After intent-engineering MCP bullet: “…with built-in `audit_intent_spec` tool enforcing safety, legality, and brand constraints.”
-- After Superuser Pack: “…with embedded review hooks and LLM-as-judge patterns for output safety.”
+- After Code-Brain: “…with embedded review hooks and LLM-as-judge patterns for output safety.”
 - After Knowledge Loop EXPLANATION.md mention: “…including contradiction detection for factual accuracy and hallucination mitigation.”
 - For Anthropic specifically, the MCP + sub-agent + skills framing already maps to their “technical artifacts for customers” language once safety is threaded.
 
@@ -1535,11 +1535,11 @@ I vote strictly in favor of the candidate's instincts on Q1, Q5 (Path B), and Q6
 
 4. **REWRITE** all NYL bullets and the two 40%/60%/50% claims per Q5 Path A. Use the single bullet in Q3. Mark original productivity bullets as **CUT**—they are landmines for metric grilling.
 
-5. **ADD safety threading** (exact phrases from Q7) to the three Selected Projects bullets that mention MCP, Superuser Pack, and Knowledge Loop/Edges. This is the minimum to clear Anthropic/OpenAI/Google bars and directly supports Sierra “agent orchestration” and Liberate “AI agent workflows… into production.”
+5. **ADD safety threading** (exact phrases from Q7) to the three Selected Projects bullets that mention MCP, Code-Brain, and Knowledge Loop/Edges. This is the minimum to clear Anthropic/OpenAI/Google bars and directly supports Sierra “agent orchestration” and Liberate “AI agent workflows… into production.”
 
 6. **REWRITE** Selected Projects bullets to incorporate missing keywords where earned:
    - intent-engineering MCP: “…3-tool TypeScript MCP server for intent specification authoring and safety-constrained `audit_intent_spec` tool use…”
-   - Superuser Pack: “…118-skill open-source agentic engineering toolkit with 17 autonomous agents, embedded LLM-as-judge review hooks, and production safety patterns.”
+   - Code-Brain: “…118-skill open-source agentic engineering toolkit with 17 autonomous agents, embedded LLM-as-judge review hooks, and production safety patterns.”
    - Add to Knowledge Loop bullet: “…including SQLite-backed contradiction detection eval for hallucination mitigation and factual accuracy.”
 
 7. **Minor cuts:** Remove “former technical founder” if it cannot be defended with shipped company evidence. Tighten Summary by 15% if it exceeds 4 lines. Ensure every AI bullet contains at least one of: shipped, production, agent orchestration, tool use, evals, LLM-as-judge, MCP.
@@ -1600,7 +1600,7 @@ The council voted unanimously on the strategic call and split tactically on thre
 
 ### 1. Adopt AI PM variant as master + restructure section order
 
-Per **GPT-5.5's** strongest structural insight (endorsed implicitly by Opus): place a **"Selected AI Artifacts"** block immediately after Summary, before Work Experience. The shipped MCP server and Superuser Pack are currently buried below two experience sections — that's wrong for a 20-second recruiter scan.
+Per **GPT-5.5's** strongest structural insight (endorsed implicitly by Opus): place a **"Selected AI Artifacts"** block immediately after Summary, before Work Experience. The shipped MCP server and Code-Brain are currently buried below two experience sections — that's wrong for a 20-second recruiter scan.
 
 Proposed order:
 ```
@@ -1617,7 +1617,7 @@ Three panelists drafted versions. I'm picking a **hybrid of Opus's and GPT-5.5's
 
 **Recommended Summary:**
 
-> AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, MCP servers, and autonomous agent fleets with human-review gates and eval-driven acceptance criteria. At The Block, shipped 3 production Claude Skills against P&E OKR delivery, co-authored the Block Pro 2.0 product audit with an 11-risk structured pre-mortem, and authored the x402 / MCP integration strategy for the agent economy. Maintains the open-source 118-skill Claude Code Superuser Pack and a 17-agent Claude Agent SDK fleet; published `@swins/intent-engineering-mcp` to npm and the MCP registry.
+> AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, MCP servers, and autonomous agent fleets with human-review gates and eval-driven acceptance criteria. At The Block, shipped 3 production Claude Skills against P&E OKR delivery, co-authored the Block Pro 2.0 product audit with an 11-risk structured pre-mortem, and authored the x402 / MCP integration strategy for the agent economy. Maintains the open-source 118-skill Code-Brain and a 17-agent Claude Agent SDK fleet; published `@swins/intent-engineering-mcp` to npm and the MCP registry.
 
 ### 3. Thread safety / eval language into 4 bullets (Q7 — the biggest gap)
 
@@ -1629,7 +1629,7 @@ Per **Opus's** four specific additions (Gemini and Grok converged on the same lo
 **3b. intent-engineering MCP project — add evals framing (Opus's strongest move):**
 > Built on an evals-first methodology: the `audit_intent_spec` tool *is* the eval — it scores a spec against the framework's dimensions and tells the author what's missing before the spec ships to a coding agent. Operationalizes the "evals are the new PRDs" thesis as a portable MCP server.
 
-**3c. Superuser Pack — reframe Phase D as judge layer (Opus + Gemini converged):**
+**3c. Code-Brain — reframe Phase D as judge layer (Opus + Gemini converged):**
 > Architecture writeups for two production subsystems: Phase D Typed Reasoning Edges (SQLite-backed cross-domain contradiction detection — a lightweight judge layer surfacing factual conflicts across 6 relation types) and Phase 6 Knowledge Loop (SessionEnd flush → nightly synth → weekly lint → SessionStart re-inject, with eval-gated promotion).
 
 **3d. Skills row addition (Opus):**
@@ -1670,7 +1670,7 @@ Three competing drafts. Here's the disagreement:
 1. 3 Claude Skills + the OKR KR they deliver against
 2. AdOps: 11 Zapier flows, 10 intake forms, 7 manual handoffs eliminated
 3. Pre-mortem: 11 risks, 3 tiers, 2 surfaced dependencies (engineering capacity, renewal cliff)
-4. Superuser Pack: 118 skills / 13 subagents / 14 hooks / 17 SDK agents (8 active by default)
+4. Code-Brain: 118 skills / 13 subagents / 14 hooks / 17 SDK agents (8 active by default)
 5. MCP server: 3 tools, npm + MCP registry, DNS-verified, shipped 13 days ahead of plan
 6. NYL: 60% discoverability via prompt-engineered metadata — *with reproducible baseline + window*
 7. Pro 2.0: 9 platforms benchmarked + 3 stakeholder interviews
@@ -1684,7 +1684,7 @@ All four panelists converged on the same earnable keywords. Synthesizing **Opus'
 | **"0-to-1"** | Polymarket: *"Drove 0-to-1 product creation: authored the PRD (v1→v3) and shipped..."* |
 | **"end-to-end"** | AdOps: *"Built an end-to-end RevOps automation pipeline..."* |
 | **"agent orchestration"** | Financial Fleet: *"Multi-agent orchestration: queue file → router → 3 retrieval agents..."* |
-| **"in production"** | Superuser Pack: change "8 active by default" → "8 in production on local-first launchd schedules" |
+| **"in production"** | Code-Brain: change "8 active by default" → "8 in production on local-first launchd schedules" |
 | **"Python, SQL/SQLite"** | Add to Skills row Tools — defensible from Phase D GitHub writeup |
 
 **Keywords explicitly REJECTED by consensus (would feel forced):**

@@ -38,16 +38,16 @@ Claude Code must read these files (in this order) before producing a Phase-Mode 
 
 | Order | File | Why |
 |---|---|---|
-| 1 | [`CLAUDE.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/CLAUDE.md) | Non-negotiable rules, agent-fleet topology, Phase D + Phase 6 history, launchd PATH requirement |
+| 1 | [`CLAUDE.md`](/Users/seanwinslow/Code-Brain/code-brain/CLAUDE.md) | Non-negotiable rules, agent-fleet topology, Phase D + Phase 6 history, launchd PATH requirement |
 | 2 | [`2026-05-06-unified-roadmap.md`](2026-05-06-unified-roadmap.md) | Tier-A truths, 8-week sprint, Task 6 §I scope (eval fluency Week 5, publication Week 7 → now upgraded to Week 2 ship) |
 | 3 | [`2026-05-10-evals-error-analysis-real-logs.md`](2026-05-10-evals-error-analysis-real-logs.md) | The data foundation — six-mode failure taxonomy grounded in 17 days of real logs |
-| 4 | [`agents-sdk/agents/vault_synthesizer.py`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/vault_synthesizer.py) | Lines 320–420 (per-file loop, status promotion) and lines 580–660 (manifest write path). The synthesizer fix must touch both. |
-| 5 | [`agents-sdk/config.toml`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/config.toml) | Cost caps, paths, safety limits — any new agent must inherit these |
-| 6 | [`agents-sdk/schedules/install_schedules.sh`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/schedules/install_schedules.sh) | launchd plist installer pattern (the `PATH` env var fix is non-optional) |
-| 7 | [`.claude/skills/writing-voice-modes/SKILL.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/.claude/skills/writing-voice-modes/SKILL.md) | The 5 voice modes + signature moves the Substack-Drafter agent depends on |
-| 8 | [`vault/40_knowledge/references/ref-anthropic-demystifying-agent-evals.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/40_knowledge/references/ref-anthropic-demystifying-agent-evals.md) | Anthropic's 8-step playbook + 3 grader-type framework — vocabulary alignment |
-| 9 | [`vault/20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md) | Pre-drafted YAML cases (vs-001 → vs-015); vs-014 and vs-015 are the keeps |
-| 10 | [`vault/20_projects/research/2026-05-09-gemini-ai-eval-fluency-primer-and-reference-cases.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/research/2026-05-09-gemini-ai-eval-fluency-primer-and-reference-cases.md) | Pre-drafted YAML cases (vs-001 → vs-013); vs-012 and vs-013 are the keeps |
+| 4 | [`agents-sdk/agents/vault_synthesizer.py`](/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/agents/vault_synthesizer.py) | Lines 320–420 (per-file loop, status promotion) and lines 580–660 (manifest write path). The synthesizer fix must touch both. |
+| 5 | [`agents-sdk/config.toml`](/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/config.toml) | Cost caps, paths, safety limits — any new agent must inherit these |
+| 6 | [`agents-sdk/schedules/install_schedules.sh`](/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/schedules/install_schedules.sh) | launchd plist installer pattern (the `PATH` env var fix is non-optional) |
+| 7 | [`.claude/skills/writing-voice-modes/SKILL.md`](/Users/seanwinslow/Code-Brain/code-brain/.claude/skills/writing-voice-modes/SKILL.md) | The 5 voice modes + signature moves the Substack-Drafter agent depends on |
+| 8 | [`vault/40_knowledge/references/ref-anthropic-demystifying-agent-evals.md`](/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/ref-anthropic-demystifying-agent-evals.md) | Anthropic's 8-step playbook + 3 grader-type framework — vocabulary alignment |
+| 9 | [`vault/20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md`](/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md) | Pre-drafted YAML cases (vs-001 → vs-015); vs-014 and vs-015 are the keeps |
+| 10 | [`vault/20_projects/research/2026-05-09-gemini-ai-eval-fluency-primer-and-reference-cases.md`](/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-09-gemini-ai-eval-fluency-primer-and-reference-cases.md) | Pre-drafted YAML cases (vs-001 → vs-013); vs-012 and vs-013 are the keeps |
 
 After reading these, Claude Code should produce a phase-by-phase execution plan against the structure below. **Do not start work without producing the plan first.**
 
@@ -89,7 +89,7 @@ Record the actual values in `traces/phase-0.5-spike.md`. Only after the spike co
 7. `EXPLANATION.md` — 4Q comprehension artifact (the portfolio hook)
 8. `traces/coded-traces.md` — the open-coded log evidence (5–10 representative excerpts from the actual stderr + manifests)
 9. `references.md` — sources index + interview-vocabulary cheat-sheet
-10. Updates to: [`CHANGELOG.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/CHANGELOG.md), [`CLAUDE.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/CLAUDE.md), [`README.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/README.md) — per non-negotiable rule "Mandatory doc updates"
+10. Updates to: [`CHANGELOG.md`](/Users/seanwinslow/Code-Brain/code-brain/CHANGELOG.md), [`CLAUDE.md`](/Users/seanwinslow/Code-Brain/code-brain/CLAUDE.md), [`README.md`](/Users/seanwinslow/Code-Brain/code-brain/README.md) — per non-negotiable rule "Mandatory doc updates"
 
 ### Ships in Workstream B — Synthesizer Fix (between Friday Week 2 and Friday Week 3)
 
@@ -527,23 +527,23 @@ Goes into the unified roadmap as **Task 9 — Substack-Drafter Agent (post-emplo
 
 ## Source data (read-only)
 
-- [`vault/health/synth-manifest-2026-05-{02,03,06,07,08,09,10}.json`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/health/) — primary error-analysis evidence
-- [`vault/90_system/agent-logs/vault-synthesizer-stderr.log`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/vault-synthesizer-stderr.log) — Mode 5 evidence (Pushover credential failure)
-- [`vault/90_system/agent-logs/vault-synthesizer-2026-05-{08,09,10}.log`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/) — successful-status-but-empty evidence
-- [`vault/knowledge/index.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/knowledge/index.md) — empty-state confirmation
+- [`vault/health/synth-manifest-2026-05-{02,03,06,07,08,09,10}.json`](/Users/seanwinslow/Code-Brain/code-brain/vault/health/) — primary error-analysis evidence
+- [`vault/90_system/agent-logs/vault-synthesizer-stderr.log`](/Users/seanwinslow/Code-Brain/code-brain/vault/90_system/agent-logs/vault-synthesizer-stderr.log) — Mode 5 evidence (Pushover credential failure)
+- [`vault/90_system/agent-logs/vault-synthesizer-2026-05-{08,09,10}.log`](/Users/seanwinslow/Code-Brain/code-brain/vault/90_system/agent-logs/) — successful-status-but-empty evidence
+- [`vault/knowledge/index.md`](/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/index.md) — empty-state confirmation
 
 ## Code to read (and patch in Phase 2)
 
-- [`agents-sdk/agents/vault_synthesizer.py`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/vault_synthesizer.py) — run_synthesis() lines 320–420; manifest write path 580–660
-- [`agents-sdk/lib/hybrid_router.py`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/lib/hybrid_router.py) — `WOLUnavailable` exception class, route decisions
-- [`agents-sdk/agents/daily_driver.py`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/daily_driver.py) — morning brief consumer of synth-manifest (search "Vault Health" section)
-- [`agents-sdk/config.toml`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/config.toml) — agent config inheritance
+- [`agents-sdk/agents/vault_synthesizer.py`](/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/agents/vault_synthesizer.py) — run_synthesis() lines 320–420; manifest write path 580–660
+- [`agents-sdk/lib/hybrid_router.py`](/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/lib/hybrid_router.py) — `WOLUnavailable` exception class, route decisions
+- [`agents-sdk/agents/daily_driver.py`](/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/agents/daily_driver.py) — morning brief consumer of synth-manifest (search "Vault Health" section)
+- [`agents-sdk/config.toml`](/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/config.toml) — agent config inheritance
 
 ## Reference / canon (read-only)
 
-- [`vault/40_knowledge/references/ref-anthropic-demystifying-agent-evals.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/40_knowledge/references/ref-anthropic-demystifying-agent-evals.md)
-- [`vault/20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md)
-- [`vault/20_projects/research/2026-05-09-gemini-ai-eval-fluency-primer-and-reference-cases.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/research/2026-05-09-gemini-ai-eval-fluency-primer-and-reference-cases.md)
+- [`vault/40_knowledge/references/ref-anthropic-demystifying-agent-evals.md`](/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/ref-anthropic-demystifying-agent-evals.md)
+- [`vault/20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md`](/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md)
+- [`vault/20_projects/research/2026-05-09-gemini-ai-eval-fluency-primer-and-reference-cases.md`](/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-09-gemini-ai-eval-fluency-primer-and-reference-cases.md)
 
 ## This artifact set
 
@@ -554,8 +554,8 @@ Goes into the unified roadmap as **Task 9 — Substack-Drafter Agent (post-emplo
 
 ## Skills to load
 
-- [`.claude/skills/writing-voice-modes/SKILL.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/.claude/skills/writing-voice-modes/SKILL.md) — required for both Phase 7 publishing and Part B agent
-- [`.claude/skills/intent-engineering/SKILL.md`](/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/.claude/skills/intent-engineering/SKILL.md) — for cross-checking this plan's intent spec quality (dogfood opportunity)
+- [`.claude/skills/writing-voice-modes/SKILL.md`](/Users/seanwinslow/Code-Brain/code-brain/.claude/skills/writing-voice-modes/SKILL.md) — required for both Phase 7 publishing and Part B agent
+- [`.claude/skills/intent-engineering/SKILL.md`](/Users/seanwinslow/Code-Brain/code-brain/.claude/skills/intent-engineering/SKILL.md) — for cross-checking this plan's intent spec quality (dogfood opportunity)
 
 ## Superpowers integration
 

@@ -6,7 +6,7 @@
 
 ## Summary
 
-AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, MCP servers, and autonomous agent fleets with human-review gates and eval-driven acceptance criteria. At The Block, shipped 3 production Claude Skills against P&E OKR delivery, co-authored the Block Pro 2.0 product audit with an 11-risk structured pre-mortem, and authored the x402 / MCP integration strategy for the agent economy. Maintains the open-source 118-skill Claude Code Superuser Pack and a 17-agent Claude Agent SDK fleet; published `@swins/intent-engineering-mcp` to npm and the MCP registry.
+AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, MCP servers, and autonomous agent fleets with human-review gates and eval-driven acceptance criteria. At The Block, shipped 3 production Claude Skills against P&E OKR delivery, co-authored the Block Pro 2.0 product audit with an 11-risk structured pre-mortem, and authored the x402 / MCP integration strategy for the agent economy. Maintains the open-source 118-skill Code-Brain and a 17-agent Claude Agent SDK fleet; published `@swins/intent-engineering-mcp` to npm and the MCP registry.
 
 ---
 
@@ -18,7 +18,7 @@ AI Product Manager and agentic-engineering practitioner. Ships production Claude
 - Shipped 2026-05-12, 13 days ahead of plan. Demoable in Claude Desktop with a single config change.
 - Built on an evals-first methodology: the `audit_intent_spec` tool *is* the eval — it scores a spec against the framework's dimensions and tells the author what's missing before the spec ships to a coding agent. Operationalizes the "evals are the new PRDs" thesis as a portable MCP server.
 
-### Claude Code Superuser Pack — Open-Source Toolkit
+### Code-Brain — Open-Source Toolkit
 
 - Open-source agentic engineering toolkit for Claude Code: 118 skills, 13 subagents, 14 hooks, 17 autonomous Claude Agent SDK agents (8 in production on local-first launchd schedules).
 - Used in production for daily PM workflows, vault automation, and content generation across crypto, creative, and personal-systems domains.

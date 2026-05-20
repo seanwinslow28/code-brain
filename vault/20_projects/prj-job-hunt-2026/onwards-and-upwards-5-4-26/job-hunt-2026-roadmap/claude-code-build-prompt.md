@@ -20,27 +20,27 @@ You are implementing an MCP (Model Context Protocol) server called `sw-mcp-inten
 Read all six files in this order. Use the `Read` tool with absolute paths. Do not skim. These files are the contract.
 
 1. **The binding scope lock (READ FIRST):**
-   `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/v0-scope-intent-engineering-mcp.md`
+   `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/v0-scope-intent-engineering-mcp.md`
    This is the implementation contract. §2 is the pinned tech stack. §4–§6 are the three tool contracts. §7 is what's out of scope. §8 is the ship gate. §9 is your operating discipline. §10 is the locked identity (do not relitigate).
 
 2. **The strategic context (read for the why):**
-   `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md`
+   `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md`
    Task 3 maps to this build. Decision 1 closes when the scope-lock is committed to this repo. Tier-A truths in the Self-Review section are inviolate.
 
 3. **Technical grounding — measured + citation-heavy:**
-   `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/research/2026-05-07-chatgpt-mcp-server-production-patterns.md`
+   `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-07-chatgpt-mcp-server-production-patterns.md`
    The conservative read on SDK choice, transport, registry process, and antipatterns. Cite this when the two research docs disagree (which is rare).
 
 4. **Technical grounding — prescriptive + paste-ready boilerplate:**
-   `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/research/2026-05-07-mcp-server-production-patterns.md`
+   `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-07-mcp-server-production-patterns.md`
    Lean on this for skeleton speed. §1 has the McpServer + StdioServerTransport pattern. §7 is the 19-day calendar.
 
 5. **Source of truth for tool logic:**
-   `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/.claude/skills/intent-engineering/SKILL.md`
+   `/Users/seanwinslow/Code-Brain/code-brain/.claude/skills/intent-engineering/SKILL.md`
    The validation checklist (40 items), the 5 fatal anti-patterns, the 4 retrofit levels, the 4 autonomy levels, and the 9-section template all live here. Tool implementations import these as constants. They do not paraphrase, summarize, or reinvent the skill's logic. If something in this skill conflicts with the scope-lock, ask me — do not silently choose.
 
 6. **Source of truth for the YAML scaffold:**
-   `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/.claude/skills/intent-engineering/references/intent-spec-template.md`
+   `/Users/seanwinslow/Code-Brain/code-brain/.claude/skills/intent-engineering/references/intent-spec-template.md`
    The blank template scaffold for `generate_intent_spec_scaffold` (Tool 2). The Level-1 MVR variant comes from the SKILL.md "Minimum Viable Retrofit (MVR) Guide" section.
 
 ## Phase 0 Output — One-Page Implementation Plan (NO CODE)
@@ -109,7 +109,7 @@ Execute Gemini DR Max §7 Phases 3 + 4 (Days 10–17). Specifically:
 
 - MCP Inspector pass: `npx @modelcontextprotocol/inspector node ./build/index.js` — verify all three tools list with correct schemas. Fix any discrepancies.
 - Stress-test pagination on `audit_intent_spec` with a 30k-character spec. Verify `next_chunk_token` round-trips correctly.
-- Run `audit_intent_spec` against 5 real SKILL.md files from `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/.claude/skills/`. Verify findings are non-trivial.
+- Run `audit_intent_spec` against 5 real SKILL.md files from `/Users/seanwinslow/Code-Brain/code-brain/.claude/skills/`. Verify findings are non-trivial.
 - Run `assess_retrofit_level` against 3 real SKILL.md files. Verify reasoning differentiates per file.
 - Write `README.md` per scope-lock §8 done-criteria item 9. Open with the single-sentence pitch from scope-lock §1.
 - Write `docs/EXPLANATION.md` (4Q comprehension artifact) — paste in the pre-drafted text from unified-roadmap §Task 3 Step 11, swap any `analyze_intent_spec` references to the actual locked tool names from scope-lock §4–§6.
@@ -122,7 +122,7 @@ After Phase 3, **STOP**. I'll review the README and EXPLANATION.md, record the L
 
 Execute the final ship sequence (Days 14–19 of Gemini DR Max §7 with the side-artifact addition):
 
-- Generate `examples/superuser-pack-retrofit-assessment.csv` by running `assess_retrofit_level` against every SKILL.md under `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/.claude/skills/`. Time-box this to 90 minutes of execution; if longer, note the bottleneck and ask me. Before commit, scan the CSV for any rows referencing residual Block IP and exclude them. Reference scope-lock §10.6.
+- Generate `examples/code-brain-retrofit-assessment.csv` by running `assess_retrofit_level` against every SKILL.md under `/Users/seanwinslow/Code-Brain/code-brain/.claude/skills/`. Time-box this to 90 minutes of execution; if longer, note the bottleneck and ask me. Before commit, scan the CSV for any rows referencing residual Block IP and exclude them. Reference scope-lock §10.6.
 - Write `server.json` registry manifest. Use namespace `com.seanwinslow/intent-engineering` (NOT `io.github.*`). Reference ChatGPT §5 and Gemini DR Max §5.
 - I will add the DNS TXT record on seanwinslow.com — you will output the exact record content from `mcp-publisher init`'s output and pause for me to confirm the DNS propagation before continuing.
 - `npm publish --access public` (I will execute the actual publish; you will prepare the package and run `npm publish --dry-run` first).

@@ -32,7 +32,7 @@ Tracks A and B run hot in weeks 1–2; Track C ramps in week 2 and runs to week 
 Both items closed 2026-05-07. Kept here for historical traceability; Friday-retro check no longer required.
 
 - [x] **Counter-signed severance PDF from Leanne.** ✅ Closed 2026-05-07 — fully executed PDF received from Block.
-- [x] **Block-named skills scrub before any public Superuser Pack push.** ✅ Closed 2026-05-07 — the three CIIA-protected skills (`the-block-jira-ticket-writer`, `etf-page-creator`, `biweekly-jira-update`) have been handled per the Phase 4 plan. Phase 3 Task 3.3 (public announcement) and Phase 4 Task 4.3 Step 9 (publish MCP server / pin Superuser Pack on profile) are no longer gated by this item.
+- [x] **Block-named skills scrub before any public Code-Brain push.** ✅ Closed 2026-05-07 — the three CIIA-protected skills (`the-block-jira-ticket-writer`, `etf-page-creator`, `biweekly-jira-update`) have been handled per the Phase 4 plan. Phase 3 Task 3.3 (public announcement) and Phase 4 Task 4.3 Step 9 (publish MCP server / pin Code-Brain on profile) are no longer gated by this item.
 
 ---
 
@@ -69,7 +69,7 @@ Both items closed 2026-05-07. Kept here for historical traceability; Friday-retr
 
 ### Task 1.1: Severance agreement decision ✅ COMPLETED 2026-05-05
 
-> **STATUS:** Signed and sent to Leanne Li (VP People Operations) on 2026-05-05. Claude review (5-flag analysis: CIIA, ADEA exposure, NY forum-selection, laptop reset deadline, FLSA representation) substituted for the paid attorney review given the 2026-05-07 signing deadline. Tenure recalibrated post-CIIA review: ~6 months service (start 11/10/2025), so one-month severance ($8,333.33) is fair, not lowball. CIIA Section 5 1-year non-solicit is the only meaningful post-termination obligation; no post-termination non-compete (MA-compliant). Three Block-named skills (`the-block-jira-ticket-writer`, `etf-page-creator`, `biweekly-jira-update`) flagged for scrub before any public Superuser Pack push — see Phase 4 / public-launch checklist.
+> **STATUS:** Signed and sent to Leanne Li (VP People Operations) on 2026-05-05. Claude review (5-flag analysis: CIIA, ADEA exposure, NY forum-selection, laptop reset deadline, FLSA representation) substituted for the paid attorney review given the 2026-05-07 signing deadline. Tenure recalibrated post-CIIA review: ~6 months service (start 11/10/2025), so one-month severance ($8,333.33) is fair, not lowball. CIIA Section 5 1-year non-solicit is the only meaningful post-termination obligation; no post-termination non-compete (MA-compliant). Three Block-named skills (`the-block-jira-ticket-writer`, `etf-page-creator`, `biweekly-jira-update`) flagged for scrub before any public Code-Brain push — see Phase 4 / public-launch checklist.
 
 **Files:**
 - Severance agreement (text): `vault/50_sources/finance/the-block-severance-docs/severance-agreement-doc.md`
@@ -171,7 +171,7 @@ Both items closed 2026-05-07. Kept here for historical traceability; Friday-retr
 - Create: `vault/20_projects/prj-job-hunt-2026/target-archetypes.md`
 
 - [ ] **Step 1: Write a one-paragraph pitch for each archetype.** Three paragraphs total. Each pitch is what you'd say to a recruiter who asked "what kind of role are you looking for?"
-  - **AI PM** — angle: agentic engineering practitioner who ships. Anchor evidence: Superuser Pack, MCP server (forthcoming), 14 SDK agents.
+  - **AI PM** — angle: agentic engineering practitioner who ships. Anchor evidence: Code-Brain, MCP server (forthcoming), 14 SDK agents.
   - **Technical PM** — angle: PM who reads + writes code, ships specs that engineers respect. Anchor: PRDs at The Block, intent-engineering skill, working knowledge of TS/Python/Claude SDK.
   - **Creative PM** — angle: 12 years illustration/animation + PM at a media company + agentic creative pipeline. Anchor: animation pipeline, design-team agents, writing-voice-modes.
 
@@ -242,7 +242,7 @@ Both items closed 2026-05-07. Kept here for historical traceability; Friday-retr
   - "Built and operated a 14-agent autonomous research fleet (Claude Agent SDK) that runs on a $0/month local-first stack and produces daily morning briefings."
 
 - [ ] **Step 4: Write the "Selected Projects" section.** Three projects:
-  - **Claude Code Superuser Pack** — link to GitHub. One line: "117 skills, 13 hooks, 14 autonomous agents. Open-source agentic engineering toolkit."
+  - **Code-Brain** — link to GitHub. One line: "117 skills, 13 hooks, 14 autonomous agents. Open-source agentic engineering toolkit."
   - **Agentic Financial-Research Fleet** — describe carefully (no personal numbers). One line: "Multi-agent research system over a verifiable financial domain; design exemplar of Karpathy-style sensors+actuators on a fine-tuned local stack."
   - **Animation Pipeline (16BitFit + portfolio shorts)** — link to portfolio. One line: "Agent-orchestrated 2D animation pipeline; humans own creative ceiling, agents own technical floor."
 
@@ -264,12 +264,12 @@ Both items closed 2026-05-07. Kept here for historical traceability; Friday-retr
 
 - [ ] **Step 2: Rewrite the About section.** Three short paragraphs.
   - P1: who you are, one career sentence, your superpower
-  - P2: what you've shipped (Block + Superuser Pack + animation pipeline) — concrete artifacts
+  - P2: what you've shipped (Block + Code-Brain + animation pipeline) — concrete artifacts
   - P3: what you're looking for, what you bring, end with a friendly "let's talk" line
 
 - [ ] **Step 3: Update current role.** Change The Block end date to May 2026. Add a one-line description of the layoff context if you want to control the narrative ("Role eliminated as part of company-wide restructuring under new CEO; not performance-related"). Optional — many people leave it ambiguous, both work.
 
-- [ ] **Step 4: Add the Superuser Pack** as a "Featured" project with a link to the public GitHub repo.
+- [ ] **Step 4: Add the Code-Brain** as a "Featured" project with a link to the public GitHub repo.
 
 - [ ] **Step 5: Update photo** if your current one is >2 years old or doesn't match the archetype you're selling. Boston has plenty of professional headshot studios; spend the $200 in week 2.
 
@@ -281,13 +281,13 @@ Both items closed 2026-05-07. Kept here for historical traceability; Friday-retr
 - Modify: `~/Code-Brain/code-brain/README.md` (verify it's link-worthy for a hiring manager)
 - Create or modify: GitHub profile README at `github.com/<yourusername>/<yourusername>/README.md`
 
-- [ ] **Step 1: Read your Superuser Pack README as a hiring manager would.** Does the first paragraph make them want to look at the second? If not, rewrite the first paragraph. Lead with what it IS and what it DEMONSTRATES, not what it CONTAINS.
+- [ ] **Step 1: Read your Code-Brain README as a hiring manager would.** Does the first paragraph make them want to look at the second? If not, rewrite the first paragraph. Lead with what it IS and what it DEMONSTRATES, not what it CONTAINS.
 
 - [ ] **Step 2: Add a "Why this exists" section near the top.** One paragraph framing this as your applied agentic-engineering practice, not just a config dump. Karpathy's framing language is your friend here.
 
 - [ ] **Step 3: Pin the repo on your GitHub profile.** Plus the new MCP server repo when it ships. Plus your animation portfolio repo if public.
 
-- [ ] **Step 4: Profile README.** A short bio. Three pinned links: portfolio, Superuser Pack, MCP server (forthcoming). One line under "Currently:" — your AI/Tech/Creative PM pitch in 12 words.
+- [ ] **Step 4: Profile README.** A short bio. Three pinned links: portfolio, Code-Brain, MCP server (forthcoming). One line under "Currently:" — your AI/Tech/Creative PM pitch in 12 words.
 
 ### Task 2.5: Talk track + story bank — what you say in every conversation for the next 8 weeks
 
@@ -307,7 +307,7 @@ Both items closed 2026-05-07. Kept here for historical traceability; Friday-retr
   - Working with Ed and stakeholders — collaboration + judgment
   - A time you killed your darling — taste + product judgment
   - The 16BitFit pause — recognizing when to stop, strategic patience
-  - Superuser Pack architecture — systems thinking
+  - Code-Brain architecture — systems thinking
   - A failure with a Block roadmap item — honesty + what you learned
   - Animation portfolio piece — creative range
 
@@ -369,7 +369,7 @@ Both items closed 2026-05-07. Kept here for historical traceability; Friday-retr
   - 1: factual layoff announcement, no spin.
   - 2: what you valued about The Block (one specific thing — the Pro team, Alex's leadership, the Campus mission, etc.).
   - 3: what you're looking for, archetype + geography + one specific differentiator.
-  - 4: what you've been building (link Superuser Pack + first MCP server).
+  - 4: what you've been building (link Code-Brain + first MCP server).
   - 5: how to help — be specific. "If you know of openings in [archetypes] at companies in [list of 5 ideal companies], please connect me."
 
 - [ ] **Step 4: Post when ready.** LinkedIn primary; consider X if your network there is healthy.
@@ -439,7 +439,7 @@ Both items closed 2026-05-07. Kept here for historical traceability; Friday-retr
 
 - [ ] **Step 8: Demo video.** 90-second Loom or asciinema recording. Show: setup, three tool invocations, the value moment. This is the artifact you'll send to hiring managers.
 
-- [ ] **Step 9: Publish.** Push to GitHub public. Pin on profile. Add to LinkedIn featured. Add to Superuser Pack README as "MCP server adjacent to this skill."
+- [ ] **Step 9: Publish.** Push to GitHub public. Pin on profile. Add to LinkedIn featured. Add to Code-Brain README as "MCP server adjacent to this skill."
 
 - [ ] **Step 10: Announce.** A focused tweet/LinkedIn post linking the repo and a one-line value prop. Tag relevant accounts (Anthropic, MCP folks, Karpathy if it's not too tryhard). Don't overdo announcements — one is enough; the repo is the product.
 
@@ -483,7 +483,7 @@ Both items closed 2026-05-07. Kept here for historical traceability; Friday-retr
 
 - [ ] **Step 3: Cover note template.** Three short paragraphs.
   - P1: why this specific company / role / team caught your attention (proof you read it).
-  - P2: what you bring — link to one concrete artifact (MCP server repo / Superuser Pack / animation piece — pick the one that fits).
+  - P2: what you bring — link to one concrete artifact (MCP server repo / Code-Brain / animation piece — pick the one that fits).
   - P3: short, friendly close.
 
 - [ ] **Step 4: Inside-contact message.** Sent same day as the application. Pattern: "Hey [name] — applying for [role] at [company]. Wanted to flag it in case there's any context worth me knowing or anyone on the team you'd suggest I connect with. Either way, no pressure — appreciate you."

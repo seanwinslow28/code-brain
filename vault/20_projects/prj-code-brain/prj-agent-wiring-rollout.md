@@ -6,7 +6,7 @@ domain:
   - creative-studio
   - life-systems
 status: complete
-context: superuser-pack
+context: code-brain
 created: 2026-04-23
 updated: 2026-05-01 (Phase 2 production soak CLOSED — PARTIAL by observation gap, no regression; rollout complete across all 3 phases)
 source: claude-code-plan-mode
@@ -18,7 +18,7 @@ references:
   - agent-wiring-plan-prompt.md
   - agents-sdk/AUDIT-2026-04-09-agent-downsizing.md
   - vault/05_atlas/operating-models/
-  - vault/20_projects/prj-superuser-pack/prj-knowledge-loop-consumer.md
+  - vault/20_projects/prj-code-brain/prj-knowledge-loop-consumer.md
   - https://claude.ai/code/routines/trig_01Xu9fvaxMRDfSr7rwSb5fYE
 ---
 

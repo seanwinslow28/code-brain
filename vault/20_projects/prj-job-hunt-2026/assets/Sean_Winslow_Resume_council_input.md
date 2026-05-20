@@ -8,8 +8,8 @@
 > (2) Summary skill count `117 → 118` (both files);
 > (3) Summary agent count `14 → 17` (both files);
 > (4) AI PM Summary "MCP servers" plural → `intent-engineering` MCP server (named, accurate);
-> (5) Superuser Pack Selected Projects entry: hook count `13 → 14`, agent count `14 → 17`, active count `7 → 8`;
-> (6) Superuser Pack entry gained a 4th bullet linking the two shipped 2026-05-12 EXPLANATION.md artifacts (Phase D + Phase 6);
+> (5) Code-Brain Selected Projects entry: hook count `13 → 14`, agent count `14 → 17`, active count `7 → 8`;
+> (6) Code-Brain entry gained a 4th bullet linking the two shipped 2026-05-12 EXPLANATION.md artifacts (Phase D + Phase 6);
 > (7) New `intent-engineering MCP Server` Selected Projects entry (3 bullets).
 
 ---
@@ -24,7 +24,7 @@
 
 ## Summary
 
-AI Product Manager and agentic-engineering practitioner with 11+ years across crypto media, SaaS, and digital asset management. Most recently at The Block, shipped 3 production Claude Skills, a Polymarket B2B revenue integration, and a 10-week Confluence overhaul plan. Builds open-source agentic-engineering tooling — the 118-skill Claude Code Superuser Pack and a 17-agent autonomous SDK fleet.
+AI Product Manager and agentic-engineering practitioner with 11+ years across crypto media, SaaS, and digital asset management. Most recently at The Block, shipped 3 production Claude Skills, a Polymarket B2B revenue integration, and a 10-week Confluence overhaul plan. Builds open-source agentic-engineering tooling — the 118-skill Code-Brain and a 17-agent autonomous SDK fleet.
 
 ---
 
@@ -76,12 +76,12 @@ AI Product Manager and agentic-engineering practitioner with 11+ years across cr
 
 ## Selected Projects
 
-### Claude Code Superuser Pack — Open-Source Toolkit
+### Code-Brain — Open-Source Toolkit
 
 - Open-source agentic engineering toolkit for Claude Code: 118 skills, 13 subagents, 14 hooks, 17 autonomous Claude Agent SDK agents (8 active on local-first launchd schedules).
 - Used in production for daily PM workflows, vault automation, and content generation across crypto, creative, and personal-systems domains.
 - Demonstrates Karpathy-style "agentic engineering practitioner" architecture — agents own decomposition; human owns judgment.
-- Architecture writeups for two production subsystems: [Phase D Typed Reasoning Edges](https://github.com/seanwinslow28/claude-code-superuser-pack/blob/main/agents-sdk/lib/concept_edges/EXPLANATION.md) (SQLite-backed cross-domain contradiction detection) and [Phase 6 Knowledge Loop](https://github.com/seanwinslow28/claude-code-superuser-pack/blob/main/agents-sdk/agents/knowledge_loop/EXPLANATION.md) (SessionEnd flush → nightly synth → weekly lint → SessionStart re-inject).
+- Architecture writeups for two production subsystems: [Phase D Typed Reasoning Edges](https://github.com/seanwinslow28/code-brain/blob/main/agents-sdk/lib/concept_edges/EXPLANATION.md) (SQLite-backed cross-domain contradiction detection) and [Phase 6 Knowledge Loop](https://github.com/seanwinslow28/code-brain/blob/main/agents-sdk/agents/knowledge_loop/EXPLANATION.md) (SessionEnd flush → nightly synth → weekly lint → SessionStart re-inject).
 
 ### intent-engineering MCP Server
 
@@ -131,7 +131,7 @@ AI Product Manager and agentic-engineering practitioner with 11+ years across cr
 
 ## Summary
 
-AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, the `intent-engineering` MCP server, and autonomous agent fleets. Most recently at The Block, delivered 3 Claude Skills, co-authored the Block Pro 2.0 product audit and competitive analysis, and authored the x402 / A2A / MCP integration strategy memo positioning Block Pro for the agent economy. Maintains the open-source 118-skill Claude Code Superuser Pack and a 17-agent autonomous SDK fleet.
+AI Product Manager and agentic-engineering practitioner. Ships production Claude Skills, the `intent-engineering` MCP server, and autonomous agent fleets. Most recently at The Block, delivered 3 Claude Skills, co-authored the Block Pro 2.0 product audit and competitive analysis, and authored the x402 / A2A / MCP integration strategy memo positioning Block Pro for the agent economy. Maintains the open-source 118-skill Code-Brain and a 17-agent autonomous SDK fleet.
 
 ---
 
@@ -183,12 +183,12 @@ AI Product Manager and agentic-engineering practitioner. Ships production Claude
 
 ## Selected Projects
 
-### Claude Code Superuser Pack — Open-Source Toolkit
+### Code-Brain — Open-Source Toolkit
 
 - Open-source agentic engineering toolkit for Claude Code: 118 skills, 13 subagents, 14 hooks, 17 autonomous Claude Agent SDK agents (8 active on local-first launchd schedules).
 - Used in production for daily PM workflows, vault automation, and content generation across crypto, creative, and personal-systems domains.
 - Demonstrates Karpathy-style "agentic engineering practitioner" architecture — agents own decomposition; human owns judgment.
-- Architecture writeups for two production subsystems: [Phase D Typed Reasoning Edges](https://github.com/seanwinslow28/claude-code-superuser-pack/blob/main/agents-sdk/lib/concept_edges/EXPLANATION.md) (SQLite-backed cross-domain contradiction detection) and [Phase 6 Knowledge Loop](https://github.com/seanwinslow28/claude-code-superuser-pack/blob/main/agents-sdk/agents/knowledge_loop/EXPLANATION.md) (SessionEnd flush → nightly synth → weekly lint → SessionStart re-inject).
+- Architecture writeups for two production subsystems: [Phase D Typed Reasoning Edges](https://github.com/seanwinslow28/code-brain/blob/main/agents-sdk/lib/concept_edges/EXPLANATION.md) (SQLite-backed cross-domain contradiction detection) and [Phase 6 Knowledge Loop](https://github.com/seanwinslow28/code-brain/blob/main/agents-sdk/agents/knowledge_loop/EXPLANATION.md) (SessionEnd flush → nightly synth → weekly lint → SessionStart re-inject).
 
 ### intent-engineering MCP Server
 

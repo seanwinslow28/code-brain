@@ -4,7 +4,7 @@ project: prj-job-hunt-2026
 task: roadmap-task-0-step-1
 created: 2026-05-06
 target-completion: 2026-05-08
-ai-context: "Line-by-line audit of Block-named/Block-contaminated skills in .claude/skills/. Output feeds Task 0 Step 2 (rewrite) + Step 3 (zero-hit grep verification). CIIA Section 2.3 compliance gate before any public Superuser Pack push."
+ai-context: "Line-by-line audit of Block-named/Block-contaminated skills in .claude/skills/. Output feeds Task 0 Step 2 (rewrite) + Step 3 (zero-hit grep verification). CIIA Section 2.3 compliance gate before any public Code-Brain push."
 ---
 
 # Block Skills Audit — Roadmap Task 0 Step 1
@@ -34,14 +34,14 @@ ai-context: "Line-by-line audit of Block-named/Block-contaminated skills in .cla
 The roadmap Task 0 names 3 skills (`the-block-jira-ticket-writer`, `etf-page-creator`, `biweekly-jira-update`). Reality after Sean's clarification + grep:
 
 - **`etf-page-creator`** — live in `.claude/skills/`. Confirmed contamination. **In scope.**
-- **`the-block-jira-ticket-writer`** — was MERGED INTO `jira-automation/` when Sean first built the Superuser Pack. Folder at `docs/Additional Skills To Add To Claude Superuser/...` is the pre-merge source, not a duplicate live skill. The merge mostly sanitized it; 2 Block leaks remain in `jira-automation/SKILL.md`. **In scope via `jira-automation`.**
+- **`the-block-jira-ticket-writer`** — was MERGED INTO `jira-automation/` when Sean first built the Code-Brain. Folder at `docs/Additional Skills To Add To Claude Superuser/...` is the pre-merge source, not a duplicate live skill. The merge mostly sanitized it; 2 Block leaks remain in `jira-automation/SKILL.md`. **In scope via `jira-automation`.**
 - **`biweekly-jira-update`** — was MERGED INTO `stakeholder-update/`. Merge happened cleanly; zero Block strings remain. **No work needed.**
 - **`api-product-management`** — NOT in roadmap Task 0 list. Live in `.claude/skills/`. Contains `developer.theblock.co` + `@theblock/data-sdk` SDK examples. **In scope; surfaced as new sanitization target.**
 - **`work-operating-model` (3 files)** + **`daily-driver`** — `the-block` is a selectable-archived domain in the 4-domain operating-model system. **In scope per Plan A — parameterize.**
 
 ## Decision (locked 2026-05-06): Plan A — full clean, all 30 → 0
 
-Sean's call: clean every `the-block` string in `.claude/skills/` to zero, not just the IP-adjacent ones. Reasoning: legal layer (CIIA Section 2.3) only protects Block IP, but the readability layer matters more for the public Superuser Pack push. Every `the-block` string in a generic-looking skill creates recruiter-friction ("did he actually scrub it, or just the obvious parts?"). Zero is the only count that doesn't generate that question.
+Sean's call: clean every `the-block` string in `.claude/skills/` to zero, not just the IP-adjacent ones. Reasoning: legal layer (CIIA Section 2.3) only protects Block IP, but the readability layer matters more for the public Code-Brain push. Every `the-block` string in a generic-looking skill creates recruiter-friction ("did he actually scrub it, or just the obvious parts?"). Zero is the only count that doesn't generate that question.
 
 **Trade-off accepted:** `work-operating-model` will lose `the-block` as a literal selectable slug; replaced with `archived-employer` (or equivalent placeholder). Bundle still lives at `vault/40_archive/operating-models-the-block-2026-05/`, so historical interviews can still be re-run by mapping `archived-employer` → that path. Functional capability preserved; literal string removed.
 
