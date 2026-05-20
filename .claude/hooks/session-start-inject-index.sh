@@ -16,7 +16,7 @@
 
 set -u
 
-REPO_ROOT="/Users/seanwinslow/Code-Brain/claude-code-superuser-pack"
+REPO_ROOT="/Users/seanwinslow/Code-Brain/code-brain"
 DEFAULT_INDEX="$REPO_ROOT/vault/knowledge/index.md"
 DEFAULT_MAX_CHARS=15000
 
