@@ -133,22 +133,56 @@ def test_run_synthesis_happy_path(tmp_path: Path) -> None:
             "concepts": [
                 {
                     "title": "RIFE Interpolation Hyperparameters",
-                    "definition": "RIFE controls frame interpolation.",
-                    "context": "Phase 5 tuning.",
-                    "examples": ["temporal_smoothing=0.8 wins by 8%"],
+                    "definition": (
+                        "RIFE Interpolation Hyperparameters control how the "
+                        "model bridges sparse keyframes by synthesizing "
+                        "intermediate frames. The `temporal_smoothing` knob "
+                        "trades drift against perceived motion smoothness. "
+                        "Tuning is empirical because the optimum shifts with "
+                        "the upstream keyframe density and the downstream "
+                        "quantizer's tolerance for jitter."
+                    ),
+                    "context": "Phase 5 tuning surfaces this tradeoff in autoresearch sweeps.",
+                    "evidence": [
+                        "RIFE Interpolation Hyperparameters control how the model bridges sparse keyframes by synthesizing intermediate frames.",
+                        "The temporal_smoothing knob trades drift against perceived motion smoothness during the densification pass.",
+                    ],
+                    "examples": ["temporal_smoothing=0.8 wins by 8% on Pixel Quantizer eval"],
                     "related": ["Wan 2.2 Keyframes", "Pixel Quantizer"],
                 }
             ],
             "connections": [
                 {
                     "title": "Keyframe Sparsity Tradeoff",
-                    "synthesis": "Sparse keyframes = drift; dense = slow.",
+                    "synthesis": (
+                        "Sparser Wan 2.2 keyframes accelerate generation but "
+                        "force RIFE to invent more in-between content, which "
+                        "compounds drift before the Pixel Quantizer can "
+                        "stabilize it. The tension is not local — it propagates "
+                        "across three pipeline stages, each of which would look "
+                        "tunable in isolation. Optimizing any stage alone "
+                        "regresses the others."
+                    ),
                     "concepts": [
                         "RIFE Interpolation Hyperparameters",
                         "Wan 2.2 Keyframes",
                         "Pixel Quantizer",
                     ],
-                    "implications": ["Tune per complexity."],
+                    "evidence": {
+                        "RIFE Interpolation Hyperparameters": [
+                            "RIFE Interpolation Hyperparameters control how the model bridges sparse keyframes by synthesizing intermediate frames during the densification pass."
+                        ],
+                        "Wan 2.2 Keyframes": [
+                            "Wan 2.2 emits keyframes whose spacing directly determines how much intermediate content RIFE must invent downstream."
+                        ],
+                        "Pixel Quantizer": [
+                            "The Pixel Quantizer absorbs jitter from upstream drift but its 4-color palette compresses information past the point where smoothing can recover it."
+                        ],
+                    },
+                    "implications": [
+                        "Per-pipeline-stage tuning is insufficient; sweeps must explore the joint space across keyframe spacing, smoothing, and quantizer palette.",
+                        "Document regression thresholds at every stage so a regression at stage N can be attributed to a setting change at stage N-1 or N-2.",
+                    ],
                 }
             ],
         }
@@ -159,8 +193,10 @@ def test_run_synthesis_happy_path(tmp_path: Path) -> None:
     ]
 
     def fake_search(query: str, top_k: int = 5) -> list[dict]:
+        # Return ≥2 chunks so Tier-1.5's thin-source skip path doesn't fire.
         return [
-            {"file_path": "05_projects/wan-notes.md", "chunk_text": "Wan 2.2", "similarity": 0.9}
+            {"file_path": "05_projects/wan-notes.md", "chunk_text": "Wan 2.2 keyframe density notes", "similarity": 0.9},
+            {"file_path": "05_projects/quantizer.md", "chunk_text": "Pixel Quantizer palette behaviour", "similarity": 0.8},
         ]
 
     result = run_synthesis(
@@ -205,7 +241,7 @@ def test_run_synthesis_rejects_articles_without_two_wikilinks(tmp_path: Path) ->
         vault_root=vault,
         changed_files=[vault / "x.md"],
         llm_caller=bad_llm,
-        retriever=lambda q, top_k=5: [],
+        retriever=lambda q, top_k=5: [{"file_path": "a.md", "chunk_text": "seed alpha", "similarity": 0.9}, {"file_path": "b.md", "chunk_text": "seed beta", "similarity": 0.8}],
         now_iso="2026-04-17",
         budget_seconds=300,
     )
@@ -228,7 +264,7 @@ def test_run_synthesis_respects_budget(tmp_path: Path) -> None:
         vault_root=vault,
         changed_files=[vault / "x.md"],
         llm_caller=slow_llm,
-        retriever=lambda q, top_k=5: [],
+        retriever=lambda q, top_k=5: [{"file_path": "a.md", "chunk_text": "seed alpha", "similarity": 0.9}, {"file_path": "b.md", "chunk_text": "seed beta", "similarity": 0.8}],
         now_iso="2026-04-17",
         budget_seconds=0,
     )
@@ -240,32 +276,87 @@ def test_run_synthesis_respects_budget(tmp_path: Path) -> None:
 
 
 def _phase_d_llm_factory(relations: list[dict]):
-    """Build an LLM caller that returns a single connection with `relations`."""
+    """Build an LLM caller that returns a single connection with `relations`.
+
+    Fixture content is intentionally rich enough to pass the Tier-1.5
+    depth gate (≥3-sentence definitions, ≥60-char prose quotes, ≥3-sentence
+    synthesis, ≥2 substantive implications). The point of the Phase-D
+    tests is edge-write semantics; the article content must still survive
+    the production gate so the tests exercise the real path.
+    """
+
+    rich_quote_a = (
+        "Concept Alpha emerges when two independent subsystems both depend on the same "
+        "invariant without either subsystem declaring the dependency in source."
+    )
+    rich_quote_b = (
+        "Concept Beta surfaces the consequence of Alpha — a coupling that is only "
+        "visible when one of the two subsystems silently changes state at runtime."
+    )
+    rich_quote_g = (
+        "Concept Gamma is the structural fix: a third surface that declares the "
+        "shared invariant explicitly so neither original subsystem can drift."
+    )
 
     def _call(prompt: str, max_tokens: int = 2000) -> dict:
         return {
             "concepts": [
                 {
                     "title": "Concept Alpha",
-                    "definition": "Alpha is a thing.",
-                    "context": "test",
-                    "examples": ["x"],
+                    "definition": (
+                        "Concept Alpha names a class of failure where two independent "
+                        "subsystems share an invariant that is not declared in either "
+                        "subsystem's source. The shared invariant becomes load-bearing "
+                        "exactly when a third party changes runtime conditions, and "
+                        "neither subsystem reports the change because neither owns the "
+                        "invariant. The defect surfaces as silent drift rather than a "
+                        "crash."
+                    ),
+                    "context": (
+                        "Recurs across the agent fleet whenever two scheduled jobs both "
+                        "depend on the MBP being awake at 02:30."
+                    ),
+                    "evidence": [rich_quote_a, rich_quote_b],
+                    "examples": ["vault_synthesizer + knowledge_lint both gate on MBP awake-at-02:30"],
                     "related": ["Concept Beta", "Concept Gamma"],
                 },
                 {
                     "title": "Concept Beta",
-                    "definition": "Beta is a thing.",
-                    "context": "test",
-                    "examples": ["y"],
+                    "definition": (
+                        "Concept Beta is the observable consequence of Concept Alpha — a "
+                        "drift that appears in one subsystem's output without either "
+                        "subsystem reporting an error. The drift is visible only when an "
+                        "operator notices the downstream artifact looks stale, which is "
+                        "always after the producer has finished and exited cleanly. "
+                        "Detection therefore lags causation by at least one cycle."
+                    ),
+                    "context": "The lag is the whole reason Tier-1.5 surfaces rejected_reasons.",
+                    "evidence": [rich_quote_b, rich_quote_g],
+                    "examples": ["meta-agent reports daily-driver error 10 min before daily-driver fires"],
                     "related": ["Concept Alpha", "Concept Gamma"],
                 },
             ],
             "connections": [
                 {
                     "title": "Alpha-Beta-Gamma Triangle",
-                    "synthesis": "Three things that interact.",
+                    "synthesis": (
+                        "Alpha names the latent coupling, Beta is its observable drift, "
+                        "and Gamma is the structural fix that declares the shared "
+                        "invariant explicitly. The triangle matters because most "
+                        "shop-floor debuggers stop at Beta — they treat the symptom as "
+                        "the bug and patch in the affected subsystem. The actual fix "
+                        "lives one level up, at the surface that declares the invariant."
+                    ),
                     "concepts": ["Concept Alpha", "Concept Beta", "Concept Gamma"],
-                    "implications": ["something"],
+                    "evidence": {
+                        "Concept Alpha": [rich_quote_a],
+                        "Concept Beta": [rich_quote_b],
+                        "Concept Gamma": [rich_quote_g],
+                    },
+                    "implications": [
+                        "Bug triage that stops at the symptom subsystem will miss latent invariants and ship coupling-tighter fixes that fail again.",
+                        "Every shared invariant deserves an explicit declaration surface owned by neither of the original subsystems involved.",
+                    ],
                     "relations": relations,
                 }
             ],
@@ -291,7 +382,7 @@ def test_run_synthesis_writes_edges_when_db_conn_provided(tmp_path: Path) -> Non
         vault_root=vault,
         changed_files=[vault / "x.md"],
         llm_caller=llm,
-        retriever=lambda q, top_k=5: [],
+        retriever=lambda q, top_k=5: [{"file_path": "a.md", "chunk_text": "seed alpha", "similarity": 0.9}, {"file_path": "b.md", "chunk_text": "seed beta", "similarity": 0.8}],
         now_iso="2026-05-01",
         budget_seconds=300,
         db_conn=db_conn,
@@ -323,7 +414,7 @@ def test_run_synthesis_drops_invalid_relations_but_writes_article(tmp_path: Path
         vault_root=vault,
         changed_files=[vault / "x.md"],
         llm_caller=llm,
-        retriever=lambda q, top_k=5: [],
+        retriever=lambda q, top_k=5: [{"file_path": "a.md", "chunk_text": "seed alpha", "similarity": 0.9}, {"file_path": "b.md", "chunk_text": "seed beta", "similarity": 0.8}],
         now_iso="2026-05-01",
         budget_seconds=300,
         db_conn=db_conn,
@@ -353,7 +444,7 @@ def test_run_synthesis_db_conn_none_skips_edges_silently(tmp_path: Path) -> None
         vault_root=vault,
         changed_files=[vault / "x.md"],
         llm_caller=llm,
-        retriever=lambda q, top_k=5: [],
+        retriever=lambda q, top_k=5: [{"file_path": "a.md", "chunk_text": "seed alpha", "similarity": 0.9}, {"file_path": "b.md", "chunk_text": "seed beta", "similarity": 0.8}],
         now_iso="2026-05-01",
         budget_seconds=300,
         db_conn=None,
@@ -372,7 +463,7 @@ def test_run_synthesis_sets_run_id(tmp_path: Path) -> None:
         vault_root=vault,
         changed_files=[vault / "x.md"],
         llm_caller=lambda p, max_tokens=2000: {"concepts": [], "connections": []},
-        retriever=lambda q, top_k=5: [],
+        retriever=lambda q, top_k=5: [{"file_path": "a.md", "chunk_text": "seed alpha", "similarity": 0.9}, {"file_path": "b.md", "chunk_text": "seed beta", "similarity": 0.8}],
         now_iso="2026-05-01",
         budget_seconds=300,
     )
@@ -440,3 +531,330 @@ def test_default_retriever_factory_forwards_include_embeddings(
     # Legacy positional path — backward compat preserved.
     retriever("q2", 5)
     assert captured["include_embeddings"] is False
+
+
+# ─── Tier 1.5 — insight-depth gate (2026-05-20) ─────────────────────────────
+#
+# Pre-Tier-1.5 the validator only checked wikilink count + the forbidden
+# "Evidence pending" string. That let median-quality output through —
+# CLI-snippet evidence, restated-prompt definitions, two-sentence stub
+# articles. `evaluate_article_depth` is the new semantic gate. Legacy
+# `validate_article_body` stays unchanged for backward compatibility; the
+# production path in `run_synthesis` now calls both.
+
+
+def _concept_body(
+    *,
+    definition: str = (
+        "Cross-domain bridging emerges when the same operational pattern "
+        "surfaces in two unrelated PARA folders for the same underlying "
+        "reason. The bridge is not coincidence; it is evidence that a "
+        "deeper invariant governs both surfaces. Naming the invariant is "
+        "what makes the bridge useful."
+    ),
+    context: str = (
+        "Sean's vault is structured to make these bridges discoverable. "
+        "The synthesizer's job is to surface them before he notices manually."
+    ),
+    quotes: list[str] | None = None,
+    examples: list[str] | None = None,
+    related: list[str] | None = None,
+) -> str:
+    from agents.vault_synthesizer import format_concept_article
+
+    if quotes is None:
+        quotes = [
+            "The synthesizer surfaces non-obvious patterns that connect creative "
+            "studio workflows with job-hunt portfolio strategy through shared "
+            "automation primitives.",
+            "Every connection that spans different PARA folders represents a "
+            "structural insight rather than a within-cluster restatement of the "
+            "same idea.",
+        ]
+    if examples is None:
+        examples = [
+            "Daily-driver morning brief uses the same pattern as the Substack drafter weekly run.",
+            "Both are scheduled producers that consume vault state and emit one artifact per fire.",
+        ]
+    if related is None:
+        related = ["Autonomous Agent Fleets", "Vault as SSoT"]
+
+    return format_concept_article(
+        title="Cross-Domain Bridging",
+        definition=definition,
+        context=context,
+        examples=examples,
+        related=related,
+        sources=["20_projects/example.md"],
+        evidence=quotes,
+        today="2026-05-20",
+    )
+
+
+def _connection_body(
+    *,
+    synthesis: str = (
+        "Three independent automation surfaces all gate on whether the MBP "
+        "is awake at 02:30 AM. The shared dependency is invisible in each "
+        "agent's source. It emerges sharply when a travel day knocks the "
+        "laptop off the LAN and all three skip in the same window."
+    ),
+    quotes_by_concept: dict[str, list[str]] | None = None,
+    implications: list[str] | None = None,
+    concepts: list[str] | None = None,
+) -> str:
+    from agents.vault_synthesizer import format_connection_article
+
+    if concepts is None:
+        concepts = ["Vault Synthesizer", "Knowledge Lint", "Substack Drafter"]
+    if quotes_by_concept is None:
+        quotes_by_concept = {
+            c: [
+                f"{c} routes vault-synthesis tasks to Qwen3-14B on the MBP via "
+                f"HybridRouter, which raises WOLUnavailable when the laptop is "
+                f"asleep and the fleet falls back to a no-op state."
+            ]
+            for c in concepts
+        }
+    if implications is None:
+        implications = [
+            "Any travel day longer than 36 hours will leave a visible synthesis gap unless cloud fallback is wired in.",
+            "The MBP-asleep dependency should be promoted to a first-class config knob with explicit per-agent fallback rules.",
+        ]
+
+    return format_connection_article(
+        title="MBP-Wake Dependency Across Producers",
+        synthesis=synthesis,
+        concepts=concepts,
+        implications=implications,
+        evidence=quotes_by_concept,
+        today="2026-05-20",
+    )
+
+
+# --- depth gate: concept articles --------------------------------------------
+
+
+def test_evaluate_concept_depth_accepts_real_concept() -> None:
+    from agents.vault_synthesizer import evaluate_article_depth
+
+    passes, reason = evaluate_article_depth(_concept_body())
+    assert passes is True, f"unexpected reject: {reason}"
+    assert reason == ""
+
+
+def test_evaluate_concept_depth_rejects_thin_definition() -> None:
+    """A single-sentence definition is a restatement, not a definition."""
+    from agents.vault_synthesizer import evaluate_article_depth
+
+    body = _concept_body(definition="It is a collection of automated processes.")
+    passes, reason = evaluate_article_depth(body)
+    assert passes is False
+    assert reason == "thin-definition"
+
+
+def test_evaluate_concept_depth_rejects_restatement_phrases() -> None:
+    """LLM-tell phrases like "a collection of X designed to Y" mean the LLM
+    restated the prompt rather than naming a mechanism."""
+    from agents.vault_synthesizer import evaluate_article_depth
+
+    body = _concept_body(
+        definition=(
+            "A collection of automated processes designed to support Sean's "
+            "job-hunting efforts, including status updates and application "
+            "tracking across multiple pipeline stages. These routines "
+            "streamline his workflow by ensuring consistency and efficiency "
+            "across the application pipeline at every step. The system "
+            "ensures that nothing falls through the cracks."
+        )
+    )
+    passes, reason = evaluate_article_depth(body)
+    assert passes is False
+    assert reason == "restatement-definition"
+
+
+def test_evaluate_concept_depth_rejects_code_only_evidence() -> None:
+    """Evidence that is purely CLI commands is not evidence — it's a recipe."""
+    from agents.vault_synthesizer import evaluate_article_depth
+
+    body = _concept_body(
+        quotes=[
+            "cd ~/Code-Brain/claude-code-superuser-pack/agents-sdk && PYTHONPATH=. .venv/bin/python3 scripts/update_status.py",
+            "PYTHONPATH=. .venv/bin/python3 scripts/update_status.py <db_id> applied --status applied --note 'auto'",
+        ]
+    )
+    passes, reason = evaluate_article_depth(body)
+    assert passes is False
+    assert reason == "code-only-evidence"
+
+
+def test_evaluate_concept_depth_rejects_short_quotes() -> None:
+    """A quote shorter than 60 chars is a fragment, not an argument."""
+    from agents.vault_synthesizer import evaluate_article_depth
+
+    body = _concept_body(quotes=["Short claim.", "Another fragment is short."])
+    passes, reason = evaluate_article_depth(body)
+    assert passes is False
+    assert reason == "thin-evidence"
+
+
+def test_evaluate_concept_depth_rejects_when_examples_duplicate_evidence() -> None:
+    """If Examples section is the same text as Evidence, the LLM is padding."""
+    from agents.vault_synthesizer import evaluate_article_depth
+
+    quotes = [
+        "The synthesizer surfaces non-obvious patterns that connect creative "
+        "studio workflows with job-hunt portfolio strategy through shared "
+        "automation primitives.",
+        "Every connection that spans different PARA folders represents a "
+        "structural insight rather than a within-cluster restatement.",
+    ]
+    body = _concept_body(quotes=quotes, examples=quotes)
+    passes, reason = evaluate_article_depth(body)
+    assert passes is False
+    assert reason == "duplicate-examples"
+
+
+# --- depth gate: connection articles -----------------------------------------
+
+
+def test_evaluate_connection_depth_accepts_real_connection() -> None:
+    from agents.vault_synthesizer import evaluate_article_depth
+
+    passes, reason = evaluate_article_depth(_connection_body())
+    assert passes is True, f"unexpected reject: {reason}"
+    assert reason == ""
+
+
+def test_evaluate_connection_depth_rejects_thin_synthesis() -> None:
+    """A one-sentence synthesis describes; it doesn't name the tension."""
+    from agents.vault_synthesizer import evaluate_article_depth
+
+    body = _connection_body(
+        synthesis="Three producers share an MBP dependency."
+    )
+    passes, reason = evaluate_article_depth(body)
+    assert passes is False
+    assert reason == "thin-synthesis"
+
+
+def test_evaluate_connection_depth_rejects_thin_threads() -> None:
+    """Per-concept threads with no substantive quote → article is shallow."""
+    from agents.vault_synthesizer import evaluate_article_depth
+
+    body = _connection_body(
+        quotes_by_concept={
+            "Vault Synthesizer": ["short"],
+            "Knowledge Lint": ["x"],
+            "Substack Drafter": ["y"],
+        }
+    )
+    passes, reason = evaluate_article_depth(body)
+    assert passes is False
+    assert reason == "thin-threads"
+
+
+def test_evaluate_connection_depth_rejects_thin_implications() -> None:
+    """Casual one-liner implications fail the gate."""
+    from agents.vault_synthesizer import evaluate_article_depth
+
+    body = _connection_body(implications=["it matters.", "consider this."])
+    passes, reason = evaluate_article_depth(body)
+    assert passes is False
+    assert reason == "thin-implications"
+
+
+# --- integration: run_synthesis records rejection reasons --------------------
+
+
+def test_run_synthesis_records_rejected_reasons_for_thin_concepts(tmp_path: Path) -> None:
+    """A thin-definition concept must be rejected and counted with a reason
+    string — so the synth-manifest carries operator-grade signal about WHY
+    output volume is low on any given night."""
+    vault = _make_vault(tmp_path, {"x.md": "seed text long enough to be readable here"})
+
+    def shallow_llm(prompt: str, max_tokens: int = 2000) -> dict:
+        return {
+            "concepts": [
+                {
+                    "title": "Automation Routines",
+                    # one-sentence definition triggers thin-definition rejection
+                    "definition": "It is a process for tracking applications.",
+                    "context": "context",
+                    "examples": ["cd foo", "python bar.py"],
+                    "evidence": [
+                        "cd ~/Code-Brain/claude-code-superuser-pack/agents-sdk",
+                        "PYTHONPATH=. .venv/bin/python3 scripts/update_status.py",
+                    ],
+                    "related": ["Daily Driver Agent", "Agent Health Monitoring"],
+                }
+            ],
+            "connections": [],
+        }
+
+    result = run_synthesis(
+        vault_root=vault,
+        changed_files=[vault / "x.md"],
+        llm_caller=shallow_llm,
+        retriever=lambda q, top_k=5: [{"file_path": "a.md", "chunk_text": "seed alpha", "similarity": 0.9}, {"file_path": "b.md", "chunk_text": "seed beta", "similarity": 0.8}],
+        now_iso="2026-05-20",
+        budget_seconds=300,
+    )
+
+    assert result.concepts_written == 0
+    assert result.rejected_count >= 1
+    # rejected_reasons is the new field — must contain at least one of the
+    # depth-gate reason codes so the manifest can attribute failures.
+    assert result.rejected_reasons, "expected rejected_reasons to be populated"
+    assert any(
+        k in {"thin-definition", "restatement-definition", "code-only-evidence", "thin-evidence"}
+        for k in result.rejected_reasons
+    )
+
+
+def test_synth_manifest_persists_rejected_reasons_and_skipped(tmp_path: Path) -> None:
+    """write_synth_manifest must serialize the new Tier-1.5 fields."""
+    from agents.vault_synthesizer import write_synth_manifest
+
+    result = SynthesisResult(status="ok")
+    result.rejected_reasons = {"thin-definition": 2, "code-only-evidence": 1}
+    result.skipped_thin_source = 4
+    result.run_id = "2026-05-20T02:30:00"
+
+    path = write_synth_manifest(vault_root=tmp_path, result=result, today="2026-05-20")
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    assert payload["rejected_reasons"] == {"thin-definition": 2, "code-only-evidence": 1}
+    assert payload["skipped_thin_source"] == 4
+
+
+def test_run_synthesis_skips_thin_source_files(tmp_path: Path) -> None:
+    """When cluster_and_sample returns <2 chunks (thin source), the file is
+    skipped entirely — no LLM call, no shallow output. Counted in
+    skipped_thin_source so the manifest surfaces the signal."""
+    vault = _make_vault(tmp_path, {"x.md": "seed"})
+
+    llm_called = {"n": 0}
+
+    def llm(prompt: str, max_tokens: int = 2000) -> dict:
+        llm_called["n"] += 1
+        return {"concepts": [], "connections": []}
+
+    # Retriever returns just one chunk → below the min-cluster threshold for
+    # Tier-1.5's skip path.
+    def thin_retriever(query: str, top_k: int = 5, *, include_embeddings: bool = False) -> list[dict]:
+        chunk = {"file_path": "y.md", "chunk_text": "tiny", "similarity": 0.9}
+        if include_embeddings:
+            chunk["embedding"] = [0.0] * 8
+        return [chunk]
+
+    result = run_synthesis(
+        vault_root=vault,
+        changed_files=[vault / "x.md"],
+        llm_caller=llm,
+        retriever=thin_retriever,
+        now_iso="2026-05-20",
+        budget_seconds=300,
+    )
+
+    assert result.skipped_thin_source >= 1
+    assert llm_called["n"] == 0, "LLM must not be called when source is thin"
