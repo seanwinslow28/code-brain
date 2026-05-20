@@ -6,7 +6,7 @@
 # (as root — no sudo needed inside this script when invoked from a LaunchDaemon).
 #
 # Manual run for testing:
-#   sudo /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/scripts/schedule_wakes.sh
+#   sudo /Users/seanwinslow/Code-Brain/code-brain/agents-sdk/scripts/schedule_wakes.sh
 #
 # Inspect queue:
 #   pmset -g sched
