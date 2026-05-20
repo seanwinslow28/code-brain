@@ -52,7 +52,7 @@ MAX_BUDGET_USD = 0.00
 
 _WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]")
 _FRONTMATTER_RE = re.compile(r"^---\n.*?\n---", re.DOTALL)
-_KEBAB_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
+_KEBAB_RE = re.compile(r"^[a-z0-9]+(?:[-_][a-z0-9]+)*\.md$")
 # `[[10]]` / `[[42]]` patterns from LLM-generated research notes (Gemini DR,
 # LDR) are footnote / citation markers, not wikilinks. Filter them out
 # before broken-link reporting.
@@ -77,9 +77,12 @@ _ORPHAN_EXCLUDE_DIRS = {
     "90_system",
     "70_apple-notes",
     "the-block-meetings-granola-notes",
+    "the-block-resume-info",
     "media-team-ideas",
     "daily",
     "qa",
+    "references",
+    "health",
 }
 
 # Strip fenced code blocks and inline code before wikilink scanning so that
@@ -106,6 +109,18 @@ _ORPHAN_EXCLUDE_SUFFIXES = ("-transcript.md",)
 # targets in a one-shot migration pass.
 _BROKEN_LINK_EXCLUDE_DIRS = {
     "the-block-meetings-granola-notes",
+}
+
+# Directories excluded from stale-reference scanning. Lint reports themselves
+# legitimately quote retired model names in their report bodies (the names
+# Sean is auditing). Archived employer material is historical record; the
+# Block job ended 2026-05 and those docs aren't being maintained.
+_STALE_REF_EXCLUDE_DIRS = {
+    "health",
+    "the-block-meetings-granola-notes",
+    "the-block-resume-info",
+    "_archive",
+    "60_archive",
 }
 
 
@@ -278,12 +293,19 @@ def find_orphan_files(vault_root: Path) -> list[LintIssue]:
 
 
 def find_missing_frontmatter(vault_root: Path) -> list[LintIssue]:
-    """Scope: `vault/knowledge/**.md` must have YAML frontmatter."""
+    """Scope: `vault/knowledge/**.md` must have YAML frontmatter.
+
+    Excludes auto-generated hub files (`index.md`) which are rewritten
+    plain-markdown by `vault_synthesizer.regenerate_index` on every nightly
+    run — adding frontmatter to them would be wiped immediately.
+    """
     knowledge = vault_root / "knowledge"
     if not knowledge.exists():
         return []
     issues: list[LintIssue] = []
     for fp in knowledge.rglob("*.md"):
+        if fp.stem.lower() in {"index", "readme"}:
+            continue
         try:
             text = fp.read_text(encoding="utf-8", errors="replace")
         except OSError:
@@ -301,7 +323,14 @@ def find_missing_frontmatter(vault_root: Path) -> list[LintIssue]:
 
 
 def find_camelcase_filenames(vault_root: Path) -> list[LintIssue]:
-    """Scope: `vault/knowledge/**.md` filenames must be kebab-case."""
+    """Scope: `vault/knowledge/**.md` filenames must be kebab- or snake-case.
+
+    Snake_case is permitted for files that mirror a Python identifier or SQL
+    table name (e.g. `concept_edges.md`, `knowledge_loop.md`, `job_feed.md`)
+    where the wikilink target written by the synthesizer is snake_case because
+    the source domain (Python/SQL) is snake_case. Mixed-case and PascalCase
+    still violate.
+    """
     knowledge = vault_root / "knowledge"
     if not knowledge.exists():
         return []
@@ -486,6 +515,9 @@ def run_tier2(
         "claude-3-",
     ]
     for fp in _vault_md_files(vault_root):
+        rel_parts = fp.relative_to(vault_root).parts
+        if any(part in _STALE_REF_EXCLUDE_DIRS for part in rel_parts):
+            continue
         try:
             text = fp.read_text(encoding="utf-8", errors="replace").lower()
         except OSError:
