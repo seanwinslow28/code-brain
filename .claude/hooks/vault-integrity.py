@@ -19,7 +19,7 @@ import time
 
 VAULT_ROOT = os.environ.get(
     "VAULT_ROOT",
-    os.path.expanduser("~/Code-Brain/claude-code-superuser-pack/vault"),
+    os.path.expanduser("~/Code-Brain/code-brain/vault"),
 )
 
 

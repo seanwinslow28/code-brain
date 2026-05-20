@@ -88,7 +88,7 @@ agents-sdk/.venv/bin/python3 agents-sdk/scripts/gemini_dr.py \
 - `--no-confirm` is REQUIRED for DR Max. The helper refuses DR Max without it; the skill's `AskUserQuestion` above provides the human confirmation gate.
 - For DR tier, `--no-confirm` is optional but encouraged for consistency.
 - **Refine the question** before passing it to `--query`. Apply the same specificity rules as `deep-research-queue`: specific, falsifiable, time-scoped where relevant, citation-friendly.
-- Run from the repo root (`/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/`).
+- Run from the repo root (`/Users/seanwinslow/Code-Brain/code-brain/`).
 
 The helper handles: Gemini API polling, ledger update, vault landing, daily-note digest injection.
 

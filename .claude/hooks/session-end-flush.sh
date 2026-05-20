@@ -14,7 +14,7 @@ if [ "${CLAUDE_INVOKED_BY:-}" = "flush" ]; then
     exit 0
 fi
 
-REPO_ROOT="/Users/seanwinslow/Code-Brain/claude-code-superuser-pack"
+REPO_ROOT="/Users/seanwinslow/Code-Brain/code-brain"
 AGENT="$REPO_ROOT/agents-sdk/agents/flush.py"
 VENV_PY="$REPO_ROOT/agents-sdk/.venv/bin/python3"
 LOG_DIR="$REPO_ROOT/vault/90_system/agent-logs"
