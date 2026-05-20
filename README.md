@@ -1,4 +1,6 @@
-# Claude Code Superuser Pack
+# Code-Brain
+
+> *One engineer's working second brain — skills, an agent fleet, and a knowledge graph that thinks back.*
 
 An open-source agentic engineering practitioner's toolkit — **118** skills, 13 subagents, **14** hooks, **17** autonomous SDK agents (8 currently running on launchd by default, 2 opt-in disabled-by-default, 1 manual-trigger), **3 primary domains**, an Obsidian vault, and a Claude Agent SDK runtime, all auto-loaded. Every component is in active use; every scheduled agent has a launchd schedule; every skill is a prompt and every prompt has a job. A local verbatim TTS pipeline (Kokoro-82M ONNX, $0/run on Apple Silicon) turns vault docs into MP3s for commute listening. If you've read Karpathy's "agentic engineering" framing and wondered what one looks like in the wild, this is one.
 

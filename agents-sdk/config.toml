@@ -1,6 +1,6 @@
 [paths]
-repo_root = "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack"
-vault_root = "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault"
+repo_root = "/Users/seanwinslow/Code-Brain/code-brain"
+vault_root = "/Users/seanwinslow/Code-Brain/code-brain/vault"
 skills_dir = ".claude/skills"
 life_systems_scripts = "life-systems/scripts"
 
@@ -129,7 +129,7 @@ skills = ["vault-read-write"]
 max_turns = 15
 max_budget_usd = 0.00
 schedule = "08:00"
-repos = ["seanwinslow28/16BitFit-V3", "seanwinslow28/sprite-sheet-automation-2026", "seanwinslow28/claude-code-superuser-pack"]
+repos = ["seanwinslow28/16BitFit-V3", "seanwinslow28/sprite-sheet-automation-2026", "seanwinslow28/code-brain"]
 target_machine = "macbook_pro"
 
 [agents.meta_agent]

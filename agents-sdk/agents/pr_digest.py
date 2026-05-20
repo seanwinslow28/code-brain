@@ -37,7 +37,7 @@ MAX_BUDGET_USD = 0.00
 DEFAULT_REPOS = [
     "seanwinslow28/16BitFit-V3",
     "seanwinslow28/sprite-sheet-automation-2026",
-    "seanwinslow28/claude-code-superuser-pack",
+    "seanwinslow28/code-brain",
 ]
 
 
