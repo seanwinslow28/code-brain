@@ -138,6 +138,13 @@ class SynthesisResult:
     # gate that the cluster-and-sample path is doing real work (vs. always
     # falling back to the top-rank slice).
     clusters_sampled: int = 0
+    # Tier 1.5 retrofit (2026-05-20) — per-reason rejection counter and
+    # thin-source skip counter. `rejected_reasons` is keyed by stable codes
+    # returned by `evaluate_article_depth` so manifest consumers can tell
+    # "low concept_written tonight because retrieval was thin" from "low
+    # because the LLM produced restated-prompt definitions".
+    rejected_reasons: dict[str, int] = field(default_factory=dict)
+    skipped_thin_source: int = 0
 
 
 # ─── pure helpers ──────────────────────────────────────────────────────────
@@ -162,6 +169,276 @@ def validate_article_body(body: str) -> bool:
     if count_wikilinks(body) < MIN_WIKILINKS_PER_ARTICLE:
         return False
     return not any(p in body for p in _FORBIDDEN_PLACEHOLDERS)
+
+
+# ─── Tier 1.5 — insight-depth gate (2026-05-20) ────────────────────────────
+#
+# Pre-1.5 the validator only checked wikilink count + the forbidden
+# "Evidence pending" string. That let median-quality output through: CLI-
+# snippet evidence, restated-prompt definitions, two-sentence stub articles
+# (see vault/knowledge/concepts/automation-routines.md written 2026-05-19).
+# `evaluate_article_depth` is the new semantic gate. It dispatches by
+# `type: concept` / `type: connection` in the frontmatter and returns a
+# (passed, reason) tuple. The synth loop attributes rejections to
+# `result.rejected_reasons` so the synth-manifest carries operator-grade
+# signal about *why* output volume changes night to night.
+
+_MIN_DEFINITION_SENTENCES = 3
+_MIN_DEFINITION_CHARS = 250
+_MIN_QUOTE_CHARS = 60
+_MIN_QUOTES_PER_CONCEPT = 2
+_MIN_SYNTHESIS_SENTENCES = 3
+_MIN_SYNTHESIS_CHARS = 200
+_MIN_THREAD_QUOTE_CHARS = 60
+_MIN_IMPLICATIONS = 2
+_MIN_IMPLICATION_CHARS = 80
+# Cluster pool below this size means the retriever could not surface
+# enough cross-domain candidates to ground a real article — skip the LLM
+# call entirely rather than produce shallow output (Tier 1.5).
+_MIN_SIMILAR_FOR_LLM = 2
+
+# Restatement tells — phrases that almost always indicate the LLM is
+# paraphrasing the prompt rather than naming a mechanism. Collected from
+# 2026-05-13 → 2026-05-19 nightly output where the median article read like
+# "a collection of X designed to Y that ensures Z."
+_RESTATEMENT_PHRASES = (
+    "a collection of",
+    "a set of",
+    "a series of",
+    "a group of",
+    "designed to support",
+    "designed to ensure",
+    "streamlines his workflow",
+    "streamlines the workflow",
+    "ensures consistency",
+    "ensures efficiency",
+    "ensures that",
+    "is a process for",
+    "is a system that",
+    "is the practice of",
+    "refers to the idea",
+    "encompasses the",
+    "this concept is critical",
+    "this is critical because",
+    "this would benefit sean",
+)
+
+# Verbal-claim markers — a substantive quote almost always contains one
+# of these. CLI commands and frontmatter slices don't.
+_VERB_MARKERS = (
+    " is ", " are ", " was ", " were ", " be ", " been ", " being ",
+    " do ", " does ", " did ", " has ", " have ", " had ",
+    " produces ", " requires ", " causes ", " depends ", " means ",
+    " fails ", " enables ", " prevents ", " allows ", " blocks ",
+    " improves ", " reduces ", " breaks ", " triggers ", " affects ",
+    " surfaces ", " emerges ", " gates ", " forces ", " replaces ",
+    " happens ", " becomes ", " remains ", " stops ", " continues ",
+    " shifted ", " shows ", " demonstrates ", " indicates ",
+)
+
+# Strong tells that a quote is purely code/CLI rather than prose.
+_CODE_LINE_PREFIXES = (
+    "$", "#!/", "cd ", "ls ", "rm ", "cp ", "mv ", "mkdir ",
+    "python ", "python3 ", "node ", "npm ", "pnpm ", "yarn ",
+    "pip ", "pip3 ", "uv ", "brew ", "git ", "PYTHONPATH",
+    "export ", "echo ", "cat ", "grep ", "sed ", "awk ",
+    "curl ", "wget ", "ssh ", "scp ", "make ", "cmake ",
+    ">>", "<<", "function ", "def ", "class ", "import ",
+    "from ", "{", "}", "[", "]", "//", "/*",
+)
+
+
+_SENTENCE_TERMINATOR_RE = re.compile(r"[.!?](?:\s|$)")
+
+
+def _count_sentences(text: str) -> int:
+    """Cheap sentence counter — counts `.`, `!`, `?` followed by whitespace
+    or end-of-string. Good enough for gating prose against thin-stub LLM
+    output; not trying to be linguistically precise."""
+    return len(_SENTENCE_TERMINATOR_RE.findall(text or ""))
+
+
+_SECTION_HEADING_RE = re.compile(r"^##\s+(.+?)\s*$", re.MULTILINE)
+
+
+def _extract_section(body: str, heading: str) -> str:
+    """Return the body of `## Heading` up to the next `## ` or end-of-body.
+
+    Returns "" when the heading is absent. Trims surrounding whitespace.
+    Used by depth checks to inspect Definition / Synthesis / Threads /
+    Implications independently.
+    """
+    target = heading.strip().lower()
+    matches = list(_SECTION_HEADING_RE.finditer(body))
+    for i, m in enumerate(matches):
+        if m.group(1).strip().lower() != target:
+            continue
+        start = m.end()
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(body)
+        return body[start:end].strip()
+    return ""
+
+
+def _strip_blockquote_markers(line: str) -> str:
+    """Strip leading `>` characters and spaces from a markdown blockquote line."""
+    stripped = line.lstrip()
+    while stripped.startswith(">"):
+        stripped = stripped[1:].lstrip()
+    return stripped
+
+
+def _quote_blocks(section: str) -> list[str]:
+    """Extract one logical quote per contiguous `>` blockquote run."""
+    blocks: list[str] = []
+    current: list[str] = []
+    for line in section.splitlines():
+        if line.lstrip().startswith(">"):
+            current.append(_strip_blockquote_markers(line))
+        elif current and line.strip() == "":
+            blocks.append(" ".join(p for p in current if p).strip())
+            current = []
+        elif current:
+            blocks.append(" ".join(p for p in current if p).strip())
+            current = []
+    if current:
+        blocks.append(" ".join(p for p in current if p).strip())
+    return [b for b in blocks if b]
+
+
+def _is_code_or_cli_quote(quote: str) -> bool:
+    """Heuristic: does this quote look like a command/code line, not prose?
+
+    The verb-marker heuristic an earlier draft used was too brittle —
+    "RIFE controls how the model bridges keyframes" got flagged because
+    "controls" / "bridges" aren't in any reasonable hardcoded verb list.
+    Two cleaner signals replace it:
+
+      1. Starts with a known code/CLI prefix (`$`, `cd `, `python`,
+         `PYTHONPATH=`, etc.) — high-precision CLI detector.
+      2. Symbol-density above 30 % — CLI lines like
+         `PYTHONPATH=. .venv/bin/python3 scripts/update_status.py <id>` are
+         dense in `/`, `=`, `-`, `<`, `>` etc., whereas prose is dense in
+         alphanumerics with a few terminal periods/commas.
+
+    Either signal alone classifies the quote as code; otherwise it's prose.
+    """
+    stripped = quote.strip()
+    if not stripped:
+        return True
+    if any(stripped.startswith(p) for p in _CODE_LINE_PREFIXES):
+        return True
+    non_word = sum(1 for ch in stripped if not (ch.isalnum() or ch.isspace()))
+    if non_word / max(len(stripped), 1) > 0.30:
+        return True
+    return False
+
+
+def _normalize_for_dup_check(text: str) -> str:
+    return re.sub(r"\s+", " ", text or "").strip().lower()
+
+
+def evaluate_article_depth(body: str) -> tuple[bool, str]:
+    """Semantic depth gate for a rendered article body.
+
+    Returns `(True, "")` when the article meets Tier-1.5 depth requirements,
+    `(False, reason)` when it doesn't. Dispatches on `type: concept` /
+    `type: connection` in the frontmatter.
+
+    Reason codes (stable — keyed by manifest consumers):
+      concept: thin-definition, restatement-definition, thin-evidence,
+               code-only-evidence, duplicate-examples
+      connection: thin-synthesis, thin-threads, thin-implications
+
+    Unknown article type → `(True, "")` (no opinion).
+    """
+    head = body[:400]
+    if "type: concept" in head:
+        return _evaluate_concept_depth(body)
+    if "type: connection" in head:
+        return _evaluate_connection_depth(body)
+    return True, ""
+
+
+def _evaluate_concept_depth(body: str) -> tuple[bool, str]:
+    definition = _extract_section(body, "Definition")
+    if (
+        _count_sentences(definition) < _MIN_DEFINITION_SENTENCES
+        or len(definition) < _MIN_DEFINITION_CHARS
+    ):
+        return False, "thin-definition"
+
+    lowered = definition.lower()
+    if any(p in lowered for p in _RESTATEMENT_PHRASES):
+        return False, "restatement-definition"
+
+    evidence_section = _extract_section(body, "Evidence")
+    quotes = _quote_blocks(evidence_section)
+    substantive = [q for q in quotes if len(q) >= _MIN_QUOTE_CHARS]
+    if len(substantive) < _MIN_QUOTES_PER_CONCEPT:
+        return False, "thin-evidence"
+    if all(_is_code_or_cli_quote(q) for q in substantive):
+        return False, "code-only-evidence"
+
+    examples_section = _extract_section(body, "Examples")
+    example_lines = [
+        ln.lstrip("- ").strip()
+        for ln in examples_section.splitlines()
+        if ln.lstrip().startswith("- ")
+    ]
+    if example_lines and quotes:
+        norm_quotes = {_normalize_for_dup_check(q) for q in quotes}
+        if example_lines and all(
+            _normalize_for_dup_check(ex) in norm_quotes for ex in example_lines
+        ):
+            return False, "duplicate-examples"
+
+    return True, ""
+
+
+_CONNECTION_THREAD_RE = re.compile(r"^###\s+\[\[([^\]|]+)\]\]\s*$", re.MULTILINE)
+
+
+def _evaluate_connection_depth(body: str) -> tuple[bool, str]:
+    synthesis = _extract_section(body, "Synthesis")
+    if (
+        _count_sentences(synthesis) < _MIN_SYNTHESIS_SENTENCES
+        or len(synthesis) < _MIN_SYNTHESIS_CHARS
+    ):
+        return False, "thin-synthesis"
+
+    threads_section = _extract_section(body, "Threads")
+    if not threads_section:
+        return False, "thin-threads"
+
+    thread_headings = list(_CONNECTION_THREAD_RE.finditer(threads_section))
+    if not thread_headings:
+        return False, "thin-threads"
+
+    for i, m in enumerate(thread_headings):
+        start = m.end()
+        end = (
+            thread_headings[i + 1].start()
+            if i + 1 < len(thread_headings)
+            else len(threads_section)
+        )
+        thread_body = threads_section[start:end]
+        thread_quotes = _quote_blocks(thread_body)
+        if not thread_quotes:
+            return False, "thin-threads"
+        if not any(len(q) >= _MIN_THREAD_QUOTE_CHARS for q in thread_quotes):
+            return False, "thin-threads"
+
+    implications_section = _extract_section(body, "Implications")
+    impl_lines = [
+        ln.lstrip("- ").strip()
+        for ln in implications_section.splitlines()
+        if ln.lstrip().startswith("- ")
+    ]
+    substantive_impls = [i for i in impl_lines if len(i) >= _MIN_IMPLICATION_CHARS]
+    if len(substantive_impls) < _MIN_IMPLICATIONS:
+        return False, "thin-implications"
+
+    return True, ""
 
 
 def _slugify(title: str) -> str:
@@ -333,6 +610,11 @@ def write_synth_manifest(
         # sample path is doing work; 0 means every pool fell back to the
         # top-rank slice (legacy v1 behaviour).
         "clusters_sampled": result.clusters_sampled,
+        # Tier 1.5 retrofit (2026-05-20) — per-reason rejection counts and
+        # thin-source skip counts. Operator-grade signal for *why* an
+        # otherwise-healthy run produced low output volume.
+        "rejected_reasons": dict(sorted(result.rejected_reasons.items())),
+        "skipped_thin_source": result.skipped_thin_source,
     }
     tmp = path.with_suffix(path.suffix + ".tmp")
     tmp.write_text(
@@ -435,21 +717,31 @@ def _build_synthesis_prompt(
 
     return (
         "You are the vault synthesizer for Sean Winslow's personal knowledge "
-        "vault. Your job is not to summarize. Your job is to surface "
-        "**non-obvious cross-domain patterns** that Sean would not notice "
-        "manually — connections across life-systems, creative-studio, "
-        "job-hunt-2026, and Superuser Pack infrastructure.\n\n"
-        "Three rules govern every article you emit:\n"
-        "  1. EVIDENCE FIRST — every claim must be grounded in a verbatim "
-        "quote from a source file. No verbatim quote → no claim.\n"
-        "  2. REUSE > REMINT — if a concept already has a slug in the "
+        "vault. Your job is not to summarize. Your job is to be Sean's "
+        "**thinking partner** — surfacing non-obvious cross-domain patterns "
+        "and tensions he would not notice manually. Connections must span "
+        "life-systems, creative-studio, job-hunt-2026, and Superuser Pack "
+        "infrastructure. **If the chunks below don't support a real insight, "
+        "return empty arrays. Do not pad.**\n\n"
+        "Four rules govern every article you emit:\n"
+        "  1. EVIDENCE FIRST — every claim grounded in a verbatim quote from "
+        "a source file. The quote must be prose that contains a claim — not "
+        "a CLI command, not a frontmatter slice, not a table cell. If the "
+        "only quotable lines are commands, OMIT the article.\n"
+        "  2. NAME THE MECHANISM — definitions describe the *underlying "
+        "pattern or invariant*, not what the source file does. \"A collection "
+        "of automated processes designed to support Sean\" is a restatement, "
+        "not a definition. \"A producer/consumer pattern where one agent's "
+        "write creates a dependency that another agent's read enforces\" is "
+        "a definition.\n"
+        "  3. REUSE > REMINT — if a concept already has a slug in the "
         "canonical list below, reuse the exact title. Do not invent "
         "near-duplicate names.\n"
-        "  3. CROSS-DOMAIN > WITHIN-DOMAIN — when proposing connections, "
-        "prefer those whose member concepts originate in DIFFERENT top-level "
-        "vault folders (life-systems × creative-studio × job-hunt × 40_knowledge "
-        "× 05_atlas). A connection of three concepts all from the same folder "
-        "is a within-domain summary, not a discovery.\n\n"
+        "  4. CROSS-DOMAIN > WITHIN-DOMAIN — connections whose member "
+        "concepts originate in DIFFERENT top-level vault folders "
+        "(life-systems × creative-studio × job-hunt × 40_knowledge × "
+        "05_atlas) are real discoveries. Three concepts from the same "
+        "folder is a within-domain summary; OMIT it.\n\n"
         f"Primary file: {primary_file_rel}  (folder: {primary_folder})\n"
         f"---\n{primary_text[:3000]}\n---\n\n"
         "Semantically similar vault files (note the `folder` field — use it "
@@ -458,28 +750,48 @@ def _build_synthesis_prompt(
         f"{canonical_block}"
         "FORBIDDEN PHRASES — articles containing any of these are rejected:\n"
         '  - "Evidence pending"\n'
-        '  - "(to be filled)"\n\n'
+        '  - "(to be filled)"\n'
+        '  - "a collection of …", "a set of …", "a series of …"\n'
+        '  - "designed to support", "designed to ensure"\n'
+        '  - "streamlines his workflow", "ensures consistency", "ensures efficiency"\n'
+        '  - "is a process for …", "is a system that …", "is the practice of …"\n'
+        '  - "this concept is critical", "this would benefit Sean"\n\n'
+        "REJECTED-SHAPE EXAMPLES (do not produce output that looks like this):\n"
+        "  BAD definition: \"A collection of automated processes designed to "
+        "support Sean's job-hunting efforts, including status updates and "
+        "application tracking.\"  — restates the prompt, names no mechanism.\n"
+        "  BAD evidence quotes: \"cd ~/Code-Brain/...\", \"PYTHONPATH=. python "
+        "scripts/update_status.py\"  — CLI commands, not claims.\n"
+        "  BAD synthesis: \"Three producers share an MBP dependency.\"  — "
+        "describes the linkage but doesn't name the tension or its "
+        "consequence.\n\n"
+        "ACCEPTED-SHAPE EXAMPLE:\n"
+        "  GOOD definition: \"Daily-routine automation depends on agents "
+        "successfully reading the previous day's note. When a synthesizer "
+        "fails silently overnight, the morning brief inherits stale context, "
+        "and the user notices the staleness before the brief flags the "
+        "failure. The dependency is invisible in each agent's source.\"\n\n"
         "Return ONLY a JSON object with this shape (lists may be empty):\n\n"
         "{\n"
         "  \"concepts\": [\n"
         "    {\n"
         "      \"title\": string,                   // reuse from canonical list if applicable\n"
-        "      \"definition\": string,              // 2-3 sentences, grounded in the quotes below\n"
-        "      \"context\": string,                 // why it matters to Sean specifically\n"
-        "      \"evidence\": [string],              // ≥2 VERBATIM quotes from the primary or similar files\n"
-        "      \"examples\": [string],              // concrete from source material\n"
+        "      \"definition\": string,              // **3–5 sentences, ≥250 chars**, naming the mechanism not the surface description\n"
+        "      \"context\": string,                 // **2–3 sentences** on why it matters to Sean specifically\n"
+        "      \"evidence\": [string],              // ≥2 VERBATIM quotes from the primary or similar files. Each quote ≥60 chars AND contains a verbal claim (an `is`/`does`/`causes`/`requires`/etc). NO CLI commands.\n"
+        "      \"examples\": [string],              // concrete from source material — MUST be distinct from `evidence` (no duplicate strings)\n"
         "      \"related\": [string]                // ≥2 exact titles of related concepts\n"
         "    }\n"
         "  ],\n"
         "  \"connections\": [\n"
         "    {\n"
         "      \"title\": string,\n"
-        "      \"synthesis\": string,               // 1-2 sentences naming the cross-domain pattern\n"
-        "      \"concepts\": [string],              // exact titles, ≥3\n"
-        "      \"evidence\": {                      // per-concept verbatim quotes\n"
-        "        \"<concept title>\": [string]      // ≥1 verbatim quote from a source file that grounds this concept's role\n"
+        "      \"synthesis\": string,               // **3–5 sentences, ≥200 chars**: name the cross-domain TENSION or PATTERN and its CONSEQUENCE. Not a description of how the concepts relate; the underlying insight that links them.\n"
+        "      \"concepts\": [string],              // exact titles, ≥3, from ≥2 different top-level folders\n"
+        "      \"evidence\": {                      // per-concept verbatim quotes; each quote ≥60 chars of prose\n"
+        "        \"<concept title>\": [string]      // ≥1 substantive verbatim quote that anchors this concept's role in the tension\n"
         "      },\n"
-        "      \"implications\": [string],          // how this informs future work\n"
+        "      \"implications\": [string],          // ≥2 entries, each ≥80 chars naming a downstream consequence or decision this surfaces\n"
         "      \"source_folders\": [string],        // the distinct top-level vault folders the member concepts span\n"
         "      \"relations\": [                     // OPTIONAL — typed edges between concept pairs\n"
         "        {\n"
@@ -492,13 +804,15 @@ def _build_synthesis_prompt(
         "    }\n"
         "  ]\n"
         "}\n\n"
-        "CRITICAL CONSTRAINTS:\n"
-        "  - every concept MUST list ≥2 verbatim quotes in `evidence` AND ≥2 related titles\n"
-        "  - every connection MUST list ≥3 concept titles AND provide `evidence` for at least each concept it lists\n"
+        "CRITICAL CONSTRAINTS (depth gate downstream rejects violators):\n"
+        "  - every concept's `definition` ≥3 sentences AND ≥250 chars AND avoids the forbidden phrases above\n"
+        "  - every concept's `evidence` ≥2 quotes, each ≥60 chars, each containing a verbal claim — not a CLI snippet\n"
+        "  - every connection's `synthesis` ≥3 sentences AND ≥200 chars, naming the tension/pattern + its consequence\n"
+        "  - every connection's per-concept `evidence` block contains ≥1 substantive prose quote (≥60 chars)\n"
+        "  - every connection has ≥2 `implications`, each ≥80 chars\n"
         "  - quotes MUST be exact substrings of the primary or similar file content shown above — paraphrasing is rejected downstream\n"
-        "  - if you cannot find ≥2 verbatim quotes for a concept, OMIT that concept rather than guessing\n"
-        "  - if you cannot identify a clear typed relation between two concepts, omit that pair from `relations`\n"
-        "  - prefer fewer, well-grounded articles over many shallow ones — empty arrays are valid output"
+        "  - if you cannot meet these depth requirements with the chunks available, OMIT the article entirely\n"
+        "  - **prefer fewer, deeper articles over many shallow ones — empty arrays are the correct output when nothing crosses the bar**"
     )
 
 
@@ -633,6 +947,18 @@ def run_synthesis(
             # No embeddings in pool → legacy top-K-by-rank behaviour.
             similar = pool[:top_k]
 
+        # Tier 1.5 (2026-05-20) — skip thin-source files before the LLM
+        # call. If the diversified pool can't surface at least 2 candidate
+        # chunks, the LLM has nothing to ground a cross-domain article
+        # against. Better to produce no article than a shallow one.
+        if len(similar) < _MIN_SIMILAR_FOR_LLM:
+            result.skipped_thin_source += 1
+            log.info(
+                "skipping %s — only %d candidate chunks (threshold %d)",
+                fp.name, len(similar), _MIN_SIMILAR_FOR_LLM,
+            )
+            continue
+
         prompt = _build_synthesis_prompt(
             primary_file_rel=str(fp.relative_to(vault_root)),
             primary_text=primary_text,
@@ -668,6 +994,20 @@ def run_synthesis(
                 )
                 if not validate_article_body(body):
                     result.rejected_count += 1
+                    result.rejected_reasons["wikilinks-or-placeholder"] = (
+                        result.rejected_reasons.get("wikilinks-or-placeholder", 0) + 1
+                    )
+                    continue
+                # Tier 1.5 (2026-05-20) — semantic depth gate. Catches
+                # restated-prompt definitions, code-only evidence, and
+                # duplicate-Examples shape that the legacy validator can't
+                # see. Reason recorded for manifest attribution.
+                depth_ok, depth_reason = evaluate_article_depth(body)
+                if not depth_ok:
+                    result.rejected_count += 1
+                    result.rejected_reasons[depth_reason] = (
+                        result.rejected_reasons.get(depth_reason, 0) + 1
+                    )
                     continue
                 (concepts_dir / f"{_slugify(title)}.md").write_text(body, encoding="utf-8")
                 result.concepts_written += 1
@@ -700,6 +1040,19 @@ def run_synthesis(
                 )
                 if not validate_article_body(body):
                     result.rejected_count += 1
+                    result.rejected_reasons["wikilinks-or-placeholder"] = (
+                        result.rejected_reasons.get("wikilinks-or-placeholder", 0) + 1
+                    )
+                    continue
+                # Tier 1.5 (2026-05-20) — semantic depth gate on the
+                # connection side: rejects thin synthesis, empty / short
+                # per-concept threads, and casual one-liner implications.
+                depth_ok, depth_reason = evaluate_article_depth(body)
+                if not depth_ok:
+                    result.rejected_count += 1
+                    result.rejected_reasons[depth_reason] = (
+                        result.rejected_reasons.get(depth_reason, 0) + 1
+                    )
                     continue
                 (connections_dir / f"{_slugify(title)}.md").write_text(body, encoding="utf-8")
                 result.connections_written += 1
