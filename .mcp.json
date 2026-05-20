@@ -5,7 +5,7 @@
       "command": "npx",
       "args": [
         "@mauricio.wolff/mcp-obsidian@latest",
-        "/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault"
+        "/Users/seanwinslow/Code-Brain/code-brain/vault"
       ],
       "env": {}
     },

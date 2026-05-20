@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-This is Sean's personal command center — a second brain for Claude Code.
+This is Code-Brain — Sean's personal command center, a second brain built on Claude Code.
 
 ## What This Repo Is
 

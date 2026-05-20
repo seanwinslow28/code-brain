@@ -7,19 +7,19 @@
 
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/bin/python3</string>
-        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/agents/meta_agent.py</string>
+        <string>/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/.venv/bin/python3</string>
+        <string>/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/agents/meta_agent.py</string>
     </array>
 
     <key>WorkingDirectory</key>
-    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack</string>
+    <string>/Users/seanwinslow/Code-Brain/code-brain</string>
 
     <key>EnvironmentVariables</key>
     <dict>
         <key>PATH</key>
         <string>/Users/seanwinslow/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
         <key>PYTHONPATH</key>
-        <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk</string>
+        <string>/Users/seanwinslow/Code-Brain/code-brain/agents-sdk</string>
     </dict>
 
     <key>StartCalendarInterval</key>
@@ -31,10 +31,10 @@
     </dict>
 
     <key>StandardOutPath</key>
-    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/meta-agent-stdout.log</string>
+    <string>/Users/seanwinslow/Code-Brain/code-brain/vault/90_system/agent-logs/meta-agent-stdout.log</string>
 
     <key>StandardErrorPath</key>
-    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/agent-logs/meta-agent-stderr.log</string>
+    <string>/Users/seanwinslow/Code-Brain/code-brain/vault/90_system/agent-logs/meta-agent-stderr.log</string>
 
     <key>RunAtLoad</key>
     <false/>

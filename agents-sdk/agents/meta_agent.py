@@ -61,7 +61,7 @@ AGENT_METADATA: dict[str, dict[str, str | float]] = {
     "meta_agent":        {"display": "meta-agent",            "schedule": "8:35 AM daily",     "machine": "local",           "cost_label": "$0.00/run",   "monthly_usd": 0.00},
 }
 BATON_DIR = Path.home() / ".claude" / "batons"
-LOG_DIR_BASE = Path.home() / "Code-Brain" / "claude-code-superuser-pack" / "vault" / "90_system" / "agent-logs"
+LOG_DIR_BASE = Path.home() / "Code-Brain" / "code-brain" / "vault" / "90_system" / "agent-logs"
 HISTORY_FILE_NAME = "agent-run-history.csv"
 HEALTH_WINDOW_HOURS = 26  # default: 24h + 2h buffer for schedule variance
 
@@ -79,7 +79,7 @@ _STALE_AFTER_HOURS: dict[str, int] = {
 # empty-queue is deep-researcher with no work to do.
 _HEALTHY_CSV_STATUSES = {"success", "empty-queue", "recursion-guard"}
 _ERROR_CSV_STATUSES = {"error"}
-VAULT_ROOT = Path.home() / "Code-Brain" / "claude-code-superuser-pack" / "vault"
+VAULT_ROOT = Path.home() / "Code-Brain" / "code-brain" / "vault"
 FLEET_STATE_DIR = VAULT_ROOT / "02_Areas" / "Agent-Fleet"
 
 MAC_MINI_OLLAMA = "http://192.168.68.200:11434"

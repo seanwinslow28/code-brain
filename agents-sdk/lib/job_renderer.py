@@ -104,7 +104,7 @@ def render_roll_up(
     triage = (
         "\n## Triage\n\n"
         "```bash\n"
-        "cd ~/Code-Brain/claude-code-superuser-pack/agents-sdk\n"
+        "cd ~/Code-Brain/code-brain/agents-sdk\n"
         "PYTHONPATH=. .venv/bin/python3 scripts/update_status.py <db_id> applied\n"
         "PYTHONPATH=. .venv/bin/python3 scripts/update_status.py <db_id> passed\n"
         "```\n"

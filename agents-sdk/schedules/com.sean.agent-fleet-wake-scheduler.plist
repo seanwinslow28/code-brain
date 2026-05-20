@@ -8,7 +8,7 @@
   runs as root) so the script does not need sudo internally.
 
   Install:
-    sudo cp /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/schedules/com.sean.agent-fleet-wake-scheduler.plist /Library/LaunchDaemons/
+    sudo cp /Users/seanwinslow/Code-Brain/code-brain/agents-sdk/schedules/com.sean.agent-fleet-wake-scheduler.plist /Library/LaunchDaemons/
     sudo chown root:wheel /Library/LaunchDaemons/com.sean.agent-fleet-wake-scheduler.plist
     sudo chmod 644        /Library/LaunchDaemons/com.sean.agent-fleet-wake-scheduler.plist
     sudo launchctl bootstrap system /Library/LaunchDaemons/com.sean.agent-fleet-wake-scheduler.plist
@@ -26,7 +26,7 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/scripts/schedule_wakes.sh</string>
+    <string>/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/scripts/schedule_wakes.sh</string>
   </array>
 
   <key>StartCalendarInterval</key>
