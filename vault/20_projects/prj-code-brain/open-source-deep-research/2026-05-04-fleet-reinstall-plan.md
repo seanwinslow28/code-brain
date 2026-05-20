@@ -130,7 +130,7 @@ Expected: empty output (no matches). If anything matches, STOP and surface — S
 - [ ] **A.3 — Delete the 6 stale plists from the repo.**
 
 ```bash
-cd /Users/seanwinslow/Code-Brain/claude-code-superuser-pack
+cd /Users/seanwinslow/Code-Brain/code-brain
 git rm agents-sdk/schedules/com.sean.agent.daily-evening.plist \
        agents-sdk/schedules/com.sean.agent.daily-morning-baton.plist \
        agents-sdk/schedules/com.sean.agent.pr-digest.plist \
@@ -367,7 +367,7 @@ Expected: both `NO_*` outputs (we haven't installed yet).
 - [ ] **E.3 — `--list` dry-run via the installer's built-in.**
 
 ```bash
-cd /Users/seanwinslow/Code-Brain/claude-code-superuser-pack
+cd /Users/seanwinslow/Code-Brain/code-brain
 ./agents-sdk/schedules/install_schedules.sh --list
 ```
 Expected output:
@@ -457,14 +457,14 @@ After E.6: paste `launchctl list | grep sean.agent` output, confirm PATH spot-ch
 
 ```bash
 hostname
-grep -m1 "^- \[ \]" /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/00_inbox/research-queue.md
+grep -m1 "^- \[ \]" /Users/seanwinslow/Code-Brain/code-brain/vault/00_inbox/research-queue.md
 ```
 Expected: hostname Mac Mini; first match is Topic 1a (`MCP / SDK toolkit survey`). If different, STOP and surface — the queue may have changed since the plan was written.
 
 - [ ] **F.2 — Dry-run.**
 
 ```bash
-cd /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk
+cd /Users/seanwinslow/Code-Brain/code-brain/agents-sdk
 PYTHONPATH=. .venv/bin/python3 agents/deep_researcher.py --mode queue --dry-run
 ```
 Expected: prints Topic 1a's question text + LDR config, exits 0.
@@ -472,7 +472,7 @@ Expected: prints Topic 1a's question text + LDR config, exits 0.
 - [ ] **F.3 — Live run.**
 
 ```bash
-cd /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk
+cd /Users/seanwinslow/Code-Brain/code-brain/agents-sdk
 PYTHONPATH=. .venv/bin/python3 agents/deep_researcher.py --mode queue
 ```
 Expected: ~5–15 minute wall-clock (per 2026-05-03 baseline of 286s for an easier topic; Topic 1a is more open-ended so allow up to 900s). Exits 0. Writes `vault/20_projects/research/2026-05-05-{slug}.md` (slug auto-derived from the Topic 1a question text).
@@ -496,7 +496,7 @@ Expected:
 ### F — Rollback (if smoke test fails)
 
 ```bash
-cd /Users/seanwinslow/Code-Brain/claude-code-superuser-pack
+cd /Users/seanwinslow/Code-Brain/code-brain
 ./agents-sdk/schedules/install_schedules.sh --remove
 launchctl list | grep sean.agent || echo "NO_JOBS_LOADED"
 ```
@@ -679,7 +679,7 @@ After all sub-plans complete, before writing the summary file:
 - [ ] `~/Library/LaunchAgents/com.sean.agent.meeting-defender.plist` is gone.
 - [ ] `agents-sdk/schedules/` contains exactly 7 plists.
 - [ ] CHANGELOG / CLAUDE.md / README.md doc diffs applied (or explicitly skipped with reason).
-- [ ] Summary file written at `vault/20_projects/prj-superuser-pack/open-source-deep-research/2026-05-04-fleet-reinstall-summary.md`.
+- [ ] Summary file written at `vault/20_projects/prj-code-brain/open-source-deep-research/2026-05-04-fleet-reinstall-summary.md`.
 
 ---
 

@@ -158,7 +158,7 @@ vault/
 │   │   ├── README.md
 │   │   ├── The-Block-Contacts-After-Layoff.md
 │   │   └── onwards-and-upwards-5-4-26/   # Migration + master plan + audit
-│   ├── prj-superuser-pack/           # This repo's active development
+│   ├── prj-code-brain/           # This repo's active development
 │   ├── prj-16bitfit/                 # Game project (most content moved to creative-studio/16bitfit-battle-mode/)
 │   ├── prj-campus-201/               # Campus LMS (mostly archived after Block layoff)
 │   ├── prj-boston-move/              # Boston relocation
@@ -1036,7 +1036,7 @@ As of 2026-05-06 (down from 1,431 in Feb 2026 due to the Apple-Notes archive col
 
 | Project | Files |
 |---|---:|
-| `prj-superuser-pack` | 26 |
+| `prj-code-brain` | 26 |
 | `prj-job-hunt-2026` | 8 (NEW 2026-05-04) |
 | `research/` | 6 (deep-researcher overnight queue) |
 | `prj-16bitfit` | 3 (most content moved to `creative-studio/16bitfit-battle-mode/` outside vault) |

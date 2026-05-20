@@ -6,12 +6,12 @@ domain:
   - creative-studio
   - life-systems
 status: complete
-context: superuser-pack
+context: code-brain
 created: 2026-05-01
 source: agent-wiring-rollout-phase-2-soak
 references:
-  - vault/20_projects/prj-superuser-pack/prj-agent-wiring-rollout.md
-  - vault/20_projects/prj-superuser-pack/prj-knowledge-loop-consumer.md
+  - vault/20_projects/prj-code-brain/prj-agent-wiring-rollout.md
+  - vault/20_projects/prj-code-brain/prj-knowledge-loop-consumer.md
 ---
 
 # Phase 2 Soak Closeout — 2026-05-01
