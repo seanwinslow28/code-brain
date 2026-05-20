@@ -2,31 +2,30 @@
 title: "Vault Synthesizer Eval Suite"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-synthesizer-retrofit-tiers.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md
 tags: [auto-generated, phase-6]
-created: 2026-05-19
-updated: 2026-05-19
+created: 2026-05-20
+updated: 2026-05-20
 ---
 
 ## Definition
 
-A structured evaluation framework designed to test the effectiveness of the Vault Synthesizer v2 retrofit, ensuring it produces cross-domain insights rather than deduplicated noise.
+A set of evaluations designed to test the performance and accuracy of the vault synthesizer used for knowledge management.
 
 ## Context
 
-This concept is critical to Sean as it directly addresses the failure of the previous Vault Synthesizer version to deliver meaningful cross-domain connections, which is a core requirement for his knowledge management system.
+This concept is significant as it ensures the reliability of Sean's knowledge vault systems, which are central to his professional development.
 
 ## Evidence
 
-> A structured evaluation framework designed to test the effectiveness of the Vault Synthesizer v2 retrofit, ensuring it produces cross-domain insights rather than deduplicated noise.
+> Vault Synthesizer Eval Suite
 
-> Task 8 — Vault Synthesizer Eval Suite (NEW 2026-05-10 — ships Friday Week 2, 2026-05-22)
+> Synthesis of five reference docs in [reference-synthesis-docs/](reference-synthesis-docs/), mapped onto the [master plan's](../2026-05-04-onwards-and-upw
 
 ## Examples
 
-- The Eval Suite is mentioned as a companion artifact for the retrofit plan.
-- It is described as a framework to test if the synthesizer produces cross-domain insight.
+- The eval suite was added to the roadmap on 2026-05-10.
 
 ## Related Concepts
 
-[[Vault Synthesizer v2 retrofit plan]] [[Cross-domain bridging]]
+[[Unified Roadmap]] [[Citation Quality]]
