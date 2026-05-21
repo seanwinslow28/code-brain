@@ -37,6 +37,14 @@ def list_macmini_synth_files(
     window (02:00–04:00 today). Filters to vault/knowledge/concepts/*.md.
 
     Returns [] on any git failure — caller treats that as a quiet night.
+
+    Silent-skip behavior: files that appear in the git log but no longer
+    exist on disk (e.g., committed then deleted before the critic ran) are
+    silently dropped from the output. This is the intended behavior — a
+    deleted file can't be critiqued — but it means the returned list may be
+    shorter than the manifest's concepts_written. To diagnose a missing
+    expansion file, run the git log command above by hand and check whether
+    each listed file exists at the printed path.
     """
     date_iso = date_iso or date.today().isoformat()
     since = f"{date_iso} {SYNTH_WINDOW_START_HOUR}"
