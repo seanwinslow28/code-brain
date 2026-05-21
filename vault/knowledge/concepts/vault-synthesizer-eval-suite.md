@@ -2,30 +2,30 @@
 title: "Vault Synthesizer Eval Suite"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-15.md
 tags: [auto-generated, phase-6]
-created: 2026-05-20
-updated: 2026-05-20
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-A set of evaluations designed to test the performance and accuracy of the vault synthesizer used for knowledge management.
+A system for evaluating the performance of the vault-synthesizer agent, ensuring that it properly processes and connects research findings.
 
 ## Context
 
-This concept is significant as it ensures the reliability of Sean's knowledge vault systems, which are central to his professional development.
+The failure of the vault-synthesizer on 2026-05-15 disrupts the ability to consolidate research findings, which is critical for Sean's knowledge management and workflow automation.
 
 ## Evidence
 
-> Vault Synthesizer Eval Suite
+> - **Status:** error
 
-> Synthesis of five reference docs in [reference-synthesis-docs/](reference-synthesis-docs/), mapped onto the [master plan's](../2026-05-04-onwards-and-upw
+> - ... notes='concepts=0 connections=0 rejected=0 edges=0'
 
 ## Examples
 
-- The eval suite was added to the roadmap on 2026-05-10.
+- The vault-synthesizer failed to run on 2026-05-15, inhibiting the synthesis of research findings.
 
 ## Related Concepts
 
-[[Unified Roadmap]] [[Citation Quality]]
+[[Indexing and Synthesis]] [[Automation Failure and Daily Note Disruption]]

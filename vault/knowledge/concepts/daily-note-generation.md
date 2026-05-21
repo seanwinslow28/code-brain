@@ -2,31 +2,30 @@
 title: "Daily Note Generation"
 type: concept
 sources:
-  - knowledge/concepts/automation-reliability.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-12.md
 tags: [auto-generated, phase-6]
-created: 2026-05-19
-updated: 2026-05-19
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-A routine task performed by the daily-driver agent to generate a note for the day, which is integral to tracking progress and activities. Its success relies heavily on the health of the agent.
+The automated process of creating a structured daily record, which serves as a key reference point for tracking work progress across multiple domains.
 
 ## Context
 
-For Sean, daily note generation is integral to his knowledge tracking and progress monitoring. It highlights the interplay between agent health and task reliability.
+For Sean, this is critical because it ensures continuity in his daily workflows and enables retrospective analysis of progress.
 
 ## Evidence
 
-> A routine task performed by the daily-driver agent to generate a note for the day, which is integral to tracking progress and activities.
+> Daily note exists: No (`/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/10_timeline/daily/2026-05-12.md`)
 
-> The health of the daily-driver agent is a critical factor in determining automation success, especially for routine tasks.
+> The daily-driver ran 23.8 hours ago, skipping the expected morning routine.
 
 ## Examples
 
-- Generating daily notes via automation
-- Agent health influencing the reliability of daily note generation
+- No daily note was generated for 2026-05-12, despite the daily-driver running.
 
 ## Related Concepts
 
-[[Automation Reliability]] [[Agent Health and Daily Routine Automation]]
+[[Automation Failure and Daily Note Disruption]] [[Daily-driver agent]]

@@ -2,30 +2,30 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-19.md
 tags: [auto-generated, phase-6]
-created: 2026-05-20
-updated: 2026-05-20
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-A system designed to monitor and manage the status of autonomous agents, ensuring their reliability and efficiency.
+A conceptual framework for monitoring the health and status of all agents in Sean's infrastructure, ensuring visibility into automation workflows.
 
 ## Context
 
-This tool is crucial for Sean to maintain the health of his agentic systems, especially as they support his job hunt and knowledge management workflows.
+This would help Sean ensure reliability and efficiency of his knowledge vault by providing real-time monitoring capabilities for agent operations.
 
 ## Evidence
 
-> Task 11 v1 CODE COMPLETE (Agent Fleet Observability Dashboard)
+> 'Active agents: 7 of 12 | Disabled: 5.'
 
-> Task 11 DEPLOY COMPLETE — fleet.seanwinslow.com LIVE
+> 'Vault indexing and concept linkage running successfully, reinforcing Obsidian as SSoT.'
 
 ## Examples
 
-- The dashboard is now live at fleet.seanwinslow.com.
+- The daily-fleet-status report provides visibility into agent activity and status.
 
 ## Related Concepts
 
-[[Unified Roadmap]] [[Automation Reliability]]
+[[Agent Health Monitoring]] [[Automation Routines]]

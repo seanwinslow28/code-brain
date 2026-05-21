@@ -2,31 +2,31 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - knowledge/concepts/automation-reliability.md
+  - 00_inbox/Executive Briefing Valve Got Lord of the Flies. Zappos Got Paralysis. Your Reorg Is Next..md
 tags: [auto-generated, phase-6]
-created: 2026-05-19
-updated: 2026-05-19
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-A concept referring to the consistent performance of automated systems, particularly in the context of daily routines and agent operations. It is crucial for ensuring that automation functions reliably across Sean's workflows.
+The consistent and dependable performance of automation systems, particularly in tasks like routing information or executing routines, is crucial for organizational stability.
 
 ## Context
 
-This concept matters to Sean because it directly affects the reliability of automation in his daily work and knowledge management workflows, which are essential for productivity.
+Sean must understand the trade-offs between automation reliability and manual process redundancy, especially in contexts where agent systems rely on these tools.
 
 ## Evidence
 
-> Automation reliability — the consistent performance of automated systems, particularly in daily routines and agent operations.
+> 'Routing is automatable now.'
 
-> Of 10 chunks retrieved per query, 6-7 always came from the agent-health/automation-reliability cluster
+> 'You’re spending leadership attention to manually do what software does better, while the thing that’s actually broken goes unaddressed.'
 
 ## Examples
 
-- Agent health and daily routine automation
-- Automation reliability as a cluster in concept space
+- Routing is a function that can be fully automated using AI.
+- Organizations often fail by focusing on automating routing while ignoring accountability.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Automation Routines]]
+[[Automation and Daily Drive Agent Interdependence]] [[Daily Routine Automation]]

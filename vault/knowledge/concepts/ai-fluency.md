@@ -2,31 +2,31 @@
 title: "AI Fluency"
 type: concept
 sources:
-  - knowledge/concepts/ai-fluency.md
+  - 00_inbox/You're Loading 66,000 Tokens of Plugins Before You Even Type. That's Why Your Limit Disappears..md
 tags: [auto-generated, phase-6]
-created: 2026-05-19
-updated: 2026-05-19
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-The ability to understand, navigate, and contribute to AI-native workflows through hands-on projects and artifacts. This is particularly relevant for Sean as he seeks roles in Enterprise AI PM, where practical outputs are favored over credentials.
+The ability to use AI tools efficiently, with a deep understanding of how to optimize prompts and model usage. It reduces waste and improves productivity.
 
 ## Context
 
-Sean's need to demonstrate expertise in Enterprise AI PM roles through concrete outputs rather than credentials.
+Sean needs to cultivate AI Fluency for both his job hunt and creative endeavors, ensuring he gets the most out of limited resources like token limits.
 
 ## Evidence
 
-> Credentials are largely worthless; artifacts are the credential.
+> Token management is a indicator of AI fluency. Here's how to get better at it.
 
-> Inbound recruiter messages in Market Two follow published work — agent specs, failure post-mortems, evaluation frameworks, narrated working sessions — not certifications.
+> The problem is that most people don’t know what they’re doing. They’re burning 5x, 10x, sometimes 20x what they should on the exact same work.
 
 ## Examples
 
-- Agent specs
-- Failure post-mortems
+- Using optimized prompts to reduce token waste.
+- Applying domain-specific knowledge to generate more precise model queries.
 
 ## Related Concepts
 
-[[Portfolio Projects for Interview Prep]] [[Agent Health Monitoring]]
+[[Cost-Capped Agentic Workflows]] [[Agent Health Monitoring]]

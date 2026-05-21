@@ -2,25 +2,30 @@
 title: "Automation Pipeline"
 type: concept
 sources:
-  - knowledge/index.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-12.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-A structured workflow that enables agents to autonomously execute tasks in sequence, including data processing, analysis, and reporting.
+A sequence of automated tasks designed to streamline workflows, ensuring consistent execution and reliability across the vault system.
 
 ## Context
 
-Automation pipelines are essential for ensuring seamless execution of agent routines, especially in large-scale operations.
+This concept is crucial for Sean's ability to maintain and scale his workflows efficiently across multiple domains.
+
+## Evidence
+
+> Background maintenance routines (indexer, synthesizer, deep-researcher) ran successfully
+
+> The daily-driver morning agent is part of the expected automation pipeline but failed to generate a note.
 
 ## Examples
 
-- Data ingestion and processing pipelines
-- Agent-driven reporting systems
+- The daily-driver agent is an integral part of the automation pipeline but failed in its role on 2026-05-12.
 
 ## Related Concepts
 
-[[Automation Routines]] [[Autonomous Agent Fleets]] [[Agent Health Monitoring]]
+[[Automation Failure and Daily Note Disruption]] [[Daily Note Generation]]
