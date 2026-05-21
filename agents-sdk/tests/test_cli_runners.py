@@ -1,8 +1,15 @@
 import asyncio
+import json
 from pathlib import Path
 from unittest.mock import AsyncMock, MagicMock, patch
 
-from lib.cli_runners import CLIResponse, detect_rate_cap, parse_codex_tokens, run_codex
+from lib.cli_runners import (
+    CLIResponse,
+    detect_rate_cap,
+    parse_codex_tokens,
+    run_antigravity,
+    run_codex,
+)
 
 FIXTURES = Path(__file__).parent / "fixtures" / "critic"
 
@@ -136,3 +143,65 @@ def test_run_codex_rate_cap_marks_response_capped():
     resp = asyncio.run(go())
     assert resp.rate_capped is True
     assert resp.ok is False
+
+
+def test_run_antigravity_replays_smoke_fixture():
+    stdout = (FIXTURES / "gemini-out.json").read_bytes()
+    stderr = (FIXTURES / "gemini-err.txt").read_bytes()
+
+    async def go():
+        fake = _fake_proc(stdout, stderr, returncode=0)
+        with patch("lib.cli_runners.asyncio.create_subprocess_exec",
+                   AsyncMock(return_value=fake)) as create:
+            resp = await run_antigravity("any prompt", timeout_s=60)
+            # Verify the env var was set on the subprocess call
+            kwargs = create.call_args.kwargs
+            env = kwargs.get("env", {})
+            assert env.get("GEMINI_CLI_TRUST_WORKSPACE") == "true"
+            return resp
+
+    resp = asyncio.run(go())
+    assert resp.cli == "antigravity"
+    assert resp.exit_code == 0
+    assert resp.rate_capped is False
+    # The response field starts with "### 1. Surgical Cultural Synthesis"
+    assert resp.text.startswith("### 1. Surgical Cultural Synthesis")
+    # Token total from stats.models["gemini-3.1-pro-preview"].tokens.total
+    assert resp.tokens == 15746
+    assert resp.ok is True
+
+
+def test_run_antigravity_malformed_json_marks_error():
+    async def go():
+        fake = _fake_proc(b"not json at all", b"", returncode=0)
+        with patch("lib.cli_runners.asyncio.create_subprocess_exec",
+                   AsyncMock(return_value=fake)):
+            return await run_antigravity("any prompt", timeout_s=10)
+
+    resp = asyncio.run(go())
+    assert resp.ok is False
+    assert resp.error is not None
+    assert "json" in resp.error.lower()
+
+
+def test_run_antigravity_extracts_routed_model_from_stats():
+    """Don't hardcode gemini-3.1-pro-preview — read from stats.models keys."""
+    payload = {
+        "session_id": "abc",
+        "response": "body",
+        "stats": {
+            "models": {
+                "gemini-4.0-pro-preview": {  # hypothetical future model
+                    "tokens": {"total": 999}
+                }
+            }
+        },
+    }
+    async def go():
+        fake = _fake_proc(json.dumps(payload).encode(), b"", returncode=0)
+        with patch("lib.cli_runners.asyncio.create_subprocess_exec",
+                   AsyncMock(return_value=fake)):
+            return await run_antigravity("any prompt", timeout_s=10)
+
+    resp = asyncio.run(go())
+    assert resp.tokens == 999

@@ -144,3 +144,103 @@ async def run_codex(prompt: str, timeout_s: float = CODEX_DEFAULT_TIMEOUT_S) -> 
         rate_capped=detect_rate_cap("codex", stderr_text),
         error=None if proc.returncode == 0 else stderr_text[:500],
     )
+
+
+ANTIGRAVITY_BINARY = "/opt/homebrew/bin/gemini"
+ANTIGRAVITY_DEFAULT_TIMEOUT_S = 120
+
+
+def _antigravity_tokens(payload: dict) -> int | None:
+    """Pluck the total token count from Anti-Gravity stats, model-name-agnostic.
+
+    `stats.models` is a {<model_name>: {tokens: {total: int, ...}}} map.
+    The model name is whichever the auto-router resolved to and may change
+    over time, so we read whichever single key is present.
+    """
+    models = (payload.get("stats") or {}).get("models") or {}
+    if not models:
+        return None
+    # If multiple models surface (multi-model routing in a future CLI version),
+    # sum them — total across the call is the right number for our manifest.
+    total = 0
+    found = False
+    for entry in models.values():
+        tk = (entry or {}).get("tokens") or {}
+        if "total" in tk:
+            total += int(tk["total"])
+            found = True
+    return total if found else None
+
+
+async def run_antigravity(prompt: str, timeout_s: float = ANTIGRAVITY_DEFAULT_TIMEOUT_S) -> CLIResponse:
+    """Invoke `gemini -p` with JSON output and plan approval mode.
+
+    Trust set via GEMINI_CLI_TRUST_WORKSPACE=true env var (explicit, not
+    inherited). Sandbox via --approval-mode plan (read-only per smoke test).
+    Returns a CLIResponse; never raises on CLI failure.
+    """
+    cmd = [
+        ANTIGRAVITY_BINARY,
+        "-p", prompt,
+        "--output-format", "json",
+        "--approval-mode", "plan",
+    ]
+    env = {**os.environ, "GEMINI_CLI_TRUST_WORKSPACE": "true"}
+    t0 = time.monotonic()
+    try:
+        proc = await asyncio.create_subprocess_exec(
+            *cmd,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+            cwd=str(Path.home()),
+            env=env,
+        )
+    except FileNotFoundError as exc:
+        return CLIResponse(
+            cli="antigravity", text="", tokens=None,
+            duration_s=time.monotonic() - t0,
+            exit_code=-1, rate_capped=False,
+            error=f"gemini binary missing: {exc}",
+        )
+
+    try:
+        stdout, stderr = await asyncio.wait_for(
+            proc.communicate(), timeout=timeout_s,
+        )
+    except asyncio.TimeoutError:
+        try:
+            proc.kill()
+        except ProcessLookupError:
+            pass
+        return CLIResponse(
+            cli="antigravity", text="", tokens=None,
+            duration_s=time.monotonic() - t0,
+            exit_code=-1, rate_capped=False,
+            error=f"antigravity timeout after {timeout_s}s",
+        )
+
+    stdout_text = stdout.decode("utf-8", errors="replace")
+    stderr_text = stderr.decode("utf-8", errors="replace")
+    duration = time.monotonic() - t0
+    rate_capped = detect_rate_cap("antigravity", stderr_text)
+
+    try:
+        payload = json.loads(stdout_text)
+    except json.JSONDecodeError as exc:
+        return CLIResponse(
+            cli="antigravity", text=stdout_text, tokens=None,
+            duration_s=duration,
+            exit_code=proc.returncode if proc.returncode is not None else -1,
+            rate_capped=rate_capped,
+            error=f"antigravity json parse failed: {exc}",
+        )
+
+    return CLIResponse(
+        cli="antigravity",
+        text=str(payload.get("response", "")),
+        tokens=_antigravity_tokens(payload),
+        duration_s=duration,
+        exit_code=proc.returncode if proc.returncode is not None else -1,
+        rate_capped=rate_capped,
+        error=None if proc.returncode == 0 else stderr_text[:500],
+    )
