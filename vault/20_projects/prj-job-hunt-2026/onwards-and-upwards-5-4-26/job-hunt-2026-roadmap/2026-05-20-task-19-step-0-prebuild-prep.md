@@ -3,6 +3,8 @@ type: prep
 project: prj-job-hunt-2026
 task: Task 19 Step 0 — Mock Interview Infrastructure pre-build prep
 created: 2026-05-20
+last_updated: 2026-05-21
+status: decisions-locked-ready-for-build
 build_window: 2026-05-21 to 2026-05-26
 ship_target: 2026-05-26
 ai-context: |
@@ -10,9 +12,13 @@ ai-context: |
   Council profile matching the existing PROFILES dict shape, 8-dim rubric prompt template,
   mock_interview_loop.py skeleton with local Whisper as the recommended transcription stack
   (symmetric with the existing Kokoro-82M TTS pipeline), test plan with Task 17 TMAY dependency
-  flagged, and 6 open decisions before the 5/21–5/26 build window. Output of this task is the
-  measurement infrastructure for Gate C ("3 consecutive 8+/10 mock interviews") — without this
-  rig, Gate C is unmeasurable.
+  flagged. Sean's decisions locked 2026-05-21: 4-panelist profile (Opus + GPT-5.5 + Gemini Pro +
+  Sonnet), local Whisper transcription, grades stay private inside interview-prep/mock-log/
+  (not surfaced in daily-driver brief), both watch + one-shot modes shipped, run tests on
+  5/26 (the "Why The Block?" question SWAPPED — Sean was laid off, not departing — replaced
+  with "Walk me through what happened with The Block + your search reset"), keep full council
+  markdown not just chairman synthesis. Output is the measurement infrastructure for Gate C
+  ("3 consecutive 8+/10 mock interviews") — without this rig, Gate C is unmeasurable.
 related:
   - "[[2026-05-06-unified-roadmap]]"
   - "[[operating-model]]"
@@ -410,11 +416,13 @@ The roadmap says "Run 3 mock TMAY attempts. Verify Council returns scored output
 ### The TMAY dependency
 **Task 17 (A2 — TMAY 2-min script) ships by 5/31**, which is 5 days *after* Task 19 ships by 5/26. So the canonical first test happens *after* the rig is live. **Mitigation:** Sean can test the rig immediately with any practice TMAY draft (even a rough one), or with other common questions like "Why are you leaving The Block?" or "Tell me about a time you disagreed with engineering." The rig's correctness check doesn't require a polished TMAY — it requires *any* recorded answer to grade against the rubric.
 
-### Suggested first-test sequence (5/26)
+### Suggested first-test sequence (5/26) — UPDATED 2026-05-21
+
+> **Question #2 swapped** per Sean's 2026-05-21 direction: "I was laid off from the Block, so we might want to switch up that specific test." The original "Why are you leaving The Block?" assumed a voluntary departure; the laid-off framing changes the answer's posture (factual narrative + recovery + forward intent, not justification). New Q2 below is calibrated for that.
 
 1. **Record 3 practice answers**, ~60-120s each, with macOS Voice Memos. Questions:
    - "Tell me about yourself" (rough TMAY)
-   - "Why are you leaving The Block?" (TMAY-adjacent, no Task 17 dependency)
+   - **"Walk me through what happened with The Block and how it reset your search."** Tests the laid-off-candidate narrative pattern: 1 sentence on the layoff (factual, unembellished) → 1 sentence on what The Block was (so the recruiter knows the substance you ran) → 2-3 sentences on what changed in your search posture (AI PM > Tech PM > Creative PM lock-in, the 8-week sprint, the published artifacts). Rubric dims this exercises hard: *information control* (don't over-explain the layoff), *weakness flipping* (the layoff becomes the inflection that produced the public artifacts), *impact specificity* (cite specific shipped things — MCP server on the registry, fleet dashboard live).
    - "Walk me through a time you shipped something hard" (the eval-suite story from Task 8 is the obvious answer)
 
 2. **Run the rig** on each:
@@ -436,27 +444,32 @@ The roadmap says "Run 3 mock TMAY attempts. Verify Council returns scored output
 
 ---
 
-## 8. Six open decisions for Sean
+## 8. DECISIONS LOCKED (2026-05-21)
 
-Answer these before 5/21 build start.
+Sean's answers from `open-question-answers-5-21.md`.
 
-1. **4-panelist (Opus + GPT-5.5 + Gemini Pro + Sonnet) vs 3-panelist (drop Sonnet, accept prompt-refactor scope)?**
-   - Default: **4 panelists with Sonnet as the 4th.** No prompt refactor, $0.40 cap maintained, different RLHF lineage from Opus. Spec-divergent on the "drop Grok for speed" framing but functionally equivalent.
+| # | Decision | Locked answer |
+|---|---|---|
+| 1 | 4-panelist (Opus + GPT-5.5 + Gemini Pro + Sonnet) vs 3-panelist? | ✅ **Default — 4 panelists with Sonnet as the 4th.** No prompt refactor, $0.40/query cap maintained, different RLHF lineage from Opus. |
+| 2 | Local Whisper vs Otter vs Granola? | ✅ **Local Whisper.** $0/run, symmetric with the existing Kokoro-82M TTS pipeline, audio never leaves the machine. |
+| 3 | Auto-publish mock grades to `vault/health/` or stay private? | ✅ **Stay private** inside `interview-prep/mock-log/`. Not surfaced in the daily-driver morning brief. |
+| 4 | Watch mode + one-shot, or one-shot only? | ✅ **Default — both.** Skeleton ships both modes. |
+| 5 | Test on 5/26 with rough drafts (don't wait for Task 17)? | ✅ **Yes, run tests 5/26.** **AND** Question #2 SWAPPED — Sean was laid off from The Block, not voluntarily departing. New Q2: "Walk me through what happened with The Block and how it reset your search" (see §7 for the rubric-dim-by-dim rationale). |
+| 6 | Full council markdown or chairman-only? | ✅ **Keep the full markdown.** Sean wants to read everything the council has to say (raw 4-model responses + cross-rankings, not just chairman synthesis). |
 
-2. **Local Whisper (default) vs Otter API vs Granola API for transcription?**
-   - Default: **local Whisper.** $0/run, symmetric with Kokoro TTS, privacy intact.
+### Operational note on Decision 5 (the question swap)
 
-3. **Should the loop auto-publish mock grades to `vault/health/` for the daily-driver brief to read, or stay private inside `interview-prep/mock-log/`?**
-   - Default: **stay private.** The daily-driver brief shouldn't be where Sean reads his own grading; that's a different shape of feedback. Mock grades are referenced only when Sean opens them deliberately.
+Sean's framing for the laid-off narrative is structurally different from the "voluntary departure" framing the original spec assumed. The right pattern for the laid-off candidate:
+1. **One factual sentence on the layoff** — unembellished, no spin
+2. **One sentence on what The Block was** — gives the recruiter substance context
+3. **2–3 sentences on the search-posture reset** — AI PM > Tech PM > Creative PM lock-in, the 8-week sprint, the public artifacts that came out of it
 
-4. **Watch mode (continuous Voice Memos polling) vs one-shot CLI?**
-   - Default: **both.** Skeleton has both. `--watch` for an interview-prep session with multiple takes, one-shot for single tests.
+This pattern exercises three rubric dimensions hard:
+- **Information control** — don't over-explain the layoff
+- **Weakness flipping** — layoff becomes the inflection that produced the artifacts
+- **Impact specificity** — cite the MCP server on the registry, the fleet dashboard at fleet.seanwinslow.com, the eval suite shipped 5/12
 
-5. **Test on 5/26 with rough TMAY drafts vs wait until Task 17 ships 5/31?**
-   - Default: **test 5/26 with rough drafts + the "Why The Block?" + "Walk me through" backups.** Don't gate Task 19 verification on Task 17.
-
-6. **Include the council session full markdown (raw 4-model responses + cross-rankings) in `mock-log/`, or just the chairman synthesis?**
-   - Default: **keep full markdown.** Reading the 4 individual responses + the rankings is useful when grades feel surprising. Storage cost is ~50KB per mock; negligible.
+After the rig is live, this pattern should be drilled until the rubric scores 8+/10 consistently. It's the highest-leverage question to nail because *every recruiter call opens with some flavor of it*.
 
 ---
 

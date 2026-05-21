@@ -8,9 +8,10 @@ created: 2026-05-18
 description: "Watch now | Your company removed a management layer. It was actually three layers in a trench coat, and only one of them was ready to go."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [product-management]
+ai-context: "Executive briefing on why flat-org reorgs collapse: Valve became Lord of the Flies, Zappos got paralysis, and 44% of companies face the same trench-coat-of-three-layers problem."
 ---
 Forty-four percent of U.S. workers say their employer cut at least one layer of management in the past year, according to Korn Ferry. The logic was sound: AI handles coordination, the hierarchy was overhead, flatten and move faster. Meta stripped out entire layers and the stock nearly tripled. Shopify told teams to prove AI couldn’t do the job before approving a hire. The direction is right. The execution, at most companies, is not — because it treats the management layer as one function when it’s actually three, each on a completely different automation timeline.
 

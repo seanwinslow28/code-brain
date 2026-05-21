@@ -3,7 +3,7 @@ type: roadmap
 project: prj-job-hunt-2026
 status: draft
 created: 2026-05-06
-last_updated: 2026-05-18
+last_updated: 2026-05-21
 synthesis_sources: [karpathy-sequoia, nate-credentials-opus, nate-credentials-gpt, nate-comprehension-opus, nate-comprehension-gpt, council-nate-jones-digest-2026-05-16]
 completion_log: unified-roadmap-completion-log.md
 amendments_index:
@@ -21,6 +21,7 @@ amendments_index:
   - 2026-05-17 (evening) — Task 11 v1 CODE COMPLETE (Agent Fleet Observability Dashboard)
   - 2026-05-18 — Task 11 DEPLOY COMPLETE — fleet.seanwinslow.com LIVE
   - 2026-05-18 (later) — Amendments log + Task 0 body lifted to companion completion log (this index replaces the prior inline YAML list)
+  - 2026-05-20 — Cowork prep-doc sprint — Tasks 20 + 13 + 15 + 19 each queued with a Step-0/Step-1 prep doc co-located in this dir; all 18 open decisions answered 2026-05-21 (see completion log)
 ai-context: "Unified roadmap synthesizing Karpathy + Nate × 2 articles × 2 models, mapped onto the existing Phase 0–8 master plan. Portfolio project ideas + concrete implementation plans through 2026-07-04. Amended 2026-05-10 with eval-suite + Substack-drafter additions after Step-0 error-analysis surfaced a 9-day silent regression that reshaped the eval scope. 2026-05-18: the 13-entry amendments log + the body of Task 0 (the only fully-closed task at the time) moved to the new companion completion log [`unified-roadmap-completion-log.md`](unified-roadmap-completion-log.md); going forward, completion summaries land there, not on top of this file. The `amendments_index` field above is a date+topic-only pointer; full prose lives in the companion log under `## Amendments Log`."
 ---
 
@@ -900,7 +901,9 @@ Run the full test suite (`cd agents-sdk && PYTHONPATH=. pytest tests/ -v`); all 
 
 ### Task 13 — Access-vs-Meaning Manifesto + Spectrum Map (Council Gap-Fill 2; NEW 2026-05-17 — draft-lock 2026-05-23, publish ~2026-06-19)
 
-> **Status:** Not started. **Zero new code** — 3–5 days of pure framing work, drafted in Week 1 (now), queued behind Substack Posts 1 (5/22 "Night My Vault Said Nothing") + 2 ("Vault said something again", depends on Task 11 dashboard ship 6/8–6/15). Publishes as **Substack Post 3** (~2026-06-19 Friday Week 5 if cadence holds). Becomes the **URL in Sean's email signature** for the back half of the sprint — the pre-read link that converts "interesting candidate" → "Tier-1 must-talk."
+> **Status 2026-05-21:** **Step 1 outline complete; all 6 decisions locked.** Hook A (silent regression) is the opener, all 7 artifacts plotted, JD URLs populated from target-companies.md. Strategic-sober first draft, then Sean runs writing-voice-modes review before commit. **Step 2 (full ~1,500-word draft pass) ready to execute next session.** See companion prep doc: [`2026-05-20-task-13-step-1-manifesto-outline.md`](2026-05-20-task-13-step-1-manifesto-outline.md).
+>
+> **Status (prior):** Not started. **Zero new code** — 3–5 days of pure framing work, drafted in Week 1 (now), queued behind Substack Posts 1 (5/22 "Night My Vault Said Nothing") + 2 ("Vault said something again", depends on Task 11 dashboard ship 6/8–6/15). Publishes as **Substack Post 3** (~2026-06-19 Friday Week 5 if cadence holds). Becomes the **URL in Sean's email signature** for the back half of the sprint — the pre-read link that converts "interesting candidate" → "Tier-1 must-talk."
 
 **Maps to:** Council Gap-Fill 2 + Nate §3.4 "Access vs Meaning / Semantic Work Primitives" (2026-05-05) + this roadmap's Decision 4 (Substack voice) **AMENDED** by adding a Post-3 manifesto slot + Karpathy synthesis Claim C ("specs and comprehension are the durable PM skill"). Cross-cites Task 3 (intent-engineering MCP) + Task 10 (vault-knowledge-mcp) + Task 12 (Judge Layer) + Task 14 (Control Architecture) as the artifact map's worked examples.
 
@@ -1075,7 +1078,9 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `pytest too
 
 ### Task 15 — Vault as Agent Infrastructure: 5-Test Scorecard (Council Gap-Fill 5; NEW 2026-05-17 — ship target 2026-06-03)
 
-> **Status:** Not started. 2–3 day build, Week 3 council slot (5/31–6/6). **Precursor doc for Task 10** (`vault-knowledge-mcp`) — makes that MCP self-justifying when it ships by establishing the architectural argument first. Council unanimity: Sean's vault genuinely passes all five of Nate's structural tests, and almost no public PM portfolio does. This is what distinguishes Sean from every other laid-off PM with a Notion site.
+> **Status 2026-05-21:** **Step 0 pre-build prep complete; all 6 decisions locked (defaults).** SCORECARD.md cells pre-populated with live vault telemetry (478 edges, 6 SQL-enforced relations, 13,488 chunks, 8 superseded edges, 219 confidence-tagged). `scripts/generate_schema.py` skeleton ready to paste, Mermaid `erDiagram` source ready to embed, 5-section essay outline ready to expand. **Voice-review checkpoint added:** Sean runs `writing-voice-modes` skill against SCORECARD + essay before any public posting. Build window 2026-06-01 → 2026-06-03 is execution. See companion prep doc: [`2026-05-20-task-15-step-0-prebuild-prep.md`](2026-05-20-task-15-step-0-prebuild-prep.md).
+>
+> **Status (prior):** Not started. 2–3 day build, Week 3 council slot (5/31–6/6). **Precursor doc for Task 10** (`vault-knowledge-mcp`) — makes that MCP self-justifying when it ships by establishing the architectural argument first. Council unanimity: Sean's vault genuinely passes all five of Nate's structural tests, and almost no public PM portfolio does. This is what distinguishes Sean from every other laid-off PM with a Notion site.
 
 **Maps to:** Council Gap-Fill 5 + Nate §3.3 "5 structural tests for agent infrastructure" + this roadmap's Task 10 (`vault-knowledge-mcp`, the MCP this scorecard self-justifies) + supports the "agent-operable knowledge" interview answer the Anthropic FDE Boston / Glean Agent Governance loops will probe for.
 
@@ -1240,6 +1245,8 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 
 ### Task 19 — A6 Mock Interview Infrastructure (Phase A, ships by 2026-05-26)
 
+> **Status 2026-05-21:** **Step 0 pre-build prep complete; all 6 decisions locked.** 4-panelist `interview_grader` profile drafted (Opus + GPT-5.5 + Gemini Pro + Sonnet, $0.40/query cap), 8-dim rubric prompt template authored, `mock_interview_loop.py` skeleton with local Whisper backend ready to paste. Grades stay private inside `vault/.../interview-prep/mock-log/`. **Question #2 swapped** in the 5/26 test plan: "Why are you leaving The Block?" → "Walk me through what happened with The Block and how it reset your search" (Sean was laid off, not departing). Build window 2026-05-21 → 2026-05-26 is execution. See companion prep doc: [`2026-05-20-task-19-step-0-prebuild-prep.md`](2026-05-20-task-19-step-0-prebuild-prep.md).
+
 **Maps to:** Aakash Gupta "record, transcribe, grade" workflow. Required to measure Gate C (3 consecutive 8+/10 mock interviews).
 
 **Files:**
@@ -1262,6 +1269,8 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 ---
 
 ### Task 20 — A11 GitHub Profile Audit (Phase A, ships by 2026-05-22)
+
+> **Status 2026-05-21:** **Deliverable shipped — Sean executes the 60-90 min audit on Fri 5/22.** Live GH-profile scrape on 2026-05-20 confirmed the audit's leverage: current bio "AI enthusiast with a background in Media looking to learn" is exactly the recruiter-bounce signature the audit targets. None of the 2026 shipped work (intent-engineering MCP, fleet dashboard, code-brain v4.0) is currently pinned. The deliverable provides: bio rewrite (Variant A recommended, 132 chars), the 6-repo pinned lineup with rationale per slot, paste-and-ship 4-section README inserts for each pinned repo (Problem / Solution / Tradeoffs / What I Learned), contribution-shape diagnosis + mitigation, 3 strategic forks, cross-link checklist, and the 10-second-incognito-test verification gate. See companion: [`2026-05-20-task-20-github-profile-audit-deliverable.md`](2026-05-20-task-20-github-profile-audit-deliverable.md).
 
 **Maps to:** Shubham Saboo's 6 elements (positioning bio, pinned repos, contribution shape, strategic forks, README polish, portfolio effect). Single-session audit; closes Gate A precondition.
 
