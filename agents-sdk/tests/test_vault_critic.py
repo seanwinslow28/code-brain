@@ -19,6 +19,7 @@ from agents.vault_critic import (
     STATUS_SUCCESS_EMPTY,
     write_critic_manifest,
 )
+from agents.vault_critic import run as run_critic
 
 
 @pytest.fixture
@@ -318,3 +319,149 @@ def test_smoke_fixtures_replay_produces_expected_expansion_shape(tmp_concept):
 
     # The convergence signal (Didion in both) is preserved.
     assert body.count("Didion") >= 2
+
+
+# ---------------------------------------------------------------------------
+# D5: run() orchestrator + wall-clock budget
+# ---------------------------------------------------------------------------
+
+
+def _make_concept_at(vault_root: Path, slug: str) -> Path:
+    p = vault_root / "vault" / "knowledge" / "concepts" / f"{slug}.md"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(
+        f'---\ntitle: "{slug}"\ntype: concept\n---\n\nbody [[wiki]]\n',
+        encoding="utf-8",
+    )
+    return p
+
+
+def _make_manifest(vault_root: Path, today_iso: str, **kwargs):
+    (vault_root / "vault" / "health").mkdir(parents=True, exist_ok=True)
+    (vault_root / "vault" / "health" / f"synth-manifest-{today_iso}.json").write_text(
+        json.dumps({"status": "ok", "concepts_written": 2, **kwargs}),
+        encoding="utf-8",
+    )
+
+
+def test_run_writes_manifest_when_no_synth_manifest_today(tmp_repo):
+    """The 2026-05-15 MBP-offline canonical case: synthesizer didn't run.
+    Agent exits cleanly with status=success-empty manifest. NOT status=error."""
+
+    async def go():
+        return await run_critic(
+            repo_root=tmp_repo,
+            date_iso="2026-05-22",
+            max_targets=3,
+            wall_budget_s=600,
+        )
+
+    result = asyncio.run(go())
+    assert result.status == STATUS_SUCCESS_EMPTY
+    assert result.articles_critiqued == 0
+
+    manifest = tmp_repo / "vault" / "health" / "critic-manifest-2026-05-22.json"
+    assert manifest.exists()
+
+
+def test_run_codex_rate_capped_marks_partial_status(tmp_repo, monkeypatch):
+    today = "2026-05-22"
+    p = _make_concept_at(tmp_repo, "writing-voice-modes")
+    _make_manifest(tmp_repo, today)
+
+    monkeypatch.setattr("agents.vault_critic.select_target_articles",
+                        lambda root, date_iso, max_targets: [p])
+
+    async def go():
+        with patch("agents.vault_critic.run_codex", AsyncMock(return_value=_capped("codex"))), \
+             patch("agents.vault_critic.run_antigravity", AsyncMock(return_value=_ok("antigravity", "gem", 15000))):
+            return await run_critic(
+                repo_root=tmp_repo,
+                date_iso=today,
+                max_targets=3,
+                wall_budget_s=600,
+            )
+
+    result = asyncio.run(go())
+    assert result.status == STATUS_PARTIAL
+    assert result.articles_critiqued == 1   # the file WAS written (anti-gravity survived)
+    assert result.codex_failures == 1
+    assert result.antigravity_failures == 0
+    expansion = tmp_repo / "vault" / "knowledge" / "expansions" / "writing-voice-modes.md"
+    assert expansion.exists()
+
+
+def test_run_both_clis_fail_for_every_article_marks_error(tmp_repo, monkeypatch):
+    today = "2026-05-22"
+    p = _make_concept_at(tmp_repo, "x")
+    _make_manifest(tmp_repo, today)
+
+    monkeypatch.setattr("agents.vault_critic.select_target_articles",
+                        lambda root, date_iso, max_targets: [p])
+
+    async def go():
+        with patch("agents.vault_critic.run_codex", AsyncMock(return_value=_fail("codex", "boom"))), \
+             patch("agents.vault_critic.run_antigravity", AsyncMock(return_value=_fail("antigravity", "boom"))):
+            return await run_critic(
+                repo_root=tmp_repo,
+                date_iso=today,
+                max_targets=3,
+                wall_budget_s=600,
+            )
+
+    result = asyncio.run(go())
+    assert result.status == STATUS_ERROR
+    assert result.articles_critiqued == 0
+    assert result.codex_failures == 1
+    assert result.antigravity_failures == 1
+
+
+def test_run_succeeds_with_three_articles(tmp_repo, monkeypatch):
+    today = "2026-05-22"
+    paths = [_make_concept_at(tmp_repo, slug) for slug in ("a", "b", "c")]
+    _make_manifest(tmp_repo, today)
+    monkeypatch.setattr("agents.vault_critic.select_target_articles",
+                        lambda root, date_iso, max_targets: paths)
+
+    async def go():
+        with patch("agents.vault_critic.run_codex", AsyncMock(side_effect=lambda *a, **k: _ok("codex", "ok", 100))), \
+             patch("agents.vault_critic.run_antigravity", AsyncMock(side_effect=lambda *a, **k: _ok("antigravity", "ok", 100))):
+            return await run_critic(
+                repo_root=tmp_repo,
+                date_iso=today,
+                max_targets=3,
+                wall_budget_s=600,
+            )
+
+    result = asyncio.run(go())
+    assert result.status == STATUS_OK
+    assert result.articles_critiqued == 3
+
+
+def test_run_respects_wall_budget(tmp_repo, monkeypatch):
+    """When wall_budget_s is exceeded mid-loop, mark partial and skip remaining."""
+    today = "2026-05-22"
+    paths = [_make_concept_at(tmp_repo, slug) for slug in ("a", "b", "c")]
+    _make_manifest(tmp_repo, today)
+    monkeypatch.setattr("agents.vault_critic.select_target_articles",
+                        lambda root, date_iso, max_targets: paths)
+
+    async def slow_cli(*args, **kwargs):
+        await asyncio.sleep(0.2)
+        return _ok("codex", "ok", 100)
+
+    async def go():
+        with patch("agents.vault_critic.run_codex", AsyncMock(side_effect=slow_cli)), \
+             patch("agents.vault_critic.run_antigravity", AsyncMock(side_effect=slow_cli)):
+            # 0.3s budget — first article should land; second/third should be skipped.
+            return await run_critic(
+                repo_root=tmp_repo,
+                date_iso=today,
+                max_targets=3,
+                wall_budget_s=0.3,
+            )
+
+    result = asyncio.run(go())
+    assert result.status == STATUS_PARTIAL
+    assert result.articles_critiqued <= 2
+    assert any("budget" in w.lower() for w in result.warnings)

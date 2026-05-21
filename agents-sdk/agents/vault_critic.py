@@ -28,12 +28,15 @@ import asyncio
 import json
 import re
 import sys
+import time
 from dataclasses import dataclass, field
+from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from lib.cli_runners import CLIResponse, run_antigravity, run_codex
+from lib.critic_selector import select_target_articles
 from lib.critique_prompt import build_critique_prompt
 from lib.filelock import FileLock
 
@@ -240,3 +243,130 @@ def _extract_first_source(article_body: str) -> str | None:
         if line.startswith("- "):
             return line[2:].strip().strip('"').strip("'") or None
     return None
+
+
+async def run(
+    *,
+    repo_root: Path,
+    date_iso: str | None = None,
+    max_targets: int = DEFAULT_MAX_TARGETS,
+    wall_budget_s: float = DEFAULT_WALL_BUDGET_S,
+    per_cli_timeout_s: int = DEFAULT_PER_CLI_TIMEOUT_S,
+    logger=None,
+) -> CritiqueResult:
+    """Orchestrate one vault_critic run end-to-end.
+
+    Status promotion (after the loop):
+      - No targets selected (no manifest / status=error / nothing fresh) → success-empty
+      - All articles produced both-CLIs-failed → error
+      - At least one CLI failed across the run → partial
+      - Budget exceeded mid-loop → partial (with budget warning)
+      - Everything clean → ok
+    """
+    from datetime import date as _date  # local import to avoid name collision with `today` parameter
+
+    date_iso = date_iso or _date.today().isoformat()
+    start = time.monotonic()
+    result = CritiqueResult(
+        status=STATUS_SUCCESS_EMPTY,
+        run_id=datetime.now().isoformat(timespec="seconds"),
+    )
+
+    targets = select_target_articles(
+        repo_root, date_iso=date_iso, max_targets=max_targets,
+    )
+    if not targets:
+        if logger:
+            logger.info("vault_critic: no target articles for %s", date_iso)
+        result.duration_seconds = time.monotonic() - start
+        write_critic_manifest(repo_root=repo_root, result=result, today=date_iso)
+        return result
+
+    recent_titles = _read_recent_titles(repo_root, limit=RECENT_TITLES_CONTEXT_LIMIT)
+    any_failure = False
+    every_article_both_failed = True
+
+    for fp in targets:
+        if time.monotonic() - start >= wall_budget_s:
+            result.warnings.append(
+                f"wall budget {wall_budget_s}s ran out after "
+                f"{result.articles_critiqued} articles"
+            )
+            any_failure = True
+            break
+
+        expansion_path, codex_resp, ag_resp = await critique_one_article(
+            repo_root=repo_root,
+            article_path=fp,
+            recent_titles=recent_titles,
+            today=date_iso,
+            per_cli_timeout_s=per_cli_timeout_s,
+        )
+
+        result.codex_calls += 1
+        result.antigravity_calls += 1
+        if codex_resp.tokens:
+            result.codex_tokens_total += codex_resp.tokens
+        if ag_resp.tokens:
+            result.antigravity_tokens_total += ag_resp.tokens
+        if not codex_resp.ok:
+            result.codex_failures += 1
+            any_failure = True
+        if not ag_resp.ok:
+            result.antigravity_failures += 1
+            any_failure = True
+
+        if expansion_path is None:
+            # Both CLIs failed for this article — don't reset
+            # every_article_both_failed; if this stays true across all
+            # targets, the run is error-class.
+            continue
+
+        every_article_both_failed = False
+        result.articles_critiqued += 1
+        result.expansions_written.append(
+            str(expansion_path.relative_to(repo_root))
+        )
+
+    if every_article_both_failed:
+        result.status = STATUS_ERROR
+    elif any_failure:
+        result.status = STATUS_PARTIAL
+    elif result.articles_critiqued > 0:
+        result.status = STATUS_OK
+    else:
+        result.status = STATUS_SUCCESS_EMPTY
+
+    result.duration_seconds = time.monotonic() - start
+    write_critic_manifest(repo_root=repo_root, result=result, today=date_iso)
+    return result
+
+
+def _read_recent_titles(repo_root: Path, limit: int) -> list[str]:
+    """Pull recent concept titles from vault/knowledge/index.md for prompt context.
+
+    The index file's `## Concepts` section is the source of truth; titles
+    surface in `[[path|Title]]` form per regenerate_index() in
+    vault_synthesizer.py. Empty list on missing/unreadable index.
+    """
+    index_path = repo_root / KNOWLEDGE_INDEX_REL
+    if not index_path.exists():
+        return []
+    try:
+        text = index_path.read_text(encoding="utf-8")
+    except OSError:
+        return []
+    in_concepts = False
+    titles: list[str] = []
+    for line in text.splitlines():
+        if line.startswith("## "):
+            in_concepts = line.strip().lower() == "## concepts"
+            continue
+        if not in_concepts:
+            continue
+        m = re.search(r"\[\[[^\]|]+\|([^\]]+)\]\]", line)
+        if m:
+            titles.append(m.group(1).strip())
+            if len(titles) >= limit:
+                break
+    return titles
