@@ -2,31 +2,31 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-17-resume-council-plan.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-27.md
 tags: [auto-generated, phase-6]
-created: 2026-05-18
-updated: 2026-05-18
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-A framework for executing agentic tasks with strict budget constraints, ensuring that workflows remain financially viable while maintaining quality.
+A strategy that ensures agent-based tasks remain financially sustainable by controlling run costs, often through the use of local or cost-free execution environments.
 
 ## Context
 
-This matters to Sean because his resume optimization process is designed within a budgetary constraint, ensuring that the LLM Council review does not exceed $1.00 per query or $7/day.
+Sean depends on this approach to keep his knowledge vault maintenance and daily automation within budget while maintaining efficiency.
 
 ## Evidence
 
-> Budget: ~$0.29 typical, $1.00 per-query cap, $7/day circuit breaker.
+> - **Total active fleet:** ~$12.00/month
 
-> Sean's role is research synthesis, draft pressure-testing, council orchestration, and CIIA/keyword sanity checks — never final resume copy authorship.
+> - vault-indexer: $0.00/month (local)
 
 ## Examples
 
-- The LLM Council review process is constrained by a $1.00 per-query cap.
-- Sean's role ensures that agentic workflows remain cost-effective.
+- daily-driver morning: ~$12.00/month
+- vault-indexer: $0.00/month (local)
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Automation Reliability]]
+[[Automation Routines]] [[Agent Health Monitoring]]

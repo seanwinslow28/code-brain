@@ -2,31 +2,31 @@
 title: "Vault Maintenance"
 type: concept
 sources:
-  - knowledge/concepts/knowledge-lint.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-29.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-The process of keeping the knowledge base updated and organized through indexing, synthesizing information, and ensuring consistency with domain-specific rules.
+The process of ensuring the knowledge vault remains functional and up-to-date through the use of agents like the vault-indexer and vault-synthesizer.
 
 ## Context
 
-This concept is crucial for Sean's personal knowledge vault, ensuring that all domains such as job preparation, creative work, and infrastructure remain aligned with domain-specific rules.
+This is relevant to Sean as he needs a reliable vault system for his personal knowledge management.
 
 ## Evidence
 
-> The process of keeping the knowledge base updated and organized through indexing, synthesizing information, and ensuring consistency with domain-specific rules.
+> - Routine archival tasks (vault-indexer/synthesizer) ran successfully during scheduled maintenance windows.
 
-> The knowledge-lint agent ensures Tier 1 and Tier 2 concepts remain properly separated, which is essential for effective vault maintenance.
+> - No baton found, but log exists: vault-synthesizer-stderr.log
 
 ## Examples
 
-- Indexing raw data into coherent knowledge chunks.
-- Synthesizing information from multiple sources.
+- vault-indexer runs daily
+- vault-synthesizer logs exist but no baton is found
 
 ## Related Concepts
 
-[[knowledge-lint]] [[Indexing and Synthesis]]
+[[Automation Routines]] [[Agent Health Monitoring]]
