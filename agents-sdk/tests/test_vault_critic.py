@@ -1,16 +1,21 @@
+import asyncio
 import json
 from pathlib import Path
+from unittest.mock import AsyncMock, patch
 
 import pytest
 
+from lib.cli_runners import CLIResponse
+
 from agents.vault_critic import (
     AGENT_NAME,
+    critique_one_article,
     CritiqueResult,
+    format_expansion_body,
     STATUS_ERROR,
     STATUS_OK,
     STATUS_PARTIAL,
     STATUS_SUCCESS_EMPTY,
-    format_expansion_body,
     write_critic_manifest,
 )
 
@@ -145,3 +150,123 @@ def test_format_expansion_body_escapes_double_quote_in_title():
     frontmatter = body[3:head_end]   # between the two ---
     parsed = yaml.safe_load(frontmatter)
     assert parsed["title"] == 'How to make `My "Quoted" Title` better'
+
+
+# ---------------------------------------------------------------------------
+# D3: critique_one_article — parallel fan-out + isolation
+# ---------------------------------------------------------------------------
+
+CONCEPT_BODY = """\
+---
+title: "Writing Voice Modes"
+type: concept
+sources:
+  - .claude/skills/writing-voice-modes/SKILL.md
+---
+
+## Definition
+
+Five voice modes plus Sean Mode.
+
+## Related Concepts
+
+[[creative-writing]] [[blog-cadence]]
+"""
+
+
+@pytest.fixture
+def tmp_concept(tmp_path):
+    (tmp_path / "vault" / "knowledge" / "concepts").mkdir(parents=True)
+    (tmp_path / "vault" / "knowledge" / "expansions").mkdir(parents=True)
+    p = tmp_path / "vault" / "knowledge" / "concepts" / "writing-voice-modes.md"
+    p.write_text(CONCEPT_BODY, encoding="utf-8")
+    return tmp_path, p
+
+
+def _ok(cli: str, text: str, tokens: int) -> CLIResponse:
+    return CLIResponse(
+        cli=cli, text=text, tokens=tokens,
+        duration_s=10.0, exit_code=0, rate_capped=False, error=None,
+    )
+
+
+def _fail(cli: str, error: str) -> CLIResponse:
+    return CLIResponse(
+        cli=cli, text="", tokens=None,
+        duration_s=0.5, exit_code=1, rate_capped=False, error=error,
+    )
+
+
+def _capped(cli: str) -> CLIResponse:
+    return CLIResponse(
+        cli=cli, text="", tokens=None,
+        duration_s=0.5, exit_code=0, rate_capped=True, error=None,
+    )
+
+
+def test_critique_one_article_both_clis_succeed(tmp_concept):
+    repo_root, concept_path = tmp_concept
+
+    async def go():
+        with patch("agents.vault_critic.run_codex", AsyncMock(return_value=_ok("codex", "codex content", 17000))), \
+             patch("agents.vault_critic.run_antigravity", AsyncMock(return_value=_ok("antigravity", "gemini content", 15000))):
+            return await critique_one_article(
+                repo_root=repo_root,
+                article_path=concept_path,
+                recent_titles=["other-concept"],
+                today="2026-05-22",
+                per_cli_timeout_s=60,
+            )
+
+    expansion_path, codex_resp, ag_resp = asyncio.run(go())
+    assert expansion_path.name == "writing-voice-modes.md"
+    assert expansion_path.parent.name == "expansions"
+    assert expansion_path.exists()
+    body = expansion_path.read_text(encoding="utf-8")
+    assert "codex content" in body
+    assert "gemini content" in body
+    assert codex_resp.ok and ag_resp.ok
+
+
+def test_critique_one_article_codex_capped_writes_antigravity_only(tmp_concept):
+    repo_root, concept_path = tmp_concept
+
+    async def go():
+        with patch("agents.vault_critic.run_codex", AsyncMock(return_value=_capped("codex"))), \
+             patch("agents.vault_critic.run_antigravity", AsyncMock(return_value=_ok("antigravity", "gemini survived", 15000))):
+            return await critique_one_article(
+                repo_root=repo_root,
+                article_path=concept_path,
+                recent_titles=[],
+                today="2026-05-22",
+                per_cli_timeout_s=60,
+            )
+
+    expansion_path, codex_resp, ag_resp = asyncio.run(go())
+    assert expansion_path.exists()
+    body = expansion_path.read_text(encoding="utf-8")
+    assert "Codex rate-capped or failed" in body
+    assert "gemini survived" in body
+    assert codex_resp.rate_capped is True
+    assert ag_resp.ok is True
+
+
+def test_critique_one_article_both_fail_returns_none_path(tmp_concept):
+    """If BOTH CLIs fail, do not write a useless expansion file — return None.
+    The caller increments failure counts and marks the run partial."""
+    repo_root, concept_path = tmp_concept
+
+    async def go():
+        with patch("agents.vault_critic.run_codex", AsyncMock(return_value=_fail("codex", "boom"))), \
+             patch("agents.vault_critic.run_antigravity", AsyncMock(return_value=_fail("antigravity", "boom"))):
+            return await critique_one_article(
+                repo_root=repo_root,
+                article_path=concept_path,
+                recent_titles=[],
+                today="2026-05-22",
+                per_cli_timeout_s=60,
+            )
+
+    expansion_path, codex_resp, ag_resp = asyncio.run(go())
+    assert expansion_path is None
+    assert not codex_resp.ok and not ag_resp.ok
