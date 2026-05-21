@@ -30,7 +30,7 @@ import re
 import sys
 import time
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -263,9 +263,7 @@ async def run(
       - Budget exceeded mid-loop → partial (with budget warning)
       - Everything clean → ok
     """
-    from datetime import date as _date  # local import to avoid name collision with `today` parameter
-
-    date_iso = date_iso or _date.today().isoformat()
+    date_iso = date_iso or date.today().isoformat()
     start = time.monotonic()
     result = CritiqueResult(
         status=STATUS_SUCCESS_EMPTY,
@@ -334,8 +332,9 @@ async def run(
         result.status = STATUS_PARTIAL
     elif result.articles_critiqued > 0:
         result.status = STATUS_OK
-    else:
-        result.status = STATUS_SUCCESS_EMPTY
+    # else: result keeps its initial STATUS_SUCCESS_EMPTY (defensive default;
+    # unreachable when `targets` was non-empty, because every_article_both_failed
+    # covers the zero-articles case).
 
     result.duration_seconds = time.monotonic() - start
     write_critic_manifest(repo_root=repo_root, result=result, today=date_iso)
