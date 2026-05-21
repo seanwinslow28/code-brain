@@ -4,6 +4,7 @@ from pathlib import Path
 from unittest.mock import AsyncMock, patch
 
 import pytest
+import yaml
 
 from lib.cli_runners import CLIResponse
 
@@ -145,7 +146,6 @@ def test_format_expansion_body_escapes_double_quote_in_title():
     )
     # The escaped quotes must appear in the YAML title; verify the line is
     # parseable as YAML.
-    import yaml
     head_end = body.find("---", 4)  # second --- (frontmatter close)
     frontmatter = body[3:head_end]   # between the two ---
     parsed = yaml.safe_load(frontmatter)
