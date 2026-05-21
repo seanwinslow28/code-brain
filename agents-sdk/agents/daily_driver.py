@@ -45,6 +45,7 @@ AGENT_NAME = "daily-driver"
 # vs-021 (v3.31.x): synth_health_summary removed from preamble; render_vault_health() replaces it.
 from lib.fleet_summary import build_fleet_overnight_digest  # noqa: E402
 from lib.lint_report import (  # noqa: E402
+    critic_health_summary,
     latest_lint_report,
     latest_synth_manifest,
     vault_health_summary,
@@ -271,6 +272,9 @@ def build_preamble(mode: str, config) -> str:
             except (OSError, json.JSONDecodeError):
                 manifest_data = {}
             base += render_vault_health(manifest_data) + "\n"
+        critic_line = critic_health_summary(config.vault_root)
+        if critic_line:
+            base += critic_line + "\n"
         artifact_block = build_artifact_preamble(config)
         if artifact_block:
             base += "\n" + artifact_block + "\n"
