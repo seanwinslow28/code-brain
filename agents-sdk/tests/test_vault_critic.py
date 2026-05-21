@@ -270,3 +270,51 @@ def test_critique_one_article_both_fail_returns_none_path(tmp_concept):
     expansion_path, codex_resp, ag_resp = asyncio.run(go())
     assert expansion_path is None
     assert not codex_resp.ok and not ag_resp.ok
+
+
+# ---------------------------------------------------------------------------
+# D4: smoke-fixture replay — regression test against future CLI output drift
+# ---------------------------------------------------------------------------
+
+SMOKE_FIXTURES = Path(__file__).parent / "fixtures" / "critic"
+
+
+def test_smoke_fixtures_replay_produces_expected_expansion_shape(tmp_concept):
+    """Replay the persisted smoke-test outputs as subprocess stand-ins;
+    assert the formatter produces an expansion file containing the verbatim
+    headline recommendations from both CLIs. This is the regression test
+    against future CLI output drift."""
+    repo_root, concept_path = tmp_concept
+    codex_stdout = (SMOKE_FIXTURES / "codex-out.txt").read_text(encoding="utf-8")
+    gemini_payload = json.loads((SMOKE_FIXTURES / "gemini-out.json").read_text(encoding="utf-8"))
+    gemini_response = gemini_payload["response"]
+
+    async def go():
+        codex_resp = _ok("codex", codex_stdout, 17182)
+        ag_resp = _ok("antigravity", gemini_response, 15746)
+        with patch("agents.vault_critic.run_codex", AsyncMock(return_value=codex_resp)), \
+             patch("agents.vault_critic.run_antigravity", AsyncMock(return_value=ag_resp)):
+            return await critique_one_article(
+                repo_root=repo_root,
+                article_path=concept_path,
+                recent_titles=[],
+                today="2026-05-22",
+                per_cli_timeout_s=60,
+            )
+
+    expansion_path, codex_resp, ag_resp = asyncio.run(go())
+    assert expansion_path is not None
+    body = expansion_path.read_text(encoding="utf-8")
+
+    # Both Codex headline recommendations are present byte-for-byte.
+    assert "Forensic Moral Essayist" in body
+    assert "Architectural Systems Narrator" in body
+    assert "Intimate Intellectual Pressure" in body
+
+    # All three Anti-Gravity headline recommendations are present byte-for-byte.
+    assert "Surgical Cultural Synthesis" in body
+    assert "Escalating Moral Architecture" in body
+    assert "Techno-Dialectical Aphorist" in body
+
+    # The convergence signal (Didion in both) is preserved.
+    assert body.count("Didion") >= 2
