@@ -102,3 +102,52 @@ def write_critic_manifest(
     tmp.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
     tmp.replace(path)
     return path
+
+
+def format_expansion_body(
+    *,
+    original_title: str,
+    original_slug: str,
+    codex_text: str,
+    antigravity_text: str,
+    today: str,
+    codex_failed: bool,
+    antigravity_failed: bool,
+) -> str:
+    """Render the markdown body for vault/knowledge/expansions/{slug}.md.
+
+    Snapshot semantics: one file per critiqued concept; not regenerated when
+    the underlying concept is rewritten. Always contains a `[[parent-slug]]`
+    wikilink so the file is not orphaned in the knowledge index.
+    """
+    codex_block = (
+        codex_text.strip()
+        if not codex_failed and codex_text.strip()
+        else "_Codex rate-capped or failed; no critique this run._"
+    )
+    antigravity_block = (
+        antigravity_text.strip()
+        if not antigravity_failed and antigravity_text.strip()
+        else "_Anti-Gravity rate-capped or failed; no critique this run._"
+    )
+    return (
+        f"---\n"
+        f'title: "How to make `{original_title}` better"\n'
+        f"type: expansion\n"
+        f'parent: "[[{original_slug}]]"\n'
+        f"sources:\n"
+        f"  - codex (gpt-5.5)\n"
+        f"  - anti-gravity (gemini-3.1-pro-preview)\n"
+        f"created: {today}\n"
+        f"updated: {today}\n"
+        f"---\n\n"
+        f"## What this is\n\n"
+        f"Critiques from two external reasoners (gpt-5.5 via Codex CLI, "
+        f"Gemini 3 via Anti-Gravity CLI) of [[{original_slug}]]. The "
+        f"synthesizer describes what the concept is; this expansion "
+        f"proposes what's missing.\n\n"
+        f"## From Codex (gpt-5.5)\n\n"
+        f"{codex_block}\n\n"
+        f"## From Anti-Gravity (Gemini 3)\n\n"
+        f"{antigravity_block}\n"
+    )
