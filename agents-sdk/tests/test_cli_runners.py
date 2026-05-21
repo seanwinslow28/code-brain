@@ -1,6 +1,8 @@
+import asyncio
 from pathlib import Path
+from unittest.mock import AsyncMock, patch
 
-from lib.cli_runners import CLIResponse, detect_rate_cap, parse_codex_tokens
+from lib.cli_runners import CLIResponse, detect_rate_cap, parse_codex_tokens, run_codex
 
 FIXTURES = Path(__file__).parent / "fixtures" / "critic"
 
@@ -75,3 +77,62 @@ def test_detect_rate_cap_negative_on_normal_stderr():
     # Smoke-test stderr was clean — no false positive.
     normal = (FIXTURES / "codex-err.txt").read_text(encoding="utf-8")
     assert detect_rate_cap("codex", normal) is False
+
+
+def _fake_proc(stdout_bytes: bytes, stderr_bytes: bytes, returncode: int = 0):
+    """Return a mocked asyncio subprocess that emits the given bytes."""
+    proc = AsyncMock()
+    proc.communicate = AsyncMock(return_value=(stdout_bytes, stderr_bytes))
+    proc.returncode = returncode
+    return proc
+
+
+def test_run_codex_replays_smoke_fixture():
+    stdout = (FIXTURES / "codex-out.txt").read_bytes()
+    stderr = (FIXTURES / "codex-err.txt").read_bytes()
+
+    async def go():
+        fake = _fake_proc(stdout, stderr, returncode=0)
+        with patch("lib.cli_runners.asyncio.create_subprocess_exec",
+                   AsyncMock(return_value=fake)):
+            return await run_codex("any prompt", timeout_s=60)
+
+    resp = asyncio.run(go())
+    assert resp.cli == "codex"
+    assert resp.tokens == 17182
+    assert resp.exit_code == 0
+    assert resp.rate_capped is False
+    # The Codex stdout fixture starts with "1. **Add..."; assert we captured it.
+    assert resp.text.startswith("1. **Add")
+    assert resp.ok is True
+
+
+def test_run_codex_timeout_returns_error_not_raise():
+    async def go():
+        async def slow_communicate():
+            await asyncio.sleep(10)
+            return (b"", b"")
+        fake = AsyncMock()
+        fake.communicate = slow_communicate
+        fake.returncode = None
+        fake.kill = AsyncMock()
+        with patch("lib.cli_runners.asyncio.create_subprocess_exec",
+                   AsyncMock(return_value=fake)):
+            return await run_codex("any prompt", timeout_s=0.05)
+
+    resp = asyncio.run(go())
+    assert resp.ok is False
+    assert resp.error is not None
+    assert "timeout" in resp.error.lower()
+
+
+def test_run_codex_rate_cap_marks_response_capped():
+    async def go():
+        fake = _fake_proc(b"", b"Error: rate limit exceeded", returncode=1)
+        with patch("lib.cli_runners.asyncio.create_subprocess_exec",
+                   AsyncMock(return_value=fake)):
+            return await run_codex("any prompt", timeout_s=10)
+
+    resp = asyncio.run(go())
+    assert resp.rate_capped is True
+    assert resp.ok is False

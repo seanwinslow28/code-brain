@@ -16,6 +16,7 @@ import asyncio
 import json
 import os
 import re
+import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
@@ -79,3 +80,67 @@ def detect_rate_cap(cli: str, stderr_text: str) -> bool:
     """
     lowered = (stderr_text or "").lower()
     return any(p in lowered for p in _RATE_CAP_PATTERNS)
+
+
+CODEX_BINARY = "/opt/homebrew/bin/codex"
+CODEX_DEFAULT_TIMEOUT_S = 120
+
+
+async def run_codex(prompt: str, timeout_s: int = CODEX_DEFAULT_TIMEOUT_S) -> CLIResponse:
+    """Invoke `codex exec` with read-only sandbox and skip-git-repo-check.
+
+    Runs from `Path.home()` (trusted per ~/.codex/config.toml `[projects]`).
+    Captures stdout (markdown response) and stderr (session metadata +
+    `tokens used` footer). Returns a CLIResponse — never raises on CLI failure;
+    timeouts and rate-caps surface via response fields.
+    """
+    cmd = [
+        CODEX_BINARY,
+        "exec",
+        "--sandbox", "read-only",
+        "--skip-git-repo-check",
+        prompt,
+    ]
+    t0 = time.monotonic()
+    try:
+        proc = await asyncio.create_subprocess_exec(
+            *cmd,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+            cwd=str(Path.home()),
+        )
+    except FileNotFoundError as exc:
+        return CLIResponse(
+            cli="codex", text="", tokens=None,
+            duration_s=time.monotonic() - t0,
+            exit_code=-1, rate_capped=False,
+            error=f"codex binary missing: {exc}",
+        )
+
+    try:
+        stdout, stderr = await asyncio.wait_for(
+            proc.communicate(), timeout=timeout_s,
+        )
+    except asyncio.TimeoutError:
+        try:
+            proc.kill()
+        except ProcessLookupError:
+            pass
+        return CLIResponse(
+            cli="codex", text="", tokens=None,
+            duration_s=time.monotonic() - t0,
+            exit_code=-1, rate_capped=False,
+            error=f"codex timeout after {timeout_s}s",
+        )
+
+    stdout_text = stdout.decode("utf-8", errors="replace")
+    stderr_text = stderr.decode("utf-8", errors="replace")
+    return CLIResponse(
+        cli="codex",
+        text=stdout_text,
+        tokens=parse_codex_tokens(stderr_text),
+        duration_s=time.monotonic() - t0,
+        exit_code=proc.returncode if proc.returncode is not None else -1,
+        rate_capped=detect_rate_cap("codex", stderr_text),
+        error=None if proc.returncode == 0 else stderr_text[:500],
+    )
