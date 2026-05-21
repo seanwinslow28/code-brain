@@ -4,7 +4,7 @@ This is Code-Brain — Sean's personal command center, a second brain built on C
 
 ## What This Repo Is
 
-118 skills, 13 Claude Code subagents, 14 hooks, 17 autonomous SDK agents (9 active on launchd, 1 manual-trigger), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
+118 skills, 13 Claude Code subagents, 14 hooks, 18 autonomous SDK agents (9 active on launchd, 2 opt-in disabled-by-default, 1 manual-trigger), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
 
 As of v3.15.0, the repo is organized so that domain-owned folders live inside their domain. `the-block/` is Sean's day-job workspace (with `product-management/` nested inside). `creative-studio/` owns 16BitFit and the design-team workspace. `life-systems/` owns personal systems. Cross-cutting infra (`.claude/`, `agents-sdk/`, `vault/`, `claude-mastery/`, installer dirs) stays at root.
 
@@ -87,7 +87,7 @@ cd agents-sdk && PYTHONPATH=. .venv/bin/python3 scripts/doc_to_audio.py \
 
 The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Claude Agent SDK. These run **outside** Claude Code sessions on macOS launchd schedules. Skills are loaded as system prompts — no duplication.
 
-**Active agents (9 of 17 on launchd by default; 2 opt-in disabled-by-default; 1 manual-trigger):**
+**Active agents (9 of 18 on launchd by default; 2 opt-in disabled-by-default; 1 manual-trigger):**
 
 | Agent | Schedule | Skills/Model | Cost/Run |
 |-------|----------|---------------|----------|
