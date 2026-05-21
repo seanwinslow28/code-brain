@@ -175,9 +175,10 @@ def _antigravity_tokens(payload: dict) -> int | None:
 async def run_antigravity(prompt: str, timeout_s: float = ANTIGRAVITY_DEFAULT_TIMEOUT_S) -> CLIResponse:
     """Invoke `gemini -p` with JSON output and plan approval mode.
 
-    Trust set via GEMINI_CLI_TRUST_WORKSPACE=true env var (explicit, not
-    inherited). Sandbox via --approval-mode plan (read-only per smoke test).
-    Returns a CLIResponse; never raises on CLI failure.
+    Trust set via GEMINI_CLI_TRUST_WORKSPACE=true added to the inherited
+    process env (the var is set explicitly per invocation; the surrounding
+    env is preserved). Sandbox via --approval-mode plan (read-only per
+    smoke test). Returns a CLIResponse; never raises on CLI failure.
     """
     cmd = [
         ANTIGRAVITY_BINARY,

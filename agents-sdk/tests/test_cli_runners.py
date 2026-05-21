@@ -156,7 +156,8 @@ def test_run_antigravity_replays_smoke_fixture():
             resp = await run_antigravity("any prompt", timeout_s=60)
             # Verify the env var was set on the subprocess call
             kwargs = create.call_args.kwargs
-            env = kwargs.get("env", {})
+            assert "env" in kwargs, "env dict was not passed as kwarg to create_subprocess_exec"
+            env = kwargs["env"]
             assert env.get("GEMINI_CLI_TRUST_WORKSPACE") == "true"
             return resp
 
