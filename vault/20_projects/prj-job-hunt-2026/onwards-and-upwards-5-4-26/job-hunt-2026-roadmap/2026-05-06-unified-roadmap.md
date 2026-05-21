@@ -901,7 +901,9 @@ Run the full test suite (`cd agents-sdk && PYTHONPATH=. pytest tests/ -v`); all 
 
 ### Task 13 — Access-vs-Meaning Manifesto + Spectrum Map (Council Gap-Fill 2; NEW 2026-05-17 — draft-lock 2026-05-23, publish ~2026-06-19)
 
-> **Status 2026-05-21:** **Step 1 outline complete; all 6 decisions locked.** Hook A (silent regression) is the opener, all 7 artifacts plotted, JD URLs populated from target-companies.md. Strategic-sober first draft, then Sean runs writing-voice-modes review before commit. **Step 2 (full ~1,500-word draft pass) ready to execute next session.** See companion prep doc: [`2026-05-20-task-13-step-1-manifesto-outline.md`](2026-05-20-task-13-step-1-manifesto-outline.md).
+> **Status 2026-05-21 (Steps 2 + 3 shipped):** **Canonical manifesto draft at [`docs/MEANING_OVER_ACCESS.md`](../../../../docs/MEANING_OVER_ACCESS.md)** (1,622 words, 4-edit voice pass applied, concept_edges schema fix applied so this agrees with Task 15 Vault Scorecard). Premium-profile council run — Opus 4.7 + GPT-5.5 + Gemini Pro + Grok 4.20, chairman = Opus 4.7, $0.5285 actual, unanimous A-first cross-rank. Voice dial average across §1 + §5: ~90% Sean Mode. **Mermaid render at [`docs/diagrams/access-meaning-spectrum.{mmd,svg,png}`](../../../../docs/diagrams/)** via `mmdc 11.15.0` (installed globally) — SVG 7.6KB for portfolio `/essays/` embed, PNG 95KB at 1000×1000 for Substack. Brand palette locked in [`.mermaid-config.json`](../../../../docs/diagrams/.mermaid-config.json) for future essays. Full ship narrative in [completion log 2026-05-21 entry](unified-roadmap-completion-log.md#2026-05-21--task-13-steps-2--3-shipped-council-draft--voice-pass--mermaid-render). **Steps 4-7 remain for the Sat 5/23 draft-lock** — Step 4 (V3-bridge `/essays/` IA), Step 5 (Substack cross-post draft), Step 6 (4Q EXPLANATION + final voice review), Step 7 (commit + tag `gap-fill-2-draft-locked`).
+>
+> **Status (prior, Step 1 complete 2026-05-21):** Step 1 outline complete; all 6 decisions locked. Hook A (silent regression) is the opener, all 7 artifacts plotted, JD URLs populated from target-companies.md. Strategic-sober first draft, then Sean runs writing-voice-modes review before commit. Step 2 (full ~1,500-word draft pass) ready to execute next session. See companion prep doc: [`2026-05-20-task-13-step-1-manifesto-outline.md`](2026-05-20-task-13-step-1-manifesto-outline.md).
 >
 > **Status (prior):** Not started. **Zero new code** — 3–5 days of pure framing work, drafted in Week 1 (now), queued behind Substack Posts 1 (5/22 "Night My Vault Said Nothing") + 2 ("Vault said something again", depends on Task 11 dashboard ship 6/8–6/15). Publishes as **Substack Post 3** (~2026-06-19 Friday Week 5 if cadence holds). Becomes the **URL in Sean's email signature** for the back half of the sprint — the pre-read link that converts "interesting candidate" → "Tier-1 must-talk."
 
@@ -1268,30 +1270,9 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 
 ---
 
-### Task 20 — A11 GitHub Profile Audit (Phase A, ships by 2026-05-22)
+### Task 20 — A11 GitHub Profile Audit ✅ CLOSED 2026-05-21
 
-> **Status 2026-05-21:** **Deliverable shipped — Sean executes the 60-90 min audit on Fri 5/22.** Live GH-profile scrape on 2026-05-20 confirmed the audit's leverage: current bio "AI enthusiast with a background in Media looking to learn" is exactly the recruiter-bounce signature the audit targets. None of the 2026 shipped work (intent-engineering MCP, fleet dashboard, code-brain v4.0) is currently pinned. The deliverable provides: bio rewrite (Variant A recommended, 132 chars), the 6-repo pinned lineup with rationale per slot, paste-and-ship 4-section README inserts for each pinned repo (Problem / Solution / Tradeoffs / What I Learned), contribution-shape diagnosis + mitigation, 3 strategic forks, cross-link checklist, and the 10-second-incognito-test verification gate. See companion: [`2026-05-20-task-20-github-profile-audit-deliverable.md`](2026-05-20-task-20-github-profile-audit-deliverable.md).
-
-**Maps to:** Shubham Saboo's 6 elements (positioning bio, pinned repos, contribution shape, strategic forks, README polish, portfolio effect). Single-session audit; closes Gate A precondition.
-
-**Files:**
-- Modify: `github.com/seanwinslow28` profile bio
-- Modify: pinned repos list (target: 6 repos pinned, ordered by recruiter-relevance)
-- Modify: each pinned repo's README to include Problem / Solution / Tradeoffs and Decisions / What I Learned sections
-
-**- [ ] Step 1: Update bio.** Format: "AI PM building [specific thing]. Shipping [specific cadence]. Lives at seanwinslow.com/transactions." Remove any "passionate about AI" / "AI enthusiast" / generic phrases.
-
-**- [ ] Step 2: Choose the 6 pinned repos.** Default selection: (1) intent-engineering-mcp, (2) vault-synthesizer-evals (after N1 Task 37 ships), (3) ldr-grounding-collapse (after N2 Task 25 ships), (4) agent-fleet-observability, (5) sw-ai-pm-portfolio, (6) code-brain. Reorder by recruiter-impact: MCP server first.
-
-**- [ ] Step 3: Audit each pinned repo's README.** For each: Problem (who has this pain? be specific), Solution (what does the tool do? how does the user interact?), Tradeoffs and Decisions (1-2 decisions made + alternatives considered + why chosen), What I Learned (real insight that travels beyond this artifact). No "I learned a lot about APIs" — specific.
-
-**- [ ] Step 4: Run contribution-shape check.** Verify recent activity (last 4 weeks) shows real commits, not just vault auto-commits. If <5 substantive commits in last 4 weeks, flag — this means the vault-auto-commit pattern is dominating the green-square shape and recruiters will discount. Mitigation: cherry-pick recent substantive commits from the monorepo and mirror them to standalone repos.
-
-**- [ ] Step 5: Add 3 strategic forks/contributions.** Light habit (15 min). Fork: anthropics/anthropic-sdk-python or anthropics/anthropic-sdk-typescript, modelcontextprotocol/typescript-sdk, and one other (target-company repo of choice). Star + clone + push one micro-PR or one issue comment to anchor the contribution graph to the AI ecosystem.
-
-**- [ ] Step 6: Cross-link.** Add seanwinslow.com to GitHub profile. Add GitHub URL to LinkedIn About section. Add GitHub URL to Substack profile.
-
-**Verification gate:** Open github.com/seanwinslow28 in incognito. Within 10 seconds, a reader should be able to say "this person builds MCP servers and ships evals" — not "AI enthusiast." 6 repos pinned, each with the 4-section README. At least 3 strategic forks visible on profile.
+> **STATUS:** All 6 steps + verification gate complete. Audit executed by Sean in a single session 2026-05-21 per the deliverable at [`2026-05-20-task-20-github-profile-audit-deliverable.md`](2026-05-20-task-20-github-profile-audit-deliverable.md). Bio rewritten (Variant A, 132 chars), 6 repos pinned in recruiter-impact order (sw-mcp-intent-engineering first), 4-section READMEs added, 3 strategic forks visible, cross-links live across GitHub / LinkedIn / Substack. **Shipped 1 day ahead of the 2026-05-22 target.** Gate A precondition satisfied — Tier-1 AI PM / FDE / FDP applications can now flow without GH-bounce risk. Full task body archived in [completion log Task 20 entry](unified-roadmap-completion-log.md#task-20--a11-github-profile-audit-closed-2026-05-21).
 
 ---
 

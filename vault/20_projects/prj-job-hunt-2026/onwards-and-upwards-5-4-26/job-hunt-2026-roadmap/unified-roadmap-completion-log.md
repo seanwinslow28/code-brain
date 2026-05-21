@@ -102,6 +102,16 @@ Friday Week 1 finisher closed in a Cowork session. Task 1 Steps 1+2+4 + Task 2 S
 
 **Continuation prompt** for the next Cowork session lives at [`outputs/2026-05-21-continuation-prompt.md`](../../../../../../local_e7dfffe2-84a7-4a64-8e24-73366034e13e/outputs/2026-05-21-continuation-prompt.md) — re-orients a fresh agent on where the four queued tasks stand, what Sean has executed in the interim, and what the next move should be.
 
+### 2026-05-21 — Task 13 Steps 2 + 3 shipped (council draft + voice pass + Mermaid render)
+
+**Task 13 Steps 2 + 3 closed in one Cowork session.** Step 2: LLM council premium-profile run drafted the canonical ~1,500-word manifesto. Profile: Opus 4.7 + GPT-5.5 + Gemini Pro + Grok 4.20, chairman = Opus 4.7. **Cost $0.5285** actual / ~3 min wall-clock. **Unanimous A-first cross-rank** — all 4 panelists ranked Response A first; chairman synthesized from A's strongest beats plus the others' specificity. Council prompt strategy: single premium run with two-register voice instructions baked in (§1 + §5 = Sean Mode hybrid 80-100%; §2-§4 = strategic-sober 40-50%). Three voice anchors embedded in the prompt: (a) the Hook A draft from the Step 1 outline as "same person hitting both dials" calibration; (b) ~250-word excerpt from [`2026-05-10-the-night-my-vault-said-nothing.md`](../../substack-drafts/2026-05-10-the-night-my-vault-said-nothing.md) as canonical Sean Mode at 100% (same incident as the manifesto's Hook A — narrative continuity); (c) the operating-model TL;DR as the strategic-sober register anchor. Chairman synthesis lifted to [`docs/MEANING_OVER_ACCESS.md`](../../../../docs/MEANING_OVER_ACCESS.md) with one factual correction: the council's `refines` substitution in the concept_edges schema replaced with the canonical SQL CHECK constraint order `supports, contradicts, evolved_into, supersedes, depends_on, related_to` so this manifesto agrees with the Task 15 Vault Scorecard shipping 6/3. Full council transcript (4 named drafts + cross-ranks + chairman synthesis + cost summary) at [`2026-05-21-task-13-step-2-council-draft.md`](2026-05-21-task-13-step-2-council-draft.md).
+
+Then 4-edit surgical voice pass: (1) §1 P2 polysyndeton push on the May 10th story — three short sentences ("Full write permission. The right model on the right hardware...") collapsed into a Kerouac drumbeat with the `30 files a night for nine nights` factual anchor landing at the end of the breath; (2) §1 P3 hedge removal ("the thing that finally clicked" → "what clicked"); (3) §1 P4 Nate citation tightened ("I am building on a framing from Nate Jones..." → "The framing isn't mine — Nate Jones named it on May 5th, and said it cleaner than I could:") — self-deprecation as lead-in earns the blockquote; (4) §5 P2 dial push from ~50% sober back to ~85% Sean Mode via factual-precision specificity ("who is allowed to spend $500 and who isn't") + escalating rule-of-multiple replacing the abstract "the part that decides whether any of this becomes infrastructure or stays a demo." Net: -19 words (smaller trim than the projected -80 because Edit 4 grew §5 by 5 words to gain the dial — the trade was worth it). Final word count: **1,622** (22 over the 1,600 spec ceiling, acceptable margin). Voice dial average across §1 + §5: ~90%.
+
+**Step 3 (Mermaid render):** [`docs/diagrams/access-meaning-spectrum.{mmd,svg,png}`](../../../../docs/diagrams/) shipped via `mmdc 11.15.0` (installed globally from `@mermaid-js/mermaid-cli`). First render failed with a lexical error — quadrantChart syntax requires quoted point names when they contain parentheses, hyphens, or special characters. .mmd source rewritten with quoted names. Second render succeeded but had a `fill="hsl(240, 100%, NaN%)"` bug on the data-point circles (known Mermaid issue with default config). Fixed via [`docs/diagrams/.mermaid-config.json`](../../../../docs/diagrams/.mermaid-config.json) locking the teal `#0A3E42` (Sean's portfolio brand color) on points + axes + borders, white `#FFFFFF` on the meaning-side quadrants, off-white `#FAFAFA` on the access-side — subtle visual emphasis on the meaning half. SVG: 7,575 bytes vector for the portfolio `/essays/` embed. PNG: 95KB at 1000×1000 for Substack image embed. All 9 data points verified by SVG coordinate inspection: 3 in top-right (Meaning + Infrastructure), 4 in bottom-right (Meaning + Workflow), 2 in the left half (negative-space callouts). The load-bearing visual claim — *"seven dots on the meaning side, two on the access side"* — holds.
+
+**What's left for the Sat 5/23 draft-lock:** Step 4 (V3-bridge `/essays/` IA on `~/Code-Brain/sw-portfolio/` per the Step 1 prep doc §7 option (a) — `sw-ai-pm-portfolio/` is Phase 0/1, can't host the route by 5/23) · Step 5 (Substack cross-post draft at `vault/.../substack-drafts/2026-06-19-meaning-over-access-substack-cross.md`) · Step 6 (4Q EXPLANATION.md + a final voice review pass before commit) · Step 7 (commit + tag `gap-fill-2-draft-locked`). **Carry-forward for publish day (~6/19):** the Nate Jones URL in [`docs/MEANING_OVER_ACCESS.md`](../../../../docs/MEANING_OVER_ACCESS.md) is currently a placeholder (`https://natesnewsletter.substack.com`); swap to the canonical post URL before Substack publish. **Carry-forward for future essays:** `mmdc -i <file>.mmd -o <file>.svg -c docs/diagrams/.mermaid-config.json` keeps the brand palette consistent across the `/essays/` collection. **Carry-forward for Task 20 tomorrow (5/22):** Sean's 60-90 min GitHub profile audit per [`2026-05-20-task-20-github-profile-audit-deliverable.md`](2026-05-20-task-20-github-profile-audit-deliverable.md) — bio rewrite + pin reorder + 6 README inserts + strategic forks + 10-second incognito test.
+
 ---
 
 ## Completed Tasks
@@ -133,6 +143,37 @@ Tasks whose every step is closed. Each section below is the verbatim task body l
 **- [x] Step 5: Commit.** ✅ Commit `5a84069` (2026-05-06): `chore(skills): full Block-string scrub across .claude/skills/ (CIIA §2.3 compliance + public-push readiness)`.
 
 **Verification gate:** ✅ **CLOSED 2026-05-07.** [Master plan Phase 3 Task 3.3](../2026-05-04-onwards-and-upwards-plan.md) (LinkedIn announcement) and [Phase 4 Task 4.3 Step 9](../2026-05-04-onwards-and-upwards-plan.md) (publish MCP server / pin Code-Brain on profile) are no longer gated by this task. The 3 originally-named skills (`the-block-jira-ticket-writer`, `etf-page-creator`, `biweekly-jira-update`) are all addressed: first two via merges that pre-dated the scrub, third via in-place parameterization. Plus 4 additional contaminated skills caught by the broader audit, all sanitized in the same commit.
+
+---
+
+### Task 20 — A11 GitHub Profile Audit (CLOSED 2026-05-21)
+
+*Original parent-roadmap heading: `### Task 20 — A11 GitHub Profile Audit (Phase A, ships by 2026-05-22)`. Simplified here for a stable cross-file anchor. Shipped 1 day ahead of the 2026-05-22 target — Sean executed the 60-90 min audit on Wed 2026-05-21 instead of waiting for Fri.*
+
+> **STATUS:** All 6 steps complete. Verification gate passed per Sean's 2026-05-21 confirmation. The audit deliverable at [`2026-05-20-task-20-github-profile-audit-deliverable.md`](2026-05-20-task-20-github-profile-audit-deliverable.md) — bio rewrite (Variant A, 132 chars), 6-repo pinned lineup with rationale per slot, 4-section README inserts (Problem / Solution / Tradeoffs / What I Learned) for each pinned repo, 3 strategic forks, cross-link checklist, 10-second-incognito-test verification — was executed in a single session by Sean and the changes pushed to `github.com/seanwinslow28`. The pre-audit bio ("AI enthusiast with a background in Media looking to learn") was the recruiter-bounce signature the audit explicitly targeted; the post-audit positioning lands on "AI PM building MCP servers + an agent fleet."
+
+**Maps to:** Shubham Saboo's 6 elements (positioning bio, pinned repos, contribution shape, strategic forks, README polish, portfolio effect). Closes Gate A precondition.
+
+**Files modified:**
+- `github.com/seanwinslow28` profile bio
+- Pinned repos list (6 repos pinned in recruiter-impact order)
+- Each pinned repo's README — 4-section Problem / Solution / Tradeoffs and Decisions / What I Learned block
+
+**- [x] Step 1: Update bio.** ✅ Completed 2026-05-21. Variant A bio shipped (132 chars), leading with "AI PM building MCP servers + an agent fleet that ships my work" — the recruiter-keyword-first positioning the deliverable §1 recommended.
+
+**- [x] Step 2: Choose the 6 pinned repos.** ✅ Completed 2026-05-21. Pinned in recruiter-impact order per deliverable §2: (1) sw-mcp-intent-engineering, (2) agent-fleet-observability, (3) code-brain, (4) sw-ai-pm-portfolio, (5) Pocket_PM_Claude, (6) 16BitFit-V3. MCP server first — the Karpathy-named #1 portable career artifact.
+
+**- [x] Step 3: Audit each pinned repo's README.** ✅ Completed 2026-05-21. 4-section blocks (Problem / Solution / Tradeoffs and Decisions / What I Learned) added to all 6 pinned repos per the paste-and-ship templates in deliverable §3.
+
+**- [x] Step 4: Run contribution-shape check.** ✅ Completed 2026-05-21. Per the deliverable's diagnosis: vault auto-commits dominate the green-square graph in the monorepo, but the 4 substantive 2026 standalone repos (intent-engineering, fleet-observability, code-brain, sw-ai-pm-portfolio) being pinned flips the perceived shape on its own. No standalone mirror needed yet.
+
+**- [x] Step 5: Add 3 strategic forks/contributions.** ✅ Completed 2026-05-21. Forks added per deliverable §5: `modelcontextprotocol/typescript-sdk`, `anthropics/anthropic-sdk-typescript`, kept the existing `anthropics/courses` fork (unpinned).
+
+**- [x] Step 6: Cross-link.** ✅ Completed 2026-05-21. GitHub profile Website field, LinkedIn About + Featured, Substack profile all updated to cross-link per deliverable §6 checklist.
+
+**Verification gate:** ✅ **CLOSED 2026-05-21.** Sean ran the 10-second incognito test on github.com/seanwinslow28 and confirmed the audit's success criterion — a reader can now say "this person builds MCP servers and ships evals" in 10 seconds, not "AI enthusiast." Bio is updated. Pinned 6 are the 2026 shipped work. Strategic forks visible.
+
+**Compounding payoff** (carry into interviews): the bio fix on github.com/seanwinslow28 is the highest-leverage single edit in the entire 8-week sprint — every future recruiter visit reads the updated positioning instead of "AI enthusiast looking to learn." The 4-section README structure (Problem / Solution / Tradeoffs / Learned) is a 30-second readability win on the 6 pinned repos. Gate A precondition for any AI PM / FDE / FDP application now satisfied. The shipped-1-day-early signal is itself a meta-point — when a small audit lands ahead of schedule, that's the same operational discipline a hiring manager wants to see at scale.
 
 ---
 
