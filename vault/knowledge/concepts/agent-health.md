@@ -2,31 +2,31 @@
 title: "Agent Health"
 type: concept
 sources:
-  - knowledge/concepts/agent-health.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-03.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-The general state of agents within the system, such as whether they are active or disabled and if they have executed successfully. This directly affects Sean's ability to maintain his knowledge vault.
+The operational status of agents, including whether they process batons/data or just log without action.
 
 ## Context
 
-Sean relies on agent health to ensure that all aspects of his personal knowledge vault, including automation routines and research consolidation, are operating as intended.
+Agent health is pivotal for Sean's automation-driven knowledge maintenance and creative production system.
 
 ## Evidence
 
-> > **Active agents:** 7 of 12 | **Disabled:** 5
+> Status: log-only, Last run: 2026-05-03T02:01:53.942905, Details: No baton found, but log exists
 
-> > The vault-synthesizer failed to run today, inhibiting the automated consolidation of research findings.
+> Agent activity was exclusively 'log-only,' indicating a failure to process batons/data.
 
 ## Examples
 
-- Active agents: 7 of 12
-- vault-synthesizer failed to run today
+- vault-indexer status: log-only with no baton found
+- daily-driver morning failed to process batons/data for 2026-05-03
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Automation Reliability]]
+[[Agent Health Monitoring]] [[Automation Failure and Daily Note Disruption]]

@@ -2,31 +2,31 @@
 title: "Fleet Status"
 type: concept
 sources:
-  - 20_projects/research/2026-05-14-Agent-Fleet-Observability-Dashboard-ChatGPT.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-10.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-The operational state of an agent fleet, including its performance metrics and recovery from silent failures through automated evaluations.
+A snapshot of the operational health and status of Sean's agent fleet, including which agents are active or disabled.
 
 ## Context
 
-Fleet status is a critical signal to recruiters, showcasing Sean's ability to maintain agent fleets with reliability and operational maturity.
+This affects how well Sean's workflow automation systems work, especially with regard to multi-domain processing and research.
 
 ## Evidence
 
-> The cold-open needs **three things above the fold**: a visible fleet-state summary, a clearly annotated May 1–10 regression timeline showing that the eval suite caught a silent failure, and a compact economics view.
+> **Active agents:** 7 of 12 | **Disabled:** 5
 
-> The operator recovered it, and the dashboard preserves the incident as proof of operational maturity.
+> Status: stale
 
 ## Examples
 
-- Silent nine-day drift in an eight-agent fleet caught by the eval layer.
-- Recovery and preservation of incidents as proof of operational maturity.
+- vault-indexer (2:00 AM daily, Mac Mini, $0.00/run)
+- knowledge-lint (Sunday 22:00, Mac Mini / MBP, $0.00/run)
 
 ## Related Concepts
 
-[[Agent Fleet Observability Dashboard]] [[Eval Vocabulary]]
+[[Agent Health Monitoring]] [[Automation Reliability]]

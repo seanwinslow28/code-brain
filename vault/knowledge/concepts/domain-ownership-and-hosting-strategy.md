@@ -2,31 +2,30 @@
 title: "Domain Ownership and Hosting Strategy"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_Creative_PM.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-20.md
 tags: [auto-generated, phase-6]
-created: 2026-05-18
-updated: 2026-05-18
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-A strategy for managing Sean's personal domain (seanwinslow.com) with DNS management via Cloudflare and domain registration at Namecheap.
+This concept refers to the infrastructure decisions around which machines are used for hosting agents and how they are managed. It emphasizes stability and reliability.
 
 ## Context
 
-This strategy ensures the domain's reliability, performance, and verifiability for all his personal and professional projects.
+For Sean, ensuring that the hosting strategy is robust helps avoid disruptions in automation workflows, especially when managing knowledge vaults and job-hunt activities.
 
 ## Evidence
 
-> - The management of Sean's personal domain (seanwinslow.com) and its hosting strategy, which includes DNS management via Cloudflare and domain registration at Namecheap.
+> - The reliance on MBP for vault-synthesizer is an instability risk (context-switch cost).
 
-> - [seanwinslow.com/transactions](https://seanwinslow.com/transactions)
+> - Suggestion: Prioritize establishing Mac Mini as the stable, always-on host for all core agent functions.
 
 ## Examples
 
-- seanwinslow.com domain and its hosting strategy
-- Publicly accessible via Cloudflare and Namecheap.
+- The suggestion to use Mac Mini as a primary host for core agents reflects the need for reliable domain ownership.
 
 ## Related Concepts
 
-[[Portfolio Walkthrough]] [[Open-Source Contributions]]
+[[Automation Reliability]] [[Infrastructure]]

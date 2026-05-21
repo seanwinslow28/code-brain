@@ -2,31 +2,35 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/concepts/automation-routines.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-20.md
 tags: [auto-generated, phase-6]
-created: 2026-05-19
-updated: 2026-05-19
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-A monitoring system that ensures the reliability and performance of automation agents, particularly those involved in job hunt tasks. It helps identify issues before they disrupt workflows.
+This concept refers to the tracking of agent statuses, such as their success or failure, and the associated logs. It enables insight into the health of automation infrastructure.
 
 ## Context
 
-For Sean's job hunt, reliable automation is critical to avoid disruptions during key phases like application tracking and daily routine execution.
+This is important to Sean as it helps him understand the reliability of his automation systems, which are critical for both knowledge management and job-hunt activities.
 
 ## Evidence
 
-> The pattern shows that Agent Health Monitoring aligns with Sean's job-hunt-2026 goals by ensuring automation reliability, which is critical for modern AgentOps and FDP roles.
+> - **Status:** healthy
+- **Last run:** 2026-05-20T03:28:22
+- **Details:** status=success · 5.1h ago · notes='concepts=4 connections=1 rejected=0 edges=3'
 
-> Agent Health Monitoring
+> - **Status:** error
+- **Last run:** 2026-05-19T08:47:03
+- **Details:** status=error · mode=morning · 23.8h ago · notes='Command failed with exit code 1 (exit code: 1) Error output: Check stderr out...'
 
 ## Examples
 
-- scripts/update_status.py <db_id> applied
-- Agent Health and Daily Routine Automation
+- The vault-synthesizer agent is marked as healthy and provided detailed notes about its execution.
+- The daily-driver agent is marked as error, with specific logs of its failure.
 
 ## Related Concepts
 
-[[Automation Routines]] [[Daily-Drive Agent]]
+[[Automation Reliability]] [[Agent Health]]

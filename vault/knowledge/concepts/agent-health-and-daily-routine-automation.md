@@ -2,31 +2,31 @@
 title: "Agent Health and Daily Routine Automation"
 type: concept
 sources:
-  - knowledge/concepts/automation-reliability.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-06.md
 tags: [auto-generated, phase-6]
-created: 2026-05-19
-updated: 2026-05-19
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-This concept explores the interdependence between agent health, such as that of the daily-driver agent, and the reliability of automation routines like generating a daily note.
+The interplay between agent health metrics (status, last run) and the daily execution of automated routines such as knowledge-lint or vault-indexer.
 
 ## Context
 
-This is important for Sean as it ties agent health directly to automation success and daily note generation, which supports his productivity goals.
+For Sean, ensuring the health of these agents is essential to maintain daily routines like knowledge indexing and linting.
 
 ## Evidence
 
-> This concept explores the interdependence between agent health, such as that of the daily-driver agent, and the reliability of automation routines like generating a daily note.
+> 'Status: log-only', 'Last run: 2026-05-04T18:15:29.219526', 'Details: No baton found, but log exists'
 
-> The health of the daily-driver agent is a critical factor in determining automation success, especially for routine tasks.
+> 'The agent fleet fails to resolve critical MCP/API access barriers (e.g., no active connection to required APIs).'
 
 ## Examples
 
-- Generating a daily note
-- Ensuring consistent task execution through agent health monitoring
+- 'Meta-agent routinely runs at 8:35 AM'
+- 'No baton found, but log exists'
 
 ## Related Concepts
 
-[[Daily Note Generation]] [[Automation Reliability]]
+[[Automation Routines]] [[Agent Health Monitoring]]
