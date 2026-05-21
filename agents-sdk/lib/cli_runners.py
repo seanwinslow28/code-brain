@@ -18,6 +18,7 @@ import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Literal
 
 _CODEX_TOKENS_RE = re.compile(r"tokens used\s*\n\s*([\d,]+)")
 
@@ -45,7 +46,7 @@ class CLIResponse:
     rate-capped responses as failures even if exit_code == 0.
     """
 
-    cli: str            # "codex" or "antigravity"
+    cli: Literal["codex", "antigravity"]
     text: str
     tokens: int | None
     duration_s: float
