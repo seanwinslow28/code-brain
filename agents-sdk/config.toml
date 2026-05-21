@@ -168,6 +168,26 @@ ldr_questions_per_iteration = 2
 ldr_timeout_seconds = 1800
 schedule = "02:45"
 
+[agents.vault_critic]
+# Pattern 1 (2026-05-21) — nightly generative critique of synthesizer concept
+# articles. Shells to Codex CLI (gpt-5.5) and Anti-Gravity CLI (Gemini 3.1 Pro)
+# in parallel. Cost: $0 incremental on personal subscriptions. No Anthropic
+# SDK in the nightly path; Sonnet fallback is OUT OF SCOPE for v1 (both-CLIs-
+# rate-capped → status=partial, exits cleanly). Sequence: runs at 03:30 after
+# vault_synthesizer (02:30) and deep_researcher (02:45), before daily_driver
+# (08:30) and meta_agent (08:45).
+enabled = true
+skills = []
+max_turns = 0                          # decorative — no Claude SDK loop in this agent
+max_budget_usd = 0.00                  # decorative — costs absorbed by ChatGPT Plus + Google personal OAuth
+schedule = "03:30"
+target_machine = "mac_mini"
+max_targets_per_run = 3
+wall_budget_seconds = 600
+per_cli_timeout_seconds = 120
+output_dir = "vault/knowledge/expansions"
+manifest_dir = "vault/health"
+
 [safety]
 max_turns_default = 30
 max_budget_default = 0.50
