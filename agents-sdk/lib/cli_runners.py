@@ -57,3 +57,25 @@ class CLIResponse:
     @property
     def ok(self) -> bool:
         return self.exit_code == 0 and not self.rate_capped and self.error is None
+
+
+_RATE_CAP_PATTERNS = (
+    "rate limit",
+    "429",
+    "quota",
+    "resource_exhausted",
+    "too many requests",
+)
+
+
+def detect_rate_cap(cli: str, stderr_text: str) -> bool:
+    """Heuristic rate-cap detector. True when stderr looks rate-capped.
+
+    Both Codex and Anti-Gravity surface rate-cap errors as free-text or JSON
+    in stderr (no consistent structured signal). We match a small set of
+    case-insensitive substrings that cover the documented + anecdotal shapes.
+    False positives on non-cap errors are tolerable — the run is marked
+    partial either way and the wrapper logs full stderr.
+    """
+    lowered = (stderr_text or "").lower()
+    return any(p in lowered for p in _RATE_CAP_PATTERNS)

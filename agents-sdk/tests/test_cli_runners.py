@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from lib.cli_runners import CLIResponse, parse_codex_tokens
+from lib.cli_runners import CLIResponse, detect_rate_cap, parse_codex_tokens
 
 FIXTURES = Path(__file__).parent / "fixtures" / "critic"
 
@@ -55,3 +55,23 @@ def test_cliresponse_ok_false_when_error_set_with_clean_exit():
     r = CLIResponse(cli="antigravity", text="", tokens=None, duration_s=0.1,
                     exit_code=0, rate_capped=False, error="json parse failed")
     assert r.ok is False
+
+
+def test_detect_rate_cap_codex_429_signature():
+    # Anecdotal Codex rate-cap shape: "rate limit" or "quota" in stderr.
+    assert detect_rate_cap("codex", "error: rate limit exceeded") is True
+    assert detect_rate_cap("codex", "Error: 429 Too Many Requests") is True
+    assert detect_rate_cap("codex", "your daily quota has been reached") is True
+
+
+def test_detect_rate_cap_antigravity_shape():
+    # Anti-Gravity surfaces quota errors as JSON-formatted stderr; the wrapper
+    # also checks for "RESOURCE_EXHAUSTED" and "quota" in any case.
+    assert detect_rate_cap("antigravity", "RESOURCE_EXHAUSTED: Quota exceeded") is True
+    assert detect_rate_cap("antigravity", "rate limit hit, try again later") is True
+
+
+def test_detect_rate_cap_negative_on_normal_stderr():
+    # Smoke-test stderr was clean — no false positive.
+    normal = (FIXTURES / "codex-err.txt").read_text(encoding="utf-8")
+    assert detect_rate_cap("codex", normal) is False
