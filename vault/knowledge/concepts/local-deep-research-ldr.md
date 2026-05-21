@@ -4,28 +4,28 @@ type: concept
 sources:
   - 00_inbox/research-queue.md
 tags: [auto-generated, phase-6]
-created: 2026-05-16
-updated: 2026-05-16
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-A research method that uses a specific model, Qwen3-14B, and data sources like SearXNG to process research questions from the Deep Research Queue.
+A research method used by the system to process deep-research questions using LDR + Qwen3-14B + SearXNG. It is pinned to version 1.5.6 due to bugs in newer versions.
 
 ## Context
 
-LDR is essential for Sean's daily research, but it has known constraints and limitations that prevent it from handling complex or multi-target questions effectively.
+Understanding LDR's constraints and status is vital for Sean to manage expectations around the efficiency and accuracy of research outputs.
 
 ## Evidence
 
-> LDR has a 900s hard budget. Compound prompts stall around 90 % and produce no output.
+> LDR is pinned to v1.5.6 awaiting upstream PR [LearningCircuit/local-deep-research#4000](https://github.com/LearningCircuit/local-deep-research/pull/4000) — the 1.5.6 → 1.6.9 upgrade attempted on 2026-05-11 hit a confirmed upstream Alembic-runner bug (migration 0007 FK mismatch on `download_attempts → download_tracker`).
 
-> Even when LDR completes, Qwen3-14B can't ground citations across multiple targets and confidently writes fabricated entities, owners, and URLs.
+> Check status with: `gh pr view 4000 --repo LearningCircuit/local-deep-research --json state,mergedAt`
 
 ## Examples
 
-- The LDR system is pinned to v1.5.6 awaiting upstream PR #4000.
+- The upgrade attempt was rolled back due to an Alembic-runner bug.
 
 ## Related Concepts
 
-[[Deep Research Queue]] [[System Constraints]]
+[[Deep Research Queue]] [[Gemini Deep Research]]

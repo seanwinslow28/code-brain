@@ -1,32 +1,31 @@
 ---
-title: "knowledge-lint"
+title: "Knowledge-Lint"
 type: concept
 sources:
-  - knowledge/concepts/knowledge-lint.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-13.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-The process of analyzing and validating the separation between Tier 1 and Tier 2 concepts within a knowledge base to maintain consistency.
+A scheduled process that checks the quality and structure of knowledge within Sean's vault system to maintain coherence and consistency.
 
 ## Context
 
-This ensures that Sean's structured knowledge remains clean and free from contamination by higher-level insights, supporting effective decision-making across domains such as job preparation, creative projects, and infrastructure maintenance.
+This concept is important for ensuring the integrity of Sean's knowledge vault, especially as it involves tiered checks and maintenance.
 
 ## Evidence
 
-> The process of analyzing and validating the separation between Tier 1 and Tier 2 concepts within a knowledge base to maintain consistency.
+> knowledge-lint (Sunday 22:00, Mac Mini / MBP, $0.00/run)
 
-> The knowledge-lint agent ensures Tier 1 and Tier 2 concepts remain properly separated, which is essential for effective vault maintenance.
+> status=success · tier1=871 tier2=28
 
 ## Examples
 
-- Ensuring that Tier 1 concepts are not mixed with Tier 2 insights.
-- Validating knowledge separation within a vault.
+- The knowledge-lint process performed tier1 and tier2 checks on vault content.
 
 ## Related Concepts
 
-[[Vault Maintenance]] [[Indexing and Synthesis]]
+[[Vault Maintenance]] [[Citation Quality]]

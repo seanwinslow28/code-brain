@@ -2,31 +2,30 @@
 title: "Cross-domain bridging"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-synthesizer-retrofit-tiers.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-15.md
 tags: [auto-generated, phase-6]
-created: 2026-05-19
-updated: 2026-05-19
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-A process of connecting concepts drawn from different top-level vault folders, such as life-systems, creative-studio, job-hunt-2026, and Superuser Pack infrastructure.
+The practice of connecting concepts across different domains such as knowledge management, creative output, and job hunting to optimize workflows.
 
 ## Context
 
-This concept is essential for Sean because it is the core requirement of the Vault Synthesizer v2 retrofit plan — to ensure insights span multiple domains rather than being limited to dense clusters.
+Sean needs cross-domain coherence to ensure his systems support both creative output and hiring goals effectively.
 
 ## Evidence
 
-> The cross-domain bridging the synthesizer is supposed to deliver (life-systems × creative-studio × job-hunt × Superuser Pack) never happened.
+> - ... 'inhibiting the automated consolidation of research findings.'
 
-> The intent spec is the contract; the four tiers are sequenced implementations.
+> - ... 'Agent connectivity remains unreliable, preventing seamless three-machine sync (Mac Mini/MBP/Alienware).'
 
 ## Examples
 
-- The retrofit aims to ensure the synthesizer produces cross-domain connections rather than cluster-biased results.
-- The current prompt lacks a preference for cross-domain connections.
+- The failure of the vault-synthesizer disrupts knowledge integration across domains.
 
 ## Related Concepts
 
-[[Vault Synthesizer Eval Suite]] [[Vault Synthesizer v2 retrofit plan]]
+[[Automation and Daily Drive Agent Interdependence]] [[Agent Fleet Observability Dashboard]]

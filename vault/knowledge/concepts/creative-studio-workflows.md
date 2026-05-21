@@ -2,31 +2,31 @@
 title: "Creative Studio Workflows"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_Creative_PM.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-30.md
 tags: [auto-generated, phase-6]
-created: 2026-05-18
-updated: 2026-05-18
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-A structured process for managing creative outputs using AI-native tooling, blending human creativity with agent-driven automation.
+A set of processes and tools used to manage creative work, including AI-driven content generation and design.
 
 ## Context
 
-Sean applies his 12+ years of illustration and animation craft through AI-native production tools like Nano Banana Pro, Seedance 2.0, and Adobe MCP.
+This is important for Sean as the current status of creative tools like Alienware and ComfyUI being offline directly impacts his ability to produce content.
 
 ## Evidence
 
-> - Agent-orchestrated 2D animation pipeline: humans own the creative ceiling, agents own the technical floor (asset generation, lip sync, render).
+> - Key creative and development infrastructure was offline: Alienware and ComfyUI endpoints were unresponsive.
 
-> - Applies 12+ years of illustration and animation craft through AI-native production tooling; portfolio short ships June 2026.
+> Implement a mandatory failover or manual trigger for the daily-driver to ensure a synthesis note is written even if no live MCP/data sources are available.
 
 ## Examples
 
-- 2D Animation Pipeline — Portfolio Short (June 2026)
-- Custom 2D-animation-principles skill governing timing and style.
+- Alienware and ComfyUI endpoints were unresponsive.
+- The daily-driver agent failed to create a note due to a lack of live data sources.
 
 ## Related Concepts
 
-[[Automation Pipeline]] [[AI-PM Landscape for Boston/Remote Hiring]]
+[[Automation Failure and Daily Note Disruption]] [[Vault Knowledge - MCP Research]]

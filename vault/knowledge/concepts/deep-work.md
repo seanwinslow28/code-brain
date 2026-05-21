@@ -2,31 +2,31 @@
 title: "Deep Work"
 type: concept
 sources:
-  - knowledge/concepts/deep-work.md
+  - 00_inbox/gemini-research-queue.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-A state of focused, distraction-free work that enables high-impact thinking and productivity. It is particularly important for activities like building portfolio projects and researching companies during job hunting.
+A focused mode of working that minimizes distractions and maximizes productivity, often through the automation of routine tasks.
 
 ## Context
 
-For Sean, deep work is critical in his job-hunt-2026 efforts to remain productive and competitive while navigating the post-layoff phase.
+This concept supports Sean's need to maintain high productivity and focus, especially as he juggling multiple domains like job hunting, creative work, and knowledge management.
 
 ## Evidence
 
-> A state of focused, distraction-free work that enables high-impact thinking and productivity.
+> Implementation Architecture
 
-> In job hunting, deep work is essential for building portfolio projects, researching companies, and preparing for interviews.
+> Automation Reliability
 
 ## Examples
 
-- Sean's intent-engineering project time
-- Morning learning blocks
+- Daily-Drive Agent
+- Automation Routines
 
 ## Related Concepts
 
-[[Track-C Protected Time]] [[Energy Management]]
+[[Agent Health Monitoring]] [[Automation and Daily Drive Agent Interdependence]]

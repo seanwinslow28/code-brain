@@ -2,31 +2,31 @@
 title: "Automation Routines"
 type: concept
 sources:
-  - knowledge/concepts/automation-routines.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-17.md
 tags: [auto-generated, phase-6]
-created: 2026-05-19
-updated: 2026-05-19
+created: 2026-05-21
+updated: 2026-05-21
 ---
 
 ## Definition
 
-A collection of automated processes designed to support Sean's job-hunting efforts, including status updates and application tracking. These routines streamline his workflow by ensuring consistency and efficiency.
+A structured sequence of automated tasks, such as the daily-driver morning agent's routine for inbox hygiene and quick-capture routing.
 
 ## Context
 
-This concept is critical for Sean's job-hunting process because it reduces manual effort and ensures that his applications are systematically tracked.
+These routines are critical components of Sean's personal knowledge vault and workflow automation, ensuring consistent productivity.
 
 ## Evidence
 
-> > cd ~/Code-Brain/claude-code-superuser-pack/agents-sdk
+> - daily-driver morning failed to run (error), blocking core daily routines like quick-capture routing and inbox hygiene.
 
-> > PYTHONPATH=. .venv/bin/python3 scripts/update_status.py <db_id> applied
+> - vault-synthesizer successfully processed 41 concepts and 42 connections, advancing the vault as SSoT.
 
 ## Examples
 
-- cd ~/Code-Brain/claude-code-superuser-pack/agents-sdk
-- PYTHONPATH=. .venv/bin/python3 scripts/update_status.py <db_id> applied
+- daily-driver morning is part of Automation Routines, but it failed on May 16.
+- vault-synthesizer is a successful example of Automation Routines working as intended.
 
 ## Related Concepts
 
-[[Daily-Drive Agent]] [[Agent Health and Daily Routine Automation]]
+[[Automation Reliability]] [[Daily Note Generation]]
