@@ -13,6 +13,7 @@ def test_parse_codex_tokens_from_real_stderr():
 
 def test_parse_codex_tokens_missing_footer_returns_none():
     assert parse_codex_tokens("no tokens used line here") is None
+    assert parse_codex_tokens(None) is None  # guard against None stderr from asyncio
 
 
 def test_parse_codex_tokens_handles_comma_thousands():
