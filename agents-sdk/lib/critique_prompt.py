@@ -25,7 +25,9 @@ def extract_wikilinks_summary(article_body: str) -> str:
     """
     seen: dict[str, None] = {}
     for target in _WIKILINK_RE.findall(article_body):
-        seen.setdefault(target.strip(), None)
+        stripped = target.strip()
+        if stripped:
+            seen.setdefault(stripped, None)
     if not seen:
         return "(no wikilinks)"
     return ", ".join(seen.keys())
@@ -48,12 +50,13 @@ def build_critique_prompt(
     busy nights — Codex / Anti-Gravity smoke test was 13.2K input.
     """
     template = (template_path or _TEMPLATE_PATH).read_text(encoding="utf-8")
+    body = article_body.strip()
     capped = recent_titles[:context_limit]
     return template.format(
         slug=slug,
-        article_body=article_body.strip(),
+        article_body=body,
         source_path=source_path,
-        wikilink_summary=extract_wikilinks_summary(article_body),
+        wikilink_summary=extract_wikilinks_summary(body),
         context_limit=context_limit,
         recent_titles=", ".join(capped) if capped else "(none)",
     )
