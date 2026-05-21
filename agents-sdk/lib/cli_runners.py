@@ -32,3 +32,27 @@ def parse_codex_tokens(stderr_text: str) -> int | None:
     if not m:
         return None
     return int(m.group(1).replace(",", ""))
+
+
+@dataclass(frozen=True)
+class CLIResponse:
+    """Result of a single CLI invocation.
+
+    `text` is the raw markdown response (Codex stdout or Anti-Gravity
+    `response` field). `tokens` is None when the CLI did not report a
+    token count. `rate_capped` is set by the wrapper when the CLI's
+    stderr matches a known rate-cap signature; the caller MUST treat
+    rate-capped responses as failures even if exit_code == 0.
+    """
+
+    cli: str            # "codex" or "antigravity"
+    text: str
+    tokens: int | None
+    duration_s: float
+    exit_code: int
+    rate_capped: bool
+    error: str | None
+
+    @property
+    def ok(self) -> bool:
+        return self.exit_code == 0 and not self.rate_capped and self.error is None

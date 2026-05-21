@@ -19,3 +19,34 @@ def test_parse_codex_tokens_missing_footer_returns_none():
 def test_parse_codex_tokens_handles_comma_thousands():
     # Codex prints 17,182 not 17182 in some terminals — match either.
     assert parse_codex_tokens("tokens used\n17,182\n") == 17182
+
+
+from lib.cli_runners import CLIResponse
+
+
+def test_cliresponse_holds_response_and_meta():
+    r = CLIResponse(
+        cli="codex",
+        text="hello world",
+        tokens=123,
+        duration_s=1.5,
+        exit_code=0,
+        rate_capped=False,
+        error=None,
+    )
+    assert r.cli == "codex"
+    assert r.text == "hello world"
+    assert r.tokens == 123
+    assert r.ok is True
+
+
+def test_cliresponse_ok_false_when_exit_nonzero():
+    r = CLIResponse(cli="codex", text="", tokens=None, duration_s=0.1,
+                    exit_code=1, rate_capped=False, error="boom")
+    assert r.ok is False
+
+
+def test_cliresponse_ok_false_when_rate_capped():
+    r = CLIResponse(cli="codex", text="", tokens=None, duration_s=0.1,
+                    exit_code=0, rate_capped=True, error=None)
+    assert r.ok is False
