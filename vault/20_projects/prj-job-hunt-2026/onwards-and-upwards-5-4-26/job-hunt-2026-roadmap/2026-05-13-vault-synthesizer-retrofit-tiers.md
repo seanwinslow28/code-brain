@@ -8,7 +8,7 @@ companion_artifacts:
   - 2026-05-10-eval-suite-build-plan.md   # the eval suite this retrofit moves the needle on
 sprint_epoch: 2026-05-04
 related_intent_skill: .claude/skills/intent-engineering/SKILL.md
-ai-context: "Vault Synthesizer v2 retrofit plan. Born 2026-05-13 from a query.py diagnostic session that proved the v1 synthesizer produces shallow, cluster-biased, duplicate-prone output. Four-tier remediation grounded in 2025-2026 RAG research (TopClustRAG, EDC, Karpathy LLM Wiki, Anthropic quote-first prompting). Tier 1 ships first as a prompt + formatter fix. Future Claude sessions checking synthesizer progress should read this file's status block first."
+ai-context: "Vault Synthesizer v2 retrofit plan. Born 2026-05-13 from a query.py diagnostic session that proved the v1 synthesizer produces shallow, cluster-biased, duplicate-prone output. Four-tier remediation grounded in 2025-2026 RAG research (TopClustRAG, EDC, Karpathy LLM Wiki, Anthropic quote-first prompting). Tier 1 ships first as a prompt + formatter fix. Future Claude sessions checking synthesizer progress should read this file's status block first. 2026-05-21 update: Tier 1.5 (depth gate) fixed the descriptive *shape* of articles, but Sean's morning review of `concepts/writing-voice-modes.md` named the next-layer gap — output is still descriptive of what exists, not generative about what's missing. The follow-on work (Pattern 1 / vault_critic agent — a new SDK agent shelling out to Codex CLI + Anti-Gravity CLI nightly at 03:30 to produce sibling `vault/knowledge/expansions/{slug}.md` files) is documented in `agents-sdk/docs/multi-cli-integration-patterns.md` and summarized at the bottom of this doc under §Follow-on layer."
 ---
 
 # Vault Synthesizer v2 — Retrofit Tiers
@@ -256,6 +256,87 @@ While pursuing the outcomes above, these must NOT degrade:
 
 ---
 
+## Follow-on layer — Generative-critique agent (Pattern 1 / `vault_critic`)
+
+> **Scope note:** this is NOT a synthesizer tier. It is a separate downstream agent that critiques the synthesizer's output. It is documented here because (1) it is directly born from Sean's 2026-05-21 morning review of `concepts/writing-voice-modes.md`, the same review that triggered Tier 1.5, and (2) any future session asking "why isn't the vault a thinking partner yet?" should read this section before proposing a new synthesizer tier.
+
+### Why this is needed (the gap Tier 1.5 cannot close)
+
+Tier 1.5 enforces structural depth — Definition ≥3 sentences, prose evidence quotes, Synthesis naming tension + consequence, etc. The depth gate has been live since 2026-05-20 and produced its first verified output on 2026-05-21 (1 concept + 1 connection survived, 2 articles rejected with stable reason codes — see Verification Log row 2026-05-21).
+
+But Sean's complaint on the same morning, after reading the surviving `writing-voice-modes.md`, was: *"I'm seeing an agent writing down facts about what is already in existence instead of expanding upon them. For example: I'm looking for the agent to tell me how I can make it BETTER. What am I not doing with that skill that I should be incorporating? What did I not think of?"*
+
+The synthesizer is grounded in the vault corpus. Every quote it surfaces is a verbatim substring of an existing source file. By design, it cannot say *"here is what you're missing"* because it has no external reference frame to compare against. No amount of depth-gate tightening will fix this — it is the wrong tool for the job. The synthesizer's job is to faithfully describe the corpus; the missing piece is a *separate* agent whose job is to critique the corpus from outside.
+
+### The minimum viable architecture
+
+Three patterns are specced in [`agents-sdk/docs/multi-cli-integration-patterns.md`](../../../../../agents-sdk/docs/multi-cli-integration-patterns.md), built on a 2026-05-21 smoke test confirming that:
+
+- **Codex CLI** v0.130.0 (gpt-5.5 with medium reasoning) accepts headless prompts via `codex exec --sandbox read-only --skip-git-repo-check "PROMPT"`, runs from a trusted working directory (`cwd=Path.home()`), and returns raw markdown on stdout in ~21s on the writing-voice-modes critique test. Cost: $0 incremental on ChatGPT Plus.
+- **Anti-Gravity CLI** v0.42.0 (Gemini 3.1 Pro via `auto-gemini-3` router; replaced the legacy `gemini` binary on May 19, 2026) accepts headless prompts via `GEMINI_CLI_TRUST_WORKSPACE=true gemini -p "PROMPT" --output-format json --approval-mode plan` and returns clean JSON `{session_id, response, stats}` in ~43s on the same test. Cost: $0 incremental on Google personal-OAuth.
+- Both CLIs independently named **Joan Didion / *The White Album*** as the #1 missing voice mode for Sean's writing-voice-modes skill — the convergence signal is itself a "you genuinely need this" indicator. Non-overlapping recommendations were complementary, not redundant (Codex: McPhee + Maggie Nelson; Anti-Gravity: Baldwin + Byung-Chul Han).
+- Smoke artifacts persisted at [`agents-sdk/docs/multi-cli-smoke-2026-05-21/`](../../../../../agents-sdk/docs/multi-cli-smoke-2026-05-21/) — 5 files including critique-prompt.md (the verified prompt template), codex-out.txt / gemini-out.json (the verbatim outputs for use as test fixtures), and the two stderr captures.
+
+**Pattern 1 (the recommended first ship)** wraps both CLIs in an SDK agent at `agents-sdk/agents/vault_critic.py` that runs on launchd at **03:30 daily** — after vault_synthesizer (02:30) and deep_researcher (02:45), before daily_driver (08:30) and meta-agent (08:45). The agent:
+
+1. Reads the night's Mac-Mini-canonical synth manifest (`vault/health/synth-manifest-{today}.json`).
+2. Filters target articles to ONLY those Mac Mini wrote — defending against PR-merge contamination of the kind that surfaced 2026-05-21 (PR #52 dropped 88 pre-Tier-2 MBP files into vault/knowledge/, polluting any naive `ls -lt` sampling). The filter cross-references the auto-commit's file list, per memory [`feedback_synth_verify_filter_to_manifest.md`](../../../../../.claude/projects/-Users-seanwinslow-Code-Brain-code-brain/memory/feedback_synth_verify_filter_to_manifest.md).
+3. Selects up to **3 newly-written concept articles** per night (rate-cap-protective hard cap).
+4. For each, fans out two parallel subprocess critiques (one to Codex CLI, one to Anti-Gravity CLI) using the smoke-test prompt template, with explicit trust flags + sandbox modes + per-call timeouts.
+5. Writes a sibling expansion file at `vault/knowledge/expansions/{slug}.md` with frontmatter `type: expansion`, `parent: [[{original-slug}]]`, both critiques rendered side-by-side under `## From Codex (gpt-5.5)` and `## From Anti-Gravity (Gemini 3)`.
+6. Writes a per-run manifest at `vault/health/critic-manifest-{date}.json` with counts, durations, token totals per CLI, and `status: ok | partial | error`.
+7. Appends one row to `vault/90_system/agent-logs/agent-run-history.csv` via `record_run`.
+8. Surfaces results in daily-driver's morning brief (under Vault Health) and in meta-agent's fleet-status report.
+
+### Why Pattern 1 first, not Patterns 2 or 3
+
+- **Pattern 2** (add Codex + Anti-Gravity adapters to the existing LLM Council at `tools/llm-council/`) is also high-value but reuses infrastructure that doesn't directly answer the "thinking partner" complaint. Plan to ship after Pattern 1 has run ≥1 week.
+- **Pattern 3** (extend `agents-sdk/lib/hybrid_router.py` to route per task-class across all four backends — Claude API, Codex, Anti-Gravity, local Qwen) is the right long-term architecture but premature now. Ship only if Pattern 1 produces evidence that the single-backend routing in the current fleet has actual quality gaps worth a routing layer to solve.
+
+### Cost + safety guards (mandatory before launch)
+
+- **Cost cap:** $0 incremental on Sean's existing personal subscriptions. No Anthropic SDK calls in the nightly path. Sonnet fallback is **out of scope for v1** — if both CLIs rate-cap, the agent marks `status: partial` and exits cleanly. This is intentional: it isolates Pattern 1 from any cloud-API blast radius.
+- **Wall-clock budget:** 600s soft cap (smoke test showed ~45s per article × 3 articles ≈ 135-180s expected — comfortable headroom).
+- **Trust gates:** both CLIs refuse to run from untrusted working directories. The wrappers MUST set `--skip-git-repo-check` (Codex) and `GEMINI_CLI_TRUST_WORKSPACE=true` (Anti-Gravity) explicitly per invocation. Silent reliance on inherited env is a latent bug.
+- **Sandbox modes:** Codex `--sandbox read-only`, Anti-Gravity `--approval-mode plan`. Both verified safe in the smoke test. No exceptions in the nightly path.
+- **Rate-cap behavior:** if one CLI returns a rate-cap-shaped error, the OTHER CLI's response is still written; manifest captures which CLI capped; no retry within the same run.
+- **Convergence detection:** when both CLIs name the same author/work (Didion appeared in both smoke runs), surface as a "🔁 Both reasoners agreed on …" callout in the expansion file. Cheap string-match; high signal for Sean.
+
+### Implementation status (2026-05-21)
+
+The integration patterns doc is written and the smoke tests passed. The next step is a structured implementation plan via the [`writing-plans`](../../../../../.claude/skills/superpowers/writing-plans/) skill in a fresh Claude Code session — the prompt to seed that session is captured in the 2026-05-21 working notes and lands at `agents-sdk/docs/plans/vault-critic-plan-2026-05-21.md` when produced. **Do not start implementation without that plan in hand** — vault_critic's contamination-filter is non-obvious and the manifest/launchd/daily-driver integration touches enough files that mid-flight design will produce drift.
+
+### Verification gate for `shipped-and-verified`
+
+Same shape Tier 1 + Tier 2 + Tier 1.5 used: **3 consecutive healthy nights** with all of:
+
+1. `vault/health/critic-manifest-{date}.json` exists, `status: ok` or `status: partial` (not `error`), `articles_critiqued > 0`.
+2. Sean reads the **median expansion file** (random sample, NOT cherry-picked — per memory [`feedback_synth_verify_against_median_not_best.md`](../../../../../.claude/projects/-Users-seanwinslow-Code-Brain-code-brain/memory/feedback_synth_verify_against_median_not_best.md)) and confirms it reads as thinking-partner work: specific named additions, specific authors, specific genre unlocks. Not "consider exploring X" — actual "add Y from Z because W."
+3. Zero rate-cap-exhaustion events (`status: error` from rate-cap exhaustion on both CLIs simultaneously) across the 3 nights.
+
+### Rollback
+
+`./agents-sdk/schedules/install_schedules.sh --remove vault_critic` disables the launchd plist. Expansion files already written remain on disk and continue to be useful. The CLI dependencies (Codex, Anti-Gravity) require no uninstall — they're Sean's standalone tools, not pinned via `pyproject.toml`.
+
+### Open questions deferred from the integration patterns doc
+
+1. **Output fencing for Codex** — should the critique prompt require `<critique>…</critique>` wrapper markers to harden parsing against Codex preamble/postamble drift? Cheap to add; recommended for v1.
+2. **Per-night article cap scaling** — fixed at 3 in v1. Revisit if synthesizer's nightly output starts averaging >10 articles after Tier 1.5 stabilizes.
+3. **Expansion file lifecycle** — frozen snapshot vs regenerated when the parent concept is rewritten? v1 default: frozen snapshot.
+4. **skill_optimizer relationship** — `vault_critic` is the cheap nightly tier; `skill_optimizer` (manual, $20-145/run, autoresearch convergence loop) is the deep tier. Footer in the expansion file recommending `skill_optimizer` for high-value critiques? Cheap to add; recommended.
+5. **MBP dual-write fix** — must be resolved BEFORE marking vault_critic `shipped-and-verified`, otherwise every verification cycle has to fight PR-merge contamination. Three options enumerated in memory [`project_pr52_mbp_stale_checkout.md`](../../../../../.claude/projects/-Users-seanwinslow-Code-Brain-code-brain/memory/project_pr52_mbp_stale_checkout.md): disable MBP's parallel synth schedule; cron `git pull origin main` on MBP at 02:25; or accept dual-write and add manifest reconciliation in `lib/fleet_summary.py`. **Sean's call required.**
+
+### Cross-references
+
+- Canonical spec: [`agents-sdk/docs/multi-cli-integration-patterns.md`](../../../../../agents-sdk/docs/multi-cli-integration-patterns.md)
+- Smoke-test artifacts (test fixtures): [`agents-sdk/docs/multi-cli-smoke-2026-05-21/`](../../../../../agents-sdk/docs/multi-cli-smoke-2026-05-21/)
+- Pattern 1 implementation plan (to be produced): `agents-sdk/docs/plans/vault-critic-plan-2026-05-21.md`
+- Codex CLI config: `~/.codex/config.toml` (model: gpt-5.5, plugins: atlassian-rovo / google-calendar / gmail / figma / github / google-drive enabled)
+- Anti-Gravity CLI config: `~/.gemini/settings.json` (model: auto-gemini-3, MCP servers: nanobanana / zapier / notebooklm-mcp / mcp-atlassian / chrome-devtools / pencil)
+- Sean's complaint (the why): 2026-05-21 morning review of [`vault/knowledge/concepts/writing-voice-modes.md`](../../../../knowledge/concepts/writing-voice-modes.md), captured verbatim in the integration patterns doc §Why this doc exists.
+
+---
+
 ## Status Tracker
 
 > **Update this section after every meaningful change. Future Claude sessions: check here first.**
@@ -267,6 +348,7 @@ While pursuing the outcomes above, these must NOT degrade:
 | **Tier 1.5 — Insight-depth gate + prompt v2** (NEW 2026-05-20) | **live, gate firing as designed (1/3 healthy nights — 2026-05-21 verified)** | 2026-05-20 | 2026-05-20 | **2026-05-21 first-night verdict (appended):** Mac Mini Tier-1.5 run wrote 1 concept + 1 connection and rejected 2 articles with stable reason codes (`rejected_reasons={thin-definition: 1, thin-threads: 1}`). Honest median spot-check of the 2 surviving articles (n=2, sample = corpus) confirms thinking-partner shape: `concepts/writing-voice-modes.md` and `connections/tonal-consistency-across-content-and-career-strategy.md` both meet the depth contract. One gate-undetected defect found — `tonal-consistency` has the same ~190-char quote duplicated across two threads (LLM cross-thread copy-paste), which the gate accepts because each thread independently passes the ≥60-char prose check. New reason-code candidate `duplicate-thread-quote` but n=1 is premature; watch 5/22 + 5/23. **Operational issue flagged separately in Verification Log:** PR #52 (merged 5/21 06:29) merged 88 pre-Tier-2 files from a stale-checkout MBP parallel synth into `vault/knowledge/`, polluting the corpus and producing FALSE-NEGATIVE random samples. Do NOT count PR #52 articles in Tier-1.5 verification. Re-trigger condition (branch c — STILL SHALLOW): if 5/22 + 5/23 random-samples (drawn ONLY from Mac Mini manifest output) still produce shallow shapes the gate accepted, ship the new reason code with a failing test exercising the exact shape. Verification gate to mark `shipped-and-verified`: 2 more consecutive healthy Tier-1.5 nights (5/22 + 5/23) producing non-zero `rejected_reasons` and median-quality output meeting the contract. <br><br>**Original ship notes (2026-05-20):** Born from Sean's 5/20 review surfacing the "I'm not getting a thinking partner" complaint. Tier 2 retrieval is healthy; the LLM is still producing surface output because the validator only checks wikilink count + the forbidden-placeholder string. **Three structural changes:** (1) New `evaluate_article_depth(body) -> (passed, reason)` semantic gate alongside `validate_article_body`. Concept gate: Definition ≥3 sentences AND ≥250 chars AND no restatement-tell phrases (`a collection of`, `designed to support`, `streamlines his workflow`, `ensures consistency`, etc.); Evidence ≥2 quotes each ≥60 chars; at least one non-code/CLI quote (prefix + symbol-density signals); Examples can't duplicate Evidence. Connection gate: Synthesis ≥3 sentences AND ≥200 chars naming a *tension* + *consequence*; each per-concept thread has ≥1 substantive (≥60-char) prose quote; ≥2 implications each ≥80 chars. (2) Prompt v2 — Definition demands 3-5 sentences naming the mechanism not the surface; Synthesis demands 3-5 sentences naming the cross-domain tension + consequence; explicit "REJECTED-SHAPE EXAMPLES" anti-pattern block (paraphrasing Sean's own complaint — restated-prompt definitions, CLI-quote evidence, "Three producers share an MBP dependency"-shape synthesis); explicit `OMIT the article entirely` instruction when chunks can't ground the depth. (3) Skip-thin-source path — when the diversified pool returns <2 chunks, skip the LLM call entirely; `result.skipped_thin_source` surfaces in manifest. New manifest fields: `rejected_reasons: dict[str,int]` (keyed by `thin-definition`/`restatement-definition`/`thin-evidence`/`code-only-evidence`/`duplicate-examples`/`thin-synthesis`/`thin-threads`/`thin-implications`/`wikilinks-or-placeholder`) and `skipped_thin_source: int` — operator-grade signal for *why* output volume changes night to night. **Test suite:** 12 new tests in `test_vault_synthesizer.py` (8 depth-gate cases + 1 manifest-persistence + 1 thin-source skip + 2 integration); full synthesizer suite 27 → 28 passed; synthesizer-neighborhood (synthesizer + retrieval-diversity + concept-edges + knowledge-lint + synth-manifest) **91 passed, 0 regressions**. Existing happy-path + Phase-D test fixtures updated to satisfy the new gate — the fixtures now look like the real shape we want production output to take, which doubles as documentation. **First production signal:** 2026-05-21 02:30 AM nightly synth run. Verification gate is twofold: (a) `rejected_reasons` populated with non-zero entries (validator actively gating, not silent-passing), and (b) **Sean reads at least 2 randomly sampled articles from 5/21's output and confirms they read like thinking-partner work, not "this is a research report about agentic workflows. This would benefit Sean."** Failure mode: if 5/21 produces near-zero articles because everything is rejected, the prompt is too strict — tune `_RESTATEMENT_PHRASES` / depth thresholds and re-test. If 5/21 still produces shallow articles, the gate logic missed a defect shape — add new reason code, write test, ship fix. Rollback: `git checkout agents-sdk/agents/vault_synthesizer.py agents-sdk/tests/test_vault_synthesizer.py` — pure-text + test changes, no new deps, no schema migrations. |
 | Tier 3 — EDC canonicalization | **deferred — wrong defect; insight depth not slug-dedup (2026-05-20)** | — | — | Slug-duplication trend was the trigger condition (per §Tier 3 trigger above). Three consecutive Tier-2 nights produced 96 concepts (was 91 on 5/17) despite ~71 attempted writes — strong implicit reuse. Pre-existing dupe groups (`vibe-coding` 5, `daily-note` 3, etc.) are flat. Three new low-count pairs appeared (`agent-health` 2→3, `portfolio-projects` new pair, `agentic-engineering` new pair) — mild upward drift but not in the original problem clusters. The retrieval-level fix (Tier 2) is indirectly satisfying the canonicalization goal. Real defect surfaced by Sean's 5/20 review is *insight depth*, which EDC cosine-merge would not touch. Re-trigger condition: if Tier 1.5's depth gate still leaves shallow output AND slug-dedup starts trending up sharply (>3 new dupe groups in one week, or any pre-existing group growing). |
 | Tier 4 — Three-pass agentic synthesis | pending (post-employment) | — | — | Do not ship under sprint pressure. Still the right architectural shape if Tier 1.5 underdelivers. |
+| **Follow-on — `vault_critic` agent (Pattern 1)** (NEW 2026-05-21) | **spec written + smoke-tested; implementation plan pending via /writing-plans skill in fresh session** | 2026-05-21 | — | NOT a synthesizer tier — a separate downstream agent that critiques each newly-written concept article using Codex CLI (gpt-5.5) + Anti-Gravity CLI (Gemini 3.1 Pro) in parallel, at $0 incremental cost on Sean's existing personal subscriptions. Born from Sean's 5/21 review of `writing-voice-modes.md` ("I'm not seeing a thinking partner — I want the agent to tell me how to make this BETTER"). Smoke-tested live 2026-05-21: Codex returned in 21s with 3 named voice modes (Didion / McPhee / Maggie Nelson) with sentence patterns + genre unlocks; Anti-Gravity returned in 43s with 3 different named voice modes (Didion / Baldwin / Byung-Chul Han) — convergence on Didion is a strong "you need this mode" signal, non-overlapping recommendations were complementary. Specced in [`agents-sdk/docs/multi-cli-integration-patterns.md`](../../../../../agents-sdk/docs/multi-cli-integration-patterns.md); smoke artifacts persisted at [`agents-sdk/docs/multi-cli-smoke-2026-05-21/`](../../../../../agents-sdk/docs/multi-cli-smoke-2026-05-21/) as test fixtures. **Next step:** seed a fresh Claude Code session with the /writing-plans skill to produce `agents-sdk/docs/plans/vault-critic-plan-2026-05-21.md` (prompt template ready). **Blocker before `shipped-and-verified`:** MBP dual-write contamination (see [`project_pr52_mbp_stale_checkout.md`](../../../../../.claude/projects/-Users-seanwinslow-Code-Brain-code-brain/memory/project_pr52_mbp_stale_checkout.md)) must be resolved — Sean's call between three documented options (disable MBP parallel synth / cron-pull / manifest reconciliation). |
 
 ### Tier 1 shipped changes — exact diff summary
 
@@ -342,7 +424,10 @@ While pursuing the outcomes above, these must NOT degrade:
 1. **Synthesizer healthy?** Run `cat vault/health/synth-manifest-$(date -v -1d +%Y-%m-%d).json | jq` and check `status: ok`, `concepts_written > 0`, `wol_status: mbp_awake`.
 2. **Tier 1 effective?** `grep -rn "Evidence pending" vault/knowledge/ | wc -l` — should be 0 after the first post-Tier-1 nightly run.
 3. **Cluster bias resolved?** Re-run the Tier-1 diagnostic: `cd agents-sdk && PYTHONPATH=. .venv/bin/python3 scripts/query.py "Find 3 themes from THREE DIFFERENT concept clusters..."` — look at the "Consulted" list. If ≥2 different vault top-level folders appear, Tier 1+2 are paying off.
-4. **Ready for next tier?** Check the trigger condition in each tier section above. Update the Status Tracker before starting work.
+4. **Tier 1.5 depth gate firing?** `cat vault/health/synth-manifest-$(date -v -1d +%Y-%m-%d).json | jq '.rejected_reasons, .skipped_thin_source'` — if `rejected_reasons` is empty AND `concepts_written > 0`, the gate may be silent-passing; investigate per Tier 1.5 row in Status Tracker.
+5. **Generative-critique layer (`vault_critic`) shipped yet?** `ls vault/health/critic-manifest-$(date -v -1d +%Y-%m-%d).json 2>/dev/null && cat | jq` — if file exists, read it. If not, the agent isn't deployed yet; see §Follow-on layer for implementation status and the prompt to seed the planning session.
+6. **Random-sample any output honestly.** When verifying any tier OR the vault_critic, filter the sample to Mac-Mini-manifest-tracked output only (per memory `feedback_synth_verify_filter_to_manifest.md`) and pick the median, never the cherry-picked best (per memory `feedback_synth_verify_against_median_not_best.md`).
+7. **Ready for next tier?** Check the trigger condition in each tier section above. Update the Status Tracker before starting work.
 
 ## Companion docs
 
@@ -354,3 +439,7 @@ While pursuing the outcomes above, these must NOT degrade:
 - [Personal context v2.0 (the why behind cross-domain discovery)](../../../../Sean-Winslow-Full-Personal-Context-v2.0.md)
 - [Life-systems operating model — Agent research fleet leverage point](../../../../05_atlas/operating-models/life-systems/operating-model.md)
 - [Creative-studio operating model — Vault-as-SSoT extra-hour north star](../../../../05_atlas/operating-models/creative-studio/operating-model.md)
+- **NEW 2026-05-21 — Follow-on layer (vault_critic / Pattern 1):**
+  - [Multi-CLI integration patterns (canonical spec for Patterns 1-3)](../../../../../agents-sdk/docs/multi-cli-integration-patterns.md)
+  - [Smoke test artifacts — verified prompt template + Codex/Anti-Gravity outputs as test fixtures](../../../../../agents-sdk/docs/multi-cli-smoke-2026-05-21/)
+  - Implementation plan target (to be produced via /writing-plans): `agents-sdk/docs/plans/vault-critic-plan-2026-05-21.md`
