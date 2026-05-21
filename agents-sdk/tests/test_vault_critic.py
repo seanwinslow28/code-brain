@@ -65,3 +65,15 @@ def test_write_critic_manifest_atomic_via_tmp_rename(tmp_repo):
     path = write_critic_manifest(repo_root=tmp_repo, result=r, today="2026-05-22")
     # No leftover .tmp file
     assert not path.with_suffix(path.suffix + ".tmp").exists()
+
+
+def test_write_critic_manifest_rejects_invalid_status(tmp_repo):
+    r = CritiqueResult(status="sucess-empty", run_id="x")  # typo
+    with pytest.raises(ValueError, match="Invalid status"):
+        write_critic_manifest(repo_root=tmp_repo, result=r, today="2026-05-22")
+
+
+def test_write_critic_manifest_rejects_empty_run_id(tmp_repo):
+    r = CritiqueResult(status=STATUS_OK, run_id="")
+    with pytest.raises(ValueError, match="run_id must be non-empty"):
+        write_critic_manifest(repo_root=tmp_repo, result=r, today="2026-05-22")

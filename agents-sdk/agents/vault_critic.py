@@ -74,6 +74,12 @@ def write_critic_manifest(
     today: str,
 ) -> Path:
     """Atomic write to vault/health/critic-manifest-{today}.json."""
+    if result.status not in STATUS_VALUES:
+        raise ValueError(
+            f"Invalid status {result.status!r}; expected one of {sorted(STATUS_VALUES)}"
+        )
+    if not result.run_id:
+        raise ValueError("run_id must be non-empty for manifest write")
     health = repo_root / HEALTH_REL
     health.mkdir(parents=True, exist_ok=True)
     path = health / f"critic-manifest-{today}.json"
