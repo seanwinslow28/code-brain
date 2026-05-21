@@ -1,6 +1,6 @@
 import asyncio
 from pathlib import Path
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 from lib.cli_runners import CLIResponse, detect_rate_cap, parse_codex_tokens, run_codex
 
@@ -115,7 +115,7 @@ def test_run_codex_timeout_returns_error_not_raise():
         fake = AsyncMock()
         fake.communicate = slow_communicate
         fake.returncode = None
-        fake.kill = AsyncMock()
+        fake.kill = MagicMock()
         with patch("lib.cli_runners.asyncio.create_subprocess_exec",
                    AsyncMock(return_value=fake)):
             return await run_codex("any prompt", timeout_s=0.05)

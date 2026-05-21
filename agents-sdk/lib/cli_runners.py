@@ -86,7 +86,7 @@ CODEX_BINARY = "/opt/homebrew/bin/codex"
 CODEX_DEFAULT_TIMEOUT_S = 120
 
 
-async def run_codex(prompt: str, timeout_s: int = CODEX_DEFAULT_TIMEOUT_S) -> CLIResponse:
+async def run_codex(prompt: str, timeout_s: float = CODEX_DEFAULT_TIMEOUT_S) -> CLIResponse:
     """Invoke `codex exec` with read-only sandbox and skip-git-repo-check.
 
     Runs from `Path.home()` (trusted per ~/.codex/config.toml `[projects]`).
