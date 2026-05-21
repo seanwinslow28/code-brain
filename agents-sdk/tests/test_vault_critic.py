@@ -10,6 +10,7 @@ from agents.vault_critic import (
     STATUS_OK,
     STATUS_PARTIAL,
     STATUS_SUCCESS_EMPTY,
+    format_expansion_body,
     write_critic_manifest,
 )
 
@@ -79,9 +80,6 @@ def test_write_critic_manifest_rejects_empty_run_id(tmp_repo):
         write_critic_manifest(repo_root=tmp_repo, result=r, today="2026-05-22")
 
 
-from agents.vault_critic import format_expansion_body
-
-
 def test_format_expansion_body_both_clis_succeeded():
     body = format_expansion_body(
         original_title="Writing Voice Modes",
@@ -128,3 +126,22 @@ def test_format_expansion_body_includes_required_wikilink():
         codex_failed=False, antigravity_failed=False,
     )
     assert "[[x]]" in body
+
+
+def test_format_expansion_body_escapes_double_quote_in_title():
+    """If the synthesizer ever produces a concept title containing a literal
+    double-quote, the YAML frontmatter must remain well-formed."""
+    body = format_expansion_body(
+        original_title='My "Quoted" Title',
+        original_slug="my-quoted-title",
+        codex_text="x", antigravity_text="x",
+        today="2026-05-22",
+        codex_failed=False, antigravity_failed=False,
+    )
+    # The escaped quotes must appear in the YAML title; verify the line is
+    # parseable as YAML.
+    import yaml
+    head_end = body.find("---", 4)  # second --- (frontmatter close)
+    frontmatter = body[3:head_end]   # between the two ---
+    parsed = yaml.safe_load(frontmatter)
+    assert parsed["title"] == 'How to make `My "Quoted" Title` better'

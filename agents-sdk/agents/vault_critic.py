@@ -119,7 +119,13 @@ def format_expansion_body(
     Snapshot semantics: one file per critiqued concept; not regenerated when
     the underlying concept is rewritten. Always contains a `[[parent-slug]]`
     wikilink so the file is not orphaned in the knowledge index.
+
+    Backticks in titles are rendered verbatim (Obsidian parses them in
+    double-quoted YAML scalars; some Obsidian versions may render the
+    inline-code style in graph views — accepted Obsidian-behavior risk).
+    Double-quotes in titles are escaped to keep the YAML scalar well-formed.
     """
+    safe_title = original_title.replace('"', '\\"')
     codex_block = (
         codex_text.strip()
         if not codex_failed and codex_text.strip()
@@ -132,7 +138,7 @@ def format_expansion_body(
     )
     return (
         f"---\n"
-        f'title: "How to make `{original_title}` better"\n'
+        f'title: "How to make `{safe_title}` better"\n'
         f"type: expansion\n"
         f'parent: "[[{original_slug}]]"\n'
         f"sources:\n"
