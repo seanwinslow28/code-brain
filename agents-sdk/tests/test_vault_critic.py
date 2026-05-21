@@ -465,3 +465,42 @@ def test_run_respects_wall_budget(tmp_repo, monkeypatch):
     assert result.status == STATUS_PARTIAL
     assert result.articles_critiqued <= 2
     assert any("budget" in w.lower() for w in result.warnings)
+
+
+# ---------------------------------------------------------------------------
+# D6: main() — CLI entry point with dry-run + record_run wiring
+# ---------------------------------------------------------------------------
+
+from agents.vault_critic import main
+
+
+def test_main_dry_run_lists_targets_without_calling_clis(tmp_repo, monkeypatch, capsys):
+    today = "2026-05-22"
+    p = _make_concept_at(tmp_repo, "x")
+    _make_manifest(tmp_repo, today)
+    monkeypatch.setattr("agents.vault_critic.select_target_articles",
+                        lambda root, date_iso, max_targets: [p])
+
+    # Force the run() function to fail loudly if it's invoked under dry-run.
+    async def must_not_call(*a, **k):
+        raise AssertionError("run() must not be called under --dry-run")
+    monkeypatch.setattr("agents.vault_critic.run", must_not_call)
+
+    # Make sure load_config returns our tmp_repo.
+    from lib.config import Config, SafetyConfig
+    fake_config = Config(
+        repo_root=tmp_repo, vault_root=tmp_repo / "vault",
+        skills_dir=tmp_repo / ".claude/skills",
+        life_systems_scripts=tmp_repo / "life-systems/scripts",
+        log_dir=tmp_repo / "vault/90_system/agent-logs",
+        log_level="INFO",
+        safety=SafetyConfig(),
+        agents={}, anthropic_api_key=None, artifacts={},
+    )
+    monkeypatch.setattr("agents.vault_critic.load_config", lambda: fake_config)
+
+    rc = main(["--dry-run", "--date", today])
+    assert rc == 0
+    out = capsys.readouterr().out
+    assert "DRY RUN" in out
+    assert "x.md" in out

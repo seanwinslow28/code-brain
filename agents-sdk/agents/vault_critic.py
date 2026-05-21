@@ -24,6 +24,7 @@ Schedule sequence:
 
 from __future__ import annotations
 
+import argparse
 import asyncio
 import json
 import re
@@ -36,9 +37,11 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from lib.cli_runners import CLIResponse, run_antigravity, run_codex
+from lib.config import load_config
 from lib.critic_selector import select_target_articles
 from lib.critique_prompt import build_critique_prompt
 from lib.filelock import FileLock
+from lib.logging_setup import record_run, setup_logger
 
 AGENT_NAME = "vault-critic"
 
@@ -369,3 +372,88 @@ def _read_recent_titles(repo_root: Path, limit: int) -> list[str]:
             if len(titles) >= limit:
                 break
     return titles
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Vault Critic Agent")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="List target articles without invoking CLIs.")
+    parser.add_argument("--date", default=None,
+                        help="ISO date for the synth-manifest to consume (default: today).")
+    parser.add_argument("--max-targets", type=int, default=DEFAULT_MAX_TARGETS)
+    parser.add_argument("--wall-budget-seconds", type=float, default=DEFAULT_WALL_BUDGET_S)
+    parser.add_argument("--per-cli-timeout-seconds", type=int, default=DEFAULT_PER_CLI_TIMEOUT_S)
+    args = parser.parse_args(argv)
+
+    cfg = load_config()
+    logger = setup_logger(AGENT_NAME, cfg.log_dir, cfg.log_level)
+    date_iso = args.date or date.today().isoformat()
+
+    targets = select_target_articles(
+        cfg.repo_root, date_iso=date_iso, max_targets=args.max_targets,
+    )
+
+    if args.dry_run:
+        print("=== DRY RUN — Vault Critic ===")
+        print(f"Date:          {date_iso}")
+        print(f"Repo:          {cfg.repo_root}")
+        print(f"Max targets:   {args.max_targets}")
+        print(f"Wall budget:   {args.wall_budget_seconds}s")
+        print(f"CLI timeout:   {args.per_cli_timeout_seconds}s each")
+        print(f"Targets ({len(targets)}):")
+        for t in targets:
+            print(f"  - {t.relative_to(cfg.repo_root)}")
+        print("=== END DRY RUN ===")
+        return 0
+
+    start_ms = time.monotonic_ns()
+    try:
+        result = asyncio.run(run(
+            repo_root=cfg.repo_root,
+            date_iso=date_iso,
+            max_targets=args.max_targets,
+            wall_budget_s=args.wall_budget_seconds,
+            per_cli_timeout_s=args.per_cli_timeout_seconds,
+            logger=logger,
+        ))
+    except Exception as exc:
+        logger.exception("vault_critic failed: %s", exc)
+        record_run(
+            cfg.log_dir, AGENT_NAME, mode=None,
+            status="error", cost_usd=0.0,
+            duration_ms=int((time.monotonic_ns() - start_ms) // 1_000_000),
+            turns=None, notes=str(exc)[:200],
+        )
+        return 1
+
+    duration_ms = int((time.monotonic_ns() - start_ms) // 1_000_000)
+    record_run(
+        cfg.log_dir, AGENT_NAME, mode=None,
+        status=("success" if result.status in {STATUS_OK, STATUS_PARTIAL, STATUS_SUCCESS_EMPTY}
+                else result.status),
+        cost_usd=0.0,
+        duration_ms=duration_ms,
+        turns=None,
+        notes=(
+            f"status={result.status} "
+            f"articles={result.articles_critiqued} "
+            f"codex_fail={result.codex_failures} "
+            f"ag_fail={result.antigravity_failures}"
+        ),
+    )
+    logger.info(
+        "vault_critic %s articles=%d codex_fail=%d ag_fail=%d duration=%.1fs",
+        result.status, result.articles_critiqued,
+        result.codex_failures, result.antigravity_failures,
+        result.duration_seconds,
+    )
+    print(
+        f"OK — vault_critic {result.status}: {result.articles_critiqued} articles "
+        f"({result.codex_failures + result.antigravity_failures} CLI failures, "
+        f"{result.duration_seconds:.1f}s)"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
