@@ -1,14 +1,16 @@
 ---
 type: research-synthesis
 date: 2026-05-21
+status: superseded-pending-benchmarks
+status_note: "2026-05-21 same-day follow-up — Live Ollama catalog inspection (see §Correction at bottom of file) revealed the synthesis missed three real, locally-runnable models that should be evaluated: qwen3.5 (12.2M pulls), qwen3.6 (1.5M pulls), and nemotron3:33b (588K pulls). The Tier A/B/C recommendations remain valid as a known-good baseline, but the upgrade-path is pending a Topic 20 pull-and-benchmark session before final adoption decisions."
 question: "Topic 19 — Optimal Ollama model for Pi-driven coding + agentic workflows in 2026, ranked by RAM/VRAM tier."
 sources:
   - "[[2026-05-21-topic-19a-optimal-ollama-models-pi-perplexity]]"
   - "[[2026-05-21-topic-19b-optimal-ollama-models-pi-gemini-dr]]"
   - "[[2026-05-21-topic-19c-optimal-ollama-models-pi-chatgpt]]"
-synthesis_method: "Three independent vendor sources (Perplexity, Gemini DR, ChatGPT) cross-ranked. Convergence + divergence analyzed against Pi's published documentation. Speculative vendor claims (TriAttention, TurboQuant, mdq100/qwen3.5-coder community tag) flagged but not used in the canonical recommendation."
+synthesis_method: "Three independent vendor sources (Perplexity, Gemini DR, ChatGPT) cross-ranked. Convergence + divergence analyzed against Pi's published documentation. Speculative vendor claims (TriAttention, TurboQuant, mdq100/qwen3.5-coder community tag) flagged but not used in the canonical recommendation. **See §Correction (2026-05-21) — this method had a now-identified bias that excluded newer locally-runnable models.**"
 target_reader: "Solo developer running Pi (pi.dev) on a 3-device personal fleet: M4 Max MacBook Pro, M4 Pro Mac Mini 24GB (always-on headless), RTX 4090 24GB Alienware."
-tags: [research, synthesis, pi.dev, ollama, optimal-models, hardware-tier]
+tags: [research, synthesis, pi.dev, ollama, optimal-models, hardware-tier, has-correction-2026-05-21]
 ---
 
 # Optimal Ollama Models for Pi (pi.dev) — Three-Source Synthesis (2026-05-21)
@@ -261,3 +263,65 @@ Pi's four workload patterns (per all three sources) map to Sean's hardware like 
 - Pi (pi.dev) — https://pi.dev/ + https://github.com/earendil-works/pi
 - Ollama Pi integration — https://docs.ollama.com/integrations/pi
 - Ollama library — https://ollama.com/library/qwen3-coder + https://ollama.com/library/devstral
+
+---
+
+## Correction (2026-05-21, same-day follow-up)
+
+### What this section is
+
+A live-catalog audit run hours after the original synthesis shipped — Sean noticed newer models on `ollama.com/search` (DeepSeek v4-pro/flash, NVIDIA Nemotron3, Qwen 3.5 / 3.6) that this synthesis never mentioned. I fetched the live page and four model detail pages directly. This addendum documents what the synthesis missed, why it missed them, and what the upgrade-path recommendation becomes once you account for them.
+
+**The Tier A/B/C recommendations above remain accurate as a known-good baseline.** They were the right call given the source evidence. The correction here is that the source evidence was systematically biased against newer models, and the synthesis didn't surface that bias clearly enough.
+
+### What the live catalog showed that the synthesis didn't (2026-05-21, ollama.com/search)
+
+| Model | Sizes (local) | Updated | Pulls | Badges | Hardware fit |
+|---|---|---|---|---|---|
+| **qwen3.5** | 0.8B / 2B / 4B / 9B / 27B (17GB) / 35B (24GB) / 122B (81GB) | 20h ago | 12.2M | vision, tools, thinking | All tiers — direct successor to qwen3-coder family |
+| **qwen3.6** | 27B (17GB) / 35B (24GB), MLX variants | 20h ago | 1.5M | vision, tools, thinking | Tier A/C — "Agentic Coding" + "thinking preservation" features |
+| **nemotron3** | 33B (28GB) — local | 3 weeks ago | 588K | vision, tools, thinking, audio | Tier C — NVIDIA-tuned for "GUI automation for AI agentic applications" |
+| **gemma4 26B-MoE / 31B-dense** | 18GB / 20GB | 20h ago | 9.8M (family) | vision, tools, thinking, audio | All tiers — benchmarks now published (LiveCodeBench v6: 31B=80%, Codeforces ELO 31B=2150) |
+
+The original synthesis's three sources were collectively unaware of these. Most are too new (April–May 2026 releases) to have accumulated benchmark articles by the time Perplexity / Gemini DR / ChatGPT indexed.
+
+### Why the synthesis missed them (methodology audit)
+
+Four structural reasons, in order of weight:
+
+1. **DR services index articles, not catalogs.** All three sources leaned on dated benchmark posts from `carlosmarten.com`, `asiai.dev`, `llmcheck.net`, and `r/LocalLLaMA` threads. Those guides are written 4-8 weeks *after* a model accumulates community testing. Qwen3.6 (3 weeks old, 1.5M pulls) and Nemotron3 (3 weeks old, 588K pulls) are inside that lag window.
+
+2. **Over-corrected synthesis bias toward "verified primary docs."** When Gemini DR (source B) claimed "Qwen 3.5 Coder 35B" existed, this synthesis flagged it as *speculative* because the cited Ollama tag was wrong (`mdq100/qwen3.5-coder:35b` is a community fork). But the official `qwen3.5:*` family from Alibaba **is real and was the most-pulled model on Ollama on the day this synthesis was published (12.2M pulls)**. Gemini DR was directionally correct; the synthesis optimized for confidence in the wrong direction and lost the signal. Specific lesson: cross-vendor disagreement on a claim is a *retrieval prompt*, not a *rejection prompt* — when sources disagree, the next step is to fetch primary truth (the live Ollama catalog), not to default to the more conservative source.
+
+3. **Pi's docs lag the Ollama library.** Pi's official integration page at `docs.ollama.com/integrations/pi` recommends `qwen3-coder` as the default — but Pi's docs haven't been refreshed for qwen3.5/3.6. The synthesis correctly cited Pi-as-authority, but Pi-as-authority was itself behind the live catalog.
+
+4. **The `cloud` badge masked the "use my PC more" filter.** Several flashy newer releases (DeepSeek v4-flash/pro, Nemotron-3-Super 120B, qwen3-coder-next, glm-5.1, gemini-3-flash-preview, minimax-m2.7) carry the `cloud` badge and run only via Ollama Cloud — irrelevant for local PC adoption. The original synthesis didn't have this distinction wired into its prompt scope, so the DR sources may have implicitly filtered some of these in or out without explaining.
+
+### Revised candidate set for Topic 20 pull-and-benchmark
+
+Recommended next step (deferred from this synthesis to a Topic 20 benchmark plan): pull-and-benchmark four models on actual hardware before the next adoption decision.
+
+| Tier | Synthesis pick (baseline) | New candidate | Why test |
+|---|---|---|---|
+| **A** (M4 Max MBP) | `qwen3-coder:30b` | **`qwen3.5:35b`** (24GB) or **`qwen3.5:27b`** (17GB) | Direct family successor, 12.2M pulls, native tools+thinking |
+| **A** secondary | — | **`qwen3.6:35b`** | "Agentic Coding" + "thinking preservation" — but only 3 weeks old, no published benchmarks |
+| **B** (M4 Pro Mac Mini 24GB) | `qwen3-coder:30b` @ 16K | **`qwen3.5:27b`** @ 16K (17GB fits with more headroom) | Smaller footprint than qwen3-coder:30b — leaves more room for KV cache + headless OS |
+| **B** secondary | — | **`gemma4:26b-MoE`** (18GB, 3.8B active) | Already in fleet (E4B used by meta-agent / flush). Published benchmarks now available. Multimodal vision bug for Pi's `read` tool is irrelevant for Sean's text/code-only fleet. |
+| **C** (RTX 4090 24GB) | `devstral:24b-small-2505-q4_K_M` | **`nemotron3:33b`** (28GB — needs CPU offload on 24GB VRAM, or wait for Q4 quant) | NVIDIA-tuned specifically for agentic workflows; "GUI automation" framing matches fleet use case. The Alienware is currently idle for agent purposes — testing this opens a new tier in the fleet. |
+
+### What does NOT change
+
+- The Pi compatibility gotchas (Ollama tool-call streaming bug #12557, 2048-token default `num_ctx`, `compat.supportsDeveloperRole: false` requirement, Gemma4 multimodal `read` bug for vision-only workloads, auto-compaction overflow) remain accurate. They're framework-level issues that any new model adoption still needs to handle.
+- The four-workload taxonomy (tool-calling, code edits, multi-turn planning, long-context summarization) remains the right evaluation framework.
+- The 3-device routing pattern (Tier B = always-on tool-caller, Tier A = interactive dev, Tier C = batch codegen) remains the recommended architecture.
+
+### What does NOT belong here
+
+- **DeepSeek v4-flash / v4-pro** — cloud-only via Ollama Cloud. Use OpenRouter or the DeepSeek direct API if you want DeepSeek. Does not serve the "use my PC more" goal.
+- **Nemotron-3-Super 120B**, **mistral-medium-3.5 (128B)**, **glm-5.1**, **kimi-k2.6**, **gemini-3-flash-preview** — all cloud-only OR too large for local hardware.
+
+### Closeout
+
+The Topic 20 plan (pull-and-benchmark on actual hardware, including PC wake-on-LAN architecture for the Alienware) is being scoped in a separate planning session via the `/writing-plans` skill. When that plan lands and the benchmarks run, this synthesis will be updated (or a Topic 20 synthesis will supersede it) with the final adoption decisions.
+
+Until then: **do not migrate any production agent away from `qwen3-coder:30b` / `devstral:24b-small-2505-q4_K_M`** based on this addendum alone. The candidates above are evaluation candidates, not adoption candidates.
