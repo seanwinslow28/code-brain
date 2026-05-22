@@ -460,7 +460,7 @@ Sean: confirm this set or swap espresso → another off-thesis topic (e.g., boul
 **Risk to flag now:** the portfolio is currently in Phase 0/1 per its CLAUDE.md. If the portfolio's Phase 3 hasn't shipped by 6/3, Task 15's verification gate item 5 is blocked.
 
 **Mitigation paths (pick during Step 5 of Task 15 build):**
-- **(a) Use the V3 bridge at `~/Code-Brain/sw-portfolio/`** — extend its already-shipped `/transactions/` infrastructure to add a minimal `/architecture/` page that just renders SCORECARD.md. ~3 hours of work in the V3 bridge repo. Buys time for the redesign to catch up.
+- **(a) Use the canonical portfolio at `~/Code-Brain/sw-ai-pm-portfolio/`** — extend its already-shipped `/transactions/` + `/architecture/` infrastructure to render SCORECARD.md. **Path updated 2026-05-22**: the V3 bridge previously at `~/Code-Brain/sw-portfolio/` was superseded when `sw-ai-pm-portfolio` shipped Phase 3 (includes `/architecture/` route). Original V3 fallback rationale preserved for history.
 - **(b) Slip Task 15 verification gate item 5** — ship the SCORECARD.md + essay + ER diagram + fixture to code-brain on 6/3, but defer the live `/architecture/` page until the portfolio redesign hits Phase 3. Loses the public-mirror payoff but the artifact itself ships on time.
 - **(c) Accelerate portfolio Phase 2+3** — push the portfolio to Phase 3 by 6/3 so the route is live when SCORECARD ships. Highest upside, highest scope risk.
 
