@@ -2,31 +2,31 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-27.md
+  - knowledge/concepts/cost-capped-agentic-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-05-21
-updated: 2026-05-21
+created: 2026-05-22
+updated: 2026-05-22
 ---
 
 ## Definition
 
-A strategy that ensures agent-based tasks remain financially sustainable by controlling run costs, often through the use of local or cost-free execution environments.
+A feedback loop mechanism where agent runtime costs are estimated and compared against predefined thresholds, ensuring that computational expenditures do not exceed a budget. This involves model selection heuristics that prioritize cheaper or cached alternatives as thresholds are approached, relying on explicit budgetary constraints to prevent unbounded spending. The mechanism assumes that tasks have a known cost envelope, and exceeding it may result in project cancellation or misalignment with resource constraints.
 
 ## Context
 
-Sean depends on this approach to keep his knowledge vault maintenance and daily automation within budget while maintaining efficiency.
+For Sean, cost-capped workflows are essential when deploying multiple agents in parallel, especially during job-hunt preparations or deep-research tasks involving high model inference costs. Without such constraints, the financial burden of agent operations could become unsustainable.
 
 ## Evidence
 
-> - **Total active fleet:** ~$12.00/month
+> The developer ecosystem also features community extensions engineered to automate the synchronization of upstream models. [...] introduces substantial financial risk.
 
-> - vault-indexer: $0.00/month (local)
+> The configuration literature explicitly states: 'OpenRouter, OPENROUTER_API_KEY, openrouter' when listing the built-in API key providers that the platform natively recognizes.
 
 ## Examples
 
-- daily-driver morning: ~$12.00/month
-- vault-indexer: $0.00/month (local)
+- The manual definition of the OpenRouter provider block utilizing the openai-completions override in the models.json file.
+- Fallback to cloud Anthropic on local timeout, sets a 30-second timeout.
 
 ## Related Concepts
 
-[[Automation Routines]] [[Agent Health Monitoring]]
+[[Provider Fallback Mechanism]] [[Automation Reliability]]

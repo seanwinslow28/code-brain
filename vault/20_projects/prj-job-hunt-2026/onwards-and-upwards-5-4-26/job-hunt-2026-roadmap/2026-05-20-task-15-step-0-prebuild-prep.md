@@ -3,6 +3,8 @@ type: prep
 project: prj-job-hunt-2026
 task: Task 15 Step 0 — Vault Scorecard pre-build prep
 created: 2026-05-20
+last_updated: 2026-05-21
+status: defaults-locked-pending-voice-review
 build_window: 2026-06-01 to 2026-06-03
 ship_target: 2026-06-03
 ai-context: |
@@ -13,7 +15,9 @@ ai-context: |
   Mermaid erDiagram source built from the real schema, a `scripts/generate_schema.py` skeleton,
   the long-form essay's 5-section structure with permalinks, the synthetic-fixture topic
   confirmation, and a cross-pollination check with the portfolio's /architecture/ route spec.
-  Sean reviews + answers 6 open decisions before the 6/1 build window opens.
+  Sean's decisions locked 2026-05-21: all 6 defaults accepted; **planned writing-voice-modes
+  pass against SCORECARD.md + the long-form essay before posting to Substack / publishing
+  the /architecture/ page** (see §8 "DECISIONS LOCKED" + the new VOICE-REVIEW REMINDER block).
 related:
   - "[[2026-05-06-unified-roadmap]]"
   - "[[ref-nate-ai-access-vs-meaning-platform]]"
@@ -23,6 +27,8 @@ sources:
   - sw-ai-pm-portfolio/docs/specs/architecture-spec-v1.md (LOCKED 2026-05-20)
   - Nate's "AI Work Primitives" §3.3 (5 structural tests for agent infrastructure)
 ---
+
+> ⚠️ **VOICE-REVIEW REMINDER (added 2026-05-21):** Sean's decision is "all defaults for now, revisit wording with the writing-voice-modes skill later." Both `vault/SCORECARD.md` and `docs/VAULT_AS_AGENT_INFRASTRUCTURE.md` ship as **first-pass strategic-sober drafts**. Before any public posting (LinkedIn announcement, Substack candidate post in Step 7, the `/architecture/` page going live), Sean runs the [`writing-voice-modes`](../../../../.claude/skills/writing-voice-modes/SKILL.md) skill against both files and edits the voice. The Step 8 verification gate (commit + tag) is the canonical "voice-reviewed" checkpoint — if the voice review hasn't happened, don't tag.
 
 # Task 15 — Vault Scorecard Pre-Build Prep (Step 0)
 
@@ -462,30 +468,29 @@ Sean: confirm this set or swap espresso → another off-thesis topic (e.g., boul
 
 ---
 
-## 8. Six open decisions for Sean
+## 8. DECISIONS LOCKED (2026-05-21)
 
-Answer these and the 6/1–6/3 build window is execution.
+Sean's answer from `open-question-answers-5-21.md`: *"Keep all default for now. I'll revisit the wording with the writing-voice-modes skill later. Make a note to remember to review before posting anything."*
 
-1. **Scoreboard cells — accept all four as written?** Particularly: do you agree Linear scores `✅✅` on Ownership + Permissions (the two losses) and `✅` on Audit (parity with vault), and that Notion gets `❌` on Persistent State (cloud-only / no durable offline source)?
-   - Default: yes, all four cells stand as written.
+| # | Decision | Locked answer |
+|---|---|---|
+| 1 | Scoreboard cells — accept all four as written? | ✅ **Default** — all four cells stand. Linear scores `✅✅` on Ownership + Permissions (the two honest losses); Notion gets `❌` on Persistent State. |
+| 2 | Synthetic fixture topic — espresso brewing? | ✅ **Default** — espresso brewing methods, 10 notes + 15 edges across all 6 relation types. |
+| 3 | Cross-pollination path with portfolio? | ✅ **Default — option (a)** — extend the V3 bridge to render `/architecture/vault-scorecard/`. 3-hour add. |
+| 4 | Loom segment — record 6/3 or batch with portfolio launch? | ✅ **Default — batch.** Aligns with Sean's 2026-05-12 directive (Looms batched until portfolio's at-rest state). |
+| 5 | Substack post candidacy — scorecard architectural argument? | ✅ **Default** — scorecard architectural argument as the Substack candidate; synthesizer-recovery story becomes a footnote inside it. |
+| 6 | HONEST NOTE format — verbatim blockquotes? | ✅ **Default** — keep verbatim blockquoted callouts. The "Linear wins here" callouts ARE the credibility move. |
 
-2. **Synthetic fixture topic — espresso brewing?**
-   - Default: yes (roadmap spec).
-   - Switch to: bouldering routes, fountain pens, or another off-thesis topic if you'd rather.
+### Voice-review checkpoint (Sean-directed, added 2026-05-21)
 
-3. **Cross-pollination path with portfolio — V3 bridge extension (option a), slip the gate (option b), or accelerate portfolio (option c)?**
-   - Default: **option (a) — extend V3 bridge.** 3-hour add, ships everything on time.
+> *"I'll revisit the wording with the writing-voice-modes skill later. Make a note to remember to review before posting anything."* — Sean
 
-4. **Loom segment — record on 6/3 or batch with the broader portfolio-launch publishing pass per your existing "Looms batched after portfolio at-rest state" directive?**
-   - Default: **batch.** Aligns with your 2026-05-12 directive on batching Loom/Substack/LinkedIn until portfolio's locked.
+This is the **load-bearing precondition for any Step 7 publishing action.** SCORECARD.md + the long-form essay ship as strategic-sober first drafts. Before:
+- LinkedIn announcement post (Step 7)
+- Substack candidate post-draft going live (Step 7)
+- `seanwinslow.com/architecture/vault-scorecard/` page being added to nav (Step 5)
 
-5. **Substack post candidacy** — Task 15's Step 7 specs a Substack candidate ("vault said something again"). But that was originally the synthesizer-recovery follow-up post tied to Task 8 B7 gate. Two competing candidates for that slot now:
-   - **(a)** Synthesizer recovery story (vault said something again)
-   - **(b)** Vault Scorecard architectural argument
-   - Default: ship the **scorecard architectural argument** as the Substack candidate; the recovery story becomes a footnote inside it ("the vault said nothing for 9 days, then started talking again, because we changed what we measured"). One post, two beats.
-
-6. **The HONEST NOTE format — keep verbatim as blockquoted callouts in both SCORECARD and essay, or rewrite them more colloquially?**
-   - Default: **keep verbatim blockquotes.** The "Linear wins here" callouts ARE the credibility move. Diluting them dilutes the signal.
+…Sean runs the [`writing-voice-modes`](../../../../.claude/skills/writing-voice-modes/SKILL.md) skill against the prose and edits the voice. The Step 8 verification gate (commit + tag) is the canonical "voice-reviewed" checkpoint. **Do not tag the commit before voice review is done.**
 
 ---
 

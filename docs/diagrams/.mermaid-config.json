@@ -1,0 +1,16 @@
+{
+  "theme": "default",
+  "themeVariables": {
+    "quadrant1Fill": "#FFFFFF",
+    "quadrant2Fill": "#FAFAFA",
+    "quadrant3Fill": "#FAFAFA",
+    "quadrant4Fill": "#FFFFFF",
+    "quadrantPointFill": "#0A3E42",
+    "quadrantPointTextFill": "#0A3E42",
+    "quadrantTitleFill": "#0A3E42",
+    "quadrantInternalBorderStrokeFill": "#D4D4D4",
+    "quadrantExternalBorderStrokeFill": "#0A3E42",
+    "quadrantXAxisTextFill": "#0A3E42",
+    "quadrantYAxisTextFill": "#0A3E42"
+  }
+}

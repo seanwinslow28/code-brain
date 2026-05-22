@@ -2,30 +2,31 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-19.md
+  - 40_knowledge/references/ref-indydevdan-coding-agent-reviewers-transcript.md
 tags: [auto-generated, phase-6]
-created: 2026-05-21
-updated: 2026-05-21
+created: 2026-05-22
+updated: 2026-05-22
 ---
 
 ## Definition
 
-A conceptual framework for monitoring the health and status of all agents in Sean's infrastructure, ensuring visibility into automation workflows.
+A dynamic feedback loop between agent performance metrics and user interventions, where visibility into agent failures directly influences the prioritization of debugging efforts. This mechanism relies on explicit status reporting from agents, which then feeds into a centralized observability system that triggers alerts or workflow adjustments. The tension arises when agents fail silently, creating a lag between the actual state of the system and what is visible to the user, which can delay corrective actions.
 
 ## Context
 
-This would help Sean ensure reliability and efficiency of his knowledge vault by providing real-time monitoring capabilities for agent operations.
+For Sean, this mechanism is critical for managing the complexity of multiple agentic systems across his job-hunt and knowledge infrastructure. Without clear visibility into agent health, he risks inefficiencies in his workflow automation.
 
 ## Evidence
 
-> 'Active agents: 7 of 12 | Disabled: 5.'
+> This harness takes no input. What is this? How does it work? And what's missing from every benchmark?
 
-> 'Vault indexing and concept linkage running successfully, reinforcing Obsidian as SSoT.'
+> You can see here 70 seconds already, but the image quality coming out of the new GPT image 2.0 model i
 
 ## Examples
 
-- The daily-fleet-status report provides visibility into agent activity and status.
+- The verifier agent attempts to generate an image but fails silently, leading to an incomplete or incorrect architecture diagram.
+- The harness runs without input and does not provide any status update, obscuring the agent's progress or failure.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Automation Routines]]
+[[Agent Health Monitoring]] [[Infrastructure Status]]

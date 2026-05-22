@@ -17,10 +17,18 @@ and writes the full report to `vault/20_projects/research/`.
 
 Budget caps from `agents-sdk/config.toml [gemini.budget]`:
 - Per-task: $7.00 max
-- Daily: $10.00
-- Monthly: $20.00
+- Daily: $20.00
+- Monthly: $50.00 (bumped from $20 on 2026-05-07 to absorb DR Max runs)
 
 ## Pending
+
+- [x] tier: dr Topic 13 (RE-RUN) — Pi (pi.dev) platform overview. Ran manually via Gemini DR web UI on 2026-05-21 (API key was expired; Sean ran from his Gemini Advanced subscription to avoid burning the $5.80 May budget headroom). $0 API spend. → [[20_projects/research/2026-05-21-topic-13-pi-platform-overview-gemini-dr-manual]]
+- [x] tier: dr Topic 14 (RE-RUN) — Pi extensions / plugins catalog. Ran manually via Gemini DR on 2026-05-21. $0 API spend. → [[20_projects/research/2026-05-21-topic-14-pi-extensions-catalog-gemini-dr-manual]]
+- [x] tier: dr Topic 15 — Pi + OpenRouter integration. Ran manually via Gemini DR on 2026-05-21. $0 API spend. → [[20_projects/research/2026-05-21-topic-15-pi-openrouter-integration-gemini-dr-manual]]
+- [x] tier: dr Topic 16 — Pi + local Ollama integration. Ran manually via ChatGPT on 2026-05-21 (shorter source than the Gemini-DR ones; primarily a config recipe). $0 API spend. → [[20_projects/research/2026-05-21-topic-16-pi-ollama-integration-chatgpt-manual]]
+- [~] tier: skipped Topic 17 — Pi + Gemini CLI interoperability. **Skipped 2026-05-21** — Sean's note: Gemini CLI is being deprecated on 2026-06-18 and replaced by the Anti-Gravity CLI. Re-scope as needed under a new Topic if Anti-Gravity ↔ Pi interop becomes interesting.
+- [x] tier: dr Topic 18 — Pi + ChatGPT Codex subscription integration. Ran manually via ChatGPT on 2026-05-21 (high-context source — Sean is logged into Codex). $0 API spend. → [[20_projects/research/2026-05-21-topic-18-pi-chatgpt-codex-integration-chatgpt-manual]]
+- [x] tier: dr Topic 19 — Optimal Ollama model for Pi-driven coding + agentic workflows. Ran THREE TIMES manually on 2026-05-21 across Perplexity, Gemini DR, and ChatGPT for cross-vendor variance, then synthesized into a single recommendation. $0 API spend. → sources [[20_projects/research/2026-05-21-topic-19a-optimal-ollama-models-pi-perplexity]] · [[20_projects/research/2026-05-21-topic-19b-optimal-ollama-models-pi-gemini-dr]] · [[20_projects/research/2026-05-21-topic-19c-optimal-ollama-models-pi-chatgpt]] · **canonical synthesis** → [[20_projects/research/2026-05-21-topic-19-synthesis-optimal-ollama-models-pi]]
 
 - [x] tier: dr Topic 2 — Anthropic API "MCP connector" mode: research the `mcp_servers` parameter on the Messages API, headless `claude login` OAuth inheritance for the Claude Agent SDK 0.1.x line, scope flow for headless agents (no browser-redirect handling), production patterns + code snippets from 2025-2026 Anthropic docs and case studies, and explicit gaps + roadmap signals about MCP+headless capabilities not yet supported. Cite Anthropic's official documentation + SDK source + dated team blog posts. — done 2026-05-04 17:22 (manual gemini-dr run, $2.80) → [[20_projects/research/2026-05-04-you-are-a-senior-research-analyst-specializing-in-ai-develop]]
 

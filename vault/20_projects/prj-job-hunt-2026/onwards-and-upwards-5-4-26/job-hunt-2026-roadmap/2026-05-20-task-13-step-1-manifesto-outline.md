@@ -3,25 +3,32 @@ type: outline
 project: prj-job-hunt-2026
 task: Task 13 Step 1 — Access-vs-Meaning Manifesto outline
 created: 2026-05-20
+last_updated: 2026-05-21
+status: decisions-locked-ready-for-step-2
 draft_lock_target: 2026-05-23
 publish_target: 2026-06-19
 ai-context: |
   Step 1 deliverable for Task 13 (Council Gap-Fill 2). Section-by-section outline with target
   word counts, plotted artifact list for the spectrum chart, role-map JD targets, and pre-drafted
-  opening + closing hooks for the personal-voice bookends. Sean reviews + edits before Step 2
-  (full draft pass on docs/MEANING_OVER_ACCESS.md, ~6 hours).
+  opening + closing hooks for the personal-voice bookends. Sean's decisions locked 2026-05-21
+  (see §7 "DECISIONS LOCKED"); JD URLs populated from vault/20_projects/prj-job-hunt-2026/target-companies.md.
+  Ready for Step 2 (full draft pass on docs/MEANING_OVER_ACCESS.md, ~6 hours).
 related:
   - "[[2026-05-06-unified-roadmap]]"
   - "[[ref-nate-ai-access-vs-meaning-platform]]"
   - "[[2026-05-16-council-nate-jones-digest]]"
+  - "[[target-companies]]"
 sources:
   - Nate's "AI Work Primitives: Access vs Meaning" (2026-05-05)
   - Council brief Gap-Fill 2 (2026-05-16)
+  - target-companies.md (JD URLs validated 2026-05-13)
 ---
 
 # Task 13 — Manifesto Outline (Step 1)
 
-> Section-by-section structure with word-count targets, plotted artifact list, role-map JD candidates, and pre-drafted opening/closing hooks. Sean: review the plotting, pick one of the two opener hooks (A vs B), then I expand into the full ~1,500-word draft in Step 2.
+> **STATUS 2026-05-21:** All 6 open decisions locked (see §7). JD URLs populated from target-companies.md. **Ready for Step 2** — Hook A (silent regression) is the opener, all 7 artifacts plotted as drafted, voice mode is strategic-sober with planned writing-voice-modes review after full draft.
+
+> Section-by-section structure with word-count targets, plotted artifact list, role-map JD candidates (now with real URLs), and pre-drafted opening/closing hooks. Step 2 expands this into the full ~1,500-word draft of `docs/MEANING_OVER_ACCESS.md`.
 
 ## 0. The thesis in one sentence (carry into interviews)
 
@@ -114,13 +121,15 @@ quadrantChart
 
 ### The role map table
 
+> **JD URLs populated 2026-05-21** from [`vault/20_projects/prj-job-hunt-2026/target-companies.md`](../../target-companies.md). Validated dates per target-companies frontmatter (last_updated 2026-05-13). Step 6 of Task 13 re-validates URLs on publish day (~6/19).
+
 | Buyer | Spectrum position | Vocabulary tell (verbatim from JD) | Example JD |
 |---|---|---|---|
-| **Anthropic FDE (Boston / NYC / Chicago)** | meaning + workflow | "MCP servers, sub-agents, and agent skills"; "control architectures around production agent deployments" | [JD URL — Sean to add] |
-| **Glean** | meaning + infrastructure | "knowledge governance"; "action primitives over enterprise systems" | [JD URL] |
-| **Sierra / Decagon** | meaning + workflow | "agent PM loops"; "structured action surfaces"; "review and escalation paths" | [JD URL] |
-| **Cursor / Cognition** | mixed (meaning + workflow with access tail) | "developer workflow primitives"; "context engineering" | [JD URL] |
-| **Manus / Adept / browser-use** | access + workflow | "computer-use"; "browser automation"; "general computer-using agent" | [JD URL] |
+| **Anthropic FDE (Boston / NYC / Chicago)** | meaning + workflow | "MCP servers, sub-agents, and agent skills"; "control architectures around production agent deployments" | [Greenhouse — Forward Deployed Engineer](https://job-boards.greenhouse.io/anthropic/jobs/4985877008) |
+| **Glean** (Forward Deployed PM) | meaning + infrastructure | "0-to-1 product creation"; "shipped AI in production" | [Greenhouse — FDP](https://job-boards.greenhouse.io/gleanwork/jobs/4651950005) |
+| **Sierra / Decagon** | meaning + workflow | "PM, Agent Development" (Sierra); "Senior Agent Product Manager" (Decagon); "review and escalation paths" | [Sierra — PM, Agent Development](https://jobs.ashbyhq.com/Sierra/effd7cd2-8a28-4bae-a3b8-40720ba09717) · [Decagon — Sr. Agent PM](https://jobs.ashbyhq.com/decagon/dcf9b561-f2fb-422b-88a9-33ce76e96608) |
+| **Cohere** (Agent Harness & Modelling) | mixed (meaning + workflow, leaning infrastructure) | "agent runtime"; "tool orchestration, parallel execution, failure recovery" | [Ashby — PM, Agent Harness & Modelling](https://jobs.ashbyhq.com/cohere/1d1b300d-254b-48c4-958f-99c6b907f295) |
+| **Manus / Adept / browser-use / OpenAI Operator** | access + workflow | "computer-use"; "browser automation"; "general computer-using agent" | Negative-space callout — not on Sean's target list; cited as the category the manifesto argues *against* |
 
 ### Body prose (~300 words after the table)
 
@@ -191,32 +200,24 @@ Per Task 13's spec, this manifesto's draft-lock ships with companion files:
 
 ---
 
-## 7. Open decisions for Sean before Step 2 starts
+## 7. DECISIONS LOCKED (2026-05-21)
 
-Six things I need a quick call on before expanding into the full draft. Each has a default — say "fine" to accept all defaults and I'll proceed.
+Sean's answers captured from `open-question-answers-5-21.md`. All defaults except the JD-URL source decision, which Sean explicitly redirected to target-companies.md.
 
-1. **Opener: Hook A (silent regression) or Hook B (dogfood)?**
-   - Default: **Hook A.** Stronger narrative arc, earns the thesis turn, dramatizes "the button worked, the decision did not" without naming it.
+| # | Decision | Locked answer |
+|---|---|---|
+| 1 | Opener: Hook A (silent regression) or Hook B (dogfood)? | ✅ **Hook A.** Silent-regression story. Stronger narrative arc, earns the thesis turn. |
+| 2 | All 7 plotted artifacts the right 7? | ✅ **Yes** — keep all 7 as drafted (intent-MCP, vault-knowledge MCP, concept_edges, cost caps, judge layer, eval suite, fleet observability). |
+| 3 | Spectrum chart coordinates? | ✅ **Default** — Mermaid coordinates as drafted in §2. |
+| 4 | Personal voice for sections 1 + 5? | ✅ **Default (strategic-sober with one dry beat per bookend)** for the initial pass. **NOTE — Sean's planned voice review:** after the full ~1,500-word draft lands in Step 2, Sean will pass it through the `writing-voice-modes` skill himself to tune tone before the draft-lock commit. The Step 2 draft is a strategic-sober first pass, not the final voice. |
+| 5 | Role-map JD URLs source? | ✅ **Use target-companies.md** — Sean explicitly redirected here. URLs now populated in the §3 role-map table (Anthropic FDE / Glean FDP / Sierra + Decagon / Cohere; Manus/Adept named as negative-space). |
+| 6 | Closing kicker — verbatim chairman synthesis or Sean-rewritten? | ✅ **Default** — lightly Sean-voiced. |
 
-2. **Are all seven plotted artifacts the right seven?**
-   - Default: yes. Spec'd 5 mandatory (intent-MCP, vault-knowledge MCP, concept_edges, cost caps, judge layer) + 2 I added (eval suite, fleet observability) because they're shipped and they meaningfully extend the bet (eval = "evaluation primitive", fleet obs = "audit primitive" — both fit Nate's 6-component framing).
-   - Switch if you'd rather: swap fleet obs for `writing-voice-modes` skill (it's meaning-layer too) OR drop eval suite back to a footnote and keep only 6.
+### Outstanding Step-2-time considerations (not blocking, but worth flagging when I draft)
 
-3. **Spectrum chart coordinates — Mermaid `quadrantChart` syntax.**
-   - Default: as plotted above (mild spread on meaning side, faint dots on access side).
-   - Adjust if you have a sharper read on relative positions.
-
-4. **Personal voice in 1 + 5 — do you want me to lean comedic-Sedaris or more strategic-sober?**
-   - Default: strategic-sober with one quietly funny aside per bookend. The manifesto genre doesn't carry pure Sedaris-comedic well, but the bookends can have a single dry beat that signals you're a person, not a position paper.
-   - Switch if: you want the comedic register stronger because of the Decision 4 voice lock — I can dial it up.
-
-5. **Role-map JD URLs — should I research them myself or do you have a preferred source?**
-   - Default: I research from the 2026-05-13 target-30 companies file (`vault/20_projects/prj-job-hunt-2026/target-companies.md`) + cross-check the Anthropic FDE listing live during Step 2. Risk: JD URLs decay between draft-lock (5/23) and publish (~6/19); Step 6 of Task 13 re-validates on publish day.
-   - Switch if: you'd rather grab the URLs yourself for accuracy.
-
-6. **The closing kicker — chairman synthesis line verbatim, or Sean-rewritten?**
-   - Default: lightly Sean-voiced (small word swaps to match your cadence — change "I think" → "My read", "typed work objects" → "typed work primitives" to match your usual phrasing). The structure stays.
-   - Switch if: you want it pure verbatim (it's strong as-is) OR fully re-authored.
+- **Voice-review checkpoint:** the full draft Step 2 produces is *strategic-sober first*, not the final voice. After it lands, Sean runs the `writing-voice-modes` skill against it to tune cadence — particularly the bookend hooks (Sections 1 + 5). Step 6's "draft-lock review" gate is where the voice-tuned version is committed.
+- **JD URL re-validation:** target-companies.md URLs were last validated 2026-05-13. Step 6 of Task 13 (publish-day verification) re-checks all 5 URLs for 200 OK. If any decay between draft-lock (5/23) and publish (~6/19), Step 6's fallback is to swap to that company's careers landing page + a 2026-05-13 snapshot saved at `vault/40_knowledge/references/role-map-2026-05-13-snapshots/` (snapshot dir to be created during Step 6).
+- **The "essays" IA on the portfolio:** Task 13 Step 4 creates `~/Code-Brain/sw-ai-pm-portfolio/src/pages/essays/{index,[slug]}.astro` + the `essays` collection. Sean is simultaneously running the portfolio redesign per `sw-ai-pm-portfolio/CLAUDE.md`. Coordinate so the `/essays/` IA lands in his Phase 3 build (or as a parallel route in the V3 bridge). My Step 4 work assumes V3-bridge integration unless Sean signals Phase 3 has shipped.
 
 ---
 

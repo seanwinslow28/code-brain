@@ -2,19 +2,19 @@
 title: "Writing-voice-modes"
 type: concept
 sources:
-  - 20_projects/prj-code-brain/Context Files For Creative Skill Building/writing-voice-modes/SKILL.md
+  - knowledge/concepts/writing-voice-modes.md
 tags: [auto-generated, phase-6]
-created: 2026-05-21
-updated: 2026-05-21
+created: 2026-05-22
+updated: 2026-05-22
 ---
 
 ## Definition
 
-A tonal calibration system that applies specific authorial voices to long-form writing, enabling Sean to shift between distinct styles — from the detached yet vivid observation of Sedaris to the chaotic intensity of Thompson. It leverages known authorial references as anchors, creating a framework where voice becomes a modular tool rather than an innate trait. The system operates through implicit constraints, requiring the writer to consciously select and apply a mode, which in turn influences sentence structure, rhythm, and cultural references embedded within the text.
+A tonal calibration system that functions as a modular constraint framework, anchoring Sean's writing to predefined authorial voices. It operates through implicit rules that enforce stylistic boundaries, requiring conscious mode selection during writing. This system transforms voice into a tool rather than an innate trait, allowing Sean to shift between tones with deliberate control.
 
 ## Context
 
-This system is pivotal for Sean’s creative work, as it ensures consistency in his personal voice across blog posts, essays, and social media. It also enables him to adapt his tone for different audiences or formats — from professional contexts that require restraint to personal projects that embrace eccentricity. The hybridization of modes allows him to innovate without losing the core identity of his writing style.
+This system is crucial for maintaining tonal consistency across Sean's creative output — from personal blogs to professional branding. It also enables adaptive tone selection for different audiences, ensuring that eccentricity is reserved for personal projects while restraint is maintained in professional contexts.
 
 ## Evidence
 
