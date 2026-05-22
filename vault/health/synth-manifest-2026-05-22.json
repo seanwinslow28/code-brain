@@ -1,16 +1,24 @@
 {
-  "clusters_sampled": 69,
-  "concepts_written": 0,
-  "connections_written": 0,
-  "duration_seconds": 2745.49,
-  "edges_rejected": 0,
-  "edges_written": 0,
-  "files_processed": 30,
-  "model_used": "none",
-  "rejected_count": 0,
-  "rejected_reasons": {},
-  "run_id": "2026-05-22T02:30:02",
+  "clusters_sampled": 162,
+  "concepts_written": 34,
+  "connections_written": 28,
+  "duration_seconds": 2710.5,
+  "edges_rejected": 1,
+  "edges_written": 45,
+  "files_processed": 77,
+  "model_used": "qwen3-14b",
+  "rejected_count": 40,
+  "rejected_reasons": {
+    "duplicate-examples": 2,
+    "restatement-definition": 10,
+    "thin-definition": 4,
+    "thin-evidence": 2,
+    "thin-synthesis": 4,
+    "thin-threads": 7,
+    "wikilinks-or-placeholder": 1
+  },
+  "run_id": "2026-05-22T09:16:33",
   "skipped_thin_source": 0,
-  "status": "error",
-  "wol_status": ""
+  "status": "ok",
+  "wol_status": "mbp_awake"
 }

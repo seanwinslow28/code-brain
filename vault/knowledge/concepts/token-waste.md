@@ -2,7 +2,7 @@
 title: "Token Waste"
 type: concept
 sources:
-  - 40_knowledge/references/ref-66000-tokens-of-plugins-before-you-type.md
+  - knowledge/concepts/token-waste.md
 tags: [auto-generated, phase-6]
 created: 2026-05-22
 updated: 2026-05-22
@@ -10,11 +10,11 @@ updated: 2026-05-22
 
 ## Definition
 
-A systemic inefficiency in AI workflows where excessive tokens are consumed by non-essential elements such as plugin context, system prompts, and reference documents that are not cached. This creates a hidden cost multiplier where users pay disproportionately more for the same output due to avoidable overhead. The issue stems from a lack of awareness around how contextual loading influences token usage, leading to unnecessary consumption and limiting the scale or depth of AI tasks that could be performed within budget.
+Token waste emerges from a producer/consumer pattern where AI agents consume excessive tokens due to unoptimized contextual loading, such as non-cached system prompts or reference documents. This creates a hidden cost multiplier where the same output is paid for disproportionately more, compressing the effective budget available for productive AI work. The pattern relies on a misalignment between input requirements and resource caching, which escalates token costs without improving output quality.
 
 ## Context
 
-Token waste directly impacts Sean's ability to optimize his AI workflows, especially in areas like job hunting and knowledge synthesis. By reducing unnecessary token consumption, Sean can stretch his Claude credits further to explore more complex prompts or scale his research agents without hitting usage limits.
+For Sean, token waste limits both his job-hunting and creative workflows by tightening the budget for Claude usage. Without mitigation, he cannot scale complex prompts or expand research agents, which are critical for knowledge synthesis and professional development.
 
 ## Evidence
 
