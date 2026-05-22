@@ -8,9 +8,10 @@ created: 2026-05-17
 description: "Watch now | Token management is a indicator of AI fluency. Here's how to get better at it."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Nate Jones on why Claude sessions burn 66,000 tokens of plugin context before the first user message, why limits feel 10x worse than they should, and what to disable."
 ---
 I recently saw a production AI pipeline that ingests multiple long-form conversations per user, runs analysis across dozens of dimensions, and generates fully personalized output. All on the most expensive models money can buy. The cost per user? Less than a quarter. Most of you are spending more than that asking Claude what to have for dinner.
 

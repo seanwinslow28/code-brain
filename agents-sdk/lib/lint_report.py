@@ -94,3 +94,51 @@ def synth_health_summary(vault_root: Path) -> str:
         f"{data.get('rejected_count', 0)} rejected "
         f"(see {manifest.as_posix()})"
     )
+
+
+def latest_critic_manifest(vault_root: Path) -> Path | None:
+    """Return newest `vault/health/critic-manifest-*.json` or None.
+
+    Sorts by name; the manifest filenames embed an ISO date so name-sort
+    matches chronological order without inspecting file mtimes (which
+    can drift on git checkout).
+    """
+    health_dir = vault_root / "health"
+    if not health_dir.exists():
+        return None
+    manifests = sorted(health_dir.glob("critic-manifest-*.json"))
+    return manifests[-1] if manifests else None
+
+
+def critic_health_summary(vault_root: Path) -> str:
+    """One-line summary of the latest vault_critic run for the morning brief.
+
+    Returns '' when no manifest exists so the caller can suppress the line
+    entirely. Mirrors synth_health_summary's empty-string contract.
+    """
+    manifest = latest_critic_manifest(vault_root)
+    if not manifest:
+        return ""
+    try:
+        data = json.loads(manifest.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return ""
+    if not isinstance(data, dict):
+        return ""
+
+    status = data.get("status", "unknown")
+    n = data.get("articles_critiqued", 0)
+    codex_fail = data.get("codex_failures", 0)
+    ag_fail = data.get("antigravity_failures", 0)
+
+    if status == "ok":
+        return f"VAULT CRITIC ✓ — {n} expansions written (see {manifest.as_posix()})"
+    if status == "success-empty":
+        return f"VAULT CRITIC ○ — 0 articles to critique tonight (see {manifest.as_posix()})"
+    if status == "partial":
+        return (
+            f"VAULT CRITIC ◐ — partial: {n} expansions written, "
+            f"codex_failures={codex_fail}, antigravity_failures={ag_fail} "
+            f"(see {manifest.as_posix()})"
+        )
+    return f"VAULT CRITIC ✗ — status `{status}` (see {manifest.as_posix()})"

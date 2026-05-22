@@ -1,0 +1,71 @@
+{
+  "date": "2026-05-22",
+  "runs": [
+    {
+      "fired_at": "2026-05-22T08:00:02.256555",
+      "fetch_total": 4078,
+      "rules_passed": 1,
+      "rules_rejected": 52,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 17.53,
+      "failed_pollers": [
+        "ats:glean (all 404)",
+        "ats:huggingface (all 404)",
+        "ats:scale (all 404)",
+        "ats:canva (all 404)",
+        "ats:circle (all 404)",
+        "ats:tome (all 404)",
+        "ats:together-ai (all 404)",
+        "ats:datarobot (all 404)",
+        "ats:spline (all 404)",
+        "ats:draftkings (all 404)",
+        "ats:replicate (all 404)",
+        "ats:coinbase (all 404)",
+        "ats:framer (all 404)",
+        "ats:fourthwall (all 404)",
+        "ats:beehiiv (all 404)",
+        "ats:sierra (ReadTimeout)",
+        "ats:notion (ReadTimeout)"
+      ],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-05-22T08:30:01.010377",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 0.05,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-05-22T09:00:04.313242",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 0.07,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-05-22T09:30:01.175383",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 1,
+      "llm_failed": 0,
+      "mbp_reachable": true,
+      "duration_sec": 31.01,
+      "failed_pollers": [],
+      "short_circuited": false
+    }
+  ]
+}

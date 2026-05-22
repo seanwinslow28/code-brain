@@ -2,30 +2,31 @@
 title: "Cross-domain bridging"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-15.md
+  - knowledge/concepts/cross-domain-bridging.md
 tags: [auto-generated, phase-6]
-created: 2026-05-21
-updated: 2026-05-21
+created: 2026-05-22
+updated: 2026-05-22
 ---
 
 ## Definition
 
-The practice of connecting concepts across different domains such as knowledge management, creative output, and job hunting to optimize workflows.
+A tension between the efficiency of solo execution and the overhead of organizational coordination. This mechanism is rooted in how AI amplifies individual capability while traditional structures reduce it through bureaucracy, leading to an asymmetry in output velocity between solo founders and teams. This bridging mechanism requires a conscious reconfiguration of how value is captured across domains, as traditional hierarchies may not align with the decentralized nature of AI-enhanced execution.
 
 ## Context
 
-Sean needs cross-domain coherence to ensure his systems support both creative output and hiring goals effectively.
+For Sean, this is critical as he navigates the job market and builds his personal knowledge vault. The tension between solo execution efficiency and team overhead becomes a central consideration in how he positions his skills, leverages AI tools, and evaluates potential roles or projects.
 
 ## Evidence
 
-> - ... 'inhibiting the automated consolidation of research findings.'
+> She left. She picked up Claude Code and Cursor. In her first month solo, she shipped a working product that addressed a market gap her former employer had been roadmapping for Q3.
 
-> - ... 'Agent connectivity remains unreliable, preventing seamless three-machine sync (Mac Mini/MBP/Alienware).'
+> The question everyone asks: 'How do we find extraordinary people?' The question they should be asking: 'How did we spend the last thirty years building organizations that make extraordinary people look ordinary?'
 
 ## Examples
 
-- The failure of the vault-synthesizer disrupts knowledge integration across domains.
+- A senior product manager left her company to work solo, shipping a working product in one month.
+- The narrative is set: AI lowers barriers, taste matters, solo founders are the future.
 
 ## Related Concepts
 
-[[Automation and Daily Drive Agent Interdependence]] [[Agent Fleet Observability Dashboard]]
+[[Automation Routines]] [[Daily Note Generation]]

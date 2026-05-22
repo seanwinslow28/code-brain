@@ -2,31 +2,31 @@
 title: "MCP Server Hardening"
 type: concept
 sources:
-  - 20_projects/research/2026-05-18-mcp-prompt-injection-hardening.md
+  - 40_knowledge/references/ref-six-agent-protocols-mcp-a2a-which-three-survive.md
 tags: [auto-generated, phase-6]
-created: 2026-05-19
-updated: 2026-05-19
+created: 2026-05-22
+updated: 2026-05-22
 ---
 
 ## Definition
 
-A checklist of security practices to defend public npm-distributed MCP servers against prompt-injection attacks, including input validation and audit logging.
+A protocol-level requirement that ensures the secure isolation and validation of tool access within agent systems. The mechanism relies on the MCP protocol to enforce trust boundaries, ensuring only verified agents can access external tools. This prevents unintended data exposure or misuse of critical infrastructure by rogue or misconfigured agents, acting as a first line of defense against operational risks.
 
 ## Context
 
-Sean's @swins/intent-engineering-mcp@0.1.0 server must follow MCP hardening guidelines to prevent exploitation.
+For Sean's job-hunt-2026 roadmap, MCP server hardening is critical to prevent agent-based systems from being exploited during candidate evaluations or data-synthesis workflows. It ensures that when Sean's agents are querying resumes, job boards, or internal systems, the access is controlled and auditable.
 
 ## Evidence
 
-> input validation at JSON-RPC boundary, tool description sanitization, output filtering, audit logging, threat model.
+> Recruiter-eye headline: *'PM who built the MCP server that lets Claude query its own conversation history.'*
 
-> The GitHub MCP private-repo exfiltration case involved tool poisoning and cross-tool prompt injection (CPI / line-jumping).
+> MCP for the tools and data an agent can reach [...] shapes the customer experience more than the model choice does.
 
 ## Examples
 
-- input validation at JSON-RPC boundary
-- audit logging
+- The MCP server is built as a 2-day wrapper around six months of work.
+- MCP for the tools and data an agent can reach [...] shapes the customer experience more than the model choice does.
 
 ## Related Concepts
 
-[[Vault Knowledge - MCP Research]] [[Intent Engineering]]
+[[Agent Health Monitoring]] [[Infrastructure Status]]
