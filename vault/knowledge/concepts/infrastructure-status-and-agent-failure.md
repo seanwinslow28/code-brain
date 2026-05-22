@@ -2,30 +2,31 @@
 title: "Infrastructure Status and Agent Failure"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-21.md
+  - 02_Areas/Agent-Fleet/fleet-state.md
 tags: [auto-generated, phase-6]
-created: 2026-05-21
-updated: 2026-05-21
+created: 2026-05-22
+updated: 2026-05-22
 ---
 
 ## Definition
 
-The interplay between physical or virtual machine status (like OFFLINE) and the operational state of agents, impacting system reliability.
+A systemic pattern where the operational health of underlying infrastructure directly correlates with the reliability and performance of autonomous agents. When key machines or services are offline, it creates a cascading failure across agent workflows, disrupting knowledge indexing, daily routines, and research automation. This mechanism highlights the interdependency between hardware reliability and agent functionality.
 
 ## Context
 
-The Aliemware and ComfyUI machines being offline might contribute to agent failures or disruptions in the overall workflow.
+For Sean, this means that when the Alienware or ComfyUI systems are offline, it limits his ability to run critical agents like 'vault-synthesizer' or 'daily-driver morning,' which are essential for knowledge synthesis and daily routine automation.
 
 ## Evidence
 
-> - Alienware | http://192.168.68.201:11434 | OFFLINE
+> Infrastructure dependency failure: Alienware and ComfyUI are offline, limiting active agent scope.
 
-> - ComfyUI | http://192.168.68.201:8188 | OFFLINE
+> The 'vault-synthesizer' agent failed, blocking critical cross-concept networking and synthesis.
 
 ## Examples
 
-- The OFFLINE status of Alienware and ComfyUI could be a root cause for some agents being disabled.
+- The 'daily-driver morning' agent failed on execution, interrupting the core daily review routine.
+- The 'vault-synthesizer' agent failed, blocking critical cross-concept networking and synthesis.
 
 ## Related Concepts
 
-[[MCP Server Hardening]] [[Automation Failure and Daily Note Disruption]]
+[[Automation Reliability]] [[Infrastructure Status]]
