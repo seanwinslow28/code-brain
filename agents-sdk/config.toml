@@ -21,7 +21,12 @@ weekly_time = "16:00"
 
 [agents.daily_driver.modes.morning]
 max_turns = 15
-max_budget_usd = 0.60
+# 2026-05-22: bumped 0.60 → 0.90 after 5 consecutive cap-hits (5/18–5/22).
+# Prompt grew with v3.16.0 operating-model preamble, v3.17.0 3-domain context,
+# v3.27.0 fleet-overnight digest. Successful runs creep $0.55-$0.58; cap at
+# 0.60 had ~3% headroom and trips on any small per-day variance. 0.90 gives
+# ~55% headroom over current ceiling. Cost ceiling per month: ~$27 worst case.
+max_budget_usd = 0.90
 
 [agents.daily_driver.modes.evening]
 max_turns = 10

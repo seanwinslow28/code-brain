@@ -487,16 +487,33 @@ async def run(mode: str, dry_run: bool = False) -> None:
 
     except Exception as e:
         logger.error(f"Agent failed: {e}")
-        record_run(
-            log_dir=config.log_dir,
-            agent_name=AGENT_NAME,
-            mode=mode,
-            status="error",
-            cost_usd=None,
-            duration_ms=None,
-            turns=None,
-            notes=str(e)[:200],
-        )
+        # If a ResultMessage was already received before the SDK raised
+        # (e.g. error_max_budget_usd: the CLI emits the result, then exits
+        # non-zero), prefer the SDK's authoritative subtype + metrics over
+        # the generic "error" status. Keeps cap-hits distinguishable from
+        # transport failures in agent-run-history.csv and the meta-agent.
+        if result_msg is not None:
+            record_run(
+                log_dir=config.log_dir,
+                agent_name=AGENT_NAME,
+                mode=mode,
+                status=result_msg.subtype,
+                cost_usd=result_msg.total_cost_usd,
+                duration_ms=result_msg.duration_ms,
+                turns=result_msg.num_turns,
+                notes=(result_msg.result or str(e))[:200],
+            )
+        else:
+            record_run(
+                log_dir=config.log_dir,
+                agent_name=AGENT_NAME,
+                mode=mode,
+                status="error",
+                cost_usd=None,
+                duration_ms=None,
+                turns=None,
+                notes=str(e)[:200],
+            )
         raise
 
 

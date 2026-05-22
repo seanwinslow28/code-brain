@@ -2,19 +2,19 @@
 title: "Agent Health"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-03.md
+  - knowledge/concepts/agent-health.md
 tags: [auto-generated, phase-6]
-created: 2026-05-21
-updated: 2026-05-21
+created: 2026-05-22
+updated: 2026-05-22
 ---
 
 ## Definition
 
-The operational status of agents, including whether they process batons/data or just log without action.
+A producer/consumer pattern where an agent's operational status determines its ability to process batons or data, with a clear dependency between the agent’s action and the system's downstream reliability. Failure in one agent introduces a contextual gap that affects dependent automation routines, creating an invisible dependency chain. The presence of logs without action reveals a divergence between expected behavior and actual execution, which can lead to cumulative system instability.
 
 ## Context
 
-Agent health is pivotal for Sean's automation-driven knowledge maintenance and creative production system.
+For Sean, agent health is central to maintaining automation fidelity across his knowledge vault and daily routine. If agents fail silently, it disrupts the continuous flow of synthesized content and accurate status updates.
 
 ## Evidence
 

@@ -2,7 +2,7 @@
 title: "Infrastructure Status and Agent Failure"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/fleet-state.md
+  - 40_knowledge/references/ref-seven-questions-decide-ai-agent-ships.md
 tags: [auto-generated, phase-6]
 created: 2026-05-22
 updated: 2026-05-22
@@ -10,23 +10,23 @@ updated: 2026-05-22
 
 ## Definition
 
-A systemic pattern where the operational health of underlying infrastructure directly correlates with the reliability and performance of autonomous agents. When key machines or services are offline, it creates a cascading failure across agent workflows, disrupting knowledge indexing, daily routines, and research automation. This mechanism highlights the interdependency between hardware reliability and agent functionality.
+A system-level state tracking mechanism that determines whether an AI agent can operate within defined boundaries. It ensures agents do not exceed permissions or cause unintended consequences by monitoring their compliance with authority structures and operational constraints. This mechanism acts as a fail-safe, ensuring that agent actions are traceable, auditable, and reversible if they violate constraints.
 
 ## Context
 
-For Sean, this means that when the Alienware or ComfyUI systems are offline, it limits his ability to run critical agents like 'vault-synthesizer' or 'daily-driver morning,' which are essential for knowledge synthesis and daily routine automation.
+For Sean’s job-hunting efforts, ensuring agent compliance with boundaries is critical when deploying tools that manage his personal knowledge vault or streamline application tracking. Without infrastructure status monitoring, agents may misinterpret instructions, mishandle sensitive data like interview notes or referrals, or cause security risks.
 
 ## Evidence
 
-> Infrastructure dependency failure: Alienware and ComfyUI are offline, limiting active agent scope.
+> A serious agent product needs a serious authority model. It is not manageable when agents transact and deploy and refund and schedule and provision or make serious commitments on their own.
 
-> The 'vault-synthesizer' agent failed, blocking critical cross-concept networking and synthesis.
+> The companies turning agentic behavior into controlled, permissioned, auditable infrastructure. The companies your security review is about to discover the hard way.
 
 ## Examples
 
-- The 'daily-driver morning' agent failed on execution, interrupting the core daily review routine.
-- The 'vault-synthesizer' agent failed, blocking critical cross-concept networking and synthesis.
+- The control layer determines where agents live, what state they remember, who they act for, and when approval is needed.
+- Agent Fleet Dashboard becomes a control-plane dashboard that includes monitoring infrastructure status.
 
 ## Related Concepts
 
-[[Automation Reliability]] [[Infrastructure Status]]
+[[Agent Health Monitoring]] [[System Constraints]]

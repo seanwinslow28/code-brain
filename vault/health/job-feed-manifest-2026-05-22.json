@@ -54,6 +54,18 @@
       "duration_sec": 0.07,
       "failed_pollers": [],
       "short_circuited": false
+    },
+    {
+      "fired_at": "2026-05-22T09:30:01.175383",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 1,
+      "llm_failed": 0,
+      "mbp_reachable": true,
+      "duration_sec": 31.01,
+      "failed_pollers": [],
+      "short_circuited": false
     }
   ]
 }
