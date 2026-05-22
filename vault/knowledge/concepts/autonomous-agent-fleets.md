@@ -2,30 +2,31 @@
 title: "Autonomous Agent Fleets"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-14.md
+  - knowledge/concepts/autonomous-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-05-21
-updated: 2026-05-21
+created: 2026-05-22
+updated: 2026-05-22
 ---
 
 ## Definition
 
-A collection of agentic systems designed to operate independently but in coordination with one another, often spanning multiple domains like knowledge management and creative workflows.
+A distributed architecture where multiple autonomous agents operate in coordination, each with discrete responsibilities but interdependent via shared state or output. The system's reliability depends on agents' ability to read and write consistent, persistent context — such as daily notes or task states. Failures in one agent's ability to read or write context can propagate silently, causing downstream agents to act on stale data without awareness of the error.
 
 ## Context
 
-For Sean, this relates to the health of his infrastructure — ensuring the consistency and reliability of these agents is key for maintaining productivity.
+Sean's workflow depends on 14 launchd SDK agents and 13 Claude Code subagents operating in concert. If one agent fails to update persistent context, another might act on outdated information, leading to misaligned automation. This risk is especially acute when agents fail silently without user notification.
 
 ## Evidence
 
-> Active agents: 7 of 12 | Disabled: 5
+> The core philosophy is a four-tool harness (Read, Write, Edit, Bash) with a first-class extension system that allows the agent to extend itself by writing and hot-reloading TypeScript modules.
 
-> The current setup remains fragile, relying on multi-machine availability (Mac Mini / MBP) for core services.
+> The npm package was migrated from `@mariozechner/pi-coding-agent` to `@earendil-works/pi-coding-agent` in May 2026. Version `0.73.1` was the last release under the old scope; `0.74.0+` publishes under `@earendil-works`.
 
 ## Examples
 
-- vault-indexer, vault-synthesizer, and deep-researcher are part of the active agent fleet.
+- A Pi agent may read a daily note to determine the user’s current task and then generate code. If that agent fails silently and does not update the note, a downstream agent may execute outdated instructions without Sean's awareness.
+- The Homebrew formula `pi-coding-agent` is MIT-licensed and currently tracks stable `0.75.3`.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Automation Routines]]
+[[Agent Health Monitoring]] [[Daily Note Generators]]

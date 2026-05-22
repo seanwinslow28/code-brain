@@ -2,23 +2,23 @@
 title: "Local Deep Research (LDR)"
 type: concept
 sources:
-  - 00_inbox/research-queue.md
+  - knowledge/concepts/local-deep-research-ldr.md
 tags: [auto-generated, phase-6]
-created: 2026-05-21
-updated: 2026-05-21
+created: 2026-05-22
+updated: 2026-05-22
 ---
 
 ## Definition
 
-A research method used by the system to process deep-research questions using LDR + Qwen3-14B + SearXNG. It is pinned to version 1.5.6 due to bugs in newer versions.
+A research method that relies on fixed versions of software components due to upstream instability. It operates under the invariant that newer versions may introduce critical bugs, requiring the system to remain pinned until upstream fixes are confirmed. This creates an indirect dependency between Sean's research expectations and the state of open-source maintenance, where delayed upgrades can affect output reliability.
 
 ## Context
 
-Understanding LDR's constraints and status is vital for Sean to manage expectations around the efficiency and accuracy of research outputs.
+Because Sean depends on LDR for research, the system's version pinning directly affects his ability to rely on automation. The Alembic-runner bug requiring a rollback highlights how open-source ecosystem instability can ripple into personal productivity, creating friction when research processes are tied to external codebases.
 
 ## Evidence
 
-> LDR is pinned to v1.5.6 awaiting upstream PR [LearningCircuit/local-deep-research#4000](https://github.com/LearningCircuit/local-deep-research/pull/4000) — the 1.5.6 → 1.6.9 upgrade attempted on 2026-05-11 hit a confirmed upstream Alembic-runner bug (migration 0007 FK mismatch on `download_attempts → download_tracker`).
+> LDR is pinned to v1.5.6 awaiting upstream PR [LearningCircuit/local-deep-research#4000] — the 1.5.6 → 1.6.9 upgrade attempted on 2026-05-11 hit a confirmed upstream Alembic-runner bug (migration 0007 FK mismatch on `download_attempts → download_tracker`)
 
 > Check status with: `gh pr view 4000 --repo LearningCircuit/local-deep-research --json state,mergedAt`
 
@@ -28,4 +28,4 @@ Understanding LDR's constraints and status is vital for Sean to manage expectati
 
 ## Related Concepts
 
-[[Deep Research Queue]] [[Gemini Deep Research]]
+[[Gemini Deep Research]] [[Deep Research Queue]]

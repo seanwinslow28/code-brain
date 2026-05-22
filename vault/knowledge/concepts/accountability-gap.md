@@ -2,31 +2,30 @@
 title: "Accountability Gap"
 type: concept
 sources:
-  - 00_inbox/Executive Briefing Valve Got Lord of the Flies. Zappos Got Paralysis. Your Reorg Is Next..md
+  - knowledge/concepts/accountability-gap.md
 tags: [auto-generated, phase-6]
-created: 2026-05-21
-updated: 2026-05-21
+created: 2026-05-22
+updated: 2026-05-22
 ---
 
 ## Definition
 
-The lack of clear feedback mechanisms and performance tracking within a company leads to mid-level employees leaving without proper guidance, which accelerates attrition and talent loss.
+A systemic failure within organizations that occurs when structured feedback loops, crucial for performance tracking and alignment with goals, are removed without adequate replacement. This leads to a vacuum in which employees lack direction and measurable outcomes, ultimately undermining motivation and retention. The mechanism lies in the absence of a producer/consumer pattern between management and employees, where feedback becomes a dependency that unmet leads to disengagement.
 
 ## Context
 
-Sean needs to be aware of how accountability gaps in company structures can lead to loss of top talent, which is relevant for recruitment and onboarding strategies.
+This concept is particularly relevant to Sean as he navigates the 2026 job market, where companies with flattened structures often face accountability gaps. Understanding these gaps helps Sean evaluate potential employers and prepare for roles where feedback systems may be lacking.
 
 ## Evidence
 
-> 'Your best mid-tenure people — the ones with options — stop waiting for feedback that isn’t coming and start interviewing.'
+> Your best mid-tenure people — the ones with options — stop waiting for feedback that isn’t coming and start interviewing.
 
-> 'By the time the attrition data surfaces, you’ve lost the people hardest to replace and spent six months solving a problem you didn’t have.'
+> Underneath that, the accountability gap compounds. Your best mid-tenure people — the ones with options — stop waiting for feedback that isn’t coming and start interviewing.
 
 ## Examples
 
-- When accountability mechanisms are removed during reorganization, top talent leaves quickly.
-- The attrition problem is often not recognized until after the damage has been done.
+- Valve, Zappos, Medium, GitHub — hit the same wall when they removed accountability structures without replacement.
 
 ## Related Concepts
 
-[[Daily Note Generation]] [[Cultural Fit Assessment]]
+[[Daily Note Generation]] [[Automation Routines]]

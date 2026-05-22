@@ -2,19 +2,19 @@
 title: "Daily Note Generation"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-12.md
+  - knowledge/concepts/daily-note-generation.md
 tags: [auto-generated, phase-6]
-created: 2026-05-21
-updated: 2026-05-21
+created: 2026-05-22
+updated: 2026-05-22
 ---
 
 ## Definition
 
-The automated process of creating a structured daily record, which serves as a key reference point for tracking work progress across multiple domains.
+A producer/consumer pattern where the daily-driver agent generates a structured note for tracking progress, but its reliability depends on the health of downstream agents. If an agent fails silently during note generation, subsequent consumers inherit stale or incorrect context. This dependency between agents becomes an invisible but critical link in the workflow, often only noticed when downstream systems fail to act on outdated data.
 
 ## Context
 
-For Sean, this is critical because it ensures continuity in his daily workflows and enables retrospective analysis of progress.
+For Sean, this mechanism is pivotal because his ability to track progress across domains — from job-hunting routines to creative work — relies on the accuracy of these notes. When a daily note is missed or corrupted, it disrupts downstream agents' ability to perform their tasks effectively.
 
 ## Evidence
 

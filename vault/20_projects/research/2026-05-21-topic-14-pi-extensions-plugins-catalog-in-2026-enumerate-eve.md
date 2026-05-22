@@ -1,12 +1,16 @@
 ---
 type: research-report
 date: 2026-05-21
+status: superseded
+superseded_reason: "Qwen3-14B confused pi.dev (the developer platform launched late-2025) with Raspberry Pi — hallucinated RPi.GPIO, Adafruit, and the Raspberry Pi Foundation as the answer. Classic citation-collapse failure on a post-cutoff product with name-collision risk. Re-routed to Gemini DR on 2026-05-21 per the v3.26.3 routing rule extension."
 question: "Topic 14 — Pi extensions / plugins catalog in 2026. Enumerate every Pi extension or plugin available on the official catalog (or community equivalent) as of 2026. For each: name, purpose, license, install command, last-updated, community signal (stars / downloads / Discord mentions). Rank by relevance for a solo developer running a personal autonomous-agent fleet (~14 agents, mixed Python + TypeScript, vault-driven Obsidian knowledge management, daily creative + product-management workflows). Cite the official Pi extensions catalog + 2026 community reviews."
 source: deep-researcher-agent
 ldr_research_id: fcb210ad-c2e9-44b0-b67f-1c0d18db642f
 wall_seconds: 61
-tags: [research, deep-research, autogen]
+tags: [research, deep-research, autogen, superseded]
 ---
+
+> **SUPERSEDED 2026-05-21** — Qwen3-14B confused pi.dev with **Raspberry Pi** and answered with RPi.GPIO, Adafruit, and the Raspberry Pi Foundation. This is fabricated content with respect to the actual question. Re-running on Gemini DR if May budget headroom permits; otherwise queued for June. Do not cite this file.
 
 # Topic 14 — Pi extensions / plugins catalog in 2026. Enumerate every Pi extension or plugin available on the official catalog (or community equivalent) as of 2026. For each: name, purpose, license, install command, last-updated, community signal (stars / downloads / Discord mentions). Rank by relevance for a solo developer running a personal autonomous-agent fleet (~14 agents, mixed Python + TypeScript, vault-driven Obsidian knowledge management, daily creative + product-management workflows). Cite the official Pi extensions catalog + 2026 community reviews.
 
