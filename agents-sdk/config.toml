@@ -258,7 +258,10 @@ models = ["phi4-mini-reasoning", "phi4-mini", "nomic-embed-text", "gemma4:e4b"]
 # the still-enabled vault_synthesizer hitting MBP when it happens to be up,
 # or ad-hoc benchmarking) hits the right machine. When MBP is asleep the
 # call fails health-check → falls back to Claude API or errors cleanly.
-host = "192.168.68.50"
+# 2026-05-23: switched from hardcoded IP (was 192.168.68.50, drifted to .53)
+# to mDNS hostname so DHCP rotation doesn't break the synth health check.
+# Adds ~100ms per resolution; negligible vs the 60s health-check interval.
+host = "seans-macbook-pro.local"
 port = 1234
 tier = 2
 runtime = "lm-studio"
@@ -386,7 +389,7 @@ max_cost_usd = 0.10
 http_timeout_sec = 10
 rate_limit_per_host_per_sec = 1
 mbp_probe_timeout_sec = 2
-mbp_probe_url = "http://192.168.68.50:1234/v1/models"  # LM Studio on MBP
+mbp_probe_url = "http://seans-macbook-pro.local:1234/v1/models"  # LM Studio on MBP (mDNS — see [routing.machines.macbook_pro])
 fetch_skip_if_within_hours = 4
 fallback_disabled = true
 log_level = "INFO"
