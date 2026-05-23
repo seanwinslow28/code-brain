@@ -2,19 +2,19 @@
 title: "Infrastructure Status and Agent Failure"
 type: concept
 sources:
-  - knowledge/connections/agent-fleet-observability-and-infrastructure-health.md
+  - knowledge/connections/infrastructure-downtime-and-agent-health-monitoring-tension.md
 tags: [auto-generated, phase-6]
-created: 2026-05-22
-updated: 2026-05-22
+created: 2026-05-23
+updated: 2026-05-23
 ---
 
 ## Definition
 
-A dependency inversion pattern where agent execution reliability is contingent upon the operational status of infrastructure components. When critical machines like Alienware or ComfyUI are offline, dependent agents such as vault-indexer and vault-synthesizer cannot fulfill their roles. This creates a hidden dependency between agent health and infrastructure uptime that is often unmonitored until it causes downstream failures.
+A dependency inversion pattern where agent execution reliability is contingent upon the operational status of infrastructure components. When critical machines like Alienware or ComfyUI go offline, agents such as vault-synthesizer and vault-indexer fail silently without clear visibility in monitoring systems. This creates a cascading effect, where unmonitored infrastructure status leads to undiagnosed agent failures, disrupting automation pipelines across knowledge management, creative workflows, and job-hunting domains.
 
 ## Context
 
-For Sean, this pattern means that infrastructural outages can silently disrupt knowledge management systems without immediate visibility into the root cause. This leads to cascading failures in automation workflows across creative, job-hunting, and knowledge domains.
+For Sean, this pattern is a critical operational risk because it undermines the reliability of his automation systems. Without clear visibility into infrastructure health, he cannot ensure that agents responsible for critical tasks like daily note generation or knowledge indexing are functioning as intended.
 
 ## Evidence
 
@@ -24,9 +24,8 @@ For Sean, this pattern means that infrastructural outages can silently disrupt k
 
 ## Examples
 
-- Vault indexer and synthesizer ran successfully, advancing the central hub (SSoT) goal.
 - Daily driver failed to generate today's daily note (2026-05-13), indicating a gap in the core daily routine.
 
 ## Related Concepts
 
-[[Infrastructure]] [[Agent Health Monitoring]]
+[[Agent Health Monitoring]] [[Creative Studio Workflows]]
