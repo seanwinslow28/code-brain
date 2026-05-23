@@ -2,30 +2,31 @@
 title: "Eval Vocabulary"
 type: concept
 sources:
-  - 20_projects/research/2026-05-18-enterprise-ai-pm-skill-gaps.md
+  - 40_knowledge/references/ref-aakash-evals-are-the-new-prd-ankur-goyal.md
 tags: [auto-generated, phase-6]
-created: 2026-05-19
-updated: 2026-05-19
+created: 2026-05-23
+updated: 2026-05-23
 ---
 
 ## Definition
 
-A structured framework for evaluating AI agents, focusing on performance baselines and failure modes.
+A structured framework for defining and quantifying the performance of AI systems through systematic experiments. This vocabulary underpins a new language for product management, where the focus shifts from static requirement documents (PRDs) to dynamic evaluation metrics that evolve with user feedback and system behavior. The core mechanism is a producer/consumer pattern where evaluators generate test cases, and consumers (developers or PMs) act on the results to refine product behavior.
 
 ## Context
 
-Sean has built an eval suite at a baseline of 7/10 with six named failure modes, which demonstrates his deep understanding of AI evaluation — a key criterion for PM hiring managers.
+For Sean, Eval Vocabulary is essential for transitioning from traditional PM practices to a data-driven AI product development model. It allows him to frame his job-hunt-2026 portfolio in terms of measurable outcomes, aligning with the trend of AI product management.
 
 ## Evidence
 
-> eval suite at 7/10 baseline with 6 named failure modes grounded in 17 days of production logs
+> The companies running 12.8 eval experiments per day are building AI products that actually work.
 
-> a Senior AI Engineering Manager who runs technical screens for PMs and has rejected candidates for shallow knowledge of evals, model routing
+> Evals are the new PRD. Here is what every PM needs to steal from their process.
 
 ## Examples
 
-- eval suite at 7/10 baseline with 6 named failure modes grounded in 17 days of production logs
+- Running 12.8 eval experiments per day.
+- Eval vocabulary replaces the PRD as primary spec artifact for AI products.
 
 ## Related Concepts
 
-[[Automation Failure and Daily Note Disruption]] [[Agent Health Monitoring]]
+[[AI Product Manager]] [[Eval Vocabulary]]
