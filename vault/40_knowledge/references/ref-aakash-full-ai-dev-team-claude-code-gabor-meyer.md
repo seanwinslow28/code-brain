@@ -8,9 +8,10 @@ created: 2026-05-23
 description: "How a Google PM runs 21 specialized Claude Code agents to go from idea to App Store in 72 minutes. The complete workflow with Confluence, JIRA, and Figma."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Aakash Gupta podcast with Google PM Gabor Meyer on assembling a full AI dev team inside Claude Code — agent roles, n8n orchestration, and the builder-PM workflow."
 ---
 What a Google PM’s 21-agent workflow actually looks like - from Confluence spec to App Store in 135 mins
 

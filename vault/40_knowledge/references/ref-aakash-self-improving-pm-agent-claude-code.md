@@ -8,9 +8,10 @@ created: 2026-05-23
 description: "Aparna Dhinakaran (CPO, Arize AI) shows how to build, trace, eval, and loop a PM agent in Claude Code in one live session."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Aakash Gupta's walkthrough of a self-improving PM agent in Claude Code — feedback loop, eval-driven prompt refinement, and the architecture for an agent that gets better at PM tasks over time."
 ---
 ![](https://www.youtube.com/watch?v=DL-pUGcfrf4)
 

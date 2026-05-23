@@ -8,9 +8,10 @@ created: 2026-05-23
 description: "Most people prompt AI by piling on instructions. The pros do the opposite: they subtract. Here's the one-line shift that fixes vague AI output."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Nate Jones' prompting flip: stop asking for 'warmer/more personal/better' — name what's wrong with the current draft instead. Negative constraints move the answer; positive nudges produce beige."
 ---
 A friend was writing an end-of-year thank-you note to her son’s third-grade teacher last month and asked ChatGPT for help. The first draft came back fast. It was sweet, structured, and it could have been about anyone’s kid with any teacher. So, she tried again. “Make it warmer.” “Make it more personal.” “Make it less generic.” Each draft inched toward a version of the same bland thing.
 

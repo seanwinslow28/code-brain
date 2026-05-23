@@ -5,6 +5,7 @@ purpose: Paste-ready prompts for manual Gemini Deep Research runs on the Pi (pi.
 target_platform: gemini.google.com (Deep Research mode)
 target_count: 7
 tags: [research, prompts, gemini-dr, pi.dev, manual-run]
+ai-context: "Paste-ready prompts for manual Gemini Deep Research runs on the pi.dev developer platform — routes through Sean's Gemini Advanced web subscription to save API budget after Qwen3-14B failed to ground pi.dev (post-cutoff)."
 ---
 
 # Pi (pi.dev) — 7 Deep Research Prompts for Manual Gemini DR
