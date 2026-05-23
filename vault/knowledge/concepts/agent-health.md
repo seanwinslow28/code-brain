@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/agent-health.md
 tags: [auto-generated, phase-6]
-created: 2026-05-22
-updated: 2026-05-22
+created: 2026-05-23
+updated: 2026-05-23
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ A producer/consumer pattern where an agent's operational status determines its a
 
 ## Context
 
-For Sean, agent health is central to maintaining automation fidelity across his knowledge vault and daily routine. If agents fail silently, it disrupts the continuous flow of synthesized content and accurate status updates.
+For Sean, agent health is central to maintaining automation fidelity across his knowledge vault and daily routine. If agents fail silently, it disrupts the continuous flow of synthesized content and accurate status updates, which is critical for his workflows in knowledge management, creative production, and job-hunting automation.
 
 ## Evidence
 

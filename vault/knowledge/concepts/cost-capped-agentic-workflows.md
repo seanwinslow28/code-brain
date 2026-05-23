@@ -2,30 +2,30 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - knowledge/concepts/cost-capped-agentic-workflows.md
+  - knowledge/connections/budgetary-constraints-and-provider-routing.md
 tags: [auto-generated, phase-6]
-created: 2026-05-22
-updated: 2026-05-22
+created: 2026-05-23
+updated: 2026-05-23
 ---
 
 ## Definition
 
-A feedback loop mechanism where agent runtime costs are estimated and compared against predefined thresholds, ensuring that computational expenditures do not exceed a budget. This involves model selection heuristics that prioritize cheaper or cached alternatives as thresholds are approached, relying on explicit budgetary constraints to prevent unbounded spending. The mechanism assumes that tasks have a known cost envelope, and exceeding it may result in project cancellation or misalignment with resource constraints.
+A mechanism that ensures agentic systems operate within predefined financial thresholds by enforcing constraints on the models and resources they can utilize. It balances the flexibility of dynamic model selection with strict budgetary limitations, preventing workflows from incurring unexpected costs. The mechanism requires explicit configuration and monitoring of fallback models to avoid overreliance on expensive resources.
 
 ## Context
 
-For Sean, cost-capped workflows are essential when deploying multiple agents in parallel, especially during job-hunt preparations or deep-research tasks involving high model inference costs. Without such constraints, the financial burden of agent operations could become unsustainable.
+Sean's agentic workflows often rely on high-cost models, but strict budget constraints demand careful configuration to avoid overspending. This is vital in long-running agent processes or research tasks that could otherwise incur prohibitive expenses.
 
 ## Evidence
 
 > The developer ecosystem also features community extensions engineered to automate the synchronization of upstream models. [...] introduces substantial financial risk.
 
-> The configuration literature explicitly states: 'OpenRouter, OPENROUTER_API_KEY, openrouter' when listing the built-in API key providers that the platform natively recognizes.
+> Sean must manually configure fallback thresholds and model selection to avoid exceeding budget caps, especially for long-running agent processes.
 
 ## Examples
 
-- The manual definition of the OpenRouter provider block utilizing the openai-completions override in the models.json file.
-- Fallback to cloud Anthropic on local timeout, sets a 30-second timeout.
+- Using fallback models when primary models fail to prevent cost overruns.
+- Manual configuration of model selection policies in OpenRouter.
 
 ## Related Concepts
 

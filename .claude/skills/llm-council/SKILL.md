@@ -12,6 +12,25 @@ See [`decision-table.md`](decision-table.md) for the full routing reference.
 
 ---
 
+## 0. Path resolution (read first)
+
+This skill is also symlinked from `~/.claude/skills/llm-council/` so it's invocable from any Claude Code session on Sean's machine. The backing CLI, profiles, budget guardrails, and spend tracking are canonical here in code-brain — don't duplicate them.
+
+| Resource | Canonical absolute path |
+|---|---|
+| CLI working dir | `/Users/seanwinslow/Code-Brain/code-brain/tools/llm-council` |
+| Spend tracking | `/Users/seanwinslow/Code-Brain/code-brain/vault/health/council-spend-{YYYY-MM-DD}.json` |
+| Session JSON archive | `/Users/seanwinslow/Code-Brain/code-brain/tools/llm-council/data/sessions/<session-id>.json` |
+| writing-voice-modes spec | `.claude/skills/writing-voice-modes/SKILL.md` in the **current** repo (most repos carry a local copy) — fall back to `/Users/seanwinslow/Code-Brain/code-brain/.claude/skills/writing-voice-modes/SKILL.md` if not present locally. |
+
+**Output routing rule:** Always pass `--output` explicitly as an absolute path. The transcript should land next to the artifact being critiqued — in whatever repo the session is running from — not in code-brain's vault by default. Examples:
+- Portfolio writing surfaces → `/Users/seanwinslow/Code-Brain/sw-ai-pm-portfolio/docs/critiques/<surface>-council-<YYYY-MM-DD>.md`
+- Job-hunt artifacts → `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/...`
+
+`mkdir -p` the parent directory first.
+
+---
+
 ## 1. When to convene a council
 
 | Question shape | Profile | Why |
@@ -57,17 +76,17 @@ Use when Sean wants to check whether the `writing-voice-modes` SKILL.md spec is 
    exactly. Do not reference any existing sample — write blind from the spec only.
    ```
 
-4. Invoke the CLI:
+4. Invoke the CLI (absolute paths so this works from any repo):
 
    ```bash
-   cd tools/llm-council && uv run python -m council \
+   cd /Users/seanwinslow/Code-Brain/code-brain/tools/llm-council && uv run python -m council \
        --profile variance \
        --prompt-file /tmp/llm-council/voice-mode-calibration-<ts>.md \
-       --output vault/20_projects/prj-job-hunt-2026/substack-pre-launch/voice-mode-calibration-runs/<YYYY-MM-DD>-<topic-slug>.md \
+       --output <ABSOLUTE-PATH-TO-OUTPUT-FILE> \
        --tag voice-mode-calibration
    ```
 
-   Create parent directories first if they don't exist (`mkdir -p ...`).
+   Create parent directories first if they don't exist (`mkdir -p ...`). For `--output`, pick a path inside the repo whose surface you're calibrating — see §0 path resolution.
 
 5. Read the chairman synthesis from the output file. Report back to Sean: where did the four interpretations converge, where did they diverge, what does the chairman think the spec is missing.
 
@@ -95,9 +114,9 @@ Use when Sean wants to check whether the `writing-voice-modes` SKILL.md spec is 
    [paste full draft]
    ```
 
-3. Invoke the CLI with `--profile premium --tag cover-letter-<company-slug>`.
+3. Invoke the CLI with `--profile premium --tag cover-letter-<company-slug>` (use the absolute `cd` path from §2.1 step 4).
 
-4. Output to `vault/20_projects/prj-job-hunt-2026/applications/<company>/<YYYY-MM-DD>-council-critique.md`.
+4. Output to `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/applications/<company>/<YYYY-MM-DD>-council-critique.md`.
 
 ### 2.3 Decision pre-mortem (premium profile)
 
@@ -121,9 +140,9 @@ Use when Sean wants to check whether the `writing-voice-modes` SKILL.md spec is 
    [paste full doc]
    ```
 
-3. Invoke the CLI with `--profile premium --tag premortem-<topic-slug>`.
+3. Invoke the CLI with `--profile premium --tag premortem-<topic-slug>` (use the absolute `cd` path from §2.1 step 4).
 
-4. Output to the same directory as the decision doc with `-council-premortem.md` suffix.
+4. Output to the same directory as the decision doc with `-council-premortem.md` suffix (absolute path).
 
 ### 2.4 PRD / spec stress-test (premium profile)
 
@@ -145,9 +164,9 @@ Use when Sean wants to check whether the `writing-voice-modes` SKILL.md spec is 
    [paste full doc]
    ```
 
-3. Invoke the CLI with `--profile premium --tag spec-stress-<topic-slug>`.
+3. Invoke the CLI with `--profile premium --tag spec-stress-<topic-slug>` (use the absolute `cd` path from §2.1 step 4).
 
-4. Output next to the source doc.
+4. Output next to the source doc (absolute path).
 
 ---
 
@@ -156,7 +175,7 @@ Use when Sean wants to check whether the `writing-voice-modes` SKILL.md spec is 
 - Every CLI invocation does a pre-flight cap check. If estimated cost > per-query cap, the CLI refuses with a clear error.
 - Daily and monthly caps are enforced across BOTH profiles combined.
 - The CLI never uses `--force` unless Sean has explicitly authorized it for this query.
-- After a successful run, the CLI records actual spend to `vault/health/council-spend-{YYYY-MM-DD}.json`.
+- After a successful run, the CLI records actual spend to `/Users/seanwinslow/Code-Brain/code-brain/vault/health/council-spend-{YYYY-MM-DD}.json` (canonical — same file across all repos, so daily/monthly caps stay coherent).
 
 If the CLI rejects a query on budget, surface the error verbatim and ask Sean whether to:
 1. Wait until tomorrow (daily reset)
@@ -175,6 +194,6 @@ If the CLI rejects a query on budget, surface the error verbatim and ask Sean wh
 
 ## 5. Output handling
 
-Council output files are full markdown transcripts: original prompt, four named responses, cross-rank table with reasoning, chairman synthesis, cost summary. They live in the vault sub-project relevant to the task (see workflow templates) for permanent record. Session JSON also written to `tools/llm-council/data/sessions/<session-id>.json` for machine-readable replay.
+Council output files are full markdown transcripts: original prompt, four named responses, cross-rank table with reasoning, chairman synthesis, cost summary. They live next to the artifact being critiqued (see §0 + workflow templates) for permanent record. Session JSON is always written to `/Users/seanwinslow/Code-Brain/code-brain/tools/llm-council/data/sessions/<session-id>.json` (canonical archive across all repos) for machine-readable replay.
 
 For voice-mode-calibration specifically, the run-trail is portfolio-worthy: the diff between Sean's draft and the four blind drafts is the calibration signal, accumulating over time.

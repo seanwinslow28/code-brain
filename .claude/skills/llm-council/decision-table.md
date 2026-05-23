@@ -37,7 +37,7 @@ When to convene a council vs. use a single model vs. use Gemini Deep Research.
 
 ## Cost gates
 
-- Per-query hard caps live in `tools/llm-council/council/profiles.py:PROFILES[<name>].max_cost_per_query` ($1.00 premium / $0.40 variance)
-- Daily / monthly governors live in `tools/llm-council/council/cli.py:_DAILY_CAP_USD` ($7) and `_MONTHLY_CAP_USD` ($40)
-- Spend tracked in `vault/health/council-spend-{YYYY-MM-DD}.json`
+- Per-query hard caps live in `/Users/seanwinslow/Code-Brain/code-brain/tools/llm-council/council/profiles.py:PROFILES[<name>].max_cost_per_query` ($1.00 premium / $0.40 variance)
+- Daily / monthly governors live in `/Users/seanwinslow/Code-Brain/code-brain/tools/llm-council/council/cli.py:_DAILY_CAP_USD` ($7) and `_MONTHLY_CAP_USD` ($40)
+- Spend tracked in `/Users/seanwinslow/Code-Brain/code-brain/vault/health/council-spend-{YYYY-MM-DD}.json` (single canonical location across all repos)
 - Use `--force` ONLY when Sean explicitly asks (bypasses per-query cap, not daily/monthly)
