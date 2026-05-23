@@ -2629,9 +2629,11 @@ The plan is "done" when:
 - **Alienware current models:** `qwen3-vl:8b` only (~5GB). **Drift:** `config.toml:278` says `Qwen3-VL-7B` — actual is the 8B variant. Non-blocking; correct config.toml line in Phase 2 or 3.
 - **MBP unified memory:** 48 GB — exactly at threshold.
 - **Decision on 35B Tier A candidates given memory:** proceed (both `qwen3.5:35b` and `qwen3.6:35b` stay in Tier A). Operator note: schedule those sweeps when MBP isn't being used interactively — 24GB model + KV cache + macOS leaves no headroom for IDE/browser.
-- **Disk free MBP / Mac Mini / Alienware:** (X / Y / Z GB)
-- **Deco AP isolation:** (on / off)
-- **MBP currently reachable?:** (yes / no / asleep)
+- **Disk free MBP / Mac Mini / Alienware:** 114 / 120 / 349.73 GB free (floors 80 / 40 / 50). All pass; MBP tightest (1.4× headroom for Tier A pulls — flag if anything ~30GB gets written between now and Phase 3).
+- **Deco AP isolation:** No AP Isolation toggle visible in the Deco app (checked Advanced + main feature list). Treat as off. Path for WoL is wired Ethernet → wired Ethernet anyway, so Wi-Fi-side isolation wouldn't apply. Real proof = Task 2.2 packet test.
+- **MBP currently reachable?:** yes. mDNS `seans-macbook-pro.local` → `192.168.68.53`. LM Studio :1234 serving `qwen3-14b`, `google/gemma-4-31b`, `qwen2.5-coder-32b-instruct` (matches config.toml:269). Phase 4 Tier A sweep can run any time. Ollama install on MBP still needed in Phase 3 (LM Studio :1234 and Ollama :11434 coexist fine).
+- **Alienware SSH user:** `seanw`.
+- **Alienware OpenSSH Server installed?:** **NO — Phase 2 blocker.** `Get-Service sshd` returns ObjectNotFound; `nc -z 192.168.68.201 22` times out. Fix at start of Phase 2 (elevated PowerShell on Alienware): `Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0 ; Start-Service sshd ; Set-Service -Name sshd -StartupType 'Automatic'`. Unblocks Tasks 1.7, 2.5, 2.6.
 
 ### Phase 1 progress
 
