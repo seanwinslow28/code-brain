@@ -4,7 +4,7 @@ This is Code-Brain — Sean's personal command center, a second brain built on C
 
 ## What This Repo Is
 
-119 skills, 13 Claude Code subagents, 14 hooks, 18 autonomous SDK agents (9 active on launchd, 2 opt-in disabled-by-default, 1 manual-trigger), **3 primary domain folders** + cross-cutting infrastructure, an Obsidian vault, and an Agent SDK layer for autonomous operation. Everything is active and auto-loaded. The installer exports subsets to other projects.
+**2 active domain folders** (`creative-studio/`, `life-systems/`) + archived `the-block/` reference + cross-cutting infrastructure, an Obsidian vault, and an autonomous Agent SDK layer. Everything in `.claude/` auto-loads. The installer exports subsets to other projects. Live counts via `ls .claude/{skills,agents,hooks}/`.
 
 ## Non-Negotiable Rules
 
@@ -14,7 +14,7 @@ This is Code-Brain — Sean's personal command center, a second brain built on C
 4. **Hook blocking**: Exit code **2** to deny (not 0 or 1).
 5. **Settings precedence** (highest wins): Enterprise managed > Project local > Project settings > User settings
 6. **Permission evaluation** (first match wins): Deny > Ask > Allow
-7. **3-domain structure**: `the-block/`, `creative-studio/`, `life-systems/` are the only workspace folders that house domain-specific content. `product-management/` lives nested inside `the-block/`; `design-team/` and `16bitfit-battle-mode/` live nested inside `creative-studio/`.
+7. **Domain structure**: Active domain content goes in `creative-studio/` or `life-systems/` only. `the-block/` is archived reference — don't add new content there. Nested: `product-management/` under `the-block/`; `design-team/` and `16bitfit-battle-mode/` under `creative-studio/`.
 8. **Vault sync owner (issue #22)**: The shell-level auto-commit hook is the **sole** owner of vault git operations. Obsidian-Git plugin auto-features (backup interval, auto-pull, auto-push, commit-on-change) must stay disabled on every machine — do not re-enable them. Running two auto-commit systems caused the v3.15.0 merge conflicts. Obsidian-Git can be used for manual commits from the command palette; it must never run automatically.
 
 ### Hook Exit Codes
@@ -102,7 +102,7 @@ cd agents-sdk && PYTHONPATH=. .venv/bin/python3 scripts/doc_to_audio.py \
 
 The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Claude Agent SDK. These run **outside** Claude Code sessions on macOS launchd schedules. Skills are loaded as system prompts — no duplication.
 
-**Active agents (9 of 18 on launchd by default; 2 opt-in disabled-by-default; 1 manual-trigger):**
+**Agent inventory** (status indicated inline — `default disabled` / `manual-trigger only`; everything else runs on launchd):
 
 | Agent | Schedule | Skills/Model | Cost/Run |
 |-------|----------|---------------|----------|
@@ -171,14 +171,9 @@ Config: `agents-sdk/config.toml`. Auth: `claude login` OAuth (no API key). Safet
 
 ```
 .claude/
-├── skills/          # ALL 119 skills (canonical, auto-loaded)
-├── agents/          # ALL 13 agents (8 domain + 5 design team) — Claude Code subagents, separate from the 14 SDK agents
-├── hooks/           # 14 hooks (block-secrets, cost-watchdog, daily-note-appender,
-│                    #           format-on-edit, log-tool-use, loop-detector,
-│                    #           network-access-control, pre-compact-flush,
-│                    #           require-confirm-highrisk, run-tests-on-stop,
-│                    #           session-end-auto-stub, session-end-flush,
-│                    #           session-start-inject-index, vault-integrity)
+├── skills/          # Canonical skill store (auto-loaded)
+├── agents/          # Claude Code subagents (domain + design team) — separate from agents-sdk/
+├── hooks/           # PreToolUse/PostToolUse/SessionStart/SessionEnd/PreCompact hooks
 └── settings.json    # Standard security profile
 
 agents-sdk/          # Autonomous agents (Claude Agent SDK, Python) + local CLIs
@@ -232,7 +227,4 @@ docs/                # Ecosystem documentation
 - Agents live in `.claude/agents/` (not shared/agents/)
 - Update `export-groups/*/playground.json` manifests when adding/removing skills
 - New domain-specific content goes inside the correct domain folder (`the-block/`, `creative-studio/`, or `life-systems/`)
-- **Mandatory doc updates**: When creating a new Skill, Agent, Sub-Agent, Hook, or Script, you MUST update all three of these files:
-  - `CHANGELOG.md` — Add entry under the current version's Added section
-  - `CLAUDE.md` — Update counts (skill/agent/hook totals, domain table, architecture comment)
-  - `README.md` — Update counts and any affected tables
+- **Doc updates on new Skill/Agent/Hook/Script**: add a CHANGELOG.md entry and update any count tables in CLAUDE.md and README.md
