@@ -1,0 +1,20 @@
+{"id": "tc-01", "prompt": "Call the read_file tool to load /etc/hosts and show me the first 5 lines.", "schema": {"name": "read_file", "required": ["path"]}}
+{"id": "tc-02", "prompt": "Read the file at ~/.zshrc using the read_file tool.", "schema": {"name": "read_file", "required": ["path"]}}
+{"id": "tc-03", "prompt": "Use read_file to open /tmp/foo.txt and return its contents.", "schema": {"name": "read_file", "required": ["path"]}}
+{"id": "tc-04", "prompt": "I need you to read the file located at /var/log/system.log.", "schema": {"name": "read_file", "required": ["path"]}}
+{"id": "tc-05", "prompt": "Please read /home/user/notes.md via the read_file tool.", "schema": {"name": "read_file", "required": ["path"]}}
+{"id": "tc-06", "prompt": "Write the string 'hello world' to /tmp/greeting.txt via write_file.", "schema": {"name": "write_file", "required": ["path", "content"]}}
+{"id": "tc-07", "prompt": "Create a new file at /tmp/config.yaml with the content 'enabled: true'.", "schema": {"name": "write_file", "required": ["path", "content"]}}
+{"id": "tc-08", "prompt": "Use write_file to save 'first line\\nsecond line' to /tmp/multi.txt.", "schema": {"name": "write_file", "required": ["path", "content"]}}
+{"id": "tc-09", "prompt": "Save the JSON object {\"x\": 1} to /tmp/data.json with the write_file tool.", "schema": {"name": "write_file", "required": ["path", "content"]}}
+{"id": "tc-10", "prompt": "Write a 3-line bash shebang script (echo hello, exit 0) to /tmp/run.sh.", "schema": {"name": "write_file", "required": ["path", "content"]}}
+{"id": "tc-11", "prompt": "In /tmp/foo.py replace the string 'old' with 'new' using the edit_file tool.", "schema": {"name": "edit_file", "required": ["path", "old_string", "new_string"]}}
+{"id": "tc-12", "prompt": "Edit /etc/hosts to change 'localhost' to 'localhost.local' via edit_file.", "schema": {"name": "edit_file", "required": ["path", "old_string", "new_string"]}}
+{"id": "tc-13", "prompt": "Use edit_file to swap 'TODO' for 'DONE' inside /tmp/list.txt.", "schema": {"name": "edit_file", "required": ["path", "old_string", "new_string"]}}
+{"id": "tc-14", "prompt": "Rename the variable 'foo' to 'bar' in /tmp/code.py using edit_file.", "schema": {"name": "edit_file", "required": ["path", "old_string", "new_string"]}}
+{"id": "tc-15", "prompt": "Replace 'enabled: false' with 'enabled: true' in /tmp/config.yaml.", "schema": {"name": "edit_file", "required": ["path", "old_string", "new_string"]}}
+{"id": "tc-16", "prompt": "Run 'ls -la /tmp' and show me the output. Use the run_bash tool.", "schema": {"name": "run_bash", "required": ["command"]}}
+{"id": "tc-17", "prompt": "Execute 'df -h' via run_bash and report.", "schema": {"name": "run_bash", "required": ["command"]}}
+{"id": "tc-18", "prompt": "Use run_bash to run 'uname -a'.", "schema": {"name": "run_bash", "required": ["command"]}}
+{"id": "tc-19", "prompt": "Run 'echo $HOME' via run_bash.", "schema": {"name": "run_bash", "required": ["command"]}}
+{"id": "tc-20", "prompt": "Execute 'cat /etc/os-release' using run_bash.", "schema": {"name": "run_bash", "required": ["command"]}}
