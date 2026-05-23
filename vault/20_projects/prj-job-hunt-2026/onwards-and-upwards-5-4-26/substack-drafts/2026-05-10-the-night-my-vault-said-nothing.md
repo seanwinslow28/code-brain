@@ -4,9 +4,12 @@ project: prj-job-hunt-2026
 artifact: vault-synthesizer-evals
 created: 2026-05-10
 voice: sean-mode-sedaris-tuned
+voice_mode: sedaris
 target_length: 1300_words
 status: draft
 companion_artifact: 2026-05-10-evals-error-analysis-real-logs.md
+header_image: images/2026-05-10-the-night-my-vault-said-nothing-header.png
+header_image_supersedes: images/2026-05-10-the-night-my-vault-said-nothing-header-v1-superseded.png
 ai-context: "Substack post syndicating the eval-suite portfolio artifact. Hook is the actual error analysis finding: 9 nights of silent zero-output runs the status field reported as 'ok'. Tone per roadmap Decision 4 — comedic Sean Mode, not Nate's strategic-sober register."
 ---
 

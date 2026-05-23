@@ -4,11 +4,13 @@ project: prj-job-hunt-2026
 artifact: meaning-over-access-manifesto
 created: 2026-05-22
 voice: strategic-sober-with-sean-mode-bookends
+voice_mode: sean
 target_length: 1600_words
 status: draft
 companion_artifact: docs/MEANING_OVER_ACCESS.md
 companion_chart_png: docs/diagrams/access-meaning-spectrum.png
 companion_chart_size: 95KB_1000x1000
+header_image: images/2026-06-19-meaning-over-access-header.png
 target_publish: 2026-06-19
 target_slot: substack-post-3
 ai-context: |
