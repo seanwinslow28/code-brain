@@ -1,0 +1,45 @@
+{
+  "date": "2026-05-23",
+  "runs": [
+    {
+      "fired_at": "2026-05-23T10:00:05.284498",
+      "fetch_total": 4338,
+      "rules_passed": 4,
+      "rules_rejected": 132,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 20.38,
+      "failed_pollers": [
+        "ats:replicate (all 404)",
+        "ats:huggingface (all 404)",
+        "ats:framer (all 404)",
+        "ats:glean (all 404)",
+        "ats:tome (all 404)",
+        "ats:together-ai (all 404)",
+        "ats:fourthwall (all 404)",
+        "ats:spline (all 404)",
+        "ats:draftkings (all 404)",
+        "ats:coinbase (all 404)",
+        "ats:canva (all 404)",
+        "ats:beehiiv (all 404)",
+        "ats:datarobot (all 404)",
+        "ats:circle (all 404)",
+        "ats:scale (all 404)"
+      ],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-05-23T10:30:06.011471",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.07,
+      "failed_pollers": [],
+      "short_circuited": false
+    }
+  ]
+}
