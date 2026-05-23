@@ -7,7 +7,7 @@ Checks:
   2. Export-group manifests: valid JSON, required fields, skill references
   3. Skill quality: YAML frontmatter, headings, name match
   4. Agent quality: YAML frontmatter, disallowedTools for read-only agents
-  5. Domain workspaces: 6 domains with README.md
+  5. Domain workspaces: active domains (creative-studio, life-systems) with README.md; the-block scanned as archive
   6. Vault: .obsidian/ exists, PARA structure
   7. Preset validity: all presets reference valid export groups and security profiles
   8. Plugin sync: marketplace.json valid
@@ -36,15 +36,17 @@ REQUIRED_PLAYGROUND_FIELDS = ["name", "description", "version", "dependencies", 
 REQUIRED_PRESET_FIELDS = ["name", "description", "export_groups", "security"]
 
 EXPECTED_DOMAINS = [
-    "the-block",
     "creative-studio",
     "life-systems",
 ]
 
 # Cross-cutting workspaces that don't qualify as a primary domain but should
 # still be scanned for secrets. Existence is NOT enforced.
+# `the-block` is archived reference content (2026-05) — kept on disk for
+# history, no longer an active domain.
 ADDITIONAL_WORKSPACES_TO_SCAN = [
     "claude-mastery",
+    "the-block",
 ]
 
 EXPECTED_VAULT_DIRS = [
@@ -253,7 +255,12 @@ def validate_export_groups(repo_root):
 
 
 def validate_domains(repo_root):
-    """Validate the 3 primary domain workspace directories (v3.15.0)."""
+    """Validate active domain workspace directories.
+
+    Active domains require existence + warn if missing CLAUDE.md/README.md.
+    `the-block/` is archived (2026-05) and lives in ADDITIONAL_WORKSPACES_TO_SCAN
+    — scanned for secrets but not required.
+    """
     errors = []
     warnings = []
 
