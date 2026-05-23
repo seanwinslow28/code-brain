@@ -2637,15 +2637,15 @@ The plan is "done" when:
 
 ### Phase 1 progress
 
-- [ ] Harness scaffold (Task 1.1)
-- [ ] Scorer tests + impl (1.2, 1.3)
-- [ ] WoL tests + impl (1.4, 1.5)
-- [ ] wake/sleep scripts (1.6, 1.7)
-- [ ] Tool-call prompts (1.8)
-- [ ] Agentic-loop prompts (1.9)
-- [ ] Needle haystack generator (1.10)
-- [ ] Main runner (1.11)
-- [ ] RSS sampler (1.12)
+- [x] Harness scaffold (Task 1.1) — d8fa70b
+- [x] Scorer tests + impl (1.2, 1.3) — 9edd30b + 464cca2; 10/10 pass
+- [x] WoL tests + impl (1.4, 1.5) — 14ba62e + fbd2eef; 5/5 pass
+- [x] wake/sleep scripts (1.6, 1.7) — 31642b4 + c4db572
+- [x] Tool-call prompts (1.8) — 540f9ee; 20 prompts validated
+- [x] Agentic-loop prompts (1.9) — d327296; 10 prompts validated
+- [x] Needle haystack generator (1.10) — f192d5e; seed=1 emits 12-char needle, 128350 prompt chars (~32K tokens)
+- [x] Main runner (1.11) — e3de8b7; smoke test on gemma4:e4b 14/20 tool-call pass
+- [x] RSS sampler (1.12) — 3626dd7; CSV format verified
 
 ### Phase 2 progress
 
