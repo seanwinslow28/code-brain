@@ -2,7 +2,7 @@
 title: "Vault as Agent Infrastructure"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-20-task-15-step-0-prebuild-prep.md
+  - knowledge/concepts/vault-as-agent-infrastructure.md
 tags: [auto-generated, phase-6]
 created: 2026-05-23
 updated: 2026-05-23
@@ -10,11 +10,11 @@ updated: 2026-05-23
 
 ## Definition
 
-A structured system where Sean's knowledge vault operates not just as a passive repository but as an active infrastructure layer, enabling autonomous agents to perform synthesis, retrieval, and decision-making. The mechanism relies on specific design patterns and constraints that ensure multi-agent coordination, with each agent's output feeding into the next in a semi-autonomous workflow. This system integrates seamlessly with Sean’s daily routines, enabling real-time feedback and evolution of the knowledge base.
+A distributed agent network where Sean's knowledge vault is structured with autonomous agents like synthesizers, indexes, and evaluators. Each agent operates semi-independently but feeds into the next in a coordinated workflow, ensuring real-time knowledge evolution and synthesis. The mechanism relies on a producer/consumer pattern with dependencies between agents, such that one agent's output becomes the input for another, forming a semi-autonomous knowledge pipeline.
 
 ## Context
 
-This concept is crucial to Sean's job-hunting strategy, as it allows him to efficiently present his knowledge and skills in a structured manner to recruiters. By treating the vault as an agent infrastructure, Sean ensures that it is not only comprehensive but also adaptable to new insights and real-time data.
+This system is essential to Sean's job-hunting strategy, enabling him to manage and present his knowledge in real time. It allows for adaptability as new insights are integrated, ensuring that the vault is always current and actionable during interviews or strategic planning.
 
 ## Evidence
 
@@ -29,4 +29,4 @@ This concept is crucial to Sean's job-hunting strategy, as it allows him to effi
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Vault Knowledge - MCP Research]]
+[[Vault Knowledge - MCP Research]] [[Agent Health Monitoring]]

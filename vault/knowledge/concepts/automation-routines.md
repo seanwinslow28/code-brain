@@ -2,31 +2,31 @@
 title: "Automation Routines"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-17.md
+  - knowledge/connections/accountability-gap-and-automation-routines.md
 tags: [auto-generated, phase-6]
-created: 2026-05-21
-updated: 2026-05-21
+created: 2026-05-23
+updated: 2026-05-23
 ---
 
 ## Definition
 
-A structured sequence of automated tasks, such as the daily-driver morning agent's routine for inbox hygiene and quick-capture routing.
+A pattern of automated tracking and logging mechanisms that enforce operational consistency but lack inherent alignment with human-centric feedback needs. The underlying invariant is the reliance on event-based triggers (like agent success or failure) without incorporating motivational cues, resulting in a functional but emotionally neutral system. This creates an imbalance where efficiency gains are achieved at the cost of human engagement and clarity.
 
 ## Context
 
-These routines are critical components of Sean's personal knowledge vault and workflow automation, ensuring consistent productivity.
+Sean’s need to maintain productivity across multiple domains is undermined if these routines do not provide contextual feedback. Without it, his ability to self-regulate during knowledge work or creative exploration may degrade.
 
 ## Evidence
 
-> - daily-driver morning failed to run (error), blocking core daily routines like quick-capture routing and inbox hygiene.
+> This concept refers to the tracking of agent statuses, such as their success or failure, and the associated logs. It enables insight into the health of automation infrastructure.
 
-> - vault-synthesizer successfully processed 41 concepts and 42 connections, advancing the vault as SSoT.
+> The result looks like freedom. It functions as organizational neglect.
 
 ## Examples
 
-- daily-driver morning is part of Automation Routines, but it failed on May 16.
-- vault-synthesizer is a successful example of Automation Routines working as intended.
+- Agent statuses logged without motivational context.
+- Automation health checks that do not inform human operators of their role in system efficacy.
 
 ## Related Concepts
 
-[[Automation Reliability]] [[Daily Note Generation]]
+[[Accountability Gap]] [[Infrastructure Status]]

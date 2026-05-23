@@ -5,13 +5,13 @@ connects:
   - Token Waste
   - Creative Studio Workflows
   - Cost-Capped Agentic Workflows
-created: 2026-05-22
-updated: 2026-05-22
+created: 2026-05-23
+updated: 2026-05-23
 ---
 
 ## Synthesis
 
-Token waste creates a tension between domains like creative-studio, job-hunt-2026, and Superuser Pack infrastructure. In each domain, excessive token costs stifle exploration and innovation due to budget constraints. This systemic inefficiency impedes Sean's ability to execute complex, high-impact workflows across domains, as he must constantly ration Claude usage rather than scaling it to meet strategic needs.
+Token waste creates a tension between domains like creative-studio, job-hunt-2026, and Superuser Pack infrastructure. In each domain, excessive token costs stifle exploration and innovation by compressing budgets for productive AI work. This pattern reveals a hidden constraint that affects Sean’s ability to scale workflows across domains, forcing trade-offs between depth and breadth of AI agent use.
 
 ## Threads
 
@@ -21,13 +21,13 @@ Token waste creates a tension between domains like creative-studio, job-hunt-202
 
 ### [[Creative Studio Workflows]]
 
-> Efficient token usage is a cross-domain issue affecting both Sean's creative work and job-hunt strategies.
+> Efficient token usage is a cross-domain issue affecting both Sean's creative work and job-hunt strategies. Reducing token waste through optimized prompts can improve productivity across domains.
 
 ### [[Cost-Capped Agentic Workflows]]
 
-> The issue stems from a lack of awareness around how contextual loading influences token usage, leading to unnecessary consumption and limiting the scale or depth of AI tasks that could be performed within budget.
+> Token waste limits both his job-hunting and creative workflows by tightening the budget for Claude usage.
 
 ## Implications
 
-- Token waste forces Sean to choose between scaling creative workflows or job-hunting research due to budget constraints.
-- Optimizing token usage could enable broader experimentation in both domains, but requires cross-domain coordination and infrastructure changes.
+- Without token optimization, Sean may be forced to reduce the scope of his creative projects due to budget constraints.
+- Token waste could hinder effective knowledge synthesis in the job-hunting domain, limiting Sean’s ability to build high-quality research agents.

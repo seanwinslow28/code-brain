@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/cross-domain-bridging.md
 tags: [auto-generated, phase-6]
-created: 2026-05-22
-updated: 2026-05-22
+created: 2026-05-23
+updated: 2026-05-23
 ---
 
 ## Definition
 
-A tension between the efficiency of solo execution and the overhead of organizational coordination. This mechanism is rooted in how AI amplifies individual capability while traditional structures reduce it through bureaucracy, leading to an asymmetry in output velocity between solo founders and teams. This bridging mechanism requires a conscious reconfiguration of how value is captured across domains, as traditional hierarchies may not align with the decentralized nature of AI-enhanced execution.
+A tension between the efficiency of solo execution and the overhead introduced by traditional organizational coordination. This mechanism is rooted in how AI amplifies individual capability while traditional structures reduce it through bureaucracy, leading to an asymmetry in output velocity between solo founders and teams. This bridging mechanism requires a conscious reconfiguration of how value is captured across domains, as traditional hierarchies may not align with the decentralized nature of AI-enhanced execution.
 
 ## Context
 

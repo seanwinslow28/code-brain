@@ -2622,7 +2622,7 @@ The plan is "done" when:
 
 ### Phase 0 answers
 
-- **Alienware OS:** (Windows 11 / Linux / dual-boot)
+- **Alienware OS:** Windows 11
 - **Alienware power state behavior:** (sleeps after X min / hibernates / stays on)
 - **BIOS WoL previously enabled?:** (yes / no / unknown)
 - **Alienware Ollama version:** (semver)

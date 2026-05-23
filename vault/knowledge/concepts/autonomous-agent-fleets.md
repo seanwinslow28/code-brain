@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/autonomous-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-05-22
-updated: 2026-05-22
+created: 2026-05-23
+updated: 2026-05-23
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ A distributed architecture where multiple autonomous agents operate in coordinat
 
 ## Context
 
-Sean's workflow depends on 14 launchd SDK agents and 13 Claude Code subagents operating in concert. If one agent fails to update persistent context, another might act on outdated information, leading to misaligned automation. This risk is especially acute when agents fail silently without user notification.
+Sean's workflow depends on a network of autonomous agents, including launchd SDK agents and Claude Code subagents, which operate in coordination but are vulnerable to propagation of errors when one agent fails silently without updating shared context.
 
 ## Evidence
 
@@ -25,7 +25,6 @@ Sean's workflow depends on 14 launchd SDK agents and 13 Claude Code subagents op
 ## Examples
 
 - A Pi agent may read a daily note to determine the user’s current task and then generate code. If that agent fails silently and does not update the note, a downstream agent may execute outdated instructions without Sean's awareness.
-- The Homebrew formula `pi-coding-agent` is MIT-licensed and currently tracks stable `0.75.3`.
 
 ## Related Concepts
 

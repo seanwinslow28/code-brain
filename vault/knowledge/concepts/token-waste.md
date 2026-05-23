@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/token-waste.md
 tags: [auto-generated, phase-6]
-created: 2026-05-22
-updated: 2026-05-22
+created: 2026-05-23
+updated: 2026-05-23
 ---
 
 ## Definition
 
-Token waste emerges from a producer/consumer pattern where AI agents consume excessive tokens due to unoptimized contextual loading, such as non-cached system prompts or reference documents. This creates a hidden cost multiplier where the same output is paid for disproportionately more, compressing the effective budget available for productive AI work. The pattern relies on a misalignment between input requirements and resource caching, which escalates token costs without improving output quality.
+Token waste is a producer/consumer pattern where AI agents consume excessive tokens due to unoptimized contextual loading — such as non-cached system prompts or reference documents — which creates a hidden cost multiplier. This escalates token costs without improving output quality, compressing the effective budget for productive AI work. The underlying invariant is a misalignment between input requirements and resource caching, which causes the same output to be paid for disproportionately more.
 
 ## Context
 

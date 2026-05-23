@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/comprehension-audit.md
 tags: [auto-generated, phase-6]
-created: 2026-05-22
-updated: 2026-05-22
+created: 2026-05-23
+updated: 2026-05-23
 ---
 
 ## Definition
 
-A structured feedback loop where an AI model is tasked with identifying its own potential errors in a summary by re-evaluating the source material. This introduces a meta-cognitive layer where the model not only produces an analysis but also self-critiques it against original data, thereby surfacing uncertainties and gaps. The mechanism is inherently iterative, requiring a second pass through the data to ensure accuracy and reliability.
+A structured feedback loop where an AI model is tasked with identifying its own potential errors in a summary by re-evaluating the source material. This introduces a meta-cognitive layer where the model not only produces an analysis but also self-critiques it against original data, thereby surfacing uncertainties and gaps. The mechanism relies on an iterative process where a second pass through the data ensures accuracy, but also introduces caution and increased time requirements.
 
 ## Context
 
