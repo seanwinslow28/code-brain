@@ -1,0 +1,22 @@
+{
+  "clusters_sampled": 167,
+  "concepts_written": 42,
+  "connections_written": 29,
+  "duration_seconds": 2702.55,
+  "edges_rejected": 1,
+  "edges_written": 43,
+  "files_processed": 82,
+  "model_used": "qwen3-14b",
+  "rejected_count": 26,
+  "rejected_reasons": {
+    "restatement-definition": 7,
+    "thin-definition": 5,
+    "thin-evidence": 4,
+    "thin-synthesis": 4,
+    "thin-threads": 1
+  },
+  "run_id": "2026-05-23T15:49:54",
+  "skipped_thin_source": 0,
+  "status": "ok",
+  "wol_status": "mbp_awake"
+}
