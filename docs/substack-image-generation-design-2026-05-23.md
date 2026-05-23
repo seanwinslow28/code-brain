@@ -113,6 +113,8 @@ header_image: images/<post-slug>-header.png   # populated after generation
 
 Sean: "Generate the header image for `<post-slug>` post."
 
+**Dual-engine routing (v4.1.2, 2026-05-23):** Two image-generation skills are available — `gemini-image-gen` (Nano Banana 2) and `openai-image-gen` (GPT Image 2). For Steadman-aesthetic Substack headers, **`gemini-image-gen` is the primary engine** because OpenAI's API safety filter blocks the artist's name and Steadman-source reference images even with `moderation=low`. For non-Steadman editorial illustration with a single style-reference attached, `openai-image-gen` is the new default per Sean's 2026-05-23 ChatGPT-side validation. See [`CHANGELOG.md`](../CHANGELOG.md#412--2026-05-23) §4.1.2 for the full live-finding writeup and [`/.claude/skills/openai-image-gen/references/openai-image-capabilities.md`](../.claude/skills/openai-image-gen/references/openai-image-capabilities.md) §9 for the safety-filter cookbook.
+
 Claude Code:
 1. Read the .md, pull `voice_mode` from frontmatter (or detect from voice tone)
 2. Extract `POST_SUBJECT_ONE_SENTENCE` (load-bearing variable; ask Sean if not derivable)

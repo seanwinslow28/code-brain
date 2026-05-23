@@ -354,13 +354,23 @@ OpenAI does not publish a single canonical rate limit for image endpoints; limit
 
 ### Safety filter
 
-All prompts and outputs are filtered. Failure surfaces as `400 Bad Request` with a content-policy reason in the error body.
+All prompts and outputs are filtered. Failure surfaces as `400 Bad Request` with `code: "moderation_blocked"` and the message *"Your request was rejected by the safety system."*
 
 `moderation` parameter:
 - `auto` (default): standard filter
 - `low`: relaxed filter for legitimate editorial / artistic work
 
-Use `low` defensively for editorial illustration work that names real people, depicts political subjects, or uses provocative aesthetic language (e.g., the word "gonzo" in a Steadman context occasionally triggers `auto`).
+**Verified live 2026-05-23:** the API safety filter is materially stricter than the ChatGPT consumer UI. Three reproducible triggers observed against legitimate editorial-illustration work:
+
+1. **Naming "Ralph Steadman"** in the prompt → reliably blocked (even with `moderation=low`). The same prompt with the artist's name removed and the style described technique-by-technique (gestural ink, calligraphic flicks, pen-pressure variation, splatter) sails through. The gonzo-aesthetic association with substance-related imagery is the suspected trigger.
+2. **Steadman-style reference images** uploaded to `images.edit` → blocked even with `moderation=low`. Reference images whose own content trips the visual safety filter (intense expressions, drips, dripping color, characters from morally-coded TV) reject the entire call.
+3. The Python SDK's `images.edit()` does NOT expose `moderation` as a kwarg in version 2.38.0 (it's documented for the API but missing from the SDK signature). The script passes it via `extra_body={"moderation": "low"}` to push it through. Even then, it does not unblock the above two triggers.
+
+**Pragmatic guidance for Steadman-aesthetic / gonzo workflows:**
+- Describe the technique, not the artist. *"Gestural india-ink linework with visible pen-pressure variation, calligraphic flicks, and deliberate ink splatters"* outperforms *"in the style of Ralph Steadman"* across the API.
+- Do NOT pass Steadman-source reference images through `images.edit`. Use textual style description on `images.generate` instead.
+- For workflows that genuinely need a Steadman reference image, fall back to `gemini-image-gen` — Nano Banana 2's safety filter is less aggressive on artist-name + intense-imagery combinations.
+- For most other style anchors (Wes Anderson, Saul Steinberg, Maira Kalman, Edward Gorey, James Turrell, Hokusai etc.) the artist's name passes through fine. The Steadman / Hunter-S-Thompson lineage is the specific exception.
 
 ---
 
