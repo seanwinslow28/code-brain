@@ -2623,12 +2623,12 @@ The plan is "done" when:
 ### Phase 0 answers
 
 - **Alienware OS:** Windows 11
-- **Alienware power state behavior:** (sleeps after X min / hibernates / stays on)
-- **BIOS WoL previously enabled?:** (yes / no / unknown)
-- **Alienware Ollama version:** (semver)
-- **Alienware current models:** (output of `ollama list`)
-- **MBP unified memory:** (X GB)
-- **Decision on 35B Tier A candidates given memory:** (proceed / skip)
+- **Alienware power state behavior:** Stays on indefinitely on AC. Balanced scheme: `STANDBYIDLE` AC=0 (never sleep), `HIBERNATEIDLE` AC=0 (never hibernate), hybrid sleep on (inert while sleep-timeout=0), wake timers enabled on AC. Idle-sleep policy will be set to 30 min in Task 2.4.
+- **BIOS WoL previously enabled?:** unknown → treat as no. `Get-NetAdapterPowerManagement` soft check returned Error 31 (one virtual adapter aborted the pipeline). Task 2.1 BIOS+OS enablement still required.
+- **Alienware Ollama version:** 0.21.0 — well above the 0.4.5 floor; no upgrade needed.
+- **Alienware current models:** `qwen3-vl:8b` only (~5GB). **Drift:** `config.toml:278` says `Qwen3-VL-7B` — actual is the 8B variant. Non-blocking; correct config.toml line in Phase 2 or 3.
+- **MBP unified memory:** 48 GB — exactly at threshold.
+- **Decision on 35B Tier A candidates given memory:** proceed (both `qwen3.5:35b` and `qwen3.6:35b` stay in Tier A). Operator note: schedule those sweeps when MBP isn't being used interactively — 24GB model + KV cache + macOS leaves no headroom for IDE/browser.
 - **Disk free MBP / Mac Mini / Alienware:** (X / Y / Z GB)
 - **Deco AP isolation:** (on / off)
 - **MBP currently reachable?:** (yes / no / asleep)
