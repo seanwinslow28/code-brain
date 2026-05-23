@@ -2,31 +2,31 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - 00_inbox/Executive Briefing Valve Got Lord of the Flies. Zappos Got Paralysis. Your Reorg Is Next..md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/2026-05-10-the-night-my-vault-said-nothing.md
 tags: [auto-generated, phase-6]
-created: 2026-05-21
-updated: 2026-05-21
+created: 2026-05-23
+updated: 2026-05-23
 ---
 
 ## Definition
 
-The consistent and dependable performance of automation systems, particularly in tasks like routing information or executing routines, is crucial for organizational stability.
+The invariant that automation systems must not only function but also report their status truthfully. When an agent fails silently, it creates a hidden dependency between the user's decision-making and the system's internal health. This is especially concerning when the system's output is used as a foundation for subsequent actions, including content generation and strategic planning.
 
 ## Context
 
-Sean must understand the trade-offs between automation reliability and manual process redundancy, especially in contexts where agent systems rely on these tools.
+For Sean, this is critical because his daily decision-making relies on the status of his agents. If automation fails silently, it creates a feedback loop where decisions are made based on false assumptions about system health.
 
 ## Evidence
 
-> 'Routing is automatable now.'
+> There is a moment, somewhere around the eighth night that an automated system has been quietly producing nothing while reporting that everything is fine, when you start to wonder which of you is the real problem.
 
-> 'You’re spending leadership attention to manually do what software does better, while the thing that’s actually broken goes unaddressed.'
+> The theme of all of it, repeated until it became a kind of liturgy, was this: evals are the new PRDs.
 
 ## Examples
 
-- Routing is a function that can be fully automated using AI.
-- Organizations often fail by focusing on automating routing while ignoring accountability.
+- The vault synthesizer failed to produce output for nine consecutive nights while still publishing status reports as 'ok'.
+- The system's ability to self-report its health is insufficient if it cannot detect or announce internal failure modes.
 
 ## Related Concepts
 
-[[Automation and Daily Drive Agent Interdependence]] [[Daily Routine Automation]]
+[[Agent Health Monitoring]] [[Eval Vocabulary]]

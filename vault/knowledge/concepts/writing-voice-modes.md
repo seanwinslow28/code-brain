@@ -2,30 +2,32 @@
 title: "Writing-voice-modes"
 type: concept
 sources:
-  - knowledge/concepts/writing-voice-modes.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/experiments/voice-calibration/2026-05-14-intent-engineering-mcp.md
 tags: [auto-generated, phase-6]
-created: 2026-05-22
-updated: 2026-05-22
+created: 2026-05-23
+updated: 2026-05-23
 ---
 
 ## Definition
 
-A tonal calibration system that functions as a modular constraint framework, anchoring Sean's writing to predefined authorial voices. It operates through implicit rules that enforce stylistic boundaries, requiring conscious mode selection during writing. This system transforms voice into a tool rather than an innate trait, allowing Sean to shift between tones with deliberate control.
+A modular constraint framework that anchors Sean's writing to predefined authorial voices, functioning as a tonal calibration system. It operates through implicit rules that enforce stylistic consistency, enabling the model to generate content with specific tonal and structural characteristics. The system is designed to be cross-mode, allowing signature moves like 'Hard Cut / Deflation' or 'Sensory Before Numbers' to be applied instinctively across different writing modes.
 
 ## Context
 
-This system is crucial for maintaining tonal consistency across Sean's creative output — from personal blogs to professional branding. It also enables adaptive tone selection for different audiences, ensuring that eccentricity is reserved for personal projects while restraint is maintained in professional contexts.
+This system is crucial for Sean's creative workflows, ensuring tonal consistency across personal blogs, professional branding, and job-hunting content. It enables him to maintain a unified voice while adapting to different formats or contexts, which strengthens his narrative control and audience connection.
 
 ## Evidence
 
-> Control HOW writing sounds by applying one of 5 voice modes calibrated to Sean Winslow's personal style.
+> The natural voice. Load this when no specific mode is requested.
 
-> The rollback took four minutes. The post-mortem took three weeks. The lesson was simple. I had tested in staging.
+> Build epic register, land mundane/absurd in final clause
+
+> Sensory Before Numbers — Smells, sounds, images FIRST. Numbers confirm and anchor.
 
 ## Examples
 
-- I spent eleven months building Zapier workflows with the quiet devotion of a man assembling IKEA furniture — following instructions I half-understood, ignoring the leftover pieces, and telling myself it looked right enough.
-- I DEPLOYED TO PRODUCTION at 11:47 PM on a Wednesday because I am a person who makes decisions like that.
+- Here's the deal — we'll architect the perfect system, ship it, scale it, and then we'll burn it all, throw our hands in the air, and question everything.
+- Nostrils flare, pupils dilate, sweat drips. Then: '847 errors in ninety seconds.'
 
 ## Related Concepts
 
