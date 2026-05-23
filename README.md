@@ -2,7 +2,7 @@
 
 > *One engineer's working second brain — skills, an agent fleet, and a knowledge graph that thinks back.*
 
-An open-source agentic engineering practitioner's toolkit — **118** skills, 13 subagents, **14** hooks, **18** autonomous SDK agents (9 currently running on launchd by default, 2 opt-in disabled-by-default, 1 manual-trigger), **3 primary domains**, an Obsidian vault, and a Claude Agent SDK runtime, all auto-loaded. Every component is in active use; every scheduled agent has a launchd schedule; every skill is a prompt and every prompt has a job. A local verbatim TTS pipeline (Kokoro-82M ONNX, $0/run on Apple Silicon) turns vault docs into MP3s for commute listening. If you've read Karpathy's "agentic engineering" framing and wondered what one looks like in the wild, this is one.
+An open-source agentic engineering practitioner's toolkit — **119** skills, 13 subagents, **14** hooks, **18** autonomous SDK agents (9 currently running on launchd by default, 2 opt-in disabled-by-default, 1 manual-trigger), **3 primary domains**, an Obsidian vault, and a Claude Agent SDK runtime, all auto-loaded. Every component is in active use; every scheduled agent has a launchd schedule; every skill is a prompt and every prompt has a job. A local verbatim TTS pipeline (Kokoro-82M ONNX, $0/run on Apple Silicon) turns vault docs into MP3s for commute listening. If you've read Karpathy's "agentic engineering" framing and wondered what one looks like in the wild, this is one.
 
 ## What's Inside
 
@@ -90,9 +90,9 @@ Skills and agents prefer native MCPs over Zapier where both exist. Currently con
 
 Zapier retained only for services with no native MCP: Salesforce, GA4, Webhooks, Code execution.
 
-### 118 Skills Across 12 Export Groups
+### 119 Skills Across 12 Export Groups
 
-> The 12 export groups roll up 117 of the 118 skills. The new `llm-council` skill (v3.35.0) is not in any export group — it's a personal-use multi-vendor critique tool dependent on the in-tree `tools/llm-council/` Python CLI, so it doesn't ship via the installer. See [`tools/llm-council/README.md`](tools/llm-council/README.md) for details.
+> The 12 export groups roll up 117 of the 119 skills. The `llm-council` skill (v3.35.0) and `openai-image-gen` skill (v4.1.2) are not in any export group — both are personal-use tools depending on in-tree assets that don't ship via the installer. See [`tools/llm-council/README.md`](tools/llm-council/README.md) and [`.claude/skills/openai-image-gen/SKILL.md`](.claude/skills/openai-image-gen/SKILL.md).
 
 All skills auto-load from `.claude/skills/`. Reference them naturally in prompts.
 
