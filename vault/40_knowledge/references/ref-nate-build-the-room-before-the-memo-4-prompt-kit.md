@@ -8,9 +8,10 @@ created: 2026-05-23
 description: "Watch now | The first useful agent workflow is not generation. It is getting the work surface into shape."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Nate Jones' 4-prompt 'project room' workflow — inventory sources, log duplicates, flag missing context, then write the grounded draft. Reframes prompt-engineering as preparing the work surface before generation."
 ---
 When AI produces a mediocre draft from a messy folder, the prompt is almost never the problem. The room is.
 

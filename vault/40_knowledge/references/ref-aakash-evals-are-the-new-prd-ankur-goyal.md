@@ -8,9 +8,10 @@ created: 2026-05-23
 description: "Learn the data-task-scores eval framework from Braintrust CEO Ankur Goyal. Build evals from scratch, iterate fast, and ship better AI products."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [product-management]
+ai-context: "Aakash Gupta podcast with Braintrust CEO Ankur Goyal on running 12.8 eval experiments per day as the new PM operating cadence — why evals replace the PRD as the primary spec artifact for AI products."
 ---
 The Growth Podcast
 

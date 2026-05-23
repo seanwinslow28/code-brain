@@ -8,9 +8,10 @@ created: 2026-05-23
 description: "Everyone has to start somewhere (and this is a good place to start)."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Nate Jones' AI-basics primer: LLMs are 'sophisticated autocomplete' trained on patterns, not encyclopedias — explains why models draft well, summarize fast, and confidently hallucinate niche facts."
 ---
 I once spent two hours trying to get AI to help me write a high-stakes email. Nothing worked. The outputs were generic, the tone was wrong, and I finally gave up and wrote the thing myself in twenty minutes.
 
