@@ -8,9 +8,10 @@ created: 2026-05-23
 description: "Three AI requests that replace the blank-page panic."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Nate Jones' three reusable starter prompts — quick draft, explain something, brainstorm — designed to do the thinking once and skip the blank-text-box paralysis on every reuse."
 ---
 If you’ve been following along, you’ve probably already used AI a few times — a draft email here, a dinner idea there. Each time, you typed something, got something back, and moved on.
 

@@ -8,9 +8,10 @@ created: 2026-05-23
 description: "When to use AI, how to pick the right technique, RAG vs fine tuning, AI agents, and the exact roadmap to becoming an AIPM from an ex-Netflix AI PM director."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [product-management]
+ai-context: "Aakash Gupta podcast with ex-Netflix/Amazon/Meta AI PM director Jyothi Nookula: when to use AI, picking the right technique (RAG vs fine-tuning vs agents), and the concrete roadmap to becoming an AI PM."
 ---
 Jyothi Nookula has worked as an AI PM at the top companies. Today, she shares the complete roadmap to becoming one yourself
 

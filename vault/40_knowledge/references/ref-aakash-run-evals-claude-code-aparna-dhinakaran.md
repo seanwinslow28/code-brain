@@ -8,9 +8,10 @@ created: 2026-05-23
 description: "Install Arize skills, ask Claude to suggest evals, and build a self-improving loop. Exact commands and steps with Aparna Dhinakaran, CPO of Arize AI."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Aakash Gupta podcast with Arize CPO Aparna Dhinakaran on running observability and evals from inside Claude Code — why getting evals wrong is the signal, and how the PM/engineer gap collapses on AI-native teams."
 ---
 Here's the exact prompts and steps to build evals in minutes
 

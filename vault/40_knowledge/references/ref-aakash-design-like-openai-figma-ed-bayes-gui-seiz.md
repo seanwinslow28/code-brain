@@ -8,9 +8,10 @@ created: 2026-05-23
 description: "OpenAI design lead and Figma AI design director show the code-canvas loop, live demo, and 5-step adoption roadmap for any team."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [creative-studio]
+ai-context: "Aakash Gupta podcast with Ed Bayes and Gui Seiz on the design language and process used at OpenAI and Figma — taste, system-driven UI, and how design teams operate inside AI-native product companies."
 ---
 Ed Bayers leads design on Codex at OpenAI and Gui Seiz leads AI design at Figma. Today, they drop a masterclass on the new design workflow
 

@@ -8,9 +8,10 @@ created: 2026-05-23
 description: "Set ChatGPT's custom instructions once and stop retyping your preferences. A 10-minute setup, plus a starter template you can paste right now."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Nate Jones' 10-minute walkthrough of ChatGPT's Personalization page — what to put in About You vs Custom Instructions, plus a starter template you can paste once and stop retyping preferences in every chat."
 ---
 If you tried Wednesday’s five lines, you’ve spent the last few days pasting them at the end of every AI request. After a week of that, the novelty wears off. The lines work, but typing them out (or remembering to copy them) gets old fast.
 

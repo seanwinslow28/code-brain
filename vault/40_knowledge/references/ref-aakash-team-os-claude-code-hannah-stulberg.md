@@ -8,9 +8,10 @@ created: 2026-05-23
 description: "How to structure a shared repo so engineers, designers, and analysts self-serve product context. Plan mode, parallel agents, and the automation-to-learning flywheel."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Aakash Gupta podcast with DoorDash PM Hannah Stulberg on building a 'Team OS' inside Claude Code — shared agents, hooks, skills, and rituals that scale a PM/Eng team's working memory."
 ---
 What it actually looks like when a PM checks in every document, every metric, every customer call into a shared repo - and the whole team queries it themselves.
 

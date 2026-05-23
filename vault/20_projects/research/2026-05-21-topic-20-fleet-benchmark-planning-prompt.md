@@ -4,6 +4,7 @@ date: 2026-05-21
 purpose: Paste-ready prompt for a fresh Claude Code session. Will invoke the `/writing-plans` skill to produce a thorough, executable plan for Topic 20 — pulling and benchmarking newer Ollama models (Qwen 3.5 / 3.6 / Nemotron3 / gemma4 26B-MoE) across Sean's 3-device fleet, with PC wake-on-LAN architecture for the Alienware so the desktop doesn't have to run overnight.
 target_session: Fresh Claude Code session, working directory = /Users/seanwinslow/Code-Brain/code-brain
 tags: [planning, topic-20, fleet-benchmark, ollama, wake-on-lan, paste-ready]
+ai-context: "Paste-ready /writing-plans prompt for Topic 20 — pull and benchmark Qwen 3.5/3.6, Nemotron3, gemma4 26B-MoE across Sean's 3-device fleet with PC wake-on-LAN. The resulting plan is committed at agents-sdk/docs/plans/2026-05-21-topic-20-fleet-model-refresh-benchmarks-plan.md."
 ---
 
 # Paste-Ready Prompt — Topic 20 Pull-and-Benchmark Plan

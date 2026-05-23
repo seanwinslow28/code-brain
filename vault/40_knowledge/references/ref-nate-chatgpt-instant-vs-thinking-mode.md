@@ -8,9 +8,10 @@ created: 2026-05-23
 description: "I ran the same prompt through ChatGPT's Instant and Thinking modes. The answers weren't the same. Here's what changed, and when the slower one is worth it."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Nate Jones runs the same prompt through ChatGPT's Instant and Thinking modes on a fictional 'Dingo Bros' test case — Thinking mode catches the legal/ethical landmines Instant glosses over."
 ---
 You’ve probably noticed a little dropdown in ChatGPT (and most other AI tools now) that lets you pick how the model thinks. One option answers right away. The other takes thirty seconds, sometimes longer, before it gives you anything back.
 
