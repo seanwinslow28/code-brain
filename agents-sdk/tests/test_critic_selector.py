@@ -6,6 +6,8 @@ import pytest
 
 from lib.critic_selector import (
     list_macmini_synth_files,
+    resolve_expansion_path,
+    select_manual_targets,
     select_target_articles,
 )
 
@@ -156,3 +158,98 @@ def test_select_target_articles_skips_when_manifest_status_is_error(monkeypatch,
 
     targets = select_target_articles(tmp_vault, date_iso=today, max_targets=3)
     assert targets == []
+
+
+# ---------------------------------------------------------------------------
+# Manual-mode helpers (Sean's on-demand critique of existing corpus, 2026-05-24)
+# ---------------------------------------------------------------------------
+
+
+def _write_connection(vault_root: Path, slug: str) -> Path:
+    p = vault_root / "vault" / "knowledge" / "connections" / f"{slug}.md"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(
+        f'---\ntitle: "{slug}"\ntype: connection\n---\n\nbody\n',
+        encoding="utf-8",
+    )
+    return p
+
+
+def test_resolve_expansion_path_routes_concepts_flat_and_connections_to_subfolder(
+    tmp_vault,
+):
+    """One concrete slug collision exists in prod
+    (automation-failure-and-daily-note-disruption.md exists in both concepts/
+    and connections/). The expansion path must namespace them apart so the
+    second-critiqued doesn't clobber the first."""
+    concept_path = _write_concept(tmp_vault, "shared-slug", "Shared")
+    connection_path = _write_connection(tmp_vault, "shared-slug")
+
+    concept_exp = resolve_expansion_path(tmp_vault, concept_path)
+    connection_exp = resolve_expansion_path(tmp_vault, connection_path)
+
+    assert concept_exp == tmp_vault / "vault" / "knowledge" / "expansions" / "shared-slug.md"
+    assert connection_exp == (
+        tmp_vault / "vault" / "knowledge" / "expansions" / "connections" / "shared-slug.md"
+    )
+    assert concept_exp != connection_exp
+
+
+def test_select_manual_targets_filters_missing_outside_and_existing(tmp_vault):
+    """Manual mode must drop: paths that don't exist, paths outside the
+    concepts/connections corpus, and paths whose expansion already exists
+    (the 4 hand-vetted expansions stay untouched without --force).
+    All skips surface as warnings, never errors."""
+    keeper = _write_concept(tmp_vault, "fresh-concept", "Fresh")
+    already_done = _write_concept(tmp_vault, "already-critiqued", "Done")
+    # Mark the second concept as already-expanded.
+    (tmp_vault / "vault" / "knowledge" / "expansions" / "already-critiqued.md").write_text(
+        "existing expansion", encoding="utf-8"
+    )
+    # An unrelated vault file (not a concept/connection).
+    (tmp_vault / "vault" / "knowledge").mkdir(parents=True, exist_ok=True)
+    stray = tmp_vault / "vault" / "knowledge" / "index.md"
+    stray.write_text("index", encoding="utf-8")
+
+    inputs = [
+        Path("vault/knowledge/concepts/fresh-concept.md"),
+        Path("vault/knowledge/concepts/already-critiqued.md"),
+        Path("vault/knowledge/concepts/missing-file.md"),
+        Path("vault/knowledge/index.md"),
+    ]
+    selected, warnings = select_manual_targets(tmp_vault, targets=inputs, force=False)
+
+    assert selected == [keeper]
+    assert len(warnings) == 3
+    assert any("already-critiqued" in w for w in warnings)
+    assert any("missing" in w for w in warnings)
+    assert any("index.md" in w for w in warnings)
+    # Sanity: the already-done expansion was not mutated by selection.
+    _ = already_done  # explicit reference to keep linter quiet
+
+
+def test_select_manual_targets_force_includes_already_critiqued(tmp_vault):
+    """--force re-critiques even when an expansion file exists, for when Sean
+    wants a fresh pass against an updated source concept."""
+    p = _write_concept(tmp_vault, "redo-me", "Redo")
+    (tmp_vault / "vault" / "knowledge" / "expansions" / "redo-me.md").write_text(
+        "stale expansion", encoding="utf-8"
+    )
+    selected, warnings = select_manual_targets(
+        tmp_vault, targets=[Path("vault/knowledge/concepts/redo-me.md")], force=True,
+    )
+    assert selected == [p]
+    assert warnings == []
+
+
+def test_select_manual_targets_accepts_connections(tmp_vault):
+    """Connections folder is a valid manual-mode source (the nightly selector
+    is concepts-only; manual mode opens up the connections corpus too)."""
+    p = _write_connection(tmp_vault, "neat-connection")
+    selected, warnings = select_manual_targets(
+        tmp_vault,
+        targets=[Path("vault/knowledge/connections/neat-connection.md")],
+        force=False,
+    )
+    assert selected == [p]
+    assert warnings == []

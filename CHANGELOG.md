@@ -5,6 +5,41 @@ All notable changes to Code-Brain (formerly *Claude Code Superuser Pack*) will b
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.3] — 2026-05-24
+
+**vault_critic ships manual mode for on-demand critique of the existing knowledge corpus.** First four nightly expansions ([`comprehension-audit`](vault/knowledge/expansions/comprehension-audit.md), [`daily-note-generation`](vault/knowledge/expansions/daily-note-generation.md), [`token-waste`](vault/knowledge/expansions/token-waste.md), [`writing-voice-modes`](vault/knowledge/expansions/writing-voice-modes.md)) validated the Codex + Anti-Gravity critique format as high-signal; this opens up the back-catalog of 108 concepts and 256 connections for hand-picked deeper passes. The nightly selector path is unchanged — same 03:30 fire, same PR-contamination filter, same manifest gate.
+
+### Added
+
+- **[`agents-sdk/agents/vault_critic.py`](agents-sdk/agents/vault_critic.py) — `--target <path>` (repeatable), `--from-list <file>`, `--force` flags.** Manual mode bypasses the nightly selector entirely; targets are taken as the curated list. `--from-list` reads a newline-separated file (ignores blank lines + `#` comments) so a batch can be staged in a scratch file. `--force` re-critiques even when an expansion already exists (default: skip, preserving the snapshot semantics that protect the existing four expansions). Concepts and connections are both valid sources.
+- **[`agents-sdk/lib/critic_selector.py`](agents-sdk/lib/critic_selector.py) — `resolve_expansion_path()` and `select_manual_targets()`.** The first maps a source article to its expansion path, routing connections to a `connections/` subfolder so same-slugged files in `concepts/` and `connections/` (one collision exists today: `automation-failure-and-daily-note-disruption.md`) cannot clobber each other. The second filters a hand-picked path list against existence, corpus-membership, and prior expansion, returning skip warnings rather than erroring.
+- **Manual-run manifests at `vault/health/critic-manifest-{date}-manual-{HHMMSS}.json`** keep on-demand critiques from overwriting the nightly `critic-manifest-{date}.json` that the meta-agent and fleet-summary read. The suffix is also surfaced in `--dry-run` output so the destination is visible before the run.
+
+### Changed
+
+- **Expansion path layout** — concepts continue to land at `vault/knowledge/expansions/{slug}.md` (the four existing files are untouched). Connection critiques now land at `vault/knowledge/expansions/connections/{slug}.md`. The nightly path is concepts-only and unaffected; the subfolder is created lazily by manual runs.
+- **`write_critic_manifest()` accepts a `suffix` kwarg** (default empty); **`run()` accepts `targets_override`, `manifest_suffix`, and `pre_warnings` kwargs** (all default to the nightly behavior). All existing call sites work unchanged.
+
+### Tests
+
+- 8 new tests across [`tests/test_critic_selector.py`](agents-sdk/tests/test_critic_selector.py) and [`tests/test_vault_critic.py`](agents-sdk/tests/test_vault_critic.py): expansion-path routing for the concepts/connections collision case, `select_manual_targets()` skip + force semantics, `run()` bypassing the manifest gate with `targets_override`, manifest-suffix isolation from the nightly path, `pre_warnings` merging into the final manifest, and a `main()` dry-run covering the manual CLI flags. All 34 critic tests pass.
+
+### Usage
+
+```bash
+# Critique a single concept on-demand
+PYTHONPATH=. .venv/bin/python agents/vault_critic.py \
+  --target vault/knowledge/concepts/agent-health.md
+
+# Curated batch from a scratch file
+cat > /tmp/critic-batch.txt <<'EOF'
+# 2026-05-24 hand-pick
+vault/knowledge/concepts/agent-health.md
+vault/knowledge/connections/automation-failure-and-daily-note-disruption.md
+EOF
+PYTHONPATH=. .venv/bin/python agents/vault_critic.py --from-list /tmp/critic-batch.txt --dry-run
+```
+
 ## [4.1.2] — 2026-05-23
 
 **openai-image-gen — second image-generation engine ships with hard-won safety-filter intelligence.** Born from Sean's 2026-05-23 ChatGPT-side validation that OpenAI image outputs landed better than Nano Banana 2 for his Substack-header workflow with a Steadman reference attached. Universal-purpose Claude Code Skill at [`.claude/skills/openai-image-gen/`](.claude/skills/openai-image-gen/) wrapping OpenAI GPT Image 2 (`gpt-image-2`, the third-generation flagship released 2026-04-21). Mirrors the file structure + CLI surface + 7-Layer-Framework integration of `gemini-image-gen` so the two engines are drop-in interchangeable. Same flags: positional `prompt`, `-o/--output`, `--aspect-ratio` (mapped to OpenAI divisible-by-16 sizes), `--reference / -r`, `--env-file`, `--model`, `--quality {low,medium,high,auto}`, `--n {1..10}`, plus the new `--moderation {auto,low}`. Routes to `images.edit` automatically when `--reference` is set; otherwise `images.generate`. Skill total: 118 → 119.

@@ -504,3 +504,136 @@ def test_main_dry_run_lists_targets_without_calling_clis(tmp_repo, monkeypatch, 
     out = capsys.readouterr().out
     assert "DRY RUN" in out
     assert "x.md" in out
+
+
+# ---------------------------------------------------------------------------
+# Manual mode — on-demand critique of existing concepts/connections (2026-05-24)
+# ---------------------------------------------------------------------------
+
+
+def _make_connection_at(vault_root: Path, slug: str) -> Path:
+    p = vault_root / "vault" / "knowledge" / "connections" / f"{slug}.md"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(
+        f'---\ntitle: "{slug}"\ntype: connection\n---\n\nbody [[wiki]]\n',
+        encoding="utf-8",
+    )
+    return p
+
+
+def test_critique_one_article_routes_connection_to_subfolder(tmp_path):
+    """A connection source must land at expansions/connections/{slug}.md so
+    it can't clobber a same-slugged concept (the prod collision is
+    automation-failure-and-daily-note-disruption.md)."""
+    (tmp_path / "vault" / "knowledge" / "expansions").mkdir(parents=True)
+    conn = _make_connection_at(tmp_path, "shared-slug")
+
+    async def go():
+        with patch("agents.vault_critic.run_codex",
+                   AsyncMock(return_value=_ok("codex", "codex body", 100))), \
+             patch("agents.vault_critic.run_antigravity",
+                   AsyncMock(return_value=_ok("antigravity", "gemini body", 100))):
+            return await critique_one_article(
+                repo_root=tmp_path, article_path=conn,
+                recent_titles=[], today="2026-05-24", per_cli_timeout_s=60,
+            )
+
+    expansion_path, _, _ = asyncio.run(go())
+    expected = tmp_path / "vault" / "knowledge" / "expansions" / "connections" / "shared-slug.md"
+    assert expansion_path == expected
+    assert expansion_path.exists()
+    # Concept-style flat path must NOT have been written.
+    assert not (tmp_path / "vault" / "knowledge" / "expansions" / "shared-slug.md").exists()
+
+
+def test_run_with_targets_override_bypasses_selector_and_manifest_gate(tmp_repo):
+    """Manual mode supplies paths directly. Even with no synth-manifest for
+    today (the 2026-05-15 MBP-offline case), the run must still execute
+    against the override list rather than exiting success-empty."""
+    p = _make_concept_at(tmp_repo, "manually-picked")
+    # Explicitly DO NOT write a synth-manifest — proves manifest gate is bypassed.
+
+    async def go():
+        with patch("agents.vault_critic.run_codex",
+                   AsyncMock(return_value=_ok("codex", "c", 100))), \
+             patch("agents.vault_critic.run_antigravity",
+                   AsyncMock(return_value=_ok("antigravity", "g", 100))):
+            return await run_critic(
+                repo_root=tmp_repo,
+                date_iso="2026-05-24",
+                max_targets=3,
+                wall_budget_s=600,
+                targets_override=[p],
+                manifest_suffix="-manual-103045",
+            )
+
+    result = asyncio.run(go())
+    assert result.status == STATUS_OK
+    assert result.articles_critiqued == 1
+    # The manifest landed at the suffixed path, NOT the nightly path.
+    manual = tmp_repo / "vault" / "health" / "critic-manifest-2026-05-24-manual-103045.json"
+    nightly = tmp_repo / "vault" / "health" / "critic-manifest-2026-05-24.json"
+    assert manual.exists()
+    assert not nightly.exists()
+
+
+def test_run_pre_warnings_are_merged_into_manifest(tmp_repo):
+    """Manual-mode skip notes (missing path, already-critiqued, etc.) must
+    surface in the final manifest's warnings list so the run record is
+    self-documenting."""
+    p = _make_concept_at(tmp_repo, "p")
+
+    async def go():
+        with patch("agents.vault_critic.run_codex",
+                   AsyncMock(return_value=_ok("codex", "c", 100))), \
+             patch("agents.vault_critic.run_antigravity",
+                   AsyncMock(return_value=_ok("antigravity", "g", 100))):
+            return await run_critic(
+                repo_root=tmp_repo,
+                date_iso="2026-05-24",
+                targets_override=[p],
+                manifest_suffix="-manual-104000",
+                pre_warnings=["skip missing: nope.md"],
+            )
+
+    result = asyncio.run(go())
+    assert "skip missing: nope.md" in result.warnings
+    payload = json.loads((
+        tmp_repo / "vault" / "health" / "critic-manifest-2026-05-24-manual-104000.json"
+    ).read_text(encoding="utf-8"))
+    assert "skip missing: nope.md" in payload["warnings"]
+
+
+def test_main_target_flag_dry_run_prints_manual_targets(tmp_repo, monkeypatch, capsys):
+    """--target flips main() into manual mode: lists the hand-picked targets,
+    uses a -manual-{HHMMSS} manifest suffix, and never invokes run()."""
+    _make_concept_at(tmp_repo, "pick-me")
+
+    async def must_not_call(*a, **k):
+        raise AssertionError("run() must not be called under --dry-run")
+    monkeypatch.setattr("agents.vault_critic.run", must_not_call)
+
+    from lib.config import Config, SafetyConfig
+    fake_config = Config(
+        repo_root=tmp_repo, vault_root=tmp_repo / "vault",
+        skills_dir=tmp_repo / ".claude/skills",
+        life_systems_scripts=tmp_repo / "life-systems/scripts",
+        log_dir=tmp_repo / "vault/90_system/agent-logs",
+        log_level="INFO",
+        safety=SafetyConfig(),
+        agents={}, anthropic_api_key=None, artifacts={},
+    )
+    monkeypatch.setattr("agents.vault_critic.load_config", lambda: fake_config)
+
+    rc = main([
+        "--dry-run",
+        "--target", "vault/knowledge/concepts/pick-me.md",
+        "--target", "vault/knowledge/concepts/does-not-exist.md",
+    ])
+    assert rc == 0
+    out = capsys.readouterr().out
+    assert "manual" in out
+    assert "pick-me.md" in out
+    assert "critic-manifest-" in out and "-manual-" in out
+    # The non-existent path surfaces as a skip warning.
+    assert "does-not-exist.md" in out
