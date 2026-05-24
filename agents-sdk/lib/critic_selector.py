@@ -21,10 +21,76 @@ from datetime import date
 from pathlib import Path
 
 CONCEPTS_REL = "vault/knowledge/concepts"
+CONNECTIONS_REL = "vault/knowledge/connections"
 EXPANSIONS_REL = "vault/knowledge/expansions"
+EXPANSIONS_CONNECTIONS_REL = "vault/knowledge/expansions/connections"
 HEALTH_REL = "vault/health"
 SYNTH_WINDOW_START_HOUR = "02:00"
 SYNTH_WINDOW_END_HOUR = "04:00"
+
+
+def resolve_expansion_path(repo_root: Path, article_path: Path) -> Path:
+    """Map a source article path to its expansion file path.
+
+    Connections route to `vault/knowledge/expansions/connections/{slug}.md` so
+    they don't collide with same-slugged concepts (e.g.
+    `automation-failure-and-daily-note-disruption.md` exists in both folders).
+    Concepts stay at `vault/knowledge/expansions/{slug}.md`, preserving the
+    existing flat layout and the 4 hand-vetted expansion files already shipped.
+    """
+    try:
+        rel_str = str(article_path.relative_to(repo_root))
+    except ValueError:
+        rel_str = ""
+    if rel_str.startswith(f"{CONNECTIONS_REL}/"):
+        return repo_root / EXPANSIONS_CONNECTIONS_REL / article_path.name
+    return repo_root / EXPANSIONS_REL / article_path.name
+
+
+def select_manual_targets(
+    repo_root: Path,
+    *,
+    targets: list[Path],
+    force: bool = False,
+) -> tuple[list[Path], list[str]]:
+    """Filter a manually-curated target list. Bypasses the manifest gate and
+    PR-contamination filter that protect the nightly path; the caller is
+    hand-picking from the existing concepts/connections corpus.
+
+    Skip rules (logged as warnings, not errors):
+      - path doesn't exist
+      - path is outside `vault/knowledge/{concepts,connections}/`
+      - expansion already exists and `force` is False (snapshot semantics)
+
+    Returns (selected_paths_in_input_order, skip_warnings).
+    """
+    selected: list[Path] = []
+    warnings: list[str] = []
+    for raw in targets:
+        full = raw if raw.is_absolute() else (repo_root / raw)
+        if not full.exists():
+            warnings.append(f"skip missing target: {raw}")
+            continue
+        try:
+            rel_str = str(full.relative_to(repo_root))
+        except ValueError:
+            warnings.append(f"skip outside repo: {raw}")
+            continue
+        if not (
+            rel_str.startswith(f"{CONCEPTS_REL}/")
+            or rel_str.startswith(f"{CONNECTIONS_REL}/")
+        ):
+            warnings.append(f"skip not in concepts/connections: {rel_str}")
+            continue
+        if not force:
+            existing = resolve_expansion_path(repo_root, full)
+            if existing.exists():
+                warnings.append(
+                    f"skip already-critiqued: {existing.relative_to(repo_root)}"
+                )
+                continue
+        selected.append(full)
+    return selected, warnings
 
 
 def list_macmini_synth_files(

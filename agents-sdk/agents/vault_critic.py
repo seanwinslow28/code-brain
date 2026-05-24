@@ -38,7 +38,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from lib.cli_runners import CLIResponse, run_antigravity, run_codex
 from lib.config import load_config
-from lib.critic_selector import select_target_articles
+from lib.critic_selector import (
+    resolve_expansion_path,
+    select_manual_targets,
+    select_target_articles,
+)
 from lib.critique_prompt import build_critique_prompt
 from lib.filelock import FileLock
 from lib.logging_setup import record_run, setup_logger
@@ -56,7 +60,6 @@ DEFAULT_WALL_BUDGET_S = 600
 DEFAULT_PER_CLI_TIMEOUT_S = 120
 RECENT_TITLES_CONTEXT_LIMIT = 30
 
-EXPANSIONS_REL = "vault/knowledge/expansions"
 HEALTH_REL = "vault/health"
 KNOWLEDGE_INDEX_REL = "vault/knowledge/index.md"
 
@@ -89,8 +92,14 @@ def write_critic_manifest(
     repo_root: Path,
     result: CritiqueResult,
     today: str,
+    suffix: str = "",
 ) -> Path:
-    """Atomic write to vault/health/critic-manifest-{today}.json."""
+    """Atomic write to vault/health/critic-manifest-{today}{suffix}.json.
+
+    `suffix` is empty for the nightly run (preserves the path the meta-agent
+    reads). Manual runs pass `-manual-{HHMMSS}` so on-demand critiques never
+    overwrite the nightly manifest that the fleet health summary depends on.
+    """
     if result.status not in STATUS_VALUES:
         raise ValueError(
             f"Invalid status {result.status!r}; expected one of {sorted(STATUS_VALUES)}"
@@ -99,7 +108,7 @@ def write_critic_manifest(
         raise ValueError("run_id must be non-empty for manifest write")
     health = repo_root / HEALTH_REL
     health.mkdir(parents=True, exist_ok=True)
-    path = health / f"critic-manifest-{today}.json"
+    path = health / f"critic-manifest-{today}{suffix}.json"
     payload = {
         "run_id": result.run_id,
         "status": result.status,
@@ -227,10 +236,9 @@ async def critique_one_article(
         antigravity_failed=not ag_resp.ok,
     )
 
-    expansions_dir = repo_root / EXPANSIONS_REL
-    expansions_dir.mkdir(parents=True, exist_ok=True)
-    lock_path = expansions_dir / ".lock"
-    expansion_path = expansions_dir / f"{original_slug}.md"
+    expansion_path = resolve_expansion_path(repo_root, article_path)
+    expansion_path.parent.mkdir(parents=True, exist_ok=True)
+    lock_path = expansion_path.parent / ".lock"
     with FileLock(lock_path, exclusive=True, timeout=30.0):
         expansion_path.write_text(body, encoding="utf-8")
     return expansion_path, codex_resp, ag_resp
@@ -256,8 +264,19 @@ async def run(
     wall_budget_s: float = DEFAULT_WALL_BUDGET_S,
     per_cli_timeout_s: int = DEFAULT_PER_CLI_TIMEOUT_S,
     logger=None,
+    targets_override: list[Path] | None = None,
+    manifest_suffix: str = "",
+    pre_warnings: list[str] | None = None,
 ) -> CritiqueResult:
     """Orchestrate one vault_critic run end-to-end.
+
+    `targets_override` skips the nightly selector (manifest gate + PR-contamination
+    filter) and uses the provided paths directly — for manual on-demand critiques
+    against the existing concepts/connections corpus. `manifest_suffix` keeps
+    on-demand runs from clobbering the nightly `critic-manifest-{date}.json` the
+    meta-agent reads. `pre_warnings` are merged into `result.warnings` before the
+    manifest is written, surfacing manual-mode skip notes (missing paths,
+    already-critiqued, etc.) in the run record.
 
     Status promotion (after the loop):
       - No targets selected (no manifest / status=error / nothing fresh) → success-empty
@@ -272,15 +291,22 @@ async def run(
         status=STATUS_SUCCESS_EMPTY,
         run_id=datetime.now().isoformat(timespec="seconds"),
     )
+    if pre_warnings:
+        result.warnings.extend(pre_warnings)
 
-    targets = select_target_articles(
-        repo_root, date_iso=date_iso, max_targets=max_targets,
-    )
+    if targets_override is not None:
+        targets = list(targets_override)
+    else:
+        targets = select_target_articles(
+            repo_root, date_iso=date_iso, max_targets=max_targets,
+        )
     if not targets:
         if logger:
             logger.info("vault_critic: no target articles for %s", date_iso)
         result.duration_seconds = time.monotonic() - start
-        write_critic_manifest(repo_root=repo_root, result=result, today=date_iso)
+        write_critic_manifest(
+            repo_root=repo_root, result=result, today=date_iso, suffix=manifest_suffix,
+        )
         return result
 
     recent_titles = _read_recent_titles(repo_root, limit=RECENT_TITLES_CONTEXT_LIMIT)
@@ -340,7 +366,9 @@ async def run(
     # covers the zero-articles case).
 
     result.duration_seconds = time.monotonic() - start
-    write_critic_manifest(repo_root=repo_root, result=result, today=date_iso)
+    write_critic_manifest(
+        repo_root=repo_root, result=result, today=date_iso, suffix=manifest_suffix,
+    )
     return result
 
 
@@ -383,26 +411,73 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--max-targets", type=int, default=DEFAULT_MAX_TARGETS)
     parser.add_argument("--wall-budget-seconds", type=float, default=DEFAULT_WALL_BUDGET_S)
     parser.add_argument("--per-cli-timeout-seconds", type=int, default=DEFAULT_PER_CLI_TIMEOUT_S)
+    parser.add_argument(
+        "--target", action="append", default=[], metavar="PATH",
+        help="Manual mode: critique this specific concept or connection path "
+             "(repeatable; absolute or repo-relative). Bypasses the nightly "
+             "manifest gate and PR-contamination filter.",
+    )
+    parser.add_argument(
+        "--from-list", default=None, metavar="FILE",
+        help="Manual mode: read newline-separated target paths from FILE. "
+             "Blank lines and lines starting with # are ignored.",
+    )
+    parser.add_argument(
+        "--force", action="store_true",
+        help="With --target/--from-list: re-critique even if an expansion file "
+             "already exists (default: skip to preserve snapshot semantics).",
+    )
     args = parser.parse_args(argv)
 
     cfg = load_config()
     logger = setup_logger(AGENT_NAME, cfg.log_dir, cfg.log_level)
     date_iso = args.date or date.today().isoformat()
 
-    targets = select_target_articles(
-        cfg.repo_root, date_iso=date_iso, max_targets=args.max_targets,
-    )
+    manual_inputs: list[Path] = [Path(t) for t in args.target]
+    if args.from_list:
+        list_path = Path(args.from_list)
+        if not list_path.is_absolute():
+            list_path = cfg.repo_root / list_path
+        if not list_path.exists():
+            print(f"ERROR: --from-list file not found: {list_path}")
+            return 2
+        for raw_line in list_path.read_text(encoding="utf-8").splitlines():
+            line = raw_line.strip()
+            if line and not line.startswith("#"):
+                manual_inputs.append(Path(line))
+
+    manual_mode = bool(manual_inputs)
+    skip_warnings: list[str] = []
+    if manual_mode:
+        targets, skip_warnings = select_manual_targets(
+            cfg.repo_root, targets=manual_inputs, force=args.force,
+        )
+        manifest_suffix = f"-manual-{datetime.now().strftime('%H%M%S')}"
+    else:
+        targets = select_target_articles(
+            cfg.repo_root, date_iso=date_iso, max_targets=args.max_targets,
+        )
+        manifest_suffix = ""
 
     if args.dry_run:
-        print("=== DRY RUN — Vault Critic ===")
+        header = "DRY RUN — Vault Critic (manual)" if manual_mode else "DRY RUN — Vault Critic"
+        print(f"=== {header} ===")
         print(f"Date:          {date_iso}")
         print(f"Repo:          {cfg.repo_root}")
-        print(f"Max targets:   {args.max_targets}")
+        if manual_mode:
+            print(f"Mode:          manual ({len(manual_inputs)} input, force={args.force})")
+            print(f"Manifest:      critic-manifest-{date_iso}{manifest_suffix}.json")
+        else:
+            print(f"Max targets:   {args.max_targets}")
         print(f"Wall budget:   {args.wall_budget_seconds}s")
         print(f"CLI timeout:   {args.per_cli_timeout_seconds}s each")
         print(f"Targets ({len(targets)}):")
         for t in targets:
             print(f"  - {t.relative_to(cfg.repo_root)}")
+        if skip_warnings:
+            print(f"Skipped ({len(skip_warnings)}):")
+            for w in skip_warnings:
+                print(f"  ! {w}")
         print("=== END DRY RUN ===")
         return 0
 
@@ -415,6 +490,9 @@ def main(argv: list[str] | None = None) -> int:
             wall_budget_s=args.wall_budget_seconds,
             per_cli_timeout_s=args.per_cli_timeout_seconds,
             logger=logger,
+            targets_override=targets if manual_mode else None,
+            manifest_suffix=manifest_suffix,
+            pre_warnings=skip_warnings or None,
         ))
     except Exception as exc:
         logger.exception("vault_critic failed: %s", exc)
