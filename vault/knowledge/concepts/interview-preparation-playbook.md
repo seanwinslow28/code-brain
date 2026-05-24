@@ -2,31 +2,31 @@
 title: "Interview Preparation Playbook"
 type: concept
 sources:
-  - knowledge/concepts/interview-preparation-playbook.md
+  - 20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-vibe-coding-playbook.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-05-22
+updated: 2026-05-22
 ---
 
 ## Definition
 
-A structured guide that outlines how to approach and prepare for different types of interviews, focusing on efficiency and effectiveness.
+A structured, executable layer on top of synthesized interview formats. It distills company-specific strategies into actionable steps and tactics, typically organized by phase (e.g., Phase 2 of 4). The playbook emphasizes pre-interview rituals, such as practicing with role-specific formats and mastering core concepts that are unlikely to change.
 
 ## Context
 
-This is particularly important for Sean's job-hunt-2026 as it helps reduce cognitive load during interviews by providing predefined strategies and expectations.
+This playbook is essential for Sean as it turns high-level, ambiguous interview formats into concrete steps. It allows him to focus on critical areas (e.g., solo builds) while avoiding traps like over-preparing for a format that may not even be used.
 
 ## Evidence
 
-> A structured guide that outlines how to approach and prepare for different types of interviews, focusing on efficiency and effectiveness.
+> This is the executable layer on top of the synthesis. Every section is built to be glanced at the morning of an interview without needing to re-orient.
 
-> This is critical in reducing the cognitive load of interviews by predefining strategies, tools, and expectations.
+> Sections 4-6 are the load-bearing tactical moves; sections 5 and 8 are the highest-leverage prep before any specific loop.
 
 ## Examples
 
-- The 'Vibe-Coding Playbook' for Sean × 2026-05
-- Research prompts like the Gemini DR Prompt — Vibe-Coding Interview Canon 2026
+- The playbook includes a 'first-five/last-five' approach for high-leverage practice.
+- Portfolio walkthroughs are a key component in some formats but not others.
 
 ## Related Concepts
 
-[[Vibe-Coding Interview Format]] [[Portfolio Walkthrough]]
+[[Vibe-Coding Interview Format]] [[Vibe-Coding Interview Canon]]
