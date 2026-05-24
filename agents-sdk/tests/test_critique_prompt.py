@@ -1,6 +1,10 @@
 from pathlib import Path
 
-from lib.critique_prompt import build_critique_prompt, extract_wikilinks_summary
+from lib.critique_prompt import (
+    build_critique_prompt,
+    extract_wikilinks_summary,
+    load_standing_context,
+)
 
 
 ARTICLE = """\
@@ -74,3 +78,54 @@ def test_extract_wikilinks_summary_handles_aliased():
 
 def test_extract_wikilinks_summary_empty_when_no_links():
     assert extract_wikilinks_summary("no links here") == "(no wikilinks)"
+
+
+# ---------------------------------------------------------------------------
+# Standing-context preamble — "About Sean" enrichment (2026-05-24, Round 2)
+# ---------------------------------------------------------------------------
+
+
+def test_load_standing_context_returns_empty_when_file_missing(tmp_path):
+    """Missing-file degrades to empty string; the prompt template's
+    {standing_context} slot then renders as a blank line. No exception, no
+    half-rendered prompt — the agent must stay quiet when enrichment is off."""
+    assert load_standing_context(tmp_path / "does-not-exist.md") == ""
+
+
+def test_load_standing_context_reads_file_contents(tmp_path):
+    p = tmp_path / "ctx.md"
+    p.write_text("# About Sean\n\nbuilt thing X.\n", encoding="utf-8")
+    out = load_standing_context(p)
+    assert "About Sean" in out
+    assert out == out.strip()  # trimmed for clean injection
+
+
+def test_build_critique_prompt_includes_standing_context_by_default(tmp_path):
+    """Default behavior: the preamble is prepended right after the
+    'Sean's complaint' line, before ARTICLE UNDER REVIEW. This is the
+    Round-2-and-beyond behavior — nightly + manual runs both get it."""
+    ctx = tmp_path / "ctx.md"
+    ctx.write_text("STANDING_CONTEXT_MARKER", encoding="utf-8")
+    out = build_critique_prompt(
+        slug="x", article_body="body", source_path="x.md",
+        recent_titles=[],
+        standing_context_path=ctx,
+    )
+    assert "STANDING_CONTEXT_MARKER" in out
+    # Position check: preamble lands BEFORE the article body, not after.
+    assert out.index("STANDING_CONTEXT_MARKER") < out.index("ARTICLE UNDER REVIEW")
+
+
+def test_build_critique_prompt_skips_standing_context_when_disabled(tmp_path):
+    """`include_standing_context=False` powers ablation runs (Round 1 vs Round 2
+    on the same target). The CLIs see the original outside-perspective-only
+    prompt with no enrichment — must match pre-2026-05-24 behavior."""
+    ctx = tmp_path / "ctx.md"
+    ctx.write_text("STANDING_CONTEXT_MARKER", encoding="utf-8")
+    out = build_critique_prompt(
+        slug="x", article_body="body", source_path="x.md",
+        recent_titles=[],
+        standing_context_path=ctx,
+        include_standing_context=False,
+    )
+    assert "STANDING_CONTEXT_MARKER" not in out

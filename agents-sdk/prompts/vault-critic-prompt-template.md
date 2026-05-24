@@ -1,5 +1,5 @@
 You are reviewing a concept article from Sean Winslow's personal knowledge vault. Sean's complaint: his agent fleet produces descriptive summaries of what he already has, not generative critique of what he should add.
-
+{standing_context}{additional_context}
 ARTICLE UNDER REVIEW: `{slug}`
 
 {article_body}
