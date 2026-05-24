@@ -637,3 +637,107 @@ def test_main_target_flag_dry_run_prints_manual_targets(tmp_repo, monkeypatch, c
     assert "critic-manifest-" in out and "-manual-" in out
     # The non-existent path surfaces as a skip warning.
     assert "does-not-exist.md" in out
+
+
+# ---------------------------------------------------------------------------
+# Round-3 default-context wiring — config.toml-driven enrichment (2026-05-24)
+# ---------------------------------------------------------------------------
+
+
+def _fake_config_with_critic_defaults(tmp_repo: Path, defaults: list[str]):
+    """Build a Config where [agents.vault_critic].default_context_files is set."""
+    from lib.config import Config, SafetyConfig
+    return Config(
+        repo_root=tmp_repo, vault_root=tmp_repo / "vault",
+        skills_dir=tmp_repo / ".claude/skills",
+        life_systems_scripts=tmp_repo / "life-systems/scripts",
+        log_dir=tmp_repo / "vault/90_system/agent-logs",
+        log_level="INFO",
+        safety=SafetyConfig(),
+        agents={"vault_critic": {"default_context_files": defaults}},
+        anthropic_api_key=None, artifacts={},
+    )
+
+
+def test_main_auto_loads_default_context_from_config(tmp_repo, monkeypatch, capsys):
+    """Round 3 calibration must be on by default — config-declared context
+    files load into every run, including the nightly path. Proves the
+    `[agents.vault_critic].default_context_files` TOML key is read."""
+    _make_concept_at(tmp_repo, "pick-me")
+    # Create the default-context file so it isn't skip-warned.
+    ctx = tmp_repo / "PROJECT_NOTES.md"
+    ctx.write_text("# Project context\nDEFAULT_CTX_MARKER\n", encoding="utf-8")
+
+    monkeypatch.setattr(
+        "agents.vault_critic.load_config",
+        lambda: _fake_config_with_critic_defaults(tmp_repo, ["PROJECT_NOTES.md"]),
+    )
+
+    async def must_not_call(*a, **k):
+        raise AssertionError("run() must not be called under --dry-run")
+    monkeypatch.setattr("agents.vault_critic.run", must_not_call)
+
+    rc = main([
+        "--dry-run",
+        "--target", "vault/knowledge/concepts/pick-me.md",
+    ])
+    assert rc == 0
+    out = capsys.readouterr().out
+    # Dry-run output advertises the default-context provenance.
+    assert "1 default" in out
+    assert "PROJECT_NOTES.md" in out
+
+
+def test_main_no_default_context_flag_drops_config_defaults(tmp_repo, monkeypatch, capsys):
+    """--no-default-context is the ablation escape hatch: drop the config
+    set, use only explicit --context flags. Necessary for round-1-style
+    cold runs once the defaults are in place."""
+    _make_concept_at(tmp_repo, "pick-me")
+    (tmp_repo / "PROJECT_NOTES.md").write_text("DEFAULT_CTX_MARKER", encoding="utf-8")
+
+    monkeypatch.setattr(
+        "agents.vault_critic.load_config",
+        lambda: _fake_config_with_critic_defaults(tmp_repo, ["PROJECT_NOTES.md"]),
+    )
+
+    async def must_not_call(*a, **k):
+        raise AssertionError("run() must not be called under --dry-run")
+    monkeypatch.setattr("agents.vault_critic.run", must_not_call)
+
+    rc = main([
+        "--dry-run",
+        "--no-default-context",
+        "--target", "vault/knowledge/concepts/pick-me.md",
+    ])
+    assert rc == 0
+    out = capsys.readouterr().out
+    # The default-context block is suppressed; no "Context files:" header.
+    assert "PROJECT_NOTES.md" not in out
+
+
+def test_main_explicit_context_appends_to_defaults(tmp_repo, monkeypatch, capsys):
+    """`--context PATH` augments, not replaces, the default set. A user adding
+    a one-off file shouldn't lose the project-wide grounding."""
+    _make_concept_at(tmp_repo, "pick-me")
+    (tmp_repo / "PROJECT_NOTES.md").write_text("DEFAULT", encoding="utf-8")
+    (tmp_repo / "EXTRA.md").write_text("EXTRA", encoding="utf-8")
+
+    monkeypatch.setattr(
+        "agents.vault_critic.load_config",
+        lambda: _fake_config_with_critic_defaults(tmp_repo, ["PROJECT_NOTES.md"]),
+    )
+
+    async def must_not_call(*a, **k):
+        raise AssertionError("run() must not be called under --dry-run")
+    monkeypatch.setattr("agents.vault_critic.run", must_not_call)
+
+    rc = main([
+        "--dry-run",
+        "--context", "EXTRA.md",
+        "--target", "vault/knowledge/concepts/pick-me.md",
+    ])
+    assert rc == 0
+    out = capsys.readouterr().out
+    assert "1 default + 1 explicit = 2 total" in out
+    assert "default: PROJECT_NOTES.md" in out
+    assert "explicit: EXTRA.md" in out
