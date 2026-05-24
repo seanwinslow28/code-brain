@@ -275,7 +275,13 @@ tier = 3
 runtime = "ollama"
 always_on = false
 wol_mac = "B4:E9:B8:F7:71:47"
-models = ["Qwen3-VL-7B"]
+# Directed broadcast for the LAN. The Deco BE63 mesh uses a /22 netmask
+# (192.168.68.0/22), so the correct directed broadcast is 192.168.71.255
+# — NOT 192.168.68.255 (which is a unicast address on /22). Discovered
+# 2026-05-24 via Topic 20 Phase 2 troubleshooting; `255.255.255.255`
+# limited broadcasts were silently dropped somewhere in the Deco backbone.
+wol_broadcast = "192.168.71.255"
+models = ["qwen3-vl:8b"]
 
 # Task → model → machine mapping
 [routing.task_map]

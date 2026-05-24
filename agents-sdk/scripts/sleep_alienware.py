@@ -29,7 +29,18 @@ def detect_os(host: str, user: str) -> str:
 def sleep_remote(host: str, user: str, os_override: str | None = None) -> int:
     os_kind = os_override or detect_os(host, user)
     if os_kind == "windows":
-        cmd = "rundll32.exe powrprof.dll,SetSuspendState 0,1,0"
+        # rundll32.exe SetSuspendState is a Win-XP-era API that Modern Standby
+        # systems (e.g. Alienware Aurora ACT1 250) silently ignore. The .NET
+        # System.Windows.Forms.Application.SetSuspendState wraps the same API
+        # with parameters that DO trigger S0ix transition on Modern Standby.
+        # Args: (PowerState.Suspend, ForceCritical=$false, DisableWakeEvent=$false)
+        # Discovered 2026-05-24 during Topic 20 Phase 2.
+        ps_oneliner = (
+            "Add-Type -AssemblyName System.Windows.Forms; "
+            "[System.Windows.Forms.Application]::SetSuspendState("
+            "[System.Windows.Forms.PowerState]::Suspend, $false, $false)"
+        )
+        cmd = f'powershell.exe -NoProfile -Command "{ps_oneliner}"'
     else:
         cmd = "sudo systemctl suspend"
 
