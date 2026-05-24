@@ -5,6 +5,58 @@ All notable changes to Code-Brain (formerly *Claude Code Superuser Pack*) will b
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.4] — 2026-05-24
+
+**vault_critic Round-3 enrichment becomes the default for every run** — both the nightly 03:30 launchd path and all manual `--target` runs auto-load the [vault-critic-standing-context.md](agents-sdk/prompts/vault-critic-standing-context.md) "About Sean" preamble plus the three project files listed in `[agents.vault_critic].default_context_files` in [config.toml](agents-sdk/config.toml). Validated 2026-05-24 across three rounds of A/B/C critique on the same 4 hand-picked targets plus a fresh 4-target batch — 12 articles total, 1 CLI failure across all 12 (Anti-Gravity rate-cap on a single Round-1 article), output quality jumping from generic "consider exploring X" recommendations to project-aware critique that names Sean's actual file paths (`agents-sdk/lib/vault_io.py`, `hybrid_router.py`, `evals/vault-synthesizer/`), agents (`Vault Synthesizer`, `meta-agent`, `Deep Researcher`), lived incidents (Qwen3-14B LDR citation collapse, 8:31 vs 8:45 daily-driver/meta-agent ordering quirk), Substack voice modes (Thompson/gonzo, Sean-default IC), and concrete artifact specs (`fencing_token` implementation, `chaos_monkey.py`, `personal-agent-leverage-map.md`).
+
+**Three cross-vendor convergence patterns now visible in the corpus** — recommendations that surfaced across multiple rounds AND both critics, indicating high architectural conviction: (1) **Sagas + compensating transactions** (Garcia-Molina & Salem, 1987) for fleet failure recovery; (2) **Erlang OTP Supervisor Trees / "Let It Crash"** (Joe Armstrong, 2003) for `meta-agent` refactor from passive observer to active supervisor; (3) **Suchman situated action** for treating intent as emergent/post-hoc rather than pre-declared in the intent-engineering MCP. **Hamel Husain's Eval-Driven Development** writing surfaced four independent times across the 12 articles — strongest single-source convergence signal in the run.
+
+### Added
+
+- **[`agents-sdk/prompts/vault-critic-standing-context.md`](agents-sdk/prompts/vault-critic-standing-context.md)** — ~680-token "About Sean" preamble auto-prepended to every critique prompt. Sections: career-stage positioning, what Sean has actually built (Code-Brain, 16BitFit, intent-engineering MCP, llm-council, Substack practice), the technical surface he ships into, and what useful critique looks like for him (specific works, not fields; artifacts he can ship; no recommendations of tools he already uses heavily). File-driven and hot-editable; missing/renamed file degrades to empty string with no exception.
+- **[`lib/critique_prompt.py`](agents-sdk/lib/critique_prompt.py) — `load_standing_context()` and `render_additional_context()`** helpers. Standing context loads the preamble file; render-additional renders each `--context` file as a labeled `## Supporting context: <relpath>` block so critics can attribute recommendations back to source. Missing context files surface as warnings, never errors.
+- **[`agents-sdk/agents/vault_critic.py`](agents-sdk/agents/vault_critic.py) — three CLI flags**: `--context <path>` (repeatable, appends to defaults), `--no-standing-context` (ablation), `--no-default-context` (ablation). Manual runs can both extend and override the config-default set.
+- **`[agents.vault_critic].default_context_files`** in [config.toml](agents-sdk/config.toml) — the Round-3-validated project files (`CLAUDE.md`, `creative-studio/16bitfit-battle-mode/CLAUDE.md`, `vault/40_knowledge/references/intent-engineering/ref-intent-engineering-overview.md`). ~8.5K tokens of context per target; combined prompt sits at ~10K tokens vs the 13.2K smoke-test ceiling. Editable without code changes — hot-swap context by editing the TOML list.
+- **Eight new tests** across [`tests/test_critique_prompt.py`](agents-sdk/tests/test_critique_prompt.py) and [`tests/test_vault_critic.py`](agents-sdk/tests/test_vault_critic.py): standing-context load + position assertion, ablation via `include_standing_context=False`, default-context auto-load from config, `--no-default-context` drop semantics, `--context` flag append-not-replace. 52 critic-related tests pass.
+
+### Changed
+
+- **`build_critique_prompt()`** takes new kwargs `include_standing_context` (default True), `standing_context_path`, and `additional_context`. All existing call sites unchanged because defaults preserve the prior behavior; the new behavior only activates when the standing-context file exists and/or `additional_context` is non-empty.
+- **`critique_one_article()` and `run()`** thread `include_standing_context` and `additional_context` through unchanged. Manual-mode CLI loads config defaults into `additional_context` automatically.
+- **Prompt template** [`vault-critic-prompt-template.md`](agents-sdk/prompts/vault-critic-prompt-template.md) gains `{standing_context}` and `{additional_context}` slots inserted between Sean's complaint line and the ARTICLE UNDER REVIEW block. Empty when disabled; well-formed in both cases.
+- **Dry-run output** now surfaces context provenance: `Context files: 3 default + 0 explicit = 3 total (~33703 chars / ~8425 tokens per target)` plus per-file labels distinguishing default vs explicit. Token budget is visible before firing.
+
+### Validation runs (2026-05-24)
+
+| Round | Standing context | `--context` files | Status | Wall | Output character |
+|---|---|---|---|---|---|
+| 1 (cold) | off | none | partial (1 AG rate-cap) | 233s | Generic "consider exploring X" recs |
+| 2 (Option A) | on | none | ok | 220s | Recs name Sean's projects + voice modes |
+| 3 (A + B) | on | 3 files (~8.4K tokens) | ok | 290s | Recs name file paths, agents, lived incidents, ship Substack titles |
+| Fresh batch (default) | on (auto) | 3 default (~8.4K tokens, no flags) | ok | 233s | Equal to Round 3 — validates config-default path end-to-end |
+
+All four runs critiqued the same `vault_critic` agent topology and architecture without ever invoking it on its own concept files — the fresh batch covered `vibe-coding-interview-canon`, `agentic-engineering`, `track-c-mcp-server-portfolio-differentiation`, and the `eval-vocabulary-and-vibe-coding-interview-canon-synergy` connection. All expansions are canonical (no `.roundN` suffix) and sit alongside the original four nightly-gold expansions in [`vault/knowledge/expansions/`](vault/knowledge/expansions/).
+
+### Usage
+
+```bash
+# Nightly run — no changes needed. launchd at 03:30 picks up the defaults.
+
+# Manual run — defaults auto-load, no --context flag needed.
+PYTHONPATH=. .venv/bin/python agents/vault_critic.py \
+  --target vault/knowledge/concepts/my-concept.md
+
+# Add per-run context on top of defaults
+PYTHONPATH=. .venv/bin/python agents/vault_critic.py \
+  --target vault/knowledge/concepts/my-concept.md \
+  --context vault/20_projects/some-project/README.md
+
+# Ablation — outside-perspective-only (Round 1 behavior)
+PYTHONPATH=. .venv/bin/python agents/vault_critic.py \
+  --target vault/knowledge/concepts/my-concept.md \
+  --no-standing-context --no-default-context
+```
+
 ## [4.1.3] — 2026-05-24
 
 **vault_critic ships manual mode for on-demand critique of the existing knowledge corpus.** First four nightly expansions ([`comprehension-audit`](vault/knowledge/expansions/comprehension-audit.md), [`daily-note-generation`](vault/knowledge/expansions/daily-note-generation.md), [`token-waste`](vault/knowledge/expansions/token-waste.md), [`writing-voice-modes`](vault/knowledge/expansions/writing-voice-modes.md)) validated the Codex + Anti-Gravity critique format as high-signal; this opens up the back-catalog of 108 concepts and 256 connections for hand-picked deeper passes. The nightly selector path is unchanged — same 03:30 fire, same PR-contamination filter, same manifest gate.

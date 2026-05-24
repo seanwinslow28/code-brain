@@ -29,18 +29,18 @@ def detect_os(host: str, user: str) -> str:
 def sleep_remote(host: str, user: str, os_override: str | None = None) -> int:
     os_kind = os_override or detect_os(host, user)
     if os_kind == "windows":
-        # rundll32.exe SetSuspendState is a Win-XP-era API that Modern Standby
-        # systems (e.g. Alienware Aurora ACT1 250) silently ignore. The .NET
-        # System.Windows.Forms.Application.SetSuspendState wraps the same API
-        # with parameters that DO trigger S0ix transition on Modern Standby.
-        # Args: (PowerState.Suspend, ForceCritical=$false, DisableWakeEvent=$false)
+        # Modern Standby on the Alienware Aurora ACT1 250 silently rejects
+        # both rundll32.exe SetSuspendState (XP-era API) and the .NET
+        # System.Windows.Forms.Application.SetSuspendState call — both return
+        # success but the OS never actually transitions to S0ix when invoked
+        # via SSH, with or without ForceCritical=$true. Sysinternals
+        # psshutdown.exe is the canonical headless-sleep tool for Windows
+        # and it works reliably from non-interactive SSH sessions.
+        # Install: see Topic 20 Phase 2 decision record.
+        #   -d   = Suspend (sleep, not hibernate)
+        #   -t 0 = 0-second countdown
         # Discovered 2026-05-24 during Topic 20 Phase 2.
-        ps_oneliner = (
-            "Add-Type -AssemblyName System.Windows.Forms; "
-            "[System.Windows.Forms.Application]::SetSuspendState("
-            "[System.Windows.Forms.PowerState]::Suspend, $false, $false)"
-        )
-        cmd = f'powershell.exe -NoProfile -Command "{ps_oneliner}"'
+        cmd = r'C:\Tools\PsTools\psshutdown.exe -d -t 0'
     else:
         cmd = "sudo systemctl suspend"
 

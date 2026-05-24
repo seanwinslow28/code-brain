@@ -193,6 +193,26 @@ per_cli_timeout_seconds = 120
 output_dir = "vault/knowledge/expansions"
 manifest_dir = "vault/health"
 
+# Default supporting-document paths injected into every vault_critic prompt
+# (Round 3 calibration, validated 2026-05-24 — see CHANGELOG 4.1.4). Each file
+# is read at run start, rendered as a `## Supporting context: <relpath>` block,
+# and inserted after the "About Sean" standing-context preamble. Critics then
+# reference Sean's actual fleet topology, project structure, and intent-
+# engineering methodology by name instead of giving generic recommendations.
+#
+# Token budget: ~8.5K tokens across these 3 files. Combined with standing
+# context (~680 tokens) + article body + template, the typical prompt sits at
+# ~10K tokens — under the 13.2K smoke-test ceiling.
+#
+# To disable for a single run: pass `--no-default-context`. To add more files
+# for a specific run: pass `--context PATH` (those append to this list).
+# Paths are resolved relative to repo_root.
+default_context_files = [
+    "CLAUDE.md",
+    "creative-studio/16bitfit-battle-mode/CLAUDE.md",
+    "vault/40_knowledge/references/intent-engineering/ref-intent-engineering-overview.md",
+]
+
 [safety]
 max_turns_default = 30
 max_budget_default = 0.50

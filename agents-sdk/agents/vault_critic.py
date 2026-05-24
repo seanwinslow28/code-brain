@@ -448,7 +448,16 @@ def main(argv: list[str] | None = None) -> int:
              "where the critics need project-specific grounding — e.g., "
              "CLAUDE.md for fleet architecture, a SKILL.md for methodology, "
              "the current fleet-status snapshot for live state. Missing files "
-             "are skipped with a warning, not an error.",
+             "are skipped with a warning, not an error. Files supplied here "
+             "are added on top of the default-context set from config.toml "
+             "(`[agents.vault_critic].default_context_files`).",
+    )
+    parser.add_argument(
+        "--no-default-context", action="store_true",
+        help="Skip the default-context file set declared in config.toml "
+             "(`[agents.vault_critic].default_context_files`). Use for "
+             "ablation runs or when you want only the files passed via "
+             "--context, not the project-wide defaults.",
     )
     args = parser.parse_args(argv)
 
@@ -482,9 +491,15 @@ def main(argv: list[str] | None = None) -> int:
         )
         manifest_suffix = ""
 
+    default_context_files: list[str] = []
+    if not args.no_default_context:
+        default_context_files = list(
+            cfg.agents.get("vault_critic", {}).get("default_context_files", [])
+        )
+    merged_context_paths = [Path(p) for p in (default_context_files + list(args.context))]
     additional_context, context_warnings = render_additional_context(
         repo_root=cfg.repo_root,
-        context_files=[Path(p) for p in args.context],
+        context_files=merged_context_paths,
     )
     skip_warnings.extend(context_warnings)
 
@@ -500,10 +515,18 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Max targets:   {args.max_targets}")
         print(f"Wall budget:   {args.wall_budget_seconds}s")
         print(f"CLI timeout:   {args.per_cli_timeout_seconds}s each")
-        if args.context:
+        if merged_context_paths:
             ctx_chars = len(additional_context)
-            print(f"Context files: {len(args.context)} requested "
-                  f"(~{ctx_chars} chars / ~{ctx_chars // 4} tokens added per target)")
+            print(
+                f"Context files: {len(default_context_files)} default "
+                f"+ {len(args.context)} explicit = "
+                f"{len(merged_context_paths)} total "
+                f"(~{ctx_chars} chars / ~{ctx_chars // 4} tokens per target)"
+            )
+            for cp in default_context_files:
+                print(f"  · default: {cp}")
+            for cp in args.context:
+                print(f"  + explicit: {cp}")
         print(f"Targets ({len(targets)}):")
         for t in targets:
             print(f"  - {t.relative_to(cfg.repo_root)}")
