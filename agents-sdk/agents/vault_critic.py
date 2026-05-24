@@ -43,7 +43,7 @@ from lib.critic_selector import (
     select_manual_targets,
     select_target_articles,
 )
-from lib.critique_prompt import build_critique_prompt
+from lib.critique_prompt import build_critique_prompt, render_additional_context
 from lib.filelock import FileLock
 from lib.logging_setup import record_run, setup_logger
 
@@ -192,6 +192,8 @@ async def critique_one_article(
     recent_titles: list[str],
     today: str,
     per_cli_timeout_s: int = DEFAULT_PER_CLI_TIMEOUT_S,
+    include_standing_context: bool = True,
+    additional_context: str = "",
 ) -> tuple[Path | None, CLIResponse, CLIResponse]:
     """Critique one article via Codex + Anti-Gravity in parallel.
 
@@ -216,6 +218,8 @@ async def critique_one_article(
         article_body=article_body,
         source_path=source_path,
         recent_titles=recent_titles,
+        include_standing_context=include_standing_context,
+        additional_context=additional_context,
     )
 
     codex_task = run_codex(prompt, timeout_s=per_cli_timeout_s)
@@ -267,6 +271,8 @@ async def run(
     targets_override: list[Path] | None = None,
     manifest_suffix: str = "",
     pre_warnings: list[str] | None = None,
+    include_standing_context: bool = True,
+    additional_context: str = "",
 ) -> CritiqueResult:
     """Orchestrate one vault_critic run end-to-end.
 
@@ -328,6 +334,8 @@ async def run(
             recent_titles=recent_titles,
             today=date_iso,
             per_cli_timeout_s=per_cli_timeout_s,
+            include_standing_context=include_standing_context,
+            additional_context=additional_context,
         )
 
         result.codex_calls += 1
@@ -427,6 +435,21 @@ def main(argv: list[str] | None = None) -> int:
         help="With --target/--from-list: re-critique even if an expansion file "
              "already exists (default: skip to preserve snapshot semantics).",
     )
+    parser.add_argument(
+        "--no-standing-context", action="store_true",
+        help="Skip the always-prepended 'About Sean' preamble at "
+             "prompts/vault-critic-standing-context.md. Use for ablation runs "
+             "comparing outside-perspective-only vs context-enriched critique.",
+    )
+    parser.add_argument(
+        "--context", action="append", default=[], metavar="PATH",
+        help="Supporting document path appended to every target's prompt "
+             "(repeatable, absolute or repo-relative). Use for thin concepts "
+             "where the critics need project-specific grounding — e.g., "
+             "CLAUDE.md for fleet architecture, a SKILL.md for methodology, "
+             "the current fleet-status snapshot for live state. Missing files "
+             "are skipped with a warning, not an error.",
+    )
     args = parser.parse_args(argv)
 
     cfg = load_config()
@@ -459,6 +482,12 @@ def main(argv: list[str] | None = None) -> int:
         )
         manifest_suffix = ""
 
+    additional_context, context_warnings = render_additional_context(
+        repo_root=cfg.repo_root,
+        context_files=[Path(p) for p in args.context],
+    )
+    skip_warnings.extend(context_warnings)
+
     if args.dry_run:
         header = "DRY RUN — Vault Critic (manual)" if manual_mode else "DRY RUN — Vault Critic"
         print(f"=== {header} ===")
@@ -471,6 +500,10 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Max targets:   {args.max_targets}")
         print(f"Wall budget:   {args.wall_budget_seconds}s")
         print(f"CLI timeout:   {args.per_cli_timeout_seconds}s each")
+        if args.context:
+            ctx_chars = len(additional_context)
+            print(f"Context files: {len(args.context)} requested "
+                  f"(~{ctx_chars} chars / ~{ctx_chars // 4} tokens added per target)")
         print(f"Targets ({len(targets)}):")
         for t in targets:
             print(f"  - {t.relative_to(cfg.repo_root)}")
@@ -493,6 +526,8 @@ def main(argv: list[str] | None = None) -> int:
             targets_override=targets if manual_mode else None,
             manifest_suffix=manifest_suffix,
             pre_warnings=skip_warnings or None,
+            include_standing_context=not args.no_standing_context,
+            additional_context=additional_context,
         ))
     except Exception as exc:
         logger.exception("vault_critic failed: %s", exc)
