@@ -32,7 +32,8 @@ def main() -> int:
     p.add_argument("--mac", help="Override MAC (default: config.toml routing.machines.alienware.wol_mac)")
     p.add_argument("--host", help="Override host for the readiness probe")
     p.add_argument("--port", type=int, help="Override port for the readiness probe")
-    p.add_argument("--timeout", type=int, default=180, help="Total wait budget in seconds (default 180)")
+    p.add_argument("--broadcast", help="Override directed broadcast (default: config.toml wol_broadcast)")
+    p.add_argument("--timeout", type=int, default=30, help="Total wait budget in seconds (default 30 — wake-from-S0ix is near-instant; bump for cold-S5)")
     p.add_argument("--quiet", action="store_true")
     args = p.parse_args()
 
@@ -40,6 +41,7 @@ def main() -> int:
     mac = args.mac or machine.get("wol_mac")
     host = args.host or machine.get("host", "192.168.68.201")
     port = int(args.port or machine.get("port", 11434))
+    broadcast = args.broadcast or machine.get("wol_broadcast", "255.255.255.255")
 
     if not mac:
         print(
@@ -50,9 +52,9 @@ def main() -> int:
         return 1
 
     if not args.quiet:
-        print(f"[wake_alienware] sending magic packet to {mac} via UDP broadcast :9 (x3)")
+        print(f"[wake_alienware] sending magic packet to {mac} via UDP broadcast {broadcast}:9 (x3)")
 
-    send_magic_packet(mac)
+    send_magic_packet(mac, broadcast_addr=broadcast)
 
     if not args.quiet:
         print(f"[wake_alienware] probing tcp://{host}:{port} every 3s for up to {args.timeout}s")
