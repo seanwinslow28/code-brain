@@ -1,0 +1,286 @@
+# Knowledge Lint Report — 2026-05-24
+
+_270 issues found (247 structural, 23 semantic)._
+
+## CRITICAL (16)
+
+- **contradiction** (T2): `knowledge/concepts/accountability-gap.md` — contradicts automation-routines (source=sql)
+- **contradiction** (T2): `knowledge/concepts/agent-health.md` — contradicts daily-note-generation (source=sql)
+- **contradiction** (T2): `knowledge/concepts/automation-pipeline.md` — contradicts agent-health-monitoring (source=sql)
+- **contradiction** (T2): `knowledge/concepts/automation-reliability.md` — contradicts cost-capped-agentic-workflows (source=sql)
+- **contradiction** (T2): `knowledge/concepts/automation-routines.md` — contradicts accountability-gap (source=sql)
+- **contradiction** (T2): `knowledge/concepts/automation-routines.md` — contradicts writing-voice-modes (source=sql)
+- **contradiction** (T2): `knowledge/concepts/comprehension-audit.md` — contradicts automation-reliability (source=sql)
+- **contradiction** (T2): `knowledge/concepts/cost-capped-agentic-workflows.md` — contradicts provider-fallback-mechanism (source=sql)
+- **contradiction** (T2): `knowledge/concepts/creative-studio-workflows.md` — contradicts automation-failure-and-daily-note-disruption (source=sql)
+- **contradiction** (T2): `knowledge/concepts/cross-domain-bridging.md` — contradicts automation-routines (source=sql)
+- **contradiction** (T2): `knowledge/concepts/cross-domain-bridging.md` — contradicts daily-note-generation (source=sql)
+- **contradiction** (T2): `knowledge/concepts/mcp-server-hardening.md` — contradicts agent-health-monitoring (source=sql)
+- **contradiction** (T2): `knowledge/concepts/negative-constraints.md` — contradicts creative-studio-workflows (source=sql)
+- **contradiction** (T2): `knowledge/concepts/project-room-workflow.md` — contradicts creative-studio-workflows (source=sql)
+- **contradiction** (T2): `knowledge/concepts/substack-drafter-agent.md` — contradicts automation-reliability (source=sql)
+- **contradiction** (T2): `knowledge/concepts/token-waste.md` — contradicts creative-studio-workflows (source=sql)
+
+## HIGH (33)
+
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/negative-constraints-and-daily-note-generation.md` — Negative Constraints
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/infrastructure-evaluation-and-roadmap-integration.md` — Track-C MCP Server / Portfolio Differentiation
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/infrastructure-stability-and-automation-reliability-in-creative-and-job-hunt-workflows.md` — Job-Hunt 2026
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/agent-resilience-across-travel-and-work-setup.md` — Deep Researcher Fleet Reinstall
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/automation-and-travel-resilience-in-job-hunt-infrastructure.md` — MBP Travel Fallback Strategy
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/preparation-as-bottleneck-for-ai-generated-content.md` — Project Room Workflow
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/automation-reliability-and-job-hunt-workflows.md` — Job Hunt 2026
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/mcp-server-pattern-repeatability.md` — MCP Server
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/product-management-and-ai-system-delivery-integration.md` — Strategic Roadmap
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/agent-health-monitoring-and-job-hunt-2026-automation-reliability.md` — Job-Hunt-2026
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/agent-health-and-professional-role-automation.md` — Integration of Agentic Systems in Professional Roles
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/tonal-consistency-across-content-and-career-strategy.md` — creative-writing
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/open-source-contributions.md` — MCP Server / Portfolio Differentiation
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/research-prompt-autoresearch-agentic-polymarket-crypto-cash-flow.md` — Prompt Engineering
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/batch-export.md` — Export
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/screenplay-craft-architect.md` — Screenplay Mechanics doc
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/jitter-ai.md` — Animation
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/unified-roadmap.md` — Task 1: Eval Suite Ship Week 2
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/unified-roadmap.md` — Task 11: Agent Fleet Observability Dashboard
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-23-openai-image-gen-skill-kickoff-prompt.md` — docs/substack-image-generation-design-2026-05-23
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/ldr-upgrade-0007-investigation-2026-05-11.md` — project_ldr_upgrade_in_flight_2026-05-11
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_DESIGN_NOTES.md` — Sean_Winslow_Resume_AI_PM.docx
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-agent-fleet-dashboard-spec.md` — vault-synthesizer eval suite
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-agent-fleet-dashboard-spec.md` — sw-ai-pm-portfolio/DESIGN-SPEC-V4
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-knowledge-mcp-spec.md` — intent-engineering MCP server
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/2026-06-19-meaning-over-access-substack-cross.md` — docs/MEANING_OVER_ACCESS
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/product-management/media-team-ideas/Perplexity-Computer-Overview.md` — sonnet 4.5
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/ref-nate-claude-chrome-extension-browser-as-employee.md` — sonnet 4.5
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/intent-engineering/ref-intent-engineering-landscape-survey-2026.md` — sonnet 4.5
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/intent-engineering/ref-personal-agentic-intent-engineering.md` — claude-3-
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-21-topic-18-pi-chatgpt-codex-integration-chatgpt-manual.md` — claude-3-
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-21-topic-15-pi-openrouter-integration-gemini-dr-manual.md` — claude-3-
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md` — opus 4.1
+
+## MEDIUM (209)
+
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/Excalidraw/Drawing 2026-04-19 09.38.16.excalidraw.md` — Excalidraw/Drawing 2026-04-19 09.38.16.excalidraw.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/product-management/prompts/ref- bi-weekly-update-prompt.md` — 30_domains/product-management/prompts/ref- bi-weekly-update-prompt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/05_atlas/operating-models/INTERVIEW-PLAYBOOK.md` — 05_atlas/operating-models/INTERVIEW-PLAYBOOK.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/05_atlas/operating-models/job-hunt-2026/operating-model.md` — 05_atlas/operating-models/job-hunt-2026/operating-model.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/05_atlas/operating-models/job-hunt-2026/schedule-recommendations.md` — 05_atlas/operating-models/job-hunt-2026/schedule-recommendations.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/05_atlas/operating-models/job-hunt-2026/HEARTBEAT.md` — 05_atlas/operating-models/job-hunt-2026/HEARTBEAT.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/05_atlas/operating-models/job-hunt-2026/USER.md` — 05_atlas/operating-models/job-hunt-2026/USER.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/05_atlas/operating-models/job-hunt-2026/SOUL.md` — 05_atlas/operating-models/job-hunt-2026/SOUL.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/05_atlas/operating-models/life-systems/operating-model.md` — 05_atlas/operating-models/life-systems/operating-model.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/05_atlas/operating-models/life-systems/schedule-recommendations.md` — 05_atlas/operating-models/life-systems/schedule-recommendations.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/05_atlas/operating-models/life-systems/HEARTBEAT.md` — 05_atlas/operating-models/life-systems/HEARTBEAT.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/05_atlas/operating-models/life-systems/USER.md` — 05_atlas/operating-models/life-systems/USER.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/05_atlas/operating-models/life-systems/SOUL.md` — 05_atlas/operating-models/life-systems/SOUL.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/agent-health-and-automation-routines-tension.md` — knowledge/connections/agent-health-and-automation-routines-tension.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/dependency-cascade-between-vault-synthesizer-and-substack-drafter.md` — knowledge/connections/dependency-cascade-between-vault-synthesizer-and-substack-drafter.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/operational-visibility-and-research-efficiency-tension.md` — knowledge/connections/operational-visibility-and-research-efficiency-tension.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/portfolio-differentiation-as-a-scheduling-constraint.md` — knowledge/connections/portfolio-differentiation-as-a-scheduling-constraint.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/tonal-consistency-across-creative-and-career-strategy.md` — knowledge/connections/tonal-consistency-across-creative-and-career-strategy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/screenplay-craft-modularization-and-voice-mode-integration.md` — knowledge/connections/screenplay-craft-modularization-and-voice-mode-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/voice-adaptation-and-professional-contextualization.md` — knowledge/connections/voice-adaptation-and-professional-contextualization.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/eval-driven-agent-coordination.md` — knowledge/connections/eval-driven-agent-coordination.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/tension-between-format-flexibility-and-preparation-specificity.md` — knowledge/connections/tension-between-format-flexibility-and-preparation-specificity.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/tension-between-cost-constraints-and-agent-autonomy.md` — knowledge/connections/tension-between-cost-constraints-and-agent-autonomy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/automation-failure-and-daily-note-disruption.md` — knowledge/concepts/automation-failure-and-daily-note-disruption.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/writing-voice-modes.md` — knowledge/expansions/writing-voice-modes.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/agentic-engineering.md` — knowledge/expansions/agentic-engineering.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/portfolio-projects.round2.md` — knowledge/expansions/portfolio-projects.round2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/portfolio-projects.round3.md` — knowledge/expansions/portfolio-projects.round3.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/autonomous-agent-fleets.round2.md` — knowledge/expansions/autonomous-agent-fleets.round2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/track-c-mcp-server-portfolio-differentiation.md` — knowledge/expansions/track-c-mcp-server-portfolio-differentiation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/daily-note-generation.md` — knowledge/expansions/daily-note-generation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/personal-agentic-intent-engineering.round1.md` — knowledge/expansions/personal-agentic-intent-engineering.round1.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/token-waste.md` — knowledge/expansions/token-waste.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/autonomous-agent-fleets.round3.md` — knowledge/expansions/autonomous-agent-fleets.round3.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/personal-agentic-intent-engineering.round3.md` — knowledge/expansions/personal-agentic-intent-engineering.round3.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/vibe-coding-interview-canon.md` — knowledge/expansions/vibe-coding-interview-canon.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/autonomous-agent-fleets.round1.md` — knowledge/expansions/autonomous-agent-fleets.round1.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/personal-agentic-intent-engineering.round2.md` — knowledge/expansions/personal-agentic-intent-engineering.round2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/comprehension-audit.md` — knowledge/expansions/comprehension-audit.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/portfolio-projects.round1.md` — knowledge/expansions/portfolio-projects.round1.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round3.md` — knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round3.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round2.md` — knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/eval-vocabulary-and-vibe-coding-interview-canon-synergy.md` — knowledge/expansions/connections/eval-vocabulary-and-vibe-coding-interview-canon-synergy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round1.md` — knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round1.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/10_timeline/weekly/2026-W10.md` — 10_timeline/weekly/2026-W10.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/10_timeline/weekly/2026-W11.md` — 10_timeline/weekly/2026-W11.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/10_timeline/weekly/2026-W15.md` — 10_timeline/weekly/2026-W15.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/10_timeline/weekly/2026-W12.md` — 10_timeline/weekly/2026-W12.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/10_timeline/weekly/2026-W16.md` — 10_timeline/weekly/2026-W16.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/10_timeline/weekly/2026-W13.md` — 10_timeline/weekly/2026-W13.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/10_timeline/weekly/2026-W18.md` — 10_timeline/weekly/2026-W18.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/people/substack.md` — 40_knowledge/people/substack.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/writing-voice-modes.md` — 40_knowledge/concepts/writing-voice-modes.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/research-hermes-prompt-caching-spike-2026-05-11.md` — 40_knowledge/concepts/research-hermes-prompt-caching-spike-2026-05-11.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/research-autoresearch-agentic-polymarket-crypto-2026-04-26.md` — 40_knowledge/concepts/research-autoresearch-agentic-polymarket-crypto-2026-04-26.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/ref-idea-ga4-analytics-saas.md` — 40_knowledge/concepts/ref-idea-ga4-analytics-saas.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/Gemini-AI-Crypto-Trading-Agent-Viability.md` — 40_knowledge/concepts/Gemini-AI-Crypto-Trading-Agent-Viability.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/idea-autoresearch-agentic-polymarket-crypto-v2-2026-04-28.md` — 40_knowledge/concepts/idea-autoresearch-agentic-polymarket-crypto-v2-2026-04-28.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/idea-agent-evals-templates.md` — 40_knowledge/concepts/idea-agent-evals-templates.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/intent-engineering.md` — 40_knowledge/concepts/intent-engineering.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/perplexity-research-autoresearch-agentic-polymarket-crypto-2026-04-26.md` — 40_knowledge/concepts/perplexity-research-autoresearch-agentic-polymarket-crypto-2026-04-26.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/templates/EXPLANATION-template.md` — 40_knowledge/templates/EXPLANATION-template.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Work/pr-digest-2026-04-08.md` — 02_Areas/Work/pr-digest-2026-04-08.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-21.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-21.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-15.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-15.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-01.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-01.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-11.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-11.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-10.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-10.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-24.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-24.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-20.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-20.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-14.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-14.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-25.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-25.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-21.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-21.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-30.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-30.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-20.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-20.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-24.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-24.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-09.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-09.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/fleet-state.md` — 02_Areas/Agent-Fleet/fleet-state.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-19.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-19.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-23.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-23.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-27.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-27.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-26.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-26.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-08.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-08.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-18.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-18.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-22.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-22.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-03.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-03.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-13.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-13.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-29.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-29.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-09.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-09.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-07.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-07.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-17.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-17.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-19.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-19.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-06.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-06.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-22.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-22.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-16.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-16.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-18.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-18.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-02.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-02.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-12.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-12.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-28.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-28.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/50_sources/finance/The Block Day 1 Information/The Block - New Hire Landing Plan-Sean Winslow.md` — 50_sources/finance/The Block Day 1 Information/The Block - New Hire Landing Plan-Sean Winslow.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/50_sources/finance/The Block Day 1 Information/The Block - Seans 30-60-90 Roadmap.md` — 50_sources/finance/The Block Day 1 Information/The Block - Seans 30-60-90 Roadmap.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/50_sources/finance/The Block Day 1 Information/The Block's Employee Handbook-Letter from the CEO.md` — 50_sources/finance/The Block Day 1 Information/The Block's Employee Handbook-Letter from the CEO.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/50_sources/finance/2026-feb-financial-analysis/extraction-report.md` — 50_sources/finance/2026-feb-financial-analysis/extraction-report.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/50_sources/finance/2026-feb-financial-analysis/financial-review-2026-02-27.md` — 50_sources/finance/2026-feb-financial-analysis/financial-review-2026-02-27.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/50_sources/finance/the-block-severance-docs/severance-agreement-doc.md` — 50_sources/finance/the-block-severance-docs/severance-agreement-doc.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/50_sources/finance/The Block Day 1 Information/TheBlock-Fidelity 401k set up /Gemini-401k-Enrollment-Prompt.md` — 50_sources/finance/The Block Day 1 Information/TheBlock-Fidelity 401k set up /Gemini-401k-Enrollment-Prompt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-07-chatgpt-mcp-server-production-patterns.md` — 20_projects/research/2026-05-07-chatgpt-mcp-server-production-patterns.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-09-gemini-ai-eval-fluency-primer-and-reference-cases.md` — 20_projects/research/2026-05-09-gemini-ai-eval-fluency-primer-and-reference-cases.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-18-vault-knowledge-mcp-research-chatgpt.md` — 20_projects/research/2026-05-18-vault-knowledge-mcp-research-chatgpt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-18-mcp-prompt-injection-hardening.md` — 20_projects/research/2026-05-18-mcp-prompt-injection-hardening.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-03-you-are-a-senior-research-analyst-at-the-intersection-of-ai.md` — 20_projects/research/2026-05-03-you-are-a-senior-research-analyst-at-the-intersection-of-ai.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-09-gemini-ai-vibe-coding-interview-canon.md` — 20_projects/research/2026-05-09-gemini-ai-vibe-coding-interview-canon.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-18-vault-knowledge-mcp-research-gemini.md` — 20_projects/research/2026-05-18-vault-knowledge-mcp-research-gemini.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-02-compare-gguf-vs-mlx-inference-speed-on-apple-m4-pro-for-14b.md` — 20_projects/research/2026-05-02-compare-gguf-vs-mlx-inference-speed-on-apple-m4-pro-for-14b.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md` — 20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-18-enterprise-ai-pm-skill-gaps.md` — 20_projects/research/2026-05-18-enterprise-ai-pm-skill-gaps.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-07-mcp-server-production-patterns.md` — 20_projects/research/2026-05-07-mcp-server-production-patterns.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-21-topic-20-fleet-benchmark-planning-prompt.md` — 20_projects/research/2026-05-21-topic-20-fleet-benchmark-planning-prompt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-21-pi-research-prompts-for-gemini-dr.md` — 20_projects/research/2026-05-21-pi-research-prompts-for-gemini-dr.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-09-perplexity-ai-vibe-coding-interview-canon.md` — 20_projects/research/2026-05-09-perplexity-ai-vibe-coding-interview-canon.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/nate-jones-portfolio-strategy-2026-05-17.md` — 20_projects/prj-job-hunt-2026/nate-jones-portfolio-strategy-2026-05-17.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-campus-201/prj-campus-201.md` — 20_projects/prj-campus-201/prj-campus-201.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-campus-201/prj-campus-product-knowledge-base-builder.md` — 20_projects/prj-campus-201/prj-campus-product-knowledge-base-builder.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-campus-201/prj-campus-notes.md` — 20_projects/prj-campus-201/prj-campus-notes.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/prj-agent-wiring-rollout.md` — 20_projects/prj-code-brain/prj-agent-wiring-rollout.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/prj-knowledge-loop-consumer.md` — 20_projects/prj-code-brain/prj-knowledge-loop-consumer.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/adobe-mcp-synthesis-v2.md` — 20_projects/prj-code-brain/adobe-mcp-synthesis-v2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/prj-automode.md` — 20_projects/prj-code-brain/prj-automode.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/phase-2-soak-closeout-2026-05-01.md` — 20_projects/prj-code-brain/phase-2-soak-closeout-2026-05-01.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-boston-move/ref-move-out-checklist.md` — 20_projects/prj-boston-move/ref-move-out-checklist.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-boston-move/prj-mary-and-sean-eat-drink-poop-around-the-world.md` — 20_projects/prj-boston-move/prj-mary-and-sean-eat-drink-poop-around-the-world.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-personal-finance/prj-personal-finance.md` — 20_projects/prj-personal-finance/prj-personal-finance.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-personal-finance/prj-ive-built-out-a-notebook-within-notebooklm-called-claud.md` — 20_projects/prj-personal-finance/prj-ive-built-out-a-notebook-within-notebooklm-called-claud.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-sw-portfolio-and-hubs-designs/ref-how-to-use-project.md` — 20_projects/prj-sw-portfolio-and-hubs-designs/ref-how-to-use-project.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-16bitfit/prj-16bitfit-2.md` — 20_projects/prj-16bitfit/prj-16bitfit-2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-16bitfit/prj-16bit-fit-color-palette.md` — 20_projects/prj-16bitfit/prj-16bit-fit-color-palette.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/open-source-deep-research/2026-05-04-fleet-reinstall-summary.md` — 20_projects/prj-code-brain/open-source-deep-research/2026-05-04-fleet-reinstall-summary.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/ref-voice-mechanics-research.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/ref-voice-mechanics-research.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/writing-voice-modes-research-playbook.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/writing-voice-modes-research-playbook.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/screenplay-craft-research-pipeline.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/screenplay-craft-research-pipeline.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/voice-modes-integration-and-upgrade-plan.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/voice-modes-integration-and-upgrade-plan.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/notebooklm-system-prompts.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/notebooklm-system-prompts.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/phase-3-session-guide.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/phase-3-session-guide.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/animation-pipeline/SKILL.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/animation-pipeline/SKILL.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/script-writing/SKILL.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/script-writing/SKILL.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/open-source-deep-research/archive/gemini-deep-research-integration-plan-2026-05-03.md` — 20_projects/prj-code-brain/open-source-deep-research/archive/gemini-deep-research-integration-plan-2026-05-03.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/job-feed/2026-05-23.md` — 20_projects/prj-job-hunt-2026/job-feed/2026-05-23.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/job-feed/2026-05-17.md` — 20_projects/prj-job-hunt-2026/job-feed/2026-05-17.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/job-feed/2026-05-13.md` — 20_projects/prj-job-hunt-2026/job-feed/2026-05-13.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/job-feed/2026-05-12.md` — 20_projects/prj-job-hunt-2026/job-feed/2026-05-12.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/job-feed/2026-05-22.md` — 20_projects/prj-job-hunt-2026/job-feed/2026-05-22.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/job-feed/2026-05-16.md` — 20_projects/prj-job-hunt-2026/job-feed/2026-05-16.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/job-feed/2026-05-19.md` — 20_projects/prj-job-hunt-2026/job-feed/2026-05-19.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/job-feed/2026-05-18.md` — 20_projects/prj-job-hunt-2026/job-feed/2026-05-18.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/job-feed/2026-05-11.md` — 20_projects/prj-job-hunt-2026/job-feed/2026-05-11.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/job-feed/2026-05-21.md` — 20_projects/prj-job-hunt-2026/job-feed/2026-05-21.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/job-feed/2026-05-15.md` — 20_projects/prj-job-hunt-2026/job-feed/2026-05-15.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/job-feed/2026-05-20.md` — 20_projects/prj-job-hunt-2026/job-feed/2026-05-20.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/job-feed/2026-05-14.md` — 20_projects/prj-job-hunt-2026/job-feed/2026-05-14.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/job-feed/2026-05-24.md` — 20_projects/prj-job-hunt-2026/job-feed/2026-05-24.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-vibe-coding-research-synthesis.md` — 20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-vibe-coding-research-synthesis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-portfolio-projects-roadmap.md` — 20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-portfolio-projects-roadmap.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-practice-and-confidence-plan.md` — 20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-practice-and-confidence-plan.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-vibe-coding-playbook.md` — 20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-vibe-coding-playbook.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/the-block-resume-info-inventory-2026-05-09.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/the-block-resume-info-inventory-2026-05-09.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-23-openai-image-gen-skill-kickoff-prompt.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-23-openai-image-gen-skill-kickoff-prompt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-08-block-skills-audit.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/2026-05-08-block-skills-audit.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/The-Block-Final-Meeting-5-4-26.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/The-Block-Final-Meeting-5-4-26.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/resume-revision-kickoff-prompt-2026-05-10.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/resume-revision-kickoff-prompt-2026-05-10.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/prompts/nate-jones-cowork-prompt.md` — 20_projects/prj-job-hunt-2026/prompts/nate-jones-cowork-prompt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_Tech_PM.md` — 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_Tech_PM.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_Creative_PM.md` — 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_Creative_PM.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_DESIGN_NOTES.md` — 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_DESIGN_NOTES.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume.md` — 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-personal-site-deployment-deferred.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-personal-site-deployment-deferred.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/v0-scope-intent-engineering-mcp.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/v0-scope-intent-engineering-mcp.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-10-evals-error-analysis-real-logs.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-10-evals-error-analysis-real-logs.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-20-task-19-step-0-prebuild-prep.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-20-task-19-step-0-prebuild-prep.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-10-eval-suite-build-plan.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-10-eval-suite-build-plan.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-knowledge-mcp-spec.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-knowledge-mcp-spec.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-synthesizer-retrofit-tiers.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-vault-synthesizer-retrofit-tiers.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/claude-code-build-prompt.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/claude-code-build-prompt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-22-continuation-prompt.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-22-continuation-prompt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-20-task-20-github-profile-audit-deliverable.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-20-task-20-github-profile-audit-deliverable.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-mbp-travel-fallback-strategy.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-mbp-travel-fallback-strategy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-21-continuation-prompt.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-21-continuation-prompt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/cowork-continuation-prompt.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/cowork-continuation-prompt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/intent-engineering-mcp.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/intent-engineering-mcp.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/2026-05-10-the-night-my-vault-said-nothing.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/2026-05-10-the-night-my-vault-said-nothing.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/2026-05-10-the-night-my-vault-said-nothing-kerouac-variant.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/2026-05-10-the-night-my-vault-said-nothing-kerouac-variant.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/2026-06-19-meaning-over-access-substack-cross.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/2026-06-19-meaning-over-access-substack-cross.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/the-block-termination-checklist/unemployment-claim.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/the-block-termination-checklist/unemployment-claim.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/the-block-termination-checklist/401k-rollover.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/the-block-termination-checklist/401k-rollover.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/experiments/voice-calibration/2026-05-14-intent-engineering-mcp.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/experiments/voice-calibration/2026-05-14-intent-engineering-mcp.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/experiments/council-sessions/2026-05-14-post-1-council-session.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/experiments/council-sessions/2026-05-14-post-1-council-session.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/gate-b-drafts/EXPLANATION.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/gate-b-drafts/EXPLANATION.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-results/chatgpt-mcp-server-production-patterns.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-results/chatgpt-mcp-server-production-patterns.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/cowork-kickoffs/2026-05-07-kickoff-vibe-coding-playbook-synthesis.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/cowork-kickoffs/2026-05-07-kickoff-vibe-coding-playbook-synthesis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/reference-synthesis-docs/claude-nate-prompt-2-analysis.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/reference-synthesis-docs/claude-nate-prompt-2-analysis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/reference-synthesis-docs/chatgpt-5.5-nate-prompt-1-analysis.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/reference-synthesis-docs/chatgpt-5.5-nate-prompt-1-analysis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/reference-synthesis-docs/brainstorming-2026-05-06-indie-products-from-karpathy-synthesis.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/reference-synthesis-docs/brainstorming-2026-05-06-indie-products-from-karpathy-synthesis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/reference-synthesis-docs/chatgpt-5.5-nate-prompt-2-analysis.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/reference-synthesis-docs/chatgpt-5.5-nate-prompt-2-analysis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/reference-synthesis-docs/claude-nate-prompt-1-analysis.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/reference-synthesis-docs/claude-nate-prompt-1-analysis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-prompts/2026-05-07-prompt-mcp-server-production-patterns.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-prompts/2026-05-07-prompt-mcp-server-production-patterns.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-prompts/2026-05-07-prompt-target-role-specs.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-prompts/2026-05-07-prompt-target-role-specs.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-prompts/2026-05-08-prompt-crypto-pm-referral-targets.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-prompts/2026-05-08-prompt-crypto-pm-referral-targets.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-prompts/2026-05-07-prompt-vibe-coding-interview-canon.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-prompts/2026-05-07-prompt-vibe-coding-interview-canon.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-prompts/2026-05-07-prompt-eval-design-canon.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-prompts/2026-05-07-prompt-eval-design-canon.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-prompts/2026-05-07-prompt-boston-remote-ai-pm-landscape.md` — 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/research-prompts/2026-05-07-prompt-boston-remote-ai-pm-landscape.md
+
+## LOW (12)
+
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/portfolio-projects.round2.md` — portfolio-projects.round2.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/portfolio-projects.round3.md` — portfolio-projects.round3.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/autonomous-agent-fleets.round2.md` — autonomous-agent-fleets.round2.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/personal-agentic-intent-engineering.round1.md` — personal-agentic-intent-engineering.round1.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/autonomous-agent-fleets.round3.md` — autonomous-agent-fleets.round3.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/personal-agentic-intent-engineering.round3.md` — personal-agentic-intent-engineering.round3.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/autonomous-agent-fleets.round1.md` — autonomous-agent-fleets.round1.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/personal-agentic-intent-engineering.round2.md` — personal-agentic-intent-engineering.round2.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/portfolio-projects.round1.md` — portfolio-projects.round1.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round3.md` — agent-health-and-daily-routine-automation-interdependence.round3.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round2.md` — agent-health-and-daily-routine-automation-interdependence.round2.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round1.md` — agent-health-and-daily-routine-automation-interdependence.round1.md
+
