@@ -81,11 +81,60 @@ This is itself a Topic 20 finding: **LM Studio's MLX integration is a meaningful
 
 ## Scorecards
 
-<!-- TIER_A_SCORECARD_PLACEHOLDER -->
+### Tier A — M4 Max MBP 48 GB, LM Studio MLX
 
-<!-- TIER_B_SCORECARD_PLACEHOLDER -->
+(Thinking-mode caveat applies — see [§Runtime caveat](#runtime-caveat--lm-studio-mlx-thinking-mode) above. Qwen3.5/3.6 numbers are undercounted vs intrinsic model capability.)
 
-<!-- TIER_C_SCORECARD_PLACEHOLDER -->
+| Model | Valid JSON | Schema match | Tok/s mean ± σ | 32K Needle | Pi gotchas |
+|---|---|---|---|---|---|
+| `qwen3-14b` (production baseline) | 28/40* | **20/40** (50%) | 27.9 ± 0.1 | **5/5** ✅ | 0/5 |
+| `qwen3.5-27b` (dense) | 19/20 | **14/20** (70%) | 13.9 ± 0.2 | 0/5 ⚠️ | 1/5 |
+| `qwen3.5-35b-a3b` (MoE 3B active) | 19/20 | **13/20** (65%) | 63.0 ± 27.4 | 0/5 ⚠️ | 1/5 |
+| `qwen3.6-27b-mlx` (dense) | 17/20 | **10/20** (50%) | 14.4 ± 1.0 | 0/5 ⚠️ | 1/5 |
+| `qwen3.6-35b-a3b-mlx` (MoE 3B active) | 20/20 | **12/20** (60%) | **80.2** ± 0.2 | 0/5 ⚠️ | 1/5 |
+| `qwen/qwen3-coder-30b` (A3B MoE) | 20/20 | **7/20** (35%) | 79.1 ± 1.0 | 0/5 ⚠️ | 0/5 |
+
+\* qwen3-14b has 40 tool_call records because of repeated smoke-test runs during adapter development; the 50 % schema rate is on the full 40-record sample.
+
+⚠️ All Qwen3.5/3.6 0/5 needle scores are the LM Studio thinking-mode artifact — model spends tokens thinking, `max_tokens=64` for needle is insufficient, content comes back empty. The qwen3-14b baseline doesn't have thinking-mode and scores 5/5 needle on the same harness. Tier C's Ollama-based numbers show what Qwen3.5 does when `think:false` is honored: 5/5 on every needle probe.
+
+**Pi gotcha "1/5" for Qwen3.5/3.6 family** = `developer_role` rejection (HTTP 400 from LM Studio's Jinja chat template, which only accepts user/system/assistant roles). Same behavior as Ollama (the gotcha exists at the framework level for both runtimes; only models with explicit `developer` role training accept it).
+
+**Decode-speed standout:** the MoE 35B-A3B variants are **3–5× faster than dense 27B variants** on Apple Silicon (~60–80 tok/s vs ~14 tok/s) thanks to the 3 B active-parameter architecture. If/when LM Studio adds thinking-disable, these are the obvious Tier A upgrade candidates to re-evaluate first.
+
+### Tier B — M4 Pro Mac Mini 24 GB, Ollama (16K context)
+
+| Model | Valid JSON | Schema match | Tok/s mean ± σ | 32K Needle | Pi gotchas |
+|---|---|---|---|---|---|
+| `gemma4_e4b-16k` (current production) | 20/20 | **14/20** (70%) | **55.2** ± 0.1 | (skipped — 16K) | 1/5 |
+| `qwen3.5_9b-16k` (candidate) | 20/20 | **12/20** (60%) | 25.2 ± 0.0 | (skipped — 16K) | 0/5 |
+
+**Tier B sweep terminated early** for `qwen3.5:27b`, `qwen3.6:27b`, `gemma4:26b` (all 17 GB) — memory thrashing at the OS level, Ollama splitting 80/20 GPU/CPU, requests timing out. The plan called these "tight" at 24 GB; actual behavior is "doesn't run reliably even at 16K context."
+
+**Needle suite skipped on Tier B** because 16K context (the practical Mac Mini ceiling) is less than the needle prompt's 32K minimum.
+
+**Pi gotcha "1/5" for gemma4:e4b** = the `gemma4_vision_read` family flag (advisory only; not relevant for text-only fleet).
+
+### Tier C — Alienware RTX 5080 16 GB + 64 GB DDR5, Ollama (32K context)
+
+| Model | Valid JSON | Schema match | Tok/s mean ± σ | 32K Needle | Pi gotchas |
+|---|---|---|---|---|---|
+| `qwen3.5_27b-32k` | 20/20 | **18/20** ✅ (90%) | 6.9 ± 0.0 | **5/5** ✅ | 0/5 |
+| `gemma4_26b-32k` (MoE 3.8B) | 20/20 | **16/20** (80%) | **39.8** ± 0.2 | **5/5** ✅ | 1/5 |
+| `qwen3.5_9b-32k` | 20/20 | **14/20** (70%) | **113.4** ± 0.1 | **5/5** ✅ | 0/5 |
+| `devstral_24b-32k` | 20/20 | **7/20** (35%) | 19.8 ± 0.0 | **5/5** ✅ | 0/5 |
+| `nemotron3_33b-32k` | 16/20 | **7/20** (35%) | 29.4 ± 0.0 | **5/5** ✅ | 0/5 |
+| `qwen3.6_27b-32k` | 20/20 | **4/20** ⚠️ (20%) | 7.8 ± 0.0 | **5/5** ✅ | 0/5 |
+
+**Every Tier C model passes the 32K needle test 5/5.** Long-context recall is reliable across the candidate set on Ollama with proper context configuration.
+
+**`qwen3.5:27b` is the ONLY model in the entire 14-model sweep to pass the 90% tool-call adoption threshold** — but at 6.9 tok/s it's slow enough to make interactive use frustrating. Reserve for batch-quality workloads.
+
+**`gemma4:26b` MoE is the standout** — 80% accuracy (just under threshold), 40 tok/s (6× faster than the 90%-passing model), MoE active-params architecture explains the speed. **Recommended Tier C production model.**
+
+**`nemotron3:33b` exceeded expectations** — the plan projected 4–10 tok/s under heavy CPU offload (12 GB through 83 GB/s DDR5-5200). Actual: 29.4 tok/s. Either Ollama's offload heuristics + Blackwell's INT8 sparsity are compensating, or the offload-vs-bandwidth math overestimated the penalty. **Topic 20 datapoint: nemotron3:33b is usable on RTX 5080 16 GB.**
+
+**`qwen3.6:27b` at 20% is a regression from qwen3.5:27b** despite being newer. Possible causes: chat-template difference, quantization variant, prompt-format expectations. Investigation worthy (deferred to Topic 21).
 
 ## Per-tier adoption analysis
 
