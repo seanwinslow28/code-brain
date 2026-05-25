@@ -2719,27 +2719,34 @@ Total Tier C pull: ~100 GB. C: drive: 349 GB free → ~249 GB after pulls. **Sin
 - [ ] Alienware pulls (3.3)
 - [ ] Inventory + rollback documented (3.4)
 
-### Phase 4 progress
+### Phase 4 progress (2026-05-25)
 
-- [ ] Tier A sweep (4.1)
-- [ ] Tier B sweep (4.2)
-- [ ] Tier C sweep (4.3)
-- [ ] Sanity-checked (4.4)
+- [x] Tier A sweep (4.1) — MBP MLX via LM Studio. 6 models. Required two passes: v1 with max_tokens=512 captured 3 models cleanly; v2 with max_tokens=2048 (intended to give Qwen3.5/3.6 thinking-mode room) hung LM Studio's queue and was reverted; fill-gaps run with v1 settings completed the remaining 3. **LM Studio thinking-mode caveat documented in Topic 20 report.**
+- [x] Tier B sweep (4.2) — Mac Mini Ollama. 2 small models completed (qwen3.5:9b, gemma4:e4b). The 17 GB candidates (qwen3.5:27b, qwen3.6:27b, gemma4:26b) **overflow Mac Mini's practical 24 GB budget even at 16K context** — Ollama splits 80/20 GPU/CPU, memory thrashes, requests time out. Pivoted: 17 GB candidates benchmarked at Tier A (LM Studio fits at 48 GB) and Tier C (Alienware with offload).
+- [x] Tier C sweep (4.3) — Alienware Ollama. 6 models. **Every Tier C model passes the 32K needle test 5/5.** Highlights: `qwen3.5:27b` 90% tool-call (only model in entire sweep to clear threshold); `gemma4:26b` 80% + 40 tok/s; `nemotron3:33b` 29 tok/s on 16 GB VRAM (3× faster than plan projected).
+- [x] Sanity-checked (4.4) — All 14 result files have expected record counts (20 tool_call + 3 throughput + 5 needle + 5 pi_gotcha = 33 records each; baseline qwen3-14b has 40 tool_call due to repeated smoke tests).
 
-### Phase 5 progress
+### Phase 5 progress (2026-05-25)
 
-- [ ] Aggregator (5.1)
-- [ ] Topic 20 report written (5.2)
-- [ ] Topic 19 marked superseded (5.3)
+- [x] Aggregator (5.1) — [agents-sdk/benchmarks/topic_20/aggregate.py](../../benchmarks/topic_20/aggregate.py); handles both Ollama and LM Studio record shapes
+- [x] Topic 20 report written (5.2) — [vault/20_projects/research/2026-05-21-topic-20-fleet-model-refresh-benchmarks.md](../../../vault/20_projects/research/2026-05-21-topic-20-fleet-model-refresh-benchmarks.md)
+- [x] Topic 19 marked superseded (5.3) — frontmatter `status: superseded`, `superseded_by` field added
 
-### Phase 6 progress (only if winners exist)
+### Phase 6 status (gated by Phase 5 findings)
 
-- [ ] Pilot soak started — agent: ____, model: ____, start date: ____
-- [ ] Pilot soak passed
-- [ ] Broader rollout
-- [ ] CLAUDE.md + CHANGELOG updated
+- [N/A] Tier A pilot — HOLD decision; no migration. Re-evaluate if LM Studio adds thinking-disable.
+- [N/A] Tier B pilot — HOLD decision; gemma4:e4b stays in production.
+- [ ] Tier C pilot — pending. **Recommended:** `gemma4:26b` MoE on a manually-triggered batch agent during Sean's 7am-5pm Alienware window. Do NOT bind a launchd agent to Tier C (Pattern E manual-wake + 7am-5pm contract makes overnight scheduled use unreliable).
 
-### Final done-when
+### Final done-when (Phase 8)
 
-- [ ] All Phase 8 checklist items green
-- [ ] `python3 scripts/validate.py` passes
+- [x] Phase 0 verification all green (or any red item is documented as "intentional deviation")
+- [x] All scorer + WoL tests pass (Phase 1: 15/15)
+- [x] All candidate model variants pulled (14 across all tiers — 4 more than the plan's original 9, because the locked candidate set was expanded post-RTX-5080-verification)
+- [x] All benchmark JSONL files present in `agents-sdk/benchmarks/topic_20/results/` (14 files)
+- [N/A] Alienware WoL soak: **not run.** Pattern A and Pattern B both proven non-functional on Modern Standby firmware (2026-05-25); Pattern E adopted. See decision record.
+- [x] `agents-sdk/docs/alienware-tier-c-wake-architecture-2026-05-21.md` committed with comprehensive failure log
+- [x] `vault/20_projects/research/2026-05-21-topic-20-fleet-model-refresh-benchmarks.md` committed with all scorecards filled in
+- [x] Topic 19 synthesis frontmatter updated to `status: superseded`
+- [x] If no adoption: report explicitly logs "HOLD" for Tier A + Tier B with reasoning; Tier C "ADD gemma4:26b" recommended (pilot pending)
+- [x] `python3 scripts/validate.py` passes (62 pre-existing warnings unrelated to Topic 20)
