@@ -97,11 +97,14 @@ def run_tool_call_suite(host: str, model: str) -> list[dict]:
                         {"role": "system", "content": system_msg},
                         {"role": "user", "content": probe["prompt"]},
                     ],
-                    # Bumped from 512 → 2048 so Qwen3.5/3.6 thinking-mode
-                    # has room to finish before producing the JSON answer.
-                    # Verified 2026-05-25: thinking uses ~100-200 tokens
-                    # before content appears; 512 was leaving content empty.
-                    max_tokens=2048, temperature=0.0,
+                    # Note 2026-05-25: bumping max_tokens to 2048 to give
+                    # Qwen3.5/3.6 thinking-mode room caused LM Studio queue
+                    # hangs (33s+ empty responses, no completion). Reverted
+                    # to 512. Consequence: when Qwen3.5/3.6 thinking burns
+                    # past the budget, content comes back empty — counted
+                    # as fail in scoring. This is a real LM-Studio-runtime
+                    # limitation that the Topic 20 report documents.
+                    max_tokens=512, temperature=0.0,
                     response_format_json=True,
                 )
                 content_raw = resp["choices"][0]["message"]["content"]
@@ -171,9 +174,13 @@ def run_needle_suite(host: str, model: str, num_ctx: int, runs: int = 5) -> list
             resp, _wall = _lmstudio_chat(
                 host, model,
                 messages=[{"role": "user", "content": hs.prompt}],
-                # Bumped 32 → 512 to give Qwen3.5/3.6 thinking room.
-                # The needle answer is 12 chars; thinking uses ~200-400 tokens.
-                max_tokens=512, temperature=0.0,
+                # Note 2026-05-25: needle answer is 12 chars (~5 tokens),
+                # but Qwen3.5/3.6 burn ~200-400 tokens on thinking first.
+                # Bumping max_tokens > 512 causes LM Studio queue hangs;
+                # leaving at 64 means thinking-mode models return empty
+                # content on this dimension. The Topic 20 report flags
+                # this as a runtime-level limitation, not a model failure.
+                max_tokens=64, temperature=0.0,
             )
             content_raw = resp["choices"][0]["message"]["content"]
             content = _strip_thinking(content_raw).strip()
