@@ -2649,13 +2649,30 @@ The plan is "done" when:
 
 ### Phase 2 progress
 
-- [ ] BIOS + OS WoL enabled (2.1)
-- [ ] Magic packet wake verified (2.2)
-- [ ] Ollama auto-start configured on Alienware (2.3)
-- [ ] Idle-sleep policy set (2.4)
-- [ ] 10-cycle soak (2.5) — record X/10 successes here:
-- [ ] SSH sleep verified (2.6)
-- [ ] Decision record written (2.7)
+- [x] BIOS + OS WoL enabled (2.1) — Killer E3100G `Wake on Magic Packet`/`Shutdown Wake-On-Lan` Enabled; BIOS `Wake on LAN/WLAN = LAN Only`; Fast Startup off; OpenSSH Server installed + Automatic; SSH key auth set up in `C:\ProgramData\ssh\administrators_authorized_keys`; psshutdown installed at `C:\Tools\PsTools\psshutdown.exe`
+- [x] Magic packet wake **from Sleep (S0ix)** verified (2.2) — 2-second wake (2026-05-24 16:52). **Cold-S5 WoL does NOT work** on this hardware (Modern Standby BIOS doesn't supply NIC standby power in S5; 90s timeout). Required architecture pivot.
+- [x] Ollama auto-start configured on Alienware (2.3) — Ollama 0.21.0 boots and binds to LAN; verified `qwen3-vl:8b` listing from Mac Mini at 192.168.68.201:11434
+- [x] Idle-sleep policy set (2.4) — `standby-timeout-ac = 1800` (30 min). NOTE: appeared to revert across one reboot; may need a re-application if it drifts again. No Deep Sleep Control toggle found in BIOS (USB Wake Support description implies it's disabled).
+- [ ] **5-cycle (revised from 10) Sleep+WoL soak (2.5)** — pending. Sleep is NOT scriptable on this Modern Standby system (psshutdown `-d` returns "Request is not supported"; .NET `SetSuspendState` returns True but is a no-op; rundll32 silently ignored). Soak will be wake-from-Sleep cycles with Sean clicking Start → Sleep between attempts. Original auto-loop infeasible.
+- [ ] SSH sleep verified (2.6) — **not feasible**, will be marked N/A in decision record. SSH key auth itself works (passwordless from Mac Mini); but no remote sleep API succeeds on Modern Standby.
+- [ ] Decision record written (2.7) — pending; capture S0ix-only architecture, /22 broadcast, Modern Standby quirks
+
+### Phase 2 — Critical discoveries (capture in Task 2.7 decision record)
+
+1. **Subnet is /22, not /24.** Deco BE63 mesh netmask = 255.255.252.0. Correct directed broadcast = `192.168.71.255`. The plan-default `255.255.255.255` was silently dropped by the Deco backbone; `192.168.68.255` is a unicast non-existent host on /22. Captured in `config.toml [routing.machines.alienware].wol_broadcast`.
+2. **Modern Standby only — no S3.** `powercfg /a` shows only `Standby (S0 Low Power Idle) Network Connected`. WoL works from S0ix sleep but NOT from full Shutdown (S5).
+3. **No programmatic sleep mechanism works over SSH.** Modern Standby kernel rejects rundll32 / .NET SetSuspendState / psshutdown -d, all silently or with "Request is not supported." Start menu Sleep (interactive) DOES work. Architecture must rely on Windows' built-in idle-sleep timeout, not scripted sleep.
+4. **Hardware is RTX 5080 + 64GB RAM (NOT 4090 + 24GB as plan assumed).** Alienware Aurora ACT1250, Intel Core Ultra 9 285, BIOS 1.14.0. RTX 5080 has 16GB GDDR7 (Blackwell) — TIGHTER VRAM than plan's assumed 24GB. Phase 3 Tier C model sizing must be re-verified.
+
+### Phase 2 — Architecture decision (Option A: simplified Pattern A)
+
+| Aspect | Final |
+|---|---|
+| Standby state | S0ix Modern Standby (no S5) |
+| Wake mechanism | WoL magic packet to `192.168.71.255:9` — ~2-second wake from Sleep |
+| Sleep trigger | Windows idle-sleep timer (30 min on AC) — auto-fires when machine genuinely idle |
+| Remote sleep | NOT supported (firmware refuses all programmatic suspend) — manual Sleep button if needed |
+| Power draw idle | ~3-10W (S0ix) — accepts the ~5W premium over original S5 plan |
 
 ### Phase 3 progress
 
