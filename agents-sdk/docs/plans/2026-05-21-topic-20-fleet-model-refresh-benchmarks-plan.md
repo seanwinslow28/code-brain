@@ -2674,6 +2674,31 @@ The plan is "done" when:
 | Remote sleep | NOT supported (firmware refuses all programmatic suspend) — manual Sleep button if needed |
 | Power draw idle | ~3-10W (S0ix) — accepts the ~5W premium over original S5 plan |
 
+### Phase 3 — candidate set decisions (2026-05-25, approved by Sean after RTX 5080 16 GB VRAM verification)
+
+The original plan's Tier C was sized for RTX 4090 24 GB. Real hardware is RTX 5080 16 GB GDDR7 + 64 GB DDR5-5200 + Core Ultra 9 285 + 1 TB NVMe. Tier B and Tier A candidate lists already include the newest qwen3.5 / qwen3.6 / gemma4 candidates; Tier C was the only set that needed amendment.
+
+Operative principle (per Sean's 2026-05-25 feedback): **test the newest local-runnable models, accept slight CPU offload as a benchmark datapoint not a rejection reason.** Cloud-only tags (`deepseek-v4-*`, `glm-5.1`, `kimi-k2.6`, `minimax-m2.7`, `gemini-3-flash-preview`, `qwen3-coder:480b-cloud`, `nemotron3-super:120b`, `mistral-medium-3.5`) are excluded — violate the "use my PC more" goal.
+
+**Tier A (M4 Max MBP, 48 GB unified):** `qwen3.5:27b` · `qwen3.5:35b` · `qwen3.6:35b` · `qwen3-coder:30b` · `qwen3:14b` (Ollama equivalent of the LM Studio production model, per Task 4.1 Step 2)
+
+**Tier B (M4 Pro Mac Mini, 24 GB unified):** `qwen3.5:9b` · `qwen3.5:27b` · `qwen3.6:27b` *(added 2026-05-25)* · `gemma4:26b` (MoE) · `gemma4:e4b` (current production baseline)
+
+**Tier C (Alienware, RTX 5080 16 GB):**
+
+| Tag | Disk | VRAM fit | Expected tok/s | Rationale |
+|---|---|---|---|---|
+| `qwen3.5:27b` | 17 GB | ~1 GB CPU offload | ~25–40 | Newest qwen3.5 27B dense, 12.2 M pulls — what §Correction said we were missing |
+| `qwen3.6:27b` | 17 GB | ~1 GB CPU offload | ~25–40 | Newest qwen3.6 with "Agentic Coding" + "thinking preservation" |
+| `qwen3.5:9b` | ~6 GB | ✅ comfortable | ~80–120 | Tests "smaller fitting model is faster on Blackwell" hypothesis |
+| `gemma4:26b` (MoE, 3.8 B active) | 18 GB | ~2 GB offload, tiny active params | ~30–50 | Newest gemma4 MoE; text-only fleet ignores multimodal-read bug |
+| `nemotron3:33b` | 28 GB | heavy offload (~12 GB through DDR5-5200 at 83 GB/s) | ~4–10 (speed cliff) | NVIDIA-tuned for agentic; capture agentic-quality numbers even if decode is slow |
+| `devstral:24b-small-2505-q4_K_M` | 14 GB | ✅ comfortable | ~40–55 | **Old baseline anchor** — without it, no apples-to-apples vs Topic 19 |
+
+Total Tier C pull: ~100 GB. C: drive: 349 GB free → ~249 GB after pulls. **Single-drive constraint:** all Tier C state lives on the 1 TB NVMe; SSD failure = full re-pull (~30 min on fresh Ollama).
+
+**Blackwell FP4 caveat for benchmark interpretation:** Ollama Q4_K_M is GGUF int-quant, not native FP4. Blackwell's FP4 advantage materializes in TensorRT-LLM/vLLM, not Ollama. RTX 5080 INT8 TOPS is +36% vs 4090 but memory bandwidth is slightly lower (960 vs 1008 GB/s). Net: read 5080 tok/s within ±10% of 4090 baselines, not "Blackwell × 1.3".
+
 ### Phase 3 progress
 
 - [ ] MBP pulls (3.1)
