@@ -1,8 +1,9 @@
 ---
 type: research-synthesis
 date: 2026-05-21
-status: superseded-pending-benchmarks
-status_note: "2026-05-21 same-day follow-up — Live Ollama catalog inspection (see §Correction at bottom of file) revealed the synthesis missed three real, locally-runnable models that should be evaluated: qwen3.5 (12.2M pulls), qwen3.6 (1.5M pulls), and nemotron3:33b (588K pulls). The Tier A/B/C recommendations remain valid as a known-good baseline, but the upgrade-path is pending a Topic 20 pull-and-benchmark session before final adoption decisions."
+status: superseded
+superseded_by: "[[2026-05-21-topic-20-fleet-model-refresh-benchmarks]]"
+status_note: "Superseded 2026-05-25 by Topic 20 benchmark report. The §Correction at the bottom of this file (added 2026-05-21) flagged the methodology bias against newer locally-runnable models; Topic 20 benchmarked those candidates on actual hardware. Headline Topic 20 outcomes: (a) no Tier A or Tier B production migration justified by the data; (b) `gemma4:26b` MoE added as new Tier C production model on the Alienware (manual-wake Pattern E because Modern-Standby firmware blocks remote-wake); (c) `qwen3.5:27b` is the only candidate to pass the 90% adoption threshold but is too slow at 6.9 tok/s; (d) the agentic-coder models (`devstral`, `qwen3-coder`, `nemotron3`) score poorly on generic tool-call prompts — likely a benchmark-template mismatch worth re-running with their native formats."
 question: "Topic 19 — Optimal Ollama model for Pi-driven coding + agentic workflows in 2026, ranked by RAM/VRAM tier."
 sources:
   - "[[2026-05-21-topic-19a-optimal-ollama-models-pi-perplexity]]"
