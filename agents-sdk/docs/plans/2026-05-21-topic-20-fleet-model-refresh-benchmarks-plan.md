@@ -2650,12 +2650,25 @@ The plan is "done" when:
 ### Phase 2 progress
 
 - [x] BIOS + OS WoL enabled (2.1) — Killer E3100G `Wake on Magic Packet`/`Shutdown Wake-On-Lan` Enabled; BIOS `Wake on LAN/WLAN = LAN Only`; Fast Startup off; OpenSSH Server installed + Automatic; SSH key auth set up in `C:\ProgramData\ssh\administrators_authorized_keys`; psshutdown installed at `C:\Tools\PsTools\psshutdown.exe`
-- [x] Magic packet wake **from Sleep (S0ix)** verified (2.2) — 2-second wake (2026-05-24 16:52). **Cold-S5 WoL does NOT work** on this hardware (Modern Standby BIOS doesn't supply NIC standby power in S5; 90s timeout). Required architecture pivot.
+- [~] Magic packet wake verification (2.2) — **the prior session's "2-second wake from S0ix" measurement was a false positive.** `probe_until_ready` succeeds because the Killer NIC keeps an opportunistic TCP listener alive in S0ix; the OS itself never wakes. Re-tested under proper measurement protocol 2026-05-25 — WoL packet sent, no wake event fired, `powercfg -lastwake` shows zero wake events. Modern Standby firmware suppresses NIC-asserted wake events at the hardware level. Pattern A is dead on this hardware.
 - [x] Ollama auto-start configured on Alienware (2.3) — Ollama 0.21.0 boots and binds to LAN; verified `qwen3-vl:8b` listing from Mac Mini at 192.168.68.201:11434
-- [x] Idle-sleep policy set (2.4) — `standby-timeout-ac = 1800` (30 min). NOTE: appeared to revert across one reboot; may need a re-application if it drifts again. No Deep Sleep Control toggle found in BIOS (USB Wake Support description implies it's disabled).
-- [ ] **5-cycle (revised from 10) Sleep+WoL soak (2.5)** — pending. Sleep is NOT scriptable on this Modern Standby system (psshutdown `-d` returns "Request is not supported"; .NET `SetSuspendState` returns True but is a no-op; rundll32 silently ignored). Soak will be wake-from-Sleep cycles with Sean clicking Start → Sleep between attempts. Original auto-loop infeasible.
-- [ ] SSH sleep verified (2.6) — **not feasible**, will be marked N/A in decision record. SSH key auth itself works (passwordless from Mac Mini); but no remote sleep API succeeds on Modern Standby.
-- [ ] Decision record written (2.7) — pending; capture S0ix-only architecture, /22 broadcast, Modern Standby quirks
+- [x] Idle-sleep policy set (2.4) — `standby-timeout-ac = 1800` (30 min). Stable across the 2026-05-25 reboots.
+- [N/A] **5-cycle Sleep+WoL soak (2.5)** — not run. Pattern A definitively dead; Pattern B (Windows Task Scheduler wake) also dead; soaking either pattern is wasted time. See decision record for full failure log.
+- [N/A] SSH sleep verified (2.6) — not feasible on Modern Standby (confirmed Phase 2). Marked N/A in decision record.
+- [x] Decision record written (2.7) — [agents-sdk/docs/alienware-tier-c-wake-architecture-2026-05-21.md](../alienware-tier-c-wake-architecture-2026-05-21.md). Captures: all 4 failed wake patterns (A WoL-from-S3, A' WoL-from-S0ix, Path 1 PlatformAoAcOverride, B Task Scheduler), Pattern E adoption, operating contract for agent fleet, rollback path.
+
+### Phase 2 — Final architecture (Pattern E, adopted 2026-05-25)
+
+**Pattern E — manual-wake interactive Tier C.** Sean physically wakes the Alienware via mouse / keyboard / power button at the start of each day (~7am) and lets it idle-sleep at night (~5pm). The agent fleet does NOT autonomously route to Tier C. Agents that want Tier C must run during Sean's awake-window or fall back to Mac Mini / MBP if the machine is unreachable.
+
+Why Pattern E and not Pattern A: Modern Standby on this firmware (Alienware Aurora ACT1250, BIOS 1.14.0) suppresses ALL non-Microsoft-signed wake events — both NIC-asserted (WoL) and RTC-asserted (Task Scheduler). No Windows-side policy or driver setting overrides this. The only working wake paths are physical input and Microsoft-signed system tasks. Documented in `project_alienware_wake_impossible.md` so future sessions don't re-investigate.
+
+Why Pattern E and not Pattern C (always-on): Pattern E saves ~$5/month in power and matches Sean's actual daily reality (at desk 7am–5pm). If the always-on tradeoff is ever desired, flip with `powercfg /change standby-timeout-ac 0` — zero migration work.
+
+Operating contract for agents routing to Tier C (enforced in fleet code in Phase 6 if needed):
+1. Probe `http://192.168.68.201:11434/api/tags` with a 3s timeout before any Tier C call.
+2. If unreachable, fall back to Mac Mini / MBP per existing routing.
+3. Do not call `wake_alienware.py` in production paths — non-functional on this hardware. Script retained for future Linux Tier C hosts.
 
 ### Phase 2 — Critical discoveries (capture in Task 2.7 decision record)
 
