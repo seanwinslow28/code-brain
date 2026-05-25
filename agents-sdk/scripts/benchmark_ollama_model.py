@@ -47,7 +47,7 @@ AGENTIC_LOOP_PROMPTS = HERE / "benchmarks/topic_20/prompts/agentic_loops.jsonl"
 
 def _ollama_chat(host: str, model: str, messages: list[dict], options: dict | None = None,
                  stream: bool = False, format_json: bool = False) -> dict:
-    body: dict = {"model": model, "messages": messages, "stream": stream}
+    body: dict = {"model": model, "messages": messages, "stream": stream, "think": False}
     if options:
         body["options"] = options
     if format_json:
