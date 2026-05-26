@@ -264,8 +264,8 @@ def main() -> int:
     p = argparse.ArgumentParser(description="Topic 20 benchmark runner for a single Ollama model.")
     p.add_argument("--model", required=True, help="Ollama model tag, e.g., qwen3.5:27b")
     p.add_argument("--host", default=DEFAULT_HOST, help="Ollama base URL")
-    p.add_argument("--tier", required=True, choices=["A", "B", "C"],
-                   help="Hardware tier (A=MBP, B=Mac Mini, C=Alienware)")
+    p.add_argument("--tier", required=True, choices=["A", "A-ollama", "B", "C"],
+                   help="Hardware tier (A=MBP LM Studio, A-ollama=MBP Ollama, B=Mac Mini, C=Alienware)")
     p.add_argument("--num-ctx", type=int, default=16384,
                    help="Native context window of the model variant under test")
     p.add_argument("--out", default=str(HERE / "benchmarks/topic_20/results"))

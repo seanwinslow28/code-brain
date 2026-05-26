@@ -19,6 +19,9 @@ RESULTS_DIR = Path(__file__).parent / "results"
 
 
 def _infer_tier(filename: str) -> str:
+    # Order matters: tierA-ollama must match before tierA substring
+    if "tierA-ollama" in filename:
+        return "A-ollama"
     if "tierA" in filename or "lmstudio" in filename:
         return "A"
     if "tierB" in filename:
@@ -90,7 +93,7 @@ def print_markdown() -> None:
     for s in summaries:
         by_tier[s["tier"]].append(s)
 
-    for tier in ("A", "B", "C"):
+    for tier in ("A", "A-ollama", "B", "C"):
         rows = by_tier.get(tier, [])
         if not rows:
             continue
