@@ -80,6 +80,13 @@ class OpenRouterClient:
 
             if 200 <= resp.status_code < 300:
                 body = resp.json()
+                if "choices" not in body or not body["choices"]:
+                    err = body.get("error", {}) if isinstance(body, dict) else {}
+                    msg = err.get("message") or "response had no choices"
+                    code = err.get("code", "")
+                    raise ClientError(
+                        f"OpenRouter 200-with-no-choices on model {model}: {code} {msg}"
+                    )
                 content = body["choices"][0]["message"]["content"]
                 usage = body.get("usage", {})
                 latency_ms = max(1, int((time.perf_counter() - start) * 1000))
