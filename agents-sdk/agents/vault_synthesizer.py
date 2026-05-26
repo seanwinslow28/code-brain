@@ -1163,18 +1163,37 @@ def _default_llm_caller_factory(
                 "mbp_awake" if decision.machine == "macbook_pro"
                 else "api_fallback"
             )
-        resp = httpx.post(
-            f"{decision.base_url}/v1/chat/completions",
-            json={
-                "model": decision.model,
-                "messages": [{"role": "user", "content": prompt}],
-                "max_tokens": max_tokens,
-                "stream": False,
-            },
-            timeout=600.0,
-        )
-        resp.raise_for_status()
-        text = resp.json()["choices"][0]["message"]["content"]
+        if decision.runtime == "ollama":
+            # Ollama /api/chat: think:false suppresses Qwen3.5/3.6 thinking
+            # tokens that LM Studio's MLX integration silently leaked.
+            # num_ctx=32768 matches the qwen3.6_35b-a3b-32k variant's modelfile.
+            resp = httpx.post(
+                f"{decision.base_url}/api/chat",
+                json={
+                    "model": decision.model,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "stream": False,
+                    "think": False,
+                    "options": {"num_ctx": 32768, "temperature": 0.0, "num_predict": max_tokens},
+                },
+                timeout=600.0,
+            )
+            resp.raise_for_status()
+            text = resp.json()["message"]["content"]
+        else:
+            # LM Studio / mlx-lm / any OpenAI-compat runtime.
+            resp = httpx.post(
+                f"{decision.base_url}/v1/chat/completions",
+                json={
+                    "model": decision.model,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "max_tokens": max_tokens,
+                    "stream": False,
+                },
+                timeout=600.0,
+            )
+            resp.raise_for_status()
+            text = resp.json()["choices"][0]["message"]["content"]
         start_ = text.find("{")
         end_ = text.rfind("}")
         if start_ == -1 or end_ == -1:
