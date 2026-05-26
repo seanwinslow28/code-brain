@@ -121,20 +121,33 @@ async def _default_completion(
 ) -> str:
     """LLM completion dispatched by runtime.
 
-    Ollama → /api/generate with format=json. LM Studio / mlx-lm → /v1/chat/completions
-    with response_format=json_schema. LM Studio rejects json_object (400 — only
-    json_schema or text), and returns 200 + {"error": ...} for unknown paths,
-    which is why the prior "try /api/generate, fall through on non-200" pattern
-    silently produced empty scores against MBP.
+    Ollama → /api/chat with think:false + format:json + num_ctx:16384. The Qwen3.5/3.6
+    family on Ollama emits <think> tokens unless think:false is set; without that,
+    the JSON parser downstream sees prefixed reasoning and falls back to a low
+    audit-flag score. This matches the request shape validated in the Topic 20
+    follow-up benchmarks (2026-05-26).
+
+    LM Studio / mlx-lm → /v1/chat/completions with response_format=json_schema.
+    LM Studio rejects json_object (400 — only json_schema or text), and returns
+    200 + {"error": ...} for unknown paths, which is why the prior "try
+    /api/generate, fall through on non-200" pattern silently produced empty
+    scores against MBP.
     """
     async with httpx.AsyncClient(timeout=120.0) as client:
         if runtime == "ollama":
             r = await client.post(
-                f"{base_url}/api/generate",
-                json={"model": model, "prompt": prompt, "stream": False, "format": "json"},
+                f"{base_url}/api/chat",
+                json={
+                    "model": model,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "stream": False,
+                    "think": False,
+                    "format": "json",
+                    "options": {"num_ctx": 16384, "temperature": 0.2},
+                },
             )
             r.raise_for_status()
-            return r.json().get("response", "")
+            return r.json()["message"]["content"]
         # lm-studio, mlx-lm, anything else OpenAI-compat
         r = await client.post(
             f"{base_url}/v1/chat/completions",

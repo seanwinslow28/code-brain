@@ -212,7 +212,7 @@ The 17 GB candidates (`qwen3.5:27b`, `qwen3.6:27b`, `gemma4:26b`) **overflow Mac
 ## Open questions deferred to Topic 21+ or skipped
 
 - **Agentic-coder rebench with native templates.** Run devstral, qwen3-coder:30b, nemotron3:33b with their model-specific tool-call formats (Mistral, OpenAI-style, etc.) instead of the generic JSON-schema prompts. Likely reveals 80%+ accuracy on these models.
-- **MBP Ollama runtime trial.** If LM Studio's MLX thinking-mode limitation persists, evaluate switching the MBP to Ollama (sacrificing ~20–30 % speed for proper `think:false` support). Topic 21 candidate.
+- **MBP Ollama runtime trial.** ✅ **RESOLVED 2026-05-26** — see follow-up [[2026-05-26-topic-20-mbp-ollama-runtime-comparison]]. Switching to Ollama is **per-model** rather than wholesale; results range from +25 pp (qwen3.6:35b-a3b) to -25 pp (qwen3.6:27b). Best Tier A upgrade candidate identified: **`qwen3.6:35b-a3b` @ MBP-Ollama** (85 % schema, 5/5 needle, 30 tok/s — beats every dimension of the Qwen3-14B baseline). Three agents recommended for migration: vault_synthesizer, knowledge_lint Tier 2, job_feed. **Needle recall completely recovers on Ollama** (5/5 across all 5 candidates, vs 0/5 on LM Studio MLX). LM Studio retained as co-resident runtime for speed-sensitive cases.
 - **Tier B replacement model class.** With the 17 GB candidates ruled out for Mac Mini, the next obvious search is models in the 8–12 GB range (qwen3:14b at 9.3 GB is one; phi4-mini-reasoning is already loaded at 3.2 GB; small Llama variants haven't been considered).
 - **qwen3.6:27b 20% schema match anomaly.** Worse than qwen3.5:27b despite being newer. Investigate: chat template difference? quantization variant difference? prompt-format expectations?
 - **Soak validation for `gemma4:26b` on Tier C.** Per the plan's Phase 6 pilot model, soak the new Tier C model on a low-stakes batch agent for 7 days before broader rollout. Pilot agent recommendation: a manually-triggered codegen scratchpad (not a launchd agent — Tier C is brand new and the 7am-5pm availability window doesn't suit launchd anyway).
@@ -226,6 +226,7 @@ Any adoption-driven config change in this report can be reverted by reverting th
 
 ## Sources
 
+- Follow-up — MBP-Ollama runtime comparison (extends this report, 2026-05-26): [[2026-05-26-topic-20-mbp-ollama-runtime-comparison]]
 - Topic 19 synthesis (superseded): [[2026-05-21-topic-19-synthesis-optimal-ollama-models-pi]]
 - Topic 16 Pi+Ollama integration: [[2026-05-21-topic-16-pi-ollama-integration-chatgpt-manual]]
 - Alienware wake architecture: [agents-sdk/docs/alienware-tier-c-wake-architecture-2026-05-21.md](../../../agents-sdk/docs/alienware-tier-c-wake-architecture-2026-05-21.md)
