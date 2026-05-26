@@ -2,31 +2,31 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/connections/dual-audience-conflict-in-marketing-and-agent-health.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-24.md
 tags: [auto-generated, phase-6]
-created: 2026-05-23
-updated: 2026-05-23
+created: 2026-05-26
+updated: 2026-05-26
 ---
 
 ## Definition
 
-A critical feedback system that ensures the operational integrity of AI agents by detecting failures in their reliability, consistency, and performance metrics over time. It functions as a health dashboard for synthetic agents that are tasked with processing content, such as synthesizers or decision-makers. Its value lies in its ability to act as a dependency-checking system, exposing gaps that downstream agents depend on for accurate interpretation.
+A monitoring framework that evaluates the status and reliability of agents within Sean's vault ecosystem. This involves tracking whether agents like 'vault-synthesizer' or 'daily-driver morning' run successfully and without error. It reflects a dependency between agent health metrics and the quality of downstream knowledge workflows.
 
 ## Context
 
-For Sean, this concept is crucial because he relies heavily on AI agents for decision support and content processing. If Agent Health Monitoring fails — such as when Daily Notes are inconsistent or incomplete — it can disrupt workflows that depend on AI agents, leading to flawed intelligence and poor recommendations.
+Sean relies on agents to automate his workflow and maintain consistency across domains. If an agent like 'daily-driver morning' fails or runs with errors, it disrupts the daily note generation and, by extension, affects how knowledge is indexed, synthesized, and reviewed later.
 
 ## Evidence
 
-> The biggest shift in thinking — start asking AI models to do more for you, especially if you're a PM that isn't the most technical person.
+> 'vault-indexer' ran successfully in the early morning, with no errors reported.
 
-> The content workflow is not where I would start. Neither is the lifecycle automation stack, and I would not waste an early conversation asking whether the team is on ChatGPT...
+> The 'daily-driver morning' agent ran successfully and updated the timeline/vault with minimal delay.
 
 ## Examples
 
-- A synthesizer failing to read a Daily Note accurately might cause downstream agents to base recommendations on stale or incomplete data.
-- Agent Health Monitoring systems flagging synthesizer failures can prevent the propagation of errors into higher-level AI-driven decisions.
+- 'vault-synthesizer' ran successfully, with no errors reported.
+- The 'daily-driver morning' agent ran successfully and created a daily note in the vault.
 
 ## Related Concepts
 
-[[Daily Note Generation]] [[Two Audiences]]
+[[Infrastructure Status and Agent Failure]] [[Indexing and Synthesis]] [[Automation Reliability]]
