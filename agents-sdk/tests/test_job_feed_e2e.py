@@ -35,8 +35,10 @@ async def test_pipeline_writes_rollup_and_persists(tmp_path, monkeypatch):
         base_url="http://mbp:1234", runtime="lm-studio", is_fallback=False, reason="ok",
     ))
 
-    # Mock the LLM completion to return a clean PM score
-    async def fake_completion(base_url, model, prompt):
+    # Mock the LLM completion to return a clean PM score.
+    # Signature mirrors lib.job_scoring._default_completion(base_url, model, prompt, runtime).
+    # Runtime is dispatched-on inside _default_completion; the mock ignores it.
+    async def fake_completion(base_url, model, prompt, runtime):
         return json.dumps({
             "fit_score": 4, "role_band": "PM",
             "rationale": "AI-native, remote-US PM role.",
