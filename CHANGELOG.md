@@ -5,6 +5,92 @@ All notable changes to Code-Brain (formerly *Claude Code Superuser Pack*) will b
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.2.0] — 2026-05-26
+
+**Topic 20 follow-up — fleet runtime shift: MBP-Ollama becomes a first-class runtime, three production agents swap their primary model, and Tier C joins the fleet via a 7-day Pattern E pilot.** Topic 20's follow-up benchmarks ([2026-05-26-topic-20-mbp-ollama-runtime-comparison.md](vault/20_projects/research/2026-05-26-topic-20-mbp-ollama-runtime-comparison.md)) proved that `qwen3.6:35b-a3b` @ MBP-Ollama beats the prior `qwen3-14b` @ MBP-LM-Studio baseline on every dimension (**85% vs 50%** schema match, **5/5 vs 0/5** 32K needle recall, **30 vs 27.9** tok/s). The needle-recall recovery is the load-bearing finding: LM Studio's MLX backend silently drops thinking-disable on Qwen3.5/3.6, which was producing empty long-context responses in production. Ollama 0.24+ on Apple Silicon honors `think:false` properly. LM Studio stays installed and bound on `:1234` as a co-resident runtime for speed-sensitive workloads where 60% schema is acceptable — the new MBP entry just points at Ollama's `:11434`.
+
+**Tier C joins the fleet for the first time** with `gemma4_26b-32k:latest` @ Alienware-Ollama as the pilot model (Topic 20 §Tier C: 80% schema, 39.8 tok/s, 5/5 needle). Operating contract is **Pattern E manual wake** — the Alienware Aurora ACT1250 firmware suppresses all non-Microsoft-signed wake events (WoL + Task Scheduler RTC both fail). No launchd schedule, no WoL retry. The new soak harness fails fast on unreachable with a Pattern E message.
+
+### Per-agent model swap matrix
+
+| Agent | Before | After | Status |
+|---|---|---|---|
+| `vault_synthesizer` (nightly 02:30) | `qwen3-14b` @ MBP-LM-Studio (:1234) | **`qwen3.6_35b-a3b-32k`** @ MBP-Ollama (:11434) | LIVE — first nightly run is 02:30 ET 2026-05-27 |
+| `job_feed` scoring (8–11am hourly) | `qwen3-14b` @ MBP-LM-Studio | **`qwen3.6_35b-a3b-32k`** @ MBP-Ollama | LIVE — next fire 8am ET 2026-05-27 |
+| `scripts/query.py` (via `vault_synthesis` task_key) | `qwen3-14b` @ MBP-LM-Studio | **`qwen3.6_35b-a3b-32k`** @ MBP-Ollama | LIVE — picks up new routing automatically |
+| `heavy_synthesis` task (ad-hoc/internal) | `qwen3-14b` @ MBP-LM-Studio | **`qwen3.6_35b-a3b-32k`** @ MBP-Ollama | LIVE |
+| `knowledge_lint` Tier 2 | `qwen3-14b` @ MBP-LM-Studio (dormant — `main()` doesn't construct `llm_caller`) | Same — still dormant | DEFERRED — wiring follow-up after Task A 1-week soak passes |
+| `code_review` task_map entry | `qwen2.5-coder-32b-instruct` @ MBP-LM-Studio | **REMOVED** | Preferred target no longer reachable; no production caller; Jaccard-extractor scorer fix never completed. Re-add when Topic 21 ships native-template rebench for `qwen3-coder:30b`. |
+| (new) **Tier C pilot** | — | **`gemma4_26b-32k:latest`** @ Alienware-Ollama, Pattern E manual trigger | SOAK Day 1/7 — verdict 2026-06-02 |
+| `meta_agent`, `flush`, `inbox_triage`, `daily_driver`, `financial_analysis`, `deep_researcher`, `vault_indexer`, `vault_critic` | unchanged | unchanged | No change — Mac Mini / Codex+Anti-Gravity paths unaffected |
+
+### Added
+
+- **[`agents-sdk/scripts/tier_c_soak.py`](agents-sdk/scripts/tier_c_soak.py)** — 200-line manual-trigger soak harness for the Topic 20 §Soak validation open question. Direct `httpx` probe + `/api/chat` against Alienware Ollama (no `HybridRouter`, no `task_map` entry, no launchd plist). Fails fast on unreachable with a Pattern E message — no WoL retry, no Claude API fallback. CLI: `--workload summarize` (only choice today), `--article <vault-rel-path>` (override random pick), `--dry-run` (probe + size + print plan). Writes `vault/health/tier-c-soak-{YYYY-MM-DD}.jsonl` (one record per run) plus `vault/health/tier-c-soak/{YYYY-MM-DD}/{slug}.md` (full response per run) for `shuf | head -2` median sampling.
+- **[`vault/20_projects/research/2026-05-26-topic-20-mbp-ollama-runtime-comparison.md`](vault/20_projects/research/2026-05-26-topic-20-mbp-ollama-runtime-comparison.md)** — Topic 20 follow-up data backing the migration. Cross-runtime sweep of 5 Qwen3.5/3.6 candidates across LM Studio MLX vs MBP-Ollama vs Alienware-Ollama. Identifies `qwen3.6:35b-a3b` as the Tier A upgrade and quantifies the needle-recall recovery.
+- **[`agents-sdk/benchmarks/topic_20/results/qwen3-coder_30b-32k-tierA-ollama-2026-05-26.jsonl`](agents-sdk/benchmarks/topic_20/results/qwen3-coder_30b-32k-tierA-ollama-2026-05-26.jsonl)** — raw benchmark records for the qwen3-coder runtime comparison.
+
+### Changed
+
+- **[`agents-sdk/config.toml`](agents-sdk/config.toml) `[routing.machines.macbook_pro]`** — runtime `lm-studio` → `ollama`, port `1234` → `11434`. Host stays at `seans-macbook-pro.local` (mDNS). LM Studio remains installed and bound on `:1234` as a co-resident runtime — a future entry would need a separate machine key to route there.
+- **[`agents-sdk/config.toml`](agents-sdk/config.toml) `[routing.machines.macbook_pro].models`** aligned with what Ollama actually serves: `["qwen3.6_35b-a3b-32k", "qwen3-coder_30b-32k", "qwen3.5_27b-32k"]`. The `-32k` variants are custom Modelfiles built via [`scripts/build_mbp_ollama_variants.sh`](agents-sdk/scripts/build_mbp_ollama_variants.sh) — base Ollama tags default to 4K context which is too small for production synth / scoring workloads.
+- **[`agents-sdk/config.toml`](agents-sdk/config.toml) `[routing.task_map]`** — `vault_synthesis`, `heavy_synthesis`, and `job_scoring` all swap `qwen3-14b` → `qwen3.6_35b-a3b-32k`. The `code_review` entry is removed (see matrix above).
+- **[`agents-sdk/config.toml`](agents-sdk/config.toml) `[agents.job_feed].mbp_probe_url`** — `http://seans-macbook-pro.local:1234/v1/models` → `http://seans-macbook-pro.local:11434/api/tags` (Ollama probe shape).
+- **[`agents-sdk/agents/vault_synthesizer.py`](agents-sdk/agents/vault_synthesizer.py)** — call shape switched from LM Studio's `/v1/chat/completions` to Ollama's `/api/chat` with `think:false` + `format:json` + `num_ctx`. The router-config flip alone was not enough because the agent constructs its own HTTP request.
+- **[`agents-sdk/lib/job_scoring.py`](agents-sdk/lib/job_scoring.py)** — same call-shape switch (Ollama `/api/chat` with `think:false` + `format:json` + `num_ctx=16384`).
+- **[`agents-sdk/tests/test_job_feed_e2e.py`](agents-sdk/tests/test_job_feed_e2e.py)** — pre-existing test-mock signature bug fixed in passing (`code_review` task fixture left untouched per the in-test self-contained fixture pattern).
+
+### Model cleanup on the MBP (~38 GiB freed)
+
+Removed two model families that the migration replaced or invalidated:
+
+- **`qwen3.6:27b`** family (base + `-32k` variant) — Ollama-broken, 20% schema match in benchmarks (vs `qwen3.5:27b`'s 90%); likely an Ollama adapter / chat-template mismatch worth investigating later (Topic 21).
+- **`qwen3.5:35b-a3b`** family (base + `-32k` variant) — redundant with the production `qwen3.6:35b-a3b` MoE upgrade.
+
+Kept on MBP-Ollama: `qwen3.6_35b-a3b-32k` (production), `qwen3.6:35b-a3b` (base), `qwen3-coder:30b` + `-32k`, `qwen3.5:27b` + `-32k`. LM Studio `:1234` co-resident: `qwen3-14b-4bit`.
+
+Fleet-wide cleanup earlier in the day: 17 models removed across Mac Mini + MBP + Alienware (~205 GB), pre-Task-A.
+
+### Topic 20 soak — Tier C pilot (in progress)
+
+- **Pilot model:** `gemma4_26b-32k:latest` @ Alienware-Ollama (`192.168.68.201:11434`)
+- **Workload:** Long-context vault article summarization (random pick from `vault/20_projects/research/*.md`, 5–25 KB inputs, adaptive `num_ctx` clamped `[8K, 32K]`)
+- **Cadence:** 2 runs/day inside the 7am–5pm Alienware-awake window (Pattern E manual trigger), ≥1h apart
+- **Calendar:** Day 1 = **2026-05-26 (today)** through Day 7 = **2026-06-01**; verdict + adoption decision on **2026-06-02** in the [Topic 20 §Soak outcome stub](vault/20_projects/research/2026-05-21-topic-20-fleet-model-refresh-benchmarks.md#L239-L241).
+- **Adopt conditions:** ≥12/14 datapoints landed, 0 thinking-token leaks, 0 truncations, median quality "thinking-partner shape" every sampling day, throughput ≥30 tok/s mean.
+- **Day-1 datapoints (both landed):** 14:59 ET → 1948c in 27.2s, **27.7 tok/s** (cold-load). 15:19 ET → 1149c in 10.5s, **34.6 tok/s** (warm). Manifest: [`vault/health/tier-c-soak-2026-05-26.jsonl`](vault/health/tier-c-soak-2026-05-26.jsonl).
+
+### Tests / production smoke
+
+- **`pytest agents-sdk/tests/ -v` → 56/56 passing** after the routing config flip.
+- **`tier_c_soak.py`:** import-clean, `--dry-run` exit 0, first 2 live datapoints valid (no thinking-token leakage, faithful 3-paragraph shape).
+- **Production smoke (post-merge 2026-05-26 15:18 ET):**
+  - `HybridRouter.route(...)` for `vault_synthesis`, `heavy_synthesis`, `job_scoring` all resolve to `machine=macbook_pro / model=qwen3.6_35b-a3b-32k / runtime=ollama / is_fallback=False` — no silent Claude API fall-through.
+  - Direct `/api/chat` with `think:false` + `format:json` returns `{"ok": true}` exactly, 35.9 tok/s.
+  - Production-shape `job_scoring` call (system + user message, `num_ctx=16384`, JSON output) returned valid `{fit, strengths, gaps}` JSON, 31 tok/s, 176 eval tokens in 5s.
+  - `query.py --model local` routed cleanly through the new `vault_synthesis` path (empty-selection short-circuit, no exception).
+  - `job_feed.py --dry-run` confirms the new `mbp_probe_url` and `fallback_disabled=True`.
+
+### Rollback
+
+Per-commit single command:
+
+```bash
+git revert 3812b4d   # Task A — vault_synthesizer + job_feed migration
+git revert c3a2a10   # Task A/B follow-up cleanup
+git revert 283649f   # Task C — Tier C soak harness
+git revert b73cad2   # Topic 20 follow-up data file (vault content)
+```
+
+Manifests under `vault/health/tier-c-soak/` stay (vault-owned, harmless historical record even on rollback).
+
+### Source commits (merged via [PR #56](https://github.com/seanwinslow28/code-brain/pull/56) → `7ccc84a`)
+
+- `b73cad2` data(topic-20): MBP-Ollama runtime comparison — qwen3.6:35b-a3b as Tier A upgrade
+- `3812b4d` feat(routing): migrate vault_synthesizer + job_feed scoring from LM Studio MLX to MBP-Ollama
+- `c3a2a10` chore(routing): clean up Task A/B follow-ups — align macbook_pro models list, drop code_review, fix e2e mock
+- `283649f` feat(routing): tier-c soak harness — gemma4_26b-32k @ Alienware Pattern E pilot
+
 ## [4.1.4] — 2026-05-24
 
 **vault_critic Round-3 enrichment becomes the default for every run** — both the nightly 03:30 launchd path and all manual `--target` runs auto-load the [vault-critic-standing-context.md](agents-sdk/prompts/vault-critic-standing-context.md) "About Sean" preamble plus the three project files listed in `[agents.vault_critic].default_context_files` in [config.toml](agents-sdk/config.toml). Validated 2026-05-24 across three rounds of A/B/C critique on the same 4 hand-picked targets plus a fresh 4-target batch — 12 articles total, 1 CLI failure across all 12 (Anti-Gravity rate-cap on a single Round-1 article), output quality jumping from generic "consider exploring X" recommendations to project-aware critique that names Sean's actual file paths (`agents-sdk/lib/vault_io.py`, `hybrid_router.py`, `evals/vault-synthesizer/`), agents (`Vault Synthesizer`, `meta-agent`, `Deep Researcher`), lived incidents (Qwen3-14B LDR citation collapse, 8:31 vs 8:45 daily-driver/meta-agent ordering quirk), Substack voice modes (Thompson/gonzo, Sean-default IC), and concrete artifact specs (`fencing_token` implementation, `chaos_monkey.py`, `personal-agent-leverage-map.md`).
