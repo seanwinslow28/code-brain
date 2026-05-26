@@ -281,12 +281,18 @@ models = ["phi4-mini-reasoning", "phi4-mini", "nomic-embed-text", "gemma4:e4b"]
 # 2026-05-23: switched from hardcoded IP (was 192.168.68.50, drifted to .53)
 # to mDNS hostname so DHCP rotation doesn't break the synth health check.
 # Adds ~100ms per resolution; negligible vs the 60s health-check interval.
+# 2026-05-26 (Topic 20 follow-up migration): switched runtime LM Studio MLX
+# → Ollama. qwen3.6:35b-a3b on MBP-Ollama beats qwen3-14b on every
+# dimension (85% vs 50% schema, 5/5 vs 0/5 needle, 30 vs 27.9 tok/s).
+# LM Studio remains installed + bound on :1234 as a co-resident runtime;
+# this entry now points at the Ollama port. See
+# vault/20_projects/research/2026-05-26-topic-20-mbp-ollama-runtime-comparison.md.
 host = "seans-macbook-pro.local"
-port = 1234
+port = 11434
 tier = 2
-runtime = "lm-studio"
+runtime = "ollama"
 always_on = false
-models = ["qwen3-14b", "qwen2.5-coder-32b-instruct", "google/gemma-4-31b"]
+models = ["qwen3.6_35b-a3b-32k", "qwen3-14b", "qwen2.5-coder-32b-instruct", "google/gemma-4-31b"]
 
 [routing.machines.alienware]
 host = "192.168.68.201"
@@ -322,9 +328,9 @@ financial_analysis = { model = "phi4-mini-reasoning", machine = "mac_mini" }
 # the Jaccard extractor (expects hyphenated tags vs prose output) rather
 # than at the models. When the extractor is fixed, re-bench and decide.
 code_review = { model = "qwen2.5-coder-32b-instruct", machine = "macbook_pro" }
-heavy_synthesis = { model = "qwen3-14b", machine = "macbook_pro" }
-vault_synthesis = { model = "qwen3-14b", machine = "macbook_pro" }  # Phase 6 D.2 — model resolved at runtime via this key
-job_scoring = { model = "qwen3-14b", machine = "macbook_pro" }
+heavy_synthesis = { model = "qwen3.6_35b-a3b-32k", machine = "macbook_pro" }
+vault_synthesis = { model = "qwen3.6_35b-a3b-32k", machine = "macbook_pro" }  # Phase 6 D.2 — model resolved at runtime via this key. 2026-05-26: qwen3-14b @ LM Studio → qwen3.6_35b-a3b-32k @ MBP-Ollama (Topic 20 follow-up)
+job_scoring = { model = "qwen3.6_35b-a3b-32k", machine = "macbook_pro" }
 deep_research = { model = "qwen3-14b-research", machine = "mac_mini" }  # Phase 5 (2026-04-26) → Mac Mini migration v3.23.0 (2026-05-02): routed via LDR HTTP at :5050, custom Modelfile tag with /no_think baked into TEMPLATE
 sprite_vision_qa = { model = "Qwen3-VL-7B", machine = "alienware" }
 comfyui_orchestration = { model = "none", machine = "alienware" }
@@ -415,7 +421,7 @@ max_cost_usd = 0.10
 http_timeout_sec = 10
 rate_limit_per_host_per_sec = 1
 mbp_probe_timeout_sec = 2
-mbp_probe_url = "http://seans-macbook-pro.local:1234/v1/models"  # LM Studio on MBP (mDNS — see [routing.machines.macbook_pro])
+mbp_probe_url = "http://seans-macbook-pro.local:11434/api/tags"  # Ollama on MBP (mDNS — see [routing.machines.macbook_pro]). 2026-05-26: switched from LM Studio :1234/v1/models to Ollama :11434/api/tags.
 fetch_skip_if_within_hours = 4
 fallback_disabled = true
 log_level = "INFO"
