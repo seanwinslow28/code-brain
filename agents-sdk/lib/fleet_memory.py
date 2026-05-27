@@ -1,0 +1,69 @@
+"""Shared filesystem-memory layer for the agent fleet.
+
+Subclasses Anthropic's BetaAbstractMemoryTool (memory_20250818) for cloud
+agents and exposes a read-only `inject_memories_into_prompt()` helper for
+local-Ollama agents that don't speak the tool protocol.
+
+Mount: vault/90_system/fleet-memory/ (resolved from config.toml).
+Namespacing: {mount}/{agent_id}/ for per-agent state, {mount}/shared/ for
+cross-agent lessons. Promotion to shared is via explicit promote_to_shared()
+call — never an implicit tool command.
+
+Path traversal is the load-bearing safety check: every read/write goes
+through _resolve_path(), which performs realpath + prefix containment.
+Any attempt to escape the mount via .., absolute paths, or symlinks raises
+PathEscapeError.
+
+See agents-sdk/docs/plans/2026-05-27-fleet-memory-phase-1-plan.md.
+"""
+
+from __future__ import annotations
+
+import logging
+from pathlib import Path
+
+logger = logging.getLogger("fleet_memory")
+
+
+class PathEscapeError(ValueError):
+    """A memory command tried to access a path outside the mount root."""
+
+
+def _resolve_path(mount_root: Path, raw_path: str) -> Path:
+    """Resolve `raw_path` against `mount_root`, rejecting any escape.
+
+    Args:
+        mount_root: The fleet-memory mount directory. Must already exist.
+        raw_path: A relative path the caller wants to access inside the mount.
+            An empty string is rejected.
+
+    Returns:
+        The fully-resolved absolute path, guaranteed to live under
+        `mount_root.resolve()`. The path itself may not exist yet (the
+        memory-tool `create` command needs to write new files); the guard
+        only ensures *where it would land* is inside the mount.
+
+    Raises:
+        PathEscapeError: If `raw_path` is empty, if it resolves outside the
+            mount (via `..`, absolute path, or symlink chain), or if any
+            intermediate component is a symlink pointing outside the mount.
+    """
+    if not raw_path:
+        raise PathEscapeError("empty path")
+
+    mount_real = mount_root.resolve()
+    if not mount_real.exists():
+        raise PathEscapeError(f"mount root does not exist: {mount_real}")
+
+    candidate = (mount_real / raw_path).resolve()
+
+    # Containment check via Path semantics (handles cross-platform separators
+    # correctly; string prefix would false-positive on /tmp/fleet vs /tmp/fleet2).
+    try:
+        candidate.relative_to(mount_real)
+    except ValueError as exc:
+        raise PathEscapeError(
+            f"path escapes mount: candidate={candidate} mount={mount_real}"
+        ) from exc
+
+    return candidate
