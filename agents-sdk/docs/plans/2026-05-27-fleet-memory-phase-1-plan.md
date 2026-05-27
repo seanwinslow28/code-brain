@@ -1378,6 +1378,16 @@ git commit -m "feat(fleet-memory): wire vault_synthesizer to memory layer (Phase
 
 The cloud daily-driver gets the real Anthropic memory tool. `claude-agent-sdk` doesn't accept `BetaAbstractMemoryTool` instances directly; we expose the tool as an MCP server, the same pattern used by `vault-tools`.
 
+**Verified SDK shape (read from `agents-sdk/lib/custom_tools.py`):**
+- Decorator: `from claude_agent_sdk import create_sdk_mcp_server, tool` — single name `tool`, not `sdk_tool`.
+- Decorator signature: `@tool(name: str, description: str, input_schema: dict[str, type])` — positional args, schema is a flat `{field_name: python_type}` dict.
+- Handler signature: `async def fn(args: dict[str, Any]) -> dict[str, Any]`.
+- Success return shape: `{"content": [{"type": "text", "text": "..."}]}`.
+- Error return shape: `{"content": [{"type": "text", "text": "..."}], "is_error": True}`.
+- Server factory: `create_sdk_mcp_server(name=..., version=..., tools=[fn1, fn2, ...])`.
+
+**Design choice:** expose **six separate MCP tools** (`memory_view`, `memory_create`, `memory_str_replace`, `memory_insert`, `memory_delete`, `memory_rename`) rather than one `memory` tool with a `command` field. The model handles typed schemas more reliably than a discriminated-union string field, and `allowed_tools` matching is per-name in the CLI permission layer. Each handler is a thin shim into the matching `FleetMemoryTool._{command}_path` method built in Tasks 4–5.
+
 - [ ] **Step 1: Write failing test for the MCP-server factory**
 
 Add a new test file `agents-sdk/tests/test_fleet_memory_mcp.py`:
@@ -1389,95 +1399,246 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
 
-def test_factory_returns_mcp_server_with_memory_commands(tmp_path: Path):
+
+def test_factory_returns_a_server_object(tmp_path: Path):
+    """Factory returns whatever create_sdk_mcp_server returns — we don't
+    assert on its internal shape, only that the call succeeds and that
+    side effects (mount bootstrap) happen."""
     from lib.custom_tools import create_fleet_memory_mcp_server
-    from lib.fleet_memory import ensure_mount
-
     mount = tmp_path / "fleet-memory"
-    ensure_mount(mount, agent_ids=["daily_driver"])
     server = create_fleet_memory_mcp_server(
-        agent_id="daily_driver",
-        mount_root=mount,
+        agent_id="daily_driver", mount_root=mount,
     )
-    # The exact server shape is whatever create_sdk_mcp_server returns,
-    # but it must expose at least one tool whose name matches one of the
-    # six memory commands so the agent CLI can route to it.
-    # We assert on a stable surface: server has a `.name` and a non-empty
-    # list of tool definitions.
-    assert hasattr(server, "name")
-    assert server.name == "fleet-memory"
+    assert server is not None
+    # Side effect: ensure_mount fired
+    assert (mount / "daily_driver").is_dir()
+    assert (mount / "shared").is_dir()
+    assert (mount / "MEMORY_INDEX.md").exists()
+
+
+@pytest.mark.asyncio
+async def test_memory_create_tool_writes_to_namespace(tmp_path: Path):
+    """The memory_create handler routes through FleetMemoryTool._create_path
+    and produces the standard MCP success envelope."""
+    from lib.custom_tools import _build_memory_handlers
+    mount = tmp_path / "fleet-memory"
+    from lib.fleet_memory import ensure_mount
+    ensure_mount(mount, agent_ids=["daily_driver"])
+    handlers = _build_memory_handlers(agent_id="daily_driver", mount_root=mount)
+    result = await handlers["memory_create"](
+        {"path": "/memories/daily_driver/note.md", "file_text": "hello"}
+    )
+    assert "is_error" not in result
+    assert result["content"][0]["type"] == "text"
+    assert (mount / "daily_driver/note.md").read_text() == "hello"
+
+
+@pytest.mark.asyncio
+async def test_memory_view_returns_text_envelope(tmp_path: Path):
+    from lib.custom_tools import _build_memory_handlers
+    mount = tmp_path / "fleet-memory"
+    from lib.fleet_memory import ensure_mount
+    ensure_mount(mount, agent_ids=["daily_driver"])
+    (mount / "daily_driver" / "x.md").write_text("body")
+    handlers = _build_memory_handlers(agent_id="daily_driver", mount_root=mount)
+    result = await handlers["memory_view"]({"path": "/memories/daily_driver/x.md"})
+    assert "is_error" not in result
+    assert result["content"][0]["text"] == "body"
+
+
+@pytest.mark.asyncio
+async def test_path_escape_returns_error_envelope_not_raise(tmp_path: Path):
+    """When the underlying _resolve_path raises PathEscapeError, the MCP
+    handler must catch it and return is_error=True — never let the SDK
+    process crash."""
+    from lib.custom_tools import _build_memory_handlers
+    mount = tmp_path / "fleet-memory"
+    from lib.fleet_memory import ensure_mount
+    ensure_mount(mount, agent_ids=["daily_driver"])
+    handlers = _build_memory_handlers(agent_id="daily_driver", mount_root=mount)
+    result = await handlers["memory_view"]({"path": "/memories/../../etc/passwd"})
+    assert result.get("is_error") is True
+    assert "PathEscapeError" in result["content"][0]["text"]
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [ ] **Step 2: Run the tests to verify they fail**
 
 ```bash
 cd agents-sdk && PYTHONPATH=. .venv/bin/pytest tests/test_fleet_memory_mcp.py -v
 ```
-Expected: FAIL with `ImportError: cannot import name 'create_fleet_memory_mcp_server'`.
+Expected: All four FAIL with `ImportError: cannot import name 'create_fleet_memory_mcp_server'` / `_build_memory_handlers`.
 
 - [ ] **Step 3: Implement the MCP-server factory**
 
-Open `agents-sdk/lib/custom_tools.py`, read the existing `create_vault_mcp_server` function to learn the SDK pattern (likely uses `claude_agent_sdk.create_sdk_mcp_server` or similar), then append:
+Open `agents-sdk/lib/custom_tools.py`. The current shape is:
+
+```python
+from claude_agent_sdk import create_sdk_mcp_server, tool
+from .vault_io import inject_at_anchor
+
+@tool("vault_inject", "...description...", {"file_path": str, "anchor_name": str, "content": str})
+async def vault_inject_tool(args: dict[str, Any]) -> dict[str, Any]:
+    ...
+    return {"content": [{"type": "text", "text": "..."}]}
+    # error path: return {"content": [...], "is_error": True}
+
+def create_vault_mcp_server():
+    return create_sdk_mcp_server(name="vault-tools", version="1.0.0", tools=[vault_inject_tool])
+```
+
+Append to that file (after `create_vault_mcp_server`):
 
 ```python
 from lib.fleet_memory import FleetMemoryTool, ensure_mount
 
 
-def create_fleet_memory_mcp_server(*, agent_id: str, mount_root: Path):
-    """Expose a FleetMemoryTool as an MCP server for claude-agent-sdk consumers.
+def _ok(text: str) -> dict[str, Any]:
+    return {"content": [{"type": "text", "text": text}]}
 
-    The Anthropic memory tool protocol (memory_20250818) is normally consumed
-    via `client.beta.messages.run_tools(tools=[memory_tool])`. claude-agent-sdk
-    doesn't accept tool *instances* directly — it accepts MCP servers. This
-    factory wraps the six memory commands as MCP tools so daily_driver can
-    declare `mcp__fleet-memory__memory` in its allowed_tools.
 
-    The wrapped tool enforces:
-      - path-traversal guard (via FleetMemoryTool._resolve)
-      - namespacing (writes restricted to {agent_id}/ and shared/)
-      - automatic manifest updates on create/str_replace/delete/rename
+def _err(exc: Exception) -> dict[str, Any]:
+    return {
+        "content": [{"type": "text", "text": f"{type(exc).__name__}: {exc}"}],
+        "is_error": True,
+    }
+
+
+def _build_memory_handlers(
+    *,
+    agent_id: str,
+    mount_root: Path,
+) -> dict[str, Any]:
+    """Return a dict of six async handlers, one per memory command.
+
+    Extracted from `create_fleet_memory_mcp_server` so unit tests can call
+    the handlers directly without spinning up an MCP server. Each handler
+    catches every exception and returns the MCP error envelope — the SDK
+    process must never crash on bad model input.
     """
     ensure_mount(mount_root, agent_ids=[agent_id])
-    tool = FleetMemoryTool(mount_root=mount_root, agent_id=agent_id)
+    fmt = FleetMemoryTool(mount_root=mount_root, agent_id=agent_id)
 
-    # The exact MCP-registration shape depends on what the existing
-    # create_vault_mcp_server uses. Mirror that shape — register six handlers
-    # (view, create, str_replace, insert, delete, rename), each routing into
-    # the matching tool._{command}_path method.
-    # Pseudocode (replace with the actual SDK call pattern in this file):
-    from claude_agent_sdk import create_sdk_mcp_server, tool as sdk_tool
-
-    @sdk_tool(name="memory", description="Anthropic memory_20250818 protocol — view/create/str_replace/insert/delete/rename under {agent_id}/ and shared/.")
-    async def memory(command: dict) -> dict:
-        cmd = command.get("command")
+    async def memory_view(args: dict[str, Any]) -> dict[str, Any]:
         try:
-            if cmd == "view":
-                return {"content": tool._view_path(command["path"])}
-            if cmd == "create":
-                return {"content": tool._create_path(command["path"], command["file_text"])}
-            if cmd == "str_replace":
-                return {"content": tool._str_replace_path(
-                    command["path"], command["old_str"], command["new_str"]
-                )}
-            if cmd == "insert":
-                return {"content": tool._insert_path(
-                    command["path"], command["insert_line"], command["insert_text"]
-                )}
-            if cmd == "delete":
-                return {"content": tool._delete_path(command["path"])}
-            if cmd == "rename":
-                return {"content": tool._rename_path(
-                    command["old_path"], command["new_path"]
-                )}
-            return {"content": f"error: unknown command {cmd}"}
-        except Exception as exc:  # surface errors to the model
-            return {"content": f"error: {type(exc).__name__}: {exc}"}
+            return _ok(fmt._view_path(args["path"]))
+        except Exception as exc:
+            return _err(exc)
 
-    return create_sdk_mcp_server(name="fleet-memory", tools=[memory])
+    async def memory_create(args: dict[str, Any]) -> dict[str, Any]:
+        try:
+            return _ok(fmt._create_path(args["path"], args["file_text"]))
+        except Exception as exc:
+            return _err(exc)
+
+    async def memory_str_replace(args: dict[str, Any]) -> dict[str, Any]:
+        try:
+            return _ok(fmt._str_replace_path(
+                args["path"], args["old_str"], args["new_str"],
+            ))
+        except Exception as exc:
+            return _err(exc)
+
+    async def memory_insert(args: dict[str, Any]) -> dict[str, Any]:
+        try:
+            return _ok(fmt._insert_path(
+                args["path"], args["insert_line"], args["insert_text"],
+            ))
+        except Exception as exc:
+            return _err(exc)
+
+    async def memory_delete(args: dict[str, Any]) -> dict[str, Any]:
+        try:
+            return _ok(fmt._delete_path(args["path"]))
+        except Exception as exc:
+            return _err(exc)
+
+    async def memory_rename(args: dict[str, Any]) -> dict[str, Any]:
+        try:
+            return _ok(fmt._rename_path(args["old_path"], args["new_path"]))
+        except Exception as exc:
+            return _err(exc)
+
+    return {
+        "memory_view": memory_view,
+        "memory_create": memory_create,
+        "memory_str_replace": memory_str_replace,
+        "memory_insert": memory_insert,
+        "memory_delete": memory_delete,
+        "memory_rename": memory_rename,
+    }
+
+
+def create_fleet_memory_mcp_server(*, agent_id: str, mount_root: Path):
+    """Expose six memory-protocol tools as an in-process MCP server.
+
+    Mirrors create_vault_mcp_server's shape. Each tool maps 1:1 onto an
+    Anthropic memory_20250818 command, routed into the namespace-scoped
+    FleetMemoryTool built in lib/fleet_memory.py.
+
+    Tool names visible to the CLI (`allowed_tools` matchers):
+        mcp__fleet-memory__memory_view
+        mcp__fleet-memory__memory_create
+        mcp__fleet-memory__memory_str_replace
+        mcp__fleet-memory__memory_insert
+        mcp__fleet-memory__memory_delete
+        mcp__fleet-memory__memory_rename
+    """
+    handlers = _build_memory_handlers(agent_id=agent_id, mount_root=mount_root)
+
+    view_tool = tool(
+        "memory_view",
+        "View a memory file or list a directory under /memories/. "
+        "Paths must stay inside the fleet-memory mount; escapes raise an error.",
+        {"path": str},
+    )(handlers["memory_view"])
+
+    create_tool = tool(
+        "memory_create",
+        "Create or overwrite a memory file. Writes are restricted to "
+        f"/memories/{agent_id}/** and /memories/shared/**.",
+        {"path": str, "file_text": str},
+    )(handlers["memory_create"])
+
+    str_replace_tool = tool(
+        "memory_str_replace",
+        "Replace a unique substring in a memory file. Fails if `old_str` "
+        "is missing or appears more than once.",
+        {"path": str, "old_str": str, "new_str": str},
+    )(handlers["memory_str_replace"])
+
+    insert_tool = tool(
+        "memory_insert",
+        "Insert text at a 0-indexed line number in a memory file.",
+        {"path": str, "insert_line": int, "insert_text": str},
+    )(handlers["memory_insert"])
+
+    delete_tool = tool(
+        "memory_delete",
+        "Delete a memory file. Only files inside the agent's namespace "
+        "or /memories/shared/ can be deleted.",
+        {"path": str},
+    )(handlers["memory_delete"])
+
+    rename_tool = tool(
+        "memory_rename",
+        "Rename or move a memory file. Both source and destination must "
+        "be inside the agent's namespace or /memories/shared/.",
+        {"old_path": str, "new_path": str},
+    )(handlers["memory_rename"])
+
+    return create_sdk_mcp_server(
+        name="fleet-memory",
+        version="1.0.0",
+        tools=[
+            view_tool, create_tool, str_replace_tool,
+            insert_tool, delete_tool, rename_tool,
+        ],
+    )
 ```
 
-**Important:** the exact `@sdk_tool` / `create_sdk_mcp_server` API depends on what `create_vault_mcp_server` already uses in this file. Mirror that pattern exactly. If the SDK shape is different from the pseudocode above, adjust the factory body — but the externally-visible behaviour (one MCP server, one tool named `memory`, routing six commands into the `FleetMemoryTool` internals) must match what the test asserts.
+**Note on the `tool(...)(handler)` pattern:** the `@tool(...)` decorator is normally applied at definition time on a module-level async function. Here we need *parameterized* tool definitions (the description embeds `agent_id`) and we want the handlers built inside `_build_memory_handlers` so unit tests can call them directly. Applying the decorator as a function call — `tool(name, desc, schema)(handler)` — gives us the same wrapped tool object without forcing module-level definitions. If the SDK's `@tool` decorator is not in fact callable this way, fall back to defining six module-level decorated async functions and replicating the dispatch logic inline; the test suite will catch the mismatch.
 
 - [ ] **Step 4: Run the MCP-server test to verify it passes**
 
@@ -1486,28 +1647,43 @@ cd agents-sdk && PYTHONPATH=. .venv/bin/pytest tests/test_fleet_memory_mcp.py -v
 ```
 Expected: PASS.
 
+- [ ] **Step 4: Run the MCP-server tests to verify they pass**
+
+```bash
+cd agents-sdk && PYTHONPATH=. .venv/bin/pytest tests/test_fleet_memory_mcp.py -v
+```
+Expected: All four PASS.
+
 - [ ] **Step 5: Write failing test for `daily_driver.build_options`**
 
 Add to `agents-sdk/tests/test_daily_driver_artifacts.py` (or create a new `test_daily_driver_fleet_memory.py`):
 
 ```python
 class TestDailyDriverFleetMemoryWiring:
+    # The six MCP tool names the daily_driver must declare in allowed_tools
+    # when fleet-memory is enabled. Pre-computed here so test assertions and
+    # the implementation stay in lockstep.
+    EXPECTED_TOOL_NAMES = {
+        "mcp__fleet-memory__memory_view",
+        "mcp__fleet-memory__memory_create",
+        "mcp__fleet-memory__memory_str_replace",
+        "mcp__fleet-memory__memory_insert",
+        "mcp__fleet-memory__memory_delete",
+        "mcp__fleet-memory__memory_rename",
+    }
+
     def test_build_options_includes_fleet_memory_mcp_when_enabled(self, monkeypatch, tmp_path):
-        # Force the per-agent toggle on via monkeypatched config
         from lib.config import load_config
         cfg = load_config()
         cfg.raw.setdefault("fleet_memory", {})["enabled"] = True
         cfg.raw["fleet_memory"].setdefault("per_agent", {}).setdefault(
             "daily_driver", {}
         )["enabled"] = True
-        cfg.raw["fleet_memory"]["mount_subpath"] = str(
-            tmp_path.relative_to(tmp_path.anchor)
-        )
 
         from agents.daily_driver import build_options
         opts = build_options(cfg, mode="morning")
         assert "fleet-memory" in opts.mcp_servers
-        assert any("fleet-memory" in t for t in opts.allowed_tools)
+        assert self.EXPECTED_TOOL_NAMES.issubset(set(opts.allowed_tools))
         assert "context-management-2025-06-27" in opts.betas
 
     def test_build_options_omits_fleet_memory_when_disabled(self, monkeypatch):
@@ -1517,6 +1693,8 @@ class TestDailyDriverFleetMemoryWiring:
         # Default: fleet_memory.enabled=false in config.toml
         opts = build_options(cfg, mode="morning")
         assert "fleet-memory" not in opts.mcp_servers
+        # None of the six memory tool names should appear when disabled.
+        assert not any("fleet-memory" in t for t in opts.allowed_tools)
 ```
 
 - [ ] **Step 6: Run the test to verify it fails**
@@ -1550,7 +1728,14 @@ After the existing `vault_server = create_vault_mcp_server()` line, add:
         mcp_servers["fleet-memory"] = create_fleet_memory_mcp_server(
             agent_id="daily_driver", mount_root=fm_mount,
         )
-        allowed_tools.append("mcp__fleet-memory__memory")
+        allowed_tools.extend([
+            "mcp__fleet-memory__memory_view",
+            "mcp__fleet-memory__memory_create",
+            "mcp__fleet-memory__memory_str_replace",
+            "mcp__fleet-memory__memory_insert",
+            "mcp__fleet-memory__memory_delete",
+            "mcp__fleet-memory__memory_rename",
+        ])
         betas.append(fm_cfg.get("beta_header", "context-management-2025-06-27"))
 ```
 
@@ -1584,13 +1769,14 @@ And in `build_preamble(mode, config)` (the function that builds the user-facing 
     ).get("enabled"):
         preamble += (
             "\n\n## Fleet Memory\n\n"
-            "You have a `memory` tool (mcp__fleet-memory__memory) exposing the\n"
-            "Anthropic memory_20250818 protocol against the shared fleet-memory\n"
-            "mount. Start every run by calling `view` on `/memories/shared/` and\n"
-            "`/memories/daily_driver/`. Record lessons you'd want future runs to\n"
-            "remember by calling `create` against `/memories/daily_driver/{slug}.md`.\n"
-            "Only call `create` for `/memories/shared/` when the lesson generalizes\n"
-            "to multiple agents.\n"
+            "You have six memory tools (mcp__fleet-memory__memory_{view,create,\n"
+            "str_replace,insert,delete,rename}) implementing the Anthropic\n"
+            "memory_20250818 protocol against a shared fleet-memory mount.\n"
+            "Start every run by calling `memory_view` on `/memories/shared/`\n"
+            "and `/memories/daily_driver/` to surface relevant prior lessons.\n"
+            "Record new lessons via `memory_create` against\n"
+            "`/memories/daily_driver/{slug}.md`. Use `/memories/shared/{slug}.md`\n"
+            "ONLY when the lesson generalizes to multiple agents.\n"
         )
 ```
 
@@ -1722,7 +1908,7 @@ enabled = true
 ```bash
 cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode morning --dry-run
 ```
-Expected: Stdout shows `Allowed tools: [..., 'mcp__fleet-memory__memory']` and the preamble contains `## Fleet Memory`.
+Expected: Stdout shows `Allowed tools: [..., 'mcp__fleet-memory__memory_view', 'mcp__fleet-memory__memory_create', 'mcp__fleet-memory__memory_str_replace', 'mcp__fleet-memory__memory_insert', 'mcp__fleet-memory__memory_delete', 'mcp__fleet-memory__memory_rename']` and the preamble contains `## Fleet Memory`.
 
 - [ ] **Step 3: Live morning run, hand-prompt a lesson save**
 
@@ -1789,7 +1975,7 @@ When a trigger fires, run a fresh deep-research synthesis (Topic 27 re-run) rath
 
 Implementation must not start until these are resolved:
 
-1. **MCP-server bridge API shape.** The plan assumes `claude_agent_sdk.create_sdk_mcp_server` + `@tool` decorator exists with the shape mirrored from `create_vault_mcp_server`. The exact pattern in `lib/custom_tools.py` may differ. **Decision needed:** Confirm the pseudocode in Task 9 step 3 matches the actual SDK pattern by reading `lib/custom_tools.py` first, then either adjust the plan or proceed.
+1. ~~**MCP-server bridge API shape.**~~ **RESOLVED 2026-05-27** — read `lib/custom_tools.py`, locked in actual SDK shape in Task 9: `tool(name, description, schema_dict)(handler)` parameterized-decorator pattern, six separate MCP tools (`memory_view` / `memory_create` / etc.), `{"content": [{"type": "text", "text": ...}], "is_error": ...}` envelope. No remaining ambiguity in Task 9; one residual edge case noted in the implementation (`tool(...)(handler)` call style) — if it doesn't work, fall back to six module-level decorated functions.
 
 2. **Anthropic SDK version drift.** `claude-agent-sdk==0.1.63` is pinned in `pyproject.toml`, but the installed venv shows `claude-agent-sdk==0.1.56` (not the pin) and `anthropic==0.101.0`. **Decision needed:** before Task 0 runs, either (a) re-install from the pyproject to pin to 0.1.63 (`uv sync` or `pip install -e .[dev]`), or (b) update the pin to match what's actually installed. Otherwise the plan's beta-header / memory-tool guarantees rest on a version that may differ from what production runs against.
 
