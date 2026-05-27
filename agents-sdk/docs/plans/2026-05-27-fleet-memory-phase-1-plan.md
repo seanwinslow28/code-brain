@@ -55,7 +55,58 @@ These are out of scope for Phase 1 and must not creep in:
 | `agents-sdk/tests/test_daily_driver_*.py` | **Modify** | Add tests covering: `build_options` includes the fleet-memory MCP server when enabled; allowed_tools list includes `mcp__fleet-memory__memory`; betas list contains `context-management-2025-06-27`. |
 | `vault/90_system/fleet-memory/MEMORY_INDEX.md` | **Create at runtime** | Bootstrapped on first `fleet_memory.ensure_mount()` call. Not in the repo at plan-execution time. |
 | `vault/90_system/fleet-memory/{vault_synthesizer,daily_driver,shared}/.gitkeep` | **Create at runtime** | Same; ensures the empty namespaces exist on disk so the auto-commit process picks them up. |
-| `CLAUDE.md` | **Modify** (last task) | Add a new row to the "Architecture decisions" table pointing at `fleet_memory.py` and the mount path. One line. |
+| `CLAUDE.md` | **Modify** (Task 10) | Add a new row to the "Architecture decisions" table pointing at `fleet_memory.py` and the mount path. One line. |
+| `evals/vault-synthesizer/cases.yaml` | **Modify** (Task 11) | Append 4 fleet-memory cases (vs-022 through vs-025). |
+| `evals/vault-synthesizer/runner.py` | **Modify** (Task 11) | Add two new fixture-invocation helpers + dispatch for the new IDs. |
+| `evals/vault-synthesizer/README.md` | **Modify** (Task 11) | Bump case-count language; document the Phase 1 fleet-memory addendum. |
+| `evals/vault-synthesizer/traces/fixtures/memory-preamble.md` | **Create** (Task 11) | Synthetic preamble fixture for vs-022. |
+| `evals/daily-driver/` (full directory) | **Create** (Task 12) | Mirror the synth eval-suite layout. README, cases.yaml (2 cases), runner.py, conftest.py, deferred-cases.yaml (4 deferred), failure-modes.md, last-run.md placeholder, traces/.gitkeep. |
+
+---
+
+## Task -1: Sync SDK venv to pin (prerequisite)
+
+**Files:** None modified — this aligns the installed `claude-agent-sdk` with the version declared in `agents-sdk/pyproject.toml` so Phase 1's beta-header and memory-tool guarantees rest on a known surface.
+
+**Why this is Task -1:** [pyproject.toml](agents-sdk/pyproject.toml) pins `claude-agent-sdk==0.1.63`, but the installed venv shows `0.1.56`. The SDK surface the fleet actually uses is narrow (`ClaudeAgentOptions`, `query`, `ResultMessage`, `create_sdk_mcp_server`, `tool`) — five names. A 0.1.56 → 0.1.63 bump is patch-level on a young project mostly hardening that surface; the existing pytest suite (679 tests) catches regressions before any memory code lands.
+
+- [ ] **Step 1: Check current SDK version**
+
+```bash
+cd /Users/seanwinslow/Code-Brain/code-brain/agents-sdk
+.venv/bin/pip show claude-agent-sdk | grep Version
+```
+Expected output: `Version: 0.1.56` (the current drifted state).
+
+- [ ] **Step 2: Sync to the pyproject pin**
+
+```bash
+cd /Users/seanwinslow/Code-Brain/code-brain/agents-sdk
+.venv/bin/pip install -e . --upgrade
+.venv/bin/pip show claude-agent-sdk | grep Version
+```
+Expected: `Version: 0.1.63`.
+
+- [ ] **Step 3: Run the full test suite to confirm no regressions**
+
+```bash
+cd /Users/seanwinslow/Code-Brain/code-brain/agents-sdk
+PYTHONPATH=. .venv/bin/pytest tests/ -v
+```
+Expected: All ~679 tests PASS. If any test fails, **stop and triage** — a 0.1.56 → 0.1.63 regression in the existing fleet is a separate problem from fleet-memory work, and shipping memory on top of a broken baseline is the wrong move. Diagnose the failure first.
+
+- [ ] **Step 4: Re-confirm Task 0's import checks still pass**
+
+```bash
+cd /Users/seanwinslow/Code-Brain/code-brain/agents-sdk
+.venv/bin/python3 -c "from anthropic.lib.tools import BetaAbstractMemoryTool; print('OK')"
+.venv/bin/python3 -c "from claude_agent_sdk import ClaudeAgentOptions; print(ClaudeAgentOptions(betas=['context-management-2025-06-27']).betas)"
+```
+Expected: `OK` and `['context-management-2025-06-27']`.
+
+- [ ] **Step 5: Commit (no file changes, but tag the resolved state)**
+
+There's nothing to commit code-wise (the venv isn't tracked). Note completion in the plan-execution log: `Task -1 done: claude-agent-sdk synced 0.1.56 → 0.1.63, 679/679 tests green.`
 
 ---
 
@@ -1297,9 +1348,60 @@ def _maybe_write_run_lesson(
     tool.write_lesson(slug=slug, summary=summary, body=body)
 ```
 
-- [ ] **Step 4: Wire the read-side into `main()`**
+- [ ] **Step 4: Wire memory into `run_synthesis` (Option 3 — orchestrator placement)**
 
-Locate the `main()` function in `agents-sdk/agents/vault_synthesizer.py`. After `cfg = load_config()` and before `result = run_synthesis(...)`, add:
+The chosen placement is the **orchestrator**, not the caller-factory and not the prompt builder. Rationale: `_build_synthesis_prompt` stays pure (no test churn across the existing prompt-builder tests); `_default_llm_caller_factory` stays focused on transport + JSON parsing (uncoupled from memory state); `run_synthesis` already coordinates run-wide context (`run_id`, `manifest_state`, `db_conn`) so memory is at the right level of abstraction.
+
+Modify `run_synthesis(...)` signature to accept a memory preamble:
+
+```python
+def run_synthesis(
+    *,
+    vault_root: Path,
+    changed_files: list[Path],
+    llm_caller: Callable[..., dict],
+    retriever: Callable[..., list[dict[str, Any]]],
+    now_iso: str | None = None,
+    budget_seconds: int = DEFAULT_BUDGET_SECONDS,
+    top_k: int = 5,
+    db_conn: sqlite3.Connection | None = None,
+    classifier_version: str | None = None,
+    logger: logging.Logger | None = None,
+    memory_preamble: str = "",     # NEW — empty string disables injection
+) -> SynthesisResult:
+```
+
+Inside the per-file loop in `run_synthesis`, find the existing block:
+
+```python
+        prompt = _build_synthesis_prompt(
+            primary_file_rel=str(fp.relative_to(vault_root)),
+            primary_text=primary_text,
+            similar=similar,
+            existing_titles=existing_titles,
+        )
+        try:
+            parsed = llm_caller(prompt)
+```
+
+Insert a memory-preamble prepend between `_build_synthesis_prompt` and `llm_caller`:
+
+```python
+        prompt = _build_synthesis_prompt(
+            primary_file_rel=str(fp.relative_to(vault_root)),
+            primary_text=primary_text,
+            similar=similar,
+            existing_titles=existing_titles,
+        )
+        if memory_preamble:
+            prompt = memory_preamble + "\n\n" + prompt
+        try:
+            parsed = llm_caller(prompt)
+```
+
+The caller factory (`_default_llm_caller_factory`) is **not** touched. The prompt builder (`_build_synthesis_prompt`) is **not** touched. Only `run_synthesis` itself learns about memory.
+
+In `main()`, after `cfg = load_config()` and before the `run_synthesis(...)` call, add the load-and-inject block:
 
 ```python
     # Fleet memory (Phase 1 pilot, 2026-05-27).
@@ -1309,41 +1411,101 @@ Locate the `main()` function in `agents-sdk/agents/vault_synthesizer.py`. After 
     fm_mount = cfg.vault_root / fm_cfg.get("mount_subpath", "90_system/fleet-memory")
     if fm_enabled:
         _fleet_memory.ensure_mount(fm_mount, agent_ids=["vault_synthesizer", "daily_driver"])
-    # Note: the prompt-injection itself happens inside the LLM caller — see
-    # _default_llm_caller_factory below — because the synth's prompt is
-    # built per-file, and the memory preamble is run-wide.
-```
-
-Modify `_default_llm_caller_factory` to accept and prepend a memory preamble. Find the existing function signature `def _default_llm_caller_factory(router: HybridRouter, manifest_state: ...) -> ...` and update to:
-
-```python
-def _default_llm_caller_factory(
-    router: HybridRouter,
-    manifest_state: dict[str, str] | None = None,
-    memory_preamble: str = "",
-) -> Callable[..., dict]:
-    ...
-    def _call(prompt: str, max_tokens: int = 2000) -> dict:
-        prompt = (memory_preamble + "\n\n" + prompt) if memory_preamble else prompt
-        ...  # existing body unchanged
-```
-
-Back in `main()`, change the `llm = _default_llm_caller_factory(router, manifest_state=manifest_state)` line to:
-
-```python
     memory_preamble = _fleet_memory.inject_memories_into_prompt(
         mount_root=fm_mount, agent_id="vault_synthesizer", enabled=fm_enabled,
         max_chars=fm_cfg.get("manifest_max_chars", 8000),
     )
-    llm = _default_llm_caller_factory(
-        router, manifest_state=manifest_state, memory_preamble=memory_preamble,
-    )
+```
+
+Update the existing `run_synthesis(...)` call to pass the preamble:
+
+```python
+        result = run_synthesis(
+            vault_root=cfg.vault_root,
+            changed_files=changed,
+            llm_caller=llm,
+            retriever=retriever,
+            budget_seconds=args.budget_seconds,
+            db_conn=db_conn,
+            classifier_version=(
+                f"{manifest_state.get('model_used', 'unknown')}/{today_iso}"
+            ),
+            logger=logger,
+            memory_preamble=memory_preamble,    # NEW
+        )
 ```
 
 After `run_synthesis(...)` returns (after the existing `result.model_used = ...` lines and the manifest write), add:
 
 ```python
     _maybe_write_run_lesson(mount_root=fm_mount, result=result, enabled=fm_enabled)
+```
+
+Also add a unit-test case asserting the orchestrator-level placement (append to `TestFleetMemoryWiring` from Step 1):
+
+```python
+    def test_run_synthesis_prepends_memory_preamble_to_prompt(self, tmp_path):
+        """When memory_preamble is non-empty, run_synthesis prepends it before
+        every per-file llm_caller invocation. Verified by capturing what
+        llm_caller receives."""
+        from agents.vault_synthesizer import run_synthesis
+
+        captured: list[str] = []
+
+        def mock_llm(prompt: str, max_tokens: int = 2000) -> dict:
+            captured.append(prompt)
+            return {"concepts": [], "connections": []}
+
+        def mock_retriever(query: str, top_k: int = 5, **kw):
+            return []
+
+        note = tmp_path / "note.md"
+        note.write_text("---\ntype: note\n---\n\nbody")
+        # Pushover stubs so ensure_credentials_or_raise passes
+        import os
+        os.environ.setdefault("PUSHOVER_USER_KEY", "stub")
+        os.environ.setdefault("PUSHOVER_API_TOKEN", "stub")
+
+        run_synthesis(
+            vault_root=tmp_path,
+            changed_files=[note],
+            llm_caller=mock_llm,
+            retriever=mock_retriever,
+            budget_seconds=30,
+            memory_preamble="# Lessons remembered\n\nLesson A",
+        )
+        assert captured, "llm_caller was not invoked"
+        assert captured[0].startswith("# Lessons remembered")
+        assert "Lesson A" in captured[0]
+
+    def test_run_synthesis_omits_preamble_when_empty(self, tmp_path):
+        from agents.vault_synthesizer import run_synthesis
+
+        captured: list[str] = []
+
+        def mock_llm(prompt: str, max_tokens: int = 2000) -> dict:
+            captured.append(prompt)
+            return {"concepts": [], "connections": []}
+
+        def mock_retriever(query: str, top_k: int = 5, **kw):
+            return []
+
+        note = tmp_path / "note.md"
+        note.write_text("---\ntype: note\n---\n\nbody")
+        import os
+        os.environ.setdefault("PUSHOVER_USER_KEY", "stub")
+        os.environ.setdefault("PUSHOVER_API_TOKEN", "stub")
+
+        run_synthesis(
+            vault_root=tmp_path,
+            changed_files=[note],
+            llm_caller=mock_llm,
+            retriever=mock_retriever,
+            budget_seconds=30,
+            memory_preamble="",
+        )
+        assert captured
+        assert not captured[0].startswith("# Lessons remembered")
 ```
 
 - [ ] **Step 5: Run the tests to verify all four pass**
@@ -1832,9 +1994,608 @@ git commit -m "docs(claude-md): document fleet-memory Phase 1 in arch-decisions 
 
 ---
 
-## Smoke Test Protocol (post-Task 10)
+## Task 11: Extend `evals/vault-synthesizer/` with fleet-memory cases
 
-Run these manually after all tasks pass. This is the "does it actually work end-to-end" gate the user requested.
+**Files:**
+- Modify: `evals/vault-synthesizer/cases.yaml`
+- Modify: `evals/vault-synthesizer/runner.py` (add memory-preamble fixture path)
+- Modify: `evals/vault-synthesizer/README.md` (bump baseline counts)
+- Create: `evals/vault-synthesizer/traces/fixtures/memory-preamble.md` (small synthetic preamble)
+
+The existing 8 cases (vs-014…vs-021) test pre-memory behavior and are grounded in 17 days of production logs. Fleet-memory introduces 4 new behaviors to cover at the eval layer (separate from unit tests in `agents-sdk/tests/`). These cases live alongside the existing ones and use the same runner pattern.
+
+- [ ] **Step 1: Add 4 cases to `cases.yaml`**
+
+Append to `evals/vault-synthesizer/cases.yaml`:
+
+```yaml
+- id: vs-022
+  category: fleet-memory
+  description: "memory_preamble parameter prepends to per-file LLM prompt when non-empty"
+  failure_mode_under_test: "Phase 1 fleet-memory — preamble must reach the LLM, not be silently dropped"
+  input:
+    fixtures: traces/fixtures
+    note_count: 1
+    memory_preamble_path: traces/fixtures/memory-preamble.md
+  expected_output:
+    preamble_first_in_prompt: true
+  judge_type: rubric
+  pass_criteria: "result.captured_prompts and result.captured_prompts[0].startswith('# Lessons remembered')"
+
+- id: vs-023
+  category: fleet-memory
+  description: "_maybe_write_run_lesson writes a lesson on STATUS_OK with concepts_written>0"
+  failure_mode_under_test: "Phase 1 fleet-memory — clean run must persist a lesson for future recall"
+  input:
+    simulated_result:
+      status: ok
+      concepts_written: 2
+      connections_written: 1
+      model_used: qwen3.6_35b-a3b-32k
+      run_id: "2026-06-15T03:00:00"
+  expected_output:
+    lesson_file_exists: true
+    manifest_updated: true
+  judge_type: rubric
+  pass_criteria: "result.lesson_files_count == 1 and 'qwen3.6_35b-a3b-32k' in result.lesson_body"
+
+- id: vs-024
+  category: fleet-memory
+  description: "_maybe_write_run_lesson is a no-op on STATUS_ERROR"
+  failure_mode_under_test: "Phase 1 fleet-memory — error runs must not pollute memory with false signal"
+  input:
+    simulated_result:
+      status: error
+      concepts_written: 0
+  expected_output:
+    lesson_files_count: 0
+  judge_type: exact-match
+  pass_criteria: "result.lesson_files_count == 0"
+
+- id: vs-025
+  category: fleet-memory
+  description: "_maybe_write_run_lesson is a no-op when fleet_memory.enabled=false even on a clean run"
+  failure_mode_under_test: "Phase 1 fleet-memory — opt-in toggle must gate all write paths"
+  input:
+    simulated_result:
+      status: ok
+      concepts_written: 5
+    fleet_memory_enabled: false
+  expected_output:
+    lesson_files_count: 0
+  judge_type: exact-match
+  pass_criteria: "result.lesson_files_count == 0"
+```
+
+- [ ] **Step 2: Create the fixture preamble**
+
+Create `evals/vault-synthesizer/traces/fixtures/memory-preamble.md`:
+
+```markdown
+# Lessons remembered from prior runs
+
+## Manifest
+
+- pr52-stale-checkout: Filter critic candidates to synth manifest, not mtime.
+
+## Your namespace (vault_synthesizer/)
+
+### pr52-stale-checkout.md
+PR #52 wrote pre-Tier-2 articles. Always filter to manifest.
+```
+
+- [ ] **Step 3: Extend `runner.py` to handle the new cases**
+
+Add a helper function near `_invoke_synthesizer` in `evals/vault-synthesizer/runner.py`:
+
+```python
+def _invoke_synthesizer_with_capture(case) -> object:
+    """vs-022: capture what llm_caller actually receives so we can assert
+    on prompt shape (memory preamble must be the first content)."""
+    from agents import vault_synthesizer as vs
+    import tempfile
+
+    inp = case.get("input", {})
+    captured: list[str] = []
+
+    def llm_caller(prompt: str, max_tokens: int = 2000) -> dict:
+        captured.append(prompt)
+        return {"concepts": [], "connections": []}
+
+    def retriever(text, top_k, **kw):
+        return []
+
+    preamble_path = ROOT / inp["memory_preamble_path"]
+    memory_preamble = preamble_path.read_text(encoding="utf-8")
+
+    fixtures_dir = ROOT / (inp.get("fixtures") or "traces/fixtures")
+    note_count = inp.get("note_count", 1)
+    tmpdir = tempfile.mkdtemp(prefix="eval-synth-mem-")
+    vault_root = Path(tmpdir)
+    changed: list[Path] = []
+    for src in sorted(fixtures_dir.glob("note-*.md"))[:note_count]:
+        import shutil
+        dst = vault_root / src.name
+        shutil.copy(src, dst)
+        changed.append(dst)
+
+    import os
+    os.environ.setdefault("PUSHOVER_USER_KEY", "eval-stub-user")
+    os.environ.setdefault("PUSHOVER_API_TOKEN", "eval-stub-token")
+
+    vs.run_synthesis(
+        vault_root=vault_root,
+        changed_files=changed,
+        llm_caller=llm_caller,
+        retriever=retriever,
+        budget_seconds=30,
+        db_conn=None,
+        memory_preamble=memory_preamble,
+    )
+
+    class _Wrap:
+        pass
+    w = _Wrap()
+    w.captured_prompts = captured
+    return w
+
+
+def _invoke_lesson_writer(case) -> object:
+    """vs-023/024/025: simulate a SynthesisResult and assert lesson-write
+    behavior. Avoids running the full synth pipeline."""
+    from agents.vault_synthesizer import _maybe_write_run_lesson, SynthesisResult
+    from lib import fleet_memory
+    import tempfile
+
+    inp = case.get("input", {})
+    sim = inp["simulated_result"]
+    enabled = inp.get("fleet_memory_enabled", True)
+    tmpdir = tempfile.mkdtemp(prefix="eval-synth-lesson-")
+    mount = Path(tmpdir) / "fleet-memory"
+    fleet_memory.ensure_mount(mount, agent_ids=["vault_synthesizer"])
+
+    result = SynthesisResult(status=sim["status"])
+    result.concepts_written = sim.get("concepts_written", 0)
+    result.connections_written = sim.get("connections_written", 0)
+    result.model_used = sim.get("model_used", "none")
+    result.run_id = sim.get("run_id", "eval-run")
+
+    _maybe_write_run_lesson(mount_root=mount, result=result, enabled=enabled)
+
+    lesson_files = list((mount / "vault_synthesizer").glob("*.md"))
+    lesson_body = lesson_files[0].read_text() if lesson_files else ""
+
+    class _Wrap:
+        pass
+    w = _Wrap()
+    w.lesson_files_count = len(lesson_files)
+    w.lesson_body = lesson_body
+    return w
+```
+
+Then in the `test_case` function, add dispatch branches for the new IDs (insert before the existing `elif case["id"] == "vs-019":` block):
+
+```python
+    elif case["id"] == "vs-022":
+        result = _invoke_synthesizer_with_capture(case)
+
+    elif case["id"] in ("vs-023", "vs-024", "vs-025"):
+        result = _invoke_lesson_writer(case)
+```
+
+- [ ] **Step 4: Update README baseline counts**
+
+In `evals/vault-synthesizer/README.md`, change the case count language. Find this line:
+
+```markdown
+**Post-fix (Workstream B complete, 2026-05-12): 7/10 (70%).**
+```
+
+Add a new paragraph after it:
+
+```markdown
+**Phase 1 fleet-memory addendum (2026-05-27): 4 cases added (vs-022 to vs-025) covering memory-preamble injection and lesson-write gating. Pass-rate target after Task 11 ships: 11/14 = 79% (the three skipped cases vs-012/013/014 remain deferred).**
+```
+
+- [ ] **Step 5: Run the new eval cases to confirm they pass**
+
+```bash
+cd agents-sdk && PYTHONPATH=. .venv/bin/python3 -m pytest \
+    ../evals/vault-synthesizer/runner.py -v -k "vs-022 or vs-023 or vs-024 or vs-025"
+```
+Expected: All four PASS.
+
+- [ ] **Step 6: Run the full eval suite to confirm no regressions**
+
+```bash
+cd agents-sdk && PYTHONPATH=. .venv/bin/python3 -m pytest \
+    ../evals/vault-synthesizer/runner.py -v
+```
+Expected: 11 PASS, 3 SKIP (the existing vs-012/013/014 deferrals).
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add evals/vault-synthesizer/cases.yaml evals/vault-synthesizer/runner.py evals/vault-synthesizer/README.md evals/vault-synthesizer/traces/fixtures/memory-preamble.md
+git commit -m "feat(evals): add 4 fleet-memory cases to vault-synthesizer eval suite"
+```
+
+---
+
+## Task 12: Scaffold `evals/daily-driver/` from scratch
+
+**Files:**
+- Create: `evals/daily-driver/README.md`
+- Create: `evals/daily-driver/cases.yaml`
+- Create: `evals/daily-driver/runner.py`
+- Create: `evals/daily-driver/conftest.py`
+- Create: `evals/daily-driver/deferred-cases.yaml`
+- Create: `evals/daily-driver/failure-modes.md`
+- Create: `evals/daily-driver/last-run.md` (placeholder; regenerated on each pytest run)
+- Create: `evals/daily-driver/traces/.gitkeep`
+
+This mirrors the [vault-synthesizer eval suite](evals/vault-synthesizer/) structure. Phase 1 ships **2 cases** focused on the fleet-memory wiring (the highest-confidence new behavior); additional cases get added in Phase 2 once production traces accumulate to ground production-grade failure modes. The deferred-cases.yaml file holds 4 named-but-not-yet-runnable cases as forward markers.
+
+- [ ] **Step 1: Create the directory and `.gitkeep` files**
+
+```bash
+mkdir -p evals/daily-driver/traces/fixtures
+touch evals/daily-driver/traces/.gitkeep
+```
+
+- [ ] **Step 2: Create `evals/daily-driver/conftest.py`**
+
+Mirrors the synth conftest pattern verbatim, with the path-prepend logic plus the `last-run.md` writer:
+
+```python
+"""Make agents-sdk importable from the eval runner regardless of pytest's CWD.
+
+Same pattern as evals/vault-synthesizer/conftest.py — see that file for the
+full rationale. Pytest auto-registers hooks from conftest.py but NOT from a
+parametrized test module like runner.py, which is why the last-run.md
+writer lives here.
+"""
+import sys
+from pathlib import Path
+
+_REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+_AGENTS_SDK = _REPO_ROOT / "agents-sdk"
+if _AGENTS_SDK.exists() and str(_AGENTS_SDK) not in sys.path:
+    sys.path.insert(0, str(_AGENTS_SDK))
+
+
+_RESULTS: list[tuple[str, str, str]] = []
+
+
+def pytest_runtest_logreport(report):
+    if report.when != "call":
+        return
+    case_id = report.nodeid.split("[", 1)[-1].rstrip("]")
+    if report.passed:
+        _RESULTS.append((case_id, "✅ PASS", ""))
+    elif report.skipped:
+        notes = str(report.longrepr).splitlines()[-1] if report.longrepr else ""
+        _RESULTS.append((case_id, "⏸️ SKIPPED", notes))
+    else:
+        notes = str(report.longrepr).splitlines()[-1] if report.longrepr else ""
+        _RESULTS.append((case_id, "❌ FAIL", notes))
+
+
+def pytest_sessionfinish(session, exitstatus):
+    if not _RESULTS:
+        return
+    from runner import _load_cases, _write_last_run
+    cases_by_id = {c["id"]: c for c in _load_cases()}
+    lines = []
+    for case_id, status, notes in _RESULTS:
+        cat = cases_by_id.get(case_id, {}).get("category", "?")
+        lines.append(f"| {case_id} | {cat} | {status} | {notes} |")
+    pass_count = sum(1 for _, s, _ in _RESULTS if "PASS" in s)
+    total = len(_RESULTS)
+    lines.append("")
+    lines.append(f"**Pass rate: {pass_count}/{total} ({100*pass_count//total}%).**")
+    _write_last_run(lines)
+```
+
+- [ ] **Step 3: Create `evals/daily-driver/cases.yaml`** with two Phase-1 cases:
+
+```yaml
+# evals/daily-driver/cases.yaml
+# Schema mirrors evals/vault-synthesizer/cases.yaml.
+# Phase 1 ships 2 cases covering the fleet-memory wiring. Additional cases land
+# in Phase 2 once production traces accumulate to ground non-fleet-memory
+# failure modes (see deferred-cases.yaml for the forward markers).
+
+- id: dd-001
+  category: fleet-memory-wiring
+  description: "build_options registers the 6 fleet-memory MCP tool names in allowed_tools when enabled"
+  failure_mode_under_test: "Phase 1 fleet-memory — daily_driver must declare all six memory tools so the CLI permission layer routes them"
+  input:
+    fleet_memory_enabled: true
+  expected_output:
+    expected_tool_names:
+      - mcp__fleet-memory__memory_view
+      - mcp__fleet-memory__memory_create
+      - mcp__fleet-memory__memory_str_replace
+      - mcp__fleet-memory__memory_insert
+      - mcp__fleet-memory__memory_delete
+      - mcp__fleet-memory__memory_rename
+    expected_beta: context-management-2025-06-27
+  judge_type: rubric
+  pass_criteria: "set(result.expected_tool_names).issubset(set(result.allowed_tools)) and 'context-management-2025-06-27' in result.betas"
+
+- id: dd-002
+  category: fleet-memory-wiring
+  description: "build_options omits fleet-memory MCP server when fleet_memory.enabled=false"
+  failure_mode_under_test: "Phase 1 fleet-memory — opt-in toggle must gate the entire MCP-server wiring, not just write paths"
+  input:
+    fleet_memory_enabled: false
+  expected_output:
+    fleet_memory_server_absent: true
+    no_fleet_memory_tools: true
+  judge_type: exact-match
+  pass_criteria: "'fleet-memory' not in result.mcp_server_names and not any('fleet-memory' in t for t in result.allowed_tools)"
+```
+
+- [ ] **Step 4: Create `evals/daily-driver/runner.py`**
+
+```python
+# evals/daily-driver/runner.py
+"""Daily Driver Eval Runner.
+
+Run with:
+    cd agents-sdk && PYTHONPATH=. .venv/bin/python3 -m pytest \\
+        ../evals/daily-driver/runner.py -v
+
+Phase 1 scope: 2 cases covering the fleet-memory MCP-server wiring.
+Phase 2 scope (see deferred-cases.yaml): morning-brief shape, vault-health
+WARNING propagation, MBP-asleep fallback path, fleet-overnight digest
+injection. Those need production traces to author cases against.
+"""
+from __future__ import annotations
+
+from datetime import datetime, timezone
+from pathlib import Path
+
+import pytest
+import yaml
+
+ROOT = Path(__file__).parent
+CASES_PATH = ROOT / "cases.yaml"
+LAST_RUN_PATH = ROOT / "last-run.md"
+
+
+def grade_exact_match(result, case) -> tuple[str, str]:
+    expr = case["pass_criteria"]
+    try:
+        ok = bool(eval(expr, {"__builtins__": {}}, {"result": result}))
+    except Exception as e:
+        return "FAIL", f"grader-eval-error: {e!r}"
+    return ("PASS", "") if ok else ("FAIL", f"{expr} evaluated False")
+
+
+def grade_rubric(result, case) -> tuple[str, str]:
+    return grade_exact_match(result, case)
+
+
+GRADERS = {"exact-match": grade_exact_match, "rubric": grade_rubric}
+
+
+def _load_cases() -> list[dict]:
+    return yaml.safe_load(CASES_PATH.read_text())
+
+
+def _write_last_run(lines: list[str]) -> None:
+    ts = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    header = (
+        f"# Daily Driver Eval — last-run\n\n"
+        f"_Auto-generated by runner.py at {ts}._\n\n"
+        f"| Case | Category | Result | Notes |\n"
+        f"|------|----------|--------|-------|\n"
+    )
+    LAST_RUN_PATH.write_text(header + "\n".join(lines) + "\n", encoding="utf-8")
+
+
+def _invoke_build_options(case) -> object:
+    """Both Phase-1 cases (dd-001, dd-002) inspect `build_options` output —
+    no full agent run, no network, no LLM. Just config + the SDK options
+    builder.
+    """
+    from lib.config import load_config
+    from agents.daily_driver import build_options
+
+    inp = case.get("input", {})
+    cfg = load_config()
+    cfg.raw.setdefault("fleet_memory", {})["enabled"] = inp.get(
+        "fleet_memory_enabled", False
+    )
+    cfg.raw["fleet_memory"].setdefault("per_agent", {}).setdefault(
+        "daily_driver", {}
+    )["enabled"] = inp.get("fleet_memory_enabled", False)
+
+    opts = build_options(cfg, mode="morning")
+
+    class _Wrap:
+        pass
+    w = _Wrap()
+    w.allowed_tools = list(opts.allowed_tools)
+    w.betas = list(opts.betas) if opts.betas else []
+    w.mcp_server_names = list(opts.mcp_servers.keys())
+    # Surface the expected-tool list from the case so pass_criteria can read it
+    w.expected_tool_names = inp.get("expected_tool_names", []) or case.get(
+        "expected_output", {}
+    ).get("expected_tool_names", [])
+    return w
+
+
+@pytest.fixture(scope="session")
+def cases():
+    return _load_cases()
+
+
+@pytest.mark.parametrize("case", _load_cases(), ids=lambda c: c["id"])
+def test_case(case):
+    if case.get("skip_reason"):
+        pytest.skip(case["skip_reason"])
+
+    if case["id"] in ("dd-001", "dd-002"):
+        result = _invoke_build_options(case)
+    else:
+        pytest.fail(f"runner.py has no dispatch for case id {case['id']!r}")
+        return
+
+    grader = GRADERS[case["judge_type"]]
+    status, msg = grader(result, case)
+    assert status == "PASS", msg
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(pytest.main([__file__, "-v"]))
+```
+
+- [ ] **Step 5: Create `evals/daily-driver/deferred-cases.yaml`**
+
+```yaml
+# evals/daily-driver/deferred-cases.yaml
+# Cases named but not yet runnable. Move into cases.yaml when traces exist.
+
+- id: dd-003
+  category: morning-brief-shape
+  description: "Morning brief must contain a `## Morning Focus` section with 1-3-5 priority list shape"
+  status: deferred
+  blocker: "Need 7+ days of production morning-brief traces to ground the assertion against actual output shape"
+
+- id: dd-004
+  category: vault-health-propagation
+  description: "When synth-manifest reports status=success-empty, the daily brief Vault Health block must contain WARNING and `concepts_written: 0`"
+  status: deferred
+  blocker: "vs-021 covers the render_vault_health function unit-side; dd-004 will cover the integration through build_prompt → query loop. Needs a way to run claude-agent-sdk.query() in offline eval mode."
+
+- id: dd-005
+  category: mbp-asleep-fallback
+  description: "When fleet-overnight digest indicates MBP was asleep, the morning brief surfaces the fallback path (cloud Sonnet) rather than silently degrading"
+  status: deferred
+  blocker: "Need MBP-asleep production traces to ground the assertion; the fallback path text shape is not stable yet."
+
+- id: dd-006
+  category: fleet-memory-content
+  description: "When fleet-memory contains a lesson tagged `daily_driver/{slug}.md` from a prior run, the agent's morning brief references the lesson by file path"
+  status: deferred
+  blocker: "Need ≥7 days of Phase 1 fleet-memory production runs to know what the model actually does with retrieved memory entries. Author after Phase 1 audit."
+```
+
+- [ ] **Step 6: Create `evals/daily-driver/failure-modes.md`**
+
+```markdown
+# Daily Driver — Failure Mode Taxonomy
+
+Phase 1 ships with the fleet-memory-wiring slice only. Production-grounded
+failure modes are authored as traces accumulate. This file mirrors the
+shape of [`evals/vault-synthesizer/failure-modes.md`](../vault-synthesizer/failure-modes.md);
+fill in modes 1–N below as you observe them in real morning runs.
+
+## Mode 1 — Fleet-memory wiring drift (Phase 1)
+**Observed:** N/A — guarded preemptively by dd-001, dd-002.
+**Symptom:** `build_options` ships without the six MCP tools, or with the
+wrong beta header. Model can't call memory tools; reads fail silently;
+no lessons accumulate.
+**Cases:** dd-001, dd-002.
+
+## Mode 2+ — TBD (Phase 2)
+Author production-grounded modes after Phase 1 produces ≥1 week of traces.
+Suggested probes:
+- Morning brief skips the 1-3-5 section when synth-manifest is malformed
+- Fleet-overnight digest injected at wrong anchor (anchor drift)
+- MBP-asleep state misreported in the digest
+- Daily-note duplicate created when an earlier 08:45 run partial-completed
+```
+
+- [ ] **Step 7: Create `evals/daily-driver/README.md`**
+
+```markdown
+# Daily Driver — Eval Suite
+
+A binary pass/fail eval suite for the autonomous morning daily-driver agent.
+Mirrors the [`evals/vault-synthesizer/`](../vault-synthesizer/) structure.
+
+> **Phase 1 scope: fleet-memory wiring only.** Two cases (dd-001, dd-002)
+> verify that the daily_driver builds correct SDK options when fleet-memory
+> is enabled vs. disabled. Production-grounded morning-brief failure modes
+> land in Phase 2 once traces accumulate.
+
+## Quickstart
+
+```bash
+cd agents-sdk && PYTHONPATH=. .venv/bin/python3 -m pytest \
+    ../evals/daily-driver/runner.py -v
+```
+
+(Running from any other CWD breaks the `agents` import — the `cd agents-sdk`
+prefix is mandatory, same as the synth eval.)
+
+## Current baseline
+
+**Phase 1 ship (2026-05-27 plan): 2/2 (100%).** Both cases assert wiring
+shape and pass against the implementation built in Tasks 9 and 10. Cases
+are pre-emptive (guarding the wiring against drift), not regression-driven
+— there's no production failure to point to yet.
+
+## Forward roadmap
+
+[`deferred-cases.yaml`](deferred-cases.yaml) lists 4 named-but-not-runnable
+cases (dd-003 through dd-006) for Phase 2:
+
+- **dd-003** Morning-brief shape (`## Morning Focus`, 1-3-5 structure)
+- **dd-004** Vault Health propagation (success-empty → WARNING)
+- **dd-005** MBP-asleep fallback signaling
+- **dd-006** Fleet-memory retrieval — does the model actually reference
+  stored lessons in its brief?
+
+Each blocked on accumulating traces, not on test infrastructure.
+
+## Sources
+
+- Eval pattern lifted from [`evals/vault-synthesizer/`](../vault-synthesizer/)
+- Underlying agent: [`agents-sdk/agents/daily_driver.py`](../../agents-sdk/agents/daily_driver.py)
+- Fleet-memory plan: [`agents-sdk/docs/plans/2026-05-27-fleet-memory-phase-1-plan.md`](../../agents-sdk/docs/plans/2026-05-27-fleet-memory-phase-1-plan.md)
+```
+
+- [ ] **Step 8: Create `evals/daily-driver/last-run.md` placeholder**
+
+```markdown
+# Daily Driver Eval — last-run
+
+_Will be auto-generated on the first `pytest` run by `conftest.py:pytest_sessionfinish`._
+```
+
+- [ ] **Step 9: Run the new eval suite**
+
+```bash
+cd agents-sdk && PYTHONPATH=. .venv/bin/python3 -m pytest \
+    ../evals/daily-driver/runner.py -v
+```
+Expected: dd-001 PASS, dd-002 PASS.
+
+- [ ] **Step 10: Confirm `last-run.md` regenerated**
+
+```bash
+cat /Users/seanwinslow/Code-Brain/code-brain/evals/daily-driver/last-run.md
+```
+Expected: a table with `dd-001 | fleet-memory-wiring | ✅ PASS` and `dd-002 | fleet-memory-wiring | ✅ PASS`.
+
+- [ ] **Step 11: Commit**
+
+```bash
+git add evals/daily-driver/
+git commit -m "feat(evals): scaffold daily-driver eval suite (Phase 1: 2 cases, 4 deferred)"
+```
+
+---
+
+## Smoke Test Protocol (post-Task 12)
+
+Run these manually after all tasks pass. This is the "does it actually work end-to-end" gate the user requested. The unit-test layer (Tasks 2–9) and the eval layer (Tasks 11–12) both pass at this point; the smoke tests confirm real production agents wire correctly against a real vault.
 
 ### Smoke 1 — vault_synthesizer round-trip
 
@@ -1977,15 +2738,15 @@ Implementation must not start until these are resolved:
 
 1. ~~**MCP-server bridge API shape.**~~ **RESOLVED 2026-05-27** — read `lib/custom_tools.py`, locked in actual SDK shape in Task 9: `tool(name, description, schema_dict)(handler)` parameterized-decorator pattern, six separate MCP tools (`memory_view` / `memory_create` / etc.), `{"content": [{"type": "text", "text": ...}], "is_error": ...}` envelope. No remaining ambiguity in Task 9; one residual edge case noted in the implementation (`tool(...)(handler)` call style) — if it doesn't work, fall back to six module-level decorated functions.
 
-2. **Anthropic SDK version drift.** `claude-agent-sdk==0.1.63` is pinned in `pyproject.toml`, but the installed venv shows `claude-agent-sdk==0.1.56` (not the pin) and `anthropic==0.101.0`. **Decision needed:** before Task 0 runs, either (a) re-install from the pyproject to pin to 0.1.63 (`uv sync` or `pip install -e .[dev]`), or (b) update the pin to match what's actually installed. Otherwise the plan's beta-header / memory-tool guarantees rest on a version that may differ from what production runs against.
+2. ~~**Anthropic SDK version drift.**~~ **RESOLVED 2026-05-27** — sync the venv to the `0.1.63` pin as a Task -1 prerequisite (see new task below). Full test suite must pass before Task 0 starts.
 
-3. **External auto-commit path coverage.** CLAUDE.md rule 8 says "the shell-level auto-commit hook is the sole owner of vault git operations." That hook is *not* in `.claude/hooks/` — vault: auto-commit commits come from an external process (likely a Mac Mini launchd job that this repo does not contain). **Decision needed:** Sean to confirm that external process commits `vault/90_system/fleet-memory/` already (it commits other `vault/90_system/` subdirs — verified via git log — so likely yes), or to extend its scope. Task 0 Step 3 builds in a verification check, but it's an empirical check, not a code-level guarantee.
+3. ~~**External auto-commit path coverage.**~~ **RESOLVED 2026-05-27** — Obsidian-Git is the active auto-commit source (user-confirmed). It commits the whole vault root, so `vault/90_system/fleet-memory/` is covered automatically. CLAUDE.md rule 8 updated 2026-05-27 to reflect this.
 
-4. **Where to land the synthesizer's memory-injection split.** The plan currently injects the memory preamble inside `_default_llm_caller_factory` (the lowest-level wrapper around the Ollama HTTP call). Alternative: inject it into `_build_synthesis_prompt` directly. **Decision needed:** stick with the caller-factory injection (lower blast radius, easier to disable per-call) or move into the prompt builder (cleaner architecturally but couples memory awareness into a pure function). Plan currently goes with the former; flag if the latter is preferred.
+4. ~~**Memory-injection placement.**~~ **RESOLVED 2026-05-27** — Option 3: inject in the `run_synthesis` orchestrator. Prompt builder stays pure; LLM caller stays uncoupled from memory; orchestrator threads the run-wide preamble. Task 8 updated below.
 
-5. **First-run safety net for daily-driver write attempts.** If `daily_driver` is enabled before the mount exists (e.g., a fresh checkout), `create_fleet_memory_mcp_server` calls `ensure_mount` so it's safe. But if the cloud agent calls `view` against `/memories/shared/` on its very first run and `shared/` is empty, the SDK returns "(empty)". The plan accepts this as expected. **Decision needed:** is "(empty)" acceptable, or do we want to seed one `shared/welcome.md` file at `ensure_mount` time to give the agent a non-empty signal? Plan currently accepts empty; flag if you want a seed.
+5. ~~**First-run empty `shared/`.**~~ **RESOLVED 2026-05-27** — accept empty. The `MEMORY_INDEX.md` header (Task 3) and daily-driver's preamble (Task 9) document the system; no seed file. If smoke testing shows the model is confused by emptiness, add a seed in a 5-minute follow-up.
 
-6. **`vault_synthesizer` lesson cadence.** Currently the plan writes one lesson per clean run. Over a 30-day Phase 1 window, that's ~30 files in `vault_synthesizer/`. **Decision needed:** is per-run cadence acceptable, or should the synth dedupe by model_used + status and only write when *those* change? Plan currently writes per-run; flag if you want dedup.
+6. ~~**`vault_synthesizer` lesson cadence.**~~ **RESOLVED 2026-05-27** — per-run, no dedup. Phase 1 is a learning window; per-run gives the data to make a Phase 2 dedup decision. Read-side collapsing (via `inject_memories_into_prompt`) remains an option if the manifest gets noisy — it's reversible, write-time dedup isn't.
 
 ---
 
@@ -1996,11 +2757,13 @@ Implementation must not start until these are resolved:
   - `fleet_memory.py` architecture sketch → Task 2 (guard), Task 3 (mount), Task 4 (class + view/create), Task 5 (remaining commands), Task 6 (manifest), Task 7 (promote + inject).
   - File-by-file change list → File Structure table.
   - Test plan matching existing pytest conventions → every task is a TDD pair (failing test → implementation → passing test); fixture in `conftest.py` mirrors `tmp_artifacts`.
+  - Eval coverage matching `evals/` conventions → Task 11 extends vault-synthesizer with 4 cases (vs-022 to vs-025); Task 12 scaffolds daily-driver with 2 active + 4 deferred cases.
   - Smoke-test protocol → "Smoke Test Protocol" section, two end-to-end flows.
   - Rollback plan → "Rollback Plan" section, three escape hatches.
-  - Open questions → six questions listed, implementation gated on answers.
+  - Open questions → six questions listed; all six resolved 2026-05-27. Implementation can start.
   - Phase 2 / 3 named but out-of-scope → "Phase 2 — Out of Scope" + "Phase 3 — Out of Scope" sections.
+  - SDK version drift → Task -1 prerequisite.
 
-- **Placeholder scan:** No "TBD", "implement later", "add appropriate error handling", or "similar to Task N" wording present. Step 3 of Task 9 contains a pseudocode marker that Open Question #1 explicitly calls out — that's a known unknown, not a placeholder.
+- **Placeholder scan:** No "TBD", "implement later", "add appropriate error handling", or "similar to Task N" wording present in the implementation-bearing tasks. The eval deferred-cases.yaml uses `status: deferred` + `blocker:` fields per the existing synth convention — that's a known pattern, not a placeholder.
 
-- **Type consistency:** Methods stay consistently named: `_resolve_path` (module function) vs `_resolve` (instance method) is intentional — the module function is the load-bearing guard; the instance method is a thin wrapper that strips the `/memories/` SDK prefix before delegating. `write_lesson` (Task 6) and `promote_to_shared` (Task 7) and `inject_memories_into_prompt` (Task 7) are stable across all task references. `FleetMemoryTool` is the only class name. Constructor signature `(mount_root, agent_id)` is consistent across Tasks 4, 6, 7, 8, 9.
+- **Type consistency:** Methods stay consistently named: `_resolve_path` (module function) vs `_resolve` (instance method) is intentional — the module function is the load-bearing guard; the instance method is a thin wrapper that strips the `/memories/` SDK prefix before delegating. `write_lesson` (Task 6) and `promote_to_shared` (Task 7) and `inject_memories_into_prompt` (Task 7) are stable across all task references. `FleetMemoryTool` is the only class name. Constructor signature `(mount_root, agent_id)` is consistent across Tasks 4, 6, 7, 8, 9. `run_synthesis` signature gains exactly one new param (`memory_preamble: str = ""`), consistent across Task 8 references and Task 11 eval cases.
