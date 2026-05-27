@@ -39,6 +39,7 @@ from typing import Any, Callable
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from lib import concept_edges
+from lib import fleet_memory as _fleet_memory
 from lib.config import load_config
 from lib.filelock import FileLock
 from lib.hybrid_router import HybridRouter, WOLUnavailable
@@ -100,6 +101,43 @@ STATUS_VALUES = frozenset({
     STATUS_OK, STATUS_PARTIAL, STATUS_PARTIAL_EMPTY, STATUS_SUCCESS_EMPTY,
     STATUS_ERROR, STATUS_BUDGET_EXHAUSTED, STATUS_WOL_DEFERRED,
 })
+
+
+def _maybe_write_run_lesson(
+    *,
+    mount_root: Path,
+    result: "SynthesisResult",
+    enabled: bool,
+) -> None:
+    """Write a one-line run-lesson to fleet-memory if the run was clean.
+
+    Only fires on status=ok with concepts_written>0. Lesson body captures
+    model_used / concepts_written / connections_written / clusters_sampled
+    so future runs can recall "what shape of run produces what output."
+    No-op when disabled or when run was not clean.
+    """
+    if not enabled:
+        return
+    if result.status != STATUS_OK or result.concepts_written == 0:
+        return
+    tool = _fleet_memory.FleetMemoryTool(
+        mount_root=mount_root, agent_id="vault_synthesizer"
+    )
+    slug = f"run-{result.run_id.replace(':', '-')}"
+    summary = (
+        f"{result.concepts_written}c/{result.connections_written}x "
+        f"via {result.model_used}"
+    )
+    body = (
+        f"# Run lesson — {result.run_id}\n\n"
+        f"- model_used: {result.model_used}\n"
+        f"- concepts_written: {result.concepts_written}\n"
+        f"- connections_written: {result.connections_written}\n"
+        f"- clusters_sampled: {result.clusters_sampled}\n"
+        f"- rejected_count: {result.rejected_count}\n"
+        f"- duration_seconds: {result.duration_seconds:.1f}\n"
+    )
+    tool.write_lesson(slug=slug, summary=summary, body=body)
 
 
 def _normalize_model_name(name: str) -> str:
@@ -839,6 +877,7 @@ def run_synthesis(
     db_conn: sqlite3.Connection | None = None,
     classifier_version: str | None = None,
     logger: logging.Logger | None = None,
+    memory_preamble: str = "",     # empty string disables injection
 ) -> SynthesisResult:
     """Drive the synthesis pass end-to-end.
 
@@ -976,6 +1015,8 @@ def run_synthesis(
             similar=similar,
             existing_titles=existing_titles,
         )
+        if memory_preamble:
+            prompt = memory_preamble + "\n\n" + prompt
         try:
             parsed = llm_caller(prompt)
         except Exception as exc:
@@ -1290,6 +1331,18 @@ def main() -> int:
     llm = _default_llm_caller_factory(router, manifest_state=manifest_state)
     retriever = _default_retriever_factory(cfg.vault_root)
 
+    # Fleet memory (Phase 1 pilot, 2026-05-27).
+    fm_cfg = cfg.fleet_memory
+    fm_agent_cfg = fm_cfg.get("per_agent", {}).get("vault_synthesizer", {})
+    fm_enabled = bool(fm_cfg.get("enabled") and fm_agent_cfg.get("enabled"))
+    fm_mount = cfg.vault_root / fm_cfg.get("mount_subpath", "90_system/fleet-memory")
+    if fm_enabled:
+        _fleet_memory.ensure_mount(fm_mount, agent_ids=["vault_synthesizer", "daily_driver"])
+    memory_preamble = _fleet_memory.inject_memories_into_prompt(
+        mount_root=fm_mount, agent_id="vault_synthesizer", enabled=fm_enabled,
+        max_chars=fm_cfg.get("manifest_max_chars", 8000),
+    )
+
     # Phase D — open the .vault-index.db connection so run_synthesis can
     # write concept_edges rows. concept_edges.get_connection() applies
     # init_db() (idempotent) so the table exists even on a fresh vault.
@@ -1311,6 +1364,7 @@ def main() -> int:
                 f"{manifest_state.get('model_used', 'unknown')}/{today_iso}"
             ),
             logger=logger,
+            memory_preamble=memory_preamble,
         )
     except WOLUnavailable as exc:
         logger.warning("WOL unavailable — deferring: %s", exc)
@@ -1355,6 +1409,8 @@ def main() -> int:
         logger.info("synth-manifest written: %s", manifest_path)
     except OSError as werr:
         logger.warning("synth-manifest write failed: %s", werr)
+
+    _maybe_write_run_lesson(mount_root=fm_mount, result=result, enabled=fm_enabled)
 
     # Persist new state only on a successful / partial run
     if result.status in {"ok", "partial"}:
