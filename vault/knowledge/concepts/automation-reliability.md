@@ -2,30 +2,33 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - knowledge/connections/agent-health-and-daily-routine-automation-interdependence.md
+  - 20_projects/research/2026-05-26-topic-20-mbp-ollama-runtime-comparison.md
 tags: [auto-generated, phase-6]
-created: 2026-05-23
-updated: 2026-05-23
+created: 2026-05-27
+updated: 2026-05-27
 ---
 
 ## Definition
 
-A system property that ensures the consistent execution of automated processes over time. It depends on a feedback loop between agent health metrics and environment state, where any deviation from expected performance implies a need for corrective action. The invariant is that automation reliability cannot exist without real-time visibility into system health and performance.
+Automation Reliability is the measure of an agent's ability to produce structurally valid outputs consistently across varying environmental conditions. It is undermined by 'silent failures' where a model generates text that looks correct but violates strict schema constraints, often due to hidden inference flags like 'thinking' modes. Reliability requires not just monitoring for crashes, but actively benchmarking schema adherence and needle recall across different runtime-model combinations to detect degradation before it impacts downstream tasks.
 
 ## Context
 
-For Sean's daily routines, including note-taking and knowledge management automation, low reliability in the system would risk producing unactionable or misleading data. This is especially critical for workflows involving time-sensitive job-hunting tasks.
+Sean's vault synthesizer and job-feed scoring agents are critical to his daily workflow. If these agents fail silently due to schema mismatches, his knowledge base becomes corrupted or his job applications are mis-scored. This concept highlights the need for rigorous, per-model runtime testing to ensure his automation pipeline remains trustworthy.
 
 ## Evidence
 
-> The core philosophy is a four-tool harness (Read, Write, Edit, Bash) with a first-class extension system that allows the agent to extend itself by writing and hot-reloading TypeScript modules.
+> gains range from +25 pp to -25 pp depending on the model.
 
-> Failures in automation reliability can disrupt job-hunt-2026 processes, such as generating accurate daily notes for interview preparation and research.
+> Cross-runtime data refutes any "switch wholesale" framing; the right move is per-model runtime selection.
+
+> qwen3.5:27b | 70 %, 13.9 tok/s, 0/5 needle | 90 %, 8.8 tok/s, 5/5 | 90 %, 6.9 tok/s, 5/5 | +20 pp ✅
 
 ## Examples
 
-- Maintaining agent health ensures automation reliability, which is essential for the consistent execution of daily routine tasks such as knowledge capture.
+- qwen3.5:27b shows a +20 pp gain in schema accuracy when moved to Ollama, recovering needle recall from 0/5 to 5/5.
+- qwen3-coder:30b shows a -5 pp loss in schema accuracy when moved to Ollama, which is within noise but indicates a potential risk for code-heavy tasks.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Daily Routine Automation]]
+[[Runtime-Model Coupling]] [[Infrastructure Status]]

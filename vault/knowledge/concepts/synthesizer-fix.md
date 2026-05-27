@@ -2,25 +2,30 @@
 title: "Synthesizer fix"
 type: concept
 sources:
-  - knowledge/connections/vault-synthesizer-eval-suite-and-synthesizer-fix.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-27.md
 tags: [auto-generated, phase-6]
-created: 2026-05-13
-updated: 2026-05-13
+created: 2026-05-27
+updated: 2026-05-27
 ---
 
 ## Definition
 
-A set of modifications or updates applied to a synthesizer to resolve issues identified by the Vault Synthesizer Eval Suite.
+The synthesizer fix addresses the latent decay of knowledge consolidation when background agents fail to run. It is not merely about restarting a script, but about recognizing that a stale synthesizer creates a gap between raw data ingestion and meaningful insight generation. This gap causes the vault to accumulate unprocessed information, leading to a state where the system has high fidelity in storage but low fidelity in understanding, requiring manual intervention to restore the synthesis loop.
 
 ## Context
 
-This fix is directly influenced by evaluations from the Vault Synthesizer Eval Suite and ensures that performance benchmarks are met for project goals.
+Sean's vault relies on the synthesizer to create connections between concepts. When it is stale, the 'knowledge backlog' grows, and the value of the daily notes and indexing efforts diminishes because the insights are not being surfaced. Fixing this is critical to maintaining the 'knowledge consolidation' that makes the vault useful.
+
+## Evidence
+
+> Background synthesis agents (Synthesizer, Deep-Researcher) are stale, delaying crucial knowledge consolidation and research output.
+
+> Prioritize running the 'Deep-researcher' and 'vault-synthesizer' immediately to clear the knowledge backlog and consolidate insights.
 
 ## Examples
 
-- Addresses performance issues identified by the Vault Synthesizer Eval Suite
-- Ensures that project goals are met
+- vault-synthesizer (2:30 AM daily, MBP (when awake), $0.00/run) ... Status: stale
 
 ## Related Concepts
 
-[[Vault Synthesizer Eval Suite]] [[prj-job-hunt-2026]]
+[[Knowledge-Lint]] [[Indexing and Synthesis]]
