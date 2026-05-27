@@ -468,6 +468,146 @@ def test_run_respects_wall_budget(tmp_repo, monkeypatch):
 
 
 # ---------------------------------------------------------------------------
+# D5b: Two-lane orchestration — fresh + backfill (2026-05-27)
+# ---------------------------------------------------------------------------
+
+
+def test_run_processes_backfill_after_fresh_lane(tmp_repo, monkeypatch):
+    """The 2026-05-27 backfill lane: after the fresh-lane targets are processed,
+    the critic drains orphan concepts/connections (no expansion file) up to
+    `backfill_max`. Counted separately in the result so meta-agent consumers
+    can tell new synth work from historical backlog drain."""
+    today = "2026-05-27"
+    fresh_path = _make_concept_at(tmp_repo, "fresh-concept")
+    orphan_path = _make_concept_at(tmp_repo, "old-orphan-concept")
+    _make_manifest(
+        tmp_repo, today,
+        concept_paths=["vault/knowledge/concepts/fresh-concept.md"],
+    )
+
+    # Fresh lane returns the manifest concept; backfill scanner picks the orphan.
+    monkeypatch.setattr(
+        "agents.vault_critic.select_target_articles",
+        lambda root, date_iso, max_targets: [fresh_path],
+    )
+
+    async def go():
+        with patch("agents.vault_critic.run_codex",
+                   AsyncMock(return_value=_ok("codex", "headline\n\nbody", 1000))), \
+             patch("agents.vault_critic.run_antigravity",
+                   AsyncMock(return_value=_ok("antigravity", "headline\n\nbody", 1000))):
+            return await run_critic(
+                repo_root=tmp_repo,
+                date_iso=today,
+                max_targets=3,
+                wall_budget_s=600,
+                backfill_max=5,
+            )
+
+    result = asyncio.run(go())
+    assert result.status == STATUS_OK
+    assert result.articles_critiqued == 1
+    assert result.backfill_articles_critiqued == 1
+    assert result.expansions_written == ["vault/knowledge/expansions/fresh-concept.md"]
+    assert result.backfill_expansions_written == [
+        "vault/knowledge/expansions/old-orphan-concept.md",
+    ]
+
+
+def test_run_backfill_disabled_via_zero(tmp_repo, monkeypatch):
+    """`backfill_max=0` short-circuits the scanner — no scan, no drain, fresh
+    lane behaves exactly as it did pre-2026-05-27. Lets operators turn the
+    feature off via `--no-backfill` without code churn."""
+    today = "2026-05-27"
+    fresh_path = _make_concept_at(tmp_repo, "fresh-only")
+    _make_concept_at(tmp_repo, "would-have-been-backfill")
+    _make_manifest(
+        tmp_repo, today,
+        concept_paths=["vault/knowledge/concepts/fresh-only.md"],
+    )
+
+    monkeypatch.setattr(
+        "agents.vault_critic.select_target_articles",
+        lambda root, date_iso, max_targets: [fresh_path],
+    )
+
+    async def go():
+        with patch("agents.vault_critic.run_codex",
+                   AsyncMock(return_value=_ok("codex", "h\n\nb", 1000))), \
+             patch("agents.vault_critic.run_antigravity",
+                   AsyncMock(return_value=_ok("antigravity", "h\n\nb", 1000))):
+            return await run_critic(
+                repo_root=tmp_repo,
+                date_iso=today,
+                max_targets=3,
+                wall_budget_s=600,
+                backfill_max=0,
+            )
+
+    result = asyncio.run(go())
+    assert result.articles_critiqued == 1
+    assert result.backfill_articles_critiqued == 0
+    assert result.backfill_expansions_written == []
+
+
+def test_run_manual_mode_skips_backfill(tmp_repo, monkeypatch):
+    """Manual-mode invocations (`--target` / `--from-list`) hand-pick paths.
+    The backfill lane must not silently add extras the operator didn't ask for —
+    surprise = bug for on-demand workflows."""
+    today = "2026-05-27"
+    target = _make_concept_at(tmp_repo, "explicit-target")
+    _make_concept_at(tmp_repo, "would-be-orphan")  # eligible for backfill if it ran
+
+    async def go():
+        with patch("agents.vault_critic.run_codex",
+                   AsyncMock(return_value=_ok("codex", "h\n\nb", 1000))), \
+             patch("agents.vault_critic.run_antigravity",
+                   AsyncMock(return_value=_ok("antigravity", "h\n\nb", 1000))):
+            return await run_critic(
+                repo_root=tmp_repo,
+                date_iso=today,
+                max_targets=3,
+                wall_budget_s=600,
+                targets_override=[target],
+                backfill_max=5,  # would normally pick "would-be-orphan", but manual mode wins
+            )
+
+    result = asyncio.run(go())
+    assert result.articles_critiqued == 1
+    assert result.backfill_articles_critiqued == 0
+
+
+def test_run_backfill_only_when_fresh_lane_empty(tmp_repo, monkeypatch):
+    """When the synth wrote 0 concepts (or the manifest is missing), the fresh
+    lane returns empty. Pre-2026-05-27 that produced a success-empty no-op
+    night. Now: the wall budget gets spent draining the backfill backlog
+    instead — quiet synth nights become productive critic nights."""
+    today = "2026-05-27"
+    _make_concept_at(tmp_repo, "orphan-1")
+    _make_concept_at(tmp_repo, "orphan-2")
+    # No synth-manifest written → fresh-lane returns [] by contract.
+
+    async def go():
+        with patch("agents.vault_critic.run_codex",
+                   AsyncMock(return_value=_ok("codex", "h\n\nb", 1000))), \
+             patch("agents.vault_critic.run_antigravity",
+                   AsyncMock(return_value=_ok("antigravity", "h\n\nb", 1000))):
+            return await run_critic(
+                repo_root=tmp_repo,
+                date_iso=today,
+                max_targets=3,
+                wall_budget_s=600,
+                backfill_max=5,
+            )
+
+    result = asyncio.run(go())
+    assert result.status == STATUS_OK
+    assert result.articles_critiqued == 0
+    assert result.backfill_articles_critiqued == 2
+    assert len(result.backfill_expansions_written) == 2
+
+
+# ---------------------------------------------------------------------------
 # D6: main() — CLI entry point with dry-run + record_run wiring
 # ---------------------------------------------------------------------------
 

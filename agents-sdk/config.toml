@@ -192,6 +192,13 @@ wall_budget_seconds = 600
 per_cli_timeout_seconds = 120
 output_dir = "vault/knowledge/expansions"
 manifest_dir = "vault/health"
+# Backfill lane (2026-05-27): after the fresh lane finishes, opportunistically
+# drains up to N orphan concepts/connections (oldest-first by mtime) that never
+# received a Round-3 expansion. Drains ~85 concepts + ~260 connections of
+# historical synth output that pre-dates vault_critic. Set to 0 to disable.
+# Counted separately in critic-manifest under `backfill_articles_critiqued`.
+backfill_max_per_run = 5
+backfill_include_connections = true
 
 # Default supporting-document paths injected into every vault_critic prompt
 # (Round 3 calibration, validated 2026-05-24 — see CHANGELOG 4.1.4). Each file

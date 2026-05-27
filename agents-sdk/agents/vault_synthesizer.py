@@ -145,6 +145,13 @@ class SynthesisResult:
     # because the LLM produced restated-prompt definitions".
     rejected_reasons: dict[str, int] = field(default_factory=dict)
     skipped_thin_source: int = 0
+    # 2026-05-27 — repo-relative paths the synth wrote this run. Sourced into
+    # the synth-manifest so vault_critic's selector can read them directly
+    # instead of inferring file membership from a 02:00–04:00 git-log window.
+    # The window proxy missed manual catch-up runs (e.g. after a power outage)
+    # whose auto-commit timestamps fall outside that range.
+    concept_paths: list[str] = field(default_factory=list)
+    connection_paths: list[str] = field(default_factory=list)
 
 
 # ─── pure helpers ──────────────────────────────────────────────────────────
@@ -615,6 +622,10 @@ def write_synth_manifest(
         # otherwise-healthy run produced low output volume.
         "rejected_reasons": dict(sorted(result.rejected_reasons.items())),
         "skipped_thin_source": result.skipped_thin_source,
+        # 2026-05-27 — authoritative file lists for vault_critic's selector.
+        # Replaces the git-log/02:00–04:00 proxy that missed catch-up runs.
+        "concept_paths": list(result.concept_paths),
+        "connection_paths": list(result.connection_paths),
     }
     tmp = path.with_suffix(path.suffix + ".tmp")
     tmp.write_text(
@@ -1009,8 +1020,12 @@ def run_synthesis(
                         result.rejected_reasons.get(depth_reason, 0) + 1
                     )
                     continue
-                (concepts_dir / f"{_slugify(title)}.md").write_text(body, encoding="utf-8")
+                concept_path = concepts_dir / f"{_slugify(title)}.md"
+                concept_path.write_text(body, encoding="utf-8")
                 result.concepts_written += 1
+                result.concept_paths.append(
+                    str(concept_path.relative_to(vault_root.parent))
+                )
 
             for conn in connections:
                 title = conn.get("title", "").strip()
@@ -1054,8 +1069,12 @@ def run_synthesis(
                         result.rejected_reasons.get(depth_reason, 0) + 1
                     )
                     continue
-                (connections_dir / f"{_slugify(title)}.md").write_text(body, encoding="utf-8")
+                connection_path = connections_dir / f"{_slugify(title)}.md"
+                connection_path.write_text(body, encoding="utf-8")
                 result.connections_written += 1
+                result.connection_paths.append(
+                    str(connection_path.relative_to(vault_root.parent))
+                )
 
                 # Phase D — typed reasoning edges. After the article writes,
                 # parse the LLM's typed `relations` and INSERT OR IGNORE

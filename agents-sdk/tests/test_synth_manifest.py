@@ -163,3 +163,35 @@ def test_synth_health_summary_handles_missing_keys(tmp_path: Path) -> None:
     assert "0 connections" in msg
     assert "0 edges" in msg
     assert "0 rejected" in msg
+
+
+def test_write_synth_manifest_emits_concept_and_connection_paths(tmp_path: Path) -> None:
+    """2026-05-27 — the manifest is now the authoritative file list consumed
+    by vault_critic's selector. Empty defaults so legacy SynthesisResult
+    construction still round-trips."""
+    vault = tmp_path / "vault"
+    result = _result(
+        concept_paths=[
+            "vault/knowledge/concepts/foo.md",
+            "vault/knowledge/concepts/bar.md",
+        ],
+        connection_paths=["vault/knowledge/connections/foo-bar.md"],
+    )
+    path = write_synth_manifest(vault_root=vault, result=result, today="2026-05-27")
+    data = json.loads(path.read_text(encoding="utf-8"))
+    assert data["concept_paths"] == [
+        "vault/knowledge/concepts/foo.md",
+        "vault/knowledge/concepts/bar.md",
+    ]
+    assert data["connection_paths"] == ["vault/knowledge/connections/foo-bar.md"]
+
+
+def test_write_synth_manifest_defaults_path_lists_to_empty(tmp_path: Path) -> None:
+    """A result with no path lists (zero-write run, or legacy callers that
+    don't populate them yet) still writes a well-formed manifest with empty
+    arrays — not missing keys, not null."""
+    vault = tmp_path / "vault"
+    path = write_synth_manifest(vault_root=vault, result=_result(), today="2026-05-27")
+    data = json.loads(path.read_text(encoding="utf-8"))
+    assert data["concept_paths"] == []
+    assert data["connection_paths"] == []
