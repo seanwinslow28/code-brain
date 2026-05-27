@@ -858,3 +858,141 @@ def test_run_synthesis_skips_thin_source_files(tmp_path: Path) -> None:
 
     assert result.skipped_thin_source >= 1
     assert llm_called["n"] == 0, "LLM must not be called when source is thin"
+
+
+
+class TestFleetMemoryWiring:
+    def test_memory_injection_prepended_to_prompt_when_enabled(self, tmp_path, monkeypatch):
+        """When [fleet_memory.per_agent.vault_synthesizer].enabled=true, the
+        synth prompt builder receives a memory preamble from the mount."""
+        from agents import vault_synthesizer as vs
+        from lib import fleet_memory
+
+        mount = tmp_path / "fleet-memory"
+        fleet_memory.ensure_mount(mount, agent_ids=["vault_synthesizer"])
+        tool = fleet_memory.FleetMemoryTool(mount_root=mount, agent_id="vault_synthesizer")
+        tool.write_lesson(
+            slug="pr52", summary="Filter to manifest, not mtime.",
+            body="Lesson: PR #52 stale-checkout incident.",
+        )
+        preamble = fleet_memory.inject_memories_into_prompt(
+            mount_root=mount, agent_id="vault_synthesizer", enabled=True
+        )
+        assert "Filter to manifest" in preamble
+        assert "PR #52" in preamble
+
+    def test_lesson_written_on_clean_run(self, tmp_path):
+        """A successful run (status=ok, concepts_written>0) writes a one-line
+        lesson capturing the run's notable signal."""
+        from lib import fleet_memory
+        from agents.vault_synthesizer import _maybe_write_run_lesson, SynthesisResult, STATUS_OK
+
+        mount = tmp_path / "fleet-memory"
+        fleet_memory.ensure_mount(mount, agent_ids=["vault_synthesizer"])
+        result = SynthesisResult(status=STATUS_OK)
+        result.concepts_written = 3
+        result.connections_written = 1
+        result.model_used = "qwen3.6_35b-a3b-32k"
+        result.run_id = "2026-05-27T03:00:00"
+        _maybe_write_run_lesson(mount_root=mount, result=result, enabled=True)
+        ns = mount / "vault_synthesizer"
+        lessons = list(ns.glob("*.md"))
+        assert len(lessons) == 1
+        assert "qwen3.6_35b-a3b-32k" in lessons[0].read_text()
+
+    def test_no_lesson_on_error_run(self, tmp_path):
+        from lib import fleet_memory
+        from agents.vault_synthesizer import _maybe_write_run_lesson, SynthesisResult, STATUS_ERROR
+
+        mount = tmp_path / "fleet-memory"
+        fleet_memory.ensure_mount(mount, agent_ids=["vault_synthesizer"])
+        result = SynthesisResult(status=STATUS_ERROR)
+        _maybe_write_run_lesson(mount_root=mount, result=result, enabled=True)
+        assert list((mount / "vault_synthesizer").glob("*.md")) == []
+
+    def test_no_lesson_when_disabled(self, tmp_path):
+        from lib import fleet_memory
+        from agents.vault_synthesizer import _maybe_write_run_lesson, SynthesisResult, STATUS_OK
+
+        mount = tmp_path / "fleet-memory"
+        fleet_memory.ensure_mount(mount, agent_ids=["vault_synthesizer"])
+        result = SynthesisResult(status=STATUS_OK)
+        result.concepts_written = 1
+        _maybe_write_run_lesson(mount_root=mount, result=result, enabled=False)
+        assert list((mount / "vault_synthesizer").glob("*.md")) == []
+
+    def test_run_synthesis_prepends_memory_preamble_to_prompt(self, tmp_path):
+        """When memory_preamble is non-empty, run_synthesis prepends it before
+        every per-file llm_caller invocation. Verified by capturing what
+        llm_caller receives.
+
+        Mock retriever MUST return >= 2 stub similars or the Tier 1.5
+        thin-source gate (_MIN_SIMILAR_FOR_LLM=2) skips the LLM call and
+        captured stays empty.
+        """
+        from agents.vault_synthesizer import run_synthesis
+
+        captured: list[str] = []
+
+        def mock_llm(prompt: str, max_tokens: int = 2000) -> dict:
+            captured.append(prompt)
+            return {"concepts": [], "connections": []}
+
+        def mock_retriever(query: str, top_k: int = 5, **kw):
+            # >= _MIN_SIMILAR_FOR_LLM to clear the thin-source gate.
+            return [
+                {"file_path": "stub-a.md", "chunk_text": "stub content A"},
+                {"file_path": "stub-b.md", "chunk_text": "stub content B"},
+            ]
+
+        note = tmp_path / "note.md"
+        note.write_text("---\ntype: note\n---\n\nbody")
+        # Pushover stubs so ensure_credentials_or_raise passes
+        import os
+        os.environ.setdefault("PUSHOVER_USER_KEY", "stub")
+        os.environ.setdefault("PUSHOVER_API_TOKEN", "stub")
+
+        run_synthesis(
+            vault_root=tmp_path,
+            changed_files=[note],
+            llm_caller=mock_llm,
+            retriever=mock_retriever,
+            budget_seconds=30,
+            memory_preamble="# Lessons remembered\n\nLesson A",
+        )
+        assert captured, "llm_caller was not invoked"
+        assert captured[0].startswith("# Lessons remembered")
+        assert "Lesson A" in captured[0]
+
+    def test_run_synthesis_omits_preamble_when_empty(self, tmp_path):
+        from agents.vault_synthesizer import run_synthesis
+
+        captured: list[str] = []
+
+        def mock_llm(prompt: str, max_tokens: int = 2000) -> dict:
+            captured.append(prompt)
+            return {"concepts": [], "connections": []}
+
+        def mock_retriever(query: str, top_k: int = 5, **kw):
+            # Same thin-source-gate concern as the sibling test above.
+            return [
+                {"file_path": "stub-a.md", "chunk_text": "stub content A"},
+                {"file_path": "stub-b.md", "chunk_text": "stub content B"},
+            ]
+
+        note = tmp_path / "note.md"
+        note.write_text("---\ntype: note\n---\n\nbody")
+        import os
+        os.environ.setdefault("PUSHOVER_USER_KEY", "stub")
+        os.environ.setdefault("PUSHOVER_API_TOKEN", "stub")
+
+        run_synthesis(
+            vault_root=tmp_path,
+            changed_files=[note],
+            llm_caller=mock_llm,
+            retriever=mock_retriever,
+            budget_seconds=30,
+            memory_preamble="",
+        )
+        assert captured
+        assert not captured[0].startswith("# Lessons remembered")
