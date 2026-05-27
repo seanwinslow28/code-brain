@@ -95,3 +95,98 @@ def ensure_mount(mount_root: Path, *, agent_ids: list[str]) -> None:
     manifest = mount_root / "MEMORY_INDEX.md"
     if not manifest.exists():
         manifest.write_text(MANIFEST_HEADER, encoding="utf-8")
+
+
+from anthropic.lib.tools import BetaAbstractMemoryTool
+from anthropic.types.beta import (
+    BetaMemoryTool20250818CreateCommand,
+    BetaMemoryTool20250818DeleteCommand,
+    BetaMemoryTool20250818InsertCommand,
+    BetaMemoryTool20250818RenameCommand,
+    BetaMemoryTool20250818StrReplaceCommand,
+    BetaMemoryTool20250818ViewCommand,
+)
+
+
+class NamespaceViolation(ValueError):
+    """A tool tried to write outside its agent_id namespace AND outside shared/."""
+
+
+class FleetMemoryTool(BetaAbstractMemoryTool):
+    """Per-agent memory tool scoped to {mount_root}/{agent_id}/ for writes.
+
+    Reads are allowed from anywhere under the mount (so agents can see
+    shared/ and peer namespaces); writes are restricted to the agent's
+    own namespace plus shared/. Use promote_to_shared() for an explicit,
+    auditable promotion path.
+    """
+
+    def __init__(
+        self,
+        *,
+        mount_root: Path,
+        agent_id: str,
+    ) -> None:
+        super().__init__()
+        if not agent_id:
+            raise ValueError("agent_id is required")
+        self._mount_root = mount_root
+        self._agent_id = agent_id
+
+    # ─── path discipline helpers ───────────────────────────────────────
+
+    def _resolve(self, raw_path: str) -> Path:
+        # Strip any leading "/memories/" prefix the Anthropic protocol uses.
+        # Agents see paths as "/memories/vault_synthesizer/foo.md" but on
+        # disk we mount at {mount_root}/vault_synthesizer/foo.md.
+        relpath = raw_path.lstrip("/")
+        if relpath.startswith("memories/"):
+            relpath = relpath[len("memories/"):]
+        return _resolve_path(self._mount_root, relpath)
+
+    def _assert_write_allowed(self, target: Path) -> None:
+        rel = target.relative_to(self._mount_root.resolve())
+        first = rel.parts[0] if rel.parts else ""
+        if first == self._agent_id or first == "shared":
+            return
+        raise NamespaceViolation(
+            f"agent={self._agent_id} tried to write {rel} — only "
+            f"{self._agent_id}/** and shared/** are writable"
+        )
+
+    # ─── internal command implementations (testable without SDK objects) ──
+
+    def _view_path(self, raw_path: str) -> str:
+        target = self._resolve(raw_path)
+        if target.is_dir():
+            entries = sorted(p.name for p in target.iterdir())
+            return "\n".join(entries) if entries else "(empty)"
+        return target.read_text(encoding="utf-8")
+
+    def _create_path(self, raw_path: str, body: str) -> str:
+        target = self._resolve(raw_path)
+        self._assert_write_allowed(target)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(body, encoding="utf-8")
+        return f"created {target.relative_to(self._mount_root.resolve())}"
+
+    # ─── BetaAbstractMemoryTool overrides (thin dispatch) ──────────────
+
+    def view(self, command: BetaMemoryTool20250818ViewCommand) -> str:
+        return self._view_path(command.path)
+
+    def create(self, command: BetaMemoryTool20250818CreateCommand) -> str:
+        return self._create_path(command.path, command.file_text)
+
+    # The remaining four are stubs until Task 5 lands them.
+    def str_replace(self, command: BetaMemoryTool20250818StrReplaceCommand) -> str:
+        raise NotImplementedError("str_replace lands in Task 5")
+
+    def insert(self, command: BetaMemoryTool20250818InsertCommand) -> str:
+        raise NotImplementedError("insert lands in Task 5")
+
+    def delete(self, command: BetaMemoryTool20250818DeleteCommand) -> str:
+        raise NotImplementedError("delete lands in Task 5")
+
+    def rename(self, command: BetaMemoryTool20250818RenameCommand) -> str:
+        raise NotImplementedError("rename lands in Task 5")
