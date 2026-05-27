@@ -240,6 +240,31 @@ class FleetMemoryTool(BetaAbstractMemoryTool):
         )
         return f"wrote lesson {raw_path} + manifest"
 
+    def promote_to_shared(self, *, slug: str) -> str:
+        """Copy {agent_id}/{slug}.md → shared/from-{agent_id}-{slug}.md
+        with provenance frontmatter. Explicit cross-agent publication
+        — never automatic; agents must call this deliberately."""
+        src = self._resolve(f"{self._agent_id}/{slug}.md")
+        if not src.exists():
+            raise ValueError(f"source lesson does not exist: {self._agent_id}/{slug}.md")
+        dest_slug = f"from-{self._agent_id}-{slug}"
+        provenance = (
+            f"---\n"
+            f"promoted_from: {self._agent_id}/{slug}.md\n"
+            f"promoted_at: {date.today().isoformat()}\n"
+            f"---\n\n"
+        )
+        body = provenance + src.read_text(encoding="utf-8")
+        dest = self._mount_root / "shared" / f"{dest_slug}.md"
+        dest.write_text(body, encoding="utf-8")
+        _update_manifest_section(
+            self._mount_root / "MEMORY_INDEX.md",
+            agent_id="shared",
+            slug=dest_slug,
+            summary=f"promoted from {self._agent_id}/{slug}",
+        )
+        return f"promoted {self._agent_id}/{slug} -> shared/{dest_slug}"
+
     # ─── BetaAbstractMemoryTool overrides (thin dispatch) ──────────────
 
     def view(self, command: BetaMemoryTool20250818ViewCommand) -> str:
@@ -295,3 +320,53 @@ def _update_manifest_section(
             # Insert immediately under the heading.
             body = body.replace(heading + "\n", heading + "\n\n" + line + "\n", 1)
         manifest_path.write_text(body, encoding="utf-8")
+
+
+def inject_memories_into_prompt(
+    *,
+    mount_root: Path,
+    agent_id: str,
+    enabled: bool,
+    max_chars: int = 8000,
+) -> str:
+    """Read-only memory injection for agents that don't speak the tool protocol.
+
+    Returns a single markdown string ready to prepend to an LLM prompt.
+    Format:
+
+        # Lessons remembered from prior runs
+
+        ## Manifest
+
+        {full MEMORY_INDEX.md body}
+
+        ## Your namespace ({agent_id}/)
+
+        {body of every .md file under {mount_root}/{agent_id}/}
+
+        ## Shared lessons (shared/)
+
+        {body of every .md file under {mount_root}/shared/}
+
+    Truncates at `max_chars` and appends "(truncated)" if anything was cut.
+    Returns "" when `enabled=False` — caller can unconditionally string-concat.
+    """
+    if not enabled:
+        return ""
+    parts: list[str] = ["# Lessons remembered from prior runs\n"]
+    manifest = mount_root / "MEMORY_INDEX.md"
+    if manifest.exists():
+        parts.append("## Manifest\n")
+        parts.append(manifest.read_text(encoding="utf-8"))
+    for label, ns in (("Your namespace", agent_id), ("Shared lessons", "shared")):
+        ns_dir = mount_root / ns
+        if not ns_dir.is_dir():
+            continue
+        parts.append(f"\n## {label} ({ns}/)\n")
+        for f in sorted(ns_dir.glob("*.md")):
+            parts.append(f"\n### {f.name}\n")
+            parts.append(f.read_text(encoding="utf-8"))
+    combined = "\n".join(parts)
+    if len(combined) > max_chars:
+        combined = combined[:max_chars] + "\n\n(truncated)\n"
+    return combined
