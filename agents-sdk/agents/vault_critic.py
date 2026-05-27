@@ -40,6 +40,7 @@ from lib.cli_runners import CLIResponse, run_antigravity, run_codex
 from lib.config import load_config
 from lib.critic_selector import (
     resolve_expansion_path,
+    select_backfill_targets,
     select_manual_targets,
     select_target_articles,
 )
@@ -59,6 +60,12 @@ DEFAULT_MAX_TARGETS = 3
 DEFAULT_WALL_BUDGET_S = 600
 DEFAULT_PER_CLI_TIMEOUT_S = 120
 RECENT_TITLES_CONTEXT_LIMIT = 30
+# Backfill lane (2026-05-27) — opportunistically drains the corpus of
+# orphan concepts/connections (those that predate vault_critic and never
+# got a Round-3 expansion). 5/run × ~7 nights/week ≈ 35/week, ~2 months
+# to clear the current 344-orphan backlog without overrunning the wall
+# budget that fresh-lane targets need.
+DEFAULT_BACKFILL_MAX = 5
 
 HEALTH_REL = "vault/health"
 KNOWLEDGE_INDEX_REL = "vault/knowledge/index.md"
@@ -85,6 +92,12 @@ class CritiqueResult:
     expansions_written: list[str] = field(default_factory=list)
     error: str = ""
     warnings: list[str] = field(default_factory=list)
+    # 2026-05-27 — backfill lane: orphan concepts/connections that never got an
+    # expansion (the corpus existed before vault_critic shipped). Counted
+    # separately so the meta-agent can report "fresh: N, backfill: M, total: N+M"
+    # without conflating same-night synth work with historical backlog drain.
+    backfill_articles_critiqued: int = 0
+    backfill_expansions_written: list[str] = field(default_factory=list)
 
 
 def write_critic_manifest(
@@ -123,6 +136,8 @@ def write_critic_manifest(
         "expansions_written": list(result.expansions_written),
         "warnings": list(result.warnings),
         "error": result.error,
+        "backfill_articles_critiqued": result.backfill_articles_critiqued,
+        "backfill_expansions_written": list(result.backfill_expansions_written),
     }
     tmp = path.with_suffix(path.suffix + ".tmp")
     tmp.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
@@ -273,20 +288,30 @@ async def run(
     pre_warnings: list[str] | None = None,
     include_standing_context: bool = True,
     additional_context: str = "",
+    backfill_max: int = DEFAULT_BACKFILL_MAX,
+    backfill_include_connections: bool = True,
 ) -> CritiqueResult:
     """Orchestrate one vault_critic run end-to-end.
 
     `targets_override` skips the nightly selector (manifest gate + PR-contamination
     filter) and uses the provided paths directly — for manual on-demand critiques
-    against the existing concepts/connections corpus. `manifest_suffix` keeps
-    on-demand runs from clobbering the nightly `critic-manifest-{date}.json` the
-    meta-agent reads. `pre_warnings` are merged into `result.warnings` before the
-    manifest is written, surfacing manual-mode skip notes (missing paths,
+    against the existing concepts/connections corpus. Manual mode also disables
+    the backfill lane (the caller is hand-picking; no surprise extras). `manifest_suffix`
+    keeps on-demand runs from clobbering the nightly `critic-manifest-{date}.json`
+    the meta-agent reads. `pre_warnings` are merged into `result.warnings` before
+    the manifest is written, surfacing manual-mode skip notes (missing paths,
     already-critiqued, etc.) in the run record.
 
-    Status promotion (after the loop):
-      - No targets selected (no manifest / status=error / nothing fresh) → success-empty
-      - All articles produced both-CLIs-failed → error
+    Backfill lane (2026-05-27): after the fresh lane finishes, if any wall budget
+    remains and `backfill_max > 0`, drains up to `backfill_max` orphan concepts
+    or connections (oldest-first) that pre-date vault_critic and never received
+    a Round-3 expansion. Counted separately in the manifest under
+    `backfill_articles_critiqued` and `backfill_expansions_written` so meta-agent
+    consumers can distinguish today's fresh work from historical backlog drain.
+
+    Status promotion (after both lanes):
+      - No targets selected (fresh + backfill both empty) → success-empty
+      - Every article produced both-CLIs-failed → error
       - At least one CLI failed across the run → partial
       - Budget exceeded mid-loop → partial (with budget warning)
       - Everything clean → ok
@@ -300,13 +325,30 @@ async def run(
     if pre_warnings:
         result.warnings.extend(pre_warnings)
 
-    if targets_override is not None:
-        targets = list(targets_override)
+    manual_mode = targets_override is not None
+    if manual_mode:
+        fresh_targets = list(targets_override)
+        backfill_targets: list[Path] = []
     else:
-        targets = select_target_articles(
+        fresh_targets = select_target_articles(
             repo_root, date_iso=date_iso, max_targets=max_targets,
         )
-    if not targets:
+        if backfill_max > 0:
+            backfill_targets = select_backfill_targets(
+                repo_root,
+                max_targets=backfill_max,
+                include_connections=backfill_include_connections,
+                exclude=fresh_targets,
+            )
+        else:
+            backfill_targets = []
+
+    all_targets: list[tuple[Path, bool]] = (
+        [(fp, False) for fp in fresh_targets]
+        + [(fp, True) for fp in backfill_targets]
+    )
+
+    if not all_targets:
         if logger:
             logger.info("vault_critic: no target articles for %s", date_iso)
         result.duration_seconds = time.monotonic() - start
@@ -319,11 +361,11 @@ async def run(
     any_failure = False
     every_article_both_failed = True
 
-    for fp in targets:
+    for fp, is_backfill in all_targets:
         if time.monotonic() - start >= wall_budget_s:
+            total_done = result.articles_critiqued + result.backfill_articles_critiqued
             result.warnings.append(
-                f"wall budget {wall_budget_s}s ran out after "
-                f"{result.articles_critiqued} articles"
+                f"wall budget {wall_budget_s}s ran out after {total_done} articles"
             )
             any_failure = True
             break
@@ -358,19 +400,22 @@ async def run(
             continue
 
         every_article_both_failed = False
-        result.articles_critiqued += 1
-        result.expansions_written.append(
-            str(expansion_path.relative_to(repo_root))
-        )
+        rel = str(expansion_path.relative_to(repo_root))
+        if is_backfill:
+            result.backfill_articles_critiqued += 1
+            result.backfill_expansions_written.append(rel)
+        else:
+            result.articles_critiqued += 1
+            result.expansions_written.append(rel)
 
     if every_article_both_failed:
         result.status = STATUS_ERROR
     elif any_failure:
         result.status = STATUS_PARTIAL
-    elif result.articles_critiqued > 0:
+    elif (result.articles_critiqued + result.backfill_articles_critiqued) > 0:
         result.status = STATUS_OK
     # else: result keeps its initial STATUS_SUCCESS_EMPTY (defensive default;
-    # unreachable when `targets` was non-empty, because every_article_both_failed
+    # unreachable when `all_targets` was non-empty, because every_article_both_failed
     # covers the zero-articles case).
 
     result.duration_seconds = time.monotonic() - start
@@ -459,6 +504,16 @@ def main(argv: list[str] | None = None) -> int:
              "ablation runs or when you want only the files passed via "
              "--context, not the project-wide defaults.",
     )
+    parser.add_argument(
+        "--backfill-max", type=int, default=None, metavar="N",
+        help="Override `[agents.vault_critic].backfill_max_per_run`. Set to "
+             "0 to disable the backfill lane for this run (fresh targets only).",
+    )
+    parser.add_argument(
+        "--no-backfill", action="store_true",
+        help="Disable the backfill lane for this run. Equivalent to "
+             "--backfill-max 0.",
+    )
     args = parser.parse_args(argv)
 
     cfg = load_config()
@@ -503,6 +558,17 @@ def main(argv: list[str] | None = None) -> int:
     )
     skip_warnings.extend(context_warnings)
 
+    critic_cfg = cfg.agents.get("vault_critic", {}) if hasattr(cfg, "agents") else {}
+    if args.no_backfill:
+        backfill_max = 0
+    elif args.backfill_max is not None:
+        backfill_max = max(0, args.backfill_max)
+    else:
+        backfill_max = int(critic_cfg.get("backfill_max_per_run", DEFAULT_BACKFILL_MAX))
+    backfill_include_connections = bool(
+        critic_cfg.get("backfill_include_connections", True)
+    )
+
     if args.dry_run:
         header = "DRY RUN — Vault Critic (manual)" if manual_mode else "DRY RUN — Vault Critic"
         print(f"=== {header} ===")
@@ -513,6 +579,11 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Manifest:      critic-manifest-{date_iso}{manifest_suffix}.json")
         else:
             print(f"Max targets:   {args.max_targets}")
+            print(
+                f"Backfill max:  {backfill_max}"
+                + (" (disabled)" if backfill_max == 0 else "")
+                + (" + connections" if backfill_max > 0 and backfill_include_connections else "")
+            )
         print(f"Wall budget:   {args.wall_budget_seconds}s")
         print(f"CLI timeout:   {args.per_cli_timeout_seconds}s each")
         if merged_context_paths:
@@ -527,9 +598,19 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"  · default: {cp}")
             for cp in args.context:
                 print(f"  + explicit: {cp}")
-        print(f"Targets ({len(targets)}):")
+        print(f"Fresh targets ({len(targets)}):")
         for t in targets:
             print(f"  - {t.relative_to(cfg.repo_root)}")
+        if not manual_mode and backfill_max > 0:
+            preview_backfill = select_backfill_targets(
+                cfg.repo_root,
+                max_targets=backfill_max,
+                include_connections=backfill_include_connections,
+                exclude=list(targets),
+            )
+            print(f"Backfill targets ({len(preview_backfill)}):")
+            for t in preview_backfill:
+                print(f"  - {t.relative_to(cfg.repo_root)}")
         if skip_warnings:
             print(f"Skipped ({len(skip_warnings)}):")
             for w in skip_warnings:
@@ -551,6 +632,8 @@ def main(argv: list[str] | None = None) -> int:
             pre_warnings=skip_warnings or None,
             include_standing_context=not args.no_standing_context,
             additional_context=additional_context,
+            backfill_max=backfill_max,
+            backfill_include_connections=backfill_include_connections,
         ))
     except Exception as exc:
         logger.exception("vault_critic failed: %s", exc)
