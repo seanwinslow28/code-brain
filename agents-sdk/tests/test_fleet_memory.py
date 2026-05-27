@@ -244,3 +244,58 @@ class TestManifestUpdate:
         assert manifest.count("- x:") == 1
         assert "second version" in manifest
         assert "first version" not in manifest
+
+
+class TestPromoteToShared:
+    def test_promote_copies_file_to_shared_with_provenance(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool.write_lesson(slug="x", summary="X", body="content")
+        tool.promote_to_shared(slug="x")
+        shared = tmp_fleet_memory / "shared/from-vault_synthesizer-x.md"
+        assert shared.exists()
+        text = shared.read_text()
+        assert "content" in text
+        assert "promoted_from: vault_synthesizer/x.md" in text  # provenance frontmatter
+
+    def test_promote_appends_to_shared_section_in_manifest(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool.write_lesson(slug="x", summary="X", body="content")
+        tool.promote_to_shared(slug="x")
+        manifest = (tmp_fleet_memory / "MEMORY_INDEX.md").read_text()
+        assert "## shared" in manifest
+        assert "from-vault_synthesizer-x" in manifest
+
+
+class TestInjectMemoriesIntoPrompt:
+    def test_returns_empty_when_disabled(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import inject_memories_into_prompt
+        result = inject_memories_into_prompt(
+            mount_root=tmp_fleet_memory, agent_id="vault_synthesizer", enabled=False
+        )
+        assert result == ""
+
+    def test_returns_manifest_plus_own_namespace_bodies(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool, inject_memories_into_prompt
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool.write_lesson(slug="pr52", summary="PR52 lesson", body="filter to manifest")
+        # Simulate a peer-written shared lesson:
+        (tmp_fleet_memory / "shared/general.md").write_text("Trust no mock retriever.")
+        result = inject_memories_into_prompt(
+            mount_root=tmp_fleet_memory, agent_id="vault_synthesizer", enabled=True
+        )
+        assert "PR52 lesson" in result          # manifest summary visible
+        assert "filter to manifest" in result   # own-namespace body included
+        assert "Trust no mock retriever." in result  # shared/ body included
+
+    def test_truncates_at_max_chars(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool, inject_memories_into_prompt
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool.write_lesson(slug="big", summary="big", body="x" * 50_000)
+        result = inject_memories_into_prompt(
+            mount_root=tmp_fleet_memory, agent_id="vault_synthesizer",
+            enabled=True, max_chars=2000,
+        )
+        assert len(result) <= 2000 + 100  # +100 cushion for the truncation marker
+        assert "(truncated)" in result
