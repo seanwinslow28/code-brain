@@ -2,31 +2,34 @@
 title: "Infrastructure Status and Agent Failure"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-24.md
+  - knowledge/expansions/infrastructure-status-and-agent-failure.md
 tags: [auto-generated, phase-6]
-created: 2026-05-26
-updated: 2026-05-26
+created: 2026-05-27
+updated: 2026-05-27
 ---
 
 ## Definition
 
-A systemic tension between the operational status of Sean's infrastructure (e.g., Mac Mini, MBP, Alienware) and the reliability of agents running on those platforms. When infrastructure fails or is unreliable (e.g., Alienware offline), it creates cascading failures in agent routines, leading to inconsistent data collection and processing within the vault. This tension reflects a dependency between physical infrastructure health and the fidelity of automated cognitive labor.
+This concept defines the architectural necessity of distinguishing between the control plane (which dictates desired state and routing policies) and the data plane (which executes local inference and writes to the vault). It argues that system fragility is not merely a matter of hardware uptime, but a loss of graceful degradation when tight coupling prevents the system from operating in a latent-fault state. The mechanism relies on a failure-mode taxonomy where accidents emerge from exhausted redundancy rather than single-point hardware breaks.
 
 ## Context
 
-Sean's ability to maintain consistent knowledge indexing, synthesis, and research depends on the stability of his infrastructure. If critical machines like Alienware are offline, agents like 'deep-researcher' and 'vault-synthesizer' cannot operate at full capacity, creating bottlenecks in the knowledge pipeline.
+Sean is building a local agent fleet where the distinction between orchestration policy and execution substrate is critical for interview differentiation. By framing his infrastructure through the lens of resilience engineering and distributed systems theory, he shifts the narrative from 'script maintenance' to 'agentic-infra operations,' which is a higher-value signal for senior engineering roles.
 
 ## Evidence
 
-> Critical infrastructure failure: Alienware and ComfyUI remain offline, limiting the full agent capability.
+> The current concept treats Mac Mini, MBP, Alienware, launchd jobs, MCP reachability, and vault outputs as one blended system. That hides the real question: which layer decides desired state, and which layer merely performs work?
 
-> Agent fleet friction point persists: The creative-studio agent functionality is hampered by unreliable MCP connections and limited machine reach.
+> Complex systems are always operating in degraded mode; accidents emerge from latent conditions, tight coupling, and exhausted redundancy, not one broken box.
+
+> This is not “Alienware offline.” It is a loss of graceful degradation in a tightly coupled cognitive-production system.
 
 ## Examples
 
-- The 'deep-researcher' executed its routine run and found no immediate unchecked items.
-- Agent-fleet audit points out a lack of synchronous activity across the three machines (Mac Mini / MBP / Alienware).
+- Separating the scheduling and health policy logic from the local model inference and ComfyUI execution layers.
+- Implementing a reconciliation lag metric to monitor the delta between desired agent state and actual state.
+- Classifying infrastructure incidents as 'latent faults' versus 'active failures' to determine blast radius.
 
 ## Related Concepts
 
-[[Infrastructure Status]] [[Creative Studio Workflows]] [[Automation Reliability]]
+[[Agent Fleet Observability Dashboard]] [[Autonomous Agent Fleets]] [[Infrastructure Status]]
