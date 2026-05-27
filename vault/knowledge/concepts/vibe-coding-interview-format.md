@@ -2,31 +2,31 @@
 title: "Vibe-Coding Interview Format"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-vibe-coding-playbook.md
+  - 40_knowledge/references/ref-nate-public-ai-work-team-learning-3-prompts.md
 tags: [auto-generated, phase-6]
-created: 2026-05-22
-updated: 2026-05-22
+created: 2026-05-27
+updated: 2026-05-27
 ---
 
 ## Definition
 
-A dynamic, role-dependent structure for evaluating technical and product management candidates through live coding exercises. The format varies across companies, with some emphasizing solo builds, while others integrate portfolio walkthroughs or take-home assessments. The structure depends on the role tier (e.g., Tier-3 wildcards like Sierra vs. Tier-1 roles at Google AI PM). This format is distinguished by its emphasis on real-time problem-solving and the integration of AI tools, such as coding agents or language models like Claude.
+An evaluation mechanism where the candidate’s competence is assessed not through static code samples but through the real-time visibility of their interaction with AI agents. This format creates a dependency on the candidate’s ability to externalize their internal reasoning, as the interviewer observes the 'judgment' of loading context and challenging the model rather than just the final output. The tension arises because the candidate must perform their cognitive load in a way that is legible to an observer without breaking the flow of the work.
 
 ## Context
 
-This format is crucial for Sean because it shapes his preparation strategy. For example, Tier-1 roles require a concise live build (e.g., Google AI PM), while Tier-3 roles may involve multi-stage interviews with portfolio walkthroughs. Understanding the format helps Sean target specific skills, like Python or Replit proficiency, or prioritize AI tool familiarity as needed.
+Sean is preparing for 'vibe-coding' interviews where he must demonstrate his AI fluency. He needs to bridge the gap between his private 'Deep Work' and the public 'performance' required by the interview format, ensuring his 'narrate before you prompt' habit is robust enough for scrutiny.
 
 ## Evidence
 
-> The defensible shape of a vibe-coding interview varies by company. Use this table to set prep load before any specific loop.
+> A senior person figures out how to load context, challenge the model, and review what comes back, and the junior across the team never gets to watch how any of that judgment works.
 
-> Where a row says 'not publicly verifiable,' do warm-network outreach to a recent hire before treating the format as known.
+> Also: that the act of recording the rep changed my prompting behavior in a useful direction — the 'narrate before you prompt' habit only sticks under public-witnessing pressure.
 
 ## Examples
 
-- Sierra (Agent PM / Eng) — Tier-3 wildcard: Plan-Build-Review structure with a 2-hour solo Build.
-- Google AI PM — Tier-1 realistic if listed: 45-min live build with open choice of tooling.
+- Sierra runs a vibe-coding interview as part of their loop.
+- Reporting on AI-native onsites.
 
 ## Related Concepts
 
-[[Vibe-Coding Interview Canon]] [[Interview Preparation Playbook]]
+[[Two Audiences]] [[Vibe-Coding Interview Canon]]
