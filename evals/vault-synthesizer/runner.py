@@ -51,6 +51,96 @@ def _load_cases() -> list[dict]:
     return yaml.safe_load(CASES_PATH.read_text())
 
 
+def _invoke_synthesizer_with_capture(case) -> object:
+    """vs-022: capture what llm_caller actually receives so we can assert
+    on prompt shape (memory preamble must be the first content)."""
+    from agents import vault_synthesizer as vs
+    import tempfile
+
+    inp = case.get("input", {})
+    captured: list[str] = []
+
+    def llm_caller(prompt: str, max_tokens: int = 2000) -> dict:
+        captured.append(prompt)
+        return {"concepts": [], "connections": []}
+
+    def retriever(text, top_k, **kw):
+        # >= _MIN_SIMILAR_FOR_LLM (=2) so Tier 1.5 thin-source gate
+        # doesn't skip the LLM call. vs-022 only asserts on preamble
+        # placement, not on similar-block content.
+        return [
+            {"file_path": "stub-a.md", "chunk_text": "stub content A"},
+            {"file_path": "stub-b.md", "chunk_text": "stub content B"},
+        ]
+
+    preamble_path = ROOT / inp["memory_preamble_path"]
+    memory_preamble = preamble_path.read_text(encoding="utf-8")
+
+    fixtures_dir = ROOT / (inp.get("fixtures") or "traces/fixtures")
+    note_count = inp.get("note_count", 1)
+    tmpdir = tempfile.mkdtemp(prefix="eval-synth-mem-")
+    vault_root = Path(tmpdir)
+    changed: list[Path] = []
+    for src in sorted(fixtures_dir.glob("note-*.md"))[:note_count]:
+        import shutil
+        dst = vault_root / src.name
+        shutil.copy(src, dst)
+        changed.append(dst)
+
+    import os
+    os.environ.setdefault("PUSHOVER_USER_KEY", "eval-stub-user")
+    os.environ.setdefault("PUSHOVER_API_TOKEN", "eval-stub-token")
+
+    vs.run_synthesis(
+        vault_root=vault_root,
+        changed_files=changed,
+        llm_caller=llm_caller,
+        retriever=retriever,
+        budget_seconds=30,
+        db_conn=None,
+        memory_preamble=memory_preamble,
+    )
+
+    class _Wrap:
+        pass
+    w = _Wrap()
+    w.captured_prompts = captured
+    return w
+
+
+def _invoke_lesson_writer(case) -> object:
+    """vs-023/024/025: simulate a SynthesisResult and assert lesson-write
+    behavior. Avoids running the full synth pipeline."""
+    from agents.vault_synthesizer import _maybe_write_run_lesson, SynthesisResult
+    from lib import fleet_memory
+    import tempfile
+
+    inp = case.get("input", {})
+    sim = inp["simulated_result"]
+    enabled = inp.get("fleet_memory_enabled", True)
+    tmpdir = tempfile.mkdtemp(prefix="eval-synth-lesson-")
+    mount = Path(tmpdir) / "fleet-memory"
+    fleet_memory.ensure_mount(mount, agent_ids=["vault_synthesizer"])
+
+    result = SynthesisResult(status=sim["status"])
+    result.concepts_written = sim.get("concepts_written", 0)
+    result.connections_written = sim.get("connections_written", 0)
+    result.model_used = sim.get("model_used", "none")
+    result.run_id = sim.get("run_id", "eval-run")
+
+    _maybe_write_run_lesson(mount_root=mount, result=result, enabled=enabled)
+
+    lesson_files = list((mount / "vault_synthesizer").glob("*.md"))
+    lesson_body = lesson_files[0].read_text() if lesson_files else ""
+
+    class _Wrap:
+        pass
+    w = _Wrap()
+    w.lesson_files_count = len(lesson_files)
+    w.lesson_body = lesson_body
+    return w
+
+
 def _invoke_synthesizer(case) -> object:
     """Build the synthesizer call from case['input'] and invoke it.
 
@@ -173,6 +263,12 @@ def test_case(case):
             "('concepts_written: 0' in result.brief or 'empty' in result.brief)"
         )
         result = w
+
+    elif case["id"] == "vs-022":
+        result = _invoke_synthesizer_with_capture(case)
+
+    elif case["id"] in ("vs-023", "vs-024", "vs-025"):
+        result = _invoke_lesson_writer(case)
 
     elif case["id"] == "vs-019":
         # Workstream B adds PushoverConfigurationError. Until it exists this

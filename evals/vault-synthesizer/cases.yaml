@@ -136,3 +136,60 @@
   judge_type: rubric
   pass_criteria: "majority of cluster wikilinks point to notes < 30 days old"
   skip_reason: "pass_criteria is English not Python; age_distribution fixture unimplemented; result has no cluster_link_ages_days field; all three are post-Workstream-B follow-ups"
+
+- id: vs-022
+  category: fleet-memory
+  description: "memory_preamble parameter prepends to per-file LLM prompt when non-empty"
+  failure_mode_under_test: "Phase 1 fleet-memory — preamble must reach the LLM, not be silently dropped"
+  input:
+    fixtures: traces/fixtures
+    note_count: 1
+    memory_preamble_path: traces/fixtures/memory-preamble.md
+  expected_output:
+    preamble_first_in_prompt: true
+  judge_type: rubric
+  pass_criteria: "result.captured_prompts and result.captured_prompts[0].startswith('# Lessons remembered')"
+
+- id: vs-023
+  category: fleet-memory
+  description: "_maybe_write_run_lesson writes a lesson on STATUS_OK with concepts_written>0"
+  failure_mode_under_test: "Phase 1 fleet-memory — clean run must persist a lesson for future recall"
+  input:
+    simulated_result:
+      status: ok
+      concepts_written: 2
+      connections_written: 1
+      model_used: qwen3.6_35b-a3b-32k
+      run_id: "2026-06-15T03:00:00"
+  expected_output:
+    lesson_file_exists: true
+    manifest_updated: true
+  judge_type: rubric
+  pass_criteria: "result.lesson_files_count == 1 and 'qwen3.6_35b-a3b-32k' in result.lesson_body"
+
+- id: vs-024
+  category: fleet-memory
+  description: "_maybe_write_run_lesson is a no-op on STATUS_ERROR"
+  failure_mode_under_test: "Phase 1 fleet-memory — error runs must not pollute memory with false signal"
+  input:
+    simulated_result:
+      status: error
+      concepts_written: 0
+  expected_output:
+    lesson_files_count: 0
+  judge_type: exact-match
+  pass_criteria: "result.lesson_files_count == 0"
+
+- id: vs-025
+  category: fleet-memory
+  description: "_maybe_write_run_lesson is a no-op when fleet_memory.enabled=false even on a clean run"
+  failure_mode_under_test: "Phase 1 fleet-memory — opt-in toggle must gate all write paths"
+  input:
+    simulated_result:
+      status: ok
+      concepts_written: 5
+    fleet_memory_enabled: false
+  expected_output:
+    lesson_files_count: 0
+  judge_type: exact-match
+  pass_criteria: "result.lesson_files_count == 0"
