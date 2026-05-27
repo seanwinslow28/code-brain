@@ -1,0 +1,35 @@
+# evals/daily-driver/cases.yaml
+# Schema mirrors evals/vault-synthesizer/cases.yaml.
+# Phase 1 ships 2 cases covering the fleet-memory wiring. Additional cases land
+# in Phase 2 once production traces accumulate to ground non-fleet-memory
+# failure modes (see deferred-cases.yaml for the forward markers).
+
+- id: dd-001
+  category: fleet-memory-wiring
+  description: "build_options registers the 6 fleet-memory MCP tool names in allowed_tools when enabled"
+  failure_mode_under_test: "Phase 1 fleet-memory — daily_driver must declare all six memory tools so the CLI permission layer routes them"
+  input:
+    fleet_memory_enabled: true
+  expected_output:
+    expected_tool_names:
+      - mcp__fleet-memory__memory_view
+      - mcp__fleet-memory__memory_create
+      - mcp__fleet-memory__memory_str_replace
+      - mcp__fleet-memory__memory_insert
+      - mcp__fleet-memory__memory_delete
+      - mcp__fleet-memory__memory_rename
+    expected_beta: context-management-2025-06-27
+  judge_type: rubric
+  pass_criteria: "set(result.expected_tool_names).issubset(set(result.allowed_tools)) and 'context-management-2025-06-27' in result.betas"
+
+- id: dd-002
+  category: fleet-memory-wiring
+  description: "build_options omits fleet-memory MCP server when fleet_memory.enabled=false"
+  failure_mode_under_test: "Phase 1 fleet-memory — opt-in toggle must gate the entire MCP-server wiring, not just write paths"
+  input:
+    fleet_memory_enabled: false
+  expected_output:
+    fleet_memory_server_absent: true
+    no_fleet_memory_tools: true
+  judge_type: exact-match
+  pass_criteria: "'fleet-memory' not in result.mcp_server_names and not any('fleet-memory' in t for t in result.allowed_tools)"
