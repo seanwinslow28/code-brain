@@ -170,6 +170,53 @@ class FleetMemoryTool(BetaAbstractMemoryTool):
         target.write_text(body, encoding="utf-8")
         return f"created {target.relative_to(self._mount_root.resolve())}"
 
+    # ─── internal command implementations (continued) ──────────────────
+
+    def _str_replace_path(self, raw_path: str, old: str, new: str) -> str:
+        target = self._resolve(raw_path)
+        self._assert_write_allowed(target)
+        body = target.read_text(encoding="utf-8")
+        count = body.count(old)
+        if count == 0:
+            raise ValueError(f"old string not found in {raw_path}")
+        if count > 1:
+            raise ValueError(
+                f"old string appears {count} times in {raw_path}; must be unique"
+            )
+        target.write_text(body.replace(old, new), encoding="utf-8")
+        return f"str_replace ok in {raw_path}"
+
+    def _insert_path(self, raw_path: str, insert_line: int, insert_text: str) -> str:
+        target = self._resolve(raw_path)
+        self._assert_write_allowed(target)
+        body = target.read_text(encoding="utf-8")
+        lines = body.splitlines(keepends=True)
+        if insert_line < 0 or insert_line > len(lines):
+            raise ValueError(
+                f"insert_line {insert_line} out of range for {raw_path} "
+                f"(0..{len(lines)})"
+            )
+        new_lines = lines[:insert_line] + [insert_text] + lines[insert_line:]
+        target.write_text("".join(new_lines), encoding="utf-8")
+        return f"insert ok in {raw_path}"
+
+    def _delete_path(self, raw_path: str) -> str:
+        target = self._resolve(raw_path)
+        self._assert_write_allowed(target)
+        if target.is_dir():
+            raise ValueError(f"refusing to delete directory {raw_path}")
+        target.unlink()
+        return f"deleted {raw_path}"
+
+    def _rename_path(self, old_raw: str, new_raw: str) -> str:
+        old_target = self._resolve(old_raw)
+        new_target = self._resolve(new_raw)
+        self._assert_write_allowed(old_target)
+        self._assert_write_allowed(new_target)
+        new_target.parent.mkdir(parents=True, exist_ok=True)
+        old_target.rename(new_target)
+        return f"renamed {old_raw} -> {new_raw}"
+
     # ─── BetaAbstractMemoryTool overrides (thin dispatch) ──────────────
 
     def view(self, command: BetaMemoryTool20250818ViewCommand) -> str:
@@ -178,15 +225,14 @@ class FleetMemoryTool(BetaAbstractMemoryTool):
     def create(self, command: BetaMemoryTool20250818CreateCommand) -> str:
         return self._create_path(command.path, command.file_text)
 
-    # The remaining four are stubs until Task 5 lands them.
     def str_replace(self, command: BetaMemoryTool20250818StrReplaceCommand) -> str:
-        raise NotImplementedError("str_replace lands in Task 5")
+        return self._str_replace_path(command.path, command.old_str, command.new_str)
 
     def insert(self, command: BetaMemoryTool20250818InsertCommand) -> str:
-        raise NotImplementedError("insert lands in Task 5")
+        return self._insert_path(command.path, command.insert_line, command.insert_text)
 
     def delete(self, command: BetaMemoryTool20250818DeleteCommand) -> str:
-        raise NotImplementedError("delete lands in Task 5")
+        return self._delete_path(command.path)
 
     def rename(self, command: BetaMemoryTool20250818RenameCommand) -> str:
-        raise NotImplementedError("rename lands in Task 5")
+        return self._rename_path(command.old_path, command.new_path)
