@@ -171,14 +171,19 @@ def select_target_articles(
     date_iso: str | None = None,
     max_targets: int = 3,
 ) -> list[Path]:
-    """Select up to `max_targets` concept articles to critique tonight.
+    """Select up to `max_targets` concept articles to critique tonight (fresh lane).
 
     Filters applied in order:
       1. Today's synth-manifest must exist (else 2026-05-15-style MBP-offline).
       2. Manifest status must NOT be `error`.
-      3. Article must be in Mac Mini's auto-commit file list (PR-contamination filter).
-      4. Article must not already have an expansion file (snapshot semantics).
-      5. Cap at `max_targets`, preserving auto-commit file order.
+      3. Article path must be listed in the manifest's `concept_paths` (2026-05-27:
+         replaces the prior 02:00–04:00 git-log window proxy, which silently
+         dropped manual catch-up runs whose auto-commit timestamps fell outside
+         that range).
+      4. Falls back to `list_macmini_synth_files` only when the manifest predates
+         the `concept_paths` field (resilience for older manifests during rollout).
+      5. Article must not already have an expansion file (snapshot semantics).
+      6. Cap at `max_targets`, preserving manifest order.
 
     Returns [] on any disqualifying condition.
     """
@@ -189,16 +194,83 @@ def select_target_articles(
     if manifest.get("status") == "error":
         return []
 
-    mm_files = list_macmini_synth_files(repo_root, date_iso=date_iso)
-    if not mm_files:
+    manifest_paths = manifest.get("concept_paths")
+    if isinstance(manifest_paths, list) and manifest_paths:
+        candidates: list[Path] = []
+        for rel in manifest_paths:
+            if not isinstance(rel, str):
+                continue
+            if not rel.startswith(f"{CONCEPTS_REL}/"):
+                continue
+            full = repo_root / rel
+            if full.exists():
+                candidates.append(full)
+    else:
+        # Resilience path: older manifests written before 2026-05-27 lack the
+        # `concept_paths` field. Fall back to the git-log proxy so the rollout
+        # day's nightly run still finds targets.
+        candidates = list_macmini_synth_files(repo_root, date_iso=date_iso)
+
+    if not candidates:
         return []
 
     expansions_dir = repo_root / EXPANSIONS_REL
     selected: list[Path] = []
-    for fp in mm_files:
+    for fp in candidates:
         if (expansions_dir / fp.name).exists():
             continue
         selected.append(fp)
         if len(selected) >= max_targets:
             break
     return selected
+
+
+def select_backfill_targets(
+    repo_root: Path,
+    *,
+    max_targets: int = 5,
+    include_connections: bool = True,
+    exclude: list[Path] | None = None,
+) -> list[Path]:
+    """Scan concepts/+connections/ for orphans missing an expansion file.
+
+    Returns up to `max_targets` paths, oldest-first by source mtime, so the
+    earliest unexpanded synth output gets critiqued first. Designed to drain
+    the historical backlog of pre-critic synth files (~85 concepts + ~260
+    connections as of 2026-05-27): when the synth was producing thin output
+    daily before vault_critic existed, those files never got Round-3
+    enrichment from Codex + Anti-Gravity.
+
+    The `exclude` list lets the caller skip paths already chosen by the
+    fresh lane so backfill doesn't re-pick them in the same run.
+
+    Connections are included by default — the nightly fresh lane is
+    concepts-only (a pre-2026-05-27 design choice), but backfill treats
+    both folders as eligible since the corpus debt covers both.
+    """
+    exclude_set = {str(p.resolve()) for p in (exclude or [])}
+    expansions_dir = repo_root / EXPANSIONS_REL
+    expansions_connections_dir = repo_root / EXPANSIONS_CONNECTIONS_REL
+
+    candidates: list[Path] = []
+    concepts_dir = repo_root / CONCEPTS_REL
+    if concepts_dir.exists():
+        for fp in concepts_dir.glob("*.md"):
+            if str(fp.resolve()) in exclude_set:
+                continue
+            if (expansions_dir / fp.name).exists():
+                continue
+            candidates.append(fp)
+
+    if include_connections:
+        connections_dir = repo_root / CONNECTIONS_REL
+        if connections_dir.exists():
+            for fp in connections_dir.glob("*.md"):
+                if str(fp.resolve()) in exclude_set:
+                    continue
+                if (expansions_connections_dir / fp.name).exists():
+                    continue
+                candidates.append(fp)
+
+    candidates.sort(key=lambda p: p.stat().st_mtime)
+    return candidates[:max_targets]
