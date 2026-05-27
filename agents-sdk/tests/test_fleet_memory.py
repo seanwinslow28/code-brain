@@ -211,3 +211,36 @@ class TestFleetMemoryToolRemainingCommands:
         tool._create_path("vault_synthesizer/x.md", "x")
         with pytest.raises(NamespaceViolation):
             tool._rename_path("vault_synthesizer/x.md", "daily_driver/x.md")
+
+
+class TestManifestUpdate:
+    def test_manifest_appends_entry_under_agent_heading(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool.write_lesson(
+            slug="pr52-stale-checkout",
+            summary="Filter critic candidates to synth manifest, not mtime.",
+            body="# PR #52 Stale Checkout\n\nThe MBP runs a parallel pre-retrofit ...",
+        )
+        manifest = (tmp_fleet_memory / "MEMORY_INDEX.md").read_text()
+        assert "## vault_synthesizer" in manifest
+        assert "pr52-stale-checkout" in manifest
+        assert "Filter critic candidates" in manifest
+
+    def test_second_write_does_not_duplicate_heading(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool.write_lesson(slug="a", summary="A", body="A")
+        tool.write_lesson(slug="b", summary="B", body="B")
+        manifest = (tmp_fleet_memory / "MEMORY_INDEX.md").read_text()
+        assert manifest.count("## vault_synthesizer") == 1
+
+    def test_rewriting_same_slug_updates_in_place(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool.write_lesson(slug="x", summary="first version", body="A")
+        tool.write_lesson(slug="x", summary="second version", body="B")
+        manifest = (tmp_fleet_memory / "MEMORY_INDEX.md").read_text()
+        assert manifest.count("- x:") == 1
+        assert "second version" in manifest
+        assert "first version" not in manifest

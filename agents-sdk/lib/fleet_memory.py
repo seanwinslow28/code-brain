@@ -20,7 +20,11 @@ See agents-sdk/docs/plans/2026-05-27-fleet-memory-phase-1-plan.md.
 from __future__ import annotations
 
 import logging
+import re
+from datetime import date
 from pathlib import Path
+
+from lib.filelock import FileLock
 
 logger = logging.getLogger("fleet_memory")
 
@@ -217,6 +221,25 @@ class FleetMemoryTool(BetaAbstractMemoryTool):
         old_target.rename(new_target)
         return f"renamed {old_raw} -> {new_raw}"
 
+    # ─── manifest-aware helpers ────────────────────────────────────────
+
+    def write_lesson(self, *, slug: str, summary: str, body: str) -> str:
+        """High-level helper: write a lesson under the agent's namespace AND
+        upsert the manifest entry. Used by agents that don't speak the tool
+        protocol (vault_synthesizer) or that want to record a lesson outside
+        the LLM loop (deterministic post-run signals)."""
+        if "/" in slug or slug.startswith("."):
+            raise ValueError(f"invalid slug: {slug}")
+        raw_path = f"{self._agent_id}/{slug}.md"
+        self._create_path(raw_path, body)
+        _update_manifest_section(
+            self._mount_root / "MEMORY_INDEX.md",
+            agent_id=self._agent_id,
+            slug=slug,
+            summary=summary,
+        )
+        return f"wrote lesson {raw_path} + manifest"
+
     # ─── BetaAbstractMemoryTool overrides (thin dispatch) ──────────────
 
     def view(self, command: BetaMemoryTool20250818ViewCommand) -> str:
@@ -236,3 +259,39 @@ class FleetMemoryTool(BetaAbstractMemoryTool):
 
     def rename(self, command: BetaMemoryTool20250818RenameCommand) -> str:
         return self._rename_path(command.old_path, command.new_path)
+
+
+_MANIFEST_LINE_RE_TEMPLATE = r"^- {slug}:.*$"
+
+
+def _update_manifest_section(
+    manifest_path: Path,
+    *,
+    agent_id: str,
+    slug: str,
+    summary: str,
+) -> None:
+    """Idempotently upsert a `- {slug}: {summary}` line under `## {agent_id}`.
+
+    Serialized via FileLock so multiple agents writing concurrently can't
+    interleave heading creation. Pure file I/O; never raises on missing
+    sections — creates the section on first use.
+    """
+    lock = FileLock(manifest_path.with_suffix(manifest_path.suffix + ".lock"),
+                    exclusive=True, timeout=10.0)
+    with lock:
+        body = manifest_path.read_text(encoding="utf-8") if manifest_path.exists() else MANIFEST_HEADER
+        heading = f"## {agent_id}"
+        line = f"- {slug}: {summary}"
+        line_re = re.compile(
+            _MANIFEST_LINE_RE_TEMPLATE.format(slug=re.escape(slug)),
+            re.MULTILINE,
+        )
+        if heading not in body:
+            body = body.rstrip() + f"\n\n{heading}\n\n{line}\n"
+        elif line_re.search(body):
+            body = line_re.sub(line, body)
+        else:
+            # Insert immediately under the heading.
+            body = body.replace(heading + "\n", heading + "\n\n" + line + "\n", 1)
+        manifest_path.write_text(body, encoding="utf-8")
