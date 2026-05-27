@@ -165,23 +165,27 @@ Append a one-line entry to the plan execution log: `Phase 1 pre-flight: GO — a
 
 ---
 
-## Task 1: Add `[fleet_memory]` config block
+## Task 1: Add `[fleet_memory]` config block + Config dataclass field
 
 **Files:**
-- Modify: `agents-sdk/config.toml` (append a new section after `[doc_to_audio]`)
+- Modify: `agents-sdk/lib/config.py` (add `fleet_memory: dict` field on `Config`, populate in `load_config()`)
+- Modify: `agents-sdk/config.toml` (append a new `[fleet_memory]` section after `[doc_to_audio]`)
+- Modify: `agents-sdk/tests/test_config.py` (new test asserting both the dataclass field and the TOML defaults)
+
+The `Config` dataclass in `lib/config.py` has no `.raw` escape hatch — every top-level TOML section is exposed as a typed field (`agents`, `artifacts`, `safety`). Mirror that pattern: add `fleet_memory: dict = field(default_factory=dict)` and populate it in `load_config()` from `raw.get("fleet_memory", {})`.
 
 - [ ] **Step 1: Write the failing config-loader test first**
 
-Add to a new section at the end of `agents-sdk/tests/test_config.py`:
+Append to `agents-sdk/tests/test_config.py`:
 
 ```python
-def test_fleet_memory_config_loads_with_defaults(tmp_path, monkeypatch):
-    """[fleet_memory] block is parsed; defaults are conservative."""
+def test_fleet_memory_config_loads_with_defaults():
+    """[fleet_memory] block is parsed onto a typed Config.fleet_memory field.
+    Defaults are conservative — opt-in per-agent."""
     from lib.config import load_config
     cfg = load_config()
-    # Section exists
-    assert hasattr(cfg, "fleet_memory") or "fleet_memory" in cfg.raw
-    fm = cfg.raw.get("fleet_memory", {})
+    assert hasattr(cfg, "fleet_memory"), "Config must expose a typed fleet_memory dict"
+    fm = cfg.fleet_memory
     assert fm.get("enabled") is False, "Phase 1 default must be disabled — opt-in only"
     assert fm.get("mount_subpath") == "90_system/fleet-memory"
     assert fm.get("manifest_filename") == "MEMORY_INDEX.md"
@@ -194,9 +198,57 @@ def test_fleet_memory_config_loads_with_defaults(tmp_path, monkeypatch):
 ```bash
 cd agents-sdk && PYTHONPATH=. .venv/bin/pytest tests/test_config.py::test_fleet_memory_config_loads_with_defaults -v
 ```
-Expected: FAIL with `KeyError: 'fleet_memory'` or `AssertionError`.
+Expected: FAIL with `AttributeError: 'Config' object has no attribute 'fleet_memory'` (since the field doesn't exist yet).
 
-- [ ] **Step 3: Add the config block**
+- [ ] **Step 3a: Add the `fleet_memory` field to `Config` and populate in `load_config()`**
+
+In `agents-sdk/lib/config.py`, modify the `Config` dataclass to add the field next to `artifacts`:
+
+```python
+@dataclass
+class Config:
+    """Top-level configuration."""
+
+    repo_root: Path
+    vault_root: Path
+    skills_dir: Path
+    life_systems_scripts: Path
+    log_dir: Path
+    log_level: str
+    safety: SafetyConfig
+    agents: dict[str, dict]
+    anthropic_api_key: str | None
+    artifacts: dict = field(default_factory=dict)
+    fleet_memory: dict = field(default_factory=dict)        # NEW
+```
+
+In `load_config()`, populate it:
+
+```python
+    agents = raw.get("agents", {})
+    artifacts = raw.get("artifacts", {})
+    fleet_memory = raw.get("fleet_memory", {})              # NEW
+```
+
+And in the `Config(...)` constructor call at the bottom of `load_config()`:
+
+```python
+    return Config(
+        repo_root=repo_root,
+        vault_root=vault_root,
+        skills_dir=skills_dir,
+        life_systems_scripts=life_systems_scripts,
+        log_dir=log_dir,
+        log_level=log_level,
+        safety=safety,
+        agents=agents,
+        anthropic_api_key=api_key,
+        artifacts=artifacts,
+        fleet_memory=fleet_memory,                          # NEW
+    )
+```
+
+- [ ] **Step 3b: Add the config block**
 
 Append to `agents-sdk/config.toml`:
 
@@ -235,11 +287,18 @@ cd agents-sdk && PYTHONPATH=. .venv/bin/pytest tests/test_config.py::test_fleet_
 ```
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 5: Run the full config test module to catch regressions**
 
 ```bash
-git add agents-sdk/config.toml agents-sdk/tests/test_config.py
-git commit -m "feat(fleet-memory): add [fleet_memory] config block (Phase 1 default disabled)"
+cd agents-sdk && PYTHONPATH=. .venv/bin/pytest tests/test_config.py -v
+```
+Expected: PASS (existing config tests must still pass — adding a field with a default shouldn't break them).
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add agents-sdk/lib/config.py agents-sdk/config.toml agents-sdk/tests/test_config.py
+git commit -m "feat(fleet-memory): add [fleet_memory] config section + Config.fleet_memory field"
 ```
 
 ---
@@ -955,6 +1014,7 @@ Add imports to the top of `agents-sdk/lib/fleet_memory.py`:
 
 ```python
 import re
+from datetime import date
 from lib.filelock import FileLock
 ```
 
@@ -1131,7 +1191,7 @@ Add method on `FleetMemoryTool`:
         provenance = (
             f"---\n"
             f"promoted_from: {self._agent_id}/{slug}.md\n"
-            f"promoted_at: {__import__('datetime').date.today().isoformat()}\n"
+            f"promoted_at: {date.today().isoformat()}\n"
             f"---\n\n"
         )
         body = provenance + src.read_text(encoding="utf-8")
@@ -1405,7 +1465,7 @@ In `main()`, after `cfg = load_config()` and before the `run_synthesis(...)` cal
 
 ```python
     # Fleet memory (Phase 1 pilot, 2026-05-27).
-    fm_cfg = cfg.raw.get("fleet_memory", {})
+    fm_cfg = cfg.fleet_memory
     fm_agent_cfg = fm_cfg.get("per_agent", {}).get("vault_synthesizer", {})
     fm_enabled = bool(fm_cfg.get("enabled") and fm_agent_cfg.get("enabled"))
     fm_mount = cfg.vault_root / fm_cfg.get("mount_subpath", "90_system/fleet-memory")
@@ -1447,7 +1507,12 @@ Also add a unit-test case asserting the orchestrator-level placement (append to 
     def test_run_synthesis_prepends_memory_preamble_to_prompt(self, tmp_path):
         """When memory_preamble is non-empty, run_synthesis prepends it before
         every per-file llm_caller invocation. Verified by capturing what
-        llm_caller receives."""
+        llm_caller receives.
+
+        Mock retriever MUST return >= 2 stub similars or the Tier 1.5
+        thin-source gate (_MIN_SIMILAR_FOR_LLM=2) skips the LLM call and
+        captured stays empty.
+        """
         from agents.vault_synthesizer import run_synthesis
 
         captured: list[str] = []
@@ -1457,7 +1522,11 @@ Also add a unit-test case asserting the orchestrator-level placement (append to 
             return {"concepts": [], "connections": []}
 
         def mock_retriever(query: str, top_k: int = 5, **kw):
-            return []
+            # >= _MIN_SIMILAR_FOR_LLM to clear the thin-source gate.
+            return [
+                {"file_path": "stub-a.md", "chunk_text": "stub content A"},
+                {"file_path": "stub-b.md", "chunk_text": "stub content B"},
+            ]
 
         note = tmp_path / "note.md"
         note.write_text("---\ntype: note\n---\n\nbody")
@@ -1488,7 +1557,11 @@ Also add a unit-test case asserting the orchestrator-level placement (append to 
             return {"concepts": [], "connections": []}
 
         def mock_retriever(query: str, top_k: int = 5, **kw):
-            return []
+            # Same thin-source-gate concern as the sibling test above.
+            return [
+                {"file_path": "stub-a.md", "chunk_text": "stub content A"},
+                {"file_path": "stub-b.md", "chunk_text": "stub content B"},
+            ]
 
         note = tmp_path / "note.md"
         note.write_text("---\ntype: note\n---\n\nbody")
@@ -1837,8 +1910,9 @@ class TestDailyDriverFleetMemoryWiring:
     def test_build_options_includes_fleet_memory_mcp_when_enabled(self, monkeypatch, tmp_path):
         from lib.config import load_config
         cfg = load_config()
-        cfg.raw.setdefault("fleet_memory", {})["enabled"] = True
-        cfg.raw["fleet_memory"].setdefault("per_agent", {}).setdefault(
+        cfg.fleet_memory.setdefault("enabled", True)
+        cfg.fleet_memory["enabled"] = True
+        cfg.fleet_memory.setdefault("per_agent", {}).setdefault(
             "daily_driver", {}
         )["enabled"] = True
 
@@ -1873,7 +1947,7 @@ In `agents-sdk/agents/daily_driver.py`, modify `build_options(config, mode)`:
 After the existing `vault_server = create_vault_mcp_server()` line, add:
 
 ```python
-    fm_cfg = config.raw.get("fleet_memory", {})
+    fm_cfg = config.fleet_memory
     fm_agent_cfg = fm_cfg.get("per_agent", {}).get("daily_driver", {})
     fm_enabled = bool(fm_cfg.get("enabled") and fm_agent_cfg.get("enabled"))
     mcp_servers = {"vault-tools": vault_server}
@@ -1925,7 +1999,7 @@ Then replace the `return ClaudeAgentOptions(...)` block to use these locals:
 And in `build_preamble(mode, config)` (the function that builds the user-facing prompt), append a fleet-memory cue when enabled:
 
 ```python
-    fm_cfg = config.raw.get("fleet_memory", {})
+    fm_cfg = config.fleet_memory
     if fm_cfg.get("enabled") and fm_cfg.get("per_agent", {}).get(
         "daily_driver", {}
     ).get("enabled"):
@@ -2103,7 +2177,13 @@ def _invoke_synthesizer_with_capture(case) -> object:
         return {"concepts": [], "connections": []}
 
     def retriever(text, top_k, **kw):
-        return []
+        # >= _MIN_SIMILAR_FOR_LLM (=2) so Tier 1.5 thin-source gate
+        # doesn't skip the LLM call. vs-022 only asserts on preamble
+        # placement, not on similar-block content.
+        return [
+            {"file_path": "stub-a.md", "chunk_text": "stub content A"},
+            {"file_path": "stub-b.md", "chunk_text": "stub content B"},
+        ]
 
     preamble_path = ROOT / inp["memory_preamble_path"]
     memory_preamble = preamble_path.read_text(encoding="utf-8")
@@ -2406,10 +2486,8 @@ def _invoke_build_options(case) -> object:
 
     inp = case.get("input", {})
     cfg = load_config()
-    cfg.raw.setdefault("fleet_memory", {})["enabled"] = inp.get(
-        "fleet_memory_enabled", False
-    )
-    cfg.raw["fleet_memory"].setdefault("per_agent", {}).setdefault(
+    cfg.fleet_memory["enabled"] = inp.get("fleet_memory_enabled", False)
+    cfg.fleet_memory.setdefault("per_agent", {}).setdefault(
         "daily_driver", {}
     )["enabled"] = inp.get("fleet_memory_enabled", False)
 
@@ -2636,7 +2714,7 @@ cd agents-sdk && PYTHONPATH=. .venv/bin/python3 -c "
 from lib.config import load_config
 from lib import fleet_memory
 cfg = load_config()
-mount = cfg.vault_root / cfg.raw['fleet_memory']['mount_subpath']
+mount = cfg.vault_root / cfg.fleet_memory['mount_subpath']
 print(fleet_memory.inject_memories_into_prompt(
     mount_root=mount, agent_id='vault_synthesizer', enabled=True
 ))
