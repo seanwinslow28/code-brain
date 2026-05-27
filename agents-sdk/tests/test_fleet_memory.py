@@ -144,3 +144,70 @@ class TestFleetMemoryToolViewCreate:
         tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
         tool._create_path("shared/cross-fleet-lesson.md", "All agents read this.")
         assert (tmp_fleet_memory / "shared/cross-fleet-lesson.md").exists()
+
+
+class TestFleetMemoryToolRemainingCommands:
+    def test_str_replace_replaces_unique_match(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool._create_path("vault_synthesizer/note.md", "Lesson: trust mocks.")
+        tool._str_replace_path(
+            "vault_synthesizer/note.md", "trust mocks", "do not trust mocks"
+        )
+        assert (tmp_fleet_memory / "vault_synthesizer/note.md").read_text() == (
+            "Lesson: do not trust mocks."
+        )
+
+    def test_str_replace_raises_on_missing_old(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool._create_path("vault_synthesizer/note.md", "Lesson: trust mocks.")
+        with pytest.raises(ValueError):
+            tool._str_replace_path("vault_synthesizer/note.md", "missing-text", "x")
+
+    def test_str_replace_raises_on_multiple_matches(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool._create_path("vault_synthesizer/note.md", "a a a")
+        with pytest.raises(ValueError):
+            tool._str_replace_path("vault_synthesizer/note.md", "a", "b")
+
+    def test_insert_inserts_after_line_number(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool._create_path("vault_synthesizer/note.md", "line1\nline3\n")
+        tool._insert_path("vault_synthesizer/note.md", insert_line=1, insert_text="line2\n")
+        assert (tmp_fleet_memory / "vault_synthesizer/note.md").read_text() == (
+            "line1\nline2\nline3\n"
+        )
+
+    def test_delete_removes_file(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool._create_path("vault_synthesizer/note.md", "x")
+        tool._delete_path("vault_synthesizer/note.md")
+        assert not (tmp_fleet_memory / "vault_synthesizer/note.md").exists()
+
+    def test_delete_refuses_paths_outside_writable_namespaces(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool, NamespaceViolation
+        # Create a peer file via direct disk write — simulating daily_driver's file.
+        peer = tmp_fleet_memory / "daily_driver" / "peer.md"
+        peer.write_text("peer")
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        with pytest.raises(NamespaceViolation):
+            tool._delete_path("daily_driver/peer.md")
+
+    def test_rename_moves_within_writable_namespaces(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool._create_path("vault_synthesizer/old.md", "x")
+        tool._rename_path("vault_synthesizer/old.md", "vault_synthesizer/new.md")
+        assert not (tmp_fleet_memory / "vault_synthesizer/old.md").exists()
+        assert (tmp_fleet_memory / "vault_synthesizer/new.md").read_text() == "x"
+
+    def test_rename_refuses_cross_namespace_target(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool, NamespaceViolation
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool._create_path("vault_synthesizer/x.md", "x")
+        with pytest.raises(NamespaceViolation):
+            tool._rename_path("vault_synthesizer/x.md", "daily_driver/x.md")
