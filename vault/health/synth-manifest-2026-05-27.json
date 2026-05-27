@@ -1,0 +1,20 @@
+{
+  "clusters_sampled": 36,
+  "concepts_written": 13,
+  "connections_written": 8,
+  "duration_seconds": 665.34,
+  "edges_rejected": 6,
+  "edges_written": 9,
+  "files_processed": 16,
+  "model_used": "qwen3-14b",
+  "rejected_count": 5,
+  "rejected_reasons": {
+    "duplicate-examples": 1,
+    "thin-evidence": 3,
+    "thin-threads": 1
+  },
+  "run_id": "2026-05-27T09:25:16",
+  "skipped_thin_source": 0,
+  "status": "ok",
+  "wol_status": "mbp_awake"
+}

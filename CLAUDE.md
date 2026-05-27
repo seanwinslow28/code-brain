@@ -15,7 +15,7 @@ This is Code-Brain — Sean's personal command center, a second brain built on C
 5. **Settings precedence** (highest wins): Enterprise managed > Project local > Project settings > User settings
 6. **Permission evaluation** (first match wins): Deny > Ask > Allow
 7. **Domain structure**: Active domain content goes in `creative-studio/` or `life-systems/` only. `the-block/` is archived reference — don't add new content there. Nested: `product-management/` under `the-block/`; `design-team/` and `16bitfit-battle-mode/` under `creative-studio/`.
-8. **Vault sync owner (issue #22)**: The shell-level auto-commit hook is the **sole** owner of vault git operations. Obsidian-Git plugin auto-features (backup interval, auto-pull, auto-push, commit-on-change) must stay disabled on every machine — do not re-enable them. Running two auto-commit systems caused the v3.15.0 merge conflicts. Obsidian-Git can be used for manual commits from the command palette; it must never run automatically.
+8. **Vault sync owner (issue #22 — current state as of 2026-05-27)**: The **Obsidian-Git plugin** is the sole owner of vault auto-commit. Identifiable in `git log` by the `vault: auto-commit YYYY-MM-DD HH:MM:SS` message shape and irregular multi-per-day commit intervals. The earlier shell-level hook approach was abandoned — no `.claude/hooks/session-end-auto-commit.sh` script exists in this repo. The "running two auto-commit systems caused v3.15.0 merge conflicts" lesson still holds — do **not** stand up a second auto-commit mechanism (cron, launchd, hook, or otherwise). Any new vault path is committed by Obsidian-Git automatically; agents and skills must never invoke `git add/commit` against the vault directly.
 
 ### Hook Exit Codes
 

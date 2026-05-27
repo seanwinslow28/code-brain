@@ -2,31 +2,33 @@
 title: "Infrastructure Status"
 type: concept
 sources:
-  - knowledge/connections/infrastructure-limitations-and-creative-studio-workflow-blockage.md
+  - 20_projects/research/2026-05-26-topic-20-mbp-ollama-runtime-comparison.md
 tags: [auto-generated, phase-6]
-created: 2026-05-23
-updated: 2026-05-23
+created: 2026-05-27
+updated: 2026-05-27
 ---
 
 ## Definition
 
-A state-based system where agents' ability to function depends on the accessibility of critical systems like MCP servers. When these systems are inaccessible, agents become constrained in their capabilities, exposing a contradiction between the assumed autonomy of agent operations and the actual dependency on external infrastructure. This reveals an underlying invariant that real-time automation requires not just internal agent health but also stable external infrastructure.
+Infrastructure Status refers to the real-time operational health and capability boundaries of the local compute stack, specifically the trade-offs between decode speed, memory bandwidth, and inference accuracy. It is not a static metric but a dynamic state where hardware tiers (MBP vs. Alienware) and runtime choices (MLX vs. Ollama) create distinct performance envelopes. A status update must account for the fact that a model's 'best' runtime is non-uniform across the model family, requiring per-model configuration rather than a global switch.
 
 ## Context
 
-For Sean, this matters because it determines the scope of automation he can rely on. If his infrastructure is unstable or inaccessible, even well-designed agent workflows will fail to execute fully.
+Sean's job hunt and agent development depend on a reliable local AI stack. Understanding the specific status of his MBP's Ollama vs. LM Studio capabilities allows him to route high-stakes tasks (like interview prep or code generation) to the correct runtime, preventing delays caused by re-running failed jobs.
 
 ## Evidence
 
-> The fleet is not addressing the critical friction point: agents cannot hit MCP servers for interactive creative tasks.
+> Best Tier A upgrade candidate identified: qwen3.6:35b-a3b on MBP-Ollama at 85 % schema match, 5/5 needle recall, 30 tok/s — beats the current qwen3-14b LM Studio production baseline on every dimension.
 
-> The inability of autonomous agents to connect with live MCP servers creates a blocking tension between Infrastructure Status and Creative Studio Workflow Execution.
+> Adoption recommendation: add Ollama as a co-resident runtime on the MBP (Ollama + LM Studio both bound, different ports).
+
+> Migrate the agents that benefit (vault_synthesizer, knowledge_lint Tier 2, job_feed scoring) to call MBP-Ollama with qwen3.6:35b-a3b for accuracy-critical work; keep LM Studio available for cases where its 2-3× decode-speed advantage matters more.
 
 ## Examples
 
-- agents cannot hit MCP servers for interactive creative tasks
-- creative-studio workflow mesh is blocked
+- The MBP-Ollama runtime with qwen3.6:35b-a3b is identified as the best Tier A upgrade candidate, outperforming the current production baseline on schema, recall, and speed.
+- LM Studio is retained for its 2-3× decode-speed advantage in scenarios where speed is prioritized over schema accuracy.
 
 ## Related Concepts
 
-[[Creative Studio Workflows]] [[Agent Health Monitoring]]
+[[Runtime-Model Coupling]] [[Automation Reliability]]
