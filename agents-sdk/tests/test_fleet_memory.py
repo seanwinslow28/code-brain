@@ -245,6 +245,16 @@ class TestManifestUpdate:
         assert "second version" in manifest
         assert "first version" not in manifest
 
+    def test_lock_file_lives_outside_mount(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool.write_lesson(slug="a", summary="A", body="A")
+        # No lock file inside the mount
+        assert not any(tmp_fleet_memory.glob("*.lock"))
+        # Lock file does live next to the mount (sibling in vault/90_system/)
+        expected_lock = tmp_fleet_memory.parent / f".{tmp_fleet_memory.name}-manifest.lock"
+        assert expected_lock.exists()
+
 
 class TestPromoteToShared:
     def test_promote_copies_file_to_shared_with_provenance(self, tmp_fleet_memory: Path):
