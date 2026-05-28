@@ -29,6 +29,8 @@ prefix is mandatory.)
 
 **Phase 1 fleet-memory addendum (2026-05-27): 4 cases added (vs-022 to vs-025) covering memory-preamble injection and lesson-write gating. Pass-rate target after Task 11 ships: 11/14 = 79% (the three skipped cases vs-012/013/014 remain deferred).**
 
+> **Pre-existing miscoding — vs-016 and vs-017 (tracked, not Phase 1 scope).** On the post-Phase-1 baseline both cases are red. Root cause: the empty mock retriever in `_invoke_synthesizer` collides with the Tier 1.5 thin-source gate (`_MIN_SIMILAR_FOR_LLM=2`) — the gate skips the LLM call so `STATUS_ERROR` never reaches the assertion the cases test. The 2-line fix lives in [`runner.py`](runner.py) `_invoke_synthesizer`: change `def retriever(text, top_k): return []` to return ≥2 stub similars. Filed as a separate ticket; **do not fix in the Phase 1 follow-up batch.**
+
 - **vs-012, vs-013** — `pass_criteria` are English prose, not Python expressions; the runner has no concept-body reader path; vs-013 also needs an `age_distribution` fixture and a `cluster_link_ages_days` field on `SynthesisResult`. All three are post-Workstream-B follow-ups.
 - **vs-014** — requires a live (or richly-mocked) LLM caller that returns a well-formed concept dict with >= 2 wikilinks; offline mocks can't faithfully test this output-side regression. Deferred to Workstream C live runs.
 
