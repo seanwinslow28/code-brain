@@ -2,31 +2,32 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - 40_knowledge/references/ref-indydevdan-coding-agent-reviewers-transcript.md
+  - knowledge/expansions/infrastructure-status.md
 tags: [auto-generated, phase-6]
-created: 2026-05-22
-updated: 2026-05-22
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Definition
 
-A dynamic feedback loop between agent performance metrics and user interventions, where visibility into agent failures directly influences the prioritization of debugging efforts. This mechanism relies on explicit status reporting from agents, which then feeds into a centralized observability system that triggers alerts or workflow adjustments. The tension arises when agents fail silently, creating a lag between the actual state of the system and what is visible to the user, which can delay corrective actions.
+A diagnostic layer that maps runtime performance to Brendan Gregg’s USE Method, reporting Utilization, Saturation, and Errors rather than qualitative speed or accuracy. This mechanism shifts the evaluation from static 'winner' selection to dynamic thresholding, where a model's viability is contingent on specific resource constraints like GPU utilization or memory pressure. By anchoring status in these physical limits, the system creates a runbook for failure modes, allowing the operator to distinguish between a model that is simply slow and one that is failing under load.
 
 ## Context
 
-For Sean, this mechanism is critical for managing the complexity of multiple agentic systems across his job-hunt and knowledge infrastructure. Without clear visibility into agent health, he risks inefficiencies in his workflow automation.
+Sean currently relies on qualitative assessments of his local inference fleet. Without this observability layer, he cannot predict when a 'Tier A' model will degrade into a 'Tier B' or 'Fallback' state, leaving him vulnerable to silent failures during critical job-hunt tasks.
 
 ## Evidence
 
-> This harness takes no input. What is this? How does it work? And what's missing from every benchmark?
+> Add a diagnostic layer that reports every runtime/machine as Utilization, Saturation, Errors rather than “fast/accurate/best.”
 
-> You can see here 70 seconds already, but the image quality coming out of the new GPT image 2.0 model i
+> This unlocks an agent fleet runbook instead of a concept note: “If vault_synthesizer misses schema, check saturation before swapping models.”
+
+> Right now the concept names winners; USE would let Sean explain why a winner stops being a winner under load.
 
 ## Examples
 
-- The verifier agent attempts to generate an image but fails silently, leading to an incomplete or incorrect architecture diagram.
-- The harness runs without input and does not provide any status update, obscuring the agent's progress or failure.
+- MBP-Ollama qwen3.6:35b-a3b is Tier A only when GPU utilization is below X, memory pressure below Y, queue depth below Z, and error rate below N.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Infrastructure Status]]
+[[Infrastructure Status]] [[Runtime-Model Coupling]]

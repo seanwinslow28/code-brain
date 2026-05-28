@@ -2,30 +2,33 @@
 title: "Synthesizer fix"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-27.md
+  - knowledge/expansions/synthesizer-fix.md
 tags: [auto-generated, phase-6]
-created: 2026-05-27
-updated: 2026-05-27
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Definition
 
-The synthesizer fix addresses the latent decay of knowledge consolidation when background agents fail to run. It is not merely about restarting a script, but about recognizing that a stale synthesizer creates a gap between raw data ingestion and meaningful insight generation. This gap causes the vault to accumulate unprocessed information, leading to a state where the system has high fidelity in storage but low fidelity in understanding, requiring manual intervention to restore the synthesis loop.
+The synthesizer fix represents a structural shift from treating knowledge decay as a vague operational nuisance to defining it as a measurable reliability contract. This approach reframes the system's health through explicit Service Level Objectives (SLOs) for freshness, backlog, and synthesis quality, anchored on an error budget for missed runs. By establishing these metrics, the system moves beyond simple maintenance to enforce a strict boundary between raw event storage and meaningful interpretation, ensuring that stale data does not silently degrade the agent fleet's operational context.
 
 ## Context
 
-Sean's vault relies on the synthesizer to create connections between concepts. When it is stale, the 'knowledge backlog' grows, and the value of the daily notes and indexing efforts diminishes because the insights are not being surfaced. Fixing this is critical to maintaining the 'knowledge consolidation' that makes the vault useful.
+Sean is currently building a portfolio that demonstrates 'Agentic Engineering' and 'Vault as Agent Infrastructure'. By treating his personal knowledge vault with the rigor of a production SRE environment, he creates a tangible artifact that proves he can manage complex, autonomous systems. This shift allows him to articulate the 'why' behind system failures, turning a personal maintenance task into a credible engineering case study for future hiring managers.
 
 ## Evidence
 
-> Background synthesis agents (Synthesizer, Deep-Researcher) are stale, delaying crucial knowledge consolidation and research output.
+> Reframe “synthesizer stale” from a vague health complaint into an explicit reliability contract: freshness SLO, backlog SLO, synthesis-quality SLO, and an error budget for missed runs.
 
-> Prioritize running the 'Deep-researcher' and 'vault-synthesizer' immediately to clear the knowledge backlog and consolidate insights.
+> The missing facet is not “knowledge consolidation”; it is why the system allowed silent degradation.
+
+> A stale synthesizer does not just delay summaries; it delays the moment when raw events become commitments, categories, and future action.
 
 ## Examples
 
-- vault-synthesizer (2:30 AM daily, MBP (when awake), $0.00/run) ... Status: stale
+- Defining health as: 'The synthesizer is healthy if 95% of eligible notes are synthesized within N hours and fewer than M concepts remain unconnected for more than D days.'
+- Treating the stale synthesizer as an operational incident with contributing factors, detection gap, blast radius, recovery actions, and prevention work.
 
 ## Related Concepts
 
-[[Knowledge-Lint]] [[Indexing and Synthesis]]
+[[Infrastructure Status]] [[Agent Health]] [[Agent Fleet Observability Dashboard]]

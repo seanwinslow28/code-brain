@@ -2,31 +2,35 @@
 title: "Benchmarking Artifact"
 type: concept
 sources:
-  - 20_projects/research/2026-05-21-topic-20-fleet-model-refresh-benchmarks.md
+  - knowledge/expansions/benchmarking-artifact.md
 tags: [auto-generated, phase-6]
-created: 2026-05-27
-updated: 2026-05-27
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Definition
 
-A benchmarking artifact is a measurement result that captures the performance of a model under a specific, constrained prompt format, which may systematically misrepresent the model's true capabilities if the format does not align with its training distribution. When a model is optimized for a specific native template (like Mistral-style tool calls) but evaluated using a generic JSON schema, the resulting accuracy score reflects a format mismatch rather than a lack of functional ability. This creates a false negative in the evaluation process, where a high-performing model is incorrectly ranked lower than a mediocre model simply because the latter happens to match the evaluation prompt's syntax better. The artifact is not a measure of the model's intrinsic quality, but a measure of its compatibility with the specific evaluation harness.
+A benchmarking artifact functions as a validity-threat taxonomy that classifies measurement failures by construct, internal, external, or statistical conclusion validity rather than merely reporting a score. This mechanism shifts the diagnostic focus from model capability to the structural integrity of the evaluation harness itself. By treating the benchmark prompt format as an interface contract, the artifact exposes the compatibility gap between model-native affordances and evaluator expectations. The core invariant is that a score is invalid if the harness violates construct validity, regardless of the model's performance within that specific constraint.
 
 ## Context
 
-This matters to Sean because his production fleet decisions rely on these benchmarks to select models for Tier C. If the benchmark is biased against models like devstral due to prompt mismatch, he risks deploying a suboptimal model (gemma4) simply because the evaluation methodology failed to surface devstral's true potential. This leads to a 'safe' but potentially less capable production environment.
+Sean needs to distinguish between a model failing a task and a test measuring the wrong capability. This distinction is critical for fleet decision records where the conclusion must be precise about whether the failure is a model defect or a test design flaw. Without this taxonomy, Sean risks optimizing for proxy metrics that collapse under Goodhart's Law once they guide deployment decisions.
 
 ## Evidence
 
-> devstral was designed for agentic-coding with native tool-call templates (Mistral-style); the Topic 20 prompt set uses generic JSON schema prompts that may not match devstral's training.
+> Your current concept names the artifact but does not classify which kind of invalidity is happening.
 
-> devstral scores 7/20 tool-call schema (35%) — much lower than expected.
+> This score is invalid because the harness violates construct validity, not because the model failed.
+
+> Treat every benchmark prompt format as an API/interface contract, not a neutral measurement environment.
+
+> Once benchmark scores guide deployment, models and humans optimize to the proxy, and the proxy stops representing capability.
 
 ## Examples
 
-- devstral scores 7/20 tool-call schema (35%) — much lower than expected.
-- Topic 19 Tier C recommendation: devstral:24b-small-2505-q4_K_M (~40–55 tok/s, "highest agentic-coding score").
+- A reusable benchmark postmortem template that concludes 'the test measured JSON-template compliance instead of agentic tool competence.'
+- An eval adapter spec for Tier C model selection where Mistral-style tool calls, OpenAI function calls, and plain JSON schema are explicit subtypes with behavioral guarantees.
 
 ## Related Concepts
 
-[[Agent Health]] [[Infrastructure Status]]
+[[Runtime-Model Coupling]] [[Eval Vocabulary]]

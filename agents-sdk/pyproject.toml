@@ -22,6 +22,12 @@ dependencies = [
     # vault/20_projects/prj-job-hunt-2026/.../2026-05-13-vault-synthesizer-
     # retrofit-tiers.md §Tier 2.
     "hdbscan>=0.8.40,<0.9",
+    # Judge layer (Council Gap-Fill 1 / Task 12, 2026-05-28): typed
+    # ActionProposal + JudgeDecision schemas for the control-plane
+    # interceptor at lib/judge/. Was previously pulled in transitively
+    # via google-genai (2.12.5 in the venv) — promoting to an explicit
+    # dep so a future google-genai bump can't silently break judge.
+    "pydantic>=2.0,<3",
 ]
 
 [project.optional-dependencies]
