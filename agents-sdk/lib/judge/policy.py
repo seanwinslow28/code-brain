@@ -194,7 +194,10 @@ def load_policy(
         )
 
     with open(path, encoding="utf-8") as fh:
-        raw = yaml.safe_load(fh)
+        try:
+            raw = yaml.safe_load(fh)
+        except yaml.YAMLError as e:
+            raise PolicySchemaError(f"{path.name}: malformed YAML — {e}") from e
 
     if not isinstance(raw, dict):
         raise PolicySchemaError(
