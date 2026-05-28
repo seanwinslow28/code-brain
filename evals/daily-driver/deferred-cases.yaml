@@ -1,0 +1,26 @@
+# evals/daily-driver/deferred-cases.yaml
+# Cases named but not yet runnable. Move into cases.yaml when traces exist.
+
+- id: dd-003
+  category: morning-brief-shape
+  description: "Morning brief must contain a `## Morning Focus` section with 1-3-5 priority list shape"
+  status: deferred
+  blocker: "Need 7+ days of production morning-brief traces to ground the assertion against actual output shape"
+
+- id: dd-004
+  category: vault-health-propagation
+  description: "When synth-manifest reports status=success-empty, the daily brief Vault Health block must contain WARNING and `concepts_written: 0`"
+  status: deferred
+  blocker: "vs-021 covers the render_vault_health function unit-side; dd-004 will cover the integration through build_prompt → query loop. Needs a way to run claude-agent-sdk.query() in offline eval mode."
+
+- id: dd-005
+  category: mbp-asleep-fallback
+  description: "When fleet-overnight digest indicates MBP was asleep, the morning brief surfaces the fallback path (cloud Sonnet) rather than silently degrading"
+  status: deferred
+  blocker: "Need MBP-asleep production traces to ground the assertion; the fallback path text shape is not stable yet."
+
+- id: dd-006
+  category: fleet-memory-content
+  description: "When fleet-memory contains a lesson tagged `daily_driver/{slug}.md` from a prior run, the agent's morning brief references the lesson by file path"
+  status: deferred
+  blocker: "Need >=7 days of Phase 1 fleet-memory production runs to know what the model actually does with retrieved memory entries. Author after Phase 1 audit."

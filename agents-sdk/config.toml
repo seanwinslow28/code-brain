@@ -506,3 +506,29 @@ max_chars_per_chunk = 250
 section_silence_ms = 200
 output_dir = "vault/90_system/audio"
 mp3_quality = 2                          # ffmpeg libmp3lame -qscale:a 2 (~190 kbps VBR)
+
+# ─── Fleet Memory (Phase 1 pilot, 2026-05-27) ─────────────────────────────
+# Shared filesystem-memory layer for the agent fleet. Subclass of Anthropic's
+# memory_20250818 protocol for cloud agents; deterministic read-and-inject
+# pattern for local-Ollama agents. Mount lives inside the vault so it
+# inherits the external auto-commit process (CLAUDE.md rule 8 / issue #22).
+# See docs/plans/2026-05-27-fleet-memory-phase-1-plan.md.
+
+[fleet_memory]
+enabled = false                                # Phase 1 default: opt-in per-agent
+mount_subpath = "90_system/fleet-memory"       # resolved relative to vault_root
+manifest_filename = "MEMORY_INDEX.md"
+manifest_max_chars = 8000                      # truncate before injecting into prompts
+beta_header = "context-management-2025-06-27"
+
+[fleet_memory.per_agent.vault_synthesizer]
+enabled = false                                # opt-in toggle for smoke testing
+agent_id = "vault_synthesizer"
+inject_on_run = true                           # read MEMORY_INDEX + own namespace at start
+write_lessons_on = ["ok"]                      # only write on clean runs; never partial/error
+
+[fleet_memory.per_agent.daily_driver]
+enabled = false                                # opt-in toggle for smoke testing
+agent_id = "daily_driver"
+inject_on_run = true                           # MCP server is mounted; preamble cues the agent to call view
+write_lessons_on = ["success"]
