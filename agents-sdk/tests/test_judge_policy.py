@@ -141,11 +141,21 @@ class TestLoadPolicySchemaErrors:
         self, tmp_path: Path, missing_field: str
     ) -> None:
         """All four top-level fields are required."""
-        bad_yaml = "\n".join(
-            line
-            for line in _VALID_YAML.splitlines()
-            if not line.startswith(f"{missing_field}:")
-        )
+        # Drop the `field:` line AND any indented continuation that follows,
+        # so removing a block-valued key like `rules:` doesn't orphan its
+        # children into malformed YAML.
+        out: list[str] = []
+        skipping = False
+        for line in _VALID_YAML.splitlines():
+            if line.startswith(f"{missing_field}:"):
+                skipping = True
+                continue
+            if skipping:
+                if line.startswith((" ", "\t")) or line == "":
+                    continue
+                skipping = False
+            out.append(line)
+        bad_yaml = "\n".join(out)
         policies_dir = _write_policy(tmp_path, bad_yaml)
         with pytest.raises(PolicySchemaError) as exc_info:
             load_policy("test_agent", policies_dir=policies_dir)
