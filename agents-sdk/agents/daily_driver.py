@@ -279,6 +279,22 @@ def build_preamble(mode: str, config) -> str:
         if artifact_block:
             base += "\n" + artifact_block + "\n"
 
+    fm_cfg = getattr(config, "fleet_memory", {}) or {}
+    if fm_cfg.get("enabled") and fm_cfg.get("per_agent", {}).get(
+        "daily_driver", {}
+    ).get("enabled"):
+        base += (
+            "\n\n## Fleet Memory\n\n"
+            "You have six memory tools (mcp__fleet-memory__memory_{view,create,\n"
+            "str_replace,insert,delete,rename}) implementing the Anthropic\n"
+            "memory_20250818 protocol against a shared fleet-memory mount.\n"
+            "Start every run by calling `memory_view` on `/memories/shared/`\n"
+            "and `/memories/daily_driver/` to surface relevant prior lessons.\n"
+            "Record new lessons via `memory_create` against\n"
+            "`/memories/daily_driver/{slug}.md`. Use `/memories/shared/{slug}.md`\n"
+            "ONLY when the lesson generalizes to multiple agents.\n"
+        )
+
     return base
 
 
@@ -412,21 +428,46 @@ def build_options(config, mode: str | None = None) -> ClaudeAgentOptions:
     if config.anthropic_api_key:
         env["ANTHROPIC_API_KEY"] = config.anthropic_api_key
 
+    fm_cfg = config.fleet_memory
+    fm_agent_cfg = fm_cfg.get("per_agent", {}).get("daily_driver", {})
+    fm_enabled = bool(fm_cfg.get("enabled") and fm_agent_cfg.get("enabled"))
+    mcp_servers = {"vault-tools": vault_server}
+    allowed_tools = [
+        "Read", "Write", "Edit", "Glob", "Grep",
+        "mcp__vault-tools__vault_inject",
+    ]
+    betas = []
+    if fm_enabled:
+        from lib.custom_tools import create_fleet_memory_mcp_server
+        fm_mount = config.vault_root / fm_cfg.get(
+            "mount_subpath", "90_system/fleet-memory"
+        )
+        mcp_servers["fleet-memory"] = create_fleet_memory_mcp_server(
+            agent_id="daily_driver", mount_root=fm_mount,
+        )
+        allowed_tools.extend([
+            "mcp__fleet-memory__memory_view",
+            "mcp__fleet-memory__memory_create",
+            "mcp__fleet-memory__memory_str_replace",
+            "mcp__fleet-memory__memory_insert",
+            "mcp__fleet-memory__memory_delete",
+            "mcp__fleet-memory__memory_rename",
+        ])
+        betas.append(fm_cfg.get("beta_header", "context-management-2025-06-27"))
+
     return ClaudeAgentOptions(
         system_prompt={
             "type": "preset",
             "preset": "claude_code",
             "append": skills_prompt,
         },
-        allowed_tools=[
-            "Read", "Write", "Edit", "Glob", "Grep",
-            "mcp__vault-tools__vault_inject",
-        ],
+        allowed_tools=allowed_tools,
         permission_mode=config.safety.permission_mode,
         max_turns=max_turns,
         max_budget_usd=max_budget,
         cwd=str(config.repo_root),
-        mcp_servers={"vault-tools": vault_server},
+        mcp_servers=mcp_servers,
+        betas=betas,
         setting_sources=["project"],
         env=env,
     )

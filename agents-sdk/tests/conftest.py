@@ -162,6 +162,15 @@ def tmp_artifacts(tmp_path: Path) -> Path:
 
 
 @pytest.fixture
+def tmp_fleet_memory(tmp_path: Path):
+    """A bootstrapped fleet-memory mount with the two pilot namespaces."""
+    from lib.fleet_memory import ensure_mount
+    mount = tmp_path / "fleet-memory"
+    ensure_mount(mount, agent_ids=["vault_synthesizer", "daily_driver"])
+    return mount
+
+
+@pytest.fixture
 def tmp_config(tmp_path: Path, tmp_vault: Path, tmp_skills: Path) -> Path:
     """Create a config.toml for testing."""
     config_file = tmp_path / "config.toml"

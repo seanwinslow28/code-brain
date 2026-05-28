@@ -1,0 +1,1 @@
+MBP-Ollama is the canonical qwen3.6_35b host. WoL is retired; use Pattern E (manual 7am-5pm wake).
