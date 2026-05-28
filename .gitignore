@@ -72,6 +72,9 @@ sw-portfolio-and-hubs-designs/
 # The Block resume info (private — historical employer materials)
 vault/30_domains/product-management/the-block-resume-info/
 
+# The Block archived domain (archived 2026-05 — historical employer materials)
+the-block/
+
 # Autonomous agent runtime artifacts — per CHANGELOG.md v3.15.0 follow-up.
 # These are written continuously by launchd-scheduled agents on the Mac Mini
 # (vault-indexer, vault-synthesizer, knowledge-lint, meta-agent, daily-driver,
