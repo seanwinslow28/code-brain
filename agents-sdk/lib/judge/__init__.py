@@ -28,7 +28,10 @@ and a future "vault-to-build" agent — all additive policy YAML +
 ActionProposal subclasses, no module rewrites.
 
 Public surface (this module):
-  - ActionProposal, JudgeDecision, Outcome  (from .schema)
+  - ActionProposal, JudgeDecision, Outcome      (from .schema)
+  - judge_action                                (from .action — Option B wrapper)
+  - write_decision, ensure_ledger_ready,
+    LedgerError, LedgerWriteError               (from .ledger)
 """
 
 from __future__ import annotations
@@ -38,9 +41,21 @@ from lib.judge.schema import (
     JudgeDecision,
     Outcome,
 )
+from lib.judge.ledger import (
+    LedgerError,
+    LedgerWriteError,
+    ensure_ledger_ready,
+    write_decision,
+)
+from lib.judge.action import judge_action
 
 __all__ = [
     "ActionProposal",
     "JudgeDecision",
     "Outcome",
+    "judge_action",
+    "write_decision",
+    "ensure_ledger_ready",
+    "LedgerError",
+    "LedgerWriteError",
 ]
