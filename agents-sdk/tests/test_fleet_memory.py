@@ -277,6 +277,23 @@ class TestPromoteToShared:
         assert "## shared" in manifest
         assert "from-vault_synthesizer-x" in manifest
 
+    def test_promote_routes_writes_through_resolve_path(self, tmp_fleet_memory: Path):
+        """Regression guard: promote_to_shared must not write directly with
+        open() / write_text() — it must route through _create_path so
+        _resolve_path and _assert_write_allowed are invoked (C1 invariant)."""
+        from lib.fleet_memory import FleetMemoryTool
+        from unittest.mock import patch
+
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool.write_lesson(slug="x", summary="X", body="content")
+
+        with patch.object(tool, "_create_path", wraps=tool._create_path) as spy:
+            tool.promote_to_shared(slug="x")
+            assert spy.called, "_create_path must be invoked by promote_to_shared"
+            # Verify the call targets shared/, not the agent's namespace
+            called_path = spy.call_args[0][0]
+            assert called_path.startswith("shared/"), f"unexpected target: {called_path}"
+
 
 class TestInjectMemoriesIntoPrompt:
     def test_returns_empty_when_disabled(self, tmp_fleet_memory: Path):

@@ -255,8 +255,11 @@ class FleetMemoryTool(BetaAbstractMemoryTool):
             f"---\n\n"
         )
         body = provenance + src.read_text(encoding="utf-8")
-        dest = self._mount_root / "shared" / f"{dest_slug}.md"
-        dest.write_text(body, encoding="utf-8")
+        # Route through _create_path so _resolve_path + _assert_write_allowed
+        # are invoked — preserves the C1 invariant that every write goes
+        # through the path-traversal guard, even for internally-constructed
+        # paths.
+        self._create_path(f"shared/{dest_slug}.md", body)
         _update_manifest_section(
             self._mount_root / "MEMORY_INDEX.md",
             agent_id="shared",
