@@ -245,6 +245,16 @@ class TestManifestUpdate:
         assert "second version" in manifest
         assert "first version" not in manifest
 
+    def test_lock_file_lives_outside_mount(self, tmp_fleet_memory: Path):
+        from lib.fleet_memory import FleetMemoryTool
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool.write_lesson(slug="a", summary="A", body="A")
+        # No lock file inside the mount
+        assert not any(tmp_fleet_memory.glob("*.lock"))
+        # Lock file does live next to the mount (sibling in vault/90_system/)
+        expected_lock = tmp_fleet_memory.parent / f".{tmp_fleet_memory.name}-manifest.lock"
+        assert expected_lock.exists()
+
 
 class TestPromoteToShared:
     def test_promote_copies_file_to_shared_with_provenance(self, tmp_fleet_memory: Path):
@@ -266,6 +276,23 @@ class TestPromoteToShared:
         manifest = (tmp_fleet_memory / "MEMORY_INDEX.md").read_text()
         assert "## shared" in manifest
         assert "from-vault_synthesizer-x" in manifest
+
+    def test_promote_routes_writes_through_resolve_path(self, tmp_fleet_memory: Path):
+        """Regression guard: promote_to_shared must not write directly with
+        open() / write_text() — it must route through _create_path so
+        _resolve_path and _assert_write_allowed are invoked (C1 invariant)."""
+        from lib.fleet_memory import FleetMemoryTool
+        from unittest.mock import patch
+
+        tool = FleetMemoryTool(mount_root=tmp_fleet_memory, agent_id="vault_synthesizer")
+        tool.write_lesson(slug="x", summary="X", body="content")
+
+        with patch.object(tool, "_create_path", wraps=tool._create_path) as spy:
+            tool.promote_to_shared(slug="x")
+            assert spy.called, "_create_path must be invoked by promote_to_shared"
+            # Verify the call targets shared/, not the agent's namespace
+            called_path = spy.call_args[0][0]
+            assert called_path.startswith("shared/"), f"unexpected target: {called_path}"
 
 
 class TestInjectMemoriesIntoPrompt:

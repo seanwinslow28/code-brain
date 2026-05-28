@@ -84,6 +84,7 @@ vault/.indexer-state.json
 vault/.job-feed.db
 vault/.job-feed.db.lock
 vault/knowledge/.lock
+vault/90_system/.fleet-memory-manifest.lock
 .claude/scheduled_tasks.lock
 vault/health/.gemini-ledger.lock
 vault/conflict-files-obsidian-git.md

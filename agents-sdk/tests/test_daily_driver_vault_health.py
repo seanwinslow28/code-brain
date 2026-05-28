@@ -122,6 +122,7 @@ def test_build_preamble_morning_includes_synth_line_when_manifest_exists(
         repo_root = tmp_path
         agents = {"daily_driver": {"morning_time": "06:00"}}
         artifacts: dict = {}
+        fleet_memory: dict = {}
 
         def artifact_config(self, name):  # noqa: D401
             return {}
@@ -147,6 +148,7 @@ def test_build_preamble_morning_omits_synth_line_when_no_manifest(
         repo_root = tmp_path
         agents = {"daily_driver": {"morning_time": "06:00"}}
         artifacts: dict = {}
+        fleet_memory: dict = {}
 
         def artifact_config(self, name):
             return {}
