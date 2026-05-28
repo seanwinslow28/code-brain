@@ -4,9 +4,9 @@ type: connection
 connects:
   - Benchmarking Artifact
   - Infrastructure Status
-  - Runtime Constraint
-created: 2026-05-27
-updated: 2026-05-27
+  - Runtime-Model Coupling
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Synthesis
@@ -23,7 +23,7 @@ The tension between benchmark bias and infrastructure expansion reveals a critic
 
 > Tier C | Alienware RTX 5080 16 GB | (none — new tier) | gemma4:26b (MoE 3.8 B active) | ADD as new Tier C production model.
 
-### [[Runtime Constraint]]
+### [[Runtime-Model Coupling]]
 
 > qwen3-14b stays — no candidate beats it on the LM Studio runtime
 
