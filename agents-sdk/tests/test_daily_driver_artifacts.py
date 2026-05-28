@@ -202,11 +202,14 @@ class TestDailyDriverFleetMemoryWiring:
         assert self.EXPECTED_TOOL_NAMES.issubset(set(opts.allowed_tools))
         assert "context-management-2025-06-27" in opts.betas
 
-    def test_build_options_omits_fleet_memory_when_disabled(self, monkeypatch):
+    def test_build_options_omits_fleet_memory_when_disabled(self, monkeypatch, tmp_config):
         from lib.config import load_config
         from agents.daily_driver import build_options
-        cfg = load_config()
-        # Default: fleet_memory.enabled=false in config.toml
+        # Load an isolated config so the disabled branch is exercised
+        # deterministically — the live config.toml flag may be toggled on
+        # for a production exercise.
+        cfg = load_config(config_path=tmp_config)
+        # tmp_config sets fleet_memory.enabled=false
         opts = build_options(cfg, mode="morning")
         assert "fleet-memory" not in opts.mcp_servers
         # None of the six memory tool names should appear when disabled.
