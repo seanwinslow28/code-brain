@@ -279,7 +279,7 @@ def build_preamble(mode: str, config) -> str:
         if artifact_block:
             base += "\n" + artifact_block + "\n"
 
-    fm_cfg = getattr(config, "fleet_memory", {}) or {}
+    fm_cfg = config.fleet_memory
     if fm_cfg.get("enabled") and fm_cfg.get("per_agent", {}).get(
         "daily_driver", {}
     ).get("enabled"):

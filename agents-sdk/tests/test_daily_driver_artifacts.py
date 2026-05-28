@@ -33,6 +33,7 @@ class _FakeConfig:
     repo_root: Path
     agents: dict = field(default_factory=dict)
     artifacts: dict = field(default_factory=dict)
+    fleet_memory: dict = field(default_factory=dict)
     safety: _FakeSafety = field(default_factory=_FakeSafety)
 
     def artifact_config(self, name: str) -> dict:
@@ -58,6 +59,7 @@ def _make_config(tmp_artifacts: Path, *, enabled: bool = True, per_agent: dict |
             "require_confirmed": True,
             "per_agent": per_agent,
         },
+        fleet_memory={},
     )
 
 
