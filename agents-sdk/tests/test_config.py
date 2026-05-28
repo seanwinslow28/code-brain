@@ -71,3 +71,17 @@ class TestJobFeedConfig:
         assert paths.get("watchlist", "").endswith("watchlist.yaml")
         assert paths.get("roll_up_dir", "").endswith("job-feed")
         assert paths.get("manifest_dir") == "vault/health"
+
+
+def test_fleet_memory_config_loads_with_defaults():
+    """[fleet_memory] block is parsed onto a typed Config.fleet_memory field.
+    Defaults are conservative — opt-in per-agent."""
+    from lib.config import load_config
+    cfg = load_config()
+    assert hasattr(cfg, "fleet_memory"), "Config must expose a typed fleet_memory dict"
+    fm = cfg.fleet_memory
+    assert fm.get("enabled") is False, "Phase 1 default must be disabled — opt-in only"
+    assert fm.get("mount_subpath") == "90_system/fleet-memory"
+    assert fm.get("manifest_filename") == "MEMORY_INDEX.md"
+    assert fm["per_agent"]["vault_synthesizer"]["enabled"] is False
+    assert fm["per_agent"]["daily_driver"]["enabled"] is False

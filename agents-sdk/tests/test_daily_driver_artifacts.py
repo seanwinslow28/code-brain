@@ -170,3 +170,42 @@ class TestToneGuard:
         lowered = block.lower()
         for phrase in ("you should", "you need to", "make sure to", "don't forget"):
             assert phrase not in lowered, f"scolding phrase leaked into preamble: {phrase!r}"
+
+
+class TestDailyDriverFleetMemoryWiring:
+    # The six MCP tool names the daily_driver must declare in allowed_tools
+    # when fleet-memory is enabled. Pre-computed here so test assertions and
+    # the implementation stay in lockstep.
+    EXPECTED_TOOL_NAMES = {
+        "mcp__fleet-memory__memory_view",
+        "mcp__fleet-memory__memory_create",
+        "mcp__fleet-memory__memory_str_replace",
+        "mcp__fleet-memory__memory_insert",
+        "mcp__fleet-memory__memory_delete",
+        "mcp__fleet-memory__memory_rename",
+    }
+
+    def test_build_options_includes_fleet_memory_mcp_when_enabled(self, monkeypatch, tmp_path):
+        from lib.config import load_config
+        cfg = load_config()
+        cfg.fleet_memory.setdefault("enabled", True)
+        cfg.fleet_memory["enabled"] = True
+        cfg.fleet_memory.setdefault("per_agent", {}).setdefault(
+            "daily_driver", {}
+        )["enabled"] = True
+
+        from agents.daily_driver import build_options
+        opts = build_options(cfg, mode="morning")
+        assert "fleet-memory" in opts.mcp_servers
+        assert self.EXPECTED_TOOL_NAMES.issubset(set(opts.allowed_tools))
+        assert "context-management-2025-06-27" in opts.betas
+
+    def test_build_options_omits_fleet_memory_when_disabled(self, monkeypatch):
+        from lib.config import load_config
+        from agents.daily_driver import build_options
+        cfg = load_config()
+        # Default: fleet_memory.enabled=false in config.toml
+        opts = build_options(cfg, mode="morning")
+        assert "fleet-memory" not in opts.mcp_servers
+        # None of the six memory tool names should appear when disabled.
+        assert not any("fleet-memory" in t for t in opts.allowed_tools)

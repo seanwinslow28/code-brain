@@ -27,6 +27,8 @@ prefix is mandatory.)
 
 **Post-fix (Workstream B complete, 2026-05-12): 7/10 (70%).** vs-015, vs-016, vs-017, vs-018, vs-019, vs-021 all flipped green via targeted patches to `agents-sdk/agents/vault_synthesizer.py`, `agents-sdk/lib/pushover.py`, and `agents-sdk/agents/daily_driver.py`. Three cases remain skipped with explicit `skip_reason` fields in [`cases.yaml`](cases.yaml):
 
+**Phase 1 fleet-memory addendum (2026-05-27): 4 cases added (vs-022 to vs-025) covering memory-preamble injection and lesson-write gating. Pass-rate target after Task 11 ships: 11/14 = 79% (the three skipped cases vs-012/013/014 remain deferred).**
+
 - **vs-012, vs-013** — `pass_criteria` are English prose, not Python expressions; the runner has no concept-body reader path; vs-013 also needs an `age_distribution` fixture and a `cluster_link_ages_days` field on `SynthesisResult`. All three are post-Workstream-B follow-ups.
 - **vs-014** — requires a live (or richly-mocked) LLM caller that returns a well-formed concept dict with >= 2 wikilinks; offline mocks can't faithfully test this output-side regression. Deferred to Workstream C live runs.
 

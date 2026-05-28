@@ -91,6 +91,35 @@ Manifests under `vault/health/tier-c-soak/` stay (vault-owned, harmless historic
 - `c3a2a10` chore(routing): clean up Task A/B follow-ups — align macbook_pro models list, drop code_review, fix e2e mock
 - `283649f` feat(routing): tier-c soak harness — gemma4_26b-32k @ Alienware Pattern E pilot
 
+## [4.1.5] — 2026-05-27
+
+**Repaired stale venv shebangs across `agents-sdk/.venv/bin/`** — entry-point scripts (`pip`, `pytest`, `playwright`, and 34 others) had hardcoded shebangs pointing at the abandoned path `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/agents-sdk/.venv/bin/python3.13`. The path dates back to when the repo was at `claude-code-superuser-pack`; the rename to `code-brain` broke every entry-point script but left the `python`/`python3`/`python3.13` symlinks working (they resolve to `/opt/homebrew/opt/python@3.13/bin/python3.13` directly, not via the broken absolute path). Result: `.venv/bin/python3 agents/foo.py` invocations kept working (which is why launchd agents survived), but `.venv/bin/pip ...` and `.venv/bin/pytest ...` direct calls all failed with `bad interpreter: ... no such file or directory`. Fixed via one-shot `sed` substitution across all 37 affected files; no package state changed, only the script shebangs. Verified by running `.venv/bin/pytest tests/test_config.py` (8 passed in 0.03s) and `.venv/bin/pip --version` (clean output).
+
+### Why this matters for future agents
+
+- **The fleet-memory Phase 1 plan at [`agents-sdk/docs/plans/2026-05-27-fleet-memory-phase-1-plan.md`](agents-sdk/docs/plans/2026-05-27-fleet-memory-phase-1-plan.md) assumes `.venv/bin/pytest` and `.venv/bin/pip` work as written** (29 direct calls across Task -1 and Tasks 1–12). If you encounter `bad interpreter` errors on a future repo rename or fresh `git clone`, run the same one-shot fix:
+
+  ```bash
+  find /Users/seanwinslow/Code-Brain/code-brain/agents-sdk/.venv/bin -maxdepth 1 -type f \
+      -exec grep -l "OLD_PATH_HERE" {} \; \
+    | xargs sed -i '' 's|OLD_PATH_HERE|/Users/seanwinslow/Code-Brain/code-brain|g'
+  ```
+
+- **`.venv/bin/python -m pip` / `.venv/bin/python -m pytest` are always-working fallbacks** if the entry-point scripts are broken again. Use those if you're debugging this issue mid-task and don't want to commit to a `sed` fix immediately.
+
+- **The launchd plists were not affected.** They invoke `.venv/bin/python3 ...` (the symlink resolves correctly) rather than entry-point scripts. The fleet kept running fine despite the broken shebangs; the issue only surfaces when something tries to execute `.venv/bin/pip` or `.venv/bin/pytest` directly.
+
+- **No CHANGELOG entry was generated when the repo was renamed.** That's the root cause of this debt — the rename happened without auditing dependent entry points. If you rename the repo again, audit `.venv/bin/*` for stale shebangs as part of the rename PR.
+
+### Detection
+
+A `head -1` of any affected entry-point script shows the bad path:
+
+```bash
+head -1 /Users/seanwinslow/Code-Brain/code-brain/agents-sdk/.venv/bin/pip
+# If this returns a path containing "claude-code-superuser-pack" or any non-current repo name, the venv needs the sed fix above.
+```
+
 ## [4.1.4] — 2026-05-24
 
 **vault_critic Round-3 enrichment becomes the default for every run** — both the nightly 03:30 launchd path and all manual `--target` runs auto-load the [vault-critic-standing-context.md](agents-sdk/prompts/vault-critic-standing-context.md) "About Sean" preamble plus the three project files listed in `[agents.vault_critic].default_context_files` in [config.toml](agents-sdk/config.toml). Validated 2026-05-24 across three rounds of A/B/C critique on the same 4 hand-picked targets plus a fresh 4-target batch — 12 articles total, 1 CLI failure across all 12 (Anti-Gravity rate-cap on a single Round-1 article), output quality jumping from generic "consider exploring X" recommendations to project-aware critique that names Sean's actual file paths (`agents-sdk/lib/vault_io.py`, `hybrid_router.py`, `evals/vault-synthesizer/`), agents (`Vault Synthesizer`, `meta-agent`, `Deep Researcher`), lived incidents (Qwen3-14B LDR citation collapse, 8:31 vs 8:45 daily-driver/meta-agent ordering quirk), Substack voice modes (Thompson/gonzo, Sean-default IC), and concrete artifact specs (`fencing_token` implementation, `chaos_monkey.py`, `personal-agent-leverage-map.md`).
