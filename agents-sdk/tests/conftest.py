@@ -195,7 +195,21 @@ def tmp_config(tmp_path: Path, tmp_vault: Path, tmp_skills: Path) -> Path:
         f'\n'
         f'[logging]\n'
         f'log_dir = "{tmp_vault / "90_system" / "agent-logs"}"\n'
-        f'log_level = "DEBUG"\n',
+        f'log_level = "DEBUG"\n'
+        f'\n'
+        # Conservative fleet-memory block modeling the documented Phase-1
+        # defaults (opt-in only). Isolates fleet-memory tests from the live
+        # config.toml flag, which can be toggled for production exercises.
+        f'[fleet_memory]\n'
+        f'enabled = false\n'
+        f'mount_subpath = "90_system/fleet-memory"\n'
+        f'manifest_filename = "MEMORY_INDEX.md"\n'
+        f'\n'
+        f'[fleet_memory.per_agent.vault_synthesizer]\n'
+        f'enabled = false\n'
+        f'\n'
+        f'[fleet_memory.per_agent.daily_driver]\n'
+        f'enabled = false\n',
         encoding="utf-8",
     )
 
