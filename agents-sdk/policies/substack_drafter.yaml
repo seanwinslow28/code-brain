@@ -1,0 +1,104 @@
+# Substack-Drafter judge policy v1.0.0
+#
+# Gates the Substack-Drafter agent (agents-sdk/agents/substack_drafter.py).
+# Loaded by lib/judge/policy.load_policy("substack_drafter") and consumed by
+# lib/judge/judge.evaluate() at runtime.
+#
+# Four rules, evaluated in declared order. First match wins. Each rule's id
+# appears in the JSONL ledger row's authorization_basis field so a
+# recruiter / auditor can grep the ledger and find every decision a single
+# rule produced.
+#
+# Why these four specifically — each rule maps to a real failure mode Sean
+# has either lived through or designed defense against:
+#
+#   - rule_a (LDR fabrication) — the v3.26.3 grounding-collapse incident.
+#     Local LDR confidently fabricated "PureMCPClient" + fake learn.microsoft.com
+#     URLs. The Substack-Drafter agent runs on the same Qwen3-14B / local-model
+#     class and is susceptible to the same fabrication mode. ESCALATE makes
+#     this a quarantine-worthy event Sean reviews by hand.
+#
+#   - rule_b (Block attribution) — CIIA Section 2.3 was real. Anything Sean
+#     publishes that touches his prior employer needs an explicit citation
+#     marker. The judge REVISEs (not BLOCKs) so the actor can retry with the
+#     marker added — preserving cadence while enforcing the rule.
+#
+#   - rule_c (voice drift) — Substack-Drafter spec rotates voice on a 5-week
+#     cycle (Sedaris / Kerouac / Thompson / Vonnegut / Sean Mode) from
+#     .claude/skills/writing-voice-modes/. If the drafter ignores its slot,
+#     the brand voice fragments. REVISE with the correct voice in feedback.
+#
+#   - rule_d (publish verb) — Tier-A truth: "agents draft / Sean sends." If
+#     a draft contains a publish verb at the top level (POST, PUBLISH, SHIP
+#     IT) as if the agent itself were the publisher, BLOCK hard. This is the
+#     boundary made executable, not "agents draft except sometimes."
+
+name: "Substack-Drafter Policy v1"
+agent: "substack_drafter"
+version: "1.0.0"
+
+# Rule precedence: first match wins. Order is intentional:
+#   1. Quarantine-worthy events (ESCALATE) — surface to Sean first.
+#   2. Cadence-preserving fixes (REVISE) — the actor can retry.
+#   3. Hard-stop (BLOCK) — boundary violations that get logged but not retried.
+rules:
+  - id: "rule_a_unverifiable_claim_named_person"
+    condition: >
+      The draft attributes a specific quote, statistic, position, or action
+      to a named real person without an inline citation (URL, vault path,
+      or [citation needed] marker) backing it. Fabricated quotes are the
+      LDR grounding-collapse failure mode. Names without backing evidence
+      are quarantine-worthy because Sean must verify by hand before they
+      can ship under his byline.
+    outcome: "ESCALATE"
+    quarantine_reason: >
+      Draft contains an unverifiable claim attributed to a named person.
+      Sean must check the source before this draft can advance. See the
+      v3.26.3 LDR routing rule for the canonical fabrication pattern.
+
+  - id: "rule_b_block_attribution_requires_citation"
+    condition: >
+      The draft makes a factual claim attributable to The Block (Sean's
+      prior employer) — products, internal metrics, named individuals,
+      strategic decisions — without an inline citation marker. CIIA
+      Section 2.3 obligations require explicit citation on any
+      Block-sourced fact published under Sean's byline.
+    outcome: "REVISE"
+    feedback_template: >
+      Add a [citation needed] marker after the Block-attributable claim,
+      OR rewrite the sentence to avoid the attribution if you can't source
+      it. See vault Task 0 (Block IP scrub) for the canonical pattern.
+
+  - id: "rule_c_voice_mode_drift"
+    condition: >
+      The draft's prose register doesn't match the voice mode assigned for
+      this week's slot in the 5-week rotation
+      (Sedaris / Kerouac / Thompson / Vonnegut / Sean Mode). The assigned
+      voice for THIS run is provided in the ActionProposal's
+      authorization_basis field; check against the rendered draft.
+    outcome: "REVISE"
+    feedback_template: >
+      Voice mode drifted from the assigned slot. Re-read
+      .claude/skills/writing-voice-modes/SKILL.md for the canonical voice
+      definitions and rewrite to match the slot named in
+      authorization_basis.
+
+  - id: "rule_d_publish_verb_at_top_level"
+    condition: >
+      The draft body contains a top-level publish verb directed at itself
+      — literal occurrences of "POST", "PUBLISH", "SHIP IT", "I'm going to
+      publish this", or equivalent — treating the agent as the publishing
+      actor. The Tier-A boundary is "agents draft / Sean sends" — the
+      agent never publishes. Top-level here means in the draft body, not
+      inside a quoted block, code fence, or example string.
+    outcome: "BLOCK"
+    # BLOCK rules have no feedback_template (the actor doesn't retry)
+    # and no quarantine_reason (this is a hard boundary, not a "Sean
+    # check this" event). The ledger row records the BLOCK + the rule id
+    # for audit; no further action.
+
+# Default outcome when no rule matches. ALLOW preserves cadence — the judge
+# is defense-in-depth, not the only review surface. Sean's manual publish
+# gate remains the Tier-A canonical control. ALLOW here means "the judge
+# found nothing to flag; proceed to Sean's review."
+fallback_outcome: "ALLOW"

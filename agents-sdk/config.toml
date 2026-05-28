@@ -351,6 +351,14 @@ job_scoring = { model = "qwen3.6_35b-a3b-32k", machine = "macbook_pro" }
 deep_research = { model = "qwen3-14b-research", machine = "mac_mini" }  # Phase 5 (2026-04-26) → Mac Mini migration v3.23.0 (2026-05-02): routed via LDR HTTP at :5050, custom Modelfile tag with /no_think baked into TEMPLATE
 sprite_vision_qa = { model = "Qwen3-VL-7B", machine = "alienware" }
 comfyui_orchestration = { model = "none", machine = "alienware" }
+# Judge layer (Council Gap-Fill 1 / Task 12, 2026-05-28): control-plane
+# interceptor evaluates ActionProposals against declarative YAML policies.
+# gemma4:e4b on Mac Mini Ollama ($0/decision) — same model + machine as
+# inbox_triage so we re-use the already-loaded weights and avoid a cold
+# load on the first call. Local-only; the routing-level fallback_to_api
+# kicks in only if Mac Mini is unreachable (explicit choice — a real
+# judge run on the paid path beats no judge).
+judge_layer = { model = "gemma4:e4b", machine = "mac_mini" }
 
 # ─── Notifications ───────────────────────────────────────────────────────────
 
