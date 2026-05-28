@@ -73,11 +73,15 @@ class TestJobFeedConfig:
         assert paths.get("manifest_dir") == "vault/health"
 
 
-def test_fleet_memory_config_loads_with_defaults():
+def test_fleet_memory_config_loads_with_defaults(tmp_config: Path):
     """[fleet_memory] block is parsed onto a typed Config.fleet_memory field.
-    Defaults are conservative — opt-in per-agent."""
+    Defaults are conservative — opt-in per-agent.
+
+    Loads an isolated config (tmp_config) rather than the live config.toml so
+    this asserts the parsing contract against a controlled value, not an
+    operational flag that may be toggled on for a production exercise."""
     from lib.config import load_config
-    cfg = load_config()
+    cfg = load_config(config_path=tmp_config)
     assert hasattr(cfg, "fleet_memory"), "Config must expose a typed fleet_memory dict"
     fm = cfg.fleet_memory
     assert fm.get("enabled") is False, "Phase 1 default must be disabled — opt-in only"
