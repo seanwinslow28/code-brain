@@ -2,33 +2,33 @@
 title: "Agent Health"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/fleet-state.md
+  - knowledge/expansions/agent-health.md
 tags: [auto-generated, phase-6]
-created: 2026-05-27
-updated: 2026-05-27
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Definition
 
-Agent health is a metric of temporal freshness and execution success, where 'stale' indicates a failure to complete a scheduled cycle within the expected window, regardless of whether the agent is technically enabled. A healthy agent produces output that updates the state of the vault, while a stale agent represents a broken dependency chain where downstream processes cannot rely on its data. This distinction is crucial because it separates the *potential* for work (enabled status) from the *actualization* of work (freshness of output).
+Agent Health is a reliability contract that shifts the failure state from simple liveness (did the process run?) to functional utility (did the output serve the consumer?). It requires defining specific Service Level Objectives (SLOs) such as freshness windows, successful completion rates, and downstream consumer impact, rather than relying on binary status checks. This transforms the concept from a monitoring dashboard into a portfolio-grade reliability system where agents have error budgets and alert policies tied to their actual value delivery.
 
 ## Context
 
-Sean monitors agent health to ensure his daily routine and knowledge base remain current. The difference between a 'healthy' daily-driver and a 'stale' synthesizer highlights the fragility of automated workflows when they depend on specific conditions (like the MBP being awake) that are not guaranteed.
+Sean is currently building a job-hunt infrastructure that relies on automated agents. By redefining health as an SLO contract, he can demonstrate to hiring managers that he understands distributed systems reliability, moving beyond simple cron-job automation to complex fleet management.
 
 ## Evidence
 
-> vault-synthesizer (2:30 AM daily, MBP (when awake), $0.00/run) - Status: stale
+> Right now the concept treats “stale” as the main failure state; that is closer to a liveness probe than health.
 
-> daily-driver morning (8:45 AM daily, Claude API, ~$0.40/run) - Status: healthy
+> Define agent health as a small SLO contract: freshness, successful completion, output usefulness, dependency readiness, and downstream consumer impact.
 
-> deep-researcher (2:45 AM daily, Mac Mini, $0.00/run) - Status: stale
+> This lets Sean sound like he operates a reliability system, not just a cron dashboard.
 
 ## Examples
 
-- The daily-driver morning agent runs successfully and creates a daily note.
-- The vault-indexer runs successfully but is considered stale because it is 30.7 hours old.
+- Defining an agent's health by its 'downstream consumer impact' rather than its exit code.
+- Creating an 'Agent Fleet SLO one-pager' that specifies error budgets for each agent.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Daily Routine Automation]] [[Infrastructure Status]]
+[[Agent Health Monitoring]] [[Agent Ops / FDP Backup Track]] [[Infrastructure Status]]

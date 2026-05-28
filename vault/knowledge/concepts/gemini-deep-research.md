@@ -2,31 +2,37 @@
 title: "Gemini Deep Research"
 type: concept
 sources:
-  - 00_inbox/research-queue.md
+  - knowledge/expansions/gemini-deep-research.md
 tags: [auto-generated, phase-6]
-created: 2026-05-27
-updated: 2026-05-27
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Definition
 
-Gemini Deep Research is a cloud-based agent tier that handles complex, multi-step research tasks that exceed the capabilities of local tools. It is characterized by its ability to navigate complex information landscapes and produce detailed, cited reports for compound topics. This tier serves as the fallback and primary engine for high-complexity queries that would otherwise stall or fail in local environments. It absorbs the workload that local agents cannot structurally support.
+Gemini Deep Research functions as a compound question-to-synthesis engine that generates cited reports, but it lacks the epistemic scaffolding to distinguish between evidence collection and adversarial disconfirmation. Without a tasking doctrine, the system treats all complex queries as identical data retrieval tasks, ignoring the psychological risks of confirmation bias inherent in automated reasoning. This creates a dependency where the output quality is determined by the user's ability to manually impose structure, rather than the agent's ability to self-regulate its reasoning mode. The mechanism is essentially a high-variance generator that requires external constraints to prevent epistemic drift.
 
 ## Context
 
-Sean uses Gemini DR for heavy compound topics and due-diligence matrices. It is essential for maintaining research quality when local tools hit their limits. This tier represents a shift from local automation to cloud-based reliability for complex tasks.
+Sean is building an autonomous agent fleet where Gemini Deep Research is a core component. If the agent cannot distinguish between a 'market map' and a 'red-team contradiction' run, it will produce misleading artifacts for high-stakes decisions like job hunting or product strategy. The current integration plan treats it as a generic cloud tier, which is insufficient for the 'Deep Research Queue' or 'Research Agents' workflows.
 
 ## Evidence
 
-> Heavy compound topics (≥3 sub-questions, multi-target evaluations like compare A/B/C on dimensions 1–4, due-diligence matrices) belong on Gemini DR / DR Max
+> The current concept treats Gemini DR as a report generator: compound question in, cited synthesis out.
 
-> The Gemini Deep Research Agent autonomously plans, executes, and synthesizes multi-step research tasks.
+> Compound research does not just need more horsepower; it needs anti-bias structure.
+
+> Before Gemini DR runs, classify whether the task requires evidence collection, hypothesis competition, adversarial disconfirmation, or estimate calibration.
 
 ## Examples
 
-- Handling multi-target evaluations
-- Absorbing compound topics that stall LDR
+- Deep Research as decision surface
+- ACH run
+- due diligence run
+- market map run
+- canonical reference excavation
+- red-team contradiction run
 
 ## Related Concepts
 
-[[System Constraints]] [[Local Deep Research (LDR)]] [[Deep Research Queue]]
+[[Research Agents]] [[Deep Research Queue]] [[Gemini Deep Research]]

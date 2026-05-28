@@ -515,20 +515,20 @@ mp3_quality = 2                          # ffmpeg libmp3lame -qscale:a 2 (~190 k
 # See docs/plans/2026-05-27-fleet-memory-phase-1-plan.md.
 
 [fleet_memory]
-enabled = false                                # Phase 1 default: opt-in per-agent
+enabled = true                                 # Phase 1 enabled 2026-05-28 for production exercise
 mount_subpath = "90_system/fleet-memory"       # resolved relative to vault_root
 manifest_filename = "MEMORY_INDEX.md"
 manifest_max_chars = 8000                      # truncate before injecting into prompts
 beta_header = "context-management-2025-06-27"
 
 [fleet_memory.per_agent.vault_synthesizer]
-enabled = false                                # opt-in toggle for smoke testing
+enabled = true                                 # Phase 1 enabled 2026-05-28
 agent_id = "vault_synthesizer"
 inject_on_run = true                           # read MEMORY_INDEX + own namespace at start
 write_lessons_on = ["ok"]                      # only write on clean runs; never partial/error
 
 [fleet_memory.per_agent.daily_driver]
-enabled = false                                # opt-in toggle for smoke testing
+enabled = true                                 # Phase 1 enabled 2026-05-28
 agent_id = "daily_driver"
 inject_on_run = true                           # MCP server is mounted; preamble cues the agent to call view
 write_lessons_on = ["success"]

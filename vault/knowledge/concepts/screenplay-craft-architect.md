@@ -2,31 +2,35 @@
 title: "Screenplay Craft Architect"
 type: concept
 sources:
-  - 20_projects/prj-code-brain/Context Files For Creative Skill Building/screenplay-craft-research-pipeline.md
+  - 40_knowledge/references/screenwriting-skill-building/The Screenplay Craft System for Animated Comedy Shorts.md
 tags: [auto-generated, phase-6]
-created: 2026-05-22
-updated: 2026-05-22
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Definition
 
-A modular system design pattern that integrates extracted screenplay techniques from multiple filmmakers into a structured, transferable framework. It operates via a producer/consumer mechanism where each filmmaker's techniques are synthesized as standalone modules, then recombined based on Sean's writing voice profile. The system requires explicit calibration to ensure the modular components align with Sean’s signature moves like hard cuts and humor-as-trojan-horse. This design ensures scalability while preserving the nuance of individual techniques.
+A modular engineering framework that treats narrative construction as a system of interchangeable functional modules rather than a linear artistic flow. This architecture maps specific psychological states and communicative failures to precise technical tools, such as diagonal communication or lexical fingerprinting, allowing for the deliberate engineering of comedic and emotional beats. The system enforces constraints by requiring characters to operate within mutually exclusive reference pools, ensuring that conflict arises from structural incompatibility rather than arbitrary plot devices. By defining authority through linguistic markers like pronouns and sentence-final particles, the framework reduces exposition requirements and accelerates character establishment.
 
 ## Context
 
-This concept is crucial for Sean to systematically extract and recombine screenplay techniques from 6 filmmakers, ensuring they are adaptable to his style for 2D animated comedy shorts. It enables precise calibration of techniques like dialogue mechanics or tonal pivots, which would be difficult to manage without modular abstraction.
+Sean is building a specialized creative pipeline for 2D animated comedy shorts, where the 3-5 minute constraint demands high-density narrative engineering. This concept provides the structural logic for his screenwriting, moving beyond intuition to a repeatable, stress-tested toolkit that aligns with his broader interest in agentic systems and modular design. Understanding this architecture allows him to apply similar modular thinking to his job-hunt artifacts and creative studio workflows.
 
 ## Evidence
 
-> Cross-Synthesis → Screenplay Craft Architect (designing a modular system from extracted techniques)
+> This framework operates as a modular engineering toolkit, organized by narrative function and stress-tested for the constraints of short-form animation.
 
-> How extracted techniques enhance the writer's existing signature moves (hard cut/deflation, humor-as-trojan-horse, rule of three with pivot, self-deprecation as structure)
+> Characters should use "Diagonal Communication"—ignoring the main point to fixate on a minor, irrelevant detail.
+
+> Assign characters mutually exclusive reference pools (e.g., corporate jargon vs. food obsessions) and compress 3-4 comedic payloads into a single line of dialogue.
+
+> Define a character's authority or submissiveness instantly through their pronouns and sentence-final particles, reducing the need for exposition.
 
 ## Examples
 
-- Analyzing Charlie Kaufman's dialogue mechanics for subtext and character distinctiveness, then embedding those into a modular 'dialogue module' that can be toggled on or off.
-- Recombining Taika Waititi’s tonal pivots with Bo Burnham's humor-as-trojan-horse structure to create a new technique for 3-5 minute shorts.
+- Character A (using corporate logistics) is trying to defuse a literal ticking bomb, while Character B (using dating-app jargon) is fixated on a text message.
+- A: The red wire dictates the payload synergy—hand me the wire cutters! B: He left me on read. That’s classic ghosting syntax, right?
 
 ## Related Concepts
 
-[[Writing-voice-modes]] [[Screenplay Mechanics doc]]
+[[Writing-voice-modes]] [[Creative Studio Workflows]]

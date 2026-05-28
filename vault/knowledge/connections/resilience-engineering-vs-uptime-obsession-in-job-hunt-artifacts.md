@@ -1,34 +1,34 @@
 ---
-title: "Resilience Engineering vs. Uptime Obsession in Job Hunt Artifacts"
+title: "Resilience Engineering vs. Uptime Obsession in Job-Hunt Artifacts"
 type: connection
 connects:
   - Infrastructure Status and Agent Failure
-  - Agentic Engineering Signal
-  - Portfolio Projects for Interview Prep
-created: 2026-05-27
-updated: 2026-05-27
+  - Automation Reliability
+  - Agent Health Monitoring
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the traditional job-hunt metric of 'uptime' (availability) and the engineering reality of 'resilience' (capacity to degrade gracefully). Sean's current infrastructure narrative risks being perceived as a hobbyist script-collection if it focuses on keeping machines online. By adopting the resilience engineering frame, he transforms a potential weakness (hardware instability) into a sophisticated design pattern (graceful degradation), directly addressing the 'Agentic Engineering Signal' required for 2026 roles.
+There is a fundamental tension between the traditional job-hunt metric of 'uptime' (availability) and the engineering reality of 'resilience' (capacity to degrade gracefully). Sean's current infrastructure status concept reveals that his system is not broken when a box is offline, but when it loses the ability to operate in a degraded state. This distinction is critical for interview differentiation because it signals a shift from 'script maintenance' to 'agentic-infra operations,' which is a higher-value signal for senior engineering roles.
 
 ## Threads
 
 ### [[Infrastructure Status and Agent Failure]]
 
-> Resilient systems are not systems that never fail; they are systems that monitor, adapt, and recover from failures while maintaining core functions.
+> Complex systems are always operating in degraded mode; accidents emerge from latent conditions, tight coupling, and exhausted redundancy, not one broken box.
 
-### [[Agentic Engineering Signal]]
+### [[Automation Reliability]]
 
-> Sean could ship a portfolio artifact showing he thinks like an agentic-infra operator, not just someone with scripts that sometimes fail.
+> The synthesizer must be reliable to maintain the integrity of the knowledge base, but reliability is not just about uptime; it is about the ability to handle failures gracefully.
 
-### [[Portfolio Projects for Interview Prep]]
+### [[Agent Health Monitoring]]
 
-> This unlocks a proper Agent Fleet Observability Dashboard spec: desired state vs actual state, reconciliation lag, degraded-service routing.
+> The current concept collapses all failures into “agent health,” which hides whether the problem is orchestration, model quality, retrieval, or user-facing value.
 
 ## Implications
 
-- Sean should reframe his portfolio project descriptions to highlight 'degraded mode operation' rather than '99.9% uptime' to demonstrate senior-level systems thinking.
-- The interview narrative must shift from 'I built a reliable system' to 'I designed a system that fails safely and recovers autonomously.'
-- Technical interviews should leverage the 'control-plane vs data-plane' distinction to discuss scalability and fault isolation in distributed systems.
+- Sean should frame his job-hunt artifacts around 'resilience engineering' rather than 'uptime' to signal senior-level thinking.
+- His portfolio projects should demonstrate how his system degrades gracefully rather than just how it stays online.
+- Interview answers should focus on 'latent conditions' and 'tight coupling' as the real sources of failure, not single-point hardware breaks.

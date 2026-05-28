@@ -2,31 +2,31 @@
 title: "Vault as Agent Infrastructure"
 type: concept
 sources:
-  - knowledge/concepts/vault-as-agent-infrastructure.md
+  - 20_projects/research/2026-05-26-topic-27-long-term-memory-backends-gemini-dr-manual.md
 tags: [auto-generated, phase-6]
-created: 2026-05-23
-updated: 2026-05-23
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Definition
 
-A distributed agent network where Sean's knowledge vault is structured with autonomous agents like synthesizers, indexes, and evaluators. Each agent operates semi-independently but feeds into the next in a coordinated workflow, ensuring real-time knowledge evolution and synthesis. The mechanism relies on a producer/consumer pattern with dependencies between agents, such that one agent's output becomes the input for another, forming a semi-autonomous knowledge pipeline.
+Vault as Agent Infrastructure is the pattern where a static knowledge base, such as an Obsidian vault, serves as the foundational state for dynamic agent operations. This infrastructure is not merely a storage layer but an active component of the agent's reasoning process, requiring robust retrieval mechanisms to bridge the gap between static facts and temporal evolution. The integrity of this infrastructure is compromised when memory stores remain siloed, preventing the propagation of learned boundaries across the fleet.
 
 ## Context
 
-This system is essential to Sean's job-hunting strategy, enabling him to manage and present his knowledge in real time. It allows for adaptability as new insights are integrated, ensuring that the vault is always current and actionable during interviews or strategic planning.
+Sean's Obsidian vault contains approximately 1,500 markdown notes and 700 highly interlinked concept notes. The vault's utility as agent infrastructure is currently limited by reactive, ad-hoc RAG pipelines that lack temporal reasoning capabilities.
 
 ## Evidence
 
-> Most people see Obsidian as content. I treat my vault as agent infrastructure.
+> The foundational knowledge base is an Obsidian vault utilizing the PARA (Projects, Areas, Resources, Archives) methodology, containing approximately 1,500 markdown notes and 700 highly interlinked concept notes.
 
-> Nate Jones published five structural tests for what counts as agent infrastructure in 2026. My vault passes three of them clearly, loses two to Linear, and the two losses are exactly what `vault-knowledge-mcp` (Task 10) and the Judge Layer (Task 12) ship next.
+> This RAG implementation suffers from a lack of temporal reasoning; it can retrieve static facts but cannot discern the chronological evolution of concepts or the success/failure rates of previous agent actions.
 
 ## Examples
 
-- The vault includes a SCORECARD.md file that acts as a system of record for knowledge edges and their confidence levels.
-- The vault-synthesizer is engineered to handle multiple tasks including querying, synthesizing knowledge, and validating against internal consistency.
+- Obsidian vault utilizing the PARA methodology
+- Reactive, ad-hoc Retrieval-Augmented Generation (RAG) pipelines querying the Obsidian vault
 
 ## Related Concepts
 
-[[Vault Knowledge - MCP Research]] [[Agent Health Monitoring]]
+[[Infrastructure Status]] [[Agent Fleet Observability Dashboard]]
