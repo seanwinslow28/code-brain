@@ -2,30 +2,31 @@
 title: "Autonomous Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/autonomous-agent-fleets.md
+  - 20_projects/research/2026-05-27-topic-27-synthesis-long-term-memory-backends.md
 tags: [auto-generated, phase-6]
-created: 2026-05-23
-updated: 2026-05-23
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Definition
 
-A distributed architecture where multiple autonomous agents operate in coordination, each with discrete responsibilities but interdependent via shared state or output. The system's reliability depends on agents' ability to read and write consistent, persistent context — such as daily notes or task states. Failures in one agent's ability to read or write context can propagate silently, causing downstream agents to act on stale data without awareness of the error.
+A distributed operational model where multiple specialized agents function as semi-independent nodes within a shared infrastructure, relying on explicit state management rather than implicit shared memory. This architecture creates a structural dependency where the utility of the fleet is strictly bounded by the latency and accuracy of its inter-agent communication protocols. When the underlying memory backend fails to propagate state changes, the fleet effectively fragments into isolated silos, rendering the collective intelligence of the group mathematically null despite the individual competence of each node.
 
 ## Context
 
-Sean's workflow depends on a network of autonomous agents, including launchd SDK agents and Claude Code subagents, which operate in coordination but are vulnerable to propagation of errors when one agent fails silently without updating shared context.
+Sean is managing a 27-agent fleet where the current three-store baseline is architecturally insufficient because lessons learned by one agent cannot propagate to the other 26. This fragmentation prevents the fleet from achieving the compounding intelligence required for complex, multi-step research tasks.
 
 ## Evidence
 
-> The core philosophy is a four-tool harness (Read, Write, Edit, Bash) with a first-class extension system that allows the agent to extend itself by writing and hot-reloading TypeScript modules.
+> Both reports identify the structural failure mode: lessons learned by one agent cannot propagate to the other 26.
 
-> The npm package was migrated from `@mariozechner/pi-coding-agent` to `@earendil-works/pi-coding-agent` in May 2026. Version `0.73.1` was the last release under the old scope; `0.74.0+` publishes under `@earendil-works`.
+> Perplexity cites Claude Code issue #4588 (Jul 2025) explicitly documenting that subagents are stateless and 'domain expertise'.
 
 ## Examples
 
-- A Pi agent may read a daily note to determine the user’s current task and then generate code. If that agent fails silently and does not update the note, a downstream agent may execute outdated instructions without Sean's awareness.
+- Adopting Anthropic's native memory_20250818 tool mounted at a shared /memories/fleet/ directory to enable cross-agent state propagation.
+- Rejecting Mem0 due to documented production failures where contradictory facts accumulate instead of superseding.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Daily Note Generators]]
+[[Infrastructure Status]] [[Agent Health Monitoring]]

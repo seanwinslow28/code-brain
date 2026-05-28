@@ -5,8 +5,8 @@ connects:
   - Two Audiences
   - Vibe-Coding Interview Format
   - Deep Work
-created: 2026-05-27
-updated: 2026-05-27
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Synthesis
