@@ -2,31 +2,30 @@
 title: "Deep Work"
 type: concept
 sources:
-  - 00_inbox/gemini-research-queue.md
+  - knowledge/connections/the-visibility-paradox-in-ai-competence.md
 tags: [auto-generated, phase-6]
-created: 2026-05-21
-updated: 2026-05-21
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Definition
 
-A focused mode of working that minimizes distractions and maximizes productivity, often through the automation of routine tasks.
+A good prompt disappears into one person’s chat history. A clever correction stays inside one employee’s browser tab. This describes the phenomenon where high-value cognitive work becomes invisible because it is optimized for the individual's immediate flow rather than organizational visibility. The mechanism creates a 'vanishing' effect where the most effective work is the least observable, making it difficult to demonstrate competence to external evaluators who cannot see the private context.
 
 ## Context
 
-This concept supports Sean's need to maintain high productivity and focus, especially as he juggling multiple domains like job hunting, creative work, and knowledge management.
+Sean must balance the efficiency of private AI work with the pedagogical value of public AI work. When he optimizes for pure efficiency, he creates an 'Accountability Gap' where his competence is invisible to evaluators. He must find a way to maintain deep work while exposing the judgment layer.
 
 ## Evidence
 
-> Implementation Architecture
+> A good prompt disappears into one person’s chat history. A clever correction stays inside one employee’s browser tab.
 
-> Automation Reliability
+> There is a fundamental tension between the efficiency of private AI work and the pedagogical value of public AI work.
 
 ## Examples
 
-- Daily-Drive Agent
-- Automation Routines
+- The 'narrate before you prompt' habit must be maintained during live interviews not just for clarity, but as a defensive mechanism against the 'vanishing' of his best work into private tabs.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Automation and Daily Drive Agent Interdependence]]
+[[Two Audiences]] [[Vibe-Coding Interview Format]]

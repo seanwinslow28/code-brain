@@ -2,33 +2,36 @@
 title: "Writing-voice-modes"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/experiments/voice-calibration/2026-05-14-intent-engineering-mcp.md
+  - 40_knowledge/references/screenwriting-skill-building/voice-modes-integration-and-upgrade-plan.md
 tags: [auto-generated, phase-6]
-created: 2026-05-23
-updated: 2026-05-23
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Definition
 
-A modular constraint framework that anchors Sean's writing to predefined authorial voices, functioning as a tonal calibration system. It operates through implicit rules that enforce stylistic consistency, enabling the model to generate content with specific tonal and structural characteristics. The system is designed to be cross-mode, allowing signature moves like 'Hard Cut / Deflation' or 'Sensory Before Numbers' to be applied instinctively across different writing modes.
+A hierarchical constraint system where voice modes operate strictly within the boundaries of format and clarity rules, rather than overriding them. This mechanism resolves conflicts by compressing or dialing down expressive elements to fit structural limits, ensuring that stylistic intent never breaks platform or audience requirements. The only exception is personal content where voice leads and format follows, establishing a dual-mode architecture for professional versus personal output.
 
 ## Context
 
-This system is crucial for Sean's creative workflows, ensuring tonal consistency across personal blogs, professional branding, and job-hunting content. It enables him to maintain a unified voice while adapting to different formats or contexts, which strengthens his narrative control and audience connection.
+Sean's screenwriting background provides the 'cut-to' and 'hard juxtaposition' instincts, but this skill upgrade plan reveals a gap: he lacks the specific craft mechanics to calibrate his voice across different professional contexts like API docs versus personal essays. Understanding this hierarchy prevents him from applying 'Gonzo' energy to technical documentation where it would fail.
 
 ## Evidence
 
-> The natural voice. Load this when no specific mode is requested.
+> Voice modes operate WITHIN format constraints, not over them.
 
-> Build epic register, land mundane/absurd in final clause
+> If creative-writing says a Twitter thread is 5-10 tweets at 280 chars max, Gonzo mode doesn't get to blow past that.
 
-> Sensory Before Numbers — Smells, sounds, images FIRST. Numbers confirm and anchor.
+> If technical-writing says front-load the conclusion, Beat Flow mode doesn't bury it under a sensory cascade.
+
+> The one exception: Personal essays and blog posts on Sean's own site. Here, voice modes lead and format follows.
 
 ## Examples
 
-- Here's the deal — we'll architect the perfect system, ship it, scale it, and then we'll burn it all, throw our hands in the air, and question everything.
-- Nostrils flare, pupils dilate, sweat drips. Then: '847 errors in ninety seconds.'
+- Compressing a cold open into 12 words: 'I DEPLOYED TO PRODUCTION at 11:47 PM on a Wednesday.'
+- Dialing humor to 20-40% in API docs, keeping dry wit in examples but never in critical path commands.
+- Using one sensory image maximum in short-form formats like tweets or Slack messages.
 
 ## Related Concepts
 
-[[Creative Studio Workflows]] [[Substack-Drafter agent]]
+[[Screenplay Craft Architect]] [[Vibe-Coding Interview Format]] [[Two Audiences]]

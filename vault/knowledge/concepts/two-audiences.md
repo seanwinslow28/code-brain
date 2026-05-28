@@ -2,31 +2,34 @@
 title: "Two Audiences"
 type: concept
 sources:
-  - 40_knowledge/references/ref-nate-public-ai-work-team-learning-3-prompts.md
+  - knowledge/expansions/two-audiences.md
 tags: [auto-generated, phase-6]
-created: 2026-05-27
-updated: 2026-05-27
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Definition
 
-A structural tension where a single artifact must simultaneously satisfy the immediate functional needs of a user and the pedagogical needs of an observer. This requires the creator to maintain a dual-layer of intent: the primary layer solves the problem, while the secondary layer exposes the decision-making logic that led to the solution. The mechanism fails when the artifact is optimized solely for efficiency, as the observer loses the ability to reverse-engineer the competence demonstrated.
+The Two Audiences framework establishes a structural duality in artifact creation where the primary audience consumes the output for utility, while the secondary audience (observers, recruiters, peers) consumes the artifact to infer the creator's taste and decision-making grammar. This mechanism requires the creator to expose the 'why' behind the 'what' without bloating the artifact into a tutorial, effectively turning private agent traces into public proof of competence. The tension arises because optimizing for the primary audience often obscures the judgment signals the secondary audience needs to evaluate the creator's seniority and strategic alignment.
 
 ## Context
 
-Sean is currently in a high-stakes job hunt where his 'work' (portfolio projects, code, writing) is being evaluated by recruiters and hiring managers. He must ensure his artifacts are not just functional but also serve as evidence of his thought process, preventing the 'vanishing' of his best work into private tabs.
+Sean is currently building a portfolio and job-hunt infrastructure where his work must simultaneously function as a useful tool and a signal of his engineering/product judgment. Without this duality, his artifacts risk being either too opaque to prove his taste or too verbose to serve their primary utility, failing to convert observers into hiring managers.
 
 ## Evidence
 
-> A good prompt disappears into one person’s chat history. A clever correction stays inside one employee’s browser tab.
+> The current concept says 'make work public'; Schön adds the missing method for exposing situated judgment without bloating the artifact into a tutorial.
 
-> Private AI work helps the person at the keyboard. Public AI work helps the company learn.
+> Worked examples turn private agent traces into teachable competence without forcing readers to infer the lesson from raw logs.
+
+> Public artifacts should expose judgment patterns, not necessarily the whole operating system.
 
 ## Examples
 
-- Shopify’s River agent runs only in public, turning one engineer’s judgment into the whole team’s.
-- The act of recording the rep changed my prompting behavior in a useful direction — the 'narrate before you prompt' habit only sticks under public-witnessing pressure.
+- Sentence pattern: 'I chose X over Y because the real constraint was Z.'
+- Sentence pattern: 'The first prompt failed because __; the repair was __; the reusable rule is __.'
+- Portfolio disclosure policy
 
 ## Related Concepts
 
-[[Two Audiences]] [[Vibe-Coding Interview Format]]
+[[Vibe-Coding Interview Canon]] [[Portfolio Projects]] [[Writing-voice-modes]]

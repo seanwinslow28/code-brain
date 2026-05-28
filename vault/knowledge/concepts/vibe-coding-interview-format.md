@@ -2,31 +2,34 @@
 title: "Vibe-Coding Interview Format"
 type: concept
 sources:
-  - 40_knowledge/references/ref-nate-public-ai-work-team-learning-3-prompts.md
+  - knowledge/expansions/vibe-coding-interview-format.md
 tags: [auto-generated, phase-6]
-created: 2026-05-27
-updated: 2026-05-27
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Definition
 
-An evaluation mechanism where the candidate’s competence is assessed not through static code samples but through the real-time visibility of their interaction with AI agents. This format creates a dependency on the candidate’s ability to externalize their internal reasoning, as the interviewer observes the 'judgment' of loading context and challenging the model rather than just the final output. The tension arises because the candidate must perform their cognitive load in a way that is legible to an observer without breaking the flow of the work.
+The interview format functions as a situated human-machine-human interaction where the candidate’s competence is revealed through the repair, redirection, and reframing of a live plan in front of an observer. Rather than testing isolated AI fluency, this mechanism evaluates the candidate's ability to manage breakdowns between the initial plan, the tool's output, the immediate context, and the observed reality. The core skill shifts from prompt generation to the continuous assignment of agency: deciding whether the human, the model, the test suite, or the interviewer is currently driving the trajectory of the work.
 
 ## Context
 
-Sean is preparing for 'vibe-coding' interviews where he must demonstrate his AI fluency. He needs to bridge the gap between his private 'Deep Work' and the public 'performance' required by the interview format, ensuring his 'narrate before you prompt' habit is robust enough for scrutiny.
+This redefinition is critical for Sean because it transforms the interview from a performance of coding speed into a demonstration of agentic judgment. By anchoring the format in Lucy Suchman’s theory of situated actions, Sean can articulate a hiring rubric that distinguishes senior engineers who manage complexity from those who merely prompt fluently. This allows him to produce a portfolio artifact that serves as 'apprenticeship theater,' making his tacit judgment visible to hiring managers who value structural reasoning over raw output.
 
 ## Evidence
 
-> A senior person figures out how to load context, challenge the model, and review what comes back, and the junior across the team never gets to watch how any of that judgment works.
+> The candidate is not merely solving the task; they are repairing, redirecting, and re-framing a live plan in front of another human.
 
-> Also: that the act of recording the rep changed my prompting behavior in a useful direction — the 'narrate before you prompt' habit only sticks under public-witnessing pressure.
+> In a vibe-coding interview, the key skill is not prompting; it is deciding who is driving now: human, model, test suite, interviewer, or prior spec.
+
+> The interview rewards candidates who can articulate tacit judgment without flattening it into a script.
 
 ## Examples
 
-- Sierra runs a vibe-coding interview as part of their loop.
-- Reporting on AI-native onsites.
+- Timestamped context-loading choices and model challenges
+- Rejected outputs and verification moves
+- Interviewer-facilitated breakdowns
 
 ## Related Concepts
 
-[[Two Audiences]] [[Vibe-Coding Interview Canon]]
+[[Vibe-Coding Interview Canon]] [[Agentic Engineering Signal]] [[Portfolio Projects]]

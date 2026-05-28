@@ -5,13 +5,13 @@ connects:
   - Infrastructure Status
   - Synthesizer fix
   - Agent Health
-created: 2026-05-27
-updated: 2026-05-27
+created: 2026-05-28
+updated: 2026-05-28
 ---
 
 ## Synthesis
 
-The tension lies between the *intent* of autonomous knowledge synthesis and the *reality* of distributed infrastructure fragility. The synthesizer and deep researcher are designed to run autonomously, but their success is contingent on the availability of specific hardware endpoints (Alienware, ComfyUI) that are currently offline. This creates a bottleneck where the *capacity* to synthesize exists in software, but the *capability* is blocked by hardware status, leading to a stale knowledge base that requires manual override. The consequence is that Sean's vault is not truly autonomous; it is dependent on a fragile mesh that can silently degrade without immediate user awareness.
+The tension lies between the intent of autonomous knowledge synthesis and the reality of distributed infrastructure fragility. The synthesizer and deep researcher are designed to run autonomously, but their success is contingent on the availability of specific hardware endpoints. This creates a bottleneck where the capacity to synthesize exists in software, but the capability is blocked by hardware status. The consequence is that Sean's vault is not truly autonomous; it is dependent on a fragile mesh that can silently degrade without immediate user awareness.
 
 ## Threads
 

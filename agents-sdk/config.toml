@@ -351,6 +351,14 @@ job_scoring = { model = "qwen3.6_35b-a3b-32k", machine = "macbook_pro" }
 deep_research = { model = "qwen3-14b-research", machine = "mac_mini" }  # Phase 5 (2026-04-26) → Mac Mini migration v3.23.0 (2026-05-02): routed via LDR HTTP at :5050, custom Modelfile tag with /no_think baked into TEMPLATE
 sprite_vision_qa = { model = "Qwen3-VL-7B", machine = "alienware" }
 comfyui_orchestration = { model = "none", machine = "alienware" }
+# Judge layer (Council Gap-Fill 1 / Task 12, 2026-05-28): control-plane
+# interceptor evaluates ActionProposals against declarative YAML policies.
+# gemma4:e4b on Mac Mini Ollama ($0/decision) — same model + machine as
+# inbox_triage so we re-use the already-loaded weights and avoid a cold
+# load on the first call. Local-only; the routing-level fallback_to_api
+# kicks in only if Mac Mini is unreachable (explicit choice — a real
+# judge run on the paid path beats no judge).
+judge_layer = { model = "gemma4:e4b", machine = "mac_mini" }
 
 # ─── Notifications ───────────────────────────────────────────────────────────
 
@@ -515,20 +523,20 @@ mp3_quality = 2                          # ffmpeg libmp3lame -qscale:a 2 (~190 k
 # See docs/plans/2026-05-27-fleet-memory-phase-1-plan.md.
 
 [fleet_memory]
-enabled = false                                # Phase 1 default: opt-in per-agent
+enabled = true                                 # Phase 1 enabled 2026-05-28 for production exercise
 mount_subpath = "90_system/fleet-memory"       # resolved relative to vault_root
 manifest_filename = "MEMORY_INDEX.md"
 manifest_max_chars = 8000                      # truncate before injecting into prompts
 beta_header = "context-management-2025-06-27"
 
 [fleet_memory.per_agent.vault_synthesizer]
-enabled = false                                # opt-in toggle for smoke testing
+enabled = true                                 # Phase 1 enabled 2026-05-28
 agent_id = "vault_synthesizer"
 inject_on_run = true                           # read MEMORY_INDEX + own namespace at start
 write_lessons_on = ["ok"]                      # only write on clean runs; never partial/error
 
 [fleet_memory.per_agent.daily_driver]
-enabled = false                                # opt-in toggle for smoke testing
+enabled = true                                 # Phase 1 enabled 2026-05-28
 agent_id = "daily_driver"
 inject_on_run = true                           # MCP server is mounted; preamble cues the agent to call view
 write_lessons_on = ["success"]
