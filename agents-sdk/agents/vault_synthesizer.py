@@ -1313,6 +1313,10 @@ def main() -> int:
                 len(changed), args.budget_seconds, args.dry_run)
 
     if args.dry_run:
+        # Dry-run is intentionally a content-preview only — it does not
+        # exercise fleet_memory.ensure_mount or memory-preamble injection.
+        # Use daily_driver --dry-run for end-to-end fleet-memory wiring
+        # validation (it calls build_options which mounts the MCP server).
         for p in changed[:20]:
             logger.info("  - %s", p.relative_to(cfg.vault_root))
         return 0

@@ -255,8 +255,11 @@ class FleetMemoryTool(BetaAbstractMemoryTool):
             f"---\n\n"
         )
         body = provenance + src.read_text(encoding="utf-8")
-        dest = self._mount_root / "shared" / f"{dest_slug}.md"
-        dest.write_text(body, encoding="utf-8")
+        # Route through _create_path so _resolve_path + _assert_write_allowed
+        # are invoked — preserves the C1 invariant that every write goes
+        # through the path-traversal guard, even for internally-constructed
+        # paths.
+        self._create_path(f"shared/{dest_slug}.md", body)
         _update_manifest_section(
             self._mount_root / "MEMORY_INDEX.md",
             agent_id="shared",
@@ -301,9 +304,14 @@ def _update_manifest_section(
     Serialized via FileLock so multiple agents writing concurrently can't
     interleave heading creation. Pure file I/O; never raises on missing
     sections — creates the section on first use.
+
+    The lock file lives outside the mount (as a sibling of the mount root)
+    so Obsidian-Git never picks it up — placing it inside would commit a
+    0-byte file into the vault on every run.
     """
-    lock = FileLock(manifest_path.with_suffix(manifest_path.suffix + ".lock"),
-                    exclusive=True, timeout=10.0)
+    mount_root = manifest_path.parent
+    lock_path = mount_root.parent / f".{mount_root.name}-manifest.lock"
+    lock = FileLock(lock_path, exclusive=True, timeout=10.0)
     with lock:
         body = manifest_path.read_text(encoding="utf-8") if manifest_path.exists() else MANIFEST_HEADER
         heading = f"## {agent_id}"
