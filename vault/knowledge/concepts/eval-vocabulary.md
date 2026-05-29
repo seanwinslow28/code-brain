@@ -2,31 +2,30 @@
 title: "Eval Vocabulary"
 type: concept
 sources:
-  - 40_knowledge/references/ref-aakash-evals-are-the-new-prd-ankur-goyal.md
+  - 40_knowledge/references/ref-agent-product-analytics-runs-not-sessions.md
 tags: [auto-generated, phase-6]
-created: 2026-05-23
-updated: 2026-05-23
+created: 2026-05-29
+updated: 2026-05-29
 ---
 
 ## Definition
 
-A structured framework for defining and quantifying the performance of AI systems through systematic experiments. This vocabulary underpins a new language for product management, where the focus shifts from static requirement documents (PRDs) to dynamic evaluation metrics that evolve with user feedback and system behavior. The core mechanism is a producer/consumer pattern where evaluators generate test cases, and consumers (developers or PMs) act on the results to refine product behavior.
+A structured set of metrics and events that define the boundaries of agent autonomy, specifically distinguishing between task completion and user acceptance. This vocabulary requires instrumenting the correction loop, where user feedback becomes eval cases that refine the roadmap. It establishes that a workflow has earned autonomy only when the rate of user correction drops below a specific threshold. The mechanism relies on real-time telemetry of the agent's internal state rather than just the final output.
 
 ## Context
 
-For Sean, Eval Vocabulary is essential for transitioning from traditional PM practices to a data-driven AI product development model. It allows him to frame his job-hunt-2026 portfolio in terms of measurable outcomes, aligning with the trend of AI product management.
+Sean is developing a 'Vault Synthesizer Eval Suite' and needs to define what 'good' looks like for his own agents. By adopting this vocabulary, he can objectively measure the reliability of his automation pipelines and demonstrate product sense in his job hunt by showing how he measures trust, not just uptime.
 
 ## Evidence
 
-> The companies running 12.8 eval experiments per day are building AI products that actually work.
+> The difference between a task that finished and a task the user trusted. Reading that one gap is how you tell which workflows have earned more autonomy.
 
-> Evals are the new PRD. Here is what every PM needs to steal from their process.
+> The three events to ship this week, the full event schema underneath them, and the prompts that turn that schema into instrumentation in your own stack, your corrections into eval cases, and your numbers into a roadmap.
 
 ## Examples
 
-- Running 12.8 eval experiments per day.
-- Eval vocabulary replaces the PRD as primary spec artifact for AI products.
+- Using user_correction_submitted as a primary signal for evaluating workflow reliability.
 
 ## Related Concepts
 
-[[AI Product Manager]] [[Eval Vocabulary]]
+[[Agentic Engineering Signal]] [[Vault Synthesizer Eval Suite]]

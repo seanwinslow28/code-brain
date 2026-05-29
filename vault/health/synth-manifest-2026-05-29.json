@@ -1,0 +1,34 @@
+{
+  "clusters_sampled": 37,
+  "concept_paths": [
+    "vault/knowledge/concepts/unified-roadmap.md",
+    "vault/knowledge/concepts/portfolio-projects-for-interview-prep.md",
+    "vault/knowledge/concepts/agentic-engineering-signal.md",
+    "vault/knowledge/concepts/eval-vocabulary.md",
+    "vault/knowledge/concepts/supervision-as-the-new-ai-edge.md",
+    "vault/knowledge/concepts/knowledge-lint.md",
+    "vault/knowledge/concepts/abstraction-layer-shift.md",
+    "vault/knowledge/concepts/background-processing.md"
+  ],
+  "concepts_written": 8,
+  "connection_paths": [
+    "vault/knowledge/connections/strategic-adaptation-via-amendment-logging.md",
+    "vault/knowledge/connections/the-autonomy-trust-gap.md",
+    "vault/knowledge/connections/the-supervision-intent-knowledge-loop.md",
+    "vault/knowledge/connections/the-abstraction-intent-feedback-loop-in-agentic-workflows.md"
+  ],
+  "connections_written": 4,
+  "duration_seconds": 2743.43,
+  "edges_rejected": 1,
+  "edges_written": 8,
+  "files_processed": 16,
+  "model_used": "qwen3-14b",
+  "rejected_count": 3,
+  "rejected_reasons": {
+    "restatement-definition": 3
+  },
+  "run_id": "2026-05-29T02:30:04",
+  "skipped_thin_source": 0,
+  "status": "partial",
+  "wol_status": "mbp_awake"
+}

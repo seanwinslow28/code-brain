@@ -1,0 +1,21 @@
+{
+  "_comment": "Synthetic edge manifest for the public vault fixture. Mirrors the concept_edges schema (from_slug, to_slug, relation, confidence). 15 edges across all 6 enforced relation types. Fully synthetic — espresso brewing, zero relation to any private vault content.",
+  "relation_types": ["supports", "contradicts", "evolved_into", "supersedes", "depends_on", "related_to"],
+  "edges": [
+    { "from_slug": "pump-pressure",            "to_slug": "espresso-extraction",      "relation": "supports",     "confidence": 0.9 },
+    { "from_slug": "tamping",                  "to_slug": "espresso-extraction",      "relation": "supports",     "confidence": 0.85 },
+    { "from_slug": "water-chemistry",          "to_slug": "espresso-extraction",      "relation": "supports",     "confidence": 0.8 },
+    { "from_slug": "pre-infusion",             "to_slug": "flavor-extraction-stages", "relation": "supports",     "confidence": 0.75 },
+    { "from_slug": "espresso-extraction",      "to_slug": "grind-size",               "relation": "depends_on",   "confidence": 0.95 },
+    { "from_slug": "flavor-extraction-stages", "to_slug": "pre-infusion",             "relation": "depends_on",   "confidence": 0.7 },
+    { "from_slug": "dose-ratio",               "to_slug": "grind-size",               "relation": "depends_on",   "confidence": 0.8 },
+    { "from_slug": "grind-size",               "to_slug": "tamping",                  "relation": "related_to",   "confidence": 0.6 },
+    { "from_slug": "dose-ratio",               "to_slug": "pump-pressure",            "relation": "related_to",   "confidence": 0.55 },
+    { "from_slug": "pre-infusion",             "to_slug": "pump-pressure",            "relation": "related_to",   "confidence": 0.65 },
+    { "from_slug": "water-chemistry",          "to_slug": "flavor-extraction-stages", "relation": "related_to",   "confidence": 0.6 },
+    { "from_slug": "lever-machine",            "to_slug": "electronic-pid-machine",   "relation": "evolved_into", "confidence": 0.9 },
+    { "from_slug": "electronic-pid-machine",   "to_slug": "lever-machine",            "relation": "supersedes",   "confidence": 0.85 },
+    { "from_slug": "water-chemistry",          "to_slug": "pump-pressure",            "relation": "contradicts",  "confidence": 0.7 },
+    { "from_slug": "pre-infusion",             "to_slug": "tamping",                  "relation": "contradicts",  "confidence": 0.6 }
+  ]
+}

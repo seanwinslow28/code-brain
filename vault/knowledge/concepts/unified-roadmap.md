@@ -4,28 +4,29 @@ type: concept
 sources:
   - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md
 tags: [auto-generated, phase-6]
-created: 2026-05-20
-updated: 2026-05-20
+created: 2026-05-29
+updated: 2026-05-29
 ---
 
 ## Definition
 
-A comprehensive synthesis of multiple reference documents, aligning them with a master plan's phases and incorporating updates from various sources including Karpathy and Nate's work across models.
+A synthesis artifact that aligns external reference documents with an internal master plan, serving as a dynamic interface between strategic input and tactical execution. It functions as a living document where amendments are logged chronologically to track the evolution of scope, such as the addition of evaluation suites or the deferral of personal site tasks. The structure enforces a separation between high-level synthesis and low-level completion logs, ensuring that the roadmap remains a strategic anchor rather than a cluttered task list.
 
 ## Context
 
-This concept is pivotal for Sean as it outlines the strategic direction and implementation plan for his job hunt in 2026, integrating insights from multiple domains.
+Sean uses this to manage the complexity of his job hunt by integrating diverse inputs (Karpathy, Nate Jones) into a single coherent plan. This prevents the fragmentation of strategy across multiple notes and allows him to see how external advice directly modifies his internal project phases.
 
 ## Evidence
 
-> # Unified Roadmap — Karpathy × Nate × 2 × 2
+> A comprehensive synthesis of multiple reference documents, aligning them with a master plan's phases and incorporating updates from various sources including Karpathy and Nate's work.
 
-> Synthesis of five reference docs in [reference-synthesis-docs/](reference-synthesis-docs/), mapped onto the [master plan's](../2026-05-04-onwards-and-upw
+> The roadmap names 5 flagship artifacts + 2 supporting artifacts as build targets through July, mapping them onto the existing Phase 0–8 master plan.
 
 ## Examples
 
-- The unified roadmap includes 13 amendments and tracks the completion of tasks from Phase 0–8.
+- Amendments log tracking the addition of Task 8 + 9 (Eval Suite ship) on 2026-05-10.
+- Task 12 Days 1-3 shipped and verified in a single Cowork session on 2026-05-28.
 
 ## Related Concepts
 
-[[Task 1: Eval Suite Ship Week 2]] [[Task 11: Agent Fleet Observability Dashboard]]
+[[Portfolio Projects for Interview Prep]] [[Master Plan]]

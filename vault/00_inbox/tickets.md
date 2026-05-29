@@ -11,6 +11,11 @@ show 0 until items land here.
 
 ## Todo
 
+- Re-add fleet-memory to daily_driver via cheap read-only inject (drop MCP bridge + context-management beta that doubled cost to $0.97 and tripped the cap 5/29); reuse inject_memories_into_prompt() like vault_synthesizer — assigned: Sean
+- Build a $0/run local summarizer (gemma4:e4b / qwen3 on Mac Mini) that curates daily_driver's fleet-memory namespace, so the Opus agent only reads, never writes — assigned: Sean
+- Wire SDK fleet agents to surface/read open tickets from tickets.md (mirror the interactive session-start-inject-tickets.sh hook) — GATE: only do this once agents have real tasks beyond vault upkeep (e.g. substack-drafter); the current vault-upkeep loop agents don't need it — assigned: Sean
+- Build a $0/run local critic-synthesizer (gemma4:e4b / qwen3 on Mac Mini) that reads the nightly critic-manifest-{date}.json after the 03:30 run, ranks+dedupes vault_critic suggestions, and writes a top-N shortlist to a SEPARATE suggestions lane (NOT the hand-curated Manual Todo) for Sean to review and promote — propose-don't-auto-promote, human-in-the-loop — GATE: only build after ~2 weeks of clean vault_critic nightly runs (recent runs show status=partial / ag_fail=5; don't triage noise) — assigned: Sean
+
 ## In Progress
 
 ## Done

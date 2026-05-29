@@ -1,0 +1,26 @@
+{
+  "antigravity_calls": 5,
+  "antigravity_failures": 5,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 3,
+  "backfill_articles_critiqued": 2,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/revenue-integration.md",
+    "vault/knowledge/expansions/personal-agentic-intent-engineering.md"
+  ],
+  "codex_calls": 5,
+  "codex_failures": 0,
+  "codex_tokens_total": 141410,
+  "duration_seconds": 600.15,
+  "error": "",
+  "expansions_written": [
+    "vault/knowledge/expansions/unified-roadmap.md",
+    "vault/knowledge/expansions/portfolio-projects-for-interview-prep.md",
+    "vault/knowledge/expansions/agentic-engineering-signal.md"
+  ],
+  "run_id": "2026-05-29T03:30:00",
+  "status": "partial",
+  "warnings": [
+    "wall budget 600s ran out after 5 articles"
+  ]
+}
