@@ -1,0 +1,51 @@
+{
+  "date": "2026-05-29",
+  "runs": [
+    {
+      "fired_at": "2026-05-29T08:00:02.553426",
+      "fetch_total": 2334,
+      "rules_passed": 1,
+      "rules_rejected": 67,
+      "llm_scored": 1,
+      "llm_failed": 0,
+      "mbp_reachable": true,
+      "duration_sec": 35.07,
+      "failed_pollers": [
+        "ats:huggingface (all 404)",
+        "ats:replicate (all 404)",
+        "ats:together-ai (all 404)",
+        "ats:openai (ReadTimeout)",
+        "ats:pinecone (ReadTimeout)",
+        "ats:krea (ReadTimeout)",
+        "ats:sierra (ReadTimeout)",
+        "ats:framer (ReadTimeout)",
+        "ats:fourthwall (ReadTimeout)",
+        "ats:scale (ReadTimeout)",
+        "ats:supabase (ReadTimeout)",
+        "ats:cursor (ReadTimeout)",
+        "ats:linear (ReadTimeout)",
+        "ats:runway (ReadTimeout)",
+        "ats:perplexity (ReadTimeout)",
+        "ats:decagon (ReadTimeout)",
+        "ats:datarobot (ReadTimeout)",
+        "ats:langchain (ReadTimeout)",
+        "ats:hopper (ReadTimeout)",
+        "ats:spline (ReadTimeout)",
+        "ats:modal (ReadTimeout)",
+        "ats:notion (ReadTimeout)",
+        "ats:pika (ReadTimeout)",
+        "ats:circle (ReadTimeout)",
+        "ats:replit (ReadTimeout)",
+        "ats:draftkings (ReadTimeout)",
+        "ats:glean (ReadTimeout)",
+        "ats:elevenlabs (ReadTimeout)",
+        "ats:tome (ReadTimeout)",
+        "ats:canva (ReadTimeout)",
+        "ats:synthesia (ReadTimeout)",
+        "ats:cohere (ReadTimeout)",
+        "ats:beehiiv (ReadTimeout)"
+      ],
+      "short_circuited": false
+    }
+  ]
+}

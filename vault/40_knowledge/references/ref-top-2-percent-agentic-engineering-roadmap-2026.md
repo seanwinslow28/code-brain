@@ -8,9 +8,10 @@ created: 2026-05-28
 description: "A complete roadmap for becoming a top 2% agentic engineer in 2026. Ten big bets on trust, tool calling, custom agents, multi-agent orchestration, and the future of agentic coding."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "IndyDevDan's 10 big bets for becoming a top 2% agentic engineer in 2026 — trust, tool calling, custom agents, multi-agent orchestration. Anchor claim: 'Want to do more with agents? You need to build agents you trust.'"
 ---
 ## TOP 2% AGENTIC ENGINEERING
 

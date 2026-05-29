@@ -8,9 +8,10 @@ created: 2026-05-28
 description: "How do you know you're improving at agentic coding? Not luck. Threads. Learn the framework for measuring real progress with Claude Code."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "IndyDevDan's mental framework for measuring real agentic-coding progress — stop being a bottleneck and become an orchestrator by tracking parallel agent threads instead of single sessions."
 ---
 ## Thinking in Threads
 

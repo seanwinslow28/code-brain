@@ -100,6 +100,11 @@
             "type": "command",
             "command": ".claude/hooks/session-start-inject-index.sh",
             "timeout": 5000
+          },
+          {
+            "type": "command",
+            "command": ".claude/hooks/session-start-inject-tickets.sh",
+            "timeout": 5000
           }
         ]
       }

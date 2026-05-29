@@ -1,0 +1,21 @@
+```mermaid
+erDiagram
+    Concept ||--o{ ConceptEdge : "from_slug"
+    Concept ||--o{ ConceptEdge : "to_slug"
+    ConceptEdge {
+        int id PK
+        text from_slug FK
+        text to_slug FK
+        text relation "enum: supports | contradicts | evolved_into | supersedes | depends_on | related_to"
+        real confidence "0..1, NULL when classifier-undecided"
+        text valid_until "ISO 8601, NULL when current"
+        text classifier_version
+        text source_synth_run
+        text created_at "ISO 8601"
+    }
+    Concept {
+        text slug PK
+        text title
+        text body
+    }
+```

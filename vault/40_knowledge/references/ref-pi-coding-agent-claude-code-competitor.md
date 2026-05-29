@@ -8,9 +8,10 @@ created: 2026-05-28
 description: "Discover why Pi is the only true Claude Code competitor. Open source, fully customizable agentic coding tool for engineers who want control of their agent harness."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "IndyDevDan positions Pi Coding Agent as the only true open-source Claude Code competitor — fully customizable agent harness for engineers who want control of the harness layer, hedge against Anthropic platform risk."
 ---
 ## Hedge your Agentic Engineering with the open source, customizable, counter-attack on Claude Code.
 

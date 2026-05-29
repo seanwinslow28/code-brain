@@ -536,7 +536,14 @@ inject_on_run = true                           # read MEMORY_INDEX + own namespa
 write_lessons_on = ["ok"]                      # only write on clean runs; never partial/error
 
 [fleet_memory.per_agent.daily_driver]
-enabled = true                                 # Phase 1 enabled 2026-05-28
+# DISABLED 2026-05-29: the MCP memory bridge (context-management beta + 6 memory
+# tools + forced memory_view every run) on the Opus daily_driver path roughly
+# DOUBLED cost — $0.49 (5/27) → $0.70 (5/28, day fleet-mem went live) → $0.97
+# (5/29) tripped the $0.90 cap (error_max_budget_usd, 6 turns). The shared store
+# is tiny (~284-char index), so this is pure per-turn protocol overhead, not data
+# volume — and it only grows. vault_synthesizer keeps fleet-mem (local, $0/run).
+# Re-enable only after the cheaper read-only inject path lands (see plan).
+enabled = false
 agent_id = "daily_driver"
 inject_on_run = true                           # MCP server is mounted; preamble cues the agent to call view
 write_lessons_on = ["success"]
