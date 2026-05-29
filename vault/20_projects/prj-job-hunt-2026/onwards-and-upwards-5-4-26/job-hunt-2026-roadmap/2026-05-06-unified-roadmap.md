@@ -1297,17 +1297,18 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 - Create: `<repo>/EXPLANATION.md` (4Q artifact)
 - Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/enterprise-data-readiness-matrix.md` (ledger row)
 
-**- [ ] Step 1: Draft the 5 dimensions of data readiness.** (1) Canonical Entity IDs — does the customer have unified IDs across systems? (2) Lineage & Provenance — can outputs be traced to source documents? (3) Freshness Signals — are timestamps reliable? (4) Workflow Eligibility Tags / Governance — which docs is the agent allowed to read? (5) Deduplication + Embedding-Store Hygiene — are vector clusters poisoned by duplicates?
+**- [x] Step 1: Draft the 5 dimensions of data readiness.** (1) Canonical Entity IDs — does the customer have unified IDs across systems? (2) Lineage & Provenance — can outputs be traced to source documents? (3) Freshness Signals — are timestamps reliable? (4) Workflow Eligibility Tags / Governance — which docs is the agent allowed to read? (5) Deduplication + Embedding-Store Hygiene — are vector clusters poisoned by duplicates?
 
-**- [ ] Step 2: For each dimension, write the diagnostic question + green/yellow/red criteria.** Green = ready for agent deployment; Yellow = pilot-ready with mitigation; Red = block, fix data layer first. Cite the Glean / Notion AI / Atlassian Rovo PM checklists (DR-Max §Q7 references).
+**- [x] Step 2: For each dimension, write the diagnostic question + green/yellow/red criteria.** Green = ready for agent deployment; Yellow = pilot-ready with mitigation; Red = block, fix data layer first. Cite the Glean / Notion AI / Atlassian Rovo PM checklists (DR-Max §Q7 references).
 
-**- [ ] Step 3: Build the scoring rubric.** 5 dimensions × 3 levels = 15-cell matrix. Each cell: 1 sentence explaining the failure mode if this cell is "Red." 1 worked example of what "Green" looks like.
+**- [x] Step 3: Build the scoring rubric.** 5 dimensions × 3 levels = 15-cell matrix. Each cell: 1 sentence explaining the failure mode if this cell is "Red." 1 worked example of what "Green" looks like.
 
-**- [ ] Step 4: Apply the rubric to a realistic worked example.** Use a fictional Fortune 500 content-publishing company (not The Block — sanitized framing). Walk through all 5 dimensions, score each, propose a 90-day remediation plan to move Red → Yellow → Green.
+**- [x] Step 4: Apply the rubric to a realistic worked example.** Use a fictional Fortune 500 content-publishing company (not The Block — sanitized framing). Walk through all 5 dimensions, score each, propose a 90-day remediation plan to move Red → Yellow → Green.
 
-**- [ ] Step 5: Write the 4Q EXPLANATION.md.** What is this? / Why this approach? / What would break? / What did I learn?
+**- [x] Step 5: Write the 4Q EXPLANATION.md.** What is this? / Why this approach? / What would break? / What did I learn?
 
-**- [ ] Step 6: Ship to standalone repo + ledger.** Push to github.com/seanwinslow28/enterprise-data-readiness-matrix. Add MDX entry to sw-ai-pm-portfolio/src/content/transactions/. Cross-post a teaser thread to LinkedIn.
+**- [x] Step 6: Ship to standalone repo + ledger.** Push to github.com/seanwinslow28/enterprise-data-readiness-matrix. Add MDX entry to sw-ai-pm-portfolio/src/content/transactions/. Cross-post a teaser thread to LinkedIn.
+  ✅ SHIPPED 2026-05-29 — repo public at github.com/seanwinslow28/enterprise-data-readiness-matrix; ledger row PR open in sw-ai-pm-portfolio (PR #11, surface=infra); matrix.md (5-dim floor-rule rubric) + worked-example (F500 + 90-day remediation) + EXPLANATION.md (4Q). Grounded in 2026-05-18 DR-Max research Q1/Q7. _(LinkedIn teaser still TODO — manual.)_
 
 **Verification gate:** Standalone repo public. Ledger row live at seanwinslow.com/transactions/enterprise-data-readiness-matrix/. 4Q EXPLANATION.md passes the <90-sec recruiter readability check.
 

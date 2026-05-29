@@ -154,6 +154,20 @@ Then 4-edit surgical voice pass: (1) §1 P2 polysyndeton push on the May 10th st
 
 ---
 
+### 2026-05-29 — Task 21 SHIPPED (Enterprise Data Readiness Matrix)
+
+**Task 21 shipped on its Friday 2026-05-29 slot** — Phase A, Steps 1-6 all closed. The artifact is a pre-deployment rubric an AI platform PM runs on a customer's data layer to answer one question before a launch date goes on a slide: *is this data actually ready to carry an agent?* Five dimensions — canonical entity IDs, lineage/provenance, freshness signals, governance/eligibility tags, dedup/embedding hygiene — each scored 🟢/🟡/🔴.
+
+**What it closes.** This is the direct answer to the DR-Max Q1 finding that **85% of Tier-1 Enterprise AI PM JDs name data/knowledge strategy as a core responsibility** — the single largest gap the research panel surfaced. Grounded in the 2026-05-18 DR-Max research (Q1 hiring-criteria synthesis + Q7 PM-checklist references: Glean / Notion AI / Atlassian Rovo).
+
+**The load-bearing design choice is the floor rule.** Deployment posture is set by the *worst* dimension, not the average — "four greens and a red, 80%, ship it" is exactly the mistake that produces the Air Canada outcome (agent fails confidently on the one Red seam; the deploying org inherits the liability). Averaging readiness is the anti-pattern the rubric is built to refuse.
+
+**The credibility angle is Code-Brain-as-worked-example.** The five dimensions aren't borrowed from a consulting deck — they're reverse-engineered from the five problems Sean had to solve on his *own* agent fleet's knowledge base before it would produce citable output: per-entity note stubs + wikilink graph (canonical IDs), stable `chunk_id` + source-path provenance (lineage), mtime/`superseded_by`-keyed retrieval (freshness), retrieval-scope exclusions + network-access hook (governance), HDBSCAN cluster-and-sample over a deduped store (embedding hygiene). The generalization *is* the artifact.
+
+**Artifacts.** Standalone public repo: [github.com/seanwinslow28/enterprise-data-readiness-matrix](https://github.com/seanwinslow28/enterprise-data-readiness-matrix) (`README.md` portfolio framing + `matrix.md` 5-dim floor-rule rubric + `worked-example-fortune-500-content-co.md` scored F500 + dated 90-day Red→Yellow→Green remediation plan + `EXPLANATION.md` 4Q). Ledger row: `sw-ai-pm-portfolio/src/content/transactions/enterprise-data-readiness-matrix.mdx` (`surface: infra` — first row on the infra surface; Sean-confirmed over `writing`), validated against the transactions Zod schema, full `npm run build` resolves `/transactions/enterprise-data-readiness-matrix/` + the `/transactions/infra/` surface index. Shipped via **PR #11** (not auto-merged). **Pending (manual):** LinkedIn teaser thread.
+
+---
+
 ## Completed Tasks
 
 Tasks whose every step is closed. Each section below is the verbatim task body lifted from the parent roadmap on 2026-05-18 (or the date of the move, noted per-task).
