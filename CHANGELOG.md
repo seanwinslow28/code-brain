@@ -5,6 +5,14 @@ All notable changes to Code-Brain (formerly *Claude Code Superuser Pack*) will b
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+- **daily_driver budget cap regression (fleet-memory cost).** Phase-1 fleet-memory went live 2026-05-28 and roughly doubled the Opus `daily_driver` morning cost ($0.49 → $0.70 → $0.97, tripping the $0.90 cap with `error_max_budget_usd` on 5/29). Root cause: the MCP-server bridge adds the `context-management-2025-06-27` beta header + 6 memory-tool defs + forced `memory_view` round-trips on every run — pure per-turn overhead, not data volume (store was ~284 chars). Remediation: selective disable (`[fleet_memory.per_agent.daily_driver].enabled = false`), reverting to the ~$0.50 baseline. `vault_synthesizer` keeps fleet-memory (local, $0/run). Cheaper redesign (read-only inject + local summarizer) documented in [the phase-1 plan](agents-sdk/docs/plans/2026-05-27-fleet-memory-phase-1-plan.md) and tracked in [vault/00_inbox/tickets.md](vault/00_inbox/tickets.md).
+
+### Added
+- **SessionStart hook `session-start-inject-tickets.sh`.** Injects the open Manual tickets (`## Todo` + `## In Progress`) from [vault/00_inbox/tickets.md](vault/00_inbox/tickets.md) as `additionalContext` so outstanding follow-ups are in context every session. Mirrors the existing knowledge-index injection hook (stdlib-only, graceful fallback, exits 0). Registered in [.claude/settings.json](.claude/settings.json). Paired with CLAUDE.md Non-Negotiable Rule 9 (capture deferred work as tickets). The same file drives the Agent Fleet Observability kanban Manual lane.
+
 ## [4.2.0] — 2026-05-26
 
 **Topic 20 follow-up — fleet runtime shift: MBP-Ollama becomes a first-class runtime, three production agents swap their primary model, and Tier C joins the fleet via a 7-day Pattern E pilot.** Topic 20's follow-up benchmarks ([2026-05-26-topic-20-mbp-ollama-runtime-comparison.md](vault/20_projects/research/2026-05-26-topic-20-mbp-ollama-runtime-comparison.md)) proved that `qwen3.6:35b-a3b` @ MBP-Ollama beats the prior `qwen3-14b` @ MBP-LM-Studio baseline on every dimension (**85% vs 50%** schema match, **5/5 vs 0/5** 32K needle recall, **30 vs 27.9** tok/s). The needle-recall recovery is the load-bearing finding: LM Studio's MLX backend silently drops thinking-disable on Qwen3.5/3.6, which was producing empty long-context responses in production. Ollama 0.24+ on Apple Silicon honors `think:false` properly. LM Studio stays installed and bound on `:1234` as a co-resident runtime for speed-sensitive workloads where 60% schema is acceptable — the new MBP entry just points at Ollama's `:11434`.
