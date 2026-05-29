@@ -2789,6 +2789,41 @@ The synthesis explicitly names the three-store baseline (Anthropic auto-memory +
 
 ---
 
+## Post-Launch Cost Incident & Cheaper-Redesign Note (2026-05-29)
+
+**What happened.** Phase 1 went live in production on 2026-05-28 (`[fleet_memory] enabled = true` + both pilots enabled). The `daily_driver` morning run cost roughly **doubled the same day** and tripped its budget cap the next morning:
+
+| Date | Cost | Status |
+|---|---|---|
+| 5/24–5/27 | $0.49–0.54 | normal (pre-launch) |
+| 5/28 | $0.70 | first run after fleet-mem went live |
+| 5/29 | **$0.97** | `error_max_budget_usd` (cap $0.90, 6 turns, 51s) — morning brief did not complete |
+
+Evidence: `vault/90_system/agent-logs/agent-run-history.csv` (the `error_max_budget_usd` row), per-run log `daily-driver-2026-05-29-morning.log`.
+
+**Root cause — the MCP-bridge pattern, not the data.** The shared store at incident time was ~284 chars (`MEMORY_INDEX.md`) plus a handful of tiny namespace files. The cost was **pure per-turn protocol overhead** that Task 9's MCP-server bridge adds to the **Opus** `daily_driver` path, in three parts:
+
+1. The `context-management-2025-06-27` **beta header** (`build_options` → `betas=[...]`) — changes per-turn context handling; suspected dominant cost on Opus.
+2. **Six MCP memory-tool definitions** shipped in every request.
+3. The preamble's **forced `memory_view` round-trips** at run start — extra turns, and each result is re-read into context on every subsequent turn.
+
+None of these scale down with the (tiny) store, and they only grow as memory accumulates — so raising the budget merely delays the next cap hit. **Immediate remediation taken 2026-05-29:** `[fleet_memory.per_agent.daily_driver].enabled = false` (selective rollback per Rollback Plan #3). Verified: `betas=[]`, `mcp_servers=['vault-tools']`, no memory tools, no Fleet Memory preamble block; cost reverts to the pre-launch ~$0.50 baseline. `vault_synthesizer` keeps fleet-mem (local model, $0/run — unaffected). 65 daily-driver/fleet-memory/config tests pass.
+
+**The cheaper pattern already exists.** `vault_synthesizer` does **not** use the MCP bridge — it uses the read-and-inject helper `inject_memories_into_prompt()` ([`lib/fleet_memory.py:333`](../../lib/fleet_memory.py)), which reads `MEMORY_INDEX.md` + the agent's namespace + `shared/` into **one capped plain-text block** (≤`manifest_max_chars`) prepended to the prompt. No beta, no tool defs, no round-trips, and because it is a static prefix it **prompt-caches cleanly**. This is exactly the "deterministic read-and-inject pattern for local-Ollama agents" the config-block comment (Task 1) already names — `daily_driver` simply got wired to the heavy pattern instead.
+
+**Recommended redesign (target workflow).** Split the read side from the write side so the expensive Opus agent does zero memory bookkeeping:
+
+- **Read side (cheap; the actual fix):** Replace `daily_driver`'s MCP bridge with `inject_memories_into_prompt()` — the same read-only path synth uses. Removes all three cost sources. Re-enables fleet-memory for `daily_driver` at near-zero marginal cost. Small change, reuses already-tested code.
+- **Write side (new; "summarizer" idea):** Read-inject is read-only, so `daily_driver` no longer writes its own lessons — which is desirable, since writing is the part we want off the Opus path. A **cheap local agent** (gemma4:e4b / qwen3 on the Mac Mini, $0/run) curates `daily_driver/`'s memory: it reads recent runs/daily notes and distills "what the morning brief should remember" into a compact namespace file. `daily_driver` then read-injects it for free.
+
+  Net target: **local summarizer writes → `daily_driver` read-injects.** The read half is already built and tested.
+
+**Tradeoff.** Read-inject is a static snapshot — `daily_driver` cannot dynamically look up a specific memory mid-run the way the tool protocol allows. For a once-daily morning brief reading a tiny curated digest, that flexibility is not worth ~2× cost. If the tool protocol is ever genuinely needed back, A/B a single `--dry-run` first to measure which of the three cost sources dominates before paying for all three.
+
+**Status:** immediate fix shipped (selective disable). Redesign tracked as a ticket in `vault/00_inbox/tickets.md` (Agent Fleet Observability kanban, Manual lane).
+
+---
+
 ## Phase 2 — Out of Scope (named for traceability)
 
 These are deliberately deferred. List them in the rollout-decision doc when Phase 2 starts; do not start them as part of this plan:
