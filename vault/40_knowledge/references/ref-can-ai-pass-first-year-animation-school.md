@@ -9,8 +9,9 @@ description: "Let's put it to the test"
 tags:
   - "source/web-clip"
 type: "source"
-status: "unprocessed"
-domain:
+status: "draft"
+domain: [creative-studio]
+ai-context: "Matt Ferguson runs six first-year classical-animation exercises through Runway image-to-video and grades them (mostly failing), arguing gen-video models lack the control to manipulate stylized 2D drawings and that bespoke task-specific tools—not video generation—will reshape animation production."
 ---
 No matter how old I get, September always puts me in that back-to-school mood. It’s a specific mix of new-binder smell and bumpy bus rides all wrapped up in impending homework dread. It never quite worked its way out of my system.
 

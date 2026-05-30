@@ -9,8 +9,9 @@ description: "The Dope Sheet - May 22, 2026"
 tags:
   - "source/web-clip"
 type: "source"
-status: "unprocessed"
-domain:
+status: "draft"
+domain: [creative-studio]
+ai-context: "Matt Ferguson's Dope Sheet roundup (May 2026): Google's Gemini Omni video model, Kling's Minibots feature deal, the Copán la Leyenda AI-feature backlash, South Park's Deep Voodoo AI use, Beeble's Canvas compositor, and the NFL AI-slop vs. stop-motion controversy."
 ---
 ![Minibots](https://substackcdn.com/image/fetch/$s_!q1pL!,w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F20d16aa7-c9b3-4043-bb4a-9c05721f4d3f_1000x667.jpeg)
 

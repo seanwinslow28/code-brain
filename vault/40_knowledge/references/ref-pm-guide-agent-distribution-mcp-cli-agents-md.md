@@ -9,8 +9,9 @@ description: "How to build MCP servers, CLIs, and AGENTS.md so AI agents can dis
 tags:
   - "source/web-clip"
 type: "source"
-status: "unprocessed"
-domain:
+status: "draft"
+domain: [product-management, claude-mastery]
+ai-context: "Aakash Gupta's playbook for making products discoverable to AI agents via MCP servers, CLIs, and AGENTS.md—with an audit template, PRD, 10 production teardowns (Stripe, Cloudflare, Linear), and a Claude Code sprint."
 ---
 ### Stripe, Cloudflare, Linear, and 7 others already shipped. Audit template, PRD, and Claude Code sprint included.
 
