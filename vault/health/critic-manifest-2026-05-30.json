@@ -1,0 +1,23 @@
+{
+  "antigravity_calls": 5,
+  "antigravity_failures": 5,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 0,
+  "backfill_articles_critiqued": 5,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/portfolio-projects.md",
+    "vault/knowledge/expansions/portfolio-walkthrough.md",
+    "vault/knowledge/expansions/practice-confidence-plan.md",
+    "vault/knowledge/expansions/real-time-problem-solving.md",
+    "vault/knowledge/expansions/research-prompt-autoresearch-agentic-polymarket-crypto-cash-flow.md"
+  ],
+  "codex_calls": 5,
+  "codex_failures": 0,
+  "codex_tokens_total": 140691,
+  "duration_seconds": 600.15,
+  "error": "",
+  "expansions_written": [],
+  "run_id": "2026-05-30T03:30:04",
+  "status": "partial",
+  "warnings": []
+}
