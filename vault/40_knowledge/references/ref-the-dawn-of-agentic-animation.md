@@ -9,8 +9,9 @@ description: "How AI agents are learning to use our tools and where that leaves 
 tags:
   - "source/web-clip"
 type: "source"
-status: "unprocessed"
-domain:
+status: "draft"
+domain: [creative-studio]
+ai-context: "Matt Ferguson on agentic animation: AI agents (OpenClaw, 3D-Agent) operating Blender/Maya/Houdini semi-autonomously as crew members, the parallel to early CG and to Claude Code writing most of Anthropic's code, and the human 'dither' (Harold Speed) that remains irreplaceable."
 ---
 As an animation-obsessed kid in the early 90s I was lucky enough to tour the late great animation studio **Nelvana** while they were working on the **Beetlejuice** animated series. When I look back at the photos I took at the time, the thing that strikes me now is the complete lack of computers. All I see is paper, paint, and artists at work.
 

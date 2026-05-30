@@ -9,8 +9,9 @@ description: "Ryan Lapopolo from OpenAI’s Frontier team on why code is a liabi
 tags:
   - "source/web-clip"
 type: "source"
-status: "unprocessed"
-domain:
+status: "draft"
+domain: [product-management, claude-mastery]
+ai-context: "Aakash Gupta interviews OpenAI Frontier's Ryan Lopopolo on how PMs operate inside a frontier AI lab: why code is a liability, the three-phase harness for shipping ~100K lines, and how to hit a billion tokens a day."
 ---
 The roadmap for how PMs operate inside a frontier AI company
 
