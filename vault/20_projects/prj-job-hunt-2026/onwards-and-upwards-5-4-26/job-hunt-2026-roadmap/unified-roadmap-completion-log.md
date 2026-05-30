@@ -4,7 +4,7 @@ parent: 2026-05-06-unified-roadmap.md
 project: prj-job-hunt-2026
 status: living
 created: 2026-05-18
-last_updated: 2026-05-21
+last_updated: 2026-05-30
 ai-context: "Living ship-history companion to the unified roadmap. Holds (a) the dated amendments log (moved here 2026-05-18 to slim the parent's frontmatter — every entry below was previously inline at the top of the roadmap), and (b) the body of any roadmap task whose every step is closed. The parent roadmap stays focused on open + in-flight work; this file accumulates outcomes. New completion writes land here, not on top of the parent."
 ---
 
@@ -165,6 +165,48 @@ Then 4-edit surgical voice pass: (1) §1 P2 polysyndeton push on the May 10th st
 **The credibility angle is Code-Brain-as-worked-example.** The five dimensions aren't borrowed from a consulting deck — they're reverse-engineered from the five problems Sean had to solve on his *own* agent fleet's knowledge base before it would produce citable output: per-entity note stubs + wikilink graph (canonical IDs), stable `chunk_id` + source-path provenance (lineage), mtime/`superseded_by`-keyed retrieval (freshness), retrieval-scope exclusions + network-access hook (governance), HDBSCAN cluster-and-sample over a deduped store (embedding hygiene). The generalization *is* the artifact.
 
 **Artifacts.** Standalone public repo: [github.com/seanwinslow28/enterprise-data-readiness-matrix](https://github.com/seanwinslow28/enterprise-data-readiness-matrix) (`README.md` portfolio framing + `matrix.md` 5-dim floor-rule rubric + `worked-example-fortune-500-content-co.md` scored F500 + dated 90-day Red→Yellow→Green remediation plan + `EXPLANATION.md` 4Q). Ledger row: `sw-ai-pm-portfolio/src/content/transactions/enterprise-data-readiness-matrix.mdx` (`surface: infra` — first row on the infra surface; Sean-confirmed over `writing`), validated against the transactions Zod schema, full `npm run build` resolves `/transactions/enterprise-data-readiness-matrix/` + the `/transactions/infra/` surface index. Shipped via **PR #11** (not auto-merged). **Pending (manual):** LinkedIn teaser thread.
+
+---
+
+### 2026-05-29 — Task 15 Vault Scorecard voice-final + Step 8 gate passed (code-brain side)
+
+**The Vault-as-Agent-Infrastructure scorecard is voice-final, committed (`53539eb`), and tagged `vault-scorecard-v1` on code-brain `main`.** Shipped artifacts: `vault/SCORECARD.md` (the canonical short scoreboard), `docs/VAULT_AS_AGENT_INFRASTRUCTURE.md` (long-form essay, 1,974 words — inside the 1,800–2,200 band), `docs/VAULT_AS_AGENT_INFRASTRUCTURE_EXPLANATION.md` (4Q), the fully-synthetic `examples/public_vault_fixture/` (espresso, 10 notes / 15 edges across all 6 relations), and `scripts/generate_schema.py`. This is the prior-art doc that made Task 10 (`vault-knowledge-mcp`, shipped the next day) self-justifying.
+
+**Telemetry refreshed since the Step-0 snapshot.** The nightly synthesizer kept running, so the numbers moved: **478 → 632 typed edges, 13,488 → 15,582 indexed chunks, 8 `valid_until`-curated edges**, verb distribution `depends_on 215 · related_to 199 · supports 160 · contradicts 38 · evolved_into 13 · supersedes 7` (sums to 632). All regenerable from the live `.vault-index.db` via `scripts/generate_schema.py` — the numbers are pulled, not hand-maintained.
+
+**Voice pass (dedicated Cowork session, `writing-voice-modes`).** The drafts shipped strategic-sober on purpose; this pass pulled them into Sean's voice without losing the credibility calibration. Section by section, 2–3 named-mode variants per slot, Sean picked/blended: epigraph lands on "the failures are the latest blueprints"; a Sedaris self-implicating intro ("I was most people"); the closer is a callback ("the blueprints I'm building from"); the two **Linear-wins HONEST NOTES** were preserved and sharpened with the load-bearing honesty beats ("I'm not going to dress that up" / "I won't pretend that's full RBAC yet"); the Judge Layer stays framed as **built, now rolling out** (not future tense). Two voice rules applied across all three docs: **emoji stripped from prose** and replaced with a four-level word scale (pass-above-Linear / clean pass / partial / fail) — scoreboard *tables* keep their marks — and **`+`→`and`** (Sean doesn't use `+` in prose).
+
+**Step 8 verification gate — all green.** `validate.py` PASSED (61 warnings / 0 errors, all pre-existing secret-pattern false-positives in unrelated files); essay 1,974 words in band; 9 code permalinks (≥5); ER diagram embeds; telemetry consistent across all four docs (incl. the portfolio mdx); fixture + artifacts leakage-clean (zero names/abs-paths/secrets). The portfolio mirror `src/content/architecture/vault-scorecard.mdx` was voice-aligned (lead, both honestNotes, `+`→`and`) and its **OQ-C resolved** — `essaySourceUrl` / `explanationUrl` now point at the live code-brain files instead of inline-body fallback.
+
+**Rule #8 note (recorded for the audit trail):** `vault/SCORECARD.md` is a vault path, which Obsidian-Git normally owns. Sean explicitly chose to include it in the manual `53539eb` commit after the conflict was flagged; a single manual commit doesn't stand up a competing auto-committer, so Obsidian-Git no-ops that file afterward.
+
+**Remaining (gated on infra, not on Task 15 content):** the public page `seanwinslow.com/architecture/vault-scorecard/` renders the already-committed mdx once the portfolio Astro site scaffolds (Phase 2). Content is ready; deploy is pending the build.
+
+---
+
+### 2026-05-30 — Task 10 `vault-knowledge-mcp` SHIPPED (8th flagship; 2nd MCP, different shape)
+
+**`@swins/vault-knowledge-mcp@0.1.0` is live on npm + `com.seanwinslow/vault-knowledge@0.1.0` on the MCP registry, repo public at [github.com/seanwinslow28/sw-mcp-vault-knowledge](https://github.com/seanwinslow28/sw-mcp-vault-knowledge).** Built and published in a single Cowork session against the 2026-05-18 Gemini DR-Max research (which had already locked the 6 open architectural decisions and flipped the spec to `research-complete`). This is the second MCP of a deliberately different shape — `intent-engineering` wraps a *skill*; this wraps the *typed reasoning graph* the nightly synthesizer maintains (six relations, ~30 live `contradicts` edges, ~15k embedded chunks). The load-bearing differentiator over candidates with one or zero MCPs is now shipped.
+
+**Naming call (the one open decision at kickoff):** kept `find_contradictions`, declined the research's "outsized-impact" rename to `analyze_reasoning_edges`. Rationale: better LLM routing, sharper Loom moment, and cross-artifact coherence with the already-shipped SCORECARD + Access-vs-Meaning essay + fixture README that all narrate the demo as "find contradictions." The enterprise "graph-traversal engine" signal the research wanted lives in the README/EXPLANATION prose instead, where it costs nothing.
+
+**The one mid-build architecture change worth recording:** swapped the SQLite driver from `better-sqlite3` → Node's built-in `node:sqlite`. better-sqlite3 needs native compilation/prebuilds and failed to install twice on a clean machine; that directly undercuts the locked "zero-friction `npm install` for a recruiter" north star. `node:sqlite` is zero-dependency, zero-build, read-only enforced at the engine — at the cost of a Node ≥22.5 floor. The driver was never a locked decision (spec §3c flagged the stack "open for research challenge").
+
+**Spec decisions that held:** 3-tool hard cap (`search_concepts`, `find_contradictions`, `get_article`); JS-native nomic-embed-text-v1.5 query embedding (Transformers.js, no Python sidecar); read-only against the existing `vault/.vault-index.db` (no second index); config-only env-var + absolute-path allowlist over `knowledge/{concepts,connections,qa}` (never a request parameter, traversal-proof); empty-state honesty on every path. Added beyond spec: a bundled synthetic-espresso **zero-config demo vault** (`npx` works out of the box; sets the recruiter test environment with exact-parity re-embedded vectors).
+
+**Verification (spec §8, 10 binary criteria):** npm + registry live ✓, `docs/EXPLANATION.md` 4Q < 90-sec cold-read ✓, README < 200 words with copy-paste config block ✓, all 3 tools non-error against the live vault ✓ (30 contradictions; "token waste" query returns the token-waste cluster descending), empty-state clean against a blank db ✓, publish-flow parity with `intent-engineering` ✓ (both prior gotchas fixed + saved to memory for the next publish). 10 hermetic tests pass.
+
+**Artifacts.** Repo: scaffold + 3 tools + `node:sqlite` driver + Transformers.js embeddings + bundled demo vault + 10-case hermetic test suite. Docs: `README.md`, `docs/EXPLANATION.md` (4Q), `docs/LOOM-SCRIPT.md` (90-sec), `docs/LINKEDIN-DRAFT.md`. **Pending (manual, Sean):** record the 90-sec Loom, drop npm + repo links into the LinkedIn first-comment, post the LinkedIn draft (tag Anthropic), and log the first recruiter engagement in [[target-companies]].
+
+---
+
+### 2026-05-30 (later) — Task 15 portfolio mirror corrected (BLOCKER-1 → inline-body 4Q; v1.1 defer)
+
+**Correction to the 2026-05-29 Task 15 entry above.** That entry recorded the portfolio mirror's OQ-C as "resolved — `essaySourceUrl` / `explanationUrl` now point at the live code-brain files." The 2026-05-30 portfolio v1-remediation session reversed that: wiring those URLs live **broke the Astro build** (BLOCKER-1), for two independent reasons — (1) the configured GitHub `/blob/` HTML URLs (not `raw`) wrote a full HTML page into the body-cache, and (2) `scripts/fetch_canonical_sources.mjs` wrote that cache *inside* the architecture content-collection glob, so Astro loaded a frontmatter-less cache file as a malformed entry → `InvalidContentEntryDataError` on every `build`. Separately, `src/pages/architecture/[slug].astro` injects the fetched file via `set:html` with no markdown→HTML step, so even a correct `raw` URL would render unprocessed source.
+
+**Resolution (Option B, Sean's call):** both architecture canonical URLs reverted to `null`, matching the proven essays inline-fallback pattern. `src/content/architecture/vault-scorecard.mdx` now renders its complete authored inline-body 4Q via `<Content />` (proper Astro markdown→HTML) — the documented OQ-C v1 fallback (`config.ts:104`). The committed lock #6 surface prose is otherwise untouched, and the 5/30 brainstorm voice pass (lead + both Linear-wins HONEST NOTES + `+`→`and`) is preserved on the mdx.
+
+**Net state of the public mirror:** the portfolio has scaffolded well past Phase 2 (hero, essays, transactions, architecture all built); `vault-scorecard.mdx` builds and renders today via the inline body. **Deferred to v1.1** (infra, not Task 15 content): wire the live upstream fetch — raw URLs verified HTTP 200 + relocate the fetch-cache out of the content-collection glob + a real md→HTML render path. The code-brain side (commit `53539eb`, tag `vault-scorecard-v1`) is unaffected. Source: `sw-ai-pm-portfolio/docs/writing-council/IMPLEMENTATION-NOTES-2026-05-30.md` BLOCKER-1.
 
 ---
 

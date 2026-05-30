@@ -3,7 +3,7 @@ type: roadmap
 project: prj-job-hunt-2026
 status: draft
 created: 2026-05-06
-last_updated: 2026-05-28
+last_updated: 2026-05-30
 synthesis_sources: [karpathy-sequoia, nate-credentials-opus, nate-credentials-gpt, nate-comprehension-opus, nate-comprehension-gpt, council-nate-jones-digest-2026-05-16]
 completion_log: unified-roadmap-completion-log.md
 amendments_index:
@@ -700,9 +700,9 @@ Each gets a concrete decision now or a deferred-to-week-N flag.
 
 ---
 
-### Task 10 — `vault-knowledge-mcp` (NEW 2026-05-13 — research-pending; 8th flagship artifact)
+### Task 10 — `vault-knowledge-mcp` (NEW 2026-05-13 — **SHIPPED 2026-05-30**; 8th flagship artifact, 2nd MCP)
 
-> **Status:** Build spec + deep-research prompt scaffold at [`2026-05-13-vault-knowledge-mcp-spec.md`](2026-05-13-vault-knowledge-mcp-spec.md). **No code written yet.** Deep research must return before architecture is locked. Expected DR run: Gemini DR-Max, ~$7 cost cap (within `agents-sdk/config.toml` Gemini Researcher governor). Expected research-return file: `vault/20_projects/research/2026-05-XX-vault-knowledge-mcp-research.md`.
+> **Status:** **SHIPPED 2026-05-30.** `@swins/vault-knowledge-mcp@0.1.0` live on npm; `com.seanwinslow/vault-knowledge@0.1.0` live on the MCP registry; repo public at [`github.com/seanwinslow28/sw-mcp-vault-knowledge`](https://github.com/seanwinslow28/sw-mcp-vault-knowledge). Working tree: `~/Code-Brain/sw-mcp-vault-knowledge/`. Built + published in a single Cowork session against the 2026-05-18 Gemini DR-Max research ([`vault/20_projects/research/2026-05-18-vault-knowledge-mcp-research.md`](../../../research/2026-05-18-vault-knowledge-mcp-research.md)) — spec flipped to `research-complete`. 3 tools (`search_concepts`, `find_contradictions`, `get_article`), `node:sqlite` driver (swapped from better-sqlite3 mid-build for zero-friction install), JS-native nomic-v1.5 query embeddings, read-only over the existing `.vault-index.db`, config-only traversal-proof allowlist, bundled zero-config espresso demo vault. 10 hermetic tests pass; all 3 tools verified non-error against the live vault (30 contradictions). README (<200w) + `docs/EXPLANATION.md` (4Q) + `docs/LOOM-SCRIPT.md` + `docs/LINKEDIN-DRAFT.md` drafted. Both prior publish-flow gotchas fixed + saved to memory. **Ship narrative + naming-decision record:** [`unified-roadmap-completion-log.md`](unified-roadmap-completion-log.md) → 2026-05-30 amendment. **Remaining (manual, Sean):** 90-sec Loom recording, LinkedIn first-comment links + post, first-recruiter-engagement log.
 
 **Maps to:** Karpathy synthesis Claim B ("MCP servers are the portable career artifact for 2026") + [[2026-05-07-target-role-specs]] §3 Anthropic FDE (literal JD ask for "MCP servers, sub-agents, agent skills") + unified roadmap Decision 1 follow-on ("two MCPs of different shapes proves the pattern is repeatable").
 
@@ -730,15 +730,15 @@ Each gets a concrete decision now or a deferred-to-week-N flag.
 
 **- [x] Step 0: Spec + research prompt drafted.** ✅ 2026-05-13 — see [`2026-05-13-vault-knowledge-mcp-spec.md`](2026-05-13-vault-knowledge-mcp-spec.md).
 
-**- [ ] Step 1: Run Gemini DR-Max with the §12 research prompt.** Output lands at `vault/20_projects/research/2026-05-XX-vault-knowledge-mcp-research.md`. Cost cap: $7.
+**- [x] Step 1: Run Gemini DR-Max with the §12 research prompt.** ✅ 2026-05-18 — [`2026-05-18-vault-knowledge-mcp-research.md`](../../../research/2026-05-18-vault-knowledge-mcp-research.md) ($7 DR-Max, + `-chatgpt` / `-gemini` companion passes).
 
-**- [ ] Step 2: Review DR results, lock the 6 open architectural decisions.** Update the spec's frontmatter `status` from `research-pending` → `research-complete`. Append a `## Scope-Lock` section to the spec capturing each locked decision.
+**- [x] Step 2: Review DR results, lock the 6 open architectural decisions.** ✅ Spec flipped `research-pending` → `research-complete`. Verdicts: JS-native embeddings, read-only existing `.vault-index.db`, env-var/absolute-path allowlist, keep `vault-knowledge-mcp` name, 3 tools, ship a public demo vault.
 
-**- [ ] Step 3: Execute the build per the locked spec.** Mirror `intent-engineering`'s 5-phase build (scaffold → 3 real tools → hardening → publish → launch comms). Reuse the publish flow frozen in this roadmap's "Publish + registry flow — frozen reference" subsection.
+**- [x] Step 3: Execute the build per the locked spec.** ✅ 2026-05-30 — mirrored `intent-engineering`'s 5-phase build. One mid-build change: `node:sqlite` replaced better-sqlite3 (zero-friction install; spec §3c stack was research-open). 10 hermetic tests pass; live vault + zero-config demo both verified.
 
-**- [ ] Step 4: Ship.** npm publish + MCP registry publish + README + 4Q `EXPLANATION.md` + 90-sec Loom + LinkedIn announcement tagging Anthropic + MCP team.
+**- [x] Step 4: Ship.** ✅ 2026-05-30 — npm + MCP registry published + verified; README + 4Q `EXPLANATION.md` in repo; Loom script + LinkedIn draft written. Loom recording + LinkedIn post are Sean's remaining manual follow-ups.
 
-**Verification gate:** 10 binary success criteria in the spec §8. Earliest start: Mon 2026-05-19 (post-research). Ship target: 2026-05-28 to 2026-06-04. Tier-A protected — slips do not block Track-C, animation pipeline (6/11), or eval suite Loom (5/22).
+**Verification gate:** ✅ **CLOSED 2026-05-30** — 8 of 10 spec §8 criteria fully met (npm live, registry live, EXPLANATION <90s, README <200w + config block, 3 tools non-error on live vault, empty-state clean, publish parity). The 2 distribution-side criteria (90-sec Loom URL, recruiter attribution) gate on Sean's manual follow-ups. Shipped inside the 2026-05-28→06-04 window. Tier-A held — no slip to Track-C, animation pipeline (6/11), or eval suite Loom.
 
 ---
 
@@ -1087,9 +1087,13 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `pytest too
 
 ---
 
-### Task 15 — Vault as Agent Infrastructure: 5-Test Scorecard (Council Gap-Fill 5; NEW 2026-05-17 — ship target 2026-06-03)
+### Task 15 — Vault as Agent Infrastructure: 5-Test Scorecard (Council Gap-Fill 5; NEW 2026-05-17 — **SHIPPED 2026-05-29; portfolio mirror corrected 2026-05-30**)
 
-> **Status 2026-05-21:** **Step 0 pre-build prep complete; all 6 decisions locked (defaults).** SCORECARD.md cells pre-populated with live vault telemetry (478 edges, 6 SQL-enforced relations, 13,488 chunks, 8 superseded edges, 219 confidence-tagged). `scripts/generate_schema.py` skeleton ready to paste, Mermaid `erDiagram` source ready to embed, 5-section essay outline ready to expand. **Voice-review checkpoint added:** Sean runs `writing-voice-modes` skill against SCORECARD + essay before any public posting. Build window 2026-06-01 → 2026-06-03 is execution. See companion prep doc: [`2026-05-20-task-15-step-0-prebuild-prep.md`](2026-05-20-task-15-step-0-prebuild-prep.md).
+> **Status 2026-05-30 — portfolio mirror corrected (BLOCKER-1); page renders via inline-body 4Q.** The 2026-05-30 portfolio v1-remediation session found that wiring the architecture page's `essaySourceUrl` / `explanationUrl` to the live code-brain files broke the Astro build, for two independent reasons: (1) the configured GitHub `/blob/` HTML URLs (not `raw`) wrote a full HTML page into the body-cache, and (2) `scripts/fetch_canonical_sources.mjs` wrote that cache *inside* the architecture content-collection glob → `InvalidContentEntryDataError` on every build; separately `src/pages/architecture/[slug].astro` injects the fetched file via `set:html` with no markdown→HTML step, so even a correct raw URL would render unprocessed source. **Resolution (Option B):** both URLs reverted to `null`; `src/content/architecture/vault-scorecard.mdx` now renders its complete authored inline-body 4Q via `<Content />` — the documented OQ-C v1 fallback. **This supersedes the 5/29 "OQ-C resolved / URLs point at the live code-brain files" line below.** The portfolio has scaffolded well past Phase 2 (hero, essays, transactions, architecture all built); the page builds and renders today — remaining is the public deploy plus the v1.1 live-upstream-fetch fix (raw URLs + relocate the fetch-cache out of the collection glob + a real md→HTML render). Detail: `sw-ai-pm-portfolio/docs/writing-council/IMPLEMENTATION-NOTES-2026-05-30.md` BLOCKER-1. Ship narrative: the [completion log](unified-roadmap-completion-log.md) `2026-05-30 (later)` entry.
+>
+> **Status 2026-05-29 — SHIPPED (code-brain side); voice-final, Step 8 gate PASSED.** `vault/SCORECARD.md`, the long-form essay `docs/VAULT_AS_AGENT_INFRASTRUCTURE.md` (1,974 words — inside the 1,800–2,200 band), the 4Q `docs/VAULT_AS_AGENT_INFRASTRUCTURE_EXPLANATION.md`, the synthetic `examples/public_vault_fixture/`, and `scripts/generate_schema.py` all shipped, committed (`53539eb`), and tagged `vault-scorecard-v1` on code-brain `main`. Telemetry refreshed to live numbers (moved since the Step-0 snapshot): **632 typed edges, 6 SQL-enforced relations, 15,582 indexed chunks, 8 `valid_until`-curated edges** (verb dist `depends_on 215 · related_to 199 · supports 160 · contradicts 38 · evolved_into 13 · supersedes 7`). Voice-review pass complete via `writing-voice-modes` — Sedaris-led intro, epigraph landing on "the latest blueprints," callback closer ("the blueprints I'm building from"), the two Linear-wins HONEST NOTES preserved and sharpened ("won't dress it up" / "won't pretend it's full RBAC yet"), emoji stripped from all prose and replaced with a four-level word scale (scoreboard *tables* keep their marks), and the `+`→`and` voice rule applied across all three docs. Verification gate: `validate.py` PASSED (61 warnings / 0 errors), ≥5 code permalinks (9), ER diagram embeds, fixture + artifacts leakage-clean (no abs paths / secrets). The portfolio mirror `vault-scorecard.mdx` is voice-aligned and committed, with its OQ-C resolved (`essaySourceUrl` / `explanationUrl` now point at the live code-brain files). **Remaining (gated on the portfolio Astro build, Phase 2 — not on Task 15 content):** the public page `seanwinslow.com/architecture/vault-scorecard/` renders the already-committed mdx once the site scaffolds. Ship narrative + Rule-#8 note: [completion log 2026-05-29 entry](unified-roadmap-completion-log.md#2026-05-29--task-15-vault-scorecard-voice-final--step-8-gate-passed-code-brain-side).
+>
+> **Status (prior 2026-05-21):** **Step 0 pre-build prep complete; all 6 decisions locked (defaults).** SCORECARD.md cells pre-populated with live vault telemetry (478 edges, 6 SQL-enforced relations, 13,488 chunks, 8 superseded edges, 219 confidence-tagged). `scripts/generate_schema.py` skeleton ready to paste, Mermaid `erDiagram` source ready to embed, 5-section essay outline ready to expand. **Voice-review checkpoint added:** Sean runs `writing-voice-modes` skill against SCORECARD + essay before any public posting. Build window 2026-06-01 → 2026-06-03 is execution. See companion prep doc: [`2026-05-20-task-15-step-0-prebuild-prep.md`](2026-05-20-task-15-step-0-prebuild-prep.md).
 >
 > **Status (prior):** Not started. 2–3 day build, Week 3 council slot (5/31–6/6). **Precursor doc for Task 10** (`vault-knowledge-mcp`) — makes that MCP self-justifying when it ships by establishing the architectural argument first. Council unanimity: Sean's vault genuinely passes all five of Nate's structural tests, and almost no public PM portfolio does. This is what distinguishes Sean from every other laid-off PM with a Notion site.
 
