@@ -1,0 +1,33 @@
+{
+  "date": "2026-05-30",
+  "runs": [
+    {
+      "fired_at": "2026-05-30T08:00:05.496602",
+      "fetch_total": 3985,
+      "rules_passed": 0,
+      "rules_rejected": 126,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": true,
+      "duration_sec": 17.1,
+      "failed_pollers": [
+        "ats:huggingface (all 404)",
+        "ats:scale (all 404)",
+        "ats:replicate (all 404)",
+        "ats:framer (all 404)",
+        "ats:spline (all 404)",
+        "ats:beehiiv (all 404)",
+        "ats:draftkings (all 404)",
+        "ats:canva (all 404)",
+        "ats:glean (all 404)",
+        "ats:together-ai (all 404)",
+        "ats:fourthwall (all 404)",
+        "ats:circle (all 404)",
+        "ats:tome (ReadTimeout)",
+        "ats:toast (ReadTimeout)",
+        "ats:datarobot (ReadTimeout)"
+      ],
+      "short_circuited": false
+    }
+  ]
+}
