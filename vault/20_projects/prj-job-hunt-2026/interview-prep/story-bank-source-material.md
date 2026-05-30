@@ -27,12 +27,12 @@ Lock these before drilling — every story inherits them.
 | Laid off from The Block 2026-05-04, cost-cutting (not performance) | ✅ confirmed | personal-context v2.0 |
 | The Block role: Associate PM (Technical), Nov 10 2025 → May 4 2026, reported to Ed Rupkus | ✅ confirmed | personal-context v2.0 |
 | The Block products: `.Co` + Campus; ETF page workflow, Jira ticket standards, biweekly P&E updates | ✅ confirmed | the-block/ skills (etf-page-creator, jira-ticket-writer, biweekly-jira-update) |
-| ~10 years multimedia/freelance in NYC (illustration, animation, film) before the PM pivot | ✅ confirmed | personal-context v2.0 |
+| **~10 years freelancing/permalancing at New York Life** (financial-services); media manager → **AI product operations lead**; the go-to person for AI footage + recommendations | ✅ confirmed 2026-05-30 | Sean direct |
 | 2024 pivot: PM classes + AI tools to switch lanes; landed The Block Nov 2025 (first FT job w/ benefits) | ✅ confirmed | personal-context v2.0 |
-| **New York Life / "financial-services org" — exact title, exact years, what "lone AI evangelist" looked like there** | ⚠️ **CONFIRM** | roadmap TMAY hook references "4 prior years at a financial-services org"; personal-context only says "decade as freelancer." Reconcile before any interview. |
+| The Block: **35 ETF pages** shipped on the repeatable workflow | ✅ confirmed 2026-05-30 | Sean direct |
 | Solo-work technical facts (every metric below) | ✅ confirmed | Code-Brain CLAUDE.md + agents-sdk docs |
 
-The one real gap is the **NYL employment specifics**. The technical solo-work stories are fully grounded; the resume-timeline stories need you to pin down the NYL title/years/scope so you don't say something in a room you can't back up.
+**Resolved 2026-05-30:** the "decade freelancer" in the personal-context doc and the "financial-services org" in the roadmap's pre-drafted TMAY hook are the **same thing** — New York Life. Sean spent ~10 years there freelancing/permalancing, rising from media manager to AI product operations lead. That means the evangelist arc isn't a side-narrative — *being the AI person was his literal job title at a financial-services giant.* That's a stronger hook than the placeholder, and it's now load-bearing in both the Story Bank and the TMAY.
 
 ---
 
@@ -126,9 +126,9 @@ Each: **Situation** (1 sentence) · **Task** (PM accountability) · **Action** (
   - Standardized **Jira ticketing** (Epics / Design Stories / Implementation Stories) so eng and design shared one definition of ready/done.
   - Ran the **biweekly Product & Engineering status update** — the cross-team comprehension surface.
   - Built a repeatable **ETF page-creation workflow** (WordPress + a pending-ETF tracking sheet) spanning content + data + publishing.
-  - [CONFIRM specifics: launch counts, cycle-time deltas, any named metric you can defend.]
+  - Shipped **35 ETF pages** on that workflow.
 - **R:** Cross-functional delivery stayed legible through the turnover; the templates were reusable enough to retain as portfolio reference.
-- **M:** [CONFIRM — need a real number: # ETF pages shipped, ticket cycle-time, or update cadence reliability.]
+- **M:** 35 ETF pages on a repeatable workflow; Jira ticket standard (Epics/Design/Implementation); biweekly P&E update held through a CPO departure + CEO change.
 - **Category:** Cross-Functional Collaboration (primary) — the one *named-org* story
 - **Verdict:** ✅ **KEEP** — you need at least one story set inside a real company with real coworkers; this is it. Needs a defensible metric.
 
@@ -157,7 +157,7 @@ Each: **Situation** (1 sentence) · **Task** (PM accountability) · **Action** (
 
 ### C10 — The AI-evangelist → AI-native-operator arc (the layoff inflection)
 
-- **S:** For years I was the lone person pushing AI inside non-AI orgs (NYL, then The Block); then the Block layoff (2026-05-04, cost-cutting) reset everything.
+- **S:** For ~10 years I was the AI person inside a financial-services org — New York Life, where I went from media manager to AI product operations lead — then carried that into The Block; the Block layoff (2026-05-04, cost-cutting) reset everything.
 - **T:** Convert the reset into momentum instead of a gap.
 - **A:**
   - Reframed: "I kept evangelizing AI inside orgs that wouldn't build it — so I went and built it myself."

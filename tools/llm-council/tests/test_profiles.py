@@ -41,3 +41,12 @@ def test_profile_max_cost_is_positive_float():
 def test_premium_more_expensive_than_variance():
     # Premium uses frontier models; variance mixes mid-tier. Caps should reflect this.
     assert get_profile("premium").max_cost_per_query >= get_profile("variance").max_cost_per_query
+
+
+def test_interview_grader_profile_exists():
+    # Task 19 (A6) — Mock Interview grader.
+    p = get_profile("interview_grader")
+    assert p.name == "interview_grader"
+    assert len(p.models) == 4, "Pipeline requires 4 panelists; do not change without prompts.py refactor"
+    assert p.chairman in p.models, "Chairman must be one of the panelists"
+    assert p.max_cost_per_query == 0.40

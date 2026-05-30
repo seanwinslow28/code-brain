@@ -36,6 +36,21 @@ PROFILES: dict[str, Profile] = {
         chairman="~anthropic/claude-sonnet-latest",
         max_cost_per_query=0.40,
     ),
+    # Task 19 (A6) — Mock Interview grader. 4 panelists, Sonnet swapped in for Grok
+    # ("speed over variance" per the roadmap spec note); keeping 4 avoids a prompts.py
+    # refactor (FANOUT/CHAIRMAN system prompts hardcode "four"). Different RLHF lineages
+    # (Opus / GPT / Gemini / Sonnet) give calibrated interview scores. $0.40/query cap.
+    "interview_grader": Profile(
+        name="interview_grader",
+        models=(
+            "anthropic/claude-opus-4.7",        # depth — chairman
+            "openai/gpt-5.5",                    # alternative RLHF lineage
+            "~google/gemini-pro-latest",         # third lineage, different rubric biases
+            "~anthropic/claude-sonnet-latest",   # speed proxy (replaces Grok 4.20)
+        ),
+        chairman="anthropic/claude-opus-4.7",
+        max_cost_per_query=0.40,
+    ),
 }
 
 

@@ -30,7 +30,7 @@ ai-context: "Curated behavioral Story Bank — 7 STAR+M stories across Aakash Gu
 | 3 | Cluster-bias retrieval | Technical AI Knowledge | "My agent kept hearing the loudest voice in the room." | HDBSCAN cluster-and-sample · depth-gate with logged reject reasons |
 | 4 | LDR fabrication catch | AI Ethics / Safety | "I caught my own agent lying and kept the receipt." | 0 fabricated briefs post-fix · 1 routing rule · specimen retained |
 | 5 | Judge Layer | AI Product Strategy | "I stopped saying 'I have agents' and started saying 'I run a control architecture.'" | 8-field ActionProposal · 4 policy rules · $0/decision · fail-open |
-| 6 | The Block cross-functional | Cross-Functional Collaboration | "I kept delivery legible while the org turned over around me." | [CONFIRM metric] · Jira ticket standard · biweekly P&E update |
+| 6 | The Block cross-functional | Cross-Functional Collaboration | "I kept delivery legible while the org turned over around me." | 35 ETF pages on a repeatable workflow · Jira ticket standard · biweekly P&E update |
 | 7 | Substack-Drafter cost tradeoff | Trade-off swing | "Local model first, cloud only on fallback — ten cents a run." | ~$0–0.10/run (cap $0.10) · local-first routing · 0 autonomous publishes |
 
 ---
@@ -121,16 +121,14 @@ ai-context: "Curated behavioral Story Bank — 7 STAR+M stories across Aakash Gu
 ## Story 6 — "I kept delivery legible while the org turned over around me"
 **Category: Cross-Functional Collaboration** — *the one story set inside a real company*
 
-> ⚠️ This story needs a defensible metric before you use it in a room. The structure is right; the number is [CONFIRM]. Pull a real one: ETF pages shipped, ticket cycle-time, or update-cadence reliability.
-
 - **S:** At The Block I owned PM workflows across the `.Co` and Campus products while the Product & Engineering org went through real leadership turnover — a departing CPO, an incoming CEO.
 - **T:** Keep cross-functional delivery — engineering, design, content — moving and legible during the instability.
 - **A:**
   - Standardized **Jira ticketing** into Epics / Design Stories / Implementation Stories so eng and design shared one definition of ready and done.
   - Owned the **biweekly Product & Engineering status update** — the comprehension surface that kept teams aligned when the leadership layer was shifting.
-  - Built a repeatable **ETF page-creation workflow** spanning content, data, and publishing — so a recurring deliverable didn't depend on me being in the room.
-- **R:** Cross-functional delivery stayed legible through the turnover; the templates were clean enough that I retained them as portfolio reference.
-- **M (say it):** **"[CONFIRM — e.g. 'I shipped N ETF pages on a repeatable workflow and ran the P&E update on a reliable biweekly cadence through three months of leadership change.']"**
+  - Built a repeatable **ETF page-creation workflow** spanning content, data, and publishing — so the recurring deliverable didn't depend on me being in the room.
+- **R:** I shipped **35 ETF pages** on that workflow, and cross-functional delivery stayed legible through the turnover; the templates were clean enough that I retained them as portfolio reference.
+- **M (say it):** **"I shipped thirty-five ETF pages on a workflow I built so the work didn't depend on me being in the room — and ran the P&E update on a reliable biweekly cadence straight through a CPO departure and a CEO change."**
 - **Arc layer:** Even before I built my own AI stack, my instinct was to make work *legible and repeatable* — the same instinct that later produced the eval suite and the judge layer.
 - **Weakness-flip cue:** if asked about the layoff here, one factual sentence (cost-cutting, not performance), then pivot to what the reset produced. Don't dwell. (Full handling lives in the TMAY's per-company file.)
 
@@ -163,6 +161,6 @@ ai-context: "Curated behavioral Story Bank — 7 STAR+M stories across Aakash Gu
 
 ## Open items before these are interview-ready
 
-- ⚠️ **Story 6 metric** — pull one real, defensible number from The Block work. This is the only story with a placeholder.
-- ⚠️ **NYL specifics** — confirm title/years/scope so the evangelist arc (and the TMAY) rests on facts you can defend under follow-up.
+- ✅ **Story 6 metric** — confirmed 2026-05-30: **35 ETF pages** shipped on the repeatable workflow.
+- ✅ **NYL specifics** — confirmed 2026-05-30: **~10 years freelancing/permalancing at New York Life**, media manager → **AI product operations lead**, the go-to person for AI footage + recommendations. (This *is* the decade the personal-context doc references — not a separate stint. The evangelist arc is literally his job title there.)
 - 🔲 **Council grading** — gated on the Task 19 rig (mock-interview infrastructure); run once it's live.

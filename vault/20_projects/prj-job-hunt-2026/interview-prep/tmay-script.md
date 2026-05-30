@@ -25,11 +25,11 @@ ai-context: "TMAY (Tell Me About Yourself) 2-minute script, Aakash Gupta 4-part 
 
 > Read the **bold** at full voice; the rest is connective tissue. Slashes `/` mark breath/beat points. Bracketed timings are cumulative targets.
 
-### 1 — Hook (0:00–0:15)
+### 1 — Hook (0:00–0:18)
 
-> **"I'm a product manager who came up through a decade of creative and multimedia work, / then pivoted hard into AI. / Most recently I was an Associate PM on the technical side at The Block, a crypto-media company — / and across that role and the years before it, I was almost always the only person in the room actively pushing AI into the work."**
+> **"I'm a product manager who spent about ten years in media at New York Life — a financial-services company — / where I went from media manager to effectively the AI product operations lead: / the person everyone came to when they needed AI footage or recommendations. / Most recently I was an Associate PM on the technical side at The Block, a crypto-media company. / The throughline across all of it — I was almost always the only person in the room actually pushing AI into the work."**
 
-*Beat. Let "only person in the room" land — it sets up the inflection.*
+*Beat. Let "only person in the room" land — it sets up the inflection. The "AI product operations lead at a financial-services company" detail is the credibility anchor: you weren't dabbling, it was your job.*
 
 ### 2 — AI Inflection Point (0:15–0:45)
 
@@ -77,11 +77,11 @@ ai-context: "TMAY (Tell Me About Yourself) 2-minute script, Aakash Gupta 4-part 
 
 - [ ] Script runs **2:00–2:30** spoken (time 3 reps).
 - [ ] Council `interview_grader` hits **8+/10 on all 8 dimensions, 3 consecutive attempts** — *gated on the Task 19 rig being live.*
-- [ ] Hook timeline facts confirmed (NYL title/years).
+- [x] Hook timeline facts confirmed — ✅ 2026-05-30: ~10yr New York Life, media manager → AI product operations lead.
 - [ ] At least the top-5 target companies have a filled `Why Here` swap in the per-company file.
 
 ## Open items
 
-- ⚠️ **NYL specifics** — confirm before delivery; the Hook leans on the pre-Block history.
-- 🔲 **Council grading** — run once the Task 19 mock-interview rig ships (it's overdue; that's the next code task in this cluster).
+- ✅ **NYL specifics** — confirmed 2026-05-30 (in the Hook above). No longer a blocker.
+- 🔲 **Council grading** — run once the Task 19 mock-interview rig ships (next code task in this cluster — being built now).
 - 🔲 **Proof-point swap** — if a given interview is heavy on a 4th artifact (e.g. the live Fleet Dashboard at fleet.seanwinslow.com), you can sub it into Proof Point 3; keep the count at three.

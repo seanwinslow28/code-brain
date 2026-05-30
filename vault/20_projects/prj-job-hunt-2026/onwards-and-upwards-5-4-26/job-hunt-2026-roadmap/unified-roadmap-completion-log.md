@@ -221,6 +221,21 @@ Then 4-edit surgical voice pass: (1) §1 P2 polysyndeton push on the May 10th st
 
 **Dependency note:** Council 8-dim grading (Task 16 Step 5 + Task 17 Step 5 verification gates) is gated on Task 19 (mock-interview rig), which is the next code task in this cluster and is overdue (was 5/26). The drafts are structurally complete and drill-ready *now*; grading just measures them once the rig is live.
 
+### 2026-05-30 (later 2) — Task 19 BUILD SHIPPED + TESTED (Mock Interview rig)
+
+**The Gate-C measurement rig is code-complete and unit-tested in a single Cowork session**, executing the 2026-05-20 prep doc's locked decisions. Five artifacts:
+
+- **`interview_grader` Council profile** (`tools/llm-council/council/profiles.py`) — 4 panelists (Opus / GPT-5.5 / Gemini Pro / Sonnet), Opus chairman, $0.40/query cap. Kept 4 panelists (Sonnet swapped for Grok) to avoid a `prompts.py` "four"-hardcode refactor — the prep-doc-flagged, Sean-approved departure from the spec's "drop to 3." New `test_interview_grader_profile_exists` → 7/7 profile tests green.
+- **8-dim rubric template** (`tools/llm-council/profiles/interview-grader-template.md`) — `{question}`/`{transcript}` tokens filled at runtime; panelists emit JSON scorecards.
+- **Orchestrator** (`agents-sdk/scripts/mock_interview_loop.py`) — record → local-Whisper transcribe → council → aggregate → write, with one-shot / `--watch` / `--transcript-text` modes.
+- **README** (`tools/llm-council/profiles/INTERVIEW_GRADER.md`) + **`mock-log/.gitkeep`**.
+
+**Design improvement over the prep-doc skeleton (documented in the README):** the prep doc's parser assumed the Council *chairman* would emit the JSON scorecard, but the chairman's system prompt produces **prose**. So the canonical NUMERIC grade is computed by **median-aggregating the four panelist JSON scorecards** (robust to one outlier; a ≥3-point panel disagreement on any dimension is flagged ⚠️), while the chairman prose is preserved as the qualitative read. This is more faithful to "a 4-model calibrated panel" than trusting one model to re-emit structured output — and it surfaces *where* the models disagree, which is itself signal.
+
+**Tests:** 13/13 new pure-logic tests (`agents-sdk/tests/test_mock_interview_loop.py` — JSON extraction tolerant of fences/prose, panelist-vs-chairman separation, median aggregation, Gate-C bar, revision merge/dedupe, empty-safe) + an end-to-end smoke (real template fill → parse → aggregate → summary write). All green on the sandbox interpreter (the Mac venvs symlink to macOS Python, unusable in the Linux sandbox, so tests ran under system python3 — pure-stdlib code, so identical behavior).
+
+**Two Sean-manual remainders before the rig produces its first grade:** (a) one-time `agents-sdk/.venv/bin/pip install faster-whisper` on the Mac; (b) Step 4 — record + grade the 3 first-test answers (TMAY / "walk me through what happened with The Block" / "shipped something hard") to open the Gate-C streak. Council grading of the Task 16 stories + Task 17 TMAY now unblocks the moment those land.
+
 ---
 
 ## Completed Tasks
