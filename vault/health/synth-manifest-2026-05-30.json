@@ -1,0 +1,26 @@
+{
+  "clusters_sampled": 35,
+  "concept_paths": [
+    "vault/knowledge/concepts/token-waste.md"
+  ],
+  "concepts_written": 1,
+  "connection_paths": [
+    "vault/knowledge/connections/the-tension-between-descriptive-resume-and-mechanical-proof.md",
+    "vault/knowledge/connections/archival-offloading-as-context-optimization.md"
+  ],
+  "connections_written": 2,
+  "duration_seconds": 3231.88,
+  "edges_rejected": 1,
+  "edges_written": 3,
+  "files_processed": 15,
+  "model_used": "qwen3-14b",
+  "rejected_count": 4,
+  "rejected_reasons": {
+    "restatement-definition": 1,
+    "thin-definition": 3
+  },
+  "run_id": "2026-05-30T02:30:04",
+  "skipped_thin_source": 0,
+  "status": "partial",
+  "wol_status": "mbp_awake"
+}

@@ -2,30 +2,31 @@
 title: "Token Waste"
 type: concept
 sources:
-  - knowledge/connections/token-waste-and-cross-domain-optimization-tension.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/unified-roadmap-completion-log.md
 tags: [auto-generated, phase-6]
-created: 2026-05-23
-updated: 2026-05-23
+created: 2026-05-30
+updated: 2026-05-30
 ---
 
 ## Definition
 
-Token waste arises from an underlying producer/consumer pattern where agents consume excessive tokens due to unoptimized contextual loading, such as non-cached system prompts or reference documents. This inefficiency creates a hidden bottleneck across multiple domains, where token allocation becomes a constraint on creativity, experimentation, and system performance. The waste is not just about cost but reflects deeper systemic issues in prompt engineering and infrastructure design.
+The inefficiency incurred when large volumes of low-signal historical data consume context window capacity, thereby increasing cost and latency while degrading the quality of AI reasoning. It occurs when agents are forced to parse irrelevant past actions alongside current strategic decisions, leading to diluted focus and higher operational expenses. Mitigating this requires strict separation of active state from archival history.
 
 ## Context
 
-For Sean, token waste restricts his ability to experiment with AI agents across domains such as creative-studio, job-hunt-2026, and Superuser Pack infrastructure. It forces budget-driven trade-offs that impact the quality of outputs from his workflows, limiting exploration and innovation.
+Sean explicitly identified the accumulation of amendments in the parent roadmap as the 'single largest in-context bloat source,' directly impacting the efficiency of his AI-assisted workflow. By offloading this data, he reduces the token cost per session and improves the relevance of the context provided to his agents.
 
 ## Evidence
 
-> The problem is that most people don’t know what they’re doing. They’re burning 5x, 10x, sometimes 20x what they should on the exact same work, and they think that’s just what AI costs.
+> Cumulatively those 13 entries were the single largest in-context bloat source for sessions opening the roadmap.
 
-> Token waste limits both his job-hunting and creative workflows by tightening the budget for Claude usage.
+> Entries are preserved verbatim in their original (source-file) order, not strictly chronological — the order reflects how Sean built them up across Cowork sessions.
 
 ## Examples
 
-- Burning 5x more tokens on the same task than necessary.
+- The decision to move the amendments log to a separate file because the 13 inline entries were causing significant bloat in the parent roadmap's context window.
+- The convention of writing new completion logs here rather than appending to the parent to keep the active roadmap slim.
 
 ## Related Concepts
 
-[[Creative Studio Workflows]] [[Cost-Capped Agentic Workflows]]
+[[Unified Roadmap]] [[Agent Health]]
