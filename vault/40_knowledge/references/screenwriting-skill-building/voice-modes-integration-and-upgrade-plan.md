@@ -1,3 +1,14 @@
+---
+type: reference
+domain:
+  - creative-studio
+status: active
+context: writing-voice-modes
+ai-context: "Integration rules + upgrade plan for the writing-voice-modes SKILL.md — new sections to insert (after Content-Type→Mode Mapping) and the roadmap for folding screenplay-craft mechanics into the existing voice modes."
+created: 2026-05-28
+source: working-doc
+---
+
 # Writing Voice Modes — Integration Rules \+ Skill Upgrade Plan
 
 ---

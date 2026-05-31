@@ -9,8 +9,11 @@ description: "I conducted five portfolio critiques for wildly different design p
 tags:
   - "source/web-clip"
 type: "source"
-status: "unprocessed"
+status: "draft"
 domain:
+  - "design-team"
+  - "life-systems"
+ai-context: "Ron Goldin distills five portfolio critiques across different design career stages into five recurring fixable problems (starting with 'the top of your portfolio could belong to anyone') — directly applicable to Sean's job-hunt portfolio work."
 ---
 ![](https://substackcdn.com/image/fetch/$s_!PSuI!,w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6ed9c826-2879-4430-9f74-32e79080e257_1448x1086.png)
 

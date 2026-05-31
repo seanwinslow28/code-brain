@@ -1,3 +1,14 @@
+---
+type: reference
+domain:
+  - creative-studio
+status: active
+context: screenplay-craft-system
+ai-context: "Screenplay Mechanics Profile on Bo Burnham's dialogue-as-phonetic-map-of-distress: syntactical persona rule sets, dual-track dialogue/stage-direction subtext, and hard-coded disfluency (mid-sentence periods) for animated comedy shorts."
+created: 2026-03-12
+source: deep-research-synthesis
+---
+
 **1\. DIALOGUE MECHANICS**  
 Burnham’s dialogue mechanics deconstruct the polished, hyper-articulate conventions of traditional screenwriting. He treats the page as a phonetic map of psychological distress, where speech patterns mirror real-time cognitive processing and anxiety 1\.
 

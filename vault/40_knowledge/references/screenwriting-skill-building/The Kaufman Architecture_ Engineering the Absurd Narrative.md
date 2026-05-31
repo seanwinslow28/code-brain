@@ -1,3 +1,14 @@
+---
+type: reference
+domain:
+  - creative-studio
+status: active
+context: screenplay-craft-system
+ai-context: "Screenplay Mechanics Profile reverse-engineering Charlie Kaufman: internal psychological architecture replacing external plot geometry, anchored by the 'Absurdism Anchor' guardrail (every meta device must externalize a concrete human wound) and existential-certainty verbal fingerprints."
+created: 2026-03-12
+source: deep-research-synthesis
+---
+
 **CHARLIE KAUFMAN: SCREENPLAY MECHANICS PROFILEPrepared by:** Structural Recursion Analyst  
 The following profile reverse-engineers Charlie Kaufman's narrative architecture. Kaufman’s screenplays operate by substituting external plot geometry with internal psychological architecture 1\. His defining anti-pattern is self-indulgence—using meta-narrative as a clever trick rather than a structural load-bearing beam 2 3\. The guardrail against this failure state is the "Absurdism Anchor": every surreal or meta-textual mechanism must literally externalize a specific, unglamorous human wound (e.g., loneliness, inadequacy, creative paralysis) 4\. Without this emotional anchor, his techniques devolve into arbitrary parody 2, 4\.
 
