@@ -2,30 +2,31 @@
 title: "Agentic Engineering"
 type: concept
 sources:
-  - knowledge/concepts/agentic-engineering.md
+  - 40_knowledge/references/ref-the-dawn-of-agentic-animation.md
 tags: [auto-generated, phase-6]
-created: 2026-05-19
-updated: 2026-05-19
+created: 2026-05-31
+updated: 2026-05-31
 ---
 
 ## Definition
 
-An approach where agents own decomposition tasks, while human judgment provides oversight. This methodology is demonstrated through Sean's development of the Claude Code Superuser Pack.
+Agentic engineering is the discipline of designing systems where AI agents operate as semi-autonomous crew members, requiring robust infrastructure for intent specification, tool integration, and failure recovery. It involves defining the boundaries of agent autonomy, ensuring they can safely interact with external tools like Blender or web browsers, and establishing the 'dither' mechanisms that allow humans to intervene when stochastic behavior deviates from desired outcomes. This field demands a shift from writing deterministic code to writing probabilistic constraints and oversight protocols.
 
 ## Context
 
-This approach is central to Sean's work in designing durable, scalable AI workflows and product management systems.
+Sean is building a 'Personal Agentic Intent Engineering' system and a 'Vault as Agent Infrastructure.' This concept defines the technical backbone of his current projects, linking his creative studio workflows with his job-hunt narrative of being a 'Project CTO' who understands the underlying mechanics of agentic systems.
 
 ## Evidence
 
-> Demonstrates Karpathy-style 'agentic engineering practitioner' architecture — agents own decomposition; human owns judgment.
+> OpenClaw is an AI assistant built on top of existing large language models that, as its website says, 'actually does things.'
 
-> Used in production for daily PM workflows, vault automation, and content generation across crypto, creative, and personal-systems domains.
+> There is already emerging including a product called 3D-Agent that claims to be a simple way to connect natural language commands to Blender using Claude.
 
 ## Examples
 
-- Claude Code Superuser Pack — Open-Source Toolkit
+- Agents deleting inboxes or harassing users when risks are not managed.
+- Agents operating Blender/Maya/Houdini semi-autonomously as crew members.
 
 ## Related Concepts
 
-[[Agent Health and Daily Routine Automation]] [[Automation Pipeline]]
+[[Personal Agentic Intent Engineering]] [[Vault as Agent Infrastructure]]
