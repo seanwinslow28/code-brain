@@ -210,7 +210,7 @@ Then 4-edit surgical voice pass: (1) §1 P2 polysyndeton push on the May 10th st
 
 **Net state of the public mirror:** the portfolio has scaffolded well past Phase 2 (hero, essays, transactions, architecture all built); `vault-scorecard.mdx` builds and renders today via the inline body. **Deferred to v1.1** (infra, not Task 15 content): wire the live upstream fetch — raw URLs verified HTTP 200 + relocate the fetch-cache out of the content-collection glob + a real md→HTML render path. The code-brain side (commit `53539eb`, tag `vault-scorecard-v1`) is unaffected. Source: `sw-ai-pm-portfolio/docs/writing-council/IMPLEMENTATION-NOTES-2026-05-30.md` BLOCKER-1.
 
-### 2026-05-30 (later) — Tasks 16 + 17 DRAFT SHIPPED (interview-prep cluster: Story Bank + TMAY)
+### 2026-05-31 — Tasks 16 + 17 DRAFT SHIPPED (interview-prep cluster: Story Bank + TMAY)
 
 **Both interview-prep writing tasks drafted in a single Cowork session**, each ahead of its date (Task 17 was due 5/31, Task 16 due 6/08). Four files landed under `vault/20_projects/prj-job-hunt-2026/interview-prep/`:
 
@@ -221,14 +221,14 @@ Then 4-edit surgical voice pass: (1) §1 P2 polysyndeton push on the May 10th st
 
 **Dependency note:** Council 8-dim grading (Task 16 Step 5 + Task 17 Step 5 verification gates) is gated on Task 19 (mock-interview rig), which is the next code task in this cluster and is overdue (was 5/26). The drafts are structurally complete and drill-ready *now*; grading just measures them once the rig is live.
 
-### 2026-05-30 (later 2) — Task 19 BUILD SHIPPED + TESTED (Mock Interview rig)
+### 2026-05-31 (later) — Task 19 BUILD SHIPPED + TESTED (Mock Interview rig)
 
 **The Gate-C measurement rig is code-complete and unit-tested in a single Cowork session**, executing the 2026-05-20 prep doc's locked decisions. Five artifacts:
 
 - **`interview_grader` Council profile** (`tools/llm-council/council/profiles.py`) — 4 panelists (Opus / GPT-5.5 / Gemini Pro / Sonnet), Opus chairman, $0.40/query cap. Kept 4 panelists (Sonnet swapped for Grok) to avoid a `prompts.py` "four"-hardcode refactor — the prep-doc-flagged, Sean-approved departure from the spec's "drop to 3." New `test_interview_grader_profile_exists` → 7/7 profile tests green.
 - **8-dim rubric template** (`tools/llm-council/profiles/interview-grader-template.md`) — `{question}`/`{transcript}` tokens filled at runtime; panelists emit JSON scorecards.
 - **Orchestrator** (`agents-sdk/scripts/mock_interview_loop.py`) — record → local-Whisper transcribe → council → aggregate → write, with one-shot / `--watch` / `--transcript-text` modes.
-- **README** (`tools/llm-council/profiles/INTERVIEW_GRADER.md`) + **`mock-log/.gitkeep`**.
+- **README** (`tools/llm-council/profiles/INTERVIEW_GRADER.md`) + **`mock-log/.gitkeep`** + a **`mock-log/RUN.md`** run cheat-sheet (the three invocation modes, the 3 first-test questions, cost/privacy reminders — added after Sean installed faster-whisper and asked for the operating walkthrough).
 
 **Design improvement over the prep-doc skeleton (documented in the README):** the prep doc's parser assumed the Council *chairman* would emit the JSON scorecard, but the chairman's system prompt produces **prose**. So the canonical NUMERIC grade is computed by **median-aggregating the four panelist JSON scorecards** (robust to one outlier; a ≥3-point panel disagreement on any dimension is flagged ⚠️), while the chairman prose is preserved as the qualitative read. This is more faithful to "a 4-model calibrated panel" than trusting one model to re-emit structured output — and it surfaces *where* the models disagree, which is itself signal.
 

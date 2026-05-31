@@ -259,8 +259,22 @@ def _build_user_prompt(proposal: ActionProposal, retry_context: str = "") -> str
     ]
     rendered = "\n".join(f"{k}: {_yaml_value(v)}" for k, v in fields)
 
+    # The content_preview is the artifact the rules actually evaluate (the
+    # draft body). Render it in its own clearly-fenced block AFTER the metadata
+    # so the model doesn't confuse the draft prose with the proposal fields.
+    # Without this block the judge sees only metadata and every rule whose
+    # condition reads "the draft ..." can never fire — it falls to ALLOW.
+    content_block = ""
+    if proposal.content_preview:
+        content_block = (
+            f"\n\n--- BEGIN DRAFT UNDER REVIEW ---\n"
+            f"{proposal.content_preview}\n"
+            f"--- END DRAFT UNDER REVIEW ---\n\n"
+            f"Apply each rule's condition to the draft text above."
+        )
+
     user = (
-        f"ActionProposal to evaluate:\n\n{rendered}\n\n"
+        f"ActionProposal to evaluate:\n\n{rendered}{content_block}\n\n"
         f"Return your verdict as the JSON object specified in the system prompt."
     )
     if retry_context:

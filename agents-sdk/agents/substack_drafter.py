@@ -442,14 +442,66 @@ if __name__ == "__main__":
 
 # --- Draft writer (Task C6, continued) ---
 
+def _draft_filename(slug: str) -> str:
+    """The canonical draft filename for today (UTC). Single source of truth so
+    the ActionProposal's target_surface matches the path _persist_draft writes."""
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    return f"{today}-agent-draft-{slug}.md"
+
+
+def _persist_draft(*, out_dir: Path, slug: str, voice_mode: str,
+                   cluster_slugs: list[str], result: dict,
+                   status: str = "pending-review") -> Path:
+    """Write an already-routed draft result to a markdown file with frontmatter.
+
+    Pure persistence — no routing, no judging. Split out of write_draft (Day 6,
+    Task 12 Step 5) so the judge can inspect the routed text BETWEEN generation
+    and persistence without duplicating the frontmatter logic.
+
+    Filename pattern: YYYY-MM-DD-agent-draft-{slug}.md
+    Frontmatter fields: type, voice, source_concepts, generated_at,
+        model_used, cost_usd, status (default 'pending-review';
+        the judge ESCALATE path passes 'quarantined-pending-review').
+
+    Args:
+        out_dir: Destination directory. Created if absent (parents=True).
+        slug: Slug used in the filename.
+        voice_mode: One of VOICE_MODES.
+        cluster_slugs: List of source concept slugs (for the frontmatter).
+        result: {'text', 'model_used', 'cost_usd'} from _route().
+        status: Frontmatter status value.
+
+    Returns:
+        Path to the written draft file.
+    """
+    out_dir.mkdir(parents=True, exist_ok=True)
+    path = out_dir / _draft_filename(slug)
+    text = result.get("text", "")
+    model_used = result.get("model_used", "unknown")
+    cost_usd = result.get("cost_usd", 0.0)
+    frontmatter = (
+        f"---\n"
+        f"type: substack-draft\n"
+        f"voice: {voice_mode}\n"
+        f"source_concepts: {cluster_slugs}\n"
+        f"generated_at: {datetime.now(timezone.utc).isoformat()}\n"
+        f"model_used: {model_used}\n"
+        f"cost_usd: {cost_usd}\n"
+        f"status: {status}\n"
+        f"---\n\n"
+    )
+    path.write_text(frontmatter + text)
+    return path
+
+
 def write_draft(*, out_dir: Path, slug: str, voice_mode: str,
                 cluster_slugs: list[str], prompt: dict[str, str],
                 max_cost_usd: float = 0.10) -> Path:
     """Call _route, persist the draft as a markdown file with frontmatter.
 
-    Filename pattern: YYYY-MM-DD-agent-draft-{slug}.md
-    Frontmatter fields: type, voice, source_concepts, generated_at,
-        model_used, cost_usd, status (always pending-review).
+    The no-judge path (judge disabled, the default). Routes then persists.
+    Behavior is unchanged from the pre-Day-6 implementation — the routing +
+    frontmatter logic just moved into _route + _persist_draft.
 
     Args:
         out_dir: Destination directory. Caller is responsible for ensuring it
@@ -470,21 +522,7 @@ def write_draft(*, out_dir: Path, slug: str, voice_mode: str,
         user=prompt["user"],
         max_cost_usd=max_cost_usd,
     )
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    path = out_dir / f"{today}-agent-draft-{slug}.md"
-    text = result.get("text", "")
-    model_used = result.get("model_used", "unknown")
-    cost_usd = result.get("cost_usd", 0.0)
-    frontmatter = (
-        f"---\n"
-        f"type: substack-draft\n"
-        f"voice: {voice_mode}\n"
-        f"source_concepts: {cluster_slugs}\n"
-        f"generated_at: {datetime.now(timezone.utc).isoformat()}\n"
-        f"model_used: {model_used}\n"
-        f"cost_usd: {cost_usd}\n"
-        f"status: pending-review\n"
-        f"---\n\n"
+    return _persist_draft(
+        out_dir=out_dir, slug=slug, voice_mode=voice_mode,
+        cluster_slugs=cluster_slugs, result=result,
     )
-    path.write_text(frontmatter + text)
-    return path

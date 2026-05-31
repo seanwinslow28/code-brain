@@ -169,6 +169,24 @@ class ActionProposal(BaseModel):
         ),
     )
 
+    content_preview: Optional[str] = Field(
+        default=None,
+        description=(
+            "The actual artifact the judge evaluates — e.g. the rendered "
+            "Substack draft body. The other eight fields are metadata ABOUT "
+            "the action; this is the action's content, the text the policy "
+            "rules (rule_a fabricated quotes, rule_b Block attribution, "
+            "rule_c voice drift, rule_d publish verbs) read directly. "
+            "None when the action has no reviewable content (a pure Pushover "
+            "ping, a git tag). Callers SHOULD truncate to a few thousand "
+            "chars before constructing the proposal so the JSONL ledger row "
+            "stays lean — the judge needs enough to spot a violation, not the "
+            "whole essay. Added Day 6 (2026-05-31): the Day 1-3 schema had no "
+            "content channel, so the judge could only ever see metadata and "
+            "fell through to ALLOW; this field is what lets the rules fire."
+        ),
+    )
+
 
 class JudgeDecision(BaseModel):
     """The judge's full response to an ActionProposal.
