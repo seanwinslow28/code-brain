@@ -2,31 +2,31 @@
 title: "Interview Preparation Playbook"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/interview-prep/2026-05-10-vibe-coding-playbook.md
+  - 20_projects/prj-job-hunt-2026/interview-prep/tmay-script.md
 tags: [auto-generated, phase-6]
-created: 2026-05-22
-updated: 2026-05-22
+created: 2026-05-31
+updated: 2026-05-31
 ---
 
 ## Definition
 
-A structured, executable layer on top of synthesized interview formats. It distills company-specific strategies into actionable steps and tactics, typically organized by phase (e.g., Phase 2 of 4). The playbook emphasizes pre-interview rituals, such as practicing with role-specific formats and mastering core concepts that are unlikely to change.
+A structured, executable layer on top of synthesized interview formats that distills company-specific strategies into actionable steps and tactics, typically organized by phase. It serves as a real-time reference guide during the interview, allowing the candidate to quickly recall specific behavioral and technical responses tailored to the interviewer's style and the company's culture. The playbook is not a script but a structured set of heuristics that can be applied dynamically to the evolving context of the interview.
 
 ## Context
 
-This playbook is essential for Sean as it turns high-level, ambiguous interview formats into concrete steps. It allows him to focus on critical areas (e.g., solo builds) while avoiding traps like over-preparing for a format that may not even be used.
+Sean has developed this playbook to manage the cognitive load of interviews, ensuring he doesn't revert to generic responses under pressure. It bridges the gap between his general interview preparation and the specific nuances of each company, allowing him to maintain authenticity while adhering to strategic goals. This artifact is critical for maintaining consistency across different interview contexts without sounding rehearsed.
 
 ## Evidence
 
-> This is the executable layer on top of the synthesis. Every section is built to be glanced at the morning of an interview without needing to re-orient.
+> This is the executable layer on top of the synthesis. Every section is built to be glanced at the morning of an interview without needing to re-read the entire prep.
 
-> Sections 4-6 are the load-bearing tactical moves; sections 5 and 8 are the highest-leverage prep before any specific loop.
+> A structured, executable layer on top of synthesized interview formats. It distills company-specific strategies into actionable steps and tactics, typically organized by phase.
 
 ## Examples
 
-- The playbook includes a 'first-five/last-five' approach for high-leverage practice.
-- Portfolio walkthroughs are a key component in some formats but not others.
+- Sean's preparation strategy must be tailored to each format rather than relying on a single static playbook.
+- The interview format functions as a situated human-machine-human interaction where the candidate’s competence is revealed through the repair, redirection, and reframing of a live plan in real-time.
 
 ## Related Concepts
 
-[[Vibe-Coding Interview Format]] [[Vibe-Coding Interview Canon]]
+[[Vibe-Coding Interview Format]] [[Vibe-Coding Playbook]]
