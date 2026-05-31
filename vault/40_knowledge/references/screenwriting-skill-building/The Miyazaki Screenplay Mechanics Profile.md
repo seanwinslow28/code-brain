@@ -1,3 +1,14 @@
+---
+type: reference
+domain:
+  - creative-studio
+status: active
+context: screenplay-craft-system
+ai-context: "Screenplay Mechanics Profile translating Miyazaki's ekonte (continuity-storyboard) visual-first method — constructed silence, yakuwarigo role-language differentiation, Kishōtenketsu micro-structure — into actionable directives for 2D animation and short-form comedy."
+created: 2026-03-12
+source: deep-research-synthesis
+---
+
 As a Visual Silence Analyst, I approach Hayao Miyazaki’s work not as literary scripts, but as *ekonte* (continuity storyboards)—technical blueprints where narrative, spatial geography, and cinematic time are engineered simultaneously 1, 2\. Miyazaki constructs silence the way conventional writers construct dialogue. The following mechanical profile translates his visual-first methodology into actionable directives for screenwriting, specifically optimized for 2D animation and adaptable to short-form comedy.  
 Here is the Screenplay Mechanics Profile.
 

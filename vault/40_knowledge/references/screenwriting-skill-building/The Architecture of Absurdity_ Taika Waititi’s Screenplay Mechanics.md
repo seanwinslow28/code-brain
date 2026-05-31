@@ -1,3 +1,14 @@
+---
+type: reference
+domain:
+  - creative-studio
+status: active
+context: screenplay-craft-system
+ai-context: "Screenplay Mechanics Profile deconstructing Taika Waititi's tonal-seam welds — 'Scripted Improv' typographic hesitation, Diagonal Communication, self-awareness-spectrum characterization, and the dialogue-vs-action-line subtext chasm — calibrated for 2D animation."
+created: 2026-03-12
+source: deep-research-synthesis
+---
+
 As a Tonal Seam Analyst, my objective is to deconstruct the architectural blueprint of Taika Waititi’s screenplays. We are not examining the magic of improvisation or the charm of his actors; we are inspecting the mechanical welds that allow absolute absurdity and crushing devastation to structurally co-exist without the frame collapsing.  
 Here is the Screenplay Mechanics Profile detailing how these techniques function on the page, specifically calibrated for translation into 2D animated narrative.
 

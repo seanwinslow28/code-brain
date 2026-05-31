@@ -1,3 +1,14 @@
+---
+type: reference
+domain:
+  - creative-studio
+status: active
+context: screenplay-craft-system
+ai-context: "Loading guide naming the six 'must-have' deep-research PDFs (Burnham, Fey×Glover, Kaufman, Miyazaki, Pixar, Waititi) to feed a Claude Code SKILL targeting 3–5 min 2D animated comedy shorts, with the specific short-form framework each contributes."
+created: 2026-05-31
+source: working-doc
+---
+
 To build an operational SKILL for your Claude Code agent that specifically targets 3–5 minute 2D animated comedy shorts with emotional depth, you must feed it documents that have already distilled feature-length techniques into short-form mechanics.  
 Here are the six "must-have" PDF documents you need to load into the agent's knowledge base:
 

@@ -1,3 +1,14 @@
+---
+type: reference
+domain:
+  - creative-studio
+status: active
+context: writing-voice-modes
+ai-context: "Reusable kickoff prompt for a new conversation to upgrade Sean's writing-voice-modes / script-writing skill with the six-filmmaker screenplay mechanics (Pixar, Kaufman, Miyazaki, Waititi, Burnham, Fey×Glover)."
+created: 2026-05-28
+source: working-doc
+---
+
 # Updated Prompt — Script-Writing Skill Upgrade (6 Filmmakers)
 
 Paste this at the start of the new conversation:
