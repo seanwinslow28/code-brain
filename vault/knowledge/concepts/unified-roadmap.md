@@ -4,29 +4,29 @@ type: concept
 sources:
   - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md
 tags: [auto-generated, phase-6]
-created: 2026-05-29
-updated: 2026-05-29
+created: 2026-05-31
+updated: 2026-05-31
 ---
 
 ## Definition
 
-A synthesis artifact that aligns external reference documents with an internal master plan, serving as a dynamic interface between strategic input and tactical execution. It functions as a living document where amendments are logged chronologically to track the evolution of scope, such as the addition of evaluation suites or the deferral of personal site tasks. The structure enforces a separation between high-level synthesis and low-level completion logs, ensuring that the roadmap remains a strategic anchor rather than a cluttered task list.
+A synthesis artifact that aligns external reference documents with an internal master plan, serving as a dynamic interface between strategic input and tactical execution. It functions as a living document where high-level strategic signals from external authorities are continuously mapped onto specific, actionable tactical steps within an existing project structure. This mechanism allows for the integration of disparate information sources into a coherent, executable timeline without requiring the creation of new, isolated silos for each new insight.
 
 ## Context
 
-Sean uses this to manage the complexity of his job hunt by integrating diverse inputs (Karpathy, Nate Jones) into a single coherent plan. This prevents the fragmentation of strategy across multiple notes and allows him to see how external advice directly modifies his internal project phases.
+Sean uses this to bridge the gap between high-level career strategy (Karpathy/Nate insights) and the granular, daily execution of his job hunt and portfolio projects. It prevents strategic drift by ensuring that every new insight is immediately tied to a concrete task or amendment in the master plan.
 
 ## Evidence
 
-> A comprehensive synthesis of multiple reference documents, aligning them with a master plan's phases and incorporating updates from various sources including Karpathy and Nate's work.
+> A synthesis artifact that aligns external reference documents with an internal master plan, serving as a dynamic interface between strategic input and tactical execution.
 
-> The roadmap names 5 flagship artifacts + 2 supporting artifacts as build targets through July, mapping them onto the existing Phase 0–8 master plan.
+> The `amendments_index` field above is a date+topic-only pointer; full prose lives in the companion log under `## Amendments Log`.
 
 ## Examples
 
-- Amendments log tracking the addition of Task 8 + 9 (Eval Suite ship) on 2026-05-10.
-- Task 12 Days 1-3 shipped and verified in a single Cowork session on 2026-05-28.
+- 2026-05-17 — Council Gap-Fill 2 expanded into Task 13 (Access-vs-Meaning Manifesto + Spectrum Map)
+- 2026-05-18 — Task 11 DEPLOY COMPLETE — fleet.seanwinslow.com LIVE
 
 ## Related Concepts
 
-[[Portfolio Projects for Interview Prep]] [[Master Plan]]
+[[Master Plan]] [[Strategic Input]] [[Tactical Execution]]

@@ -2,31 +2,31 @@
 title: "Abstraction Layer Shift"
 type: concept
 sources:
-  - 40_knowledge/references/ref-how-i-ai-felix-rieseberg-claude-cowork-google-io-2026.md
+  - 40_knowledge/references/ref-pms-ship-100k-lines-code-openai-lopopolo.md
 tags: [auto-generated, phase-6]
-created: 2026-05-29
-updated: 2026-05-29
+created: 2026-05-31
+updated: 2026-05-31
 ---
 
 ## Definition
 
-This pattern describes the strategic decision to delegate execution to an AI agent while retaining human oversight at a higher level of semantic intent. Instead of managing the granular steps of a task, the user defines the outcome and constraints, allowing the agent to determine the implementation details. This shift reduces cognitive load by offloading the 'how' to the machine while preserving the 'what' and 'why' for the human, effectively turning the user into a product manager of their own digital labor.
+This pattern describes the structural inversion where the Product Manager transitions from being a direct author of implementation details to a designer of constraints and verification logic. Instead of writing code, the PM defines the 'harness'—the rules, tests, and specifications that the model executes. This shifts the PM's leverage from manual execution speed to the precision of their intent engineering and the robustness of their evaluation criteria. The PM becomes the architect of the system's behavior rather than the builder of its components.
 
 ## Context
 
-Sean is building an agent fleet and job-hunting simultaneously. Adopting this pattern allows him to maintain high-level control over complex workflows (like job applications or code synthesis) without getting bogged down in the mechanical details, which is critical for scaling his personal productivity during a high-intensity career transition.
+Sean is currently navigating the job hunt for AI-native roles where 'vibe-coding' and harness engineering are becoming standard. Understanding this shift allows him to position his existing PM experience not as a lack of coding ability, but as a mastery of higher-leverage abstraction layers. It reframes his value proposition from 'I can code' to 'I can direct the code generation with higher fidelity than a human can write it manually.'
 
 ## Evidence
 
-> Felix walks through building a 3D floor planner from a 2D house plan, using email as a personal inventory database, creating live dashboards from connected apps, and hacking together a $20 hardware “Claude buddy.”
+> Their coding happened through PRDs, tests, docs, and harness rules. The model did the typing.
 
-> He also shares his philosophy for getting more out of AI: go one abstraction layer up, let Claude work in the background, and stop assuming computers can’t solve some of the annoying little problems in your life.
+> Most companies are still debating whether PMs should ship code. OpenAI is debating the best ways for PMs to ship code.
 
 ## Examples
 
-- Using email as a personal inventory database rather than a communication channel.
-- Building a 3D floor planner from a 2D house plan via natural language instructions.
+- PMs shipped around 100K lines of production code without opening the IDE.
+- The model did the typing based on harness rules.
 
 ## Related Concepts
 
-[[Personal Agentic Intent Engineering]] [[Daily-driver agent]]
+[[Vibe-Coding Interview]] [[Intent Engineering]] [[Supervision as the New AI Edge]]

@@ -2,31 +2,31 @@
 title: "Runtime-Model Coupling"
 type: concept
 sources:
-  - knowledge/expansions/runtime-model-coupling.md
+  - health/tier-c-soak/2026-05-30/2026-05-03-what-are-the-practical-differences-between-ollama-modelfile.md
 tags: [auto-generated, phase-6]
-created: 2026-05-28
-updated: 2026-05-28
+created: 2026-05-31
+updated: 2026-05-31
 ---
 
 ## Definition
 
-Runtime-Model Coupling is the phenomenon where a model's functional capability is not an intrinsic property of its weights, but an emergent result of the interaction between the model, the sampling contract, and the runtime environment. This coupling creates a dependency where the system's reliability is determined by the specific configuration of temperature, constraints, and decoder logic rather than the model's raw intelligence. Consequently, a model that fails in one runtime context may succeed in another, making the runtime a critical component of the capability definition rather than a neutral transport layer.
+Runtime-Model Coupling is the phenomenon where a model's functional capability is not an intrinsic property of its weights, but an emergent result of the interaction between the model, the prompt context, and the execution environment. This coupling creates a dependency where the model's behavior is contingent on the specific runtime configuration rather than just its static training data. When this coupling is loose, the model may fail to adhere to constraints or context requirements that are critical for consistent performance. Tightening this coupling requires explicit mechanisms to enforce context persistence and constraint adherence across different runtime layers.
 
 ## Context
 
-This matters to Sean because his agent fleet relies on precise outputs for automation. If he treats the model as a static API, he ignores the runtime variables that actually determine success, leading to silent failures when configurations change or when switching between local and remote providers.
+Sean is building an agent fleet where consistency is paramount. If the model's behavior drifts based on how it is invoked (Modelfile vs. API), the fleet's reliability degrades. Understanding this coupling helps Sean decide when to bake constraints into the model (static) versus passing them at runtime (dynamic), which is crucial for maintaining the integrity of his knowledge vault and job-hunt automation.
 
 ## Evidence
 
-> Current concept says runtime config changes capability, but it under-specifies the sampling layer: temperature, top-p, repetition penalties, grammar constraints, JSON mode, tool-call decoding, seed behavior, and stop sequences.
+> The central thesis is that while both methods serve to define model behavior, they differ fundamentally in their persistence, flexibility, and implementation: Modelfile prompts act as a static, 'baked-in' foundation for a model's persona, whereas runtime messages provide a dynamic mechanism to override or supplement that foundation during specific API requests or chat sessions.
 
-> The question is not “Can model X do task Y?” but “Under which joint-system conditions does model X remain a trustworthy component in workflow Z?”
+> Modelfile prompts are defined using the `SYSTEM` keyword during model initialization, while runtime messages are passed via the API request payload.
 
 ## Examples
 
-- qwen3.6:35b-a3b on Ollama think:false is not interchangeable with the same model under another runtime
-- schema-critical local model certification
+- Using a Modelfile to create a custom model with a fixed persona for strict output formatting.
+- Passing runtime system messages to tailor responses to specific contexts in a chat session.
 
 ## Related Concepts
 
-[[Agent Ops / FDP Backup Track]] [[Infrastructure Status]]
+[[Abstraction Layer Shift]] [[System Constraints]]
