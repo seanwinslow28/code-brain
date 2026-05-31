@@ -17,7 +17,7 @@ ai-context: "TMAY (Tell Me About Yourself) 2-minute script, Aakash Gupta 4-part 
 >
 > **The spine.** This script is the **AI-evangelist → AI-native-operator arc** made into 2 minutes: *I was the person pushing AI inside orgs that wouldn't build it; the Block layoff was the inflection; so I went and built the proof myself.* Every proof point is something an interviewer can install or visit.
 >
-> **One factual flag before you say this in a room:** the Hook references your pre-Block history. Confirm the NYL title/years (see `story-bank-source-material.md` ground-truth table) so the timeline is bulletproof under follow-up. Bracketed `[CONFIRM]` spots are where you must verify, not improvise.
+> **Tenure framing note (facts confirmed 2026-05-30):** the Hook references your pre-Block New York Life history — ~10 years, media manager → AI product operations lead. This is settled and bulletproof. The one thing to have ready for a follow-up: that decade was freelance/permalance at NYL, so if asked "were you full-time there?" answer it plainly (long-term permalance) rather than letting the "ten years at New York Life" phrasing imply FTE. Ground-truth table in `story-bank-source-material.md`.
 
 ---
 
