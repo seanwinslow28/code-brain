@@ -2,35 +2,33 @@
 title: "Benchmarking Artifact"
 type: concept
 sources:
-  - knowledge/expansions/benchmarking-artifact.md
+  - health/tier-c-soak/2026-05-30/2026-05-21-topic-20-fleet-model-refresh-benchmarks.md
 tags: [auto-generated, phase-6]
-created: 2026-05-28
-updated: 2026-05-28
+created: 2026-05-31
+updated: 2026-05-31
 ---
 
 ## Definition
 
-A benchmarking artifact functions as a validity-threat taxonomy that classifies measurement failures by construct, internal, external, or statistical conclusion validity rather than merely reporting a score. This mechanism shifts the diagnostic focus from model capability to the structural integrity of the evaluation harness itself. By treating the benchmark prompt format as an interface contract, the artifact exposes the compatibility gap between model-native affordances and evaluator expectations. The core invariant is that a score is invalid if the harness violates construct validity, regardless of the model's performance within that specific constraint.
+Benchmarking Artifact is the distortion of performance metrics caused by the specific testing methodology, such as generic JSON schema benchmarks or fixed context windows, which fails to account for the model's native template requirements or runtime-specific optimizations. This artifact leads to incorrect conclusions about a model's suitability because the test conditions do not reflect the actual deployment environment. For instance, a model might appear to underperform on a generic benchmark while excelling with its native template, or vice versa. This creates a risk where model selection is based on artificial constraints rather than real-world utility.
 
 ## Context
 
-Sean needs to distinguish between a model failing a task and a test measuring the wrong capability. This distinction is critical for fleet decision records where the conclusion must be precise about whether the failure is a model defect or a test design flaw. Without this taxonomy, Sean risks optimizing for proxy metrics that collapse under Goodhart's Law once they guide deployment decisions.
+Sean must avoid promoting models based on benchmarks that do not match his production setup. If he relies on generic benchmarks, he might reject a model that would perform well with native templates or accept one that fails in his specific runtime. This concept ensures that benchmarking is a rigorous, context-aware process rather than a superficial comparison.
 
 ## Evidence
 
-> Your current concept names the artifact but does not classify which kind of invalidity is happening.
+> The report concludes that while Tier A and Tier B production models should remain on their current baselines, a new Tier C production model should be established using `gemma4:26b` on the Alienware hardware.
 
-> This score is invalid because the harness violates construct validity, not because the model failed.
+> The report also highlights that `nemotron3:33b` is more viable than previously projected, running at 29.4 tok/s on the RTX 5080 via efficient CPU offloading.
 
-> Treat every benchmark prompt format as an API/interface contract, not a neutral measurement environment.
-
-> Once benchmark scores guide deployment, models and humans optimize to the proxy, and the proxy stops representing capability.
+> There is a need to re-benchmark agentic-coder models using their native templates to account for the limitations of the current generic testing method.
 
 ## Examples
 
-- A reusable benchmark postmortem template that concludes 'the test measured JSON-template compliance instead of agentic tool competence.'
-- An eval adapter spec for Tier C model selection where Mistral-style tool calls, OpenAI function calls, and plain JSON schema are explicit subtypes with behavioral guarantees.
+- Gemma4:26b outperforms previous Tier C candidates on generic JSON schema benchmarks despite potential native template advantages.
+- Qwen3.6 performance drop is identified as a regression, possibly due to chat-template differences or quantization variants.
 
 ## Related Concepts
 
-[[Runtime-Model Coupling]] [[Eval Vocabulary]]
+[[Runtime-Model Coupling]] [[Infrastructure Status]]
