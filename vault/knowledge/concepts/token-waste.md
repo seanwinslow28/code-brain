@@ -2,31 +2,30 @@
 title: "Token Waste"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/unified-roadmap-completion-log.md
+  - knowledge/connections/archival-offloading-as-context-optimization.md
 tags: [auto-generated, phase-6]
-created: 2026-05-30
-updated: 2026-05-30
+created: 2026-05-31
+updated: 2026-05-31
 ---
 
 ## Definition
 
-The inefficiency incurred when large volumes of low-signal historical data consume context window capacity, thereby increasing cost and latency while degrading the quality of AI reasoning. It occurs when agents are forced to parse irrelevant past actions alongside current strategic decisions, leading to diluted focus and higher operational expenses. Mitigating this requires strict separation of active state from archival history.
+Token waste is the structural inefficiency that occurs when low-signal historical data consumes context window capacity, thereby increasing cost and latency while degrading the quality of AI reasoning. This phenomenon arises because large language models treat all input tokens with equal attention weight, meaning that verbose logs of completed work dilute the signal-to-noise ratio of active strategic inputs. The mechanism is not merely about volume but about the specific type of information: static, closed-state data actively competes with dynamic, open-state data for limited cognitive resources. Consequently, the system's ability to maintain coherence and accuracy is inversely proportional to the amount of irrelevant historical baggage carried in the context window.
 
 ## Context
 
-Sean explicitly identified the accumulation of amendments in the parent roadmap as the 'single largest in-context bloat source,' directly impacting the efficiency of his AI-assisted workflow. By offloading this data, he reduces the token cost per session and improves the relevance of the context provided to his agents.
+Sean must recognize that every line of completed task history in his active roadmap is a direct tax on his agent's reasoning capability. By allowing these entries to accumulate, he is actively degrading the fidelity of his daily-driver agent and increasing the cost of every subsequent interaction. The implication is that strict archival protocols are not just organizational preferences but essential performance optimizations for his agentic infrastructure.
 
 ## Evidence
 
 > Cumulatively those 13 entries were the single largest in-context bloat source for sessions opening the roadmap.
 
-> Entries are preserved verbatim in their original (source-file) order, not strictly chronological — the order reflects how Sean built them up across Cowork sessions.
+> The inefficiency incurred when large volumes of low-signal historical data consume context window capacity, thereby increasing cost and latency while degrading the quality of AI reasoning.
 
 ## Examples
 
-- The decision to move the amendments log to a separate file because the 13 inline entries were causing significant bloat in the parent roadmap's context window.
-- The convention of writing new completion logs here rather than appending to the parent to keep the active roadmap slim.
+- The 13 specific entries that constituted the largest in-context bloat source for sessions opening the roadmap.
 
 ## Related Concepts
 
-[[Unified Roadmap]] [[Agent Health]]
+[[Unified Roadmap]] [[Vault as Agent Infrastructure]]
