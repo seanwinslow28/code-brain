@@ -2,7 +2,7 @@
 title: "Unified Roadmap"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-06-unified-roadmap.md
+  - knowledge/connections/archival-offloading-as-context-optimization.md
 tags: [auto-generated, phase-6]
 created: 2026-05-31
 updated: 2026-05-31
@@ -10,23 +10,22 @@ updated: 2026-05-31
 
 ## Definition
 
-A synthesis artifact that aligns external reference documents with an internal master plan, serving as a dynamic interface between strategic input and tactical execution. It functions as a living document where high-level strategic signals from external authorities are continuously mapped onto specific, actionable tactical steps within an existing project structure. This mechanism allows for the integration of disparate information sources into a coherent, executable timeline without requiring the creation of new, isolated silos for each new insight.
+The Unified Roadmap functions as a dynamic control plane that must be strictly decoupled from its historical log to maintain operational integrity. This pattern reveals that maintaining a 'living' document requires active pruning of completed work to preserve signal-to-noise ratio for agents. The mechanism relies on a separation of concerns where the active roadmap focuses exclusively on open and in-flight work, while historical outcomes are offloaded to a separate archival store. This decoupling prevents the active roadmap from becoming a bloated, unmanageable artifact that hinders rather than helps strategic planning.
 
 ## Context
 
-Sean uses this to bridge the gap between high-level career strategy (Karpathy/Nate insights) and the granular, daily execution of his job hunt and portfolio projects. It prevents strategic drift by ensuring that every new insight is immediately tied to a concrete task or amendment in the master plan.
+Sean's current roadmap is suffering from bloat because it accumulates outcomes alongside active tasks. This conflation forces his agents to process irrelevant historical data, leading to the token waste described in the related concept. The immediate implication is that Sean must enforce strict conventions for moving tasks to the completion log to prevent the parent roadmap from bloating again.
 
 ## Evidence
 
-> A synthesis artifact that aligns external reference documents with an internal master plan, serving as a dynamic interface between strategic input and tactical execution.
+> The parent roadmap stays focused on open + in-flight work; this file accumulates outcomes.
 
-> The `amendments_index` field above is a date+topic-only pointer; full prose lives in the companion log under `## Amendments Log`.
+> This pattern reveals that maintaining a 'living' document requires active pruning of completed work to preserve signal-to-noise ratio for agents.
 
 ## Examples
 
-- 2026-05-17 — Council Gap-Fill 2 expanded into Task 13 (Access-vs-Meaning Manifesto + Spectrum Map)
-- 2026-05-18 — Task 11 DEPLOY COMPLETE — fleet.seanwinslow.com LIVE
+- The parent roadmap staying focused on open + in-flight work while a separate file accumulates outcomes.
 
 ## Related Concepts
 
-[[Master Plan]] [[Strategic Input]] [[Tactical Execution]]
+[[Token Waste]] [[Vault as Agent Infrastructure]]

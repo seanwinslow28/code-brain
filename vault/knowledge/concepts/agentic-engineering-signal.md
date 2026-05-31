@@ -2,30 +2,31 @@
 title: "Agentic Engineering Signal"
 type: concept
 sources:
-  - 40_knowledge/references/ref-agent-product-analytics-runs-not-sessions.md
+  - knowledge/connections/the-tension-between-descriptive-resume-and-mechanical-proof.md
 tags: [auto-generated, phase-6]
-created: 2026-05-29
-updated: 2026-05-29
+created: 2026-05-31
+updated: 2026-05-31
 ---
 
 ## Definition
 
-The unit of product behavior shifts from the session to the agent run, requiring analytics to track the specific steps an agent takes, the tools it touches, and the boundaries it hits. This mechanism collapses the feedback loop from weeks to minutes, allowing developers to shape and steer agent behavior mid-flight. Without this granular signal, powerful automation becomes dangerous because the consequences of decisions land in real time without visibility. The core invariant is that completion of a task does not equal user trust; the gap between finishing and being accepted is where autonomy is earned.
+This concept defines a hiring heuristic where technical competence is validated not through descriptive claims of capability, but through the immediate, mechanical verifiability of deployed artifacts. It operates as a producer/consumer pattern where the candidate's infrastructure acts as the producer, generating a public, staged state that the hiring manager consumes as proof of operational excellence. The signal is only valid if the artifact exists in a live, accessible state that requires no additional interpretation to verify its existence and functionality. This shifts the burden of proof from the candidate's narrative to the system's reliability, making the infrastructure itself the primary evidence of skill.
 
 ## Context
 
-Sean is building an eval suite and job-hunting for AI PM roles. Understanding that 'completion' is not 'acceptance' is critical for designing the right metrics for his portfolio projects and for evaluating AI products in interviews. He needs to distinguish between workflows that are merely functional and those that have earned enough trust to operate autonomously.
+Sean is navigating a job market that increasingly demands 'mechanical proof' over traditional resume descriptions. By treating his portfolio and staging infrastructure as the primary signal, he aligns his job hunt with the 'agentic engineering' paradigm, where the ability to ship and maintain automated systems is the core competency being evaluated. This approach leverages his existing vault infrastructure as a competitive differentiator, turning his operational rigor into a direct hiring asset.
 
 ## Evidence
 
-> When the user is an agent, the unit of product behavior is becoming the agent run: the work a user handed over, the steps the agent took, the tools it touched, the boundaries it hit, the corrections it got back, and whether anyone accepted the result.
+> The four repo files and the portfolio ledger row are ALREADY AUTHORED and staged.
 
-> Speed is the engine. Analytics is the rudder. A database that vanishes in nine seconds is what happens when you have a powerful engine and no way to steer.
+> The content is written and staged. This is a ship + wiring task, not an authoring task.
 
 ## Examples
 
-- Tracking agent_run_started + task_completed + user_correction_submitted joined on agent_run_id to separate completion from acceptance.
+- Staging four specific repo files and a portfolio ledger row as immediate proof of work.
+- Treating the 'ship + wiring task' as the primary deliverable rather than the authoring content.
 
 ## Related Concepts
 
-[[Eval Vocabulary]] [[Agentic Engineering]]
+[[Vibe-Coding Interview Format]] [[Portfolio Projects]] [[Mechanical Proof]]

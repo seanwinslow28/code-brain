@@ -5,8 +5,8 @@ connects:
   - Vibe-Coding Interview Format
   - Agentic Engineering Signal
   - Portfolio Projects
-created: 2026-05-30
-updated: 2026-05-30
+created: 2026-05-31
+updated: 2026-05-31
 ---
 
 ## Synthesis
