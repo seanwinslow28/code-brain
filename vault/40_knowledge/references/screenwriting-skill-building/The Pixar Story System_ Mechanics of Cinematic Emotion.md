@@ -1,3 +1,14 @@
+---
+type: reference
+domain:
+  - creative-studio
+status: active
+context: screenplay-craft-system
+ai-context: "Screenplay Mechanics Profile on the Pixar story system: Verbal Fingerprint System (opposing worldviews as incompatible syntax), the '2+2 not 4' subtext rule, and emotion engineered through animation rather than stated dialogue."
+created: 2026-03-12
+source: deep-research-synthesis
+---
+
 # SCREENPLAY MECHANICS PROFILE: THE PIXAR STORY SYSTEM
 
 ### 1\. DIALOGUE MECHANICS

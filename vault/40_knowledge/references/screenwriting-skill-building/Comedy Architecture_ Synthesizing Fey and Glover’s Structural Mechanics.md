@@ -1,3 +1,14 @@
+---
+type: reference
+domain:
+  - creative-studio
+status: active
+context: screenplay-craft-system
+ai-context: "Screenplay Mechanics Profile synthesizing Tina Fey's high-velocity joke-machine structure with Donald Glover's surrealist 'grounded-then-eroded' architecture for 2D animated comedy shorts; flags the Fey (joke density blocks emotion) and Glover (ungrounded tonal drift) anti-patterns."
+created: 2026-03-12
+source: deep-research-synthesis
+---
+
 As a Comedy Architecture Analyst, I approach screenwriting not as a mystical art, but as structural engineering. To fulfill your request, we must examine two of the most mechanically distinct, yet highly complementary, architects of modern television: **Tina Fey and Donald Glover**.  
 Fey is a structural traditionalist who builds ironclad, high-velocity joke machines. Glover is a surrealist architect who constructs grounded realities specifically to erode their foundations. Where they overlap is foundational comedy craft; where they diverge reveals distinct mechanical solutions to pacing, tone, and audience psychology 1, 2\.  
 **⚠️ CRITICAL ANTI-PATTERNS TO AVOID:**

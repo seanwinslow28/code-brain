@@ -1,3 +1,14 @@
+---
+type: reference
+domain:
+  - creative-studio
+status: active
+context: screenplay-craft-system
+ai-context: "Modular SCREENPLAY CRAFT SYSTEM for 3–5 min 2D animated comedy shorts, organized by narrative function (dialogue toolkit, etc.) and mapping each technique to its source filmmaker (Waititi scripted improv, Burnham textual phonetics, Diagonal Communication)."
+created: 2026-05-31
+source: working-doc
+---
+
 Here is the SCREENPLAY CRAFT SYSTEM designed specifically for 3-5 minute 2D animated comedy shorts with emotional depth. This framework operates as a modular engineering toolkit, organized by narrative function and stress-tested for the constraints of short-form animation.
 
 ### 1\. DIALOGUE TOOLKIT
