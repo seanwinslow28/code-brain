@@ -1328,13 +1328,15 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 
 ---
 
-### Task 22 — DR3 Superuser System Card (Phase A, ships Friday 2026-06-05)
+### Task 22 — DR3 Code-Brain System Card (Phase A, ships Friday 2026-06-05)
+
+> **Renamed 2026-05-31:** "Superuser System Card" → "Code-Brain System Card." The DR-Max research (2026-05-18) named it before the project was renamed to **Code-Brain**; the artifact documents the Code-Brain fleet, so the title now matches the system it cards. Old planned paths (`docs/SUPERUSER_SYSTEM_CARD.md`, `…/transactions/superuser-system-card.md`) are superseded by the new ones below. Historical origin in [`2026-05-18-enterprise-ai-pm-skill-gaps.md`](../../../research/2026-05-18-enterprise-ai-pm-skill-gaps.md) keeps the old name as a dated record.
 
 **Maps to:** DR-Max Q2 finding — Regulatory accountability is a Tier-1 hiring-manager concern. Maps the existing Code-Brain to SR-11-7 model risk tiering + EU AI Act Annex IV technical documentation. Pure strategic writing.
 
 **Files:**
-- Create: `docs/SUPERUSER_SYSTEM_CARD.md`
-- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/superuser-system-card.md`
+- Create: `docs/CODE_BRAIN_SYSTEM_CARD.md`
+- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/code-brain-system-card.md`
 
 **- [ ] Step 1: Map the existing fleet to SR-11-7 tiers.** For each of the 8 active SDK agents (vault_indexer, vault_synthesizer, deep_researcher, meta_agent, daily_driver, knowledge_lint, flush, gemini_researcher) + intent-engineering MCP + LLM Council + Substack-Drafter + Judge Layer: assign an SR-11-7 materiality tier (low / medium / high) with rationale.
 
