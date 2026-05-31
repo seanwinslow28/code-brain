@@ -165,7 +165,8 @@ def pick_densest_cluster(*, concepts_dir: Path, min_shared: int = 3) -> list[str
 
 def compose_prompt(*, voice_mode: str, voice_skill_path: Path,
                    cluster_slugs: list[str], cluster_bodies: list[str],
-                   reference_excerpts: list[str], word_count_target: int = 1350) -> dict[str, str]:
+                   reference_excerpts: list[str], word_count_target: int = 1350,
+                   demo_injection: str | None = None) -> dict[str, str]:
     """Return {'system': ..., 'user': ...} ready for HybridRouter.
 
     The system prompt loads writing-voice-modes/SKILL.md verbatim so the LLM
@@ -227,7 +228,52 @@ def compose_prompt(*, voice_mode: str, voice_skill_path: Path,
         f"- Cite sources by wikilink, not by URL.\n"
         f"- Do not publish to Substack — this is a draft for Sean to review.\n"
     )
+
+    # Demo-injection (Task 12 Step 6): only set when the agent is run with
+    # --demo-injection. Appends a synthetic instruction that forces a
+    # policy-rule-tripping draft so the judge's catch is reproducible for the
+    # Loom. Production runs pass demo_injection=None and this block is skipped.
+    if demo_injection:
+        user = f"{user}\n{demo_injection}\n"
+
     return {"system": system, "user": user}
+
+
+# --- Demo-injection fragment loader (Task 12 Step 6) -------------------------
+
+_DEMO_FRAGMENTS_FILENAME = "demo_injection_fragments.yaml"
+
+
+def load_demo_injection_fragment(key: str = "default", *,
+                                 policies_dir: Path | None = None) -> str:
+    """Load a synthetic prompt fragment for the judge-layer Loom demo.
+
+    Loaded ONLY on the --demo-injection path (production never calls this). The
+    fragment text lives in agents-sdk/policies/demo_injection_fragments.yaml so
+    the demo content is tunable without a code change.
+
+    Args:
+        key: Which fragment to load ('default' trips rule_a → ESCALATE;
+            'revise_citation' trips rule_b → REVISE).
+        policies_dir: Override the policies directory (tests pass tmp_path).
+
+    Returns:
+        The fragment string.
+
+    Raises:
+        FileNotFoundError: the fragments file is missing.
+        KeyError:          the requested fragment key isn't in the file.
+    """
+    import yaml
+    base = policies_dir or (Path(__file__).resolve().parents[1] / "policies")
+    path = base / _DEMO_FRAGMENTS_FILENAME
+    fragments = yaml.safe_load(path.read_text())
+    if not isinstance(fragments, dict) or key not in fragments:
+        raise KeyError(
+            f"demo-injection fragment {key!r} not found in {path}. "
+            f"Available: {sorted(fragments) if isinstance(fragments, dict) else '(none)'}"
+        )
+    return str(fragments[key]).strip()
 
 
 # --- HybridRouter wrapper + draft writer (Task C6) ---
@@ -328,7 +374,11 @@ def main(*, health_dir: Path, concepts_dir: Path, out_dir: Path,
          voice_skill_path: Path, dry_run: bool = False,
          today: date | None = None, epoch: date | None = None,
          voice_override: str | None = None,
-         max_cost_usd: float = 0.10) -> int:
+         max_cost_usd: float = 0.10,
+         judge_enabled: bool = False,
+         max_retries_on_revise: int = 2,
+         quarantine_subdir: str = "quarantine",
+         demo_injection: str | None = None) -> int:
     """Agent entrypoint. Returns process exit code (always 0 for graceful no-ops).
 
     Sequence:
@@ -342,6 +392,13 @@ def main(*, health_dir: Path, concepts_dir: Path, out_dir: Path,
     """
     today = today or date.today()
     epoch = epoch or date(2026, 5, 4)
+
+    # Demo-injection always runs the judge — the whole point of the take is to
+    # watch the judge catch the rigged draft. Saves Sean editing config.toml
+    # before recording the Loom.
+    if demo_injection:
+        judge_enabled = True
+        print("[substack_drafter] --demo-injection set — judge engaged for this run")
 
     # 1. Gate on synthesizer dryness
     if is_synthesizer_dry(health_dir=health_dir, threshold=3):
@@ -370,6 +427,7 @@ def main(*, health_dir: Path, concepts_dir: Path, out_dir: Path,
         cluster_slugs=cluster,
         cluster_bodies=cluster_bodies,
         reference_excerpts=reference_excerpts,
+        demo_injection=demo_injection,
     )
 
     # 6. Dry-run short-circuit (kill-switch layer 3)
@@ -381,14 +439,30 @@ def main(*, health_dir: Path, concepts_dir: Path, out_dir: Path,
         print(f"  user prompt:   {len(prompt['user'])} chars")
         return 0
 
-    # 7. Route + write
+    # 7. Route + write. Judge-gated when judge_enabled (both config kill-switches
+    #    true); otherwise the unchanged route→persist path.
     slug = "-".join(cluster[:2])[:50]
     out_dir.mkdir(parents=True, exist_ok=True)
-    path = write_draft(
-        out_dir=out_dir, slug=slug, voice_mode=voice,
-        cluster_slugs=cluster, prompt=prompt, max_cost_usd=max_cost_usd,
-    )
-    print(f"[substack_drafter] draft written: {path}")
+    if judge_enabled:
+        jr = route_with_judge(
+            out_dir=out_dir, slug=slug, voice_mode=voice,
+            cluster_slugs=cluster, prompt=prompt, max_cost_usd=max_cost_usd,
+            max_retries_on_revise=max_retries_on_revise,
+            quarantine_subdir=quarantine_subdir,
+        )
+        if jr["path"] is None:
+            print(f"[substack_drafter] judge {jr['outcome']} — no draft written")
+        else:
+            print(
+                f"[substack_drafter] judge {jr['outcome']} "
+                f"(retries={jr['retries']}) — draft written: {jr['path']}"
+            )
+    else:
+        path = write_draft(
+            out_dir=out_dir, slug=slug, voice_mode=voice,
+            cluster_slugs=cluster, prompt=prompt, max_cost_usd=max_cost_usd,
+        )
+        print(f"[substack_drafter] draft written: {path}")
 
     # 8. Pushover ping (informational; non-fatal)
     try:
@@ -418,12 +492,36 @@ def _cli() -> int:
         print("[substack_drafter] disabled in config.toml — exit 0 (set enabled = true to opt in)")
         return 0
 
+    # Judge layer engages ONLY when BOTH kill-switches are true: the agent-level
+    # [substack_drafter].judge_enabled AND the module-level [judge_layer].enabled.
+    # Two independent flags so the judge can be globally killed without editing
+    # every agent block, and an agent can opt out without disabling the module.
+    jl = cfg.get("judge_layer", {})
+    judge_enabled = bool(sd.get("judge_enabled", False)) and bool(jl.get("enabled", False))
+
     p = argparse.ArgumentParser(description="Substack-Drafter agent")
     p.add_argument("--dry-run", action="store_true",
                    help="Compose the prompt and print it, but do not call the model or write a draft")
-    p.add_argument("--voice", default=None,
+    # --voice and --demo-injection are mutually exclusive: a demo take rigs the
+    # draft to trip a rule and forces the judge on; pinning a voice on top of
+    # that muddies the take.
+    g = p.add_mutually_exclusive_group()
+    g.add_argument("--voice", default=None,
                    help="Pin voice mode (sean|sedaris|kerouac|thompson|vonnegut). Default: 5-week calendar rotation")
+    g.add_argument("--demo-injection", nargs="?", const="default", default=None,
+                   metavar="FRAGMENT",
+                   help="Loom demo: inject a synthetic rule-tripping fragment and force the judge on. "
+                        "Optional value selects the fragment ('default'→ESCALATE, 'revise_citation'→REVISE).")
     args = p.parse_args()
+
+    # Resolve the demo fragment text (only when the flag is present).
+    demo_fragment = None
+    if args.demo_injection is not None:
+        try:
+            demo_fragment = load_demo_injection_fragment(args.demo_injection)
+        except (FileNotFoundError, KeyError) as exc:
+            print(f"[substack_drafter] --demo-injection error: {exc}", file=sys.stderr)
+            return 1
 
     return main(
         health_dir=repo_root / "vault" / "health",
@@ -433,6 +531,10 @@ def _cli() -> int:
         dry_run=args.dry_run,
         voice_override=args.voice,
         max_cost_usd=sd.get("max_cost_usd", 0.10),
+        judge_enabled=judge_enabled,
+        max_retries_on_revise=jl.get("max_retries_on_revise", 2),
+        quarantine_subdir=jl.get("quarantine_subdir", "quarantine"),
+        demo_injection=demo_fragment,
     )
 
 
@@ -526,3 +628,172 @@ def write_draft(*, out_dir: Path, slug: str, voice_mode: str,
         out_dir=out_dir, slug=slug, voice_mode=voice_mode,
         cluster_slugs=cluster_slugs, result=result,
     )
+
+
+# --- Judge layer integration (Task 12 Step 5, Council Gap-Fill 1) ------------
+#
+# The judge is a control-plane interceptor that sits between the drafter's
+# generation step (_route) and its persistence step (_persist_draft). It
+# evaluates the rendered draft against a declarative YAML policy and returns
+# one of 5 outcomes. It engages ONLY when both config kill-switches are true
+# ([substack_drafter].judge_enabled AND [judge_layer].enabled, both default
+# false). When disabled, main() calls write_draft() and nothing here runs —
+# byte-for-byte the pre-Day-6 behavior. The judge is defense-in-depth; Sean's
+# manual publish gate stays the Tier-A canonical control ("agents draft / Sean
+# sends"), which is why every fail path falls OPEN to a written draft, never
+# silently swallows one.
+
+JUDGE_AGENT_NAME = "substack_drafter"
+JUDGE_POLICY_NAME = "substack_drafter"
+# Chars of the draft handed to the judge AND stored in the JSONL ledger row.
+# Enough to spot a fabricated quote or a publish verb; not the whole 1,300-word
+# essay (keeps the ledger lean — the row is telemetry, not an archive).
+_CONTENT_PREVIEW_CAP = 4000
+
+
+def _build_action_proposal(*, draft_text: str, voice_mode: str,
+                           cluster_slugs: list[str], target_surface: str):
+    """Construct the typed ActionProposal the judge evaluates.
+
+    The eight metadata fields describe the action; content_preview carries the
+    (truncated) draft body itself so the policy rules — all of which read 'the
+    draft' — have something to read. authorization_basis encodes the assigned
+    voice mode because rule_c checks voice drift against it.
+    """
+    from lib.judge import ActionProposal
+
+    preview = draft_text
+    if len(preview) > _CONTENT_PREVIEW_CAP:
+        preview = preview[:_CONTENT_PREVIEW_CAP] + "\n…[truncated for judge/ledger]"
+
+    return ActionProposal(
+        intended_action="write_substack_draft",
+        target_surface=target_surface,
+        evidence_used=list(cluster_slugs) or None,
+        authorization_basis=f"substack_drafter.yaml assigned_voice={voice_mode}",
+        expected_consequence=(
+            "A markdown draft lands in the vault for Sean's manual Friday "
+            "review. Nothing is published; Sean is the only publisher."
+        ),
+        rollback_path=f"delete {target_surface}",
+        exposure_level="local-only",
+        human_review_required=True,
+        content_preview=preview,
+    )
+
+
+def _notify_judge_outcome(outcome: str, detail: str, *, urgent: bool = False) -> None:
+    """Best-effort Pushover ping for BLOCK / ESCALATE. Never raises.
+
+    judge_action() already writes the ledger row for every outcome and pings
+    on JUDGE_UNAVAILABLE. This adds the operator-facing ping for the two
+    outcomes Sean wants to know about immediately.
+    """
+    try:
+        from lib import pushover
+        pushover.send_push(
+            title=f"Substack-Drafter judge: {outcome}",
+            message=detail,
+            priority=1 if urgent else 0,
+        )
+    except Exception as exc:  # noqa: BLE001 — notification never blocks the run
+        print(f"[substack_drafter] judge notify skipped (non-fatal): {exc}")
+
+
+def route_with_judge(*, out_dir: Path, slug: str, voice_mode: str,
+                     cluster_slugs: list[str], prompt: dict[str, str],
+                     max_cost_usd: float = 0.10,
+                     max_retries_on_revise: int = 2,
+                     quarantine_subdir: str = "quarantine") -> dict:
+    """Route a draft, gate it through the judge, persist per the verdict.
+
+    Returns {"outcome": str, "path": Path|None, "decision": JudgeDecision,
+             "retries": int}.
+
+    Dispatch (outcomes from policies/substack_drafter.yaml):
+      ALLOW             → persist normally.
+      JUDGE_UNAVAILABLE → fall open: persist normally. judge_action() already
+                          logged the row + fired the Pushover. Sean's manual
+                          gate is the canonical control.
+      REVISE            → re-route with the judge's feedback appended, up to
+                          max_retries_on_revise times. ALLOW on a retry →
+                          persist. Still REVISE after the last retry → escalate
+                          to the quarantine subfolder.
+      ESCALATE          → persist to the quarantine subfolder (status
+                          quarantined-pending-review); urgent Pushover.
+      BLOCK             → do NOT persist. The boundary held; informational ping.
+
+    judge_action()/evaluate() never raise, so this function's only failure
+    surface is _route (generation) and _persist_draft (disk) — the same
+    surfaces write_draft already has.
+    """
+    from lib.judge import Outcome, judge_action
+    from lib.judge.policy import load_policy
+
+    policy = load_policy(JUDGE_POLICY_NAME)
+    target = str(out_dir / _draft_filename(slug))
+
+    system, user = prompt["system"], prompt["user"]
+    retries = 0
+
+    while True:
+        result = _route(task="substack_draft", system=system, user=user,
+                        max_cost_usd=max_cost_usd)
+        proposal = _build_action_proposal(
+            draft_text=result.get("text", ""), voice_mode=voice_mode,
+            cluster_slugs=cluster_slugs, target_surface=target,
+        )
+        decision = judge_action(proposal, policy, agent_name=JUDGE_AGENT_NAME)
+        outcome = decision.outcome  # string — schema uses use_enum_values=True
+
+        if outcome in (Outcome.ALLOW.value, Outcome.JUDGE_UNAVAILABLE.value):
+            path = _persist_draft(out_dir=out_dir, slug=slug, voice_mode=voice_mode,
+                                  cluster_slugs=cluster_slugs, result=result)
+            return {"outcome": outcome, "path": path, "decision": decision,
+                    "retries": retries}
+
+        if outcome == Outcome.REVISE.value:
+            if retries < max_retries_on_revise:
+                retries += 1
+                feedback = decision.feedback or "Revise per policy and retry."
+                user = f"{user}\n\nJUDGE FEEDBACK (revise and resubmit):\n{feedback}"
+                continue
+            # Retries exhausted, still REVISE — escalate to quarantine.
+            path = _persist_draft(out_dir=out_dir / quarantine_subdir, slug=slug,
+                                  voice_mode=voice_mode, cluster_slugs=cluster_slugs,
+                                  result=result, status="quarantined-pending-review")
+            _notify_judge_outcome(
+                "ESCALATE",
+                f"REVISE unresolved after {retries} retries → quarantined: {path}",
+                urgent=True,
+            )
+            return {"outcome": Outcome.ESCALATE.value, "path": path,
+                    "decision": decision, "retries": retries}
+
+        if outcome == Outcome.ESCALATE.value:
+            path = _persist_draft(out_dir=out_dir / quarantine_subdir, slug=slug,
+                                  voice_mode=voice_mode, cluster_slugs=cluster_slugs,
+                                  result=result, status="quarantined-pending-review")
+            _notify_judge_outcome(
+                "ESCALATE",
+                decision.quarantine_reason or f"escalated by judge → quarantined: {path}",
+                urgent=True,
+            )
+            return {"outcome": outcome, "path": path, "decision": decision,
+                    "retries": retries}
+
+        if outcome == Outcome.BLOCK.value:
+            _notify_judge_outcome(
+                "BLOCK",
+                "draft blocked at the policy boundary (publish-verb rule); no file written",
+                urgent=False,
+            )
+            return {"outcome": outcome, "path": None, "decision": decision,
+                    "retries": retries}
+
+        # Unknown outcome — fall open defensively. Should be unreachable
+        # (Outcome is a closed 5-value enum), but never swallow a draft.
+        path = _persist_draft(out_dir=out_dir, slug=slug, voice_mode=voice_mode,
+                              cluster_slugs=cluster_slugs, result=result)
+        return {"outcome": outcome, "path": path, "decision": decision,
+                "retries": retries}

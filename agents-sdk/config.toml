@@ -497,6 +497,18 @@ schedule_day = "Thursday"
 schedule_hour = 18
 voice_epoch = "2026-05-04"  # Monday of the sprint; rotation index zero
 # voice_override = "sedaris"  # uncomment to pin a mode for a specific run
+judge_enabled = false  # Task 12 Step 5 kill-switch: gate drafts through lib/judge.
+                       # Engages ONLY if [judge_layer].enabled is ALSO true.
+
+# ─── Judge Layer (Council Gap-Fill 1 / Task 12, 2026-05-31 Day 6 wire-up) ────
+# Control-plane interceptor between an agent's generation and its action.
+# Module-level kill-switch: enabled=false means no agent's judge path runs even
+# if that agent's own judge_enabled=true. Routing for the evaluator model lives
+# in [routing.task_map].judge_layer (gemma4:e4b @ mac_mini, $0/decision).
+[judge_layer]
+enabled = false                 # module-level master switch; default OFF
+max_retries_on_revise = 2       # REVISE → re-route with feedback up to N times, then ESCALATE
+quarantine_subdir = "quarantine"  # ESCALATE drafts land in <output_dir>/<this> for Sean
 
 # ─── Local TTS Pipeline (v3.36.0, 2026-05-15) ───────────────────────────
 # Verbatim doc-to-audio via Kokoro-82M ONNX. CLI: scripts/doc_to_audio.py.
