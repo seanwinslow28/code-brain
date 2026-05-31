@@ -19,6 +19,8 @@ show 0 until items land here.
 - vault-knowledge-mcp: log the first recruiter/hiring-manager engagement attributable to this artifact in target-companies.md (spec §8 criterion 9, the last open success criterion) — assigned: Sean
 - Task 19 Step 4 / Gate C: record + grade the 3 first-test answers (TMAY / "walk me through what happened with The Block" / "shipped something hard") via mock_interview_loop.py; drill to 8+/10 ×3 consecutive. Also grades the Task 16 stories + Task 17 TMAY — assigned: Sean
 - TMAY per-company file: fill a Why-Here swap for each remaining top-5 target before its interview (4 already filled: Anthropic FDE / Sierra / Decagon / ServiceNow) — assigned: Sean
+- Task 12 judge layer Steps 8-9 (Sean-host): run the full pytest suite + validate.py per 2026-05-31-task-12-day-6-handoff.md; record the 90-sec --demo-injection Loom; post the LinkedIn draft tagging Anthropic + FDE-Boston JD; commit + tag judge-layer-v0.1.0 (paste-ready CHANGELOG block in the handoff doc) — assigned: Sean
+- Task 12 judge layer: add the /transactions/judge-layer ledger row in sw-ai-pm-portfolio (surface: control-plane) — GATE: Gap-Fill 3 personal-site deploy must land first so the page resolves — assigned: Sean
 
 ## In Progress
 
