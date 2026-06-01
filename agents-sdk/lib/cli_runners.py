@@ -185,6 +185,16 @@ async def run_antigravity(prompt: str, timeout_s: float = ANTIGRAVITY_DEFAULT_TI
         "-p", prompt,
         "--output-format", "json",
         "--approval-mode", "plan",
+        # Disable all configured MCP servers for this invocation. The critic
+        # only needs the model to emit a text critique — it never calls a tool.
+        # Loading the 6 MCP servers from ~/.gemini/settings.json (chrome-devtools
+        # → Chrome on :9222, npx/uvx subprocesses, remote zapier) makes startup
+        # heavy and fragile: it works interactively (~12-18s) but hangs past the
+        # per-CLI timeout on the unattended 3:30am nightly run (Chrome closed,
+        # post-wake window), producing 0 sessions / 0 tokens / 5-of-5 failures
+        # while the lightweight Codex CLI in the same process succeeds. Passing
+        # a single non-existent server name allows zero servers. (2026-06-01)
+        "--allowed-mcp-server-names", "__none__",
     ]
     env = {**os.environ, "GEMINI_CLI_TRUST_WORKSPACE": "true"}
     t0 = time.monotonic()

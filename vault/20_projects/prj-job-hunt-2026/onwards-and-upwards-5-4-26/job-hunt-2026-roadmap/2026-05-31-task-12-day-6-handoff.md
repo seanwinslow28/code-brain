@@ -38,13 +38,14 @@ The Mac `.venv` symlinks to macOS Python and can't execute under the Linux sandb
 ## Your host moves (do these on the Mac)
 
 ```bash
-cd ~/Code-Brain/agents-sdk
+cd ~/Code-Brain/code-brain/agents-sdk
 
-# 1. Full-suite regression (expect the 2 known pre-existing fleet-memory reds only)
+# 1. Full-suite regression (suite is fully green as of 2026-06-01 — 850 passed, 0 reds;
+#    the 2 fleet-memory reds noted at handoff time have since been fixed)
 PYTHONPATH=. .venv/bin/pytest tests/ -q
 
 # 2. Repo validator (expect PASSED / 0 errors; warnings are pre-existing)
-cd ~/Code-Brain && python3 scripts/validate.py && cd agents-sdk
+cd ~/Code-Brain/code-brain && python3 scripts/validate.py && cd agents-sdk
 
 # 3. Live judge demo (real gemma4:e4b on Mac Mini Ollama — this is the Loom take).
 #    --demo-injection forces the judge on; no config edit needed.
