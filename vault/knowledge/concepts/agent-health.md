@@ -2,32 +2,30 @@
 title: "Agent Health"
 type: concept
 sources:
-  - knowledge/expansions/agent-health.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-31.md
 tags: [auto-generated, phase-6]
-created: 2026-05-28
-updated: 2026-05-28
+created: 2026-06-01
+updated: 2026-06-01
 ---
 
 ## Definition
 
-Agent Health is a reliability contract that shifts the failure state from simple liveness (did the process run?) to functional utility (did the output serve the consumer?). It requires defining specific Service Level Objectives (SLOs) such as freshness windows, successful completion rates, and downstream consumer impact, rather than relying on binary status checks. This transforms the concept from a monitoring dashboard into a portfolio-grade reliability system where agents have error budgets and alert policies tied to their actual value delivery.
+Agent health is a measure of the successful execution of scheduled tasks by autonomous agents, indicating their operational readiness and reliability. It is determined by the status of daily runs, such as indexing or synthesis, and the absence of errors during these processes. This metric reflects the internal consistency of the agent fleet but does not account for external dependencies or hardware availability.
 
 ## Context
 
-Sean is currently building a job-hunt infrastructure that relies on automated agents. By redefining health as an SLO contract, he can demonstrate to hiring managers that he understands distributed systems reliability, moving beyond simple cron-job automation to complex fleet management.
+The consistent healthy status of agents like vault-indexer and vault-synthesizer suggests that the core automation logic is robust. However, this health is isolated to the agents' internal processes and does not guarantee the successful completion of broader, multi-step workflows that depend on external resources.
 
 ## Evidence
 
-> Right now the concept treats “stale” as the main failure state; that is closer to a liveness probe than health.
+> vault-indexer (2:00 AM daily, Mac Mini, $0.00/run) - Status: healthy
 
-> Define agent health as a small SLO contract: freshness, successful completion, output usefulness, dependency readiness, and downstream consumer impact.
-
-> This lets Sean sound like he operates a reliability system, not just a cron dashboard.
+> vault-synthesizer (2:30 AM daily, MBP (when awake), $0.00/run) - Status: healthy
 
 ## Examples
 
-- Defining an agent's health by its 'downstream consumer impact' rather than its exit code.
-- Creating an 'Agent Fleet SLO one-pager' that specifies error budgets for each agent.
+- The vault-indexer successfully processed 406 chunks with zero errors during its daily run.
+- The vault-synthesizer completed its run with 28 concepts and 16 connections, indicating successful synthesis.
 
 ## Related Concepts
 

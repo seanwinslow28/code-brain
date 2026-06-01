@@ -2,34 +2,34 @@
 title: "System Constraints"
 type: concept
 sources:
-  - health/tier-c-soak/2026-05-27/2026-05-21-topic-19c-optimal-ollama-models-pi-chatgpt.md
+  - 00_inbox/research-queue.md
 tags: [auto-generated, phase-6]
-created: 2026-05-28
-updated: 2026-05-28
+created: 2026-06-01
+updated: 2026-06-01
 ---
 
 ## Definition
 
-System Constraints refers to the hard limits imposed by hardware resources (RAM, VRAM) and software architecture (context windows, streaming protocols) that dictate the feasible operational envelope of an AI agent. These constraints are not merely technical specifications but active determinants of which models can be deployed and how they must be configured to function. The tension arises because the desired capabilities (long context, complex reasoning) often exceed the default capacities of the hardware, requiring specific model architectures or configuration overrides to bridge the gap.
+System constraints are the hard boundaries imposed by tooling limitations that dictate operational routing, forcing a separation between simple, single-shape queries and complex, multi-target evaluations. When a tool like Local Deep Research (LDR) hits a timeout or citation collapse on compound prompts, the system must divert to a more capable agent like Gemini Deep Research to maintain output integrity. This constraint is not merely a preference but a structural requirement to prevent the generation of fabricated entities and URLs that arise when the model cannot ground citations across multiple targets.
 
 ## Context
 
-Sean is evaluating models for different hardware tiers (M4 Max, M4 Pro, RTX 3090). The constraints of each machine directly limit the choice of models and the types of workflows (e.g., long-context summarization vs. fast tool-calling) that are viable. Recognizing these constraints allows for precise hardware-software matching rather than generic model selection.
+This matters to Sean because it defines the architectural boundary of his current automated research pipeline. Understanding that LDR is pinned to v1.5.6 due to upstream migration bugs means he cannot simply upgrade to fix the timeout issue; he must rely on the Gemini DR tier for complex tasks until the upstream PR is merged. This constraint directly impacts his ability to scale research output without manual intervention or quality degradation.
 
 ## Evidence
 
-> This research report identifies the optimal Ollama models for Pi-driven coding and agentic workflows in 2026, categorized by hardware tiers based on available RAM and VRAM.
+> Compound prompts stall around 90 % and produce no output. (Topic 1b, 2026-05-06.)
 
-> The report provides specific model recommendations across three hardware tiers. For Tier A (M4 Max MBP, 48GB), Gemma4:31b is the best overall for agentic reasoning and tool-calling.
+> Qwen3-14B can't ground citations across multiple targets and confidently writes fabricated entities, owners, and URLs.
 
-> Tier C (RTX 3090/4090, 24GB VRAM) leverages CUDA, suggesting Qwen3.5:35b-A3B-Coding in NVFP4 format for efficient long-context tasks.
+> LDR is pinned to v1.5.6 awaiting upstream PR [LearningCircuit/local-deep-research#4000]
 
 ## Examples
 
-- Tier A (M4 Max MBP, 48GB) using Gemma4:31b
-- Tier B (M4 Pro Mac Mini, 24GB) using Gemma4:26b
-- Tier C (RTX 3090/4090, 24GB VRAM) using Qwen3.5:35b-A3B-Coding
+- Topic 1b, 2026-05-06: Compound prompt stalled at 90% timeout
+- Topic 1a, 2026-05-05: Fabricated entities in LDR output
+- Upstream Alembic-runner bug (migration 0007 FK mismatch)
 
 ## Related Concepts
 
-[[Runtime-Model Coupling]] [[Infrastructure Status]]
+[[Gemini Deep Research]] [[Local Deep Research (LDR)]] [[Infrastructure Status]]
