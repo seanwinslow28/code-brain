@@ -2,30 +2,31 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - 00_inbox/gemini-research-queue.md
+  - 00_inbox/tickets.md
 tags: [auto-generated, phase-6]
-created: 2026-05-28
-updated: 2026-05-28
+created: 2026-06-01
+updated: 2026-06-01
 ---
 
 ## Definition
 
-This mechanism establishes a hard financial ceiling on autonomous agent operations by defining tiered budget caps that dictate which model capabilities are accessible for a given task. The system enforces a trade-off between depth and cost, where high-fidelity synthesis is gated behind higher per-query expenditures, while standard iterative research is constrained by daily and monthly aggregate limits. This creates a scarcity model where the agent must prioritize tasks based on available budget headroom rather than technical feasibility alone.
+This pattern describes a constraint architecture where agent execution is gated by strict financial thresholds rather than just technical success. When operational costs exceed a predefined cap, the system must halt or degrade gracefully to prevent resource exhaustion. This forces a shift from continuous automation to intermittent, high-value interventions, ensuring that the economic viability of the agent fleet is monitored as closely as its functional reliability.
 
 ## Context
 
-Sean is actively managing the financial viability of his automated research infrastructure. By capping monthly spend at $50 and daily spend at $20, he forces a strategic decision on when to deploy expensive 'Deep Research Max' runs versus cheaper 'Deep Research' runs, directly impacting the velocity and quality of his knowledge acquisition.
+Sean is actively managing the cost of his agent fleet, specifically noting that a context-management beta 'doubled cost to $0.97 and tripped the cap.' This concept is critical for his job-hunt infrastructure, as it demonstrates an understanding of production-grade cost control, a key skill for AI Product Manager roles.
 
 ## Evidence
 
-> Budget caps from agents-sdk/config.toml [gemini.budget]: Per-task: $7.00 max, Daily: $20.00, Monthly: $50.00 (bumped from $20 on 2026-05-07 to absorb DR Max runs)
+> drop MCP bridge + context-management beta that doubled cost to $0.97 and tripped the cap 5/29
 
-> Tier markers: dr — Deep Research (~$2–4/query, ~20-30 min): standard iterative web research, max — Deep Research Max (~$5–10/query, ~30-60 min): extended synthesis, more sources, higher quality
+> Build a $0/run local summarizer (gemma4:e4b / qwen3 on Mac Mini) that curates daily_driver's fleet-memory namespace
 
 ## Examples
 
-- Sean manually ran Topic 13, 14, 15, 16, 18, and 19 via external tools (Gemini Advanced, ChatGPT) to avoid burning the API budget, resulting in $0 API spend for those queries.
+- Replacing expensive cloud-based context management with a local $0/run summarizer on a Mac Mini.
+- Dropping the MCP bridge because it caused cost overruns that triggered system caps.
 
 ## Related Concepts
 
-[[Gemini Deep Research]] [[Local Deep Research (LDR)]] [[Token Waste]]
+[[Cost-Capped Agentic Workflows]] [[Automation Reliability]] [[Infrastructure Status]]

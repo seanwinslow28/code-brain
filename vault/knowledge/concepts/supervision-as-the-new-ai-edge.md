@@ -2,31 +2,33 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - 40_knowledge/references/ref-the-dawn-of-agentic-animation.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-31-task-22-system-card-council-stress.md
 tags: [auto-generated, phase-6]
-created: 2026-05-31
-updated: 2026-05-31
+created: 2026-06-01
+updated: 2026-06-01
 ---
 
 ## Definition
 
-As AI agents transition from passive chat interfaces to autonomous actors capable of executing complex toolchains and pursuing long-term goals, the primary value shift for human professionals moves from direct execution to high-level oversight. This creates a new professional invariant where the human acts as a 'dither' or quality filter, managing the stochastic output of semi-autonomous crew members rather than generating the raw material themselves. The competitive advantage no longer lies in the speed of individual task completion, but in the ability to curate, correct, and direct the agency of these systems effectively.
+Supervision as the New AI Edge is the strategic pivot where the value of an AI Product Manager shifts from building autonomous agents to designing the governance layers that monitor them. It defines the edge not in the agent's capability, but in the 'Judge Layer' and 'control-plane' that enforce constraints on that capability. This pattern argues that as models become more capable, the scarcity moves to the ability to define materiality tiers and map them to regulatory obligations like the EU AI Act. The edge is the ability to articulate the 'inherited-and-unmanaged' risk of vendor updates rather than claiming full architectural control.
 
 ## Context
 
-This is critical for Sean's job hunt in 2026, as he positions himself not just as a creator or PM, but as an orchestrator of agentic workflows. Understanding this shift allows him to articulate how his role evolves from 'doing the work' to 'managing the agents that do the work,' which is a key differentiator in the current market.
+Sean is positioning himself for AI PM roles in regulated industries (fintech/SaaS) where 'autonomous' is a liability. By framing his fleet as a case study in 'model-risk accounting' rather than just 'automation,' he aligns his skills with the hiring managers' primary fear: liability. This concept bridges his technical fleet work with the strategic requirements of enterprise hiring.
 
 ## Evidence
 
-> What sets them apart from the ChatGPT or Claude experience you might be familiar with is their ability to use tools and pursue goals over longer stretches of time, more autonomously.
+> It's the document a model-risk officer would ask me to produce if Code-Brain *were* a production system at a bank — written against the system I actually operate.
 
-> The human 'dither' (Harold Speed) that remains irreplaceable.
+> Vendor-model risk named as inherited-and-unmanaged rather than architected away.
+
+> Drift risk shifts from retraining to silent vendor model updates (e.g., Anthropic point releases), which is arguably harder to monitor, not easier.
 
 ## Examples
 
-- OpenClaw agents browsing the web and using software independently to deliver results.
-- 3D-Agent connecting natural language commands to Blender semi-autonomously.
+- Mapping the fleet to SR-11-7 model-risk tiers to demonstrate fluency with enterprise risk frameworks.
+- Treating 'silent vendor model updates' as a critical monitoring vector that requires active oversight rather than passive trust.
 
 ## Related Concepts
 
-[[Agentic Engineering]] [[Supervision as the New AI Edge]]
+[[Accountability Gap]] [[AI Product Manager]] [[Model-Risk Officer]]

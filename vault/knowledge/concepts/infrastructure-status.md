@@ -2,30 +2,31 @@
 title: "Infrastructure Status"
 type: concept
 sources:
-  - knowledge/connections/runtime-model-coupling-and-automation-reliability.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-31.md
 tags: [auto-generated, phase-6]
-created: 2026-05-28
-updated: 2026-05-28
+created: 2026-06-01
+updated: 2026-06-01
 ---
 
 ## Definition
 
-Infrastructure Status refers to the current state and performance metrics of the hardware and software stack supporting Sean's agentic workflows. It includes specific benchmarks for model performance, such as schema match rates and token speeds, which are used to evaluate the suitability of different model-runtime combinations. This status is dynamic and must be continuously monitored to ensure that the infrastructure meets the demands of his job hunt and creative projects.
+Infrastructure status represents the operational availability of the physical endpoints required for agent execution, distinct from the logical health of the agents themselves. When critical hardware like the Alienware or ComfyUI endpoints remains offline, it creates a hard boundary that prevents specific workflows from executing, regardless of the agent fleet's internal stability. This state is not merely a technical glitch but a structural constraint that defines the current limits of Sean's automated capabilities.
 
 ## Context
 
-Sean is constantly evaluating new models and runtimes to optimize his workflow. The Infrastructure Status provides the concrete data needed to make informed decisions about which configurations to adopt.
+Sean's ability to execute creative and deep research tasks is directly gated by the availability of these specific machines. The persistent offline status of the Alienware and ComfyUI endpoints indicates a bottleneck that limits the scope of his automated output, forcing a reliance on the remaining active agents for all other tasks.
 
 ## Evidence
 
-> Best Tier A upgrade candidate identified: qwen3.6:35b-a3b on MBP-Ollama at 85 % schema match, 5/5 needle recall, 30 tok/s — beats the current qwen3-14b LM Studio production baseline on every dimension.
+> Alienware and ComfyUI endpoints remain OFFLINE, blocking key multi-domain workflows.
 
-> Sean must maintain a configuration matrix of runtime-model pairs rather than a single 'best model' recommendation, increasing operational complexity but ensuring reliability.
+> Autonomous agents lack reliable, cross-machine MCP connectivity (top friction point).
 
 ## Examples
 
-- qwen3.6:35b-a3b on MBP-Ollama at 85 % schema match, 5/5 needle recall, 30 tok/s
+- The daily-fleet-status report explicitly lists Alienware and ComfyUI as offline, contrasting with the healthy status of the Mac Mini and MBP.
+- The agent fleet shows continued inability to fully access MCP servers in headless mode, limiting automation scope.
 
 ## Related Concepts
 
-[[Runtime-Model Coupling]] [[Automation Reliability]]
+[[Agent Health]] [[Infrastructure]] [[MCP Server Hardening]]
