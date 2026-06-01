@@ -2,31 +2,31 @@
 title: "Abstraction Layer Shift"
 type: concept
 sources:
-  - 40_knowledge/references/ref-pms-ship-100k-lines-code-openai-lopopolo.md
+  - 40_knowledge/references/ref-canvas-was-never-the-design.md
 tags: [auto-generated, phase-6]
-created: 2026-05-31
-updated: 2026-05-31
+created: 2026-06-01
+updated: 2026-06-01
 ---
 
 ## Definition
 
-This pattern describes the structural inversion where the Product Manager transitions from being a direct author of implementation details to a designer of constraints and verification logic. Instead of writing code, the PM defines the 'harness'—the rules, tests, and specifications that the model executes. This shifts the PM's leverage from manual execution speed to the precision of their intent engineering and the robustness of their evaluation criteria. The PM becomes the architect of the system's behavior rather than the builder of its components.
+This concept describes the structural inversion where the artifact (the canvas) is revealed as a secondary byproduct of the primary mechanism (intent engineering). When tools lower the friction of rendering, the value proposition shifts from the mastery of the tool to the precision of the prompt. The design process is no longer defined by the manipulation of pixels but by the externalization of thinking through language. This shift exposes the canvas as merely the interface for that externalization, rather than the site of the design itself.
 
 ## Context
 
-Sean is currently navigating the job hunt for AI-native roles where 'vibe-coding' and harness engineering are becoming standard. Understanding this shift allows him to position his existing PM experience not as a lack of coding ability, but as a mastery of higher-leverage abstraction layers. It reframes his value proposition from 'I can code' to 'I can direct the code generation with higher fidelity than a human can write it manually.'
+Sean is navigating a job market where 'Vibe-Coding' and AI prototyping are becoming standard. Understanding this shift allows him to position his value not in Figma mastery, but in the ability to drive outcomes through high-fidelity intent engineering, which is the new scarce resource.
 
 ## Evidence
 
-> Their coding happened through PRDs, tests, docs, and harness rules. The model did the typing.
+> The thinking happened in the conversation. The intent happened in the language. The judgment about purpose and person and constraint happened before anything appeared on a screen.
 
-> Most companies are still debating whether PMs should ship code. OpenAI is debating the best ways for PMs to ship code.
+> The canvas was where we went to externalise the thinking. Now there is a faster way to externalise it and that means the canvas... has been revealed as something different.
 
 ## Examples
 
-- PMs shipped around 100K lines of production code without opening the IDE.
-- The model did the typing based on harness rules.
+- Claude Design generating a working prototype from a two-sentence prompt
+- Figma’s stock dropping 7% upon the launch of AI design tools
 
 ## Related Concepts
 
-[[Vibe-Coding Interview]] [[Intent Engineering]] [[Supervision as the New AI Edge]]
+[[Intent Engineering]] [[Vibe-Coding Interview Canon]]
