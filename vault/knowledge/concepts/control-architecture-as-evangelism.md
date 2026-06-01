@@ -2,7 +2,7 @@
 title: "Control Architecture as Evangelism"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-31-continuation-prompt.md
+  - 40_knowledge/references/ref-animation-ai-news-amazon-mgm-pixar-youtube.md
 tags: [auto-generated, phase-6]
 created: 2026-06-01
 updated: 2026-06-01
@@ -10,23 +10,23 @@ updated: 2026-06-01
 
 ## Definition
 
-The practice of embedding explicit human-in-the-loop constraints and verification steps into automated workflows to demonstrate professional maturity. Instead of maximizing autonomy, the system prioritizes auditability and decision transparency. This creates a visible record of judgment calls, which serves as proof of leadership capability. The architecture itself becomes a teaching tool for how to responsibly deploy AI agents in high-stakes environments.
+The strategic use of technical and legal controls to enforce creative integrity in an automated environment. This involves designing systems where human oversight is not an afterthought but a prerequisite for deployment. It requires building infrastructure that respects authorial boundaries and prevents unauthorized replication or modification of creative assets.
 
 ## Context
 
-Sean's job hunt requires him to show he can manage AI systems responsibly. By enforcing rules like 'agents draft / I send', he is not just protecting his work but also showcasing a specific management philosophy that hiring managers value.
+Sean's work on 'Vault Synthesizer' and 'Agent Fleet' is essentially building a control architecture for his own knowledge. Applying this to his job hunt means showing how he can build systems that protect user data and creative rights in enterprise AI deployments.
 
 ## Evidence
 
-> Tier-A guardrails: agents draft / I send (nothing publishes or commits irreversibly without me); honor cost caps; don't fabricate facts — cite from the vault research docs.
+> The program is designed to produce shows with the use of AI tools alongside traditional tools like Blender and Maya.
 
-> Don't auto-commit. Obsidian-Git owns vault/ auto-commit; docs/, agents-sdk/, and the portfolio repo are mine to commit by hand.
+> YouTube moves to auto-label 'significant photorealistic AI use.'
 
 ## Examples
 
-- The requirement to leave a clean git status and provide suggested commit messages, ensuring human oversight of version control.
-- The explicit instruction to 'explain everything as we work' to create a defensible record of decision-making.
+- Amazon MGM's GenAI Creators Fund combining AI with traditional tools like Maya.
+- YouTube's policy shift to auto-label AI-generated content.
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Cost-Capped Agentic Workflows]] [[Agent Ops / FDP Backup Track]]
+[[Supervision as the New AI Edge]] [[Accountability Gap]]

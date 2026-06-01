@@ -2,7 +2,7 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-31-task-22-system-card-council-stress.md
+  - 40_knowledge/references/ref-claude-code-how-the-guy-who-built-it-uses-it.md
 tags: [auto-generated, phase-6]
 created: 2026-06-01
 updated: 2026-06-01
@@ -10,25 +10,24 @@ updated: 2026-06-01
 
 ## Definition
 
-Supervision as the New AI Edge is the strategic pivot where the value of an AI Product Manager shifts from building autonomous agents to designing the governance layers that monitor them. It defines the edge not in the agent's capability, but in the 'Judge Layer' and 'control-plane' that enforce constraints on that capability. This pattern argues that as models become more capable, the scarcity moves to the ability to define materiality tiers and map them to regulatory obligations like the EU AI Act. The edge is the ability to articulate the 'inherited-and-unmanaged' risk of vendor updates rather than claiming full architectural control.
+The competitive advantage in AI-augmented work shifts from raw coding ability to the architectural discipline of managing context, parallelism, and session state. This mechanism requires the operator to treat the AI not as a single monolithic tool, but as a fleet of specialized agents that must be explicitly coordinated through plan modes and background processing. The invariant is that output quality degrades linearly with context window bloat, making session management the primary bottleneck for scalability rather than model intelligence.
 
 ## Context
 
-Sean is positioning himself for AI PM roles in regulated industries (fintech/SaaS) where 'autonomous' is a liability. By framing his fleet as a case study in 'model-risk accounting' rather than just 'automation,' he aligns his skills with the hiring managers' primary fear: liability. This concept bridges his technical fleet work with the strategic requirements of enterprise hiring.
+Sean is positioning himself for AI Product Manager roles where he must demonstrate mastery over agentic workflows. Understanding that Anthropic is explicitly validating 'Claude Code for everything' through Cowork confirms that the industry standard is moving toward non-coding agentic orchestration, which is directly relevant to his job-hunt-2026 narrative of bridging product strategy with technical execution.
 
 ## Evidence
 
-> It's the document a model-risk officer would ask me to produce if Code-Brain *were* a production system at a bank — written against the system I actually operate.
+> Cowork’s release validates that “Claude Code for everything” isn’t just a workaround - it’s the direction the product is going.
 
-> Vendor-model risk named as inherited-and-unmanaged rather than architected away.
-
-> Drift risk shifts from retraining to silent vendor model updates (e.g., Anthropic point releases), which is arguably harder to monitor, not easier.
+> Most of the features that make Claude Code powerful, such as context management, background agents, and custom commands, aren’t yet easily available in Cowork.
 
 ## Examples
 
-- Mapping the fleet to SR-11-7 model-risk tiers to demonstrate fluency with enterprise risk frameworks.
-- Treating 'silent vendor model updates' as a critical monitoring vector that requires active oversight rather than passive trust.
+- Using plan mode to break down complex tasks before execution
+- Managing parallel sessions for distinct sub-tasks
+- Leveraging background agents for asynchronous processing
 
 ## Related Concepts
 
-[[Accountability Gap]] [[AI Product Manager]] [[Model-Risk Officer]]
+[[Agentic Engineering]] [[Context Management]] [[Agent Fleet Observability Dashboard]]
