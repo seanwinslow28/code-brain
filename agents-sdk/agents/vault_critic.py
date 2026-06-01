@@ -88,6 +88,12 @@ class CritiqueResult:
     antigravity_calls: int = 0
     antigravity_failures: int = 0
     antigravity_tokens_total: int = 0
+    # 2026-06-01 — persist the most-recent per-CLI failure text. The manifest
+    # previously recorded only failure *counts*, so a 100%-failing CLI (e.g. the
+    # Anti-Gravity 5-of-5 nightly failures) gave no clue *why* it failed. These
+    # capture CLIResponse.error from the last failing call of each CLI.
+    codex_last_error: str = ""
+    antigravity_last_error: str = ""
     duration_seconds: float = 0.0
     expansions_written: list[str] = field(default_factory=list)
     error: str = ""
@@ -132,6 +138,8 @@ def write_critic_manifest(
         "antigravity_calls": result.antigravity_calls,
         "antigravity_failures": result.antigravity_failures,
         "antigravity_tokens_total": result.antigravity_tokens_total,
+        "codex_last_error": result.codex_last_error,
+        "antigravity_last_error": result.antigravity_last_error,
         "duration_seconds": round(result.duration_seconds, 2),
         "expansions_written": list(result.expansions_written),
         "warnings": list(result.warnings),
@@ -388,9 +396,13 @@ async def run(
             result.antigravity_tokens_total += ag_resp.tokens
         if not codex_resp.ok:
             result.codex_failures += 1
+            if codex_resp.error:
+                result.codex_last_error = codex_resp.error
             any_failure = True
         if not ag_resp.ok:
             result.antigravity_failures += 1
+            if ag_resp.error:
+                result.antigravity_last_error = ag_resp.error
             any_failure = True
 
         if expansion_path is None:
