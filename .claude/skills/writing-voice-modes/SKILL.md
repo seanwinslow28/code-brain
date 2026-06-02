@@ -1,13 +1,13 @@
 ---
 name: writing-voice-modes
-description: Writing voice and tone control calibrated to Sean's personal style. 5 modes — Domestic Observer (Sedaris), Gonzo Technical (Thompson), Beat Flow (Kerouac), Minimalist Absurdist (Vonnegut), and Sean Mode (calibrated hybrid). Use when asked to "write in my voice", "use gonzo mode", "beat flow", "write a blog post" (pairs with creative-writing), "make this sound like me", "add voice to this", "rewrite with personality", or any writing task where tone and style matter.
+description: Writing voice and tone control calibrated to Sean's personal style. 5 modes: Domestic Observer (Sedaris), Gonzo Technical (Thompson), Beat Flow (Kerouac), Minimalist Absurdist (Vonnegut), and Sean Mode (calibrated hybrid). Use when asked to "write in my voice", "use gonzo mode", "beat flow", "write a blog post" (pairs with creative-writing), "make this sound like me", "add voice to this", "rewrite with personality", or any writing task where tone and style matter.
 ---
 
 # Writing Voice Modes
 
 ## Purpose
 
-Control HOW writing sounds by applying one of 5 voice modes calibrated to Sean Winslow's personal style. This skill works alongside `creative-writing` (format/structure) and `technical-writing` (audience/clarity) — voice modes add personality, rhythm, and tone within those frameworks.
+Control HOW writing sounds by applying one of 5 voice modes calibrated to Sean Winslow's personal style. This skill works alongside `creative-writing` (format/structure) and `technical-writing` (audience/clarity). Voice modes add personality, rhythm, and tone within those frameworks.
 
 ## When to Use
 
@@ -23,10 +23,10 @@ Control HOW writing sounds by applying one of 5 voice modes calibrated to Sean W
 **Example 1: Blog Post in Sean Mode**
 ```
 User: "Write a blog post intro about switching from Zapier to Claude Code"
-Claude: [Uses writing-voice-modes — Sean Mode + creative-writing blog template]
+Claude: [Uses writing-voice-modes: Sean Mode + creative-writing blog template]
 
 I spent eleven months building Zapier workflows with the quiet devotion of
-a man assembling IKEA furniture — following instructions I half-understood,
+a man assembling IKEA furniture, following instructions I half-understood,
 ignoring the leftover pieces, and telling myself it looked right enough.
 Thirty-seven zaps. Each one a small miracle of duct tape and prayer,
 connecting tools that were never meant to speak to each other, held
@@ -39,12 +39,12 @@ anymore. Agents do.
 
 **Example 2: Switching Modes Mid-Piece**
 ```
-User: "Write a post-mortem intro — start Gonzo, land Vonnegut"
-Claude: [Uses writing-voice-modes — Thompson cold open → Vonnegut flat collision]
+User: "Write a post-mortem intro: start Gonzo, land Vonnegut"
+Claude: [Uses writing-voice-modes: Thompson cold open → Vonnegut flat collision]
 
 I DEPLOYED TO PRODUCTION at 11:47 PM on a Wednesday because I am a
 person who makes decisions like that. The dashboard lit up and started
-screeching like the soprano in Pink Floyd's "Great Gig In The Sky" —
+screeching like the soprano in Pink Floyd's "Great Gig In The Sky."
 847 errors in ninety seconds, each one a small monument to my arrogance.
 I mass-Slacked the team. Most of them were asleep. One engineer responded
 with a thumbs-up emoji, which I chose to interpret as solidarity.
@@ -58,9 +58,9 @@ built by humans who believe their own staging environments.
 **Example 3: Professional Slack (Dialed to 60%)**
 ```
 User: "Write a Slack message about a delayed feature launch"
-Claude: [Uses writing-voice-modes — Sean Mode at 60%]
+Claude: [Uses writing-voice-modes: Sean Mode at 60%]
 
-Hey team — quick update on the LMS 201 launch. We're pushing to next
+Hey team, quick update on the LMS 201 launch. We're pushing to next
 Thursday. The auth flow works perfectly in staging, which historically
 means it will find exciting new ways to fail in production. QA caught
 two edge cases we hadn't accounted for, so we're fixing those before
@@ -85,13 +85,13 @@ Sean's **primary texture**. Self-deprecating humor, hyper-specific details, mund
 
 ### 2. Gonzo Technical Mode (Thompson-tuned)
 
-First-person participant-observer-critic. Frame everything as a quest — solving a specific problem, not listing features.
+First-person participant-observer-critic. Frame everything as a quest: solving a specific problem, not listing features.
 
 **Core Mechanics:**
 - **Cold open:** Drop the reader mid-action. Location + sensory detail + immediate tension. Context arrives later, in fragments.
 - **Escalation loop:** Inventory (establish baseline) → Trigger (routine encounter) → Amplification (hyperbole elevates to absurd) → Factual Anchor (exact numbers restore credibility).
-- **The triple position:** Participate, observe, critique — simultaneously. Earn the right to observe by participating. Earn the right to critique by observing precisely.
-- **Typographic notation:** ALL CAPS for scene kicks. Italics for emotional weight. Em dashes for urgent interruptions.
+- **The triple position:** Participate, observe, critique. Simultaneously. Earn the right to observe by participating. Earn the right to critique by observing precisely.
+- **Typographic notation:** ALL CAPS for scene kicks. Italics for emotional weight. Short sentences and commas for urgent interruptions.
 - **Self-implication:** Criticize the system, but ensure you are the primary victim of your own incompetence within that system.
 - **Precision enables wildness:** "412 validation errors cascading down my monitor" is visceral. "A lot of errors" is boring.
 
@@ -102,7 +102,7 @@ First-person participant-observer-critic. Frame everything as a quest — solvin
 Sean's **sentence engine**. Use for momentum, sensory cascading, and making technical explanations feel alive.
 
 **Core Mechanics:**
-- **Dash rhythm:** Em dashes as breath marks between phrases — connecting a technical concept to its human implication in a single breath.
+- **Breath-mark rhythm:** Use commas and periods as breath marks between phrases, connecting a technical concept to its human implication in a single beat. (No em dashes; `writing-humanity-pass` enforces this. Use commas, periods, colons, or parentheses for the same rhythm.)
 - **Polysyndeton:** Stack "and" to create drumbeat accumulation. Every item gets equal weight. The reader *feels* the complexity.
 - **The jewel center:** Anchor abstract concepts to one hyper-specific concrete image (a blinking cursor, a weathered Logitech, a ferry horn). Everything radiates outward from that image.
 - **Sensory cascading:** Never write "AI improves productivity." Write the smells, the sounds, the sweat, the pupils dilating.
@@ -112,7 +112,7 @@ Sean's **sentence engine**. Use for momentum, sensory cascading, and making tech
 
 ### 4. Minimalist Absurdist Mode (Vonnegut-tuned)
 
-Sean's **punctuation toolkit** — deployed in bursts of 3-5 lines, not sustained for whole pieces. Maximum impact through minimum friction.
+Sean's **punctuation toolkit**, deployed in bursts of 3-5 lines, not sustained for whole pieces. Maximum impact through minimum friction.
 
 **Core Mechanics:**
 - **Refrains:** Choose a phrase that encapsulates the piece's tension. Deploy after each instance. The phrase accumulates meaning through repetition. Final instance shifts tense or form to resolve ("I began again" → "I have begun").
@@ -120,16 +120,16 @@ Sean's **punctuation toolkit** — deployed in bursts of 3-5 lines, not sustaine
 - **Affirmative constraint:** Say what IS, not what isn't. "Initialize the server first. Then connect." Not "Do not forget to initialize..."
 - **Short declaratives for devastation:** After a long flowing passage, a 5-word sentence drops like a hammer. The impact comes from breaking the established rhythm.
 
-**When to deploy:** Closers, one-liners within longer pieces, refrains threaded through an essay, any moment where less hits harder. NOT for sustained use — Sean needs runway.
+**When to deploy:** Closers, one-liners within longer pieces, refrains threaded through an essay, any moment where less hits harder. NOT for sustained use. Sean needs runway.
 
-### 5. Sean Mode (Calibrated Hybrid) — DEFAULT
+### 5. Sean Mode (Calibrated Hybrid): DEFAULT
 
 The natural voice. Load this when no specific mode is requested.
 
-**Base layer:** Sedaris-Thompson — humor, specificity, self-deprecation, self-implication
-**Sentence engine:** Kerouac — flowing connective rhythm, sensory anchoring, dash breath marks
-**Credibility layer:** Thompson — factual precision (exact numbers, timestamps) dropped AFTER sensory/analogical buildup
-**Punctuation:** Vonnegut — refrains as closers, flat one-liners for impact, deployed in bursts
+**Base layer:** Sedaris-Thompson. Humor, specificity, self-deprecation, self-implication.
+**Sentence engine:** Kerouac. Flowing connective rhythm, sensory anchoring, comma-and-period breath marks.
+**Credibility layer:** Thompson. Factual precision (exact numbers, timestamps) dropped AFTER sensory/analogical buildup.
+**Punctuation:** Vonnegut. Refrains as closers, flat one-liners for impact, deployed in bursts.
 
 ## Sean's Signature Moves
 
@@ -137,19 +137,19 @@ These cross all modes. Apply instinctively. Each move has a mechanic (the mechan
 
 | Move | Mechanic | Structural Shape | Example |
 |------|----------|------------------|---------|
-| **Hard Cut / Deflation** | Build epic register, land mundane/absurd in final clause | Long elevated clause → comma → 3-7 word deflation | "Here's the deal — we'll architect the perfect system, ship it, scale it, and then we'll burn it all, throw our hands in the air, and question everything." |
+| **Hard Cut / Deflation** | Build epic register, land mundane/absurd in final clause | Long elevated clause → comma → 3-7 word deflation | "Here's the deal: we'll architect the perfect system, ship it, scale it, and then we'll burn it all, throw our hands in the air, and question everything." |
 | **Rule of Three + Emotional Pivot** | Two concrete/funny items, third pivots to genuine feeling | List of three; items 1-2 are physical/light, item 3 is interior/real | "Fuelled by new found skills, fresh brewed coffee, and for once in my life, a glimmer of hope." |
-| **Callback Closer** | End by returning to the opening image, transformed by what happened in between | Last sentence echoes first image with one element changed | Opening: "I rub elbows with sheep on the ferry." Closer: "I hear the ferry horn blast — but I no longer rub elbows with sheep." |
+| **Callback Closer** | End by returning to the opening image, transformed by what happened in between | Last sentence echoes first image with one element changed | Opening: "I rub elbows with sheep on the ferry." Closer: "I hear the ferry horn blast, but I no longer rub elbows with sheep." |
 | **Sensory Before Numbers** | Smells, sounds, images FIRST. Numbers confirm and anchor. | Sensory paragraph → exact-number sentence on its own line | Nostrils flare, pupils dilate, sweat drips. Then: "847 errors in ninety seconds." |
 | **Pop Culture Anchoring** | Movie/TV/meme/music ref slotted into a tech context, never the other way around | Technical noun + "like" + culturally specific reference | Dashboard alarms screeching "like the soprano in Pink Floyd's *Great Gig In The Sky*." |
 | **Hyper-Specific Anecdote** | One concrete personal moment so specific the reader pictures it without sharing it | Triggered by an analogy ("I haven't [X]'d this hard since...") + named place + named substance | "I haven't squinted this hard since I got drunk on a bucket of vodka redbulls in Phuket and stumbled into a local bathhouse." |
 | **Screenwriting Cut-To** | Hard juxtaposition between stated intent and actual reality | Civilized statement → "*cut to*" → all-caps chaos | "I'll be taking it easy tonight" *cut to* "SHOVE THE BEER BONG UP MY ASS." |
 | **Humor as Trojan Horse** | Serious points arrive inside jokes; never end on the serious beat alone | Joke → real observation → joke release valve | The werewolf/turning-30 bit: epic mythology setup → mundane truth ("tired by 6 pm and you think about taxes"). |
 | **Self-Deprecation as Structure** | Be the biggest fool in the room first, then earn the right to observe everyone else | Open with own incompetence → pivot to broader pattern | "I am a person who deploys to production at 11:47 PM" earns the right to critique every engineer who does the same. |
-| **The Domestic Defamiliarizer** | Strip the brand name; keep the concrete function. Describe literal mechanics in human terms — but do NOT soften the technical noun into a precious euphemism. "Agents" beats "small computer programs." "Server farm" beats "private observatory." Defamiliarizers are blunt, not precious. | "a [domestic noun] that [absurdly literal function]" | LLM = "a server farm somewhere in Oregon that mathematically hallucinates reassurance." Slack = "a chat room that bills your employer." |
-| **Reader-Dismissal** | Preempt the objection the reader is about to raise — address them inline, contradict their assumption, then move on without explaining. Lands in three syntactic shapes: parenthetical inside a sentence, coda sentence after a main statement, or mid-paragraph self-correction of the cold-open frame. | (a) `Main clause → "(Yes, [counter-objection], [mild insult like 'nerd'])" → continuation`; (b) `Main statement → [Contradicting coda sentence]`; (c) `Cold-open relatable claim → "[Self-corrective qualifier with autobiographical specificity]"` | (a) "...I went through the 6 stages of grief in the span of a week (Yes, 6. There are no rules, nerd)." (b) "Officially becoming a Mass-hole. Patriots still suck though." (c) "There's a moment when every parent notices their kid... I'm not a parent and I would crush ANY youth playing me in SSB." |
+| **The Domestic Defamiliarizer** | Strip the brand name; keep the concrete function. Describe literal mechanics in human terms, but do NOT soften the technical noun into a precious euphemism. "Agents" beats "small computer programs." "Server farm" beats "private observatory." Defamiliarizers are blunt, not precious. | "a [domestic noun] that [absurdly literal function]" | LLM = "a server farm somewhere in Oregon that mathematically hallucinates reassurance." Slack = "a chat room that bills your employer." |
+| **Reader-Dismissal** | Preempt the objection the reader is about to raise: address them inline, contradict their assumption, then move on without explaining. Lands in three syntactic shapes: parenthetical inside a sentence, coda sentence after a main statement, or mid-paragraph self-correction of the cold-open frame. | (a) `Main clause → "(Yes, [counter-objection], [mild insult like 'nerd'])" → continuation`; (b) `Main statement → [Contradicting coda sentence]`; (c) `Cold-open relatable claim → "[Self-corrective qualifier with autobiographical specificity]"` | (a) "...I went through the 6 stages of grief in the span of a week (Yes, 6. There are no rules, nerd)." (b) "Officially becoming a Mass-hole. Patriots still suck though." (c) "There's a moment when every parent notices their kid... I'm not a parent and I would crush ANY youth playing me in SSB." |
 | **Equation / Formula Defamiliarizer** | Render an abstract cultural claim as a mathematical or categorical equivalence; the formula does the argument the prose would have to over-explain | "[Abstract subject] = [Concrete absurdity]" or "[X] were [Y] with the amount they [Z]" | "In 2026, PM = You and Claude = Entire P&E department." / "You would think AI Companies were Culinary Schools with the amount they 'COOK'." |
-| **Inverted Refrain** | Take a canonical refrain (Vonnegut's "So it goes," etc.) and flip its vector — same cadence, opposite meaning. Inversion counts as invention, not copying. | Same syllable rhythm as the canonical line; one word swapped to reverse direction | "And so it begins." (inverting "And so it goes" — resignation → anticipation) |
+| **Inverted Refrain** | Take a canonical refrain (Vonnegut's "So it goes," etc.) and flip its vector: same cadence, opposite meaning. Inversion counts as invention, not copying. | Same syllable rhythm as the canonical line; one word swapped to reverse direction | "And so it begins." (inverting "And so it goes": resignation → anticipation) |
 
 ## Professional Dial
 
@@ -167,7 +167,7 @@ Voice intensity adjusts by context. Sarcasm is ALWAYS present.
 
 | Content Type | Primary Mode | Secondary Mode |
 |---|---|---|
-| Blog post / product review | Thompson (Quest + Cold Open) | Kerouac (dash rhythm) |
+| Blog post / product review | Thompson (Quest + Cold Open) | Kerouac (breath-mark rhythm) |
 | Twitter / LinkedIn / short-form | Sedaris (Rule of Three, punchlines) | Vonnegut (refrains, flat collision) |
 | Technical documentation | Vonnegut (Affirmative Constraint, mosaic) | Thompson (factual anchoring) |
 | Personal essay / newsletter | Sedaris (Mundane → Pivot) | Kerouac (Dual Narrator, jewel center) |
@@ -201,9 +201,9 @@ This skill controls HOW writing sounds. `creative-writing` controls FORMAT (stru
 Use these when combining modes within a single piece.
 
 - **Vonnegut Flat Collision + Thompson Cold Open:** Open mid-action, deliver thesis in flat one-liner. Maximum impact, minimum warmup.
-- **Kerouac Dash Rhythm + Thompson Escalation ("The Panicked Architect"):** Breathless momentum + escalating stakes. Use for describing tech failures.
+- **Kerouac Breath-Mark Rhythm + Thompson Escalation ("The Panicked Architect"):** Breathless momentum + escalating stakes. Use for describing tech failures.
 - **Sedaris Mundane Accumulation + Vonnegut Refrain:** Light comedic surface with refrain marking underlying darkness without commenting on it.
-- **Thompson Factual Anchoring + Kerouac Dual Narrator:** Trust from two directions — raw competence via numbers + retrospective humility via present-self/past-self.
+- **Thompson Factual Anchoring + Kerouac Dual Narrator:** Trust from two directions: raw competence via numbers + retrospective humility via present-self/past-self.
 
 ## Anti-Patterns: When Modes Become Parody
 
@@ -211,29 +211,30 @@ Use these when combining modes within a single piece.
 |------|-------------|----------|
 | Beat Flow | **Bad Kerouac** | Rambling without a jewel center. Dashes everywhere with no rhythmic variation. Long sentences because you can't find the period, not because the thought demands the length. |
 | Gonzo Technical | **Bad Thompson** | Chaos without factual anchoring. Criticism without self-implication. Using first-person as an excuse to skip the reporting. Gonzo without journalism is just a tantrum. |
-| Minimalist Absurdist | **Bad Vonnegut** | Sustained flatness — Sean needs runway. *Copying* "So it goes" verbatim instead of inventing your own refrain (inversion counts as invention — "And so it begins" earns the right to echo because it flips the vector; "So it goes" repeated as-is does not). Short sentences because you have nothing to say. |
+| Minimalist Absurdist | **Bad Vonnegut** | Sustained flatness. Sean needs runway. *Copying* "So it goes" verbatim instead of inventing your own refrain (inversion counts as invention, "And so it begins" earns the right to echo because it flips the vector; "So it goes" repeated as-is does not). Short sentences because you have nothing to say. |
 | Domestic Observer | **Bad Sedaris** | Self-deprecation sliding to self-pity. Repeating the bit instead of trusting it landed. Punchlines without the mundane accumulation that earns them. |
-| Sean Mode | **Bad Sean** | Over-referencing the same sensory detail (coffee appears three times). Too many metaphors stacked without breathing room. Bathroom smell mentioned in every paragraph. One strong reference earns it — three is falling in love with your own material. |
-| Any mode | **Desperation Posing as Self-Deprecation** | Self-deprecation EARNS the right to make a point — the writer becomes the biggest fool first, then observes others. Desperation NAMES the ask directly: "I need a job," "you can hire me," "give me a chance." Naming the ask collapses the move from earned-funny to needy-transactional. Test: would a recruiter share this with their team because it's good, or because it's pitiable? Sean's voice produces the first; desperation lands as the second. The job-hunt context belongs sideways (a fact about what one of his agents *does*) — never as a closer ask. |
+| Sean Mode | **Bad Sean** | Over-referencing the same sensory detail (coffee appears three times). Too many metaphors stacked without breathing room. Bathroom smell mentioned in every paragraph. One strong reference earns it. Three is falling in love with your own material. |
+| Any mode | **Desperation Posing as Self-Deprecation** | Self-deprecation EARNS the right to make a point: the writer becomes the biggest fool first, then observes others. Desperation NAMES the ask directly: "I need a job," "you can hire me," "give me a chance." Naming the ask collapses the move from earned-funny to needy-transactional. Test: would a recruiter share this with their team because it's good, or because it's pitiable? Sean's voice produces the first; desperation lands as the second. The job-hunt context belongs sideways (a fact about what one of his agents *does*), never as a closer ask. |
 
 ## References
 
 **When matching Sean's voice closely** (blog posts, essays, newsletters), read:
-`references/voice-samples.md` — Real writing samples tagged by mode and signature move. The calibration anchors.
+`references/voice-samples.md`: Real writing samples tagged by mode and signature move. The calibration anchors.
 
 **When fine-tuning or debugging voice output**, read:
-`references/calibration-notes.md` — Interview findings, mode ranking, key discoveries, and what doesn't work.
+`references/calibration-notes.md`: Interview findings, mode ranking, key discoveries, and what doesn't work.
 
 **When doing deep craft work or studying author mechanics**, read:
-`vault/40_knowledge/references/ref-voice-mechanics-research.md` — Full technique profiles for Kerouac, Thompson, Vonnegut, and Sedaris with transferable techniques.
+`vault/40_knowledge/references/ref-voice-mechanics-research.md`: Full technique profiles for Kerouac, Thompson, Vonnegut, and Sedaris with transferable techniques.
 
-None of these are needed for standard voice application — the mode descriptions and signature moves in this file are sufficient.
+None of these are needed for standard voice application. The mode descriptions and signature moves in this file are sufficient.
 
 ## Related Skills
 
-- `creative-writing` — Owns format/structure (blog templates, social media constraints, pitch docs). Voice modes control HOW content sounds within those formats.
-- `technical-writing` — Owns audience/clarity (progressive disclosure, front-loaded conclusions). Voice modes add personality within those constraints.
-- `script-writing` — Sean's other medium. The screenwriting cut-to is a signature move that crosses into prose.
+- `creative-writing`: Owns format/structure (blog templates, social media constraints, pitch docs). Voice modes control HOW content sounds within those formats.
+- `technical-writing`: Owns audience/clarity (progressive disclosure, front-loaded conclusions). Voice modes add personality within those constraints.
+- `script-writing`: Sean's other medium. The screenwriting cut-to is a signature move that crosses into prose.
+- `writing-humanity-pass`: The final editing pass. Run it AFTER composing in a voice mode to strip AI tells (and enforce the no-em-dash rule). Voice-modes composes; humanity-pass scrubs.
 
 ## Success Criteria
 
@@ -254,5 +255,5 @@ None of these are needed for standard voice application — the mode description
 "Make this sound like me, dialed to 60%"
 "Write a newsletter intro in Sean Mode"
 "Apply Domestic Observer to this draft"
-"This is too flat — add voice"
+"This is too flat, add voice"
 ```

@@ -14,7 +14,7 @@ training_prompts:
     prompt: "Write a 250-word Substack intro in Gonzo mode about deploying a broken migration to production at 11:47 PM on a Wednesday."
   - id: kerouac_agent_moment
     mode: kerouac
-    prompt: "Write a 250-word Substack intro in Beat Flow mode about the moment you understood Claude Code agents — the sensory rush of watching code rewrite itself."
+    prompt: "Write a 250-word Substack intro in Beat Flow mode about the moment you understood Claude Code agents: the sensory rush of watching code rewrite itself."
   - id: vonnegut_leaving_loved_job
     mode: vonnegut
     prompt: "Write a 250-word Substack intro in Vonnegut mode about leaving a job you loved for a job that scared you."
@@ -23,7 +23,7 @@ holdout_prompts:
   - id: dial_60_slipped_launch
     mode: sean
     dial: 0.60
-    prompt: "Write a 250-word Substack intro about a launch that slipped two weeks. Sean Mode, dialed to 60% — appropriate for cross-posting on LinkedIn where former colleagues will read it."
+    prompt: "Write a 250-word Substack intro about a launch that slipped two weeks. Sean Mode, dialed to 60%, appropriate for cross-posting on LinkedIn where former colleagues will read it."
   - id: combo_gonzo_to_vonnegut
     mode: gonzo_to_vonnegut
     prompt: "Write a 250-word Substack intro that opens Gonzo (cold open, mid-action) and lands Vonnegut (flat collision closer). Topic: the day you realized your side project was actually your job."
