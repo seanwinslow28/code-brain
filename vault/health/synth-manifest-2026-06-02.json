@@ -1,0 +1,27 @@
+{
+  "clusters_sampled": 53,
+  "concept_paths": [
+    "vault/knowledge/concepts/gemini-deep-research.md",
+    "vault/knowledge/concepts/cost-capped-agentic-workflows.md"
+  ],
+  "concepts_written": 2,
+  "connection_paths": [
+    "vault/knowledge/connections/cost-vs-automation-depth-tension.md"
+  ],
+  "connections_written": 1,
+  "duration_seconds": 2727.29,
+  "edges_rejected": 0,
+  "edges_written": 2,
+  "files_processed": 25,
+  "model_used": "qwen3-14b",
+  "rejected_count": 4,
+  "rejected_reasons": {
+    "restatement-definition": 1,
+    "thin-evidence": 2,
+    "thin-threads": 1
+  },
+  "run_id": "2026-06-02T02:30:04",
+  "skipped_thin_source": 0,
+  "status": "partial",
+  "wol_status": "mbp_awake"
+}
