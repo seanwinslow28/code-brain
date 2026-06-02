@@ -1362,6 +1362,8 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 
 ### Task 23 — DR6 MCP Prompt-Injection Security Audit (Phase A, ships Friday 2026-06-08)
 
+> **Status 2026-06-01 (SHIPPED + PUBLISHED, ~7 days early).** Built via the §0 prep doc's paste-ready Claude Code prompt ([`2026-05-31-task-23-step-0-prebuild-prep.md`](2026-05-31-task-23-step-0-prebuild-prep.md)), executed host-side. `@swins/intent-engineering-mcp@0.1.1` published to npm + MCP registry. The prep doc's 5 spec corrections all held: entry is `src/index.ts` (not `server.ts`); Zod was already at the boundary so the work was *tightening* not *adding*; the real finding was **unconstrained `file_path` → arbitrary local-file read** (`audit_intent_spec({file_path:"/etc/passwd"})` + symlink escape), fixed via a new `src/intent/safe-fs.ts` `loadFileSafely` (realpath + 1 MiB cap + extension allowlist + optional `INTENT_ENGINEERING_ALLOWED_ROOT` confinement); OAuth/sandboxing deferred *with surface-scoped reasons*; output URL-filtering downgraded honestly. Shipped: `safe-fs.ts` + `audit-log.ts` (append-only JSONL, fail-open), `.strict()` on all 3 input schemas, 3 `node:test` files (zero new deps), `docs/SECURITY.md` (106 lines, 5 sections, leads with the file-read vector + the MCP trust boundary), version bump + CHANGELOG. **EchoLeak attribution corrected + web-verified 2026-06-02:** CVE-2025-32711 is Microsoft 365 Copilot (Aim Labs), NOT Anthropic/MCP — the source LDR doc had it wrong. Ledger row + LinkedIn draft shipped this session. **Remaining (Sean-host):** `npm run build` in the portfolio to confirm the new ledger row resolves, commit it, post the LinkedIn. Full narrative in the completion log.
+
 **Maps to:** DR-Max follow-up flag + GitHub MCP precedent. LDR research at `vault/20_projects/research/2026-05-18-mcp-prompt-injection-hardening.md` informs the checklist. Hardens the already-shipped @swins/intent-engineering-mcp@0.1.0 server.
 
 **Files:**
@@ -1387,6 +1389,8 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 ---
 
 ### Task 24 — DR7 Discovery PRD / Cross-Functional Translation Artifact (Phase A, ships Friday 2026-06-08)
+
+> **Status 2026-06-02 (prepped — execution-ready; not yet built).** A paste-ready fresh-session continuation prompt is staged at [`2026-06-02-task-24-continuation-prompt.md`](2026-06-02-task-24-continuation-prompt.md): all decisions pre-locked (workflow, 5 personas, adoption-funnel metrics, 90-day Klarna-citing rollout, evangelism callout, voice split), research-first pointer to [`2026-05-18-enterprise-ai-pm-skill-gaps.md`](../../research/2026-05-18-enterprise-ai-pm-skill-gaps.md), and the full verification gate. One open micro-fork left for Sean: ledger `surface` = `product` vs `writing`. Sequenced **behind** the publish-day backlog clear + Gate-C interview drilling (it's more strategic-writing ammunition on an already-deep stack). Build window is execution-only.
 
 **Maps to:** DR-Max Q1 finding — Cross-Functional Translation is the MOST-cited JD skill (90% of Tier-1 JDs). The "AI evangelist in non-AI orgs" backstory IS the raw material for this artifact. Pure strategic writing.
 
