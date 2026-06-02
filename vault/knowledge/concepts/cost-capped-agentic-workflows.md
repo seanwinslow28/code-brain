@@ -4,29 +4,29 @@ type: concept
 sources:
   - 00_inbox/tickets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-01
-updated: 2026-06-01
+created: 2026-06-02
+updated: 2026-06-02
 ---
 
 ## Definition
 
-This pattern describes a constraint architecture where agent execution is gated by strict financial thresholds rather than just technical success. When operational costs exceed a predefined cap, the system must halt or degrade gracefully to prevent resource exhaustion. This forces a shift from continuous automation to intermittent, high-value interventions, ensuring that the economic viability of the agent fleet is monitored as closely as its functional reliability.
+This pattern describes a constraint architecture where agent execution is gated by strict financial thresholds rather than just technical success. When a specific integration method, such as an MCP bridge, causes costs to double and trigger hard caps, the system must revert to cheaper, read-only injection patterns to maintain viability. The mechanism relies on identifying the cost driver of a dependency and replacing it with a low-overhead alternative that preserves the data flow without the financial penalty.
 
 ## Context
 
-Sean is actively managing the cost of his agent fleet, specifically noting that a context-management beta 'doubled cost to $0.97 and tripped the cap.' This concept is critical for his job-hunt infrastructure, as it demonstrates an understanding of production-grade cost control, a key skill for AI Product Manager roles.
+Sean is operating under tight budget constraints for his agent fleet. The recent failure of the MCP bridge due to cost caps demonstrates that technical elegance must yield to economic sustainability. He needs to ensure that future agent interactions, particularly those involving memory or ticketing, do not inadvertently trigger these caps, which would halt his job-hunt automation entirely.
 
 ## Evidence
 
 > drop MCP bridge + context-management beta that doubled cost to $0.97 and tripped the cap 5/29
 
-> Build a $0/run local summarizer (gemma4:e4b / qwen3 on Mac Mini) that curates daily_driver's fleet-memory namespace
+> Build a $0/run local summarizer ... that curates daily_driver's fleet-memory namespace, so the Opus agent only reads, never writes
 
 ## Examples
 
-- Replacing expensive cloud-based context management with a local $0/run summarizer on a Mac Mini.
-- Dropping the MCP bridge because it caused cost overruns that triggered system caps.
+- Reverting to inject_memories_into_prompt() to avoid the $0.97 cost spike
+- Using local models like gemma4:e4b on a Mac Mini for $0/run summarization
 
 ## Related Concepts
 
-[[Cost-Capped Agentic Workflows]] [[Automation Reliability]] [[Infrastructure Status]]
+[[Context Management as a Bottleneck]] [[Agent Health Monitoring]]
