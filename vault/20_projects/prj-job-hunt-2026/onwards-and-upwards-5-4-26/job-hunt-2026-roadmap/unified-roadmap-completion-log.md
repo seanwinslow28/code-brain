@@ -328,6 +328,33 @@ Then 4-edit surgical voice pass: (1) §1 P2 polysyndeton push on the May 10th st
 
 ---
 
+### 2026-06-02 (council revision) — Task 24 Discovery PRD stress-tested + "remove the magic" pass
+
+**What happened.** Ran the offered premium LLM-Council stress-test on the PRD (4 frontier models cross-ranking + chairman synthesis, $0.61, under the $1.00/query cap). Transcript: [`portfolio-artifacts/critiques/discovery-prd-council-2026-06-02.md`](../../portfolio-artifacts/critiques/discovery-prd-council-2026-06-02.md). Council ran host-side via Claude Code (the Cowork sandbox egress proxy blocks `openrouter.ai`); prompt was pre-assembled in-session with the PRD inlined.
+
+**The verdict (high consensus).** All four models agreed §3 genuinely proves cross-functional translation — the one unqualified win — but the original draft made the controls sound *more deterministic than the technology allows*, which undercuts the artifact's own thesis to a technical reader. Chairman's framing (endorsed): **"keep the human translation, remove the magic."**
+
+**Scope chosen (two forks, both to the tighter option):** (1) revision depth = **Core "remove the magic"** only (the ~10 fixes all four converged on), not the fuller rigor-adds or the full sweep; (2) personas = **keep all five clean + distinct** (fix the Editor/SEO blur by making SEO genuinely SEO-specific), *declined* the council's "make personas asymmetric / scar-tissue" suggestion since it trades against the locked "tell-them-apart-blind" gate.
+
+**Fixes folded in:**
+- **Citation ≠ factuality** (the unanimous 30-second-kill error): §3.1/§3.3/§3.4 + Story 1 now describe sampled, scored, human-validated claim-support — explicitly *not* "if it can't cite it, it's flagged."
+- **Editor/SEO blur** (unanimous): the SEO lead's translation + Story 4 gate are now genuinely SEO (search-intent, keyword cannibalization/canonical conflict, near-duplicate similarity, freshness, schema/internal-link), not "factual + original."
+- **Training-data overclaim** (chairman sided with GPT-5.5): "not trained on the open internet" / "nothing comes from material we don't own" reframed — the base model carries pretrained knowledge; only *publishable claims* are corpus-grounded; vendor barred from training on our content.
+- **Time-to-Trust** renamed "time to first light-edit approval" (fixes the "nothing publishes without a human" contradiction) + sustained-trust companion (two consecutive light-edit approvals) to defeat editor-fatigue gaming.
+- **Adoption rate → brief-penetration rate** (% of eligible briefs through the assistant, not once-weekly logins).
+- **Bank of America Erica cut** as a category error (customer-facing containment-rate bot ≠ internal drafting tool); Klarna kept, JPMorgan kept with the analogy explicitly trimmed. Still ≥2 cases.
+- **Thresholds**: now set from a Phase-1 human-labeled baseline with explicit false-positive tolerance, not named in advance.
+- **Tells killed**: the dated vault-path footnote ("theater" in a portfolio artifact), the "acceptance criteria a non-technical PM can verify without reading code" self-announcement, and "worst case is a correction, not a court."
+- Cheap rigor adds the council flagged: archive self-contradiction + net-new-topic routing as risk bullets; "product education" dropped from Tier-1 (not low-liability).
+
+**Word-count tradeoff (Sean's call):** the accuracy fixes pushed the body from ~3,490 to **~3,730**, over the 2,500-3,500 ceiling. Sean accepted the overage — the precision is worth ~230 words and a 3,700-word Discovery PRD reads fine. The 3,500 was a self-imposed readability ceiling, not an external constraint.
+
+**Ledger MDX updated:** dropped Erica from the methods; added an `adversarial stress-test / premium LLM Council / $0.61` method row; intro now notes the council pass. `validate_content.mjs` passes clean.
+
+**Net:** the artifact now survives a technical hiring manager — its load-bearing claim ("I translate AI concepts accurately") no longer collapses on the citation/factuality inspection that all four models flagged. Host close-outs unchanged (build + commit + optional LinkedIn/Substack).
+
+---
+
 ## Completed Tasks
 
 Tasks whose every step is closed. Each section below is the verbatim task body lifted from the parent roadmap on 2026-05-18 (or the date of the move, noted per-task).
