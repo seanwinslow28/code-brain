@@ -1,13 +1,13 @@
 ---
 name: writing-voice-modes
-description: Writing voice and tone control calibrated to Sean's personal style. 5 modes — Domestic Observer (Sedaris), Gonzo Technical (Thompson), Beat Flow (Kerouac), Minimalist Absurdist (Vonnegut), and Sean Mode (calibrated hybrid). Use when asked to "write in my voice", "use gonzo mode", "beat flow", "write a blog post" (pairs with creative-writing), "make this sound like me", "add voice to this", "rewrite with personality", or any writing task where tone and style matter.
+description: Writing voice and tone control calibrated to Sean's personal style. 5 modes: Domestic Observer (Sedaris), Gonzo Technical (Thompson), Beat Flow (Kerouac), Minimalist Absurdist (Vonnegut), and Sean Mode (calibrated hybrid). Use when asked to "write in my voice", "use gonzo mode", "beat flow", "write a blog post" (pairs with creative-writing), "make this sound like me", "add voice to this", "rewrite with personality", or any writing task where tone and style matter.
 ---
 
 # Writing Voice Modes
 
 ## Purpose
 
-Control HOW writing sounds by applying one of 5 voice modes calibrated to Sean Winslow's personal style. This skill works alongside `creative-writing` (format/structure) and `technical-writing` (audience/clarity) — voice modes add personality, rhythm, and tone within those frameworks.
+Control HOW writing sounds by applying one of 5 voice modes calibrated to Sean Winslow's personal style. This skill works alongside `creative-writing` (format/structure) and `technical-writing` (audience/clarity). Voice modes add personality, rhythm, and tone within those frameworks.
 
 ## When to Use
 
@@ -85,13 +85,13 @@ Sean's **primary texture**. Self-deprecating humor, hyper-specific details, mund
 
 ### 2. Gonzo Technical Mode (Thompson-tuned)
 
-First-person participant-observer-critic. Frame everything as a quest — solving a specific problem, not listing features.
+First-person participant-observer-critic. Frame everything as a quest: solving a specific problem, not listing features.
 
 **Core Mechanics:**
 - **Cold open:** Drop the reader mid-action. Location + sensory detail + immediate tension. Context arrives later, in fragments.
 - **Escalation loop:** Inventory (establish baseline) → Trigger (routine encounter) → Amplification (hyperbole elevates to absurd) → Factual Anchor (exact numbers restore credibility).
-- **The triple position:** Participate, observe, critique — simultaneously. Earn the right to observe by participating. Earn the right to critique by observing precisely.
-- **Typographic notation:** ALL CAPS for scene kicks. Italics for emotional weight. Em dashes for urgent interruptions.
+- **The triple position:** Participate, observe, critique. Simultaneously. Earn the right to observe by participating. Earn the right to critique by observing precisely.
+- **Typographic notation:** ALL CAPS for scene kicks. Italics for emotional weight. Short sentences and commas for urgent interruptions.
 - **Self-implication:** Criticize the system, but ensure you are the primary victim of your own incompetence within that system.
 - **Precision enables wildness:** "412 validation errors cascading down my monitor" is visceral. "A lot of errors" is boring.
 
@@ -102,7 +102,7 @@ First-person participant-observer-critic. Frame everything as a quest — solvin
 Sean's **sentence engine**. Use for momentum, sensory cascading, and making technical explanations feel alive.
 
 **Core Mechanics:**
-- **Dash rhythm:** Em dashes as breath marks between phrases — connecting a technical concept to its human implication in a single breath.
+- **Breath-mark rhythm:** Use commas and periods as breath marks between phrases, connecting a technical concept to its human implication in a single beat. (No em dashes; `writing-humanity-pass` enforces this. Use commas, periods, colons, or parentheses for the same rhythm.)
 - **Polysyndeton:** Stack "and" to create drumbeat accumulation. Every item gets equal weight. The reader *feels* the complexity.
 - **The jewel center:** Anchor abstract concepts to one hyper-specific concrete image (a blinking cursor, a weathered Logitech, a ferry horn). Everything radiates outward from that image.
 - **Sensory cascading:** Never write "AI improves productivity." Write the smells, the sounds, the sweat, the pupils dilating.
@@ -112,7 +112,7 @@ Sean's **sentence engine**. Use for momentum, sensory cascading, and making tech
 
 ### 4. Minimalist Absurdist Mode (Vonnegut-tuned)
 
-Sean's **punctuation toolkit** — deployed in bursts of 3-5 lines, not sustained for whole pieces. Maximum impact through minimum friction.
+Sean's **punctuation toolkit**, deployed in bursts of 3-5 lines, not sustained for whole pieces. Maximum impact through minimum friction.
 
 **Core Mechanics:**
 - **Refrains:** Choose a phrase that encapsulates the piece's tension. Deploy after each instance. The phrase accumulates meaning through repetition. Final instance shifts tense or form to resolve ("I began again" → "I have begun").
@@ -120,16 +120,16 @@ Sean's **punctuation toolkit** — deployed in bursts of 3-5 lines, not sustaine
 - **Affirmative constraint:** Say what IS, not what isn't. "Initialize the server first. Then connect." Not "Do not forget to initialize..."
 - **Short declaratives for devastation:** After a long flowing passage, a 5-word sentence drops like a hammer. The impact comes from breaking the established rhythm.
 
-**When to deploy:** Closers, one-liners within longer pieces, refrains threaded through an essay, any moment where less hits harder. NOT for sustained use — Sean needs runway.
+**When to deploy:** Closers, one-liners within longer pieces, refrains threaded through an essay, any moment where less hits harder. NOT for sustained use. Sean needs runway.
 
-### 5. Sean Mode (Calibrated Hybrid) — DEFAULT
+### 5. Sean Mode (Calibrated Hybrid): DEFAULT
 
 The natural voice. Load this when no specific mode is requested.
 
-**Base layer:** Sedaris-Thompson — humor, specificity, self-deprecation, self-implication
-**Sentence engine:** Kerouac — flowing connective rhythm, sensory anchoring, dash breath marks
-**Credibility layer:** Thompson — factual precision (exact numbers, timestamps) dropped AFTER sensory/analogical buildup
-**Punctuation:** Vonnegut — refrains as closers, flat one-liners for impact, deployed in bursts
+**Base layer:** Sedaris-Thompson. Humor, specificity, self-deprecation, self-implication.
+**Sentence engine:** Kerouac. Flowing connective rhythm, sensory anchoring, comma-and-period breath marks.
+**Credibility layer:** Thompson. Factual precision (exact numbers, timestamps) dropped AFTER sensory/analogical buildup.
+**Punctuation:** Vonnegut. Refrains as closers, flat one-liners for impact, deployed in bursts.
 
 ## Sean's Signature Moves
 
