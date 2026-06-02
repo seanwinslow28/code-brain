@@ -308,6 +308,26 @@ Then 4-edit surgical voice pass: (1) §1 P2 polysyndeton push on the May 10th st
 
 ---
 
+### 2026-06-02 (later) — Task 24 Discovery PRD SHIPPED (content-complete; cross-functional translation artifact)
+
+**What shipped.** The Discovery PRD / Cross-Functional Translation artifact, executed from the staged continuation prompt in a single Cowork session. Two files:
+
+1. **The PRD** — [`portfolio-artifacts/discovery-prd-ai-content-workflow.md`](../../portfolio-artifacts/discovery-prd-ai-content-workflow.md). A discovery-phase PRD for an AI-assisted article-drafting + editorial-review workflow at a generic ~50-person Fortune-500 content org (all Block specifics sanitized). ~3,490-word body. Structure: §0 intro → §1 product context → §2 outcome problem statement (cut first-draft cycle time ~4 days → under 8 hours without sacrificing brand voice) → **§3 the load-bearing five-persona discovery** → §4 six user stories → §5 adoption-funnel metrics → §6 90-day phased rollout → §7 risks → §8 evangelism callout.
+
+2. **The ledger row** — [`sw-ai-pm-portfolio/src/content/transactions/discovery-prd-content-workflow.mdx`](../../../../../../sw-ai-pm-portfolio/src/content/transactions/discovery-prd-content-workflow.mdx). Schema-matched to `code-brain-system-card.mdx` (inline-body 4Q, push-independent). **Micro-fork resolved: `surface: product`** — a Discovery PRD is the canonical PM-craft artifact, so it files next to the other product-surface rows and reads as "I do product discovery / cross-functional translation," which is precisely the #1 JD gap the artifact targets. `node scripts/validate_content.mjs` passes clean (schema + em-dash F6 lint over rendered prose).
+
+**The load-bearing move (§3).** Five stakeholders, five vocabularies, one product. Each persona gets a verbatim-style quote, a "what they were actually asking" read, and the explicit translation move for each AI concept: the **editor** (eval → "your rubric, applied earlier"; hallucination → "it shows its work, cite-or-flag"), the **content strategist** (RAG → "it remembers what we published"; embeddings → "finds related work by meaning"), the **SEO lead** (hallucination → E-E-A-T/ranking risk; eval → "a pre-publish linter"), **legal counsel** (RAG/training-data → chain-of-custody provenance; hallucination → bounded liability, Air Canada cited), and the **executive sponsor** (metrics → one ROI number + a Klarna-tripwire; cost → cost-per-article vs. writer-hour). A translation matrix recaps it and shows the deliberate *deferrals* (knowing which concept each persona does NOT need). The thesis: translation isn't simplification, it's re-rooting a concept in the listener's accountability — same fact, five different promises.
+
+**Why this artifact (the strategic anchor).** Maps to the 2026-05-18 DR-Max skill-gap research Q1: cross-functional translation is the single most-cited skill across Tier-1 AI PM JDs (90%), and it's the one Sean's decade of informal AI-evangelism-in-non-AI-orgs is the raw material for. The §8 callout makes that connection explicit without a desperation ask ("named accountability is the difference the title would have made" — sideways, not "hire me").
+
+**Verification gate — PASSED.** (a) Body in the 2,500-3,500-word band (~3,490 readable; raw incl. markdown table syntax ~3,560). (b) Five personas voiced distinctly enough to tell apart blind (craft-proud editor vs. throughput-blunt strategist vs. algorithm-anxious SEO lead vs. provenance-precise lawyer vs. board-narrative exec). (c) Six user stories each in "As a [persona], I want…, so that…" form, each with acceptance criteria a non-technical PM can verify. (d) Rollout cites **3** DR-Max-surfaced case studies (Klarna walk-back as the load-bearing Tier-1-only lesson + Bank of America Erica's internal-first iteration + JPMorgan LLM Suite's training-led/ADKAR adoption), ≥2 required. (e) Evangelism-arc paragraph present (§8).
+
+**Voice split (same as the System Card).** PRD body is sober/declarative work-artifact prose. Sean Mode (writing-voice-modes) applied to only two spots: §0 intro and §8 evangelism callout, both verified em-dash-free per the writing-humanity-pass rule.
+
+**Host close-outs (Sean — Tier-A, not auto-committed):** (1) `npm run build` in `sw-ai-pm-portfolio` to confirm `/transactions/discovery-prd-content-workflow/` resolves, then commit the portfolio repo by hand (the vault side is Obsidian-Git's to auto-commit; the portfolio is Sean's). (2) Optional LinkedIn teaser / Substack candidate. (3) **Offered:** premium LLM-Council stress-test (pure-argument artifact, strong candidate — same as the System Card). Tickets filed.
+
+---
+
 ## Completed Tasks
 
 Tasks whose every step is closed. Each section below is the verbatim task body lifted from the parent roadmap on 2026-05-18 (or the date of the move, noted per-task).

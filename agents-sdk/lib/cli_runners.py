@@ -17,11 +17,73 @@ import json
 import os
 import re
 import time
+from datetime import datetime, timezone
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
 
 _CODEX_TOKENS_RE = re.compile(r"tokens used\s*\n\s*([\d,]+)")
+
+
+async def _pump_stream(stream, buf: bytearray) -> None:
+    """Continuously read a subprocess pipe into `buf` until EOF.
+
+    Run as a background task so partial output is always accumulated in `buf`,
+    even when the parent abandons the wait on timeout. This is what makes the
+    timeout path able to report what the child streamed before it hung —
+    `asyncio.wait_for(proc.communicate())` discards that on cancellation.
+    """
+    if stream is None:
+        return
+    while True:
+        try:
+            chunk = await stream.read(65536)
+        except Exception:
+            break
+        if not chunk:
+            break
+        buf.extend(chunk)
+
+
+def _write_ag_timeout_capture(
+    debug_log_dir: Path,
+    *,
+    timeout_s: float,
+    duration_s: float,
+    cmd: list[str],
+    stdout_text: str,
+    stderr_text: str,
+) -> Path | None:
+    """Persist gemini's partial output at the moment of a timeout kill.
+
+    Writes a timestamped log under `debug_log_dir` so a failing nightly/kickstart
+    run leaves behind exactly what the CLI last printed before it hung — the
+    decisive clue for the zero-token 120s hang. Best-effort; never raises.
+    """
+    try:
+        debug_log_dir.mkdir(parents=True, exist_ok=True)
+        stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%S")
+        out_path = debug_log_dir / f"ag-timeout-{stamp}.log"
+        # Redact the prompt arg (large, may contain vault content); keep flags.
+        redacted_cmd = [
+            "<prompt>" if i > 0 and cmd[i - 1] == "-p" else part
+            for i, part in enumerate(cmd)
+        ]
+        body = (
+            f"# Anti-Gravity (gemini) timeout capture\n"
+            f"captured_utc: {datetime.now(timezone.utc).isoformat()}\n"
+            f"timeout_s: {timeout_s}\n"
+            f"actual_duration_s: {duration_s:.2f}\n"
+            f"cmd: {redacted_cmd}\n"
+            f"stdout_len: {len(stdout_text)}\n"
+            f"stderr_len: {len(stderr_text)}\n"
+            f"\n===== STDOUT =====\n{stdout_text}\n"
+            f"\n===== STDERR =====\n{stderr_text}\n"
+        )
+        out_path.write_text(body, encoding="utf-8")
+        return out_path
+    except Exception:
+        return None
 
 
 def parse_codex_tokens(stderr_text: str) -> int | None:
@@ -172,13 +234,25 @@ def _antigravity_tokens(payload: dict) -> int | None:
     return total if found else None
 
 
-async def run_antigravity(prompt: str, timeout_s: float = ANTIGRAVITY_DEFAULT_TIMEOUT_S) -> CLIResponse:
+async def run_antigravity(
+    prompt: str,
+    timeout_s: float = ANTIGRAVITY_DEFAULT_TIMEOUT_S,
+    debug_log_dir: Path | None = None,
+) -> CLIResponse:
     """Invoke `gemini -p` with JSON output and plan approval mode.
 
     Trust set via GEMINI_CLI_TRUST_WORKSPACE=true added to the inherited
     process env (the var is set explicitly per invocation; the surrounding
     env is preserved). Sandbox via --approval-mode plan (read-only per
     smoke test). Returns a CLIResponse; never raises on CLI failure.
+
+    `debug_log_dir`: when set, a timeout drains and persists gemini's partial
+    stdout/stderr to a timestamped file there (diagnostic for the nightly
+    zero-token hang — see POSTMORTEM-2026-06-01-vault-critic-antigravity.md).
+
+    `VAULT_CRITIC_AG_DEBUG=1` in the env appends gemini's own `--debug` flag,
+    which streams startup/auth/request progress to stderr. Reversible probe for
+    the kickstart run — leave unset for normal nightly behavior.
     """
     cmd = [
         ANTIGRAVITY_BINARY,
@@ -196,11 +270,14 @@ async def run_antigravity(prompt: str, timeout_s: float = ANTIGRAVITY_DEFAULT_TI
         # a single non-existent server name allows zero servers. (2026-06-01)
         "--allowed-mcp-server-names", "__none__",
     ]
+    if os.environ.get("VAULT_CRITIC_AG_DEBUG") == "1":
+        cmd.append("--debug")
     env = {**os.environ, "GEMINI_CLI_TRUST_WORKSPACE": "true"}
     t0 = time.monotonic()
     try:
         proc = await asyncio.create_subprocess_exec(
             *cmd,
+            stdin=asyncio.subprocess.DEVNULL,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
             cwd=str(Path.home()),
@@ -214,25 +291,58 @@ async def run_antigravity(prompt: str, timeout_s: float = ANTIGRAVITY_DEFAULT_TI
             error=f"gemini binary missing: {exc}",
         )
 
+    # Pump both pipes into buffers via background tasks so partial output is
+    # always captured — including when we abandon the wait on timeout.
+    out_buf = bytearray()
+    err_buf = bytearray()
+    out_task = asyncio.create_task(_pump_stream(proc.stdout, out_buf))
+    err_task = asyncio.create_task(_pump_stream(proc.stderr, err_buf))
+
+    timed_out = False
     try:
-        stdout, stderr = await asyncio.wait_for(
-            proc.communicate(), timeout=timeout_s,
-        )
+        await asyncio.wait_for(proc.wait(), timeout=timeout_s)
     except asyncio.TimeoutError:
+        timed_out = True
         try:
             proc.kill()
         except ProcessLookupError:
             pass
+
+    # Let the pumps grab any final buffered bytes. The bulk is already captured
+    # mid-stream; gemini's node children can hold the pipe open past SIGKILL, so
+    # cap this short rather than waiting on a slow EOF.
+    try:
+        await asyncio.wait_for(
+            asyncio.gather(out_task, err_task, return_exceptions=True),
+            timeout=2,
+        )
+    except asyncio.TimeoutError:
+        out_task.cancel()
+        err_task.cancel()
+
+    stdout_text = bytes(out_buf).decode("utf-8", errors="replace")
+    stderr_text = bytes(err_buf).decode("utf-8", errors="replace")
+    duration = time.monotonic() - t0
+
+    if timed_out:
+        capture_path = None
+        if debug_log_dir is not None:
+            capture_path = _write_ag_timeout_capture(
+                debug_log_dir,
+                timeout_s=timeout_s,
+                duration_s=duration,
+                cmd=cmd,
+                stdout_text=stdout_text,
+                stderr_text=stderr_text,
+            )
+        suffix = f" (capture: {capture_path})" if capture_path else ""
         return CLIResponse(
             cli="antigravity", text="", tokens=None,
-            duration_s=time.monotonic() - t0,
+            duration_s=duration,
             exit_code=-1, rate_capped=False,
-            error=f"antigravity timeout after {timeout_s}s",
+            error=f"antigravity timeout after {timeout_s}s{suffix}",
         )
 
-    stdout_text = stdout.decode("utf-8", errors="replace")
-    stderr_text = stderr.decode("utf-8", errors="replace")
-    duration = time.monotonic() - t0
     rate_capped = detect_rate_cap("antigravity", stderr_text)
 
     try:
