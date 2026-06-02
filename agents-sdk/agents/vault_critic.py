@@ -246,7 +246,12 @@ async def critique_one_article(
     )
 
     codex_task = run_codex(prompt, timeout_s=per_cli_timeout_s)
-    ag_task = run_antigravity(prompt, timeout_s=per_cli_timeout_s)
+    # Persist gemini's partial output on timeout to the agent-logs dir so a
+    # failing nightly/kickstart run leaves the decisive hang evidence behind.
+    ag_debug_dir = repo_root / "vault" / "90_system" / "agent-logs"
+    ag_task = run_antigravity(
+        prompt, timeout_s=per_cli_timeout_s, debug_log_dir=ag_debug_dir,
+    )
     codex_resp, ag_resp = await asyncio.gather(codex_task, ag_task)
 
     # If both failed, do not write a useless expansion file.

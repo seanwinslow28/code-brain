@@ -86,11 +86,34 @@ def test_detect_rate_cap_negative_on_normal_stderr():
     assert detect_rate_cap("codex", normal) is False
 
 
+def _fake_stream(data: bytes):
+    """A fake StreamReader: first read() yields all bytes, then EOF (b'')."""
+    stream = MagicMock()
+    state = {"sent": False}
+
+    async def _read(_n: int = -1) -> bytes:
+        if state["sent"]:
+            return b""
+        state["sent"] = True
+        return data
+
+    stream.read = _read
+    return stream
+
+
 def _fake_proc(stdout_bytes: bytes, stderr_bytes: bytes, returncode: int = 0):
-    """Return a mocked asyncio subprocess that emits the given bytes."""
-    proc = AsyncMock()
-    proc.communicate = AsyncMock(return_value=(stdout_bytes, stderr_bytes))
+    """Return a mocked asyncio subprocess that emits the given bytes.
+
+    Supports both interfaces: run_codex uses proc.communicate(); run_antigravity
+    pumps proc.stdout/proc.stderr and awaits proc.wait().
+    """
+    proc = MagicMock()
     proc.returncode = returncode
+    proc.communicate = AsyncMock(return_value=(stdout_bytes, stderr_bytes))
+    proc.wait = AsyncMock(return_value=returncode)
+    proc.kill = MagicMock()
+    proc.stdout = _fake_stream(stdout_bytes)
+    proc.stderr = _fake_stream(stderr_bytes)
     return proc
 
 
@@ -183,6 +206,61 @@ def test_run_antigravity_malformed_json_marks_error():
     assert resp.ok is False
     assert resp.error is not None
     assert "json" in resp.error.lower()
+
+
+def test_run_antigravity_timeout_writes_capture(tmp_path):
+    """On timeout, the wrapper must persist gemini's partial stderr to a capture
+    file under debug_log_dir — the decisive evidence for the nightly zero-token
+    hang (POSTMORTEM-2026-06-01). The pump accumulates streamed bytes even
+    though we abandon the wait."""
+    async def go():
+        fake = MagicMock()
+        fake.returncode = None
+
+        async def slow_wait():
+            await asyncio.sleep(10)
+            return 0
+
+        fake.wait = slow_wait
+        fake.kill = MagicMock()
+        fake.stdout = _fake_stream(b"")
+        fake.stderr = _fake_stream(b"RESOURCE_EXHAUSTED: quota exceeded\n")
+        with patch("lib.cli_runners.asyncio.create_subprocess_exec",
+                   AsyncMock(return_value=fake)):
+            return await run_antigravity(
+                "any prompt", timeout_s=0.05, debug_log_dir=tmp_path,
+            )
+
+    resp = asyncio.run(go())
+    assert resp.ok is False
+    assert "timeout" in (resp.error or "").lower()
+    captures = list(tmp_path.glob("ag-timeout-*.log"))
+    assert len(captures) == 1, "expected exactly one capture file"
+    body = captures[0].read_text(encoding="utf-8")
+    assert "RESOURCE_EXHAUSTED" in body, "partial stderr was not captured"
+
+
+def test_run_antigravity_timeout_no_capture_when_dir_none():
+    """Without debug_log_dir the timeout path must not raise and writes nothing."""
+    async def go():
+        fake = MagicMock()
+        fake.returncode = None
+
+        async def slow_wait():
+            await asyncio.sleep(10)
+            return 0
+
+        fake.wait = slow_wait
+        fake.kill = MagicMock()
+        fake.stdout = _fake_stream(b"")
+        fake.stderr = _fake_stream(b"")
+        with patch("lib.cli_runners.asyncio.create_subprocess_exec",
+                   AsyncMock(return_value=fake)):
+            return await run_antigravity("any prompt", timeout_s=0.05)
+
+    resp = asyncio.run(go())
+    assert resp.ok is False
+    assert "timeout" in (resp.error or "").lower()
 
 
 def test_run_antigravity_extracts_routed_model_from_stats():

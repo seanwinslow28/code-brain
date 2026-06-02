@@ -526,6 +526,19 @@ async def run(mode: str, dry_run: bool = False) -> None:
             notes=result_msg.result[:200] if result_msg and result_msg.result else "",
         )
 
+        # Portfolio daily-dated layer: render the hero dateline + about-pulse
+        # from this run's fleet data and (per [portfolio] config) commit/push
+        # to the portfolio's main so Vercel rebuilds with a current dateline.
+        # Isolated try — a publish/push problem must never change the agent's
+        # recorded status or hang the unattended run.
+        if mode == "morning":
+            try:
+                from lib.portfolio_dateline import run_publish
+
+                run_publish(config, logger=logger)
+            except Exception as pub_err:  # noqa: BLE001 — publish is best-effort
+                logger.error(f"Portfolio dateline publish failed (non-fatal): {pub_err}")
+
     except Exception as e:
         logger.error(f"Agent failed: {e}")
         # If a ResultMessage was already received before the SDK raised
