@@ -52,6 +52,7 @@ class Config:
     anthropic_api_key: str | None
     artifacts: dict = field(default_factory=dict)
     fleet_memory: dict = field(default_factory=dict)
+    portfolio: dict = field(default_factory=dict)
 
     def agent_config(self, name: str) -> AgentConfig:
         """Get configuration for a named agent."""
@@ -121,6 +122,7 @@ def load_config(
     agents = raw.get("agents", {})
     artifacts = raw.get("artifacts", {})
     fleet_memory = raw.get("fleet_memory", {})
+    portfolio = raw.get("portfolio", {})
 
     # API key is optional — if not set, the SDK falls back to
     # Claude Code CLI's existing auth (e.g., `claude login` OAuth)
@@ -138,4 +140,5 @@ def load_config(
         anthropic_api_key=api_key,
         artifacts=artifacts,
         fleet_memory=fleet_memory,
+        portfolio=portfolio,
     )

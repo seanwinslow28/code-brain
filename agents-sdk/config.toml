@@ -559,3 +559,28 @@ enabled = false
 agent_id = "daily_driver"
 inject_on_run = true                           # MCP server is mounted; preamble cues the agent to call view
 write_lessons_on = ["success"]
+
+# --- Portfolio daily-dated layer (sw-ai-pm-portfolio) ----------------------
+# The Daily Driver's morning run renders the portfolio's hero dateline +
+# About-pulse JSONs from real fleet data (agent-run-history.csv + the latest
+# synth manifest) via lib/portfolio_dateline.py, then commits them to the
+# portfolio's `main` so Vercel rebuilds with a current dateline.
+#
+# Writes target `worktree_path` — a dedicated git worktree pinned to `main`
+# so bot commits never touch whatever branch is checked out in the primary
+# portfolio clone. Create it once (and only then does this step activate):
+#   git -C /Users/seanwinslow/Code-Brain/sw-ai-pm-portfolio \
+#       worktree add ../.portfolio-dateline-worktree main
+#
+# auto_push armed 2026-06-02 after a `git push --dry-run` confirmed working
+# osxkeychain credentials from the worktree (GIT_TERMINAL_PROMPT=0 makes a
+# missing-credential push fail fast rather than hang). The morning run writes
+# + commits the JSONs to the worktree's `main` and pushes (pull --rebase
+# first). If launchd ever lacks keychain access, the push fails non-fatally
+# and logs `PUSH FAILED (check launchd credentials)` — the run never hangs.
+[portfolio]
+enabled = true
+worktree_path = "/Users/seanwinslow/Code-Brain/.portfolio-dateline-worktree"
+api_subpath = "public/api"
+commit = true
+auto_push = true
