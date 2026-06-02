@@ -1,0 +1,25 @@
+{
+  "antigravity_calls": 5,
+  "antigravity_failures": 5,
+  "antigravity_last_error": "antigravity timeout after 120s",
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 0,
+  "backfill_articles_critiqued": 5,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/agent-ops-fdp-backup-track.md",
+    "vault/knowledge/expansions/competitive-analysis.md",
+    "vault/knowledge/expansions/confidence-rituals.md",
+    "vault/knowledge/expansions/confluence-overhaul-plan.md",
+    "vault/knowledge/expansions/crypto-pm-apm-role-specifications.md"
+  ],
+  "codex_calls": 5,
+  "codex_failures": 0,
+  "codex_last_error": "",
+  "codex_tokens_total": 139186,
+  "duration_seconds": 600.16,
+  "error": "",
+  "expansions_written": [],
+  "run_id": "2026-06-02T03:30:03",
+  "status": "partial",
+  "warnings": []
+}
