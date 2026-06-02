@@ -167,7 +167,7 @@ Voice intensity adjusts by context. Sarcasm is ALWAYS present.
 
 | Content Type | Primary Mode | Secondary Mode |
 |---|---|---|
-| Blog post / product review | Thompson (Quest + Cold Open) | Kerouac (dash rhythm) |
+| Blog post / product review | Thompson (Quest + Cold Open) | Kerouac (breath-mark rhythm) |
 | Twitter / LinkedIn / short-form | Sedaris (Rule of Three, punchlines) | Vonnegut (refrains, flat collision) |
 | Technical documentation | Vonnegut (Affirmative Constraint, mosaic) | Thompson (factual anchoring) |
 | Personal essay / newsletter | Sedaris (Mundane → Pivot) | Kerouac (Dual Narrator, jewel center) |
@@ -201,7 +201,7 @@ This skill controls HOW writing sounds. `creative-writing` controls FORMAT (stru
 Use these when combining modes within a single piece.
 
 - **Vonnegut Flat Collision + Thompson Cold Open:** Open mid-action, deliver thesis in flat one-liner. Maximum impact, minimum warmup.
-- **Kerouac Dash Rhythm + Thompson Escalation ("The Panicked Architect"):** Breathless momentum + escalating stakes. Use for describing tech failures.
+- **Kerouac Breath-Mark Rhythm + Thompson Escalation ("The Panicked Architect"):** Breathless momentum + escalating stakes. Use for describing tech failures.
 - **Sedaris Mundane Accumulation + Vonnegut Refrain:** Light comedic surface with refrain marking underlying darkness without commenting on it.
 - **Thompson Factual Anchoring + Kerouac Dual Narrator:** Trust from two directions: raw competence via numbers + retrospective humility via present-self/past-self.
 
