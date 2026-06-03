@@ -81,15 +81,23 @@ When you see these, lean toward leaving the prose alone. Over-editing destroys w
 
 ## Integration
 
-This skill runs AFTER composition. `writing-voice-modes` composes; this scrubs.
+This skill runs LAST in the chain. The full Substack pipeline:
 
-- Chaining order (recommended): compose with `writing-voice-modes` (plus `creative-writing` for format, `technical-writing` for clarity), then run `writing-humanity-pass` LAST.
-- It never overrides a format constraint (`creative-writing`) or a signature move (`writing-voice-modes`).
+```
+storytelling-architecture → substack-value-engine → writing-voice-modes → writing-critique → writing-humanity-pass
+   (beat SHAPE + order)       (value GATE + payoff)    (every SENTENCE)      (RED-TEAM, advisory)  (scrub + no em dash)
+```
+
+`storytelling-architecture` and `substack-value-engine` shape a beat map (story + value, no prose); `writing-voice-modes` composes every sentence; this skill scrubs.
+
+- Chaining order: shape with `storytelling-architecture` + `substack-value-engine`, compose with `writing-voice-modes` (plus `creative-writing` for format, `technical-writing` for clarity), red-team with `writing-critique` (advisory; one grounded revise pass max), then run `writing-humanity-pass` LAST.
+- This skill is where two upstream story mechanics get their punctuation enforced: a slippery-slide "forward-pull" line and a parenthetical particular both gravitate toward the em dash by default. The engagement pass leaves the *function*; this pass realizes it without the dash (period-fragment, colon, restructure). Never assume the dash away upstream; clean it up here.
+- It never overrides a format constraint (`creative-writing`), a signature move (`writing-voice-modes`), or a story beat (`storytelling-architecture`).
 - For neutral text it agrees with `technical-writing` (plain, front-loaded, no slop).
 
 ## References
 
-- `references/ai-tells.md`: all 30 patterns, adapted to Sean's output, each tagged `[SLOP]` (always cut) or `[CLASH->move]` (defer in voice-safe).
+- `references/ai-tells.md`: all 30 patterns, adapted to Sean's output, each tagged `[SLOP]` (always cut) or `[CLASH->move]` (defer in voice-safe). Its "Evidence quality" section stratifies the catalog by how well each tell is supported, and wires the measurable, baseline-relative signals (sentence-length burstiness, MATTR, pronoun rate) to the `writing-critique` analyzer (`.claude/skills/writing-critique/references/analyze.py` + `baseline.json`).
 - `references/voice-safe-exceptions.md`: the crosswalk. Each `[CLASH]` tell maps to the signature move it collides with and how voice-safe resolves it.
 
 Adapted from [`blader/humanizer`](https://github.com/blader/humanizer) (MIT, v2.7.0), itself based on [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) (WikiProject AI Cleanup). MIT permits adaptation; attribution retained.

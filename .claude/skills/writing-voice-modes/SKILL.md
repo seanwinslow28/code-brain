@@ -231,10 +231,15 @@ None of these are needed for standard voice application. The mode descriptions a
 
 ## Related Skills
 
+This skill is the SENTENCE author in the Substack chain: `storytelling-architecture` → `substack-value-engine` → **`writing-voice-modes`** → `writing-critique` → `writing-humanity-pass`. The two upstream skills emit a beat map (story shape + value gate); voice-modes writes 100% of the prose fresh against it and must never reorder beats. The downstream `writing-critique` gate may route ONE grounded revise request back here ("revise against [this specific finding]"); voice-modes writes that revision, still without reordering beats.
+
+- `storytelling-architecture`: Upstream. Owns story ORDER and the beat map; voice-modes owns the SENTENCES. The handoff is lossy on prose by design (no drafted lines come forward), so voice is not flattened. Receive the beat map, author every line.
+- `substack-value-engine`: Upstream. Owns the Value Gate (Itch/Solution/Transfer) and the narrative-to-value seam. It decides the pivot line's JOB; voice-modes writes the line. Its "ask lands sideways" rule defers to this skill's **Desperation Posing as Self-Deprecation** anti-pattern (this skill owns the tone; value-engine owns the structural gate).
 - `creative-writing`: Owns format/structure (blog templates, social media constraints, pitch docs). Voice modes control HOW content sounds within those formats.
 - `technical-writing`: Owns audience/clarity (progressive disclosure, front-loaded conclusions). Voice modes add personality within those constraints.
 - `script-writing`: Sean's other medium. The screenwriting cut-to is a signature move that crosses into prose.
 - `writing-humanity-pass`: The final editing pass. Run it AFTER composing in a voice mode to strip AI tells (and enforce the no-em-dash rule). Voice-modes composes; humanity-pass scrubs.
+- `writing-critique`: the adversarial gate that runs after voice and before humanity-pass. It never rewrites; when it finds a reader-cost defect it sends a single grounded revise request back to this skill. It treats Sean's signature moves as defensible choices, not defects.
 
 ## Success Criteria
 

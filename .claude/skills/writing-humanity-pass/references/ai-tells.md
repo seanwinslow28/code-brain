@@ -136,6 +136,95 @@ Cut: describe the thing as it is. Ex: "This function was added to replace the ol
 
 ---
 
+## Evidence quality
+
+The 30 patterns above are useful editing triggers, but they are not equally
+well-supported as "AI detection." This section stratifies them by how strong the
+evidence is, and wires the measurable ones to the `writing-critique` analyzer
+(`.claude/skills/writing-critique/references/analyze.py` + `baseline.json`). The
+honest framing matters: an over-claimed tell that flags Sean's own voice destroys
+trust in the whole catalog.
+
+> Citations here were re-grounded against primary sources and deliberately diverge
+> from the upstream `creative-writing-skills/antipatterns.md` they were adapted
+> from. Two upstream cites (BEA 2025, Nature HSSCOMMS 2025) were NOT carried over
+> because they were not verified; do not re-import them without reading them.
+
+### Tier A1: Measurable AND baseline-relative (wired to the analyzer)
+
+These can be computed from the draft and compared against Sean's own voice
+baseline. Treat them as evidence for a finding, never as a finding alone; all are
+advisory.
+
+- **Burstiness / sentence-length coefficient of variation (σ/μ).** The
+  best-supported, analyzer-computable AI-flatness signal: humans vary sentence
+  length more (higher CV), AI is smoother. Low CV vs Sean's baseline → "monotonous
+  vs your voice." (Decoding AI Authorship, arXiv:2603.23219 / arXiv:2408.00769.)
+  This is the headline measurable tell. Relates to "variety in sentence length" in
+  SKILL.md's "Signs of Human Writing."
+- **Lexical variability (MATTR@50).** Lower lexical diversity shows up in AI text
+  **relative to a comparison class**: lower than polished/expert human prose, but
+  *higher* than L2 / constrained-vocabulary writers. So it is only meaningful
+  against a baseline, never as an absolute "AI = low diversity" claim. (Diversity
+  Boosts AI-Generated Text Detection, arXiv:2509.18880; human-vs-AI TTR 55.3 vs
+  45.5, SSRN 5833302. MATTR is itself window/length-sensitive (arXiv:2507.15092),
+  which is why the window is locked at 50.)
+- **Personal-pronoun rate, STRICTLY baseline-relative, NEVER absolute.** Sean's
+  calibrated modes are pronoun-heavy by design; an absolute "low pronouns = AI"
+  check would flag his *most* characteristic prose. Only flag a drop below Sean's
+  own first-person-rate baseline. (No support among the detection papers for an
+  absolute claim; treat as a heuristic.)
+
+### Tier A2: Research-cited but qualitative (NOT analyzer-measurable)
+
+- **Positive-emotion skew** ("more positive-emotion language even in dark scenes").
+  A reviewer cue only. There is no sentiment lexicon in the stdlib analyzer, so
+  this **cannot be wired** to `analyze.py`. Thin independent evidence; use as a
+  human read, not a metric.
+
+### Detection-caution note (why two former "support" cites are NOT evidence)
+
+- **Kobak et al. (2024):** kept, but for its *real* claim: LLMs leave a detectable
+  **word-frequency fingerprint** (excess vocabulary in scientific abstracts),
+  genre- and model-bound. This supports the slop-list framing below, NOT the
+  lexical-*diversity* signal (excess vocabulary is the opposite construct from
+  vocabulary diversity). (arXiv:2406.07016.)
+- **RAID (ACL 2024)** and **Ghostbuster (NAACL 2024)** are a detection benchmark and
+  a black-box classifier. They make **no per-feature stylometric claim**. Citing
+  them as evidence for a human-readable tell is a category error. Keep them only as
+  cautions: RAID's standing result is that any fixed surface signal degrades on
+  unseen models and under simple manipulation; Ghostbuster shows likelihood-feature
+  classifiers can detect AI text but expose no interpretable tell.
+  (arXiv:2405.07940; arXiv:2305.15047.)
+
+### Tier B: Community folklore (useful triggers, not proof)
+
+Widely recognized, largely unstudied. Good editing prompts; not detection evidence:
+clean-but-hollow prose, tidy-summary endings, repetitive emotional choreography,
+overused metaphor clusters. Most of the structural patterns (#1, #25, #29) live
+here.
+
+### Tier C: Not reliable: word-level slop lists
+
+Word-level slop lists (pattern #7 territory) are largely derived from GPT-era
+output in specific genres; they transfer poorly across models and domains, and
+their hit-rate against Claude in particular is lower and unreliable. Treat them as
+**editorial taste choices, not a model-agnostic detection signal.** (This is a
+deliberate divergence from upstream's verbatim "near-random for Claude
+specifically" line. The claim rests on a model/genre-transfer argument, not a
+measured Claude-specific hit-rate.)
+
+### The em-dash ban is an owned taste choice, NOT detection
+
+Pattern #14 (em/en dashes) stays a **hard cut**, but its category is honest: Sean
+retired the em dash as a deliberate voice choice. It is not listed here as a
+"research-backed AI tell." It is a rule Sean owns. (See SKILL.md "The Em-Dash Hard
+Rule.")
+
 ## Detection guidance
 
-See SKILL.md "What NOT to Flag" and "Signs of Human Writing." Rule of thumb: rewrite on clusters of tells, never on a single isolated one. When the text is Sean's voice, the signature moves in `voice-safe-exceptions.md` are protected.
+See SKILL.md "What NOT to Flag" and "Signs of Human Writing." Rule of thumb:
+rewrite on clusters of tells, never on a single isolated one. When the text is
+Sean's voice, the signature moves in `voice-safe-exceptions.md` are protected. For
+the measurable signals (burstiness, MATTR, pronoun rate), the `writing-critique`
+analyzer supplies baseline-relative evidence; it is advisory and never blocks.
