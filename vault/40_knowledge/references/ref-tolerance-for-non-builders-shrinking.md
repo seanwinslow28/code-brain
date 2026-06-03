@@ -8,9 +8,10 @@ created: 2026-06-02
 description: "New expectations are emerging where everyone is a potential builder, supported by agent portfolio governance and data-driven prioritization."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [product-management, career-transition]
+ai-context: "Daniel Williams argues AI collapsed the cost of building, so orgs no longer tolerate mid-to-senior 'non-builder' PMs who lived in planning theater and gatekeeping — the surviving work is shipping value plus portfolio-level judgment and domain expertise AI can't make cheaper."
 ---
 In a recent interview with Lenny Rachitsky, Nikhyl Singhal (former VP at Meta and Google) predicted that half of product managers are about to be replaced, not because of performance but because their role was never about building in the first place. Singhal projects 30,000 legacy administrative PMs giving way to 8,000 AI-fluent builders. The role isn’t shrinking. The tolerance for non-builders is.
 

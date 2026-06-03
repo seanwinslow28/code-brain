@@ -5,13 +5,13 @@ connects:
   - Cost-Capped Agentic Workflows
   - Agent Health Monitoring
   - Vault Maintenance
-created: 2026-06-02
-updated: 2026-06-02
+created: 2026-06-03
+updated: 2026-06-03
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the depth of automation and its financial cost. Deep integrations like MCP bridges can double costs and trigger caps, forcing a retreat to simpler, cheaper patterns. This tension requires Sean to constantly evaluate whether the value of an automated feature justifies its cost, often leading to a preference for local, $0-run solutions over cloud-dependent ones. The consequence is a more resilient but less 'seamless' automation architecture that prioritizes sustainability over convenience.
+There is a fundamental tension between the desire for deep, seamless automation and the financial constraints that limit its implementation. When complex integrations like MCP bridges are introduced, they often double costs and trigger hard caps, forcing a retreat to simpler, cheaper patterns. This tension requires Sean to constantly evaluate whether the value of an automated feature justifies its cost, leading to a preference for local, $0-run solutions. The consequence is a more resilient but less 'seamless' automation architecture that prioritizes sustainability over convenience.
 
 ## Threads
 

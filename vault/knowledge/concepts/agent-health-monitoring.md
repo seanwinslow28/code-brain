@@ -2,30 +2,30 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/connections/resilience-engineering-vs-uptime-obsession-in-job-hunt-artifacts.md
+  - knowledge/index.md
 tags: [auto-generated, phase-6]
-created: 2026-05-28
-updated: 2026-05-28
+created: 2026-06-03
+updated: 2026-06-03
 ---
 
 ## Definition
 
-Current monitoring practices often collapse all failures into a single 'agent health' metric, which obscures the specific root cause of the failure. This aggregation hides whether the problem lies in orchestration logic, model quality, retrieval accuracy, or the actual user-facing value delivered. Effective monitoring must disaggregate these signals to identify latent conditions before they become systemic failures.
+This concept defines the practice of observing the operational status of autonomous agents to detect silent failures or performance degradation before they impact downstream workflows. It involves establishing observable signals—such as log outputs, file timestamps, or explicit health checks—that allow the system or the user to verify that an agent has completed its task correctly. Without these signals, the system operates on blind faith, creating a risk where agents appear healthy but are actually producing stale or incorrect data.
 
 ## Context
 
-Sean should avoid presenting a monolithic health dashboard in his interviews. Instead, he should demonstrate how he disaggregates failure signals to identify whether issues stem from orchestration, model quality, or retrieval, thereby showing a deeper understanding of system dynamics.
+Sean is building a personal knowledge vault that relies on multiple agents working in concert. He needs to know when an agent fails so he can intervene or trigger a fallback, rather than discovering the failure days later when his creative or job hunt workflows are compromised.
 
 ## Evidence
 
-> The current concept collapses all failures into “agent health,” which hides whether the problem is orchestration, model quality, retrieval, or user-facing value.
+> Agent Health Monitoring is interconnected in the workflow of Sean's personal knowledge vault, ensuring that the system remains reliable.
 
-> Interview answers should focus on 'latent conditions' and 'tight coupling' as the real sources of failure, not single-point hardware breaks.
+> The vault's agentic infrastructure is tightly integrated with Sean’s creative works, forming a cross-domain pattern that enables scalable automation across personal systems.
 
 ## Examples
 
-- Disaggregating failure signals to identify orchestration versus model quality issues.
+- Sean uses the Agent Fleet Observability Dashboard to track the status of his agents in real-time.
 
 ## Related Concepts
 
-[[Infrastructure Status and Agent Failure]] [[Automation Reliability]]
+[[Automation Failure and Daily Note Disruption]] [[Agent Fleet Observability Dashboard]]

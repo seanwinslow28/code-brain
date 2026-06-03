@@ -8,9 +8,10 @@ created: 2026-06-02
 description: "Tokenmaxxing is the data warehouse mistake at a different layer. The fix isn’t compressing tokens. It’s deciding which agents in your portfolio earn their keep."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery, product-management]
+ai-context: "Daniel Williams reframes token optimization ('tokenmaxxing') as the 1990s data-warehouse mistake repeated — the fix is agent rationalization: scoring each agent in the portfolio by revenue/cost/efficiency value, killing the bottom third, and resourcing the top, before any prompt compression is legitimate."
 ---
 A senior engineer I know showed me his approach to prompt optimization a couple of weeks ago. Multiple columns, months of A/B tests, average tokens per call broken out by tool path. He had cut his agent’s token usage by 30+ percent. I asked him whether the work the agent produced had gotten better. He didn’t have a column for that. He didn’t have a column for whether the automation needed to exist. He had a column for tokens because tokens are denominated in dollars. The dashboard his team built had a slot for them, and this is what the executives at his company care about.
 

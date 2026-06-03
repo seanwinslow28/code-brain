@@ -2,31 +2,33 @@
 title: "AI Fluency"
 type: concept
 sources:
-  - 00_inbox/You're Loading 66,000 Tokens of Plugins Before You Even Type. That's Why Your Limit Disappears..md
+  - 40_knowledge/references/ref-tolerance-for-non-builders-shrinking.md
 tags: [auto-generated, phase-6]
-created: 2026-05-21
-updated: 2026-05-21
+created: 2026-06-03
+updated: 2026-06-03
 ---
 
 ## Definition
 
-The ability to use AI tools efficiently, with a deep understanding of how to optimize prompts and model usage. It reduces waste and improves productivity.
+AI fluency is defined not by the ability to write code, but by the willingness to act before the playbook catches up, utilizing existing tools to collapse the time-to-value for complex administrative or creative tasks. It requires a proactive integration of disparate AI agents (like LLMs and research tools) into daily workflows to demonstrate tangible efficiency gains that serve as proof of competence. This fluency is the prerequisite for surviving the collapse of legacy administrative roles, as it signals the capacity to leverage agent portfolios for high-leverage output.
 
 ## Context
 
-Sean needs to cultivate AI Fluency for both his job hunt and creative endeavors, ensuring he gets the most out of limited resources like token limits.
+Sean must demonstrate this fluency in his job hunt by showcasing specific, quantifiable reductions in effort achieved through AI integration, rather than just listing tools he has used. His narrative needs to highlight the 'willingness to act' and the resulting operational shifts, such as moving from planning theater to data-driven prioritization.
 
 ## Evidence
 
-> Token management is a indicator of AI fluency. Here's how to get better at it.
+> None of that required permission. All of it required a willingness to act before the playbook caught up.
 
-> The problem is that most people don’t know what they’re doing. They’re burning 5x, 10x, sometimes 20x what they should on the exact same work.
+> I have been using LLMs and agents fully in my business since 2024 and writing publicly about coding agents in Claude Code for Non-Coders since the summer of 2025.
+
+> At this point in my career, I was a senior director with multiple managers and PMs reporting to me.
 
 ## Examples
 
-- Using optimized prompts to reduce token waste.
-- Applying domain-specific knowledge to generate more precise model queries.
+- Using ChatGPT to draft performance reviews in late 2022 when most enterprises had told staff not to use generative AI.
+- Writing publicly about coding agents in Claude Code for Non-Coders since the summer of 2025, now with 29,000+ subscribers.
 
 ## Related Concepts
 
-[[Cost-Capped Agentic Workflows]] [[Agent Health Monitoring]]
+[[AI Fluency]] [[Supervision as the New AI Edge]] [[Vibe-Coding Interview Canon]]
