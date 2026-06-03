@@ -317,16 +317,20 @@ def compute_metrics(path: str, rep_window: int = 5) -> dict:
 
 def segment_corpus(body_text: str) -> list[str]:
     """Split post-frontmatter corpus text into segments on top-level '## ' headings.
-    Heading lines are dropped; only the passage bodies are returned."""
+    Heading lines are dropped; only the passage bodies are returned. Content before
+    the first '## ' heading (a metadata/provenance comment, say) is preamble, not a
+    passage, so it is discarded and never pollutes the baseline."""
     segments, current = [], []
+    seen_heading = False
     for line in body_text.splitlines():
         if line.startswith("## "):
-            if any(l.strip() for l in current):
+            if seen_heading and any(l.strip() for l in current):
                 segments.append("\n".join(current))
+            seen_heading = True
             current = []
-        else:
+        elif seen_heading:
             current.append(line)
-    if any(l.strip() for l in current):
+    if seen_heading and any(l.strip() for l in current):
         segments.append("\n".join(current))
     return [s for s in segments if s.strip()]
 
