@@ -2,31 +2,30 @@
 title: "Infrastructure Status"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-31.md
+  - 02_Areas/Agent-Fleet/fleet-state.md
 tags: [auto-generated, phase-6]
-created: 2026-06-01
-updated: 2026-06-01
+created: 2026-06-03
+updated: 2026-06-03
 ---
 
 ## Definition
 
-Infrastructure status represents the operational availability of the physical endpoints required for agent execution, distinct from the logical health of the agents themselves. When critical hardware like the Alienware or ComfyUI endpoints remains offline, it creates a hard boundary that prevents specific workflows from executing, regardless of the agent fleet's internal stability. This state is not merely a technical glitch but a structural constraint that defines the current limits of Sean's automated capabilities.
+Infrastructure status represents the physical and network prerequisites for agent autonomy, where the availability of specific machines (Mac Mini, MBP, Alienware) dictates the operational scope of the fleet. When hardware goes offline, it creates a hard boundary on which agents can execute, effectively fragmenting the vault's capabilities into disjointed subsets. This state is not merely a technical error but a structural constraint that prevents the realization of high-leverage automations like finance checks or job aggregation, forcing a reliance on manual intervention.
 
 ## Context
 
-Sean's ability to execute creative and deep research tasks is directly gated by the availability of these specific machines. The persistent offline status of the Alienware and ComfyUI endpoints indicates a bottleneck that limits the scope of his automated output, forcing a reliance on the remaining active agents for all other tasks.
+Sean's ability to maintain a fully automated job-hunt and creative pipeline depends on the continuous availability of his multi-machine mesh. The current offline status of Alienware and ComfyUI blocks critical testing and sync paths, directly impacting his capacity to execute complex, cross-domain workflows without manual oversight.
 
 ## Evidence
 
-> Alienware and ComfyUI endpoints remain OFFLINE, blocking key multi-domain workflows.
+> Alienware and ComfyUI are OFFLINE, blocking multi-machine sync and creative pipeline testing.
 
-> Autonomous agents lack reliable, cross-machine MCP connectivity (top friction point).
+> No indication of MCP access troubleshooting, leaving core cross-domain automation reliant on manual intervention.
 
 ## Examples
 
-- The daily-fleet-status report explicitly lists Alienware and ComfyUI as offline, contrasting with the healthy status of the Mac Mini and MBP.
-- The agent fleet shows continued inability to fully access MCP servers in headless mode, limiting automation scope.
+- The snapshot confirms routine maintenance but lacks evidence of high-leverage, active automations (e.g., finance checks, job aggregation).
 
 ## Related Concepts
 
-[[Agent Health]] [[Infrastructure]] [[MCP Server Hardening]]
+[[Agent Health]] [[Infrastructure]] [[Automation Reliability]]

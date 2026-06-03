@@ -8,9 +8,10 @@ created: 2026-06-02
 description: "Claude Architecture Series · Lesson 2.2: Most error responses give your agent room to invent a recovery. Here's how to take that room away."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Daniel Williams (Claude Architecture series Lesson 2.2) argues vague MCP error responses let agents hallucinate destructive recoveries (Replit DB wipe, Gemini CLI file overwrite, Amazon agent prod deletion) — the fix is structured application-error responses that name the error category and required action so the agent can't improvise, treating isError:true as the envelope, not the fix."
 ---
 👋 Welcome! I’m Daniel Williams. I write *Claude Code for Non-Coders* for senior technical professionals who built their careers on technical judgment, stopped writing code years ago, and are now figuring out how AI and coding agents will change their work.
 

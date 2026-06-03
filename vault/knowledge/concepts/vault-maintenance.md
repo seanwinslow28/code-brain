@@ -2,31 +2,30 @@
 title: "Vault Maintenance"
 type: concept
 sources:
-  - knowledge/concepts/vault-maintenance.md
+  - knowledge/connections/cost-vs-automation-depth-tension.md
 tags: [auto-generated, phase-6]
-created: 2026-05-22
-updated: 2026-05-22
+created: 2026-06-03
+updated: 2026-06-03
 ---
 
 ## Definition
 
-A dependency-based maintenance system where the success of agents like 'vault-indexer' and 'vault-synthesizer' ensures consistent knowledge vault operations. The process relies on one agent's output (e.g., updated indexes) being the input for another, creating a chain of dependencies that must be completed without failure. If one agent fails silently or produces stale data, downstream agents inherit this inconsistency, which can only be detected when a user engages with the vault content or when explicit health checks flag the issue.
+This concept refers to the practice of maintaining the integrity and utility of the knowledge vault through automated, low-cost processes. The mechanism involves building local tools that curate and summarize data without incurring external API costs. This approach prioritizes the long-term sustainability of the knowledge base over the convenience of real-time, cloud-synced updates. The invariant is that the vault must remain accessible and useful even when external services are unavailable or too expensive.
 
 ## Context
 
-For Sean, this mechanism ensures that his personal knowledge repository remains coherent and up-to-date. It underpins both his creative studio workflow, where he draws from the vault for ideation, and his job-hunt-2026 strategy, where a well-maintained knowledge base is essential for tracking opportunities and refining his portfolio. The vault also serves as an MCP (Machine-Consumable Platform) interface for external queries.
+Sean needs a reliable way to keep his vault updated without relying on expensive cloud services. By building a local summarizer, he can ensure that his knowledge base remains current and organized. This strategy aligns with his broader goal of creating a resilient, cost-effective automation architecture that does not depend on external financial inputs.
 
 ## Evidence
 
-> Routine archival tasks (vault-indexer/synthesizer) ran successfully during scheduled maintenance windows.
+> Build a $0/run local summarizer ... that curates daily_driver's fleet-memory namespace
 
-> No baton found, but log exists: vault-synthesizer-stderr.log
+> There is a fundamental tension between the depth of automation and its financial cost.
 
 ## Examples
 
-- vault-indexer runs daily
-- vault-synthesizer logs exist but no baton is found
+- Using a local summarizer to curate the fleet-memory namespace
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Automation Routines]]
+[[Cost-Capped Agentic Workflows]] [[Agent Health Monitoring]]

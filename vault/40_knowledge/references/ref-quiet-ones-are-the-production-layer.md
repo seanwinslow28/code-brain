@@ -8,9 +8,10 @@ created: 2026-06-02
 description: "Everyone’s reading this week’s AI stories wrong: AI didn’t replace the careful thinkers. It exposed how long the org has been ignoring them. /goal just shipped in Claude Code to close the gap."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [product-management, career-transition, claude-mastery]
+ai-context: "Daniel Williams' weekend dispatch argues AI didn't replace careful thinkers but exposed orgs' 'functional stupidity' — the under-funded production layer (verification, orchestration, role redesign, operating-model governance) is why <20% of AI adopters see bottom-line impact, and Claude Code's /goal is the personal-practice version of outcome-mode over task-mode."
 ---
 **👋 Welcome! I’m Daniel Williams.** I write Claude Code for Non-Coders for senior technical professionals who built their careers on technical judgment, stopped writing code years ago, and are now figuring out how AI and coding agents will change their work.
 

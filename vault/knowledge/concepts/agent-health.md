@@ -2,31 +2,30 @@
 title: "Agent Health"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-31.md
+  - 02_Areas/Agent-Fleet/fleet-state.md
 tags: [auto-generated, phase-6]
-created: 2026-06-01
-updated: 2026-06-01
+created: 2026-06-03
+updated: 2026-06-03
 ---
 
 ## Definition
 
-Agent health is a measure of the successful execution of scheduled tasks by autonomous agents, indicating their operational readiness and reliability. It is determined by the status of daily runs, such as indexing or synthesis, and the absence of errors during these processes. This metric reflects the internal consistency of the agent fleet but does not account for external dependencies or hardware availability.
+Agent health is a metric of operational continuity defined by the successful execution of scheduled tasks and the absence of silent failures in the background processing layer. It requires agents to not only run but to produce verifiable outputs (like daily notes or index updates) that feed into the broader knowledge loop. When an agent's status is 'healthy' but its output is empty or stale, it indicates a latent failure in the context management layer rather than a true state of readiness.
 
 ## Context
 
-The consistent healthy status of agents like vault-indexer and vault-synthesizer suggests that the core automation logic is robust. However, this health is isolated to the agents' internal processes and does not guarantee the successful completion of broader, multi-step workflows that depend on external resources.
+Sean relies on the daily-driver and synthesizer agents to maintain the integrity of his daily notes and knowledge base. The health of these agents determines whether his morning planning is based on fresh data or stale context, directly affecting his daily decision-making efficiency.
 
 ## Evidence
 
-> vault-indexer (2:00 AM daily, Mac Mini, $0.00/run) - Status: healthy
+> daily-driver morning (8:45 AM daily, Claude API, ~$0.40/run) - Status: healthy - notes='Morning planning complete for Tuesday 2026-06-02.'
 
-> vault-synthesizer (2:30 AM daily, MBP (when awake), $0.00/run) - Status: healthy
+> vault-synthesizer (2:30 AM daily, MBP (when awake), $0.00/run) - Status: healthy - notes='concepts=2 connections=1 rejected=4 edges=2'
 
 ## Examples
 
-- The vault-indexer successfully processed 406 chunks with zero errors during its daily run.
-- The vault-synthesizer completed its run with 28 concepts and 16 connections, indicating successful synthesis.
+- The Daily Driver executed morning planning and generated today's note, maintaining process hygiene.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Agent Ops / FDP Backup Track]] [[Infrastructure Status]]
+[[Agent Health Monitoring]] [[Daily Routine Automation]] [[Context Management as a Bottleneck]]
