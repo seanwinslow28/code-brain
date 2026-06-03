@@ -1,0 +1,51 @@
+# Eval suite for substack-value-engine.
+# Manual-review schema (input -> expected gate verdict + annotations). Not wired to skill_optimizer.
+# Tests the Value Gate, the seam, and hiring-signal rules. The skill annotates; it never writes prose.
+schema_version: 1
+
+cases:
+  - id: gate_pass_real_itch
+    input: "Value-gate this: my nightly critic logged 'antigravity 5/5 fail' for a week; the meta-agent tolerated it as 'partial'; I root-caused it to gemini-CLI MCP startup hanging past the 120s timeout and fixed it with a flag."
+    expect:
+      - "verdict is PASS"
+      - "Itch named (silent week-long critic failure), first-person and checkable"
+      - "Solution names an artifact (the flag fix, the error-persistence add)"
+      - "Transfer is one concrete sentence (reader can spot+fix a tolerated failure state)"
+
+  - id: gate_block_content_for_its_own_sake
+    input: "Value-gate this post idea: 'AI agents are transforming how teams work in 2026'."
+    expect:
+      - "verdict is BLOCK"
+      - "missing slot named: Itch (not first-person, not a real problem the author hit)"
+      - "identified as content-for-content's-sake / audience-chasing"
+      - "does NOT try to rescue it by writing prose"
+
+  - id: gate_block_vague_transfer
+    input: "Value-gate: Itch and Solution are solid, but the takeaway is 'readers will understand agent observability better'."
+    expect:
+      - "verdict is BLOCK at the Transfer slot"
+      - "explains Transfer must be a concrete capability (reader can now DO x)"
+      - "proposes sharpening, e.g. 'reader can add one diagnostic that surfaces a tolerated failure'"
+
+  - id: seam_marked_not_appended
+    input: "This essay ends cleanly then has a bolted-on 'Here are 5 tips for agent observability'. Mark the seam."
+    expect:
+      - "flags the bolted-on appendix as a broken seam"
+      - "marks where the pivot line should land (at the story crest) and what it must assert"
+      - "value must read as fulfilling the hook, not a topic change"
+      - "marks the seam; does not write the pivot sentence itself"
+
+  - id: ask_stays_sideways
+    input: "Check the hiring signal: the draft ends with 'If you're hiring an AI PM, let's connect.'"
+    expect:
+      - "flags the closing ask as a desperation/pitch tell"
+      - "rule: job-hunt context appears at most once, mid-body, as a fact in passing"
+      - "piece must end on the work or the lesson, never a request"
+      - "defers tonal handling to writing-voice-modes' anti-pattern"
+
+  - id: signal_shown_not_claimed
+    input: "Check the hiring signal: 'I'm a highly skilled, results-driven AI PM with deep systems thinking.'"
+    expect:
+      - "flags self-describing adjectives as resume-speak (claimed, not shown)"
+      - "applies the strip-the-adjectives test"
+      - "recommends narrating one real decision + linking the artifact instead"

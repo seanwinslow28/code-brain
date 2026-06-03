@@ -1,0 +1,33 @@
+# SEALED surprise cases for substack-value-engine. Held out to test generalization.
+# Same manual-review schema as evals.yaml. Do not train/tune against these.
+schema_version: 1
+
+surprise_cases:
+  - id: surprise_backlog_triage
+    input: "Triage these three ideas by real itch: (a) 'the state of AI in 2026', (b) 'why my draft->pro escalation cut my image-gen bill in half after one bad $40 night', (c) '10 prompt tips everyone should know'."
+    expect:
+      - "(b) passes the Itch slot: first-person, dated, real cost, checkable"
+      - "(a) and (c) blocked as audience-chasing / no lived itch"
+      - "ranks (b) first; names why (a)/(c) fail"
+
+  - id: surprise_overdeliver_test
+    input: "Value-gate a post that explains agent evals conceptually but hands the reader nothing to use."
+    expect:
+      - "fails the over-deliver test (nothing usable in 10 minutes)"
+      - "requires one copy-pasteable artifact (a cases.yaml stub, a checklist, a command)"
+      - "Rule of One check: one idea, over-delivered on a narrow surface"
+
+  - id: surprise_pillar_vs_filler
+    input: "Is this worth posting: a 200-word recap of a conference I attended, no problem solved, no artifact?"
+    expect:
+      - "verdict BLOCK: no Itch, no Transfer; recap is not a solved problem"
+      - "distinguishes a real itch ('I tried X, it failed, here's the fix') from event-recap filler"
+      - "does not pad it into a fake takeaway"
+
+  - id: surprise_self_postmortem_signal
+    input: "Check the hiring signal on a post dissecting how MY OWN cost-cap regression doubled my daily-driver spend before I caught it."
+    expect:
+      - "recognizes the blameless self-post-mortem as a HIGH seniority signal"
+      - "confirms it is shown (artifact: the cost numbers, the cap trip) not claimed"
+      - "verifies competence is visible BEFORE any self-deprecation lands (not fishing)"
+      - "ends on the lesson/fix, not on availability"
