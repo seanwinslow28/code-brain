@@ -240,6 +240,37 @@ def test_run_antigravity_timeout_writes_capture(tmp_path):
     assert "RESOURCE_EXHAUSTED" in body, "partial stderr was not captured"
 
 
+def test_ag_timeout_capture_includes_connectivity_probe(tmp_path):
+    """When a reachability probe is supplied, it lands in its own section so the
+    nightly hang's sub-cause (IPv6-only vs all-Google vs DNS) is discriminable."""
+    from lib.cli_runners import _write_ag_timeout_capture
+
+    path = _write_ag_timeout_capture(
+        tmp_path,
+        timeout_s=120,
+        duration_s=122.0,
+        cmd=["/opt/homebrew/bin/gemini", "-p", "secret prompt", "--debug"],
+        stdout_text="",
+        stderr_text="play.googleapis.com connect timeout",
+        probe_text="curl4 cloudcode-pa.googleapis.com: http=404 connect=0.03s",
+    )
+    body = path.read_text(encoding="utf-8")
+    assert "CONNECTIVITY PROBE" in body
+    assert "curl4 cloudcode-pa.googleapis.com" in body
+    assert "secret prompt" not in body, "prompt must stay redacted"
+
+
+def test_ag_timeout_capture_omits_probe_section_when_empty(tmp_path):
+    """No probe text → no empty probe section (normal nightly, AG_DEBUG off)."""
+    from lib.cli_runners import _write_ag_timeout_capture
+
+    path = _write_ag_timeout_capture(
+        tmp_path, timeout_s=120, duration_s=122.0,
+        cmd=["gemini", "-p", "x"], stdout_text="", stderr_text="boom",
+    )
+    assert "CONNECTIVITY PROBE" not in path.read_text(encoding="utf-8")
+
+
 def test_run_antigravity_timeout_no_capture_when_dir_none():
     """Without debug_log_dir the timeout path must not raise and writes nothing."""
     async def go():
