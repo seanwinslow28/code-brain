@@ -10,6 +10,7 @@ from lib.hybrid_router import (
     HybridRouter,
     MachineConfig,
     MachineStatus,
+    RouteUnavailable,
 )
 
 # ── Fixtures ───────────────────────────────────────────────────────────
@@ -41,7 +42,7 @@ def _make_machines() -> dict[str, MachineConfig]:
             tier=3,
             runtime="ollama",
             always_on=False,
-            models=["Qwen3-VL-7B"],
+            models=["Qwen3-VL-7B", "gemma4_26b-32k"],
             wol_mac="AA:BB:CC:DD:EE:FF",
         ),
     }
@@ -56,6 +57,11 @@ def _make_task_map() -> dict[str, dict[str, str]]:
         "heavy_synthesis": {"model": "Qwen3.5", "machine": "macbook_pro"},
         "sprite_vision_qa": {"model": "Qwen3-VL-7B", "machine": "alienware"},
         "comfyui_orchestration": {"model": "none", "machine": "alienware"},
+        "tier_c_batch_summarize": {
+            "model": "gemma4_26b-32k",
+            "machine": "alienware",
+            "fallback": "none",
+        },
     }
 
 
@@ -128,6 +134,37 @@ def test_comfyui_direct_routing(router: HybridRouter) -> None:
     assert result.machine == "alienware"
     assert result.model == "none"
     assert not result.is_fallback
+
+
+def test_route_tier_c_to_alienware_when_healthy(router: HybridRouter) -> None:
+    """tier_c_batch_summarize routes to Alienware when it is awake."""
+    router.set_machine_status("alienware", MachineStatus.HEALTHY)
+    result = asyncio.run(router.route("tier_c_batch_summarize"))
+    assert result.machine == "alienware"
+    assert result.model == "gemma4_26b-32k"
+    assert not result.is_fallback
+
+
+def test_tier_c_unreachable_raises_never_api(router: HybridRouter) -> None:
+    """When Alienware is asleep, the route fails fast — it must NOT bill the
+    paid Claude API, even though the global fallback_to_api is True."""
+    assert router.fallback_to_api is True  # the global default is still on
+    router.set_machine_status("alienware", MachineStatus.UNHEALTHY)
+    # Other machines are healthy but lack gemma4_26b-32k → must not be grabbed.
+    router.set_machine_status("mac_mini", MachineStatus.HEALTHY)
+    router.set_machine_status("macbook_pro", MachineStatus.HEALTHY)
+    with pytest.raises(RouteUnavailable):
+        asyncio.run(router.route("tier_c_batch_summarize"))
+
+
+def test_tier_c_miss_sends_no_wol(router: HybridRouter, monkeypatch) -> None:
+    """A fail-fast miss must not fire the (architecturally dead) WoL packet."""
+    calls = []
+    monkeypatch.setattr(router, "send_wol", lambda name: calls.append(name) or False)
+    router.set_machine_status("alienware", MachineStatus.UNHEALTHY)
+    with pytest.raises(RouteUnavailable):
+        asyncio.run(router.route("tier_c_batch_summarize"))
+    assert calls == []  # send_wol never called
 
 
 def test_unknown_task_falls_to_api(router: HybridRouter) -> None:
