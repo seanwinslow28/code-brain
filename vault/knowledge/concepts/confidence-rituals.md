@@ -2,31 +2,34 @@
 title: "Confidence Rituals"
 type: concept
 sources:
-  - knowledge/concepts/confidence-rituals.md
+  - knowledge/expansions/confidence-rituals.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-06-03
+updated: 2026-06-03
 ---
 
 ## Definition
 
-Practices that help candidates manage self-doubt, maintain composure, and project confidence during interviews, particularly in vibe-coding formats that value transparency.
+Confidence Rituals function as a mechanism for stabilizing ambiguity during high-stakes social performances, specifically interviews, by shifting the focus from internal emotional regulation to external impression management. This concept relies on the distinction between backstage preparation and front-stage performance, where the candidate actively shapes the collaborative room rather than merely coping with nerves. It requires the integration of self-efficacy calibration, which indexes confidence to concrete mastery evidence, and anti-fragile disclosure, which structures uncertainty into operational judgment. The ritual transforms vague optimism into a demonstrable ability to manage the definition of the situation through specific verbal and behavioral scripts.
 
 ## Context
 
-Critical for Sean as he navigates vibe-coding interviews in his job-hunt-2026, where projecting confidence is essential for success.
+Sean is navigating a job hunt in 2026 where 'vibe-coding' and agentic engineering are key differentiators. His current confidence framework risks sounding like generic coping rather than deliberate professional shaping. By refining these rituals, he can better articulate his value during interviews, turning moments of not knowing into demonstrations of strategic thinking and control architecture.
 
 ## Evidence
 
-> Practices that help candidates manage self-doubt, maintain composure, and project confidence during interviews.
+> Current concept treats confidence as an internal state to regulate. Missing move: interviews are staged social performances where the candidate must manage the definition of the situation.
 
-> In vibe-coding interviews, where transparency is valued, managing self-doubt is crucial to presenting as a strong collaborator.
+> Sean’s concept should distinguish “I feel confident” from “I have proof I can perform this task under these constraints.”
+
+> The missing technique is structured disclosure: name uncertainty, bound it, choose a next probe, and explain what evidence would change your mind.
 
 ## Examples
 
-- Pre-interview breathing techniques
-- Rehearsing common interview prompts
+- Using the sentence pattern: “I don’t know that yet; the smallest useful test is X, and if it returns Y I’ll do Z.”
+- Creating a portfolio one-pager mapping target role competencies to concrete mastery evidence from Code-Brain, 16BitFit, intent-engineering, and llm-council.
+- Developing an agentic-engineering interview demo script where Sean turns uncertainty into operational judgment by narrating tradeoffs and setting stop rules.
 
 ## Related Concepts
 
-[[Energy Management]] [[Interpersonal Dynamics]]
+[[Vibe-Coding Interview]] [[Portfolio Projects]] [[Interview Preparation Playbook]]

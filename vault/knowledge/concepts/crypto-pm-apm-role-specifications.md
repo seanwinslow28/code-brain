@@ -2,31 +2,34 @@
 title: "Crypto PM/APM Role Specifications"
 type: concept
 sources:
-  - knowledge/concepts/crypto-pm-apm-role-specifications.md
+  - knowledge/expansions/crypto-pm-apm-role-specifications.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-06-03
+updated: 2026-06-03
 ---
 
 ## Definition
 
-This concept outlines the responsibilities, qualifications, and expectations for Product Managers (PM) or Associate Product Managers (APM) in the cryptocurrency space, ensuring accurate alignment with company needs.
+This concept defines a specialized product management framework where the core competency shifts from traditional user experience optimization to the design of on-chain telemetry and market mechanisms. It requires the practitioner to treat product surfaces as economic systems, necessitating a deep understanding of incentive structures, liquidity dynamics, and regulatory ambiguity. The role demands the ability to instrument protocol behavior directly through tools like Dune Analytics rather than relying on standard business intelligence dashboards. This creates a distinct professional identity that bridges technical infrastructure, economic theory, and legal compliance.
 
 ## Context
 
-This is crucial for Sean as he works on job-hunt-2026, particularly in mapping referral targets and aligning with hiring managers' expectations.
+Sean is actively targeting senior product roles in the crypto sector, where generic SaaS experience is often insufficient. By articulating this specific 'mechanism-design' and 'telemetry' capability, he differentiates himself from candidates who only possess surface-level 'web3 knowledge.' This definition allows him to produce high-signal artifacts, such as interview one-pagers, that demonstrate immediate value to hiring managers looking for PMs who can navigate the unique constraints of decentralized protocols.
 
 ## Evidence
 
-> Details defining the responsibilities, qualifications, and expectations for Product Managers (PM) or Associate Product Managers (APM) in the cryptocurrency space.
+> A role-spec facet that treats crypto PM work as instrumentation design, not just blockchain knowledge, where the PM defines the event-level metric that proves whether the product is working.
 
-> Understanding these specs allows for accurate mapping of referrals to hiring managers and ensures alignment with a company's needs.
+> In crypto, product surfaces often are markets, so PMs need to reason about incentives, congestion, liquidity, adverse selection, and strategic behavior rather than just optimizing UX.
+
+> The PM must design under legal ambiguity without becoming a lawyer, adding criteria for regulatory sensemaking such as custody, disclosures, and jurisdictional rollout.
 
 ## Examples
 
-- Proficiency in blockchain protocols
-- Experience with exchange platforms
+- Defining a portfolio one-pager titled 'How I’d Measure Product-Market Fit for a Crypto Product Without Waiting for BI' using Dune’s Spellbook repo.
+- Producing a Substack essay or case study titled 'Crypto PM Is Market Design Wearing a UX Mask' to position Sean for exchange or lending roles.
+- Creating a runbook for 'Feature Launch Risk Triage for a Crypto PM' that addresses token classification risk and compliance UX.
 
 ## Related Concepts
 
-[[Crypto PM/APM Targets That Convert The Block Referrals]] [[Target Role Specs for 2026]]
+[[Target Role Specs for 2026]] [[Portfolio Projects for Interview Prep]] [[Market Positioning]]

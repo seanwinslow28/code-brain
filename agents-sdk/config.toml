@@ -199,6 +199,15 @@ manifest_dir = "vault/health"
 # Counted separately in critic-manifest under `backfill_articles_critiqued`.
 backfill_max_per_run = 5
 backfill_include_connections = true
+# Anti-Gravity circuit breaker (2026-06-03): Codex + AG run in parallel per
+# article, so a hung AG call makes the whole article wait the full 120s timeout
+# even after Codex finishes. AG has failed 5/5 nightly since 2026-05-26 (network
+# reachability to Google API hosts at 03:30 — see CONTINUATION-2026-06-02), so
+# those stalls drain the entire 600s wall budget and starve Codex. After this
+# many CONSECUTIVE AG failures, stop invoking AG for the rest of the run.
+# Set to 1 (aggressive) while AG is known-dead pending the June-18 oauth EOL
+# migration; raise to 2 once AG is healthy again. 0 disables the breaker.
+antigravity_circuit_threshold = 1
 
 # Default supporting-document paths injected into every vault_critic prompt
 # (Round 3 calibration, validated 2026-05-24 — see CHANGELOG 4.1.4). Each file
@@ -321,7 +330,10 @@ wol_mac = "B4:E9:B8:F7:71:47"
 # 2026-05-24 via Topic 20 Phase 2 troubleshooting; `255.255.255.255`
 # limited broadcasts were silently dropped somewhere in the Deco backbone.
 wol_broadcast = "192.168.71.255"
-models = ["qwen3-vl:8b"]
+# gemma4_26b-32k added 2026-06-03 — Topic 20 Tier C soak ADOPTED (17/17 clean).
+# Bare tag (no :latest) so it matches the tag-stripped health-check name and
+# still resolves to :latest in /api/chat. See tier_c_batch_summarize below.
+models = ["qwen3-vl:8b", "gemma4_26b-32k"]
 
 # Task → model → machine mapping
 [routing.task_map]
@@ -359,6 +371,21 @@ comfyui_orchestration = { model = "none", machine = "alienware" }
 # kicks in only if Mac Mini is unreachable (explicit choice — a real
 # judge run on the paid path beats no judge).
 judge_layer = { model = "gemma4:e4b", machine = "mac_mini" }
+# Tier C batch route — fleet's first Tier C production model.
+# Topic 20 soak ADOPTED 2026-06-03: gemma4_26b-32k @ Alienware (RTX 5080 16GB)
+# passed 17/17 Pattern E datapoints clean (0 think-leak, 0 truncation, no
+# drift; mean ~29.6 tok/s, workload-bound). See
+# vault/20_projects/research/2026-06-03-topic-20-tier-c-soak-closeout.md.
+# BATCH / ASYNC ONLY — ~30 tok/s sustained, explicitly NOT for interactive use.
+# fallback = "none": the Alienware is offline ~16h/day (Pattern E manual wake,
+# 7am–5pm; remote wake is architecturally impossible on this hardware). The
+# global fallback_to_api=true would otherwise SILENTLY bill the paid Claude
+# API on every off-hours miss. This route fails fast (raises RouteUnavailable)
+# instead — no surprise cloud spend, no silent quality downgrade. A batch
+# consumer catches RouteUnavailable and defers to the next awake window.
+# No auto-consumer wired yet (2026-06-03) — manual / opt-in route. Plan:
+# agents-sdk/docs/plans/2026-06-03-tier-c-batch-route-wiring-plan.md
+tier_c_batch_summarize = { model = "gemma4_26b-32k", machine = "alienware", fallback = "none" }
 
 # ─── Notifications ───────────────────────────────────────────────────────────
 
@@ -559,3 +586,28 @@ enabled = false
 agent_id = "daily_driver"
 inject_on_run = true                           # MCP server is mounted; preamble cues the agent to call view
 write_lessons_on = ["success"]
+
+# --- Portfolio daily-dated layer (sw-ai-pm-portfolio) ----------------------
+# The Daily Driver's morning run renders the portfolio's hero dateline +
+# About-pulse JSONs from real fleet data (agent-run-history.csv + the latest
+# synth manifest) via lib/portfolio_dateline.py, then commits them to the
+# portfolio's `main` so Vercel rebuilds with a current dateline.
+#
+# Writes target `worktree_path` — a dedicated git worktree pinned to `main`
+# so bot commits never touch whatever branch is checked out in the primary
+# portfolio clone. Create it once (and only then does this step activate):
+#   git -C /Users/seanwinslow/Code-Brain/sw-ai-pm-portfolio \
+#       worktree add ../.portfolio-dateline-worktree main
+#
+# auto_push armed 2026-06-02 after a `git push --dry-run` confirmed working
+# osxkeychain credentials from the worktree (GIT_TERMINAL_PROMPT=0 makes a
+# missing-credential push fail fast rather than hang). The morning run writes
+# + commits the JSONs to the worktree's `main` and pushes (pull --rebase
+# first). If launchd ever lacks keychain access, the push fails non-fatally
+# and logs `PUSH FAILED (check launchd credentials)` — the run never hangs.
+[portfolio]
+enabled = true
+worktree_path = "/Users/seanwinslow/Code-Brain/.portfolio-dateline-worktree"
+api_subpath = "public/api"
+commit = true
+auto_push = true

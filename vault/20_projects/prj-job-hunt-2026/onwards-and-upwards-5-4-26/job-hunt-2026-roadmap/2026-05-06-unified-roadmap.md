@@ -1362,6 +1362,8 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 
 ### Task 23 — DR6 MCP Prompt-Injection Security Audit (Phase A, ships Friday 2026-06-08)
 
+> **Status 2026-06-01 (SHIPPED + PUBLISHED, ~7 days early).** Built via the §0 prep doc's paste-ready Claude Code prompt ([`2026-05-31-task-23-step-0-prebuild-prep.md`](2026-05-31-task-23-step-0-prebuild-prep.md)), executed host-side. `@swins/intent-engineering-mcp@0.1.1` published to npm + MCP registry. The prep doc's 5 spec corrections all held: entry is `src/index.ts` (not `server.ts`); Zod was already at the boundary so the work was *tightening* not *adding*; the real finding was **unconstrained `file_path` → arbitrary local-file read** (`audit_intent_spec({file_path:"/etc/passwd"})` + symlink escape), fixed via a new `src/intent/safe-fs.ts` `loadFileSafely` (realpath + 1 MiB cap + extension allowlist + optional `INTENT_ENGINEERING_ALLOWED_ROOT` confinement); OAuth/sandboxing deferred *with surface-scoped reasons*; output URL-filtering downgraded honestly. Shipped: `safe-fs.ts` + `audit-log.ts` (append-only JSONL, fail-open), `.strict()` on all 3 input schemas, 3 `node:test` files (zero new deps), `docs/SECURITY.md` (106 lines, 5 sections, leads with the file-read vector + the MCP trust boundary), version bump + CHANGELOG. **EchoLeak attribution corrected + web-verified 2026-06-02:** CVE-2025-32711 is Microsoft 365 Copilot (Aim Labs), NOT Anthropic/MCP — the source LDR doc had it wrong. Ledger row + LinkedIn draft shipped this session. **Remaining (Sean-host):** `npm run build` in the portfolio to confirm the new ledger row resolves, commit it, post the LinkedIn. Full narrative in the completion log.
+
 **Maps to:** DR-Max follow-up flag + GitHub MCP precedent. LDR research at `vault/20_projects/research/2026-05-18-mcp-prompt-injection-hardening.md` informs the checklist. Hardens the already-shipped @swins/intent-engineering-mcp@0.1.0 server.
 
 **Files:**
@@ -1388,29 +1390,32 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 
 ### Task 24 — DR7 Discovery PRD / Cross-Functional Translation Artifact (Phase A, ships Friday 2026-06-08)
 
+> **Status 2026-06-02 (content-complete + council-revised; host close-outs pending).** Steps 1-8 drafted in a Cowork session, then stress-tested and revised. PRD at [`portfolio-artifacts/discovery-prd-ai-content-workflow.md`](../../portfolio-artifacts/discovery-prd-ai-content-workflow.md) — sober work-artifact voice with Sean-voiced intro (§0) + evangelism callout (§8). **Verification gate PASSED** (with one deliberate relaxation): 5 personas (editor / strategist / SEO lead / legal / exec) voiced distinctly enough to tell apart blind; 6 user stories each "As a [persona], I want…, so that…" with non-technical-verifiable AC; rollout cites 2 DR-Max cases (Klarna walk-back + JPMorgan LLM Suite — Bank of America Erica **cut** in revision as a category error, still ≥2 required); evangelism-arc paragraph present. **Word count: ~3,730 (over the 2,500-3,500 ceiling — Sean accepted the overage; the council accuracy fixes were worth the ~230 words).** Ledger row at [`discovery-prd-content-workflow.mdx`](../../../../../../sw-ai-pm-portfolio/src/content/transactions/discovery-prd-content-workflow.mdx) — **`surface: product`**; `node scripts/validate_content.mjs` passes clean (schema + em-dash F6). **Premium LLM-Council stress-test RAN** ($0.61, 4 frontier models + chairman; transcript at [`critiques/discovery-prd-council-2026-06-02.md`](../../portfolio-artifacts/critiques/discovery-prd-council-2026-06-02.md)). Council verdict: §3 proves the translation skill, but the original draft made the controls sound more deterministic than the tech allows. **Core "remove the magic" fixes folded in:** citation≠factuality (sampled/scored/human-validated, not "cite-or-flag"); SEO lead made genuinely SEO-specific (cannibalization / intent / freshness / schema, not "factual + original"); training-data claims reframed (base model has pretrained knowledge; only *publishable claims* are corpus-grounded); Time-to-Trust renamed "time to first light-edit approval" + sustained-trust companion (fixes the "nothing publishes without a human" contradiction + editor-fatigue gaming); adoption→brief-penetration (de-gamed); thresholds now set from a Phase-1 human-labeled baseline; vault-path footnote + "verify without reading code" tell removed. Full narrative in the completion log. **Host close-outs (Sean):** `npm run build` to confirm `/transactions/discovery-prd-content-workflow/` resolves, then commit the portfolio repo by hand; optional Substack/LinkedIn. Tickets filed.
+
 **Maps to:** DR-Max Q1 finding — Cross-Functional Translation is the MOST-cited JD skill (90% of Tier-1 JDs). The "AI evangelist in non-AI orgs" backstory IS the raw material for this artifact. Pure strategic writing.
 
 **Files:**
-- Create: `vault/20_projects/prj-job-hunt-2026/portfolio-artifacts/discovery-prd-ai-content-workflow.md`
-- Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/discovery-prd-content-workflow.md`
+- Created: `vault/20_projects/prj-job-hunt-2026/portfolio-artifacts/discovery-prd-ai-content-workflow.md` ✅
+- Created: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/discovery-prd-content-workflow.mdx` ✅ (`.mdx`, not `.md`, to match the transactions collection)
+- Created (this session): `vault/20_projects/prj-job-hunt-2026/portfolio-artifacts/critiques/discovery-prd-council-2026-06-02.md` (LLM-Council transcript)
 
-**- [ ] Step 1: Choose the workflow.** A realistic AI product surface a content-team PM would propose to a skeptical org. Default choice: "AI-assisted article drafting + editorial review workflow for a 50-person content org." Sanitize Block-specific names — generic Fortune 500 content company framing.
+**- [x] Step 1: Choose the workflow.** ✅ 2026-06-02. AI-assisted article drafting + editorial review for a generic ~50-person Fortune-500 content org; all Block specifics sanitized.
 
-**- [ ] Step 2: Write the discovery section.** Stakeholder interviews (5 personas) — what the editor, content strategist, SEO lead, legal counsel, and executive sponsor each said about AI. Translate technical concepts (embeddings, RAG, hallucination rates, eval metrics) into each persona's language. THIS IS THE LOAD-BEARING SECTION — it demonstrates the cross-functional translation skill.
+**- [x] Step 2: Write the discovery section.** ✅ 2026-06-02. The load-bearing §3 — 5 distinctly-voiced personas (editor / strategist / SEO lead / legal / exec), each with a verbatim-style quote, a "what they were actually asking," and explicit translations of embeddings / RAG / hallucination / eval metrics. Council-revised to strip deterministic overclaims (citation≠factuality; SEO made genuinely SEO-specific).
 
-**- [ ] Step 3: Write the problem statement.** Business outcome the workflow targets. Not "use AI" — actual content-team pain (e.g., "first-draft cycle time from 4 days to 8 hours without sacrificing brand voice").
+**- [x] Step 3: Write the problem statement.** ✅ 2026-06-02. Outcome-framed: cut Tier-1 first-draft cycle time ~4 days → under 8 hours without degrading brand voice and without dumping rework on the editor.
 
-**- [ ] Step 4: Write the user stories.** 6 stories, each in "As a [persona], I want [behavior], so that [outcome]" format. Each story includes acceptance criteria a non-technical PM can verify.
+**- [x] Step 4: Write the user stories.** ✅ 2026-06-02. 6 stories in "As a [persona], I want…, so that…" form, each with non-technical-verifiable acceptance criteria.
 
-**- [ ] Step 5: Write the success metrics.** Not just CTR-style numbers — adoption rate (% of writers using the tool weekly), fallback-to-human rate (% of drafts the editor rewrites from scratch), Time-to-Trust (days from rollout to writers using the tool unsupervised). These are the DR-Max-surfaced "adoption funnel" metrics.
+**- [x] Step 5: Write the success metrics.** ✅ 2026-06-02. Adoption funnel: brief-penetration rate, fallback-to-human rate (edit-distance measured), time-to-first-light-edit-approval + sustained-trust companion. Renamed/de-gamed in the council pass. Explicitly not CTR/volume.
 
-**- [ ] Step 6: Write the rollout plan.** 90-day phased rollout with named champion-enablement program. References Klarna's walk-back lesson (DR-Max §Q6) — Tier-1 only at launch, expand to Tier-2 only after CSAT validated.
+**- [x] Step 6: Write the rollout plan.** ✅ 2026-06-02. 90-day phased, champion-led; cites Klarna walk-back (Tier-1-only lesson) + JPMorgan LLM Suite (training-led adoption). BofA Erica cut in the council revision as a category error.
 
-**- [ ] Step 7: Add a "where the AI evangelism arc applies" callout.** 1 paragraph at the end: "I lived this discovery process informally at two prior orgs. The version here is what I would have shipped if those orgs had given me the named accountability." This is the load-bearing connection between Sean's bio and this artifact.
+**- [x] Step 7: Add the "where the AI evangelism arc applies" callout.** ✅ 2026-06-02. §8, Sean-voiced, em-dash-free; frames the decade of informal evangelism as the raw material, no desperation ask.
 
-**- [ ] Step 8: Ship.** Push to portfolio-artifacts/. Add ledger row. Substack post candidate.
+**- [x] Step 8: Ship.** ✅ 2026-06-02 (content side). PRD in portfolio-artifacts/; ledger row `discovery-prd-content-workflow.mdx` (`surface: product`); `validate_content.mjs` clean. Host close-outs (`npm run build` + commit + optional LinkedIn/Substack) ticketed for Sean.
 
-**Verification gate:** PRD is 2,500–3,500 words. 5 personas voiced distinctly. 6 user stories acceptance-criteria-complete. Rollout plan references at least 2 DR-Max-surfaced case studies. AI-evangelism arc paragraph present.
+**Verification gate:** ✅ **PASSED 2026-06-02** (with one deliberate relaxation). 5 personas voiced distinctly; 6 user stories acceptance-criteria-complete; rollout references 2 DR-Max case studies (Klarna + JPMorgan, ≥2 required, after Erica was cut); AI-evangelism arc present. **Word count ~3,730, over the 2,500–3,500 ceiling — Sean accepted the overage; the council accuracy fixes were worth the ~230 words.** Premium LLM-Council stress-test run ($0.61) and Core "remove the magic" fixes folded in; see the status blockquote above + the completion-log entries (`2026-06-02 (later)` ship + `2026-06-02 (council revision)`).
 
 ---
 

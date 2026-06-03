@@ -2,32 +2,33 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - 40_knowledge/references/ref-claude-code-how-the-guy-who-built-it-uses-it.md
+  - 40_knowledge/references/ref-tolerance-for-non-builders-shrinking.md
 tags: [auto-generated, phase-6]
-created: 2026-06-01
-updated: 2026-06-01
+created: 2026-06-03
+updated: 2026-06-03
 ---
 
 ## Definition
 
-The competitive advantage in AI-augmented work shifts from raw coding ability to the architectural discipline of managing context, parallelism, and session state. This mechanism requires the operator to treat the AI not as a single monolithic tool, but as a fleet of specialized agents that must be explicitly coordinated through plan modes and background processing. The invariant is that output quality degrades linearly with context window bloat, making session management the primary bottleneck for scalability rather than model intelligence.
+As the cost of execution approaches zero through agentic automation, the economic value of senior roles shifts from the act of building to the governance of agent portfolios and the application of domain-specific judgment. This creates a bifurcation where 'non-builders' who rely on bureaucratic gatekeeping become obsolete, while those who can direct AI systems to produce high-value outcomes retain relevance. The invariant here is that technical fluency is no longer the primary differentiator; rather, the ability to curate, verify, and strategically deploy automated outputs becomes the scarce resource.
 
 ## Context
 
-Sean is positioning himself for AI Product Manager roles where he must demonstrate mastery over agentic workflows. Understanding that Anthropic is explicitly validating 'Claude Code for everything' through Cowork confirms that the industry standard is moving toward non-coding agentic orchestration, which is directly relevant to his job-hunt-2026 narrative of bridging product strategy with technical execution.
+Sean is navigating a career transition where his value proposition must shift from traditional product management oversight to demonstrating high-level agentic governance. He must articulate how his experience in complex stakeholder management and strategic prioritization translates into the new paradigm of 'agent portfolio governance' rather than defending legacy PM rituals.
 
 ## Evidence
 
-> Cowork’s release validates that “Claude Code for everything” isn’t just a workaround - it’s the direction the product is going.
+> The role isn’t shrinking. The tolerance for non-builders is.
 
-> Most of the features that make Claude Code powerful, such as context management, background agents, and custom commands, aren’t yet easily available in Cowork.
+> What’s emerging in its place is a model in which everyone in the org is a potential builder, supported by agent portfolio governance and the kind of judgment work that the coordination roles never required.
+
+> The higher you sat in the old org, the more of your day was the first list and the less of it was the second.
 
 ## Examples
 
-- Using plan mode to break down complex tasks before execution
-- Managing parallel sessions for distinct sub-tasks
-- Leveraging background agents for asynchronous processing
+- Reducing performance review effort from ten to fourteen days to roughly 45 minutes by stitching NotebookLM, ChatGPT, and Grok together.
+- Stitching NotebookLM, ChatGPT, and Grok together to draft six-figure proposals in minutes.
 
 ## Related Concepts
 
-[[Agentic Engineering]] [[Context Management]] [[Agent Fleet Observability Dashboard]]
+[[Supervision as the New AI Edge]] [[AI Fluency]] [[Context Management as a Bottleneck]]

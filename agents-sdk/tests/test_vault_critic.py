@@ -468,6 +468,93 @@ def test_run_respects_wall_budget(tmp_repo, monkeypatch):
 
 
 # ---------------------------------------------------------------------------
+# D5a: Anti-Gravity circuit breaker (2026-06-03)
+# ---------------------------------------------------------------------------
+
+
+def test_run_antigravity_circuit_breaker_trips_and_skips(tmp_repo, monkeypatch):
+    """After `antigravity_circuit_threshold` consecutive AG failures the breaker
+    trips: remaining articles run Codex-only (AG subprocess not spawned), so AG's
+    120s timeout stops eating the wall budget. Skipped articles count as skipped,
+    not failures; Codex still produces every expansion."""
+    today = "2026-05-22"
+    paths = [_make_concept_at(tmp_repo, s) for s in ("a", "b", "c", "d")]
+    _make_manifest(tmp_repo, today)
+    monkeypatch.setattr("agents.vault_critic.select_target_articles",
+                        lambda root, date_iso, max_targets: paths)
+
+    ag_mock = AsyncMock(side_effect=lambda *a, **k: _fail("antigravity", "antigravity timeout after 120s"))
+
+    async def go():
+        with patch("agents.vault_critic.run_codex", AsyncMock(side_effect=lambda *a, **k: _ok("codex", "ok", 100))), \
+             patch("agents.vault_critic.run_antigravity", ag_mock):
+            return await run_critic(
+                repo_root=tmp_repo, date_iso=today, max_targets=10,
+                wall_budget_s=600, antigravity_circuit_threshold=2, backfill_max=0,
+            )
+
+    result = asyncio.run(go())
+    assert ag_mock.await_count == 2, "AG must not be invoked after the breaker trips"
+    assert result.antigravity_calls == 2
+    assert result.antigravity_failures == 2
+    assert result.antigravity_skipped == 2
+    assert result.codex_calls == 4
+    assert result.articles_critiqued == 4  # Codex carries all four
+    assert result.status == STATUS_PARTIAL  # AG genuinely failed twice — honest
+    assert any("circuit" in w.lower() for w in result.warnings)
+
+
+def test_run_antigravity_circuit_breaker_disabled_when_threshold_zero(tmp_repo, monkeypatch):
+    """threshold=0 disables the breaker — AG is attempted for every article."""
+    today = "2026-05-22"
+    paths = [_make_concept_at(tmp_repo, s) for s in ("a", "b", "c")]
+    _make_manifest(tmp_repo, today)
+    monkeypatch.setattr("agents.vault_critic.select_target_articles",
+                        lambda root, date_iso, max_targets: paths)
+    ag_mock = AsyncMock(side_effect=lambda *a, **k: _fail("antigravity", "boom"))
+
+    async def go():
+        with patch("agents.vault_critic.run_codex", AsyncMock(side_effect=lambda *a, **k: _ok("codex", "ok", 100))), \
+             patch("agents.vault_critic.run_antigravity", ag_mock):
+            return await run_critic(
+                repo_root=tmp_repo, date_iso=today, max_targets=10,
+                wall_budget_s=600, antigravity_circuit_threshold=0, backfill_max=0,
+            )
+
+    result = asyncio.run(go())
+    assert ag_mock.await_count == 3  # every article
+    assert result.antigravity_skipped == 0
+    assert result.antigravity_failures == 3
+
+
+def test_run_antigravity_breaker_resets_on_success(tmp_repo, monkeypatch):
+    """A successful AG call resets the consecutive-failure counter, so an isolated
+    transient failure never trips the breaker (threshold=2)."""
+    today = "2026-05-22"
+    paths = [_make_concept_at(tmp_repo, s) for s in ("a", "b", "c", "d")]
+    _make_manifest(tmp_repo, today)
+    monkeypatch.setattr("agents.vault_critic.select_target_articles",
+                        lambda root, date_iso, max_targets: paths)
+    # fail, ok, fail, ok — never two failures in a row.
+    seq = [_fail("antigravity", "x"), _ok("antigravity", "g", 50),
+           _fail("antigravity", "x"), _ok("antigravity", "g", 50)]
+    ag_mock = AsyncMock(side_effect=seq)
+
+    async def go():
+        with patch("agents.vault_critic.run_codex", AsyncMock(side_effect=lambda *a, **k: _ok("codex", "ok", 100))), \
+             patch("agents.vault_critic.run_antigravity", ag_mock):
+            return await run_critic(
+                repo_root=tmp_repo, date_iso=today, max_targets=10,
+                wall_budget_s=600, antigravity_circuit_threshold=2, backfill_max=0,
+            )
+
+    result = asyncio.run(go())
+    assert ag_mock.await_count == 4  # breaker never trips
+    assert result.antigravity_skipped == 0
+    assert result.antigravity_failures == 2
+
+
+# ---------------------------------------------------------------------------
 # D5b: Two-lane orchestration — fresh + backfill (2026-05-27)
 # ---------------------------------------------------------------------------
 

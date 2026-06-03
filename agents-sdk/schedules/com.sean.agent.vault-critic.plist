@@ -20,6 +20,12 @@
     <dict>
         <key>PATH</key>
         <string>/Users/seanwinslow/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <!-- TEMPORARY diagnostic (2026-06-02): appends gemini's own --debug so the
+             nightly captures verbose stderr at the moment of the Anti-Gravity hang
+             into vault/90_system/agent-logs/ag-timeout-<utc>.log. Remove after the
+             zero-token 120s hang is root-caused. See CONTINUATION-2026-06-02. -->
+        <key>VAULT_CRITIC_AG_DEBUG</key>
+        <string>1</string>
     </dict>
     <key>WorkingDirectory</key>
     <string>/Users/seanwinslow/Code-Brain/code-brain</string>

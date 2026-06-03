@@ -38,6 +38,18 @@ class WOLUnavailable(Exception):
     """
 
 
+class RouteUnavailable(Exception):
+    """Raised when a route's preferred machine is down AND the route has
+    explicitly opted out of fallback via task_map `fallback = "none"`.
+
+    This is the cost-safety contract for routes on frequently-offline hosts
+    (the Tier C batch route on the Alienware, offline ~16h/day under Pattern
+    E). It guarantees a miss never silently bills the paid Claude API and
+    never fires a (non-functional) Wake-on-LAN packet. Callers catch this and
+    skip/defer to the next awake window — a healthy idle outcome, not an error.
+    """
+
+
 class MachineStatus(Enum):
     UNKNOWN = "unknown"
     HEALTHY = "healthy"
@@ -301,6 +313,20 @@ class HybridRouter:
                 base_url=mc.base_url,
                 runtime=mc.runtime,
                 reason=f"Preferred machine healthy (tier {mc.tier})",
+            )
+
+        # Per-route fail-fast opt-out. A task_map entry may set
+        # `fallback = "none"` to forbid the entire WoL → within-tier → paid
+        # API cascade when its preferred machine is unreachable. This is the
+        # cost-safety contract for the Tier C batch route: the Alienware is
+        # offline ~16h/day (Pattern E manual wake, 7am–5pm) and the global
+        # fallback_to_api=true would otherwise SILENTLY bill the Claude API on
+        # every miss. Raise before any side effect (no dead-WoL packet, no
+        # cross-tier scan, no API spend). Callers defer to the next window.
+        if mapping.get("fallback") == "none":
+            raise RouteUnavailable(
+                f"{preferred_machine} unreachable for '{task}' and route opts "
+                f'out of fallback (fallback="none"); no WoL, no API spend.'
             )
 
         # Try WOL for Alienware if it's the preferred machine

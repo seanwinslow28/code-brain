@@ -2,37 +2,31 @@
 title: "Gemini Deep Research"
 type: concept
 sources:
-  - knowledge/expansions/gemini-deep-research.md
+  - knowledge/concepts/gemini-deep-research.md
 tags: [auto-generated, phase-6]
-created: 2026-05-28
-updated: 2026-05-28
+created: 2026-06-03
+updated: 2026-06-03
 ---
 
 ## Definition
 
-Gemini Deep Research functions as a compound question-to-synthesis engine that generates cited reports, but it lacks the epistemic scaffolding to distinguish between evidence collection and adversarial disconfirmation. Without a tasking doctrine, the system treats all complex queries as identical data retrieval tasks, ignoring the psychological risks of confirmation bias inherent in automated reasoning. This creates a dependency where the output quality is determined by the user's ability to manually impose structure, rather than the agent's ability to self-regulate its reasoning mode. The mechanism is essentially a high-variance generator that requires external constraints to prevent epistemic drift.
+This concept defines a specialized fallback handler for complex, multi-step research tasks that exceed the scope of Local Deep Research. It serves as a mechanism to prevent stalls or low-quality output in the primary queue by leveraging Gemini's ability to navigate complex information landscapes. The system relies on this model to autonomously plan, execute, and synthesize these tasks, producing detailed, cited reports for compound topics. This separation of concerns allows the primary queue to remain efficient while offloading heavy lifting to a more capable agent.
 
 ## Context
 
-Sean is building an autonomous agent fleet where Gemini Deep Research is a core component. If the agent cannot distinguish between a 'market map' and a 'red-team contradiction' run, it will produce misleading artifacts for high-stakes decisions like job hunting or product strategy. The current integration plan treats it as a generic cloud tier, which is insufficient for the 'Deep Research Queue' or 'Research Agents' workflows.
+Sean integrates this handler to ensure his vault receives high-quality, grounded information for complex queries. By offloading heavy research to Gemini, he prevents the primary queue from being overwhelmed by tasks it cannot handle effectively. This allows him to maintain a high standard of output without manually intervening in every research task.
 
 ## Evidence
 
-> The current concept treats Gemini DR as a report generator: compound question in, cited synthesis out.
+> Gemini Deep Research is the designated handler for complex, multi-step research tasks that exceed the scope of Local Deep Research.
 
-> Compound research does not just need more horsepower; it needs anti-bias structure.
-
-> Before Gemini DR runs, classify whether the task requires evidence collection, hypothesis competition, adversarial disconfirmation, or estimate calibration.
+> The Gemini Deep Research Agent autonomously plans, executes, and synthesizes multi-step research tasks.
 
 ## Examples
 
-- Deep Research as decision surface
-- ACH run
-- due diligence run
-- market map run
-- canonical reference excavation
-- red-team contradiction run
+- Multi-step research tasks
+- Complex information landscapes
 
 ## Related Concepts
 
-[[Research Agents]] [[Deep Research Queue]] [[Gemini Deep Research]]
+[[Deep Research Queue]] [[System Constraints]]
