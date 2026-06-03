@@ -199,6 +199,15 @@ manifest_dir = "vault/health"
 # Counted separately in critic-manifest under `backfill_articles_critiqued`.
 backfill_max_per_run = 5
 backfill_include_connections = true
+# Anti-Gravity circuit breaker (2026-06-03): Codex + AG run in parallel per
+# article, so a hung AG call makes the whole article wait the full 120s timeout
+# even after Codex finishes. AG has failed 5/5 nightly since 2026-05-26 (network
+# reachability to Google API hosts at 03:30 — see CONTINUATION-2026-06-02), so
+# those stalls drain the entire 600s wall budget and starve Codex. After this
+# many CONSECUTIVE AG failures, stop invoking AG for the rest of the run.
+# Set to 1 (aggressive) while AG is known-dead pending the June-18 oauth EOL
+# migration; raise to 2 once AG is healthy again. 0 disables the breaker.
+antigravity_circuit_threshold = 1
 
 # Default supporting-document paths injected into every vault_critic prompt
 # (Round 3 calibration, validated 2026-05-24 — see CHANGELOG 4.1.4). Each file

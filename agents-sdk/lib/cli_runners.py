@@ -53,12 +53,17 @@ def _write_ag_timeout_capture(
     cmd: list[str],
     stdout_text: str,
     stderr_text: str,
+    probe_text: str = "",
 ) -> Path | None:
     """Persist gemini's partial output at the moment of a timeout kill.
 
     Writes a timestamped log under `debug_log_dir` so a failing nightly/kickstart
     run leaves behind exactly what the CLI last printed before it hung — the
     decisive clue for the zero-token 120s hang. Best-effort; never raises.
+
+    `probe_text`: optional IP-family-split reachability probe captured at the
+    failure moment (see `_probe_google_reachability`), appended as its own
+    section so the sub-cause (IPv6-only vs all-Google vs DNS) is discriminable.
     """
     try:
         debug_log_dir.mkdir(parents=True, exist_ok=True)
@@ -69,6 +74,10 @@ def _write_ag_timeout_capture(
             "<prompt>" if i > 0 and cmd[i - 1] == "-p" else part
             for i, part in enumerate(cmd)
         ]
+        probe_section = (
+            f"\n===== CONNECTIVITY PROBE (post-timeout) =====\n{probe_text}\n"
+            if probe_text else ""
+        )
         body = (
             f"# Anti-Gravity (gemini) timeout capture\n"
             f"captured_utc: {datetime.now(timezone.utc).isoformat()}\n"
@@ -77,6 +86,7 @@ def _write_ag_timeout_capture(
             f"cmd: {redacted_cmd}\n"
             f"stdout_len: {len(stdout_text)}\n"
             f"stderr_len: {len(stderr_text)}\n"
+            f"{probe_section}"
             f"\n===== STDOUT =====\n{stdout_text}\n"
             f"\n===== STDERR =====\n{stderr_text}\n"
         )
@@ -84,6 +94,70 @@ def _write_ag_timeout_capture(
         return out_path
     except Exception:
         return None
+
+
+# Hosts the gemini CLI must reach. cloudcode-pa is the Code Assist
+# (oauth-personal) model endpoint; play.googleapis is Clearcut telemetry — the
+# host that logs UND_ERR_CONNECT_TIMEOUT in the 2026-06-03 nightly captures.
+_GOOGLE_PROBE_HOSTS = ("cloudcode-pa.googleapis.com", "play.googleapis.com")
+# Non-Google control: Codex/OpenAI survive the same 03:30 window, so if this
+# connects while Google times out, the fault is Google-reachability-specific.
+_PROBE_CONTROL_HOST = "api.openai.com"
+# Run the probe at most once per process — bounds added wall-time on a 5-timeout
+# night to a single ~10s burst instead of 5×.
+_ag_probe_emitted = False
+
+
+async def _run_probe_cmd(label: str, args: list[str], timeout: float = 12.0) -> str:
+    """Run one diagnostic command, return a 'label: output' line. Never raises."""
+    try:
+        proc = await asyncio.create_subprocess_exec(
+            *args,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.STDOUT,
+        )
+        try:
+            out, _ = await asyncio.wait_for(proc.communicate(), timeout=timeout)
+        except asyncio.TimeoutError:
+            try:
+                proc.kill()
+            except ProcessLookupError:
+                pass
+            return f"{label}: PROBE-TIMEOUT after {timeout}s"
+        text = (out or b"").decode("utf-8", errors="replace").strip()
+        return f"{label}: {text or '(no output)'}"
+    except FileNotFoundError as exc:
+        return f"{label}: probe-tool-missing ({exc})"
+    except Exception as exc:  # noqa: BLE001 - diagnostics must never crash the agent
+        return f"{label}: probe-error ({exc})"
+
+
+async def _probe_google_reachability() -> str:
+    """Probe IP-family-split reachability to Google API hosts at the failure moment.
+
+    Fired only on an Anti-Gravity timeout (and only under VAULT_CRITIC_AG_DEBUG,
+    once per process). Discriminates the nightly zero-token hang between
+    (a) IPv6-to-Google broken, (b) all-Google unreachable, and (c) DNS — by
+    comparing per-family TCP connect against a non-Google control. Best-effort;
+    returns a formatted text block, never raises.
+    """
+    def _curl(host: str, family: str) -> list[str]:
+        return [
+            "curl", family, "-sS", "-o", "/dev/null", "--connect-timeout", "8",
+            "-w", "http=%{http_code} connect=%{time_connect}s tcp=%{remote_ip}",
+            f"https://{host}/",
+        ]
+
+    tasks = []
+    for host in _GOOGLE_PROBE_HOSTS:
+        tasks.append(_run_probe_cmd(f"curl4 {host}", _curl(host, "-4")))
+        tasks.append(_run_probe_cmd(f"curl6 {host}", _curl(host, "-6")))
+        tasks.append(_run_probe_cmd(f"digA   {host}", ["dig", "+short", "+time=5", "A", host]))
+        tasks.append(_run_probe_cmd(f"digAAAA {host}", ["dig", "+short", "+time=5", "AAAA", host]))
+    tasks.append(_run_probe_cmd(
+        f"curl4 {_PROBE_CONTROL_HOST} (control)", _curl(_PROBE_CONTROL_HOST, "-4")))
+    lines = await asyncio.gather(*tasks)
+    return "\n".join(lines)
 
 
 def parse_codex_tokens(stderr_text: str) -> int | None:
@@ -327,6 +401,16 @@ async def run_antigravity(
     if timed_out:
         capture_path = None
         if debug_log_dir is not None:
+            # Diagnostic only: under the same reversible AG_DEBUG switch, run the
+            # reachability probe once to capture the network state at the failure
+            # moment. Refutes/confirms the Google-host-unreachable root cause that
+            # the 2026-06-03 captures point to (play.googleapis.com connect-timeout
+            # while Codex/OpenAI succeed in the same process).
+            global _ag_probe_emitted
+            probe_text = ""
+            if os.environ.get("VAULT_CRITIC_AG_DEBUG") == "1" and not _ag_probe_emitted:
+                _ag_probe_emitted = True
+                probe_text = await _probe_google_reachability()
             capture_path = _write_ag_timeout_capture(
                 debug_log_dir,
                 timeout_s=timeout_s,
@@ -334,6 +418,7 @@ async def run_antigravity(
                 cmd=cmd,
                 stdout_text=stdout_text,
                 stderr_text=stderr_text,
+                probe_text=probe_text,
             )
         suffix = f" (capture: {capture_path})" if capture_path else ""
         return CLIResponse(

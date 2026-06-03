@@ -80,3 +80,67 @@ Research ranking: **#1 swallowed-429 quota hang** › #2 token-refresh-loss (RUL
 1. Read `vault/90_system/agent-logs/ag-timeout-*.log` (5 expected) + `critic-manifest-2026-06-03.json` `antigravity_last_error`. Look for `429`/`RESOURCE_EXHAUSTED`/`Quota`/`Request cancelled.` in the captured stderr → confirms #1.
 2. If confirmed: migrate the nightly off oauth-personal to `GEMINI_API_KEY` (AI Studio, no daily cap) — also forced by the **oauth-personal-via-gemini-cli EOL June 18 2026**. Then **remove `VAULT_CRITIC_AG_DEBUG=1`** from the plist.
 3. If the capture shows something else (startup hang, different error), re-rank.
+
+---
+
+## Session 4 progress — 2026-06-03 (Claude Code) — ROOT CAUSE REVISED
+
+**The 6/02 #1 hypothesis (swallowed-429 quota hang) is REFUTED by the failing-condition evidence.**
+
+The 03:30 6/03 nightly fired with `VAULT_CRITIC_AG_DEBUG=1` armed and produced 5 captures
+(`vault/90_system/agent-logs/ag-timeout-2026-06-03T07-{32,34,36,38,40}-*.log`). Grepping all 5 for
+`429|RESOURCE_EXHAUSTED|quota|Request cancelled|cloudcode-pa` → **zero hits**. With `--debug` on,
+there is **not one line about the model request** (no GenerateContent, no stream, no quota error).
+
+What the captures DO show: gemini gets through startup (~1.9s), `Loaded cached credentials` (OAuth
+fine), creates the session stub, then the **only** network activity that logs anything is the Clearcut
+telemetry flush — which fails with `TypeError: fetch failed → ConnectTimeoutError (attempted address:
+play.googleapis.com:443, timeout: 10000ms) UND_ERR_CONNECT_TIMEOUT` on 4/5 runs (the 5th got
+`HTTP 400`). Then silence to the 120s kill.
+
+**Decisive control:** daytime `curl` to BOTH `play.googleapis.com` and `cloudcode-pa.googleapis.com`
+connects in ~30–60ms on IPv4 AND IPv6 (http=404, frontend reached). So play.googleapis.com is NOT a
+permanently-blocked telemetry host — its nightly connect-timeout is a real, time-correlated signal.
+
+**Machine-state ruled out:** pmset log shows the Mac Mini was AWAKE across 03:25–03:45 (Claude.app
+NoIdleSleep assertion), no sleep/darkwake/powernap. Route to Google IPs goes via en0→gateway, not any
+utun/VPN. Codex pushed 145K tokens at the same 03:30 (bulk egress works). So: machine up, network up,
+non-Google egress fine — **only Google API hosts are unreachable in the ~03:30 window.**
+
+**ROOT CAUSE (class, high confidence):** gemini's model request to `cloudcode-pa.googleapis.com` can't
+establish a TCP connection to Google's API frontend at ~03:30; with no short connect timeout it hangs
+to the 120s kill (zero tokens). Codex/OpenAI are on different infra and unaffected. NOT quota, NOT auth,
+NOT MCP, NOT machine-asleep.
+
+**Sub-cause NOT yet discriminated** (IPv6-to-Google nighttime breakage vs general Google-ASN
+reachability vs router/ISP nightly event). One daytime hint: `curl -6` to Google connected via an
+IPv4-**mapped** address (`::ffff:...`), suggesting native IPv6 to Google may already route oddly.
+
+**Shipped (uncommitted, repo):** `lib/cli_runners.py` — added `_probe_google_reachability()` +
+`_run_probe_cmd()`; on an AG timeout (gated behind `VAULT_CRITIC_AG_DEBUG=1`, run-once/process) it now
+appends a `===== CONNECTIVITY PROBE (post-timeout) =====` section to the capture file: IP-family-split
+`curl -4`/`curl -6` connect timing to both Google hosts + dig A/AAAA + an `api.openai.com` control.
++2 unit tests (`tests/test_cli_runners.py`, 20/20 pass). Probe smoke-tested live (daytime baseline good).
+Takes effect on tonight's run automatically (launchd re-imports the module per run; no reload needed).
+
+**NEXT SESSION — check after 03:30 2026-06-04:**
+1. Read the `===== CONNECTIVITY PROBE =====` section in the new `ag-timeout-2026-06-04T07-*.log`.
+   - `curl6 *.googleapis.com: PROBE-TIMEOUT` while `curl4` connects AND `api.openai.com` connects
+     → **IPv6-to-Google nighttime breakage** (fix: force gemini/undici to IPv4 at night, e.g.
+     `NODE_OPTIONS=--dns-result-order=ipv4first` or disable IPv6 on the egress path).
+   - BOTH curl4 and curl6 to Google PROBE-TIMEOUT while OpenAI control connects → **general Google-ASN
+     reachability** (ISP peering / router nightly event); fix is reschedule or provider change.
+   - Google connects fine in the probe but gemini still hung → the hang is inside the CLI's request
+     path, not the network; re-open the gemini-cli-internals angle.
+2. Regardless: oauth-personal EOL June 18 — migrate/replace the AG path (tickets logged).
+3. Then remove `VAULT_CRITIC_AG_DEBUG=1` from the plist.
+
+**Also shipped Session 4 — AG circuit breaker (budget protection, independent of root cause):**
+Codex+AG run in parallel per article, so a hung AG charges the full 120s to every article even after
+Codex finishes → 5×120s ate the whole 600s budget (only ~3 articles/night). Added a circuit breaker in
+`vault_critic.py run()`: after N consecutive AG failures, stop spawning AG (`antigravity_enabled=False`)
+and go Codex-only. Config `[agents.vault_critic].antigravity_circuit_threshold` = **1** (aggressive,
+while AG is dead); `--ag-circuit-threshold` overrides; 0 disables. Manifest gains `antigravity_skipped`.
+A successful AG resets the counter (transient failure won't trip it). 5 new tests; full suite 829 pass.
+VERIFY on the next nightly: manifest `antigravity_calls`≈1, `antigravity_skipped`≈N-1, more
+`articles_critiqued`, `duration_seconds` well under 600. Raise threshold to 2 once AG is healthy.

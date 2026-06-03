@@ -60,6 +60,14 @@ DEFAULT_MAX_TARGETS = 3
 DEFAULT_WALL_BUDGET_S = 600
 DEFAULT_PER_CLI_TIMEOUT_S = 120
 RECENT_TITLES_CONTEXT_LIMIT = 30
+# Anti-Gravity circuit breaker (2026-06-03) — Codex and AG run in PARALLEL per
+# article (asyncio.gather), so a hung AG call makes the whole article wait the
+# full per-CLI timeout (120s) even when Codex finished in seconds. When AG is
+# down (it has failed 5/5 nightly since 2026-05-26, contributing 0 tokens) those
+# 120s stalls drain the entire 600s wall budget and starve Codex of articles.
+# After this many CONSECUTIVE AG failures, stop spawning AG for the rest of the
+# run so remaining articles are Codex-only and fast. 0 disables the breaker.
+DEFAULT_AG_CIRCUIT_THRESHOLD = 2
 # Backfill lane (2026-05-27) — opportunistically drains the corpus of
 # orphan concepts/connections (those that predate vault_critic and never
 # got a Round-3 expansion). 5/run × ~7 nights/week ≈ 35/week, ~2 months
@@ -88,6 +96,11 @@ class CritiqueResult:
     antigravity_calls: int = 0
     antigravity_failures: int = 0
     antigravity_tokens_total: int = 0
+    # 2026-06-03 — articles for which AG was deliberately not invoked because the
+    # circuit breaker had tripped (N consecutive AG failures). These are NOT
+    # failures: Codex still ran. Lets the manifest distinguish "AG broke" from
+    # "AG intentionally skipped to protect the wall budget".
+    antigravity_skipped: int = 0
     # 2026-06-01 — persist the most-recent per-CLI failure text. The manifest
     # previously recorded only failure *counts*, so a 100%-failing CLI (e.g. the
     # Anti-Gravity 5-of-5 nightly failures) gave no clue *why* it failed. These
@@ -137,6 +150,7 @@ def write_critic_manifest(
         "codex_tokens_total": result.codex_tokens_total,
         "antigravity_calls": result.antigravity_calls,
         "antigravity_failures": result.antigravity_failures,
+        "antigravity_skipped": result.antigravity_skipped,
         "antigravity_tokens_total": result.antigravity_tokens_total,
         "codex_last_error": result.codex_last_error,
         "antigravity_last_error": result.antigravity_last_error,
@@ -217,12 +231,18 @@ async def critique_one_article(
     per_cli_timeout_s: int = DEFAULT_PER_CLI_TIMEOUT_S,
     include_standing_context: bool = True,
     additional_context: str = "",
+    antigravity_enabled: bool = True,
 ) -> tuple[Path | None, CLIResponse, CLIResponse]:
     """Critique one article via Codex + Anti-Gravity in parallel.
 
     Returns (expansion_path, codex_resp, antigravity_resp). expansion_path
     is None when BOTH CLIs failed (no point writing a placeholder file).
     The returned CLIResponses let the caller account counts + tokens.
+
+    `antigravity_enabled=False` skips the AG subprocess entirely (the circuit
+    breaker has tripped) and returns a synthetic skipped AG response — the
+    article runs Codex-only and the caller must account it as skipped, not
+    failed. This is what stops a hung AG from charging 120s to every article.
     """
     article_body = article_path.read_text(encoding="utf-8", errors="replace")
     title_match = _TITLE_FRONTMATTER_RE.search(article_body)
@@ -246,13 +266,22 @@ async def critique_one_article(
     )
 
     codex_task = run_codex(prompt, timeout_s=per_cli_timeout_s)
-    # Persist gemini's partial output on timeout to the agent-logs dir so a
-    # failing nightly/kickstart run leaves the decisive hang evidence behind.
-    ag_debug_dir = repo_root / "vault" / "90_system" / "agent-logs"
-    ag_task = run_antigravity(
-        prompt, timeout_s=per_cli_timeout_s, debug_log_dir=ag_debug_dir,
-    )
-    codex_resp, ag_resp = await asyncio.gather(codex_task, ag_task)
+    if antigravity_enabled:
+        # Persist gemini's partial output on timeout to the agent-logs dir so a
+        # failing nightly/kickstart run leaves the decisive hang evidence behind.
+        ag_debug_dir = repo_root / "vault" / "90_system" / "agent-logs"
+        ag_task = run_antigravity(
+            prompt, timeout_s=per_cli_timeout_s, debug_log_dir=ag_debug_dir,
+        )
+        codex_resp, ag_resp = await asyncio.gather(codex_task, ag_task)
+    else:
+        # Circuit breaker tripped — don't spawn (and wait on) a known-hung AG.
+        codex_resp = await codex_task
+        ag_resp = CLIResponse(
+            cli="antigravity", text="", tokens=None, duration_s=0.0,
+            exit_code=-1, rate_capped=False,
+            error="antigravity skipped (circuit breaker tripped)",
+        )
 
     # If both failed, do not write a useless expansion file.
     if not codex_resp.ok and not ag_resp.ok:
@@ -303,6 +332,7 @@ async def run(
     additional_context: str = "",
     backfill_max: int = DEFAULT_BACKFILL_MAX,
     backfill_include_connections: bool = True,
+    antigravity_circuit_threshold: int = DEFAULT_AG_CIRCUIT_THRESHOLD,
 ) -> CritiqueResult:
     """Orchestrate one vault_critic run end-to-end.
 
@@ -373,6 +403,9 @@ async def run(
     recent_titles = _read_recent_titles(repo_root, limit=RECENT_TITLES_CONTEXT_LIMIT)
     any_failure = False
     every_article_both_failed = True
+    # Anti-Gravity circuit breaker state (see DEFAULT_AG_CIRCUIT_THRESHOLD).
+    consecutive_ag_failures = 0
+    ag_tripped = False
 
     for fp, is_backfill in all_targets:
         if time.monotonic() - start >= wall_budget_s:
@@ -383,6 +416,7 @@ async def run(
             any_failure = True
             break
 
+        ag_enabled = not ag_tripped
         expansion_path, codex_resp, ag_resp = await critique_one_article(
             repo_root=repo_root,
             article_path=fp,
@@ -391,24 +425,46 @@ async def run(
             per_cli_timeout_s=per_cli_timeout_s,
             include_standing_context=include_standing_context,
             additional_context=additional_context,
+            antigravity_enabled=ag_enabled,
         )
 
         result.codex_calls += 1
-        result.antigravity_calls += 1
         if codex_resp.tokens:
             result.codex_tokens_total += codex_resp.tokens
-        if ag_resp.tokens:
-            result.antigravity_tokens_total += ag_resp.tokens
         if not codex_resp.ok:
             result.codex_failures += 1
             if codex_resp.error:
                 result.codex_last_error = codex_resp.error
             any_failure = True
-        if not ag_resp.ok:
-            result.antigravity_failures += 1
-            if ag_resp.error:
-                result.antigravity_last_error = ag_resp.error
-            any_failure = True
+
+        if not ag_enabled:
+            # Breaker already tripped — AG was not invoked for this article.
+            result.antigravity_skipped += 1
+        else:
+            result.antigravity_calls += 1
+            if ag_resp.tokens:
+                result.antigravity_tokens_total += ag_resp.tokens
+            if not ag_resp.ok:
+                result.antigravity_failures += 1
+                consecutive_ag_failures += 1
+                if ag_resp.error:
+                    result.antigravity_last_error = ag_resp.error
+                any_failure = True
+            else:
+                consecutive_ag_failures = 0
+            # Trip the breaker once AG fails this many times back-to-back, so the
+            # rest of the run skips the hung CLI and reclaims the wall budget.
+            if (
+                not ag_tripped
+                and antigravity_circuit_threshold > 0
+                and consecutive_ag_failures >= antigravity_circuit_threshold
+            ):
+                ag_tripped = True
+                result.warnings.append(
+                    f"antigravity circuit-breaker tripped after "
+                    f"{consecutive_ag_failures} consecutive failures; remaining "
+                    f"articles run Codex-only"
+                )
 
         if expansion_path is None:
             # Both CLIs failed for this article — don't reset
@@ -531,6 +587,13 @@ def main(argv: list[str] | None = None) -> int:
         help="Disable the backfill lane for this run. Equivalent to "
              "--backfill-max 0.",
     )
+    parser.add_argument(
+        "--ag-circuit-threshold", type=int, default=None, metavar="N",
+        help="Override `[agents.vault_critic].antigravity_circuit_threshold`. "
+             "After N consecutive Anti-Gravity failures, stop invoking AG for "
+             "the rest of the run (remaining articles go Codex-only) so a hung "
+             "AG stops draining the wall budget. 0 disables the breaker.",
+    )
     args = parser.parse_args(argv)
 
     cfg = load_config()
@@ -585,6 +648,12 @@ def main(argv: list[str] | None = None) -> int:
     backfill_include_connections = bool(
         critic_cfg.get("backfill_include_connections", True)
     )
+    if args.ag_circuit_threshold is not None:
+        ag_circuit_threshold = max(0, args.ag_circuit_threshold)
+    else:
+        ag_circuit_threshold = int(
+            critic_cfg.get("antigravity_circuit_threshold", DEFAULT_AG_CIRCUIT_THRESHOLD)
+        )
 
     if args.dry_run:
         header = "DRY RUN — Vault Critic (manual)" if manual_mode else "DRY RUN — Vault Critic"
@@ -603,6 +672,10 @@ def main(argv: list[str] | None = None) -> int:
             )
         print(f"Wall budget:   {args.wall_budget_seconds}s")
         print(f"CLI timeout:   {args.per_cli_timeout_seconds}s each")
+        print(
+            f"AG breaker:    trip after {ag_circuit_threshold} consecutive failures"
+            + (" (disabled)" if ag_circuit_threshold == 0 else "")
+        )
         if merged_context_paths:
             ctx_chars = len(additional_context)
             print(
@@ -651,6 +724,7 @@ def main(argv: list[str] | None = None) -> int:
             additional_context=additional_context,
             backfill_max=backfill_max,
             backfill_include_connections=backfill_include_connections,
+            antigravity_circuit_threshold=ag_circuit_threshold,
         ))
     except Exception as exc:
         logger.exception("vault_critic failed: %s", exc)
