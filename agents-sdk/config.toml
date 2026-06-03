@@ -330,7 +330,10 @@ wol_mac = "B4:E9:B8:F7:71:47"
 # 2026-05-24 via Topic 20 Phase 2 troubleshooting; `255.255.255.255`
 # limited broadcasts were silently dropped somewhere in the Deco backbone.
 wol_broadcast = "192.168.71.255"
-models = ["qwen3-vl:8b"]
+# gemma4_26b-32k added 2026-06-03 — Topic 20 Tier C soak ADOPTED (17/17 clean).
+# Bare tag (no :latest) so it matches the tag-stripped health-check name and
+# still resolves to :latest in /api/chat. See tier_c_batch_summarize below.
+models = ["qwen3-vl:8b", "gemma4_26b-32k"]
 
 # Task → model → machine mapping
 [routing.task_map]
@@ -368,6 +371,21 @@ comfyui_orchestration = { model = "none", machine = "alienware" }
 # kicks in only if Mac Mini is unreachable (explicit choice — a real
 # judge run on the paid path beats no judge).
 judge_layer = { model = "gemma4:e4b", machine = "mac_mini" }
+# Tier C batch route — fleet's first Tier C production model.
+# Topic 20 soak ADOPTED 2026-06-03: gemma4_26b-32k @ Alienware (RTX 5080 16GB)
+# passed 17/17 Pattern E datapoints clean (0 think-leak, 0 truncation, no
+# drift; mean ~29.6 tok/s, workload-bound). See
+# vault/20_projects/research/2026-06-03-topic-20-tier-c-soak-closeout.md.
+# BATCH / ASYNC ONLY — ~30 tok/s sustained, explicitly NOT for interactive use.
+# fallback = "none": the Alienware is offline ~16h/day (Pattern E manual wake,
+# 7am–5pm; remote wake is architecturally impossible on this hardware). The
+# global fallback_to_api=true would otherwise SILENTLY bill the paid Claude
+# API on every off-hours miss. This route fails fast (raises RouteUnavailable)
+# instead — no surprise cloud spend, no silent quality downgrade. A batch
+# consumer catches RouteUnavailable and defers to the next awake window.
+# No auto-consumer wired yet (2026-06-03) — manual / opt-in route. Plan:
+# agents-sdk/docs/plans/2026-06-03-tier-c-batch-route-wiring-plan.md
+tier_c_batch_summarize = { model = "gemma4_26b-32k", machine = "alienware", fallback = "none" }
 
 # ─── Notifications ───────────────────────────────────────────────────────────
 
