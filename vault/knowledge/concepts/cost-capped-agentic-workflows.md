@@ -2,10 +2,10 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - 00_inbox/tickets.md
+  - knowledge/concepts/cost-capped-agentic-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-06-02
-updated: 2026-06-02
+created: 2026-06-03
+updated: 2026-06-03
 ---
 
 ## Definition

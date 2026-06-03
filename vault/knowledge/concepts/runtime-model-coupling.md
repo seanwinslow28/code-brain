@@ -2,33 +2,31 @@
 title: "Runtime-Model Coupling"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-31-task-12-day-6-handoff.md
+  - health/tier-c-soak/2026-06-02/2026-05-21-topic-20-fleet-benchmark-planning-prompt.md
 tags: [auto-generated, phase-6]
-created: 2026-06-01
-updated: 2026-06-01
+created: 2026-06-03
+updated: 2026-06-03
 ---
 
 ## Definition
 
-Runtime-Model Coupling occurs when the structural schema of a data object must be expanded to expose internal state that was previously hidden from downstream consumers. In this case, the `ActionProposal` schema required a new `content_preview` field because the policy rules needed to inspect the actual draft text, not just metadata. Without this coupling, the judge layer operates on incomplete information, causing it to default to permissive outcomes like `ALLOW` because it cannot verify the content against the rules. This creates a dependency where the agent's output format must evolve in lockstep with the policy engine's inspection requirements.
+Runtime-Model Coupling describes the phenomenon where the operational stability of an agentic loop is inextricably linked to the specific inference characteristics of the underlying model, rather than just the code logic. When a model like Qwen enables 'thinking' modes or alters its token generation patterns, it introduces latency and state-management overhead that the surrounding automation infrastructure was not designed to absorb. This coupling creates a fragile dependency where the agent's reliability degrades not because of a bug in the orchestrator, but because the model's internal processing time exceeds the expected window for tool-calling synchronization. The invariant here is that agentic reliability is a function of the slowest component in the inference chain, making model selection a critical infrastructure decision rather than a mere performance metric.
 
 ## Context
 
-This matters to Sean because his job-hunt automation relies on a judge layer to ensure quality and compliance. If the judge cannot see the draft content, the entire safety mechanism is bypassed, leading to unvetted Substack posts. The fix required modifying the data contract between the drafter and the judge, highlighting how tightly coupled the agent's output structure is to the validation logic.
+Sean is building a multi-device fleet to benchmark models like Qwen 3.5/3.6 and Gemma 4. If he adopts a model that significantly slows down tool loops due to 'thinking' modes, his entire automation pipeline for job hunting and creative studio work will suffer from latency-induced failures. He must treat model selection as an infrastructure constraint, ensuring that the chosen model's runtime behavior aligns with the strict timing requirements of his automated workflows.
 
 ## Evidence
 
-> the eight original fields are all metadata, none carried the draft text the policy rules actually read
+> the potential for Qwen models to significantly slow down tool loops when 'thinking' mode is enabled
 
-> Without it the judge sees only metadata and always falls through to ALLOW
-
-> The Day-3 unit tests hid this by mocking the model response
+> the benchmark suite is designed to measure tool-calling correctness (using at least 20 prompts), tokens per second, memory footprint, agentic-loop reliability, and long-context degradation
 
 ## Examples
 
-- Added `content_preview: Optional[str] = None` to `ActionProposal` in `lib/judge/schema.py`
-- Renders `content_preview` in a fenced block in `_build_user_prompt` so the local model knows which text to review
+- Qwen models slowing down tool loops when 'thinking' mode is enabled
+- Benchmarking agentic-loop reliability alongside tokens per second
 
 ## Related Concepts
 
-[[Substack-Drafter agent]] [[Agent Health Monitoring]]
+[[Runtime-Model Coupling]] [[Automation Reliability]] [[System Constraints]]

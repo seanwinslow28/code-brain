@@ -1,0 +1,28 @@
+{
+  "antigravity_calls": 5,
+  "antigravity_failures": 5,
+  "antigravity_last_error": "antigravity timeout after 120s (capture: /Users/seanwinslow/Code-Brain/code-brain/vault/90_system/agent-logs/ag-timeout-2026-06-03T07-40-15.log)",
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 3,
+  "backfill_articles_critiqued": 2,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/crypto-pm-apm-targets-that-convert-the-block-referrals.md",
+    "vault/knowledge/expansions/cultural-fit-assessment.md"
+  ],
+  "codex_calls": 5,
+  "codex_failures": 0,
+  "codex_last_error": "",
+  "codex_tokens_total": 145240,
+  "duration_seconds": 610.17,
+  "error": "",
+  "expansions_written": [
+    "vault/knowledge/expansions/agent-rationalization.md",
+    "vault/knowledge/expansions/supervision-as-the-new-ai-edge.md",
+    "vault/knowledge/expansions/ai-fluency.md"
+  ],
+  "run_id": "2026-06-03T03:30:05",
+  "status": "partial",
+  "warnings": [
+    "wall budget 600s ran out after 5 articles"
+  ]
+}
