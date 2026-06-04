@@ -2,31 +2,31 @@
 title: "Runtime-Model Coupling"
 type: concept
 sources:
-  - health/tier-c-soak/2026-06-02/2026-05-21-topic-20-fleet-benchmark-planning-prompt.md
+  - knowledge/concepts/runtime-model-coupling.md
 tags: [auto-generated, phase-6]
-created: 2026-06-03
-updated: 2026-06-03
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Definition
 
-Runtime-Model Coupling describes the phenomenon where the operational stability of an agentic loop is inextricably linked to the specific inference characteristics of the underlying model, rather than just the code logic. When a model like Qwen enables 'thinking' modes or alters its token generation patterns, it introduces latency and state-management overhead that the surrounding automation infrastructure was not designed to absorb. This coupling creates a fragile dependency where the agent's reliability degrades not because of a bug in the orchestrator, but because the model's internal processing time exceeds the expected window for tool-calling synchronization. The invariant here is that agentic reliability is a function of the slowest component in the inference chain, making model selection a critical infrastructure decision rather than a mere performance metric.
+Runtime-model coupling is a structural dependency where an agent's operational stability and memory persistence are inextricably bound to a specific vendor's proprietary inference infrastructure. This coupling eliminates the need for external storage setup but introduces a single point of failure where changes to the vendor's memory tooling can break existing agent workflows without warning. The mechanism relies on the vendor's internal state management to handle persistence, effectively outsourcing the reliability of long-term memory to the provider's infrastructure rather than the developer's control.
 
 ## Context
 
-Sean is building a multi-device fleet to benchmark models like Qwen 3.5/3.6 and Gemma 4. If he adopts a model that significantly slows down tool loops due to 'thinking' modes, his entire automation pipeline for job hunting and creative studio work will suffer from latency-induced failures. He must treat model selection as an infrastructure constraint, ensuring that the chosen model's runtime behavior aligns with the strict timing requirements of his automated workflows.
+Sean is managing a fleet of 27 agents on local hardware, where infrastructure overhead is a critical constraint. By relying on Anthropic's native memory tool, he avoids the complexity of managing external databases but risks losing control over his agents' long-term knowledge base if the vendor changes their API or deprecates the feature.
 
 ## Evidence
 
-> the potential for Qwen models to significantly slow down tool loops when 'thinking' mode is enabled
+> The optimal long-term memory solution is Anthropic’s native `memory_20250818` tool paired with a thin cross-agent routing layer, providing immediate value by enabling cross-agent propagation while maintaining zero infrastructure overhead.
 
-> the benchmark suite is designed to measure tool-calling correctness (using at least 20 prompts), tokens per second, memory footprint, agentic-loop reliability, and long-context degradation
+> The computational cost of memory management is entirely offloaded to Anthropic's inference infrastructure, but the system is not without critical architectural limitations regarding vendor lock-in and API stability.
 
 ## Examples
 
-- Qwen models slowing down tool loops when 'thinking' mode is enabled
-- Benchmarking agentic-loop reliability alongside tokens per second
+- Migrating from fragmented `CLAUDE.md` files to a unified `/memories/fleet/` directory using Anthropic's native tool to ensure all agents share the same memory namespace.
+- Using a thin cross-agent routing layer to manage the `memory_20250818` tool, allowing lessons learned by one agent to be instantly accessible to others without manual intervention.
 
 ## Related Concepts
 
-[[Runtime-Model Coupling]] [[Automation Reliability]] [[System Constraints]]
+[[Control Plane / Data Plane Split for Agent Fleets]] [[Infrastructure Status]]

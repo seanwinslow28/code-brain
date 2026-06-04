@@ -2,36 +2,34 @@
 title: "Writing-voice-modes"
 type: concept
 sources:
-  - 40_knowledge/references/screenwriting-skill-building/voice-modes-integration-and-upgrade-plan.md
+  - 40_knowledge/references/ref-ai-writing-tell-humanaizer-skill.md
 tags: [auto-generated, phase-6]
-created: 2026-05-28
-updated: 2026-05-28
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Definition
 
-A hierarchical constraint system where voice modes operate strictly within the boundaries of format and clarity rules, rather than overriding them. This mechanism resolves conflicts by compressing or dialing down expressive elements to fit structural limits, ensuring that stylistic intent never breaks platform or audience requirements. The only exception is personal content where voice leads and format follows, establishing a dual-mode architecture for professional versus personal output.
+Writing-voice-modes is a structural intervention that separates the mechanical generation of text from the restoration of authorial identity. It operates by enforcing a multi-layered audit where vocabulary substitution is insufficient without addressing rhythmic monotony and false balance. The mechanism requires the writer to actively inject uncertainty, specific feelings, and first-person perspective to break the 'clean-but-voiceless' pattern inherent in standard AI outputs. This creates a dependency on the writer's emotional recall rather than just their editorial judgment.
 
 ## Context
 
-Sean's screenwriting background provides the 'cut-to' and 'hard juxtaposition' instincts, but this skill upgrade plan reveals a gap: he lacks the specific craft mechanics to calibrate his voice across different professional contexts like API docs versus personal essays. Understanding this hierarchy prevents him from applying 'Gonzo' energy to technical documentation where it would fail.
+Sean is building a personal knowledge vault and job-hunt infrastructure that relies heavily on AI-assisted drafting. Without this mode, his professional communications risk becoming indistinguishable from generic content, undermining the 'human layer' that performs 12% better in AI search citations. He needs to ensure his 'soul' is restored before publishing to maintain the authenticity required for his creative-studio and job-hunt narratives.
 
 ## Evidence
 
-> Voice modes operate WITHIN format constraints, not over them.
+> AI text has fingerprints — and most people don’t know how to remove them.
 
-> If creative-writing says a Twitter thread is 5-10 tweets at 280 chars max, Gonzo mode doesn't get to blow past that.
+> Clean-but-voiceless writing is still dead writing.
 
-> If technical-writing says front-load the conclusion, Beat Flow mode doesn't bury it under a sensory cascade.
-
-> The one exception: Personal essays and blog posts on Sean's own site. Here, voice modes lead and format follows.
+> AI-assisted content that is well-edited performs 12% better in AI search citations than purely human-written content.
 
 ## Examples
 
-- Compressing a cold open into 12 words: 'I DEPLOYED TO PRODUCTION at 11:47 PM on a Wednesday.'
-- Dialing humor to 20-40% in API docs, keeping dry wit in examples but never in critical path commands.
-- Using one sensory image maximum in short-form formats like tweets or Slack messages.
+- Layer 1: vocabulary blacklist
+- Layer 2: structural pattern diagnosis
+- Layer 3: the rare one. It puts soul back in — opinions, uncertainty, first person, specific feelings.
 
 ## Related Concepts
 
-[[Screenplay Craft Architect]] [[Vibe-Coding Interview Format]] [[Two Audiences]]
+[[Agent Health]] [[Context Management as a Bottleneck]]

@@ -2,31 +2,34 @@
 title: "Agentic Engineering"
 type: concept
 sources:
-  - 40_knowledge/references/ref-the-dawn-of-agentic-animation.md
+  - 40_knowledge/references/ref-opus-4-8-prompting-playbook-2026.md
 tags: [auto-generated, phase-6]
-created: 2026-05-31
-updated: 2026-05-31
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Definition
 
-Agentic engineering is the discipline of designing systems where AI agents operate as semi-autonomous crew members, requiring robust infrastructure for intent specification, tool integration, and failure recovery. It involves defining the boundaries of agent autonomy, ensuring they can safely interact with external tools like Blender or web browsers, and establishing the 'dither' mechanisms that allow humans to intervene when stochastic behavior deviates from desired outcomes. This field demands a shift from writing deterministic code to writing probabilistic constraints and oversight protocols.
+Agentic engineering is the discipline of designing, building, and maintaining systems where AI agents operate autonomously or semi-autonomously to achieve complex goals, often involving coordination with other agents and external tools. It moves beyond simple task automation to encompass the architecture of agent interactions, decision-making logic, error handling, and the integration of dynamic capabilities like self-orchestration and parallel execution. This field requires a deep understanding of both the underlying models and the systemic properties of multi-agent environments.
 
 ## Context
 
-Sean is building a 'Personal Agentic Intent Engineering' system and a 'Vault as Agent Infrastructure.' This concept defines the technical backbone of his current projects, linking his creative studio workflows with his job-hunt narrative of being a 'Project CTO' who understands the underlying mechanics of agentic systems.
+Sean's interest in 'Project CTO' and 'Simon AI' aligns directly with agentic engineering. He needs to articulate how he can build and manage systems that are not just reactive but proactive and adaptive, leveraging the latest capabilities like dynamic workflows to create superior user experiences and operational efficiencies.
 
 ## Evidence
 
-> OpenClaw is an AI assistant built on top of existing large language models that, as its website says, 'actually does things.'
+> Anthropic engineers have been using this as a daily driver for months. The rest of the world found out yesterday.
 
-> There is already emerging including a product called 3D-Agent that claims to be a simple way to connect natural language commands to Blender using Claude.
+> Opus 4.8 is the model Anthropic is betting its near-trillion-dollar story on.
+
+> The ability for Claude to write its own orchestration scripts, spin up parallel subagents, and scale test-time compute trivially.
 
 ## Examples
 
-- Agents deleting inboxes or harassing users when risks are not managed.
-- Agents operating Blender/Maya/Houdini semi-autonomously as crew members.
+- Claude Code's ability to write its own orchestration scripts.
+- The use of parallel subagents to scale test-time compute.
+- Anthropic's internal adoption of dynamic workflows as a standard practice.
 
 ## Related Concepts
 
-[[Personal Agentic Intent Engineering]] [[Vault as Agent Infrastructure]]
+[[Supervision as the New AI Edge]] [[Context Management as a Bottleneck]] [[Dynamic Workflows]]

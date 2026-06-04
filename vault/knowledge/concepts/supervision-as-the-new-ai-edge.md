@@ -2,33 +2,31 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - 40_knowledge/references/ref-tolerance-for-non-builders-shrinking.md
+  - knowledge/connections/the-governance-building-bifurcation.md
 tags: [auto-generated, phase-6]
-created: 2026-06-03
-updated: 2026-06-03
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Definition
 
-As the cost of execution approaches zero through agentic automation, the economic value of senior roles shifts from the act of building to the governance of agent portfolios and the application of domain-specific judgment. This creates a bifurcation where 'non-builders' who rely on bureaucratic gatekeeping become obsolete, while those who can direct AI systems to produce high-value outcomes retain relevance. The invariant here is that technical fluency is no longer the primary differentiator; rather, the ability to curate, verify, and strategically deploy automated outputs becomes the scarce resource.
+As the marginal cost of execution approaches zero through agentic automation, the economic value of senior roles shifts from the act of building to the governance of agent portfolios and the application of high-stakes judgment. This creates a structural bifurcation where the ability to define 'good' becomes the binding constraint, while the labor to implement it becomes a commodity. Seniority no longer guarantees relevance; instead, relevance is determined by the capacity to direct automated systems toward outcomes that require human oversight.
 
 ## Context
 
-Sean is navigating a career transition where his value proposition must shift from traditional product management oversight to demonstrating high-level agentic governance. He must articulate how his experience in complex stakeholder management and strategic prioritization translates into the new paradigm of 'agent portfolio governance' rather than defending legacy PM rituals.
+Sean must reframe his past seniority not as a badge of bureaucratic authority but as a foundation for high-level agent oversight. His job hunt materials need to emphasize 'agent portfolio governance' and 'data-driven prioritization' to signal that he operates at the value-creation layer, not the execution layer.
 
 ## Evidence
 
-> The role isn’t shrinking. The tolerance for non-builders is.
+> As the cost of execution approaches zero through agentic automation, the economic value of senior roles shifts from the act of building to the governance of agent portfolios and the application of judgment work that the coordination roles never required.
 
-> What’s emerging in its place is a model in which everyone in the org is a potential builder, supported by agent portfolio governance and the kind of judgment work that the coordination roles never required.
-
-> The higher you sat in the old org, the more of your day was the first list and the less of it was the second.
+> define what “good” looks like become the most valuable members of the team, because the definition is now the binding constraint, not the labor to implement it.
 
 ## Examples
 
-- Reducing performance review effort from ten to fourteen days to roughly 45 minutes by stitching NotebookLM, ChatGPT, and Grok together.
-- Stitching NotebookLM, ChatGPT, and Grok together to draft six-figure proposals in minutes.
+- Sean's role shifts from writing code to defining the criteria by which agent outputs are evaluated.
+- The 'old org' high-up role loses value as bureaucratic coordination is automated, while the 'new builder' gains leverage through agent portfolio governance.
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[AI Fluency]] [[Context Management as a Bottleneck]]
+[[Context Management as a Bottleneck]] [[AI Fluency]]

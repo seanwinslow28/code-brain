@@ -2,31 +2,30 @@
 title: "Confluence Overhaul Plan"
 type: concept
 sources:
-  - knowledge/concepts/confluence-overhaul-plan.md
+  - knowledge/connections/operational-knowledge-vs-static-documentation.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Definition
 
-A strategy to improve internal documentation and knowledge management systems, ensuring teams have access to accurate information and resources. It enhances operational efficiency by streamlining internal communication and documentation processes.
+The Confluence Overhaul Plan represents a traditional approach to documentation management that implies a periodic cleanup or static improvement effort. This framing contradicts the dynamic nature of Knowledge-Centered Service, which views documentation as a continuous byproduct of work rather than a discrete project. The plan focuses on improving documentation as a general goal, which lacks the specificity of a concrete 'docs operating model' with named failure modes. This static view fails to account for the operational context that gives documents their meaning in a fast-moving engineering environment.
 
 ## Context
 
-This is especially relevant to Sean's work on knowledge infrastructure, as it ensures efficient access to information within teams — a critical component of his job-hunt and creative-studio workflows.
+Sean can propose a 'docs operating model' with named failure modes instead of a generic overhaul, aligning with KCS principles.
 
 ## Evidence
 
-> A strategy to improve internal documentation and knowledge management systems, ensuring teams have access to accurate information and resources.
+> Current concept says 'improve documentation'; this would let him ship a concrete 'docs operating model' with named failure modes.
 
-> This plan enhances operational efficiency by streamlining internal communication and documentation processes.
+> contradicts the current “overhaul plan” framing, which implies a periodic cleanup.
 
 ## Examples
 
-- Internal knowledge base updates
-- Team collaboration tools
+- Shipping a concrete 'docs operating model' with named failure modes.
 
 ## Related Concepts
 
-[[Revenue Integration]] [[AI Product Manager]]
+[[Knowledge-Centered Service]] [[Operating-model interview]]

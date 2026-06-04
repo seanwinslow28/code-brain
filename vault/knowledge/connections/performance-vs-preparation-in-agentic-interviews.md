@@ -4,14 +4,14 @@ type: connection
 connects:
   - Confidence Rituals
   - Vibe-Coding Interview
-  - Portfolio Projects
-created: 2026-06-03
-updated: 2026-06-03
+  - Agentic Engineering Signal
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Synthesis
 
-The tension between backstage preparation and front-stage performance creates a critical gap in how Sean presents his agentic engineering skills. If he relies solely on internal confidence rituals, he fails to manage the interviewer's perception of his ability to stabilize ambiguity. This gap means that even strong technical mastery may be misinterpreted as flailing if the performance script is missing. The consequence is that Sean risks sounding like he is coping with nerves rather than deliberately shaping the collaborative room, undermining his credibility as a senior engineer.
+The tension between backstage preparation and front-stage performance creates a critical gap in how Sean presents his agentic engineering skills. If he relies solely on internal confidence metrics, he fails to demonstrate the external control architecture that employers actually evaluate. This gap forces a shift from proving competence through static artifacts to demonstrating it through dynamic, real-time negotiation of the interview situation. The consequence is that without structured disclosure rituals, his technical depth remains invisible to hiring managers who prioritize immediate operational judgment over historical proof.
 
 ## Threads
 
@@ -21,14 +21,14 @@ The tension between backstage preparation and front-stage performance creates a 
 
 ### [[Vibe-Coding Interview]]
 
-> Vibe-coding interviews reward transparency, but raw transparency can read as flailing.
+> Vibe-coding interviews serve dual purposes — testing real-time coding skills and assessing cultural fit through interpersonal dynamics. This makes them a nexus for life-systems (communication) and job-hunt-2026 (outcome delivery).
 
-### [[Portfolio Projects]]
+### [[Agentic Engineering Signal]]
 
-> It would let Sean decide which stories deserve airtime, instead of rehearsing generic prompts or relying on mood management.
+> Agentic engineering requires demonstrating the ability to leverage AI tools for rapid iteration and outcome delivery, shifting the evaluation from static code to dynamic process management.
 
 ## Implications
 
-- Sean must develop specific 'recovery lines' and 'how I want you to read my silence' scripts to control the narrative during technical demonstrations.
-- He needs to map his portfolio projects to specific interview competencies to provide concrete evidence of mastery rather than relying on vague confidence.
-- The interview strategy must shift from demonstrating knowledge to demonstrating the process of managing uncertainty and making operational judgments.
+- Sean must replace static portfolio reviews with live, narrated problem-solving sessions that explicitly model his decision-making tradeoffs.
+- Interview preparation must include scripting for uncertainty disclosure rather than just rehearsing known answers to technical questions.
+- The definition of 'competence' in 2026 hiring shifts from 'knowing the answer' to 'managing the ambiguity of not knowing' with operational precision.

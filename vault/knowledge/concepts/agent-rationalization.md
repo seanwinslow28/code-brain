@@ -2,10 +2,10 @@
 title: "Agent Rationalization"
 type: concept
 sources:
-  - 40_knowledge/references/ref-tokenmaxxing-dead-end-agent-portfolios.md
+  - knowledge/concepts/agent-rationalization.md
 tags: [auto-generated, phase-6]
-created: 2026-06-03
-updated: 2026-06-03
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean is building a complex agent fleet for his job hunt and creative studio. Wit
 
 ## Related Concepts
 
-[[Token Waste]] [[Supervision as the New AI Edge]] [[Context Management as a Bottleneck]]
+[[Token Waste]] [[Supervision as the New AI Edge]]
