@@ -144,3 +144,37 @@ while AG is dead); `--ag-circuit-threshold` overrides; 0 disables. Manifest gain
 A successful AG resets the counter (transient failure won't trip it). 5 new tests; full suite 829 pass.
 VERIFY on the next nightly: manifest `antigravity_calls`≈1, `antigravity_skipped`≈N-1, more
 `articles_critiqued`, `duration_seconds` well under 600. Raise threshold to 2 once AG is healthy.
+
+---
+
+## Session 5 — 2026-06-04 results (both fixes verified)
+
+**Circuit breaker: WORKS.** `critic-manifest-2026-06-04.json`: antigravity_calls=1, antigravity_skipped=7,
+codex_calls=8, articles_critiqued=3 + backfill 5 = **8 total** (was 5 on 6/03), codex_tokens=260K
+(was 145K), duration=**323s** (was 610s). Warning: "antigravity circuit-breaker tripped after 1
+consecutive failures". Throughput up ~60%, wall budget no longer starved.
+
+**Network-reachability root cause: REFUTED by the 6/04 probe.** Only one ag-timeout capture (breaker
+trips after the first failure → run-once probe fired on it). The `CONNECTIVITY PROBE` section, captured
+AT the 120s-timeout moment, shows the network was FULLY UP during the hang:
+  curl4 cloudcode-pa.googleapis.com: http=404 connect=0.023s
+  curl6 cloudcode-pa.googleapis.com: http=404 connect=0.026s
+  curl4 play.googleapis.com:         http=404 connect=0.016s
+  curl6 play.googleapis.com:         http=404 connect=0.014s
+  curl4 api.openai.com (control):    http=421 connect=0.066s
+Both Google hosts reachable on BOTH families in ~15-26ms while gemini's model request hung to 120s / 0
+tokens. This run's Clearcut flush even got an HTTP 400 (connected) rather than a connect-timeout. So the
+6/03 play.googleapis.com `UND_ERR_CONNECT_TIMEOUT` was an intermittent telemetry-endpoint red herring,
+NOT a signal about the model host.
+
+**Where that leaves it:** eliminated = MCP, OAuth-refresh, machine-asleep, raw network reachability,
+and swallowed-429 (no quota strings). What remains is the authenticated Code Assist *streaming* call
+silently hanging (server-side throttle-as-hang on the preview model, or a gemini-cli stream bug) —
+caveat: curl-reachable ≠ authed-call-works, and the CLI swallows the real error, so more --debug
+captures won't reveal more. **Decision: stop chasing the gemini hang.** The breaker contains it at $0
+cost and the **June-18 oauth-personal EOL** obsoletes the entire path. Next action is the migration
+decision (drop AG / GEMINI_API_KEY / Antigravity CLI), not more debugging.
+
+**Cleanup pending:** `VAULT_CRITIC_AG_DEBUG=1` can now be removed from the plist (the probe has given
+its verdict) — but it's harmless (1 capture + ~10s probe per night) and confirms the breaker each
+night, so leaving it until the migration is also fine. The run-once probe is gated behind it.
