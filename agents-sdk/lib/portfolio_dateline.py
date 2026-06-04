@@ -360,11 +360,28 @@ def commit_and_push(
             return f"commit failed: {commit.stderr.strip()[:160]}"
         if not do_push:
             return "committed (push disabled — auto_push=false)"
-        # Rebase on origin/main first so a remote-ahead state doesn't reject.
-        _git(["pull", "--rebase", "--autostash", "origin", "main"], worktree, timeout=90)
-        push = _git(["push", "origin", "main"], worktree, timeout=90)
+        # Sync to the latest origin/main, then push the commit we just made.
+        # GitHub PR merges advance origin/main between runs, so rebase our
+        # commit onto it to avoid a non-fast-forward. Push HEAD explicitly —
+        # NOT the local `main` ref: the rebase detaches HEAD, and pushing the
+        # stale local `main` (left behind origin once PRs merge) is a
+        # guaranteed non-fast-forward. That ref mismatch was the long-standing
+        # cause of the silent morning "PUSH FAILED" — the good commit stranded
+        # on a detached HEAD while the diverged branch ref was rejected.
+        rebase = _git(["pull", "--rebase", "--autostash", "origin", "main"], worktree, timeout=90)
+        if rebase.returncode != 0:
+            _git(["rebase", "--abort"], worktree)
+            return f"committed; REBASE-ON-ORIGIN FAILED (not pushed): {rebase.stderr.strip()[:160]}"
+        push = _git(["push", "origin", "HEAD:main"], worktree, timeout=90)
         if push.returncode != 0:
-            return f"committed; PUSH FAILED (check launchd credentials): {push.stderr.strip()[:160]}"
+            # A rejected push is a git-level failure (non-fast-forward, etc.),
+            # not necessarily a credential problem — surface the real stderr.
+            return f"committed; PUSH FAILED (git rejected — not a credential hang): {push.stderr.strip()[:200]}"
+        # Reattach the worktree to a local `main` aligned with what we just
+        # pushed, so the next run starts on a clean, fast-forwarded branch
+        # instead of a detached HEAD that would strand the next commit.
+        _git(["branch", "-f", "main", "HEAD"], worktree)
+        _git(["checkout", "main"], worktree)
         return "committed + pushed to main"
     except subprocess.TimeoutExpired:
         return "git timed out (likely a credential prompt — push left unattended-safe)"
@@ -400,6 +417,30 @@ def _validate_portfolio(worktree: Path, *, timeout: int = 120) -> tuple[bool, st
     return False, tail[-500:]
 
 
+def _sync_worktree_to_origin(worktree: Path) -> tuple[bool, str]:
+    """Hard-reset the bot-owned worktree to the latest ``origin/main`` on a
+    clean ``main`` branch *before* rendering.
+
+    The portfolio's ``public/api/*.json`` are bot-owned outputs. Building from
+    a fresh ``origin/main`` every morning means the run always overwrites the
+    latest merged state cleanly, so the post-commit push is a plain
+    fast-forward — no stale/detached ref, and no rebase conflict even if a PR
+    touched those files between runs. ``checkout -f`` discards any leftover
+    local state (e.g. a half-written file from a crashed run) and reattaches
+    ``main`` if a prior run left HEAD detached.
+
+    Best-effort and non-fatal: on any failure (offline, no remote, not a git
+    dir) the caller proceeds and ``commit_and_push``'s post-commit rebase still
+    guards against a remote-ahead reject. Returns (ok, reason)."""
+    fetch = _git(["fetch", "origin", "main"], worktree, timeout=90)
+    if fetch.returncode != 0:
+        return False, f"fetch failed: {fetch.stderr.strip()[:160]}"
+    checkout = _git(["checkout", "-f", "-B", "main", "origin/main"], worktree)
+    if checkout.returncode != 0:
+        return False, f"checkout failed: {checkout.stderr.strip()[:160]}"
+    return True, ""
+
+
 def run_publish(config, *, logger=None) -> str:
     """Daily-Driver morning post-step: render + write + validate + commit/push.
 
@@ -422,6 +463,14 @@ def run_publish(config, *, logger=None) -> str:
     if not worktree.exists():
         _log(f"worktree not found at {worktree} (create it to activate); skipping")
         return "no-worktree"
+
+    # Start from the latest origin/main so we always render over the newest
+    # merged state on a clean, non-detached `main` (best-effort — see helper).
+    synced, sync_err = _sync_worktree_to_origin(worktree)
+    if synced:
+        _log("worktree synced to origin/main")
+    else:
+        _log(f"worktree sync skipped ({sync_err}); proceeding — push step still rebases")
 
     api_dir = worktree / pcfg.get("api_subpath", "public/api")
     rendered = publish(
