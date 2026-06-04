@@ -2,33 +2,30 @@
 title: "Boundary Object Theory"
 type: concept
 sources:
-  - knowledge/expansions/confluence-overhaul-plan.md
+  - knowledge/connections/operational-knowledge-vs-static-documentation.md
 tags: [auto-generated, phase-6]
-created: 2026-06-03
-updated: 2026-06-03
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Definition
 
-Boundary Object Theory posits that documents are not neutral information containers but flexible artifacts that different teams interpret differently while pretending they mean the same thing. This mechanism explains why AI knowledge systems fail when they summarize documents without modeling the specific needs and interpretations of various stakeholders. The tension arises because a PRD, metric definition, or architecture diagram serves as a 'boundary object' that translates between engineering, product, and business domains, often losing fidelity in the process. Effective knowledge management requires explicit handling of these translation artifacts to prevent the 'translation loss' that occurs when a single summary is forced to serve multiple conflicting mental models.
+Boundary Object Theory posits that documents are not neutral information containers but flexible artifacts that different teams interpret differently while pretending they mean the same thing. This mechanism creates a shared reference point that allows diverse groups to collaborate without requiring full consensus on meaning, effectively masking the underlying semantic divergence. The theory suggests that the utility of a document lies in its ability to sustain this pretense of shared understanding across disciplinary boundaries. When AI systems summarize these documents, they often strip away the contextual cues that allow different stakeholders to project their own meanings onto the artifact.
 
 ## Context
 
-Sean can leverage this theory to sound less like a generic PM and more like a strategic thinker who understands the sociotechnical complexity of AI systems. By arguing that AI knowledge systems fail when they ignore the 'boundary object' nature of documents, he can propose a Substack essay or interview artifact that highlights the importance of modeling stakeholder intent. This positions him as someone who can bridge the gap between technical implementation and organizational reality, a key skill for AI-PM roles.
+Sean can use this to explain why AI summaries often fail to capture the 'boundary object' nature of original documents, leading to 'translation loss' in stakeholder communication.
 
 ## Evidence
 
 > Docs are not just information containers; they are boundary objects that different teams use differently while pretending they mean the same thing.
 
-> AI knowledge systems fail when they summarize documents without modeling who needs the document to mean what.
-
-> Add explicit handling for translation artifacts: PRDs, metric definitions, launch checklists, architecture diagrams, roadmap narratives, and glossary entries.
+> Boundary Object Theory posits that documents are not neutral information containers but flexible artifacts that different teams interpret differently while pretending they mean the same thing.
 
 ## Examples
 
-- A Substack essay or AI-PM interview artifact arguing that AI knowledge systems fail when they summarize documents without modeling who needs the document to mean what.
-- A Confluence audit runbook that diagnoses knowledge rot by artifact class, identifying where translation artifacts are causing misalignment between teams.
+- PRDs, metric definitions, launch checklists, architecture diagrams, roadmap narratives, and glossary entries serve as boundary objects.
 
 ## Related Concepts
 
-[[Cross-domain bridging]] [[AI Product Manager]] [[Context Management as a Bottleneck]]
+[[Knowledge-Centered Service]] [[Context Management as a Bottleneck]]

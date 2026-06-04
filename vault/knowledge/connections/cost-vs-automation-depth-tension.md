@@ -5,8 +5,8 @@ connects:
   - Cost-Capped Agentic Workflows
   - Agent Health Monitoring
   - Vault Maintenance
-created: 2026-06-03
-updated: 2026-06-03
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Synthesis

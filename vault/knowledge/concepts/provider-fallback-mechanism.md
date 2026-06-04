@@ -2,31 +2,31 @@
 title: "Provider Fallback Mechanism"
 type: concept
 sources:
-  - health/tier-c-soak/2026-06-02/2026-05-21-topic-16-pi-ollama-integration-chatgpt-manual.md
+  - knowledge/concepts/provider-fallback-mechanism.md
 tags: [auto-generated, phase-6]
-created: 2026-06-03
-updated: 2026-06-03
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Definition
 
-A Provider Fallback Mechanism is a resilience pattern where an agent system is configured to automatically switch inference providers when the primary source fails to meet reliability or availability thresholds. This mechanism requires explicit configuration of alternative endpoints and often involves a hierarchy of trust and performance, where local providers are preferred for speed but cloud providers serve as a stable backup. The tension lies in the complexity of maintaining consistent tool-calling behavior across different provider implementations, as variations in API compliance can break the agent's ability to execute complex tasks.
+This architecture implements a specialized handler that intercepts complex, multi-step research tasks exceeding the primary queue's scope, routing them to a more capable external agent to prevent system stalls. By separating concerns, the primary queue maintains efficiency while offloading heavy lifting to an external agent capable of autonomous planning and synthesis. This mechanism acts as a safety valve for the primary system's limitations, ensuring that compound topics receive detailed, cited reports without manual intervention. The reliance on the external agent's ability to autonomously plan and synthesize information creates a dependency on that agent's specific capabilities and availability.
 
 ## Context
 
-Sean's vault infrastructure depends on continuous operation. If the local Ollama instance becomes unresponsive or the model unloads unexpectedly, the agent must seamlessly degrade to a cloud provider without losing the thread of the current task. This ensures that the knowledge synthesis process remains uninterrupted despite local infrastructure volatility.
+Sean integrates this handler to ensure his vault receives high-quality, grounded information for complex queries without overwhelming the primary queue. By offloading heavy research to Gemini, he prevents the primary queue from being overwhelmed by tasks it cannot handle effectively, allowing him to maintain a high standard of output without manually intervening in every research task.
 
 ## Evidence
 
-> The report concludes by suggesting that users monitor for truncation issues and provides a template for a fallback configuration to Anthropic should the local provider fail.
+> Gemini Deep Research is the designated handler for complex, multi-step research tasks that exceed the scope of Local Deep Research.
 
-> For performance and reliability, the report highlights that context window management (via `num_ctx`) must be handled within the Ollama `Modelfile` rather than the Pi config.
+> The Gemini Deep Research Agent autonomously plans, executes, and synthesizes multi-step research tasks.
 
 ## Examples
 
-- Providing a template for a fallback configuration to Anthropic should the local provider fail.
-- Monitoring for truncation issues that might necessitate a switch to a provider with a larger context window.
+- Multi-step research tasks
+- Complex information landscapes
 
 ## Related Concepts
 
-[[Runtime-Model Coupling]] [[Infrastructure Status]]
+[[Deep Research Queue]] [[System Constraints]]

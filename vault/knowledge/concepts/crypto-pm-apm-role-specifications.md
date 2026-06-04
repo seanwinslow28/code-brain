@@ -2,15 +2,15 @@
 title: "Crypto PM/APM Role Specifications"
 type: concept
 sources:
-  - knowledge/expansions/crypto-pm-apm-role-specifications.md
+  - knowledge/concepts/crypto-pm-apm-role-specifications.md
 tags: [auto-generated, phase-6]
-created: 2026-06-03
-updated: 2026-06-03
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Definition
 
-This concept defines a specialized product management framework where the core competency shifts from traditional user experience optimization to the design of on-chain telemetry and market mechanisms. It requires the practitioner to treat product surfaces as economic systems, necessitating a deep understanding of incentive structures, liquidity dynamics, and regulatory ambiguity. The role demands the ability to instrument protocol behavior directly through tools like Dune Analytics rather than relying on standard business intelligence dashboards. This creates a distinct professional identity that bridges technical infrastructure, economic theory, and legal compliance.
+This framework redefines product management in decentralized environments as the design of on-chain telemetry and economic mechanisms rather than traditional user experience optimization. It requires the practitioner to treat product surfaces as markets, necessitating a deep understanding of incentive structures, liquidity dynamics, and regulatory ambiguity. The role demands the ability to instrument protocol behavior directly through tools like Dune Analytics rather than relying on standard business intelligence dashboards. This creates a distinct professional identity that bridges technical infrastructure, economic theory, and legal compliance.
 
 ## Context
 

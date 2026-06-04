@@ -3,15 +3,15 @@ title: "The Tension Between Protocol Instrumentation and Regulatory Ambiguity"
 type: connection
 connects:
   - Crypto PM/APM Role Specifications
-  - Target Role Specs for 2026
-  - Portfolio Projects for Interview Prep
-created: 2026-06-03
-updated: 2026-06-03
+  - The Tension Between Protocol Instrumentation and Regulatory Ambiguity
+  - Market Positioning
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the need for real-time, on-chain product telemetry and the static, often opaque nature of regulatory compliance in crypto. While mechanism-design PMs must optimize for liquidity and incentive alignment in real-time, they simultaneously operate under legal ambiguity that requires cautious, pre-launch risk triage. This creates a professional bottleneck where the most valuable product insights (on-chain data) are often the hardest to translate into compliant, hireable artifacts without becoming a lawyer. The consequence is that successful crypto PMs must master two distinct languages: the dynamic logic of market design and the static logic of legal risk.
+There is a fundamental tension between the need for real-time, on-chain product telemetry and the static, often opaque nature of regulatory compliance in crypto. While mechanism-design PMs must instrument protocol behavior directly to prove product viability, they must simultaneously navigate legal ambiguity regarding custody, disclosures, and jurisdictional rollout. This creates a dual constraint where the product surface is both a market requiring economic reasoning and a legal entity requiring compliance sensemaking. The consequence is that Sean cannot rely on standard SaaS product management playbooks, as they do not account for the intersection of incentive structures and regulatory risk.
 
 ## Threads
 
@@ -19,15 +19,15 @@ There is a fundamental tension between the need for real-time, on-chain product 
 
 > The PM must design under legal ambiguity without becoming a lawyer, adding criteria for regulatory sensemaking such as custody, disclosures, and jurisdictional rollout.
 
-### [[Target Role Specs for 2026]]
+### [[The Tension Between Protocol Instrumentation and Regulatory Ambiguity]]
 
-> Include: trigger type, timing, what to gate, what the free dashboard should contain, and progressive profiling sequence.
+> There is a fundamental tension between the need for real-time, on-chain product telemetry and the static, often opaque nature of regulatory compliance in crypto.
 
-### [[Portfolio Projects for Interview Prep]]
+### [[Market Positioning]]
 
-> A portfolio one-pager or interview artifact titled 'How I’d Measure Product-Market Fit for a Crypto Product Without Waiting for BI.'
+> By articulating this specific 'mechanism-design' and 'telemetry' capability, he differentiates himself from candidates who only possess surface-level 'web3 knowledge.'
 
 ## Implications
 
-- Sean should prioritize interview artifacts that explicitly map on-chain metrics to compliance boundaries, demonstrating he can ship product without triggering legal risk.
-- Job hunt strategy must emphasize 'regulatory sensemaking' as a differentiator, as few candidates can articulate the intersection of Dune Analytics data and custody risk.
+- Sean must develop a portfolio that explicitly demonstrates how he balances real-time telemetry with regulatory constraints, rather than just showcasing UX improvements.
+- Interview narratives should focus on 'regulatory sensemaking' as a core product competency, distinguishing him from candidates who view compliance as a post-launch legal hurdle.
