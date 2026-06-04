@@ -5,8 +5,8 @@ connects:
   - Competitive Analysis
   - Value Chain / Activity System Mapping
   - Market Positioning
-created: 2026-06-03
-updated: 2026-06-03
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Synthesis

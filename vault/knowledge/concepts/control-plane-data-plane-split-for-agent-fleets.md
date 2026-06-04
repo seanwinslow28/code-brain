@@ -2,30 +2,30 @@
 title: "Control Plane / Data Plane Split for Agent Fleets"
 type: concept
 sources:
-  - knowledge/expansions/agent-ops-fdp-backup-track.md
+  - knowledge/connections/control-plane-stability-vs-data-plane-drift.md
 tags: [auto-generated, phase-6]
-created: 2026-06-03
-updated: 2026-06-03
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Definition
 
-This architectural invariant separates the agent system into two distinct layers: the control plane, which manages scheduling, authorization, and halting logic, and the data plane, where agents execute specific tasks like reading vault artifacts or generating summaries. This separation allows the control layer to remain stable and observable while the data layer handles variable workloads and transient state mutations. By isolating these concerns, operators can apply different reliability guarantees to each layer, ensuring that the decision-making logic for agent lifecycle does not become entangled with the execution logic of individual agent runs.
+This architectural invariant separates the agent system into two distinct layers: the control plane, which manages scheduling, authorization, and halting logic, and the data plane, where agents actually read/write vault artifacts, run research, generate summaries, or mutate files. The stability of the control plane is often assumed to be static, yet it must interface with a data plane that experiences inherent volatility due to user changes or agent mutations. When the control plane assumes a static environment but the data plane experiences drift, the system fails not because of control logic errors, but because of unmanaged divergence between intended and actual workflows. This split requires explicit design of context preparation to survive the volatility of the living vault.
 
 ## Context
 
-Sean is building a personal AI infrastructure that needs to be robust enough for professional demonstration. Currently, his agents likely mix scheduling logic with execution logic, making it difficult to diagnose failures or scale the system. Defining this split provides a clear mental model for interview whiteboard artifacts and helps structure the underlying codebase for maintainability.
+Sean's vault operates as a living system where agent outputs mutate the very artifacts they depend on. By explicitly defining the boundary between the scheduling logic and the artifact mutation logic, Sean can isolate failures in agent behavior from failures in orchestration. This distinction is critical for debugging why an agent might be 'green' (running) but producing stale or incorrect outputs due to data plane drift.
 
 ## Evidence
 
 > distinguish the control plane that schedules, routes, authorizes, observes, and halts agents from the data plane where agents actually read/write vault artifacts, run research, generate summaries, or mutate files.
 
-> I built a local agent control plane over launchd, file manifests, cost caps, health checks, and Obsidian-Git boundaries.
+> This architectural invariant separates the agent system into two distinct layers: the control plane, which manages scheduling, authorization, and halting logic, and the data plane, where agents actually read/write vault artifacts, run research, generate summaries, or mutate files.
 
 ## Examples
 
-- Using launchd to manage the lifecycle of agent processes (control plane) while the agents themselves read and write to Obsidian vault files (data plane).
+- The control plane halts an agent because it detects a deviation in the data plane's output format, even though the agent's internal logic was correct.
 
 ## Related Concepts
 
-[[Agent Fleet Observability Dashboard]] [[Infrastructure Status]]
+[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Vault as Agent Infrastructure]]

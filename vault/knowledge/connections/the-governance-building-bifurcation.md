@@ -5,8 +5,8 @@ connects:
   - Supervision as the New AI Edge
   - AI Fluency
   - Context Management as a Bottleneck
-created: 2026-06-03
-updated: 2026-06-03
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Synthesis
@@ -17,7 +17,7 @@ The tension lies in the decoupling of 'building' from 'value creation,' where th
 
 ### [[Supervision as the New AI Edge]]
 
-> What’s emerging in its place is a model in which everyone in the org is a potential builder, supported by agent portfolio governance and the kind of judgment work that the coordination roles never required.
+> As the cost of execution approaches zero through agentic automation, the economic value of senior roles shifts from the act of building to the governance of agent portfolios and the application of judgment work that the coordination roles never required.
 
 ### [[AI Fluency]]
 

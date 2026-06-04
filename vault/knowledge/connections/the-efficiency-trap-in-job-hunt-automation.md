@@ -5,8 +5,8 @@ connects:
   - Agent Rationalization
   - Token Waste
   - Context Management as a Bottleneck
-created: 2026-06-03
-updated: 2026-06-03
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Synthesis
@@ -21,11 +21,11 @@ There is a critical tension between the immediate financial incentive to reduce 
 
 ### [[Token Waste]]
 
-> If your system prompt, tool definitions, and reference documents aren’t cached, you’re paying ten dollars for every dollar of stable context, and this should be the first thing you set up.
+> If your system prompt, tool definitions, and reference documents aren't cached, you’re paying ten dollars for every dollar of stable context, and this should be the first thing you set up.
 
 ### [[Context Management as a Bottleneck]]
 
-> standard. If your system prompt, tool definitions, and reference documents aren’t cached, you’re paying ten dollars for every dollar of stable context, and this should be the first thing you set up.
+> standard. If your system prompt, tool definitions, and reference documents aren't cached, you’re paying ten dollars for every dollar of stable context, and this should be the first thing you set up.
 
 ## Implications
 

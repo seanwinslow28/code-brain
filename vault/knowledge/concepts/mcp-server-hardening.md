@@ -2,10 +2,10 @@
 title: "MCP Server Hardening"
 type: concept
 sources:
-  - 40_knowledge/references/ref-agent-hallucinated-recovery-mcp-errors.md
+  - knowledge/concepts/mcp-server-hardening.md
 tags: [auto-generated, phase-6]
-created: 2026-06-03
-updated: 2026-06-03
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Definition

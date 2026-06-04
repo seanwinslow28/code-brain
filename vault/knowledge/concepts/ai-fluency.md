@@ -2,33 +2,31 @@
 title: "AI Fluency"
 type: concept
 sources:
-  - 40_knowledge/references/ref-tolerance-for-non-builders-shrinking.md
+  - knowledge/connections/the-governance-building-bifurcation.md
 tags: [auto-generated, phase-6]
-created: 2026-06-03
-updated: 2026-06-03
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Definition
 
-AI fluency is defined not by the ability to write code, but by the willingness to act before the playbook catches up, utilizing existing tools to collapse the time-to-value for complex administrative or creative tasks. It requires a proactive integration of disparate AI agents (like LLMs and research tools) into daily workflows to demonstrate tangible efficiency gains that serve as proof of competence. This fluency is the prerequisite for surviving the collapse of legacy administrative roles, as it signals the capacity to leverage agent portfolios for high-leverage output.
+AI fluency is defined not by technical proficiency but by the willingness to act before established protocols or playbooks have caught up to new capabilities. It requires a shift from seeking permission to exercising judgment in ambiguous environments where the rules are still being written. This fluency is a prerequisite for leveraging agent portfolios effectively, as it allows individuals to navigate the gap between capability and governance.
 
 ## Context
 
-Sean must demonstrate this fluency in his job hunt by showcasing specific, quantifiable reductions in effort achieved through AI integration, rather than just listing tools he has used. His narrative needs to highlight the 'willingness to act' and the resulting operational shifts, such as moving from planning theater to data-driven prioritization.
+Sean's ability to act before the playbook catches up is a key differentiator in his job hunt. It signals that he can operate in the 'new builder' role, where governance and judgment are more valuable than adherence to established processes.
 
 ## Evidence
 
 > None of that required permission. All of it required a willingness to act before the playbook caught up.
 
-> I have been using LLMs and agents fully in my business since 2024 and writing publicly about coding agents in Claude Code for Non-Coders since the summer of 2025.
-
-> At this point in my career, I was a senior director with multiple managers and PMs reporting to me.
+> What’s emerging in its place is a model in which everyone in the org is a potential builder, supported by agent portfolio governance and the kind of judgment work that the coordination roles never required.
 
 ## Examples
 
-- Using ChatGPT to draft performance reviews in late 2022 when most enterprises had told staff not to use generative AI.
-- Writing publicly about coding agents in Claude Code for Non-Coders since the summer of 2025, now with 29,000+ subscribers.
+- Sean implements agent workflows without waiting for formal approval, demonstrating proactive governance.
+- The 'new builder' role requires judgment work that coordination roles never demanded, highlighting the shift in required skills.
 
 ## Related Concepts
 
-[[AI Fluency]] [[Supervision as the New AI Edge]] [[Vibe-Coding Interview Canon]]
+[[Supervision as the New AI Edge]] [[The Governance-Building Bifurcation]]

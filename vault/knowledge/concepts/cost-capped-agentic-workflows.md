@@ -2,31 +2,31 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - knowledge/concepts/cost-capped-agentic-workflows.md
+  - knowledge/connections/cost-vs-automation-depth-tension.md
 tags: [auto-generated, phase-6]
-created: 2026-06-03
-updated: 2026-06-03
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Definition
 
-This pattern describes a constraint architecture where agent execution is gated by strict financial thresholds rather than just technical success. When a specific integration method, such as an MCP bridge, causes costs to double and trigger hard caps, the system must revert to cheaper, read-only injection patterns to maintain viability. The mechanism relies on identifying the cost driver of a dependency and replacing it with a low-overhead alternative that preserves the data flow without the financial penalty.
+This pattern describes a constraint architecture where agent execution is gated by strict financial thresholds rather than just technical success. When a specific integration method, such as an MCP bridge, causes costs to double and trigger hard caps, the system forces a retreat to simpler, cheaper patterns. This creates a resilience engineering trade-off where the automation architecture prioritizes sustainability and $0-run local solutions over seamless, complex integrations. The consequence is that Sean must constantly evaluate whether the value of an automated feature justifies its cost, leading to a preference for local, $0-run models for any new automation.
 
 ## Context
 
-Sean is operating under tight budget constraints for his agent fleet. The recent failure of the MCP bridge due to cost caps demonstrates that technical elegance must yield to economic sustainability. He needs to ensure that future agent interactions, particularly those involving memory or ticketing, do not inadvertently trigger these caps, which would halt his job-hunt automation entirely.
+Sean's infrastructure is currently limited by hard financial caps that break complex integrations. This forces a strategic pivot away from deep, seamless automation toward resilient, low-cost local solutions to avoid triggering these caps.
 
 ## Evidence
 
 > drop MCP bridge + context-management beta that doubled cost to $0.97 and tripped the cap 5/29
 
-> Build a $0/run local summarizer ... that curates daily_driver's fleet-memory namespace, so the Opus agent only reads, never writes
+> Sean must prioritize local, $0-run models for any new automation to avoid cost caps.
 
 ## Examples
 
-- Reverting to inject_memories_into_prompt() to avoid the $0.97 cost spike
-- Using local models like gemma4:e4b on a Mac Mini for $0/run summarization
+- Dropping the MCP bridge to avoid tripping the cost cap
+- Building a $0/run local summarizer that curates daily_driver's fleet-memory namespace
 
 ## Related Concepts
 
-[[Context Management as a Bottleneck]] [[Agent Health Monitoring]]
+[[Agent Health Monitoring]] [[Vault Maintenance]]
