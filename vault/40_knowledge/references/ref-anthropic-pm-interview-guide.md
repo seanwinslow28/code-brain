@@ -5,12 +5,13 @@ author:
   - "[[Insider Loops·Last updated Jun 2026]]"
 published:
 created: 2026-06-04
-description:
+description: "Insider Loops' operational breakdown of Anthropic's PM interview loop — all 6 stages (Recruiter → HM → Case Presentation → Onsite Loop → Team Matching → Offer), with deep coverage of the universal Culture Interview and the live Customer Scenarios round no public resource documents."
 tags:
   - "source/web-clip"
 type: "source"
-status: "unprocessed"
-domain:
+status: "draft"
+domain: [product-management]
+ai-context: "Insider Loops' stage-by-stage Anthropic PM interview guide (L3–L7, all product areas) — covers the universal Culture Interview (rehearsed STAR stories = #1 failure mode) and the live Demo-Claude Customer Scenarios round; directly relevant to Sean's [[prj-job-hunt-2026]] Anthropic prep."
 ---
 A comprehensive resource for product managers targeting roles at Anthropic. This guide synthesizes insights from insider candidates who completed the full interview loop, Anthropic's own published guidance, and extensive research. Unlike generic resources, this guide covers rounds that no public resource breaks down with the operational detail you need to actually prepare.
 

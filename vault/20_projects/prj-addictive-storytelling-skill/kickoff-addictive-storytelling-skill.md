@@ -1,3 +1,11 @@
+---
+type: project
+domain: [creative-studio]
+status: draft
+created: 2026-06-03
+ai-context: "Self-contained kickoff prompt to build a new 'Addictive Storytelling + Value' skill layer that sits upstream of [[writing-voice-modes]] and [[writing-humanity-pass]] — owns narrative architecture and reader-value delivery so every Substack post solves a real problem Sean actually had. Build deferred until after the 2026-06-11 skill-freeze (see [[skill-ideas-deferred]])."
+---
+
 # Kickoff Prompt — Build the "Addictive Storytelling + Value" Skill Layer
 
 > Paste everything below the line into a fresh Cowork session. It is self-contained: it carries the source thesis, the repo map, and the build contract so the new session starts with full context. Re-attach `substack-writing-tips-1.md` if you still have it (optional — its core thesis is embedded below).
