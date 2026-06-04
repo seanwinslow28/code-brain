@@ -1,0 +1,32 @@
+{
+  "antigravity_calls": 1,
+  "antigravity_failures": 1,
+  "antigravity_last_error": "antigravity timeout after 120s (capture: /Users/seanwinslow/Code-Brain/code-brain/vault/90_system/agent-logs/ag-timeout-2026-06-04T07-32-07.log)",
+  "antigravity_skipped": 7,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 3,
+  "backfill_articles_critiqued": 5,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/daily-driver-agent.md",
+    "vault/knowledge/expansions/daily-note-gener.md",
+    "vault/knowledge/expansions/daily-note-generators.md",
+    "vault/knowledge/expansions/daily-routine-automation.md",
+    "vault/knowledge/expansions/hiring-manager-appeal.md"
+  ],
+  "codex_calls": 8,
+  "codex_failures": 0,
+  "codex_last_error": "",
+  "codex_tokens_total": 260542,
+  "duration_seconds": 323.44,
+  "error": "",
+  "expansions_written": [
+    "vault/knowledge/expansions/double-monetization-invariant.md",
+    "vault/knowledge/expansions/motivational-tension-via-open-loops.md",
+    "vault/knowledge/expansions/humor-and-status-dynamics.md"
+  ],
+  "run_id": "2026-06-04T03:30:04",
+  "status": "partial",
+  "warnings": [
+    "antigravity circuit-breaker tripped after 1 consecutive failures; remaining articles run Codex-only"
+  ]
+}
