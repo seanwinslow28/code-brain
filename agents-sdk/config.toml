@@ -596,10 +596,14 @@ inject_on_run = true                           # MCP server is mounted; preamble
 write_lessons_on = ["success"]
 
 # --- Portfolio daily-dated layer (sw-ai-pm-portfolio) ----------------------
-# The Daily Driver's morning run renders the portfolio's hero dateline +
-# About-pulse JSONs from real fleet data (agent-run-history.csv + the latest
-# synth manifest) via lib/portfolio_dateline.py, then commits them to the
-# portfolio's `main` so Vercel rebuilds with a current dateline.
+# The Daily Driver's morning run renders the portfolio's four public/api JSONs
+# from real fleet data via lib/portfolio_dateline.py — dateline + about-pulse
+# (agent-run-history.csv + synth manifest + measured commit count), next-piece
+# (editorial, from [portfolio.next_piece] below), and shipped-stats-<slug>
+# (live npm + GitHub, from [portfolio.shipped_stats] below). It then runs the
+# portfolio's `npm run validate` and, only if that passes, commits to the
+# portfolio's `main` so Vercel rebuilds with a current dateline. Runbook:
+# docs/portfolio-refresh-runbook.md.
 #
 # Writes target `worktree_path` — a dedicated git worktree pinned to `main`
 # so bot commits never touch whatever branch is checked out in the primary
@@ -619,3 +623,21 @@ worktree_path = "/Users/seanwinslow/Code-Brain/.portfolio-dateline-worktree"
 api_subpath = "public/api"
 commit = true
 auto_push = true
+
+# next-piece.json — the "next in production" tile. Editorial: "what ships next"
+# is not derivable from fleet data, so it's set by hand here and the bridge only
+# stamps updated_at. Edit title/date_target whenever the answer changes.
+[portfolio.next_piece]
+title = "Vault Scorecard"
+date_target = "2026-06-10"
+
+# shipped-stats-<slug>.json — live npm weekly downloads + GitHub stars per
+# opted-in case study (slug -> {npm_package, github_repo}). EMPTY on purpose:
+# as of 2026-06-04 `intent-engineering-mcp` is NOT on the npm registry (404) and
+# has no public GitHub repo, so enabling it would zero out the hand-seeded file.
+# The renderer skips any slug whose live fetch fails — it never fabricates. To
+# activate once the product is actually published, uncomment and set the real
+# identifiers:
+# [portfolio.shipped_stats.intent-engineering-mcp]
+# npm_package = "intent-engineering-mcp"
+# github_repo = "seanwinslow28/intent-engineering-mcp"
