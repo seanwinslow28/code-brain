@@ -1,29 +1,38 @@
 """Render the portfolio's daily-dated JSON layer from real fleet data.
 
-The sw-ai-pm-portfolio hero dateline, About-teaser pulse strip, and
-"next piece" card read three static files under the portfolio's
-``public/api/``:
+The sw-ai-pm-portfolio hero dateline, About-teaser pulse strip,
+"next piece" card, and shipped case-study stats read four static files
+under the portfolio's ``public/api/``:
 
-    - dateline.json     (hero: voiced wire-service fleet pulse)
-    - about-pulse.json  (About-teaser: last-24h making-activity items)
-    - next-piece.json   (next-in-production card)
+    - dateline.json            (hero: voiced wire-service fleet pulse)
+    - about-pulse.json         (About-teaser: last-24h making-activity items)
+    - next-piece.json          (next-in-production card)
+    - shipped-stats-<slug>.json (live npm/GitHub stats per shipped case study)
 
-Until now nothing bridged the fleet's real output into those files, so
-they went stale and the build's freshness validator flagged them every
-morning even though the Daily Driver ran clean. This module is the
-bridge: it reads the SAME structured sources the Fleet Overnight Digest
-reads (``agent-run-history.csv`` + the latest synth manifest) and renders
-the portfolio JSONs deterministically.
+This module is the bridge between the fleet's real output and those
+files. The dateline + about-pulse are rendered from the SAME structured
+sources the Fleet Overnight Digest reads (``agent-run-history.csv`` + the
+latest synth manifest) plus a measured code-brain commit count. The
+next-piece is editorial — read verbatim from the ``[portfolio.next_piece]``
+config block (the bridge only stamps ``updated_at``). The shipped-stats
+are fetched live from public npm + GitHub APIs per slug declared in
+``[portfolio.shipped_stats]``.
 
 Deterministic on purpose: the dateline body is terse wire-service
 stat-speak ("indexer wrote 139 chunks at 02:00."), not creative prose, so
 templating reproduces the established voice exactly and never hallucinates
-a number. The Daily Driver calls publish() at the end of its morning run;
-see daily_driver.py.
+a number. The Daily Driver calls run_publish() at the end of its morning
+run; see daily_driver.py.
 
-The renderer NEVER fabricates: a missing agent row is reported honestly
-("no run") and a missing manifest omits the synth clause rather than
-guessing.
+The renderer NEVER fabricates: a missing agent row is reported honestly,
+a missing manifest omits the synth clause rather than guessing, and a
+shipped-stats fetch that fails (404 / network / missing field) returns
+None so the caller SKIPS writing that file — the hand-curated file is left
+to age to a muted "LATEST" badge rather than being zeroed.
+
+Before any commit/push, run_publish() runs the portfolio's own
+``npm run validate`` against the worktree and refuses to push if it fails,
+so the fleet never ships JSON the Vercel build would reject.
 """
 
 from __future__ import annotations
@@ -32,6 +41,8 @@ import json
 import os
 import re
 import subprocess
+import urllib.error
+import urllib.request
 from datetime import date, datetime
 from pathlib import Path
 
@@ -56,6 +67,41 @@ def _note_field(notes: str, key: str) -> str | None:
 
 def _plural(n: int, singular: str) -> str:
     return f"{n} {singular}" if n == 1 else f"{n} {singular}s"
+
+
+def _now_iso() -> str:
+    """Local (ET on Sean's machines) ISO 8601 timestamp, second precision."""
+    return datetime.now().astimezone().replace(microsecond=0).isoformat()
+
+
+def _count_commits(repo_root: Path, *, hours: int = 24) -> int:
+    """Count real code-brain commits in the last `hours`, excluding the
+    Obsidian-Git vault auto-commits (message shape ``vault: auto-commit ...``).
+
+    Honest by construction: vault auto-commits are machine noise, not making.
+    Never raises — a git failure yields 0 so the morning run is unaffected.
+    """
+    res = _git(["log", f"--since={hours} hours ago", "--pretty=%s"], repo_root)
+    if res.returncode != 0:
+        return 0
+    subjects = [s for s in res.stdout.splitlines() if s.strip()]
+    return sum(1 for s in subjects if not s.startswith("vault: auto-commit"))
+
+
+def _fetch_json(url: str, *, timeout: int = 10) -> dict | None:
+    """GET a JSON document. Returns None on any non-200 / network / parse error
+    so callers can skip honestly rather than fabricate. Never raises."""
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": "code-brain-fleet/1.0", "Accept": "application/json"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:  # noqa: S310 — fixed https hosts
+            if resp.status != 200:
+                return None
+            return json.loads(resp.read().decode("utf-8"))
+    except (urllib.error.URLError, OSError, ValueError, TimeoutError):
+        return None
 
 
 def render_dateline(
@@ -143,7 +189,7 @@ def render_dateline(
         "date_display": f"BOSTON, {today.strftime('%B %-d, %Y').upper()}",
         "pattern": "fleet_pulse",
         "body": body,
-        "updated_at": datetime.now().astimezone().replace(microsecond=0).isoformat(),
+        "updated_at": _now_iso(),
     }
 
 
@@ -152,18 +198,24 @@ def render_about_pulse(
 ) -> dict:
     """Render about-pulse.json items from verifiable last-24h fleet facts.
 
-    Only emits items it can verify: fleet runs (distinct fleet agents that
-    ran), and whether today's daily note was written. Stays a pure function
-    of fleet state — no fabricated commit/draft counts.
+    Only emits items it can verify: real code-brain commits (excluding vault
+    auto-commits), fleet runs (distinct fleet agents that ran), and whether
+    today's daily note was written. Stays a pure function of measured state —
+    no fabricated draft/cel counts. The home teaser shows the first 3 items,
+    so the order is commits → fleet_runs → daily note.
     """
     today = today or date.today()
     vault_root = vault_root or (repo_root / "vault")
     runs = _read_recent_runs(repo_root)
 
+    items: list[dict] = []
+
+    commits = _count_commits(repo_root)
+    items.append({"type": "commits", "count": commits, "label": _plural(commits, "commit")})
+
     fleet_keys = ("vault-indexer", "vault-synthesizer", "vault-critic")
     ran = [k for k in fleet_keys if runs.get(k) and (runs[k].get("status") or "") == "success"]
     short = " · ".join(k.split("-", 1)[1] for k in ran)  # indexer · synthesizer · critic
-    items: list[dict] = []
     if ran:
         items.append({"type": "fleet_runs", "count": len(ran), "label": f"{len(ran)} fleet runs ({short})"})
 
@@ -174,24 +226,101 @@ def render_about_pulse(
     return {
         "date_iso": today.isoformat(),
         "items": items,
-        "updated_at": datetime.now().astimezone().replace(microsecond=0).isoformat(),
+        "updated_at": _now_iso(),
+    }
+
+
+def render_next_piece(spec: dict | None) -> dict | None:
+    """Render next-piece.json from the editorial ``[portfolio.next_piece]`` block.
+
+    "What ships next" is not derivable from fleet data, so the bridge reads the
+    title + date_target verbatim from config and only stamps updated_at. Returns
+    None when the block (or a required field) is absent, so a hand-curated file
+    is never overwritten with empty data.
+    """
+    if not spec:
+        return None
+    title = spec.get("title")
+    date_target = spec.get("date_target")
+    if not title or not date_target:
+        return None
+    return {
+        "title": str(title),
+        "date_target": str(date_target),
+        "updated_at": _now_iso(),
+    }
+
+
+def render_shipped_stats(slug: str, spec: dict | None) -> dict | None:
+    """Render shipped-stats-<slug>.json from LIVE npm + GitHub public APIs.
+
+    spec = {"npm_package": "...", "github_repo": "owner/name"}. Emits only what
+    is API-measurable — weekly npm downloads and GitHub stars; the prior
+    "verified installs (MCP registry)" row is intentionally dropped (no public
+    API). Returns None on any missing identifier or fetch failure so the caller
+    SKIPS writing the file (the hand-curated one ages to a muted "LATEST" badge
+    rather than being zeroed). NEVER fabricates.
+    """
+    npm_pkg = (spec or {}).get("npm_package")
+    gh_repo = (spec or {}).get("github_repo")
+    if not npm_pkg or not gh_repo:
+        return None
+
+    dl = _fetch_json(f"https://api.npmjs.org/downloads/point/last-week/{npm_pkg}")
+    gh = _fetch_json(f"https://api.github.com/repos/{gh_repo}")
+    if not dl or not gh:
+        return None
+
+    downloads = dl.get("downloads")
+    stars = gh.get("stargazers_count")
+    if downloads is None or stars is None:
+        return None
+
+    return {
+        "slug": slug,
+        "updated_at": _now_iso(),
+        "items": [
+            {"label": "weekly downloads", "value": str(downloads), "unit": "npm"},
+            {"label": "stars", "value": str(stars), "unit": "GitHub"},
+        ],
     }
 
 
 def publish(
-    repo_root: Path, portfolio_api_dir: Path, *, vault_root: Path | None = None, dry_run: bool = True
+    repo_root: Path,
+    portfolio_api_dir: Path,
+    *,
+    vault_root: Path | None = None,
+    dry_run: bool = True,
+    next_piece_spec: dict | None = None,
+    shipped_stats_specs: dict | None = None,
 ) -> dict[str, dict]:
     """Render the JSONs and (unless dry_run) write them to the portfolio.
 
-    Returns the rendered dicts keyed by filename so the caller can log or
-    test them. Writing is the only side effect; committing/pushing the
-    portfolio repo is the caller's responsibility (kept separate so the
-    consequential git step is explicit and easy to gate).
+    Always renders dateline.json + about-pulse.json. Additionally renders
+    next-piece.json when a ``next_piece_spec`` is supplied, and one
+    shipped-stats-<slug>.json per entry in ``shipped_stats_specs`` whose live
+    fetch succeeds (failed/missing fetches are silently skipped — never zeroed).
+
+    Returns the rendered dicts keyed by filename so the caller can log or test
+    them. Writing is the only side effect; committing/pushing the portfolio repo
+    is the caller's responsibility (kept separate so the consequential git step
+    is explicit and easy to gate).
     """
-    rendered = {
+    rendered: dict[str, dict] = {
         "dateline.json": render_dateline(repo_root, vault_root),
         "about-pulse.json": render_about_pulse(repo_root, vault_root),
     }
+
+    next_piece = render_next_piece(next_piece_spec)
+    if next_piece is not None:
+        rendered["next-piece.json"] = next_piece
+
+    for slug, spec in (shipped_stats_specs or {}).items():
+        stats = render_shipped_stats(slug, spec)
+        if stats is not None:
+            rendered[f"shipped-stats-{slug}.json"] = stats
+
     if not dry_run:
         portfolio_api_dir.mkdir(parents=True, exist_ok=True)
         for name, data in rendered.items():
@@ -226,7 +355,7 @@ def commit_and_push(
         staged = _git(["diff", "--cached", "--quiet"], worktree)
         if staged.returncode == 0:
             return "no changes to commit"
-        commit = _git(["commit", "-m", f"chore(dateline): fleet pulse {today.isoformat()}"], worktree)
+        commit = _git(["commit", "-m", f"chore(daily): fleet refresh {today.isoformat()}"], worktree)
         if commit.returncode != 0:
             return f"commit failed: {commit.stderr.strip()[:160]}"
         if not do_push:
@@ -243,12 +372,42 @@ def commit_and_push(
         return f"git unavailable: {e}"
 
 
+def _validate_portfolio(worktree: Path, *, timeout: int = 120) -> tuple[bool, str]:
+    """Run the portfolio's own ``npm run validate`` (the prebuild content +
+    dateline/about-pulse freshness guardrails) against the worktree.
+
+    Returns (ok, tail) where tail is the last chunk of combined output on
+    failure. Pure node builtins — no node_modules needed. Never raises: a
+    timeout or missing npm yields (False, reason) so the caller refuses to push
+    rather than shipping unvalidated JSON or hanging the unattended run.
+    """
+    try:
+        proc = subprocess.run(
+            ["npm", "run", "validate"],
+            cwd=str(worktree),
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            check=False,
+        )
+    except subprocess.TimeoutExpired:
+        return False, f"npm run validate timed out after {timeout}s"
+    except OSError as e:
+        return False, f"npm run validate could not start: {e}"
+    if proc.returncode == 0:
+        return True, ""
+    tail = (proc.stdout + proc.stderr).strip()
+    return False, tail[-500:]
+
+
 def run_publish(config, *, logger=None) -> str:
-    """Daily-Driver morning post-step: render + write + (optionally) commit/push.
+    """Daily-Driver morning post-step: render + write + validate + commit/push.
 
     Reads the [portfolio] config block. Self-activating: no-ops with a logged
     note when disabled or when the worktree hasn't been created yet, so wiring
-    this in is safe before the worktree exists. Returns a status string.
+    this in is safe before the worktree exists. Renders all four file types,
+    then runs ``npm run validate`` and refuses to commit/push if it fails (the
+    honesty + don't-break-the-build gate). Returns a status string.
     """
     def _log(msg: str) -> None:
         if logger:
@@ -266,10 +425,22 @@ def run_publish(config, *, logger=None) -> str:
 
     api_dir = worktree / pcfg.get("api_subpath", "public/api")
     rendered = publish(
-        Path(config.repo_root), api_dir, vault_root=Path(config.vault_root), dry_run=False
+        Path(config.repo_root),
+        api_dir,
+        vault_root=Path(config.vault_root),
+        dry_run=False,
+        next_piece_spec=pcfg.get("next_piece"),
+        shipped_stats_specs=pcfg.get("shipped_stats"),
     )
     _log(f"wrote {', '.join(rendered)} -> {api_dir}")
     _log(f"dateline: {rendered['dateline.json']['body']}")
+
+    # Validation gate — never push JSON the portfolio's Vercel build would reject.
+    ok, tail = _validate_portfolio(worktree)
+    if not ok:
+        _log(f"npm run validate FAILED — not pushing. tail: {tail}")
+        return "validation-failed (not pushed)"
+    _log("npm run validate passed")
 
     if pcfg.get("commit", True):
         files = [f"{pcfg.get('api_subpath', 'public/api')}/{n}" for n in rendered]
@@ -290,9 +461,15 @@ def _main() -> None:
     args = parser.parse_args()
 
     config = load_config()
+    pcfg = getattr(config, "portfolio", {}) or {}
     api_dir = Path(args.portfolio_api_dir) if args.portfolio_api_dir else Path("/tmp/portfolio-api")
     rendered = publish(
-        Path(config.repo_root), api_dir, vault_root=Path(config.vault_root), dry_run=args.dry_run
+        Path(config.repo_root),
+        api_dir,
+        vault_root=Path(config.vault_root),
+        dry_run=args.dry_run,
+        next_piece_spec=pcfg.get("next_piece"),
+        shipped_stats_specs=pcfg.get("shipped_stats"),
     )
     print(json.dumps(rendered, indent=2, ensure_ascii=False))
 
