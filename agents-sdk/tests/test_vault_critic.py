@@ -554,6 +554,36 @@ def test_run_antigravity_breaker_resets_on_success(tmp_repo, monkeypatch):
     assert result.antigravity_failures == 2
 
 
+def test_run_antigravity_disabled_runs_codex_only(tmp_repo, monkeypatch):
+    """antigravity_enabled=False → AG is never invoked (0 calls, 0 wasted 120s),
+    every article runs Codex-only, all skipped, and an all-Codex-success run is a
+    clean OK (not partial — there is no AG failure to degrade it)."""
+    today = "2026-05-22"
+    paths = [_make_concept_at(tmp_repo, s) for s in ("a", "b", "c")]
+    _make_manifest(tmp_repo, today)
+    monkeypatch.setattr("agents.vault_critic.select_target_articles",
+                        lambda root, date_iso, max_targets: paths)
+    ag_mock = AsyncMock(side_effect=lambda *a, **k: _fail("antigravity", "should never be called"))
+
+    async def go():
+        with patch("agents.vault_critic.run_codex", AsyncMock(side_effect=lambda *a, **k: _ok("codex", "ok", 100))), \
+             patch("agents.vault_critic.run_antigravity", ag_mock):
+            return await run_critic(
+                repo_root=tmp_repo, date_iso=today, max_targets=10,
+                wall_budget_s=600, antigravity_enabled=False, backfill_max=0,
+            )
+
+    result = asyncio.run(go())
+    assert ag_mock.await_count == 0, "AG must never be invoked in codex-only mode"
+    assert result.antigravity_calls == 0
+    assert result.antigravity_failures == 0
+    assert result.antigravity_skipped == 3
+    assert result.codex_calls == 3
+    assert result.articles_critiqued == 3
+    assert result.status == STATUS_OK  # clean codex-only run is OK, not partial
+    assert any("codex-only" in w.lower() for w in result.warnings)
+
+
 # ---------------------------------------------------------------------------
 # D5b: Two-lane orchestration — fresh + backfill (2026-05-27)
 # ---------------------------------------------------------------------------

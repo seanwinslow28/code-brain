@@ -178,3 +178,10 @@ decision (drop AG / GEMINI_API_KEY / Antigravity CLI), not more debugging.
 **Cleanup pending:** `VAULT_CRITIC_AG_DEBUG=1` can now be removed from the plist (the probe has given
 its verdict) — but it's harmless (1 capture + ~10s probe per night) and confirms the breaker each
 night, so leaving it until the migration is also fine. The run-once probe is gated behind it.
+
+**Decision (2026-06-04, Sean): Codex-only.** Shipped `antigravity_enabled = false` in config.toml — AG
+is never spawned (no wasted 120s, no Gemini spend), distinct from the breaker (which is the recovery
+path for a *degrading* AG and stays dormant). `--no-antigravity`/`--antigravity` CLI overrides added.
+An all-Codex-success run is now `ok`, not `partial`. **Post-June-18 follow-up:** re-enable AG via the
+**Antigravity CLI** (paid Google-One subscription, not the metered API) and A/B test whether the second
+opinion is worth keeping. Don't revisit the old gemini-cli oauth-personal path — it EOLs 6/18.

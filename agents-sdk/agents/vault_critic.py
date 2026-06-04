@@ -333,6 +333,7 @@ async def run(
     backfill_max: int = DEFAULT_BACKFILL_MAX,
     backfill_include_connections: bool = True,
     antigravity_circuit_threshold: int = DEFAULT_AG_CIRCUIT_THRESHOLD,
+    antigravity_enabled: bool = True,
 ) -> CritiqueResult:
     """Orchestrate one vault_critic run end-to-end.
 
@@ -406,6 +407,12 @@ async def run(
     # Anti-Gravity circuit breaker state (see DEFAULT_AG_CIRCUIT_THRESHOLD).
     consecutive_ag_failures = 0
     ag_tripped = False
+    # Codex-only mode (2026-06-04): AG is fully disabled at the source so it is
+    # never spawned — no wasted per-article timeout, no Gemini spend. The breaker
+    # is the recovery path for a *degrading* AG; this is the deliberate off switch
+    # while AG is dead pending the June-18 oauth EOL / Antigravity-CLI migration.
+    if not antigravity_enabled:
+        result.warnings.append("antigravity disabled (codex-only mode)")
 
     for fp, is_backfill in all_targets:
         if time.monotonic() - start >= wall_budget_s:
@@ -416,7 +423,7 @@ async def run(
             any_failure = True
             break
 
-        ag_enabled = not ag_tripped
+        ag_enabled = antigravity_enabled and not ag_tripped
         expansion_path, codex_resp, ag_resp = await critique_one_article(
             repo_root=repo_root,
             article_path=fp,
@@ -594,6 +601,19 @@ def main(argv: list[str] | None = None) -> int:
              "the rest of the run (remaining articles go Codex-only) so a hung "
              "AG stops draining the wall budget. 0 disables the breaker.",
     )
+    ag_group = parser.add_mutually_exclusive_group()
+    ag_group.add_argument(
+        "--no-antigravity", action="store_true",
+        help="Codex-only run: never invoke Anti-Gravity (gemini). Overrides "
+             "`[agents.vault_critic].antigravity_enabled`. Use while AG is "
+             "down/dead so no per-article timeout is wasted and no Gemini quota "
+             "is spent.",
+    )
+    ag_group.add_argument(
+        "--antigravity", action="store_true",
+        help="Force Anti-Gravity on for this run even if config disables it "
+             "(e.g. a post-June-18 Antigravity-CLI migration test).",
+    )
     args = parser.parse_args(argv)
 
     cfg = load_config()
@@ -654,6 +674,12 @@ def main(argv: list[str] | None = None) -> int:
         ag_circuit_threshold = int(
             critic_cfg.get("antigravity_circuit_threshold", DEFAULT_AG_CIRCUIT_THRESHOLD)
         )
+    if args.no_antigravity:
+        antigravity_enabled = False
+    elif args.antigravity:
+        antigravity_enabled = True
+    else:
+        antigravity_enabled = bool(critic_cfg.get("antigravity_enabled", True))
 
     if args.dry_run:
         header = "DRY RUN — Vault Critic (manual)" if manual_mode else "DRY RUN — Vault Critic"
@@ -673,9 +699,13 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Wall budget:   {args.wall_budget_seconds}s")
         print(f"CLI timeout:   {args.per_cli_timeout_seconds}s each")
         print(
-            f"AG breaker:    trip after {ag_circuit_threshold} consecutive failures"
-            + (" (disabled)" if ag_circuit_threshold == 0 else "")
+            f"Anti-Gravity:  {'enabled' if antigravity_enabled else 'DISABLED (codex-only)'}"
         )
+        if antigravity_enabled:
+            print(
+                f"AG breaker:    trip after {ag_circuit_threshold} consecutive failures"
+                + (" (disabled)" if ag_circuit_threshold == 0 else "")
+            )
         if merged_context_paths:
             ctx_chars = len(additional_context)
             print(
@@ -725,6 +755,7 @@ def main(argv: list[str] | None = None) -> int:
             backfill_max=backfill_max,
             backfill_include_connections=backfill_include_connections,
             antigravity_circuit_threshold=ag_circuit_threshold,
+            antigravity_enabled=antigravity_enabled,
         ))
     except Exception as exc:
         logger.exception("vault_critic failed: %s", exc)
