@@ -106,3 +106,6 @@ vault/90_system/audio/*.mp3
 # (server.pid, server.log, events, server-stopped) plus regenerable HTML
 # scaffolding. Actual brainstorm outputs land in the vault, not here.
 .superpowers/
+
+# Local agent tooling artifacts (e.g. .agents/skills export mirror) — not source.
+.agents/
