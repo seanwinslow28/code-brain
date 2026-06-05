@@ -5,13 +5,13 @@ connects:
   - Boundary Object Theory
   - Vault as Agent Infrastructure
   - Workbench Narrative
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Synthesis
 
-The tension lies between Sean's job-hunt artifacts which rely on a typed semantic layer (meaning) versus traditional job applications which rely on UI navigation (access). His Substack draft explicitly rejects agents clicking around UIs in favor of typed work objects and scoped authority. This creates a cross-domain pattern where his professional narrative is built on infrastructure depth rather than surface-level visibility, forcing recruiters to engage with his work as a system rather than a resume.
+The core tension lies between Sean's job-hunt artifacts which rely on a typed semantic layer (meaning) versus traditional job applications which rely on UI navigation (access). His Substack draft explicitly rejects agents clicking around UIs in favor of typed work objects and scoped authority. This creates a cross-domain pattern where his professional narrative is built on infrastructure depth rather than surface-level visibility, forcing recruiters to engage with his work as a system rather than a resume.
 
 ## Threads
 

@@ -3,10 +3,10 @@ title: "Performance vs. Preparation in Agentic Interviews"
 type: connection
 connects:
   - Confidence Rituals
-  - Vibe-Coding Interview
+  - Vibe-Coding Interview Format
   - Agentic Engineering Signal
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Synthesis
@@ -19,9 +19,9 @@ The tension between backstage preparation and front-stage performance creates a 
 
 > Current concept treats confidence as an internal state to regulate. Missing move: interviews are staged social performances where the candidate must manage the definition of the situation.
 
-### [[Vibe-Coding Interview]]
+### [[Vibe-Coding Interview Format]]
 
-> Vibe-coding interviews serve dual purposes — testing real-time coding skills and assessing cultural fit through interpersonal dynamics. This makes them a nexus for life-systems (communication) and job-hunt-2026 (outcome delivery).
+> Vibe-coding interviews serve dual purposes — testing real-time coding skills and assessing cultural fit through interpersonal dynamics.
 
 ### [[Agentic Engineering Signal]]
 

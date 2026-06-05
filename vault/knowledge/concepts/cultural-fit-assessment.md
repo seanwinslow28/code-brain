@@ -2,31 +2,30 @@
 title: "Cultural Fit Assessment"
 type: concept
 sources:
-  - knowledge/concepts/cultural-fit-assessment.md
+  - 40_knowledge/references/ref-anthropic-pm-interview-guide.md
 tags: [auto-generated, phase-6]
-created: 2026-05-14
-updated: 2026-05-14
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Definition
 
-Evaluates whether a candidate's values, work style, and communication approach align with the company culture. This assessment is particularly critical in fast-moving AI-native companies where alignment is key.
+A universal, high-stakes interview stage that functions as a values alignment filter rather than a skills assessment. This mechanism operates by eliminating candidates who rely on pre-packaged narratives, forcing them to demonstrate authentic behavioral patterns and cultural resonance through spontaneous storytelling. It serves as a primary elimination point because it tests the underlying invariant of whether the candidate's intrinsic motivations align with the organization's core identity.
 
 ## Context
 
-Sean needs this to align with the culture of AI-native startups during his job-hunt-2026, ensuring he is not only technically qualified but also culturally aligned with his target companies.
+Sean must recognize that this is not a soft skill check but a hard filter. Preparing for this requires moving beyond generic STAR stories to develop genuine, rehearsed narratives that reflect his actual decision-making processes and values, as this is the #1 failure mode for candidates transitioning from traditional tech companies.
 
 ## Evidence
 
-> Evaluates whether a candidate's values, work style, and communication approach align with the company culture.
+> The Culture Interview is universal — every candidate, every role, every level.
 
-> Vibe-coding interviews are a vehicle for cultural fit assessment, particularly in fast-moving AI-native companies where alignment is key.
+> Pre-packaged STAR stories are the documented #1 failure mode.
 
 ## Examples
 
-- Discussions around coding styles during interviews
-- How a candidate handles ambiguous problems or requests
+- No other major tech company runs a dedicated 45-minute values interview for all hires, making this a unique differentiator in Anthropic's hiring process.
 
 ## Related Concepts
 
-[[Vibe-Coding Interview]] [[Interpersonal Dynamics]]
+[[Cultural Fit Assessment]] [[Interview Preparation Playbook]]

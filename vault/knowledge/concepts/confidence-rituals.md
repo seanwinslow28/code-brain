@@ -4,28 +4,29 @@ type: concept
 sources:
   - knowledge/connections/performance-vs-preparation-in-agentic-interviews.md
 tags: [auto-generated, phase-6]
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Definition
 
-Confidence Rituals function as a mechanism for stabilizing ambiguity during high-stakes social performances by shifting the focus from internal emotional regulation to external structural disclosure. This concept defines confidence not as a feeling but as a demonstrated capability to manage uncertainty through explicit verbalization of constraints and next steps. The ritual requires the candidate to name the uncertainty, bound it with specific parameters, and choose a probe that reveals their reasoning process rather than their final answer. This transforms the interview from a test of static knowledge into a demonstration of dynamic operational judgment.
+Confidence Rituals function as a mechanism for stabilizing ambiguity during high-stakes social performances by shifting the focus from internal emotional regulation to external structural control. This concept defines confidence not as a feeling but as a verifiable state of operational readiness, where the candidate manages the definition of the situation through explicit disclosure of constraints and tradeoffs. The underlying invariant is that perceived competence in agentic workflows depends on the visibility of the decision-making architecture rather than the mere presence of technical knowledge. By treating interviews as staged performances, the ritual allows the candidate to negotiate the evaluation criteria in real-time, preventing the invisibility of their technical depth.
 
 ## Context
 
-Sean's job hunt relies on demonstrating agentic engineering skills, which are inherently dynamic and process-oriented. Without these rituals, his internal confidence metrics remain invisible to hiring managers who prioritize immediate operational judgment over historical proof. By adopting structured disclosure, he can bridge the gap between his actual competence and the interviewer's perception of it.
+Sean’s job hunt relies heavily on demonstrating agentic engineering skills, which are often invisible if he only presents static artifacts. Without these rituals, hiring managers cannot distinguish between genuine operational judgment and superficial prompt fluency. This concept is critical for bridging the gap between his internal preparation and the external signals required to secure a role in 2026.
 
 ## Evidence
 
 > Current concept treats confidence as an internal state to regulate. Missing move: interviews are staged social performances where the candidate must manage the definition of the situation.
 
-> The missing technique is structured disclosure: name uncertainty, bound it, choose a next probe, and explain what evidence would change your mind.
+> Sean’s concept should distinguish “I feel confident” from “I have proof I can perform this task under these constraints.”
 
 ## Examples
 
-- Sean must replace static portfolio reviews with live, narrated problem-solving sessions that explicitly model his decision-making tradeoffs.
+- Scripting uncertainty disclosure during live problem-solving sessions
+- Explicitly modeling decision-making tradeoffs in real-time
 
 ## Related Concepts
 
-[[Vibe-Coding Interview]] [[Agentic Engineering Signal]]
+[[Vibe-Coding Interview Format]] [[Agentic Engineering Signal]]

@@ -5,8 +5,8 @@ connects:
   - Supervision as the New AI Edge
   - AI Fluency
   - Context Management as a Bottleneck
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Synthesis

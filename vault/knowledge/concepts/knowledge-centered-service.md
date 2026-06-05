@@ -2,10 +2,10 @@
 title: "Knowledge-Centered Service"
 type: concept
 sources:
-  - knowledge/connections/operational-knowledge-vs-static-documentation.md
+  - knowledge/concepts/knowledge-centered-service.md
 tags: [auto-generated, phase-6]
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Definition

@@ -2,11 +2,11 @@
 title: "The Illusion of Universal Superiority in AI Models"
 type: connection
 connects:
-  - Supervision as the New AI Edge
   - Benchmarking Artifact
   - Context Management as a Bottleneck
-created: 2026-06-04
-updated: 2026-06-04
+  - Supervision as the New AI Edge
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Synthesis
@@ -15,10 +15,6 @@ The tension lies between the allure of high benchmark scores and the reality of 
 
 ## Threads
 
-### [[Supervision as the New AI Edge]]
-
-> The harder question is where it should replace your current workflow, where it should be a specialist, and where turning the reasoning dial up can make the work worse.
-
 ### [[Benchmarking Artifact]]
 
 > If all you want is a leaderboard, the article can end there. But that would be a bad article, and it would make you worse at choosing models.
@@ -26,6 +22,10 @@ The tension lies between the allure of high benchmark scores and the reality of 
 ### [[Context Management as a Bottleneck]]
 
 > Andon Labs found a long-horizon business benchmark where Opus 4.8 on max effort did worse than Opus 4.8 on high effort, and both did worse than Opus 4.7.
+
+### [[Supervision as the New AI Edge]]
+
+> The harder question is where it should replace your current workflow, where it should be a specialist, and where turning the reasoning dial up can make the work worse.
 
 ## Implications
 
