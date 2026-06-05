@@ -2,31 +2,30 @@
 title: "Benchmarking Artifact"
 type: concept
 sources:
-  - 40_knowledge/references/ref-opus-4-8-benchmark-81-nate.md
+  - knowledge/connections/the-latency-accuracy-trade-off-in-heterogeneous-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Definition
 
-A benchmark score is a static snapshot of performance on a specific suite of tasks, but it fails to capture the dynamic reality of model behavior across different effort levels and task types. The artifact of a high score can be misleading if it ignores the 'long-horizon' failures or the degradation of performance when reasoning is dialed up unnecessarily. True evaluation requires looking beyond the average score to individual run outcomes and the specific weaknesses that emerge in specialized contexts.
+Evaluation methodologies often introduce bias by favoring established models or ignoring the specific architectural nuances of newer, locally-runnable variants. This artifact arises when benchmarks do not account for the unique prompt-engineering requirements or hardware-specific optimizations of new models, leading to inaccurate assessments of their true utility. Recognizing this artifact is crucial for avoiding false negatives in model selection and ensuring that evaluations reflect real-world performance rather than methodological flaws.
 
 ## Context
 
-Sean uses benchmarks to evaluate AI tools for his vault and job hunt. Recognizing that a high score (like Opus 4.8's 81) does not guarantee superiority in all scenarios prevents him from making suboptimal tooling decisions based on superficial metrics.
+Sean's prior synthesis methodology was biased against newer locally-runnable models, leading to incorrect conclusions about their effectiveness. By identifying this artifact, he can adjust his evaluation criteria to account for these biases and make more informed decisions about model deployment.
 
 ## Evidence
 
-> If all you want is a leaderboard, the article can end there. But that would be a bad article, and it would make you worse at choosing models.
+> Topic 19 §Correction (2026-05-21) flagged that the prior synthesis methodology was biased against newer locally-runnable models.
 
-> Andon Labs found a long-horizon business benchmark where Opus 4.8 on max effort did worse than Opus 4.8 on high effort, and both did worse than Opus 4.7.
+> The decision to add gemma4:26b to Tier C is driven by the specific balance of active parameters and VRAM, suggesting that future model additions must be evaluated against the specific memory bandwidth of the target tier rather than just parameter count.
 
 ## Examples
 
-- Analyzing individual run outcomes rather than just the average score.
-- Comparing Opus 4.8's performance at different effort levels against Opus 4.7.
+- Prior synthesis methodology was biased against newer locally-runnable models, leading to incorrect conclusions about their effectiveness.
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Context Management as a Bottleneck]]
+[[Runtime-Model Coupling]] [[System Constraints]]

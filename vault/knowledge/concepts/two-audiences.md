@@ -2,31 +2,31 @@
 title: "Two Audiences"
 type: concept
 sources:
-  - 40_knowledge/references/ref-pm-guide-agent-distribution-mcp-cli-agents-md.md
+  - knowledge/connections/the-supervision-context-agency-triad-in-product-design.md
 tags: [auto-generated, phase-6]
-created: 2026-05-31
-updated: 2026-05-31
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Definition
 
-The Two Audiences invariant describes the tension where a product must simultaneously satisfy human stakeholders who approve budgets and autonomous agents who execute workflows. Success requires decoupling the value proposition for humans (strategic outcomes, ROI) from the interface requirements for agents (programmatic accessibility, low-latency execution). Ignoring the agent audience results in products that are theoretically valuable but practically invisible to the automation layer.
+The Two Audiences invariant describes a structural tension where a product must simultaneously satisfy human stakeholders who approve budgets and autonomous agents who execute workflows. This duality forces the system design to accommodate two distinct sets of requirements: one focused on financial justification and strategic alignment for humans, and another focused on precise state management and tool execution for agents. The mechanism creates a friction point because optimizing for one audience often degrades the experience or utility for the other, requiring explicit boundary objects to translate between these incompatible value systems.
 
 ## Context
 
-Sean’s resume and interview prep often focus on human-centric PM skills. By explicitly acknowledging the agent audience, he can demonstrate a more mature understanding of modern product architecture, showing he can design for both the sponsor (human) and the operator (agent).
+Sean is navigating the AI Product Manager landscape where he must demonstrate an understanding of this split. His job hunt and creative studio workflows both require him to build systems that serve his own operational needs (as the human stakeholder) while also being robust enough for automated agents to process without failure. Recognizing this invariant helps him frame his portfolio projects as solutions to this specific architectural problem rather than just general productivity tools.
 
 ## Evidence
 
-> Every generation of software has a dominant distribution channel. Every time the channel shifts, the companies that build for the new interface first win the decade.
+> The Two Audiences invariant describes the tension where a product must simultaneously satisfy human stakeholders who approve budgets and autonomous agents who execute workflows.
 
-> The post named something product teams have been slow to act on: the distribution channel is shifting from human interfaces to agent interfaces.
+> Success depends on designing boundary objects that translate between these two distinct value systems without loss of fidelity.
 
 ## Examples
 
-- Andrej Karpathy put it bluntly last week: “It’s 2026. Build. For. Agents.”
-- Top [X] API endpoints for [product]: [Paste API docs]
+- A dashboard that shows ROI metrics to humans while exposing API endpoints for agent-driven updates
+- A workflow where human approval gates trigger automated state transitions for downstream agents
 
 ## Related Concepts
 
-[[Distribution Surface]] [[AI Product Manager]] [[Agentic Engineering]]
+[[Boundary Object Theory]] [[Agentic Engineering]]

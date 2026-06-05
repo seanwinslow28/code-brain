@@ -5,13 +5,13 @@ connects:
   - Agent Rationalization
   - Token Waste
   - Context Management as a Bottleneck
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Synthesis
 
-There is a critical tension between the immediate financial incentive to reduce token costs and the strategic necessity of maintaining high-signal agent outputs for job hunting. When Sean optimizes for token efficiency (Tokenmaxxing), he risks degrading the quality of his creative studio outputs or job application materials because the optimization function ignores the 'value' dimension. This leads to a false economy where the fleet appears cheaper to run but less effective at achieving the primary goal of securing a role, mirroring the data warehouse mistakes of the 1990s where storage costs were optimized while data utility was ignored.
+There is a critical tension between the immediate financial incentive to reduce token costs and the strategic necessity of maintaining high-signal agent outputs for job hunting. When Sean optimizes for token efficiency, he risks degrading the quality of his creative studio outputs or job application materials because the optimization function ignores the 'value' dimension. This leads to a false economy where the fleet appears cheaper to run but less effective at achieving the primary goal of securing a role.
 
 ## Threads
 

@@ -5,13 +5,13 @@ connects:
   - Competitive Analysis
   - Value Chain / Activity System Mapping
   - Market Positioning
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Synthesis
 
-The tension lies between detecting the macro-shift in the basis of competition and mapping the micro-activities that sustain advantage. Strategic inflection points identify when the game board changes, while activity system mapping reveals why the current configuration is defensible. This combination allows for a narrative that is both timely and structurally sound. The consequence is a portfolio that demonstrates not just what was built, but why it matters at this specific moment in the market.
+The tension lies between detecting the macro-shift in the basis of competition and mapping the micro-activities that sustain advantage. Strategic inflection points identify when the game board changes, while activity system mapping reveals why the current configuration is defensible. This combination allows for a narrative that is both timely and structurally sound, ensuring that career moves are anchored in market reality rather than personal preference.
 
 ## Threads
 
