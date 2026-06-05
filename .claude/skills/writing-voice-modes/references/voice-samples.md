@@ -345,3 +345,90 @@ Observations that should inform future SKILL.md mutations and the next corpus ro
 - **Multi-mode blending at length is the natural pattern, not the exception.** The current skill teaches modes as discrete choices. Sample 3 used Cold Open + Reader-Dismissal + Rhetorical Catechism + List-Cascade + Polysyndeton + Domestic Defamiliarizer + Hard Cut closer in 250 words. Document this as the expected behavior at full Substack-intro length.
 
 ---
+
+## Elicited Raw Voice: Reference-Universe Interview (2026-06-04)
+
+> Round 5 of corpus collection, different method: these are NOT exercise rewrites. Sean
+> answered interview questions about his cultural references and the *answers themselves*
+> came out as unperformed raw voice — no AI draft to react against, no target format.
+> This is the closest thing in the corpus to how he actually talks. Full transcripts:
+> Writing-Exercises-For-Claude parts 1–2; inventory distilled into `reference-universe.md`;
+> negative findings into `cheese-bank.md`.
+
+### Best verbatim passages (tagged)
+
+> "They beat the undefeated Patriots. David vs. Goliath. Rocky vs. Apollo. Me vs. the toilet after eating Indian food the night before. A true underdog story."
+
+**Underdog stacking** — escalating same-thing comparisons, third item self-incriminating, then a deadpan summary line. Rule-of-three pivot running on comparisons instead of list items.
+
+> "Watching that beautiful toolbag Guy Fieri drive around Flavortown serving donkey sauce to the masses in a convertible that matches the burnt red tone of his sweaty face is pure poetry."
+
+**Affectionate-insult epithet** ("beautiful toolbag") + hyper-specific visual chain + flat aesthetic verdict ("is pure poetry"). The sentence is long because the joke compounds; the verdict is three words.
+
+> "Weed and Sean went together like lamb and tunafish for the next decade."
+
+**Embedded-quote-as-simile** — a Step Brothers line woven in unattributed. Second observed instance of the borrowed-canon-line family (with Lyric-as-Literal's "I'm shipping up to Boston"). The reader who knows, knows; the reader who doesn't still gets a joke.
+
+> "I never had the balls to crowd surf because I've seen one too many people get tossed around and groped only to have their head meet the ground a few seconds after. Luckily, their neck broke their fall."
+
+**Deadpan reversal** — the "luckily" sets up relief, the payload is worse. Classic loaded-sentence shape with a cruelty-free dark turn.
+
+> "One of her favorites is Gracie Abrams (daughter of some guy named J.J. Abrams. Apparently, he created some no named show called Lost and directed a couple of Star Wars flicks. Doesn't sound too interesting)."
+
+**Faux-Ignorance Aside** (NEW PROVISIONAL MOVE) — deadpan pretending not to know a famous thing, sustained across multiple beats. Distinct from Reader-Dismissal: the reader isn't being addressed, the world is being under-reacted to.
+
+> "...because one of them was a dealer (just weed. Calm down, ya narc)..." / "...I saw one of the girls whose part I totally skipped over crying (DRAMA QUEEN) and running into the dressing room."
+
+**Reader-Dismissal, instances 4 and 5** — confirms the move is pervasive in raw speech, not exercise-induced. "(DRAMA QUEEN)" is a new micro-variant: all-caps parenthetical verdict on a third party while the narrative keeps moving.
+
+> "I still think of that night from time to time and get a hollow feeling in my stomach... but god damn, did I look GOOD in that kilt."
+
+**Hard Cut on genuine shame** — the Pentheus story carries real guilt (a castmate cried over his skipped pages) and the closer still deflects into body-confidence. Note: he lets the hollow feeling land for a full beat BEFORE the cut. Gravity gets one sentence, never zero.
+
+> "She cried. I nailed it."
+
+**Vonnegut compression closer in the wild** — the Gracie Abrams Christmas-gift story ends on four words, two sentences, sentiment immediately converted to self-congratulation.
+
+> "It was a place for people with no names and little IQs to gain fame in their childhood bedrooms."
+
+Early-YouTube description — the **affectionate roast** register: mockery + genuine love coexisting, neither canceling the other.
+
+> "Different city. Different chapter. Same shit."
+
+**Cliché inversion** (from the Cheese Gauntlet, B4) — his instinctive fix for LinkedIn poetry is to keep the cadence and break the sentiment.
+
+### What this round teaches
+
+- **Raw Sean is a storyteller, not an aphorist.** The interview answers are wall-to-wall narrative: named people (cousin Mark, Oscar, Mary), named places (Angelo's deli, Gagopa, Burial Park), named substances, physical comedy. Wit arrives in waves between stretches of plain storytelling. Contrast with the rejected MEANING_OVER_ACCESS register (per-sentence metaphor cleverness about abstractions) — see cheese-bank.md.
+- **Gravity gets one beat before the cut.** In the Pentheus story the genuine feeling ("hollow feeling in my stomach") is allowed to land before the kilt deflection. The hard cut does not erase sincerity; it caps it.
+- **Sentence length tracks joke structure.** Long sentences when a joke compounds (Guy Fieri), short when the verdict lands. The rhythm isn't decorative — it's load-bearing comedy timing.
+- **His similes borrow from his canon without attribution** (lamb and tunafish). When generating, prefer a reference-universe canon line woven in over a freshly invented simile.
+- **Two new provisional moves to watch:** Faux-Ignorance Aside (1 strong instance) and Affectionate-Insult Epithet ("beautiful toolbag" — 1 instance). Hold for second instances before promoting to SKILL.md, per the established promotion rule.
+
+---
+
+## Script Corpus (2026-06-04)
+
+> Sean's 11 screenplays (~2019 era, converted to Markdown at
+> `vault/40_knowledge/references/screenwriting-skill-building/Seans-Old-Scripts/Markdown/`)
+> were mined in a dedicated session. Full report — action-line prose bank, dialogue joke
+> anatomy, character-intro inventory, per-move evidence, themes — at
+> `../drafts/2026-06-04-script-mining-report.md`. The **action-line prose bank** (report §2)
+> is a first-order calibration anchor for essay narration: it is his natural prose voice at
+> length, pre-dating any AI involvement.
+
+**Promotions executed against the report:** Faux-Ignorance Aside (4 instances / 4 scripts),
+Affectionate-Insult Epithet (3+ / 2 scripts), Borrowed Canon Line (absorbing the
+Lyric-as-Literal provisional; 5+ instances across formats), plus six new script-mined moves
+(Comic Under-Reaction, Sincerity Punished by the World, Fumbled Idiom, Zeugma Paint, Buried
+Rotten Beat, Character-Intro Verdict) — all now in the SKILL.md signature-moves table.
+
+**Still on watch:** Rhetorical Catechism (no script support — possibly a 2026-era prose tic;
+needs one more independent prose instance) and Post-Chaos Inventory Shot (1.5 instances).
+
+**Standing correction from the mine:** the skill previously under-modeled sincerity capacity.
+The one-beat-before-the-cut rule is the short-prose compression of a bigger instinct — at
+length, earnest passages run whole scenes and the deflation arrives externally, on a delay
+(see SKILL.md "Sincerity Budget").
+
+---
