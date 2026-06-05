@@ -109,3 +109,7 @@ vault/90_system/audio/*.mp3
 
 # Local agent tooling artifacts (e.g. .agents/skills export mirror) — not source.
 .agents/
+
+# Codex CLI local config/state — generated, not source.
+.codex/
+AGENTS.md
