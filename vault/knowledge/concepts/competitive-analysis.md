@@ -2,10 +2,10 @@
 title: "Competitive Analysis"
 type: concept
 sources:
-  - knowledge/connections/strategic-inflection-vs-activity-system-in-competitive-analysis.md
+  - knowledge/concepts/competitive-analysis.md
 tags: [auto-generated, phase-6]
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Definition

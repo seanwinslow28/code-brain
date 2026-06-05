@@ -5,8 +5,8 @@ connects:
   - Knowledge-Centered Service
   - Boundary Object Theory
   - Confluence Overhaul Plan
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Synthesis

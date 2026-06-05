@@ -2,34 +2,31 @@
 title: "Crypto PM/APM Role Specifications"
 type: concept
 sources:
-  - knowledge/concepts/crypto-pm-apm-role-specifications.md
+  - knowledge/connections/the-tension-between-protocol-instrumentation-and-regulatory-ambiguity.md
 tags: [auto-generated, phase-6]
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Definition
 
-This framework redefines product management in decentralized environments as the design of on-chain telemetry and economic mechanisms rather than traditional user experience optimization. It requires the practitioner to treat product surfaces as markets, necessitating a deep understanding of incentive structures, liquidity dynamics, and regulatory ambiguity. The role demands the ability to instrument protocol behavior directly through tools like Dune Analytics rather than relying on standard business intelligence dashboards. This creates a distinct professional identity that bridges technical infrastructure, economic theory, and legal compliance.
+This framework redefines product management in decentralized environments as the design of on-chain telemetry and economic mechanisms rather than traditional user experience optimization. It requires the practitioner to operate under legal ambiguity without becoming a lawyer, adding criteria for regulatory sensemaking such as custody, disclosures, and jurisdictional rollout. The role demands a dual competency where the product surface is treated as both a market requiring economic reasoning and a legal entity requiring compliance sensemaking.
 
 ## Context
 
-Sean is actively targeting senior product roles in the crypto sector, where generic SaaS experience is often insufficient. By articulating this specific 'mechanism-design' and 'telemetry' capability, he differentiates himself from candidates who only possess surface-level 'web3 knowledge.' This definition allows him to produce high-signal artifacts, such as interview one-pagers, that demonstrate immediate value to hiring managers looking for PMs who can navigate the unique constraints of decentralized protocols.
+Sean must articulate this specific 'mechanism-design' and 'telemetry' capability to differentiate himself from candidates who only possess surface-level 'web3 knowledge.' This distinction is critical for converting The Block referrals and targeting roles that value regulatory sensemaking as a core product competency rather than a post-launch legal hurdle.
 
 ## Evidence
 
-> A role-spec facet that treats crypto PM work as instrumentation design, not just blockchain knowledge, where the PM defines the event-level metric that proves whether the product is working.
-
-> In crypto, product surfaces often are markets, so PMs need to reason about incentives, congestion, liquidity, adverse selection, and strategic behavior rather than just optimizing UX.
-
 > The PM must design under legal ambiguity without becoming a lawyer, adding criteria for regulatory sensemaking such as custody, disclosures, and jurisdictional rollout.
+
+> By articulating this specific 'mechanism-design' and 'telemetry' capability, he differentiates himself from candidates who only possess surface-level 'web3 knowledge.'
 
 ## Examples
 
-- Defining a portfolio one-pager titled 'How I’d Measure Product-Market Fit for a Crypto Product Without Waiting for BI' using Dune’s Spellbook repo.
-- Producing a Substack essay or case study titled 'Crypto PM Is Market Design Wearing a UX Mask' to position Sean for exchange or lending roles.
-- Creating a runbook for 'Feature Launch Risk Triage for a Crypto PM' that addresses token classification risk and compliance UX.
+- Designing on-chain telemetry to prove product viability while navigating custody regulations.
+- Integrating regulatory sensemaking into the core product management criteria.
 
 ## Related Concepts
 
-[[Target Role Specs for 2026]] [[Portfolio Projects for Interview Prep]] [[Market Positioning]]
+[[The Tension Between Protocol Instrumentation and Regulatory Ambiguity]] [[Market Positioning]]

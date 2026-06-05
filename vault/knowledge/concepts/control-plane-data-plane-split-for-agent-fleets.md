@@ -2,30 +2,31 @@
 title: "Control Plane / Data Plane Split for Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/control-plane-stability-vs-data-plane-drift.md
+  - knowledge/connections/vendor-lock-in-vs-architectural-flexibility.md
 tags: [auto-generated, phase-6]
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Definition
 
-This architectural invariant separates the agent system into two distinct layers: the control plane, which manages scheduling, authorization, and halting logic, and the data plane, where agents actually read/write vault artifacts, run research, generate summaries, or mutate files. The stability of the control plane is often assumed to be static, yet it must interface with a data plane that experiences inherent volatility due to user changes or agent mutations. When the control plane assumes a static environment but the data plane experiences drift, the system fails not because of control logic errors, but because of unmanaged divergence between intended and actual workflows. This split requires explicit design of context preparation to survive the volatility of the living vault.
+This architectural pattern separates the decision-making logic (control plane) from the execution and state storage (data plane) to reduce coupling between agents. When this split is absent, agents become dependent on shared infrastructure that they do not own or control, leading to coordination failures and scalability limits. The mechanism requires explicit routing layers to manage how agents interact with memory stores, ensuring that one agent's write operations do not inadvertently corrupt another agent's state.
 
 ## Context
 
-Sean's vault operates as a living system where agent outputs mutate the very artifacts they depend on. By explicitly defining the boundary between the scheduling logic and the artifact mutation logic, Sean can isolate failures in agent behavior from failures in orchestration. This distinction is critical for debugging why an agent might be 'green' (running) but producing stale or incorrect outputs due to data plane drift.
+Sean's fleet consists of multiple agents that need to share context without interfering with each other. Without a clear split between control and data planes, his agents risk overwriting each other's historical data or failing to propagate information correctly, which undermines the reliability of his autonomous workflows.
 
 ## Evidence
 
-> distinguish the control plane that schedules, routes, authorizes, observes, and halts agents from the data plane where agents actually read/write vault artifacts, run research, generate summaries, or mutate files.
+> The analysis evaluates five distinct options, highlighting specific technical trade-offs and known issues for each, with the 'Do-Nothing' baseline failing to solve the structural problem of uncoordinated, non-propagating memory stores.
 
-> This architectural invariant separates the agent system into two distinct layers: the control plane, which manages scheduling, authorization, and halting logic, and the data plane, where agents actually read/write vault artifacts, run research, generate summaries, or mutate files.
+> analytic clients, leading to systemic resource exhaustion over long-running automated fleet deployments (Issue \#3376).
 
 ## Examples
 
-- The control plane halts an agent because it detects a deviation in the data plane's output format, even though the agent's internal logic was correct.
+- Implementing a thin cross-agent routing layer for memory propagation.
+- Addressing the primary multitenant failure mode where Agent A overwrites Agent B's historical data.
 
 ## Related Concepts
 
-[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Vault as Agent Infrastructure]]
+[[Runtime-Model Coupling]] [[Vendor Lock-in vs. Architectural Flexibility]]

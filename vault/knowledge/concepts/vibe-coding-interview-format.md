@@ -2,31 +2,31 @@
 title: "Vibe-Coding Interview Format"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-descriptive-resume-and-mechanical-proof.md
+  - knowledge/connections/performance-vs-preparation-in-agentic-interviews.md
 tags: [auto-generated, phase-6]
-created: 2026-05-31
-updated: 2026-05-31
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Definition
 
-This format functions as a situated human-machine-human interaction where the candidate’s competence is revealed through the repair, redirection, and reframing of a live plan. It is not a static assessment of knowledge but a dynamic evaluation of how the candidate manages the tension between intent and execution in real-time. The mechanism relies on the candidate's ability to maintain coherence while adapting to the immediate constraints of the environment, demonstrating fluency through action rather than description. This format exposes the underlying operational logic of the candidate's thinking, making the process of problem-solving the primary artifact of evaluation.
+The Vibe-Coding Interview Format functions as a situated human-machine-human interaction where the candidate’s competence is revealed through the repair, redirection, and reframing of a live plan. This format serves dual purposes: testing real-time coding skills and assessing cultural fit through interpersonal dynamics, making it a nexus for life-systems communication and job-hunt outcome delivery. The mechanism relies on the candidate's ability to navigate the inversion of traditional pair-programming dynamics, where the human acts as the navigator while the AI assumes the driver role. Competence is thus defined by the quality of the negotiation with the tool and the interviewer, rather than the final code output.
 
 ## Context
 
-Sean's job hunt involves interviews that prioritize real-time problem-solving and 'vibe-coding' skills. Understanding this format allows him to prepare not just for technical questions, but for the specific dynamic of live plan repair and redirection. By recognizing the interview as a 'ship + wiring task,' he can focus his preparation on the reliability of his immediate responses and the clarity of his operational logic, rather than just the correctness of his final answer.
+Sean must adapt his interview strategy to this format, which prioritizes dynamic process management over static code correctness. Understanding this format allows him to demonstrate the 'Agentic Engineering Signal' effectively, showing how he leverages AI tools for rapid iteration. This insight is vital for avoiding the trap of preparing only for traditional technical questions.
 
 ## Evidence
 
-> The content is written and staged. This is a ship + wiring task, not an authoring task.
+> Vibe-coding interviews serve dual purposes — testing real-time coding skills and assessing cultural fit through interpersonal dynamics.
 
-> The interview format functions as a situated human-machine-human interaction where the candidate’s competence is revealed through the repair, redirection, and reframing of a live plan.
+> This format functions as a situated human-machine-human interaction where the candidate’s competence is revealed through the repair, redirection, and reframing of a live plan.
 
 ## Examples
 
-- Repairing a live plan during a coding session.
-- Redirecting a problem-solving approach based on immediate feedback.
+- Navigating the role-switching between driver and navigator
+- Demonstrating cultural fit through interpersonal dynamics
 
 ## Related Concepts
 
-[[Agentic Engineering Signal]] [[Real-Time Problem Solving]] [[Interpersonal Dynamics]]
+[[Confidence Rituals]] [[The Agentic Role Inversion Tension]]

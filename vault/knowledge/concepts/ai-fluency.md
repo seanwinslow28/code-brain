@@ -2,10 +2,10 @@
 title: "AI Fluency"
 type: concept
 sources:
-  - knowledge/connections/the-governance-building-bifurcation.md
+  - knowledge/concepts/ai-fluency.md
 tags: [auto-generated, phase-6]
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Definition

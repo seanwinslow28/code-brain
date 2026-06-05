@@ -2,10 +2,10 @@
 title: "Vibe-Coding Interview"
 type: concept
 sources:
-  - knowledge/connections/performance-vs-preparation-in-agentic-interviews.md
+  - knowledge/concepts/vibe-coding-interview.md
 tags: [auto-generated, phase-6]
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Definition

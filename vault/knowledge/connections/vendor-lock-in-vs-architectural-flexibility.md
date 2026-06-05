@@ -5,8 +5,8 @@ connects:
   - Runtime-Model Coupling
   - Control Plane / Data Plane Split for Agent Fleets
   - Infrastructure Status
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Synthesis
@@ -17,7 +17,7 @@ The tension between leveraging Anthropic's native memory for zero infrastructure
 
 ### [[Runtime-Model Coupling]]
 
-> The optimal long-term memory solution is Anthropic’s native `memory_20250818` tool paired with a thin cross-agent routing layer, providing immediate value by enabling cross-agent propagation while maintaining zero infrastructure overhead.
+> Runtime-model coupling is a structural dependency where an agent's operational stability and memory persistence are inextricably bound to a specific vendor's proprietary inference infrastructure.
 
 ### [[Control Plane / Data Plane Split for Agent Fleets]]
 
