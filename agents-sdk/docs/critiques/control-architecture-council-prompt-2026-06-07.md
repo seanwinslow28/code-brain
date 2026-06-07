@@ -1,0 +1,96 @@
+You are a four-member review council stress-testing a portfolio artifact written by an AI Product Manager (Sean Winslow) who is interviewing for Forward-Deployed / enterprise AI PM roles (the named target is Anthropic's Forward Deployed Engineer, Applied AI). The artifact below, `CONTROL_ARCHITECTURE.md`, reframes his existing personal-agent-fleet infrastructure as the "Authority / Recovery / Audit" control trinity that enterprise buyers look for (the framing traces to Nate Jones's §3.7 "implementation-architecture components"). FDE hiring managers and senior engineers will read this closely. Your job is to find what would cost him credibility in a technical screen, and what would make it land harder.
+
+Critique against these axes, in priority order:
+
+1. **Credibility / overclaiming.** Where does the doc claim more than a ~100-line-of-routing-logic, one-laptop fleet can support? Flag any sentence a senior engineer would seize on to grill him on concurrency, distributed systems, or scale he can't defend. The doc *deliberately* refuses to frame its local-cloud router as an "agent operating system" or "runtime architecture" (a logged guardrail — Task 7 STOP-DOING). Pressure-test whether that restraint is held consistently, or whether any sentence still inflates.
+
+2. **Technical honesty.** The doc is explicit that the production fleet's enforced exit codes are 0/1/2 (hooks) plus typed exceptions (`RouteUnavailable`, budget-cap aborts), and that the demo's "exit code 7 = budget breach" is a convention the *demo harness* introduces, not a production claim. Is that honesty boundary drawn clearly enough that a reader who clones the repo won't feel misled? Are there other places where a claim and the real code could diverge?
+
+3. **The Authority / Recovery / Audit mapping.** Does each of the three sections actually belong under its heading, or do any of the control surfaces sit under the wrong leg? Is anything in the trinity missing that an enterprise buyer would expect (e.g., rate limiting, least-privilege, secrets rotation, replay, tamper-evidence on the audit log)?
+
+4. **What a Forward-Deployed buyer most wants to see** that is under-developed or absent. Be specific and concrete — name the paragraph.
+
+5. **Structure and cut-ability.** It runs ~1,700 words. What is the weakest 200 words? What single addition would most increase its persuasive force per word?
+
+**Voice constraint — read this carefully.** This is an intentionally SOBER, declarative work-artifact (engineering documentation), not a personal essay. Do NOT recommend injecting personal voice, jokes, narrative color, or "clever" per-sentence metaphors — that register is explicitly wrong for this artifact and Sean adds any personal flourish himself, by hand, later. Critique it as you would internal engineering documentation: clarity, precision, defensibility, honesty. Reward plain declarative prose; penalize anything that performs.
+
+Each council member: give your sharpest independent read first (do not converge prematurely). Then the chairman synthesizes a single prioritized revision list: the 3–5 highest-leverage changes, each with a concrete before/after or a specific instruction, ordered by impact on an FDE reader.
+
+---ARTIFACT UNDER REVIEW: CONTROL_ARCHITECTURE.md---
+
+# Control Architecture: Authority, Recovery, Audit
+
+> What it takes to let autonomous agents spend real money against real credentials and still sleep at night.
+
+This document reframes infrastructure I already run — budget caps, circuit breakers, keychain-gated credentials, Pushover escalation, and append-only JSONL ledgers — as the three control surfaces Nate Jones names as the table stakes for production agent deployments: **Authority, Recovery, Audit** (§3.7, "implementation-architecture components"). None of this is new code. It has been enforcing a $50/month ceiling on an autonomous fleet since April. What was missing was the *name*. Calling it "cost discipline" undersold it; it is the same control plane an enterprise asks a Forward-Deployed Engineer to stand up around a customer's agents, at the scale of one person's machine.
+
+The fleet under discussion: 17 SDK agents on launchd schedules plus 13 Claude Code subagents, running headless overnight, authenticated against paid APIs (Anthropic, Gemini Deep Research) and free local models. The honest version of "autonomous agents with budgets" is that the interesting engineering is not the autonomy. It is the three things that keep the autonomy from quietly bankrupting you or silently producing nothing.
+
+## The control loop, end to end
+
+```mermaid
+sequenceDiagram
+    participant A as Agent run
+    participant P as Policy (config.toml caps)
+    participant L as Ledger (vault/health/*.json)
+    participant N as Pushover
+    participant H as Human (Sean)
+    A->>P: request to spend $X on a task
+    P-->>A: $X exceeds daily_cap_usd → DENY
+    Note over A,P: circuit trips before any API call
+    A->>L: append breach record (append-only)
+    A->>N: notify_on = gate_check_fail → push
+    N-->>H: phone alert (the agent failed loudly)
+    H->>A: rollback — kill-switch flag or git revert
+    Note over H,A: recovery is a documented one-liner, not a code change
+```
+
+Four control surfaces fire in sequence on a single budget breach: the policy blocks, the ledger records, the human is paged, and a rollback path is already written down. The rest of this document is what each surface is, and where the real code lives.
+
+## 1. Authority — who is allowed to spend what, and hold which key
+
+Authority is the set of questions answered *before* an agent acts: how much may it spend, which credentials may it hold, and which models it is forbidden from using for a given task.
+
+**Budget caps as policy, cascading.** Spend authority is declared in [`agents-sdk/config.toml`](../config.toml), not buried in code. Every task profile carries a per-query ceiling (`[safety] max_budget_default = 0.50` is the floor; individual agents raise or lower it — the daily-driver morning run gets `max_budget_usd = 0.90`, the skill-optimizer a hard `cost_cap_usd_hard = 200.00` over a soft `cost_cap_usd_soft = 50.00`). Above those sit the aggregate governors in `[gemini.budget]`: `daily_cap_usd = 20.00` and `monthly_cap_usd = 50.00`. The three tiers are deliberate. A per-query cap stops one runaway call; the daily cap catches the second-order case where ten individually-legal calls compound past the day's budget; the monthly governor is the backstop when a schedule misfires for a week. Authority is layered because a single threshold only catches a single failure mode.
+
+**Keychain-gated credentials.** No secret lives in a `.env` file. Every API key is fetched at runtime from the macOS Keychain through [`agents-sdk/lib/keychain.py`](../lib/keychain.py), under the service prefix `com.sean.agents`; the module's own docstring is blunt about it — *"No .env files — this is the only sanctioned credential path."* This is an authority statement, not a convenience: it makes "which agent may hold which credential" an OS-enforced boundary rather than a file-permission hope. The same helper gates the Pushover tokens that the audit surface depends on, so a credential misconfiguration is caught at one chokepoint.
+
+**Forbidding a model is also authority.** The Job Feed agent sets `fallback_disabled = true` ([`config.toml`](../config.toml), `[agents.job_feed]`). When its preferred local model is unreachable, it is *not* permitted to fall back to a paid API — it takes the miss. This is authority expressed as a negative: routing-as-policy, where the policy is "this task is never worth paid spend." It is the cheapest control in the system and the one that has saved the most money.
+
+**One note on routing.** A local-cloud router decides which model — local Qwen/Gemma on a Mac Mini, or a frontier API — serves each task, which is authority over *which brain runs which task*. That is the full extent of the claim. I am deliberately **not** framing this router as an "agent operating system" or a "runtime architecture"; it is roughly a hundred lines of routing logic, and dressing it up as systems infrastructure invites questions about concurrency and distributed caching that the code does not try to answer. The deferral is logged as a standing decision (Task 7 STOP-DOING, "skip framing the router as Agent OS"). The control-architecture story does not need the inflation, and the inflation would weaken it.
+
+## 2. Recovery — what happens when a control trips
+
+Authority decides what is allowed. Recovery decides what happens at the boundary: how the system fails, and how a human puts it back.
+
+**Documented exit-code semantics.** The fleet's hooks speak a small, fixed vocabulary, anchored in [`CLAUDE.md`](../../CLAUDE.md) ("Hook Exit Codes"): `0` allows, `1` logs an error but allows the operation, `2` denies and blocks. Exit `2` is the hard stop — a PreToolUse hook returning `2` is how a binary "no" is enforced without a model in the loop. The discipline is that the codes are *documented and stable*, so a failing gate is legible rather than a mystery crash.
+
+**Circuit breakers that refuse to spend.** The cost-safety case is handled by a real exception, `RouteUnavailable`, in [`agents-sdk/lib/hybrid_router.py`](../lib/hybrid_router.py) (L41). When a route opts out of fallback (`fallback = "none"`) and its machine is offline, the router *raises before any side effect* — no wake-on-LAN packet, no cross-tier scan, and critically no silent paid-API spend. The inline contract says it plainly: *"no WoL, no API spend."* Failing closed, toward $0, is the recovery default.
+
+**Escalation that fails loud.** When a gate trips or an agent errors, the human is paged through [`agents-sdk/lib/pushover.py`](../lib/pushover.py), governed by `[notifications] notify_on = ["agent_error", "gate_check_fail"]`. The module is built to fail loud on purpose: `ensure_credentials_or_raise()` crashes a run at boot if the Pushover keys are missing, rather than discovering at notify-time that the system whose job is surfacing failures cannot surface anything. A monitoring layer that can fail silently is worse than none.
+
+**Rollback as a one-liner.** Every consumer-facing capability has a written rollback that is a flag flip, not a refactor. `[knowledge_index] inject_on_session_start = false` instantly stops the session-start context injection; `[artifacts] enabled = false` is a global kill-switch for the operating-model wiring. These are documented in [`config.toml`](../config.toml) beside the features they govern, so recovery is a known move under pressure, not an improvisation.
+
+**State that survives a crash.** Durable state is parked in SQLite via [`agents-sdk/lib/concept_edges.py`](../lib/concept_edges.py), so a run that dies mid-flight leaves the knowledge graph intact and the next run resumes against committed rows rather than lost memory. (The judge layer's `JUDGE_UNAVAILABLE` outcome is the same idea applied to review — a missing judge is a first-class, recorded result, not an exception that voids the run; see the Task 12 judge-layer ledger.)
+
+## 3. Audit — reconstructing what happened without my narration
+
+Audit is the property that lets a third party answer *what changed, when, and why* without me in the room. Three independent substrates carry it.
+
+**Append-only JSONL/JSON ledgers.** Every paid run writes a timestamped, per-period record under `vault/health/`. The shapes are simple and stable. A council run appends to `council-spend-YYYY-MM-DD.json` — `{ "date", "total", "runs": [ { "amount", "profile", "tag" } ] }`. A Gemini Deep Research run appends to `gemini-spend-YYYY-MM.json` an object carrying `cost_predicted_usd`, `cost_actual_usd`, `wall_seconds`, the full `query`, an ISO-8601 `created` timestamp, and the `output_path` it produced. They are append-only and per-period, which means the audit trail is a `cat` and a `jq` away, not a database export.
+
+**Git history as an audit primitive.** The repository itself is an audit log: semantic commit messages, a versioned `CHANGELOG.md`, and the "frozen reference" pattern where a shipped artifact's commit is the citable record. Reconstructing a decision is `git log`, not archaeology.
+
+**Provenance inside the knowledge graph.** The typed-edge schema in [`concept_edges.py`](../lib/concept_edges.py) is itself auditable. Each edge carries a `confidence`, a `classifier_version`, and a `valid_until` marker; the six legal relations (`supports`, `contradicts`, `evolved_into`, `supersedes`, `depends_on`, `related_to`) are enforced by a SQL `CHECK` constraint. When a newer claim supersedes an older one, `mark_superseded()` stamps `valid_until` rather than deleting — so the graph records not just what it currently believes but *when it stopped believing the alternative*. That is audit history at the level of the agents' memory, queryable in SQL.
+
+## Worked example: a forced over-budget call
+
+The runnable demonstration lives in [`tools/governance-demo/`](../../tools/governance-demo/). `replay_budget_breach.py` replays one of three fixtures against a stubbed agent runner and exercises the real control paths:
+
+- `--fixture allowed` — spend inside budget. Policy passes, the run proceeds, one ledger row is written. Exit `0`.
+- `--fixture over_budget` — spend that breaches the daily cap. The policy check trips *before* any API call, a breach record is appended to the demo ledger, the Pushover path is invoked (use `--dry-pushover` to log instead of paging), and the run exits non-zero. The documented rollback is printed.
+- `--fixture missing_auth` — a request whose keychain-gated key has been stripped. The credential gate denies at the authority layer before spend is even considered.
+
+A note on honesty, because an FDE will clone this and check: the production fleet's enforced exit vocabulary is `0/1/2` (hooks) plus typed exceptions like `RouteUnavailable` and the budget-cap aborts described above. The demo harness adopts **exit code `7` as an explicit "budget breach" signal** so the worked example has an unambiguous, greppable outcome — that is a convention this demo introduces for clarity, not a claim that every production agent emits `7` today. The fixtures are deliberately synthetic and the runner is stubbed; it writes to a demo ledger, never to the real `vault/health/` files. The README states this boundary.
+
+The whole loop runs in well under a minute: breach, block, ledger write, page, rollback path. Authority decided it was not allowed. Recovery made the failure loud and the fix a one-liner. Audit wrote down that it happened. That is what control architecture means in practice, sized to one laptop and one phone.

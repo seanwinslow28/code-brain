@@ -8,9 +8,10 @@ created: 2026-06-07
 description: "System Design Fundamentals: 114 Concepts Explained for Software Engineers."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [life-systems]
+ai-context: "Neo Kim's system-design fundamentals — 114 concepts explained for software engineers (part 3 of 3)."
 ---
 ### #129: Part 3 - Webhooks, WebRTC, CQRS, and 35 others.
 

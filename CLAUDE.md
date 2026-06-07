@@ -209,9 +209,10 @@ life-systems/                         # DOMAIN 3 — personal systems
 
 claude-mastery/      # cross-cutting Claude Code meta-reference (stays at root)
 tools/                                # sidecar tools (non-skill, non-agent)
-└── llm-council/                      # Multi-vendor LLM council (inspired by karpathy/llm-council)
-    ├── upstream/                     # Karpathy's reference web app, unmodified
-    └── council/                      # Headless CLI used by .claude/skills/llm-council/
+├── llm-council/                      # Multi-vendor LLM council (inspired by karpathy/llm-council)
+│   ├── upstream/                     # Karpathy's reference web app, unmodified
+│   └── council/                      # Headless CLI used by .claude/skills/llm-council/
+└── governance-demo/                  # Authority/Recovery/Audit demo (Task 14) — replay_budget_breach.py + fixtures + tests; pairs with agents-sdk/docs/CONTROL_ARCHITECTURE.md
 evals/
 └── vault-synthesizer/   # 10-case eval suite for the nightly synthesizer
 vault/               # Obsidian vault (PARA + MOCs + operating-models + Prompts + RAG)

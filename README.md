@@ -25,6 +25,7 @@ Cross-cutting (no domain CLAUDE.md):
 | **vault/** | Obsidian vault with PARA structure, MOCs, prompt library, RAG knowledge, operating-model artifacts |
 | **agents-sdk/** | Autonomous Claude Agent SDK layer (Python + launchd) |
 | **evals/vault-synthesizer/** | 10-case binary eval suite for the vault synthesizer agent (v3.30.1) |
+| **tools/** | Sidecar tools (non-skill, non-agent): `llm-council/` (multi-vendor council) and `governance-demo/` (Authority/Recovery/Audit demo, pairs with `agents-sdk/docs/CONTROL_ARCHITECTURE.md`) |
 | **.claude/** | Canonical skills, agents, hooks, settings (auto-loaded) |
 
 ### Design Team (4 Review Agents)
