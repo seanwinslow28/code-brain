@@ -1,0 +1,28 @@
+{
+  "antigravity_calls": 0,
+  "antigravity_failures": 0,
+  "antigravity_last_error": "",
+  "antigravity_skipped": 5,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 0,
+  "backfill_articles_critiqued": 5,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/connections/agent-health-automation-routines-and-daily-driver-agent-interplay.md",
+    "vault/knowledge/expansions/connections/agent-health-automation-routines-and-daily-notes.md",
+    "vault/knowledge/expansions/connections/agent-health-daily-drive-agent-automation-success.md",
+    "vault/knowledge/expansions/connections/agent-resilience-across-travel-and-work-setup.md",
+    "vault/knowledge/expansions/connections/agentic-commerce-and-daily-routine-automation.md"
+  ],
+  "codex_calls": 5,
+  "codex_failures": 0,
+  "codex_last_error": "",
+  "codex_tokens_total": 128637,
+  "duration_seconds": 150.6,
+  "error": "",
+  "expansions_written": [],
+  "run_id": "2026-06-07T03:30:05",
+  "status": "ok",
+  "warnings": [
+    "antigravity disabled (codex-only mode)"
+  ]
+}
