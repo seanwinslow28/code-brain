@@ -8,9 +8,10 @@ created: 2026-06-07
 description: "How Stock Exchange Works - A Deep Dive"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [life-systems]
+ai-context: "Neo Kim's system-design deep dive on stock-exchange architecture — broker, gateway (risk manager / wallet / order manager with sequence numbers), and matching engine with an in-memory FIFO order book and deterministic matching."
 ---
 ### #101: Stock Exchange System Design - Part 1
 

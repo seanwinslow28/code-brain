@@ -1,0 +1,9 @@
+{
+  "_comment": "SYNTHETIC fixture. Not a real agent run. A spend request that pushes daily spend over the cap -> BUDGET BREACH path (circuit trips before the call; ledger + Pushover + rollback).",
+  "task": "demo: deep-research compound run (synthetic)",
+  "keychain_key": "GEMINI_API_KEY",
+  "auth_present": true,
+  "requested_usd": 7.00,
+  "daily_spent_usd": 18.50,
+  "daily_cap_usd": 20.00
+}

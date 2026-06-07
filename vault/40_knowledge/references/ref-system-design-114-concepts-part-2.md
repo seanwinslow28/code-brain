@@ -8,9 +8,10 @@ created: 2026-06-07
 description: "A deep dive into system design core concepts. Websockets, gateway, distributed cache, and 35 others."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [life-systems]
+ai-context: "Neo Kim's system-design core concepts — websockets, gateway, distributed cache, and ~35 others (part 2 of 3)."
 ---
 ### #122: Part 2 - websockets, gateway, distributed cache, and 35 others.
 

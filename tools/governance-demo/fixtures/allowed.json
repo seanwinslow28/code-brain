@@ -1,0 +1,9 @@
+{
+  "_comment": "SYNTHETIC fixture. Not a real agent run. A spend request inside the daily cap with its keychain key present -> ALLOW path.",
+  "task": "demo: vault concept synthesis (synthetic)",
+  "keychain_key": "GEMINI_API_KEY",
+  "auth_present": true,
+  "requested_usd": 0.42,
+  "daily_spent_usd": 3.10,
+  "daily_cap_usd": 20.00
+}

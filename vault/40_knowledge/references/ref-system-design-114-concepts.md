@@ -8,9 +8,10 @@ created: 2026-06-07
 description: "Scalability, Availability, Reliability, and 35 others."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [life-systems]
+ai-context: "Neo Kim's system-design primer covering scalability, availability, reliability, and ~35 other foundational concepts (part 1 of 3)."
 ---
 ### #120: Part 1 - scalability, availability, reliability, and 35 others.
 
