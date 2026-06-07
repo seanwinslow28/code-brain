@@ -41,6 +41,30 @@
       "duration_sec": 2.05,
       "failed_pollers": [],
       "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-07T09:00:03.019023",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.07,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-07T09:30:05.506824",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.03,
+      "failed_pollers": [],
+      "short_circuited": false
     }
   ]
 }
