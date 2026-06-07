@@ -8,9 +8,10 @@ created: 2026-06-07
 description: "Intention in Practice"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [creative-studio]
+ai-context: "Germán Reina Carmona on why a deliberate, intention-first process — storyboarding twice (cinematic, then page layout) before clean-up — produces better art than skipping steps, even when it looks inefficient."
 ---
 Hey there, Germán here 🌞!
 

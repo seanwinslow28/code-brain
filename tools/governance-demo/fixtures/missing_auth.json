@@ -1,0 +1,9 @@
+{
+  "_comment": "SYNTHETIC fixture. Not a real agent run. The keychain-gated key is stripped (auth_present=false) -> AUTHORITY DENIES at the credential gate, before budget is evaluated. Note the request is otherwise within budget, to prove the auth gate fires FIRST.",
+  "task": "demo: council critique run (synthetic)",
+  "keychain_key": "OPENROUTER_API_KEY",
+  "auth_present": false,
+  "requested_usd": 0.30,
+  "daily_spent_usd": 1.00,
+  "daily_cap_usd": 20.00
+}

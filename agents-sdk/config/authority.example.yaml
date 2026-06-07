@@ -1,0 +1,65 @@
+# authority.example.yaml — a sanitized, declarative agent-authority policy.
+#
+# This is an EXAMPLE artifact for agents-sdk/docs/CONTROL_ARCHITECTURE.md. It mirrors
+# the STRUCTURE of the real per-agent blocks in config.toml ([gemini_researcher],
+# [agents.job_feed], [llm_council]) without leaking the real cost numbers. Every figure
+# below is a round, generic placeholder ($1 / $10 / $50), not a production cap.
+#
+# The point it makes: an agent's *authority* — how much it may spend, which credential
+# it may hold, and which models it is forbidden from using — can live in a declarative
+# policy file, separate from the agent's code. Caps are policy, not logic.
+#
+# Credentials are referenced by their macOS Keychain entry NAME, never by value. The
+# real fetch path is agents-sdk/lib/keychain.py (service prefix com.sean.agents). No
+# secret material appears in this file or in any committed config.
+
+version: 1
+
+# ── Spend authority: the three-tier cap cascade ───────────────────────────────
+# per_query stops one runaway call; daily catches compounding legal calls; monthly
+# is the backstop when a schedule misfires for a week. A single threshold only
+# catches a single failure mode, so all three are declared.
+budget:
+  per_query_cap_usd: 1.00
+  daily_cap_usd: 10.00
+  monthly_cap_usd: 50.00
+  on_breach: block          # block | warn — "block" trips the circuit before the call
+  ledger: vault/health/example-spend-{YYYY-MM}.json   # append-only audit trail
+
+# ── Credential authority: which agent may hold which key ──────────────────────
+# Keys are gated through the macOS Keychain. The policy names the Keychain entry; the
+# loader resolves it at runtime. A missing entry denies at the credential gate, before
+# any spend is evaluated.
+credentials:
+  primary_keychain_ref: example_service_token     # resolved via lib/keychain.py get <ref>
+  deny_if_absent: true                            # fail closed: no key -> no run
+
+# ── Routing authority: which brain runs which task, and which is forbidden ─────
+# fallback_disabled expresses authority as a negative: when the preferred (local, free)
+# model is unreachable, this task is NOT permitted to fall back to a paid API. It takes
+# the miss. This is the cheapest control in the system.
+routing:
+  preferred: local            # local | frontier
+  fallback_disabled: true     # forbid the paid-API fallback for this task
+  on_unavailable: defer       # defer to the next window; never silently bill the API
+
+# ── Escalation authority: how a tripped control reaches a human ───────────────
+# The escalation channel itself is credential-gated and fails loud: a missing token
+# crashes the run at boot rather than discovering at notify-time that the system whose
+# job is surfacing failures cannot surface anything.
+escalation:
+  provider: pushover
+  user_keychain_ref: example_pushover_user
+  token_keychain_ref: example_pushover_token
+  notify_on:
+    - budget_breach
+    - auth_denied
+    - agent_error
+  require_credentials_at_boot: true
+
+# ── Rollback: every capability declares a one-line undo ───────────────────────
+# Recovery is a known move under pressure, not an improvisation. Each is a flag flip
+# or a revert, never a refactor.
+rollback:
+  disable_flag: enabled            # set enabled=false to kill this policy instantly
+  audited_in: CHANGELOG.md         # the revert is its own audit record

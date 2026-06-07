@@ -8,9 +8,10 @@ created: 2026-06-07
 description: "No dashboards, no data, no problem. Here's how to prove your value anyway."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [creative-studio]
+ai-context: "Miranda Slayter (UX Survival Guide) on proving design value without metrics by defining directional intended-impact statements sourced from support tickets, heuristic evals, and competitor benchmarks."
 ---
 Hey, [Miranda](https://www.linkedin.com/in/slayter/) here 👋
 
