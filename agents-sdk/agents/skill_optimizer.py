@@ -33,6 +33,9 @@ class SkillOptimizerConfig:
     cost_cap_usd_soft: float = 50.0
     sonnet_check_every_n_iterations: int = 5
     results_path: str = "data/skill-optimizer/writing-voice-modes-results.tsv"
+    generator_model: str = "opus"   # Agent SDK alias (version-proof); pin a full ID for reproducibility
+    sonnet_model: str = "sonnet"
+    ollama_base_url: str = "http://localhost:5050"
 
 
 def preflight_checks(config: SkillOptimizerConfig) -> tuple[bool, str]:
@@ -73,7 +76,7 @@ def generate_outputs(
     skill_md_text: str,
     prompts: list[dict],
     runs_per_prompt: int,
-    model: str = "claude-opus-4-7",
+    model: str = "opus",
     max_tokens: int = 600,
 ) -> dict[str, list[dict]]:
     """Run `runs_per_prompt` generations for each prompt; return outputs keyed by prompt id.
@@ -171,7 +174,7 @@ def propose_mutation(
     current_skill_md: str,
     recent_results: list[dict],
     worst_criteria: list[str],
-    model: str = "claude-opus-4-7",
+    model: str = "opus",
 ) -> tuple[str, str, str]:
     """Ask the optimizer subagent to propose ONE mutation.
 
@@ -255,7 +258,9 @@ import random as _random
 import time
 import httpx
 import yaml
-from anthropic import Anthropic
+# NOTE: the raw `anthropic` SDK (API-key billed) is intentionally NOT imported.
+# All model calls route through _SubscriptionClient (Claude Agent SDK / OAuth) so
+# generation bills Sean's subscription, never a metered API key. See 2026-06-06.
 
 from lib.skill_optimizer.structural_checks import (
     substack_format_intro,
@@ -288,11 +293,14 @@ def run_optimization_loop(config: SkillOptimizerConfig, dry_run: bool = False) -
     program_md = (config.repo_root / "agents-sdk/lib/skill_optimizer/program.md").read_text()
     judge_template = (config.repo_root / "agents-sdk/lib/skill_optimizer/judge_prompt.txt").read_text()
 
-    anthropic = Anthropic()
-    # Local Ollama client wrapper — implementation can use anthropic-style or direct HTTP.
-    # For dry_run, both clients are mocks that return canned text/YES.
+    # Generation/mutation route through the Claude subscription (OAuth), never the
+    # Anthropic API key. For dry_run, all clients are mocks that return canned text/YES.
+    gen_client = (
+        _SubscriptionClient(config.repo_root, default_model=config.generator_model)
+        if not dry_run else _DummyClient("Sean-voice placeholder output.")
+    )
     local_client = _build_ollama_client(config) if not dry_run else _DummyClient("YES")
-    sonnet_client = anthropic if not dry_run else _DummyClient("YES")
+    sonnet_client = gen_client if not dry_run else _DummyClient("YES")
     judge = JudgeRunner(local_client=local_client, sonnet_client=sonnet_client, prompt_template=judge_template)
 
     results_path = config.repo_root / "agents-sdk" / config.results_path
@@ -312,7 +320,7 @@ def run_optimization_loop(config: SkillOptimizerConfig, dry_run: bool = False) -
         worst = _worst_criteria(recent_rows)
         try:
             section, rationale, modified_md = propose_mutation(
-                optimizer_client=anthropic,
+                optimizer_client=gen_client,
                 program_md=program_md,
                 current_skill_md=current_skill_md,
                 recent_results=recent_rows,
@@ -341,11 +349,11 @@ def run_optimization_loop(config: SkillOptimizerConfig, dry_run: bool = False) -
         #      Ollama timeout or HTTP error skips the iteration instead of killing the
         #      whole run. SKILL.md is reverted to the prior committed state on failure.
         try:
-            train_outputs = generate_outputs(anthropic, modified_md, evals["training_prompts"], config.runs_per_prompt)
-            holdout_outputs = generate_outputs(anthropic, modified_md, evals["holdout_prompts"], config.runs_per_prompt)
+            train_outputs = generate_outputs(gen_client, modified_md, evals["training_prompts"], config.runs_per_prompt)
+            holdout_outputs = generate_outputs(gen_client, modified_md, evals["holdout_prompts"], config.runs_per_prompt)
             surprise_outputs = {}
             if iteration % 5 == 0:
-                surprise_outputs = generate_outputs(anthropic, modified_md, sealed["surprise_prompts"], config.runs_per_prompt)
+                surprise_outputs = generate_outputs(gen_client, modified_md, sealed["surprise_prompts"], config.runs_per_prompt)
 
             structural = _run_structural_checks(train_outputs, baseline)
             judge_outputs = _run_judge(judge, train_outputs, evals, mode_anchors=_load_anchors())
@@ -411,6 +419,109 @@ def run_optimization_loop(config: SkillOptimizerConfig, dry_run: bool = False) -
             break
 
     print(f"loop complete after {iteration} iterations")
+
+
+def run_score_only(config: SkillOptimizerConfig, dry_run: bool = False) -> dict:
+    """Score the CURRENT on-disk SKILL.md WITHOUT mutating it.
+
+    A baseline measurement, not an optimization step: no mutation proposal, no
+    keep/revert, no git commit, no tripwires. Runs the training + holdout prompts
+    through generation + the full 6-criterion scoring and appends ONE row to
+    results.tsv tagged `score-only-<date>` so a current-artifact baseline is
+    comparable to past iterations.
+
+    Skips the branch-name preflight (score-only never commits) but still requires
+    the eval files and a calibrated stylometry threshold. Returns the score dict
+    so callers/tests can assert on it.
+    """
+    for p, name in [
+        (config.target_skill_md, "SKILL.md"),
+        (config.evals_path, "evals.yaml"),
+        (config.stylometry_baseline_path, "stylometry_baseline.json"),
+    ]:
+        if not p.exists():
+            raise RuntimeError(f"missing required file: {name} at {p}")
+    baseline = load_baseline(config.stylometry_baseline_path)
+    if baseline.get("_threshold") is None:
+        raise RuntimeError(
+            "stylometric threshold not yet calibrated "
+            "(run agents-sdk/scripts/calibrate_stylometry_threshold.py first)"
+        )
+
+    evals = yaml.safe_load(config.evals_path.read_text())
+    judge_template = (
+        config.repo_root / "agents-sdk/lib/skill_optimizer/judge_prompt.txt"
+    ).read_text()
+
+    gen_client = (
+        _DummyClient("Sean-voice placeholder output.")
+        if dry_run
+        else _SubscriptionClient(config.repo_root, default_model=config.generator_model)
+    )
+    local_client = _DummyClient("YES") if dry_run else _build_ollama_client(config)
+    sonnet_client = gen_client
+    judge = JudgeRunner(
+        local_client=local_client, sonnet_client=sonnet_client, prompt_template=judge_template
+    )
+
+    skill_md = config.target_skill_md.read_text()
+    anchors = _load_anchors()
+    start = time.time()
+
+    train_outputs = generate_outputs(
+        gen_client, skill_md, evals["training_prompts"], config.runs_per_prompt,
+        model=config.generator_model,
+    )
+    holdout_outputs = generate_outputs(
+        gen_client, skill_md, evals["holdout_prompts"], config.runs_per_prompt,
+        model=config.generator_model,
+    )
+
+    train = score_outputs(
+        _run_structural_checks(train_outputs, baseline),
+        _run_judge(judge, train_outputs, evals, anchors),
+    )
+    holdout = score_outputs(
+        _run_structural_checks(holdout_outputs, baseline),
+        _run_judge(judge, holdout_outputs, evals, anchors),
+    )
+    train_score = train["total_passes"] / train["max_score"]
+    holdout_score = holdout["total_passes"] / holdout["max_score"]
+    per = train["per_criterion"]
+
+    row = {
+        "iteration": f"score-only-{datetime.date.today().isoformat()}",
+        "timestamp": datetime.datetime.now().isoformat(timespec="seconds"),
+        "mutation_section": "(none — score-only baseline)",
+        "mutation_summary": "Baseline measurement of current SKILL.md; no mutation applied.",
+        "train_score": f"{train_score:.4f}",
+        "holdout_score": f"{holdout_score:.4f}",
+        "surprise_score": "",
+        "criterion_substack_format_intro": f"{per.get('substack_format_intro', 0):.4f}",
+        "criterion_anti_pattern_overreference": f"{per.get('anti_pattern_overreference', 0):.4f}",
+        "criterion_stylometric_distance": f"{per.get('stylometric_distance', 0):.4f}",
+        "criterion_signature_move_present": f"{per.get('signature_move_present', 0):.4f}",
+        "criterion_sounds_like_sean": f"{per.get('sounds_like_sean', 0):.4f}",
+        "criterion_no_anti_pattern_violation": f"{per.get('no_anti_pattern_violation', 0):.4f}",
+        "moving_avg": f"{train_score:.4f}",
+        "delta_vs_best": "",
+        "kept_or_reverted": "n/a",
+        "tripwires_triggered": "",
+        "sonnet_qwen_agreement": "",
+        "duration_sec": f"{time.time() - start:.1f}",
+        "cost_usd": "",
+    }
+    results_path = config.repo_root / "agents-sdk" / config.results_path
+    write_results_row(results_path, row)
+    print(f"[score-only] train={train_score:.4f}  holdout={holdout_score:.4f}")
+    for cid in CRITERION_IDS:
+        print(f"  {cid}: {per.get(cid, 0):.4f}")
+    return {
+        "train_score": train_score,
+        "holdout_score": holdout_score,
+        "per_criterion": per,
+        "row": row,
+    }
 
 
 # Helper function placeholders — fully implemented in Tasks 4.7, 4.8, 4.9.
@@ -787,6 +898,97 @@ def _plateau(scores: list[float], n: int = 3, tol: float = 0.005) -> bool:
     return max(tail) - min(tail) <= tol
 
 
+class _SubscriptionClient:
+    """Route generation / mutation / Sonnet-judge calls through the Claude Agent
+    SDK over `claude login` OAuth — i.e. the user's Claude subscription, NEVER the
+    Anthropic API key.
+
+    Cost-safety requirement (2026-06-06): Sean removed all ANTHROPIC_API_KEYs from
+    the machine after an eval drained API credit. This client never reads or passes
+    a key; it spawns the SDK with `env={}` so the CLI falls back to OAuth, and warns
+    loudly if a stray key is present in the environment. Exposes the minimal
+    `.messages.create()` (generation/mutation) and `.complete()` (Sonnet judge)
+    surfaces the optimizer + JudgeRunner already expect, so it's a drop-in for the
+    old `anthropic.Anthropic()` without touching their call sites.
+    """
+
+    def __init__(self, repo_root: Path, default_model: str = "opus"):
+        import os
+
+        if os.environ.get("ANTHROPIC_API_KEY"):
+            print(
+                "[skill_optimizer] WARNING: ANTHROPIC_API_KEY is set in the environment. "
+                "This client IGNORES it and bills your Claude subscription via OAuth. "
+                "Unset it (`unset ANTHROPIC_API_KEY`) if you want to be certain no "
+                "metered API call is ever possible."
+            )
+        self.repo_root = repo_root
+        self.default_model = default_model
+        self.messages = self  # so `client.messages.create(...)` resolves to .create
+
+    async def _run_async(self, *, system: Optional[str], prompt: str, model: Optional[str]):
+        from claude_agent_sdk import ClaudeAgentOptions, ResultMessage, query
+
+        import sys
+
+        opts: dict = {
+            "model": model or self.default_model,  # alias ("opus"/"sonnet"), version-proof
+            "tools": [],                    # pure text generation: no tools loaded
+            "max_turns": 1,
+            "permission_mode": "bypassPermissions",
+            "cwd": str(self.repo_root),
+            "env": {},                      # never pass ANTHROPIC_API_KEY -> OAuth subscription
+            # Surface the CLI's real stderr instead of swallowing it (the 2026-06-07
+            # failure was a generic "exit code 1" with no detail). Leave setting_sources
+            # and allowed_tools at their defaults: an explicit [] makes the SDK emit an
+            # empty-valued flag (`--setting-sources=`) that the CLI rejects.
+            "stderr": lambda line: sys.stderr.write(f"[claude-cli] {line}\n"),
+        }
+        if system:
+            opts["system_prompt"] = system
+        options = ClaudeAgentOptions(**opts)
+
+        text_parts: list[str] = []
+        usage = {"input_tokens": 0, "output_tokens": 0}
+        async for message in query(prompt=prompt, options=options):
+            content = getattr(message, "content", None)
+            if content:
+                for block in content:
+                    t = getattr(block, "text", None)
+                    if t:
+                        text_parts.append(t)
+            if isinstance(message, ResultMessage):
+                if not text_parts and getattr(message, "result", None):
+                    text_parts.append(message.result)
+                u = getattr(message, "usage", None) or {}
+                if isinstance(u, dict):
+                    usage["input_tokens"] = u.get("input_tokens", 0) or 0
+                    usage["output_tokens"] = u.get("output_tokens", 0) or 0
+        return "".join(text_parts), usage
+
+    def _run(self, *, system: Optional[str], prompt: str, model: Optional[str]):
+        import asyncio
+
+        return asyncio.run(self._run_async(system=system, prompt=prompt, model=model))
+
+    def create(self, *, model=None, max_tokens=600, system=None, messages, **_):
+        """Mimic anthropic.Anthropic().messages.create() for generate_outputs/propose_mutation."""
+        user = messages[-1]["content"] if messages else ""
+        text, usage = self._run(system=system, prompt=user, model=model)
+        return type("M", (), {
+            "content": [type("C", (), {"text": text})()],
+            "usage": type("U", (), {
+                "input_tokens": usage["input_tokens"],
+                "output_tokens": usage["output_tokens"],
+            })(),
+        })()
+
+    def complete(self, *, prompt: str, model=None, temperature: float = 0.0, seed: int = 0, **_):
+        """Mimic the Ollama client's .complete() for the Sonnet sample-check path."""
+        text, _usage = self._run(system=None, prompt=prompt, model=model)
+        return text
+
+
 class _DummyClient:
     """Echo client for dry-run mode."""
     def __init__(self, fixed_response: str = "YES"):
@@ -802,6 +1004,12 @@ if __name__ == "__main__":
     import argparse
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument(
+        "--score-only",
+        action="store_true",
+        help="Score the current SKILL.md without mutating it (baseline measurement). "
+        "No git, no keep/revert; appends a score-only row to results.tsv.",
+    )
     ap.add_argument("--config-path", default="agents-sdk/config.toml")
     args = ap.parse_args()
     # Load config from TOML — caller fills in repo_root etc.
@@ -822,5 +1030,11 @@ if __name__ == "__main__":
         cost_cap_usd_soft=cfg_data.get("cost_cap_usd_soft", 50.0),
         sonnet_check_every_n_iterations=cfg_data.get("sonnet_check_every_n_iterations", 5),
         results_path=cfg_data.get("results_path", "data/skill-optimizer/writing-voice-modes-results.tsv"),
+        generator_model=cfg_data.get("generator_model", "claude-opus-4-7"),
+        sonnet_model=cfg_data.get("judge_model_sonnet_check", "claude-sonnet-4-6"),
+        ollama_base_url=cfg_data.get("ollama_base_url", "http://localhost:5050"),
     )
-    run_optimization_loop(config, dry_run=args.dry_run)
+    if args.score_only:
+        run_score_only(config, dry_run=args.dry_run)
+    else:
+        run_optimization_loop(config, dry_run=args.dry_run)

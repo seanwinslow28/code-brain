@@ -23,7 +23,9 @@ from agents.skill_optimizer import (
     _run_structural_checks,
     _run_judge,
     _sonnet_check,
+    run_score_only,
 )
+import json
 
 
 class TestPreflightChecks:
@@ -313,6 +315,127 @@ class TestLoadAnchors:
         anchors = _load_anchors()
         # Even though no Sedaris-tagged samples exist, sedaris key is non-empty (padded).
         assert len(anchors["sedaris"]) >= 2
+
+
+class TestSubscriptionClient:
+    """The generation/judge client must shape responses correctly AND never depend
+    on an Anthropic API key (it routes through the Claude subscription via OAuth)."""
+
+    def test_create_shapes_response(self, tmp_path, monkeypatch):
+        from agents import skill_optimizer
+        monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+        client = skill_optimizer._SubscriptionClient(tmp_path, default_model="claude-opus-4-7")
+        # Stub the SDK round-trip so no real query() / API import happens.
+        monkeypatch.setattr(
+            client, "_run",
+            lambda *, system, prompt, model: ("hi there", {"input_tokens": 12, "output_tokens": 7}),
+        )
+        msg = client.messages.create(
+            model=None, max_tokens=600, system="sys", messages=[{"role": "user", "content": "go"}]
+        )
+        assert msg.content[0].text == "hi there"
+        assert msg.usage.input_tokens == 12
+        assert msg.usage.output_tokens == 7
+
+    def test_complete_returns_text(self, tmp_path, monkeypatch):
+        from agents import skill_optimizer
+        client = skill_optimizer._SubscriptionClient(tmp_path)
+        monkeypatch.setattr(
+            client, "_run",
+            lambda *, system, prompt, model: ("YES", {"input_tokens": 1, "output_tokens": 1}),
+        )
+        assert client.complete(prompt="judge?", model="claude-sonnet-4-6") == "YES"
+
+    def test_warns_when_api_key_present(self, tmp_path, monkeypatch, capsys):
+        from agents import skill_optimizer
+        monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-should-be-ignored")
+        skill_optimizer._SubscriptionClient(tmp_path)
+        out = capsys.readouterr().out
+        assert "IGNORES it" in out
+
+
+class TestRunScoreOnly:
+    def _setup_repo(self, tmp_path, monkeypatch, threshold=5.0):
+        # Eval files + baseline + judge prompt + results dir under a tmp "repo".
+        (tmp_path / "SKILL.md").write_text("# Writing Voice Modes\n\nSome skill body.\n")
+        (tmp_path / "evals.yaml").write_text(
+            "schema_version: 1\n"
+            "training_prompts:\n"
+            "  - id: sean_a\n    mode: sean\n    prompt: 'Write a Sean-Mode intro.'\n"
+            "holdout_prompts:\n"
+            "  - id: dial_60\n    mode: sean\n    dial: 0.6\n    prompt: 'Write a 60% intro.'\n"
+            "llm_judge_criteria:\n"
+            "  - id: signature_move_present\n    ensemble: false\n    question: 'Has a move?'\n"
+            "  - id: sounds_like_sean\n    ensemble: true\n    n_judges: 3\n    question: 'Sounds like Sean?'\n"
+            "  - id: no_anti_pattern_violation\n    ensemble: true\n    n_judges: 3\n    question: 'Clean?'\n"
+        )
+        baseline = {
+            "sentence_length_mean": 14.0,
+            "sentence_length_stdev": 8.0,
+            "comma_density_per_100w": 3.0,
+            "em_dash_density_per_100w": 0.0,
+            "first_person_freq_per_100w": 4.0,
+            "_stdevs": {
+                "sentence_length_mean": 5.0,
+                "sentence_length_stdev": 4.0,
+                "comma_density_per_100w": 2.0,
+                "em_dash_density_per_100w": 1.0,
+                "first_person_freq_per_100w": 2.0,
+            },
+            "_ngrams": [["the", "ferry"]],
+            "_threshold": threshold,
+        }
+        (tmp_path / "baseline.json").write_text(json.dumps(baseline))
+        jp_dir = tmp_path / "agents-sdk" / "lib" / "skill_optimizer"
+        jp_dir.mkdir(parents=True)
+        (jp_dir / "judge_prompt.txt").write_text("Judge: {question}\n")
+        (tmp_path / "agents-sdk" / "data" / "skill-optimizer").mkdir(parents=True)
+
+        fake_samples = tmp_path / "voice-samples.md"
+        fake_samples.write_text(
+            "# Samples\n\n"
+            "### Sean general voice sample\n"
+            "Some Sean voice prose with at least thirty words so the anchor parser keeps it "
+            "around for the judge to reference later on in the run today.\n\n"
+        )
+        from agents import skill_optimizer
+        monkeypatch.setattr(skill_optimizer, "_VOICE_SAMPLES_PATH", fake_samples)
+
+        return SkillOptimizerConfig(
+            branch="main",
+            repo_root=tmp_path,
+            target_skill_md=tmp_path / "SKILL.md",
+            evals_path=tmp_path / "evals.yaml",
+            evals_sealed_path=tmp_path / "evals.sealed.yaml",
+            stylometry_baseline_path=tmp_path / "baseline.json",
+            runs_per_prompt=2,
+            results_path="data/skill-optimizer/results.tsv",
+        )
+
+    def test_scores_without_mutating_and_writes_row(self, tmp_path, monkeypatch):
+        config = self._setup_repo(tmp_path, monkeypatch)
+        before = (tmp_path / "SKILL.md").read_text()
+        result = run_score_only(config, dry_run=True)
+
+        # SKILL.md is never touched by a score-only run.
+        assert (tmp_path / "SKILL.md").read_text() == before
+        assert 0.0 <= result["train_score"] <= 1.0
+        assert 0.0 <= result["holdout_score"] <= 1.0
+
+        results_file = tmp_path / "agents-sdk" / "data" / "skill-optimizer" / "results.tsv"
+        assert results_file.exists()
+        lines = results_file.read_text().strip().splitlines()
+        assert lines[0].split("\t") == list(RESULTS_HEADER)
+        row = dict(zip(RESULTS_HEADER, lines[1].split("\t")))
+        assert row["iteration"].startswith("score-only-")
+        assert row["kept_or_reverted"] == "n/a"
+        # Dry-run judge returns YES, so all three judge criteria pass at 1.0.
+        assert row["criterion_sounds_like_sean"] == "1.0000"
+
+    def test_raises_when_threshold_uncalibrated(self, tmp_path, monkeypatch):
+        config = self._setup_repo(tmp_path, monkeypatch, threshold=None)
+        with pytest.raises(RuntimeError, match="threshold not yet calibrated"):
+            run_score_only(config, dry_run=True)
 
 
 class TestBuildRow:

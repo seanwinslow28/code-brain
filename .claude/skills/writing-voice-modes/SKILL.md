@@ -1,6 +1,6 @@
 ---
 name: writing-voice-modes
-description: Writing voice and tone control calibrated to Sean's personal style. 5 modes: Domestic Observer (Sedaris), Gonzo Technical (Thompson), Beat Flow (Kerouac), Minimalist Absurdist (Vonnegut), and Sean Mode (calibrated hybrid). Use when asked to "write in my voice", "use gonzo mode", "beat flow", "write a blog post" (pairs with creative-writing), "make this sound like me", "add voice to this", "rewrite with personality", or any writing task where tone and style matter.
+description: Writing voice and tone control calibrated to Sean's personal style. Default is Sean Mode — Sean's own dive-bar-grit voice (90%) with four author techniques borrowed sparingly (10%): Domestic Observer (Sedaris), Gonzo Technical (Thompson), Beat Flow (Kerouac), Minimalist Absurdist (Vonnegut). Use when asked to "write in my voice", "use gonzo mode", "beat flow", "write a blog post" (pairs with creative-writing), "make this sound like me", "add voice to this", "rewrite with personality", or any writing task where tone and style matter.
 ---
 
 # Writing Voice Modes
@@ -70,9 +70,11 @@ timeline in Jira. Holler if questions.
 
 ## The 5 Voice Modes
 
+> **Framing note (2026-06-05):** these five are technique vocabularies, not five equal identities. The DEFAULT is always Sean Mode (#5), which is 90% Sean and 10% borrowed technique. The four author modes below are the spice rack — read them as "moves you can borrow," and reach for a named author mode in full only when a specific piece explicitly calls for it. Sedaris in particular is over-pulled by models; see the warning in Sean Mode.
+
 ### 1. Domestic Observer Mode (Sedaris-tuned)
 
-Sean's **primary texture**. Self-deprecating humor, hyper-specific details, mundane accumulation building toward an unsignposted emotional pivot.
+A technique set Sean borrows from, NOT his primary texture (his primary texture is the dive-bar House Style). Self-deprecating humor, hyper-specific details, mundane accumulation building toward an unsignposted emotional pivot. **Easy to over-pull** — too much of this and the prose goes refined/literary/villa-in-golden-hour, which is the wrong register. Borrow the mundane→pivot move; don't adopt the whole NPR-essay voice.
 
 **Core Mechanics:**
 - **Loaded sentences:** Front-load the mundane, back-load the surprise. Funniest word lands last.
@@ -122,14 +124,31 @@ Sean's **punctuation toolkit**, deployed in bursts of 3-5 lines, not sustained f
 
 **When to deploy:** Closers, one-liners within longer pieces, refrains threaded through an essay, any moment where less hits harder. NOT for sustained use. Sean needs runway.
 
-### 5. Sean Mode (Calibrated Hybrid): DEFAULT
+### 5. Sean Mode (THE base voice): DEFAULT
 
-The natural voice. Load this when no specific mode is requested.
+The natural voice, and the default for everything unless a specific mode is requested. **Sean Mode is 90% Sean and 10% borrowed technique.** Sean is not a blend of four authors; Sean is the base, and the authors are spices you reach for occasionally when a specific move serves the sentence. If a draft reads like any one author, the mix is wrong. The reader should hear Sean, with a technique surfacing here and there — never a Sedaris essay, never a Thompson bender, never a Vonnegut exercise.
 
-**Base layer:** Sedaris-Thompson. Humor, specificity, self-deprecation, self-implication.
-**Sentence engine:** Kerouac. Flowing connective rhythm, sensory anchoring, comma-and-period breath marks.
-**Credibility layer:** Thompson. Factual precision (exact numbers, timestamps) dropped AFTER sensory/analogical buildup.
-**Punctuation:** Vonnegut. Refrains as closers, flat one-liners for impact, deployed in bursts.
+**The 90% (Sean's own voice — see House Style below and the Raw Stories in `references/voice-samples.md`):** dive-bar grit, bodily and profane when it earns it, narrative-first, named people and places and substances, jokes built from physical comedy and lived specifics, warmth under the darkness.
+
+**The 10% (techniques borrowed as needed, never as identities):**
+- *Kerouac* — the sentence engine when a passage needs momentum (flowing connective rhythm, sensory anchoring, comma-and-period breath marks).
+- *Thompson* — factual precision (exact numbers, timestamps) dropped AFTER the sensory/analogical buildup; self-implication.
+- *Vonnegut* — refrains as closers and flat one-liners, in short bursts only.
+- *Sedaris* — the mundane→pivot when a piece wants humor to earn trust first. **Use sparingly.** Sedaris is the easiest author for a model to over-pull, and an over-Sedaris draft reads as refined/tasteful/NPR — the opposite of Sean's register. If the prose feels like an essay written at a villa in golden hour, you've pulled too much Sedaris. Cut it back toward the dive bar.
+
+## House Style — The Grit Register (read before any full-intensity piece)
+
+Sean's default texture is **dive bar, not veranda.** He's well-read and well-traveled and could write the white-linen-golden-hour version, but that's not the voice. The voice is the guy on his 5th beer in a shitty dive bar singing Piano Man with some puffy-faced blue-collar drunks; or on his 3rd bottle of wine, covered in mystery stains, girlfriend asleep in the other room after a good night. Grit, body, vice, and profanity are **default-on** at full intensity, not garnish.
+
+Concretely, the baseline register:
+- **Bodily and unprecious.** Bathrooms, hangovers, sex, sweat, vomit, the physical and the gross are fair game and frequent (the scripts confirm: "covered in vomit stains and regret," fart-discovers-a-corpse, the acid-trip dog "firing ocean water out of its asshole"). Don't sanitize the body out.
+- **Profanity is native, not seasoning.** "Same shit," "beat the hell out of each other," "ya narc," "good ass morning." Curse the way he curses — casually, rhythmically, never bleeped into "stuff" or "heck."
+- **Vice is furniture, never moralized.** Weed, beer, the occasional acid tab, the 30-rack — present and matter-of-fact, the way the scripts treat them. Not glamorized, not apologized for.
+- **Blue-collar over literary.** When choosing between an elegant word and the word a guy says at the bar, pick the bar. "Toolbag" over "buffoon." "Crackheads cookin' my dinner" over "questionable kitchen staff."
+- **The grit dials DOWN, never out, for professional contexts.** The Professional Dial (below) tones this for stakeholder/external writing — but the Substack/personal default is unapologetically gritty. Sarcasm and a bodily streak survive even at 40%.
+- **Dialing down means SUBSTITUTION, not subtraction (Round 7, validated on Sean's own recruiter pass).** Grit is NOT the profanity itself; it's the physical comedy, the folksy blue-collar diction, and the personification. To make a piece recruiter-safe, swap each curse for its folksy/cartoon equivalent and keep the bite: "bullshit" → "hogwash", "bullshitting me" → "pulling the rug out from under me", "the little bastard" → "the little demon", "worth a damn" → "worth it". A machine "twiddling its thumbs, shrugging, saying 'Who? Me?'" carries more grit than "thumb up its ass" and a recruiter can read it. Never sterilize on the way down; trade the cusses for blue-collar/cartoon register.
+
+This is the layer the calibration corpus was thinnest on, which is why early drafts skewed refined. The fix lives in the exemplars: the **Raw Stories** section of `references/voice-samples.md` is the register anchor. When in doubt about texture, match those, not the polished March mode-applied essays.
 
 ## Sean's Signature Moves
 
@@ -141,7 +160,7 @@ These cross all modes. Apply instinctively. Each move has a mechanic (the mechan
 | **Rule of Three + Emotional Pivot** | Two concrete/funny items, third pivots to genuine feeling | List of three; items 1-2 are physical/light, item 3 is interior/real | "Fuelled by new found skills, fresh brewed coffee, and for once in my life, a glimmer of hope." |
 | **Callback Closer** | End by returning to the opening image, transformed by what happened in between | Last sentence echoes first image with one element changed | Opening: "I rub elbows with sheep on the ferry." Closer: "I hear the ferry horn blast, but I no longer rub elbows with sheep." |
 | **Sensory Before Numbers** | Smells, sounds, images FIRST. Numbers confirm and anchor. Joke-form cousin (script-confirmed): **precision-as-punchline** — an exact number, date, or price IS the punchline with no sensory preamble ("Fifty-One." listeners · "835 tickets" · "Scorpion: Ten Baht"). | Sensory paragraph → exact-number sentence on its own line | Nostrils flare, pupils dilate, sweat drips. Then: "847 errors in ninety seconds." |
-| **Pop Culture Anchoring** | Movie/TV/meme/music ref slotted into a tech context, never the other way around. **Source ONLY from `references/reference-universe.md` or the piece's actual subject — never invent a reference.** Prefer weaving a canon line in unattributed (the lamb-and-tunafish pattern) over building a fresh simile. | Technical noun + "like" + culturally specific reference | Dashboard alarms screeching "like the soprano in Pink Floyd's *Great Gig In The Sky*." |
+| **Pop Culture Anchoring** | Movie/TV/meme/music ref slotted into a tech context, never the other way around. **Source ONLY from `references/reference-universe.md` or the piece's actual subject — never invent a reference.** Prefer weaving a canon line in unattributed (the lamb-and-tunafish pattern) over building a fresh simile. **Rationed: ~1–2 per piece, each earning its place — see the Reference Gorging anti-pattern. This is a rare spice, not the connective tissue.** | Technical noun + "like" + culturally specific reference | Dashboard alarms screeching "like the soprano in Pink Floyd's *Great Gig In The Sky*." |
 | **Hyper-Specific Anecdote** | One concrete personal moment so specific the reader pictures it without sharing it | Triggered by an analogy ("I haven't [X]'d this hard since...") + named place + named substance | "I haven't squinted this hard since I got drunk on a bucket of vodka redbulls in Phuket and stumbled into a local bathhouse." |
 | **Screenwriting Cut-To** | Hard juxtaposition between stated intent and actual reality | Civilized statement → "*cut to*" → all-caps chaos | "I'll be taking it easy tonight" *cut to* "SHOVE THE BEER BONG UP MY ASS." |
 | **Humor as Trojan Horse** | Serious points arrive inside jokes; never end on the serious beat alone | Joke → real observation → joke release valve | The werewolf/turning-30 bit: epic mythology setup → mundane truth ("tired by 6 pm and you think about taxes"). |
@@ -234,6 +253,15 @@ Use these when combining modes within a single piece.
 | Any mode | **Prop Recycling** | Corpus props (cold coffee, Tuesday, the desk, the ferry, the bathroom stall) auto-inserted regardless of topic — "all of the authors think I just drink cold coffee at all hours of the day." The jewel-center examples in this file illustrate the technique; they are NOT a menu. Generate a fresh concrete anchor from the piece's actual topic every time. Ban list in `references/cheese-bank.md`. |
 | Any mode | **Clever-Metaphor Wit** | Per-sentence engineered metaphor cleverness about tech abstractions ("the void wearing a JSON costume") — try-hard Thompson with agent buzzwords. Sean's wit is NARRATIVE: stories with named people, places, and substances, canon quotes deployed as speech, plain storytelling between the waves. If every sentence performs, it's not Sean. Labeled specimen: `docs/MEANING_OVER_ACCESS.md` (see cheese-bank.md). Archaeologically confirmed 2026-06-04: zero ancestors of this register in 8,663 lines across 11 scripts. |
 | Any mode | **Narrator Pun** | A pun in Sean's own narrator voice is a register error. Across 11 scripts, puns exist ONLY as characterization of hacks — quoted and punished in-world ("Try and KETCHUP!" / "Do you guys write your own material?"). Licensed wordplay is slang-literalization ("'COOK'") or the Fumbled Idiom — never a pun played straight. |
+| Any mode | **Reference Gorging (the Family Guy cut-to)** | Pulling a pop-culture reference every few sentences in a "that reminds me of the time… *cut to* [bit]" cadence. The reference universe is a PANTRY, not a MENU — you don't cook with every ingredient. **Hard governor: ~1–2 earned references per piece, max.** A reference must do real work (land a joke, sharpen an image); if the sentence survives without it, cut it. Most paragraphs should have ZERO pop-culture references and run on Sean's own lived specifics instead. The tell: if you could swap the reference for a different one and nothing breaks, it was garnish — delete it. **Stronger still (Round 7): Sean cuts even an apt reference when a fresh ORIGINAL image (physical comedy, personification, a cartoon gag) serves the sentence. Generate the original before reaching for the quotable.** |
+| Any mode | **Lexical Repetition (incl. near-synonyms)** | The same word, or a near-synonym of it, recurring across a piece: "garbage" then "trash" then "junk." Sean's rule (Round 7): one instance of a concept-word per piece; at most one early and a *different* one late if truly needed, never a third. Repeating a word OR its synonym reads as thin vocabulary. Pick the single strongest word for the idea; vary or cut the rest. Generalizes "Bad Sean" (over-using one sensory detail) from props to lexis. |
+
+## Do-Not-Promote Topics
+
+Some true facts about Sean are not material to showcase. A real detail being true does not make it fair game.
+
+- **The layoff / being laid off / job loss is suppressed by default.** It is real, but Sean does not want it surfaced in his writing, and it kept creeping into drafts as backstory, stakes, motivation, or a sympathy-adjacent sideways aside ("the week I spent reading eval papers like a man trying to outrun a layoff"). Cut it. Do not use the layoff as setup, motivation, or an ask, **not even once**, unless Sean explicitly asks for it in a specific piece. The work stands on its own; the layoff is not the story. (This hardens `substack-value-engine`'s "ask lands sideways" rule from "at most once" to "omit by default.")
+- **General test:** if a biographical fact is being used to make the reader feel something *about Sean's circumstances* rather than to serve the story or hand the reader value, cut it. Sean promotes the work, never the predicament.
 
 ## References
 

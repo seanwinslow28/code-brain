@@ -154,6 +154,53 @@ def compute_distance(
     return z_total
 
 
+_META_STOPWORDS = (
+    "voice-samples", "calibration", "skill.md", "skill md", "corpus",
+    "verbatim", "anchor", "signature move", "why it works", "why it's better",
+    "ai wrote", "sean rewrote",
+)
+
+
+def extract_voice_corpus_chunks(
+    text: str,
+    min_words: int = 60,
+    window: int = 100,
+) -> list[str]:
+    """Isolate ONLY Sean's actual quoted voice from voice-samples.md.
+
+    voice-samples.md interleaves real samples (Markdown blockquotes, `> ...`) with
+    heavy analytical commentary (`**Signature moves:** ...`, `**Why it works:** ...`,
+    round notes). The naive "any 60-200 word paragraph" extractor swept that
+    commentary into the stylometric fingerprint, contaminating it with the
+    document's own vocabulary (`skill md`, `pop culture anchoring`) and skewing the
+    features toward expository prose. This pulls blockquoted prose only, drops
+    italic editor notes and meta lines, and chunks into ~`window`-word samples so
+    cross-chunk stdevs are computable. Precision over recall: the inline
+    "Sean rewrote:" passages (not blockquoted) are intentionally skipped to keep
+    the corpus clean.
+    """
+    quote_lines: list[str] = []
+    for line in text.splitlines():
+        s = line.strip()
+        if not s.startswith(">"):
+            continue
+        s = s.lstrip(">").strip()
+        if not s or s.startswith(("_", "**")):  # blank, italic note, or bold meta
+            continue
+        low = s.lower()
+        if any(stop in low for stop in _META_STOPWORDS):
+            continue
+        quote_lines.append(s)
+
+    words = " ".join(quote_lines).split()
+    chunks: list[str] = []
+    for i in range(0, len(words), window):
+        w = words[i : i + window]
+        if len(w) >= min_words:
+            chunks.append(" ".join(w))
+    return chunks
+
+
 def load_baseline(path: Path | str) -> dict:
     """Load stylometry baseline JSON. Raises FileNotFoundError if missing."""
     with open(path, "r") as f:

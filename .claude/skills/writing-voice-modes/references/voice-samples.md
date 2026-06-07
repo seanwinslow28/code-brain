@@ -8,6 +8,127 @@
 
 ---
 
+## Round 7 — Sean's edits to the dive-bar MEANING_OVER_ACCESS rewrite (2026-06-07)
+
+> Second A/B in the skill-validation series: the skill rewrote the labeled cheese specimen
+> (`docs/MEANING_OVER_ACCESS.md`) at full dive-bar grit; Sean edited it down to a recruiter-readable
+> pass. Verdict: the grit "helped get my voice and the feeling across" but was "too heavy on the cuss
+> words for a recruiter." These edits are the highest-signal finding yet on HOW grit dials down.
+
+**THE headline: grit is not the profanity. It's the physical comedy + folksy diction + personification.**
+Sean stripped nearly every curse and the voice survived intact, because he SUBSTITUTED each one rather
+than sterilizing:
+- "If it's bullshit" → "If it's hogwash"
+- "are you bullshitting me again?" → "are you pulling the rug out from under me again?"
+- "the little bastard" → "the little demon"
+- "I'm the asshole who built the dashboard" → "I'm the one who built the dashboard"
+- "single goddamn one" → "single one"; "worth a damn" → "worth it"; "wide the hell open" → "wide open"
+- Title "Nine Nights of Bullshit" → "Nine Nights of Silence"
+
+**Lesson: the recruiter dial (Professional Dial down-shift) is achieved by SUBSTITUTION, not subtraction.**
+Keep the bite via folksy diction (hogwash, pulling the rug) and physical comedy. Do not go sterile when
+dialing down profanity; swap it for its blue-collar/cartoon equivalent.
+
+**He cut the one pop-culture reference for an original physical-comedy image.**
+- Model: "sitting there with its thumb up its ass, producing jack shit. I have no idea what I'm doing,
+  but I know I do it really, really well." (crude + the Andy Dwyer borrowed line)
+- Sean: "sitting there twiddling its thumbs, shrugging its shoulders, and saying, 'Who? Me?'"
+- Lesson: reinforces the reference governor HARD. Even an apt borrowed line gets cut when a fresh
+  original image serves. Sean's instinct is **physical comedy + personification** (the machine as a
+  guilty kid playing innocent), not a quotable. Generate originals before reaching for a reference.
+
+**Cartoon visual gags beat clever similes.**
+- Model: "staring at the ninth concepts_written: 0 like it owed me money" (debt simile)
+- Sean: "staring at the empty folder as virtual moths fluttered out" (the empty-coffers cartoon gag)
+- Lesson: when reaching for an image, prefer a cartoon/visual gag (the squash-and-stretch register, cf.
+  Rocko / Ren & Stimpy in `reference-universe.md`) over an engineered simile.
+
+**Lexical de-duplication includes near-synonyms (direct instruction).**
+Sean: "there were multiple lines with 'garbage' and/or 'trash'. We shouldn't repeat the same words over
+and over, even if they're related. You could get away with a 'garbage' in the first paragraph and a
+'trash' in the last, but that's as far as it should go." He cut "pile of garbage" → "those notes" and
+"1am garbage" → "groggy 1am brain dump," leaving a single "trash." Rule added to SKILL.md anti-patterns.
+
+**New provisional move (1 instance, on watch): Naive-Hope Cap.**
+Sean added "My productivity will go through the roof! Huzzah!" as a flat, over-enthusiastic line capping
+the dream paragraph right before reality kills it. The archaic-comic register ("Huzzah!") signals the
+irony. It's a Sincerity-Punished setup in miniature: state the naive hope flat, let the next beat gut
+it. Hold for a second instance before promoting to the SKILL.md table.
+
+**Also:** Sean tightened (cut the now-redundant "That's the pitch." once the Huzzah cap did that job; cut
+the "really, really well" tail) and bolded "**behind**" the button for emphasis (bold as a typographic
+emphasis tool alongside ALL CAPS). Minor: the "it's"→"its" instances in his draft are real typos (flag
+on a recruiter pass), not a voice feature.
+
+---
+
+## Round 6 — Sean's edits to the first grit-era draft (2026-06-05)
+
+> First full-chain draft written AFTER the grit/90-10/reference-governor overhaul ("Raising
+> Claude," post 1). Sean's verdict: "SO much better." He made only TWO real content edits
+> (the rest were editor markdown-escaping artifacts) — the draft landed ~95%, which is the
+> headline: the grit overhaul worked. The two edits are high-signal residuals:
+
+**Edit 1 — Sean adds one more concrete than the model dares.**
+- Model: "The truth is Guy Fieri, that beautiful toolbag, driving through Flavortown handing donkey sauce to the masses."
+- Sean: "The truth is my love for that beautiful toolbag, Guy Fieri. Driving through Flavortown with 50 pounds of 'bling' on every limb, handing out donkey sauce to the masses."
+- Lesson: **residual under-specification.** Even post-overhaul, the model stops one concrete short. Sean's instinct adds the extra vivid physical detail ("50 pounds of 'bling' on every limb"). When a sentence has one concrete, ask whether Sean would add a second. He usually would.
+
+**Edit 2 — Sean swaps a flat preference for a quotable, place-anchored register declaration (NEW PROVISIONAL MOVE — on watch).**
+- Model: "I had to tell it I think the donkey sauce guy is genuinely funny." (flat, tells)
+- Sean: "I had to tell it 'less Parisian balcony. More grimy dive bar in the pits of Staten Island'." (quotable, shows, geographically grounded, declares the register)
+- **Register-Declaring Contrast ("less X, more Y")**: a taste-declaring comparison pair, often place- or class-anchored, deployed where the model would otherwise state a flat preference. Adjacent to Hard Cut but its job is declaring register, not deflating. 1 instance — hold for a second before promoting to SKILL.md.
+- Bonus validation: Sean independently reproduced the House Style "dive bar, not veranda" doctrine in his own edit. The grit register is correctly tuned — the doctrine matches his unprompted instinct.
+
+**Also:** Sean quotes his own reactions ("GROSS." → "\"GROSS.\""). Minor, consistent with quote-as-speech.
+
+---
+
+## Raw Stories (full, unedited) — THE GRIT REGISTER ANCHOR
+
+> Added 2026-06-05. These are full verbatim passages from Sean's reference-universe interview
+> (Writing-Exercises-For-Claude parts 1–2). They are the single most important register anchor
+> in this file. When the question is "how gritty / how Sean does the texture feel," match THESE,
+> not the polished March mode-applied essays further down. This is the dive-bar voice the House
+> Style section in SKILL.md points to: bodily, profane, vice-as-furniture, blue-collar,
+> narrative-first. Typos and looseness preserved on purpose — they are voice data; do not sand
+> them out. (More raw stories land here as Sean supplies them; the corpus deepens, never bloats.)
+
+### The Staten Island ferry, teenage years (grit / vice / body)
+> "I've spent many hours on the Staten Island ferry and it holds both miserable and hilarious memories. When I was in high school and early college years, that's when the hilarity occurred. Drinking 'ferry beers' to kick the night off in the streets of Manhattan. Finding out any bars, clubs, deli's, or Saki bomb places that saw that I had a baby face, but didn't give a shit that my 'license' said I was a 28 year old man from PA. Hammered drunk on the way home on a 2 am ferry with a bunch of hoodlum friends of mine. Making out with random high school crushes and passing out under the seats."
+
+### Burial Park + the first dub (vice as furniture, "ya narc")
+> "In high school, the summer before sophomore year, those same neighborhood friends formed a band called… Burial Park (Hell yea, death and nostalgia). They would practice at a house in the basement around the block from us. They were older than me, so I was pretty naive to the 'smoke breaks' that always ended up with a jam session and a visit to Angelo's deli to get a shit ton of chips and hostess pastries. I just thought it was the rock n' roll lifestyle. I eventually learned what they were actually doing, and because one of them was a dealer (just weed. Calm down, ya narc), that was the first time I bought a dub ($20 of weed) and smoked it out of my friends pipe on the side of my parents house. I didn't feel anything, but that was the start of a beautiful relationship. Weed and Sean went together like lamb and tunafish for the next decade."
+
+### Husky youth (blue-collar, bodily, the redemption arc with a punchline)
+> "I was a husky youth (from about 8 to 13) and a large part of that was due the 90's crazy line up of sugary ass breakfast foods, microwaveable Stouffers mac and cheese, and a Burger King right up the block from me. Pair that combo with video games consuming my life and a Blockbuster next to that Burger King, you got yourself an incredibly chubby pale child. Luckily, I've learned a lot from those days. I'm eating nutritious home cooked meals, in the gym 5 days a week, and have a 4 pack (on a good day). It was also that Blockbuster that gave me access to a never ending amount of movies to explore."
+
+### The Pentheus play (the crown-jewel story — sincerity given full runway, then the kilt cut)
+> "After pacing back and forth in my parents living room, reading over the lines, deciding whether or not this was a good idea, I took a rip of my bong and got the courage to just say 'Fuck it' and drove to the school... I played Pentheus. King of Thebes. Acting across Dionysus (Oscar) aka the god of wine, sex, and good ass times. Pentheus didn't stand a chance... I found myself dressed in a kilt and a crown in front of a large crowd (probably, like, 20 people) and actually playing the lead in a play... I started verbally drifting into the second meeting of ours and skipped a whole half hour my fellow actors dialogue. Fortunately, Oscar was a pro and immediately went along with it... I turn to Oscar to celebrate our victory in the first half and he just says 'Bro, what are you doing?!?!'... I saw one of the girls whose part I totally skipped over crying (DRAMA QUEEN) and running into the dressing room. It hit me and I felt horrible. I powered through the rest of the play, apologized to the girl multiple times, bought her drinks, got hammered with the cast afterwards and we had 5 more shows after that. All of them went perfectly. Could have been from the tequila shots we took before each one to loosen up... I still think of that night from time to time and get a hollow feeling in my stomach… but god damn, did I look GOOD in that kilt."
+
+### The 2023 road trip / acid-beach dog (peak grit — vice, body, the worst possible turn)
+> "We were just introduced to Airbnb and we took advantage of the fact that we could sleep in a bed for 30 bucks a night. Who says Charles Manson ruined the 60's for traveling vagabonds?... We stayed with a young couple in Nashville... The night before we left, they handed us a little tin box. 'It's a long trip, so here's a little something incase you guys find the right opportunity'. Inside that box was 2 little pieces of tie died paper with a stoned smiley face on them. A couple of little 'nice to meet ya' acid tabs... we stayed with a friend of a friend who randomly said, 'I feel like tripping balls this weekend'. The opportunity had come... I knew it was hitting when the glistening ocean started to look like diamonds... I decided to take the tennis ball the dog brought and play a little fetch... It was all in good fun until the dog came out, spat out the ball and just stood there. I called its name, but it was just standing there with a blank gaze. Suddenly, it squatted down and started firing ocean water out of its asshole. I normally would find that hilarious, but the acid didn't do me any favors. I thought I had just ended its life. Fortunately, it just shook it off, picked the ball back up, and ran back to me. I stopped playing fetch and most definitely didn't go into the water."
+
+### Firefly / Tom Petty (the time-loop epiphany — grit earns the sincerity)
+> "I was in my prime drinking, drug using, and who-gives-a-fuck years, so we camped out with her friends in 90 degree heat. Didn't shower for two days, drank from sun up to sun up, indulged in some strong Molly, and capped it off with an acid trip on Sunday. We laid down and watched Tom Petty and the heartbreakers sing 'Last Dance With Mary Jane' and I had a profound thought about how weird time is and how our parents were once our age doing the same exact thing with the same exact band. I don't remember the details, but that's the jist of it."
+
+### Cousin Mark + the 30-rack (blue-collar domestic detail)
+> "My cousin Mark went to St. Johns University in Staten Island, so he lived with me and my parents for a few years. Him and I would rip through a 30 rack of bud heavies and air drum along to John Bonham's solo in Zeppelin's Dazed and Confused."
+
+### The Gracie Abrams Paris gift (warmth under the grit — the generous closer)
+> "I searched for concerts of her favorite artists and I stumbled upon the Gracie Abrams European tour. My god, she was playing in Paris at the same time we were going to be there. I kept the secret well. To present this gift to her, I drew a caricature of Gracie in my Christmas card and had a speech bubble saying 'See you in Paris!', along with the printed out tickets. She cried. I nailed it."
+
+### Karaoke (Macho Man voice, underage Gagopa, Backstreet Boys)
+> "Mr. Brightside by The Killers, Don't Stop Me Now by Queen, and Flagpole Sitta by Harvey Danger are the top go-to's for me... we rented a small space in a Korea Town spot. We kept the drinks rolling, ate mushroom chocolates, and sang for 4 hours straight. Any time the drinks would come, we'd say 'Looks like it's time to crack another cold one!!!' In our best macho man randy savage voices... Drinking cheap beer and Sake at a place called 'Gagopa' that always led to one of those 2 AM ferry nights. Just a gang of youths taking advantage of an establishment who didn't care about our age as long as our money was good. And to add to the embarrassing aspect, you better believe boy bands from the 90's get tossed into the karaoke mix. Backstreet Boys were THEM. Still are."
+
+### Super Bowl 42 / the underdog stack (how he does an analogy)
+> "They beat the undefeated Patriots. David vs. Goliath. Rocky vs. Apollo. Me vs. the toilet after eating Indian food the night before. A true underdog story."
+
+### Food TV (the affectionate-insult register at full strength)
+> "Watching that beautiful toolbag Guy Fieri drive around Flavortown serving donkey sauce to the masses in a convertible that matches the burnt red tone of his sweaty face is pure poetry... I could watch Paul Hollywood and Prue Leith eat pastries all day. I dream of a day that I meet Paul and get a Hollywood Handshake. Also, just casually telling people that they have a 'Soggy Bottom' when referring to undercooked pastry is gold."
+
+---
+
 ## Raw Voice (Unedited Sean)
 
 ### Hyper-Specific Anecdote + Self-Deprecation
