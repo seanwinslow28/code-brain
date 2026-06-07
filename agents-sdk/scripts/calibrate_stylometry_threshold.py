@@ -23,11 +23,13 @@ sys.path.insert(0, str(REPO / "agents-sdk"))
 from lib.skill_optimizer.stylometry import (
     extract_features,
     compute_distance,
+    extract_voice_corpus_chunks,
     load_baseline,
     save_baseline,
 )
-# Use Anthropic SDK directly for generation. Sean must have ANTHROPIC_API_KEY in env.
-from anthropic import Anthropic, APIStatusError, APIConnectionError, RateLimitError
+# The Anthropic SDK is imported LAZILY (only inside the generation path) so the
+# default --reuse-existing flow recomputes the threshold from already-captured
+# texts with ZERO API calls and ZERO key requirement (cost-safety, 2026-06-06).
 
 VOICE_SAMPLES = REPO / ".claude/skills/writing-voice-modes/references/voice-samples.md"
 BASELINE_PATH = REPO / "agents-sdk/data/skill-optimizer/stylometry_baseline.json"
@@ -53,32 +55,21 @@ GENERIC_AI_PROMPTS = [
 
 
 def _extract_real_sean_chunks() -> list[str]:
-    """Pull ~15 ~100-word chunks from voice-samples.md."""
-    text = VOICE_SAMPLES.read_text()
-    # Naive: split by blank lines, keep chunks 60-200 words.
-    chunks = re.split(r"\n\s*\n", text)
-    keep = []
-    for c in chunks:
-        wc = len(c.split())
-        if 60 <= wc <= 200 and not c.strip().startswith("#") and "AI wrote" not in c:
-            keep.append(c.strip())
-    if len(keep) < 15:
-        # Fall back: split longer passages.
-        for c in chunks:
-            wc = len(c.split())
-            if wc > 200:
-                words = c.split()
-                for i in range(0, len(words) - 100, 100):
-                    keep.append(" ".join(words[i : i + 100]))
-                    if len(keep) >= 15:
-                        break
-            if len(keep) >= 15:
-                break
-    return keep[:15]
+    """Pull ~15 ~100-word real-Sean chunks from voice-samples.md.
+
+    Delegates to the shared blockquote-isolating extractor so the calibration
+    "real Sean" samples are drawn from the SAME corpus the baseline features were
+    built on (rebuild_stylometry_baseline.py). The old naive paragraph split swept
+    in the document's analytical commentary; that contamination is fixed centrally.
+    """
+    chunks = extract_voice_corpus_chunks(VOICE_SAMPLES.read_text())
+    return chunks[:15]
 
 
-def _call_with_retries(client: Anthropic, prompt: str, max_attempts: int = 3) -> str:
+def _call_with_retries(client, prompt: str, max_attempts: int = 3) -> str:
     """Call the API with up to 3 retries on 429/5xx with 5s backoff."""
+    from anthropic import APIStatusError, APIConnectionError, RateLimitError
+
     last_err = None
     for attempt in range(1, max_attempts + 1):
         try:
@@ -105,6 +96,8 @@ def _call_with_retries(client: Anthropic, prompt: str, max_attempts: int = 3) ->
 
 
 def _generate_ai_samples(prompts: list[str]) -> list[str]:
+    from anthropic import Anthropic
+
     client = Anthropic()
     samples = []
     for i, p in enumerate(prompts, 1):
@@ -135,26 +128,55 @@ def _roc_auc(distances: list[tuple[float, int]]) -> tuple[float, float]:
     return best_t, best_score
 
 
-def main() -> None:
+def _labeled_texts(reuse_existing: bool) -> list[tuple[str, int]]:
+    """Return (text, label) pairs. Reuse existing calibration_set.jsonl (no API) or
+    rebuild the AI half via Opus generation (needs ANTHROPIC_API_KEY)."""
+    if reuse_existing:
+        if not CALIBRATION_OUT.exists():
+            raise SystemExit(
+                f"--reuse-existing needs {CALIBRATION_OUT}; run a full calibration once first."
+            )
+        pairs: list[tuple[str, int]] = []
+        for line in CALIBRATION_OUT.read_text().splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            rec = json.loads(line)
+            if rec.get("text") is not None and rec.get("label") in (0, 1):
+                pairs.append((rec["text"], int(rec["label"])))
+        print(f"reusing {len(pairs)} existing labeled texts (no API calls)")
+        return pairs
+
     real = _extract_real_sean_chunks()
     print(f"extracted {len(real)} real-Sean chunks")
-    print("generating 15 generic-AI samples (Opus 4.7)...")
+    print("generating 15 generic-AI samples (Opus 4.7 via API key)...")
     ai = _generate_ai_samples(GENERIC_AI_PROMPTS)
     print(f"generated {len(ai)} AI samples")
+    return [(t, 1) for t in real] + [(t, 0) for t in ai]
+
+
+def main() -> None:
+    import argparse
+
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument(
+        "--reuse-existing",
+        action="store_true",
+        help="Recompute distances + threshold from the EXISTING calibration_set.jsonl "
+        "texts against the current baseline. Zero API calls, no key needed. Use this "
+        "after rebuild_stylometry_baseline.py changes the feature vector.",
+    )
+    args = ap.parse_args()
 
     baseline = load_baseline(BASELINE_PATH)
-    distances = []
+    pairs = _labeled_texts(reuse_existing=args.reuse_existing)
+
+    distances: list[tuple[float, int]] = []
     with open(CALIBRATION_OUT, "w") as f:
-        for text in real:
-            features = extract_features(text)
-            d = compute_distance(features, baseline, target_text=text)
-            distances.append((d, 1))
-            f.write(json.dumps({"label": 1, "distance": d, "text": text}) + "\n")
-        for text in ai:
-            features = extract_features(text)
-            d = compute_distance(features, baseline, target_text=text)
-            distances.append((d, 0))
-            f.write(json.dumps({"label": 0, "distance": d, "text": text}) + "\n")
+        for text, label in pairs:
+            d = compute_distance(extract_features(text), baseline, target_text=text)
+            distances.append((d, label))
+            f.write(json.dumps({"label": label, "distance": d, "text": text}) + "\n")
 
     threshold, score = _roc_auc(distances)
     print(f"best threshold: {threshold:.2f} (TPR-FPR = {score:.2f})")
