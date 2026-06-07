@@ -4,8 +4,37 @@ import pytest
 from lib.skill_optimizer.stylometry import (
     extract_features,
     extract_distinctive_ngrams,
+    extract_voice_corpus_chunks,
     compute_distance,
 )
+
+
+class TestExtractVoiceCorpusChunks:
+    SAMPLE = (
+        "# Voice Samples\n\n"
+        "> _Note: em dashes normalized. This is an editor note, not voice._\n\n"
+        "### A real story\n"
+        "> " + ("I was hammered drunk on the ferry with my hoodlum friends and we "
+                "passed out under the seats again that night. ") * 4 + "\n\n"
+        "**Signature moves:** Pop Culture Anchoring; Hard Cut deflation; the SKILL.md table.\n\n"
+        "**Why it works:** mundane accumulation builds to a pivot in the calibration corpus.\n\n"
+        "**AI wrote:** \"Every rep is a vote for the person you're becoming.\"\n"
+    )
+
+    def test_keeps_blockquoted_voice(self):
+        chunks = extract_voice_corpus_chunks(self.SAMPLE)
+        joined = " ".join(chunks).lower()
+        assert "hoodlum friends" in joined
+        assert len(chunks) >= 1
+
+    def test_excludes_meta_commentary_and_notes(self):
+        joined = " ".join(extract_voice_corpus_chunks(self.SAMPLE)).lower()
+        # Document analysis vocabulary must NOT leak into the corpus.
+        assert "signature moves" not in joined
+        assert "skill.md" not in joined and "skill md" not in joined
+        assert "why it works" not in joined
+        assert "editor note" not in joined  # italic `>` note is dropped
+        assert "every rep is a vote" not in joined  # AI-wrote line excluded
 
 
 class TestExtractFeatures:

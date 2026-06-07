@@ -64,7 +64,7 @@ class JudgeRunner:
             output=output, anchor_1=a1, anchor_2=a2, question=question, mode=mode,
         )
         client = self.sonnet if (use_sonnet and self.sonnet) else self.local
-        model = "claude-sonnet-4-6" if (use_sonnet and self.sonnet) else "qwen3-14b-research:latest"
+        model = "sonnet" if (use_sonnet and self.sonnet) else "qwen3-14b-research:latest"
         raw = client.complete(prompt=prompt, model=model, temperature=0.0, seed=seed)
         parsed, reason = self._parse_yes_no(raw)
         if parsed is None:
