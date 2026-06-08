@@ -8,9 +8,15 @@ created: 2026-06-08
 description: "Watch now | Token burn is more than a budget problem. It;s what happens when frontier intelligence gets useful, open models get good, and companies try to manage agentic work with 2025 controls."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "nates-newsletter"
+  - "token-economics"
+  - "ai-cost-management"
+  - "agentic-work"
+  - "operating-model"
+type: reference
+status: processed
+domain: [claude-mastery, life-systems]
+ai-context: "Nate Jones executive briefing on Uber blowing its entire 2026 AI budget months early (95% of engineers on AI tools, an internal agent writing ~1,800 code changes/week) — argues token burn is not waste but signal that AI has crossed from a tool-you-buy into labor-you-must-manage; introduces a 'minimum effective intelligence' routing rule (frontier vs open vs no model per job) and explains why 2025 seat/license budget models break for work that plans, retries, and runs for hours. Directly relevant to the fleet's own cost caps and HybridRouter tiering."
 ---
 The next AI budget fight will not start because employees refuse to use AI.
 

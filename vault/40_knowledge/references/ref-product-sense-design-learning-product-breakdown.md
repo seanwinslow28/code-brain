@@ -8,9 +8,14 @@ created: 2026-06-08
 description: "Build great product sense with practice and get hired at your dram company."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "product-sense"
+  - "pm-interview"
+  - "ai-pm"
+  - "job-hunt"
+type: reference
+status: processed
+domain: [life-systems]
+ai-context: "Abhishek Kumar's full breakdown of a 10/10 product-sense interview answer to 'design a product that changes how people learn' — the model answer locks four things before speaking (company = Google, ecosystem player = self-directed adult learners, problem = the gap between what you study and whether it prepares you for a real outcome, AI angle = Socratic LLM dialogue as the primary teaching modality) and scores on a single through-line from mission → segment → problem → de-scoped v1. Pairs with the ref-aakash-ai-pm-* interview-prep corpus."
 ---
 **Question:** Design a product that changes how people learn.
 
