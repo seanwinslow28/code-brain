@@ -11,6 +11,7 @@ show 0 until items land here.
 
 ## Todo
 
+- enterprise-ap-agent-spec ledger row committed (995ae66) on portfolio branch `fix/hero-mobile-transparent-bg`, NOT main — the `/transactions/enterprise-ap-agent-spec/` route only goes live when that branch merges to main. Also still open from the Task 26 gate: ≥1 substantive LinkedIn comment from an enterprise AI PM (post ~5–7 days pre-ship) — assigned: Sean
 - Substack series "Make It Sound Like Me" (working name): rewrite the post-1 draft (the-confident-stranger) against the 2026-06-05 upgraded skill — new Pi-anchored thesis ("there are many Claudes; this one writes like me" / the humbling that you can't one-shot your own brain into an LLM), grittier title, dial Sedaris way down, references rationed — assigned: Sean
 - Substack value engine: build the reader-facing tool — ship a Cheese-Gauntlet + reference-universe-interview prompt kit (copy-paste, Nate-style) with post 1 [DONE — kit shipped]; design the full "interview-the-reader → emit their personal voice-mode SKILL.md" Cowork plugin as a later flagship post [SPEC DELIVERED 2026-06-07: job-hunt-2026-roadmap/2026-06-07-voiceprint-plugin-build-spec.md, working name VoicePrint, MVP ~4-6 sessions; 4 open decisions: name / MVP boundary / bundle-the-chain / public-vs-dogfood-first; BUILD not started pending Sean's go] — assigned: Sean
 - Substack: lock series name (candidates: "Make It Sound Like Me", "This One's Mine", "Writing With Taste", "Raising Claude") + per-post title convention (blunt/bodily over clever) — assigned: Sean

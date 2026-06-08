@@ -45,7 +45,7 @@ The escalation tree and trust boundary we designed in Session A are *custom eith
 
 **Certifications**
 - Workday-native (5): broadest — SOC 1/2/3 Type II, ISO 27001/27017/27018/27701, ISO 42001, HIPAA attestation, FedRAMP Moderate, NIST AI RMF. (workday.com/trust)
-- OpenAI platform (5): SOC 2 Type 2, ISO 27001/27017/27018/27701, ISO 42001, SOC 3, CSA STAR, PCI DSS v4, FedRAMP 20x — **HIPAA BAA unverified** ⏱. (trust.openai.com)
+- OpenAI platform (5): SOC 2 Type 2, ISO 27001/27017/27018/27701, ISO 42001, SOC 3, CSA STAR, PCI DSS v4, FedRAMP 20x, and a **HIPAA BAA** — available for the API and ChatGPT Enterprise via baa@openai.com (verified 2026-06-08). (trust.openai.com / help.openai.com)
 - Anthropic platform (4): SOC 2 Type I & II, ISO 27001:2022, ISO 42001:2023, HIPAA-ready/BAA — strong, slightly shorter published list. (privacy.claude.com)
 - Self-build (2): inherits the *model's* certs only; **your AP application carries its own SOC 2 scope** — a real audit lift you now own.
 
@@ -61,7 +61,7 @@ The buyer is a **200-person SaaS company, 5,000 invoices/mo**, that needs SOC 2 
 
 ## Recommendation (ratified 2026-06-08)
 
-> **Build the differentiated AP logic on the Anthropic platform; buy the runtime, models, and compliance substrate.** Reject self-build (governance + hidden ops cost), reject Workday-native (lock-in; inherits their logic), with OpenAI a close second (broader cert list, but higher lock-in and an unverified HIPAA BAA). This is the classic enterprise split: **build the thing that's yours (the escalation tree, the trust boundary, the controls), buy the undifferentiated heavy lifting (model serving, SSO, SOC 2 substrate).**
+> **Build the differentiated AP logic on the Anthropic platform; buy the runtime, models, and compliance substrate.** Reject self-build (governance + hidden ops cost), reject Workday-native (lock-in; inherits their logic), with OpenAI a close second (broader cert list and a now-verified HIPAA BAA, but higher lock-in). This is the classic enterprise split: **build the thing that's yours (the escalation tree, the trust boundary, the controls), buy the undifferentiated heavy lifting (model serving, SSO, SOC 2 substrate).**
 >
 > *Most-defensible counter-position to be ready for: if the company is already standardized on OpenAI or Azure, the switching cost erases Anthropic's portability edge and OpenAI's broader cert list wins — the recommendation is buyer-context-dependent, not absolute.*
 
@@ -71,4 +71,4 @@ The buyer is a **200-person SaaS company, 5,000 invoices/mo**, that needs SOC 2 
 - **Silent capability degradation** — a vendor can change model behavior behind the same API without notice, which for a money-moving agent is a model-risk event. Mitigation: pin model versions, gate version bumps through the SOC 2 CC8.1 change process, and run the eval suite against any new version before it touches production. (This is where Sessions B and D connect.)
 
 ## Sources
-Research reference brief §3 (vendor comparison, with primary trust-page citations): trust.anthropic.com / privacy.claude.com, trust.openai.com, workday.com/en-us/why-workday/trust/compliance.html, code.claude.com. Cost figures: [cost-model.md](./cost-model.md). ⏱ Re-pull all trust pages at publish — certifications are point-in-time, and OpenAI's HIPAA BAA + SSO specifics were unverified at research time.
+Research reference brief §3 (vendor comparison, with primary trust-page citations): trust.anthropic.com / privacy.claude.com, trust.openai.com, workday.com/en-us/why-workday/trust/compliance.html, code.claude.com. Cost figures: [cost-model.md](./cost-model.md). ⏱ Re-pull all trust pages at publish — certifications are point-in-time. Re-verified 2026-06-08: OpenAI offers a HIPAA BAA for the API + ChatGPT Enterprise (request via baa@openai.com) and provides SAML SSO + SCIM for enterprise — both previously unverified, now confirmed.
