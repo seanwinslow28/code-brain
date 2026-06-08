@@ -7,9 +7,14 @@ created: 2026-06-08
 description: "Get high quality insights on internet communities, building products communities love and startups. This weekly email will get your creative juices flowing. CEO of Late Checkout - a holding company building community-based technology businesses."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+  - "startup-ideas"
+  - "ai-tools"
+  - "idea-sourcing"
+  - "demand-signals"
+type: reference
+status: processed
+domain: [life-systems, creative-studio]
+ai-context: "Greg Isenberg's 20 tactics for sourcing already-validated, profitable startup ideas by mining existing demand signals rather than brainstorming from imagination — e.g. site:reddit.com 'is there a tool that' searches, your own repeated ChatGPT prompts, low-star/high-usage Shopify & WordPress plugins, manual AI gigs on Upwork/Fiverr ripe for productization, and niche Discord/Facebook 'does anyone have a tool for…' threads."
 ---
 [![](https://framerusercontent.com/images/t0GrgyPlyWxMdWO1sBfm84Bbqg.png) ![](https://framerusercontent.com/images/OlrLNwWT3L4mrmxK3YQCWtuyK8.png)](https://www.gregisenberg.com/)
 
