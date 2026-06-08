@@ -2,31 +2,31 @@
 title: "Infrastructure Status"
 type: concept
 sources:
-  - knowledge/connections/vendor-lock-in-vs-architectural-flexibility.md
+  - 40_knowledge/references/ref-system-design-114-concepts-part-2.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-06-08
+updated: 2026-06-08
 ---
 
 ## Definition
 
-Infrastructure status refers to the current state of scalability, reliability, and verification of the underlying systems supporting agent operations. It encompasses open questions about how well a system handles growth beyond initial benchmarks and whether its performance claims are independently verified. This concept highlights the gap between vendor-reported metrics and the actual operational reality of running autonomous agents on local hardware.
+The observable state of the underlying communication channels and network infrastructure that determines the reliability and latency of agent interactions. This status is not just about whether a server is up, but whether the specific transport mechanisms (like WebSocket upgrades or TCP connections) are functional and unblocked by intermediate network devices. It represents the foundational layer upon which all higher-level agent behaviors depend.
 
 ## Context
 
-Sean is evaluating long-term memory backends for his solo developer fleet, where hardware constraints and scalability are critical concerns. Understanding the infrastructure status helps him identify potential bottlenecks, such as flat-file limitations or unverified benchmarks, that could impact his system's performance as it scales.
+Sean's fleet relies on stable infrastructure to function. If the 'Infrastructure Status' of the WebSocket channel is degraded due to firewall blocks, the entire agentic workflow may fail silently or degrade in performance. Monitoring this status is crucial for diagnosing why agents might not be receiving real-time updates.
 
 ## Evidence
 
-> Open questions remain regarding the scalability of the flat-file approach beyond 200 files and the lack of independent, peer-reviewed verification for the various vendor-reported benchmarks.
+> Plus, some proxies/firewalls “block” WebSocket upgrades or long-lived connections, so compatibility can vary.
 
-> The research article argues that for a solo developer managing a fleet of approximately 27 Claude agents on local Apple Silicon, the optimal long-term memory solution is Anthropic’s native `memory_20250818`.
+> WebSockets provide full-duplex, bidirectional communication between client & server over a single TCP connection.
 
 ## Examples
 
-- Scalability limits of flat-file approaches beyond 200 files.
-- Lack of independent verification for vendor-reported benchmarks.
+- Checking if a firewall is blocking port 443 for WebSocket upgrades.
+- Monitoring TCP connection latency to detect network partitions affecting agent sync.
 
 ## Related Concepts
 
-[[Runtime-Model Coupling]] [[Hardware Constraints vs. Fleet Scale]]
+[[Runtime-Model Coupling]] [[Agent Health Monitoring]]
