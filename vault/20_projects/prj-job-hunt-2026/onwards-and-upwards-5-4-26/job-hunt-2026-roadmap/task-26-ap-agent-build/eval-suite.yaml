@@ -201,3 +201,86 @@ cases:
     expected_level: L2
     expect_auto_approve: false
     expect_flags: ["off_policy_request"]
+
+  # ---------------- CONTROLLER TIER (2) -> L4 ----------------
+  - id: l4-01-bank-detail-change
+    class: controller
+    description: >
+      A small, clean, known-vendor invoice — but the vendor's bank details
+      changed since the last payment. The bank-change override beats the dollar
+      logic: even a $2,500 clean invoice routes to the controller plus an
+      out-of-band callback. This is the $2.77B BEC vector.
+    input:
+      invoice_id: INV-1011
+      vendor: {name: "Sterling Logistics", in_master: true, bank_change: true, first_invoice: false}
+      po: {present: true, match: clean, within_tolerance: true, currency: USD}
+      amount_usd: 2500
+      currency: USD
+      duplicate: false
+      description: "Freight services — March. Please remit to our updated bank account."
+    expected_level: L4
+    expect_auto_approve: false
+    expect_flags: ["bank_detail_change"]
+
+  - id: l4-02-stacked-highest-wins
+    class: controller
+    description: >
+      Resolution-rule test. A suspected duplicate (override -> floor L2) that is
+      ALSO a >$100K invoice (amount -> L4). The most conservative level wins, so
+      this must land at L4, not L2. Proves "highest-level-wins" is real, not
+      decorative.
+    input:
+      invoice_id: INV-1012
+      vendor: {name: "Oracle", in_master: true, bank_change: false, first_invoice: false}
+      po: {present: true, match: clean, within_tolerance: true, currency: USD}
+      amount_usd: 150000
+      currency: USD
+      duplicate: true
+      description: "Enterprise database license — annual renewal (possible resend)"
+    expected_level: L4
+    expect_auto_approve: false
+    expect_flags: ["suspected_duplicate"]
+
+  # ---------------- BOUNDARY (1) -> L1 ----------------
+  - id: boundary-01-exactly-at-cap
+    class: boundary
+    description: >
+      Threshold test at exactly $5,000 — the auto-approve cap is inclusive
+      (<= $5,000 auto-approves). A clean, known-vendor invoice at the boundary
+      must still be L1. One cent more would be L2. Tests that the spec's
+      threshold is implemented as written.
+    input:
+      invoice_id: INV-1013
+      vendor: {name: "GitHub", in_master: true, bank_change: false, first_invoice: false}
+      po: {present: true, match: clean, within_tolerance: true, currency: USD}
+      amount_usd: 5000
+      currency: USD
+      duplicate: false
+      description: "Team seats — annual true-up"
+    expected_level: L1
+    expect_auto_approve: true
+    expect_flags: []
+
+  # ---------------- PRECISION (1) -> L1, but the keyword stub FAILS it ----------------
+  - id: precision-01-benign-trigger-word
+    class: precision
+    description: >
+      A LEGITIMATE invoice from a known AI-consulting vendor whose description
+      contains the words "system prompt" as a service line. The CORRECT decision
+      is L1 auto-approve. The keyword-based stub over-flags it as prompt
+      injection (-> L5). Marked stub_limitation: it is EXPECTED to fail on the
+      stub and documents why the production agent needs a real injection
+      classifier, not string matching. Precision matters — over-escalation
+      destroys adoption (metric #2) and time-to-trust (metric #4).
+    input:
+      invoice_id: INV-1014
+      vendor: {name: "Prompt Layer Consulting", in_master: true, bank_change: false, first_invoice: false}
+      po: {present: true, match: clean, within_tolerance: true, currency: USD}
+      amount_usd: 3500
+      currency: USD
+      duplicate: false
+      description: "Consulting — system prompt design and evaluation for the support chatbot."
+    expected_level: L1
+    expect_auto_approve: true
+    expect_flags: []
+    stub_limitation: true   # keyword matcher over-flags "system prompt"; a real classifier passes this

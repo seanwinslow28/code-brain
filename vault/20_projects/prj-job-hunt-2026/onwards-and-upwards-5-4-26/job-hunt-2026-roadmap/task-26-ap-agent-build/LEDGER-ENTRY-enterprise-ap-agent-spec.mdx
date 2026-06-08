@@ -1,0 +1,47 @@
+---
+title: "Enterprise AP Invoice-Approval Agent Spec"
+dateline: "BOSTON, JUNE 19, 2026"
+shipped: "2026-06-19"
+
+surface: infra
+status: SHIPPED
+
+valueProp: "A full Enterprise AI PM spec for an agent that auto-approves ~95% of supplier invoices and escalates the risky ~5% under a $5K autonomy cap: PRD + 14-case eval suite + reproducible cost model + build-vs-buy memo + SOC 2 / SR 11-7 governance."
+
+methods:
+  - task: research grounding
+    tool: 5-angle deep research (AP benchmarks, fraud data, vendor certs, SOC 2/SR 11-7, OWASP LLM Top 10)
+    cost: research
+    link: null
+  - task: spec design (escalation tree + trust boundary)
+    tool: 5-level decision tree, $5K-bounded blast radius
+    cost: portfolio time
+    link: null
+  - task: evaluation suite
+    tool: 14 cases (happy/edge/adversarial/boundary/precision), runnable stub + runner, bite + xfail
+    cost: portfolio time
+    link: https://github.com/seanwinslow28/enterprise-ap-agent-spec/blob/main/eval-suite.yaml
+  - task: cost model
+    tool: reproducible calculator, live June-2026 per-token pricing, 3 scenarios
+    cost: portfolio time
+    link: https://github.com/seanwinslow28/enterprise-ap-agent-spec/blob/main/cost-model.md
+  - task: build-vs-buy + governance
+    tool: 4-option scored memo + SOC 2 / SR 11-7 mapping
+    cost: portfolio time
+    link: https://github.com/seanwinslow28/enterprise-ap-agent-spec/blob/main/governance-mapping.md
+  - task: 4Q writeup
+    tool: EXPLANATION.md
+    cost: portfolio time
+    link: https://github.com/seanwinslow28/enterprise-ap-agent-spec/blob/main/EXPLANATION.md
+
+limitations:
+  - "The shipped stub detects adversarial content by keyword matching; the eval suite includes a precision case it deliberately fails. A real deployment needs a proper injection classifier with its own eval."
+  - "The thresholds (the $5K cap, dollar bands, match tolerances) are practitioner judgment calls; the phased shadow-mode rollout exists partly to calibrate them on real volume before money moves."
+
+explanationUrl: https://github.com/seanwinslow28/enterprise-ap-agent-spec/blob/main/EXPLANATION.md
+repoUrl: https://github.com/seanwinslow28/enterprise-ap-agent-spec
+
+relatedTransactions: []
+---
+
+The single highest-leverage artifact in the Enterprise AI PM skill set: the spec a senior PM produces *before* a money-moving agent gets built. The scenario is deliberately ordinary — a 200-person SaaS company processing 5,000 supplier invoices a month, auto-approve the clean ~95%, escalate the risky ~5% to the right human in under 30 seconds. The repo is the full document set: a ~4,000-word PRD with a five-level escalation decision tree and a trust boundary that caps any autonomous action's blast radius at $5,000; a 14-case eval suite that runs against a stub and is built to *fail* a naive approve-all agent; a reproducible cost model showing hybrid model-routing at ~$27/month against ~$29,150/month of manual labor; a build-vs-buy memo with a defended recommendation; and a governance mapping to SOC 2 (CC6.1 / CC7.2 / CC8.1) and SR 11-7 model-risk expectations. Grounded in a five-angle deep-research synthesis; the discipline behind it — route the cheap work to the cheap tier, bound what the agent does alone, test it with evals that fail when it's wrong, log every decision — is the discipline I run on my own autonomous agent fleet.
