@@ -2,33 +2,31 @@
 title: "Context Compounding"
 type: concept
 sources:
-  - 40_knowledge/references/ref-one-file-saves-team-thousands-hours.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/archive/2026-06-05-raising-claude-post1-beatmap.md
 tags: [auto-generated, phase-6]
-created: 2026-06-01
-updated: 2026-06-01
+created: 2026-06-08
+updated: 2026-06-08
 ---
 
 ## Definition
 
-Context compounding is the mechanism by which individual corrections to shared AI instruction files propagate across an entire organization, turning isolated agent interactions into a collective intelligence asset. When a team structures these files to mirror their internal hierarchy, every correction one person makes eliminates the need for others to re-explain the same context, creating a compounding effect that scales with adoption. This process transforms the static nature of documentation into a dynamic, self-correcting system where the cost of onboarding new AI sessions drops to near zero as the team grows.
+This mechanism describes how value accumulates non-linearly in human-AI collaboration when raw, high-fidelity data is introduced incrementally over multiple sessions. Unlike standard context management which treats tokens as a finite budget to be optimized, this pattern views the accumulation of specific, personal artifacts (like screenplays, reactions, and reference lists) as a compounding asset that gradually narrows the gap between the AI's generalist output and the user's specific intent. The underlying invariant is that the quality of the final artifact is determined by the density and specificity of the historical data fed into the model, rather than the sophistication of the immediate instructions.
 
 ## Context
 
-Sean is building a personal knowledge vault that functions as an agentic infrastructure. Understanding how context compounds allows him to design his vault's structure so that his own corrections to agent instructions (like CLAUDE.md) compound across his various projects (job hunt, creative studio, etc.), preventing the 'thousands of hours' of waste described in the source material from happening in his personal workflow.
+Sean's 'Raising Claude' post-1 beatmap explicitly lists 'eleven mined screenplays' and 'Cheese Gauntlet reactions' as evidence for the humbling of not one-shotting. He is building a 'Voiceprint Plugin' that productizes these design principles, turning the manual skill of supervision into a repeatable infrastructure. This concept explains why his job-hunt preparation involves 'portfolio-walkthrough fluency' rather than just memorizing answers; he is compounding context to demonstrate architectural defensibility.
 
 ## Evidence
 
-> Shared AI context files eliminate the thousands of hours teams waste re-explaining company context to AI tools each year.
+> The method beats (cheese gauntlet, reference universe, script mining) are the EVIDENCE for this humbling, not the point.
 
-> Every correction one person makes compounds across the entire team.
-
-> Organizing instruction files in shared folders that mirror a company's structure turns individual AI use into compounding team intelligence.
+> Accept it's back-and-forth raising, not a prompt. (Artifacts: the method, the before/after, the linked kit.)
 
 ## Examples
 
-- A product manager at DoorDash uses shared folders to mirror company structure so every team member's AI session loads the right context automatically.
-- Teams avoid paying three full-time employees to re-explain company context to an AI that forgets everything overnight.
+- Mining eleven screenplays to create a 'reference universe' that pre-dates every machine, providing receipts that anchor Claude's output in Sean's specific cultural history.
+- Using the 'Cheese Gauntlet' reactions as raw material for hours of interaction, allowing the model to learn Sean's taste through exposure rather than description.
 
 ## Related Concepts
 
-[[Vault as Agent Infrastructure]] [[Centralized Distribution Mechanism]]
+[[Context Compounding]] [[Supervision as the New AI Edge]] [[Vault as Agent Infrastructure]]
