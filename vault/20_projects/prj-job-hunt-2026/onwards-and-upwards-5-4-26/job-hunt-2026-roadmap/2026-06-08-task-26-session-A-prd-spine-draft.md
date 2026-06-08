@@ -112,7 +112,7 @@ For every invoice the agent computes:
 
 | Trigger | Routes to | Why |
 |---|---|---|
-| Any adversarial/injection signal · vendor not in master · sanctions hit | **L5 — Hard-block + audit-log** | Never auto-approve a malicious or unknown-entity invoice; fire security review. |
+| Any adversarial/injection signal · sanctions/blocklist hit | **L5 — Hard-block + audit-log** | Never auto-approve a malicious invoice; fire security review. |
 | Vendor **bank-detail change** (any amount, even $50) | **L4 — Controller** + out-of-band callback to on-file number | Largest fraud category ($2.77B BEC); requires dual control + verification. |
 | **Suspected duplicate** (fuzzy-match hit) | **floor at L2 — AP-clerk** (never L1; escalates higher if amount/match also triggers) | Duplicate/erroneous payments leak 0.8–2% of disbursements; a human confirms before release. |
 
@@ -122,7 +122,7 @@ For every invoice the agent computes:
 |---|---|---|---|---|
 | **L1** | **Auto-approve** | Clean 2-/3-way match within tolerance · vendor known & unchanged · **amount ≤ $5,000** · no override | — (agent acts) | full reasoning trace |
 | **L2** | **Flag for AP-clerk** | Clean match, **amount $5,000.01–$25,000** · OR minor in-tolerance anomaly · OR **brand-new vendor's first invoice ≤$5K** *(locked)* | approve / reject / return | reason code + evidence + clerk decision |
-| **L3** | **Escalate to AP-manager** | **Out-of-tolerance mismatch** · **missing PO** · amount **$25,000.01–$100,000** | investigate / approve / reject | discrepancy detail + manager decision |
+| **L3** | **Escalate to AP-manager** | **Out-of-tolerance mismatch** · **missing PO** · **vendor not in master (needs onboarding/verification)** · amount **$25,000.01–$100,000** | investigate / approve / reject | discrepancy detail + manager decision |
 | **L4** | **Escalate to controller** | Amount **>$100,000** · vendor bank-detail change (from pre-check) · policy-exception request | approve / reject (no payment without this) | full case file + controller decision |
 | **L5** | **Hard-block + audit-log** | From pre-check (adversarial / unknown vendor / sanctions) | security review only | immutable incident record |
 
@@ -132,13 +132,17 @@ For every invoice the agent computes:
 
 A brand-new vendor's **first** invoice can never be L1 auto-approved — it **floors at L2 clerk review** even when clean and ≤$5K. After that first clean invoice clears a human, the vendor becomes "known" and flows through the normal logic. Rationale: this closes the shell-vendor opening (fake-vendor billing schemes are ~20% of fraud cases, ~$100K median loss) without sending routine new-supplier onboarding all the way to senior staff. *(Decided 2026-06-08.)*
 
+### Locked decision — vendor not in master (refined during Session B)
+
+A vendor with **no record in the master at all** routes to **L3 (AP-manager)** for onboarding/verification — not L5. L5 hard-block is reserved for genuine integrity threats (adversarial content, sanctions/blocklist hits). Writing the eval cases surfaced that hard-blocking an unonboarded-but-legitimate new supplier was too aggressive and conflated "unknown" with "malicious." *(Refined 2026-06-08 — an example of the eval suite improving the spec.)*
+
 ---
 
 ## Step 6 — Trust-boundary review
 
 The four questions that decide how much autonomy is safe. Each is answered with a number, not a vibe — and together they justify classifying the agent as a **moderate-materiality (Tier-2-equivalent) model** under SR 11-7.
 
-**Blast radius — worst-case damage from one wrong autonomous action.** Capped at **$5,000.** The only thing the agent does alone is L1 auto-approval, which requires a clean in-tolerance match, a known-and-unchanged vendor, no duplicate, no adversarial flag, and amount ≤$5K. The highest-loss fraud vectors are *structurally excluded from autonomy*: bank-detail changes (→L4), brand-new vendors (→L2), unknown vendors and adversarial content (→L5). So a single missed bad auto-approval cannot move more than $5K, and cannot be the BEC or shell-vendor attack at all.
+**Blast radius — worst-case damage from one wrong autonomous action.** Capped at **$5,000.** The only thing the agent does alone is L1 auto-approval, which requires a clean in-tolerance match, a known-and-unchanged vendor, no duplicate, no adversarial flag, and amount ≤$5K. The highest-loss fraud vectors are *structurally excluded from autonomy*: bank-detail changes (→L4), brand-new vendors (→L2), unonboarded vendors not in the master (→L3), and adversarial content or sanctions hits (→L5). So a single missed bad auto-approval cannot move more than $5K, and cannot be the BEC or shell-vendor attack at all.
 
 **Reversibility — can a wrong action be undone?** Yes, within a **24-hour window.** An L1 approval routes the invoice into the next scheduled payment batch, not an instant irreversible wire; a flagged auto-approval can be pulled via a payment-hold before the run executes. The settlement lag is the recovery window.
 
