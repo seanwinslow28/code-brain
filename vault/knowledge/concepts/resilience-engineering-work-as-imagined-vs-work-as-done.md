@@ -2,30 +2,31 @@
 title: "Resilience Engineering: Work-as-Imagined vs Work-as-Done"
 type: concept
 sources:
-  - knowledge/concepts/resilience-engineering-work-as-imagined-vs-work-as-done.md
+  - 40_knowledge/references/screenwriting-skill-building/Seans-Old-Scripts/Markdown/Script-Nothing-But-A-Good-Time.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-06-08
+updated: 2026-06-08
 ---
 
 ## Definition
 
-System reliability is determined by detecting the divergence between intended design and actual operational workflow, rather than merely preventing failures in static plans. This gap emerges because the data plane—the living vault—evolves dynamically while the control plane—the scheduler—relies on static assumptions that quickly become obsolete. Agent operations must therefore shift from maintaining green status indicators to actively monitoring for silent drift where automated outputs no longer align with current user intent.
+This concept describes the divergence between a character's intended narrative arc (Work-as-Imagined) and the chaotic, unscripted reality of their immediate environment (Work-as-Done). In comedy, this gap is widened intentionally; the protagonist plans a specific outcome, but the 'system' of the scene (other characters, physical objects, timing) forces an alternative result. The narrative tension comes from watching the protagonist adapt to these unplanned constraints rather than overcoming them through sheer will.
 
 ## Context
 
-Sean's job hunt and creative studio workflows depend on agents maintaining consistency across shifting priorities. If agents continue executing outdated templates or ignoring new constraints, downstream artifacts like resumes or creative pieces become misaligned with his actual goals. Monitoring this divergence allows Sean to intervene before the gap widens into systemic noise that degrades the quality of his professional output.
+Sean's script 'Nothing But A Good Time' features Eric trying to execute a plan (sex) that fails due to environmental factors. Analyzing this through resilience engineering helps Sean see his script not as a failed romance, but as a successful study of how characters navigate broken systems, a key skill for writing realistic dialogue and action.
 
 ## Evidence
 
-> This framework posits that system reliability is not just about preventing failures in designed workflows, but about detecting when the actual operational workflow diverges from the intended design.
+> The drunk bearded man looks off into the distance. They fell from the sky.
 
-> agent ops is not just keeping agents green; it is detecting when the designed workflow and the real workflow diverge.
+> Taking advantage of the distraction, Eric leans over the bar, pouring himself another.
 
 ## Examples
 
-- An agent continues to generate daily notes based on a template that the user has stopped using, creating a silent divergence between the agent's output and the user's actual practice.
+- Eric intends to leave the stall with his dignity intact, but instead becomes a passive participant in the bar's chaos, ultimately choosing numbness (drinking) over engagement.
+- The woman tries to reclaim her property (status), but is met with 'Finders keepers,' forcing her into a new role as a victim of circumstance rather than an agent of change.
 
 ## Related Concepts
 
-[[Control Plane / Data Plane Split for Agent Fleets]] [[Infrastructure Status and Agent Failure]]
+[[System Constraints]] [[Real-Time Problem Solving]]

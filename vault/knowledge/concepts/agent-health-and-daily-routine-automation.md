@@ -2,10 +2,10 @@
 title: "Agent Health and Daily Routine Automation"
 type: concept
 sources:
-  - knowledge/connections/agent-health-and-daily-routine-automation.md
+  - knowledge/concepts/agent-health-and-daily-routine-automation.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-06-08
+updated: 2026-06-08
 ---
 
 ## Definition

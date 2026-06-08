@@ -2,31 +2,31 @@
 title: "Runtime-Model Coupling"
 type: concept
 sources:
-  - knowledge/connections/vendor-lock-in-vs-architectural-flexibility.md
+  - 40_knowledge/references/ref-system-design-114-concepts-part-3.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-06-08
+updated: 2026-06-08
 ---
 
 ## Definition
 
-Runtime-model coupling is a structural dependency where an agent's operational stability and memory persistence are inextricably bound to a specific vendor's proprietary inference infrastructure. This coupling creates a single point of failure because the agent cannot function correctly if the vendor alters its API, deprecates features, or changes pricing models. The mechanism eliminates architectural flexibility by making the memory layer indistinguishable from the compute layer, forcing the user to accept the vendor's roadmap as their own system constraints.
+This pattern describes the structural dependency where an application's deployment and operational runtime are inextricably bound to a specific vendor's proprietary infrastructure, creating a high-friction exit barrier. When developers build within a closed ecosystem, they prioritize integration with that platform's native services over portable architecture, effectively trading long-term architectural flexibility for short-term development velocity. The resulting system becomes fragile because any change in the vendor's pricing, API stability, or strategic direction forces a complete re-architecture rather than a simple configuration update.
 
 ## Context
 
-Sean is building an autonomous agent fleet on local hardware, where he needs predictable, stable memory operations. If his agents are tightly coupled to Anthropic's native memory tool, any upstream change by Anthropic could break his entire fleet's ability to retain context or execute tasks, creating a critical reliability risk for his personal knowledge vault.
+Sean is actively evaluating 'Orchids' as an alternative to locked-in stacks like Supabase or Stripe. Understanding this coupling helps him recognize why 'one-click deployment to Vercel' and 'bring your own AI subscriptions' are not just features but critical risk mitigations for his career mobility and project longevity.
 
 ## Evidence
 
-> Runtime-model coupling is a structural dependency where an agent's operational stability and memory persistence are inextricably bound to a specific vendor's proprietary inference infrastructure.
+> You live inside their box, choose from their secret stack, and force you to start over the moment you want to use a different database, payment processor, or tool.
 
-> The optimal long-term memory solution is Anthropic’s native `memory_20250818` tool paired with a thin cross-agent routing layer, providing immediate value by enabling cross-agent propagation while maintaining zero infrastructure overhead.
+> Not forced to spend credits, bring your own AI subscriptions with you.
 
 ## Examples
 
-- Using Anthropic's native `memory_20250818` tool for cross-agent memory propagation.
-- The 'Do-Nothing' baseline failing to solve the structural problem of uncoordinated, non-propagating memory stores.
+- Forcing a switch from Supabase to a self-hosted PostgreSQL instance requires rewriting data access layers because the original code assumed Supabase-specific authentication and real-time subscriptions.
+- Migrating payment logic from Stripe's hosted checkout to a custom processor requires rebuilding the entire webhook handling and reconciliation system.
 
 ## Related Concepts
 
-[[Vendor Lock-in vs. Architectural Flexibility]] [[Control Plane / Data Plane Split for Agent Fleets]]
+[[Abstraction Layer Shift]] [[Infrastructure Status]]

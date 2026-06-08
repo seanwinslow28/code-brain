@@ -2,10 +2,10 @@
 title: "Accountability Gap"
 type: concept
 sources:
-  - knowledge/connections/the-silent-failure-loop-in-personal-knowledge-infrastructure.md
+  - knowledge/concepts/accountability-gap.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-06-08
+updated: 2026-06-08
 ---
 
 ## Definition
