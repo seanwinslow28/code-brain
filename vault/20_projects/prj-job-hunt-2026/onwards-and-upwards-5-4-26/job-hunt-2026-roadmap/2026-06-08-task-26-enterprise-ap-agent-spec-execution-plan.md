@@ -19,6 +19,8 @@ This is the map. We agreed: **plan first, build second.** Read this end-to-end o
 
 Nothing in here gets built yet. This document is the shared brief.
 
+> **Companion research:** the factual grounding for Sessions A/C/D lives in [[2026-06-08-task-26-research-reference-brief]] — a cited fact base (AP landscape + benchmarks, fraud loss math, vendor/cert comparison, SOC 2 + SR 11-7, OWASP adversarial taxonomy) produced via the deep-research skill on 2026-06-08. The SOC 2 control-ID correction and the SR 11-7 "principles not tiers" point in this plan are now primary-source verified there.
+
 ---
 
 ## Part 1 — What Task 26 actually is (in plain English)
