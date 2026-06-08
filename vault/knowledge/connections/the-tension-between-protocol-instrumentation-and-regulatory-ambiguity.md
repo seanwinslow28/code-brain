@@ -2,32 +2,32 @@
 title: "The Tension Between Protocol Instrumentation and Regulatory Ambiguity"
 type: connection
 connects:
-  - Crypto PM/APM Role Specifications
-  - The Tension Between Protocol Instrumentation and Regulatory Ambiguity
-  - Market Positioning
-created: 2026-06-04
-updated: 2026-06-04
+  - Boundary Object Theory
+  - Automation Reliability
+  - Vault Knowledge - MCP Research
+created: 2026-06-08
+updated: 2026-06-08
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the need for real-time, on-chain product telemetry and the static, often opaque nature of regulatory compliance in crypto. While mechanism-design PMs must instrument protocol behavior directly to prove product viability, they must simultaneously navigate legal ambiguity regarding custody, disclosures, and jurisdictional rollout. This creates a dual constraint where the product surface is both a market requiring economic reasoning and a legal entity requiring compliance sensemaking. The consequence is that Sean cannot rely on standard SaaS product management playbooks, as they do not account for the intersection of incentive structures and regulatory risk.
+Sean's attempt to automate his job hunt and creative studio workflows creates a tension between the need for precise protocol instrumentation (to track progress and ensure reliability) and the ambiguity of external platforms (like LinkedIn or email providers) that lack standardized APIs. This tension forces him to build 'boundary objects'—such as the `vault-knowledge-mcp`—that can translate between his internal structured data and the chaotic, unstructured reality of external services. The consequence is a system that is highly resilient internally but fragile at the edges, requiring constant maintenance to handle the drift between his vault's logic and the real world's unpredictability.
 
 ## Threads
 
-### [[Crypto PM/APM Role Specifications]]
+### [[Boundary Object Theory]]
 
-> The PM must design under legal ambiguity without becoming a lawyer, adding criteria for regulatory sensemaking such as custody, disclosures, and jurisdictional rollout.
+> Contradiction (T2): knowledge/concepts/boundary-object-theory.md contradicts confluence-overhaul-plan.
 
-### [[The Tension Between Protocol Instrumentation and Regulatory Ambiguity]]
+### [[Automation Reliability]]
 
-> There is a fundamental tension between the need for real-time, on-chain product telemetry and the static, often opaque nature of regulatory compliance in crypto.
+> Contradiction (T2): knowledge/concepts/automation-reliability.md contradicts cost-capped-agentic-workflows.
 
-### [[Market Positioning]]
+### [[Vault Knowledge - MCP Research]]
 
-> By articulating this specific 'mechanism-design' and 'telemetry' capability, he differentiates himself from candidates who only possess surface-level 'web3 knowledge.'
+> The working title should be retained, though slight adjustments in the README copy are necessary to emphasize the graph nature of the data.
 
 ## Implications
 
-- Sean must develop a portfolio that explicitly demonstrates how he balances real-time telemetry with regulatory constraints, rather than just showcasing UX improvements.
-- Interview narratives should focus on 'regulatory sensemaking' as a core product competency, distinguishing him from candidates who view compliance as a post-launch legal hurdle.
+- Sean must prioritize building robust translation layers (MCP servers) over perfect internal automation to handle external variability.
+- The cost of maintaining these boundary objects may exceed the value of the automation they enable, requiring a reassessment of ROI for each workflow.

@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/agent-rationalization.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-06-08
+updated: 2026-06-08
 ---
 
 ## Definition
