@@ -64,12 +64,22 @@ GATED FOLLOW-UP (do ONLY after the repo above is public and its URLs resolve —
 
 ## Verification gate (Task 26 — definition of done)
 
-- [ ] Repo `enterprise-ap-agent-spec` public on GitHub
+_Executed via Claude Code 2026-06-08. All build/publish/ledger criteria met; only the LinkedIn comment (lead-time dependent) remains open._
+
+- [x] Repo `enterprise-ap-agent-spec` public on GitHub — https://github.com/seanwinslow28/enterprise-ap-agent-spec (public, `main`, README renders 200; 10 files + `.gitignore`)
 - [x] PRD.md 4,000–6,000 words (4,074)
-- [x] Eval cases runnable against a stub (14 cases; green on correct, red on naive)
-- [x] Cost model has real per-token numbers (June 2026, cited)
+- [x] Eval cases runnable against a stub (14 cases; green on correct = 13 pass + 1 xfail / exit 0, red on naive = 4 pass / 10 fail / exit 1)
+- [x] Cost model has real per-token numbers (June 2026, cited) — `cost_model.py` prints 3-scenario table, Hybrid $0.0053/invoice
 - [x] Build-vs-buy memo has a defended recommendation (Anthropic platform, ratified)
-- [ ] ≥1 substantive LinkedIn comment from an enterprise AI PM (Sean, post-ship)
-- [ ] Transactions ledger row live on seanwinslow.com/transactions (gated follow-up)
+- [ ] ≥1 substantive LinkedIn comment from an enterprise AI PM (Sean, post-ship — sole remaining gate)
+- [x] Transactions ledger row live on seanwinslow.com/transactions — `/transactions/enterprise-ap-agent-spec/` returns 200 (branch merged to main 2026-06-08; `dateline`/`shipped` = 2026-06-08)
 - [x] README + EXPLANATION present; README readable in <90s
 - [x] SOC 2 control IDs corrected (CC6.1 access / CC7.2 monitoring / CC8.1 change mgmt)
+
+### Execution log (2026-06-08)
+
+- **Repo published:** assembled 10 files flat + `.gitignore` into `~/Code-Brain/enterprise-ap-agent-spec/`, all four runtime gates passed locally, `gh repo create --public --push`. All 5 frontmatter URLs (repo / EXPLANATION / eval-suite / cost-model / governance-mapping) resolve 200.
+- **Ledger shipped:** copied `LEDGER-ENTRY-*.mdx` → portfolio `src/content/transactions/enterprise-ap-agent-spec.mdx`, set `dateline`/`shipped` to 2026-06-08, fixed two body em dashes (DESIGN.md §213). Committed on `fix/hero-mobile-transparent-bg`, merged to main, deployed. Route live (200).
+- **Daily Driver run** ($0.74) refreshed the stale `dateline.json` (was 2026-06-04) → live API now 2026-06-08, pushed + deployed main.
+- **Vault source synced** to the live artifact: `LEDGER-ENTRY-*.mdx` now carries the 6/8 dates + em-dash fixes (no drift).
+- **Time-sensitive numbers** (model pricing, vendor certs, OWASP/NIST labels) re-verified + edited in a prior Claude Code session per Sean.

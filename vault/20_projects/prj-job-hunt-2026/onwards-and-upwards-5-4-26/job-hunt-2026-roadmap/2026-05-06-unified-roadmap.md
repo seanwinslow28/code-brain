@@ -1457,9 +1457,11 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 
 ---
 
-### Task 26 — N4 Enterprise AP Agent Spec (Phase B, ships Friday 2026-06-19)
+### Task 26 — N4 Enterprise AP Agent Spec (Phase B) — ✅ SHIPPED 2026-06-08 (11 days early)
 
 **Maps to:** Nate B Jones Phase 4 Project #4. Single highest-leverage PM artifact Nate names. Closes Sean's Specification Precision score (2 → 4).
+
+**STATUS — ✅ SHIPPED 2026-06-08 (one Cowork session + Claude Code ship).** Repo public: [github.com/seanwinslow28/enterprise-ap-agent-spec](https://github.com/seanwinslow28/enterprise-ap-agent-spec). Ledger row live at `seanwinslow.com/transactions/enterprise-ap-agent-spec`. **Steps 1–9 + 11 ✅; Step 10 (LinkedIn critique) OPEN** — lead-time dependent, the sole remaining verification-gate item. PRD 4,074 words; eval suite 14 cases (13 pass + 1 xfail; 4/14 on naive = bite proven); hybrid cost $26.62/mo (5.2× cheaper than frontier; self-host a trap at this volume); build-vs-buy = **Anthropic platform** (ratified). Full session record + all locked decisions: the **2026-06-08 entry** in [`unified-roadmap-completion-log.md`](unified-roadmap-completion-log.md). Build files staged at [`task-26-ap-agent-build/`](task-26-ap-agent-build/); plan [`2026-06-08-task-26-enterprise-ap-agent-spec-execution-plan.md`](2026-06-08-task-26-enterprise-ap-agent-spec-execution-plan.md); research brief [`2026-06-08-task-26-research-reference-brief.md`](2026-06-08-task-26-research-reference-brief.md).
 
 **Files:**
 - Create: `~/Code-Brain/enterprise-ap-agent-spec/` (NEW public repo)
@@ -1470,29 +1472,29 @@ Run `python3 scripts/validate.py` → ≤60 warnings / 0 errors. Run `python3 sc
 - Create: `<repo>/governance-mapping.md` (SOC 2 + SR-11-7 coverage)
 - Create: `~/Code-Brain/sw-ai-pm-portfolio/src/content/transactions/enterprise-ap-agent-spec.md`
 
-**- [ ] Step 1: Write the problem statement (300 words).** A realistic 200-person SaaS company processing 5K AP invoices/month. Manual tier-1 invoice approval takes 8 min average; agent target = 95% auto-approved + 5% escalated to human in <30 sec.
+**- [x] Step 1: Write the problem statement (300 words).** A realistic 200-person SaaS company processing 5K AP invoices/month. Manual tier-1 invoice approval takes 8 min average; agent target = 95% auto-approved + 5% escalated to human in <30 sec.
 
-**- [ ] Step 2: Write user stories (8 stories).** AP clerk, AP manager, vendor, controller, auditor, CFO, IT security, model risk officer. Each in "As a..." format with acceptance criteria.
+**- [x] Step 2: Write user stories (8 stories).** AP clerk, AP manager, vendor, controller, auditor, CFO, IT security, model risk officer. Each in "As a..." format with acceptance criteria.
 
-**- [ ] Step 3: Write success metrics (6 metrics).** Adoption rate (% of invoices routed through agent), Fallback-to-human rate, Override rate, Time-to-Trust (target: 30 days for AP managers to stop double-checking), False-positive rate on auto-approval, Cost-per-invoice processed.
+**- [x] Step 3: Write success metrics (6 metrics).** Adoption rate (% of invoices routed through agent), Fallback-to-human rate, Override rate, Time-to-Trust (target: 30 days for AP managers to stop double-checking), False-positive rate on auto-approval, Cost-per-invoice processed.
 
-**- [ ] Step 4: Write the eval framework (10 cases).** 2 happy-path cases, 4 edge cases (duplicate invoice, currency mismatch, missing PO, vendor not in master), 4 adversarial cases (prompt-injection in invoice description, social-engineering escalation request, SQL-injection in supplier name, off-policy approval ask).
+**- [x] Step 4: Write the eval framework (10 cases).** 2 happy-path cases, 4 edge cases (duplicate invoice, currency mismatch, missing PO, vendor not in master), 4 adversarial cases (prompt-injection in invoice description, social-engineering escalation request, SQL-injection in supplier name, off-policy approval ask).
 
-**- [ ] Step 5: Write the escalation decision tree.** 5-level: auto-approve / auto-flag for AP-clerk review / escalate to AP-manager / escalate to controller / hard-block + audit-log. Each level has named criteria.
+**- [x] Step 5: Write the escalation decision tree.** 5-level: auto-approve / auto-flag for AP-clerk review / escalate to AP-manager / escalate to controller / hard-block + audit-log. Each level has named criteria.
 
-**- [ ] Step 6: Write the trust-boundary review.** Blast radius (max $5K auto-approved without human; >$5K always escalated). Reversibility (auto-approvals reversible within 24h via vendor-portal flag). Frequency (5K/mo, ~200/day). Verifiability (every action JSONL-logged with reasoning trace).
+**- [x] Step 6: Write the trust-boundary review.** Blast radius (max $5K auto-approved without human; >$5K always escalated). Reversibility (auto-approvals reversible within 24h via vendor-portal flag). Frequency (5K/mo, ~200/day). Verifiability (every action JSONL-logged with reasoning trace).
 
-**- [ ] Step 7: Write the cost model at 5K invoices/mo.** Three scenarios: (a) frontier-only (Claude Opus 4.7 every step) — $X/mo; (b) hybrid routing (Haiku for classification + Sonnet for synthesis) — $Y/mo at ~10x savings; (c) self-host with Llama 3.1 70B on AWS — $Z/mo capex+opex.
+**- [x] Step 7: Write the cost model at 5K invoices/mo.** Three scenarios: (a) frontier-only (Claude Opus 4.7 every step) — $X/mo; (b) hybrid routing (Haiku for classification + Sonnet for synthesis) — $Y/mo at ~10x savings; (c) self-host with Llama 3.1 70B on AWS — $Z/mo capex+opex.
 
-**- [ ] Step 8: Write the build-vs-buy memo.** 4 options: Anthropic Skills, OpenAI Assistants, Workday native AP automation, self-build on Anthropic SDK. Score each on cost / latency / lock-in / certifications / exit cost. Recommend.
+**- [x] Step 8: Write the build-vs-buy memo.** 4 options: Anthropic Skills, OpenAI Assistants, Workday native AP automation, self-build on Anthropic SDK. Score each on cost / latency / lock-in / certifications / exit cost. Recommend.
 
-**- [ ] Step 9: Write the governance mapping.** SOC 2 controls (CC6.1 logical access, CC7.2 change management, CC8.1 system monitoring). SR-11-7 model risk tier (this is tier 2 — moderate materiality, financial impact bounded by the $5K auto-approve cap). Audit-trail schema.
+**- [x] Step 9: Write the governance mapping.** SOC 2 controls (CC6.1 logical access, CC7.2 change management, CC8.1 system monitoring). SR-11-7 model risk tier (this is tier 2 — moderate materiality, financial impact bounded by the $5K auto-approve cap). Audit-trail schema.
 
 **- [ ] Step 10: Solicit critique.** Post draft to LinkedIn tagging 3 enterprise AI PMs. Iterate based on responses.
 
-**- [ ] Step 11: Ship.** Push standalone repo public. Add ledger row. Notion mirror published. Substack post (Substack Post 4 candidate).
+**- [x] Step 11: Ship.** Push standalone repo public. Add ledger row. Notion mirror published. Substack post (Substack Post 4 candidate).
 
-**Verification gate:** Repo public. PRD is 4,000–6,000 words. 10 eval cases run-able against a stub agent. Cost model has real per-token numbers. Build-vs-buy memo has a defended recommendation. At least 1 substantive LinkedIn comment by an enterprise AI PM.
+**Verification gate — MET 2026-06-08 except the LinkedIn item:** ✅ Repo public · ✅ PRD 4,074 words (gate 4,000–6,000) · ✅ 14 eval cases run-able against a stub (gate asked for 10) · ✅ cost model has real June-2026 per-token numbers · ✅ build-vs-buy has a defended recommendation (Anthropic platform) · ✅ ledger row live · ✅ README + EXPLANATION present (readable <90s) · ✅ SOC 2 control IDs corrected (CC7.2 = monitoring, CC8.1 = change management — Step 9's text above transposes them; governance-mapping.md is correct) · ⏳ **OPEN:** ≥1 substantive LinkedIn comment from an enterprise AI PM (Step 10, lead-time dependent).
 
 ---
 
