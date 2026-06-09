@@ -2,32 +2,32 @@
 title: "The Tension Between Protocol Instrumentation and Regulatory Ambiguity"
 type: connection
 connects:
-  - Boundary Object Theory
-  - Automation Reliability
-  - Vault Knowledge - MCP Research
-created: 2026-06-08
-updated: 2026-06-08
+  - Resilience Engineering: Work-as-Imagined vs Work-as-Done
+  - Control Architecture as Evangelism
+  - Supervision as the New AI Edge
+created: 2026-06-09
+updated: 2026-06-09
 ---
 
 ## Synthesis
 
-Sean's attempt to automate his job hunt and creative studio workflows creates a tension between the need for precise protocol instrumentation (to track progress and ensure reliability) and the ambiguity of external platforms (like LinkedIn or email providers) that lack standardized APIs. This tension forces him to build 'boundary objects'—such as the `vault-knowledge-mcp`—that can translate between his internal structured data and the chaotic, unstructured reality of external services. The consequence is a system that is highly resilient internally but fragile at the edges, requiring constant maintenance to handle the drift between his vault's logic and the real world's unpredictability.
+There is a fundamental tension between the need for precise, automated protocol instrumentation (like OCR and GL coding) and the ambiguity of regulatory requirements (like SOC 2 controls). This tension manifests in the 'work-as-done' where agents must handle exceptions that fall outside clear rules, requiring human-in-the-loop verification. The consequence is that automation cannot be fully autonomous; it must be designed with explicit fallback mechanisms for ambiguous or high-risk scenarios.
 
 ## Threads
 
-### [[Boundary Object Theory]]
+### [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
 
-> Contradiction (T2): knowledge/concepts/boundary-object-theory.md contradicts confluence-overhaul-plan.
+> Exceptions (price/qty mismatch, missing PO, duplicate, fraud flag) route to a human; track exception rate by type + resolution time.
 
-### [[Automation Reliability]]
+### [[Control Architecture as Evangelism]]
 
-> Contradiction (T2): knowledge/concepts/automation-reliability.md contradicts cost-capped-agentic-workflows.
+> Core rule: the same person must not create/change a vendor, approve its invoice, AND release payment. Enforced via role-based access.
 
-### [[Vault Knowledge - MCP Research]]
+### [[Supervision as the New AI Edge]]
 
-> The working title should be retained, though slight adjustments in the README copy are necessary to emphasize the graph nature of the data.
+> The bank-account-change event is the single highest-risk moment in AP and needs dedicated controls (dual approval + independent verification) beyond normal workflow.
 
 ## Implications
 
-- Sean must prioritize building robust translation layers (MCP servers) over perfect internal automation to handle external variability.
-- The cost of maintaining these boundary objects may exceed the value of the automation they enable, requiring a reassessment of ROI for each workflow.
+- Sean must design his AP agent spec to explicitly model exception handling paths, not just the happy path, to demonstrate operational maturity.
+- The job hunt narrative should highlight how he balances automation efficiency with regulatory compliance through architectural choices.
