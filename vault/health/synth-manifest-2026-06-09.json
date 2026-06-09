@@ -1,0 +1,29 @@
+{
+  "clusters_sampled": 39,
+  "concept_paths": [
+    "vault/knowledge/concepts/writing-voice-modes.md",
+    "vault/knowledge/concepts/resilience-engineering-work-as-imagined-vs-work-as-done.md"
+  ],
+  "concepts_written": 2,
+  "connection_paths": [
+    "vault/knowledge/connections/the-tension-between-protocol-instrumentation-and-regulatory-ambiguity-in-voice-preservation.md",
+    "vault/knowledge/connections/the-tension-between-protocol-instrumentation-and-regulatory-ambiguity.md"
+  ],
+  "connections_written": 2,
+  "duration_seconds": 2773.75,
+  "edges_rejected": 0,
+  "edges_written": 3,
+  "files_processed": 15,
+  "model_used": "qwen3-14b",
+  "rejected_count": 7,
+  "rejected_reasons": {
+    "thin-definition": 3,
+    "thin-evidence": 1,
+    "thin-synthesis": 1,
+    "thin-threads": 2
+  },
+  "run_id": "2026-06-09T02:30:05",
+  "skipped_thin_source": 0,
+  "status": "partial",
+  "wol_status": "mbp_awake"
+}
