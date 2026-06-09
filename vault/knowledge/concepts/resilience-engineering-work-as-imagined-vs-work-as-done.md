@@ -2,31 +2,30 @@
 title: "Resilience Engineering: Work-as-Imagined vs Work-as-Done"
 type: concept
 sources:
-  - 40_knowledge/references/screenwriting-skill-building/Seans-Old-Scripts/Markdown/Script-Nothing-But-A-Good-Time.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-06-08-task-26-research-reference-brief.md
 tags: [auto-generated, phase-6]
-created: 2026-06-08
-updated: 2026-06-08
+created: 2026-06-09
+updated: 2026-06-09
 ---
 
 ## Definition
 
-This concept describes the divergence between a character's intended narrative arc (Work-as-Imagined) and the chaotic, unscripted reality of their immediate environment (Work-as-Done). In comedy, this gap is widened intentionally; the protagonist plans a specific outcome, but the 'system' of the scene (other characters, physical objects, timing) forces an alternative result. The narrative tension comes from watching the protagonist adapt to these unplanned constraints rather than overcoming them through sheer will.
+This concept describes the structural gap between idealized automation flows and the reality of exception handling. In AP systems, the 'work-as-done' is dominated by manual interventions for edge cases like duplicate detection failures or tolerance threshold breaches, rather than the seamless 'work-as-imagined' flow. The system's reliability depends not on preventing all errors, but on how efficiently it routes these exceptions to human judgment when automated controls fail.
 
 ## Context
 
-Sean's script 'Nothing But A Good Time' features Eric trying to execute a plan (sex) that fails due to environmental factors. Analyzing this through resilience engineering helps Sean see his script not as a failed romance, but as a successful study of how characters navigate broken systems, a key skill for writing realistic dialogue and action.
+Sean is building an Enterprise AP Agent Spec where correctness-critical claims must be verified against primary sources. Understanding that the 'work-as-done' involves significant exception routing helps him design agents that prioritize robust error handling and verification loops over pure automation speed, ensuring the system remains trustworthy when it deviates from the ideal path.
 
 ## Evidence
 
-> The drunk bearded man looks off into the distance. They fell from the sky.
+> Exceptions (price/qty mismatch, missing PO, duplicate, fraud flag) route to a human; track exception rate by type + resolution time.
 
-> Taking advantage of the distraction, Eric leans over the bar, pouring himself another.
+> The bank-account-change event is the single highest-risk moment in AP and needs dedicated controls (dual approval + independent verification) beyond normal workflow.
 
 ## Examples
 
-- Eric intends to leave the stall with his dignity intact, but instead becomes a passive participant in the bar's chaos, ultimately choosing numbness (drinking) over engagement.
-- The woman tries to reclaim her property (status), but is met with 'Finders keepers,' forcing her into a new role as a victim of circumstance rather than an agent of change.
+- Automated duplicate detection can catch a large share pre-payment (one vendor claims 'up to 95%' — marketing ceiling).
 
 ## Related Concepts
 
-[[System Constraints]] [[Real-Time Problem Solving]]
+[[Automation Reliability]] [[Supervision as the New AI Edge]]

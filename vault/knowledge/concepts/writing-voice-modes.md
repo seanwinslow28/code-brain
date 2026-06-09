@@ -2,31 +2,31 @@
 title: "Writing-voice-modes"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/2026-06-05-the-confident-stranger.md
+  - 00_inbox/tickets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-08
-updated: 2026-06-08
+created: 2026-06-09
+updated: 2026-06-09
 ---
 
 ## Definition
 
-A calibration mechanism where the author's authentic voice is defined by its resistance to algorithmic smoothing. When an AI model generates text that is grammatically immaculate and emotionally certain, it creates a 'stranger' effect because it lacks the specific friction, doubt, and idiosyncratic rhythm of human experience. The value of the voice emerges not from clarity, but from the visible struggle to articulate a complex reality without resorting to generic inspirational platitudes.
+The deliberate curation of stylistic registers—such as 'gritty' or 'bodily' tones—to anchor a unique authorial identity against the homogenizing pressure of large language models. This mechanism relies on preserving raw, unpolished narrative data (typos, run-ons) as high-fidelity signal for voice training, rather than treating them as errors to be corrected by automated passes. The invariant is that authentic voice emerges from the tension between natural human looseness and the structured constraints of AI generation, requiring active resistance to over-polishing.
 
 ## Context
 
-Sean is rebuilding his Substack presence after a layoff, using it as a vehicle for professional signaling and personal processing. He must distinguish his 'actual voice' from the 'LinkedIn cathedral' of AI-generated content that feels smooth but hollow. This concept defines how he can use the 'gross' feeling of inauthenticity as a metric for quality control.
+Sean is actively building a Substack series ('Make It Sound Like Me') and a 'VoicePrint' plugin to monetize this specific skill. The risk is that without explicit guardrails against 'over-polish,' his unique voice gets smoothed into generic AI output, destroying the competitive advantage of his personal brand.
 
 ## Evidence
 
-> It nailed every word and got me completely wrong, which is somehow more insulting than if it had just been bad.
+> Sean's looser constructions are voice data (typos/run-ons consistent across 7 years of scripts + raw interviews); the pass should fix rhythm and word choice, never sand the looseness
 
-> Every word spelled right. The grammar immaculate. And the guy inside it was a total stranger, the kind who treats a bad week like inspirational stationery and means it.
+> the humbling that you can't one-shot your own brain into an LLM
 
 ## Examples
 
-- The AI draft described getting laid off as 'inspirational stationery,' turning a traumatic event into generic motivational content.
-- Sean's reaction to the AI draft was immediate rejection ('GROSS'), indicating his voice is tied to raw, unpolished honesty rather than polished certainty.
+- Dialing Sedaris references down to ration them
+- Evaluating Bukowski as a sixth author influence for 'beauty-in-squalor' register
 
 ## Related Concepts
 
-[[Humor and Status Dynamics]] [[The Confident Stranger]]
+[[Substack-Drafter agent]] [[Craft in Product Design]]
