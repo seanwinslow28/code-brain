@@ -50,6 +50,14 @@ ai-context: "Per-company Why-Here swaps for the TMAY script + the contained layo
 - **Why-Here line:** **"Enterprise agent adoption lives or dies on trust and governance, not raw capability. I've been building the unglamorous parts — eval suites grounded in real logs, a control architecture with an audit ledger, a data-readiness rubric. That's the work that makes a NowAssist deployment something a risk team will actually sign off on."**
 - **Note:** Lean enterprise/governance vocab (Task 18 §4: SR-11-7, model card vs system card). Story 1 + Story 5.
 
+### Stripe — PM, Agentic Commerce / Payments AI surface
+
+- **Product surface:** "the Agentic Commerce Suite — the Agentic Commerce Protocol, shared payment tokens, machine payments — the rails for agents to move money safely."
+- **Archetype word:** agentic-commerce / control-architecture.
+- **Why-Here line:** **"You've decided agents are going to move money, and you're building the rails for it — ACP, shared payment tokens, machine payments. The last two months of my life have been the buyer-side version of that exact problem: an agent that moves money with a fraud-aware escalation tree, a control architecture that governs what agents are allowed to do. This is the one place where the trust layer I've been building solo is the actual product."**
+- **Lead story:** the Enterprise AP Agent Spec (money-movement + 5-level escalation) as headliner; Story 5 (Judge Layer) for the technical walkthrough.
+- **Vocab to pre-load:** SPT (shared payment token), MPP (machine payments protocol), ACP, Radar risk scoring, fail-open vs fail-closed at money scale. **Note:** not in target-companies.md — add-or-drop decision pending. Full packet: [[per-company/stripe]].
+
 ---
 
 ## Template for a new target (copy + fill)
