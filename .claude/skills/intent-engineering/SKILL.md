@@ -410,7 +410,7 @@ Run this against every intent spec before shipping.
   - Never guess on ambiguous transactions — mark as "Uncategorized" and flag.
 - **Hard Constraint:** Read-only access to bank CSVs. Cannot initiate transactions.
   Chase CSV format: Transaction Date, Post Date, Description, Category, Type,
-  Amount, Memo. [redacted]/mo net income baseline for anomaly detection.
+  Amount, Memo. Net-income baseline for anomaly detection comes from the local profile.
 - **Stop Rule:** Halt if CSV parse fails or data freshness > 7 days.
 
 ---
