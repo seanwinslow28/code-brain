@@ -223,6 +223,8 @@ presets/             # Export presets (starter, power, enterprise, creative)
 scripts/             # install.sh, install.ps1, validate.py
 plugin/              # Marketplace distribution
 docs/                # Ecosystem documentation
+├── prompts/         #   cross-cutting kickoff/continuation prompts (project-local prompts stay co-located)
+└── plans/           #   cross-cutting plans & audits (mirrors agents-sdk/docs/plans/; skill-session plans stay in docs/superpowers/)
 ```
 
 ## When Modifying
@@ -232,4 +234,5 @@ docs/                # Ecosystem documentation
 - Agents live in `.claude/agents/` (not shared/agents/)
 - Update `export-groups/*/playground.json` manifests when adding/removing skills
 - New domain-specific content goes inside the correct domain folder (`the-block/`, `creative-studio/`, or `life-systems/`)
+- Cross-cutting kickoff/continuation prompts go in `docs/prompts/`; cross-cutting plans/audits in `docs/plans/` (`YYYY-MM-DD-slug.md`). Never at repo root. Project-local prompts/plans stay co-located (`agents-sdk/docs/plans/`, `creative-studio/16bitfit-battle-mode/prompts-and-summaries/`, `docs/superpowers/`)
 - **Doc updates on new Skill/Agent/Hook/Script**: add a CHANGELOG.md entry and update any count tables in CLAUDE.md and README.md

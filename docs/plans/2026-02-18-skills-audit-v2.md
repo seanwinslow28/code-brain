@@ -256,9 +256,9 @@ Same false-positive warnings as Phase 1. No new issues introduced.
 | Skill | Quality Before | Quality After | Key Personalization Added |
 |-------|---------------|---------------|--------------------------|
 | health-habits | 3 | 5 | PPL split (Mon-Fri schedule), 4:45 AM anchor, 3-4 sets to failure, Apple Fitness → CSV pipeline via Shortcuts, XP/level gamification (10 levels, streak bonuses), vault daily note checkboxes, weekly summary generation, supplement stack table |
-| personal-finance | 5 | 5 | Chase CSV parser (7-col format) + Bilt CSV parser (headerless quoted), [redacted]/mo net income, 19 active subscriptions with keep/cancel status, 7 annual renewal dates, modified 50/30/20 budget framework, debt paydown calculator, Sean-specific regex categorization (40+ merchant patterns), anomaly detection |
+| personal-finance | 5 | 5 | Chase CSV parser (7-col format) + Bilt CSV parser (headerless quoted), configurable net-income baseline, 19 active subscriptions with keep/cancel status, 7 annual renewal dates, modified 50/30/20 budget framework, debt paydown calculator, Sean-specific regex categorization (40+ merchant patterns), anomaly detection |
 | time-management | 4 | 5 | 4:45 AM → 9 PM daily structure, energy map (6 time blocks), 45/35/20 work split, Focus Day (Mon/Fri) vs Meeting Day (Tue-Thu), `/today` daily planning ritual, PEARL conflict resolution with Sean's priority hierarchy, weekly review template, Google Calendar OAuth integration plan |
-| life-admin | 3 | 5 | Boston move March 21 checklist (15 items with status tracking), medical provider transition [redacted-provider]→Aetna (7-step checklist), address change tracker (5 categories), annual subscription renewal calendar (7 dates), file organization audit workflow, Cannes France Sep 2026 trip planning template |
+| life-admin | 3 | 5 | Boston move March 21 checklist (15 items with status tracking), medical provider transition workflow (7-step checklist), address change tracker (5 categories), annual subscription renewal calendar (7 dates), file organization audit workflow, Cannes France Sep 2026 trip planning template |
 
 ### Interview Process
 
@@ -560,7 +560,7 @@ None. All redundancies resolved as of v3.4.0.
 | Skill | Resolution |
 |-------|-----------|
 | health-habits | Rewritten with PPL split, 4:45 AM anchor, XP/level gamification, Apple Fitness pipeline, vault integration |
-| personal-finance | Rewritten with Chase+Bilt CSV parsers, [redacted]/mo net income, debt paydown calculator, modified 50/30/20 budget |
+| personal-finance | Rewritten with Chase+Bilt CSV parsers, configurable net-income baseline, debt paydown calculator, modified 50/30/20 budget |
 | time-management | Rewritten with 45/35/20 split, energy map, Focus Day vs Meeting Day, PEARL conflict resolution, /today planning |
 | life-admin | Rewritten with Boston move checklist, medical provider transition, address change tracker, Cannes trip planning |
 
@@ -724,9 +724,9 @@ Interactive interview conducted with Sean. All 4 skills rewritten with personali
 | # | Action | Files | Effort | Status |
 |---|--------|-------|--------|--------|
 | 26 | ~~Rewrite health-habits~~ | `.claude/skills/health-habits/SKILL.md` | Medium | DONE — PPL split, 4:45 AM anchor, XP/level gamification, Apple Fitness pipeline, vault integration |
-| 27 | ~~Rewrite personal-finance~~ | `.claude/skills/personal-finance/SKILL.md` | Medium | DONE — Chase+Bilt CSV parsers, [redacted]/mo net income, subscription tracker, debt paydown calculator, modified 50/30/20 budget |
+| 27 | ~~Rewrite personal-finance~~ | `.claude/skills/personal-finance/SKILL.md` | Medium | DONE — Chase+Bilt CSV parsers, configurable net-income baseline, subscription tracker, debt paydown calculator, modified 50/30/20 budget |
 | 28 | ~~Rewrite time-management~~ | `.claude/skills/time-management/SKILL.md` | Medium | DONE — 45/35/20 work split, energy map, Focus Day vs Meeting Day, PEARL conflict resolution, /today daily planning |
-| 29 | ~~Rewrite life-admin~~ | `.claude/skills/life-admin/SKILL.md` | Medium | DONE — Boston move checklist (March 21), medical provider transition ([redacted-provider]→Aetna), address change tracker, file audit, Cannes trip planning |
+| 29 | ~~Rewrite life-admin~~ | `.claude/skills/life-admin/SKILL.md` | Medium | DONE — Boston move checklist (March 21), medical provider transition workflow, address change tracker, file audit, Cannes trip planning |
 
 ### Phase 4: Block PM Rewrites — COMPLETE (v3.6.0, Feb 18 2026)
 
