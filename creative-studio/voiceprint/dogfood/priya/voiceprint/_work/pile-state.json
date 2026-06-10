@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "reader_label": "priya",
+  "root": "voiceprint/",
+  "created": "2026-06-08",
+  "updated": "2026-06-08",
+  "preferences": { "em_dashes": "keep" },
+  "stages": {
+    "interview":  { "status": "complete", "artifact": "_work/interview-transcript.md", "updated": "2026-06-08" },
+    "gauntlet":   { "status": "complete", "artifact": "_work/gauntlet-reactions.md", "updated": "2026-06-08" },
+    "mine":       { "status": "complete", "artifact": "_work/mined-samples.md", "cold_start": false, "updated": "2026-06-08" },
+    "synthesize": { "status": "complete", "artifact": "my-voice/", "generated_from": ["_work/interview-transcript.md", "_work/gauntlet-reactions.md", "_work/mined-samples.md"], "updated": "2026-06-08" },
+    "refine":     { "status": "not_started", "rounds": 0, "last_diff_pct": null }
+  },
+  "next_best_action": "Run /voiceprint-refine to start sharpening, then /voiceprint-proof."
+}

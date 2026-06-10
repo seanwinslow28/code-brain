@@ -36,6 +36,7 @@ class SkillOptimizerConfig:
     generator_model: str = "opus"   # Agent SDK alias (version-proof); pin a full ID for reproducibility
     sonnet_model: str = "sonnet"
     ollama_base_url: str = "http://localhost:5050"
+    judge_model_local: str = "qwen3-14b-research:latest"  # local Ollama judge tag; CLI-overridable
 
 
 def preflight_checks(config: SkillOptimizerConfig) -> tuple[bool, str]:
@@ -71,6 +72,26 @@ def preflight_checks(config: SkillOptimizerConfig) -> tuple[bool, str]:
     return True, "ok"
 
 
+def _truncate_to_token_budget(text: str, max_tokens: int, words_per_token: float = 0.75) -> str:
+    """Trim generated text to ~max_tokens tokens, approximating the hard output cap the
+    raw anthropic API enforced for the 2026-05-10 baseline (generated at max_tokens=600).
+
+    The Claude subscription CLI exposes no output-token cap, so without this an uncapped
+    generation (~4k tokens of rambling) would be scored against ~450-word baseline outputs,
+    making the structural/stylometry criteria non-comparable. Trimming to the first
+    ~max_tokens tokens replicates the API's behavior (the first N tokens of an unbounded
+    generation ≈ what the API returned with max_tokens=N). A word offset is the
+    tokenizer-free proxy (~1.33 tokens/word for English prose); original whitespace and
+    newlines are preserved so the format + stylometry checks see real paragraph structure.
+    """
+    import re as _re
+    max_words = max(1, int(max_tokens * words_per_token))
+    words = list(_re.finditer(r"\S+", text))
+    if len(words) <= max_words:
+        return text
+    return text[: words[max_words - 1].end()]
+
+
 def generate_outputs(
     client,
     skill_md_text: str,
@@ -83,7 +104,8 @@ def generate_outputs(
 
     Each output: {"text": str, "input_tokens": int, "output_tokens": int}
     The skill_md_text is loaded as a system prompt so the generation model behaves
-    as if it had loaded the writing-voice-modes skill.
+    as if it had loaded the writing-voice-modes skill. Output text is trimmed to
+    ~max_tokens tokens to match the baseline's hard API cap (see _truncate_to_token_budget).
     """
     outputs: dict[str, list[dict]] = {}
     for prompt in prompts:
@@ -96,7 +118,7 @@ def generate_outputs(
                 messages=[{"role": "user", "content": prompt["prompt"]}],
             )
             outputs[prompt["id"]].append({
-                "text": msg.content[0].text,
+                "text": _truncate_to_token_budget(msg.content[0].text, max_tokens),
                 "input_tokens": msg.usage.input_tokens,
                 "output_tokens": msg.usage.output_tokens,
             })
@@ -301,7 +323,10 @@ def run_optimization_loop(config: SkillOptimizerConfig, dry_run: bool = False) -
     )
     local_client = _build_ollama_client(config) if not dry_run else _DummyClient("YES")
     sonnet_client = gen_client if not dry_run else _DummyClient("YES")
-    judge = JudgeRunner(local_client=local_client, sonnet_client=sonnet_client, prompt_template=judge_template)
+    judge = JudgeRunner(
+        local_client=local_client, sonnet_client=sonnet_client,
+        prompt_template=judge_template, local_model=config.judge_model_local,
+    )
 
     results_path = config.repo_root / "agents-sdk" / config.results_path
 
@@ -421,7 +446,7 @@ def run_optimization_loop(config: SkillOptimizerConfig, dry_run: bool = False) -
     print(f"loop complete after {iteration} iterations")
 
 
-def run_score_only(config: SkillOptimizerConfig, dry_run: bool = False) -> dict:
+def run_score_only(config: SkillOptimizerConfig, dry_run: bool = False, debug: bool = False) -> dict:
     """Score the CURRENT on-disk SKILL.md WITHOUT mutating it.
 
     A baseline measurement, not an optimization step: no mutation proposal, no
@@ -456,31 +481,39 @@ def run_score_only(config: SkillOptimizerConfig, dry_run: bool = False) -> dict:
     gen_client = (
         _DummyClient("Sean-voice placeholder output.")
         if dry_run
-        else _SubscriptionClient(config.repo_root, default_model=config.generator_model)
+        else _SubscriptionClient(config.repo_root, default_model=config.generator_model, debug=debug)
     )
     local_client = _DummyClient("YES") if dry_run else _build_ollama_client(config)
     sonnet_client = gen_client
     judge = JudgeRunner(
-        local_client=local_client, sonnet_client=sonnet_client, prompt_template=judge_template
+        local_client=local_client, sonnet_client=sonnet_client,
+        prompt_template=judge_template, local_model=config.judge_model_local,
     )
 
     skill_md = config.target_skill_md.read_text()
     anchors = _load_anchors()
     start = time.time()
 
+    # Progress prints (flush=True) make this long, otherwise-silent run observable.
+    n_train = len(evals["training_prompts"]) * config.runs_per_prompt
+    n_holdout = len(evals["holdout_prompts"]) * config.runs_per_prompt
+    print(f"[score-only] generating {n_train} training outputs (Opus, subscription)...", flush=True)
     train_outputs = generate_outputs(
         gen_client, skill_md, evals["training_prompts"], config.runs_per_prompt,
         model=config.generator_model,
     )
+    print(f"[score-only] generating {n_holdout} holdout outputs...", flush=True)
     holdout_outputs = generate_outputs(
         gen_client, skill_md, evals["holdout_prompts"], config.runs_per_prompt,
         model=config.generator_model,
     )
 
+    print(f"[score-only] scoring training outputs ({config.judge_model_local} judge)...", flush=True)
     train = score_outputs(
         _run_structural_checks(train_outputs, baseline),
         _run_judge(judge, train_outputs, evals, anchors),
     )
+    print("[score-only] scoring holdout outputs...", flush=True)
     holdout = score_outputs(
         _run_structural_checks(holdout_outputs, baseline),
         _run_judge(judge, holdout_outputs, evals, anchors),
@@ -912,9 +945,11 @@ class _SubscriptionClient:
     old `anthropic.Anthropic()` without touching their call sites.
     """
 
-    def __init__(self, repo_root: Path, default_model: str = "opus"):
+    def __init__(self, repo_root: Path, default_model: str = "opus", debug: bool = False):
         import os
+        import tempfile
 
+        self.debug = debug
         if os.environ.get("ANTHROPIC_API_KEY"):
             print(
                 "[skill_optimizer] WARNING: ANTHROPIC_API_KEY is set in the environment. "
@@ -925,51 +960,91 @@ class _SubscriptionClient:
         self.repo_root = repo_root
         self.default_model = default_model
         self.messages = self  # so `client.messages.create(...)` resolves to .create
-
-    async def _run_async(self, *, system: Optional[str], prompt: str, model: Optional[str]):
-        from claude_agent_sdk import ClaudeAgentOptions, ResultMessage, query
-
-        import sys
-
-        opts: dict = {
-            "model": model or self.default_model,  # alias ("opus"/"sonnet"), version-proof
-            "tools": [],                    # pure text generation: no tools loaded
-            "max_turns": 1,
-            "permission_mode": "bypassPermissions",
-            "cwd": str(self.repo_root),
-            "env": {},                      # never pass ANTHROPIC_API_KEY -> OAuth subscription
-            # Surface the CLI's real stderr instead of swallowing it (the 2026-06-07
-            # failure was a generic "exit code 1" with no detail). Leave setting_sources
-            # and allowed_tools at their defaults: an explicit [] makes the SDK emit an
-            # empty-valued flag (`--setting-sources=`) that the CLI rejects.
-            "stderr": lambda line: sys.stderr.write(f"[claude-cli] {line}\n"),
-        }
-        if system:
-            opts["system_prompt"] = system
-        options = ClaudeAgentOptions(**opts)
-
-        text_parts: list[str] = []
-        usage = {"input_tokens": 0, "output_tokens": 0}
-        async for message in query(prompt=prompt, options=options):
-            content = getattr(message, "content", None)
-            if content:
-                for block in content:
-                    t = getattr(block, "text", None)
-                    if t:
-                        text_parts.append(t)
-            if isinstance(message, ResultMessage):
-                if not text_parts and getattr(message, "result", None):
-                    text_parts.append(message.result)
-                u = getattr(message, "usage", None) or {}
-                if isinstance(u, dict):
-                    usage["input_tokens"] = u.get("input_tokens", 0) or 0
-                    usage["output_tokens"] = u.get("output_tokens", 0) or 0
-        return "".join(text_parts), usage
+        # Run generation in a neutral, empty cwd — NOT the repo root. If the CLI ran
+        # inside the repo it would load .claude/settings.json and fire project hooks
+        # (SessionEnd flush/auto-stub) + spin up project MCP servers (obsidian-vault,
+        # ldr) on EVERY call. At ~105 generations that is 105 vault-touching/local-model
+        # jobs contending with the judge. An empty cwd loads no project settings.
+        self._neutral_cwd = tempfile.mkdtemp(prefix="skilloptim-gen-")
 
     def _run(self, *, system: Optional[str], prompt: str, model: Optional[str]):
-        import asyncio
+        """One-shot generation via `claude --print` over OAuth — the Claude subscription,
+        NEVER the Anthropic API key. Returns (text, usage_dict).
 
-        return asyncio.run(self._run_async(system=system, prompt=prompt, model=model))
+        Why a direct subprocess instead of the Agent SDK's query(): each call is a fully
+        independent `claude` process. The SDK's stream-json control channel proved flaky
+        across a long batch — a single generation mid-run died with a generic
+        `Command failed with exit code 1` (query.py:740), aborting the whole score-only
+        run (2026-06-08). A fresh subprocess per call has no shared channel to wedge, and
+        an 8-call batch verified clean. Subprocesses also let us retry transient blips.
+        """
+        import os
+        import subprocess
+        import sys
+        import json as _json
+
+        cmd = [
+            "claude", "--print",
+            "--model", model or self.default_model,   # alias "opus"/"sonnet", version-proof
+            "--output-format", "json",                 # structured result + usage
+            # The skill text is the WHOLE system prompt: drop CLAUDE.md / project / daily-log
+            # injection so generation matches the clean-API baseline, not a polluted agent.
+            "--exclude-dynamic-system-prompt-sections",
+            # Pure text generation: no tools, so the model WRITES instead of running
+            # background searches/agentic loops (which inflated outputs to 5k+ tokens of
+            # tool narration in testing). Mirrors the old SDK `tools=[]`.
+            "--tools", "",
+            "--permission-mode", "bypassPermissions",
+        ]
+        if system:
+            cmd += ["--system-prompt", system]
+        if self.debug:
+            cmd += ["--debug-to-stderr"]
+        cmd += [prompt]
+
+        # OAuth creds live in ~/.claude (cwd-independent). Strip CLAUDECODE / entrypoint so
+        # the child doesn't detect itself as nested, and HARD-strip any ANTHROPIC_API_KEY /
+        # AUTH_TOKEN so a stray key can never silently turn this into a metered API call.
+        # cwd is an empty dir -> no project settings/hooks/MCP fire (×105 would touch the vault).
+        env = {k: v for k, v in os.environ.items()
+               if k not in ("CLAUDECODE", "CLAUDE_CODE_ENTRYPOINT")}
+        env.pop("ANTHROPIC_API_KEY", None)
+        env.pop("ANTHROPIC_AUTH_TOKEN", None)
+
+        last_err: Optional[Exception] = None
+        for backoff in (0, 2, 8, 20):  # retry transient CLI/control hiccups before giving up
+            if backoff:
+                time.sleep(backoff)
+            proc = subprocess.run(
+                cmd, cwd=self._neutral_cwd, env=env, capture_output=True, text=True,
+            )
+            if self.debug and proc.stderr:
+                sys.stderr.write(f"[claude-cli] {proc.stderr[-2000:]}\n")
+            if proc.returncode != 0:
+                last_err = RuntimeError(
+                    f"claude --print exited {proc.returncode}; stderr_tail={proc.stderr[-400:]!r}"
+                )
+                continue
+            try:
+                data = _json.loads(proc.stdout)
+            except _json.JSONDecodeError as e:
+                last_err = RuntimeError(
+                    f"claude --print emitted non-JSON stdout: {e}; head={proc.stdout[:300]!r}"
+                )
+                continue
+            if data.get("is_error"):
+                # api_error_status surfaces rate-limit / overload so the caller can see it.
+                last_err = RuntimeError(
+                    f"claude --print is_error subtype={data.get('subtype')!r} "
+                    f"api_error_status={data.get('api_error_status')!r}"
+                )
+                continue
+            usage = data.get("usage", {}) or {}
+            return data.get("result", ""), {
+                "input_tokens": usage.get("input_tokens", 0) or 0,
+                "output_tokens": usage.get("output_tokens", 0) or 0,
+            }
+        raise last_err  # type: ignore[misc]
 
     def create(self, *, model=None, max_tokens=600, system=None, messages, **_):
         """Mimic anthropic.Anthropic().messages.create() for generate_outputs/propose_mutation."""
@@ -1010,6 +1085,24 @@ if __name__ == "__main__":
         help="Score the current SKILL.md without mutating it (baseline measurement). "
         "No git, no keep/revert; appends a score-only row to results.tsv.",
     )
+    ap.add_argument(
+        "--debug",
+        action="store_true",
+        help="Score-only: enable --debug-to-stderr on the CLI so the real failure "
+        "reason surfaces (prints [claude-cli] ... lines) instead of a generic exit-1.",
+    )
+    ap.add_argument(
+        "--judge-model",
+        default=None,
+        help="Override the local Ollama judge tag (config judge_model_local). Use when the "
+        "canonical Mac-Mini qwen3-14b-research host is down, e.g. --judge-model qwen3.5:27b.",
+    )
+    ap.add_argument(
+        "--ollama-base-url",
+        default=None,
+        help="Override the Ollama base URL (config ollama_base_url), e.g. "
+        "--ollama-base-url http://localhost:11434 to hit the local Ollama instead of :5050.",
+    )
     ap.add_argument("--config-path", default="agents-sdk/config.toml")
     args = ap.parse_args()
     # Load config from TOML — caller fills in repo_root etc.
@@ -1032,9 +1125,12 @@ if __name__ == "__main__":
         results_path=cfg_data.get("results_path", "data/skill-optimizer/writing-voice-modes-results.tsv"),
         generator_model=cfg_data.get("generator_model", "claude-opus-4-7"),
         sonnet_model=cfg_data.get("judge_model_sonnet_check", "claude-sonnet-4-6"),
-        ollama_base_url=cfg_data.get("ollama_base_url", "http://localhost:5050"),
+        # CLI flags win over config so a one-off judge substitution never edits the
+        # canonical config.toml values (which describe the Mac-Mini :5050 host).
+        ollama_base_url=args.ollama_base_url or cfg_data.get("ollama_base_url", "http://localhost:5050"),
+        judge_model_local=args.judge_model or cfg_data.get("judge_model_local", "qwen3-14b-research:latest"),
     )
     if args.score_only:
-        run_score_only(config, dry_run=args.dry_run)
+        run_score_only(config, dry_run=args.dry_run, debug=args.debug)
     else:
         run_optimization_loop(config, dry_run=args.dry_run)

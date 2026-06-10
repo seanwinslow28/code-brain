@@ -73,6 +73,44 @@ class TestSingleJudgeCall:
         assert "ambiguous" in result.reason.lower()
 
 
+class TestLocalModelSelection:
+    """The local judge tag must be configurable so a run can substitute a model
+    (e.g. when the canonical Mac-Mini qwen3-14b-research host is down)."""
+
+    def test_default_local_model_is_qwen3_14b_research(self):
+        client = MagicMock()
+        client.complete.return_value = "YES"
+        runner = JudgeRunner(
+            local_client=client, sonnet_client=None, prompt_template=PROMPT_TEMPLATE
+        )
+        runner.judge_single(output="x", anchors=["a", "b"], question="?", mode="sean")
+        assert client.complete.call_args.kwargs["model"] == "qwen3-14b-research:latest"
+
+    def test_custom_local_model_is_passed_to_client(self):
+        client = MagicMock()
+        client.complete.return_value = "YES"
+        runner = JudgeRunner(
+            local_client=client, sonnet_client=None,
+            prompt_template=PROMPT_TEMPLATE, local_model="qwen3.5:27b",
+        )
+        runner.judge_single(output="x", anchors=["a", "b"], question="?", mode="sean")
+        assert client.complete.call_args.kwargs["model"] == "qwen3.5:27b"
+
+    def test_sonnet_path_unaffected_by_local_model(self):
+        local = MagicMock()
+        sonnet = MagicMock()
+        sonnet.complete.return_value = "YES"
+        runner = JudgeRunner(
+            local_client=local, sonnet_client=sonnet,
+            prompt_template=PROMPT_TEMPLATE, local_model="qwen3.5:27b",
+        )
+        runner.judge_single(
+            output="x", anchors=["a", "b"], question="?", mode="sean", use_sonnet=True
+        )
+        assert sonnet.complete.call_args.kwargs["model"] == "sonnet"
+        local.complete.assert_not_called()
+
+
 class TestEnsembleJudge:
     def test_majority_yes_passes(self):
         client = MagicMock()
