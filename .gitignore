@@ -113,3 +113,58 @@ vault/90_system/audio/*.mp3
 # Codex CLI local config/state — generated, not source.
 .codex/
 AGENTS.md
+
+# ════════════════════════════════════════════════════════════════════════
+# PRIVATE LAYER — recruiter-readiness cleanup 2026-06-10
+# Personal/job-hunt material lives on local disk, never on GitHub.
+# History scrubbed via git filter-repo (see docs/2026-06-10-code-brain-
+# recruiter-readiness-audit-plan.md). Agents must never `git add` these.
+# ════════════════════════════════════════════════════════════════════════
+
+# Job-hunt command center — consolidated private home.
+# Runtime writers: job_feed.py, daily_driver.py, mock_interview_loop.py,
+# substack_drafter.py (paths unchanged; they read/write on-disk, not via git).
+vault/20_projects/prj-job-hunt-2026/
+
+# Personal projects (move logistics, personal finance notes)
+vault/20_projects/prj-boston-move/
+vault/20_projects/prj-personal-finance/
+
+# Operating-model artifacts (SOUL/USER/HEARTBEAT/schedule-recs) —
+# read at runtime by agents-sdk/lib/artifact_loader.py from disk.
+vault/05_atlas/operating-models/
+
+# Daily notes — personal timeline (job-hunt log, mood, schedule).
+# Obsidian-Git respects this rule, so future daily notes stay local-only.
+vault/10_timeline/daily/
+
+# Personal source material & profiles (consolidated into the job-hunt home
+# on disk; rules guard against re-staging from any path)
+_inputs/
+_archive/
+docs/Claude Code Personal Finance Info/
+vault/Sean-Winslow-Full-Personal-Context-v2.0.md
+personal-context-v2-interview-prompt.md
+
+# Skill-embedded personal data — the skills stay public, their real
+# profiles/corpora stay local (see each SKILL.md "local-only" section)
+.claude/skills/personal-finance/references/
+.claude/skills/life-admin/references/
+.claude/skills/writing-voice-modes/references/
+.claude/skills/writing-voice-modes/drafts/
+
+# Employer-confidential (The Block) — archived reference, local-only
+[redacted: granola archive path]
+vault/30_domains/product-management/media-team-ideas/
+
+# ════════════════════════════════════════════════════════════════════════
+# BLOAT GUARDS — recruiter-readiness cleanup 2026-06-10
+# ════════════════════════════════════════════════════════════════════════
+
+# Root-level duplicate of creative-studio/16bitfit-battle-mode (deduped
+# 2026-06-10; anchored so the creative-studio copy is unaffected)
+/16bitfit-battle-mode/
+
+# Vendored demo media for the last30days skill (multi-MB jpeg/mp3/png —
+# see the upstream skill repo for originals)
+.claude/skills/last30days/assets/
