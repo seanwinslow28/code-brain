@@ -231,7 +231,7 @@ If you read **only one section**, read this one.
 | Synthesized connection article (LLM-generated) | `vault/knowledge/connections/` | auto-named by `vault_synthesizer` |
 | Q&A answer (terminal `query.py` output) | `vault/knowledge/qa/` | auto-named by `query.py --file-back` |
 | Daily note | `10_timeline/daily/` | `YYYY-MM-DD.md` |
-[redacted: granola archive path]
+| Granola meeting (auto-synced) | `30_domains/product-management/the-block-meetings-granola-notes/` | `mtg-YYYY-MM-DD-<slug>.md` (post-process) |
 | Operating-model artifact | `05_atlas/operating-models/<domain>/` | `HEARTBEAT.md` / `USER.md` / `SOUL.md` / `operating-model.md` / `schedule-recommendations.md` |
 | Daily fleet status (autonomous) | `02_Areas/Agent-Fleet/` | `daily-fleet-status-YYYY-MM-DD.md` |
 | Health telemetry (synth manifest, lint, spend) | `vault/health/` | `synth-manifest-YYYY-MM-DD.json`, `YYYY-MM-DD-lint-report.md`, `gemini-spend-YYYY-MM.json` |
@@ -295,7 +295,7 @@ Spot-check three claims:
 ```bash
 # Claim 1: Granola landing path
 python3 -c "import json; d=json.load(open('/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/.obsidian/plugins/granola-sync/data.json')); print(d['customBaseFolder'])"
-[redacted: granola archive path]
+# Expected: 30_domains/product-management/the-block-meetings-granola-notes
 
 # Claim 2: Daily template anchors
 grep -E "^<!-- " /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/templates/tpl-daily.md
@@ -373,7 +373,7 @@ vault/
 ├── 30_domains/                       # Domain workspace folders
 │   ├── claude-mastery/               # (mostly empty — domain-level reference notes)
 │   ├── product-management/
-[redacted: granola archive path]
+│   │   ├── the-block-meetings-granola-notes/   # Granola plugin landing zone (auto-sync)
 │   │   ├── prompts/
 │   │   └── media-team-ideas/
 │   ├── creative-studio/
@@ -910,7 +910,7 @@ Append under `<!-- SECTION: plugins -->`. Replace the original 8-plugin table wi
 | **Local REST API** | MCP server endpoint for AI access | HTTPS on port 27124, self-signed SSL |
 | **Remotely Save** | Cloud sync (encrypted config) | Encrypted credentials |
 | **Homepage** | Opens vault to Home.md | Set to `Home` note |
-[redacted: granola archive path]
+| **Granola Sync** | Syncs meeting notes + transcripts from Granola | Individual files, `linkFromDailyNotes: true`, landing at `30_domains/product-management/the-block-meetings-granola-notes/`. Desktop only. |
 | **Calendar** | NEW — Sidebar calendar widget | Standard config |
 | **Excalidraw** | NEW — Hand-drawn diagrams stored at `Excalidraw/` | Standard config |
 | **Image Converter** | NEW — Auto-convert pasted images (PNG → WebP, etc.) | Standard config |
@@ -1123,7 +1123,7 @@ Read the scratchpad. Diff every number against the table. Fix any drift.
 
 Append under `<!-- SECTION: granola -->`. Start from lines 803–862 of the original, but verify these specific values match `vault/.obsidian/plugins/granola-sync/data.json`:
 
-[redacted: granola archive path]
+- `customBaseFolder: "30_domains/product-management/the-block-meetings-granola-notes"` ✓
 - `saveAsIndividualFiles: true` ✓
 - `linkFromDailyNotes: true` ✓
 - `syncDaysBack: 7` ✓
@@ -1280,7 +1280,7 @@ If any of these fail (especially the SECTION marker count), Edit the file to fix
 
 ```bash
 # Granola landing path matches what's in the new guide
-[redacted: granola archive path]
+grep "the-block-meetings-granola-notes" /Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/90_system/VAULT-GUIDE.md
 python3 -c "import json; d=json.load(open('/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/.obsidian/plugins/granola-sync/data.json')); print(d['customBaseFolder'])"
 # The grep result must contain the path printed by python.
 

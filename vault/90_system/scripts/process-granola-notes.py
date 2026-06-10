@@ -25,7 +25,7 @@ from pathlib import Path
 # ── Paths ────────────────────────────────────────────────────────────────
 
 VAULT = Path(__file__).resolve().parent.parent.parent  # vault/90_system/scripts/ → vault/
-[redacted: granola archive path]
+GRANOLA_BASE = VAULT / "30_domains" / "product-management" / "the-block-meetings-granola-notes"
 DAILY_DIR = VAULT / "10_timeline" / "daily"
 OLD_GRANOLA = VAULT / "Granola"
 
