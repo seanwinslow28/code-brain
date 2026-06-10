@@ -11,6 +11,12 @@ show 0 until items land here.
 
 ## Todo
 
+- recruiter-cleanup: delete the pre-rewrite mirror backup `~/code-brain-backup-2026-06-10.git` (holds ALL scrubbed private history) + `/tmp/code-brain-restore` + `~/code-brain-scrub-paths*.txt` once confident in the rewrite (suggest after 1-2 weeks of clean operation) — assigned: Sean
+- recruiter-cleanup: file GitHub Support ticket to purge unreachable objects (old commits remain SHA-fetchable server-side until GC); flip repo public only after Support confirms or after accepting the residual-while-private risk — assigned: Sean
+- fleet privacy filter: nightly synthesizer/flush still write job-hunt-derived concepts into the PUBLIC vault/knowledge/ + tickets.md over time — add a privacy-aware exclusion (route career/personal-derived concepts to vault/knowledge/private/) or schedule a periodic prune pass — assigned: Sean
+- fleet venv: agents-sdk/.venv silently broken before 2026-06-10 (Homebrew python@3.13 had been removed; reinstalled today) — verify tonight's launchd runs succeed; consider uv-managed pinned interpreter so brew upgrades can't orphan the venv again — assigned: Sean
+- recruiter-cleanup deferred polish: docs/ top level still has loose dirs (NotebookLM Synthesis Cleanup, Design-Enhancement-Docs, Additional Skills…); consider folding into docs/ subtaxonomy in a later pass — assigned: Sean
+
 - enterprise-ap-agent-spec: repo public + `/transactions/enterprise-ap-agent-spec/` route LIVE (branch merged 2026-06-08). Last open item from the Task 26 gate: ≥1 substantive LinkedIn comment from an enterprise AI PM (post ~5–7 days pre-ship) — assigned: Sean
 - Substack series "Make It Sound Like Me" (working name): rewrite the post-1 draft (the-confident-stranger) against the 2026-06-05 upgraded skill — new Pi-anchored thesis ("there are many Claudes; this one writes like me" / the humbling that you can't one-shot your own brain into an LLM), grittier title, dial Sedaris way down, references rationed — assigned: Sean
 - Substack value engine: build the reader-facing tool — ship a Cheese-Gauntlet + reference-universe-interview prompt kit (copy-paste, Nate-style) with post 1 [DONE — kit shipped]; design the full "interview-the-reader → emit their personal voice-mode SKILL.md" Cowork plugin as a later flagship post [SPEC DELIVERED 2026-06-07: job-hunt-2026-roadmap/2026-06-07-voiceprint-plugin-build-spec.md, working name VoicePrint, MVP ~4-6 sessions; 4 open decisions: name / MVP boundary / bundle-the-chain / public-vs-dogfood-first; BUILD not started pending Sean's go] — assigned: Sean
