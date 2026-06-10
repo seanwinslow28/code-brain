@@ -2,31 +2,31 @@
 title: "Infrastructure Status"
 type: concept
 sources:
-  - 40_knowledge/references/ref-system-design-114-concepts-part-2.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-09.md
 tags: [auto-generated, phase-6]
-created: 2026-06-08
-updated: 2026-06-08
+created: 2026-06-10
+updated: 2026-06-10
 ---
 
 ## Definition
 
-The observable state of the underlying communication channels and network infrastructure that determines the reliability and latency of agent interactions. This status is not just about whether a server is up, but whether the specific transport mechanisms (like WebSocket upgrades or TCP connections) are functional and unblocked by intermediate network devices. It represents the foundational layer upon which all higher-level agent behaviors depend.
+The operational availability of physical hardware nodes (Mac Mini, Alienware) serves as a hard constraint on agent fleet capacity. When a node goes offline, dependent agents lose their execution environment, creating a silent failure mode where the software layer reports health but the physical layer is absent. This decoupling means that 'healthy' status in logs does not guarantee functional capability for tasks requiring specific hardware resources or network endpoints.
 
 ## Context
 
-Sean's fleet relies on stable infrastructure to function. If the 'Infrastructure Status' of the WebSocket channel is degraded due to firewall blocks, the entire agentic workflow may fail silently or degrade in performance. Monitoring this status is crucial for diagnosing why agents might not be receiving real-time updates.
+Sean's agent fleet relies on a multi-machine setup. The offline status of the Alienware machine directly impacts the ability to run certain agents or sync data, creating a bottleneck that is invisible to purely software-based health checks unless explicitly monitored at the infrastructure level.
 
 ## Evidence
 
-> Plus, some proxies/firewalls “block” WebSocket upgrades or long-lived connections, so compatibility can vary.
+> Alienware machine is offline, hindering required three-machine sync for robust operation.
 
-> WebSockets provide full-duplex, bidirectional communication between client & server over a single TCP connection.
+> The health of the agent fleet is directly coupled to the availability of the underlying infrastructure, creating a single point of failure for high-leverage tasks.
 
 ## Examples
 
-- Checking if a firewall is blocking port 443 for WebSocket upgrades.
-- Monitoring TCP connection latency to detect network partitions affecting agent sync.
+- Mac Mini status: Online
+- Alienware status: OFFLINE
 
 ## Related Concepts
 
-[[Runtime-Model Coupling]] [[Agent Health Monitoring]]
+[[Agent Health Monitoring]] [[Infrastructure Dependency in Agent Health]]
