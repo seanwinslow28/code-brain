@@ -35,10 +35,15 @@ class JudgeRunner:
         local_client: _LLMClient,
         sonnet_client: Optional[_LLMClient],
         prompt_template: str,
+        local_model: str = "qwen3-14b-research:latest",
     ):
         self.local = local_client
         self.sonnet = sonnet_client
         self.template = prompt_template
+        # Which Ollama tag the local judge calls. Canonical is the Mac Mini's
+        # qwen3-14b-research:latest; overridable (e.g. a local substitute) when
+        # that host is down — see skill_optimizer --judge-model.
+        self.local_model = local_model
 
     @staticmethod
     def _parse_yes_no(response: str) -> tuple[bool | None, str]:
@@ -64,7 +69,7 @@ class JudgeRunner:
             output=output, anchor_1=a1, anchor_2=a2, question=question, mode=mode,
         )
         client = self.sonnet if (use_sonnet and self.sonnet) else self.local
-        model = "sonnet" if (use_sonnet and self.sonnet) else "qwen3-14b-research:latest"
+        model = "sonnet" if (use_sonnet and self.sonnet) else self.local_model
         raw = client.complete(prompt=prompt, model=model, temperature=0.0, seed=seed)
         parsed, reason = self._parse_yes_no(raw)
         if parsed is None:

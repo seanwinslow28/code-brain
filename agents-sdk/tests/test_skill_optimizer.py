@@ -353,6 +353,84 @@ class TestSubscriptionClient:
         out = capsys.readouterr().out
         assert "IGNORES it" in out
 
+    def test_run_direct_cli_strips_api_key_and_disables_tools(self, tmp_path, monkeypatch):
+        """The direct `claude --print` transport must (a) never leak an API key into the
+        child env (OAuth-only), (b) disable tools so generation is pure text, and (c) parse
+        result + usage from the JSON output."""
+        import subprocess as _sub
+        from agents import skill_optimizer
+        monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-must-not-be-passed")
+        monkeypatch.setenv("ANTHROPIC_AUTH_TOKEN", "tok-must-not-be-passed")
+        captured = {}
+
+        def fake_run(cmd, cwd=None, env=None, capture_output=None, text=None):
+            captured["cmd"] = cmd
+            captured["env"] = env
+            captured["cwd"] = cwd
+            payload = json.dumps({
+                "result": "hello world", "is_error": False,
+                "usage": {"input_tokens": 5, "output_tokens": 9},
+            })
+            return type("P", (), {"returncode": 0, "stdout": payload, "stderr": ""})()
+
+        monkeypatch.setattr(_sub, "run", fake_run)
+        client = skill_optimizer._SubscriptionClient(tmp_path, default_model="opus")
+        text, usage = client._run(system="SKILL BODY", prompt="write something", model="opus")
+
+        assert text == "hello world"
+        assert usage == {"input_tokens": 5, "output_tokens": 9}
+        # OAuth only — no metered-key material may reach the child process.
+        assert "ANTHROPIC_API_KEY" not in captured["env"]
+        assert "ANTHROPIC_AUTH_TOKEN" not in captured["env"]
+        cmd = captured["cmd"]
+        assert "--print" in cmd and "--model" in cmd
+        assert cmd[cmd.index("--output-format") + 1] == "json"
+        assert cmd[cmd.index("--tools") + 1] == ""  # tools disabled -> pure text
+        assert cmd[cmd.index("--system-prompt") + 1] == "SKILL BODY"
+        assert captured["cwd"] == client._neutral_cwd  # neutral dir, not the repo
+
+    def test_run_retries_transient_is_error_then_succeeds(self, tmp_path, monkeypatch):
+        import subprocess as _sub
+        from agents import skill_optimizer
+        monkeypatch.setattr(skill_optimizer.time, "sleep", lambda *_a, **_k: None)
+        calls = {"n": 0}
+
+        def fake_run(cmd, **kw):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                bad = json.dumps({"is_error": True, "subtype": "error_during_execution",
+                                  "api_error_status": None})
+                return type("P", (), {"returncode": 0, "stdout": bad, "stderr": ""})()
+            good = json.dumps({"result": "ok", "is_error": False,
+                               "usage": {"input_tokens": 1, "output_tokens": 1}})
+            return type("P", (), {"returncode": 0, "stdout": good, "stderr": ""})()
+
+        monkeypatch.setattr(_sub, "run", fake_run)
+        client = skill_optimizer._SubscriptionClient(tmp_path)
+        text, _usage = client._run(system=None, prompt="x", model="opus")
+        assert text == "ok"
+        assert calls["n"] == 2  # retried once past the transient is_error
+
+
+class TestTruncateToTokenBudget:
+    """Output is trimmed to ~max_tokens tokens to mirror the baseline's hard API cap."""
+
+    def test_short_text_unchanged(self):
+        from agents.skill_optimizer import _truncate_to_token_budget
+        t = "one two three four five"
+        assert _truncate_to_token_budget(t, max_tokens=600) == t
+
+    def test_long_text_trimmed_to_word_budget(self):
+        from agents.skill_optimizer import _truncate_to_token_budget
+        words = " ".join(str(i) for i in range(1000))
+        out = _truncate_to_token_budget(words, max_tokens=600)  # 600 * 0.75 = 450 words
+        assert len(out.split()) == 450
+
+    def test_preserves_paragraph_structure(self):
+        from agents.skill_optimizer import _truncate_to_token_budget
+        t = "para one.\n\npara two.\n\npara three."
+        assert "\n\n" in _truncate_to_token_budget(t, max_tokens=600)
+
 
 class TestRunScoreOnly:
     def _setup_repo(self, tmp_path, monkeypatch, threshold=5.0):
@@ -436,6 +514,22 @@ class TestRunScoreOnly:
         config = self._setup_repo(tmp_path, monkeypatch, threshold=None)
         with pytest.raises(RuntimeError, match="threshold not yet calibrated"):
             run_score_only(config, dry_run=True)
+
+    def test_judge_model_local_flows_into_judge_runner(self, tmp_path, monkeypatch):
+        from agents import skill_optimizer
+        config = self._setup_repo(tmp_path, monkeypatch)
+        config.judge_model_local = "qwen3.5:27b"  # simulate a --judge-model override
+
+        captured = {}
+        real_judge_runner = skill_optimizer.JudgeRunner
+
+        def _capturing(*args, **kwargs):
+            captured["local_model"] = kwargs.get("local_model")
+            return real_judge_runner(*args, **kwargs)
+
+        monkeypatch.setattr(skill_optimizer, "JudgeRunner", _capturing)
+        run_score_only(config, dry_run=True)
+        assert captured["local_model"] == "qwen3.5:27b"
 
 
 class TestBuildRow:
