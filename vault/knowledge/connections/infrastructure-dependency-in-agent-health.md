@@ -3,31 +3,31 @@ title: "Infrastructure Dependency in Agent Health"
 type: connection
 connects:
   - Infrastructure Status
-  - Agent Health
-  - Automation Reliability
-created: 2026-06-03
-updated: 2026-06-03
+  - Agent Health Monitoring
+  - Deep Research Queue
+created: 2026-06-10
+updated: 2026-06-10
 ---
 
 ## Synthesis
 
-The health of the agent fleet is directly coupled to the availability of the underlying infrastructure, creating a single point of failure for high-leverage tasks. When the Alienware and ComfyUI go offline, the agents that depend on them cannot execute their specialized functions, leading to a gap in the automation pipeline that must be filled manually. This tension highlights the fragility of a distributed system where hardware availability dictates software capability.
+The health of the autonomous agent fleet is directly tied to the overall infrastructure health of Sean's systems. When physical machines go offline, agents that depend on them become non-functional, creating a gap between reported software health and actual operational capability. This dependency means that monitoring must extend beyond agent logs to include hardware status to ensure true fleet reliability.
 
 ## Threads
 
 ### [[Infrastructure Status]]
 
-> Alienware and ComfyUI are OFFLINE, blocking multi-machine sync and creative pipeline testing.
+> Alienware machine is offline, hindering required three-machine sync for robust operation.
 
-### [[Agent Health]]
+### [[Agent Health Monitoring]]
 
-> vault-indexer (2:00 AM daily, Mac Mini, $0.00/run) - Status: healthy - Details: status=success · 6.7h ago · notes='chunks=139, embeddings=139, errors=0'
+> The health of the agent fleet is directly coupled to the availability of the underlying infrastructure, creating a single point of failure for high-leverage tasks.
 
-### [[Automation Reliability]]
+### [[Deep Research Queue]]
 
-> No indication of MCP access troubleshooting, leaving core cross-domain automation reliant on manual intervention.
+> Deep researcher reported an empty queue; key research synthesis function was inactive today.
 
 ## Implications
 
-- Sean must prioritize resolving the Mac Mini/MBP/Alienware connectivity mesh to enable full agent reach and restore high-leverage automation capabilities.
-- The current state of the fleet limits the ability to perform complex, multi-machine tasks, forcing a reliance on manual intervention for any work that requires the offline hardware.
+- Sean must implement hardware-level monitoring to detect offline machines before they impact agent operations.
+- The reliance on multiple machines introduces complexity in maintaining consistent fleet status across different environments.
