@@ -167,7 +167,7 @@ relatedArchitecture: z.union([z.string(), z.array(z.string())]).optional(),  // 
 | # | Decision | Recommended default | Action |
 |---|---|---|---|
 | 3 | Dark mode in V1? | Light-only home hero, manual footer toggle for sub-pages | **Confirm or switch** |
-| 4 | The Block case study framing | Frame the work, not the exit; [redacted] as primary reference; ARCHIVED status locked | **Confirm; Block content review must happen before /work/the-block/ ships** |
+| 4 | The Block case study framing | Frame the work, not the exit; primary reference confirmed; ARCHIVED status locked | **Confirm; Block content review must happen before /work/the-block/ ships** |
 | 5 | 16BitFit case study | PAUSED locked; case study leans on the pipeline, not finished game | **Confirm there's enough shippable artifact material** — if no, drop A-5 to A-4 + reduce grid to 5 cells (case-study spec §13.5 OPEN-3) |
 | 7 | Global nav shape | All 5 surfaces as siblings (`work` / `transactions` / `architecture` / `essays` / `about`) | **Confirm; switch only if cluttered after live build** |
 | 8 | A-3 tile media | 90-sec Loom poster (terminal + Claude Desktop loading) | **Confirm; pick at tile-build time based on 400×500px legibility** |

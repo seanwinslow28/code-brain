@@ -1,57 +1,12 @@
 # Knowledge Lint Report — 2026-04-18
 
+
 _114 issues found (110 structural, 4 semantic)._
 
 ## HIGH (48)
 
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
 - **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/40_knowledge/references/ref-agent-soul-md-prompt.md` — Nate
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/30_domains/product-management/media-team-ideas/Perplexity-Computer-Overview.md` — sonnet 4.5
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
 
 ## MEDIUM (66)
 
