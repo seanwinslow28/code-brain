@@ -76,7 +76,7 @@ _ORPHAN_EXCLUDE_DIRS = {
     "00_inbox",
     "90_system",
     "70_apple-notes",
-[redacted: granola archive path]
+    "the-block-meetings-granola-notes",
     "the-block-resume-info",
     "media-team-ideas",
     "daily",
@@ -108,7 +108,7 @@ _ORPHAN_EXCLUDE_SUFFIXES = ("-transcript.md",)
 # data. Re-enable scanning here only if you rewrite the stale link
 # targets in a one-shot migration pass.
 _BROKEN_LINK_EXCLUDE_DIRS = {
-[redacted: granola archive path]
+    "the-block-meetings-granola-notes",
 }
 
 # Directories excluded from stale-reference scanning. Lint reports themselves
@@ -117,7 +117,7 @@ _BROKEN_LINK_EXCLUDE_DIRS = {
 # Block job ended 2026-05 and those docs aren't being maintained.
 _STALE_REF_EXCLUDE_DIRS = {
     "health",
-[redacted: granola archive path]
+    "the-block-meetings-granola-notes",
     "the-block-resume-info",
     "_archive",
     "60_archive",

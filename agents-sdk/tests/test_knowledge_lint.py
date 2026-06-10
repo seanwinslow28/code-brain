@@ -83,12 +83,12 @@ def test_find_broken_wikilinks_skips_numeric_citation_markers(tmp_path: Path) ->
 
 
 def test_find_broken_wikilinks_skips_granola_archive(tmp_path: Path) -> None:
-[redacted: granola archive path]
+    """Files inside the-block-meetings-granola-notes/ must be skipped
     entirely — that archive is read-only and full of stale slug-rename
     cross-references."""
     v = tmp_path / "vault"
     _touch(
-[redacted: granola archive path]
+        v / "30_domains" / "product-management" / "the-block-meetings-granola-notes" / "mtg-foo.md",
         "links to [[Alex_Sean sync]] which no longer exists",
     )
     _touch(v / "outside.md", "this links to [[also-missing]]")

@@ -155,7 +155,7 @@ personal-context-v2-interview-prompt.md
 .claude/skills/writing-voice-modes/drafts/
 
 # Employer-confidential (The Block) — archived reference, local-only
-[redacted: granola archive path]
+vault/30_domains/product-management/the-block-meetings-granola-notes/
 vault/30_domains/product-management/media-team-ideas/
 vault/60_archive/operating-models-the-block-2026-05/
 
@@ -178,3 +178,7 @@ vault/60_archive/apple-notes-personal/
 # from the public graph 2026-06-10 (synthesizer index scans only
 # concepts/connections/qa, so this dir never appears in index.md)
 vault/knowledge/private/
+
+# Late finds (2026-06-10 marker sweep): personal medical note + Apple Notes import
+vault/40_knowledge/references/ref-dr-cat-medical-transition-boston.md
+vault/70_apple-notes/

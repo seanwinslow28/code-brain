@@ -32,7 +32,7 @@ If you read **only one section**, read this one.
 | Synthesized connection article (LLM-generated) | `knowledge/connections/` | auto-named by `vault_synthesizer` |
 | Q&A answer (terminal `query.py` output) | `knowledge/qa/` | auto-named by `query.py --file-back` |
 | Daily note | `10_timeline/daily/` | `YYYY-MM-DD.md` |
-[redacted: granola archive path]
+| Granola meeting (auto-synced) | `30_domains/product-management/the-block-meetings-granola-notes/` | `mtg-YYYY-MM-DD-<slug>.md` (post-process) |
 | Operating-model artifact | `05_atlas/operating-models/<domain>/` | `HEARTBEAT.md` / `USER.md` / `SOUL.md` / `operating-model.md` / `schedule-recommendations.md` |
 | Daily fleet status (autonomous) | `02_Areas/Agent-Fleet/` | `daily-fleet-status-YYYY-MM-DD.md` |
 | Health telemetry (synth manifest, lint, spend) | `health/` | `synth-manifest-YYYY-MM-DD.json`, `YYYY-MM-DD-lint-report.md`, `gemini-spend-YYYY-MM.json` |
@@ -170,7 +170,7 @@ vault/
 ├── 30_domains/                       # Domain workspace folders
 │   ├── claude-mastery/               # (mostly empty — domain-level reference notes)
 │   ├── product-management/
-[redacted: granola archive path]
+│   │   ├── the-block-meetings-granola-notes/   # Granola plugin landing zone (auto-sync)
 │   │   ├── prompts/
 │   │   └── media-team-ideas/
 │   ├── creative-studio/
@@ -623,7 +623,7 @@ These files are **read-only from Claude Code's perspective** — only `meta_agen
 | **Local REST API** | MCP server endpoint for AI access | HTTPS on port 27124, self-signed SSL |
 | **Remotely Save** | Cloud sync (encrypted config) | Encrypted credentials |
 | **Homepage** | Opens vault to Home.md | Set to `Home` note |
-[redacted: granola archive path]
+| **Granola Sync** | Syncs meeting notes + transcripts from Granola | Individual files, `linkFromDailyNotes: true`, landing at `30_domains/product-management/the-block-meetings-granola-notes/`. Desktop only. |
 | **Calendar** | NEW — Sidebar calendar widget | Standard config |
 | **Excalidraw** | NEW — Hand-drawn diagrams stored at `Excalidraw/` | Standard config |
 | **Image Converter** | NEW — Auto-convert pasted images (PNG → WebP, etc.) | Standard config |
@@ -956,7 +956,7 @@ Connect Smart Connections embeddings to Claude via the `smart-connections-mcp` s
 **Plugin config** (`vault/.obsidian/plugins/granola-sync/data.json`):
 - `saveAsIndividualFiles: true` — each meeting gets its own file
 - `linkFromDailyNotes: true` — daily notes get `[[wiki-links]]` under `## Meetings`
-[redacted: granola archive path]
+- `customBaseFolder: "30_domains/product-management/the-block-meetings-granola-notes"` — landing zone
 - `transcriptHandling: "same-location"` — transcripts co-locate with notes
 - `syncDaysBack: 7` — re-syncs recent files (processing script waits 7 days before processing)
 
