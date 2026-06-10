@@ -173,3 +173,8 @@ vault/60_archive/apple-notes-personal/
 # Vendored demo media for the last30days skill (multi-MB jpeg/mp3/png —
 # see the upstream skill repo for originals)
 .claude/skills/last30days/assets/
+
+# Knowledge-graph private lane — job-hunt/personal-derived concepts pruned
+# from the public graph 2026-06-10 (synthesizer index scans only
+# concepts/connections/qa, so this dir never appears in index.md)
+vault/knowledge/private/
