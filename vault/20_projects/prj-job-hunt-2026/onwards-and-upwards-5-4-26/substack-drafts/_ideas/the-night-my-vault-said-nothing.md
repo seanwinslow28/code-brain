@@ -1,16 +1,19 @@
 ---
-type: substack-draft
-project: prj-job-hunt-2026
-artifact: vault-synthesizer-evals
+series: raising-claude
+post_number: bonus
+title: "The Night My Vault Said Nothing"
+status: idea
+publish_date: TBD
+hero_image: images/hero.png
+ships_with: evals/vault-synthesizer (shipped repo — no NEW tool required)
+ships_with_status: shipped
+pain_point: "evals are the new PRDs / silent regression nobody catches"
+voice_chain_run: n
+event: 9-night-regression (EVALS framing — a DISTINCT lesson from the Post 7 manifesto; OK to keep both. Do NOT also publish the dive-bar cuts in _archive — same war story.)
+buffer_use: "Tool-free, near-ready. Use as a cadence buffer between tool-gated posts."
 created: 2026-05-10
-voice: sean-mode-sedaris-tuned
 voice_mode: sedaris
-target_length: 1300_words
-status: draft
 companion_artifact: 2026-05-10-evals-error-analysis-real-logs.md
-header_image: images/2026-05-10-the-night-my-vault-said-nothing-header.png
-header_image_supersedes: images/2026-05-10-the-night-my-vault-said-nothing-header-v1-superseded.png
-ai-context: "Substack post syndicating the eval-suite portfolio artifact. Hook is the actual error analysis finding: 9 nights of silent zero-output runs the status field reported as 'ok'. Tone per roadmap Decision 4 — comedic Sean Mode, not Nate's strategic-sober register."
 ---
 
 # The Night My Vault Said Nothing

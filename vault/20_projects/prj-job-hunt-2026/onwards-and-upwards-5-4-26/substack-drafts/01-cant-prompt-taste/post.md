@@ -1,3 +1,22 @@
+---
+series: raising-claude
+post_number: 1
+title: "You Can't Prompt Taste Into a Machine"
+status: ready
+publish_date: TBD
+hero_image: "MISSING — needs generation"
+ships_with: cheese-gauntlet-kit
+ships_with_status: shipped
+pain_point: "humanize prompts don't work"
+voice_chain_run: y
+voice_chain_notes: "Layoff suppressed (Do-Not-Promote); the layoff-as-invitation gauntlet cheese swapped to a non-layoff specimen. Analyzer CV 0.757 / MATTR 0.82, within Sean baseline. Zero em dashes in body."
+event: voice-calibration
+launch_blockers:
+  - "Hero image: none. Needs generation."
+  - "Gist: the Cheese Gauntlet kit isn't a public gist yet; closing link is a REPLACE-WITH-YOUR-GIST-URL placeholder."
+  - "Substack backlink: the PUBLIC kit points to a REPLACE placeholder; swap in after publish."
+---
+
 # You Can't Prompt Taste Into a Machine
 
 I built the thing myself. A whole skill, weeks of work, a careful little machine for teaching Claude to write like me. Then I fed it a prompt and asked for a few lines in my voice, and here's what came back:
@@ -10,7 +29,7 @@ Every word spelled right. Grammar you could eat off of. And the guy who wrote it
 
 Here's the part that actually stung. I'd been proud. I spent those weeks convinced I'd finally cracked it, that I'd written a clever enough stack of instructions to pour myself into a model and have me come back out the other side. One good prompt. That was the entire theory. Tell it what I sound like, careful and complete, and I'd be me on tap.
 
-Why I was sinking weeks into a voice skill at all comes down to this. A month back I got laid off, and the calendar that used to own me suddenly belonged to me, every empty hour of it just sitting there. I won't dress it up. It's a quiet, specific kind of bad. Same body, same apartment, same girlfriend, Mary, who's handling it better than I am, and the only thing that changed is that all the time I'd spent years swearing I would use was finally, horribly, mine. So I decided to build the thing I'd been dodging. I sat down with more feeling in my chest than I'd had in months, ready to put my real voice on a page. The machine handed me a guy with a laminated dream journal.
+Why I was sinking weeks into a voice skill at all comes down to this. I'd spent months teaching a fleet of little agents to run my life. One reads my vault at 2 a.m. and files what it finds. One writes my mornings before I'm awake. One researches while I sleep and bills me nothing for it. I'd handed off damn near everything, and the one job not a single one of them could do was sound like me. So I built a skill to fix that too, sat down with more excitement than I'd had in months, and asked for a few lines in my own voice. The machine handed me a guy with a laminated dream journal.
 
 So I did what everybody does when a model gets it wrong. I gave it more rules. If it didn't know me, I'd tell it. Be self-deprecating. Use pop culture. Keep the closers short and mean. I wrote it a little instruction manual for being Sean, the way you'd brief a stand-in before a stunt.
 
@@ -20,7 +39,7 @@ And then the thing I'd had backwards the whole time finally landed. The machine 
 
 So I stopped describing and started handing over evidence. Hours of it.
 
-First I built it a gauntlet. Ten sentences, all deliberately rancid, the exact LinkedIn poetry it kept reaching for, and I reacted to each one fast and mean, before politeness could climb in. "Getting laid off wasn't an ending. It was an invitation to begin." No. "New city, new chapter, same dream." Nope. Different city, different chapter, same shit. Every single "no" drew a sharper outline of the real guy than any rule ever could. I can't describe my own voice. I can smell what isn't it from across the room.
+First I built it a gauntlet. Ten sentences, all deliberately rancid, the exact LinkedIn poetry it kept reaching for, and I reacted to each one fast and mean, before politeness could climb in. "Your setbacks aren't setbacks. They're setups." No. "New city, new chapter, same dream." Nope. Different city, different chapter, same shit. Every single "no" drew a sharper outline of the real guy than any rule ever could. I can't describe my own voice. I can smell what isn't it from across the room.
 
 Then I told it what I actually love, not the impressive version. Left to guess, it had me pegged for prestige drama and refined taste. The truth is my love for that beautiful toolbag, Guy Fieri. Driving through Flavortown with 50 pounds of "bling" on every limb, handing out donkey sauce to the masses. The truth is watching Chopped mostly for the sob stories and clocking how many absolute maniacs are cooking dinner at the nice restaurants. The machine guessed Sunday-night prestige. I had to tell it "less Parisian balcony. More grimy dive bar in the pits of Staten Island".
 

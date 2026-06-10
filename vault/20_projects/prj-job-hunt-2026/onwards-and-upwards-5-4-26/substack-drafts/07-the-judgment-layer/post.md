@@ -1,18 +1,22 @@
 ---
-type: substack-draft
-project: prj-job-hunt-2026
-artifact: meaning-over-access-manifesto
+series: raising-claude
+post_number: 7
+title: "The Judgment Layer"
+body_title: "Access Over Meaning"
+status: ready
+publish_date: TBD
+cadence_gate: "Do NOT publish before Posts 1 + 2 are live. Capstone — lands last in the series."
+hero_image: images/hero.png
+ships_with: the whole stack (intent-engineering MCP, vault-knowledge MCP, writing chain, VoicePrint, design-team agents)
+ships_with_status: shipped
+pain_point: "brand stewardship is worth more as output floods (McKinsey/EY)"
+voice_chain_run: partial
+event: 9-night-regression (manifesto framing — CANONICAL home for this war story)
+stale_frontmatter_note: "Old block said target_publish 2026-06-19 / target_slot substack-post-3 — STALE from an earlier plan. This is the Post 7 capstone now."
 created: 2026-05-22
-voice: strategic-sober-with-sean-mode-bookends
-voice_mode: sean
-target_length: 1600_words
-status: draft
+voice_mode: strategic-sober-with-sean-mode-bookends
 companion_artifact: docs/MEANING_OVER_ACCESS.md
 companion_chart_png: docs/diagrams/access-meaning-spectrum.png
-companion_chart_size: 95KB_1000x1000
-header_image: images/2026-06-19-meaning-over-access-header.png
-target_publish: 2026-06-19
-target_slot: substack-post-3
 ai-context: |
   Substack cross-post of the canonical manifesto at docs/MEANING_OVER_ACCESS.md.
   Substack-specific deltas from canonical: (a) replaces inline Mermaid quadrantChart

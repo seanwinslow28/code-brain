@@ -1,15 +1,25 @@
 ---
-type: substack-draft
-project: prj-job-hunt-2026
-artifact: ldr-grounding-collapse
+series: raising-claude
+post_number: 6
+title: "Stop Building Agents"
+working_title_original: "The Day My Research Agent Invented Microsoft"
+status: drafting
+publish_date: TBD
+hero_image: "MISSING — needs generation"
+ships_with: Agent-or-Automation Advisor
+ships_with_status: to-build
+pain_point: "automations with LLM nodes… the maintenance burden kills it (1,556 upvotes)"
+voice_chain_run: n
+event: ldr-grounding-collapse
 created: 2026-05-31
-voice: sean-mode-sedaris-tuned
 voice_mode: sedaris
-target_length: 1500_words
-status: draft
 companion_artifact: github.com/seanwinslow28/ldr-grounding-collapse
-substack_post_number: 1
-ai-context: "Substack Post 1 (the announcement that gates Posts 2-3). Syndicates the LDR Grounding-Collapse post-mortem repo. Roadmap due 2026-05-29; drafted 2026-05-31 (2-day slip). Hook per Task 25 Step 6 — the moment Sean read 'PureMCPClient' and his Spidey-sense fired. Comedic Sean Mode (Sedaris-tuned), same register as 2026-05-10-the-night-my-vault-said-nothing.md — NOT Nate strategic-sober. Run writing-voice-modes pass before publish. Swap the repo URL once pushed; cadence: this is Post 1, publishes before Posts 2-3."
+reframe_note: |
+  Current body = 'The Day My Research Agent Invented Microsoft' (LDR grounding-collapse,
+  the May 5 event): a near-complete Sedaris-tuned post about a routing rule
+  (compound questions → cloud; single-shape → local). To become Post 6 'Stop Building
+  Agents' it should lead with the agent-vs-automation hook and ship with the Advisor.
+  Old frontmatter claimed 'Post 1' — that is SUPERSEDED; this is Post 6.
 ---
 
 # The Day My Research Agent Invented Microsoft

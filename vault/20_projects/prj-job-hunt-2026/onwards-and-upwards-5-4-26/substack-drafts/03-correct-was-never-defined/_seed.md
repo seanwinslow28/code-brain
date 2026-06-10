@@ -1,11 +1,8 @@
 ---
-type: project
-domain: []
-status: active
-context: intent-engineering-mcp
-energy-level: medium
-ai-context: ""
-review-date: 2026-06-06
+role: seed
+for_post: 3
+series: raising-claude
+note: "Salvaged origin paragraph for Post 3 'Correct Was Never Defined'. The gold is the final paragraph (nineteen days / shipped on day six / @swins/intent-engineering-mcp v0.1.0 / 23-of-25 self-audit). Raw material, NOT the draft. The Post 3 draft lives in this folder's post.md."
 created: 2026-05-23
 ---
 # intent-engineering-mcp
