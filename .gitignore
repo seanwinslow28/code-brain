@@ -134,9 +134,10 @@ vault/20_projects/prj-personal-finance/
 # read at runtime by agents-sdk/lib/artifact_loader.py from disk.
 vault/05_atlas/operating-models/
 
-# Daily notes — personal timeline (job-hunt log, mood, schedule).
-# Obsidian-Git respects this rule, so future daily notes stay local-only.
-vault/10_timeline/daily/
+# Timeline notes (daily/weekly/monthly) — personal log: job-hunt timeline,
+# mood, schedule, employer details. Obsidian-Git respects this rule, so
+# future notes stay local-only.
+vault/10_timeline/
 
 # Personal source material & profiles (consolidated into the job-hunt home
 # on disk; rules guard against re-staging from any path)
@@ -156,6 +157,10 @@ personal-context-v2-interview-prompt.md
 # Employer-confidential (The Block) — archived reference, local-only
 [redacted: granola archive path]
 vault/30_domains/product-management/media-team-ideas/
+vault/60_archive/operating-models-the-block-2026-05/
+
+# Archived personal notes (Apple Notes import)
+vault/60_archive/apple-notes-personal/
 
 # ════════════════════════════════════════════════════════════════════════
 # BLOAT GUARDS — recruiter-readiness cleanup 2026-06-10

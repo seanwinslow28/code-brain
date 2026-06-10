@@ -1,49 +1,11 @@
 # Knowledge Lint Report — 2026-04-26
 
+
 _154 issues found (148 structural, 6 semantic)._
 
 ## HIGH (55)
 
 - **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/00_inbox/Deep Research Max a step change for autonomous research agents.md` — Lukas Haas
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
 - **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/60_archive/inbox-archive-2026-04-25/Karpathy's-viral-AI-wiki-has-a-flaw-most-of-the-100K-people-who-bookmarked-it-haven't-noticed-yet.md` — Nate
 - **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/40_knowledge/references/ref-mastercard-lobster-ai-agent-payments.md` — RT Watson
 - **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/40_knowledge/references/ref-x402-agentic-market-app-store.md` — Daniel Kuhn
@@ -56,9 +18,6 @@ _154 issues found (148 structural, 6 semantic)._
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/health/2026-04-18-lint-report.md` — sonnet 4.5
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/health/2026-04-19-lint-report.md` — sonnet 4.5
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/30_domains/product-management/media-team-ideas/Perplexity-Computer-Overview.md` — sonnet 4.5
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
 
 ## MEDIUM (99)
 

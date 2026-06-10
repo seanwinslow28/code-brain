@@ -1,5 +1,6 @@
 # Knowledge Lint Report — 2026-05-17
 
+
 _640 issues found (601 structural, 39 semantic)._
 
 ## CRITICAL (8)
@@ -69,9 +70,6 @@ _640 issues found (601 structural, 39 semantic)._
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/health/2026-05-10-lint-report.md` — claude-3-
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/health/2026-04-19-lint-report.md` — sonnet 4.5
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/30_domains/product-management/media-team-ideas/Perplexity-Computer-Overview.md` — sonnet 4.5
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/30_domains/product-management/the-block-resume-info/The Block - PRD/Campus Sponsored Brainstorm - Post Meeting/Campus Sponsor and Integration Brainstorm - Gemini Version/Campus Sponsor And Integration Brainstorm/Previous Claude Conversation - 11-30.md` — sonnet 4.5
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/30_domains/product-management/the-block-resume-info/SeanxEd-Q2-OKRs-Roadmap-2026/Roadmap-2026/Pro-revamp-3-25-26-updated/CEO-Pitch-Slide-Foundation.md` — sonnet 4.5
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/30_domains/product-management/the-block-resume-info/SeanxEd-Q2-OKRs-Roadmap-2026/Roadmap-2026/Pro-revamp-3-25-26-updated/CEO-Pitch-Narrative-Synthesis.md` — sonnet 4.5

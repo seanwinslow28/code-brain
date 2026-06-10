@@ -1,65 +1,11 @@
 # Knowledge Lint Report — 2026-05-10
 
+
 _899 issues found (871 structural, 28 semantic)._
 
 ## HIGH (376)
 
 - **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/00_inbox/The next AI platform winner won't have the best model. They'll own something most companies don't even see yet..md` — Nate
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
 - **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/30_domains/product-management/the-block-resume-info/SeanxEd-Q2-OKRs-Roadmap-2026/Roadmap-2026/Pro-revamp-3-25-26-updated/data-explorer-server/node_modules/optionator/README.md` — String
 - **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/30_domains/product-management/the-block-resume-info/SeanxEd-Q2-OKRs-Roadmap-2026/Roadmap-2026/Pro-revamp-3-25-26-updated/data-explorer-server/node_modules/ajv/README.md` — 1
 - **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/05_atlas/operating-models/job-hunt-2026/operating-model.md` — writing-voice-modes
@@ -356,9 +302,6 @@ _899 issues found (871 structural, 28 semantic)._
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/health/2026-04-18-lint-report.md` — sonnet 4.5
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/health/2026-04-19-lint-report.md` — sonnet 4.5
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/30_domains/product-management/media-team-ideas/Perplexity-Computer-Overview.md` — sonnet 4.5
-[redacted: granola archive path]
-[redacted: granola archive path]
-[redacted: granola archive path]
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/30_domains/product-management/the-block-resume-info/The Block - PRD/Campus Sponsored Brainstorm - Post Meeting/Campus Sponsor and Integration Brainstorm - Gemini Version/Campus Sponsor And Integration Brainstorm/Previous Claude Conversation - 11-30.md` — sonnet 4.5
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/30_domains/product-management/the-block-resume-info/SeanxEd-Q2-OKRs-Roadmap-2026/Roadmap-2026/Pro-revamp-3-25-26-updated/CEO-Pitch-Slide-Foundation.md` — sonnet 4.5
 - **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/30_domains/product-management/the-block-resume-info/SeanxEd-Q2-OKRs-Roadmap-2026/Roadmap-2026/Pro-revamp-3-25-26-updated/CEO-Pitch-Narrative-Synthesis.md` — sonnet 4.5
