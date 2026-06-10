@@ -94,12 +94,14 @@ The single biggest effort risk is making the interviews *adaptive* (pushing on g
 - **Reader ≠ Sean.** Zero Sean content in any generated bundle. The dogfood-on-someone-else step exists to catch leakage.
 - **Reaction capture UX.** The gauntlet only works if reactions are fast and blunt; the command must coach "one or two words, before the polite part of your brain shows up."
 
-## 9. Decisions for Sean (before any build)
+## 9. Decisions — LOCKED (Sean, 2026-06-07)
 
-1. **Name.** `VoicePrint` (working) vs tie it to the series ("Raising Claude: Voice") vs the kit name ("Cheese Gauntlet"). 
-2. **MVP boundary** — ship A/B/C/D only, or include the refine loop (E) in v1?
-3. **Bundle the upstream chain?** Voice-only skill, or also ship generic storytelling/value/humanity so readers get the full pipeline.
-4. **Public-from-day-1 vs dogfood-private-first** — build it generic and external-ready immediately, or harden it on a few real humans before opening it up.
+1. **Name: VoicePrint.**
+2. **Scope: best-possible, not MVP-minimal.** Ship all five (A/B/C/D/E) + anything the build session deems worth adding. (Supersedes §6's MVP/post-MVP split — treat post-MVP items as in-scope; the eval/autoresearch harness stays out.)
+3. **Bundle the upstream chain** (generic storytelling-architecture / value-engine / writing-critique / humanity-pass) so readers get the whole pipeline. The bundled humanity-pass must be de-Sean'd / parameterized to the reader's signature moves.
+4. **Harden first.** Build it generic/external-ready, but dogfood on a few real (non-Sean) humans before opening it publicly. A validation/dogfood phase is part of the build plan.
+
+Execution continuation prompt for a fresh build session: [`2026-06-07-voiceprint-continuation-prompt.md`](2026-06-07-voiceprint-continuation-prompt.md).
 
 ## 10. Success criteria
 

@@ -27,6 +27,8 @@ If those files still show `status: awaiting-interview`, run: `Run the work-opera
 - `finance/` — creative-studio business finance (separate from personal finance, which lives in `life-systems/`)
 - `scripts/` — automation scripts specific to creative production
 - `templates/` — reusable production templates
+- `docs/tool-shipping-playbook.md` — **the repeatable engine** behind VoicePrint: find a pain point → ship a friction-killing plugin/MCP → write the story → repeat (feeds marketplace + portfolio + Substack each loop). Read before starting a new tool build in this space.
+- `voiceprint/` — **the VoicePrint plugin** (built 2026-06-08): a distributable Cowork plugin that interviews a reader and generates THEIR own personal writing-voice skill. Source of truth: [voiceprint/CHANGELOG.md](voiceprint/CHANGELOG.md) + [voiceprint/docs/BUILD-PLAN.md](voiceprint/docs/BUILD-PLAN.md). It productizes Sean's `writing-voice-modes` calibration method but ships ZERO Sean content (de-Sean'd bundle + dogfood-verified); the packaged `.plugin` is the post-2 deliverable for the "Raising Claude" series. Its bundled chain skills are plugin-internal — do NOT add them to `.claude/skills/`.
 
 ## Project-Specific Handoff: 16BitFit
 

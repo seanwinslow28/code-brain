@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VoicePrint — priya voice</title>
+<style>
+  :root { --ink:#1a1a1a; --muted:#6b6b6b; --paper:#fffaf2; --accent:#0a5b54; --warn:#9a5b00; --line:#e4ddcf; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:32px; background:var(--paper); color:var(--ink);
+          font:16px/1.55 ui-sans-serif,-apple-system,Segoe UI,Roboto,sans-serif; }
+  .wrap { max-width:680px; margin:0 auto; }
+  h1 { font-size:22px; margin:0 0 2px; }
+  .sub { color:var(--muted); margin:0 0 24px; font-size:14px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px;
+           padding:20px 22px; margin:0 0 18px; }
+  h2 { font-size:15px; text-transform:uppercase; letter-spacing:.04em; color:var(--accent);
+        margin:0 0 14px; }
+  ul.checklist { list-style:none; margin:0; padding:0; }
+  ul.checklist li { display:flex; align-items:center; gap:10px; padding:7px 0;
+                     border-bottom:1px dashed var(--line); }
+  ul.checklist li:last-child { border-bottom:0; }
+  .mark { width:20px; text-align:center; }
+  li.done .mark { color:var(--accent); } li.todo .mark { color:#c9c1b2; }
+  li.partial .mark { color:var(--warn); }
+  .lbl { flex:1; } .st { color:var(--muted); font-size:13px; }
+  .next { font-size:17px; } .next b { color:var(--accent); }
+  .muted { color:var(--muted); font-size:13px; }
+  .warn { color:var(--warn); font-size:14px; }
+  svg.trend { width:100%; max-width:420px; height:auto; }
+  .trend .line { fill:none; stroke:var(--accent); stroke-width:2.5; }
+  .trend .dot { fill:var(--accent); }
+  .proofrow { display:flex; justify-content:space-between; gap:16px; padding:6px 0;
+               border-bottom:1px dashed var(--line); font-size:14px; }
+  .verdict { margin-top:12px; font-weight:600; color:var(--accent); }
+  code { background:#f3eee3; padding:1px 5px; border-radius:4px; font-size:13px; }
+  footer { color:var(--muted); font-size:12px; margin-top:8px; text-align:center; }
+</style></head>
+<body><div class="wrap">
+  <h1>Your VoicePrint pile</h1>
+  <p class="sub">Built from your evidence, on your machine. Nothing here left your computer.</p>
+
+  <section class="card">
+    <h2>The pile</h2>
+    <ul class="checklist"><li class="done"><span class="mark">&#10003;</span><span class="lbl">Reference-universe interview</span><span class="st">complete</span></li>
+<li class="done"><span class="mark">&#10003;</span><span class="lbl">Cheese gauntlet</span><span class="st">complete</span></li>
+<li class="done"><span class="mark">&#10003;</span><span class="lbl">Mine pre-AI writing</span><span class="st">complete</span></li>
+<li class="done"><span class="mark">&#10003;</span><span class="lbl">Generate the voice skill</span><span class="st">complete</span></li>
+<li class="todo"><span class="mark">&#9675;</span><span class="lbl">Refine loop</span><span class="st">not started</span></li></ul>
+    
+  </section>
+
+  <section class="card next">
+    <h2>Next</h2>
+    <p class="next"><b>Run /voiceprint-refine to start sharpening, then /voiceprint-proof.</b></p>
+    <p class="muted">Your voice skill is ready at <code>voiceprint/my-voice/</code>.</p>
+  </section>
+
+  <section class="card">
+    <h2>Is it converging?</h2>
+    <p class="muted">Run a couple of refine rounds to see the convergence line.</p>
+  </section>
+
+  
+
+  <footer>Generated 2026-06-09 00:44 · refresh by re-running /voiceprint-start or /voiceprint-refine</footer>
+</div></body></html>
