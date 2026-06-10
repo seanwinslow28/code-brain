@@ -1,0 +1,21 @@
+{
+  "name": "voiceprint",
+  "version": "0.1.0",
+  "description": "Builds your own writing-voice skill from evidence, not adjectives. Unlike tools that analyze old posts and hand you a description, VoicePrint learns you from what you REJECT (the Cheese Gauntlet), what you quote, and how you actually write — then generates a personal SKILL.md + reference files. Works with no corpus, runs local with no account or API key, and proves it's converging instead of promising a one-shot. From the 'Raising Claude' series.",
+  "author": {
+    "name": "Sean Winslow"
+  },
+  "keywords": [
+    "writing",
+    "voice",
+    "style",
+    "write-like-me",
+    "ai-slop",
+    "skill-generator",
+    "interview",
+    "cheese-gauntlet",
+    "local",
+    "privacy"
+  ],
+  "license": "MIT"
+}
