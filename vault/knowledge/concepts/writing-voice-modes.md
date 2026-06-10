@@ -2,15 +2,15 @@
 title: "Writing-voice-modes"
 type: concept
 sources:
-  - 00_inbox/tickets.md
+  - knowledge/concepts/writing-voice-modes.md
 tags: [auto-generated, phase-6]
-created: 2026-06-09
-updated: 2026-06-09
+created: 2026-06-10
+updated: 2026-06-10
 ---
 
 ## Definition
 
-The deliberate curation of stylistic registers—such as 'gritty' or 'bodily' tones—to anchor a unique authorial identity against the homogenizing pressure of large language models. This mechanism relies on preserving raw, unpolished narrative data (typos, run-ons) as high-fidelity signal for voice training, rather than treating them as errors to be corrected by automated passes. The invariant is that authentic voice emerges from the tension between natural human looseness and the structured constraints of AI generation, requiring active resistance to over-polishing.
+This mechanism defines a deliberate curation of stylistic registers—such as 'gritty' or 'bodily' tones—to anchor a unique authorial identity against the homogenizing pressure of large language models. It relies on preserving raw, unpolished narrative data (typos, run-ons) as high-fidelity signal for voice training, rather than treating them as errors to be corrected by automated passes. The invariant is that authentic voice emerges from the tension between natural human looseness and the structured constraints of AI generation, requiring active resistance to over-polishing.
 
 ## Context
 
