@@ -626,18 +626,36 @@ auto_push = true
 
 # next-piece.json — the "next in production" tile. Editorial: "what ships next"
 # is not derivable from fleet data, so it's set by hand here and the bridge only
-# stamps updated_at. Edit title/date_target whenever the answer changes.
+# stamps updated_at.
+#
+# CONSUMER STATUS (2026-06-11): date_target has ZERO portfolio consumers.
+# Portfolio PR #24 (commit 4b739df; CHANGELOG under docs/specs/projects-section-
+# spec-v1.md, 2026-06-11) dropped the A-6 "check back ~<date>" subtitle —
+# NextInProduction.astro no longer imports next-piece.json, and the pulsing
+# COMING pill carries the forward promise without naming a day. Rationale: a
+# date that has already PASSED (Vault Scorecard shipped — ledger MAY 31 +
+# architecture writeup) inverts the honesty layer into evidence of abandonment
+# (portfolio audit P3-17). (transactions/[surface]/index.astro only references
+# next-piece.json in a comment for a future phase; it does not import it today.)
+#
+# The Daily Driver STILL renders + writes next-piece.json every morning for
+# contract stability — a consumer may return later. But the content must never
+# carry a stale/fabricated date again. render_next_piece() returns None (file
+# NOT written) unless BOTH title and date_target are non-empty, so this block
+# stays populated with honest, DATELESS values: a neutral forward title + a
+# non-date "TBD" placeholder. When a real next piece + a real ship date are
+# actually committed, set them here — do not invent a date to fill the slot.
 [portfolio.next_piece]
-title = "Vault Scorecard"
-date_target = "2026-06-10"
+title = "next piece in production"
+date_target = "TBD"
 
-# shipped-stats-<slug>.json — live npm weekly downloads + GitHub stars per
-# opted-in case study (slug -> {npm_package, github_repo}). EMPTY on purpose:
-# as of 2026-06-04 `intent-engineering-mcp` is NOT on the npm registry (404) and
-# has no public GitHub repo, so enabling it would zero out the hand-seeded file.
-# The renderer skips any slug whose live fetch fails — it never fabricates. To
-# activate once the product is actually published, uncomment and set the real
-# identifiers:
-# [portfolio.shipped_stats.intent-engineering-mcp]
-# npm_package = "intent-engineering-mcp"
-# github_repo = "seanwinslow28/intent-engineering-mcp"
+# shipped-stats-<slug>.json — KEEP EMPTY. As of 2026-06-11 the shipped-stats
+# card is intentionally QUALITATIVE and number-free. The live adoption metrics
+# (npm downloads ~single digits/week, GitHub stars 0) are too low to be
+# meaningful and read as vanity numbers; the prior hand-seeded file (8 stars /
+# 47 weekly / 12 installs) did not match reality. The card now reports durable
+# ship facts (published to npm + MCP registry, DNS-verified namespace, demoable)
+# from the static file public/api/shipped-stats-intent-engineering-mcp.json
+# ("static": true). Leaving this block empty means the dormant renderer never
+# overwrites that static card with a numeric fetch. Do NOT re-enable numeric
+# shipped-stats for this slug without an explicit decision to show real counts.

@@ -33,14 +33,33 @@ the JSON supplies the *body/numbers*, gated by `isFresh(date_iso)` (48h window, 
 - **reading** — whether today's daily note exists.
 - Drafts and cels are **not** measured (no reliable source). They are never faked.
 
-### next-piece (editorial)
+### next-piece (editorial — `date_target` has ZERO consumers as of 2026-06-11)
 "What ships next" isn't derivable from fleet data, so it's read verbatim from config —
-the bridge only stamps `updated_at`. **Edit it when the answer changes:**
+the bridge only stamps `updated_at`. `render_next_piece` requires **both** `title` and
+`date_target` to be non-empty; if either is missing it returns `None` and the file is
+**not written** (the guard against overwriting a hand-curated file with empty data).
+So keep both populated.
+
+**Consumer status — `date_target` is now consumer-less.** As of **2026-06-11**, no
+portfolio code reads `next-piece.json`. Portfolio **PR #24** (CHANGELOG under
+[`docs/specs/projects-section-spec-v1.md`](../../../sw-ai-pm-portfolio/CHANGELOG.md),
+2026-06-11) removed the A-6 "check back ~<date>" subtitle: `NextInProduction.astro` no
+longer imports the file, and the pulsing COMING pill carries the forward promise without
+naming a day. (`transactions/[surface]/index.astro` mentions it only in a comment for a
+future phase — it does not import it today. The portfolio's `npm run validate` gate does
+**not** cover `next-piece.json` at all, so its contents can never block the morning push.)
+
+The Daily Driver **still writes the file every morning** (contract stability — a consumer
+may return later), but the content must stay **dateless and honest**: a date that has
+*passed* reads as abandonment (audit P3-17). Until a real next piece + a real ship date
+are actually committed, hold neutral placeholders — **do not invent a date** to fill the
+slot:
 ```toml
 [portfolio.next_piece]
-title = "Vault Scorecard"
-date_target = "2026-06-10"
+title = "next piece in production"   # neutral forward title; names nothing unshipped
+date_target = "TBD"                   # non-date placeholder — keeps the file written, lies about nothing
 ```
+When the answer genuinely changes (a real piece with a real target date), set both here.
 
 ### shipped-stats (currently inactive — by design)
 As of 2026-06-04, `intent-engineering-mcp` is **not** on the npm registry (404) and has no
@@ -129,3 +148,4 @@ git -C "$WT" checkout -- public/api   # discard, no commit/push
 | `PUSH FAILED (check launchd credentials)` | committed locally, push rejected | check osxkeychain access from launchd |
 | `no changes to commit` | re-run, identical content | expected/idempotent |
 | shipped-stats file absent from output | live fetch failed or slug not configured | expected until the product is published + configured |
+| `next-piece.json` shows a passed `date_target` (A-6 tile reads as abandonment) | **moot consumer-side as of 2026-06-11** — PR #24 removed the only renderer of `date_target`, so a stale date no longer surfaces on the site. Producer-side guard: keep `[portfolio.next_piece].date_target` **dateless** (`"TBD"`) until a real target exists, so a returning consumer never re-inherits a stale promise | keep the config block dateless; do not re-add a date until it's real |
