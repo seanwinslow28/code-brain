@@ -1,0 +1,104 @@
+{
+  "date": "2026-06-13",
+  "runs": [
+    {
+      "fired_at": "2026-06-13T08:00:05.288731",
+      "fetch_total": 4444,
+      "rules_passed": 0,
+      "rules_rejected": 112,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 9.5,
+      "failed_pollers": [
+        "ats:glean (all 404)",
+        "ats:scale (all 404)",
+        "ats:framer (all 404)",
+        "ats:beehiiv (all 404)",
+        "ats:replicate (all 404)",
+        "ats:fourthwall (all 404)",
+        "ats:canva (all 404)",
+        "ats:huggingface (all 404)",
+        "ats:circle (all 404)",
+        "ats:spline (all 404)",
+        "ats:tome (all 404)",
+        "ats:datarobot (all 404)",
+        "ats:together-ai (all 404)",
+        "ats:draftkings (all 404)"
+      ],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-13T08:30:03.342189",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.05,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-13T09:00:06.073283",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.06,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-13T09:30:05.230801",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.04,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-13T10:00:04.824352",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.1,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-13T10:30:04.407345",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.07,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-13T11:00:04.524992",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.07,
+      "failed_pollers": [],
+      "short_circuited": false
+    }
+  ]
+}

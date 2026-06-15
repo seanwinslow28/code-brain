@@ -1,0 +1,104 @@
+{
+  "date": "2026-06-12",
+  "runs": [
+    {
+      "fired_at": "2026-06-12T08:00:04.923674",
+      "fetch_total": 4428,
+      "rules_passed": 8,
+      "rules_rejected": 135,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 11.5,
+      "failed_pollers": [
+        "ats:beehiiv (all 404)",
+        "ats:circle (all 404)",
+        "ats:huggingface (all 404)",
+        "ats:scale (all 404)",
+        "ats:fourthwall (all 404)",
+        "ats:tome (all 404)",
+        "ats:draftkings (all 404)",
+        "ats:spline (all 404)",
+        "ats:framer (all 404)",
+        "ats:together-ai (all 404)",
+        "ats:datarobot (all 404)",
+        "ats:glean (all 404)",
+        "ats:canva (all 404)",
+        "ats:replicate (all 404)"
+      ],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-12T08:30:02.658928",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.07,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-12T09:00:04.840429",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.08,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-12T09:30:02.431735",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.04,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-12T10:00:02.644299",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.03,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-12T10:30:02.695573",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.05,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-12T11:00:02.837743",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.03,
+      "failed_pollers": [],
+      "short_circuited": false
+    }
+  ]
+}

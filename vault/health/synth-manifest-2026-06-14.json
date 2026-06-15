@@ -1,0 +1,18 @@
+{
+  "clusters_sampled": 55,
+  "concept_paths": [],
+  "concepts_written": 0,
+  "connection_paths": [],
+  "connections_written": 0,
+  "duration_seconds": 2199.53,
+  "edges_rejected": 0,
+  "edges_written": 0,
+  "files_processed": 24,
+  "model_used": "none",
+  "rejected_count": 0,
+  "rejected_reasons": {},
+  "run_id": "2026-06-14T02:30:06",
+  "skipped_thin_source": 0,
+  "status": "error",
+  "wol_status": ""
+}

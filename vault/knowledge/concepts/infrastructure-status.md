@@ -2,31 +2,31 @@
 title: "Infrastructure Status"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-09.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-10.md
 tags: [auto-generated, phase-6]
-created: 2026-06-10
-updated: 2026-06-10
+created: 2026-06-12
+updated: 2026-06-12
 ---
 
 ## Definition
 
-The operational availability of physical hardware nodes (Mac Mini, Alienware) serves as a hard constraint on agent fleet capacity. When a node goes offline, dependent agents lose their execution environment, creating a silent failure mode where the software layer reports health but the physical layer is absent. This decoupling means that 'healthy' status in logs does not guarantee functional capability for tasks requiring specific hardware resources or network endpoints.
+The operational state of physical compute endpoints (e.g., Mac Mini, Alienware) acts as a hard constraint on agent capability. When an endpoint goes offline, dependent agents do not merely pause; they enter a degraded or disabled state, creating a silent failure mode where the system appears healthy at the orchestration layer but is functionally inert at the execution layer. This creates a disconnect between the reported fleet status and the actual capacity to execute complex tasks like creative synthesis or deep research.
 
 ## Context
 
-Sean's agent fleet relies on a multi-machine setup. The offline status of the Alienware machine directly impacts the ability to run certain agents or sync data, creating a bottleneck that is invisible to purely software-based health checks unless explicitly monitored at the infrastructure level.
+Sean's agent fleet relies on a distributed infrastructure. The offline status of the Alienware and ComfyUI endpoints directly blocks the 'full creative pipeline automation' and 'deep research synthesis,' forcing Sean to manually intervene or accept incomplete outputs, which undermines the value of the automated fleet.
 
 ## Evidence
 
-> Alienware machine is offline, hindering required three-machine sync for robust operation.
+> Core functional requirements for full creative pipeline automation were impeded by infra gaps.
 
-> The health of the agent fleet is directly coupled to the availability of the underlying infrastructure, creating a single point of failure for high-leverage tasks.
+> Agent fleet connectivity failures noted (Alienware/ComfyUI offline).
 
 ## Examples
 
-- Mac Mini status: Online
-- Alienware status: OFFLINE
+- The deep-researcher queue was empty because it could not sweep data without the necessary compute resources.
+- The daily-driver morning planning completed successfully, but its output was limited by missing MCP access due to infrastructure gaps.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Infrastructure Dependency in Agent Health]]
+[[Agent Health Monitoring]] [[Infrastructure Status and Agent Failure]]

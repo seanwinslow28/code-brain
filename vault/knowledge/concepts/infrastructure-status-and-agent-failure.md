@@ -2,30 +2,31 @@
 title: "Infrastructure Status and Agent Failure"
 type: concept
 sources:
-  - knowledge/connections/control-plane-stability-vs-data-plane-drift.md
+  - knowledge/concepts/infrastructure-status.md
 tags: [auto-generated, phase-6]
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-15
+updated: 2026-06-15
 ---
 
 ## Definition
 
-This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local actions. Current article sounds like a vague job track; this would make it a credible operational discipline. The failure mode is not always a crash, but a silent drift where the infrastructure status appears healthy while the data plane is out of sync with the control plane's expectations. This distinction allows for more targeted debugging of agent failures by isolating whether the issue lies in the scheduling logic or the artifact mutation logic.
+This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local model inference, ComfyUI execution, embeddings, vault writes, and file processing. When physical compute endpoints like the Alienware or ComfyUI machines go offline, dependent agents do not merely pause; they enter a degraded or disabled state, creating a silent failure mode where the system appears healthy at the orchestration layer but is functionally inert at the execution layer. This disconnect means that operational success metrics such as status: ok and zero errors are decoupled from cognitive utility when the underlying data lacks semantic structure or available compute resources to process it.
 
 ## Context
 
-Sean needs to present his infrastructure work as a credible operational discipline, not just a job track. By framing agent failure as a result of control/data plane divergence, he elevates the discussion from simple uptime monitoring to complex system resilience. This perspective is valuable in interviews where demonstrating deep architectural understanding is key.
+Sean's agent fleet relies on a distributed infrastructure where the offline status of specific endpoints directly blocks full creative pipeline automation and deep research synthesis. This forces Sean to manually intervene or accept incomplete outputs, undermining the value of the automated fleet because the daily-driver morning planning completes successfully but its output is limited by missing MCP access due to these infrastructure gaps.
 
 ## Evidence
 
-> This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local actions.
+> Core functional requirements for full creative pipeline automation were impeded by infra gaps.
 
-> Current article sounds like a vague job track; this would make it a credible operational discipline.
+> Agent fleet connectivity failures noted (Alienware/ComfyUI offline).
 
 ## Examples
 
-- An agent's status is reported as 'healthy' because it is running, but its output is ignored by the control plane because the data plane has changed in a way that breaks the expected contract.
+- The deep-researcher queue was empty because it could not sweep data without the necessary compute resources.
+- The daily-driver morning planning completed successfully, but its output was limited by missing MCP access due to infrastructure gaps.
 
 ## Related Concepts
 
-[[Control Plane / Data Plane Split for Agent Fleets]] [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
+[[Agent Health Monitoring]] [[Infrastructure Status]]
