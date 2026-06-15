@@ -26,7 +26,13 @@ max_turns = 15
 # v3.27.0 fleet-overnight digest. Successful runs creep $0.55-$0.58; cap at
 # 0.60 had ~3% headroom and trips on any small per-day variance. 0.90 gives
 # ~55% headroom over current ceiling. Cost ceiling per month: ~$27 worst case.
-max_budget_usd = 0.90
+# 2026-06-15: bumped 0.90 → 1.25. Cost crept again — successful runs now ride
+# $0.82-$0.85 and the cap tripped on 6/12 ($0.911) and 6/15 ($0.907), each time
+# silently stranding the portfolio dateline (the publish post-step used to be
+# skipped when the run errored — now hardened into a `finally` in daily_driver,
+# so a cap-hit no longer freezes the live date, but headroom still matters).
+# 1.25 gives ~47% over a typical $0.85 run. Worst-case month: ~$37.50.
+max_budget_usd = 1.25
 
 [agents.daily_driver.modes.evening]
 max_turns = 10
