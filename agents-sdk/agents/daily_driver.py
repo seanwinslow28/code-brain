@@ -526,19 +526,6 @@ async def run(mode: str, dry_run: bool = False) -> None:
             notes=result_msg.result[:200] if result_msg and result_msg.result else "",
         )
 
-        # Portfolio daily-dated layer: render the hero dateline + about-pulse
-        # from this run's fleet data and (per [portfolio] config) commit/push
-        # to the portfolio's main so Vercel rebuilds with a current dateline.
-        # Isolated try — a publish/push problem must never change the agent's
-        # recorded status or hang the unattended run.
-        if mode == "morning":
-            try:
-                from lib.portfolio_dateline import run_publish
-
-                run_publish(config, logger=logger)
-            except Exception as pub_err:  # noqa: BLE001 — publish is best-effort
-                logger.error(f"Portfolio dateline publish failed (non-fatal): {pub_err}")
-
     except Exception as e:
         logger.error(f"Agent failed: {e}")
         # If a ResultMessage was already received before the SDK raised
@@ -569,6 +556,23 @@ async def run(mode: str, dry_run: bool = False) -> None:
                 notes=str(e)[:200],
             )
         raise
+    finally:
+        # Portfolio daily-dated layer: render the hero dateline + about-pulse
+        # from overnight fleet data (read from disk — NOT from this agent's
+        # planning output) and commit/push so Vercel rebuilds with a current
+        # dateline. In `finally` on purpose: a budget-cap or transport error in
+        # the query loop above must NOT skip the push — otherwise the live
+        # site's build date freezes at the last good deploy (this is exactly
+        # what stranded the date on 2026-06-12 and 2026-06-15). Fully isolated +
+        # best-effort: it never changes the agent's recorded status, never masks
+        # the re-raised agent error, and never hangs the unattended run.
+        if mode == "morning":
+            try:
+                from lib.portfolio_dateline import run_publish
+
+                run_publish(config, logger=logger)
+            except Exception as pub_err:  # noqa: BLE001 — publish is best-effort
+                logger.error(f"Portfolio dateline publish failed (non-fatal): {pub_err}")
 
 
 def main():
