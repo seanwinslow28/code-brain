@@ -2,31 +2,30 @@
 title: "Runtime-Model Coupling"
 type: concept
 sources:
-  - 40_knowledge/references/ref-system-design-114-concepts-part-3.md
+  - 00_inbox/tickets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-08
-updated: 2026-06-08
+created: 2026-06-12
+updated: 2026-06-12
 ---
 
 ## Definition
 
-This pattern describes the structural dependency where an application's deployment and operational runtime are inextricably bound to a specific vendor's proprietary infrastructure, creating a high-friction exit barrier. When developers build within a closed ecosystem, they prioritize integration with that platform's native services over portable architecture, effectively trading long-term architectural flexibility for short-term development velocity. The resulting system becomes fragile because any change in the vendor's pricing, API stability, or strategic direction forces a complete re-architecture rather than a simple configuration update.
+This pattern describes the fragile dependency between an operating system's binary integrity verification (such as macOS code-signing checks) and the agent's execution environment. When a package manager upgrades a core interpreter, it alters the binary's cryptographic hash, causing the process supervisor to reject the existing launch configuration as invalid. The mechanism fails not because the logic is wrong, but because the runtime identity has shifted without updating the supervisor's cached state.
 
 ## Context
 
-Sean is actively evaluating 'Orchids' as an alternative to locked-in stacks like Supabase or Stripe. Understanding this coupling helps him recognize why 'one-click deployment to Vercel' and 'bring your own AI subscriptions' are not just features but critical risk mitigations for his career mobility and project longevity.
+Sean's agent fleet relies on Homebrew-managed Python interpreters for execution. A routine upgrade invalidated the launchd cache for five critical jobs, causing them to be kernel-killed overnight. This creates a silent failure mode where the knowledge loop breaks because the infrastructure assumes static binary paths rather than dynamic runtime identities.
 
 ## Evidence
 
-> You live inside their box, choose from their secret stack, and force you to start over the moment you want to use a different database, payment processor, or tool.
+> the 2026-06-10 13:31 Homebrew python@3.13 reinstall (3.13.11→3.13.13_1) changed the interpreter cdhash, which invalidated launchd's cached LWCR for 5 jobs
 
-> Not forced to spend credits, bring your own AI subscriptions with you.
+> every fire on 2026-06-11 was kernel-killed with OS_REASON_CODESIGNING (no daily note, no overnight knowledge loop)
 
 ## Examples
 
-- Forcing a switch from Supabase to a self-hosted PostgreSQL instance requires rewriting data access layers because the original code assumed Supabase-specific authentication and real-time subscriptions.
-- Migrating payment logic from Stripe's hosted checkout to a custom processor requires rebuilding the entire webhook handling and reconciliation system.
+- launchd's cache was stale
 
 ## Related Concepts
 
-[[Abstraction Layer Shift]] [[Infrastructure Status]]
+[[Automation Failure and Daily Note Disruption]] [[Infrastructure Status]]

@@ -1,0 +1,29 @@
+{
+  "clusters_sampled": 42,
+  "concept_paths": [
+    "vault/knowledge/concepts/runtime-model-coupling.md",
+    "vault/knowledge/concepts/privacy-aware-data-routing.md",
+    "vault/knowledge/concepts/infrastructure-status.md",
+    "vault/knowledge/concepts/deep-research-queue.md"
+  ],
+  "concepts_written": 4,
+  "connection_paths": [
+    "vault/knowledge/connections/infrastructure-dependency-and-creative-pipeline-failure.md",
+    "vault/knowledge/connections/the-tension-between-artifact-completeness-and-distribution-latency.md"
+  ],
+  "connections_written": 2,
+  "duration_seconds": 2950.31,
+  "edges_rejected": 0,
+  "edges_written": 3,
+  "files_processed": 15,
+  "model_used": "qwen3-14b",
+  "rejected_count": 4,
+  "rejected_reasons": {
+    "thin-definition": 2,
+    "thin-evidence": 1
+  },
+  "run_id": "2026-06-12T02:30:05",
+  "skipped_thin_source": 0,
+  "status": "partial",
+  "wol_status": "mbp_awake"
+}

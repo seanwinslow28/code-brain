@@ -2,31 +2,33 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - knowledge/connections/cost-vs-automation-depth-tension.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-12.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-06-15
+updated: 2026-06-15
 ---
 
 ## Definition
 
-This pattern describes a constraint architecture where agent execution is gated by strict financial thresholds rather than just technical success. When a specific integration method, such as an MCP bridge, doubles the operational cost and triggers a hard cap, the system forces a retreat to simpler, cheaper patterns. This creates a dynamic where automation depth is inversely proportional to financial risk, prioritizing local, $0-run solutions over seamless but expensive cloud integrations. The invariant here is that sustainability dictates architectural complexity, not user convenience.
+This mechanism describes a hard constraint architecture where financial limits act as the primary failure mode for operational continuity, rather than technical errors. When an agent's execution exceeds its allocated budget threshold, the system halts immediately to prevent uncontrolled spending, effectively treating cost exhaustion as a critical error state that breaks downstream dependencies. This creates a fragile link between financial governance and daily information synthesis, where the absence of funds directly causes data staleness in the user's primary interface.
 
 ## Context
 
-Sean's infrastructure relies on avoiding cost caps to maintain continuous operation. By recognizing that complex integrations like MCP bridges can double costs and trip limits, he can proactively choose local models that ensure reliability without financial interruption.
+Sean relies on the 'daily-driver morning' agent to generate his daily note, which serves as the central hub for his operational context. The failure of this specific agent due to budget exhaustion ($0.9107 cost vs. limit) means the entire day's synthesis is missing, forcing Sean to manually reconstruct context or operate without the automated brief he depends on.
 
 ## Evidence
 
-> drop MCP bridge + context-management beta that doubled cost to $0.97 and tripped the cap 5/29
+> daily-driver morning failed due to budget exhaustion (max_budget_usd), halting key operational synthesis.
 
-> Build a $0/run local summarizer ... that curates daily_driver's fleet-memory namespace
+> cost=$0.9107 · notes='Command failed with exit code 1 (exit code: 1) Error output: Check stderr out...'
+
+> Immediately stabilize agent budgets (e.g., daily-driver) to prevent operational context loss from hitting hard limits.
 
 ## Examples
 
-- Retreating from an MCP bridge after it doubled costs and triggered a hard cap on May 29th.
-- Building a local summarizer for the daily_driver namespace to maintain $0/run operations.
+- The daily-driver morning agent incurred a cost of $0.9107 before triggering the max_budget_usd error, resulting in an exit code 1 and no output for the daily note.
+- Other agents like vault-indexer and vault-synthesizer run at $0.00/run, indicating that only high-cost API calls (like Claude) are subject to these hard financial caps.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Vault Maintenance]]
+[[Agent Health Monitoring]] [[Automation Failure and Daily Note Disruption]] [[Infrastructure Status]]
