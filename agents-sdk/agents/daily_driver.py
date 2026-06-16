@@ -422,6 +422,11 @@ def build_options(config, mode: str | None = None) -> ClaudeAgentOptions:
         or config.safety.max_budget_default
     )
 
+    # Per-mode model override (None ⇒ omit ⇒ SDK uses the OAuth default, Opus).
+    # Mirrors the max_turns / max_budget resolution above. Only morning sets it
+    # today (→ "sonnet") per the 2026-06-16 cost fix; absent key preserves Opus.
+    model = mode_cfg.get("model")
+
     # Only pass API key if explicitly set; otherwise the SDK uses
     # Claude Code CLI's existing auth (e.g., `claude login` OAuth)
     env = {}
@@ -465,6 +470,7 @@ def build_options(config, mode: str | None = None) -> ClaudeAgentOptions:
         permission_mode=config.safety.permission_mode,
         max_turns=max_turns,
         max_budget_usd=max_budget,
+        model=model,
         cwd=str(config.repo_root),
         mcp_servers=mcp_servers,
         betas=betas,
@@ -492,6 +498,7 @@ async def run(mode: str, dry_run: bool = False) -> None:
     if dry_run:
         print("=== DRY RUN — Daily Driver Agent ===")
         print(f"\nMode: {mode}")
+        print(f"Model: {options.model or '(SDK default — Opus)'}")
         print(f"Max turns: {options.max_turns}")
         print(f"Max budget: ${options.max_budget_usd}")
         print(f"Permission mode: {options.permission_mode}")
