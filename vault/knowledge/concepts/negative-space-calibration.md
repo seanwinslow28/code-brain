@@ -2,32 +2,31 @@
 title: "Negative Space Calibration"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/raising-claude-cheese-gauntlet-kit-PUBLIC.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-06-11-readmes-voice-final.md
 tags: [auto-generated, phase-6]
-created: 2026-06-08
-updated: 2026-06-08
+created: 2026-06-16
+updated: 2026-06-16
 ---
 
 ## Definition
 
-A signal extraction mechanism where user rejection of generated content serves as a higher-fidelity training input than explicit instruction. Because users cannot accurately describe their own stylistic voice through positive assertion, the system leverages their immediate, visceral disgust at generic or 'cheesy' outputs to define the boundaries of authenticity. This creates a negative space around the desired output, allowing the model to infer the specific tonal constraints that positive prompts fail to capture.
+This mechanism refers to the deliberate omission of rhetorical flourishes or technical verbosity to preserve signal-to-noise ratio for specific reader types. It is not merely 'editing' but a strategic allocation of attention where the absence of information (negative space) becomes the primary carrier of meaning. By stripping em dashes and tightening voice sections, the artifact forces the reader to fill in gaps with their own expertise, thereby increasing engagement from senior reviewers who detect competence through restraint rather than exposition.
 
 ## Context
 
-Sean is building a personal voiceprint for his Substack and job hunt materials. He has identified that standard prompting fails because he cannot articulate his taste directly. By using this mechanism, he turns the 'Cheese Gauntlet' from a simple filter into a data generation engine that captures his unique cultural and tonal boundaries.
+Sean's job hunt requires demonstrating 'senior' judgment. Over-explaining technical details signals insecurity or junior-level need for validation. By calibrating negative space, he allows the recruiter to infer sophistication from what is left unsaid, while allowing the engineer to verify competence through what remains.
 
 ## Evidence
 
-> You can't describe your voice. Trust me, you'll try, and you'll produce a paragraph of adjectives that fits half the planet. But you can spot what *isn't* you instantly.
+> Dry wit allowed in an aside, never in a command or a config value.
 
-> This weaponizes that. The model generates ten lines of the exact stuff you hate, in your name, and you react. Your disgust is the signal.
+> The period turns the inversion into two sentences instead of riding an em dash.
 
 ## Examples
 
-- The model generates ten lines of generic, 'prestige' writing that Sean finds repulsive.
-- Sean reacts to these lines with immediate disgust, providing a clear negative constraint.
-- The system uses this rejection to refine the voiceprint, avoiding the 'tasteful, prestige, respectable' trap.
+- Replacing an em-dash-heavy sentence with two short, declarative sentences increases the perceived authority of the statement by removing syntactic hesitation.
+- Keeping the technical body 'clean and neutral' ensures that no rhetorical noise distracts from the API documentation's utility.
 
 ## Related Concepts
 
-[[Intent Engineering]] [[Context Compounding]]
+[[Negative Space Calibration]] [[Craft in Product Design]] [[Two Audiences]]
