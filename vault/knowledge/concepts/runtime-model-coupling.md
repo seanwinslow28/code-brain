@@ -4,17 +4,17 @@ type: concept
 sources:
   - 00_inbox/tickets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-12
-updated: 2026-06-12
+created: 2026-06-16
+updated: 2026-06-16
 ---
 
 ## Definition
 
-This pattern describes the fragile dependency between an operating system's binary integrity verification (such as macOS code-signing checks) and the agent's execution environment. When a package manager upgrades a core interpreter, it alters the binary's cryptographic hash, causing the process supervisor to reject the existing launch configuration as invalid. The mechanism fails not because the logic is wrong, but because the runtime identity has shifted without updating the supervisor's cached state.
+This pattern describes the fragile dependency between an agent's operational runtime environment and its underlying system interpreter. When a package manager like Homebrew upgrades a core binary (e.g., Python), it changes the executable's cryptographic hash (cdhash). If the operating system's service manager (launchd) caches this hash, the upgrade invalidates the cache without updating the running service configuration. This creates a silent failure mode where the agent process is killed by the OS for code-signing violations, yet the source code and scripts remain perfectly valid on disk.
 
 ## Context
 
-Sean's agent fleet relies on Homebrew-managed Python interpreters for execution. A routine upgrade invalidated the launchd cache for five critical jobs, causing them to be kernel-killed overnight. This creates a silent failure mode where the knowledge loop breaks because the infrastructure assumes static binary paths rather than dynamic runtime identities.
+Sean's entire knowledge vault relies on automated agents (synthesizer, indexer, deep-researcher) firing on schedule. A runtime-model coupling failure means the 'knowledge loop' breaks overnight without any error logs in the application layer, only a kernel-level termination. This forces Sean to manually intervene via CLI to restore service, undermining the autonomy he is trying to build.
 
 ## Evidence
 
@@ -24,7 +24,8 @@ Sean's agent fleet relies on Homebrew-managed Python interpreters for execution.
 
 ## Examples
 
-- launchd's cache was stale
+- Recovering manually 2026-06-11 09:15 via launchctl bootout+bootstrap of the 5 jobs
+- Durable fix still open: either (a) uv-managed pinned interpreter under the repo so brew can't move the binary, or (b) a post-brew upgrade hook that re-boot
 
 ## Related Concepts
 

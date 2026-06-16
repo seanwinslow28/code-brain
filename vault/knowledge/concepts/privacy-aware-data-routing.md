@@ -4,17 +4,17 @@ type: concept
 sources:
   - 00_inbox/tickets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-12
-updated: 2026-06-12
+created: 2026-06-16
+updated: 2026-06-16
 ---
 
 ## Definition
 
-This mechanism addresses the tension between automated synthesis capabilities and data classification boundaries. When an agent fleet processes mixed inputs, it tends to normalize all outputs into a single public knowledge base unless explicit exclusion rules are enforced. The pattern requires a deliberate filtering layer that routes career-specific or personal-derived concepts away from public-facing indexes to prevent accidental exposure of sensitive professional strategies.
+This mechanism addresses the tension between automated knowledge synthesis and data sovereignty. When an agent fleet processes mixed inputs (public project docs vs. private career strategy), a lack of explicit routing rules causes sensitive, job-hunt-derived concepts to leak into public-facing vault directories. The system treats all markdown files as equal knowledge assets unless a privacy filter explicitly distinguishes their origin, leading to accidental exposure of personal strategic data in public indexes.
 
 ## Context
 
-Sean's vault synthesizer currently writes job-hunt-derived concepts into the public vault/knowledge/ directory. This creates a privacy risk where professional search strategies become permanently indexed and accessible, violating the separation between his public creative output and private career activities.
+Sean is actively managing his job hunt (job-hunt-2026) while maintaining a public open-source presence. The current synthesizer writes all derived concepts into the same public `vault/knowledge/` folder. This creates a risk where private career strategies or interview preparations become discoverable via public repo searches, violating the separation between his professional brand and personal job-search tactics.
 
 ## Evidence
 
@@ -24,8 +24,9 @@ Sean's vault synthesizer currently writes job-hunt-derived concepts into the pub
 
 ## Examples
 
-- route career/personal-derived concepts to vault/knowledge/private/
+- Route career/personal-derived concepts to vault/knowledge/private/
+- Schedule a periodic prune pass for job-hunt data
 
 ## Related Concepts
 
-[[Vault as Agent Infrastructure]] [[Cross-domain bridging]]
+[[Vault as Agent Infrastructure]] [[Privacy-Aware Data Routing]]
