@@ -1,0 +1,31 @@
+{
+  "antigravity_calls": 0,
+  "antigravity_failures": 0,
+  "antigravity_last_error": "",
+  "antigravity_skipped": 7,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 2,
+  "backfill_articles_critiqued": 5,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/connections/portfolio-projects-as-strategic-interview-preparation.md",
+    "vault/knowledge/expansions/connections/product-management-and-ai-system-delivery-integration.md",
+    "vault/knowledge/expansions/connections/rag-s-emerging-layered-architecture-as-a-cross-domain-pattern.md",
+    "vault/knowledge/expansions/connections/research-as-input-for-mcp-servers.md",
+    "vault/knowledge/expansions/connections/research-methodology-integration.md"
+  ],
+  "codex_calls": 7,
+  "codex_failures": 0,
+  "codex_last_error": "",
+  "codex_tokens_total": 201002,
+  "duration_seconds": 257.76,
+  "error": "",
+  "expansions_written": [
+    "vault/knowledge/expansions/comprehension-as-currency.md",
+    "vault/knowledge/expansions/negative-space-calibration.md"
+  ],
+  "run_id": "2026-06-16T03:30:04",
+  "status": "ok",
+  "warnings": [
+    "antigravity disabled (codex-only mode)"
+  ]
+}
