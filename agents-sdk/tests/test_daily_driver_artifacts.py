@@ -214,3 +214,33 @@ class TestDailyDriverFleetMemoryWiring:
         assert "fleet-memory" not in opts.mcp_servers
         # None of the six memory tool names should appear when disabled.
         assert not any("fleet-memory" in t for t in opts.allowed_tools)
+
+
+def test_build_options_uses_mode_model_when_set():
+    """A per-mode `model` key flows through to ClaudeAgentOptions.model."""
+    from lib.config import load_config
+    from agents.daily_driver import build_options
+
+    cfg = load_config()
+    # Force the value regardless of what config.toml currently holds, so this
+    # test pins the resolution logic, not the shipped config.
+    cfg.agents.setdefault("daily_driver", {}).setdefault("modes", {}).setdefault(
+        "morning", {}
+    )["model"] = "sonnet"
+
+    opts = build_options(cfg, mode="morning")
+    assert opts.model == "sonnet"
+
+
+def test_build_options_model_none_when_mode_key_absent():
+    """No `model` key ⇒ options.model is None ⇒ SDK keeps the OAuth default (Opus)."""
+    from lib.config import load_config
+    from agents.daily_driver import build_options
+
+    cfg = load_config()
+    # Evening mode carries no model override; strip one if present to be explicit.
+    cfg.agents.get("daily_driver", {}).get("modes", {}).get("evening", {}).pop(
+        "model", None
+    )
+    opts = build_options(cfg, mode="evening")
+    assert opts.model is None

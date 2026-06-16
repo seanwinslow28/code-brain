@@ -21,18 +21,19 @@ weekly_time = "16:00"
 
 [agents.daily_driver.modes.morning]
 max_turns = 15
-# 2026-05-22: bumped 0.60 → 0.90 after 5 consecutive cap-hits (5/18–5/22).
-# Prompt grew with v3.16.0 operating-model preamble, v3.17.0 3-domain context,
-# v3.27.0 fleet-overnight digest. Successful runs creep $0.55-$0.58; cap at
-# 0.60 had ~3% headroom and trips on any small per-day variance. 0.90 gives
-# ~55% headroom over current ceiling. Cost ceiling per month: ~$27 worst case.
-# 2026-06-15: bumped 0.90 → 1.25. Cost crept again — successful runs now ride
-# $0.82-$0.85 and the cap tripped on 6/12 ($0.911) and 6/15 ($0.907), each time
-# silently stranding the portfolio dateline (the publish post-step used to be
-# skipped when the run errored — now hardened into a `finally` in daily_driver,
-# so a cap-hit no longer freezes the live date, but headroom still matters).
-# 1.25 gives ~47% over a typical $0.85 run. Worst-case month: ~$37.50.
-max_budget_usd = 1.25
+# 2026-06-16: routed morning to Sonnet 4.6 (model="sonnet") and reset the budget
+# cap 1.25 → 0.50. Root cause of the recurring cap-hits (5/29 $0.97, 6/12 $0.91,
+# 6/15 $0.91) was running a TEMPLATED note task on Opus — NOT MCPs or pulled-
+# content size (the injected fleet digest is ~200 tokens). The earlier cap bumps
+# (0.60→0.90→1.25) chased the creep instead of removing the cause. Sonnet does
+# this task for ~$0.15-0.20/run (~5x cheaper), so the cap now sits as a TRIPWIRE:
+# ~2.7x over expected Sonnet cost, still below the ~$0.88 Opus floor — an
+# accidental revert to Opus trips the cap loudly instead of billing silently.
+# Worst-case month: ~$15 (was ~$37.50 on Opus). Rollback: delete the model line
+# (→ Opus default) and/or restore 1.25. Design:
+# docs/superpowers/specs/2026-06-16-daily-driver-cost-fix-design.md
+model = "sonnet"
+max_budget_usd = 0.50
 
 [agents.daily_driver.modes.evening]
 max_turns = 10
