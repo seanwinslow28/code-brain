@@ -1,0 +1,24 @@
+{
+  "clusters_sampled": 6,
+  "concept_paths": [],
+  "concepts_written": 0,
+  "connection_paths": [
+    "vault/knowledge/connections/silent-failure-propagation-in-agent-fleets.md",
+    "vault/knowledge/connections/privacy-vs-automation-in-knowledge-management.md"
+  ],
+  "connections_written": 2,
+  "duration_seconds": 993.41,
+  "edges_rejected": 0,
+  "edges_written": 4,
+  "files_processed": 3,
+  "model_used": "qwen3-14b",
+  "rejected_count": 3,
+  "rejected_reasons": {
+    "thin-definition": 2,
+    "thin-evidence": 1
+  },
+  "run_id": "2026-06-17T02:30:06",
+  "skipped_thin_source": 0,
+  "status": "partial-empty",
+  "wol_status": "mbp_awake"
+}

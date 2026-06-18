@@ -5,8 +5,8 @@ parent: "[[product-management-and-ai-system-delivery-integration]]"
 sources:
   - codex (gpt-5.5)
   - anti-gravity (gemini-3.1-pro-preview)
-created: 2026-06-16
-updated: 2026-06-16
+created: 2026-06-17
+updated: 2026-06-17
 ---
 
 ## What this is
@@ -15,38 +15,29 @@ Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-
 
 ## From Codex (gpt-5.5)
 
-1. **Add “Product Discovery As Risk Retirement,” anchored on Marty Cagan’s _INSPIRED_ and Teresa Torres’s _Continuous Discovery Habits_**
+1. **Add “Continuous Discovery Habits” as the missing PM delivery loop**
 
-   Current concept jumps from “PM aligns AI delivery to roadmap” to a generic business-objective frame. Missing piece: PM is not just alignment, it is systematic uncertainty reduction.
+   **What to add:** A discovery cadence layer: opportunity solution trees, assumption mapping, and experiment-first roadmap slices. The current concept jumps from “Claude Skills” to “strategic roadmap” without the product mechanism that decides *which* AI capability deserves to exist.
 
-   Add a section that treats AI-system delivery as four risk lanes: **value risk, usability risk, feasibility risk, and viability risk**. For Sean’s agent work, this becomes: “Which agent behavior is valuable, trusted, technically achievable, and worth operating?”
+   **Exemplar:** Teresa Torres, *Continuous Discovery Habits*.
 
-   Sentence pattern to add:  
-   “This skill/agent is not ‘done’ when it runs; it is done when the riskiest assumption behind it has been retired.”
+   **Unlocks for Sean:** A portfolio one-pager or Substack essay called something like **“Skills Are Not Features: Discovery Loops for Agent Capabilities.”** This would let Sean argue that agent skills should be managed as continuously validated bets, not as an accumulating toolbox. Artifact: an **AI-skill opportunity tree** where each skill maps to user outcome, assumption, evidence, and kill/keep signal. Current concept cannot reach that because it treats “effective product management” as a virtue, not an operating system.
 
-   Unlocks: a sharper portfolio artifact: **AI Agent Discovery Memo**. Instead of saying “I delivered Claude Skills through PM,” Sean could show a one-page artifact mapping an agent feature to assumptions, probes, evals, and ship criteria. That is much stronger for AI-PM interviews than “technical features aligned to strategy.”
+2. **Add “Jobs-to-be-Done demand-side framing” to contradict feature-led skill delivery**
 
-2. **Add “Delivery As Socio-Technical Control System,” anchored on Sidney Dekker’s _The Field Guide to Understanding Human Error_ and Nancy Leveson’s STAMP/STPA work, especially _Engineering a Safer World_**
+   **What to add:** A JTBD mode that asks what progress the user is hiring an agentic system to make, and what old workaround it must beat. Sentence pattern: “The user does not want `skill X`; they are hiring the system to make progress from `struggling moment` to `desired new state`, while avoiding `old anxiety`.”
 
-   The article implies AI delivery is a matter of roadmap plus feature execution. That misses the control-system view: failures emerge from weak constraints, bad feedback loops, unclear authority, and local optimization.
+   **Exemplar:** Clayton Christensen et al., *Competing Against Luck*; Bob Moesta, *Demand-Side Sales 101*.
 
-   Add a contradicting framework: AI PM is less “feature owner” and more **control-loop designer**. The relevant question is not “Did the agent complete the task?” but “What feedback, escalation, stop rules, and authority boundaries prevent the system from doing locally reasonable but globally wrong things?”
+   **Unlocks for Sean:** A sharper job-hunt artifact: **case-study teardown of Code-Brain as a JTBD product**, not a personal automation stack. It would let him explain why “vault critic,” “daily driver,” and “knowledge lint” exist as demand responses: reducing forgetting, turning sessions into reusable assets, and forcing critique into the loop. Current concept sounds generic because “aligning technical features with business objectives” could describe any SaaS roadmap. JTBD would make the agent fleet legible as demand architecture.
 
-   Sentence pattern to add:  
-   “For agentic systems, delivery quality is not feature throughput; it is the integrity of the control loop between intent, action, observation, correction, and audit.”
+3. **Add “Wardley Mapping” as the missing strategy-to-architecture bridge**
 
-   Unlocks: a concrete **Agent Control Architecture Runbook** for Code-Brain or intent-engineering MCP. This would let Sean produce artifacts like stop-rule matrices, escalation ladders, trace review protocols, and post-incident templates. The current concept cannot reach operational safety; it only reaches “alignment.”
+   **What to add:** A Wardley-map layer for AI system delivery: user need at the top, value chain underneath, components positioned by evolution stage from genesis to commodity. This gives Sean a way to decide what to build, buy, automate, standardize, or leave artisanal.
 
-3. **Add “Boundary Object Product Management,” anchored on Susan Leigh Star and James Griesemer’s 1989 paper _Institutional Ecology, ‘Translations’ and Boundary Objects_**
+   **Exemplar:** Simon Wardley, *Wardley Maps* / “The Art of Strategy” online book.
 
-   The article says Claude Skills, PM, and strategic roadmap are connected, but it does not explain how different groups can coordinate around the same artifact while interpreting it differently. That is the missing PM-native move.
-
-   Add the idea that skills, PRDs, roadmap themes, eval traces, and agent specs are **boundary objects**: stable enough to coordinate engineering, design, leadership, and users, but flexible enough for each group to use them differently.
-
-   Sentence pattern to add:  
-   “A good AI delivery artifact is not a document everyone reads the same way; it is a boundary object each discipline can act through without losing shared intent.”
-
-   Unlocks: a strong **portfolio one-pager / Substack essay**: “The PRD Is Becoming an Agent Spec.” Sean could show how Claude Skills, intent specs, eval suites, and roadmaps converge into a new PM artifact. This moves him from “PM who uses agents” to “PM defining the coordination layer for agentic engineering.”
+   **Unlocks for Sean:** An executable strategy artifact: **a Wardley map of agentic-engineering infrastructure**, with components like Claude Code skills, MCP servers, local LLM routing, launchd schedules, evals, vault indexing, and portfolio publishing placed by maturity. This would support decisions like “custom-build intent-engineering MCP, but commoditize model routing,” or “keep voice-mode writing bespoke, but standardize fleet observability.” Current concept only says roadmap alignment matters; Wardley gives him a visual decision instrument for where the roadmap should actually place investment.
 
 ## From Anti-Gravity (Gemini 3)
 

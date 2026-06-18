@@ -5,8 +5,8 @@ parent: "[[research-methodology-integration]]"
 sources:
   - codex (gpt-5.5)
   - anti-gravity (gemini-3.1-pro-preview)
-created: 2026-06-16
-updated: 2026-06-16
+created: 2026-06-17
+updated: 2026-06-17
 ---
 
 ## What this is
@@ -15,45 +15,20 @@ Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-
 
 ## From Codex (gpt-5.5)
 
-1. **Add “research as competing programs,” not queue routing**
+1. **Add “Protocol Before Retrieval” mode**
+   - **Anchor:** Barbara Kitchenham & Stuart Charters, *Guidelines for Performing Systematic Literature Reviews in Software Engineering*; PRISMA 2020 Statement by Page et al.
+   - **Pattern to add:** every research item gets a tiny protocol before execution: `question`, `inclusion criteria`, `exclusion criteria`, `source classes`, `extraction fields`, `stop rule`, `confidence grade`.
+   - **Unlocks:** a research runbook and agent spec where Gemini DR / LDR are not just tiered by cost and depth, but governed by evidence discipline. Current concept says “which tool runs the question”; this would let Sean ship “how the answer earns trust.”
 
-   Anchor it on Imre Lakatos, **“Falsification and the Methodology of Scientific Research Programmes”** in *Criticism and the Growth of Knowledge*.
+2. **Add “Analysis of Competing Hypotheses” as the critic layer**
+   - **Anchor:** Richards J. Heuer Jr., *Psychology of Intelligence Analysis*, especially the ACH method.
+   - **Pattern to add:** each research output must name 2-4 rival hypotheses, then score evidence by whether it confirms, contradicts, or is diagnostic against each one. Sentence pattern: “The strongest evidence against my preferred answer is…”
+   - **Unlocks:** a vault-critic upgrade, decision pre-mortem template, or Substack essay about “agentic research that tries to disprove itself.” Current concept integrates research machinery; ACH would integrate adversarial judgment.
 
-   Current concept treats LDR vs Gemini DR as a tiering/logistics problem: which engine should handle which question. Missing is the stronger research-methodology layer: every research item should declare whether it is part of a **progressive** or **degenerating** research program.
-
-   Add a field/pattern:
-
-   > “This question belongs to the `X` research program. It is progressive if it predicts/produces `Y`; degenerating if it only explains failures after the fact.”
-
-   This unlocks a **research agenda audit** artifact: a monthly Substack or vault report that says which lines of inquiry are creating new testable leverage and which are just producing nicer explanations. It would make Sean’s fleet critique generative because it would not merely summarize “what research ran”; it would decide which intellectual bets deserve more budget.
-
-2. **Add “information foraging” as the cost model for research routing**
-
-   Anchor it on Peter Pirolli and Stuart Card, **“Information Foraging in Information Access Environments”** and Pirolli’s book ** *Information Foraging Theory* **.
-
-   The concept currently has tiers based on tool capability and dollar cost. What’s missing is a behavioral model of research as scent-following: patches, cues, expected yield, abandonment thresholds. Sean already has queues, citations, and local/cloud routes; he does not yet appear to have a theory for when a research agent should **stop digging**, **switch patches**, or **escalate because scent is weak but value is high**.
-
-   Add a “scent ledger” to each research item:
-
-   > `information_scent: strong|mixed|weak`  
-   > `patch_type: canonical-source|forum-trace|repo-issue|market-map|paper-chain`  
-   > `abandon_rule: stop after N low-yield hops unless a named source appears`
-
-   This unlocks an **agent runbook** and **executable research policy**: not “Gemini for big topics,” but “use Gemini when patch switching dominates answer synthesis.” It also gives Sean a portfolio-grade artifact: a visible research router that justifies escalation by expected information gain, not vibes.
-
-3. **Add “evidence grading by claim type,” borrowed from evidence-based medicine**
-
-   Anchor it on Gordon Guyatt et al., **“GRADE: an emerging consensus on rating quality of evidence and strength of recommendations”** in *BMJ*.
-
-   The current concept mentions citation quality collapse, fabricated entities, and routing rules, but it lacks a way to grade outputs by the **kind of claim** being made. A vendor docs claim, a community compatibility claim, a pricing claim, a conceptual analogy, and a career-market claim should not share one generic “citation quality” bucket.
-
-   Add a small claim taxonomy:
-
-   > `claim_type: factual-current|technical-compatibility|market-signal|conceptual-framework|personal-strategy`  
-   > `evidence_grade: high|moderate|low|speculative`  
-   > `upgrade_path: primary-docs|replication|expert-source|multi-source-agreement|personal-test`
-
-   This unlocks a **research QA rubric** and **portfolio one-pager** Sean does not currently have: “How my agent fleet decides what it knows.” It would also sharpen the Vault Critic: instead of saying “citation weak,” it can say “this is a technical-compatibility claim supported only by community hearsay; upgrade path is a reproduction script.” That moves the system from summary to epistemic operations.
+3. **Add “Wicked Problem / IBIS Mapping” for questions that should not become reports**
+   - **Anchor:** Horst Rittel & Melvin Webber, “Dilemmas in a General Theory of Planning”; Werner Kunz & Horst Rittel, *Issues as Elements of Information Systems*; Jeff Conklin, *Dialogue Mapping*.
+   - **Pattern to add:** distinguish `answerable research questions` from `wicked coordination questions`. Represent the latter as `Issue -> Positions -> Arguments`, not as a synthesized memo.
+   - **Unlocks:** an executable “research-to-decision map” artifact for product strategy, job-hunt positioning, and agent architecture tradeoffs. The current concept treats research as knowledge acquisition; IBIS would let Sean model unresolved tension without prematurely flattening it into summary prose.
 
 ## From Anti-Gravity (Gemini 3)
 
