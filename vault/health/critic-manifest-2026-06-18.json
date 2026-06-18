@@ -1,0 +1,30 @@
+{
+  "antigravity_calls": 0,
+  "antigravity_failures": 0,
+  "antigravity_last_error": "",
+  "antigravity_skipped": 6,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 1,
+  "backfill_articles_critiqued": 5,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/connections/tier-1-tier-2-separation-for-cross-domain-insight-integrity.md",
+    "vault/knowledge/expansions/connections/vibe-coding-interview-and-career-artifact-integration.md",
+    "vault/knowledge/expansions/connections/vibe-coding-interview-ecosystem.md",
+    "vault/knowledge/expansions/connections/vibe-coding-interviews-as-cultural-fit-gateways.md",
+    "vault/knowledge/expansions/connections/vibe-coding-rituals-and-confidence-building.md"
+  ],
+  "codex_calls": 6,
+  "codex_failures": 0,
+  "codex_last_error": "",
+  "codex_tokens_total": 188475,
+  "duration_seconds": 167.21,
+  "error": "",
+  "expansions_written": [
+    "vault/knowledge/expansions/silent-failure-propagation-in-agent-fleets.md"
+  ],
+  "run_id": "2026-06-18T03:30:05",
+  "status": "ok",
+  "warnings": [
+    "antigravity disabled (codex-only mode)"
+  ]
+}
