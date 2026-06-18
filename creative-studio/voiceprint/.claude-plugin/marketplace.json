@@ -1,0 +1,28 @@
+{
+  "name": "voiceprint",
+  "owner": {
+    "name": "Sean Winslow"
+  },
+  "plugins": [
+    {
+      "name": "voiceprint",
+      "source": "./",
+      "description": "Builds your own writing-voice skill from evidence, not adjectives: learns you from what you reject (the Cheese Gauntlet), what you quote, and how you actually write, then generates a personal SKILL.md plus reference files. Local, no account, no API key. From the 'Raising Claude' series.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Sean Winslow"
+      },
+      "license": "MIT",
+      "keywords": [
+        "writing",
+        "voice",
+        "style",
+        "write-like-me",
+        "ai-slop",
+        "cheese-gauntlet",
+        "local",
+        "privacy"
+      ]
+    }
+  ]
+}
