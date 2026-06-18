@@ -5,8 +5,8 @@ parent: "[[portfolio-projects-as-strategic-interview-preparation]]"
 sources:
   - codex (gpt-5.5)
   - anti-gravity (gemini-3.1-pro-preview)
-created: 2026-06-16
-updated: 2026-06-16
+created: 2026-06-17
+updated: 2026-06-17
 ---
 
 ## What this is
@@ -15,26 +15,53 @@ Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-
 
 ## From Codex (gpt-5.5)
 
-1. **Add “Evidence Portfolio” mode, anchored on Donald Schön’s _The Reflective Practitioner_.**  
-   Current concept says “portfolio projects signal skill,” but misses Schön’s core move: professional credibility comes from showing reflection-in-action, not just outcomes. Add a section that forces each portfolio project to expose: `situation -> live uncertainty -> intervention -> surprise -> revised frame -> next action`.
+1. **Add “portfolio as audition artifact,” anchored on Josh W. Comeau’s _Building an Effective Dev Portfolio_**
 
-   **Exemplifies it:** Donald A. Schön, _The Reflective Practitioner: How Professionals Think in Action_.
+   Current concept treats the portfolio as proof-of-skill plus recruiter translation. Missing facet: the portfolio project should behave like a **work sample for the exact job**, not a gallery.
 
-   **Unlocks:** A portfolio one-pager or interview walkthrough that proves Sean can think inside ambiguity. Right now the concept risks producing “look what I built” artifacts. This turns Code-Brain, 16BitFit, or intent-engineering into “here is how I changed my model under pressure,” which is much stronger for senior PM and agentic-engineering interviews.
+   Add a mode like: **“This artifact lets a hiring manager watch me do the job before interviewing me.”**
 
-2. **Add “Executable Taste” mode, anchored on Bret Victor’s _Inventing on Principle_ talk.**  
-   The missing facet is not more project description; it is a visible principle that makes Sean’s work legible as taste. Victor’s pattern is: name the principle, show the pain, make the principle executable in a tool, then demonstrate the world before/after. Sean’s version could be: “agents should critique toward missing generative artifacts, not summarize existing notes.”
+   Exemplar: Josh W. Comeau, [_Building an Effective Dev Portfolio_](https://www.joshwcomeau.com/blog/effective-portfolio/). His useful distinction is not “show projects,” but “make the evaluator’s path frictionless and concrete.”
 
-   **Exemplifies it:** Bret Victor, _Inventing on Principle_.
+   Unlocks: a **role-specific portfolio one-pager** for AI-PM / agentic-engineering IC roles:
+   - problem
+   - constraints
+   - artifact shipped
+   - what changed after critique/evals
+   - what a hiring manager should infer
 
-   **Unlocks:** A Substack essay plus executable demo: “The Critic That Refuses to Summarize.” This would let Sean show an opinionated design principle embodied in Code-Brain, not merely a fleet inventory. It also gives him a sentence pattern for interviews: `I believe X should be true; I built Y to make that belief unavoidable.`
+   Without this, Sean risks presenting Code-Brain as impressive infrastructure rather than an audition for judgment, taste, and shipping behavior.
 
-3. **Add “Portfolio as Boundary Object” mode, anchored on Susan Leigh Star and James Griesemer’s paper _Institutional Ecology, ‘Translations’ and Boundary Objects_.**  
-   The concept assumes one portfolio communicates to everyone. It does not account for the recruiter, hiring manager, staff engineer, and AI-PM interviewer each needing a different stable-but-translatable artifact. Boundary object theory gives Sean the missing frame: one underlying project, multiple audience-specific representations.
+2. **Add “demonstration beats explanation,” anchored on Bret Victor’s _Inventing on Principle_**
 
-   **Exemplifies it:** Susan Leigh Star and James R. Griesemer, “Institutional Ecology, ‘Translations’ and Boundary Objects: Amateurs and Professionals in Berkeley’s Museum of Vertebrate Zoology, 1907-39.”
+   Current concept still leans on communicating value clearly. That is weaker than making value **self-evident through interaction**.
 
-   **Unlocks:** A portfolio packet system: recruiter skim page, technical architecture note, PM case-study memo, and executable repo demo all pointing at the same project. Current concept can only say “communicate clearly.” This adds a production pattern: `same evidence base, different interpretive surface, no dilution of substance.`
+   Add: **“Demo-first interview preparation: every concept must have a manipulable artifact.”**
+
+   Exemplar: Bret Victor, [_Inventing on Principle_](https://worrydream.com/#!/InventingOnPrinciple). The relevant pattern is: don’t explain the abstraction first; let the viewer change something and immediately see the consequence.
+
+   Unlocks: an **executable demo genre** Sean does not currently name:
+   - “Here is yesterday’s agent fleet output.”
+   - “Here is the critique failure mode.”
+   - “Toggle this constraint.”
+   - “Watch the agent spec / runbook / portfolio claim change.”
+
+   This would turn “agentic-engineering signal” into a live interview artifact. It also exposes whether the system has real operational semantics or is mostly impressive narration.
+
+3. **Add “claim-evidence-risk framing,” anchored on Barbara Minto’s _The Pyramid Principle_**
+
+   Current concept says “clear communication,” but not what structure prevents recruiter/hiring-manager overload. Sean needs a compression grammar for translating weird, deep systems into business-readable judgment.
+
+   Add: **“Every portfolio project gets a Minto-style answer spine: answer first, grouped evidence second, risk/tradeoff third.”**
+
+   Exemplar: Barbara Minto, _The Pyramid Principle: Logic in Writing and Thinking_.
+
+   Sentence pattern:
+   > “I built X to prove Y; the evidence is A/B/C; the tradeoff I managed was Z.”
+
+   Unlocks: **interview answer cards, recruiter blurbs, case-study openers, and Substack intros** that stop sounding like “I built a complex agent fleet” and start sounding like “I know how to turn ambiguous autonomy into governed, observable systems.”
+
+   This is the missing bridge between Sean’s inside-view artifacts and the outside-view hiring filter.
 
 ## From Anti-Gravity (Gemini 3)
 

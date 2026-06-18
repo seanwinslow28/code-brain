@@ -1,0 +1,29 @@
+{
+  "clusters_sampled": 34,
+  "concept_paths": [
+    "vault/knowledge/concepts/infrastructure-status.md",
+    "vault/knowledge/concepts/silent-failure-propagation-in-agent-fleets.md"
+  ],
+  "concepts_written": 2,
+  "connection_paths": [
+    "vault/knowledge/connections/silent-failure-propagation-in-agent-fleets.md",
+    "vault/knowledge/connections/privacy-vs-automation-in-knowledge-management.md",
+    "vault/knowledge/connections/hardware-dependency-and-agent-capability.md",
+    "vault/knowledge/connections/the-invisible-debt-of-silent-failures-in-agentic-workflows.md"
+  ],
+  "connections_written": 4,
+  "duration_seconds": 2729.62,
+  "edges_rejected": 2,
+  "edges_written": 1,
+  "files_processed": 14,
+  "model_used": "qwen3-14b",
+  "rejected_count": 4,
+  "rejected_reasons": {
+    "thin-definition": 2,
+    "thin-evidence": 2
+  },
+  "run_id": "2026-06-18T02:30:06",
+  "skipped_thin_source": 0,
+  "status": "partial",
+  "wol_status": "mbp_awake"
+}
