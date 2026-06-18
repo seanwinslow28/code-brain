@@ -1,0 +1,8 @@
+**INT. DENNIS'S KITCHEN — NIGHT**  
+Dennis stands over the kitchen counter. The untended stains from years of the same ham and mustard lunches sprinkle his worn out dress shirt and thrift store tie. A busted up juicer lays on the kitchen counter, caked in previous concoctions. It's the only thing he came home to. He looks over at the clock on the wall. It TICKS loudly next to a cracked wedding photo and reads 6:09 pm. He shakes his head and walks toward his bedroom. He stops in his tracks and sees the basement door’s ajar.
+
+**INT. DENNIS’ BASEMENT — CONTINUOUS**  
+Dennis slowly walks down each creaky step. He reaches the second to last stair, flicks on the light, and scans the room. Star Wars collectibles and toys lay on the floor and pushed to the side of the room. Where they once took real estate, lays workout equipment, a large mirror on the wall, and mountains of sweaty clothes on top of multiple duffle bags. Inside one of the duffle bags, a large obnoxious purple dildo is exposed.Dennis stares at the mess. His teeth clench and his face hardens. He stomps up the stairs.
+
+**INT. DENNIS'S KITCHEN — NIGHT**  
+Dennis swiftly makes his way into the kitchen and looks at the clock in the other room. The clock reads 6:12pm. He takes out his phone and scrolls. The screen reads “Open until 7 pm”. He grabs the busted juicer and hustles out of the front door, slamming it behind him. The room’s empty.The wedding photo shifts, then falls to the floor. The clock TICKS.
