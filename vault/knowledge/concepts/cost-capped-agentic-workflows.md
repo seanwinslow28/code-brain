@@ -2,33 +2,31 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-12.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-06-15-kickoff-agent-cost-calculator.md
 tags: [auto-generated, phase-6]
-created: 2026-06-15
-updated: 2026-06-15
+created: 2026-06-16
+updated: 2026-06-16
 ---
 
 ## Definition
 
-This mechanism describes a hard constraint architecture where financial limits act as the primary failure mode for operational continuity, rather than technical errors. When an agent's execution exceeds its allocated budget threshold, the system halts immediately to prevent uncontrolled spending, effectively treating cost exhaustion as a critical error state that breaks downstream dependencies. This creates a fragile link between financial governance and daily information synthesis, where the absence of funds directly causes data staleness in the user's primary interface.
+This concept defines a control architecture where economic viability serves as the primary constraint for agent deployment, rather than technical capability alone. It establishes that the token cost of an AI model must be explicitly compared against the marginal value of human labor it displaces to determine feasibility. The mechanism relies on a break-even analysis where the 'self-host' or 'hybrid' scenario becomes viable only when the operational overhead exceeds the calculated token bill, which is often a fraction (0.1% to 0.5%) of the offset human cost.
 
 ## Context
 
-Sean relies on the 'daily-driver morning' agent to generate his daily note, which serves as the central hub for his operational context. The failure of this specific agent due to budget exhaustion ($0.9107 cost vs. limit) means the entire day's synthesis is missing, forcing Sean to manually reconstruct context or operate without the automated brief he depends on.
+Sean's job hunt strategy hinges on demonstrating that he can build tools that make these economic calculations visible and actionable for recruiters. By porting the `cost_model.py` logic into a public, interactive artifact, he transforms an abstract financial risk into a tangible product feature, proving his ability to bridge technical implementation with business value.
 
 ## Evidence
 
-> daily-driver morning failed due to budget exhaustion (max_budget_usd), halting key operational synthesis.
+> The cost math ports cleanly from cost_model.py to a pure TS module with Vitest unit tests, which is also the strongest interview signal (tested math, not a spreadsheet).
 
-> cost=$0.9107 · notes='Command failed with exit code 1 (exit code: 1) Error output: Check stderr out...'
-
-> Immediately stabilize agent budgets (e.g., daily-driver) to prevent operational context loss from hitting hard limits.
+> The punchline that the token bill is 0.1 to 0.5 percent of the human labor it offsets.
 
 ## Examples
 
-- The daily-driver morning agent incurred a cost of $0.9107 before triggering the max_budget_usd error, resulting in an exit code 1 and no output for the daily note.
-- Other agents like vault-indexer and vault-synthesizer run at $0.00/run, indicating that only high-cost API calls (like Claude) are subject to these hard financial caps.
+- Porting the three scenarios and price table from cost_model.py to reproduce the printed table to the cent at default assumptions.
+- Adding a Vitest test that asserts parity between the TypeScript implementation and the Python source model.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Automation Failure and Daily Note Disruption]] [[Infrastructure Status]]
+[[Agentic Engineering Signal]] [[Portfolio Projects]]

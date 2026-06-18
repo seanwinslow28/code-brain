@@ -1,0 +1,39 @@
+{
+  "clusters_sampled": 36,
+  "concept_paths": [
+    "vault/knowledge/concepts/runtime-model-coupling.md",
+    "vault/knowledge/concepts/privacy-aware-data-routing.md",
+    "vault/knowledge/concepts/comprehension-as-currency.md",
+    "vault/knowledge/concepts/two-audiences.md",
+    "vault/knowledge/concepts/negative-space-calibration.md",
+    "vault/knowledge/concepts/cost-capped-agentic-workflows.md"
+  ],
+  "concepts_written": 6,
+  "connection_paths": [
+    "vault/knowledge/connections/the-autonomy-paradox-automation-fragility-vs-privacy-leakage.md",
+    "vault/knowledge/connections/budget-velocity-vs-operational-continuity-tension.md",
+    "vault/knowledge/connections/hardware-dependency-as-system-bottleneck.md",
+    "vault/knowledge/connections/the-tension-between-technical-substance-and-narrative-fluency.md",
+    "vault/knowledge/connections/the-tension-between-technical-depth-and-recruiter-accessibility.md",
+    "vault/knowledge/connections/the-visibility-paradox-in-portfolio-artifacts.md",
+    "vault/knowledge/connections/the-tension-between-narrative-signal-and-technical-fidelity.md",
+    "vault/knowledge/connections/economic-visibility-as-technical-proof.md"
+  ],
+  "connections_written": 8,
+  "duration_seconds": 2910.8,
+  "edges_rejected": 2,
+  "edges_written": 8,
+  "files_processed": 13,
+  "model_used": "qwen3-14b",
+  "rejected_count": 14,
+  "rejected_reasons": {
+    "restatement-definition": 1,
+    "thin-definition": 7,
+    "thin-evidence": 5,
+    "thin-threads": 1
+  },
+  "run_id": "2026-06-16T02:30:05",
+  "skipped_thin_source": 0,
+  "status": "partial",
+  "wol_status": "mbp_awake"
+}
