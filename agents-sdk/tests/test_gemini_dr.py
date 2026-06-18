@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+from datetime import date
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
@@ -751,10 +752,20 @@ def test_append_ledger_tmp_cleaned_on_write_error(tmp_path: Path, monkeypatch):
 
 
 def test_run_warn_called_with_mtd_plus_pred(tmp_path: Path):
-    """I2: warn_if_approaching_cap receives mtd + pred_cost, not just mtd."""
+    """I2: warn_if_approaching_cap receives mtd + pred_cost, not just mtd.
+
+    The ledger entry MUST be dated to the real ``date.today()`` — run() computes
+    mtd/today against the live clock, so a hard-coded past date would no longer
+    count as current-month spend, the daily-cap refusal would not fire, and
+    execution would fall through to the real ``genai`` API call (the historical
+    "pytest hangs on an unmocked Gemini DR call" bug). ``genai`` and
+    ``get_credential`` are also patched as a hermetic guard so no test can ever
+    reach the network even if the cap logic changes.
+    """
     ledger = tmp_path / "gemini-spend-2026-05.json"
-    # Pre-populate ledger so mtd > 0 (makes the test distinguishable from mtd=0)
-    existing = [{"cost_usd": 10.00, "created": "2026-05-03T08:00:00Z"}]
+    # Pre-populate ledger so mtd > 0 (makes the test distinguishable from mtd=0).
+    # Dated to today so it counts under run()'s live-clock cap math.
+    existing = [{"cost_usd": 10.00, "created": f"{date.today().isoformat()}T08:00:00Z"}]
     ledger.write_text(json.dumps(existing), encoding="utf-8")
 
     warn_calls = []
@@ -767,6 +778,8 @@ def test_run_warn_called_with_mtd_plus_pred(tmp_path: Path):
         patch("scripts.gemini_dr.load_config") as mock_load_config,
         patch("scripts.gemini_dr.setup_logger") as mock_logger,
         patch("scripts.gemini_dr.record_run"),
+        patch("scripts.gemini_dr.get_credential", return_value="fake-api-key"),
+        patch("scripts.gemini_dr.genai") as mock_genai,
         patch("scripts.gemini_dr.warn_if_approaching_cap", side_effect=capture_warn),
     ):
         mock_cfg.return_value = {
@@ -810,3 +823,5 @@ def test_run_warn_called_with_mtd_plus_pred(tmp_path: Path):
     assert warn_calls[0] == pytest.approx(12.80), (
         f"Expected warn called with mtd+pred=$12.80, got ${warn_calls[0]}"
     )
+    # The daily-cap refusal must fire before any API call — never hit the network.
+    mock_genai.Client.assert_not_called()
