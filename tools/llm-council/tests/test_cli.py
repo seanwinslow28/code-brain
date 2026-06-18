@@ -1,11 +1,12 @@
 import json
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 from click.testing import CliRunner
 
-from council.cli import main
+from council.cli import _render_markdown, main
 from council.client import ModelResponse
 
 
@@ -62,6 +63,41 @@ def test_cli_writes_markdown_output(fake_api_key, tmp_path, tmp_spend_dir, monke
     assert "Use pytest-asyncio." in text                       # m1 response
     assert "Synthesis: pytest-asyncio is most idiomatic..." in text  # chairman
     assert "test-tag" in text                                  # tag echoed
+
+
+def test_render_markdown_handles_null_content():
+    """Regression: a council model returning null content must not crash render.
+
+    Hit 2026-06-16 on the 16BitFit 4Q run — gemini-pro returned null content, so
+    ``lines.append(r["content"])`` appended None and ``"\\n".join(lines)`` raised
+    ``TypeError: sequence item N: expected str instance, NoneType found``, failing
+    the whole transcript write even though the run + spend had succeeded.
+    Guards the three places that append model-supplied text: response content,
+    ranking reasoning, and chairman synthesis.
+    """
+    session = SimpleNamespace(
+        tag="null-content-test",
+        id="sess-null",
+        duration_ms=1234,
+        total_tokens_in=10,
+        total_tokens_out=20,
+        dropped_models=[],
+        ranking_failed_models=[],
+        responses=[
+            {"model_id": "gemini-pro", "content": None},          # the offending null
+            {"model_id": "gpt", "content": "A real answer."},
+        ],
+        rankings=[{"judge_model": "j1", "ranking": ["a", "b"], "reasoning": None}],
+        chairman_response=SimpleNamespace(model_id="chair", content=None),
+    )
+    profile = SimpleNamespace(name="variance")
+
+    md = _render_markdown(session, profile, user_query="What's the move?", cost_usd=0.14)
+
+    # No crash, real content preserved, and nulls replaced with a placeholder.
+    assert isinstance(md, str)
+    assert "A real answer." in md
+    assert "no response" in md  # null content/chairman placeholder rendered
 
 
 def test_cli_exits_nonzero_on_missing_prompt_file(fake_api_key, tmp_path):
