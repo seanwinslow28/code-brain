@@ -485,7 +485,7 @@ max_budget_usd = 0.00
 # Schedule: 7 launchd fires 8:00–11:00 AM ET; idempotency in agents/job_feed.py.
 enabled = true
 max_cost_usd = 0.10
-http_timeout_sec = 10
+http_timeout_sec = 20  # 2026-06-18: bumped 10→20. Several valid ATS boards (elevenlabs, lovable, hubspot, klaviyo, webflow, cursor) were dying as ReadTimeout at 10s under concurrency; all respond within ~20s. Pollers run in parallel so wall-clock impact is bounded by the slowest single board, not additive.
 rate_limit_per_host_per_sec = 1
 mbp_probe_timeout_sec = 2
 mbp_probe_url = "http://seans-macbook-pro.local:11434/api/tags"  # Ollama on MBP (mDNS — see [routing.machines.macbook_pro]). 2026-05-26: switched from LM Studio :1234/v1/models to Ollama :11434/api/tags.
