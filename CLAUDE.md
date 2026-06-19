@@ -117,7 +117,7 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Cla
 | Knowledge Lint | Sunday 22:00 | Tier 1 structural Python checks (Mac Mini); Tier 2 Qwen3-14B on MBP if awake; 3-domain SOUL context for `soul-tier-a-conflict` issue kind | $0.00 (local) |
 | Flush (SessionEnd) | hook-triggered | gemma4:e4b on Mac Mini via `inbox_triage` routing for <100-msg sessions; ≥100-msg sessions attempt Qwen3-14B on MBP if awake; 3-domain SOUL prepend | $0.00 (local) |
 | Gemini Researcher (**default disabled**) | 03:30 daily (when `INSTALL_GEMINI=1`) | Gemini DR / DR Max via `gemini_dr.run` | $0–7/run; capped $7 task / $10 day / $20 month |
-| Job Feed | 8:00–11:00 AM (7 fires) | Qwen3-14B on MBP via HybridRouter (`fallback_disabled=true`); 4 free public feeds + ~40-company ATS watchlist; SQLite + Markdown roll-up | $0.00 |
+| Job Feed | 8:00–11:00 AM (7 fires) | Qwen3-14B on MBP via HybridRouter (`fallback_disabled=true`); 4 free public feeds + ~40-company ATS watchlist; SQLite + Markdown roll-up; optional Gmail email digest (`[notifications.email]`, opt-in, `lib/job_email.py`) + instant Pushover push on strong fits (`[notifications.push_strong_fits]`, opt-in) | $0.00 |
 | Skill Optimizer (**manual-trigger only**) | manual (`agents-sdk/agents/skill_optimizer.py`) | Opus 4.7 generation + Qwen3-14B local judge + Sonnet 4.6 sample-check every 5 iters; autoresearch loop on a single SKILL.md | $20–145/run (cap $200) |
 | Substack-Drafter (**default disabled**) | Thursday 18:00 weekly (when `INSTALL_SUBSTACK_DRAFTER=1`) | HybridRouter (Qwen3-14B local → Sonnet 4.6 fallback); reads writing-voice-modes SKILL.md verbatim; 5-week voice rotation (sean/sedaris/kerouac/thompson/vonnegut) | $0–0.10/run (cap $0.10) |
 

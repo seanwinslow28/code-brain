@@ -11,7 +11,9 @@ by flush.py on repeated errors, and by phase6_gatecheck.py on failing gates
 
 from __future__ import annotations
 
+import json
 import logging
+from pathlib import Path
 
 import httpx
 
@@ -150,3 +152,78 @@ def notify_gate_check_fail(*, criterion: str, detail: str = "") -> None:
         )
     except PushoverError as exc:
         logger.error("Pushover notify_gate_check_fail send failed: %s", exc)
+
+
+# ── Job Feed strong-fit push (2026-06-18) ────────────────────────────────────
+# Instant phone buzz when the job_feed agent surfaces a STRONG role fit (>=4),
+# the companion to the email digest. Reuses the existing Pushover Keychain creds
+# (no new secret). Best-effort: never raises into the agent run. A per-day
+# .pushed-<date>.json ledger dedupes by db_id so the 7 morning fires never
+# re-push the same role. `fits` are the agent's (db_id, Posting, ScoringResult)
+# tuples (see JobDB.scored_today); attributes are read duck-typed.
+
+def build_strong_fits_push(fits: list[tuple]) -> tuple[str, str]:
+    """Return (title, message) summarizing the strong fits. Pure."""
+    n = len(fits)
+    title = f"{n} strong job fit{'' if n == 1 else 's'}"
+    lines = [f"★{s.fit_score} {p.company} — {p.title}" for (_db_id, p, s) in fits[:5]]
+    if n > 5:
+        lines.append(f"+{n - 5} more")
+    return title, "\n".join(lines)
+
+
+def _load_push_ledger(path: Path) -> set[int]:
+    if not path.exists():
+        return set()
+    try:
+        return set(json.loads(path.read_text(encoding="utf-8")))
+    except (json.JSONDecodeError, ValueError, OSError):
+        return set()
+
+
+def _append_push_ledger(path: Path, ids: list[int]) -> None:
+    current = _load_push_ledger(path)
+    current.update(ids)
+    path.write_text(json.dumps(sorted(current)), encoding="utf-8")
+
+
+def maybe_push_strong_fits(
+    *,
+    push_cfg: dict | None,
+    fits: list[tuple],
+    ledger_path: Path,
+    today_iso: str,
+    send_fn=None,
+) -> dict:
+    """Best-effort: push any new strong fits (>= min_fit_score). Never raises.
+
+    Returns {"pushed": int, "error": str | None}. A disabled config or no new
+    strong fits is a no-op. `send_fn` is injectable for tests (defaults to
+    send_push). Reuses the existing pushover_user_key / pushover_app_token
+    Keychain creds.
+    """
+    if not push_cfg or not push_cfg.get("enabled", False):
+        return {"pushed": 0, "error": None}
+
+    min_fit_score = int(push_cfg.get("min_fit_score", 4))
+    already = _load_push_ledger(ledger_path)
+    new_fits = [
+        f
+        for f in fits
+        if f[2].fit_score is not None
+        and f[2].fit_score >= min_fit_score
+        and f[0] not in already
+    ]
+    if not new_fits:
+        return {"pushed": 0, "error": None}
+
+    title, message = build_strong_fits_push(new_fits)
+    sender = send_fn or send_push
+    try:
+        sender(title=title, message=message, priority=1)
+    except PushoverError as exc:
+        logger.error("Pushover strong-fit push failed: %s", exc)
+        return {"pushed": 0, "error": str(exc)}
+
+    _append_push_ledger(ledger_path, [db_id for (db_id, _p, _s) in new_fits])
+    return {"pushed": len(new_fits), "error": None}

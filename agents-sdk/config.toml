@@ -416,6 +416,29 @@ pushover_app_token_keychain = "pushover_app_token"
 # is the always-on agent driver; no agent wakes the MBP anymore.
 notify_on = ["agent_error", "gate_check_fail"]
 
+# ─── Job Feed email digest (2026-06-18) ──────────────────────────────────────
+# After the job_feed agent writes its daily roll-up, email new qualifying fits
+# to Sean's inbox so the Gmail app notifies him away from the desk. Disabled by
+# default — flip enabled=true AFTER storing BOTH creds in Keychain (no contact
+# data in this tracked file; recipient = sender = the Gmail account):
+#   python3 lib/keychain.py set gmail_address you@gmail.com
+#   python3 lib/keychain.py set gmail_app_password <16-char Gmail App Password>
+# Requires 2-Step Verification on the Google account to mint an App Password.
+[notifications.email]
+enabled = true         # opt-in switch — true only after both Keychain creds exist
+min_fit_score = 3      # email strong (>=4) + medium (3); set 4 for strong-only
+smtp_host = "smtp.gmail.com"
+smtp_port = 465
+
+# ─── Job Feed strong-fit push (2026-06-18) ───────────────────────────────────
+# Instant Pushover phone buzz when job_feed surfaces a STRONG fit (>=4) — the
+# companion to the email digest. Reuses the existing Pushover Keychain creds
+# (pushover_user_key / pushover_app_token) — NO new secret. Flip enabled=true to
+# turn on; no credential step needed if Pushover already works for agent errors.
+[notifications.push_strong_fits]
+enabled = true         # opt-in switch
+min_fit_score = 4      # push only strong fits; lower to 3 to also push medium
+
 # ─── Knowledge-Loop Consumer Activation (Phase B, 2026-04-25) ──────────
 # Read by `.claude/hooks/session-start-inject-index.sh` to gate the
 # SessionStart `additionalContext` injection of vault/knowledge/index.md.
