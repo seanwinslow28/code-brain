@@ -4,17 +4,17 @@ type: concept
 sources:
   - 00_inbox/tickets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-16
-updated: 2026-06-16
+created: 2026-06-19
+updated: 2026-06-19
 ---
 
 ## Definition
 
-This pattern describes the fragile dependency between an agent's operational runtime environment and its underlying system interpreter. When a package manager like Homebrew upgrades a core binary (e.g., Python), it changes the executable's cryptographic hash (cdhash). If the operating system's service manager (launchd) caches this hash, the upgrade invalidates the cache without updating the running service configuration. This creates a silent failure mode where the agent process is killed by the OS for code-signing violations, yet the source code and scripts remain perfectly valid on disk.
+This pattern describes the fragile dependency between an agent's operational runtime environment and its execution schedule. When a system-level update alters the binary identity or code-signing hash of the interpreter, the operating system's launch daemon invalidates its cached state for any jobs relying on that specific binary path. This creates a silent failure mode where the agent fleet appears healthy in configuration but is completely inert because the OS refuses to bootstrap the stale cache entries.
 
 ## Context
 
-Sean's entire knowledge vault relies on automated agents (synthesizer, indexer, deep-researcher) firing on schedule. A runtime-model coupling failure means the 'knowledge loop' breaks overnight without any error logs in the application layer, only a kernel-level termination. This forces Sean to manually intervene via CLI to restore service, undermining the autonomy he is trying to build.
+Sean's entire job-hunt automation pipeline relies on precise timing and state continuity. A runtime break means missed daily notes, stalled research queues, and broken feedback loops during critical career transition periods, forcing manual intervention that breaks the 'set-and-forget' illusion of his system.
 
 ## Evidence
 
@@ -24,8 +24,8 @@ Sean's entire knowledge vault relies on automated agents (synthesizer, indexer, 
 
 ## Examples
 
-- Recovering manually 2026-06-11 09:15 via launchctl bootout+bootstrap of the 5 jobs
-- Durable fix still open: either (a) uv-managed pinned interpreter under the repo so brew can't move the binary, or (b) a post-brew upgrade hook that re-boot
+- Five specific launchd jobs (daily-morning, meta-agent, vault-indexer, vault-synthesizer, deep-researcher) were killed simultaneously due to a single Python interpreter upgrade.
+- Recovery required manual execution of `launchctl bootout` and `bootstrap` commands to clear the stale cache and re-register the valid binary.
 
 ## Related Concepts
 

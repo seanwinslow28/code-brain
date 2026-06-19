@@ -37,19 +37,19 @@ def _render_markdown(session, profile, user_query: str, cost_usd: float) -> str:
     lines.append("## Council responses\n")
     for r in session.responses:
         lines.append(f"### {r['model_id']}\n")
-        lines.append(r["content"])
+        lines.append(r["content"] or "_(no response: model returned null)_")
         lines.append("")
 
     lines.append("## Cross-rankings\n")
     for rk in session.rankings:
         lines.append(f"### Judge: {rk['judge_model']}\n")
         lines.append(f"- **Order:** {' > '.join(rk['ranking'])}")
-        lines.append(f"- **Reasoning:** {rk['reasoning']}")
+        lines.append(f"- **Reasoning:** {rk['reasoning'] or '_(no reasoning returned)_'}")
         lines.append("")
 
     lines.append("## Chairman synthesis\n")
     lines.append(f"_Chairman model: `{session.chairman_response.model_id}`_\n")
-    lines.append(session.chairman_response.content)
+    lines.append(session.chairman_response.content or "_(no response: chairman returned null)_")
     lines.append("")
     return "\n".join(lines)
 
