@@ -1,13 +1,15 @@
 ---
 name: script-writing
-description: Screenplay writing for animated short films. Covers industry-standard screenplay format, scene structure, beat sheets, dialogue craft, visual action lines, shot descriptions for animation handoff, and table reads. Use when asked about "write a script", "screenplay", "beat sheet", "scene breakdown", "dialogue", "animated short", "storyboard script", or "shot descriptions".
+description: Screenplay format, structure, and production handoff for animated short films. Covers industry-standard screenplay format, beat sheets, short-form structural patterns (therefore/but, kishotenketsu, want engine), scene breakdowns, shot descriptions for animation handoff, and table reads. Use when asked about "write a script", "screenplay", "beat sheet", "scene breakdown", "outline a short", "animated short", "storyboard script", "shot descriptions", or "format this as a screenplay". For voice, jokes, dialogue punch-up, and how it should SOUND like Sean, pair with `screenwriting-modes`.
 ---
 
 # Script Writing (Animated Shorts)
 
 ## Purpose
 
-Write screenplays for animated short films using industry-standard format. This skill covers the full writing process from concept through production-ready script: beat sheets for structure, screenplay formatting for execution, dialogue craft for character voice, and shot descriptions that hand off cleanly to the animation pipeline.
+Write screenplays for animated short films using industry-standard format. This skill owns **format, beat structure (ORDER), and production handoff** — beat sheets, screenplay formatting, short-form structural patterns, scene breakdowns, and shot descriptions that hand off cleanly to the animation pipeline.
+
+**This skill owns ORDER; `screenwriting-modes` owns SENTENCES.** Format and beat-order live here; voice, jokes, dialogue mechanics, taste, and Sean's signature moves live in `screenwriting-modes` (the screen twin of `writing-voice-modes`). Keeping them separate is deliberate: when a structure skill writes the actual sentences, its phrasing flattens the voice. Generate structure here, draft voice there, then format here. See **Integration with `screenwriting-modes`** below.
 
 ## When to Use
 
@@ -203,7 +205,24 @@ Add between beats 4 and 5:
 **Closing Image:** [Last thing — mirrors/transforms the opening]
 ```
 
+## Short-Form Structural Patterns
+
+These are the structural spines for a 3–5 minute short — ORDER, not voice. Pick one as the skeleton, then draft the voice with `screenwriting-modes`.
+
+| Pattern | Spine | Best for |
+|:--------|:------|:---------|
+| **Therefore/But engine** (Pixar) | Every beat connects via "therefore" (consequence) or "but" (complication) — never "and then." Want X → THEREFORE try A → BUT the flaw → THEREFORE try B → BUT catastrophic escalation → THEREFORE confront the flaw. | Causal comedy that escalates; the default propulsion engine. |
+| **Want engine** (Pixar) | Give the protagonist one primal, instantly readable desire. Comedy = absurd attempts to get it; success is irrelevant. No exposition — the Want IS the character. | Wordless or near-wordless shorts; instant setups. |
+| **Kishotenketsu** (Miyazaki) | Four parts, no antagonist: Ki (establish routine) → Sho (deepen, low stakes) → Ten (an unrelated chaotic non-sequitur shatters the tone) → Ketsu (character adapts to a new equilibrium). | Disruption-of-calm comedy where conflict-escalation would feel forced. |
+| **Trope-autopsy spine** (Sean-native) | Stand a narrator/frame outside a cliché (the quit-your-job-for-family movie, the New-Year's-reinvention myth) and flick it across the runtime via Declare-then-Puncture. | Parody/satire shorts; pairs with the Ironic Narrator move in `screenwriting-modes`. |
+
+**Callback payoff debt:** anything planted gets paid off before the end, preferably physically — but in Sean's work this is *reflexive, not engineered*. Structure the spine; let the callbacks emerge in the voice draft (see `screenwriting-modes`). Don't pre-plan "a setup for later."
+
+**Choosing endings (structural):** cathartic resolution (Pixar/Waititi) vs. deflationary/ambiguous (Kaufman/Miyazaki). For Sean, the closer is almost always a **dirty victory** — a real win with the squalor still in frame — and the closing image mirrors the opening, transformed. Keep the emotional mechanics in `screenwriting-modes`; here, just make sure the beat sheet *has* a closing-image beat that earns it.
+
 ## Dialogue Craft
+
+These are the format-level fundamentals — they keep dialogue clean and producible. The *voice* layer (how Sean's characters actually sound: register-contrast casting, status-assigned verbal fingerprints, the confession deluge, comic under-reaction) lives in `screenwriting-modes`. Use these rules to keep dialogue tight; use that skill to make it sound like him.
 
 ### Rules for Animation Dialogue
 
@@ -259,6 +278,19 @@ For reviewing a draft with fresh eyes:
 4. **Trim pass** — Can any scene be cut without losing the story? (If yes, cut it.)
 5. **Opening/closing mirror** — Does the final image reflect or transform the opening?
 
+## Integration with `screenwriting-modes`
+
+The two skills compose. This one owns format, beat order, and handoff; `screenwriting-modes` owns voice, jokes, taste, and the emotional engine.
+
+**Order of operations:**
+
+1. **Structure here** — pick a structural spine, build the beat sheet, lock the closing-image beat.
+2. **Voice there** — draft the actual scenes/dialogue with `screenwriting-modes`, loose and fast. Sean drafts voice-first, format-second (run-on prose dialogue blocks) — that is the rule, not a mistake. Don't train the looseness out at this stage.
+3. **Format here** — run the format pass over the voice draft: scene headings, character cues, parentheticals, transitions, page timing.
+4. **Table read** — review with the protocol above.
+
+**When structure and voice disagree:** a `CUT TO:` is format, structure, *and* a joke at once. If a structural beat and a voice move collide on one of these, resolve toward the joke — the cut exists because it's funny. But voice doesn't get to blow up the beat order to land a gag: compress the joke to fit the structure instead.
+
 ## Success Criteria
 
 - [ ] Beat sheet maps emotional arc with clear purpose per beat
@@ -271,6 +303,7 @@ For reviewing a draft with fresh eyes:
 
 ## Related Skills
 
+- `screenwriting-modes` — The voice/taste twin (calibrated to Sean). Owns how dialogue and action SOUND, the six filmmaker modes, the signature-moves table, and the WHAT layer. Pair on every creative script; this skill provides the structural frame, that one provides the voice within it.
 - `animation-pipeline` — Takes the finished script into production (Stage 1 input)
 - `creative-director` — Project planning, critique rubrics, creative vision
 - `2d-animation-principles` — Animation rules that inform shot descriptions and timing cues
@@ -281,7 +314,7 @@ For reviewing a draft with fresh eyes:
 "Help me outline a short film about [concept]"
 "Write a beat sheet for a 5-minute animated short"
 "Write the screenplay for scene 3"
-"Polish this dialogue — it feels flat"
+"Pick a structural spine for this short"
 "Break this script into shots for storyboarding"
 "Do a table read on this draft"
 "Format this as a proper screenplay"
