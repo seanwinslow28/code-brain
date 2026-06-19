@@ -1,0 +1,30 @@
+{
+  "antigravity_calls": 0,
+  "antigravity_failures": 0,
+  "antigravity_last_error": "",
+  "antigravity_skipped": 6,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 1,
+  "backfill_articles_critiqued": 5,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/connections/vibe-coding-synergy-for-cultural-and-technical-alignment.md",
+    "vault/knowledge/expansions/batch-export.md",
+    "vault/knowledge/expansions/jitter-ai.md",
+    "vault/knowledge/expansions/connections/adops-automation-and-daily-drive-agent-synergy.md",
+    "vault/knowledge/expansions/connections/agent-fleet-reliability-and-automation-pipeline.md"
+  ],
+  "codex_calls": 6,
+  "codex_failures": 0,
+  "codex_last_error": "",
+  "codex_tokens_total": 187863,
+  "duration_seconds": 127.06,
+  "error": "",
+  "expansions_written": [
+    "vault/knowledge/expansions/harness-engineering-invariant.md"
+  ],
+  "run_id": "2026-06-19T03:30:05",
+  "status": "ok",
+  "warnings": [
+    "antigravity disabled (codex-only mode)"
+  ]
+}

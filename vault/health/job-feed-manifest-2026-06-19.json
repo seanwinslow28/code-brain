@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-19",
+  "runs": [
+    {
+      "fired_at": "2026-06-19T08:00:05.128368",
+      "fetch_total": 4787,
+      "rules_passed": 27,
+      "rules_rejected": 500,
+      "llm_scored": 18,
+      "llm_failed": 9,
+      "mbp_reachable": true,
+      "duration_sec": 224.68,
+      "failed_pollers": [],
+      "short_circuited": false
+    },
+    {
+      "fired_at": "2026-06-19T08:30:05.877790",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 9,
+      "llm_failed": 0,
+      "mbp_reachable": true,
+      "duration_sec": 39.61,
+      "failed_pollers": [],
+      "short_circuited": false
+    }
+  ]
+}
