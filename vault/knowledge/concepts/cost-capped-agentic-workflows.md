@@ -2,10 +2,10 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-06-15-kickoff-agent-cost-calculator.md
+  - knowledge/concepts/cost-capped-agentic-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-06-16
-updated: 2026-06-16
+created: 2026-06-19
+updated: 2026-06-19
 ---
 
 ## Definition

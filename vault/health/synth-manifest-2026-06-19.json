@@ -1,0 +1,29 @@
+{
+  "clusters_sampled": 40,
+  "concept_paths": [
+    "vault/knowledge/concepts/supervision-as-the-new-ai-edge.md",
+    "vault/knowledge/concepts/harness-engineering-invariant.md",
+    "vault/knowledge/concepts/runtime-model-coupling.md",
+    "vault/knowledge/concepts/cost-capped-agentic-workflows.md",
+    "vault/knowledge/concepts/infrastructure-status-and-agent-failure.md"
+  ],
+  "concepts_written": 5,
+  "connection_paths": [
+    "vault/knowledge/connections/maintenance-surface-vs-capability-trade-off.md",
+    "vault/knowledge/connections/the-fragility-of-automated-career-continuity.md"
+  ],
+  "connections_written": 2,
+  "duration_seconds": 3196.58,
+  "edges_rejected": 1,
+  "edges_written": 2,
+  "files_processed": 15,
+  "model_used": "qwen3-14b",
+  "rejected_count": 1,
+  "rejected_reasons": {
+    "thin-definition": 1
+  },
+  "run_id": "2026-06-19T02:30:03",
+  "skipped_thin_source": 0,
+  "status": "partial",
+  "wol_status": "mbp_awake"
+}

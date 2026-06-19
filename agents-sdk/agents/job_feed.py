@@ -31,11 +31,13 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from lib.config import load_config
 from lib.hybrid_router import HybridRouter
 from lib.job_db import JobDB, DEDUPE_NEW, DEDUPE_SCORED
+from lib.job_email import maybe_send_digest
 from lib.job_renderer import read_roll_up_frontmatter, render_roll_up
 from lib.job_rules import apply_rules
 from lib.job_scoring import JobScoringUnavailable, score_posting
 from lib.job_sources import fetch_all, load_watchlist_slugs
 from lib.logging_setup import record_run, setup_logger
+from lib.pushover import maybe_push_strong_fits
 
 AGENT_NAME = "job-feed"
 DISABLE_FLAG = Path(__file__).parent.parent / ".disable-job-feed"
@@ -74,6 +76,8 @@ async def run_pipeline(
     fallback_disabled: bool,
     router: HybridRouter | None,
     completion_fn: CompletionFn | None,
+    email_cfg: dict | None = None,
+    push_cfg: dict | None = None,
 ) -> dict:
     """Single end-to-end pipeline run. Returns a run-report dict for the manifest."""
     t0 = time.monotonic()
@@ -167,6 +171,33 @@ async def run_pipeline(
         encoding="utf-8",
     )
 
+    # 6b. Email digest — best-effort, no-op unless [notifications.email].enabled.
+    # Per-day .emailed-<date>.json ledger dedupes by db_id so the 7 morning
+    # fires never re-send the same role. Never raises into the run.
+    email_result = maybe_send_digest(
+        email_cfg=email_cfg,
+        fits=scored,
+        ledger_path=roll_up_dir / f".emailed-{today_iso}.json",
+        today_iso=today_iso,
+    )
+    report["emailed"] = email_result["sent"]
+    if email_result["error"]:
+        report["email_error"] = email_result["error"]
+
+    # 6c. Pushover instant push for strong fits (>=4) — best-effort, no-op unless
+    # [notifications.push_strong_fits].enabled. Separate .pushed-<date>.json
+    # ledger so push + email dedupe independently. Reuses existing Keychain
+    # Pushover creds (no new secret). Never raises into the run.
+    push_result = maybe_push_strong_fits(
+        push_cfg=push_cfg,
+        fits=scored,
+        ledger_path=roll_up_dir / f".pushed-{today_iso}.json",
+        today_iso=today_iso,
+    )
+    report["pushed"] = push_result["pushed"]
+    if push_result["error"]:
+        report["push_error"] = push_result["error"]
+
     # 7. Write run manifest (append today's run to the daily manifest)
     manifest_path = manifest_dir / f"job-feed-manifest-{today_iso}.json"
     if manifest_path.exists():
@@ -222,6 +253,8 @@ def main() -> int:
     with open(raw_cfg_path, "rb") as f:
         raw = tomllib.load(f)
     router = HybridRouter.from_config(raw)
+    email_cfg = raw.get("notifications", {}).get("email", {})
+    push_cfg = raw.get("notifications", {}).get("push_strong_fits", {})
 
     t0 = time.time()
     try:
@@ -238,6 +271,8 @@ def main() -> int:
             fallback_disabled=jf_cfg.get("fallback_disabled", True),
             router=router,
             completion_fn=None,
+            email_cfg=email_cfg,
+            push_cfg=push_cfg,
         ))
         status = "success" if report.get("short_circuited") or report.get("llm_failed", 0) == 0 else "partial"
         logger.info(

@@ -416,6 +416,29 @@ pushover_app_token_keychain = "pushover_app_token"
 # is the always-on agent driver; no agent wakes the MBP anymore.
 notify_on = ["agent_error", "gate_check_fail"]
 
+# ─── Job Feed email digest (2026-06-18) ──────────────────────────────────────
+# After the job_feed agent writes its daily roll-up, email new qualifying fits
+# to Sean's inbox so the Gmail app notifies him away from the desk. Disabled by
+# default — flip enabled=true AFTER storing BOTH creds in Keychain (no contact
+# data in this tracked file; recipient = sender = the Gmail account):
+#   python3 lib/keychain.py set gmail_address you@gmail.com
+#   python3 lib/keychain.py set gmail_app_password <16-char Gmail App Password>
+# Requires 2-Step Verification on the Google account to mint an App Password.
+[notifications.email]
+enabled = true         # opt-in switch — true only after both Keychain creds exist
+min_fit_score = 3      # email strong (>=4) + medium (3); set 4 for strong-only
+smtp_host = "smtp.gmail.com"
+smtp_port = 465
+
+# ─── Job Feed strong-fit push (2026-06-18) ───────────────────────────────────
+# Instant Pushover phone buzz when job_feed surfaces a STRONG fit (>=4) — the
+# companion to the email digest. Reuses the existing Pushover Keychain creds
+# (pushover_user_key / pushover_app_token) — NO new secret. Flip enabled=true to
+# turn on; no credential step needed if Pushover already works for agent errors.
+[notifications.push_strong_fits]
+enabled = true         # opt-in switch
+min_fit_score = 4      # push only strong fits; lower to 3 to also push medium
+
 # ─── Knowledge-Loop Consumer Activation (Phase B, 2026-04-25) ──────────
 # Read by `.claude/hooks/session-start-inject-index.sh` to gate the
 # SessionStart `additionalContext` injection of vault/knowledge/index.md.
@@ -485,7 +508,7 @@ max_budget_usd = 0.00
 # Schedule: 7 launchd fires 8:00–11:00 AM ET; idempotency in agents/job_feed.py.
 enabled = true
 max_cost_usd = 0.10
-http_timeout_sec = 10
+http_timeout_sec = 20  # 2026-06-18: bumped 10→20. Several valid ATS boards (elevenlabs, lovable, hubspot, klaviyo, webflow, cursor) were dying as ReadTimeout at 10s under concurrency; all respond within ~20s. Pollers run in parallel so wall-clock impact is bounded by the slowest single board, not additive.
 rate_limit_per_host_per_sec = 1
 mbp_probe_timeout_sec = 2
 mbp_probe_url = "http://seans-macbook-pro.local:11434/api/tags"  # Ollama on MBP (mDNS — see [routing.machines.macbook_pro]). 2026-05-26: switched from LM Studio :1234/v1/models to Ollama :11434/api/tags.
