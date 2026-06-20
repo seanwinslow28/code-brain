@@ -51,7 +51,7 @@ The pipeline runs in a fixed order; each stage feeds the next.
 1. **GATHER** — Collect fresh evidence into a real-URL bundle:
    - `last30days` social backbone (recent user complaints / discussion).
    - Perplexity **Sonar** article harvest (tier-scaled: `sonar` → `sonar-reasoning-pro` → `sonar-deep-research`).
-   - A web collector for supplementary articles.
+   - A **web collector** (Exa if `EXA_API_KEY` set, else Brave) for supplementary fresh articles, with a full-page fetch fallback for quote density.
    Every piece of evidence carries the URL it was fetched from. Nothing enters the pipeline without a source.
 
 2. **FUSE** — Run the gathered evidence through an OpenRouter **Fusion panel** (Opus / GPT / Gemini / Grok at standard tier) plus an outer **judge** model. The panel reads the evidence and proposes candidate pain points; the judge consolidates and de-duplicates them.
@@ -124,7 +124,8 @@ Always pass this as an **absolute** path under `/Users/seanwinslow/Code-Brain/co
 
 - Every CLI invocation does a pre-flight cap check. If the estimated cost would exceed the per-run cap, the CLI refuses with a clear `Budget rejected:` error (exit code 2).
 - Per-run caps: **quick $0.50 / standard $1.50 / deep $4.00**.
-- Discovery's own daily/monthly caps: **$10/day, $50/month**. These are independent of the council's caps but tracked in the **same** spend file — discovery rows are tagged `tool="discovery"` so the two tools never cross-deplete each other while staying in one coherent ledger.
+- Discovery's own daily/monthly caps: **$10/day, $50/month**. These are independent of the council's caps but tracked in the **same** spend file — discovery rows are tagged `tool="discovery"` so the two tools never cross-deplete each other while staying in one coherent ledger (enforced bidirectionally via per-tool pre-flight as of Phase 2).
+- Recorded spend uses OpenRouter's authoritative `usage.cost` when available, falling back to a conservative token estimate.
 - `deep` tier **confirms the cost interactively before running** (pass `--yes` only when Sean has authorized it for this run).
 - `--force` bypasses **only the per-run cap** — the daily and monthly caps are still enforced. Use it only when Sean explicitly authorizes it for this query.
 - After a successful run the CLI records actual spend to `/Users/seanwinslow/Code-Brain/code-brain/vault/health/council-spend-{YYYY-MM-DD}.json` (canonical — same file across all repos, so daily/monthly caps stay coherent).

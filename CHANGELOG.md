@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### fusion-discovery-council Phase 2 — hardened slice (2026-06-20)
+- Wired the Brave web provider + full-page fetch fallback; last30days collector fixed (real plugin path, `--emit=json` parser, dropped the bogus `--agent` flag) — all three Stage-1 collectors now contribute evidence.
+- Gather orchestrator returns per-collector status (logged to stderr + recorded in the session JSON) so empty runs are diagnosable.
+- Cost integrity: record OpenRouter's authoritative `usage.cost`; surface Fusion HTTP errors verbatim with no retry on 4xx; council + discovery budgets now isolated bidirectionally via per-tool pre-flight.
+- Plan: docs/superpowers/plans/2026-06-20-fusion-discovery-council-phase2.md. Deferred to Phase 3+: extended collectors (review/GitHub/intent/Q&A/trends), the substack lens.
+
 ### Added — `fusion-discovery-council` skill — evidence→idea discovery (2026-06-20)
 - **New skill `fusion-discovery-council`** — multi-model fresh-evidence discovery that mines real user pain points and frames them as ranked, evidence-linked PM opportunities. Authored as a sidecar to the existing LLM Council; it reuses the council `client.py`/`budget.py` spine and ships as a new subpackage `tools/llm-council/council/discovery/`.
 - **Four-stage pipeline:** GATHER (last30days + Perplexity Sonar + web) → FUSE (OpenRouter Fusion panel + judge) → VERIFY (anti-fabrication gate) → FRAME (pm lens → idea ledger). Sonar appears **only in Stage-1 gather** (it is `tools=False`) and never sits on the Fusion panel.

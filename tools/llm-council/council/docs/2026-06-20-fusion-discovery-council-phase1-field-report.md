@@ -111,6 +111,8 @@ The 4 ranked opportunities (score = intensity × (1 + distinct-source-domains)):
 | **Exa web** | 1b | optional (no key) | already implemented; needs `EXA_API_KEY` |
 | **last30days social** | 1a | 🔧 key present, **path + flag + parser wrong** | medium (below) |
 
+> **RESOLVED in Phase 2** ([plan](../../../../docs/superpowers/plans/2026-06-20-fusion-discovery-council-phase2.md)). Brave web provider wired (Task 1, commits `08cad85`/`bd4add6`) with a full-page fetch fallback bounded to `text/*` + a 2 MB cap. last30days collector rewritten (Task 3, commit `b098409`): real plugin path, `--emit=json` parser, `--agent` dropped. **Live caveat:** the upstream `last30days.py` currently crashes before emitting JSON (`INCLUDE_SOURCES=None` → `AttributeError`), so the live last30 path yields `[]` (collector degrades safely) until that upstream config bug is fixed — see the Phase 2 field report. Original findings retained below.
+
 ### 5.1 Brave web search — wire the missing provider
 `council/discovery/gather/web.py` only implements `_default_exa_search()`; `collect_web` checks `EXA_API_KEY` only. The module docstring says "Exa/Brave" but the Brave half was never built. Sean has `BRAVE_API_KEY` in `.env`.
 
@@ -172,6 +174,8 @@ if search is ...:
 ## 6. Code-review punch list (deferred → Phase 2 backlog)
 
 From the whole-implementation review. None block Phase 1; all are real Phase-2 hardening.
+
+> **RESOLVED in Phase 2** ([plan](../../../../docs/superpowers/plans/2026-06-20-fusion-discovery-council-phase2.md)) — Important items 1–4 all shipped: **1** budget symmetry → council CLI now uses `preflight_tool(tool="council")` (Task 6, commit `7dea981`); **2** authoritative `usage.cost` captured in `FusionResult` + preferred in `_estimate_cost` (Task 4, commit `ad4deed`); **3** Fusion HTTP errors surfaced verbatim with no retry on 4xx (Task 5, commit `8edb75e`); **4** per-collector gather status threaded to stderr + session JSON so empty runs are diagnosable (Task 2, commit `51c2c61`). Minor items 5–8 remain Phase 3 polish. Original findings retained below.
 
 **Important:**
 1. **Budget isolation is one-directional.** `record_spend` always bumps the daily file's aggregate `total`, and council's `preflight` reads that `total` — so discovery spend reduces *council's* headroom, though the reverse is correctly prevented (discovery reads tool-scoped sums). Conservative (never overspends) but contradicts the SKILL.md "never cross-deplete" claim. **Fix:** route council's preflight through `preflight_tool(tool="council")` too, or compute `total` per-tool. Add a test asserting a large discovery spend doesn't change council headroom.
