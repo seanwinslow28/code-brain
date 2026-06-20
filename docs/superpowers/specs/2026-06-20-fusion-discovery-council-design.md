@@ -157,7 +157,7 @@ Reasoning models priced per-million tokens. Web search billed per query. Discove
 - **Pre-flight cap check** (reuse council's guard): estimate panel-token + web-query + judge cost; refuse if over the per-run cap; surface the error verbatim.
 - The real cost variable is web-tool calls = `panel_size × max_tool_calls × per-query price` → bounded per tier via `max_tool_calls`.
 - `deep` **confirms cost before running** (like Gemini DR Max).
-- **Spend file:** reuse `vault/health/council-spend-{YYYY-MM-DD}.json` (shared source of truth) but with **independent per-tool daily/monthly caps** (tag records by tool) so discovery runs can't starve the critique budget. Proposed caps: $7/day, $40/month for discovery, separate from council's.
+- **Spend file:** reuse `vault/health/council-spend-{YYYY-MM-DD}.json` (shared source of truth) but with **independent per-tool daily/monthly caps** (tag records by tool) so discovery runs can't starve the critique budget. Caps: **$10/day, $50/month** for discovery, separate from council's.
 
 ## 9. Output
 
