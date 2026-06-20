@@ -2,12 +2,13 @@
 """4-stage orchestrator: gather → fuse → verify → frame → render."""
 
 import json
+import sys
 import time
 import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
-from council.discovery.fusion import FusionResult, fuse as _fuse
+from council.discovery.fusion import FusionResult, FusionError, fuse as _fuse
 from council.discovery.frame import frame_pm
 from council.discovery.gather import gather_evidence
 from council.discovery.render import render_ledger
@@ -27,6 +28,13 @@ class DiscoveryResult:
     verified_count: int
     dropped_count: int
     session: dict
+
+
+class DiscoveryFailed(Exception):
+    def __init__(self, message: str, *, cost_usd: float = 0.0, session: dict | None = None):
+        super().__init__(message)
+        self.cost_usd = cost_usd
+        self.session = session or {}
 
 
 def _estimate_cost(fr: FusionResult, tier) -> float:
@@ -53,7 +61,22 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str,
                                         "gather_status": gather_status})
 
     fuse = fuse_fn or _fuse
-    fr = await fuse(api_key=api_key, bundle=bundle, tier=tcfg, topic=topic)
+    try:
+        fr = await fuse(api_key=api_key, bundle=bundle, tier=tcfg, topic=topic)
+    except FusionError as e:
+        cost = round(getattr(e, "cost", 0.0) or 0.0, 4)
+        fail_session = {
+            "id": session_id, "topic": topic, "lens": lens, "tier": tier,
+            "evidence_count": len(bundle.records), "gather_status": gather_status,
+            "failed_stage": "fuse", "error": str(e), "cost_usd": cost,
+        }
+        if sessions_dir is not None:
+            try:
+                sessions_dir.mkdir(parents=True, exist_ok=True)
+                (sessions_dir / f"{session_id}.json").write_text(json.dumps(fail_session, indent=2))
+            except Exception as write_err:  # never let a failed diagnostic write eat the spend record
+                print(f"[discovery] failed to persist failure session {session_id}: {write_err}", file=sys.stderr)
+        raise DiscoveryFailed(str(e), cost_usd=cost, session=fail_session) from e
 
     verified = verify_pain_points(fr.pain_points, bundle)
     dropped = sum(1 for v in verified if not v.verified)

@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 from rich.console import Console
 
 from council.budget import BudgetExceeded, preflight_tool, record_spend
-from council.discovery.pipeline import run_discovery
+from council.discovery.pipeline import run_discovery, DiscoveryFailed
 from council.discovery.tiers import get_tier
 
 console = Console()
@@ -55,7 +55,20 @@ def main(topic, lens, tier, output, force, yes, skip_budget_check):
         result = asyncio.run(run_discovery(
             topic=topic, lens=lens, tier=tier, api_key=api_key, sessions_dir=sessions_dir,
         ))
-    except Exception as e:  # surface pipeline failure cleanly
+    except DiscoveryFailed as e:
+        if not skip_budget_check and e.cost_usd > 0:
+            record_spend(amount=e.cost_usd, profile=tier, tag=f"discovery-{lens}",
+                         on_date=date.today(), tool="discovery")
+        status = (e.session or {}).get("gather_status", {})
+        console.print(f"[red]Discovery failed at fuse:[/red] {e}")
+        if status:
+            console.print(f"[dim]Gather status: {status}[/dim]")
+        if e.cost_usd > 0:
+            console.print(f"[dim]Recorded spend: ${e.cost_usd:.2f} (billed even though FUSE failed)[/dim]")
+        else:
+            console.print("[dim]No spend recorded (FUSE failed before billing)[/dim]")
+        sys.exit(3)
+    except Exception as e:  # surface other pipeline failures cleanly (no spend incurred pre-fuse)
         console.print(f"[red]Discovery failed: {e}[/red]")
         sys.exit(3)
 

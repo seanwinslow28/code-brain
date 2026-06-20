@@ -30,3 +30,21 @@ def test_cli_deep_requires_confirmation(tmp_path, monkeypatch, fake_api_key):
         "--skip-budget-check",
     ], input="n\n")
     assert res.exit_code != 0 or "aborted" in res.output.lower()
+
+
+def test_cli_records_spend_and_echoes_status_on_failure(tmp_path, monkeypatch, fake_api_key, tmp_spend_dir):
+    from datetime import date
+    from council import budget
+    from council.discovery.pipeline import DiscoveryFailed
+
+    async def boom(**kw):
+        raise DiscoveryFailed("fuse blew up", cost_usd=0.42,
+                              session={"gather_status": {"sonar": "ok: 3 records (3 found)"}})
+    monkeypatch.setattr("council.discovery.__main__.run_discovery", boom)
+
+    res = CliRunner().invoke(main, [
+        "obsidian", "--lens", "pm", "--tier", "quick", "--output", str(tmp_path / "o.md"),
+    ])
+    assert res.exit_code == 3
+    assert "Gather status" in res.output
+    assert round(budget.tool_total_for_day(date.today(), "discovery"), 2) == 0.42
