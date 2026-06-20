@@ -59,11 +59,18 @@ def _default_brave_search(api_key: str):
 
 async def _simple_fetch(url: str, timeout: float = 20.0) -> str:
     """Best-effort full-page text for quote density. Crude tag-strip; Phase 3 may swap a real parser."""
+    # Phase 3: add scheme/private-IP allow-list before fetching attacker-influenced URLs.
     try:
         async with httpx.AsyncClient(timeout=timeout, follow_redirects=True) as c:
             r = await c.get(url, headers={"User-Agent": "Mozilla/5.0 (discovery-bot)"})
             r.raise_for_status()
-            html = r.text
+            ctype = r.headers.get("content-type", "")
+            # A Brave result URL can point at a PDF/binary/huge page. Skip non-HTML
+            # bodies (missing content-type is allowed, not over-constrained) and cap
+            # the text we scan so an oversized page can't blow up memory.
+            if ctype and not (ctype.startswith("text/") or ctype.startswith("application/xhtml")):
+                return ""
+            html = r.text[:2_000_000]
     except httpx.HTTPError:
         return ""
     text = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", html)
