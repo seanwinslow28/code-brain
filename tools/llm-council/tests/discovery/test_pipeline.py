@@ -11,7 +11,7 @@ async def test_pipeline_end_to_end_drops_unverified():
     bundle.add(EvidenceRecord("reddit", "r/pm", "https://r.com/1", "2026-06-18", "exports fail silently", 9))
 
     async def gather_fn(**kw):
-        return bundle
+        return bundle, {"sonar": "ok: 1 records (1 found)"}
 
     async def fuse_fn(**kw):
         return FusionResult(pain_points=[
@@ -31,7 +31,7 @@ async def test_pipeline_end_to_end_drops_unverified():
 @pytest.mark.asyncio
 async def test_empty_bundle_renders_low_signal():
     async def gather_fn(**kw):
-        return EvidenceBundle()
+        return EvidenceBundle(), {"sonar": "ok: 0 records (0 found)"}
     res = await run_discovery(topic="x", lens="pm", tier="quick",
                               api_key="k", gather_fn=gather_fn, fuse_fn=None)
     assert res.verified_count == 0

@@ -41,13 +41,14 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str,
     session_id = f"{time.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:6]}"
 
     gather = gather_fn or gather_evidence
-    bundle = await gather(topic=topic, tier=tcfg, api_key=api_key)
+    bundle, gather_status = await gather(topic=topic, tier=tcfg, api_key=api_key)
 
     if not bundle.records:
         md = render_ledger(topic=topic, lens=lens, tier=tier, cards=[], quote_bank=[],
                            fusion_result=FusionResult(), cost_usd=0.0, dropped_count=0)
         return DiscoveryResult(markdown=md, cost_usd=0.0, verified_count=0, dropped_count=0,
-                               session={"id": session_id, "topic": topic, "empty": True})
+                               session={"id": session_id, "topic": topic, "empty": True,
+                                        "gather_status": gather_status})
 
     fuse = fuse_fn or _fuse
     fr = await fuse(api_key=api_key, bundle=bundle, tier=tcfg, topic=topic)
@@ -64,6 +65,7 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str,
         "id": session_id, "topic": topic, "lens": lens, "tier": tier,
         "evidence_count": len(bundle.records), "verified": len(cards),
         "dropped": dropped, "cost_usd": cost,
+        "gather_status": gather_status,
         "blind_spots": fr.blind_spots, "contradictions": fr.contradictions,
     }
     if sessions_dir is not None:
