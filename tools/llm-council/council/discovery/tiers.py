@@ -18,15 +18,15 @@ class TierConfig:
 _STANDARD_PANEL = (
     "anthropic/claude-opus-4.7",
     "openai/gpt-5.5",
-    "google/gemini-pro-latest",
+    "~google/gemini-pro-latest",
     "x-ai/grok-4.3",
 )
 
 TIERS: dict[str, TierConfig] = {
     "quick": TierConfig(
         name="quick",
-        panel=("google/gemini-pro-latest", "x-ai/grok-4.3", "deepseek/deepseek-v4-pro"),
-        judge="google/gemini-pro-latest",
+        panel=("~google/gemini-pro-latest", "x-ai/grok-4.3", "deepseek/deepseek-v4-pro"),
+        judge="~google/gemini-pro-latest",
         max_tool_calls=3,
         max_cost_per_run=0.50,
         sonar_model="perplexity/sonar",
@@ -45,7 +45,7 @@ TIERS: dict[str, TierConfig] = {
     ),
     "deep": TierConfig(
         name="deep",
-        panel=_STANDARD_PANEL + ("deepseek/deepseek-v4-pro", "mistralai/mistral-medium-3.5"),
+        panel=_STANDARD_PANEL + ("deepseek/deepseek-v4-pro", "mistralai/mistral-medium-3-5"),
         judge="anthropic/claude-opus-4.7",
         max_tool_calls=8,
         max_cost_per_run=4.00,

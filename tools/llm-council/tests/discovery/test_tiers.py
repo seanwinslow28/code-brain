@@ -12,7 +12,7 @@ def test_standard_panel_is_four_frontier_vendors():
     assert t.panel == (
         "anthropic/claude-opus-4.7",
         "openai/gpt-5.5",
-        "google/gemini-pro-latest",
+        "~google/gemini-pro-latest",
         "x-ai/grok-4.3",
     )
     assert t.judge == "anthropic/claude-opus-4.7"
@@ -28,7 +28,7 @@ def test_sonar_never_in_panel():
 def test_deep_adds_two_more_lineages_and_confirms_cost():
     t = get_tier("deep")
     assert "deepseek/deepseek-v4-pro" in t.panel
-    assert "mistralai/mistral-medium-3.5" in t.panel
+    assert "mistralai/mistral-medium-3-5" in t.panel
     assert t.max_cost_per_run == 4.00
 
 

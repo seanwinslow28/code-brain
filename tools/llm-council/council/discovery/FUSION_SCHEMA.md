@@ -55,14 +55,15 @@ plan's IDs are **rejected by the live API** (`400: "<id> is not a valid model ID
 | `perplexity/sonar`               | ✅ valid    | —                                             |
 | `perplexity/sonar-reasoning-pro` | ✅ valid    | —                                             |
 | `perplexity/sonar-deep-research` | ✅ valid    | —                                             |
-| `google/gemini-pro-latest`       | ❌ **400**  | `google/gemini-2.5-pro` (concrete) · `~google/gemini-pro-latest` (alias variant exists) |
-| `mistralai/mistral-medium-3.5`   | ❌ **400**  | `mistralai/mistral-medium-3-5` · `mistralai/mistral-medium-3.1` · `mistralai/mistral-medium-3` |
+| `google/gemini-pro-latest`       | ❌ **400**  | **`~google/gemini-pro-latest`** ← now wired in (floating "latest" alias → resolves to `google/gemini-3.1-pro-preview`) |
+| `mistralai/mistral-medium-3.5`   | ❌ **400**  | **`mistralai/mistral-medium-3-5`** ← now wired in (resolves to `mistralai/mistral-medium-3.5-20260430`) |
 
-**Impact:** the mock-based test suite is unaffected (it never calls the live API). But a **live**
-`quick`/`standard` run (judge or panel = `gemini-pro-latest`) and a live `deep` run (panel includes
-`mistral-medium-3.5`) will 400 until these IDs are swapped in `tiers.py`. This is flagged to Sean as
-a decision: the committed `tiers.py` keeps the plan's IDs (per "implement what's written"); swapping
-to valid IDs is a one-line-per-tier change that also requires updating the Task 2 assertions.
+**RESOLVED 2026-06-20 (Sean-directed):** `tiers.py` now ships the validated IDs — `~google/gemini-pro-latest`
+(the tilde is OpenRouter's floating-"latest" alias) in the `quick` judge+panel and the `standard`/`deep`
+panel, and `mistralai/mistral-medium-3-5` in the `deep` panel. Both were confirmed accepted by the live
+chat endpoint (HTTP 200, `max_tokens=1` probe). The Task 2 assertions were updated to match. The bare
+`google/gemini-pro-latest` and dotted `mistralai/mistral-medium-3.5` from the design spec remain invalid —
+do not reintroduce them.
 
 ---
 
