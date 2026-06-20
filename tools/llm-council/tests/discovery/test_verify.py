@@ -28,3 +28,15 @@ def test_real_url_but_quote_not_present_fails():
     pt = CandidatePainPoint("Drift", "s", quotes=["totally different invented complaint"], urls=["https://r.com/1"])
     out = verify_pain_points([pt], _bundle())
     assert out[0].verified is False
+
+
+def test_embedding_attack_fails():
+    # A fabricated long "quote" that merely EMBEDS the real bundle quote must NOT verify.
+    pt = CandidatePainPoint(
+        "Embedded fabrication", "s",
+        quotes=["exports fail silently because the vendor secretly sells your data"],
+        urls=["https://r.com/1"],
+    )
+    out = verify_pain_points([pt], _bundle())
+    assert out[0].verified is False
+    assert out[0].supporting_urls == []

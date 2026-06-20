@@ -22,7 +22,7 @@ def _quote_present_at_url(bundle: EvidenceBundle, url: str, quotes: list[str]) -
         hay = rec.quote.strip().lower()
         for q in quotes:
             needle = q.strip().lower()
-            if needle and (needle in hay or hay in needle):
+            if needle and needle in hay:  # cited quote must actually appear in the fetched text (no reverse-containment — that lets fabricated long quotes embed a real short one)
                 return True
     return False
 
