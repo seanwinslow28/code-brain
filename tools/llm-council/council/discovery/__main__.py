@@ -7,6 +7,7 @@ from datetime import date
 from pathlib import Path
 
 import click
+from dotenv import load_dotenv
 from rich.console import Console
 
 from council.budget import BudgetExceeded, preflight_tool, record_spend
@@ -27,6 +28,7 @@ DISCOVERY_MONTHLY_CAP = 50.0
 @click.option("--yes", is_flag=True, help="Auto-confirm deep-tier cost.")
 @click.option("--skip-budget-check", is_flag=True, hidden=True)
 def main(topic, lens, tier, output, force, yes, skip_budget_check):
+    load_dotenv()  # resolve OPENROUTER_API_KEY from the repo-root .env (mirrors council.client)
     tcfg = get_tier(tier)
 
     if tier == "deep" and not yes:
