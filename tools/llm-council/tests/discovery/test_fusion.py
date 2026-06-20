@@ -48,6 +48,20 @@ async def test_fuse_retries_then_raises_on_unparseable(httpx_mock):
 
 
 @pytest.mark.asyncio
+async def test_fuse_surfaces_4xx_body_without_retry(httpx_mock):
+    from council.discovery.evidence import EvidenceBundle, EvidenceRecord
+    from council.discovery.tiers import get_tier
+    from council.discovery import fusion
+    httpx_mock.add_response(status_code=400, json={"error": {"message": "max_tool_calls too high"}})
+    b = EvidenceBundle(); b.add(EvidenceRecord("reddit", "r", "https://r.com/1", "", "q"))
+    with pytest.raises(fusion.FusionError) as exc:
+        await fusion.fuse(api_key="k", bundle=b, tier=get_tier("quick"), topic="x")
+    assert "max_tool_calls too high" in str(exc.value)
+    assert "400" in str(exc.value)
+    assert len(httpx_mock.get_requests()) == 1          # no retry on HTTP error
+
+
+@pytest.mark.asyncio
 async def test_fuse_captures_usage_cost(httpx_mock):
     import json
     payload = {"pain_points": [{"title": "T", "summary": "s", "quotes": ["q"], "urls": ["https://r.com/1"]}]}

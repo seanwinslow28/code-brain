@@ -124,7 +124,12 @@ async def fuse(*, api_key: str, bundle: EvidenceBundle, tier: TierConfig, topic:
     async with httpx.AsyncClient(timeout=timeout) as client:
         for attempt in range(2):
             resp = await client.post(OPENROUTER_URL, headers=headers, json=body)
-            resp.raise_for_status()
+            if resp.status_code >= 400:
+                try:
+                    msg = resp.json().get("error", {}).get("message") or resp.text
+                except Exception:
+                    msg = resp.text
+                raise FusionError(f"OpenRouter {resp.status_code} on Fusion call (judge={tier.judge}): {msg}")
             payload = resp.json()
             choice = (payload.get("choices") or [{}])[0]
             content = choice.get("message", {}).get("content", "")
