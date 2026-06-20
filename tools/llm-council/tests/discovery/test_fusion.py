@@ -45,3 +45,19 @@ async def test_fuse_retries_then_raises_on_unparseable(httpx_mock):
     httpx_mock.add_response(json={"choices": [{"message": {"content": "still not json"}}], "usage": {}})
     with pytest.raises(fusion.FusionError):
         await fusion.fuse(api_key="k", bundle=_bundle(), tier=get_tier("quick"), topic="x")
+
+
+@pytest.mark.asyncio
+async def test_fuse_captures_usage_cost(httpx_mock):
+    import json
+    payload = {"pain_points": [{"title": "T", "summary": "s", "quotes": ["q"], "urls": ["https://r.com/1"]}]}
+    httpx_mock.add_response(json={
+        "choices": [{"message": {"content": json.dumps(payload)}}],
+        "usage": {"prompt_tokens": 100, "completion_tokens": 50, "cost": 0.4231},
+    })
+    from council.discovery.evidence import EvidenceBundle, EvidenceRecord
+    from council.discovery.tiers import get_tier
+    from council.discovery import fusion
+    b = EvidenceBundle(); b.add(EvidenceRecord("reddit", "r", "https://r.com/1", "", "q"))
+    res = await fusion.fuse(api_key="k", bundle=b, tier=get_tier("quick"), topic="x")
+    assert res.cost == 0.4231

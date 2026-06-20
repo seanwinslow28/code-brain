@@ -28,6 +28,16 @@ async def test_pipeline_end_to_end_drops_unverified():
     assert res.cost_usd > 0
 
 
+def test_estimate_cost_prefers_usage_cost():
+    from council.discovery.pipeline import _estimate_cost
+    from council.discovery.fusion import FusionResult
+    from council.discovery.tiers import get_tier
+    fr = FusionResult(tokens_in=1000, tokens_out=300, web_calls=4, cost=0.88)
+    assert _estimate_cost(fr, get_tier("standard")) == 0.88
+    fr0 = FusionResult(tokens_in=1000, tokens_out=300, web_calls=4, cost=0.0)
+    assert _estimate_cost(fr0, get_tier("standard")) > 0      # falls back to token estimate
+
+
 @pytest.mark.asyncio
 async def test_empty_bundle_renders_low_signal():
     async def gather_fn(**kw):

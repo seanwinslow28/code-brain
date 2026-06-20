@@ -36,6 +36,7 @@ class FusionResult:
     tokens_in: int = 0
     tokens_out: int = 0
     web_calls: int = 0
+    cost: float = 0.0
 
 
 def _evidence_block(bundle: EvidenceBundle) -> str:
@@ -113,6 +114,7 @@ def _to_result(data: dict, usage: dict) -> FusionResult:
         tokens_in=usage.get("prompt_tokens", 0),
         tokens_out=usage.get("completion_tokens", 0),
         web_calls=_web_calls(usage),
+        cost=float(usage.get("cost", 0.0) or 0.0),
     )
 
 

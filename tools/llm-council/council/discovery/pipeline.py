@@ -30,6 +30,8 @@ class DiscoveryResult:
 
 
 def _estimate_cost(fr: FusionResult, tier) -> float:
+    if getattr(fr, "cost", 0.0):
+        return round(fr.cost, 4)                  # authoritative OpenRouter usage.cost
     tok = (fr.tokens_in / 1000.0) * DISCOVERY_PRICE_IN_PER_1K + (fr.tokens_out / 1000.0) * DISCOVERY_PRICE_OUT_PER_1K
     web = len(tier.panel) * tier.max_tool_calls * WEB_QUERY_PRICE
     return round(tok + web, 4)
