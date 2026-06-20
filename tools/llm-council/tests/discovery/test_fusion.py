@@ -78,6 +78,45 @@ async def test_fuse_captures_usage_cost(httpx_mock):
     assert res.cost == 0.4231
 
 
+@pytest.mark.asyncio
+async def test_fuse_failure_carries_summed_cost(httpx_mock):
+    from council.discovery.evidence import EvidenceBundle, EvidenceRecord
+    from council.discovery.tiers import get_tier
+    # Two 200 responses, both valid envelopes but content lacks pain_points → unparseable twice.
+    for c in (0.10, 0.12):
+        httpx_mock.add_response(json={"choices": [{"message": {"content": "no json here"}}], "usage": {"cost": c}})
+    b = EvidenceBundle(); b.add(EvidenceRecord("reddit", "r", "https://r.com/1", "", "q"))
+    with pytest.raises(fusion.FusionError) as exc:
+        await fusion.fuse(api_key="k", bundle=b, tier=get_tier("quick"), topic="x")
+    assert round(exc.value.cost, 4) == 0.22          # billed both attempts
+
+
+@pytest.mark.asyncio
+async def test_fuse_success_after_retry_sums_cost(httpx_mock):
+    import json
+    from council.discovery.evidence import EvidenceBundle, EvidenceRecord
+    from council.discovery.tiers import get_tier
+    httpx_mock.add_response(json={"choices": [{"message": {"content": "garbage"}}], "usage": {"cost": 0.10}})
+    good = {"pain_points": [{"title": "T", "summary": "s", "quotes": ["q"], "urls": ["https://r.com/1"]}]}
+    httpx_mock.add_response(json={"choices": [{"message": {"content": json.dumps(good)}}], "usage": {"cost": 0.12}})
+    b = EvidenceBundle(); b.add(EvidenceRecord("reddit", "r", "https://r.com/1", "", "q"))
+    res = await fusion.fuse(api_key="k", bundle=b, tier=get_tier("quick"), topic="x")
+    assert round(res.cost, 4) == 0.22
+
+
+@pytest.mark.asyncio
+async def test_fuse_4xx_on_second_attempt_carries_first_attempt_cost(httpx_mock):
+    from council.discovery.evidence import EvidenceBundle, EvidenceRecord
+    from council.discovery.tiers import get_tier
+    # Attempt 1: 200, billed 0.10, unparseable → retry. Attempt 2: 4xx.
+    httpx_mock.add_response(json={"choices": [{"message": {"content": "no json"}}], "usage": {"cost": 0.10}})
+    httpx_mock.add_response(status_code=429, json={"error": {"message": "rate limited"}})
+    b = EvidenceBundle(); b.add(EvidenceRecord("reddit", "r", "https://r.com/1", "", "q"))
+    with pytest.raises(fusion.FusionError) as exc:
+        await fusion.fuse(api_key="k", bundle=b, tier=get_tier("quick"), topic="x")
+    assert round(exc.value.cost, 4) == 0.10
+
+
 def test_strip_sse_padding_removes_comment_lines():
     raw = ": OPENROUTER PROCESSING\n\n: OPENROUTER PROCESSING\n\n{\"a\": 1}"
     assert _strip_sse_padding(raw) == '{"a": 1}'

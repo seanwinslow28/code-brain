@@ -13,7 +13,9 @@ OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 
 class FusionError(Exception):
-    pass
+    def __init__(self, message: str, *, cost: float = 0.0):
+        super().__init__(message)
+        self.cost = cost
 
 
 def _strip_sse_padding(text: str) -> str:
@@ -184,6 +186,7 @@ def _to_result(data: dict, usage: dict) -> FusionResult:
 async def fuse(*, api_key: str, bundle: EvidenceBundle, tier: TierConfig, topic: str, timeout: float = 180.0) -> FusionResult:
     body = _build_body(bundle, tier, topic)
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+    total_cost = 0.0
     async with httpx.AsyncClient(timeout=timeout) as client:
         for attempt in range(2):
             resp = await client.post(OPENROUTER_URL, headers=headers, json=body)
@@ -192,12 +195,22 @@ async def fuse(*, api_key: str, bundle: EvidenceBundle, tier: TierConfig, topic:
                     msg = resp.json().get("error", {}).get("message") or resp.text
                 except Exception:
                     msg = resp.text
-                raise FusionError(f"OpenRouter {resp.status_code} on Fusion call (judge={tier.judge}): {msg}")
+                raise FusionError(
+                    f"OpenRouter {resp.status_code} on Fusion call (judge={tier.judge}): {msg}",
+                    cost=round(total_cost, 6),
+                )
             payload = _decode_payload(resp)
+            usage = payload.get("usage", {}) or {}
+            total_cost += float(usage.get("cost", 0.0) or 0.0)
             choice = (payload.get("choices") or [{}])[0]
             content = choice.get("message", {}).get("content", "")
             data = _parse(content)
             if data is not None:
-                return _to_result(data, payload.get("usage", {}))
+                res = _to_result(data, usage)
+                res.cost = round(total_cost, 6)        # sum across attempts (fixes retry double-bill)
+                return res
             body["messages"][0]["content"] = _JUDGE_INSTRUCTION + "\n\nReturn ONLY the JSON object."
-        raise FusionError("Fusion judge did not return parseable pain-point JSON after retry.")
+        raise FusionError(
+            "Fusion judge did not return parseable pain-point JSON after retry.",
+            cost=round(total_cost, 6),
+        )
