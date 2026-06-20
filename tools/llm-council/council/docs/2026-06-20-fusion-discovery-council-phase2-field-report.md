@@ -9,7 +9,7 @@ phase1_report: 2026-06-20-fusion-discovery-council-phase1-field-report.md
 
 # fusion-discovery-council — Phase 2 Field Report
 
-**One-line:** All seven Phase-2 tasks landed green via subagent-driven TDD (implement → spec review → code-quality review per task). The hardening goals are met — the discovery slice is now genuinely multi-source, empty runs are diagnosable, and the three cost/budget-integrity gaps are closed. One real rollover blocks *live* last30 yield (an upstream plugin crash, not our code); everything else deferred is intentional Phase-3 polish.
+**One-line:** All seven Phase-2 tasks landed green via subagent-driven TDD (implement → spec review → code-quality review per task). The hardening goals are met in code — the discovery slice is now genuinely multi-source, empty runs are diagnosable, and the three cost/budget-integrity gaps are closed (76 tests pass). A live e2e then surfaced **two real Phase-3 blockers for live discovery** (a Fusion-response robustness gap from OpenRouter SSE keep-alive padding, and unrecorded spend on Fusion failure — §5/§6) plus the known upstream last30days crash. These are live-integration hardening, not Phase-2 regressions; the rest of the deferred backlog is intentional polish.
 
 ## 1. Executive summary
 
@@ -78,18 +78,26 @@ None of these block Phase 2. They are the accumulated Minor review nits + the li
 - *Task 5 / `fusion.py`* — `error.get("message")` assumes `error` is a dict; a string-typed `error` degrades to `resp.text` via the `except` (safe). No test covers the non-JSON-body branch. 5xx is (correctly) not retried — worth a one-line "why" comment.
 - *Task 6 / test* — could add a second assertion seeding a same-month prior-day discovery spend to also regression-guard the *monthly* (not just daily) cross-depletion path.
 
+**Live-surfaced (2026-06-20 e2e — two `quick`-tier runs, both failed at the Fusion response-parse step) — promote to Phase-3 priorities:**
+- **Fusion response robustness — `fuse()`'s `payload = resp.json()` is unguarded against OpenRouter's SSE keep-alive padding.** Run 2 raised a raw `json.JSONDecodeError: Expecting value: line 181 column 1 (char 990)` — ≈180 newlines in 990 chars is the signature of OpenRouter's `: OPENROUTER PROCESSING` keep-alive comment lines, which it streams as padding while a *slow* request (Fusion runs the panel + multiple web tool calls) processes, even on a non-stream request. `resp.json()` chokes on the non-JSON prefix and the error escapes as a bare `JSONDecodeError` (not even a `FusionError`). Run 1 failed differently (`message.content` parsed but wasn't the clean `{"pain_points":…}` object → `_parse` None twice → `FusionError`). Both trace to the same fragility: the live Fusion envelope is not always the clean single-JSON body the Task-4 spike captured. **Intermittent** — Phase 1 run #2 (also `quick`, same Gemini judge) succeeded at $0.39 when the call was fast enough to skip padding. **Fix:** strip leading SSE comment lines / extract the JSON object defensively before `resp.json()`/`_parse` (e.g. request `Accept: application/json` and tolerate `: ` keep-alive lines, or read `resp.text`, drop comment lines, then `json.loads`); harden `_parse` to locate the first balanced `{…}`. Capturing the raw bytes (one more paid call) would confirm the SSE-padding hypothesis byte-for-byte.
+- **Failed-Fusion spend is not recorded locally (cost-integrity leak).** `record_spend` runs only *after* a successful `run_discovery` ([__main__.py](../__main__.py) line 64-66); any post-gather failure exits at the `except` (line 58) having already billed OpenRouter for the Fusion call(s). Both failed e2e runs billed real money (200-status calls — and run 1 made two via the reprompt-retry) yet recorded $0. Sibling of the Phase-1 punch-list item 3, but for the 200-unparseable / unguarded-`resp.json()` path rather than 4xx. **Fix:** capture `usage.cost` from the raw payload and `record_spend` it even on a parse failure (record in a `finally`/`except`, or have `fuse` attach usage to the raised error).
+- **A `fuse` failure also loses `gather_status`.** It's persisted to the session JSON only on the success path, so neither failed run left a session artifact showing the per-collector statuses. **Fix:** write the session JSON (with `gather_status`) before the fuse call, or in the failure path, so an empty/failed run is diagnosable from disk, not just stderr.
+
 **Out of scope by design (Phase 3+ per the plan):**
 - Extended tier-gated collectors (review sites + competitor-weakness mining, GitHub Issues/Canny/roadmaps, demand/intent, Q&A, trend velocity) + quote-verbatim hardening (WebFetch Sonar citations).
 - The `substack` lens (`frame_substack` + handoff into `substack-value-engine`) and the `--segment` creative-signal qualifier (Phase 4).
 - Phase-1 Minor punch-list items 5–8 (frame quote-bank positional pairing, Sonar verbatim WebFetch, URL escaping in render, `web_calls` in the estimate).
 
-## 6. Recommended next step
+## 6. Live e2e — attempted (2026-06-20, Sean-approved spend)
 
-**Live end-to-end run (plan Task 7, Step 6 — gated on spend approval).** A single `quick`-tier run (~$0.50, hard-capped) would confirm three Phase-2 wins at once against the live API: multi-source evidence (Sonar + Brave), non-error `gather_status` per collector in the session JSON, and `usage.cost`-based spend recording. Suggested:
+Ran the plan's Task-7 Step-6 command twice at `quick` tier:
 ```bash
-cd /Users/seanwinslow/Code-Brain/code-brain/tools/llm-council && uv run python -m council.discovery \
-  "obsidian plugins" --lens pm --tier quick --output /tmp/p2-ledger.md
+uv run python -m council.discovery "obsidian plugins" --lens pm --tier quick --output /tmp/p2-ledger.md
 ```
-Expect the session JSON under `/tmp/.discovery-sessions/` to show `gather_status` like `{"sonar": "ok: …", "web": "ok: …", "last30": "error: …"}` (last30 erroring is the known upstream bug, now *visible* rather than silent — which is exactly the diagnosability Phase 2 bought).
+**Both runs failed at the Fusion response-parse step** (run 1: `FusionError` "did not return parseable pain-point JSON after retry"; run 2: bare `JSONDecodeError: Expecting value: line 181 column 1 (char 990)`). Root cause + fixes are in §5 under "Live-surfaced" — the short version is OpenRouter's SSE keep-alive padding on slow Fusion calls breaking `fuse()`'s unguarded `resp.json()`/`_parse`, plus the fact that these failures bill OpenRouter but record $0 locally.
 
-Not run autonomously: the plan flags this as spend-gated and asks for Sean's go-ahead first.
+**What the live run did and didn't confirm:**
+- ✅ The pipeline reached FUSE, so GATHER ran without raising (Sonar + Brave fired; last30 degraded silently to `[]` per the known upstream bug). No collector exception propagated — Task 2's `gather(return_exceptions=True)` shielding held.
+- ❌ Could not observe `gather_status` (lost when `fuse` raised before the session write) or confirm `usage.cost` recording (FUSE never returned). The Phase-2 *code* is verified by the 76-passing suite; the live API path has a pre-existing Fusion-response robustness gap that this run usefully surfaced.
+
+**Recommended Phase-3 first move:** harden the Fusion response read (strip SSE comment lines / extract the JSON object) + record spend on failure (§5), then re-run the live e2e to confirm `gather_status` + `usage.cost` end-to-end. This is the single highest-leverage Phase-3 item — without it, live discovery is intermittently unusable regardless of how good the evidence is. The implementation work itself is complete and green; this is a live-integration hardening, not a regression.
