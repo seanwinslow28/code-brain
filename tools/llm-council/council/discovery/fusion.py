@@ -16,6 +16,67 @@ class FusionError(Exception):
     pass
 
 
+def _strip_sse_padding(text: str) -> str:
+    """Drop OpenRouter SSE keep-alive comment lines (": OPENROUTER PROCESSING") + blanks."""
+    return "\n".join(
+        ln for ln in text.splitlines() if ln.strip() and not ln.lstrip().startswith(":")
+    ).strip()
+
+
+def _first_json_object(text: str) -> dict | None:
+    """Return the first balanced {...} object found in text (string-aware), or None.
+
+    Scans from the first "{" anywhere in the text — it does not require the object
+    to be at top level, and will dig into a leading array to find it.
+    """
+    start = text.find("{")
+    if start < 0:
+        return None
+    depth = 0
+    in_str = False
+    esc = False
+    for i in range(start, len(text)):
+        ch = text[i]
+        if in_str:
+            if esc:
+                esc = False
+            elif ch == "\\":
+                esc = True
+            elif ch == '"':
+                in_str = False
+            continue
+        if ch == '"':
+            in_str = True
+        elif ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                try:
+                    return json.loads(text[start:i + 1])
+                except json.JSONDecodeError:
+                    return None
+    return None
+
+
+def _decode_payload(resp: httpx.Response) -> dict:
+    """Decode a Fusion HTTP response, tolerating OpenRouter SSE keep-alive padding."""
+    text = resp.text
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+    stripped = _strip_sse_padding(text)
+    try:
+        return json.loads(stripped)
+    except json.JSONDecodeError:
+        # `or text`: belt-and-suspenders fallback for when stripping nuked the whole body.
+        obj = _first_json_object(stripped or text)
+        if isinstance(obj, dict):
+            return obj
+        raise FusionError("Fusion response was not decodable JSON (after SSE-padding strip).")
+
+
 @dataclass
 class CandidatePainPoint:
     title: str
@@ -87,8 +148,10 @@ def _parse(content: str) -> dict | None:
     try:
         data = json.loads(text)
     except (json.JSONDecodeError, IndexError):
-        return None
-    return data if "pain_points" in data else None
+        data = _first_json_object(text)            # tolerate prose around the JSON
+    if isinstance(data, dict) and "pain_points" in data:
+        return data
+    return None
 
 
 def _web_calls(usage: dict) -> int:
@@ -130,7 +193,7 @@ async def fuse(*, api_key: str, bundle: EvidenceBundle, tier: TierConfig, topic:
                 except Exception:
                     msg = resp.text
                 raise FusionError(f"OpenRouter {resp.status_code} on Fusion call (judge={tier.judge}): {msg}")
-            payload = resp.json()
+            payload = _decode_payload(resp)
             choice = (payload.get("choices") or [{}])[0]
             content = choice.get("message", {}).get("content", "")
             data = _parse(content)
