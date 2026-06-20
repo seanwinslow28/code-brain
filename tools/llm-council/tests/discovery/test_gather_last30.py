@@ -56,3 +56,78 @@ async def test_collect_returns_empty_on_runner_failure():
     async def boom(topic):
         raise FileNotFoundError("no script")
     assert await collect_last30("x", runner=boom) == []
+
+
+@pytest.mark.asyncio
+async def test_collect_breadcrumb_on_non_json(capsys):
+    async def runner(topic):
+        return "AttributeError: 'NoneType' object has no attribute 'split'"
+    recs = await collect_last30("x", runner=runner)
+    assert recs == []
+    assert "[last30]" in capsys.readouterr().err
+
+
+@pytest.mark.asyncio
+async def test_collect_empty_output_returns_empty(capsys):
+    async def runner(topic):
+        return "   \n"
+    recs = await collect_last30("x", runner=runner)
+    assert recs == []
+
+
+@pytest.mark.asyncio
+async def test_subprocess_runner_kills_and_reaps_on_timeout(monkeypatch):
+    import asyncio as _asyncio
+    from council.discovery.gather import last30
+
+    flags = {"kill": False, "wait": False}
+
+    class _FakeProc:
+        returncode = -9
+        async def communicate(self):
+            await _asyncio.sleep(999)  # hang → forces the timeout branch
+        def kill(self):
+            flags["kill"] = True
+        async def wait(self):
+            flags["wait"] = True
+
+    async def fake_exec(*a, **k):
+        return _FakeProc()
+
+    real_wait_for = _asyncio.wait_for
+    async def fast_wait_for(aw, timeout):
+        # use the REAL wait_for semantics (genuine cancellation of communicate()) but fast
+        return await real_wait_for(aw, timeout=0.05)
+
+    monkeypatch.setattr(last30.asyncio, "create_subprocess_exec", fake_exec)
+    monkeypatch.setattr(last30.asyncio, "wait_for", fast_wait_for)
+    monkeypatch.setattr(last30, "_find_last30_script", lambda: "/tmp/fake-last30.py")
+
+    with pytest.raises(_asyncio.TimeoutError):
+        await last30._subprocess_runner("x")
+    assert flags["kill"] is True and flags["wait"] is True  # child reaped, not orphaned
+
+
+@pytest.mark.asyncio
+async def test_subprocess_runner_breadcrumb_on_empty_stdout(monkeypatch, capsys):
+    from council.discovery.gather import last30
+
+    class _FakeProc:
+        returncode = 1
+        async def communicate(self):
+            return (b"", b"Traceback (most recent call last):\nAttributeError: 'NoneType' object has no attribute 'split'")
+        def kill(self):
+            pass
+        async def wait(self):
+            pass
+
+    async def fake_exec(*a, **k):
+        return _FakeProc()
+
+    monkeypatch.setattr(last30.asyncio, "create_subprocess_exec", fake_exec)
+    monkeypatch.setattr(last30, "_find_last30_script", lambda: "/tmp/fake-last30.py")
+
+    out = await last30._subprocess_runner("x")
+    assert out == ""
+    err = capsys.readouterr().err
+    assert "[last30]" in err and "empty stdout" in err   # stderr tail breadcrumb fired

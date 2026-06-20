@@ -7,6 +7,7 @@ JSON shape: report.to_dict() from that skill's lib/schema.py.
 import asyncio
 import json
 import shutil
+import sys
 from pathlib import Path
 
 from council.discovery.evidence import EvidenceRecord
@@ -83,8 +84,17 @@ async def _subprocess_runner(topic: str) -> str:
         py, str(script), topic, "--emit=json", "--quick", "--no-native-web",
         stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
     )
-    out, _ = await asyncio.wait_for(proc.communicate(), timeout=300)
-    return out.decode("utf-8", "replace")
+    try:
+        out, err = await asyncio.wait_for(proc.communicate(), timeout=300)
+    except asyncio.TimeoutError:
+        proc.kill()                          # reap the child so it can't orphan
+        await proc.wait()
+        raise
+    text = out.decode("utf-8", "replace")
+    if not text.strip():
+        tail = (err.decode("utf-8", "replace").strip().splitlines() or ["<no stderr>"])[-1]
+        print(f"[last30] empty stdout (exit {proc.returncode}); stderr tail: {tail}", file=sys.stderr)
+    return text
 
 
 async def collect_last30(topic: str, runner=_subprocess_runner) -> list[EvidenceRecord]:
@@ -92,8 +102,11 @@ async def collect_last30(topic: str, runner=_subprocess_runner) -> list[Evidence
         text = await runner(topic)
     except (FileNotFoundError, asyncio.TimeoutError):
         return []
+    if not text.strip():
+        return []
     try:
         data = json.loads(text)
     except (json.JSONDecodeError, ValueError):
+        print(f"[last30] non-JSON output; first 80 chars: {text.strip()[:80]!r}", file=sys.stderr)
         return []
     return parse_last30_json(data)
