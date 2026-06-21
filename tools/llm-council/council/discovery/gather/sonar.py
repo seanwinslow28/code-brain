@@ -5,7 +5,7 @@ import re
 import httpx
 
 from council.discovery.evidence import EvidenceRecord
-from council.discovery.gather.web import _simple_fetch, extract_quotes
+from council.discovery.gather.web import extract_quotes
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 _SENT = re.compile(r"[^.!?]{20,}[.!?]")
