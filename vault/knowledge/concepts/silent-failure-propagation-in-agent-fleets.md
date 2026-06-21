@@ -2,31 +2,30 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - 00_inbox/tickets.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-20.md
 tags: [auto-generated, phase-6]
-created: 2026-06-20
-updated: 2026-06-20
+created: 2026-06-21
+updated: 2026-06-21
 ---
 
 ## Definition
 
-This pattern describes a class of bugs where an upstream agent produces a valid but semantically empty output (such as `null` content), which downstream agents treat as a successful state rather than an error condition. Because the failure is silent at the source, it propagates through the pipeline until a rigid consumer (like a string joiner) encounters the invalid type and crashes. The critical invariant here is that success in one layer (the run completed) does not guarantee validity in the next layer (the data structure is intact), creating a hidden dependency on non-null assertions across agent boundaries.
+This mechanism refers to the phenomenon where individual agents report healthy status codes while their functional outputs are compromised or missing, leading to a false sense of operational completeness. In Sean's fleet, the vault-indexer and synthesizer report success despite the broader system failing to produce the daily note, because they operate on separate execution paths that do not validate the final user-facing artifact. This creates a visibility gap where infrastructure health metrics diverge from actual workflow utility.
 
 ## Context
 
-Sean's fleet relies on multiple LLM models (Gemini, Qwen, etc.) returning structured JSON. When one model returns null content due to safety filters or timeouts, the transcript renderer fails catastrophically because it assumes all responses are strings. This breaks the observability loop, preventing Sean from seeing that the run actually succeeded, which masks the true reliability profile of his multi-model strategy.
+Sean monitors agent health via the fleet status dashboard. If he only checks 'status=success' without verifying the existence of the daily note, he misses the critical failure in his morning routine automation.
 
 ## Evidence
 
-> gemini-pro returned null; recovered by reconstructing the .md from the session JSON archive
+> vault-indexer and vault-synthesizer ran successfully, maintaining continuous activity on building the core 'Vault-as-SSoT' infrastructure.
 
-> _render_markdown appends r["content"] (None) to lines, so "\n".join(lines) raises TypeError: sequence item N: expected str instance, NoneType found and the whole transcript fails to write even though the run + spend succeeded
+> Offline state of Alienware/ComfyUI prevents running key automation loops (e.g., animation pipelines or advanced testing environments).
 
 ## Examples
 
-- The `llm-council` transcript render crashes when any council model returns null content
-- Recovering the .md from the session JSON archive instead of relying on the rendered markdown
+- The meta-agent generated a report showing 7 active agents, yet the daily note was not created due to the morning agent's auth failure.
 
 ## Related Concepts
 
-[[Automation Reliability]] [[Infrastructure Status and Agent Failure]] [[Silent Failure Propagation in Agent Fleets]]
+[[Agent Health Monitoring]] [[Infrastructure Status]] [[Automation Reliability]]

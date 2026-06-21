@@ -2,31 +2,31 @@
 title: "Context Compounding"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/substack-drafts/archive/2026-06-05-raising-claude-post1-beatmap.md
+  - knowledge/expansions/connections/agent-health-and-knowledge-retrieval-interdependence.md
 tags: [auto-generated, phase-6]
-created: 2026-06-08
-updated: 2026-06-08
+created: 2026-06-21
+updated: 2026-06-21
 ---
 
 ## Definition
 
-This mechanism describes how value accumulates non-linearly in human-AI collaboration when raw, high-fidelity data is introduced incrementally over multiple sessions. Unlike standard context management which treats tokens as a finite budget to be optimized, this pattern views the accumulation of specific, personal artifacts (like screenplays, reactions, and reference lists) as a compounding asset that gradually narrows the gap between the AI's generalist output and the user's specific intent. The underlying invariant is that the quality of the final artifact is determined by the density and specificity of the historical data fed into the model, rather than the sophistication of the immediate instructions.
+A behavioral pattern where agents function as information foragers rather than simple index queryers, following scent to decide whether to exploit a patch, abandon it, or widen their search. This mechanism requires tracking the decision trace over search patches, specifically noting why a source was initially promising and what signals caused the scent to weaken. It shifts the focus from top-k chunk retrieval efficiency to the agent's ability to navigate the information landscape effectively.
 
 ## Context
 
-Sean's 'Raising Claude' post-1 beatmap explicitly lists 'eleven mined screenplays' and 'Cheese Gauntlet reactions' as evidence for the humbling of not one-shotting. He is building a 'Voiceprint Plugin' that productizes these design principles, turning the manual skill of supervision into a repeatable infrastructure. This concept explains why his job-hunt preparation involves 'portfolio-walkthrough fluency' rather than just memorizing answers; he is compounding context to demonstrate architectural defensibility.
+Sean's agents often retrieve knowledge but fail to synthesize it because they lack the behavioral frame for when to stop searching. By treating retrieval as foraging, Sean can optimize his agents to recognize when they have exhausted a 'patch' of useful information and need to pivot, preventing token waste on diminishing returns.
 
 ## Evidence
 
-> The method beats (cheese gauntlet, reference universe, script mining) are the EVIDENCE for this humbling, not the point.
+> Agents are not merely querying an index; they are following scent, deciding whether to exploit a patch, abandon it, or widen search.
 
-> Accept it's back-and-forth raising, not a prompt. (Artifacts: the method, the before/after, the linked kit.)
+> Retrieval is no longer “top-k chunks went in”; it becomes a decision trace over search patches.
 
 ## Examples
 
-- Mining eleven screenplays to create a 'reference universe' that pre-dates every machine, providing receipts that anchor Claude's output in Sean's specific cultural history.
-- Using the 'Cheese Gauntlet' reactions as raw material for hours of interaction, allowing the model to learn Sean's taste through exposure rather than description.
+- An agent abandoning a source because the 'scent' of relevance weakened after reading three paragraphs.
+- An agent widening its search when the initial patch failed to provide sufficient evidence for a claim.
 
 ## Related Concepts
 
-[[Context Compounding]] [[Supervision as the New AI Edge]] [[Vault as Agent Infrastructure]]
+[[Token Waste]] [[Indexing and Synthesis]]

@@ -2,31 +2,31 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - knowledge/concepts/cost-capped-agentic-workflows.md
+  - 00_inbox/tickets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-19
-updated: 2026-06-19
+created: 2026-06-21
+updated: 2026-06-21
 ---
 
 ## Definition
 
-This concept defines a control architecture where economic viability serves as the primary constraint for agent deployment, rather than technical capability alone. It establishes that the token cost of an AI model must be explicitly compared against the marginal value of human labor it displaces to determine feasibility. The mechanism relies on a break-even analysis where the 'self-host' or 'hybrid' scenario becomes viable only when the operational overhead exceeds the calculated token bill, which is often a fraction (0.1% to 0.5%) of the offset human cost.
+This mechanism refers to the architectural requirement that financial accounting for agent operations must be decoupled from execution success. When spend recording is gated behind a success condition, any failure in the processing logic results in unaccounted resource consumption, creating a blind spot in budget management. True cost control requires instrumentation of usage metrics at the point of request submission or response receipt, regardless of the semantic validity of the returned payload.
 
 ## Context
 
-Sean's job hunt strategy hinges on demonstrating that he can build tools that make these economic calculations visible and actionable for recruiters. By porting the `cost_model.py` logic into a public, interactive artifact, he transforms an abstract financial risk into a tangible product feature, proving his ability to bridge technical implementation with business value.
+Sean is building an agent fleet for job hunting and research where token costs are a primary constraint. Unrecorded spend from failed Fusion calls distorts his understanding of the true cost of discovery, making it impossible to accurately benchmark the efficiency of different model providers or prompt strategies.
 
 ## Evidence
 
-> The cost math ports cleanly from cost_model.py to a pure TS module with Vitest unit tests, which is also the strongest interview signal (tested math, not a spreadsheet).
+> failed Fusion calls bill OpenRouter but record $0 locally because record_spend is post-success only in __main__.py
 
-> The punchline that the token bill is 0.1 to 0.5 percent of the human labor it offsets.
+> run 1 FusionError did not return parseable and run 2 bare JSONDecodeError Expecting value line 181 column 1 char 990
 
 ## Examples
 
-- Porting the three scenarios and price table from cost_model.py to reproduce the printed table to the cent at default assumptions.
-- Adding a Vitest test that asserts parity between the TypeScript implementation and the Python source model.
+- OpenRouter streaming SSE keep-alive comments as padding that choke the unguarded payload extraction in fuse()
+- Stripping leading comment lines and extracting the first balanced JSON object before parsing to prevent JSONDecodeError
 
 ## Related Concepts
 
-[[Agentic Engineering Signal]] [[Portfolio Projects]]
+[[Cost-Capped Agentic Workflows]] [[Automation Reliability]] [[Token Waste]]

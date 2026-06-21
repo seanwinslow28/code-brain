@@ -2,32 +2,32 @@
 title: "The Tension Between Protocol Instrumentation and Regulatory Ambiguity"
 type: connection
 connects:
-  - Humor and Status Dynamics
   - Silent Failure Propagation in Agent Fleets
-  - Infrastructure Status
-created: 2026-06-20
-updated: 2026-06-20
+  - Cost-Capped Agentic Workflows
+  - Automation Reliability
+created: 2026-06-21
+updated: 2026-06-21
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the need for precise, observable states in automated systems and the ambiguous, often indifferent nature of human or environmental feedback. In screenwriting, this mirrors how characters navigate mechanical failures with social indifference; in agent fleets, it manifests as silent failures where the system state is clear but the 'clerk' (user/monitor) provides no immediate validation. This creates a risk where errors propagate because the lack of negative feedback is misinterpreted as success.
+There is a fundamental tension between the need for robust error handling in agentic pipelines and the ambiguity of what constitutes a 'failure' worth recording. When an agent fails to parse a response due to upstream formatting issues (like SSE comments), it often bypasses the success gate that triggers cost logging. This creates a regulatory gap where financial accountability is lost because the system treats the failure as a non-event rather than a billable event. The consequence is that Sean cannot accurately audit his spend, leading to potential budget overruns that are invisible in his local logs.
 
 ## Threads
 
-### [[Humor and Status Dynamics]]
-
-> The clerk watches Dennis struggle and does nothing. He just stares at him, deadpan. No fucks given.
-
 ### [[Silent Failure Propagation in Agent Fleets]]
 
-> The failure of the 'daily-driver morning' agent disrupts Sean's daily note generation, which in turn affects his creative studio workflow and knowledge maintenance.
+> Our fusion-discovery-council collector degrades safely to [] so the pipeline never crashes but last30 contributes zero live evidence until fixed
 
-### [[Infrastructure Status]]
+### [[Cost-Capped Agentic Workflows]]
 
-> The reliability of automation agents directly impacts Sean's ability to maintain consistent daily outputs such as notes, research, and creative work.
+> failed Fusion calls bill OpenRouter but record $0 locally because record_spend is post-success only in __main__.py
+
+### [[Automation Reliability]]
+
+> run 1 FusionError did not return parseable and run 2 bare JSONDecodeError Expecting value line 181 column 1 char 990
 
 ## Implications
 
-- Sean must design explicit 'status confirmation' mechanisms in his agent fleet that do not rely on the absence of errors, but on active acknowledgment of state changes.
-- When debugging workflow disruptions, Sean should look for 'deadpan' indicators—subtle shifts in output timing or format—rather than just hard crashes.
+- Sean must implement pre-success spend recording for all LLM calls to ensure accurate cost attribution even when parsing fails
+- The agent fleet's observability dashboard will show false positives for health if it only tracks successful runs rather than total attempts
