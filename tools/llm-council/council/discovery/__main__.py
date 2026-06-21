@@ -19,6 +19,14 @@ DISCOVERY_DAILY_CAP = 10.0
 DISCOVERY_MONTHLY_CAP = 50.0
 
 
+def _brief_path(output: Path) -> Path:
+    """Sibling path for the substack handoff brief: drop a trailing '-idea-ledger', add '-brief'."""
+    stem = output.stem
+    if stem.endswith("-idea-ledger"):
+        stem = stem[: -len("-idea-ledger")]
+    return output.with_name(f"{stem}-brief{output.suffix}")
+
+
 @click.command()
 @click.argument("topic")
 @click.option("--lens", type=click.Choice(["pm", "substack"]), default="pm")
@@ -74,10 +82,15 @@ def main(topic, lens, tier, output, force, yes, skip_budget_check):
 
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(result.markdown)
+    if lens == "substack" and result.brief_markdown:
+        brief = _brief_path(output)
+        brief.write_text(result.brief_markdown)
     if not skip_budget_check:
         record_spend(amount=result.cost_usd, profile=tier, tag=f"discovery-{lens}",
                      on_date=date.today(), tool="discovery")
     console.print(f"[green]Idea ledger written:[/green] {output}")
+    if lens == "substack" and result.brief_markdown:
+        console.print(f"[green]Substack handoff brief written:[/green] {_brief_path(output)}")
     console.print(f"[dim]Verified ideas: {result.verified_count} · dropped: {result.dropped_count} · ${result.cost_usd:.2f}[/dim]")
 
 
