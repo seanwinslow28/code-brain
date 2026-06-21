@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### fusion-discovery-council Phase 4 — extended collectors + fetch hardening (2026-06-20)
+- Three new free, fabrication-gate-compatible Stage-1 collectors, tier-gated per spec §6: review sites + competitor-weakness mining (Brave site-targeted) and GitHub Issues on `standard`/`deep`; Stack Exchange Q&A on `deep`. `quick` stays lean.
+- `_simple_fetch` SSRF/redirect allow-list: per-hop scheme + public-IP validation (blocks file://, private/loopback/link-local + cloud-metadata IPs, and redirects into them).
+- Sonar evidence hardened to verbatim quotes (WebFetch each citation, extract a true substring; falls back to the synthesized sentence) — strengthens the Stage-3 gate.
+- Folded §7b nits: `_first_json_object` scans forward past a malformed leading object; last30 timeout hoisted to a module constant.
+- Cost integrity: all new collectors are free; a regression guard + a documented threading recipe (gather/__init__.py) keep "never bill and record $0" true if a paid collector is ever added. Caps unchanged ($0.50/$1.50/$4.00); validated live (Step 6).
+- Plan: docs/superpowers/plans/2026-06-20-fusion-discovery-council-phase4.md. Deferred to Phase 5: the `substack` lens + `--segment` qualifier. Deferred further: demand-intent, trend-velocity, Quora.
+
 ### fusion-discovery-council Phase 3 — live reliability (2026-06-20)
 - Fusion responses now decode through OpenRouter's `: OPENROUTER PROCESSING` SSE keep-alive padding (the bug that intermittently crashed live `quick`/`standard` runs); `_parse` tolerates prose-wrapped JSON.
 - Cost integrity on failure: `FusionError` carries the incurred cost (summed across retry attempts); a failed Fusion call now records the spend OpenRouter billed and persists the session JSON (with per-collector `gather_status`) instead of silently recording $0.

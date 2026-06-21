@@ -52,6 +52,7 @@ The pipeline runs in a fixed order; each stage feeds the next.
    - `last30days` social backbone (recent user complaints / discussion).
    - Perplexity **Sonar** article harvest (tier-scaled: `sonar` → `sonar-reasoning-pro` → `sonar-deep-research`).
    - A **web collector** (Exa if `EXA_API_KEY` set, else Brave) for supplementary fresh articles, with a full-page fetch fallback for quote density.
+   - **Extended collectors (tier-gated):** review sites + competitor-weakness mining, GitHub Issues, and Stack Exchange Q&A. `standard` adds review sites + GitHub Issues; `deep` adds those plus Stack Exchange Q&A. Each emits a real URL + a verbatim quote, so the Stage-3 gate still governs everything.
    Every piece of evidence carries the URL it was fetched from. Nothing enters the pipeline without a source.
 
 2. **FUSE** — Run the gathered evidence through an OpenRouter **Fusion panel** (Opus / GPT / Gemini / Grok at standard tier) plus an outer **judge** model. The panel reads the evidence and proposes candidate pain points; the judge consolidates and de-duplicates them.
@@ -60,7 +61,7 @@ The pipeline runs in a fixed order; each stage feeds the next.
 
 4. **FRAME** — Apply the lens (`pm` in Phase 1) to turn each *verified* pain point into a ranked, evidence-linked opportunity, and render the **idea ledger** markdown.
 
-> Phase 1 ships the GATHER backbone (last30days + Sonar + web). Extended collectors (review sites, GitHub issues, trend feeds) are deferred to Phase 2/3 and do **not** run yet — do not claim them.
+> As of Phase 4 the extended collectors are LIVE and tier-gated: review sites + competitor-weakness mining and GitHub Issues on `standard`/`deep`, Stack Exchange Q&A on `deep`. Still deferred (do **not** claim them): demand-intent (autocomplete/PAA), trend-velocity feeds, and Quora. `quick` stays lean (last30days + Sonar + web).
 
 ---
 
