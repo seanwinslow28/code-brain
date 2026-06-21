@@ -61,7 +61,7 @@ The pipeline runs in a fixed order; each stage feeds the next.
 
 4. **FRAME** — Apply the lens to each *verified* pain point: `pm` → ranked, evidence-linked opportunity cards; `substack` → ranked post angles + a substack-value-engine handoff brief. Render the **idea ledger** markdown (+ the brief for substack).
 
-> As of Phase 4 the extended collectors are LIVE and tier-gated: review sites + competitor-weakness mining and GitHub Issues on `standard`/`deep`, Stack Exchange Q&A on `deep`. Still deferred (do **not** claim them): demand-intent (autocomplete/PAA), trend-velocity feeds, and Quora. `quick` stays lean (last30days + Sonar + web).
+> The extended collectors are LIVE and tier-gated (above): review sites + competitor-weakness mining and GitHub Issues on `standard`/`deep`, Stack Exchange Q&A on `deep`. NOT included — do **not** claim them: demand-intent (autocomplete/PAA — produces queries, not URL-anchored quotes, so the gate would drop them), trend-velocity feeds (no clean free API), and Quora (anti-scraping). `quick` stays lean (last30days + Sonar + web). The `last30days` backbone contributes Reddit/HN (keyless); HackerNews can come back empty on some runs and degrades safely.
 
 ---
 
@@ -134,6 +134,7 @@ Always pass this as an **absolute** path under `/Users/seanwinslow/Code-Brain/co
 
 - Every CLI invocation does a pre-flight cap check. If the estimated cost would exceed the per-run cap, the CLI refuses with a clear `Budget rejected:` error (exit code 2).
 - Per-run caps: **quick $0.50 / standard $1.50 / deep $4.00**.
+- **The per-run cap gates the pre-flight ESTIMATE (`0.6 × cap`), not actual spend.** A web-tool-call-heavy topic can *overshoot* its per-run cap — observed 2026-06-21: a `standard` run cost **$2.74** vs the $1.50 cap. Cost is dominated by the panel's web-tool calls and is **high-variance by topic**, so don't assume `deep` ⟹ most expensive (a deep run the same day cost $0.99). **The $10/day cap is the real guardrail** — it's checked against *actual* accumulated spend, so it can't be overshot the same way. Watch the daily total when running several topics in a session.
 - Discovery's own daily/monthly caps: **$10/day, $50/month**. These are independent of the council's caps but tracked in the **same** spend file — discovery rows are tagged `tool="discovery"` so the two tools never cross-deplete each other while staying in one coherent ledger (enforced bidirectionally via per-tool pre-flight as of Phase 2).
 - Recorded spend uses OpenRouter's authoritative `usage.cost` when available, falling back to a conservative token estimate.
 - `deep` tier **confirms the cost interactively before running** (pass `--yes` only when Sean has authorized it for this run).
@@ -156,7 +157,7 @@ This is the heart of the skill and is **not** softened under any circumstance.
 - A candidate the panel proposes but that cannot be traced to a real fetched URL is **dropped** or marked `unverified` — never paraphrased into the ledger as if it were sourced, never "rounded up" to a real claim.
 - This is what separates discovery from a model hallucinating plausible-sounding pain. If the evidence isn't there, the idea doesn't ship.
 
-When reporting back to Sean, always surface the **dropped/unverified count** alongside the verified ideas — a high drop rate is signal about evidence thinness, not something to hide.
+When reporting back to Sean, always surface the **dropped/unverified count** alongside the verified ideas — a high drop rate is signal about evidence thinness, not something to hide. Also point Sean at the ledger's **blind-spot / whitespace map** — the signature cross-model output that audits what the evidence and the panel *missed* (e.g. "the topic returned generic AI-coding pain, not studio-2D specifics"). It is often the highest-signal section and tells you how to sharpen the next run (reframe the topic, add `--segment`, or raise the tier).
 
 ---
 
