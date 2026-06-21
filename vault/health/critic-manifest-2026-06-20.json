@@ -1,0 +1,30 @@
+{
+  "antigravity_calls": 0,
+  "antigravity_failures": 0,
+  "antigravity_last_error": "",
+  "antigravity_skipped": 6,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 1,
+  "backfill_articles_critiqued": 5,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/connections/agent-health-and-knowledge-retrieval-interdependence.md",
+    "vault/knowledge/expansions/adops-automation.md",
+    "vault/knowledge/expansions/ai-product-manager.md",
+    "vault/knowledge/expansions/ai-prototyping.md",
+    "vault/knowledge/expansions/provider-preference-configuration.md"
+  ],
+  "codex_calls": 6,
+  "codex_failures": 0,
+  "codex_last_error": "",
+  "codex_tokens_total": 187686,
+  "duration_seconds": 136.52,
+  "error": "",
+  "expansions_written": [
+    "vault/knowledge/expansions/execution-strategy-decoupling.md"
+  ],
+  "run_id": "2026-06-20T03:30:05",
+  "status": "ok",
+  "warnings": [
+    "antigravity disabled (codex-only mode)"
+  ]
+}
