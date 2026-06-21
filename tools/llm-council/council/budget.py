@@ -84,16 +84,60 @@ def _read_total_for_month(on_date: date) -> float:
     return total
 
 
-def record_spend(*, amount: float, profile: str, tag: str, on_date: date) -> None:
+def record_spend(*, amount: float, profile: str, tag: str, on_date: date, tool: str = "council") -> None:
     """Append a run to today's daily spend file. Atomic write."""
     f = _daily_file(on_date)
     if f.exists():
         data = json.loads(f.read_text())
     else:
         data = {"date": on_date.isoformat(), "total": 0.0, "runs": []}
-    data["runs"].append({"amount": amount, "profile": profile, "tag": tag})
+    data["runs"].append({"amount": amount, "profile": profile, "tag": tag, "tool": tool})
     data["total"] = round(data["total"] + amount, 6)
     _atomic_write_json(f, data)
+
+
+def _sum_runs(path: Path, tool: str) -> float:
+    if not path.exists():
+        return 0.0
+    try:
+        runs = json.loads(path.read_text()).get("runs", [])
+    except (json.JSONDecodeError, ValueError):
+        return 0.0
+    # Records written before the tool field default to "council".
+    return sum(float(r.get("amount", 0.0)) for r in runs if r.get("tool", "council") == tool)
+
+
+def tool_total_for_day(on_date: date, tool: str) -> float:
+    return _sum_runs(_daily_file(on_date), tool)
+
+
+def tool_total_for_month(on_date: date, tool: str) -> float:
+    prefix = f"council-spend-{on_date.strftime('%Y-%m')}-"
+    return sum(_sum_runs(f, tool) for f in _spend_dir().glob(f"{prefix}*.json"))
+
+
+def preflight_tool(
+    *, estimated: float, per_query_cap: float, daily_cap: float, monthly_cap: float,
+    on_date: date, tool: str, force: bool = False,
+) -> None:
+    """Like preflight, but daily/monthly totals are scoped to one tool."""
+    if not force and estimated > per_query_cap:
+        raise BudgetExceeded(
+            f"per-run cap exceeded: estimated ${estimated:.4f} > cap ${per_query_cap:.4f}. "
+            f"Use --force to override (still subject to daily/monthly caps)."
+        )
+    today = tool_total_for_day(on_date, tool)
+    if today + estimated > daily_cap:
+        raise BudgetExceeded(
+            f"{tool} daily cap would be exceeded: today=${today:.4f} + "
+            f"estimated=${estimated:.4f} > daily_cap=${daily_cap:.4f}"
+        )
+    month = tool_total_for_month(on_date, tool)
+    if month + estimated > monthly_cap:
+        raise BudgetExceeded(
+            f"{tool} monthly cap would be exceeded: month-to-date=${month:.4f} + "
+            f"estimated=${estimated:.4f} > monthly_cap=${monthly_cap:.4f}"
+        )
 
 
 def preflight(
