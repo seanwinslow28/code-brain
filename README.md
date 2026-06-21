@@ -97,7 +97,7 @@ Zapier retained only for services with no native MCP: Salesforce, GA4, Webhooks,
 
 ### 120 Skills Across 12 Export Groups
 
-> The 12 export groups roll up 117 of the 120 base skills. The `llm-council` skill (v3.35.0), `openai-image-gen` skill (v4.1.2), `writing-humanity-pass` skill, and `writing-critique` skill are not in any export group. All four are personal-use companions that depend on in-tree assets or pair with another skill, so they don't ship via the installer. See [`tools/llm-council/README.md`](tools/llm-council/README.md) and [`.claude/skills/openai-image-gen/SKILL.md`](.claude/skills/openai-image-gen/SKILL.md).
+> The 12 export groups roll up 117 of the 120 base skills. The `llm-council` skill (v3.35.0), `fusion-discovery-council` skill, `openai-image-gen` skill (v4.1.2), `writing-humanity-pass` skill, and `writing-critique` skill are not in any export group. All five are personal-use companions that depend on in-tree assets or pair with another skill, so they don't ship via the installer. See [`tools/llm-council/README.md`](tools/llm-council/README.md) and [`.claude/skills/openai-image-gen/SKILL.md`](.claude/skills/openai-image-gen/SKILL.md).
 
 All skills auto-load from `.claude/skills/`. Reference them naturally in prompts.
 

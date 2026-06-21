@@ -8,7 +8,7 @@ from pathlib import Path
 import click
 from rich.console import Console
 
-from council.budget import BudgetExceeded, preflight, record_spend
+from council.budget import BudgetExceeded, preflight_tool, record_spend
 from council.client import OpenRouterClient
 from council.pipeline import run_council
 from council.profiles import PROFILES, get_profile
@@ -76,12 +76,13 @@ def main(profile: str, prompt_file: Path, output: Path, tag: str, force: bool, s
         # This is a rough enough estimate that we lean on per-query cap as the real gate.
         rough = p.max_cost_per_query * 0.5  # half the cap, before actual call
         try:
-            preflight(
+            preflight_tool(
                 estimated=rough,
                 per_query_cap=p.max_cost_per_query,
                 daily_cap=_load_daily_cap(),
                 monthly_cap=_load_monthly_cap(),
                 on_date=date.today(),
+                tool="council",
                 force=force,
             )
         except BudgetExceeded as e:
