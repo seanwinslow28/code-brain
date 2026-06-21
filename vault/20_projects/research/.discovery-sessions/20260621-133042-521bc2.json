@@ -1,0 +1,33 @@
+{
+  "id": "20260621-133042-521bc2",
+  "topic": "Claude plugins and skills for 2D animation pipelines",
+  "lens": "substack",
+  "tier": "deep",
+  "evidence_count": 31,
+  "verified": 4,
+  "dropped": 2,
+  "cost_usd": 1.0662,
+  "gather_status": {
+    "last30": "ok: 1 records (1 found)",
+    "sonar": "ok: 20 records (20 found)",
+    "web": "ok: 6 records (6 found)",
+    "reviews": "ok: 1 records (1 found)",
+    "github": "ok: 3 records (3 found)",
+    "qa": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "Very few raw first-person animator quotes; most evidence is Sonar-synthesized commentary rather than direct user voices.",
+    "No quantitative data on adoption, abandonment rates, latency, token cost, or render times for animation workflows.",
+    "No coverage of industry export formats (Lottie, MP4, image sequences), rigs, lip-sync, compositing, or audio sync.",
+    "No discussion of collaboration, version control, determinism, or team/multi-artist production workflows.",
+    "No accessibility considerations (e.g., prefers-reduced-motion) for generated web animations.",
+    "No analysis of IP/training-data provenance concerns for commercial animation production.",
+    "Several evidence timestamps are in the future (2026-05-27, 2026-06-17, 2026-06-20), suggesting the underlying source corpus may include hallucinated or fabricated dates that no panel model flagged."
+  ],
+  "contradictions": [
+    "Anthropic/Brilliant framing of Claude Design as a 'step change' for prototyping interactive animations contrasts with widespread user reports of friction, choppy motion, and engineering complexity.",
+    "Claude pipelines are simultaneously described as 'rapid and flexible' at generating code and as failing to understand timing, staging, or design \u2014 a speed-vs-craft tension.",
+    "Specialized skills are presented as responses that address pain points, while users in the same evidence say those exact needs remain unmet.",
+    "The 'append mode is broken' Trustpilot complaint was treated by some panel models as evidence of animation-pipeline reliability, but the source provides no context tying it to 2D animation workflows."
+  ]
+}
