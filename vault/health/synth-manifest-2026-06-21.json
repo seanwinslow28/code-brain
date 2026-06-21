@@ -1,0 +1,32 @@
+{
+  "clusters_sampled": 27,
+  "concept_paths": [
+    "vault/knowledge/concepts/silent-failure-propagation-in-agent-fleets.md",
+    "vault/knowledge/concepts/cost-capped-agentic-workflows.md",
+    "vault/knowledge/concepts/automation-failure-and-daily-note-disruption.md",
+    "vault/knowledge/concepts/silent-failure-propagation-in-agent-fleets.md",
+    "vault/knowledge/concepts/agent-fleet-observability-dashboard.md",
+    "vault/knowledge/concepts/context-compounding.md"
+  ],
+  "concepts_written": 6,
+  "connection_paths": [
+    "vault/knowledge/connections/the-tension-between-protocol-instrumentation-and-regulatory-ambiguity.md",
+    "vault/knowledge/connections/credential-rotency-vs-infrastructure-stability.md",
+    "vault/knowledge/connections/the-tension-between-protocol-instrumentation-and-epistemic-blindness.md",
+    "vault/knowledge/connections/the-tension-between-automation-velocity-and-reputational-risk-in-job-hunt-execution.md"
+  ],
+  "connections_written": 4,
+  "duration_seconds": 1915.0,
+  "edges_rejected": 1,
+  "edges_written": 6,
+  "files_processed": 16,
+  "model_used": "qwen3-14b",
+  "rejected_count": 3,
+  "rejected_reasons": {
+    "thin-evidence": 3
+  },
+  "run_id": "2026-06-21T02:30:05",
+  "skipped_thin_source": 0,
+  "status": "partial",
+  "wol_status": "mbp_awake"
+}
