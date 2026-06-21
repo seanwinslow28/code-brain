@@ -157,3 +157,13 @@ def test_decode_payload_raises_on_undecodable_body():
         text = "not json at all <html>"
     with pytest.raises(fusion.FusionError):
         fusion._decode_payload(_R())
+
+
+def test_first_json_object_skips_malformed_leading_object():
+    # leading {...} is balanced but not valid JSON (unquoted key); the second is valid
+    text = 'noise {not: valid} more {"pain_points": []} trailing'
+    assert _first_json_object(text) == {"pain_points": []}
+
+
+def test_first_json_object_none_when_no_valid_object():
+    assert _first_json_object("{nope} {still bad}") is None

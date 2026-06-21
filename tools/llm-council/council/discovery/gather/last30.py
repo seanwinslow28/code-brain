@@ -12,6 +12,8 @@ from pathlib import Path
 
 from council.discovery.evidence import EvidenceRecord
 
+_LAST30_TIMEOUT_S = 300   # last30days can be slow; hard cap so a hung child can't stall gather
+
 
 def _eng(item: dict, *keys: str) -> int:
     e = item.get("engagement") or {}
@@ -85,7 +87,7 @@ async def _subprocess_runner(topic: str) -> str:
         stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
     )
     try:
-        out, err = await asyncio.wait_for(proc.communicate(), timeout=300)
+        out, err = await asyncio.wait_for(proc.communicate(), timeout=_LAST30_TIMEOUT_S)
     except asyncio.TimeoutError:
         proc.kill()                          # reap the child so it can't orphan
         await proc.wait()

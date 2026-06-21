@@ -26,39 +26,46 @@ def _strip_sse_padding(text: str) -> str:
 
 
 def _first_json_object(text: str) -> dict | None:
-    """Return the first balanced {...} object found in text (string-aware), or None.
+    """Return the first balanced {...} object that parses as JSON (string-aware), or None.
 
-    Scans from the first "{" anywhere in the text — it does not require the object
-    to be at top level, and will dig into a leading array to find it.
+    Scans from each "{" in turn — if a balanced span fails to parse, it continues to the
+    NEXT "{" rather than giving up, so a malformed leading object followed by a valid one
+    still decodes. Digs past leading arrays/prose to find the object.
     """
-    start = text.find("{")
-    if start < 0:
-        return None
-    depth = 0
-    in_str = False
-    esc = False
-    for i in range(start, len(text)):
-        ch = text[i]
-        if in_str:
-            if esc:
-                esc = False
-            elif ch == "\\":
-                esc = True
-            elif ch == '"':
-                in_str = False
-            continue
-        if ch == '"':
-            in_str = True
-        elif ch == "{":
-            depth += 1
-        elif ch == "}":
-            depth -= 1
-            if depth == 0:
-                try:
-                    return json.loads(text[start:i + 1])
-                except json.JSONDecodeError:
-                    return None
-    return None
+    search_from = 0
+    while True:
+        start = text.find("{", search_from)
+        if start < 0:
+            return None
+        depth = 0
+        in_str = False
+        esc = False
+        end = -1
+        for i in range(start, len(text)):
+            ch = text[i]
+            if in_str:
+                if esc:
+                    esc = False
+                elif ch == "\\":
+                    esc = True
+                elif ch == '"':
+                    in_str = False
+                continue
+            if ch == '"':
+                in_str = True
+            elif ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    end = i
+                    break
+        if end < 0:
+            return None                       # unbalanced from here to the end
+        try:
+            return json.loads(text[start:end + 1])
+        except json.JSONDecodeError:
+            search_from = start + 1           # scan forward to the next "{"
 
 
 def _decode_payload(resp: httpx.Response) -> dict:
