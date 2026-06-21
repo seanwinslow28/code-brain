@@ -77,3 +77,16 @@ def test_large_discovery_spend_does_not_reject_council_run(
 
     assert res.exit_code == 0, res.output
     assert "Budget rejected" not in res.output
+
+
+def test_prior_day_discovery_spend_does_not_deplete_council_monthly(tmp_spend_dir):
+    # A large discovery spend earlier this month must not reduce council's monthly headroom.
+    budget.record_spend(
+        amount=30.0, profile="standard", tag="d", on_date=date(2026, 6, 10), tool="discovery"
+    )
+    budget.preflight_tool(
+        estimated=0.50, per_query_cap=1.00, daily_cap=7.0, monthly_cap=40.0,
+        on_date=date(2026, 6, 20), tool="council",
+    )  # must not raise
+    assert budget.tool_total_for_month(date(2026, 6, 20), "discovery") == 30.0
+    assert budget.tool_total_for_month(date(2026, 6, 20), "council") == 0.0
