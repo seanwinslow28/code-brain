@@ -151,7 +151,7 @@ cd agents-sdk && PYTHONPATH=. .venv/bin/python3 agents/daily_driver.py --mode mo
 cd agents-sdk && PYTHONPATH=. pytest tests/ -v
 ```
 
-Config: `agents-sdk/config.toml`. Auth: `claude login` OAuth (no API key). Safety: max 30 turns, default $0.50/run cap (daily-driver morning bumped to $0.60 to absorb the operating-model artifact preamble). SDK version: `0.1.63` (pinned in `agents-sdk/pyproject.toml`). Morning schedule: daily-driver 08:30 writes the note, meta-agent 08:45 reports on it. Full docs: `docs/agents-sdk.md`.
+Config: `agents-sdk/config.toml`. Auth: `claude login` OAuth (no API key). For unattended launchd runs, prefer a long-lived `claude setup-token` token stored in Keychain (`python3 agents-sdk/lib/keychain.py set claude_code_oauth_token <token>`) — [lib/auth.py](agents-sdk/lib/auth.py)'s `resolve_oauth_token()` injects it as `CLAUDE_CODE_OAUTH_TOKEN`, so headless runs don't 401 when the interactive credential expires (root cause of the 2026-06-20 morning 401). Safety: max 30 turns, default $0.50/run cap (daily-driver morning bumped to $0.60 to absorb the operating-model artifact preamble). SDK version: `0.1.63` (pinned in `agents-sdk/pyproject.toml`). Morning schedule: daily-driver 08:30 writes the note, meta-agent 08:45 reports on it. Full docs: `docs/agents-sdk.md`.
 
 ## Architecture decisions (current capabilities — full history in CHANGELOG.md)
 

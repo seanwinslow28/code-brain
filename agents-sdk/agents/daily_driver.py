@@ -27,6 +27,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from claude_agent_sdk import ClaudeAgentOptions, ResultMessage, query
 
 from lib.artifact_loader import load_heartbeats
+from lib.auth import OAUTH_TOKEN_ENV, resolve_oauth_token
 from lib.config import load_config
 from lib.custom_tools import create_vault_mcp_server
 from lib.logging_setup import record_run, setup_logger
@@ -427,11 +428,19 @@ def build_options(config, mode: str | None = None) -> ClaudeAgentOptions:
     # today (→ "sonnet") per the 2026-06-16 cost fix; absent key preserves Opus.
     model = mode_cfg.get("model")
 
-    # Only pass API key if explicitly set; otherwise the SDK uses
-    # Claude Code CLI's existing auth (e.g., `claude login` OAuth)
+    # Auth precedence: an explicit API key wins; otherwise prefer a long-lived
+    # `claude setup-token` OAuth token (env or Keychain) over the interactive
+    # `claude login` credential. The interactive credential can't be refreshed
+    # in an unattended launchd run, so it 401s once expired (observed
+    # 2026-06-20). resolve_oauth_token() returns None when no long-lived token
+    # is configured, leaving the SDK to fall back to the existing CLI auth.
     env = {}
     if config.anthropic_api_key:
         env["ANTHROPIC_API_KEY"] = config.anthropic_api_key
+    else:
+        oauth_token = resolve_oauth_token()
+        if oauth_token:
+            env[OAUTH_TOKEN_ENV] = oauth_token
 
     fm_cfg = config.fleet_memory
     fm_agent_cfg = fm_cfg.get("per_agent", {}).get("daily_driver", {})
@@ -477,6 +486,30 @@ def build_options(config, mode: str | None = None) -> ClaudeAgentOptions:
         setting_sources=["project"],
         env=env,
     )
+
+
+_AUTH_FAILURE_MARKERS = (
+    "authentication_error",
+    "API Error: 401",
+    "Failed to authenticate",
+)
+
+
+def _resolve_status(result_msg) -> str:
+    """Map an SDK ResultMessage to the status recorded in run history.
+
+    The CLI can surface a 401 auth failure as a ResultMessage with
+    subtype="success" and the error text in `.result` (observed 2026-06-20:
+    cost=$0, 1 turn, "Failed to authenticate. API Error: 401 ..."). Recording
+    that as "success" hides auth failures behind a green ✓ in the fleet digest,
+    so detect the auth markers and downgrade to "error_auth".
+    """
+    if result_msg is None:
+        return "unknown"
+    text = result_msg.result or ""
+    if any(marker in text for marker in _AUTH_FAILURE_MARKERS):
+        return "error_auth"
+    return result_msg.subtype
 
 
 async def run(mode: str, dry_run: bool = False) -> None:
@@ -526,7 +559,7 @@ async def run(mode: str, dry_run: bool = False) -> None:
             log_dir=config.log_dir,
             agent_name=AGENT_NAME,
             mode=mode,
-            status=result_msg.subtype if result_msg else "unknown",
+            status=_resolve_status(result_msg),
             cost_usd=result_msg.total_cost_usd if result_msg else None,
             duration_ms=result_msg.duration_ms if result_msg else None,
             turns=result_msg.num_turns if result_msg else None,
@@ -545,7 +578,7 @@ async def run(mode: str, dry_run: bool = False) -> None:
                 log_dir=config.log_dir,
                 agent_name=AGENT_NAME,
                 mode=mode,
-                status=result_msg.subtype,
+                status=_resolve_status(result_msg),
                 cost_usd=result_msg.total_cost_usd,
                 duration_ms=result_msg.duration_ms,
                 turns=result_msg.num_turns,
