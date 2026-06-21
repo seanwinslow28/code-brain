@@ -6,6 +6,7 @@ from council.discovery.gather.web import (
     extract_quotes,
     _default_brave_search,
     _simple_fetch,
+    _is_safe_fetch_url,
 )
 
 
@@ -52,9 +53,9 @@ async def test_brave_search_normalizes(httpx_mock):
 
 @pytest.mark.asyncio
 async def test_simple_fetch_strips_html(httpx_mock):
-    httpx_mock.add_response(url="https://x.com/p",
+    httpx_mock.add_response(url="http://93.184.216.34/p",
                             text="<html><body><p>Exports fail silently every time.</p><script>x()</script></body></html>")
-    text = await _simple_fetch("https://x.com/p")
+    text = await _simple_fetch("http://93.184.216.34/p")
     assert "Exports fail silently" in text
     assert "x()" not in text
 
@@ -80,3 +81,34 @@ async def test_collect_web_selects_brave_when_only_brave_key(monkeypatch, httpx_
             {"title": "T", "url": "https://b.com/3", "description": "Users hate the broken sync.", "page_age": "2026-06-01"}]}})
     recs = await collect_web(topic="sync")
     assert any(r.url == "https://b.com/3" for r in recs)
+
+
+def test_is_safe_fetch_url_blocks_non_http_schemes():
+    assert _is_safe_fetch_url("file:///etc/passwd") is False
+    assert _is_safe_fetch_url("gopher://169.254.169.254/") is False
+    assert _is_safe_fetch_url("ftp://example.com/x") is False
+
+
+def test_is_safe_fetch_url_blocks_private_and_metadata_ips():
+    assert _is_safe_fetch_url("http://169.254.169.254/latest/meta-data/") is False  # cloud metadata
+    assert _is_safe_fetch_url("http://127.0.0.1/") is False
+    assert _is_safe_fetch_url("http://10.0.0.5/") is False
+    assert _is_safe_fetch_url("http://192.168.1.10/") is False
+
+
+def test_is_safe_fetch_url_resolves_hostname_via_injected_resolver():
+    assert _is_safe_fetch_url("https://g2.com/x", resolve=lambda h: ["93.184.216.34"]) is True
+    # any resolved private IP rejects the whole host (DNS-rebinding-conservative)
+    assert _is_safe_fetch_url("https://evil.test/x", resolve=lambda h: ["10.1.2.3"]) is False
+    # unresolvable host is rejected
+    assert _is_safe_fetch_url("https://nope.test/x", resolve=lambda h: []) is False
+
+
+@pytest.mark.asyncio
+async def test_simple_fetch_blocks_redirect_to_metadata(httpx_mock):
+    # public literal-IP first hop 302s toward the cloud-metadata IP → must be blocked, returns ""
+    httpx_mock.add_response(url="http://93.184.216.34/start", status_code=302,
+                            headers={"location": "http://169.254.169.254/latest"})
+    text = await _simple_fetch("http://93.184.216.34/start")
+    assert text == ""
+    assert len(httpx_mock.get_requests()) == 1   # metadata hop never fetched

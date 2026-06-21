@@ -44,3 +44,28 @@ async def test_collect_sonar_reads_message_annotations(httpx_mock):
     assert {r.url for r in recs} == {"https://a.com/x", "https://b.com/y"}
     assert all(r.source_type == "sonar" for r in recs)
     assert all(r.quote for r in recs)
+
+
+@pytest.mark.asyncio
+async def test_collect_sonar_anchors_verbatim_quote_via_fetch(httpx_mock):
+    httpx_mock.add_response(json={
+        "choices": [{"message": {"content": "Synthesized paraphrase sentence about onboarding."}}],
+        "citations": ["https://news.com/a"], "usage": {},
+    })
+    async def fetch(url):
+        return "Real reviewers complain the onboarding flow is broken and confusing."
+    recs = await collect_sonar(api_key="k", topic="x", model="perplexity/sonar", fetch=fetch)
+    assert len(recs) == 1
+    assert "onboarding flow is broken" in recs[0].quote   # verbatim from the page, not the paraphrase
+
+
+@pytest.mark.asyncio
+async def test_collect_sonar_falls_back_to_synthesized_when_fetch_empty(httpx_mock):
+    httpx_mock.add_response(json={
+        "choices": [{"message": {"content": "Teams report onboarding is slow and painful."}}],
+        "citations": ["https://news.com/a"], "usage": {},
+    })
+    async def fetch(url):
+        return ""    # page yielded no complaint sentence
+    recs = await collect_sonar(api_key="k", topic="x", model="perplexity/sonar", fetch=fetch)
+    assert recs[0].quote == "Teams report onboarding is slow and painful."
