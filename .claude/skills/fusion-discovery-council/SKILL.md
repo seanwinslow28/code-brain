@@ -159,5 +159,6 @@ The skill **writes** the idea ledger to `vault/20_projects/research/...` and sto
 ## 8. Failure modes
 
 - **Budget rejected** (exit 2) — pre-flight cap hit; surface the error verbatim and offer the options in §5.
-- **Discovery failed** (exit 3) — a pipeline stage (gather/fuse) errored; surface the message. No ledger is written and no spend is recorded for a failed run.
+- **Discovery failed at fuse** (exit 3) — the Fusion call failed (after SSE-padding-safe decode + one reprompt retry). The CLI **records the spend OpenRouter actually billed** (tagged `tool="discovery"`), **persists the session JSON** with per-collector `gather_status`, and echoes that status — so a failed run is diagnosable and never silently free. No ledger is written.
+- **Discovery failed (exit 3, pre-fuse)** — a gather/setup error before any billable call; no spend recorded.
 - **High drop rate** — the pipeline ran but most candidates failed the verification gate. This is a *valid* outcome (thin evidence), not a bug. Report the verified vs dropped counts to Sean honestly.

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### fusion-discovery-council Phase 3 — live reliability (2026-06-20)
+- Fusion responses now decode through OpenRouter's `: OPENROUTER PROCESSING` SSE keep-alive padding (the bug that intermittently crashed live `quick`/`standard` runs); `_parse` tolerates prose-wrapped JSON.
+- Cost integrity on failure: `FusionError` carries the incurred cost (summed across retry attempts); a failed Fusion call now records the spend OpenRouter billed and persists the session JSON (with per-collector `gather_status`) instead of silently recording $0.
+- last30 subprocess kills timed-out children and emits stderr breadcrumbs so silent-empty runs (e.g. the upstream `INCLUDE_SOURCES=null` crash) are diagnosable.
+- Plan: docs/superpowers/plans/2026-06-20-fusion-discovery-council-phase3.md. Deferred to Phase 4+: extended collectors, the substack lens, `_simple_fetch` SSRF allow-list.
+
 ### fusion-discovery-council Phase 2 — hardened slice (2026-06-20)
 - Wired the Brave web provider + full-page fetch fallback; last30days collector fixed (real plugin path, `--emit=json` parser, dropped the bogus `--agent` flag) — all three Stage-1 collectors now contribute evidence.
 - Gather orchestrator returns per-collector status (logged to stderr + recorded in the session JSON) so empty runs are diagnosable.
