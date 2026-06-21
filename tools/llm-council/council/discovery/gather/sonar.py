@@ -5,9 +5,11 @@ import re
 import httpx
 
 from council.discovery.evidence import EvidenceRecord
+from council.discovery.gather.web import _simple_fetch, extract_quotes
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 _SENT = re.compile(r"[^.!?]{20,}[.!?]")
+_VERBATIM_FETCH_LIMIT = 6   # fetch the top-N citations to anchor a true verbatim quote
 
 
 def _extract_citations(payload: dict) -> list[str]:
@@ -36,7 +38,7 @@ def _extract_citations(payload: dict) -> list[str]:
     return out
 
 
-async def collect_sonar(*, api_key: str, topic: str, model: str, timeout: float = 120.0) -> list[EvidenceRecord]:
+async def collect_sonar(*, api_key: str, topic: str, model: str, timeout: float = 120.0, fetch=None) -> list[EvidenceRecord]:
     body = {
         "model": model,
         "messages": [{
@@ -60,7 +62,12 @@ async def collect_sonar(*, api_key: str, topic: str, model: str, timeout: float 
     sentences = [s.strip() for s in _SENT.findall(content)][: len(citations)] or [content[:200]]
     recs = []
     for i, url in enumerate(citations):
-        quote = sentences[i] if i < len(sentences) else sentences[-1]
+        synthesized = sentences[i] if i < len(sentences) else sentences[-1]
+        quote = synthesized
+        if fetch is not None and i < _VERBATIM_FETCH_LIMIT:
+            verbatim = extract_quotes(await fetch(url))
+            if verbatim:
+                quote = verbatim[0]      # a true substring of the fetched page → strengthens VERIFY
         recs.append(EvidenceRecord(
             source_type="sonar", source_name="Perplexity Sonar", url=url,
             date="", quote=quote, engagement=0,
