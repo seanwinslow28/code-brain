@@ -13,6 +13,9 @@ class TierConfig:
     sonar_model: str            # Stage 1b article harvester
     social: bool                # run last30days backbone
     web: bool                   # run exa/brave web collector
+    reviews: bool = False       # review-sites + competitor-weakness mining (standard+)
+    github: bool = False        # GitHub Issues unmet-need mining (standard+)
+    qa: bool = False            # Stack Exchange Q&A pain mining (deep)
 
 
 _STANDARD_PANEL = (
@@ -42,6 +45,8 @@ TIERS: dict[str, TierConfig] = {
         sonar_model="perplexity/sonar-reasoning-pro",
         social=True,
         web=True,
+        reviews=True,
+        github=True,
     ),
     "deep": TierConfig(
         name="deep",
@@ -52,6 +57,9 @@ TIERS: dict[str, TierConfig] = {
         sonar_model="perplexity/sonar-deep-research",
         social=True,
         web=True,
+        reviews=True,
+        github=True,
+        qa=True,
     ),
 }
 
