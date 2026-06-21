@@ -35,3 +35,11 @@ def test_deep_adds_two_more_lineages_and_confirms_cost():
 def test_unknown_tier_raises():
     with pytest.raises(KeyError):
         get_tier("ultra")
+
+
+def test_collector_tier_gating_matches_matrix():
+    q, s, d = get_tier("quick"), get_tier("standard"), get_tier("deep")
+    assert (q.reviews, q.github, q.qa) == (False, False, False)   # quick stays lean
+    assert (s.reviews, s.github, s.qa) == (True, True, False)     # standard: + reviews + github
+    assert (d.reviews, d.github, d.qa) == (True, True, True)      # deep: + reviews + github + qa
+    assert all(t.social and t.web for t in (q, s, d))             # social + web stay on everywhere
