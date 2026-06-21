@@ -11,7 +11,7 @@
 ## Global Constraints
 
 - Python floor stays `>=3.10`. Co-located subpackage; **reuse the council spine (`client.py`, `budget.py`)** — do **not** add a second HTTP client or a second spend file.
-- **Run all commands from `tools/llm-council/`.** The test command is **`uv run --extra dev python -m pytest -v`** — plain `uv run pytest` does NOT work (pytest lives in the `dev` extra). Baseline after the Phase-1–3 merge: **93 passed, 1 skipped** (94+ if Phase 4 landed first); every task must keep the full suite green (no regressions) on top of its new tests.
+- **Run all commands from `tools/llm-council/`.** The test command is **`uv run --extra dev python -m pytest -v`** — plain `uv run pytest` does NOT work (pytest lives in the `dev` extra). Baseline **with Phase 4 landed: 114 passed, 1 skipped** (Phase 4 added +21 tests; field report `2026-06-21-fusion-discovery-council-phase4-field-report.md`); every task must keep the full suite green (no regressions) on top of its new tests.
 - **The fabrication gate (`verify.py`) is SACRED — never weaken it.** The substack lens consumes the **already-verified** pain points (post-VERIFY); it must never re-introduce ungrounded claims. Every quote/URL in the brief comes from a `VerifiedPainPoint.supporting_urls`.
 - The skill **never** `git add`s the `vault/` directory (CLAUDE.md rule 8 — Obsidian-Git owns vault commits). The CLI **writes** the ledger + brief and stops there.
 - Verified OpenRouter model IDs (live 2026-06-20): `~google/gemini-pro-latest` (tilde = floating alias; bare form 400s), `mistralai/mistral-medium-3-5` (hyphen; dotted form 400s), plus `anthropic/claude-opus-4.7`, `openai/gpt-5.5`, `x-ai/grok-4.3`, `deepseek/deepseek-v4-pro`, all Sonar variants. (Phase 5 changes no model IDs.)
@@ -21,14 +21,16 @@
 
 ---
 
-## Grounding note: where this plan grounds, and the Phase-4 interaction
+## Grounding note: PHASE 4 HAS LANDED (2026-06-21) — apply the deltas below
 
-This plan is **grounded against today's `main`** (the merged Phase-1–3 state), where GATHER runs **last30 + sonar + web** and `pipeline.run_discovery` always calls `frame_pm`. It does **not** assume Phase 4 has landed.
+This plan was originally drafted against pre-Phase-4 `main`. **Phase 4 is now complete** (branch `feat/fusion-discovery-council-phase4`, 114 passed/1 skipped, both tiers live-confirmed under cap; field report `tools/llm-council/council/docs/2026-06-21-fusion-discovery-council-phase4-field-report.md`). Execute Phase 5 on top of Phase 4 (it draws on the wider evidence surface). The Phase-4-landed-first notes throughout this plan are therefore **IN FORCE, not optional** — the primary code in Task 5 now reflects all six collectors.
 
-- **If Phase 4 has NOT landed:** every step applies verbatim.
-- **If Phase 4 HAS landed first (recommended order):** the only delta is in **Task 5** — `gather_evidence`'s default `collectors` dict will also contain `reviews`/`github`/`qa`; thread `segment=segment` into those three lambdas using the identical pattern shown for `web`/`sonar`/`last30`. Each call-out flags this inline.
+**What Phase 4 changed that Phase 5 must account for:**
+- GATHER now runs **last30 + sonar + web + reviews + github + qa** (tier-gated: quick = last30+sonar+web; standard adds reviews+github; deep adds qa). `--segment` (Task 5) must thread through **all six** collectors, not three — the substack lens benefits from the wider bundle.
+- `collect_sonar` already has a `fetch=None` param (Phase 4 Task 6) and the orchestrator passes `fetch=_simple_fetch` — **keep both** when adding `segment`. `sonar.py` now imports only `extract_quotes` from `web.py` (Phase 4 final-review M1 dropped the dead `_simple_fetch` import) — do **not** re-add it.
+- The substack lens itself (Tasks 1–4) is fully independent of which collectors exist — it operates on post-VERIFY pain points, so those tasks apply verbatim.
 
-The substack lens (Tasks 1–4) is fully independent of which collectors exist — it operates on post-VERIFY pain points.
+> **Known-degraded, carried from Phase 4 (don't be surprised live):** `last30` still yields **0 records** (upstream `INCLUDE_SOURCES=null` crash; degrades safely). The review collector **under-yields (~3 records)** because Brave collapses the OR'd multi-`site:` query — correctness is fine, it's yield-tuning only (ticket M2, LOW). Neither blocks Phase 5; the live substack run draws on Sonar + web + reviews + github + qa.
 
 ---
 
@@ -632,18 +634,21 @@ git commit -m "feat(discovery): CLI writes substack handoff brief to sibling pat
 **Files:**
 - Modify: `tools/llm-council/council/discovery/__main__.py` (add `--segment` flag → `run_discovery`)
 - Modify: `tools/llm-council/council/discovery/pipeline.py` (pass `segment` into the gather call)
-- Modify: `tools/llm-council/council/discovery/gather/__init__.py` (thread `segment` into collectors)
+- Modify: `tools/llm-council/council/discovery/gather/__init__.py` (thread `segment` into all six collectors)
 - Modify: `tools/llm-council/council/discovery/gather/web.py` (`collect_web` segment in query)
 - Modify: `tools/llm-council/council/discovery/gather/sonar.py` (`collect_sonar` segment in prompt)
 - Modify: `tools/llm-council/council/discovery/gather/last30.py` (`collect_last30` segment composed into subject)
-- Test: `tests/discovery/test_gather_web.py`, `test_gather_sonar.py`, `test_gather_last30.py`, `test_pipeline.py`, `test_cli.py` (add)
+- Modify: `tools/llm-council/council/discovery/gather/reviews.py` (`collect_reviews` segment in subject) — **Phase 4 collector**
+- Modify: `tools/llm-council/council/discovery/gather/github.py` (`collect_github` segment in query) — **Phase 4 collector**
+- Modify: `tools/llm-council/council/discovery/gather/qa.py` (`collect_qa` segment in query) — **Phase 4 collector**
+- Test: `tests/discovery/test_gather_web.py`, `test_gather_sonar.py`, `test_gather_last30.py`, `test_gather_reviews.py`, `test_gather_github.py`, `test_gather_qa.py`, `test_pipeline.py`, `test_cli.py` (add)
 
 **Interfaces:**
-- `collect_web(*, topic, segment="", search=..., fetch=..., max_results=8)`, `collect_sonar(*, api_key, topic, model, timeout=120.0, segment="", fetch=None)`, `collect_last30(topic, runner=_subprocess_runner, segment="")` each gain a `segment: str = ""` param that shapes their query when non-empty (default `""` = today's behavior). `gather_evidence(*, topic, tier, api_key, segment="", collectors=None)` threads `segment` into the default collector lambdas. `run_discovery` passes its `segment` into `gather(...)`. The CLI adds `--segment` (default `""`).
+- `collect_web(*, topic, segment="", search=..., fetch=..., max_results=8)`, `collect_sonar(*, api_key, topic, model, timeout=120.0, segment="", fetch=None)`, `collect_last30(topic, runner=_subprocess_runner, segment="")`, `collect_reviews(*, topic, segment="", search=..., fetch=..., max_results=8)`, `collect_github(*, topic, segment="", search=..., max_results=8)`, `collect_qa(*, topic, segment="", search=..., max_results=8)` each gain a `segment: str = ""` param that shapes their query when non-empty (default `""` = today's behavior). `gather_evidence(*, topic, tier, api_key, segment="", collectors=None)` threads `segment` into all six default collector lambdas. `run_discovery` passes its `segment` into `gather(...)`. The CLI adds `--segment` (default `""`).
 
 **Context:** Spec §4 + Phase-1 run-#2 insight (the blind-spot map proved generic "creatives" returns developer pain). `--segment developer|creative|pm|<free text>` reshapes the gather queries toward a target audience so the evidence comes from where that audience actually posts. Default `""` keeps every existing collector test green.
 
-> **Phase-4-landed-first note:** if `gather_evidence`'s default `collectors` dict also has `reviews`/`github`/`qa`, thread `segment=segment` into those three lambdas too, with the identical pattern (`collect_reviews(topic=t, segment=segment)`, etc.), and add a `segment=""` param to each of those collectors mirroring `collect_web`. Their query-shaping: prepend the segment to the Brave/GitHub/SE query subject exactly as `collect_web` does.
+> **Phase 4 has landed (MANDATORY scope for this task):** there are **six** collectors to thread `segment` through, not three. Step 3 below now includes the `reviews`/`github`/`qa` edits as primary code (each gains a `segment=""` param + query-shaping mirroring `collect_web`), and Step 1 includes a test for each. A `--segment` that only reshapes web/sonar/last30 would silently ignore half the evidence surface — do not skip the three Phase-4 collectors.
 
 - [ ] **Step 1: Write the failing tests**
 
@@ -699,6 +704,47 @@ async def test_collect_last30_composes_segment_into_subject():
     assert seen["s"] == "pm tools enterprise"
 ```
 
+Add to `tests/discovery/test_gather_reviews.py` (Phase 4 collector):
+
+```python
+@pytest.mark.asyncio
+async def test_collect_reviews_includes_segment_in_query():
+    captured = {}
+    async def search(q):
+        captured["q"] = q
+        return []
+    await collect_reviews(topic="crm", segment="nonprofits", search=search, fetch=None)
+    assert "crm" in captured["q"] and "nonprofits" in captured["q"]
+    assert "site:g2.com" in captured["q"]   # still site-targeted
+```
+
+Add to `tests/discovery/test_gather_github.py` (Phase 4 collector):
+
+```python
+@pytest.mark.asyncio
+async def test_collect_github_includes_segment_in_query():
+    captured = {}
+    async def search(q):
+        captured["q"] = q
+        return []
+    await collect_github(topic="auth", segment="mobile devs", search=search)
+    assert "auth" in captured["q"] and "mobile devs" in captured["q"]
+    assert "is:issue" in captured["q"]
+```
+
+Add to `tests/discovery/test_gather_qa.py` (Phase 4 collector):
+
+```python
+@pytest.mark.asyncio
+async def test_collect_qa_includes_segment_in_query():
+    captured = {}
+    async def search(q):
+        captured["q"] = q
+        return []
+    await collect_qa(topic="docker", segment="data engineers", search=search)
+    assert "docker" in captured["q"] and "data engineers" in captured["q"]
+```
+
 Add to `tests/discovery/test_pipeline.py`:
 
 ```python
@@ -734,8 +780,8 @@ def test_cli_passes_segment_to_pipeline(tmp_path, monkeypatch, fake_api_key):
 
 - [ ] **Step 2: Run to verify they fail**
 
-Run: `cd tools/llm-council && uv run --extra dev python -m pytest tests/discovery/test_gather_web.py::test_collect_web_includes_segment_in_query tests/discovery/test_pipeline.py::test_run_discovery_passes_segment_to_gather tests/discovery/test_cli.py::test_cli_passes_segment_to_pipeline -v`
-Expected: FAIL — `collect_web()`/`run_discovery()` reject the `segment` kwarg, and the CLI has no `--segment` option.
+Run: `cd tools/llm-council && uv run --extra dev python -m pytest tests/discovery/test_gather_web.py::test_collect_web_includes_segment_in_query tests/discovery/test_gather_reviews.py::test_collect_reviews_includes_segment_in_query tests/discovery/test_gather_github.py::test_collect_github_includes_segment_in_query tests/discovery/test_gather_qa.py::test_collect_qa_includes_segment_in_query tests/discovery/test_pipeline.py::test_run_discovery_passes_segment_to_gather tests/discovery/test_cli.py::test_cli_passes_segment_to_pipeline -v`
+Expected: FAIL — `collect_web()`/`collect_reviews()`/`collect_github()`/`collect_qa()`/`run_discovery()` reject the `segment` kwarg, and the CLI has no `--segment` option.
 
 - [ ] **Step 3: Implement the threading**
 
@@ -764,7 +810,7 @@ async def collect_sonar(*, api_key: str, topic: str, model: str, timeout: float 
     }
 ```
 
-> If Task 6 of Phase 4 already added the `fetch` param to `collect_sonar`, keep it — add `segment` alongside it (signature shown above already includes both). On today's `main` (no Phase 4), the current signature is `(*, api_key, topic, model, timeout=120.0)`; the line above adds both `segment` and `fetch=None` — that matches Phase 4 Task 6. If Phase 4 has NOT landed, change the signature to `(*, api_key, topic, model, timeout: float = 120.0, segment: str = "")` instead (drop `fetch`), since the verbatim-fetch path doesn't exist yet.
+> Phase 4 already added the `fetch=None` param to `collect_sonar` (Task 6) and the verbatim-fetch loop in its body — the signature above keeps `fetch=None` and adds `segment` alongside it. This is a **targeted edit**: replace only the signature line and the user-message `content` block; leave the verbatim-fetch loop intact. Do **not** touch the import — `sonar.py` imports only `extract_quotes` from `web.py` (Phase 4 M1 removed the dead `_simple_fetch` import).
 
 In `council/discovery/gather/last30.py`, add `segment` to `collect_last30` and compose the subject (replace the signature line and the `text = await runner(topic)` line):
 
@@ -777,7 +823,37 @@ async def collect_last30(topic: str, runner=_subprocess_runner, segment: str = "
         return []
 ```
 
-In `council/discovery/gather/__init__.py`, add `segment` to `gather_evidence` and thread it into each collector lambda (replace the signature + the default `collectors` dict):
+In `council/discovery/gather/reviews.py`, add `segment` to `collect_reviews` and shape the subject before building the site-targeted query (replace the signature line; insert the subject line before `results = await search(...)` and use it):
+
+```python
+async def collect_reviews(*, topic: str, segment: str = "", search=..., fetch=..., max_results: int = 8) -> list[EvidenceRecord]:
+```
+```python
+    subject = f"{topic} {segment}".strip() if segment else topic
+    results = await search(_review_query(subject))
+```
+
+In `council/discovery/gather/github.py`, add `segment` to `collect_github` and compose the subject into the issue query (replace the signature line and the `items = await search(...)` line):
+
+```python
+async def collect_github(*, topic: str, segment: str = "", search=..., max_results: int = 8) -> list[EvidenceRecord]:
+```
+```python
+    subject = f"{topic} {segment}".strip() if segment else topic
+    items = await search(f"{subject} in:title,body is:issue")
+```
+
+In `council/discovery/gather/qa.py`, add `segment` to `collect_qa` and compose the subject into the search term (replace the signature line and the `items = await search(topic)` line):
+
+```python
+async def collect_qa(*, topic: str, segment: str = "", search=..., max_results: int = 8) -> list[EvidenceRecord]:
+```
+```python
+    subject = f"{topic} {segment}".strip() if segment else topic
+    items = await search(subject)
+```
+
+In `council/discovery/gather/__init__.py`, add `segment` to `gather_evidence` and thread it into **all six** collector lambdas (replace the signature + the default `collectors` dict):
 
 ```python
 async def gather_evidence(*, topic: str, tier: TierConfig, api_key: str, segment: str = "",
@@ -785,12 +861,15 @@ async def gather_evidence(*, topic: str, tier: TierConfig, api_key: str, segment
     if collectors is None:
         collectors = {
             "last30": (lambda t: collect_last30(t, segment=segment)) if tier.social else None,
-            "sonar": (lambda t: collect_sonar(api_key=api_key, topic=t, model=tier.sonar_model, segment=segment)),
+            "sonar": (lambda t: collect_sonar(api_key=api_key, topic=t, model=tier.sonar_model, segment=segment, fetch=_simple_fetch)),
             "web": (lambda t: collect_web(topic=t, segment=segment)) if tier.web else None,
+            "reviews": (lambda t: collect_reviews(topic=t, segment=segment)) if tier.reviews else None,
+            "github": (lambda t: collect_github(topic=t, segment=segment)) if tier.github else None,
+            "qa": (lambda t: collect_qa(topic=t, segment=segment)) if tier.qa else None,
         }
 ```
 
-> **Phase-4-landed-first:** the `sonar` lambda also passes `fetch=_simple_fetch` (Phase 4 Task 7) — keep it: `collect_sonar(api_key=api_key, topic=t, model=tier.sonar_model, segment=segment, fetch=_simple_fetch)`. And add `reviews`/`github`/`qa` entries with `segment=segment` (and a `segment=""` param on each of those collectors, query-shaped like `collect_web`).
+> The `sonar` lambda keeps `fetch=_simple_fetch` (Phase 4 Task 7) and now also passes `segment=segment`. The `reviews`/`github`/`qa` entries + their tier gates already exist from Phase 4 — only `segment=segment` is added. Leave the imports (`collect_reviews`/`collect_github`/`collect_qa`/`_simple_fetch`) as Phase 4 left them.
 
 In `council/discovery/pipeline.py`, pass `segment` into the gather call (replace the gather line):
 
@@ -815,14 +894,14 @@ In `council/discovery/__main__.py`, add the `--segment` option and pass it to `r
 
 - [ ] **Step 4: Run the affected tests + full suite**
 
-Run: `cd tools/llm-council && uv run --extra dev python -m pytest tests/discovery/test_gather_web.py tests/discovery/test_gather_sonar.py tests/discovery/test_gather_last30.py tests/discovery/test_pipeline.py tests/discovery/test_cli.py -v`
-Expected: PASS (existing collector/pipeline/CLI tests — all default `segment=""` → unchanged behavior — plus the 5 new segment tests). Then full suite green.
+Run: `cd tools/llm-council && uv run --extra dev python -m pytest tests/discovery/test_gather_web.py tests/discovery/test_gather_sonar.py tests/discovery/test_gather_last30.py tests/discovery/test_gather_reviews.py tests/discovery/test_gather_github.py tests/discovery/test_gather_qa.py tests/discovery/test_pipeline.py tests/discovery/test_cli.py -v`
+Expected: PASS (existing collector/pipeline/CLI tests — all default `segment=""` → unchanged behavior — plus the 8 new segment tests, one per collector + pipeline + CLI). Then full suite green.
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add council/discovery/__main__.py council/discovery/pipeline.py council/discovery/gather/__init__.py council/discovery/gather/web.py council/discovery/gather/sonar.py council/discovery/gather/last30.py tests/discovery/test_gather_web.py tests/discovery/test_gather_sonar.py tests/discovery/test_gather_last30.py tests/discovery/test_pipeline.py tests/discovery/test_cli.py
-git commit -m "feat(discovery): --segment qualifier reshapes gather queries toward an audience"
+git add council/discovery/__main__.py council/discovery/pipeline.py council/discovery/gather/__init__.py council/discovery/gather/web.py council/discovery/gather/sonar.py council/discovery/gather/last30.py council/discovery/gather/reviews.py council/discovery/gather/github.py council/discovery/gather/qa.py tests/discovery/test_gather_web.py tests/discovery/test_gather_sonar.py tests/discovery/test_gather_last30.py tests/discovery/test_gather_reviews.py tests/discovery/test_gather_github.py tests/discovery/test_gather_qa.py tests/discovery/test_pipeline.py tests/discovery/test_cli.py
+git commit -m "feat(discovery): --segment qualifier reshapes gather queries across all six collectors"
 ```
 
 ---
@@ -907,7 +986,7 @@ Add a dated entry under the latest `CHANGELOG.md` heading:
 ```markdown
 ### fusion-discovery-council Phase 5 — substack lens + segment qualifier (2026-06-20)
 - `--lens substack` ships: reframes verified pain points into ranked post angles (`frame_substack`) and writes a `substack-value-engine`-consumable handoff brief (pre-fills the Value-Gate Itch + Transfer + verbatim evidence; leaves Solution for the author). Renders a `Substack Idea Ledger` + a sibling `-substack-brief.md`. No new Fusion call — same per-run cost as `pm`.
-- `--segment <audience>` reshapes the gather queries (web/sonar/last30) toward a target audience, fixing the "generic 'creatives' returns developer pain" failure mode. Default empty = unchanged behavior.
+- `--segment <audience>` reshapes the gather queries (all six collectors: web/sonar/last30 + reviews/github/qa) toward a target audience, fixing the "generic 'creatives' returns developer pain" failure mode. Default empty = unchanged behavior.
 - Plan: docs/superpowers/plans/2026-06-20-fusion-discovery-council-phase5.md.
 ```
 
@@ -966,18 +1045,18 @@ git commit -m "docs(discovery): Phase 5 — substack lens + --segment surface re
 - `frame_substack()` → Task 1 ✅ (verified pain → post angles + hooks + value-promise/Transfer + candidate Itch; consumes post-VERIFY points, no new Fusion call).
 - Handoff brief consumable by `substack-value-engine` → Tasks 2 + 4 ✅ (brief scaffolds Itch/Solution/Transfer per the skill's Value Gate, names the chain, carries verbatim evidence; written to the spec §9 sibling path).
 - Wire `--lens substack` through `__main__.py` + a render variant → Tasks 3 + 4 ✅ (pipeline lens branch + `render_substack_*`).
-- `--segment` qualifier reshaping gather queries → Task 5 ✅ (web/sonar/last30, threaded via gather_evidence + run_discovery + CLI; Phase-1 run-#2 insight addressed).
+- `--segment` qualifier reshaping gather queries → Task 5 ✅ (all six collectors: web/sonar/last30 + reviews/github/qa, threaded via gather_evidence + run_discovery + CLI; Phase-1 run-#2 insight addressed).
 - Output path per §9 (ledger + brief where the chain expects) → Task 4 ✅ (`...-substack-idea-ledger.md` + `...-substack-brief.md` under `vault/20_projects/research/`).
 
 **Placeholder scan:** every code/test step carries complete code grounded in the real current files (re-read 2026-06-20) and the real `substack-value-engine` Value-Gate contract. No TBD/TODO. The one live step (Task 6 Step 5) is a gated, Sean-approved confirmation with the deterministic unit tests as the real gate.
 
 **Type consistency:** `PostAngle` (Task 1) is consumed by `render_substack_*` (Task 2) and `pipeline` (Task 3) with matching field names (`title/audience/hook/itch/transfer/evidence_urls/quotes/whitespace/score/corroboration`); `frame_substack(verified, fusion_result, segment="")` signature matches its pipeline call; `DiscoveryResult.brief_markdown` (Task 3, default `""`) is read by the CLI (Task 4) and defaults keep existing positional `DiscoveryResult(...)` constructions valid; `run_discovery`'s `segment` param (Task 3) is populated by the CLI + threaded to `gather_evidence` (Task 5); `_brief_path` (Task 4) is defined before use. `collect_web/collect_sonar/collect_last30/gather_evidence` all gain `segment: str = ""` (Task 5) — default empty preserves every existing call site and test.
 
-**Cross-phase consistency:** the Task-5 `collect_sonar` signature includes `fetch=None` to match Phase 4 Task 6; the inline note tells the executor to drop `fetch` if Phase 4 has not landed. The `gather_evidence` default-collectors edit (Task 5) is written for today's 3 collectors with an explicit Phase-4-landed-first addendum for `reviews`/`github`/`qa`.
+**Cross-phase consistency (Phase 4 landed):** Task 5 threads `segment` through **all six** collectors (web/sonar/last30 + reviews/github/qa), with `collect_sonar` keeping its Phase-4 `fetch=None` param and the orchestrator keeping `fetch=_simple_fetch`. `sonar.py`'s import is left as Phase 4's M1 fix left it (`extract_quotes` only). The substack-lens tasks (1–4) are collector-agnostic (post-VERIFY) and apply verbatim.
 
 ---
 
 ## Phasing reminder
 
-This plan is **Phase 5 (substack lens + segment qualifier)** only. It is the final planned phase of the original spec's roadmap. It can ship **independently of Phase 4** (it grounds against today's collectors), though the recommended order is **Phase 4 first** (so the substack lens draws on the wider evidence surface). After it lands and a live substack run confirms the lens + brief:
+This plan is **Phase 5 (substack lens + segment qualifier)** only. It is the final planned phase of the original spec's roadmap. **Phase 4 has landed**, so it runs on top of the wider evidence surface (reviews/github/qa) and `--segment` reshapes all six collectors. After it lands and a live substack run confirms the lens + brief:
 - **Future (deferred, per spec §13):** autonomous/queued discovery mode; Apify actors for gated review-site depth; additional `deep` lineages; pain-taxonomy persistence across runs; the competitor-Substack/newsletter-landscape collector (spec §6, substack-lens-specific — defers cleanly as a Phase-4-style site-targeted collector).
