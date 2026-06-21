@@ -6,6 +6,7 @@ JSON shape: report.to_dict() from that skill's lib/schema.py.
 
 import asyncio
 import json
+import os
 import shutil
 import sys
 from pathlib import Path
@@ -13,6 +14,20 @@ from pathlib import Path
 from council.discovery.evidence import EvidenceRecord
 
 _LAST30_TIMEOUT_S = 300   # last30days can be slow; hard cap so a hung child can't stall gather
+
+# Upstream last30days defaults INCLUDE_SOURCES=None (lib/env.py), then does
+# `config.get('INCLUDE_SOURCES', '').split(',')` (last30days.py) → AttributeError before any
+# JSON is emitted. Forcing a non-null value unblocks the crash. reddit + hackernews need no
+# API key (they "work out of the box"), so they restore the social backbone keyless.
+_LAST30_INCLUDE_SOURCES = "reddit,hackernews"
+
+
+def _last30_env() -> dict:
+    """Subprocess env that forces INCLUDE_SOURCES so the upstream None-default crash can't fire.
+
+    `os.environ` takes precedence in the plugin's loader, so this override wins regardless of any
+    global ~/.config/last30days/.env. Inherits the rest of the parent env (PATH, API keys, etc.)."""
+    return {**os.environ, "INCLUDE_SOURCES": _LAST30_INCLUDE_SOURCES}
 
 
 def _eng(item: dict, *keys: str) -> int:
@@ -85,6 +100,7 @@ async def _subprocess_runner(topic: str) -> str:
     proc = await asyncio.create_subprocess_exec(
         py, str(script), topic, "--emit=json", "--quick", "--no-native-web",
         stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE,
+        env=_last30_env(),
     )
     try:
         out, err = await asyncio.wait_for(proc.communicate(), timeout=_LAST30_TIMEOUT_S)

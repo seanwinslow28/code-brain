@@ -1,6 +1,15 @@
 import json
 import pytest
-from council.discovery.gather.last30 import parse_last30_json, collect_last30
+from council.discovery.gather.last30 import parse_last30_json, collect_last30, _last30_env
+
+
+def test_last30_env_forces_include_sources(monkeypatch):
+    # Upstream last30days defaults INCLUDE_SOURCES=None then calls .split(',') on it → crash.
+    # We force a non-null value (reddit,hackernews work keyless) via the subprocess env.
+    monkeypatch.setenv("SOME_INHERITED_VAR", "keepme")
+    env = _last30_env()
+    assert env["INCLUDE_SOURCES"] == "reddit,hackernews"
+    assert env["SOME_INHERITED_VAR"] == "keepme"   # preserves inherited env (API keys, PATH, etc.)
 
 SAMPLE = {
     "topic": "roadmap tools",
