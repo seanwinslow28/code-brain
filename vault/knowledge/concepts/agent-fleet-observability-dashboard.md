@@ -2,32 +2,31 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/expansions/infrastructure-status.md
+  - knowledge/expansions/connections/agent-health-and-knowledge-retrieval-interdependence.md
 tags: [auto-generated, phase-6]
-created: 2026-05-28
-updated: 2026-05-28
+created: 2026-06-21
+updated: 2026-06-21
 ---
 
 ## Definition
 
-A diagnostic layer that maps runtime performance to Brendan Gregg’s USE Method, reporting Utilization, Saturation, and Errors rather than qualitative speed or accuracy. This mechanism shifts the evaluation from static 'winner' selection to dynamic thresholding, where a model's viability is contingent on specific resource constraints like GPU utilization or memory pressure. By anchoring status in these physical limits, the system creates a runbook for failure modes, allowing the operator to distinguish between a model that is simply slow and one that is failing under load.
+A telemetry framework that distinguishes between monitoring (answering known failure questions via uptime and resource metrics) and observability (enabling the investigation of unknown failure modes through high-cardinality context). This mechanism requires recording specific decision traces for every agent run, including input sources, retrieval sets, skipped sources, model routes, costs, timeouts, fallback paths, output dispositions, and downstream artifacts touched. Without this granularity, health metrics risk becoming green dashboards that mask silent epistemic failure because the system cannot answer new questions about why a retrieval failed or succeeded.
 
 ## Context
 
-Sean currently relies on qualitative assessments of his local inference fleet. Without this observability layer, he cannot predict when a 'Tier A' model will degrade into a 'Tier B' or 'Fallback' state, leaving him vulnerable to silent failures during critical job-hunt tasks.
+Sean's current agent health concept treats health as uptime and completion rate, which is insufficient for debugging why an agent produced poor output. By implementing this observability layer, Sean can identify when agents are failing silently due to bad retrieval choices rather than infrastructure crashes, allowing him to fix the epistemic loop rather than just the plumbing.
 
 ## Evidence
 
-> Add a diagnostic layer that reports every runtime/machine as Utilization, Saturation, Errors rather than “fast/accurate/best.”
+> Monitoring answers known failure questions. Observability lets the fleet investigate unknown failure modes from traces, events, and high-cardinality context.
 
-> This unlocks an agent fleet runbook instead of a concept note: “If vault_synthesizer misses schema, check saturation before swapping models.”
-
-> Right now the concept names winners; USE would let Sean explain why a winner stops being a winner under load.
+> Without this, Sean’s “agent health” risks becoming green dashboards over silent epistemic failure.
 
 ## Examples
 
-- MBP-Ollama qwen3.6:35b-a3b is Tier A only when GPU utilization is below X, memory pressure below Y, queue depth below Z, and error rate below N.
+- Recording why a source looked promising, what scent weakened, and what would trigger patch abandonment during retrieval.
+- Logging the specific model route and fallback path taken when a primary provider failed or returned low-confidence results.
 
 ## Related Concepts
 
-[[Infrastructure Status]] [[Runtime-Model Coupling]]
+[[Agent Health]] [[Silent Failure Propagation in Agent Fleets]]
