@@ -105,10 +105,21 @@ It also confirmed: pm path regression-free, all six collectors genuinely honor `
 
 Phase 5 completes the **planned roadmap**. It does **not** make the tool production-dependable. In priority order:
 
-### 7a. HIGH — Fusion response robustness (this is the real blocker)
+### 7a. ~~HIGH — Fusion response robustness (the real blocker)~~ → ✅ RESOLVED (was stale)
+
+> **CORRECTION (2026-06-21, post-Phase-5 close-out review).** This section was carried **stale from the Phase-2 backlog** and does **not** match the current code on `main`. Both fixes it asks for already shipped in **Phase 3**:
+> - `fuse()` does **not** use an "unguarded `resp.json()`" — it calls `_decode_payload(resp)` ([fusion.py](../discovery/fusion.py)), a 3-tier SSE-padding-robust decoder (`json.loads` → `_strip_sse_padding` → `_first_json_object` scan-forward → typed `FusionError`).
+> - Failed Fusion calls **do** record spend: `total_cost` accumulates `usage.cost` across attempts → `FusionError(cost=…)` → the CLI's `except DiscoveryFailed` calls `record_spend`. Not $0.
+> - **OpenRouter docs research (2026-06-21) confirms our handling is documented-correct:** `: OPENROUTER PROCESSING` is a documented SSE keep-alive *comment*; per the SSE spec, `:`-prefixed lines must be ignored — exactly what `_strip_sse_padding` does. Streaming is not required for slow calls. Sources: [server-tools/fusion](https://openrouter.ai/docs/guides/features/server-tools/fusion), [api/reference/streaming](https://openrouter.ai/docs/api/reference/streaming).
+>
+> **Net: §7a is closed** — the named bug is fixed AND the approach is validated. The "two runs failed on 2026-06-20" were **Phase-2** runs, pre-Phase-3-fix. The only residual is *confidence* (few live runs) — see the close-out live-run plan. Original (stale) text preserved below for the record.
+
 Live discovery **intermittently fails at the FUSE parse step**. Two `quick`-tier runs on 2026-06-20 both failed: one `FusionError "did not return parseable"`, one bare `JSONDecodeError`. Root cause: OpenRouter streams `: OPENROUTER PROCESSING` SSE keep-alive comment lines as padding on slow Fusion calls, so `fuse()`'s unguarded `payload = resp.json()` in [`fusion.py`](../discovery/fusion.py) chokes on the non-JSON prefix. **It did not fire on today's Phase-5 live run, which is exactly why it's dangerous — it's intermittent, correlated with slow panel/tool-call runs.** Until this is fixed, *any* live run (pm or substack) can fail unpredictably. **Two coupled fixes:** (1) strip leading `: ` comment lines / extract the first balanced `{…}` before `json.loads`, harden `_parse`; (2) **cost-integrity** — failed Fusion calls bill OpenRouter but `record_spend` is post-success only, so a failed run records $0 locally. Record `usage.cost` on failure too. **This is the single highest-leverage thing to do before the tool is dependable.** Ticketed HIGH; full write-up in the Phase-2 field report §5/§6.
 
-### 7b. MEDIUM — the social backbone is dark
+### 7b. ~~MEDIUM — the social backbone is dark~~ → ✅ RESOLVED (2026-06-21)
+
+> **RESOLVED (2026-06-21, commit `85b1a63`).** Root cause confirmed: the upstream loader ([lib/env.py](file)) defaults `INCLUDE_SOURCES=None`, then `last30days.py` does `.split(',')` on it. Fixed **durably in our repo** (not a global `~/.config` hack a fresh machine loses): `gather/last30.py`'s `_last30_env()` forces `INCLUDE_SOURCES=reddit,hackernews` (keyless sources) in the subprocess env, which wins in the plugin's `os.environ`-first loader precedence. Live-verified — the crash is gone and **reddit yields records** (3 on the verification run). HN errored that run under `--no-native-web` (degrades safely to 0 HN records; a `hackernews_error` field is emitted) — logged as a LOW follow-up, not a blocker.
+
 `last30` yields 0 live (§6). The tool currently leans on Sonar + web + reviews + github + qa. The substack lens specifically benefits from Reddit/HN social pain, which is exactly what `last30` would supply. The 30-second config unblock should be done and verified before anyone leans on the substack lens for real reader-pain mining. Ticketed (carried).
 
 ### 7c. LOW — `--segment` free-text into operator-bearing queries (NEW this phase)
@@ -131,6 +142,12 @@ None block merge; all either match the sibling `frame_pm`/`render_ledger` bar or
 ### 7g. Deferred-further (documented, out of the original roadmap)
 Per spec §13 / Phase-4 §7d: autonomous/queued discovery mode; Apify actors for gated review-site depth; additional `deep` panel lineages; pain-taxonomy persistence across runs; demand-intent as query-expansion; trend-velocity feeds; the competitor-Substack/newsletter-landscape collector (a clean Phase-4-style site-targeted add for the substack lens). None are needed for the roadmap; all are real enhancements if the tool gets daily use.
 
+### 7h. NEW (2026-06-21 OpenRouter Fusion research) — two LOW findings
+Surfaced by the close-out research dig into the OpenRouter Fusion server-tool + streaming docs (the same dig that confirmed §7a is closed). Neither is a live bug today; both are cheap insurance.
+- **Request-shape divergence (LOW, compatibility watch).** Current OpenRouter docs put the Fusion config under `tools[0].parameters` (with the judge as `model` *inside* it). Our `_build_body` ([fusion.py](../discovery/fusion.py)) uses a **top-level `"fusion"` block** + top-level `model`. Ours is live-verified working (FUSION_SCHEMA.md), but no test would catch it if OpenRouter ever drops the top-level form. Fix-if-it-breaks: move config into `tools[0].parameters`. Add a periodic live re-verify. Ticketed.
+- **Typed `failure_reason` is invisible to us (LOW, diagnosability).** The Fusion tool hard-fails with `status:"error"` + a typed `failure_reason` (`all_panels_failed`, `insufficient_credits`, `rate_limited`, `fusion_invocation_capped`, `unexpected_error`). Because we read the **outer judge's** `message.content` rather than the raw tool result, those reach us as a vague "did not return parseable" + one retry → `FusionError`. Safe (degrades correctly) but loses the diagnostic. A future enhancement could detect `status`/`failure_reason` and surface it. Ticketed.
+- Also confirmed in-spec by the research (no action): `analysis_models` range 1–8 (we use ≤6), `max_tool_calls` range 1–16 (we use ≤8), and streaming is **not** required for slow calls.
+
 ## 8. State of the branch
 
 - **Branch:** `feat/fusion-discovery-council-phase5` — **not merged, no PR** (per the kickoff: stay on the feature branch unless asked).
@@ -141,3 +158,5 @@ Per spec §13 / Phase-4 §7d: autonomous/queued discovery mode; Apify actors for
 ## 9. Bottom line (honest)
 
 **The roadmap is done; the tool is feature-complete and the deterministic gate is green.** The substack lens and `--segment` are correct, cost-safe, and fabrication-gate-respecting. **But "feature-complete" ≠ "dependable for real use."** The one thing that actually gates trustworthy operation is **§7a (Fusion robustness)** — it's a HIGH, intermittent, live-only failure that today's run happened to dodge. If this tool is going to be used to mine real Substack ideas, fix 7a first and unblock 7b (`last30`) second; everything else in §7 is genuine but lower-stakes. I'd not call the fusion-discovery-council "complete" in the operational sense until 7a is closed and a few consecutive live runs (both lenses) succeed without a FUSE flake.
+
+> **UPDATE (2026-06-21 close-out).** The §9 framing above was built on a stale §7a. On review: **§7a was already closed** (the bug was fixed in Phase 3 and the SSE-strip approach is validated documented-correct by OpenRouter research — see the §7a correction). **§7b (`last30`) is now fixed** (`85b1a63`, reddit yields live). So **there is no remaining blocker.** What's left before declaring *operational* completeness is **confidence only** — a few consecutive live runs (incl. deep-tier, the slowest/worst case for SSE padding) without a FUSE flake. The two new research findings (§7h) are LOW and ticketed. Revised bottom line: **the tool is feature-complete, the one real open item is closed, and operational confidence is one short live-run pass away.**
