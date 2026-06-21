@@ -28,6 +28,7 @@ class DiscoveryResult:
     verified_count: int
     dropped_count: int
     session: dict
+    brief_markdown: str = ""
 
 
 class DiscoveryFailed(Exception):
@@ -45,7 +46,7 @@ def _estimate_cost(fr: FusionResult, tier) -> float:
     return round(tok + web, 4)
 
 
-async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str,
+async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segment: str = "",
                         gather_fn=None, fuse_fn=None, sessions_dir: Path | None = None) -> DiscoveryResult:
     tcfg = get_tier(tier)
     session_id = f"{time.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:6]}"
@@ -80,15 +81,26 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str,
 
     verified = verify_pain_points(fr.pain_points, bundle)
     dropped = sum(1 for v in verified if not v.verified)
-    cards, quote_bank = frame_pm(verified, fr)
     cost = _estimate_cost(fr, tcfg)
 
-    md = render_ledger(topic=topic, lens=lens, tier=tier, cards=cards, quote_bank=quote_bank,
-                       fusion_result=fr, cost_usd=cost, dropped_count=dropped)
+    brief_md = ""
+    if lens == "substack":
+        from council.discovery.frame_substack import frame_substack
+        from council.discovery.render_substack import render_substack_ledger, render_substack_brief
+        angles, quote_bank = frame_substack(verified, fr, segment=segment)
+        md = render_substack_ledger(topic=topic, tier=tier, angles=angles, quote_bank=quote_bank,
+                                    fusion_result=fr, cost_usd=cost, dropped_count=dropped)
+        brief_md = render_substack_brief(topic=topic, segment=segment, angles=angles)
+        verified_count = len(angles)
+    else:
+        cards, quote_bank = frame_pm(verified, fr)
+        md = render_ledger(topic=topic, lens=lens, tier=tier, cards=cards, quote_bank=quote_bank,
+                           fusion_result=fr, cost_usd=cost, dropped_count=dropped)
+        verified_count = len(cards)
 
     session = {
         "id": session_id, "topic": topic, "lens": lens, "tier": tier,
-        "evidence_count": len(bundle.records), "verified": len(cards),
+        "evidence_count": len(bundle.records), "verified": verified_count,
         "dropped": dropped, "cost_usd": cost,
         "gather_status": gather_status,
         "blind_spots": fr.blind_spots, "contradictions": fr.contradictions,
@@ -97,5 +109,5 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str,
         sessions_dir.mkdir(parents=True, exist_ok=True)
         (sessions_dir / f"{session_id}.json").write_text(json.dumps(session, indent=2))
 
-    return DiscoveryResult(markdown=md, cost_usd=cost, verified_count=len(cards),
-                           dropped_count=dropped, session=session)
+    return DiscoveryResult(markdown=md, cost_usd=cost, verified_count=verified_count,
+                           dropped_count=dropped, session=session, brief_markdown=brief_md)
