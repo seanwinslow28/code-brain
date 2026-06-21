@@ -52,7 +52,7 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
     session_id = f"{time.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:6]}"
 
     gather = gather_fn or gather_evidence
-    bundle, gather_status = await gather(topic=topic, tier=tcfg, api_key=api_key)
+    bundle, gather_status = await gather(topic=topic, tier=tcfg, api_key=api_key, segment=segment)
 
     if not bundle.records:
         md = render_ledger(topic=topic, lens=lens, tier=tier, cards=[], quote_bank=[],

@@ -36,12 +36,13 @@ def _default_github_search(token: str | None):
     return search
 
 
-async def collect_github(*, topic: str, search=..., max_results: int = 8) -> list[EvidenceRecord]:
+async def collect_github(*, topic: str, segment: str = "", search=..., max_results: int = 8) -> list[EvidenceRecord]:
     if search is ...:
         search = _default_github_search(os.environ.get("GITHUB_TOKEN"))
     if search is None:
         return []
-    items = await search(f"{topic} in:title,body is:issue")
+    subject = f"{topic} {segment}".strip() if segment else topic
+    items = await search(f"{subject} in:title,body is:issue")
     recs: list[EvidenceRecord] = []
     for it in items[:max_results]:
         url = it.get("html_url", "")

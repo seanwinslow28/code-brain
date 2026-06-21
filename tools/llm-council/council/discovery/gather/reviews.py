@@ -28,7 +28,7 @@ def _review_query(topic: str) -> str:
     return f"{topic} review ({weak}) ({sites})"
 
 
-async def collect_reviews(*, topic: str, search=..., fetch=..., max_results: int = 8) -> list[EvidenceRecord]:
+async def collect_reviews(*, topic: str, segment: str = "", search=..., fetch=..., max_results: int = 8) -> list[EvidenceRecord]:
     if search is ...:
         key = os.environ.get("BRAVE_API_KEY")
         search = _default_brave_search(key) if key else None
@@ -36,7 +36,8 @@ async def collect_reviews(*, topic: str, search=..., fetch=..., max_results: int
         fetch = _simple_fetch
     if search is None:
         return []
-    results = await search(_review_query(topic))
+    subject = f"{topic} {segment}".strip() if segment else topic
+    results = await search(_review_query(subject))
     recs: list[EvidenceRecord] = []
     for it in results[:max_results]:
         url = it.get("url", "")

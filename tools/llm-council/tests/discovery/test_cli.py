@@ -65,6 +65,22 @@ def test_cli_pm_lens_writes_no_brief(tmp_path, monkeypatch, fake_api_key):
     assert not (tmp_path / "led-brief.md").exists()
 
 
+def test_cli_passes_segment_to_pipeline(tmp_path, monkeypatch, fake_api_key):
+    captured = {}
+
+    async def fake_run(**kw):
+        captured.update(kw)
+        return DiscoveryResult("# Idea Ledger — x\n", 0.1, 0, 0, {"id": "s"})
+    monkeypatch.setattr("council.discovery.__main__.run_discovery", fake_run)
+
+    res = CliRunner().invoke(main, [
+        "x", "--lens", "pm", "--tier", "quick", "--segment", "designers",
+        "--output", str(tmp_path / "o.md"), "--skip-budget-check",
+    ])
+    assert res.exit_code == 0, res.output
+    assert captured["segment"] == "designers"
+
+
 def test_cli_records_spend_and_echoes_status_on_failure(tmp_path, monkeypatch, fake_api_key, tmp_spend_dir):
     from datetime import date
     from council import budget

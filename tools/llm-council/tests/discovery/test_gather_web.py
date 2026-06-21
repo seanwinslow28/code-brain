@@ -112,3 +112,23 @@ async def test_simple_fetch_blocks_redirect_to_metadata(httpx_mock):
     text = await _simple_fetch("http://93.184.216.34/start")
     assert text == ""
     assert len(httpx_mock.get_requests()) == 1   # metadata hop never fetched
+
+
+@pytest.mark.asyncio
+async def test_collect_web_includes_segment_in_query():
+    captured = {}
+    async def search(q):
+        captured["q"] = q
+        return []
+    await collect_web(topic="note apps", segment="designers", search=search, fetch=None)
+    assert "designers" in captured["q"] and "note apps" in captured["q"]
+
+
+@pytest.mark.asyncio
+async def test_collect_web_no_segment_unchanged():
+    captured = {}
+    async def search(q):
+        captured["q"] = q
+        return []
+    await collect_web(topic="note apps", search=search, fetch=None)
+    assert captured["q"] == "note apps user complaints problems frustrations 2026"

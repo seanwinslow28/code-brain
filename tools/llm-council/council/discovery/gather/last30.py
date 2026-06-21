@@ -99,9 +99,10 @@ async def _subprocess_runner(topic: str) -> str:
     return text
 
 
-async def collect_last30(topic: str, runner=_subprocess_runner) -> list[EvidenceRecord]:
+async def collect_last30(topic: str, runner=_subprocess_runner, segment: str = "") -> list[EvidenceRecord]:
+    subject = f"{topic} {segment}".strip() if segment else topic
     try:
-        text = await runner(topic)
+        text = await runner(subject)
     except (FileNotFoundError, asyncio.TimeoutError):
         return []
     if not text.strip():

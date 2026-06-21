@@ -143,7 +143,7 @@ async def _simple_fetch(url: str, timeout: float = 20.0) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-async def collect_web(*, topic: str, search=..., fetch=..., max_results: int = 8) -> list[EvidenceRecord]:
+async def collect_web(*, topic: str, segment: str = "", search=..., fetch=..., max_results: int = 8) -> list[EvidenceRecord]:
     if search is ...:
         if os.environ.get("EXA_API_KEY"):
             search = _default_exa_search(os.environ["EXA_API_KEY"])
@@ -159,7 +159,8 @@ async def collect_web(*, topic: str, search=..., fetch=..., max_results: int = 8
         fetch = None
     if search is None:
         return []
-    query = f"{topic} user complaints problems frustrations 2026"
+    subject = f"{topic} {segment}".strip() if segment else topic
+    query = f"{subject} user complaints problems frustrations 2026"
     results = await search(query)
     recs: list[EvidenceRecord] = []
     for it in results[:max_results]:

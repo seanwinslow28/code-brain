@@ -120,6 +120,17 @@ async def test_substack_lens_produces_angles_ledger_and_brief():
 
 
 @pytest.mark.asyncio
+async def test_run_discovery_passes_segment_to_gather():
+    seen = {}
+    async def gather_fn(**kw):
+        seen.update(kw)
+        return EvidenceBundle(), {"sonar": "ok: 0 records (0 found)"}
+    await run_discovery(topic="x", lens="pm", tier="quick", api_key="k",
+                        segment="developers", gather_fn=gather_fn)
+    assert seen["segment"] == "developers"
+
+
+@pytest.mark.asyncio
 async def test_pm_lens_produces_no_brief():
     bundle = EvidenceBundle()
     bundle.add(EvidenceRecord("reddit", "r/x", "https://r.com/1", "2026-06-18", "exports fail silently", 9))
