@@ -34,12 +34,13 @@ def _default_se_search(site: str = "stackoverflow"):
     return search
 
 
-async def collect_qa(*, topic: str, search=..., max_results: int = 8) -> list[EvidenceRecord]:
+async def collect_qa(*, topic: str, segment: str = "", search=..., max_results: int = 8) -> list[EvidenceRecord]:
     if search is ...:
         search = _default_se_search()
     if search is None:
         return []
-    items = await search(topic)
+    subject = f"{topic} {segment}".strip() if segment else topic
+    items = await search(subject)
     recs: list[EvidenceRecord] = []
     for it in items[:max_results]:
         url = it.get("link", "")

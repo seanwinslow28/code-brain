@@ -40,3 +40,14 @@ async def test_collect_reviews_no_key_returns_empty(monkeypatch):
     monkeypatch.delenv("BRAVE_API_KEY", raising=False)
     recs = await collect_reviews(topic="x")
     assert recs == []
+
+
+@pytest.mark.asyncio
+async def test_collect_reviews_includes_segment_in_query():
+    captured = {}
+    async def search(q):
+        captured["q"] = q
+        return []
+    await collect_reviews(topic="crm", segment="nonprofits", search=search, fetch=None)
+    assert "crm" in captured["q"] and "nonprofits" in captured["q"]
+    assert "site:g2.com" in captured["q"]   # still site-targeted

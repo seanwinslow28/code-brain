@@ -109,6 +109,16 @@ async def test_subprocess_runner_kills_and_reaps_on_timeout(monkeypatch):
 
 
 @pytest.mark.asyncio
+async def test_collect_last30_composes_segment_into_subject():
+    seen = {}
+    async def runner(subject):
+        seen["s"] = subject
+        return "{}"
+    await collect_last30("pm tools", runner=runner, segment="enterprise")
+    assert seen["s"] == "pm tools enterprise"
+
+
+@pytest.mark.asyncio
 async def test_subprocess_runner_breadcrumb_on_empty_stdout(monkeypatch, capsys):
     from council.discovery.gather import last30
 

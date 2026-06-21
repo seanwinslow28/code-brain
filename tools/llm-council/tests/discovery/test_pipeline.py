@@ -93,3 +93,57 @@ async def test_fuse_failure_still_raises_with_cost_when_session_write_fails(tmp_
         await run_discovery(topic="x", lens="pm", tier="quick", api_key="k",
                             gather_fn=gather_fn, fuse_fn=fuse_fn, sessions_dir=bad)
     assert exc.value.cost_usd == 0.42
+
+
+@pytest.mark.asyncio
+async def test_substack_lens_produces_angles_ledger_and_brief():
+    bundle = EvidenceBundle()
+    bundle.add(EvidenceRecord("reddit", "r/x", "https://r.com/1", "2026-06-18", "exports fail silently", 9))
+
+    async def gather_fn(**kw):
+        return bundle, {"sonar": "ok: 1 records (1 found)"}
+
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Export loss", "notes vanish on conflict", ["exports fail silently"],
+                               ["https://r.com/1"], intensity=5, segment="power users"),
+        ], blind_spots=["nobody covers recovery UX"], tokens_in=900, tokens_out=200, cost=0.3)
+
+    res = await run_discovery(topic="sync apps", lens="substack", tier="standard",
+                              api_key="k", gather_fn=gather_fn, fuse_fn=fuse_fn)
+    assert "Substack Idea Ledger" in res.markdown
+    assert "Export loss" in res.markdown
+    assert res.verified_count == 1
+    assert res.brief_markdown                                   # the brief is produced
+    assert "Itch" in res.brief_markdown
+    assert "exports fail silently" in res.brief_markdown        # verbatim evidence carried into the brief
+
+
+@pytest.mark.asyncio
+async def test_run_discovery_passes_segment_to_gather():
+    seen = {}
+    async def gather_fn(**kw):
+        seen.update(kw)
+        return EvidenceBundle(), {"sonar": "ok: 0 records (0 found)"}
+    await run_discovery(topic="x", lens="pm", tier="quick", api_key="k",
+                        segment="developers", gather_fn=gather_fn)
+    assert seen["segment"] == "developers"
+
+
+@pytest.mark.asyncio
+async def test_pm_lens_produces_no_brief():
+    bundle = EvidenceBundle()
+    bundle.add(EvidenceRecord("reddit", "r/x", "https://r.com/1", "2026-06-18", "exports fail silently", 9))
+
+    async def gather_fn(**kw):
+        return bundle, {"sonar": "ok: 1 records (1 found)"}
+
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Export loss", "s", ["exports fail silently"], ["https://r.com/1"], intensity=5),
+        ], tokens_in=900, tokens_out=200, cost=0.3)
+
+    res = await run_discovery(topic="sync apps", lens="pm", tier="standard",
+                              api_key="k", gather_fn=gather_fn, fuse_fn=fuse_fn)
+    assert "Idea Ledger — sync apps" in res.markdown
+    assert res.brief_markdown == ""

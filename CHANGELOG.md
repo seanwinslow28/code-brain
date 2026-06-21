@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### fusion-discovery-council Phase 5 — substack lens + segment qualifier (2026-06-21)
+- `--lens substack` ships: reframes verified pain points into ranked post angles (`frame_substack`) and writes a `substack-value-engine`-consumable handoff brief (pre-fills the Value-Gate Itch + Transfer + verbatim evidence; leaves Solution for the author). Renders a `Substack Idea Ledger` + a sibling `-substack-brief.md`. No new Fusion call — same per-run cost as `pm`.
+- `--segment <audience>` reshapes the gather queries (all six collectors: web/sonar/last30 + reviews/github/qa) toward a target audience, fixing the "generic 'creatives' returns developer pain" failure mode. Default empty = unchanged behavior.
+- Plan: docs/superpowers/plans/2026-06-20-fusion-discovery-council-phase5.md.
+
 ### fusion-discovery-council Phase 4 — extended collectors + fetch hardening (2026-06-20)
 - Three new free, fabrication-gate-compatible Stage-1 collectors, tier-gated per spec §6: review sites + competitor-weakness mining (Brave site-targeted) and GitHub Issues on `standard`/`deep`; Stack Exchange Q&A on `deep`. `quick` stays lean.
 - `_simple_fetch` SSRF/redirect allow-list: per-hop scheme + public-IP validation (blocks file://, private/loopback/link-local + cloud-metadata IPs, and redirects into them).

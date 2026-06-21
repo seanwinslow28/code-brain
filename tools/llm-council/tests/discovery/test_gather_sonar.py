@@ -69,3 +69,16 @@ async def test_collect_sonar_falls_back_to_synthesized_when_fetch_empty(httpx_mo
         return ""    # page yielded no complaint sentence
     recs = await collect_sonar(api_key="k", topic="x", model="perplexity/sonar", fetch=fetch)
     assert recs[0].quote == "Teams report onboarding is slow and painful."
+
+
+@pytest.mark.asyncio
+async def test_collect_sonar_includes_segment_in_prompt(httpx_mock):
+    import json as _json
+    httpx_mock.add_response(json={
+        "choices": [{"message": {"content": "a claim about it here."}}],
+        "citations": ["https://a.com/1"], "usage": {},
+    })
+    await collect_sonar(api_key="k", topic="note apps", model="perplexity/sonar",
+                        segment="developers", fetch=None)
+    body = _json.loads(httpx_mock.get_requests()[0].content)
+    assert "developers" in body["messages"][0]["content"]
