@@ -1,8 +1,11 @@
 # council/discovery/gather/web.py
 """Collector: neural web search (Exa/Brave) + fetch → complaint-quote extraction."""
 
+import ipaddress
 import os
 import re
+import socket
+from urllib.parse import urlparse
 
 import httpx
 
@@ -57,20 +60,82 @@ def _default_brave_search(api_key: str):
     return search
 
 
-async def _simple_fetch(url: str, timeout: float = 20.0) -> str:
-    """Best-effort full-page text for quote density. Crude tag-strip; Phase 3 may swap a real parser."""
-    # Phase 3: add scheme/private-IP allow-list before fetching attacker-influenced URLs.
+_FETCH_MAX_REDIRECTS = 3
+
+
+def _resolve_ips(host: str) -> list[str]:
+    """Resolve a hostname to its IP strings (IPv4 + IPv6). Real DNS; injectable in tests.
+
+    Note: a brief blocking getaddrinfo is acceptable for this personal tool. There is a
+    residual TOCTOU gap between resolve and connect (DNS rebinding) we accept rather than
+    pin the connection IP — fetch targets come from Brave results, not an attacker.
+    """
     try:
-        async with httpx.AsyncClient(timeout=timeout, follow_redirects=True) as c:
-            r = await c.get(url, headers={"User-Agent": "Mozilla/5.0 (discovery-bot)"})
-            r.raise_for_status()
-            ctype = r.headers.get("content-type", "")
-            # A Brave result URL can point at a PDF/binary/huge page. Skip non-HTML
-            # bodies (missing content-type is allowed, not over-constrained) and cap
-            # the text we scan so an oversized page can't blow up memory.
-            if ctype and not (ctype.startswith("text/") or ctype.startswith("application/xhtml")):
-                return ""
-            html = r.text[:2_000_000]
+        infos = socket.getaddrinfo(host, None)
+    except socket.gaierror:
+        return []
+    return [info[4][0] for info in infos]
+
+
+def _is_safe_fetch_url(url: str, *, resolve=_resolve_ips) -> bool:
+    """True only for http(s) URLs whose host resolves entirely to globally-routable IPs.
+
+    Blocks non-http(s) schemes (file://, gopher://, ftp://, …) and SSRF targets: loopback,
+    private, link-local (incl. 169.254.169.254 cloud metadata), and reserved ranges. A host
+    that resolves to ANY non-global IP is rejected (no partial trust).
+    """
+    parsed = urlparse(url)
+    if parsed.scheme not in ("http", "https"):
+        return False
+    host = parsed.hostname
+    if not host:
+        return False
+    try:                                  # literal IP host → check directly, no DNS
+        return ipaddress.ip_address(host).is_global
+    except ValueError:
+        pass
+    ips = resolve(host)
+    if not ips:
+        return False
+    for raw in ips:
+        try:
+            if not ipaddress.ip_address(raw).is_global:
+                return False
+        except ValueError:
+            return False
+    return True
+
+
+async def _simple_fetch(url: str, timeout: float = 20.0) -> str:
+    """Best-effort full-page text for quote density (crude tag-strip).
+
+    SSRF-hardened: validates scheme + resolved IPs of the initial URL AND every redirect hop
+    against a public-IP allow-list before connecting. Redirects are followed manually
+    (follow_redirects=False) so a public URL can't 302 into a private/metadata address.
+    """
+    try:
+        async with httpx.AsyncClient(timeout=timeout, follow_redirects=False) as c:
+            current = url
+            html = ""
+            for _ in range(_FETCH_MAX_REDIRECTS + 1):
+                if not _is_safe_fetch_url(current):
+                    return ""
+                r = await c.get(current, headers={"User-Agent": "Mozilla/5.0 (discovery-bot)"})
+                if r.is_redirect:
+                    loc = r.headers.get("location")
+                    if not loc:
+                        return ""
+                    current = str(httpx.URL(current).join(loc))
+                    continue
+                r.raise_for_status()
+                ctype = r.headers.get("content-type", "")
+                # Skip non-HTML bodies (PDF/binary); missing content-type is allowed.
+                if ctype and not (ctype.startswith("text/") or ctype.startswith("application/xhtml")):
+                    return ""
+                html = r.text[:2_000_000]
+                break
+            else:
+                return ""  # exceeded the redirect cap
     except httpx.HTTPError:
         return ""
     text = re.sub(r"(?is)<(script|style)[^>]*>.*?</\1>", " ", html)
