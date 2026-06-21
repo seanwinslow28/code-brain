@@ -2,31 +2,31 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/silent-failure-propagation-in-agent-fleets.md
+  - 00_inbox/tickets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-18
-updated: 2026-06-18
+created: 2026-06-20
+updated: 2026-06-20
 ---
 
 ## Definition
 
-This pattern describes a systemic vulnerability where background agents fail to raise explicit errors but instead produce null or incomplete data, which downstream consumers then inherit as valid context. The core mechanism is the absence of a health check at the commit boundary, allowing corrupted state to propagate through the vault without immediate detection. This creates a 'trust gap' where the user assumes automation succeeded because no exception was thrown, only to discover the failure when attempting to consume the stale artifact. The tension lies between the expectation of automated reliability and the reality of silent failures in background agents.
+This pattern describes a class of bugs where an upstream agent produces a valid but semantically empty output (such as `null` content), which downstream agents treat as a successful state rather than an error condition. Because the failure is silent at the source, it propagates through the pipeline until a rigid consumer (like a string joiner) encounters the invalid type and crashes. The critical invariant here is that success in one layer (the run completed) does not guarantee validity in the next layer (the data structure is intact), creating a hidden dependency on non-null assertions across agent boundaries.
 
 ## Context
 
-Sean's vault relies on continuous synthesis; if the synthesizer fails silently overnight, the morning brief inherits stale context, and the user notices the staleness before the brief flags the failure. This undermines the utility of the daily note as a source of truth, forcing Sean to manually audit outputs rather than trusting the automation.
+Sean's fleet relies on multiple LLM models (Gemini, Qwen, etc.) returning structured JSON. When one model returns null content due to safety filters or timeouts, the transcript renderer fails catastrophically because it assumes all responses are strings. This breaks the observability loop, preventing Sean from seeing that the run actually succeeded, which masks the true reliability profile of his multi-model strategy.
 
 ## Evidence
 
-> When an agent fails silently (e.g., returning null content), it does not raise an error but instead produces incomplete or missing data.
+> gemini-pro returned null; recovered by reconstructing the .md from the session JSON archive
 
-> This causes downstream consumers to inherit stale context, leading to a breakdown in the knowledge vault's integrity that is only noticed by the user when they attempt to use the corrupted artifact.
+> _render_markdown appends r["content"] (None) to lines, so "\n".join(lines) raises TypeError: sequence item N: expected str instance, NoneType found and the whole transcript fails to write even though the run + spend succeeded
 
 ## Examples
 
-- The LLM council transcript crash where null content caused a TypeError, preventing the write even though the run succeeded.
-- change lines.append(r["content"]) to lines.append(r["content"] or "_(no response: model returned null)_")
+- The `llm-council` transcript render crashes when any council model returns null content
+- Recovering the .md from the session JSON archive instead of relying on the rendered markdown
 
 ## Related Concepts
 
-[[Automation Failure and Daily Note Disruption]] [[Provider Fallback Mechanism]] [[Infrastructure Status and Agent Failure]]
+[[Automation Reliability]] [[Infrastructure Status and Agent Failure]] [[Silent Failure Propagation in Agent Fleets]]

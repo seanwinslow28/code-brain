@@ -1,0 +1,28 @@
+{
+  "clusters_sampled": 36,
+  "concept_paths": [
+    "vault/knowledge/concepts/silent-failure-propagation-in-agent-fleets.md",
+    "vault/knowledge/concepts/execution-strategy-decoupling.md",
+    "vault/knowledge/concepts/harness-engineering-invariant.md"
+  ],
+  "concepts_written": 3,
+  "connection_paths": [
+    "vault/knowledge/connections/the-fragility-of-silent-nulls-in-multi-agent-pipelines.md",
+    "vault/knowledge/connections/the-tension-between-protocol-instrumentation-and-regulatory-ambiguity.md"
+  ],
+  "connections_written": 2,
+  "duration_seconds": 2712.56,
+  "edges_rejected": 0,
+  "edges_written": 3,
+  "files_processed": 14,
+  "model_used": "qwen3-14b",
+  "rejected_count": 3,
+  "rejected_reasons": {
+    "thin-evidence": 2,
+    "thin-threads": 1
+  },
+  "run_id": "2026-06-20T02:30:03",
+  "skipped_thin_source": 0,
+  "status": "partial",
+  "wol_status": "mbp_awake"
+}

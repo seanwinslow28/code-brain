@@ -2,10 +2,10 @@
 title: "Harness Engineering Invariant"
 type: concept
 sources:
-  - 00_inbox/Vercel deleted 80% of its agent's tools and the agent got better + what to delete from yours (guide inside!).md
+  - knowledge/concepts/harness-engineering-invariant.md
 tags: [auto-generated, phase-6]
-created: 2026-06-19
-updated: 2026-06-19
+created: 2026-06-20
+updated: 2026-06-20
 ---
 
 ## Definition
