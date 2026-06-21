@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Headless auth hardening — durable OAuth token + 401 telemetry fix (2026-06-21)
+- Root cause of the 2026-06-20 08:30 daily-driver 401 ("Invalid authentication credentials"): scheduled launchd runs authenticate via the interactive `claude login` OAuth credential, which can't be refreshed unattended, so it 401s once expired. Self-healed (06-21 ran clean at $0.20) but will recur.
+- New [agents-sdk/lib/auth.py](agents-sdk/lib/auth.py) `resolve_oauth_token()`: prefers a long-lived `claude setup-token` token (env `CLAUDE_CODE_OAUTH_TOKEN`, else Keychain `claude_code_oauth_token`) and injects it into the SDK subprocess env in `daily_driver.build_options` when no API key is set. Returns `None` → unchanged interactive-OAuth fallback (fully backward-compatible until the token is minted). Secret stays in Keychain only — never in the public-repo plists.
+- Telemetry fix: a 401 came back as a `ResultMessage` with `subtype="success"` (cost $0, 1 turn) and was logged as a green ✓. `daily_driver._resolve_status()` now downgrades auth-marker results to `error_auth`, and `fleet_summary` renders it as `✗ auth`.
+- Tests: `tests/test_auth.py` (4) + `tests/test_daily_driver_status.py` (7). Remaining one-time interactive step (Sean): `claude setup-token` → `keychain.py set claude_code_oauth_token`.
+
 ### fusion-discovery-council Phase 5 — substack lens + segment qualifier (2026-06-21)
 - `--lens substack` ships: reframes verified pain points into ranked post angles (`frame_substack`) and writes a `substack-value-engine`-consumable handoff brief (pre-fills the Value-Gate Itch + Transfer + verbatim evidence; leaves Solution for the author). Renders a `Substack Idea Ledger` + a sibling `-substack-brief.md`. No new Fusion call — same per-run cost as `pm`.
 - `--segment <audience>` reshapes the gather queries (all six collectors: web/sonar/last30 + reviews/github/qa) toward a target audience, fixing the "generic 'creatives' returns developer pain" failure mode. Default empty = unchanged behavior.

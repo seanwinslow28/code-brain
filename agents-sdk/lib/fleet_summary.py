@@ -48,6 +48,7 @@ STATUS_BADGE = {
     "empty-queue": "○ empty queue",
     "recursion-guard": "○ no-op",
     "error": "✗",
+    "error_auth": "✗ auth",
 }
 
 
