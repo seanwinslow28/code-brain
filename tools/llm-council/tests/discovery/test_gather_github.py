@@ -27,3 +27,14 @@ async def test_collect_github_builds_records_from_issues():
 @pytest.mark.asyncio
 async def test_collect_github_empty_when_no_provider():
     assert await collect_github(topic="x", search=None) == []
+
+
+@pytest.mark.asyncio
+async def test_collect_github_includes_segment_in_query():
+    captured = {}
+    async def search(q):
+        captured["q"] = q
+        return []
+    await collect_github(topic="auth", segment="mobile devs", search=search)
+    assert "auth" in captured["q"] and "mobile devs" in captured["q"]
+    assert "is:issue" in captured["q"]

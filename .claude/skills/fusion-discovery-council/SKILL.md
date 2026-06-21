@@ -36,7 +36,7 @@ This skill's backing CLI lives in code-brain; it is canonical there and must not
 | "What are users actually complaining about in X?" | Yes — this is the core case |
 | "Mine fresh pain points / opportunities in this space" | Yes |
 | "Where do competitors fail their users?" | Yes |
-| "Find me Substack ideas grounded in real reader pain" | Phase 2 (see lens note) — `pm` lens ships now |
+| "Find me Substack ideas grounded in real reader pain" | Yes — `--lens substack` emits a post-angle ledger + a substack-value-engine handoff brief |
 | Critique a draft / spec / cover letter I already wrote | No — use `llm-council` |
 | Write or refactor code | No — single-model Claude |
 | Simple factual lookup | No — answer in-session |
@@ -59,7 +59,7 @@ The pipeline runs in a fixed order; each stage feeds the next.
 
 3. **VERIFY** — The **anti-fabrication gate** (see §4). Every candidate pain point must trace to a quote whose URL exists in the gathered evidence. Untraceable candidates are dropped or marked `unverified` — never quietly kept.
 
-4. **FRAME** — Apply the lens (`pm` in Phase 1) to turn each *verified* pain point into a ranked, evidence-linked opportunity, and render the **idea ledger** markdown.
+4. **FRAME** — Apply the lens to each *verified* pain point: `pm` → ranked, evidence-linked opportunity cards; `substack` → ranked post angles + a substack-value-engine handoff brief. Render the **idea ledger** markdown (+ the brief for substack).
 
 > As of Phase 4 the extended collectors are LIVE and tier-gated: review sites + competitor-weakness mining and GitHub Issues on `standard`/`deep`, Stack Exchange Q&A on `deep`. Still deferred (do **not** claim them): demand-intent (autocomplete/PAA), trend-velocity feeds, and Quora. `quick` stays lean (last30days + Sonar + web).
 
@@ -70,12 +70,15 @@ The pipeline runs in a fixed order; each stage feeds the next.
 ```
 --lens     pm | substack    (default: pm)
 --tier     quick | standard | deep    (default: standard)
+--segment  <audience>        reshape gather queries toward a target audience (optional)
 --output   <ABSOLUTE PATH>   (required)
 --force    bypass per-run cap only (daily/monthly still enforced)
 --yes      auto-confirm deep-tier cost prompt
 ```
 
-**`--lens`** — `pm` frames verified pain into ranked PM opportunities and **is the only lens shipping in Phase 1**. `substack` (framing the same evidence as newsletter/essay ideas) is **coming in a later phase** — do not present it as working.
+**`--lens`** — `pm` (default) frames verified pain into ranked PM opportunities. `substack` reframes the same verified pain into ranked post angles and additionally writes a **handoff brief** consumable by the `substack-value-engine` skill (chain: substack-value-engine → storytelling-architecture → writing-voice-modes → writing-critique → writing-humanity-pass). The brief pre-fills the Value-Gate Itch + Transfer + verbatim evidence and leaves the Solution slot for you.
+
+**`--segment`** — optional free-text audience qualifier (e.g. `developer`, `creative`, `pm`) that reshapes the gather queries toward where that audience posts. Use it when a generic topic returns the wrong segment's pain (e.g. generic "creatives" returns developer pain).
 
 **`--tier`** — scales the panel size, per-model web tool-call budget, the Sonar harvester, and the per-run cost cap:
 
@@ -113,9 +116,15 @@ On success the CLI prints the ledger path plus a one-line summary (`Verified ide
 vault/20_projects/research/<YYYY-MM-DD>-<topic-slug>-<lens>-idea-ledger.md
 ```
 
+On `--lens substack`, a sibling brief is also written:
+
+```
+vault/20_projects/research/<YYYY-MM-DD>-<topic-slug>-substack-brief.md
+```
+
 - `<YYYY-MM-DD>` — today's date.
 - `<topic-slug>` — the topic, lowercased and hyphenated.
-- `<lens>` — `pm` (Phase 1).
+- `<lens>` — `pm` or `substack`.
 
 Always pass this as an **absolute** path under `/Users/seanwinslow/Code-Brain/code-brain/`.
 

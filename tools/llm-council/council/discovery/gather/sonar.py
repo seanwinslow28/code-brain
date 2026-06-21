@@ -38,12 +38,13 @@ def _extract_citations(payload: dict) -> list[str]:
     return out
 
 
-async def collect_sonar(*, api_key: str, topic: str, model: str, timeout: float = 120.0, fetch=None) -> list[EvidenceRecord]:
+async def collect_sonar(*, api_key: str, topic: str, model: str, timeout: float = 120.0, segment: str = "", fetch=None) -> list[EvidenceRecord]:
+    seg = f" specifically from the perspective of {segment}" if segment else ""
     body = {
         "model": model,
         "messages": [{
             "role": "user",
-            "content": f"What are the most recent, specific user complaints and unmet needs about {topic}? "
+            "content": f"What are the most recent, specific user complaints and unmet needs about {topic}{seg}? "
                        f"Quote real users where possible. Cite sources.",
         }],
     }

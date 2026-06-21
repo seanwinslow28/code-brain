@@ -21,16 +21,16 @@ from council.discovery.gather.web import collect_web, _simple_fetch
 from council.discovery.tiers import TierConfig
 
 
-async def gather_evidence(*, topic: str, tier: TierConfig, api_key: str,
+async def gather_evidence(*, topic: str, tier: TierConfig, api_key: str, segment: str = "",
                           collectors: dict | None = None) -> tuple[EvidenceBundle, dict]:
     if collectors is None:
         collectors = {
-            "last30": (lambda t: collect_last30(t)) if tier.social else None,
-            "sonar": (lambda t: collect_sonar(api_key=api_key, topic=t, model=tier.sonar_model, fetch=_simple_fetch)),
-            "web": (lambda t: collect_web(topic=t)) if tier.web else None,
-            "reviews": (lambda t: collect_reviews(topic=t)) if tier.reviews else None,
-            "github": (lambda t: collect_github(topic=t)) if tier.github else None,
-            "qa": (lambda t: collect_qa(topic=t)) if tier.qa else None,
+            "last30": (lambda t: collect_last30(t, segment=segment)) if tier.social else None,
+            "sonar": (lambda t: collect_sonar(api_key=api_key, topic=t, model=tier.sonar_model, segment=segment, fetch=_simple_fetch)),
+            "web": (lambda t: collect_web(topic=t, segment=segment)) if tier.web else None,
+            "reviews": (lambda t: collect_reviews(topic=t, segment=segment)) if tier.reviews else None,
+            "github": (lambda t: collect_github(topic=t, segment=segment)) if tier.github else None,
+            "qa": (lambda t: collect_qa(topic=t, segment=segment)) if tier.qa else None,
         }
     active = {name: fn for name, fn in collectors.items() if fn is not None}
     results = await asyncio.gather(*(fn(topic) for fn in active.values()), return_exceptions=True)

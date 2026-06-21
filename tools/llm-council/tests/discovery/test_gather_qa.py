@@ -28,3 +28,13 @@ async def test_collect_qa_builds_records_and_unescapes_titles():
 @pytest.mark.asyncio
 async def test_collect_qa_empty_without_provider():
     assert await collect_qa(topic="x", search=None) == []
+
+
+@pytest.mark.asyncio
+async def test_collect_qa_includes_segment_in_query():
+    captured = {}
+    async def search(q):
+        captured["q"] = q
+        return []
+    await collect_qa(topic="docker", segment="data engineers", search=search)
+    assert "docker" in captured["q"] and "data engineers" in captured["q"]

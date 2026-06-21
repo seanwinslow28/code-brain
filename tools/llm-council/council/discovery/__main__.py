@@ -19,15 +19,24 @@ DISCOVERY_DAILY_CAP = 10.0
 DISCOVERY_MONTHLY_CAP = 50.0
 
 
+def _brief_path(output: Path) -> Path:
+    """Sibling path for the substack handoff brief: drop a trailing '-idea-ledger', add '-brief'."""
+    stem = output.stem
+    if stem.endswith("-idea-ledger"):
+        stem = stem[: -len("-idea-ledger")]
+    return output.with_name(f"{stem}-brief{output.suffix}")
+
+
 @click.command()
 @click.argument("topic")
 @click.option("--lens", type=click.Choice(["pm", "substack"]), default="pm")
 @click.option("--tier", type=click.Choice(["quick", "standard", "deep"]), default="standard")
 @click.option("--output", type=click.Path(dir_okay=False, path_type=Path), required=True)
+@click.option("--segment", default="", help="Reshape gather queries toward an audience (e.g. developer, creative, pm).")
 @click.option("--force", is_flag=True, help="Bypass per-run cap (daily/monthly still enforced).")
 @click.option("--yes", is_flag=True, help="Auto-confirm deep-tier cost.")
 @click.option("--skip-budget-check", is_flag=True, hidden=True)
-def main(topic, lens, tier, output, force, yes, skip_budget_check):
+def main(topic, lens, tier, output, segment, force, yes, skip_budget_check):
     load_dotenv()  # resolve OPENROUTER_API_KEY from the repo-root .env (mirrors council.client)
     tcfg = get_tier(tier)
 
@@ -53,7 +62,7 @@ def main(topic, lens, tier, output, force, yes, skip_budget_check):
 
     try:
         result = asyncio.run(run_discovery(
-            topic=topic, lens=lens, tier=tier, api_key=api_key, sessions_dir=sessions_dir,
+            topic=topic, lens=lens, tier=tier, api_key=api_key, segment=segment, sessions_dir=sessions_dir,
         ))
     except DiscoveryFailed as e:
         if not skip_budget_check and e.cost_usd > 0:
@@ -74,10 +83,15 @@ def main(topic, lens, tier, output, force, yes, skip_budget_check):
 
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(result.markdown)
+    if lens == "substack" and result.brief_markdown:
+        brief = _brief_path(output)
+        brief.write_text(result.brief_markdown)
     if not skip_budget_check:
         record_spend(amount=result.cost_usd, profile=tier, tag=f"discovery-{lens}",
                      on_date=date.today(), tool="discovery")
     console.print(f"[green]Idea ledger written:[/green] {output}")
+    if lens == "substack" and result.brief_markdown:
+        console.print(f"[green]Substack handoff brief written:[/green] {_brief_path(output)}")
     console.print(f"[dim]Verified ideas: {result.verified_count} · dropped: {result.dropped_count} · ${result.cost_usd:.2f}[/dim]")
 
 
