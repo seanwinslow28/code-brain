@@ -1,0 +1,31 @@
+{
+  "id": "20260621-133044-0c8894",
+  "topic": "Claude plugins and skills for 2D animation pipelines",
+  "lens": "pm",
+  "tier": "standard",
+  "evidence_count": 26,
+  "verified": 12,
+  "dropped": 0,
+  "cost_usd": 2.7369,
+  "gather_status": {
+    "last30": "ok: 1 records (1 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 6 records (6 found)",
+    "reviews": "ok: 1 records (1 found)",
+    "github": "ok: 3 records (3 found)"
+  },
+  "blind_spots": [
+    "No direct evidence in the provided sources from Toon Boom Harmony, Adobe Animate, or Adobe After Effects studio TDs about Claude plugin/skill use \u2014 2D-specific DCC complaints are inferred from generic 'connectors are unreliable' commentary.",
+    "No evidence on frame-accurate timing, lip-sync, audio scrubbing, or per-frame determinism, which are core 2D animation requirements distinct from generic image/video editing.",
+    "No coverage of ink-and-paint, line cleanup, or auto-color automation tasks \u2014 central to traditional 2D pipelines but not mentioned in the evidence.",
+    "No discussion of integration with studio production-tracking and version-control systems (Shotgrid/ftrack/Kitsu/Perforce) via Claude MCP.",
+    "No evidence on NDA / data-governance concerns for client assets passing through Claude or Adobe connector infrastructure at studio scale.",
+    "No quantitative evidence on token economics for per-frame or per-shot batch operations across thousands of frames.",
+    "Several dates in the evidence (e.g., 2026-04, 2026-06) are future-dated relative to normal verifiability; sources should be treated with appropriate skepticism."
+  ],
+  "contradictions": [
+    "Marketing positions Claude connectors as production-grade creative tooling, while independent testing in the evidence says they are unreliable for serious work and 'fall far short of replacing a skilled artist.'",
+    "Skills/plugins are pitched as a way to stabilize quality and encode SOPs, but the same evidence base reports connector output that 'requires substantial human correction' and stacks of MCP servers + hooks + skills that simply 'felt slow.'",
+    "Anthropic engineering postmortems frame the forgetful/repetitive behavior as a specific bug, while user-side reporting frames an ongoing pattern of declining performance and growing backlash, suggesting disagreement over whether the issues are isolated incidents or a trend."
+  ]
+}
