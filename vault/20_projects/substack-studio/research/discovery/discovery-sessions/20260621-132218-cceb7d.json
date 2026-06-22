@@ -1,0 +1,34 @@
+{
+  "id": "20260621-132218-cceb7d",
+  "topic": "Claude plugins and skills for 2D animation pipelines",
+  "lens": "pm",
+  "tier": "deep",
+  "evidence_count": 61,
+  "verified": 3,
+  "dropped": 4,
+  "cost_usd": 0.9942,
+  "gather_status": {
+    "last30": "ok: 1 records (1 found)",
+    "sonar": "ok: 50 records (50 found)",
+    "web": "ok: 6 records (6 found)",
+    "reviews": "ok: 1 records (1 found)",
+    "github": "ok: 3 records (3 found)",
+    "qa": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "Very little direct first-person testimony from named professional 2D animators or studios \u2014 much evidence is Perplexity/Sonar summarization rather than raw user posts.",
+    "No quantitative data on failure rates, latency, token cost, adoption, or retention.",
+    "No comparison to competing agentic stacks (Cursor, Cline, ChatGPT custom GPTs, Runway, Adobe Firefly/Sensei) for the same animation workflows.",
+    "No coverage of non-Adobe 2D tools like Toon Boom, Moho, or TVPaint despite being industry-standard.",
+    "No discussion of frame-accurate determinism, reproducibility, or deterministic seeds \u2014 core production-animation concerns.",
+    "No evidence on IP, training-data provenance, or licensing risks for AI-generated motion assets in commercial studios.",
+    "The r/claudeskills marketplace citation provides only a title with no substantive user quote.",
+    "Several regression quotes ('Something has felt off\u2026', 'avid Claude Code user\u2026') lack attached URLs in the evidence, weakening attributability.",
+    "No view from producers, asset managers, IT/security teams despite claims about governance and private repos."
+  ],
+  "contradictions": [
+    "Claude is described as 'powerful enough to be genuinely useful' and able to 'wire up complex pipelines,' yet simultaneously reported to produce PowerPoint-grade output, regress in code quality, and modify stale file versions.",
+    "Stacking MCP servers, hooks, and skills expands capability but the same layering is blamed for slowness and token waste \u2014 capability and performance are in tension.",
+    "Users want deep AI integration into animation tools, yet one cited user explicitly rejects in-product AI in favor of an external agent of their choice, indicating disagreement over where AI should live in the stack."
+  ]
+}
