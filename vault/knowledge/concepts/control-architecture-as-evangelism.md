@@ -2,31 +2,31 @@
 title: "Control Architecture as Evangelism"
 type: concept
 sources:
-  - 40_knowledge/references/ref-animation-ai-news-amazon-mgm-pixar-youtube.md
+  - 20_projects/prj-job-hunt-2026/assets/older/Sean_Winslow_Resume_Tech_PM.md
 tags: [auto-generated, phase-6]
-created: 2026-06-01
-updated: 2026-06-01
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-The strategic use of technical and legal controls to enforce creative integrity in an automated environment. This involves designing systems where human oversight is not an afterthought but a prerequisite for deployment. It requires building infrastructure that respects authorial boundaries and prevents unauthorized replication or modification of creative assets.
+The strategic use of technical infrastructure design to communicate professional philosophy and capability. By building systems that embody specific architectural principles (like local-first, evals-first, or agent-rationalization), the architect demonstrates their values through implementation rather than description. This approach turns the infrastructure itself into a persuasive artifact that validates the underlying methodology.
 
 ## Context
 
-Sean's work on 'Vault Synthesizer' and 'Agent Fleet' is essentially building a control architecture for his own knowledge. Applying this to his job hunt means showing how he can build systems that protect user data and creative rights in enterprise AI deployments.
+Sean's 'Agentic Financial-Research Fleet' and Code-Brain architecture serve as evangelism for his preferred stack (local LLMs, MCP, agent orchestration). The design choices (e.g., '$0/month local-LLM stack', 'evals-first') communicate his stance on cost, privacy, and reliability without needing to explicitly argue for them in a cover letter.
 
 ## Evidence
 
-> The program is designed to produce shows with the use of AI tools alongside traditional tools like Blender and Maya.
+> Runs on a $0/month local-LLM stack (Ollama, SearXNG, LDR) with Gemini Deep Research as cloud fallback for compound topics.
 
-> YouTube moves to auto-label 'significant photorealistic AI use.'
+> Design exemplar of a 'sensors and actuators' architecture on a local stack — verifiable, durable, fully self-hosted.
 
 ## Examples
 
-- Amazon MGM's GenAI Creators Fund combining AI with traditional tools like Maya.
-- YouTube's policy shift to auto-label AI-generated content.
+- Multi-agent orchestration: queue file → router → 3 retrieval agents → local-LLM synthesis → daily morning brief.
+- Built an end-to-end RevOps automation pipeline — 11 Zapier workflows + 10 product-specific intake forms + central Tables database
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Accountability Gap]]
+[[Agentic Engineering Signal]] [[Intent Engineering]] [[Vault as Agent Infrastructure]]
