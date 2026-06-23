@@ -2,31 +2,31 @@
 title: "Provider Fallback Mechanism"
 type: concept
 sources:
-  - knowledge/concepts/provider-fallback-mechanism.md
+  - 00_inbox/tickets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-This architecture implements a specialized handler that intercepts complex, multi-step research tasks exceeding the primary queue's scope, routing them to a more capable external agent to prevent system stalls. By separating concerns, the primary queue maintains efficiency while offloading heavy lifting to an external agent capable of autonomous planning and synthesis. This mechanism acts as a safety valve for the primary system's limitations, ensuring that compound topics receive detailed, cited reports without manual intervention. The reliance on the external agent's ability to autonomously plan and synthesize information creates a dependency on that agent's specific capabilities and availability.
+A resilience pattern where the system is architected to handle transient failures from a primary service provider by implementing specific error-handling logic rather than relying on automatic retries or external fallbacks. The mechanism involves identifying the specific failure mode (such as malformed input due to provider-specific quirks) and writing targeted parsers or validators that strip non-standard data before processing. This approach prioritizes precision in handling edge cases over broad redundancy, ensuring that the system remains functional even when the provider behaves unexpectedly.
 
 ## Context
 
-Sean integrates this handler to ensure his vault receives high-quality, grounded information for complex queries without overwhelming the primary queue. By offloading heavy research to Gemini, he prevents the primary queue from being overwhelmed by tasks it cannot handle effectively, allowing him to maintain a high standard of output without manually intervening in every research task.
+Sean's agent fleet interacts with external APIs like OpenRouter. When these providers introduce unexpected behaviors (like SSE comments), Sean must manually harden his code to handle them. This highlights the fragility of relying on third-party services without robust, specific error handling, requiring constant vigilance and code updates to maintain stability.
 
 ## Evidence
 
-> Gemini Deep Research is the designated handler for complex, multi-step research tasks that exceed the scope of Local Deep Research.
+> ignoring :-prefixed lines is the spec-correct handling _strip_sse_padding already does
 
-> The Gemini Deep Research Agent autonomously plans, executes, and synthesizes multi-step research tasks.
+> Fix: strip leading : comment lines / extract the first balanced {…} before json.loads
 
 ## Examples
 
-- Multi-step research tasks
-- Complex information landscapes
+- failed Fusion calls bill OpenRouter but record $0 locally
+- record usage.cost on failure too
 
 ## Related Concepts
 
-[[Deep Research Queue]] [[System Constraints]]
+[[Cost-Capped Agentic Workflows]] [[Automation Reliability]] [[Infrastructure Status]]
