@@ -2,31 +2,31 @@
 title: "Context Compounding"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-and-knowledge-retrieval-interdependence.md
+  - 20_projects/substack-studio/MIGRATION-REPORT.md
 tags: [auto-generated, phase-6]
-created: 2026-06-21
-updated: 2026-06-21
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-A behavioral pattern where agents function as information foragers rather than simple index queryers, following scent to decide whether to exploit a patch, abandon it, or widen their search. This mechanism requires tracking the decision trace over search patches, specifically noting why a source was initially promising and what signals caused the scent to weaken. It shifts the focus from top-k chunk retrieval efficiency to the agent's ability to navigate the information landscape effectively.
+This pattern refers to the accumulation of editorial and research artifacts across multiple files to create a dense, reusable knowledge base that reduces the cognitive load for future agentic writing tasks. Instead of treating each post as an isolated event, the system consolidates 'spine' documents, deep-dive research JSONs, and style anchors into a unified folder structure. This compounding effect allows subsequent agents to retrieve not just the immediate draft context, but the entire historical reasoning chain, including discovery sessions and opportunity reports, thereby increasing the fidelity and consistency of the generated content over time.
 
 ## Context
 
-Sean's agents often retrieve knowledge but fail to synthesize it because they lack the behavioral frame for when to stop searching. By treating retrieval as foraging, Sean can optimize his agents to recognize when they have exhausted a 'patch' of useful information and need to pivot, preventing token waste on diminishing returns.
+Sean's Substack workflow relies on deep research and consistent voice. By consolidating 83 files (including 5 deep-dives and 2 discovery JSONs) into `substack-studio`, he ensures that the 'Raising Claude' series benefits from a growing reservoir of contextual evidence, rather than starting each post from scratch.
 
 ## Evidence
 
-> Agents are not merely querying an index; they are following scent, deciding whether to exploit a patch, abandon it, or widen search.
+> research/ — opportunity-report-creative-agentic.md (spine) + deep-dives/ (5) + last30days/ (6) + discovery/ (2 ledgers + discovery-sessions/ 3 JSONs).
 
-> Retrieval is no longer “top-k chunks went in”; it becomes a decision trace over search patches.
+> SERIES-COMMAND-CENTER.md (the drafts README.md, renamed so it doesn't collide with the stub).
 
 ## Examples
 
-- An agent abandoning a source because the 'scent' of relevance weakened after reading three paragraphs.
-- An agent widening its search when the initial patch failed to provide sufficient evidence for a claim.
+- The inclusion of 'hero-prompt.txt' and 'kits' in each post folder allows for rapid regeneration of visual assets without re-querying the model.
+- The use of '_seed.md' files provides a structured starting point for new posts, leveraging previous editorial decisions.
 
 ## Related Concepts
 
-[[Token Waste]] [[Indexing and Synthesis]]
+[[Context Compounding]] [[Creative Studio Workflows]]

@@ -2,31 +2,31 @@
 title: "Agentic Engineering Signal"
 type: concept
 sources:
-  - knowledge/connections/performance-vs-preparation-in-agentic-interviews.md
+  - 20_projects/substack-studio/04-eval-tools-wrong-people/post.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-The Agentic Engineering Signal is the observable evidence that a candidate can leverage AI tools for rapid iteration and outcome delivery, distinguishing them from those who merely possess theoretical knowledge. This signal requires demonstrating the ability to manage ambiguity with operational precision, shifting the evaluation from static code artifacts to dynamic process management. The mechanism involves making the invisible architecture of agentic workflows visible through live, narrated problem-solving sessions. It serves as a critical differentiator in hiring, where employers prioritize immediate operational judgment over historical proof of competence.
+A resume or portfolio artifact that signals deep understanding of evaluation design rather than mere tool usage. It moves the candidate from 'uses AI tools' to 'thinks in evals,' demonstrating the ability to scope skills with human-in-the-loop review gates. This signal is critical for roles requiring strategic inflection points where standard automation fails.
 
 ## Context
 
-Sean needs to explicitly craft this signal to stand out in the 2026 job market, where AI fluency is common but agentic engineering is rare. By focusing on the 'signal' rather than just the 'skill', he can better align his interview performance with employer expectations. This concept helps him avoid the pitfall of under-selling his capabilities through static portfolios.
+Sean's job hunt strategy relies on demonstrating this specific signal to pass the 'Aakash bar.' The concept highlights that understanding evaluation frameworks is a differentiator in competitive hiring, particularly for product management and engineering leadership roles.
 
 ## Evidence
 
-> Agentic engineering requires demonstrating the ability to leverage AI tools for rapid iteration and outcome delivery, shifting the evaluation from static code to dynamic process management.
+> This bullet alone moves the resume from 'uses AI tools' to 'thinks in evals,' which is the Aakash bar.
 
-> The Agentic Engineering Signal is the observable evidence that a candidate can leverage AI tools for rapid iteration and outcome delivery, distinguishing them from those who merely prom
+> each skill scoped with a human-in-the-loop review gate before publish, send, or ticket creation
 
 ## Examples
 
-- Live narrated problem-solving sessions
-- Explicit modeling of decision-making tradeoffs
+- Direct delivery against the P&E Q2 Objective 5 KR3
+- Signals the candidate is in the eval-design conversation, not just adjacent to it
 
 ## Related Concepts
 
-[[Confidence Rituals]] [[Vibe-Coding Interview Format]]
+[[Supervision as the New AI Edge]] [[Portfolio Projects]]

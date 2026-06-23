@@ -2,31 +2,31 @@
 title: "Intent Engineering"
 type: concept
 sources:
-  - 40_knowledge/references/ref-show-design-impact-without-metrics.md
+  - 20_projects/substack-studio/research/opportunity-report-creative-agentic.md
 tags: [auto-generated, phase-6]
-created: 2026-06-08
-updated: 2026-06-08
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-A strategic discipline where designers articulate directional hypotheses about intended impact to compensate for the absence of quantitative metrics. This mechanism shifts the burden of proof from retrospective measurement to prospective clarity, requiring the designer to define exactly what 'better' means before execution begins. It transforms vague goals like 'improve experience' into specific causal claims about user behavior, such as reducing drop-off by removing friction at checkout.
+A control architecture where structured intent serves as the primary gate for agent behavior, replacing open-ended generation with auditable specifications. This mechanism requires that every output be traceable to a pre-defined brief or constraint set, ensuring that the 'why' behind an action is preserved and verifiable. It shifts the burden of proof from the model's internal logic to the user's explicit framing, creating a closed loop where evaluation happens at the spec layer rather than post-hoc.
 
 ## Context
 
-Sean is currently navigating a job hunt in an AI-heavy market where he must demonstrate tangible value without always having access to established data pipelines or A/B testing infrastructure. By mastering intent engineering, he can frame his design decisions around clear causal logic rather than waiting for post-launch analytics, making his portfolio and interview narratives more robust against 'no metrics' objections.
+Sean has already built the technical foundation for this via his intent-engineering MCP and writing chain assets. The opportunity lies not in building new infrastructure but in translating this engineer-centric control plane into language accessible to creative and marketing teams who currently lack these governance tools.
 
 ## Evidence
 
-> Because impact isn’t just numbers — it’s clarity about what should change, and why your design makes that change possible.
+> "The missing layer in AI agents is not autonomy. It is structured intent."
 
-> These aren’t metrics — they’re directional hypotheses. And they signal that you think beyond pixels.
+> "eval tooling like Braintrust and LangSmith is designed for ML engineers… most teams don't need 'research-grade evals' first."
 
 ## Examples
 
-- Defining an intended impact statement: 'This redesign is intended to increase checkout completion by reducing interruptions and clarifying next steps.'
-- Using support tickets, heuristic evaluations, and competitor benchmarks to source the clarity needed for these statements.
+- Using the intent-engineering MCP to audit agent outputs against a brief before they are considered final.
+- Applying VoicePrint to productize the loop of eliciting intent, scoring it, and gating output for brand consistency.
 
 ## Related Concepts
 
-[[Agentic Experience Design]] [[Value Chain / Activity System Mapping]]
+[[Control Architecture as Evangelism]] [[Supervision as the New AI Edge]]

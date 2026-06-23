@@ -2,32 +2,32 @@
 title: "The Tension Between Protocol Instrumentation and Regulatory Ambiguity"
 type: connection
 connects:
-  - Silent Failure Propagation in Agent Fleets
-  - Cost-Capped Agentic Workflows
-  - Automation Reliability
-created: 2026-06-21
-updated: 2026-06-21
+  - Context Compounding
+  - Token Waste
+  - MCP Server Hardening
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the need for robust error handling in agentic pipelines and the ambiguity of what constitutes a 'failure' worth recording. When an agent fails to parse a response due to upstream formatting issues (like SSE comments), it often bypasses the success gate that triggers cost logging. This creates a regulatory gap where financial accountability is lost because the system treats the failure as a non-event rather than a billable event. The consequence is that Sean cannot accurately audit his spend, leading to potential budget overruns that are invisible in his local logs.
+Sean's adoption of specialized tools like Grill Me and Firecrawl reveals a tension between the desire for precise, instrumented workflows and the ambiguity of general-purpose agent protocols. While MCPs offer a standardized way to connect tools, Sean's preference for CLIs and specific skills suggests that current protocol standards are too loose to enforce the rigorous context extraction he requires. This forces him to build custom 'skills' as a workaround for the lack of standardization in agentic planning.
 
 ## Threads
 
-### [[Silent Failure Propagation in Agent Fleets]]
+### [[Context Compounding]]
 
-> Our fusion-discovery-council collector degrades safely to [] so the pipeline never crashes but last30 contributes zero live evidence until fixed
+> Grill Me relentlessly interviews you to extract context *before* building; checkpoints answers to docs.
 
-### [[Cost-Capped Agentic Workflows]]
+### [[Token Waste]]
 
-> failed Fusion calls bill OpenRouter but record $0 locally because record_spend is post-success only in __main__.py
+> The loudest efficiency theme is 'CLIs beat MCPs' on token cost.
 
-### [[Automation Reliability]]
+### [[MCP Server Hardening]]
 
-> run 1 FusionError did not return parseable and run 2 bare JSONDecodeError Expecting value line 181 column 1 char 990
+> Research target: which pattern is more common in published MCP servers, and is there a published 'MCP best practices' doc (from Anthropic, MCP working group, or community) that takes a position?
 
 ## Implications
 
-- Sean must implement pre-success spend recording for all LLM calls to ensure accurate cost attribution even when parsing fails
-- The agent fleet's observability dashboard will show false positives for health if it only tracks successful runs rather than total attempts
+- Sean may need to contribute to or define MCP best practices to ensure his custom skills can be standardized.
+- The preference for CLIs over MCPs suggests a potential fragmentation in his tooling stack as he optimizes for cost and precision.

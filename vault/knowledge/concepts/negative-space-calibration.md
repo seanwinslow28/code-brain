@@ -2,31 +2,31 @@
 title: "Negative Space Calibration"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-06-11-readmes-voice-final.md
+  - 20_projects/substack-studio/playbook/image-house-style.md
 tags: [auto-generated, phase-6]
-created: 2026-06-16
-updated: 2026-06-16
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-This mechanism refers to the deliberate omission of rhetorical flourishes or technical verbosity to preserve signal-to-noise ratio for specific reader types. It is not merely 'editing' but a strategic allocation of attention where the absence of information (negative space) becomes the primary carrier of meaning. By stripping em dashes and tightening voice sections, the artifact forces the reader to fill in gaps with their own expertise, thereby increasing engagement from senior reviewers who detect competence through restraint rather than exposition.
+A design invariant where the visible 'work-in-progress' artifacts—such as construction underdrawings, paper grain, or hole-punch marks—are intentionally preserved to signal authenticity and process. This mechanism relies on the tension between the finished linework and the exposed scaffolding, creating a specific aesthetic of 'pencil test' realism rather than polished finality. The constraint requires that all other elements remain monochrome or minimally accented to prevent visual competition with this structural honesty.
 
 ## Context
 
-Sean's job hunt requires demonstrating 'senior' judgment. Over-explaining technical details signals insecurity or junior-level need for validation. By calibrating negative space, he allows the recruiter to infer sophistication from what is left unsaid, while allowing the engineer to verify competence through what remains.
+Sean is moving away from the 'deliberate ink splatter' of his previous v1 design because it felt like 'ink blotting' that 'never sat right.' By adopting the portfolio's pencil-test look, he leverages the 'show the work' tell to establish a calm, precise aesthetic that aligns with his actual taste rather than a borrowed gonzo style.
 
 ## Evidence
 
-> Dry wit allowed in an aside, never in a command or a config value.
+> The new anchors are Sean's three portfolio illustrations (recipes saved at _assets/style-anchors/portfolio-pencil-anchor-prompts.md).
 
-> The period turns the inversion into two sentences instead of riding an em dash.
+> faint light-blue construction underdrawing left visible (the 'show the work' tell that makes it read as a pencil test, not a finished render).
 
 ## Examples
 
-- Replacing an em-dash-heavy sentence with two short, declarative sentences increases the perceived authority of the statement by removing syntactic hesitation.
-- Keeping the technical body 'clean and neutral' ensures that no rhetorical noise distracts from the API documentation's utility.
+- Using warm cream paper #FFF9F0 with visible grain and hole-punch marks along one margin to signal hand-made authenticity.
+- Leaving the light-blue construction underdrawing visible behind the graphite linework to distinguish the image from a finished render.
 
 ## Related Concepts
 
-[[Negative Space Calibration]] [[Craft in Product Design]] [[Two Audiences]]
+[[Craft in Product Design]] [[Negative Space Calibration]]

@@ -2,31 +2,31 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - 00_inbox/Vercel deleted 80% of its agent's tools and the agent got better + what to delete from yours (guide inside!).md
+  - 20_projects/substack-studio/research/opportunity-report-creative-agentic.md
 tags: [auto-generated, phase-6]
-created: 2026-06-19
-updated: 2026-06-19
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-The competitive advantage in agentic systems shifts from model capability to the quality of the maintenance surface, where 'harness' defines the boundary between owned and rented infrastructure. This concept posits that long-term utility depends on inspection, memory, and skepticism rather than initial deployment, as agents continue producing work even after accuracy degrades. The core mechanism is a producer/consumer pattern where the agent's output creates a dependency that requires rigorous human-in-the-loop verification to prevent silent failure propagation.
+The strategic advantage derived from human-in-the-loop governance structures that validate agent outputs against specific business or creative goals. This pattern emerges because current tooling focuses on generation capabilities while neglecting the judgment layer required to ensure those generations align with complex, nuanced objectives. The edge comes from owning the 'gate'—the mechanism that decides when an output is sufficient—rather than competing on raw generation speed or volume.
 
 ## Context
 
-Sean must decide how much of the data feed, review screen, and permission levels he owns versus rents when building his personal knowledge vault. This decision directly impacts his ability to maintain 'mostly' correct systems where failures stay local rather than catastrophic, ensuring his agent fleet remains reliable for job hunting and creative work.
+Sean's positioning leverages his existing assets (VoicePrint, design-team agents) to own this judgment layer for creative teams who are overwhelmed by uncontrolled AI outputs. This allows him to sell governance and control as a premium service distinct from the commodity of AI generation itself.
 
 ## Evidence
 
-> Keeping them honest is about to be one of the most valuable AI skills there is.
+> "The opportunity is translation, not invention: take that engineer-framed loop and re-skin it in brief/brand/voice language for the people the agent-infra builders ignore."
 
-> You are investing in the long-term maintenance of an agent and harness system.
+> "You already shipped the answer once: elicit intent → score it → gate the output."
 
 ## Examples
 
-- Vercel deleted 80% of its sales agent's tools, which improved performance by reducing the maintenance surface.
-- Boat maintenance involves checking lines, fittings, pumps, and batteries to ensure failures stay local when away from shore.
+- Positioning the 'Intent Card' as a guided brief that self-audits, serving as the creative front-end for non-coders.
+- Using the vault-knowledge MCP to make the reasoning behind decisions auditable for stakeholders.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Vault Maintenance]]
+[[Intent Engineering]] [[Control Architecture as Evangelism]]

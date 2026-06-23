@@ -2,31 +2,30 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - knowledge/connections/automation-health-and-daily-knowledge-integrity-tension.md
+  - 20_projects/substack-studio/06-stop-building-agents/2026-06-17-agent-or-automation-advisor-build-spec.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-Automation reliability is defined as the capacity of an agent fleet to maintain operational continuity despite component failures or silent logic errors. It requires shifting from simple benchmarking to verifying that downstream dependencies, such as daily note generation, are actually populated and not just executed without error. True reliability in this context means detecting when a process completes successfully but produces no usable data, thereby preventing the propagation of stale state.
+Automation reliability is defined by the compounding risk of non-determinism across multiple LLM nodes within a deterministic pipeline. When an automation relies on bounded steps that call a model, the maintenance burden increases because debugging becomes difficult when behavior varies between runs. This creates a reliability collapse where the project fails not due to logic errors, but due to the inability to predict outcomes in a system that lacks strict state control.
 
 ## Context
 
-Sean's workflow depends on reliable automation to free up cognitive load. When reliability is compromised by silent failures, he must manually inspect outputs, reintroducing the very friction automation was meant to eliminate and risking errors in high-stakes areas like job hunting.
+Sean is building an 'Agent-or-Automation Advisor' to help users avoid this trap before they start coding. He recognizes that people often choose complex agents when simple automations would suffice, leading to high maintenance costs later. This concept is central to his Substack series on stopping the blind construction of agents.
 
 ## Evidence
 
-> Automation reliability is the capacity of an agent fleet to maintain operational continuity despite component failures or silent logic errors.
+> automations with LLM nodes... the maintenance burden kills it
 
-> The dependency between agent health monitoring, automation reliability, and daily note generation reveals a hidden tension where upstream failures silently corrupt downstream knowledge fidelity.
+> non-determinism compounding across steps, debugging a thing that behaves differently every run
 
 ## Examples
 
-- Silent logic errors in the synthesizer cause downstream knowledge fidelity to degrade without triggering an error state in the agent itself.
-- Sean must implement explicit health checks that trigger alerts when daily notes are not generated, rather than relying on the absence of errors as proof of success.
+- A 20-line automation that calls a model at one or two bounded steps instead of a multi-step looping agent.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Automation Failure and Daily Note Disruption]]
+[[Agent Rationalization]] [[Silent Failure Propagation in Agent Fleets]]
