@@ -84,6 +84,20 @@
       "short_circuited": false,
       "emailed": 0,
       "pushed": 0
+    },
+    {
+      "fired_at": "2026-06-24T10:30:01.801012",
+      "fetch_total": 0,
+      "rules_passed": 0,
+      "rules_rejected": 0,
+      "llm_scored": 0,
+      "llm_failed": 0,
+      "mbp_reachable": false,
+      "duration_sec": 2.06,
+      "failed_pollers": [],
+      "short_circuited": false,
+      "emailed": 0,
+      "pushed": 0
     }
   ]
 }
