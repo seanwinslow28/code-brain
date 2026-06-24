@@ -2,37 +2,32 @@
 title: "Portfolio Walkthrough"
 type: concept
 sources:
-  - knowledge/expansions/portfolio-walkthrough.md
+  - knowledge/expansions/connections/ai-fluency-agentic-engineering-signal-and-portfolio-projects-for-interview-prep.md
 tags: [auto-generated, phase-6]
-created: 2026-05-31
-updated: 2026-05-31
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-A portfolio walkthrough functions as a judgment evidence artifact rather than a capability inventory by framing projects as responses to specific systemic mismatches. It requires the candidate to articulate the governing principle that made the right behavior easier, moving beyond simple automation summaries. This approach transforms the narrative from a list of tools used into a demonstration of intent engineering and operational design. The structure forces the inclusion of adversarial decision points where plausible alternatives were explicitly rejected based on risk or principle. This creates a visible spine of reasoning that allows interviewers to assess epistemic hygiene and decision-making under uncertainty.
+A Portfolio Walkthrough is a narrative structure that transforms a project gallery into a case-study teardown of decision-making. It anchors the artifact on Donald Schön’s reflective practice, requiring the candidate to describe the situation entered, the initial frame, the surprise that broke it, and the revised move. This mechanism creates legibility of practice, allowing the viewer to inspect the principle hold or fail rather than just observing the output.
 
 ## Context
 
-Sean needs to distinguish himself in AI-PM and agentic engineering roles where many candidates can demonstrate tool usage but few can demonstrate the underlying design logic. By adopting this format, he shifts the interview dynamic from technical verification to strategic alignment, showcasing his ability to build systems that turn vague intent into executable environments. This is critical for senior roles where the value lies in defining the operating model rather than just executing tasks.
+Sean's current concept treats portfolio projects as proof of tool usage. By adopting this walkthrough structure, he can demonstrate 'taste as evaluation function' and provide a sharper interview answer to 'why did you build it this way?'
 
 ## Evidence
 
-> The strongest version makes the candidate’s governing principle visible through a live artifact.
+> Add a section that distinguishes 'AI fluency' from 'reflective practice under uncertainty.'
 
-> Each project is framed as: 'I noticed a mismatch between what the system rewarded and what the work actually needed, so I built an environment where the right behavior became easier.'
-
-> A portfolio walkthrough should include adversarial decision points, not only outcomes.
-
-> This turns the walkthrough from capability inventory into judgment evidence.
+> This unlocks a stronger artifact than a project gallery: a case-study teardown of Code-Brain or 16BitFit where the signal is not 'I built agents,' but 'I can notice when an agent system is optimizing the wrong thing and reframe the work.'
 
 ## Examples
 
-- Explaining why Obsidian-Git owns commits in the Code-Brain project.
-- Detailing why local LDR is bounded away from compound research.
-- Justifying why the vault critic uses multiple CLIs.
-- Stating why MCP access is interactive-only.
+- Case-study teardown of Code-Brain
+- Misfit inventory for private/public boundary
+- Executable demo of explicit intent and stop rules
 
 ## Related Concepts
 
-[[Intent Engineering]] [[Portfolio Projects]] [[Vibe-Coding Interview Canon]]
+[[Agentic Engineering Signal]] [[Craft in Product Design]] [[Vibe-Coding Interview Canon]]

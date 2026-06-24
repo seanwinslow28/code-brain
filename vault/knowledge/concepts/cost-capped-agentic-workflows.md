@@ -4,29 +4,29 @@ type: concept
 sources:
   - 00_inbox/tickets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-21
-updated: 2026-06-21
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-This mechanism refers to the architectural requirement that financial accounting for agent operations must be decoupled from execution success. When spend recording is gated behind a success condition, any failure in the processing logic results in unaccounted resource consumption, creating a blind spot in budget management. True cost control requires instrumentation of usage metrics at the point of request submission or response receipt, regardless of the semantic validity of the returned payload.
+This mechanism refers to the architectural necessity of decoupling financial accounting from functional success in agent loops. When an agent invocation fails functionally (e.g., due to parsing errors or timeouts) but still consumes API resources, the billing system records a cost while the local state machine records zero progress. This creates a 'leaky bucket' invariant where financial expenditure accumulates independently of value generation, requiring explicit failure-path instrumentation to maintain accurate ROI metrics.
 
 ## Context
 
-Sean is building an agent fleet for job hunting and research where token costs are a primary constraint. Unrecorded spend from failed Fusion calls distorts his understanding of the true cost of discovery, making it impossible to accurately benchmark the efficiency of different model providers or prompt strategies.
+Sean is building a job-hunt and research fleet where token costs are significant. The current architecture only records spend on success, meaning failed attempts (which still hit OpenRouter) create a blind spot in his cost tracking, potentially masking the true expense of debugging or retry loops.
 
 ## Evidence
 
-> failed Fusion calls bill OpenRouter but record $0 locally because record_spend is post-success only in __main__.py
+> failed Fusion calls bill OpenRouter but record $0 locally (`record_spend` is post-success only in `__main__.py`) — record usage.cost on failure too.
 
-> run 1 FusionError did not return parseable and run 2 bare JSONDecodeError Expecting value line 181 column 1 char 990
+> The 'two runs failed' were Phase-2, pre-fix. Residual is confidence only (a few live runs incl. deep).
 
 ## Examples
 
-- OpenRouter streaming SSE keep-alive comments as padding that choke the unguarded payload extraction in fuse()
-- Stripping leading comment lines and extracting the first balanced JSON object before parsing to prevent JSONDecodeError
+- OpenRouter processing lines are documented SSE keep-alive comments that must be stripped before JSON parsing to prevent `JSONDecodeError`.
+- The fix involves hardening `_parse` by extracting the first balanced `{…}` before `json.loads` rather than relying on clean payload returns.
 
 ## Related Concepts
 
-[[Cost-Capped Agentic Workflows]] [[Automation Reliability]] [[Token Waste]]
+[[Token Waste]] [[Fleet Status]]

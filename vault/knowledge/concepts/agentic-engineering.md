@@ -2,34 +2,31 @@
 title: "Agentic Engineering"
 type: concept
 sources:
-  - 40_knowledge/references/ref-opus-4-8-prompting-playbook-2026.md
+  - knowledge/connections/cross-domain-bridging-via-agentic-infrastructure.md
 tags: [auto-generated, phase-6]
-created: 2026-06-04
-updated: 2026-06-04
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-Agentic engineering is the discipline of designing, building, and maintaining systems where AI agents operate autonomously or semi-autonomously to achieve complex goals, often involving coordination with other agents and external tools. It moves beyond simple task automation to encompass the architecture of agent interactions, decision-making logic, error handling, and the integration of dynamic capabilities like self-orchestration and parallel execution. This field requires a deep understanding of both the underlying models and the systemic properties of multi-agent environments.
+Agentic engineering is an architectural pattern where agents are granted ownership of decomposition tasks while humans retain exclusive ownership of judgment and final decision-making. This separation of concerns allows for scalable automation of complex workflows without sacrificing the nuanced oversight required for high-stakes outcomes. The system functions as a producer/consumer model where agent-generated artifacts create dependencies that human review enforces, ensuring quality control through explicit gates rather than implicit trust.
 
 ## Context
 
-Sean's interest in 'Project CTO' and 'Simon AI' aligns directly with agentic engineering. He needs to articulate how he can build and manage systems that are not just reactive but proactive and adaptive, leveraging the latest capabilities like dynamic workflows to create superior user experiences and operational efficiencies.
+Sean embodies this pattern by demonstrating a 'Karpathy-style' approach where he builds and deploys autonomous fleets but maintains critical oversight. This positions him not just as a developer but as an architect of intelligent systems, a key differentiator for senior product management roles that require both technical depth and strategic oversight.
 
 ## Evidence
 
-> Anthropic engineers have been using this as a daily driver for months. The rest of the world found out yesterday.
+> Demonstrates Karpathy-style 'agentic engineering practitioner' architecture — agents own decomposition; human owns judgment.
 
-> Opus 4.8 is the model Anthropic is betting its near-trillion-dollar story on.
-
-> The ability for Claude to write its own orchestration scripts, spin up parallel subagents, and scale test-time compute trivially.
+> Ships production Claude Skills, MCP servers, and autonomous agent fleets with human-review gates and eval-driven acceptance criteria.
 
 ## Examples
 
-- Claude Code's ability to write its own orchestration scripts.
-- The use of parallel subagents to scale test-time compute.
-- Anthropic's internal adoption of dynamic workflows as a standard practice.
+- Agents decompose complex research tasks while Sean reviews the synthesized outputs for strategic alignment.
+- Human-review gates are enforced on all autonomous agent fleet outputs before they are considered production-ready.
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Context Management as a Bottleneck]] [[Dynamic Workflows]]
+[[Context Compounding]] [[Vault as Agent Infrastructure]]

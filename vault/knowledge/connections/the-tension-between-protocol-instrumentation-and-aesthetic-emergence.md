@@ -5,13 +5,13 @@ connects:
   - Negative Space Calibration
   - Raising vs. Describing
   - Supervision as the New AI Edge
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Synthesis
 
-Sean's infrastructure relies on deterministic, protocol-driven automation (agents filing notes, running scripts) which assumes inputs can be fully specified. However, his creative output (voice) resists this determinism, requiring a non-deterministic, iterative calibration process. The tension lies in the fact that the same tools used to stabilize his daily operations fail when applied to aesthetic tasks, forcing a split between 'operational' agents (which work via clear rules) and 'creative' agents (which work via rejection loops). This implies that Sean's vault architecture must support two distinct modes of interaction: one for execution and one for cultivation.
+Sean's infrastructure is built on a mechanism of deterministic protocol instrumentation, where agents rely on explicit, verifiable inputs to execute tasks. However, aesthetic emergence requires a non-deterministic cultivation process that cannot be fully specified by protocols. This tension creates a structural split in his vault: operational domains succeed through automation and clarity, while creative domains fail when subjected to the same deterministic logic, requiring a separate mode of interaction based on rejection and calibration rather than instruction.
 
 ## Threads
 

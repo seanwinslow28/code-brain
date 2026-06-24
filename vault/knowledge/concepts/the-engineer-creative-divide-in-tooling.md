@@ -2,15 +2,15 @@
 title: "The Engineer-Creative Divide in Tooling"
 type: concept
 sources:
-  - 20_projects/substack-studio/research/deep-dives/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md
+  - knowledge/concepts/the-engineer-creative-divide-in-tooling.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-Tooling ecosystems often evolve around the power users who build them, creating a structural bias toward developer-centric workflows. This divide manifests as a gap where tools are abundant for coders but sparse for creatives, because the latter group lacks the technical leverage to demand specific features. The consequence is that creative work remains underserved not by lack of capability, but by lack of tailored interfaces and semantic understanding.
+Tooling ecosystems evolve around the power users who build them, creating a structural bias toward developer-centric workflows. This divide manifests as a gap where tools are abundant for coders but sparse for creatives, because the latter group lacks the technical leverage to demand specific features. The consequence is that creative work remains underserved not by lack of capability, but by lack of tailored interfaces and semantic understanding.
 
 ## Context
 

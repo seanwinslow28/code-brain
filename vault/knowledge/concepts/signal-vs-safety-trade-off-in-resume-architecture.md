@@ -2,31 +2,31 @@
 title: "Signal vs. Safety Trade-off in Resume Architecture"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/older/Sean_Winslow_Resume_DESIGN_NOTES.md
+  - knowledge/expansions/signal-vs-safety-trade-off-in-resume-architecture.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-This concept describes the strategic tension between optimizing for traditional recruiter expectations (safety) and maximizing visibility for AI-forward hiring managers (signal). It manifests when a candidate deliberately reorders sections to place technical artifacts before professional experience, accepting the risk of ATS parsing errors or recruiter confusion in exchange for immediate proof of capability. The mechanism relies on the assumption that the target audience's evaluation criteria have shifted from title-based hierarchy to artifact-based verification.
+This concept defines a strategic tension where an engineer must choose between maximizing immediate recognition through novel, high-signal artifacts (which risks category confusion for traditional recruiters) and minimizing risk through standardized, safe formatting (which dilutes unique value). The core mechanism is the trade-off between 'illegibility tax'—the penalty paid when non-standard formats fail to parse in institutional systems—and 'evidence density,' which requires anchoring claims in measurable outcomes rather than aesthetic novelty. Success depends on whether the artifact creates enough market pull to forgive category confusion, effectively bypassing the need for traditional credential signaling.
 
 ## Context
 
-Sean is targeting AI-forward companies where proving he 'actually builds with AI' is more valuable than holding a senior title at a traditional firm. This trade-off is critical because it defines how he positions his Open Source contributions relative to his employment history, directly impacting his ability to bypass gatekeepers who rely on legacy scanning habits.
+Sean is navigating a job hunt where his deep technical work (agent fleets, local knowledge loops) might be perceived as 'too weird' or illegible by standard HR filters. He needs to determine when to lead with these complex artifacts versus when to fall back on safe, title-heavy resumes to avoid being filtered out before a human sees the work.
 
 ## Evidence
 
-> Explicit Teal / Resume Worded guidance: when public artifacts (npm package, OSS toolkit) are stronger signal than the last job title, they belong in the first third of page 1 where AI hiring managers scan for 'this person actually builds with AI' proof.
+> Lead with artifacts only when the artifact creates pull strong enough that the reader forgives category confusion.
 
-> Safer for traditional recruiters but weaker positioning for AI-forward roles. Sean prioritized signal over safety.
+> Artifact-first resumes increase signal for humans who understand the artifacts, but may become illegible to institutions that need standardized categories.
 
 ## Examples
 
-- Placing 'Selected AI Artifacts' before 'Work Experience' in the resume section order
-- Using a single accent color (Navy #0C447C) to denote confidence without triggering 'designed in Canva' perceptions
+- Built `Code-Brain`, a 7-agent local knowledge loop, reducing nightly synthesis cost to `$0/run` while maintaining scheduled indexing, critique, research, and daily planning across `~110` concepts and `~260` links.
+- Portfolio one-pager / hiring-manager brief with PMF-style evidence: who has used it, what pain it solves, what changed because it exists.
 
 ## Related Concepts
 
-[[Agentic Engineering Signal]] [[Market Positioning]] [[Two Audiences]]
+[[Agentic Engineering Signal]] [[Market Positioning]]

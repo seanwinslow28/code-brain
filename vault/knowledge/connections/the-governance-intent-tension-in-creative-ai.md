@@ -5,8 +5,8 @@ connects:
   - Supervision as the New AI Edge
   - Context Management as a Bottleneck
   - Intent Engineering
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Synthesis

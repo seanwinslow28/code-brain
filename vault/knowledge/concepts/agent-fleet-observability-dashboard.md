@@ -2,31 +2,31 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-and-knowledge-retrieval-interdependence.md
+  - knowledge/expansions/connections/agentic-engineering-and-daily-driver-agent-optimization.md
 tags: [auto-generated, phase-6]
-created: 2026-06-21
-updated: 2026-06-21
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-A telemetry framework that distinguishes between monitoring (answering known failure questions via uptime and resource metrics) and observability (enabling the investigation of unknown failure modes through high-cardinality context). This mechanism requires recording specific decision traces for every agent run, including input sources, retrieval sets, skipped sources, model routes, costs, timeouts, fallback paths, output dispositions, and downstream artifacts touched. Without this granularity, health metrics risk becoming green dashboards that mask silent epistemic failure because the system cannot answer new questions about why a retrieval failed or succeeded.
+This concept establishes the mechanism of treating personal agents as reliability services defined by Service Level Objectives (SLOs) and error budgets rather than helpful bots. It requires defining specific Service Level Indicators (SLIs) such as daily note creation time, overnight digest presence, stale context rate, manual repair minutes, and false confidence incidents. The underlying pattern is that automation freezes and repair work must outrank feature work when the user-observable promise falls below a defined percentage of days.
 
 ## Context
 
-Sean's current agent health concept treats health as uptime and completion rate, which is insufficient for debugging why an agent produced poor output. By implementing this observability layer, Sean can identify when agents are failing silently due to bad retrieval choices rather than infrastructure crashes, allowing him to fix the epistemic loop rather than just the plumbing.
+Sean's current concept mentions that health monitoring matters but lacks the rigor to make explicit decisions about when to optimize, pause, degrade, alert, or delete an agent. By adopting SLO mode, he can create a portfolio-grade Agent Fleet Reliability One-Pager and a real runbook that quantifies the cost of automation failures.
 
 ## Evidence
 
-> Monitoring answers known failure questions. Observability lets the fleet investigate unknown failure modes from traces, events, and high-cardinality context.
+> Treat the daily-driver as a reliability service, not a helpful bot. Define SLIs like daily_note_created_by_08:40, overnight_digest_present, stale_context_rate, manual_repair_minutes, and false_confidence_incidents.
 
-> Without this, Sean’s “agent health” risks becoming green dashboards over silent epistemic failure.
+> This agent is healthy when USER-OBSERVABLE PROMISE holds N% of days; if not, automation freezes and repair work outranks feature work.
 
 ## Examples
 
-- Recording why a source looked promising, what scent weakened, and what would trigger patch abandonment during retrieval.
-- Logging the specific model route and fallback path taken when a primary provider failed or returned low-confidence results.
+- Creating a portfolio-grade Agent Fleet Reliability One-Pager that serves as a real runbook for the daily-driver.
+- Making explicit decisions about when to optimize, pause, degrade, alert, or delete an agent based on SLO compliance.
 
 ## Related Concepts
 
-[[Agent Health]] [[Silent Failure Propagation in Agent Fleets]]
+[[Agent Health]] [[Automation Reliability]]

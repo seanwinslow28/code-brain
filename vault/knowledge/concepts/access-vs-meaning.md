@@ -2,10 +2,10 @@
 title: "Access vs Meaning"
 type: concept
 sources:
-  - 20_projects/substack-studio/07-the-judgment-layer/post.md
+  - knowledge/concepts/access-vs-meaning.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ This is central to Sean's job-hunt strategy and his 'Judgment Layer' manifesto. 
 
 ## Related Concepts
 
-[[Intent Engineering]] [[Comprehension as Currency]] [[Control Architecture as Evangelism]]
+[[Intent Engineering]] [[Comprehension as Currency]]

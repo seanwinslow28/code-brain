@@ -2,10 +2,10 @@
 title: "Evidence Accumulation Loop"
 type: concept
 sources:
-  - 20_projects/substack-studio/01-cant-prompt-taste/ships-with-cheese-gauntlet-kit.md
+  - knowledge/concepts/evidence-accumulation-loop.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition

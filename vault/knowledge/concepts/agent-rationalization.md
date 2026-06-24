@@ -2,10 +2,10 @@
 title: "Agent Rationalization"
 type: concept
 sources:
-  - 20_projects/substack-studio/06-stop-building-agents/post.md
+  - knowledge/concepts/agent-rationalization.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition

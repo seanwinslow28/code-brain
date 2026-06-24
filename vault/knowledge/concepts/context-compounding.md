@@ -2,31 +2,31 @@
 title: "Context Compounding"
 type: concept
 sources:
-  - 20_projects/substack-studio/MIGRATION-REPORT.md
+  - knowledge/connections/cross-domain-bridging-via-agentic-infrastructure.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-This pattern refers to the accumulation of editorial and research artifacts across multiple files to create a dense, reusable knowledge base that reduces the cognitive load for future agentic writing tasks. Instead of treating each post as an isolated event, the system consolidates 'spine' documents, deep-dive research JSONs, and style anchors into a unified folder structure. This compounding effect allows subsequent agents to retrieve not just the immediate draft context, but the entire historical reasoning chain, including discovery sessions and opportunity reports, thereby increasing the fidelity and consistency of the generated content over time.
+Context compounding is a multiplicative effect where improvements in one domain's tooling or infrastructure directly enhance the quality and coherence of outputs in another, seemingly unrelated domain. This occurs because shared underlying systems—such as agentic fleets, MCP servers, and knowledge vaults—serve as common nodes that transmit refined capabilities across silos. The mechanism relies on the reuse of high-fidelity artifacts and processes, allowing gains in professional product management to compound into personal career narrative and creative production without proportional increases in effort.
 
 ## Context
 
-Sean's Substack workflow relies on deep research and consistent voice. By consolidating 83 files (including 5 deep-dives and 2 discovery JSONs) into `substack-studio`, he ensures that the 'Raising Claude' series benefits from a growing reservoir of contextual evidence, rather than starting each post from scratch.
+This matters to Sean because his professional tooling (Code-Brain, 17-agent fleet) is not just for work but actively fuels his job-hunt materials and creative outputs. By recognizing this compounding effect, he can strategically leverage his professional infrastructure to elevate his personal brand and resume artifacts, turning technical proficiency into a unique competitive advantage in the market.
 
 ## Evidence
 
-> research/ — opportunity-report-creative-agentic.md (spine) + deep-dives/ (5) + last30days/ (6) + discovery/ (2 ledgers + discovery-sessions/ 3 JSONs).
+> Sean's personal knowledge vault and job-hunt materials are not separate silos but interconnected nodes in a single agentic infrastructure.
 
-> SERIES-COMMAND-CENTER.md (the drafts README.md, renamed so it doesn't collide with the stub).
+> The same tools (Code-Brain, MCP servers) used for professional product management are repurposed to manage his career narrative and creative outputs.
 
 ## Examples
 
-- The inclusion of 'hero-prompt.txt' and 'kits' in each post folder allows for rapid regeneration of visual assets without re-querying the model.
-- The use of '_seed.md' files provides a structured starting point for new posts, leveraging previous editorial decisions.
+- Using the 17-agent Claude Agent SDK fleet for daily PM workflows also automates vault synthesis for job-hunt materials.
+- Improvements in vault synthesis directly enhance the quality of resume artifacts through shared agentic infrastructure.
 
 ## Related Concepts
 
-[[Context Compounding]] [[Creative Studio Workflows]]
+[[Agentic Engineering]] [[Vault as Agent Infrastructure]]

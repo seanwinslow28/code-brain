@@ -2,30 +2,30 @@
 title: "Motivational Tension via Open Loops"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-scientific-rigor-and-craft-doctrine-in-knowledge-systems.md
+  - knowledge/connections/the-tension-between-authority-and-approachability-in-technical-storytelling.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-This pattern identifies that the psychological utility of an unresolved narrative or question lies in its ability to generate motivational tension rather than enhancing memory retention directly. The mechanism relies on the Ovsiankina effect, where the drive to resolve the open loop creates engagement, distinct from any actual cognitive stickiness of the content itself. This distinction forces a separation between what is memorable and what is compelling.
+This pattern explains how narrative structures sustain attention by leveraging the Ovsiankina effect, where an unresolved task creates a psychological urge to complete it. The mechanism does not rely on memory retention but on motivational tension that the reader feels compelled to resolve. This requires the writer to create open loops that are sufficiently intriguing to demand resolution but sufficiently clear in their trajectory to promise closure.
 
 ## Context
 
-Sean must distinguish between concepts that are scientifically robust and those that merely leverage motivational tension for engagement. This allows him to tag his Substack mechanics accurately, ensuring he does not mistake the effectiveness of an open loop for the validity of the underlying scientific claim.
+Sean uses this to structure his Substack articles and technical documentation, ensuring that readers remain engaged through the entire piece by constantly offering small, resolvable tensions rather than static information dumps.
 
 ## Evidence
 
-> What survives is the motivational version (the Ovsiankina resumption tendency), not the memory claim.
+> What survives is the motivational version (the Ovsiankina resumption tendency), not the memory claim. So: open loops work because they create motivational tension the reader wants to resolve, not because they magically stick in memory.
 
-> So: open loops work because they create motivational tension the reader wants to resolve, not because they magically stick in memory.
+> This creates a 'safe' environment for the reader to engage with complex ideas, while open loops maintain the motivational tension needed to keep them reading.
 
 ## Examples
 
-- A Substack post uses an unresolved question at the end of a section to drive clicks to the next part, leveraging tension rather than information density.
+- Creating open loops that create motivational tension the reader wants to resolve
 
 ## Related Concepts
 
-[[Humor and Status Dynamics]] [[Addictive Storytelling]]
+[[Humor and Status Dynamics]] [[Negative Space Calibration]]

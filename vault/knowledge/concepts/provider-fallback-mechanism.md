@@ -2,31 +2,31 @@
 title: "Provider Fallback Mechanism"
 type: concept
 sources:
-  - 00_inbox/tickets.md
+  - knowledge/expansions/provider-fallback-mechanism.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-A resilience pattern where the system is architected to handle transient failures from a primary service provider by implementing specific error-handling logic rather than relying on automatic retries or external fallbacks. The mechanism involves identifying the specific failure mode (such as malformed input due to provider-specific quirks) and writing targeted parsers or validators that strip non-standard data before processing. This approach prioritizes precision in handling edge cases over broad redundancy, ensuring that the system remains functional even when the provider behaves unexpectedly.
+A runtime state machine that decides when a dependency is no longer trustworthy enough to call, moving beyond simple retry policies to include circuit breaker semantics with explicit failure thresholds and cool-down windows. This mechanism treats provider weirdness not as a parsing defect but as an operational signal requiring degraded behavior, such as suppressing output or marking runs financially untrusted. It enforces the invariant that the system must preserve the mission of the workflow rather than maintaining the illusion that every step completed successfully.
 
 ## Context
 
-Sean's agent fleet interacts with external APIs like OpenRouter. When these providers introduce unexpected behaviors (like SSE comments), Sean must manually harden his code to handle them. This highlights the fragility of relying on third-party services without robust, specific error handling, requiring constant vigilance and code updates to maintain stability.
+Sean's agent fleet relies on multiple external providers (OpenRouter, Fusion) where silent failures can lead to invisible cost leakage or split-brain accounting events. Without this mechanism, failed calls might bill externally while recording zero locally, creating a trust deficit that undermines the integrity of the entire knowledge vault infrastructure.
 
 ## Evidence
 
-> ignoring :-prefixed lines is the spec-correct handling _strip_sse_padding already does
+> A provider fallback is not a retry policy; it is a runtime state machine that decides when a dependency is no longer trustworthy enough to call.
 
-> Fix: strip leading : comment lines / extract the first balanced {…} before json.loads
+> Fallback is insufficient once a side effect has crossed the boundary; the system now needs compensation, reconciliation, or quarantine.
 
 ## Examples
 
-- failed Fusion calls bill OpenRouter but record $0 locally
-- record usage.cost on failure too
+- When OpenRouter bills failed calls but records $0 locally, the system must detect this split-brain accounting event and trigger a reconciliation process.
+- If citation verification fails, the agent suppresses FRAME output rather than emitting unverified data, marking the run with a named confidence state.
 
 ## Related Concepts
 
-[[Cost-Capped Agentic Workflows]] [[Automation Reliability]] [[Infrastructure Status]]
+[[Automation Reliability]] [[Silent Failure Propagation in Agent Fleets]]

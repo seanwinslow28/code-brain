@@ -2,33 +2,31 @@
 title: "Context Management as a Bottleneck"
 type: concept
 sources:
-  - 20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md
+  - knowledge/connections/the-supervision-paradox-in-creative-adoption.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-In complex agentic systems, the primary failure mode is not computational capacity but the degradation of semantic context across agent handoffs. When agents operate in silos without shared provenance layers, they lose the 'why' behind the 'what,' leading to outputs that are technically valid but strategically orphaned. This bottleneck manifests as a disconnect between high-level creative intent and low-level execution details.
+This mechanism describes the limitation of current agent architectures in maintaining semantic coherence over extended temporal or structural spans. It is not merely a technical constraint of token windows, but a fundamental gap in how models encode and retrieve 'brand voice' or 'narrative intent' across disjointed content pieces. The bottleneck emerges because context is treated as static input rather than a dynamic state that must be actively preserved and updated during generation.
 
 ## Context
 
-Sean's work involves bridging the gap between high-level creative vision and technical execution. By addressing context management, he can prevent the 'silent failure' where agents produce content that misses the nuanced intent of the original brief.
+For Sean's vault and agent infrastructure, this means that any tool claiming to handle 'long-form' or 'multi-step' creative work must explicitly solve for state persistence. Without this, the output degrades into generic patterns, forcing the human reviewer to spend more time reconstructing context than editing prose.
 
 ## Evidence
 
-> the creative slice is still re-aimed from an engineer-skewed corpus — that skew held across all three passes, which is itself a finding
+> Users frequently note that 'AI tools struggle to maintain brand voice consistency across long-form content,' indicating a failure in context retention rather than generation.
 
-> the gap is not 'no eval tools' but 'eval tools built for the wrong audience'
-
-> most teams do not need research-grade evals first
+> The tension lies between the economic promise of automation and the operational reality of supervision. As agents become more capable, the cost of verifying their output does not decrease proportionally because creative work is subjective and context-heavy.
 
 ## Examples
 
-- A creative brief being interpreted differently by a copywriting agent vs. a design agent due to lack of shared context.
-- Agents producing consistent but irrelevant content because they lack access to the broader strategic narrative.
+- The specific struggle to 'maintain brand voice consistency' across different sections of a document.
+- The disproportionate increase in verification costs despite improvements in agent capability.
 
 ## Related Concepts
 
-[[Context Compounding]] [[Vault as Agent Infrastructure]] [[Silent Failure Propagation in Agent Fleets]]
+[[Supervision as the New AI Edge]] [[Context Compounding]]

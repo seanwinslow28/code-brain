@@ -5,8 +5,8 @@ connects:
   - Silent Failure Propagation in Agent Fleets
   - Eval Vocabulary as Control Mechanism
   - Infrastructure Status
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Synthesis

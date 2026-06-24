@@ -2,10 +2,10 @@
 title: "Friction-Killing Wedge"
 type: concept
 sources:
-  - 20_projects/substack-studio/playbook/tool-shipping-playbook.md
+  - knowledge/concepts/friction-killing-wedge.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition

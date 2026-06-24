@@ -2,31 +2,31 @@
 title: "Privacy-Aware Data Routing"
 type: concept
 sources:
-  - 20_projects/substack-studio/MIGRATION-REPORT.md
+  - knowledge/connections/the-tension-between-privacy-isolation-and-agentic-accessibility.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-This mechanism describes a deliberate architectural split where sensitive, high-risk personal data is isolated in gitignored private directories while a sanitized, public-facing copy serves as the operational interface for agents and version control. The system enforces a hard invariant that no named individuals, compensation terms, or proprietary identifiers can leak into the tracked knowledge graph, effectively decoupling the 'work-as-done' (private reality) from the 'work-as-promoted' (public artifact). This creates a dual-state vault where the public layer acts as a controlled abstraction, allowing agentic tools to function on structured data without accessing the raw, sensitive source material that triggered the initial privacy constraints.
+This mechanism describes a deliberate architectural split where sensitive, high-risk personal data is isolated in gitignored private directories while a sanitized, public-facing copy serves as the sole interface for agentic systems. The routing logic enforces a strict boundary: any concept derived from private ancestors cannot be promoted to the public graph without explicit review, ensuring that privacy follows derivation rather than location. This creates a proxy layer that allows agents to operate on structured knowledge without ever accessing the raw, sensitive source material, effectively decoupling agentic utility from data exposure.
 
 ## Context
 
-Sean is managing a Substack series ('Raising Claude') that involves sensitive personal narratives and prior employment details. By routing this through a scrubbed public copy, he enables GitHub backup and cross-machine sync (the primary utility) while strictly adhering to his 'Do-Not-Promote' rule and Rule #10, preventing accidental exposure of private life-systems data in his public code-brain infrastructure.
+Sean's Substack series relies on personal narratives that are valuable precisely because they are sensitive; however, his agent infrastructure requires broad access to function. This tension forces him to maintain two parallel states of truth, creating a dependency risk where the public copy may lack the nuance necessary for deep agentic assistance if the scrubbing process is imperfect.
 
 ## Evidence
 
 > The privacy gate (Do-Not-Promote term / prior-employer name / named individuals / compensation terms / family names) returns zero hits across all tracked files.
 
-> All edits applied to the public copy only; the un-scrubbed originals remain in the gitignored source.
+> Privacy follows derivation, not location: every generated concept stores `why_provenance` and `where_provenance`; if any ancestor is private, the descendant cannot be promoted without review.
 
 ## Examples
 
-- The `_private/` directory is explicitly gitignored and empty of content, serving as a null sink for any accidental inclusion attempts.
-- Originals were verified to have no git modifications, ensuring the 'copy-not-move' strategy preserved the private state while the public copy was transformed.
+- The scrubbing process that removes prior-employer names and family names from the public copy of the Substack work.
+- The gitignore rules that prevent private directories from syncing to GitHub or being indexed by the MCP server.
 
 ## Related Concepts
 
-[[Vault as Agent Infrastructure]] [[Privacy-Aware Data Routing]]
+[[Vault as Agent Infrastructure]] [[Do-Not-Promote Framing]]

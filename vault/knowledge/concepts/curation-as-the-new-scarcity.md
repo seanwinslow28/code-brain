@@ -2,19 +2,19 @@
 title: "Curation as the New Scarcity"
 type: concept
 sources:
-  - 20_projects/substack-studio/research/deep-dives/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md
+  - knowledge/concepts/curation-as-the-new-scarcity.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-In an environment where tool availability exceeds human attention capacity, the primary economic value shifts from creation to selection. The mechanism here is that abundance creates noise, and noise degrades signal quality for non-technical users. Consequently, trust becomes the limiting factor in adoption, as users cannot verify the utility of thousands of options themselves. This forces intermediaries to act as filters, transforming their role from builders to validators.
+When tool availability exceeds human attention capacity, economic value shifts from creation to selection because abundance creates noise that degrades signal quality for non-technical users. Trust becomes the limiting factor in adoption since users cannot verify the utility of thousands of options themselves, forcing intermediaries to act as filters. This transforms their role from builders to validators who must demonstrate why specific tools are worth the user's limited cognitive load.
 
 ## Context
 
-Sean's Substack series and VoicePrint plugin must position themselves not just as another tool, but as a trusted filter for creatives who are overwhelmed by the 500+ MCP servers mentioned in the research. If Sean builds tools without this curation layer, they will be lost in the noise.
+Sean's Substack series and VoicePrint plugin must position themselves not just as another tool, but as a trusted filter for creatives who are overwhelmed by the 500+ MCP servers mentioned in the research. If Sean builds tools without this curation layer, they will be lost in the noise because creators lack the technical bandwidth to evaluate raw utility.
 
 ## Evidence
 

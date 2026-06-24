@@ -2,30 +2,30 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - 20_projects/substack-studio/06-stop-building-agents/2026-06-17-agent-or-automation-advisor-build-spec.md
+  - knowledge/connections/the-tension-between-eval-rigor-and-automation-simplicity.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-Automation reliability is defined by the compounding risk of non-determinism across multiple LLM nodes within a deterministic pipeline. When an automation relies on bounded steps that call a model, the maintenance burden increases because debugging becomes difficult when behavior varies between runs. This creates a reliability collapse where the project fails not due to logic errors, but due to the inability to predict outcomes in a system that lacks strict state control.
+Automation Reliability is the property of a system where deterministic pipelines prevent non-determinism from compounding across sequential steps. It relies on minimizing the surface area for failure by avoiding complex evaluation layers when simple, predictable outcomes are sufficient. When reliability is compromised, debugging becomes impossible because the system behaves differently in every run, creating an invisible dependency chain.
 
 ## Context
 
-Sean is building an 'Agent-or-Automation Advisor' to help users avoid this trap before they start coding. He recognizes that people often choose complex agents when simple automations would suffice, leading to high maintenance costs later. This concept is central to his Substack series on stopping the blind construction of agents.
+Sean's daily drive agents must function without silent failures that disrupt his morning brief or status updates, making reliability a core infrastructure concern.
 
 ## Evidence
 
-> automations with LLM nodes... the maintenance burden kills it
-
 > non-determinism compounding across steps, debugging a thing that behaves differently every run
+
+> The tension lies between the chaotic, asynchronous nature of agent interactions and the need for deterministic, consistent outcomes in Sean's product architectures.
 
 ## Examples
 
-- A 20-line automation that calls a model at one or two bounded steps instead of a multi-step looping agent.
+- Debugging a thing that behaves differently every run
 
 ## Related Concepts
 
-[[Agent Rationalization]] [[Silent Failure Propagation in Agent Fleets]]
+[[Eval Vocabulary]] [[Silent Failure Propagation in Agent Fleets]]

@@ -5,13 +5,13 @@ connects:
   - Supervision as the New AI Edge
   - Context Management as a Bottleneck
   - Accountability Gap
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Synthesis
 
-The tension lies between the economic promise of automation and the operational reality of supervision. As agents become more capable, the cost of verifying their output does not decrease proportionally because creative work is subjective and context-heavy. This creates a paradox where the more sophisticated the agent, the more specialized the human reviewer must be to catch subtle errors, thereby increasing the marginal cost of adoption rather than decreasing it.
+The core tension is that increased agent capability exacerbates the cost of human verification rather than reducing it, creating a paradox where adoption becomes more expensive as technology improves. This happens because creative work relies on subjective context and brand nuance, which are difficult for models to retain consistently over long spans. Consequently, the 'edge' shifts from generation speed to the specialized human ability to supervise and correct these subtle failures, making supervision the new bottleneck.
 
 ## Threads
 

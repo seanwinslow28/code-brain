@@ -2,10 +2,10 @@
 title: "Harness Engineering Invariant"
 type: concept
 sources:
-  - 20_projects/substack-studio/research/last30days/2026-06-09-ai-agent-frameworks-people-wish-existed-last30days.md
+  - knowledge/concepts/harness-engineering-invariant.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition

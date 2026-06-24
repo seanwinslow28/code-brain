@@ -2,10 +2,10 @@
 title: "Intent Engineering"
 type: concept
 sources:
-  - 20_projects/substack-studio/research/opportunity-report-creative-agentic.md
+  - knowledge/concepts/intent-engineering.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
@@ -18,9 +18,9 @@ Sean has already built the technical foundation for this via his intent-engineer
 
 ## Evidence
 
-> "The missing layer in AI agents is not autonomy. It is structured intent."
+> The missing layer in AI agents is not autonomy. It is structured intent.
 
-> "eval tooling like Braintrust and LangSmith is designed for ML engineers… most teams don't need 'research-grade evals' first."
+> eval tooling like Braintrust and LangSmith is designed for ML engineers… most teams don't need 'research-grade evals' first.
 
 ## Examples
 

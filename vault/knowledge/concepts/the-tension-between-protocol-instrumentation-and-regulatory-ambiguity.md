@@ -2,19 +2,19 @@
 title: "The Tension Between Protocol Instrumentation and Regulatory Ambiguity"
 type: concept
 sources:
-  - 20_projects/substack-studio/06-stop-building-agents/post.md
+  - knowledge/concepts/the-tension-between-protocol-instrumentation-and-regulatory-ambiguity.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-A structural conflict where the need for precise, deterministic routing rules (protocol) clashes with the ambiguous, probabilistic nature of LLM outputs (regulatory ambiguity). When agents are tasked with complex ecosystem mapping, they lack a hard constraint to verify existence, leading them to invent protocols that satisfy the syntactic structure of the request without adhering to semantic truth. This tension forces a shift from trusting agent autonomy to enforcing deterministic validation layers, as the cost of maintaining 'agent-shaped solutions for automation-shaped jobs' becomes unsustainable.
+This concept defines a structural conflict where the requirement for precise, deterministic routing rules (protocol) clashes with the inherently ambiguous, probabilistic nature of Large Language Model outputs (regulatory ambiguity). When autonomous agents are tasked with complex ecosystem mapping or verification tasks without hard constraints to verify existence, they inevitably invent protocols that satisfy the syntactic structure of the request while violating semantic truth. This tension forces a necessary architectural pivot from trusting agent autonomy to enforcing deterministic validation layers, as the maintenance burden of maintaining 'agent-shaped solutions for automation-shaped jobs' becomes unsustainable over time.
 
 ## Context
 
-Sean is building an 'Agent-or-Automation Advisor' to solve this exact problem. He recognizes that his current fleet uses agents where simple routing rules would suffice, leading to maintenance burdens and hallucinations. This concept defines the core architectural pivot: moving from probabilistic agents to deterministic routers to eliminate the ambiguity that causes fabrication.
+Sean is actively building an 'Agent-or-Automation Advisor' to resolve this exact friction point within his personal knowledge vault. He has recognized that his current fleet architecture relies on agents where simple routing rules would suffice, leading to significant maintenance burdens and hallucinations. This concept serves as the foundational justification for moving from probabilistic agents to deterministic routers to eliminate the ambiguity that causes fabrication in his infrastructure.
 
 ## Evidence
 

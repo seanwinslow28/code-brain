@@ -2,30 +2,31 @@
 title: "Vault as Agent Infrastructure"
 type: concept
 sources:
-  - knowledge/connections/archival-offloading-as-context-optimization.md
+  - knowledge/connections/the-tension-between-privacy-isolation-and-agentic-accessibility.md
 tags: [auto-generated, phase-6]
-created: 2026-05-31
-updated: 2026-05-31
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-Vault as Agent Infrastructure is the pattern where the knowledge base serves as the literal control plane for autonomous work, requiring explicit design of context preparation to survive handoffs between agents. This mechanism treats the vault not as a passive archive but as an active system where decisions, constraints, discoveries, and partial state must survive the transition from one agent to another. When this survival fails, each agent starts with an incomplete picture, making the system brittle and prone to errors. The consequence is that the vault's structure directly dictates the reliability and coherence of the entire agentic workflow.
+The vault functions not merely as a storage repository but as the active substrate for agentic reasoning, where the act of writing into tracked folders creates dependencies that subsequent agents must resolve. By consolidating work like the 'Raising Claude' Substack series into this public folder, Sean establishes a persistent state that agents can read, synthesize, and extend, turning static notes into dynamic operational memory. This infrastructure relies on the assumption that the data within is sufficiently sanitized to be safe for automated processing while remaining rich enough to support complex reasoning tasks.
 
 ## Context
 
-Sean's vault is currently failing to protect the integrity of active work because historical data is not properly isolated. This failure mode leads to the token waste and roadmap bloat that degrade his agent's performance. The implication is that the vault must be treated as a critical infrastructure component where context preparation is an explicit design problem, not an afterthought.
+Sean's workflow depends on agents having reliable access to his knowledge graph; if the vault is treated as a passive archive rather than an active infrastructure layer, the agentic fleet loses its context and utility. The consolidation of work into this tracked folder ensures backup and cross-machine sync, but it also exposes the data to the risks inherent in public-facing agent interfaces.
 
 ## Evidence
 
-> Decisions, constraints, discoveries, and partial state have to survive the handoff. When they don’t, each agent starts with an incomplete picture and the system gets brittle.
+> Consolidated the 'Raising Claude' Substack work into this tracked (public) folder inside code-brain, so it backs up to GitHub and syncs across machines.
 
-> This file holds the ship history — dated amendments and the bodies of fully-closed tasks.
+> The health of the autonomous agent fleet is directly tied to the overall infrastructure health of Sean's systems.
 
 ## Examples
 
-- The vault holding the ship history with dated amendments and the bodies of fully-closed tasks.
+- The 'Raising Claude' Substack work being moved into the tracked public folder for backup and sync.
+- Agents reading from the code-brain directory to synthesize new concepts or update status.
 
 ## Related Concepts
 
-[[Token Waste]] [[Unified Roadmap]]
+[[Privacy-Aware Data Routing]] [[Agent Health Monitoring]]

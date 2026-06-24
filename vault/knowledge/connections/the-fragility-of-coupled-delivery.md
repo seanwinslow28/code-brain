@@ -5,8 +5,8 @@ connects:
   - Runtime-Model Coupling
   - Cadence-Gated Dependency
   - Agentic Engineering
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Synthesis

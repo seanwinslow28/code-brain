@@ -2,10 +2,10 @@
 title: "Slop as a Trust Deficit"
 type: concept
 sources:
-  - 20_projects/substack-studio/research/last30days/2026-06-09-ai-creative-tools-frustrations-and-gaps-last30days.md
+  - knowledge/concepts/slop-as-a-trust-deficit.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
@@ -20,11 +20,10 @@ Sean's 'VoicePrint' plugin and 'writing-humanity-pass' are direct counter-measur
 
 > AI Slop Is Destroying The Internet... ran AI deep-research on a topic, found ~20% of 'facts' were fabricated, then watched the misinformation get laundered back into the web as a 'credible source.'
 
-> Is AI Content Actually Helping Marketing Or Are We Just Flooding the Internet With More Noise?
+> The consensus #1 complaint across design, writing, and marketing is that output sounds 'generic, flat, interchangeable.'
 
 ## Examples
 
-- The consensus #1 complaint across design, writing, and marketing is that output sounds 'generic, flat, interchangeable.'
 - Brafton survey identifies 'thin or generic-sounding' content as the top marketer complaint.
 
 ## Related Concepts

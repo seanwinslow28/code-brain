@@ -2,30 +2,32 @@
 title: "Eval Vocabulary"
 type: concept
 sources:
-  - 20_projects/substack-studio/06-stop-building-agents/2026-06-17-agent-or-automation-advisor-build-spec.md
+  - knowledge/expansions/eval-vocabulary.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-The Eval Vocabulary represents the shift where evaluation metrics replace traditional Product Requirements Documents (PRDs) as the primary artifact for defining success. Instead of writing narrative specs, developers create portable MCP servers that score specifications against defined dimensions before any coding begins. This operationalizes the thesis that 'evals are the new PRDs' by making the evaluation process a concrete, executable tool rather than a document.
+An operational framework that shifts evaluation from static rubrics to dynamic, executable systems where datasets, evaluators, and traces form a repeatable loop. This approach treats evals as decision instruments rather than mere scoring tools, requiring explicit lineage from business intent through observable metrics to pass/fail thresholds. The system must account for Goodhart's Law by recognizing that once agents optimize against visible proxies, the eval becomes an incentive structure that can degrade judgment quality over time.
 
 ## Context
 
-Sean is integrating this concept into his job hunt materials and resume, positioning himself as an AI Product Manager who understands that rigorous evaluation is critical for agentic systems. He views this as a key differentiator in his portfolio projects.
+Sean needs this to transition from describing specs as linters to building miniature eval labs that ship with fixtures and CI-style regression output. This allows him to produce a PM/IC portfolio one-pager that demonstrates how specific evals change decisions, rather than just measuring quality abstractly.
 
 ## Evidence
 
-> intent_spec` tool *is* the eval. It scores a spec against the framework's dimensions before that spec reaches a coding agent
+> The missing move is: business intent -> decision question -> observable metric -> eval case -> pass/fail threshold
 
-> turning the 'evals are the new PRDs' thesis into a portable MCP server.
+> An eval becomes dangerous when it stops measuring judgment and starts training agents to satisfy the visible proxy
+
+> Sean’s current concept describes a spec linter; these works turn it into a repeatable system
 
 ## Examples
 
-- A portable MCP server that tells the author what is missing from a spec before it ships to a coding agent.
+- Bad spec, improved spec, adversarial spec, historical production trace, and CI-style regression output
 
 ## Related Concepts
 
-[[Intent Engineering]] [[Track C MCP Server / Portfolio Differentiation]]
+[[Harness Engineering Invariant]] [[Intent Engineering]]

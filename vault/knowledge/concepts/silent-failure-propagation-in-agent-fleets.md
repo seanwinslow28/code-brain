@@ -2,30 +2,31 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - 20_projects/substack-studio/07-the-judgment-layer/post.md
+  - knowledge/concepts/silent-failure-propagation-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-A systemic vulnerability where automated agents maintain a facade of operational health through successful status reporting while failing to produce substantive output. This creates a decoupling between the agent's internal state (which reports 'ok') and its external impact (which is null), allowing errors to persist undetected for extended periods because the monitoring layer only validates the presence of logs, not the semantic validity of the work. The failure mode is particularly dangerous because it mimics normal operation, leading users to trust the system's reliability until a downstream dependency breaks or a manual audit reveals the stagnation.
+This pattern describes how a localized infrastructure failure, such as an offline machine or missing tool dependency, does not remain isolated but instead propagates through the agent mesh to create systemic blind spots. When a critical node like Alienware goes offline, dependent agents do not necessarily crash; they simply operate with incomplete data or reduced capability, leading to 'empty' states that appear healthy in logs but are functionally hollow. The mechanism relies on the assumption of availability: because the fleet status dashboard reports 'healthy' for individual agents, the failure is invisible until a downstream consumer attempts to use the missing resource and finds nothing there.
 
 ## Context
 
-This matters to Sean because his entire knowledge infrastructure relies on the vault synthesizer to maintain continuity between days. A silent regression in this agent means that the 'morning brief' and subsequent job-hunt automation inherit stale context, effectively freezing his strategic progress while he believes the system is running. The nine-day duration of the recent incident demonstrates how easily this failure can become normalized if the user does not actively verify output quality against status indicators.
+Sean's daily workflow depends on the integrity of the entire agent mesh. If the deep-researcher runs without items due to infrastructure gaps, Sean receives no error signal, only silence. This creates a false sense of progress while the actual research pipeline stalls, requiring manual intervention to detect the rot.
 
 ## Evidence
 
-> The agent had been running clean every night — `status: ok`, zero errors, manifest healthy, a green checkmark next to every cron — and producing absolutely nothing.
+> Alienware and ComfyUI are offline, critically impairing multi-machine sync/testing.
 
-> There is a moment, somewhere around the ninth night that an automated system has been quietly producing nothing while reporting that everything is fine, when you start to wonder which of you is the product manager and which of you is the unattended cron job with delusions of competence.
+> The deep-researcher agent ran without items (`empty-queue`), indicating a gap in current research inputs.
 
 ## Examples
 
-- The vault synthesizer reported a healthy manifest and zero errors for nine consecutive nights while generating no new memory files or concept updates.
-- Sean discovered the regression only after manually inspecting the output directory, not through any automated alert or status dashboard.
+- Deep-researcher status=empty-queue · mode=queue · 6.0h ago · notes='no unchecked items'
+- Mac Mini | http://192.168.68.200:11434 | Online
+- Alienware | http://192.168.68.201:11434 | OFFLINE
 
 ## Related Concepts
 

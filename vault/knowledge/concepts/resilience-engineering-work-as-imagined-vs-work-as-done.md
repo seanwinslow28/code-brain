@@ -2,30 +2,31 @@
 title: "Resilience Engineering: Work-as-Imagined vs Work-as-Done"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-06-08-task-26-research-reference-brief.md
+  - knowledge/expansions/connections/agentic-engineering-and-daily-driver-agent-optimization.md
 tags: [auto-generated, phase-6]
-created: 2026-06-09
-updated: 2026-06-09
+created: 2026-06-24
+updated: 2026-06-24
 ---
 
 ## Definition
 
-This concept describes the structural gap between idealized automation flows and the reality of exception handling. In AP systems, the 'work-as-done' is dominated by manual interventions for edge cases like duplicate detection failures or tolerance threshold breaches, rather than the seamless 'work-as-imagined' flow. The system's reliability depends not on preventing all errors, but on how efficiently it routes these exceptions to human judgment when automated controls fail.
+This concept defines the gap between an agent's designed operational state and its actual failure modes in a sociotechnical loop. It requires modeling the system not as a sequence of successful steps, but as a controller interacting with environmental constraints where unsafe actions occur when provided, not provided, or at the wrong time. The mechanism shifts focus from preventing all errors to identifying which failures are dangerous versus merely annoying, ensuring that graceful degradation preserves user decision quality even when normal coordination breaks.
 
 ## Context
 
-Sean is building an Enterprise AP Agent Spec where correctness-critical claims must be verified against primary sources. Understanding that the 'work-as-done' involves significant exception routing helps him design agents that prioritize robust error handling and verification loops over pure automation speed, ensuring the system remains trustworthy when it deviates from the ideal path.
+Sean is building a daily-driver agent that must handle overnight context injection and daily note creation. Without this lens, he risks optimizing for 'health' metrics while ignoring the specific hazard of false operational certainty caused by stale context. This insight allows him to define explicit stop rules and escalation boundaries rather than just monitoring uptime.
 
 ## Evidence
 
-> Exceptions (price/qty mismatch, missing PO, duplicate, fraud flag) route to a human; track exception rate by type + resolution time.
+> Model the daily-driver as a controller in a sociotechnical loop: Sean, vault, launchd, local models, calendar backfill, cost caps, daily-note state.
 
-> The bank-account-change event is the single highest-risk moment in AP and needs dedicated controls (dual approval + independent verification) beyond normal workflow.
+> Injecting stale overnight context is worse than injecting none because it creates false operational certainty.
 
 ## Examples
 
-- Automated duplicate detection can catch a large share pre-payment (one vendor claims 'up to 95%' — marketing ceiling).
+- Defining fallback states such as full automation, partial digest, stale-but-labeled digest, empty daily note, manual recovery prompt, and fleet quarantine.
+- When capability fails, the system must preserve user decision quality by degrading to a fallback state with visible confidence labels.
 
 ## Related Concepts
 
-[[Automation Reliability]] [[Supervision as the New AI Edge]]
+[[Agent Health Monitoring]] [[Intent Engineering]]
