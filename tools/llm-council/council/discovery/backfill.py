@@ -109,11 +109,27 @@ def _strip_meta_prefix(blind_spot: str) -> str:
     return cur or blind_spot.strip()
 
 
+# Brave's q-param hard limits are ~50 words / 400 chars; exceed either and the search 422s and (pre-fix)
+# crashed the whole post-FUSE pipeline (observed 2026-06-28 deep run). Clamp with margin under both.
+_MAX_QUERY_WORDS = 40
+_MAX_QUERY_CHARS = 360
+
+
 def _supplement_query(blind_spot: str, topic: str, segment: str) -> str:
-    """Solution/evidence-side query for a blind-spot gap. Deliberately NOT the complaint query."""
+    """Solution/evidence-side query for a blind-spot gap. Deliberately NOT the complaint query.
+
+    Clamped under Brave's q-param ceiling: the topic head is kept intact (most on-subject), the gap is
+    trimmed to the remaining word budget, then "2026" is appended. An unclamped topic+gap can otherwise
+    push past Brave's 50-word limit and 422 the search.
+    """
     gap = _strip_meta_prefix(blind_spot)
-    parts = [topic.strip(), segment.strip(), gap, "2026"]
-    return " ".join(p for p in parts if p)
+    head = " ".join(p for p in (topic.strip(), segment.strip()) if p)
+    budget = max(4, _MAX_QUERY_WORDS - len(head.split()) - 1)   # -1 reserves a slot for "2026"
+    gap = " ".join(gap.split()[:budget])
+    q = " ".join(p for p in (head, gap, "2026") if p)
+    if len(q) > _MAX_QUERY_CHARS:                               # defensive: a very long topic head alone
+        q = q[:_MAX_QUERY_CHARS].rsplit(" ", 1)[0]
+    return q
 
 
 def _keywords(query: str) -> set[str]:
@@ -161,8 +177,15 @@ async def run_backfill(*, blind_spots: list[str], bundle: EvidenceBundle, topic:
     for gap in gaps:
         query = _supplement_query(gap, topic, segment)
         extractor = _make_relevant_extractor(query)
-        recs = await collect_web(topic=topic, segment=segment, query=query, extract=extractor,
-                                 source_type="web-supplement", search=search, fetch=fetch)
+        try:
+            recs = await collect_web(topic=topic, segment=segment, query=query, extract=extractor,
+                                     source_type="web-supplement", search=search, fetch=fetch)
+        except Exception:
+            # A search/fetch backend error (e.g. a Brave 422) degrades this gap to "still open" rather
+            # than crashing the pipeline post-FUSE (SKILL.md §8 "supplement never crashes"). The failed
+            # query is not cost-counted (queries_run is only incremented on a successful collect_web).
+            items.append(BackfillItem(gap=gap, query=query, findings=[], status="still open"))
+            continue
         queries_run += 1
         findings: list[EvidenceRecord] = []
         for r in recs:
