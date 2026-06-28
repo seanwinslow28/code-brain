@@ -2,13 +2,15 @@
 """Render the substack-lens artifacts: a ranked post-angle idea ledger and a
 substack-value-engine handoff brief."""
 
+from council.discovery.backfill import BackfillResult, supplement_section
 from council.discovery.frame_substack import PostAngle
 from council.discovery.fusion import FusionResult
 
 
 def render_substack_ledger(*, topic: str, tier: str, angles: list[PostAngle],
                            quote_bank: list[str], fusion_result: FusionResult,
-                           cost_usd: float, dropped_count: int) -> str:
+                           cost_usd: float, dropped_count: int,
+                           supplement: "BackfillResult | None" = None) -> str:
     L: list[str] = []
     L.append(f"# Substack Idea Ledger — {topic}\n")
     L.append(f"- **Lens:** `substack`  **Tier:** `{tier}`  **Post angles:** {len(angles)}")
@@ -29,6 +31,7 @@ def render_substack_ledger(*, topic: str, tier: str, angles: list[PostAngle],
     L.append("## Blind-spot / Whitespace Map\n")
     L.extend(f"- {b}" for b in (fusion_result.blind_spots or ["_(none surfaced)_"]))
     L.append("")
+    L.extend(supplement_section(supplement))      # Stage 5 — sits next to the gaps it answers ([] if None)
     L.append("## Quote Bank\n")
     L.extend(f"- {q}" for q in (quote_bank or ["_(empty)_"]))
     L.append("")

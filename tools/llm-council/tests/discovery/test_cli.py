@@ -81,6 +81,30 @@ def test_cli_passes_segment_to_pipeline(tmp_path, monkeypatch, fake_api_key):
     assert captured["segment"] == "designers"
 
 
+def test_cli_supplement_flag_defaults_on_and_can_disable(tmp_path, monkeypatch, fake_api_key):
+    captured = {}
+
+    async def fake_run(**kw):
+        captured.update(kw)
+        return DiscoveryResult("# Idea Ledger — x\n", 0.1, 0, 0, {"id": "s"})
+    monkeypatch.setattr("council.discovery.__main__.run_discovery", fake_run)
+
+    # default: supplement on
+    res = CliRunner().invoke(main, [
+        "x", "--lens", "pm", "--tier", "quick", "--output", str(tmp_path / "a.md"), "--skip-budget-check",
+    ])
+    assert res.exit_code == 0, res.output
+    assert captured["supplement"] is True
+
+    # --no-supplement disables it
+    res2 = CliRunner().invoke(main, [
+        "x", "--lens", "pm", "--tier", "quick", "--no-supplement",
+        "--output", str(tmp_path / "b.md"), "--skip-budget-check",
+    ])
+    assert res2.exit_code == 0, res2.output
+    assert captured["supplement"] is False
+
+
 def test_cli_records_spend_and_echoes_status_on_failure(tmp_path, monkeypatch, fake_api_key, tmp_spend_dir):
     from datetime import date
     from council import budget

@@ -35,8 +35,10 @@ def _brief_path(output: Path) -> Path:
 @click.option("--segment", default="", help="Reshape gather queries toward an audience (e.g. developer, creative, pm).")
 @click.option("--force", is_flag=True, help="Bypass per-run cap (daily/monthly still enforced).")
 @click.option("--yes", is_flag=True, help="Auto-confirm deep-tier cost.")
+@click.option("--supplement/--no-supplement", default=True,
+              help="Stage 5 BACKFILL: web-search the blind-spot map and append a gap-fill section (default on).")
 @click.option("--skip-budget-check", is_flag=True, hidden=True)
-def main(topic, lens, tier, output, segment, force, yes, skip_budget_check):
+def main(topic, lens, tier, output, segment, force, yes, supplement, skip_budget_check):
     load_dotenv()  # resolve OPENROUTER_API_KEY from the repo-root .env (mirrors council.client)
     tcfg = get_tier(tier)
 
@@ -62,7 +64,8 @@ def main(topic, lens, tier, output, segment, force, yes, skip_budget_check):
 
     try:
         result = asyncio.run(run_discovery(
-            topic=topic, lens=lens, tier=tier, api_key=api_key, segment=segment, sessions_dir=sessions_dir,
+            topic=topic, lens=lens, tier=tier, api_key=api_key, segment=segment,
+            supplement=supplement, sessions_dir=sessions_dir,
         ))
     except DiscoveryFailed as e:
         if not skip_budget_check and e.cost_usd > 0:
