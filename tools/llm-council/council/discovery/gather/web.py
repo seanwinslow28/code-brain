@@ -143,7 +143,14 @@ async def _simple_fetch(url: str, timeout: float = 20.0) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
-async def collect_web(*, topic: str, segment: str = "", search=..., fetch=..., max_results: int = 8) -> list[EvidenceRecord]:
+async def collect_web(*, topic: str, segment: str = "", search=..., fetch=..., max_results: int = 8,
+                      query: str | None = None, extract=None, source_type: str = "web") -> list[EvidenceRecord]:
+    """Neural web search + quote extraction → EvidenceRecords.
+
+    Defaults reproduce the byte-identical complaint-side Stage-1 behavior. Stage 5 BACKFILL reuses
+    this same SSRF-hardened path with overrides: `query` (a solution/evidence-side gap query),
+    `extract` (a permissive keyword-overlap extractor), and `source_type="web-supplement"`.
+    """
     if search is ...:
         if os.environ.get("EXA_API_KEY"):
             search = _default_exa_search(os.environ["EXA_API_KEY"])
@@ -159,8 +166,11 @@ async def collect_web(*, topic: str, segment: str = "", search=..., fetch=..., m
         fetch = None
     if search is None:
         return []
-    subject = f"{topic} {segment}".strip() if segment else topic
-    query = f"{subject} user complaints problems frustrations 2026"
+    if extract is None:
+        extract = extract_quotes
+    if query is None:
+        subject = f"{topic} {segment}".strip() if segment else topic
+        query = f"{subject} user complaints problems frustrations 2026"
     results = await search(query)
     recs: list[EvidenceRecord] = []
     for it in results[:max_results]:
@@ -168,11 +178,11 @@ async def collect_web(*, topic: str, segment: str = "", search=..., fetch=..., m
         if not url:
             continue
         text = it.get("_text") or ""
-        if not extract_quotes(text) and fetch is not None:
+        if not extract(text) and fetch is not None:
             text = await fetch(url)
-        for q in extract_quotes(text):
+        for q in extract(text):
             recs.append(EvidenceRecord(
-                source_type="web", source_name=it.get("title", "") or "web",
+                source_type=source_type, source_name=it.get("title", "") or "web",
                 url=url, date=it.get("published", ""), quote=q, engagement=0,
             ))
     return recs

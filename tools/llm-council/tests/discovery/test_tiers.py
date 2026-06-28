@@ -43,3 +43,9 @@ def test_collector_tier_gating_matches_matrix():
     assert (s.reviews, s.github, s.qa) == (True, True, False)     # standard: + reviews + github
     assert (d.reviews, d.github, d.qa) == (True, True, True)      # deep: + reviews + github + qa
     assert all(t.social and t.web for t in (q, s, d))             # social + web stay on everywhere
+
+
+def test_supplement_blind_spot_caps_scale_by_tier():
+    assert get_tier("quick").supplement_max_blind_spots == 2
+    assert get_tier("standard").supplement_max_blind_spots == 4
+    assert get_tier("deep").supplement_max_blind_spots == 6
