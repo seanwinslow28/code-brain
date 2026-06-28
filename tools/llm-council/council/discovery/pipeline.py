@@ -81,52 +81,74 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
                 print(f"[discovery] failed to persist failure session {session_id}: {write_err}", file=sys.stderr)
         raise DiscoveryFailed(str(e), cost_usd=cost, session=fail_session) from e
 
-    verified = verify_pain_points(fr.pain_points, bundle)
-    dropped = sum(1 for v in verified if not v.verified)
+    # FUSE succeeded → its tokens are already billed. From here on ANY failure (verify / backfill /
+    # frame / render / session-write) must still surface that billed cost so __main__ records the spend.
+    # Without this, a post-fuse crash silently drops real spend and the daily cap goes blind (root cause
+    # of the 2026-06-28 BACKFILL crash). Mirror the FusionError path: thread the accumulated cost into
+    # DiscoveryFailed.cost_usd and persist a diagnostic failure session.
     cost = _estimate_cost(fr, tcfg)
+    try:
+        verified = verify_pain_points(fr.pain_points, bundle)
+        dropped = sum(1 for v in verified if not v.verified)
 
-    # Stage 5 — BACKFILL (before render; needs only fr.blind_spots + bundle + topic/segment/tier, so it
-    # runs once for both lenses). Its (free) web queries are priced at WEB_QUERY_PRICE and added here
-    # *after* _estimate_cost — folding inside _estimate_cost would be dropped by its fr.cost early-return.
-    supplement_result = None
-    if supplement:
-        backfill = backfill_fn or run_backfill
-        supplement_result = await backfill(blind_spots=fr.blind_spots, bundle=bundle, topic=topic,
-                                           segment=segment, tier=tcfg)
-        cost = round(cost + supplement_result.queries_run * WEB_QUERY_PRICE, 4)
+        # Stage 5 — BACKFILL (before render; needs only fr.blind_spots + bundle + topic/segment/tier, so
+        # it runs once for both lenses). Its (free) web queries are priced at WEB_QUERY_PRICE and added
+        # here *after* _estimate_cost — folding inside would be dropped by its fr.cost early-return.
+        supplement_result = None
+        if supplement:
+            backfill = backfill_fn or run_backfill
+            supplement_result = await backfill(blind_spots=fr.blind_spots, bundle=bundle, topic=topic,
+                                               segment=segment, tier=tcfg)
+            cost = round(cost + supplement_result.queries_run * WEB_QUERY_PRICE, 4)
 
-    brief_md = ""
-    if lens == "substack":
-        from council.discovery.frame_substack import frame_substack
-        from council.discovery.render_substack import render_substack_ledger, render_substack_brief
-        angles, quote_bank = frame_substack(verified, fr, segment=segment)
-        md = render_substack_ledger(topic=topic, tier=tier, angles=angles, quote_bank=quote_bank,
-                                    fusion_result=fr, cost_usd=cost, dropped_count=dropped,
-                                    supplement=supplement_result)
-        brief_md = render_substack_brief(topic=topic, segment=segment, angles=angles)
-        verified_count = len(angles)
-    else:
-        cards, quote_bank = frame_pm(verified, fr)
-        md = render_ledger(topic=topic, lens=lens, tier=tier, cards=cards, quote_bank=quote_bank,
-                           fusion_result=fr, cost_usd=cost, dropped_count=dropped,
-                           supplement=supplement_result)
-        verified_count = len(cards)
+        brief_md = ""
+        if lens == "substack":
+            from council.discovery.frame_substack import frame_substack
+            from council.discovery.render_substack import render_substack_ledger, render_substack_brief
+            angles, quote_bank = frame_substack(verified, fr, segment=segment)
+            md = render_substack_ledger(topic=topic, tier=tier, angles=angles, quote_bank=quote_bank,
+                                        fusion_result=fr, cost_usd=cost, dropped_count=dropped,
+                                        supplement=supplement_result)
+            brief_md = render_substack_brief(topic=topic, segment=segment, angles=angles)
+            verified_count = len(angles)
+        else:
+            cards, quote_bank = frame_pm(verified, fr)
+            md = render_ledger(topic=topic, lens=lens, tier=tier, cards=cards, quote_bank=quote_bank,
+                               fusion_result=fr, cost_usd=cost, dropped_count=dropped,
+                               supplement=supplement_result)
+            verified_count = len(cards)
 
-    session = {
-        "id": session_id, "topic": topic, "lens": lens, "tier": tier,
-        "evidence_count": len(bundle.records), "verified": verified_count,
-        "dropped": dropped, "cost_usd": cost,
-        "gather_status": gather_status,
-        "blind_spots": fr.blind_spots, "contradictions": fr.contradictions,
-        "supplement": (None if supplement_result is None else {
-            "skipped": supplement_result.skipped, "queries_run": supplement_result.queries_run,
-            "filled": sum(1 for it in supplement_result.items if it.findings),
-            "items": len(supplement_result.items),
-        }),
-    }
-    if sessions_dir is not None:
-        sessions_dir.mkdir(parents=True, exist_ok=True)
-        (sessions_dir / f"{session_id}.json").write_text(json.dumps(session, indent=2))
+        session = {
+            "id": session_id, "topic": topic, "lens": lens, "tier": tier,
+            "evidence_count": len(bundle.records), "verified": verified_count,
+            "dropped": dropped, "cost_usd": cost,
+            "gather_status": gather_status,
+            "blind_spots": fr.blind_spots, "contradictions": fr.contradictions,
+            "supplement": (None if supplement_result is None else {
+                "skipped": supplement_result.skipped, "queries_run": supplement_result.queries_run,
+                "filled": sum(1 for it in supplement_result.items if it.findings),
+                "items": len(supplement_result.items),
+            }),
+        }
+        if sessions_dir is not None:
+            sessions_dir.mkdir(parents=True, exist_ok=True)
+            (sessions_dir / f"{session_id}.json").write_text(json.dumps(session, indent=2))
 
-    return DiscoveryResult(markdown=md, cost_usd=cost, verified_count=verified_count,
-                           dropped_count=dropped, session=session, brief_markdown=brief_md)
+        return DiscoveryResult(markdown=md, cost_usd=cost, verified_count=verified_count,
+                               dropped_count=dropped, session=session, brief_markdown=brief_md)
+    except DiscoveryFailed:
+        raise                                          # already typed + costed — don't double-wrap
+    except Exception as e:
+        cost = round(cost, 4)
+        fail_session = {
+            "id": session_id, "topic": topic, "lens": lens, "tier": tier,
+            "evidence_count": len(bundle.records), "gather_status": gather_status,
+            "failed_stage": "post-fuse", "error": str(e), "cost_usd": cost,
+        }
+        if sessions_dir is not None:
+            try:
+                sessions_dir.mkdir(parents=True, exist_ok=True)
+                (sessions_dir / f"{session_id}.json").write_text(json.dumps(fail_session, indent=2))
+            except Exception as write_err:  # never let a failed diagnostic write eat the spend record
+                print(f"[discovery] failed to persist failure session {session_id}: {write_err}", file=sys.stderr)
+        raise DiscoveryFailed(str(e), cost_usd=cost, session=fail_session) from e

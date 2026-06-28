@@ -72,15 +72,16 @@ def main(topic, lens, tier, output, segment, force, yes, supplement, skip_budget
             record_spend(amount=e.cost_usd, profile=tier, tag=f"discovery-{lens}",
                          on_date=date.today(), tool="discovery")
         status = (e.session or {}).get("gather_status", {})
-        console.print(f"[red]Discovery failed at fuse:[/red] {e}")
+        stage = (e.session or {}).get("failed_stage", "fuse")
+        console.print(f"[red]Discovery failed ({stage}):[/red] {e}")
         if status:
             console.print(f"[dim]Gather status: {status}[/dim]")
         if e.cost_usd > 0:
-            console.print(f"[dim]Recorded spend: ${e.cost_usd:.2f} (billed even though FUSE failed)[/dim]")
+            console.print(f"[dim]Recorded spend: ${e.cost_usd:.2f} (real OpenRouter spend preserved despite the {stage} failure)[/dim]")
         else:
-            console.print("[dim]No spend recorded (FUSE failed before billing)[/dim]")
+            console.print("[dim]No spend recorded (failed before billing)[/dim]")
         sys.exit(3)
-    except Exception as e:  # surface other pipeline failures cleanly (no spend incurred pre-fuse)
+    except Exception as e:  # genuinely pre-fuse/setup failures only — nothing billed yet (post-fuse failures become DiscoveryFailed above)
         console.print(f"[red]Discovery failed: {e}[/red]")
         sys.exit(3)
 
