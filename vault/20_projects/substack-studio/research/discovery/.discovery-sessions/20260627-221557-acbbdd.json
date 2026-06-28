@@ -1,0 +1,29 @@
+{
+  "id": "20260627-221557-acbbdd",
+  "topic": "designers and creators struggling to keep a character, style, or brand consistent across many AI-generated outputs",
+  "lens": "substack",
+  "tier": "deep",
+  "evidence_count": 31,
+  "verified": 5,
+  "dropped": 1,
+  "cost_usd": 1.2611,
+  "gather_status": {
+    "last30": "ok: 4 records (4 found)",
+    "sonar": "ok: 19 records (19 found)",
+    "web": "ok: 8 records (8 found)",
+    "reviews": "ok: 0 records (0 found)",
+    "github": "ok: 0 records (0 found)",
+    "qa": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "No quantitative data on how frequently consistency failures occur or how much time/cost they impose on creators.",
+    "No direct evidence from end consumers about whether they actually perceive the character/brand drift that creators worry about.",
+    "Little evidence on whether newer reference-input or character-reference features actually solve the problem in practice.",
+    "No coverage of non-image modalities (e.g., video, 3D, audio) where consistency may also matter.",
+    "Several listed evidence items (AI mastery, AI simp farms, junior pipeline, designer job market) are unrelated to consistency and provide no usable signal on this pain point."
+  ],
+  "contradictions": [
+    "Evidence frames consistency failures as fundamentally a model architecture issue (memoryless sampling) while other items frame failures as 'environment design' failures rather than model failures, implying different root causes and fixes.",
+    "Industry blogs imply brand consistency can be fixed with playbooks/workflows, while the technical-community evidence suggests the memoryless nature of generation is an inherent limitation requiring per-call re-anchoring."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "20260627-215053-f694c8",
+  "topic": "writers and authors trying to get AI to write in their own voice instead of generic AI prose",
+  "lens": "substack",
+  "tier": "standard",
+  "evidence_count": 54,
+  "verified": 5,
+  "dropped": 1,
+  "cost_usd": 1.6546,
+  "gather_status": {
+    "last30": "ok: 30 records (30 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 6 records (6 found)",
+    "reviews": "ok: 3 records (3 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "Almost no evidence on cost, pricing, or willingness to pay for voice-preserving tools.",
+    "No quantified data on time-savings vs. quality trade-offs beyond anecdotes ('5 minutes', '15 minutes').",
+    "Little on non-fiction/business writing, screenwriting, or non-English-language writers; sample skews to fiction, poetry, and essays.",
+    "No evidence comparing specific tools/models head-to-head on voice fidelity.",
+    "No longitudinal data on whether calibration techniques actually sustain voice across a full manuscript.",
+    "Reader/audience perspective on detecting voice is asserted by writers but not validated by reader-side evidence."
+  ],
+  "contradictions": [
+    "Some writers insist AI prose is 'really obvious' and easy to detect, while others fear genuine human work will be falsely flagged as AI \u2014 implying detection is unreliable.",
+    "One camp treats AI voice failure as an inherent, accepted limitation (novelist 'accepted that as a limitation'), while tutorials claim adequate context/calibration makes output sound human ('nobody's calling your book robotic').",
+    "The 'AI ruins writing' sentiment is framed as a serious craft/ethics threat by some, but dismissed as 'noise' getting 'old fast' by others in the same community.",
+    "Critics frame AI users as 'not real writers,' yet the same evidence set includes writers actively using AI and seeking to make it work in their voice."
+  ]
+}

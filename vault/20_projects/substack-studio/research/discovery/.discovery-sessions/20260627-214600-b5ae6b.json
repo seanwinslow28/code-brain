@@ -1,0 +1,29 @@
+{
+  "id": "20260627-214600-b5ae6b",
+  "topic": "illustrators and character artists trying to get AI image generators to match their own drawing style and keep a character consistent across images",
+  "lens": "substack",
+  "tier": "standard",
+  "evidence_count": 26,
+  "verified": 6,
+  "dropped": 0,
+  "cost_usd": 1.2134,
+  "gather_status": {
+    "last30": "ok: 4 records (4 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 7 records (7 found)",
+    "reviews": "error: HTTPStatusError: HTTPStatusError(\"Client error '422 Unprocessable Entity' for url 'https://api.search.brave.com/res/v1/web/search?q=illustrators+and+character+artists+trying+to+get+AI+image+generators+to+match+their+own+drawing+style+and+keep+a+character+consistent+across+images+illustrator+review+%28%221+star%22+OR+%222+star%22+OR+worst+OR+terrible+OR+disappointing+OR+avoid+OR+cancel%29+%28site%3Ag2.com+OR+site%3Acapterra.com+OR+site%3Atrustpilot.com+OR+site%3Aproducthunt.com+OR+site%3Aapps.apple.com+OR+site%3Aplay.google.com%29&count=8'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422\")",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "Little evidence on pricing or cost as a barrier for these workflows.",
+    "No evidence comparing specific tools' relative performance on consistency (e.g., Midjourney vs DALL\u00b7E vs Stable Diffusion).",
+    "No evidence on whether reference-image / fine-tuning / LoRA approaches solve the consistency problem.",
+    "Sparse evidence on technical/setup difficulty beyond a single 'setup process is painful' mention.",
+    "No quantified data on time lost or success rates; intensity is inferred from qualitative complaints.",
+    "Hiring/freelancer friction (MaxxFeral) is tangential and not clearly about AI tool pain points."
+  ],
+  "contradictions": [
+    "Some sources frame AI as productive for breadth (CapCut: 'turn hours into minutes' for 10 cover directions), while most evidence frames AI as failing at coherent, consistent output \u2014 suggesting value for ideation/volume but not for style/character fidelity.",
+    "Workaround optimism vs. failure: neolemon suggests describing style via 'movement + medium + era + vibes' as a viable workaround, whereas other sources report workarounds and specific prompts still fail to prevent default/generic output."
+  ]
+}
