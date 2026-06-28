@@ -1,0 +1,31 @@
+{
+  "id": "20260627-215657-126e13",
+  "topic": "creatives who feel AI flattens their distinctive personal style into a generic average even after feeding it references and examples",
+  "lens": "substack",
+  "tier": "deep",
+  "evidence_count": 46,
+  "verified": 5,
+  "dropped": 1,
+  "cost_usd": 1.3169,
+  "gather_status": {
+    "last30": "ok: 22 records (22 found)",
+    "sonar": "ok: 19 records (19 found)",
+    "web": "ok: 5 records (5 found)",
+    "reviews": "ok: 0 records (0 found)",
+    "github": "ok: 0 records (0 found)",
+    "qa": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "No quantitative data on how prevalent the flattening complaint is (no counts, surveys, or sample sizes) \u2014 most evidence is synthesis or anecdote.",
+    "Little first-person verbatim testimony from the affected creatives themselves; much of the strongest evidence is secondary synthesis (Sonar/report sources) rather than direct user voices.",
+    "No evidence on whether specific techniques (LoRA, voice profiles, fine-tuning) succeed for some users \u2014 only that improvements are 'partial,' with no breakdown of when/why steering works.",
+    "Music-specific firsthand pain is thin; the only direct music comment in evidence is dismissive of quality rather than about flattening of a personal style.",
+    "No vendor/model-specific attribution \u2014 evidence does not distinguish which tools or model versions flatten most.",
+    "Recency is unclear for the synthesis (Sonar) sources, which carry no dates, weakening confidence in how current these specific complaints are."
+  ],
+  "contradictions": [
+    "Surface diversity vs. deep sameness: evidence states AI outputs can appear 'wildly different' in scene/subject yet are simultaneously described as homogenized and reverting to an average \u2014 the variety is real at the surface but contradicts the felt uniformity.",
+    "Productivity/originality gains vs. flattening harm: one source notes AI may 'enhance productivity and originality scores' while still making work more uniform and less valued, an internal tension between measured improvement and perceived loss.",
+    "Serendipity as benefit vs. liability: creatives reportedly appreciate surprising outputs yet simultaneously distrust them due to lack of control, a tension between valuing and fearing unpredictability."
+  ]
+}

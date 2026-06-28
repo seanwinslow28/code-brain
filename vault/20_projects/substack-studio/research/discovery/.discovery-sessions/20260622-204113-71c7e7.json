@@ -1,0 +1,32 @@
+{
+  "id": "20260622-204113-71c7e7",
+  "topic": "AI creative tools producing soulless, generic, or off-brand work",
+  "lens": "substack",
+  "tier": "standard",
+  "evidence_count": 33,
+  "verified": 7,
+  "dropped": 1,
+  "cost_usd": 1.1719,
+  "gather_status": {
+    "last30": "ok: 12 records (12 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 6 records (6 found)",
+    "reviews": "ok: 0 records (0 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "No first-hand client/executive voices explaining why AI use is mandated despite poor outputs \u2014 only practitioner perspectives.",
+    "Evidence skews toward anti-AI communities (r/BetterOffline) and creative-protectionist outlets; little counter-evidence from successful AI-assisted workflows.",
+    "No discussion of whether fine-tuned, brand-trained, or RAG-augmented models reduce the 'AI look' and off-brand failures.",
+    "Failure modes are conflated (technical glitches, brand-tone mismatch, philosophical soullessness, derivative content) \u2014 they may have distinct solutions.",
+    "No quantitative baseline comparing AI rejection rates to human-only prototype rejection rates.",
+    "The 60\u201380% income-drop statistic from a single source is repeated uncritically without methodology scrutiny.",
+    "No engagement with the possibility that some 'AI allegations' stigmatize legitimate human work.",
+    "Evidence does not separate text/LLM failures from image, video, and layout tool failures."
+  ],
+  "contradictions": [
+    "Practitioners argue failures are architectural ('Large Language models don't understand layout, format, nor style... there's no \"AI\" application in your space'), while managers/clients insist the fault is insufficient prompt engineering ('spend more time prompt engineering the layout').",
+    "Some sources frame soullessness as inherent and unfixable, while MarTech/Mojo frame it as a process problem that can be repaired by adding narrative, control, and lived experience \u2014 implying the deficiency is not intrinsic.",
+    "Clients simultaneously demand 'innovative' AI workflows and reject the resulting prototypes as toddler-level work."
+  ]
+}

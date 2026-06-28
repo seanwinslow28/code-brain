@@ -1,0 +1,28 @@
+{
+  "id": "20260627-222739-a12537",
+  "topic": "creatives who only use AI for finished output and cannot make it work as a brainstorming, ideation, or storyboarding partner",
+  "lens": "substack",
+  "tier": "standard",
+  "evidence_count": 31,
+  "verified": 4,
+  "dropped": 2,
+  "cost_usd": 1.1474,
+  "gather_status": {
+    "last30": "ok: 6 records (6 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 10 records (10 found)",
+    "reviews": "ok: 0 records (0 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "Little to no evidence on specific tool features or UX changes that would actually enable iterative ideation/storyboarding collaboration; the FIXIT method is referenced but no detail or efficacy data is provided.",
+    "No quantitative breakdown of which creative disciplines (writing, visual art, film/storyboarding, music) struggle most as an ideation partner.",
+    "Absence of evidence from users who successfully use AI as a brainstorming partner, leaving the success conditions unexamined.",
+    "No pricing, accessibility, or learning-curve evidence explaining whether the failure is capability or user workflow mismatch."
+  ],
+  "contradictions": [
+    "One source argues AI 'can't be real creative' yet others fear it will 'replace real creativity,' reflecting tension over whether AI is creatively incapable or competitively threatening (https://www.reddit.com/r/aiwars/comments/1ue4dx9/i_personally_cant_understand_the_logic_of_some/).",
+    "Promotional/optimistic claims about AI generating large revenue (AI UGC for apps, dropshipping AI agent) contrast sharply with the dominant evidence that AI output is low-quality and requires heavy editing (https://x.com/BrianFrydberg/status/2067266108059504776, https://x.com/fomoliver/status/2062247396633870466).",
+    "The motionapp source frames human-AI collaboration as fixable via a method, contradicting other sources that frame AI's creative limitations as intrinsic and unfixable (https://motionapp.com/blog/brainstorming-with-ai-for-performance-advertising vs https://aokistudio.com/50-arguments-against-the-use-of-ai-in-creative-fields.html)."
+  ]
+}
