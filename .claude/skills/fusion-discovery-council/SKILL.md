@@ -44,7 +44,7 @@ This skill's backing CLI lives in code-brain; it is canonical there and must not
 
 ---
 
-## 2. The four stages
+## 2. The five stages
 
 The pipeline runs in a fixed order; each stage feeds the next.
 
@@ -59,7 +59,9 @@ The pipeline runs in a fixed order; each stage feeds the next.
 
 3. **VERIFY** — The **anti-fabrication gate** (see §4). Every candidate pain point must trace to a quote whose URL exists in the gathered evidence. Untraceable candidates are dropped or marked `unverified` — never quietly kept.
 
-4. **FRAME** — Apply the lens to each *verified* pain point: `pm` → ranked, evidence-linked opportunity cards; `substack` → ranked post angles + a substack-value-engine handoff brief. Render the **idea ledger** markdown (+ the brief for substack).
+4. **FRAME** — Apply the lens to each *verified* pain point: `pm` → ranked, evidence-linked opportunity cards; `substack` → ranked post angles + a substack-value-engine handoff brief.
+
+5. **BACKFILL** — The pipeline web-searches its own blind-spot map so no gap is left un-chased. For each blind-spot bullet (tier-capped: `quick` 2 / `standard` 4 / `deep` 6, one query each) it derives a **solution/evidence-side** query (not a complaint query), reuses the existing Stage-1 web collector (Exa/Brave) with a permissive verbatim extractor, URL-anchors each finding through the **same** gate as §6, and appends a clearly-separate **Web Supplement (gap-fill)** section to the ledger. A gap it can't fill is rendered "still open — not filled," never papered over. Default-on (`--supplement`); the web findings are kept OUT of the panel-ranked list (they never bypass FUSE consensus) and labeled **gap-fill LEADS, not consensus-verified claims** (see §6). Then render the **idea ledger** markdown (+ the brief for substack).
 
 > The extended collectors are LIVE and tier-gated (above): review sites + competitor-weakness mining and GitHub Issues on `standard`/`deep`, Stack Exchange Q&A on `deep`. NOT included — do **not** claim them: demand-intent (autocomplete/PAA — produces queries, not URL-anchored quotes, so the gate would drop them), trend-velocity feeds (no clean free API), and Quora (anti-scraping). `quick` stays lean (last30days + Sonar + web). The `last30days` backbone contributes Reddit/HN (keyless); HackerNews can come back empty on some runs and degrades safely.
 
@@ -74,7 +76,10 @@ The pipeline runs in a fixed order; each stage feeds the next.
 --output   <ABSOLUTE PATH>   (required)
 --force    bypass per-run cap only (daily/monthly still enforced)
 --yes      auto-confirm deep-tier cost prompt
+--supplement / --no-supplement   Stage 5 BACKFILL: web-search the blind-spot map and append a gap-fill section (default: on)
 ```
+
+**`--supplement` / `--no-supplement`** — Stage 5 BACKFILL (default **on**, so every run self-fills its blind spots). Web-searches each blind-spot bullet and appends the **Web Supplement (gap-fill)** section. `--no-supplement` skips the stage entirely and reproduces the exact pre-Stage-5 ledger. Requires `EXA_API_KEY` or `BRAVE_API_KEY` — with neither set the stage degrades to a "skipped" note (see §8), never a crash. Adds only the tier-capped web-query cost (see §5).
 
 **`--lens`** — `pm` (default) frames verified pain into ranked PM opportunities. `substack` reframes the same verified pain into ranked post angles and additionally writes a **handoff brief** consumable by the `substack-value-engine` skill (chain: substack-value-engine → storytelling-architecture → writing-voice-modes → writing-critique → writing-humanity-pass). The brief pre-fills the Value-Gate Itch + Transfer + verbatim evidence and leaves the Solution slot for you.
 
@@ -137,6 +142,7 @@ Always pass this as an **absolute** path under `/Users/seanwinslow/Code-Brain/co
 - **The per-run cap gates the pre-flight ESTIMATE (`0.6 × cap`), not actual spend.** A web-tool-call-heavy topic can *overshoot* its per-run cap — observed 2026-06-21: a `standard` run cost **$2.74** vs the $1.50 cap. Cost is dominated by the panel's web-tool calls and is **high-variance by topic**, so don't assume `deep` ⟹ most expensive (a deep run the same day cost $0.99). **The $10/day cap is the real guardrail** — it's checked against *actual* accumulated spend, so it can't be overshot the same way. Watch the daily total when running several topics in a session.
 - Discovery's own daily/monthly caps: **$10/day, $50/month**. These are independent of the council's caps but tracked in the **same** spend file — discovery rows are tagged `tool="discovery"` so the two tools never cross-deplete each other while staying in one coherent ledger (enforced bidirectionally via per-tool pre-flight as of Phase 2).
 - Recorded spend uses OpenRouter's authoritative `usage.cost` when available, falling back to a conservative token estimate.
+- **Stage 5 BACKFILL is cheap and bounded.** It reuses the free web collector (Exa/Brave on your own keys → $0 on the OpenRouter ledger) and makes **no** model call. Its web queries are priced into recorded spend at the standard per-web-query rate, tier-capped to 2 / 4 / 6 queries (`quick` / `standard` / `deep`) — i.e. at most ~$0.07 added on `deep`. The $10/day cap still governs.
 - `deep` tier **confirms the cost interactively before running** (pass `--yes` only when Sean has authorized it for this run).
 - `--force` bypasses **only the per-run cap** — the daily and monthly caps are still enforced. Use it only when Sean explicitly authorizes it for this query.
 - After a successful run the CLI records actual spend to `/Users/seanwinslow/Code-Brain/code-brain/vault/health/council-spend-{YYYY-MM-DD}.json` (canonical — same file across all repos, so daily/monthly caps stay coherent).
@@ -156,6 +162,7 @@ This is the heart of the skill and is **not** softened under any circumstance.
 - Every pain point in the ledger must trace to a **quote whose URL exists in the gathered evidence bundle**.
 - A candidate the panel proposes but that cannot be traced to a real fetched URL is **dropped** or marked `unverified` — never paraphrased into the ledger as if it were sourced, never "rounded up" to a real claim.
 - This is what separates discovery from a model hallucinating plausible-sounding pain. If the evidence isn't there, the idea doesn't ship.
+- **The gate also governs Stage 5 BACKFILL.** Supplement findings route through the *same* shared verification helper (`quote_supported_at_url` in `verify.py`), so a supplement item ships only if its quote appears verbatim at a real fetched URL. Because the supplement extracts quotes deterministically from the fetched page, it is **safe by construction** — it cannot fabricate. Its remaining, un-vetted risk is **relevance** (a keyword-matched sentence could be on-keyword but off-topic), so the Web Supplement section is explicitly labeled **gap-fill LEADS, not consensus-verified claims**. Roadmap item E1 upgrades that one shared helper from substring containment to atomic-claim + NLI entailment; when it lands, both VERIFY and BACKFILL inherit relevance-vetting for free.
 
 When reporting back to Sean, always surface the **dropped/unverified count** alongside the verified ideas — a high drop rate is signal about evidence thinness, not something to hide. Also point Sean at the ledger's **blind-spot / whitespace map** — the signature cross-model output that audits what the evidence and the panel *missed* (e.g. "the topic returned generic AI-coding pain, not studio-2D specifics"). It is often the highest-signal section and tells you how to sharpen the next run (reframe the topic, add `--segment`, or raise the tier).
 
@@ -173,3 +180,4 @@ The skill **writes** the idea ledger to `vault/20_projects/research/...` and sto
 - **Discovery failed at fuse** (exit 3) — the Fusion call failed (after SSE-padding-safe decode + one reprompt retry). The CLI **records the spend OpenRouter actually billed** (tagged `tool="discovery"`), **persists the session JSON** with per-collector `gather_status`, and echoes that status — so a failed run is diagnosable and never silently free. No ledger is written.
 - **Discovery failed (exit 3, pre-fuse)** — a gather/setup error before any billable call; no spend recorded.
 - **High drop rate** — the pipeline ran but most candidates failed the verification gate. This is a *valid* outcome (thin evidence), not a bug. Report the verified vs dropped counts to Sean honestly.
+- **Supplement skipped (no web-search key)** — Stage 5 needs `EXA_API_KEY` or `BRAVE_API_KEY`. With neither set, the BACKFILL stage degrades gracefully: it runs no queries, costs nothing, and the ledger's Web Supplement section reads `supplement skipped: no web-search key configured`. The rest of the run is unaffected — it never crashes. (Run with `--no-supplement` to drop the section entirely.)

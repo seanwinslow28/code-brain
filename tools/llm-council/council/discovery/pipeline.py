@@ -1,5 +1,5 @@
 # council/discovery/pipeline.py
-"""4-stage orchestrator: gather → fuse → verify → frame → render."""
+"""5-stage orchestrator: gather → fuse → verify → frame → backfill → render."""
 
 import json
 import sys
@@ -8,6 +8,7 @@ import uuid
 from dataclasses import dataclass
 from pathlib import Path
 
+from council.discovery.backfill import run_backfill
 from council.discovery.fusion import FusionResult, FusionError, fuse as _fuse
 from council.discovery.frame import frame_pm
 from council.discovery.gather import gather_evidence
@@ -47,7 +48,8 @@ def _estimate_cost(fr: FusionResult, tier) -> float:
 
 
 async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segment: str = "",
-                        gather_fn=None, fuse_fn=None, sessions_dir: Path | None = None) -> DiscoveryResult:
+                        gather_fn=None, fuse_fn=None, backfill_fn=None, supplement: bool = True,
+                        sessions_dir: Path | None = None) -> DiscoveryResult:
     tcfg = get_tier(tier)
     session_id = f"{time.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:6]}"
 
@@ -56,7 +58,7 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
 
     if not bundle.records:
         md = render_ledger(topic=topic, lens=lens, tier=tier, cards=[], quote_bank=[],
-                           fusion_result=FusionResult(), cost_usd=0.0, dropped_count=0)
+                           fusion_result=FusionResult(), cost_usd=0.0, dropped_count=0, supplement=None)
         return DiscoveryResult(markdown=md, cost_usd=0.0, verified_count=0, dropped_count=0,
                                session={"id": session_id, "topic": topic, "empty": True,
                                         "gather_status": gather_status})
@@ -83,19 +85,31 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
     dropped = sum(1 for v in verified if not v.verified)
     cost = _estimate_cost(fr, tcfg)
 
+    # Stage 5 — BACKFILL (before render; needs only fr.blind_spots + bundle + topic/segment/tier, so it
+    # runs once for both lenses). Its (free) web queries are priced at WEB_QUERY_PRICE and added here
+    # *after* _estimate_cost — folding inside _estimate_cost would be dropped by its fr.cost early-return.
+    supplement_result = None
+    if supplement:
+        backfill = backfill_fn or run_backfill
+        supplement_result = await backfill(blind_spots=fr.blind_spots, bundle=bundle, topic=topic,
+                                           segment=segment, tier=tcfg)
+        cost = round(cost + supplement_result.queries_run * WEB_QUERY_PRICE, 4)
+
     brief_md = ""
     if lens == "substack":
         from council.discovery.frame_substack import frame_substack
         from council.discovery.render_substack import render_substack_ledger, render_substack_brief
         angles, quote_bank = frame_substack(verified, fr, segment=segment)
         md = render_substack_ledger(topic=topic, tier=tier, angles=angles, quote_bank=quote_bank,
-                                    fusion_result=fr, cost_usd=cost, dropped_count=dropped)
+                                    fusion_result=fr, cost_usd=cost, dropped_count=dropped,
+                                    supplement=supplement_result)
         brief_md = render_substack_brief(topic=topic, segment=segment, angles=angles)
         verified_count = len(angles)
     else:
         cards, quote_bank = frame_pm(verified, fr)
         md = render_ledger(topic=topic, lens=lens, tier=tier, cards=cards, quote_bank=quote_bank,
-                           fusion_result=fr, cost_usd=cost, dropped_count=dropped)
+                           fusion_result=fr, cost_usd=cost, dropped_count=dropped,
+                           supplement=supplement_result)
         verified_count = len(cards)
 
     session = {
@@ -104,6 +118,11 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
         "dropped": dropped, "cost_usd": cost,
         "gather_status": gather_status,
         "blind_spots": fr.blind_spots, "contradictions": fr.contradictions,
+        "supplement": (None if supplement_result is None else {
+            "skipped": supplement_result.skipped, "queries_run": supplement_result.queries_run,
+            "filled": sum(1 for it in supplement_result.items if it.findings),
+            "items": len(supplement_result.items),
+        }),
     }
     if sessions_dir is not None:
         sessions_dir.mkdir(parents=True, exist_ok=True)

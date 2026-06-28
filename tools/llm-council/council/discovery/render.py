@@ -1,12 +1,14 @@
 """Render the idea ledger markdown artifact."""
 
+from council.discovery.backfill import BackfillResult, supplement_section
 from council.discovery.frame import IdeaCard
 from council.discovery.fusion import FusionResult
 
 
 def render_ledger(*, topic: str, lens: str, tier: str, cards: list[IdeaCard],
                   quote_bank: list[str], fusion_result: FusionResult,
-                  cost_usd: float, dropped_count: int) -> str:
+                  cost_usd: float, dropped_count: int,
+                  supplement: "BackfillResult | None" = None) -> str:
     L: list[str] = []
     L.append(f"# Idea Ledger — {topic}\n")
     L.append(f"- **Lens:** `{lens}`  **Tier:** `{tier}`  **Verified ideas:** {len(cards)}")
@@ -27,6 +29,7 @@ def render_ledger(*, topic: str, lens: str, tier: str, cards: list[IdeaCard],
     L.append("## Blind-spot / Whitespace Map\n")
     L.extend(f"- {b}" for b in (fusion_result.blind_spots or ["_(none surfaced)_"]))
     L.append("")
+    L.extend(supplement_section(supplement))      # Stage 5 — sits next to the gaps it answers ([] if None)
     L.append("## Contradiction Map\n")
     L.extend(f"- {c}" for c in (fusion_result.contradictions or ["_(none surfaced)_"]))
     L.append("")

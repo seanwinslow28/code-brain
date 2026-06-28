@@ -16,6 +16,7 @@ class TierConfig:
     reviews: bool = False       # review-sites + competitor-weakness mining (standard+)
     github: bool = False        # GitHub Issues unmet-need mining (standard+)
     qa: bool = False            # Stack Exchange Q&A pain mining (deep)
+    supplement_max_blind_spots: int = 2  # Stage 5 BACKFILL: max blind-spot gaps web-searched (1 query each)
 
 
 _STANDARD_PANEL = (
@@ -35,6 +36,7 @@ TIERS: dict[str, TierConfig] = {
         sonar_model="perplexity/sonar",
         social=True,
         web=True,
+        supplement_max_blind_spots=2,
     ),
     "standard": TierConfig(
         name="standard",
@@ -47,6 +49,7 @@ TIERS: dict[str, TierConfig] = {
         web=True,
         reviews=True,
         github=True,
+        supplement_max_blind_spots=4,
     ),
     "deep": TierConfig(
         name="deep",
@@ -60,6 +63,7 @@ TIERS: dict[str, TierConfig] = {
         reviews=True,
         github=True,
         qa=True,
+        supplement_max_blind_spots=6,
     ),
 }
 
