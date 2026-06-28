@@ -1,0 +1,52 @@
+---
+series: raising-claude
+post_number: 1
+title: "You Can't Prompt Taste Into a Machine"
+status: published
+publish_date: 2026-06-11
+hero_image: images/hero.png
+ships_with: cheese-gauntlet-kit
+ships_with_status: shipped
+pain_point: "humanize prompts don't work"
+voice_chain_run: y
+voice_chain_notes: "Do-Not-Promote framing suppressed; the gauntlet cheese swapped to a neutral specimen. Analyzer CV 0.757 / MATTR 0.82, within Sean baseline. Zero em dashes in body. Full-chain verification 2026-06-10 (all 5 stages): ship — verified, no copy changes. Arc holds, closer 'This one's mine.' strongest line; Itch/Solution/Transfer filled, ask sideways; refs = Guy Fieri + Chopped (2, approved); no anti-patterns; analyzer re-confirmed in band; body em-dash-clean. LAUNCH.md still accurate."
+event: voice-calibration
+live_url: https://seanpwins.substack.com/p/you-cant-prompt-taste-into-a-machine
+gist_url: https://gist.github.com/seanwinslow28/26428be6d035b2b259651277171c0404
+post_publish_todo:
+  - "Swap the live post URL into the gist's line-3 backlink (edit the live gist on GitHub; it still reads REPLACE-WITH-YOUR-SUBSTACK-POST-URL)."
+---
+
+# You Can't Prompt Taste Into a Machine
+
+I built the thing myself. A whole skill, weeks of work, a careful little machine for teaching Claude to write like me. Then I fed it a prompt and asked for a few lines in my voice, and here's what came back:
+
+*"Every rep is a vote for the person you're becoming."*
+
+I typed one word back at it. "GROSS."
+
+Every word spelled right. Grammar you could eat off of. And the guy who wrote it was a total stranger, the kind who calls a bad week a growth opportunity and means it. The machine I built to sound like me had cooked up a LinkedIn motivational poster with my name on it, and it was so damn sure of itself. I built that.
+
+Here's the part that actually stung. I'd been proud. I spent those weeks convinced I'd finally cracked it, that I'd written a clever enough stack of instructions to pour myself into a model and have me come back out the other side. One good prompt. That was the entire theory. Tell it what I sound like, careful and complete, and I'd be me on tap.
+
+Why I was sinking weeks into a voice skill at all comes down to this. I'd spent months teaching a fleet of little agents to run my life. One reads my vault at 2 a.m. and files what it finds. One writes my mornings before I'm awake. One researches while I sleep and bills me nothing for it. I'd handed off damn near everything, and the one job not a single one of them could do was sound like me. So I built a skill to fix that too, sat down with more excitement than I'd had in months, and asked for a few lines in my own voice. The machine handed me a guy with a laminated dream journal.
+
+So I did what everybody does when a model gets it wrong. I gave it more rules. If it didn't know me, I'd tell it. Be self-deprecating. Use pop culture. Keep the closers short and mean. I wrote it a little instruction manual for being Sean, the way you'd brief a stand-in before a stunt.
+
+It got worse. The next draft was more confident and more wrong, a stranger who'd read my notes and was now doing a full impression. Tell a machine to "be self-deprecating" and it performs humility, which is the least humble thing on earth. Every rule I added sharpened the impression and blurred the man. Describing your own voice is like describing a smell. You can stack up adjectives all afternoon and the guy on the other end still won't know if you mean a bakery or a house fire. You cannot spec your way to a self.
+
+And then the thing I'd had backwards the whole time finally landed. The machine wasn't ignoring my rules. The machine was never mine to start with. Claude's whole mind got shaped by thousands of other people long before I showed up with a text box, what they fed it, what they rewarded, what they sanded off. It came to me pre-raised. Brilliant, fast, knows more than I ever will, and molded by a committee I never met. Expecting it to think like me because I described myself well is like expecting a kid to love your music because you sat him down and explained why it's good. That's not how taste gets in. You don't get a person from a description of a person, and you sure as hell don't get one out of a single prompt.
+
+So I stopped describing and started handing over evidence. Hours of it.
+
+First I built it a gauntlet. Ten sentences, all deliberately rancid, the exact LinkedIn poetry it kept reaching for, and I reacted to each one fast and mean, before politeness could climb in. "Your setbacks aren't setbacks. They're setups." No. "New city, new chapter, same dream." Nope. Different city, different chapter, same shit. Every single "no" drew a sharper outline of the real guy than any rule ever could. I can't describe my own voice. I can smell what isn't it from across the room.
+
+Then I told it what I actually love, not the impressive version. Left to guess, it had me pegged for prestige drama and refined taste. The truth is my love for that beautiful toolbag, Guy Fieri. Driving through Flavortown with 50 pounds of "bling" on every limb, handing out donkey sauce to the masses. The truth is watching Chopped mostly for the sob stories and clocking how many absolute maniacs are cooking dinner at the nice restaurants. The machine guessed Sunday-night prestige. I had to tell it "less Parisian balcony. More grimy dive bar in the pits of Staten Island".
+
+Then I dug up the receipts that predate every machine. I wrote eleven screenplays in my twenties, long before any of this, and fed them in whole. Buried in there is a kids'-party mascot named Petey Possum getting stabbed on his way to a birthday gig, and a woman covered in vomit stains and regret, and a few hundred other lines that prove I had a voice years before a model offered to lend me one. Each one of those was hours. Not a prompt. Hours of handing over more of myself than an instruction manual could ever hold. Which is about when it stopped feeling like programming and started feeling like raising something.
+
+And it got better. Not perfect. Not done. Not one-shot, not even close. It stopped inventing a guy and started quoting the one in the evidence, the references coming out of my actual life instead of a stock photo of one. But I want to be straight about the lesson, because it isn't "I cracked it." The lesson is the hours. There's no clever prompt hiding at the bottom of this that I just hadn't found yet. One-shotting gets you decent, and decent is everywhere. The thing that actually thinks like me only shows up after the back-and-forth, the same way you don't get a kid who shares your taste from one good talk at the kitchen table. You get him from years.
+
+So the cure for the confident stranger was never a better description of me. It was evidence, handed over slow. You can start your own pile this weekend, and I'd rather you did than take my word for it. I wrote up the exact prompts I used, the gauntlet, the reference interview, the dig-up-your-old-stuff one, and dropped them in a [Cheese Gauntlet Prompt Kit](https://gist.github.com/seanwinslow28/26428be6d035b2b259651277171c0404) you can copy and run tonight.
+
+I'm not building a copy of myself. I went in thinking I was, and that was the whole mistake. I'm raising something that writes like me, which is a stranger and a better deal than a clone, because a clone would just be me with worse opinions. The machine came to me raised by strangers. I'm slowly raising it back. There are a lot of Claudes out there, millions of them, every one sounding like the same confident nobody. Not this one. This one's starting to write like me. This one's mine.

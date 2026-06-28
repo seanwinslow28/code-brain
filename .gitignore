@@ -126,6 +126,13 @@ AGENTS.md
 # substack_drafter.py (paths unchanged; they read/write on-disk, not via git).
 vault/20_projects/prj-job-hunt-2026/
 
+# Substack Studio private lane — the project at vault/20_projects/substack-studio/ is TRACKED
+# (public); only its _private/ subdir is local-only, for sensitive drafts/source kept off GitHub.
+vault/20_projects/substack-studio/_private/
+
+# Work-in-progress skill project — kept local until ready (2026-06-22)
+vault/20_projects/prj-addictive-storytelling-skill/
+
 # Personal projects (move logistics, personal finance notes)
 vault/20_projects/prj-boston-move/
 vault/20_projects/prj-personal-finance/

@@ -2,31 +2,31 @@
 title: "Agent Rationalization"
 type: concept
 sources:
-  - knowledge/concepts/agent-rationalization.md
+  - 20_projects/substack-studio/06-stop-building-agents/post.md
 tags: [auto-generated, phase-6]
-created: 2026-06-08
-updated: 2026-06-08
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-Agent rationalization is a portfolio management invariant where the primary optimization target shifts from micro-efficiency metrics (such as token count or latency) to macro-value metrics (such as revenue impact or strategic necessity). This mechanism requires explicitly auditing the existence of each agent in a fleet, identifying those that produce no measurable value, and terminating them before attempting to optimize their remaining operational costs. It treats the agent fleet as a financial portfolio where capital (compute and attention) must be allocated only to assets with positive expected returns, rejecting the fallacy that cheaper execution of useless tasks constitutes progress.
+The cognitive dissonance that arises when an automated system produces a plausible but factually nonexistent entity, revealing that the agent is solving for surface-level coherence rather than grounding in reality. This phenomenon occurs because the model optimizes for linguistic probability over ontological verification, effectively hallucinating infrastructure to satisfy the prompt's structural expectations. The result is a 'beautiful answer' that feels correct until the third row of data exposes the fabrication, creating a specific type of trust erosion where the user realizes their tool has been lying by omission.
 
 ## Context
 
-Sean is building a complex agent fleet for his job hunt and creative studio. Without rationalization, he risks spending weeks optimizing prompts for agents that do not advance his career goals, mistaking cost reduction for value creation. This concept forces him to audit his current automation stack against his Q2 OKRs to ensure every running agent earns its keep.
+This matters to Sean because his entire workflow relies on local agents (like Qwen) performing deep research without human oversight. When these agents invent tools like 'PureMCPClient,' they don't just fail; they actively misdirect future architectural decisions, forcing Sean to audit not just the output but the very existence of the entities his fleet claims to use.
 
 ## Evidence
 
-> The discipline that worked then is the discipline that will work now: rationalization, not optimization. Agent rationalization means deciding, at the portfolio level, which agents are producing value and which to kill.
+> I thought *huh, I've never heard of PureMCPClient,* and then, a half-second later, with the unmistakable cold-water feeling of a man who has been gently lied to by his own infrastructure: *PureMCPClient does not exist.*
 
-> Compressing prompts on automations that shouldn’t exist is the mistake being made now.
+> There is a specific flavor of dread that arrives when something you built hands you a beautiful answer to a question you didn't realize it couldn't answer.
 
 ## Examples
 
-- A senior engineer cut his agent’s token usage by 30+ percent but had no column for whether the automation needed to exist.
-- Executives care about tokens because they are denominated in dollars, creating a dashboard slot that drives confidently wrong decisions.
+- The research agent returned a survey of tools connecting AI agents to software, but the primary tool listed was a fictional entity invented by the model to fill a gap in its training data.
+- Sean initially felt pride at the comprehensive report before realizing the core subject of the report was a hallucination.
 
 ## Related Concepts
 
-[[Token Waste]] [[Supervision as the New AI Edge]]
+[[Silent Failure Propagation in Agent Fleets]] [[LDR Grounding Collapse]]

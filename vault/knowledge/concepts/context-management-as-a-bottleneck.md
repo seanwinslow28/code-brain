@@ -2,31 +2,33 @@
 title: "Context Management as a Bottleneck"
 type: concept
 sources:
-  - health/2026-06-07-lint-report.md
+  - 20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md
 tags: [auto-generated, phase-6]
-created: 2026-06-08
-updated: 2026-06-08
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-Context management acts as the primary constraint on agentic productivity, where the finite capacity of an agent's context window limits its ability to retain and retrieve relevant information across long-running workflows. When context is not explicitly managed or compressed, agents suffer from 'context fatigue,' leading to degraded performance in complex tasks like daily note generation or job-hunt tracking. This bottleneck necessitates architectural solutions such as external memory stores or structured indexing to offload cognitive load.
+In complex agentic systems, the primary failure mode is not computational capacity but the degradation of semantic context across agent handoffs. When agents operate in silos without shared provenance layers, they lose the 'why' behind the 'what,' leading to outputs that are technically valid but strategically orphaned. This bottleneck manifests as a disconnect between high-level creative intent and low-level execution details.
 
 ## Context
 
-For Sean, this concept explains why his automation pipelines sometimes fail silently; the agent loses track of the current state because the context window was overwhelmed by prior interactions, breaking the chain of accountability.
+Sean's work involves bridging the gap between high-level creative vision and technical execution. By addressing context management, he can prevent the 'silent failure' where agents produce content that misses the nuanced intent of the original brief.
 
 ## Evidence
 
-> Contradiction (T2): knowledge/concepts/context-management-as-a-bottleneck.md contradicts supervision-as-the-new-ai-edge.
+> the creative slice is still re-aimed from an engineer-skewed corpus — that skew held across all three passes, which is itself a finding
 
-> Context Compounding: The process of organizing raw data into coherent knowledge chunks (indexing) and combining them to form new insights or connections (synthesis).
+> the gap is not 'no eval tools' but 'eval tools built for the wrong audience'
+
+> most teams do not need research-grade evals first
 
 ## Examples
 
-- Agent fails to retrieve previous day's note due to context overflow.
-- Synthesizer produces stale output because it cannot recall the original prompt constraints.
+- A creative brief being interpreted differently by a copywriting agent vs. a design agent due to lack of shared context.
+- Agents producing consistent but irrelevant content because they lack access to the broader strategic narrative.
 
 ## Related Concepts
 
-[[Token Waste]] [[Indexing and Synthesis]]
+[[Context Compounding]] [[Vault as Agent Infrastructure]] [[Silent Failure Propagation in Agent Fleets]]
