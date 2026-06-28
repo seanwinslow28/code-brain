@@ -1,0 +1,29 @@
+{
+  "id": "20260627-222321-61ccec",
+  "topic": "animators using AI video generators getting lifeless motion, wrong timing, and characters that drift between shots",
+  "lens": "substack",
+  "tier": "standard",
+  "evidence_count": 48,
+  "verified": 4,
+  "dropped": 0,
+  "cost_usd": 1.172,
+  "gather_status": {
+    "last30": "ok: 20 records (20 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 6 records (6 found)",
+    "reviews": "ok: 7 records (7 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "Most evidence is qualitative complaint; no quantitative data on failure rates, frequency, or how often these issues occur per generation.",
+    "Several key sonar-attributed quotes lack dates, making recency and trend direction hard to assess.",
+    "No evidence on which specific tools/models produce which failures\u2014complaints are generic to 'AI video tools' rather than benchmarked per product.",
+    "Little to no evidence on workflow cost (time spent fixing drift/timing) or whether any prompting/post-fix techniques actually work at production quality.",
+    "The anatomical-error cluster comes from viewers identifying AI, not from animators describing their own production pain, so it may not reflect the professional-animator segment.",
+    "No evidence on audio/lip-sync, rendering cost, or rights/licensing pain points\u2014scope is limited to motion, timing, and consistency."
+  ],
+  "contradictions": [
+    "Movement is described both as 'very very slow movements' and as 'insanely jittery' within the same Corridor source, suggesting failure modes vary (too slow vs. too fast) rather than a single consistent timing defect.",
+    "The AtlasCloudAI post implies a prompt prefix can supply 'sakuga timing' and fix stiff/linear motion, which is in tension with sonar/critic claims that the lifeless-motion problem makes tools fundamentally 'unusable for professional-quality animation.'"
+  ]
+}

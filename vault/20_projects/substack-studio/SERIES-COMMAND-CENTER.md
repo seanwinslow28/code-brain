@@ -1,155 +1,140 @@
-# Substack — Raising Claude (command center)
+# Pencil & Prompt — Editorial Command Center
 
-Single source of truth for the series. **One series: Raising Claude, 7 posts + a bonus.**
-Spine = the opportunity report (`vault/30_domains/creative-studio/substack-research/2026-06-09-opportunity-report-creative-agentic.md`, Part 4).
-Engine = `creative-studio/docs/tool-shipping-playbook.md` (every post pairs a pain point with a tool you ship).
+The live editorial queue. What publishes, in what order, in what format, and what state it's in. Strategy lives in **[POSITIONING-AND-EDITORIAL-SPEC.md](POSITIONING-AND-EDITORIAL-SPEC.md)** (source of truth) and the rules in **[CLAUDE.md](CLAUDE.md)**; this doc is the running order.
 
-Cadence: **2–3×/week (Mon/Thu)**. Honest constraint: cadence is gated by **tool-build time**, not
-writing time — 3 of the 7 posts ship with a tool that isn't built yet.
+> Supersedes the old "Raising Claude" command center (7 tool-paired posts on a Mon/Thu calendar). That model was retired with the 2026-06-22 repositioning. The new model is a recurring teaching spine plus periodic tool drops, paced by quality, not a tool-build calendar.
 
----
+## The model in one screen
 
-## 📅 THE QUEUE — what do I post next?
+- **Three recurring formats.** The signature is **Take Two** (named 2026-06-23). The other two are concepts whose names get locked when their sections ship.
+- **Cadence is gated by spine quality, not tool-build time.** The old cadence strangled because three posts waited on unbuilt tools. The spine runs in plain Claude with no install, so it never blocks on a build. Quality over speed; no forced calendar.
+- **Ratio about 3:1** (three spine posts per tool drop).
+- **Notes run from day zero** as the variety, reach, and interaction layer. Discovery research (and every Substack-growth source we checked) says Notes drive the majority of new subscribers. Main posts stay disciplined on the spine; Notes carry the experiments.
 
-| When | Post | Folder | Status | Ships with | Blocker |
+| Format | Name | Job | Cadence |
+|---|---|---|---|
+| Teaching spine | **Take Two** | Convert skeptics. One creative job, shown soulless first, then directed move by move to something with a pulse, ending in the transferable recipe. The signature. | Weekly-ish |
+| Tool drop | *(name at ship)* working: Build Logs / The Workshop | "I built you a thing." Packaged for a non-coder. Portfolio proof + the natural paywall line. | Periodic, tentpole |
+| Reader fix | *(name at ship)* working: Fix My Mess | Fix a botched AI output in public. Reach + community. | Frequent, light |
+
+## The relaunch arc (the live queue)
+
+**Launch bundle** ships together the day the publication relaunches, so a reader arriving on the flagship can orient immediately.
+
+| Order | Piece | Format | Lane / Angle | Status | Notes |
 |---|---|---|---|---|---|
-| **Jun 11** ✓ | 1 · You Can't Prompt Taste Into a Machine | `01-cant-prompt-taste/` | **published** | Cheese Gauntlet kit ✓ | gist backlink swap |
-| **Jun 15** ✓ | 2 · I Built a Machine to Sound Like You | `02-machine-to-sound-like-you/` | **published** | VoicePrint ✓ | — |
-| **Jun 18** ✓ | 3 · Correct Was Never Defined | `03-correct-was-never-defined/` | **published** | intent-engineering MCP ✓ / Intent Card ⚒ | published 6/18 — seanpwins.substack.com/p/correct-was-never-defined |
-| **Mon Jun 22** | *bonus* · The Night My Vault Said Nothing | `_ideas/` | idea | evals/vault-synthesizer ✓ | voice chain only (tool-free buffer) |
-| **Thu Jun 25** | 6 · Stop Building Agents | `06-stop-building-agents/` | drafting | Agent-or-Automation Advisor ⚒ | **build Advisor (a weekend)** → then draft. Spec ready + hook relead decided 6/17 (`06-stop-building-agents/2026-06-17-agent-or-automation-advisor-build-spec.md`) |
-| **Mon Jun 29** | 4 · The Eval Tools Are Built for the Wrong People | `04-eval-tools-wrong-people/` | idea | On-Brand Gate ⚒ | **build On-Brand Gate** |
-| **Thu Jul 2** | 5 · Your Content Tripled, Engagement Dropped 40% | `05-content-tripled/` | idea | On-Brand Gate (anti-slop) ⚒ | same gate as Post 4 |
-| **Mon Jul 6** | 7 · The Judgment Layer (capstone) | `07-the-judgment-layer/` | ready | the whole stack ✓ | cadence-gate: never before 1+2 |
+| Bundle | **Take Two #1 — "Teach the model your hand"** | Take Two | Visual / character · Angles 2+3 | capture-pending | The flagship. **Locked 2026-06-27: fresh self-portrait, bust framing** — upload a selfie, get glossy slop ("it has my likeness, not my taste"), then direct it into Sean's pencil-test hand move by move. Shoot plan + beats: [`take-two-01-teach-the-model-your-hand/capture-plan-and-beats.md`](take-two-01-teach-the-model-your-hand/capture-plan-and-beats.md). |
+| Bundle | **Start Here** (page) | Page | Angle 5 as foil | to write | The manifesto, as a page. Stance + the whitespace flag ("does teaching the model your taste kill the AI look? I answer that by showing it") + where to begin. |
+| Bundle | **About** (page) | Page | — | to write | Deep bio: the creative technologist, the pencil-character lineage, the agent fleet, contact. |
+| #2 | **Take Two #2 — writing / voice demo** | Take Two | Writing · Angle 2 | idea | Generic AI prose directed to Sean's actual voice via reference-feeding (the VoicePrint method). A second lane proves the method travels; that's the point of placing it second. |
+| #3 | **Fix My Mess pilot** | Reader fix | Angle 1 | idea | Sean submits his own botched output first. Lands once the spine is unmistakable. Quotable cold-open available (Angle 1's "let a toddler design their app"). |
+| Day 0 → | **Notes** | — | all | ongoing | Variety, reach, interaction. Not a post. Runs continuously from relaunch. |
 
-**Swap rule:** if a tool isn't ready by its post's date, pull the next **tool-free** post forward
-(the bonus evals post, or Post 3 — both ship with already-shipped assets). Never ship a post
-without its tool; that breaks the whole model. The bonus exists to absorb a slipped build.
+**Sequencing logic (researched 2026-06-23):** lead with the pillar series, do not diversify the main feed early. A recognizable series drives ~80% of growth; mixing formats up front muddies the "what is this about" signal. Reach comes from Notes, not from front-loading the interactive format. Sources: spec §11, plus the 2026-06-23 launch-sequencing scan (Build to Launch, The 2hour Creator, Write Build Scale, and Nate Jones's June 2026 move from daily variety to a focused weekly spine).
 
-**This week's real work:** Post 3 ships Thu Jun 18 (copy through the full voice chain 6/16,
-analyzer in band; pending Sean's copy sign-off) → build the Advisor over the weekend so Post 6
-holds Thu Jun 25.
+## Take Two backlog (ranked, from 2026-06-27 discovery)
 
-**Queue resequenced 2026-06-16:** Post 2 went out 6/15 (a day late), so the queue was re-dated
-from today on the Mon/Thu cadence. Post 3 (shipped-MCP, no build dependency) pulled forward to
-the next slot (Thu 6/18); the bonus, Post 6, Posts 4/5, and Post 7 shifted down one slot each.
-Series folder numbers unchanged — only the queue order moved.
+Six new council runs + a web-search supplement gave each lane a *pain paired with a fix*, so the value gate is pre-cleared. Full synthesis + sources: [`research/discovery/2026-06-27-discovery-synthesis-backlog-and-web-supplement.md`](research/discovery/2026-06-27-discovery-synthesis-backlog-and-web-supplement.md).
 
----
+| Rank | Take Two | Lane | The move it demonstrates | Status |
+|---|---|---|---|---|
+| 1 | **Teach the model your hand** (flagship) | visual | anchor identity + name the rubric as visual logic; correct drift by drift | **capture-pending** — fresh self-portrait, bust; plan at [`take-two-01-…/capture-plan-and-beats.md`](take-two-01-teach-the-model-your-hand/capture-plan-and-beats.md) |
+| 2 | **Write in your own voice** | writing | feed 3-5 samples → Style Block + negative list (VoicePrint) | idea |
+| 3 | **Keep a character alive across a series** | visual | reference anchoring + style-lock across many outputs (Character Bible) | idea |
+| 4 | **Make AI motion feel alive** | animation | human owns timing: keyframe / first-last-frame, bind subject | idea |
+| 5 | **Use the intern upstream, not just at the end** | process | AI as adversarial partner: ideate-first, diverge/converge, make it ask you questions | idea |
+
+**Thesis backbone (not a post):** "fighting the regression to the mean" (mode collapse, peer-reviewed) is Start Here's whitespace claim + recurring Notes, the *why* under every demo. Never lead with it.
+
+## Discovery-angle map
+
+Which sourced pain feeds which format. Original cluster from `research/discovery/2026-06-22-…`; the six lane/theme runs from `2026-06-27-…` (synthesis doc above).
+
+- **Take Two (spine):** Angle 2 (soulless / no human POV), Angle 3 (the same-y "AI look"), Angle 4 (layout / tone / narrative depth). The craft-demo fuel.
+- **Fix My Mess:** Angle 1 (clients reject AI prototypes), plus reader submissions.
+- **Tool drops:** emerge from a pain that recurs across spine posts (e.g., a packaged taste-rubric or reference-kit), and Angle 7 (correction burden erodes time savings) is natural tool-drop justification.
+- **Start Here / manifesto fuel:** Angle 5 ("you're prompting it wrong" → reframed: "you're not prompting it wrong, you quit one step early"). Foil, not a post.
+- **Skip:** Angle 6 (income-drop doom) — off-thesis, off-voice.
+
+From the 2026-06-27 runs:
+
+- **Take Two (spine):** A visual (style enforcement, character consistency) → flagship #1 + #3; B writing (blandification, lost voice) → #2; C animation (drift, dead timing) → #4; F partner-upstream (generic ideation) → #5.
+- **Fix My Mess:** E series/brand (brand systems not enforced, content-policy campaign breaks); the false-positive "accused of AI" cluster (B#3, A#6) as a defend-the-human angle.
+- **Start Here / manifesto + Notes:** D losing-your-style + the mode-collapse mechanism = "fighting the regression to the mean."
+- **Skip:** F#2 ("AI fundamentally can't feel") — the doomer frame; foil only, never a claim.
+
+## Page scaffolding & nav
+
+Custom homepage (not the default feed): flagship featured, *Start Here* pinned, recent posts below. Modeled on In the Weeds (hannahstulberg.substack.com).
+
+**Launch-lean nav** (don't build empty rooms; add sections as they fill):
+
+- Live at launch: `Home` · `Start Here` · `Take Two` · `About` · `GitHub` (https://github.com/seanwinslow28) · `Portfolio` (https://seanwinslow.com/)
+- Add when content exists: a `Tool Drops` section (first drop), a `Fix My Mess` section (pilot), and `YouTube` / `Chat` if/when real.
+
+**Start Here vs About:** Start Here is the manifesto-lite orientation page (stance + whitespace claim + where to begin). About is the deep personal bio. They are pages, not posts.
+
+## Profile cleanup (relaunch checklist)
+
+Same account `@seanpwins`, rebranded. See spec §10.
+
+- [ ] Set publication name to **Pencil & Prompt** + subtitle "Teach the machine your taste, one creative job at a time."
+- [ ] Rewrite the bio from the old PM line to the empathetic-believer positioning.
+- [ ] Curate restacks: keep the animation / creative-AI ones; drop the PM-job-interview restack; re-restack the best with a one-line take.
+- [ ] Unpublish (revert to draft, don't delete) the 3 live posts.
+- [ ] Build the custom homepage + the launch-lean nav.
+
+## Recasting the old "Raising Claude" posts
+
+The migrated `01-…` through `07-…` + `bonus-…` folders are the back catalog, not the front sequence. Re-evaluate, don't auto-publish:
+
+- **01 You Can't Prompt Taste** → recast as a back-catalog Take Two entry (on-thesis: taste). Strong title, on-voice.
+- **02 Machine to Sound Like You** → recast (writing / voice); can seed Take Two #2's method.
+- **03 Correct Was Never Defined** (intent-MCP) → most off-thesis; rework toward the creative angle or shelve for audience B.
+- **04 / 05 / 06 / 07 / bonus** → analyst / agent-flavored, lean audience B. Hold and re-evaluate. Some shipped tools (VoicePrint, the gates) may resurface later as Tool Drops packaged for non-coders.
 
 ## Status legend
 
-`idea` → `drafting` → `voice-pass` (chain not yet run) → `ready` → `scheduled` → `published`
+`idea` → `drafting` → `voice-pass` (chain not yet run) → `ready` → `scheduled` → `published`. Pages: `to write` → `ready` → `live`.
 
-Every post **must** clear the voice chain before publish: **writing-voice-modes → writing-critique → writing-humanity-pass**.
-Voice rules: dive-bar grit dialed by context · no em dashes · Do-Not-Promote framing suppressed · ≤2 pop-culture refs from the real reference universe · the ask lands sideways.
+## Voice chain & the value gate (the publish bar)
 
-Tool icons: ✓ shipped · ⚒ to-build.
+Every post, the manifesto, and About clear the chain before publish (full rules in [CLAUDE.md](CLAUDE.md)):
 
----
+`substack-value-engine` → `storytelling-architecture` → `writing-voice-modes` (Sean Mode) → `writing-critique` → `writing-humanity-pass`
 
-## The 7 posts (the spine)
+- No em dashes. Dive-bar grit. Anti-hype. The ask lands sideways.
+- **The value gate blocks** any piece whose Itch is not genuinely Sean's, or whose Solution is not a real artifact (a run, an eval, a before/after, a number). The captured real work *is* the post.
 
-| # | Title | Pain (their words) | Ships with | Tool status |
-|---|---|---|---|---|
-| 1 | You Can't Prompt Taste Into a Machine | "humanize prompts don't work" | Cheese Gauntlet kit | shipped |
-| 2 | I Built a Machine to Sound Like You | "it's obvious, we know" / fraud guilt | VoicePrint | shipped |
-| 3 | Correct Was Never Defined | "the missing layer is structured intent" | Intent Card / intent-engineering MCP | MCP shipped; Card to build |
-| 4 | The Eval Tools Are Built for the Wrong People | "designed for ML engineers" | On-Brand Gate | to build |
-| 5 | Your Content Tripled, Engagement Dropped 40% | "AI slop, the arms race is losing" | the anti-slop gate | to build (= Post 4's tool) |
-| 6 | Stop Building Agents | "automations, not agents" (1,556 upvotes) | Agent-or-Automation Advisor | to build (cheap; loudest hook) |
-| 7 | The Judgment Layer | brand stewardship worth more as output floods | the whole stack; ties to "Access Over Meaning" | shipped |
-| — | *bonus:* The Night My Vault Said Nothing | "evals are the new PRDs / silent regression" | evals/vault-synthesizer repo | shipped (tool-free buffer) |
+## Image house style
 
----
+Pencil-test look (cream paper, graphite + cross-hatching, faint blue construction lines, ONE accent color, absurd caricature, minimal watercolor bloom). Accent per post: amber for human / personal, teal for technical / system. Engine: `openai-image-gen` (GPT Image 2) or ChatGPT, run on the Mac (image APIs are firewalled off Cowork). Full recipe: [`playbook/image-house-style.md`](playbook/image-house-style.md). Hero lives at each post's `images/hero.png`; old versions in `images/_superseded/`.
 
-## 🖼️ Image map
-
-Hero lives at each post's `images/hero.png`; superseded/test versions sit in `images/_superseded/`.
-
-| Post | Hero | Superseded held | Still needed |
-|---|---|---|---|
-| 1 | `hero.png` ✓ | — | — |
-| 2 | `hero.png` ✓ | — | — |
-| 3 | `hero.png` ✓ (intent-eng header) | v1 | optional refresh |
-| 4 | — | — | **GENERATE** |
-| 5 | — | — | **GENERATE** |
-| 6 | — | — | **GENERATE** |
-| 7 | `hero.png` ✓ (meaning-over-access) | chatgpt, openai-test | — (plus the access-meaning chart embed at publish) |
-| bonus | `hero.png` ✓ | v1, chatgpt, openai-test | — |
-
-**Missing heroes: Posts 4, 5, 6.** House style is now the **pencil-test look** from the
-portfolio (cream paper, graphite + cross-hatching, ONE accent color, blob-baby characters +
-amber thread, one minimal watercolor bloom behind the linework). Full spec + master prompt
-recipe: `docs/substack-image-generation-design-2026-05-23.md` (v2). Accent per post: amber for
-human posts, teal for technical (3/4/6/7). Engine: `openai-image-gen` (GPT Image 2) or ChatGPT.
-The grotesque cheese format is retired as the default (available only as an in-pencil-test
-satire variant). Post 2 is the priority (ships Thu).
-
----
-
-## 🔧 Tool map (ships_with)
-
-| Tool | For post | Status | Notes |
-|---|---|---|---|
-| Cheese Gauntlet kit | 1 | shipped | `01-…/ships-with-cheese-gauntlet-kit-PUBLIC.md` (published) + `…-kit.md` (source) |
-| VoicePrint | 2 | shipped | Cowork plugin; dogfood done (Priya, 0.57 burstiness) |
-| intent-engineering MCP | 3 | shipped | `@swins/intent-engineering-mcp` — "the audit is the eval" |
-| Intent Card | 3 (shares it) | **to build — no pending deadline** | brief-mode on the **existing 3 tools** via an optional `mode` param (DECIDED 6/18 — *not* new `audit_brief` tools). Spec: `sw-mcp-intent-engineering/planning-docs/2026-06-18-intent-card-build-brief.md` (gitignored/local). **No separate post:** Post 3 ships on the shipped MCP alone, so nothing waits on the Card → build it for the capstone (Post 7) or a follow-up |
-| On-Brand Gate | 4 + 5 | **to build** | generalize writing-critique → pass/fail + violated clauses + slop-risk (report §2B) |
-| Agent-or-Automation Advisor | 6 | **to build** | cheapest tool, a weekend; loudest hook (report §1 #3). **Spec ready 6/17:** MCP sibling to intent-engineering (`advise_task` + `audit_fleet`), deterministic rubric from Sean's fleet doctrine + pass^k math; self-dogfood = the post's proof + lead. Spec: `06-stop-building-agents/2026-06-17-agent-or-automation-advisor-build-spec.md` |
-| the whole stack | 7 | shipped | capstone ties everything to "Access Over Meaning" |
-
-**Build order (report §"What to do next"):** Advisor (Post 6) → Intent Card (Post 3) → On-Brand Gate (Posts 4/5).
-**By post-deadline the true order is Advisor → On-Brand Gate → Intent Card** — Posts 4/5/6 each block on their tool, but Post 3 ships on the already-shipped MCP alone, so nothing waits on the Intent Card (build it for the capstone, no deadline). The report's order ranked by build-cost, not post-urgency.
-
----
-
-## Folder & naming conventions
+## Folder & frontmatter conventions
 
 ```
-NN-slug/                    one folder per post; NN = SERIES number (stable, not queue order)
-  post.md                   the draft (or scaffold). Carries the standard frontmatter block.
-  _seed.md                  salvaged raw material (Post 3 only, so far)
-  ships-with-*.md           the tool/companion that ships with the post
+<slug>/                     one folder per new piece (descriptive slug; the queue, not the folder name, holds order)
+  post.md                   the draft. Carries the frontmatter block below.
   images/hero.png           the final hero
-  images/_superseded/       old/test image versions, never deleted, never confused for final
-_ideas/        unscheduled posts + future seeds (the bonus evals post lives here)
-_archive/      superseded variants + retired cuts (workshop history; do not publish)
-_experiments/  process artifacts (council sessions, beatmaps, voice-calibration)
-_assets/references/   headshot + image-gen style refs
+  images/_superseded/       old/test versions, never deleted
+01-… through 07-…, bonus-…  the Raising Claude back catalog (recast candidates, see above)
+_assets/                    references + style anchors
+_private/                   gitignored, local-only sensitive lane
 ```
-
-The **queue reorders in this README**, not in folder names — so resequencing never renames a folder.
 
 ### Standard frontmatter (every `post.md`)
 
 ```yaml
-series: raising-claude
-post_number: 1            # or "bonus"
+publication: pencil-and-prompt
+format: take-two | tool-drop | fix-my-mess
 title: "..."
 status: idea | drafting | voice-pass | ready | scheduled | published
-publish_date: 2026-06-05  # or TBD
-hero_image: images/hero.png        # or "MISSING — needs generation"
-ships_with: cheese-gauntlet-kit
-ships_with_status: shipped | to-build
-pain_point: "in the audience's own words"
+publish_date: TBD
+craft_lane: visual | writing | motion        # ONE lane per post (guardrail)
+hero_image: images/hero.png                   # or "MISSING — needs generation"
+discovery_angle: "which sourced pain it answers"
+itch: "the genuinely-Sean problem (value gate slot 1)"
+solution_artifact: "the real run / eval / before-after (value gate slot 2 — blocks if absent)"
+transfer: "what the reader can do for themselves after (value gate slot 3)"
 voice_chain_run: y | n
-event: voice-calibration  # which real story it draws from (the duplicate-guard)
 ```
-
-`event` is the **dup-guard**: the 9-night vault regression is the canonical material for Post 7
-(manifesto framing). The bonus evals post reuses it under a *different lesson*; the two dive-bar
-cuts in `_archive/` are the same story and must **not** also ship.
-
----
-
-## Reconciliation notes (what changed 2026-06-09)
-
-- One war story (9-night silent regression) was told 3 ways across 5 files → manifesto wins Post 7,
-  evals cut survives as the bonus, two dive-bar cuts retired to `_archive/`.
-- `the-confident-stranger` = an alt full-intensity cut of the shipped Post 1 → `_archive/`.
-- `ldr-grounding-collapse` (was labeled "Post 1") = a distinct event → re-slotted as Post 6 draft.
-- `intent-engineering-mcp.md` (empty project stub) → `03-…/_seed.md`, salvaged for its origin paragraph.
-- Two empty legacy dirs (`images/ archive/ experiments/ substack-image-generation-references/`)
-  couldn't be deleted from this session — they're empty, git won't commit them; delete in Finder when convenient.
