@@ -2,6 +2,7 @@
 """5-stage orchestrator: gather → fuse → verify → frame → backfill → render."""
 
 import json
+import re
 import sys
 import time
 import uuid
@@ -20,6 +21,16 @@ from council.discovery.verify import verify_pain_points
 DISCOVERY_PRICE_IN_PER_1K = 0.003
 DISCOVERY_PRICE_OUT_PER_1K = 0.015
 WEB_QUERY_PRICE = 0.012
+
+# --segment is a free-text AUDIENCE qualifier, not a search operator. Strip query-operator chars
+# (`:` and parens) so an operator-bearing segment (`is:pr`, `site:foo`, a stray `)`) can't alter the
+# composed provider query semantics in any collector, and collapse whitespace (also folds a
+# whitespace-only segment to ""). Normalized once here, at the pipeline boundary.
+_SEGMENT_OPERATOR_CHARS = re.compile(r"[():]")
+
+
+def _normalize_segment(segment: str) -> str:
+    return " ".join(_SEGMENT_OPERATOR_CHARS.sub(" ", segment or "").split())
 
 
 @dataclass
@@ -51,6 +62,7 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
                         gather_fn=None, fuse_fn=None, backfill_fn=None, supplement: bool = True,
                         sessions_dir: Path | None = None) -> DiscoveryResult:
     tcfg = get_tier(tier)
+    segment = _normalize_segment(segment)
     session_id = f"{time.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:6]}"
 
     gather = gather_fn or gather_evidence
