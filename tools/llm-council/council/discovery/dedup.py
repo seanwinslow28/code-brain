@@ -59,3 +59,82 @@ def pain_similarity(a: str, b: str) -> float:
 
 def _point_text(point: CandidatePainPoint) -> str:
     return f"{point.title}. {point.summary}"
+
+
+@dataclass(frozen=True)
+class MergeRecord:
+    canonical_title: str
+    merged_titles: list[str]            # titles absorbed into the canonical (excludes the canonical)
+
+
+def _distinct_domains(urls: list[str]) -> int:
+    return len({urlparse(u).netloc.lower() for u in urls if u})
+
+
+def _dedup_keep_order(items: list[str]) -> list[str]:
+    seen: set[str] = set()
+    out: list[str] = []
+    for it in items:
+        if it not in seen:
+            seen.add(it)
+            out.append(it)
+    return out
+
+
+def _strength_key(v: VerifiedPainPoint, idx: int) -> tuple:
+    # Strongest first: most distinct domains, then intensity, then quote count, then earliest index.
+    return (-_distinct_domains(v.supporting_urls), -int(v.point.intensity or 0),
+            -len(v.point.quotes), idx)
+
+
+def _merge_cluster(members: list[VerifiedPainPoint]) -> VerifiedPainPoint:
+    seed = members[0]                                   # strongest (members built seed-first)
+    sp = seed.point
+    merged = CandidatePainPoint(
+        title=sp.title, summary=sp.summary,
+        quotes=_dedup_keep_order([q for m in members for q in m.point.quotes]),
+        urls=_dedup_keep_order([u for m in members for u in m.point.urls]),
+        consensus=sp.consensus, intensity=sp.intensity, recency=sp.recency, segment=sp.segment,
+    )
+    supporting = _dedup_keep_order([u for m in members for u in m.supporting_urls])
+    return VerifiedPainPoint(point=merged, verified=True, supporting_urls=supporting)
+
+
+def dedup_verified(
+    verified: list[VerifiedPainPoint],
+    *,
+    threshold: float = SIM_THRESHOLD,
+    similarity_fn: SimilarityFn = pain_similarity,
+) -> tuple[list[VerifiedPainPoint], list[MergeRecord]]:
+    """Collapse near-duplicate gate-survived pain points. Bounded merge-to-canonical: each point
+    joins at most one (best-matching) canonical above `threshold`, else seeds a new canonical — no
+    transitive closure. Unverified points pass through untouched."""
+    true_pts = [(i, v) for i, v in enumerate(verified) if v.verified]
+    passthrough = [v for v in verified if not v.verified]
+    ordered = sorted(true_pts, key=lambda iv: _strength_key(iv[1], iv[0]))
+
+    clusters: list[list[VerifiedPainPoint]] = []        # each cluster is [seed, members...]
+    for _idx, v in ordered:
+        vtext = _point_text(v.point)
+        best_c, best_sim = None, 0.0
+        for c in clusters:
+            sim = similarity_fn(vtext, _point_text(c[0].point))
+            if sim > best_sim:
+                best_sim, best_c = sim, c
+        if best_c is not None and best_sim >= threshold:
+            best_c.append(v)
+        else:
+            clusters.append([v])
+
+    deduped: list[VerifiedPainPoint] = []
+    merges: list[MergeRecord] = []
+    for members in clusters:
+        if len(members) == 1:
+            deduped.append(members[0])
+            continue
+        deduped.append(_merge_cluster(members))
+        merges.append(MergeRecord(
+            canonical_title=members[0].point.title,
+            merged_titles=[m.point.title for m in members[1:]],
+        ))
+    return deduped + passthrough, merges
