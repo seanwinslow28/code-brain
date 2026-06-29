@@ -3,14 +3,20 @@ from council.discovery.evidence import EvidenceRecord
 from council.discovery.frame_substack import PostAngle
 from council.discovery.fusion import FusionResult
 from council.discovery.render_substack import render_substack_ledger, render_substack_brief
+from council.discovery.scoring import ScoreBreakdown
 
 
 def _angle():
     return PostAngle(
         title="Slow export", audience="solo founders", hook="exports hang for minutes",
-        itch="Slow export: exports hang for minutes", transfer="After reading, the reader can fix slow exports.",
+        itch="Slow export: exports hang for minutes",
+        transfer="After reading, the reader can fix slow exports.",
         evidence_urls=["https://a.com/1"], quotes=["exports hang for minutes"],
-        whitespace="nobody covers recovery UX", score=8.0, corroboration=1,
+        whitespace="nobody covers recovery UX",
+        score=ScoreBreakdown(composite=72.0, value=0.8, confidence=0.9, importance=0.8,
+                             reach=0.6, recency=0.7, source_corroboration=0.5,
+                             consensus_ratio=1.0, intensity=4, engagement_sum=100,
+                             distinct_sources=2, distinct_domains=1, evidence_date="2026-06"),
     )
 
 
@@ -25,6 +31,7 @@ def test_ledger_includes_all_sections():
     assert "Blind-spot" in md and "recovery UX" in md
     assert "Quote Bank" in md
     assert "$0.42" in md and "dropped by verification: 2" in md
+    assert "score 72/100" in md
 
 
 def test_brief_scaffolds_value_gate_and_keeps_evidence():

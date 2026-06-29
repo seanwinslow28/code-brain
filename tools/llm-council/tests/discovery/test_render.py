@@ -1,13 +1,24 @@
 from council.discovery.backfill import BackfillItem, BackfillResult
+from council.discovery.bet import ProposedBet
 from council.discovery.evidence import EvidenceRecord
 from council.discovery.frame import IdeaCard
 from council.discovery.fusion import FusionResult
 from council.discovery.render import render_ledger
+from council.discovery.scoring import ScoreBreakdown
+
+
+def _score():
+    return ScoreBreakdown(composite=68.0, value=0.83, confidence=0.82, importance=0.8,
+                          reach=0.71, recency=0.84, source_corroboration=0.55,
+                          consensus_ratio=1.0, intensity=4, engagement_sum=340,
+                          distinct_sources=5, distinct_domains=2, evidence_date="2026-06")
 
 
 def _cards():
-    return [IdeaCard("Slow export", "PMs", "Slow export: s", "wa", "opp",
-                     ["https://a.com/1"], ['"slow"'], 8.0, 1)]
+    return [IdeaCard("Slow export", "PMs", "Slow export: it hangs", '"exports hang for minutes"',
+                     ["https://a.com/1"], ['"slow"'], _score(),
+                     "Fresh signal — evidence dated 2026-06",
+                     ProposedBet("workflow-friction", "users won't switch", "time-on-task test"))]
 
 
 def _fr():
@@ -24,6 +35,12 @@ def test_render_includes_all_sections():
     md = _render()
     assert "# Idea Ledger — pm tools" in md
     assert "Slow export" in md
+    assert "score 68/100" in md
+    assert '"exports hang for minutes"' in md          # leads with verbatim quote
+    assert "**Size:**" in md and "importance 4/5" in md and "recency 0.84" in md
+    assert "**Confidence:**" in md and "0.82" in md
+    assert "**Why now:**" in md
+    assert "Proposed bet" in md and "workflow-friction" in md and "Your call" in md
     assert "https://a.com/1" in md
     assert "Blind-spot" in md and "no SSO talk" in md
     assert "Quote Bank" in md and "Contradiction" in md

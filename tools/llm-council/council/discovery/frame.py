@@ -1,10 +1,13 @@
 # council/discovery/frame.py
-"""Stage 4 (pm lens) — verified pain points → ranked opportunity cards + quote bank."""
+"""Stage 4 (pm lens) — verified pain points → ranked PRD-grade opportunity cards + quote bank."""
 
 from dataclasses import dataclass
-from urllib.parse import urlparse
+from datetime import date
 
+from council.discovery.bet import ProposedBet, propose_bet
+from council.discovery.evidence import EvidenceBundle
 from council.discovery.fusion import FusionResult
+from council.discovery.scoring import ScoreBreakdown, score_opportunity
 from council.discovery.verify import VerifiedPainPoint
 
 
@@ -12,20 +15,26 @@ from council.discovery.verify import VerifiedPainPoint
 class IdeaCard:
     title: str
     who: str
-    pain: str
-    workaround: str
-    opportunity: str
+    pain: str               # the summary line (secondary to the quote)
+    lead_quote: str         # pain in their words — the verbatim quote
     evidence_urls: list[str]
     quotes: list[str]
-    score: float
-    corroboration: int
+    score: ScoreBreakdown
+    why_now: str
+    bet: ProposedBet
 
 
-def _domains(urls: list[str]) -> int:
-    return len({urlparse(u).netloc for u in urls if u})
+def _why_now(score: ScoreBreakdown) -> str:
+    if not score.evidence_date:
+        return "Recency unknown — verify the pain is current."
+    if score.recency >= 0.5:
+        return f"Fresh signal — evidence dated {score.evidence_date}."
+    return f"Older signal (evidence {score.evidence_date}); confirm it's still live."
 
 
-def frame_pm(verified: list[VerifiedPainPoint], fusion_result: FusionResult) -> tuple[list[IdeaCard], list[str]]:
+def frame_pm(verified: list[VerifiedPainPoint], fusion_result: FusionResult,
+             bundle: EvidenceBundle, *, today: date | None = None) -> tuple[list[IdeaCard], list[str]]:
+    today = today or date.today()
     cards: list[IdeaCard] = []
     quote_bank: list[str] = []
     seen_q: set[str] = set()
@@ -33,23 +42,22 @@ def frame_pm(verified: list[VerifiedPainPoint], fusion_result: FusionResult) -> 
         if not v.verified:
             continue
         pt = v.point
-        corr = _domains(v.supporting_urls)
-        score = float(pt.intensity or 1) * (1 + corr)
+        score = score_opportunity(pt, v.supporting_urls, bundle, today=today)
         cards.append(IdeaCard(
             title=pt.title,
             who=pt.segment or "users",
             pain=f"{pt.title}: {pt.summary}",
-            workaround="(from evidence — see quotes)",
-            opportunity=f"Ship a capability that removes '{pt.title}' for {pt.segment or 'users'}.",
+            lead_quote=pt.quotes[0] if pt.quotes else "",
             evidence_urls=v.supporting_urls,
             quotes=pt.quotes,
             score=score,
-            corroboration=corr,
+            why_now=_why_now(score),
+            bet=propose_bet(pt),
         ))
         for q, u in zip(pt.quotes, v.supporting_urls + [""] * len(pt.quotes)):
             line = f'"{q}" — {u}'.rstrip(" —")
             if line not in seen_q:
                 seen_q.add(line)
                 quote_bank.append(line)
-    cards.sort(key=lambda c: c.score, reverse=True)
+    cards.sort(key=lambda c: c.score.composite, reverse=True)
     return cards, quote_bank
