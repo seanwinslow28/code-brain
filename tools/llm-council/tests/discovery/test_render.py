@@ -42,7 +42,9 @@ def test_render_includes_all_sections():
     assert "**Why now:**" in md
     assert "Proposed bet" in md and "workflow-friction" in md and "Your call" in md
     assert "https://a.com/1" in md
-    assert "Blind-spot" in md and "no SSO talk" in md
+    assert "## ⭐ Whitespace Map — what this run MISSED" in md and "no SSO talk" in md
+    assert "## Blind-spot / Whitespace Map" not in md          # old buried heading removed
+    assert md.index("⭐ Whitespace Map") < md.index("## Ranked Opportunities")  # hero leads
     assert "Quote Bank" in md and "Contradiction" in md
     assert "$0.91" in md and "dropped by verification: 2" in md
 
@@ -54,7 +56,7 @@ def test_supplement_none_is_byte_identical_to_omitted():
                             quote_bank=['"slow" — https://a.com/1'], fusion_result=_fr(),
                             cost_usd=0.91, dropped_count=2)
     assert explicit_none == omitted
-    assert "Web Supplement" not in explicit_none
+    assert "## Web Supplement" not in explicit_none   # the section (the hero references it by name)
 
 
 def test_supplement_skipped_renders_honest_note():
