@@ -28,7 +28,9 @@ def test_ledger_includes_all_sections():
     assert "# Substack Idea Ledger — export tools" in md
     assert "Slow export" in md
     assert "https://a.com/1" in md
-    assert "Blind-spot" in md and "recovery UX" in md
+    assert "## ⭐ Whitespace Map — what this run MISSED" in md and "recovery UX" in md
+    assert "## Blind-spot / Whitespace Map" not in md
+    assert md.index("⭐ Whitespace Map") < md.index("## Ranked Post Angles")
     assert "Quote Bank" in md
     assert "$0.42" in md and "dropped by verification: 2" in md
     assert "score 72/100" in md
@@ -63,8 +65,8 @@ def test_supplement_section_renders_in_substack_ledger():
     assert "## Web Supplement (gap-fill)" in md
     assert "LEADS" in md
     assert "Recovery UX cut data loss by 40 percent in the study." in md and "https://s.com/1" in md
-    # supplement sits between the Blind-spot map and the Quote Bank, separate from ranked angles
-    assert md.index("Blind-spot") < md.index("Web Supplement") < md.index("Quote Bank")
+    # hero leads; supplement sits between the ranked angles and the Quote Bank
+    assert md.index("⭐ Whitespace Map") < md.index("## Web Supplement") < md.index("Quote Bank")
 
 
 def test_supplement_none_keeps_substack_ledger_byte_identical():
@@ -73,4 +75,4 @@ def test_supplement_none_keeps_substack_ledger_byte_identical():
               quote_bank=['"exports hang for minutes" — https://a.com/1'],
               fusion_result=fr, cost_usd=0.42, dropped_count=2)
     assert render_substack_ledger(**kw, supplement=None) == render_substack_ledger(**kw)
-    assert "Web Supplement" not in render_substack_ledger(**kw)
+    assert "## Web Supplement" not in render_substack_ledger(**kw)   # section (hero names it by ref)
