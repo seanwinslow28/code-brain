@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### fusion-discovery-council D2 — receipts UI (2026-06-29)
+- **fusion-discovery-council D2 — receipts UI:** each ranked card in both ledgers (PM +
+  substack) now shows a compact `🧾` receipts line — corroboration tier (off distinct
+  independent domains; journalism two-source rule, caps at well-corroborated) + freshness
+  badge (off the existing scoring recency decay; undated-never-fresh honesty gate) — plus a
+  one-time legend framing receipts as evidence *depth*, not a verdict. New shared
+  `council/discovery/receipts.py`; $0, deterministic, render-layer only. Closes Step B.
+
 ### fusion-discovery-council E3 — near-duplicate pain-point dedup + MMR gap ranking (2026-06-29)
 - **fusion-discovery-council E3 — near-duplicate pain-point dedup + MMR gap ranking.** New
   `council/discovery/dedup.py` ($0/deterministic): a shared lexical token-Jaccard similarity drives
