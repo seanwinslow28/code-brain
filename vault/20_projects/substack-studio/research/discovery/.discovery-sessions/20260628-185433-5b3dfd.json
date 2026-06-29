@@ -1,0 +1,35 @@
+{
+  "id": "20260628-185433-5b3dfd",
+  "topic": "creative professionals who spend more time fixing, re-rolling, and cleaning up AI-generated output than the tools actually save them",
+  "lens": "substack",
+  "tier": "standard",
+  "evidence_count": 32,
+  "verified": 7,
+  "dropped": 1,
+  "cost_usd": 1.504,
+  "gather_status": {
+    "last30": "ok: 9 records (9 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 8 records (8 found)",
+    "reviews": "ok: 0 records (0 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "No quantified before/after time-tracking data measuring actual hours spent fixing vs. saved per task\u2014claims are largely self-reported or survey-based.",
+    "Visual/design and audio creative segments (illustrators, designers, musicians, video editors) are underrepresented in the cleanup-burden evidence; most accuracy/quality evidence centers on text/copy and code.",
+    "No evidence on cost of re-rolling in terms of compute/subscription spend, only time.",
+    "Little evidence on whether tool improvements over time reduce the cleanup burden, or on which specific workflows benefit (the '10x' developers are mentioned but not characterized).",
+    "No direct user-voice evidence from the r/techquestions and r/aiwars threads beyond their titles, limiting their evidentiary weight."
+  ],
+  "contradictions": [
+    "Productivity benefit is highly uneven: some developers report up to 10x gains from AI workflows while others see little, contradicting both blanket 'AI saves time' and blanket 'AI wastes time' framings (pragmaticengineer.com).",
+    "Practitioner emphasis that 'a great prompt on yesterday's model will often outperform a weak prompt on today's best release' (x.com/Nyrofomo) implies skill/effort drives outcomes, which is in tension with copy.ai's claim that GTM teams aren't struggling due to lack of effort or skill but due to tool coordination.",
+    "Pro-AI sentiment in the r/aiwars thread titles (e.g., questioning the logic that AI can't be creative) sits in tension with the dominant evidence framing AI output as generic and lifeless\u2014though the threads provide only titles, not substantive argument."
+  ],
+  "supplement": {
+    "skipped": false,
+    "queries_run": 4,
+    "filled": 4,
+    "items": 4
+  }
+}

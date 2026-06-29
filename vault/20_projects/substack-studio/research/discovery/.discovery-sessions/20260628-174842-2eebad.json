@@ -1,0 +1,35 @@
+{
+  "id": "20260628-174842-2eebad",
+  "topic": "artists, illustrators, and writers being falsely accused of using AI, or afraid to disclose their AI use, and the trust and legitimacy fallout they face",
+  "lens": "substack",
+  "tier": "standard",
+  "evidence_count": 29,
+  "verified": 6,
+  "dropped": 1,
+  "cost_usd": 1.2624,
+  "gather_status": {
+    "last30": "ok: 7 records (7 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 7 records (7 found)",
+    "reviews": "error: HTTPStatusError: HTTPStatusError(\"Client error '422 Unprocessable Entity' for url 'https://api.search.brave.com/res/v1/web/search?q=artists%2C+illustrators%2C+and+writers+being+falsely+accused+of+using+AI%2C+or+afraid+to+disclose+their+AI+use%2C+and+the+trust+and+legitimacy+fallout+they+face+review+%28%221+star%22+OR+%222+star%22+OR+worst+OR+terrible+OR+disappointing+OR+avoid+OR+cancel%29+%28site%3Ag2.com+OR+site%3Acapterra.com+OR+site%3Atrustpilot.com+OR+site%3Aproducthunt.com+OR+site%3Aapps.apple.com+OR+site%3Aplay.google.com%29&count=8'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422\")",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "No evidence quantifying how frequently false accusations occur versus genuine AI use, leaving prevalence unclear.",
+    "Little direct first-person testimony from writers (most writing evidence is mediated through journalism); the writer/author perspective is thinner than the visual-artist perspective.",
+    "No evidence on financial/income impact (lost clients, lost commissions) despite mention of client perception.",
+    "No evidence on platform or marketplace policy responses to false accusations.",
+    "Author-side perspective on whether to commission human artists from AI references (Nathan the Author tweet) raises an unresolved etiquette question with no resolution in evidence."
+  ],
+  "contradictions": [
+    "Some artists demand reliable detection tools as a solution, while other evidence shows detection tools themselves misidentify human work as AI, undermining them as a remedy.",
+    "Many creators report fear of disclosing AI use, yet evidence also notes that many artists and writers do openly use AI in limited ways (idea generation, references, backgrounds).",
+    "Accusers admit 'AI-looking' traits are not reliable proof, yet style/vibe-based accusations continue to spread widely."
+  ],
+  "supplement": {
+    "skipped": false,
+    "queries_run": 4,
+    "filled": 4,
+    "items": 4
+  }
+}
