@@ -9,8 +9,11 @@ Spec: docs/superpowers/specs/2026-06-29-discovery-d4-whitespace-hero-design.md.
 
 _CAVEAT = (
     "> Gaps below = absence-of-evidence (what the panel and evidence did **not** surface), NOT "
-    "verified claims or confirmed opportunities. The next move for each gap is to **investigate** "
-    "it — never to build on it. Absence of a surfaced gap is not proof of full coverage."
+    "verified claims or confirmed opportunities. They are **ranked most-distinct-first** — by "
+    "dissimilarity to what this run actually surfaced, which is an ordering signal, **not a severity "
+    "or confidence score** (a blind spot has no supporting evidence by definition). The next move for "
+    "each gap is to **investigate** it — never to build on it. Absence of a surfaced gap is not proof "
+    "of full coverage."
 )
 
 _GAP_ACTION = ("   → Backfill (agent WebSearch/WebFetch, solution-side) — lands in "
@@ -63,7 +66,7 @@ def whitespace_hero(*, blind_spots: list[str], tier: str, segment: str,
     L.append(_CAVEAT)
     L.append("")
     _sharpen(has_gaps=True)
-    L.append("**Gaps the panel/evidence missed:**")
+    L.append("**Gaps the panel/evidence missed (ranked most-distinct-first):**")
     for i, g in enumerate(gaps, 1):
         L.append(f"{i}. {g}")
         L.append(_GAP_ACTION)
