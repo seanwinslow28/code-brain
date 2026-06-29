@@ -1,0 +1,37 @@
+{
+  "id": "20260628-173154-bb86fd",
+  "topic": "skeptical creatives who tried AI tools, got generic soulless results, and quit \u2014 why they abandoned it and what would make them give it another chance",
+  "lens": "substack",
+  "tier": "deep",
+  "evidence_count": 39,
+  "verified": 7,
+  "dropped": 0,
+  "cost_usd": 1.9549,
+  "gather_status": {
+    "last30": "ok: 13 records (13 found)",
+    "sonar": "ok: 20 records (20 found)",
+    "web": "ok: 6 records (6 found)",
+    "reviews": "error: HTTPStatusError: HTTPStatusError(\"Client error '422 Unprocessable Entity' for url 'https://api.search.brave.com/res/v1/web/search?q=skeptical+creatives+who+tried+AI+tools%2C+got+generic+soulless+results%2C+and+quit+%E2%80%94+why+they+abandoned+it+and+what+would+make+them+give+it+another+chance+review+%28%221+star%22+OR+%222+star%22+OR+worst+OR+terrible+OR+disappointing+OR+avoid+OR+cancel%29+%28site%3Ag2.com+OR+site%3Acapterra.com+OR+site%3Atrustpilot.com+OR+site%3Aproducthunt.com+OR+site%3Aapps.apple.com+OR+site%3Aplay.google.com%29&count=8'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422\")",
+    "github": "ok: 0 records (0 found)",
+    "qa": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "Evidence skews heavily toward writers and visual artists; relatively thin first-person testimony from designers, filmmakers, and game artists despite being named in scope.",
+    "Most 'soulless' and emotional-authenticity claims come from a single Perplexity Sonar synthesis rather than independently verifiable primary quotes, so the strength of underlying primary evidence is hard to gauge.",
+    "Little evidence on pricing, learning-curve, or onboarding friction as abandonment drivers \u2014 almost all complaints are about output quality/meaning, not cost or usability.",
+    "No quantitative data on what fraction of skeptics actually returned after improvements, or which specific changes (memory, personalization) measurably re-engaged them.",
+    "Pro/positive counter-experiences (e.g., AI as useful for competitor analysis or brainstorming) are mentioned but under-explored relative to the negative cluster."
+  ],
+  "contradictions": [
+    "Some creatives reject AI output as soulless and meaningless, while others report concrete value when AI is confined to mechanical tasks (e.g., the niks_df tweet on Atria's Raya earning its keep for competitor creatives + auto-tagging hooks), suggesting the problem is role/scope, not the technology itself.",
+    "Detectability of 'AI tells' is treated both as a damning flaw (generic ChatGPT-isms) and dismissed by others who embrace those markers \u2014 e.g., a user saying they love the em-dash and don't care if it reads as AI.",
+    "One thread argues for openly disclosing/normalizing AI use ('Why we should stop disclosing AI use' / 'AI Doesn't Kill Creativity'), directly opposing the dominant panel narrative that AI undermines authenticity and craft.",
+    "The 'almost useless after recent updates' complaint conflicts with a commenter's suggestion that models have improved significantly since 2021, implying disagreement over whether output quality is trending down or up."
+  ],
+  "supplement": {
+    "skipped": false,
+    "queries_run": 5,
+    "filled": 5,
+    "items": 5
+  }
+}

@@ -43,6 +43,9 @@ Six new council runs + a web-search supplement gave each lane a *pain paired wit
 | 3 | **Keep a character alive across a series** | visual | reference anchoring + style-lock across many outputs (Character Bible) | idea |
 | 4 | **Make AI motion feel alive** | animation | human owns timing: keyframe / first-last-frame, bind subject | idea |
 | 5 | **Use the intern upstream, not just at the end** | process | AI as adversarial partner: ideate-first, diverge/converge, make it ask you questions | idea |
+| 6 | **Keep the intern in a bounded role** | process / writing | feed your context + confine AI to a *welcome* role (brainstorm / outline / mechanic / sparring partner), preserve authorship; generic-ghostwriter slop → the bounded-role version that's recognizably yours | idea (from 2026-06-28 T3) |
+| 7 | **Cut the correction burden** | process / tool-drop | the re-roll/cleanup tax is the real cost; anchor-once-reuse + the taste rubric so you stop fixing the same drift | idea (from 2026-06-28 T1 v2) |
+| 8 | **Build a repeatable system, not a casino** | process / tool-drop | seeds / versioning / Character Bibles → a process you can trust, vs slot-machine prompting | idea (from 2026-06-28 T4 v2) |
 
 **Thesis backbone (not a post):** "fighting the regression to the mean" (mode collapse, peer-reviewed) is Start Here's whitespace claim + recurring Notes, the *why* under every demo. Never lead with it.
 
@@ -62,6 +65,14 @@ From the 2026-06-27 runs:
 - **Fix My Mess:** E series/brand (brand systems not enforced, content-policy campaign breaks); the false-positive "accused of AI" cluster (B#3, A#6) as a defend-the-human angle.
 - **Start Here / manifesto + Notes:** D losing-your-style + the mode-collapse mechanism = "fighting the regression to the mean."
 - **Skip:** F#2 ("AI fundamentally can't feel") — the doomer frame; foil only, never a claim.
+
+From the 2026-06-28 runs (synthesis: [`research/discovery/2026-06-28-discovery-synthesis-T2-T3-backlog.md`](research/discovery/2026-06-28-discovery-synthesis-T2-T3-backlog.md)):
+
+- **Take Two (spine):** T3 "bounded role + absorb my context" → new Take Two #6 above.
+- **Defend-the-human (Fix My Mess-adjacent) + Tool Drop:** T2 "no fair standard of evidence for AI accusations" → a defend-the-human essay AND a candidate Tool Drop (ship a standard-of-evidence / disclosure kit); T2 "evidence-free witch hunts" (Ben Moran, 100 hrs, suspended from r/Art) = the cold-open.
+- **Start Here / manifesto + Notes:** T3#1 sharpens the whitespace claim — *the skeptic isn't a technophobe; they quit the generic ghostwriter; the bounded-role version is the second chance.* T3#2 (the "NPC trap" — AI drafts stunt your growth) = a standalone essay/Notes.
+- **Cut the correction burden (T1 v2, now mine-able):** "AI sheen / lacks voice" (the *why* behind the rewriting) + "hidden cleanup erases the time savings" → Take Two / Tool Drop #7.
+- **Build a repeatable system (T4 v2, now mine-able):** "give me seeds/versioning, not a casino" (the opportunity) + "same prompt never twice" (the itch) → Take Two / Tool Drop #8.
 
 ## Page scaffolding & nav
 
