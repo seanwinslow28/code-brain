@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### fusion-discovery-council — Step A harden: shared query-length clamp (2026-06-28)
+- **New `council/discovery/textbudget.py`** — one place for the provider q-param ceilings (Brave ~50 words/400 chars, GitHub ~256 chars) and a shared `clamp_words_chars(text, *, max_words, max_chars)` that trims on a word boundary. A long topic (and/or `--segment`) composed into a provider query is what 422'd the search and, pre-fix, crashed Stage-5 backfill (2026-06-28).
+- **`reviews` + `github` collectors now clamp their subject** ([gather/reviews.py](tools/llm-council/council/discovery/gather/reviews.py), [gather/github.py](tools/llm-council/council/discovery/gather/github.py)) before composing the provider query — so the fixed `site:`/weakness or `in:title,body is:issue` operators are never truncated away and a long topic can't 422 them (the same crash class the backfill hit).
+- **`backfill._supplement_query` refactored** to reuse `clamp_words_chars` + the shared `BRAVE_Q_MAX_*` ceilings (DRY; also now catches a topic head that alone exceeds the word ceiling). Behavior unchanged — its 14 tests stay green.
+- Tests: new `tests/discovery/test_textbudget.py` (4) + long-topic clamp regressions in `test_gather_reviews.py` / `test_gather_github.py`. Full council suite **174 passed, 1 skipped**.
+
 ### fusion-discovery-council — BACKFILL moves to the agent layer (2026-06-28)
 - **Pivot:** Stage 5 BACKFILL now runs by default at the **agent layer** — the orchestrating Claude Code session reads each ledger's `## Blind-spot / Whitespace Map` and backfills it with its own `WebSearch`/`WebFetch` on Sean's Anthropic subscription (**$0 marginal API**). An agent's search→read→synthesize **vets relevance natively** — the one thing the deterministic in-CLI Exa/Brave version (keyword extraction, "relevance: mixed") couldn't do. Cheaper *and* higher-quality.
 - **CLI default flipped:** `--supplement` is now **default OFF** ([__main__.py](tools/llm-council/council/discovery/__main__.py)). It stays fully working as **opt-in** for a future headless / no-agent mode (the only path that still needs the deterministic in-CLI backfill). TDD: the `test_cli.py` default-assertion was inverted first (red → green); all prior tests stay green.
