@@ -20,11 +20,11 @@ def render_substack_ledger(*, topic: str, tier: str, angles: list[PostAngle],
     if not angles:
         L.append("_No pain points survived verification. Low verifiable signal — widen the topic or raise the tier._\n")
     for i, a in enumerate(angles, 1):
-        L.append(f"### {i}. {a.title}  ·  score {a.score:.1f}")
+        L.append(f"### {i}. {a.title}  ·  score {a.score.composite:.0f}/100")
         L.append(f"- **Audience:** {a.audience}")
         L.append(f"- **Hook:** {a.hook}")
         L.append(f"- **Transfer:** {a.transfer}")
-        L.append(f"- **Corroboration:** {a.corroboration} source domain(s)")
+        L.append(f"- **Corroboration:** {a.score.distinct_domains} source domain(s)")
         L.append("- **Evidence:** " + ", ".join(a.evidence_urls))
         L.append("")
 
@@ -62,7 +62,7 @@ def render_substack_brief(*, topic: str, segment: str, angles: list[PostAngle]) 
         L.append("_No verified pain points — no angles to brief. Widen the topic or raise the tier._")
         return "\n".join(L)
     for i, a in enumerate(angles, 1):
-        L.append(f"## Angle {i}: {a.title}  ·  score {a.score:.1f}")
+        L.append(f"## Angle {i}: {a.title}  ·  score {a.score.composite:.0f}/100")
         L.append(f"- **Audience:** {a.audience}")
         L.append(f"- **Hook (open loop):** {a.hook}")
         L.append(f"- **Itch (Value-Gate slot 1 — candidate, verify it's genuinely yours):** {a.itch}")

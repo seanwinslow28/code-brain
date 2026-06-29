@@ -1,26 +1,59 @@
+from datetime import date
+
+from council.discovery.evidence import EvidenceBundle, EvidenceRecord
 from council.discovery.fusion import CandidatePainPoint, FusionResult
 from council.discovery.verify import VerifiedPainPoint
-from council.discovery.frame import frame_pm
+from council.discovery.frame import frame_pm, IdeaCard
+from council.discovery.scoring import ScoreBreakdown
+from council.discovery.bet import ProposedBet
+
+TODAY = date(2026, 6, 29)
 
 
-def _vpp(title, intensity, urls):
-    pt = CandidatePainPoint(title, "summary", quotes=[f"{title} quote"], urls=urls,
-                            intensity=intensity, segment="PMs")
+def _vpp(title, intensity, urls, summary="summary", consensus="4/4 models"):
+    pt = CandidatePainPoint(title, summary, quotes=[f"{title} quote"], urls=urls,
+                            intensity=intensity, segment="PMs", recency="2026-06",
+                            consensus=consensus)
     return VerifiedPainPoint(point=pt, verified=True, supporting_urls=urls)
 
 
-def test_cards_sorted_by_score_and_only_verified():
+def _bundle(urls, engagement=50):
+    b = EvidenceBundle()
+    for i, u in enumerate(urls):
+        b.add(EvidenceRecord("reddit", f"author{i}", u, "2026-06-20", f"q{i}", engagement=engagement))
+    return b
+
+
+def test_cards_sorted_by_composite_and_only_verified():
     low = _vpp("Low", 2, ["https://a.com/1"])
-    high = _vpp("High", 5, ["https://a.com/2", "https://b.com/3"])  # 2 domains → higher corroboration
+    high = _vpp("High", 5, ["https://a.com/2", "https://b.com/3", "https://c.com/4", "https://d.com/5"])
     dropped = VerifiedPainPoint(point=CandidatePainPoint("X", "", [], []), verified=False, supporting_urls=[])
-    cards, quote_bank = frame_pm([low, high, dropped], FusionResult())
+    bundle = _bundle(["https://a.com/1", "https://a.com/2", "https://b.com/3",
+                      "https://c.com/4", "https://d.com/5"])
+    cards, quote_bank = frame_pm([low, high, dropped], FusionResult(), bundle, today=TODAY)
     assert [c.title for c in cards] == ["High", "Low"]
-    assert all(c.score > 0 for c in cards)
-    assert len(cards) == 2                       # unverified excluded
+    assert all(isinstance(c.score, ScoreBreakdown) and c.score.composite > 0 for c in cards)
+    assert len(cards) == 2
     assert any("High quote" in q for q in quote_bank)
 
 
-def test_opportunity_line_references_pain():
-    cards, _ = frame_pm([_vpp("Slow export", 4, ["https://a.com/1"])], FusionResult())
-    assert "Slow export" in cards[0].pain
-    assert cards[0].opportunity
+def test_card_leads_with_verbatim_quote_and_has_bet_and_why_now():
+    bundle = _bundle(["https://a.com/1"])
+    cards, _ = frame_pm([_vpp("Slow export", 4, ["https://a.com/1"])], FusionResult(), bundle, today=TODAY)
+    c = cards[0]
+    assert c.lead_quote == "Slow export quote"     # leads with the verbatim quote
+    assert "Slow export" in c.pain
+    assert isinstance(c.bet, ProposedBet) and c.bet.shape == "workflow-friction"
+    assert c.why_now                                # deterministic, non-empty
+    assert c.who == "PMs"
+
+
+def test_why_now_reflects_recency_state():
+    bundle = _bundle(["https://a.com/1"])
+    fresh = _vpp("Fresh", 3, ["https://a.com/1"])
+    old = _vpp("Old", 3, ["https://a.com/1"])
+    old.point.__dict__["recency"] = "2020-01"      # force an old date
+    cf, _ = frame_pm([fresh], FusionResult(), bundle, today=TODAY)
+    co, _ = frame_pm([old], FusionResult(), bundle, today=TODAY)
+    assert "Fresh signal" in cf[0].why_now
+    assert "Older signal" in co[0].why_now
