@@ -41,6 +41,9 @@ def _corroboration(distinct_domains: int) -> str:
 
 
 def _freshness(recency: float, evidence_date: str) -> str:
+    # Contract: evidence_date is either "" or an already-parsed ISO date from
+    # scoring.ScoreBreakdown (scoring.py emits date.isoformat() or "") — this badge does
+    # not re-validate a non-empty string, it renders it verbatim.
     # date-present gate FIRST: unparseable dates get recency=0.5 in scoring, which would
     # otherwise falsely read as 'fresh'. 'undated' is never 'fresh'.
     if not (evidence_date or "").strip():

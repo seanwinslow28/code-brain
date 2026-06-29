@@ -20,6 +20,10 @@ def _angle():
     )
 
 
+def _fr_sub():
+    return FusionResult(blind_spots=["nobody covers recovery UX"], contradictions=["mobile vs desktop"])
+
+
 def test_ledger_includes_all_sections():
     fr = FusionResult(blind_spots=["nobody covers recovery UX"], contradictions=["mobile vs desktop"])
     md = render_substack_ledger(topic="export tools", tier="standard", angles=[_angle()],
@@ -76,10 +80,6 @@ def test_supplement_none_keeps_substack_ledger_byte_identical():
               fusion_result=fr, cost_usd=0.42, dropped_count=2)
     assert render_substack_ledger(**kw, supplement=None) == render_substack_ledger(**kw)
     assert "## Web Supplement" not in render_substack_ledger(**kw)   # section (hero names it by ref)
-
-
-def _fr_sub():
-    return FusionResult(blind_spots=["nobody covers recovery UX"], contradictions=["mobile vs desktop"])
 
 
 def test_substack_ledger_includes_receipt_and_legend_once():
