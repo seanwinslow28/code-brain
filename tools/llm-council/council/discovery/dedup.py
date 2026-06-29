@@ -116,7 +116,7 @@ def dedup_verified(
     clusters: list[list[VerifiedPainPoint]] = []        # each cluster is [seed, members...]
     for _idx, v in ordered:
         vtext = _point_text(v.point)
-        best_c, best_sim = None, 0.0
+        best_c, best_sim = None, -1.0
         for c in clusters:
             sim = similarity_fn(vtext, _point_text(c[0].point))
             if sim > best_sim:

@@ -257,6 +257,33 @@ async def test_pipeline_dedups_near_duplicate_pain_points():
 
 
 @pytest.mark.asyncio
+async def test_pipeline_same_domain_merge_does_not_inflate_corroboration():
+    """Two same-domain URLs that merge into one pain point must report only 1 distinct domain,
+    proving same-domain corroboration is NOT double-counted after a merge."""
+    bundle = EvidenceBundle()
+    bundle.add(EvidenceRecord("reddit", "r/a", "https://same.com/a", "2026-06-29", "exports fail silently", 9))
+    bundle.add(EvidenceRecord("reddit", "r/b", "https://same.com/b", "2026-06-29", "exports fail silently", 9))
+
+    async def gather_fn(**kw):
+        return bundle, {"sonar": "ok: 2 records (2 found)"}
+
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Exports fail silently", "exports silently fail on conflict",
+                               ["exports fail silently"], ["https://same.com/a"], intensity=5),
+            CandidatePainPoint("Silently failing exports", "on conflict exports fail silently",
+                               ["exports fail silently"], ["https://same.com/b"], intensity=4),
+        ], blind_spots=["x"], tokens_in=900, tokens_out=200, cost=0.3)
+
+    res = await run_discovery(topic="sync apps", lens="pm", tier="standard",
+                              api_key="k", gather_fn=gather_fn, fuse_fn=fuse_fn)
+    assert res.verified_count == 1                              # two near-dups collapsed to one
+    assert res.session["merged_count"] == 1
+    # same-domain merge must NOT double-count: only 1 distinct domain should be reported
+    assert "1 independent domain(s)" in res.markdown
+
+
+@pytest.mark.asyncio
 async def test_pipeline_ranks_blind_spots_worst_first():
     bundle = EvidenceBundle()
     bundle.add(EvidenceRecord("reddit", "r/a", "https://d1.com/a", "2026-06-18", "exports fail silently", 9))
