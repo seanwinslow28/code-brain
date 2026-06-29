@@ -3,6 +3,7 @@
 from council.discovery.backfill import BackfillResult, supplement_section
 from council.discovery.frame import IdeaCard
 from council.discovery.fusion import FusionResult
+from council.discovery.receipts import receipt_line, receipts_legend
 from council.discovery.whitespace import whitespace_hero
 
 
@@ -27,6 +28,7 @@ def render_ledger(*, topic: str, lens: str, tier: str, segment: str = "", cards:
     for i, c in enumerate(cards, 1):
         s = c.score
         L.append(f"### {i}. {c.title}  ·  score {s.composite:.0f}/100")
+        L.append(receipt_line(s))
         L.append(f"- **Who:** {c.who}")
         L.append(f'- **Pain (their words):** {c.lead_quote}')
         L.append(f"  - {c.pain}")
@@ -43,6 +45,9 @@ def render_ledger(*, topic: str, lens: str, tier: str, segment: str = "", cards:
         L.append(f"  - Riskiest assumption: {c.bet.riskiest_assumption}")
         L.append(f"  - Cheapest test: {c.bet.cheapest_test}")
         L.append("  - _Your call: _________________________________")
+        L.append("")
+    if any(c.score.distinct_domains >= 2 for c in cards):
+        L.append(receipts_legend())
         L.append("")
 
     L.extend(supplement_section(supplement))      # Stage 5 — Web Supplement the hero links to ([] if None)

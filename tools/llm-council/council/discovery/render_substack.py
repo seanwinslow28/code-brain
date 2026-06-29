@@ -5,6 +5,7 @@ substack-value-engine handoff brief."""
 from council.discovery.backfill import BackfillResult, supplement_section
 from council.discovery.frame_substack import PostAngle
 from council.discovery.fusion import FusionResult
+from council.discovery.receipts import receipt_line, receipts_legend
 from council.discovery.whitespace import whitespace_hero
 
 
@@ -28,11 +29,15 @@ def render_substack_ledger(*, topic: str, tier: str, segment: str = "", angles: 
         L.append("_No pain points survived verification. Low verifiable signal — widen the topic or raise the tier._\n")
     for i, a in enumerate(angles, 1):
         L.append(f"### {i}. {a.title}  ·  score {a.score.composite:.0f}/100")
+        L.append(receipt_line(a.score))
         L.append(f"- **Audience:** {a.audience}")
         L.append(f"- **Hook:** {a.hook}")
         L.append(f"- **Transfer:** {a.transfer}")
         L.append(f"- **Corroboration:** {a.score.distinct_domains} source domain(s)")
         L.append("- **Evidence:** " + ", ".join(a.evidence_urls))
+        L.append("")
+    if angles:
+        L.append(receipts_legend())
         L.append("")
 
     L.extend(supplement_section(supplement))      # Stage 5 — Web Supplement the hero links to ([] if None)

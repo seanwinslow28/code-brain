@@ -80,3 +80,34 @@ def test_supplement_findings_render_with_leads_label_and_still_open():
     assert "still open" in md
     # supplement stays separate from the ranked list (above Contradiction Map)
     assert md.index("Web Supplement") < md.index("Contradiction Map")
+
+
+def test_render_includes_receipt_line_and_legend_once():
+    md = _render()
+    # _score() has distinct_domains=2, recency=0.84, evidence_date="2026-06"
+    assert "🧾 corroborated · 2 independent domains" in md
+    assert "fresh · evidence 2026-06" in md
+    assert md.count("Receipts** show evidence") == 1          # legend once, not per-card
+    assert "**Size:**" in md and "**Confidence:**" in md      # detail lines kept (augment, not replace)
+    assert md.index("score 68/100") < md.index("🧾") < md.index("**Who:**")  # receipt under heading
+
+
+def test_render_single_source_card_reads_single_source():
+    score = ScoreBreakdown(composite=40.0, value=0.5, confidence=0.6, importance=0.6,
+                           reach=0.4, recency=0.4, source_corroboration=0.3, consensus_ratio=0.5,
+                           intensity=3, engagement_sum=50, distinct_sources=1, distinct_domains=1,
+                           evidence_date="2026-05-20")
+    card = IdeaCard("Niche bug", "devs", "Niche bug: x", '"x"', ["https://b.com/1"], ['"x"'],
+                    score, "Older signal", ProposedBet("s", "a", "t"))
+    md = render_ledger(topic="t", lens="pm", tier="standard", cards=[card], quote_bank=[],
+                       fusion_result=_fr(), cost_usd=0.1, dropped_count=0)
+    assert "🧾 single-source · 1 domain" in md
+    assert "well-corroborated" not in md                       # not over-stated
+
+
+def test_render_empty_cards_no_receipts_no_legend():
+    md = render_ledger(topic="t", lens="pm", tier="standard", cards=[], quote_bank=[],
+                       fusion_result=_fr(), cost_usd=0.1, dropped_count=3)
+    assert "🧾" not in md
+    assert "Receipts** show evidence" not in md
+    assert "No pain points survived verification" in md
