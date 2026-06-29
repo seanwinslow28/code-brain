@@ -116,3 +116,13 @@ def test_hero_blank_gaps_filtered():
     md = _hero(["  ", "real gap"])
     assert "1. real gap" in md
     assert "2. " not in md.split("Gaps the panel")[1]  # only one real gap rendered
+
+
+def test_hero_states_gaps_are_ranked_most_distinct_first():
+    out = "\n".join(whitespace_hero(blind_spots=["gap one", "gap two"], tier="standard",
+                                    segment="devs", verified_count=2, dropped_count=0))
+    assert "most-distinct-first" in out
+    assert "not a severity" in out.lower() or "not a confidence" in out.lower()
+    # the absence-of-evidence guardrail must remain
+    assert "absence-of-evidence" in out
+    assert "investigate" in out.lower()

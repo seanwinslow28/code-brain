@@ -39,7 +39,7 @@ def test_parse_consensus_ratio():
 
 def test_full_evidence_scores_near_max_confidence():
     urls = [f"https://d{i}.com/x" for i in range(4)]
-    recs = [EvidenceRecord("reddit", f"author{i}", urls[i], "2026-06-20", "q", engagement=200)
+    recs = [EvidenceRecord("reddit", f"src{i}", urls[i], "2026-06-20", "q", engagement=200)
             for i in range(4)]
     s = score_opportunity(_pt(intensity=5), urls, _bundle(*recs), today=TODAY)
     assert s.confidence > 0.95
@@ -103,3 +103,15 @@ def test_sensitivity_sanity_corroborated_mid_beats_single_high():
         _bundle(EvidenceRecord("reddit", "solo", "https://one.com/x", "2026-06-20", "q", engagement=150)),
         today=TODAY)
     assert multi.composite > single.composite
+
+
+def test_domain_count_and_source_count_use_different_inputs():
+    # Documented intentional asymmetry: distinct_domains is derived from supporting_urls (gate truth),
+    # while engagement_sum/distinct_sources come from matched bundle records. Construct a case where a
+    # supporting_url has NO matching record -> it still counts as a domain but contributes 0 sources.
+    rec = EvidenceRecord("reddit", "solo", "https://matched.com/x", "2026-06-20", "q", engagement=50)
+    supporting = ["https://matched.com/x", "https://unmatched.com/y"]   # 2 domains, 1 matched record
+    s = score_opportunity(_pt(intensity=4), supporting, _bundle(rec), today=TODAY)
+    assert s.distinct_domains == 2                 # from supporting_urls
+    assert s.distinct_sources == 1                 # only the matched record's source_name
+    assert s.engagement_sum == 50                  # only the matched record's engagement
