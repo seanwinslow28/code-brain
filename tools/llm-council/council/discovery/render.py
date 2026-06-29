@@ -25,6 +25,9 @@ def render_ledger(*, topic: str, lens: str, tier: str, segment: str = "", cards:
     L.append("## Ranked Opportunities\n")
     if not cards:
         L.append("_No pain points survived verification. Low verifiable signal — widen the topic or raise the tier._\n")
+    else:
+        L.append(receipts_legend())
+        L.append("")
     for i, c in enumerate(cards, 1):
         s = c.score
         L.append(f"### {i}. {c.title}  ·  score {s.composite:.0f}/100")
@@ -46,10 +49,6 @@ def render_ledger(*, topic: str, lens: str, tier: str, segment: str = "", cards:
         L.append(f"  - Cheapest test: {c.bet.cheapest_test}")
         L.append("  - _Your call: _________________________________")
         L.append("")
-    if any(c.score.distinct_domains >= 2 for c in cards):
-        L.append(receipts_legend())
-        L.append("")
-
     L.extend(supplement_section(supplement))      # Stage 5 — Web Supplement the hero links to ([] if None)
     L.append("## Contradiction Map\n")
     L.extend(f"- {c}" for c in (fusion_result.contradictions or ["_(none surfaced)_"]))

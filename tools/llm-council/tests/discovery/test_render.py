@@ -89,7 +89,7 @@ def test_render_includes_receipt_line_and_legend_once():
     assert "fresh · evidence 2026-06" in md
     assert md.count("Receipts** show evidence") == 1          # legend once, not per-card
     assert "**Size:**" in md and "**Confidence:**" in md      # detail lines kept (augment, not replace)
-    assert md.index("score 68/100") < md.index("🧾") < md.index("**Who:**")  # receipt under heading
+    assert md.index("score 68/100") < md.index("🧾 corroborated") < md.index("**Who:**")  # receipt under heading
 
 
 def test_render_single_source_card_reads_single_source():
@@ -102,7 +102,7 @@ def test_render_single_source_card_reads_single_source():
     md = render_ledger(topic="t", lens="pm", tier="standard", cards=[card], quote_bank=[],
                        fusion_result=_fr(), cost_usd=0.1, dropped_count=0)
     assert "🧾 single-source · 1 domain" in md
-    assert "well-corroborated" not in md                       # not over-stated
+    assert "🧾 well-corroborated" not in md                    # the card's receipt isn't over-stated (legend may name the tier)
 
 
 def test_render_empty_cards_no_receipts_no_legend():

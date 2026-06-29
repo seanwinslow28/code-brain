@@ -27,6 +27,9 @@ def render_substack_ledger(*, topic: str, tier: str, segment: str = "", angles: 
     L.append("## Ranked Post Angles\n")
     if not angles:
         L.append("_No pain points survived verification. Low verifiable signal — widen the topic or raise the tier._\n")
+    else:
+        L.append(receipts_legend())
+        L.append("")
     for i, a in enumerate(angles, 1):
         L.append(f"### {i}. {a.title}  ·  score {a.score.composite:.0f}/100")
         L.append(receipt_line(a.score))
@@ -36,10 +39,6 @@ def render_substack_ledger(*, topic: str, tier: str, segment: str = "", angles: 
         L.append(f"- **Corroboration:** {a.score.distinct_domains} source domain(s)")
         L.append("- **Evidence:** " + ", ".join(a.evidence_urls))
         L.append("")
-    if angles:
-        L.append(receipts_legend())
-        L.append("")
-
     L.extend(supplement_section(supplement))      # Stage 5 — Web Supplement the hero links to ([] if None)
     L.append("## Quote Bank\n")
     L.extend(f"- {q}" for q in (quote_bank or ["_(empty)_"]))

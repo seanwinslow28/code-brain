@@ -89,7 +89,7 @@ def test_substack_ledger_includes_receipt_and_legend_once():
     assert "🧾 single-source · 1 domain" in md                 # single-source reads honestly
     assert "fresh · evidence 2026-06" in md
     assert md.count("Receipts** show evidence") == 1           # legend once
-    assert md.index("score 72/100") < md.index("🧾") < md.index("**Audience:**")
+    assert md.index("score 72/100") < md.index("🧾 single-source") < md.index("**Audience:**")
 
 
 def test_substack_well_corroborated_aging_angle_maps_badge():
