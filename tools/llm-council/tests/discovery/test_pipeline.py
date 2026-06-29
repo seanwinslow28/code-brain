@@ -96,6 +96,65 @@ async def test_fuse_failure_still_raises_with_cost_when_session_write_fails(tmp_
 
 
 @pytest.mark.asyncio
+async def test_post_fuse_failure_records_billed_cost(tmp_path):
+    # A failure AFTER fuse (verify/backfill/frame/render) must still surface the already-billed FUSE
+    # cost as DiscoveryFailed.cost_usd, mirroring the FusionError path — otherwise __main__ records $0
+    # and the daily cap goes blind to real spend (observed 2026-06-28 when BACKFILL crashed post-fuse).
+    from council.discovery.pipeline import run_discovery, DiscoveryFailed
+    import json as _json
+
+    b = EvidenceBundle(); b.add(EvidenceRecord("reddit", "r", "https://r.com/1", "", "exports fail silently"))
+
+    async def gather_fn(**kw):
+        return b, {"sonar": "ok: 1 records (1 found)"}
+
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Export loss", "s", ["exports fail silently"], ["https://r.com/1"], intensity=5),
+        ], blind_spots=["no SSO"], tokens_in=1000, tokens_out=300, cost=0.5)
+
+    async def backfill_fn(**kw):
+        raise RuntimeError("post-fuse blowup (e.g. Brave 422)")
+
+    sdir = tmp_path / ".sessions"
+    with pytest.raises(DiscoveryFailed) as exc:
+        await run_discovery(topic="x", lens="substack", tier="standard", api_key="k",
+                            gather_fn=gather_fn, fuse_fn=fuse_fn, backfill_fn=backfill_fn,
+                            supplement=True, sessions_dir=sdir)
+    assert exc.value.cost_usd == 0.5                  # FUSE was billed; spend survives the post-fuse crash
+    written = list(sdir.glob("*.json"))
+    assert len(written) == 1
+    data = _json.loads(written[0].read_text())
+    assert data["failed_stage"] == "post-fuse" and data["cost_usd"] == 0.5
+    assert "gather_status" in data
+
+
+@pytest.mark.asyncio
+async def test_post_fuse_failure_still_raises_with_cost_when_session_write_fails(tmp_path):
+    from council.discovery.pipeline import run_discovery, DiscoveryFailed
+    b = EvidenceBundle(); b.add(EvidenceRecord("reddit", "r", "https://r.com/1", "", "exports fail silently"))
+
+    async def gather_fn(**kw):
+        return b, {"sonar": "ok: 1 records (1 found)"}
+
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Export loss", "s", ["exports fail silently"], ["https://r.com/1"], intensity=5),
+        ], blind_spots=["x"], tokens_in=1000, tokens_out=300, cost=0.5)
+
+    async def backfill_fn(**kw):
+        raise RuntimeError("boom")
+
+    # sessions_dir points at an existing FILE → diagnostic mkdir/write raises → spend must still survive.
+    bad = tmp_path / "not-a-dir"; bad.write_text("x")
+    with pytest.raises(DiscoveryFailed) as exc:
+        await run_discovery(topic="x", lens="pm", tier="standard", api_key="k",
+                            gather_fn=gather_fn, fuse_fn=fuse_fn, backfill_fn=backfill_fn,
+                            supplement=True, sessions_dir=bad)
+    assert exc.value.cost_usd == 0.5
+
+
+@pytest.mark.asyncio
 async def test_substack_lens_produces_angles_ledger_and_brief():
     bundle = EvidenceBundle()
     bundle.add(EvidenceRecord("reddit", "r/x", "https://r.com/1", "2026-06-18", "exports fail silently", 9))
