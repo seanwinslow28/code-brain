@@ -3,9 +3,10 @@
 from council.discovery.backfill import BackfillResult, supplement_section
 from council.discovery.frame import IdeaCard
 from council.discovery.fusion import FusionResult
+from council.discovery.whitespace import whitespace_hero
 
 
-def render_ledger(*, topic: str, lens: str, tier: str, cards: list[IdeaCard],
+def render_ledger(*, topic: str, lens: str, tier: str, segment: str = "", cards: list[IdeaCard],
                   quote_bank: list[str], fusion_result: FusionResult,
                   cost_usd: float, dropped_count: int,
                   supplement: "BackfillResult | None" = None) -> str:
@@ -13,6 +14,10 @@ def render_ledger(*, topic: str, lens: str, tier: str, cards: list[IdeaCard],
     L.append(f"# Idea Ledger — {topic}\n")
     L.append(f"- **Lens:** `{lens}`  **Tier:** `{tier}`  **Verified ideas:** {len(cards)}")
     L.append(f"- **Cost:** ${cost_usd:.2f}  ·  Pain points dropped by verification: {dropped_count}\n")
+
+    # D4 — the whitespace map LEADS the ledger (highest-signal section; feeds the agent backfill).
+    L.extend(whitespace_hero(blind_spots=fusion_result.blind_spots, tier=tier, segment=segment,
+                             verified_count=len(cards), dropped_count=dropped_count))
 
     L.append("## Ranked Opportunities\n")
     if not cards:
@@ -38,10 +43,7 @@ def render_ledger(*, topic: str, lens: str, tier: str, cards: list[IdeaCard],
         L.append("  - _Your call: _________________________________")
         L.append("")
 
-    L.append("## Blind-spot / Whitespace Map\n")
-    L.extend(f"- {b}" for b in (fusion_result.blind_spots or ["_(none surfaced)_"]))
-    L.append("")
-    L.extend(supplement_section(supplement))      # Stage 5 — sits next to the gaps it answers ([] if None)
+    L.extend(supplement_section(supplement))      # Stage 5 — Web Supplement the hero links to ([] if None)
     L.append("## Contradiction Map\n")
     L.extend(f"- {c}" for c in (fusion_result.contradictions or ["_(none surfaced)_"]))
     L.append("")
