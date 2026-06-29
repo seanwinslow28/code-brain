@@ -51,3 +51,20 @@ async def test_collect_reviews_includes_segment_in_query():
     await collect_reviews(topic="crm", segment="nonprofits", search=search, fetch=None)
     assert "crm" in captured["q"] and "nonprofits" in captured["q"]
     assert "site:g2.com" in captured["q"]   # still site-targeted
+
+
+@pytest.mark.asyncio
+async def test_collect_reviews_clamps_long_topic_under_brave_q_ceiling():
+    # A long topic/--segment composed with the site:/weakness scaffolding can blow past Brave's
+    # ~50-word / ~400-char q-param ceiling and 422. The variable subject must be clamped so the
+    # composed query stays under it — without truncating the site: operators away.
+    captured = {}
+    async def search(q):
+        captured["q"] = q
+        return []
+    long_topic = " ".join(["creative"] * 40)
+    await collect_reviews(topic=long_topic, search=search, fetch=None)
+    assert len(captured["q"].split()) <= 50
+    assert len(captured["q"]) <= 400
+    assert "site:g2.com" in captured["q"]    # scaffolding preserved
+    assert "creative" in captured["q"]       # subject still present
