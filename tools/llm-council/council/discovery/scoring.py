@@ -30,7 +30,7 @@ HALFLIFE_DAYS = 30        # exponential recency decay half-life
 RECENCY_FLOOR = 0.3       # anti over-correction — old durable pain isn't crushed
 RECENCY_NEUTRAL = 0.5     # unparseable date
 DOMAIN_CEIL = 4           # independent domains for full source credit
-AUTHOR_CEIL = 5           # distinct authors for full source credit
+SOURCE_CEIL = 5           # distinct sources for full source credit
 CONF_FLOOR = 0.5          # a single-source pain is halved, never zeroed
 CONF_SRC_WT = 0.7         # independent sources dominate confidence
 CONF_CONSENSUS_WT = 0.3   # model agreement is a lighter, separate signal
@@ -48,7 +48,7 @@ class ScoreBreakdown:
     consensus_ratio: float      # 0-1  model-panel agreement
     intensity: int
     engagement_sum: int
-    distinct_authors: int
+    distinct_sources: int
     distinct_domains: int
     evidence_date: str          # parsed date used, or ""
 
@@ -82,9 +82,10 @@ def score_opportunity(
     bundle: EvidenceBundle,
     *,
     today: date | None = None,
-    value_weights: dict[str, float] = VALUE_WEIGHTS,
+    value_weights: dict[str, float] | None = None,
 ) -> ScoreBreakdown:
     today = today or date.today()
+    value_weights = value_weights or VALUE_WEIGHTS
     supp = set(supporting_urls)
     recs = [r for r in bundle.records if r.url in supp]
 
@@ -92,11 +93,12 @@ def score_opportunity(
     intensity = max(int(point.intensity or 0), 1)
     importance = _clamp(intensity / 5)
 
-    # reach ← log-damped engagement + breadth (authors + domains)
+    # reach ← log-damped engagement + breadth (sources + domains)
     eng_sum = sum(int(r.engagement or 0) for r in recs)
-    distinct_authors = len({r.source_name for r in recs if r.source_name})
-    distinct_domains = len({urlparse(u).netloc for u in supporting_urls if u})
-    breadth = distinct_authors + distinct_domains
+    distinct_sources = len({r.source_name for r in recs if r.source_name})
+    # domains come from the gate-truth supporting_urls; engagement/sources from matched records (intentional asymmetry).
+    distinct_domains = len({urlparse(u).netloc.lower() for u in supporting_urls if u})
+    breadth = distinct_sources + distinct_domains
     reach = _clamp(0.7 * (log1p(eng_sum) / log1p(REACH_CEIL))
                    + 0.3 * min(breadth / BREADTH_CEIL, 1.0))
 
@@ -118,7 +120,7 @@ def score_opportunity(
 
     # confidence ← independent sources (dominant) + model consensus (light)
     source_corroboration = _clamp(0.7 * min(distinct_domains / DOMAIN_CEIL, 1.0)
-                                  + 0.3 * min(distinct_authors / AUTHOR_CEIL, 1.0))
+                                  + 0.3 * min(distinct_sources / SOURCE_CEIL, 1.0))
     consensus_ratio = _parse_consensus(point.consensus)
     confidence = _clamp(
         CONF_FLOOR + (1 - CONF_FLOOR) * (CONF_SRC_WT * source_corroboration
@@ -131,6 +133,6 @@ def score_opportunity(
         importance=round(importance, 4), reach=round(reach, 4), recency=round(recency, 4),
         source_corroboration=round(source_corroboration, 4),
         consensus_ratio=round(consensus_ratio, 4),
-        intensity=intensity, engagement_sum=eng_sum, distinct_authors=distinct_authors,
+        intensity=intensity, engagement_sum=eng_sum, distinct_sources=distinct_sources,
         distinct_domains=distinct_domains, evidence_date=evidence_date,
     )

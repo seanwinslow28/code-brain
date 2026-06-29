@@ -82,6 +82,13 @@ def test_recency_floor_holds_for_old_evidence():
     assert s.recency == 0.3
 
 
+def test_recency_falls_back_to_record_dates_when_point_recency_unparseable():
+    rec = EvidenceRecord("reddit", "src", "https://a.com/x", "2026-06-20", "q", engagement=10)
+    s = score_opportunity(_pt(recency="recently"), ["https://a.com/x"], _bundle(rec), today=TODAY)
+    assert s.evidence_date == "2026-06-20"      # used the record's date, not neutral
+    assert s.recency > 0.3                       # a real decay value, not the floor/neutral
+
+
 def test_sensitivity_sanity_corroborated_mid_beats_single_high():
     multi_urls = [f"https://d{i}.com/x" for i in range(4)]
     multi = score_opportunity(
