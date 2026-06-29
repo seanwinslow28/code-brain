@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### fusion-discovery-council — Step A harden: shared query-length clamp (2026-06-28)
+- **New `council/discovery/textbudget.py`** — one place for the provider q-param ceilings (Brave ~50 words/400 chars, GitHub ~256 chars) and a shared `clamp_words_chars(text, *, max_words, max_chars)` that trims on a word boundary. A long topic (and/or `--segment`) composed into a provider query is what 422'd the search and, pre-fix, crashed Stage-5 backfill (2026-06-28).
+- **`reviews` + `github` collectors now clamp their subject** ([gather/reviews.py](tools/llm-council/council/discovery/gather/reviews.py), [gather/github.py](tools/llm-council/council/discovery/gather/github.py)) before composing the provider query — so the fixed `site:`/weakness or `in:title,body is:issue` operators are never truncated away and a long topic can't 422 them (the same crash class the backfill hit).
+- **`backfill._supplement_query` refactored** to reuse `clamp_words_chars` + the shared `BRAVE_Q_MAX_*` ceilings (DRY; also now catches a topic head that alone exceeds the word ceiling). Behavior unchanged — its 14 tests stay green.
+- Tests: new `tests/discovery/test_textbudget.py` (4) + long-topic clamp regressions in `test_gather_reviews.py` / `test_gather_github.py`. Full council suite **174 passed, 1 skipped**.
+
 ### fusion-discovery-council — Step A harden: --segment normalization + Fusion failure diagnostics (2026-06-28)
 - **`--segment` is normalized at the pipeline boundary** ([pipeline.py](tools/llm-council/council/discovery/pipeline.py) `_normalize_segment`): strips search-operator chars (`:`, parens) and collapses whitespace (incl. whitespace-only → "") once in `run_discovery`, so an operator-bearing segment (`is:pr`, `site:foo`, a stray `)`) can't alter any collector's composed query semantics. It's an audience qualifier, not a query operator.
 - **Fusion tool failures now report the real reason** ([fusion.py](tools/llm-council/council/discovery/fusion.py) `_find_failure_reason`): when a 200 response carries no parseable pain-point JSON, `fuse()` defensively scans the payload for a typed `failure_reason` (`all_panels_failed` / `rate_limited` / `fusion_invocation_capped` / …) and appends it to the `FusionError` instead of the generic "unparseable" message. The exact path is undocumented (FUSION_SCHEMA.md captured only the success shape), so the scan is path-agnostic; the success path is untouched.

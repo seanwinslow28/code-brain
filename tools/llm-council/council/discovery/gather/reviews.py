@@ -12,6 +12,7 @@ import os
 
 from council.discovery.evidence import EvidenceRecord
 from council.discovery.gather.web import _default_brave_search, _simple_fetch, extract_quotes
+from council.discovery.textbudget import BRAVE_Q_MAX_CHARS, BRAVE_Q_MAX_WORDS, clamp_words_chars
 
 REVIEW_DOMAINS = (
     "g2.com", "capterra.com", "trustpilot.com",
@@ -37,6 +38,9 @@ async def collect_reviews(*, topic: str, segment: str = "", search=..., fetch=..
     if search is None:
         return []
     subject = f"{topic} {segment}".strip() if segment else topic
+    # The site:/weakness scaffolding eats ~27 words / ~210 chars of Brave's q-param ceiling; clamp
+    # the variable subject so a long topic/--segment can't push the composed query past it and 422.
+    subject = clamp_words_chars(subject, max_words=BRAVE_Q_MAX_WORDS - 30, max_chars=BRAVE_Q_MAX_CHARS - 240)
     results = await search(_review_query(subject))
     recs: list[EvidenceRecord] = []
     for it in results[:max_results]:
