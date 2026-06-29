@@ -38,6 +38,12 @@ def test_rule2_segment_present_iff_empty():
     assert not any("--segment" in x for x in setseg)
 
 
+def test_rule2_whitespace_only_segment_treated_as_empty():
+    a = _sharpen_actions(has_gaps=True, n_gaps=1, tier="standard", segment="   ",
+                         verified_count=5, dropped_count=1)
+    assert any("--segment" in x for x in a)
+
+
 def test_rule3_no_verified():
     a = _sharpen_actions(has_gaps=True, n_gaps=1, tier="standard", segment="dev",
                          verified_count=0, dropped_count=3)
@@ -92,6 +98,18 @@ def test_hero_empty_gaps_note():
     md = _hero([], tier="deep", segment="dev", verified_count=5, dropped_count=0)
     assert "No blind spots surfaced" in md
     assert "Backfill the" not in md
+
+
+def test_hero_empty_gaps_still_fires_rules_2_4():
+    # spec lines 121-122: no gaps → rule 1 omitted, but rules 2-4 still render if applicable
+    md = _hero([], tier="standard", segment="", verified_count=0, dropped_count=5)  # 100% drop
+    assert "No blind spots surfaced" in md
+    assert "**Sharpen the next run:**" in md
+    assert "Backfill the" not in md                       # rule 1 omitted (no gaps)
+    assert "--segment" in md                              # rule 2
+    assert "nothing survived verification" in md          # rule 3
+    assert "Raise tier to `deep`" in md and "100%" in md  # rule 4
+    assert "1. Add `--segment" in md                      # renumbered from 1 (no rule-1 line)
 
 
 def test_hero_blank_gaps_filtered():

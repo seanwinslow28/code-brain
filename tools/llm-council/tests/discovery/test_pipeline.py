@@ -42,10 +42,12 @@ def test_estimate_cost_prefers_usage_cost():
 async def test_empty_bundle_renders_low_signal():
     async def gather_fn(**kw):
         return EvidenceBundle(), {"sonar": "ok: 0 records (0 found)"}
-    res = await run_discovery(topic="x", lens="pm", tier="quick",
+    res = await run_discovery(topic="x", lens="pm", tier="quick", segment="developer",
                               api_key="k", gather_fn=gather_fn, fuse_fn=None)
     assert res.verified_count == 0
     assert "Low verifiable signal" in res.markdown or "No pain points survived" in res.markdown
+    # the empty-bundle hero must honor the passed segment (not falsely tell you to add one)
+    assert "Add `--segment" not in res.markdown
 
 
 def test_normalize_segment_strips_operators_and_collapses_whitespace():

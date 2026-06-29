@@ -70,8 +70,9 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
     bundle, gather_status = await gather(topic=topic, tier=tcfg, api_key=api_key, segment=segment)
 
     if not bundle.records:
-        md = render_ledger(topic=topic, lens=lens, tier=tier, cards=[], quote_bank=[],
-                           fusion_result=FusionResult(), cost_usd=0.0, dropped_count=0, supplement=None)
+        md = render_ledger(topic=topic, lens=lens, tier=tier, segment=segment, cards=[],
+                           quote_bank=[], fusion_result=FusionResult(), cost_usd=0.0,
+                           dropped_count=0, supplement=None)
         return DiscoveryResult(markdown=md, cost_usd=0.0, verified_count=0, dropped_count=0,
                                session={"id": session_id, "topic": topic, "empty": True,
                                         "gather_status": gather_status})

@@ -34,6 +34,7 @@ def _sharpen_actions(*, has_gaps: bool, n_gaps: int, tier: str, segment: str,
     if verified_count == 0:
         out.append("Widen or reframe the topic — nothing survived verification.")
     rate = _drop_rate(verified_count, dropped_count)
+    # Gate is on the EXACT rate; the displayed percent is rounded for readability only.
     if tier != "deep" and rate >= 0.50:
         out.append(f"Raise tier to `deep` — thin verifiable signal (drop rate {round(rate * 100)}%).")
     return out
