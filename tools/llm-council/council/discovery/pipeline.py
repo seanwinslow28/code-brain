@@ -120,16 +120,16 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
             from council.discovery.frame_substack import frame_substack
             from council.discovery.render_substack import render_substack_ledger, render_substack_brief
             angles, quote_bank = frame_substack(verified, fr, bundle, segment=segment, today=today)
-            md = render_substack_ledger(topic=topic, tier=tier, angles=angles, quote_bank=quote_bank,
-                                        fusion_result=fr, cost_usd=cost, dropped_count=dropped,
-                                        supplement=supplement_result)
+            md = render_substack_ledger(topic=topic, tier=tier, segment=segment, angles=angles,
+                                        quote_bank=quote_bank, fusion_result=fr, cost_usd=cost,
+                                        dropped_count=dropped, supplement=supplement_result)
             brief_md = render_substack_brief(topic=topic, segment=segment, angles=angles)
             verified_count = len(angles)
         else:
             cards, quote_bank = frame_pm(verified, fr, bundle, today=today)
-            md = render_ledger(topic=topic, lens=lens, tier=tier, cards=cards, quote_bank=quote_bank,
-                               fusion_result=fr, cost_usd=cost, dropped_count=dropped,
-                               supplement=supplement_result)
+            md = render_ledger(topic=topic, lens=lens, tier=tier, segment=segment, cards=cards,
+                               quote_bank=quote_bank, fusion_result=fr, cost_usd=cost,
+                               dropped_count=dropped, supplement=supplement_result)
             verified_count = len(cards)
 
         session = {
