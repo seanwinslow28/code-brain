@@ -190,6 +190,31 @@ def _to_result(data: dict, usage: dict) -> FusionResult:
     )
 
 
+def _find_failure_reason(obj, _depth: int = 0) -> str | None:
+    """Best-effort scan for a Fusion tool `failure_reason` (all_panels_failed / insufficient_credits /
+    rate_limited / fusion_invocation_capped / unexpected_error) anywhere in a 200 payload, so a
+    tool-level hard-fail reports the real reason instead of the generic 'unparseable' message. The
+    exact path is undocumented (FUSION_SCHEMA.md captured only the success shape), so scan defensively
+    rather than hard-code a guessed path.
+    """
+    if _depth > 6 or obj is None:
+        return None
+    if isinstance(obj, dict):
+        fr = obj.get("failure_reason")
+        if isinstance(fr, str) and fr.strip():
+            return fr.strip()
+        for v in obj.values():
+            found = _find_failure_reason(v, _depth + 1)
+            if found:
+                return found
+    elif isinstance(obj, list):
+        for v in obj:
+            found = _find_failure_reason(v, _depth + 1)
+            if found:
+                return found
+    return None
+
+
 async def fuse(*, api_key: str, bundle: EvidenceBundle, tier: TierConfig, topic: str, timeout: float = 180.0) -> FusionResult:
     body = _build_body(bundle, tier, topic)
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
@@ -217,7 +242,9 @@ async def fuse(*, api_key: str, bundle: EvidenceBundle, tier: TierConfig, topic:
                 res.cost = round(total_cost, 6)        # sum across attempts (fixes retry double-bill)
                 return res
             body["messages"][0]["content"] = _JUDGE_INSTRUCTION + "\n\nReturn ONLY the JSON object."
+        reason = _find_failure_reason(payload)     # payload = last attempt; surface a tool hard-fail
+        detail = f" (Fusion tool failure_reason: {reason})" if reason else ""
         raise FusionError(
-            "Fusion judge did not return parseable pain-point JSON after retry.",
+            f"Fusion judge did not return parseable pain-point JSON after retry.{detail}",
             cost=round(total_cost, 6),
         )

@@ -48,6 +48,28 @@ async def test_empty_bundle_renders_low_signal():
     assert "Low verifiable signal" in res.markdown or "No pain points survived" in res.markdown
 
 
+def test_normalize_segment_strips_operators_and_collapses_whitespace():
+    from council.discovery.pipeline import _normalize_segment
+    # --segment is a free-text audience qualifier, NOT a query operator: strip :/parens so it can't
+    # alter provider query semantics (the github/reviews/sonar boundary), and collapse whitespace.
+    assert _normalize_segment("is:pr (mobile)") == "is pr mobile"
+    assert _normalize_segment("site:foo bar") == "site foo bar"
+    assert _normalize_segment("  nonprofits  ") == "nonprofits"
+    assert _normalize_segment("   ") == ""           # whitespace-only collapses to empty
+    assert _normalize_segment("") == ""
+
+
+@pytest.mark.asyncio
+async def test_run_discovery_normalizes_segment_before_gather():
+    captured = {}
+    async def gather_fn(**kw):
+        captured["segment"] = kw["segment"]
+        return EvidenceBundle(), {"sonar": "ok: 0 records (0 found)"}
+    await run_discovery(topic="crm", lens="pm", tier="quick", api_key="k",
+                        segment="is:pr (nonprofits)", gather_fn=gather_fn, fuse_fn=None)
+    assert captured["segment"] == "is pr nonprofits"
+
+
 @pytest.mark.asyncio
 async def test_fuse_failure_persists_session_and_raises_discoveryfailed(tmp_path):
     from council.discovery.evidence import EvidenceBundle, EvidenceRecord
