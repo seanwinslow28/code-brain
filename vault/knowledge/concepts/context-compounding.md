@@ -2,31 +2,31 @@
 title: "Context Compounding"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-bridging-via-agentic-infrastructure.md
+  - knowledge/concepts/context-compounding.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-Context compounding is a multiplicative effect where improvements in one domain's tooling or infrastructure directly enhance the quality and coherence of outputs in another, seemingly unrelated domain. This occurs because shared underlying systems—such as agentic fleets, MCP servers, and knowledge vaults—serve as common nodes that transmit refined capabilities across silos. The mechanism relies on the reuse of high-fidelity artifacts and processes, allowing gains in professional product management to compound into personal career narrative and creative production without proportional increases in effort.
+This mechanism describes a non-linear value accumulation where an agent's output quality scales with task duration and complexity, contingent on maintaining coherent state across long operational horizons. Unlike simple task completion which resets context at each step, this pattern requires the agent to iteratively refine hypotheses and build upon previous steps without losing track of the original intent. The primary bottleneck is not computational power but the model's ability to retain and synthesize information over weeks of continuous operation, preventing output degradation into noise.
 
 ## Context
 
-This matters to Sean because his professional tooling (Code-Brain, 17-agent fleet) is not just for work but actively fuels his job-hunt materials and creative outputs. By recognizing this compounding effect, he can strategically leverage his professional infrastructure to elevate his personal brand and resume artifacts, turning technical proficiency into a unique competitive advantage in the market.
+Sean's 'Deep Research Queue' and 'Creative Studio Workflows' require agents to work on open-ended tasks for days or weeks. If the system cannot compound context effectively, the output degrades into noise, making long-horizon automation impossible and forcing a return to manual, linear workflows.
 
 ## Evidence
 
-> Sean's personal knowledge vault and job-hunt materials are not separate silos but interconnected nodes in a single agentic infrastructure.
+> the kind of thing that can make progress on open ended tasks for weeks on end in the face of errors and mistakes and ambiguity.
 
-> The same tools (Code-Brain, MCP servers) used for professional product management are repurposed to manage his career narrative and creative outputs.
+> what really matters is how smart and general and sample efficient the model is during a session.
 
 ## Examples
 
-- Using the 17-agent Claude Agent SDK fleet for daily PM workflows also automates vault synthesis for job-hunt materials.
-- Improvements in vault synthesis directly enhance the quality of resume artifacts through shared agentic infrastructure.
+- A research agent building a comprehensive market analysis over 48 hours by iteratively refining its thesis.
+- A creative assistant developing a narrative arc across multiple drafting sessions without losing character consistency.
 
 ## Related Concepts
 
-[[Agentic Engineering]] [[Vault as Agent Infrastructure]]
+[[Context Management as a Bottleneck]] [[Memory Rot and Lifecycle Management]]

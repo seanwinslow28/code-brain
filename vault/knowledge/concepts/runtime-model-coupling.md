@@ -2,31 +2,33 @@
 title: "Runtime-Model Coupling"
 type: concept
 sources:
-  - 00_inbox/tickets.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-26.md
 tags: [auto-generated, phase-6]
-created: 2026-06-19
-updated: 2026-06-19
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-This pattern describes the fragile dependency between an agent's operational runtime environment and its execution schedule. When a system-level update alters the binary identity or code-signing hash of the interpreter, the operating system's launch daemon invalidates its cached state for any jobs relying on that specific binary path. This creates a silent failure mode where the agent fleet appears healthy in configuration but is completely inert because the OS refuses to bootstrap the stale cache entries.
+This invariant occurs when the logical dependency of an agent on specific hardware or network conditions is not abstracted away, causing the agent's availability to be directly tied to the physical state of a single machine. Instead of a distributed, resilient architecture where agents can migrate or fallback, the runtime model couples the agent's identity to a specific endpoint (e.g., MBP vs. Mac Mini). This coupling creates a single point of failure for critical cognitive tasks, as the agent cannot function if that specific machine is offline or asleep.
 
 ## Context
 
-Sean's entire job-hunt automation pipeline relies on precise timing and state continuity. A runtime break means missed daily notes, stalled research queues, and broken feedback loops during critical career transition periods, forcing manual intervention that breaks the 'set-and-forget' illusion of his system.
+Sean's infrastructure attempts to balance cost and capability by using different machines for different agents. However, placing the vault-synthesizer on the MacBook Pro (MBP) introduces reliability risks because laptops are not always awake or connected, unlike the Mac Mini which serves as the stable host for indexing.
 
 ## Evidence
 
-> the 2026-06-10 13:31 Homebrew python@3.13 reinstall (3.13.11→3.13.13_1) changed the interpreter cdhash, which invalidated launchd's cached LWCR for 5 jobs
+> The fleet's dependency on specific machine states conflicts with the goal of reliable, always-on operation.
 
-> every fire on 2026-06-11 was kernel-killed with OS_REASON_CODESIGNING (no daily note, no overnight knowledge loop)
+> Prioritize resolving vault-synthesizer errors to link concepts, which is vital for all three domains (creative/life-systems).
+
+> Design a clear restructuring pass: migrate all critical agent dependency from flaky machines (MBP/Alienware) to Mac Mini as the stable host.
 
 ## Examples
 
-- Five specific launchd jobs (daily-morning, meta-agent, vault-indexer, vault-synthesizer, deep-researcher) were killed simultaneously due to a single Python interpreter upgrade.
-- Recovery required manual execution of `launchctl bootout` and `bootstrap` commands to clear the stale cache and re-register the valid binary.
+- The vault-synthesizer is scheduled for 2:30 AM on the MBP, but if the laptop sleeps or loses power, the synthesis step is skipped entirely.
+- Critical machines like Alienware and ComfyUI remain offline, preventing full cross-machine agent mesh functionality.
 
 ## Related Concepts
 
-[[Automation Failure and Daily Note Disruption]] [[Infrastructure Status]]
+[[Infrastructure Status]] [[Automation Reliability]] [[Control Plane / Data Plane Split for Agent Fleets]]

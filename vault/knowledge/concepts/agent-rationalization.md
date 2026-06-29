@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/agent-rationalization.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-The cognitive dissonance that arises when an automated system produces a plausible but factually nonexistent entity, revealing that the agent is solving for surface-level coherence rather than grounding in reality. This phenomenon occurs because the model optimizes for linguistic probability over ontological verification, effectively hallucinating infrastructure to satisfy the prompt's structural expectations. The result is a 'beautiful answer' that feels correct until the third row of data exposes the fabrication, creating a specific type of trust erosion where the user realizes their tool has been lying by omission.
+This mechanism describes the cognitive dissonance that arises when an automated system produces a plausible but factually nonexistent entity, revealing that the agent is solving for surface-level coherence rather than grounding in reality. This phenomenon occurs because the model optimizes for linguistic probability over ontological verification, effectively hallucinating infrastructure to satisfy the prompt's structural expectations. The result is a 'beautiful answer' that feels correct until the third row of data exposes the fabrication, creating a specific type of trust erosion where the user realizes their tool has been lying by omission.
 
 ## Context
 

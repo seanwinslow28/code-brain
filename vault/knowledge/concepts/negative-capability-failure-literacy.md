@@ -2,31 +2,31 @@
 title: "Negative Capability / Failure Literacy"
 type: concept
 sources:
-  - knowledge/expansions/connections/agentic-engineering-signal-ai-fluency-and-portfolio-projects-for-interview-prep.md
+  - 00_inbox/The next big breakthrough will be AIs learning on the job.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-This concept establishes 'failure literacy' as a counter-signal to portfolio polish, emphasizing that serious systems people are impressed by how one articulates and manages failure. It requires documenting the specific ways a system fails, how those failures are detected, bounded, and recovered from. This shifts the narrative from what was shipped to the robustness of the error-handling architecture.
+This concept defines the capacity of an agentic system to persist through ambiguity, error, and incomplete information without premature closure or catastrophic failure. It is not merely robustness, but a specific form of resilience where the agent treats mistakes as data points for course correction rather than terminal states requiring human intervention. This capability emerges from training regimes that expose models to thousands of diverse environments where success is defined by progress over time rather than immediate correctness.
 
 ## Context
 
-Sean's vault contains numerous examples of agent failures (OAuth 401s, citation fabrications). Leveraging these as evidence of 'failure literacy' can make his portfolio stand out by showing he understands the limits of his systems.
+Sean's job hunt and creative studio rely on agents that can operate autonomously for extended periods. If his fleet lacks this literacy, any minor deviation in a long-running task (like a deep research queue or application tracking) will break the workflow, forcing manual intervention and destroying the value of automation.
 
 ## Evidence
 
-> Serious systems people are impressed by what you can say about failure, not just what you shipped.
+> Because such training will create these general problem solving skills (like how to make progress on an open ended task for weeks on end in the face of errors, mistakes, and ambiguity).
 
-> This system fails in these three ways; here is how I detect, bound, and recover from each.
+> AI agents are able to I'm going to solve more and more ambitious problems over longer and longer time spans.
 
 ## Examples
 
-- A runbook detailing the 2026-06-20 headless OAuth 401 incident.
-- An interview story bank around v3.15.0 auto-commit conflicts.
+- An agent continuing to refine a resume draft after encountering a formatting error instead of stopping.
+- A research agent adjusting its search strategy when initial sources are irrelevant rather than aborting the query.
 
 ## Related Concepts
 
-[[Infrastructure Status]] [[Agent Health]]
+[[Real-Time Problem Solving]] [[SRE Error Budget for Agents]]

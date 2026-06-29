@@ -2,10 +2,10 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/expansions/connections/agentic-engineering-and-daily-driver-agent-optimization.md
+  - knowledge/concepts/agent-fleet-observability-dashboard.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition

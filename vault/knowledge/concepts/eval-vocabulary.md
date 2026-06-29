@@ -2,15 +2,15 @@
 title: "Eval Vocabulary"
 type: concept
 sources:
-  - knowledge/expansions/eval-vocabulary.md
+  - knowledge/concepts/eval-vocabulary.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-An operational framework that shifts evaluation from static rubrics to dynamic, executable systems where datasets, evaluators, and traces form a repeatable loop. This approach treats evals as decision instruments rather than mere scoring tools, requiring explicit lineage from business intent through observable metrics to pass/fail thresholds. The system must account for Goodhart's Law by recognizing that once agents optimize against visible proxies, the eval becomes an incentive structure that can degrade judgment quality over time.
+This framework redefines evaluation as a dynamic, executable loop where datasets, evaluators, and traces form a repeatable cycle rather than static rubrics. It treats evals as decision instruments that require explicit lineage from business intent through observable metrics to pass/fail thresholds. The system must account for Goodhart's Law by recognizing that once agents optimize against visible proxies, the eval becomes an incentive structure that can degrade judgment quality over time.
 
 ## Context
 
@@ -21,8 +21,6 @@ Sean needs this to transition from describing specs as linters to building minia
 > The missing move is: business intent -> decision question -> observable metric -> eval case -> pass/fail threshold
 
 > An eval becomes dangerous when it stops measuring judgment and starts training agents to satisfy the visible proxy
-
-> Sean’s current concept describes a spec linter; these works turn it into a repeatable system
 
 ## Examples
 

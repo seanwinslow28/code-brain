@@ -2,10 +2,10 @@
 title: "Context Management as a Bottleneck"
 type: concept
 sources:
-  - knowledge/connections/the-supervision-paradox-in-creative-adoption.md
+  - knowledge/concepts/context-management-as-a-bottleneck.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition

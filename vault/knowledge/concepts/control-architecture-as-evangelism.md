@@ -2,10 +2,10 @@
 title: "Control Architecture as Evangelism"
 type: concept
 sources:
-  - knowledge/connections/local-first-infrastructure-as-professional-stance.md
+  - knowledge/concepts/control-architecture-as-evangelism.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition

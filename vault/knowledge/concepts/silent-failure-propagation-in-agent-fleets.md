@@ -2,32 +2,31 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/silent-failure-propagation-in-agent-fleets.md
+  - health/2026-06-28-lint-report.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-This pattern describes how a localized infrastructure failure, such as an offline machine or missing tool dependency, does not remain isolated but instead propagates through the agent mesh to create systemic blind spots. When a critical node like Alienware goes offline, dependent agents do not necessarily crash; they simply operate with incomplete data or reduced capability, leading to 'empty' states that appear healthy in logs but are functionally hollow. The mechanism relies on the assumption of availability: because the fleet status dashboard reports 'healthy' for individual agents, the failure is invisible until a downstream consumer attempts to use the missing resource and finds nothing there.
+Silent failure propagation occurs when an agent's output error is not immediately detected by downstream consumers, allowing the incorrect state to be treated as valid input for subsequent processes. This pattern creates a cascade effect where each dependent agent reinforces the initial error, expanding the scope of the failure across the fleet without any single agent recognizing the anomaly. The mechanism is characterized by the absence of explicit error signals, relying instead on implicit assumptions of correctness that are violated only when the accumulated errors become insurmountable.
 
 ## Context
 
-Sean's daily workflow depends on the integrity of the entire agent mesh. If the deep-researcher runs without items due to infrastructure gaps, Sean receives no error signal, only silence. This creates a false sense of progress while the actual research pipeline stalls, requiring manual intervention to detect the rot.
+In Sean's multi-agent environment, silent failures in one component (e.g., synthesizer) can corrupt the inputs for others (e.g., job hunt trackers), leading to a degradation in the quality of his entire knowledge vault without immediate notice.
 
 ## Evidence
 
-> Alienware and ComfyUI are offline, critically impairing multi-machine sync/testing.
+> contradiction (T2): knowledge/concepts/agent-health.md — contradicts context-management-as-a-bottleneck
 
-> The deep-researcher agent ran without items (`empty-queue`), indicating a gap in current research inputs.
+> contradiction (T2): knowledge/concepts/agent-health-monitoring.md — contradicts infrastructure-status-and-agent-failure
 
 ## Examples
 
-- Deep-researcher status=empty-queue · mode=queue · 6.0h ago · notes='no unchecked items'
-- Mac Mini | http://192.168.68.200:11434 | Online
-- Alienware | http://192.168.68.201:11434 | OFFLINE
+- A synthesizer error is not flagged, causing the next agent to process corrupted data.
+- Infrastructure status reports show 'healthy' despite underlying agent failures.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Infrastructure Status]] [[Automation Reliability]]
+[[Agent Health Monitoring]] [[Infrastructure Status and Agent Failure]] [[Accountability Gap]]

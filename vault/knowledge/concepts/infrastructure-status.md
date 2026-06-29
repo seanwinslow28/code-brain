@@ -2,31 +2,31 @@
 title: "Infrastructure Status"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-17.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-24.md
 tags: [auto-generated, phase-6]
-created: 2026-06-18
-updated: 2026-06-18
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-The operational state of the physical hardware layer (Mac Mini, Alienware, ComfyUI) acts as a hard constraint on agent capability, specifically determining whether agents can access local MCP servers or must rely on external APIs. When infrastructure components go offline, agents that depend on them for low-latency processing or specific tooling become functionally disabled, regardless of their software health status. This creates a binary dependency where the availability of compute resources directly dictates the scope of autonomous actions an agent can safely execute without error.
+The operational state of physical hardware nodes (Mac Mini, Alienware, MBP) and their hosted services acts as a hard constraint on the logical availability of the agent fleet. When a node goes offline, it does not merely pause tasks; it severs the specific dependency chains that rely on local inference or storage, creating silent gaps in data synchronization across the vault. This status is not just a health metric but a structural boundary condition that determines which agents can execute and which must fail gracefully.
 
 ## Context
 
-Sean's fleet relies on a mix of always-on (Mac Mini) and intermittent (Alienware/ComfyUI) hardware. The offline status of these machines blocks multi-machine workflow reliability, forcing agents to either fail or operate with reduced capabilities, which impacts the consistency of his knowledge vault.
+Sean's vault relies on a distributed infrastructure where the Mac Mini serves as the always-on host. The offline status of the Alienware machine directly blocks cross-machine parity, meaning the 'Single Source of Truth' is fragmented by physical hardware availability rather than software logic.
 
 ## Evidence
 
-> Alienware and ComfyUI environments are offline, blocking multi-machine workflow reliability.
+> Alienware machine is offline, blocking necessary cross-machine vault parity for comprehensive SSoT.
 
-> The agent fleet still shows dependency on MCP tools/APIs unavailable in headless mode.
+> ComfyUI pipeline is OFFLINE, removing a critical component from the creative workflow infrastructure.
 
 ## Examples
 
-- Mac Mini remains online at http://192.168.68.200:11434 while Alienware is OFFLINE.
-- ComfyUI at http://192.168.68.201:8188 is marked OFFLINE, preventing image generation tasks.
+- The Mac Mini remains online at http://192.168.68.200:11434 while Alienware is marked OFFLINE.
+- ComfyUI on Alienware (http://192.168.68.201:8188) is explicitly listed as OFFLINE in historical status reports.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Infrastructure Status and Agent Failure]]
+[[Agent Health Monitoring]] [[Vault as Agent Infrastructure]]

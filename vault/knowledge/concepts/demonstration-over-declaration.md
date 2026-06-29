@@ -2,10 +2,10 @@
 title: "Demonstration Over Declaration"
 type: concept
 sources:
-  - knowledge/expansions/connections/agentic-engineering-signal-ai-fluency-and-portfolio-projects-for-interview-prep.md
+  - knowledge/concepts/demonstration-over-declaration.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition

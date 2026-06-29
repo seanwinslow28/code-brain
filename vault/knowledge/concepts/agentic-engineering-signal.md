@@ -2,15 +2,15 @@
 title: "Agentic Engineering Signal"
 type: concept
 sources:
-  - knowledge/expansions/connections/ai-fluency-agentic-engineering-signal-and-portfolio-projects-for-interview-prep.md
+  - knowledge/concepts/agentic-engineering-signal.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-The Agentic Engineering Signal is not a measure of tool exposure or volume of code, but a demonstration of reflective practice under uncertainty. It requires the candidate to articulate the specific frame they initially used, the surprise that broke that frame, and the revised move they made in response. This shifts the evaluation from 'I built agents' to 'I can notice when an agent system is optimizing the wrong thing and reframe the work.' The signal proves judgment over activity by showcasing the ability to diagnose misfits between form and context.
+The Agentic Engineering Signal is a mechanism where technical competence is demonstrated not through tool exposure or code volume, but through the articulation of reflective practice under uncertainty. It requires the candidate to explicitly name the initial frame used, identify the specific surprise that broke that frame, and describe the revised move made in response. This shifts the evaluation metric from 'I built agents' to 'I can notice when an agent system is optimizing the wrong thing and reframe the work.' The signal proves judgment over activity by showcasing the ability to diagnose misfits between form and context.
 
 ## Context
 
@@ -18,7 +18,7 @@ Sean needs this signal for senior PM, AI-PM, and agentic-engineering interviews 
 
 ## Evidence
 
-> The article currently says portfolio projects should showcase agentic capability, but it lacks a theory of why one artifact is better than another.
+> The Agentic Engineering Signal is not a measure of tool exposure or volume of code, but a demonstration of reflective practice under uncertainty.
 
 > This maps directly to senior PM, AI-PM, and agentic-engineering interviews where evaluators care about judgment, not tool exposure.
 
