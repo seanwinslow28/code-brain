@@ -96,7 +96,7 @@ def propose_bet(point: CandidatePainPoint) -> ProposedBet: ...
 `classify_pain_shape` keyword-matches `title + " " + summary` (lowercased), **first match wins** in this priority order:
 1. **trust-gap** — wrong, hallucinat, inaccurate, unreliable, trust, error, made up
 2. **cost-pain** — expensive, pricing, price, cost, afford, too much, paywall
-3. **integration-gap** — integrat, api, connect, sync, export, import, compat, plugin
+3. **integration-gap** — integrat, api, connect, sync, compat, plugin (note: `export`/`import` deliberately excluded — they're ambiguous workflow verbs, e.g. "export is slow", not reliable integration signals)
 4. **workflow-friction** — slow, tedious, manual, workaround, friction, clunky, too many steps
 5. **missing-capability** — default fallback
 

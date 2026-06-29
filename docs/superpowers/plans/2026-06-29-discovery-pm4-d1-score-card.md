@@ -394,8 +394,7 @@ _SHAPE_KEYWORDS: list[tuple[str, tuple[str, ...]]] = [
     ("trust-gap", ("wrong", "hallucinat", "inaccurate", "unreliable", "trust", "error",
                    "made up", "made-up")),
     ("cost-pain", ("expensive", "pricing", "price", "cost", "afford", "too much", "paywall")),
-    ("integration-gap", ("integrat", "api", "connect", "sync", "export", "import",
-                         "compat", "plugin")),
+    ("integration-gap", ("integrat", "api", "connect", "sync", "compat", "plugin")),
     ("workflow-friction", ("slow", "tedious", "manual", "workaround", "friction",
                            "clunky", "too many steps")),
 ]
@@ -561,7 +560,7 @@ class IdeaCard:
 def _why_now(score: ScoreBreakdown) -> str:
     if not score.evidence_date:
         return "Recency unknown — verify the pain is current."
-    if score.recency >= 0.6:
+    if score.recency >= 0.5:
         return f"Fresh signal — evidence dated {score.evidence_date}."
     return f"Older signal (evidence {score.evidence_date}); confirm it's still live."
 
@@ -637,7 +636,7 @@ def _score():
     return ScoreBreakdown(composite=68.0, value=0.83, confidence=0.82, importance=0.8,
                           reach=0.71, recency=0.84, source_corroboration=0.55,
                           consensus_ratio=1.0, intensity=4, engagement_sum=340,
-                          distinct_authors=5, distinct_domains=2, evidence_date="2026-06")
+                          distinct_sources=5, distinct_domains=2, evidence_date="2026-06")
 
 
 def _cards():
@@ -684,7 +683,7 @@ Replace lines 20-27 (the `for i, c in enumerate(cards, 1):` block) with:
         L.append("- **Evidence:** " + ", ".join(c.evidence_urls)
                  + f"  ·  {s.distinct_domains} independent domain(s)")
         L.append(f"- **Size:** importance {s.intensity}/5 · reach {s.reach:.2f} "
-                 f"({s.engagement_sum} engagement, {s.distinct_authors} authors, "
+                 f"({s.engagement_sum} engagement, {s.distinct_sources} sources, "
                  f"{s.distinct_domains} domains) · recency {s.recency:.2f}")
         L.append(f"- **Confidence:** {s.confidence:.2f}× (sources {s.source_corroboration:.2f}, "
                  f"consensus {s.consensus_ratio:.2f})  →  value {s.value:.2f} × conf = {s.composite:.0f}/100")
@@ -895,7 +894,7 @@ def _angle():
         score=ScoreBreakdown(composite=72.0, value=0.8, confidence=0.9, importance=0.8,
                              reach=0.6, recency=0.7, source_corroboration=0.5,
                              consensus_ratio=1.0, intensity=4, engagement_sum=100,
-                             distinct_authors=2, distinct_domains=1, evidence_date="2026-06"),
+                             distinct_sources=2, distinct_domains=1, evidence_date="2026-06"),
     )
 ```
 
