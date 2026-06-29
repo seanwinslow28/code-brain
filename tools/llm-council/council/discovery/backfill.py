@@ -20,6 +20,7 @@ from dataclasses import dataclass, field
 
 from council.discovery.evidence import EvidenceBundle, EvidenceRecord
 from council.discovery.gather.web import _SENT, collect_web
+from council.discovery.textbudget import BRAVE_Q_MAX_CHARS, BRAVE_Q_MAX_WORDS, clamp_words_chars
 from council.discovery.verify import quote_supported_at_url
 
 
@@ -109,27 +110,25 @@ def _strip_meta_prefix(blind_spot: str) -> str:
     return cur or blind_spot.strip()
 
 
-# Brave's q-param hard limits are ~50 words / 400 chars; exceed either and the search 422s and (pre-fix)
-# crashed the whole post-FUSE pipeline (observed 2026-06-28 deep run). Clamp with margin under both.
-_MAX_QUERY_WORDS = 40
-_MAX_QUERY_CHARS = 360
+# Clamp with margin under Brave's q-param ceiling (textbudget.BRAVE_Q_MAX_*); exceeding it 422s the
+# search and (pre-fix) crashed the whole post-FUSE pipeline (observed 2026-06-28 deep run).
+_MAX_QUERY_WORDS = BRAVE_Q_MAX_WORDS - 10   # 40
+_MAX_QUERY_CHARS = BRAVE_Q_MAX_CHARS - 40   # 360
 
 
 def _supplement_query(blind_spot: str, topic: str, segment: str) -> str:
     """Solution/evidence-side query for a blind-spot gap. Deliberately NOT the complaint query.
 
     Clamped under Brave's q-param ceiling: the topic head is kept intact (most on-subject), the gap is
-    trimmed to the remaining word budget, then "2026" is appended. An unclamped topic+gap can otherwise
-    push past Brave's 50-word limit and 422 the search.
+    trimmed to the remaining word budget, then "2026" is appended. The shared `clamp_words_chars` is
+    the final safety net (also catches a topic head that alone exceeds the word ceiling).
     """
     gap = _strip_meta_prefix(blind_spot)
     head = " ".join(p for p in (topic.strip(), segment.strip()) if p)
     budget = max(4, _MAX_QUERY_WORDS - len(head.split()) - 1)   # -1 reserves a slot for "2026"
     gap = " ".join(gap.split()[:budget])
     q = " ".join(p for p in (head, gap, "2026") if p)
-    if len(q) > _MAX_QUERY_CHARS:                               # defensive: a very long topic head alone
-        q = q[:_MAX_QUERY_CHARS].rsplit(" ", 1)[0]
-    return q
+    return clamp_words_chars(q, max_words=_MAX_QUERY_WORDS, max_chars=_MAX_QUERY_CHARS)
 
 
 def _keywords(query: str) -> set[str]:

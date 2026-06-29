@@ -38,3 +38,18 @@ async def test_collect_github_includes_segment_in_query():
     await collect_github(topic="auth", segment="mobile devs", search=search)
     assert "auth" in captured["q"] and "mobile devs" in captured["q"]
     assert "is:issue" in captured["q"]
+
+
+@pytest.mark.asyncio
+async def test_collect_github_clamps_long_subject_under_q_ceiling():
+    # GitHub search q caps at ~256 chars; a long topic/--segment must be clamped so the composed
+    # query stays under it (and keeps the is:issue operator).
+    captured = {}
+    async def search(q):
+        captured["q"] = q
+        return []
+    long_topic = " ".join(["alpha"] * 80)
+    await collect_github(topic=long_topic, search=search)
+    assert len(captured["q"]) <= 256
+    assert "is:issue" in captured["q"]
+    assert "alpha" in captured["q"]
