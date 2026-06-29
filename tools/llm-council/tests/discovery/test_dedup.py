@@ -104,3 +104,38 @@ def test_dedup_injectable_similarity_fn():
     b = _vpp("words", "entirely other", urls=["https://b.com/y"])
     deduped, _ = dedup_verified([a, b], similarity_fn=lambda x, y: 1.0)   # force everything equal
     assert len(deduped) == 1
+
+
+from council.discovery.dedup import rank_gaps
+
+
+def test_rank_gaps_worst_first_most_distinct_from_found():
+    found = ["Export loss. notes vanish on conflict"]
+    gaps = [
+        "nobody covers export conflict recovery",   # close to what we found -> ranked later
+        "pricing transparency is unaddressed",      # orthogonal -> ranked first (biggest blind spot)
+    ]
+    ranked = rank_gaps(gaps, found)
+    assert ranked[0] == "pricing transparency is unaddressed"
+
+
+def test_rank_gaps_drops_near_duplicate_gaps():
+    gaps = [
+        "pricing transparency is unaddressed",
+        "transparency of pricing is not addressed",   # near-dup of the first
+        "mobile offline mode is missing",
+    ]
+    ranked = rank_gaps(gaps, [])
+    assert len(ranked) == 2
+    assert "mobile offline mode is missing" in ranked
+
+
+def test_rank_gaps_empty_inputs():
+    assert rank_gaps([], []) == []
+    assert rank_gaps(["  ", ""], []) == []          # blank gaps dropped
+
+
+def test_rank_gaps_no_reference_keeps_all_distinct():
+    gaps = ["alpha topic one", "beta subject two", "gamma matter three"]
+    ranked = rank_gaps(gaps, [])
+    assert set(ranked) == set(gaps)                 # all distinct -> all kept

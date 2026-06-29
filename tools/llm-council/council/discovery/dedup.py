@@ -138,3 +138,43 @@ def dedup_verified(
             merged_titles=[m.point.title for m in members[1:]],
         ))
     return deduped + passthrough, merges
+
+
+def rank_gaps(
+    gaps: list[str],
+    reference_texts: list[str],
+    *,
+    lambda_: float = MMR_LAMBDA,
+    threshold: float = SIM_THRESHOLD,
+    similarity_fn: SimilarityFn = pain_similarity,
+) -> list[str]:
+    """MMR diversity selection over whitespace gaps. relevance(gap) = 'blind-spot-ness' =
+    1 - max_sim(gap, reference_texts) (a gap most UNLIKE what the run surfaced ranks first).
+    A gap whose max similarity to an already-selected gap >= threshold is dropped (MMR + dedup
+    in one pass). Deterministic; ties break on original order."""
+    cleaned = [g.strip() for g in (gaps or []) if g and g.strip()]
+    if not cleaned:
+        return []
+    refs = [r for r in (reference_texts or []) if r and r.strip()]
+
+    def blindspot(g: str) -> float:
+        if not refs:
+            return 1.0
+        return 1.0 - max(similarity_fn(g, r) for r in refs)
+
+    selected: list[str] = []
+    remaining = list(enumerate(cleaned))            # (orig_idx, gap)
+    while remaining:
+        best = None                                 # (mmr_score, -orig_idx, orig_idx, gap, max_sel)
+        for oi, g in remaining:
+            max_sel = max((similarity_fn(g, s) for s in selected), default=0.0)
+            mmr = lambda_ * blindspot(g) - (1.0 - lambda_) * max_sel
+            cand = (mmr, -oi, oi, g, max_sel)
+            if best is None or cand[0] > best[0] or (cand[0] == best[0] and cand[1] > best[1]):
+                best = cand
+        _mmr, _noi, oi, g, max_sel = best
+        remaining = [(i, x) for (i, x) in remaining if i != oi]
+        if selected and max_sel >= threshold:
+            continue                                # near-duplicate of an already-selected gap -> drop
+        selected.append(g)
+    return selected
