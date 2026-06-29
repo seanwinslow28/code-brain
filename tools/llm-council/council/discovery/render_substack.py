@@ -5,9 +5,10 @@ substack-value-engine handoff brief."""
 from council.discovery.backfill import BackfillResult, supplement_section
 from council.discovery.frame_substack import PostAngle
 from council.discovery.fusion import FusionResult
+from council.discovery.whitespace import whitespace_hero
 
 
-def render_substack_ledger(*, topic: str, tier: str, angles: list[PostAngle],
+def render_substack_ledger(*, topic: str, tier: str, segment: str = "", angles: list[PostAngle],
                            quote_bank: list[str], fusion_result: FusionResult,
                            cost_usd: float, dropped_count: int,
                            supplement: "BackfillResult | None" = None) -> str:
@@ -15,6 +16,10 @@ def render_substack_ledger(*, topic: str, tier: str, angles: list[PostAngle],
     L.append(f"# Substack Idea Ledger — {topic}\n")
     L.append(f"- **Lens:** `substack`  **Tier:** `{tier}`  **Post angles:** {len(angles)}")
     L.append(f"- **Cost:** ${cost_usd:.2f}  ·  Pain points dropped by verification: {dropped_count}\n")
+
+    # D4 — the whitespace map LEADS the ledger (highest-signal section; feeds the agent backfill).
+    L.extend(whitespace_hero(blind_spots=fusion_result.blind_spots, tier=tier, segment=segment,
+                             verified_count=len(angles), dropped_count=dropped_count))
 
     L.append("## Ranked Post Angles\n")
     if not angles:
@@ -28,10 +33,7 @@ def render_substack_ledger(*, topic: str, tier: str, angles: list[PostAngle],
         L.append("- **Evidence:** " + ", ".join(a.evidence_urls))
         L.append("")
 
-    L.append("## Blind-spot / Whitespace Map\n")
-    L.extend(f"- {b}" for b in (fusion_result.blind_spots or ["_(none surfaced)_"]))
-    L.append("")
-    L.extend(supplement_section(supplement))      # Stage 5 — sits next to the gaps it answers ([] if None)
+    L.extend(supplement_section(supplement))      # Stage 5 — Web Supplement the hero links to ([] if None)
     L.append("## Quote Bank\n")
     L.extend(f"- {q}" for q in (quote_bank or ["_(empty)_"]))
     L.append("")

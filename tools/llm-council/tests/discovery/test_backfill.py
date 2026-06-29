@@ -211,7 +211,7 @@ async def test_supplement_section_and_cost_fold_pm():
     sup = await run_discovery(topic="pm tools", lens="pm", tier="standard", api_key="k",
                               gather_fn=_gather_fn, fuse_fn=_fuse_fn,
                               backfill_fn=_stub_backfill(2), supplement=True)
-    assert "Web Supplement" not in base.markdown
+    assert "## Web Supplement" not in base.markdown   # section absent (hero names it by ref)
     assert "Web Supplement (gap-fill)" in sup.markdown
     assert "tool A beats tool B" in sup.markdown
     assert "https://cmp.com/1" in sup.markdown
@@ -232,4 +232,4 @@ async def test_supplement_section_renders_for_substack_lens():
 async def test_no_supplement_produces_no_section():
     res = await run_discovery(topic="pm tools", lens="pm", tier="standard", api_key="k",
                               gather_fn=_gather_fn, fuse_fn=_fuse_fn, supplement=False)
-    assert "Web Supplement" not in res.markdown
+    assert "## Web Supplement" not in res.markdown   # section absent (hero names it by ref)
