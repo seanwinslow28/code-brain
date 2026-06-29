@@ -9,11 +9,13 @@ from council.discovery.whitespace import whitespace_hero
 def render_ledger(*, topic: str, lens: str, tier: str, segment: str = "", cards: list[IdeaCard],
                   quote_bank: list[str], fusion_result: FusionResult,
                   cost_usd: float, dropped_count: int,
-                  supplement: "BackfillResult | None" = None) -> str:
+                  supplement: "BackfillResult | None" = None, merged_count: int = 0) -> str:
     L: list[str] = []
     L.append(f"# Idea Ledger — {topic}\n")
     L.append(f"- **Lens:** `{lens}`  **Tier:** `{tier}`  **Verified ideas:** {len(cards)}")
     L.append(f"- **Cost:** ${cost_usd:.2f}  ·  Pain points dropped by verification: {dropped_count}\n")
+    if merged_count:
+        L.append(f"- Merged {merged_count} near-duplicate pain point(s) before ranking.\n")
 
     # D4 — the whitespace map LEADS the ledger (highest-signal section; feeds the agent backfill).
     L.extend(whitespace_hero(blind_spots=fusion_result.blind_spots, tier=tier, segment=segment,

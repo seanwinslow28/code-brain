@@ -17,6 +17,7 @@ from council.discovery.gather import gather_evidence
 from council.discovery.render import render_ledger
 from council.discovery.tiers import get_tier
 from council.discovery.verify import verify_pain_points
+from council.discovery.dedup import dedup_verified, rank_gaps, _point_text
 
 # Per-1k-token blended prices (USD) and per-web-query price for cost estimation.
 DISCOVERY_PRICE_IN_PER_1K = 0.003
@@ -104,6 +105,11 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
     try:
         verified = verify_pain_points(fr.pain_points, bundle)
         dropped = sum(1 for v in verified if not v.verified)
+        # E3 — collapse near-duplicate gate-survived pains (honest merge), then rank D4's gaps
+        # worst-first against what the run actually surfaced. Both reuse one lexical similarity.
+        verified, merges = dedup_verified(verified)
+        fr.blind_spots = rank_gaps(
+            fr.blind_spots, [_point_text(v.point) for v in verified if v.verified])
 
         # Stage 5 — BACKFILL (before render; needs only fr.blind_spots + bundle + topic/segment/tier, so
         # it runs once for both lenses). Its (free) web queries are priced at WEB_QUERY_PRICE and added
@@ -123,20 +129,22 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
             angles, quote_bank = frame_substack(verified, fr, bundle, segment=segment, today=today)
             md = render_substack_ledger(topic=topic, tier=tier, segment=segment, angles=angles,
                                         quote_bank=quote_bank, fusion_result=fr, cost_usd=cost,
-                                        dropped_count=dropped, supplement=supplement_result)
+                                        dropped_count=dropped, supplement=supplement_result,
+                                        merged_count=len(merges))
             brief_md = render_substack_brief(topic=topic, segment=segment, angles=angles)
             verified_count = len(angles)
         else:
             cards, quote_bank = frame_pm(verified, fr, bundle, today=today)
             md = render_ledger(topic=topic, lens=lens, tier=tier, segment=segment, cards=cards,
                                quote_bank=quote_bank, fusion_result=fr, cost_usd=cost,
-                               dropped_count=dropped, supplement=supplement_result)
+                               dropped_count=dropped, supplement=supplement_result,
+                               merged_count=len(merges))
             verified_count = len(cards)
 
         session = {
             "id": session_id, "topic": topic, "lens": lens, "tier": tier,
             "evidence_count": len(bundle.records), "verified": verified_count,
-            "dropped": dropped, "cost_usd": cost,
+            "dropped": dropped, "merged_count": len(merges), "cost_usd": cost,
             "gather_status": gather_status,
             "blind_spots": fr.blind_spots, "contradictions": fr.contradictions,
             "supplement": (None if supplement_result is None else {
