@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### fusion-discovery-council E3 — near-duplicate pain-point dedup + MMR gap ranking (2026-06-29)
+- **fusion-discovery-council E3 — near-duplicate pain-point dedup + MMR gap ranking.** New
+  `council/discovery/dedup.py` ($0/deterministic): a shared lexical token-Jaccard similarity drives
+  (a) `dedup_verified` — collapses near-duplicate gate-survived pain points via bounded
+  merge-to-canonical (bias-to-under-merge, no transitive closure), unioning evidence honestly with
+  corroboration kept keyed on distinct domains; and (b) `rank_gaps` — MMR (Carbonell & Goldstein 1998,
+  λ=0.3) ranking that orders D4's whitespace gaps most-distinct-first and drops near-duplicate gaps.
+  Wired into `pipeline.py` after VERIFY; renderers show a `merged_count` note. Design grounded in a $0
+  deep-research pass (`vault/20_projects/research/2026-06-29-mmr-dedup-similarity-research.md`). Also
+  closes two PM4 carry-forward test nits. No model cost, gate untouched.
+
 ### fusion-discovery-council — Step B: whitespace map as hero output (D4) (2026-06-29)
 - **New `council/discovery/whitespace.py`** — the blind-spot/whitespace map now **LEADS** both ledgers (pm + substack) instead of rendering last as bare `- {b}` bullets. Each gap renders as a statement + a uniform **`→ Backfill (agent WebSearch/WebFetch, solution-side)`** next-action, under a deterministic **"Sharpen the next run"** list (4 conditional rules: backfill the N gaps · add `--segment` if unset · reframe if 0 verified · raise tier when drop-rate ≥50% and not already `deep`). Shared by both renderers (DRY); `$0`/deterministic, no model call.
 - **Honesty-preserving (gate-aligned):** gaps are explicitly framed as **absence-of-evidence** (what the panel/evidence *missed*), never verified claims or confirmed opportunities; the per-gap action is always to *investigate*, never to *build*; no fabricated confidence/score is attached to a gap. The hero links the existing `## Web Supplement (gap-fill)` section by reference — `backfill.py` / `verify_supplement.py` untouched.
