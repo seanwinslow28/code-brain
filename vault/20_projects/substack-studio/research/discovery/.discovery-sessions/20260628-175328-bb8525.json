@@ -1,0 +1,34 @@
+{
+  "id": "20260628-175328-bb8525",
+  "topic": "creatives who cannot get AI tools to produce the same quality result twice and struggle to build a repeatable creative process they can trust",
+  "lens": "substack",
+  "tier": "standard",
+  "evidence_count": 44,
+  "verified": 0,
+  "dropped": 0,
+  "cost_usd": 1.5696,
+  "gather_status": {
+    "last30": "ok: 19 records (19 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 10 records (10 found)",
+    "reviews": "error: HTTPStatusError: HTTPStatusError(\"Client error '422 Unprocessable Entity' for url 'https://api.search.brave.com/res/v1/web/search?q=creatives+who+cannot+get+AI+tools+to+produce+the+same+quality+result+twice+and+struggle+to+build+a+repeatable+creative+process+they+can+trust+review+%28%221+star%22+OR+%222+star%22+OR+worst+OR+terrible+OR+disappointing+OR+avoid+OR+cancel%29+%28site%3Ag2.com+OR+site%3Acapterra.com+OR+site%3Atrustpilot.com+OR+site%3Aproducthunt.com+OR+site%3Aapps.apple.com+OR+site%3Aplay.google.com%29&count=8'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422\")",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "No evidence was provided (no Reddit, X, YouTube, Perplexity Sonar aggregations, or web articles, and no quotes or URLs). The entire topic is therefore uncovered.",
+    "Cannot assess non-repeatable outputs from identical prompts without source quotes.",
+    "Cannot assess model drift / silent updates without source quotes.",
+    "Cannot assess character/style/voice consistency without source quotes.",
+    "Cannot assess loss of creative control across multi-step workflows without source quotes.",
+    "Cannot assess workflow rework, manual checking, or cooldowns without source quotes.",
+    "Cannot assess demand for version-stable models or changelogs without source quotes.",
+    "Cannot assess the 'prompting vs. building factories' theme without source quotes."
+  ],
+  "contradictions": [],
+  "supplement": {
+    "skipped": false,
+    "queries_run": 4,
+    "filled": 4,
+    "items": 4
+  }
+}

@@ -1,6 +1,7 @@
 # tests/discovery/test_backfill.py
 """Stage 5 — BACKFILL (web-supplement gap-fill). Credential-free: inject search=/fetch=."""
 
+import httpx
 import pytest
 
 from council.discovery.backfill import (
@@ -34,6 +35,19 @@ def test_supplement_query_strips_meta_prefix_and_targets_solution():
 def test_supplement_query_handles_bare_no_and_little():
     assert not _supplement_query("Little data on latency", "x", "").lower().startswith("little")
     assert not _supplement_query("No tool head-to-head", "x", "").lower().startswith("no ")
+
+
+def test_supplement_query_clamped_under_brave_limits():
+    # Verbatim repro of the 2026-06-28 deep-run 422: this exact topic + blind-spot bullet produced a
+    # derived query past Brave's 50-word ceiling (chars were fine — the WORD count is what 422'd).
+    real_topic = ("skeptical creatives who tried AI tools, got generic soulless results, and quit "
+                  "— why they abandoned it and what would make them give it another chance")
+    real_gap = ("The evidence contains few direct first-person interviews with skeptical creatives "
+                "who tried AI, quit, and then described precise conditions that would make them return.")
+    q = _supplement_query(real_gap, topic=real_topic, segment="")
+    assert len(q.split()) <= 50            # Brave's hard word ceiling — the 422 trigger
+    assert len(q) <= 400                   # Brave's hard char ceiling
+    assert "skeptical creatives" in q      # topic head preserved so the query stays on-subject
 
 
 # --- the shared verification gate (forward-compat E1 chokepoint) -------------
@@ -91,6 +105,34 @@ async def test_no_web_key_skips_without_crash():
     assert "no web-search key" in res.skip_reason.lower()
     assert res.queries_run == 0
     assert res.items == []
+
+
+@pytest.mark.asyncio
+async def test_search_error_degrades_gap_to_still_open_without_crashing():
+    # Repro of the 2026-06-28 deep-run crash: a Brave 422 raised inside collect_web must NOT
+    # propagate and kill the whole pipeline (SKILL.md §8 "supplement never crashes"). The errored
+    # gap degrades to "still open"; later gaps still process; the failed query isn't cost-counted.
+    calls: list[str] = []
+
+    async def search(q):
+        calls.append(q)
+        if len(calls) == 1:
+            req = httpx.Request("GET", "https://api.search.brave.com/res/v1/web/search")
+            raise httpx.HTTPStatusError("422 Unprocessable Entity", request=req,
+                                        response=httpx.Response(422, request=req))
+        return [{"title": "Cmp", "url": "https://blog.com/cmp", "published": "", "_text": _CMP_TEXT}]
+
+    res = await run_backfill(
+        blind_spots=["No head-to-head comparison of coding assistants",
+                     "No comparison of coding assistants on accuracy"],
+        bundle=EvidenceBundle(), topic="coding assistants", segment="",
+        tier=get_tier("standard"), search=search, fetch=None)
+    assert res.skipped is False
+    assert len(res.items) == 2
+    assert res.items[0].status == "still open"     # the gap whose search 422'd
+    assert res.items[0].findings == []
+    assert res.items[1].status == "filled"         # pipeline continued to the next gap
+    assert res.queries_run == 1                    # only the successful query is cost-counted
 
 
 @pytest.mark.asyncio

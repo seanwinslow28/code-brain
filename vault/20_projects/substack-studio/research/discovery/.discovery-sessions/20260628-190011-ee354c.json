@@ -1,0 +1,36 @@
+{
+  "id": "20260628-190011-ee354c",
+  "topic": "artists, writers, and designers who say AI is a slot machine \u2014 the same prompt never gives the same result twice \u2014 and who have stopped chasing prompts in favor of building a repeatable system they can trust",
+  "lens": "substack",
+  "tier": "standard",
+  "evidence_count": 46,
+  "verified": 5,
+  "dropped": 1,
+  "cost_usd": 1.5541,
+  "gather_status": {
+    "last30": "ok: 25 records (25 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 6 records (6 found)",
+    "reviews": "error: HTTPStatusError: HTTPStatusError(\"Client error '422 Unprocessable Entity' for url 'https://api.search.brave.com/res/v1/web/search?q=artists%2C+writers%2C+and+designers+who+say+AI+is+a+slot+machine+%E2%80%94+the+same+prompt+never+gives+the+same+result+twice+%E2%80%94+and+who+have+stopped+chasing+prompts+in+favor+of+building+a+repeatable+system+they+can+trust+creative+professionals+review+%28%221+star%22+OR+%222+star%22+OR+worst+OR+terrible+OR+disappointing+OR+avoid+OR+cancel%29+%28site%3Ag2.com+OR+site%3Acapterra.com+OR+site%3Atrustpilot.com+OR+site%3Aproducthunt.com+OR+site%3Aapps.apple.com+OR+site%3Aplay.google.com%29&count=8'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422\")",
+    "github": "error: HTTPStatusError: HTTPStatusError(\"Client error '422 Unprocessable Entity' for url 'https://api.github.com/search/issues?q=artists%2C+writers%2C+and+designers+who+say+AI+is+a+slot+machine+%E2%80%94+the+same+prompt+never+gives+the+same+result+twice+%E2%80%94+and+who+have+stopped+chasing+prompts+in+favor+of+building+a+repeatable+system+they+can+trust+creative+professionals+in%3Atitle%2Cbody+is%3Aissue&sort=reactions&order=desc&per_page=12'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422\")"
+  },
+  "blind_spots": [
+    "Almost all evidence reflects artists/writers/designers hostile or skeptical toward AI; no voices from creators who successfully built repeatable systems and are satisfied, so the 'stopped chasing prompts in favor of building systems they can trust' behavior is asserted as a need but not documented in practice.",
+    "No quantitative data on how widespread the slot-machine frustration is \u2014 claims rely on 'a growing number' / 'many' without measured prevalence.",
+    "Much of the on-topic detail comes from a single synthesizer (Perplexity Sonar) paraphrasing or quoting sources; primary verbatim user complaints from named professionals are thin.",
+    "No evidence on specific tools, model versions, or whether features like fixed seeds already partially solve the problem \u2014 the pain is described generically.",
+    "Rights/licensing concerns ('rights-respecting') surface in the evidence but are entangled with the reproducibility pain and not separately explored as a workflow blocker.",
+    "Little on the 'win over AI' / overcoming the problem angle (the r/graphic_design row is a bare headline with no detail), leaving solution-side validation unsupported."
+  ],
+  "contradictions": [
+    "The slot-machine randomness is framed as a pain/loss of craft by most sources, yet some community voices frame the same unpredictability as a thrill/'BIG HIT' and an addictive draw \u2014 pain for professionals but reward for casual users.",
+    "Creative Bloq argues the generic, prompt-limited nature of AI works in artists' favour (a positive), contradicting the dominant view that opacity and genericness are unmet needs/pains.",
+    "Ruben Hassid's framing leans into 'overload & addiction' and evolutionary variation ('thousands of variations \u2014 most fail, few survive') as a workflow he engages with, somewhat at odds with peers who reject prompt-chasing entirely in favor of deterministic systems."
+  ],
+  "supplement": {
+    "skipped": false,
+    "queries_run": 4,
+    "filled": 2,
+    "items": 4
+  }
+}

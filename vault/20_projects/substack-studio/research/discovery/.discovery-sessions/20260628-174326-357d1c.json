@@ -1,0 +1,35 @@
+{
+  "id": "20260628-174326-357d1c",
+  "topic": "creative professionals who spend more time fixing, re-rolling, and cleaning up AI-generated output than the tools actually save them",
+  "lens": "substack",
+  "tier": "standard",
+  "evidence_count": 32,
+  "verified": 1,
+  "dropped": 5,
+  "cost_usd": 1.3254,
+  "gather_status": {
+    "last30": "ok: 14 records (14 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 3 records (3 found)",
+    "reviews": "ok: 0 records (0 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "Almost all quantified evidence centers on developers and generic 'white-collar/knowledge workers'; there is little direct, first-person evidence from non-coding creative professionals (designers, illustrators, video/image generators, writers) despite the topic's framing around creatives.",
+    "The Nyrofomo source on prompting and the model-comparison evidence (Veo, Seedance, Kling, Runway) touches the visual/video-generation segment, but no quantified cleanup-time data exists for image/video creators specifically.",
+    "No evidence isolates which specific task types or tools produce the worst fixing-to-savings ratio for creative (non-code) output.",
+    "Survey figures are partially fragmented in the evidence (e.g., '6.' and '4 hours' appear split), so exact aggregate cleanup-time numbers cannot be fully reconstructed from the provided snippets.",
+    "No evidence quantifies how often re-rolling eventually succeeds versus the task being abandoned or done manually."
+  ],
+  "contradictions": [
+    "Whether the burden is the tool's fault or the user's: cleanup-time evidence frames AI output as inherently low-quality 'workslop', while pooya.blog, Pragmatic Engineer, and Nyrofomo attribute failures to user skill, prompting, and context discipline.",
+    "Productivity is described as net-negative or gain-erasing in most sources (e.g., Copilot debugging quote, 'erasing any productivity gains'), yet the Pragmatic Engineer source notes some users derive '10x more productivity benefit', indicating highly variable rather than uniformly negative outcomes.",
+    "Some r/aiwars items frame AI positively or as not killing creativity/jobs, which sits in tension with the cleanup-burden and burnout framing in the survey-based sources; however these r/aiwars items contain no direct evidence of the fixing/re-rolling pain point itself."
+  ],
+  "supplement": {
+    "skipped": false,
+    "queries_run": 4,
+    "filled": 4,
+    "items": 4
+  }
+}

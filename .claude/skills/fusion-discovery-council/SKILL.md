@@ -59,9 +59,9 @@ The pipeline runs in a fixed order; each stage feeds the next.
 
 3. **VERIFY** — The **anti-fabrication gate** (see §4). Every candidate pain point must trace to a quote whose URL exists in the gathered evidence. Untraceable candidates are dropped or marked `unverified` — never quietly kept.
 
-4. **FRAME** — Apply the lens to each *verified* pain point: `pm` → ranked, evidence-linked opportunity cards; `substack` → ranked post angles + a substack-value-engine handoff brief.
+4. **FRAME** — Apply the lens to each *verified* pain point: `pm` → ranked, evidence-linked opportunity cards; `substack` → ranked post angles + a substack-value-engine handoff brief. The CLI then renders the **idea ledger** markdown (+ the brief for substack) and exits — this is its final output.
 
-5. **BACKFILL** — The pipeline web-searches its own blind-spot map so no gap is left un-chased. For each blind-spot bullet (tier-capped: `quick` 2 / `standard` 4 / `deep` 6, one query each) it derives a **solution/evidence-side** query (not a complaint query), reuses the existing Stage-1 web collector (Exa/Brave) with a permissive verbatim extractor, URL-anchors each finding through the **same** gate as §6, and appends a clearly-separate **Web Supplement (gap-fill)** section to the ledger. A gap it can't fill is rendered "still open — not filled," never papered over. Default-on (`--supplement`); the web findings are kept OUT of the panel-ranked list (they never bypass FUSE consensus) and labeled **gap-fill LEADS, not consensus-verified claims** (see §6). Then render the **idea ledger** markdown (+ the brief for substack).
+5. **BACKFILL** *(agent-layer; the default flow)* — After the CLI writes the ledger, **the orchestrating Claude Code session backfills the blind-spot map itself** using its own `WebSearch`/`WebFetch` tools (on Sean's Anthropic subscription — **$0 marginal API**). It reads each ledger's `## Blind-spot / Whitespace Map`, runs a **solution/evidence-side** search for each gap (not a complaint query), reads the candidate pages, and appends a clearly-separate `## Web Supplement (gap-fill)` section. An agent search→read→synthesize vets **relevance natively** (the deterministic in-CLI version couldn't), so the leads are higher-quality. Same anti-fabrication discipline as §6: **every item is a verbatim quote from a real fetched URL**, or it's rendered `still open — not filled` — never papered over. The supplement stays **OUT** of the panel-ranked list (it never bypasses FUSE consensus) and is labeled **gap-fill LEADS, not consensus-verified claims**. The full single-session recipe is §4.1; the `verify_supplement` backstop (§6) re-checks every quote is verbatim. *(Opt-in `--supplement` runs a deterministic in-CLI Exa/Brave version of this stage for the future headless/no-agent path — default **off**; see §3.)*
 
 > The extended collectors are LIVE and tier-gated (above): review sites + competitor-weakness mining and GitHub Issues on `standard`/`deep`, Stack Exchange Q&A on `deep`. NOT included — do **not** claim them: demand-intent (autocomplete/PAA — produces queries, not URL-anchored quotes, so the gate would drop them), trend-velocity feeds (no clean free API), and Quora (anti-scraping). `quick` stays lean (last30days + Sonar + web). The `last30days` backbone contributes Reddit/HN (keyless); HackerNews can come back empty on some runs and degrades safely.
 
@@ -76,10 +76,10 @@ The pipeline runs in a fixed order; each stage feeds the next.
 --output   <ABSOLUTE PATH>   (required)
 --force    bypass per-run cap only (daily/monthly still enforced)
 --yes      auto-confirm deep-tier cost prompt
---supplement / --no-supplement   Stage 5 BACKFILL: web-search the blind-spot map and append a gap-fill section (default: on)
+--supplement / --no-supplement   Opt-in in-CLI Stage 5 BACKFILL (Exa/Brave), for the headless/no-agent path (default: OFF)
 ```
 
-**`--supplement` / `--no-supplement`** — Stage 5 BACKFILL (default **on**, so every run self-fills its blind spots). Web-searches each blind-spot bullet and appends the **Web Supplement (gap-fill)** section. `--no-supplement` skips the stage entirely and reproduces the exact pre-Stage-5 ledger. Requires `EXA_API_KEY` or `BRAVE_API_KEY` — with neither set the stage degrades to a "skipped" note (see §8), never a crash. Adds only the tier-capped web-query cost (see §5).
+**`--supplement` / `--no-supplement`** — **Default OFF.** In a normal Claude Code session, leave it off and let the agent do BACKFILL via `WebSearch`/`WebFetch` ($0, higher-quality, relevance-vetted — see §2 stage 5 + §4.1). `--supplement` turns on the **deterministic in-CLI Exa/Brave** version of the stage, which exists for a **future headless / autonomous mode with no agent** to drive the web tools. It requires `EXA_API_KEY` or `BRAVE_API_KEY` — with neither set it degrades to a "skipped" note (see §8), never a crash — and it adds the tier-capped web-query cost (see §5). It uses deterministic keyword extraction (relevance: mixed), so prefer the agent flow whenever an agent is in the loop.
 
 **`--lens`** — `pm` (default) frames verified pain into ranked PM opportunities. `substack` reframes the same verified pain into ranked post angles and additionally writes a **handoff brief** consumable by the `substack-value-engine` skill (chain: substack-value-engine → storytelling-architecture → writing-voice-modes → writing-critique → writing-humanity-pass). The brief pre-fills the Value-Gate Itch + Transfer + verbatim evidence and leaves the Solution slot for you.
 
@@ -133,6 +133,36 @@ vault/20_projects/research/<YYYY-MM-DD>-<topic-slug>-substack-brief.md
 
 Always pass this as an **absolute** path under `/Users/seanwinslow/Code-Brain/code-brain/`.
 
+### 4.1 Single-session agent-driven flow (the standard run)
+
+One Claude Code session does it all. The council CLI is the paid part; the BACKFILL is the agent
+using its own web tools on the subscription ($0). The copy-paste template lives at
+[`references/run-template.md`](references/run-template.md) — model new runs on it.
+
+1. **Run the council CLI** (the §4 invocation) for each topic. It writes the ledger (+ brief for
+   substack) and prints `Verified ideas: N · dropped: M · $X.XX`. *Leave `--supplement` off.*
+2. **Read the blind-spot map.** Open each ledger and read its `## Blind-spot / Whitespace Map`.
+3. **Backfill each gap with your own web tools.** For every gap bullet, run `WebSearch` on the
+   **solution/evidence side** (what would fill the gap, not a complaint query), `WebFetch` the
+   most promising results, and pull a **verbatim quote** that actually speaks to the gap. You are
+   the relevance filter — only keep a quote if it genuinely addresses the gap.
+4. **Append the `## Web Supplement (gap-fill)` section** to the ledger, one `### <gap>` subsection
+   per gap. Format each finding as a single line: `- "<verbatim quote>" — <URL>`. A gap you can't
+   fill honestly is `- still open — not filled`. Lead the section with the standard LEADS caveat
+   (it's leads, not FUSE-consensus claims). **Never fabricate or paraphrase a quote into looking
+   sourced** — that breaks the §6 gate.
+5. **Run the backstop** to prove every quote is verbatim at its URL:
+   ```bash
+   cd /Users/seanwinslow/Code-Brain/code-brain/tools/llm-council && \
+     uv run python -m council.discovery.verify_supplement <LEDGER ABSOLUTE PATH>
+   ```
+   Exit 0 = all quotes verbatim-supported. Exit 1 = at least one isn't — **demote each flagged
+   item to `still open — not filled`** and re-run until clean.
+6. **Report back** verified/dropped counts, gaps filled vs still-open, and the backstop result.
+
+This is subscription-covered ($0 API) and vets relevance natively — strictly better than the
+deterministic in-CLI `--supplement` path, which exists only for a future no-agent headless mode.
+
 ---
 
 ## 5. Cost discipline
@@ -142,7 +172,7 @@ Always pass this as an **absolute** path under `/Users/seanwinslow/Code-Brain/co
 - **The per-run cap gates the pre-flight ESTIMATE (`0.6 × cap`), not actual spend.** A web-tool-call-heavy topic can *overshoot* its per-run cap — observed 2026-06-21: a `standard` run cost **$2.74** vs the $1.50 cap. Cost is dominated by the panel's web-tool calls and is **high-variance by topic**, so don't assume `deep` ⟹ most expensive (a deep run the same day cost $0.99). **The $10/day cap is the real guardrail** — it's checked against *actual* accumulated spend, so it can't be overshot the same way. Watch the daily total when running several topics in a session.
 - Discovery's own daily/monthly caps: **$10/day, $50/month**. These are independent of the council's caps but tracked in the **same** spend file — discovery rows are tagged `tool="discovery"` so the two tools never cross-deplete each other while staying in one coherent ledger (enforced bidirectionally via per-tool pre-flight as of Phase 2).
 - Recorded spend uses OpenRouter's authoritative `usage.cost` when available, falling back to a conservative token estimate.
-- **Stage 5 BACKFILL is cheap and bounded.** It reuses the free web collector (Exa/Brave on your own keys → $0 on the OpenRouter ledger) and makes **no** model call. Its web queries are priced into recorded spend at the standard per-web-query rate, tier-capped to 2 / 4 / 6 queries (`quick` / `standard` / `deep`) — i.e. at most ~$0.07 added on `deep`. The $10/day cap still governs.
+- **Stage 5 BACKFILL is $0 in the default (agent-driven) flow.** The agent uses `WebSearch`/`WebFetch` on Sean's Anthropic subscription — no OpenRouter spend, nothing added to the discovery ledger. The opt-in in-CLI `--supplement` path (headless/no-agent) reuses the free Exa/Brave collector on your own keys ($0 on the OpenRouter ledger) and makes **no** model call; its web queries are priced into recorded spend at the standard per-web-query rate, tier-capped to 2 / 4 / 6 queries (`quick` / `standard` / `deep`) — at most ~$0.07 on `deep`. Either way the $10/day cap still governs the paid council stages.
 - `deep` tier **confirms the cost interactively before running** (pass `--yes` only when Sean has authorized it for this run).
 - `--force` bypasses **only the per-run cap** — the daily and monthly caps are still enforced. Use it only when Sean explicitly authorizes it for this query.
 - After a successful run the CLI records actual spend to `/Users/seanwinslow/Code-Brain/code-brain/vault/health/council-spend-{YYYY-MM-DD}.json` (canonical — same file across all repos, so daily/monthly caps stay coherent).
@@ -162,7 +192,7 @@ This is the heart of the skill and is **not** softened under any circumstance.
 - Every pain point in the ledger must trace to a **quote whose URL exists in the gathered evidence bundle**.
 - A candidate the panel proposes but that cannot be traced to a real fetched URL is **dropped** or marked `unverified` — never paraphrased into the ledger as if it were sourced, never "rounded up" to a real claim.
 - This is what separates discovery from a model hallucinating plausible-sounding pain. If the evidence isn't there, the idea doesn't ship.
-- **The gate also governs Stage 5 BACKFILL.** Supplement findings route through the *same* shared verification helper (`quote_supported_at_url` in `verify.py`), so a supplement item ships only if its quote appears verbatim at a real fetched URL. Because the supplement extracts quotes deterministically from the fetched page, it is **safe by construction** — it cannot fabricate. Its remaining, un-vetted risk is **relevance** (a keyword-matched sentence could be on-keyword but off-topic), so the Web Supplement section is explicitly labeled **gap-fill LEADS, not consensus-verified claims**. Roadmap item E1 upgrades that one shared helper from substring containment to atomic-claim + NLI entailment; when it lands, both VERIFY and BACKFILL inherit relevance-vetting for free.
+- **The gate also governs Stage 5 BACKFILL — now split across the agent + a code backstop.** The agent-driven supplement (§4.1) is held to the same standard by two complementary checks: **(1) relevance** — the agent reads each page and only keeps a quote that genuinely speaks to the gap (the deterministic in-CLI version couldn't do this; it's the agent's native strength); **(2) verbatim-ness** — the `verify_supplement` backstop (`python -m council.discovery.verify_supplement <ledger>`) re-fetches every cited URL and confirms the quote appears there *verbatim*, routed through the **same** shared primitive (`quote_supported_at_url` in `verify.py`) as the core VERIFY stage. A quote that isn't verbatim at its URL is demoted to `still open — not filled`. The Web Supplement section is still labeled **gap-fill LEADS, not consensus-verified claims** (it never bypassed FUSE). Roadmap item E1 upgrades the shared primitive from substring containment to atomic-claim + NLI entailment for the **core VERIFY stage**; the agent backfill already vets relevance natively, so E1 is now a core-gate concern, not a backfill one.
 
 When reporting back to Sean, always surface the **dropped/unverified count** alongside the verified ideas — a high drop rate is signal about evidence thinness, not something to hide. Also point Sean at the ledger's **blind-spot / whitespace map** — the signature cross-model output that audits what the evidence and the panel *missed* (e.g. "the topic returned generic AI-coding pain, not studio-2D specifics"). It is often the highest-signal section and tells you how to sharpen the next run (reframe the topic, add `--segment`, or raise the tier).
 
@@ -180,4 +210,5 @@ The skill **writes** the idea ledger to `vault/20_projects/research/...` and sto
 - **Discovery failed at fuse** (exit 3) — the Fusion call failed (after SSE-padding-safe decode + one reprompt retry). The CLI **records the spend OpenRouter actually billed** (tagged `tool="discovery"`), **persists the session JSON** with per-collector `gather_status`, and echoes that status — so a failed run is diagnosable and never silently free. No ledger is written.
 - **Discovery failed (exit 3, pre-fuse)** — a gather/setup error before any billable call; no spend recorded.
 - **High drop rate** — the pipeline ran but most candidates failed the verification gate. This is a *valid* outcome (thin evidence), not a bug. Report the verified vs dropped counts to Sean honestly.
-- **Supplement skipped (no web-search key)** — Stage 5 needs `EXA_API_KEY` or `BRAVE_API_KEY`. With neither set, the BACKFILL stage degrades gracefully: it runs no queries, costs nothing, and the ledger's Web Supplement section reads `supplement skipped: no web-search key configured`. The rest of the run is unaffected — it never crashes. (Run with `--no-supplement` to drop the section entirely.)
+- **Supplement skipped (no web-search key)** — *opt-in `--supplement` path only.* The in-CLI Stage 5 needs `EXA_API_KEY` or `BRAVE_API_KEY`. With neither set it degrades gracefully: no queries, no cost, and the ledger's Web Supplement section reads `supplement skipped: no web-search key configured` — never a crash. The default agent-driven flow (§4.1) has no key dependency: it uses the agent's own `WebSearch`/`WebFetch`.
+- **Agent backfill: a gap with no honest fill** — in the §4.1 flow, if the agent can't find a verbatim quote that genuinely addresses a gap, the gap is written `still open — not filled`. That is the correct outcome (honest whitespace), not a failure. The `verify_supplement` backstop exit 1 likewise means *demote, don't paper over* — never invent a quote to clear it.
