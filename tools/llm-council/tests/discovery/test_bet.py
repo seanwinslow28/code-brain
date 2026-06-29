@@ -31,3 +31,15 @@ def test_propose_bet_returns_stable_populated_struct():
 def test_default_fallback_is_missing_capability():
     bet = propose_bet(_pt("Something vague", "no matching keywords here"))
     assert bet.shape == "missing-capability"
+
+
+def test_every_shape_has_a_bet_entry():
+    from council.discovery.bet import _SHAPE_KEYWORDS, _SHAPE_BETS
+    shapes = {s for s, _ in _SHAPE_KEYWORDS} | {"missing-capability"}
+    assert shapes == set(_SHAPE_BETS), "every classifiable shape must have a bet"
+
+
+def test_cost_pain_bet_is_about_pricing():
+    bet = propose_bet(_pt("Too expensive for solo devs"))
+    assert bet.shape == "cost-pain"
+    assert "pric" in bet.cheapest_test.lower() or "pay" in bet.cheapest_test.lower()
