@@ -2,7 +2,7 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - knowledge/concepts/automation-reliability.md
+  - knowledge/connections/the-tension-between-eval-rigor-and-automation-simplicity.md
 tags: [auto-generated, phase-6]
 created: 2026-06-29
 updated: 2026-06-29
@@ -10,17 +10,17 @@ updated: 2026-06-29
 
 ## Definition
 
-Automation Reliability is the structural property of a system where deterministic pipelines actively prevent non-determinism from compounding across sequential steps. This mechanism relies on minimizing the failure surface area by rejecting complex evaluation layers when simple, predictable outcomes are sufficient for the task at hand. When this reliability is compromised, debugging becomes impossible because the system behaves differently in every run, creating an invisible dependency chain that masks the root cause of failure.
+Automation reliability is defined by the stability of outputs across repeated executions, where non-determinism compounding across steps creates debugging challenges that are fundamentally different from static code bugs. When agents behave differently every run, the system loses its deterministic nature, making it impossible to establish a baseline for performance or trust. This instability arises not from logic errors but from the inherent variance in model outputs and context window fluctuations.
 
 ## Context
 
-Sean's daily drive agents must function without silent failures that disrupt his morning brief or status updates, making reliability a core infrastructure concern rather than a mere feature request. If the automation layer introduces noise, Sean loses the ability to trust the signal, forcing him to manually verify outputs that should be automatic.
+Sean's framework demands high-fidelity scoring for agentic systems, but many tasks are better served by deterministic pipelines that bypass the need for such rigorous evaluation entirely. The tension lies in balancing the need for reliable automation with the complexity of managing non-deterministic agents.
 
 ## Evidence
 
 > non-determinism compounding across steps, debugging a thing that behaves differently every run
 
-> The tension lies between the chaotic, asynchronous nature of agent interactions and the need for deterministic, consistent outcomes in Sean's product architectures.
+> The core tension lies in the conflict between Sean's need for rigorous, automated feedback loops (instrumentation) and the inherent ambiguity of human-centric evaluation criteria
 
 ## Examples
 
@@ -28,4 +28,4 @@ Sean's daily drive agents must function without silent failures that disrupt his
 
 ## Related Concepts
 
-[[Eval Vocabulary]] [[Silent Failure Propagation in Agent Fleets]]
+[[Eval Vocabulary]] [[Intent Engineering]]

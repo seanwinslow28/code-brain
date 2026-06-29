@@ -2,32 +2,32 @@
 title: "The Tension Between Protocol Instrumentation and Regulatory Ambiguity"
 type: connection
 connects:
-  - Context Compounding
-  - Token Waste
-  - MCP Server Hardening
-created: 2026-06-23
-updated: 2026-06-23
+  - Resilience Engineering: Work-as-Imagined vs Work-as-Done
+  - Control Plane / Data Plane Split for Agent Fleets
+  - Silent Failure Propagation in Agent Fleets
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Synthesis
 
-Sean's adoption of specialized tools like Grill Me and Firecrawl reveals a tension between the desire for precise, instrumented workflows and the ambiguity of general-purpose agent protocols. While MCPs offer a standardized way to connect tools, Sean's preference for CLIs and specific skills suggests that current protocol standards are too loose to enforce the rigorous context extraction he requires. This forces him to build custom 'skills' as a workaround for the lack of standardization in agentic planning.
+Sean faces a tension where his desire for rigorous agent observability (instrumentation) clashes with the ambiguity of human judgment in creative and job-hunt contexts (regulatory). The mechanism here is that strict protocols fail when they cannot account for the 'work-as-done,' while loose protocols lead to silent failure propagation. The consequence is that Sean must design 'degraded modes' where agents explicitly signal uncertainty rather than masking it with confident but incorrect outputs.
 
 ## Threads
 
-### [[Context Compounding]]
+### [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
 
-> Grill Me relentlessly interviews you to extract context *before* building; checkpoints answers to docs.
+> implementation architecture fails when it optimizes the diagram instead of the practiced workaround
 
-### [[Token Waste]]
+### [[Control Plane / Data Plane Split for Agent Fleets]]
 
-> The loudest efficiency theme is 'CLIs beat MCPs' on token cost.
+> where is the coordination surface, who notices drift, what happens when automation is confidently wrong, and how does control transfer back to the human
 
-### [[MCP Server Hardening]]
+### [[Silent Failure Propagation in Agent Fleets]]
 
-> Research target: which pattern is more common in published MCP servers, and is there a published 'MCP best practices' doc (from Anthropic, MCP working group, or community) that takes a position?
+> When a synthesizer fails silently overnight, the morning brief inherits stale context, and the user notices the staleness before the brief flags the failure
 
 ## Implications
 
-- Sean may need to contribute to or define MCP best practices to ensure his custom skills can be standardized.
-- The preference for CLIs over MCPs suggests a potential fragmentation in his tooling stack as he optimizes for cost and precision.
+- Sean should prioritize 'degraded modes' in his agent specs over perfect automation, ensuring agents pause and ask for clarification when they detect drift from the work-as-imagined path.
+- His portfolio projects must demonstrate how he handles 'confidently wrong' automation, showing interviewers that he values reliability under surprise over raw throughput.

@@ -2,30 +2,31 @@
 title: "Benchmarking Artifact"
 type: concept
 sources:
-  - knowledge/connections/the-latency-accuracy-trade-off-in-heterogeneous-fleets.md
+  - knowledge/expansions/connections/open-source-contributions-creative-studio-workflows-through-automation.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-Evaluation methodologies often introduce bias by favoring established models or ignoring the specific architectural nuances of newer, locally-runnable variants. This artifact arises when benchmarks do not account for the unique prompt-engineering requirements or hardware-specific optimizations of new models, leading to inaccurate assessments of their true utility. Recognizing this artifact is crucial for avoiding false negatives in model selection and ensuring that evaluations reflect real-world performance rather than methodological flaws.
+A structured evaluation framework that anchors creative model selection on reproducible prompt suites and failure class taxonomies rather than subjective preference. This mechanism transforms vague taste judgments into executable decision authority by defining locked prompts, acceptance gates, and specific rejection criteria for each pipeline iteration. It shifts the artifact from a static catalog of capabilities to a dynamic instrument for measuring performance envelopes across diverse generative models.
 
 ## Context
 
-Sean's prior synthesis methodology was biased against newer locally-runnable models, leading to incorrect conclusions about their effectiveness. By identifying this artifact, he can adjust his evaluation criteria to account for these biases and make more informed decisions about model deployment.
+Sean needs to demonstrate production-grade stewardship in his portfolio rather than mere automation enthusiasm. By creating a tangible benchmarking artifact, he provides AI-PM and engineering reviewers with verifiable evidence of his ability to standardize creative output quality across different model providers and local pipelines.
 
 ## Evidence
 
-> Topic 19 §Correction (2026-05-21) flagged that the prior synthesis methodology was biased against newer locally-runnable models.
+> The missing move is a prompt-suite + rubric Sean can rerun across Nano Banana, FLUX, SDXL forks, OpenRouter routes, and local pipelines.
 
-> The decision to add gemma4:26b to Tier C is driven by the specific balance of active parameters and VRAM, suggesting that future model additions must be evaluated against the specific memory bandwidth of the target tier rather than just parameter count.
+> For each creative use case, define 12 locked prompts, 4 failure classes, and one acceptance gate.
 
 ## Examples
 
-- Prior synthesis methodology was biased against newer locally-runnable models, leading to incorrect conclusions about their effectiveness.
+- A tiny taste benchmark that replaces the question of which image model is best with a repeatable evaluation process.
+- Defining specific failure classes for sprite-sheet acceptance tests to ensure consistent output quality.
 
 ## Related Concepts
 
-[[Runtime-Model Coupling]] [[System Constraints]]
+[[Open-Source Contributions]] [[Creative Studio Workflows]]

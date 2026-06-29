@@ -5,8 +5,8 @@ connects:
   - Access vs Meaning
   - Negative Space Calibration
   - Craft in Product Design
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Synthesis

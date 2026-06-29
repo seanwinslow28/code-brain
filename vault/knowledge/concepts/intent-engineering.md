@@ -2,31 +2,30 @@
 title: "Intent Engineering"
 type: concept
 sources:
-  - knowledge/concepts/intent-engineering.md
+  - knowledge/connections/the-tension-between-eval-rigor-and-automation-simplicity.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-A control architecture where structured intent serves as the primary gate for agent behavior, replacing open-ended generation with auditable specifications. This mechanism requires that every output be traceable to a pre-defined brief or constraint set, ensuring that the 'why' behind an action is preserved and verifiable. It shifts the burden of proof from the model's internal logic to the user's explicit framing, creating a closed loop where evaluation happens at the spec layer rather than post-hoc.
+Intent Engineering is the discipline of extracting precise, actionable specifications from users who provide vague or aesthetic requests, such as 'make it pop,' which are inherently unsolvable by deterministic systems. This process requires translating subjective desires into objective constraints that can be evaluated and executed by agents without ambiguity. The gap between what a user wants and what they can articulate is the primary source of failure in agentic workflows.
 
 ## Context
 
-Sean has already built the technical foundation for this via his intent-engineering MCP and writing chain assets. The opportunity lies not in building new infrastructure but in translating this engineer-centric control plane into language accessible to creative and marketing teams who currently lack these governance tools.
+Sean's framework demands high-fidelity scoring for agentic systems, but many tasks are better served by deterministic pipelines that bypass the need for such rigorous evaluation entirely. The 'Agent-or-Automation Advisor' must explicitly address the cost of implementing rigorous evals versus the benefit gained for low-complexity tasks.
 
 ## Evidence
 
-> The missing layer in AI agents is not autonomy. It is structured intent.
+> Getting useful intent out of someone who says 'make it pop' is the unsolved 80%
 
-> eval tooling like Braintrust and LangSmith is designed for ML engineers… most teams don't need 'research-grade evals' first.
+> There is a fundamental tension between the need for rigorous evaluation (Eval Vocabulary) and the desire for simple, reliable automations.
 
 ## Examples
 
-- Using the intent-engineering MCP to audit agent outputs against a brief before they are considered final.
-- Applying VoicePrint to productize the loop of eliciting intent, scoring it, and gating output for brand consistency.
+- Getting useful intent out of someone who says 'make it pop'
 
 ## Related Concepts
 
-[[Control Architecture as Evangelism]] [[Supervision as the New AI Edge]]
+[[Eval Vocabulary]] [[Automation Reliability]]

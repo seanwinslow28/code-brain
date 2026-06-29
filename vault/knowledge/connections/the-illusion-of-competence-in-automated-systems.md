@@ -5,13 +5,13 @@ connects:
   - Silent Failure Propagation in Agent Fleets
   - Access vs Meaning
   - Infrastructure Status
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the visibility of system status and the reality of system output, where agents can maintain perfect operational health metrics while failing to deliver any functional value. This illusion arises because monitoring layers typically validate structural integrity (logs exist, no crashes) rather than semantic utility (work was done). The consequence is that users develop false confidence in their automation stacks, leading to strategic stagnation when the silent failures are finally discovered. This pattern reveals that 'health' is not a binary state of uptime but a continuous verification of output alignment with intent.
+There is a fundamental tension between the visibility of system status and the reality of system output, where agents can maintain perfect operational health metrics while failing to deliver any functional value. This illusion arises because monitoring layers typically validate structural integrity (logs exist, no crashes) rather than semantic utility (work was done). The consequence is that users develop false confidence in their automation stacks, leading to strategic stagnation when the silent failures are finally discovered.
 
 ## Threads
 

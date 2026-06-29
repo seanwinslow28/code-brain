@@ -4,28 +4,28 @@ type: concept
 sources:
   - knowledge/connections/the-tension-between-privacy-isolation-and-agentic-accessibility.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-This mechanism describes a deliberate architectural split where sensitive, high-risk personal data is isolated in gitignored private directories while a sanitized, public-facing copy serves as the sole interface for agentic systems. The routing logic enforces a strict boundary: any concept derived from private ancestors cannot be promoted to the public graph without explicit review, ensuring that privacy follows derivation rather than location. This creates a proxy layer that allows agents to operate on structured knowledge without ever accessing the raw, sensitive source material, effectively decoupling agentic utility from data exposure.
+This mechanism describes a deliberate architectural split where sensitive, high-risk personal data is isolated in gitignored private directories while a sanitized, public-facing copy serves as the sole interface for agentic systems. The invariant here is that privacy follows derivation rather than location; any generated concept must store its provenance chain so that if any ancestor node contains private information, the descendant cannot be promoted to the public graph without explicit review. This creates a dependency where the integrity of the public knowledge graph relies entirely on the correctness of the scrubbing process, as agents lack the semantic capability to distinguish between safe abstraction and leaked identity.
 
 ## Context
 
-Sean's Substack series relies on personal narratives that are valuable precisely because they are sensitive; however, his agent infrastructure requires broad access to function. This tension forces him to maintain two parallel states of truth, creating a dependency risk where the public copy may lack the nuance necessary for deep agentic assistance if the scrubbing process is imperfect.
+Sean's Substack series derives its unique value from personal, sensitive narratives that must be excluded from his public, agent-accessible knowledge graph. This routing mechanism allows him to maintain a 'sanitized proxy layer' for his AI agents while keeping the raw emotional and factual truth in private storage, preventing accidental exposure of family names or compensation terms.
 
 ## Evidence
 
-> The privacy gate (Do-Not-Promote term / prior-employer name / named individuals / compensation terms / family names) returns zero hits across all tracked files.
+> The privacy gate returns zero hits across all tracked files when checking for named individuals, compensation terms, or family names.
 
-> Privacy follows derivation, not location: every generated concept stores `why_provenance` and `where_provenance`; if any ancestor is private, the descendant cannot be promoted without review.
+> Privacy follows derivation, not location: every generated concept stores why_provenance and where_provenance; if any ancestor is private, the descendant cannot be promoted without review.
 
 ## Examples
 
-- The scrubbing process that removes prior-employer names and family names from the public copy of the Substack work.
-- The gitignore rules that prevent private directories from syncing to GitHub or being indexed by the MCP server.
+- A scrubbing process that filters out 'Do-Not-Promote' framing elements like prior-employer names before data enters the public graph.
+- The requirement that Sean maintain two parallel states: private originals for narrative depth and public copies for agentic accessibility.
 
 ## Related Concepts
 

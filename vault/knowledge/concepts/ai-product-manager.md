@@ -2,31 +2,31 @@
 title: "AI Product Manager"
 type: concept
 sources:
-  - knowledge/concepts/ai-product-manager.md
+  - knowledge/expansions/connections/ai-product-management-ecosystem.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-A specialized role in product management focused on leveraging AI to shape and execute product strategies. This role is emphasized as a distinct hiring target for companies like Anthropic.
+The role of an AI Product Manager is fundamentally shifting from managing model-as-feature or model-as-platform to operating as a manager of semi-autonomous software teams. This position requires owning the failure taxonomy, eval set, acceptance threshold, and release gate rather than just the roadmap. The core value proposition lies in designing the operating model for these agentic systems, distinguishing the role from generic prompt fluency or traditional product management.
 
 ## Context
 
-This concept aligns with Sean's job-hunt-2026 strategy, which targets AI-native roles and the intersection of automation and agent systems.
+Sean Winslow needs to articulate this specific positioning to avoid sounding like a generic AI PM and instead demonstrate he has already built the category he wants to be hired into. This distinction allows him to reject generic AI-PM postings that do not align with his edge in agent-fleet operation.
 
 ## Evidence
 
-> A specialized role in product management focused on leveraging AI to shape and execute product strategies. This is emphasized as a distinct hiring target for companies like Anthropic.
+> The sentence pattern: “An AI PM owns not just the roadmap, but the failure taxonomy, eval set, acceptance threshold, and release gate.”
 
-> Anthropic pays competitively for FDE roles. Sierra runs a vibe-coding interview as part of their loop.
+> Sean needs a sharper market position, like “agentic systems PM who can also ship the harness.”
 
 ## Examples
 
-- Anthropic's FDE roles
-- Sierra's vibe-coding interviews
+- AI PM eval case study for Code-Brain showing before/after examples where the fleet stopped producing summaries and began producing generative critique.
+- Role-screening matrix distinguishing model-as-feature, model-as-platform, and model-as-labor-force.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Automation Routines]]
+[[Agentic Engineering]] [[Market Positioning]]

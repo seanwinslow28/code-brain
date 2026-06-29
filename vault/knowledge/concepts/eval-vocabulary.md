@@ -2,7 +2,7 @@
 title: "Eval Vocabulary"
 type: concept
 sources:
-  - knowledge/concepts/eval-vocabulary.md
+  - knowledge/connections/the-tension-between-eval-rigor-and-automation-simplicity.md
 tags: [auto-generated, phase-6]
 created: 2026-06-29
 updated: 2026-06-29
@@ -10,22 +10,22 @@ updated: 2026-06-29
 
 ## Definition
 
-This framework redefines evaluation as a dynamic, executable loop where datasets, evaluators, and traces form a repeatable cycle rather than static rubrics. It treats evals as decision instruments that require explicit lineage from business intent through observable metrics to pass/fail thresholds. The system must account for Goodhart's Law by recognizing that once agents optimize against visible proxies, the eval becomes an incentive structure that can degrade judgment quality over time.
+Eval Vocabulary functions as a semantic contract layer that translates ambiguous human intent into deterministic scoring dimensions before any code generation occurs. This mechanism prevents the compounding of non-determinism by forcing explicit criteria for success, effectively acting as a pre-flight check for agentic workflows. Without this vocabulary, agents operate on implicit assumptions that vary between runs, leading to silent failures that are difficult to debug or reproduce consistently.
 
 ## Context
 
-Sean needs this to transition from describing specs as linters to building miniature eval labs that ship with fixtures and CI-style regression output. This allows him to produce a PM/IC portfolio one-pager that demonstrates how specific evals change decisions, rather than just measuring quality abstractly.
+Sean's infrastructure relies on high-fidelity scoring for agentic systems, but many tasks are better served by deterministic pipelines that bypass the need for such rigorous evaluation entirely. Understanding when to apply this vocabulary is critical to avoiding cognitive overload and maintaining automation reliability.
 
 ## Evidence
 
-> The missing move is: business intent -> decision question -> observable metric -> eval case -> pass/fail threshold
+> intent_spec` tool *is* the eval. It scores a spec against the framework's dimensions before that spec reaches a coding agent
 
-> An eval becomes dangerous when it stops measuring judgment and starts training agents to satisfy the visible proxy
+> The Eval Vocabulary serves as the critical coordination mechanism between Autonomous Agent Fleets and their dependent systems.
 
 ## Examples
 
-- Bad spec, improved spec, adversarial spec, historical production trace, and CI-style regression output
+- Scoring a spec against the framework's dimensions before it reaches a coding agent
 
 ## Related Concepts
 
-[[Harness Engineering Invariant]] [[Intent Engineering]]
+[[Automation Reliability]] [[Intent Engineering]]

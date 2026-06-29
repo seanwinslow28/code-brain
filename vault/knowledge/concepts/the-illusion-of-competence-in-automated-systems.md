@@ -2,7 +2,7 @@
 title: "The Illusion of Competence in Automated Systems"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-25.md
+  - knowledge/expansions/connections/automation-and-operational-efficiency-synergy.md
 tags: [auto-generated, phase-6]
 created: 2026-06-29
 updated: 2026-06-29
@@ -10,25 +10,23 @@ updated: 2026-06-29
 
 ## Definition
 
-This mechanism occurs when the operational metrics of a system (such as uptime, API response codes, or log success flags) diverge from its functional utility. The system appears competent because it is running and responding, but it lacks the necessary inputs or internal logic to produce value. This illusion persists until a downstream consumer attempts to use the stale or empty output, at which point the gap between perceived health and actual capability becomes visible.
+Automation transfers cognitive load from execution to monitoring, creating a state where the system appears functional while the human operator loses the procedural knowledge required for recovery. This creates a dependency on exception handling rather than routine operation, meaning that as normal paths become more automated, the remaining manual work becomes rarer and higher-stakes. The operator's skill atrophies precisely because the automation succeeds too often to practice failure modes, leaving them vulnerable when the system encounters out-of-distribution events.
 
 ## Context
 
-Sean's daily note generation succeeds, giving him the impression that his morning routine is fully automated and intelligent. However, because the synthesizer failed, the 'intelligence' part of the routine is missing, leaving him with a template rather than a synthesized insight.
+Sean is building an agent fleet for his personal vault and AdOps. If he automates the 'normal' path of note generation or status updates, he risks losing the ability to debug those systems manually. This insight forces him to design for failure literacy rather than just uptime, ensuring he retains the mental models needed when the automated pipeline breaks.
 
 ## Evidence
 
-> Successful execution of the Daily Driver ritual via agent API (maintaining life-systems structure)
+> Every automation transfers work from execution to monitoring, exception handling, recovery, and skill retention.
 
-> status=empty-queue · mode=queue · 6.0h ago · notes='no unchecked items'
-
-> Daily note exists: Yes (`/Users/seanwinslow/Code-Brain/code-brain/vault/10_timeline/daily/2026-06-25.md`)
+> Automation is only valuable when it increases throughput at the current bottleneck or protects the bottleneck from avoidable load.
 
 ## Examples
 
-- The daily-driver agent reporting 'status=success' while relying on empty data from the synthesizer
-- Deep Researcher showing 'no unchecked items' which masks the lack of new research opportunities rather than indicating completion
+- Designing an exception taxonomy for Daily Driver agents that includes detection signals and human handoff protocols
+- Mapping frontstage user actions against backstage agent work to identify invisible labor in service blueprints
 
 ## Related Concepts
 
-[[Silent Failure Propagation in Agent Fleets]] [[Agent Health Monitoring]] [[Context Management as a Bottleneck]]
+[[Supervision as the New AI Edge]] [[Negative Capability / Failure Literacy]] [[SRE Error Budget for Agents]]

@@ -2,31 +2,30 @@
 title: "Two Audiences"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-06-11-readmes-voice-final.md
+  - knowledge/connections/boundary-objects-as-career-narrative.md
 tags: [auto-generated, phase-6]
-created: 2026-06-16
-updated: 2026-06-16
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-This mechanism describes the structural bifurcation of a single artifact into two distinct rhetorical registers based on the reader's cognitive load and intent. The first register, 'voice,' operates at high abstraction to signal strategic judgment and narrative coherence to recruiters who skim for pattern recognition. The second register, 'neutral body,' operates at low abstraction to provide verifiable technical depth for engineers who audit for implementation fidelity. The tension arises because optimizing one register often degrades the other; successful artifacts maintain a strict boundary where voice never contaminates technical precision, and technical detail never dilutes narrative clarity.
+This concept defines the structural tension where a single artifact must satisfy the divergent evaluation criteria of technical peers and non-technical hiring managers. It requires transforming descriptive reliability talk into an evaluative artifact that demonstrates operational judgment, thereby bridging the gap between internal system health and external career signaling. The mechanism involves curating evidence so that it is simultaneously technically accurate and narratively compelling for a lay audience.
 
 ## Context
 
-Sean is navigating a job hunt where he must simultaneously prove high-level product thinking (via README framing) and low-level engineering rigor (via code/infra). This concept explains why his '35% split dial' strategy works: it allocates cognitive bandwidth to the recruiter's first ten seconds without sacrificing the engineer's need for auditability.
+Sean faces the challenge of turning his daily notes and status updates into artifacts that hiring managers can evaluate as proof of operational judgment. This requires him to consciously shift from describing system state to demonstrating the reasoning behind that state, ensuring the output serves both his agents' needs and his career narrative.
 
 ## Evidence
 
-> voice carries the one-liner / Problem / What-I-Learned (the recruiter's first ten seconds and the judgment signal); the technical body (install, API, config, tables) stays clean and neutral.
+> It turns the article from descriptive reliability talk into an artifact hiring managers can evaluate as operational judgment.
 
-> Most agent failures aren't reasoning failures. They're intent failures. The spec is vague, the stop rules are missing, the outcome is an activity disguised as a state.
+> Sean must explicitly map his technical outputs to career narratives for each audience.
 
 ## Examples
 
-- The README opener uses inversion ('Most agent failures...') to create narrative tension for the recruiter, while the subsequent technical sections use dry, imperative commands for the engineer.
-- Em dashes are scrubbed from both registers to prevent 'dry wit' from bleeding into command syntax, ensuring the neutral body remains machine-readable and unambiguous.
+- Daily notes serving as a shared artifact that is legible to both agents and human reviewers.
 
 ## Related Concepts
 
-[[Two Audiences]] [[Craft in Product Design]] [[Workbench Narrative]]
+[[Boundary Object Theory]] [[Agentic Engineering Signal]]

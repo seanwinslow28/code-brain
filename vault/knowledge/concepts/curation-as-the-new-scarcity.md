@@ -2,7 +2,7 @@
 title: "Curation as the New Scarcity"
 type: concept
 sources:
-  - knowledge/concepts/curation-as-the-new-scarcity.md
+  - knowledge/expansions/curation-as-the-new-scarcity.md
 tags: [auto-generated, phase-6]
 created: 2026-06-29
 updated: 2026-06-29
@@ -10,23 +10,23 @@ updated: 2026-06-29
 
 ## Definition
 
-When tool availability exceeds human attention capacity, economic value shifts from creation to selection because abundance creates noise that degrades signal quality for non-technical users. Trust becomes the limiting factor in adoption since users cannot verify the utility of thousands of options themselves, forcing intermediaries to act as filters. This transforms their role from builders to validators who must demonstrate why specific tools are worth the user's limited cognitive load.
+In an environment where information abundance is infinite and attention is finite, the primary economic value shifts from content creation to the rigorous filtering of that content. This scarcity is not merely about reducing noise but about establishing a trusted signal through costly signaling mechanisms, such as publishing failures and rejected tools alongside successes. A curator gains authority not by what they recommend, but by visibly refusing, testing, and risking being wrong about specific items, thereby demonstrating judgment as labor rather than just opinion.
 
 ## Context
 
-Sean's Substack series and VoicePrint plugin must position themselves not just as another tool, but as a trusted filter for creatives who are overwhelmed by the 500+ MCP servers mentioned in the research. If Sean builds tools without this curation layer, they will be lost in the noise because creators lack the technical bandwidth to evaluate raw utility.
+Sean is building a personal knowledge vault and agent fleet that requires high-fidelity curation to avoid becoming a repository of 'slop' or low-value automation. By adopting this concept, he can differentiate his output (Code-Brain, VoicePrint) from generic AI-tool punditry by focusing on the editorial rubric and the 'curation ledger' of rejected tools, which serves as a stronger proof of competence than simple recommendations.
 
 ## Evidence
 
-> The most-requested *thing* is no longer a tool — it is **curation, trust, and "make this mine."**
+> A curator is trusted less by what they recommend than by what they visibly refuse, test, and risk being wrong about.
 
-> There are [500+ public MCP servers](https://www.reddit.com/r/ClaudeCode/comments/1tpdltv/the_10_best_mcp_servers_for_claude_code_right_now/) ... the ecosystem is built for engineers.
+> Curation becomes defensible when the filter has a house style: exclusions feel authored, not merely ranked.
 
 ## Examples
 
-- A creator says "14,000 MCP servers exist for Claude. I recommend these 4" on TikTok.
-- The punkpeye/awesome-mcp-servers list sits at 89K stars, indicating a massive need for ranking.
+- Publishing a 'curation ledger' for Code-Brain showing accepted/rejected tools, tests run, failure notes, and why each tool earned cognitive load.
+- Creating a Substack series format called 'The Code-Brain Canon' where tools are reviewed through a consistent editorial rubric.
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Two Audiences]]
+[[Curation as the New Scarcity]] [[Slop as a Trust Deficit]] [[Demonstration Over Declaration]]

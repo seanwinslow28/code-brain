@@ -2,10 +2,10 @@
 title: "Raising vs. Describing"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-protocol-instrumentation-and-aesthetic-emergence.md
+  - knowledge/concepts/raising-vs-describing.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ This mechanism distinguishes between two modes of instruction: describing provid
 
 ## Context
 
-Sean’s infrastructure struggles when applying operational logic (description) to creative tasks (raising), leading to a failure in agents producing content that sounds like him despite precise instructions.
+Sean’s infrastructure struggles when applying operational logic (description) to creative tasks (raising), leading to a failure in agents producing content that sounds like him despite precise instructions. This tension creates a bottleneck where automation works for deterministic tasks but fails for aesthetic ones, requiring a shift from prompt engineering to curation.
 
 ## Evidence
 

@@ -2,19 +2,19 @@
 title: "Standardization of AI Interaction"
 type: concept
 sources:
-  - knowledge/connections/standardization-of-ai-interaction.md
+  - knowledge/concepts/standardization-of-ai-interaction.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-This concept describes the strategic pivot from treating AI tools as generic, interchangeable commodities to establishing a proprietary, named infrastructure layer that governs intent and execution. By defining a specific 'intent-engineering MCP server,' Sean moves beyond conceptual usage to infrastructural ownership, creating a boundary object where human negotiation of meaning meets agent-constrained action. This standardization serves as a signal of seniority, demonstrating that he architects the protocols rather than merely consuming the output, thereby shifting his professional identity from user to architect of interaction layers.
+This concept defines a strategic pivot where an engineer transitions from consuming generic AI outputs to architecting proprietary intent-engineering protocols. By establishing a named infrastructure layer, such as a specific MCP server, the professional creates a boundary object that governs how human negotiation of meaning meets agent-constrained action. This shift signals seniority by demonstrating ownership over the interaction layer itself, rather than merely operating within existing tooling constraints.
 
 ## Context
 
-Sean is positioning himself for senior product roles where 'Agentic Engineering' is becoming a core competency. The ability to define and own the protocol layer (MCP) distinguishes him from candidates who only know how to prompt models, aligning his personal brand with the emerging infrastructure needs of autonomous systems.
+Sean is positioning himself for senior product roles where 'Agentic Engineering' is becoming a core competency. The ability to define and own the protocol layer distinguishes him from candidates who only know how to prompt models, aligning his personal brand with the emerging infrastructure needs of autonomous systems.
 
 ## Evidence
 
@@ -29,4 +29,4 @@ Sean is positioning himself for senior product roles where 'Agentic Engineering'
 
 ## Related Concepts
 
-[[Intent Engineering]] [[Agentic Engineering Signal]] [[Boundary Object Theory]]
+[[Intent Engineering]] [[Agentic Engineering Signal]]

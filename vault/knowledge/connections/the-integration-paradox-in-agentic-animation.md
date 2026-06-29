@@ -5,8 +5,8 @@ connects:
   - Runtime-Model Coupling
   - Stacked-Tooling Friction
   - Automation Reliability
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Synthesis

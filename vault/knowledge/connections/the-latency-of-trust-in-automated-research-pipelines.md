@@ -5,13 +5,13 @@ connects:
   - Silent Failure Propagation in Agent Fleets
   - Cost-Capped Agentic Workflows
   - Automation Reliability
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Synthesis
 
-There is a critical tension between the speed of agent execution and the visibility of data integrity. When upstream agents (like the discovery collector) silently under-yield or downstream agents (like the fusion parser) choke on formatting artifacts, the system does not crash; it merely produces less value than expected. This 'silent failure' propagates through the pipeline, creating a false sense of operational health while the actual output quality degrades. The consequence is that Sean cannot rely on binary success/fail metrics to gauge fleet health; he must monitor yield rates and parsing robustness as primary indicators of system reliability.
+There is a critical tension between the speed of agent execution and the visibility of data integrity. When upstream agents silently under-yield or downstream agents choke on formatting artifacts, the system does not crash; it merely produces less value than expected. This 'silent failure' propagates through the pipeline, creating a false sense of operational health while the actual output quality degrades. The consequence is that Sean cannot rely on binary success/fail metrics to gauge fleet health; he must monitor yield rates and parsing robustness as primary indicators of system reliability.
 
 ## Threads
 

@@ -3,15 +3,15 @@ title: "Resilience vs. Reliability in Agent Health"
 type: connection
 connects:
   - Resilience Engineering: Work-as-Imagined vs Work-as-Done
-  - Control Plane / Data Plane Split for Agent Fleets
+  - SRE Error Budget for Agents
   - Agent Health Monitoring
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Synthesis
 
-The tension lies between traditional reliability metrics (uptime, success rates) and resilience engineering (graceful degradation under surprise). While Sean's current focus is on monitoring health, the deeper insight is that agent systems must be designed to stretch under failure rather than just avoid it. This shift transforms his portfolio from a collection of working scripts into a demonstration of operational maturity.
+The core tension exists between the traditional engineering obsession with reliability (uptime, success rates) and the operational reality of resilience (graceful degradation under surprise). This shift transforms Sean's portfolio from a collection of working scripts into a demonstration of operational maturity by proving that his agents can stretch under failure rather than just avoid it. The consequence is that hiring managers will value the 'stretch' capability of his agents more than their uptime statistics, as it signals a deeper understanding of complex system dynamics.
 
 ## Threads
 
@@ -19,7 +19,7 @@ The tension lies between traditional reliability metrics (uptime, success rates)
 
 > The useful question becomes not “did the agent fail?” but “did the workflow degrade gracefully, preserve intent, and create a recovery path?”
 
-### [[Control Plane / Data Plane Split for Agent Fleets]]
+### [[SRE Error Budget for Agents]]
 
 > A creative agent is not healthy when it succeeds once; it is healthy when its failure rate, recovery path, and operator attention cost stay inside an explicit error budget.
 

@@ -5,8 +5,8 @@ connects:
   - Privacy-Aware Data Routing
   - Vault as Agent Infrastructure
   - Do-Not-Promote Framing
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Synthesis

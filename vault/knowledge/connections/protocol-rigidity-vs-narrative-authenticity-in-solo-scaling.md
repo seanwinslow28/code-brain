@@ -5,8 +5,8 @@ connects:
   - MCP Server Hardening
   - Friction-Killing Wedge
   - Double-Monetization Invariant
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Synthesis

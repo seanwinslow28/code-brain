@@ -5,8 +5,8 @@ connects:
   - Harness Engineering Invariant
   - Memory Rot and Lifecycle Management
   - Context Management as a Bottleneck
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Synthesis
@@ -21,11 +21,11 @@ There is a fundamental tension between the market's focus on raw model intellige
 
 ### [[Memory Rot and Lifecycle Management]]
 
-> The breakdown usually stems from the infrastructure surrounding the model, not the limitations of the language model itself.
+> A highly-retrieved memo can become stale, causing silent contradictions with new instructions if no lifecycle management exists.
 
 ### [[Context Management as a Bottleneck]]
 
-> A highly-retrieved memo can become stale, causing silent contradictions with new instructions if no lifecycle management exists.
+> There is a fundamental tension between the market's focus on raw model intelligence and the reality that infrastructure limitations are the true bottleneck for agent reliability.
 
 ## Implications
 

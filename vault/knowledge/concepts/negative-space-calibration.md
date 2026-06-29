@@ -2,31 +2,30 @@
 title: "Negative Space Calibration"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-protocol-instrumentation-and-aesthetic-emergence.md
+  - knowledge/expansions/evidence-accumulation-loop.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-Aesthetic refinement operates through a mechanism of exclusion rather than inclusion, where the agent's role is to identify and reject outputs that violate implicit stylistic boundaries. This process relies on the user providing negative constraints—such as 'Gross' or 'Never'—to define the shape of the desired output by what it is not. The system learns the target distribution not by modeling the positive space directly, but by pruning the probability mass of rejected samples until only the acceptable remains.
+Voice fidelity is not achieved by accumulating more examples of desired phrasing, but by explicitly defining what the voice must refuse to become. This mechanism treats taste as a map of status moves and social boundaries rather than mere aesthetic preference. By identifying 'taste enemies' and forbidden styles, the system creates a negative space that gives shape to the positive output. Without this exclusionary boundary, accumulated evidence degrades into obedient pastiche or generic mimicry.
 
 ## Context
 
-Sean faces a specific bottleneck where his creative voice cannot be captured by standard descriptive prompts, forcing him to rely on this rejection-based calibration loop to maintain quality in his writing and content generation.
+Sean’s Substack voice risks becoming 'generic' not because it lacks data, but because it lacks specific social charge and refusal points. This concept provides the structural constraint needed to prevent his AI-assisted writing from sounding like a polished cover band of his influences.
 
 ## Evidence
 
-> I want to find my writing voice by reacting to what it ISN'T. two words is fine. "No." "Gross." "Never."
+> Your AI voice is not generic because it lacks examples; it is generic because it has no taste enemies.
 
-> You can't prompt taste into an LLM; it's raising, not describing.
+> A useful voice system needs a way to metabolize influences without becoming their cover band.
 
 ## Examples
 
-- Using the 'Cheese Gauntlet' kit to translate aesthetic rejection into a processable format for agents.
-- The split between operational agents that work via clear rules and creative agents that work via rejection loops.
+- Thompson mode may keep the prosecutorial acceleration, but must drop the fake-druggy adjective pile.
 
 ## Related Concepts
 
-[[Raising vs. Describing]] [[Supervision as the New AI Edge]]
+[[Evidence Accumulation Loop]] [[Writing-voice-modes]]

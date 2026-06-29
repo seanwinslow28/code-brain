@@ -5,8 +5,8 @@ connects:
   - SRE Error Budget for Agents
   - Normal Accident Critique
   - Control Plane / Data Plane Split for Agent Fleets
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Synthesis

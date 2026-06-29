@@ -2,29 +2,30 @@
 title: "Normal Accident Critique"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-monitoring-and-job-hunt-2026-automation-reliability.md
+  - knowledge/expansions/connections/automation-reliability-and-agent-health-cross-dependencies.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-The Normal Accident framework posits that in tightly coupled and complex systems, some failures are inevitable system properties rather than bugs to be eliminated. Adding more monitoring or control layers can paradoxically increase risk by creating false confidence, inducing alarm fatigue, and introducing new coupling paths between previously independent components. This pattern suggests that resilience engineering must focus on designing for graceful degradation and bounded blast radii rather than pursuing dashboard maximalism or perfect observability.
+This concept identifies a failure mode in tightly coupled agent fleets where individual components remain healthy, yet systemic collapse occurs due to timing, authority, or feedback-loop pressures. Unlike standard health monitoring which checks for broken parts, this framework diagnoses coupling incidents where one agent's success condition creates an unsafe context for another. It shifts the diagnostic lens from component reliability to interaction topology, revealing that failures can emerge from the architecture of dependencies rather than the quality of execution.
 
 ## Context
 
-This insight challenges Sean's current assumption that more monitoring always equals better safety, urging him to design agent fleets that degrade gracefully rather than pretending to be reliable. It provides a sophisticated narrative for his Substack and interviews about why his system is designed to fail safely rather than never failing.
+Sean is building a personal knowledge vault with multiple autonomous agents (synthesizer, daily note generators). As he scales this fleet, he risks creating 'normal accidents' where the system appears green but is structurally fragile. Understanding this allows him to design runbooks that diagnose why reliability degraded even when no single agent crashed.
 
 ## Evidence
 
-> If agent fleets are complex and tightly coupled, some failures are not bugs to eliminate but system properties to design around.
+> This failure is not an agent-health incident; it is a coupling incident where A’s success condition creates B’s unsafe context.
 
-> In tightly coupled systems, added observability can create false confidence, alarm fatigue, and new coupling paths.
+> Failures in tightly coupled systems are not always caused by a sick component; they can emerge from individually healthy components interacting under timing, authority, or feedback-loop pressure.
 
 ## Examples
 
-- A Substack essay titled 'Why My Agent Fleet Is Designed to Degrade, Not Pretend It Is Reliable.'
+- A synthesizer agent successfully writes a concept, but the timing of that write creates a stale-context dependency for a daily-note generator that reads it before the index updates.
+- An agent fleet appears healthy because all processes return exit code 0, yet the system fails to produce useful output because the agents' success conditions are mutually exclusive under load.
 
 ## Related Concepts
 

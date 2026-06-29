@@ -2,10 +2,10 @@
 title: "Portfolio Walkthrough"
 type: concept
 sources:
-  - knowledge/expansions/connections/ai-fluency-agentic-engineering-signal-and-portfolio-projects-for-interview-prep.md
+  - knowledge/concepts/portfolio-walkthrough.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
@@ -18,7 +18,7 @@ Sean's current concept treats portfolio projects as proof of tool usage. By adop
 
 ## Evidence
 
-> Add a section that distinguishes 'AI fluency' from 'reflective practice under uncertainty.'
+> A Portfolio Walkthrough is a narrative structure that transforms a project gallery into a case-study teardown of decision-making.
 
 > This unlocks a stronger artifact than a project gallery: a case-study teardown of Code-Brain or 16BitFit where the signal is not 'I built agents,' but 'I can notice when an agent system is optimizing the wrong thing and reframe the work.'
 

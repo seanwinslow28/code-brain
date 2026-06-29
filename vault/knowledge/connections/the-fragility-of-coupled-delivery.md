@@ -4,9 +4,9 @@ type: connection
 connects:
   - Runtime-Model Coupling
   - Cadence-Gated Dependency
-  - Agentic Engineering
-created: 2026-06-24
-updated: 2026-06-24
+  - Agentic Engineering Signal
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Synthesis
@@ -23,7 +23,7 @@ The tension between the desire for consistent audience engagement and the realit
 
 > Cadence is gated by tool-build time, not writing time — 3 of the 7 posts ship with a tool that isn't built yet.
 
-### [[Agentic Engineering]]
+### [[Agentic Engineering Signal]]
 
 > Spine = the opportunity report (`vault/30_domains/creative-studio/substack-research/2026-06-09-opportunity-report-creative-agentic.md`, Part 4).
 

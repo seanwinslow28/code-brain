@@ -2,19 +2,19 @@
 title: "Memory Rot and Lifecycle Management"
 type: concept
 sources:
-  - knowledge/concepts/memory-rot-and-lifecycle-management.md
+  - knowledge/connections/the-intelligence-infrastructure-decoupling-tension.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-Memory rot is a structural failure mode where stale preferences or outdated context silently contradict new instructions because the system lacks a defined lifecycle for data decay. This pattern emerges when agents accumulate state without explicit mechanisms to create, update, summarize, and delete memos, turning memory into a liability rather than an asset over long-running sessions. The underlying invariant is that retrieval frequency does not guarantee relevance; a highly-retrieved memo can become confidently wrong if no decay protocol exists to prune its authority.
+This concept defines the temporal decay of information within an agent's persistent storage, where retrieved data becomes stale and contradictory to new instructions if no explicit lifecycle management is enforced. It highlights that a highly-retrieved memo can become obsolete, causing silent failures in downstream reasoning processes because the system lacks mechanisms to invalidate or update outdated context. The mechanism relies on distinguishing between static reference data and dynamic state that requires periodic refreshment to maintain fidelity.
 
 ## Context
 
-Sean's vault system must handle long-term knowledge retention without degradation, particularly as his agent fleet scales. Recognizing memory rot as a structural threat ensures his infrastructure implements active summarization and deletion protocols rather than passive accumulation, which is critical for maintaining the integrity of his job-hunt-2026 and creative-studio workflows where context accuracy directly impacts output quality.
+Sean's vault synthesizer must actively manage the age and relevance of stored concepts to prevent the accumulation of stale knowledge that undermines future synthesis runs. Without this management, the vault becomes a repository of contradictions rather than a coherent knowledge base.
 
 ## Evidence
 
@@ -24,9 +24,9 @@ Sean's vault system must handle long-term knowledge retention without degradatio
 
 ## Examples
 
-- Cross-session identity resolution fails when anonymous or multi-device contexts break the assumption of a stable user ID.
-- The 'Memory Wars' indicate that persistent state is becoming the primary differentiator in agent capabilities.
+- Synthesizer runs sampling older clusters may retrieve outdated job-hunt strategies that conflict with current market conditions.
+- Fleet memory indices generated in May remain valid in June only if their underlying assumptions about model capabilities are re-verified.
 
 ## Related Concepts
 
-[[Context Compounding]] [[Decision/Provenance Memory]]
+[[Harness Engineering Invariant]] [[Context Management as a Bottleneck]]

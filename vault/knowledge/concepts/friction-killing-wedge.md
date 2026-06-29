@@ -2,31 +2,31 @@
 title: "Friction-Killing Wedge"
 type: concept
 sources:
-  - knowledge/concepts/friction-killing-wedge.md
+  - knowledge/expansions/friction-killing-wedge.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-29
+updated: 2026-06-29
 ---
 
 ## Definition
 
-A strategic positioning mechanism where defensibility is derived not from feature breadth but from the explicit elimination of a single, high-friction point that competitors ignore or treat as table stakes. This wedge requires identifying what nobody else does and leading every artifact with that specific constraint-killing capability, rather than competing on general utility. It functions as a filter against 'feature dumps,' ensuring that the tool exists solely because it killed a specific friction that others leave intact.
+A strategic entry point defined by the specific moment a user abandons their current habit because the combined force of situational push and solution pull exceeds the anxiety of switching and the inertia of the present state. This mechanism relies on identifying a transient wedge where high-visibility novelty can be defended against commodity drift before it becomes table stakes. It requires mapping the value chain to distinguish between user-visible components that offer leverage and hidden infrastructure that must be treated as undifferentiated work.
 
 ## Context
 
-In the crowded MCP and creative tool market, Sean cannot compete on generic capabilities like 'build a skill' or 'interview me.' He must identify a narrow, high-value gap—such as 'learn-from-what-you-reject' or 'works-with-no-corpus'—to create a defensible niche that signals deep judgment rather than just technical execution.
+Sean needs this to move beyond slogan generation and create executable validation runbooks for his Code-Brain and intent-engineering projects, ensuring he proves causal demand before building product narratives.
 
 ## Evidence
 
-> Your defensibility is the thing nobody else does. For VoicePrint it was learn-from-what-you-reject + works-with-no-corpus + honest-loop + local/free.
+> User abandons CURRENT HABIT when push-of-situation + pull-of-new-solution beats anxiety-of-switching + habit-of-present.
 
-> every tool exists because it killed a specific friction. If you can't name the one friction in a sentence, it's a feature dump.
+> Map the killed friction as a value-chain node; defend only what is high-visibility and left-of-market.
 
 ## Examples
 
-- Assuming obvious framings like 'write like me' are table stakes owned by others like Skill Creator or Grill Me.
-- Mining gaps with the blunt prompt: 'From the research — not from what I'm telling you — what are the loudest unmet needs and the gaps nobody's filling?'
+- Adding switching-forces mode anchored on Bob Moesta’s Demand-Side Sales 101
+- Creating a commodity drift map based on Simon Wardley’s Value Chain Mapping
 
 ## Related Concepts
 
-[[Market Positioning]] [[Competitive Analysis]]
+[[Value Chain / Activity System Mapping]] [[Market Positioning]]
