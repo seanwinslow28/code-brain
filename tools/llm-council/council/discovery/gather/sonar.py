@@ -38,7 +38,10 @@ def _extract_citations(payload: dict) -> list[str]:
     return out
 
 
-async def collect_sonar(*, api_key: str, topic: str, model: str, timeout: float = 120.0, segment: str = "", fetch=None) -> list[EvidenceRecord]:
+async def collect_sonar(*, api_key: str, topic: str, model: str, timeout: float = 120.0, segment: str = "", fetch=None) -> tuple[list[EvidenceRecord], float]:
+    """Returns (records, billed_cost_usd). Sonar is a PAID Perplexity call — OpenRouter reports the
+    spend in `usage.cost`, which the gather orchestrator threads into the discovery spend ledger so
+    the daily cap isn't blind to it (the "every collector is FREE" invariant never covered Sonar)."""
     seg = f" specifically from the perspective of {segment}" if segment else ""
     body = {
         "model": model,
@@ -55,10 +58,11 @@ async def collect_sonar(*, api_key: str, topic: str, model: str, timeout: float 
             resp.raise_for_status()
             payload = resp.json()
     except (httpx.HTTPError,):
-        return []
+        return [], 0.0   # request failed → nothing billed
+    cost = float((payload.get("usage") or {}).get("cost") or 0.0)
     citations = _extract_citations(payload)
     if not citations:
-        return []
+        return [], cost   # billed even with no usable citations — surface the spend
     content = (payload.get("choices") or [{}])[0].get("message", {}).get("content", "")
     sentences = [s.strip() for s in _SENT.findall(content)][: len(citations)] or [content[:200]]
     recs = []
@@ -73,4 +77,4 @@ async def collect_sonar(*, api_key: str, topic: str, model: str, timeout: float 
             source_type="sonar", source_name="Perplexity Sonar", url=url,
             date="", quote=quote, engagement=0,
         ))
-    return recs
+    return recs, cost

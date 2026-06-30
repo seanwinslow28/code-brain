@@ -1,11 +1,13 @@
 # council/discovery/gather/__init__.py
 """Stage 1 orchestrator: run tier-enabled collectors concurrently → (deduped bundle, per-collector status).
 
-COST-INTEGRITY INVARIANT: every collector below is FREE (no billable provider call). The CLI's
-generic pre-fuse `except` therefore records $0 correctly. If you add a paid collector (e.g. Firecrawl
-/ Apify), you MUST thread its incurred cost into a typed gather failure and record_spend it in that
-`except` — mirror FusionError.cost → DiscoveryFailed.cost_usd — or a gather-stage failure will
-silently record $0 (cost-integrity leak). See test_gather_cost_integrity.py.
+COST-INTEGRITY CONTRACT: a collector returns EITHER `list[EvidenceRecord]` (FREE) OR a
+`(records, billed_cost_usd)` tuple (PAID). Sonar is the one paid collector today — OpenRouter
+reports its spend in `usage.cost`. The orchestrator accumulates every collector's billed cost onto
+`bundle.gather_cost_usd`, which the pipeline folds into the run's recorded spend so the daily cap
+isn't blind to it. If you add another paid collector (Firecrawl / Apify), return the `(records, cost)`
+tuple — do NOT make a silent billable call that returns a bare list. See test_gather_cost_integrity.py
+and test_gather_orchestrator.py.
 """
 
 import asyncio
@@ -41,6 +43,8 @@ async def gather_evidence(*, topic: str, tier: TierConfig, api_key: str, segment
             status[name] = f"error: {type(r).__name__}: {r!r}"
             print(f"[gather] collector {name!r} failed: {type(r).__name__}: {r}", file=sys.stderr)
         else:
-            added = sum(1 for rec in r if bundle.add(rec))
-            status[name] = f"ok: {added} records ({len(r)} found)"
+            records, cost = (r if isinstance(r, tuple) else (r, 0.0))   # PAID collector → (records, cost)
+            bundle.gather_cost_usd = round(bundle.gather_cost_usd + cost, 6)
+            added = sum(1 for rec in records if bundle.add(rec))
+            status[name] = f"ok: {added} records ({len(records)} found)"
     return bundle, status

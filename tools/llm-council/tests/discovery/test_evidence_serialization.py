@@ -8,6 +8,7 @@ def _sample_bundle() -> EvidenceBundle:
                          quote="Prompts never give the same result twice.", engagement=42))
     b.add(EvidenceRecord(source_type="sonar", source_name="Perplexity Sonar",
                          url="https://example.com/b", date="", quote="Creators want a repeatable system."))
+    b.gather_cost_usd = 0.0231   # real Sonar spend must survive a to_dict/from_dict round-trip (PM3 persistence)
     return b
 
 
@@ -21,8 +22,9 @@ def test_to_dict_lists_all_records():
 def test_round_trip_equals_original():
     b = _sample_bundle()
     restored = EvidenceBundle.from_dict(b.to_dict())
-    assert restored == b                      # records + _keys + urls all match
+    assert restored == b                      # records + _keys + urls + gather_cost_usd all match
     assert restored.has_url("https://example.com/a")
+    assert restored.gather_cost_usd == 0.0231  # billed Sonar spend preserved, not silently zeroed
 
 
 def test_from_dict_restores_dedup_guard():
