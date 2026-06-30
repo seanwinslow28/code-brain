@@ -40,11 +40,15 @@ class EvidenceBundle:
         return url in self.urls
 
     def to_dict(self) -> dict:
-        return {"records": [asdict(r) for r in self.records]}
+        # Persist gather_cost_usd too: PM3 freezes a bundle to disk via this serializer, and a
+        # from_dict() that defaulted cost to 0.0 would silently zero real Sonar spend on reload —
+        # the exact cost-integrity failure the gather threading exists to prevent.
+        return {"records": [asdict(r) for r in self.records], "gather_cost_usd": self.gather_cost_usd}
 
     @classmethod
     def from_dict(cls, d: dict) -> "EvidenceBundle":
         bundle = cls()
         for rd in d.get("records", []):
             bundle.add(EvidenceRecord(**rd))
+        bundle.gather_cost_usd = d.get("gather_cost_usd", 0.0)
         return bundle
