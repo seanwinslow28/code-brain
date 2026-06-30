@@ -2,30 +2,33 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/concepts/agent-health-monitoring.md
+  - knowledge/connections/the-decoupling-of-operational-health-from-functional-value.md
 tags: [auto-generated, phase-6]
-created: 2026-06-08
-updated: 2026-06-08
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
 
-Agent Health Monitoring is the operational discipline of verifying autonomous agent completion through explicit observable signals rather than assuming success based on process exit codes. This mechanism requires distinguishing between successful execution and silent failure, where an agent completes its task but produces incorrect or missing data without raising exceptions. The system relies on statistical sampling, human review, and anomaly detection to catch errors that do not raise exceptions, ensuring that the operational status is decoupled from data freshness only when explicit checks are in place.
+This concept refers to the practice of tracking agent status through binary or scalar metrics (e.g., uptime, response time, exit codes) rather than semantic quality or output volume. The mechanism creates a blind spot where agents are considered 'healthy' as long as they are running and responding, regardless of whether their output meets functional requirements. This leads to a misalignment between the monitoring layer's perception of system health and the actual utility of the agent fleet for the user.
 
 ## Context
 
-Sean's morning brief depends on the previous day's synthesis being complete. When the synthesizer fails silently, he notices the staleness before the brief flags the failure, highlighting a lag in error detection that necessitates explicit health checks to raise errors rather than relying on silent failures to be detected by absence.
+Sean uses Agent Health Monitoring to track his fleet, but the current metrics (like 'status=error' with zero concepts) are insufficient to detect silent failures. He needs content-aware health checks that verify output volume and quality, not just process completion, to ensure his knowledge base remains vital.
 
 ## Evidence
 
-> Agent Health Monitoring is the operational discipline of verifying autonomous agent completion through explicit observable signals rather than assuming success based on process exit codes.
+> Sean must implement content-aware health checks that verify output volume and quality, not just process completion.
 
-> Sean notices the staleness of his morning brief before the brief itself flags the failure, indicating a lag in error detection.
+> The daily-driver agent should fail or flag an error if its input from the synthesizer is empty, breaking the illusion of competence.
+
+> status=error · 5.5h ago · notes='concepts=0 connections=0 rejected=0 edges=0'
 
 ## Examples
 
-- ing output that is wrong, with no error signal. No exception. No confidence flag. It looks identical to correct output.
+- The run lesson for 2026-06-29 shows a duration of 2557.1 seconds and 109 concepts written, providing a baseline for what 'healthy' output looks like.
+- The run lesson for 2026-05-27 shows only 3 concepts written in 47.2 seconds, which might be flagged as an anomaly if monitored by volume rather than just success.
 
 ## Related Concepts
 
-[[Accountability Gap]] [[Automation Failure and Daily Note Disruption]]
+[[The Illusion of Competence in Automated Systems]] [[Silent Failure Propagation in Agent Fleets]]

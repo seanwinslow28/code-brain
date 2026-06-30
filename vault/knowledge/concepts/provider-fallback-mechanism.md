@@ -2,10 +2,10 @@
 title: "Provider Fallback Mechanism"
 type: concept
 sources:
-  - knowledge/connections/resilience-engineering-work-as-imagined-vs-work-as-done.md
+  - knowledge/concepts/provider-fallback-mechanism.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition

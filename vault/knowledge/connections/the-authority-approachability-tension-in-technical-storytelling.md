@@ -5,8 +5,8 @@ connects:
   - Humor and Status Dynamics
   - Negative Space Calibration
   - Motivational Tension via Open Loops
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Synthesis

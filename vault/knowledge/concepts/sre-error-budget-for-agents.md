@@ -2,32 +2,31 @@
 title: "SRE Error Budget for Agents"
 type: concept
 sources:
-  - knowledge/expansions/connections/observability-and-personal-knowledge-infrastructure.md
+  - knowledge/connections/resilience-vs-reliability-in-agent-health.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
 
-This concept applies Site Reliability Engineering principles to personal agent fleets by defining measurable Service Level Objectives (SLOs) and corresponding error budgets for automation reliability. It shifts the focus from mere status monitoring to quantifiable performance thresholds, such as daily note freshness or manual correction time limits. When these budgets are exhausted, it triggers specific operational responses like blameless postmortems or toil tracking rather than simple alerting.
+This concept establishes a quantitative threshold for acceptable agent failure, defining health not by the absence of errors but by the stability of three variables: failure rate, recovery path efficiency, and operator attention cost. It transforms agent reliability from an abstract quality into a managed resource that can be spent on feature development or innovation, provided the total error budget is not exhausted. The mechanism enforces a trade-off where higher reliability requires stricter constraints on creative or adaptive behaviors.
 
 ## Context
 
-Sean is building a personal knowledge infrastructure that relies on automated agents for daily notes and research. Without defined error budgets, he risks accumulating 'toil'—repetitive manual patches for agent failures—which degrades system reliability over time. This concept provides the mathematical framework to decide when to automate further versus when to accept human-in-the-loop costs.
+Sean needs to apply this metric to his agent fleet to move beyond simple uptime tracking. By defining explicit error budgets, he can justify periods of lower reliability during complex synthesis tasks, provided the recovery mechanisms are robust and the attention cost remains within bounds.
 
 ## Evidence
 
-> Borrow SLOs, error budgets, toil tracking, and blameless postmortems from infrastructure operations, but apply them to personal agent fleets.
+> A creative agent is not healthy when it succeeds once; it is healthy when its failure rate, recovery path, and operator attention cost stay inside an explicit error budget.
 
-> Example: “daily note freshness SLO: 95% before 9 AM”; “manual correction budget: under 20 minutes/week”; “agent toil: any recurring human patch after automation failure.”
+> The tension between SRE error budgets and resilience engineering lies in the balance between strict reliability targets and adaptive capacity.
 
 ## Examples
 
-- Daily note freshness SLO: 95% before 9 AM
-- Manual correction budget: under 20 minutes/week
-- Agent toil: any recurring human patch after automation failure
+- Tracking operator attention cost as a key metric for agent health alongside failure rates.
+- Using error budgets to enforce freezes on feature development when reliability drops below a threshold.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Automation Reliability]] [[Infrastructure Status]]
+[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Agent Health Monitoring]]

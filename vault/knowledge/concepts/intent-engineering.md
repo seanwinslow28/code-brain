@@ -2,30 +2,31 @@
 title: "Intent Engineering"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-eval-rigor-and-automation-simplicity.md
+  - knowledge/connections/governance-gap-in-creative-ai-adoption.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
 
-Intent Engineering is the discipline of extracting precise, actionable specifications from users who provide vague or aesthetic requests, such as 'make it pop,' which are inherently unsolvable by deterministic systems. This process requires translating subjective desires into objective constraints that can be evaluated and executed by agents without ambiguity. The gap between what a user wants and what they can articulate is the primary source of failure in agentic workflows.
+This concept defines the structural requirement for agency, positing that autonomy without structured intent leads to uncontrolled generation. It establishes that the primary bottleneck in AI adoption is not computational power but the lack of traceable, accountable decision-making layers. This layer provides the necessary judgment and oversight for high-stakes creative work.
 
 ## Context
 
-Sean's framework demands high-fidelity scoring for agentic systems, but many tasks are better served by deterministic pipelines that bypass the need for such rigorous evaluation entirely. The 'Agent-or-Automation Advisor' must explicitly address the cost of implementing rigorous evals versus the benefit gained for low-complexity tasks.
+Sean's infrastructure addresses this by providing the 'judgment layer' that enables safe, governed AI adoption in creative contexts.
 
 ## Evidence
 
-> Getting useful intent out of someone who says 'make it pop' is the unsolved 80%
+> The missing layer in AI agents is not autonomy. It is structured intent.
 
-> There is a fundamental tension between the need for rigorous evaluation (Eval Vocabulary) and the desire for simple, reliable automations.
+> There is a critical tension between the rapid adoption of generative AI tools by creative teams and the lack of governance mechanisms tailored to their specific needs.
 
 ## Examples
 
-- Getting useful intent out of someone who says 'make it pop'
+- Adding structured intent to agent workflows
+- Implementing governance for generative AI
 
 ## Related Concepts
 
-[[Eval Vocabulary]] [[Automation Reliability]]
+[[The Engineer-Creative Divide in Tooling]] [[Control Architecture as Evangelism]]

@@ -2,10 +2,10 @@
 title: "Friction-Killing Wedge"
 type: concept
 sources:
-  - knowledge/expansions/friction-killing-wedge.md
+  - knowledge/concepts/friction-killing-wedge.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ A strategic entry point defined by the specific moment a user abandons their cur
 
 ## Context
 
-Sean needs this to move beyond slogan generation and create executable validation runbooks for his Code-Brain and intent-engineering projects, ensuring he proves causal demand before building product narratives.
+Sean needs this to move beyond slogan generation and create executable validation runbooks for his Code-Brain and intent-engineering projects, ensuring he proves causal demand before building product narratives. Without this wedge, his efforts risk becoming generic demonstrations of capability rather than targeted interventions that capture market share during a moment of vulnerability.
 
 ## Evidence
 

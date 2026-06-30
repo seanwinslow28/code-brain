@@ -2,10 +2,10 @@
 title: "Memory Rot and Lifecycle Management"
 type: concept
 sources:
-  - knowledge/connections/the-intelligence-infrastructure-decoupling-tension.md
+  - knowledge/concepts/memory-rot-and-lifecycle-management.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition

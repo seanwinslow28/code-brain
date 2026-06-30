@@ -2,30 +2,30 @@
 title: "Control Architecture as Evangelism"
 type: concept
 sources:
-  - knowledge/concepts/control-architecture-as-evangelism.md
+  - knowledge/connections/infrastructure-as-career-differentiation.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
 
-This concept describes a strategic posture where technical infrastructure choices serve as explicit signals of professional values rather than mere operational necessities. By enforcing a local-first stack, an engineer demonstrates a commitment to data sovereignty and cost independence that transcends standard engineering metrics. This stance functions as a filter for employer alignment, prioritizing long-term resilience over short-term convenience in the face of vendor lock-in risks.
+This concept describes a strategic posture where technical infrastructure choices serve as explicit signals of professional values rather than mere operational necessities. By enforcing local-first constraints, an engineer transforms their toolchain into a manifesto that communicates independence, privacy advocacy, and cost-consciousness to potential employers. The mechanism relies on the visibility of self-hosted resilience, which acts as a proxy for long-term thinking and vendor-agnostic reliability in high-stakes hiring contexts.
 
 ## Context
 
-Sean uses his infrastructure choices to differentiate himself in the job market by signaling independence from cloud-dependent workflows. This approach appeals to employers who value self-sufficiency and cost-conscious engineering practices.
+Sean uses his local-first stack not just for efficiency but to signal specific professional values like privacy and cost-awareness to employers who value durable, independent engineering practices over convenience-driven cloud dependency.
 
 ## Evidence
 
 > The choice of a local-first stack is not just a technical preference but a professional statement about privacy, cost, and reliability.
 
-> By building on a '$0/month local-LLM stack', Sean signals independence from vendor lock-in and a commitment to durable, self-hosted solutions.
+> Sean leverages his local-first infrastructure not just for technical efficiency but as a strategic career differentiator that signals independence and cost-consciousness.
 
 ## Examples
 
-- Running Ollama and SearXNG locally with Gemini Deep Research only as a fallback for complex queries.
-- Positioning the $0/month stack as a differentiator against peers relying on expensive cloud AI services.
+- Using a '$0/month local-LLM stack' to demonstrate financial prudence and technical self-sufficiency.
+- Positioning self-hosted resilience as a key attribute of his professional brand for employers seeking vendor-independent engineers.
 
 ## Related Concepts
 

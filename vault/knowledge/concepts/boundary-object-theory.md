@@ -2,15 +2,15 @@
 title: "Boundary Object Theory"
 type: concept
 sources:
-  - knowledge/connections/boundary-objects-as-career-narrative.md
+  - knowledge/concepts/boundary-object-theory.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
 
-This concept describes how status objects and dashboards function as translation layers between different roles within a system. It posits that a fleet dashboard is not merely telemetry but a boundary object that mediates between Sean-the-builder, Sean-the-writer, and Sean-the-job-candidate by requiring distinct interpretations of the same data. The mechanism relies on the artifact's ability to remain flexible enough for local adaptation while robust enough to maintain a common identity across these disparate social worlds.
+This mechanism describes how status objects and dashboards function as translation layers between different roles within a system. It posits that a fleet dashboard is not merely telemetry but a boundary object that mediates between Sean-the-builder, Sean-the-writer, and Sean-the-job-candidate by requiring distinct interpretations of the same data. The mechanism relies on the artifact's ability to remain flexible enough for local adaptation while robust enough to maintain a common identity across these disparate social worlds.
 
 ## Context
 

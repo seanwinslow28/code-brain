@@ -2,31 +2,31 @@
 title: "Resilience Engineering: Work-as-Imagined vs Work-as-Done"
 type: concept
 sources:
-  - knowledge/expansions/connections/implementation-architecture-and-enterprise-ai-workflow.md
+  - knowledge/connections/resilience-vs-reliability-in-agent-health.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
 
-This concept defines the structural gap between formalized workflow diagrams and the actual, often messy, routines humans execute to achieve results. It posits that implementation architecture fails when it optimizes for the designed state rather than the lived reality of exceptions and workarounds. The mechanism relies on identifying where automation is confidently wrong because it cannot account for the functional resonance of human adaptation.
+This concept defines the structural gap between the deterministic, linear workflows agents are programmed to execute and the chaotic, non-linear reality of their actual runtime environments. It posits that agent health cannot be measured by binary success/failure states because these states ignore the 'stretch' capacity required to handle partial failures gracefully. The mechanism relies on observing how an agent degrades under pressure rather than just its ability to maintain uptime in ideal conditions.
 
 ## Context
 
-Sean needs this to avoid building AI workflows that look perfect in documentation but collapse under real-world ambiguity during job hunting or creative production. By acknowledging the 'work-as-done,' he can design agents that handle drift rather than just following a rigid script, making his portfolio projects more robust and interview-ready.
+Sean's current portfolio projects likely emphasize successful automation runs, which fails to demonstrate operational maturity. By shifting focus to graceful degradation, he can signal to hiring managers that his systems are robust enough for complex, real-world enterprise environments where perfect reliability is impossible.
 
 ## Evidence
 
-> implementation architecture fails when it optimizes the diagram instead of the practiced workaround
+> The useful question becomes not “did the agent fail?” but “did the workflow degrade gracefully, preserve intent, and create a recovery path?”
 
-> reliability is not just whether automation works, but whether the human + tool ensemble can coordinate under surprise, degraded state, and partial knowledge
+> Your current frame treats monitoring as detection: catch loops, hallucinations, broken states.
 
 ## Examples
 
-- A workflow discovery template for AI-PM interviews that asks to show the official process, the actual process, the exception path, the workaround, and the person who knows when the dashboard lies
-- A fleet handoff/runback spec defining observability, authority, degraded modes, and human re-entry for Daily Driver, Vault Critic, and Knowledge Lint
+- Designing portfolio projects to explicitly show fallback behaviors rather than just successful runs.
+- Demonstrating that hiring managers value the 'stretch' capability of agents more than uptime statistics.
 
 ## Related Concepts
 
-[[Implementation Architecture]] [[SRE Error Budget for Agents]] [[The Illusion of Competence in Automated Systems]]
+[[SRE Error Budget for Agents]] [[Agent Health Monitoring]]

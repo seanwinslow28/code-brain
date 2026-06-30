@@ -2,22 +2,22 @@
 title: "Constraint-First Automation vs. General Efficiency"
 type: connection
 connects:
-  - Control Plane / Data Plane Split for Agent Fleets
+  - Constraint-First Automation vs. General Efficiency
   - System Constraints
   - Value Chain / Activity System Mapping
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Synthesis
 
-Sean’s current automation efforts risk optimizing non-bottleneck processes, creating the illusion of progress while the true constraint remains unaddressed. By applying Goldratt’s Theory of Constraints, he must first identify the limiting factor in his job hunt or vault maintenance before automating anything. The tension lies in the fact that general efficiency tools (like batch exports or status updates) are easy to automate but often irrelevant if they don’t increase throughput at the actual bottleneck.
+The core tension lies in the conflict between the ease of automating general efficiency tasks and the necessity of addressing specific system constraints to achieve real throughput gains. When automation is applied to non-bottleneck areas, it generates false signals of progress while the actual limiting factor continues to restrict overall performance. This pattern forces a strategic choice: either accept the inefficiency of the bottleneck or redirect automation efforts to protect and amplify the constraint, which often requires more complex, less visible engineering.
 
 ## Threads
 
-### [[Control Plane / Data Plane Split for Agent Fleets]]
+### [[Constraint-First Automation vs. General Efficiency]]
 
-> Identify constraint, map upstream/downstream queues, decide whether to automate, staff, delete, or buffer.
+> Sean’s current automation efforts risk optimizing non-bottleneck processes, creating the illusion of progress while the true constraint remains unaddressed.
 
 ### [[System Constraints]]
 
@@ -29,5 +29,6 @@ Sean’s current automation efforts risk optimizing non-bottleneck processes, cr
 
 ## Implications
 
-- Sean should audit his job hunt pipeline to find the true bottleneck (e.g., interview prep vs. application volume) before automating applications.
-- Vault automation should prioritize protecting the 'bottleneck' of synthesis or insight generation over routine note-taking.
+- Sean must audit his job hunt pipeline to identify the true bottleneck before automating any application processes.
+- Vault automation should prioritize protecting the synthesis and insight generation bottleneck over routine note-taking tasks.
+- Metrics focused on volume or speed may be misleading if they do not correlate with throughput at the constraint.

@@ -5,8 +5,8 @@ connects:
   - Silent Failure Propagation in Agent Fleets
   - Access vs Meaning
   - Infrastructure Status
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Synthesis

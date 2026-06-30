@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/agentic-engineering.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
 
-Agentic engineering is an architectural pattern where agents are granted ownership of decomposition tasks while humans retain exclusive ownership of judgment and final decision-making. This separation of concerns allows for scalable automation of complex workflows without sacrificing the nuanced oversight required for high-stakes outcomes. The system functions as a producer/consumer model where agent-generated artifacts create dependencies that human review enforces, ensuring quality control through explicit gates rather than implicit trust.
+This architectural pattern establishes a strict separation of concerns where autonomous agents assume ownership of task decomposition and execution, while humans retain exclusive authority over judgment and final decision-making. The system operates as a producer/consumer model in which agent-generated artifacts create explicit dependencies that human review enforces through quality gates rather than implicit trust. This structure allows for scalable automation of complex workflows without sacrificing the nuanced oversight required for high-stakes outcomes, effectively turning human attention into a critical control plane resource.
 
 ## Context
 
@@ -18,9 +18,9 @@ Sean embodies this pattern by demonstrating a 'Karpathy-style' approach where he
 
 ## Evidence
 
-> Demonstrates Karpathy-style 'agentic engineering practitioner' architecture — agents own decomposition; human owns judgment.
+> Agentic engineering is an architectural pattern where agents are granted ownership of decomposition tasks while humans retain exclusive ownership of judgment and final decision-making.
 
-> Ships production Claude Skills, MCP servers, and autonomous agent fleets with human-review gates and eval-driven acceptance criteria.
+> The system functions as a producer/consumer model where agent-generated artifacts create dependencies that human review enforces, ensuring quality control through explicit gates rather than implicit trust.
 
 ## Examples
 

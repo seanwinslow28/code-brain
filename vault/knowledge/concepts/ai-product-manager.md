@@ -2,10 +2,10 @@
 title: "AI Product Manager"
 type: concept
 sources:
-  - knowledge/expansions/connections/ai-product-management-ecosystem.md
+  - knowledge/concepts/ai-product-manager.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition

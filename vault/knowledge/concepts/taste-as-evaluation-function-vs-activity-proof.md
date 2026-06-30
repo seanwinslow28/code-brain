@@ -2,10 +2,10 @@
 title: "Taste as Evaluation Function vs. Activity Proof"
 type: concept
 sources:
-  - knowledge/connections/taste-as-evaluation-function-vs-activity-proof.md
+  - knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean's current portfolio artifacts often fail to explain why one design is bette
 
 ## Related Concepts
 
-[[Agentic Engineering Signal]] [[Craft in Product Design]] [[Portfolio Projects]]
+[[Agentic Engineering Signal]] [[Craft in Product Design]]

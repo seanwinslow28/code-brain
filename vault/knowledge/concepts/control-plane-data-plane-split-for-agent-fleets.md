@@ -2,19 +2,19 @@
 title: "Control Plane / Data Plane Split for Agent Fleets"
 type: concept
 sources:
-  - knowledge/expansions/connections/automation-and-operational-efficiency-synergy.md
+  - knowledge/concepts/control-plane-data-plane-split-for-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
 
-Operational efficiency is not a property of the automation itself but emerges from the handoffs between visible user workflows, backstage agent work, and support systems. This split requires distinguishing between the control logic that directs agents (the control plane) and the actual data processing or content generation they perform (the data plane). When these are tightly coupled, failures in one domain cascade into the other; when separated, Sean can isolate bottlenecks and apply constraints specifically to the throughput-limiting layer without destabilizing the entire system.
+This mechanism defines operational efficiency not as an intrinsic property of automation, but as a function of the handoffs between visible user workflows and backstage agent work. It requires distinguishing between the control logic that directs agents (the control plane) and the actual data processing or content generation they perform (the data plane). When these layers are tightly coupled, failures in one domain cascade into the other; when separated, bottlenecks can be isolated to the throughput-limiting layer without destabilizing the entire system.
 
 ## Context
 
-Sean's vault synthesizer and fleet memory index represent the control plane, while the actual note generation or job application tracking is the data plane. Understanding this split allows him to diagnose whether a slowdown in his job hunt is due to poor decision-making (control) or execution capacity (data), preventing misdiagnosis of operational issues.
+Sean's vault synthesizer and fleet memory index represent the control plane, while job application tracking is the data plane. Understanding this split allows him to diagnose whether a slowdown in his job hunt is due to poor decision-making (control) or execution capacity (data), preventing misdiagnosis of operational issues.
 
 ## Evidence
 

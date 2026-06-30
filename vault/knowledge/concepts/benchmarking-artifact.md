@@ -2,10 +2,10 @@
 title: "Benchmarking Artifact"
 type: concept
 sources:
-  - knowledge/expansions/connections/open-source-contributions-creative-studio-workflows-through-automation.md
+  - knowledge/concepts/benchmarking-artifact.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition

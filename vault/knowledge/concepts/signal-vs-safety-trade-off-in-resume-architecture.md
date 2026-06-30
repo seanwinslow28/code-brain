@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/signal-vs-safety-trade-off-in-resume-architecture.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition

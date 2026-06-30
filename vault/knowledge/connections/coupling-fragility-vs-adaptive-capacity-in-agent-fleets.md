@@ -2,20 +2,20 @@
 title: "Coupling Fragility vs Adaptive Capacity in Agent Fleets"
 type: connection
 connects:
-  - Normal Accident Critique
+  - Coupling Fragility vs Adaptive Capacity in Agent Fleets
   - Resilience Engineering: Work-as-Imagined vs Work-as-Done
   - Agent Fleet Observability Dashboard
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Synthesis
 
-The tension lies between designing agents for reliable execution of known tasks and ensuring the fleet can adapt when those tasks become impossible. Sean's current focus on 'green checkmarks' masks the risk of normal accidents where healthy components interact fatally. By integrating resilience engineering metrics, he can shift from monitoring uptime to measuring adaptive capacity, which is critical for maintaining trust in a personal knowledge system.
+The core tension lies between the engineering desire for deterministic reliability through strict uptime metrics and the operational reality that complex agent fleets fail normally due to hidden coupling. When Sean monitors only for success, he ignores the adaptive capacity required when those successes create unsafe contexts for downstream agents. This leads to a fragility where the system appears healthy but is structurally incapable of handling novel failures, forcing manual intervention that breaks the automation loop.
 
 ## Threads
 
-### [[Normal Accident Critique]]
+### [[Coupling Fragility vs Adaptive Capacity in Agent Fleets]]
 
 > This failure is not an agent-health incident; it is a coupling incident where A’s success condition creates B’s unsafe context.
 
@@ -29,5 +29,5 @@ The tension lies between designing agents for reliable execution of known tasks 
 
 ## Implications
 
-- Sean should redesign his monitoring dashboards to include metrics on fallback quality and manual takeover cost, not just success rates.
-- He needs to create incident review templates that distinguish between component failures and coupling failures in his agent fleet.
+- Sean must redesign his monitoring dashboards to include metrics on fallback quality and manual takeover cost, rather than relying solely on binary success rates.
+- He needs to create incident review templates that distinguish between component failures and coupling failures in his agent fleet to prevent recurring normal accidents.

@@ -2,10 +2,10 @@
 title: "Negative Capability / Failure Literacy"
 type: concept
 sources:
-  - knowledge/expansions/connections/creative-automation-pipeline.md
+  - knowledge/concepts/negative-capability-failure-literacy.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition

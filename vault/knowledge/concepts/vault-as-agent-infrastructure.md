@@ -2,10 +2,10 @@
 title: "Vault as Agent Infrastructure"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-privacy-isolation-and-agentic-accessibility.md
+  - knowledge/concepts/vault-as-agent-infrastructure.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition

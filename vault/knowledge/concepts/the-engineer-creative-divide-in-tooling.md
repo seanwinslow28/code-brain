@@ -2,31 +2,31 @@
 title: "The Engineer-Creative Divide in Tooling"
 type: concept
 sources:
-  - knowledge/concepts/the-engineer-creative-divide-in-tooling.md
+  - knowledge/connections/governance-gap-in-creative-ai-adoption.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
 
-Tooling ecosystems evolve around the power users who build them, creating a structural bias toward developer-centric workflows. This divide manifests as a gap where tools are abundant for coders but sparse for creatives, because the latter group lacks the technical leverage to demand specific features. The consequence is that creative work remains underserved not by lack of capability, but by lack of tailored interfaces and semantic understanding.
+This divide manifests as a mismatch between the evaluation metrics favored by technical builders and the operational realities of creative professionals. ML engineers prioritize research-grade evals that measure model fidelity, while creative teams require governance mechanisms that ensure brand safety and traceability. The gap exists because tooling is built for the former audience, leaving the latter without the necessary control planes to adopt AI safely.
 
 ## Context
 
-Sean's research explicitly notes that the corpus is developer-tooling-skewed, leaving a clear opening for tools that speak the language of creatives rather than engineers. This validates his focus on 'VoicePrint' and creative-specific agents.
+Sean can exploit this divide by positioning his intent-engineering infrastructure as the bridge that translates technical rigor into creative accountability, a service currently underserved by the market.
 
 ## Evidence
 
-> The ecosystem is built for engineers. When developers showed what they actually built ... the top answers were a migraine/barometric tracker, a `wtf` debug command
+> eval tooling like Braintrust and LangSmith is designed for ML engineers… most teams don't need 'research-grade evals' first.
 
-> The corpus is developer-tooling-skewed; the creative slice is ~15-20 of 79 items
+> The missing layer in AI agents is not autonomy. It is structured intent.
 
 ## Examples
 
-- Top developer builds include a migraine/barometric tracker and a debug command.
-- Creative gaps are partly inferred from absence in the primary developer-focused corpus.
+- Using Braintrust for model evaluation
+- Implementing structured intent specifications
 
 ## Related Concepts
 
-[[Two Audiences]] [[Craft in Product Design]]
+[[Control Architecture as Evangelism]] [[Intent Engineering]]

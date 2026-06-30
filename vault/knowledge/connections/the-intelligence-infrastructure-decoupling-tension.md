@@ -5,8 +5,8 @@ connects:
   - Harness Engineering Invariant
   - Memory Rot and Lifecycle Management
   - Context Management as a Bottleneck
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Synthesis

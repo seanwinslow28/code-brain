@@ -2,10 +2,10 @@
 title: "Liability Routing in Agentic Product Design"
 type: concept
 sources:
-  - knowledge/connections/liability-routing-in-agentic-product-design.md
+  - knowledge/concepts/liability-routing-in-agentic-product-design.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean must frame his portfolio projects around 'auditable intent' rather than jus
 
 ## Related Concepts
 
-[[Accountability Gap]] [[Human-in-the-loop]] [[Agentic Engineering]]
+[[Accountability Gap]] [[Human-in-the-loop]]

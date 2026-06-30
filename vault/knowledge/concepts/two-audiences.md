@@ -2,10 +2,10 @@
 title: "Two Audiences"
 type: concept
 sources:
-  - knowledge/connections/boundary-objects-as-career-narrative.md
+  - knowledge/concepts/two-audiences.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition

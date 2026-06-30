@@ -2,10 +2,10 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-eval-rigor-and-automation-simplicity.md
+  - knowledge/concepts/automation-reliability.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition

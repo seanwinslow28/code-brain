@@ -2,10 +2,10 @@
 title: "Runtime-Model Coupling"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-26.md
+  - knowledge/concepts/runtime-model-coupling.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
@@ -21,8 +21,6 @@ Sean's infrastructure attempts to balance cost and capability by using different
 > The fleet's dependency on specific machine states conflicts with the goal of reliable, always-on operation.
 
 > Prioritize resolving vault-synthesizer errors to link concepts, which is vital for all three domains (creative/life-systems).
-
-> Design a clear restructuring pass: migrate all critical agent dependency from flaky machines (MBP/Alienware) to Mac Mini as the stable host.
 
 ## Examples
 

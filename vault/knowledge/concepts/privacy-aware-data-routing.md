@@ -2,10 +2,10 @@
 title: "Privacy-Aware Data Routing"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-privacy-isolation-and-agentic-accessibility.md
+  - knowledge/concepts/privacy-aware-data-routing.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition

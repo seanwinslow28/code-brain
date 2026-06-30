@@ -2,32 +2,31 @@
 title: "Agentic Engineering Signal"
 type: concept
 sources:
-  - knowledge/concepts/agentic-engineering-signal.md
+  - knowledge/connections/infrastructure-as-career-differentiation.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
 
-The Agentic Engineering Signal is a mechanism where technical competence is demonstrated not through tool exposure or code volume, but through the articulation of reflective practice under uncertainty. It requires the candidate to explicitly name the initial frame used, identify the specific surprise that broke that frame, and describe the revised move made in response. This shifts the evaluation metric from 'I built agents' to 'I can notice when an agent system is optimizing the wrong thing and reframe the work.' The signal proves judgment over activity by showcasing the ability to diagnose misfits between form and context.
+This concept defines the practice of deploying autonomous agent fleets as a tangible proof-of-work that demonstrates advanced engineering capabilities beyond standard coding tasks. The presence of multiple production-grade agents running on local schedules serves as a dynamic resume, showcasing mastery over orchestration, reliability, and system design in real-time. It shifts the narrative from theoretical knowledge to demonstrated operational competence, proving the engineer can build and maintain complex, self-sustaining systems.
 
 ## Context
 
-Sean needs this signal for senior PM, AI-PM, and agentic-engineering interviews where evaluators care about judgment. Current portfolio projects often only prove activity; this concept provides the theoretical bridge (via Schön and Alexander) to prove taste and strategic thinking.
+Sean's deployment of 17 autonomous agents, with 8 in production on local-first launchd schedules, serves as a live demonstration of his engineering depth and ability to manage complex agentic workflows.
 
 ## Evidence
 
-> The Agentic Engineering Signal is not a measure of tool exposure or volume of code, but a demonstration of reflective practice under uncertainty.
+> 17 autonomous Claude Agent SDK agents (8 in production on local-first launchd schedules).
 
-> This maps directly to senior PM, AI-PM, and agentic-engineering interviews where evaluators care about judgment, not tool exposure.
+> Sean leverages his local-first infrastructure not just for technical efficiency but as a strategic career differentiator that signals independence and cost-consciousness.
 
 ## Examples
 
-- Distinguishing 'AI fluency' from 'reflective practice under uncertainty'
-- Using a 'misfit inventory' to name forces like cost ceiling or stale context
-- Expressing one principle as an executable demo where the viewer can manipulate it
+- Running 8 agents in production on local-first launchd schedules to prove operational reliability.
+- Utilizing the Claude Agent SDK to create a fleet that demonstrates advanced orchestration skills.
 
 ## Related Concepts
 
-[[Portfolio Projects]] [[AI Fluency]] [[Craft in Product Design]]
+[[Control Architecture as Evangelism]] [[Intent Engineering]]

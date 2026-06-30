@@ -5,8 +5,8 @@ connects:
   - Control Architecture as Evangelism
   - Agentic Engineering Signal
   - Intent Engineering
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Synthesis

@@ -5,13 +5,13 @@ connects:
   - SRE Error Budget for Agents
   - Job Hunt as Sales Pipeline
   - Silent Failure Propagation in Agent Fleets
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Synthesis
 
-The core tension lies in the trade-off between maintaining high reliability in automation (to avoid errors in critical job-hunt tasks) and the need for velocity in a fast-moving market. High reliability requires strict error budgets and suppression of non-actionable alerts, which can mask underlying systemic issues or slow down response times to new opportunities. Conversely, prioritizing velocity often leads to accepting lower reliability thresholds, increasing the risk of silent failures that damage Sean’s professional reputation or cause missed deadlines. This tension manifests as a strategic decision: whether to invest in robust SRE practices for his job-hunt infrastructure or to accept higher failure rates in exchange for faster iteration and broader reach.
+The core tension lies in the trade-off between maintaining high reliability in automation to avoid errors in critical job-hunt tasks and the need for velocity in a fast-moving market. High reliability requires strict error budgets and suppression of non-actionable alerts, which can mask underlying systemic issues or slow down response times to new opportunities. Conversely, prioritizing velocity often leads to accepting lower reliability thresholds, increasing the risk of silent failures that damage Sean’s professional reputation or cause missed deadlines. This tension manifests as a strategic decision: whether to invest in robust SRE practices for his job-hunt infrastructure or to accept higher failure rates in exchange for faster iteration and broader reach.
 
 ## Threads
 

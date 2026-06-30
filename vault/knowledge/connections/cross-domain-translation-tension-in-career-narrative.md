@@ -4,14 +4,14 @@ type: connection
 connects:
   - Boundary Object Theory
   - Two Audiences
-  - Creative Studio Workflows
-created: 2026-06-29
-updated: 2026-06-29
+  - Cross-domain bridging
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Synthesis
 
-The tension arises because Sean's technical role requires precise, machine-readable telemetry while his career role requires interpretive, human-readable narrative. This creates a dependency where the vault must act as a boundary object that translates raw data into career-relevant stories without losing technical fidelity. The consequence is that Sean cannot rely on implicit understanding; he must explicitly define which artifacts are legible across these roles to maintain coherence between his builder identity and his candidate persona.
+The core tension arises because Sean's technical role demands precise, machine-readable telemetry while his career role requires interpretive, human-readable narrative. This creates a dependency where the vault must act as a boundary object that translates raw data into career-relevant stories without losing technical fidelity. The consequence is that Sean cannot rely on implicit understanding; he must explicitly define which artifacts are legible across these roles to maintain coherence between his builder identity and his candidate persona.
 
 ## Threads
 
@@ -23,9 +23,9 @@ The tension arises because Sean's technical role requires precise, machine-reada
 
 > It turns the article from descriptive reliability talk into an artifact hiring managers can evaluate as operational judgment.
 
-### [[Creative Studio Workflows]]
+### [[Cross-domain bridging]]
 
-> The connection mentions Creative Studio Workflows, Fleet Status, and Agent Health Monitoring, but it does not explain how different actors interpret the same status object.
+> The tension lies in the integration of Sean's professional product management tools with his personal career and creative outputs, creating a unified agentic infrastructure.
 
 ## Implications
 

@@ -2,19 +2,19 @@
 title: "Job Hunt as Sales Pipeline"
 type: concept
 sources:
-  - knowledge/expansions/connections/automation-job-hunt-and-observability-integration.md
+  - knowledge/concepts/job-hunt-as-sales-pipeline.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
 
-This concept reframes the job search from a passive application process into an instrumented sales funnel with defined stages, conversion rates, aging metrics, and next-best-action rules. It treats career transition as a go-to-market (GTM) system where each interaction is a data point in a larger pipeline, requiring stage SLAs and automated nudges to prevent decay in warm leads or stale applications. The mechanism relies on visualizing the bottleneck—whether it is sourcing, qualification, or interview conversion—to allocate research spend and effort efficiently rather than uniformly across all opportunities.
+This mechanism reframes career transition from a passive application process into an instrumented sales funnel where each interaction serves as a data point in a larger go-to-market system. It requires stage SLAs and automated nudges to prevent decay in warm leads or stale applications, treating the search as a business operation with clear KPIs. The core invariant is visualizing the bottleneck—whether it is sourcing, qualification, or interview conversion—to allocate research spend and effort efficiently rather than uniformly across all opportunities.
 
 ## Context
 
-Sean’s job hunt often suffers from lack of visibility into where applications stall or why certain companies are not responding. By applying sales pipeline logic, he can identify which stages are leaking value and adjust his strategy accordingly. This transforms the job hunt from a black box of anxiety into a manageable business operation with clear KPIs, enabling him to make sharper decisions about which companies deserve deep research and which applications should be deprioritized.
+Sean’s job hunt often suffers from lack of visibility into where applications stall or why certain companies are not responding. By applying sales pipeline logic, he can identify which stages are leaking value and adjust his strategy accordingly. This transforms the job hunt from a black box of anxiety into a manageable business operation with clear KPIs.
 
 ## Evidence
 

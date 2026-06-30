@@ -2,10 +2,10 @@
 title: "Curation as the New Scarcity"
 type: concept
 sources:
-  - knowledge/expansions/curation-as-the-new-scarcity.md
+  - knowledge/concepts/curation-as-the-new-scarcity.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean is building a personal knowledge vault and agent fleet that requires high-f
 
 ## Related Concepts
 
-[[Curation as the New Scarcity]] [[Slop as a Trust Deficit]] [[Demonstration Over Declaration]]
+[[Slop as a Trust Deficit]] [[Demonstration Over Declaration]]

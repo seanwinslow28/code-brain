@@ -2,10 +2,10 @@
 title: "Normal Accident Critique"
 type: concept
 sources:
-  - knowledge/expansions/connections/automation-reliability-and-agent-health-cross-dependencies.md
+  - knowledge/concepts/normal-accident-critique.md
 tags: [auto-generated, phase-6]
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
