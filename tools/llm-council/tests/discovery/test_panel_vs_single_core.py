@@ -43,6 +43,32 @@ def test_both_arms_fuse_same_bundle_with_different_panels():
     assert res["cost"] == pytest.approx(0.2)
 
 
+def test_arm_a_failure_records_its_cost():
+    bundle = _bundle()
+    calls = {"n": 0}
+
+    async def fake_gather(*, topic, tier, api_key, segment=""):
+        return bundle, {}
+
+    async def fake_fuse(*, api_key, bundle, tier, topic):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            raise FusionError("arm A blew up", cost=0.07)
+        return FusionResult(cost=0.1)
+
+    records = []
+    with pytest.raises(FusionError):
+        asyncio.run(run_panel_vs_single(
+            topic="t", tier_name="standard", single_model="anthropic/claude-opus-4.7",
+            api_key="k", on_date=date(2026, 6, 30),
+            gather_fn=fake_gather, fuse_fn=fake_fuse,
+            record_fn=lambda **kw: records.append(kw),
+        ))
+    # exactly one spend record from the failed arm-A partial cost
+    assert len(records) == 1
+    assert records[0]["amount"] == pytest.approx(0.07)
+
+
 def test_arm_b_failure_still_records_arm_a_and_arm_b_cost():
     bundle = _bundle()
     calls = {"n": 0}

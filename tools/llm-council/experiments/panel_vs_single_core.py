@@ -22,7 +22,11 @@ async def run_panel_vs_single(*, topic, tier_name, single_model, api_key, on_dat
 
     bundle, gather_status = await gather(topic=topic, tier=tcfg, api_key=api_key)
 
-    fr_a = await fuse(api_key=api_key, bundle=bundle, tier=tcfg, topic=topic)
+    try:
+        fr_a = await fuse(api_key=api_key, bundle=bundle, tier=tcfg, topic=topic)
+    except FusionError as e:
+        _bill(getattr(e, "cost", 0.0) or 0.0)   # record arm-A partial spend before surfacing
+        raise
     _bill(fr_a.cost)
 
     try:

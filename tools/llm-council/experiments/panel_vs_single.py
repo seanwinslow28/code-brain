@@ -52,18 +52,20 @@ def _write_artifacts(out_dir: Path, result: dict, topic: str) -> dict:
 @click.option("--single-model", default="anthropic/claude-opus-4.7")
 @click.option("--out", type=click.Path(file_okay=False, path_type=Path), default=None)
 @click.option("--yes", is_flag=True, help="Auto-confirm the dual-fuse cost.")
-def main(topic, tier_name, single_model, out, yes):
+@click.option("--skip-budget-check", is_flag=True, hidden=True)
+def main(topic, tier_name, single_model, out, yes, skip_budget_check):
     load_dotenv()
     tcfg = get_tier(tier_name)
     # Two fuse calls intentionally exceed a single-run cap, so gate on the DAILY cap, not per-run.
     estimated = round(tcfg.max_cost_per_run * 1.5, 4)
-    try:
-        preflight_tool(estimated=estimated, per_query_cap=DISCOVERY_DAILY_CAP,
-                       daily_cap=DISCOVERY_DAILY_CAP, monthly_cap=DISCOVERY_MONTHLY_CAP,
-                       on_date=date.today(), tool="discovery")
-    except BudgetExceeded as e:
-        console.print(f"[red]Budget rejected: {e}[/red]")
-        raise SystemExit(2)
+    if not skip_budget_check:
+        try:
+            preflight_tool(estimated=estimated, per_query_cap=DISCOVERY_DAILY_CAP,
+                           daily_cap=DISCOVERY_DAILY_CAP, monthly_cap=DISCOVERY_MONTHLY_CAP,
+                           on_date=date.today(), tool="discovery")
+        except BudgetExceeded as e:
+            console.print(f"[red]Budget rejected: {e}[/red]")
+            raise SystemExit(2)
 
     console.print(f"[yellow]Dual-fuse (panel vs {single_model}) — estimated up to ${estimated:.2f} "
                   f"(2 real OpenRouter calls).[/yellow]")

@@ -22,6 +22,14 @@ def test_shuffle_is_deterministic_per_topic():
     assert key1 == key2
 
 
+def test_shuffle_pinned_to_known_sha256():
+    # Cross-process anchor: sha256(b"same-topic") % 2 == 1 → arm A maps to Set 2.
+    # If the shuffle ever regresses to salted hash() this test breaks across processes.
+    a, b = [_pt("Alpha pain")], [_pt("Beta pain")]
+    _, key = build_blind_rating(a, b, topic="same-topic")
+    assert key == {"Set 1": "B", "Set 2": "A"}
+
+
 def test_markdown_hides_arm_identity_but_shows_content():
     a, b = [_pt("Alpha pain")], [_pt("Beta pain")]
     md, key = build_blind_rating(a, b, topic="t")
