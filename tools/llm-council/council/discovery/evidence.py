@@ -22,6 +22,10 @@ class EvidenceBundle:
     records: list[EvidenceRecord] = field(default_factory=list)
     _keys: set = field(default_factory=set)
     urls: set = field(default_factory=set)
+    # Real $ billed during Stage-1 gather (Sonar is a paid Perplexity call). Accumulated by the
+    # orchestrator from billing collectors and folded into the run's recorded spend by the pipeline,
+    # so the $10/day discovery cap sees Sonar's ~$0.02/run instead of silently under-reporting.
+    gather_cost_usd: float = 0.0
 
     def add(self, record: EvidenceRecord) -> bool:
         key = _dedup_key(record)

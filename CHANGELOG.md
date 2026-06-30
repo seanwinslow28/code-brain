@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### fusion-discovery-council gather follow-ups — Sonar cost integrity + review-site fan-out (2026-06-30)
+- **Sonar cost-integrity leak fixed.** Sonar is a paid Perplexity call on every run, but its
+  `usage.cost` was discarded — the gather stage's "every collector is FREE" invariant never
+  actually covered it, so the $10/day discovery cap silently under-counted ~$0.02/run. Collectors
+  now follow an explicit contract: return `list[EvidenceRecord]` (free) **or** `(records, cost)`
+  (paid). `collect_sonar` returns its billed `usage.cost`; the orchestrator accumulates it onto
+  the new `EvidenceBundle.gather_cost_usd`, and the pipeline folds that into the run's recorded
+  spend on **every** path (success, empty-bundle, fuse-failure) so the cap sees real Sonar spend.
+- **Review-site search fan-out.** `gather/reviews.py` issued one `(site:a OR site:b OR …)` query,
+  but Brave collapses an OR'd multi-`site:` query so most review domains were never searched. It
+  now fans out one single-`site:` query per domain (concurrently, tolerating per-domain failures),
+  round-robin-merges for cross-domain diversity, dedups by URL, and caps **total** fetches at
+  `max_results` so the fan-out can't explode cost/latency. Per-query length clamp preserved.
+- TDD; `tools/llm-council` suite **278 passed, 1 skipped**; validator PASS. $0 (free Brave/Exa path).
+
 ### fusion-discovery-council E2 — judge-family debias (2026-06-30)
 - **fusion-discovery-council E2 — panel self-preference fix.** The FUSE judge was a literal
   member of its own panel in every tier (the confound the Step-C gate flagged). E2 enforces one
