@@ -126,8 +126,9 @@ choices[0].message : ["role","content","refusal","reasoning","reasoning_details"
    (falling back to the token estimate when absent). Kept as-is for Phase 1 to preserve the tested
    contract; flagged to Sean.
 3. **Real cost calibration.** This single 2-panel, `max_tool_calls=2` call with a Gemini 2.5 Pro judge
-   cost **$0.497** (4 web tool calls executed). A `standard` tier (4-panel, `max_tool_calls=5`,
-   Opus judge) will cost meaningfully more — the per-run cap ($1.50) and daily/monthly caps
+   cost **$0.497** (4 web tool calls executed). A `standard` tier (post-E2: 3-panel,
+   `max_tool_calls=5`, with a non-panelist Opus judge) will cost meaningfully more — the per-run
+   cap ($1.50) and daily/monthly caps
    ($10/$50) are the real guardrails. The web-tool count (`panel_size × max_tool_calls`) dominates.
 
 ## 5. Cost of this spike
