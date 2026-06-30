@@ -14,6 +14,10 @@ __pycache__/
 # Session output (real council runs)
 data/sessions/*.json
 
+# Experiment run output — ad-hoc runs are not tracked by default.
+# The Step C panel-vs-single gate's decision artifacts are force-added as the audit trail.
+experiments/runs/
+
 # Local env override
 .env
 .env.local
