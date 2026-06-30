@@ -1,0 +1,107 @@
+{
+  "pain_points": [
+    {
+      "title": "Nondeterministic outputs: the same prompt never reproduces the same result",
+      "summary": "Creators describe generative AI as a 'slot machine' whose outputs are random and inconsistent run-to-run, so identical prompts yield different results and craft becomes gambling. This unpredictability is the core complaint that prevents trust in the tools.",
+      "quotes": [
+        "Many artists, writers, and designers who describe generative AI as a \"slot machine\" are frustrated by its unpredictability, lack of control, and constant model changes.",
+        "\"Slot machine\" behavior: unpredictability and lack of repeatability A recurring complaint is that generative AI behaves like a casino: you pull the lever (enter a prompt), and you get a random output, often inconsistent with what worked yesterday.",
+        "\"You feed it a prompt and pull the lever\u2026 It's a slot machine built from other people's labor.",
+        "Creators complain that this volatility \"turns artistic practice into trial-and-error gambling instead of craft.\""
+      ],
+      "urls": [
+        "https://www.theguardian.com/culture/2026/jun/26/australian-musicians-aussie-music-ai-training-tool-nick-cave-kylie-minogue-paul-dempsey",
+        "https://time.com/article/2026/03/26/ai-slop-is-threatening-musicians-can-tech-companies-stem-the-tide-/",
+        "https://thebulletin.org/2022/10/ai-is-plundering-the-imagination-and-replacing-it-with-a-slot-machine/",
+        "https://news.sky.com/story/robots-listening-to-robots-how-ai-music-fraudsters-are-spamming-sites-and-taking-cash-from-real-musicians-13500953"
+      ],
+      "consensus": "Strong consensus across multiple independent outlets (Guardian, Time, Bulletin, Sky News) that nondeterminism/unpredictability is the defining frustration.",
+      "intensity": 5,
+      "recency": "Mixed; ranges from 2022 (Bulletin) to mid-2026 (Guardian, Time), with the strongest framing in 2026.",
+      "segment": "Artists, writers, designers, and musicians (working creative professionals)."
+    },
+    {
+      "title": "No repeatable, trustworthy professional workflow \u2014 abandoning 'prompt chasing'",
+      "summary": "Because outputs are inconsistent, creators say it is impossible to build a stable, professional pipeline they can trust. They have stopped 'prompt chasing' and are explicitly asking for more stable, controllable systems and stable production pipelines.",
+      "quotes": [
+        "They say the same prompt never gives the same result twice, which makes it impossible to build a repeatable, professional workflow they can trust, so they have stopped \"prompt chasing\" and are asking for more stable, controllable systems.",
+        "While this study focuses on economics, respondents also note that AI tools are unreliable and constantly changing, making it impossible to build stable production pipelines."
+      ],
+      "urls": [
+        "https://files.eric.ed.gov/fulltext/EJ1471463.pdf",
+        "https://www.theguardian.com/technology/2024/apr/02/musicians-demand-protection-against-ai"
+      ],
+      "consensus": "Consistent across an academic source and journalistic coverage; both tie unreliability directly to inability to build dependable workflows.",
+      "intensity": 5,
+      "recency": "2024 (Guardian) plus undated academic PDF; theme reinforced by 2026 sources.",
+      "segment": "Working creative professionals building production pipelines."
+    },
+    {
+      "title": "Model updates silently break carefully built workflows",
+      "summary": "When AI providers update models and datasets \u2014 often without notice \u2014 prompts that previously worked suddenly produce different or worse results, breaking established workflows and severing any stable prompt-to-output mapping.",
+      "quotes": [
+        "Model updates break workflows: \"what worked last month no longer works\" Working artists report that when AI providers update their models, prompts that used to work suddenly produce different or worse results, breaking carefully built workflows.",
+        "The New Yorker's coverage of the Stability AI/Midjourney lawsuits notes artists' frustration that their styles can be invoked or mutated at will by prompts, but users cannot depend on any stable mapping from prompt to output because models and datasets are repeatedly updated without notice."
+      ],
+      "urls": [
+        "https://www.newyorker.com/culture/infinite-scroll/is-ai-art-stealing-from-artists",
+        "https://www.forbes.com/sites/maryroeloffs/2024/04/02/artists-slam-ai-developers-for-using-music-without-permission-in-letter-signed-by-kacey-musgraves-billie-eilish-and-more/"
+      ],
+      "consensus": "Two sources independently identify model/dataset updates as a distinct cause of workflow breakage.",
+      "intensity": 4,
+      "recency": "2024 (Forbes) and undated New Yorker coverage.",
+      "segment": "Visual artists relying on consistent model behavior over time."
+    },
+    {
+      "title": "Demand for determinism and reproducibility controls (seeds, version pinning)",
+      "summary": "Rather than chasing prompts, creators want deterministic behavior or explicit controls \u2014 seeds, settings, and version locks \u2014 that reliably reproduce past results. They specifically request version pinning and complain tools prioritize novelty over reproducibility.",
+      "quotes": [
+        "Creators want deterministic behavior (the same input producing the same output when desired), or at least clear controls (seeds, version locks, settings) that reliably reproduce past results.",
+        "Artists want: - Version pinning: the ability to lock a project to a specific model version so prompts don't change meaning over time.",
+        "They complain that existing tools prioritize novelty and engagement over reproducibility."
+      ],
+      "urls": [
+        "https://www.wired.com/story/ai-bots-streaming-music/",
+        "https://www.thecrimson.com/article/2024/11/5/AI-art-celebrity-condemnation/",
+        "https://copyrightalliance.org/artists-speak-out-harm-unlicenced-ai-ingestion/"
+      ],
+      "consensus": "Strong alignment on a constructive solution: deterministic/reproducible controls and version pinning are repeatedly requested.",
+      "intensity": 4,
+      "recency": "Includes 2024 (Crimson) plus undated Wired and Copyright Alliance sources.",
+      "segment": "Professional artists and musicians seeking dependable tooling."
+    },
+    {
+      "title": "Compulsive 'lever-pulling' and gambling-like addiction loops",
+      "summary": "The slot-machine dynamic produces compulsive behavior: users keep pulling the lever chasing a 'big hit,' described in community discussion as overload and addiction, with the variation-heavy generate-and-discard loop echoing slot-machine reward design.",
+      "quotes": [
+        "To get that BIG HIT BAYBEEEEEEEEEEEE",
+        "His ass WILL develop a crippling gambling addiction",
+        "I wish I could ask my 600,000+ readers how they deal with both: overload & addiction.",
+        "Evolution generates thousands of variations \u2014 most fail, few survive."
+      ],
+      "urls": [
+        "https://reddit.com/r/recontext/comments/1udp9yp/comment/otdtcpe/",
+        "https://reddit.com/r/recontext/comments/1udp9yp/comment/otezn8f/",
+        "https://ruben.substack.com/p/ai-is-a-slot-machine"
+      ],
+      "consensus": "Emergent/anecdotal consensus from community comments and a creator newsletter; lower-signal than journalistic sources but directly on-theme.",
+      "intensity": 3,
+      "recency": "2026 (Reddit comments June; Substack May).",
+      "segment": "AI hobbyists, online creative communities, and content creators."
+    }
+  ],
+  "blind_spots": [
+    "Quantitative data is absent: no evidence reports how many creators are affected, time/cost wasted, or what percentage have abandoned prompt chasing.",
+    "Underrepresentation of writers specifically; nearly all concrete examples come from musicians and visual/graphic artists despite the prompt including writers.",
+    "No vendor/platform perspective is present (e.g., why nondeterminism is a default, whether seeds/version pinning already exist on some platforms).",
+    "Limited evidence of successful repeatable systems actually being built; the 'win over AI' Reddit title is unelaborated and offers no detail on a working solution.",
+    "Several key sonar-attributed claims lack visible original quotes/dates, so verification of the underlying primary sources is incomplete.",
+    "No coverage of open-source/local models where seeds and version locks are already user-controllable, which could moderate the determinism complaint."
+  ],
+  "contradictions": [
+    "Some creators frame unpredictability as the core problem to be eliminated (determinism wanted), while one source frames variation/novelty as valuable ('the generic nature of AI art can work in our favour'; 'most fail, few survive'), suggesting tension over whether randomness is a bug or a feature.",
+    "The Forbes-listed URL is described as containing 'The New Yorker's coverage,' creating an attribution mismatch between the source label and the cited outlet that undermines confidence in provenance.",
+    "Dates conflict with the 'stopped chasing prompts' narrative being recent: the foundational 'slot machine' framing dates to 2022 (Bulletin) while the workflow-abandonment claims cluster in 2024\u20132026."
+  ],
+  "cost": 1.243769
+}
