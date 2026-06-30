@@ -8,10 +8,12 @@ from council.discovery.evidence import EvidenceRecord
 
 @pytest.mark.asyncio
 async def test_gather_collectors_record_no_spend(tmp_spend_dir):
-    """Cost-integrity invariant: Stage-1 collectors are all FREE today, so a full gather run
-    records ZERO discovery spend. If a future collector bills (Firecrawl/Apify), this stays
-    green ONLY by threading the incurred cost into a typed gather failure + record_spend
-    (see the gather/__init__.py invariant note) — never by a silent billable call."""
+    """Cost-integrity invariant: gather() itself NEVER calls record_spend — a billing collector
+    (Sonar today) surfaces its cost via the (records, cost) tuple, which the orchestrator puts on
+    bundle.gather_cost_usd and the PIPELINE folds into recorded spend. So a gather() call in
+    isolation (these free list-returning fakes) records ZERO discovery spend. A future paid
+    collector must return the (records, cost) tuple too — never make a silent billable call.
+    See gather/__init__.py and test_gather_orchestrator.py for the cost-threading path."""
     async def fake(t):
         return [EvidenceRecord("review", "g2.com", "https://g2.com/1", "", "it crashes daily")]
     bundle, status = await gather_evidence(

@@ -69,12 +69,15 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
 
     gather = gather_fn or gather_evidence
     bundle, gather_status = await gather(topic=topic, tier=tcfg, api_key=api_key, segment=segment)
+    # Sonar (Stage-1) is a paid call billed regardless of what survives downstream; seed every
+    # cost path with it so a no-records / fuse-failure run still records the real gather spend.
+    gather_cost = round(getattr(bundle, "gather_cost_usd", 0.0) or 0.0, 4)
 
     if not bundle.records:
         md = render_ledger(topic=topic, lens=lens, tier=tier, segment=segment, cards=[],
-                           quote_bank=[], fusion_result=FusionResult(), cost_usd=0.0,
+                           quote_bank=[], fusion_result=FusionResult(), cost_usd=gather_cost,
                            dropped_count=0, supplement=None)
-        return DiscoveryResult(markdown=md, cost_usd=0.0, verified_count=0, dropped_count=0,
+        return DiscoveryResult(markdown=md, cost_usd=gather_cost, verified_count=0, dropped_count=0,
                                session={"id": session_id, "topic": topic, "empty": True,
                                         "gather_status": gather_status})
 
@@ -82,7 +85,7 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
     try:
         fr = await fuse(api_key=api_key, bundle=bundle, tier=tcfg, topic=topic)
     except FusionError as e:
-        cost = round(getattr(e, "cost", 0.0) or 0.0, 4)
+        cost = round((getattr(e, "cost", 0.0) or 0.0) + gather_cost, 4)
         fail_session = {
             "id": session_id, "topic": topic, "lens": lens, "tier": tier,
             "evidence_count": len(bundle.records), "gather_status": gather_status,
@@ -101,7 +104,7 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
     # Without this, a post-fuse crash silently drops real spend and the daily cap goes blind (root cause
     # of the 2026-06-28 BACKFILL crash). Mirror the FusionError path: thread the accumulated cost into
     # DiscoveryFailed.cost_usd and persist a diagnostic failure session.
-    cost = _estimate_cost(fr, tcfg)
+    cost = round(_estimate_cost(fr, tcfg) + gather_cost, 4)
     try:
         verified = verify_pain_points(fr.pain_points, bundle)
         dropped = sum(1 for v in verified if not v.verified)

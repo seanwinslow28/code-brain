@@ -28,6 +28,41 @@ async def test_pipeline_end_to_end_drops_unverified():
     assert res.cost_usd > 0
 
 
+@pytest.mark.asyncio
+async def test_pipeline_folds_gather_cost_into_spend():
+    # Sonar's billed gather cost (carried on bundle.gather_cost_usd) must be added to the run's
+    # recorded cost — otherwise the $10/day cap goes blind to ~$0.02/run of real Sonar spend.
+    bundle = EvidenceBundle()
+    bundle.add(EvidenceRecord("reddit", "r/pm", "https://r.com/1", "2026-06-18", "exports fail silently", 9))
+    bundle.gather_cost_usd = 0.0231
+
+    async def gather_fn(**kw):
+        return bundle, {"sonar": "ok: 1 records (1 found)"}
+
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Export loss", "s", ["exports fail silently"], ["https://r.com/1"], intensity=5),
+        ], blind_spots=[], tokens_in=0, tokens_out=0, web_calls=0, cost=0.50)
+
+    res = await run_discovery(topic="pm tools", lens="pm", tier="standard", api_key="k",
+                              gather_fn=gather_fn, fuse_fn=fuse_fn, supplement=False)
+    assert res.cost_usd == pytest.approx(0.5231)   # fuse 0.50 + gather 0.0231
+
+
+@pytest.mark.asyncio
+async def test_pipeline_records_gather_cost_on_empty_bundle():
+    # Sonar bills even when it yields no usable evidence; the empty-bundle path must still report it.
+    empty = EvidenceBundle()
+    empty.gather_cost_usd = 0.018
+
+    async def gather_fn(**kw):
+        return empty, {"sonar": "ok: 0 records (0 found)"}
+
+    res = await run_discovery(topic="x", lens="pm", tier="quick", api_key="k",
+                              gather_fn=gather_fn, fuse_fn=None)
+    assert res.cost_usd == pytest.approx(0.018)
+
+
 def test_estimate_cost_prefers_usage_cost():
     from council.discovery.pipeline import _estimate_cost
     from council.discovery.fusion import FusionResult
