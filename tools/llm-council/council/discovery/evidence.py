@@ -1,6 +1,6 @@
 """Evidence model: real-URL records gathered in Stage 1, consumed by fuse/verify/frame."""
 
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 
 
 @dataclass(frozen=True)
@@ -34,3 +34,13 @@ class EvidenceBundle:
 
     def has_url(self, url: str) -> bool:
         return url in self.urls
+
+    def to_dict(self) -> dict:
+        return {"records": [asdict(r) for r in self.records]}
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "EvidenceBundle":
+        bundle = cls()
+        for rd in d.get("records", []):
+            bundle.add(EvidenceRecord(**rd))
+        return bundle
