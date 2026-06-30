@@ -2,7 +2,7 @@
 title: "Runtime-Model Coupling"
 type: concept
 sources:
-  - knowledge/concepts/runtime-model-coupling.md
+  - knowledge/connections/the-latent-debt-of-silent-failures-in-cognitive-infrastructure.md
 tags: [auto-generated, phase-6]
 created: 2026-06-30
 updated: 2026-06-30
@@ -10,23 +10,22 @@ updated: 2026-06-30
 
 ## Definition
 
-This invariant occurs when the logical dependency of an agent on specific hardware or network conditions is not abstracted away, causing the agent's availability to be directly tied to the physical state of a single machine. Instead of a distributed, resilient architecture where agents can migrate or fallback, the runtime model couples the agent's identity to a specific endpoint (e.g., MBP vs. Mac Mini). This coupling creates a single point of failure for critical cognitive tasks, as the agent cannot function if that specific machine is offline or asleep.
+This mechanism refers to the dependency of agent reliability on specific hardware states and network conditions rather than just software logic. When critical agents are hosted on unstable machines like an MBP or Alienware, their availability becomes tied to the host's sleep state or power management settings. This coupling introduces a non-deterministic failure mode where the agent is logically correct but physically unavailable, causing silent drops in data flow that are difficult to diagnose through software logs alone.
 
 ## Context
 
-Sean's infrastructure attempts to balance cost and capability by using different machines for different agents. However, placing the vault-synthesizer on the MacBook Pro (MBP) introduces reliability risks because laptops are not always awake or connected, unlike the Mac Mini which serves as the stable host for indexing.
+Sean's infrastructure includes critical synthesis agents running on his personal laptop (MBP). The instability of this hardware directly impacts the consistency of his knowledge vault, necessitating a migration to a more stable host like the Mac Mini to decouple agent availability from daily device usage patterns.
 
 ## Evidence
 
-> The fleet's dependency on specific machine states conflicts with the goal of reliable, always-on operation.
+> Design a clear restructuring pass: migrate all critical agent dependency from flaky machines (MBP/Alienware) to Mac Mini as the stable host.
 
-> Prioritize resolving vault-synthesizer errors to link concepts, which is vital for all three domains (creative/life-systems).
+> The health of the autonomous agent fleet, such as vault-indexer and vault-synthesizer, is directly tied to the overall infrastructure health of Sean's systems.
 
 ## Examples
 
-- The vault-synthesizer is scheduled for 2:30 AM on the MBP, but if the laptop sleeps or loses power, the synthesis step is skipped entirely.
-- Critical machines like Alienware and ComfyUI remain offline, preventing full cross-machine agent mesh functionality.
+- Sean must implement a semantic verification step in the daily note generation process to detect when conceptual links are missing, rather than relying solely on agent health checks.
 
 ## Related Concepts
 
-[[Infrastructure Status]] [[Automation Reliability]] [[Control Plane / Data Plane Split for Agent Fleets]]
+[[Infrastructure Status]] [[Vault as Agent Infrastructure]]

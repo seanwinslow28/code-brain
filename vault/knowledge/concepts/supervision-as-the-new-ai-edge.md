@@ -2,7 +2,7 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - knowledge/connections/the-cost-of-verification-vs-the-value-of-governance.md
+  - knowledge/connections/the-validity-paradox-in-ai-pm-selection.md
 tags: [auto-generated, phase-6]
 created: 2026-06-30
 updated: 2026-06-30
@@ -10,23 +10,23 @@ updated: 2026-06-30
 
 ## Definition
 
-This concept defines a structural inversion in value creation where the marginal cost of generation approaches zero, thereby shifting the economic bottleneck to the verification layer. As generative models produce increasingly plausible but unverified outputs, the human supervisor's role transforms from content creator to quality auditor. This creates a high-friction dependency where the speed of the agent fleet is artificially capped by the slower, more expensive rate of human review required to maintain trust and legal safety.
+This concept identifies the shift in competitive advantage from raw model capability to the nuanced management of user expectations and system trust. It argues that superior technical updates can degrade performance if they violate established mental models or learned behaviors, making the preservation of implicit contracts more critical than explicit feature gains. The underlying pattern is that value is derived from maintaining continuity in human-AI interaction rather than maximizing isolated metric improvements.
 
 ## Context
 
-Sean must recognize that his current agentic workflows are likely creating 'plausibility debt' rather than efficiency gains. If the output requires significant editing to be usable, the net value of the automation is negative compared to manual creation. He needs to pivot his tooling strategy toward reducing the cognitive load of verification rather than just increasing the volume of raw text generation.
+Sean’s job hunt must highlight his ability to manage this tension, particularly when proposing changes to existing systems. He needs to demonstrate that he prioritizes the stability of user trust over raw technical novelty, which is a key differentiator for senior AI product roles.
 
 ## Evidence
 
-> Marketing teams report that 'AI-generated content often requires more editing time than writing from scratch,' which inverts the expected efficiency gain of agentic workflows.
+> A more accurate AI update can still hurt team performance if it violates learned user expectations.
 
-> Legal teams in marketing organizations are 'hesitant to approve AI-generated content without extensive review,' citing potential copyright and defamation risks.
+> Sean must frame his agentic engineering demos as tests of backward compatibility and trust preservation, not just technical fluency.
 
 ## Examples
 
-- The inversion of efficiency where AI drafting takes longer to finalize than manual writing.
-- Legal hesitation blocking deployment due to unverified provenance of generated segments.
+- Prioritizing backward compatibility in demo narratives to show respect for existing user mental models.
+- Focusing on 'trust preservation' as a core metric in project descriptions rather than just accuracy or speed.
 
 ## Related Concepts
 
-[[Accountability Gap]] [[Context Management as a Bottleneck]]
+[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Vibe-Coding Interview Canon]]

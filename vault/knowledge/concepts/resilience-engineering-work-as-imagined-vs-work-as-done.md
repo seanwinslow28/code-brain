@@ -2,7 +2,7 @@
 title: "Resilience Engineering: Work-as-Imagined vs Work-as-Done"
 type: concept
 sources:
-  - knowledge/connections/resilience-vs-reliability-in-agent-health.md
+  - knowledge/connections/the-validity-paradox-in-ai-pm-selection.md
 tags: [auto-generated, phase-6]
 created: 2026-06-30
 updated: 2026-06-30
@@ -10,23 +10,23 @@ updated: 2026-06-30
 
 ## Definition
 
-This concept defines the structural gap between the deterministic, linear workflows agents are programmed to execute and the chaotic, non-linear reality of their actual runtime environments. It posits that agent health cannot be measured by binary success/failure states because these states ignore the 'stretch' capacity required to handle partial failures gracefully. The mechanism relies on observing how an agent degrades under pressure rather than just its ability to maintain uptime in ideal conditions.
+This concept defines the structural gap between the idealized, linear workflows assumed by standard hiring instruments and the non-linear, improvisational reality of managing autonomous agent fleets. It posits that traditional selection methods systematically filter for adherence to pre-defined scripts rather than the capacity to recover intention when those scripts fail in production. The mechanism relies on the observation that effective performance in complex systems is measured by the ability to navigate deviation, not by the avoidance of it.
 
 ## Context
 
-Sean's current portfolio projects likely emphasize successful automation runs, which fails to demonstrate operational maturity. By shifting focus to graceful degradation, he can signal to hiring managers that his systems are robust enough for complex, real-world enterprise environments where perfect reliability is impossible.
+Sean must recognize that his job hunt strategy currently emphasizes 'plan execution' which aligns with the 'Work-as-Imagined' side of this tension. To succeed, he needs to reframe his portfolio to demonstrate 'recovery intention,' showing how he handles the collapse of plans rather than just their successful completion.
 
 ## Evidence
 
-> The useful question becomes not “did the agent fail?” but “did the workflow degrade gracefully, preserve intent, and create a recovery path?”
+> The interview is not testing whether the candidate can follow a plan; it is testing whether they can recover intention when the plan collapses.
 
-> Your current frame treats monitoring as detection: catch loops, hallucinations, broken states.
+> Standard interviews measure adherence to imagined plans, while effective AI PMs demonstrate competence through improvisation during plan collapse.
 
 ## Examples
 
-- Designing portfolio projects to explicitly show fallback behaviors rather than just successful runs.
-- Demonstrating that hiring managers value the 'stretch' capability of agents more than uptime statistics.
+- Designing portfolio demos that explicitly show backward compatibility and trust preservation during agent failure scenarios.
+- Framing agentic engineering work as a test of resilience rather than just technical fluency.
 
 ## Related Concepts
 
-[[SRE Error Budget for Agents]] [[Agent Health Monitoring]]
+[[Supervision as the New AI Edge]] [[Vibe-Coding Interview Canon]]

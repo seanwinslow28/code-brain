@@ -2,7 +2,7 @@
 title: "The Illusion of Competence in Automated Systems"
 type: concept
 sources:
-  - knowledge/connections/the-illusion-of-competence-in-automated-systems.md
+  - knowledge/expansions/the-illusion-of-competence-in-automated-systems.md
 tags: [auto-generated, phase-6]
 created: 2026-06-30
 updated: 2026-06-30
@@ -10,23 +10,23 @@ updated: 2026-06-30
 
 ## Definition
 
-This phenomenon occurs when monitoring layers validate structural integrity—such as log existence, process completion, or zero crash reports—rather than semantic utility or functional output. Agents maintain perfect operational health metrics while failing to deliver any meaningful value, creating a feedback loop where users develop false confidence in their automation stacks. The critical failure mode is that silent regressions mask themselves as healthy operations until the accumulated strategic stagnation becomes undeniable.
+This concept describes the systemic risk where high-performing automation creates a latent vulnerability by eroding the human operator's ability to recover from failure. As automation handles routine tasks with increasing reliability, it removes the very practice data required for humans to maintain manual proficiency. Consequently, when the system inevitably fails or encounters an edge case, the human fallback is not just untrained but actively degraded, creating a dangerous gap between perceived and actual safety.
 
 ## Context
 
-Sean must implement output-verification checks in his monitoring stack that validate semantic content, not just process completion, to prevent silent regressions from masking as healthy operations. This insight directly informs his job-hunt strategy by emphasizing 'judgment layer' expertise, which addresses the failure mode of access-heavy agents that lack meaningful context.
+Sean is building an autonomous agent fleet (Vault Synthesizer, Job Feed, etc.) that operates with high reliability. Understanding this illusion is critical because it dictates that Sean must intentionally design 'breakdown drills' rather than relying on passive monitoring to ensure he remains capable of manual intervention when the agents fail silently.
 
 ## Evidence
 
-> The agent had been running clean every night — `status: ok`, zero errors, manifest healthy, a green checkmark next to every cron — and producing absolutely nothing.
+> When automation removes routine practice, it also removes the training data for human recovery.
 
-> There is a moment, somewhere around the ninth night that an automated system has been quietly producing nothing while reporting that everything is fine, when you start to wonder which of you is the product manager and which of you is the unattended cron job with delusions of competence.
+> The failure is not that the automation stops working; the failure is that the human’s model of the automation diverges from the automation’s actual state.
 
 ## Examples
 
-- A cron job reports 'healthy' status for nine consecutive nights while generating zero functional output.
-- Monitoring layers validate structural integrity like logs existing rather than semantic utility like work being done.
+- Monthly failure drills for Daily Driver, Vault Critic, Job Feed, and Synthesizer to practice manual recovery.
+- Agent Fleet Mode Legend to track scheduled, skipped, fallback-disabled, partial, human-needed, stale-output, and authority-escalated states.
 
 ## Related Concepts
 
-[[Silent Failure Propagation in Agent Fleets]] [[Infrastructure Status]]
+[[The Illusion of Health in Autonomous Systems]] [[SRE Error Budget for Agents]]

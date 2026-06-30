@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/the-tension-between-privacy-isolation-and-agentic-accessibility.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Definition
 
-This is the semantic rule set that identifies and suppresses specific personal topics, such as prior employment details or family names, from being promoted into the public knowledge graph. It acts as a filter layer that intercepts content before it enters the agentic ecosystem, ensuring that sensitive information remains in the private domain while allowing the broader narrative to be processed by agents. The framing is not just a technical constraint but a creative voice rule that shapes how Sean's stories are told and shared.
+This is the semantic rule set that governs what content is eligible for promotion into the public knowledge graph, acting as a filter for sensitive or proprietary information. It defines specific categories of suppressed personal topics, such as prior-employer names and compensation terms, which must be scrubbed before data can be exposed to agents. This framing creates a boundary object between Sean's private reality and his public narrative, requiring constant vigilance to ensure that the 'sanitized proxy' remains truly free of the original's sensitive attributes.
 
 ## Context
 
-Sean's Substack series has a 'voice rule' that suppresses certain personal details, which aligns with his need for privacy in his agent infrastructure. This dual layer of suppression—creative and technical—creates a complex dependency where the public copy must accurately reflect the private original without revealing the suppressed elements.
+Sean uses this framing to protect his privacy while still leveraging agentic tools for creative work. The tension arises because the agent infrastructure treats all data equally unless explicitly constrained by these rules, meaning the burden of privacy falls on the routing mechanism rather than the agent's inherent understanding.
 
 ## Evidence
 
@@ -24,9 +24,9 @@ Sean's Substack series has a 'voice rule' that suppresses certain personal detai
 
 ## Examples
 
-- The suppression of prior-employer names in the Substack series' voice rule.
-- The code-brain Rule #10 that enforces the Do-Not-Promote framing for sensitive topics.
+- The 'Do-Not-Promote' term is used as an umbrella for suppressed personal topics.
+- Prior-employer names and compensation terms are explicitly listed as items to be filtered by the privacy gate.
 
 ## Related Concepts
 
-[[Privacy-Aware Data Routing]] [[Vault as Agent Infrastructure]]
+[[Privacy-Aware Data Routing]] [[Negative Capability / Failure Literacy]]

@@ -2,7 +2,7 @@
 title: "Negative Space Calibration"
 type: concept
 sources:
-  - knowledge/connections/the-authority-approachability-tension-in-technical-storytelling.md
+  - knowledge/connections/the-tension-between-protocol-instrumentation-and-aesthetic-emergence.md
 tags: [auto-generated, phase-6]
 created: 2026-06-30
 updated: 2026-06-30
@@ -10,23 +10,23 @@ updated: 2026-06-30
 
 ## Definition
 
-This mechanism defines the precise threshold of information withholding that sustains reader engagement. Curiosity intensity scales with proximity, meaning the gap between what is known and what is revealed must feel small and closeable to the audience. If the negative space is too wide, it becomes a vast chasm that causes frustration; if too narrow, it eliminates the motivational tension necessary for sustained attention.
+This mechanism defines a feedback loop where aesthetic refinement is driven by explicit rejection of unwanted outputs rather than the generation of desired ones. It relies on the agent's ability to recognize and eliminate deviations from a target style, using negative constraints as the primary signal for improvement. This approach bypasses the difficulty of describing abstract qualities like 'voice' or 'taste' by focusing on what is clearly wrong, allowing the correct form to emerge through elimination.
 
 ## Context
 
-In Sean's creative writing and technical documentation, knowing exactly how much detail to omit is critical. Proper calibration ensures that his audience remains intellectually engaged by feeling capable of filling in the blanks, rather than being overwhelmed or bored by over-explanation.
+Sean faces a specific bottleneck in his creative studio where agents can execute tasks but cannot replicate his unique voice. By shifting from descriptive prompting to rejection-based calibration, he leverages his own taste as the evaluation function, turning the agent fleet into a tool for refining rather than generating raw content.
 
 ## Evidence
 
-> Curiosity intensity scales with proximity: the gap must feel small and closeable, not a vast chasm
+> I want to find my writing voice by reacting to what it ISN'T. two words is fine. "No." "Gross." "Never."
 
-> He must calibrate negative space carefully, ensuring that the gaps he leaves are small enough for his target audience to fill, maintaining engagement rather than causing frustration.
+> You can't prompt taste into an LLM; it's raising, not describing.
 
 ## Examples
 
-- Leaving specific technical details implicit when the audience can logically deduce them.
-- Structuring narratives so open loops resolve quickly enough to maintain momentum.
+- Using the 'Cheese Gauntlet' kit to translate aesthetic rejection into a format agents can process without requiring explicit descriptive prompts.
+- Maintaining separate mental models for automating tasks versus cultivating style to prevent operational rigidity from leaking into creative processes.
 
 ## Related Concepts
 
-[[Humor and Status Dynamics]] [[Motivational Tension via Open Loops]]
+[[Raising vs. Describing]] [[Supervision as the New AI Edge]]

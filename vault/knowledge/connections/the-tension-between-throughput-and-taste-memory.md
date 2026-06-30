@@ -2,30 +2,30 @@
 title: "The Tension Between Throughput and Taste Memory"
 type: connection
 connects:
-  - Negative Capability / Failure Literacy
-  - Supervision as the New AI Edge
   - Slop as a Trust Deficit
-created: 2026-06-29
-updated: 2026-06-29
+  - Supervision as the New AI Edge
+  - Negative Capability / Failure Literacy
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Synthesis
 
-The core tension lies in the conflict between optimizing for generation speed (throughput) and preserving aesthetic integrity (taste memory). When agents are allowed to scale without 'productive obstruction' or 'dailies loops,' they converge on generic, high-probability outputs that lack distinct voice. This results in a 'trust deficit' where the volume of content increases but its perceived value decreases, as the system fails to distinguish between technical success and creative failure.
+This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. As agents scale without 'productive obstruction,' they optimize for volume over value, causing outputs to converge on generic, high-probability patterns that lack distinct voice. The consequence is that Sean's professional signal is diluted by slop, requiring him to implement 'obstruction' primitives and 'taste governance' to maintain his unique aesthetic edge in a market saturated with automated content.
 
 ## Threads
 
-### [[Negative Capability / Failure Literacy]]
+### [[Slop as a Trust Deficit]]
 
-> agents should not only execute taste; they should disturb taste on schedule.
+> Prompt-to-asset pipelines fail when they optimize throughput over taste memory.
 
 ### [[Supervision as the New AI Edge]]
 
 > which artifacts deserve more compute, which defects are taste failures versus technical failures
 
-### [[Slop as a Trust Deficit]]
+### [[Negative Capability / Failure Literacy]]
 
-> Prompt-to-asset pipelines fail when they optimize throughput over taste memory.
+> agents should not only execute taste; they should disturb taste on schedule.
 
 ## Implications
 

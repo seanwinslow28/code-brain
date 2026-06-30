@@ -2,7 +2,7 @@
 title: "Boundary Object Theory"
 type: concept
 sources:
-  - knowledge/concepts/boundary-object-theory.md
+  - knowledge/connections/the-tension-between-tacit-judgment-and-automated-execution.md
 tags: [auto-generated, phase-6]
 created: 2026-06-30
 updated: 2026-06-30
@@ -10,22 +10,23 @@ updated: 2026-06-30
 
 ## Definition
 
-This mechanism describes how status objects and dashboards function as translation layers between different roles within a system. It posits that a fleet dashboard is not merely telemetry but a boundary object that mediates between Sean-the-builder, Sean-the-writer, and Sean-the-job-candidate by requiring distinct interpretations of the same data. The mechanism relies on the artifact's ability to remain flexible enough for local adaptation while robust enough to maintain a common identity across these disparate social worlds.
+Artifacts function as shared interfaces that allow distinct professional groups to negotiate meaning without requiring a unified mental model. This pattern enables product, engineering, design, and hiring managers to align on specific outcomes while maintaining their separate domain languages. The artifact itself becomes the site of translation, reducing friction by externalizing the negotiation process into a tangible format.
 
 ## Context
 
-Sean must explicitly map his technical outputs to career narratives for each audience because his vault acts as this boundary object. Without this explicit mapping, the technical telemetry remains opaque to hiring managers who evaluate operational judgment rather than raw code or logs.
+Sean's vault must act as a boundary object that facilitates negotiation across his different roles (builder, writer, candidate). By treating portfolio projects and documentation as negotiable artifacts rather than static demonstrations, he can bridge the gap between technical precision and interpretive narrative required in job hunts.
 
 ## Evidence
 
-> A fleet dashboard is not just telemetry; it is a boundary object between Sean-the-builder, Sean-the-writer, Sean-the-job-candidate, and the agents themselves.
+> Artifacts that let product, engineering, design, and hiring managers negotiate meaning without sharing the same mental model.
 
-> This concept describes how status objects and dashboards function as translation layers between different roles within a system.
+> Sean's different roles (builder, writer, candidate) require different interpretations of the same data.
 
 ## Examples
 
-- The fleet dashboard serving as a shared artifact legible to both agents and human reviewers.
+- Portfolio projects designed as boundary objects for stakeholder negotiation
+- Vault acting as a boundary object across builder/writer/candidate roles
 
 ## Related Concepts
 
-[[Two Audiences]] [[Creative Studio Workflows]]
+[[Cross-domain bridging]] [[Two Audiences]]

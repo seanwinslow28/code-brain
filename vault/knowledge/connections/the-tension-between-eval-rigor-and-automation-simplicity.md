@@ -5,8 +5,8 @@ connects:
   - Eval Vocabulary
   - Automation Reliability
   - Intent Engineering
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Synthesis
@@ -17,7 +17,7 @@ There is a fundamental tension between the need for rigorous evaluation (Eval Vo
 
 ### [[Eval Vocabulary]]
 
-> intent_spec` tool *is* the eval. It scores a spec against the framework's dimensions before that spec reaches a coding agent
+> Eval Vocabulary functions as a semantic contract layer that translates ambiguous human intent into deterministic scoring dimensions before any code generation occurs.
 
 ### [[Automation Reliability]]
 

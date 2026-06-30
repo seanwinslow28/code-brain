@@ -5,8 +5,8 @@ connects:
   - Friction-Killing Wedge
   - Value Chain / Activity System Mapping
   - Market Positioning
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Synthesis

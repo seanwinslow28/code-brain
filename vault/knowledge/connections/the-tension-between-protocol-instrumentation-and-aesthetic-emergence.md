@@ -5,8 +5,8 @@ connects:
   - Negative Space Calibration
   - Raising vs. Describing
   - Supervision as the New AI Edge
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Synthesis

@@ -2,7 +2,7 @@
 title: "Slop as a Trust Deficit"
 type: concept
 sources:
-  - knowledge/concepts/slop-as-a-trust-deficit.md
+  - knowledge/expansions/slop-as-a-trust-deficit.md
 tags: [auto-generated, phase-6]
 created: 2026-06-30
 updated: 2026-06-30
@@ -10,22 +10,23 @@ updated: 2026-06-30
 
 ## Definition
 
-This mechanism defines the erosion of user confidence in automated systems caused by low-signal outputs or silent failures, which forces the user to expend mental energy verifying task completion. The resulting 'slop' represents the hidden cognitive overhead required to validate that an agent actually performed its duty correctly, rather than simply appearing to do so. When this verification cost exceeds the effort of manual execution, it creates a perverse incentive to disable automation despite its theoretical efficiency gains. This mechanism highlights how reliability is not just about uptime, but about the fidelity of the output relative to the user's need for certainty.
+Slop is not merely low trust; it is miscalibrated reliance where the user cannot distinguish whether an agent’s output deserves delegation, inspection, or rejection. This deficit arises because the agent’s internal state—such as rate limits, stale indexes, or context starvation—remains hidden from the user until failure occurs. The resulting friction forces the user to perform high-stakes monitoring and recovery work that is cognitively expensive precisely because it is rare and unpracticed.
 
 ## Context
 
-Sean is building a personal knowledge vault that requires high fidelity and trust in his agent fleet. If the synthesizer produces empty results or fails silently, he must spend time checking logs rather than using insights, which erodes the value proposition of the automation. This deficit directly impacts his ability to rely on the fleet for daily operations and job-hunt workflows.
+Sean is building an agent fleet where reliability is paramount. If he cannot accurately assess when to delegate tasks versus when to inspect outputs, his productivity gains are negated by the cognitive load of verification. This concept reframes the problem from 'trust' to 'calibrated reliance,' enabling him to design specific observability contracts and failure drills.
 
 ## Evidence
 
-> Prioritize fixing agent reliability: Address the flaky MBP/Alienware synchronization issues to achieve full agent coverage across all machines.
+> Slop is not low trust; it is miscalibrated reliance, where the user cannot tell whether the agent’s output deserves delegation, inspection, or rejection.
 
-> Focus on infrastructure stabilization before building complex features: Solve MCP authorization persistence first to remove session-start friction.
+> The fleet’s failure mode is not that Sean still has work to do; it is that the remaining work becomes colder, rarer, less practiced, and more cognitively expensive.
 
 ## Examples
 
-- The daily note exists but lacks the synthesized insights because the synthesizer failed, requiring Sean to manually review the fleet status to understand why.
+- An agent reliability scorecard that tracks per-agent reliance modes, confidence cues, inspection cost, and failure classes.
+- An agent observability contract requiring every agent to report current mode, last successful run, skipped obligations, degraded dependencies, and required human action.
 
 ## Related Concepts
 
-[[Automation Reliability]] [[Context Management as a Bottleneck]]
+[[Agent Health Monitoring]] [[Control Room Observability]] [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]

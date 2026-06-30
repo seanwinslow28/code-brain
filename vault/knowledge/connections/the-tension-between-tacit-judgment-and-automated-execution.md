@@ -5,8 +5,8 @@ connects:
   - Supervision as the New AI Edge
   - Boundary Object Theory
   - Vibe-Coding Interview Canon
-created: 2026-06-29
-updated: 2026-06-29
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Synthesis

@@ -2,11 +2,11 @@
 title: "The Tension Between Workflow Integrity and Partial Failure Reality"
 type: connection
 connects:
-  - Resilience Engineering: Work-as-Imagined vs Work-as-Done
   - Provider Fallback Mechanism
   - Silent Failure Propagation in Agent Fleets
-created: 2026-06-29
-updated: 2026-06-29
+  - Resilience Engineering: Work-as-Imagined vs Work-as-Done
+created: 2026-06-30
+updated: 2026-06-30
 ---
 
 ## Synthesis
@@ -15,10 +15,6 @@ Sean's automated workflows assume deterministic completion, but distributed depe
 
 ## Threads
 
-### [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
-
-> The tension between the imagined reliability of automated workflows and the actual state of distributed dependencies reveals that fallback mechanisms must account for partial failures rather than binary success/failure states.
-
 ### [[Provider Fallback Mechanism]]
 
 > A provider fallback is not a retry policy; it is a runtime state machine that decides when a dependency is no longer trustworthy enough to call.
@@ -26,6 +22,10 @@ Sean's automated workflows assume deterministic completion, but distributed depe
 ### [[Silent Failure Propagation in Agent Fleets]]
 
 > When a synthesizer fails silently overnight, the morning brief inherits stale context, and the user notices the staleness before the brief flags the failure.
+
+### [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
+
+> The tension between the imagined reliability of automated workflows and the actual state of distributed dependencies reveals that fallback mechanisms must account for partial failures rather than binary success/failure states.
 
 ## Implications
 

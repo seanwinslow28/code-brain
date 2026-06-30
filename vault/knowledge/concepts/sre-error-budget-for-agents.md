@@ -2,7 +2,7 @@
 title: "SRE Error Budget for Agents"
 type: concept
 sources:
-  - knowledge/connections/resilience-vs-reliability-in-agent-health.md
+  - knowledge/expansions/connections/provider-fallback-and-automation-reliability.md
 tags: [auto-generated, phase-6]
 created: 2026-06-30
 updated: 2026-06-30
@@ -10,23 +10,23 @@ updated: 2026-06-30
 
 ## Definition
 
-This concept establishes a quantitative threshold for acceptable agent failure, defining health not by the absence of errors but by the stability of three variables: failure rate, recovery path efficiency, and operator attention cost. It transforms agent reliability from an abstract quality into a managed resource that can be spent on feature development or innovation, provided the total error budget is not exhausted. The mechanism enforces a trade-off where higher reliability requires stricter constraints on creative or adaptive behaviors.
+An SRE error budget for agents is a quantitative constraint that limits the acceptable rate of automated failure or degradation to preserve long-term system trust and operational stability. Rather than treating fallback as an infinite resource, this mechanism defines a threshold where the cost of reliability (e.g., budget burn, latency) exceeds the value of the output, triggering a shift from automatic recovery to human escalation or hard failure. This transforms agent reliability from a binary uptime metric into a managed trade-off between availability and cost/quality integrity.
 
 ## Context
 
-Sean needs to apply this metric to his agent fleet to move beyond simple uptime tracking. By defining explicit error budgets, he can justify periods of lower reliability during complex synthesis tasks, provided the recovery mechanisms are robust and the attention cost remains within bounds.
+Sean is building autonomous agent fleets that operate with significant financial and temporal costs. Without an error budget, agents may continue to burn resources on low-value or corrupted outputs during provider degradation, eroding trust in the system. Defining this budget allows Sean to make explicit decisions about when to stop automating and start intervening.
 
 ## Evidence
 
-> A creative agent is not healthy when it succeeds once; it is healthy when its failure rate, recovery path, and operator attention cost stay inside an explicit error budget.
+> Fallback increases reliability only when it does not hide systemic failure, amplify cost, or degrade user trust.
 
-> The tension between SRE error budgets and resilience engineering lies in the balance between strict reliability targets and adaptive capacity.
+> The current note treats fallback as uptime. It needs 'what kind of failure happened, and what kind of fallback is allowed?'
 
 ## Examples
 
-- Tracking operator attention cost as a key metric for agent health alongside failure rates.
-- Using error budgets to enforce freezes on feature development when reliability drops below a threshold.
+- A cost-capped agent escalation policy where fallback is allowed until daily budget burn reaches N% or confidence drops below threshold.
+- Routing to a secondary provider only if quality/cost/audit conditions hold, rather than automatic failover.
 
 ## Related Concepts
 
-[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Agent Health Monitoring]]
+[[Provider Fallback Mechanism]] [[Agent Health Monitoring]]
