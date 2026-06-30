@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### fusion-discovery-council E2 — judge-family debias (2026-06-30)
+- **fusion-discovery-council E2 — panel self-preference fix.** The FUSE judge was a literal
+  member of its own panel in every tier (the confound the Step-C gate flagged). E2 enforces one
+  invariant — *judge model family ∉ panel families* — in `tiers.py`: `quick` judge swaps
+  Gemini→GPT (panel unchanged); `standard`/`deep` drop the Opus panelist (Opus stays the judge,
+  panels become anthropic-free 3-/5-vendor sets). A `_family()` helper + a regression test lock
+  the invariant. `tiers.py`-only, $0, no live calls; the `openrouter:fusion` path is untouched.
+  Research ($0 deep-research): family separation is the highest-leverage debias lever and the
+  only one robust to both mechanism accounts; the full order-randomized pipeline was rejected
+  (wrong task shape for a synthesis judge; order-swap can backfire). Decision record:
+  `vault/20_projects/research/2026-06-30-llm-judge-self-preference-debias-research.md`.
+
 ### fusion-discovery-council D2 — receipts UI (2026-06-29)
 - **fusion-discovery-council D2 — receipts UI:** each ranked card in both ledgers (PM +
   substack) now shows a compact `🧾` receipts line — corroboration tier (off distinct

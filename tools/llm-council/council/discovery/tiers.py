@@ -3,6 +3,13 @@
 from dataclasses import dataclass
 
 
+def _family(model_id: str) -> str:
+    """OpenRouter model family: the segment before the first '/', minus a leading '~'
+    floating-alias marker. E2 keeps each tier's judge family disjoint from its panel
+    (self-preference debias — see the E2 research note)."""
+    return model_id.removeprefix("~").split("/", 1)[0]
+
+
 @dataclass(frozen=True)
 class TierConfig:
     name: str
@@ -19,8 +26,9 @@ class TierConfig:
     supplement_max_blind_spots: int = 2  # Stage 5 BACKFILL: max blind-spot gaps web-searched (1 query each)
 
 
+# E2: Opus is the standard/deep JUDGE, so it is intentionally NOT a panelist
+# (judge family must be disjoint from the panel — self-preference debias).
 _STANDARD_PANEL = (
-    "anthropic/claude-opus-4.7",
     "openai/gpt-5.5",
     "~google/gemini-pro-latest",
     "x-ai/grok-4.3",
@@ -30,7 +38,7 @@ TIERS: dict[str, TierConfig] = {
     "quick": TierConfig(
         name="quick",
         panel=("~google/gemini-pro-latest", "x-ai/grok-4.3", "deepseek/deepseek-v4-pro"),
-        judge="~google/gemini-pro-latest",
+        judge="openai/gpt-5.5",   # E2: disjoint from quick panel {google, x-ai, deepseek}
         max_tool_calls=3,
         max_cost_per_run=0.50,
         sonar_model="perplexity/sonar",

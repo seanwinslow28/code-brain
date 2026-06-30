@@ -32,9 +32,10 @@ def test_both_arms_fuse_same_bundle_with_different_panels():
         gather_fn=fake_gather, fuse_fn=fake_fuse,
         record_fn=lambda **kw: records.append(kw),
     ))
-    # same bundle object both times; arm A panel has 4 models, arm B exactly 1
+    # same bundle object both times; arm A panel has 3 models (post-E2: Opus is the
+    # judge, not a panelist), arm B exactly 1
     assert seen[0][0] == seen[1][0]
-    assert len(seen[0][1]) == 4
+    assert len(seen[0][1]) == 3
     assert seen[1][1] == ("anthropic/claude-opus-4.7",)
     # spend recorded once per arm, tagged discovery
     assert len(records) == 2

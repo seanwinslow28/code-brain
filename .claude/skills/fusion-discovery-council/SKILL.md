@@ -55,7 +55,7 @@ The pipeline runs in a fixed order; each stage feeds the next.
    - **Extended collectors (tier-gated):** review sites + competitor-weakness mining, GitHub Issues, and Stack Exchange Q&A. `standard` adds review sites + GitHub Issues; `deep` adds those plus Stack Exchange Q&A. Each emits a real URL + a verbatim quote, so the Stage-3 gate still governs everything.
    Every piece of evidence carries the URL it was fetched from. Nothing enters the pipeline without a source.
 
-2. **FUSE** — Run the gathered evidence through an OpenRouter **Fusion panel** (Opus / GPT / Gemini / Grok at standard tier) plus an outer **judge** model. The panel reads the evidence and proposes candidate pain points; the judge consolidates and de-duplicates them.
+2. **FUSE** — Run the gathered evidence through an OpenRouter **Fusion panel** (GPT / Gemini / Grok at standard tier) plus an outer **judge** model (Opus at standard/deep, GPT at quick). The panel reads the evidence and proposes candidate pain points; the judge consolidates and de-duplicates them. **E2 invariant:** the judge's model family is deliberately disjoint from every panelist's, so no model grades its own family's output (self-preference debias — see [the E2 research note](../../../vault/20_projects/research/2026-06-30-llm-judge-self-preference-debias-research.md)).
 
 3. **VERIFY** — The **anti-fabrication gate** (see §4). Every candidate pain point must trace to a quote whose URL exists in the gathered evidence. Untraceable candidates are dropped or marked `unverified` — never quietly kept.
 
