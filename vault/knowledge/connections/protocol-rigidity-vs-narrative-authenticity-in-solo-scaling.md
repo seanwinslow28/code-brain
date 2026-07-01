@@ -5,19 +5,19 @@ connects:
   - MCP Server Hardening
   - Friction-Killing Wedge
   - Double-Monetization Invariant
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Synthesis
 
-Sean faces a structural tension between the need for 'MCP Server Hardening' to ensure technical reliability and the desire to maintain an 'honest-loop' narrative that exposes the messy reality of solo development. The 'Double-Monetization Invariant' forces him to ship polished, protocol-compliant tools while simultaneously documenting the friction-killing wedge that makes them unique. This creates a risk where the very rigidity required for market credibility undermines the authenticity that drives his audience engagement.
+Sean is caught in a tension where the technical rigor required to make his tools marketable ('MCP Server Hardening') conflicts with the raw, unpolished authenticity that drives his audience engagement ('honest-loop'). The 'Double-Monetization Invariant' forces him to ship polished, protocol-compliant tools while simultaneously documenting the friction-killing wedge that makes them unique. This creates a risk where the very rigidity required for market credibility undermines the authenticity that drives his audience engagement.
 
 ## Threads
 
 ### [[MCP Server Hardening]]
 
-> The repeatable engine behind VoicePrint, written down so the next build is faster and the Substack series has a spine.
+> Sean faces a structural tension between the need for 'MCP Server Hardening' to ensure technical reliability and the desire to maintain an 'honest-loop' narrative that exposes the messy reality of solo development.
 
 ### [[Friction-Killing Wedge]]
 

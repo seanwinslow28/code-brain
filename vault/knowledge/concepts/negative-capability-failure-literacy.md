@@ -2,15 +2,15 @@
 title: "Negative Capability / Failure Literacy"
 type: concept
 sources:
-  - knowledge/expansions/negative-capability-failure-literacy.md
+  - knowledge/concepts/negative-capability-failure-literacy.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
 
-This concept defines a mechanism where aesthetic obstruction is not merely survived but metabolized into sharper constraints and stronger judgment. It distinguishes robustness, which keeps a pipeline working after failure, from antifragility, where the system produces better taste or reusable mutations because of the volatility. The core invariant is that a failure is only useful if it leaves behind a concrete artifact—a rule, rubric, asset, or negative example—that prevents future slop.
+This mechanism defines a metabolic process where aesthetic obstruction is not merely survived but converted into sharper constraints and stronger judgment. It distinguishes robustness, which keeps a pipeline working after failure, from antifragility, where the system produces better taste or reusable mutations because of the volatility. The core invariant is that a failure is only useful if it leaves behind a concrete artifact—a rule, rubric, asset, or negative example—that prevents future slop.
 
 ## Context
 

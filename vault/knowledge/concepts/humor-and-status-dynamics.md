@@ -4,23 +4,23 @@ type: concept
 sources:
   - knowledge/connections/the-authority-approachability-tension-in-technical-storytelling.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
 
-This mechanism describes how communicators strategically modulate their perceived social status to manage reader trust. By intentionally lowering their own status through self-deprecating humor, a technical writer reduces the psychological distance between themselves and the audience, thereby increasing approachability without sacrificing the underlying authority required for credibility. This dynamic creates a safe environment where complex ideas can be explored without triggering defensive resistance in the reader.
+This mechanism describes how communicators strategically modulate their perceived social status to manage reader trust. By intentionally lowering their own status through self-deprecating humor, a technical writer reduces the psychological distance between themselves and the audience. This deliberate reduction in status creates a safe environment for engagement, allowing complex ideas to be received without triggering defensive resistance from high-status readers who might otherwise feel challenged or patronized.
 
 ## Context
 
-Sean is navigating a job hunt and creative studio phase where his personal brand must balance technical depth with relatable storytelling. Understanding this tension allows him to calibrate his voice across different platforms, ensuring he appears competent yet accessible rather than aloof or overly casual.
+Sean must balance his role as an expert with the need to remain approachable during job hunts and client interactions. If he maintains too high a status, he risks appearing arrogant; if too low, he loses credibility. This concept provides the tactical lever for that balance.
 
 ## Evidence
 
 > Technical writers face a fundamental tension between establishing authority (high status) and building rapport (low status).
 
-> Humor and negative space calibration resolve this by allowing the writer to strategically lower their status without losing credibility, creating a safe environment for engagement.
+> Humor and negative space calibration resolve this by allowing the writer to strategically lower their status without losing credibility.
 
 ## Examples
 

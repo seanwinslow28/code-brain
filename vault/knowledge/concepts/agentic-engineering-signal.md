@@ -2,10 +2,10 @@
 title: "Agentic Engineering Signal"
 type: concept
 sources:
-  - knowledge/connections/infrastructure-as-career-differentiation.md
+  - knowledge/concepts/agentic-engineering-signal.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ This concept defines the practice of deploying autonomous agent fleets as a tang
 
 ## Context
 
-Sean's deployment of 17 autonomous agents, with 8 in production on local-first launchd schedules, serves as a live demonstration of his engineering depth and ability to manage complex agentic workflows.
+Sean's deployment of 17 autonomous agents, with 8 in production on local-first launchd schedules, serves as a live demonstration of his engineering depth and ability to manage complex agentic workflows. This operational reality acts as a strategic career differentiator that signals independence and cost-consciousness to potential employers.
 
 ## Evidence
 

@@ -5,8 +5,8 @@ connects:
   - Coupling Fragility vs Adaptive Capacity in Agent Fleets
   - Resilience Engineering: Work-as-Imagined vs Work-as-Done
   - Agent Fleet Observability Dashboard
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Synthesis

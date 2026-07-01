@@ -2,10 +2,10 @@
 title: "Intent Engineering"
 type: concept
 sources:
-  - knowledge/connections/governance-gap-in-creative-ai-adoption.md
+  - knowledge/concepts/intent-engineering.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ This concept defines the structural requirement for agency, positing that autono
 
 ## Context
 
-Sean's infrastructure addresses this by providing the 'judgment layer' that enables safe, governed AI adoption in creative contexts.
+Sean's infrastructure addresses this by providing the 'judgment layer' that enables safe, governed AI adoption in creative contexts. Without this explicit intent structure, agents operate as black boxes that generate output without accountability, creating a governance gap that prevents professional scaling of AI-assisted workflows.
 
 ## Evidence
 

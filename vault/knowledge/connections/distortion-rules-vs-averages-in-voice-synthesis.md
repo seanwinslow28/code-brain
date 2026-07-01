@@ -5,8 +5,8 @@ connects:
   - Exemplar Distance
   - Evidence Accumulation Loop
   - Craft in Product Design
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Synthesis

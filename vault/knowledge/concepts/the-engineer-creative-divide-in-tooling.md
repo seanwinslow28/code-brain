@@ -2,31 +2,31 @@
 title: "The Engineer-Creative Divide in Tooling"
 type: concept
 sources:
-  - knowledge/connections/governance-gap-in-creative-ai-adoption.md
+  - knowledge/connections/the-integration-paradox-in-agentic-animation.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
 
-This divide manifests as a mismatch between the evaluation metrics favored by technical builders and the operational realities of creative professionals. ML engineers prioritize research-grade evals that measure model fidelity, while creative teams require governance mechanisms that ensure brand safety and traceability. The gap exists because tooling is built for the former audience, leaving the latter without the necessary control planes to adopt AI safely.
+This pattern describes the structural shift where a creator's primary role transitions from artistic execution to infrastructure maintenance due to the complexity of integrating specialized automation tools. As Sean layers multiple agents and skills, the cognitive load required to manage their interactions increases disproportionately to the creative output generated. This divide manifests when the time spent debugging pipeline failures exceeds the time spent on actual content creation, effectively turning the creator into an unpaid systems engineer.
 
 ## Context
 
-Sean can exploit this divide by positioning his intent-engineering infrastructure as the bridge that translates technical rigor into creative accountability, a service currently underserved by the market.
+Sean is attempting to build a high-fidelity animation portfolio while simultaneously managing a complex agentic fleet. If this divide widens, his job-hunt progress stalls because he becomes an infrastructure expert rather than a creative director, undermining the very signal he needs to convey to hiring managers.
 
 ## Evidence
 
-> eval tooling like Braintrust and LangSmith is designed for ML engineers… most teams don't need 'research-grade evals' first.
+> The consequence is a shift from being a creator to being an infrastructure engineer, which undermines the efficiency gains he seeks in his job-hunt portfolio.
 
-> The missing layer in AI agents is not autonomy. It is structured intent.
+> Connecting Claude Code to external animation services, renderers, and desktop tools requires complex setup, and stacking MCP servers, hooks, and skills makes workflows feel slow and bloated before any visual output is reached.
 
 ## Examples
 
-- Using Braintrust for model evaluation
-- Implementing structured intent specifications
+- Sean spends more time debugging the pipeline than creating content.
+- Users must think in React/SVG/timing terms rather than describing animations naturally.
 
 ## Related Concepts
 
-[[Control Architecture as Evangelism]] [[Intent Engineering]]
+[[Runtime-Model Coupling]] [[Stacked-Tooling Friction]]

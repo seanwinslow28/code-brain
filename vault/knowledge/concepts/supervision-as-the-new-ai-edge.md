@@ -2,31 +2,31 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - knowledge/connections/the-validity-paradox-in-ai-pm-selection.md
+  - knowledge/connections/the-skill-atrophy-trap-in-agentic-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
 
-This concept identifies the shift in competitive advantage from raw model capability to the nuanced management of user expectations and system trust. It argues that superior technical updates can degrade performance if they violate established mental models or learned behaviors, making the preservation of implicit contracts more critical than explicit feature gains. The underlying pattern is that value is derived from maintaining continuity in human-AI interaction rather than maximizing isolated metric improvements.
+This concept identifies the shift in value from execution to oversight in agentic workflows. Automation often removes easy work and leaves humans with rarer, harder, higher-stakes supervision failures. The edge is no longer in doing the work faster but in detecting when the automated system deviates from reality and correcting it before it causes damage. This requires a deep understanding of the underlying mechanics that the automation abstracts away.
 
 ## Context
 
-Sean’s job hunt must highlight his ability to manage this tension, particularly when proposing changes to existing systems. He needs to demonstrate that he prioritizes the stability of user trust over raw technical novelty, which is a key differentiator for senior AI product roles.
+As Sean's agent fleet grows more capable, his role shifts from creator to supervisor. The value of his work lies not in the volume of content generated but in his ability to spot subtle errors or strategic misalignments that the agents miss. This makes his manual oversight skills more critical than ever.
 
 ## Evidence
 
-> A more accurate AI update can still hurt team performance if it violates learned user expectations.
+> Automation often removes easy work and leaves humans with rarer, harder, higher-stakes supervision failures.
 
-> Sean must frame his agentic engineering demos as tests of backward compatibility and trust preservation, not just technical fluency.
+> Every automation transfers work from execution to monitoring, exception handling, recovery, and skill retention.
 
 ## Examples
 
-- Prioritizing backward compatibility in demo narratives to show respect for existing user mental models.
-- Focusing on 'trust preservation' as a core metric in project descriptions rather than just accuracy or speed.
+- Sean must manually review the synthesizer's output to ensure it aligns with his strategic goals, rather than trusting the agent to do it automatically.
+- The job hunt strategy requires Sean to manually adjust his narrative based on feedback, as agents cannot fully capture the nuance of human interaction.
 
 ## Related Concepts
 
-[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Vibe-Coding Interview Canon]]
+[[The Skill Atrophy Trap in Agentic Workflows]] [[The Illusion of Competence in Automated Systems]]

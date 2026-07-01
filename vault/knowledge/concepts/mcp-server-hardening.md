@@ -2,31 +2,31 @@
 title: "MCP Server Hardening"
 type: concept
 sources:
-  - knowledge/concepts/mcp-server-hardening.md
+  - knowledge/connections/protocol-rigidity-vs-narrative-authenticity-in-solo-scaling.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
 
-This mechanism defines a structural constraint on agent behavior by replacing vague error envelopes with explicit, categorized failure modes that eliminate the agent's ability to improvise recovery paths. When an MCP tool fails, the response must name the specific error category and the required action, effectively removing the 'room' for the model to hallucinate a plausible but destructive workaround. This shifts the burden of reliability from the model's inference capabilities to the tool's interface design, ensuring that failures are handled deterministically rather than through risky agent-side inference.
+The process of transforming a functional prototype into a reliable, protocol-compliant service that can withstand the scrutiny of external users and automated systems. This involves enforcing strict interfaces, handling edge cases silently, and ensuring that the server's behavior is predictable enough to be integrated into larger agent fleets. It is the bridge between a personal tool and a public infrastructure component.
 
 ## Context
 
-Sean is building a complex agent fleet where tools interact with live systems (databases, file systems). If these tools return ambiguous errors, agents like the synthesizer or job-hunt trackers might 'fix' things incorrectly, leading to data loss or broken pipelines. Hardening MCP servers prevents these silent failures from becoming catastrophic hallucinations.
+Sean must harden his MCP servers to maintain credibility in the marketplace. Without this rigor, the 'honest-loop' narrative of solo development could be undermined by silent failures that break user workflows, damaging both his reputation and his revenue stream.
 
 ## Evidence
 
-> If your tool fails and the agent recovers gracefully, you built a tool. If your tool fails and the agent hallucinates a workaround, you built a trap.
+> Sean faces a structural tension between the need for 'MCP Server Hardening' to ensure technical reliability and the desire to maintain an 'honest-loop' narrative that exposes the messy reality of solo development.
 
-> The fix is structured error responses that name the error category and action, leaving no room for improvisation.
+> A good MCP server turns private context into a boundary object: a shared interface where humans negotiate meaning and agents execute constrained action.
 
 ## Examples
 
-- Returning a structured JSON error with `isError: true` and a specific `error_category` field instead of a generic text message.
-- Defining a fixed set of `required_action` values (e.g., 'retry_with_backoff', 'abort', 'notify_user') that the agent must select from, rather than generating free-text recovery plans.
+- Writing down the repeatable engine behind VoicePrint to ensure the next build is faster and more consistent.
+- Ensuring the MCP server works with no corpus to reduce dependency on external data sources.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Infrastructure Status]]
+[[Friction-Killing Wedge]] [[Double-Monetization Invariant]]

@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/liability-routing-in-agentic-product-design.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition

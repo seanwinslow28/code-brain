@@ -2,10 +2,10 @@
 title: "Harness Engineering Invariant"
 type: concept
 sources:
-  - knowledge/connections/the-intelligence-infrastructure-decoupling-tension.md
+  - knowledge/concepts/harness-engineering-invariant.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition

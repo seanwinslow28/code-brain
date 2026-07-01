@@ -2,10 +2,10 @@
 title: "Substack-Drafter agent"
 type: concept
 sources:
-  - knowledge/expansions/connections/substack-drafter-agent-and-daily-note-generation.md
+  - knowledge/concepts/substack-drafter-agent.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition

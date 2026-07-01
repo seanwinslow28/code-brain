@@ -2,30 +2,31 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - knowledge/concepts/automation-reliability.md
+  - knowledge/connections/the-latency-of-trust-in-automated-research-pipelines.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
 
-Automation reliability is defined by the stability of outputs across repeated executions, where non-determinism compounding across steps creates debugging challenges that are fundamentally different from static code bugs. When agents behave differently every run, the system loses its deterministic nature, making it impossible to establish a baseline for performance or trust. This instability arises not from logic errors but from the inherent variance in model outputs and context window fluctuations.
+This concept refers to the gap between perceived operational health and actual data freshness or completeness. Agents may report 'healthy' status based on successful execution of their immediate tasks, ignoring the quality of the data they produce or consume. This leads to a situation where the system is technically running but functionally degraded, requiring Sean to monitor yield rates rather than just success/fail states.
 
 ## Context
 
-Sean's framework demands high-fidelity scoring for agentic systems, but many tasks are better served by deterministic pipelines that bypass the need for such rigorous evaluation entirely. The tension lies in balancing the need for reliable automation with the complexity of managing non-deterministic agents.
+Sean's daily drive and knowledge vault depend on reliable automation. When agents report health without addressing data integrity, he risks building his knowledge base on stale or incomplete information, undermining the utility of the entire system.
 
 ## Evidence
 
-> non-determinism compounding across steps, debugging a thing that behaves differently every run
+> The 'two runs failed' were Phase-2, pre-fix. Residual is confidence only (a few live runs incl. deep).
 
-> The core tension lies in the conflict between Sean's need for rigorous, automated feedback loops (instrumentation) and the inherent ambiguity of human-centric evaluation criteria
+> Sean cannot rely on binary success/fail metrics to gauge fleet health; he must monitor yield rates and parsing robustness as primary indicators of system reliability.
 
 ## Examples
 
-- Debugging a thing that behaves differently every run
+- Agents reporting 'healthy' status while producing stale data
+- Binary success metrics masking underlying data quality issues
 
 ## Related Concepts
 
-[[Eval Vocabulary]] [[Intent Engineering]]
+[[Silent Failure Propagation in Agent Fleets]] [[Cost-Capped Agentic Workflows]]

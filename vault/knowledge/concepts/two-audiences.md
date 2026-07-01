@@ -2,30 +2,31 @@
 title: "Two Audiences"
 type: concept
 sources:
-  - knowledge/concepts/two-audiences.md
+  - knowledge/connections/cross-domain-translation-tension-in-career-narrative.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
 
-This concept defines the structural tension where a single artifact must satisfy the divergent evaluation criteria of technical peers and non-technical hiring managers. It requires transforming descriptive reliability talk into an evaluative artifact that demonstrates operational judgment, thereby bridging the gap between internal system health and external career signaling. The mechanism involves curating evidence so that it is simultaneously technically accurate and narratively compelling for a lay audience.
+The structural requirement that a single output must satisfy the contradictory constraints of two distinct evaluators: one demanding precise, low-level technical fidelity and the other requiring high-level, interpretive narrative coherence. This creates a dependency where the artifact must be dual-layered, ensuring that technical accuracy does not obscure strategic value, nor does narrative flourish compromise technical credibility. The mechanism forces an explicit mapping between raw data points and their strategic implications to prevent misinterpretation by either audience.
 
 ## Context
 
-Sean faces the challenge of turning his daily notes and status updates into artifacts that hiring managers can evaluate as proof of operational judgment. This requires him to consciously shift from describing system state to demonstrating the reasoning behind that state, ensuring the output serves both his agents' needs and his career narrative.
+Sean faces this tension daily when his vault synthesizes technical logs into career narratives. He must ensure that the 'builder' identity is not lost in the 'candidate' persona, requiring artifacts that are simultaneously rigorous enough for engineering review and compelling enough for executive assessment.
 
 ## Evidence
 
-> It turns the article from descriptive reliability talk into an artifact hiring managers can evaluate as operational judgment.
+> The core tension arises because Sean's technical role demands precise, machine-readable telemetry while his career role requires interpretive, human-readable narrative.
 
-> Sean must explicitly map his technical outputs to career narratives for each audience.
+> Sean must explicitly map his technical outputs to career narratives for each audience to ensure coherence across roles.
 
 ## Examples
 
-- Daily notes serving as a shared artifact that is legible to both agents and human reviewers.
+- Mapping agent fleet status logs to a narrative about operational resilience for hiring managers.
+- Translating MCP server design decisions into portfolio projects that demonstrate architectural judgment.
 
 ## Related Concepts
 
-[[Boundary Object Theory]] [[Agentic Engineering Signal]]
+[[Boundary Object Theory]] [[Cross-domain bridging]]

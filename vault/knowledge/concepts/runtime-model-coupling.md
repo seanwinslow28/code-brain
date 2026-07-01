@@ -2,30 +2,31 @@
 title: "Runtime-Model Coupling"
 type: concept
 sources:
-  - knowledge/connections/the-latent-debt-of-silent-failures-in-cognitive-infrastructure.md
+  - knowledge/connections/the-integration-paradox-in-agentic-animation.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
 
-This mechanism refers to the dependency of agent reliability on specific hardware states and network conditions rather than just software logic. When critical agents are hosted on unstable machines like an MBP or Alienware, their availability becomes tied to the host's sleep state or power management settings. This coupling introduces a non-deterministic failure mode where the agent is logically correct but physically unavailable, causing silent drops in data flow that are difficult to diagnose through software logs alone.
+This mechanism refers to the misalignment between the high-level natural language interface promised by AI models and the low-level technical constraints required for reliable execution. When a model's output is tightly coupled to specific runtime environments like SVG or React, the user must possess deep technical knowledge of those runtimes to effectively guide the agent. This coupling creates a hidden barrier where the 'ease' of the prompt is negated by the complexity of the resulting code artifacts.
 
 ## Context
 
-Sean's infrastructure includes critical synthesis agents running on his personal laptop (MBP). The instability of this hardware directly impacts the consistency of his knowledge vault, necessitating a migration to a more stable host like the Mac Mini to decouple agent availability from daily device usage patterns.
+Sean's animation pipeline relies on generating code that runs in specific environments. If the model's output is too tightly coupled to these technical details, Sean must act as a technical reviewer for every iteration, slowing down his creative velocity and increasing the risk of errors.
 
 ## Evidence
 
-> Design a clear restructuring pass: migrate all critical agent dependency from flaky machines (MBP/Alienware) to Mac Mini as the stable host.
+> The marketed pitch is that animators describe an animation and Claude produces it, but in practice users must think in React/SVG/timing terms, iterate on intricate prompts, and repeatedly correct both code and creative output before anything is production-ready.
 
-> The health of the autonomous agent fleet, such as vault-indexer and vault-synthesizer, is directly tied to the overall infrastructure health of Sean's systems.
+> Builders stacked MCP servers on top of hooks on top of skills and wondered why things felt slow.
 
 ## Examples
 
-- Sean must implement a semantic verification step in the daily note generation process to detect when conceptual links are missing, rather than relying solely on agent health checks.
+- Users must iterate on intricate prompts to correct code and creative output.
+- Generated animation code suffers from performance and memory problems.
 
 ## Related Concepts
 
-[[Infrastructure Status]] [[Vault as Agent Infrastructure]]
+[[The Engineer-Creative Divide in Tooling]] [[Automation Reliability]]

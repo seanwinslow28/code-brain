@@ -2,32 +2,32 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: connection
 connects:
-  - Silent Failure Propagation in Agent Fleets
+  - Runtime-Model Coupling
   - The Illusion of Health in Autonomous Systems
-  - Automation Reliability
-created: 2026-06-30
-updated: 2026-06-30
+  - Infrastructure Status and Agent Failure
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Synthesis
 
-There is a critical tension between operational status and data freshness in autonomous systems. Agents report 'healthy' or 'success' based on their own execution, ignoring the quality of their inputs. This creates a blind spot where Sean trusts the system's output because it looks correct, while the underlying context is rotting. The consequence is that failures compound silently until they manifest as significant errors in high-stakes decisions like job hunting or creative planning.
+There is a critical tension between operational reliability (access) and cognitive utility (meaning) in agentic systems. When an agent has full access to the vault but no judgment or physical availability due to runtime-model coupling, it produces 'green' status indicators while silently failing to contribute to the knowledge graph. This creates an illusion of competence where the system appears healthy because the control plane is responsive, even though the data plane is stagnant.
 
 ## Threads
 
-### [[Silent Failure Propagation in Agent Fleets]]
+### [[Runtime-Model Coupling]]
 
-> Downstream agents continue to execute based on stale or null inputs, propagating the failure silently through the workflow because the dependency chain is logical rather than enforced.
+> This coupling introduces a non-deterministic failure mode where the agent is logically correct but physically unavailable, causing silent drops in data flow that are difficult to diagnose through software logs alone.
 
 ### [[The Illusion of Health in Autonomous Systems]]
 
-> This concept defines a latent failure mode where an agent's operational status is decoupled from its data freshness, creating a dependency chain that propagates stale context to downstream agents.
+> There is a critical tension between operational reliability (access) and cognitive utility (meaning) in agentic systems. When an agent has full access but no judgment, it produces 'green' status indicators while silently failing to contribute to the knowledge graph.
 
-### [[Automation Reliability]]
+### [[Infrastructure Status and Agent Failure]]
 
-> A producer/consumer pattern where one agent's write creates a dependency that another agent's read enforces, requiring strict validation of input quality rather than just existence.
+> This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local processing and storage operations.
 
 ## Implications
 
-- Sean must implement explicit data freshness checks in the daily-driver agent to prevent it from trusting stale research outputs.
-- The fleet status dashboard should distinguish between 'agent alive' and 'data fresh' to avoid masking upstream failures with downstream success metrics.
+- Sean must implement semantic verification steps in daily note generation to detect when conceptual links are missing, rather than relying solely on agent health checks.
+- Migrating critical agents to a stable host like the Mac Mini is required to decouple agent availability from daily device usage patterns and ensure consistent data flow.

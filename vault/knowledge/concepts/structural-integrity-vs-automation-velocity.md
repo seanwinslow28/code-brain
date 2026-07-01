@@ -2,15 +2,15 @@
 title: "Structural Integrity vs. Automation Velocity"
 type: concept
 sources:
-  - knowledge/connections/structural-integrity-vs-automation-velocity.md
+  - knowledge/concepts/structural-integrity-vs-automation-velocity.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
 
-This concept defines the friction between the rate of data ingestion and the capacity for semantic validation. When automation pipelines prioritize throughput, they bypass the Luhmannian invariant that requires durable atomic claims to survive long-term retrieval. This creates a system where volume increases but signal-to-noise ratio decreases, as agents generate transient notes without enforcing the structural rigor needed for compounding knowledge.
+This mechanism defines the friction between the rate of data ingestion and the capacity for semantic validation. When automation pipelines prioritize throughput, they bypass the Luhmannian invariant that requires durable atomic claims to survive long-term retrieval. This creates a system where volume increases but signal-to-noise ratio decreases, as agents generate transient notes without enforcing the structural rigor needed for compounding knowledge.
 
 ## Context
 

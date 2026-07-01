@@ -2,10 +2,10 @@
 title: "Control Architecture as Evangelism"
 type: concept
 sources:
-  - knowledge/connections/infrastructure-as-career-differentiation.md
+  - knowledge/concepts/control-architecture-as-evangelism.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ This concept describes a strategic posture where technical infrastructure choice
 
 ## Context
 
-Sean uses his local-first stack not just for efficiency but to signal specific professional values like privacy and cost-awareness to employers who value durable, independent engineering practices over convenience-driven cloud dependency.
+Sean uses his local-first stack not just for efficiency but to signal specific professional values like privacy and cost-awareness to employers who value durable, independent engineering practices over convenience-driven cloud dependency. This transforms the daily act of maintaining infrastructure into a continuous demonstration of strategic alignment with high-value employer traits.
 
 ## Evidence
 

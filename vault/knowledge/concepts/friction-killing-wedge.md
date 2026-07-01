@@ -2,31 +2,31 @@
 title: "Friction-Killing Wedge"
 type: concept
 sources:
-  - knowledge/concepts/friction-killing-wedge.md
+  - knowledge/connections/protocol-rigidity-vs-narrative-authenticity-in-solo-scaling.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
 
-A strategic entry point defined by the specific moment a user abandons their current habit because the combined force of situational push and solution pull exceeds the anxiety of switching and the inertia of the present state. This mechanism relies on identifying a transient wedge where high-visibility novelty can be defended against commodity drift before it becomes table stakes. It requires mapping the value chain to distinguish between user-visible components that offer leverage and hidden infrastructure that must be treated as undifferentiated work.
+A competitive moat constructed not from superior performance metrics, but from the deliberate exclusion of external dependencies that create fragility. This strategy leverages constraints—such as operating without a pre-existing corpus or requiring no heavy data ingestion—as features that guarantee immediate utility and privacy. By refusing to adopt standard industry practices that demand significant setup overhead, the product captures value in the gap between what is technically possible and what is practically usable for the individual.
 
 ## Context
 
-Sean needs this to move beyond slogan generation and create executable validation runbooks for his Code-Brain and intent-engineering projects, ensuring he proves causal demand before building product narratives. Without this wedge, his efforts risk becoming generic demonstrations of capability rather than targeted interventions that capture market share during a moment of vulnerability.
+Sean uses this wedge to differentiate VoicePrint from competitors who rely on complex cloud infrastructures or large language model APIs. It allows him to market a tool that works instantly for solo creators who prioritize speed and local control over scalable, enterprise-grade features.
 
 ## Evidence
 
-> User abandons CURRENT HABIT when push-of-situation + pull-of-new-solution beats anxiety-of-switching + habit-of-present.
+> Your defensibility is the thing nobody else does. For VoicePrint it was learn-from-what-you-reject + works-with-no-corpus + honest-loop + local/free.
 
-> Map the killed friction as a value-chain node; defend only what is high-visibility and left-of-market.
+> The repeatable engine behind VoicePrint, written down so the next build is faster and the Substack series has a spine.
 
 ## Examples
 
-- Adding switching-forces mode anchored on Bob Moesta’s Demand-Side Sales 101
-- Creating a commodity drift map based on Simon Wardley’s Value Chain Mapping
+- VoicePrint's ability to function without a pre-built corpus of user data
+- The decision to keep the tool local and free to avoid subscription fatigue
 
 ## Related Concepts
 
-[[Value Chain / Activity System Mapping]] [[Market Positioning]]
+[[Double-Monetization Invariant]] [[MCP Server Hardening]]

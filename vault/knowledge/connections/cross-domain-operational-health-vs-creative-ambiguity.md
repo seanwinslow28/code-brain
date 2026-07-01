@@ -5,8 +5,8 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - Resilience Engineering: Work-as-Imagined vs Work-as-Done
   - Silent Failure Propagation in Agent Fleets
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Synthesis
@@ -17,7 +17,7 @@ Sean's infrastructure suffers from a critical tension where robust protocol inst
 
 ### [[The Illusion of Health in Autonomous Systems]]
 
-> There is a fundamental tension between the need for simplified agent health metrics and the complex reality of human-agent joint cognition. When Sean designs monitoring layers that prioritize protocol compliance over semantic accuracy, he creates an illusion of health where agents appear functional while silently propagating stale context.
+> When a synthesizer fails silently overnight, the morning brief inherits stale context, and the user notices the staleness before the brief flags the failure
 
 ### [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
 

@@ -5,13 +5,13 @@ connects:
   - SRE Error Budget for Agents
   - Normal Accident Critique
   - Control Plane / Data Plane Split for Agent Fleets
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Synthesis
 
-The tension between error budgeting and normal accidents reveals a fundamental contradiction in autonomous system design: while error budgets provide a contractual framework for managing acceptable failure rates, they assume that failures are independent events. However, in tightly coupled agent fleets, monitoring itself can create new coupling paths and false confidence, making some failures inevitable regardless of the budget. This means Sean must balance explicit reliability contracts with architectural patterns that allow for graceful degradation, rather than relying solely on monitoring to prevent all errors.
+The tension between error budgeting and normal accidents reveals a fundamental contradiction in autonomous system design: while error budgets provide a contractual framework for managing acceptable failure rates, they assume that failures are independent events. However, in tightly coupled agent fleets, monitoring itself can create new coupling paths and false confidence, making some failures inevitable regardless of the budget. This means Sean must balance explicit reliability contracts with architectural patterns that allow for graceful degradation, rather than relying solely on monitoring to prevent all errors. The control plane/data plane split offers a structural solution by decoupling intent from execution, allowing the system to recover from inevitable failures without losing its strategic direction.
 
 ## Threads
 

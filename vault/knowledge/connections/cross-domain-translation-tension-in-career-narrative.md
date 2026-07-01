@@ -5,13 +5,13 @@ connects:
   - Boundary Object Theory
   - Two Audiences
   - Cross-domain bridging
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Synthesis
 
-The core tension arises because Sean's technical role demands precise, machine-readable telemetry while his career role requires interpretive, human-readable narrative. This creates a dependency where the vault must act as a boundary object that translates raw data into career-relevant stories without losing technical fidelity. The consequence is that Sean cannot rely on implicit understanding; he must explicitly define which artifacts are legible across these roles to maintain coherence between his builder identity and his candidate persona.
+The fundamental tension exists between the need for precise, machine-readable technical evidence and the requirement for interpretive, human-readable career narratives. This creates a dependency where Sean's vault must act as a boundary object that translates raw data into strategic stories without losing technical fidelity. The consequence is that Sean cannot rely on implicit understanding; he must explicitly define which artifacts are legible across these roles to maintain coherence between his builder identity and his candidate persona.
 
 ## Threads
 

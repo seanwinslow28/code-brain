@@ -2,22 +2,22 @@
 title: "The Taste-Fidelity Decoupling in Creative Production"
 type: connection
 connects:
-  - Taste as Social Charge vs. Evidence as Fidelity
+  - The Taste-Fidelity Decoupling in Creative Production
   - Negative Space Calibration
   - Curation as the New Scarcity
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Synthesis
 
-The core tension lies in the fact that high-fidelity evidence accumulation produces generic outputs because it optimizes for similarity rather than distinction. Taste calibration requires defining what the voice must refuse to become, creating a negative space that signals status and class alignment. When Sean's agents prioritize volume of evidence over strategic refusal, they generate content that is technically accurate but socially inert, failing to establish the 'taste enemies' necessary for a defensible creative position.
+The fundamental tension lies in the divergence between technical fidelity and social distinction, where high-fidelity evidence accumulation produces generic outputs by optimizing for similarity rather than difference. This decoupling occurs because agents prioritize volume of evidence over strategic refusal, leading to content that is accurate but socially inert. The consequence is a loss of defensible creative position, as the voice fails to establish 'taste enemies' necessary for status signaling and audience alignment.
 
 ## Threads
 
-### [[Taste as Social Charge vs. Evidence as Fidelity]]
+### [[The Taste-Fidelity Decoupling in Creative Production]]
 
-> The tension lies between accumulating evidence for fidelity and defining taste for social charge.
+> The core tension lies in the fact that high-fidelity evidence accumulation produces generic outputs because it optimizes for similarity rather than distinction.
 
 ### [[Negative Space Calibration]]
 

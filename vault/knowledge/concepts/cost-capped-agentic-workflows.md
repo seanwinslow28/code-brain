@@ -2,31 +2,31 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - 00_inbox/tickets.md
+  - knowledge/connections/the-latency-of-trust-in-automated-research-pipelines.md
 tags: [auto-generated, phase-6]
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
 
-This mechanism refers to the architectural necessity of decoupling financial accounting from functional success in agent loops. When an agent invocation fails functionally (e.g., due to parsing errors or timeouts) but still consumes API resources, the billing system records a cost while the local state machine records zero progress. This creates a 'leaky bucket' invariant where financial expenditure accumulates independently of value generation, requiring explicit failure-path instrumentation to maintain accurate ROI metrics.
+This pattern involves decoupling financial accounting from functional success metrics to prevent the masking of debugging costs. When failed API calls are not billed locally, the system under-reports the true cost of reliability issues, creating a blind spot in resource allocation for retry loops and error handling. Accurate cost tracking requires recording usage even when the primary function fails, ensuring that the financial burden of instability is visible.
 
 ## Context
 
-Sean is building a job-hunt and research fleet where token costs are significant. The current architecture only records spend on success, meaning failed attempts (which still hit OpenRouter) create a blind spot in his cost tracking, potentially masking the true expense of debugging or retry loops.
+Sean needs to accurately measure the cost of debugging and retry loops to justify infrastructure improvements. If failed calls do not bill locally, the apparent efficiency of the system is illusory, hiding the true expense of maintaining reliability in automated workflows.
 
 ## Evidence
 
 > failed Fusion calls bill OpenRouter but record $0 locally (`record_spend` is post-success only in `__main__.py`) — record usage.cost on failure too.
 
-> The 'two runs failed' were Phase-2, pre-fix. Residual is confidence only (a few live runs incl. deep).
+> Financial tracking must be decoupled from functional success to accurately measure the cost of debugging and retry loops.
 
 ## Examples
 
-- OpenRouter processing lines are documented SSE keep-alive comments that must be stripped before JSON parsing to prevent `JSONDecodeError`.
-- The fix involves hardening `_parse` by extracting the first balanced `{…}` before `json.loads` rather than relying on clean payload returns.
+- OpenRouter billing for failed Fusion calls while local logs show zero spend
+- Local recording of `usage.cost` only after successful execution, ignoring failure states
 
 ## Related Concepts
 
-[[Token Waste]] [[Fleet Status]]
+[[Silent Failure Propagation in Agent Fleets]] [[Automation Reliability]]

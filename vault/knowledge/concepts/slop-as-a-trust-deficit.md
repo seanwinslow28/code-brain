@@ -2,10 +2,10 @@
 title: "Slop as a Trust Deficit"
 type: concept
 sources:
-  - knowledge/expansions/slop-as-a-trust-deficit.md
+  - knowledge/concepts/slop-as-a-trust-deficit.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean is building an agent fleet where reliability is paramount. If he cannot acc
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Control Room Observability]] [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
+[[Agent Health Monitoring]] [[Control Room Observability]]

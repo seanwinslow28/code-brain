@@ -2,10 +2,10 @@
 title: "Accountability Gap"
 type: concept
 sources:
-  - knowledge/connections/the-cost-of-verification-vs-the-value-of-governance.md
+  - knowledge/concepts/accountability-gap.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition

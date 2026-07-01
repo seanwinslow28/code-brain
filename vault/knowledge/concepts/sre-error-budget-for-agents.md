@@ -2,10 +2,10 @@
 title: "SRE Error Budget for Agents"
 type: concept
 sources:
-  - knowledge/expansions/connections/provider-fallback-and-automation-reliability.md
+  - knowledge/concepts/sre-error-budget-for-agents.md
 tags: [auto-generated, phase-6]
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Definition
