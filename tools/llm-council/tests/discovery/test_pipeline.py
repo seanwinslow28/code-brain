@@ -63,6 +63,19 @@ async def test_pipeline_records_gather_cost_on_empty_bundle():
     assert res.cost_usd == pytest.approx(0.018)
 
 
+@pytest.mark.asyncio
+async def test_empty_bundle_session_carries_verify_and_citation_keys():
+    # schema uniformity: the empty-bundle early-return session must carry the same
+    # verify_mode / citation_* keys as the full path (substring-only, no metrics).
+    async def gather_fn(**kw):
+        return EvidenceBundle(), {"sonar": "ok: 0 records (0 found)"}
+    res = await run_discovery(topic="x", lens="pm", tier="quick", api_key="k",
+                              gather_fn=gather_fn, fuse_fn=None)
+    assert res.session["verify_mode"] == "substring-only"
+    assert res.session["citation_precision"] is None
+    assert res.session["citation_recall"] is None
+
+
 def test_estimate_cost_prefers_usage_cost():
     from council.discovery.pipeline import _estimate_cost
     from council.discovery.fusion import FusionResult
