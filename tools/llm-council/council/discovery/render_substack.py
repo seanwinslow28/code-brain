@@ -12,11 +12,15 @@ from council.discovery.whitespace import whitespace_hero
 def render_substack_ledger(*, topic: str, tier: str, segment: str = "", angles: list[PostAngle],
                            quote_bank: list[str], fusion_result: FusionResult,
                            cost_usd: float, dropped_count: int,
-                           supplement: "BackfillResult | None" = None, merged_count: int = 0) -> str:
+                           supplement: "BackfillResult | None" = None, merged_count: int = 0,
+                           verify_mode: str = "nli") -> str:
     L: list[str] = []
     L.append(f"# Substack Idea Ledger — {topic}\n")
     L.append(f"- **Lens:** `substack`  **Tier:** `{tier}`  **Post angles:** {len(angles)}")
     L.append(f"- **Cost:** ${cost_usd:.2f}  ·  Pain points dropped by verification: {dropped_count}\n")
+    if verify_mode == "substring-only":
+        L.append("- **Verification:** substring-only — NLI model not loaded (degraded mode; "
+                 "see `scripts/install_nli_model.sh`)\n")
     if merged_count:
         L.append(f"- Merged {merged_count} near-duplicate pain point(s) before ranking.\n")
 
