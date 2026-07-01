@@ -304,3 +304,46 @@ async def test_pipeline_ranks_blind_spots_worst_first():
     md = res.markdown
     # the orthogonal gap (pricing) is ranked above the one close to the found pain (export recovery)
     assert md.index("pricing transparency is unaddressed") < md.index("nobody covers export conflict recovery")
+
+
+@pytest.mark.asyncio
+async def test_pipeline_records_verify_mode_substring_only_without_scorer(tmp_path):
+    from tests.discovery.test_verify_entailment import FakeScorer  # noqa
+    bundle = EvidenceBundle()
+    bundle.add(EvidenceRecord("reddit", "r/pm", "https://r.com/1", "", "exports fail silently", 9))
+    async def gather_fn(**kw):
+        return bundle, {"sonar": "ok: 1 records (1 found)"}
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Export loss", "s", ["exports fail silently"], ["https://r.com/1"], intensity=5),
+        ], blind_spots=[], tokens_in=10, tokens_out=5, cost=0.1)
+    sdir = tmp_path / ".sessions"
+    res = await run_discovery(topic="x", lens="pm", tier="standard", api_key="k",
+                              gather_fn=gather_fn, fuse_fn=fuse_fn, supplement=False,
+                              sessions_dir=sdir, scorer=None)
+    import json
+    data = json.loads(next(sdir.glob("*.json")).read_text())
+    assert data["verify_mode"] == "substring-only"
+    assert data["citation_precision"] is None and data["citation_recall"] is None
+    assert res.verified_count == 1
+
+
+@pytest.mark.asyncio
+async def test_pipeline_records_nli_mode_and_metrics_with_scorer(tmp_path):
+    from tests.discovery.test_verify_entailment import FakeScorer
+    bundle = EvidenceBundle()
+    bundle.add(EvidenceRecord("reddit", "r/pm", "https://r.com/1", "", "exports fail silently", 9))
+    async def gather_fn(**kw):
+        return bundle, {"sonar": "ok: 1 records (1 found)"}
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Export loss", "s", ["exports fail silently"], ["https://r.com/1"], intensity=5),
+        ], blind_spots=[], tokens_in=10, tokens_out=5, cost=0.1)
+    sdir = tmp_path / ".sessions"
+    await run_discovery(topic="x", lens="pm", tier="standard", api_key="k",
+                        gather_fn=gather_fn, fuse_fn=fuse_fn, supplement=False,
+                        sessions_dir=sdir, scorer=FakeScorer(prob=0.9))
+    import json
+    data = json.loads(next(sdir.glob("*.json")).read_text())
+    assert data["verify_mode"] == "nli"
+    assert data["citation_recall"] == 1.0

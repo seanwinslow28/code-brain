@@ -14,15 +14,20 @@ from council.discovery.backfill import run_backfill
 from council.discovery.fusion import FusionResult, FusionError, fuse as _fuse
 from council.discovery.frame import frame_pm
 from council.discovery.gather import gather_evidence
+from council.discovery.nli import get_scorer
 from council.discovery.render import render_ledger
 from council.discovery.tiers import get_tier
-from council.discovery.verify import verify_pain_points
+from council.discovery.verify import verify_pain_points, citation_metrics
 from council.discovery.dedup import dedup_verified, rank_gaps, _point_text
 
 # Per-1k-token blended prices (USD) and per-web-query price for cost estimation.
 DISCOVERY_PRICE_IN_PER_1K = 0.003
 DISCOVERY_PRICE_OUT_PER_1K = 0.015
 WEB_QUERY_PRICE = 0.012
+
+# Sentinel default for `scorer` — distinguishes "caller didn't pass one" (resolve via get_scorer())
+# from "caller explicitly passed scorer=None" (force degraded substring-only mode, e.g. in tests).
+_UNSET = object()
 
 # --segment is a free-text AUDIENCE qualifier, not a search operator. Strip query-operator chars
 # (`:` and parens) so an operator-bearing segment (`is:pr`, `site:foo`, a stray `)`) can't alter the
@@ -62,7 +67,7 @@ def _estimate_cost(fr: FusionResult, tier) -> float:
 
 async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segment: str = "",
                         gather_fn=None, fuse_fn=None, backfill_fn=None, supplement: bool = True,
-                        sessions_dir: Path | None = None) -> DiscoveryResult:
+                        sessions_dir: Path | None = None, scorer=_UNSET) -> DiscoveryResult:
     tcfg = get_tier(tier)
     segment = _normalize_segment(segment)
     session_id = f"{time.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:6]}"
@@ -103,11 +108,18 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
     # DiscoveryFailed.cost_usd and persist a diagnostic failure session.
     cost = _estimate_cost(fr, tcfg)
     try:
-        verified = verify_pain_points(fr.pain_points, bundle)
+        # Resolve here (not at function top) so the empty-bundle early-return path never pays to
+        # load the NLI model. scorer=_UNSET (default) resolves via get_scorer(); an explicit
+        # scorer=None (tests) forces degraded substring-only mode.
+        active_scorer = get_scorer() if scorer is _UNSET else scorer
+        verified = verify_pain_points(fr.pain_points, bundle, scorer=active_scorer)
         dropped = sum(1 for v in verified if not v.verified)
         # E3 — collapse near-duplicate gate-survived pains (honest merge), then rank D4's gaps
         # worst-first against what the run actually surfaced. Both reuse one lexical similarity.
         verified, merges = dedup_verified(verified)
+        # Metrics computed AFTER dedup so precision/recall reflect the deduped, surfaced set.
+        metrics = citation_metrics(verified, bundle, scorer=active_scorer)
+        verify_mode = "nli" if active_scorer is not None else "substring-only"
         fr.blind_spots = rank_gaps(
             fr.blind_spots, [_point_text(v.point) for v in verified if v.verified])
 
@@ -152,6 +164,9 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
                 "filled": sum(1 for it in supplement_result.items if it.findings),
                 "items": len(supplement_result.items),
             }),
+            "verify_mode": verify_mode,
+            "citation_precision": metrics.precision,
+            "citation_recall": metrics.recall,
         }
         if sessions_dir is not None:
             sessions_dir.mkdir(parents=True, exist_ok=True)
