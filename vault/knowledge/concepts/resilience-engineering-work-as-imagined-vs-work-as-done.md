@@ -2,7 +2,7 @@
 title: "Resilience Engineering: Work-as-Imagined vs Work-as-Done"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-operational-health-vs-creative-ambiguity.md
+  - knowledge/expansions/the-illusion-of-health-in-autonomous-systems.md
 tags: [auto-generated, phase-6]
 created: 2026-07-01
 updated: 2026-07-01
@@ -10,23 +10,23 @@ updated: 2026-07-01
 
 ## Definition
 
-This concept defines the gap between the deterministic, idealized workflow diagrams designed by engineers and the actual, often chaotic, practices users employ to achieve their goals. Implementation architectures fail when they optimize for the diagram rather than the practiced workaround, leading to systems that are robust in theory but brittle in practice. The mechanism requires recognizing that user behavior will deviate from specifications, and designing for resilience means accommodating these deviations rather than enforcing rigid compliance.
+This framework highlights the divergence between the theoretical model of system operation and the actual practices agents and humans employ to keep the system running. It posits that failures arise not from component breakdowns but from the accumulation of local adaptations that, while rational in the moment, erode the shared assumptions necessary for coordinated action. The tension lies in the fact that these adaptations are often invisible to standard observability tools that only monitor the 'imagined' workflow.
 
 ## Context
 
-Sean's portfolio projects must demonstrate how he handles 'confidently wrong' automation, showing interviewers that he values reliability under surprise over raw efficiency. His infrastructure suffers when it optimizes the diagram instead of the practiced workaround, leading to silent failures in creative and job-hunt contexts.
+Sean's agent fleet likely develops workarounds for missing context or failed handoffs. Understanding this divergence helps him identify where the fleet is 'working around' problems rather than solving them, which is critical for maintaining trust in automated outputs.
 
 ## Evidence
 
-> implementation architecture fails when it optimizes the diagram instead of the practiced workaround
+> The missing facet is that “green dashboards” are not just bad summaries; they are part of how systems normalize deviance.
 
-> Sean should prioritize 'degraded modes' in his agent specs over perfect automation
+> A green system can still be dangerous if it has lost shared context with its human operator.
 
 ## Examples
 
-- Optimizing the diagram instead of the practiced workaround
-- Prioritizing degraded modes over perfect automation
+- Agents silently falling back to cached data when real-time retrieval fails, maintaining uptime but losing freshness.
+- Human operators ignoring stale outputs because the dashboard remains green, reinforcing the normalization of deviance.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Structural Integrity vs. Automation Velocity]]
+[[The Illusion of Health in Autonomous Systems]] [[Silent Failure Propagation in Agent Fleets]] [[Common Ground Breakdown]]

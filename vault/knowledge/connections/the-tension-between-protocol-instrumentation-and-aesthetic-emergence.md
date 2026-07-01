@@ -5,13 +5,13 @@ connects:
   - Negative Space Calibration
   - Raising vs. Describing
   - Supervision as the New AI Edge
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Synthesis
 
-Sean's infrastructure relies on deterministic protocol instrumentation, where agents execute tasks based on explicit, verifiable inputs. However, aesthetic emergence requires a non-deterministic cultivation process that cannot be fully specified by these protocols. This tension creates a structural split in his vault: operational domains succeed through automation and clarity, while creative domains fail when subjected to the same deterministic logic, requiring a separate mode of interaction based on rejection and calibration rather than instruction.
+Sean's infrastructure is built on deterministic protocol instrumentation, which excels at executing explicit, verifiable tasks but fails to capture the non-deterministic nature of aesthetic emergence. This creates a structural split where operational domains succeed through automation, while creative domains require a separate mode of interaction based on rejection and calibration. The consequence is that Sean must maintain distinct mental models for these domains, preventing the leakage of operational rigidity into creative processes.
 
 ## Threads
 

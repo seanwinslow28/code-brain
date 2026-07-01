@@ -2,7 +2,7 @@
 title: "Vibe-Coding Interview Canon"
 type: concept
 sources:
-  - knowledge/concepts/vibe-coding-interview-canon.md
+  - knowledge/connections/the-validity-paradox-in-ai-pm-selection.md
 tags: [auto-generated, phase-6]
 created: 2026-07-01
 updated: 2026-07-01
@@ -10,22 +10,22 @@ updated: 2026-07-01
 
 ## Definition
 
-This concept reframes the 'vibe-coding' interview format from a mere cultural signal to a psychometric instrument with specific validity properties. It asserts that these interviews function as high-fidelity work samples that test for adverse impact and criterion contamination, revealing how candidates handle ambiguity and social dynamics in real-time. The mechanism is that the informal nature of the interaction exposes tacit judgments and decision-making heuristics that structured interviews obscure.
+This concept establishes the psychometric framework for evaluating 'vibe-coding' interviews, treating them not merely as cultural signals but as instruments with specific validity properties. It requires analyzing these interactions through the lens of predictive validity, adverse impact, criterion contamination, and work-sample fidelity to determine their actual utility in selecting effective AI product managers. The mechanism shifts the focus from superficial cultural alignment to measurable job performance indicators.
 
 ## Context
 
-Sean should leverage this understanding to prepare for interviews by treating them as psychometric tests rather than cultural fit assessments. He needs to be aware of how his responses might be interpreted through the lens of predictive validity and adverse impact, ensuring his 'vibe' aligns with the actual work demands.
+Sean needs to apply this psychometric counterframe to his own interview preparation, ensuring that his demonstrations of vibe-coding fluency are grounded in verifiable work-sample fidelity rather than just cultural signaling.
 
 ## Evidence
 
 > The current note treats vibe-coding interviews as a cultural signal. Add the psychometric counterframe: interviews are instruments with predictive validity, adverse impact, criterion contamination, and work-sample fidelity.
 
-> Sean should design his portfolio to explicitly demonstrate 'recovery intention' rather than just plan execution to align with actual job demands.
+> Standard interviews measure adherence to imagined plans, while effective AI PMs demonstrate competence through improvisation during plan collapse.
 
 ## Examples
 
-- Analyzing interview responses through the lens of psychometric validity rather than just cultural alignment.
-- Designing portfolio pieces that serve as high-fidelity work samples for agent management scenarios.
+- Analyzing interview questions for criterion contamination
+- Evaluating the predictive validity of vibe-coding tasks
 
 ## Related Concepts
 

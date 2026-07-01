@@ -5,13 +5,13 @@ connects:
   - Supervision as the New AI Edge
   - SRE Error Budget for Agents
   - Resilience Engineering: Work-as-Imagined vs Work-as-Done
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Synthesis
 
-This connection reveals a fundamental tension between the need for precise, executable supervision specs (like Erlang/OTP's Supervisor Behaviour) and the ambiguity of defining SLOs for personal automation. While protocol instrumentation allows for detailed monitoring and restart policies, regulatory ambiguity arises when determining what level of unreliability is acceptable for different agents. This tension manifests in the difficulty of creating a unified error budget that balances reliability with cognitive load, forcing Sean to choose between rigid control and flexible adaptation.
+Sean faces a fundamental tension between the need for precise, executable supervision specs (like Erlang/OTP's Supervisor Behaviour) and the ambiguity of defining SLOs for personal automation. While protocol instrumentation allows for detailed monitoring and restart policies, regulatory ambiguity arises when determining what level of unreliability is acceptable for different agents. This tension manifests in the difficulty of creating a unified error budget that balances reliability with cognitive load, forcing Sean to choose between rigid control and flexible adaptation.
 
 ## Threads
 

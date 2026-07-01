@@ -2,7 +2,7 @@
 title: "SRE Error Budget for Agents"
 type: concept
 sources:
-  - knowledge/concepts/sre-error-budget-for-agents.md
+  - knowledge/expansions/the-illusion-of-health-in-autonomous-systems.md
 tags: [auto-generated, phase-6]
 created: 2026-07-01
 updated: 2026-07-01
@@ -10,23 +10,23 @@ updated: 2026-07-01
 
 ## Definition
 
-An SRE error budget for agents is a quantitative constraint that limits the acceptable rate of automated failure or degradation to preserve long-term system trust and operational stability. Rather than treating fallback as an infinite resource, this mechanism defines a threshold where the cost of reliability (e.g., budget burn, latency) exceeds the value of the output, triggering a shift from automatic recovery to human escalation or hard failure. This transforms agent reliability from a binary uptime metric into a managed trade-off between availability and cost/quality integrity.
+This pattern redefines reliability from a binary success/failure metric to a quantifiable allowance of coordination risk at agent-to-agent boundaries. Instead of measuring whether individual scripts exit cleanly, it tracks specific failure modes such as stale context, missing artifacts, skipped writes, and silent fallbacks against a defined budget. The unit of reliability becomes the handoff contract, ensuring that the cost of coordination errors is explicitly accounted for rather than hidden in aggregate health metrics.
 
 ## Context
 
-Sean is building autonomous agent fleets that operate with significant financial and temporal costs. Without an error budget, agents may continue to burn resources on low-value or corrupted outputs during provider degradation, eroding trust in the system. Defining this budget allows Sean to make explicit decisions about when to stop automating and start intervening.
+Sean needs to operationalize his agent fleet's reliability. By adopting an error budget approach, he can set concrete thresholds (e.g., 'daily note stale > 1 run = yellow') that trigger human intervention before the illusion of health masks a deeper systemic drift.
 
 ## Evidence
 
-> Fallback increases reliability only when it does not hide systemic failure, amplify cost, or degrade user trust.
+> Each agent-to-agent boundary gets a budget for stale context, missing artifacts, skipped writes, late outputs, and silent fallbacks.
 
-> The current note treats fallback as uptime. It needs 'what kind of failure happened, and what kind of fallback is allowed?'
+> The unit of reliability is not the agent; it is the handoff contract.
 
 ## Examples
 
-- A cost-capped agent escalation policy where fallback is allowed until daily budget burn reaches N% or confidence drops below threshold.
-- Routing to a secondary provider only if quality/cost/audit conditions hold, rather than automatic failover.
+- Setting a threshold where 'context index older than 24h = degraded' forces a review of the indexing pipeline.
+- Triggering an incident when a critic agent produces partial outputs twice in a row, indicating a breakdown in the common ground.
 
 ## Related Concepts
 
-[[Provider Fallback Mechanism]] [[Agent Health Monitoring]]
+[[The Illusion of Health in Autonomous Systems]] [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Context Management as a Bottleneck]]

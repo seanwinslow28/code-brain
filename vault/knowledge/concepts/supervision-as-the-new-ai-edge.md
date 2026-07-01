@@ -2,7 +2,7 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - knowledge/connections/the-skill-atrophy-trap-in-agentic-workflows.md
+  - knowledge/connections/the-verification-governance-inversion.md
 tags: [auto-generated, phase-6]
 created: 2026-07-01
 updated: 2026-07-01
@@ -10,23 +10,23 @@ updated: 2026-07-01
 
 ## Definition
 
-This concept identifies the shift in value from execution to oversight in agentic workflows. Automation often removes easy work and leaves humans with rarer, harder, higher-stakes supervision failures. The edge is no longer in doing the work faster but in detecting when the automated system deviates from reality and correcting it before it causes damage. This requires a deep understanding of the underlying mechanics that the automation abstracts away.
+This mechanism defines the transition where human oversight becomes the primary differentiator in AI utility rather than a necessary evil. When automated agents produce high-volume, low-differentiation content, the value of human input shifts from creation to curation and verification. The edge is no longer in who can generate faster, but who can verify more accurately and efficiently.
 
 ## Context
 
-As Sean's agent fleet grows more capable, his role shifts from creator to supervisor. The value of his work lies not in the volume of content generated but in his ability to spot subtle errors or strategic misalignments that the agents miss. This makes his manual oversight skills more critical than ever.
+For Sean's job hunt, demonstrating this ability to manage and verify AI output is a key signal of seniority. It shows he understands the limitations of current models and has built systems to mitigate their risks, which is crucial for roles involving AI product management or engineering leadership.
 
 ## Evidence
 
-> Automation often removes easy work and leaves humans with rarer, harder, higher-stakes supervision failures.
+> Marketing teams report that 'AI-generated content often requires more editing time than writing from scratch,' which inverts the expected efficiency gain of agentic workflows.
 
-> Every automation transfers work from execution to monitoring, exception handling, recovery, and skill retention.
+> The core tension is that increased agent capability exacerbates the cost of human verification rather than reducing it, creating a paradox where adoption becomes more expensive as technology improves.
 
 ## Examples
 
-- Sean must manually review the synthesizer's output to ensure it aligns with his strategic goals, rather than trusting the agent to do it automatically.
-- The job hunt strategy requires Sean to manually adjust his narrative based on feedback, as agents cannot fully capture the nuance of human interaction.
+- Users frequently note that 'AI tools struggle to maintain brand voice consistency across long-form content,' indicating a failure in context retention rather than generation.
+- Legal teams in marketing organizations are 'hesitant to approve AI-generated content without extensive review,' citing potential copyright and defamation risks.
 
 ## Related Concepts
 
-[[The Skill Atrophy Trap in Agentic Workflows]] [[The Illusion of Competence in Automated Systems]]
+[[The Verification-Governance Inversion]] [[Accountability Gap]] [[Legibility Debt as a Supervision Failure Mode]]

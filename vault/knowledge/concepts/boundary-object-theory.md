@@ -2,7 +2,7 @@
 title: "Boundary Object Theory"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-translation-tension-in-career-narrative.md
+  - knowledge/expansions/connections/agentic-engineering-and-open-source-synergy.md
 tags: [auto-generated, phase-6]
 created: 2026-07-01
 updated: 2026-07-01
@@ -10,23 +10,23 @@ updated: 2026-07-01
 
 ## Definition
 
-A boundary object functions as a shared artifact that possesses enough plasticity to adapt to the local needs of different social worlds, while simultaneously maintaining enough robust identity to remain recognizable across those distinct groups. In Sean's context, this manifests as the tension between machine-readable telemetry required by agent fleets and human-readable narrative required by hiring managers. The mechanism relies on the artifact serving as a translation layer where technical fidelity is preserved but the interpretive frame shifts based on the audience's domain-specific expectations.
+Boundary resources function as control surfaces that shape what external actors can safely build within a platform without corrupting its core integrity. This mechanism transforms open-source contributions from mere proof of generosity into a structured ecosystem where APIs, documentation, and plugin contracts define the boundaries of safe extension. The underlying invariant is that visibility alone does not create synergy; rather, the design of these boundary objects determines whether external input strengthens or destabilizes the central system.
 
 ## Context
 
-This matters to Sean because his career progression depends on demonstrating operational judgment through artifacts that are legible to both automated systems and human reviewers. Without explicit boundary objects, his technical work remains opaque to hiring managers, while his narrative lacks the structural integrity demanded by engineering roles.
+Sean needs to move beyond using open source as a credibility signal and instead engineer it as a deliberate control mechanism for his Intent Engineering MCP. By treating contributor paths and failure modes as explicit boundary resources, he can manage the attention economy of maintainers while ensuring that external extensions align with his architectural goals.
 
 ## Evidence
 
-> A fleet dashboard is not just telemetry; it is a boundary object between Sean-the-builder, Sean-the-writer, Sean-the-job-candidate, and the agents themselves.
+> Open source is not merely proof of generosity or visibility; it is a control surface.
 
-> It turns the article from descriptive reliability talk into an artifact hiring managers can evaluate as operational judgment.
+> APIs, docs, examples, issue templates, eval harnesses, and plugin contracts are 'boundary resources' that shape what outsiders can safely build.
 
 ## Examples
 
-- The fleet dashboard acting as a shared reference point for both agent health monitoring and career narrative construction.
-- Using technical telemetry data to construct a story about operational maturity for job applications.
+- Intent Engineering MCP as Boundary Resource: one page showing contributor paths, extension points, guardrails, evals, and failure modes.
+- A portfolio artifact demonstrating how Sean designs ecosystems others can extend without corrupting the core.
 
 ## Related Concepts
 
-[[Two Audiences]] [[Cross-domain bridging]]
+[[Agentic Engineering]] [[Open-Source Contributions]]

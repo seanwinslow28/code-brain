@@ -2,7 +2,7 @@
 title: "Accountability Gap"
 type: concept
 sources:
-  - knowledge/concepts/accountability-gap.md
+  - knowledge/connections/the-verification-governance-inversion.md
 tags: [auto-generated, phase-6]
 created: 2026-07-01
 updated: 2026-07-01
@@ -10,11 +10,11 @@ updated: 2026-07-01
 
 ## Definition
 
-An Accountability Gap emerges when the chain of custody for creative or technical artifacts becomes opaque due to automated generation, creating a liability void that human stakeholders are unwilling to fill. This gap is not merely a lack of documentation but a structural failure in attributing intent and responsibility for specific segments of output. It forces organizations to impose heavy manual review layers as a proxy for legal safety, effectively negating the automation benefits.
+This pattern identifies the disconnect between the speed of automated generation and the legal or ethical responsibility for its output. Agents can produce content rapidly, but they cannot assume liability for copyright infringement, defamation, or brand misalignment. This gap forces humans to remain in the loop not for creation, but for risk mitigation and final approval.
 
 ## Context
 
-For Sean's job hunt and studio operations, this gap represents a significant risk if he relies on unverified AI outputs for client-facing or public materials. He must build infrastructure that explicitly logs provenance to close this gap, turning 'verifiability' into a sellable feature of his agentic tools rather than an afterthought.
+Sean's personal knowledge vault and job hunt materials must be accurate and original. If his agents hallucinate or plagiarize, he bears the professional risk. Understanding this gap helps him design verification steps that specifically target these high-liability areas rather than just checking for typos.
 
 ## Evidence
 
@@ -24,9 +24,9 @@ For Sean's job hunt and studio operations, this gap represents a significant ris
 
 ## Examples
 
-- Copyright and defamation risks associated with unreviewed AI text.
-- The market opportunity for governance infrastructure that automates audit trails.
+- Sean's infrastructure suffers from a critical tension where robust protocol instrumentation masks epistemic blindness, creating an illusion of health that is particularly dangerous in creative production.
+- The tension lies between the need for simplified agent health metrics and the complex reality of human-agent joint cognition.
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[The Cost of Verification vs. The Value of Governance]]
+[[The Verification-Governance Inversion]] [[Liability Routing in Agentic Product Design]] [[Slop as a Trust Deficit]]

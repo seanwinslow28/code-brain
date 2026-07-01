@@ -5,8 +5,8 @@ connects:
   - SRE Error Budget for Agents
   - Resilience Engineering: Work-as-Imagined vs Work-as-Done
   - Reflexion Loop
-created: 2026-06-30
-updated: 2026-06-30
+created: 2026-07-01
+updated: 2026-07-01
 ---
 
 ## Synthesis

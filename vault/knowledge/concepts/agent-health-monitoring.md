@@ -2,7 +2,7 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/connections/the-decoupling-of-operational-health-from-functional-value.md
+  - knowledge/connections/the-tension-between-reliability-metrics-and-adaptive-capacity-in-agent-fleets.md
 tags: [auto-generated, phase-6]
 created: 2026-07-01
 updated: 2026-07-01
@@ -10,22 +10,23 @@ updated: 2026-07-01
 
 ## Definition
 
-The practice of evaluating agent status through operational metrics like uptime and exit codes rather than semantic output verification. This approach assumes that process completion equates to value delivery, ignoring the possibility of empty or corrupted data payloads. It creates a blind spot where agents can be technically 'alive' but functionally inert.
+This concept describes the transition from passive detection of broken states to active assessment of operational maturity through graceful degradation. It identifies that monitoring must evolve beyond simple loop catching to evaluate whether the system preserves its core intent despite component failures. The mechanism requires defining what 'healthy' looks like during partial failure, not just during nominal operation.
 
 ## Context
 
-Sean's current monitoring setup reports 'healthy' statuses even when the synthesizer produces no concepts, leading him to believe his knowledge base is being updated when it is actually stagnant.
+Sean's current monitoring treats health as a binary state, which fails to capture the nuanced reality of his agent fleet's adaptive capacity and creates blind spots in his job-hunt infrastructure reliability.
 
 ## Evidence
 
-> status=error · 5.5h ago · notes='concepts=0 connections=0 rejected=0 edges=0'
+> Your current frame treats monitoring as detection: catch loops, hallucinations, broken states.
 
-> Sean cannot trust the dashboard as a proxy for his knowledge base's vitality
+> Sean faces a structural tension where the traditional engineering obsession with reliability (uptime, success rates) clashes with the operational reality of resilience (graceful degradation under surprise).
 
 ## Examples
 
-- forcing him to manually verify the content quality rather than relying on system metrics
+- Evaluating whether the synthesizer's rejected_count correlates with actual loss of intent.
+- Analyzing the duration_seconds to identify when monitoring becomes a bottleneck rather than a safeguard.
 
 ## Related Concepts
 
-[[The Illusion of Competence in Automated Systems]] [[Silent Failure Propagation in Agent Fleets]]
+[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[SRE Error Budget for Agents]]

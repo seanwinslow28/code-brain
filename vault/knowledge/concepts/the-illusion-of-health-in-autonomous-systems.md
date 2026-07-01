@@ -2,7 +2,7 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: concept
 sources:
-  - knowledge/connections/the-decoupling-of-operational-uptime-from-cognitive-integrity.md
+  - knowledge/expansions/the-illusion-of-health-in-autonomous-systems.md
 tags: [auto-generated, phase-6]
 created: 2026-07-01
 updated: 2026-07-01
@@ -10,23 +10,23 @@ updated: 2026-07-01
 
 ## Definition
 
-This pattern describes a state where an agent's operational metrics indicate normal functioning while its cognitive outputs degrade silently. The system maintains process continuity and resource availability, creating a false positive for reliability. This decoupling prevents early detection of knowledge rot because standard health checks do not validate semantic accuracy or context freshness.
+This concept describes a systemic failure mode where autonomous agents maintain operational continuity and report 'green' status despite accumulating critical context decay or coordination errors. The mechanism relies on the decoupling of local agent success metrics from global system coherence, allowing locally rational adaptations to drift away from the intended control plane model without triggering immediate alerts. Health checks become unreliable because they verify that scripts exit with code 0, rather than verifying that the shared assumptions between agents and humans remain valid.
 
 ## Context
 
-Sean needs to distinguish between an agent that is running correctly and one that is thinking correctly. Without this distinction, he risks building infrastructure on stale or incorrect premises, leading to compounding errors in his job hunt and creative work.
+Sean is building an agent fleet for knowledge synthesis and job hunting. If the fleet reports health while silently dropping context or hallucinating handoffs, Sean's downstream work (resumes, essays) will be built on stale or incorrect data. Recognizing this illusion prevents him from trusting automated outputs without manual verification of the underlying common ground.
 
 ## Evidence
 
-> An agent can be 'healthy' in terms of process execution while failing to maintain accurate state across interactions.
+> The dashboard is not lying; it is faithfully reporting the system-as-imagined after the system-as-done has drifted away.
 
-> The fleet's health dashboard reports binary status (healthy/online) that contradicts the functional reality of empty queues and offline infrastructure.
+> Autonomous systems do not usually fail because one agent suddenly breaks, but because locally rational adaptations accumulate until the control plane’s model is fiction.
 
 ## Examples
 
-- Agents appearing green in monitoring tools while propagating stale context to daily notes
-- Dashboard indicators showing online status despite underlying knowledge base corruption
+- A synthesizer agent completes its run and reports success, but it used a context index that was 24 hours old, missing recent updates in Sean's vault.
+- An agent fleet shows all green status indicators while silently skipping writes to the daily note due to a silent fallback mechanism.
 
 ## Related Concepts
 
-[[Silent Failure Propagation in Agent Fleets]] [[Context Management as a Bottleneck]]
+[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Silent Failure Propagation in Agent Fleets]] [[SRE Error Budget for Agents]]

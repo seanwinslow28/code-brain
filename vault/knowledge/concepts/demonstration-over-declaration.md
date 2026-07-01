@@ -2,7 +2,7 @@
 title: "Demonstration Over Declaration"
 type: concept
 sources:
-  - knowledge/concepts/demonstration-over-declaration.md
+  - knowledge/expansions/connections/agentic-engineering-and-open-source-synergy.md
 tags: [auto-generated, phase-6]
 created: 2026-07-01
 updated: 2026-07-01
@@ -10,22 +10,22 @@ updated: 2026-07-01
 
 ## Definition
 
-This mechanism shifts the evidentiary standard for technical competence from declarative assertions of skill to observable traces of operational logic. It requires that any claim about system capability be anchored in a working artifact where the underlying principle is visible in its trace, failure mode, and recovery path. The evaluator does not read a description of the agent; they watch the principle operate through inspectable arguments like nightly loops, manifest diffs, and cost caps.
+This pattern shifts validation from capability narratives to refutable public tests where outcomes are proven through reproduction rather than assertion. It requires turning claims into executable artifacts that allow others to feed bad inputs, observe failures, and verify fixes, thereby establishing credibility through falsifiability. The mechanism relies on the tension between stating what one can do and providing a traceable proof that withstands scrutiny.
 
 ## Context
 
-Sean's job hunt relies on proving 'AI Fluency' to recruiters who are skeptical of vague claims. By staging Code-Brain as an inspectable argument rather than a black box, he provides a tangible proof point that distinguishes his operational competence from mere tool familiarity.
+Sean's current portfolio risks sounding like a recruiter-facing summary of capabilities. By adopting this pattern, he can create an executable demo where a bad intent spec leads to an audit failure and then a passing trace, offering a stronger genre of proof than essays or summaries.
 
 ## Evidence
 
-> The missing idea is not “show AI fluency,” but “make the evaluator watch the principle operate.”
+> The missing move is to turn each claim into a refutable public test: can another person run the MCP server, feed it a bad intent spec, see the audit fail, fix it, and observe a better agent outcome?
 
-> Code-Brain is not described as a large agent fleet, but staged as an inspectable argument: nightly loop, manifest, critic output, lint gate, cost cap, and a before/after concept diff.
+> That reaches a stronger genre than essay or summary: proof-by-reproduction.
 
 ## Examples
 
-- A portfolio one-pager that includes a live demo script of the agent's trace.
-- A before/after concept diff showing the evolution of the agent's logic.
+- bad-spec.md → audit_intent_spec → failure report → revised-spec.md → passing trace.
+- An executable portfolio demo that serves as proof-by-reproduction rather than a capability narrative.
 
 ## Related Concepts
 
