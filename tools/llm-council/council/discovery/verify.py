@@ -18,15 +18,26 @@ class VerifiedPainPoint:
 
 
 _ENTAIL_TAU = 0.5
-_CLAIM_SENT = re.compile(r"[^.!?]+[.!?]|[^.!?]+$")
+# A claim boundary is sentence-ending punctuation that (a) is followed by whitespace or
+# end-of-text -- so decimals/versions ("v3.0", "$9.99") never split -- and (b) is not the dot
+# of a common abbreviation ("Mr.", "e.g."). The old split-on-every-dot regex produced spurious
+# 1-3 char fragments ("Mr.", "0") that each had to be independently entailed -> false rejects.
+_CLAIM_BOUNDARY = re.compile(
+    r"(?<!\bMr)(?<!\bMrs)(?<!\bMs)(?<!\bDr)(?<!\bProf)(?<!\bSt)(?<!\bSr)(?<!\bJr)"
+    r"(?<!\bvs)(?<!\betc)(?<!\be\.g)(?<!\bi\.e)"
+    r"[.!?]+(?=\s|$)"
+)
 _logger = logging.getLogger("council.discovery.verify")
 _degraded_warned = False
 
 
 def _claim_sentences(text: str) -> list[str]:
-    parts = [s.strip() for s in _CLAIM_SENT.findall(text)]
+    text = text.strip()
+    if not text:
+        return []
+    parts = [s.strip() for s in _CLAIM_BOUNDARY.split(text)]
     parts = [p for p in parts if p]
-    return parts or ([text.strip()] if text.strip() else [])
+    return parts or [text]
 
 
 def _warn_degraded_once() -> None:
@@ -102,10 +113,14 @@ def citation_metrics(verified: list[VerifiedPainPoint], bundle: EvidenceBundle, 
     Recall = fraction of verified points whose cited quotes are all supported by the
     concatenated premise of their *cited* urls (point.urls, not just the independently
     verified subset). Precision = over each (point, cited_url) citation, the fraction
-    that are non-redundant -- a citation is redundant iff removing it still leaves the
-    point supported by the remaining premise. Cited urls (not just supporting_urls) are
-    the correct denominator: a url that doesn't independently support the claim can
-    still be a genuine (if redundant) citation to test for redundancy.
+    that are non-redundant.
+
+    Option (c) -- unfetched-citation semantics (decided 2026-07-01, "verified, not
+    hallucinated"): a cited url that was NEVER fetched into the bundle (a phantom) is
+    unverifiable, so it counts in the precision DENOMINATOR but can never be a numerator
+    hit -- a hard precision miss. Redundancy is evaluated only among fetched (bundle)
+    urls: a fetched citation is redundant iff removing it still leaves the point supported
+    by the remaining fetched premise.
     """
     if scorer is None:
         return CitationMetrics(None, None)
@@ -119,9 +134,12 @@ def citation_metrics(verified: list[VerifiedPainPoint], bundle: EvidenceBundle, 
         quotes = v.point.quotes
         urls = v.point.urls
         recalls.append(1.0 if _all_claims_supported(quotes, _premise_for(bundle, urls), scorer) else 0.0)
+        bundle_urls = [u for u in urls if bundle.has_url(u)]
         for u in urls:
             total += 1
-            remaining = [x for x in urls if x != u]
+            if not bundle.has_url(u):
+                continue                       # (c) phantom: denominator only, never a hit
+            remaining = [x for x in bundle_urls if x != u]
             # redundant iff the point is still supported WITHOUT this citation
             still = bool(remaining) and _all_claims_supported(quotes, _premise_for(bundle, remaining), scorer)
             if not still:

@@ -84,7 +84,9 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
                            dropped_count=0, supplement=None, verify_mode="substring-only")
         return DiscoveryResult(markdown=md, cost_usd=gather_cost, verified_count=0, dropped_count=0,
                                session={"id": session_id, "topic": topic, "empty": True,
-                                        "gather_status": gather_status})
+                                        "gather_status": gather_status,
+                                        "verify_mode": "substring-only",
+                                        "citation_precision": None, "citation_recall": None})
 
     fuse = fuse_fn or _fuse
     try:
