@@ -55,3 +55,22 @@ def test_multi_sentence_claim_requires_all_supported():
 def test_empty_inputs_reject():
     assert quote_supported_at_url(cited_quote="", fetched_text="anything", scorer=None) is False
     assert quote_supported_at_url(cited_quote="x", fetched_text="", scorer=None) is False
+
+
+def test_verify_pain_points_accepts_paraphrase_with_scorer():
+    from council.discovery.evidence import EvidenceBundle, EvidenceRecord
+    from council.discovery.fusion import CandidatePainPoint
+    from council.discovery.verify import verify_pain_points
+
+    b = EvidenceBundle()
+    b.add(EvidenceRecord("reddit", "r/pm", "https://r.com/1", "", "exporting silently drops rows"))
+    pt = CandidatePainPoint("Export loss", "s", ["the export feature loses data"], ["https://r.com/1"], intensity=5)
+
+    # no scorer -> paraphrase not a substring -> dropped (today's behavior)
+    assert verify_pain_points([pt], b)[0].verified is False
+
+    # with scorer that entails the paraphrase -> verified
+    s = FakeScorer(table={"the export feature loses data": 0.9})
+    out = verify_pain_points([pt], b, scorer=s)
+    assert out[0].verified is True
+    assert out[0].supporting_urls == ["https://r.com/1"]

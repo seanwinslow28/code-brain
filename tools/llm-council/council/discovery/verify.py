@@ -61,22 +61,22 @@ def quote_supported_at_url(*, cited_quote: str, fetched_text: str, scorer=None) 
     return all(_claim_supported(s, fetched_text, doc_lower, scorer) for s in sentences)
 
 
-def _quote_present_at_url(bundle: EvidenceBundle, url: str, quotes: list[str]) -> bool:
+def _quote_present_at_url(bundle: EvidenceBundle, url: str, quotes: list[str], scorer=None) -> bool:
     for rec in bundle.records:
         if rec.url != url:
             continue
         for q in quotes:
-            if quote_supported_at_url(cited_quote=q, fetched_text=rec.quote):
+            if quote_supported_at_url(cited_quote=q, fetched_text=rec.quote, scorer=scorer):
                 return True
     return False
 
 
-def verify_pain_points(points: list[CandidatePainPoint], bundle: EvidenceBundle) -> list[VerifiedPainPoint]:
+def verify_pain_points(points: list[CandidatePainPoint], bundle: EvidenceBundle, scorer=None) -> list[VerifiedPainPoint]:
     out: list[VerifiedPainPoint] = []
     for pt in points:
         supporting = [
             u for u in pt.urls
-            if bundle.has_url(u) and _quote_present_at_url(bundle, u, pt.quotes)
+            if bundle.has_url(u) and _quote_present_at_url(bundle, u, pt.quotes, scorer=scorer)
         ]
         out.append(VerifiedPainPoint(point=pt, verified=bool(supporting), supporting_urls=supporting))
     return out
