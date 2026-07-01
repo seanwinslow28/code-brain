@@ -1,4 +1,5 @@
-import importlib
+import pytest
+
 import council.discovery.nli as nli
 
 
@@ -26,10 +27,6 @@ def test_scorer_cache_is_singleton(monkeypatch, tmp_path):
     a = nli.get_scorer()
     b = nli.get_scorer()
     assert a is b  # both None, cached without re-attempting load
-
-
-import pytest
-import council.discovery.nli as nli
 
 
 @pytest.mark.skipif(nli.get_scorer() is None, reason="NLI model not installed (run scripts/install_nli_model.sh)")

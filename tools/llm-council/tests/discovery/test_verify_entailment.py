@@ -1,5 +1,20 @@
 # tests/discovery/test_verify_entailment.py
-from council.discovery.verify import quote_supported_at_url
+from council.discovery.verify import quote_supported_at_url, _claim_sentences
+
+
+def test_claim_split_keeps_decimal_versions_intact():
+    # "v3.0" must not fragment into "v3." + "0" (old naive split-on-every-dot bug)
+    assert _claim_sentences("We use v3.0 now") == ["We use v3.0 now"]
+
+
+def test_claim_split_keeps_title_abbreviations_intact():
+    # "Mr." must not become a standalone spurious fragment that then has to be entailed
+    assert _claim_sentences("Mr. Smith says exports drop rows") == ["Mr. Smith says exports drop rows"]
+
+
+def test_claim_split_still_splits_real_sentences():
+    # genuine sentence boundaries still split (and trailing punctuation is stripped)
+    assert _claim_sentences("Exports drop rows. SSO is broken too") == ["Exports drop rows", "SSO is broken too"]
 
 
 class FakeScorer:
@@ -50,6 +65,14 @@ def test_multi_sentence_claim_requires_all_supported():
     s = FakeScorer(prob=0.0)
     assert quote_supported_at_url(cited_quote="drops rows. it also lacks SSO.",
                                   fetched_text="exporting silently drops rows", scorer=s) is False
+
+
+def test_entailment_at_exact_tau_boundary_accepts():
+    # prob exactly == _ENTAIL_TAU (0.5). The gate uses `>=`, so the boundary ACCEPTS.
+    # Pins >= vs > so a future refactor can't silently flip it (today only 0.92/0.10 tested).
+    s = FakeScorer(prob=0.5)
+    assert quote_supported_at_url(cited_quote="the export feature loses data",
+                                  fetched_text="exporting silently drops rows", scorer=s) is True
 
 
 def test_empty_inputs_reject():

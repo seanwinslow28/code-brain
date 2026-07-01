@@ -41,7 +41,7 @@ if [[ ! -f "${MODELS_DIR}/${ONNX_FILENAME}" ]]; then
   "${HF_CLI}" download "${MODEL_ID}" \
     "${ONNX_SUBPATH}" \
     tokenizer.json tokenizer_config.json spm.model special_tokens_map.json added_tokens.json config.json \
-    --local-dir "${MODELS_DIR}" || true
+    --local-dir "${MODELS_DIR}"
 else
   echo "[install_nli_model] ${ONNX_FILENAME} already present — skipping download."
 fi

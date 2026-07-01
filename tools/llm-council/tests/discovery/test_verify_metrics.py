@@ -40,3 +40,24 @@ def test_precision_flags_redundant_citation():
     verified = verify_pain_points([pt], b, scorer=s)
     m = citation_metrics(verified, b, scorer=s)
     assert m.precision == 0.5  # 1 of 2 citations contributes
+
+
+def test_phantom_cited_url_is_a_hard_precision_miss():
+    # Option (c): a url the model cited but that was NEVER fetched into the bundle is
+    # unverifiable -> it counts in the precision denominator, never in the numerator.
+    # This is the multi-quote edge case where the OLD semantics inflated precision to 1.0:
+    # the point is verified (q1 substring-present at url1) but not all-claims-supported
+    # (q2 is nowhere), so the OLD redundancy test counted BOTH the phantom and url1 as
+    # "load-bearing" -> 2/2 = 1.0. Option (c) makes the phantom a hard miss -> 1/2 = 0.5.
+    b = _bundle(EvidenceRecord("reddit", "r", "https://r.com/1", "", "exports silently drop rows"))
+    pt = CandidatePainPoint(
+        "Export", "s",
+        ["silently drop rows", "it also lacks SSO"],          # q1 supported at url1, q2 nowhere
+        ["https://r.com/1", "https://phantom.com/never-fetched"],
+        intensity=5,
+    )
+    s = FakeScorer(prob=0.0)  # only substring can support; q2 has neither substring nor entailment
+    verified = verify_pain_points([pt], b, scorer=s)
+    assert verified[0].verified is True                        # q1 keeps the point alive
+    m = citation_metrics(verified, b, scorer=s)
+    assert m.precision == 0.5  # url1 contributes, phantom is a hard miss (never numerator)

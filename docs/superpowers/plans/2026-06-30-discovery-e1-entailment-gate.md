@@ -260,7 +260,7 @@ git commit -m "discovery E1: thread optional scorer through verify_pain_points +
 - Produces: `@dataclass CitationMetrics(precision: float | None, recall: float | None)`; `citation_metrics(verified: list[VerifiedPainPoint], bundle, scorer=None) -> CitationMetrics`.
 - Consumes: `VerifiedPainPoint`, `quote_supported_at_url`.
 
-**Definitions (reference-free, ALCE):** for each verified point, build the premise = concatenation of the `rec.quote`s at its `supporting_urls`. **Recall** = fraction of points whose cited quotes are all supported by that concatenated premise. **Precision** = over each (point, supporting_url) citation, fraction that are *not* redundant — a citation is redundant iff removing it still leaves the point supported by the remaining premise. When `scorer is None`, return `CitationMetrics(None, None)` (metrics are an NLI-mode feature).
+**Definitions (reference-free, ALCE):** for each verified point, build the premise = concatenation of the `rec.quote`s at its cited urls (`point.urls`, not just `supporting_urls`). **Recall** = fraction of points whose cited quotes are all supported by that concatenated premise. **Precision** = over each (point, cited_url) citation, fraction that are *not* redundant — a citation is redundant iff removing it still leaves the point supported by the remaining premise. **Unfetched-citation semantics (option c, decided 2026-07-01):** a cited url never fetched into the bundle (a phantom) is unverifiable — it counts in the precision denominator but never as a hit (a hard miss); redundancy is evaluated only among fetched urls. When `scorer is None`, return `CitationMetrics(None, None)` (metrics are an NLI-mode feature).
 
 - [ ] **Step 1: Write the failing tests**
 
@@ -346,11 +346,14 @@ def citation_metrics(verified, bundle, scorer=None) -> CitationMetrics:
     contributing = total = 0
     for v in points:
         quotes = v.point.quotes
-        urls = v.supporting_urls
+        urls = v.point.urls          # all model-cited urls (NOT just supporting_urls)
         recalls.append(1.0 if _all_claims_supported(quotes, _premise_for(bundle, urls), scorer) else 0.0)
+        bundle_urls = [u for u in urls if bundle.has_url(u)]
         for u in urls:
             total += 1
-            remaining = [x for x in urls if x != u]
+            if not bundle.has_url(u):
+                continue             # (c) phantom (unfetched) citation: denominator only, never a hit
+            remaining = [x for x in bundle_urls if x != u]
             # redundant iff the point is still supported WITHOUT this citation
             still = bool(remaining) and _all_claims_supported(quotes, _premise_for(bundle, remaining), scorer)
             if not still:
