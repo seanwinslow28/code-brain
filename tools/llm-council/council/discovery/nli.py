@@ -8,7 +8,8 @@ from pathlib import Path
 
 _logger = logging.getLogger("council.discovery.nli")
 _DEFAULT_DIR = Path(__file__).resolve().parent.parent.parent / "models" / "nli-deberta-v3-small"
-_ENTAILMENT_IDX = 1   # CONFIRM against the model card id2label before trusting; see Task 4 note
+_ENTAILMENT_IDX = 1   # CONFIRMED: index 1 = entailment (verified against model card id2label
+                       # {0: contradiction, 1: entailment, 2: neutral} and a live run — 2026-07-01)
 _sentinel = object()
 _cached = _sentinel
 

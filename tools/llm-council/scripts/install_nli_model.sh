@@ -19,18 +19,26 @@ ONNX_FILENAME="model_qint8_avx512_vnni.onnx"
 
 echo "[install_nli_model] tools/llm-council: ${COUNCIL_DIR}"
 
-# 1. Verify huggingface-cli is on PATH
-if ! command -v huggingface-cli >/dev/null 2>&1; then
-  echo "[install_nli_model] ERROR: huggingface-cli not found on PATH." >&2
-  echo "[install_nli_model] Install it: uv pip install 'huggingface_hub[cli]' (or pip install huggingface_hub[cli])" >&2
+# 1. Resolve the HF Hub CLI. `hf` is the current entry point (huggingface_hub>=0.27);
+# `huggingface-cli` is the older/deprecated name and still works on older installs.
+HF_CLI=""
+if command -v hf >/dev/null 2>&1; then
+  HF_CLI="hf"
+elif command -v huggingface-cli >/dev/null 2>&1; then
+  HF_CLI="huggingface-cli"
+fi
+if [[ -z "${HF_CLI}" ]]; then
+  echo "[install_nli_model] ERROR: neither 'hf' nor 'huggingface-cli' found on PATH." >&2
+  echo "[install_nli_model] Install it: uv pip install --python ${COUNCIL_DIR}/.venv/bin/python3 huggingface_hub" >&2
   exit 1
 fi
+echo "[install_nli_model] Using HF Hub CLI: ${HF_CLI}"
 
 # 2. Fetch model weights + tokenizer files (only if the ONNX is missing)
 mkdir -p "${MODELS_DIR}"
 if [[ ! -f "${MODELS_DIR}/${ONNX_FILENAME}" ]]; then
   echo "[install_nli_model] Downloading ${MODEL_ID} (~173MB int8 ONNX + tokenizer)…"
-  huggingface-cli download "${MODEL_ID}" \
+  "${HF_CLI}" download "${MODEL_ID}" \
     "${ONNX_SUBPATH}" \
     tokenizer.json tokenizer_config.json spm.model special_tokens_map.json added_tokens.json config.json \
     --local-dir "${MODELS_DIR}" || true
