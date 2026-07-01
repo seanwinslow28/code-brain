@@ -80,3 +80,52 @@ def verify_pain_points(points: list[CandidatePainPoint], bundle: EvidenceBundle,
         ]
         out.append(VerifiedPainPoint(point=pt, verified=bool(supporting), supporting_urls=supporting))
     return out
+
+
+@dataclass
+class CitationMetrics:
+    precision: float | None
+    recall: float | None
+
+
+def _premise_for(bundle: EvidenceBundle, urls) -> str:
+    return " ".join(r.quote for r in bundle.records if r.url in set(urls))
+
+
+def _all_claims_supported(quotes, premise: str, scorer) -> bool:
+    return all(quote_supported_at_url(cited_quote=q, fetched_text=premise, scorer=scorer) for q in quotes)
+
+
+def citation_metrics(verified: list[VerifiedPainPoint], bundle: EvidenceBundle, scorer=None) -> CitationMetrics:
+    """Reference-free ALCE-style citation precision/recall (NLI-mode only).
+
+    Recall = fraction of verified points whose cited quotes are all supported by the
+    concatenated premise of their *cited* urls (point.urls, not just the independently
+    verified subset). Precision = over each (point, cited_url) citation, the fraction
+    that are non-redundant -- a citation is redundant iff removing it still leaves the
+    point supported by the remaining premise. Cited urls (not just supporting_urls) are
+    the correct denominator: a url that doesn't independently support the claim can
+    still be a genuine (if redundant) citation to test for redundancy.
+    """
+    if scorer is None:
+        return CitationMetrics(None, None)
+    points = [v for v in verified if v.verified]
+    if not points:
+        return CitationMetrics(None, None)
+
+    recalls = []
+    contributing = total = 0
+    for v in points:
+        quotes = v.point.quotes
+        urls = v.point.urls
+        recalls.append(1.0 if _all_claims_supported(quotes, _premise_for(bundle, urls), scorer) else 0.0)
+        for u in urls:
+            total += 1
+            remaining = [x for x in urls if x != u]
+            # redundant iff the point is still supported WITHOUT this citation
+            still = bool(remaining) and _all_claims_supported(quotes, _premise_for(bundle, remaining), scorer)
+            if not still:
+                contributing += 1
+    recall = round(sum(recalls) / len(recalls), 4)
+    precision = round(contributing / total, 4) if total else None
+    return CitationMetrics(precision=precision, recall=recall)
