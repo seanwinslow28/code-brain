@@ -22,6 +22,33 @@ async def test_gather_returns_bundle_and_status():
 
 
 @pytest.mark.asyncio
+async def test_gather_threads_billing_collector_cost_to_bundle():
+    # A collector that bills (Sonar) reports (records, cost); the orchestrator accumulates that
+    # onto bundle.gather_cost_usd so the pipeline can fold it into recorded discovery spend.
+    async def paid_sonar(topic):
+        return ([EvidenceRecord("sonar", "S", "https://a/1", "", "pain a")], 0.0231)
+    async def free_web(topic):
+        return [EvidenceRecord("web", "W", "https://b/2", "", "pain b")]   # plain list = $0
+    bundle, status = await gather_evidence(
+        topic="x", tier=get_tier("quick"), api_key="k",
+        collectors={"sonar": paid_sonar, "web": free_web},
+    )
+    assert bundle.gather_cost_usd == pytest.approx(0.0231)
+    assert len(bundle.records) == 2
+    assert status["sonar"].startswith("ok:")
+
+
+@pytest.mark.asyncio
+async def test_gather_cost_zero_when_no_billing_collector():
+    async def free(topic):
+        return [EvidenceRecord("web", "W", "https://b/2", "", "pain b")]
+    bundle, _ = await gather_evidence(
+        topic="x", tier=get_tier("quick"), api_key="k", collectors={"web": free},
+    )
+    assert bundle.gather_cost_usd == 0.0
+
+
+@pytest.mark.asyncio
 async def test_default_collectors_respect_tier_flags(monkeypatch):
     seen = []
 

@@ -22,6 +22,10 @@ class EvidenceBundle:
     records: list[EvidenceRecord] = field(default_factory=list)
     _keys: set = field(default_factory=set)
     urls: set = field(default_factory=set)
+    # Real $ billed during Stage-1 gather (Sonar is a paid Perplexity call). Accumulated by the
+    # orchestrator from billing collectors and folded into the run's recorded spend by the pipeline,
+    # so the $10/day discovery cap sees Sonar's ~$0.02/run instead of silently under-reporting.
+    gather_cost_usd: float = 0.0
 
     def add(self, record: EvidenceRecord) -> bool:
         key = _dedup_key(record)
@@ -36,11 +40,15 @@ class EvidenceBundle:
         return url in self.urls
 
     def to_dict(self) -> dict:
-        return {"records": [asdict(r) for r in self.records]}
+        # Persist gather_cost_usd too: PM3 freezes a bundle to disk via this serializer, and a
+        # from_dict() that defaulted cost to 0.0 would silently zero real Sonar spend on reload —
+        # the exact cost-integrity failure the gather threading exists to prevent.
+        return {"records": [asdict(r) for r in self.records], "gather_cost_usd": self.gather_cost_usd}
 
     @classmethod
     def from_dict(cls, d: dict) -> "EvidenceBundle":
         bundle = cls()
         for rd in d.get("records", []):
             bundle.add(EvidenceRecord(**rd))
+        bundle.gather_cost_usd = d.get("gather_cost_usd", 0.0)
         return bundle
