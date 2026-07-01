@@ -111,3 +111,15 @@ def test_render_empty_cards_no_receipts_no_legend():
     assert "🧾" not in md
     assert "Receipts** show evidence" not in md
     assert "No pain points survived verification" in md
+
+
+def test_render_shows_degraded_verification_note():
+    md = render_ledger(topic="x", lens="pm", tier="standard", segment="", cards=[],
+                       quote_bank=[], fusion_result=FusionResult(), cost_usd=0.0,
+                       dropped_count=0, supplement=None, verify_mode="substring-only")
+    assert "substring-only" in md.lower()
+
+
+def test_render_nli_mode_shows_no_degraded_note():
+    md = _render()  # default verify_mode="nli"
+    assert "substring-only" not in md.lower()

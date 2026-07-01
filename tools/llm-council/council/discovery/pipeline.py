@@ -78,7 +78,7 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
     if not bundle.records:
         md = render_ledger(topic=topic, lens=lens, tier=tier, segment=segment, cards=[],
                            quote_bank=[], fusion_result=FusionResult(), cost_usd=0.0,
-                           dropped_count=0, supplement=None)
+                           dropped_count=0, supplement=None, verify_mode="substring-only")
         return DiscoveryResult(markdown=md, cost_usd=0.0, verified_count=0, dropped_count=0,
                                session={"id": session_id, "topic": topic, "empty": True,
                                         "gather_status": gather_status})
@@ -142,7 +142,7 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
             md = render_substack_ledger(topic=topic, tier=tier, segment=segment, angles=angles,
                                         quote_bank=quote_bank, fusion_result=fr, cost_usd=cost,
                                         dropped_count=dropped, supplement=supplement_result,
-                                        merged_count=len(merges))
+                                        merged_count=len(merges), verify_mode=verify_mode)
             brief_md = render_substack_brief(topic=topic, segment=segment, angles=angles)
             verified_count = len(angles)
         else:
@@ -150,7 +150,7 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
             md = render_ledger(topic=topic, lens=lens, tier=tier, segment=segment, cards=cards,
                                quote_bank=quote_bank, fusion_result=fr, cost_usd=cost,
                                dropped_count=dropped, supplement=supplement_result,
-                               merged_count=len(merges))
+                               merged_count=len(merges), verify_mode=verify_mode)
             verified_count = len(cards)
 
         session = {

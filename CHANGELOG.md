@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### fusion-discovery-council E1 — NLI entailment gate (2026-07-01)
+- **fusion-discovery-council E1 — substring→NLI entailment upgrade for the core VERIFY gate.**
+  New `council/discovery/nli.py`: an in-process `cross-encoder/nli-deberta-v3-small` int8 ONNX
+  scorer (via `onnxruntime`, no server) that checks whether a cited quote *entails* the claimed
+  pain point, layered strictly on top of the existing substring/URL-traceability check — the
+  recall-safety invariant holds (substring never rejects; NLI only adds a stricter pass, never
+  removes the floor). The model is an **optional extra** (`pip install -e '.[nli]'` /
+  `tools/llm-council/scripts/install_nli_model.sh`); with no model installed or any load failure,
+  `get_scorer()` returns `None` and the gate degrades gracefully to substring-only — never a hard
+  failure. Degraded runs are never silent: the rendered ledger shows a one-line
+  `**Verification:** substring-only` note, and session JSON records `verify_mode`
+  (`"nli"`/`"substring-only"`) plus ALCE-style `citation_precision`/`citation_recall` metrics.
+  `tools/llm-council/models/` is gitignored — model weights never get committed.
+
 ### fusion-discovery-council E2 — judge-family debias (2026-06-30)
 - **fusion-discovery-council E2 — panel self-preference fix.** The FUSE judge was a literal
   member of its own panel in every tier (the confound the Step-C gate flagged). E2 enforces one
