@@ -2,10 +2,10 @@
 title: "Humor and Status Dynamics"
 type: concept
 sources:
-  - knowledge/connections/the-authority-approachability-tension-in-technical-storytelling.md
+  - knowledge/concepts/humor-and-status-dynamics.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition

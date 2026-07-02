@@ -2,15 +2,15 @@
 title: "Two Audiences"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-translation-tension-in-career-narrative.md
+  - knowledge/concepts/two-audiences.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-The structural requirement that a single output must satisfy the contradictory constraints of two distinct evaluators: one demanding precise, low-level technical fidelity and the other requiring high-level, interpretive narrative coherence. This creates a dependency where the artifact must be dual-layered, ensuring that technical accuracy does not obscure strategic value, nor does narrative flourish compromise technical credibility. The mechanism forces an explicit mapping between raw data points and their strategic implications to prevent misinterpretation by either audience.
+This mechanism defines a structural bifurcation where a single artifact must simultaneously satisfy contradictory evaluation criteria: one audience demands low-level technical fidelity and machine-readable precision, while the other requires high-level interpretive narrative coherence and strategic value. This creates a dependency where the output cannot be optimized for either side in isolation without compromising credibility with the other; technical accuracy must not obscure strategic intent, nor can narrative flourish degrade technical trust. The artifact functions as a boundary object that forces an explicit mapping between raw operational data points and their broader implications to prevent misinterpretation by either evaluator.
 
 ## Context
 

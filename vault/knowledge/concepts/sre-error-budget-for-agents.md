@@ -2,31 +2,31 @@
 title: "SRE Error Budget for Agents"
 type: concept
 sources:
-  - knowledge/expansions/the-illusion-of-health-in-autonomous-systems.md
+  - knowledge/connections/the-tension-between-reliability-metrics-and-adaptive-capacity-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-This pattern redefines reliability from a binary success/failure metric to a quantifiable allowance of coordination risk at agent-to-agent boundaries. Instead of measuring whether individual scripts exit cleanly, it tracks specific failure modes such as stale context, missing artifacts, skipped writes, and silent fallbacks against a defined budget. The unit of reliability becomes the handoff contract, ensuring that the cost of coordination errors is explicitly accounted for rather than hidden in aggregate health metrics.
+This mechanism redefines agent health not as a binary state of success, but as a dynamic equilibrium where failure rates, recovery paths, and operator attention costs remain within an explicit budget. It treats the creative agent's output as a service level objective that must be balanced against the cost of intervention required to maintain it. The invariant is that an agent is only healthy if its operational friction stays predictable and bounded.
 
 ## Context
 
-Sean needs to operationalize his agent fleet's reliability. By adopting an error budget approach, he can set concrete thresholds (e.g., 'daily note stale > 1 run = yellow') that trigger human intervention before the illusion of health masks a deeper systemic drift.
+Sean needs to quantify the 'stretch' capability of his agents by tracking how much operator attention their failures require, rather than just counting successful runs.
 
 ## Evidence
 
-> Each agent-to-agent boundary gets a budget for stale context, missing artifacts, skipped writes, late outputs, and silent fallbacks.
+> A creative agent is not healthy when it succeeds once; it is healthy when its failure rate, recovery path, and operator attention cost stay inside an explicit error budget.
 
-> The unit of reliability is not the agent; it is the handoff contract.
+> Your current frame treats monitoring as detection: catch loops, hallucinations, broken states.
 
 ## Examples
 
-- Setting a threshold where 'context index older than 24h = degraded' forces a review of the indexing pipeline.
-- Triggering an incident when a critic agent produces partial outputs twice in a row, indicating a breakdown in the common ground.
+- Tracking operator attention cost alongside failure rates in the fleet memory index.
+- Defining health by the stability of recovery paths rather than single-instance success.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Context Management as a Bottleneck]]
+[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Agent Health Monitoring]]

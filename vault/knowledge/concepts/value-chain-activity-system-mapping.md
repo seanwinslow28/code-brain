@@ -2,10 +2,10 @@
 title: "Value Chain / Activity System Mapping"
 type: concept
 sources:
-  - knowledge/connections/wedge-validation-vs-commodity-drift-tension.md
+  - knowledge/concepts/value-chain-activity-system-mapping.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition

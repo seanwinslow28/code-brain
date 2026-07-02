@@ -3,10 +3,10 @@ title: "The Validity Paradox in AI-PM Selection"
 type: connection
 connects:
   - Resilience Engineering: Work-as-Imagined vs Work-as-Done
-  - Supervision as the New AI Edge
   - Vibe-Coding Interview Canon
-created: 2026-07-01
-updated: 2026-07-01
+  - Supervision as the New AI Edge
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Synthesis
@@ -19,13 +19,13 @@ There is a fundamental tension between the psychometric requirement for predicti
 
 > The interview is not testing whether the candidate can follow a plan; it is testing whether they can recover intention when the plan collapses.
 
-### [[Supervision as the New AI Edge]]
-
-> A more accurate AI update can still hurt team performance if it violates learned user expectations.
-
 ### [[Vibe-Coding Interview Canon]]
 
 > The current note treats vibe-coding interviews as a cultural signal. Add the psychometric counterframe: interviews are instruments with predictive validity, adverse impact, criterion contamination, and work-sample fidelity.
+
+### [[Supervision as the New AI Edge]]
+
+> A more accurate AI update can still hurt team performance if it violates learned user expectations.
 
 ## Implications
 

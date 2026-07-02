@@ -5,8 +5,8 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - Infrastructure Status and Agent Failure
   - Runtime-Model Coupling
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Synthesis
@@ -17,7 +17,7 @@ There is a fundamental tension between the operational visibility of agent healt
 
 ### [[The Illusion of Health in Autonomous Systems]]
 
-> There is a critical tension between operational reliability (access) and cognitive utility (meaning) in agentic systems. When an agent has full access but no judgment, it produces 'green' status indicators while silently failing to contribute to the knowledge graph.
+> When an agent has full access but no judgment, it produces 'green' status indicators while silently failing to contribute to the knowledge graph.
 
 ### [[Infrastructure Status and Agent Failure]]
 

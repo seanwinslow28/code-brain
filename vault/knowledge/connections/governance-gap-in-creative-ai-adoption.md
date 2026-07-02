@@ -5,8 +5,8 @@ connects:
   - The Engineer-Creative Divide in Tooling
   - Control Architecture as Evangelism
   - Intent Engineering
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Synthesis

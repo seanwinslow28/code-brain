@@ -2,31 +2,31 @@
 title: "Open-Source Contributions"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_Tech_PM.md
+  - knowledge/expansions/open-source-contributions.md
 tags: [auto-generated, phase-6]
-created: 2026-05-18
-updated: 2026-05-18
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-Sean publishes tools to npm and the MCP registry, including agentic engineering toolkits like the Claude Code Superuser Pack. This reflects his emphasis on open-source, reusable components for AI and agent workflows.
+This concept represents a shift from viewing open source as mere publication to treating it as an operational discipline of maintainer surface area. It requires defining governance, release discipline, and support boundaries to ensure projects are safe for others to enter. The core mechanism is the tension between publishing output and maintaining the supply chain required to sustain that output without creating unfunded obligations.
 
 ## Context
 
-This plays a key role in Sean's professional identity as both a product manager and an open-source contributor, helping to shape AI workflow infrastructure.
+Sean needs to demonstrate senior IC judgment around adoption and trust signals rather than just shipping code. By framing his work through Karl Fogel’s lens, he moves from a résumé claim of 'I published tools' to a professional argument about designing systems others can safely use.
 
 ## Evidence
 
-> Published the `@swins/intent-engineering-mcp` MCP server to npm and the MCP registry in May 2026.
+> The missing facet is operational: issue templates, contribution path, release discipline, governance, support boundaries, deprecation policy.
 
-> Open-source agentic engineering toolkit for Claude Code: 118 skills, 13 subagents, 14 hooks, 17 autonomous Claude Agent SDK agents (8 in production on local-first launchd schedules).
+> Publishing creates dependency demand; contribution quality is measured by whether maintenance supply can keep up.
 
 ## Examples
 
-- intent-engineering MCP Server
-- Claude Code Superuser Pack — Open-Source Toolkit
+- Creating a MAINTAINERSHIP.md or Contributor Operating Model for Agentic Tooling
+- Shipping a lightweight dependency-risk rubric for MCP/tools including maintainer bus factor and issue latency
 
 ## Related Concepts
 
-[[MCP Server / Portfolio Differentiation]] [[Agent Health Monitoring]]
+[[Agentic Engineering Signal]] [[Supervision as the New AI Edge]]

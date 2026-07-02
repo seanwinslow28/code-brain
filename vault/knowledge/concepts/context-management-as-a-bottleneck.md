@@ -2,10 +2,10 @@
 title: "Context Management as a Bottleneck"
 type: concept
 sources:
-  - knowledge/connections/the-decoupling-of-operational-uptime-from-cognitive-integrity.md
+  - knowledge/concepts/context-management-as-a-bottleneck.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition

@@ -2,31 +2,31 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/concepts/agent-fleet-observability-dashboard.md
+  - knowledge/connections/the-tension-between-volume-and-insight-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-This concept establishes the mechanism of treating personal agents as reliability services defined by Service Level Objectives (SLOs) and error budgets rather than helpful bots. It requires defining specific Service Level Indicators (SLIs) such as daily note creation time, overnight digest presence, stale context rate, manual repair minutes, and false confidence incidents. The underlying pattern is that automation freezes and repair work must outrank feature work when the user-observable promise falls below a defined percentage of days.
+A monitoring interface that aggregates critiques and performance data from multiple external reasoners to evaluate the health and output quality of an agent fleet. It serves as a feedback loop where external models critique the primary fleet's work, providing a multi-perspective assessment of validity and insight depth. This mechanism allows for the detection of systemic issues like 'slop' by comparing internal metrics against external validation.
 
 ## Context
 
-Sean's current concept mentions that health monitoring matters but lacks the rigor to make explicit decisions about when to optimize, pause, degrade, alert, or delete an agent. By adopting SLO mode, he can create a portfolio-grade Agent Fleet Reliability One-Pager and a real runbook that quantifies the cost of automation failures.
+Sean uses this dashboard to identify when his fleet is producing low-quality outputs by leveraging critiques from models like GPT-5.5 and Gemini 3, which helps him diagnose the trust deficit caused by volume optimization.
 
 ## Evidence
 
-> Treat the daily-driver as a reliability service, not a helpful bot. Define SLIs like daily_note_created_by_08:40, overnight_digest_present, stale_context_rate, manual_repair_minutes, and false_confidence_incidents.
+> Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-Gravity CLI) of agent-fleets-supporting-knowledge-synthesis.
 
-> This agent is healthy when USER-OBSERVABLE PROMISE holds N% of days; if not, automation freezes and repair work outranks feature work.
+> The evidence shows that increasing clusters sampled does not linearly increase valid concepts written.
 
 ## Examples
 
-- Creating a portfolio-grade Agent Fleet Reliability One-Pager that serves as a real runbook for the daily-driver.
-- Making explicit decisions about when to optimize, pause, degrade, alert, or delete an agent based on SLO compliance.
+- Using GPT-5.5 to critique the fleet's synthesis outputs for logical consistency.
+- Comparing Gemini 3's assessment of insight depth against the fleet's own concept counts.
 
 ## Related Concepts
 
-[[Agent Health]] [[Automation Reliability]]
+[[Double-loop learning]] [[Slop as a Trust Deficit]]

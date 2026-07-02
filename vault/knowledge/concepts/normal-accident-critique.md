@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/normal-accident-critique.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition

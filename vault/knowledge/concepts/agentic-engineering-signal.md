@@ -2,31 +2,31 @@
 title: "Agentic Engineering Signal"
 type: concept
 sources:
-  - knowledge/concepts/agentic-engineering-signal.md
+  - knowledge/expansions/open-source-contributions.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-This concept defines the practice of deploying autonomous agent fleets as a tangible proof-of-work that demonstrates advanced engineering capabilities beyond standard coding tasks. The presence of multiple production-grade agents running on local schedules serves as a dynamic resume, showcasing mastery over orchestration, reliability, and system design in real-time. It shifts the narrative from theoretical knowledge to demonstrated operational competence, proving the engineer can build and maintain complex, self-sustaining systems.
+This concept defines open source not as a commons but as an attention market where working in public serves as a distribution design. It distinguishes between generic contribution and public proof-of-work with a specific adoption funnel. The mechanism maps each repository to its audience, trust signal, and maintainer promise to make agentic systems inspectable and credible.
 
 ## Context
 
-Sean's deployment of 17 autonomous agents, with 8 in production on local-first launchd schedules, serves as a live demonstration of his engineering depth and ability to manage complex agentic workflows. This operational reality acts as a strategic career differentiator that signals independence and cost-consciousness to potential employers.
+Sean must move beyond generic publishing to show how he uses open source to build credibility for agentic engineering. This requires treating his repositories as artifacts that demonstrate specific professional competencies rather than just technical outputs.
 
 ## Evidence
 
-> 17 autonomous Claude Agent SDK agents (8 in production on local-first launchd schedules).
+> Modern open source often behaves less like a commons and more like an attention market.
 
-> Sean leverages his local-first infrastructure not just for technical efficiency but as a strategic career differentiator that signals independence and cost-consciousness.
+> Sean should distinguish 'open source contribution' from 'public proof-of-work with an adoption funnel.'
 
 ## Examples
 
-- Running 8 agents in production on local-first launchd schedules to prove operational reliability.
-- Utilizing the Claude Agent SDK to create a fleet that demonstrates advanced orchestration skills.
+- Mapping each repo/package to audience, adoption path, trust signal, and maintainer promise
+- Using open source to make agentic systems inspectable, reusable, and credible
 
 ## Related Concepts
 
-[[Control Architecture as Evangelism]] [[Intent Engineering]]
+[[Open-Source Contributions]] [[Distribution Surface]]

@@ -5,8 +5,8 @@ connects:
   - Silent Failure Propagation in Agent Fleets
   - Cost-Capped Agentic Workflows
   - Automation Reliability
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Synthesis
@@ -17,7 +17,7 @@ There is a critical tension between the speed of agent execution and the visibil
 
 ### [[Silent Failure Propagation in Agent Fleets]]
 
-> Brave treats `site:` as a single filter hint, not a Boolean. Records that DO return are real + gate-valid (correctness fine); this is yield tuning only.
+> When upstream agents silently under-yield or downstream agents choke on formatting artifacts, the system does not crash; it merely produces less value than expected.
 
 ### [[Cost-Capped Agentic Workflows]]
 
@@ -25,7 +25,7 @@ There is a critical tension between the speed of agent execution and the visibil
 
 ### [[Automation Reliability]]
 
-> The 'two runs failed' were Phase-2, pre-fix. Residual is confidence only (a few live runs incl. deep).
+> Sean cannot rely on binary success/fail metrics to gauge fleet health; he must monitor yield rates and parsing robustness as primary indicators of system reliability.
 
 ## Implications
 

@@ -5,8 +5,8 @@ connects:
   - SRE Error Budget for Agents
   - Normal Accident Critique
   - Agent Health Monitoring
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Synthesis

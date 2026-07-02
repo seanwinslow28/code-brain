@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/liability-routing-in-agentic-product-design.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-This concept defines a structural constraint where the boundary of viable agentic products is determined by the ability to assign residual responsibility when autonomous agents operate outside deterministic control. It posits that human-in-the-loop checkpoints are not merely operational best practices but legal necessities required to resolve the accountability gap in corporate structures. The mechanism forces a design pattern where successful products are defined by their capacity to clearly assign blame and accountability back to the human architect rather than the agent executing the intent.
+This structural constraint defines the boundary of viable agentic products by requiring a clear mechanism to assign residual responsibility when autonomous agents operate outside deterministic control. It posits that human-in-the-loop checkpoints are not merely operational best practices but legal necessities required to resolve the accountability gap in corporate structures. The mechanism forces a design pattern where successful products are defined by their capacity to clearly assign blame and accountability back to the human architect rather than the agent executing the intent.
 
 ## Context
 

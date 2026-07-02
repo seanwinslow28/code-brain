@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/the-latency-of-trust-in-automated-research-pipelines.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-This concept refers to the gap between perceived operational health and actual data freshness or completeness. Agents may report 'healthy' status based on successful execution of their immediate tasks, ignoring the quality of the data they produce or consume. This leads to a situation where the system is technically running but functionally degraded, requiring Sean to monitor yield rates rather than just success/fail states.
+This concept refers to the gap between binary operational health metrics (such as exit codes and dashboard status) and the actual functional value delivered by automated systems. When agents report 'healthy' despite producing low-yield or malformed outputs, the system creates an illusion of competence that prevents timely intervention. True reliability requires monitoring yield rates and parsing robustness rather than relying solely on success/failure flags.
 
 ## Context
 
-Sean's daily drive and knowledge vault depend on reliable automation. When agents report health without addressing data integrity, he risks building his knowledge base on stale or incomplete information, undermining the utility of the entire system.
+Sean's infrastructure monitors agent health via dashboards, but these tools do not capture semantic quality. This leads to a situation where he believes his automation is working correctly while the actual output degrades silently over time.
 
 ## Evidence
 
@@ -24,8 +24,8 @@ Sean's daily drive and knowledge vault depend on reliable automation. When agent
 
 ## Examples
 
-- Agents reporting 'healthy' status while producing stale data
-- Binary success metrics masking underlying data quality issues
+- Phase-2 runs failing before fixes were applied
+- Residual confidence issues in live runs including deep research
 
 ## Related Concepts
 

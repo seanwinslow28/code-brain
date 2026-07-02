@@ -5,8 +5,8 @@ connects:
   - The Taste-Fidelity Decoupling in Creative Production
   - Negative Space Calibration
   - Curation as the New Scarcity
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Synthesis

@@ -5,8 +5,8 @@ connects:
   - SRE Error Budget for Agents
   - Control Plane / Data Plane Split for Agent Fleets
   - Provider Preference Configuration
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Synthesis
@@ -25,7 +25,7 @@ The tension between static cost caps and dynamic quality requirements is resolve
 
 ### [[Provider Preference Configuration]]
 
-> Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-Gravity CLI) of [[provider-preference-configuration-and-cost-capped-workflows]].
+> what each provider, router, budget guard, and agent is allowed to promise, what it cannot promise, and what happens when promises fail.
 
 ## Implications
 

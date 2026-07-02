@@ -4,28 +4,28 @@ type: concept
 sources:
   - knowledge/connections/the-tension-between-reliability-metrics-and-adaptive-capacity-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-This concept describes the transition from passive detection of broken states to active assessment of operational maturity through graceful degradation. It identifies that monitoring must evolve beyond simple loop catching to evaluate whether the system preserves its core intent despite component failures. The mechanism requires defining what 'healthy' looks like during partial failure, not just during nominal operation.
+This concept describes the traditional paradigm of monitoring as a reactive detection mechanism focused on identifying discrete failure states such as loops, hallucinations, or broken states. It contrasts with proactive resilience by focusing on the immediate symptoms of deviation rather than the systemic capacity to absorb them. The limitation is that it treats health as the absence of errors rather than the presence of adaptive capacity.
 
 ## Context
 
-Sean's current monitoring treats health as a binary state, which fails to capture the nuanced reality of his agent fleet's adaptive capacity and creates blind spots in his job-hunt infrastructure reliability.
+Sean's current monitoring frame is insufficient for demonstrating the operational maturity required in his job hunt, as it misses the nuance of graceful degradation.
 
 ## Evidence
 
 > Your current frame treats monitoring as detection: catch loops, hallucinations, broken states.
 
-> Sean faces a structural tension where the traditional engineering obsession with reliability (uptime, success rates) clashes with the operational reality of resilience (graceful degradation under surprise).
+> The consequence is that his portfolio must evolve from a collection of working scripts to a demonstration of how his agents stretch under failure.
 
 ## Examples
 
-- Evaluating whether the synthesizer's rejected_count correlates with actual loss of intent.
-- Analyzing the duration_seconds to identify when monitoring becomes a bottleneck rather than a safeguard.
+- Detecting hallucinations in real-time agent outputs.
+- Identifying broken states in automated workflows.
 
 ## Related Concepts
 

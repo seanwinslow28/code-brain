@@ -2,15 +2,15 @@
 title: "Cross-domain bridging"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-translation-tension-in-career-narrative.md
+  - knowledge/concepts/cross-domain-bridging.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-The active process of integrating disparate professional domains—such as product management tools, personal creative outputs, and job hunt infrastructure—into a unified agentic system. This mechanism resolves the friction between isolated workflows by creating shared dependencies where progress in one domain (e.g., technical automation) directly informs value in another (e.g., career narrative). The consequence is a unified identity that prevents the fragmentation of Sean's professional brand across different platforms and contexts.
+This mechanism resolves the friction between isolated professional workflows by creating shared dependencies where progress in one domain directly informs value in another. It integrates disparate systems—such as product management tools, creative outputs, and job hunt infrastructure—into a unified agentic system. The consequence is a unified identity that prevents the fragmentation of Sean's professional brand across different platforms and contexts.
 
 ## Context
 

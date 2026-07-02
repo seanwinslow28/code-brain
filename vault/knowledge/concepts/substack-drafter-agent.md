@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/substack-drafter-agent.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-This concept represents a specific application of agentic engineering where the goal is not merely to automate writing but to enforce editorial constraints on raw data. The mechanism involves converting unstructured daily-note sediment into bounded writing assignments defined by one scene, one tension, and one claim. It functions as a distillation layer that prevents the agent from producing generic summaries by requiring a specific narrative structure for every candidate post.
+This mechanism defines a distillation layer that enforces editorial constraints on raw data by converting unstructured daily-note sediment into bounded writing assignments. It functions as an active editor rather than a passive recorder, requiring a specific narrative structure for every candidate post to prevent generic summaries. The system demands structural integrity through the constraint of one scene, one tension, and one claim before outputting text.
 
 ## Context
 

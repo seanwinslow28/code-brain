@@ -2,11 +2,11 @@
 title: "The Tension Between Automation Reliability and Human Recovery Capacity"
 type: connection
 connects:
-  - The Illusion of Competence in Automated Systems
-  - Agent Fleet Mode Legend
+  - The Skill Atrophy Trap in Agentic Workflows
+  - Agent Fleet Observability Dashboard
   - SRE Error Budget for Agents
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Synthesis
@@ -15,11 +15,11 @@ There is a fundamental inverse relationship between the reliability of automated
 
 ## Threads
 
-### [[The Illusion of Competence in Automated Systems]]
+### [[The Skill Atrophy Trap in Agentic Workflows]]
 
 > When automation removes routine practice, it also removes the training data for human recovery.
 
-### [[Agent Fleet Mode Legend]]
+### [[Agent Fleet Observability Dashboard]]
 
 > This adds mode visibility: scheduled, skipped, fallback-disabled, partial, human-needed, stale-output, authority-escalated.
 
@@ -31,4 +31,3 @@ There is a fundamental inverse relationship between the reliability of automated
 
 - Sean must schedule monthly failure drills to prevent skill atrophy in his own manual intervention capabilities.
 - The definition of 'health' for the fleet must include the operator's ability to take over, not just the agent's uptime.
-- Monitoring dashboards must prioritize mode visibility over simple status indicators to reduce cognitive load during failures.

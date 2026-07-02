@@ -2,10 +2,10 @@
 title: "Friction-Killing Wedge"
 type: concept
 sources:
-  - knowledge/connections/wedge-validation-vs-commodity-drift-tension.md
+  - knowledge/concepts/friction-killing-wedge.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
@@ -18,9 +18,9 @@ Sean must identify high-visibility nodes to defend while treating hidden compone
 
 ## Evidence
 
-> Map the killed friction as a value-chain node; defend only what is high-visibility and left-of-market.
-
 > A strategic entry point defined by the specific moment a user abandons their current habit because the combined force of situational push and solution pull exceeds the anxiety of switching.
+
+> Map the killed friction as a value-chain node; defend only what is high-visibility and left-of-market.
 
 ## Examples
 

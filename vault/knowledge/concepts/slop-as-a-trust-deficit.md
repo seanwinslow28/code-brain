@@ -2,31 +2,34 @@
 title: "Slop as a Trust Deficit"
 type: concept
 sources:
-  - knowledge/concepts/slop-as-a-trust-deficit.md
+  - knowledge/expansions/control-plane-data-plane-split-for-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-Slop is not merely low trust; it is miscalibrated reliance where the user cannot distinguish whether an agent’s output deserves delegation, inspection, or rejection. This deficit arises because the agent’s internal state—such as rate limits, stale indexes, or context starvation—remains hidden from the user until failure occurs. The resulting friction forces the user to perform high-stakes monitoring and recovery work that is cognitively expensive precisely because it is rare and unpracticed.
+This concept identifies the erosion of operator trust caused by low-fidelity or generic outputs from automated systems. When agents produce 'slop'—content that is technically correct but semantically hollow—the operator must expend additional cognitive effort to verify validity. This verification burden creates a friction point that undermines the efficiency gains of automation, forcing the user back into manual review loops.
 
 ## Context
 
-Sean is building an agent fleet where reliability is paramount. If he cannot accurately assess when to delegate tasks versus when to inspect outputs, his productivity gains are negated by the cognitive load of verification. This concept reframes the problem from 'trust' to 'calibrated reliance,' enabling him to design specific observability contracts and failure drills.
+Sean's job hunt and creative studio workflows require high-signal outputs. If his agent fleet generates generic content or 'slop' due to insufficient constraints or context, he must manually audit every output, negating the time savings and potentially damaging his confidence in the system's reliability.
 
 ## Evidence
 
-> Slop is not low trust; it is miscalibrated reliance, where the user cannot tell whether the agent’s output deserves delegation, inspection, or rejection.
+> Sean could turn 'Vault Critic wrote generic slop' into a control table
 
-> The fleet’s failure mode is not that Sean still has work to do; it is that the remaining work becomes colder, rarer, less practiced, and more cognitively expensive.
+> accidents are produced by inadequate control in a sociotechnical system, not just broken components
+
+> the current concept only reaches ops metaphor
 
 ## Examples
 
-- An agent reliability scorecard that tracks per-agent reliance modes, confidence cues, inspection cost, and failure classes.
-- An agent observability contract requiring every agent to report current mode, last successful run, skipped obligations, degraded dependencies, and required human action.
+- An agent generating a resume bullet point that is grammatically correct but lacks specific metrics or impact
+- A synthesizer producing a connection between two concepts that are tangentially related but not meaningfully linked
+- A status update that reports 'completed' without specifying which files were modified or what errors occurred
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Control Room Observability]]
+[[Constraint-First Automation vs. General Efficiency]] [[Legibility Debt as a Supervision Failure Mode]] [[Taste as Evaluation Function vs. Activity Proof]]

@@ -2,19 +2,19 @@
 title: "MCP Server Hardening"
 type: concept
 sources:
-  - knowledge/connections/protocol-rigidity-vs-narrative-authenticity-in-solo-scaling.md
+  - knowledge/concepts/mcp-server-hardening.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-The process of transforming a functional prototype into a reliable, protocol-compliant service that can withstand the scrutiny of external users and automated systems. This involves enforcing strict interfaces, handling edge cases silently, and ensuring that the server's behavior is predictable enough to be integrated into larger agent fleets. It is the bridge between a personal tool and a public infrastructure component.
+This concept defines the structural transformation of a functional prototype into a protocol-compliant service capable of withstanding external scrutiny. It requires enforcing strict interfaces and handling edge cases silently to ensure predictable behavior for integration into larger agent fleets. The mechanism bridges the gap between a personal tool and public infrastructure by turning private context into a boundary object where humans negotiate meaning and agents execute constrained action.
 
 ## Context
 
-Sean must harden his MCP servers to maintain credibility in the marketplace. Without this rigor, the 'honest-loop' narrative of solo development could be undermined by silent failures that break user workflows, damaging both his reputation and his revenue stream.
+Sean must harden his MCP servers to maintain credibility in the marketplace, as silent failures can undermine the 'honest-loop' narrative of solo development. Without this rigor, broken user workflows damage both his reputation and revenue stream, creating a structural tension between technical reliability and narrative authenticity.
 
 ## Evidence
 

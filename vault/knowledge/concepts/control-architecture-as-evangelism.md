@@ -2,31 +2,31 @@
 title: "Control Architecture as Evangelism"
 type: concept
 sources:
-  - knowledge/concepts/control-architecture-as-evangelism.md
+  - knowledge/expansions/connections/automation-and-agentic-tooling-synergy.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-This concept describes a strategic posture where technical infrastructure choices serve as explicit signals of professional values rather than mere operational necessities. By enforcing local-first constraints, an engineer transforms their toolchain into a manifesto that communicates independence, privacy advocacy, and cost-consciousness to potential employers. The mechanism relies on the visibility of self-hosted resilience, which acts as a proxy for long-term thinking and vendor-agnostic reliability in high-stakes hiring contexts.
+This pattern defines the shift from building tools to designing coordination protocols for human-agent teams. It requires explicit definitions of ownership, escalation boundaries, and confidence displays to manage the joint cognitive system. The mechanism focuses on making the invisible work of agent handoffs visible and auditable by the human operator. This transforms the vault from a passive repository into an active cockpit where Sean retains ultimate authority over decision rights.
 
 ## Context
 
-Sean uses his local-first stack not just for efficiency but to signal specific professional values like privacy and cost-awareness to employers who value durable, independent engineering practices over convenience-driven cloud dependency. This transforms the daily act of maintaining infrastructure into a continuous demonstration of strategic alignment with high-value employer traits.
+Sean is building a 'personal knowledge vault' that functions as infrastructure for his creative and professional life. To maintain control, he must define clear boundaries between what agents do autonomously and what requires human judgment. This concept provides the framework for designing those boundaries, ensuring he remains the pilot rather than just a passenger in his own workflow.
 
 ## Evidence
 
-> The choice of a local-first stack is not just a technical preference but a professional statement about privacy, cost, and reliability.
+> Reframe the fleet not as tools executing workflows, but as a human-agent joint system where reliability depends on coordination, observability, handoff, and graceful degradation.
 
-> Sean leverages his local-first infrastructure not just for technical efficiency but as a strategic career differentiator that signals independence and cost-consciousness.
+> It also gives you hiring language for AI-PM roles: designing the cockpit, not just wiring the automations.
 
 ## Examples
 
-- Using a '$0/month local-LLM stack' to demonstrate financial prudence and technical self-sufficiency.
-- Positioning self-hosted resilience as a key attribute of his professional brand for employers seeking vendor-independent engineers.
+- Creating an 'agent fleet observability spec' with baton files and post-incident review templates.
+- Defining 'who owns the next move' in the synthesis process to prevent ambiguous handoffs between agents.
 
 ## Related Concepts
 
-[[Agentic Engineering Signal]] [[Intent Engineering]]
+[[Agent Fleet Observability Dashboard]] [[Joint Cognitive Systems]]

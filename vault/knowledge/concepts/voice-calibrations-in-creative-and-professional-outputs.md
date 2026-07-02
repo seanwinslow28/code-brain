@@ -2,10 +2,10 @@
 title: "Voice Calibrations in Creative and Professional Outputs"
 type: concept
 sources:
-  - knowledge/expansions/connections/voice-calibrations-in-creative-and-professional-outputs.md
+  - knowledge/concepts/voice-calibrations-in-creative-and-professional-outputs.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition

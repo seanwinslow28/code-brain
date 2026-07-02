@@ -2,31 +2,31 @@
 title: "Negative Space Calibration"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-protocol-instrumentation-and-aesthetic-emergence.md
+  - knowledge/connections/the-taste-fidelity-decoupling-in-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-This mechanism defines a feedback loop where aesthetic refinement is driven by the explicit rejection of undesirable outputs rather than the generation of desired ones. It relies on the agent's ability to recognize and articulate what constitutes 'bad' taste or structural failure, using negative constraints as the primary vector for style acquisition. The system treats the absence of specific errors as the signal for correctness, allowing the user to curate output by eliminating noise rather than prescribing form.
+A calibration method where voice identity is established by explicitly defining the boundaries of what must be excluded, rather than by accumulating positive examples of desired traits. This approach leverages the asymmetry between inclusion and exclusion, allowing for sharper definition through strategic refusal. It prevents the dilution of signal that occurs when agents attempt to model a voice solely through statistical averaging of existing samples.
 
 ## Context
 
-Sean faces a bottleneck where his creative voice cannot be captured by positive prompts alone. By leveraging rejection-based calibration, he can bypass the need for exhaustive descriptive instructions, which often fail to capture nuance, and instead use his existing taste as a filter to shape the agent's output iteratively.
+Sean's creative production requires a defensible position that distinguishes him from generic AI outputs. By focusing on what his voice refuses to become, he can maintain social distinction even as the underlying evidence base grows larger and more homogeneous.
 
 ## Evidence
 
-> I want to find my writing voice by reacting to what it ISN'T. two words is fine. "No." "Gross." "Never."
+> Voice fidelity is not achieved by accumulating more examples of desired phrasing, but by explicitly defining what the voice must refuse to become.
 
-> You can't prompt taste into an LLM; it's raising, not describing.
+> The fundamental tension lies in the divergence between technical fidelity and social distinction, where high-fidelity evidence accumulation produces generic outputs by optimizing for similarity rather than difference.
 
 ## Examples
 
-- Using the 'Cheese Gauntlet' kit to translate aesthetic rejection into a processable format for agents.
-- Responding with single-word rejections like 'No' or 'Gross' to steer the agent away from unwanted stylistic patterns.
+- Defining 'taste enemies' for each Substack mode to prevent voice from becoming generic.
+- Tagging status moves (insider, crank, technician) rather than just preferred phrasing.
 
 ## Related Concepts
 
-[[Raising vs. Describing]] [[Supervision as the New AI Edge]]
+[[The Taste-Fidelity Decoupling in Creative Production]] [[Curation as the New Scarcity]]

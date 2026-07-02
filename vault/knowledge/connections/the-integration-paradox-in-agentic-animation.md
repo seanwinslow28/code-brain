@@ -3,10 +3,10 @@ title: "The Integration Paradox in Agentic Animation"
 type: connection
 connects:
   - Runtime-Model Coupling
-  - Stacked-Tooling Friction
+  - The Engineer-Creative Divide in Tooling
   - Automation Reliability
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Synthesis
@@ -19,7 +19,7 @@ There is a fundamental tension between the promise of agentic automation and the
 
 > The marketed pitch is that animators describe an animation and Claude produces it, but in practice users must think in React/SVG/timing terms, iterate on intricate prompts, and repeatedly correct both code and creative output before anything is production-ready.
 
-### [[Stacked-Tooling Friction]]
+### [[The Engineer-Creative Divide in Tooling]]
 
 > Connecting Claude Code to external animation services, renderers, and desktop tools requires complex setup, and stacking MCP servers, hooks, and skills makes workflows feel slow and bloated before any visual output is reached.
 

@@ -2,30 +2,31 @@
 title: "Coupling Fragility vs Adaptive Capacity in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/coupling-fragility-vs-adaptive-capacity-in-agent-fleets.md
+  - knowledge/expansions/coupling-fragility-vs-adaptive-capacity-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-This concept defines a structural tension where an agent fleet's apparent reliability is undermined by hidden dependencies between components. When one agent's success condition creates an unsafe context for another, the system fails not due to individual component errors but through coupling incidents. This fragility arises because standard monitoring focuses on binary uptime metrics rather than the adaptive capacity required to handle partial degradation or novel failure modes.
+This concept defines a structural tension where an agent fleet's reliability is determined by the ratio of rigid, unverified dependencies to its ability to absorb failure without collapse. When agents operate under implicit orchestration assumptions rather than explicit promise contracts, the system accumulates coupling fragility; any single point of stale data or silent failure propagates through the chain because the adaptive capacity—the ability to detect saturation and recruit alternate paths—remains latent. The mechanism is not merely about redundancy, but about the visibility of constraints: if an agent cannot verify the freshness and provenance of its input, it cannot safely adapt, forcing the entire fleet into a brittle state where graceful extensibility is impossible.
 
 ## Context
 
-Sean must recognize that his current dashboard metrics mask the true health of his automation infrastructure. By focusing only on whether loops run, he ignores the quality of fallbacks and the cost of manual intervention when coupling failures occur. This insight is critical for designing a portfolio artifact that demonstrates sophisticated system design rather than just basic scripting.
+Sean's vault synthesizer runs have shown increasing complexity (from 3 to 125 concepts) but also rising rejection rates and duration. Without explicit 'promise contracts' or STPA-based control loops, the growing number of connections between agents creates a hidden debt of coupling fragility that threatens the stability of his personal knowledge infrastructure.
 
 ## Evidence
 
-> This failure is not an agent-health incident; it is a coupling incident where A’s success condition creates B’s unsafe context.
+> The missing move is: For each agent, name the controller, controlled process, feedback channel, unsafe control action, and missing constraint. This turns A creates B's unsafe context into an analyzable control loop.
 
-> The dashboard should not only report whether the nightly loop ran; it should show what adaptive capacity remains when the loop is partially degraded.
+> This fleet is healthy only if it can detect saturation, recruit alternate capacity, and preserve coordination before brittle collapse.
 
 ## Examples
 
-- Sean can ship a stronger portfolio artifact: “How I designed a personal agent fleet for graceful degradation, not just green checkmarks.”
+- A daily-driver agent consuming stale synth output without freshness metadata
+- An observability dashboard showing remaining slack and fallback depth rather than just green/red status
 
 ## Related Concepts
 
-[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Agent Fleet Observability Dashboard]]
+[[Control Plane / Data Plane Split for Agent Fleets]] [[Silent Failure Propagation in Agent Fleets]] [[SRE Error Budget for Agents]]

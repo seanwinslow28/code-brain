@@ -2,31 +2,31 @@
 title: "The Skill Atrophy Trap in Agentic Workflows"
 type: concept
 sources:
-  - knowledge/connections/the-skill-atrophy-trap-in-agentic-workflows.md
+  - knowledge/expansions/connections/automation-and-agentic-tooling-synergy.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-This concept describes the structural degradation of human operator resilience caused by the delegation of cognitive tasks to automated systems. As Sean offloads routine processing to his agent fleet, he experiences a reduction in immediate mental effort but simultaneously loses the manual recovery skills necessary to debug or restore those same systems when they fail. The mechanism creates a fragile dependency where the complexity of the automation outpaces the operator's ability to intervene manually, turning efficiency gains into long-term vulnerability.
+This mechanism describes the inverse relationship between automation fidelity and human operational competence. As agents handle more clusters and concepts, the user's direct engagement with the underlying data structures diminishes. This creates a dependency where the user can no longer verify or repair the system because they have lost the tacit knowledge of how it functions. The risk is not just failure, but the inability to diagnose the failure when it occurs.
 
 ## Context
 
-Sean is building a complex personal knowledge vault and job hunt infrastructure using multiple agents (Qwen3, etc.). If he relies entirely on these agents for synthesis and maintenance, he risks losing the 'muscle memory' required to fix the vault when an agent hallucinates or a script breaks, leaving him unable to function without the very tools he built.
+Sean is scaling his vault synthesis from 3 concepts to 125 concepts per run. This rapid expansion increases the cognitive load on the agents but decreases Sean's visibility into the mechanics of each individual concept. He risks becoming a passive consumer of synthesized knowledge rather than an active architect, making him vulnerable to silent errors in logic or structure.
 
 ## Evidence
 
-> As Sean delegates more tasks to his agent fleet, he experiences a reduction in immediate cognitive load but an increase in the severity of potential failures due to skill atrophy.
+> Your current concept treats Skills + fleets + pipelines as additive capability, but not as a transfer problem between tacit human practice and formalized machine action.
 
-> The consequence is that his ability to recover from system failures degrades over time, creating a fragile dependency where he cannot function without the very systems he built to help him.
+> as automation improves, humans get worse positioned to intervene because they lose practice, context, and situational awareness.
 
 ## Examples
 
-- Sean automates his daily note generation and synthesis, but when the synthesizer fails silently overnight, he no longer knows how to manually reconstruct the missing context because he hasn't written those notes himself in weeks.
-- The job hunt automation tracks applications and updates status, but Sean loses the ability to craft a compelling narrative for interviews because he has stopped practicing manual writing.
+- Sean's run metrics show concepts_written jumping from 3 to 125 while duration_seconds increases from 47.2 to 2641.4.
+- The rejected_count remains high (76-80) in later runs, indicating persistent structural issues that Sean may no longer have the bandwidth to manually audit.
 
 ## Related Concepts
 
-[[The Automation Paradox in Personal Knowledge Infrastructure]] [[The Illusion of Competence in Automated Systems]] [[Supervision as the New AI Edge]]
+[[Negative Capability / Failure Literacy]] [[Supervision as the New AI Edge]]

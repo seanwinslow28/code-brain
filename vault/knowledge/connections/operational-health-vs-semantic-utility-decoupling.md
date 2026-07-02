@@ -5,8 +5,8 @@ connects:
   - The Illusion of Competence in Automated Systems
   - Silent Failure Propagation in Agent Fleets
   - Infrastructure Status
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Synthesis

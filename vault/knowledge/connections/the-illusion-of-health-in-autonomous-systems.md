@@ -2,32 +2,32 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: connection
 connects:
-  - Runtime-Model Coupling
-  - The Illusion of Health in Autonomous Systems
-  - Infrastructure Status and Agent Failure
-created: 2026-07-01
-updated: 2026-07-01
+  - Coupling Fragility vs Adaptive Capacity in Agent Fleets
+  - Resilience Engineering: Work-as-Imagined vs Work-as-Done
+  - Agent Fleet Observability Dashboard
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Synthesis
 
-There is a critical tension between operational reliability (access) and cognitive utility (meaning) in agentic systems. When an agent has full access to the vault but no judgment or physical availability due to runtime-model coupling, it produces 'green' status indicators while silently failing to contribute to the knowledge graph. This creates an illusion of competence where the system appears healthy because the control plane is responsive, even though the data plane is stagnant.
+This tension arises because binary success metrics create an illusion of health while masking the growing coupling fragility between agents. When Sean monitors only for uptime, he ignores the adaptive capacity required to handle novel failures, leading to a system that appears robust but is structurally incapable of graceful degradation. The consequence is that minor semantic mismatches accumulate as 'legibility debt,' eventually causing catastrophic failures that require manual intervention and break the automation loop.
 
 ## Threads
 
-### [[Runtime-Model Coupling]]
+### [[Coupling Fragility vs Adaptive Capacity in Agent Fleets]]
 
-> This coupling introduces a non-deterministic failure mode where the agent is logically correct but physically unavailable, causing silent drops in data flow that are difficult to diagnose through software logs alone.
+> This failure is not an agent-health incident; it is a coupling incident where A’s success condition creates B’s unsafe context.
 
-### [[The Illusion of Health in Autonomous Systems]]
+### [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
 
-> There is a critical tension between operational reliability (access) and cognitive utility (meaning) in agentic systems. When an agent has full access but no judgment, it produces 'green' status indicators while silently failing to contribute to the knowledge graph.
+> The dashboard should not only report whether the nightly loop ran; it should show what adaptive capacity remains when the loop is partially degraded.
 
-### [[Infrastructure Status and Agent Failure]]
+### [[Agent Fleet Observability Dashboard]]
 
-> This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local processing and storage operations.
+> Current concept points toward uptime. This would let Sean ship a stronger portfolio artifact: “How I designed a personal agent fleet for graceful degradation, not just green checkmarks.”
 
 ## Implications
 
-- Sean must implement semantic verification steps in daily note generation to detect when conceptual links are missing, rather than relying solely on agent health checks.
-- Migrating critical agents to a stable host like the Mac Mini is required to decouple agent availability from daily device usage patterns and ensure consistent data flow.
+- Sean must redesign his monitoring dashboards to include metrics on fallback quality and manual takeover cost, rather than relying solely on binary success rates.
+- He needs to create incident review templates that distinguish between component failures and coupling failures in his agent fleet to prevent recurring normal accidents.

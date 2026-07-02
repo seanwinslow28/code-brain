@@ -5,8 +5,8 @@ connects:
   - Boundary Object Theory
   - Demonstration Over Declaration
   - Agentic Engineering
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Synthesis

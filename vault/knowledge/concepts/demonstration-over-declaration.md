@@ -2,10 +2,10 @@
 title: "Demonstration Over Declaration"
 type: concept
 sources:
-  - knowledge/expansions/connections/agentic-engineering-and-open-source-synergy.md
+  - knowledge/concepts/demonstration-over-declaration.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition

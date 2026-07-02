@@ -2,10 +2,10 @@
 title: "Access vs Meaning"
 type: concept
 sources:
-  - knowledge/connections/the-illusion-of-competence-in-automated-systems.md
+  - knowledge/concepts/access-vs-meaning.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition

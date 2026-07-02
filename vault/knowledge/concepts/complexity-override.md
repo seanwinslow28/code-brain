@@ -2,10 +2,10 @@
 title: "Complexity Override"
 type: concept
 sources:
-  - knowledge/connections/complexity-override-vs-single-shape-constraints.md
+  - knowledge/concepts/complexity-override.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean's current infrastructure relies heavily on deterministic protocol instrumen
 
 ## Related Concepts
 
-[[System Constraints]] [[Research Workflow Integration]] [[Context Management as a Bottleneck]]
+[[System Constraints]] [[Research Workflow Integration]]

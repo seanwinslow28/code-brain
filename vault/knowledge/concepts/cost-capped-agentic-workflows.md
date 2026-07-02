@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/the-latency-of-trust-in-automated-research-pipelines.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-This pattern involves decoupling financial accounting from functional success metrics to prevent the masking of debugging costs. When failed API calls are not billed locally, the system under-reports the true cost of reliability issues, creating a blind spot in resource allocation for retry loops and error handling. Accurate cost tracking requires recording usage even when the primary function fails, ensuring that the financial burden of instability is visible.
+This pattern defines a financial leakage vector where the cost accounting logic is decoupled from the functional success state of an agent run. Specifically, when external API calls fail or return empty results, the billing provider charges for the request, but the local ledger only records spend upon successful completion. This creates a hidden tax on debugging and retry loops, as the system accumulates financial debt without corresponding data assets, distorting the true cost-per-insight metric.
 
 ## Context
 
-Sean needs to accurately measure the cost of debugging and retry loops to justify infrastructure improvements. If failed calls do not bill locally, the apparent efficiency of the system is illusory, hiding the true expense of maintaining reliability in automated workflows.
+Sean's job-hunt and research agents frequently hit rate limits or return empty results during retries. If the local ledger does not capture these failed API calls, he cannot accurately calculate the true cost of his automated workflows, leading to underestimation of operational expenses.
 
 ## Evidence
 
@@ -24,8 +24,8 @@ Sean needs to accurately measure the cost of debugging and retry loops to justif
 
 ## Examples
 
-- OpenRouter billing for failed Fusion calls while local logs show zero spend
-- Local recording of `usage.cost` only after successful execution, ignoring failure states
+- OpenRouter billing for failed Fusion calls while local ledger records $0
+- Local ledger recording spend only after successful completion in `__main__.py`
 
 ## Related Concepts
 

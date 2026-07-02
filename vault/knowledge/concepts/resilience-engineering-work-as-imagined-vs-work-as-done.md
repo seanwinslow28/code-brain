@@ -2,31 +2,34 @@
 title: "Resilience Engineering: Work-as-Imagined vs Work-as-Done"
 type: concept
 sources:
-  - knowledge/expansions/the-illusion-of-health-in-autonomous-systems.md
+  - knowledge/expansions/control-plane-data-plane-split-for-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-This framework highlights the divergence between the theoretical model of system operation and the actual practices agents and humans employ to keep the system running. It posits that failures arise not from component breakdowns but from the accumulation of local adaptations that, while rational in the moment, erode the shared assumptions necessary for coordinated action. The tension lies in the fact that these adaptations are often invisible to standard observability tools that only monitor the 'imagined' workflow.
+This concept defines the structural gap between the control surface an operator believes they are managing and the actual state of the underlying system. In agent fleets, the manifest JSON, daily notes, and dashboard widgets serve as representations that distort reality rather than mirroring it. When these representations become stale or overly optimistic, operators develop false confidence because the visible workflow appears stable while the backstage processes have failed silently.
 
 ## Context
 
-Sean's agent fleet likely develops workarounds for missing context or failed handoffs. Understanding this divergence helps him identify where the fleet is 'working around' problems rather than solving them, which is critical for maintaining trust in automated outputs.
+Sean's vault relies on automated agents to maintain his knowledge infrastructure. If he trusts the manifest or dashboard without verifying the underlying data plane, he risks making decisions based on a 'work-as-imagined' state that no longer exists, leading to silent failure propagation in his job hunt and creative workflows.
 
 ## Evidence
 
-> The missing facet is that “green dashboards” are not just bad summaries; they are part of how systems normalize deviance.
+> operators never touch the real system directly; they act through representations
 
-> A green system can still be dangerous if it has lost shared context with its human operator.
+> the daily note, manifest JSON, Obsidian graph, spend logs, and launchd status are not 'observability extras'
+
+> what distortion does it introduce, what action does it enable, and what false confidence might it create
 
 ## Examples
 
-- Agents silently falling back to cached data when real-time retrieval fails, maintaining uptime but losing freshness.
-- Human operators ignoring stale outputs because the dashboard remains green, reinforcing the normalization of deviance.
+- The manifest JSON showing a successful run while the actual file write failed due to a permission error
+- A dashboard widget displaying green status for an agent that is actually stuck in a retry loop
+- The daily note appearing complete when the synthesizer skipped critical connections due to token limits
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Silent Failure Propagation in Agent Fleets]] [[Common Ground Breakdown]]
+[[Control Plane / Data Plane Split for Agent Fleets]] [[The Illusion of Health in Autonomous Systems]] [[Fleet Status]]

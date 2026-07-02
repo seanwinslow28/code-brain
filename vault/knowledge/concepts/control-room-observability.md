@@ -2,31 +2,31 @@
 title: "Control Room Observability"
 type: concept
 sources:
-  - knowledge/concepts/control-room-observability.md
+  - knowledge/expansions/control-room-observability.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-02
+updated: 2026-07-02
 ---
 
 ## Definition
 
-This mechanism distinguishes between passive dashboard displays and active control rooms by integrating telemetry with responsibility assignment, escalation paths, and abort criteria. It transforms observability from a state of awareness into a system of command authority where operators can make go/no-go decisions based on real-time data. The pattern requires defining named consoles and incident drills to handle failures proactively rather than reactively.
+A governance architecture that distinguishes between monitoring nominal system health and managing active failure states. It requires separating the passive observation of telemetry from the active authority to intervene, ensuring that when an agent fleet deviates from its intended path, a specific role assumes command rather than leaving the system in an ambiguous state. This structure prevents silent failures by enforcing clear escalation paths and recovery protocols before the system reaches a critical failure point.
 
 ## Context
 
-Sean's current infrastructure treats observability as mere awareness, which is insufficient for critical workflows like job hunting or creative production. By adopting NASA Apollo-style control room patterns, he can establish clear escalation protocols and abort criteria, ensuring that agent failures do not silently propagate into his professional output.
+Sean is building an autonomous job-hunt and portfolio infrastructure where agents operate with significant autonomy. Without this distinction, he risks either micromanaging healthy systems or failing to intervene when a subtle drift in agent behavior causes reputational damage during a job application process. This concept provides the necessary safety rails for his 'Superuser Pack' infrastructure.
 
 ## Evidence
 
-> A distinction between dashboard-as-display and dashboard-as-control-room: telemetry, responsibility assignment, escalation paths, abort criteria, and post-incident learning.
+> Separate “mission control” roles from “incident command” roles: observer, operator, incident commander, comms owner, recovery owner, postmortem owner.
 
-> This turns the concept from “my agents emit status into my daily note” into an operator runbook: alert classes, named consoles, go/no-go rules, incident drills, and handoff protocols.
+> Mission control monitors a planned operation; incident command takes over when the system leaves nominal bounds.
 
 ## Examples
 
-- Gene Kranz, Failure Is Not an Option
-- NASA’s Apollo 13 mission operations as the canonical operational pattern
+- agent-fleet-incident-command.md with severity classes and escalation templates
+- portfolio-grade one-pager showing how his fleet prevents unsafe autonomous behavior
 
 ## Related Concepts
 
-[[Agent Fleet Observability Dashboard]] [[Infrastructure Status and Agent Failure]] [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
+[[Agent Fleet Observability Dashboard]] [[SRE Error Budget for Agents]] [[The Illusion of Health in Autonomous Systems]]
