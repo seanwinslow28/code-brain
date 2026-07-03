@@ -2,10 +2,10 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - knowledge/connections/the-latency-of-trust-in-automated-research-pipelines.md
+  - knowledge/concepts/cost-capped-agentic-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition

@@ -2,19 +2,19 @@
 title: "Privacy-Aware Data Routing"
 type: concept
 sources:
-  - knowledge/connections/the-privacy-accessibility-paradox-in-agentic-workflows.md
+  - knowledge/concepts/privacy-aware-data-routing.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This mechanism describes a deliberate architectural split where sensitive, high-risk personal data is isolated in gitignored private directories while a sanitized, public-facing copy serves as the sole input for agentic processing. The system enforces a strict boundary that prevents raw personal narratives from entering the agent's context window, thereby mitigating privacy leakage risks during automated synthesis. This separation requires continuous verification to ensure the proxy remains clean, creating a dependency on automated scripts rather than manual review.
+This mechanism establishes a strict architectural bifurcation where high-risk personal data is isolated in gitignored private directories, while a sanitized proxy serves as the sole input for agentic processing. The system enforces a boundary that prevents raw narratives from entering the agent's context window, thereby mitigating privacy leakage during automated synthesis. This separation creates a dependency on continuous automated verification scripts to ensure the public copy remains clean, as manual review is not scalable for this volume of data.
 
 ## Context
 
-Sean must implement automated verification scripts to continuously check that no private entities have leaked into the public copy, as manual review is not scalable. The reliance on a 'sanitized proxy' means that any agent operating on the public data lacks access to the full nuance of the original stories, potentially limiting the depth of agentic assistance in sensitive areas.
+Sean must implement these verification scripts because the reliance on a sanitized proxy means agents lack access to full nuance, potentially limiting assistance depth in sensitive areas. The tension lies in balancing the need for agentic utility against the risk of exposing private entities through automated leakage.
 
 ## Evidence
 

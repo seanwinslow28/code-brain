@@ -5,8 +5,8 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - Silent Failure Propagation in Agent Fleets
   - Infrastructure Status
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Synthesis

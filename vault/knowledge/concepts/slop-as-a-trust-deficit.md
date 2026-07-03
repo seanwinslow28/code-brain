@@ -2,34 +2,31 @@
 title: "Slop as a Trust Deficit"
 type: concept
 sources:
-  - knowledge/expansions/control-plane-data-plane-split-for-agent-fleets.md
+  - knowledge/connections/the-volume-insight-tension-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This concept identifies the erosion of operator trust caused by low-fidelity or generic outputs from automated systems. When agents produce 'slop'—content that is technically correct but semantically hollow—the operator must expend additional cognitive effort to verify validity. This verification burden creates a friction point that undermines the efficiency gains of automation, forcing the user back into manual review loops.
+This mechanism describes a systemic erosion of confidence in automated knowledge synthesis, where the volume of generated artifacts (concepts and connections) outpaces their verifiable utility. As the fleet scales its sampling capacity without a corresponding increase in insight quality, it creates a noise floor that obscures genuine value. This forces Sean into a manual curation role, effectively negating the automation's purpose and requiring him to expend cognitive energy filtering low-signal outputs rather than synthesizing high-signal ones.
 
 ## Context
 
-Sean's job hunt and creative studio workflows require high-signal outputs. If his agent fleet generates generic content or 'slop' due to insufficient constraints or context, he must manually audit every output, negating the time savings and potentially damaging his confidence in the system's reliability.
+Sean is building an automated personal knowledge vault, but the current output quality is degrading his trust in the system. He needs to understand why increasing throughput is hurting rather than helping his ability to maintain a reliable 'thinking partner' interface.
 
 ## Evidence
 
-> Sean could turn 'Vault Critic wrote generic slop' into a control table
+> This creates a 'Slop as a Trust Deficit' where Sean must manually curate outputs that the fleet produces in abundance.
 
-> accidents are produced by inadequate control in a sociotechnical system, not just broken components
-
-> the current concept only reaches ops metaphor
+> As the fleet scales its sampling capacity, it generates more connections but fails to linearly increase valid concepts, creating a noise floor that obscures genuine insight.
 
 ## Examples
 
-- An agent generating a resume bullet point that is grammatically correct but lacks specific metrics or impact
-- A synthesizer producing a connection between two concepts that are tangentially related but not meaningfully linked
-- A status update that reports 'completed' without specifying which files were modified or what errors occurred
+- Sean must implement a 'Synthesis Policy Change Record' to track when the fleet's rules need adjustment, not just its outputs.
+- The fleet's evaluation metrics should shift from 'concepts written' to 'rival hypotheses considered' to prevent shallow synthesis.
 
 ## Related Concepts
 
-[[Constraint-First Automation vs. General Efficiency]] [[Legibility Debt as a Supervision Failure Mode]] [[Taste as Evaluation Function vs. Activity Proof]]
+[[Double-loop learning]] [[Agent Fleet Observability Dashboard]]

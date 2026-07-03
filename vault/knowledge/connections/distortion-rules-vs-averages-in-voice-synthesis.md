@@ -5,13 +5,13 @@ connects:
   - Exemplar Distance
   - Evidence Accumulation Loop
   - Craft in Product Design
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Synthesis
 
-The core tension lies in the trade-off between fidelity and agency: averaging influences creates a bland composite that lacks distinctiveness, while distortion rules allow for productive misreading of precursors. This pattern reveals that imitation consumes the source, whereas influence metabolizes it, requiring explicit constraints to prevent the system from becoming a 'cover band' of literary heroes. The consequence is that Sean’s system must enforce these rules to avoid producing polished mimicry rather than a usable personal instrument.
+The fundamental tension exists between the desire for high-fidelity imitation through evidence accumulation and the necessity of maintaining distinct agency through distortion rules. When Sean's system averages influences, it creates a bland composite that lacks the specific voice required for his career narrative, effectively turning him into a 'cover band' of his literary heroes. This pattern reveals that imitation consumes the source, whereas influence metabolizes it, requiring explicit constraints to prevent the system from becoming a polished mimicry rather than a usable personal instrument.
 
 ## Threads
 
@@ -29,5 +29,5 @@ The core tension lies in the trade-off between fidelity and agency: averaging in
 
 ## Implications
 
-- Sean needs a 'voice-mode runbook' that specifies which influences to deform for each specific writing mode to maintain distinctiveness.
-- The system must explicitly forbid certain stylistic elements from specific influences to prevent the agent from becoming a 'cover band' of his literary heroes.
+- Sean must implement a 'voice-mode runbook' that explicitly forbids certain stylistic elements from specific influences to prevent the agent from becoming a 'cover band' of his literary heroes.
+- The system needs to enforce distortion rules that actively deform precursor signals, ensuring that the resulting voice remains distinct rather than becoming a bland composite of averaged inputs.

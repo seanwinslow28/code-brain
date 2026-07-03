@@ -7,6 +7,8 @@ manifest-then-top-5 retrieval pattern (Perplexity DR, Apr 2026).
 
 ## vault_synthesizer
 
+- run-2026-07-03T02-30-06: 150c/42x via qwen3-14b
+
 - run-2026-07-02T02-30-05: 141c/40x via qwen3-14b
 
 - run-2026-07-01T02-30-02: 125c/50x via qwen3-14b

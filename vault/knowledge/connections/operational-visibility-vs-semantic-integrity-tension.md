@@ -5,13 +5,13 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - Silent Failure Propagation in Agent Fleets
   - Agent Health Monitoring
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the operational visibility of agent health and the semantic integrity of the knowledge vault. When agents fail silently, the system continues to operate normally from a monitoring perspective, but the underlying data becomes stale or invalid. This creates a trust deficit because the user relies on the output without knowing that the semantic completeness has degraded.
+There is a fundamental tension between the operational visibility of agent health and the semantic integrity of the knowledge vault. When agents fail silently, the system continues to operate normally from a monitoring perspective, but the underlying data becomes stale or invalid. This creates a trust deficit because the user relies on the output without knowing that the semantic completeness has degraded. The mechanism relies on the decoupling of binary health signals from continuous value verification.
 
 ## Threads
 

@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/voice-calibrations-in-creative-and-professional-outputs.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition

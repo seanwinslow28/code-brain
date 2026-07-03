@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/connections/operational-visibility-vs-semantic-integrity-in-cognitive-infrastructure.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This architectural pattern distinguishes between the control plane, which manages routing policies and desired state, and the data plane, which executes local processing and storage. Failures often manifest when the control plane remains stable while the data plane encounters physical or logical bottlenecks that prevent actual work from occurring. This split allows agents to appear functional at a high level while their underlying execution capabilities are compromised.
+This architectural pattern distinguishes between the control plane, which dictates desired state and routing policies, and the data plane, which executes local processing and storage operations. Failures often occur in the data plane where agents process information, yet the control plane continues to report healthy status because it only monitors the existence of processes rather than their functional output. This split creates a blind spot where the system's orchestration layer perceives health while the execution layer suffers from silent drops in data flow that are difficult to diagnose through standard software logs alone.
 
 ## Context
 
-Sean's infrastructure uses separate layers for orchestration and execution. When these layers decouple, monitoring tools may report success based on control plane signals even though the data plane has failed to process or store information correctly.
+Sean's infrastructure relies on agents like the vault synthesizer to maintain his personal knowledge base. When the control plane reports health but the data plane fails, Sean loses trust in his automated systems because he cannot distinguish between a true outage and a semantic failure. This distinction is critical for debugging why his job hunt updates or creative studio workflows occasionally miss key information despite appearing operational.
 
 ## Evidence
 
 > This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local processing and storage operations.
 
-> The tension lies between the orchestration layer's perception of health and the execution layer's physical reality.
+> The core tension lies between the orchestration layer's perception of health and the execution layer's physical reality. While the meta-agent reports 'healthy' status for agents like vault-synthesizer, the actual data flow may be stagnant or corrupted.
 
 ## Examples
 
-- Orchestration agents reporting healthy status while vault-synthesizer fails to write
-- Control plane routing policies remaining valid while data plane storage operations stall
+- A synthesizer agent runs successfully on a Mac Mini but fails to write connections to the vault because of a permission error in the data plane, while the control plane still reports the process as active.
+- Monitoring dashboards measure availability rather than value, allowing silent failures to propagate until they disrupt downstream dependencies like daily notes or job hunt updates.
 
 ## Related Concepts
 
-[[Runtime-Model Coupling]] [[The Illusion of Health in Autonomous Systems]]
+[[The Illusion of Health in Autonomous Systems]] [[Runtime-Model Coupling]] [[Silent Failure Propagation in Agent Fleets]]

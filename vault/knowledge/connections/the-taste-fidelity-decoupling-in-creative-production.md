@@ -2,32 +2,32 @@
 title: "The Taste-Fidelity Decoupling in Creative Production"
 type: connection
 connects:
-  - The Taste-Fidelity Decoupling in Creative Production
+  - Supervision as the New AI Edge
   - Negative Space Calibration
-  - Curation as the New Scarcity
-created: 2026-07-02
-updated: 2026-07-02
+  - Raising vs. Describing
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Synthesis
 
-The fundamental tension lies in the divergence between technical fidelity and social distinction, where high-fidelity evidence accumulation produces generic outputs by optimizing for similarity rather than difference. This decoupling occurs because agents prioritize volume of evidence over strategic refusal, leading to content that is accurate but socially inert. The consequence is a loss of defensible creative position, as the voice fails to establish 'taste enemies' necessary for status signaling and audience alignment.
+Sean's operational infrastructure achieves high fidelity through deterministic protocols, but this same determinism creates a decoupling from aesthetic taste, which requires non-deterministic calibration. The tension lies in the fact that the mechanisms ensuring operational reliability (explicit instructions) are ineffective for creative work, forcing Sean to maintain separate mental models. This decoupling means that as his automation scales, his ability to supervise and calibrate creative output becomes the critical bottleneck, shifting his value from execution to taste.
 
 ## Threads
 
-### [[The Taste-Fidelity Decoupling in Creative Production]]
+### [[Supervision as the New AI Edge]]
 
-> The core tension lies in the fact that high-fidelity evidence accumulation produces generic outputs because it optimizes for similarity rather than distinction.
+> I'd spent months teaching a fleet of little agents to run my life... I'd handed off damn near everything, and the one job not a single one of them could do was sound like me.
 
 ### [[Negative Space Calibration]]
 
-> Voice fidelity is not achieved by accumulating more examples of desired phrasing, but by explicitly defining what the voice must refuse to become.
+> I want to find my writing voice by reacting to what it ISN'T. two words is fine. "No." "Gross." "Never."
 
-### [[Curation as the New Scarcity]]
+### [[Raising vs. Describing]]
 
-> judgment/curation step (vendors can't sell it because it's unautomatable taste, which is exactly why it's defensible).
+> You can't prompt taste into an LLM; it's raising, not describing.
 
 ## Implications
 
-- Sean must define 'taste enemies' for each Substack mode to prevent his voice from becoming generic despite high evidence volume.
-- Voice calibration should include tagging status moves (insider, crank, technician) rather than just preferred phrasing.
+- Sean must consciously switch contexts between 'operational mode' (protocol-driven) and 'creative mode' (calibration-driven) to avoid applying rigid automation logic to aesthetic tasks.
+- The value of his personal vault shifts from being a repository of automated workflows to a training ground for taste calibration, requiring more manual curation than before.

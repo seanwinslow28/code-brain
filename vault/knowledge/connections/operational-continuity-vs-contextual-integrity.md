@@ -2,11 +2,11 @@
 title: "Operational Continuity vs. Contextual Integrity"
 type: connection
 connects:
-  - Resilience Engineering: Work-as-Imagined vs Work-as-Done
   - The Illusion of Health in Autonomous Systems
   - Silent Failure Propagation in Agent Fleets
-created: 2026-07-02
-updated: 2026-07-02
+  - Operational Visibility vs. Semantic Value in Agent Fleets
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Synthesis
@@ -15,10 +15,6 @@ There is a fundamental tension between maintaining operational continuity, signa
 
 ## Threads
 
-### [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
-
-> This framework highlights the divergence between the theoretical model of system operation and the actual practices agents and humans employ to keep the system running.
-
 ### [[The Illusion of Health in Autonomous Systems]]
 
 > This concept describes a systemic failure mode where autonomous agents maintain operational continuity and report 'green' status despite accumulating critical context decay or coordination breakdowns.
@@ -26,6 +22,10 @@ There is a fundamental tension between maintaining operational continuity, signa
 ### [[Silent Failure Propagation in Agent Fleets]]
 
 > Failures arise not from component breakdowns but from the accumulation of local adaptations that, while rational in the moment, erode the shared assumptions necessary for coordinated action.
+
+### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+
+> This connection reveals a fundamental tension between the operational metrics used to monitor agent health and the semantic integrity of the data they produce.
 
 ## Implications
 

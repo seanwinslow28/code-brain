@@ -5,13 +5,13 @@ connects:
   - Resilience Engineering: Work-as-Imagined vs Work-as-Done
   - Slop as a Trust Deficit
   - Control Plane / Data Plane Split for Agent Fleets
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Synthesis
 
-The tension lies between the operator's need for a simplified control surface and the system's complex, often failing, reality. When agents produce 'slop' or fail silently, the representations (manifests, dashboards) become distorted mirrors that hide the true state of the data plane. This distortion creates a trust deficit where Sean must either invest heavily in verification (defeating automation's purpose) or risk acting on false confidence, leading to systemic failures in his job hunt and creative outputs.
+The core tension arises from the operator's reliance on simplified representations (control plane) to manage complex, probabilistic agent behaviors (data plane). When agents produce 'slop' or fail silently, the representation becomes a distorted mirror that hides the true state of the system, creating a trust deficit. This distortion forces Sean into a verification loop, where he must manually audit automated outputs, effectively negating the efficiency gains of the automation and increasing the risk of systemic errors in his career and creative work.
 
 ## Threads
 

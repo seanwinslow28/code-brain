@@ -2,19 +2,19 @@
 title: "Control Architecture as Evangelism"
 type: concept
 sources:
-  - knowledge/expansions/connections/automation-and-agentic-tooling-synergy.md
+  - knowledge/connections/tacit-knowledge-erosion-vs-automation-scale.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This pattern defines the shift from building tools to designing coordination protocols for human-agent teams. It requires explicit definitions of ownership, escalation boundaries, and confidence displays to manage the joint cognitive system. The mechanism focuses on making the invisible work of agent handoffs visible and auditable by the human operator. This transforms the vault from a passive repository into an active cockpit where Sean retains ultimate authority over decision rights.
+This concept defines a shift from viewing agents as isolated tools to treating them as components of a joint human-agent system. Reliability is no longer determined by individual agent accuracy but by the quality of coordination, observability, and handoff protocols between the human operator and the fleet. The architecture must explicitly support graceful degradation when agents fail, ensuring the human remains in the loop for critical decisions rather than being bypassed by automation.
 
 ## Context
 
-Sean is building a 'personal knowledge vault' that functions as infrastructure for his creative and professional life. To maintain control, he must define clear boundaries between what agents do autonomously and what requires human judgment. This concept provides the framework for designing those boundaries, ensuring he remains the pilot rather than just a passenger in his own workflow.
+Sean's current setup relies on automated synthesis runs. Without explicit 'evangelism' of control architecture, he treats the fleet as a black box. He needs to reframe his role from 'wiring automations' to 'designing the cockpit' to maintain oversight.
 
 ## Evidence
 
@@ -24,9 +24,8 @@ Sean is building a 'personal knowledge vault' that functions as infrastructure f
 
 ## Examples
 
-- Creating an 'agent fleet observability spec' with baton files and post-incident review templates.
-- Defining 'who owns the next move' in the synthesis process to prevent ambiguous handoffs between agents.
+- The fleet memory index is auto-generated, but Sean must manually interpret the 'rejected_count' to understand system health.
 
 ## Related Concepts
 
-[[Agent Fleet Observability Dashboard]] [[Joint Cognitive Systems]]
+[[Supervision as the New AI Edge]] [[Control Plane / Data Plane Split for Agent Fleets]]

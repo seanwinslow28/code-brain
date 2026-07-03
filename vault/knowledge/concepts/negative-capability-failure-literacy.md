@@ -2,31 +2,31 @@
 title: "Negative Capability / Failure Literacy"
 type: concept
 sources:
-  - knowledge/expansions/control-room-observability.md
+  - knowledge/connections/the-verification-governance-inversion-in-agentic-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-The practice of anticipating failure modes before they manifest by forcing a mental simulation of catastrophic outcomes. Instead of relying on reactive telemetry, this mechanism requires the operator to explicitly articulate how a system could fail embarrassingly in the future, thereby surfacing hidden dependencies and single points of failure that normal monitoring misses. It transforms abstract risk into concrete, actionable runbooks.
+This concept defines the capacity to remain comfortable with uncertainty and ambiguity without immediately resorting to rationalization or premature closure. In the context of agentic workflows, it serves as a critical counter-mechanism to the illusion of health, requiring Sean to actively engage in premortems and failure literacy exercises before launching high-stakes artifacts. It is the disciplined practice of surfacing hidden failure modes that automated systems are blind to.
 
 ## Context
 
-Sean’s job hunt involves high-stakes outputs like portfolios and pitches where failure is not an option. By applying this pre-mortem technique, he can identify fragility in his automation pipelines before they impact his professional narrative, turning potential disasters into prepared contingencies.
+Sean must cultivate this capability to prevent his job hunt from becoming a volume game rather than a strategic one. By applying negative capability, he can identify the specific points where automation might be stripping away the nuance necessary for his personal brand and career narrative.
 
 ## Evidence
 
-> Before go/no-go, require the control room to answer: “It is 30 days later and this agent workflow failed embarrassingly. What happened?”
-
 > Klein’s premortem gives Sean a repeatable artifact for surfacing hidden failure modes before a launch, pitch, essay, demo, or recruiter-facing update goes live.
+
+> The tension between the speed of automation (which produces many artifacts) and the slowness of verification (which requires human negative capability).
 
 ## Examples
 
-- failure-forecast runbook for job-hunt and portfolio automations
-- surfacing hidden failure modes before a launch
+- Using premortems to check job hunt artifacts before they go live.
+- Recognizing that automated speed conflicts with the preservation of taste memory.
 
 ## Related Concepts
 
-[[The Illusion of Competence in Automated Systems]] [[Legibility Debt as a Supervision Failure Mode]] [[SRE Error Budget for Agents]]
+[[The Illusion of Health in Autonomous Systems]] [[Taste as Evaluation Function vs. Activity Proof]]

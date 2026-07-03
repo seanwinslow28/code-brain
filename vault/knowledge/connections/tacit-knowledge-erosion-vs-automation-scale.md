@@ -5,13 +5,13 @@ connects:
   - The Skill Atrophy Trap in Agentic Workflows
   - Control Architecture as Evangelism
   - Supervision as the New AI Edge
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Synthesis
 
-The tension lies between the efficiency gains of scaling agent fleets and the erosion of Sean's tacit knowledge required to maintain them. As the number of concepts and clusters processed increases, the complexity of the system outpaces Sean's ability to hold its mental model. This leads to a 'black box' effect where failures become harder to diagnose because the underlying logic is no longer fully internalized by the human operator. The consequence is a growing vulnerability to silent failures that only manifest as output quality degradation.
+The core tension lies between the efficiency gains of scaling agent fleets and the erosion of Sean's tacit knowledge required to maintain them. As the number of concepts and clusters processed increases, the complexity of the system outpaces Sean's ability to hold its mental model. This leads to a 'black box' effect where failures become harder to diagnose because the underlying logic is no longer fully internalized by the human operator. The consequence is a growing vulnerability to silent failures that only manifest as output quality degradation.
 
 ## Threads
 

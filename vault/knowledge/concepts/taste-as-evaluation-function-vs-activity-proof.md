@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This concept defines a structural tension in professional signaling where the metric of success shifts from demonstrating operational throughput to demonstrating aesthetic and strategic judgment. In agentic engineering, building agents proves activity but fails to prove taste because it lacks an evaluative argument for why one design is superior to another. By anchoring projects on Christopher Alexander’s synthesis of form, Sean can resolve concrete forces like cost ceilings or stale context, transforming the portfolio from a gallery of outputs into a proof of judgment. This shift requires moving beyond tool exposure to explain the resolution of misfits, which is what senior evaluators actually assess.
+This mechanism describes a structural tension in professional signaling where the metric of success shifts from demonstrating operational throughput to demonstrating aesthetic and strategic judgment. In agentic engineering, building agents proves activity but fails to prove taste because it lacks an evaluative argument for why one design is superior to another. By anchoring projects on Christopher Alexander’s synthesis of form, Sean can resolve concrete forces like cost ceilings or stale context, transforming the portfolio from a gallery of outputs into a proof of judgment. This shift requires moving beyond tool exposure to explain the resolution of misfits, which is what senior evaluators actually assess.
 
 ## Context
 

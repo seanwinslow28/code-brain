@@ -2,31 +2,31 @@
 title: "The Taste-Fidelity Decoupling in Creative Production"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-eval-rigor-and-automation-simplicity.md
+  - knowledge/connections/the-taste-fidelity-decoupling-in-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This mechanism occurs when the ability to evaluate quality (taste) diverges from the ability to execute high-fidelity production, often exacerbated by automated tools that prioritize speed over nuance. As Sean delegates more creative or strategic work to agents, his own capacity to judge 'good' output diminishes because he is no longer engaged in the granular decision-making process. This decoupling creates a dependency on external validation or rigid metrics that fail to capture aesthetic or strategic value.
+This mechanism describes a structural divergence where high-fidelity evidence accumulation optimizes for similarity rather than distinction, resulting in generic outputs that lack social charge. The decoupling occurs because agents prioritize volume of evidence over strategic refusal, leading to content that is accurate but socially inert. Consequently, the voice fails to establish 'taste enemies' necessary for status signaling and audience alignment, rendering the creative work defensible only by its technical correctness rather than its unique perspective.
 
 ## Context
 
-Sean's job hunt and creative studio work require high-level judgment, yet his reliance on AI-generated content risks atrophying his own critical faculties. The tension between 'making it pop' (ambiguous intent) and deterministic scoring highlights the gap between human taste and machine fidelity.
+Sean must define 'taste enemies' for each Substack mode to prevent his voice from becoming generic despite high evidence volume. Voice calibration should include tagging status moves (insider, crank, technician) rather than just preferred phrasing.
 
 ## Evidence
 
-> Getting useful intent out of someone who says 'make it pop' is the unsolved 80%
+> The core tension lies in the fact that high-fidelity evidence accumulation produces generic outputs because it optimizes for similarity rather than distinction.
 
-> There is a fundamental tension between the tacit nature of professional judgment and the explicit, automated nature of AI execution.
+> Voice fidelity is not achieved by accumulating more examples of desired phrasing, but by explicitly defining what the voice must refuse to become.
 
 ## Examples
 
-- Sean struggles to provide specific feedback on AI-generated copy because he lacks the granular context of its creation.
-- Automated resume tailoring produces generic outputs that pass keyword checks but fail to convey Sean's unique voice.
+- Optimizing for similarity in creative production leads to social inertia.
+- Defining refusal criteria establishes defensible creative positions.
 
 ## Related Concepts
 
-[[Tacit Judgment vs. Automated Execution]] [[Taste as Evaluation Function vs. Activity Proof]]
+[[Negative Space Calibration]] [[Curation as the New Scarcity]]

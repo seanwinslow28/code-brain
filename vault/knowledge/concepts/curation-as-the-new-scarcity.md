@@ -2,19 +2,19 @@
 title: "Curation as the New Scarcity"
 type: concept
 sources:
-  - knowledge/connections/the-taste-fidelity-decoupling-in-creative-production.md
+  - knowledge/concepts/curation-as-the-new-scarcity.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-A market dynamic where the value of creative output shifts from generation capacity to the unautomatable judgment required to select and refine specific instances. As automated tools lower the cost of production, the scarcity moves to the 'judgment/curation step' which vendors cannot sell because it relies on personal taste. This creates a defensible position for individuals who can demonstrate this specific aesthetic judgment.
+This concept defines a market dynamic where the economic value of creative output shifts from generation capacity to the unautomatable judgment required to select and refine specific instances. As automated tools lower the cost of production, the scarcity moves to the 'judgment/curation step' which vendors cannot sell because it relies on personal taste. This creates a defensible position for individuals who can demonstrate this specific aesthetic judgment, effectively decoupling the ability to produce from the ability to create value.
 
 ## Context
 
-Sean's job hunt and creative studio efforts must pivot from demonstrating technical capability (which is easily automated) to demonstrating unique taste. The vault synthesizer's increasing output volume highlights the need for Sean to provide the 'unautomatable taste' that gives his work value.
+Sean's job hunt and creative studio efforts must pivot from demonstrating technical capability (which is easily automated) to demonstrating unique taste. The vault synthesizer's increasing output volume highlights the need for Sean to provide the 'unautomatable taste' that gives his work value, ensuring he remains distinct from the flood of AI-generated content.
 
 ## Evidence
 

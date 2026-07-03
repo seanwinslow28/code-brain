@@ -4,28 +4,28 @@ type: concept
 sources:
   - knowledge/connections/the-tension-between-reliability-metrics-and-adaptive-capacity-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This mechanism redefines agent health not as a binary state of success, but as a dynamic equilibrium where failure rates, recovery paths, and operator attention costs remain within an explicit budget. It treats the creative agent's output as a service level objective that must be balanced against the cost of intervention required to maintain it. The invariant is that an agent is only healthy if its operational friction stays predictable and bounded.
+This concept establishes a quantitative threshold for acceptable agent failure, treating creative or operational errors as a finite resource that must be managed against operator attention costs. It defines health not by the absence of errors, but by the stability of the ratio between error frequency and the human effort required to resolve them. The mechanism enforces discipline by forcing engineers to choose between accelerating feature development (burning budget) or investing in reliability engineering (saving budget). This invariant prevents the infinite optimization of edge cases that yields diminishing returns.
 
 ## Context
 
-Sean needs to quantify the 'stretch' capability of his agents by tracking how much operator attention their failures require, rather than just counting successful runs.
+Sean can use this framework to justify why his agents are not 'perfect' but are instead 'cost-effective.' It provides a professional vocabulary for discussing trade-offs with hiring managers who value operational maturity over naive perfectionism. By defining his error budget, he demonstrates an ability to make strategic decisions about where reliability engineering investment is actually needed.
 
 ## Evidence
 
 > A creative agent is not healthy when it succeeds once; it is healthy when its failure rate, recovery path, and operator attention cost stay inside an explicit error budget.
 
-> Your current frame treats monitoring as detection: catch loops, hallucinations, broken states.
+> The consequence is that his portfolio must evolve from a collection of working scripts to a demonstration of how his agents stretch under failure.
 
 ## Examples
 
-- Tracking operator attention cost alongside failure rates in the fleet memory index.
-- Defining health by the stability of recovery paths rather than single-instance success.
+- Calculating the hours saved by automation versus the hours spent debugging it over a month.
+- Setting a limit on how many times an agent can retry a failed API call before alerting a human.
 
 ## Related Concepts
 

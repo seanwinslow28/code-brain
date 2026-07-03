@@ -2,32 +2,32 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: connection
 connects:
-  - Operational Visibility vs. Semantic Value in Agent Fleets
   - The Illusion of Health in Autonomous Systems
-  - Agent Health Monitoring
-created: 2026-07-02
-updated: 2026-07-02
+  - Coupling Fragility vs Adaptive Capacity in Agent Fleets
+  - Resilience Engineering: Work-as-Imagined vs Work-as-Done
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Synthesis
 
-Sean's infrastructure suffers from a critical tension where operational metrics (dashboard health, exit codes) are decoupled from functional value (semantic output). Agents report 'health' while producing zero concepts, creating an illusion of competence that masks silent failures. This leads to a degradation of the knowledge base because the monitoring layer cannot distinguish between successful execution and successful contribution.
+Sean's infrastructure suffers from a critical tension where operational metrics (dashboard health, exit codes) are decoupled from functional value (semantic output). Agents report 'health' based on uptime, but this creates an illusion of competence while the actual quality of the knowledge vault degrades. This disconnect means that Sean can have a 'healthy' system that is functionally useless for his job hunt or creative work, leading to wasted effort and potential career risks.
 
 ## Threads
 
-### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
-
-> The tension lies between binary operational metrics that confirm process completion and semantic quality metrics that confirm functional value.
-
 ### [[The Illusion of Health in Autonomous Systems]]
 
-> This mechanism describes a systemic blind spot where operational metrics like uptime and exit codes indicate success while semantic output quality degrades to zero.
+> This tension arises because binary success metrics create an illusion of health while masking the growing coupling fragility between agents.
 
-### [[Agent Health Monitoring]]
+### [[Coupling Fragility vs Adaptive Capacity in Agent Fleets]]
 
-> Sean uses Agent Health Monitoring to track his fleet, but the current metrics (like 'status=error' with zero concepts) are insufficient to detect silent failures.
+> This failure is not an agent-health incident; it is a coupling incident where A’s success condition creates B’s unsafe context.
+
+### [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
+
+> The dashboard should not only report whether the nightly loop ran; it should show what adaptive capacity remains when the loop is partially degraded.
 
 ## Implications
 
-- Sean needs to implement content-aware health checks that verify output volume and quality, not just process completion, to ensure his knowledge base remains vital.
-- The daily-driver agent should fail or flag an error if its input from the synthesizer is empty, breaking the illusion of competence.
+- Sean must redesign his monitoring dashboards to include metrics on fallback quality and manual takeover cost, rather than relying solely on binary success rates.
+- He needs to create incident review templates that distinguish between component failures and coupling failures in his agent fleet to prevent recurring normal accidents.

@@ -2,7 +2,7 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/concepts/agent-fleet-observability-dashboard.md
+  - knowledge/connections/the-volume-insight-tension-in-agent-fleets.md
 tags: [auto-generated, phase-6]
 created: 2026-07-03
 updated: 2026-07-03
@@ -10,23 +10,23 @@ updated: 2026-07-03
 
 ## Definition
 
-A monitoring interface that aggregates critiques and performance data from multiple external reasoners to evaluate the health and output quality of an agent fleet. It serves as a feedback loop where external models critique the primary fleet's work, providing a multi-perspective assessment of validity and insight depth. This mechanism allows for the detection of systemic issues like 'slop' by comparing internal metrics against external validation.
+A monitoring interface that provides visibility into the health, performance, and output quality of an autonomous agent fleet. It serves as a critical feedback loop for detecting systemic issues like trust deficits or rule failures that are not apparent from individual agent logs. By aggregating critiques and metrics from multiple external reasoners, it enables higher-level diagnosis of fleet-wide behavior patterns.
 
 ## Context
 
-Sean uses this dashboard to identify when his fleet is producing low-quality outputs by leveraging critiques from models like GPT-5.5 and Gemini 3, which helps him diagnose the trust deficit caused by volume optimization.
+Sean needs a way to objectively assess whether his fleet is improving or degrading over time. The dashboard provides the necessary data points to identify when manual intervention or rule changes are required.
 
 ## Evidence
 
 > Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-Gravity CLI) of agent-fleets-supporting-knowledge-synthesis.
 
-> The evidence shows that increasing clusters sampled does not linearly increase valid concepts written.
+> There is a fundamental tension between the fleet's drive for high-throughput sampling and the preservation of insight quality, leading to a systemic trust deficit.
 
 ## Examples
 
-- Using GPT-5.5 to critique the fleet's synthesis outputs for logical consistency.
-- Comparing Gemini 3's assessment of insight depth against the fleet's own concept counts.
+- Sean must implement a 'Synthesis Policy Change Record' to track when the fleet's rules need adjustment, not just its outputs.
+- The fleet's evaluation metrics should shift from 'concepts written' to 'rival hypotheses considered' to prevent shallow synthesis.
 
 ## Related Concepts
 
-[[Double-loop learning]] [[Slop as a Trust Deficit]]
+[[Slop as a Trust Deficit]] [[Double-loop learning]]

@@ -5,8 +5,8 @@ connects:
   - SRE Error Budget for Agents
   - Control Plane / Data Plane Split for Agent Fleets
   - Provider Preference Configuration
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Synthesis

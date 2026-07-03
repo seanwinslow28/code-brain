@@ -2,10 +2,10 @@
 title: "The Tension Between Automation Velocity and Creative Friction"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-automation-velocity-and-creative-friction.md
+  - knowledge/concepts/the-tension-between-automation-velocity-and-creative-friction.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean's current infrastructure prioritizes speed and reliability in his vault syn
 
 ## Related Concepts
 
-[[Negative Capability / Failure Literacy]] [[Agentic Experience Design]] [[Intent Engineering]]
+[[Negative Capability / Failure Literacy]] [[Agentic Experience Design]]

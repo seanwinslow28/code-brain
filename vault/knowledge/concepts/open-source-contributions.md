@@ -2,30 +2,30 @@
 title: "Open-Source Contributions"
 type: concept
 sources:
-  - knowledge/expansions/open-source-contributions.md
+  - knowledge/connections/the-maintainer-burden-vs-distribution-signal-tension.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This concept represents a shift from viewing open source as mere publication to treating it as an operational discipline of maintainer surface area. It requires defining governance, release discipline, and support boundaries to ensure projects are safe for others to enter. The core mechanism is the tension between publishing output and maintaining the supply chain required to sustain that output without creating unfunded obligations.
+This concept represents a shift from viewing open source as mere publication to treating it as an operational discipline of maintainer surface area. It requires defining governance, release cadence, and support boundaries to prevent the project from becoming an unfunded obligation that drains creative energy. The value is not in the code itself but in the signal of reliability sent to potential employers or collaborators who depend on that stability.
 
 ## Context
 
-Sean needs to demonstrate senior IC judgment around adoption and trust signals rather than just shipping code. By framing his work through Karl Fogel’s lens, he moves from a résumé claim of 'I published tools' to a professional argument about designing systems others can safely use.
+Sean must manage this tension because his job hunt relies on demonstrating technical authority, yet his limited time makes unsustainable maintenance a risk to his primary income goals. By treating contributions as a bounded service rather than an endless commitment, he protects his capacity for high-leverage activities like writing and system design.
 
 ## Evidence
 
-> The missing facet is operational: issue templates, contribution path, release discipline, governance, support boundaries, deprecation policy.
-
 > Publishing creates dependency demand; contribution quality is measured by whether maintenance supply can keep up.
+
+> This concept represents a shift from viewing open source as mere publication to treating it as an operational discipline of maintainer surface area.
 
 ## Examples
 
-- Creating a MAINTAINERSHIP.md or Contributor Operating Model for Agentic Tooling
-- Shipping a lightweight dependency-risk rubric for MCP/tools including maintainer bus factor and issue latency
+- Defining explicit deprecation policies for older versions of a library to reduce support load.
+- Limiting feature requests to those that align with the core architectural vision rather than ad-hoc user demands.
 
 ## Related Concepts
 

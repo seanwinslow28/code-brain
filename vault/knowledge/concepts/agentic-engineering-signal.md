@@ -2,31 +2,31 @@
 title: "Agentic Engineering Signal"
 type: concept
 sources:
-  - knowledge/expansions/open-source-contributions.md
+  - knowledge/connections/the-maintainer-burden-vs-distribution-signal-tension.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This concept defines open source not as a commons but as an attention market where working in public serves as a distribution design. It distinguishes between generic contribution and public proof-of-work with a specific adoption funnel. The mechanism maps each repository to its audience, trust signal, and maintainer promise to make agentic systems inspectable and credible.
+This mechanism describes how public proof-of-work functions as a calibrated trust signal in a market saturated with low-effort content. It distinguishes between mere activity and demonstrable governance, where the ability to maintain a complex system over time serves as a stronger indicator of competence than isolated technical feats. The signal is amplified when the artifact demonstrates an understanding of distribution and adoption, not just creation.
 
 ## Context
 
-Sean must move beyond generic publishing to show how he uses open source to build credibility for agentic engineering. This requires treating his repositories as artifacts that demonstrate specific professional competencies rather than just technical outputs.
+For Sean, this means his job hunt materials should frame repositories as evidence of governance judgment rather than just technical capability. This approach counters the noise of 'vibe-coding' by highlighting the structural integrity and long-term viability of his work.
 
 ## Evidence
 
-> Modern open source often behaves less like a commons and more like an attention market.
-
 > Sean should distinguish 'open source contribution' from 'public proof-of-work with an adoption funnel.'
+
+> The missing move: Sean should distinguish 'open source contribution' from 'public proof-of-work with an adoption funnel.'
 
 ## Examples
 
-- Mapping each repo/package to audience, adoption path, trust signal, and maintainer promise
-- Using open source to make agentic systems inspectable, reusable, and credible
+- Documenting the decision-making process behind architectural choices in a README to show strategic thinking.
+- Showcasing metrics of user adoption or community engagement alongside code quality.
 
 ## Related Concepts
 
-[[Open-Source Contributions]] [[Distribution Surface]]
+[[Open-Source Contributions]] [[Supervision as the New AI Edge]]

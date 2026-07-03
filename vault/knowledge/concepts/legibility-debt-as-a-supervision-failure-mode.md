@@ -2,31 +2,31 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md
+  - knowledge/expansions/connections/ai-pm-recruitment-strategy-integration.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-Legibility debt is the structural gap between simplified observability metrics and the complex reality of joint cognition, where dashboard simplicity masks hidden coordination failures at agent handoff boundaries. When Sean prioritizes aggregate health scores to reduce cognitive load, he sacrifices the granular telemetry required for effective supervision, making systemic fragility invisible until it disrupts daily workflow. This creates a false sense of reliability because the control plane cannot detect errors that occur in the unmonitored spaces between automated agents.
+Legibility debt occurs when the pressure to make work 'recruiter-legible' erases the local complexity that actually creates value, resulting in a version of Sean that is attractive to institutions but indistinguishable from commodity candidates. This is a supervision failure because it prioritizes the signal over the substance, causing the 'actually-differentiated Sean' to be sand down into AI-PM keywords. The debt accumulates when daily notes and portfolios are optimized for keyword matching rather than preserving the unique proof of operating in a market transition.
 
 ## Context
 
-Sean's vault relies on scheduled agents and hooks to maintain his knowledge infrastructure. If he accepts superficial health indicators, he risks silent failure propagation where the system appears functional but has lost critical context or broken dependencies without triggering an alert.
+Sean's job search strategy risks becoming a 'legibility trap' where he optimizes for ATS systems and recruiter scans at the expense of demonstrating his true competitive advantage. This debt manifests as a generic 'AI-PM' persona that lacks the specific, weird proof required to stand out in a saturated market.
 
 ## Evidence
 
-> The tension between simplified observability and complex joint cognition creates 'legibility debt,' where the very metrics Sean uses to trust his system become sources of hidden failure.
+> Systems become attractive to institutions by becoming legible, but legibility can erase the local complexity that actually creates value.
 
-> When he prioritizes dashboard simplicity, he sacrifices the granular data needed for effective supervision, making coordination failures invisible until they disrupt his daily workflow.
+> 'Recruiter-legible Sean' and 'actually-differentiated Sean' are not the same product. The daily-note / portfolio integration should preserve weird proof, not sand it down into AI-PM keywords.
 
 ## Examples
 
-- A fleet status dashboard showing all agents as 'healthy' while a synthesizer silently fails to update the manifest, leaving Sean with stale context.
-- Monitoring layers that prioritize dashboard simplicity inadvertently create legibility debt where critical coordination failures at handoff boundaries become invisible.
+- Replacing a nuanced failure postmortem with generic 'lessons learned' bullet points to fit a standard template.
+- Using broad 'AI-PM' keywords instead of specific value-chain positions where Sean's artifacts prove advantage.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Supervision as the New AI Edge]]
+[[Boundary Object Theory]] [[Signal vs. Safety Trade-off in Resume Architecture]]

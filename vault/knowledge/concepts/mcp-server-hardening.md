@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/mcp-server-hardening.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This concept defines the structural transformation of a functional prototype into a protocol-compliant service capable of withstanding external scrutiny. It requires enforcing strict interfaces and handling edge cases silently to ensure predictable behavior for integration into larger agent fleets. The mechanism bridges the gap between a personal tool and public infrastructure by turning private context into a boundary object where humans negotiate meaning and agents execute constrained action.
+This mechanism defines the structural transformation of a functional prototype into a protocol-compliant service capable of withstanding external scrutiny. It requires enforcing strict interfaces and handling edge cases silently to ensure predictable behavior for integration into larger agent fleets. The process bridges the gap between a personal tool and public infrastructure by turning private context into a boundary object where humans negotiate meaning and agents execute constrained action.
 
 ## Context
 

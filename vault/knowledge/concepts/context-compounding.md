@@ -2,7 +2,7 @@
 title: "Context Compounding"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/fleet-state.md
+  - knowledge/concepts/context-compounding.md
 tags: [auto-generated, phase-6]
 created: 2026-07-03
 updated: 2026-07-03
@@ -22,8 +22,6 @@ Sean’s daily note generation depends on prior synthesis and indexing runs. If 
 
 > Vault synthesis runs completed, gathering concepts and connections for the central hub.
 
-> Periodic vault indexing maintained across scheduled maintenance jobs.
-
 ## Examples
 
 - The meta-agent generates a fleet status report based on data from agents that may be operating with stale or incomplete context due to infrastructure outages.
@@ -31,4 +29,4 @@ Sean’s daily note generation depends on prior synthesis and indexing runs. If 
 
 ## Related Concepts
 
-[[Automation Failure and Daily Note Disruption]] [[Context Management as a Bottleneck]] [[Silent Failure Propagation in Agent Fleets]]
+[[Automation Failure and Daily Note Disruption]] [[Context Management as a Bottleneck]]

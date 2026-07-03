@@ -2,31 +2,31 @@
 title: "Control Plane / Data Plane Split for Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/control-plane-data-plane-split-for-agent-fleets.md
+  - knowledge/connections/representation-distortion-and-trust-erosion-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This mechanism defines operational efficiency not as an intrinsic property of automation, but as a function of the handoffs between visible user workflows and backstage agent work. It requires distinguishing between the control logic that directs agents (the control plane) and the actual data processing or content generation they perform (the data plane). When these layers are tightly coupled, failures in one domain cascade into the other; when separated, bottlenecks can be isolated to the throughput-limiting layer without destabilizing the entire system.
+This architectural invariant separates the decision-making logic (control plane) from the execution and state management (data plane), creating a dependency where the control plane's view of reality is mediated by potentially flawed data sources. When agents operate in this split architecture, failures often manifest as discrepancies between the intended state defined by the controller and the actual state maintained by the workers. This separation allows for scalability but introduces a critical vulnerability: if the control plane cannot accurately perceive the data plane's condition, it issues commands that are either redundant or destructive. The mechanism thrives on the assumption that observability is sufficient for control, which is often false in complex adaptive systems.
 
 ## Context
 
-Sean's vault synthesizer and fleet memory index represent the control plane, while job application tracking is the data plane. Understanding this split allows him to diagnose whether a slowdown in his job hunt is due to poor decision-making (control) or execution capacity (data), preventing misdiagnosis of operational issues.
+Sean's infrastructure uses this split to manage his vault and job hunt processes. When the control plane (his dashboards or manifests) fails to reflect the data plane (actual agent outputs and file states), he makes decisions based on stale or incorrect information, leading to systemic failures in his career progression and creative output quality.
 
 ## Evidence
 
-> Operational efficiency is not a property of the automation; it is a property of the handoffs between visible user workflow, backstage agent work, and support systems.
+> accidents are produced by inadequate control in a sociotechnical system, not just broken components
 
-> Identify constraint, map upstream/downstream queues, decide whether to automate, staff, delete, or buffer.
+> The tension lies between the operator's need for a simplified control surface and the system's complex, often failing, reality.
 
 ## Examples
 
-- Creating a before/after blueprint of an AdOps intake flow with each agent/hook/API placed behind the line of visibility
-- Using Eliyahu M. Goldratt’s Theory of Constraints to determine if automation should target bottleneck protection rather than general efficiency
+- inadequate control in a sociotechnical system
+- simplified control surface
 
 ## Related Concepts
 
-[[System Constraints]] [[Value Chain / Activity System Mapping]] [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
+[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Slop as a Trust Deficit]]

@@ -2,31 +2,31 @@
 title: "Boundary Object Theory"
 type: concept
 sources:
-  - knowledge/concepts/boundary-object-theory.md
+  - knowledge/expansions/connections/ai-pm-recruitment-strategy-integration.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-Boundary resources function as control surfaces that shape what external actors can safely build within a platform without corrupting its core integrity. This mechanism transforms open-source contributions from mere proof of generosity into a structured ecosystem where APIs, documentation, and plugin contracts define the boundaries of safe extension. The underlying invariant is that visibility alone does not create synergy; rather, the design of these boundary objects determines whether external input strengthens or destabilizes the central system.
+A boundary object is an artifact that different audiences can each use without agreeing on the same interpretation, allowing them to coordinate across distinct social worlds while maintaining their own local perspectives. In Sean's context, this means creating portfolio packets where a recruiter sees 'process,' an engineer sees 'architecture,' and a founder sees 'business value,' all derived from the same underlying work. This mechanism prevents the need for Sean to shape-shift his identity for different interview loops by providing a single, multi-layered evidence source that supports multiple simultaneous readings.
 
 ## Context
 
-Sean needs to move beyond using open source as a credibility signal and instead engineer it as a deliberate control mechanism for his Intent Engineering MCP. By treating contributor paths and failure modes as explicit boundary resources, he can manage the attention economy of maintainers while ensuring that external extensions align with his architectural goals.
+Sean is navigating a complex job hunt where he must appeal to both technical engineering teams and product-focused leadership. Standard portfolios often fail because they force a single narrative that satisfies neither group fully. By treating his work as boundary objects, he can preserve the 'weird proof' of his actual capabilities while remaining legible to institutional hiring filters.
 
 ## Evidence
 
-> Open source is not merely proof of generosity or visibility; it is a control surface.
+> Artifacts that different audiences can each use without agreeing on the same interpretation. Recruiter, hiring manager, AI engineer, design lead, and founder should all be able to read the same object differently and still say 'this is useful.'
 
-> APIs, docs, examples, issue templates, eval harnesses, and plugin contracts are 'boundary resources' that shape what outsiders can safely build.
+> Add a named artifact type: boundary-object portfolio packet. It should include one live demo, one system diagram, one decision record, and one failure postmortem.
 
 ## Examples
 
-- Intent Engineering MCP as Boundary Resource: one page showing contributor paths, extension points, guardrails, evals, and failure modes.
-- A portfolio artifact demonstrating how Sean designs ecosystems others can extend without corrupting the core.
+- A single system diagram that shows technical depth to an engineer but strategic alignment to a hiring manager.
+- A failure postmortem that demonstrates engineering rigor to ICs while showing product maturity to leadership.
 
 ## Related Concepts
 
-[[Agentic Engineering]] [[Open-Source Contributions]]
+[[Legibility Debt as a Supervision Failure Mode]] [[Two Audiences]]

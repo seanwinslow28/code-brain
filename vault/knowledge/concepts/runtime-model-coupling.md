@@ -2,31 +2,31 @@
 title: "Runtime-Model Coupling"
 type: concept
 sources:
-  - knowledge/connections/operational-visibility-vs-semantic-integrity-in-cognitive-infrastructure.md
+  - knowledge/connections/the-integration-paradox-in-agentic-animation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This coupling introduces a non-deterministic failure mode where an agent's logical correctness is decoupled from its physical availability. The agent may execute the correct algorithm but fail to deliver results due to environmental constraints, causing silent drops in data flow that are difficult to diagnose through standard software logs alone. This creates a gap between what the agent intends to do and what it can actually accomplish.
+This invariant refers to the mismatch between the high-level semantic interface promised by AI models and the low-level technical constraints required for reliable execution. When Sean uses agentic tools for animation, he is forced to think in terms of React/SVG/timing rather than pure creative intent, creating a coupling between the model's output and the specific runtime environment. This coupling requires continuous iteration on intricate prompts and manual correction of both code and creative output, which erodes the abstraction layer that AI is supposed to provide.
 
 ## Context
 
-Sean's agents run on various devices with different resource constraints. When runtime conditions change unexpectedly, agents may logically succeed but physically fail, leading to inconsistent data flow in his knowledge vault without clear error messages.
+Sean's job-hunt portfolio relies on demonstrating proficiency with modern agentic workflows. If the runtime-model coupling is too tight, his ability to demonstrate high-level creative strategy is compromised by low-level debugging tasks, reducing the perceived value of his work.
 
 ## Evidence
 
-> This coupling introduces a non-deterministic failure mode where the agent is logically correct but physically unavailable, causing silent drops in data flow that are difficult to diagnose through software logs alone.
+> The marketed pitch is that animators describe an animation and Claude produces it, but in practice users must think in React/SVG/timing terms, iterate on intricate prompts, and repeatedly correct both code and creative output before anything is production-ready.
 
-> Sean's infrastructure suffers from a critical tension where robust protocol instrumentation masks epistemic blindness.
+> Generated animation code suffers from performance and memory problems, and skill packages themselves show reliability issues that compound during integration.
 
 ## Examples
 
-- Agents executing correct logic but failing due to memory constraints
-- Silent drops in data flow despite logical correctness of agent code
+- Users having to correct both code and creative output repeatedly before anything is production-ready.
+- Skill packages showing reliability issues that compound during integration.
 
 ## Related Concepts
 
-[[Infrastructure Status and Agent Failure]] [[The Illusion of Health in Autonomous Systems]]
+[[The Engineer-Creative Divide in Tooling]] [[Automation Reliability]]

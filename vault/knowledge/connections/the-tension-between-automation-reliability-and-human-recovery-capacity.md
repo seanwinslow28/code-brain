@@ -5,8 +5,8 @@ connects:
   - The Skill Atrophy Trap in Agentic Workflows
   - Agent Fleet Observability Dashboard
   - SRE Error Budget for Agents
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Synthesis

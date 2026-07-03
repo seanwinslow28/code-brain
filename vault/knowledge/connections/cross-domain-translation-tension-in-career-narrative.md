@@ -5,8 +5,8 @@ connects:
   - Boundary Object Theory
   - Two Audiences
   - Cross-domain bridging
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Synthesis

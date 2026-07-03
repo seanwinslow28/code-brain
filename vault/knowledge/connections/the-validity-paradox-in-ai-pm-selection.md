@@ -5,13 +5,13 @@ connects:
   - Resilience Engineering: Work-as-Imagined vs Work-as-Done
   - Vibe-Coding Interview Canon
   - Supervision as the New AI Edge
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the psychometric requirement for predictive validity in hiring and the situated nature of actual AI product work. Standard interviews measure adherence to imagined plans, while effective AI PMs demonstrate competence through improvisation during plan collapse. This paradox means that traditional selection methods may systematically reject candidates who are actually best suited for the messy reality of agent management.
+This connection reveals a critical tension between the psychometric requirements of hiring instruments and the actual demands of AI product management. Standard interviews measure adherence to imagined plans, which filters out candidates who excel at improvisation during plan collapse. This paradox means that the most effective AI PMs may be systematically rejected by traditional selection methods because they do not fit the 'work-as-imagined' mold.
 
 ## Threads
 

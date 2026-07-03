@@ -2,7 +2,7 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/concepts/agent-health-monitoring.md
+  - knowledge/connections/the-tension-between-reliability-metrics-and-adaptive-capacity-in-agent-fleets.md
 tags: [auto-generated, phase-6]
 created: 2026-07-03
 updated: 2026-07-03
@@ -10,22 +10,22 @@ updated: 2026-07-03
 
 ## Definition
 
-This mechanism defines a reactive detection paradigm where system health is equated with the absence of discrete failure states such as loops or hallucinations, rather than the presence of adaptive capacity. It treats monitoring as a binary status check that identifies symptoms after they occur, failing to account for the systemic ability to absorb deviation gracefully. The limitation lies in its inability to distinguish between nominal operation and semantic degradation, creating a false sense of security when agents are technically 'up' but functionally obsolete.
+This concept redefines monitoring from a passive detection mechanism to an active assessment of semantic integrity and operational state. It argues that traditional metrics like CPU usage or loop counts are insufficient for agentic systems because they do not capture the quality of reasoning or the validity of context. The mechanism requires observing the agent's ability to maintain coherence across complex, multi-step workflows rather than just its ability to execute commands. This shift reveals the true cost of 'slop' and silent failures that degrade system trust over time.
 
 ## Context
 
-Sean's current portfolio demonstrates script reliability but lacks the operational maturity required for senior roles because it misses the nuance of graceful degradation. To demonstrate true engineering depth, he must shift from showing working scripts to demonstrating how his agents stretch under failure and maintain semantic value despite infrastructure noise.
+Sean needs to move beyond simple uptime dashboards to show how he monitors the 'health' of his agent's reasoning processes. This allows him to demonstrate a sophisticated understanding of AI operations that goes beyond basic scripting skills. It positions him as an engineer who understands the unique failure modes of probabilistic systems rather than deterministic ones.
 
 ## Evidence
 
 > Your current frame treats monitoring as detection: catch loops, hallucinations, broken states.
 
-> The consequence is that his portfolio must evolve from a collection of working scripts to a demonstration of how his agents stretch under failure.
+> When agents produce 'slop' or fail silently, the representation distorts the operator's view of reality.
 
 ## Examples
 
-- Detecting hallucinations in real-time agent outputs
-- Identifying broken states in automated workflows
+- Tracking the semantic drift of a research agent's output over a long-running task.
+- Measuring the latency between an agent's detected error and its successful recovery action.
 
 ## Related Concepts
 

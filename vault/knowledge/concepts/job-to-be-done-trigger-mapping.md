@@ -2,10 +2,10 @@
 title: "Job-to-Be-Done Trigger Mapping"
 type: concept
 sources:
-  - knowledge/expansions/claude-skills.md
+  - knowledge/concepts/job-to-be-done-trigger-mapping.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition

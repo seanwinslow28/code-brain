@@ -5,8 +5,8 @@ connects:
   - Silent Failure Propagation in Agent Fleets
   - Cost-Capped Agentic Workflows
   - Automation Reliability
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Synthesis

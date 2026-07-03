@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/concepts/normal-accident-critique.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This concept identifies a failure mode in tightly coupled agent fleets where individual components remain healthy, yet systemic collapse occurs due to timing, authority, or feedback-loop pressures. Unlike standard health monitoring which checks for broken parts, this framework diagnoses coupling incidents where one agent's success condition creates an unsafe context for another. It shifts the diagnostic lens from component reliability to interaction topology, revealing that failures can emerge from the architecture of dependencies rather than the quality of execution.
+This framework identifies a systemic failure mode in tightly coupled agent fleets where individual components remain healthy, yet collapse occurs due to timing, authority, or feedback-loop pressures. Unlike standard health monitoring which checks for broken parts, this diagnostic lens shifts from component reliability to interaction topology, revealing that failures emerge from the architecture of dependencies rather than execution quality. It defines a coupling incident where one agent's success condition creates an unsafe context for another, meaning the system appears green but is structurally fragile under load.
 
 ## Context
 
-Sean is building a personal knowledge vault with multiple autonomous agents (synthesizer, daily note generators). As he scales this fleet, he risks creating 'normal accidents' where the system appears green but is structurally fragile. Understanding this allows him to design runbooks that diagnose why reliability degraded even when no single agent crashed.
+Sean is scaling his personal knowledge vault with multiple autonomous agents, risking 'normal accidents' where reliability degrades even though no single agent crashes. Understanding this allows him to design runbooks that diagnose why the fleet fails to produce useful output despite all processes returning exit code 0. It highlights the tension between operational uptime and cognitive integrity, where access is full but judgment is absent.
 
 ## Evidence
 

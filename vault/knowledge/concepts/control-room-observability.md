@@ -2,19 +2,19 @@
 title: "Control Room Observability"
 type: concept
 sources:
-  - knowledge/expansions/control-room-observability.md
+  - knowledge/concepts/control-room-observability.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-A governance architecture that distinguishes between monitoring nominal system health and managing active failure states. It requires separating the passive observation of telemetry from the active authority to intervene, ensuring that when an agent fleet deviates from its intended path, a specific role assumes command rather than leaving the system in an ambiguous state. This structure prevents silent failures by enforcing clear escalation paths and recovery protocols before the system reaches a critical failure point.
+This architecture enforces a strict separation between passive telemetry monitoring and active intervention authority, preventing the ambiguity that arises when agents drift from nominal paths without clear escalation triggers. It establishes distinct roles for mission control versus incident command to ensure that recovery protocols activate before silent failures cause reputational damage in high-stakes contexts like job applications. By defining these boundaries explicitly, the system avoids the trap of micromanaging healthy states while guaranteeing that critical deviations are caught by a designated authority rather than left to resolve themselves.
 
 ## Context
 
-Sean is building an autonomous job-hunt and portfolio infrastructure where agents operate with significant autonomy. Without this distinction, he risks either micromanaging healthy systems or failing to intervene when a subtle drift in agent behavior causes reputational damage during a job application process. This concept provides the necessary safety rails for his 'Superuser Pack' infrastructure.
+Sean is building an autonomous infrastructure where agents operate with significant independence; without this governance layer, he risks either over-intervening in stable systems or missing subtle behavioral drifts that could harm his professional reputation during active job hunting phases.
 
 ## Evidence
 

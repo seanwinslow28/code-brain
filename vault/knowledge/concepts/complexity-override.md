@@ -2,31 +2,31 @@
 title: "Complexity Override"
 type: concept
 sources:
-  - knowledge/concepts/complexity-override.md
+  - knowledge/expansions/complexity-override.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-A decision mechanism that suspends standard single-shape routing constraints when a problem space is identified as inherently non-decomposable. This override prevents the system from forcing premature synthesis on messy topics, which would otherwise result in structurally unsound outputs that appear valid but lack depth. It acts as a circuit breaker for linear routing rules, allowing for experimental probing phases before any final synthesis occurs.
+A protocol for navigating complex domains by suspending linear routing rules in favor of bounded probes that force the system to disclose information. This mechanism shifts the unit of discipline from compliance with pre-defined paths to the design of safe-to-fail experiments, observable signals, and amplification or dampening rules. It protects the reflective phase where an agent learns what kind of problem it is facing by acting, observing back-talk, and reframing, rather than applying a known procedure prematurely.
 
 ## Context
 
-Sean's current infrastructure relies heavily on deterministic protocol instrumentation and single-shape constraints to manage workflow efficiency. However, this rigidity creates a structural fragility when applied to complex creative or research questions that require iterative exploration rather than linear decomposition. Recognizing this tension allows Sean to introduce a complexity-domain override that suspends standard constraints when the problem space is inherently non-decomposable.
+Sean's current fleet relies heavily on structured routing which risks premature convergence when handling ambiguous research topics. By implementing this override, he can operationalize 'reflection-in-action,' allowing his agents to explore uncertain territories without collapsing into false certainty too early. This is critical for his job hunt and creative work where the problem definition itself is often the primary variable.
 
 ## Evidence
 
-> The tension exists between the efficiency of 'single-shape topics only' rules and the necessity of probing in complex domains where decomposition fails.
+> Complexity Override does not relax discipline; it changes the unit of discipline from routing compliance to probe design: safe-to-fail experiment, observable signal, amplification/dampening rule.
 
-> Cynefin contradicts it: some research questions are not complicated-but-decomposable; they are complex, meaning the right move is probing multiple small experiments before synthesis.
+> Complexity Override protects the reflective phase where the agent is not yet solving the problem, but learning what kind of problem it is by acting, observing back-talk, and reframing.
 
 ## Examples
 
-- Suspending single-shape routing rules for topics that resist decomposition
-- Introducing non-linear probing phases before entering the synthesis stage
+- Triggering 3-5 parallel probes for a research topic, each with a hypothesis, timebox, expected signal, and kill/amplify rule.
+- Writing a Substack essay explaining why an agent fleet needs reflection rather than just routing to demonstrate agentic-engineering judgment.
 
 ## Related Concepts
 
-[[System Constraints]] [[Research Workflow Integration]]
+[[Double-loop learning]] [[Negative Capability / Failure Literacy]]
