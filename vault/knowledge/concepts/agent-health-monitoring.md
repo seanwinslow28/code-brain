@@ -2,19 +2,19 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-reliability-metrics-and-adaptive-capacity-in-agent-fleets.md
+  - knowledge/concepts/agent-health-monitoring.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This concept describes the traditional paradigm of monitoring as a reactive detection mechanism focused on identifying discrete failure states such as loops, hallucinations, or broken states. It contrasts with proactive resilience by focusing on the immediate symptoms of deviation rather than the systemic capacity to absorb them. The limitation is that it treats health as the absence of errors rather than the presence of adaptive capacity.
+This mechanism defines a reactive detection paradigm where system health is equated with the absence of discrete failure states such as loops or hallucinations, rather than the presence of adaptive capacity. It treats monitoring as a binary status check that identifies symptoms after they occur, failing to account for the systemic ability to absorb deviation gracefully. The limitation lies in its inability to distinguish between nominal operation and semantic degradation, creating a false sense of security when agents are technically 'up' but functionally obsolete.
 
 ## Context
 
-Sean's current monitoring frame is insufficient for demonstrating the operational maturity required in his job hunt, as it misses the nuance of graceful degradation.
+Sean's current portfolio demonstrates script reliability but lacks the operational maturity required for senior roles because it misses the nuance of graceful degradation. To demonstrate true engineering depth, he must shift from showing working scripts to demonstrating how his agents stretch under failure and maintain semantic value despite infrastructure noise.
 
 ## Evidence
 
@@ -24,8 +24,8 @@ Sean's current monitoring frame is insufficient for demonstrating the operationa
 
 ## Examples
 
-- Detecting hallucinations in real-time agent outputs.
-- Identifying broken states in automated workflows.
+- Detecting hallucinations in real-time agent outputs
+- Identifying broken states in automated workflows
 
 ## Related Concepts
 

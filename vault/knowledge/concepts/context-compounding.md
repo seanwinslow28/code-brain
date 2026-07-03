@@ -2,31 +2,33 @@
 title: "Context Compounding"
 type: concept
 sources:
-  - knowledge/concepts/context-compounding.md
+  - 02_Areas/Agent-Fleet/fleet-state.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
 
-This mechanism describes a non-linear value accumulation where an agent's output quality scales with task duration and complexity, contingent on maintaining coherent state across long operational horizons. Unlike simple task completion which resets context at each step, this pattern requires the agent to iteratively refine hypotheses and build upon previous steps without losing track of the original intent. The primary bottleneck is not computational power but the model's ability to retain and synthesize information over weeks of continuous operation, preventing output degradation into noise.
+Automated systems accumulate and propagate errors or omissions across sequential runs, where the output of one agent becomes the flawed input for the next. This compounding effect occurs because each agent operates with limited visibility into the systemic failures of its predecessors, treating incomplete data as valid context. The result is a gradual degradation of information quality that remains invisible until the final output diverges significantly from reality.
 
 ## Context
 
-Sean's 'Deep Research Queue' and 'Creative Studio Workflows' require agents to work on open-ended tasks for days or weeks. If the system cannot compound context effectively, the output degrades into noise, making long-horizon automation impossible and forcing a return to manual, linear workflows.
+Sean’s daily note generation depends on prior synthesis and indexing runs. If the vault-synthesizer or deep-researcher fails silently or produces empty results, the morning brief inherits this degraded context, potentially leading to planning decisions based on incomplete information about his job hunt or creative studio status.
 
 ## Evidence
 
-> the kind of thing that can make progress on open ended tasks for weeks on end in the face of errors and mistakes and ambiguity.
+> Daily routine successfully executed by daily-driver morning agent.
 
-> what really matters is how smart and general and sample efficient the model is during a session.
+> Vault synthesis runs completed, gathering concepts and connections for the central hub.
+
+> Periodic vault indexing maintained across scheduled maintenance jobs.
 
 ## Examples
 
-- A research agent building a comprehensive market analysis over 48 hours by iteratively refining its thesis.
-- A creative assistant developing a narrative arc across multiple drafting sessions without losing character consistency.
+- The meta-agent generates a fleet status report based on data from agents that may be operating with stale or incomplete context due to infrastructure outages.
+- The daily-driver morning agent creates a planning note based on the previous day's synthesis, which might have missed critical updates if the deep-researcher queue was blocked.
 
 ## Related Concepts
 
-[[Context Management as a Bottleneck]] [[Memory Rot and Lifecycle Management]]
+[[Automation Failure and Daily Note Disruption]] [[Context Management as a Bottleneck]] [[Silent Failure Propagation in Agent Fleets]]

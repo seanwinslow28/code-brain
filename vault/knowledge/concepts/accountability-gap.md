@@ -2,10 +2,10 @@
 title: "Accountability Gap"
 type: concept
 sources:
-  - knowledge/connections/verification-cost-vs-generation-speed.md
+  - knowledge/concepts/accountability-gap.md
 tags: [auto-generated, phase-6]
-created: 2026-07-02
-updated: 2026-07-02
+created: 2026-07-03
+updated: 2026-07-03
 ---
 
 ## Definition
