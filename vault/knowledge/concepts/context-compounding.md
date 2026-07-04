@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/context-compounding.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
@@ -18,9 +18,9 @@ Sean’s daily note generation depends on prior synthesis and indexing runs. If 
 
 ## Evidence
 
-> Daily routine successfully executed by daily-driver morning agent.
+> Automated systems accumulate and propagate errors or omissions across sequential runs, where the output of one agent becomes the flawed input for the next.
 
-> Vault synthesis runs completed, gathering concepts and connections for the central hub.
+> The result is a gradual degradation of information quality that remains invisible until the final output diverges significantly from reality.
 
 ## Examples
 

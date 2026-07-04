@@ -2,15 +2,15 @@
 title: "Open-Source Contributions"
 type: concept
 sources:
-  - knowledge/connections/the-maintainer-burden-vs-distribution-signal-tension.md
+  - knowledge/concepts/open-source-contributions.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
 
-This concept represents a shift from viewing open source as mere publication to treating it as an operational discipline of maintainer surface area. It requires defining governance, release cadence, and support boundaries to prevent the project from becoming an unfunded obligation that drains creative energy. The value is not in the code itself but in the signal of reliability sent to potential employers or collaborators who depend on that stability.
+This mechanism defines open source not as a passive repository of code, but as an active operational discipline governing maintainer surface area. It requires the explicit definition of governance boundaries and release cadences to prevent the project from becoming an unfunded obligation that drains creative energy. The primary value lies in the signal of reliability sent to potential employers or collaborators who depend on that stability, rather than the code artifacts themselves.
 
 ## Context
 

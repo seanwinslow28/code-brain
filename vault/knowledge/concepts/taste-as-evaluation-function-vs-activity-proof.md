@@ -2,31 +2,31 @@
 title: "Taste as Evaluation Function vs. Activity Proof"
 type: concept
 sources:
-  - knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md
+  - 20_projects/prj-job-hunt-2026/job-feed/2026-07-03.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
 
-This mechanism describes a structural tension in professional signaling where the metric of success shifts from demonstrating operational throughput to demonstrating aesthetic and strategic judgment. In agentic engineering, building agents proves activity but fails to prove taste because it lacks an evaluative argument for why one design is superior to another. By anchoring projects on Christopher Alexander’s synthesis of form, Sean can resolve concrete forces like cost ceilings or stale context, transforming the portfolio from a gallery of outputs into a proof of judgment. This shift requires moving beyond tool exposure to explain the resolution of misfits, which is what senior evaluators actually assess.
+The tension between demonstrating competence through high-volume activity (sampling clusters, writing concepts) and the need for precise, taste-driven evaluation of fit. The system generates 'activity proof' via metrics like 'clusters_sampled' and 'concepts_written', but the actual value is derived from the 'fit_score' which requires nuanced judgment that cannot be fully automated. This creates a dependency where volume must be sufficient to allow taste to operate effectively, but not so high that it dilutes the signal.
 
 ## Context
 
-Sean's current portfolio artifacts often fail to explain why one design is better than another, leaving a gap in demonstrating strategic judgment. By anchoring projects on Christopher Alexander’s synthesis of form, Sean can shift from showing tool exposure to showing the resolution of concrete forces like cost ceilings or stale context. This transforms the portfolio from a gallery of outputs into an evaluative argument for his design quality.
+Sean's run data shows increasing 'clusters_sampled' (from 155 to 272) while 'concepts_written' also increases, suggesting an attempt to scale the evaluation function. However, the 'fit_score' remains the ultimate arbiter, meaning that without strong taste, increased activity yields diminishing returns in terms of actual opportunities.
 
 ## Evidence
 
-> The tension lies between proving activity (building agents) and proving taste (resolving misfits).
+> The run metrics show a clear increase in 'clusters_sampled' from 155 on 2026-06-23 to 272 on 2026-07-02, indicating a scaling of the evaluation activity.
 
-> Current portfolio artifacts often fail to explain why one design is better than another, leaving a gap in demonstrating strategic judgment.
+> The job feed explicitly categorizes roles by 'fit_score' (e.g., '⭐ 3/5', '⭐ 2/5'), which serves as the final evaluation function that overrides raw activity metrics.
 
 ## Examples
 
-- Rewriting project descriptions to focus on 'misfits' resolved rather than features built.
-- Citing specific forces like 'cost ceiling' or 'agent overreach' in interview answers to demonstrate taste.
+- On 2026-07-02, the system sampled 272 clusters and wrote 141 concepts, yet only identified 1 medium fit and 5 weak fits, showing the gap between activity volume and high-value outcomes.
+- The 'Medium Fits' section lists roles with specific rationales like 'Staff PM title exceeds Sean's eligible bands,' which is a taste-driven evaluation rather than a simple keyword match.
 
 ## Related Concepts
 
-[[Agentic Engineering Signal]] [[Craft in Product Design]]
+[[Job Hunt as Sales Pipeline]] [[Signal vs. Safety Trade-off in Resume Architecture]]

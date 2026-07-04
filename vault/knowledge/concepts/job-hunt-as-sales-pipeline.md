@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/job-hunt-as-sales-pipeline.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
 
-This mechanism reframes career transition from a passive application process into an instrumented sales funnel where each interaction serves as a data point in a larger go-to-market system. It requires stage SLAs and automated nudges to prevent decay in warm leads or stale applications, treating the search as a business operation with clear KPIs. The core invariant is visualizing the bottleneck—whether it is sourcing, qualification, or interview conversion—to allocate research spend and effort efficiently rather than uniformly across all opportunities.
+This mechanism reframes career transition from a passive application process into an instrumented sales funnel where each interaction serves as a data point in a larger go-to-market system. The system relies on volume and filtering efficiency rather than static qualification, treating each application as a test of fit against an evolving market signal. Success is determined by the ratio of high-quality outputs to rejected inputs, requiring constant calibration of what constitutes a 'fit' based on real-time feedback loops.
 
 ## Context
 
-Sean’s job hunt often suffers from lack of visibility into where applications stall or why certain companies are not responding. By applying sales pipeline logic, he can identify which stages are leaking value and adjust his strategy accordingly. This transforms the job hunt from a black box of anxiety into a manageable business operation with clear KPIs.
+Sean's job hunt data shows a clear progression from low-volume experimentation to high-throughput filtering. Understanding this as a pipeline allows him to optimize for throughput and signal clarity rather than just application count, recognizing that the 'medium fits' are the critical conversion zone where strategy matters most.
 
 ## Evidence
 
-> The concept currently treats job-hunt workflows as something to observe, not as a funnel with stages, conversion rates, aging, and next-best-action rules.
+> The daily roll-up explicitly tracks 'total_surfaced', 'top_fits', 'medium_fits', and 'weak_fits' as distinct pipeline stages, indicating a structured approach to filtering opportunities rather than random application.
 
-> It also gives Sean sharper decisions: which companies deserve research spend, which applications are stale, which intros are decaying, and where the bottleneck actually is.
+> The rationale for rejecting the Harvey Staff PM role cites 'Staff PM title exceeds Sean's eligible bands... making it a poor fit despite strong AI industry alignment,' demonstrating that market signals (industry) are filtered through personal constraints (bands/experience).
 
 ## Examples
 
-- Pipeline model: sourced → qualified → warm intro → recruiter screen → hiring-manager screen → loop → offer / dead.
-- Adding stage SLAs and automated nudges to maintain momentum in each phase of the funnel.
+- On 2026-07-03, the system surfaced 1 medium fit and 1 weak fit from Harvey, categorizing them by 'fit_score' rather than just listing them.
+- The rejection of the Harvey Staff PM role was based on a specific constraint: 'Staff PM title is too senior for Sean's 2 years of PM experience,' showing active filtering against personal capacity.
 
 ## Related Concepts
 
-[[Competitive Analysis]] [[Market Positioning]]
+[[Job-to-Be-Done Trigger Mapping]] [[Taste as Evaluation Function vs. Activity Proof]]

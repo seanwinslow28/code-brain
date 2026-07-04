@@ -2,10 +2,10 @@
 title: "Complexity Override"
 type: concept
 sources:
-  - knowledge/expansions/complexity-override.md
+  - knowledge/concepts/complexity-override.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition

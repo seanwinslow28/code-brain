@@ -2,19 +2,19 @@
 title: "Infrastructure Status"
 type: concept
 sources:
-  - knowledge/connections/operational-health-vs-semantic-utility-decoupling.md
+  - knowledge/concepts/infrastructure-status.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
 
-This concept refers to the binary state reporting mechanism that validates whether a system component is running, rather than whether it is functioning correctly. It relies on structural integrity checks like process liveness and exit codes, which are insufficient for detecting semantic failures in complex agent workflows. The gap between this status and actual utility creates a blind spot where systems appear healthy while failing to deliver value.
+This mechanism represents a binary state reporting protocol that validates process liveness and structural integrity rather than functional correctness or semantic utility. It creates a blind spot where systems maintain perfect operational health metrics while failing to deliver any meaningful value, as exit codes and network connectivity cannot detect logical failures in complex agent workflows. The gap between this status and actual output quality means agents can run continuously without errors yet produce duplicate or empty content indefinitely.
 
 ## Context
 
-Sean's vault synthesizer runs consistently report 'status: ok' despite producing no meaningful content, highlighting the inadequacy of current infrastructure status checks for validating semantic output.
+Sean's vault synthesizer runs consistently report 'status: ok' despite producing no meaningful content, highlighting the inadequacy of current infrastructure status checks for validating semantic output. This creates a false sense of security where Sean assumes his knowledge base is being enriched when it is actually stagnating or degrading.
 
 ## Evidence
 

@@ -2,10 +2,10 @@
 title: "Control Architecture as Evangelism"
 type: concept
 sources:
-  - knowledge/connections/tacit-knowledge-erosion-vs-automation-scale.md
+  - knowledge/concepts/control-architecture-as-evangelism.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition

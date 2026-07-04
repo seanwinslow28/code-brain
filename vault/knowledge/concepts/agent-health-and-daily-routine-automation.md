@@ -2,19 +2,19 @@
 title: "Agent Health and Daily Routine Automation"
 type: concept
 sources:
-  - knowledge/connections/operational-uptime-vs-cognitive-utility-tension.md
+  - knowledge/concepts/agent-health-and-daily-routine-automation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
 
-This cross-domain pattern establishes that agent health directly affects automation reliability, particularly for daily note generation. The mechanism involves a dependency chain where the successful execution of routine tasks requires agents to maintain both process liveness and functional connectivity. When this dual requirement is unmet, the automation pipeline breaks silently without triggering standard failure alerts.
+This pattern describes a dependency chain where the successful execution of routine tasks requires agents to maintain both process liveness and functional connectivity. When this dual requirement is unmet, the automation pipeline breaks silently without triggering standard failure alerts, creating a gap between operational status and actual utility. The mechanism reveals that monitoring must extend beyond simple process checks to include physical connectivity verification to ensure reliable daily operations.
 
 ## Context
 
-Sean's daily workflow depends on automated note generation that fails when agent health indicators are misleading. The pattern reveals how critical infrastructure monitoring must extend beyond process status to include physical connectivity checks to ensure reliable daily operations.
+Sean's daily workflow depends on automated note generation that fails when agent health indicators are misleading. This creates a risk where the knowledge vault loses temporal coherence overnight, leaving Sean with stale context in the morning before he can detect the infrastructure failure.
 
 ## Evidence
 

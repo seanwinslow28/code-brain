@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/evidence-accumulation-loop.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
 
-A calibration mechanism where voice fidelity is treated as a function of accumulated, high-fidelity data points rather than immediate instruction following. The system requires the user to perform iterative 'reps' over multiple sessions, allowing the model to infer stylistic patterns from raw, unedited outputs instead of relying on static, one-shot prompts that fail to capture nuance. This shifts the burden of precision from the prompt engineer to the data collector, creating a compounding effect where each session refines the previous context.
+This mechanism treats voice fidelity as a function of accumulated, high-fidelity data points rather than immediate instruction following. The system requires the user to perform iterative 'reps' over multiple sessions, allowing the model to infer stylistic patterns from raw, unedited outputs instead of relying on static, one-shot prompts that fail to capture nuance. This shifts the burden of precision from the prompt engineer to the data collector, creating a compounding effect where each session refines the previous context.
 
 ## Context
 

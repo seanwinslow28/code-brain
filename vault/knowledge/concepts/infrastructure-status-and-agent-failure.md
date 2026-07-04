@@ -2,10 +2,10 @@
 title: "Infrastructure Status and Agent Failure"
 type: concept
 sources:
-  - knowledge/connections/operational-visibility-vs-semantic-integrity-in-cognitive-infrastructure.md
+  - knowledge/concepts/infrastructure-status-and-agent-failure.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean's infrastructure relies on agents like the vault synthesizer to maintain hi
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Runtime-Model Coupling]] [[Silent Failure Propagation in Agent Fleets]]
+[[The Illusion of Health in Autonomous Systems]] [[Runtime-Model Coupling]]

@@ -2,10 +2,10 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/connections/the-volume-insight-tension-in-agent-fleets.md
+  - knowledge/concepts/agent-fleet-observability-dashboard.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition

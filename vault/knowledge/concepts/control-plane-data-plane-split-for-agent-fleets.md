@@ -2,10 +2,10 @@
 title: "Control Plane / Data Plane Split for Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/representation-distortion-and-trust-erosion-in-agent-fleets.md
+  - knowledge/concepts/control-plane-data-plane-split-for-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition

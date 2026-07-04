@@ -2,19 +2,19 @@
 title: "Negative Capability / Failure Literacy"
 type: concept
 sources:
-  - knowledge/connections/the-verification-governance-inversion-in-agentic-workflows.md
+  - knowledge/concepts/negative-capability-failure-literacy.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
 
-This concept defines the capacity to remain comfortable with uncertainty and ambiguity without immediately resorting to rationalization or premature closure. In the context of agentic workflows, it serves as a critical counter-mechanism to the illusion of health, requiring Sean to actively engage in premortems and failure literacy exercises before launching high-stakes artifacts. It is the disciplined practice of surfacing hidden failure modes that automated systems are blind to.
+This mechanism defines the disciplined capacity to tolerate uncertainty and ambiguity without resorting to premature rationalization or closure. In agentic workflows, it acts as a necessary counter-weight to the illusion of health, forcing Sean to actively engage in premortems before launching high-stakes artifacts. It is not merely patience, but the structural refusal to let automated speed override the slow verification required for personal brand integrity.
 
 ## Context
 
-Sean must cultivate this capability to prevent his job hunt from becoming a volume game rather than a strategic one. By applying negative capability, he can identify the specific points where automation might be stripping away the nuance necessary for his personal brand and career narrative.
+Sean must cultivate this capability to prevent his job hunt from devolving into a volume game where automation strips away the nuance of his narrative. By applying negative capability, he identifies specific points where automated systems are blind to hidden failure modes that only human taste can detect.
 
 ## Evidence
 

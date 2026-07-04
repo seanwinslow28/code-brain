@@ -2,10 +2,10 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-protocol-instrumentation-and-regulatory-ambiguity.md
+  - knowledge/concepts/operational-visibility-vs-semantic-value-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
@@ -22,14 +22,11 @@ Sean is building a high-volume agent fleet for job hunting and creative producti
 
 > The system prioritizes technical uptime (agents running) over semantic utility (insights generated).
 
-> Critical machines (Alienware and ComfyUI) reported as OFFLINE, breaking the multi-machine sync model.
-
 ## Examples
 
 - Agents report 'healthy' status despite critical hardware dependencies being offline.
 - Sean sees 'healthy' agents but receives no actionable intelligence.
-- The fleet's reliability metrics are misleading because they do not account for the offline state of critical hardware dependencies.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Silent Failure Propagation in Agent Fleets]] [[Legibility Debt as a Supervision Failure Mode]]
+[[The Illusion of Health in Autonomous Systems]] [[Silent Failure Propagation in Agent Fleets]]
