@@ -2,7 +2,7 @@
 title: "Complexity Override"
 type: concept
 sources:
-  - knowledge/concepts/complexity-override.md
+  - knowledge/connections/probe-design-vs-routing-compliance-in-agentic-workflows.md
 tags: [auto-generated, phase-6]
 created: 2026-07-04
 updated: 2026-07-04
@@ -10,23 +10,23 @@ updated: 2026-07-04
 
 ## Definition
 
-A protocol for navigating complex domains by suspending linear routing rules in favor of bounded probes that force the system to disclose information. This mechanism shifts the unit of discipline from compliance with pre-defined paths to the design of safe-to-fail experiments, observable signals, and amplification or dampening rules. It protects the reflective phase where an agent learns what kind of problem it is facing by acting, observing back-talk, and reframing, rather than applying a known procedure prematurely.
+Complexity Override is a mechanism that relaxes rigid procedural constraints when the problem domain exceeds the capacity of standard routing rules. It does not abandon discipline but shifts the unit of discipline from following a pre-defined path to managing the parameters of an experiment. This allows agents to operate in high-entropy environments where the 'correct' action is not known a priori, requiring them to maintain observability and control over the experimental bounds rather than the outcome.
 
 ## Context
 
-Sean's current fleet relies heavily on structured routing which risks premature convergence when handling ambiguous research topics. By implementing this override, he can operationalize 'reflection-in-action,' allowing his agents to explore uncertain territories without collapsing into false certainty too early. This is critical for his job hunt and creative work where the problem definition itself is often the primary variable.
+Sean's vault shows a progression from simple automation (3 concepts) to complex agentic workflows (150+ concepts). As complexity increases, standard routing fails. This concept explains how his system handles that transition by changing the rules of engagement rather than breaking them.
 
 ## Evidence
 
 > Complexity Override does not relax discipline; it changes the unit of discipline from routing compliance to probe design: safe-to-fail experiment, observable signal, amplification/dampening rule.
 
-> Complexity Override protects the reflective phase where the agent is not yet solving the problem, but learning what kind of problem it is by acting, observing back-talk, and reframing.
+> Single-shape constraints work for simple domains but fail in complex ones where decomposition is required.
 
 ## Examples
 
-- Triggering 3-5 parallel probes for a research topic, each with a hypothesis, timebox, expected signal, and kill/amplify rule.
-- Writing a Substack essay explaining why an agent fleet needs reflection rather than just routing to demonstrate agentic-engineering judgment.
+- Shifting the unit of discipline from routing compliance to probe design.
+- Using safe-to-fail experiments as the primary unit of operation.
 
 ## Related Concepts
 
-[[Double-loop learning]] [[Negative Capability / Failure Literacy]]
+[[Probe Design vs. Routing Compliance in Agentic Workflows]] [[Constraint-First Automation vs. General Efficiency]]

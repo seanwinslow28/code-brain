@@ -2,7 +2,7 @@
 title: "Taste as Evaluation Function vs. Activity Proof"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/job-feed/2026-07-03.md
+  - knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md
 tags: [auto-generated, phase-6]
 created: 2026-07-04
 updated: 2026-07-04
@@ -10,11 +10,11 @@ updated: 2026-07-04
 
 ## Definition
 
-The tension between demonstrating competence through high-volume activity (sampling clusters, writing concepts) and the need for precise, taste-driven evaluation of fit. The system generates 'activity proof' via metrics like 'clusters_sampled' and 'concepts_written', but the actual value is derived from the 'fit_score' which requires nuanced judgment that cannot be fully automated. This creates a dependency where volume must be sufficient to allow taste to operate effectively, but not so high that it dilutes the signal.
+This concept defines the structural tension between quantifiable operational volume and qualitative judgment in automated systems. The system generates 'activity proof' via metrics like 'clusters_sampled' and 'concepts_written', but the actual value is derived from the 'fit_score' which requires nuanced judgment that cannot be fully automated. This creates a dependency where volume must be sufficient to allow taste to operate effectively, but not so high that it dilutes the signal. The mechanism reveals that automation can scale the search space, but it cannot replace the evaluation function that determines value within that space.
 
 ## Context
 
-Sean's run data shows increasing 'clusters_sampled' (from 155 to 272) while 'concepts_written' also increases, suggesting an attempt to scale the evaluation function. However, the 'fit_score' remains the ultimate arbiter, meaning that without strong taste, increased activity yields diminishing returns in terms of actual opportunities.
+Sean's run data shows increasing 'clusters_sampled' (from 155 to 272) while 'concepts_written' also increases, suggesting an attempt to scale the evaluation function. However, the 'fit_score' remains the ultimate arbiter, meaning that without strong taste, increased activity yields diminishing returns in terms of actual opportunities. This insight is critical for optimizing the job hunt pipeline, as it highlights the need to balance agent throughput with human-in-the-loop calibration.
 
 ## Evidence
 

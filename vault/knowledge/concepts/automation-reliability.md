@@ -2,7 +2,7 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - knowledge/concepts/automation-reliability.md
+  - knowledge/connections/the-integration-paradox-in-agentic-animation.md
 tags: [auto-generated, phase-6]
 created: 2026-07-04
 updated: 2026-07-04
@@ -10,11 +10,11 @@ updated: 2026-07-04
 
 ## Definition
 
-This concept defines the fragility of agentic workflows when they depend on multiple external systems and complex skill packages. As Sean integrates more specialized tools, the reliability of the entire pipeline becomes dependent on the weakest link in the chain, leading to compounding failures. This fragility is exacerbated by the lack of robust error handling and the inherent unpredictability of LLM outputs in critical paths.
+This concept defines the degradation of system stability as complexity increases, specifically where generated code and skill packages introduce performance bottlenecks and memory issues. The reliability of agentic workflows is not static but decreases with the number of integrated components, creating a fragile dependency chain that breaks under production conditions. This unreliability forces human intervention to correct errors, negating the efficiency gains of automation.
 
 ## Context
 
-Sean's job-hunt portfolio must demonstrate not just the use of complex tools, but the ability to manage complexity and ensure reliability. If his agentic workflows are unreliable, it undermines his credibility as a technical professional.
+Sean needs to present a robust portfolio project. If the underlying automation is unreliable, he cannot demonstrate the 'Agentic Engineering Signal' effectively, as hiring managers will see the failures rather than the potential.
 
 ## Evidence
 
@@ -24,8 +24,8 @@ Sean's job-hunt portfolio must demonstrate not just the use of complex tools, bu
 
 ## Examples
 
-- Skill packages showing reliability issues that compound during integration.
-- Generated animation code suffering from performance and memory problems.
+- Skill packages show reliability issues that compound during integration.
+- Generated animation code suffers from performance and memory problems.
 
 ## Related Concepts
 

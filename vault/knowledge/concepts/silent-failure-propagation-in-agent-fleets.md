@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/the-latency-of-trust-in-automated-research-pipelines.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
 
-This mechanism describes a state where upstream agents produce insufficient or null outputs without raising explicit errors, causing downstream consumers to process degraded data rather than failing fast. The system maintains an illusion of operational health because the binary success/fail metric remains true, even though the semantic yield has collapsed. This creates a dependency chain where the integrity of the final output is determined by the weakest link's ability to signal its own inadequacy.
+This mechanism describes a state where upstream agents produce insufficient or null outputs without raising explicit errors, causing downstream consumers to process degraded data rather than failing fast. The system maintains an illusion of operational health because the binary success flag remains true, even though the semantic yield has dropped to zero or near-zero. This creates a compounding latency in trust, as Sean cannot distinguish between a healthy pipeline and one that is silently starving its own utility.
 
 ## Context
 
-Sean's automated research pipeline relies on multiple agents chaining together; if one silently under-delivers, the entire synthesis becomes worthless without Sean noticing until it is too late. He needs to detect these silent drops before they compound into false confidence in his job-hunt or creative outputs.
+Sean's automated research pipelines rely on chaining multiple agents; if the initial data collection fails silently, the entire downstream synthesis effort becomes worthless, yet the monitoring dashboard reports success. This forces him to monitor yield rates rather than just process uptime to detect these failures early enough to intervene.
 
 ## Evidence
 
@@ -24,8 +24,8 @@ Sean's automated research pipeline relies on multiple agents chaining together; 
 
 ## Examples
 
-- Upstream agents silently under-yield
-- Downstream agents choke on formatting artifacts
+- Upstream agents silently under-yielding
+- Downstream agents choking on formatting artifacts
 
 ## Related Concepts
 

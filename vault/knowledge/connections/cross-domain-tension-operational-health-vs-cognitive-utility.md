@@ -5,8 +5,8 @@ connects:
   - Operational Visibility vs. Semantic Value in Agent Fleets
   - The Illusion of Health in Autonomous Systems
   - Agent Health Monitoring
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Synthesis

@@ -2,10 +2,10 @@
 title: "Vault as Agent Infrastructure"
 type: concept
 sources:
-  - knowledge/connections/the-privacy-accessibility-paradox-in-agentic-workflows.md
+  - knowledge/concepts/vault-as-agent-infrastructure.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition

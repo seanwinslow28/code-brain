@@ -5,8 +5,8 @@ connects:
   - Legibility Debt as a Supervision Failure Mode
   - Boundary Object Theory
   - Signal vs. Safety Trade-off in Resume Architecture
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Synthesis

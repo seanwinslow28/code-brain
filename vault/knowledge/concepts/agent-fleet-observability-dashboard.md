@@ -2,7 +2,7 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/concepts/agent-fleet-observability-dashboard.md
+  - knowledge/connections/probe-design-vs-routing-compliance-in-agentic-workflows.md
 tags: [auto-generated, phase-6]
 created: 2026-07-04
 updated: 2026-07-04
@@ -10,23 +10,23 @@ updated: 2026-07-04
 
 ## Definition
 
-A monitoring interface that provides visibility into the health, performance, and output quality of an autonomous agent fleet. It serves as a critical feedback loop for detecting systemic issues like trust deficits or rule failures that are not apparent from individual agent logs. By aggregating critiques and metrics from multiple external reasoners, it enables higher-level diagnosis of fleet-wide behavior patterns.
+This concept describes the critical dependency between experimental action and operational visibility. In probe-based systems, an agent cannot distinguish between a failed experiment and a successful one without real-time, granular data on signal quality. The dashboard acts as the feedback loop that allows the system to amplify good signals and dampen bad ones, preventing the loss of systemic health during exploration phases.
 
 ## Context
 
-Sean needs a way to objectively assess whether his fleet is improving or degrading over time. The dashboard provides the necessary data points to identify when manual intervention or rule changes are required.
+Sean's runs show increasing duration and cluster sampling (up to 272 clusters). Without observability, these large-scale probes would be blind. The dashboard is not just a monitor but an active component in the learning loop.
 
 ## Evidence
 
-> Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-Gravity CLI) of agent-fleets-supporting-knowledge-synthesis.
+> Operational visibility is required to distinguish between a failed probe and a successful one, ensuring that the system can amplify good signals and dampen bad ones without losing track of overall health.
 
-> There is a fundamental tension between the fleet's drive for high-throughput sampling and the preservation of insight quality, leading to a systemic trust deficit.
+> The fleet's architecture needs to support parallel probe execution with independent kill switches to prevent cascading failures in complex domains.
 
 ## Examples
 
-- Sean must implement a 'Synthesis Policy Change Record' to track when the fleet's rules need adjustment, not just its outputs.
-- The fleet's evaluation metrics should shift from 'concepts written' to 'rival hypotheses considered' to prevent shallow synthesis.
+- Distinguishing between a failed probe and a successful one via operational visibility.
+- Amplifying good signals and dampening bad ones without losing track of overall health.
 
 ## Related Concepts
 
-[[Slop as a Trust Deficit]] [[Double-loop learning]]
+[[Probe Design vs. Routing Compliance in Agentic Workflows]] [[SRE Error Budget for Agents]]

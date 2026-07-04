@@ -2,7 +2,7 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/concepts/agent-health-monitoring.md
+  - knowledge/connections/the-tension-between-reliability-metrics-and-adaptive-capacity-in-agent-fleets.md
 tags: [auto-generated, phase-6]
 created: 2026-07-04
 updated: 2026-07-04
@@ -10,23 +10,23 @@ updated: 2026-07-04
 
 ## Definition
 
-This mechanism redefines system observability by shifting focus from passive operational metrics to an active assessment of semantic integrity and reasoning coherence. It argues that traditional indicators like CPU usage or loop counts are insufficient for agentic systems because they fail to capture the validity of context or the quality of inference. The core requirement is observing the agent's ability to maintain logical continuity across complex, multi-step workflows rather than merely executing commands without error. This shift exposes the hidden costs of 'slop' and silent failures that gradually degrade the operator's trust in the system's output.
+This concept describes the mechanism of distinguishing between technical detection of system states and the semantic evaluation of agent utility. It defines monitoring not merely as catching broken states or loops, but as assessing whether the agent's output preserves the original intent despite environmental noise. The underlying pattern is that traditional health checks are insufficient because they do not account for the 'work-as-done' reality where agents must navigate partial failures. Effective monitoring requires measuring the fidelity of intent preservation rather than just the presence of errors.
 
 ## Context
 
-Sean needs to demonstrate a sophisticated understanding of AI operations that transcends basic scripting or uptime monitoring. By articulating how he monitors the 'health' of reasoning processes, he positions himself as an engineer who understands the unique failure modes of probabilistic systems versus deterministic ones. This distinction is critical for his job hunt, showing he can diagnose issues that standard dashboards miss.
+Sean's current frame treats monitoring as detection, which is insufficient for demonstrating the resilience required in complex agent fleets. He must evolve his monitoring strategy to capture the quality of degradation and recovery, which is more valuable for his portfolio and job hunt.
 
 ## Evidence
 
 > Your current frame treats monitoring as detection: catch loops, hallucinations, broken states.
 
-> When agents produce 'slop' or fail silently, the representation distorts the operator's view of reality.
+> The core tension exists between the traditional engineering obsession with reliability (uptime, success rates) and the operational reality of resilience (graceful degradation under surprise).
 
 ## Examples
 
-- Tracking the semantic drift of a research agent's output over a long-running task to identify context decay.
-- Measuring the latency between an agent's detected error and its successful recovery action to gauge resilience.
+- The fleet memory index tracks concepts written and connections made, but does not explicitly measure the semantic integrity of those outputs during high-load runs.
+- Hiring managers value the 'stretch' capability of agents more than uptime statistics because it signals a deeper understanding of complex system dynamics.
 
 ## Related Concepts
 
-[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[SRE Error Budget for Agents]]
+[[SRE Error Budget for Agents]] [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]

@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/the-validity-paradox-in-ai-pm-selection.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
 
-This concept defines the emerging competitive advantage in AI product management as the ability to supervise and calibrate agent behavior rather than merely build the agents themselves. It posits that accurate technical updates can degrade team performance if they violate established user expectations, making the preservation of trust a critical engineering constraint. The mechanism involves balancing technical correctness with the psychological continuity of the user experience, ensuring that changes are perceived as improvements rather than disruptions.
+This concept identifies the invariant that accurate technical updates to an AI system can degrade user trust if they violate established mental models or learned expectations. The mechanism is a mismatch between model accuracy and user interface predictability: as AI becomes more capable, the cost of violating user expectations increases because users rely on consistency for trust. The edge in AI product management shifts from raw capability to the careful calibration of surprise versus reliability.
 
 ## Context
 
-Sean should position his expertise in agentic engineering not just as technical proficiency but as a form of supervision that maintains user trust. This perspective allows him to differentiate himself from candidates who focus solely on technical capabilities while neglecting the human factors of AI adoption.
+Sean's work with agentic systems must prioritize trust preservation over pure accuracy gains. If he introduces changes that break user expectations, even technically superior models will be rejected by users. His portfolio should demonstrate this sensitivity to user psychology.
 
 ## Evidence
 
@@ -24,9 +24,9 @@ Sean should position his expertise in agentic engineering not just as technical 
 
 ## Examples
 
-- Designing an agent interface that gradually introduces new capabilities to avoid shocking users with sudden changes
-- Implementing fallback mechanisms that preserve user control when the AI makes a mistake
+- Prioritizing backward compatibility in AI updates
+- Testing demos for trust preservation rather than just technical fluency
 
 ## Related Concepts
 
-[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[The Validity Paradox in AI-PM Selection]]
+[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Vibe-Coding Interview Canon]]

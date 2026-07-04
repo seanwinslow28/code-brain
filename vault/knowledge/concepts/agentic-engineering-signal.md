@@ -2,7 +2,7 @@
 title: "Agentic Engineering Signal"
 type: concept
 sources:
-  - knowledge/concepts/agentic-engineering-signal.md
+  - knowledge/connections/the-maintainer-burden-vs-distribution-signal-tension.md
 tags: [auto-generated, phase-6]
 created: 2026-07-04
 updated: 2026-07-04
@@ -10,22 +10,22 @@ updated: 2026-07-04
 
 ## Definition
 
-This mechanism describes how public proof-of-work functions as a calibrated trust signal in a market saturated with low-effort content. It distinguishes between mere activity and demonstrable governance, where the ability to maintain a complex system over time serves as a stronger indicator of competence than isolated technical feats. The signal is amplified when the artifact demonstrates an understanding of distribution and adoption, not just creation.
+This concept defines the professional value derived from public proof-of-work that demonstrates governance judgment and system design capability. It operates on the principle that the signal is generated not by the volume of code, but by the clarity of boundaries and the sustainability of the maintenance model. The mechanism involves calibrating public artifacts to serve as evidence of strategic restraint rather than just technical output.
 
 ## Context
 
-For Sean, this means his job hunt materials should frame repositories as evidence of governance judgment rather than just technical capability. This approach counters the noise of 'vibe-coding' by highlighting the structural integrity and long-term viability of his work.
+In the context of Sean's job hunt, this concept helps frame his repositories as evidence of maturity. By distinguishing between mere contribution and a calibrated trust signal, he can leverage his work to demonstrate high-level architectural thinking without overcommitting to unsustainable support roles.
 
 ## Evidence
 
 > Sean should distinguish 'open source contribution' from 'public proof-of-work with an adoption funnel.'
 
-> The missing move: Sean should distinguish 'open source contribution' from 'public proof-of-work with an adoption funnel.'
+> Job hunt materials should frame repositories as evidence of governance judgment rather than just technical capability.
 
 ## Examples
 
-- Documenting the decision-making process behind architectural choices in a README to show strategic thinking.
-- Showcasing metrics of user adoption or community engagement alongside code quality.
+- Framing a repository's README to highlight its deprecation policy and support boundaries.
+- Using the 'adoption funnel' metaphor to explain how public work serves as a strategic signal.
 
 ## Related Concepts
 

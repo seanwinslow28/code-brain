@@ -4,28 +4,28 @@ type: concept
 sources:
   - knowledge/connections/the-validity-paradox-in-ai-pm-selection.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
 
-This concept defines the structural gap between the idealized, linear workflows assumed by standard hiring instruments and the non-linear, improvisational reality of managing autonomous agent fleets. It posits that traditional selection methods systematically filter for adherence to pre-defined scripts rather than the capacity to recover intention when those scripts fail in production. The mechanism relies on the observation that effective performance in complex systems is measured by the ability to navigate deviation, not by the avoidance of it.
+This concept defines the structural gap between the idealized, linear workflows assumed by standard hiring instruments and the non-linear, improvisational reality of managing autonomous systems. Standard selection methods measure adherence to a pre-scripted plan, which systematically filters out candidates who excel at recovering intention when that plan collapses. The mechanism here is a validity error: the instrument measures 'work-as-imagined' compliance rather than 'work-as-done' resilience, creating a false negative for high-performing AI product managers who thrive in chaotic environments.
 
 ## Context
 
-Sean must recognize that his job hunt strategy is currently misaligned with the actual demands of AI Product Management roles, which prioritize adaptability over rigid planning. By understanding this gap, he can reframe his portfolio and interview narratives to highlight moments of successful recovery rather than just successful execution.
+Sean is targeting roles where AI agents operate with significant autonomy. If his interview strategy focuses on demonstrating plan execution, he will fail to signal the actual competency required: recovery from failure. He must reframe his narrative to highlight how he manages deviation rather than just adherence.
 
 ## Evidence
 
 > The interview is not testing whether the candidate can follow a plan; it is testing whether they can recover intention when the plan collapses.
 
-> Standard interviews measure adherence to imagined plans, while effective AI PMs demonstrate competence through improvisation during plan collapse.
+> Standard interviews measure adherence to imagined plans, which filters out candidates who excel at improvisation during plan collapse.
 
 ## Examples
 
-- Demonstrating how an agent fleet handled a sudden API failure by rerouting traffic without human intervention
-- Explaining the decision to override an automated workflow when it violated user trust expectations
+- Designing portfolio projects that explicitly demonstrate 'recovery intention' rather than just plan execution
+- Framing agentic engineering demos as tests of backward compatibility and trust preservation
 
 ## Related Concepts
 

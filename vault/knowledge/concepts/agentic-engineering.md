@@ -2,7 +2,7 @@
 title: "Agentic Engineering"
 type: concept
 sources:
-  - knowledge/concepts/agentic-engineering.md
+  - knowledge/connections/attention-economics-vs-boundary-control-in-open-source.md
 tags: [auto-generated, phase-6]
 created: 2026-07-04
 updated: 2026-07-04
@@ -10,23 +10,23 @@ updated: 2026-07-04
 
 ## Definition
 
-This architectural pattern establishes a strict separation of concerns where autonomous agents assume ownership of task decomposition and execution, while humans retain exclusive authority over judgment and final decision-making. The system operates as a producer/consumer model in which agent-generated artifacts create explicit dependencies that human review enforces through quality gates rather than implicit trust. This structure allows for scalable automation of complex workflows without sacrificing the nuanced oversight required for high-stakes outcomes, effectively turning human attention into a critical control plane resource.
+Agentic engineering involves managing the operational costs and distribution signals of open source while mitigating the attention drain caused by dependency demand. It requires recognizing that publishing creates a bottleneck where maintaining platform integrity competes with the finite attention of maintainers. The mechanism focuses on strategic allocation of resources to prevent reputation pressure from overwhelming core development and ensuring that open source serves as a control surface rather than an unmanaged queue.
 
 ## Context
 
-Sean embodies this pattern by demonstrating a 'Karpathy-style' approach where he builds and deploys autonomous fleets but maintains critical oversight. This positions him not just as a developer but as an architect of intelligent systems, a key differentiator for senior product management roles that require both technical depth and strategic oversight.
+Sean faces a fundamental tension between the operational cost of maintaining open source and the professional signal it generates. This requires balancing rapid development with long-term resilience, ensuring that infrastructure stability supports domain-specific workflows without becoming a source of silent failure propagation.
 
 ## Evidence
 
-> Agentic engineering is an architectural pattern where agents are granted ownership of decomposition tasks while humans retain exclusive ownership of judgment and final decision-making.
+> There is a fundamental tension between the operational cost of maintaining open source and the professional signal it generates.
 
-> The system functions as a producer/consumer model where agent-generated artifacts create dependencies that human review enforces, ensuring quality control through explicit gates rather than implicit trust.
+> Publishing creates dependency demand that can become an unmanageable burden if not explicitly constrained by boundary resources.
 
 ## Examples
 
-- Agents decompose complex research tasks while Sean reviews the synthesized outputs for strategic alignment.
-- Human-review gates are enforced on all autonomous agent fleet outputs before they are considered production-ready.
+- Balancing rapid development with long-term resilience in platform choices
+- Implementing explicit constraints to manage dependency demand
 
 ## Related Concepts
 
-[[Context Compounding]] [[Vault as Agent Infrastructure]]
+[[Boundary Object Theory]] [[Demonstration Over Declaration]]

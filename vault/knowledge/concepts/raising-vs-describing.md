@@ -2,10 +2,10 @@
 title: "Raising vs. Describing"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-protocol-instrumentation-and-aesthetic-emergence.md
+  - knowledge/concepts/raising-vs-describing.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition

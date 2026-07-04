@@ -3,10 +3,10 @@ title: "Operational Visibility vs. Semantic Integrity in Cognitive Infrastructur
 type: connection
 connects:
   - The Illusion of Health in Autonomous Systems
-  - Infrastructure Status and Agent Failure
+  - Control Plane / Data Plane Split for Agent Fleets
   - Runtime-Model Coupling
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Synthesis
@@ -19,7 +19,7 @@ There is a fundamental tension between the operational visibility of agent healt
 
 > When an agent has full access but no judgment, it produces 'green' status indicators while silently failing to contribute to the knowledge graph.
 
-### [[Infrastructure Status and Agent Failure]]
+### [[Control Plane / Data Plane Split for Agent Fleets]]
 
 > This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local processing and storage operations.
 

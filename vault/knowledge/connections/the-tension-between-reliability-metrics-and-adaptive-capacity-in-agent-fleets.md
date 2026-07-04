@@ -5,8 +5,8 @@ connects:
   - Resilience Engineering: Work-as-Imagined vs Work-as-Done
   - SRE Error Budget for Agents
   - Agent Health Monitoring
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Synthesis

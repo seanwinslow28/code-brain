@@ -2,32 +2,32 @@
 title: "The Verification-Governance Inversion in Agentic Workflows"
 type: connection
 connects:
-  - The Illusion of Health in Autonomous Systems
-  - Negative Capability / Failure Literacy
-  - Legibility Debt as a Supervision Failure Mode
-created: 2026-07-03
-updated: 2026-07-03
+  - Slop as a Trust Deficit
+  - Resilience Engineering: Work-as-Imagined vs Work-as-Done
+  - Control Plane / Data Plane Split for Agent Fleets
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Synthesis
 
-Sean faces a structural inversion where the governance of his professional output is delegated to systems that only verify operational health, not semantic truth. This creates a tension between the speed of automation (which produces many artifacts) and the slowness of verification (which requires human negative capability). The consequence is that Sean's portfolio grows in volume but risks degrading in quality, as the agents optimize for completion metrics while the user optimizes for strategic impact.
+This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. As the fleet scales, the volume of outputs increases, but the quality of insights does not scale proportionally. This creates a verification-governance inversion where the operator must spend more time verifying low-quality outputs than creating high-value content, effectively negating the efficiency gains of automation.
 
 ## Threads
 
-### [[The Illusion of Health in Autonomous Systems]]
+### [[Slop as a Trust Deficit]]
 
-> Sean's infrastructure suffers from a critical tension where operational metrics (dashboard health, exit codes) are decoupled from functional value (semantic output).
+> The core tension arises from the operator's reliance on simplified representations (control plane) to manage complex, probabilistic agent behaviors (data plane).
 
-### [[Negative Capability / Failure Literacy]]
+### [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
 
-> Klein’s premortem gives Sean a repeatable artifact for surfacing hidden failure modes before a launch, pitch, essay, demo, or recruiter-facing update goes live.
+> Sean's automated workflows assume deterministic completion, but distributed dependencies introduce partial failures that binary success/failure states cannot capture.
 
-### [[Legibility Debt as a Supervision Failure Mode]]
+### [[Control Plane / Data Plane Split for Agent Fleets]]
 
-> Sean faces a structural tension where the engineering desire for simplified, aggregate health metrics clashes with the operational reality of complex human-agent joint cognition.
+> accidents are produced by inadequate control in a sociotechnical system, not just broken components
 
 ## Implications
 
-- Sean must implement pre-mortem checklists for all high-stakes job hunt artifacts to prevent silent failures from propagating into his public portfolio.
-- Telemetry dashboards alone are insufficient for ensuring the integrity of his professional outputs, requiring a hybrid model of automated speed and manual verification.
+- Sean must implement explicit quality gates that reject low-signal outputs before they enter his knowledge base.
+- The fleet's evaluation metrics should prioritize insight density over concept count to prevent trust erosion.

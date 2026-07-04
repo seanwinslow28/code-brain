@@ -2,7 +2,7 @@
 title: "Double-loop learning"
 type: concept
 sources:
-  - knowledge/concepts/double-loop-learning.md
+  - knowledge/connections/the-volume-insight-tension-in-agent-fleets.md
 tags: [auto-generated, phase-6]
 created: 2026-07-04
 updated: 2026-07-04
@@ -10,23 +10,23 @@ updated: 2026-07-04
 
 ## Definition
 
-This mechanism describes a systemic failure mode where an automated system optimizes for local efficiency metrics while ignoring the degradation of its underlying governance rules. In agent fleets, this manifests as continued high-volume output despite declining insight quality, because the evaluation loop only measures quantity rather than the validity of the synthesis logic itself. The system remains trapped in a single-loop optimization cycle, treating symptoms like 'low concept count' as the problem to solve, rather than recognizing that the criteria for what constitutes a valid concept are fundamentally misaligned with the goal of deep understanding.
+This mechanism refers to the process by which a system identifies that its governing rules or mental models are themselves flawed, rather than just correcting errors within those rules. In the context of agent fleets, it requires the system to notice when the volume of output no longer correlates with insight quality, prompting a revision of the synthesis policy itself. Without this capability, the fleet continues to optimize for metrics that degrade overall value.
 
 ## Context
 
-Sean is currently observing a trajectory where his fleet's output volume increases significantly (from 3 to 150 concepts) while the underlying quality and utility of those outputs remain questionable. Without intervening in the governing rules, he risks accumulating 'slop' that erodes trust in the system without providing any actual cognitive leverage or job-hunt advantage.
+Sean's current setup lacks the mechanism by which the fleet notices that the rules themselves are wrong, forcing him to manually adjust the governing logic. This gap between automated execution and strategic adjustment is a key bottleneck in scaling his personal knowledge infrastructure.
 
 ## Evidence
 
 > What is missing is the mechanism by which the fleet notices that the rules themselves are wrong.
 
-> The system continues to execute its current rules efficiently, but fails to notice that those rules are fundamentally flawed for the goal of insight generation.
+> Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-Gravity CLI) of agent-fleets-supporting-knowledge-synthesis.
 
 ## Examples
 
-- Shifting evaluation metrics from 'concepts written' to 'rival hypotheses considered' to force deeper synthesis.
-- Implementing a 'Synthesis Policy Change Record' to explicitly track adjustments to the fleet's governing logic rather than just its output volume.
+- The fleet's evaluation metrics should shift from 'concepts written' to 'rival hypotheses considered' to prevent shallow synthesis.
+- Sean must implement a 'Synthesis Policy Change Record' to track when the fleet's rules need adjustment, not just its outputs.
 
 ## Related Concepts
 
-[[Slop as a Trust Deficit]] [[Agent Fleet Observability Dashboard]]
+[[The Illusion of Competence in Automated Systems]] [[Supervision as the New AI Edge]]

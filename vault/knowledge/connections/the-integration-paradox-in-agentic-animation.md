@@ -5,8 +5,8 @@ connects:
   - Runtime-Model Coupling
   - The Engineer-Creative Divide in Tooling
   - Automation Reliability
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Synthesis

@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/voice-calibrations-in-creative-and-professional-outputs.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
 
-This concept defines voice not as a static tonal preference but as a dynamic constraint system where semantic payloads are preserved while syntactic machines change. It requires the separation of rhetorical form from factual claims, allowing for distinct modes like 'Orwell Mode' which strips performance to build trust in high-stakes professional contexts. The mechanism involves testing whether agents can maintain thesis integrity across transformations rather than merely imitating surface-level stylistic flavors.
+This mechanism treats voice not as a stylistic preference but as a dynamic constraint system where semantic payloads remain invariant while syntactic machines change. It requires the explicit separation of rhetorical form from factual claims, allowing for distinct modes like 'Orwell Mode' which strips performance to build trust in high-stakes professional contexts. The core tension lies in testing whether agents can maintain thesis integrity across transformations rather than merely imitating surface-level stylistic flavors.
 
 ## Context
 

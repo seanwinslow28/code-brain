@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/the-integration-paradox-in-agentic-animation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition
 
-This invariant refers to the mismatch between the high-level semantic interface promised by AI models and the low-level technical constraints required for reliable execution. When Sean uses agentic tools for animation, he is forced to think in terms of React/SVG/timing rather than pure creative intent, creating a coupling between the model's output and the specific runtime environment. This coupling requires continuous iteration on intricate prompts and manual correction of both code and creative output, which erodes the abstraction layer that AI is supposed to provide.
+This invariant refers to the mismatch between the high-level semantic intent of an AI model and the low-level technical constraints required for its execution in creative domains. When animators use agentic tools, they are forced to adopt the mental models of the underlying runtime (e.g., SVG coordinates, timing functions) rather than remaining in the domain of artistic direction. This coupling creates a friction point where the user must translate creative vision into rigid technical specifications that the model can process.
 
 ## Context
 
-Sean's job-hunt portfolio relies on demonstrating proficiency with modern agentic workflows. If the runtime-model coupling is too tight, his ability to demonstrate high-level creative strategy is compromised by low-level debugging tasks, reducing the perceived value of his work.
+Sean's job-hunt portfolio relies on demonstrating high-level creative strategy and technical architecture. If he is forced to dive deep into SVG/timing mechanics due to runtime-model coupling, his work may appear overly focused on implementation details rather than strategic design.
 
 ## Evidence
 
@@ -24,8 +24,8 @@ Sean's job-hunt portfolio relies on demonstrating proficiency with modern agenti
 
 ## Examples
 
-- Users having to correct both code and creative output repeatedly before anything is production-ready.
-- Skill packages showing reliability issues that compound during integration.
+- Users must iterate on intricate prompts to correct code and creative output.
+- Skill packages show reliability issues that compound during integration.
 
 ## Related Concepts
 

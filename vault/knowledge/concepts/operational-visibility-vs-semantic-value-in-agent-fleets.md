@@ -2,7 +2,7 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/operational-visibility-vs-semantic-value-in-agent-fleets.md
+  - knowledge/connections/the-tension-between-automation-velocity-and-creative-friction.md
 tags: [auto-generated, phase-6]
 created: 2026-07-04
 updated: 2026-07-04
@@ -10,23 +10,23 @@ updated: 2026-07-04
 
 ## Definition
 
-This pattern describes a structural decoupling where automated systems prioritize verifiable operational states—such as process uptime, exit codes, and network reachability—over the functional utility of their outputs. The mechanism creates a false positive loop: agents report 'healthy' because they are running, while the actual value generation (semantic insight) fails silently due to hardware dependencies or context drift. This leads to a supervision failure where the user must manually audit the quality of work rather than trusting the system's self-reporting, effectively inverting the expected efficiency gains of automation.
+This pattern highlights the inverse relationship between the ease of monitoring an agent's operational state and the actual semantic quality of its output. High visibility allows for quick detection of crashes but fails to detect when an agent is producing 'slop'—output that is syntactically correct but semantically empty due to missing context or resources. The mechanism is a measurement gap: systems optimize for uptime and throughput metrics while neglecting the contextual integrity required for high-value knowledge work.
 
 ## Context
 
-Sean is building a high-volume agent fleet for job hunting and creative production. If the fleet reports 'success' while failing to produce usable artifacts (like a polished resume or a coherent daily note), Sean wastes time verifying outputs that never existed. This tension forces him to treat the fleet as a black box requiring manual inspection, negating the labor-saving intent of the automation.
+Sean's ability to evaluate his own progress in job hunting and creative projects depends on the quality of his synthesized knowledge. If he only monitors operational visibility, he may believe his system is working effectively while actually accumulating low-value data that requires significant manual correction later.
 
 ## Evidence
 
-> Sean's infrastructure suffers from a critical tension where operational metrics (dashboard health, exit codes) are decoupled from functional value (semantic output).
+> The operational health of agents directly impacts the cost-effectiveness of agentic workflows. If an agent is unhealthy, it may incur unnecessary costs or disrupt other automation tasks.
 
-> The system prioritizes technical uptime (agents running) over semantic utility (insights generated).
+> Sean must implement semantic validation checks on synthesized concepts to ensure they are not just numerous but also contextually complete and MCP-accessible.
 
 ## Examples
 
-- Agents report 'healthy' status despite critical hardware dependencies being offline.
-- Sean sees 'healthy' agents but receives no actionable intelligence.
+- The jump from 3 to 150 concepts written shows increased velocity but does not indicate improved semantic value.
+- The rejection count of 78 in one run versus 51 in another shows variability in filtering but not necessarily in the quality of accepted concepts.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Silent Failure Propagation in Agent Fleets]]
+[[The Tension Between Automation Velocity and Creative Friction]] [[Legibility Debt as a Supervision Failure Mode]]

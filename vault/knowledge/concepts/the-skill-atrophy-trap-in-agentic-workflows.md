@@ -2,10 +2,10 @@
 title: "The Skill Atrophy Trap in Agentic Workflows"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-automation-reliability-and-human-recovery-capacity.md
+  - knowledge/concepts/the-skill-atrophy-trap-in-agentic-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Definition

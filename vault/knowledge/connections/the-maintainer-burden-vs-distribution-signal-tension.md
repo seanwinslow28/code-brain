@@ -5,8 +5,8 @@ connects:
   - Open-Source Contributions
   - Agentic Engineering Signal
   - Supervision as the New AI Edge
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Synthesis

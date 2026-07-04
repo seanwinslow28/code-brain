@@ -5,13 +5,13 @@ connects:
   - Resilience Engineering: Work-as-Imagined vs Work-as-Done
   - Vibe-Coding Interview Canon
   - Supervision as the New AI Edge
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-04
+updated: 2026-07-04
 ---
 
 ## Synthesis
 
-This connection reveals a critical tension between the psychometric requirements of hiring instruments and the actual demands of AI product management. Standard interviews measure adherence to imagined plans, which filters out candidates who excel at improvisation during plan collapse. This paradox means that the most effective AI PMs may be systematically rejected by traditional selection methods because they do not fit the 'work-as-imagined' mold.
+This connection reveals a critical tension between the psychometric requirements of hiring instruments and the actual demands of AI product management. Standard interviews measure adherence to imagined plans, which filters out candidates who excel at improvisation during plan collapse. This paradox means that the most effective AI PMs may be systematically rejected by traditional selection methods because they do not fit the 'work-as-imagined' mold. The consequence is a misalignment between Sean's demonstrated skills and the actual competencies required for success in autonomous AI environments.
 
 ## Threads
 
@@ -21,7 +21,7 @@ This connection reveals a critical tension between the psychometric requirements
 
 ### [[Vibe-Coding Interview Canon]]
 
-> The current note treats vibe-coding interviews as a cultural signal. Add the psychometric counterframe: interviews are instruments with predictive validity, adverse impact, criterion contamination, and work-sample fidelity.
+> Add the psychometric counterframe: interviews are instruments with predictive validity, adverse impact, criterion contamination, and work-sample fidelity.
 
 ### [[Supervision as the New AI Edge]]
 
