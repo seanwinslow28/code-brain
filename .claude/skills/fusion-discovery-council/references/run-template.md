@@ -67,8 +67,8 @@ Columns: Topic | Verified ideas | Dropped | Cost | Gaps filled/total | verify_su
 Then: total spend vs the $10/day cap.
 
 === DO NOT ===
-- git add / git commit anything under vault/ — Obsidian-Git owns vault commits (CLAUDE.md rule 8).
-  Just write the ledgers (+ briefs) and stop.
+- git add / git commit anything under vault/ — just write the ledgers (+ briefs) and stop;
+  committing the vault is a deliberate step for Sean, not part of the run.
 - pass --supplement (the agent IS the backfill here), --force, or retry a budget-rejected run.
 - run image generation or any unrelated work.
 ```

@@ -204,9 +204,9 @@ When reporting back to Sean, always surface the **dropped/unverified count** alo
 
 ---
 
-## 7. Vault rule (never commit)
+## 7. Vault output
 
-The skill **writes** the idea ledger to `vault/20_projects/research/...` and stops there. It must **never** run `git add` / `git commit` against `vault/`. Per CLAUDE.md rule 8, the **Obsidian-Git plugin is the sole owner** of vault auto-commit — the new ledger file will be committed automatically. Do not stand up any second commit mechanism for vault paths.
+The skill **writes** the idea ledger to `vault/20_projects/research/...` and stops there — it doesn't `git add`/commit/push. Committing the vault is a separate, deliberate step (Sean, or an interactive Claude Code session when he asks), not something the skill does mid-run.
 
 ---
 

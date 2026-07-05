@@ -49,7 +49,7 @@ Demonstrate in animation, writing, or visual design, where Sean has provable tas
 
 This folder rides **code-brain's public repo.** Treat everything tracked here as published.
 
-- **Never** write personal, employer, prior-role, job-hunt, financial, medical, or contact data into a tracked file. See code-brain CLAUDE.md **Rule #10**.
+- **Never** write personal, employer, prior-role, job-hunt, financial, medical, or contact data into a tracked file. See code-brain CLAUDE.md **Rule #9**.
 - Anything sensitive goes in the gitignored **[_private/](_private/)** lane and stays there. Never move it up without a privacy pass; never weaken the `.gitignore` rule that covers it.
 - **Never `git add` / `git commit` the vault.** The Obsidian-Git plugin owns vault auto-commit (code-brain CLAUDE.md Rule #8).
 - Competitive/white-space analysis is fine in public (it is not personal data). The line is personal and employer material.
