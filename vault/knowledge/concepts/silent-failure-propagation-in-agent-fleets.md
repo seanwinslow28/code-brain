@@ -29,4 +29,4 @@ This matters to Sean because his entire knowledge infrastructure relies on the v
 
 ## Related Concepts
 
-[[Cost-Capped Agentic Workflows]] [[Automation Reliability]]
+[[Agent Health Monitoring]] [[Infrastructure Status]] [[Automation Reliability]]

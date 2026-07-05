@@ -2,31 +2,34 @@
 title: "Agentic Engineering"
 type: concept
 sources:
-  - knowledge/concepts/agentic-engineering.md
+  - 40_knowledge/references/ref-opus-4-8-prompting-playbook-2026.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-04
+updated: 2026-06-04
 ---
 
 ## Definition
 
-Agentic engineering is the operational discipline of managing the distribution signals and maintenance costs of open-source platforms while actively mitigating the attention drain caused by external dependency demands. It requires recognizing that publishing code creates a bottleneck where maintaining platform integrity competes with the finite attention of maintainers, forcing a strategic allocation of resources to prevent reputation pressure from overwhelming core development. The mechanism focuses on treating open source as a control surface rather than an unmanaged queue, ensuring that infrastructure stability supports domain-specific workflows without becoming a source of silent failure propagation.
+Agentic engineering is the discipline of designing, building, and maintaining systems where AI agents operate autonomously or semi-autonomously to achieve complex goals, often involving coordination with other agents and external tools. It moves beyond simple task automation to encompass the architecture of agent interactions, decision-making logic, error handling, and the integration of dynamic capabilities like self-orchestration and parallel execution. This field requires a deep understanding of both the underlying models and the systemic properties of multi-agent environments.
 
 ## Context
 
-Sean faces a fundamental tension between the operational cost of maintaining open-source projects and the professional signal these projects generate. This requires balancing rapid development cycles with long-term resilience, ensuring that the infrastructure he builds supports his creative and job-hunt workflows without becoming a source of silent failure or reputation risk.
+Sean's interest in 'Project CTO' and 'Simon AI' aligns directly with agentic engineering. He needs to articulate how he can build and manage systems that are not just reactive but proactive and adaptive, leveraging the latest capabilities like dynamic workflows to create superior user experiences and operational efficiencies.
 
 ## Evidence
 
-> There is a fundamental tension between the operational cost of maintaining open source and the professional signal it generates.
+> Anthropic engineers have been using this as a daily driver for months. The rest of the world found out yesterday.
 
-> Publishing creates dependency demand that can become an unmanageable burden if not explicitly constrained by boundary resources.
+> Opus 4.8 is the model Anthropic is betting its near-trillion-dollar story on.
+
+> The ability for Claude to write its own orchestration scripts, spin up parallel subagents, and scale test-time compute trivially.
 
 ## Examples
 
-- Balancing rapid development with long-term resilience in platform choices
-- Implementing explicit constraints to manage dependency demand
+- Claude Code's ability to write its own orchestration scripts.
+- The use of parallel subagents to scale test-time compute.
+- Anthropic's internal adoption of dynamic workflows as a standard practice.
 
 ## Related Concepts
 
-[[Boundary Object Theory]] [[Demonstration Over Declaration]]
+[[Supervision as the New AI Edge]] [[Context Management as a Bottleneck]] [[Dynamic Workflows]]

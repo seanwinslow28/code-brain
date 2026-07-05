@@ -2,31 +2,30 @@
 title: "Vault as Agent Infrastructure"
 type: concept
 sources:
-  - knowledge/concepts/vault-as-agent-infrastructure.md
+  - knowledge/connections/archival-offloading-as-context-optimization.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-05-31
+updated: 2026-05-31
 ---
 
 ## Definition
 
-This mechanism defines the vault not merely as a storage repository but as the active, synchronized substrate that agents consume to generate insights. It establishes a dependency where the integrity of the public-facing data directly dictates the quality and safety of agentic outputs. The infrastructure relies on git-backed synchronization to ensure that the agent's context window is always aligned with the latest verified state of Sean's knowledge base. This creates a rigid coupling between the physical file structure and the logical flow of information, where any structural change in the vault requires corresponding updates in the agent's routing logic.
+Vault as Agent Infrastructure is the pattern where the knowledge base serves as the literal control plane for autonomous work, requiring explicit design of context preparation to survive handoffs between agents. This mechanism treats the vault not as a passive archive but as an active system where decisions, constraints, discoveries, and partial state must survive the transition from one agent to another. When this survival fails, each agent starts with an incomplete picture, making the system brittle and prone to errors. The consequence is that the vault's structure directly dictates the reliability and coherence of the entire agentic workflow.
 
 ## Context
 
-Sean uses this infrastructure to manage his 'Raising Claude' Substack series, ensuring that sensitive narratives are backed up to GitHub while remaining accessible to agents through a sanitized layer. The reliance on this synchronized state means that any failure in the sync process or the sanitization script can disrupt the entire agentic workflow.
+Sean's vault is currently failing to protect the integrity of active work because historical data is not properly isolated. This failure mode leads to the token waste and roadmap bloat that degrade his agent's performance. The implication is that the vault must be treated as a critical infrastructure component where context preparation is an explicit design problem, not an afterthought.
 
 ## Evidence
 
-> Consolidated the 'Raising Claude' Substack work into this tracked (public) folder inside code-brain, so it backs up to GitHub and syncs across machines.
+> Decisions, constraints, discoveries, and partial state have to survive the handoff. When they don’t, each agent starts with an incomplete picture and the system gets brittle.
 
-> The consequence is a dependency on automated verification scripts to ensure the proxy remains clean, creating a fragile system where any scrubbing failure could lead to privacy leakage or loss of context.
+> This file holds the ship history — dated amendments and the bodies of fully-closed tasks.
 
 ## Examples
 
-- Sean's workflow is defined by a fundamental tension between the need for rich, personal data to fuel creative insights and the requirement to isolate that same data to protect privacy.
-- The reliance on a 'sanitized proxy' means that any agent operating on the public data lacks access to the full nuance of the original stories.
+- The vault holding the ship history with dated amendments and the bodies of fully-closed tasks.
 
 ## Related Concepts
 
-[[Privacy-Aware Data Routing]] [[Silent Failure Propagation in Agent Fleets]]
+[[Token Waste]] [[Unified Roadmap]]

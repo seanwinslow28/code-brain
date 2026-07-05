@@ -2,31 +2,31 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - knowledge/concepts/cost-capped-agentic-workflows.md
+  - 00_inbox/tickets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-21
+updated: 2026-06-21
 ---
 
 ## Definition
 
-This pattern defines a financial leakage vector where the cost accounting logic is decoupled from the functional success state of an agent run. Specifically, when external API calls fail or return empty results, the billing provider charges for the request, but the local ledger only records spend upon successful completion. This creates a hidden tax on debugging and retry loops, as the system accumulates financial debt without corresponding data assets, distorting the true cost-per-insight metric.
+This mechanism refers to the architectural requirement that financial accounting for agent operations must be decoupled from execution success. When spend recording is gated behind a success condition, any failure in the processing logic results in unaccounted resource consumption, creating a blind spot in budget management. True cost control requires instrumentation of usage metrics at the point of request submission or response receipt, regardless of the semantic validity of the returned payload.
 
 ## Context
 
-Sean's job-hunt and research agents frequently hit rate limits or return empty results during retries. If the local ledger does not capture these failed API calls, he cannot accurately calculate the true cost of his automated workflows, leading to underestimation of operational expenses.
+Sean is building an agent fleet for job hunting and research where token costs are a primary constraint. Unrecorded spend from failed Fusion calls distorts his understanding of the true cost of discovery, making it impossible to accurately benchmark the efficiency of different model providers or prompt strategies.
 
 ## Evidence
 
-> failed Fusion calls bill OpenRouter but record $0 locally (`record_spend` is post-success only in `__main__.py`) — record usage.cost on failure too.
+> failed Fusion calls bill OpenRouter but record $0 locally because record_spend is post-success only in __main__.py
 
-> Financial tracking must be decoupled from functional success to accurately measure the cost of debugging and retry loops.
+> run 1 FusionError did not return parseable and run 2 bare JSONDecodeError Expecting value line 181 column 1 char 990
 
 ## Examples
 
-- OpenRouter billing for failed Fusion calls while local ledger records $0
-- Local ledger recording spend only after successful completion in `__main__.py`
+- OpenRouter streaming SSE keep-alive comments as padding that choke the unguarded payload extraction in fuse()
+- Stripping leading comment lines and extracting the first balanced JSON object before parsing to prevent JSONDecodeError
 
 ## Related Concepts
 
-[[Silent Failure Propagation in Agent Fleets]] [[Automation Reliability]]
+[[Cost-Capped Agentic Workflows]] [[Automation Reliability]] [[Token Waste]]

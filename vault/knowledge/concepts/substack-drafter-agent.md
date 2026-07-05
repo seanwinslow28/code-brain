@@ -2,31 +2,30 @@
 title: "Substack-Drafter agent"
 type: concept
 sources:
-  - knowledge/concepts/substack-drafter-agent.md
+  - 40_knowledge/people/substack.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-05-17
+updated: 2026-05-17
 ---
 
 ## Definition
 
-This mechanism defines a distillation layer that enforces editorial constraints on raw data by converting unstructured daily-note sediment into bounded writing assignments. It functions as an active editor rather than a passive recorder, requiring a specific narrative structure for every candidate post to prevent generic summaries. The system demands structural integrity through the constraint of one scene, one tension, and one claim before outputting text.
+A conceptual agent or workflow designed to draft content for Substack, possibly integrating with existing automation frameworks.
 
 ## Context
 
-Sean's current Substack-Drafter integration likely produces content that sounds like a system digest rather than a deliberate essay. By implementing this concept, he transforms the agent from a passive recorder into an active editor that demands structural integrity before outputting text.
+Relevant to Sean as he explores content creation and publishing mechanisms for his personal knowledge vault.
 
 ## Evidence
 
-> Add a drafting mode that forces each candidate post into: one scene / one tension / one claim / one artifact.
+> Auto-stub created by `auto_stub_people.py` — fill in identity when convenient.
 
-> It would let Sean ship weekly essays from daily notes without sounding like a vault digest.
+> `[[Substack]]` appears as author of one `ref-*` note. Hub note so the reference resolves.
 
 ## Examples
 
-- Generating a 'Field Note' format for a specific technical failure.
-- Creating a 'Decision Trace' that highlights the contradiction between two prior beliefs.
+- The stub for Substack suggests it is commonly referenced in notes related to content creation and publishing.
 
 ## Related Concepts
 
-[[Substack-Drafter agent]] [[Craft in Product Design]]
+[[Daily Note Generation]] [[Automation Routines]]

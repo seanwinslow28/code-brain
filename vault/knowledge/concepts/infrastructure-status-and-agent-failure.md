@@ -2,31 +2,31 @@
 title: "Infrastructure Status and Agent Failure"
 type: concept
 sources:
-  - knowledge/connections/operational-uptime-vs-cognitive-utility-tension.md
+  - knowledge/concepts/infrastructure-status.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-19
+updated: 2026-06-19
 ---
 
 ## Definition
 
-This mechanism defines the hard dependency chain where software-level health reports are negated by hardware offline states or network unavailability. It establishes that agent functionality is not self-contained but relies on a substrate of physical and network resources that must be actively verified. The failure mode here is not within the agent's code but in its inability to bridge the gap between digital intent and physical execution when the underlying infrastructure collapses.
+This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local inference or tooling. When physical hardware in the data plane goes offline, agents that depend on it for low-latency processing become functionally disabled, regardless of their software health status. This creates a binary dependency where the availability of compute resources directly dictates the scope of autonomous actions an agent can safely execute without error. The failure mode is not a logic error but a hard constraint violation that propagates silently through the fleet's operational state.
 
 ## Context
 
-Sean needs to understand that his agents' failures are often upstream of their own logic, rooted in the stability of the machines they run on. Recognizing this dependency allows him to prioritize physical-layer monitoring over software-level debugging when issues arise.
+Sean's fleet relies on a mix of always-on (Mac Mini) and intermittent (Alienware/ComfyUI) hardware. The offline status of these machines blocks multi-machine workflow reliability, forcing agents to either fail or operate with reduced capabilities, which impacts the consistency of his knowledge vault.
 
 ## Evidence
 
-> This invariant describes the physical and network dependencies that underpin agent functionality, where hardware offline states directly negate software-level health reports.
+> The operational state of the physical hardware layer (Mac Mini, Alienware, ComfyUI) acts as a hard constraint on agent capability, specifically determining whether agents can access local MCP servers or must rely on external APIs.
 
-> When physical machines go offline, agents that depend on them become non-functional regardless of their internal process status.
+> When infrastructure components go offline, agents that depend on them for low-latency processing or specific tooling become functionally disabled, regardless of their software health status.
 
 ## Examples
 
-- Hardware offline states directly negating software-level health reports.
-- Agents becoming non-functional due to physical machine downtime despite internal process liveness.
+- Alienware and ComfyUI environments are offline, blocking multi-machine workflow reliability.
+- The agent fleet still shows dependency on MCP tools/APIs unavailable in headless mode.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Agent Health and Daily Routine Automation]]
+[[Agent Health Monitoring]] [[Control Plane / Data Plane Split for Agent Fleets]]

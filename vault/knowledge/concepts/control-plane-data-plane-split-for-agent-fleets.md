@@ -2,31 +2,31 @@
 title: "Control Plane / Data Plane Split for Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/operational-visibility-vs-semantic-integrity-in-cognitive-infrastructure.md
+  - knowledge/connections/vendor-lock-in-vs-architectural-flexibility.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Definition
 
-This architectural invariant distinguishes between the control plane, which dictates desired state and routing policies for agent behavior, and the data plane, which executes local processing and storage operations. In agentic systems, a failure in the data plane (e.g., inability to write or synthesize) does not necessarily corrupt the control plane's perception of health if monitoring is limited to process liveness. This split allows agents to appear logically correct and available while physically failing to execute their intended cognitive tasks.
+This architectural pattern separates the decision-making logic (control plane) from the execution and state storage (data plane) to reduce coupling between agents. When this split is absent, agents become dependent on shared infrastructure that they do not own or control, leading to coordination failures and scalability limits. The mechanism requires explicit routing layers to manage how agents interact with memory stores, ensuring that one agent's write operations do not inadvertently corrupt another agent's state.
 
 ## Context
 
-Sean's infrastructure relies on a fleet of agents where the control plane (orchestration/health checks) may remain stable even as the data plane (vault synthesis/knowledge graph updates) degrades. Understanding this split is crucial for diagnosing why Sean perceives his system as healthy while his actual knowledge output stagnates.
+Sean's fleet consists of multiple agents that need to share context without interfering with each other. Without a clear split between control and data planes, his agents risk overwriting each other's historical data or failing to propagate information correctly, which undermines the reliability of his autonomous workflows.
 
 ## Evidence
 
-> This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local processing and storage operations.
+> The analysis evaluates five distinct options, highlighting specific technical trade-offs and known issues for each, with the 'Do-Nothing' baseline failing to solve the structural problem of uncoordinated, non-propagating memory stores.
 
-> The core tension lies between the orchestration layer's binary health reporting and the execution layer's physical and semantic failures.
+> analytic clients, leading to systemic resource exhaustion over long-running automated fleet deployments (Issue \#3376).
 
 ## Examples
 
-- An agent process remaining active and responsive to health checks while failing to write new entries to the vault due to a silent logic error.
-- Routing policies directing traffic to an agent that is technically reachable but cognitively inert due to model coupling issues.
+- Implementing a thin cross-agent routing layer for memory propagation.
+- Addressing the primary multitenant failure mode where Agent A overwrites Agent B's historical data.
 
 ## Related Concepts
 
-[[Runtime-Model Coupling]] [[Agent Health Monitoring]]
+[[Runtime-Model Coupling]] [[Vendor Lock-in vs. Architectural Flexibility]]

@@ -18,9 +18,9 @@ Sean is building a 'Cheese Gauntlet' kit for his Substack audience to help them 
 
 ## Evidence
 
-> The evidence loop assumes more examples produce better imitation.
+> You're not pasting these in and walking away with your voice on tap. You're starting a pile of evidence the model gets to learn you from.
 
-> Missing contradiction: too much evidence can create obedient pastiche.
+> The first session gets you a sharper outline. The tenth gets you something that sounds like you wrote it.
 
 ## Examples
 

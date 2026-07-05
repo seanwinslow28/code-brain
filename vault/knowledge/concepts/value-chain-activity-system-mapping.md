@@ -4,29 +4,28 @@ type: concept
 sources:
   - knowledge/concepts/value-chain-activity-system-mapping.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Definition
 
-This mechanism distinguishes between user-visible novelty and hidden commodities within a production chain to reveal that any unique advantage is inherently temporary. It forces a binary strategic choice: productize the visible wedge before it becomes table stakes, or open-source the invisible infrastructure to avoid wasting resources on non-defensible moats. The underlying pattern shows that 'the thing nobody else does' requires constant re-evaluation of which components are defensible versus which have drifted into undifferentiated market standards.
+Activity system mapping analyzes competitors by the specific operating activities they perform and how those activities reinforce each other. It exposes the tradeoffs that make imitation hard by revealing the interconnectedness of operational choices. This mechanism demonstrates that advantage is not derived from a single best practice but from the coherence of the entire system. The defensible moat is created by the complexity of these interdependencies, which cannot be copied without dismantling the original advantage.
 
 ## Context
 
-Sean needs this map to create a strategy one-pager for Code-Brain that clarifies what to productize, what to open-source, and what to treat as table stakes. It prevents the waste of building complex defenses around components that are already commoditized by the market, ensuring he focuses only on the true wedge.
+Sean's portfolio must demonstrate the compounding nature of his activity system to show defensible advantage. By mapping how his technical skills reinforce his product strategy, he creates a narrative of structural integrity. This approach shifts the focus from individual deliverables to the underlying architecture of his professional value.
 
 ## Evidence
 
-> The missing contradiction: 'the thing nobody else does' is temporary.
+> Activity system mapping analyzes competitors by the specific operating activities they perform and how those activities reinforce each other.
 
-> A wedge is defensible only if Sean knows which components are user-visible and still novel, versus hidden commodities.
+> Which operating activities reinforce each other, and which tradeoffs make imitation hard?
 
 ## Examples
 
-- Identifying user-visible novelty
-- Classifying hidden commodities
+- Mapping the reinforcement between agent-system authorship and strategic inflection detection.
 
 ## Related Concepts
 
-[[Friction-Killing Wedge]] [[Market Positioning]]
+[[Competitive Analysis]] [[Market Positioning]]

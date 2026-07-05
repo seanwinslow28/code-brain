@@ -29,4 +29,4 @@ Sean is managing a Substack series ('Raising Claude') that involves sensitive pe
 
 ## Related Concepts
 
-[[Vault as Agent Infrastructure]] [[Do-Not-Promote Framing]]
+[[Vault as Agent Infrastructure]] [[Privacy-Aware Data Routing]]

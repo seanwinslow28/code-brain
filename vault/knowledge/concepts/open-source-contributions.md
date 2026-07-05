@@ -2,31 +2,31 @@
 title: "Open-Source Contributions"
 type: concept
 sources:
-  - knowledge/connections/the-maintainer-burden-vs-distribution-signal-tension.md
+  - 20_projects/prj-job-hunt-2026/assets/Sean_Winslow_Resume_Tech_PM.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-05-18
+updated: 2026-05-18
 ---
 
 ## Definition
 
-This concept represents a shift from viewing open source as mere publication to treating it as an operational discipline of maintainer surface area. It requires defining governance, release cadence, and support boundaries before writing code, ensuring that the project does not become an unfunded obligation for the author. The value lies in the signal of reliability rather than the volume of features shipped.
+Sean publishes tools to npm and the MCP registry, including agentic engineering toolkits like the Claude Code Superuser Pack. This reflects his emphasis on open-source, reusable components for AI and agent workflows.
 
 ## Context
 
-Sean must treat his public work as a managed product with clear boundaries to prevent open source from becoming a liability during his job hunt. By limiting scope and enforcing deprecation policies, he protects his time while still demonstrating governance judgment to potential employers.
+This plays a key role in Sean's professional identity as both a product manager and an open-source contributor, helping to shape AI workflow infrastructure.
 
 ## Evidence
 
-> Publishing creates dependency demand; contribution quality is measured by whether maintenance supply can keep up.
+> Published the `@swins/intent-engineering-mcp` MCP server to npm and the MCP registry in May 2026.
 
-> Sean must define explicit support boundaries and deprecation policies to prevent open source from becoming a liability.
+> Open-source agentic engineering toolkit for Claude Code: 118 skills, 13 subagents, 14 hooks, 17 autonomous Claude Agent SDK agents (8 in production on local-first launchd schedules).
 
 ## Examples
 
-- Defining a clear deprecation policy for older versions of a library before announcing its stability.
-- Limiting the number of concurrent feature requests accepted into a repository to maintain signal quality.
+- intent-engineering MCP Server
+- Claude Code Superuser Pack — Open-Source Toolkit
 
 ## Related Concepts
 
-[[Agentic Engineering Signal]] [[Supervision as the New AI Edge]]
+[[MCP Server / Portfolio Differentiation]] [[Agent Health Monitoring]]

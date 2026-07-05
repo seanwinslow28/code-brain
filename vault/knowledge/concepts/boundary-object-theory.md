@@ -2,31 +2,31 @@
 title: "Boundary Object Theory"
 type: concept
 sources:
-  - knowledge/connections/the-legibility-paradox-of-agentic-supervision.md
+  - knowledge/concepts/boundary-object-theory.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-05
+updated: 2026-06-05
 ---
 
 ## Definition
 
-This concept refers to artifacts that enable negotiation of meaning between distinct professional groups without requiring them to share identical mental models. In the context of agentic work, these objects serve as the bridge between Sean's internal supervisory logic and the external expectations of product, engineering, and hiring stakeholders. They allow diverse evaluators to interpret the value of automated execution through a shared, tangible framework.
+Boundary Object Theory posits that documents function as flexible artifacts allowing diverse teams to collaborate without requiring full consensus on meaning, effectively masking underlying semantic divergence through a shared pretense of understanding. This mechanism creates a stable reference point for coordination while permitting each group to interpret the artifact according to their specific disciplinary needs and goals. The utility of such documents lies in their ability to sustain this illusion of shared understanding across boundaries, even as the actual interpretations diverge significantly between stakeholders. When AI systems summarize these artifacts, they often strip away the contextual cues that allow different groups to project their own meanings onto the object, thereby destroying its boundary-object function.
 
 ## Context
 
-Sean's portfolio projects must function as boundary objects that demonstrate his ability to translate intent into executable plans. This framing is necessary because his actual work involves translating abstract intent for agents, which is difficult for humans to evaluate directly without such artifacts.
+Sean can use this framework to explain why AI-generated summaries frequently fail to capture the nuanced, multi-perspective nature of original documents like PRDs or architecture diagrams. By recognizing that these documents are designed to be interpreted differently by different teams, Sean can better evaluate when an AI summary has lost critical contextual layers necessary for stakeholder alignment. This insight helps him anticipate 'translation loss' in automated workflows and design prompts that preserve the ambiguity required for cross-functional collaboration.
 
 ## Evidence
 
-> Artifacts that let product, engineering, design, and hiring managers negotiate meaning without sharing the same mental model.
+> Boundary Object Theory posits that documents are not neutral information containers but flexible artifacts that different teams interpret differently while pretending they mean the same thing.
 
-> His portfolio projects should be framed not just as technical achievements but as boundary objects.
+> The theory suggests that the utility of a document lies in its ability to sustain this pretense of shared understanding across disciplinary boundaries.
 
 ## Examples
 
-- Portfolio projects framed as demonstrations of intent translation.
-- Artifacts that allow hiring managers to understand supervisory complexity.
+- PRDs, metric definitions, launch checklists, architecture diagrams, roadmap narratives, and glossary entries serve as boundary objects.
+- AI summaries often strip away the contextual cues that allow different stakeholders to project their own meanings onto the artifact.
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Vibe-Coding Interview Canon]]
+[[Knowledge-Centered Service]] [[Context Management as a Bottleneck]]

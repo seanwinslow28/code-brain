@@ -2,31 +2,31 @@
 title: "Two Audiences"
 type: concept
 sources:
-  - knowledge/concepts/two-audiences.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-06-11-readmes-voice-final.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-16
+updated: 2026-06-16
 ---
 
 ## Definition
 
-This mechanism defines a structural bifurcation where a single artifact must simultaneously satisfy contradictory evaluation criteria: one audience demands low-level technical fidelity and machine-readable precision, while the other requires high-level interpretive narrative coherence and strategic value. This creates a dependency where the output cannot be optimized for either side in isolation without compromising credibility with the other; technical accuracy must not obscure strategic intent, nor can narrative flourish degrade technical trust. The artifact functions as a boundary object that forces an explicit mapping between raw operational data points and their broader implications to prevent misinterpretation by either evaluator.
+This mechanism describes the structural bifurcation of a single artifact into two distinct rhetorical registers based on the reader's cognitive load and intent. The first register, 'voice,' operates at high abstraction to signal strategic judgment and narrative coherence to recruiters who skim for pattern recognition. The second register, 'neutral body,' operates at low abstraction to provide verifiable technical depth for engineers who audit for implementation fidelity. The tension arises because optimizing one register often degrades the other; successful artifacts maintain a strict boundary where voice never contaminates technical precision, and technical detail never dilutes narrative clarity.
 
 ## Context
 
-Sean faces this tension daily when his vault synthesizes technical logs into career narratives. He must ensure that the 'builder' identity is not lost in the 'candidate' persona, requiring artifacts that are simultaneously rigorous enough for engineering review and compelling enough for executive assessment.
+Sean is navigating a job hunt where he must simultaneously prove high-level product thinking (via README framing) and low-level engineering rigor (via code/infra). This concept explains why his '35% split dial' strategy works: it allocates cognitive bandwidth to the recruiter's first ten seconds without sacrificing the engineer's need for auditability.
 
 ## Evidence
 
-> The core tension arises because Sean's technical role demands precise, machine-readable telemetry while his career role requires interpretive, human-readable narrative.
+> voice carries the one-liner / Problem / What-I-Learned (the recruiter's first ten seconds and the judgment signal); the technical body (install, API, config, tables) stays clean and neutral.
 
-> Sean must explicitly map his technical outputs to career narratives for each audience to ensure coherence across roles.
+> Most agent failures aren't reasoning failures. They're intent failures. The spec is vague, the stop rules are missing, the outcome is an activity disguised as a state.
 
 ## Examples
 
-- Mapping agent fleet status logs to a narrative about operational resilience for hiring managers.
-- Translating MCP server design decisions into portfolio projects that demonstrate architectural judgment.
+- The README opener uses inversion ('Most agent failures...') to create narrative tension for the recruiter, while the subsequent technical sections use dry, imperative commands for the engineer.
+- Em dashes are scrubbed from both registers to prevent 'dry wit' from bleeding into command syntax, ensuring the neutral body remains machine-readable and unambiguous.
 
 ## Related Concepts
 
-[[Boundary Object Theory]] [[Cross-domain bridging]]
+[[Two Audiences]] [[Craft in Product Design]] [[Workbench Narrative]]

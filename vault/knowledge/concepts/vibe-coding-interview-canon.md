@@ -2,31 +2,31 @@
 title: "Vibe-Coding Interview Canon"
 type: concept
 sources:
-  - knowledge/connections/the-legibility-paradox-of-agentic-supervision.md
+  - 40_knowledge/references/ref-canvas-was-never-the-design.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-01
+updated: 2026-06-01
 ---
 
 ## Definition
 
-This mechanism describes an evaluation paradigm where technical proficiency is secondary to the candidate's ability to externalize tacit decision-making under pressure. The interview tests whether a candidate can make their internal supervisory logic visible and coherent when challenged, rather than just demonstrating static output quality. Success requires translating implicit navigation choices into explicit narratives that hiring managers can verify.
+This concept defines the emerging standard for evaluating technical and product candidates based on their ability to leverage AI tools for rapid iteration and outcome delivery. It shifts the interview focus from algorithmic memorization or static portfolio pieces to the dynamic process of 'vibe-coding'—using AI to explore solution spaces quickly. The canon includes specific artifacts like prototype labs and AI-generated demos that demonstrate fluency in this new workflow.
 
 ## Context
 
-Sean must treat his interview performance as a distinct discipline from his coding output. If he relies on the assumption that his code speaks for itself, he will fail because the code does not reveal the supervisory complexity that constitutes his actual edge.
+Sean is actively updating his resume and interview prep to include 'Vibe-Coding' concepts. This concept helps him structure his narrative around how he uses AI to accelerate product development, making him a stronger candidate for AI-PM roles.
 
 ## Evidence
 
-> Interviews do not just test output quality; they test whether the candidate can make tacit judgment visible under pressure.
+> The headlines are all about AI versus designers, tools versus jobs, who wins, who loses.
 
-> Sean must treat his interview performance as a separate discipline from his coding output.
+> Without the Media Hub, these are siloed products. With it, they're a cohesive package.
 
 ## Examples
 
-- Narrating the invisible navigation decisions made during project development.
-- Demonstrating how intent was decomposed into executable plans for diverse stakeholders.
+- Showcasing a 'Prototype Lab' as a key project in the resume
+- Discussing the 'Media Hub' as a product bundling strategy
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Boundary Object Theory]]
+[[Intent Engineering]] [[AI Product Manager]]

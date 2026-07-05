@@ -2,31 +2,30 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-reliability-metrics-and-adaptive-capacity-in-agent-fleets.md
+  - knowledge/concepts/agent-health-monitoring.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-08
+updated: 2026-06-08
 ---
 
 ## Definition
 
-This concept describes the shift from passive detection of broken states to active monitoring of operational maturity and intent preservation. It involves observing how agents handle context loss, hallucinations, and loop failures not just as errors to be caught, but as signals of system strain that require graceful degradation strategies. The mechanism emphasizes that health is a dynamic property defined by the agent's ability to maintain core objectives despite component failures, rather than a static state of continuous operation.
+Agent Health Monitoring is the operational discipline of verifying autonomous agent completion through explicit observable signals rather than assuming success based on process exit codes. This mechanism requires distinguishing between successful execution and silent failure, where an agent completes its task but produces incorrect or missing data without raising exceptions. The system relies on statistical sampling, human review, and anomaly detection to catch errors that do not raise exceptions, ensuring that the operational status is decoupled from data freshness only when explicit checks are in place.
 
 ## Context
 
-Sean should redesign his monitoring dashboards to highlight these adaptive behaviors in his portfolio. This approach provides tangible proof of his engineering depth, showing he can build systems that are robust under uncertainty, which is highly valued in the current job market for AI infrastructure roles.
+Sean's morning brief depends on the previous day's synthesis being complete. When the synthesizer fails silently, he notices the staleness before the brief flags the failure, highlighting a lag in error detection that necessitates explicit health checks to raise errors rather than relying on silent failures to be detected by absence.
 
 ## Evidence
 
-> Your current frame treats monitoring as detection: catch loops, hallucinations, broken states.
+> Agent Health Monitoring is the operational discipline of verifying autonomous agent completion through explicit observable signals rather than assuming success based on process exit codes.
 
-> Sean faces a critical tension between the desire for deterministic reliability through SRE metrics and the reality that complex systems fail normally due to hidden coupling.
+> Sean notices the staleness of his morning brief before the brief itself flags the failure, indicating a lag in error detection.
 
 ## Examples
 
-- Monitoring context loss during agent operations
-- Observing intent preservation during component failures
+- ing output that is wrong, with no error signal. No exception. No confidence flag. It looks identical to correct output.
 
 ## Related Concepts
 
-[[SRE Error Budget for Agents]] [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
+[[Accountability Gap]] [[Automation Failure and Daily Note Disruption]]

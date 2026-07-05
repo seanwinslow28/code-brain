@@ -2,30 +2,30 @@
 title: "Resilience Engineering: Work-as-Imagined vs Work-as-Done"
 type: concept
 sources:
-  - knowledge/connections/the-validity-paradox-in-ai-pm-selection.md
+  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-06-08-task-26-research-reference-brief.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-09
+updated: 2026-06-09
 ---
 
 ## Definition
 
-This concept defines the structural gap between the idealized, linear workflows assumed by standard hiring instruments and the non-linear, improvisational reality of managing autonomous systems. It posits that traditional selection methods measure adherence to a pre-scripted plan rather than the capacity to recover intention when that plan collapses. The mechanism relies on the observation that 'work-as-done' in complex environments is characterized by constant deviation from 'work-as-imagined,' making resilience a more predictive trait than compliance.
+This concept describes the structural gap between idealized automation flows and the reality of exception handling. In AP systems, the 'work-as-done' is dominated by manual interventions for edge cases like duplicate detection failures or tolerance threshold breaches, rather than the seamless 'work-as-imagined' flow. The system's reliability depends not on preventing all errors, but on how efficiently it routes these exceptions to human judgment when automated controls fail.
 
 ## Context
 
-Sean must recognize that his portfolio and interview performance should demonstrate recovery capability rather than just execution fidelity, as this aligns with the actual demands of AI product management where plans frequently fail.
+Sean is building an Enterprise AP Agent Spec where correctness-critical claims must be verified against primary sources. Understanding that the 'work-as-done' involves significant exception routing helps him design agents that prioritize robust error handling and verification loops over pure automation speed, ensuring the system remains trustworthy when it deviates from the ideal path.
 
 ## Evidence
 
-> The interview is not testing whether the candidate can follow a plan; it is testing whether they can recover intention when the plan collapses.
+> Exceptions (price/qty mismatch, missing PO, duplicate, fraud flag) route to a human; track exception rate by type + resolution time.
 
-> Standard interviews measure adherence to imagined plans, which filters out candidates who excel at improvisation during plan collapse.
+> The bank-account-change event is the single highest-risk moment in AP and needs dedicated controls (dual approval + independent verification) beyond normal workflow.
 
 ## Examples
 
-- Demonstrating backward compatibility and trust preservation in agentic engineering demos instead of just technical fluency.
+- Automated duplicate detection can catch a large share pre-payment (one vendor claims 'up to 95%' — marketing ceiling).
 
 ## Related Concepts
 
-[[Vibe-Coding Interview Canon]] [[Supervision as the New AI Edge]]
+[[Automation Reliability]] [[Supervision as the New AI Edge]]

@@ -2,31 +2,31 @@
 title: "Runtime-Model Coupling"
 type: concept
 sources:
-  - knowledge/connections/the-integration-paradox-in-agentic-animation.md
+  - 00_inbox/tickets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-19
+updated: 2026-06-19
 ---
 
 ## Definition
 
-This invariant occurs when the abstraction layer of an AI model fails to match the runtime requirements of the target domain, forcing the user to manually bridge the gap with low-level code. In agentic animation, the model generates high-level creative intent, but the runtime environment (React/SVG/timing) requires precise technical specifications that the model cannot reliably infer without extensive iteration. This coupling creates a friction point where the 'agentic' promise is negated by the need for human-in-the-loop correction of both code and creative output.
+This pattern describes the fragile dependency between an agent's operational runtime environment and its execution schedule. When a system-level update alters the binary identity or code-signing hash of the interpreter, the operating system's launch daemon invalidates its cached state for any jobs relying on that specific binary path. This creates a silent failure mode where the agent fleet appears healthy in configuration but is completely inert because the OS refuses to bootstrap the stale cache entries.
 
 ## Context
 
-Sean's job-hunt portfolio relies on demonstrating mastery of agentic workflows, but if he is constantly correcting the model's runtime errors, he is not demonstrating automation but rather manual coding assisted by AI. This distinction is critical for technical hiring managers who can distinguish between true agentic efficiency and 'vibe-coding' that requires heavy oversight.
+Sean's entire job-hunt automation pipeline relies on precise timing and state continuity. A runtime break means missed daily notes, stalled research queues, and broken feedback loops during critical career transition periods, forcing manual intervention that breaks the 'set-and-forget' illusion of his system.
 
 ## Evidence
 
-> The marketed pitch is that animators describe an animation and Claude produces it, but in practice users must think in React/SVG/timing terms, iterate on intricate prompts, and repeatedly correct both code and creative output before anything is production-ready.
+> the 2026-06-10 13:31 Homebrew python@3.13 reinstall (3.13.11→3.13.13_1) changed the interpreter cdhash, which invalidated launchd's cached LWCR for 5 jobs
 
-> Generated animation code suffers from performance and memory problems, and skill packages themselves show reliability issues that compound during integration.
+> every fire on 2026-06-11 was kernel-killed with OS_REASON_CODESIGNING (no daily note, no overnight knowledge loop)
 
 ## Examples
 
-- Users thinking in React/SVG/timing terms instead of creative intent
-- Repeatedly correcting both code and creative output
+- Five specific launchd jobs (daily-morning, meta-agent, vault-indexer, vault-synthesizer, deep-researcher) were killed simultaneously due to a single Python interpreter upgrade.
+- Recovery required manual execution of `launchctl bootout` and `bootstrap` commands to clear the stale cache and re-register the valid binary.
 
 ## Related Concepts
 
-[[The Engineer-Creative Divide in Tooling]] [[Automation Reliability]]
+[[Automation Failure and Daily Note Disruption]] [[Infrastructure Status]]

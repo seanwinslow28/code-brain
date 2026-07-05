@@ -2,31 +2,31 @@
 title: "Infrastructure Status"
 type: concept
 sources:
-  - knowledge/connections/operational-visibility-vs-semantic-integrity-in-agent-fleets.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-17.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-18
+updated: 2026-06-18
 ---
 
 ## Definition
 
-This concept refers to the physical and network state of the hardware components that support the agent fleet, which directly impacts the ability to establish a reliable three-machine mesh. When critical endpoints like Alienware or ComfyUI go offline, the operational visibility of the system is compromised, leading to fragmented research capabilities. The status of these machines is not just a technical detail but a fundamental dependency for the continuity of strategic insight generation.
+The operational state of the physical hardware layer (Mac Mini, Alienware, ComfyUI) acts as a hard constraint on agent capability, specifically determining whether agents can access local MCP servers or must rely on external APIs. When infrastructure components go offline, agents that depend on them for low-latency processing or specific tooling become functionally disabled, regardless of their software health status. This creates a binary dependency where the availability of compute resources directly dictates the scope of autonomous actions an agent can safely execute without error.
 
 ## Context
 
-Sean's ability to generate strategic insights is directly tied to the availability of his hardware infrastructure. When Alienware and ComfyUI are offline, he cannot establish the full agent mesh required for deep research, leading to gaps in his knowledge vault.
+Sean's fleet relies on a mix of always-on (Mac Mini) and intermittent (Alienware/ComfyUI) hardware. The offline status of these machines blocks multi-machine workflow reliability, forcing agents to either fail or operate with reduced capabilities, which impacts the consistency of his knowledge vault.
 
 ## Evidence
 
-> Alienware and ComfyUI remain offline; full three-machine agent mesh cannot be reliably established.
+> Alienware and ComfyUI environments are offline, blocking multi-machine workflow reliability.
 
-> Fixing the Alienware endpoint is not just an infrastructure task but a critical dependency for restarting strategic insight generation.
+> The agent fleet still shows dependency on MCP tools/APIs unavailable in headless mode.
 
 ## Examples
 
-- Alienware and ComfyUI remaining offline prevents the establishment of a reliable three-machine agent mesh.
-- The Alienware endpoint being down directly impacts the ability to restart strategic insight generation.
+- Mac Mini remains online at http://192.168.68.200:11434 while Alienware is OFFLINE.
+- ComfyUI at http://192.168.68.201:8188 is marked OFFLINE, preventing image generation tasks.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Silent Failure Propagation in Agent Fleets]]
+[[Agent Health Monitoring]] [[Infrastructure Status and Agent Failure]]
