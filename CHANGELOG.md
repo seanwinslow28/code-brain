@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### CLAUDE.md — retire the Obsidian-Git vault-ownership rule (2026-07-05)
+- **Deleted Non-Negotiable rule 8** ("Obsidian-Git is the sole owner of vault
+  auto-commit; agents must never `git add/commit` the vault directly"). Obsidian-Git
+  is off while Sean is home (it caused merge conflicts) and re-enabled only while
+  traveling; vault commits are now deliberate — Sean, or Claude Code when instructed
+  in an interactive session. Renumbered the remaining rules: capture-deferred-work →
+  **rule 8**, privacy layer → **rule 9**.
+- **Updated the live rule-number references** to match the renumber: `README.md` and
+  `vault/20_projects/substack-studio/CLAUDE.md` (privacy `10 → 9`). Historical CHANGELOG
+  entries and dated `docs/prompts/*` continuation prompts left as point-in-time records.
+- **Dropped the rule-8 "never commit vault" framing** from the fusion-discovery-council
+  skill (`SKILL.md` §7 + `references/run-template.md`); the skill still writes its ledgers
+  and leaves committing to a deliberate session, minus the Obsidian-Git rationale.
+
 ### Fable 5 audit campaign — Phase B: the Fable burn (2026-07-05)
 - **All raw Fable captures banked** (`docs/plans/wwf5d/fable-runs/`): 7-question
   introspection, three blind battery runs (BT1 skill-audit, BT2 anima register seam,
