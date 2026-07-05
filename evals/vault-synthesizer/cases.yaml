@@ -64,9 +64,9 @@
     fixtures: traces/fixtures
     note_count: 1
   expected_output:
-    model_used: "in {\"qwen3-14b\", \"claude-sonnet-4-6\", \"claude-haiku-4-5\", \"none\"}"
+    model_used: "in {\"qwen3.6-35b-a3b-32k\", \"qwen3-14b\", \"claude-sonnet-4-6\", \"claude-haiku-4-5\", \"none\"}"
   judge_type: exact-match
-  pass_criteria: "result.model_used in {'qwen3-14b', 'claude-sonnet-4-6', 'claude-haiku-4-5', 'none'}"
+  pass_criteria: "result.model_used in {'qwen3.6-35b-a3b-32k', 'qwen3-14b', 'claude-sonnet-4-6', 'claude-haiku-4-5', 'none'}"
 
 - id: vs-019
   category: config-fail-loud
