@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### WWF5D §7 — council validation of the Step 4 robustness gate (2026-07-05)
+- **Ran the de-biased validation** from `docs/plans/wwf5d/round2/council-run-prompt.md`: 6
+  blind, order-swapped council queries (`variance` profile) comparing Opus-with-WWF5D vs
+  Opus-without-WWF5D across the RT1–RT3 battery, tallied on the non-Claude panel only
+  (Sonnet chairman excluded, F4). Result: **WWF5D favored on 2/3 tasks (RT1, RT3), RT2
+  ties across order-swaps** — real, cost $4.20 (`vault/health/council-spend-2026-07-05.json`).
+- **Found and fixed a blindness gap** the run-prompt didn't anticipate: the WWF5D-authored
+  artifacts self-cite their own framework 58 times inline (`WWF5D §X.Y`) plus one explicit
+  "the baseline's known catches" self-reference — both redacted (section numbers kept,
+  framework name and comparison language stripped) on `/tmp` copies before feeding the
+  council; source files in `docs/plans/wwf5d/round2/` untouched.
+- **Position-bias audit** (beyond the run-prompt's ask): Mistral-medium-3-5 voted
+  `VERDICT: A` in 6 of 6 runs regardless of content (non-diagnostic); GPT-5.4-mini showed a
+  5/6 position-B bias; only DeepSeek-v4-pro tracked content across the order-swap. This is
+  the real cause of the RT2 tie, not genuine panel disagreement.
+- **κ-gate computed at 0.0** against Sean's existing n=3 reference-blind label (3/3
+  favoring WITH) — a known zero-variance degeneracy, not evidence of panel randomness.
+  Per the pre-committed rule, Sean's-eye verdict (3/3) stands as the Engine-Truth call;
+  the council corroborates 2/3 and ties (not contradicts) the third. Full write-up:
+  `docs/plans/wwf5d/round2/council-results.md`.
+
 ### BT5 Phase C — Tier-2 reachability fix: owner forks decided (2026-07-05)
 - **Both owner forks from the BT5 diagnosis are resolved** (Sean, on the Mac Mini — the
   scheduler/driver host where `vault-synthesizer` + `knowledge-lint` actually load; the
