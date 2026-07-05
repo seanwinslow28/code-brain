@@ -10,18 +10,23 @@ For the creative who tried AI, got soulless output from a prompt or two, and wal
 
 Full positioning, voice, value model, and the relaunch plan live in **[POSITIONING-AND-EDITORIAL-SPEC.md](POSITIONING-AND-EDITORIAL-SPEC.md)**. That doc is the source of truth. This README is orientation.
 
+## The arc (re-anchored 2026-06-29): partner, then system, then art
+
+The masthead is **have the agent think like me**. You build a creative partner by brainstorming and interviewing the agent into your taste, *then* build the system on top of it, *then* make the art that is yours. The first posts are the partner on-ramp; the **system framework** (spec it, test it, version it, gate it) is the destination they earn, not the front door. An earlier framing (2026-06-28) led with the framework and drifted the masthead onto the architecture; it was re-anchored here. The pivot's insight survives and feeds the destination: isolated techniques are commodity, and the deeper craft is treating creative AI as a system. Masthead: [`SOUL.md`](SOUL.md). History: [`2026-06-28-pivot-prompts-to-systems.md`](2026-06-28-pivot-prompts-to-systems.md) (evidence) plus [`CONTINUATION-2026-06-29-refocus-partner-then-system.md`](CONTINUATION-2026-06-29-refocus-partner-then-system.md) (refocus).
+
 ## The reader and the white space
 
 - **The one reader:** the blocked, skeptical artist. A non-coding creative (illustrator, writer, animator, musician, designer) who is AI-curious but burned, and a little ashamed of using it. Sean is the guide and the character, not the audience.
 - **The white space Sean owns:** maker's soul (real craft demos) + skeptic's-eye-level empathy + a *teachable* taste-transfer method + a tool that kills the grind + dive-bar anti-hype voice. None of the three closest comparables (Don Giannatti curates, Gabe Michael masters, Nate Jones analyzes) stand here.
 
-## The three formats
+## The formats
 
-1. **Teaching spine** (working name: The Re-Roll / Direction) — one creative job shown soulless first, then directed move by move to something with a pulse, ending in the transferable recipe. Weekly. The signature.
-2. **Tool drop** (working name: Build Logs / The Workshop) — "I built you a thing so you stop hand-grinding this," packaged for a non-coder. Periodic, tentpole, the premium tier.
-3. **Fix My Mess** — fix a reader's botched AI output in public. Frequent, light, drives reach and community.
+1. **The Spine** (teaching demos): one creative job, the partner taking it soulless to yours move by move, ending in the transferable method + both-tier artifacts. The signature. Follows one creative project across media (comics, animation, music & voice, editing).
+2. **Back to Basics** (working: "Tim the Tool Man"): the tool-onboarding series, NEW 2026-06-29. Introduce a technical partner (skills/`.claude`, then Pi, Hermes, Higgsfield, ComfyUI), why it is a superpower and how it works, wired to the taste-transfer method. The bridge that brings non-coders into the technical.
+3. **Tool drop**: "I built you a thing," shipped in both tiers (copy-paste + symlinkable skill). Periodic, tentpole, the premium line.
+4. **Fix My Mess**: flagged for re-evaluation under the refocus (may fold into the System arc's public Gate).
 
-Ratio is roughly 3:1 (three teaching posts per tool drop).
+Full format set + the first-arc lineup: [`SOUL.md`](SOUL.md) §5-6.
 
 ## How a post gets made
 

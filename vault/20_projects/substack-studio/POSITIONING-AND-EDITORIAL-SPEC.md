@@ -1,11 +1,19 @@
 # Substack Studio — Positioning & Editorial Spec
 
-**Status:** Locked foundation (2026-06-22). Supersedes the "Raising Claude" tool-shipping-first model.
+**Status:** Foundation (2026-06-22), re-anchored 2026-06-29. The masthead philosophy now lives in [SOUL.md](SOUL.md) ("have the agent think like me; partner, then system"); read it first. This doc is the strategic detail beneath it. Where the two disagree, SOUL.md wins.
 **Purpose:** The strategic heart of this publication. Read this before writing a post, naming anything, or planning research. The README and CLAUDE.md derive from this doc; if they ever disagree, this wins until explicitly revised.
 
 > Note: this doc contains competitive positioning, not personal data. If you'd rather keep the white-space analysis off the public repo, move it to `_private/`. It's written clean either way.
 
 ---
+
+## 0. Strategic arc, partner first, system as destination (re-anchored 2026-06-29)
+
+> Read this before §1, alongside [SOUL.md](SOUL.md) (the masthead). This section was rewritten on 2026-06-29. The earlier "compete on a system framework" framing (2026-06-28) over-rotated and put the *architecture* at the front door. The framework is kept, as the **destination**, not the opener. History: [`2026-06-28-pivot-prompts-to-systems.md`](2026-06-28-pivot-prompts-to-systems.md) (the pivot, now read as evidence) and [`CONTINUATION-2026-06-29-refocus-partner-then-system.md`](CONTINUATION-2026-06-29-refocus-partner-then-system.md) (the refocus).
+
+The masthead is **have the agent think like me**, and the arc is **partner, then system, then art**: build a creative partner by brainstorming and interviewing the agent into your taste, *then* build the system on top of it, *then* make the art that is yours. The first posts are the partner on-ramp; the system framework (spec it, test it, version it, gate it) is the destination they earn.
+
+The pivot's core insight survives and feeds the destination: isolated techniques are commodity (the flagship how-to was value-gate **blocked** because its Transfer was already free), and the deeper, un-commoditized craft is **control**, treating creative AI as a system. That is true. It is just not the front door. Leading the masthead with the framework front-loaded the architecture and lost the thing the publication set out to preach. The reader transformation is "you build a partner that thinks like you, then the system that scales it," and the directions A / B / C (in the locked docs) are the **system arc**, re-mapped in SOUL.md §7.
 
 ## 1. What this publication is (one paragraph)
 
@@ -15,7 +23,7 @@ A Substack for **creatives who are skeptical that AI can be a real creative part
 
 ## 2. The reader (the one reader)
 
-**Primary — "the blocked/skeptical artist."** Non-coding creatives: illustrators, writers, animators, musicians, designers, marketers. AI-curious but burned. They believe AI output is inherently soulless and that using it is a little shameful. They do **not** want to install an MCP server. Value to them = permission, method, and proof.
+**Primary — "the blocked/skeptical artist."** Non-coding creatives: illustrators, writers, animators, musicians, designers, marketers. AI-curious but burned. They believe AI output is inherently soulless and that using it is a little shameful. They start in the tools they already have (copy-paste, no install), but we **bring them into the technical**, not wall them off from it (revised 2026-06-29). Value to them = permission, method, proof, and the new craft itself. The non-coder is the on-ramp, not the ceiling (see the both-tiers value model in §6 and SOUL.md §3).
 
 **The guide, not the audience — Sean (the creative technologist).** Tony Stark + Motoko Kusanagi: a creative who learned to think like a systems architect. He's the one on screen showing them how to build their own JARVIS for their craft *without forcing them to become engineers*.
 
@@ -65,21 +73,25 @@ Mapped against the three closest comparables (research 2026-06-22):
 Every post is some blend of **method + transformation + tool**, but not all three every time — that's what strangled the old cadence.
 
 - **Demo in your lane; teach a method that travels.** Demonstrate in animation/writing/visual design (where Sean has real, provable taste). Then strip the lesson of its specific craft so a musician or copywriter can run it on theirs. *The demo is specific; the method is universal.*
-- **Tools are packaged for a non-coder.** One-click skill, hosted thing, copy-paste kit — never "clone this repo." A tool a skeptic can't run is worse than no tool.
+- **Tools ship in both tiers, every time (revised 2026-06-29).** A copy-paste kit so anyone can start today in the tool they already have, AND the symlinkable `.claude` skill for the reader ready to level up. We teach the why and how of the technical layer, not just the result. The old "non-coder only" rule was quietly steering us toward already-solved problems; the new rule brings the reader into the craft. (Detail: SOUL.md §3-4.)
 - **Sean's growth is texture, never the pitch.** Building in public, learning to ship, the AI-PM portfolio — all of it shows through as *proof he did the work*. The reader promise is always the headline; the moment a post's headline becomes "look what I built," it repels the artist.
 
 ---
 
-## 7. The recurring formats (the engine of Direction 2)
+## 7. The recurring formats
 
-Three named formats, each with a distinct funnel job. Names are **placeholders** pending the `pm-marketing-growth:product-name` pass.
+> Re-anchored 2026-06-29. The current format set + the first-arc lineup live in [SOUL.md](SOUL.md) §5-6 (the partner arc + the comics-to-animation-to-music-to-editing cascade). This section keeps the detail. The set is: **the Spine** (teaching demos), **Back to Basics** (the new tool-onboarding series), **the Tool Drop**, and **Fix My Mess** (flagged for re-evaluation, may fold into the System arc's public Gate). Names are working pending a `pm-marketing-growth:product-name` pass.
+
+### Format 0 — Back to Basics *(working: "Tim the Tool Man")* — recurring, newcomer-facing — NEW 2026-06-29
+The tool-onboarding series, and the bridge that walks a non-coder into the technical world. Introduce a technical partner (skills + `.claude` first, then Pi, Hermes, Higgsfield, ComfyUI, and whatever ships next): why it is a superpower, how it works at a basic level, wired to the taste-transfer method. NOT a generic tutorial. The spin is always "this tool, in service of making the agent's taste yours." Ships both tiers.
+**Job:** onboard newcomers to the tools the Spine teaches with; a bottomless idea well as new tools ship.
 
 ### Format 1 — The teaching spine *(working: "The Re-Roll" / "Direction")* — frequent, signature
 One creative task, shown **soulless first** (the exact output a skeptic would quit on), then directed move-by-move to something with a pulse. Every correction narrated = the taste being transferred. Ends with the **transferable recipe** — the method stripped of craft, runnable in plain Claude today, no install. Method + transformation fused.
 **Job:** convert skeptics, build the weekly habit, carry the relationship.
 
 ### Format 2 — The tool drop *(working: "Build Logs" / "The Workshop")* — periodic, tentpole
-The "I built you a thing so you stop hand-grinding this" post. Seeded by prior teaching posts, so it lands on a primed audience. Shows the build-in-public mess (texture), then ships the tool packaged for a non-coder.
+The "I built you a thing so you stop hand-grinding this" post. Seeded by prior teaching posts, so it lands on a primed audience. Shows the build-in-public mess (texture), then ships the tool in both tiers (copy-paste + the symlinkable skill).
 **Job:** deepest reader value, portfolio proof, the natural paywall line.
 
 ### Format 3 — The reach format: **"Fix My Mess" / Office Hours** *(locked as the concept)* — frequent, light

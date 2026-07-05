@@ -2,7 +2,9 @@
 
 The live editorial queue. What publishes, in what order, in what format, and what state it's in. Strategy lives in **[POSITIONING-AND-EDITORIAL-SPEC.md](POSITIONING-AND-EDITORIAL-SPEC.md)** (source of truth) and the rules in **[CLAUDE.md](CLAUDE.md)**; this doc is the running order.
 
-> Supersedes the old "Raising Claude" command center (7 tool-paired posts on a Mon/Thu calendar). That model was retired with the 2026-06-22 repositioning. The new model is a recurring teaching spine plus periodic tool drops, paced by quality, not a tool-build calendar.
+> Supersedes the old "Raising Claude" command center (7 tool-paired posts on a Mon/Thu calendar), retired with the 2026-06-22 repositioning.
+
+> **Re-anchored 2026-06-29: partner, then system.** The masthead is [`SOUL.md`](SOUL.md) ("have the agent think like me"). The live queue is now the **partner arc** (build a creative partner by brainstorming + interviewing the agent into your taste), which leads into the **system arc** (the A/B/C research, re-cast as the destination). The earlier 2026-06-28 "system framework as masthead" framing was demoted: the framework is the destination, not the opener. The queue below is rebuilt around the partner arc + the new **Back to Basics** tool-onboarding series; the old "Take Two #1, Teach the model your hand" is recast (it leaned system: declare a rubric, gate drift) into the partner-arc opener "Make the Agent's Taste Yours." Full refocus: [`CONTINUATION-2026-06-29-refocus-partner-then-system.md`](CONTINUATION-2026-06-29-refocus-partner-then-system.md).
 
 ## The model in one screen
 
@@ -13,22 +15,24 @@ The live editorial queue. What publishes, in what order, in what format, and wha
 
 | Format | Name | Job | Cadence |
 |---|---|---|---|
-| Teaching spine | **Take Two** | Convert skeptics. One creative job, shown soulless first, then directed move by move to something with a pulse, ending in the transferable recipe. The signature. | Weekly-ish |
-| Tool drop | *(name at ship)* working: Build Logs / The Workshop | "I built you a thing." Packaged for a non-coder. Portfolio proof + the natural paywall line. | Periodic, tentpole |
-| Reader fix | *(name at ship)* working: Fix My Mess | Fix a botched AI output in public. Reach + community. | Frequent, light |
+| The Spine | **Take Two** | One creative job, the partner taking it soulless to yours move by move, ending in the transferable method + both-tier artifacts. Follows one project across media (comics, animation, music & voice, editing). The signature. | Weekly-ish |
+| Tool-onboarding | **Back to Basics** *(working: Tim the Tool Man)* | Introduce a technical partner (skills/`.claude`, Pi, Hermes, Higgsfield, ComfyUI): why it is a superpower, how it works, wired to taste-transfer. Brings non-coders into the technical. NEW 2026-06-29. | Recurring, light |
+| Tool drop | *(name at ship)* working: Build Logs / The Workshop | "I built you a thing," shipped both tiers (copy-paste + symlinkable skill). Portfolio proof + the paywall line. | Periodic, tentpole |
+| Reader fix | *(name at ship)* working: Fix My Mess | Fix a botched AI output in public. Flagged for re-evaluation (may fold into the System arc's Gate). | TBD |
 
 ## The relaunch arc (the live queue)
 
 **Launch bundle** ships together the day the publication relaunches, so a reader arriving on the flagship can orient immediately.
 
-| Order | Piece | Format | Lane / Angle | Status | Notes |
+| Order | Piece | Format | Ships (both tiers) | Status | Notes |
 |---|---|---|---|---|---|
-| Bundle | **Take Two #1 — "Teach the model your hand"** | Take Two | Visual / character · Angles 2+3 | capture-pending | The flagship. **Locked 2026-06-27: fresh self-portrait, bust framing** — upload a selfie, get glossy slop ("it has my likeness, not my taste"), then direct it into Sean's pencil-test hand move by move. Shoot plan + beats: [`take-two-01-teach-the-model-your-hand/capture-plan-and-beats.md`](take-two-01-teach-the-model-your-hand/capture-plan-and-beats.md). |
-| Bundle | **Start Here** (page) | Page | Angle 5 as foil | to write | The manifesto, as a page. Stance + the whitespace flag ("does teaching the model your taste kill the AI look? I answer that by showing it") + where to begin. |
-| Bundle | **About** (page) | Page | — | to write | Deep bio: the creative technologist, the pencil-character lineage, the agent fleet, contact. |
-| #2 | **Take Two #2 — writing / voice demo** | Take Two | Writing · Angle 2 | idea | Generic AI prose directed to Sean's actual voice via reference-feeding (the VoicePrint method). A second lane proves the method travels; that's the point of placing it second. |
-| #3 | **Fix My Mess pilot** | Reader fix | Angle 1 | idea | Sean submits his own botched output first. Lands once the spine is unmistakable. Quotable cold-open available (Angle 1's "let a toddler design their app"). |
-| Day 0 → | **Notes** | — | all | ongoing | Variety, reach, interaction. Not a post. Runs continuously from relaunch. |
+| Bundle | **Post 1, "Make the Agent's Taste Yours"** | Spine (opener) | taste-context kit + the interview/brainstorm partner skill | plan-locked, build sheet next | The relaunch flagship. The no-context vs with-your-taste contrast; "making the agent's taste yours." Recasts the old "Teach the model your hand" capture ([`take-two-01-…/capture-plan-and-beats.md`](take-two-01-teach-the-model-your-hand/capture-plan-and-beats.md)) into the partner frame. |
+| Bundle | **Start Here** (page) | Page | n/a | drafted (revisit vs SOUL) | Orientation: the mantra + the partner-then-system arc + where to begin. |
+| Bundle | **About** (page) | Page | n/a | drafted (revisit vs SOUL) | Deep bio: the creative technologist, the pencil-character lineage, the agent fleet. |
+| #2 | **Back to Basics #1** *(Tim the Tool Man)* | Tool-onboarding | starter `.claude` setup + copy-paste equivalent | idea | Why a technical partner is a superpower + how a skill works, basic level. Onboards the reader to use Post 1's skill. |
+| #3 | **Steal Like an Artist** | Spine | references to bespoke-prompt kit + skill | idea | Drop a mix of references + a description, the agent emits a unique prompt for that mix. The new skill idea. |
+| #4 | **The Partner That Pushes Back, Build a World (Comics)** | Spine (cascade begins) | world/character/dialogue ideation skill | idea | The partner builds a world, characters, dialogue (one post or split). Begins the comics, animation, music & voice, editing cascade. |
+| Day 0 → | **Notes** | n/a | n/a | ongoing | Variety, reach, interaction. Runs continuously from relaunch. |
 
 **Sequencing logic (researched 2026-06-23):** lead with the pillar series, do not diversify the main feed early. A recognizable series drives ~80% of growth; mixing formats up front muddies the "what is this about" signal. Reach comes from Notes, not from front-loading the interactive format. Sources: spec §11, plus the 2026-06-23 launch-sequencing scan (Build to Launch, The 2hour Creator, Write Build Scale, and Nate Jones's June 2026 move from daily variety to a focused weekly spine).
 
@@ -102,7 +106,7 @@ The migrated `01-…` through `07-…` + `bonus-…` folders are the back catalo
 - **01 You Can't Prompt Taste** → recast as a back-catalog Take Two entry (on-thesis: taste). Strong title, on-voice.
 - **02 Machine to Sound Like You** → recast (writing / voice); can seed Take Two #2's method.
 - **03 Correct Was Never Defined** (intent-MCP) → most off-thesis; rework toward the creative angle or shelve for audience B.
-- **04 / 05 / 06 / 07 / bonus** → analyst / agent-flavored, lean audience B. Hold and re-evaluate. Some shipped tools (VoicePrint, the gates) may resurface later as Tool Drops packaged for non-coders.
+- **04 / 05 / 06 / 07 / bonus** → analyst / agent-flavored, lean audience B. Hold and re-evaluate. Some shipped tools (VoicePrint, the gates) may resurface later as Tool Drops, shipped in both tiers.
 
 ## Status legend
 
