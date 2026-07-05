@@ -1,6 +1,6 @@
 ---
 name: writing-voice-modes
-description: Writing voice and tone control calibrated to Sean's personal style. Default is Sean Mode — Sean's own dive-bar-grit voice (90%) with four author techniques borrowed sparingly (10%): Domestic Observer (Sedaris), Gonzo Technical (Thompson), Beat Flow (Kerouac), Minimalist Absurdist (Vonnegut). Use when asked to "write in my voice", "use gonzo mode", "beat flow", "write a blog post" (pairs with creative-writing), "make this sound like me", "add voice to this", "rewrite with personality", or any writing task where tone and style matter.
+description: Writing voice and tone control calibrated to Sean's personal style. Default is Sean Mode — Sean's own dive-bar-grit voice (90%) with four author techniques borrowed sparingly (10%): Domestic Observer (Sedaris), Gonzo Technical (Thompson), Beat Flow (Kerouac), Minimalist Absurdist (Vonnegut). The SENTENCE author of the Substack chain; every voice write commits to a mode + dial before composing, self-checks for register drift before handoff, and states its voice decisions with the draft. Use when asked to "write in my voice", "use gonzo mode", "beat flow", "write a blog post" (pairs with creative-writing), "make this sound like me", "add voice to this", "rewrite with personality", "dial this to 60%", "make this recruiter-safe", or any writing task where tone and style matter.
 ---
 
 # Writing Voice Modes
@@ -9,6 +9,8 @@ description: Writing voice and tone control calibrated to Sean's personal style.
 
 Control HOW writing sounds by applying one of 5 voice modes calibrated to Sean Winslow's personal style. This skill works alongside `creative-writing` (format/structure) and `technical-writing` (audience/clarity). Voice modes add personality, rhythm, and tone within those frameworks.
 
+The skill has two jobs, and the second is as binding as the first: **compose** prose in the right register, and **carry the voice decisions visibly** — commit to a mode and dial before writing, catch register drift before handoff (not a stage later in `writing-critique`), and state what was chosen alongside the draft so nobody downstream has to reverse-engineer intent from prose. The Voice Write Workflow below is the spine; every section after it is reference material the steps point into.
+
 ## When to Use
 
 - Writing blog posts, essays, newsletters, or social media with a distinct voice
@@ -16,7 +18,53 @@ Control HOW writing sounds by applying one of 5 voice modes calibrated to Sean W
 - Choosing which voice mode fits a content type or audience
 - Combining techniques from multiple modes for hybrid effects
 - Dialing voice intensity up or down for professional vs. personal contexts
+- As the SENTENCE author in the Substack chain: a beat map arrives from `storytelling-architecture` + `substack-value-engine`, and this skill writes every line against it (see Related Skills)
 - Any writing task where "make this sound like me" is the goal
+
+## The Voice Write Workflow (five steps, every run)
+
+Everything below this section is reference material — modes, register, moves, anti-patterns. This is the procedure that uses them. It applies to standalone asks and chain runs alike; headless runs (e.g. Substack-Drafter) walk the same steps with nobody to interrupt, which makes Step 1's statement and Step 5's record more important, not less.
+
+### Step 1 — Commit: name the mode and dial before any prose exists
+
+State, in one line before composing: **mode + dial % + the audience that sets it** (choose via the Professional Dial and the Content Type → Mode Mapping below). The default is Sean Mode; reach for a named author mode in full only when the piece explicitly calls for it. If the ask or an upstream brief already pins mode or dial ("dialed to 60%", a per-piece override, the drafter's weekly rotation), honor the pin — restate it, don't re-decide it.
+
+> Committing: Sean Mode at 60% — team Slack update, comfortable colleagues.
+
+Interactively this gives Sean one beat to redirect before prose exists: a wrong mode caught here costs one line; caught after composition it costs the draft. State it and write — don't stop to ask for approval.
+
+### Step 2 — Load: read what this piece needs
+
+Follow the References section's reading rules — they are conditional (which file, when) and mandatory, not optional context. Nearly every Substack piece trips the reference-universe rule; any full-intensity piece re-reads House Style first. The standing law: **the samples and reference universe lead; this file's mechanics annotate.** In a run that cannot read files (a pure-LLM headless call), skip what can't be loaded and say so in the record's Gate line — never fake a reference pull.
+
+### Step 3 — Compose
+
+Write the piece. Chain mode: the beat map binds — author every sentence fresh against it, never reorder beats. Standalone: format constraints bind per Integration Rules. As each section lands, pressure its last line (scene-button discipline, per Success Criteria) — and while stopped there, run Step 4's register checks on that section. Drift is cheapest to catch at the section boundary you're already standing on, not in a full-draft rewrite at the end.
+
+### Step 4 — Gate: the pre-handoff drift check (self-edit; fix in place)
+
+Before calling the draft done, walk four checks. Any failure → fix in place, then re-check. This is a self-edit against this file's own rules, not a second critique gate: no analyzer, no verdict, no findings list. Measurement stays owned by `writing-critique`, one stage later — this gate exists so obvious drift never reaches it.
+
+1. **Register hold (House Style).** Still dive-bar, or has it slid refined / literary / villa-in-golden-hour? Check against the House Style bullets, not instinct. Slid → cut back toward the bar.
+2. **90/10 spine check.** Point at the connective tissue between the highlights: is it Sean's own narration, with a borrowed technique surfacing here and there? If any single author's register owns a paragraph or more, the mix is wrong (over-Sedaris is the usual offender) — rewrite that stretch as Sean.
+3. **Anti-pattern sweep.** Walk the Anti-Patterns table against the draft. The high-frequency catches: Reference Gorging (run the woven-vs-swappable test on every reference), Lexical Repetition, Prop Recycling, Limp Deflation, Clever-Metaphor Wit.
+4. **Do-Not-Promote sweep.** Confirm no suppressed-by-default topic appears — as stakes, motivation, aside, or ask — unless Sean explicitly asked for it in THIS piece (if he did, name that ask in the record).
+
+### Step 5 — State: emit the Voice Decision Record with the draft
+
+Deliver the prose, then a short labeled block stating what was chosen. It records choices, never quality judgments, and it is metadata riding with the draft — never part of the published text.
+
+```
+VOICE DECISION RECORD
+Mode: Sean Mode (default)
+Dial: 60% — team Slack, comfortable colleagues
+Moves deployed: Callback Closer (last line echoes the staging open) · Rule of Three + Pivot (§2)
+Borrowed techniques: Kerouac breath-marks (§3 momentum run); none dominant
+Do-Not-Promote: clean
+Gate: run — over-Sedaris pull in §4 rewritten
+```
+
+Each field has a consumer: mode / dial / techniques are what Sean or a chain orchestrator carries forward at the handoff (transport across the chain is the invoker's job, not this skill's); the named move instances tell a later scrub which patterns were deliberate; the last two lines prove the sweeps actually ran. For micro-pieces (one paragraph or less), the Step 1 line doubles as the record — restate it under the text with any moves used. On a critique-routed revise, re-run Step 4 on the changed spans and re-emit the record.
 
 ## Examples
 
@@ -199,6 +247,8 @@ Voice intensity adjusts by context. Sarcasm is ALWAYS present.
 
 ## Content Type → Mode Mapping
 
+Read this table through the framing note in The 5 Voice Modes: it names which technique vocabulary to borrow FROM for each content type, not which author to write AS. Sean Mode stays the base; the named mode supplies the moves.
+
 | Content Type | Primary Mode | Secondary Mode |
 |---|---|---|
 | Blog post / product review | Thompson (Quest + Cold Open) | Kerouac (breath-mark rhythm) |
@@ -228,7 +278,7 @@ This skill controls HOW writing sounds. `creative-writing` controls FORMAT (stru
 | Mode wants sensory detail, format says brevity (tweet, Slack) | One sensory image maximum. Pick the jewel center. Cut the cascade. |
 | Mode wants a refrain, format is short-form | Deploy the refrain twice maximum (setup + payoff). Three needs runway. |
 
-**The one exception:** Personal essays and blog posts on Sean's own site. Here, voice modes lead and format follows. The mode shapes the structure. `creative-writing` provides the skeleton (hook, sections, closer), but the mode can reshape that skeleton if the piece demands it.
+**The one exception:** Personal essays and blog posts on Sean's own site. Here, voice modes lead and format follows. The mode shapes the structure. `creative-writing` provides the skeleton (hook, sections, closer), but the mode can reshape that skeleton if the piece demands it. That license covers `creative-writing`'s format skeleton only: a beat map arriving from `storytelling-architecture` is never a skeleton this skill may reshape — beat order binds at every dial (see Related Skills).
 
 ## Complementary Technique Pairs
 
@@ -285,7 +335,7 @@ The mode descriptions and signature moves in this file teach the HOW; the refere
 
 ## Related Skills
 
-This skill is the SENTENCE author in the Substack chain: `storytelling-architecture` → `substack-value-engine` → **`writing-voice-modes`** → `writing-critique` → `writing-humanity-pass`. The two upstream skills emit a beat map (story shape + value gate); voice-modes writes 100% of the prose fresh against it and must never reorder beats. The downstream `writing-critique` gate may route ONE grounded revise request back here ("revise against [this specific finding]"); voice-modes writes that revision, still without reordering beats.
+This skill is the SENTENCE author in the Substack chain: `storytelling-architecture` → `substack-value-engine` → **`writing-voice-modes`** → `writing-critique` → `writing-humanity-pass`. The two upstream skills emit a beat map (story shape + value gate); voice-modes writes 100% of the prose fresh against it and must never reorder beats. The downstream `writing-critique` gate may route ONE grounded revise request back here ("revise against [this specific finding]"); voice-modes writes that revision, still without reordering beats. At the seam, this skill's output is two things: the voiced draft and the Voice Decision Record (Workflow Step 5). Carrying them forward belongs to whoever invoked the skill — Sean in an interactive session, the orchestrating agent in a chain run. This skill states its decisions; it does not own the transport.
 
 - `storytelling-architecture`: Upstream. Owns story ORDER and the beat map; voice-modes owns the SENTENCES. The handoff is lossy on prose by design (no drafted lines come forward), so voice is not flattened. Receive the beat map, author every line.
 - `substack-value-engine`: Upstream. Owns the Value Gate (Itch/Solution/Transfer) and the narrative-to-value seam. It decides the pivot line's JOB; voice-modes writes the line. Its "ask lands sideways" rule defers to this skill's **Desperation Posing as Self-Deprecation** anti-pattern (this skill owns the tone; value-engine owns the structural gate).
@@ -305,6 +355,9 @@ This skill is the SENTENCE author in the Substack chain: `storytelling-architect
 - [ ] Humor serves the point, not the other way around
 - [ ] Closers are the strongest line in the piece
 - [ ] Every section's last line gets the same pressure (scene-button discipline — per section, not just the finale; a deflation or an appalling pivot, never a summary)
+- [ ] Mode + dial + audience stated in one line before composing (Workflow Step 1)
+- [ ] The pre-handoff gate ran — register hold, 90/10 spine, anti-pattern sweep, Do-Not-Promote sweep — with failures fixed in place (Workflow Step 4)
+- [ ] Voice Decision Record emitted with the draft, listing only moves actually deployed (Workflow Step 5)
 
 ## Copy/Paste Ready
 
@@ -316,4 +369,5 @@ This skill is the SENTENCE author in the Substack chain: `storytelling-architect
 "Write a newsletter intro in Sean Mode"
 "Apply Domestic Observer to this draft"
 "This is too flat, add voice"
+"Make this recruiter-safe: dial to 40%, swap the cusses, keep the bite"
 ```

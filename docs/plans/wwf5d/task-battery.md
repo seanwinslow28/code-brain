@@ -150,6 +150,25 @@ Harness: `prd-generator` skill (interview-driven — its own interview is the gr
 
 Harness: `systematic-debugging` skill (its own investigation loop is the grounding step; no Q&A is pre-pinned here). Candidate: Vault Synthesizer / knowledge-lint Tier-2 intermittency when the MBP is asleep — Wake-on-LAN was retired as a fix path, and per-agent skip-and-continue logic (`agents-sdk/agents/vault_synthesizer.py`, `agents-sdk/agents/knowledge_lint.py`) has papered over the underlying reachability gap rather than resolving it. No Opus baseline generated this window.
 
+**PINNED 2026-07-05 (Phase B Slice-3 reclaim — paired same-day runs).** Baseline and blind run launched in parallel from one orchestrator (`model=opus` / `model=fable` subagents), identical working tree (post-Slice-2, commit `d15b736`), identical prompt except the output path — which kills the pin-drift risk the CORE tasks managed with SHAs. Design notes for fairness on a *debugging* task: the symptom statement and a four-file starting read set are pinned; the investigation path beyond it is deliberately free (read-only) and each run must log its evidence trail, because the path itself is the measured behavior. The harness is the freshly-elevated systematic-debugging SKILL.md — double duty: the pair also live-trials the Slice-2 elevation (Evidence Block gates) on both models.
+
+1. **Harness:** `.claude/skills/systematic-debugging/SKILL.md` @ working tree (`d15b736` or later).
+2. **Pinned symptom:** as given verbatim in the run prompt below.
+3. **Pinned starting read set:** `agents-sdk/agents/vault_synthesizer.py`, `agents-sdk/agents/knowledge_lint.py`, `agents-sdk/lib/hybrid_router.py`, `agents-sdk/config.toml`.
+4. **Run prompt** (identical for both runs except `<OUTPUT-PATH>` = `docs/plans/wwf5d/baselines/bt5-opus.md` for the baseline, `docs/plans/wwf5d/fable-runs/bt5-fable.md` for the blind run):
+
+   > Read and follow `.claude/skills/systematic-debugging/SKILL.md` from the working tree of the code-brain repo (tree state: commit `d15b736` or later). Apply it to a real, currently-unsolved fleet problem — this is diagnosis and spec only; do not fix anything.
+   >
+   > Symptom (pinned): two scheduled agents degrade intermittently because their Tier-2 model host is unreachable: Vault Synthesizer (02:30 daily) and Knowledge Lint Tier 2 (Sunday 22:00) call Qwen3-14B served from the MacBook Pro, which succeeds only when the MBP happens to be awake. Wake-on-LAN was retired as a fix path. Per-agent skip-and-continue logic has papered over the reachability gap rather than resolving it — runs "succeed" with Tier-2 work silently skipped. The owner wants a root-cause diagnosis and an intent-carrying fix spec, not another patch.
+   >
+   > Starting read set (pinned — read all four before hypothesizing): `agents-sdk/agents/vault_synthesizer.py` · `agents-sdk/agents/knowledge_lint.py` · `agents-sdk/lib/hybrid_router.py` · `agents-sdk/config.toml`.
+   >
+   > Investigation freedom: from there, follow the evidence anywhere in this repo (docs, logs, health manifests, plists, `vault/health/*.json`) — read-only. Short-timeout (≤5s) local reachability probes are permitted; no state changes, no restarts, no installs, no edits, no git operations. Do NOT read `docs/plans/wwf5d/baselines/` or `docs/plans/wwf5d/fable-runs/` (parallel-run isolation). Log every file you consulted in an "Evidence read" appendix — the investigation path is part of the record.
+   >
+   > Output: write your complete output to a single markdown file at `<OUTPUT-PATH>`: the skill's Evidence Block and phase outputs, the root cause (symptom vs cause made explicit), and an intent-carrying fix spec for a weaker implementing model (objective / root cause / change / what NOT to change, done-criteria, edge cases). Diagnosis only — implementation happens later, with separate authorization.
+
+5. **Baseline:** `docs/plans/wwf5d/baselines/bt5-opus.md` (generated 2026-07-05, same-day pair).
+
 ---
 
 **Next steps (outside this doc's scope).** Step 2 (baseline generation): for BT1–BT3, run each task's exact Run Prompt now, in a fresh session per task, and save the full output to the Baseline path listed. Step 3 (verify) and the validation harness / Phase-B Fable runbook are separate WWF5D artifacts (Task 7).
