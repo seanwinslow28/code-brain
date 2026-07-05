@@ -86,6 +86,12 @@ Recommendations:
 
 Always run the clarifying interview before generating a PRD.
 
+### Pre-Interview Inference Pass (Do This First)
+
+Before asking anything, read what the user already gave you — the request itself, pasted meeting notes, a linked doc, prior tickets, or context from earlier in the conversation. Pre-fill every interview answer you can infer from that material, then **ask only the questions the context left genuinely unanswered.** Show the user the answers you inferred ("Here's what I picked up: user = internal analysts; trigger = Q3 support-ticket spike — correct me on any of these") so they can fix a wrong inference in one line instead of re-typing what they already told you.
+
+This is what separates an adaptive interview from a rote checklist: a senior PM doesn't re-ask what the brief already states. If the request answers all six core questions, skip straight to Approach Exploration with your inferred answers stated for confirmation. Never ask a question the provided context already answers.
+
 ### Interview Style
 
 - Ask questions **one at a time** (not all at once)
@@ -128,15 +134,25 @@ For crypto/fintech features, also ask:
 
 After the interview, before writing the PRD:
 
-1. **Propose 2-3 different approaches** with trade-offs for each
-2. **Lead with your recommended option** and explain why
-3. **Get user approval** on approach before proceeding to the full PRD
+1. **Propose 2-3 different approaches**, and for each name the specific thing it trades away — cost, latency, complexity, time-to-ship, or flexibility. "Trade-offs" in the abstract reads junior; "Option B ships in a week but locks us to one vendor's export format" reads senior.
+2. **Lead with your recommended option** and state what it sacrifices and why that sacrifice is the right call here — an opinion a reader can push back on, not a hedge.
+3. **Get user approval** on the approach before proceeding to the full PRD.
 
-This prevents wasted effort on specs that solve the wrong problem or use the wrong architecture.
+This prevents wasted effort on specs that solve the wrong problem or use the wrong architecture. When the chosen approach and its rejected alternatives matter beyond this doc, hand the decision plus rationale to the `decision-doc` skill so the "why we didn't do B" survives.
+
+## Writing Testable Acceptance Criteria
+
+Acceptance criteria are the part a hiring manager and an engineer both check hardest, so write every one to be *falsifiable by construction*, not as an aspiration:
+
+- Each criterion states an observable behavior with a pass/fail boundary — a specific input or state, the expected output, and a threshold where one applies. "Export is fast" is not testable; "a CSV of 10k rows downloads in <3s p95" is.
+- Prefer Given/When/Then for anything with a precondition ("Given a filtered view, when the user clicks Export, then only the filtered rows are in the file").
+- Before emitting the PRD, self-check each criterion: could QA write a pass/fail test from this line **alone**, with no clarifying question? If not, rewrite it — add the metric, the boundary, or the missing observable. A line that survives this check is done; one that doesn't is a defect you're shipping to the reader.
+
+Do this at generation time, not only in the validation pass — an untestable criterion caught by the reader instead of by you is exactly the failure this prevents.
 
 ## PRD Template
 
-Generate PRDs with these sections. Adapt depth to scope (S = lighter, L = comprehensive):
+Generate PRDs with these sections. Adapt depth to scope (S = lighter, L = comprehensive). **The template is a floor to adapt, not a form to fill** — a hiring manager has read a thousand rote "Executive Summary / Goals / Non-Goals" decks, so lead with the sharpest problem framing, cut any section that would be boilerplate for this specific PRD, and never pad a section just because it's on the list. What reads as senior-PM work is the thinking in the Problem Statement and the tradeoffs, not the completeness of the headings.
 
 ```markdown
 # [Feature Name] PRD
@@ -192,7 +208,7 @@ Generate PRDs with these sections. Adapt depth to scope (S = lighter, L = compre
 
 ## Technical Spec Template
 
-Generate after PRD is approved. Translates "what" into "how":
+Generate after PRD is approved. Translates "what" into "how". Use the inline template below for a quick, self-contained handoff; for a deeper engineering spec, hand the approved PRD to the `tech-spec` skill (it consumes a PRD whose acceptance criteria and non-functional requirements are already filled in — which this one produces). Either way, run the finished doc past the `doc-reviewer` agent before sharing: it checks the same completeness / clarity / actionability bar recruiters and engineers will, and catching a gap there beats catching it in the meeting.
 
 ```markdown
 # Technical Specification: [Feature Name]
