@@ -7,6 +7,65 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### BT5 Phase C — Tier-2 reachability fix: owner forks decided (2026-07-05)
+- **Both owner forks from the BT5 diagnosis are resolved** (Sean, on the Mac Mini — the
+  scheduler/driver host where `vault-synthesizer` + `knowledge-lint` actually load; the
+  MBP is only the Tier-2 model host). Diagnosis + spec: `docs/plans/wwf5d/fable-runs/bt5-fable.md`
+  (primary), `docs/plans/wwf5d/baselines/bt5-opus.md` (independent baseline),
+  `docs/plans/wwf5d/fable-runs/bt5-diff.md` (convergence/split). Handoff prompt:
+  `docs/plans/wwf5d/bt5-mac-mini-fix-prompt.md`.
+- **Fork 1 — lint Tier-2 LLM leg: WIRE IT.** The `soul-tier-a-conflict` capability that
+  CLAUDE.md advertises as HIGH has never run in production (`knowledge_lint.py` `main()`
+  passed no `llm_caller`; born unwired at `6ad8ce3`). Decision: make the advertised
+  capability real rather than retire it — "never fired" reflects that it never executed,
+  not that it ran and found nothing. Implemented as **C3** (its own PR: adds a production
+  `llm_caller`, injects a concept corpus into `_build_tier2_prompt`, and replaces the LLM
+  block's silent `except Exception: pass` with logged/reported failures).
+- **Fork 2 — synthesis host binding: STAY ON MBP + C5 catch-up.** Rejected relocating
+  `vault_synthesis` to the always-on Mac Mini (would require a smaller model first clearing
+  `evals/vault-synthesizer/` — a quality-regression risk v3.14.3 deliberately avoided).
+  Kept MBP-class capacity; off-LAN misses become cheap, typed `wol-deferred` deferrals that
+  self-re-queue (the 2026-06-23 catch-up ran 52 files/45 concepts — the implicit re-queue
+  already converges within days). A gated same-day catch-up fire (**C5**) is deferred until
+  after ≥1 week of observation per the rollout order.
+- **Rollout (per spec):** C1+C2 (route once/run + fail-fast + circuit breaker + resurrect the
+  dead `wol-deferred` deferral path + ≤1 notification honoring `[notifications].notify_on`)
+  → C4 (manifest `host_probe` field + status truthfulness + consumer sweep incl. the
+  substack-drafter dry-threshold) → C3 (lint wiring) → observe ≥1 real week (done-criterion
+  6: zero `status=error`+`model_used=none` misses; any miss presents as `wol-deferred`,
+  `duration_seconds < 180`) → decide C5. Hard non-goals held: no paid-API fallback, no WOL
+  resurrection, no relocation of synthesis/lint-T2 off the MBP, exit 0 on environmental
+  deferral. Also lands the CLAUDE.md agents-table correction (Tier-2 model is
+  `qwen3.6_35b-a3b-32k` since 2026-05-26, not Qwen3-14B; "skip-and-continue" falsified) and,
+  separately, the `_normalize_model_name` stale-enum fix.
+- **C1+C2 shipped (2026-07-05).** `vault_synthesizer.main()` now resolves the Tier-2 route
+  **once per run** before the per-file loop (`route_to_macbook` hoisted out of the per-prompt
+  caller); on an unreachable host it takes the resurrected typed-deferral path (writes one
+  `wol-deferred` manifest, `record_run status="deferred"`, indexer state NOT advanced so the
+  work re-queues, exit 0). `_default_llm_caller_factory` now binds to a pre-resolved
+  `RoutingDecision` (bounded 10s connect / 600s read) instead of routing per file. Added a
+  mid-run circuit breaker in `run_synthesis` (`host_probe` param): after K=2 consecutive
+  per-file failures it re-probes once and stops — `partial`/`partial-empty` on host loss,
+  no 90s-poll-per-remaining-file. `route_to_macbook` gained a `notify_on` gate
+  (`_should_notify_host_unreachable`): silent by default (honors `[notifications].notify_on`,
+  where `wol_failure` was removed in v3.14.3), `host_unreachable` opts back in; legacy
+  callers (flush) unchanged. New suite `tests/test_bt5_tier2_deferral.py` (8 tests,
+  failing-test-first); full agents-sdk suite green (926).
+- **C4 shipped (2026-07-05).** Added a first-class `host_probe` outcome to the synth manifest
+  (`SynthesisResult.host_probe`: `"ok"` | `"unreachable"` | `"lost-mid-run"`) so a Tier-2 miss
+  can never again be mislabeled a generic `error`. Consumer sweep:
+  `substack_drafter.is_synthesizer_dry` now treats `wol-deferred` / host-unreachable nights as
+  **non-dry** (a deferral isn't evidence the synthesizer ran empty — it didn't run), so a run
+  of off-LAN weekends can't wrongly suppress the drafter; `fleet_summary` gained a `⏸ deferred`
+  badge so the daily note surfaces a deferral distinctly (verified `meta_agent` already passes a
+  `deferred` CSV status through as its own state, not `error`/`healthy`). Cosmetic enum fix:
+  `_normalize_model_name` maps the real Tier-2 model (`qwen3.6_35b-a3b-32k`, since the
+  2026-05-26 Ollama swap) to a new `qwen3.6-35b-a3b-32k` enum instead of the historical
+  `qwen3-14b`; `MODEL_USED_VALUES` + the `evals/vault-synthesizer/cases.yaml` `model_used`
+  contract extended to accept both. CLAUDE.md agents-table: corrected the Vault Synthesizer +
+  Flush rows (model name + typed-deferral semantics; "skip-and-continue" falsified). Suite
+  green (929).
+
 ### CLAUDE.md — retire the Obsidian-Git vault-ownership rule (2026-07-05)
 - **Deleted Non-Negotiable rule 8** ("Obsidian-Git is the sole owner of vault
   auto-commit; agents must never `git add/commit` the vault directly"). Obsidian-Git

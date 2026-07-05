@@ -110,13 +110,13 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Cla
 | Agent | Schedule | Skills/Model | Cost/Run |
 |-------|----------|---------------|----------|
 | Vault Indexer | 2:00 AM daily | nomic-embed-text (Mac Mini Ollama) | $0.00 (local) |
-| Vault Synthesizer | 2:30 AM daily | Qwen3-14B on MBP (intermittent — succeeds only when MBP awake; WOL retired) | $0.00 (local) |
+| Vault Synthesizer | 2:30 AM daily | `qwen3.6_35b-a3b-32k` on MBP-Ollama (Tier-2; WOL retired). Off-LAN nights defer cleanly (BT5, 2026-07-05): one 90s route pre-flight → typed `wol-deferred` manifest, exit 0, indexer state held so the work self-re-queues — **not** the old poll-storm `error`. A mid-run host loss trips a circuit breaker → `partial`. | $0.00 (local) |
 | Deep Researcher | 2:45 AM daily | LDR + SearXNG + Qwen3-14B GGUF (Q4_K_M, `qwen3-14b-research:latest` Modelfile with `/no_think`) via Ollama on Mac Mini at `localhost:5050`. Hard 900s timeout — heavy compound topics must route to Gemini DR/DR Max (see routing rule below). | $0.00 (local) |
 | Vault Critic | 3:30 AM daily | Codex CLI (gpt-5.5, ChatGPT Plus) + Anti-Gravity CLI (Gemini 3.1 Pro, Google personal OAuth) via parallel subprocess shell-out; no Claude SDK in the nightly path | $0 (subscriptions absorb) |
 | Daily Driver (morning) | 8:30 AM daily | daily-driver, vault-read-write + operating-model HEARTBEAT awareness | ~$0.40 (cap $0.60) |
 | Meta-Agent (fleet health) | 8:45 AM daily (runs *after* daily-driver to eliminate the `Daily note exists: No` race) | gemma4:e4b (Mac Mini Ollama) + local health checks + schedule-recommendations context | $0.00 (local) |
 | Knowledge Lint | Sunday 22:00 | Tier 1 structural Python checks (Mac Mini); Tier 2 Qwen3-14B on MBP if awake; 3-domain SOUL context for `soul-tier-a-conflict` issue kind | $0.00 (local) |
-| Flush (SessionEnd) | hook-triggered | gemma4:e4b on Mac Mini via `inbox_triage` routing for <100-msg sessions; ≥100-msg sessions attempt Qwen3-14B on MBP if awake; 3-domain SOUL prepend | $0.00 (local) |
+| Flush (SessionEnd) | hook-triggered | gemma4:e4b on Mac Mini via `inbox_triage` routing for <100-msg sessions; ≥100-msg sessions attempt `qwen3.6_35b-a3b-32k` on MBP if awake; 3-domain SOUL prepend | $0.00 (local) |
 | Gemini Researcher (**default disabled**) | 03:30 daily (when `INSTALL_GEMINI=1`) | Gemini DR / DR Max via `gemini_dr.run` | $0–7/run; capped $7 task / $10 day / $20 month |
 | Job Feed | 8:00–11:00 AM (7 fires) | Qwen3-14B on MBP via HybridRouter (`fallback_disabled=true`); 4 free public feeds + ~40-company ATS watchlist; SQLite + Markdown roll-up; optional Gmail email digest (`[notifications.email]`, opt-in, `lib/job_email.py`) + instant Pushover push on strong fits (`[notifications.push_strong_fits]`, opt-in) | $0.00 |
 | Skill Optimizer (**manual-trigger only**) | manual (`agents-sdk/agents/skill_optimizer.py`) | Opus 4.7 generation + Qwen3-14B local judge + Sonnet 4.6 sample-check every 5 iters; autoresearch loop on a single SKILL.md | $20–145/run (cap $200) |
