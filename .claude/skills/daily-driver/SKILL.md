@@ -16,6 +16,15 @@ Act as a personal assistant that bookends each day: morning planning to set prio
 - End of day (review, compress context, plan tomorrow)
 - Weekly planning (review the week's daily notes, set next week's goals)
 
+## Execution Modes
+
+This skill runs in two modes, and the difference is deliberate:
+
+- **Scheduled / headless** — the 08:30 launchd run driven by `agents-sdk` loads this file as a system prompt. It is fully autonomous: never ask a question (a prompt for input silently hangs the run), infer every decision from the vault, and make the best-judgment call. The agent's Zero-Interaction Mandate enforces this; every protocol below assumes it.
+- **Interactive** — "start my day" in a session. Same infer-first default: read the written record before asking. Surface a choice only when the vault genuinely can't disambiguate, and never block the plan waiting on it.
+
+In both modes the daily note is the source of truth — infer from what's written rather than re-asking what's already recorded.
+
 ## Vault Paths
 
 ```
@@ -35,6 +44,8 @@ Daily notes use these anchors for programmatic injection (PATCH, not PUT):
 | `<!-- jira-log -->` | Work Log | Jira activity summaries |
 | `<!-- claude-sessions -->` | Claude Code Sessions | Session entries with inline Dataview fields |
 | `<!-- side-projects -->` | Side Project Notes | Creative/R&D progress |
+| `<!-- fleet-overnight -->` | Fleet Overnight | Overnight agent digest (new concepts/connections/research + latest lint), injected verbatim by the 08:45 headless run — the meta-agent reads this section |
+| `<!-- agent-error -->` | (error log) | Headless-run error entries (timestamp, mode, description) when an MCP or file operation fails |
 
 Weekly notes use:
 
@@ -57,6 +68,8 @@ Reading yesterday's daily note... Found 2 open loops:
 2. Finish v0 of intent-engineering MCP server (60% done)
 
 Reading your calendar... 1 recruiter screen today at 2pm.
+
+Reading the overnight fleet digest... vault-critic flagged a contradiction between two [[intent-engineering]] concepts — promoting it to a Quick Win; nothing else in the digest needs a slot today.
 
 ## Today's Plan
 1. [Deep Work] Intent-engineering MCP server v0 — analyze_intent_spec tool (90 min)
@@ -134,6 +147,8 @@ When this step is re-enabled (new workspace exists), the historical pattern is p
 
 ### Step 2: Prioritize with the 1-3-5 Rule
 
+**First, triage the overnight fleet results into the plan.** Before filling the 1-3-5, read what Step 1 gathered — the fleet-overnight digest at `<!-- fleet-overnight -->`, the Vault Health / vault-critic / job-feed lines in the morning brief, and the loaded HEARTBEAT rhythm. For each overnight signal decide explicitly: promote it into today's plan (a critic-flagged contradiction worth resolving, a strong-fit job to act on, a due status checkbox) or park it (note it and move on). A plan that ignores the overnight digest is the generic-productivity-app failure this skill exists to avoid. Then place the **1** big deep-work thing in the day's real energy-peak / HEARTBEAT deep-work window, not just first on the list.
+
 Structure the day as:
 - **1** big thing (deep work, 60-90 min block)
 - **3** medium things (30 min each)
@@ -160,6 +175,8 @@ Create or update `vault/10_timeline/daily/YYYY-MM-DD.md` using the template at `
 - Claude Code Sessions with `<!-- claude-sessions -->` anchor
 - Side Projects with `<!-- side-projects -->` anchor
 - Evening Reflection section
+
+**Write for the downstream readers.** The meta-agent reads this note at 08:45 to report fleet health, so the fleet-overnight digest must be present and injected verbatim — never summarized or paraphrased. Tomorrow's morning run and the EOD review both look for open loops and carry-forward in the Evening Reflection section; put them there, not buried in prose, so the next reader finds them.
 
 ### Writing to Anchors
 
@@ -189,10 +206,10 @@ Update the daily note with:
 
 ### Step 3: Stage Tomorrow
 
-Add a `**Carry forward:**` entry in Evening Reflection with:
-- Carry-over tasks (uncompleted must-dos)
-- New items that surfaced during the day
-- Any time-sensitive deadlines
+Write the Evening Reflection section so it matches what the scheduled evening run produces and what tomorrow's morning run reads:
+- **Win:** the biggest accomplishment today (counterbalance to the application-rejection ride)
+- **Lesson:** what you'd do differently
+- **Carry forward:** carry-over tasks (uncompleted must-dos), new items that surfaced during the day, and any time-sensitive deadlines
 
 ## Mid-Day Check-In
 
@@ -218,6 +235,7 @@ On Friday or Sunday, prompt:
 ## Success Criteria
 
 - [ ] Morning planning produces a prioritized daily note
+- [ ] The plan reflects the overnight fleet digest — actionable results are triaged into the 1-3-5 or explicitly parked, never silently ignored
 - [ ] Job-hunt + deep-work brief surfaces the five Step 1a signals (status / interview events / deep-work focus / status-checkboxes due / yesterday's wins) when the job hunt is active
 - [ ] Slack overnight scan no-op is honored (no errors against revoked workspaces); when re-enabled, classifies messages as Action Required / FYI / Skip and writes to `<!-- slack-overnight -->` anchor (excludes bot noise + already-replied messages)
 - [ ] EOD review captures open loops and stages tomorrow
