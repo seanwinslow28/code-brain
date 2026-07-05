@@ -74,10 +74,15 @@ Each critiques execution and defers to the owning skill; never re-litigates the
 premise.
 
 1. **Structure** → defers to `storytelling-architecture` (hook, but/therefore
-   seams, open-loop closure, slippery-slide ends).
+   seams, open-loop closure, slippery-slide ends). When storytelling's
+   **open-loop ledger** is present in context, check closure against it by name:
+   a ledger loop with no close in the draft is a blocking structural finding, not
+   a matter of taste.
 2. **Value** → defers to `substack-value-engine` (Itch/Solution/Transfer
    delivered, seam is payoff not appendix, Rule-of-One, one usable thing in 10
-   minutes).
+   minutes). When the named **Value Gate verdict** is present, re-check each slot
+   actually landed in the voiced draft (especially that the Transfer's artifact is
+   really there) — verify, do not re-run the gate.
 3. **Voice** → defers to `writing-voice-modes` (signature moves present vs
    generic narrator; register drift).
 4. **Prose / line** → rhythm, sentence variety, repetition, clarity, AI-flatness.
@@ -117,10 +122,28 @@ gains a calibration round, re-extract the new Sean prose into
 `python3 references/analyze.py --emit-baseline references/baseline-corpus.md --out references/baseline.json`.
 The MATTR window is locked at 50; do not tune it.
 
-## Verdict
+## Verdict (binding on the findings, never softened)
 
 Always explicit, exactly one of: `ship` / `revise` / `structural-rework`, plus the
 single highest-leverage fix in one sentence.
+
+The verdict is a *function of the findings*, not a judgment call. Softening it to
+spare the writer is the exact sycophancy this skill is built to resist:
+
+- Any unresolved **blocking or major reader-cost** finding forbids `ship`. A draft
+  with a real defect cannot be stamped ship because the rest is strong.
+- A failed **structure or value gate** (a ledger loop left open, a Value Gate slot
+  that did not land) forces `structural-rework`, not `revise`. `revise` is for
+  line-and-execution fixes; a broken spine is not a line fix.
+- `ship` requires zero unresolved blocking/major findings. When torn between two
+  verdicts, pick the more severe: a false `ship` ships slop, a false `revise`
+  costs one more pass.
+
+**Selecting the single highest-leverage fix.** It is the finding with the highest
+*reader cost × reach*, never the most visible or the easiest one. Validate it: *if
+only this were fixed, would the draft clear the ship bar?* If yes, it is the right
+fix. If no, either you picked a lower-leverage one, or the true verdict is
+`structural-rework` and no single line-fix rescues the draft. Say which.
 
 ## The chain after this change
 
@@ -135,6 +158,14 @@ informs the revise decision; humanity-pass still does the qualitative scrub
 afterward. Critique is advisory, never rewrites, caps at one grounded revise pass,
 and hands off in-context.
 
+**The handoff forward is a named artifact — the critique fix list:** the findings
+carried forward, the single highest-leverage fix, and the verdict. It travels to
+`writing-humanity-pass`, which treats any prose change made to satisfy a critique
+finding as protected — the final scrub must not undo the gate's work (a blunt
+sentence a fix introduced can read like a tell but was a reader-cost decision).
+Emit the fix list so the last stage preserves those fixes instead of regressing
+them.
+
 ## Related Skills
 
 - `storytelling-architecture`: owns structure; this skill critiques structural
@@ -144,9 +175,10 @@ and hands off in-context.
 - `writing-voice-modes`: owns the sentences and Sean's signature moves; this skill
   routes a grounded revise request back here, and treats signature moves as
   defensible choices, not defects.
-- `writing-humanity-pass`: runs after this skill. Its `references/ai-tells.md`
-  evidence stratification shares this skill's measurable signals (burstiness,
-  MATTR, pronoun rate) and the same analyzer.
+- `writing-humanity-pass`: runs after this skill. It consumes this skill's
+  **critique fix list** and protects those fixes from the scrub. Its
+  `references/ai-tells.md` evidence stratification shares this skill's measurable
+  signals (burstiness, MATTR, pronoun rate) and the same analyzer.
 
 ## Attribution
 
@@ -175,7 +207,12 @@ the baseline pipeline are new additions, not ports.
       the chain gate.
 - [ ] Severity-ranked floor honored: a strong draft yields fewer findings, never
       invented ones; praise is capped to one line.
-- [ ] Verdict is explicit (`ship` / `revise` / `structural-rework`) + the one fix.
+- [ ] Verdict is explicit (`ship` / `revise` / `structural-rework`) + the one fix,
+      and binding on the findings: no `ship` with an unresolved blocking/major
+      finding; a failed structure/value gate forces `structural-rework`.
+- [ ] The single highest-leverage fix is the highest reader-cost × reach finding,
+      validated by the "if only this were fixed, would it ship?" test.
+- [ ] The critique fix list is emitted for `writing-humanity-pass` to preserve.
 - [ ] The skill never rewrites; fixes route to voice-modes / humanity-pass / Sean.
 - [ ] Headless runs emit the machine-readable verdict block.
 - [ ] The analyzer stays advisory; burstiness/MATTR/pronoun flags are
