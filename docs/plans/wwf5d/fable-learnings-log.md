@@ -41,7 +41,14 @@ Ceilings / limits (F3 — equally valuable):
 
 | Date | Slice / task | What happened | Delta / notable behavior | Exploit idea | Tag |
 |---|---|---|---|---|---|
-| | | | | | |
+| 2026-07-05 | protocol | Runbook driven by Fable main session; blind runs executed as fresh Fable *subagents* (Agent tool, model=fable), one per task | Blindness + pinned inputs preserved without manual `/clear`; orchestrator session holds all analysis | Subagent orchestration = Fable-window multiplier; reusable for BT4/BT5 (Opus baselines via model=opus subagents same-day) | surprise |
+| 2026-07-05 | S1/BT1 | Fable read the live MCP server (`checklist.ts`) before asserting adapter findings; caught the 1:1 code mirror | Opus reasoned text-only → its spec would silently fork canonical text from shipped code (DW delta) | "Verify the world before asserting adapters" as a WWF5D grounding move | strength |
+| 2026-07-05 | S1/BT1 | Opus caught 2 real seams Fable missed: unverified-enforcement existence check; write-path mandate-injection trigger | Fable blind spot on a false-sense-of-safety seam | Fold "existence-check every 'enforced via X' claim" into WWF5D §2 explicitly — don't rely on it emerging | ceiling |
+| 2026-07-05 | S1/BT2 | Diagnosis zoom-out near-parity with Opus (same root-cause family, same 4-part fix shape) | Fable edge concentrated in epistemics (unobserved code → test obligation, not claim) + spec decidedness + implementation-hazard anticipation (byte-pin oracle) | Don't spend Fable on plain zoom-outs; spend it on the *spec* end of diagnosis tasks | cheap-on-opus |
+| 2026-07-05 | S1/BT2 | Opus asserted unobserved dispatch behavior as implemented fact (silent-NB2 row), contradicting its own scope note | Fable held the pinned "open risk, not confirmed failure" framing on both open questions | "Unobserved code is a test obligation, never a claim" → WWF5D §1/§3 | strength |
+| 2026-07-05 | S1/BT3 | Both models found the same 2 dangerously-wrong seams AND invented the same backbone fix (orchestrator-owned accreting manifest) independently | Headline seams + carrier mechanism are cheap on Opus; Fable premium = 6 extra real findings (tail) + contract-*contradiction* detection (seam-beat definitions; locked-file reorder license) | Fable for breadth past the pointed-at seams; convergence itself validates the finding | strength |
+| 2026-07-05 | S1/BT3 | Fable-only owner-empathy find: per-piece override clauses ("unless Sean explicitly asks") have no carrier — the chain reverts Sean's own calls by design | Opus never audited seams the grounding didn't name (publish surface, headless formats, back-edges, coordinate spaces) | "Audit the seams the grounding didn't point at" as an explicit §2 step | strength |
+| 2026-07-05 | S1/1a vs 1c | Introspection hypotheses largely corroborated for Q1/Q2/Q3/Q6/Q7; Q4 (zoom-out) and instance-level Q5 matched by Opus | Self-report was *directionally* honest but couldn't predict which moves were Fable-unique vs promptable | Introspection alone would have over-claimed; the diff step earned its cost (F1 vindicated) | surprise |
 
 Tags: `strength` · `surprise` · `ceiling` · `round-2` · `cheap-on-opus`
 
@@ -49,7 +56,9 @@ Tags: `strength` · `surprise` · `ceiling` · `round-2` · `cheap-on-opus`
 
 _Fill as ideas surface. Each becomes a candidate line item for the next round's brainstorm._
 
--
+- **Paired same-day baseline+blind runs via subagents:** BT4 (prd-generator on the PM3 t1 re-run) and BT5 (systematic-debugging on the MBP-reachability intermittency) can be run as `model=opus` baseline subagent + `model=fable` blind subagent from one orchestrator — kills the pin-drift problem the battery doc worries about, since both runs share a working tree snapshot.
+- **Targeted round-2 introspection:** re-run only the questions whose hypotheses the diffs *couldn't* test (deliverable-shape grounding, research triggers #3/#4, second-occurrence fix-shape) with tasks designed to exercise them.
+- **Ceiling probes as tasks:** BT1 exposed two Fable misses (enforcement existence-check; write-path trigger gap). Design one battery task around false-sense-of-safety seams to measure whether the WWF5D §2 checklist item closes the gap for Opus AND Fable.
 
 ## Regroup trigger
 
