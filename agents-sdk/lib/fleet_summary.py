@@ -49,6 +49,9 @@ STATUS_BADGE = {
     "recursion-guard": "○ no-op",
     "error": "✗",
     "error_auth": "✗ auth",
+    # BT5 C4 — a Tier-2 host-unreachable deferral is a healthy idle outcome,
+    # surfaced distinctly so it's never read as a failure (✗) or buried.
+    "deferred": "⏸ deferred (host unreachable)",
 }
 
 

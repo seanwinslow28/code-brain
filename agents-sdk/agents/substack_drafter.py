@@ -67,6 +67,13 @@ def is_synthesizer_dry(*, health_dir: Path, threshold: int = 3) -> bool:
     If any manifest in the last `threshold` has concepts_written > 0,
     we have something to draft from → returns False (not dry).
 
+    BT5 C4 (2026-07-05): a `wol-deferred` / host-unreachable night has
+    concepts_written == 0 because the synthesizer DEFERRED (Tier-2 host down),
+    not because it ran and produced nothing. Deferrals are therefore treated
+    as non-dry — they break a dry streak rather than extend it, so a run of
+    off-LAN weekends can't wrongly suppress the drafter while un-synthesized
+    material piles up behind the deferrals.
+
     Args:
         health_dir: Directory containing synth-manifest-YYYY-MM-DD.json files.
             Typically `vault/health/`.
@@ -87,8 +94,18 @@ def is_synthesizer_dry(*, health_dir: Path, threshold: int = 3) -> bool:
             parsed.append(json.loads(path.read_text()))
         except (json.JSONDecodeError, OSError):
             return True  # unreadable manifest = treat as dry to be safe
-    # All manifests readable — dry only if none had any output
-    return not any(d.get("concepts_written", 0) > 0 for d in parsed)
+    # All manifests readable — dry only if none had any output AND none were
+    # deferrals (a deferral is not evidence of dryness — the synth didn't run).
+    def _is_deferral(d: dict) -> bool:
+        return (
+            d.get("status") == "wol-deferred"
+            or d.get("host_probe") in {"unreachable", "lost-mid-run"}
+        )
+
+    return not any(
+        d.get("concepts_written", 0) > 0 or _is_deferral(d)
+        for d in parsed
+    )
 
 
 # --- Cluster picker (Task C4) ---
