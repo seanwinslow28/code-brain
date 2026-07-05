@@ -7,6 +7,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### BT5 Phase C — Tier-2 reachability fix: owner forks decided (2026-07-05)
+- **Both owner forks from the BT5 diagnosis are resolved** (Sean, on the Mac Mini — the
+  scheduler/driver host where `vault-synthesizer` + `knowledge-lint` actually load; the
+  MBP is only the Tier-2 model host). Diagnosis + spec: `docs/plans/wwf5d/fable-runs/bt5-fable.md`
+  (primary), `docs/plans/wwf5d/baselines/bt5-opus.md` (independent baseline),
+  `docs/plans/wwf5d/fable-runs/bt5-diff.md` (convergence/split). Handoff prompt:
+  `docs/plans/wwf5d/bt5-mac-mini-fix-prompt.md`.
+- **Fork 1 — lint Tier-2 LLM leg: WIRE IT.** The `soul-tier-a-conflict` capability that
+  CLAUDE.md advertises as HIGH has never run in production (`knowledge_lint.py` `main()`
+  passed no `llm_caller`; born unwired at `6ad8ce3`). Decision: make the advertised
+  capability real rather than retire it — "never fired" reflects that it never executed,
+  not that it ran and found nothing. Implemented as **C3** (its own PR: adds a production
+  `llm_caller`, injects a concept corpus into `_build_tier2_prompt`, and replaces the LLM
+  block's silent `except Exception: pass` with logged/reported failures).
+- **Fork 2 — synthesis host binding: STAY ON MBP + C5 catch-up.** Rejected relocating
+  `vault_synthesis` to the always-on Mac Mini (would require a smaller model first clearing
+  `evals/vault-synthesizer/` — a quality-regression risk v3.14.3 deliberately avoided).
+  Kept MBP-class capacity; off-LAN misses become cheap, typed `wol-deferred` deferrals that
+  self-re-queue (the 2026-06-23 catch-up ran 52 files/45 concepts — the implicit re-queue
+  already converges within days). A gated same-day catch-up fire (**C5**) is deferred until
+  after ≥1 week of observation per the rollout order.
+- **Rollout (per spec):** C1+C2 (route once/run + fail-fast + circuit breaker + resurrect the
+  dead `wol-deferred` deferral path + ≤1 notification honoring `[notifications].notify_on`)
+  → C4 (manifest `host_probe` field + status truthfulness + consumer sweep incl. the
+  substack-drafter dry-threshold) → C3 (lint wiring) → observe ≥1 real week (done-criterion
+  6: zero `status=error`+`model_used=none` misses; any miss presents as `wol-deferred`,
+  `duration_seconds < 180`) → decide C5. Hard non-goals held: no paid-API fallback, no WOL
+  resurrection, no relocation of synthesis/lint-T2 off the MBP, exit 0 on environmental
+  deferral. Also lands the CLAUDE.md agents-table correction (Tier-2 model is
+  `qwen3.6_35b-a3b-32k` since 2026-05-26, not Qwen3-14B; "skip-and-continue" falsified) and,
+  separately, the `_normalize_model_name` stale-enum fix.
+
 ### CLAUDE.md — retire the Obsidian-Git vault-ownership rule (2026-07-05)
 - **Deleted Non-Negotiable rule 8** ("Obsidian-Git is the sole owner of vault
   auto-commit; agents must never `git add/commit` the vault directly"). Obsidian-Git
