@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fable 5 audit campaign — Phase B: the Fable burn (2026-07-05)
+- **All raw Fable captures banked** (`docs/plans/wwf5d/fable-runs/`): 7-question
+  introspection, three blind battery runs (BT1 skill-audit, BT2 anima register seam,
+  BT3 chain-level writing-chain audit) executed as fresh Fable subagents against the
+  pinned inputs, plus four behavioral diffs vs the Opus baselines — including the
+  Slice-3-reclaim **BT5 pair** (systematic-debugging on the MBP Tier-2 intermittency,
+  same-day `model=opus` baseline + `model=fable` blind run; BT4 skipped as saturated).
+- **WWF5D SKILL.md §1–6 co-authored** from corroborated deltas only (F1) as abstracted
+  recipes (F2), with an evidence index mapping every item to its diff, Opus-parity items
+  marked cheap-on-opus, two ceiling-adopted moves (enforcement existence-check, vantage
+  aliasing), and uncorroborated introspection claims dropped. §7 awaits the Opus
+  validation pass (`validation-harness.md`).
+- **Five Tier-1 skills elevated** (Fable, per-skill subagents, draft specs as floors):
+  intent-engineering (validation-gate semantics, level-scoped checklist, canonical
+  Zero-Interaction Mandate, MCP routing + PAIRED-MCP-CHANGE markers), writing-voice-modes
+  (scaffolding only — five-step workflow + Voice Decision Record; locked voice content
+  byte-identical), skill-system-mastery, plan-and-think (thinking controls verified
+  against v2.1.199), systematic-debugging (Evidence Block hard gates, fleet first-checks;
+  live-trialed by both BT5 runs same-day). `scripts/validate.py` green throughout.
+- **Phase C specs saved:** `docs/plans/wwf5d/anima-register-seam-spec.md` (BT2 output,
+  production-grade per diff) and `creative-chain-spec.md` (BT3 Artifact 2). BT5's paired
+  fix specs + two owner forks ticketed in `vault/00_inbox/tickets.md`.
+
 ### Fable 5 audit campaign — Phase A prep (2026-07-04)
 - **Fable 5 campaign scaffolding.** Added the campaign + research-grounding docs
   (`docs/plans/2026-07-04-fable5-audit-campaign.md`, `-wwf5d-research-findings.md`),
