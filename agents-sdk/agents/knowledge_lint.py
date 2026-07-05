@@ -7,14 +7,20 @@ Tier 1 (Mac Mini, structural Python checks, ~5 min):
   • missing YAML frontmatter in vault/knowledge/
   • CamelCase filenames in vault/knowledge/ (kebab-case only)
 
-Tier 2 (MacBook Pro, Qwen3-14B via route_to_macbook, ~15 min, semantic):
-  • contradiction detection across related articles
-  • staleness detection (>30d + time-sensitive model/API refs)
-  • SOT drift check (vault vs SOURCE-OF-TRUTH.md Parts 1-2)
-  • Phase 2 (2026-04-27): soul-tier-a-conflict — flags articles whose
-    claims contradict any Tier-A SOUL item across the active domains
-    (creative-studio, life-systems, job-hunt-2026). Activated when a Tier-2
-    `llm_caller` is supplied; SOUL context is prepended to the prompt.
+Tier 2 (semantic, ~15 min):
+  • staleness detection (time-sensitive model/API refs) — Mac-Mini-local regex
+  • contradiction fast path — SQL over the synthesizer's `concept_edges` (local)
+  • LLM leg (MacBook Pro, `qwen3.6_35b-a3b-32k` via route_to_macbook): semantic
+    contradiction discovery the synthesizer missed + soul-tier-a-conflict —
+    flags articles whose claims contradict any Tier-A SOUL item across the
+    active domains (creative-studio, life-systems, job-hunt-2026).
+
+    BT5 C3 (2026-07-05) wired this leg into production for the first time:
+    main() now resolves the Tier-2 route once (probe-first), injects the
+    `knowledge/concepts/*.md` corpus into the prompt in 32K-context batches,
+    and reports the leg's actual outcome (reviewed N batches / deferred / failed
+    / gate-skipped) instead of the old silent skip. A down host defers honestly;
+    the regex + SQL fast paths always run regardless of MBP state.
 
 Output: `vault/health/YYYY-MM-DD-lint-report.md` with severity buckets
 (CRITICAL / HIGH / MEDIUM / LOW).
@@ -26,11 +32,13 @@ matching the Sunday-22:00 launchd schedule from install_schedules.sh.
 from __future__ import annotations
 
 import argparse
+import asyncio
 import json
 import logging
 import re
 import sqlite3
 import sys
+import time
 from dataclasses import dataclass, field
 from datetime import date
 from enum import Enum
@@ -43,7 +51,17 @@ from lib import concept_edges
 from lib.artifact_loader import DOMAINS, load_artifact
 from lib.config import Config, load_config
 from lib.filelock import FileLock
+from lib.hybrid_router import HybridRouter, RoutingDecision, WOLUnavailable
 from lib.logging_setup import record_run, setup_logger
+
+# BT5 C3 (2026-07-05) — Tier-2 corpus injection budgets. The prompt now carries
+# the actual concept articles to review (it previously carried none, so a wired
+# caller reviewed nothing). Digests are batched to fit the 32K-token context of
+# `qwen3.6_35b-a3b-32k` with headroom for SOUL context + instructions + the JSON
+# response; multiple LLM calls per run are bounded by a wall-clock budget.
+TIER2_BATCH_MAX_CHARS = 40_000   # ~12–14K tokens per batch — safe under 32K
+TIER2_BUDGET_SECONDS = 900       # ~15 min per the module docstring
+_CONCEPT_DIGEST_MAX_CHARS = 700  # title + Definition section per concept
 
 AGENT_NAME = "knowledge-lint"
 MAX_TURNS_TIER1 = 20
@@ -389,8 +407,76 @@ def build_soul_context(config: Config | None) -> str:
     )
 
 
-def _build_tier2_prompt(soul_context: str) -> str:
-    """Tier-2 LLM prompt — semantic contradictions + Tier-A SOUL conflicts."""
+def _extract_concept_digest(text: str, max_chars: int = _CONCEPT_DIGEST_MAX_CHARS) -> str:
+    """Compact per-concept digest for the Tier-2 corpus: title + Definition
+    section (the semantic core for contradiction detection). Falls back to a
+    leading slice of the body when there's no Definition heading."""
+    body = _FRONTMATTER_RE.sub("", text).strip()
+    title = ""
+    for line in body.splitlines():
+        if line.startswith("# "):
+            title = line[2:].strip()
+            break
+    definition = ""
+    m = re.search(r"^##\s+Definition\s*\n(.*?)(?=^##\s|\Z)", body, re.DOTALL | re.MULTILINE)
+    if m:
+        definition = m.group(1).strip()
+    digest = (f"# {title}\n" if title else "") + (definition or body)
+    return digest[:max_chars].strip()
+
+
+def _load_concept_corpus(vault_root: Path) -> list[tuple[str, str]]:
+    """Return [(repo-relative path, digest)] for every `knowledge/concepts/*.md`.
+
+    BT5 C3 — the material the Tier-2 LLM scan actually reviews. Empty (not an
+    error) on a fresh vault before the synthesizer has written any concepts.
+    """
+    concepts_dir = vault_root / "knowledge" / "concepts"
+    if not concepts_dir.is_dir():
+        return []
+    corpus: list[tuple[str, str]] = []
+    for fp in sorted(concepts_dir.glob("*.md")):
+        try:
+            text = fp.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        corpus.append((fp.relative_to(vault_root).as_posix(), _extract_concept_digest(text)))
+    return corpus
+
+
+def _batch_corpus(
+    corpus: list[tuple[str, str]],
+    max_chars: int = TIER2_BATCH_MAX_CHARS,
+) -> list[list[tuple[str, str]]]:
+    """Greedily pack concept digests into batches whose combined size fits the
+    32K-context budget. Never drops an entry (a lone oversized digest gets its
+    own batch)."""
+    batches: list[list[tuple[str, str]]] = []
+    cur: list[tuple[str, str]] = []
+    cur_len = 0
+    for rel, digest in corpus:
+        entry_len = len(rel) + len(digest) + 16
+        if cur and cur_len + entry_len > max_chars:
+            batches.append(cur)
+            cur, cur_len = [], 0
+        cur.append((rel, digest))
+        cur_len += entry_len
+    if cur:
+        batches.append(cur)
+    return batches
+
+
+def _build_tier2_prompt(
+    soul_context: str,
+    corpus_batch: list[tuple[str, str]] | None = None,
+) -> str:
+    """Tier-2 LLM prompt — semantic contradictions + Tier-A SOUL conflicts.
+
+    BT5 C3: `corpus_batch` (a slice of `_load_concept_corpus`) is injected so the
+    model has the actual articles to review. Called with only `soul_context`
+    (corpus_batch=None) the prompt degrades to instructions + SOUL, preserving
+    the pre-C3 signature.
+    """
     instructions = (
         "Review the vault for two things:\n"
         "  1. Semantic contradictions across `knowledge/concepts/*.md`.\n"
@@ -401,9 +487,14 @@ def _build_tier2_prompt(soul_context: str) -> str:
         '  "contradictions": [{"files": ["..."], "detail": "..."}],\n'
         '  "soul_conflicts": [{"file": "...", "tier_a_item": "...", "detail": "..."}]\n'
     )
-    if soul_context:
-        return soul_context + instructions
-    return instructions
+    corpus_block = ""
+    if corpus_batch:
+        parts = ["--- BEGIN CONCEPT CORPUS (review these articles) ---\n"]
+        for rel, digest in corpus_batch:
+            parts.append(f"### {rel}\n{digest}\n")
+        parts.append("--- END CONCEPT CORPUS ---\n\n")
+        corpus_block = "\n".join(parts)
+    return (soul_context or "") + corpus_block + instructions
 
 
 def _slugs_from_contradiction_files(files: list[str]) -> tuple[str, str] | None:
@@ -484,6 +575,9 @@ def run_tier2(
     stale_days: int = 30,
     soul_context: str = "",
     logger: logging.Logger | None = None,
+    report_notes: list[str] | None = None,
+    tier2_batch_max_chars: int = TIER2_BATCH_MAX_CHARS,
+    tier2_budget_seconds: int = TIER2_BUDGET_SECONDS,
 ) -> list[LintIssue]:
     """Heuristic staleness + SQL fast path + LLM contradiction / SOUL scan.
 
@@ -552,11 +646,43 @@ def run_tier2(
     if llm_caller is None:
         return issues
 
-    # LLM-powered contradiction + SOUL Tier-A conflict (caller supplies impl).
-    # Phase D: contradictions are deduped against the SQL fast path; SOUL
-    # conflicts have no SQL substitute and always surface from the LLM.
-    try:
-        resp = llm_caller(_build_tier2_prompt(soul_context))
+    # BT5 C3 — LLM-powered contradiction + SOUL Tier-A conflict, now over a
+    # real concept corpus injected in token-budgeted batches (the prompt used
+    # to carry none, so this leg reviewed nothing). Phase D dedupe still holds:
+    # contradictions dedupe against the SQL fast path AND across batches; SOUL
+    # conflicts have no SQL substitute and always surface. A per-batch failure
+    # is logged + reported (never the old silent `except: pass`), and the loop
+    # stops — a connection-class error means the host went away.
+    batches = _batch_corpus(_load_concept_corpus(vault_root), max_chars=tier2_batch_max_chars)
+    if not batches:
+        # One-call floor: even with no concept corpus, run a single scan so the
+        # SOUL-conflict leg (which reasons over the SOUL context, not the
+        # corpus) still fires — preserves the pre-C3 single-call contract.
+        batches = [[]]
+
+    start = time.monotonic()
+    reviewed = 0
+    for batch in batches:
+        if reviewed > 0 and (time.monotonic() - start) >= tier2_budget_seconds:
+            if report_notes is not None:
+                report_notes.append(
+                    f"Tier-2 LLM scan: reviewed {reviewed}/{len(batches)} concept "
+                    f"batches (time budget {tier2_budget_seconds}s reached; "
+                    f"{len(batches) - reviewed} deferred to next run)."
+                )
+            break
+        try:
+            resp = llm_caller(_build_tier2_prompt(soul_context, batch))
+        except Exception as exc:
+            log.warning("Tier 2 LLM scan failed on batch %d/%d: %s",
+                        reviewed + 1, len(batches), exc)
+            if report_notes is not None:
+                report_notes.append(
+                    f"Tier-2 LLM scan: failed — {type(exc).__name__} "
+                    f"(after {reviewed}/{len(batches)} batches)"
+                )
+            break
+        reviewed += 1
         for c in resp.get("contradictions", []):
             files = c.get("files", [])
             if not files:
@@ -564,10 +690,12 @@ def run_tier2(
             pair = _slugs_from_contradiction_files(files)
             if pair and frozenset(pair) in seen_contradiction_pairs:
                 log.info(
-                    "Tier 2 contradiction: source=llm dropped (sql had it) "
+                    "Tier 2 contradiction: source=llm dropped (already seen) "
                     "%s vs %s", pair[0], pair[1],
                 )
                 continue
+            if pair:
+                seen_contradiction_pairs.add(frozenset(pair))
             log.info("Tier 2 contradiction: source=llm %s", files[0])
             issues.append(
                 LintIssue(
@@ -596,8 +724,12 @@ def run_tier2(
                     tier=2,
                 )
             )
-    except Exception:
-        pass
+    else:
+        # Loop completed without break — all batches reviewed.
+        if report_notes is not None:
+            report_notes.append(
+                f"Tier-2 LLM scan: reviewed {reviewed}/{len(batches)} concept batches."
+            )
     return issues
 
 
@@ -769,11 +901,19 @@ def format_report(
     tier1: Tier1Report,
     tier2: list[LintIssue],
     today: str,
+    tier2_notes: list[str] | None = None,
 ) -> str:
     lines = [f"# Knowledge Lint Report — {today}", ""]
     total = tier1.total_issues + len(tier2)
     lines.append(f"_{total} issues found ({tier1.total_issues} structural, {len(tier2)} semantic)._")
     lines.append("")
+    # BT5 C3 — surface the Tier-2 LLM leg's actual outcome (ran N batches /
+    # deferred / failed / gate-skipped) so a silent skip can never again read
+    # as a clean semantic scan.
+    if tier2_notes:
+        for note in tier2_notes:
+            lines.append(f"_{note}_")
+        lines.append("")
 
     buckets: dict[LintSeverity, list[LintIssue]] = {s: [] for s in LintSeverity}
     for issue in list(tier1.issues) + list(tier2):
@@ -804,6 +944,84 @@ def write_report(vault_root: Path, content: str, *, today: str) -> Path:
     return out
 
 
+def _default_lint_llm_caller_factory(decision: RoutingDecision) -> Callable[[str], dict]:
+    """LLM caller bound to a pre-resolved routing decision (BT5 C3), mirroring
+    the synthesizer's factory: fast connect / long read, tolerant JSON
+    extraction. Returns {} on a response with no JSON object so a malformed
+    reply is an empty (not failed) batch."""
+    import httpx
+
+    _timeout = httpx.Timeout(600.0, connect=10.0)
+
+    def _call(prompt: str) -> dict:
+        if decision.runtime == "ollama":
+            resp = httpx.post(
+                f"{decision.base_url}/api/chat",
+                json={
+                    "model": decision.model,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "stream": False,
+                    "think": False,
+                    "options": {"num_ctx": 32768, "temperature": 0.0},
+                },
+                timeout=_timeout,
+            )
+            resp.raise_for_status()
+            text = resp.json()["message"]["content"]
+        else:
+            resp = httpx.post(
+                f"{decision.base_url}/v1/chat/completions",
+                json={
+                    "model": decision.model,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "stream": False,
+                },
+                timeout=_timeout,
+            )
+            resp.raise_for_status()
+            text = resp.json()["choices"][0]["message"]["content"]
+        start_ = text.find("{")
+        end_ = text.rfind("}")
+        if start_ == -1 or end_ == -1:
+            return {"contradictions": [], "soul_conflicts": []}
+        try:
+            return json.loads(text[start_ : end_ + 1])
+        except json.JSONDecodeError:
+            return {"contradictions": [], "soul_conflicts": []}
+
+    return _call
+
+
+def _resolve_lint_tier2_caller(
+    logger: logging.Logger,
+) -> tuple[Callable[[str], dict] | None, str | None]:
+    """BT5 C3 — probe the Tier-2 host once, up front (like the synthesizer).
+
+    Returns (llm_caller, deferral_note). On an unreachable/misconfigured host,
+    llm_caller is None and deferral_note carries the honest report line so the
+    scan degrades to SQL/regex-only instead of silently claiming a clean run.
+    """
+    try:
+        import tomllib
+        with open(Path(__file__).parent.parent / "config.toml", "rb") as f:
+            raw_cfg = tomllib.load(f)
+        router = HybridRouter.from_config(raw_cfg)
+        cfg_notify_on = raw_cfg.get("notifications", {}).get("notify_on")
+
+        async def _preflight() -> RoutingDecision:
+            return await router.route_to_macbook(
+                task="lint_tier2", wake_timeout_s=90.0, notify_on=cfg_notify_on
+            )
+        decision = asyncio.run(_preflight())
+        return _default_lint_llm_caller_factory(decision), None
+    except WOLUnavailable:
+        logger.warning("Tier-2 LLM host unreachable — SQL/regex only this run")
+        return None, "Tier-2 LLM scan: deferred (host unreachable)."
+    except Exception as exc:  # router/config init failure must not kill Tier 1
+        logger.warning("Tier-2 LLM router init failed: %s", exc)
+        return None, f"Tier-2 LLM scan: unavailable — {type(exc).__name__}."
+
+
 # ─── CLI ──────────────────────────────────────────────────────────────────
 
 def main() -> int:
@@ -819,30 +1037,45 @@ def main() -> int:
     logger.info("Tier 1: %d issues", tier1.total_issues)
 
     tier2: list[LintIssue] = []
+    tier2_notes: list[str] = []
     if tier1.total_issues > 0 or args.full:
         soul_context = build_soul_context(cfg)
+        # BT5 C3 — wire the Tier-2 LLM leg for real (probe-first). A down host
+        # defers honestly; SQL/regex always run regardless.
+        llm_caller, deferral_note = _resolve_lint_tier2_caller(logger)
+        if deferral_note:
+            tier2_notes.append(deferral_note)
         tier2 = run_tier2(
             cfg.vault_root,
+            llm_caller=llm_caller,
             soul_context=soul_context,
             logger=logger,
+            report_notes=tier2_notes,
         )
         logger.info(
-            "Tier 2: %d issues (soul_context=%s)",
+            "Tier 2: %d issues (soul_context=%s, llm=%s)",
             len(tier2),
             "loaded" if soul_context else "off",
+            "wired" if llm_caller else "deferred",
         )
+    else:
+        # Distinguish "gate-skipped" from "ran without LLM" (BT5 C3).
+        tier2_notes.append("Tier-2 LLM scan: skipped by gate (Tier 1 clean, no --full).")
 
     today = date.today().isoformat()
-    report = format_report(tier1=tier1, tier2=tier2, today=today)
+    report = format_report(tier1=tier1, tier2=tier2, today=today, tier2_notes=tier2_notes)
 
     if not args.dry_run:
         path = write_report(cfg.vault_root, report, today=today)
         logger.info("Report: %s", path)
 
     # Exit code 0 regardless; daily_driver surfaces CRITICAL/HIGH in morning brief
+    notes = f"tier1={tier1.total_issues} tier2={len(tier2)}"
+    if tier2_notes:
+        notes += " | " + "; ".join(tier2_notes)
     record_run(cfg.log_dir, AGENT_NAME, mode=None,
                status="success", cost_usd=0.0, duration_ms=None, turns=None,
-               notes=f"tier1={tier1.total_issues} tier2={len(tier2)}")
+               notes=notes[:300])
     return 0
 
 

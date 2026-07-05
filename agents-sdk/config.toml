@@ -374,6 +374,11 @@ financial_analysis = { model = "phi4-mini-reasoning", machine = "mac_mini" }
 # qwen3-coder:30b — that model is retained on MBP-Ollama (-32k variant).
 heavy_synthesis = { model = "qwen3.6_35b-a3b-32k", machine = "macbook_pro" }
 vault_synthesis = { model = "qwen3.6_35b-a3b-32k", machine = "macbook_pro" }  # Phase 6 D.2 — model resolved at runtime via this key. 2026-05-26: qwen3-14b @ LM Studio → qwen3.6_35b-a3b-32k @ MBP-Ollama (Topic 20 follow-up)
+# BT5 C3 (2026-07-05) — knowledge_lint's Tier-2 semantic scan (LLM contradiction
+# discovery + soul-tier-a-conflict). Dedicated key (same model+host as
+# vault_synthesis) so per-task routing stays observable; probe-first like the
+# synthesizer, so an unreachable MBP defers cleanly instead of silently skipping.
+lint_tier2 = { model = "qwen3.6_35b-a3b-32k", machine = "macbook_pro" }
 job_scoring = { model = "qwen3.6_35b-a3b-32k", machine = "macbook_pro" }
 deep_research = { model = "qwen3-14b-research", machine = "mac_mini" }  # Phase 5 (2026-04-26) → Mac Mini migration v3.23.0 (2026-05-02): routed via LDR HTTP at :5050, custom Modelfile tag with /no_think baked into TEMPLATE
 sprite_vision_qa = { model = "Qwen3-VL-7B", machine = "alienware" }
