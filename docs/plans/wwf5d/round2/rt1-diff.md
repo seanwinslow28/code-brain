@@ -1,0 +1,41 @@
+# RT1 diff — Fable vs Opus on preserve-session fix-spec (axis: spec-decidedness + intent-preservation, §6)
+
+**Compared:** `rt1-fable.md` (13 findings F1–F13 + 2 forks + 9 edge cases + Stop Rules) vs `rt1-opus.md` (13 findings + 2 forks + 5 edge cases). Identical shared findings input (`rt1-preserve-session-findings.md`), identical grounding, `intent-engineering` scaffold both. Deltas are quality-only (style ignored), tagged `dangerously-wrong`/`structural`/`minor`, direction **FABLE+** (F1-admissible) / **OPUS+** (F3 ceiling).
+
+**Headline:** the audit-level content converged (expected — both got the same findings). Both restated grounding, verified the world (both independently re-confirmed `## Session Log` in zero files, no `prj-code-brain.md`, `context:` absent from CLAUDE.md, the flush hook, the Dataview line), both split the two-anchor discipline, both named a transport, both resolved the two owner-forks with recommendation+contingency. **The premium is entirely in the *spec* end** — and Fable's is materially more decided, catches two contract-contradictions Opus's own spec would have shipped, and reaches seams the findings didn't name. This is the cleanest single-axis corroboration of §6 in the battery.
+
+---
+
+## FABLE+ deltas (admissible WWF5D evidence)
+
+- `structural` — **FABLE+ — Opus's own rotation rule (F13) contradicts Opus's own zero-loss objective; Fable caught it.** Opus F13: "cap `## Session Log` at 10; when appending an 11th, **drop the oldest**." Dropping = deletion = data loss — in a spec whose stated Objective is *zero loss*. Fable F13: cap at 10 but **MOVE** the oldest to `docs/session-log-archive.md` (cut+paste+verify both files) — "rotation is the sole sanctioned removal, a relocation not a deletion; deletion violates zero-loss." Fable held the objective through a decision where Opus silently violated it. Textbook "hold the framing exactly, resolve every edge toward the objective" (§1.2/§6.2).
+
+- `structural` — **FABLE+ — the paired-consumer edit Opus explicitly protected against (contract point-of-effect).** Both route "Open Questions" to a durable surface. But Opus's What-NOT-to-change says "resume-session is read-only and unchanged; do not co-fix resume" — yet resume-session's extract list reads only decisions/blockers/next-steps/files, so the newly-written Open Questions **arrives but is never read** (the wow condition "resume can resurface it" fails). Fable caught this: F8 adds a scoped **paired one-line edit to resume-session** (add "open questions" to its extract + a briefing section + prefer it in Suggested First Action), with a scope-guard ("those additions only — do not restructure"). Fable named it a *paired change* (§2.7). Opus's "protect the reader" instinct left the fix inert at the point of effect.
+
+- `structural` — **FABLE+ — the `Link:` field vs knowledge_lint's zero-broken-links invariant (contract-contradiction).** Fable F6: emit `Link: [[prj-<slug>]]` **only when a target note was found** — "a wikilink to a nonexistent note is a broken wikilink that Sunday's knowledge_lint flags (the vault holds at 0 — don't be the regression)." Opus F6 pins the same line format but always includes the `Link:` tail — which, on the common code-brain miss (no `prj-code-brain.md`), ships a broken wikilink that trips a *different* fleet system. Fable traced the line to a second consumer's invariant; Opus stopped at the Dataview parser.
+
+- `structural` — **FABLE+ — transport operationalized end to end, incl. the MCP path + its failure fallback.** Both name `Edit`. Opus mentions `mcp-obsidian` only to dismiss it ("search path only"). Fable specifies the **Read→Edit→Read loop**, handles the mounted `obsidian-vault` MCP ("its write tools may substitute; the Read-verify still runs"), AND adds edge-case 9: MCP transport failure → fall back to the built-in loop → else `FAILED` + payload dump; **never retry a transport in a loop**. Fable wired both paths and the degraded path (§5.2 + §2.5); Opus wired one and dismissed the other.
+
+- `structural` — **FABLE+ — the last-resort recovery: FAILED dumps the payload to chat.** Fable F1: on a `FAILED` destination, "print the un-landed payload verbatim in chat with paste instructions — the session is ending; a payload not on disk exists nowhere but this chat." Opus emits `✗ write failed` but never specifies recovering the content. Fable carried zero-loss to the last possible boundary; Opus reported the failure and stopped.
+
+- `structural` — **FABLE+ — the concrete implementer tripwire + retry bound (§6.3).** Fable added a Stop Rules block anticipating **the likeliest breakage in THIS repo**: "CLAUDE.md changed between Read and Edit (Daily Driver edited it mid-session) — `old_string` no longer matches → re-Read, one retry, then honest FAILED." Opus's profile lists "Stop/Done" but the output ships only "Done looks like" — no retry bound, no concurrent-edit case. Fable named the repo's tripwire and defused it; Opus didn't.
+
+- `structural` — **FABLE+ — breadth: the privacy/secrets boundary the findings didn't name.** Fable edge-case 8 ties the fix to Rule #10 + `block-secrets.py` (PreToolUse on Write|Edit): sensitive payload → redacted summary in the *tracked* CLAUDE.md, specifics only to the gitignored vault surfaces or chat — "zero-loss never licenses a privacy breach; the constraints bound the objective, not vice versa." Opus has no secrets edge case. This is auditing the seam the grounding didn't point at (§2.1).
+
+## OPUS+ deltas (ceiling evidence — F3)
+
+- `structural` — **OPUS+ — the empty-session case. Fable missed it.** Opus E4: nothing to preserve → write nothing, emit `nothing to preserve — no durable changes this session`, and explicitly **don't write an empty `## Session Log` stub** ("it pollutes the file resume reads first"). Fable enumerates nine edge cases but not the empty-session one. A real (minor) completeness gap in Fable's spec.
+
+- `minor` — **OPUS+ — tighter exposition.** Opus's §2 before→after table and §7 checkable-done list are crisper/more scannable than Fable's denser prose. Style, not quality — logged for honesty, not admissible.
+
+## Matched (no meaningful delta — cheap on Opus)
+
+- Restated grounding; the world-verification set (both re-confirmed the same repo facts independently); the two-anchor discipline split (both: `status-update`/`Blockers` = replace, the logs = append, with the same "state vs log" discriminator); naming a write transport at all; the daily-line-format-as-contract; create-or-locate the daily note; the missing-anchor adapter; the flush-hook coexistence resolution (both → stay-two-structures, single-owner-per-surface); surfacing both owner-forks with recommendation+contingency (§6.8 matched — the pre-make-vs-surface discipline is present in both).
+
+## Owner-fork split (surprise — the BT5 pattern recurs)
+
+On **Fork A (missing vault note)** the two ran *principled in opposite directions*, like BT5: Opus → **redirect-to-CLAUDE.md** (silent fallback, keep the "don't auto-create" rule); Fable → **consented interactive scaffold offer** ("ask once: scaffold from tpl-project.md? [y/N]", leveraging that the skill is interactive). Both lossless, both with contingencies. The split — not either answer — is the lesson (§6.8): Fable exploited the interactive context to *surface the choice at runtime*; Opus pre-decided a silent redirect. Sean's call at implementation.
+
+## Bottom line
+
+Spec-decidedness is **FABLE+** on RT1, decisively: Fable's spec is more mechanically complete (transport loop + MCP fallback + failure recovery), anticipates the repo's concrete tripwire (§6.3), reaches an un-named seam (privacy), and — the sharp part — caught **two contract-contradictions Opus's own spec would have shipped** (rotation-drops-violate-zero-loss; Open-Questions-written-but-unread). OPUS+ is one edge case (empty session) + tighter prose. Corroborates §6.1/§6.2/§6.3/§6.8, §2.7 (paired change), §2.1 (unnamed seams), §2.5 (degraded path). New candidate item: **"hold the spec's own stated objective as an invariant across every sub-decision — a cap that deletes in a zero-loss spec is a self-contradiction"** (§6 self-consistency, stronger than the current §6.7 self-application check).
