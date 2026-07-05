@@ -33,9 +33,32 @@ logger = logging.getLogger(__name__)
 class WOLUnavailable(Exception):
     """Raised when a required wake target (or always-on machine) is unreachable.
 
-    Callers decide whether to retry, defer, or silently skip. Always fires
-    a Pushover notification at raise time so Sean is aware.
+    Callers decide whether to retry, defer, or silently skip. Whether a
+    Pushover notification fires at raise time is gated on the caller's
+    `notify_on` list (BT5 C2, 2026-07-05): `wol_failure` was removed from
+    `[notifications].notify_on` in v3.14.3, so an unreachable Tier-2 host is
+    silent by default — the manifest + morning brief carry the signal. A
+    caller that passes no `notify_on` (legacy) keeps the notify-on-failure
+    behavior.
     """
+
+
+# BT5 C2 (2026-07-05): the event names that opt a host-unreachable miss into a
+# Pushover page. `wol_failure` is the historical name; `host_unreachable` is the
+# forward name a caller adds to `[notifications].notify_on` to get the single
+# page. `None` = legacy caller (notify), matching pre-BT5 behavior.
+_HOST_UNREACHABLE_EVENTS = ("host_unreachable", "wol_failure")
+
+
+def _should_notify_host_unreachable(notify_on: list[str] | None) -> bool:
+    """Decide whether to fire a Pushover page for a host-unreachable miss.
+
+    - `notify_on is None` → legacy callers (flush, ad-hoc): notify (unchanged).
+    - a config list is supplied → honor it: notify only if the event opted in.
+    """
+    if notify_on is None:
+        return True
+    return any(evt in notify_on for evt in _HOST_UNREACHABLE_EVENTS)
 
 
 class RouteUnavailable(Exception):
@@ -371,6 +394,7 @@ class HybridRouter:
         *,
         task: str,
         wake_timeout_s: float = 90.0,
+        notify_on: list[str] | None = None,
     ) -> RoutingDecision:
         """Phase 6 cross-machine transport for MacBook-Pro-hosted tasks.
 
@@ -387,6 +411,12 @@ class HybridRouter:
         wake from deep sleep plus LM Studio server startup can exceed 60s,
         especially on Wi-Fi where the first magic packet may be dropped
         during initial radio reassociation.
+
+        `notify_on` (BT5 C2, 2026-07-05): the caller's
+        `[notifications].notify_on` list. When supplied, a host-unreachable
+        miss pages only if `host_unreachable`/`wol_failure` is opted in;
+        otherwise it is silent. `None` (default) preserves the legacy
+        always-notify behavior for callers that don't pass config.
         """
         mapping = self.task_map.get(task)
         if not mapping:
@@ -431,10 +461,29 @@ class HybridRouter:
             f"task={task} waited {wake_timeout_s:.0f}s; {last_reason}. "
             f"If LM Studio is installed, flip the local-server toggle ON."
         )
-        notify_wol_failure(task=task, machine="macbook_pro", detail=detail)
+        # BT5 C2 — honor [notifications].notify_on. Silent by default (the
+        # caller passes its config list and `wol_failure`/`host_unreachable`
+        # are absent post-v3.14.3); legacy callers (notify_on=None) still page.
+        if _should_notify_host_unreachable(notify_on):
+            notify_wol_failure(task=task, machine="macbook_pro", detail=detail)
         raise WOLUnavailable(
             f"macbook_pro unreachable for task '{task}' after {wake_timeout_s:.0f}s"
         )
+
+    async def probe(self, machine_name: str) -> bool:
+        """Force a fresh (cache-invalidated) health check. True iff HEALTHY.
+
+        BT5 C1 (2026-07-05): the synthesizer's mid-run circuit breaker calls
+        this after K consecutive per-file LLM failures to distinguish
+        "host lost mid-run" (defer-shaped, → partial) from "host up but calls
+        failing" (real error, e.g. model not pulled → 404). Invalidates the
+        `health_check_interval` cache so the probe actually hits the wire
+        rather than returning the (stale) pre-flight HEALTHY reading.
+        """
+        if machine_name in self._health:
+            self._health[machine_name].last_check = 0.0
+        health = await self.check_health(machine_name)
+        return health.status == MachineStatus.HEALTHY
 
     def set_machine_status(self, machine_name: str, status: MachineStatus) -> None:
         """Manually override a machine's health status (for testing).

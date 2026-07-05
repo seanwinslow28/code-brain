@@ -42,7 +42,7 @@ from lib import concept_edges
 from lib import fleet_memory as _fleet_memory
 from lib.config import load_config
 from lib.filelock import FileLock
-from lib.hybrid_router import HybridRouter, WOLUnavailable
+from lib.hybrid_router import HybridRouter, RoutingDecision, WOLUnavailable
 from lib.logging_setup import record_run, setup_logger
 from lib.retrieval_diversity import build_embedding_query, cluster_and_sample
 
@@ -241,6 +241,13 @@ _MIN_IMPLICATION_CHARS = 80
 # enough cross-domain candidates to ground a real article — skip the LLM
 # call entirely rather than produce shallow output (Tier 1.5).
 _MIN_SIMILAR_FOR_LLM = 2
+
+# BT5 C1 (2026-07-05) — mid-run host-loss circuit breaker. If the Tier-2 host
+# drops after the once-per-run pre-flight route succeeds, K consecutive per-file
+# LLM failures trip a single ≤5s re-probe; on a down host the loop stops with a
+# `partial`/`partial-empty` status instead of re-polling every remaining file
+# (the old 90s-poll-per-file storm). Reset on any successful call.
+_CIRCUIT_BREAKER_K = 2
 
 # Restatement tells — phrases that almost always indicate the LLM is
 # paraphrasing the prompt rather than naming a mechanism. Collected from
@@ -878,6 +885,7 @@ def run_synthesis(
     classifier_version: str | None = None,
     logger: logging.Logger | None = None,
     memory_preamble: str = "",     # empty string disables injection
+    host_probe: Callable[[], bool] | None = None,
 ) -> SynthesisResult:
     """Drive the synthesis pass end-to-end.
 
@@ -928,6 +936,9 @@ def run_synthesis(
 
     files_attempted = 0
     files_succeeded = 0
+    # BT5 C1 — mid-run host-loss circuit breaker state.
+    consecutive_failures = 0
+    host_lost_mid_run = False
 
     for fp in changed_files:
         if time.monotonic() - start >= budget_seconds:
@@ -1021,8 +1032,32 @@ def run_synthesis(
             parsed = llm_caller(prompt)
         except Exception as exc:
             result.warnings.append(f"LLM call failed for {fp.name}: {exc}")
+            # BT5 C1 — mid-run host-loss circuit breaker. After K consecutive
+            # failures, re-probe once (≤5s) to tell "host lost mid-run"
+            # (defer-shaped → partial) from "host up but every call fails"
+            # (real error, e.g. model not pulled → 404). Either way, STOP the
+            # loop — never re-enter a 90s poll per remaining file.
+            consecutive_failures += 1
+            if host_probe is not None and consecutive_failures >= _CIRCUIT_BREAKER_K:
+                try:
+                    reachable = bool(host_probe())
+                except Exception:
+                    reachable = False
+                if reachable:
+                    result.warnings.append(
+                        f"stopped after {consecutive_failures} consecutive LLM "
+                        f"failures with host reachable (check model availability)"
+                    )
+                else:
+                    host_lost_mid_run = True
+                    result.warnings.append(
+                        f"host lost mid-run after {result.files_processed} files"
+                    )
+                break
             continue
 
+        # Any success resets the consecutive-failure streak.
+        consecutive_failures = 0
         files_succeeded += 1
 
         concepts = parsed.get("concepts", []) or []
@@ -1172,7 +1207,14 @@ def run_synthesis(
     # Promote result.status based on what actually happened during the per-file loop.
     # Done at the end so the existing "set status=partial on budget timeout" path
     # can compose with this (if status is already an error-class value, leave it).
-    if result.status not in {STATUS_ERROR, STATUS_BUDGET_EXHAUSTED, STATUS_WOL_DEFERRED}:
+    if host_lost_mid_run:
+        # BT5 C1 — a mid-run host loss is an environmental miss, not a code
+        # failure: record it as partial (some articles landed) / partial-empty
+        # (none did) rather than letting the files_succeeded==0 branch below
+        # mislabel it `error`. The pre-flight already succeeded this run, so the
+        # deferral status is reserved for the pre-flight-down case.
+        result.status = STATUS_PARTIAL if files_succeeded > 0 else STATUS_PARTIAL_EMPTY
+    elif result.status not in {STATUS_ERROR, STATUS_BUDGET_EXHAUSTED, STATUS_WOL_DEFERRED}:
         if files_attempted == 0:
             # Nothing to do this run; no signal to promote
             pass
@@ -1198,31 +1240,25 @@ def run_synthesis(
 # ─── CLI entry point (production path) ────────────────────────────────────
 
 def _default_llm_caller_factory(
-    router: HybridRouter,
-    manifest_state: dict[str, str] | None = None,
+    decision: RoutingDecision,
 ) -> Callable[..., dict]:
-    """Return an LLM caller that hits the routed MacBook Pro endpoint.
+    """Return an LLM caller bound to a PRE-RESOLVED routing decision.
 
-    Phase D: when `manifest_state` is provided, the first successful
-    routing decision mutates `model_used` and `wol_status` on the dict
-    so the synthesizer can later persist them in the synth-manifest.
-    Caller path: main() builds the dict, passes it in, and reads from
-    it after run_synthesis returns.
+    BT5 C1 (2026-07-05): routing is resolved ONCE per run in main() (a single
+    90s wake window aligned with the 02:25 pmset wake), not per file. This
+    caller just issues the HTTP request against the already-chosen endpoint —
+    the old per-prompt `route_to_macbook` (a fresh 90s poll for every changed
+    file on a down-host night) is gone. A bounded connect timeout lets a
+    mid-run host loss fail fast (feeding run_synthesis's circuit breaker)
+    while inference keeps the full 600s read budget.
     """
     import httpx
 
+    # Fast connect (host reachability decided in ~10s, not a 600s black-hole
+    # hang), long read (local inference on the 35B model can take minutes).
+    _timeout = httpx.Timeout(600.0, connect=10.0)
+
     def _call(prompt: str, max_tokens: int = 2000) -> dict:
-        async def go():
-            return await router.route_to_macbook(
-                task="vault_synthesis", wake_timeout_s=90.0
-            )
-        decision = asyncio.run(go())
-        if manifest_state is not None and not manifest_state.get("model_used"):
-            manifest_state["model_used"] = _normalize_model_name(decision.model)
-            manifest_state["wol_status"] = (
-                "mbp_awake" if decision.machine == "macbook_pro"
-                else "api_fallback"
-            )
         if decision.runtime == "ollama":
             # Ollama /api/chat: think:false suppresses Qwen3.5/3.6 thinking
             # tokens that LM Studio's MLX integration silently leaked.
@@ -1236,7 +1272,7 @@ def _default_llm_caller_factory(
                     "think": False,
                     "options": {"num_ctx": 32768, "temperature": 0.0, "num_predict": max_tokens},
                 },
-                timeout=600.0,
+                timeout=_timeout,
             )
             resp.raise_for_status()
             text = resp.json()["message"]["content"]
@@ -1250,7 +1286,7 @@ def _default_llm_caller_factory(
                     "max_tokens": max_tokens,
                     "stream": False,
                 },
-                timeout=600.0,
+                timeout=_timeout,
             )
             resp.raise_for_status()
             text = resp.json()["choices"][0]["message"]["content"]
@@ -1330,9 +1366,64 @@ def main() -> int:
         logger.error("Router init failed: %s", exc)
         return 1
 
-    # Phase D — capture model_used / wol_status for the synth-manifest.
+    # BT5 C1 (2026-07-05) — resolve the Tier-2 route ONCE per run, before the
+    # per-file loop, instead of re-polling a down host for every changed file
+    # (the old ~45-min poll storm → status=error → page-per-file). A single 90s
+    # wake window, aligned with the 02:25 pmset self-wake. Probe only when
+    # there is Tier-2 work: an empty run has nothing to defer (edge case).
+    today_iso = date.today().isoformat()
+    cfg_notify_on = raw_cfg.get("notifications", {}).get("notify_on")
     manifest_state: dict[str, str] = {}
-    llm = _default_llm_caller_factory(router, manifest_state=manifest_state)
+    decision: RoutingDecision | None = None
+    if changed:
+        try:
+            async def _preflight() -> RoutingDecision:
+                return await router.route_to_macbook(
+                    task="vault_synthesis", wake_timeout_s=90.0,
+                    notify_on=cfg_notify_on,
+                )
+            decision = asyncio.run(_preflight())
+        except WOLUnavailable as exc:
+            # Typed deferral (resurrects the once-dead handler): cheap, honest,
+            # self-re-queuing. Indexer state is intentionally NOT advanced (the
+            # `ok`/`partial` gate below), so the changed files re-attempt next
+            # opportunity — the implicit retry queue. Exit 0 (launchd).
+            logger.warning("Tier-2 host unreachable — deferring: %s", exc)
+            deferred = SynthesisResult(status=STATUS_WOL_DEFERRED)
+            deferred.run_id = datetime.now().isoformat(timespec="seconds")
+            deferred.wol_status = "wol_deferred"
+            try:
+                write_synth_manifest(
+                    vault_root=cfg.vault_root, result=deferred, today=today_iso
+                )
+            except OSError as werr:
+                logger.warning("synth-manifest write failed on deferral: %s", werr)
+            record_run(cfg.log_dir, AGENT_NAME, mode=None, status="deferred",
+                       cost_usd=0.0, duration_ms=None, turns=None,
+                       notes="tier2-host-unreachable")
+            return 0
+        # Host reachable — record the resolved model/host for the manifest.
+        manifest_state["model_used"] = _normalize_model_name(decision.model)
+        manifest_state["wol_status"] = (
+            "mbp_awake" if decision.machine == "macbook_pro" else "api_fallback"
+        )
+
+    # Per-file caller bound to the pre-resolved decision (no per-file routing).
+    # With no Tier-2 work, run_synthesis early-returns before invoking it, so a
+    # no-op caller is safe.
+    if decision is not None:
+        llm = _default_llm_caller_factory(decision)
+    else:
+        def llm(prompt: str, max_tokens: int = 2000) -> dict:
+            return {"concepts": [], "connections": []}
+
+    # Mid-run host-loss re-probe for run_synthesis's circuit breaker.
+    def _host_probe() -> bool:
+        try:
+            return asyncio.run(router.probe("macbook_pro"))
+        except Exception:
+            return False
+
     retriever = _default_retriever_factory(cfg.vault_root)
 
     # Fleet memory (Phase 1 pilot, 2026-05-27).
@@ -1353,7 +1444,6 @@ def main() -> int:
     from agents.vault_indexer import get_db_path
     db_path = get_db_path(cfg.vault_root)
     db_conn = concept_edges.get_connection(db_path)
-    today_iso = date.today().isoformat()
 
     start_ns = time.monotonic_ns()
     try:
@@ -1369,25 +1459,12 @@ def main() -> int:
             ),
             logger=logger,
             memory_preamble=memory_preamble,
+            host_probe=_host_probe,
         )
-    except WOLUnavailable as exc:
-        logger.warning("WOL unavailable — deferring: %s", exc)
-        # Phase D: still write a manifest so the daily-driver brief sees
-        # the deferral, not silent absence.
-        deferred_result = SynthesisResult(status="wol-deferred")
-        deferred_result.run_id = datetime.now().isoformat(timespec="seconds")
-        deferred_result.wol_status = "wol_deferred"
-        try:
-            write_synth_manifest(
-                vault_root=cfg.vault_root, result=deferred_result, today=today_iso
-            )
-        except OSError as werr:
-            logger.warning("synth-manifest write failed on deferral: %s", werr)
-        db_conn.close()
-        record_run(cfg.log_dir, AGENT_NAME, mode=None, status="deferred",
-                   cost_usd=0.0, duration_ms=None, turns=None,
-                   notes="wol-unavailable")
-        return 0
+    # NOTE (BT5 C1): the routing decision is now pre-resolved above, so a
+    # WOLUnavailable can no longer originate inside the per-file loop — the
+    # deferral is handled at the pre-flight. Only genuine code/LLM failures
+    # reach here.
     except Exception as exc:
         logger.error("synthesis failed: %s", exc)
         db_conn.close()

@@ -38,6 +38,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   deferral. Also lands the CLAUDE.md agents-table correction (Tier-2 model is
   `qwen3.6_35b-a3b-32k` since 2026-05-26, not Qwen3-14B; "skip-and-continue" falsified) and,
   separately, the `_normalize_model_name` stale-enum fix.
+- **C1+C2 shipped (2026-07-05).** `vault_synthesizer.main()` now resolves the Tier-2 route
+  **once per run** before the per-file loop (`route_to_macbook` hoisted out of the per-prompt
+  caller); on an unreachable host it takes the resurrected typed-deferral path (writes one
+  `wol-deferred` manifest, `record_run status="deferred"`, indexer state NOT advanced so the
+  work re-queues, exit 0). `_default_llm_caller_factory` now binds to a pre-resolved
+  `RoutingDecision` (bounded 10s connect / 600s read) instead of routing per file. Added a
+  mid-run circuit breaker in `run_synthesis` (`host_probe` param): after K=2 consecutive
+  per-file failures it re-probes once and stops — `partial`/`partial-empty` on host loss,
+  no 90s-poll-per-remaining-file. `route_to_macbook` gained a `notify_on` gate
+  (`_should_notify_host_unreachable`): silent by default (honors `[notifications].notify_on`,
+  where `wol_failure` was removed in v3.14.3), `host_unreachable` opts back in; legacy
+  callers (flush) unchanged. New suite `tests/test_bt5_tier2_deferral.py` (8 tests,
+  failing-test-first); full agents-sdk suite green (926).
 
 ### CLAUDE.md — retire the Obsidian-Git vault-ownership rule (2026-07-05)
 - **Deleted Non-Negotiable rule 8** ("Obsidian-Git is the sole owner of vault
