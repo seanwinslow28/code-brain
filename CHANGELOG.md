@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fable 5 audit campaign — Phase A prep (2026-07-04)
+- **Fable 5 campaign scaffolding.** Added the campaign + research-grounding docs
+  (`docs/plans/2026-07-04-fable5-audit-campaign.md`, `-wwf5d-research-findings.md`),
+  two audit-harness skills (`skill-audit`, `zoom-out-and-think`), the skill triage,
+  and the WWF5D scaffold (introspection protocol, task battery + Opus baselines,
+  validation harness, Phase B runbook). Phase A (Opus/Sonnet prep) only; Phase B
+  runs on Fable per the runbook. WWF5D encodes abstracted recipes corroborated by
+  behavioral diffs, never raw transcripts.
+
 ### fusion-discovery-council E1 — NLI entailment gate (2026-07-01)
 - **fusion-discovery-council E1 — substring→NLI entailment upgrade for the core VERIFY gate.**
   New `council/discovery/nli.py`: an in-process `cross-encoder/nli-deberta-v3-small` int8 ONNX

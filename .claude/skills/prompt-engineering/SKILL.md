@@ -17,6 +17,8 @@ Systematically apply Anthropic's official prompt engineering best practices when
 - Building reusable prompt templates with variables
 - Reviewing a prompt before deploying it in production or a Claude Project
 - Writing prompts for Claude Code CLAUDE.md files or custom instructions
+- Writing a skill's system prompt (SKILL.md body) or an agent system prompt
+- Writing an MCP tool or skill **description** — the short trigger text a model reads to decide whether to invoke it (optimize for auto-selection: lead with the action and the *when-to-call* trigger conditions, not prose a human would enjoy)
 - Helping someone learn how to prompt effectively
 
 ## Examples
@@ -60,6 +62,8 @@ Claude: [Uses prompt-engineering skill] Creates template with:
 Apply these in order from most to least broadly effective. Not every prompt needs all 9 — use judgment based on complexity.
 
 For detailed explanations and examples of each technique, see techniques-guide.md.
+
+**Calibrate to current Claude (4.x/5.x), not legacy habits.** Modern Claude models follow clear intent and structure far better than older ones, so the highest-leverage move is almost always sharper instructions, not more scaffolding. Two specific recalibrations: don't wrap everything in XML "just in case" (Technique 4 — use tags to disambiguate genuinely separate components, not as decoration), and don't lean on an elaborate role-play persona to unlock capability (Technique 5 — on modern models the persona shapes tone and framing, not raw ability; lead with a precise task description). When you catch yourself reaching for a legacy trick, check first whether one clearer sentence would do the same work.
 
 ### Technique 1: Be Clear and Direct
 
@@ -125,17 +129,16 @@ Role prompting turns Claude from a general assistant into a domain expert.
 - Role affects tone, depth, terminology, and focus
 - Combine with constraints: "You are an editor. Rules: Preserve meaning. Improve clarity. Keep sentences under 18 words."
 
-### Technique 6: Prefill Claude's Response (API Only)
+### Technique 6: Prefill Claude's Response (Legacy — Removed on Current Models)
 
-Start Claude's response with specific text to control format and skip preamble.
+Prefilling means starting Claude's response with your own text to control format and skip preamble. **On current Claude models (Opus 4.6 and the 4.7 / 4.8, Sonnet 5, and Fable 5 lines), a last-assistant-turn prefill returns a 400 error** — do not reach for it first. It remains valid only on older/legacy models.
 
-**Apply by asking:** Do I need Claude to output in a specific format (JSON, XML) without preamble? (API/Claude Code only)
+**Use these modern replacements instead:**
+- **Guaranteed JSON / schema output** → structured outputs: set `output_config.format` with a JSON schema (or use the SDK's `messages.parse()`). This replaces prefilling `{` and actually *guarantees* the shape rather than nudging toward it.
+- **Skip the preamble** ("Here is the summary:") → a system-prompt instruction: *"Respond directly with no preamble; do not open with 'Here is' or 'Based on'."*
+- **Hold a persona / role** → set the role in the system prompt (Technique 5), not by prefilling `[ROLE_NAME]:`.
 
-**Key rules:**
-- Prefilling `{` forces JSON output with no intro text
-- Prefilling `[ROLE_NAME]:` helps maintain character in conversations
-- Not available with extended thinking mode
-- A little prefilling goes a long way — even a few words can steer output dramatically
+**Apply by asking:** Am I targeting a current model? If yes, use structured outputs or a system-prompt instruction. Only prefill when you have confirmed the target is a legacy model that still accepts it.
 
 ### Technique 7: Chain Complex Prompts
 
@@ -172,6 +175,25 @@ Add self-checking instructions to catch errors before final output.
 - For factual tasks: "Quote the relevant source material before drawing conclusions"
 - For code: "Trace through your code with a test case before presenting it"
 
+## Debugging a Prompt That Produces Bad Output
+
+When an existing prompt misbehaves, do NOT rewrite it from scratch and re-apply all nine techniques — that discards the parts that already work and often reintroduces the same bug. Diagnose the specific failure, change the one thing most likely responsible, and re-test.
+
+1. **Name the failure mode precisely.** What is actually wrong with the output — not "it's bad"? Wrong format, hallucinated facts, ignored a constraint, wrong tone/voice, too long/short, or a refusal?
+2. **Map the failure to its most-likely cause** and change only that:
+
+| Failure mode | Most-likely cause → the one change to try first |
+|--------------|--------------------------------------------------|
+| Wrong or inconsistent format | No structured output / no example of the exact shape → add `output_config.format` (Technique 6) or 2-3 examples (Technique 2) |
+| Hallucinated / made-up facts | No grounding → require "quote the source before answering" (Technique 9) or supply the source in `<document>` tags (Technique 8) |
+| Ignored a constraint | Constraint buried or stated once → move it to its own line, phrase it as a negative ("Never …"), and put the most important constraints last (Technique 1) |
+| Wrong tone / voice | No role or no voice example → set the role (Technique 5) and show one example in the target voice (Technique 2) |
+| Too long / rambling / too terse | No length or scope bound → add an explicit limit and say what to cut ("under 150 words; drop background the reader already has") |
+| Unwanted preamble | → system-prompt instruction to respond directly (see Technique 6's modern replacements) |
+| Refusal on benign work | Over-aggressive framing or an ambiguous request → reframe the intent plainly and state the legitimate use; don't escalate with "you MUST" |
+
+3. **Change one thing, then re-test on the same input that failed.** If it's fixed, stop — don't keep "improving." If not, revert that change and try the next-most-likely cause. Rewriting everything hides which constraint was actually broken; a targeted fix tells you.
+
 ## Prompt Assembly Order
 
 When building a prompt, assemble components in this order:
@@ -198,6 +220,14 @@ When building a prompt, assemble components in this order:
 | Summarization | Clarity, XML, Long context | CoT, Validation |
 | Multi-step workflow | Chaining, XML handoffs | Validation per step |
 | Template creation | XML, Examples, Variables | Role, Validation |
+
+## Verify the Prompt Actually Works
+
+A checklist-complete prompt is not the goal — a prompt that changes model behavior is. Before delivering any prompt you wrote or improved:
+
+1. State the **one** behavior change you're targeting ("outputs valid JSON every time," "stops adding a summary paragraph," "catches the edge case it was missing").
+2. Run it once on a representative input and read the output against that target — a before/after if you're improving an existing prompt.
+3. If the target behavior didn't move, treat it as a debugging problem (see the section above), not a reason to pile on more instructions. Deliver only once you've seen the change you promised.
 
 ## Success Criteria
 

@@ -9,7 +9,7 @@ description: The gate that makes a post worth reading and worth coming back for.
 
 Make sure a post is a gift, not filler. The story (owned by `storytelling-architecture`) is the hook; this skill owns the payoff: the real problem solved and the value handed to the reader. It encodes the source thesis directly: *the #1 metric is building a library of things YOU genuinely found valuable; every post solves a real problem you actually had; content for content's sake is the failure mode.*
 
-This skill operates on the **beat map** from `storytelling-architecture` (in-context, not a file). It annotates that map with the value gate and the narrative-to-value seam. It does **not** write prose and does **not** reorder beats. The voice layer writes sentences next.
+This skill operates on the **beat map** and its **Handoff Block** from `storytelling-architecture` (in-context, not a file). It annotates that map with the value gate and the narrative-to-value seam, attaching to the crest beat and central loop the Handoff Block names rather than re-deriving them. It does **not** write prose and does **not** reorder beats. The voice layer writes sentences next.
 
 ## When to Use
 
@@ -24,23 +24,25 @@ A post may not proceed unless it names all three slots. If any slot is empty or 
 
 1. **Itch**: the specific, real, first-person problem the author actually had. Must be concrete enough to be checkable (a named tool, a dated incident, a real cost). If you cannot name a genuine itch, kill the piece: it is content for content's sake.
 2. **Solution**: what the author actually did about it (the narrative payoff and the teaching). Must include at least one artifact the reader can see: a run, an eval, a number, a commit, a failed attempt.
-3. **Transfer**: one sentence: *"After reading this, the reader can now ___."* If the Transfer is vague ("understand AI better"), the piece fails. It must be a concrete capability the reader gains.
+3. **Transfer**: one sentence: *"After reading this, the reader can now ___."* If the Transfer is vague ("understand AI better"), the piece fails. It must be a concrete capability the reader gains, **delivered by a specific artifact named in the Solution slot**: the reader can now [do X] *using* [the prompt / checklist / command / eval you shipped]. A Transfer that names a capability but no artifact that delivers it is the vague-value pass this gate exists to stop; weld the capability to the copy-pasteable thing, or the slot is not filled.
 
-Output the gate verdict explicitly: PASS (with the three slots filled) or BLOCK (with the missing slot named). A draft that started from "what's trending" or "I should post something" almost always fails the Itch slot, and that is the gate working.
+Output the **Value Gate verdict** explicitly: PASS (with the three slots filled) or BLOCK (with the missing slot named). A draft that started from "what's trending" or "I should post something" almost always fails the Itch slot, and that is the gate working. This named verdict travels forward through the (locked) voice stage: `writing-critique` re-checks the same three slots against the voiced draft (it verifies the slots actually landed; it does not re-run the gate).
+
+On PASS, **lock the Transfer as the single takeaway** and hand it to the voice stage: one sentence, the capability welded to its delivering artifact, marked as the spine every section serves. Sharpen it until the draft nearly writes itself from it. This locked takeaway is what shapes the draft downstream; a fuzzy takeaway here becomes a fuzzy piece four stages later, when it is far more expensive to fix.
 
 ## The Narrative-to-Value Seam
 
 The single highest-craft moment. After the story crests (the beat map's turn/payoff), the instruction must read as *finishing the story*, not interrupting it. Spec:
 
-1. The story's hook is a half-told problem. The loop stays open through the struggle.
-2. At the crest, land ONE explicit declarative **pivot line** that names the lesson. (This skill marks WHERE the pivot lands and WHAT it must assert; the voice layer writes the actual sentence.)
-3. The how-to is delivered as the *fulfillment of the hook*, the closing of the loop, not a topic change. The reader should feel the value section answers the question the story raised.
+1. The story's hook is a half-told problem: storytelling's **central loop** from the open-loop ledger. The loop stays open through the struggle.
+2. At the **crest beat** storytelling marks in its Handoff Block, land ONE explicit declarative **pivot line** that names the lesson. (This skill marks WHERE the pivot lands and WHAT it must assert; the voice layer writes the actual sentence.) Attach to the crest storytelling handed over; do not re-derive it.
+3. The how-to is delivered as the *fulfillment of the hook*, the closing of the **central loop**, not a topic change. The reader should feel the value section answers the question the story raised. The Transfer's artifact is what closes that loop: if closing the central loop and landing the Transfer are not the same beat, the seam is bolted-on.
 
 Anti-pattern: a clean essay that stops, then a bolted-on "Here are 5 tips." The teaching must be the payoff of the specific story, not a generic appendix.
 
 ## The Four Supporting Rules
 
-1. **Rule of One.** One idea, one reader, one promise, one CTA per piece. The title/hook makes a promise; the body over-delivers on *exactly that* and nothing else. Scope-creep is a broken promise. Test: state the promise in one sentence; does every section serve it?
+1. **Rule of One (one itch, hard).** One idea, one reader, one promise, one CTA per piece. The title/hook makes a promise; the body over-delivers on *exactly that* and nothing else. Scope-creep is a broken promise. Test: state the promise in one sentence; does every section serve it? **The common failure is three half-itches wearing one title.** If triage surfaces more than one candidate itch, the gate BLOCKS until exactly one survives: pick the realest and cut the rest, or split them into separate posts. Three half-solved problems is three broken promises, not one rich piece; depth on one itch beats coverage of three.
 
 2. **Over-deliver on a narrow promise.** Earn trust with surplus on a *tight* surface, never breadth-for-coverage. A copy-pasteable artifact (a prompt, a checklist, a command), a real number, a named example. Gate: *"Does this contain one thing the reader can use in the next 10 minutes?"* Depth-on-one-thing beats a survey of ten.
 
@@ -66,7 +68,7 @@ storytelling-architecture → substack-value-engine → writing-voice-modes → 
 
 - This skill runs the Value Gate, marks the seam, and annotates the beat map with Itch/Solution/Transfer and where the artifact/payoff/sideways-ask land. It does **not** write prose and does **not** reorder beats.
 - If the Value Gate BLOCKS, the chain stops here. Do not pass a failing piece downstream to be dressed up in good voice. A well-voiced piece that solves nothing is the worst outcome (polished slop).
-- On PASS, hand the annotated beat map to `writing-voice-modes`, which writes every sentence fresh.
+- On PASS, hand the annotated beat map — plus the **locked single takeaway** and the named **Value Gate verdict** — to `writing-voice-modes`, which writes every sentence fresh against the takeaway. These travel in-context through the voice stage; `writing-critique` consumes the Value Gate verdict downstream.
 
 Handoff is in-context, not a saved file.
 
@@ -74,7 +76,7 @@ Handoff is in-context, not a saved file.
 
 - `storytelling-architecture`: the prior stage. Produces the beat map this skill gates and annotates. Story makes them read; this makes it worth their time.
 - `writing-voice-modes`: writes every sentence against the annotated beat map. This skill decides the pivot line's job; voice writes the line. Owns the "Desperation Posing as Self-Deprecation" anti-pattern this skill's sideways-ask rule defers to.
-- `writing-critique`: red-teams the voiced draft. It checks whether the Value Gate and hiring signal actually landed (Itch/Solution/Transfer delivered, ask stays sideways) but defers to this skill on the gate itself; it critiques execution, not the verdict.
+- `writing-critique`: red-teams the voiced draft. It re-checks the named **Value Gate verdict** (Itch/Solution/Transfer delivered, ask stays sideways) against the voiced draft but defers to this skill on the gate itself; it critiques execution, not the verdict.
 - `writing-humanity-pass`: the final scrub, runs last.
 - `creative-writing`: owns format/length constraints the value gate operates within.
 
@@ -86,9 +88,10 @@ Handoff is in-context, not a saved file.
 
 - [ ] Value Gate verdict is explicit: PASS (3 slots filled) or BLOCK (missing slot named).
 - [ ] Itch is real, first-person, and checkable; no content-for-content's-sake passes.
-- [ ] Transfer is one concrete sentence ("the reader can now ___"), not vague.
-- [ ] The seam is marked: the value reads as fulfilling the hook, not a bolted-on appendix.
-- [ ] Rule of One holds; over-deliver test passes (one usable thing in 10 minutes).
+- [ ] Transfer is one concrete sentence welded to a delivering artifact ("the reader can now ___ using ___"), not vague.
+- [ ] On PASS, the Transfer is locked as the single takeaway and handed forward as the draft's spine.
+- [ ] The seam is marked: the value reads as fulfilling the hook, closing storytelling's central loop, not a bolted-on appendix.
+- [ ] Rule of One holds: exactly one itch survives (multi-itch pieces are blocked or split); over-deliver test passes (one usable thing in 10 minutes).
 - [ ] Hiring signal is shown via artifact + decision reasoning, never claimed.
 - [ ] The ask stays sideways; the piece ends on work or lesson, never a request.
 - [ ] No prose written; no beats reordered (chain contract honored).
