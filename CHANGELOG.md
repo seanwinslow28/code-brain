@@ -51,6 +51,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   where `wol_failure` was removed in v3.14.3), `host_unreachable` opts back in; legacy
   callers (flush) unchanged. New suite `tests/test_bt5_tier2_deferral.py` (8 tests,
   failing-test-first); full agents-sdk suite green (926).
+- **C4 shipped (2026-07-05).** Added a first-class `host_probe` outcome to the synth manifest
+  (`SynthesisResult.host_probe`: `"ok"` | `"unreachable"` | `"lost-mid-run"`) so a Tier-2 miss
+  can never again be mislabeled a generic `error`. Consumer sweep:
+  `substack_drafter.is_synthesizer_dry` now treats `wol-deferred` / host-unreachable nights as
+  **non-dry** (a deferral isn't evidence the synthesizer ran empty — it didn't run), so a run
+  of off-LAN weekends can't wrongly suppress the drafter; `fleet_summary` gained a `⏸ deferred`
+  badge so the daily note surfaces a deferral distinctly (verified `meta_agent` already passes a
+  `deferred` CSV status through as its own state, not `error`/`healthy`). Cosmetic enum fix:
+  `_normalize_model_name` maps the real Tier-2 model (`qwen3.6_35b-a3b-32k`, since the
+  2026-05-26 Ollama swap) to a new `qwen3.6-35b-a3b-32k` enum instead of the historical
+  `qwen3-14b`; `MODEL_USED_VALUES` + the `evals/vault-synthesizer/cases.yaml` `model_used`
+  contract extended to accept both. CLAUDE.md agents-table: corrected the Vault Synthesizer +
+  Flush rows (model name + typed-deferral semantics; "skip-and-continue" falsified). Suite
+  green (929).
 
 ### CLAUDE.md — retire the Obsidian-Git vault-ownership rule (2026-07-05)
 - **Deleted Non-Negotiable rule 8** ("Obsidian-Git is the sole owner of vault

@@ -81,7 +81,15 @@ _SLUG_RE = re.compile(r"[^a-z0-9]+")
 # is used when no LLM call completed during the run (e.g., MBP asleep, network
 # refused). Downstream consumers (daily-driver brief, manifest readers) can
 # branch on the enum without the empty-string sentinel.
-MODEL_USED_VALUES = frozenset({"qwen3-14b", "claude-sonnet-4-6", "claude-haiku-4-5", "none"})
+# BT5 (2026-07-05): `qwen3.6-35b-a3b-32k` is the real Tier-2 model since the
+# 2026-05-26 LM-Studio→Ollama swap; before this, `_normalize_model_name` mapped
+# every `qwen*` → `qwen3-14b`, so the manifest lied about which model ran. Both
+# names are retained: the new one for current runs, `qwen3-14b` for historical
+# manifests + the deep-research Mac-Mini model that legitimately carries it.
+MODEL_USED_VALUES = frozenset({
+    "qwen3.6-35b-a3b-32k", "qwen3-14b",
+    "claude-sonnet-4-6", "claude-haiku-4-5", "none",
+})
 MODEL_USED_NONE = "none"
 
 # --- status taxonomy (vs-015, vs-016, vs-017) ---
@@ -145,6 +153,8 @@ def _normalize_model_name(name: str) -> str:
     if not name:
         return MODEL_USED_NONE
     n = name.lower()
+    if "35b-a3b" in n or "qwen3.6" in n:
+        return "qwen3.6-35b-a3b-32k"
     if "qwen" in n:
         return "qwen3-14b"
     if "haiku" in n:
@@ -169,6 +179,12 @@ class SynthesisResult:
     edges_rejected: int = 0
     model_used: str = MODEL_USED_NONE
     wol_status: str = ""              # "mbp_awake" | "api_fallback" | "wol_deferred"
+    # BT5 C4 (2026-07-05) — first-class Tier-2 host-reachability outcome so a
+    # miss can never again be mislabeled a generic `error`. "" = not probed
+    # (pure unit path / empty run); "ok" = pre-flight reachable; "unreachable"
+    # = pre-flight down (typed deferral); "lost-mid-run" = host dropped after
+    # the pre-flight succeeded (circuit breaker → partial).
+    host_probe: str = ""
     run_id: str = ""                  # ISO timestamp; matches synth-manifest run_id
     # Tier 2 retrofit (2026-05-16) — sum of real HDBSCAN clusters HDBSCAN
     # found across every per-file retrieval pool this run. Surfaces in the
@@ -656,6 +672,8 @@ def write_synth_manifest(
         "duration_seconds": round(result.duration_seconds, 2),
         "model_used": result.model_used,
         "wol_status": result.wol_status,
+        # BT5 C4 — Tier-2 host-reachability outcome (see SynthesisResult).
+        "host_probe": result.host_probe,
         "status": result.status,
         # Tier 2 retrofit (2026-05-16) — total real clusters HDBSCAN found
         # across all per-file retrieval pools. ≥3 means the cluster-and-
@@ -1050,6 +1068,7 @@ def run_synthesis(
                     )
                 else:
                     host_lost_mid_run = True
+                    result.host_probe = "lost-mid-run"  # BT5 C4
                     result.warnings.append(
                         f"host lost mid-run after {result.files_processed} files"
                     )
@@ -1392,6 +1411,7 @@ def main() -> int:
             deferred = SynthesisResult(status=STATUS_WOL_DEFERRED)
             deferred.run_id = datetime.now().isoformat(timespec="seconds")
             deferred.wol_status = "wol_deferred"
+            deferred.host_probe = "unreachable"  # BT5 C4
             try:
                 write_synth_manifest(
                     vault_root=cfg.vault_root, result=deferred, today=today_iso
@@ -1483,6 +1503,9 @@ def main() -> int:
     # Phase D — copy model_used / wol_status into the result, write manifest.
     result.model_used = manifest_state.get("model_used", MODEL_USED_NONE)
     result.wol_status = manifest_state.get("wol_status", "")
+    # BT5 C4 — the pre-flight succeeded to reach here; unless the circuit
+    # breaker already recorded a mid-run loss, the host was reachable ("ok").
+    result.host_probe = result.host_probe or "ok"
     try:
         manifest_path = write_synth_manifest(
             vault_root=cfg.vault_root, result=result, today=today_iso

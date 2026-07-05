@@ -81,6 +81,28 @@ def test_dryness_gate_passes_when_only_most_recent_3_have_output(tmp_path):
     assert is_synthesizer_dry(health_dir=tmp_path, threshold=3) is False
 
 
+def test_dryness_gate_treats_deferrals_as_non_dry(tmp_path):
+    # BT5 C4: a wol-deferred night has concepts_written==0 because the synth
+    # DEFERRED (Tier-2 host down), not because it ran dry. A window of
+    # deferrals must NOT trip the dryness gate — there is pending
+    # un-synthesized material behind them.
+    from agents.substack_drafter import is_synthesizer_dry
+    _write_manifest(tmp_path, "2026-06-05", 0, status="wol-deferred")
+    _write_manifest(tmp_path, "2026-06-06", 0, status="wol-deferred")
+    _write_manifest(tmp_path, "2026-06-07", 0, status="wol-deferred")
+    assert is_synthesizer_dry(health_dir=tmp_path, threshold=3) is False
+
+
+def test_dryness_gate_deferral_breaks_a_dry_streak(tmp_path):
+    # A single deferral in the window is enough to say "not dry" — we can't
+    # conclude the synthesizer is dry across a night it never actually ran.
+    from agents.substack_drafter import is_synthesizer_dry
+    _write_manifest(tmp_path, "2026-06-05", 0)
+    _write_manifest(tmp_path, "2026-06-06", 0, status="wol-deferred")
+    _write_manifest(tmp_path, "2026-06-07", 0)
+    assert is_synthesizer_dry(health_dir=tmp_path, threshold=3) is False
+
+
 def test_dryness_gate_blocks_when_one_of_last_3_is_zero(tmp_path):
     # Any single zero in the last N nights → dry. Conservative.
     _write_manifest(tmp_path, "2026-05-30", 5)

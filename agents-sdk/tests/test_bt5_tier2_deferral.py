@@ -101,6 +101,7 @@ def test_circuit_breaker_stops_after_k_failures_when_host_down(
 
     assert calls["n"] == 2, "breaker must stop the loop at K=2, not grind all 5 files"
     assert result.status in {"partial", "partial-empty"}
+    assert result.host_probe == "lost-mid-run"  # BT5 C4 — truthful outcome
     assert any("host lost mid-run" in w for w in result.warnings)
 
 
@@ -281,3 +282,19 @@ def test_main_defers_once_when_host_unreachable(
     data = json.loads(manifest.read_text(encoding="utf-8"))
     assert data["status"] == "wol-deferred"
     assert data["wol_status"] == "wol_deferred"
+    assert data["host_probe"] == "unreachable"  # BT5 C4 — first-class outcome
+
+
+# ─── BT5 cosmetic — stale model-name enum ────────────────────────────────────
+
+def test_normalize_model_name_maps_current_tier2_model() -> None:
+    """BT5: the real Tier-2 model since the 2026-05-26 Ollama swap must stop
+    reporting as the historical `qwen3-14b` enum, while the deep-research
+    Mac-Mini model that legitimately carries that name still maps to it."""
+    from agents.vault_synthesizer import _normalize_model_name, MODEL_USED_VALUES
+
+    assert _normalize_model_name("qwen3.6_35b-a3b-32k") == "qwen3.6-35b-a3b-32k"
+    assert "qwen3.6-35b-a3b-32k" in MODEL_USED_VALUES
+    assert _normalize_model_name("qwen3-14b-research:latest") == "qwen3-14b"
+    assert _normalize_model_name("claude-sonnet-4-6") == "claude-sonnet-4-6"
+    assert _normalize_model_name("") == "none"
