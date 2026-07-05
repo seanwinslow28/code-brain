@@ -227,13 +227,16 @@ The warmth-under-darkness worldview survives at every level. Strip the gore befo
 
 Sean **drafts voice-first, format-second** — run-on prose dialogue blocks, format applied after. This has been stable for ~7 years; it is the rule, not a mistake. **Build the format pass into the workflow; don't train the looseness out.** Generate in voice (loose, fast, funny), then hand to `script-writing` for the formatting pass. Typos and loose constructions are voice data at the draft stage — clean rhythm and word choice, not over-polish.
 
+**Don't let the production cues die in the prose.** The voice draft is where the *directorial* decisions get made — a `CUT TO:`, a loaded object that has to be boarded, a wordless-ache beat with implied timing, every V.O./narrator line, the Register-Contrast blocking that lands "before dialogue." Buried in loose run-on prose, those cues are invisible to whoever formats and produces next — the exact failure where the timing and asset cues live in prose nobody extracts. Fix it at the *handoff*, not during drafting (keep the drafting loose): when you pass the draft to `script-writing`, append a compact **production-cue list** — the cuts, the loaded objects/props to board, the V.O. lines, the blocking beats, and any beat whose timing matters — so the format pass and the downstream production skills (`remotion-*`, `video-animation-production`) can lift them instead of re-deriving them from prose. You flag the cues; `script-writing` owns turning them into the formatted, parseable structure. (This generalizes the "flag visual findings for `animation-pipeline`" instinct in the Miyazaki section to every production-load-bearing cue.)
+
 ## Integration with `script-writing`
 
 This skill controls voice/taste/jokes/emotional engine. `script-writing` controls format, beat order, and production handoff. When loaded together:
 
 - **Voice operates inside the structural frame, not over it.** If `script-writing`'s beat sheet says the turn lands at 2:15, the Contradiction Cut respects that placement — it doesn't blow up the structure to land a joke.
 - **A few moves are genuinely both.** A `CUT TO:` is format, structure, *and* a joke at once. When structure and voice disagree on one of these, resolve toward the joke — the cut exists because it's funny.
-- **Order of operations:** structure first (beat sheet via `script-writing`) → voice draft (this skill, loose and fast) → format pass (`script-writing`) → table read.
+- **Carry the production cues into the frame, don't bury them.** The voice draft generates directorial artifacts — cuts, loaded objects, V.O. lines, blocking, timing-bearing beats. Surface them for `script-writing` to format (see The Format Pass); a brilliant loaded-object beat that never reaches the board or the timeline was wasted.
+- **Order of operations:** structure first (beat sheet via `script-writing`) → voice draft (this skill, loose and fast) → surface the production-cue list at handoff → format pass (`script-writing`, cues → formatted/parseable structure) → table read.
 
 ## References
 
@@ -249,6 +252,7 @@ The mode descriptions and moves table above are sufficient for standard applicat
 - `script-writing` — Owns format, beat structure, and production handoff. This skill provides the voice within that frame.
 - `writing-voice-modes` — The prose twin. The `CUT TO:`, hard cut/deflation, and self-deprecation-as-structure cross both media; several signature moves are shared.
 - `animation-pipeline` — The Miyazaki/visual findings (object-economy, room-as-biography, wordless ache via loaded object) feed storyboard and shot work. Flag visual discoveries for both skills.
+- `remotion-*` / `video-animation-production` — The downstream production consumers (explainers, trailers, YouTube). They ingest the *formatted* script's scene/shot/V.O./timing structure; the production-cue list you surface at handoff (see The Format Pass) is what survives to them. This skill doesn't format for them directly — it flags the cues so `script-writing`'s format pass can. (Defining the parseable scene/shot/V.O./timing schema itself is `script-writing`'s job, since it owns production handoff.)
 
 **anima fleet (lightweight pointer):** This skill is what **Sam** (the Phase-3 scriptwriter agent, Opus) loads to generate in Sean's voice — modes as inspiration, the moves table + §8 samples as the calibration anchors. The script↔board handoff to **Bea** (storyboard artist) sits where the voice produces *visual* storytelling — the Room-as-Biography and Loaded-Object moves are the cleanest handoff points (Sam writes the loaded object; Bea boards it). Sean stays the conductor. Full agent wiring lives in the anima repo, not here.
 
@@ -263,6 +267,7 @@ The mode descriptions and moves table above are sufficient for standard applicat
 - [ ] Closers are the strongest line/image in the scene (his single most reliable instinct)
 - [ ] The darkness wasn't sanded below the context dial
 - [ ] No anti-pattern violations
+- [ ] Production-load-bearing cues (cuts, loaded objects, V.O., blocking, timing beats) are surfaced for the format pass — not left buried in the prose draft
 
 ## Copy/Paste Ready
 

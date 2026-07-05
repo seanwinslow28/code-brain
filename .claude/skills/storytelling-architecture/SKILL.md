@@ -33,6 +33,17 @@ BEAT MAP: working title
 
 Do not write the sentences. Write the beats. The voice layer authors every line fresh against this map.
 
+## The Handoff Block (required — travels with the beat map)
+
+The beat map is stage 1 of a five-stage chain, and its decisions have to survive four stages to the final draft, past the locked voice stage that can only act on what physically arrives in context. A loop or a crest tracked only in your reasoning dies at the voice stage. So every beat map ends with an explicit Handoff Block: emitted text the next stages consume **by name**, never the skill's private notes.
+
+- **Open-loop ledger.** Every loop the map opens, listed with where it opens and where it is scheduled to close: `L1 — opens at beat 1 (why did the build break?) → closes at beat 5`. This is the open-loop budget (mechanic 3) made durable. `writing-critique`, four stages downstream, checks loop closure against this ledger; a loop with no scheduled close is a bug in the map, not a style choice.
+- **Central loop.** Which ledger loop is the story's spine: the half-told problem the hook opens and the payoff closes. `substack-value-engine` lands its value payoff on exactly this loop.
+- **Crest beat.** The beat where tension peaks and the turn lands. `substack-value-engine` attaches its pivot line here; don't make it re-find the crest.
+- **Seam beat.** The beat where value / the Transfer lands (the SO-CAN-YOU beat).
+
+Name all four explicitly. The downstream stages are instructed to consume this block by name; when it is missing they re-derive it by eye and drift, which is the "explicit handoff notes the next stage actually consumes" this skill exists to provide.
+
 ## The Six Enforced Mechanics
 
 Each is a gate. Run the beat map against all six.
@@ -41,7 +52,7 @@ Each is a gate. Run the beat map against all six.
 
 2. **Cold open / in medias res.** Open on a concrete moment, scene, or live tension. Never on context, definitions, or "In this piece I'll...". The first beat raises ONE specific unanswered question. Throat-clearing openings are a fail.
 
-3. **Open-loop budget.** Every loop the map opens must be closed by a later beat. In short form, a loop closes within ~1-3 beats/paragraphs or the reader disengages from frustration. Track each loop; flag any left open at the end. (Justify loops by *motivational tension*, not memory. The Zeigarnik "you'll remember it" claim fails replication: see `references/story-mechanics.md`.)
+3. **Open-loop budget.** Every loop the map opens must be closed by a later beat. In short form, a loop closes within ~1-3 beats/paragraphs or the reader disengages from frustration. Record each loop in the **open-loop ledger** (emitted in the Handoff Block above), not just in your head; flag any left open at the end. Tracking a loop only in reasoning is the failure mode: it dies at the locked voice stage and `writing-critique` has nothing to check closure against four stages later. (Justify loops by *motivational tension*, not memory. The Zeigarnik "you'll remember it" claim fails replication: see `references/story-mechanics.md`.)
 
 4. **Closeable gap, not chasm.** The hook promises a payoff that feels imminent and attainable ("the one line that broke the build"), not vast and vague ("the secret of great writing"). Flag hooks that promise more than the beats can pay off.
 
@@ -62,7 +73,7 @@ These set beat ORDER. Treat them as a checklist of pressures the piece should sa
 
 The failure mode is structure leaking into the surface until a reader can name your template (the LinkedIn broetry trap). Two checks, applied to the beat map:
 
-- **Specificity check (McKee archetype vs stereotype):** each beat carries a detail specific to THIS story, not a generality any template would produce. Generic beat = formula has leaked. Concrete, lived, idiosyncratic beat = sound.
+- **Specificity gate (hard — McKee archetype vs stereotype):** each beat must carry a detail specific to THIS story, not a generality any template would produce. Generic beat = formula has leaked. Concrete, lived, idiosyncratic beat = sound. This is a blocking output gate, not an advisory pass: the map is not done while any beat is a generic shape (hook/tension/payoff boilerplate) that would fit any post. A beat you could paste into a different piece unchanged is tension not yet welded to THIS material; rewrite it before emitting the map.
 - **Nameable-template check:** if the beat order is the obvious canonical shape with nothing bent, vary it (start later, reorder a reveal, fold two beats). The reader should *feel* the structure, never name it.
 
 ## The Chain Contract (what this skill must NOT do)
@@ -77,13 +88,13 @@ storytelling-architecture → substack-value-engine → writing-voice-modes → 
 - `writing-voice-modes` writes 100% of the sentences fresh against the beats. It must never reorder beats.
 - `writing-humanity-pass` runs last.
 
-Handoff is in-context: the beat map flows to the next stage in the working context, not as a saved file.
+Handoff is in-context: the beat map **and its Handoff Block** flow to the next stage in the working context, not as a saved file. The open-loop ledger and the crest / central-loop / seam markers travel with the map through the (locked) voice stage, so `substack-value-engine` can attach the value gate to the coordinates it names, and `writing-critique` can check loop closure against the ledger four stages later.
 
 ## Related Skills
 
 - `substack-value-engine`: the next stage. Adds the value gate and the narrative-to-value seam to the beat map. Story makes them read; value-engine makes it worth their time.
 - `writing-voice-modes`: writes every sentence against this beat map. This skill owns ORDER; voice owns SENTENCES. Never let voice reorder beats; never let this skill phrase a line.
-- `writing-critique`: red-teams the voiced draft between voice and humanity-pass. It critiques structural execution (hook, but/therefore seams, loop closure) but never re-litigates the beat map this skill committed.
+- `writing-critique`: red-teams the voiced draft between voice and humanity-pass. It critiques structural execution (hook, but/therefore seams, loop closure) but never re-litigates the beat map this skill committed. It checks loop closure against this skill's **open-loop ledger** when the ledger is present in context.
 - `writing-humanity-pass`: the final scrub. Realizes forward-pull lines without em dashes.
 - `creative-writing`: owns format/word-count/platform constraints. Beat maps fit within those.
 
@@ -99,7 +110,8 @@ Handoff is in-context: the beat map flows to the next stage in the working conte
 - [ ] Every opened loop closes; short-form loops close within ~1-3 beats.
 - [ ] The hook's gap is closeable, and the central tension is withheld then escalated.
 - [ ] Each section ends on forward pull, not a summary.
-- [ ] Specificity check passes (no generic beats); template is not nameable.
+- [ ] Specificity gate passes (no generic beats; no beat pasteable into another piece); template is not nameable.
+- [ ] A Handoff Block is emitted: open-loop ledger (each loop, where it opens and closes) + central loop + crest beat + seam beat.
 
 ## Copy/Paste Ready
 
