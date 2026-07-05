@@ -1,6 +1,6 @@
 ---
 name: technical-writing
-description: Technical writing craft for audience-aware documents. Covers API getting-started guides, system design documents, onboarding guides, runbooks, release notes, changelogs, RFCs, and internal proposals. Use when asked to "write an API guide", "system design doc", "onboarding guide", "runbook", "release notes", "changelog", "write an RFC", "internal proposal", or "what's new announcement".
+description: Technical writing craft for reader-first documents people actually finish — the decision or action visible in the first screen, not buried under the author's journey. Covers API getting-started guides, system design documents, onboarding guides, runbooks, release notes, changelogs, RFCs, internal proposals, and PR descriptions. Use when asked to "write an API guide", "system design doc", "onboarding guide", "runbook", "release notes", "changelog", "write an RFC", "internal proposal", "PR description", or "what's new announcement".
 ---
 
 # Technical Writing
@@ -28,16 +28,34 @@ Write clear, audience-aware technical documents that humans actually read. This 
 | `decision-doc` | Capturing decision rationale (lightweight ADRs) |
 | **technical-writing** | **Writing craft for audience-facing documents** |
 
+## When This Craft Feeds Another Skill's Artifact
+
+`decision-doc`, `stakeholder-update`, a portfolio case study, or a GitHub PR body each own their document *shape* — but they're only as good as the writing craft inside them. When you produce (or hand off to) one of those, the First-Screen Test and reader-first structure still apply: a decision record whose decision is buried, or a PR description that walks the files before it says what changed and why it's safe, fails the same way any other doc does. This skill supplies that craft layer; the other skill owns the artifact's structure.
+
 ## Writing Principles
 
 Apply these to every document:
 
-1. **Front-load the conclusion.** Lead with what the reader needs to know, not how you got there. Put the summary first, details after.
+1. **Front-load the conclusion — reader's need, not author's journey.** Lead with what the *reader* needs to do or decide, not the story of how *you* got there. The single most important thing (the decision, the action, the outcome) goes in the first screen — never after a "Background" or "Current State" warm-up. Chronological author-narrative ("first we tried X, then Y, so we…") is the default failure mode; invert it. (Enforced by the First-Screen Test below.)
 2. **Write for the scanner.** Most readers scan. Use headers, bullet lists, bold key terms, and tables. Wall-of-text paragraphs lose readers.
 3. **Progressive disclosure.** Layer information: overview → quick start → detailed reference. Let readers stop when they have enough.
 4. **Active voice, plain language.** "The server validates the token" not "The token is validated by the server." Avoid jargon unless the audience expects it.
 5. **One idea per paragraph.** If a paragraph covers two topics, split it.
 6. **Show, don't just tell.** Every concept needs an example. Code blocks, command outputs, screenshots, or diagrams.
+
+## The First-Screen Test (the gate that makes docs get finished)
+
+"Front-load the conclusion" is easy to nod along to and still bury the lede. This is the forcing check that makes it real. A hiring manager or a busy engineer skims; if the one thing that matters isn't visible before they scroll, they bounce — and for the public repo and PM portfolio, that reader is often deciding something about the author. So every document clears this gate before it ships:
+
+**Cover the doc below the first paragraph (or the fold). From the title + first screen alone, can the reader state: (1) what this is, (2) the single most important decision / action / outcome, and (3) whether it's for them?** If not, the lede is buried — move it up.
+
+Concretely:
+- A system design doc's first screen names the *decision*, not just the system.
+- A PR description's first screen says what changed and why it's safe to merge, before the file-by-file walk.
+- Release notes lead with the one change users care about, not the version number.
+- An RFC's first screen states the proposal, not three paragraphs of problem history.
+
+If the most important sentence is currently in the middle or the end, that isn't a summary problem — that's the doc. Cut or move everything that delays it.
 
 ## Examples
 
@@ -302,12 +320,30 @@ Welcome! This guide gets you productive in [timeframe].
 - [ ] [Question for reviewers]
 ```
 
+### PR Description
+
+```markdown
+## What & why (first screen)
+[One or two sentences: what this PR changes and why it's safe to merge. A reviewer should be able to approve in principle from this alone.]
+
+## Changes
+- [User- or behavior-visible change]
+- [Change 2]
+
+## How to verify
+[The exact commands or steps a reviewer runs to confirm it works.]
+
+## Risk / rollback
+[What could break, and how to undo it. "Low risk — revert the commit" is a valid answer.]
+```
+
 ## Review Checklist
 
 Before publishing any technical document:
 
 - [ ] **Audience:** Is it clear who this is for? Does the language match their expertise level?
-- [ ] **Summary first:** Can a reader get the key point from the first paragraph?
+- [ ] **First-screen test:** From the title + first screen alone, can the reader name what this is, the key decision/action, and whether it's for them? (see The First-Screen Test)
+- [ ] **Reader-first, not author-first:** Does it lead with what the reader needs to do/decide, not the chronology of what the author did?
 - [ ] **Scannable:** Headers, lists, tables — not walls of text?
 - [ ] **Examples:** Does every concept have a concrete example?
 - [ ] **Actionable:** Can the reader do something with this information?
@@ -317,7 +353,7 @@ Before publishing any technical document:
 ## Success Criteria
 
 - [ ] Document has a clear audience and purpose statement
-- [ ] Key information is in the first paragraph, not buried
+- [ ] Passes the First-Screen Test — the key decision/action/outcome is visible before the reader scrolls, in reader terms not author chronology
 - [ ] Every technical concept has a working example
 - [ ] Review checklist passes
 - [ ] Document is appropriately differentiated from existing docs (no overlap with doc-workflows output)
@@ -331,4 +367,5 @@ Before publishing any technical document:
 "Write a runbook for [incident type]"
 "Draft release notes for this version"
 "Write an RFC for [proposal]"
+"Write a PR description for this change"
 ```
