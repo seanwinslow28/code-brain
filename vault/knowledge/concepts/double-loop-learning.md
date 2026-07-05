@@ -2,10 +2,10 @@
 title: "Double-loop learning"
 type: concept
 sources:
-  - knowledge/connections/the-volume-insight-tension-in-agent-fleets.md
+  - knowledge/concepts/double-loop-learning.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition

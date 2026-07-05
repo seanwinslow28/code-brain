@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/do-not-promote-framing.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
@@ -18,9 +18,9 @@ Sean uses this framing to manage his 'Raising Claude' series, ensuring that sens
 
 ## Evidence
 
-> "This framing acts as a semantic filter that suppresses specific personal topics from being surfaced by agents, based on the series' own voice rule and code-brain Rule #10."
+> This framing acts as a semantic filter that suppresses specific personal topics from being surfaced by agents, based on the series' own voice rule and code-brain Rule #10.
 
-> "Sean faces a structural tension where the very data that gives his Substack series its unique value (personal, sensitive narratives) is also the data that must be excluded from his public-facing agent inputs."
+> Sean faces a structural tension where the very data that gives his Substack series its unique value (personal, sensitive narratives) is also the data that must be excluded from his public-facing agent inputs.
 
 ## Examples
 

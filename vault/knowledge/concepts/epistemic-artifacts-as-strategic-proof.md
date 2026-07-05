@@ -2,10 +2,10 @@
 title: "Epistemic Artifacts as Strategic Proof"
 type: concept
 sources:
-  - knowledge/connections/epistemic-artifacts-as-strategic-proof.md
+  - knowledge/concepts/epistemic-artifacts-as-strategic-proof.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean faces the risk of appearing merely operational in his job hunt. By framing 
 
 ## Related Concepts
 
-[[Portfolio as Epistemic Artifact]] [[Strategy Kernel Check]] [[Agentic Engineering Signal]]
+[[Portfolio as Epistemic Artifact]] [[Strategy Kernel Check]]

@@ -2,10 +2,10 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/connections/the-legibility-boundary-tension-in-portfolio-design.md
+  - knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition

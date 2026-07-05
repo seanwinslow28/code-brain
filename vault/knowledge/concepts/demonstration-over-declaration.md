@@ -2,19 +2,19 @@
 title: "Demonstration Over Declaration"
 type: concept
 sources:
-  - knowledge/connections/attention-economics-vs-boundary-control-in-open-source.md
+  - knowledge/concepts/demonstration-over-declaration.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-This mechanism transforms abstract claims into refutable public tests that allow others to verify outcomes through direct interaction. It requires the creation of artifacts where another person can run a server, feed it bad intent, see the audit fail, and observe a better agent outcome. This approach signals quality without inviting excessive support requests by making the value proposition tangible and immediately verifiable.
+This mechanism transforms abstract professional claims into refutable public tests that allow external observers to verify outcomes through direct interaction rather than trusting narrative assertions. It requires the creation of tangible artifacts where a reviewer can run a server, feed it bad intent, see the audit fail, and observe a better agent outcome. This approach signals quality without inviting excessive support requests by making the value proposition immediately verifiable and reducing the cognitive load on maintainers who must review external contributions.
 
 ## Context
 
-Sean should prioritize falsifiable demos over broad contribution metrics to signal quality effectively. This strategy reduces the cognitive load on maintainers reviewing external contributions by providing explicit failure modes and evals that demonstrate capability rather than just describing it.
+Sean should prioritize falsifiable demos over broad contribution metrics to signal quality effectively in his job hunt and open-source presence. By providing explicit failure modes and evals, he demonstrates capability through proof-of-work rather than just describing it, which is critical for establishing trust in agentic engineering roles where governance judgment is paramount.
 
 ## Evidence
 
@@ -29,4 +29,4 @@ Sean should prioritize falsifiable demos over broad contribution metrics to sign
 
 ## Related Concepts
 
-[[Boundary Object Theory]] [[Agentic Engineering]]
+[[Boundary Object Theory]] [[Agentic Engineering Signal]]

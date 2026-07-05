@@ -2,32 +2,32 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: connection
 connects:
-  - Automation Failure and Daily Note Disruption
-  - Provider Fallback Mechanism
-  - Infrastructure Status and Agent Failure
-created: 2026-06-18
-updated: 2026-06-18
+  - The Illusion of Health in Autonomous Systems
+  - Operational Visibility vs. Semantic Value in Agent Fleets
+  - Deep Research Queue
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Synthesis
 
-The tension lies between the expectation of automated reliability and the reality of silent failures in background agents. When an agent fails silently (e.g., returning null content), it does not raise an error but instead produces incomplete or missing data. This causes downstream consumers to inherit stale context, leading to a breakdown in the knowledge vault's integrity that is only noticed by the user when they attempt to use the corrupted artifact.
+Technical health metrics mask semantic failures, creating a feedback loop where the operator believes the system is working while it is actually idle or producing low-value output. The deep-researcher's 'empty-queue' status is technically healthy but functionally useless, yet the daily report presents it as a success. This disconnect prevents Sean from identifying that his knowledge aggregation pipeline has stalled, leading to a false sense of progress in his job hunt and creative work.
 
 ## Threads
 
-### [[Automation Failure and Daily Note Disruption]]
+### [[The Illusion of Health in Autonomous Systems]]
 
-> When a synthesizer fails silently overnight, the morning brief inherits stale context, and the user notices the staleness before the brief flags the failure.
+> status=success · 5.5h ago · notes='concepts=146 connections=42 rejected=48 edges=21'
 
-### [[Provider Fallback Mechanism]]
+### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
 
-> change lines.append(r["content"]) to lines.append(r["content"] or "_(no response: model returned null)_")
+> Deep research queues are empty, meaning the major knowledge aggregation function was not utilized.
 
-### [[Infrastructure Status and Agent Failure]]
+### [[Deep Research Queue]]
 
-> The LLM council transcript crash where null content caused a TypeError, preventing the write even though the run succeeded.
+> status=empty-queue · mode=queue · 6.0h ago · notes='no unchecked items'
 
 ## Implications
 
-- Sean must implement explicit health checks for agent outputs before they are committed to the vault.
-- The system needs a mechanism to alert Sean when a silent failure occurs, rather than waiting for him to notice the gap.
+- Sean must define 'success' for each agent not by technical completion but by semantic output quality, requiring new metrics beyond status codes.
+- The daily fleet report should highlight 'value gaps' (e.g., empty queues despite active agents) rather than just technical health to prevent false confidence.

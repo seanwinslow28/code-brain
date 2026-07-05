@@ -2,15 +2,15 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-reliability-metrics-and-adaptive-capacity-in-agent-fleets.md
+  - knowledge/concepts/agent-health-monitoring.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-This concept describes the mechanism of distinguishing between technical detection of system states and the semantic evaluation of agent utility. It defines monitoring not merely as catching broken states or loops, but as assessing whether the agent's output preserves the original intent despite environmental noise. The underlying pattern is that traditional health checks are insufficient because they do not account for the 'work-as-done' reality where agents must navigate partial failures. Effective monitoring requires measuring the fidelity of intent preservation rather than just the presence of errors.
+This mechanism distinguishes between technical detection of system states and the semantic evaluation of agent utility. It defines monitoring not merely as catching broken states or loops, but as assessing whether the agent's output preserves the original intent despite environmental noise. The underlying pattern is that traditional health checks are insufficient because they do not account for the 'work-as-done' reality where agents must navigate partial failures. Effective monitoring requires measuring the fidelity of intent preservation rather than just the presence of errors.
 
 ## Context
 

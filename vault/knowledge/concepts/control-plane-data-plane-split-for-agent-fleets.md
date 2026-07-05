@@ -2,19 +2,19 @@
 title: "Control Plane / Data Plane Split for Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/representation-distortion-and-trust-erosion-in-agent-fleets.md
+  - knowledge/concepts/control-plane-data-plane-split-for-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-This concept defines the architectural separation between the simplified, deterministic control logic (control plane) and the complex, probabilistic agent behaviors (data plane). The tension arises when the control plane's assumptions about agent behavior diverge from the actual outputs produced in the data plane. This split creates a 'legibility debt' where the operator cannot easily see the true state of the system, leading to trust erosion when silent failures or 'slop' occur.
+This architectural pattern separates deterministic orchestration logic from probabilistic agent execution, creating a structural gap where the control plane's simplified model of reality diverges from the complex, noisy outputs generated in the data plane. This divergence produces 'legibility debt,' a state where the operator loses visibility into the true system state because the control signals no longer accurately reflect the underlying agent behaviors. The tension escalates when high-throughput sampling prioritizes volume over signal quality, leading to silent failures that erode trust before they are detected by standard success/failure metrics.
 
 ## Context
 
-Sean needs to implement 'unsafe control action' modes that explicitly flag when representations diverge from reality. The vault synthesizer must prioritize signal quality over volume to prevent trust erosion from 'slop'.
+Sean must implement 'unsafe control action' modes that explicitly flag when representations diverge from reality, preventing the accumulation of unobserved errors in his personal knowledge vault. The current fleet's drive for high-throughput sampling creates a systemic trust deficit, requiring a shift toward observability dashboards that highlight distortion metrics rather than just completion rates.
 
 ## Evidence
 

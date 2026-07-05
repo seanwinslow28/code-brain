@@ -2,19 +2,19 @@
 title: "Boundary Object Theory"
 type: concept
 sources:
-  - knowledge/expansions/connections/automation-infrastructure-and-interview-preparation.md
+  - knowledge/concepts/boundary-object-theory.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-Boundary objects act as the structural bridge between different social worlds, such as product management judgment, engineering execution, and agent governance. They are artifacts that have enough plasticity to adapt to local needs while maintaining enough identity to be shared across domains. This mechanism allows Sean's strongest artifacts to serve not just as tools but as translation layers that align disparate stakeholders. The invariant is that complex systems require objects that can be interpreted differently by different groups without losing their core function.
+Boundary objects function as structural bridges between distinct social worlds, such as product management judgment, engineering execution, and agent governance. These artifacts possess sufficient plasticity to adapt to local needs while maintaining enough identity to remain shared across domains. This mechanism allows Sean's strongest work to serve not merely as tools but as translation layers that align disparate stakeholders without losing their core function. The underlying invariant is that complex systems require objects interpretable differently by various groups while preserving a unified purpose.
 
 ## Context
 
-Sean operates at the intersection of creative studio work, job hunting, and infrastructure engineering. Understanding boundary objects helps him design artifacts that resonate with both technical interviewers and product-focused hiring managers. It elevates his work from mere implementation to strategic coordination.
+Sean operates at the intersection of creative studio work, job hunting, and infrastructure engineering, requiring artifacts that resonate with both technical interviewers and product-focused hiring managers. Understanding this theory elevates his work from mere implementation to strategic coordination, ensuring his outputs act as effective translation layers. This perspective helps him design artifacts that bridge the gap between abstract intent and concrete execution in high-stakes professional contexts.
 
 ## Evidence
 
@@ -29,4 +29,4 @@ Sean operates at the intersection of creative studio work, job hunting, and infr
 
 ## Related Concepts
 
-[[Cross-domain bridging]] [[Two Audiences]] [[Product Management]]
+[[Cross-domain bridging]] [[Two Audiences]]

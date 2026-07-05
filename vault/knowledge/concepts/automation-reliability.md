@@ -2,10 +2,10 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - knowledge/connections/the-integration-paradox-in-agentic-animation.md
+  - knowledge/concepts/automation-reliability.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition

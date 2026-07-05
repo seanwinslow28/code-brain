@@ -2,31 +2,31 @@
 title: "Slop as a Trust Deficit"
 type: concept
 sources:
-  - knowledge/connections/the-volume-insight-tension-in-agent-fleets.md
+  - knowledge/concepts/infrastructure-status.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-This mechanism describes a systemic erosion of confidence in automated knowledge synthesis, where the volume of generated artifacts (concepts and connections) outpaces their verifiable utility. As the fleet scales its sampling capacity, it generates more connections but fails to linearly increase valid concepts, creating a noise floor that obscures genuine insight. This forces Sean into a role of manual curator rather than automated assistant, eroding the value of the automation.
+This mechanism describes a systemic erosion of confidence in automated knowledge synthesis, where the volume of generated artifacts outpaces their verifiable utility. As agents produce more content with lower semantic density, the user's trust in the system's ability to provide value diminishes, leading to increased manual oversight or complete abandonment of the automation. The invariant is that trust is a function of signal-to-noise ratio, and automated systems that prioritize volume over precision actively degrade their own long-term viability.
 
 ## Context
 
-Sean's infrastructure suffers from a critical tension where robust protocol instrumentation masks epistemic blindness, creating an illusion of health that is particularly dangerous in creative production. The fleet's drive for high-throughput sampling directly conflicts with the preservation of taste memory, leading to a systemic trust deficit that requires manual intervention.
+Sean's increasing rejection counts in later runs (e.g., 78 rejections in June 23) indicate that the system is producing 'slop'—content that is technically valid but semantically rejected. This creates a trust deficit where Sean must spend more time curating and rejecting outputs, negating the time-saving benefits of the automation.
 
 ## Evidence
 
-> This creates a 'Slop as a Trust Deficit' where Sean must manually curate outputs that the fleet produces in abundance.
+> This mechanism describes a systemic erosion of confidence in automated knowledge synthesis, where the volume of generated artifacts (concepts and connections) outpaces their verifiable utility.
 
-> As the fleet scales its sampling capacity (clusters_sampled), there is a latent tension between generating more connections and maintaining the signal-to-noise ratio.
+> As agents produce more content with lower semantic density, the user's trust in the system's ability to provide value diminishes.
 
 ## Examples
 
-- The fleet's evaluation metrics should shift from 'concepts written' to 'rival hypotheses considered' to prevent shallow synthesis.
-- Sean must implement a 'Synthesis Policy Change Record' to track when the fleet's rules need adjustment, not just its outputs.
+- A daily note generator producing repetitive summaries that Sean deletes without reading.
+- A research agent returning outdated or irrelevant sources due to poor query formulation.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Taste as Evaluation Function vs. Activity Proof]]
+[[The Illusion of Competence in Automated Systems]] [[Legibility Debt as a Supervision Failure Mode]]

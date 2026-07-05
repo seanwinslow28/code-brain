@@ -2,15 +2,15 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/connections/probe-design-vs-routing-compliance-in-agentic-workflows.md
+  - knowledge/concepts/agent-fleet-observability-dashboard.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-This concept describes the critical dependency between experimental action and operational visibility. In probe-based systems, an agent cannot distinguish between a failed experiment and a successful one without real-time, granular data on signal quality. The dashboard acts as the feedback loop that allows the system to amplify good signals and dampen bad ones, preventing the loss of systemic health during exploration phases.
+This concept defines the critical dependency between experimental action and operational visibility in probe-based systems. An agent cannot distinguish between a failed experiment and a successful one without real-time, granular data on signal quality. The dashboard acts as the feedback loop that allows the system to amplify good signals and dampen bad ones, preventing the loss of systemic health during exploration phases. It transforms raw telemetry into actionable intelligence for adaptive control.
 
 ## Context
 

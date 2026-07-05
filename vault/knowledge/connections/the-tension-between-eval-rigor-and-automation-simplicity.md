@@ -5,8 +5,8 @@ connects:
   - Eval Vocabulary
   - Automation Reliability
   - Intent Engineering
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Synthesis
@@ -21,13 +21,13 @@ There is a fundamental tension between the need for rigorous evaluation (Eval Vo
 
 ### [[Automation Reliability]]
 
-> intent_spec` tool *is* the eval. It scores a spec against the framework's dimensions before that spec reaches a coding agent
+> Understanding when to apply this vocabulary is critical to avoiding cognitive overload and maintaining automation reliability.
 
 ### [[Intent Engineering]]
 
-> The Eval Vocabulary serves as the critical coordination mechanism between Autonomous Agent Fleets and their dependent systems.
+> intent_spec` tool *is* the eval. It scores a spec against the framework's dimensions before that spec reaches a coding agent
 
 ## Implications
 
-- Sean must establish clear criteria for when to invoke eval vocabulary versus relying on simpler automation pipelines.
-- Over-reliance on evals may lead to diminishing returns in terms of time spent versus value gained in automation reliability.
+- Sean must establish clear criteria for when to invoke Eval Vocabulary versus defaulting to simpler automation patterns.
+- Over-reliance on rigorous evaluation may lead to diminishing returns in contexts where speed and simplicity are more valuable than precision.
