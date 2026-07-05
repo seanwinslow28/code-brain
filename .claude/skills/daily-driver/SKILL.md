@@ -44,7 +44,7 @@ Daily notes use these anchors for programmatic injection (PATCH, not PUT):
 | `<!-- jira-log -->` | Work Log | Jira activity summaries |
 | `<!-- claude-sessions -->` | Claude Code Sessions | Session entries with inline Dataview fields |
 | `<!-- side-projects -->` | Side Project Notes | Creative/R&D progress |
-| `<!-- fleet-overnight -->` | Fleet Overnight | Overnight agent digest (new concepts/connections/research + latest lint), injected verbatim by the 08:45 headless run — the meta-agent reads this section |
+| `<!-- fleet-overnight -->` | Fleet Overnight | Overnight agent digest (new concepts/connections/research + latest lint), injected verbatim by the 08:30 daily-driver morning run — the 08:45 meta-agent reads this section |
 | `<!-- agent-error -->` | (error log) | Headless-run error entries (timestamp, mode, description) when an MCP or file operation fails |
 
 Weekly notes use:
