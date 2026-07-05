@@ -1,0 +1,31 @@
+{
+  "antigravity_calls": 0,
+  "antigravity_failures": 0,
+  "antigravity_last_error": "",
+  "antigravity_skipped": 8,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 3,
+  "backfill_articles_critiqued": 4,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/connections/provider-fallback-and-automation-reliability.md",
+    "vault/knowledge/expansions/connections/provider-preference-configuration-and-cost-capped-workflows.md",
+    "vault/knowledge/expansions/connections/research-system-integration-and-constraints.md",
+    "vault/knowledge/expansions/connections/substack-drafter-agent-and-daily-note-generation.md"
+  ],
+  "codex_calls": 8,
+  "codex_failures": 1,
+  "codex_last_error": "codex timeout after 120s",
+  "codex_tokens_total": 231226,
+  "duration_seconds": 331.35,
+  "error": "",
+  "expansions_written": [
+    "vault/knowledge/expansions/negative-capability-failure-literacy.md",
+    "vault/knowledge/expansions/the-illusion-of-competence-in-automated-systems.md",
+    "vault/knowledge/expansions/slop-as-a-trust-deficit.md"
+  ],
+  "run_id": "2026-06-29T03:30:05",
+  "status": "partial",
+  "warnings": [
+    "antigravity disabled (codex-only mode)"
+  ]
+}

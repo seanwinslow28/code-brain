@@ -1,0 +1,32 @@
+{
+  "antigravity_calls": 0,
+  "antigravity_failures": 0,
+  "antigravity_last_error": "",
+  "antigravity_skipped": 8,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 3,
+  "backfill_articles_critiqued": 5,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/connections/ai-pm-and-autonomous-agent-synergy.md",
+    "vault/knowledge/expansions/connections/ai-product-management-and-vibe-coding-interview-integration.md",
+    "vault/knowledge/expansions/connections/ai-product-management-ecosystem.md",
+    "vault/knowledge/expansions/connections/ai-product-manager-and-vibe-coding-interview-integration.md",
+    "vault/knowledge/expansions/connections/ai-prototyping-and-vibe-coding-interview-synergy.md"
+  ],
+  "codex_calls": 8,
+  "codex_failures": 0,
+  "codex_last_error": "",
+  "codex_tokens_total": 297070,
+  "duration_seconds": 263.17,
+  "error": "",
+  "expansions_written": [
+    "vault/knowledge/expansions/curation-as-the-new-scarcity.md",
+    "vault/knowledge/expansions/evidence-accumulation-loop.md",
+    "vault/knowledge/expansions/friction-killing-wedge.md"
+  ],
+  "run_id": "2026-06-24T03:30:05",
+  "status": "ok",
+  "warnings": [
+    "antigravity disabled (codex-only mode)"
+  ]
+}

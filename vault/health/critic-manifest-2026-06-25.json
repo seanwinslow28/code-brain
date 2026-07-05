@@ -1,0 +1,28 @@
+{
+  "antigravity_calls": 0,
+  "antigravity_failures": 0,
+  "antigravity_last_error": "",
+  "antigravity_skipped": 5,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 0,
+  "backfill_articles_critiqued": 5,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/connections/automation-and-operational-efficiency-cross-domain-synergy.md",
+    "vault/knowledge/expansions/connections/automation-and-operational-efficiency-synergy.md",
+    "vault/knowledge/expansions/connections/automation-failure-affects-daily-contextual-continuity.md",
+    "vault/knowledge/expansions/connections/automation-interdependencies-across-system-creative-and-job-hunt-domains.md",
+    "vault/knowledge/expansions/connections/automation-job-hunt-and-observability-integration.md"
+  ],
+  "codex_calls": 5,
+  "codex_failures": 0,
+  "codex_last_error": "",
+  "codex_tokens_total": 155080,
+  "duration_seconds": 120.3,
+  "error": "",
+  "expansions_written": [],
+  "run_id": "2026-06-25T03:30:04",
+  "status": "ok",
+  "warnings": [
+    "antigravity disabled (codex-only mode)"
+  ]
+}
