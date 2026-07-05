@@ -28,6 +28,54 @@ async def test_pipeline_end_to_end_drops_unverified():
     assert res.cost_usd > 0
 
 
+@pytest.mark.asyncio
+async def test_pipeline_folds_gather_cost_into_spend():
+    # Sonar's billed gather cost (carried on bundle.gather_cost_usd) must be added to the run's
+    # recorded cost — otherwise the $10/day cap goes blind to ~$0.02/run of real Sonar spend.
+    bundle = EvidenceBundle()
+    bundle.add(EvidenceRecord("reddit", "r/pm", "https://r.com/1", "2026-06-18", "exports fail silently", 9))
+    bundle.gather_cost_usd = 0.0231
+
+    async def gather_fn(**kw):
+        return bundle, {"sonar": "ok: 1 records (1 found)"}
+
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Export loss", "s", ["exports fail silently"], ["https://r.com/1"], intensity=5),
+        ], blind_spots=[], tokens_in=0, tokens_out=0, web_calls=0, cost=0.50)
+
+    res = await run_discovery(topic="pm tools", lens="pm", tier="standard", api_key="k",
+                              gather_fn=gather_fn, fuse_fn=fuse_fn, supplement=False)
+    assert res.cost_usd == pytest.approx(0.5231)   # fuse 0.50 + gather 0.0231
+
+
+@pytest.mark.asyncio
+async def test_pipeline_records_gather_cost_on_empty_bundle():
+    # Sonar bills even when it yields no usable evidence; the empty-bundle path must still report it.
+    empty = EvidenceBundle()
+    empty.gather_cost_usd = 0.018
+
+    async def gather_fn(**kw):
+        return empty, {"sonar": "ok: 0 records (0 found)"}
+
+    res = await run_discovery(topic="x", lens="pm", tier="quick", api_key="k",
+                              gather_fn=gather_fn, fuse_fn=None)
+    assert res.cost_usd == pytest.approx(0.018)
+
+
+@pytest.mark.asyncio
+async def test_empty_bundle_session_carries_verify_and_citation_keys():
+    # schema uniformity: the empty-bundle early-return session must carry the same
+    # verify_mode / citation_* keys as the full path (substring-only, no metrics).
+    async def gather_fn(**kw):
+        return EvidenceBundle(), {"sonar": "ok: 0 records (0 found)"}
+    res = await run_discovery(topic="x", lens="pm", tier="quick", api_key="k",
+                              gather_fn=gather_fn, fuse_fn=None)
+    assert res.session["verify_mode"] == "substring-only"
+    assert res.session["citation_precision"] is None
+    assert res.session["citation_recall"] is None
+
+
 def test_estimate_cost_prefers_usage_cost():
     from council.discovery.pipeline import _estimate_cost
     from council.discovery.fusion import FusionResult
@@ -42,10 +90,34 @@ def test_estimate_cost_prefers_usage_cost():
 async def test_empty_bundle_renders_low_signal():
     async def gather_fn(**kw):
         return EvidenceBundle(), {"sonar": "ok: 0 records (0 found)"}
-    res = await run_discovery(topic="x", lens="pm", tier="quick",
+    res = await run_discovery(topic="x", lens="pm", tier="quick", segment="developer",
                               api_key="k", gather_fn=gather_fn, fuse_fn=None)
     assert res.verified_count == 0
     assert "Low verifiable signal" in res.markdown or "No pain points survived" in res.markdown
+    # the empty-bundle hero must honor the passed segment (not falsely tell you to add one)
+    assert "Add `--segment" not in res.markdown
+
+
+def test_normalize_segment_strips_operators_and_collapses_whitespace():
+    from council.discovery.pipeline import _normalize_segment
+    # --segment is a free-text audience qualifier, NOT a query operator: strip :/parens so it can't
+    # alter provider query semantics (the github/reviews/sonar boundary), and collapse whitespace.
+    assert _normalize_segment("is:pr (mobile)") == "is pr mobile"
+    assert _normalize_segment("site:foo bar") == "site foo bar"
+    assert _normalize_segment("  nonprofits  ") == "nonprofits"
+    assert _normalize_segment("   ") == ""           # whitespace-only collapses to empty
+    assert _normalize_segment("") == ""
+
+
+@pytest.mark.asyncio
+async def test_run_discovery_normalizes_segment_before_gather():
+    captured = {}
+    async def gather_fn(**kw):
+        captured["segment"] = kw["segment"]
+        return EvidenceBundle(), {"sonar": "ok: 0 records (0 found)"}
+    await run_discovery(topic="crm", lens="pm", tier="quick", api_key="k",
+                        segment="is:pr (nonprofits)", gather_fn=gather_fn, fuse_fn=None)
+    assert captured["segment"] == "is pr nonprofits"
 
 
 @pytest.mark.asyncio
@@ -93,6 +165,65 @@ async def test_fuse_failure_still_raises_with_cost_when_session_write_fails(tmp_
         await run_discovery(topic="x", lens="pm", tier="quick", api_key="k",
                             gather_fn=gather_fn, fuse_fn=fuse_fn, sessions_dir=bad)
     assert exc.value.cost_usd == 0.42
+
+
+@pytest.mark.asyncio
+async def test_post_fuse_failure_records_billed_cost(tmp_path):
+    # A failure AFTER fuse (verify/backfill/frame/render) must still surface the already-billed FUSE
+    # cost as DiscoveryFailed.cost_usd, mirroring the FusionError path — otherwise __main__ records $0
+    # and the daily cap goes blind to real spend (observed 2026-06-28 when BACKFILL crashed post-fuse).
+    from council.discovery.pipeline import run_discovery, DiscoveryFailed
+    import json as _json
+
+    b = EvidenceBundle(); b.add(EvidenceRecord("reddit", "r", "https://r.com/1", "", "exports fail silently"))
+
+    async def gather_fn(**kw):
+        return b, {"sonar": "ok: 1 records (1 found)"}
+
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Export loss", "s", ["exports fail silently"], ["https://r.com/1"], intensity=5),
+        ], blind_spots=["no SSO"], tokens_in=1000, tokens_out=300, cost=0.5)
+
+    async def backfill_fn(**kw):
+        raise RuntimeError("post-fuse blowup (e.g. Brave 422)")
+
+    sdir = tmp_path / ".sessions"
+    with pytest.raises(DiscoveryFailed) as exc:
+        await run_discovery(topic="x", lens="substack", tier="standard", api_key="k",
+                            gather_fn=gather_fn, fuse_fn=fuse_fn, backfill_fn=backfill_fn,
+                            supplement=True, sessions_dir=sdir)
+    assert exc.value.cost_usd == 0.5                  # FUSE was billed; spend survives the post-fuse crash
+    written = list(sdir.glob("*.json"))
+    assert len(written) == 1
+    data = _json.loads(written[0].read_text())
+    assert data["failed_stage"] == "post-fuse" and data["cost_usd"] == 0.5
+    assert "gather_status" in data
+
+
+@pytest.mark.asyncio
+async def test_post_fuse_failure_still_raises_with_cost_when_session_write_fails(tmp_path):
+    from council.discovery.pipeline import run_discovery, DiscoveryFailed
+    b = EvidenceBundle(); b.add(EvidenceRecord("reddit", "r", "https://r.com/1", "", "exports fail silently"))
+
+    async def gather_fn(**kw):
+        return b, {"sonar": "ok: 1 records (1 found)"}
+
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Export loss", "s", ["exports fail silently"], ["https://r.com/1"], intensity=5),
+        ], blind_spots=["x"], tokens_in=1000, tokens_out=300, cost=0.5)
+
+    async def backfill_fn(**kw):
+        raise RuntimeError("boom")
+
+    # sessions_dir points at an existing FILE → diagnostic mkdir/write raises → spend must still survive.
+    bad = tmp_path / "not-a-dir"; bad.write_text("x")
+    with pytest.raises(DiscoveryFailed) as exc:
+        await run_discovery(topic="x", lens="pm", tier="standard", api_key="k",
+                            gather_fn=gather_fn, fuse_fn=fuse_fn, backfill_fn=backfill_fn,
+                            supplement=True, sessions_dir=bad)
+    assert exc.value.cost_usd == 0.5
 
 
 @pytest.mark.asyncio
@@ -147,3 +278,120 @@ async def test_pm_lens_produces_no_brief():
                               api_key="k", gather_fn=gather_fn, fuse_fn=fuse_fn)
     assert "Idea Ledger — sync apps" in res.markdown
     assert res.brief_markdown == ""
+
+
+@pytest.mark.asyncio
+async def test_pipeline_dedups_near_duplicate_pain_points():
+    bundle = EvidenceBundle()
+    bundle.add(EvidenceRecord("reddit", "r/a", "https://d1.com/a", "2026-06-18", "exports fail silently", 9))
+    bundle.add(EvidenceRecord("reddit", "r/b", "https://d2.com/b", "2026-06-18", "exports fail silently", 9))
+
+    async def gather_fn(**kw):
+        return bundle, {"sonar": "ok: 2 records (2 found)"}
+
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Exports fail silently", "exports silently fail on conflict",
+                               ["exports fail silently"], ["https://d1.com/a"], intensity=5),
+            CandidatePainPoint("Silently failing exports", "on conflict exports fail silently",
+                               ["exports fail silently"], ["https://d2.com/b"], intensity=4),
+        ], blind_spots=["x"], tokens_in=900, tokens_out=200, cost=0.3)
+
+    res = await run_discovery(topic="sync apps", lens="pm", tier="standard",
+                              api_key="k", gather_fn=gather_fn, fuse_fn=fuse_fn)
+    assert res.verified_count == 1                              # two near-dups collapsed to one
+    assert res.session["merged_count"] == 1
+    assert "Merged 1" in res.markdown                           # honest render note
+
+
+@pytest.mark.asyncio
+async def test_pipeline_same_domain_merge_does_not_inflate_corroboration():
+    """Two same-domain URLs that merge into one pain point must report only 1 distinct domain,
+    proving same-domain corroboration is NOT double-counted after a merge."""
+    bundle = EvidenceBundle()
+    bundle.add(EvidenceRecord("reddit", "r/a", "https://same.com/a", "2026-06-29", "exports fail silently", 9))
+    bundle.add(EvidenceRecord("reddit", "r/b", "https://same.com/b", "2026-06-29", "exports fail silently", 9))
+
+    async def gather_fn(**kw):
+        return bundle, {"sonar": "ok: 2 records (2 found)"}
+
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Exports fail silently", "exports silently fail on conflict",
+                               ["exports fail silently"], ["https://same.com/a"], intensity=5),
+            CandidatePainPoint("Silently failing exports", "on conflict exports fail silently",
+                               ["exports fail silently"], ["https://same.com/b"], intensity=4),
+        ], blind_spots=["x"], tokens_in=900, tokens_out=200, cost=0.3)
+
+    res = await run_discovery(topic="sync apps", lens="pm", tier="standard",
+                              api_key="k", gather_fn=gather_fn, fuse_fn=fuse_fn)
+    assert res.verified_count == 1                              # two near-dups collapsed to one
+    assert res.session["merged_count"] == 1
+    # same-domain merge must NOT double-count: only 1 distinct domain should be reported
+    assert "1 independent domain(s)" in res.markdown
+
+
+@pytest.mark.asyncio
+async def test_pipeline_ranks_blind_spots_worst_first():
+    bundle = EvidenceBundle()
+    bundle.add(EvidenceRecord("reddit", "r/a", "https://d1.com/a", "2026-06-18", "exports fail silently", 9))
+
+    async def gather_fn(**kw):
+        return bundle, {"sonar": "ok: 1 records (1 found)"}
+
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Exports fail silently", "exports silently fail on conflict",
+                               ["exports fail silently"], ["https://d1.com/a"], intensity=5),
+        ], blind_spots=["nobody covers export conflict recovery",
+                        "pricing transparency is unaddressed"],
+           tokens_in=900, tokens_out=200, cost=0.3)
+
+    res = await run_discovery(topic="sync apps", lens="pm", tier="standard",
+                              api_key="k", gather_fn=gather_fn, fuse_fn=fuse_fn)
+    md = res.markdown
+    # the orthogonal gap (pricing) is ranked above the one close to the found pain (export recovery)
+    assert md.index("pricing transparency is unaddressed") < md.index("nobody covers export conflict recovery")
+
+
+@pytest.mark.asyncio
+async def test_pipeline_records_verify_mode_substring_only_without_scorer(tmp_path):
+    from tests.discovery.test_verify_entailment import FakeScorer  # noqa
+    bundle = EvidenceBundle()
+    bundle.add(EvidenceRecord("reddit", "r/pm", "https://r.com/1", "", "exports fail silently", 9))
+    async def gather_fn(**kw):
+        return bundle, {"sonar": "ok: 1 records (1 found)"}
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Export loss", "s", ["exports fail silently"], ["https://r.com/1"], intensity=5),
+        ], blind_spots=[], tokens_in=10, tokens_out=5, cost=0.1)
+    sdir = tmp_path / ".sessions"
+    res = await run_discovery(topic="x", lens="pm", tier="standard", api_key="k",
+                              gather_fn=gather_fn, fuse_fn=fuse_fn, supplement=False,
+                              sessions_dir=sdir, scorer=None)
+    import json
+    data = json.loads(next(sdir.glob("*.json")).read_text())
+    assert data["verify_mode"] == "substring-only"
+    assert data["citation_precision"] is None and data["citation_recall"] is None
+    assert res.verified_count == 1
+
+
+@pytest.mark.asyncio
+async def test_pipeline_records_nli_mode_and_metrics_with_scorer(tmp_path):
+    from tests.discovery.test_verify_entailment import FakeScorer
+    bundle = EvidenceBundle()
+    bundle.add(EvidenceRecord("reddit", "r/pm", "https://r.com/1", "", "exports fail silently", 9))
+    async def gather_fn(**kw):
+        return bundle, {"sonar": "ok: 1 records (1 found)"}
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Export loss", "s", ["exports fail silently"], ["https://r.com/1"], intensity=5),
+        ], blind_spots=[], tokens_in=10, tokens_out=5, cost=0.1)
+    sdir = tmp_path / ".sessions"
+    await run_discovery(topic="x", lens="pm", tier="standard", api_key="k",
+                        gather_fn=gather_fn, fuse_fn=fuse_fn, supplement=False,
+                        sessions_dir=sdir, scorer=FakeScorer(prob=0.9))
+    import json
+    data = json.loads(next(sdir.glob("*.json")).read_text())
+    assert data["verify_mode"] == "nli"
+    assert data["citation_recall"] == 1.0

@@ -2,32 +2,32 @@
 title: "The Tension Between Protocol Instrumentation and Regulatory Ambiguity"
 type: connection
 connects:
-  - The Illusion of Health in Autonomous Systems
-  - Silent Failure Propagation in Agent Fleets
-  - Agent Health Monitoring
-created: 2026-07-02
-updated: 2026-07-02
+  - Context Compounding
+  - Token Waste
+  - MCP Server Hardening
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Synthesis
 
-Sean's agent fleet is heavily instrumented with health checks and status reports, yet these metrics fail to capture the regulatory ambiguity of what constitutes 'success' in a creative or job-hunt context. The system prioritizes technical uptime (agents running) over semantic utility (insights generated). This tension leads to a false sense of progress where Sean sees 'healthy' agents but receives no actionable intelligence, forcing him to manually intervene to bridge the gap between automated activity and actual value creation.
+Sean's adoption of specialized tools like Grill Me and Firecrawl reveals a tension between the desire for precise, instrumented workflows and the ambiguity of general-purpose agent protocols. While MCPs offer a standardized way to connect tools, Sean's preference for CLIs and specific skills suggests that current protocol standards are too loose to enforce the rigorous context extraction he requires. This forces him to build custom 'skills' as a workaround for the lack of standardization in agentic planning.
 
 ## Threads
 
-### [[The Illusion of Health in Autonomous Systems]]
+### [[Context Compounding]]
 
-> System health checks passed across all scheduled agents, confirming general infrastructure stability.
+> Grill Me relentlessly interviews you to extract context *before* building; checkpoints answers to docs.
 
-### [[Silent Failure Propagation in Agent Fleets]]
+### [[Token Waste]]
 
-> Critical machines (Alienware and ComfyUI) reported as OFFLINE, breaking the multi-machine sync model.
+> The loudest efficiency theme is 'CLIs beat MCPs' on token cost.
 
-### [[Agent Health Monitoring]]
+### [[MCP Server Hardening]]
 
-> The operational health of agents directly impacts the cost-effectiveness of agentic workflows. If an agent is unhealthy, it may incur unnecessary costs or disrupt other automation tasks.
+> Research target: which pattern is more common in published MCP servers, and is there a published 'MCP best practices' doc (from Anthropic, MCP working group, or community) that takes a position?
 
 ## Implications
 
-- Sean must manually verify the semantic quality of daily notes rather than trusting the automated 'success' status.
-- The fleet's reliability metrics are misleading because they do not account for the offline state of critical hardware dependencies like Alienware and ComfyUI.
+- Sean may need to contribute to or define MCP best practices to ensure his custom skills can be standardized.
+- The preference for CLIs over MCPs suggests a potential fragmentation in his tooling stack as he optimizes for cost and precision.

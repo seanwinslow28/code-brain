@@ -1,13 +1,32 @@
 ---
 name: creative-writing
-description: Multi-format creative writing assistant for blog posts, social media (Twitter/X, LinkedIn, Instagram), pitch documents (grants, festival submissions), artist bios/statements, and portfolio narratives. Use when asked to "write a blog post", "draft a tweet", "social media post", "artist statement", "festival submission", "grant application", "portfolio narrative", "pitch doc", or "write about my work".
+description: Creative-writing craft — scene, concrete imagery, sentence rhythm, narrative prose — across formats: blog posts, fiction experiments, social media (Twitter/X, LinkedIn, Instagram), pitch documents (grants, festival submissions), artist bios/statements, and portfolio narratives. Use when asked to "write a blog post", "draft a tweet", "social media post", "sharpen this scene", "fix the rhythm/imagery", "write a fiction piece", "artist statement", "festival submission", "grant application", "portfolio narrative", "pitch doc", or "write about my work". Pairs with `writing-voice-modes` (voice/register) — craft shapes the piece, voice-modes colors it.
 ---
 
 # Creative Writing (Multi-Format)
 
 ## Purpose
 
-Write polished, voice-consistent content across formats — blog posts, social media, pitch documents, artist statements, and portfolio narratives. Each format has its own structure, constraints, and audience expectations. This skill provides templates and craft principles for all of them.
+Write polished, well-crafted content across formats — blog posts, fiction, social media, pitch documents, artist statements, and portfolio narratives. This skill owns *craft*: what the piece is made of — scene, concrete image, sentence rhythm, structure, the hook, the turn, the close. Each format has its own constraints, and this skill provides templates and craft moves for all of them. Voice (register, diction, what the sentences *sound like*) is owned by `writing-voice-modes` — see the contract below.
+
+## Division of Labor: Craft vs Voice (read when `writing-voice-modes` is also loaded)
+
+On "write a blog post" — and most prose asks — this skill and `writing-voice-modes` fire together. They own different layers; keep them from colliding:
+
+- **This skill owns CRAFT** — what the piece is *made of*: scene, concrete image, sentence rhythm, structure, the shape of the argument or narrative, the hook, the turn, the close.
+- **`writing-voice-modes` owns VOICE** — register and diction: Sean Mode's dive-bar grit, the author-technique borrows, what the sentences *sound like*.
+
+**Order of operations when both fire:** shape and sharpen the craft here first, then hand the craft-strong draft to `writing-voice-modes` for the voice pass. Do **not** bake a competing authorial voice into the draft — leave the register for voice-modes to set, or the two will fight and voice-modes will overwrite your diction anyway. Running standalone (no voice pass coming)? The Voice Consistency section below is your fallback; when voice-modes *is* loaded, defer to it.
+
+## Craft Is Diagnostic, Not Decorative
+
+Generic craft advice — "show don't tell", "vary your sentences", "be concrete" — is worthless welded to nothing. It's the MFA-workshop reflex, and it never makes a real draft better. Every craft move this skill makes must land on a *specific* line, image, or beat in the actual piece:
+
+- **Name the line.** Don't say "add concrete detail" — quote the flat sentence and rewrite it in place: "'I simplified my workflow' → 'I deleted 47 Figma files.'"
+- **Diagnose before prescribing.** Find *this* draft's weakest image, its saggiest paragraph, the exact spot the rhythm flatlines — then fix that spot, before→after.
+- **One craft move, shown, beats five rules listed.** If you can't point at the sentence it changes, don't give the note.
+
+A craft pass that could have been pasted onto any draft is a failed pass. The reader should be able to see the specific place the piece leveled up.
 
 ## When to Use
 
@@ -302,10 +321,11 @@ When adapting content across formats:
 | Twitter thread → Blog | Expand each tweet into a paragraph. Add transitions, examples, and nuance. |
 | Festival submission → Blog | Shift from third-person/formal to first-person/conversational. Add behind-the-scenes details. |
 | Case study → LinkedIn | Extract the "What I Learned" section. Frame it as advice. |
+| Blog/prose → video narration (Remotion/VO) | Rewrite for the ear: spoken cadence, shorter clauses, no visual-only punctuation. This skill supplies the *words*; hand shot timing and VO structure to the `remotion-*` / `video-animation-production` skills — don't bury timing cues in the prose. |
 
-## Voice Consistency
+## Voice Consistency (standalone fallback — defer to `writing-voice-modes` when it's loaded)
 
-Maintain a consistent authorial voice across formats by defining:
+When `writing-voice-modes` is in the chain, it owns voice: skip this block and hand off the craft-strong draft (see Division of Labor above). Standalone — a quick one-off tweet, or a draft with no voice pass coming — maintain a consistent authorial voice across formats by defining:
 
 ```markdown
 ## Voice Profile
@@ -322,13 +342,15 @@ Maintain a consistent authorial voice across formats by defining:
 - [ ] Content matches the format's constraints (word count, structure, tone)
 - [ ] Hook is in the first 1-2 sentences (not buried)
 - [ ] One clear idea per piece (not a grab bag)
-- [ ] Voice is consistent with the author's established tone
+- [ ] Every craft note lands on a specific named line/image/beat — no generic advice pasted onto the draft
+- [ ] Voice is left to `writing-voice-modes` when it's loaded (no competing register baked in); standalone, voice is consistent with the author's established tone
 - [ ] Cross-format adaptations transform (not just truncate)
 - [ ] Pitch documents include all required fields for the submission type
 - [ ] Artist statements avoid clichés ("explore the intersection of...")
 
 ## Related Skills
 
+- `writing-voice-modes` — Owns voice/register; this skill owns craft. On "write a blog post" both fire (see Division of Labor). Hand the craft-strong draft off for the voice pass, then `writing-critique` → `writing-humanity-pass` finish the chain.
 - `script-writing` — Screenplay format for animated shorts (structured narrative)
 - `technical-writing` — Audience-aware documentation (API guides, system design docs)
 - `doc-workflows` — Code documentation automation (READMEs, API docs)

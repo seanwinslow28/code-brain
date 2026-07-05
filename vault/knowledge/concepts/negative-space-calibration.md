@@ -2,31 +2,31 @@
 title: "Negative Space Calibration"
 type: concept
 sources:
-  - knowledge/connections/operational-fidelity-vs-creative-calibration-tension.md
+  - 20_projects/substack-studio/playbook/image-house-style.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-This mechanism describes a method of aesthetic definition where identity is established not by what is included, but by what is explicitly rejected. It relies on reactive, non-deterministic judgment to carve out a unique voice by marking boundaries against undesirable outputs. This process is inherently manual and non-scalable because it requires a nuanced understanding of context that cannot be captured in static rules or prompts.
+A design invariant where the visible 'work-in-progress' artifacts—such as construction underdrawings, paper grain, or hole-punch marks—are intentionally preserved to signal authenticity and process. This mechanism relies on the tension between the finished linework and the exposed scaffolding, creating a specific aesthetic of 'pencil test' realism rather than polished finality. The constraint requires that all other elements remain monochrome or minimally accented to prevent visual competition with this structural honesty.
 
 ## Context
 
-Sean's approach to finding his writing voice involves reacting to what it is not, using short, decisive rejections. This highlights the limitation of automation: while agents can generate content, they cannot easily replicate the subtle, contextual rejection that defines Sean's unique style.
+Sean is moving away from the 'deliberate ink splatter' of his previous v1 design because it felt like 'ink blotting' that 'never sat right.' By adopting the portfolio's pencil-test look, he leverages the 'show the work' tell to establish a calm, precise aesthetic that aligns with his actual taste rather than a borrowed gonzo style.
 
 ## Evidence
 
-> I want to find my writing voice by reacting to what it ISN'T. two words is fine. 'No.' 'Gross.' 'Never.'
+> The new anchors are Sean's three portfolio illustrations (recipes saved at _assets/style-anchors/portfolio-pencil-anchor-prompts.md).
 
-> The value of his personal vault shifts from being a repository of automated workflows to a training ground for taste calibration, requiring more manual curation than before.
+> faint light-blue construction underdrawing left visible (the 'show the work' tell that makes it read as a pencil test, not a finished render).
 
 ## Examples
 
-- Sean uses the word 'Gross' to reject outputs that fail his aesthetic standards.
-- The synthesizer's rejection count serves as a proxy for this negative space calibration in the automated workflow.
+- Using warm cream paper #FFF9F0 with visible grain and hole-punch marks along one margin to signal hand-made authenticity.
+- Leaving the light-blue construction underdrawing visible behind the graphite linework to distinguish the image from a finished render.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[Supervision as the New AI Edge]]
+[[Craft in Product Design]] [[Negative Space Calibration]]

@@ -2,31 +2,31 @@
 title: "Provider Fallback Mechanism"
 type: concept
 sources:
-  - knowledge/concepts/provider-fallback-mechanism.md
+  - 00_inbox/tickets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-A provider fallback is not a retry policy; it is a runtime state machine that decides when a dependency is no longer trustworthy enough to call. This mechanism preserves the mission of the workflow by allowing partial completion rather than forcing a total failure when specific providers become unreliable. It requires explicit degraded behavior protocols to prevent invisible cost leakage from accumulating over time.
+A resilience pattern where the system is architected to handle transient failures from a primary service provider by implementing specific error-handling logic rather than relying on automatic retries or external fallbacks. The mechanism involves identifying the specific failure mode (such as malformed input due to provider-specific quirks) and writing targeted parsers or validators that strip non-standard data before processing. This approach prioritizes precision in handling edge cases over broad redundancy, ensuring that the system remains functional even when the provider behaves unexpectedly.
 
 ## Context
 
-Sean must implement explicit degraded behavior protocols for each provider route to prevent invisible cost leakage. The agent fleet requires a decision artifact defining thresholds for disabling specific providers before their failures contaminate the entire workflow.
+Sean's agent fleet interacts with external APIs like OpenRouter. When these providers introduce unexpected behaviors (like SSE comments), Sean must manually harden his code to handle them. This highlights the fragility of relying on third-party services without robust, specific error handling, requiring constant vigilance and code updates to maintain stability.
 
 ## Evidence
 
-> A provider fallback is not a retry policy; it is a runtime state machine that decides when a dependency is no longer trustworthy enough to call.
+> ignoring :-prefixed lines is the spec-correct handling _strip_sse_padding already does
 
-> Provider fallback should preserve the mission of the workflow, not the illusion that every step completed.
+> Fix: strip leading : comment lines / extract the first balanced {…} before json.loads
 
 ## Examples
 
-- Runtime state machine for dependency trust
-- Explicit degraded behavior protocols
+- failed Fusion calls bill OpenRouter but record $0 locally
+- record usage.cost on failure too
 
 ## Related Concepts
 
-[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Automation Reliability]]
+[[Cost-Capped Agentic Workflows]] [[Automation Reliability]] [[Infrastructure Status]]

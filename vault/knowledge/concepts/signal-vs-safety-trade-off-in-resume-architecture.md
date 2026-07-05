@@ -2,31 +2,31 @@
 title: "Signal vs. Safety Trade-off in Resume Architecture"
 type: concept
 sources:
-  - knowledge/concepts/signal-vs-safety-trade-off-in-resume-architecture.md
+  - 20_projects/prj-job-hunt-2026/assets/older/Sean_Winslow_Resume_DESIGN_NOTES.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-This mechanism describes the strategic tension between maximizing the clarity of one's value proposition (signal) and minimizing the risk of rejection or misinterpretation (safety). High-signal architectures require taking risks by highlighting specific, potentially niche advantages that may not align with standard job descriptions, while high-safety architectures rely on generic, widely accepted keywords that reduce visibility but increase pass-through rates. The consequence is that optimizing for safety often results in a diluted narrative that fails to capture the market shift from custom craft to productized doctrine.
+This concept describes the strategic tension between optimizing for traditional recruiter expectations (safety) and maximizing visibility for AI-forward hiring managers (signal). It manifests when a candidate deliberately reorders sections to place technical artifacts before professional experience, accepting the risk of ATS parsing errors or recruiter confusion in exchange for immediate proof of capability. The mechanism relies on the assumption that the target audience's evaluation criteria have shifted from title-based hierarchy to artifact-based verification.
 
 ## Context
 
-Sean's career trajectory involves moving from custom engineering work to more productized or strategic roles, requiring him to signal this transition clearly. However, doing so risks alienating traditional hiring managers who expect conventional signals, forcing him to balance the need for differentiation against the need for institutional acceptance.
+Sean is targeting AI-forward companies where proving he 'actually builds with AI' is more valuable than holding a senior title at a traditional firm. This trade-off is critical because it defines how he positions his Open Source contributions relative to his employment history, directly impacting his ability to bypass gatekeepers who rely on legacy scanning habits.
 
 ## Evidence
 
-> For role archetype X, the hiring manager is buying Y capability; Sean’s evidence sits at value-chain position Z, where the market is shifting from custom craft to productized doctrine.
+> Explicit Teal / Resume Worded guidance: when public artifacts (npm package, OSS toolkit) are stronger signal than the last job title, they belong in the first third of page 1 where AI hiring managers scan for 'this person actually builds with AI' proof.
 
-> Optimizing for one mechanism actively undermines the other: a highly legible portfolio becomes indistinguishable from competitors, while a highly differentiated boundary object may fail to register with recruiters.
+> Safer for traditional recruiters but weaker positioning for AI-forward roles. Sean prioritized signal over safety.
 
 ## Examples
 
-- Highlighting 'agentic workflow design' instead of generic 'software engineering' to signal niche expertise
-- Using specific metrics from a failed project to demonstrate resilience rather than hiding it for safety
+- Placing 'Selected AI Artifacts' before 'Work Experience' in the resume section order
+- Using a single accent color (Navy #0C447C) to denote confidence without triggering 'designed in Canva' perceptions
 
 ## Related Concepts
 
-[[Legibility Debt as a Supervision Failure Mode]] [[Market Positioning]]
+[[Agentic Engineering Signal]] [[Market Positioning]] [[Two Audiences]]

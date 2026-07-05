@@ -117,6 +117,38 @@ async def test_fuse_4xx_on_second_attempt_carries_first_attempt_cost(httpx_mock)
     assert round(exc.value.cost, 4) == 0.10
 
 
+@pytest.mark.asyncio
+async def test_fuse_surfaces_top_level_fusion_failure_reason(httpx_mock):
+    # 200 OK but the Fusion *tool* hard-failed: content carries no parseable pain-point JSON and a
+    # typed failure_reason is present. Surface the real reason, not the generic "unparseable" message.
+    for _ in range(2):
+        httpx_mock.add_response(json={
+            "choices": [{"message": {"content": ""}}],
+            "usage": {"cost": 0.0},
+            "failure_reason": "fusion_invocation_capped",
+        })
+    b = EvidenceBundle(); b.add(EvidenceRecord("reddit", "r", "https://r.com/1", "", "q"))
+    with pytest.raises(fusion.FusionError) as exc:
+        await fusion.fuse(api_key="k", bundle=b, tier=get_tier("quick"), topic="x")
+    assert "fusion_invocation_capped" in str(exc.value)
+
+
+@pytest.mark.asyncio
+async def test_fuse_finds_failure_reason_nested_in_choice(httpx_mock):
+    # The exact path is undocumented (FUSION_SCHEMA.md captured only the success shape), so the scan
+    # must find failure_reason wherever OpenRouter nests it.
+    for _ in range(2):
+        httpx_mock.add_response(json={
+            "choices": [{"message": {"content": "no json"},
+                         "fusion": {"status": "error", "failure_reason": "all_panels_failed"}}],
+            "usage": {},
+        })
+    b = EvidenceBundle(); b.add(EvidenceRecord("reddit", "r", "https://r.com/1", "", "q"))
+    with pytest.raises(fusion.FusionError) as exc:
+        await fusion.fuse(api_key="k", bundle=b, tier=get_tier("quick"), topic="x")
+    assert "all_panels_failed" in str(exc.value)
+
+
 def test_strip_sse_padding_removes_comment_lines():
     raw = ": OPENROUTER PROCESSING\n\n: OPENROUTER PROCESSING\n\n{\"a\": 1}"
     assert _strip_sse_padding(raw) == '{"a": 1}'

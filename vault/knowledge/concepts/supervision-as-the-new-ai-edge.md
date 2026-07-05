@@ -2,31 +2,31 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - knowledge/connections/the-legibility-paradox-of-agentic-supervision.md
+  - 20_projects/substack-studio/research/opportunity-report-creative-agentic.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-This concept defines a structural shift in professional value where the primary economic leverage moves from direct artifact generation to the curation and validation of automated outputs. As execution becomes commoditized by agent fleets, the human role transforms into a navigator responsible for intent decomposition and acceptance criteria. This creates a dependency on tacit judgment that is inherently invisible to external observers who only see the final output quality rather than the supervisory complexity.
+The strategic advantage derived from human-in-the-loop governance structures that validate agent outputs against specific business or creative goals. This pattern emerges because current tooling focuses on generation capabilities while neglecting the judgment layer required to ensure those generations align with complex, nuanced objectives. The edge comes from owning the 'gate'—the mechanism that decides when an output is sufficient—rather than competing on raw generation speed or volume.
 
 ## Context
 
-Sean's increasing delegation of work to his agent fleet means his daily value is no longer in writing code but in directing it. However, this direction is often internal and unrecorded, creating a risk that his professional brand fails to reflect his actual strategic contribution during career advancement moments.
+Sean's positioning leverages his existing assets (VoicePrint, design-team agents) to own this judgment layer for creative teams who are overwhelmed by uncontrolled AI outputs. This allows him to sell governance and control as a premium service distinct from the commodity of AI generation itself.
 
 ## Evidence
 
-> Sean remains the navigator responsible for intent, decomposition, and acceptance.
+> "The opportunity is translation, not invention: take that engineer-framed loop and re-skin it in brief/brand/voice language for the people the agent-infra builders ignore."
 
-> As Sean delegates more work to his agent fleet, his role shifts from artifact creation to tacit supervision.
+> "You already shipped the answer once: elicit intent → score it → gate the output."
 
 ## Examples
 
-- The shift from writing code to defining the acceptance criteria for that code.
-- The need to narrate invisible navigation decisions during interviews.
+- Positioning the 'Intent Card' as a guided brief that self-audits, serving as the creative front-end for non-coders.
+- Using the vault-knowledge MCP to make the reasoning behind decisions auditable for stakeholders.
 
 ## Related Concepts
 
-[[Vibe-Coding Interview Canon]] [[Boundary Object Theory]]
+[[Intent Engineering]] [[Control Architecture as Evangelism]]

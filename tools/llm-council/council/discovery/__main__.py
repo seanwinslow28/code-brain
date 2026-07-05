@@ -35,8 +35,13 @@ def _brief_path(output: Path) -> Path:
 @click.option("--segment", default="", help="Reshape gather queries toward an audience (e.g. developer, creative, pm).")
 @click.option("--force", is_flag=True, help="Bypass per-run cap (daily/monthly still enforced).")
 @click.option("--yes", is_flag=True, help="Auto-confirm deep-tier cost.")
+@click.option("--supplement/--no-supplement", default=False,
+              help="Opt-in Stage 5 BACKFILL: deterministic Exa/Brave web-search of the blind-spot map "
+                   "(off-subscription, for the headless/no-agent path). Default OFF — in an agent "
+                   "session, let the orchestrating agent backfill via WebSearch/WebFetch ($0). Needs "
+                   "EXA_API_KEY or BRAVE_API_KEY.")
 @click.option("--skip-budget-check", is_flag=True, hidden=True)
-def main(topic, lens, tier, output, segment, force, yes, skip_budget_check):
+def main(topic, lens, tier, output, segment, force, yes, supplement, skip_budget_check):
     load_dotenv()  # resolve OPENROUTER_API_KEY from the repo-root .env (mirrors council.client)
     tcfg = get_tier(tier)
 
@@ -62,22 +67,24 @@ def main(topic, lens, tier, output, segment, force, yes, skip_budget_check):
 
     try:
         result = asyncio.run(run_discovery(
-            topic=topic, lens=lens, tier=tier, api_key=api_key, segment=segment, sessions_dir=sessions_dir,
+            topic=topic, lens=lens, tier=tier, api_key=api_key, segment=segment,
+            supplement=supplement, sessions_dir=sessions_dir,
         ))
     except DiscoveryFailed as e:
         if not skip_budget_check and e.cost_usd > 0:
             record_spend(amount=e.cost_usd, profile=tier, tag=f"discovery-{lens}",
                          on_date=date.today(), tool="discovery")
         status = (e.session or {}).get("gather_status", {})
-        console.print(f"[red]Discovery failed at fuse:[/red] {e}")
+        stage = (e.session or {}).get("failed_stage", "fuse")
+        console.print(f"[red]Discovery failed ({stage}):[/red] {e}")
         if status:
             console.print(f"[dim]Gather status: {status}[/dim]")
         if e.cost_usd > 0:
-            console.print(f"[dim]Recorded spend: ${e.cost_usd:.2f} (billed even though FUSE failed)[/dim]")
+            console.print(f"[dim]Recorded spend: ${e.cost_usd:.2f} (real OpenRouter spend preserved despite the {stage} failure)[/dim]")
         else:
-            console.print("[dim]No spend recorded (FUSE failed before billing)[/dim]")
+            console.print("[dim]No spend recorded (failed before billing)[/dim]")
         sys.exit(3)
-    except Exception as e:  # surface other pipeline failures cleanly (no spend incurred pre-fuse)
+    except Exception as e:  # genuinely pre-fuse/setup failures only — nothing billed yet (post-fuse failures become DiscoveryFailed above)
         console.print(f"[red]Discovery failed: {e}[/red]")
         sys.exit(3)
 

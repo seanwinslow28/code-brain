@@ -2,19 +2,19 @@
 title: "Evidence Accumulation Loop"
 type: concept
 sources:
-  - knowledge/connections/distortion-rules-vs-averages-in-voice-synthesis.md
+  - 20_projects/substack-studio/01-cant-prompt-taste/ships-with-cheese-gauntlet-kit.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-A feedback pattern where increasing the volume of input examples is assumed to linearly improve output fidelity, yet fails to account for the diminishing returns of stylistic averaging. This loop creates a dependency on quantity over quality, leading to obedient pastiche when the system lacks constraints to filter or distort the accumulated evidence. The mechanism reveals that more data does not equal better signal if the underlying aggregation method is purely additive.
+A calibration mechanism where voice fidelity is treated as a function of accumulated, high-fidelity data points rather than immediate instruction following. The system requires the user to perform iterative 'reps' over multiple sessions, allowing the model to infer stylistic patterns from raw, unedited outputs instead of relying on static, one-shot prompts that fail to capture nuance. This shifts the burden of precision from the prompt engineer to the data collector, creating a compounding effect where each session refines the previous context.
 
 ## Context
 
-Sean's vault synthesizer runs show a correlation between higher cluster sampling and increased concept writing, but also higher rejection rates. Understanding this loop helps him tune the balance between gathering enough context and avoiding the 'bland composite' effect that dilutes his specific narrative voice.
+Sean is building a 'Cheese Gauntlet' kit for his Substack audience to help them calibrate their own AI voices. He explicitly rejects the 'magic prompt' paradigm in favor of a long-term evidence pile, recognizing that one-time instructions cannot replicate the depth of personal taste and cultural reference required for authentic voice.
 
 ## Evidence
 
@@ -24,8 +24,9 @@ Sean's vault synthesizer runs show a correlation between higher cluster sampling
 
 ## Examples
 
-- The system's tendency to average influences creates a composite that lacks the specific voice required for his career narrative.
+- Prompt 1: The Reference-Universe Interview
+- Prompt 3: Mine Your Pre-AI Writing
 
 ## Related Concepts
 
-[[Exemplar Distance]] [[Craft in Product Design]]
+[[Cultural Reference Mapping]] [[Negative Space Calibration]]

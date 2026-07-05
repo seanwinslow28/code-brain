@@ -81,6 +81,34 @@ def test_cli_passes_segment_to_pipeline(tmp_path, monkeypatch, fake_api_key):
     assert captured["segment"] == "designers"
 
 
+def test_cli_supplement_flag_defaults_off_and_can_enable(tmp_path, monkeypatch, fake_api_key):
+    # As of the 2026-06-28 agent-layer pivot, the in-CLI Exa/Brave BACKFILL is OPT-IN: the
+    # default flow leaves it OFF (the orchestrating agent backfills via WebSearch/WebFetch on
+    # the subscription, $0). --supplement keeps the deterministic CLI backfill for the headless
+    # / no-agent path.
+    captured = {}
+
+    async def fake_run(**kw):
+        captured.update(kw)
+        return DiscoveryResult("# Idea Ledger — x\n", 0.1, 0, 0, {"id": "s"})
+    monkeypatch.setattr("council.discovery.__main__.run_discovery", fake_run)
+
+    # default: supplement off
+    res = CliRunner().invoke(main, [
+        "x", "--lens", "pm", "--tier", "quick", "--output", str(tmp_path / "a.md"), "--skip-budget-check",
+    ])
+    assert res.exit_code == 0, res.output
+    assert captured["supplement"] is False
+
+    # --supplement enables the opt-in CLI backfill
+    res2 = CliRunner().invoke(main, [
+        "x", "--lens", "pm", "--tier", "quick", "--supplement",
+        "--output", str(tmp_path / "b.md"), "--skip-budget-check",
+    ])
+    assert res2.exit_code == 0, res2.output
+    assert captured["supplement"] is True
+
+
 def test_cli_records_spend_and_echoes_status_on_failure(tmp_path, monkeypatch, fake_api_key, tmp_spend_dir):
     from datetime import date
     from council import budget

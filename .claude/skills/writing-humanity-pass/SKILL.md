@@ -31,10 +31,12 @@ Classification signals, in priority order:
 3. Internal signal: first-person + narrative + sensory detail routes to voice; third-person + procedural + reference routes to neutral.
 4. Ambiguous routes to VOICE-SAFE (the safer failure: it preserves more, scrubs less).
 
+**Mixed documents: classify per section, not once for the whole text.** A post-mortem with a narrative intro and a neutral runbook section scrubs the intro VOICE-SAFE and the runbook FULL. Applying one register to both is the failure the owner named as a fuzzy boundary: it flattens the narrative or injects voice into the runbook. The voice/neutral line is real *inside* a document, not just across documents. When a section's register is genuinely ambiguous at the edge, that section routes VOICE-SAFE (preserve more).
+
 ### Step 2. The scrub loop (both registers)
 
 1. Draft rewrite. Apply `references/ai-tells.md` for the chosen register. Cover everything the original covered (N paragraphs in, N paragraphs out). Preserve meaning.
-2. Audit. Ask explicitly: "What makes this still read as AI-generated?" Answer in brief bullets (remaining tells, too-tidy rhythm, slogan-y closer).
+2. Audit. Ask explicitly: "What makes this still read as AI-generated?" Answer in brief bullets (remaining tells, too-tidy rhythm, slogan-y closer). Treat the documented catalog as a **living floor, not a closed set**: models emit new tells faster than `references/ai-tells.md` is updated, so when a passage clusters as machine-written but matches no listed tell, flag it as a *suspected new tell* and scrub it in the current register rather than passing it because it is not on the list. The catalog's logic (over-tidy, over-hedged, over-signposted, texture-free) generalizes past its entries.
 3. Final rewrite. Fix the audit bullets. Scan the result for `—`, `–`, and ` -- `; any hit means it is not done.
 
 ### Step 3. Deliver
@@ -92,7 +94,8 @@ storytelling-architecture → substack-value-engine → writing-voice-modes → 
 
 - Chaining order: shape with `storytelling-architecture` + `substack-value-engine`, compose with `writing-voice-modes` (plus `creative-writing` for format, `technical-writing` for clarity), red-team with `writing-critique` (advisory; one grounded revise pass max), then run `writing-humanity-pass` LAST.
 - This skill is where two upstream story mechanics get their punctuation enforced: a slippery-slide "forward-pull" line and a parenthetical particular both gravitate toward the em dash by default. The engagement pass leaves the *function*; this pass realizes it without the dash (period-fragment, colon, restructure). Never assume the dash away upstream; clean it up here.
-- It never overrides a format constraint (`creative-writing`), a signature move (`writing-voice-modes`), or a story beat (`storytelling-architecture`).
+- It never overrides a format constraint (`creative-writing`), a signature move (`writing-voice-modes`), a story beat (`storytelling-architecture`), or a critique fix (`writing-critique`).
+- It consumes `writing-critique`'s **critique fix list** and treats every prose change made to satisfy a critique finding as protected input, on the same footing as a signature move: never scrub a critique fix back out. A fix can *look* like a tell (a deliberately blunt sentence, a repeated word kept for emphasis) but was a reader-cost decision the gate already made; undoing it silently regresses the draft that just passed the gate. When the fix list is present, check the final scrub against it before delivering.
 - For neutral text it agrees with `technical-writing` (plain, front-loaded, no slop).
 
 ## References
@@ -105,9 +108,10 @@ Adapted from [`blader/humanizer`](https://github.com/blader/humanizer) (MIT, v2.
 ## Success Criteria
 
 - [ ] Output contains zero em/en dashes (both registers).
-- [ ] Voice-safe scrub preserves every signature move; neutral scrub strips to plain register.
+- [ ] Voice-safe scrub preserves every signature move AND every critique fix; neutral scrub strips to plain register.
+- [ ] Mixed documents are classified per section, not once for the whole text.
 - [ ] Meaning preserved; paragraph count matches the original.
-- [ ] No tell from `ai-tells.md` survives that is not a protected Sean move.
+- [ ] No tell survives that is not a protected Sean move; suspected new tells (clustered but unlisted) are caught, not passed because they are not in `ai-tells.md`.
 - [ ] Real human prose (no clusters of tells) is left largely alone, not gutted.
 
 ## Copy/Paste Ready

@@ -2,15 +2,15 @@
 title: "Agent Rationalization"
 type: concept
 sources:
-  - knowledge/concepts/agent-rationalization.md
+  - 20_projects/substack-studio/06-stop-building-agents/post.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-This mechanism describes the cognitive dissonance that arises when an automated system produces a plausible but factually nonexistent entity, revealing that the agent is solving for surface-level coherence rather than grounding in reality. This phenomenon occurs because the model optimizes for linguistic probability over ontological verification, effectively hallucinating infrastructure to satisfy the prompt's structural expectations. The result is a 'beautiful answer' that feels correct until the third row of data exposes the fabrication, creating a specific type of trust erosion where the user realizes their tool has been lying by omission.
+The cognitive dissonance that arises when an automated system produces a plausible but factually nonexistent entity, revealing that the agent is solving for surface-level coherence rather than grounding in reality. This phenomenon occurs because the model optimizes for linguistic probability over ontological verification, effectively hallucinating infrastructure to satisfy the prompt's structural expectations. The result is a 'beautiful answer' that feels correct until the third row of data exposes the fabrication, creating a specific type of trust erosion where the user realizes their tool has been lying by omission.
 
 ## Context
 

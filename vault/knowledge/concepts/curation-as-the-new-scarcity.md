@@ -2,31 +2,31 @@
 title: "Curation as the New Scarcity"
 type: concept
 sources:
-  - knowledge/concepts/curation-as-the-new-scarcity.md
+  - 20_projects/substack-studio/research/deep-dives/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-This concept defines a market dynamic where the economic value of creative output shifts from generation capacity to the unautomatable judgment required to select and refine specific instances. As automated tools lower the cost of production, the scarcity moves to the 'judgment/curation step' which vendors cannot sell because it relies on personal taste. This creates a defensible position for individuals who can demonstrate this specific aesthetic judgment, effectively decoupling the ability to produce from the ability to create value.
+In an environment where tool availability exceeds human attention capacity, the primary economic value shifts from creation to selection. The mechanism here is that abundance creates noise, and noise degrades signal quality for non-technical users. Consequently, trust becomes the limiting factor in adoption, as users cannot verify the utility of thousands of options themselves. This forces intermediaries to act as filters, transforming their role from builders to validators.
 
 ## Context
 
-Sean's job hunt and creative studio efforts must pivot from demonstrating technical capability (which is easily automated) to demonstrating unique taste. The vault synthesizer's increasing output volume highlights the need for Sean to provide the 'unautomatable taste' that gives his work value, ensuring he remains distinct from the flood of AI-generated content.
+Sean's Substack series and VoicePrint plugin must position themselves not just as another tool, but as a trusted filter for creatives who are overwhelmed by the 500+ MCP servers mentioned in the research. If Sean builds tools without this curation layer, they will be lost in the noise.
 
 ## Evidence
 
-> judgment/curation step (vendors can't sell it because it's unautomatable taste, which is exactly why it's defensible).
+> The most-requested *thing* is no longer a tool — it is **curation, trust, and "make this mine."**
 
-> The consequence is a loss of defensible creative position, as the voice fails to establish 'taste enemies' necessary for status signaling and audience alignment.
+> There are [500+ public MCP servers](https://www.reddit.com/r/ClaudeCode/comments/1tpdltv/the_10_best_mcp_servers_for_claude_code_right_now/) ... the ecosystem is built for engineers.
 
 ## Examples
 
-- Sean must define 'taste enemies' for each Substack mode.
-- Voice calibration should include tagging status moves (insider, crank, technician).
+- A creator says "14,000 MCP servers exist for Claude. I recommend these 4" on TikTok.
+- The punkpeye/awesome-mcp-servers list sits at 89K stars, indicating a massive need for ranking.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[Negative Space Calibration]]
+[[Supervision as the New AI Edge]] [[Two Audiences]]

@@ -2,30 +2,30 @@
 title: "Privacy-Aware Data Routing"
 type: concept
 sources:
-  - knowledge/concepts/privacy-aware-data-routing.md
+  - 20_projects/substack-studio/MIGRATION-REPORT.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-This mechanism establishes a strict architectural bifurcation where high-risk personal data is isolated in gitignored private directories, while a sanitized proxy serves as the sole input for agentic processing. The system enforces a boundary that prevents raw narratives from entering the agent's context window, thereby mitigating privacy leakage during automated synthesis. This separation creates a dependency on continuous automated verification scripts to ensure the public copy remains clean, as manual review is not scalable for this volume of data.
+This mechanism describes a deliberate architectural split where sensitive, high-risk personal data is isolated in gitignored private directories while a sanitized, public-facing copy serves as the operational interface for agents and version control. The system enforces a hard invariant that no named individuals, compensation terms, or proprietary identifiers can leak into the tracked knowledge graph, effectively decoupling the 'work-as-done' (private reality) from the 'work-as-promoted' (public artifact). This creates a dual-state vault where the public layer acts as a controlled abstraction, allowing agentic tools to function on structured data without accessing the raw, sensitive source material that triggered the initial privacy constraints.
 
 ## Context
 
-Sean must implement these verification scripts because the reliance on a sanitized proxy means agents lack access to full nuance, potentially limiting assistance depth in sensitive areas. The tension lies in balancing the need for agentic utility against the risk of exposing private entities through automated leakage.
+Sean is managing a Substack series ('Raising Claude') that involves sensitive personal narratives and prior employment details. By routing this through a scrubbed public copy, he enables GitHub backup and cross-machine sync (the primary utility) while strictly adhering to his 'Do-Not-Promote' rule and Rule #10, preventing accidental exposure of private life-systems data in his public code-brain infrastructure.
 
 ## Evidence
 
-> This mechanism describes a deliberate architectural split where sensitive, high-risk personal data is isolated in gitignored private directories while a sanitized, public-facing copy serves as the sole input for agentic processing.
+> The privacy gate (Do-Not-Promote term / prior-employer name / named individuals / compensation terms / family names) returns zero hits across all tracked files.
 
-> Sean must implement automated verification scripts to continuously check that no private entities have leaked into the public copy, as manual review is not scalable.
+> All edits applied to the public copy only; the un-scrubbed originals remain in the gitignored source.
 
 ## Examples
 
-- gitignored private directories
-- sanitized, public-facing copy
+- The `_private/` directory is explicitly gitignored and empty of content, serving as a null sink for any accidental inclusion attempts.
+- Originals were verified to have no git modifications, ensuring the 'copy-not-move' strategy preserved the private state while the public copy was transformed.
 
 ## Related Concepts
 

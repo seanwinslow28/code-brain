@@ -11,6 +11,7 @@ import os
 import httpx
 
 from council.discovery.evidence import EvidenceRecord
+from council.discovery.textbudget import GITHUB_Q_MAX_CHARS, clamp_words_chars
 
 GITHUB_SEARCH_URL = "https://api.github.com/search/issues"
 
@@ -42,6 +43,9 @@ async def collect_github(*, topic: str, segment: str = "", search=..., max_resul
     if search is None:
         return []
     subject = f"{topic} {segment}".strip() if segment else topic
+    # GitHub search q caps at ~256 chars; clamp the subject so the ` in:title,body is:issue` operators
+    # still fit and a long topic/--segment can't 422 the search.
+    subject = clamp_words_chars(subject, max_words=40, max_chars=GITHUB_Q_MAX_CHARS - 40)
     items = await search(f"{subject} in:title,body is:issue")
     recs: list[EvidenceRecord] = []
     for it in items[:max_results]:

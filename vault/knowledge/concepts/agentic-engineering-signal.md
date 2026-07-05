@@ -2,31 +2,31 @@
 title: "Agentic Engineering Signal"
 type: concept
 sources:
-  - knowledge/concepts/agentic-engineering-signal.md
+  - 20_projects/substack-studio/04-eval-tools-wrong-people/post.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-This concept defines the professional value derived from public proof-of-work that demonstrates governance judgment and system design capability. It operates on the principle that the signal is generated not by the volume of code, but by the clarity of boundaries and the sustainability of the maintenance model. The mechanism involves calibrating public artifacts to serve as evidence of strategic restraint rather than just technical output.
+A resume or portfolio artifact that signals deep understanding of evaluation design rather than mere tool usage. It moves the candidate from 'uses AI tools' to 'thinks in evals,' demonstrating the ability to scope skills with human-in-the-loop review gates. This signal is critical for roles requiring strategic inflection points where standard automation fails.
 
 ## Context
 
-In the context of Sean's job hunt, this concept helps frame his repositories as evidence of maturity. By distinguishing between mere contribution and a calibrated trust signal, he can leverage his work to demonstrate high-level architectural thinking without overcommitting to unsustainable support roles.
+Sean's job hunt strategy relies on demonstrating this specific signal to pass the 'Aakash bar.' The concept highlights that understanding evaluation frameworks is a differentiator in competitive hiring, particularly for product management and engineering leadership roles.
 
 ## Evidence
 
-> Sean should distinguish 'open source contribution' from 'public proof-of-work with an adoption funnel.'
+> This bullet alone moves the resume from 'uses AI tools' to 'thinks in evals,' which is the Aakash bar.
 
-> Job hunt materials should frame repositories as evidence of governance judgment rather than just technical capability.
+> each skill scoped with a human-in-the-loop review gate before publish, send, or ticket creation
 
 ## Examples
 
-- Framing a repository's README to highlight its deprecation policy and support boundaries.
-- Using the 'adoption funnel' metaphor to explain how public work serves as a strategic signal.
+- Direct delivery against the P&E Q2 Objective 5 KR3
+- Signals the candidate is in the eval-design conversation, not just adjacent to it
 
 ## Related Concepts
 
-[[Open-Source Contributions]] [[Supervision as the New AI Edge]]
+[[Supervision as the New AI Edge]] [[Portfolio Projects]]

@@ -17,6 +17,11 @@ dev = [
     "pytest-asyncio>=0.23",
     "pytest-httpx>=0.30",
 ]
+nli = [
+    "onnxruntime>=1.17",
+    "transformers>=4.40",
+    "numpy",
+]
 
 [build-system]
 requires = ["hatchling"]

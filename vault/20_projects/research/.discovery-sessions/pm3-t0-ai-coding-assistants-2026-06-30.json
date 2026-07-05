@@ -1,0 +1,761 @@
+{
+  "stamp": "t0",
+  "date": "2026-06-30",
+  "topic": "AI coding assistants",
+  "tier": "standard",
+  "lens": "pm",
+  "verified_count": 8,
+  "dropped_count": 2,
+  "cost_usd": 1.8465,
+  "evidence_count": 93,
+  "gather_cost_usd": 0.02984,
+  "bundle": {
+    "records": [
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://www.reddit.com/r/aigamedev/comments/1ug5f5w/i_cant_code_but_after_8_months_of_building_with/",
+        "date": "2026-06-26",
+        "quote": "I can\u2019t code, but after 8 months of building with AI, my first game is finally public",
+        "engagement": 327
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1ug5f5w/comment/otx4etn/",
+        "date": "2026-06-26",
+        "quote": "Looks solid! I will check it out! Are the assets AI too? If so you've done a good job keeping everything coherent.",
+        "engagement": 16
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1ug5f5w/comment/otxlc9b/",
+        "date": "2026-06-26",
+        "quote": "AI is great for us! Look at that, people who cant code are able to create their own project... I can imagine a future where we will be able to create anything we want. Good job!",
+        "engagement": 11
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1ug5f5w/comment/otxeiqz/",
+        "date": "2026-06-26",
+        "quote": "The amount of polish was impressive.",
+        "engagement": 7
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1ug5f5w/comment/otybdsb/",
+        "date": "2026-06-26",
+        "quote": "THE FUCK?!?!? Nice one, dude, really great work!",
+        "engagement": 6
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1ug5f5w/comment/otx5wb9/",
+        "date": "2026-06-26",
+        "quote": "which ai did you use particularly!",
+        "engagement": 3
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1ug5f5w/comment/otx7sdk/",
+        "date": "2026-06-26",
+        "quote": "Looks cool, congrats on shipping",
+        "engagement": 2
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1ug5f5w/comment/otxa45s/",
+        "date": "2026-06-26",
+        "quote": "really pretty!",
+        "engagement": 2
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1ug5f5w/comment/otxahu4/",
+        "date": "2026-06-26",
+        "quote": "awesoe bro, what engine?",
+        "engagement": 2
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1ug5f5w/comment/otxbj1d/",
+        "date": "2026-06-26",
+        "quote": "Looks super good my dude",
+        "engagement": 2
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1ug5f5w/comment/otxfk02/",
+        "date": "2026-06-26",
+        "quote": "looks amazing!",
+        "engagement": 2
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/LLMDevs",
+        "url": "https://www.reddit.com/r/LLMDevs/comments/1uh3zi7/have_you_achieved_something_practically_real/",
+        "date": "2026-06-27",
+        "quote": "Have you achieved something practically real using AI for coding?",
+        "engagement": 11
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://www.reddit.com/r/aigamedev/comments/1uh94v8/building_dev_tools_is_the_real_ai_cheat_code/",
+        "date": "2026-06-27",
+        "quote": "Building dev tools is the real AI cheat code",
+        "engagement": 105
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1uh94v8/comment/ou62isj/",
+        "date": "2026-06-27",
+        "quote": "this is just in general with AI. The amount of internal tooling I've been able to develop for my day job is insane, tons of scripts and complex pipelines that would otherwise take weeks",
+        "engagement": 15
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1uh94v8/comment/ou60u6y/",
+        "date": "2026-06-27",
+        "quote": "If anyone is interested, game is already playable and with dozens of active players on https://berrus.app. Is free to play mix of Path of Exile and RuneScape. Coming soon to Steam (wishlist please!). Currently working on a complete overhaul that will turn it into a \"real\" profesional game. Aiming to ship this new version in 1-2 months, just in time to steal the spotlight of GTA \ud83d\ude1b",
+        "engagement": 8
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1uh94v8/comment/ou61j7r/",
+        "date": "2026-06-27",
+        "quote": "I realized that too, I made my own tool in Godot itself which will allow me to built content for my Godot game quicker",
+        "engagement": 8
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1uh94v8/comment/ou64fmb/",
+        "date": "2026-06-27",
+        "quote": "Ive noticed that I personally enjoy working on the tools as much at the actual games. Ive been making a 3d hextile procedural generator that i plan to use across several games. getting it dialed in has been a task",
+        "engagement": 4
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1uh94v8/comment/ou693j4/",
+        "date": "2026-06-27",
+        "quote": "on my small scale, i created a monte carlo simulation + visualization tool for the balancing of my game, with AI. it allows to catch the tails events that might happen, and balance accordingly",
+        "engagement": 3
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1uh94v8/comment/ou6g2mb/",
+        "date": "2026-06-27",
+        "quote": "Nice I'm building an online multiplayer browser game. I have a game server, database, world editor, grafana for monitoring performance, documentation site for users and dev. Been working on it for many hours every day, but it's shaping up nicely in less than a week of work... I have a lot more work ",
+        "engagement": 2
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1uh94v8/comment/ou6m9g6/",
+        "date": "2026-06-27",
+        "quote": "Now build a pipe that allows the LLM to take screenshots and use your editor to build the rest of the game. Mostly kidding, or am I? I like your admin dashboard",
+        "engagement": 1
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1uh94v8/comment/ou6qoud/",
+        "date": "2026-06-27",
+        "quote": "Yep. 100% agree. And it's almost as fun. I created an auto-player that runs simulations in my rpg/tactics game. It runs a ton of seeded runs in a row and I can see how different things turn out in terms of game balance.",
+        "engagement": 1
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1uh94v8/comment/ou7tcd7/",
+        "date": "2026-06-27",
+        "quote": "True, I made my own tool for quality ai asset generation and it really helps games that I hand-code from not visually looking like slop",
+        "engagement": 1
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://reddit.com/r/aigamedev/comments/1uh94v8/comment/ou7xu4z/",
+        "date": "2026-06-27",
+        "quote": "Yeah it's not mentioned how the biggest hit with AI is to all those tool programmers in the asset stores that must be taking a hit",
+        "engagement": 1
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://www.reddit.com/r/aigamedev/comments/1uj0okh/53years_old_coder_hope_ai_can_help_me_make_a_game/",
+        "date": "2026-06-29",
+        "quote": "53years old coder, hope AI can help me make a game I have dreamed for 10+ years",
+        "engagement": 35
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/aigamedev",
+        "url": "https://www.reddit.com/r/aigamedev/comments/1ujophm/new_to_ai_assisted_game_coding_would_love_some/",
+        "date": "2026-06-30",
+        "quote": "New to AI assisted game coding, would love some advice!",
+        "engagement": 1
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/AskVibecoders",
+        "url": "https://www.reddit.com/r/AskVibecoders/comments/1ugabby/whats_the_best_personal_ai_agent_assistant/",
+        "date": "2026-06-26",
+        "quote": "What's the best personal AI agent assistant?",
+        "engagement": 18
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/MLjobs",
+        "url": "https://www.reddit.com/r/MLjobs/comments/1ug0izo/hiring_aibackend_engineer_building_an_autonomous/",
+        "date": "2026-06-26",
+        "quote": "[Hiring] AI/Backend Engineer \u2013 Building an Autonomous Productivity Companion",
+        "engagement": 24
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/SideProject",
+        "url": "https://www.reddit.com/r/SideProject/comments/1uf6aer/i_built_a_free_ai_coding_assistant_because_i/",
+        "date": "2026-06-25",
+        "quote": "I built a free AI coding assistant because I couldn't afford Cursor subscription.",
+        "engagement": 21
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/AskProgrammers",
+        "url": "https://www.reddit.com/r/AskProgrammers/comments/1uf479a/aicoding_agents_are_now_the_default_what_comes/",
+        "date": "2026-06-25",
+        "quote": "AI-coding agents are now the default. What comes next?",
+        "engagement": 13
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/vibecoding",
+        "url": "https://www.reddit.com/r/vibecoding/comments/1udf4jg/best_pricetoperformance_ai_coding_agents_right/",
+        "date": "2026-06-23",
+        "quote": "Best price-to-performance AI coding agents right now (beyond GitHub Copilot)?",
+        "engagement": 1
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/vibecoding",
+        "url": "https://www.reddit.com/r/vibecoding/comments/1uh3ywk/recommendation_for_ai_assistant/",
+        "date": "2026-06-27",
+        "quote": "Recommendation for ai assistant",
+        "engagement": 2
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/vibecoding",
+        "url": "https://www.reddit.com/r/vibecoding/comments/1ugw5fx/can_anyone_recommend_an_aifree/",
+        "date": "2026-06-27",
+        "quote": "Can anyone recommend an AI?(free)",
+        "engagement": 28
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/vibecoding",
+        "url": "https://www.reddit.com/r/vibecoding/comments/1uhofmi/whats_the_best_ai_to_vibe_code/",
+        "date": "2026-06-28",
+        "quote": "What's the best ai to vibe code?",
+        "engagement": 18
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/vibecoding",
+        "url": "https://www.reddit.com/r/vibecoding/comments/1udy1lg/i_turned_27_years_of_programming_into_a_full_time/",
+        "date": "2026-06-24",
+        "quote": "I turned 27 years of programming into a full time job with AI",
+        "engagement": 59
+      },
+      {
+        "source_type": "reddit",
+        "source_name": "r/vibecoding",
+        "url": "https://www.reddit.com/r/vibecoding/comments/1ueanau/vibe_coded_so_hard_i_ended_up_having_an_ai_company/",
+        "date": "2026-06-24",
+        "quote": "Vibe coded so hard i ended up having an AI company",
+        "engagement": 66
+      },
+      {
+        "source_type": "x",
+        "source_name": "Holochain",
+        "url": "https://x.com/Holochain/status/2072026570273747125",
+        "date": "2026-06-30",
+        "quote": "Think building a peer-to-peer app requires years of coding experience? Think again. \ud83e\udd14\n\nThe latest hAppenings newsletter features a great story on how a non-developer successfully built a hApp. With improving community tools and AI assistants, the barrier to entry for building on Holochain is dropping fast.\n\nRead the story here: https://t.co/LzfhzmHilq \n\n#Holochain #Web3 #NoCode #SoftwareDev #P2P",
+        "engagement": 47
+      },
+      {
+        "source_type": "x",
+        "source_name": "SubstraOS",
+        "url": "https://x.com/SubstraOS/status/2072010526826397988",
+        "date": "2026-06-30",
+        "quote": "What can you actually build with the SubstraOS API?  \n\nAnything that needs an LLM endpoint.  \n\n1. Drop-in OpenAI replacement  \nAlready calling OpenAI?  Swap the base URL to `https://t.co/kbQQMMSoWf`, add your SubstraOS key, and run open models through the same flow.  \nNo rewrite. Streaming supported. Lower-cost inference through pooled GPUs.  \nUse it for support bots, content tools, internal assistants, summarizers, chat apps, and AI features inside existing products.  \n\n2. Your own Claude Code-",
+        "engagement": 11
+      },
+      {
+        "source_type": "x",
+        "source_name": "TheValueist",
+        "url": "https://x.com/TheValueist/status/2071984211666272515",
+        "date": "2026-06-30",
+        "quote": "$NVDA $MU $SNDK $LITE INVESTMENT COMMITTEE TAKEAWAY\n\nLongCat-2.0 is best interpreted as a strategic systems-engineering event rather than a conventional model-release event. The relevant investment question is not whether Meituan has produced another high-quality chatbot; it is whether a leading Chinese local-services platform has demonstrated a credible route to frontier-scale agentic AI using a domestic accelerator stack, while simultaneously positioning the model for internal commerce automat",
+        "engagement": 5
+      },
+      {
+        "source_type": "x",
+        "source_name": "gadievron",
+        "url": "https://x.com/gadievron/status/2072046875406909668",
+        "date": "2026-06-30",
+        "quote": "1. Focus on protecting agents where adoption is, risk is high, and where attackers focus when attacking AI: On the endpoint (agents, coding assistants, and their supply chain, skills, extensions, MCP servers, etc.)",
+        "engagement": 0
+      },
+      {
+        "source_type": "x",
+        "source_name": "GiftOjeabulu_",
+        "url": "https://x.com/GiftOjeabulu_/status/2071993697642611169",
+        "date": "2026-06-30",
+        "quote": "1/5  \n\nThe New SDLC With Vibe Coding : \n\nSoftware engineering is moving away from a world where developers primarily write code syntax and toward one where they communicate intent in natural language.\n\nThe evolution has progressed from:\n\n- Basic autocomplete.\n- Inline code generation.\n- Chat-based coding assistants.\n\nFully autonomous AI agents that can plan, modify repositories, run tests, and create pull requests independently.\n\nThis Whitepaper explains : How AI agents are reshaping the softwar",
+        "engagement": 0
+      },
+      {
+        "source_type": "x",
+        "source_name": "nordicinst",
+        "url": "https://x.com/nordicinst/status/2071987338368942124",
+        "date": "2026-06-30",
+        "quote": "MIT @techreview: Agentic AI: systems that act in the world, not just generate. From coding assistants to robotic tasks, the future lies in tool-wunified models that can reason, plan, and act. Sweden/Europe should invest in trusted AI governance and robus\u2026 https://t.co/TAfhkxmL2u",
+        "engagement": 0
+      },
+      {
+        "source_type": "x",
+        "source_name": "stretchcloud",
+        "url": "https://x.com/stretchcloud/status/2072064381421326837",
+        "date": "2026-06-30",
+        "quote": "The inference cost curve for generative media just stepped down again.\n\nGoogle shipped two models today. Nano Banana 2 Lite (Gemini 3.1 Flash-Lite Image): $0.034 per image at 1K resolution, 4 seconds per output, 2.7x faster than Gemini 3.1 Flash Image. Its arena Elo score is 1251. That puts it above Nano Banana Pro (1245) despite costing 4x less ($0.034 vs $0.134 per image). Gemini Omni Flash: $0.10 per second of video output on the developer API, native audio, SOTA editing, multi-turn editing w",
+        "engagement": 0
+      },
+      {
+        "source_type": "x",
+        "source_name": "rammcodes",
+        "url": "https://x.com/rammcodes/status/2071991519024963638",
+        "date": "2026-06-30",
+        "quote": "Bruh... if your AI-generated UIs suck, this design engine could help \ud83e\udd84\n\nStyleSeed is an open-source design engine for AI coding assistants that teaches design judgment, helping them generate cleaner, more polished UIs instead of generic AI-looking interfaces.\n\n\u2192 works with Claude Code, Cursor & Codex\n\u2192 74 design rules\n\u2192 48 reusable components\n\u2192 7 built-in brand skins\n\nPerfect for UI developers and vibe coders who want AI-generated UIs to look more polished and intentional :)\n\nSource \ud83d\udd17: github(DO",
+        "engagement": 4
+      },
+      {
+        "source_type": "x",
+        "source_name": "StatsWire",
+        "url": "https://x.com/StatsWire/status/2072024433196462565",
+        "date": "2026-06-30",
+        "quote": "\ud83d\udd25 Anthropic just raised the bar with Claude Sonnet 5.\n\nIf you thought AI coding assistants were already impressive, Claude Sonnet 5 takes things to the next level.\n\nHere's what's new:\n\n\ud83e\udde0 Near Opus 4.8-level performance at a much lower cost\n\ud83d\udcbb Better coding, debugging, and large-scale code refactoring\n\ud83e\udd16 More agentic\u2014plans tasks, uses tools, and completes multi-step workflows\n\u26a1 Faster responses with improved reasoning and accuracy\n\ud83c\udf10 Designed for real-world work, from software engineering to researc",
+        "engagement": 4
+      },
+      {
+        "source_type": "x",
+        "source_name": "theinformation",
+        "url": "https://x.com/theinformation/status/2071987230650867877",
+        "date": "2026-06-30",
+        "quote": "Meta is spending billions on AI while pushing employees to rely less on outside coding assistants and more on its own tools.\n\nFull story: https://t.co/eiPhidiIeE",
+        "engagement": 4
+      },
+      {
+        "source_type": "x",
+        "source_name": "FPuklowski",
+        "url": "https://x.com/FPuklowski/status/2072049026573504597",
+        "date": "2026-06-30",
+        "quote": "OpenAI expands its enterprise AI push with HP",
+        "engagement": 0
+      },
+      {
+        "source_type": "youtube",
+        "source_name": "AI Engineer",
+        "url": "https://www.youtube.com/watch?v=-QFHIoCo-Ko",
+        "date": "2026-04-24",
+        "quote": "How many of you guys um are coding have ever coded with AI?",
+        "engagement": 1095569
+      },
+      {
+        "source_type": "youtube",
+        "source_name": "AI Engineer",
+        "url": "https://www.youtube.com/watch?v=-QFHIoCo-Ko",
+        "date": "2026-04-24",
+        "quote": "So, why do we have to wait till 3:45?",
+        "engagement": 1095569
+      },
+      {
+        "source_type": "youtube",
+        "source_name": "AI Engineer",
+        "url": "https://www.youtube.com/watch?v=-QFHIoCo-Ko",
+        "date": "2026-04-24",
+        "quote": "This is going to be around 2 hours, so we might just sort of kick off 2 hours from now.",
+        "engagement": 1095569
+      },
+      {
+        "source_type": "youtube",
+        "source_name": "AI Engineer",
+        "url": "https://www.youtube.com/watch?v=-QFHIoCo-Ko",
+        "date": "2026-04-24",
+        "quote": "Cuz it doesn't matter whether you're using 1 million uh context window or 200K, it's always going to be about this.",
+        "engagement": 1095569
+      },
+      {
+        "source_type": "youtube",
+        "source_name": "AI Engineer",
+        "url": "https://www.youtube.com/watch?v=-QFHIoCo-Ko",
+        "date": "2026-04-24",
+        "quote": "Cuz if you have a ton of stuff in here, if you have 250K tokens, like I have seen people put in there, then that you're just going to go straight into the dumb zone without even being able to do anything.",
+        "engagement": 1095569
+      },
+      {
+        "source_type": "youtube",
+        "source_name": "The Coding Sloth",
+        "url": "https://www.youtube.com/watch?v=91B_v-wOaws",
+        "date": "2026-01-22",
+        "quote": "People are always like, why should I use AI when I can just Google it in 5 seconds?",
+        "engagement": 618836
+      },
+      {
+        "source_type": "youtube",
+        "source_name": "The Coding Sloth",
+        "url": "https://www.youtube.com/watch?v=91B_v-wOaws",
+        "date": "2026-01-22",
+        "quote": "Planning out a solution, breaking the problem down into smaller pieces, and then coding it.",
+        "engagement": 618836
+      },
+      {
+        "source_type": "youtube",
+        "source_name": "The Coding Sloth",
+        "url": "https://www.youtube.com/watch?v=91B_v-wOaws",
+        "date": "2026-01-22",
+        "quote": "Pretty impressive for like a quick little 3minut prompt.",
+        "engagement": 618836
+      },
+      {
+        "source_type": "youtube",
+        "source_name": "The Coding Sloth",
+        "url": "https://www.youtube.com/watch?v=91B_v-wOaws",
+        "date": "2026-01-22",
+        "quote": "As of right now, my favorite MCPs are number one, Context 7.",
+        "engagement": 618836
+      },
+      {
+        "source_type": "youtube",
+        "source_name": "The Coding Sloth",
+        "url": "https://www.youtube.com/watch?v=91B_v-wOaws",
+        "date": "2026-01-22",
+        "quote": "This lets AI fetch documentation automatically, which means I don't have to copy and paste the same documentation for the 50th time.",
+        "engagement": 618836
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://www.buildmvpfast.com/blog/ai-assisted-coding-backlash-developers-2026",
+        "date": "",
+        "quote": "Most recent user feedback shows that developers feel AI coding assistants are **unreliable, \u201calmost right but not quite,\u201d increasingly verbose, context\u2011blind, and sometimes dangerously destructive**, and they want tools that are **trustworthy, controllable, stable in quality, and safer by default**.",
+        "engagement": 0
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://arstechnica.com/ai/2025/03/ai-coding-assistant-refuses-to-write-code-tells-user-to-learn-programming-instead/",
+        "date": "",
+        "quote": "Sign in Well that&#8217;s embarrassing AI coding assistant refuses to write code, tells user to learn programming instead Cursor AI tells user, &#8220;I cannot generate code for you, as that would be completing your work.",
+        "engagement": 0
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://www.programming-helper.com/tech/developers-voice-frustrations-over-ai-coding-assistant-output-quality",
+        "date": "",
+        "quote": "\u201cAlmost right, but not quite\u201d \u2013 chronic correctness and quality issues\n\n- A large share of developers say the core frustration is near\u2011miss correctness: code that compiles but is subtly wrong.",
+        "engagement": 0
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://www.cio.com/article/4117049/developers-still-dont-trust-ai-generated-code.html",
+        "date": "",
+        "quote": "&ldquo;We&rsquo;ve found that AI tools will occasionally ignore key aspects of the existing codebase or fail to align with established coding standards and architectural patterns,&rdquo; Owens says.",
+        "engagement": 0
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://www.reddit.com/r/technews/comments/1q7htqd/ai_coding_assistants_are_getting_worse/",
+        "date": "",
+        "quote": "[6][1]  \n  - A 2026 industry survey similarly reports **trust in AI code accuracy dropped from 40% to 29% in a year, and 46% of developers now actively distrust AI output**.",
+        "engagement": 0
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://www.cerbos.dev/blog/productivity-paradox-of-ai-coding-assistants",
+        "date": "",
+        "quote": "If code, credentials, or production data leave your environment through an AI assistant, you cannot guarantee deletion or control over where that data ends up.",
+        "engagement": 0
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://arstechnica.com/information-technology/2025/07/ai-coding-assistants-chase-phantoms-destroy-real-user-data/",
+        "date": "",
+        "quote": "[3]  \n  - An aggregated analysis of thousands of Copilot opinions concluded that **\u201cCopilot lies or produces bad results for a vast majority of the time\u201d**, leading some users to abandon it despite productivity benefits.",
+        "engagement": 0
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://staff.telkomuniversity.ac.id/2026/01/08/ai-coding-assistants-are-getting-worse/",
+        "date": "",
+        "quote": "[3]\n\n- Empirical data backs these complaints:\n\n  - CodeRabbit\u2019s analysis of 470 open\u2011source pull requests found **AI\u2011generated code had 1.",
+        "engagement": 0
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://www.weaving.news/news/019b9e3c-dd26-7c93-9b99-4bf65dd98084",
+        "date": "",
+        "quote": "7\u00d7 more issues per PR than human\u2011written code**, including 1.",
+        "engagement": 0
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://www.reddit.com/r/Frontend/comments/1jabkte/tried_ai_coding_assistants_so_you_dont_have_to/",
+        "date": "",
+        "quote": "4\u00d7 more critical issues and 1.",
+        "engagement": 0
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://www.reddit.com/r/programming/comments/1qdv6h0/newer_ai_coding_assistants_are_failing_in/",
+        "date": "",
+        "quote": "75\u00d7 more logic errors.",
+        "engagement": 0
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://news.ycombinator.com/item?id=46542036",
+        "date": "",
+        "quote": "[1]  \n  - A 2025 study cited in recent coverage found **30\u201350% of sampled Copilot outputs contained critical security flaws** such as SQL injection and insecure cryptography.",
+        "engagement": 0
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://news.ycombinator.com/item?id=42336553",
+        "date": "",
+        "quote": "[3]\n\n**Unmet needs implied:**\n\n- Assistants that **prioritize reliability over speed**, with built\u2011in static analysis, tests, and security checks before suggestions are made.",
+        "engagement": 0
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://www.reddit.com/r/technews/comments/1ftrc6l/ai_coding_assistants_do_not_boost_productivity_or/",
+        "date": "",
+        "quote": "- Clear **uncertainty signaling** (\u201cI\u2019m not sure this is correct\u201d) instead of confident wrong answers.",
+        "engagement": 0
+      },
+      {
+        "source_type": "sonar",
+        "source_name": "Perplexity Sonar",
+        "url": "https://arxiv.org/html/2406.07765v1",
+        "date": "",
+        "quote": "- Tunable modes (e.",
+        "engagement": 0
+      },
+      {
+        "source_type": "web",
+        "source_name": "Newer AI Coding Assistants Are Failing in Insidious Ways",
+        "url": "https://spectrum.ieee.org/ai-coding-degrades",
+        "date": "2026-03-09",
+        "quote": "AI-created code would often fail with a syntax error or snarl itself up in faulty structure.",
+        "engagement": 0
+      },
+      {
+        "source_type": "web",
+        "source_name": "\u201cMy productivity is boosted, but \u2026\u201d Demystifying Users\u2019 Perception on AI Coding Assistants",
+        "url": "https://arxiv.org/html/2508.12285v1",
+        "date": "2025-08-17",
+        "quote": "<strong>Context awareness is a major issue: assistants understand code well but often fail to retain or fetch relevant context.",
+        "engagement": 0
+      },
+      {
+        "source_type": "web",
+        "source_name": "Revisiting Using AI Coding Assistants: You\u2019re Holding It Wrong Edition | Hackaday",
+        "url": "https://hackaday.com/2026/06/08/revisiting-using-ai-coding-assistants-youre-holding-it-wrong-edition/",
+        "date": "2026-06-14",
+        "quote": "It&#8217;s bad enough when a code completion tool gets it wrong, it&#8217;s worse when the human in the loop fails to catch the glaring mistake.",
+        "engagement": 0
+      },
+      {
+        "source_type": "web",
+        "source_name": "Revisiting Using AI Coding Assistants: You\u2019re Holding It Wrong Edition | Hackaday",
+        "url": "https://hackaday.com/2026/06/08/revisiting-using-ai-coding-assistants-youre-holding-it-wrong-edition/",
+        "date": "2026-06-14",
+        "quote": "Report comment Reply Mike Burke says: June 8, 2026 at 7:44 pm What seems to be missing is clear requirements, a design paradigm, and design standards.",
+        "engagement": 0
+      },
+      {
+        "source_type": "web",
+        "source_name": "Why are experienced developers complaining about AI ...",
+        "url": "https://www.linkedin.com/posts/gregorparent_help-me-understand-how-it-is-that-developers-activity-7371919755252903936-njoG",
+        "date": "",
+        "quote": "Companies who hate ai\u2026you\u2019re basically dead and you\u2019re ok with it.",
+        "engagement": 0
+      },
+      {
+        "source_type": "web",
+        "source_name": "Why are experienced developers complaining about AI ...",
+        "url": "https://www.linkedin.com/posts/gregorparent_help-me-understand-how-it-is-that-developers-activity-7371919755252903936-njoG",
+        "date": "",
+        "quote": "than fail later manually, especially when working with new software you haven\u2019t seen a full development process for, since problems that come down to the overall design/structure won\u2019t show till later down the line once projects get bigger.",
+        "engagement": 0
+      },
+      {
+        "source_type": "web",
+        "source_name": "AI Coding Assistant Statistics 2026 | Uvik Software",
+        "url": "https://uvik.net/blog/ai-coding-assistant-statistics/",
+        "date": "2026-06-25",
+        "quote": "Confusing \u201clooks correct\u201d with \u201cis correct.",
+        "engagement": 0
+      },
+      {
+        "source_type": "web",
+        "source_name": "AI Coding Assistant Statistics 2026 | Uvik Software",
+        "url": "https://uvik.net/blog/ai-coding-assistant-statistics/",
+        "date": "2026-06-25",
+        "quote": "The near-correct nature of AI output \u2014 it compiles and looks plausible, but fails in subtle ways \u2014 drives this frustration.",
+        "engagement": 0
+      },
+      {
+        "source_type": "web",
+        "source_name": "The Real Struggle with AI Coding Agents \u2014 And How to Overcome It",
+        "url": "https://www.smiansh.com/blogs/the-real-struggle-with-ai-coding-agents-and-how-to-overcome-it/",
+        "date": "",
+        "quote": "Fixing one bug would create three new ones.",
+        "engagement": 0
+      },
+      {
+        "source_type": "web",
+        "source_name": "The Real Struggle with AI Coding Agents \u2014 And How to Overcome It",
+        "url": "https://www.smiansh.com/blogs/the-real-struggle-with-ai-coding-agents-and-how-to-overcome-it/",
+        "date": "",
+        "quote": "But I\u2019ve learned the hard way that without the right approach, they can also slow you down, drain your credits, and leave you with more problems than you started with.",
+        "engagement": 0
+      },
+      {
+        "source_type": "review",
+        "source_name": "apps.apple.com",
+        "url": "https://apps.apple.com/us/app/chatllm-ai-assistant-chat/id6502844681?see-all=reviews",
+        "date": "",
+        "quote": "I wish the team would either output 4 images like bing, or at least allow for randomization seeding so we can get different images using the same prompt.",
+        "engagement": 0
+      },
+      {
+        "source_type": "review",
+        "source_name": "apps.apple.com",
+        "url": "https://apps.apple.com/us/app/chatllm-ai-assistant-chat/id6502844681?see-all=reviews",
+        "date": "",
+        "quote": "I wish they would offer both as a menu option so you can pick your variety.",
+        "engagement": 0
+      },
+      {
+        "source_type": "review",
+        "source_name": "g2.com",
+        "url": "https://learn.g2.com/best-ai-code-generators",
+        "date": "2025-03-21",
+        "quote": "A 2023 McKinsey report found that AI coding assistants could reduce software development time by 20% to 45%, especially in early-stage prototyping and bug fixing.",
+        "engagement": 0
+      },
+      {
+        "source_type": "review",
+        "source_name": "g2.com",
+        "url": "https://learn.g2.com/best-ai-code-generators",
+        "date": "2025-03-21",
+        "quote": "I run the generated code in an IDE or compiler to identify syntax errors, missing imports, and improper function calls.",
+        "engagement": 0
+      },
+      {
+        "source_type": "github",
+        "source_name": "microsoft/vscode",
+        "url": "https://github.com/microsoft/vscode/issues/313962",
+        "date": "2026-05-03",
+        "quote": "Add `Assisted-by` instead of `Co-authored-by` for AI agents",
+        "engagement": 58
+      },
+      {
+        "source_type": "github",
+        "source_name": "rust-lang/leadership-council",
+        "url": "https://github.com/rust-lang/leadership-council/issues/273",
+        "date": "2026-03-06",
+        "quote": "Policy proposal: No low-effort contributions",
+        "engagement": 49
+      },
+      {
+        "source_type": "github",
+        "source_name": "microsoft/vscode",
+        "url": "https://github.com/microsoft/vscode/issues/288878",
+        "date": "2026-01-19",
+        "quote": "[vscode-server-web] Add --enable-remote-storage option to persist browser state on server",
+        "engagement": 47
+      },
+      {
+        "source_type": "github",
+        "source_name": "mastodon/mastodon",
+        "url": "https://github.com/mastodon/mastodon/issues/38072",
+        "date": "2026-03-05",
+        "quote": "Consider not allowing LLM and AI contributions",
+        "engagement": 43
+      },
+      {
+        "source_type": "github",
+        "source_name": "aws/amazon-q-developer-cli",
+        "url": "https://github.com/aws/amazon-q-developer-cli/issues/2096",
+        "date": "2025-06-23",
+        "quote": "feat: MCP Streamable HTTP Transport Support",
+        "engagement": 38
+      },
+      {
+        "source_type": "github",
+        "source_name": "openai/codex",
+        "url": "https://github.com/openai/codex/issues/1397",
+        "date": "2025-06-27",
+        "quote": "Configurable file exclusion patterns for sensitive files",
+        "engagement": 37
+      },
+      {
+        "source_type": "github",
+        "source_name": "anomalyco/opencode",
+        "url": "https://github.com/anomalyco/opencode/issues/1970",
+        "date": "2025-08-15",
+        "quote": "Feature Request: Add Background Bash Execution (Like Claude Code\u2019s Ctrl+b)",
+        "engagement": 33
+      },
+      {
+        "source_type": "github",
+        "source_name": "github/copilot-cli",
+        "url": "https://github.com/github/copilot-cli/issues/1157",
+        "date": "2026-01-28",
+        "quote": "Feature Request: Global Hooks Configuration with UserPromptSubmit, Stop, and Notification Events",
+        "engagement": 25
+      }
+    ],
+    "gather_cost_usd": 0.02984
+  }
+}

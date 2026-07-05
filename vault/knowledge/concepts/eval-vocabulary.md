@@ -2,30 +2,30 @@
 title: "Eval Vocabulary"
 type: concept
 sources:
-  - knowledge/concepts/eval-vocabulary.md
+  - 20_projects/substack-studio/06-stop-building-agents/2026-06-17-agent-or-automation-advisor-build-spec.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-Eval Vocabulary functions as a semantic contract layer that translates ambiguous human intent into deterministic scoring dimensions before any code generation occurs. This mechanism prevents the compounding of non-determinism by forcing explicit criteria for success, effectively acting as a pre-flight check for agentic workflows. Without this vocabulary, agents operate on implicit assumptions that vary between runs, leading to silent failures that are difficult to debug or reproduce consistently.
+The Eval Vocabulary represents the shift where evaluation metrics replace traditional Product Requirements Documents (PRDs) as the primary artifact for defining success. Instead of writing narrative specs, developers create portable MCP servers that score specifications against defined dimensions before any coding begins. This operationalizes the thesis that 'evals are the new PRDs' by making the evaluation process a concrete, executable tool rather than a document.
 
 ## Context
 
-Sean's infrastructure relies on high-fidelity scoring for agentic systems, but many tasks are better served by deterministic pipelines that bypass the need for such rigorous evaluation entirely. Understanding when to apply this vocabulary is critical to avoiding cognitive overload and maintaining automation reliability.
+Sean is integrating this concept into his job hunt materials and resume, positioning himself as an AI Product Manager who understands that rigorous evaluation is critical for agentic systems. He views this as a key differentiator in his portfolio projects.
 
 ## Evidence
 
 > intent_spec` tool *is* the eval. It scores a spec against the framework's dimensions before that spec reaches a coding agent
 
-> The Eval Vocabulary serves as the critical coordination mechanism between Autonomous Agent Fleets and their dependent systems.
+> turning the 'evals are the new PRDs' thesis into a portable MCP server.
 
 ## Examples
 
-- Scoring a spec against the framework's dimensions before it reaches a coding agent
+- A portable MCP server that tells the author what is missing from a spec before it ships to a coding agent.
 
 ## Related Concepts
 
-[[Automation Reliability]] [[Intent Engineering]]
+[[Intent Engineering]] [[Track C MCP Server / Portfolio Differentiation]]

@@ -11,9 +11,11 @@ those slots stay for substack-value-engine to gate.
 """
 
 from dataclasses import dataclass
-from urllib.parse import urlparse
+from datetime import date
 
+from council.discovery.evidence import EvidenceBundle
 from council.discovery.fusion import FusionResult
+from council.discovery.scoring import ScoreBreakdown, score_opportunity
 from council.discovery.verify import VerifiedPainPoint
 
 
@@ -27,16 +29,13 @@ class PostAngle:
     evidence_urls: list[str]
     quotes: list[str]
     whitespace: str          # angle differentiation (from the blind-spot/whitespace map)
-    score: float
-    corroboration: int
-
-
-def _domains(urls: list[str]) -> int:
-    return len({urlparse(u).netloc for u in urls if u})
+    score: ScoreBreakdown
 
 
 def frame_substack(verified: list[VerifiedPainPoint], fusion_result: FusionResult,
-                   segment: str = "") -> tuple[list[PostAngle], list[str]]:
+                   bundle: EvidenceBundle, *, segment: str = "",
+                   today: date | None = None) -> tuple[list[PostAngle], list[str]]:
+    today = today or date.today()
     angles: list[PostAngle] = []
     quote_bank: list[str] = []
     seen_q: set[str] = set()
@@ -45,8 +44,7 @@ def frame_substack(verified: list[VerifiedPainPoint], fusion_result: FusionResul
         if not v.verified:
             continue
         pt = v.point
-        corr = _domains(v.supporting_urls)
-        score = float(pt.intensity or 1) * (1 + corr)
+        score = score_opportunity(pt, v.supporting_urls, bundle, today=today)
         angles.append(PostAngle(
             title=pt.title,
             audience=segment or pt.segment or "readers",
@@ -57,12 +55,11 @@ def frame_substack(verified: list[VerifiedPainPoint], fusion_result: FusionResul
             quotes=pt.quotes,
             whitespace=whitespace,
             score=score,
-            corroboration=corr,
         ))
         for q, u in zip(pt.quotes, v.supporting_urls + [""] * len(pt.quotes)):
             line = f'"{q}" — {u}'.rstrip(" —")
             if line not in seen_q:
                 seen_q.add(line)
                 quote_bank.append(line)
-    angles.sort(key=lambda a: a.score, reverse=True)
+    angles.sort(key=lambda a: a.score.composite, reverse=True)
     return angles, quote_bank

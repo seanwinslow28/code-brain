@@ -2,31 +2,33 @@
 title: "Context Management as a Bottleneck"
 type: concept
 sources:
-  - knowledge/concepts/context-management-as-a-bottleneck.md
+  - 20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-This pattern identifies context maintenance as the primary constraint on agent reliability when state accuracy degrades over time. Agents fail to preserve or update critical information across interactions, leading to inconsistent outputs and degraded decision-making quality. The bottleneck emerges not from computational limits but from the inability to maintain semantic coherence.
+In complex agentic systems, the primary failure mode is not computational capacity but the degradation of semantic context across agent handoffs. When agents operate in silos without shared provenance layers, they lose the 'why' behind the 'what,' leading to outputs that are technically valid but strategically orphaned. This bottleneck manifests as a disconnect between high-level creative intent and low-level execution details.
 
 ## Context
 
-Sean's agents struggle with maintaining accurate state across long-running workflows, particularly in job hunt tracking and creative project management. This bottleneck limits their ability to provide reliable support for complex, multi-step tasks.
+Sean's work involves bridging the gap between high-level creative vision and technical execution. By addressing context management, he can prevent the 'silent failure' where agents produce content that misses the nuanced intent of the original brief.
 
 ## Evidence
 
-> Context management acts as a bottleneck when agents fail to maintain accurate state across interactions, leading to degraded agent health and unreliable outputs.
+> the creative slice is still re-aimed from an engineer-skewed corpus — that skew held across all three passes, which is itself a finding
 
-> When an agent has full access but no judgment, it produces 'green' status indicators while silently propagating stale or incorrect context.
+> the gap is not 'no eval tools' but 'eval tools built for the wrong audience'
+
+> most teams do not need research-grade evals first
 
 ## Examples
 
-- Agents losing track of previous decisions in long-running job hunt workflows
-- Inconsistent creative project states due to failed context preservation
+- A creative brief being interpreted differently by a copywriting agent vs. a design agent due to lack of shared context.
+- Agents producing consistent but irrelevant content because they lack access to the broader strategic narrative.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Silent Failure Propagation in Agent Fleets]]
+[[Context Compounding]] [[Vault as Agent Infrastructure]] [[Silent Failure Propagation in Agent Fleets]]

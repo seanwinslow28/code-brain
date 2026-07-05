@@ -2,31 +2,31 @@
 title: "Intent Engineering"
 type: concept
 sources:
-  - knowledge/concepts/intent-engineering.md
+  - 20_projects/substack-studio/research/opportunity-report-creative-agentic.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-This concept defines the structural requirement for agency, positing that autonomy without structured intent leads to uncontrolled generation. It establishes that the primary bottleneck in AI adoption is not computational power but the lack of traceable, accountable decision-making layers. This layer provides the necessary judgment and oversight for high-stakes creative work.
+A control architecture where structured intent serves as the primary gate for agent behavior, replacing open-ended generation with auditable specifications. This mechanism requires that every output be traceable to a pre-defined brief or constraint set, ensuring that the 'why' behind an action is preserved and verifiable. It shifts the burden of proof from the model's internal logic to the user's explicit framing, creating a closed loop where evaluation happens at the spec layer rather than post-hoc.
 
 ## Context
 
-Sean's infrastructure addresses this by providing the 'judgment layer' that enables safe, governed AI adoption in creative contexts. Without this explicit intent structure, agents operate as black boxes that generate output without accountability, creating a governance gap that prevents professional scaling of AI-assisted workflows.
+Sean has already built the technical foundation for this via his intent-engineering MCP and writing chain assets. The opportunity lies not in building new infrastructure but in translating this engineer-centric control plane into language accessible to creative and marketing teams who currently lack these governance tools.
 
 ## Evidence
 
-> The missing layer in AI agents is not autonomy. It is structured intent.
+> "The missing layer in AI agents is not autonomy. It is structured intent."
 
-> There is a critical tension between the rapid adoption of generative AI tools by creative teams and the lack of governance mechanisms tailored to their specific needs.
+> "eval tooling like Braintrust and LangSmith is designed for ML engineers… most teams don't need 'research-grade evals' first."
 
 ## Examples
 
-- Adding structured intent to agent workflows
-- Implementing governance for generative AI
+- Using the intent-engineering MCP to audit agent outputs against a brief before they are considered final.
+- Applying VoicePrint to productize the loop of eliciting intent, scoring it, and gating output for brand consistency.
 
 ## Related Concepts
 
-[[The Engineer-Creative Divide in Tooling]] [[Control Architecture as Evangelism]]
+[[Control Architecture as Evangelism]] [[Supervision as the New AI Edge]]

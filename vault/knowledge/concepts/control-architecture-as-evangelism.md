@@ -2,30 +2,31 @@
 title: "Control Architecture as Evangelism"
 type: concept
 sources:
-  - knowledge/concepts/control-architecture-as-evangelism.md
+  - 20_projects/prj-job-hunt-2026/assets/older/Sean_Winslow_Resume_Tech_PM.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition
 
-This concept defines a shift from viewing agents as isolated tools to treating them as components of a joint human-agent system. Reliability is no longer determined by individual agent accuracy but by the quality of coordination, observability, and handoff protocols between the human operator and the fleet. The architecture must explicitly support graceful degradation when agents fail, ensuring the human remains in the loop for critical decisions rather than being bypassed by automation.
+The strategic use of technical infrastructure design to communicate professional philosophy and capability. By building systems that embody specific architectural principles (like local-first, evals-first, or agent-rationalization), the architect demonstrates their values through implementation rather than description. This approach turns the infrastructure itself into a persuasive artifact that validates the underlying methodology.
 
 ## Context
 
-Sean's current setup relies on automated synthesis runs. Without explicit 'evangelism' of control architecture, he treats the fleet as a black box. He needs to reframe his role from 'wiring automations' to 'designing the cockpit' to maintain oversight.
+Sean's 'Agentic Financial-Research Fleet' and Code-Brain architecture serve as evangelism for his preferred stack (local LLMs, MCP, agent orchestration). The design choices (e.g., '$0/month local-LLM stack', 'evals-first') communicate his stance on cost, privacy, and reliability without needing to explicitly argue for them in a cover letter.
 
 ## Evidence
 
-> Reframe the fleet not as tools executing workflows, but as a human-agent joint system where reliability depends on coordination, observability, handoff, and graceful degradation.
+> Runs on a $0/month local-LLM stack (Ollama, SearXNG, LDR) with Gemini Deep Research as cloud fallback for compound topics.
 
-> It also gives you hiring language for AI-PM roles: designing the cockpit, not just wiring the automations.
+> Design exemplar of a 'sensors and actuators' architecture on a local stack — verifiable, durable, fully self-hosted.
 
 ## Examples
 
-- The fleet memory index is auto-generated, but Sean must manually interpret the 'rejected_count' to understand system health.
+- Multi-agent orchestration: queue file → router → 3 retrieval agents → local-LLM synthesis → daily morning brief.
+- Built an end-to-end RevOps automation pipeline — 11 Zapier workflows + 10 product-specific intake forms + central Tables database
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Control Plane / Data Plane Split for Agent Fleets]]
+[[Agentic Engineering Signal]] [[Intent Engineering]] [[Vault as Agent Infrastructure]]

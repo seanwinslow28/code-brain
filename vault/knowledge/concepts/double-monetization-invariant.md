@@ -2,10 +2,10 @@
 title: "Double-Monetization Invariant"
 type: concept
 sources:
-  - knowledge/concepts/double-monetization-invariant.md
+  - 20_projects/substack-studio/playbook/tool-shipping-playbook.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Definition

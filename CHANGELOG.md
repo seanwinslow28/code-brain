@@ -7,6 +7,117 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fable 5 audit campaign — Phase A prep (2026-07-04)
+- **Fable 5 campaign scaffolding.** Added the campaign + research-grounding docs
+  (`docs/plans/2026-07-04-fable5-audit-campaign.md`, `-wwf5d-research-findings.md`),
+  two audit-harness skills (`skill-audit`, `zoom-out-and-think`), the skill triage,
+  and the WWF5D scaffold (introspection protocol, task battery + Opus baselines,
+  validation harness, Phase B runbook). Phase A (Opus/Sonnet prep) only; Phase B
+  runs on Fable per the runbook. WWF5D encodes abstracted recipes corroborated by
+  behavioral diffs, never raw transcripts.
+
+### fusion-discovery-council E1 — NLI entailment gate (2026-07-01)
+- **fusion-discovery-council E1 — substring→NLI entailment upgrade for the core VERIFY gate.**
+  New `council/discovery/nli.py`: an in-process `cross-encoder/nli-deberta-v3-small` int8 ONNX
+  scorer (via `onnxruntime`, no server) that checks whether a cited quote *entails* the claimed
+  pain point, layered strictly on top of the existing substring/URL-traceability check — the
+  recall-safety invariant holds (substring never rejects; NLI only adds a stricter pass, never
+  removes the floor). The model is an **optional extra** (`pip install -e '.[nli]'` /
+  `tools/llm-council/scripts/install_nli_model.sh`); with no model installed or any load failure,
+  `get_scorer()` returns `None` and the gate degrades gracefully to substring-only — never a hard
+  failure. Degraded runs are never silent: the rendered ledger shows a one-line
+  `**Verification:** substring-only` note, and session JSON records `verify_mode`
+  (`"nli"`/`"substring-only"`) plus ALCE-style `citation_precision`/`citation_recall` metrics.
+  `tools/llm-council/models/` is gitignored — model weights never get committed.
+
+### fusion-discovery-council gather follow-ups — Sonar cost integrity + review-site fan-out (2026-06-30)
+- **Sonar cost-integrity leak fixed.** Sonar is a paid Perplexity call on every run, but its
+  `usage.cost` was discarded — the gather stage's "every collector is FREE" invariant never
+  actually covered it, so the $10/day discovery cap silently under-counted ~$0.02/run. Collectors
+  now follow an explicit contract: return `list[EvidenceRecord]` (free) **or** `(records, cost)`
+  (paid). `collect_sonar` returns its billed `usage.cost`; the orchestrator accumulates it onto
+  the new `EvidenceBundle.gather_cost_usd`, and the pipeline folds that into the run's recorded
+  spend on **every** path (success, empty-bundle, fuse-failure) so the cap sees real Sonar spend.
+- **Review-site search fan-out.** `gather/reviews.py` issued one `(site:a OR site:b OR …)` query,
+  but Brave collapses an OR'd multi-`site:` query so most review domains were never searched. It
+  now fans out one single-`site:` query per domain (concurrently, tolerating per-domain failures),
+  round-robin-merges for cross-domain diversity, dedups by URL, and caps **total** fetches at
+  `max_results` so the fan-out can't explode cost/latency. Per-query length clamp preserved.
+- TDD; `tools/llm-council` suite **278 passed, 1 skipped**; validator PASS. $0 (free Brave/Exa path).
+
+### fusion-discovery-council E2 — judge-family debias (2026-06-30)
+- **fusion-discovery-council E2 — panel self-preference fix.** The FUSE judge was a literal
+  member of its own panel in every tier (the confound the Step-C gate flagged). E2 enforces one
+  invariant — *judge model family ∉ panel families* — in `tiers.py`: `quick` judge swaps
+  Gemini→GPT (panel unchanged); `standard`/`deep` drop the Opus panelist (Opus stays the judge,
+  panels become anthropic-free 3-/5-vendor sets). A `_family()` helper + a regression test lock
+  the invariant. `tiers.py`-only, $0, no live calls; the `openrouter:fusion` path is untouched.
+  Research ($0 deep-research): family separation is the highest-leverage debias lever and the
+  only one robust to both mechanism accounts; the full order-randomized pipeline was rejected
+  (wrong task shape for a synthesis judge; order-swap can backfire). Decision record:
+  `vault/20_projects/research/2026-06-30-llm-judge-self-preference-debias-research.md`.
+
+### fusion-discovery-council D2 — receipts UI (2026-06-29)
+- **fusion-discovery-council D2 — receipts UI:** each ranked card in both ledgers (PM +
+  substack) now shows a compact `🧾` receipts line — corroboration tier (off distinct
+  independent domains; journalism two-source rule, caps at well-corroborated) + freshness
+  badge (off the existing scoring recency decay; undated-never-fresh honesty gate) — plus a
+  one-time legend framing receipts as evidence *depth*, not a verdict. New shared
+  `council/discovery/receipts.py`; $0, deterministic, render-layer only. Closes Step B.
+
+### fusion-discovery-council E3 — near-duplicate pain-point dedup + MMR gap ranking (2026-06-29)
+- **fusion-discovery-council E3 — near-duplicate pain-point dedup + MMR gap ranking.** New
+  `council/discovery/dedup.py` ($0/deterministic): a shared lexical token-Jaccard similarity drives
+  (a) `dedup_verified` — collapses near-duplicate gate-survived pain points via bounded
+  merge-to-canonical (bias-to-under-merge, no transitive closure), unioning evidence honestly with
+  corroboration kept keyed on distinct domains; and (b) `rank_gaps` — MMR (Carbonell & Goldstein 1998,
+  λ=0.3) ranking that orders D4's whitespace gaps most-distinct-first and drops near-duplicate gaps.
+  Wired into `pipeline.py` after VERIFY; renderers show a `merged_count` note. Design grounded in a $0
+  deep-research pass (`vault/20_projects/research/2026-06-29-mmr-dedup-similarity-research.md`). Also
+  closes two PM4 carry-forward test nits. No model cost, gate untouched.
+
+### fusion-discovery-council — Step B: whitespace map as hero output (D4) (2026-06-29)
+- **New `council/discovery/whitespace.py`** — the blind-spot/whitespace map now **LEADS** both ledgers (pm + substack) instead of rendering last as bare `- {b}` bullets. Each gap renders as a statement + a uniform **`→ Backfill (agent WebSearch/WebFetch, solution-side)`** next-action, under a deterministic **"Sharpen the next run"** list (4 conditional rules: backfill the N gaps · add `--segment` if unset · reframe if 0 verified · raise tier when drop-rate ≥50% and not already `deep`). Shared by both renderers (DRY); `$0`/deterministic, no model call.
+- **Honesty-preserving (gate-aligned):** gaps are explicitly framed as **absence-of-evidence** (what the panel/evidence *missed*), never verified claims or confirmed opportunities; the per-gap action is always to *investigate*, never to *build*; no fabricated confidence/score is attached to a gap. The hero links the existing `## Web Supplement (gap-fill)` section by reference — `backfill.py` / `verify_supplement.py` untouched.
+- `render_ledger` / `render_substack_ledger` gain a `segment` param (drives the `--segment` sharpen rule); threaded from `pipeline.py`. Old `## Blind-spot / Whitespace Map` buried heading removed. SKILL.md §2/§4.1/§6 updated to the new `## ⭐ Whitespace Map` heading. Grounded in a $0 deep-research pass ([vault/20_projects/research/2026-06-29-whitespace-gap-map-presentation-research.md](vault/20_projects/research/2026-06-29-whitespace-gap-map-presentation-research.md) — OST/NN-G/absence-of-evidence verified). 15 new tests. Spec [docs/superpowers/specs/2026-06-29-discovery-d4-whitespace-hero-design.md](docs/superpowers/specs/2026-06-29-discovery-d4-whitespace-hero-design.md), plan [docs/superpowers/plans/2026-06-29-discovery-d4-whitespace-hero.md](docs/superpowers/plans/2026-06-29-discovery-d4-whitespace-hero.md).
+
+### fusion-discovery-council — Step B: real opportunity score + PRD-grade card (PM4 + D1) (2026-06-29)
+- **New `scoring.py`** — replaces the toy `intensity * (1 + domains)` with a research-grounded **`composite = 100 × value × confidence`** (RICE pattern). `value` = weighted importance/reach/recency; `confidence` = independent-source corroboration (dominant) + model consensus (light, **separate** — model agreement ≠ independent evidence), floored at 0.5 so a single-source pain is discounted, never propped up by high importance or zeroed. Reach is **log-damped** (`log1p`, Reddit "hot" precedent — one viral post can't dominate); recency is exp-decay, smallest weight, floored (over-weighting recency is the documented failure mode). Grounded in a deep-research pass ([vault/20_projects/research/2026-06-29-opportunity-scoring-frameworks-research.md](vault/20_projects/research/2026-06-29-opportunity-scoring-frameworks-research.md) — 23 claims verified against ODI/RICE/Reddit-source/OECD primary sources). Constants are tunable + flagged for sensitivity-testing. 10 tests.
+- **New `bet.py`** — deterministic pain-shape classifier (trust-gap / cost-pain / integration-gap / workflow-friction / missing-capability) → a labeled "proposed bet" (riskiest-assumption category + cheapest-test pattern) with a human fill-in slot. Names a structural starting point; **never fabricates a specific insight**. 6 tests.
+- **PRD-grade card** — `IdeaCard` + `render_ledger` redesigned to **who · pain-in-their-words (verbatim lead quote) · evidence + corroboration · size (auditable score components) · why-now (deterministic from recency) · proposed bet**. Dropped the dead `workaround`/filler `opportunity` fields. The `value × conf = composite` arithmetic renders inline so the score is auditable, not a black box.
+- **Substack lens** shares the same `score_opportunity` helper (DRY) — `PostAngle.score` is now the same `ScoreBreakdown`; the toy score + `corroboration` field are gone.
+- **Honesty rename:** the reach/confidence breadth signal is labeled `distinct_sources` (from `EvidenceRecord.source_name` — a channel/handle/publication), not "authors".
+- Verification gate untouched; **$0 new API spend** (every signal from the in-memory bundle). Full council suite **195 passed, 1 skipped**. Spec [docs/superpowers/specs/2026-06-29-discovery-pm4-d1-score-card-design.md](docs/superpowers/specs/2026-06-29-discovery-pm4-d1-score-card-design.md), plan [docs/superpowers/plans/2026-06-29-discovery-pm4-d1-score-card.md](docs/superpowers/plans/2026-06-29-discovery-pm4-d1-score-card.md).
+
+### fusion-discovery-council — Step A harden: shared query-length clamp (2026-06-28)
+- **New `council/discovery/textbudget.py`** — one place for the provider q-param ceilings (Brave ~50 words/400 chars, GitHub ~256 chars) and a shared `clamp_words_chars(text, *, max_words, max_chars)` that trims on a word boundary. A long topic (and/or `--segment`) composed into a provider query is what 422'd the search and, pre-fix, crashed Stage-5 backfill (2026-06-28).
+- **`reviews` + `github` collectors now clamp their subject** ([gather/reviews.py](tools/llm-council/council/discovery/gather/reviews.py), [gather/github.py](tools/llm-council/council/discovery/gather/github.py)) before composing the provider query — so the fixed `site:`/weakness or `in:title,body is:issue` operators are never truncated away and a long topic can't 422 them (the same crash class the backfill hit).
+- **`backfill._supplement_query` refactored** to reuse `clamp_words_chars` + the shared `BRAVE_Q_MAX_*` ceilings (DRY; also now catches a topic head that alone exceeds the word ceiling). Behavior unchanged — its 14 tests stay green.
+- Tests: new `tests/discovery/test_textbudget.py` (4) + long-topic clamp regressions in `test_gather_reviews.py` / `test_gather_github.py`. Full council suite **174 passed, 1 skipped**.
+
+### fusion-discovery-council — Step A harden: --segment normalization + Fusion failure diagnostics (2026-06-28)
+- **`--segment` is normalized at the pipeline boundary** ([pipeline.py](tools/llm-council/council/discovery/pipeline.py) `_normalize_segment`): strips search-operator chars (`:`, parens) and collapses whitespace (incl. whitespace-only → "") once in `run_discovery`, so an operator-bearing segment (`is:pr`, `site:foo`, a stray `)`) can't alter any collector's composed query semantics. It's an audience qualifier, not a query operator.
+- **Fusion tool failures now report the real reason** ([fusion.py](tools/llm-council/council/discovery/fusion.py) `_find_failure_reason`): when a 200 response carries no parseable pain-point JSON, `fuse()` defensively scans the payload for a typed `failure_reason` (`all_panels_failed` / `rate_limited` / `fusion_invocation_capped` / …) and appends it to the `FusionError` instead of the generic "unparseable" message. The exact path is undocumented (FUSION_SCHEMA.md captured only the success shape), so the scan is path-agnostic; the success path is untouched.
+- **HN under `--no-native-web`:** investigated, **kept as-is** — it's a deliberate speed/cost choice; HN degrades safely to empty while reddit (API) yields. Removing it would re-enable native web for all sources just to recover HN (an untested change against the external plugin). Documented in tickets.md.
+- Tests: `--segment` normalize (unit + `run_discovery` boundary) in `test_pipeline.py`; top-level + nested `failure_reason` surfacing in `test_fusion.py`. Full council suite **green**.
+
+### fusion-discovery-council — BACKFILL moves to the agent layer (2026-06-28)
+- **Pivot:** Stage 5 BACKFILL now runs by default at the **agent layer** — the orchestrating Claude Code session reads each ledger's `## Blind-spot / Whitespace Map` and backfills it with its own `WebSearch`/`WebFetch` on Sean's Anthropic subscription (**$0 marginal API**). An agent's search→read→synthesize **vets relevance natively** — the one thing the deterministic in-CLI Exa/Brave version (keyword extraction, "relevance: mixed") couldn't do. Cheaper *and* higher-quality.
+- **CLI default flipped:** `--supplement` is now **default OFF** ([__main__.py](tools/llm-council/council/discovery/__main__.py)). It stays fully working as **opt-in** for a future headless / no-agent mode (the only path that still needs the deterministic in-CLI backfill). TDD: the `test_cli.py` default-assertion was inverted first (red → green); all prior tests stay green.
+- **New code-enforced anti-fabrication backstop:** `python -m council.discovery.verify_supplement <ledger>` ([verify_supplement.py](tools/llm-council/council/discovery/verify_supplement.py)) parses the agent-written `## Web Supplement (gap-fill)` section, re-fetches each cited URL, and confirms the quote appears **verbatim** — routed through the same shared `quote_supported_at_url` primitive as the core VERIFY gate. Exit 1 on any miss (demote that item to "still open"). Division of labor: the agent judges *relevance*; this proves *verbatim-ness*. Trust, but verify.
+- **Docs:** SKILL.md §2/§3/§4.1/§5/§6/§8 rewritten so the agent-driven flow is the documented standard; new copy-paste [`references/run-template.md`](.claude/skills/fusion-discovery-council/references/run-template.md) drives one session end-to-end (run CLI → read blind-spot map → agent backfill → `verify_supplement`).
+- **Cascade:** the E1-coupled-backfill cleanup ticket is **closed** (no deterministic Stage-5 relevance gate to upgrade — E1 is now a core-VERIFY concern only), and the post-fuse cost-recording hole is **resolved** — the typed-failure fix landed independently on `main` via #99 (merged in here), so post-fuse stage failures now record real billed spend; the agent-layer pivot separately removes the only post-fuse network call. (Residual: a manual OpenRouter reconcile of the 2026-06-28 under-count, which predates #99.)
+- Tests: new `tests/discovery/test_verify_supplement.py` (11). Discovery suite **132 passed**. Plan: [`~/.claude/plans/read-through-docs-prompts-2026-06-28-fus-hazy-robin.md`]; continuation: [docs/prompts/2026-06-28-fusion-discovery-council-continuation.md](docs/prompts/2026-06-28-fusion-discovery-council-continuation.md).
+
+### fusion-discovery-council Phase 6 — Stage 5 BACKFILL web-supplement (2026-06-28)
+- **New stage:** the pipeline now runs `gather → fuse → verify → frame → backfill → render`. After FRAME, **BACKFILL** ([tools/llm-council/council/discovery/backfill.py](tools/llm-council/council/discovery/backfill.py)) web-searches the FUSE panel's own blind-spot map so no gap is left un-chased — folding the previously-manual post-run web pass into the tool.
+- Per blind-spot bullet (tier-capped **quick 2 / standard 4 / deep 6**, one query each) it derives a **solution/evidence-side** query (strips meta-prefixes like "No evidence on…"; deliberately NOT the Stage-1 complaint query), reuses the existing SSRF-hardened web collector (`collect_web`, now parameterized with `query`/`extract`/`source_type` overrides — defaults byte-unchanged), extracts verbatim sentences overlapping the gap keywords, URL-anchors + dedups them, and appends a clearly-separate **`## Web Supplement (gap-fill)`** section. Unfilled gaps render "still open — not filled."
+- **Same anti-fabrication gate:** the substring primitive is factored out of `verify.py` into one shared `quote_supported_at_url(...)` that BOTH VERIFY and BACKFILL call — the single chokepoint roadmap **E1** will upgrade (substring → atomic-claim + NLI entailment). v1 supplement findings are **safe by construction** (deterministic verbatim extraction) but relevance-unvetted, so the section is labeled **gap-fill LEADS, not consensus-verified claims**, and web findings never enter the FUSE-ranked list.
+- **Cost-safe:** $0 on the OpenRouter ledger (reuses the free Exa/Brave rail, no model call); the free web queries are priced into recorded spend at `WEB_QUERY_PRICE` × queries-run (≤ ~$0.07 on `deep`), added *after* `_estimate_cost` so the `fr.cost` early-return can't drop it. $10/day cap still governs.
+- **CLI:** `--supplement/--no-supplement` (default **on**, so every run self-fills). `--no-supplement` reproduces the exact pre-Stage-5 ledger (byte-identical). No web key → stage degrades to a "skipped" note, never a crash. Works for both `pm` and `substack` lenses.
+- Tests: new `tests/discovery/test_backfill.py` (12) + a hermetic `conftest.py` (deletes web keys by default) + additions to `test_render.py`/`test_render_substack.py`/`test_cli.py`/`test_tiers.py`. Full suite **153 passed, 1 skipped**.
+- Spec: [docs/prompts/2026-06-27-fusion-discovery-council-web-supplement-stage-prompt.md](docs/prompts/2026-06-27-fusion-discovery-council-web-supplement-stage-prompt.md).
+
 ### substack-studio — consolidated "Raising Claude" Substack project migrated to a tracked home (2026-06-22)
 - **New project `vault/20_projects/substack-studio/`** — the scattered Substack work (posts + research + playbook + image house-style + the writing/image/research skill chain) consolidated into one **tracked (public)** folder inside code-brain, so it backs up to GitHub and syncs across machines. Was previously stranded under the gitignored `prj-job-hunt-2026/` private layer.
 - **Copy + privacy transformation** (originals copied, never moved — live agents still read the source paths): copied Posts 01–07 + bonus, the series command-center, CONTINUATION/KICKOFF docs, `_assets`, 17 research files, and 2 playbook docs. **Scrubbed** every Do-Not-Promote mention to neutral phrasing (posts 1–3 frontmatter notes, Post 7 + bonus body prose, editorial docs). **Excluded** the workshop/PII layer (`_archive/`, `_experiments/`, the council-session naming real individuals + employment-departure specifics) — they stay only in the gitignored source. The privacy gate over all tracked files returns zero hits for the Do-Not-Promote term, prior-employer name, named individuals, or compensation terms.

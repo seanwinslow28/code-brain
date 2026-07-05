@@ -5,19 +5,21 @@ connects:
   - Context Compounding
   - Agentic Engineering
   - Vault as Agent Infrastructure
-created: 2026-06-24
-updated: 2026-06-24
+created: 2026-06-23
+updated: 2026-06-23
 ---
 
 ## Synthesis
 
-The tension lies in the integration of Sean's professional product management tools with his personal career and creative outputs, creating a unified agentic infrastructure. This integration allows for context compounding, where improvements in one domain directly enhance another, but it also requires careful management to prevent cross-contamination of sensitive data or loss of domain-specific focus. The consequence is a powerful feedback loop that amplifies Sean's unique value proposition as an AI Product Manager who can leverage his own infrastructure to drive innovation across all areas of his work.
+Sean's personal knowledge vault and job-hunt materials are not separate silos but interconnected nodes in a single agentic infrastructure. The same tools (Code-Brain, MCP servers) used for professional product management are repurposed to manage his career narrative and creative outputs. This creates a feedback loop where improvements in one domain (e.g., better vault synthesis) directly enhance the quality of another (e.g., more coherent resume artifacts), leveraging the 'context compounding' effect across life-systems.
 
 ## Threads
 
 ### [[Context Compounding]]
 
-> Sean's personal knowledge vault and job-hunt materials are not separate silos but interconnected nodes in a single agentic infrastructure.
+> Maintains the open-source 118-skill Code-Brain and a 17-agent Claude Agent SDK fleet
+
+> Used in production for daily PM workflows, vault automation, and content generation across crypto, creative, and personal-systems domains.
 
 ### [[Agentic Engineering]]
 
