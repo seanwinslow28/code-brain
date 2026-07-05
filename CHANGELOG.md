@@ -65,6 +65,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   contract extended to accept both. CLAUDE.md agents-table: corrected the Vault Synthesizer +
   Flush rows (model name + typed-deferral semantics; "skip-and-continue" falsified). Suite
   green (929).
+- **C3 shipped (2026-07-05) — Fork 1 realized: the lint Tier-2 LLM leg is wired.** Fixes
+  Origin C: `knowledge_lint.main()` passed no `llm_caller`, so the semantic contradiction scan
+  and `soul-tier-a-conflict` (advertised HIGH in CLAUDE.md) had **never run in production**;
+  the prompt embedded no corpus; and the LLM block swallowed failures with `except: pass`.
+  Now: `main()` resolves a new `lint_tier2` task route **once, probe-first** (same pattern as
+  the synthesizer — a down MBP defers honestly, `notify_on`-gated), builds a production
+  `llm_caller`, and `_build_tier2_prompt` injects the `knowledge/concepts/*.md` corpus (title +
+  Definition digests) in `TIER2_BATCH_MAX_CHARS`-sized batches for the 32K context, bounded by
+  a `TIER2_BUDGET_SECONDS` (~15 min) wall-clock budget with no silent truncation (the deferred
+  batch count is reported). The silent `except: pass` is replaced by a logged + reported
+  failure line. The report footer + `record_run` notes now distinguish **reviewed N/M batches**
+  / **deferred (host unreachable)** / **failed — <exc>** / **skipped by gate**, so a silent skip
+  can never again read as a clean scan. Cross-batch + SQL contradiction dedupe preserved; a
+  one-call floor keeps the pre-C3 single-call contract (empty vault still fires the SOUL leg).
+  New suite `tests/test_bt5_lint_tier2.py` (11 tests, failing-test-first). CLAUDE.md Knowledge
+  Lint row corrected. Full agents-sdk suite green (939).
 
 ### CLAUDE.md — retire the Obsidian-Git vault-ownership rule (2026-07-05)
 - **Deleted Non-Negotiable rule 8** ("Obsidian-Git is the sole owner of vault
