@@ -4,7 +4,9 @@ The operating manual for any session working in this folder. Rules here are stan
 
 ## 0. Read first, every time
 
-**[POSITIONING-AND-EDITORIAL-SPEC.md](POSITIONING-AND-EDITORIAL-SPEC.md) before any work.** It is the source of truth: positioning, the one reader, the soul, the white space, the voice, the value model, the formats, the relaunch plan. If anything here disagrees with the spec, the spec wins until it is explicitly revised. Do not re-litigate locked decisions (the name, the reader, the formats); pick up the active task.
+**[SOUL.md](SOUL.md) before any work, it is the masthead.** "Have the agent think like me; build the partner, then the system, then the art." Then [POSITIONING-AND-EDITORIAL-SPEC.md](POSITIONING-AND-EDITORIAL-SPEC.md) for the strategic detail (the one reader, the white space, the voice, the value model, the formats, the relaunch plan). If anything here disagrees with SOUL.md, SOUL.md wins; the spec wins over this file. Do not re-litigate locked decisions (the name, the reader, the arc); pick up the active task.
+
+**The arc is partner first, system as destination (re-anchored 2026-06-29).** The first posts build a creative partner (brainstorm + interview the agent into your taste); the **system framework** (spec it, test it, version it, gate it) is the destination they earn, not the front door. [`2026-06-28-pivot-prompts-to-systems.md`](2026-06-28-pivot-prompts-to-systems.md) is now read as **evidence** (its insight that isolated techniques are commodity is true and feeds the destination), not as the masthead. Do not lead with the framework, and do not default back to "hand out a prompt / teach a technique." Lead with the partner and the demo.
 
 ## 1. The voice chain is mandatory
 
@@ -28,6 +30,7 @@ These are the traps the research surfaced. Hold the line:
 - **One craft lane per post.** Demo in one discipline. Do not sprawl.
 - **Do not lump the failure modes.** A technical glitch, an off-brand tone, and philosophical soullessness are three different problems with three different fixes. Each is its own post. Conflating them is the gap the whole field falls into; we don't.
 - **The whitespace question is the method:** "Does feeding the model your references and taste kill the AI look?" Nobody is answering it. Answering it, by showing it, is what Pencil & Prompt is for.
+- **Lead with the partner and the demo; the system is the destination (re-anchored 2026-06-29).** "Differentiate, never duplicate" has teeth: the isolated technique/prompt lane is saturated and commodity, so a post whose only takeaway is a free-elsewhere prompt is value-gate-blocked (it already blocked the old flagship how-to). But the answer is not to lead with the framework. Lead with building the partner (brainstorm + interview the agent into your taste) and the live demo; the system (spec/test/version/gate) is where the arc *leads*, earned over the partner posts. The moat is the taste-transfer method, not the architecture diagram.
 
 ## 3. The value gate (hard block)
 
@@ -38,9 +41,9 @@ Before a post is worth writing, `substack-value-engine` must clear two slots:
 
 The capture of the real work is the post. Write from the build, not after it.
 
-## 4. Demo in Sean's lane; teach a method that travels
+## 4. Demo in Sean's lane; teach a method that travels; ship both tiers
 
-Demonstrate in animation, writing, or visual design, where Sean has provable taste. Then strip the lesson of its craft so a musician or copywriter can run it on theirs. The demo is specific; the method is universal. Tools ship packaged for a non-coder (one-click skill, hosted thing, copy-paste kit), never "clone this repo." A tool a skeptic can't run is worse than no tool.
+Demonstrate in animation, writing, or visual design, where Sean has provable taste. Then strip the lesson of its craft so a musician or copywriter can run it on theirs. The demo is specific; the method is universal. **Tools ship in two tiers, every time (revised 2026-06-29):** a copy-paste kit so anyone can start in the tool they already have, AND the symlinkable `.claude` skill for the reader ready to level up. Teach the why and how of the technical layer; do not wall the reader off from it. The non-coder is the on-ramp, not the ceiling. (Masthead rationale: SOUL.md §3-4.)
 
 ## 5. Privacy and repo rules
 
