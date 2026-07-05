@@ -1,0 +1,32 @@
+{
+  "id": "20260630-172729-4ee6bd",
+  "topic": "AI coding assistants",
+  "lens": "pm",
+  "tier": "standard",
+  "evidence_count": 93,
+  "verified": 8,
+  "dropped": 2,
+  "merged_count": 0,
+  "cost_usd": 1.8465,
+  "gather_status": {
+    "last30": "ok: 56 records (56 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 10 records (10 found)",
+    "reviews": "ok: 4 records (4 found)",
+    "github": "ok: 8 records (8 found)"
+  },
+  "blind_spots": [
+    "Limited non-English and enterprise-procurement perspective; segments skew toward indie/hobbyist vibe coders and US tech press.",
+    "CodeRabbit analysis quote is truncated in the evidence ('had 1.'), so the actual defect/severity finding is unknown.",
+    "Positive/success stories (e.g., shipping a game without coding, internal tooling wins) are present but underexplored as counter-signal context.",
+    "Evidence is heavily weighted toward Reddit, GitHub, and aggregator/blog summaries; little first-party telemetry or quantified productivity data beyond cited surveys.",
+    "Refusal-to-help behavior is referenced (Cursor telling a user to learn programming) but only as a headline with no clustered user-impact discussion in the rest of the evidence.",
+    "No evidence on latency/performance/speed of suggestions as a standalone pain point despite 'reliability over speed' framing."
+  ],
+  "contradictions": [
+    "Productivity is framed both positively (AI builds internal tooling that 'would otherwise take weeks', a non-coder shipped a game in 8 months) and negatively (assistants 'slow you down, drain your credits' and one source titled 'AI coding assistants do not boost productivity').",
+    "Some users abandon tools because 'Copilot lies or produces bad results for a vast majority of the time' while others report substantial productivity benefits from the same class of tools.",
+    "Trust framing conflicts: declining trust (40%->29%, 46% distrust) coexists with continued heavy adoption and reliance reflected in volume of usage and tooling requests."
+  ],
+  "supplement": null
+}
