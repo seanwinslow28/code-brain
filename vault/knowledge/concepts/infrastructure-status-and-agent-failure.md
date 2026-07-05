@@ -2,7 +2,7 @@
 title: "Infrastructure Status and Agent Failure"
 type: concept
 sources:
-  - knowledge/concepts/infrastructure-status-and-agent-failure.md
+  - knowledge/connections/operational-uptime-vs-cognitive-utility-tension.md
 tags: [auto-generated, phase-6]
 created: 2026-07-05
 updated: 2026-07-05
@@ -10,23 +10,23 @@ updated: 2026-07-05
 
 ## Definition
 
-This architectural pattern distinguishes between the control plane, which dictates desired state and routing policies, and the data plane, which executes local processing and storage operations. Failures often occur in the data plane where agents process information, yet the control plane continues to report healthy status because it only monitors the existence of processes rather than their functional output. This split creates a blind spot where the system's orchestration layer perceives health while the execution layer suffers from silent drops in data flow that are difficult to diagnose through standard software logs alone.
+This mechanism defines the hard dependency chain where software-level health reports are negated by hardware offline states or network unavailability. It establishes that agent functionality is not self-contained but relies on a substrate of physical and network resources that must be actively verified. The failure mode here is not within the agent's code but in its inability to bridge the gap between digital intent and physical execution when the underlying infrastructure collapses.
 
 ## Context
 
-Sean's infrastructure relies on agents like the vault synthesizer to maintain his personal knowledge base. When the control plane reports health but the data plane fails, Sean loses trust in his automated systems because he cannot distinguish between a true outage and a semantic failure. This distinction is critical for debugging why his job hunt updates or creative studio workflows occasionally miss key information despite appearing operational.
+Sean needs to understand that his agents' failures are often upstream of their own logic, rooted in the stability of the machines they run on. Recognizing this dependency allows him to prioritize physical-layer monitoring over software-level debugging when issues arise.
 
 ## Evidence
 
-> This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local processing and storage operations.
+> This invariant describes the physical and network dependencies that underpin agent functionality, where hardware offline states directly negate software-level health reports.
 
-> The core tension lies between the orchestration layer's perception of health and the execution layer's physical reality. While the meta-agent reports 'healthy' status for agents like vault-synthesizer, the actual data flow may be stagnant or corrupted.
+> When physical machines go offline, agents that depend on them become non-functional regardless of their internal process status.
 
 ## Examples
 
-- A synthesizer agent runs successfully on a Mac Mini but fails to write connections to the vault because of a permission error in the data plane, while the control plane still reports the process as active.
-- Monitoring dashboards measure availability rather than value, allowing silent failures to propagate until they disrupt downstream dependencies like daily notes or job hunt updates.
+- Hardware offline states directly negating software-level health reports.
+- Agents becoming non-functional due to physical machine downtime despite internal process liveness.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Runtime-Model Coupling]]
+[[The Illusion of Health in Autonomous Systems]] [[Agent Health and Daily Routine Automation]]

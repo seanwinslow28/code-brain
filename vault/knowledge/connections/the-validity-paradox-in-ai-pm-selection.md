@@ -5,8 +5,8 @@ connects:
   - Resilience Engineering: Work-as-Imagined vs Work-as-Done
   - Vibe-Coding Interview Canon
   - Supervision as the New AI Edge
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Synthesis

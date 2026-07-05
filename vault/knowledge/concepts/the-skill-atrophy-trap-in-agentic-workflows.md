@@ -2,31 +2,31 @@
 title: "The Skill Atrophy Trap in Agentic Workflows"
 type: concept
 sources:
-  - knowledge/concepts/the-skill-atrophy-trap-in-agentic-workflows.md
+  - knowledge/connections/the-tacit-knowledge-trap-in-scaling-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-This mechanism describes an inverse relationship where increased automation reliability degrades human operational competence by removing routine practice. As the system handles more tasks, the operator loses the training data required for manual recovery, creating a dependency on the very system they must eventually override. The trap lies in the fact that standard monitoring metrics cannot detect this latent degradation because the system remains functionally stable while the human backup layer becomes obsolete.
+This mechanism describes the inverse relationship between automation fidelity and human operational competence, where increased reliance on agent fleets systematically degrades the user's ability to diagnose failures or intervene effectively. As agents handle more complex clusters and concepts, the human operator loses the granular context required for manual override, creating a dependency loop where the system becomes opaque precisely when it is most critical. The consequence is that the user transitions from an active supervisor to a passive recipient of output quality, unable to distinguish between systemic errors and minor deviations without significant retraining effort.
 
 ## Context
 
-Sean's agent fleet is becoming more robust, which reduces his need for intervention but simultaneously erodes his ability to perform manual recovery when silent failures occur. He must actively engineer breakdowns to preserve his own operational competence as a necessary backup layer.
+Sean's vault synthesizer runs are increasing in complexity (from 3 concepts to 150+), yet his ability to verify the underlying logic is diminishing. This creates a vulnerability where silent failures in the fleet go undetected until they manifest as degraded output, because he no longer holds the mental model of the intermediate steps.
 
 ## Evidence
 
-> When automation removes routine practice, it also removes the training data for human recovery.
+> as automation improves, humans get worse positioned to intervene because they lose practice, context, and situational awareness.
 
-> Every autonomous agent needs a manual recovery curriculum, not just monitoring.
+> The core tension lies between the efficiency gains of scaling agent fleets and the erosion of Sean's tacit knowledge required to maintain them.
 
 ## Examples
 
-- Scheduling monthly failure drills to prevent skill atrophy in manual intervention capabilities
-- Defining fleet health to include the operator's ability to take over, not just agent uptime
+- Sean processes 150 concepts in a single run but cannot verify the logic behind each connection due to lack of direct experience.
+- The fleet scales from 3 concepts to 146+ concepts, increasing opacity while reducing Sean's manual oversight capacity.
 
 ## Related Concepts
 
-[[SRE Error Budget for Agents]] [[Agent Fleet Observability Dashboard]]
+[[Tacit Knowledge Erosion vs. Automation Scale]] [[Control Architecture as Evangelism]]

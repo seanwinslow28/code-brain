@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/the-latency-of-trust-in-automated-research-pipelines.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-This mechanism describes a state where upstream agents produce insufficient or null outputs without raising explicit errors, causing downstream consumers to process degraded data rather than failing fast. The system maintains an illusion of operational health because the binary success flag remains true, even though the semantic yield has dropped to zero or near-zero. This creates a compounding latency in trust, as Sean cannot distinguish between a healthy pipeline and one that is silently starving its own utility.
+This mechanism describes a state where upstream agents silently under-yield or downstream agents choke on formatting artifacts, resulting in a system that does not crash but merely produces less value than expected. The failure mode is characterized by the absence of explicit error signals, creating an illusion of operational health while actual output quality degrades. This latency forces observers to abandon binary success metrics in favor of yield monitoring, as the system's reliability is defined by its ability to signal degradation rather than just its uptime. Debugging becomes harder because the financial cost of failure is often invisible until later reconciliation, masking the true expense of maintaining pipeline robustness.
 
 ## Context
 
-Sean's automated research pipelines rely on chaining multiple agents; if the initial data collection fails silently, the entire downstream synthesis effort becomes worthless, yet the monitoring dashboard reports success. This forces him to monitor yield rates rather than just process uptime to detect these failures early enough to intervene.
+Sean must implement yield monitoring for upstream collectors to detect silent under-delivery before it impacts downstream synthesis. Financial tracking must be decoupled from functional success to accurately measure the cost of debugging and retry loops.
 
 ## Evidence
 
@@ -24,9 +24,8 @@ Sean's automated research pipelines rely on chaining multiple agents; if the ini
 
 ## Examples
 
-- Upstream agents silently under-yielding
-- Downstream agents choking on formatting artifacts
+- failed Fusion calls bill OpenRouter but record $0 locally (`record_spend` is post-success only in `__main__.py`) — record usage.cost on failure too.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+[[Cost-Capped Agentic Workflows]] [[Automation Reliability]]

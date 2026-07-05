@@ -5,8 +5,8 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - Control Plane / Data Plane Split for Agent Fleets
   - Runtime-Model Coupling
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Synthesis

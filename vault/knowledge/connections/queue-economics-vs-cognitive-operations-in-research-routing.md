@@ -5,8 +5,8 @@ connects:
   - Deep Research Queue
   - Negative Capability / Failure Literacy
   - Gemini Deep Research
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Synthesis
@@ -31,4 +31,3 @@ The fundamental tension exists between managing research as a throughput problem
 
 - Sean must implement a dashboard metric combining WIP age and completion rate to validate routing policies against actual throughput.
 - Agent specs must declare their intended cognitive operation before selecting a model, preventing misalignment between task type and tool capability.
-- Failure labels in the Vault Critic must distinguish between capacity exhaustion (queue issue) and stage mismatch (cognitive issue).

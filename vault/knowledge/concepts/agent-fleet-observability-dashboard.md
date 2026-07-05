@@ -2,7 +2,7 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/concepts/agent-fleet-observability-dashboard.md
+  - knowledge/connections/the-volume-insight-tension-in-agent-fleets.md
 tags: [auto-generated, phase-6]
 created: 2026-07-05
 updated: 2026-07-05
@@ -10,23 +10,23 @@ updated: 2026-07-05
 
 ## Definition
 
-This concept defines the critical dependency between experimental action and operational visibility in probe-based systems. An agent cannot distinguish between a failed experiment and a successful one without real-time, granular data on signal quality. The dashboard acts as the feedback loop that allows the system to amplify good signals and dampen bad ones, preventing the loss of systemic health during exploration phases. It transforms raw telemetry into actionable intelligence for adaptive control.
+This mechanism is a monitoring interface that provides visibility into the operational health and semantic output quality of an agent fleet. It allows Sean to detect discrepancies between intended behavior (e.g., high-quality synthesis) and actual behavior (e.g., high-volume slop). The dashboard serves as a critical feedback loop for triggering double-loop learning when metrics indicate a divergence from strategic goals.
 
 ## Context
 
-Sean's runs show increasing duration and cluster sampling (up to 272 clusters). Without observability, these large-scale probes would be blind. The dashboard is not just a monitor but an active component in the learning loop.
+Sean's current observability is insufficient to distinguish between operational success (high throughput) and semantic success (high insight). A dedicated dashboard would surface the 'Volume-Insight Tension' in real-time, allowing for proactive rule adjustments.
 
 ## Evidence
 
-> Operational visibility is required to distinguish between a failed probe and a successful one, ensuring that the system can amplify good signals and dampen bad ones without losing track of overall health.
+> Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-Gravity CLI) of agent-fleets-supporting-knowledge-synthesis.
 
-> The fleet's architecture needs to support parallel probe execution with independent kill switches to prevent cascading failures in complex domains.
+> There is a fundamental tension between the fleet's drive for high-throughput sampling and the preservation of insight quality, leading to a systemic trust deficit.
 
 ## Examples
 
-- Distinguishing between a failed probe and a successful one via operational visibility.
-- Amplifying good signals and dampening bad ones without losing track of overall health.
+- Sean must implement a 'Synthesis Policy Change Record' to track when the fleet's rules need adjustment, not just its outputs.
+- The fleet's evaluation metrics should shift from 'concepts written' to 'rival hypotheses considered' to prevent shallow synthesis.
 
 ## Related Concepts
 
-[[Probe Design vs. Routing Compliance in Agentic Workflows]] [[SRE Error Budget for Agents]]
+[[Slop as a Trust Deficit]] [[Double-loop learning]]

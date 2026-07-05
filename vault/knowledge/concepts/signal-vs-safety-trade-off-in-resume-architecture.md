@@ -2,10 +2,10 @@
 title: "Signal vs. Safety Trade-off in Resume Architecture"
 type: concept
 sources:
-  - knowledge/connections/the-legibility-boundary-tension-in-portfolio-design.md
+  - knowledge/concepts/signal-vs-safety-trade-off-in-resume-architecture.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition

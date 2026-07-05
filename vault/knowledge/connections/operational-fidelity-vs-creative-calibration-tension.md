@@ -5,8 +5,8 @@ connects:
   - The Taste-Fidelity Decoupling in Creative Production
   - Supervision as the New AI Edge
   - Negative Space Calibration
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Synthesis
@@ -25,7 +25,7 @@ This tension arises from the incompatibility between deterministic operational p
 
 ### [[Negative Space Calibration]]
 
-> I want to find my writing voice by reacting to what it ISN'T. two words is fine. "No." "Gross." "Never."
+> I want to find my writing voice by reacting to what it ISN'T. two words is fine. 'No.' 'Gross.' 'Never.'
 
 ## Implications
 

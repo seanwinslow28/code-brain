@@ -2,31 +2,31 @@
 title: "Vibe-Coding Interview Canon"
 type: concept
 sources:
-  - knowledge/connections/the-validity-paradox-in-ai-pm-selection.md
+  - knowledge/connections/the-legibility-paradox-of-agentic-supervision.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-This concept describes the tension between treating coding interviews as cultural signaling events and recognizing them as psychometric instruments with specific validity properties. When interviews are reduced to 'vibe' checks, they lose predictive validity and criterion contamination becomes rampant because the assessment criteria are opaque and inconsistent. The mechanism is a failure of measurement fidelity: the interview no longer predicts job performance but instead signals in-group cultural fit, which is often unrelated to technical capability.
+This mechanism describes an evaluation paradigm where technical proficiency is secondary to the candidate's ability to externalize tacit decision-making under pressure. The interview tests whether a candidate can make their internal supervisory logic visible and coherent when challenged, rather than just demonstrating static output quality. Success requires translating implicit navigation choices into explicit narratives that hiring managers can verify.
 
 ## Context
 
-Sean's preparation for AI PM roles must address this duality. He needs to understand that 'vibe' is a signal, but he must also demonstrate the psychometric rigor expected of an AI PM who understands measurement validity. Ignoring the psychometric dimension leaves him vulnerable to arbitrary rejection.
+Sean must treat his interview performance as a distinct discipline from his coding output. If he relies on the assumption that his code speaks for itself, he will fail because the code does not reveal the supervisory complexity that constitutes his actual edge.
 
 ## Evidence
 
-> The current note treats vibe-coding interviews as a cultural signal.
+> Interviews do not just test output quality; they test whether the candidate can make tacit judgment visible under pressure.
 
-> Add the psychometric counterframe: interviews are instruments with predictive validity, adverse impact, criterion contamination, and work-sample fidelity.
+> Sean must treat his interview performance as a separate discipline from his coding output.
 
 ## Examples
 
-- Treating interviews as instruments with predictive validity
-- Analyzing adverse impact and criterion contamination in hiring processes
+- Narrating the invisible navigation decisions made during project development.
+- Demonstrating how intent was decomposed into executable plans for diverse stakeholders.
 
 ## Related Concepts
 
-[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Supervision as the New AI Edge]]
+[[Supervision as the New AI Edge]] [[Boundary Object Theory]]

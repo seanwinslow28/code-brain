@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/the-integration-paradox-in-agentic-animation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-This invariant refers to the mismatch between the high-level semantic intent of an AI model and the low-level technical constraints required for its execution in creative domains. When animators use agentic tools, they are forced to adopt the mental models of the underlying runtime (e.g., SVG coordinates, timing functions) rather than remaining in the domain of artistic direction. This coupling creates a friction point where the user must translate creative vision into rigid technical specifications that the model can process.
+This invariant occurs when the abstraction layer of an AI model fails to match the runtime requirements of the target domain, forcing the user to manually bridge the gap with low-level code. In agentic animation, the model generates high-level creative intent, but the runtime environment (React/SVG/timing) requires precise technical specifications that the model cannot reliably infer without extensive iteration. This coupling creates a friction point where the 'agentic' promise is negated by the need for human-in-the-loop correction of both code and creative output.
 
 ## Context
 
-Sean's job-hunt portfolio relies on demonstrating high-level creative strategy and technical architecture. If he is forced to dive deep into SVG/timing mechanics due to runtime-model coupling, his work may appear overly focused on implementation details rather than strategic design.
+Sean's job-hunt portfolio relies on demonstrating mastery of agentic workflows, but if he is constantly correcting the model's runtime errors, he is not demonstrating automation but rather manual coding assisted by AI. This distinction is critical for technical hiring managers who can distinguish between true agentic efficiency and 'vibe-coding' that requires heavy oversight.
 
 ## Evidence
 
@@ -24,8 +24,8 @@ Sean's job-hunt portfolio relies on demonstrating high-level creative strategy a
 
 ## Examples
 
-- Users must iterate on intricate prompts to correct code and creative output.
-- Skill packages show reliability issues that compound during integration.
+- Users thinking in React/SVG/timing terms instead of creative intent
+- Repeatedly correcting both code and creative output
 
 ## Related Concepts
 

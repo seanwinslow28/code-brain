@@ -2,7 +2,7 @@
 title: "Evidence Accumulation Loop"
 type: concept
 sources:
-  - knowledge/concepts/evidence-accumulation-loop.md
+  - knowledge/connections/distortion-rules-vs-averages-in-voice-synthesis.md
 tags: [auto-generated, phase-6]
 created: 2026-07-05
 updated: 2026-07-05
@@ -10,23 +10,22 @@ updated: 2026-07-05
 
 ## Definition
 
-This mechanism treats voice fidelity as a function of accumulated, high-fidelity data points rather than immediate instruction following. The system requires the user to perform iterative 'reps' over multiple sessions, allowing the model to infer stylistic patterns from raw, unedited outputs instead of relying on static, one-shot prompts that fail to capture nuance. This shifts the burden of precision from the prompt engineer to the data collector, creating a compounding effect where each session refines the previous context.
+A feedback pattern where increasing the volume of input examples is assumed to linearly improve output fidelity, yet fails to account for the diminishing returns of stylistic averaging. This loop creates a dependency on quantity over quality, leading to obedient pastiche when the system lacks constraints to filter or distort the accumulated evidence. The mechanism reveals that more data does not equal better signal if the underlying aggregation method is purely additive.
 
 ## Context
 
-Sean is building a 'Cheese Gauntlet' kit for his Substack audience to help them calibrate their own AI voices. He explicitly rejects the 'magic prompt' paradigm in favor of a long-term evidence pile, recognizing that one-time instructions cannot replicate the depth of personal taste and cultural reference required for authentic voice.
+Sean's vault synthesizer runs show a correlation between higher cluster sampling and increased concept writing, but also higher rejection rates. Understanding this loop helps him tune the balance between gathering enough context and avoiding the 'bland composite' effect that dilutes his specific narrative voice.
 
 ## Evidence
 
-> You're not pasting these in and walking away with your voice on tap. You're starting a pile of evidence the model gets to learn you from.
+> The evidence loop assumes more examples produce better imitation.
 
-> The first session gets you a sharper outline. The tenth gets you something that sounds like you wrote it.
+> Missing contradiction: too much evidence can create obedient pastiche.
 
 ## Examples
 
-- Prompt 1: The Reference-Universe Interview
-- Prompt 3: Mine Your Pre-AI Writing
+- The system's tendency to average influences creates a composite that lacks the specific voice required for his career narrative.
 
 ## Related Concepts
 
-[[Cultural Reference Mapping]] [[Negative Space Calibration]]
+[[Exemplar Distance]] [[Craft in Product Design]]

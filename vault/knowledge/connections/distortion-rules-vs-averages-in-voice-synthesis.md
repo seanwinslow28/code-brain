@@ -5,8 +5,8 @@ connects:
   - Exemplar Distance
   - Evidence Accumulation Loop
   - Craft in Product Design
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Synthesis
@@ -21,7 +21,9 @@ The fundamental tension exists between the desire for high-fidelity imitation th
 
 ### [[Evidence Accumulation Loop]]
 
-> The evidence loop assumes more examples produce better imitation. Missing contradiction: too much evidence can create obedient pastiche.
+> The evidence loop assumes more examples produce better imitation.
+
+> Missing contradiction: too much evidence can create obedient pastiche.
 
 ### [[Craft in Product Design]]
 

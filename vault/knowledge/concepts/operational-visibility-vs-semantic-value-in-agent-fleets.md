@@ -2,7 +2,7 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/infrastructure-status.md
+  - knowledge/connections/the-tension-between-automation-velocity-and-creative-friction.md
 tags: [auto-generated, phase-6]
 created: 2026-07-05
 updated: 2026-07-05
@@ -10,23 +10,23 @@ updated: 2026-07-05
 
 ## Definition
 
-This pattern highlights the inverse relationship between the ease of monitoring an agent's operational state and the actual semantic quality of its output. High visibility allows for quick verification of liveness but often obscures the depth, accuracy, or relevance of the generated content, leading to a false confidence in system utility. The mechanism relies on the assumption that successful execution implies successful reasoning, which is frequently violated when agents produce syntactically correct but semantically empty artifacts.
+This mechanism defines the inverse relationship between the ease of monitoring an agent's operational state and the actual quality of its output. As automation scales, visibility into binary health (up/down) increases, but visibility into semantic integrity (contextual completeness, accuracy) decreases because it requires deeper, more expensive inspection. The system optimizes for uptime metrics while degrading the informational value of the data it produces.
 
 ## Context
 
-Sean's experience with the synthesizer runs demonstrates that while he can easily verify that the cron jobs are running (high visibility), he cannot verify the quality of the insights without manual inspection. This creates a supervision burden where the cost of verifying utility exceeds the cost of monitoring status, undermining the efficiency gains of automation.
+Sean's fleet monitoring likely tracks whether vault-synthesizer processes are running, but not whether they successfully accessed all necessary resources. This gap allows high-volume, low-value runs to pass as successful, masking the 'friction deficit' where errors go unnoticed due to reduced human engagement.
 
 ## Evidence
 
-> This pattern highlights the inverse relationship between the ease of monitoring an agent's operational state and the actual semantic quality of its output.
+> The operational health of agents directly impacts the cost-effectiveness of agentic workflows.
 
-> High visibility allows for quick verification of liveness but often obscures the depth, accuracy, or relevance of the generated content.
+> If an agent is unhealthy, it may incur unnecessary costs or disrupt other automation tasks.
 
 ## Examples
 
-- A synthesizer reporting 'success' while generating generic summaries that add no new knowledge to the vault.
-- An agent fleet showing all nodes active while failing to index new documents due to a configuration drift.
+- A synthesizer completing a run in 2700 seconds but producing concepts with missing context due to MCP failures.
+- Monitoring dashboards showing green status for agents that are functionally blind to certain data sources.
 
 ## Related Concepts
 
-[[The Illusion of Competence in Automated Systems]] [[Legibility Debt as a Supervision Failure Mode]]
+[[The Illusion of Health in Autonomous Systems]] [[Silent Failure Propagation in Agent Fleets]]

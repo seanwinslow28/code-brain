@@ -5,8 +5,8 @@ connects:
   - SRE Error Budget for Agents
   - Resilience Engineering: Work-as-Imagined vs Work-as-Done
   - Premortem Before Automation
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Synthesis

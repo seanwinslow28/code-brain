@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/connections/the-tension-between-reliability-metrics-and-adaptive-capacity-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-This concept establishes that agent health is not defined by perfect success rates but by the containment of failure costs within an explicit operational budget. It defines a mechanism where the acceptable error rate is determined by the operator's attention cost and the complexity of the recovery path, rather than technical uptime alone. The invariant here is that a creative agent remains healthy only when its failure frequency and remediation overhead stay within predefined limits. This shifts the engineering focus from preventing all errors to managing the economic and cognitive impact of inevitable errors.
+This mechanism establishes a quantitative threshold for acceptable failure in probabilistic systems, treating error not as a binary state but as a managed resource. It requires defining explicit limits on failure rates, recovery paths, and operator attention costs to prevent the 'illusion of health' where an agent appears functional but is actually degrading system stability. The invariant here is that a creative agent's health is determined by its ability to stay within these bounds during stress, rather than achieving perfect uptime which is often uninformative about underlying fragility.
 
 ## Context
 
-Sean needs to articulate how his agents manage their own 'error budgets' to avoid overwhelming human operators with noise or requiring excessive manual intervention. This metric is crucial for proving that his systems are sustainable at scale, not just functional in isolation.
+Sean needs to apply this concept to his job hunt by framing his agent fleets as systems with managed error budgets. This demonstrates to potential employers that he understands the trade-offs between reliability and adaptive capacity, a key differentiator for senior engineering roles involving autonomous systems.
 
 ## Evidence
 
 > A creative agent is not healthy when it succeeds once; it is healthy when its failure rate, recovery path, and operator attention cost stay inside an explicit error budget.
 
-> There is a fundamental tension between the desire for high availability through provider fallback and the risk of amplifying systemic failure or cost when those fallbacks are unbounded.
+> The tension lies between defining strict Service Level Objectives for context availability and the reality that agents will inevitably fail to meet them.
 
 ## Examples
 
-- The rejection count in fleet runs increasing from 1 to 80 indicates a shift in the error budget consumption, requiring adjustments in sampling strategies.
-- Monitoring as detection catches loops and hallucinations, but does not inherently measure the cost of the operator's attention required to resolve them.
+- Tracking operator attention cost during agent failures
+- Defining recovery paths within an explicit error budget
 
 ## Related Concepts
 
-[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Agent Health Monitoring]]
+[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[The Illusion of Health in Autonomous Systems]]

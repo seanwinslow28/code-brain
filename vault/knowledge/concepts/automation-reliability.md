@@ -2,7 +2,7 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - knowledge/concepts/automation-reliability.md
+  - knowledge/connections/the-integration-paradox-in-agentic-animation.md
 tags: [auto-generated, phase-6]
 created: 2026-07-05
 updated: 2026-07-05
@@ -10,11 +10,11 @@ updated: 2026-07-05
 
 ## Definition
 
-This concept defines the degradation of system stability as complexity increases, specifically where generated code and skill packages introduce performance bottlenecks and memory issues. The reliability of agentic workflows is not static but decreases with the number of integrated components, creating a fragile dependency chain that breaks under production conditions. This unreliability forces human intervention to correct errors, negating the efficiency gains of automation.
+This pattern defines the degradation of system trust as automated components introduce new failure modes that are harder to detect and debug than manual processes. In Sean's context, the reliability of agentic animation is compromised by performance issues, memory leaks, and skill package instability, which compound during integration. This unreliability forces a shift in strategy from maximizing automation coverage to ensuring minimal viable pipeline stability.
 
 ## Context
 
-Sean needs to present a robust portfolio project. If the underlying automation is unreliable, he cannot demonstrate the 'Agentic Engineering Signal' effectively, as hiring managers will see the failures rather than the potential.
+For Sean's job-hunt, demonstrating 'Automation Reliability' means showing he can build robust systems that fail gracefully, rather than brittle systems that appear impressive but break under load. His portfolio must highlight his ability to diagnose and mitigate these reliability issues, positioning him as an engineer who understands the limits of automation.
 
 ## Evidence
 
@@ -24,9 +24,9 @@ Sean needs to present a robust portfolio project. If the underlying automation i
 
 ## Examples
 
-- Skill packages show reliability issues that compound during integration.
-- Generated animation code suffers from performance and memory problems.
+- Performance and memory problems in generated animation code
+- Skill packages showing reliability issues during integration
 
 ## Related Concepts
 
-[[Runtime-Model Coupling]] [[The Engineer-Creative Divide in Tooling]]
+[[Runtime-Model Coupling]] [[The Integration Paradox in Agentic Animation]]

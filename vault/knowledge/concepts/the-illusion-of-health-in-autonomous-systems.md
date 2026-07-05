@@ -2,7 +2,7 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/fleet-state.md
+  - knowledge/connections/the-tension-between-automation-velocity-and-creative-friction.md
 tags: [auto-generated, phase-6]
 created: 2026-07-05
 updated: 2026-07-05
@@ -10,25 +10,23 @@ updated: 2026-07-05
 
 ## Definition
 
-System observability metrics often report binary success states (e.g., 'status=success') that mask underlying semantic failures or incomplete execution. When an agent reports a healthy status while failing to capture critical external data sources (like Calendar or Slack via MCP), the system appears functional but is operationally blind. This creates a dangerous feedback loop where the user trusts the automation's output without verifying its completeness, leading to decisions based on stale or missing context.
+This pattern describes a structural blind spot where operational metrics (uptime, process existence) diverge from functional utility (data completeness, resource accessibility). When agents operate in headless modes or disconnected environments, they appear 'alive' to monitoring systems but are structurally incapable of performing their intended semantic tasks. This creates a false positive state where the infrastructure is technically running but functionally inert, leading to silent degradation of downstream outputs.
 
 ## Context
 
-Sean relies on the daily-driver agent for morning planning and the synthesizer for knowledge accumulation. If these agents report 'healthy' while missing key data streams due to MCP authorization issues, Sean’s strategic planning is compromised by invisible gaps in information.
+Sean's vault-synthesizer runs have increased in volume (up to 150 concepts) while relying on headless agents that lack full MCP access. Without recognizing this illusion, Sean risks accumulating a large volume of low-fidelity knowledge artifacts that appear productive but are structurally incomplete.
 
 ## Evidence
 
-> Current agent fleet cannot reliably access all three machines (Mac Mini/MBP/Alienware) as required by SSoT goal.
+> Core infrastructure failure points persist: agents lack robust MCP access in headless mode.
 
-> Lack of reliable MCP connections prevents core life-systems data capture (e.g., Calendar/Slack).
-
-> Deep research queues are empty, meaning the major knowledge aggregation function was not utilized.
+> Alienware and ComfyUI environments were OFFLINE, limiting agent capabilities needed for full system redundancy.
 
 ## Examples
 
-- The daily-driver agent reports 'status=success' and creates a daily note, yet the note lacks calendar context because MCP auth failed.
-- The vault-synthesizer reports 'concepts=146 connections=42', but these concepts are derived from a limited subset of available data due to offline endpoints.
+- Agents reporting 'healthy' status while being unable to fetch critical context from MCP servers.
+- High concept counts (150+) generated during runs where infrastructure was partially offline.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Operational Visibility vs. Semantic Value in Agent Fleets]] [[The Illusion of Competence in Automated Systems]]
+[[Operational Visibility vs. Semantic Value in Agent Fleets]] [[The Illusion of Competence in Automated Systems]]

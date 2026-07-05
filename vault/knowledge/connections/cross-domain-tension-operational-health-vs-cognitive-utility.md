@@ -4,9 +4,9 @@ type: connection
 connects:
   - Operational Visibility vs. Semantic Value in Agent Fleets
   - The Illusion of Health in Autonomous Systems
-  - Agent Health Monitoring
-created: 2026-07-04
-updated: 2026-07-04
+  - Legibility Debt as a Supervision Failure Mode
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Synthesis
@@ -17,15 +17,15 @@ The core tension lies between the orchestration layer's binary health reporting 
 
 ### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
 
-> The tension lies between binary operational metrics that confirm process completion and semantic quality metrics that confirm functional value.
+> Sean's infrastructure suffers from a critical tension where operational metrics (dashboard health, exit codes) are decoupled from functional value (semantic output).
 
 ### [[The Illusion of Health in Autonomous Systems]]
 
 > This mechanism describes a systemic blind spot where operational metrics like uptime and exit codes indicate success while semantic output quality degrades to zero.
 
-### [[Agent Health Monitoring]]
+### [[Legibility Debt as a Supervision Failure Mode]]
 
-> Sean uses Agent Health Monitoring to track his fleet, but the current metrics (like 'status=error' with zero concepts) are insufficient to detect silent failures.
+> Sean faces a structural tension where the engineering desire for simplified, aggregate health metrics clashes with the operational reality of complex human-agent joint cognition.
 
 ## Implications
 

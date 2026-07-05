@@ -2,31 +2,31 @@
 title: "Probe Design vs. Routing Compliance in Agentic Workflows"
 type: concept
 sources:
-  - knowledge/connections/probe-design-vs-routing-compliance-in-agentic-workflows.md
+  - knowledge/connections/cross-domain-agentic-learning-velocity-vs-operational-stability.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-This concept defines a structural tension where agents must choose between executing known linear paths (routing compliance) and discovering unknown problem structures through safe-to-fail experiments (probe design). Routing compliance assumes the solution space is static and fully mapped, allowing for high-throughput execution but failing when the environment shifts. Probe design treats the problem structure itself as the variable to be discovered, requiring slower, iterative feedback loops to distinguish between signal and noise. The mechanism relies on treating failed probes not as errors but as necessary exploration costs that reduce uncertainty about the domain's topology.
+This concept defines a structural tension where agents must choose between executing known linear paths (routing compliance) and discovering unknown problem structures through safe-to-fail experiments (probe design). Linear routing assumes a known structure and prioritizes efficiency, while probe design acknowledges complexity and requires the system to distinguish between failed probes and successful ones. The consequence is that Sean must balance the breadth of exploration against the depth of signal clarity, ensuring that the error budget covers both execution errors and exploration costs.
 
 ## Context
 
-Sean is managing an agent fleet that has grown in complexity (from 3 concepts to 150+ over time). As the number of clusters sampled increases, the cost of blind routing grows. He needs a framework to decide when to stop optimizing for throughput and start optimizing for signal clarity in uncertain environments.
+Sean's job hunt and creative studio work require navigating uncertain domains where linear routing fails. The fleet's ability to sample clusters (258 in July) represents a probe design strategy, but without clear visibility into which probes yield signal, the operational stability is compromised.
 
 ## Evidence
 
-> Linear routing assumes a known structure, while probe design acknowledges that the structure must be discovered through safe-to-fail experiments.
+> The tension lies between the efficiency of linear routing and the necessity of probe design in complex domains.
 
-> The error budget must account for the cost of probes that fail to yield signal, treating them as necessary exploration costs rather than pure failures in execution.
+> Operational visibility is required to distinguish between a failed probe and a successful one, ensuring that the system can amplify good signals and dampen bad ones without losing track of overall health.
 
 ## Examples
 
-- Treating a failed probe as an exploration cost rather than a pure failure in execution.
-- Shifting optimization goals from throughput to signal clarity in uncertain environments.
+- The fleet samples 258 clusters per run, representing a high-volume probe design approach.
+- The synthesizer rejects 48 concepts per run, acting as a filter for low-signal probes.
 
 ## Related Concepts
 
-[[Complexity Override]] [[Agent Fleet Observability Dashboard]] [[SRE Error Budget for Agents]]
+[[Cross-Domain: Agentic Learning Velocity vs. Operational Stability]] [[Agent Fleet Observability Dashboard]]

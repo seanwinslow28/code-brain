@@ -2,15 +2,15 @@
 title: "Wardley Mapping for career leverage"
 type: concept
 sources:
-  - knowledge/expansions/connections/automation-infrastructure-and-interview-preparation.md
+  - knowledge/concepts/wardley-mapping-for-career-leverage.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-Wardley mapping serves as a strategic positioning model that forces artifacts to be placed by user need and maturity rather than technical complexity. It distinguishes between bespoke demos, reusable capabilities, commodity tooling, and proofs of taste, creating a map of where to differentiate versus where to borrow or hide machinery. This mechanism prevents the generic failure mode of treating every impressive system as equally worth explaining in an interview context. The underlying pattern is that strategic value comes from knowing which layers to expose and which to abstract away.
+This mechanism forces artifacts to be placed by user need and maturity rather than technical complexity, distinguishing between bespoke demos, reusable capabilities, commodity tooling, and proofs of taste. It prevents the generic failure mode of treating every impressive system as equally worth explaining in an interview context by revealing that strategic value comes from knowing which layers to expose and which to abstract away. The underlying pattern is that differentiation requires identifying where unique advantage exists versus where borrowing or hiding machinery maximizes impact.
 
 ## Context
 
@@ -29,4 +29,4 @@ Sean needs to curate his portfolio for maximum impact during job hunting, avoidi
 
 ## Related Concepts
 
-[[Market Positioning]] [[Taste as Evaluation Function vs. Activity Proof]] [[Track-C Protected Time]]
+[[Market Positioning]] [[Taste as Evaluation Function vs. Activity Proof]]

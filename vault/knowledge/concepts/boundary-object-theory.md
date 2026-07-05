@@ -2,7 +2,7 @@
 title: "Boundary Object Theory"
 type: concept
 sources:
-  - knowledge/concepts/boundary-object-theory.md
+  - knowledge/connections/the-legibility-paradox-of-agentic-supervision.md
 tags: [auto-generated, phase-6]
 created: 2026-07-05
 updated: 2026-07-05
@@ -10,23 +10,23 @@ updated: 2026-07-05
 
 ## Definition
 
-Boundary objects function as structural bridges between distinct social worlds, such as product management judgment, engineering execution, and agent governance. These artifacts possess sufficient plasticity to adapt to local needs while maintaining enough identity to remain shared across domains. This mechanism allows Sean's strongest work to serve not merely as tools but as translation layers that align disparate stakeholders without losing their core function. The underlying invariant is that complex systems require objects interpretable differently by various groups while preserving a unified purpose.
+This concept refers to artifacts that enable negotiation of meaning between distinct professional groups without requiring them to share identical mental models. In the context of agentic work, these objects serve as the bridge between Sean's internal supervisory logic and the external expectations of product, engineering, and hiring stakeholders. They allow diverse evaluators to interpret the value of automated execution through a shared, tangible framework.
 
 ## Context
 
-Sean operates at the intersection of creative studio work, job hunting, and infrastructure engineering, requiring artifacts that resonate with both technical interviewers and product-focused hiring managers. Understanding this theory elevates his work from mere implementation to strategic coordination, ensuring his outputs act as effective translation layers. This perspective helps him design artifacts that bridge the gap between abstract intent and concrete execution in high-stakes professional contexts.
+Sean's portfolio projects must function as boundary objects that demonstrate his ability to translate intent into executable plans. This framing is necessary because his actual work involves translating abstract intent for agents, which is difficult for humans to evaluate directly without such artifacts.
 
 ## Evidence
 
-> Sean’s strongest artifacts are not just tools; they are boundary objects between PM judgment, engineering execution, and agent governance.
+> Artifacts that let product, engineering, design, and hiring managers negotiate meaning without sharing the same mental model.
 
-> The observability dashboard, intent-engineering spec, ... [is a boundary object]
+> His portfolio projects should be framed not just as technical achievements but as boundary objects.
 
 ## Examples
 
-- Observability dashboard as a boundary object
-- Intent-engineering spec as a translation layer
+- Portfolio projects framed as demonstrations of intent translation.
+- Artifacts that allow hiring managers to understand supervisory complexity.
 
 ## Related Concepts
 
-[[Cross-domain bridging]] [[Two Audiences]]
+[[Supervision as the New AI Edge]] [[Vibe-Coding Interview Canon]]

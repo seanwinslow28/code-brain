@@ -2,10 +2,10 @@
 title: "Operational Readiness Review"
 type: concept
 sources:
-  - knowledge/expansions/connections/automation-infrastructure-and-interview-preparation.md
+  - knowledge/concepts/operational-readiness-review.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition

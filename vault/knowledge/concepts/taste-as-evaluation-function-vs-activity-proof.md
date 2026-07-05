@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-This concept defines the structural tension between quantifiable operational volume and qualitative judgment in automated systems. The system generates 'activity proof' via metrics like 'clusters_sampled' and 'concepts_written', but the actual value is derived from the 'fit_score' which requires nuanced judgment that cannot be fully automated. This creates a dependency where volume must be sufficient to allow taste to operate effectively, but not so high that it dilutes the signal. The mechanism reveals that automation can scale the search space, but it cannot replace the evaluation function that determines value within that space.
+This mechanism defines the structural tension between quantifiable operational volume and qualitative judgment in automated systems. The system generates 'activity proof' via metrics like 'clusters_sampled' and 'concepts_written', but the actual value is derived from the 'fit_score' which requires nuanced judgment that cannot be fully automated. This creates a dependency where volume must be sufficient to allow taste to operate effectively, but not so high that it dilutes the signal. The mechanism reveals that automation can scale the search space, but it cannot replace the evaluation function that determines value within that space.
 
 ## Context
 

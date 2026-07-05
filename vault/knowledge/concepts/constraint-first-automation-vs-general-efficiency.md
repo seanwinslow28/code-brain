@@ -2,7 +2,7 @@
 title: "Constraint-First Automation vs. General Efficiency"
 type: concept
 sources:
-  - knowledge/concepts/constraint-first-automation-vs-general-efficiency.md
+  - knowledge/connections/aesthetic-standardization-as-a-supervisory-mechanism.md
 tags: [auto-generated, phase-6]
 created: 2026-07-05
 updated: 2026-07-05
@@ -10,23 +10,23 @@ updated: 2026-07-05
 
 ## Definition
 
-This mechanism describes the strategic divergence between optimizing for local throughput in non-bottleneck areas versus protecting the global system constraint. When automation targets general efficiency, it generates false signals of progress while the actual limiting factor continues to restrict overall performance. True leverage requires identifying the specific bottleneck and redirecting engineering efforts to amplify or protect that constraint, even if the underlying processes are more complex and less visible than routine optimization tasks.
+This concept defines the preference for rigid, negative constraints (what not to do) over general efficiency metrics when automating creative tasks, as constraints provide a clearer boundary for agent execution than abstract goals. It argues that 'flat design' principles, such as avoiding gradients and shadows, serve as effective negative constraints because they are easily codified into schema-like instructions for agents. The mechanism prioritizes the reliability of output within defined boundaries over the speed or breadth of unconstrained generation.
 
 ## Context
 
-Sean must audit his job hunt pipeline to identify the true bottleneck before automating any application processes. Vault automation should prioritize protecting the synthesis and insight generation bottleneck over routine note-taking tasks. Metrics focused on volume or speed may be misleading if they do not correlate with throughput at the constraint.
+Sean's agent fleet often produces 'slop' when given vague positive instructions. By adopting a constraint-first approach, he ensures that the automation pipeline respects the aesthetic standards necessary for his professional brand, even if it means slower iteration speeds. This is critical for his job hunt materials where deviation from standard aesthetics could signal a lack of attention to detail.
 
 ## Evidence
 
-> The core tension lies in the conflict between the ease of automating general efficiency tasks and the necessity of addressing specific system constraints to achieve real throughput gains
+> Flat Design: Two-dimensional elements without gradients, shadows, or depth effects using clean geometric shapes
 
-> Automation is only valuable when it increases throughput at the current bottleneck or protects the bottleneck from avoidable load
+> Sean must define 'taste' as a set of negative constraints (what NOT to do) rather than positive instructions, which are harder for agents to follow consistently.
 
 ## Examples
 
-- Sean’s current automation efforts risk optimizing non-bottleneck processes, creating the illusion of progress while the true constraint remains unaddressed.
-- Operational efficiency is not a property of the automation; it is a property of the handoffs between visible user workflow, backstage agent work, and support systems.
+- Specifying 'no drop shadows' in a prompt to ensure consistency with a flat design aesthetic.
+- Rejecting any output that includes gradients because they violate the defined negative constraint of the brand style guide.
 
 ## Related Concepts
 
-[[System Constraints]] [[Value Chain / Activity System Mapping]]
+[[Aesthetic Standardization as a Supervisory Mechanism]] [[Slop as a Trust Deficit]]

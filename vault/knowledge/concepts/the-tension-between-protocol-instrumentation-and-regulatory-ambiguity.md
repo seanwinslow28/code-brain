@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/the-tension-between-protocol-instrumentation-and-regulatory-ambiguity.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition

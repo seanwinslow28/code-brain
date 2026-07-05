@@ -4,9 +4,9 @@ type: connection
 connects:
   - The Illusion of Health in Autonomous Systems
   - Silent Failure Propagation in Agent Fleets
-  - Agent Health Monitoring
-created: 2026-07-04
-updated: 2026-07-04
+  - Operational Visibility vs. Semantic Value in Agent Fleets
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Synthesis
@@ -23,9 +23,9 @@ This connection reveals a fundamental tension between the operational metrics us
 
 > Sean's infrastructure suffers from a critical tension where operational metrics (dashboard health, exit codes) are decoupled from functional value (semantic output).
 
-### [[Agent Health Monitoring]]
+### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
 
-> The health of the autonomous agent fleet, such as vault-indexer and vault-synthesizer, is directly tied to the overall infrastructure health of Sean's systems.
+> There is a fundamental tension between the operational visibility of agent health and the semantic integrity of the knowledge vault. Agents can appear healthy through standard metrics while producing outputs that are semantically hollow.
 
 ## Implications
 

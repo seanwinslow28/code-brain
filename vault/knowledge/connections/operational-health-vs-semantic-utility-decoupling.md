@@ -5,8 +5,8 @@ connects:
   - The Illusion of Competence in Automated Systems
   - Silent Failure Propagation in Agent Fleets
   - Infrastructure Status
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Synthesis
@@ -25,7 +25,7 @@ A critical tension exists between the visibility of system status and the realit
 
 ### [[Infrastructure Status]]
 
-> There is a moment, somewhere around the ninth night that an automated system has been quietly producing nothing while reporting that everything is fine, when you start to wonder which of you is the product manager and which of you is the unattended cron job with delusions of competence.
+> There is a moment, somewhere around the ninth night that an automated system has been quietly producing nothing while reporting that everything is fine, when you start to wonder which of you is the product manager and which of you are the unattended cron job with delusions of competence.
 
 ## Implications
 

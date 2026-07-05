@@ -4,28 +4,28 @@ type: concept
 sources:
   - knowledge/connections/the-maintainer-burden-vs-distribution-signal-tension.md
 tags: [auto-generated, phase-6]
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Definition
 
-This concept represents a shift from viewing open source as mere publication to treating it as an operational discipline of maintainer surface area. It requires defining governance, release cadence, and support boundaries before writing code, ensuring that the act of publishing does not create an unfunded maintenance obligation. The core mechanism is the recognition that every public artifact generates dependency demand that must be matched by sustainable supply.
+This concept represents a shift from viewing open source as mere publication to treating it as an operational discipline of maintainer surface area. It requires defining governance, release cadence, and support boundaries before writing code, ensuring that the project does not become an unfunded obligation for the author. The value lies in the signal of reliability rather than the volume of features shipped.
 
 ## Context
 
-Sean's job hunt strategy relies on demonstrating technical depth, but his infrastructure constraints mean he cannot sustain high-touch support for multiple projects. Treating open source as a managed product with clear boundaries prevents it from becoming a liability that drains energy from higher-value activities like creative production or deep research.
+Sean must treat his public work as a managed product with clear boundaries to prevent open source from becoming a liability during his job hunt. By limiting scope and enforcing deprecation policies, he protects his time while still demonstrating governance judgment to potential employers.
 
 ## Evidence
 
 > Publishing creates dependency demand; contribution quality is measured by whether maintenance supply can keep up.
 
-> Sean should distinguish 'open source contribution' from 'public proof-of-work with an adoption funnel.'
+> Sean must define explicit support boundaries and deprecation policies to prevent open source from becoming a liability.
 
 ## Examples
 
-- Defining explicit deprecation policies for older repositories to signal governance judgment rather than just technical capability.
-- Limiting the scope of new projects to ensure maintenance supply can keep up with dependency demand.
+- Defining a clear deprecation policy for older versions of a library before announcing its stability.
+- Limiting the number of concurrent feature requests accepted into a repository to maintain signal quality.
 
 ## Related Concepts
 

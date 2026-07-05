@@ -5,13 +5,13 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - SRE Error Budget for Agents
   - Resilience Engineering: Work-as-Imagined vs Work-as-Done
-created: 2026-07-04
-updated: 2026-07-04
+created: 2026-07-05
+updated: 2026-07-05
 ---
 
 ## Synthesis
 
-There is a fundamental tension between maintaining operational continuity, signaled by green dashboards and successful script exits, and preserving contextual integrity, which requires fresh, accurate shared assumptions. This tension creates an illusion of health where the system appears functional while its underlying knowledge base becomes stale or incorrect, leading to a crisis of trust when the divergence finally manifests as a visible failure. The consequence is that Sean's monitoring infrastructure actively masks the degradation of his personal knowledge vault's accuracy, forcing him to implement 'incident archeology' to trace back from visible failures to the accumulated drift that caused them.
+This connection reveals a fundamental tension between the drive for operational continuity, measured by green dashboards and successful script exits, and the preservation of contextual integrity, which requires fresh and accurate shared assumptions across agents. The consequence is an 'illusion of health' where the system appears fully functional while its underlying knowledge base decays, forcing Sean to rely on 'incident archeology' to trace failures back to accumulated drift rather than preventing them proactively. This dynamic creates a trust deficit because the monitoring infrastructure actively masks the degradation of semantic value until it manifests as a visible failure.
 
 ## Threads
 

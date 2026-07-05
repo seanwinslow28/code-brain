@@ -2,7 +2,7 @@
 title: "Control Plane / Data Plane Split for Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/control-plane-data-plane-split-for-agent-fleets.md
+  - knowledge/connections/operational-visibility-vs-semantic-integrity-in-cognitive-infrastructure.md
 tags: [auto-generated, phase-6]
 created: 2026-07-05
 updated: 2026-07-05
@@ -10,23 +10,23 @@ updated: 2026-07-05
 
 ## Definition
 
-This architectural pattern separates deterministic orchestration logic from probabilistic agent execution, creating a structural gap where the control plane's simplified model of reality diverges from the complex, noisy outputs generated in the data plane. This divergence produces 'legibility debt,' a state where the operator loses visibility into the true system state because the control signals no longer accurately reflect the underlying agent behaviors. The tension escalates when high-throughput sampling prioritizes volume over signal quality, leading to silent failures that erode trust before they are detected by standard success/failure metrics.
+This architectural invariant distinguishes between the control plane, which dictates desired state and routing policies for agent behavior, and the data plane, which executes local processing and storage operations. In agentic systems, a failure in the data plane (e.g., inability to write or synthesize) does not necessarily corrupt the control plane's perception of health if monitoring is limited to process liveness. This split allows agents to appear logically correct and available while physically failing to execute their intended cognitive tasks.
 
 ## Context
 
-Sean must implement 'unsafe control action' modes that explicitly flag when representations diverge from reality, preventing the accumulation of unobserved errors in his personal knowledge vault. The current fleet's drive for high-throughput sampling creates a systemic trust deficit, requiring a shift toward observability dashboards that highlight distortion metrics rather than just completion rates.
+Sean's infrastructure relies on a fleet of agents where the control plane (orchestration/health checks) may remain stable even as the data plane (vault synthesis/knowledge graph updates) degrades. Understanding this split is crucial for diagnosing why Sean perceives his system as healthy while his actual knowledge output stagnates.
 
 ## Evidence
 
-> accidents are produced by inadequate control in a sociotechnical system, not just broken components
+> This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local processing and storage operations.
 
-> Sean needs to implement 'unsafe control action' modes that explicitly flag when representations diverge from reality
+> The core tension lies between the orchestration layer's binary health reporting and the execution layer's physical and semantic failures.
 
 ## Examples
 
-- The fleet's drive for high-throughput sampling leads to a systemic trust deficit as the volume of outputs increases.
-- Observability dashboards should highlight distortion metrics, not just success/failure rates.
+- An agent process remaining active and responsive to health checks while failing to write new entries to the vault due to a silent logic error.
+- Routing policies directing traffic to an agent that is technically reachable but cognitively inert due to model coupling issues.
 
 ## Related Concepts
 
-[[Slop as a Trust Deficit]] [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
+[[Runtime-Model Coupling]] [[Agent Health Monitoring]]
