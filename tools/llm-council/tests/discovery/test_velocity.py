@@ -43,3 +43,50 @@ def test_velocity_module_never_imports_the_gate():
     assert "import verify" not in text
     import council.discovery.velocity as V
     assert not hasattr(V, "verify"), "velocity.py must not bind the gate module"
+
+
+import council.discovery.velocity as V
+from council.discovery.velocity import PytrendsProvider, get_velocity_provider
+
+
+def test_provider_maps_rising_series_to_signal_and_caches():
+    calls = []
+
+    def fake_fetch(terms, window_days):
+        calls.append(list(terms))
+        return {t: [10, 20, 30, 40, 50] for t in terms}
+
+    p = PytrendsProvider(fetch=fake_fetch, window_days=90)
+    out = p.measure_batch(["ai code review", "ai code review", "mcp auth"])  # dupe collapses
+    assert out["mcp auth"].normalized > 0.5 and out["mcp auth"].source == "pytrends"
+    assert out["ai code review"].points == 5
+    # second call for an already-measured term hits cache, not fetch
+    p.measure_batch(["mcp auth"])
+    assert sum(len(c) for c in calls) == 2  # only the 2 unique terms ever fetched
+
+
+def test_provider_thin_series_and_failures_become_none():
+    def fake_fetch(terms, window_days):
+        return {terms[0]: [42]}            # one thin (single-point) series; others absent
+
+    p = PytrendsProvider(fetch=fake_fetch)
+    out = p.measure_batch(["thin", "missing"])
+    assert out["thin"] is None and out["missing"] is None
+
+
+def test_provider_never_raises_when_fetch_explodes():
+    def boom(terms, window_days):
+        raise RuntimeError("rate limited")
+
+    out = PytrendsProvider(fetch=boom).measure_batch(["a", "b"])
+    assert out == {"a": None, "b": None}
+
+
+def test_get_velocity_provider_env_gating(monkeypatch):
+    monkeypatch.delenv("DISCOVERY_VELOCITY", raising=False)
+    assert get_velocity_provider() is None                         # default: off
+    monkeypatch.setenv("DISCOVERY_VELOCITY", "pytrends")
+    monkeypatch.setattr(V, "_pytrends_available", lambda: False)
+    assert get_velocity_provider() is None                         # opted-in but not installed
+    monkeypatch.setattr(V, "_pytrends_available", lambda: True)
+    assert isinstance(get_velocity_provider(), PytrendsProvider)   # opted-in and available
