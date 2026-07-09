@@ -21,7 +21,7 @@ import re
 
 from council.discovery.evidence import EvidenceBundle
 from council.discovery.fusion import CandidatePainPoint
-from council.discovery.velocity import VelocitySignal, VELOCITY_NORM_NEUTRAL
+from council.discovery.velocity import VelocitySignal
 
 # --- tunable constants (sensitivity-test before trusting absolute values) ---
 VALUE_WEIGHTS = {"importance": 0.45, "reach": 0.40, "recency": 0.15}   # sum 1.0

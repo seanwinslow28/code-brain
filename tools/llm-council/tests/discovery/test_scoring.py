@@ -153,11 +153,14 @@ def test_positive_weight_boosts_rising_and_discounts_falling_bounded():
     assert up.value <= 1.0                                 # clamped
 
 
-def test_explicit_zero_weight_forces_term_off_not_the_constant():
-    # 0.0 is falsy: an `or` fallback here would silently apply the module weight. Guard it.
-    up_default = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY,
-                                   velocity=_sig(1.0), velocity_weight=0.5)
+def test_explicit_zero_weight_forces_term_off_not_the_constant(monkeypatch):
+    # Module default set to non-zero so an explicit 0.0 must differ from it: under a buggy
+    # `weight = velocity_weight or VELOCITY_WEIGHT`, 0.0 would fall through to 0.5 and turn the
+    # term ON (composite > base) — this test now fails on that bug. The correct None-check keeps 0.0.
+    monkeypatch.setattr("council.discovery.scoring.VELOCITY_WEIGHT", 0.5)
+    base = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY)
     off = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY,
                             velocity=_sig(1.0), velocity_weight=0.0)
-    base = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY)
-    assert off.composite == base.composite and up_default.composite > base.composite
+    up_default = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY, velocity=_sig(1.0))
+    assert off.composite == base.composite      # explicit 0.0 forces term OFF despite non-zero default
+    assert up_default.composite > base.composite  # None -> falls back to the (now 0.5) module default
