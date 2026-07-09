@@ -2,31 +2,31 @@
 title: "The Verification-Governance Inversion in Agentic Workflows"
 type: concept
 sources:
-  - knowledge/connections/the-verification-governance-inversion-in-agentic-workflows.md
+  - knowledge/connections/the-cost-of-supervision-vs-the-value-of-intent.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-This mechanism describes a systemic inversion where the increasing operational efficiency of automated synthesis directly erodes the user's capacity for meaningful verification, forcing a shift from creative authorship to reactive governance. As the fleet scales its sampling capacity and concept production, it generates artifacts that exceed Sean's bandwidth for taste calibration, creating a trust deficit that undermines the vault's utility. The system optimizes for throughput rather than insight, resulting in a 'slop' effect where volume masks incompetence and obscures signal from noise.
+This mechanism describes a structural shift where the economic viability of an agentic workflow is determined not by its generation throughput, but by the cost of validating its output. As AI models become cheaper and more capable, the marginal cost of producing raw content approaches zero, while the fixed cost of human supervision remains constant or increases due to cognitive load. This inversion forces a reordering of priorities: instead of optimizing for speed of creation, the system must optimize for the precision of constraint definitions that minimize verification effort. The bottleneck moves from the generator to the gatekeeper.
 
 ## Context
 
-Sean must implement a 'Synthesis Policy Change Record' to explicitly track adjustments to the fleet's governing logic rather than just its output volume. The current trajectory of increasing concept counts without corresponding increases in connection quality indicates a failure in the double-loop learning mechanism, requiring a strategic pivot to prioritize verification over generation.
+Sean is observing this exact inversion in his fleet runs. Early runs with smaller models (qwen3-14b) produced high volumes of concepts but suffered from massive rejection rates (up to 80 rejected out of 253 clusters sampled). The recent switch to qwen3.6-35b-a3b-32k drastically reduced rejections (down to 14) despite lower volume, proving that intent precision outweighs raw sampling capacity.
 
 ## Evidence
 
-> There is a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
+> This tension arises when the cost of verifying AI-generated content exceeds the value of the content itself, forcing a shift from production-centric to supervision-centric workflows.
 
-> As the fleet scales its sampling capacity and concept production, it generates artifacts that exceed Sean's capacity for meaningful verification, forcing him into a reactive governance role rather than a creative one.
+> As Sean delegates more tasks to agents, the role of 'supervision' shifts from direct execution to monitoring and intervention, creating a paradox where increased automation leads to increased supervisory burden.
 
 ## Examples
 
-- The system continues to execute its current rules efficiently, but fails to notice that those rules are fundamentally flawed for the goal of insight generation.
-- Sean must implement a 'Synthesis Policy Change Record' to explicitly track adjustments to the fleet's governing logic rather than just its output volume.
+- Run on 2026-07-01 sampled 236 clusters but rejected 76 (32% rejection rate) using qwen3-14b.
+- Run on 2026-07-08 sampled 145 clusters and rejected only 14 (9.6% rejection rate) using qwen3.6-35b-a3b-32k.
 
 ## Related Concepts
 
-[[Slop as a Trust Deficit]] [[Double-loop learning]]
+[[Supervision as the New AI Edge]] [[The Taste-Fidelity Decoupling in Creative Production]]

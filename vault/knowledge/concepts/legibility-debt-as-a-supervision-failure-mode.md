@@ -2,31 +2,31 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-operational-health-vs-cognitive-utility.md
+  - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-This pattern occurs when the engineering desire for simplified, aggregate health metrics clashes with the operational reality of complex human-agent joint cognition. By prioritizing legible dashboards over nuanced semantic verification, Sean creates a supervision failure where he cannot distinguish between productive activity and empty ritual. The debt accumulates as the system optimizes for metrics that are easy to measure rather than those that indicate actual cognitive progress.
+Legibility debt emerges when the velocity of automated execution outpaces the capacity of reporting mechanisms to reflect system state accurately. This creates a gap where high-volume output masks underlying instability, forcing human supervisors to shift from strategic oversight to forensic debugging. The resulting erosion of trust occurs because health metrics appear robust while epistemic blindness grows, making it difficult to distinguish between genuine progress and silent failure propagation.
 
 ## Context
 
-Sean faces this tension in his agent fleet design, where robust protocol instrumentation masks epistemic blindness. This is particularly dangerous because it creates an illusion of health that prevents him from noticing when his knowledge base is stagnating despite high system utilization.
+Sean is scaling his agent fleet's concept generation from 3 to over 150 per run, yet the reporting infrastructure remains static. This mismatch means that as throughput increases, the visibility into quality and correctness decreases, creating a dangerous illusion of health where errors are hidden by volume rather than exposed by scrutiny.
 
 ## Evidence
 
-> Sean faces a structural tension where the engineering desire for simplified, aggregate health metrics clashes with the operational reality of complex human-agent joint cognition.
+> As Sean scales the concept generation from 3 to 153 concepts per run, the mechanisms for reporting status lag behind, creating a legibility gap.
 
-> Sean's infrastructure suffers from a critical tension where robust protocol instrumentation masks epistemic blindness.
+> Robust protocol instrumentation masks epistemic blindness, creating an illusion of health that is particularly dangerous in creative contexts.
 
 ## Examples
 
-- Prioritizing green dashboards over verifying if new concepts were actually written to the vault.
-- Designing monitoring layers that prioritize operational continuity over contextual integrity.
+- The jump from 3 concepts written in May to 153 in July with only marginal improvements in rejection rates indicates a scaling bottleneck in supervision.
+- Automated dashboards highlighting successful completions while ignoring missing data creates a false sense of operational stability.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+[[The Illusion of Health in Autonomous Systems]] [[Agent Fleet Observability Dashboard]]

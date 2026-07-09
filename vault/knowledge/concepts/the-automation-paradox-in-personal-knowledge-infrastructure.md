@@ -2,31 +2,31 @@
 title: "The Automation Paradox in Personal Knowledge Infrastructure"
 type: concept
 sources:
-  - knowledge/connections/the-skill-atrophy-trap-in-agentic-workflows.md
+  - knowledge/concepts/the-automation-paradox-in-personal-knowledge-infrastructure.md
 tags: [auto-generated, phase-6]
-created: 2026-07-01
-updated: 2026-07-01
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-This concept defines the inverse relationship between operational efficiency and system resilience in personal knowledge management. Increasing the degree of automation reduces the routine cognitive load required to maintain the vault, but it simultaneously erodes the operator's manual recovery skills. The paradox arises because the very tools built to save time also remove the practice necessary to fix those tools when they inevitably break, creating a hidden liability that grows with every automated task.
+This pattern emerges when the efficiency gains of automated synthesis are offset by the increasing cognitive load required to supervise low-fidelity outputs. As the system automates more of the 'heavy lifting' (clustering, drafting), it generates more noise that requires human intervention to filter, effectively shifting the labor from creation to curation. The paradox is that the more successful the automation is at volume, the less time remains for the high-value creative work it was intended to enable.
 
 ## Context
 
-Sean's drive to automate his personal vault and job hunt creates a tension where increased automation reduces routine cognitive load but simultaneously increases the severity of potential failures by eroding his manual recovery skills. This is critical because his vault is not just a storage system but a core part of his professional identity and job hunting strategy.
+Sean's vault runs show a consistent pattern of high rejection counts relative to concepts written, suggesting that the automated process is generating significant 'slop' that requires manual pruning. This tension forces a re-evaluation of what constitutes success in an agentic workflow: fidelity over volume.
 
 ## Evidence
 
-> Sean’s drive to automate his personal vault and job hunt creates a tension where increased automation reduces routine cognitive load but simultaneously increases the severity of potential failures by eroding his manual recovery skills.
+> clusters_sampled: 272, rejected_count: 50, duration_seconds: 2618.0
 
-> The consequence is that his ability to recover from system failures degrades over time, creating a fragile dependency where he cannot function without the very systems he built to help him.
+> Sean's workflow reveals a fundamental tension between the desire for immediate control (explicit prompts) and the reality of complex style transfer (implicit learning).
 
 ## Examples
 
-- Sean uses agents to generate daily notes and synthesize connections, but when the agent fleet fails, he lacks the manual workflow to reconstruct his knowledge base.
-- The automation of job hunt status updates saves time but leaves Sean unprepared for the manual storytelling required in interviews.
+- Run 2026-07-06 used qwen3.6-35b-a3b-32k but had a rejected_count of 106 against 103 concepts written, indicating a near 1:1 failure rate in initial generation fidelity.
+- The definition of 'success' for the fleet may need to shift from volume (concepts written) to fidelity (rejection rate or taste alignment score).
 
 ## Related Concepts
 
-[[The Skill Atrophy Trap in Agentic Workflows]] [[The Illusion of Competence in Automated Systems]]
+[[The Taste-Fidelity Decoupling in Creative Production]] [[Slop as a Trust Deficit]]

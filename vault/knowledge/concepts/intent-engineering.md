@@ -2,31 +2,31 @@
 title: "Intent Engineering"
 type: concept
 sources:
-  - 20_projects/substack-studio/research/opportunity-report-creative-agentic.md
+  - knowledge/concepts/intent-engineering.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-A control architecture where structured intent serves as the primary gate for agent behavior, replacing open-ended generation with auditable specifications. This mechanism requires that every output be traceable to a pre-defined brief or constraint set, ensuring that the 'why' behind an action is preserved and verifiable. It shifts the burden of proof from the model's internal logic to the user's explicit framing, creating a closed loop where evaluation happens at the spec layer rather than post-hoc.
+This discipline defines the mechanism of translating ambiguous human desires into precise, machine-readable constraints. It operates on the invariant that understanding intent is an 80% problem of elicitation rather than a 20% problem of reformatting words. The value lies in bridging the gap between technical precision and creative intuition through better elicitation tools. This approach shifts the focus from merely executing commands to solving the underlying specification problem.
 
 ## Context
 
-Sean has already built the technical foundation for this via his intent-engineering MCP and writing chain assets. The opportunity lies not in building new infrastructure but in translating this engineer-centric control plane into language accessible to creative and marketing teams who currently lack these governance tools.
+Sean's ability to engineer intent is a key differentiator in his job hunt and product design. By mastering this skill, he can bridge the gap between creative vision and technical execution, making him more effective in collaborative environments. This capability allows him to act as a translator between vague stakeholder requests and concrete agent behaviors.
 
 ## Evidence
 
-> "The missing layer in AI agents is not autonomy. It is structured intent."
+> Getting useful intent out of someone who says 'make it pop' is the unsolved 80%; reformatting their words is the easy 20%.
 
-> "eval tooling like Braintrust and LangSmith is designed for ML engineers… most teams don't need 'research-grade evals' first."
+> The market opportunity lies in bridging the gap between technical precision and creative intuition through better elicitation tools.
 
 ## Examples
 
-- Using the intent-engineering MCP to audit agent outputs against a brief before they are considered final.
-- Applying VoicePrint to productize the loop of eliciting intent, scoring it, and gating output for brand consistency.
+- Converting a client's vague feedback into a detailed style guide for an AI agent.
+- Creating a template for 'creative intent' that forces users to specify tone, audience, and constraints.
 
 ## Related Concepts
 
-[[Control Architecture as Evangelism]] [[Supervision as the New AI Edge]]
+[[The Taste-Fidelity Decoupling in Creative Production]] [[The Verification-Governance Inversion in Agentic Workflows]]

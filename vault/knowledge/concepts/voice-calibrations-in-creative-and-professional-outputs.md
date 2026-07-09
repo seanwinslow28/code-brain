@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/voice-calibrations-in-creative-and-professional-outputs.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-This mechanism treats voice not as a stylistic preference but as a dynamic constraint system where semantic payloads remain invariant while syntactic machines change. It requires the explicit separation of rhetorical form from factual claims, allowing for distinct modes like 'Orwell Mode' which strips performance to build trust in high-stakes professional contexts. The core tension lies in testing whether agents can maintain thesis integrity across transformations rather than merely imitating surface-level stylistic flavors.
+This mechanism describes the iterative alignment of machine-generated text with a specific human voice through explicit constraints and negative examples, treating style as a boundary condition rather than an inherent model property. The calibration cost is high because it requires the user to articulate implicit aesthetic preferences into restrictive prompt instructions, often forbidding previous drafts to avoid pattern repetition. This process highlights the fragility of style transfer in automated workflows, where the system must be actively steered away from generic outputs through precise negative prompting.
 
 ## Context
 
-Sean needs this distinction to prevent his technical writing from sounding overly theatrical when credibility is paramount, such as in architecture decision records or recruiter one-pagers. By explicitly defining 'Plain Style' and 'Polyphonic Drafting,' he can ensure that professional artifacts meet the specific trust requirements of hiring managers and peers without sacrificing creative rigor.
+Sean's runs frequently involve voice calibration steps where he must explicitly forbid certain patterns or drafts to achieve the desired output, highlighting the fragility of style transfer in automated workflows. The tension arises when the cost of verifying AI-generated content exceeds the value of the content itself, forcing a shift from production-centric to supervision-centric workflows.
 
 ## Evidence
 
-> It is missing voice as formal constraint: same incident, 99 transformations, each governed by a visible rule.
+> The prompt explicitly forbids repeating the 'missed' drafts, indicating that previous iterations failed to capture the necessary aesthetic nuance.
 
-> Add 'Orwell Mode': short concrete nouns, active verbs, no ornamental metaphor unless it carries analytic load, ruthless deletion of inflated abstractions.
+> Sean Mode + the House Style grit register + the signature-moves table
 
 ## Examples
 
-- Rewrite the same claim through 5 constraint passes: notation, interrogation, litotes, official letter, free verse.
-- The PM wants X. The engineer distrusts Y. The user experiences Z. The artifact must reconcile them by doing A.
+- Run 2026-07-07 reduced concepts_written to 86 but also reduced rejected_count to 33, suggesting that tighter calibration or smaller sampling improved fidelity.
+- The tension arises when the cost of verifying AI-generated content exceeds the value of the content itself, forcing a shift from production-centric to supervision-centric workflows.
 
 ## Related Concepts
 
-[[Writing-voice-modes]] [[Taste as Evaluation Function vs. Activity Proof]]
+[[The Taste-Fidelity Decoupling in Creative Production]] [[The Verification-Governance Inversion]]

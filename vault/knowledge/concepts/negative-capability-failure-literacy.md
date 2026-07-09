@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/negative-capability-failure-literacy.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-This mechanism defines the disciplined capacity to tolerate uncertainty and ambiguity without resorting to premature rationalization or closure. In agentic workflows, it acts as a necessary counter-weight to the illusion of health, forcing Sean to actively engage in premortems before launching high-stakes artifacts. It is not merely patience, but the structural refusal to let automated speed override the slow verification required for personal brand integrity.
+This mechanism defines the strategic acceptance of an agent's inherent limitations as a creative constraint rather than a bug, requiring the user to develop 'failure literacy'—the ability to recognize when a model is hallucinating or failing and to pivot the prompt strategy accordingly. It involves treating the output not as a direct translation of intent but as a collaborative material that must be shaped through iterative correction, specifically by avoiding the urge to make outputs 'more realistic' when they are stiff, and instead embracing exaggeration. This literacy prevents the user from fighting the model's nature and instead leverages its strengths in stylistic abstraction.
 
 ## Context
 
-Sean must cultivate this capability to prevent his job hunt from devolving into a volume game where automation strips away the nuance of his narrative. By applying negative capability, he identifies specific points where automated systems are blind to hidden failure modes that only human taste can detect.
+Sean is training himself to work with GPT Image 2 and ChatGPT image gen, where direct control is limited. He must learn to 'iterate, never restart' and use specific levers like 'warmer bloom' or 'heavier construction lines' to guide the output, accepting that the model's 'clueless' nature can be a feature of the aesthetic.
 
 ## Evidence
 
-> Klein’s premortem gives Sean a repeatable artifact for surfacing hidden failure modes before a launch, pitch, essay, demo, or recruiter-facing update goes live.
+> When a render is stiff, the lever is always 'crank the caricature, more exaggerated and absurd,' never 'make it more realistic.'
 
-> The tension between the speed of automation (which produces many artifacts) and the slowness of verification (which requires human negative capability).
+> Other dials: 'warmer bloom,' 'heavier construction lines,' 'goofier pixel face.'
 
 ## Examples
 
-- Using premortems to check job hunt artifacts before they go live.
-- Recognizing that automated speed conflicts with the preservation of taste memory.
+- Choosing to exaggerate the intern's 'pixel face' rather than trying to fix a stiff pose.
+- Using a single reference image to prevent style muddiness, acknowledging that multiple references degrade fidelity.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Taste as Evaluation Function vs. Activity Proof]]
+[[The Taste-Fidelity Decoupling in Creative Production]] [[Tacit Knowledge Erosion vs. Automation Scale]]

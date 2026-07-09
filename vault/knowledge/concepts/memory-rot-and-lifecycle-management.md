@@ -2,31 +2,31 @@
 title: "Memory Rot and Lifecycle Management"
 type: concept
 sources:
-  - 20_projects/substack-studio/research/last30days/2026-06-09-ai-agent-frameworks-people-wish-existed-last30days.md
+  - knowledge/concepts/memory-rot-and-lifecycle-management.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-Memory rot occurs when stale preferences or outdated context silently contradict new instructions because the system lacks a defined lifecycle for data decay. Without explicit mechanisms to create, update, summarize, and delete memos, an agent's state becomes a liability rather than an asset, leading to inconsistent behavior over long-running sessions. This pattern requires a four-layer architecture that treats memory as a dynamic resource with finite validity periods.
+This pattern defines the inevitable degradation of semantic value in stored knowledge artifacts when they are not actively pruned or reconciled against current taste signals. It is not merely storage bloat but a functional decay where older, lower-fidelity memories dilute the weight of new, critical instructions. The mechanism relies on the fact that unmanaged accumulation creates noise that obscures the signal, requiring ruthless pruning to maintain the integrity of the creative voice.
 
 ## Context
 
-Sean's vault system must handle long-term knowledge retention without degradation. Recognizing memory rot as a structural threat ensures his fleet implements active summarization and deletion protocols rather than passive accumulation.
+Sean's agent fleet samples hundreds of clusters daily; without this lifecycle management, his 'taste memory' becomes a liability rather than an asset, causing the synthesizer to ignore real instructions in favor of stale context. The shift from high-volume accumulation to high-fidelity filtering is essential for maintaining operational clarity.
 
 ## Evidence
 
-> The breakdown usually stems from the infrastructure surrounding the model, not the limitations of the language model itself.
+> A taste memory that grows without reconciling will degrade the output, not improve it.
 
-> A highly-retrieved memo can become stale, causing silent contradictions with new instructions if no lifecycle management exists.
+> The inevitable degradation of semantic value in stored knowledge artifacts when they are not actively pruned or reconciled against current taste signals.
 
 ## Examples
 
-- Cross-session identity resolution fails when anonymous or multi-device contexts break the assumption of a stable user ID.
-- The 'Memory Wars' indicate that persistent state is becoming the primary differentiator in agent capabilities.
+- Synthesizer runs showing high rejected counts (e.g., 106 rejections) despite high concept counts, indicating the model is struggling to filter relevant taste signals from bloat.
+- The shift from qwen3-14b to qwen3.6-35b-a3b-32k resulting in fewer concepts written but higher fidelity connections, suggesting a move away from volume-based accumulation.
 
 ## Related Concepts
 
-[[Context Compounding]] [[Decision/Provenance Memory]]
+[[Context Compounding]] [[The Taste-Fidelity Decoupling in Creative Production]]

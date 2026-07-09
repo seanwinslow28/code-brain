@@ -2,33 +2,31 @@
 title: "Context Management as a Bottleneck"
 type: concept
 sources:
-  - 20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md
+  - knowledge/concepts/context-management-as-a-bottleneck.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-In complex agentic systems, the primary failure mode is not computational capacity but the degradation of semantic context across agent handoffs. When agents operate in silos without shared provenance layers, they lose the 'why' behind the 'what,' leading to outputs that are technically valid but strategically orphaned. This bottleneck manifests as a disconnect between high-level creative intent and low-level execution details.
+In agentic workflows, the capacity to maintain coherent context across multiple runs and domains is limited by the fragmentation of memory stores and the lack of explicit cross-referencing between disparate knowledge bases. When agents operate in silos (e.g., job-hunt vs. creative-studio), they fail to leverage prior insights, leading to redundant work and missed opportunities for synthesis. This bottleneck manifests as a 'context blindness' where the system can process vast amounts of data but cannot connect related concepts across different life-systems because the underlying graph structure is not explicitly maintained or queried.
 
 ## Context
 
-Sean's work involves bridging the gap between high-level creative vision and technical execution. By addressing context management, he can prevent the 'silent failure' where agents produce content that misses the nuanced intent of the original brief.
+Sean's vault spans multiple domains (life-systems, creative-studio, job-hunt), yet the current synthesizer runs appear to treat each domain independently. This concept identifies why cross-domain insights are rare and suggests that the bottleneck is not compute power but the structural integrity of the knowledge graph.
 
 ## Evidence
 
-> the creative slice is still re-aimed from an engineer-skewed corpus — that skew held across all three passes, which is itself a finding
+> The prompt requires connections to span 'life-systems, creative-studio, job-hunt-2026, and Superuser Pack infrastructure,' implying these are currently siloed.
 
-> the gap is not 'no eval tools' but 'eval tools built for the wrong audience'
-
-> most teams do not need research-grade evals first
+> The Idea Ledger notes 'Context blindness & codebase awareness failures' as a top pain point, which applies equally to the vault's internal knowledge management.
 
 ## Examples
 
-- A creative brief being interpreted differently by a copywriting agent vs. a design agent due to lack of shared context.
-- Agents producing consistent but irrelevant content because they lack access to the broader strategic narrative.
+- The synthesizer must manually specify 'source_folders' for connections, indicating that automatic cross-domain linking is not yet robust.
+- The 'Whitespce Map' identifies 'Limited non-English and enterprise-procurement perspective' as a gap, showing how context scope limits insight generation.
 
 ## Related Concepts
 
-[[Context Compounding]] [[Vault as Agent Infrastructure]] [[Silent Failure Propagation in Agent Fleets]]
+[[Context Compounding]] [[Vault as Agent Infrastructure]]

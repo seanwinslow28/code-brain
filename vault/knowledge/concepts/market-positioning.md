@@ -4,28 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/market-positioning.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-Market positioning is the strategic alignment of one's capabilities with the evolving basis of competition, requiring a deliberate shift in how value is perceived by the market. This mechanism involves recognizing when the source of advantage has moved from one domain to another, such as from roadmap ownership to agent-system authorship. The consequence is a redefinition of the professional identity to match the new structural realities of the industry, allowing for the creation of a unique and defensible market niche.
+This concept defines the strategic alignment of technical capabilities with the market's evolving basis of competition, specifically shifting value perception from raw output to curated authority. It requires a deliberate decoupling of 'activity proof' (volume of work) from 'taste proof' (quality of judgment). The mechanism involves positioning the creator not as a producer of content but as an architect of taste, where the market pays for the scarcity of good judgment rather than the abundance of generation. This shift is necessary because automated generation commoditizes output, making taste the only defensible differentiator.
 
 ## Context
 
-Sean's career transition is framed as a response to this shift, moving from traditional product roles to agentic infrastructure. This positioning leverages the new basis of competition to create a unique and defensible market niche that allows him to command higher value by addressing specific tensions identified in the strategic inflection.
+Sean must adjust his Substack and job-hunt narrative to emphasize 'taste proof' over 'activity proof'. The market no longer values mere automation; it values the strategic alignment of that automation with a distinct, human-guided aesthetic. This requires showing the 'failure' of unguided automation to highlight the value of his specific calibration.
 
 ## Evidence
 
-> I saw the basis of advantage move from roadmap ownership to agent-system authorship.
+> Market positioning is the strategic alignment of one's capabilities with the evolving basis of competition, requiring a deliberate shift in how value is perceived by the market.
 
-> The tension lies between detecting the macro-shift in the basis of competition and mapping the micro-activities that sustain advantage.
+> There is a fundamental tension between the desire to automate creative workflows and the necessity of human taste to guide them.
 
 ## Examples
 
-- Positioning as an agent-system author rather than a roadmap owner.
+- Shifting value perception from output volume to judgment quality.
+- Positioning automation as a vehicle for taste, not a replacement for it.
 
 ## Related Concepts
 
-[[Competitive Analysis]] [[Value Chain / Activity System Mapping]]
+[[Taste as Evaluation Function vs. Activity Proof]] [[Control Architecture as Evangelism]]

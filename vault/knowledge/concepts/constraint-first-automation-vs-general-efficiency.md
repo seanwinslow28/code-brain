@@ -2,31 +2,31 @@
 title: "Constraint-First Automation vs. General Efficiency"
 type: concept
 sources:
-  - knowledge/connections/aesthetic-standardization-as-a-supervisory-mechanism.md
+  - knowledge/connections/the-supervisory-cost-of-taste-transfer.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-This concept defines the preference for rigid, negative constraints (what not to do) over general efficiency metrics when automating creative tasks, as constraints provide a clearer boundary for agent execution than abstract goals. It argues that 'flat design' principles, such as avoiding gradients and shadows, serve as effective negative constraints because they are easily codified into schema-like instructions for agents. The mechanism prioritizes the reliability of output within defined boundaries over the speed or breadth of unconstrained generation.
+This pattern identifies the tension between optimizing for raw throughput (general efficiency) and optimizing for specific outcome fidelity (constraint-first automation). General efficiency seeks to minimize cost and time per unit, while constraint-first automation accepts higher initial setup costs to ensure the output aligns with complex, nuanced human standards. The mechanism fails when users apply general efficiency metrics to problems requiring high-fidelity constraint satisfaction.
 
 ## Context
 
-Sean's agent fleet often produces 'slop' when given vague positive instructions. By adopting a constraint-first approach, he ensures that the automation pipeline respects the aesthetic standards necessary for his professional brand, even if it means slower iteration speeds. This is critical for his job hunt materials where deviation from standard aesthetics could signal a lack of attention to detail.
+Sean's prior runs show a trade-off: qwen3-14b offered high volume but lower fidelity (more rejections), while qwen3.6-35b-a3b-32k offered better alignment but required different supervision strategies. He must choose which efficiency metric serves his current goal.
 
 ## Evidence
 
-> Flat Design: Two-dimensional elements without gradients, shadows, or depth effects using clean geometric shapes
+> The old cadence strangled because three posts waited on unbuilt tools.
 
-> Sean must define 'taste' as a set of negative constraints (what NOT to do) rather than positive instructions, which are harder for agents to follow consistently.
+> As the number of agents scales, the cost of supervision does not decrease proportionally; instead, it increases because the rubric must become more complex to prevent drift.
 
 ## Examples
 
-- Specifying 'no drop shadows' in a prompt to ensure consistency with a flat design aesthetic.
-- Rejecting any output that includes gradients because they violate the defined negative constraint of the brand style guide.
+- The 'old cadence' being strangled by tool dependencies illustrates the failure of general efficiency when constraints are not met.
+- The increase in rubric complexity with scaling agents demonstrates the non-linear cost of constraint-first automation.
 
 ## Related Concepts
 
-[[Aesthetic Standardization as a Supervisory Mechanism]] [[Slop as a Trust Deficit]]
+[[The Taste-Fidelity Decoupling in Creative Production]] [[Supervision as the New AI Edge]]
