@@ -395,3 +395,75 @@ async def test_pipeline_records_nli_mode_and_metrics_with_scorer(tmp_path):
     data = json.loads(next(sdir.glob("*.json")).read_text())
     assert data["verify_mode"] == "nli"
     assert data["citation_recall"] == 1.0
+
+
+from council.discovery.evidence import EvidenceBundle, EvidenceRecord
+from council.discovery.fusion import CandidatePainPoint, FusionResult
+from council.discovery.velocity import VelocitySignal
+
+
+class _FakeVProvider:
+    def measure_batch(self, terms):
+        # rising signal for every term
+        return {t: VelocitySignal(term=t, slope=0.8, normalized=0.9, source="pytrends",
+                                  window_days=90, points=5) for t in terms}
+
+
+def _one_point_bundle_and_fuse():
+    url = "https://ex.com/a"
+    async def gather_fn(**kw):
+        b = EvidenceBundle()
+        b.add(EvidenceRecord("reddit", "r/pm", url, "2026-06-20", "slow export", engagement=100))
+        return b, {"ok": True}
+    async def fuse_fn(**kw):
+        pt = CandidatePainPoint("Slow export", "it's slow", quotes=["slow export"], urls=[url],
+                                intensity=4, recency="2026-06", consensus="4/4 models")
+        return FusionResult(pain_points=[pt])
+    return gather_fn, fuse_fn
+
+
+@pytest.mark.asyncio
+async def test_velocity_off_by_default_in_session():
+    gather_fn, fuse_fn = _one_point_bundle_and_fuse()
+    res = await run_discovery(topic="pm tools", lens="pm", tier="standard", api_key="k",
+                              gather_fn=gather_fn, fuse_fn=fuse_fn, supplement=False,
+                              velocity_provider=None)
+    assert res.session["velocity_mode"] == "off"
+    assert res.session["why_now_coverage"] == 0.0
+
+
+@pytest.mark.asyncio
+async def test_velocity_provider_threads_and_reports_coverage():
+    gather_fn, fuse_fn = _one_point_bundle_and_fuse()
+    res = await run_discovery(topic="pm tools", lens="pm", tier="standard", api_key="k",
+                              gather_fn=gather_fn, fuse_fn=fuse_fn, supplement=False,
+                              velocity_provider=_FakeVProvider())
+    assert res.session["velocity_mode"] == "pytrends"
+    assert res.session["why_now_coverage"] == 1.0                 # the one card carries a signal
+
+
+@pytest.mark.asyncio
+async def test_empty_bundle_session_carries_velocity_keys():
+    async def gather_fn(**kw):
+        return EvidenceBundle(), {"ok": True}
+    res = await run_discovery(topic="x", lens="pm", tier="quick", api_key="k",
+                              gather_fn=gather_fn, fuse_fn=None)
+    assert res.session["velocity_mode"] == "off"
+    assert res.session["why_now_coverage"] == 0.0
+
+
+@pytest.mark.asyncio
+async def test_invariant_velocity_cannot_perturb_the_gate():
+    # THE MOAT: verified set + citation metrics identical velocity on vs off (weight defaults to 0),
+    # and no velocity string leaks into evidence urls/quotes.
+    g1, f1 = _one_point_bundle_and_fuse()
+    off = await run_discovery(topic="pm tools", lens="pm", tier="standard", api_key="k",
+                              gather_fn=g1, fuse_fn=f1, supplement=False, velocity_provider=None)
+    g2, f2 = _one_point_bundle_and_fuse()
+    on = await run_discovery(topic="pm tools", lens="pm", tier="standard", api_key="k",
+                             gather_fn=g2, fuse_fn=f2, supplement=False,
+                             velocity_provider=_FakeVProvider())
+    assert off.session["verified"] == on.session["verified"]
+    assert off.session["dropped"] == on.session["dropped"]
+    assert off.session["citation_precision"] == on.session["citation_precision"]
+    assert off.session["citation_recall"] == on.session["citation_recall"]

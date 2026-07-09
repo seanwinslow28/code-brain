@@ -17,6 +17,7 @@ from council.discovery.gather import gather_evidence
 from council.discovery.nli import get_scorer
 from council.discovery.render import render_ledger
 from council.discovery.tiers import get_tier
+from council.discovery.velocity import get_velocity_provider
 from council.discovery.verify import verify_pain_points, citation_metrics
 from council.discovery.dedup import dedup_verified, rank_gaps, _point_text
 
@@ -67,7 +68,8 @@ def _estimate_cost(fr: FusionResult, tier) -> float:
 
 async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segment: str = "",
                         gather_fn=None, fuse_fn=None, backfill_fn=None, supplement: bool = True,
-                        sessions_dir: Path | None = None, scorer=_UNSET) -> DiscoveryResult:
+                        sessions_dir: Path | None = None, scorer=_UNSET,
+                        velocity_provider=_UNSET) -> DiscoveryResult:
     tcfg = get_tier(tier)
     segment = _normalize_segment(segment)
     session_id = f"{time.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:6]}"
@@ -86,7 +88,8 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
                                session={"id": session_id, "topic": topic, "empty": True,
                                         "gather_status": gather_status,
                                         "verify_mode": "substring-only",
-                                        "citation_precision": None, "citation_recall": None})
+                                        "citation_precision": None, "citation_recall": None,
+                                        "velocity_mode": "off", "why_now_coverage": 0.0})
 
     fuse = fuse_fn or _fuse
     try:
@@ -140,6 +143,8 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
 
         brief_md = ""
         today = date.today()
+        velocity_mode = "off"
+        why_now_coverage = 0.0
         if lens == "substack":
             from council.discovery.frame_substack import frame_substack
             from council.discovery.render_substack import render_substack_ledger, render_substack_brief
@@ -151,12 +156,17 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
             brief_md = render_substack_brief(topic=topic, segment=segment, angles=angles)
             verified_count = len(angles)
         else:
-            cards, quote_bank = frame_pm(verified, fr, bundle, today=today)
+            active_vp = get_velocity_provider() if velocity_provider is _UNSET else velocity_provider
+            cards, quote_bank = frame_pm(verified, fr, bundle, today=today, topic=topic,
+                                         velocity_provider=active_vp)
             md = render_ledger(topic=topic, lens=lens, tier=tier, segment=segment, cards=cards,
                                quote_bank=quote_bank, fusion_result=fr, cost_usd=cost,
                                dropped_count=dropped, supplement=supplement_result,
                                merged_count=len(merges), verify_mode=verify_mode)
             verified_count = len(cards)
+            velocity_mode = "pytrends" if active_vp is not None else "off"
+            why_now_coverage = (round(sum(1 for c in cards if c.score.velocity_source) / len(cards), 4)
+                                if cards else 0.0)
 
         session = {
             "id": session_id, "topic": topic, "lens": lens, "tier": tier,
@@ -172,6 +182,8 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
             "verify_mode": verify_mode,
             "citation_precision": metrics.precision,
             "citation_recall": metrics.recall,
+            "velocity_mode": velocity_mode,
+            "why_now_coverage": why_now_coverage,
         }
         if sessions_dir is not None:
             sessions_dir.mkdir(parents=True, exist_ok=True)
