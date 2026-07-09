@@ -2,31 +2,31 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-automation-velocity-and-creative-friction.md
+  - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-This pattern describes a structural blind spot where operational metrics (uptime, process existence) diverge from functional utility (data completeness, resource accessibility). When agents operate in headless modes or disconnected environments, they appear 'alive' to monitoring systems but are structurally incapable of performing their intended semantic tasks. This creates a false positive state where the infrastructure is technically running but functionally inert, leading to silent degradation of downstream outputs.
+This invariant describes how robust protocol instrumentation can mask epistemic blindness, creating a false sense of operational stability. When systems report high completion rates without corresponding quality signals, supervisors mistake activity for progress. This illusion is particularly dangerous in creative contexts where semantic integrity and taste are harder to quantify than throughput metrics.
 
 ## Context
 
-Sean's vault-synthesizer runs have increased in volume (up to 150 concepts) while relying on headless agents that lack full MCP access. Without recognizing this illusion, Sean risks accumulating a large volume of low-fidelity knowledge artifacts that appear productive but are structurally incomplete.
+Sean's fleet runs show increasing concept counts but stagnant or declining connection quality, yet the system reports 'success' based on volume. This creates a feedback loop where the supervisor trusts the dashboard over their own judgment, leading to undetected degradation in knowledge synthesis quality.
 
 ## Evidence
 
-> Core infrastructure failure points persist: agents lack robust MCP access in headless mode.
+> Robust protocol instrumentation masks epistemic blindness, creating an illusion of health that is particularly dangerous in creative contexts.
 
-> Alienware and ComfyUI environments were OFFLINE, limiting agent capabilities needed for full system redundancy.
+> Automated dashboards should be designed to highlight missing data or silence as critical errors, not just successful completions.
 
 ## Examples
 
-- Agents reporting 'healthy' status while being unable to fetch critical context from MCP servers.
-- High concept counts (150+) generated during runs where infrastructure was partially offline.
+- The system reports 103 concepts written in July but fails to flag the lack of strategic connections compared to earlier runs.
+- High rejection counts (e.g., 106 rejections) are treated as noise rather than signals of systemic quality issues.
 
 ## Related Concepts
 
-[[Operational Visibility vs. Semantic Value in Agent Fleets]] [[The Illusion of Competence in Automated Systems]]
+[[Legibility Debt as a Supervision Failure Mode]] [[The Efficiency-Quality Inversion in Automated Synthesis]]

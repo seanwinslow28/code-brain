@@ -2,31 +2,31 @@
 title: "Negative Space Calibration"
 type: concept
 sources:
-  - 20_projects/substack-studio/playbook/image-house-style.md
+  - knowledge/concepts/negative-space-calibration.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-A design invariant where the visible 'work-in-progress' artifacts—such as construction underdrawings, paper grain, or hole-punch marks—are intentionally preserved to signal authenticity and process. This mechanism relies on the tension between the finished linework and the exposed scaffolding, creating a specific aesthetic of 'pencil test' realism rather than polished finality. The constraint requires that all other elements remain monochrome or minimally accented to prevent visual competition with this structural honesty.
+This mechanism defines a gap not as an active void waiting to be filled, but as a structural absence of evidence that requires rigorous verification before any strategic action is taken. It forces the analyst to distinguish between 'silence' in the market data and 'confirmed opportunity,' preventing the premature construction of solutions for problems that may not exist or are already solved by unobserved means. The calibration process treats the lack of visible competitors or features as a signal of potential invisibility rather than immediate demand, requiring higher evidentiary thresholds to validate the gap's reality.
 
 ## Context
 
-Sean is moving away from the 'deliberate ink splatter' of his previous v1 design because it felt like 'ink blotting' that 'never sat right.' By adopting the portfolio's pencil-test look, he leverages the 'show the work' tell to establish a calm, precise aesthetic that aligns with his actual taste rather than a borrowed gonzo style.
+Sean must apply this to his competitive analysis and product discovery workflows to avoid building features based on 'solutioneering' traps where agents hallucinate needs from silence. By calibrating negative space, he ensures that his gap maps reflect epistemic deficits requiring investigation rather than hunting grounds for low-effort opportunities.
 
 ## Evidence
 
-> The new anchors are Sean's three portfolio illustrations (recipes saved at _assets/style-anchors/portfolio-pencil-anchor-prompts.md).
+> Every strong gap presentation does the same three things to each gap: (1) states it as a need/pain, not a solution
 
-> faint light-blue construction underdrawing left visible (the 'show the work' tell that makes it read as a pencil test, not a finished render).
+> The whitespace map is by construction absence-of-evidence (what the panel/evidence missed)
 
 ## Examples
 
-- Using warm cream paper #FFF9F0 with visible grain and hole-punch marks along one margin to signal hand-made authenticity.
-- Leaving the light-blue construction underdrawing visible behind the graphite linework to distinguish the image from a finished render.
+- Stating a gap as a 'need/pain' rather than a 'solution' in gap presentations
+- Treating the whitespace map as an 'absence-of-evidence' indicator
 
 ## Related Concepts
 
-[[Craft in Product Design]] [[Negative Space Calibration]]
+[[The Verification-Governance Inversion]] [[Slop as a Trust Deficit]]

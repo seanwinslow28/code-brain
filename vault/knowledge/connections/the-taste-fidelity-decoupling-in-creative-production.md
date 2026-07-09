@@ -2,32 +2,32 @@
 title: "The Taste-Fidelity Decoupling in Creative Production"
 type: connection
 connects:
+  - The Taste-Fidelity Decoupling in Creative Production
   - Supervision as the New AI Edge
-  - Negative Space Calibration
-  - Raising vs. Describing
-created: 2026-07-03
-updated: 2026-07-03
+  - Demonstration Over Declaration
+created: 2026-07-08
+updated: 2026-07-08
 ---
 
 ## Synthesis
 
-Sean's operational infrastructure achieves high fidelity through deterministic protocols, but this same determinism creates a decoupling from aesthetic taste, which requires non-deterministic calibration. The tension lies in the fact that the mechanisms ensuring operational reliability (explicit instructions) are ineffective for creative work, forcing Sean to maintain separate mental models. This decoupling means that as his automation scales, his ability to supervise and calibrate creative output becomes the critical bottleneck, shifting his value from execution to taste.
+This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. As Sean scales his creative production through automation, the 'taste-fidelity decoupling' widens, requiring increasingly sophisticated supervision mechanisms to maintain quality. The consequence is that the marginal cost of maintaining creative authority does not decrease with scale; instead, it shifts from generation labor to calibration labor. This creates a bottleneck where the value of Sean's work is determined by his ability to teach the fleet his taste, rather than his ability to generate content.
 
 ## Threads
 
+### [[The Taste-Fidelity Decoupling in Creative Production]]
+
+> The tension lies between the agent's default statistical tendency toward the 'median' and the user's desire for unique aesthetic expression.
+
 ### [[Supervision as the New AI Edge]]
 
-> I'd spent months teaching a fleet of little agents to run my life... I'd handed off damn near everything, and the one job not a single one of them could do was sound like me.
+> The job is to teach it yours, until it quits handing you the factory setting and starts making work that's recognizably you, on demand.
 
-### [[Negative Space Calibration]]
+### [[Demonstration Over Declaration]]
 
-> I want to find my writing voice by reacting to what it ISN'T. two words is fine. "No." "Gross." "Never."
-
-### [[Raising vs. Describing]]
-
-> You can't prompt taste into an LLM; it's raising, not describing.
+> This gap necessitates a shift from 'prompt engineering' to 'calibration engineering,' where the primary activity becomes demonstrating preference through iterative feedback rather than describing intent through text.
 
 ## Implications
 
-- Sean must consciously switch contexts between 'operational mode' (protocol-driven) and 'creative mode' (calibration-driven) to avoid applying rigid automation logic to aesthetic tasks.
-- The value of his personal vault shifts from being a repository of automated workflows to a training ground for taste calibration, requiring more manual curation than before.
+- Sean must invest in building a robust library of calibration artifacts early, as this will become the primary bottleneck for scaling his creative output.
+- The value of his Substack and job hunt materials lies not in the volume of content but in the distinctiveness of his taste, which requires continuous calibration.

@@ -2,31 +2,31 @@
 title: "Taste as Evaluation Function vs. Activity Proof"
 type: concept
 sources:
-  - knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md
+  - knowledge/connections/the-inversion-of-creative-labor-from-production-to-curation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-This mechanism defines the structural tension between quantifiable operational volume and qualitative judgment in automated systems. The system generates 'activity proof' via metrics like 'clusters_sampled' and 'concepts_written', but the actual value is derived from the 'fit_score' which requires nuanced judgment that cannot be fully automated. This creates a dependency where volume must be sufficient to allow taste to operate effectively, but not so high that it dilutes the signal. The mechanism reveals that automation can scale the search space, but it cannot replace the evaluation function that determines value within that space.
+This concept defines the shift in creative labor from generating artifacts to evaluating them against a personal aesthetic standard. In an agentic workflow, 'activity proof' (e.g., number of prompts sent) becomes irrelevant if the output lacks distinctiveness. The mechanism relies on the creator's ability to articulate their taste through evidence rather than description, turning the evaluation process into a feedback loop that refines the model's output. This creates a dependency where the quality of the input (taste articulation) directly determines the utility of the output, making taste a scalable but fragile asset.
 
 ## Context
 
-Sean's run data shows increasing 'clusters_sampled' (from 155 to 272) while 'concepts_written' also increases, suggesting an attempt to scale the evaluation function. However, the 'fit_score' remains the ultimate arbiter, meaning that without strong taste, increased activity yields diminishing returns in terms of actual opportunities. This insight is critical for optimizing the job hunt pipeline, as it highlights the need to balance agent throughput with human-in-the-loop calibration.
+Sean's vault synthesizer runs show a progression from 'prompting harder' to 'teaching taste.' The recent runs with qwen3.6-35b suggest that higher model fidelity allows for better taste transfer. However, the low 'connections_written' count relative to 'concepts_written' indicates that Sean is still struggling to encode his specific evaluative criteria into the system. This concept highlights the need for Sean to document his taste explicitly to reduce the cognitive load of evaluation.
 
 ## Evidence
 
-> The run metrics show a clear increase in 'clusters_sampled' from 155 on 2026-06-23 to 272 on 2026-07-02, indicating a scaling of the evaluation activity.
+> You don't get a person from a description of a person, and you sure as hell don't get one out of a single prompt.
 
-> The job feed explicitly categorizes roles by 'fit_score' (e.g., '⭐ 3/5', '⭐ 2/5'), which serves as the final evaluation function that overrides raw activity metrics.
+> The value of his creative portfolio shifts from the volume of work produced to the distinctiveness of his aesthetic filter.
 
 ## Examples
 
-- On 2026-07-02, the system sampled 272 clusters and wrote 141 concepts, yet only identified 1 medium fit and 5 weak fits, showing the gap between activity volume and high-value outcomes.
-- The 'Medium Fits' section lists roles with specific rationales like 'Staff PM title exceeds Sean's eligible bands,' which is a taste-driven evaluation rather than a simple keyword match.
+- Sean's use of 'rejected_count' as a metric implies he is actively evaluating output against a standard, not just generating content.
+- The phrase 'recognizably mine' suggests that taste is the primary criterion for success in his current workflow.
 
 ## Related Concepts
 
-[[Job Hunt as Sales Pipeline]] [[Signal vs. Safety Trade-off in Resume Architecture]]
+[[Demonstration Over Declaration]] [[The Taste-Fidelity Decoupling in Creative Production]] [[Curation as the New Scarcity]]

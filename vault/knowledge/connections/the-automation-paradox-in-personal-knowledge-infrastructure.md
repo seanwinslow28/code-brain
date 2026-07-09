@@ -2,32 +2,32 @@
 title: "The Automation Paradox in Personal Knowledge Infrastructure"
 type: connection
 connects:
-  - The Illusion of Competence in Automated Systems
-  - Supervision as the New AI Edge
-  - Negative Capability / Failure Literacy
-created: 2026-06-29
-updated: 2026-06-29
+  - The Taste-Fidelity Decoupling in Creative Production
+  - Tacit Knowledge Erosion vs. Automation Scale
+  - Taste as Evaluation Function vs. Activity Proof
+created: 2026-07-06
+updated: 2026-07-06
 ---
 
 ## Synthesis
 
-Sean’s drive to automate his personal vault and job hunt creates a tension where increased automation reduces routine cognitive load but simultaneously increases the severity of potential failures by eroding his manual recovery skills. This paradox means that every automation decision must be weighed not just by its efficiency gain, but by the 'skill atrophy' it causes in the human operator. The consequence is that Sean must intentionally preserve 'manual mode' capabilities or design for rapid re-learning to avoid being trapped by systems he can no longer debug.
+This connection reveals a tension between the goal of automation (efficiency, scale) and the requirement for creative authority (taste, uniqueness). As Sean builds more automated workflows (like the fleet memory index or discovery runs), he risks creating a system that optimizes for speed and volume at the expense of the very 'taste' that defines his unique value. The consequence is a potential erosion of his professional identity if he becomes merely a manager of generic outputs rather than a creator of distinct work.
 
 ## Threads
 
-### [[The Illusion of Competence in Automated Systems]]
+### [[The Taste-Fidelity Decoupling in Creative Production]]
 
-> Every automation transfers work from execution to monitoring, exception handling, recovery, and skill retention.
+> The lesson is 'context is the difference between the median and you'; the cartoon scene + pencil-test are the worked example, explicitly not the point.
 
-### [[Supervision as the New AI Edge]]
+### [[Tacit Knowledge Erosion vs. Automation Scale]]
 
-> Automation often removes easy work and leaves humans with rarer, harder, higher-stakes supervision failures.
+> illustrators and character artists trying to get AI image generators to match their own drawing style and keep a character consistency across images
 
-### [[Negative Capability / Failure Literacy]]
+### [[Taste as Evaluation Function vs. Activity Proof]]
 
-> For each automation: normal path, detection signal, human handoff, recovery affordance, skill-atropy risk.
+> Segment reframed to the AI-curious-but-burned maker (not anti-AI forums)
 
 ## Implications
 
-- Sean should implement 'chaos engineering' for his vault agents to periodically break automations and force manual recovery practice.
-- Job hunt automation must include explicit 'skill retention' steps so he doesn't lose the ability to write or strategize manually when needed for interviews.
+- Sean must design his automation systems to explicitly preserve and enhance his taste, rather than just scaling output volume.
+- His Substack content should focus on 'taste calibration' techniques for creatives using AI, positioning him as a guide through the paradox.

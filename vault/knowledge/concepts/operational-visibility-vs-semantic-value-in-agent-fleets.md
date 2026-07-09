@@ -2,31 +2,31 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-automation-velocity-and-creative-friction.md
+  - knowledge/connections/the-decoupling-of-operational-health-from-strategic-efficacy.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-This mechanism defines the inverse relationship between the ease of monitoring an agent's operational state and the actual quality of its output. As automation scales, visibility into binary health (up/down) increases, but visibility into semantic integrity (contextual completeness, accuracy) decreases because it requires deeper, more expensive inspection. The system optimizes for uptime metrics while degrading the informational value of the data it produces.
+This tension arises when the governance of professional output is delegated to systems that only verify operational health, not semantic truth. The mechanism involves a binary health reporting layer that validates process existence and network connectivity but fails to validate the semantic completeness of the data pipeline. Consequently, agents report success based on infrastructure metrics while the actual knowledge produced lacks the necessary depth or context for strategic utility.
 
 ## Context
 
-Sean's fleet monitoring likely tracks whether vault-synthesizer processes are running, but not whether they successfully accessed all necessary resources. This gap allows high-volume, low-value runs to pass as successful, masking the 'friction deficit' where errors go unnoticed due to reduced human engagement.
+Sean faces a critical inversion where his monitoring setup fails to detect when agents are idle or blocked by infrastructure limitations like missing MCP connections. This leads to undetected productivity loss because the system validates that the agent is running, not that it is producing valuable semantic output.
 
 ## Evidence
 
-> The operational health of agents directly impacts the cost-effectiveness of agentic workflows.
+> The health of the autonomous agent fleet, such as vault-indexer and vault-synthesizer, is directly tied to the overall infrastructure health of Sean's systems.
 
-> If an agent is unhealthy, it may incur unnecessary costs or disrupt other automation tasks.
+> Sean must redefine 'health' metrics to include semantic output quality and task completion against strategic goals, not just process uptime.
 
 ## Examples
 
-- A synthesizer completing a run in 2700 seconds but producing concepts with missing context due to MCP failures.
-- Monitoring dashboards showing green status for agents that are functionally blind to certain data sources.
+- The fleet's health monitoring mechanism validates process existence and network connectivity but fails to validate the semantic completeness of the data pipeline.
+- When physical machines go offline, agents that depend on them become non-functional, yet the orchestration layer may still report 'healthy' status.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Silent Failure Propagation in Agent Fleets]]
+[[The Illusion of Health in Autonomous Systems]] [[Agent Health Monitoring]]
