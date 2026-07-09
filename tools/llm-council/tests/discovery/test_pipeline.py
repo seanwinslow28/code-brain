@@ -453,9 +453,11 @@ async def test_empty_bundle_session_carries_velocity_keys():
 
 
 @pytest.mark.asyncio
-async def test_invariant_velocity_cannot_perturb_the_gate():
-    # THE MOAT: verified set + citation metrics identical velocity on vs off (weight defaults to 0),
+async def test_invariant_velocity_cannot_perturb_the_gate(monkeypatch):
+    # THE MOAT: verified set + citation metrics identical velocity ON (non-zero weight) vs off,
     # and no velocity string leaks into evidence urls/quotes.
+    # Velocity now actively re-ranks scores; the gate must remain byte-identical anyway.
+    monkeypatch.setattr("council.discovery.scoring.VELOCITY_WEIGHT", 0.3)
     g1, f1 = _one_point_bundle_and_fuse()
     off = await run_discovery(topic="pm tools", lens="pm", tier="standard", api_key="k",
                               gather_fn=g1, fuse_fn=f1, supplement=False, velocity_provider=None)
@@ -467,3 +469,6 @@ async def test_invariant_velocity_cannot_perturb_the_gate():
     assert off.session["dropped"] == on.session["dropped"]
     assert off.session["citation_precision"] == on.session["citation_precision"]
     assert off.session["citation_recall"] == on.session["citation_recall"]
+    # velocity genuinely did something under the non-zero weight: the on-run's markdown leads
+    # with a velocity line in _why_now, while the off-run shows only the recency note.
+    assert on.markdown != off.markdown

@@ -131,7 +131,7 @@ def score_opportunity(
     # flat signal) leaves value_base untouched. None-check (NOT `or`): explicit 0.0 forces it off.
     weight = VELOCITY_WEIGHT if velocity_weight is None else velocity_weight
     vel_norm = velocity.normalized if velocity is not None else VELOCITY_NEUTRAL
-    centered = (vel_norm - 0.5) * 2.0
+    centered = (vel_norm - VELOCITY_NEUTRAL) * 2.0
     value = _clamp(value_base * (1.0 + weight * centered))
 
     # confidence ← independent sources (dominant) + model consensus (light)

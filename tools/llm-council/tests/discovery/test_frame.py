@@ -109,3 +109,15 @@ def test_frame_pm_without_provider_is_unchanged_default_path():
     bundle = _bundle(["https://a.com/1"])
     cards, _ = frame_pm([_vpp("X", 3, ["https://a.com/1"])], FusionResult(), bundle, today=TODAY)
     assert cards[0].score.velocity_source == "" and cards[0].why_now  # no provider -> neutral
+
+
+def test_velocity_signal_never_leaks_into_evidence_or_quotes():
+    bundle = _bundle(["https://a.com/1"])
+    v = _vpp("Leak check", 4, ["https://a.com/1"])
+    prov = _FakeProvider({"leak check": _sig("leak check", 0.9)})
+    cards, _ = frame_pm([v], FusionResult(), bundle, today=TODAY, topic="pm",
+                        velocity_provider=prov, velocity_weight=0.3)
+    c = cards[0]
+    assert c.evidence_urls == v.supporting_urls      # unchanged by velocity
+    assert c.quotes == v.point.quotes                # unchanged by velocity
+    assert c.score.velocity_source == "pytrends"     # signal WAS attached (to the score only)

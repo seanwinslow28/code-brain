@@ -112,6 +112,8 @@ class PytrendsProvider:
             except Exception as e:  # rate-limit / network / parse — degrade this group to None
                 _logger.warning("velocity fetch failed for %s (%s) — those cards degrade.", group, e)
                 series_map = {}
+            if not isinstance(series_map, dict):
+                series_map = {}
             for t in group:
                 vals = series_map.get(t) or []
                 if len(vals) < 2:

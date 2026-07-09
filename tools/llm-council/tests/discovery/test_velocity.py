@@ -82,6 +82,18 @@ def test_provider_never_raises_when_fetch_explodes():
     assert out == {"a": None, "b": None}
 
 
+def test_measure_batch_chunks_terms_beyond_five():
+    calls = []
+    def fake_fetch(terms, window_days):
+        calls.append(list(terms))
+        return {t: [10, 20, 30, 40, 50] for t in terms}
+    p = PytrendsProvider(fetch=fake_fetch)
+    terms = [f"term {i}" for i in range(7)]
+    out = p.measure_batch(terms)
+    assert len(calls) == 2 and [len(c) for c in calls] == [5, 2]   # chunked by 5
+    assert all(out[t] is not None for t in terms)                   # all resolved
+
+
 def test_get_velocity_provider_env_gating(monkeypatch):
     monkeypatch.delenv("DISCOVERY_VELOCITY", raising=False)
     assert get_velocity_provider() is None                         # default: off
