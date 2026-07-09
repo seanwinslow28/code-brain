@@ -21,6 +21,7 @@ import re
 
 from council.discovery.evidence import EvidenceBundle
 from council.discovery.fusion import CandidatePainPoint
+from council.discovery.velocity import VelocitySignal, VELOCITY_NORM_NEUTRAL
 
 # --- tunable constants (sensitivity-test before trusting absolute values) ---
 VALUE_WEIGHTS = {"importance": 0.45, "reach": 0.40, "recency": 0.15}   # sum 1.0
@@ -34,6 +35,8 @@ SOURCE_CEIL = 5           # distinct sources for full source credit
 CONF_FLOOR = 0.5          # a single-source pain is halved, never zeroed
 CONF_SRC_WT = 0.7         # independent sources dominate confidence
 CONF_CONSENSUS_WT = 0.3   # model agreement is a lighter, separate signal
+VELOCITY_WEIGHT = 0.0     # E4: velocity term OFF by default — ship moves no card's rank until raised
+VELOCITY_NEUTRAL = 0.5    # normalized velocity of a flat / absent trend (no nudge)
 
 
 @dataclass(frozen=True)
@@ -51,6 +54,10 @@ class ScoreBreakdown:
     distinct_sources: int
     distinct_domains: int
     evidence_date: str          # parsed date used, or ""
+    velocity: float = VELOCITY_NEUTRAL   # 0-1 normalized; 0.5 = flat / no signal
+    velocity_raw: float = 0.0            # raw slope (regression-visibility); 0.0 when no signal
+    velocity_source: str = ""            # "pytrends" when a real signal is attached, else ""
+    velocity_term: str = ""              # the term measured, else ""
 
 
 def _clamp(x: float, lo: float = 0.0, hi: float = 1.0) -> float:
@@ -83,6 +90,8 @@ def score_opportunity(
     *,
     today: date | None = None,
     value_weights: dict[str, float] | None = None,
+    velocity: VelocitySignal | None = None,
+    velocity_weight: float | None = None,
 ) -> ScoreBreakdown:
     today = today or date.today()
     value_weights = value_weights or VALUE_WEIGHTS
@@ -114,9 +123,16 @@ def score_opportunity(
         recency = max(0.5 ** (age / HALFLIFE_DAYS), RECENCY_FLOOR)
         evidence_date = d.isoformat()
 
-    value = _clamp(value_weights["importance"] * importance
-                   + value_weights["reach"] * reach
-                   + value_weights["recency"] * recency)
+    value_base = _clamp(value_weights["importance"] * importance
+                        + value_weights["reach"] * reach
+                        + value_weights["recency"] * recency)
+
+    # E4 — bounded velocity nudge. centered=0 when flat/absent, so the default weight 0 (and any
+    # flat signal) leaves value_base untouched. None-check (NOT `or`): explicit 0.0 forces it off.
+    weight = VELOCITY_WEIGHT if velocity_weight is None else velocity_weight
+    vel_norm = velocity.normalized if velocity is not None else VELOCITY_NEUTRAL
+    centered = (vel_norm - 0.5) * 2.0
+    value = _clamp(value_base * (1.0 + weight * centered))
 
     # confidence ← independent sources (dominant) + model consensus (light)
     source_corroboration = _clamp(0.7 * min(distinct_domains / DOMAIN_CEIL, 1.0)
@@ -135,4 +151,8 @@ def score_opportunity(
         consensus_ratio=round(consensus_ratio, 4),
         intensity=intensity, engagement_sum=eng_sum, distinct_sources=distinct_sources,
         distinct_domains=distinct_domains, evidence_date=evidence_date,
+        velocity=round(vel_norm, 4),
+        velocity_raw=round(velocity.slope, 4) if velocity is not None else 0.0,
+        velocity_source=velocity.source if velocity is not None else "",
+        velocity_term=velocity.term if velocity is not None else "",
     )

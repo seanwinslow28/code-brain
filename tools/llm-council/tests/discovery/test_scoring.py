@@ -115,3 +115,49 @@ def test_domain_count_and_source_count_use_different_inputs():
     assert s.distinct_domains == 2                 # from supporting_urls
     assert s.distinct_sources == 1                 # only the matched record's source_name
     assert s.engagement_sum == 50                  # only the matched record's engagement
+
+
+from council.discovery.scoring import VELOCITY_WEIGHT
+from council.discovery.velocity import VelocitySignal
+
+
+def _sig(normalized):
+    return VelocitySignal(term="t", slope=(normalized - 0.5) * 2, normalized=normalized,
+                          source="pytrends", window_days=90, points=5)
+
+
+def test_velocity_weight_defaults_to_zero():
+    assert VELOCITY_WEIGHT == 0.0
+
+
+def test_no_velocity_signal_is_neutral_and_marks_empty_source():
+    s = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY)
+    assert s.velocity == 0.5 and s.velocity_raw == 0.0
+    assert s.velocity_source == "" and s.velocity_term == ""
+
+
+def test_default_weight_leaves_composite_identical_even_with_a_rising_signal():
+    base = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY)
+    with_sig = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY, velocity=_sig(0.95))
+    assert with_sig.composite == base.composite            # weight 0 -> byte-identical
+    assert with_sig.velocity == 0.95 and with_sig.velocity_source == "pytrends"  # but reported
+
+
+def test_positive_weight_boosts_rising_and_discounts_falling_bounded():
+    base = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY)
+    up = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY,
+                           velocity=_sig(1.0), velocity_weight=0.2)
+    down = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY,
+                             velocity=_sig(0.0), velocity_weight=0.2)
+    assert up.composite > base.composite > down.composite
+    assert up.value <= 1.0                                 # clamped
+
+
+def test_explicit_zero_weight_forces_term_off_not_the_constant():
+    # 0.0 is falsy: an `or` fallback here would silently apply the module weight. Guard it.
+    up_default = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY,
+                                   velocity=_sig(1.0), velocity_weight=0.5)
+    off = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY,
+                            velocity=_sig(1.0), velocity_weight=0.0)
+    base = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY)
+    assert off.composite == base.composite and up_default.composite > base.composite
