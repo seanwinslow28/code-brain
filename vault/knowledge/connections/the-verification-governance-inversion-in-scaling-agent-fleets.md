@@ -2,32 +2,32 @@
 title: "The Verification-Governance Inversion in Scaling Agent Fleets"
 type: connection
 connects:
-  - Operational Visibility vs. Semantic Value in Agent Fleets
-  - Probe Design vs. Routing Compliance in Agentic Workflows
-  - SRE Error Budget for Agents
-created: 2026-07-05
-updated: 2026-07-05
+  - The Taste-Fidelity Decoupling in Creative Production
+  - Velocity vs. Judgment in MCP Strengthening
+  - Throughput vs. Taste Memory Tension
+created: 2026-07-07
+updated: 2026-07-07
 ---
 
 ## Synthesis
 
-This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. As the fleet scales its sampling capacity and concept production, the verification governance cannot keep pace, causing Sean to lose faith in the system's output quality. The consequence is that Sean must redefine success metrics for his agents to include signal quality and learning velocity, rather than relying solely on task completion rates or volume.
+This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. As Sean scales his fleet from 3 to over 150 concepts per run, the verification mechanisms fail to keep pace with the volume of generated content. This inversion means that higher automation velocity actually increases the cognitive load on Sean, as he must spend more time correcting generic output than generating original content.
 
 ## Threads
 
-### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+### [[The Taste-Fidelity Decoupling in Creative Production]]
 
-> As the fleet scales its sampling capacity (clusters_sampled), there is a latent tension between generating more connections and maintaining the signal-to-noise ratio.
+> There is a fundamental tension between the agent's drive for statistical coherence and the creator's need for aesthetic deviation.
 
-### [[Probe Design vs. Routing Compliance in Agentic Workflows]]
+### [[Velocity vs. Judgment in MCP Strengthening]]
 
-> The tension lies between the efficiency of linear routing and the necessity of probe design in complex domains.
+> There is a critical tension between the increasing volume of automated output and the stagnating depth of strategic connections.
 
-### [[SRE Error Budget for Agents]]
+### [[Throughput vs. Taste Memory Tension]]
 
-> The error budget must account for the cost of probes that fail to yield signal, treating them as necessary exploration costs rather than pure failures in execution.
+> There is a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory.
 
 ## Implications
 
-- Sean must redefine success metrics for his agents to include signal quality and learning velocity, not just task completion rates.
-- The fleet's architecture needs to support parallel probe execution with independent kill switches to prevent cascading failures in complex domains.
+- Sean must implement stricter negative constraints in his prompt chains to prevent the agent from drifting into generic prose during long-form generation.
+- The current scaling strategy is unsustainable because it increases legibility debt without improving strategic insight.

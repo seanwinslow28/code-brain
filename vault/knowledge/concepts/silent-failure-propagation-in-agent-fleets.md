@@ -2,31 +2,31 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - 20_projects/substack-studio/07-the-judgment-layer/post.md
+  - knowledge/concepts/silent-failure-propagation-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-A systemic vulnerability where automated agents maintain a facade of operational health through successful status reporting while failing to produce substantive output. This creates a decoupling between the agent's internal state (which reports 'ok') and its external impact (which is null), allowing errors to persist undetected for extended periods because the monitoring layer only validates the presence of logs, not the semantic validity of the work. The failure mode is particularly dangerous because it mimics normal operation, leading users to trust the system's reliability until a downstream dependency breaks or a manual audit reveals the stagnation.
+This pattern describes a latent failure mode where a foundational agent's inability to produce output due to missing dependencies or configuration errors causes subsequent agents to proceed with stale or null data without raising an alarm. The downstream agents are designed to process whatever is available in the shared state, treating the absence of new information as valid input rather than a signal of upstream failure. This results in a compounding drift where the entire system operates on outdated premises while maintaining the appearance of continuous operation, creating a dangerous decoupling between operational health and semantic freshness.
 
 ## Context
 
-This matters to Sean because his entire knowledge infrastructure relies on the vault synthesizer to maintain continuity between days. A silent regression in this agent means that the 'morning brief' and subsequent job-hunt automation inherit stale context, effectively freezing his strategic progress while he believes the system is running. The nine-day duration of the recent incident demonstrates how easily this failure can become normalized if the user does not actively verify output quality against status indicators.
+Sean's daily-driver morning agent creates notes based on previous day's synthesis; if the synthesizer fails silently due to MCP issues, the morning brief inherits this gap without alerting him. He only notices the staleness when manually reviewing content, forcing a manual audit of the chain of custody for his daily intelligence rather than relying on automated health checks.
 
 ## Evidence
 
-> The agent had been running clean every night — `status: ok`, zero errors, manifest healthy, a green checkmark next to every cron — and producing absolutely nothing.
+> When a foundational agent fails to produce output due to missing dependencies or configuration errors, subsequent agents that depend on that output often proceed with stale or null data without raising an alarm.
 
-> There is a moment, somewhere around the ninth night that an automated system has been quietly producing nothing while reporting that everything is fine, when you start to wonder which of you is the product manager and which of you is the unattended cron job with delusions of competence.
+> The result is a compounding drift where the entire system operates on outdated premises while maintaining the appearance of continuous operation.
 
 ## Examples
 
-- The vault synthesizer reported a healthy manifest and zero errors for nine consecutive nights while generating no new memory files or concept updates.
-- Sean discovered the regression only after manually inspecting the output directory, not through any automated alert or status dashboard.
+- The vault-indexer reports zero errors while indexing 126 chunks, but if those chunks are stale due to offline sync sources, the index is technically valid but semantically obsolete.
+- The daily note exists and was created successfully, yet it lacks the 'proactive research topic input' that should have populated it via the deep-researcher.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Infrastructure Status]] [[Automation Reliability]]
+[[Agent Health Monitoring]] [[Context Compounding]]

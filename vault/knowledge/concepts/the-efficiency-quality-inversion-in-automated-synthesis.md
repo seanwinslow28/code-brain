@@ -2,31 +2,31 @@
 title: "The Efficiency-Quality Inversion in Automated Synthesis"
 type: concept
 sources:
-  - knowledge/connections/the-efficiency-quality-inversion-in-automated-synthesis.md
+  - knowledge/concepts/the-efficiency-quality-inversion-in-automated-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-This mechanism describes a systemic inversion where increasing the operational throughput of an automated synthesis fleet directly correlates with a decrease in the semantic density and verifiable quality of its output. As the system optimizes for volume metrics such as concepts written, it inadvertently creates a 'slop' effect that masks incompetence behind high activity levels. This erosion of signal-to-noise ratio forces the human operator to expend more cognitive energy on verification than on insight generation, ultimately undermining the utility of the knowledge vault.
+This invariant describes a phase transition where increasing the volume of automated concept generation degrades semantic novelty because the synthesizer prioritizes throughput over taste. As the system scales from low-volume runs to high-throughput ingestion, it fills the vault with redundant or weakly connected ideas, creating 'legibility debt' that forces the user to spend more cognitive energy filtering noise than gaining insight. The mechanism is a failure of the rejection threshold: when clusters are sampled at scale, the marginal utility of each new artifact decreases, and the system stops distinguishing between high-signal connections and low-signal filler.
 
 ## Context
 
-Sean is observing his fleet's concept production jump from 45 to over 150 per run while connection quality stagnates. This trend indicates that the automation is prioritizing activity over value, creating a trust deficit where Sean can no longer rely on the fleet's output as a source of truth without exhaustive manual auditing.
+Sean's vault synthesizer runs show a dramatic increase in concepts written (from 3 to 150) and clusters sampled (from 5 to 272) over several weeks. However, the number of connections written has remained relatively flat or declined, suggesting that while the system is ingesting more data, it is failing to create high-value links. This creates a tension where the vault becomes harder to navigate rather than easier, as the user must manually curate the output of an increasingly noisy agent.
 
 ## Evidence
 
-> There is a critical tension between the fleet's increasing operational efficiency and its decreasing semantic value. As the system scales up concept production (e.g., from 45 to 150 concepts per run), it optimizes for throughput rather than insight, creating a 'slop' effect where volume masks incompetence.
+> concepts_written: 153 connections_written: 39 clusters_sampled: 255 rejected_count: 35
 
-> This mechanism describes a systemic erosion of confidence in automated knowledge synthesis, where the volume of generated artifacts (concepts and connections) outpaces their verifiable quality.
+> concepts_written: 45 connections_written: 30 clusters_sampled: 155 rejected_count: 78
 
 ## Examples
 
-- The fleet's evaluation metrics should shift from 'concepts written' to 'rival hypotheses considered' to prevent shallow synthesis.
-- The current trajectory of increasing concept counts without corresponding increases in connection quality indicates a failure in the double-loop learning mechanism.
+- On July 5th, the synthesizer wrote 153 concepts but only 39 connections, indicating a high volume of isolated facts without integration.
+- On June 23rd, the system rejected 78 clusters out of 155 sampled, showing that nearly half the attempted synthesis was deemed insufficiently valuable by the model.
 
 ## Related Concepts
 
-[[Slop as a Trust Deficit]] [[Double-loop learning]] [[Agent Fleet Observability Dashboard]]
+[[Legibility Debt as a Supervision Failure Mode]] [[Throughput vs. Taste Memory Tension]]

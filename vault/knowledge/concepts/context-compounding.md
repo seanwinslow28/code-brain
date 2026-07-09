@@ -2,31 +2,31 @@
 title: "Context Compounding"
 type: concept
 sources:
-  - 20_projects/substack-studio/MIGRATION-REPORT.md
+  - knowledge/concepts/context-compounding.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-This pattern refers to the accumulation of editorial and research artifacts across multiple files to create a dense, reusable knowledge base that reduces the cognitive load for future agentic writing tasks. Instead of treating each post as an isolated event, the system consolidates 'spine' documents, deep-dive research JSONs, and style anchors into a unified folder structure. This compounding effect allows subsequent agents to retrieve not just the immediate draft context, but the entire historical reasoning chain, including discovery sessions and opportunity reports, thereby increasing the fidelity and consistency of the generated content over time.
+Context compounding is a cognitive load phenomenon where the accumulation of prior context windows dilutes the weight of new, critical instructions. As the memory core grows through repeated agent runs, the model's attention mechanism is forced to distribute focus across an expanding set of historical data points. This causes the 'real instructions' to lose their relative importance, leading to a systemic failure in following specific taste constraints.
 
 ## Context
 
-Sean's Substack workflow relies on deep research and consistent voice. By consolidating 83 files (including 5 deep-dives and 2 discovery JSONs) into `substack-studio`, he ensures that the 'Raising Claude' series benefits from a growing reservoir of contextual evidence, rather than starting each post from scratch.
+Sean observes that as his vault expands, the synthesizer begins to ignore explicit taste directives because they are buried under layers of accumulated, unpruned context from previous runs. This creates a tension between the desire for comprehensive memory and the need for precise, high-fidelity execution in creative production.
 
 ## Evidence
 
-> research/ — opportunity-report-creative-agentic.md (spine) + deep-dives/ (5) + last30days/ (6) + discovery/ (2 ledgers + discovery-sessions/ 3 JSONs).
+> A bloated memory makes the model ignore the real instructions.
 
-> SERIES-COMMAND-CENTER.md (the drafts README.md, renamed so it doesn't collide with the stub).
+> A cognitive load phenomenon where the accumulation of prior context windows dilutes the weight of new, critical instructions.
 
 ## Examples
 
-- The inclusion of 'hero-prompt.txt' and 'kits' in each post folder allows for rapid regeneration of visual assets without re-querying the model.
-- The use of '_seed.md' files provides a structured starting point for new posts, leveraging previous editorial decisions.
+- Runs with 250+ clusters sampled showing a drop in connection quality or relevance, as the model struggles to prioritize recent taste signals over older data.
+- The 'rejected_count' metric spiking when the context window exceeds the model's effective attention span for specific taste constraints.
 
 ## Related Concepts
 
-[[Context Compounding]] [[Creative Studio Workflows]]
+[[Memory Rot and Lifecycle Management]] [[The Taste-Fidelity Decoupling in Creative Production]]

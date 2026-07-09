@@ -2,31 +2,31 @@
 title: "Demonstration Over Declaration"
 type: concept
 sources:
-  - knowledge/concepts/demonstration-over-declaration.md
+  - knowledge/connections/the-taste-fidelity-decoupling-in-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-07-09
+updated: 2026-07-09
 ---
 
 ## Definition
 
-This mechanism transforms abstract professional claims into refutable public tests that allow external observers to verify outcomes through direct interaction rather than trusting narrative assertions. It requires the creation of tangible artifacts where a reviewer can run a server, feed it bad intent, see the audit fail, and observe a better agent outcome. This approach signals quality without inviting excessive support requests by making the value proposition immediately verifiable and reducing the cognitive load on maintainers who must review external contributions.
+This mechanism outlines the operational shift required when text-based instructions fail to capture complex aesthetic preferences. It posits that effective calibration relies on demonstrating preference through iterative feedback loops rather than describing intent through static text prompts. This approach reduces the ambiguity inherent in natural language by providing concrete examples of desired outcomes, thereby tightening the feedback loop between human taste and machine output.
 
 ## Context
 
-Sean should prioritize falsifiable demos over broad contribution metrics to signal quality effectively in his job hunt and open-source presence. By providing explicit failure modes and evals, he demonstrates capability through proof-of-work rather than just describing it, which is critical for establishing trust in agentic engineering roles where governance judgment is paramount.
+Sean's increasing use of larger models (qwen3.6-35b) suggests an attempt to reduce the need for this intensive demonstration, yet the persistent need for high rejection rates indicates that declaration alone is insufficient. The data shows that even with superior models, the 'connections_written' metric remains low relative to clusters sampled, highlighting the difficulty of encoding taste without demonstration.
 
 ## Evidence
 
-> The missing move is to turn each claim into a refutable public test: can another person run the MCP server, feed it a bad intent spec, see the audit fail, fix it, and observe a better agent outcome?
+> This gap necessitates a shift from 'prompt engineering' to 'calibration engineering,' where the primary activity becomes demonstrating preference through iterative feedback rather than describing intent through text.
 
-> Portfolio artifacts should prioritize falsifiable demos over broad contribution metrics to signal quality without inviting excessive support requests.
+> The tension lies between the agent's default statistical tendency toward the 'median' and the user's desire for unique aesthetic expression.
 
 ## Examples
 
-- Running an MCP server with a bad intent spec to demonstrate audit failure
-- Observing a better agent outcome after fixing the spec
+- Sean's run on 2026-07-07 wrote only 86 concepts from 144 clusters, requiring significant supervision to filter out non-distinctive outputs.
+- The shift from 'prompt engineering' to 'calibration engineering' where the primary activity becomes demonstrating preference through iterative feedback rather than describing intent through text.
 
 ## Related Concepts
 
-[[Boundary Object Theory]] [[Agentic Engineering Signal]]
+[[The Taste-Fidelity Decoupling in Creative Production]] [[Supervision as the New AI Edge]]
