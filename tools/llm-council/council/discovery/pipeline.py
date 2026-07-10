@@ -41,6 +41,18 @@ def _normalize_segment(segment: str) -> str:
     return " ".join(_SEGMENT_OPERATOR_CHARS.sub(" ", segment or "").split())
 
 
+def _write_session(sessions_dir: Path | None, session_id: str, payload: dict) -> None:
+    """Persist a session JSON. Never raises: a failed diagnostic write must not mask the
+    run result or eat the spend record — warn on stderr and move on."""
+    if sessions_dir is None:
+        return
+    try:
+        sessions_dir.mkdir(parents=True, exist_ok=True)
+        (sessions_dir / f"{session_id}.json").write_text(json.dumps(payload, indent=2))
+    except Exception as write_err:
+        print(f"[discovery] failed to persist session {session_id}: {write_err}", file=sys.stderr)
+
+
 @dataclass
 class DiscoveryResult:
     markdown: str
@@ -84,12 +96,15 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
         md = render_ledger(topic=topic, lens=lens, tier=tier, segment=segment, cards=[],
                            quote_bank=[], fusion_result=FusionResult(), cost_usd=gather_cost,
                            dropped_count=0, supplement=None, verify_mode="substring-only")
-        return DiscoveryResult(markdown=md, cost_usd=gather_cost, verified_count=0, dropped_count=0,
-                               session={"id": session_id, "topic": topic, "empty": True,
-                                        "gather_status": gather_status,
-                                        "verify_mode": "substring-only",
-                                        "citation_precision": None, "citation_recall": None,
-                                        "velocity_mode": "off", "why_now_coverage": 0.0})
+        session = {"id": session_id, "topic": topic, "lens": lens, "tier": tier,
+                   "segment": segment, "empty": True, "cost_usd": gather_cost,
+                   "gather_status": gather_status,
+                   "verify_mode": "substring-only",
+                   "citation_precision": None, "citation_recall": None,
+                   "velocity_mode": "off", "why_now_coverage": 0.0}
+        _write_session(sessions_dir, session_id, session)
+        return DiscoveryResult(markdown=md, cost_usd=gather_cost, verified_count=0,
+                               dropped_count=0, session=session)
 
     fuse = fuse_fn or _fuse
     try:
@@ -98,15 +113,11 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
         cost = round((getattr(e, "cost", 0.0) or 0.0) + gather_cost, 4)
         fail_session = {
             "id": session_id, "topic": topic, "lens": lens, "tier": tier,
+            "segment": segment,
             "evidence_count": len(bundle.records), "gather_status": gather_status,
             "failed_stage": "fuse", "error": str(e), "cost_usd": cost,
         }
-        if sessions_dir is not None:
-            try:
-                sessions_dir.mkdir(parents=True, exist_ok=True)
-                (sessions_dir / f"{session_id}.json").write_text(json.dumps(fail_session, indent=2))
-            except Exception as write_err:  # never let a failed diagnostic write eat the spend record
-                print(f"[discovery] failed to persist failure session {session_id}: {write_err}", file=sys.stderr)
+        _write_session(sessions_dir, session_id, fail_session)
         raise DiscoveryFailed(str(e), cost_usd=cost, session=fail_session) from e
 
     # FUSE succeeded → its tokens are already billed. From here on ANY failure (verify / backfill /
@@ -170,6 +181,7 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
 
         session = {
             "id": session_id, "topic": topic, "lens": lens, "tier": tier,
+            "segment": segment,
             "evidence_count": len(bundle.records), "verified": verified_count,
             "dropped": dropped, "merged_count": len(merges), "cost_usd": cost,
             "gather_status": gather_status,
@@ -185,9 +197,7 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
             "velocity_mode": velocity_mode,
             "why_now_coverage": why_now_coverage,
         }
-        if sessions_dir is not None:
-            sessions_dir.mkdir(parents=True, exist_ok=True)
-            (sessions_dir / f"{session_id}.json").write_text(json.dumps(session, indent=2))
+        _write_session(sessions_dir, session_id, session)
 
         return DiscoveryResult(markdown=md, cost_usd=cost, verified_count=verified_count,
                                dropped_count=dropped, session=session, brief_markdown=brief_md)
@@ -197,13 +207,9 @@ async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segme
         cost = round(cost, 4)
         fail_session = {
             "id": session_id, "topic": topic, "lens": lens, "tier": tier,
+            "segment": segment,
             "evidence_count": len(bundle.records), "gather_status": gather_status,
             "failed_stage": "post-fuse", "error": str(e), "cost_usd": cost,
         }
-        if sessions_dir is not None:
-            try:
-                sessions_dir.mkdir(parents=True, exist_ok=True)
-                (sessions_dir / f"{session_id}.json").write_text(json.dumps(fail_session, indent=2))
-            except Exception as write_err:  # never let a failed diagnostic write eat the spend record
-                print(f"[discovery] failed to persist failure session {session_id}: {write_err}", file=sys.stderr)
+        _write_session(sessions_dir, session_id, fail_session)
         raise DiscoveryFailed(str(e), cost_usd=cost, session=fail_session) from e

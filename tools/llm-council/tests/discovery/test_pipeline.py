@@ -1,4 +1,5 @@
 # tests/discovery/test_pipeline.py
+import json
 import pytest
 from council.discovery.evidence import EvidenceBundle, EvidenceRecord
 from council.discovery.fusion import CandidatePainPoint, FusionResult
@@ -472,3 +473,89 @@ async def test_invariant_velocity_cannot_perturb_the_gate(monkeypatch):
     # velocity genuinely did something under the non-zero weight: the on-run's markdown leads
     # with a velocity line in _why_now, while the off-run shows only the recency note.
     assert on.markdown != off.markdown
+
+
+# --- D3 Slice A: session persistence ---------------------------------------
+
+
+def _empty_gather(gather_cost: float = 0.0):
+    async def gather_fn(**kw):
+        b = EvidenceBundle()
+        b.gather_cost_usd = gather_cost
+        return b, {"sonar": "ok: 0 records (0 found)"}
+    return gather_fn
+
+
+@pytest.mark.asyncio
+async def test_empty_bundle_session_is_persisted(tmp_path):
+    # THE LEAK: the empty-bundle early-return must write a session file when a dir is given.
+    sdir = tmp_path / "sessions"
+    res = await run_discovery(topic="x", lens="pm", tier="quick", api_key="k",
+                              gather_fn=_empty_gather(0.018), fuse_fn=None, sessions_dir=sdir)
+    files = list(sdir.glob("*.json"))
+    assert len(files) == 1
+    data = json.loads(files[0].read_text())
+    assert data["empty"] is True
+    assert data["lens"] == "pm"
+    assert data["tier"] == "quick"
+    assert data["segment"] == ""
+    assert data["cost_usd"] == pytest.approx(0.018)
+    assert data["id"] == res.session["id"]
+
+
+@pytest.mark.asyncio
+async def test_empty_bundle_bad_sessions_dir_does_not_crash(tmp_path):
+    # Mirror the fuse-fail guard: a broken sessions_dir must never mask the run result.
+    bad = tmp_path / "not-a-dir"
+    bad.write_text("i am a file")
+    res = await run_discovery(topic="x", lens="pm", tier="quick", api_key="k",
+                              gather_fn=_empty_gather(), fuse_fn=None, sessions_dir=bad)
+    assert res.verified_count == 0          # returned normally despite failed write
+
+
+@pytest.mark.asyncio
+async def test_success_session_records_segment(tmp_path):
+    bundle = EvidenceBundle()
+    bundle.add(EvidenceRecord("reddit", "r/pm", "https://r.com/1", "2026-06-18",
+                              "exports fail silently", 9))
+
+    async def gather_fn(**kw):
+        return bundle, {"sonar": "ok: 1 records (1 found)"}
+
+    async def fuse_fn(**kw):
+        return FusionResult(pain_points=[
+            CandidatePainPoint("Export loss", "s", ["exports fail silently"],
+                               ["https://r.com/1"], intensity=5),
+        ], blind_spots=[], tokens_in=100, tokens_out=50, web_calls=0)
+
+    sdir = tmp_path / "sessions"
+    res = await run_discovery(topic="pm tools", lens="pm", tier="standard", api_key="k",
+                              gather_fn=gather_fn, fuse_fn=fuse_fn, supplement=False,
+                              segment="developer", sessions_dir=sdir, scorer=None)
+    assert res.session["segment"] == "developer"
+    data = json.loads(next(iter(sdir.glob("*.json"))).read_text())
+    assert data["segment"] == "developer"
+
+
+@pytest.mark.asyncio
+async def test_failure_sessions_record_segment(tmp_path):
+    # fuse-failure diagnostic session must carry segment too (re-run affordance needs it).
+    from council.discovery.fusion import FusionError
+    from council.discovery.pipeline import DiscoveryFailed
+    bundle = EvidenceBundle()
+    bundle.add(EvidenceRecord("reddit", "r/pm", "https://r.com/1", "2026-06-18", "quote", 9))
+
+    async def gather_fn(**kw):
+        return bundle, {"sonar": "ok: 1 records (1 found)"}
+
+    async def fuse_fn(**kw):
+        raise FusionError("panel collapsed")
+
+    sdir = tmp_path / "sessions"
+    with pytest.raises(DiscoveryFailed):
+        await run_discovery(topic="x", lens="pm", tier="quick", api_key="k",
+                            gather_fn=gather_fn, fuse_fn=fuse_fn,
+                            segment="creative", sessions_dir=sdir)
+    data = json.loads(next(iter(sdir.glob("*.json"))).read_text())
+    assert data["segment"] == "creative"
+    assert data["failed_stage"] == "fuse"
