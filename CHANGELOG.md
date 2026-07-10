@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fusion Discovery — session persistence + D3 dashboard (2026-07-09)
+- **Slice A: Session store now persists by default.** `run_discovery()` persists all
+  session JSONs (including empty bundles) to a canonical store with resolution order:
+  explicit `sessions_dir` arg > `$DISCOVERY_SESSIONS_DIR` env > `vault/20_projects/research/.discovery-sessions/`
+  (guarded: skipped with stderr warning if the repo vault is absent); explicit `sessions_dir=None`
+  disables. All session payloads now record `segment` and empty sessions gain `lens`/`tier`/`cost_usd`
+  fields.
+- **Slice B: D3 run-history dashboard.** `uv run python -m council.discovery.dashboard --output <path>`
+  renders a self-contained HTML dashboard ($0, zero JS, local files only) over session JSONs + council-spend
+  ledgers: spend vs $10/day + $50/mo caps, per-run cost vs tier caps, verified/dropped trends, citation
+  precision/recall (E1), velocity_mode + why_now_coverage (E4), per-collector yield + FUSE success rate,
+  ledger/session discrepancy flags, copy-ready re-run commands (shlex-quoted), PM3 pain-taxonomy slot, honest
+  "thin: N runs" + "n/a (pre-E1/pre-E4)" labeling, and a foreign/malformed-files skip list. Suite:
+  326 → 364 passed (1 skipped).
+
 ### WWF5D §7 — council validation of the Step 4 robustness gate (2026-07-05)
 - **Ran the de-biased validation** from `docs/plans/wwf5d/round2/council-run-prompt.md`: 6
   blind, order-swapped council queries (`variance` profile) comparing Opus-with-WWF5D vs
