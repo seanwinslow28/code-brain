@@ -1,5 +1,6 @@
 # tests/discovery/test_dashboard.py
 import json
+import shlex
 
 import pytest
 
@@ -115,6 +116,30 @@ def test_load_spend_skips_non_dict_json(tmp_path):
     assert skipped and "malformed" in skipped[0][1]
 
 
+def test_load_spend_skips_non_dict_run_entries(tmp_path):
+    d = tmp_path / "health"
+    d.mkdir()
+    (d / "council-spend-2026-07-03.json").write_text(json.dumps({
+        "date": "2026-07-03", "total": 1.0,
+        "runs": [None, {"amount": 1.0, "tool": "discovery"}],
+    }))
+    days, skipped = load_spend(d)          # must not raise
+    # chosen behavior: a non-dict entry anywhere in runs makes the whole file malformed
+    # (consistent with the existing "malformed ledger" skip path for other shape errors)
+    assert days == []
+    assert skipped and "malformed" in skipped[0][1]
+
+
+def test_load_spend_skips_non_list_runs(tmp_path):
+    d = tmp_path / "health"
+    d.mkdir()
+    (d / "council-spend-2026-07-04.json").write_text(json.dumps({
+        "date": "2026-07-04", "total": 1.0, "runs": "oops",
+    }))
+    days, skipped = load_spend(d)          # must not raise
+    assert skipped and "malformed" in skipped[0][1]
+
+
 def test_load_sessions_tolerates_non_string_id(tmp_path):
     d = tmp_path / "s"
     _write_sessions(d, weird={"id": 12345, "verified": 3})
@@ -182,21 +207,26 @@ def test_discrepancies_both_directions():
 
 
 def test_rerun_command_full_and_pre_fix():
+    from council.discovery.pipeline import _REPO_ROOT
+
     full = rerun_command(_rows(SUCCESS_SESSION)[0])
-    assert full.startswith("uv run python -m council.discovery 'ai coding agents'")
+    assert full.startswith(f"cd {shlex.quote(str(_REPO_ROOT / 'tools' / 'llm-council'))} && "
+                            "uv run python -m council.discovery 'ai coding agents'")
     assert "--lens pm" in full and "--tier standard" in full
     assert "--segment developer" in full          # shlex.quote leaves bare-safe words unquoted
-    assert "--output vault/20_projects/research/ai-coding-agents-rerun-idea-ledger.md" in full
+    out = _REPO_ROOT / "vault" / "20_projects" / "research" / "ai-coding-agents-rerun-idea-ledger.md"
+    assert f"--output {shlex.quote(str(out))}" in full
     pre = rerun_command(_rows(PRE_E1_SESSION)[0])
     assert "--segment" not in pre                       # pre-fix run: segment unrecorded
 
 
 def test_rerun_command_quotes_hostile_topic():
-    import shlex
     hostile = {**SUCCESS_SESSION, "topic": 'x"; touch pwned; echo "y'}
     cmd = rerun_command(_rows(hostile)[0])
     assert "touch pwned" in cmd                      # content survives...
-    assert shlex.split(cmd)[5] == 'x"; touch pwned; echo "y'  # ...as ONE argv token (argv: uv run python -m council.discovery TOPIC)
+    argv = shlex.split(cmd)
+    topic_idx = argv.index("council.discovery") + 1
+    assert argv[topic_idx] == 'x"; touch pwned; echo "y'  # ...as ONE argv token
 
 
 def test_collector_yield_tolerates_non_dict_gather_status():

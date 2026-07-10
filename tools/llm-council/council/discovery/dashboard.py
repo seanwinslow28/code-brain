@@ -86,7 +86,7 @@ def load_spend(spend_dir: Path) -> tuple[list[SpendDay], list[tuple[str, str]]]:
             days.append(SpendDay(date=payload["date"],
                                  discovery_total=round(sum((r.get("amount", 0.0) for r in runs), 0.0), 4),
                                  runs=runs))
-        except (json.JSONDecodeError, OSError, KeyError, TypeError) as e:
+        except (json.JSONDecodeError, OSError, KeyError, TypeError, AttributeError) as e:
             skipped.append((path.name, f"malformed ledger ({e.__class__.__name__})"))
     days.sort(key=lambda d: d.date)
     return days, skipped
@@ -151,13 +151,18 @@ def _slug(text: str) -> str:
 
 
 def rerun_command(session: dict) -> str:
-    """Copy-ready re-run of this topic. Pre-fix sessions lack segment — omit the flag."""
-    parts = [f"uv run python -m council.discovery {shlex.quote(session.get('topic', ''))}",
+    """Copy-ready re-run of this topic — absolute paths + explicit cd, so the block works
+    from any CWD. Pre-fix sessions lack segment — omit the flag."""
+    from council.discovery.pipeline import _REPO_ROOT
+
+    parts = [f"cd {shlex.quote(str(_REPO_ROOT / 'tools' / 'llm-council'))} &&",
+             f"uv run python -m council.discovery {shlex.quote(session.get('topic', ''))}",
              f"--lens {session.get('lens', 'pm')}", f"--tier {session.get('tier', 'standard')}"]
     segment = session.get("segment")
     if segment:
         parts.append(f"--segment {shlex.quote(segment)}")
-    parts.append(f"--output vault/20_projects/research/{_slug(session.get('topic', ''))}-rerun-idea-ledger.md")
+    out = _REPO_ROOT / "vault" / "20_projects" / "research" / f"{_slug(session.get('topic', ''))}-rerun-idea-ledger.md"
+    parts.append(f"--output {shlex.quote(str(out))}")
     return " ".join(parts)
 
 
