@@ -115,3 +115,52 @@ def test_domain_count_and_source_count_use_different_inputs():
     assert s.distinct_domains == 2                 # from supporting_urls
     assert s.distinct_sources == 1                 # only the matched record's source_name
     assert s.engagement_sum == 50                  # only the matched record's engagement
+
+
+from council.discovery.scoring import VELOCITY_WEIGHT
+from council.discovery.velocity import VelocitySignal
+
+
+def _sig(normalized):
+    return VelocitySignal(term="t", slope=(normalized - 0.5) * 2, normalized=normalized,
+                          source="pytrends", window_days=90, points=5)
+
+
+def test_velocity_weight_defaults_to_zero():
+    assert VELOCITY_WEIGHT == 0.0
+
+
+def test_no_velocity_signal_is_neutral_and_marks_empty_source():
+    s = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY)
+    assert s.velocity == 0.5 and s.velocity_raw == 0.0
+    assert s.velocity_source == "" and s.velocity_term == ""
+
+
+def test_default_weight_leaves_composite_identical_even_with_a_rising_signal():
+    base = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY)
+    with_sig = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY, velocity=_sig(0.95))
+    assert with_sig.composite == base.composite            # weight 0 -> byte-identical
+    assert with_sig.velocity == 0.95 and with_sig.velocity_source == "pytrends"  # but reported
+
+
+def test_positive_weight_boosts_rising_and_discounts_falling_bounded():
+    base = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY)
+    up = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY,
+                           velocity=_sig(1.0), velocity_weight=0.2)
+    down = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY,
+                             velocity=_sig(0.0), velocity_weight=0.2)
+    assert up.composite > base.composite > down.composite
+    assert up.value <= 1.0                                 # clamped
+
+
+def test_explicit_zero_weight_forces_term_off_not_the_constant(monkeypatch):
+    # Module default set to non-zero so an explicit 0.0 must differ from it: under a buggy
+    # `weight = velocity_weight or VELOCITY_WEIGHT`, 0.0 would fall through to 0.5 and turn the
+    # term ON (composite > base) — this test now fails on that bug. The correct None-check keeps 0.0.
+    monkeypatch.setattr("council.discovery.scoring.VELOCITY_WEIGHT", 0.5)
+    base = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY)
+    off = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY,
+                            velocity=_sig(1.0), velocity_weight=0.0)
+    up_default = score_opportunity(_pt(), [], EvidenceBundle(), today=TODAY, velocity=_sig(1.0))
+    assert off.composite == base.composite      # explicit 0.0 forces term OFF despite non-zero default
+    assert up_default.composite > base.composite  # None -> falls back to the (now 0.5) module default
