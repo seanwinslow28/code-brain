@@ -12,3 +12,11 @@ def _no_web_keys(monkeypatch):
     monkeypatch.delenv("EXA_API_KEY", raising=False)
     monkeypatch.delenv("BRAVE_API_KEY", raising=False)
     yield
+
+
+@pytest.fixture(autouse=True)
+def _hermetic_sessions_dir(tmp_path, monkeypatch):
+    """Persist-by-default (D3 Slice A) must never write into the real vault during tests:
+    any test that omits sessions_dir resolves to a per-test tmp dir via the env override."""
+    monkeypatch.setenv("DISCOVERY_SESSIONS_DIR", str(tmp_path / "hermetic-sessions"))
+    yield
