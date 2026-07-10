@@ -15,7 +15,7 @@ _ID_DATE = re.compile(r"^(\d{4})(\d{2})(\d{2})-")
 
 
 def _session_date(session_id: str) -> str:
-    m = _ID_DATE.match(session_id or "")
+    m = _ID_DATE.match(str(session_id or ""))
     return f"{m.group(1)}-{m.group(2)}-{m.group(3)}" if m else ""
 
 
@@ -76,6 +76,9 @@ def load_spend(spend_dir: Path) -> tuple[list[SpendDay], list[tuple[str, str]]]:
     for path in sorted(spend_dir.glob("council-spend-*.json")):
         try:
             payload = json.loads(path.read_text())
+            if not isinstance(payload, dict):
+                skipped.append((path.name, "malformed ledger (not an object)"))
+                continue
             runs = [r for r in payload.get("runs", []) if r.get("tool") == "discovery"]
             days.append(SpendDay(date=payload["date"],
                                  discovery_total=round(sum((r.get("amount", 0.0) for r in runs), 0.0), 4),

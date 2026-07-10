@@ -104,3 +104,20 @@ def test_load_spend_skips_malformed(tmp_path):
     days, skipped = load_spend(d)
     assert days == []
     assert skipped and "malformed" in skipped[0][1]
+
+
+def test_load_spend_skips_non_dict_json(tmp_path):
+    d = tmp_path / "health"
+    d.mkdir()
+    (d / "council-spend-2026-07-02.json").write_text("[1, 2, 3]")
+    days, skipped = load_spend(d)
+    assert days == []
+    assert skipped and "malformed" in skipped[0][1]
+
+
+def test_load_sessions_tolerates_non_string_id(tmp_path):
+    d = tmp_path / "s"
+    _write_sessions(d, weird={"id": 12345, "verified": 3})
+    sessions, skipped = load_sessions(d)
+    assert len(sessions) == 1
+    assert sessions[0]["_date"] == ""
