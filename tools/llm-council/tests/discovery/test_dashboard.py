@@ -129,3 +129,63 @@ def test_load_sessions_mixed_ids_never_crash(tmp_path):
     sessions, skipped = load_sessions(d)
     assert len(sessions) == 1 and sessions[0]["id"] == SUCCESS_SESSION["id"]
     assert skipped and "foreign" in skipped[0][1]
+
+
+from council.discovery.dashboard import (
+    collector_yield, discrepancies, fuse_stats, month_totals, rerun_command,
+)
+
+
+def _rows(*payloads):
+    out = []
+    for p in payloads:
+        q = dict(p)
+        q.setdefault("_kind", "failure" if q.get("failed_stage") else
+                     "empty" if q.get("empty") else "success")
+        q["_date"] = q["id"][:4] + "-" + q["id"][4:6] + "-" + q["id"][6:8]
+        q.setdefault("_file", q["id"] + ".json")
+        out.append(q)
+    return out
+
+
+def test_collector_yield_parses_ok_and_keeps_errors_verbatim():
+    rows = _rows(SUCCESS_SESSION,
+                 {**PRE_E1_SESSION, "gather_status": {"sonar": "error: 429 too many requests"}})
+    y = collector_yield(rows)
+    assert y["sonar"]["records"] == 15 and y["sonar"]["found"] == 15
+    assert y["sonar"]["ok_runs"] == 1 and y["sonar"]["runs"] == 2
+    assert y["sonar"]["errors"] == ["error: 429 too many requests"]
+    assert y["web"]["records"] == 6
+
+
+def test_fuse_stats_counts_kinds():
+    s = fuse_stats(_rows(SUCCESS_SESSION, PRE_E1_SESSION, FAILURE_SESSION, EMPTY_SESSION))
+    assert s == {"success": 2, "failure": 1, "empty": 1, "rate": pytest.approx(2 / 3)}
+
+
+def test_fuse_stats_no_attempts():
+    assert fuse_stats(_rows(EMPTY_SESSION))["rate"] is None
+
+
+def test_month_totals():
+    days = [SpendDay("2026-06-30", 1.85, []), SpendDay("2026-07-05", 0.0, []),
+            SpendDay("2026-07-07", 1.0485, [])]
+    assert month_totals(days) == {"2026-06": 1.85, "2026-07": 1.0485}
+
+
+def test_discrepancies_both_directions():
+    rows = _rows(SUCCESS_SESSION)                      # session on 2026-07-07, cost > 0
+    days = [SpendDay("2026-07-05", 0.5, [{}])]         # spend on a day with no session
+    lines = discrepancies(rows, days)
+    assert any("2026-07-07" in ln and "no discovery spend" in ln for ln in lines)
+    assert any("2026-07-05" in ln and "no session" in ln for ln in lines)
+
+
+def test_rerun_command_full_and_pre_fix():
+    full = rerun_command(_rows(SUCCESS_SESSION)[0])
+    assert full.startswith('uv run python -m council.discovery "ai coding agents"')
+    assert "--lens pm" in full and "--tier standard" in full
+    assert '--segment "developer"' in full
+    assert "--output vault/20_projects/research/ai-coding-agents-rerun-idea-ledger.md" in full
+    pre = rerun_command(_rows(PRE_E1_SESSION)[0])
+    assert "--segment" not in pre                       # pre-fix run: segment unrecorded

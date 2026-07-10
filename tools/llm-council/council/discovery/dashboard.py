@@ -87,3 +87,69 @@ def load_spend(spend_dir: Path) -> tuple[list[SpendDay], list[tuple[str, str]]]:
             skipped.append((path.name, f"malformed ledger ({e.__class__.__name__})"))
     days.sort(key=lambda d: d.date)
     return days, skipped
+
+
+_GATHER_OK = re.compile(r"^ok: (\d+) records \((\d+) found\)")
+
+
+def collector_yield(sessions: list[dict]) -> dict[str, dict]:
+    """Aggregate per-collector yield from gather_status strings. Unknown formats are kept
+    verbatim as errors — never guessed into numbers."""
+    out: dict[str, dict] = {}
+    for s in sessions:
+        for collector, status in (s.get("gather_status") or {}).items():
+            slot = out.setdefault(collector, {"records": 0, "found": 0,
+                                              "ok_runs": 0, "runs": 0, "errors": []})
+            slot["runs"] += 1
+            m = _GATHER_OK.match(str(status))
+            if m:
+                slot["records"] += int(m.group(1))
+                slot["found"] += int(m.group(2))
+                slot["ok_runs"] += 1
+            else:
+                slot["errors"].append(str(status))
+    return out
+
+
+def fuse_stats(sessions: list[dict]) -> dict:
+    counts = {"success": 0, "failure": 0, "empty": 0}
+    for s in sessions:
+        counts[s["_kind"]] += 1
+    attempts = counts["success"] + counts["failure"]
+    return {**counts, "rate": (counts["success"] / attempts) if attempts else None}
+
+
+def month_totals(days: list["SpendDay"]) -> dict[str, float]:
+    out: dict[str, float] = {}
+    for d in days:
+        month = d.date[:7]
+        out[month] = round(out.get(month, 0.0) + d.discovery_total, 4)
+    return out
+
+
+def discrepancies(sessions: list[dict], days: list["SpendDay"]) -> list[str]:
+    """Session/ledger mismatches, flagged instead of papered over."""
+    session_dates = {s["_date"] for s in sessions if s.get("cost_usd") and s["_date"]}
+    ledger_dates = {d.date for d in days if d.discovery_total > 0}
+    lines = []
+    for date in sorted(session_dates - ledger_dates):
+        lines.append(f"{date}: session(s) with cost recorded but no discovery spend in the ledger")
+    for date in sorted(ledger_dates - session_dates):
+        lines.append(f"{date}: discovery spend in the ledger but no session file (pre-fix leak?)")
+    return lines
+
+
+def _slug(text: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", (text or "").lower()).strip("-")
+    return slug[:60].rstrip("-") or "topic"
+
+
+def rerun_command(session: dict) -> str:
+    """Copy-ready re-run of this topic. Pre-fix sessions lack segment — omit the flag."""
+    parts = [f'uv run python -m council.discovery "{session.get("topic", "")}"',
+             f"--lens {session.get('lens', 'pm')}", f"--tier {session.get('tier', 'standard')}"]
+    segment = session.get("segment")
+    if segment:
+        parts.append(f'--segment "{segment}"')
+    parts.append(f"--output vault/20_projects/research/{_slug(session.get('topic', ''))}-rerun-idea-ledger.md")
+    return " ".join(parts)
