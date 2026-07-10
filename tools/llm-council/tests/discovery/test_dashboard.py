@@ -203,3 +203,33 @@ def test_collector_yield_tolerates_non_dict_gather_status():
     rows = _rows(SUCCESS_SESSION, {**PRE_E1_SESSION, "gather_status": ["ok: 1 records (1 found)"]})
     y = collector_yield(rows)          # must not raise
     assert y["sonar"]["runs"] == 1     # only the well-formed session counted
+
+
+from click.testing import CliRunner
+
+
+def test_cli_renders_html(tmp_path):
+    from council.discovery.dashboard import main
+    sdir = tmp_path / "s"
+    _write_sessions(sdir, ok=SUCCESS_SESSION)
+    spend = tmp_path / "health"
+    spend.mkdir()
+    out = tmp_path / "dash.html"
+    res = CliRunner().invoke(main, ["--sessions-dir", str(sdir),
+                                    "--spend-dir", str(spend), "--output", str(out)])
+    assert res.exit_code == 0, res.output
+    html = out.read_text()
+    assert "ai coding agents" in html
+    assert "thin: 1 runs" in html
+    assert str(out) in res.output
+
+
+def test_cli_default_sessions_dir_resolution(tmp_path, monkeypatch):
+    # Omitted --sessions-dir → pipeline resolution (env override, hermetic in tests).
+    from council.discovery.dashboard import main
+    monkeypatch.setenv("DISCOVERY_SESSIONS_DIR", str(tmp_path / "resolved"))
+    out = tmp_path / "dash.html"
+    res = CliRunner().invoke(main, ["--spend-dir", str(tmp_path / "nohealth"),
+                                    "--output", str(out)])
+    assert res.exit_code == 0, res.output
+    assert "No session history found" in out.read_text()

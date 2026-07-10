@@ -11,6 +11,8 @@ import shlex
 from dataclasses import dataclass
 from pathlib import Path
 
+import click
+
 # Session id "YYYYMMDD-HHMMSS-hex" → "YYYY-MM-DD".
 _ID_DATE = re.compile(r"^(\d{4})(\d{2})(\d{2})-")
 
@@ -157,3 +159,48 @@ def rerun_command(session: dict) -> str:
         parts.append(f"--segment {shlex.quote(segment)}")
     parts.append(f"--output vault/20_projects/research/{_slug(session.get('topic', ''))}-rerun-idea-ledger.md")
     return " ".join(parts)
+
+
+def _run_cli(sessions_dir: Path | None, spend_dir: Path | None) -> tuple[str, Path]:
+    """Resolve dirs, load, render → (html, resolved_sessions_dir). Split from main() so the
+    resolution logic is unit-callable. Heavy imports stay local so load_sessions/load_spend
+    remain importable without pulling the whole pipeline."""
+    from datetime import datetime
+
+    from council.budget import _spend_dir as _default_spend_dir
+    from council.discovery.dashboard_render import render_dashboard
+    from council.discovery.pipeline import _default_sessions_dir
+
+    if sessions_dir is None:
+        sessions_dir = _default_sessions_dir()
+        if sessions_dir is None:
+            raise click.ClickException(
+                "no sessions dir: pass --sessions-dir or set DISCOVERY_SESSIONS_DIR")
+    if spend_dir is None:
+        spend_dir = _default_spend_dir()
+    sessions, skipped_sessions = load_sessions(sessions_dir)
+    days, skipped_spend = load_spend(spend_dir)
+    html = render_dashboard(sessions, skipped_sessions, days, skipped_spend,
+                            generated_at=datetime.now().strftime("%Y-%m-%d %H:%M"),
+                            sessions_dir=sessions_dir)
+    return html, sessions_dir
+
+
+@click.command()
+@click.option("--sessions-dir", type=click.Path(file_okay=False, path_type=Path), default=None,
+              help="Session-JSON dir (default: pipeline resolution — $DISCOVERY_SESSIONS_DIR "
+                   "or the canonical vault store).")
+@click.option("--spend-dir", type=click.Path(file_okay=False, path_type=Path), default=None,
+              help="council-spend-*.json dir (default: $COUNCIL_SPEND_DIR or vault/health/).")
+@click.option("--output", type=click.Path(dir_okay=False, path_type=Path), required=True,
+              help="Self-contained HTML output path.")
+def main(sessions_dir, spend_dir, output):
+    """Render the discovery run-history dashboard (one self-contained HTML file, $0)."""
+    html, resolved = _run_cli(sessions_dir, spend_dir)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(html)
+    click.echo(f"Dashboard written: {output} (sessions: {resolved})")
+
+
+if __name__ == "__main__":
+    main()
