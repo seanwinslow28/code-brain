@@ -119,5 +119,13 @@ def test_load_sessions_tolerates_non_string_id(tmp_path):
     d = tmp_path / "s"
     _write_sessions(d, weird={"id": 12345, "verified": 3})
     sessions, skipped = load_sessions(d)
-    assert len(sessions) == 1
-    assert sessions[0]["_date"] == ""
+    assert sessions == []
+    assert skipped and "foreign" in skipped[0][1]
+
+
+def test_load_sessions_mixed_ids_never_crash(tmp_path):
+    d = tmp_path / "s"
+    _write_sessions(d, ok=SUCCESS_SESSION, weird={"id": 12345, "verified": 3})
+    sessions, skipped = load_sessions(d)
+    assert len(sessions) == 1 and sessions[0]["id"] == SUCCESS_SESSION["id"]
+    assert skipped and "foreign" in skipped[0][1]

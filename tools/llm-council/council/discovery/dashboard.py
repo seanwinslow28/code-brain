@@ -22,7 +22,7 @@ def _session_date(session_id: str) -> str:
 def _classify(payload: dict) -> str | None:
     """A session record is one of success/failure/empty; anything else (e.g. the pm3-t0
     evidence-bundle capture) is foreign — skipped honestly, never guessed at."""
-    if not isinstance(payload, dict) or "id" not in payload:
+    if not isinstance(payload, dict) or not isinstance(payload.get("id"), str):
         return None
     if payload.get("failed_stage"):
         return "failure"
