@@ -233,3 +233,18 @@ def test_cli_default_sessions_dir_resolution(tmp_path, monkeypatch):
                                     "--output", str(out)])
     assert res.exit_code == 0, res.output
     assert "No session history found" in out.read_text()
+
+
+def test_cli_default_spend_dir_resolution(tmp_path, monkeypatch, tmp_spend_dir):
+    # Omitted --spend-dir → council.budget._spend_dir() (COUNCIL_SPEND_DIR env, sandboxed here).
+    from council.discovery.dashboard import main
+    (tmp_spend_dir / "council-spend-2026-07-08.json").write_text(json.dumps({
+        "date": "2026-07-08", "total": 0.5,
+        "runs": [{"amount": 0.5, "profile": "quick", "tag": "discovery-pm", "tool": "discovery"}],
+    }))
+    sdir = tmp_path / "s"
+    _write_sessions(sdir, ok=SUCCESS_SESSION)
+    out = tmp_path / "dash.html"
+    res = CliRunner().invoke(main, ["--sessions-dir", str(sdir), "--output", str(out)])
+    assert res.exit_code == 0, res.output
+    assert "2026-07-08" in out.read_text()      # ledger day surfaced via the DEFAULT spend resolution
