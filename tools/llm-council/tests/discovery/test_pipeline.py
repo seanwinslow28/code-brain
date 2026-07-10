@@ -559,3 +559,46 @@ async def test_failure_sessions_record_segment(tmp_path):
     data = json.loads(next(iter(sdir.glob("*.json"))).read_text())
     assert data["segment"] == "creative"
     assert data["failed_stage"] == "fuse"
+
+
+# --- D3 Slice A: persist-by-default resolution -------------------------------
+
+
+def test_default_sessions_dir_env_wins(monkeypatch, tmp_path):
+    from council.discovery import pipeline
+    monkeypatch.setenv("DISCOVERY_SESSIONS_DIR", str(tmp_path / "custom"))
+    assert pipeline._default_sessions_dir() == tmp_path / "custom"
+
+
+def test_default_sessions_dir_canonical_when_vault_exists(monkeypatch):
+    from council.discovery import pipeline
+    monkeypatch.delenv("DISCOVERY_SESSIONS_DIR", raising=False)
+    d = pipeline._default_sessions_dir()
+    assert d == pipeline._REPO_ROOT / "vault" / "20_projects" / "research" / ".discovery-sessions"
+
+
+def test_default_sessions_dir_guard_disables_when_no_vault(monkeypatch, tmp_path, capsys):
+    from council.discovery import pipeline
+    monkeypatch.delenv("DISCOVERY_SESSIONS_DIR", raising=False)
+    monkeypatch.setattr(pipeline, "_REPO_ROOT", tmp_path / "vendored-elsewhere")
+    assert pipeline._default_sessions_dir() is None
+    assert "persistence disabled" in capsys.readouterr().err
+
+
+@pytest.mark.asyncio
+async def test_run_discovery_persists_by_default(monkeypatch, tmp_path):
+    # No sessions_dir arg at all → session lands in the resolved default.
+    auto = tmp_path / "auto"
+    monkeypatch.setenv("DISCOVERY_SESSIONS_DIR", str(auto))
+    await run_discovery(topic="x", lens="pm", tier="quick", api_key="k",
+                        gather_fn=_empty_gather(), fuse_fn=None)
+    assert len(list(auto.glob("*.json"))) == 1
+
+
+@pytest.mark.asyncio
+async def test_run_discovery_explicit_none_disables_persistence(monkeypatch, tmp_path):
+    auto = tmp_path / "auto"
+    monkeypatch.setenv("DISCOVERY_SESSIONS_DIR", str(auto))
+    await run_discovery(topic="x", lens="pm", tier="quick", api_key="k",
+                        gather_fn=_empty_gather(), fuse_fn=None, sessions_dir=None)
+    assert not auto.exists()

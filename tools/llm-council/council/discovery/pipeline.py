@@ -2,6 +2,7 @@
 """5-stage orchestrator: gather → fuse → verify → frame → backfill → render."""
 
 import json
+import os
 import re
 import sys
 import time
@@ -35,6 +36,24 @@ _UNSET = object()
 # composed provider query semantics in any collector, and collapse whitespace (also folds a
 # whitespace-only segment to ""). Normalized once here, at the pipeline boundary.
 _SEGMENT_OPERATOR_CHARS = re.compile(r"[():]")
+
+# pipeline.py sits at <repo-root>/tools/llm-council/council/discovery/ → parents[4] = repo root.
+_REPO_ROOT = Path(__file__).resolve().parents[4]
+
+
+def _default_sessions_dir() -> Path | None:
+    """Resolve where sessions persist when the caller doesn't say (D3 Slice A: persist by
+    default — an un-persisted run is history we can't recover). $DISCOVERY_SESSIONS_DIR wins;
+    else the canonical vault store, guarded so a vendored copy of this package never writes
+    to a surprising location."""
+    raw = os.environ.get("DISCOVERY_SESSIONS_DIR")
+    if raw:
+        return Path(raw)
+    if (_REPO_ROOT / "vault").is_dir():
+        return _REPO_ROOT / "vault" / "20_projects" / "research" / ".discovery-sessions"
+    print("[discovery] no DISCOVERY_SESSIONS_DIR and no repo vault — session persistence disabled",
+          file=sys.stderr)
+    return None
 
 
 def _normalize_segment(segment: str) -> str:
@@ -80,8 +99,10 @@ def _estimate_cost(fr: FusionResult, tier) -> float:
 
 async def run_discovery(*, topic: str, lens: str, tier: str, api_key: str, segment: str = "",
                         gather_fn=None, fuse_fn=None, backfill_fn=None, supplement: bool = True,
-                        sessions_dir: Path | None = None, scorer=_UNSET,
+                        sessions_dir=_UNSET, scorer=_UNSET,
                         velocity_provider=_UNSET) -> DiscoveryResult:
+    if sessions_dir is _UNSET:
+        sessions_dir = _default_sessions_dir()
     tcfg = get_tier(tier)
     segment = _normalize_segment(segment)
     session_id = f"{time.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:6]}"
