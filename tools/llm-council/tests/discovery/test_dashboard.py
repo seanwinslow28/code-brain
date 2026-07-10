@@ -183,9 +183,23 @@ def test_discrepancies_both_directions():
 
 def test_rerun_command_full_and_pre_fix():
     full = rerun_command(_rows(SUCCESS_SESSION)[0])
-    assert full.startswith('uv run python -m council.discovery "ai coding agents"')
+    assert full.startswith("uv run python -m council.discovery 'ai coding agents'")
     assert "--lens pm" in full and "--tier standard" in full
-    assert '--segment "developer"' in full
+    assert "--segment developer" in full          # shlex.quote leaves bare-safe words unquoted
     assert "--output vault/20_projects/research/ai-coding-agents-rerun-idea-ledger.md" in full
     pre = rerun_command(_rows(PRE_E1_SESSION)[0])
     assert "--segment" not in pre                       # pre-fix run: segment unrecorded
+
+
+def test_rerun_command_quotes_hostile_topic():
+    import shlex
+    hostile = {**SUCCESS_SESSION, "topic": 'x"; touch pwned; echo "y'}
+    cmd = rerun_command(_rows(hostile)[0])
+    assert "touch pwned" in cmd                      # content survives...
+    assert shlex.split(cmd)[5] == 'x"; touch pwned; echo "y'  # ...as ONE argv token (argv: uv run python -m council.discovery TOPIC)
+
+
+def test_collector_yield_tolerates_non_dict_gather_status():
+    rows = _rows(SUCCESS_SESSION, {**PRE_E1_SESSION, "gather_status": ["ok: 1 records (1 found)"]})
+    y = collector_yield(rows)          # must not raise
+    assert y["sonar"]["runs"] == 1     # only the well-formed session counted

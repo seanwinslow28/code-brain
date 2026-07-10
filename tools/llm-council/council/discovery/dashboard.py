@@ -7,6 +7,7 @@ self-contained HTML artifact (see dashboard_render.py). $0: local files only.
 
 import json
 import re
+import shlex
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -97,7 +98,10 @@ def collector_yield(sessions: list[dict]) -> dict[str, dict]:
     verbatim as errors — never guessed into numbers."""
     out: dict[str, dict] = {}
     for s in sessions:
-        for collector, status in (s.get("gather_status") or {}).items():
+        gather_status = s.get("gather_status")
+        if not isinstance(gather_status, dict):
+            continue
+        for collector, status in gather_status.items():
             slot = out.setdefault(collector, {"records": 0, "found": 0,
                                               "ok_runs": 0, "runs": 0, "errors": []})
             slot["runs"] += 1
@@ -146,10 +150,10 @@ def _slug(text: str) -> str:
 
 def rerun_command(session: dict) -> str:
     """Copy-ready re-run of this topic. Pre-fix sessions lack segment — omit the flag."""
-    parts = [f'uv run python -m council.discovery "{session.get("topic", "")}"',
+    parts = [f"uv run python -m council.discovery {shlex.quote(session.get('topic', ''))}",
              f"--lens {session.get('lens', 'pm')}", f"--tier {session.get('tier', 'standard')}"]
     segment = session.get("segment")
     if segment:
-        parts.append(f'--segment "{segment}"')
+        parts.append(f"--segment {shlex.quote(segment)}")
     parts.append(f"--output vault/20_projects/research/{_slug(session.get('topic', ''))}-rerun-idea-ledger.md")
     return " ".join(parts)
