@@ -19,7 +19,7 @@ PROFILES: dict[str, Profile] = {
         models=(
             "anthropic/claude-opus-4.7",
             "openai/gpt-5.5",
-            "~google/gemini-pro-latest",
+            "google/gemini-2.5-pro",
             "x-ai/grok-4.20",
         ),
         chairman="anthropic/claude-opus-4.7",
