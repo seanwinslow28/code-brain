@@ -19,8 +19,8 @@ PROFILES: dict[str, Profile] = {
         models=(
             "anthropic/claude-opus-4.7",
             "openai/gpt-5.5",
-            "~google/gemini-pro-latest",
-            "x-ai/grok-4.20",
+            "google/gemini-2.5-pro",
+            "x-ai/grok-4.5",
         ),
         chairman="anthropic/claude-opus-4.7",
         max_cost_per_query=1.00,
