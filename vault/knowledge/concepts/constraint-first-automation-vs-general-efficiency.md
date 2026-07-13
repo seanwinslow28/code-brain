@@ -4,28 +4,28 @@ type: concept
 sources:
   - knowledge/connections/the-supervisory-cost-of-taste-transfer.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition
 
-This pattern identifies the tension between optimizing for raw throughput (general efficiency) and optimizing for specific outcome fidelity (constraint-first automation). General efficiency seeks to minimize cost and time per unit, while constraint-first automation accepts higher initial setup costs to ensure the output aligns with complex, nuanced human standards. The mechanism fails when users apply general efficiency metrics to problems requiring high-fidelity constraint satisfaction.
+This pattern identifies the trade-off between optimizing for broad operational efficiency and optimizing for specific, taste-encoded constraints. General efficiency seeks to minimize cost and time per unit of output, often by lowering the complexity of the rubric. Constraint-first automation accepts higher per-unit costs to ensure the output adheres to a narrow, high-fidelity aesthetic standard, prioritizing signal over noise.
 
 ## Context
 
-Sean's prior runs show a trade-off: qwen3-14b offered high volume but lower fidelity (more rejections), while qwen3.6-35b-a3b-32k offered better alignment but required different supervision strategies. He must choose which efficiency metric serves his current goal.
+Sean's prior runs with qwen3-14b optimized for general efficiency (more concepts written), while his recent runs with qwen3.6-35b optimize for constraint-first automation (fewer concepts, fewer rejections). He must decide which metric aligns with his current strategic goal.
 
 ## Evidence
 
 > The old cadence strangled because three posts waited on unbuilt tools.
 
-> As the number of agents scales, the cost of supervision does not decrease proportionally; instead, it increases because the rubric must become more complex to prevent drift.
+> Sean must allocate specific time for rubric refinement as a primary deliverable, not just a preparatory step, to prevent taste drift.
 
 ## Examples
 
-- The 'old cadence' being strangled by tool dependencies illustrates the failure of general efficiency when constraints are not met.
-- The increase in rubric complexity with scaling agents demonstrates the non-linear cost of constraint-first automation.
+- The qwen3-14b runs sampled 250+ clusters but wrote ~100 concepts, indicating a broad, less constrained approach.
+- The qwen3.6-35b runs sampled ~140 clusters and wrote ~80 concepts with only ~20 rejections, indicating a tighter, constraint-first approach.
 
 ## Related Concepts
 

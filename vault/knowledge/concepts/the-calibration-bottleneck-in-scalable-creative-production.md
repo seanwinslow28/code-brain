@@ -2,30 +2,30 @@
 title: "The Calibration Bottleneck in Scalable Creative Production"
 type: concept
 sources:
-  - knowledge/concepts/the-calibration-bottleneck-in-scalable-creative-production.md
+  - knowledge/connections/the-supervisory-inversion-in-creative-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition
 
-This concept defines the structural limit where the marginal cost of maintaining creative authority does not decrease with scale, but instead shifts from generation labor to calibration labor. As Sean scales his creative production through automation, the 'taste-fidelity decoupling' widens, requiring increasingly sophisticated supervision mechanisms to maintain quality. The consequence is that the value of Sean's work becomes determined by his ability to teach the fleet his taste, rather than his ability to generate content. This creates a bottleneck where the specificity of human taste conflicts with the infinite scalability of automated creative production.
+This mechanism describes a structural inversion where the marginal cost of generating creative artifacts approaches zero, while the marginal cost of verifying their fidelity increases non-linearly. As agentic systems scale output volume, the human operator transitions from a producer to a reviewer, creating a bottleneck where the rate of consumption limits the effective throughput of creation. This creates a dependency on 'taste' as the primary scarce resource, forcing creators to spend more cognitive energy on discernment than on execution.
 
 ## Context
 
-Sean is actively scaling his agent fleet (vault synthesizer) to handle creative and job-hunt tasks. The data shows that as he samples more clusters, the rejection rate and supervision cost increase, indicating that automation alone cannot preserve his unique aesthetic without significant manual calibration effort. This insight explains why simply increasing throughput does not yield proportional value in his Substack or job hunt materials.
+Sean is observing his own fleet's performance metrics across different models (qwen3-14b vs qwen3.6-35b) and noticing that higher quality models do not necessarily reduce the total time spent on a task because they require more rigorous supervision to prevent 'slop'. This insight directly impacts how he should structure his Substack content, shifting focus from 'how to prompt' to 'how to evaluate'.
 
 ## Evidence
 
-> As Sean scales his creative production through automation, the 'taste-fidelity decoupling' widens, requiring increasingly sophisticated supervision mechanisms to maintain quality.
+> creative professionals who spend more time fixing, re-rolling, and cleaning up AI-generated output than the tools actually save them
 
-> The consequence is that the marginal cost of maintaining creative authority does not decrease with scale; instead, it shifts from generation labor to calibration labor.
+> The reported failures cluster around bad context discipline, vague prompts, missing eval loops, and unmonitored tool output
 
 ## Examples
 
-- Sean must invest in building a robust library of calibration artifacts early, as this will become the primary bottleneck for scaling his creative output.
-- The value of his Substack and job hunt materials lies not in the volume of content but in the distinctiveness of his taste, which requires continuous calibration.
+- Sean's run on 2026-07-05 used qwen3.6-35b which wrote 83 concepts but only 18 connections, indicating a high rejection rate due to fidelity issues rather than generation speed.
+- The shift from qwen3-14b (141 concepts written) to qwen3.6-35b (83 concepts written) shows that better models produce fewer but potentially higher-quality outputs, yet the supervision load remains high.
 
 ## Related Concepts
 

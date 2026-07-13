@@ -5,8 +5,8 @@ connects:
   - The Taste-Fidelity Decoupling in Creative Production
   - Taste as Evaluation Function vs. Activity Proof
   - Demonstration Over Declaration
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-11
+updated: 2026-07-11
 ---
 
 ## Synthesis

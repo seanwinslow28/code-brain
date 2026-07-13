@@ -2,31 +2,31 @@
 title: "The Verification-Governance Inversion"
 type: concept
 sources:
-  - knowledge/connections/reliability-vs-cost-in-verification-architecture.md
+  - knowledge/concepts/the-verification-governance-inversion.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition
 
-This pattern describes the strategic reversal of priorities where governance constraints are enforced through low-cost, high-reliability local checks rather than expensive, high-fidelity external judgments. It inverts the traditional assumption that higher fidelity always yields better governance by recognizing that governance requires availability, which is only guaranteed through local execution. This inversion allows for scalable verification without incurring the economic or operational risks of external model dependencies.
+This pattern describes a structural failure where agents invert the proper order of verification and governance by writing opportunities as solutions before establishing the underlying need. The mechanism is driven by a dominant failure mode in gap mapping where solution-framing overrides evidence accumulation, leading to artifacts that lack evidentiary support. This inversion erodes trust because it prioritizes the appearance of action over the rigor of investigation, effectively bypassing the governance layer that should validate the problem space.
 
 ## Context
 
-Sean's vault synthesis process requires constant verification to maintain semantic integrity. By inverting the priority to favor reliability over fidelity, he ensures that the verification gate never becomes a bottleneck or failure point. This approach supports the long-term sustainability of his knowledge infrastructure by keeping costs near zero and availability at 100%.
+Sean needs to enforce a strict sequence where gaps are stated as needs/pains before any solution is proposed. The synthesis pipeline must prioritize investigation prompts over solution generation to prevent this inversion from corrupting the vault's epistemic hygiene.
 
 ## Evidence
 
-> The resolution is to invert this priority: accept lower fidelity in exchange for zero marginal cost and guaranteed availability through local execution, recognizing that reliability is a prerequisite for any quality metric.
+> 98% of people write opportunities as solutions and solution-framing is the dominant failure mode of gap mapping
 
-> Option (b) is the cost trap and is rejected; (c) can't gate a headless pipeline.
+> Every strong gap presentation does the same three things to each gap: (1) states it as a need/pain, not a solution
 
 ## Examples
 
-- Prioritizing in-process ONNX models over API-based solutions to ensure robust verification
-- Focusing future upgrades on model accuracy improvements within the local runtime rather than seeking external compute
+- Writing opportunities as solutions instead of stating them as needs
+- Prioritizing investigation prompts over solution generation
 
 ## Related Concepts
 
-[[Automation Reliability]] [[Runtime-Model Coupling]]
+[[Slop as a Trust Deficit]] [[Negative Space Calibration]]

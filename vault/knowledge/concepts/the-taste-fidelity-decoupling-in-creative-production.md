@@ -2,31 +2,31 @@
 title: "The Taste-Fidelity Decoupling in Creative Production"
 type: concept
 sources:
-  - knowledge/connections/the-taste-fidelity-decoupling-in-creative-production.md
+  - knowledge/connections/the-supervisory-cost-of-taste-transfer.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition
 
-This mechanism describes the systemic divergence between an agent's statistical tendency toward median outputs and a creator's requirement for unique aesthetic expression. As automation scales, the marginal cost of maintaining creative authority shifts from generation labor to calibration labor, creating a bottleneck where value is determined by the ability to teach taste rather than generate content. This decoupling forces a transition from prompt engineering to calibration engineering, where preference is demonstrated through iterative feedback loops instead of declared via text instructions.
+This mechanism describes the divergence between automated throughput and the preservation of specific aesthetic signals as a system scales. When an agent fleet increases its sampling volume without a proportional increase in supervisory capacity, the rubric required to maintain taste fidelity becomes too complex for human maintenance. Consequently, the output retains structural efficiency but loses the unique semantic signature that defines the creator's value, creating a liability where automation degrades rather than enhances quality.
 
 ## Context
 
-Sean's fleet memory index shows a clear progression from low-volume runs on smaller models to high-volume sampling on larger models, yet the 'rejected_count' and 'duration_seconds' metrics indicate that maintaining quality requires disproportionate computational and temporal resources. The widening gap between clusters sampled and concepts written proves that taste preservation is becoming the primary constraint on his creative throughput.
+Sean is observing his fleet metrics shift from high-volume/low-fidelity (qwen3-14b runs) to lower-volume/higher-fidelity (qwen3.6-35b runs). He must recognize that the 'taste' he is trying to encode is not a static constraint but a dynamic signal that decays as the gap between sampling and supervision widens.
 
 ## Evidence
 
-> The tension lies between the agent's default statistical tendency toward the 'median' and the user's desire for unique aesthetic expression.
+> As Sean attempts to make the agent think like him, he must define increasingly complex constraints to prevent drift.
 
-> The marginal cost of maintaining creative authority does not decrease with scale; instead, it shifts from generation labor to calibration labor.
+> The consequence is that automation becomes a liability if the supervisory overhead exceeds the efficiency gains, forcing Sean to choose between generic scale and high-fidelity niche.
 
 ## Examples
 
-- Sean's run on 2026-07-08 used qwen3.6-35b-a3b-32k to sample 145 clusters but only wrote 96 concepts with 22 connections, requiring 1649 seconds of processing time.
-- The shift from 'prompt engineering' to 'calibration engineering' where the primary activity becomes demonstrating preference through iterative feedback rather than describing intent through text.
+- The qwen3-14b runs from June 29-July 5 show high concept counts (109-153) but also high rejection rates (35-80), indicating a struggle to maintain fidelity at scale.
+- The shift to qwen3.6-35b in July shows lower concept counts (82-96) but significantly lower rejection rates (14-24), suggesting a tighter taste alignment.
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Demonstration Over Declaration]]
+[[Supervision as the New AI Edge]] [[Constraint-First Automation vs. General Efficiency]]

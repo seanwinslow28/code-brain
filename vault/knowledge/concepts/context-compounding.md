@@ -2,31 +2,31 @@
 title: "Context Compounding"
 type: concept
 sources:
-  - knowledge/concepts/context-compounding.md
+  - knowledge/connections/the-scalability-paradox-in-agentic-creative-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition
 
-Context compounding is a cognitive load phenomenon where the accumulation of prior context windows dilutes the weight of new, critical instructions. As the memory core grows through repeated agent runs, the model's attention mechanism is forced to distribute focus across an expanding set of historical data points. This causes the 'real instructions' to lose their relative importance, leading to a systemic failure in following specific taste constraints.
+This pattern describes how accumulated context in an agent's memory degrades its ability to follow explicit instructions. A bloated memory makes the model ignore the real instructions, as the signal-to-noise ratio drops with each added token. The mechanism is not just storage capacity but the interference of irrelevant prior data with current task constraints.
 
 ## Context
 
-Sean observes that as his vault expands, the synthesizer begins to ignore explicit taste directives because they are buried under layers of accumulated, unpruned context from previous runs. This creates a tension between the desire for comprehensive memory and the need for precise, high-fidelity execution in creative production.
+Sean experiences this when his synthesizer fails to prioritize recent directives due to older, conflicting context. This leads to a cycle of correction where he must constantly prune or re-state instructions to regain control over the output quality.
 
 ## Evidence
 
 > A bloated memory makes the model ignore the real instructions.
 
-> A cognitive load phenomenon where the accumulation of prior context windows dilutes the weight of new, critical instructions.
+> This connection reveals a critical tension where the pursuit of automated throughput directly undermines the preservation of taste memory, creating a scalability paradox.
 
 ## Examples
 
-- Runs with 250+ clusters sampled showing a drop in connection quality or relevance, as the model struggles to prioritize recent taste signals over older data.
-- The 'rejected_count' metric spiking when the context window exceeds the model's effective attention span for specific taste constraints.
+- The value of the 'Creative Partner' is contingent on the agent's ability to prune irrelevant taste signals, not just accumulate them.
+- As Sean attempts to scale his creative output via the fleet, the infrastructure dependencies become unstable.
 
 ## Related Concepts
 
-[[Memory Rot and Lifecycle Management]] [[The Taste-Fidelity Decoupling in Creative Production]]
+[[Throughput vs. Taste Memory Tension]] [[The Taste-Fidelity Decoupling in Creative Production]]

@@ -2,32 +2,33 @@
 title: "The Calibration Bottleneck in Scalable Creative Production"
 type: connection
 connects:
-  - The Taste-Fidelity Decoupling in Creative Production
   - Supervision as the New AI Edge
-  - Demonstration Over Declaration
-created: 2026-07-07
-updated: 2026-07-07
+  - The Paradox of Agentic Efficiency vs. Creative Authority
+  - The Taste-Fidelity Decoupling in Creative Production
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Synthesis
 
-This connection reveals a critical tension between the scalability of agent fleets and the specificity of human taste. As Sean scales his creative production through automation, the 'taste-fidelity decoupling' widens, requiring increasingly sophisticated supervision mechanisms to maintain quality. The consequence is that the marginal cost of maintaining creative authority does not decrease with scale; instead, it shifts from generation labor to calibration labor. This creates a bottleneck where the value of Sean's work is determined by his ability to teach the fleet his taste, rather than his ability to generate content.
+There is a fundamental tension between the velocity of automated synthesis and the fidelity required for creative authority. As Sean's agent fleet scales up concept volume (e.g., 153 concepts in July), the rejection rate drops but the cognitive load of supervision increases, creating a bottleneck where the cost of correction exceeds the value of generation. This pattern suggests that scalable creative production is not limited by tool capability but by the human capacity to maintain 'taste' as an evaluation function against homogenized outputs.
 
 ## Threads
 
-### [[The Taste-Fidelity Decoupling in Creative Production]]
-
-> The tension lies between the agent's default statistical tendency toward the 'median' and the user's desire for unique aesthetic expression. This decoupling means that creative authority is undermined by the very tools meant to amplify it.
-
 ### [[Supervision as the New AI Edge]]
 
-> The job is to teach it yours, until it quits handing you the factory setting and starts making work that's recognizably you, on demand.
+> The reported failures cluster around bad context discipline, vague prompts, missing eval loops, and unmonitored tool output
 
-### [[Demonstration Over Declaration]]
+### [[The Paradox of Agentic Efficiency vs. Creative Authority]]
 
-> This gap necessitates a shift from 'prompt engineering' to 'calibration engineering,' where the primary activity becomes demonstrating preference through iterative feedback rather than describing intent through text.
+> This connection reveals a critical inversion where the efficiency of AI generation is directly offset by the increasing cognitive load of supervision, creating a bottleneck that undermines creative authority.
+
+### [[The Taste-Fidelity Decoupling in Creative Production]]
+
+> they often spend more time fixing tone, structure, and accuracy than they would have spent drafting themselves.
 
 ## Implications
 
-- Sean must invest in building a robust library of calibration artifacts early, as this will become the primary bottleneck for scaling his creative output.
-- The value of his Substack and job hunt materials lies not in the volume of content but in the distinctiveness of his taste, which requires continuous calibration.
+- Sean must prioritize 'evaluation loops' over 'prompt engineering' in his Substack content to address the true bottleneck of creative authority.
+- Agent fleet scaling should be capped by human supervision capacity rather than computational throughput to prevent quality degradation.
+- The value proposition for Sean's audience shifts from efficiency to 'creative sovereignty' and 'taste preservation'.

@@ -2,31 +2,31 @@
 title: "Vault Synthesizer Eval Suite"
 type: concept
 sources:
-  - knowledge/connections/self-validation-vs-external-validity-in-agentic-evaluation.md
+  - knowledge/connections/the-efficiency-quality-inversion-in-agentic-evaluation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition
 
-This refers to the specific evaluation infrastructure where the judge model was structurally integrated into the candidate panel, creating a self-referential loop that compromised validity. The mechanism involves a literal membership overlap where the evaluator is also a participant, leading to biased outcomes that favor the judge's own outputs. This design flaw masks actual performance gaps and creates an illusion of competence by optimizing for internal consistency rather than external truth.
+A structured evaluation framework that measures the health and efficacy of the vault synthesizer by tracking metrics such as concepts written, connections written, clusters sampled, and rejected counts over time. The mechanism involves comparing these metrics across different model families and run configurations to identify patterns of efficiency and quality degradation. It serves as a diagnostic tool for Sean to assess whether his agentic infrastructure is producing genuine insights or merely accumulating data.
 
 ## Context
 
-Sean needs to recognize this specific failure mode in his past runs to avoid repeating it in future evaluations. The consequence is that any claims of robustness made using this suite are invalid because the judge was not neutral. He must ensure that future evaluators are structurally separated from candidates to maintain epistemic integrity.
+The fleet memory index provides a longitudinal view of the synthesizer's performance, allowing Sean to correlate model changes with shifts in output quality and operational efficiency.
 
 ## Evidence
 
-> the FUSE judge `anthropic/claude-opus-4.7` was a *literal member* of its own panel in every tier
+> One-line summary per memory file. Used by agents for the manifest-then-top-5 retrieval pattern (Perplexity DR, Apr 2026).
 
-> The core tension exists between the operational efficiency of using a single model family for both generation and evaluation versus the epistemic integrity required for genuine discovery
+> The core tension exists between the operational efficiency of using a single model family for both generation and evaluation versus the epistemic integrity required for genuine discovery.
 
 ## Examples
 
-- Claude Opus 4.7 evaluating its own outputs as part of the candidate set
-- Using a single model family for both generating and judging responses in the same tier
+- run-2026-07-11T02-30-06: 83c/18x via qwen3.6-35b-a3b-32k
+- run-2026-06-23T02-30-05: 45c/30x via qwen3-14b
 
 ## Related Concepts
 
-[[The Illusion of Competence in Automated Systems]] [[Synthesizer fix]]
+[[The Illusion of Competence in Automated Systems]] [[Taste as Evaluation Function vs. Activity Proof]]
