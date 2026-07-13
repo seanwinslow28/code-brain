@@ -162,6 +162,44 @@ async def test_cross_rank_retries_non_json_then_skips(fake_profile):
 
 
 @pytest.mark.asyncio
+async def test_total_tokens_include_crossrank_and_failed_parse_retries(fake_profile):
+    """Every provider attempt is billed; rankings + parse-retries must be in the totals."""
+    valid = '{"ranking": ["A","B","C"], "reasoning": "ok"}'
+    client = MagicMock()
+    # 4 fanout + (m1 ok, m2 parse-fail, m2 retry parse-fail, m3 ok, m4 ok) + 1 chairman = 10 attempts
+    client.complete = AsyncMock(side_effect=[
+        _resp("m1", "a1"), _resp("m2", "a2"), _resp("m3", "a3"), _resp("m4", "a4"),
+        _resp("m1", valid), _resp("m2", "nope"), _resp("m2", "still nope"),
+        _resp("m3", valid), _resp("m4", valid),
+        _resp("m1", "synth"),
+    ])
+    session = await run_council(client=client, profile=fake_profile, user_query="Q", tag="t")
+    # 10 attempts × 10 tokens each — the pre-fix code counted only fanout(4)+chairman(1)=50.
+    assert session.total_tokens_in == 100
+    assert session.total_tokens_out == 100
+
+
+@pytest.mark.asyncio
+async def test_session_records_per_attempt_usage(fake_profile):
+    valid = '{"ranking": ["A","B","C"], "reasoning": "ok"}'
+    client = MagicMock()
+    client.complete = AsyncMock(side_effect=[
+        _resp("m1", "a1"), _resp("m2", "a2"), _resp("m3", "a3"), _resp("m4", "a4"),
+        _resp("m1", valid), _resp("m2", valid), _resp("m3", valid), _resp("m4", valid),
+        _resp("m1", "synth"),
+    ])
+    session = await run_council(client=client, profile=fake_profile, user_query="Q", tag="t")
+    assert len(session.attempts) == 9
+    stages = [a["stage"] for a in session.attempts]
+    assert stages.count("fanout") == 4
+    assert stages.count("crossrank") == 4
+    assert stages.count("chairman") == 1
+    for a in session.attempts:
+        assert "tokens_in" in a and "tokens_out" in a
+        assert "cost" in a and "generation_id" in a and "requested_model" in a
+
+
+@pytest.mark.asyncio
 async def test_session_writes_json_to_data_sessions_dir(fake_profile, tmp_path):
     client = MagicMock()
     valid = '{"ranking": ["A","B","C"], "reasoning": "ok"}'

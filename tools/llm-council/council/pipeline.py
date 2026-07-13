@@ -33,6 +33,24 @@ class CouncilSession:
     total_tokens_in: int = 0
     total_tokens_out: int = 0
     duration_ms: int = 0
+    # Per-provider-attempt usage/cost, separate from user-facing content. Covers EVERY
+    # attempt that returned a response — fanout survivors, cross-rank first + parse-retry,
+    # and chairman — so measurement can see cross-rank spend (which the totals now include).
+    attempts: list[dict] = field(default_factory=list)
+
+
+def _attempt_record(stage: str, r: ModelResponse) -> dict:
+    """A per-attempt usage/cost record (kept separate from user-facing content)."""
+    return {
+        "stage": stage,
+        "requested_model": r.model_id,
+        "returned_model_id": r.returned_model_id,
+        "generation_id": r.generation_id,
+        "tokens_in": r.tokens_in,
+        "tokens_out": r.tokens_out,
+        "cost": r.cost,
+        "finish_reason": r.finish_reason,
+    }
 
 
 def _parse_ranking(content: str) -> dict | None:
@@ -75,35 +93,45 @@ async def _crossrank_one(
     judge_model: str,
     user_query: str,
     others: list[dict],
-) -> dict | None:
-    """Run one judge's cross-rank. Returns parsed dict or None after retry failure."""
+) -> tuple[dict | None, list[ModelResponse]]:
+    """Run one judge's cross-rank.
+
+    Returns (parsed ranking dict or None, list of the response attempts made). Both the
+    first and the parse-retry attempts are returned so their usage is measured even when
+    parsing fails (a returned-but-unparsed response was still billed).
+    """
     user_msg = crossrank_prompt(user_query=user_query, others=others)
+    attempts: list[ModelResponse] = []
     try:
         first = await client.complete(model=judge_model, system=CROSSRANK_SYSTEM, user=user_msg)
+        attempts.append(first)
         parsed = _parse_ranking(first.content)
         if parsed is not None:
-            return {"judge_model": judge_model, **parsed}
+            return {"judge_model": judge_model, **parsed}, attempts
         retry = await client.complete(
             model=judge_model,
             system=CROSSRANK_SYSTEM + "\n\nReturn ONLY a JSON object. No prose, no markdown fence.",
             user=user_msg,
         )
+        attempts.append(retry)
         parsed = _parse_ranking(retry.content)
         if parsed is not None:
-            return {"judge_model": judge_model, **parsed}
+            return {"judge_model": judge_model, **parsed}, attempts
     except ClientError:
-        return None
-    return None
+        return None, attempts
+    return None, attempts
 
 
 async def _crossrank(
     client: OpenRouterClient,
     responses: list[ModelResponse],
     user_query: str,
-) -> tuple[list[dict], list[str]]:
+) -> tuple[list[dict], list[str], list[ModelResponse]]:
     """Stage 2: each surviving model judges the OTHER N-1 responses.
 
-    Returns (parsed_rankings, ranking_failed_model_ids).
+    Returns (parsed_rankings, ranking_failed_model_ids, all_response_attempts). The third
+    element carries every cross-rank response attempt (first + parse-retry) for usage
+    accounting.
     """
     coros = []
     judge_models = []
@@ -118,12 +146,14 @@ async def _crossrank(
     results = await asyncio.gather(*coros)
     rankings: list[dict] = []
     failed: list[str] = []
-    for model, r in zip(judge_models, results):
+    attempts: list[ModelResponse] = []
+    for model, (r, judge_attempts) in zip(judge_models, results):
+        attempts.extend(judge_attempts)
         if r is None:
             failed.append(model)
         else:
             rankings.append(r)
-    return rankings, failed
+    return rankings, failed, attempts
 
 
 async def _chairman(
@@ -165,7 +195,7 @@ async def run_council(
             "Fall back to single-model review."
         )
 
-    rankings, ranking_failed = await _crossrank(client, responses, user_query)
+    rankings, ranking_failed, crossrank_attempts = await _crossrank(client, responses, user_query)
 
     try:
         chairman_resp = await _chairman(
@@ -186,8 +216,13 @@ async def run_council(
             f"Fall back to single-model review or retry."
         ) from e
 
-    total_in = sum(r.tokens_in for r in responses) + chairman_resp.tokens_in
-    total_out = sum(r.tokens_out for r in responses) + chairman_resp.tokens_out
+    attempts = (
+        [_attempt_record("fanout", r) for r in responses]
+        + [_attempt_record("crossrank", r) for r in crossrank_attempts]
+        + [_attempt_record("chairman", chairman_resp)]
+    )
+    total_in = sum(a["tokens_in"] for a in attempts)
+    total_out = sum(a["tokens_out"] for a in attempts)
 
     session = CouncilSession(
         id=session_id,
@@ -211,6 +246,7 @@ async def run_council(
         total_tokens_in=total_in,
         total_tokens_out=total_out,
         duration_ms=int((time.perf_counter() - started) * 1000),
+        attempts=attempts,
     )
 
     if sessions_dir is not None:
@@ -229,6 +265,7 @@ async def run_council(
             "total_tokens_in": session.total_tokens_in,
             "total_tokens_out": session.total_tokens_out,
             "duration_ms": session.duration_ms,
+            "attempts": session.attempts,
         }, indent=2))
 
     return session
