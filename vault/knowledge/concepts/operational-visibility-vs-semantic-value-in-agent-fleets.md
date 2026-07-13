@@ -2,31 +2,31 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/the-decoupling-of-operational-health-from-strategic-efficacy.md
+  - knowledge/connections/semantic-blind-spots-in-agent-fleet-monitoring.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition
 
-This tension arises when the governance of professional output is delegated to systems that only verify operational health, not semantic truth. The mechanism involves a binary health reporting layer that validates process existence and network connectivity but fails to validate the semantic completeness of the data pipeline. Consequently, agents report success based on infrastructure metrics while the actual knowledge produced lacks the necessary depth or context for strategic utility.
+This concept defines the structural gap between monitoring infrastructure that tracks resource utilization and process states versus systems that evaluate the quality, freshness, and logical coherence of generated content. The mechanism involves a misalignment where high-fidelity metrics are applied to operational stability while low-fidelity or absent metrics are applied to semantic integrity. This results in a system that is highly observable regarding its own mechanics but opaque regarding its actual utility, forcing human operators to become the primary validation layer for data quality.
 
 ## Context
 
-Sean faces a critical inversion where his monitoring setup fails to detect when agents are idle or blocked by infrastructure limitations like missing MCP connections. This leads to undetected productivity loss because the system validates that the agent is running, not that it is producing valuable semantic output.
+Sean's current monitoring validates process existence but fails to validate semantic completeness, meaning he cannot distinguish between a healthy agent producing good content and a healthy agent producing stale content. This forces him to allocate time for manual verification, reducing the net efficiency gain of the agent fleet.
 
 ## Evidence
 
-> The health of the autonomous agent fleet, such as vault-indexer and vault-synthesizer, is directly tied to the overall infrastructure health of Sean's systems.
+> This connection reveals a fundamental tension between the operational metrics used to monitor agent health and the semantic integrity of the data they produce.
 
-> Sean must redefine 'health' metrics to include semantic output quality and task completion against strategic goals, not just process uptime.
+> There is a critical tension between operational reliability (access) and cognitive utility (meaning) in agentic systems.
 
 ## Examples
 
-- The fleet's health monitoring mechanism validates process existence and network connectivity but fails to validate the semantic completeness of the data pipeline.
-- When physical machines go offline, agents that depend on them become non-functional, yet the orchestration layer may still report 'healthy' status.
+- Agents report success based on HTTP 200 responses while the content body contains outdated information.
+- Dashboards confirm uptime but provide no signal regarding the freshness of the underlying knowledge base.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Agent Health Monitoring]]
+[[The Illusion of Health in Autonomous Systems]] [[Silent Failure Propagation in Agent Fleets]]

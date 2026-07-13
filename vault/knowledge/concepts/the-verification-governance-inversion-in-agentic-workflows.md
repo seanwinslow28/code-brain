@@ -2,10 +2,10 @@
 title: "The Verification-Governance Inversion in Agentic Workflows"
 type: concept
 sources:
-  - knowledge/connections/the-cost-of-supervision-vs-the-value-of-intent.md
+  - knowledge/concepts/the-verification-governance-inversion-in-agentic-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition

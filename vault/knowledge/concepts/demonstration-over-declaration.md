@@ -2,31 +2,31 @@
 title: "Demonstration Over Declaration"
 type: concept
 sources:
-  - knowledge/connections/the-taste-fidelity-decoupling-in-creative-production.md
+  - knowledge/concepts/demonstration-over-declaration.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition
 
-This mechanism outlines the operational shift required when text-based instructions fail to capture complex aesthetic preferences. It posits that effective calibration relies on demonstrating preference through iterative feedback loops rather than describing intent through static text prompts. This approach reduces the ambiguity inherent in natural language by providing concrete examples of desired outcomes, thereby tightening the feedback loop between human taste and machine output.
+This mechanism posits that complex aesthetic standards cannot be effectively communicated through declarative instructions alone, but must be demonstrated through exemplars. The underlying pattern is that 'description' lacks the granularity to capture tacit knowledge, leading to a gap between intent and execution in agentic systems. Consequently, high-fidelity models are required not just for processing power, but for their ability to approximate the nuanced patterns found in demonstration data.
 
 ## Context
 
-Sean's increasing use of larger models (qwen3.6-35b) suggests an attempt to reduce the need for this intensive demonstration, yet the persistent need for high rejection rates indicates that declaration alone is insufficient. The data shows that even with superior models, the 'connections_written' metric remains low relative to clusters sampled, highlighting the difficulty of encoding taste without demonstration.
+Sean's transition to qwen3.6-35b-a3b-32k aligns with this principle, as larger models are better at pattern matching from demonstrations than smaller ones. The drop in rejections suggests that the model is better approximating his taste through its training data rather than through explicit prompting.
 
 ## Evidence
 
-> This gap necessitates a shift from 'prompt engineering' to 'calibration engineering,' where the primary activity becomes demonstrating preference through iterative feedback rather than describing intent through text.
+> You don't get a person from a description of a person, and you sure as hell don't get one out of a single prompt.
 
-> The tension lies between the agent's default statistical tendency toward the 'median' and the user's desire for unique aesthetic expression.
+> Not prompting harder, but teaching it my taste until what came back was recognizably mine.
 
 ## Examples
 
-- Sean's run on 2026-07-07 wrote only 86 concepts from 144 clusters, requiring significant supervision to filter out non-distinctive outputs.
-- The shift from 'prompt engineering' to 'calibration engineering' where the primary activity becomes demonstrating preference through iterative feedback rather than describing intent through text.
+- Sean's reliance on 'dragging' the output to have a pulse indicates that declaration (the initial prompt) is insufficient for creative fidelity.
+- The use of qwen3.6-35b-a3b-32k suggests a preference for models with larger context windows and better pattern recognition capabilities.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[Supervision as the New AI Edge]]
+[[The Taste-Fidelity Decoupling in Creative Production]] [[Taste as Evaluation Function vs. Activity Proof]]

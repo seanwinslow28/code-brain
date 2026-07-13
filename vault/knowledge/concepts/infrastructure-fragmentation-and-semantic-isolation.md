@@ -2,30 +2,31 @@
 title: "Infrastructure Fragmentation and Semantic Isolation"
 type: concept
 sources:
-  - knowledge/connections/infrastructure-fragmentation-and-semantic-isolation.md
+  - knowledge/connections/cross-domain-infrastructure-fragility-and-knowledge-synthesis-quality.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition
 
-This concept defines the causal link between physical or network disconnections in hardware infrastructure and the resulting isolation of semantic data within agent silos. The mechanism operates by breaking the mesh connectivity required for agents to share context, forcing them to operate with limited local knowledge rather than a unified global view. This fragmentation prevents the emergence of complex, cross-domain insights that depend on accessing the full breadth of Sean's knowledge base.
+This mechanism defines how physical disconnection of hardware nodes creates a fragmented agent mesh that cannot support complex, cross-domain reasoning. When key hosts become unreachable, agents lose access to shared context and memory stores, forcing them to operate in silos with incomplete data. This isolation prevents the synthesis of holistic insights, as agents cannot verify or enrich their understanding against the full vault state.
 
 ## Context
 
-Sean's physical hardware disconnections create a fragmented agent mesh that cannot support the complex reasoning required for his creative and professional outputs, leading to shallow synthesis results.
+Sean's infrastructure instability (tier2-host-unreachable) is directly causing semantic isolation in his synthesizer agents. This technical fragmentation is a root cause of the declining quality in his knowledge synthesis, as agents are unable to perform the deep cross-referencing necessary for high-value insights.
 
 ## Evidence
 
-> The physical disconnection of key hardware creates a fragmented agent mesh that cannot support complex, cross-domain reasoning.
+> This concept defines the causal link between physical or network disconnections in hardware infrastructure and the resulting isolation of semantic data within agent silos.
 
-> This technical fragmentation directly causes semantic isolation, where agents operate in silos with limited context, leading to shallow outputs or empty queues despite 'healthy' status reports.
+> Prioritize resolving the 'tier2-host-unreachable' status for the vault-synthesizer agent.
 
 ## Examples
 
-- Agents operating in silos due to hardware disconnections
+- The 'tier2-host-unreachable' status preventing the vault-synthesizer from accessing full context.
+- Agents operating in silos due to network disconnections, leading to fragmented knowledge synthesis.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+[[Vault as Agent Infrastructure]] [[Silent Failure Propagation in Agent Fleets]]
