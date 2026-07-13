@@ -5,8 +5,8 @@ connects:
   - The Paradox of Agentic Efficiency vs. Creative Authority
   - The Taste-Fidelity Decoupling in Creative Production
   - Supervision as the New AI Edge
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-11
+updated: 2026-07-11
 ---
 
 ## Synthesis

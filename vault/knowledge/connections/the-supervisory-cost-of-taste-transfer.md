@@ -5,8 +5,8 @@ connects:
   - The Taste-Fidelity Decoupling in Creative Production
   - Supervision as the New AI Edge
   - Constraint-First Automation vs. General Efficiency
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Synthesis

@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/market-positioning.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition
 
-This concept defines the strategic alignment of technical capabilities with the market's evolving basis of competition, specifically shifting value perception from raw output to curated authority. It requires a deliberate decoupling of 'activity proof' (volume of work) from 'taste proof' (quality of judgment). The mechanism involves positioning the creator not as a producer of content but as an architect of taste, where the market pays for the scarcity of good judgment rather than the abundance of generation. This shift is necessary because automated generation commoditizes output, making taste the only defensible differentiator.
+This concept defines the strategic alignment of technical capabilities with the evolving basis of competition, specifically shifting value perception from raw output to curated authority. It requires a deliberate decoupling of 'activity proof' (volume of work) from 'taste proof' (quality of judgment). The mechanism involves positioning the creator not as a producer of content but as an architect of taste, where the market pays for the scarcity of good judgment rather than the abundance of generation. This shift is necessary because automated generation commoditizes output, making taste the only defensible differentiator.
 
 ## Context
 

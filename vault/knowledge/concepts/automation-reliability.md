@@ -2,15 +2,15 @@
 title: "Automation Reliability"
 type: concept
 sources:
-  - knowledge/connections/reliability-vs-cost-in-verification-architecture.md
+  - knowledge/concepts/automation-reliability.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition
 
-This mechanism refers to the invariant that automated systems must prioritize deterministic execution and fault tolerance over optimal output quality when operating in unattended environments. It establishes a hierarchy where availability is a prerequisite for any quality metric, meaning that a reliable but lower-fidelity check is superior to an unreliable high-fidelity one. This principle forces the architecture to reject external dependencies that introduce non-deterministic latency or cost structures.
+This mechanism defines the invariant that automated systems must prioritize deterministic execution and fault tolerance over optimal output quality when operating in unattended environments. It establishes a hierarchy where availability is a prerequisite for any quality metric, meaning that a reliable but lower-fidelity check is superior to an unreliable high-fidelity one. This principle forces the architecture to reject external dependencies that introduce non-deterministic latency or cost structures.
 
 ## Context
 

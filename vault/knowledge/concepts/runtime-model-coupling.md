@@ -2,10 +2,10 @@
 title: "Runtime-Model Coupling"
 type: concept
 sources:
-  - knowledge/connections/reliability-vs-cost-in-verification-architecture.md
+  - knowledge/concepts/runtime-model-coupling.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition

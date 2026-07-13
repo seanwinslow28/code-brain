@@ -4,28 +4,28 @@ type: concept
 sources:
   - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition
 
-Legibility debt emerges when the velocity of automated execution outpaces the capacity of reporting mechanisms to reflect system state accurately. This creates a gap where high-volume output masks underlying instability, forcing human supervisors to shift from strategic oversight to forensic debugging. The resulting erosion of trust occurs because health metrics appear robust while epistemic blindness grows, making it difficult to distinguish between genuine progress and silent failure propagation.
+This invariant describes the structural decay of system trust when automated throughput outpaces the capacity for human verification. As Sean scales concept generation from 3 to 153 items per run, the reporting mechanisms fail to keep pace, creating a gap where status updates become unreliable proxies for actual health. This forces supervision to shift from strategic oversight to forensic debugging, eroding confidence in the system's metrics because the user cannot verify state without manual intervention.
 
 ## Context
 
-Sean is scaling his agent fleet's concept generation from 3 to over 150 per run, yet the reporting infrastructure remains static. This mismatch means that as throughput increases, the visibility into quality and correctness decreases, creating a dangerous illusion of health where errors are hidden by volume rather than exposed by scrutiny.
+Sean is actively scaling his agent fleet's output volume while simultaneously observing a drop in reliable status reporting. Understanding this debt is critical because it explains why high-volume runs feel less trustworthy despite producing more artifacts.
 
 ## Evidence
 
 > As Sean scales the concept generation from 3 to 153 concepts per run, the mechanisms for reporting status lag behind, creating a legibility gap.
 
-> Robust protocol instrumentation masks epistemic blindness, creating an illusion of health that is particularly dangerous in creative contexts.
+> This forces supervision to shift from strategic oversight to forensic debugging, eroding trust in the system's health metrics because the user cannot verify the system's state without manual intervention.
 
 ## Examples
 
-- The jump from 3 concepts written in May to 153 in July with only marginal improvements in rejection rates indicates a scaling bottleneck in supervision.
-- Automated dashboards highlighting successful completions while ignoring missing data creates a false sense of operational stability.
+- The jump from 3 concepts (run-2026-05-27) to 153 concepts (run-2026-07-02) coincides with a period where status reporting reliability becomes questionable.
+- The shift in supervision style from strategic oversight to forensic debugging as the volume of automated outputs increases.
 
 ## Related Concepts
 

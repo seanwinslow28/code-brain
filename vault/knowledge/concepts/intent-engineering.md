@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/intent-engineering.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition

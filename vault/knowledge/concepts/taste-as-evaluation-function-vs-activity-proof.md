@@ -2,31 +2,31 @@
 title: "Taste as Evaluation Function vs. Activity Proof"
 type: concept
 sources:
-  - knowledge/connections/the-inversion-of-creative-labor-from-production-to-curation.md
+  - knowledge/connections/the-verification-governance-inversion-in-agentic-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-07-09
-updated: 2026-07-09
+created: 2026-07-13
+updated: 2026-07-13
 ---
 
 ## Definition
 
-This concept defines the shift in creative labor from generating artifacts to evaluating them against a personal aesthetic standard. In an agentic workflow, 'activity proof' (e.g., number of prompts sent) becomes irrelevant if the output lacks distinctiveness. The mechanism relies on the creator's ability to articulate their taste through evidence rather than description, turning the evaluation process into a feedback loop that refines the model's output. This creates a dependency where the quality of the input (taste articulation) directly determines the utility of the output, making taste a scalable but fragile asset.
+This concept defines the conflict between using 'taste'—a nuanced, context-rich understanding of quality—as the primary evaluation function versus using activity metrics (like concepts written) as proof of progress. When taste is ignored in favor of activity, the system prioritizes quantity over quality, leading to a degradation in the vault's overall utility. The mechanism highlights that true evaluation requires subjective judgment that cannot be fully automated or replaced by volume-based proxies.
 
 ## Context
 
-Sean's vault synthesizer runs show a progression from 'prompting harder' to 'teaching taste.' The recent runs with qwen3.6-35b suggest that higher model fidelity allows for better taste transfer. However, the low 'connections_written' count relative to 'concepts_written' indicates that Sean is still struggling to encode his specific evaluative criteria into the system. This concept highlights the need for Sean to document his taste explicitly to reduce the cognitive load of evaluation.
+Sean needs to re-evaluate his success metrics for the vault synthesizer. Instead of celebrating high concept counts, he should focus on the fidelity and relevance of the connections generated. This shift will help him maintain the 'taste memory' necessary for effective knowledge management and prevent the erosion of quality standards.
 
 ## Evidence
 
-> You don't get a person from a description of a person, and you sure as hell don't get one out of a single prompt.
+> The high rejection rates in earlier runs indicate that the system is generating significant 'slop' that requires manual cleanup.
 
-> The value of his creative portfolio shifts from the volume of work produced to the distinctiveness of his aesthetic filter.
+> Sean must implement stricter constraints on cluster sampling to prevent the generation of low-fidelity content that requires excessive manual review.
 
 ## Examples
 
-- Sean's use of 'rejected_count' as a metric implies he is actively evaluating output against a standard, not just generating content.
-- The phrase 'recognizably mine' suggests that taste is the primary criterion for success in his current workflow.
+- Run 2026-07-08 had only 14 rejections out of 96 concepts, indicating a higher fidelity output.
+- Run 2026-07-11 had just 12 rejections out of 83 concepts, showing improved alignment with taste standards.
 
 ## Related Concepts
 
-[[Demonstration Over Declaration]] [[The Taste-Fidelity Decoupling in Creative Production]] [[Curation as the New Scarcity]]
+[[The Efficiency-Quality Inversion in Automated Synthesis]] [[Velocity vs. Judgment in MCP Strengthening]]

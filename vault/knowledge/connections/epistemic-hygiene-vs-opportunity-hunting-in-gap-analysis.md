@@ -2,11 +2,11 @@
 title: "Epistemic Hygiene vs. Opportunity Hunting in Gap Analysis"
 type: connection
 connects:
-  - Negative Space Calibration
-  - The Verification-Governance Inversion
   - Slop as a Trust Deficit
-created: 2026-07-09
-updated: 2026-07-09
+  - The Verification-Governance Inversion
+  - Negative Space Calibration
+created: 2026-07-11
+updated: 2026-07-11
 ---
 
 ## Synthesis
@@ -15,17 +15,17 @@ The fundamental tension lies in whether gap maps serve as a rigorous hygiene che
 
 ## Threads
 
-### [[Negative Space Calibration]]
+### [[Slop as a Trust Deficit]]
 
-> Every strong gap presentation does the same three things to each gap: (1) states it as a need/pain, not a solution
+> When agents treat gaps as opportunities, they fall into the 'solutioneering' trap, building features for non-existent needs
 
 ### [[The Verification-Governance Inversion]]
 
 > 98% of people write opportunities as solutions and solution-framing is the dominant failure mode of gap mapping
 
-### [[Slop as a Trust Deficit]]
+### [[Negative Space Calibration]]
 
-> When agents treat gaps as opportunities, they fall into the 'solutioneering' trap, building features for non-existent needs
+> Every strong gap presentation does the same three things to each gap: (1) states it as a need/pain, not a solution
 
 ## Implications
 
