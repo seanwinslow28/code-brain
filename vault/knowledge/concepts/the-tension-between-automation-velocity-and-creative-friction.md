@@ -2,15 +2,15 @@
 title: "The Tension Between Automation Velocity and Creative Friction"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-automation-velocity-and-creative-friction.md
+  - knowledge/concepts/the-tension-between-automation-velocity-and-creative-friction.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition
 
-This invariant describes the structural trade-off where increasing the throughput of automated synthesis agents directly correlates with a degradation in the depth of strategic connections. As Sean attempts to scale his creative output via the fleet, the fragmentation of hosts like MBP and Alienware introduces delays that negate the benefits of automation. This tension forces a choice between maintaining complex, fragile multi-host setups or simplifying to a single reliable host at the cost of raw compute power. The consequence is a reduction in synthesis quality when the system prioritizes uptime over capability.
+This invariant describes a structural trade-off where increasing the throughput of automated synthesis agents directly correlates with a degradation in the depth of strategic connections. As Sean attempts to scale his creative output via the fleet, the fragmentation of hosts like MBP and Alienware introduces delays that negate the benefits of automation. This tension forces a choice between maintaining complex, fragile multi-host setups or simplifying to a single reliable host at the cost of raw compute power. The consequence is a reduction in synthesis quality when the system prioritizes uptime over capability.
 
 ## Context
 

@@ -2,31 +2,30 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/concepts/agent-fleet-observability-dashboard.md
+  - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition
 
-An observability dashboard that prioritizes successful completions over missing data or silence creates a blind spot for systemic failures. Effective design requires treating silence as a critical error signal, ensuring that gaps in output are as visible as successes. This approach prevents the normalization of silent failures and forces attention to areas where the system is not performing.
+This concept defines the necessary architectural shift from monitoring operational metrics (uptime, latency) to monitoring semantic integrity and verification gaps. A true observability layer for agentic work must treat silence, missing data, or unverified outputs as critical errors rather than successes. It requires a feedback loop where the system explicitly flags when human judgment is required, rather than assuming that completion equals correctness.
 
 ## Context
 
-Sean's current dashboard likely highlights volume metrics, which obscures the declining quality of connections. By shifting focus to missing data and silence, Sean can identify where the agent fleet is failing to produce meaningful insights rather than just processing inputs.
+Sean's current metrics show 'concepts_written' and 'duration', but lack a clear signal for 'semantic verification needed'. The dashboard needs to highlight when the ratio of rejected concepts or unverified clusters exceeds a threshold, forcing a pause in automation.
 
 ## Evidence
 
 > Automated dashboards should be designed to highlight missing data or silence as critical errors, not just successful completions.
 
-> Sean must treat manual tickets as the single source of truth for system health, rather than a reflection of agent activity.
+> The tension between operational visibility and semantic value reveals a critical flaw: agents can report 'healthy' status while the knowledge pipeline is effectively stalled.
 
 ## Examples
 
-- Treating manual tickets as the primary health indicator reveals gaps that automated metrics miss.
-- Highlighting silence in output streams forces investigation into why certain concepts are not being generated or connected.
+- The current manifest shows 'concepts_written' counts but does not indicate whether those concepts were verified by Sean, leaving the 'health' metric ambiguous.
 
 ## Related Concepts
 
-[[Legibility Debt as a Supervision Failure Mode]] [[The Illusion of Health in Autonomous Systems]]
+[[Legibility Debt as a Supervision Failure Mode]] [[Agent Health Monitoring]]

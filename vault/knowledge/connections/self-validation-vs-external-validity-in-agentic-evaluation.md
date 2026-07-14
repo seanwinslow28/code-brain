@@ -5,13 +5,13 @@ connects:
   - The Illusion of Competence in Automated Systems
   - Synthesizer fix
   - Vault Synthesizer Eval Suite
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Synthesis
 
-The core tension exists between the operational efficiency of using a single model family for both generation and evaluation versus the epistemic integrity required for genuine discovery. When the judge is structurally part of the candidate panel, the system optimizes for internal consistency and self-preference rather than external truth, creating an 'illusion of competence' that masks actual performance gaps. This has significant consequences for Sean's professional credibility, as it requires explicit architectural separation to validate claims of robustness across diverse inputs.
+The core tension exists between the operational efficiency of using a single model family for both generation and evaluation versus the epistemic integrity required for genuine discovery. When the judge is structurally part of the candidate panel, the system optimizes for internal consistency and self-preference rather than external truth. This creates an 'illusion of competence' that masks actual performance gaps, requiring explicit architectural separation to validate claims of robustness across diverse inputs.
 
 ## Threads
 

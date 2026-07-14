@@ -5,13 +5,13 @@ connects:
   - Legibility Debt as a Supervision Failure Mode
   - The Illusion of Health in Autonomous Systems
   - Agent Fleet Observability Dashboard
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the increasing velocity of automated execution and the decreasing legibility of its outputs. As Sean scales the concept generation from 3 to 153 concepts per run, the mechanisms for reporting status lag behind, creating a legibility gap. This forces supervision to shift from strategic oversight to forensic debugging, eroding trust in the system's health metrics because the user cannot verify the system's state without manual intervention.
+This connection reveals the fundamental tension where the drive for automated throughput directly conflicts with the preservation of semantic integrity and human trust. As Sean scales his fleet's sampling capacity, the system generates more output than he can verify, creating a legibility gap that forces supervision into forensic mode. The consequence is a systemic trust deficit: the system appears healthy because it is active, but the user cannot confirm its value without manual intervention, leading to eventual burnout or abandonment of the tool.
 
 ## Threads
 

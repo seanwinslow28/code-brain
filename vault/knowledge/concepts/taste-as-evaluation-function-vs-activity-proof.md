@@ -2,31 +2,30 @@
 title: "Taste as Evaluation Function vs. Activity Proof"
 type: concept
 sources:
-  - knowledge/connections/the-verification-governance-inversion-in-agentic-workflows.md
+  - knowledge/connections/the-efficiency-quality-inversion-in-agentic-evaluation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition
 
-This concept defines the conflict between using 'taste'—a nuanced, context-rich understanding of quality—as the primary evaluation function versus using activity metrics (like concepts written) as proof of progress. When taste is ignored in favor of activity, the system prioritizes quantity over quality, leading to a degradation in the vault's overall utility. The mechanism highlights that true evaluation requires subjective judgment that cannot be fully automated or replaced by volume-based proxies.
+This concept defines the structural shift in creative labor where the primary value driver moves from artifact generation to aesthetic filtering against a personal standard. The mechanism requires an external or distinct evaluation function to enforce taste fidelity, rather than relying on volume metrics which only measure throughput capacity. When activity proof replaces taste as the metric, the system optimizes for consistency and speed, effectively eroding the specific judgment required to distinguish high-signal insights from low-signal noise.
 
 ## Context
 
-Sean needs to re-evaluate his success metrics for the vault synthesizer. Instead of celebrating high concept counts, he should focus on the fidelity and relevance of the connections generated. This shift will help him maintain the 'taste memory' necessary for effective knowledge management and prevent the erosion of quality standards.
+Sean's transition from using qwen3-14b to qwen3.6-35b-a3b-32k demonstrates a move away from brute-force sampling toward taste-based filtering, yet the risk remains that he will interpret the lower volume as a failure rather than a calibration success.
 
 ## Evidence
 
-> The high rejection rates in earlier runs indicate that the system is generating significant 'slop' that requires manual cleanup.
+> This concept defines the shift in creative labor from generating artifacts to evaluating them against a personal aesthetic standard
 
-> Sean must implement stricter constraints on cluster sampling to prevent the generation of low-fidelity content that requires excessive manual review.
+> He should prioritize taste-based filtering over volume-based metrics, accepting lower throughput in exchange for higher conceptual value.
 
 ## Examples
 
-- Run 2026-07-08 had only 14 rejections out of 96 concepts, indicating a higher fidelity output.
-- Run 2026-07-11 had just 12 rejections out of 83 concepts, showing improved alignment with taste standards.
+- The drop in concepts_written from 153 to 87 while maintaining connection quality indicates a successful calibration of the evaluation function rather than a degradation of capability.
 
 ## Related Concepts
 
-[[The Efficiency-Quality Inversion in Automated Synthesis]] [[Velocity vs. Judgment in MCP Strengthening]]
+[[The Illusion of Competence in Automated Systems]] [[Throughput vs. Taste Memory Tension]]

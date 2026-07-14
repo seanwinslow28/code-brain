@@ -2,31 +2,31 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/silent-failure-propagation-in-agent-fleets.md
+  - knowledge/connections/the-decoupling-of-operational-health-from-strategic-efficacy.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition
 
-This pattern describes a latent failure mode where a foundational agent's inability to produce output due to missing dependencies or configuration errors causes subsequent agents to proceed with stale or null data without raising an alarm. The downstream agents are designed to process whatever is available in the shared state, treating the absence of new information as valid input rather than a signal of upstream failure. This results in a compounding drift where the entire system operates on outdated premises while maintaining the appearance of continuous operation, creating a dangerous decoupling between operational health and semantic freshness.
+This mechanism describes how a failure in one agent's semantic output propagates downstream as a silent dependency block, rather than an explicit error. When the synthesizer fails to produce high-quality concepts due to infrastructure limitations or model constraints, subsequent agents that rely on this data inherit stale or empty context. The failure is invisible in each agent's source because the health check passes, but the strategic efficacy of the entire fleet degrades.
 
 ## Context
 
-Sean's daily-driver morning agent creates notes based on previous day's synthesis; if the synthesizer fails silently due to MCP issues, the morning brief inherits this gap without alerting him. He only notices the staleness when manually reviewing content, forcing a manual audit of the chain of custody for his daily intelligence rather than relying on automated health checks.
+Sean's daily routine and job hunt strategies rely on accurate, up-to-date information from his vault. Silent failures mean he might make career decisions based on outdated or low-quality synthesis, unaware that the underlying data pipeline is broken.
 
 ## Evidence
 
-> When a foundational agent fails to produce output due to missing dependencies or configuration errors, subsequent agents that depend on that output often proceed with stale or null data without raising an alarm.
+> There is a critical tension between the desire for autonomous synthesis and the lack of observable intermediate states in headless agents.
 
-> The result is a compounding drift where the entire system operates on outdated premises while maintaining the appearance of continuous operation.
+> When the synthesizer fails silently overnight, the morning brief inherits stale context, and the user notices the staleness before the brief flags the failure.
 
 ## Examples
 
-- The vault-indexer reports zero errors while indexing 126 chunks, but if those chunks are stale due to offline sync sources, the index is technically valid but semantically obsolete.
-- The daily note exists and was created successfully, yet it lacks the 'proactive research topic input' that should have populated it via the deep-researcher.
+- A synthesizer run completes with 103 concepts but 47 connections, yet the next day's agent finds no new insights because the semantic graph was not updated.
+- The health of the autonomous agent fleet, such as vault-indexer and vault-synthesizer, is directly tied to the overall infrastructure health, masking individual semantic failures.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Context Compounding]]
+[[The Illusion of Health in Autonomous Systems]] [[Agent Health Monitoring]]

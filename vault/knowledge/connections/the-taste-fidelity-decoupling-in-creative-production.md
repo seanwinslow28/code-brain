@@ -2,32 +2,32 @@
 title: "The Taste-Fidelity Decoupling in Creative Production"
 type: connection
 connects:
-  - The Taste-Fidelity Decoupling in Creative Production
+  - The Efficiency-Quality Inversion in Automated Synthesis
+  - The Calibration Bottleneck in Scalable Creative Production
   - Supervision as the New AI Edge
-  - Demonstration Over Declaration
-created: 2026-07-08
-updated: 2026-07-08
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Synthesis
 
-This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. As Sean scales his creative production through automation, the 'taste-fidelity decoupling' widens, requiring increasingly sophisticated supervision mechanisms to maintain quality. The consequence is that the marginal cost of maintaining creative authority does not decrease with scale; instead, it shifts from generation labor to calibration labor. This creates a bottleneck where the value of Sean's work is determined by his ability to teach the fleet his taste, rather than his ability to generate content.
+This connection reveals a critical tension between the increasing volume of automated output and the stagnating depth of strategic connections. As Sean scales the concept generation, the 'taste-fidelity decoupling' emerges: the model produces more content, but the human supervisor spends exponentially more time correcting tone and structure than drafting from scratch. The consequence is that 'efficiency' metrics become misleading unless they account for the full lifecycle of creation and correction, leading to a net loss in creative authority if supervision capacity is not scaled accordingly.
 
 ## Threads
 
-### [[The Taste-Fidelity Decoupling in Creative Production]]
+### [[The Efficiency-Quality Inversion in Automated Synthesis]]
 
-> The tension lies between the agent's default statistical tendency toward the 'median' and the user's desire for unique aesthetic expression.
+> As Sean increases concept volume, the marginal cost of generation drops, but the marginal cost of correction rises due to the taste-fidelity decoupling.
+
+### [[The Calibration Bottleneck in Scalable Creative Production]]
+
+> As Sean's agent fleet scales up concept volume (e.g., 153 concepts in July), the rejection rate drops but the cognitive load of supervision increases, creating a bottleneck where the cost of correction exceeds the value of generation.
 
 ### [[Supervision as the New AI Edge]]
 
-> The job is to teach it yours, until it quits handing you the factory setting and starts making work that's recognizably you, on demand.
-
-### [[Demonstration Over Declaration]]
-
-> This gap necessitates a shift from 'prompt engineering' to 'calibration engineering,' where the primary activity becomes demonstrating preference through iterative feedback rather than describing intent through text.
+> Investment in 'evaluation loops' and 'taste preservation' tools will yield higher returns than investing in larger or more numerous models.
 
 ## Implications
 
-- Sean must invest in building a robust library of calibration artifacts early, as this will become the primary bottleneck for scaling his creative output.
-- The value of his Substack and job hunt materials lies not in the volume of content but in the distinctiveness of his taste, which requires continuous calibration.
+- Sean must implement a 'supervision budget' that limits concept volume to a level where he can maintain high-fidelity oversight, preventing taste degradation.
+- He should prioritize tools that enhance 'taste preservation' and 'evaluation loops' over raw model scaling, as these directly address the fidelity gap.

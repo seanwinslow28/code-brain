@@ -2,19 +2,19 @@
 title: "Constraint-First Automation vs. General Efficiency"
 type: concept
 sources:
-  - knowledge/connections/the-supervisory-cost-of-taste-transfer.md
+  - knowledge/concepts/constraint-first-automation-vs-general-efficiency.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition
 
-This pattern identifies the trade-off between optimizing for broad operational efficiency and optimizing for specific, taste-encoded constraints. General efficiency seeks to minimize cost and time per unit of output, often by lowering the complexity of the rubric. Constraint-first automation accepts higher per-unit costs to ensure the output adheres to a narrow, high-fidelity aesthetic standard, prioritizing signal over noise.
+This pattern identifies the structural trade-off between optimizing for broad operational throughput and optimizing for specific, taste-encoded constraints. General efficiency seeks to minimize cost and time per unit of output by lowering the complexity of the rubric, whereas constraint-first automation accepts higher per-unit costs to ensure the output adheres to a narrow, high-fidelity aesthetic standard. The mechanism prioritizes signal fidelity over noise reduction, effectively treating taste as a hard constraint rather than a soft preference.
 
 ## Context
 
-Sean's prior runs with qwen3-14b optimized for general efficiency (more concepts written), while his recent runs with qwen3.6-35b optimize for constraint-first automation (fewer concepts, fewer rejections). He must decide which metric aligns with his current strategic goal.
+Sean's prior runs with qwen3-14b optimized for general efficiency by writing more concepts, while his recent runs with qwen3.6-35b optimize for constraint-first automation by writing fewer concepts with significantly fewer rejections. He must decide which metric aligns with his current strategic goal of building a high-fidelity knowledge vault rather than a large, low-signal one.
 
 ## Evidence
 
