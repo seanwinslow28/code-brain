@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/connections/velocity-vs-judgment-in-agentic-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition
@@ -24,8 +24,8 @@ Sean must reduce his synthesizer's output volume to prioritize depth over breadt
 
 ## Examples
 
-- The system's ability to maintain judgment and fidelity degrades as volume increases.
-- More time is spent checking work than doing it due to the verification-governance inversion.
+- Sean must reduce his synthesizer's output volume to prioritize depth over breadth
+- quality cannot be scaled linearly with speed
 
 ## Related Concepts
 

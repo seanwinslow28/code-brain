@@ -5,8 +5,8 @@ connects:
   - The Illusion of Competence in Automated Systems
   - Taste as Evaluation Function vs. Activity Proof
   - Vault Synthesizer Eval Suite
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Synthesis

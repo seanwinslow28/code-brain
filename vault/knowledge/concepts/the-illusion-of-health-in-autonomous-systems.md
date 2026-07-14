@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition
 
-This pattern occurs when robust protocol instrumentation masks underlying epistemic blindness, creating a false sense of operational stability. Agents report successful completions and high throughput, but the semantic quality or structural integrity of the output degrades silently. This is particularly dangerous in creative contexts where taste memory and judgment are eroded by volume, yet the system logs show no errors.
+This invariant captures the phenomenon where robust protocol instrumentation and high completion rates mask underlying epistemic blindness, creating a false sense of system stability. Agents report success based on technical criteria (e.g., file written, API call returned), but these metrics do not correlate with semantic value or strategic alignment. The danger is acute in creative contexts because the lack of immediate negative feedback allows low-quality output to accumulate silently until it overwhelms the user's capacity to filter.
 
 ## Context
 
-Sean's vault synthesizer runs show increasing concept counts but potentially decreasing connection quality or relevance. Recognizing this illusion prevents him from mistaking activity for progress.
+Sean's fleet runs consistently for days with high 'concepts_written' counts, but the 'rejected_count' and 'clusters_sampled' metrics reveal that much of this activity is noise. The system feels healthy because it never crashes, but the semantic integrity of the vault is degrading due to the sheer volume of unverified output.
 
 ## Evidence
 
@@ -24,9 +24,8 @@ Sean's vault synthesizer runs show increasing concept counts but potentially dec
 
 ## Examples
 
-- The discrepancy between high concept counts (e.g., 153 concepts) and the potential loss of semantic fidelity in those concepts.
-- The reliance on automated dashboards that only flag successful completions, ignoring the quality or relevance of the generated content.
+- On 2026-07-06, the system wrote 103 concepts and sampled 193 clusters with a rejection rate of 106, yet the run completed successfully in 2725 seconds, masking the high failure rate within the 'success' metric.
 
 ## Related Concepts
 
-[[Legibility Debt as a Supervision Failure Mode]] [[Agent Fleet Observability Dashboard]]
+[[Legibility Debt as a Supervision Failure Mode]] [[Agent Health Monitoring]]

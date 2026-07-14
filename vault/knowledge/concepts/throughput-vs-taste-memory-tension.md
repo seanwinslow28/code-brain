@@ -4,28 +4,28 @@ type: concept
 sources:
   - knowledge/connections/velocity-vs-judgment-in-agentic-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition
 
-This invariant captures the systemic conflict where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. The mechanism operates by prioritizing quantity over the nuanced quality required for creative integrity, causing a degradation in the perceived value of the output. This tension is critical because it undermines the user's confidence in the automated system's ability to produce high-quality work.
+This invariant captures the systemic conflict where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. The mechanism operates by prioritizing quantity of output over the nuanced quality required for creative fidelity, causing the operator to lose confidence in the system's ability to maintain aesthetic standards. This tension manifests as a growing gap between the volume of generated content and the operator's capacity to verify its strategic alignment.
 
 ## Context
 
-Sean faces a challenge in maintaining his aesthetic standards while scaling his agentic workflows. The tension between throughput and taste memory requires him to find a balance that preserves his creative identity without sacrificing efficiency.
+Sean faces a trust deficit as his automated systems produce more content that fails to meet his creative standards, forcing him to spend more time verifying outputs rather than creating new ones. This erosion of trust undermines the utility of the automation pipeline for high-stakes creative work.
 
 ## Evidence
 
 > There is a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
 
-> As Sean scales the concept generation, the system's ability to maintain judgment and fidelity degrades.
+> Creatives in the comments echo that this material is impossible to build good narratives or campaigns on.
 
 ## Examples
 
-- The drive for automated throughput directly conflicts with the preservation of taste memory.
-- A systemic trust deficit arises from the conflict between throughput and taste.
+- leading to a systemic trust deficit
+- impossible to build good narratives or campaigns on
 
 ## Related Concepts
 

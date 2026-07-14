@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/public-benchmarking-infrastructure.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition
