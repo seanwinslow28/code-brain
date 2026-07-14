@@ -5,8 +5,8 @@ connects:
   - The Efficiency-Quality Inversion in Automated Synthesis
   - Throughput vs. Taste Memory Tension
   - Tacit Knowledge Erosion vs. Automation Scale
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Synthesis

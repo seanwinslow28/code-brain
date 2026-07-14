@@ -2,10 +2,10 @@
 title: "Job Hunt as Sales Pipeline"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/job-feed/2026-07-11.md
+  - knowledge/concepts/job-hunt-as-sales-pipeline.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition

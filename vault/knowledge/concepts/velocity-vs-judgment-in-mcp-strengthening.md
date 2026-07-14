@@ -2,10 +2,10 @@
 title: "Velocity vs. Judgment in MCP Strengthening"
 type: concept
 sources:
-  - knowledge/connections/the-verification-governance-inversion-in-agentic-workflows.md
+  - knowledge/concepts/velocity-vs-judgment-in-mcp-strengthening.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition

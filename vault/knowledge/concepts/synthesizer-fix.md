@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/self-validation-vs-external-validity-in-agentic-evaluation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition
 
-This concept defines the architectural intervention of enforcing family separation between generation and evaluation models. It posits that model family separation is the single highest-leverage, lowest-cost lever for restoring epistemic integrity in agentic workflows. By decoupling the judge from the candidate pool, the system prevents the structural bias inherent in same-family evaluations.
+This concept defines the architectural intervention of enforcing strict separation between the generation model and the evaluation judge. It identifies family separation as the highest-leverage mechanism for breaking self-referential bias loops in automated synthesis. By ensuring the judge cannot be a candidate, the system forces genuine external validation rather than internal preference optimization.
 
 ## Context
 
-Sean needs to implement this fix to validate claims of robustness across diverse inputs. It is a critical step in moving from operational efficiency to genuine discovery in his knowledge vault infrastructure.
+Sean's transition from Qwen3-14b to Qwen3.6-35b showed improved metrics but masked underlying validity issues until explicit separation was enforced. This fix is critical for maintaining epistemic integrity in his personal knowledge vault.
 
 ## Evidence
 
@@ -24,8 +24,8 @@ Sean needs to implement this fix to validate claims of robustness across diverse
 
 ## Examples
 
-- Switching from Qwen3.6 to Claude for evaluation while keeping Qwen3.6 for synthesis
-- Using Llama-2 as a judge for GPT-4 outputs in benchmarking scenarios
+- Using Claude Opus as the judge while Qwen3.6 generates the content
+- Architectural separation of the judge from the candidate panel in every tier
 
 ## Related Concepts
 
