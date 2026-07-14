@@ -732,3 +732,218 @@ def reconcile_stale(accounting_date: date, *, older_than: datetime | None = None
         if reconciled:
             _atomic_write_json_fsync(_daily_file_in(root, accounting_date), data)
         return reconciled
+
+
+def record_actual(
+    reservation: Reservation,
+    *,
+    attempt_id: str,
+    generation_id: str | None,
+    usage_cost: float | None,
+    status: str = _SETTLED,
+) -> None:
+    """Append ONE non-debit per-attempt actual; DO NOT transition the reservation.
+
+    The council/retrieval graphs run many attempts under one reservation (F8a.4). Each
+    attempt's ``usage.cost``+``generation_id`` is recorded as its own ``actuals`` row so
+    per-generation truth survives — a failed-but-billed attempt is never laundered into an
+    aggregate zero — and ``reserved >= sum(actual)`` stays checkable per graph. The
+    reservation stays ``dispatched``; the single terminal transition is ``close`` (or
+    ``settle`` for the atomic single-attempt seams). ``usage.cost`` NEVER debits
+    ``amount``/``total``. ``attempt_id`` must be unique within the day, matching ``settle``.
+    """
+    if status not in (_SETTLED, _UNKNOWN):
+        raise ReservationError(f"actual status must be settled|unknown, got {status!r}")
+    if not isinstance(attempt_id, str) or not attempt_id:
+        raise ReservationError(f"attempt_id must be a nonblank string, got {attempt_id!r}")
+    if generation_id is not None and (not isinstance(generation_id, str) or not generation_id):
+        raise ReservationError(
+            f"generation_id must be None or a nonblank string, got {generation_id!r}"
+        )
+    # settled <-> a KNOWN cost; unknown <-> no usable cost. Never mislabel one as the other,
+    # or a null-cost "settled" row would falsely assert a fully-accounted attempt.
+    if status == _SETTLED and usage_cost is None:
+        raise ReservationError("a settled actual requires a known usage_cost (got None)")
+    if status == _UNKNOWN and usage_cost is not None:
+        raise ReservationError("an unknown actual must carry usage_cost None")
+    on_date = _normalize_account_date(reservation.on_date)
+    root = _resolve_root()
+    with month_lock(on_date, root=root):
+        parsed = _strict_parse_file(_daily_file_in(root, on_date))
+        if attempt_id in parsed.attempt_ids:
+            raise ReservationError(f"attempt_id {attempt_id!r} already recorded")
+        data = _load_daily_in(root, on_date)
+        row = _find_reservation_row(data, reservation.reservation_id)
+        if row["status"] != _DISPATCHED:
+            raise ReservationError(
+                f"cannot record an actual against a {row['status']!r} reservation "
+                "(expected dispatched)"
+            )
+        if usage_cost is not None:
+            _to_decimal(usage_cost, field="usage_cost")
+        data.setdefault("actuals", []).append({
+            "reservation_id": reservation.reservation_id,
+            "run_id": reservation.run_id,
+            "attempt_id": attempt_id,
+            "generation_id": generation_id,
+            "usage_cost": usage_cost,
+            "status": status,
+            "recorded_at": datetime.now(timezone.utc).isoformat(),
+        })
+        _atomic_write_json_fsync(_daily_file_in(root, on_date), data)
+
+
+def close(reservation: Reservation, *, status: str) -> None:
+    """Terminal ``dispatched -> settled | unknown`` transition WITHOUT recording an actual.
+
+    For the multi-attempt seams whose per-attempt actuals were already written via
+    ``record_actual``: ``close`` performs only the single terminal transition, preserving
+    ``settle``'s one-terminal-transition invariant. ``unknown`` retains the reservation
+    debit (refund only on affirmative provider no-charge evidence). A fully failed graph
+    (zero surviving attempts, zero actuals) closes ``unknown`` and keeps its debit.
+    """
+    if status not in (_SETTLED, _UNKNOWN):
+        raise ReservationError(f"close status must be settled|unknown, got {status!r}")
+    on_date = _normalize_account_date(reservation.on_date)
+    root = _resolve_root()
+    with month_lock(on_date, root=root):
+        _strict_parse_file(_daily_file_in(root, on_date))  # fail closed before mutating
+        data = _load_daily_in(root, on_date)
+        row = _find_reservation_row(data, reservation.reservation_id)
+        if row["status"] != _DISPATCHED:
+            raise ReservationError(
+                f"illegal transition {row['status']} -> {status} (expected dispatched)"
+            )
+        if status == _SETTLED:
+            # ``settled`` asserts the graph is FULLY accounted: at least one actual, and none
+            # of this reservation's actuals left unknown/null. A zero-actual or any-unknown
+            # graph closes ``unknown`` — never launder a possibly-billed graph into a clean
+            # settled/no-cost terminal that reconcile_stale will not revisit.
+            own = [
+                a for a in data.get("actuals", [])
+                if a.get("reservation_id") == reservation.reservation_id
+            ]
+            if not own:
+                raise ReservationError("cannot close settled with zero actuals — use unknown")
+            if any(a.get("status") != _SETTLED or a.get("usage_cost") is None for a in own):
+                raise ReservationError(
+                    "cannot close settled while an actual is unknown/uncosted — use unknown"
+                )
+        row["status"] = status
+        _atomic_write_json_fsync(_daily_file_in(root, on_date), data)
+
+
+@dataclass(frozen=True)
+class ReconcileResult:
+    """Outcome of reconciling ledger actuals against authoritative provider records.
+
+    ``reconciled_total`` is the provider-authoritative billed sum (matched + unaccounted) —
+    the honest figure the ``reserved >= actual`` cross-check uses. Unresolved attempts stay
+    ``unknown`` (never zero) and contribute nothing to the total.
+    """
+    reconciled_total: Decimal
+    resolved: list      # ledger null-cost filled from provider truth
+    confirmed: list     # ledger cost == provider cost
+    corrected: list     # ledger cost != provider cost (provider authoritative)
+    unaccounted: list   # provider generation with NO ledger actual (failed-but-billed)
+    unresolved: list    # ledger actual with no usable provider cost — stays unknown
+
+
+def _reconcile_money(value, *, field: str) -> Decimal:
+    """Coerce a reconciliation money value to a finite, nonnegative ``Decimal`` or fail
+    closed. Accepts ``Decimal`` (as well as the ledger's JSON int/float) so the helper's own
+    ``reconciled_cost`` output can be fed back unchanged in an idempotent replay."""
+    if isinstance(value, Decimal):
+        dec = value
+    elif isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise LedgerCorrupt(f"{field} must be a number, got {value!r}")
+    else:
+        try:
+            dec = Decimal(str(value))
+        except InvalidOperation as exc:
+            raise LedgerCorrupt(f"{field} is not a valid decimal: {value!r}") from exc
+    if not dec.is_finite():
+        raise LedgerCorrupt(f"{field} must be finite, got {value!r}")
+    if dec < 0:
+        raise LedgerCorrupt(f"{field} must be nonnegative, got {value!r}")
+    return dec
+
+
+def reconcile_generations(actuals, provider_records) -> ReconcileResult:
+    """Idempotent reconciliation of ledger actuals against provider generation truth.
+
+    Keyed by ``generation_id``; the provider is authoritative for what was billed:
+      * ledger cost null  + provider cost       -> resolved (filled from provider)
+      * ledger cost == provider cost            -> confirmed (exact Decimal equality)
+      * ledger cost != provider cost            -> corrected (provider wins)
+      * provider generation with NO ledger row  -> unaccounted (failed-but-billed)
+      * ledger row with no usable provider cost -> unresolved (stays unknown, never zero)
+
+    ``reconciled_total`` sums provider truth over every matched + unaccounted generation.
+    Pure: no ledger mutation and no network (provider records are injected), so re-running
+    on the resolved ledger yields the identical total — idempotent by construction. Corrupt
+    ledger money / ids fail closed (``LedgerCorrupt``) rather than pass as a silent zero.
+    """
+    provider: dict = {}
+    for gen_id, cost in dict(provider_records).items():
+        provider[gen_id] = None if cost is None else _reconcile_money(cost, field="provider usage_cost")
+
+    # The billed total is provider truth, counted ONCE per generation — independent of how
+    # many (or how few) ledger rows reference it. Summing per-ledger-row would double-count a
+    # duplicated generation_id, and a doubled cost total is dangerously-wrong.
+    total = sum((c for c in provider.values() if c is not None), Decimal(0))
+
+    resolved: list = []
+    confirmed: list = []
+    corrected: list = []
+    unresolved: list = []
+    matched: set = set()
+    seen: set = set()  # every generation_id present in a ledger row (usable cost or not)
+
+    for act in actuals:
+        gen_id = act.get("generation_id")
+        attempt_id = act.get("attempt_id")
+        ledger_cost = act.get("usage_cost")
+        if gen_id is not None and (not isinstance(gen_id, str) or not gen_id):
+            raise LedgerCorrupt(
+                f"actual generation_id must be None or a nonblank string, got {gen_id!r}"
+            )
+        # Validate ledger money UP FRONT so a corrupt cost fails closed even when there is no
+        # provider truth to compare against — never silently pass as an unresolved zero.
+        ledger_dec = None if ledger_cost is None else _reconcile_money(ledger_cost, field="ledger usage_cost")
+        if gen_id is not None:
+            seen.add(gen_id)
+        prov_cost = provider.get(gen_id) if gen_id is not None else None
+        if gen_id is None or gen_id not in provider or prov_cost is None:
+            # No usable provider truth for this row → stays unknown, never zeroed.
+            unresolved.append({"attempt_id": attempt_id, "generation_id": gen_id})
+            continue
+        matched.add(gen_id)
+        entry = {"attempt_id": attempt_id, "generation_id": gen_id, "reconciled_cost": prov_cost}
+        if ledger_dec is None:
+            resolved.append(entry)
+        elif ledger_dec == prov_cost:
+            confirmed.append(entry)
+        else:
+            corrected.append(entry)
+
+    unaccounted: list = []
+    for gen_id, prov_cost in provider.items():
+        if gen_id in seen:
+            # The ledger already holds a row for this generation — its disposition was decided
+            # in the actuals loop (matched or unresolved). Don't emit a phantom duplicate.
+            continue
+        if prov_cost is None:
+            # Provider knows the generation but reports no cost yet → stays unknown.
+            unresolved.append({"attempt_id": None, "generation_id": gen_id})
+            continue
+        unaccounted.append({"generation_id": gen_id, "reconciled_cost": prov_cost})
+
+    return ReconcileResult(
+        reconciled_total=total,
+        resolved=resolved,
+        confirmed=confirmed,
+        corrected=corrected,
+        unaccounted=unaccounted,
+        unresolved=unresolved,
+    )
