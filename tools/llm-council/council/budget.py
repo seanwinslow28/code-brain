@@ -2,14 +2,42 @@
 
 Spend files live at $COUNCIL_SPEND_DIR (default: vault/health/) and are append-only
 JSON written atomically via tmp + rename.
+
+F8a.3 adds the-oracle's locked reserve-before-dispatch surface on this same ledger:
+a canonical month-scoped ``flock`` (``month_lock``), a locked ``record_spend`` for
+*every* writer (so an unmigrated sibling's stale read-modify-write can never clobber a
+durably-appended oracle reservation), a strict fail-closed enforcement parser
+(``strict_ledger_state``), the ``check_and_reserve`` transaction, and a crash-safe
+``reserved -> dispatched -> settled | unknown`` reservation lifecycle. Siblings keep
+their tolerant preflight/settlement lifecycle until F8b; only their *mutation* is now
+serialized. The reserved-cost is the sole enforcement debit (``amount``/``total``);
+actual ``usage.cost`` is recorded in a non-debit ``actuals`` array keyed by
+``run_id``+``attempt_id``. The schema is versioned so F8b is additive.
 """
 
+import contextlib
+import fcntl
 import json
 import os
 import tempfile
+import uuid
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, datetime, timezone
+from decimal import ROUND_CEILING, Decimal, InvalidOperation
 from pathlib import Path
+
+# Additive schema contract (F8b populates the nullable policy_* fields + adds writers
+# without rewriting F8a rows or changing the lock kernel).
+LEDGER_SCHEMA_VERSION = 2
+_SUPPORTED_SCHEMA_VERSIONS = (1, 2)
+_MICRO = Decimal("0.000001")
+_RESERVATION_KIND = "reservation"
+_RESERVED = "reserved"
+_DISPATCHED = "dispatched"
+_SETTLED = "settled"
+_UNKNOWN = "unknown"
+_LIFECYCLE_STATES = (_RESERVED, _DISPATCHED, _SETTLED, _UNKNOWN)
+_NONTERMINAL = (_RESERVED, _DISPATCHED)
 
 
 @dataclass(frozen=True)
@@ -21,6 +49,18 @@ class Pricing:
 
 class BudgetExceeded(Exception):
     """Raised when a pre-flight check rejects a query."""
+
+
+class LedgerCorrupt(Exception):
+    """Strict enforcement parse refused the ledger — fail closed, never under-count.
+
+    Distinct from the tolerant ``_read_total_*``/``_sum_runs`` readers, which stay
+    tolerant for dashboards/reporting only.
+    """
+
+
+class ReservationError(Exception):
+    """An illegal reservation lifecycle transition or a missing reservation row."""
 
 
 def _spend_dir() -> Path:
@@ -85,15 +125,26 @@ def _read_total_for_month(on_date: date) -> float:
 
 
 def record_spend(*, amount: float, profile: str, tag: str, on_date: date, tool: str = "council") -> None:
-    """Append a run to today's daily spend file. Atomic write."""
-    f = _daily_file(on_date)
-    if f.exists():
-        data = json.loads(f.read_text())
-    else:
-        data = {"date": on_date.isoformat(), "total": 0.0, "runs": []}
-    data["runs"].append({"amount": amount, "profile": profile, "tag": tag, "tool": tool})
-    data["total"] = round(data["total"] + amount, 6)
-    _atomic_write_json(f, data)
+    """Append a run to today's daily spend file under the canonical month lock.
+
+    F8a.3 (finding 1): the read-modify-write acquires the month lock on *every*
+    mutation, including legacy sibling calls, so an unmigrated sibling's stale snapshot
+    can never clobber a durably-appended oracle reservation. The signature and on-disk
+    shape are unchanged, so siblings need no code change.
+    """
+    on_date = _normalize_account_date(on_date)
+    root = _resolve_root()
+    with month_lock(on_date, root=root):
+        f = _daily_file_in(root, on_date)
+        if f.exists():
+            data = json.loads(f.read_text())
+        else:
+            data = {"date": on_date.isoformat(), "total": 0.0, "runs": []}
+        data["runs"].append({"amount": amount, "profile": profile, "tag": tag, "tool": tool})
+        # Recompute total as the Decimal sum of all runs (not an iterative float round),
+        # so the stored total never drifts past the strict parser's tolerance (finding 9).
+        _recompute_total(data)
+        _atomic_write_json(f, data)
 
 
 def _sum_runs(path: Path, tool: str) -> float:
@@ -171,3 +222,513 @@ def preflight(
             f"monthly cap would be exceeded: month-to-date=${month_total:.4f} + "
             f"estimated=${estimated:.4f} > monthly_cap=${monthly_cap:.4f}"
         )
+
+
+# ---------------------------------------------------------------------------
+# F8a.3 — canonical lock identity + locked reserve + crash-safe lifecycle
+# ---------------------------------------------------------------------------
+
+
+def _normalize_account_date(on_date) -> date:
+    """Coerce to a plain calendar ``date`` or fail closed.
+
+    ``datetime`` is a ``date`` subclass whose ``isoformat()`` is a timestamp — left as-is
+    it would open a per-*instant* daily file that bypasses the calendar day's accumulated
+    total (finding 1). Normalize a ``datetime`` to its UTC-agnostic calendar day; reject
+    anything that is not a date at all (the-oracle derives the accounting date internally
+    in UTC and passes a plain ``date``).
+    """
+    if isinstance(on_date, datetime):
+        return on_date.date()
+    if isinstance(on_date, date):
+        return on_date
+    raise TypeError("on_date must be a datetime.date")
+
+
+def _resolve_root() -> Path:
+    """Resolve the spend dir to an absolute realpath ONCE for a whole transaction.
+
+    Pinning collapses symlink/relative/trailing-slash spellings AND freezes the root for
+    the duration of the locked transaction, so a concurrent ``COUNCIL_SPEND_DIR``/cwd/
+    symlink change cannot make the lock and the data files diverge (finding 3).
+    """
+    return Path(os.path.realpath(_spend_dir()))
+
+
+def _daily_file_in(root: Path, on_date: date) -> Path:
+    return root / f"council-spend-{on_date.isoformat()}.json"
+
+
+def _month_files_in(root: Path, on_date: date) -> list:
+    prefix = f"council-spend-{on_date.strftime('%Y-%m')}-"
+    return sorted(root.glob(f"{prefix}*.json"))
+
+
+def month_lock_path(accounting_date: date, *, root: Path | None = None) -> Path:
+    """Return the ONE canonical lock file for ``accounting_date``'s month.
+
+    The path is the resolved absolute realpath of the spend dir (not the raw
+    ``COUNCIL_SPEND_DIR``/symlink spelling — two spellings of one directory must
+    collapse to the same lock file) over the MONTH kernel: the monthly cap spans every
+    daily file in the ``YYYY-MM``, so serializing the whole month makes a monthly-total
+    read + reservation write atomic. The lock keys on the *accounting month of the data
+    row*, so any two writers touching the same monthly data set take the same lock
+    regardless of their wall clocks. Pass a pre-resolved ``root`` to pin it for the whole
+    transaction; ``check_and_reserve`` and the locked ``record_spend`` both do this, and
+    F8b reuses the identical kernel.
+    """
+    accounting_date = _normalize_account_date(accounting_date)
+    root = root if root is not None else _resolve_root()
+    return root / f".council-spend-{accounting_date.strftime('%Y-%m')}.lock"
+
+
+@contextlib.contextmanager
+def month_lock(accounting_date: date, *, root: Path | None = None):
+    """Hold an exclusive inter-process ``flock`` over the accounting month.
+
+    Advisory (``fcntl.flock``); every mutation path in this module takes it. NEVER nest
+    two acquisitions on one thread — separate open file descriptions would deadlock.
+    """
+    path = month_lock_path(accounting_date, root=root)
+    fd = os.open(path, os.O_RDWR | os.O_CREAT, 0o644)
+    try:
+        fcntl.flock(fd, fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(fd, fcntl.LOCK_UN)
+    finally:
+        os.close(fd)
+
+
+def _atomic_write_json_fsync(path: Path, data: dict) -> None:
+    """Atomically replace ``path`` and fsync both the file and its parent directory.
+
+    Durability contract for the reservation lifecycle: a ``reserved``/``dispatched`` row
+    must survive a crash (so the budget stays consumed until reconciliation), which
+    requires the data to reach disk (file fsync) and the rename to be durable (parent-dir
+    fsync) before we return — i.e. before the first network byte for ``dispatched``.
+    """
+    directory = path.parent
+    fd, tmp_name = tempfile.mkstemp(dir=directory, prefix=path.name + ".", suffix=".tmp")
+    tmp = Path(tmp_name)
+    try:
+        with os.fdopen(fd, "w") as handle:
+            json.dump(data, handle, indent=2)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp, path)
+    except BaseException:
+        tmp.unlink(missing_ok=True)
+        raise
+    dir_fd = os.open(directory, os.O_RDONLY)
+    try:
+        os.fsync(dir_fd)
+    finally:
+        os.close(dir_fd)
+
+
+def _to_decimal(value, *, field: str) -> Decimal:
+    """Coerce a JSON money value to a finite, nonnegative ``Decimal`` or fail closed."""
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise LedgerCorrupt(f"{field} must be a number, got {value!r}")
+    try:
+        dec = Decimal(str(value))
+    except InvalidOperation as exc:
+        raise LedgerCorrupt(f"{field} is not a valid decimal: {value!r}") from exc
+    if not dec.is_finite():
+        raise LedgerCorrupt(f"{field} must be finite, got {value!r}")
+    if dec < 0:
+        raise LedgerCorrupt(f"{field} must be nonnegative, got {value!r}")
+    return dec
+
+
+@dataclass(frozen=True)
+class _ParsedFile:
+    aggregate: Decimal
+    by_tool: dict
+    reservation_ids: tuple
+    attempt_ids: tuple
+
+
+def _reject_duplicate_keys(pairs):
+    """``object_pairs_hook`` that refuses duplicate JSON object keys (finding 6).
+
+    Plain ``json.loads`` keeps the last value, so a tampered ledger with a second
+    ``"runs"``/``"total"`` would parse as zero and hide spend. Strict enforcement rejects.
+    """
+    seen: dict = {}
+    for key, value in pairs:
+        if key in seen:
+            raise LedgerCorrupt(f"duplicate JSON key {key!r}")
+        seen[key] = value
+    return seen
+
+
+def _strict_parse_file(path: Path) -> _ParsedFile:
+    """Strictly parse ONE daily file for enforcement — refuse on any anomaly.
+
+    Refuses (never skips/zeroes): malformed JSON, duplicate JSON keys, a bool/unsupported
+    ``schema_version``, an unparseable ``date``, an existing file missing ``runs``/``total``
+    (truncation), non-finite/negative money, a reservation row missing ``tool``/``run_id``/
+    ``status``/``reservation_id``, a stored ``total`` inconsistent with the summed runs
+    (beyond a per-run micro tolerance), an illegal reservation ``status``, or a duplicate
+    reservation/attempt id within the file. The reserved-cost ``amount`` is the debit for
+    every run regardless of lifecycle status (``total`` is reserved-only).
+    """
+    try:
+        raw = path.read_text()
+    except FileNotFoundError:
+        return _ParsedFile(Decimal(0), {}, (), ())
+    try:
+        data = json.loads(raw, object_pairs_hook=_reject_duplicate_keys)
+    except (json.JSONDecodeError, ValueError) as exc:
+        raise LedgerCorrupt(f"{path.name}: malformed JSON") from exc
+    if not isinstance(data, dict):
+        raise LedgerCorrupt(f"{path.name}: top level is not an object")
+
+    version = data.get("schema_version")
+    if version is not None and (
+        isinstance(version, bool) or version not in _SUPPORTED_SCHEMA_VERSIONS
+    ):
+        raise LedgerCorrupt(f"{path.name}: unsupported schema_version {version!r}")
+
+    date_field = data.get("date")
+    if date_field is not None:
+        try:
+            date.fromisoformat(date_field)
+        except (TypeError, ValueError) as exc:
+            raise LedgerCorrupt(f"{path.name}: invalid date {date_field!r}") from exc
+
+    # An existing ledger file must carry both runs and total; their absence means a
+    # truncated/incomplete write and MUST fail closed rather than read as zero (finding 4).
+    if "runs" not in data:
+        raise LedgerCorrupt(f"{path.name}: ledger missing runs")
+    if "total" not in data:
+        raise LedgerCorrupt(f"{path.name}: ledger missing total")
+    runs = data["runs"]
+    if not isinstance(runs, list):
+        raise LedgerCorrupt(f"{path.name}: runs is not a list")
+
+    aggregate = Decimal(0)
+    by_tool: dict = {}
+    reservation_ids: list = []
+    for row in runs:
+        if not isinstance(row, dict):
+            raise LedgerCorrupt(f"{path.name}: a run is not an object")
+        amount = _to_decimal(row.get("amount"), field=f"{path.name}: run amount")
+        is_reservation = row.get("kind") == _RESERVATION_KIND
+        if is_reservation and "tool" not in row:
+            # A reservation charged to the legacy "council" default would vanish from its
+            # real per-tool total and defeat the HARD per-tool cap (finding 5).
+            raise LedgerCorrupt(f"{path.name}: reservation row missing tool")
+        tool = row.get("tool", "council")
+        if not isinstance(tool, str) or not tool:
+            raise LedgerCorrupt(f"{path.name}: run tool must be a nonempty string")
+        aggregate += amount
+        by_tool[tool] = by_tool.get(tool, Decimal(0)) + amount
+        if is_reservation:
+            status = row.get("status")
+            if status not in _LIFECYCLE_STATES:
+                raise LedgerCorrupt(f"{path.name}: illegal reservation status {status!r}")
+            rid = row.get("reservation_id")
+            if not isinstance(rid, str) or not rid:
+                raise LedgerCorrupt(f"{path.name}: reservation missing reservation_id")
+            run_id = row.get("run_id")
+            if not isinstance(run_id, str) or not run_id:
+                raise LedgerCorrupt(f"{path.name}: reservation missing run_id")
+            reservation_ids.append(rid)
+
+    if len(set(reservation_ids)) != len(reservation_ids):
+        raise LedgerCorrupt(f"{path.name}: duplicate reservation_id")
+
+    stored = _to_decimal(data["total"], field=f"{path.name}: total")
+    # Legacy files written by the old iterative round(...,6) can drift up to a micro per
+    # run; tolerate that band while still catching gross tampering (finding 9).
+    tolerance = _MICRO * max(1, len(runs))
+    if abs(stored - aggregate) > tolerance:
+        raise LedgerCorrupt(
+            f"{path.name}: total {stored} inconsistent with summed runs {aggregate}"
+        )
+
+    actuals = data.get("actuals", [])
+    if not isinstance(actuals, list):
+        raise LedgerCorrupt(f"{path.name}: actuals is not a list")
+    attempt_ids: list = []
+    for act in actuals:
+        if not isinstance(act, dict):
+            raise LedgerCorrupt(f"{path.name}: an actual is not an object")
+        aid = act.get("attempt_id")
+        if aid is not None:
+            attempt_ids.append(aid)
+        cost = act.get("usage_cost")
+        if cost is not None:
+            _to_decimal(cost, field=f"{path.name}: usage_cost")
+    if len(set(attempt_ids)) != len(attempt_ids):
+        raise LedgerCorrupt(f"{path.name}: duplicate attempt_id")
+
+    return _ParsedFile(aggregate, by_tool, tuple(reservation_ids), tuple(attempt_ids))
+
+
+def strict_ledger_state(accounting_date: date, *, root: Path | None = None) -> dict:
+    """Fail-closed per-tool and aggregate totals for the day and month of ``accounting_date``.
+
+    Enforcement-only: refuses a corrupt ledger (``LedgerCorrupt``) rather than
+    under-counting and admitting a cap-breaking run. Callers MUST hold ``month_lock``.
+    Pass a pinned ``root`` (as ``check_and_reserve`` does) so the read cannot race a
+    concurrent spend-root change.
+    """
+    accounting_date = _normalize_account_date(accounting_date)
+    root = root if root is not None else _resolve_root()
+    day_parsed = _strict_parse_file(_daily_file_in(root, accounting_date))
+    month_agg = Decimal(0)
+    month_by_tool: dict = {}
+    all_reservation_ids: list = []
+    all_attempt_ids: list = []
+    for path in _month_files_in(root, accounting_date):
+        parsed = _strict_parse_file(path)
+        month_agg += parsed.aggregate
+        for tool, amt in parsed.by_tool.items():
+            month_by_tool[tool] = month_by_tool.get(tool, Decimal(0)) + amt
+        all_reservation_ids.extend(parsed.reservation_ids)
+        all_attempt_ids.extend(parsed.attempt_ids)
+    if len(set(all_reservation_ids)) != len(all_reservation_ids):
+        raise LedgerCorrupt("duplicate reservation_id across the accounting month")
+    if len(set(all_attempt_ids)) != len(all_attempt_ids):
+        raise LedgerCorrupt("duplicate attempt_id across the accounting month")
+    return {
+        "day": {"aggregate": day_parsed.aggregate, "by_tool": dict(day_parsed.by_tool)},
+        "month": {"aggregate": month_agg, "by_tool": month_by_tool},
+        "reservation_ids": set(all_reservation_ids),
+        "attempt_ids": set(all_attempt_ids),
+    }
+
+
+@dataclass(frozen=True)
+class Reservation:
+    """Handle to a durable reservation row; carries what the lifecycle helpers need."""
+    reservation_id: str
+    run_id: str
+    tool: str
+    amount: float
+    on_date: date
+
+
+def _load_daily_in(root: Path, on_date: date) -> dict:
+    f = _daily_file_in(root, on_date)
+    if f.exists():
+        data = json.loads(f.read_text())
+    else:
+        data = {"date": on_date.isoformat(), "total": 0.0, "runs": []}
+    data.setdefault("runs", [])
+    data.setdefault("actuals", [])
+    return data
+
+
+def _recompute_total(data: dict) -> None:
+    total = sum((_to_decimal(r.get("amount"), field="run amount") for r in data["runs"]), Decimal(0))
+    data["total"] = float(total)
+
+
+def check_and_reserve(
+    *,
+    reserved_cost: float,
+    tool: str,
+    tag: str,
+    profile: str,
+    run_id: str,
+    on_date: date,
+    per_query_cap: float,
+    tool_daily_cap: float,
+    tool_monthly_cap: float,
+    aggregate_daily_cap: float,
+    aggregate_monthly_cap: float,
+    reservation_id: str | None = None,
+    policy_version=None,
+    policy_hash=None,
+) -> Reservation:
+    """One locked transaction: strict-check the caps, then durably reserve.
+
+    Under the canonical month lock (over a spend root pinned once for the whole
+    transaction): strict-parse the ledger (fail closed on corruption), enforce the
+    per-tool per-query/daily/monthly caps HARD — there is NO ``force`` override, the
+    per-tool cap is hard (finding 2) — CHECK the cross-tool aggregate daily/monthly
+    ceiling (refuse if the-oracle would breach it — checked but not airtight until F8b),
+    then write a durable ``reserved`` row (atomic rename + fsync of file and parent dir).
+    The reserved cost is the sole enforcement debit.
+    """
+    if not isinstance(run_id, str) or not run_id:
+        raise ValueError("run_id must be a nonblank string")
+    on_date = _normalize_account_date(on_date)
+    # Quantize the reserved cost UP to the ledger micro before comparing to caps, so a
+    # float-noise value fractionally over a cap can never slip through (finding 10) and
+    # the stored debit never rounds below its bound.
+    cost = _to_decimal(reserved_cost, field="reserved_cost").quantize(_MICRO, rounding=ROUND_CEILING)
+    rid = reservation_id or uuid.uuid4().hex
+    root = _resolve_root()
+    with month_lock(on_date, root=root):
+        state = strict_ledger_state(on_date, root=root)
+        if rid in state["reservation_ids"]:
+            raise ReservationError(f"reservation_id {rid!r} already exists")
+        if cost > _to_decimal(per_query_cap, field="per_query_cap"):
+            raise BudgetExceeded(
+                f"per-query cap exceeded: reserved ${cost} > cap ${per_query_cap}"
+            )
+        tool_day = state["day"]["by_tool"].get(tool, Decimal(0))
+        if tool_day + cost > _to_decimal(tool_daily_cap, field="tool_daily_cap"):
+            raise BudgetExceeded(
+                f"{tool} daily cap would be exceeded: day=${tool_day} + reserved=${cost} "
+                f"> daily_cap=${tool_daily_cap}"
+            )
+        tool_month = state["month"]["by_tool"].get(tool, Decimal(0))
+        if tool_month + cost > _to_decimal(tool_monthly_cap, field="tool_monthly_cap"):
+            raise BudgetExceeded(
+                f"{tool} monthly cap would be exceeded: month=${tool_month} + "
+                f"reserved=${cost} > monthly_cap=${tool_monthly_cap}"
+            )
+        agg_day = state["day"]["aggregate"]
+        if agg_day + cost > _to_decimal(aggregate_daily_cap, field="aggregate_daily_cap"):
+            raise BudgetExceeded(
+                f"aggregate daily ceiling would be exceeded: day=${agg_day} + "
+                f"reserved=${cost} > aggregate_daily_cap=${aggregate_daily_cap}"
+            )
+        agg_month = state["month"]["aggregate"]
+        if agg_month + cost > _to_decimal(aggregate_monthly_cap, field="aggregate_monthly_cap"):
+            raise BudgetExceeded(
+                f"aggregate monthly ceiling would be exceeded: month=${agg_month} + "
+                f"reserved=${cost} > aggregate_monthly_cap=${aggregate_monthly_cap}"
+            )
+
+        data = _load_daily_in(root, on_date)
+        data["schema_version"] = LEDGER_SCHEMA_VERSION
+        data["runs"].append({
+            "amount": float(cost),
+            "profile": profile,
+            "tag": tag,
+            "tool": tool,
+            "kind": _RESERVATION_KIND,
+            "reservation_id": rid,
+            "run_id": run_id,
+            "status": _RESERVED,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "policy_version": policy_version,
+            "policy_hash": policy_hash,
+        })
+        _recompute_total(data)
+        _atomic_write_json_fsync(_daily_file_in(root, on_date), data)
+    return Reservation(reservation_id=rid, run_id=run_id, tool=tool, amount=float(cost), on_date=on_date)
+
+
+def _find_reservation_row(data: dict, reservation_id: str) -> dict:
+    for row in data["runs"]:
+        if row.get("kind") == _RESERVATION_KIND and row.get("reservation_id") == reservation_id:
+            return row
+    raise ReservationError(f"reservation {reservation_id} not found")
+
+
+def _transition(reservation: Reservation, *, expected, new_status: str) -> None:
+    on_date = _normalize_account_date(reservation.on_date)
+    root = _resolve_root()
+    with month_lock(on_date, root=root):
+        _strict_parse_file(_daily_file_in(root, on_date))  # fail closed before mutating
+        data = _load_daily_in(root, on_date)
+        row = _find_reservation_row(data, reservation.reservation_id)
+        if row["status"] != expected:
+            raise ReservationError(
+                f"illegal transition {row['status']} -> {new_status} "
+                f"(expected current status {expected})"
+            )
+        row["status"] = new_status
+        _atomic_write_json_fsync(_daily_file_in(root, on_date), data)
+
+
+def mark_dispatched(reservation: Reservation) -> None:
+    """Transition ``reserved -> dispatched`` and fsync BEFORE the first network byte.
+
+    A crash after this point leaves a durable ``dispatched`` debit that startup
+    reconciliation retains as ``unknown`` — the budget stays consumed, never under-counts.
+    """
+    _transition(reservation, expected=_RESERVED, new_status=_DISPATCHED)
+
+
+def settle(
+    reservation: Reservation,
+    *,
+    attempt_id: str,
+    generation_id: str | None,
+    usage_cost: float | None,
+    status: str = _SETTLED,
+) -> None:
+    """Terminal ``dispatched -> settled | unknown``; record the NON-debit actual.
+
+    ``usage.cost`` is stored in ``actuals`` keyed by ``run_id``+``attempt_id`` and never
+    debits ``amount``/``total``. Terminal ``unknown`` retains the reservation debit
+    (``usage_cost=None``); refund only on affirmative provider evidence of no charge.
+    """
+    if status not in (_SETTLED, _UNKNOWN):
+        raise ReservationError(f"settle status must be settled|unknown, got {status!r}")
+    on_date = _normalize_account_date(reservation.on_date)
+    root = _resolve_root()
+    with month_lock(on_date, root=root):
+        parsed = _strict_parse_file(_daily_file_in(root, on_date))
+        if attempt_id in parsed.attempt_ids:
+            raise ReservationError(f"attempt_id {attempt_id!r} already recorded")
+        data = _load_daily_in(root, on_date)
+        row = _find_reservation_row(data, reservation.reservation_id)
+        if row["status"] != _DISPATCHED:
+            raise ReservationError(
+                f"illegal transition {row['status']} -> {status} (expected dispatched)"
+            )
+        row["status"] = status
+        if usage_cost is not None:
+            _to_decimal(usage_cost, field="usage_cost")
+        data.setdefault("actuals", []).append({
+            "reservation_id": reservation.reservation_id,
+            "run_id": reservation.run_id,
+            "attempt_id": attempt_id,
+            "generation_id": generation_id,
+            "usage_cost": usage_cost,
+            "status": status,
+            "recorded_at": datetime.now(timezone.utc).isoformat(),
+        })
+        _atomic_write_json_fsync(_daily_file_in(root, on_date), data)
+
+
+def reconcile_stale(accounting_date: date, *, older_than: datetime | None = None) -> list:
+    """Startup reconciliation under the lock: retain crash-orphaned reservations.
+
+    Any ``reserved``/``dispatched`` row left by a crash becomes terminal ``unknown`` and
+    KEEPS its debit (consumed budget >= the retained reservation). A refund requires
+    affirmative provider evidence of no charge — the generation-id reconciliation query is
+    deferred to just before F8a.4, so F8a.3 conservatively retains.
+
+    ``older_than`` guards against clobbering a *live* dispatch owned by another process
+    (finding 8): only rows whose ``created_at`` predates the cutoff are reconciled. The
+    single-user sequential model calls this at startup before any in-flight dispatch;
+    cross-process liveness is F8b. A row with an unparseable/absent ``created_at`` is
+    reconciled (conservative retain).
+    """
+    accounting_date = _normalize_account_date(accounting_date)
+    root = _resolve_root()
+    with month_lock(accounting_date, root=root):
+        _strict_parse_file(_daily_file_in(root, accounting_date))
+        data = _load_daily_in(root, accounting_date)
+        reconciled = []
+        for row in data["runs"]:
+            if row.get("kind") != _RESERVATION_KIND or row.get("status") not in _NONTERMINAL:
+                continue
+            if older_than is not None:
+                created = row.get("created_at")
+                created_dt = None
+                if isinstance(created, str):
+                    try:
+                        created_dt = datetime.fromisoformat(created)
+                    except ValueError:
+                        created_dt = None
+                if created_dt is not None and created_dt >= older_than:
+                    continue  # too new — a live dispatch, not a crash orphan
+            row["status"] = _UNKNOWN
+            reconciled.append(row["reservation_id"])
+        if reconciled:
+            _atomic_write_json_fsync(_daily_file_in(root, accounting_date), data)
+        return reconciled
