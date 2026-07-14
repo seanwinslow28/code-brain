@@ -8,9 +8,10 @@ created: 2026-06-28
 description: "Labs are throwing away the most valuable data."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Dwarkesh Patel transcript arguing the next AI paradigm shift is continual/on-the-job learning, not just scaling verifiable-task RL training, since labs currently discard the richest signal — real deployment experience."
 ---
 Transcript
 
