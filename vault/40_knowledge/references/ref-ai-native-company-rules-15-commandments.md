@@ -8,9 +8,10 @@ created: 2026-07-14
 description: "Watch now | The fifteen rules I wrote for my own company, the five questions that turn one resented ritual into a rule that can run, and the ladder that decides how hard that rule is allowed to bite."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery, life-systems]
+ai-context: "Nate's framework for writing an AI-native company's operating rules explicitly — separating values, rules, runtime checks, and human appeals so agents (not just people) can enforce them."
 ---
 Your company already has commandments that nobody voted on or consciously decided to enforce.
 

@@ -7,8 +7,9 @@ created: 2026-07-03
 description: "Explore the latest Crunchbase product updates and release notes. Discover new features and ways to use Crunchbase data."
 tags:
   - "source/web-clip"
+  - "triage/human"
 type: "source"
-status: "unprocessed"
+status: "needs-review"
 domain:
 ---
 ## Recent Highlights
