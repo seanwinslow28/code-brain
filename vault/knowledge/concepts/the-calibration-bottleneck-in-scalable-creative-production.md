@@ -2,31 +2,31 @@
 title: "The Calibration Bottleneck in Scalable Creative Production"
 type: concept
 sources:
-  - knowledge/connections/the-supervisory-inversion-in-creative-workflows.md
+  - knowledge/connections/the-efficiency-quality-inversion-in-automated-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition
 
-This mechanism describes a structural inversion where the marginal cost of generating creative artifacts approaches zero, while the marginal cost of verifying their fidelity increases non-linearly. As agentic systems scale output volume, the human operator transitions from a producer to a reviewer, creating a bottleneck where the rate of consumption limits the effective throughput of creation. This creates a dependency on 'taste' as the primary scarce resource, forcing creators to spend more cognitive energy on discernment than on execution.
+A structural constraint where the human supervisor's capacity to evaluate and correct agent output becomes the limiting factor in the production pipeline, regardless of how fast the agents generate content. As concept volume scales, the rejection rate may drop due to better model quality or prompt engineering, but the cognitive load of supervision increases because each new concept requires distinct contextual calibration. The bottleneck is not the generation speed but the 'taste' verification step, which cannot be fully automated without degrading the unique voice Sean aims to preserve.
 
 ## Context
 
-Sean is observing his own fleet's performance metrics across different models (qwen3-14b vs qwen3.6-35b) and noticing that higher quality models do not necessarily reduce the total time spent on a task because they require more rigorous supervision to prevent 'slop'. This insight directly impacts how he should structure his Substack content, shifting focus from 'how to prompt' to 'how to evaluate'.
+Sean's data shows a steady increase in concepts written (from 3 to 153) while rejection counts fluctuate. He must recognize that scaling volume without scaling supervision capacity leads to quality degradation or burnout, not just efficiency gains.
 
 ## Evidence
 
-> creative professionals who spend more time fixing, re-rolling, and cleaning up AI-generated output than the tools actually save them
+> As Sean's agent fleet scales up concept volume (e.g., 153 concepts in July), the rejection rate drops but the cognitive load of supervision increases, creating a bottleneck where the cost of correction exceeds the value of generation.
 
-> The reported failures cluster around bad context discipline, vague prompts, missing eval loops, and unmonitored tool output
+> The reported failures cluster around bad context discipline, vague prompts, missing eval loops, and unmonitored tool output.
 
 ## Examples
 
-- Sean's run on 2026-07-05 used qwen3.6-35b which wrote 83 concepts but only 18 connections, indicating a high rejection rate due to fidelity issues rather than generation speed.
-- The shift from qwen3-14b (141 concepts written) to qwen3.6-35b (83 concepts written) shows that better models produce fewer but potentially higher-quality outputs, yet the supervision load remains high.
+- The run on 2026-07-02 produced 141 concepts with only 50 rejections, suggesting high volume but potentially lower per-concept scrutiny compared to earlier runs with fewer concepts.
+- Sean's note that 'they often spend more time fixing tone, structure, and accuracy than they would have spent drafting themselves' highlights the calibration cost.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[Supervision as the New AI Edge]]
+[[The Efficiency-Quality Inversion in Automated Synthesis]] [[Supervision as the New AI Edge]]

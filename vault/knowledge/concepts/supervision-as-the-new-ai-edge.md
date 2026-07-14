@@ -2,31 +2,31 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - knowledge/connections/the-supervisory-cost-of-taste-transfer.md
+  - knowledge/connections/the-efficiency-quality-inversion-in-automated-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition
 
-In an environment where generative capacity is commoditized, the competitive advantage shifts from the ability to produce content to the ability to curate and verify it with high-fidelity taste. This invariant posits that the cost of supervision is not a fixed overhead but a variable that scales with the complexity of the rubric required to prevent drift. The edge is therefore defined by the density of taste-encoded constraints per unit of computational output, rather than the volume of output itself.
+In an era where generative models are commoditized, the competitive advantage shifts from the ability to produce content to the ability to curate and correct it with high-fidelity taste. This mechanism posits that 'supervision' is no longer a passive review step but an active, skill-intensive layer of production that requires deep domain expertise and aesthetic judgment. The edge comes not from faster generation but from the supervisor's capacity to maintain 'taste fidelity' across diverse outputs, preventing homogenization and ensuring strategic alignment.
 
 ## Context
 
-Sean's job hunt and creative studio goals rely on distinctiveness. If his agents produce generic content efficiently, he loses his unique positioning. He must treat supervision time as a primary production metric, not just a quality control step.
+Sean is investing in larger models (qwen3.6-35b) but must realize that the real value lies in his own ability to supervise and refine. The 'edge' is his taste, not the model's speed.
 
 ## Evidence
 
-> Discovery research (and every Substack-growth source we checked) says Notes drive the majority of new subscribers.
+> Investment in 'evaluation loops' and 'taste preservation' tools will yield higher returns than investing in larger or more numerous models.
 
-> Success metrics should shift from volume of generated content to the reduction in editorial overhead and the preservation of taste fidelity.
+> Sean should cap agent fleet scaling at a level where human supervision can maintain high fidelity, rather than maximizing raw output volume.
 
 ## Examples
 
-- The 'rejected_count' metric in the fleet memory index serves as a proxy for supervision cost, tracking how many outputs failed the taste rubric.
-- The duration_seconds metric tracks the time investment required to achieve that fidelity, revealing the true cost of the edge.
+- The focus on 'bad context discipline' and 'vague prompts' as failure modes indicates that supervision quality is directly tied to prompt precision and context management.
+- The shift in Sean's strategy from mere volume to 'taste preservation' tools reflects the recognition of supervision as the key differentiator.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[Taste as Evaluation Function vs. Activity Proof]]
+[[The Efficiency-Quality Inversion in Automated Synthesis]] [[The Calibration Bottleneck in Scalable Creative Production]]

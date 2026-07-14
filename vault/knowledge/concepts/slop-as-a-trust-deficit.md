@@ -2,31 +2,30 @@
 title: "Slop as a Trust Deficit"
 type: concept
 sources:
-  - knowledge/concepts/slop-as-a-trust-deficit.md
+  - knowledge/connections/cross-domain-tension-automated-throughput-vs-epistemic-hygiene-in-gap-analysis.md
 tags: [auto-generated, phase-6]
-created: 2026-07-13
-updated: 2026-07-13
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Definition
 
-This concept defines the accumulation of low-validity content that arises when agents conflate silence with opportunity, treating any unaddressed area as a valid target for solution generation. The mechanism operates through a failure mode where the absence of explicit evidence is misinterpreted not as a signal for investigation, but as a permission slip to fabricate needs. This creates a systemic erosion of trust because the resulting artifacts lack evidentiary support and serve only to fill perceived gaps rather than address verified pains.
+Slop is not merely low-quality content but a symptom of a deeper trust deficit where agents treat knowledge gaps as opportunities for solutioneering rather than signals for investigation. This pattern occurs when the absence of evidence is misinterpreted as a call to action, leading to the construction of features or insights for non-existent needs. The mechanism here is a failure of negative space calibration, where the system cannot distinguish between a void that requires filling and a void that requires understanding.
 
 ## Context
 
-Sean must prevent his agents from building features for non-existent needs by implementing explicit 'evidence status' labels in gap maps. Without this guardrail, the vault accumulates 'slop'—content that looks like insight but is actually hallucinated opportunity hunting disguised as analysis.
+Sean's vault suffers from this deficit when agents generate connections based on assumed gaps rather than verified evidence, eroding his trust in the reliability of his own knowledge infrastructure.
 
 ## Evidence
 
-> When agents treat gaps as opportunities, they fall into the 'solutioneering' trap, building features for non-existent needs
+> When agents treat gaps as opportunities, they fall into the 'solutioneering' trap, building features for non-existent needs.
 
-> The accumulation of low-validity content that arises when agents conflate silence with opportunity
+> The absence of evidence is misinterpreted as a signal for action rather than a call for investigation.
 
 ## Examples
 
-- Agents prioritizing opportunity hunting over rigorous hygiene checks
-- Conflating silence with opportunity rather than a call for investigation
+- building features for non-existent needs
 
 ## Related Concepts
 
-[[The Verification-Governance Inversion]] [[Negative Space Calibration]]
+[[Throughput vs. Taste Memory Tension]] [[Negative Space Calibration]]

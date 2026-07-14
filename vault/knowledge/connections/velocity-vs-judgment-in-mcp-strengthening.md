@@ -2,32 +2,32 @@
 title: "Velocity vs. Judgment in MCP Strengthening"
 type: connection
 connects:
-  - Velocity vs. Judgment in MCP Strengthening
   - The Efficiency-Quality Inversion in Automated Synthesis
-  - Taste as Evaluation Function vs. Activity Proof
-created: 2026-07-09
-updated: 2026-07-09
+  - Operational Visibility vs. Semantic Value in Agent Fleets
+  - Accountability Gap
+created: 2026-07-14
+updated: 2026-07-14
 ---
 
 ## Synthesis
 
-This connection reveals a critical tension between the drive for automated throughput and the preservation of taste memory. As Sean scales his fleet's sampling capacity, the system generates more 'slop' that requires manual verification, creating a trust deficit. The consequence is that the human becomes the bottleneck for quality assurance, effectively negating the time savings of automation and leading to a systemic inversion where efficiency gains are offset by increased cognitive load.
+Sean's transition from small, high-quality runs to large, low-quality runs reveals a critical tension between operational velocity and semantic judgment. As the system scales up concept generation (from 3 to 150+), the ability to maintain high semantic integrity collapses because the validation mechanisms cannot keep pace with the throughput. This leads to a 'slop' effect where the vault is filled with data that looks like knowledge but lacks the structural integrity required for strategic decision-making.
 
 ## Threads
 
-### [[Velocity vs. Judgment in MCP Strengthening]]
-
-> As Sean scales his fleet's sampling capacity, the system generates more 'slop' that requires manual verification, creating a trust deficit.
-
 ### [[The Efficiency-Quality Inversion in Automated Synthesis]]
 
-> As the fleet scales its sampling capacity (clusters_sampled), there is a latent tension between generating more connections and maintaining the signal-to-noise ratio.
+> As Sean scales from 3 concepts to 150+ concepts per run, the system shifts from a 'craft' mode requiring deep judgment to a 'production' mode optimized for volume.
 
-### [[Taste as Evaluation Function vs. Activity Proof]]
+### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
 
-> The high rejection rates in earlier runs indicate that the system is generating significant 'slop' that requires manual cleanup.
+> Systems often prioritize visibility into the former while neglecting the latter, leading to a situation where agents appear healthy but are producing meaningless or incorrect data.
+
+### [[Accountability Gap]]
+
+> The contradiction between automation reliability and daily note generation highlights a gap in understanding who is responsible for the final output.
 
 ## Implications
 
-- Sean must implement stricter constraints on cluster sampling to prevent the generation of low-fidelity content that requires excessive manual review.
-- The current automation strategy is unsustainable as it creates a verification-governance inversion that negates the time savings of automation.
+- Sean must implement a 'taste memory' check that samples semantic quality independently of operational metrics to prevent silent degradation.
+- The system should cap maximum concept throughput per run to force a return to 'craft' mode when volume exceeds validation capacity.
