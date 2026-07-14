@@ -54,7 +54,14 @@ def _attempt_record(stage: str, r: ModelResponse) -> dict:
 
 
 def _parse_ranking(content: str) -> dict | None:
-    """Try to parse the cross-rank JSON. Returns the dict or None on failure."""
+    """Parse and shape-validate the cross-rank JSON. Returns the dict or None on failure.
+
+    The CROSSRANK_SYSTEM contract is a list of unique single-letter labels plus a string
+    reasoning. Enforcing that shape here matters beyond tidiness: chairman_prompt executes
+    ' > '.join(ranking) and embeds reasoning verbatim, so an unvalidated ranking value
+    (e.g. one long string) would expand a bounded judge response into an unbounded
+    chairman input. Junk keys are stripped for the same reason.
+    """
     try:
         # Strip optional markdown fence if present
         text = content.strip()
@@ -63,11 +70,24 @@ def _parse_ranking(content: str) -> dict | None:
             if text.startswith("json"):
                 text = text[4:]
         data = json.loads(text)
-        if "ranking" in data and "reasoning" in data:
-            return data
-    except (json.JSONDecodeError, IndexError, KeyError):
+    except (json.JSONDecodeError, IndexError):
         return None
-    return None
+    if not isinstance(data, dict) or "ranking" not in data or "reasoning" not in data:
+        return None
+    ranking = data["ranking"]
+    reasoning = data["reasoning"]
+    if (
+        not isinstance(ranking, list)
+        or not 1 <= len(ranking) <= 8
+        or any(
+            not isinstance(label, str) or len(label) != 1 or not "A" <= label <= "Z"
+            for label in ranking
+        )
+        or len(set(ranking)) != len(ranking)
+        or not isinstance(reasoning, str)
+    ):
+        return None
+    return {"ranking": ranking, "reasoning": reasoning}
 
 
 async def _fanout(client: OpenRouterClient, models: tuple[str, ...], user_query: str) -> tuple[list[ModelResponse], list[str]]:

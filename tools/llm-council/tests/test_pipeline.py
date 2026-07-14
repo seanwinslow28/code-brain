@@ -230,3 +230,48 @@ async def test_session_writes_json_to_data_sessions_dir(fake_profile, tmp_path):
     assert data["tag"] == "voice-mode"
     assert data["profile"] == "test"
     assert len(data["responses"]) == 4
+
+
+class TestParseRankingStrictShape:
+    """_parse_ranking must enforce the CROSSRANK_SYSTEM contract shape.
+
+    chairman_prompt executes ' > '.join(rk["ranking"]) and embeds rk["reasoning"]
+    verbatim; an unvalidated ranking (e.g. a long string, whose join explodes it
+    ~4x) lets one judge response blow past any downstream input-size bound.
+    """
+
+    def test_ranking_as_string_is_rejected(self):
+        from council.pipeline import _parse_ranking
+
+        exploit = json.dumps({"ranking": "A" * 11_969, "reasoning": ""})
+        assert _parse_ranking(exploit) is None
+
+    @pytest.mark.parametrize(
+        "ranking",
+        [
+            ["Response A", "B"],          # multi-char label
+            ["a", "b"],                   # lowercase
+            [1, 2, 3],                    # non-str entries
+            ["A", "A", "B"],              # duplicate labels
+            ["A", "B", "C", "D", "E", "F", "G", "H", "I"],  # > 8 labels
+            [],                           # empty
+            {"A": 1},                     # wrong container
+        ],
+    )
+    def test_malformed_ranking_shapes_are_rejected(self, ranking):
+        from council.pipeline import _parse_ranking
+
+        assert _parse_ranking(json.dumps({"ranking": ranking, "reasoning": "r"})) is None
+
+    def test_non_string_reasoning_is_rejected(self):
+        from council.pipeline import _parse_ranking
+
+        assert _parse_ranking(json.dumps({"ranking": ["A", "B"], "reasoning": 7})) is None
+
+    def test_valid_ranking_is_accepted_and_stripped_to_contract_keys(self):
+        from council.pipeline import _parse_ranking
+
+        parsed = _parse_ranking(
+            json.dumps({"ranking": ["B", "A", "C"], "reasoning": "ok", "junk": "x"})
+        )
+        assert parsed == {"ranking": ["B", "A", "C"], "reasoning": "ok"}
