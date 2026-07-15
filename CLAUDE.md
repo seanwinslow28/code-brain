@@ -238,3 +238,17 @@ docs/                # Ecosystem documentation
 - New domain-specific content goes inside the correct domain folder (`the-block/`, `creative-studio/`, or `life-systems/`)
 - Cross-cutting kickoff/continuation prompts go in `docs/prompts/`; cross-cutting plans/audits in `docs/plans/` (`YYYY-MM-DD-slug.md`). Never at repo root. Project-local prompts/plans stay co-located (`agents-sdk/docs/plans/`, `creative-studio/16bitfit-battle-mode/prompts-and-summaries/`, `docs/superpowers/`)
 - **Doc updates on new Skill/Agent/Hook/Script**: add a CHANGELOG.md entry and update any count tables in CLAUDE.md and README.md
+
+## Agent skills
+
+### Issue tracker
+
+Issues, PRDs, and wayfinder maps live in GitHub Issues (`seanwinslow28/code-brain`) via the `gh` CLI; external PRs are NOT a triage surface. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Canonical vocabulary, unmodified: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Multi-context: `CONTEXT-MAP.md` at root routes to per-domain `CONTEXT.md` files (created lazily by `/domain-modeling`). See `docs/agents/domain.md`.
