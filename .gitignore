@@ -95,6 +95,7 @@ agents-sdk/logs/*.log
 
 # LLM Council spend tracking — private cost data
 vault/health/council-spend-*.json
+vault/health/.council-spend-*.lock
 
 # Local TTS — model weights and generated audio
 agents-sdk/models/**/*.onnx
