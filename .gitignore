@@ -173,6 +173,16 @@ vault/60_archive/operating-models-the-block-2026-05/
 # Archived personal notes (Apple Notes import)
 vault/60_archive/apple-notes-personal/
 
+# Paid/subscriber source clips (2026-07-16) — full-text captures of paid
+# newsletter/community content (Nate B Jones Executive Circle, paid course
+# material). Short attributed quotes in briefs/ledgers are fine; the full
+# clips carry the publisher's do-not-share terms and stay local-only.
+# Guards against vault auto-commit sweeps (root cause of the 2026-07-14
+# exposure removed in PR #131).
+vault/00_inbox/Claude-Hermes-Inspired-Memory-Plan.md
+vault/00_inbox/PM-SKILLS-2.0.md
+vault/**/Executive-Circle-*.md
+
 # ════════════════════════════════════════════════════════════════════════
 # BLOAT GUARDS — recruiter-readiness cleanup 2026-06-10
 # ════════════════════════════════════════════════════════════════════════
