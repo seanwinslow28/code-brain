@@ -8,9 +8,10 @@ created: 2026-06-18
 description: "Watch now | Maintenance is not the boring thing that happens after the real work. It is what keeps useful systems alive."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Nate on why AI agents need ongoing maintenance, not just launch — using Vercel's sales agent (better after 80% of its tools were deleted) to argue for regularly pruning agent tool/skill surfaces rather than only adding to them."
 ---
 I learned maintenance first from boats.
 

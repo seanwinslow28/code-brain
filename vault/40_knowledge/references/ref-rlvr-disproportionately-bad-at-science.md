@@ -8,9 +8,10 @@ created: 2026-06-30
 description: "the verification loop for theories can be on the order of decades and centuries, and even then we know today as the better theory can often actually make worse predictions"
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [claude-mastery]
+ai-context: "Dwarkesh Patel argues RL-with-verifiable-rewards may be disproportionately bad at scientific discovery, since science's real verification loops run decades-to-centuries and 'better' theories often make worse near-term predictions."
 ---
 ### the verification loop for theories can be on the order of decades and centuries, and even then we know today as the better theory can often actually make worse predictions
 

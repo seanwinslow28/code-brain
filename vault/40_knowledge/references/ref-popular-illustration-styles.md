@@ -8,9 +8,10 @@ created: 2026-07-03
 description: "Explore illustration styles from retro and vector to 3D and whimsical. Learn characteristics, techniques, and ideal uses for each."
 tags:
   - "source/web-clip"
-type: "source"
-status: "unprocessed"
-domain:
+type: reference
+status: draft
+domain: [creative-studio]
+ai-context: "Reference catalog of ten illustration styles (realistic, flat, pixel art, isometric, etc.) with characteristics, use cases, and technical complexity for matching visual style to project."
 ---
 Every illustration tells a story, but the way it’s told depends entirely on the style you choose.
 
