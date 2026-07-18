@@ -1,0 +1,12 @@
+{
+  "policy_version": 1,
+  "tools": {
+    "council":        {"per_query_caps": [0.40, 1.00], "daily_cap": 7.00,  "monthly_cap": 40.00,  "reservation_basis": "estimate",   "force_per_query_allowed": true},
+    "discovery":      {"per_query_caps": [0.50, 1.50, 4.00, 10.00], "daily_cap": 10.00, "monthly_cap": 50.00, "reservation_basis": "estimate", "force_per_query_allowed": true},
+    "oracle-forecast":{"per_query_caps": [6.50], "daily_cap": 150.00, "monthly_cap": 650.00, "reservation_basis": "worst_case", "force_per_query_allowed": false},
+    "oracle-retrieve":{"per_query_caps": [1.00], "daily_cap": 65.00,  "monthly_cap": 275.00, "reservation_basis": "worst_case", "force_per_query_allowed": false},
+    "baserate":       {"per_query_caps": [1.00], "daily_cap": 30.00,  "monthly_cap": 75.00,  "reservation_basis": "worst_case", "force_per_query_allowed": false}
+  },
+  "aggregate": {"daily_cap": 245.00, "monthly_cap": 1000.00},
+  "sum_exceeds_aggregate": true
+}
