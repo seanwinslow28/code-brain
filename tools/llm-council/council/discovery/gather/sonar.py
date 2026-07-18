@@ -6,8 +6,15 @@ import httpx
 
 from council.discovery.evidence import EvidenceRecord
 from council.discovery.gather.web import extract_quotes
+from council.discovery.textbudget import clamp_utf8_bytes
+from council.pricing import provider_price_policy
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+SONAR_MAX_TOKENS = 2048
+TOPIC_EMBED_MAX_BYTES = 2048
+# Segment is user-controlled CLI input appended to the paid prompt: unclamped it
+# outruns the priced input bound entirely (review finding, 3a-2 round 2).
+SEGMENT_EMBED_MAX_BYTES = 512
 _SENT = re.compile(r"[^.!?]{20,}[.!?]")
 _VERBATIM_FETCH_LIMIT = 6   # fetch the top-N citations to anchor a true verbatim quote
 
@@ -42,15 +49,21 @@ async def collect_sonar(*, api_key: str, topic: str, model: str, timeout: float 
     """Returns (records, billed_cost_usd). Sonar is a PAID Perplexity call — OpenRouter reports the
     spend in `usage.cost`, which the gather orchestrator threads into the discovery spend ledger so
     the daily cap isn't blind to it (the "every collector is FREE" invariant never covered Sonar)."""
+    topic = clamp_utf8_bytes(topic, TOPIC_EMBED_MAX_BYTES)
+    segment = clamp_utf8_bytes(segment, SEGMENT_EMBED_MAX_BYTES)
     seg = f" specifically from the perspective of {segment}" if segment else ""
     body = {
         "model": model,
+        "max_tokens": SONAR_MAX_TOKENS,
+        "provider": provider_price_policy(model),
         "messages": [{
             "role": "user",
             "content": f"What are the most recent, specific user complaints and unmet needs about {topic}{seg}? "
                        f"Quote real users where possible. Cite sources.",
         }],
     }
+    # Perplexity's server-side search count (and per-search web price) is not
+    # client-boundable; Task 3c prices and discloses that residual at its STOP.
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
     try:
         async with httpx.AsyncClient(timeout=timeout) as client:
