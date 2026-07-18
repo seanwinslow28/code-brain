@@ -2,13 +2,12 @@
 
 import asyncio
 import sys
-from datetime import date
 from pathlib import Path
 
 import click
 from rich.console import Console
 
-from council.budget import BudgetExceeded, preflight_tool, record_spend
+from council.budget import BudgetExceeded, preflight_tool, record_spend, utc_accounting_date
 from council.client import OpenRouterClient
 from council.pipeline import run_council
 from council.profiles import PROFILES, get_profile
@@ -81,7 +80,7 @@ def main(profile: str, prompt_file: Path, output: Path, tag: str, force: bool, s
                 per_query_cap=p.max_cost_per_query,
                 daily_cap=_load_daily_cap(),
                 monthly_cap=_load_monthly_cap(),
-                on_date=date.today(),
+                on_date=utc_accounting_date(),
                 tool="council",
                 force=force,
             )
@@ -115,7 +114,9 @@ def main(profile: str, prompt_file: Path, output: Path, tag: str, force: bool, s
     estimated_cost = (session.total_tokens_in / 1000.0) * 0.005 + (session.total_tokens_out / 1000.0) * 0.015
 
     if not skip_budget_check:
-        record_spend(amount=estimated_cost, profile=p.name, tag=tag, on_date=date.today())
+        record_spend(
+            amount=estimated_cost, profile=p.name, tag=tag, on_date=utc_accounting_date()
+        )
 
     output.write_text(_render_markdown(session, p, user_query, estimated_cost))
     console.print(f"[green]Council session written:[/green] {output}")

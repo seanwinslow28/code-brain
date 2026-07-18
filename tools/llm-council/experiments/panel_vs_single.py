@@ -5,14 +5,13 @@ import json
 import os
 import time
 from dataclasses import asdict
-from datetime import date
 from pathlib import Path
 
 import click
 from dotenv import load_dotenv
 from rich.console import Console
 
-from council.budget import BudgetExceeded, preflight_tool
+from council.budget import BudgetExceeded, preflight_tool, utc_accounting_date
 from council.discovery.fusion import FusionResult
 from council.discovery.tiers import get_tier
 from experiments.blind_rating import build_blind_rating
@@ -62,7 +61,7 @@ def main(topic, tier_name, single_model, out, yes, skip_budget_check):
         try:
             preflight_tool(estimated=estimated, per_query_cap=DISCOVERY_DAILY_CAP,
                            daily_cap=DISCOVERY_DAILY_CAP, monthly_cap=DISCOVERY_MONTHLY_CAP,
-                           on_date=date.today(), tool="discovery")
+                           on_date=utc_accounting_date(), tool="discovery")
         except BudgetExceeded as e:
             console.print(f"[red]Budget rejected: {e}[/red]")
             raise SystemExit(2)
@@ -77,7 +76,7 @@ def main(topic, tier_name, single_model, out, yes, skip_budget_check):
     api_key = os.environ.get("OPENROUTER_API_KEY", "")
     result = asyncio.run(run_panel_vs_single(
         topic=topic, tier_name=tier_name, single_model=single_model,
-        api_key=api_key, on_date=date.today(),
+        api_key=api_key, on_date=utc_accounting_date(),
     ))
     paths = _write_artifacts(out_dir, result, topic)
     console.print(f"[green]Done.[/green] ${result['cost']:.4f} across both arms.")

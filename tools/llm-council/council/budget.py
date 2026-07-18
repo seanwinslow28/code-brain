@@ -63,6 +63,26 @@ class ReservationError(Exception):
     """An illegal reservation lifecycle transition or a missing reservation row."""
 
 
+def utc_accounting_date() -> date:
+    """Return the UTC calendar day used by every ledger writer.
+
+    This is the ONLY sanctioned accounting-date source for ledger writers, matching the
+    derivation used inline by the-oracle's ``oracle/spend.py::reserve_sync``. A local date
+    is a correctness bug (residual 2): a sibling writing at 17:00 PDT on August 31 uses
+    2026-08-31 locally even though the instant is 2026-09-01 UTC. Its spend then never
+    appears in the UTC September aggregate, and it takes August's month lock while a UTC
+    writer holds September's, so mutual exclusion is lost across the boundary.
+
+    Month-boundary contract: THE ADMISSION MONTH OWNS THE RUN. A ``Reservation`` carries
+    its ``on_date``; actuals and ``close`` write to that month's file under that month's
+    lock (the existing kernel behavior). This is sound precisely because reservation is a
+    pre-dispatch bound: cash from a run reserved August 31 and settled September 1 was
+    already admitted against August's caps and cannot exceed its August debit. Never take
+    two month locks in one transaction.
+    """
+    return datetime.now(timezone.utc).date()
+
+
 def _spend_dir() -> Path:
     raw = os.environ.get("COUNCIL_SPEND_DIR")
     if raw:

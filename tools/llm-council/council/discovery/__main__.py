@@ -3,14 +3,13 @@
 import asyncio
 import os
 import sys
-from datetime import date
 from pathlib import Path
 
 import click
 from dotenv import load_dotenv
 from rich.console import Console
 
-from council.budget import BudgetExceeded, preflight_tool, record_spend
+from council.budget import BudgetExceeded, preflight_tool, record_spend, utc_accounting_date
 from council.discovery.pipeline import run_discovery, DiscoveryFailed
 from council.discovery.tiers import get_tier
 
@@ -56,7 +55,7 @@ def main(topic, lens, tier, output, segment, force, yes, supplement, skip_budget
                 estimated=tcfg.max_cost_per_run * 0.6,
                 per_query_cap=tcfg.max_cost_per_run,
                 daily_cap=DISCOVERY_DAILY_CAP, monthly_cap=DISCOVERY_MONTHLY_CAP,
-                on_date=date.today(), tool="discovery", force=force,
+                on_date=utc_accounting_date(), tool="discovery", force=force,
             )
         except BudgetExceeded as e:
             console.print(f"[red]Budget rejected: {e}[/red]")
@@ -73,7 +72,7 @@ def main(topic, lens, tier, output, segment, force, yes, supplement, skip_budget
     except DiscoveryFailed as e:
         if not skip_budget_check and e.cost_usd > 0:
             record_spend(amount=e.cost_usd, profile=tier, tag=f"discovery-{lens}",
-                         on_date=date.today(), tool="discovery")
+                         on_date=utc_accounting_date(), tool="discovery")
         status = (e.session or {}).get("gather_status", {})
         stage = (e.session or {}).get("failed_stage", "fuse")
         console.print(f"[red]Discovery failed ({stage}):[/red] {e}")
@@ -95,7 +94,7 @@ def main(topic, lens, tier, output, segment, force, yes, supplement, skip_budget
         brief.write_text(result.brief_markdown)
     if not skip_budget_check:
         record_spend(amount=result.cost_usd, profile=tier, tag=f"discovery-{lens}",
-                     on_date=date.today(), tool="discovery")
+                     on_date=utc_accounting_date(), tool="discovery")
     console.print(f"[green]Idea ledger written:[/green] {output}")
     if lens == "substack" and result.brief_markdown:
         console.print(f"[green]Substack handoff brief written:[/green] {_brief_path(output)}")
