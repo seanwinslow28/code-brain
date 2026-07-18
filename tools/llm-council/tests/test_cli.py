@@ -1,13 +1,11 @@
-import json
-from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, MagicMock, patch
 
-import pytest
 from click.testing import CliRunner
 
 from council.cli import _render_markdown, main
 from council.client import ModelResponse
+from council.profiles import PROFILES
 
 
 def _r(model: str, content: str) -> ModelResponse:
@@ -26,22 +24,19 @@ def test_cli_writes_markdown_output(fake_api_key, tmp_path, tmp_spend_dir, monke
     prompt_file.write_text("What's the best way to test async code?")
     out_file = tmp_path / "out.md"
 
+    profile = PROFILES["variance"]
+    m1, m2, m3, m4 = profile.models
     valid = '{"ranking": ["A","B","C"], "reasoning": "ok"}'
     fake_responses = [
-        _r("m1", "Use pytest-asyncio."),
-        _r("m2", "Use anyio."),
-        _r("m3", "Use trio test."),
-        _r("m4", "Use unittest IsolatedAsyncioTestCase."),
-        _r("m1", valid), _r("m2", valid), _r("m3", valid), _r("m4", valid),
-        _r("m1", "Synthesis: pytest-asyncio is most idiomatic..."),
+        _r(m1, "Use pytest-asyncio."),
+        _r(m2, "Use anyio."),
+        _r(m3, "Use trio test."),
+        _r(m4, "Use unittest IsolatedAsyncioTestCase."),
+        _r(m1, valid), _r(m2, valid), _r(m3, valid), _r(m4, valid),
+        _r(m1, "Synthesis: pytest-asyncio is most idiomatic..."),
     ]
 
-    with patch("council.cli.OpenRouterClient") as mock_client_cls, \
-         patch("council.cli.get_profile") as mock_get_profile:
-        from council.profiles import Profile
-        mock_get_profile.return_value = Profile(
-            name="variance", models=("m1","m2","m3","m4"), chairman="m1", max_cost_per_query=10.0,
-        )
+    with patch("council.cli.OpenRouterClient") as mock_client_cls:
         mock_inst = MagicMock()
         mock_inst.complete = AsyncMock(side_effect=fake_responses)
         mock_inst.aclose = AsyncMock()

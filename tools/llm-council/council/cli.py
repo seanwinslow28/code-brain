@@ -9,10 +9,15 @@ from rich.console import Console
 
 from council.budget import BudgetExceeded, preflight_tool, record_spend, utc_accounting_date
 from council.client import OpenRouterClient
-from council.pipeline import run_council
+from council.pipeline import DEFAULT_STAGE_BOUNDS, run_council
 from council.profiles import PROFILES, get_profile
 
 console = Console()
+
+# Task 3c prices the worst case from this ceiling using byte >= token. Raising
+# it changes reservation sizing and therefore requires a Sean gate; disclose
+# the value at the Task 3c STOP.
+PROMPT_MAX_BYTES = 131072
 
 
 def _render_markdown(session, profile, user_query: str, cost_usd: float) -> str:
@@ -62,7 +67,15 @@ def _render_markdown(session, profile, user_query: str, cost_usd: float) -> str:
 @click.option("--skip-budget-check", is_flag=True, hidden=True, help="Test-only: skip all budget gates.")
 def main(profile: str, prompt_file: Path, output: Path, tag: str, force: bool, skip_budget_check: bool) -> None:
     """Run an LLM council session against the given prompt file."""
-    user_query = prompt_file.read_text().strip()
+    raw_user_query = prompt_file.read_text()
+    prompt_bytes = len(raw_user_query.encode("utf-8"))
+    if prompt_bytes > PROMPT_MAX_BYTES:
+        console.print(
+            f"[red]Prompt file is {prompt_bytes} UTF-8 bytes; "
+            f"the cap is {PROMPT_MAX_BYTES} bytes.[/red]"
+        )
+        sys.exit(1)
+    user_query = raw_user_query.strip()
     if not user_query:
         console.print("[red]Prompt file is empty.[/red]")
         sys.exit(1)
@@ -98,6 +111,7 @@ def main(profile: str, prompt_file: Path, output: Path, tag: str, force: bool, s
                 user_query=user_query,
                 tag=tag,
                 sessions_dir=sessions_dir,
+                dispatch_bounds=DEFAULT_STAGE_BOUNDS,
             )
             return session
         finally:
