@@ -140,7 +140,7 @@ def test_settlement_takes_the_admission_months_lock_not_the_current_months(
     assert acquired == ["2026-08", "2026-08"]
 
 
-def test_council_cli_uses_utc_accounting_date_for_preflight_and_record(
+def test_council_cli_uses_utc_accounting_date_for_reserve_lifecycle(
     tmp_path, monkeypatch
 ):
     from council import cli
@@ -149,10 +149,14 @@ def test_council_cli_uses_utc_accounting_date_for_preflight_and_record(
     captured = {}
 
     class FakeClient:
+        def __init__(self, **kwargs):
+            pass
+
         async def aclose(self):
             return None
 
     async def fake_run_council(**kwargs):
+        kwargs["on_attempt"]({"generation_id": "utc-generation", "cost": 0.25})
         return CouncilSession(
             id="utc-session",
             profile=kwargs["profile"].name,
@@ -169,11 +173,27 @@ def test_council_cli_uses_utc_accounting_date_for_preflight_and_record(
     monkeypatch.setattr(cli, "utc_accounting_date", lambda: sentinel)
     monkeypatch.setattr(cli, "OpenRouterClient", FakeClient)
     monkeypatch.setattr(cli, "run_council", fake_run_council)
+    reservation = budget.Reservation("utc-reservation", "utc-run", "council", 5.0, sentinel)
+
+    def reserve(**kwargs):
+        captured["reserve"] = kwargs["on_date"]
+        return reservation
+
+    monkeypatch.setattr(cli.budget, "check_and_reserve", reserve)
     monkeypatch.setattr(
-        cli, "preflight_tool", lambda **kwargs: captured.__setitem__("preflight", kwargs["on_date"])
+        cli.budget,
+        "mark_dispatched",
+        lambda value: captured.__setitem__("dispatch", value.on_date),
     )
     monkeypatch.setattr(
-        cli, "record_spend", lambda **kwargs: captured.__setitem__("record", kwargs["on_date"])
+        cli.budget,
+        "record_actual",
+        lambda value, **kwargs: captured.__setitem__("actual", value.on_date),
+    )
+    monkeypatch.setattr(
+        cli.budget,
+        "close",
+        lambda value, **kwargs: captured.__setitem__("close", value.on_date),
     )
     prompt = tmp_path / "prompt.txt"
     prompt.write_text("hello")
@@ -191,8 +211,12 @@ def test_council_cli_uses_utc_accounting_date_for_preflight_and_record(
     )
 
     assert result.exit_code == 0, result.output
-    assert captured["preflight"] is sentinel
-    assert captured["record"] is sentinel
+    assert captured == {
+        "reserve": sentinel,
+        "dispatch": sentinel,
+        "actual": sentinel,
+        "close": sentinel,
+    }
 
 
 def test_discovery_cli_success_uses_utc_accounting_date_for_preflight_and_record(

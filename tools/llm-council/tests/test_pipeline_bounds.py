@@ -316,11 +316,13 @@ def test_cli_rejects_oversize_prompt_before_budget_or_network(
 ):
     prompt_file = tmp_path / "oversize.txt"
     prompt_file.write_bytes(b"x" * (cli.PROMPT_MAX_BYTES + 1))
-    preflight = Mock(side_effect=AssertionError("preflight must not run"))
-    record = Mock(side_effect=AssertionError("record_spend must not run"))
+    load_policy = Mock(side_effect=AssertionError("policy load must not run"))
+    reserve = Mock(side_effect=AssertionError("reservation must not run"))
+    dispatch = Mock(side_effect=AssertionError("dispatch must not run"))
     network = Mock(side_effect=AssertionError("client must not be constructed"))
-    monkeypatch.setattr(cli, "preflight_tool", preflight)
-    monkeypatch.setattr(cli, "record_spend", record)
+    monkeypatch.setattr(cli.policy, "load_policy", load_policy)
+    monkeypatch.setattr(cli.budget, "check_and_reserve", reserve)
+    monkeypatch.setattr(cli.budget, "mark_dispatched", dispatch)
     monkeypatch.setattr(cli, "OpenRouterClient", network)
 
     result = CliRunner().invoke(
@@ -338,8 +340,9 @@ def test_cli_rejects_oversize_prompt_before_budget_or_network(
     assert result.exit_code == 1
     assert str(cli.PROMPT_MAX_BYTES + 1) in result.output
     assert str(cli.PROMPT_MAX_BYTES) in result.output
-    preflight.assert_not_called()
-    record.assert_not_called()
+    load_policy.assert_not_called()
+    reserve.assert_not_called()
+    dispatch.assert_not_called()
     network.assert_not_called()
 
 
@@ -353,6 +356,7 @@ def test_cli_accepts_prompt_exactly_at_byte_cap(
 
     async def fake_run_council(**kwargs):
         reached_pipeline(kwargs)
+        kwargs["on_attempt"]({"generation_id": "gen-at-cap", "cost": 0.10})
         return SimpleNamespace(
             tag="cap",
             id="session",
@@ -386,7 +390,6 @@ def test_cli_accepts_prompt_exactly_at_byte_cap(
             str(output),
             "--tag",
             "cap",
-            "--skip-budget-check",
         ],
     )
 
@@ -395,6 +398,9 @@ def test_cli_accepts_prompt_exactly_at_byte_cap(
     pipeline_kwargs = reached_pipeline.call_args.args[0]
     assert len(pipeline_kwargs["user_query"].encode("utf-8")) == cli.PROMPT_MAX_BYTES
     assert pipeline_kwargs["dispatch_bounds"] is DEFAULT_STAGE_BOUNDS
+    ledger = json.loads(next(tmp_spend_dir.glob("council-spend-????-??-??.json")).read_text())
+    assert ledger["runs"][0]["status"] == "settled"
+    assert ledger["actuals"][0]["provenance"] == "authoritative"
     assert output.exists()
 
 

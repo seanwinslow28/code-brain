@@ -590,15 +590,16 @@ def check_and_reserve(
     reservation_id: str | None = None,
     policy_version=None,
     policy_hash=None,
+    force: bool = False,
 ) -> Reservation:
     """One locked transaction: strict-check the caps, then durably reserve.
 
     Under the canonical month lock (over a spend root pinned once for the whole
     transaction): strict-parse the ledger (fail closed on corruption), enforce the
-    per-tool per-query/daily/monthly caps HARD — there is NO ``force`` override, the
-    per-tool cap is hard (finding 2) — CHECK the cross-tool aggregate daily/monthly
-    ceiling (refuse if the-oracle would breach it — checked but not airtight until F8b),
-    then write a durable ``reserved`` row (atomic rename + fsync of file and parent dir).
+    per-tool per-query/daily/monthly caps and the cross-tool aggregate daily/monthly
+    ceiling, then write a durable ``reserved`` row (atomic rename + fsync of file and
+    parent dir). ``force=True`` skips ONLY the per-query comparison when policy permits;
+    it still debits the full reserved cost. Daily and monthly caps are NEVER bypassed.
     The reserved cost is the sole enforcement debit.
     """
     if not isinstance(run_id, str) or not run_id:
@@ -645,6 +646,10 @@ def check_and_reserve(
                 if tool not in active_tools:
                     raise ReservationError(f"tool {tool!r} is not in active policy")
                 active_tool = active_tools[tool]
+                if force and not active_tool["force_per_query_allowed"]:
+                    raise ReservationError(
+                        f"force is not allowed for tool {tool!r} by the active policy"
+                    )
 
                 requested_per_query = _to_decimal(per_query_cap, field="per_query_cap")
                 active_per_query = {
@@ -687,7 +692,7 @@ def check_and_reserve(
         state = strict_ledger_state(on_date, root=root)
         if rid in state["reservation_ids"]:
             raise ReservationError(f"reservation_id {rid!r} already exists")
-        if cost > _to_decimal(per_query_cap, field="per_query_cap"):
+        if not force and cost > _to_decimal(per_query_cap, field="per_query_cap"):
             raise BudgetExceeded(
                 f"per-query cap exceeded: reserved ${cost} > cap ${per_query_cap}"
             )

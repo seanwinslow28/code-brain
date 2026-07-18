@@ -12,13 +12,13 @@ from council import budget, policy
 
 
 SHIPPED_POLICY = {
-    "policy_version": 1,
+    "policy_version": 2,
     "tools": {
         "council": {
-            "per_query_caps": [0.40, 1.00],
-            "daily_cap": 7.00,
-            "monthly_cap": 40.00,
-            "reservation_basis": "estimate",
+            "per_query_caps": [5.50, 11.50, 13.00],
+            "daily_cap": 45.00,
+            "monthly_cap": 250.00,
+            "reservation_basis": "worst_case",
             "force_per_query_allowed": True,
         },
         "discovery": {
@@ -94,7 +94,7 @@ def test_shipped_policy_loads_and_equals_approved_census():
     loaded = policy.load_policy()
 
     assert loaded == SHIPPED_POLICY
-    assert loaded["tools"]["council"]["per_query_caps"] == [0.40, 1.00]
+    assert loaded["tools"]["council"]["per_query_caps"] == [5.50, 11.50, 13.00]
     assert loaded["tools"]["discovery"]["per_query_caps"] == [0.50, 1.50, 4.00, 10.00]
     assert loaded["tools"]["oracle-forecast"] == SHIPPED_POLICY["tools"]["oracle-forecast"]
     assert loaded["tools"]["oracle-retrieve"] == SHIPPED_POLICY["tools"]["oracle-retrieve"]
@@ -208,7 +208,7 @@ def test_load_policy_refuses_non_positive_finite_tool_caps(tmp_path, field, valu
 
 def test_load_policy_refuses_tool_daily_cap_above_monthly_cap(tmp_path):
     candidate = copy.deepcopy(SHIPPED_POLICY)
-    candidate["tools"]["council"]["daily_cap"] = 41.00
+    candidate["tools"]["council"]["daily_cap"] = 251.00
     with pytest.raises(policy.PolicyError, match="daily_cap.*monthly_cap"):
         policy.load_policy(_write_policy(tmp_path / "policy.json", candidate))
 
@@ -267,10 +267,10 @@ def test_load_policy_refuses_non_boolean_sum_relation_flag(tmp_path, value):
 
 def test_load_policy_refuses_true_sum_flag_when_neither_sum_exceeds(tmp_path):
     candidate = copy.deepcopy(SHIPPED_POLICY)
-    candidate["aggregate"] = {"daily_cap": 300.0, "monthly_cap": 1200.0}
+    candidate["aggregate"] = {"daily_cap": 300.0, "monthly_cap": 1300.0}
     with pytest.raises(
         policy.PolicyError,
-        match=r"daily sum 262.*daily aggregate 300.*monthly sum 1090.*monthly aggregate 1200",
+        match=r"daily sum 300.*daily aggregate 300.*monthly sum 1300.*monthly aggregate 1300",
     ):
         policy.load_policy(_write_policy(tmp_path / "policy.json", candidate))
 
@@ -280,7 +280,7 @@ def test_load_policy_refuses_false_sum_flag_when_either_sum_exceeds(tmp_path):
     candidate["sum_exceeds_aggregate"] = False
     with pytest.raises(
         policy.PolicyError,
-        match=r"daily sum 262.*daily aggregate 245.*monthly sum 1090.*monthly aggregate 1000",
+        match=r"daily sum 300.*daily aggregate 245.*monthly sum 1300.*monthly aggregate 1000",
     ):
         policy.load_policy(_write_policy(tmp_path / "policy.json", candidate))
 
@@ -294,7 +294,7 @@ def test_policy_hash_is_stable_across_source_key_order(tmp_path):
         "sum_exceeds_aggregate": True,
         "aggregate": {"monthly_cap": 1000.00, "daily_cap": 245.00},
         "tools": dict(reversed(list(SHIPPED_POLICY["tools"].items()))),
-        "policy_version": 1,
+        "policy_version": 2,
     }
     second = _write_policy(tmp_path / "second.json", reordered)
 
@@ -328,7 +328,7 @@ def test_activate_policy_writes_atomic_round_trippable_snapshot(tmp_spend_dir):
     assert active_path.is_file()
     assert policy.load_active_policy(tmp_spend_dir) == record
     assert record["policy"] == SHIPPED_POLICY
-    assert record["policy_version"] == 1
+    assert record["policy_version"] == 2
     assert record["policy_hash"] == policy.policy_hash(record["policy"])
     assert record["activated_at_utc"].endswith("+00:00")
     assert list(tmp_spend_dir.glob(f"{policy.ACTIVE_POLICY_FILENAME}.*.tmp")) == []
@@ -401,7 +401,7 @@ def test_policy_cli_activate_prints_version_and_hash(tmp_spend_dir, capsys):
     assert policy.main(["activate"]) == 0
 
     output = capsys.readouterr()
-    assert "version 1" in output.out
+    assert "version 2" in output.out
     assert expected_hash in output.out
     assert output.err == ""
 
@@ -421,13 +421,13 @@ def test_policy_cli_activate_exits_nonzero_with_error_on_refusal(tmp_path, capsy
 def test_active_policy_is_cross_checkout_authority_and_stamps_legacy_callers(
     tmp_spend_dir, tmp_path, monkeypatch
 ):
-    v1_path = _write_policy(tmp_path / "checkout-v1.json")
-    v2 = copy.deepcopy(SHIPPED_POLICY)
-    v2["policy_version"] = 2
-    v2["tools"]["oracle-forecast"]["monthly_cap"] = 651.00
-    v2_path = _write_policy(tmp_path / "checkout-v2.json", v2)
-    active = policy.activate_policy(v1_path, root=tmp_spend_dir)
-    v2_hash = policy.policy_hash(policy.load_policy(v2_path))
+    v2_path = _write_policy(tmp_path / "checkout-v2.json")
+    v3 = copy.deepcopy(SHIPPED_POLICY)
+    v3["policy_version"] = 3
+    v3["tools"]["oracle-forecast"]["monthly_cap"] = 651.00
+    v3_path = _write_policy(tmp_path / "checkout-v3.json", v3)
+    active = policy.activate_policy(v2_path, root=tmp_spend_dir)
+    v3_hash = policy.policy_hash(policy.load_policy(v3_path))
     today = budget.utc_accounting_date()
     monkeypatch.setattr(budget, "POLICY_ENFORCEMENT_ENABLED", True)
 
@@ -443,18 +443,18 @@ def test_active_policy_is_cross_checkout_authority_and_stamps_legacy_callers(
         budget.check_and_reserve(
             **_activated_reserve_kwargs(
                 today,
-                run_id="v2-stale-checkout",
+                run_id="v3-stale-checkout",
                 tool_monthly_cap=651.00,
-                policy_version=2,
-                policy_hash=v2_hash,
+                policy_version=3,
+                policy_hash=v3_hash,
             )
         )
     budget.check_and_reserve(**_activated_reserve_kwargs(today, run_id="legacy-unstamped"))
 
     rows = _reservation_rows(tmp_spend_dir, today)
     assert [(row["run_id"], row["policy_version"], row["policy_hash"]) for row in rows] == [
-        ("v1-explicit", 1, active["policy_hash"]),
-        ("legacy-unstamped", 1, active["policy_hash"]),
+        ("v1-explicit", 2, active["policy_hash"]),
+        ("legacy-unstamped", 2, active["policy_hash"]),
     ]
 
 
@@ -480,6 +480,57 @@ def test_enforcement_refuses_per_query_cap_outside_activated_enumeration(
         budget.check_and_reserve(
             **_activated_reserve_kwargs(budget.utc_accounting_date(), per_query_cap=6.51)
         )
+
+
+def test_enforcement_refuses_force_when_active_tool_disallows_it(
+    tmp_spend_dir, tmp_path, monkeypatch
+):
+    candidate = copy.deepcopy(SHIPPED_POLICY)
+    candidate["tools"]["council"]["force_per_query_allowed"] = False
+    policy.activate_policy(
+        _write_policy(tmp_path / "no-force.json", candidate), root=tmp_spend_dir
+    )
+    monkeypatch.setattr(budget, "POLICY_ENFORCEMENT_ENABLED", True)
+
+    with pytest.raises(budget.ReservationError, match="force.*not allowed"):
+        budget.check_and_reserve(
+            reserved_cost=6.0,
+            tool="council",
+            tag="force-policy",
+            profile="variance",
+            run_id="force-refused",
+            on_date=budget.utc_accounting_date(),
+            per_query_cap=5.50,
+            tool_daily_cap=45.00,
+            tool_monthly_cap=250.00,
+            aggregate_daily_cap=245.00,
+            aggregate_monthly_cap=1000.00,
+            force=True,
+        )
+
+
+def test_enforcement_allows_force_when_active_tool_allows_it(
+    tmp_spend_dir, monkeypatch
+):
+    policy.activate_policy(root=tmp_spend_dir)
+    monkeypatch.setattr(budget, "POLICY_ENFORCEMENT_ENABLED", True)
+
+    reservation = budget.check_and_reserve(
+        reserved_cost=6.0,
+        tool="council",
+        tag="force-policy",
+        profile="variance",
+        run_id="force-allowed",
+        on_date=budget.utc_accounting_date(),
+        per_query_cap=5.50,
+        tool_daily_cap=45.00,
+        tool_monthly_cap=250.00,
+        aggregate_daily_cap=245.00,
+        aggregate_monthly_cap=1000.00,
+        force=True,
+    )
+
+    assert reservation.amount == 6.0
 
 
 def test_enforcement_refuses_tool_daily_cap_drift_by_one_cent(tmp_spend_dir, monkeypatch):
@@ -636,7 +687,7 @@ def test_load_policy_refuses_integer_money_so_hashes_stay_canonical(tmp_path):
 @pytest.mark.parametrize(
     "mutate",
     [
-        lambda p: p.__setitem__("policy_version", 2),
+        lambda p: p.__setitem__("policy_version", 3),
         lambda p: p["tools"]["oracle-forecast"].__setitem__("monthly_cap", 651.00),
         lambda p: p["tools"]["council"].__setitem__("force_per_query_allowed", False),
     ],
