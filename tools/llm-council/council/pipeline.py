@@ -50,6 +50,29 @@ DEFAULT_STAGE_BOUNDS = StageBounds(
 )
 
 
+class CouncilRunError(RuntimeError):
+    """A council-stage failure carrying every provider attempt known at the boundary."""
+
+    def __init__(self, message: str, *, stage: str, attempts: list[dict]) -> None:
+        super().__init__(message)
+        self.stage = stage
+        self.attempts = attempts
+
+
+class FanoutAbort(CouncilRunError):
+    """Stage-1 lost enough models that the council cannot continue."""
+
+    def __init__(self, message: str, *, attempts: list[dict]) -> None:
+        super().__init__(message, stage="fanout", attempts=attempts)
+
+
+class ChairmanFailure(CouncilRunError):
+    """Stage-3 synthesis failed after earlier attempts may already have billed."""
+
+    def __init__(self, message: str, *, attempts: list[dict]) -> None:
+        super().__init__(message, stage="chairman", attempts=attempts)
+
+
 def _dispatch_kwargs(
     bounds: StageBounds | None,
     *,
@@ -115,6 +138,33 @@ def _attempt_record(stage: str, r: ModelResponse) -> dict:
     }
 
 
+def _error_attempt_record(stage: str, requested_model: str, error: Exception) -> dict:
+    """An interaction that raised before returning provider usage metadata."""
+    return {
+        "stage": stage,
+        "requested_model": requested_model,
+        "returned_model_id": None,
+        "generation_id": None,
+        "tokens_in": None,
+        "tokens_out": None,
+        "cost": None,
+        "finish_reason": None,
+        "error": f"{type(error).__name__}: {error}",
+    }
+
+
+@dataclass(frozen=True)
+class _CallbackFailure:
+    """Carries a callback failure through fanout's ordered gather result."""
+
+    error: BaseException
+
+
+def _deliver_attempt(on_attempt: Callable[[dict], None] | None, attempt: dict) -> None:
+    if on_attempt is not None:
+        on_attempt(attempt)
+
+
 def _parse_ranking(content: str) -> dict | None:
     """Parse and shape-validate the cross-rank JSON. Returns the dict or None on failure.
 
@@ -157,31 +207,53 @@ async def _fanout(
     models: tuple[str, ...],
     user_query: str,
     bounds: StageBounds | None,
-) -> tuple[list[ModelResponse], list[str]]:
-    """Stage 1: parallel fan-out. Returns (surviving_responses, dropped_model_ids)."""
+    on_attempt: Callable[[dict], None] | None,
+) -> tuple[list[ModelResponse], list[str], list[dict], list[dict]]:
+    """Stage 1: parallel fan-out, capturing each interaction as it resolves."""
     user_msg = fanout_prompt(user_query=user_query)
-    coros = [
-        client.complete(
-            model=m,
-            system=FANOUT_SYSTEM,
-            user=user_msg,
-            **_dispatch_kwargs(
-                bounds,
-                model=m,
-                max_tokens=bounds.fanout_max_tokens if bounds else 0,
-            ),
-        )
-        for m in models
-    ]
-    results = await asyncio.gather(*coros, return_exceptions=True)
+
+    async def complete_one(model: str):
+        try:
+            response = await client.complete(
+                model=model,
+                system=FANOUT_SYSTEM,
+                user=user_msg,
+                **_dispatch_kwargs(
+                    bounds,
+                    model=model,
+                    max_tokens=bounds.fanout_max_tokens if bounds else 0,
+                ),
+            )
+        except Exception as error:
+            attempt = _error_attempt_record("fanout", model, error)
+            try:
+                _deliver_attempt(on_attempt, attempt)
+            except BaseException as callback_error:
+                return _CallbackFailure(callback_error)
+            return model, None, attempt
+        attempt = _attempt_record("fanout", response)
+        try:
+            _deliver_attempt(on_attempt, attempt)
+        except BaseException as callback_error:
+            return _CallbackFailure(callback_error)
+        return model, response, attempt
+
+    results = await asyncio.gather(*(complete_one(model) for model in models))
     survivors: list[ModelResponse] = []
     dropped: list[str] = []
-    for model, r in zip(models, results):
-        if isinstance(r, Exception):
+    success_attempts: list[dict] = []
+    error_attempts: list[dict] = []
+    for result in results:
+        if isinstance(result, _CallbackFailure):
+            raise result.error
+        model, response, attempt = result
+        if response is None:
             dropped.append(model)
+            error_attempts.append(attempt)
         else:
-            survivors.append(r)
-    return survivors, dropped
+            survivors.append(response)
+            success_attempts.append(attempt)
+    return survivors, dropped, success_attempts, error_attempts
 
 
 async def _crossrank_one(
@@ -190,15 +262,15 @@ async def _crossrank_one(
     user_query: str,
     others: list[dict],
     bounds: StageBounds | None,
-) -> tuple[dict | None, list[ModelResponse]]:
+    on_attempt: Callable[[dict], None] | None,
+) -> tuple[dict | _CallbackFailure | None, list[dict]]:
     """Run one judge's cross-rank.
 
-    Returns (parsed ranking dict or None, list of the response attempts made). Both the
-    first and the parse-retry attempts are returned so their usage is measured even when
-    parsing fails (a returned-but-unparsed response was still billed).
+    Returns the parsed ranking (or None) and every success/error attempt record. Both
+    returned-but-unparsed responses and a subsequent ClientError remain accountable.
     """
     user_msg = crossrank_prompt(user_query=user_query, others=others)
-    attempts: list[ModelResponse] = []
+    attempts: list[dict] = []
     try:
         first = await client.complete(
             model=judge_model,
@@ -210,10 +282,26 @@ async def _crossrank_one(
                 max_tokens=bounds.crossrank_max_tokens if bounds else 0,
             ),
         )
-        attempts.append(first)
-        parsed = _parse_ranking(first.content)
-        if parsed is not None:
-            return {"judge_model": judge_model, **parsed}, attempts
+    except Exception as error:
+        attempt = _error_attempt_record("crossrank", judge_model, error)
+        attempts.append(attempt)
+        try:
+            _deliver_attempt(on_attempt, attempt)
+        except BaseException as callback_error:
+            return _CallbackFailure(callback_error), attempts
+        if isinstance(error, ClientError):
+            return None, attempts
+        raise
+    attempt = _attempt_record("crossrank", first)
+    attempts.append(attempt)
+    try:
+        _deliver_attempt(on_attempt, attempt)
+    except BaseException as callback_error:
+        return _CallbackFailure(callback_error), attempts
+    parsed = _parse_ranking(first.content)
+    if parsed is not None:
+        return {"judge_model": judge_model, **parsed}, attempts
+    try:
         retry = await client.complete(
             model=judge_model,
             system=CROSSRANK_SYSTEM + "\n\nReturn ONLY a JSON object. No prose, no markdown fence.",
@@ -224,12 +312,25 @@ async def _crossrank_one(
                 max_tokens=bounds.crossrank_max_tokens if bounds else 0,
             ),
         )
-        attempts.append(retry)
-        parsed = _parse_ranking(retry.content)
-        if parsed is not None:
-            return {"judge_model": judge_model, **parsed}, attempts
-    except ClientError:
-        return None, attempts
+    except Exception as error:
+        attempt = _error_attempt_record("crossrank", judge_model, error)
+        attempts.append(attempt)
+        try:
+            _deliver_attempt(on_attempt, attempt)
+        except BaseException as callback_error:
+            return _CallbackFailure(callback_error), attempts
+        if isinstance(error, ClientError):
+            return None, attempts
+        raise
+    attempt = _attempt_record("crossrank", retry)
+    attempts.append(attempt)
+    try:
+        _deliver_attempt(on_attempt, attempt)
+    except BaseException as callback_error:
+        return _CallbackFailure(callback_error), attempts
+    parsed = _parse_ranking(retry.content)
+    if parsed is not None:
+        return {"judge_model": judge_model, **parsed}, attempts
     return None, attempts
 
 
@@ -238,12 +339,15 @@ async def _crossrank(
     responses: list[ModelResponse],
     user_query: str,
     bounds: StageBounds | None,
-) -> tuple[list[dict], list[str], list[ModelResponse]]:
+    on_attempt: Callable[[dict], None] | None,
+) -> tuple[list[dict], list[str], list[dict], list[dict]]:
     """Stage 2: each surviving model judges the OTHER N-1 responses.
 
-    Returns (parsed_rankings, ranking_failed_model_ids, all_response_attempts). The third
-    element carries every cross-rank response attempt (first + parse-retry) for usage
-    accounting.
+    Returns rankings, failed judges, success records for the unchanged session shape, and
+    all success/error records for failure accounting. Every judge is drained before an
+    error is raised, so no attempt callback can fire after this boundary returns. Callback
+    failures take precedence in judge order, followed by raw provider exceptions in judge
+    order; ``ClientError`` continues to degrade only that judge.
     """
     coros = []
     judge_models = []
@@ -262,19 +366,31 @@ async def _crossrank(
             for r in responses
             if r.model_id != judge.model_id
         ]
-        coros.append(_crossrank_one(client, judge.model_id, user_query, others, bounds))
+        coros.append(
+            _crossrank_one(
+                client, judge.model_id, user_query, others, bounds, on_attempt
+            )
+        )
         judge_models.append(judge.model_id)
-    results = await asyncio.gather(*coros)
+    results = await asyncio.gather(*coros, return_exceptions=True)
+    for result in results:
+        if isinstance(result, tuple) and isinstance(result[0], _CallbackFailure):
+            raise result[0].error
+    for result in results:
+        if isinstance(result, BaseException):
+            raise result
     rankings: list[dict] = []
     failed: list[str] = []
-    attempts: list[ModelResponse] = []
-    for model, (r, judge_attempts) in zip(judge_models, results):
+    attempts: list[dict] = []
+    for model, result in zip(judge_models, results):
+        r, judge_attempts = result
         attempts.extend(judge_attempts)
         if r is None:
             failed.append(model)
         else:
             rankings.append(r)
-    return rankings, failed, attempts
+    success_attempts = [attempt for attempt in attempts if "error" not in attempt]
+    return rankings, failed, success_attempts, attempts
 
 
 async def _chairman(
@@ -335,27 +451,36 @@ async def run_council(
     tag: str,
     sessions_dir: Path | None = None,
     dispatch_bounds: StageBounds | None = None,
+    on_attempt: Callable[[dict], None] | None = None,
 ) -> CouncilSession:
     """End-to-end council run. Aborts on 2+ Stage-1 failures; degrades on 1.
 
     Every admission gateway must either inject ``dispatch_bounds`` or provide a
     self-bounding client. The council CLI injects ``DEFAULT_STAGE_BOUNDS``;
     the-oracle uses its own guarded, self-bounding client.
+
+    When ``on_attempt`` is supplied, it runs synchronously immediately after each provider
+    interaction resolves. Its exceptions propagate unchanged: accounting is a fail-closed
+    boundary, so an accounting failure aborts the council rather than losing the attempt.
+
+    Cancellation of the caller cancels the gather and its children; a spontaneous child
+    CancelledError propagates rather than being classified as a provider failure.
     """
     started = time.perf_counter()
     session_id = f"{time.strftime('%Y%m%d-%H%M%S')}-{uuid.uuid4().hex[:6]}"
 
-    responses, dropped = await _fanout(
-        client, profile.models, user_query, dispatch_bounds
+    responses, dropped, fanout_attempts, fanout_errors = await _fanout(
+        client, profile.models, user_query, dispatch_bounds, on_attempt
     )
     if len(dropped) >= 2:
-        raise RuntimeError(
+        raise FanoutAbort(
             f"Council unavailable: two or more models failed in Stage 1 ({dropped}). "
-            "Fall back to single-model review."
+            "Fall back to single-model review.",
+            attempts=fanout_attempts + fanout_errors,
         )
 
-    rankings, ranking_failed, crossrank_attempts = await _crossrank(
-        client, responses, user_query, dispatch_bounds
+    rankings, ranking_failed, crossrank_attempts, all_crossrank_attempts = await _crossrank(
+        client, responses, user_query, dispatch_bounds, on_attempt
     )
 
     try:
@@ -367,21 +492,33 @@ async def run_council(
             rankings,
             dispatch_bounds,
         )
-    except ClientError as e:
+    except Exception as e:
         # Spec §5: chairman failure aborts with a clear message. The CLI catches
         # RuntimeError and produces a graceful exit; we wrap ClientError here
         # to centralize error normalization at the pipeline boundary.
-        raise RuntimeError(
+        chairman_error = _error_attempt_record("chairman", profile.chairman, e)
+        _deliver_attempt(on_attempt, chairman_error)
+        if not isinstance(e, ClientError):
+            raise
+        raise ChairmanFailure(
             f"Chairman synthesis failed ({profile.chairman}): {e}. "
             f"Stage-1 produced {len(responses)} responses; Stage-2 produced "
             f"{len(rankings)} rankings. Council session JSON was not written. "
-            f"Fall back to single-model review or retry."
+            f"Fall back to single-model review or retry.",
+            attempts=(
+                fanout_attempts
+                + fanout_errors
+                + all_crossrank_attempts
+                + [chairman_error]
+            ),
         ) from e
 
+    chairman_attempt = _attempt_record("chairman", chairman_resp)
+    _deliver_attempt(on_attempt, chairman_attempt)
     attempts = (
-        [_attempt_record("fanout", r) for r in responses]
-        + [_attempt_record("crossrank", r) for r in crossrank_attempts]
-        + [_attempt_record("chairman", chairman_resp)]
+        fanout_attempts
+        + crossrank_attempts
+        + [chairman_attempt]
     )
     total_in = sum(a["tokens_in"] for a in attempts)
     total_out = sum(a["tokens_out"] for a in attempts)

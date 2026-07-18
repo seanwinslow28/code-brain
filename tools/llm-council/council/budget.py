@@ -38,6 +38,7 @@ _SETTLED = "settled"
 _UNKNOWN = "unknown"
 _LIFECYCLE_STATES = (_RESERVED, _DISPATCHED, _SETTLED, _UNKNOWN)
 _NONTERMINAL = (_RESERVED, _DISPATCHED)
+_PROVENANCE = ("authoritative", "estimated", "unknown")
 
 # Task 5 flips it.
 POLICY_ENFORCEMENT_ENABLED = False
@@ -366,6 +367,22 @@ def _to_decimal(value, *, field: str) -> Decimal:
     return dec
 
 
+def _resolve_provenance(provenance: str | None, usage_cost: float | None) -> str:
+    """Resolve and validate additive actual-cost provenance."""
+    resolved = (
+        "authoritative" if usage_cost is not None else "unknown"
+    ) if provenance is None else provenance
+    if resolved not in _PROVENANCE:
+        raise ReservationError(
+            f"provenance must be one of {_PROVENANCE!r}, got {provenance!r}"
+        )
+    if resolved in ("authoritative", "estimated") and usage_cost is None:
+        raise ReservationError(f"{resolved} provenance requires a known usage_cost")
+    if resolved == "unknown" and usage_cost is not None:
+        raise ReservationError("unknown provenance requires usage_cost None")
+    return resolved
+
+
 @dataclass(frozen=True)
 class _ParsedFile:
     aggregate: Decimal
@@ -487,6 +504,10 @@ def _strict_parse_file(path: Path) -> _ParsedFile:
         cost = act.get("usage_cost")
         if cost is not None:
             _to_decimal(cost, field=f"{path.name}: usage_cost")
+        if "provenance" in act and act["provenance"] not in _PROVENANCE:
+            raise LedgerCorrupt(
+                f"{path.name}: invalid actual provenance {act['provenance']!r}"
+            )
     if len(set(attempt_ids)) != len(attempt_ids):
         raise LedgerCorrupt(f"{path.name}: duplicate attempt_id")
 
@@ -754,6 +775,7 @@ def settle(
     generation_id: str | None,
     usage_cost: float | None,
     status: str = _SETTLED,
+    provenance: str | None = None,
 ) -> None:
     """Terminal ``dispatched -> settled | unknown``; record the NON-debit actual.
 
@@ -763,6 +785,13 @@ def settle(
     """
     if status not in (_SETTLED, _UNKNOWN):
         raise ReservationError(f"settle status must be settled|unknown, got {status!r}")
+    if status == _UNKNOWN and usage_cost is not None:
+        raise ReservationError("an unknown actual must carry usage_cost None")
+    resolved_provenance = _resolve_provenance(provenance, usage_cost)
+    if status == _SETTLED and resolved_provenance != "authoritative":
+        raise ReservationError(
+            "cannot settle settled with non-authoritative provenance — use unknown"
+        )
     on_date = _normalize_account_date(reservation.on_date)
     root = _resolve_root()
     with month_lock(on_date, root=root):
@@ -785,6 +814,7 @@ def settle(
             "generation_id": generation_id,
             "usage_cost": usage_cost,
             "status": status,
+            "provenance": resolved_provenance,
             "recorded_at": datetime.now(timezone.utc).isoformat(),
         })
         _atomic_write_json_fsync(_daily_file_in(root, on_date), data)
@@ -837,6 +867,7 @@ def record_actual(
     generation_id: str | None,
     usage_cost: float | None,
     status: str = _SETTLED,
+    provenance: str | None = None,
 ) -> None:
     """Append ONE non-debit per-attempt actual; DO NOT transition the reservation.
 
@@ -862,6 +893,7 @@ def record_actual(
         raise ReservationError("a settled actual requires a known usage_cost (got None)")
     if status == _UNKNOWN and usage_cost is not None:
         raise ReservationError("an unknown actual must carry usage_cost None")
+    resolved_provenance = _resolve_provenance(provenance, usage_cost)
     on_date = _normalize_account_date(reservation.on_date)
     root = _resolve_root()
     with month_lock(on_date, root=root):
@@ -884,6 +916,7 @@ def record_actual(
             "generation_id": generation_id,
             "usage_cost": usage_cost,
             "status": status,
+            "provenance": resolved_provenance,
             "recorded_at": datetime.now(timezone.utc).isoformat(),
         })
         _atomic_write_json_fsync(_daily_file_in(root, on_date), data)
@@ -921,9 +954,15 @@ def close(reservation: Reservation, *, status: str) -> None:
             ]
             if not own:
                 raise ReservationError("cannot close settled with zero actuals — use unknown")
-            if any(a.get("status") != _SETTLED or a.get("usage_cost") is None for a in own):
+            if any(
+                a.get("status") != _SETTLED
+                or a.get("usage_cost") is None
+                or a.get("provenance", "authoritative") != "authoritative"
+                for a in own
+            ):
                 raise ReservationError(
-                    "cannot close settled while an actual is unknown/uncosted — use unknown"
+                    "cannot close settled while an actual is unknown/uncosted/"
+                    "non-authoritative — use unknown"
                 )
         row["status"] = status
         _atomic_write_json_fsync(_daily_file_in(root, on_date), data)
