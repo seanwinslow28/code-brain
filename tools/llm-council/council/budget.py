@@ -39,6 +39,9 @@ _UNKNOWN = "unknown"
 _LIFECYCLE_STATES = (_RESERVED, _DISPATCHED, _SETTLED, _UNKNOWN)
 _NONTERMINAL = (_RESERVED, _DISPATCHED)
 
+# Task 5 flips it.
+POLICY_ENFORCEMENT_ENABLED = False
+
 
 @dataclass(frozen=True)
 class Pricing:
@@ -587,6 +590,79 @@ def check_and_reserve(
     rid = reservation_id or uuid.uuid4().hex
     root = _resolve_root()
     with month_lock(on_date, root=root):
+        if POLICY_ENFORCEMENT_ENABLED:
+            # Lazy import keeps budget <-> policy import-safe. The activation snapshot is
+            # enforcement state and must be read from this transaction's pinned shared
+            # root while the canonical month lock is held.
+            from council import policy
+
+            active = policy.load_active_policy(root)
+            if active is not None:
+                active_version = active["policy_version"]
+                active_hash = active["policy_hash"]
+                if policy_version is None and policy_hash is None:
+                    policy_version = active_version
+                    policy_hash = active_hash
+                elif policy_version is None or policy_hash is None:
+                    raise ReservationError(
+                        "both policy_version and policy_hash are required when either is supplied"
+                    )
+                else:
+                    # True == 1 in Python: exact-type checks must precede the equality
+                    # comparison or a boolean version launders through (review finding 1).
+                    if isinstance(policy_version, bool) or not isinstance(policy_version, int):
+                        raise ReservationError("policy_version must be an integer")
+                    if not isinstance(policy_hash, str):
+                        raise ReservationError("policy_hash must be a string")
+                    if policy_version != active_version or policy_hash != active_hash:
+                        raise ReservationError(
+                            f"caller policy does not match active policy version {active_version} "
+                            f"hash {active_hash}"
+                        )
+
+                active_tools = active["policy"]["tools"]
+                if tool not in active_tools:
+                    raise ReservationError(f"tool {tool!r} is not in active policy")
+                active_tool = active_tools[tool]
+
+                requested_per_query = _to_decimal(per_query_cap, field="per_query_cap")
+                active_per_query = {
+                    Decimal(str(value)) for value in active_tool["per_query_caps"]
+                }
+                if requested_per_query not in active_per_query:
+                    raise ReservationError(
+                        f"per_query_cap drift: {per_query_cap!r} is not in activated "
+                        f"per_query_caps {active_tool['per_query_caps']!r}"
+                    )
+
+                cap_pairs = (
+                    ("tool_daily_cap", tool_daily_cap, active_tool["daily_cap"]),
+                    ("tool_monthly_cap", tool_monthly_cap, active_tool["monthly_cap"]),
+                    (
+                        "aggregate_daily_cap",
+                        aggregate_daily_cap,
+                        active["policy"]["aggregate"]["daily_cap"],
+                    ),
+                    (
+                        "aggregate_monthly_cap",
+                        aggregate_monthly_cap,
+                        active["policy"]["aggregate"]["monthly_cap"],
+                    ),
+                )
+                for field, supplied, activated in cap_pairs:
+                    if _to_decimal(supplied, field=field) != Decimal(str(activated)):
+                        raise ReservationError(
+                            f"{field} drift: caller {supplied!r} != activated {activated!r}"
+                        )
+
+                # Admission always uses the activated snapshot. The caller chooses one
+                # enumerated per-query tier; every other cap has exactly one active value.
+                per_query_cap = float(requested_per_query)
+                tool_daily_cap = active_tool["daily_cap"]
+                tool_monthly_cap = active_tool["monthly_cap"]
+                aggregate_daily_cap = active["policy"]["aggregate"]["daily_cap"]
+                aggregate_monthly_cap = active["policy"]["aggregate"]["monthly_cap"]
+
         state = strict_ledger_state(on_date, root=root)
         if rid in state["reservation_ids"]:
             raise ReservationError(f"reservation_id {rid!r} already exists")
