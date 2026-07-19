@@ -1,10 +1,21 @@
 # tests/discovery/test_dashboard.py
 import json
 import shlex
+from pathlib import Path
 
 import pytest
+from click.testing import CliRunner
 
-from council.discovery.dashboard import SpendDay, load_sessions, load_spend
+from council.discovery.dashboard import (
+    SpendDay,
+    collector_yield,
+    discrepancies,
+    fuse_stats,
+    load_sessions,
+    load_spend,
+    month_totals,
+    rerun_command,
+)
 
 SUCCESS_SESSION = {
     "id": "20260707-101500-abc123", "topic": "ai coding agents", "lens": "pm",
@@ -107,6 +118,14 @@ def test_load_spend_skips_malformed(tmp_path):
     assert skipped and "malformed" in skipped[0][1]
 
 
+def test_dashboard_uses_public_spend_dir_accessor():
+    from council.discovery import dashboard
+
+    source = Path(dashboard.__file__).read_text()
+    assert "from council.budget import spend_dir" in source
+    assert "from council.budget import _spend_dir" not in source
+
+
 def test_load_spend_skips_non_dict_json(tmp_path):
     d = tmp_path / "health"
     d.mkdir()
@@ -154,11 +173,6 @@ def test_load_sessions_mixed_ids_never_crash(tmp_path):
     sessions, skipped = load_sessions(d)
     assert len(sessions) == 1 and sessions[0]["id"] == SUCCESS_SESSION["id"]
     assert skipped and "foreign" in skipped[0][1]
-
-
-from council.discovery.dashboard import (
-    collector_yield, discrepancies, fuse_stats, month_totals, rerun_command,
-)
 
 
 def _rows(*payloads):
@@ -235,9 +249,6 @@ def test_collector_yield_tolerates_non_dict_gather_status():
     assert y["sonar"]["runs"] == 1     # only the well-formed session counted
 
 
-from click.testing import CliRunner
-
-
 def test_cli_renders_html(tmp_path):
     from council.discovery.dashboard import main
     sdir = tmp_path / "s"
@@ -266,7 +277,7 @@ def test_cli_default_sessions_dir_resolution(tmp_path, monkeypatch):
 
 
 def test_cli_default_spend_dir_resolution(tmp_path, monkeypatch, tmp_spend_dir):
-    # Omitted --spend-dir → council.budget._spend_dir() (COUNCIL_SPEND_DIR env, sandboxed here).
+    # Omitted --spend-dir → council.budget.spend_dir() (COUNCIL_SPEND_DIR, sandboxed here).
     from council.discovery.dashboard import main
     (tmp_spend_dir / "council-spend-2026-07-08.json").write_text(json.dumps({
         "date": "2026-07-08", "total": 0.5,

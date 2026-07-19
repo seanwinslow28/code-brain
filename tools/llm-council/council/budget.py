@@ -99,6 +99,14 @@ def _spend_dir() -> Path:
     return d
 
 
+def spend_dir() -> Path:
+    """Public reporting/tooling accessor for the configured spend directory.
+
+    Enforcement transactions continue to pin one resolved root via ``_resolve_root``.
+    """
+    return _spend_dir()
+
+
 def _daily_file(on_date: date) -> Path:
     return _spend_dir() / f"council-spend-{on_date.isoformat()}.json"
 

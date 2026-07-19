@@ -219,7 +219,7 @@ def test_council_cli_uses_utc_accounting_date_for_reserve_lifecycle(
     }
 
 
-def test_discovery_cli_success_uses_utc_accounting_date_for_preflight_and_record(
+def test_discovery_cli_success_uses_utc_accounting_date_for_reserve_actual_and_close(
     tmp_path, monkeypatch
 ):
     import council.discovery.__main__ as discovery_cli
@@ -230,18 +230,34 @@ def test_discovery_cli_success_uses_utc_accounting_date_for_preflight_and_record
     async def fake_run_discovery(**kwargs):
         return DiscoveryResult("# ledger", 0.42, 1, 0, {"id": "utc-discovery"})
 
+    reservation = budget.Reservation("rid", "run", "discovery", 3.23256, sentinel)
+
+    def fake_reserve(**kwargs):
+        captured["reserve"] = kwargs["on_date"]
+        return reservation
+
     monkeypatch.setattr(discovery_cli, "utc_accounting_date", lambda: sentinel)
     monkeypatch.setattr(discovery_cli, "load_dotenv", lambda: None)
     monkeypatch.setattr(discovery_cli, "run_discovery", fake_run_discovery)
     monkeypatch.setattr(
-        discovery_cli,
-        "preflight_tool",
-        lambda **kwargs: captured.__setitem__("preflight", kwargs["on_date"]),
+        discovery_cli.budget,
+        "check_and_reserve",
+        fake_reserve,
     )
     monkeypatch.setattr(
-        discovery_cli,
-        "record_spend",
-        lambda **kwargs: captured.__setitem__("record", kwargs["on_date"]),
+        discovery_cli.budget,
+        "mark_dispatched",
+        lambda reservation: captured.__setitem__("dispatch", reservation.on_date),
+    )
+    monkeypatch.setattr(
+        discovery_cli.budget,
+        "record_actual",
+        lambda reservation, **kwargs: captured.__setitem__("actual", reservation.on_date),
+    )
+    monkeypatch.setattr(
+        discovery_cli.budget,
+        "close",
+        lambda reservation, **kwargs: captured.__setitem__("close", reservation.on_date),
     )
 
     result = CliRunner().invoke(
@@ -250,11 +266,15 @@ def test_discovery_cli_success_uses_utc_accounting_date_for_preflight_and_record
     )
 
     assert result.exit_code == 0, result.output
-    assert captured["preflight"] is sentinel
-    assert captured["record"] is sentinel
+    assert captured == {
+        "reserve": sentinel,
+        "dispatch": sentinel,
+        "actual": sentinel,
+        "close": sentinel,
+    }
 
 
-def test_discovery_cli_billed_failure_uses_utc_accounting_date_for_record(
+def test_discovery_cli_billed_failure_uses_utc_accounting_date_for_lifecycle(
     tmp_path, monkeypatch
 ):
     import council.discovery.__main__ as discovery_cli
@@ -265,18 +285,34 @@ def test_discovery_cli_billed_failure_uses_utc_accounting_date_for_record(
     async def fake_run_discovery(**kwargs):
         raise DiscoveryFailed("fuse failed", cost_usd=0.42)
 
+    reservation = budget.Reservation("rid", "run", "discovery", 3.23256, sentinel)
+
+    def fake_reserve(**kwargs):
+        captured["reserve"] = kwargs["on_date"]
+        return reservation
+
     monkeypatch.setattr(discovery_cli, "utc_accounting_date", lambda: sentinel)
     monkeypatch.setattr(discovery_cli, "load_dotenv", lambda: None)
     monkeypatch.setattr(discovery_cli, "run_discovery", fake_run_discovery)
     monkeypatch.setattr(
-        discovery_cli,
-        "preflight_tool",
-        lambda **kwargs: captured.__setitem__("preflight", kwargs["on_date"]),
+        discovery_cli.budget,
+        "check_and_reserve",
+        fake_reserve,
     )
     monkeypatch.setattr(
-        discovery_cli,
-        "record_spend",
-        lambda **kwargs: captured.__setitem__("record", kwargs["on_date"]),
+        discovery_cli.budget,
+        "mark_dispatched",
+        lambda reservation: captured.__setitem__("dispatch", reservation.on_date),
+    )
+    monkeypatch.setattr(
+        discovery_cli.budget,
+        "record_actual",
+        lambda reservation, **kwargs: captured.__setitem__("actual", reservation.on_date),
+    )
+    monkeypatch.setattr(
+        discovery_cli.budget,
+        "close",
+        lambda reservation, **kwargs: captured.__setitem__("close", reservation.on_date),
     )
 
     result = CliRunner().invoke(
@@ -285,11 +321,15 @@ def test_discovery_cli_billed_failure_uses_utc_accounting_date_for_record(
     )
 
     assert result.exit_code == 3
-    assert captured["preflight"] is sentinel
-    assert captured["record"] is sentinel
+    assert captured == {
+        "reserve": sentinel,
+        "dispatch": sentinel,
+        "actual": sentinel,
+        "close": sentinel,
+    }
 
 
-def test_panel_vs_single_cli_uses_utc_accounting_date_for_preflight_and_run(
+def test_panel_vs_single_cli_uses_utc_accounting_date_for_reserve_run_and_actuals(
     tmp_path, monkeypatch
 ):
     import experiments.panel_vs_single as panel_cli
@@ -299,16 +339,38 @@ def test_panel_vs_single_cli_uses_utc_accounting_date_for_preflight_and_run(
 
     async def fake_run_panel_vs_single(**kwargs):
         captured["run"] = kwargs["on_date"]
+        kwargs["record_fn"](amount=0.0)
         return {"cost": 0.0}
+
+    reservation = budget.Reservation("rid", "run", "discovery", 8.55568, sentinel)
+
+    def fake_reserve(**kwargs):
+        captured["reserve"] = kwargs["on_date"]
+        return reservation
 
     monkeypatch.setattr(panel_cli, "utc_accounting_date", lambda: sentinel)
     monkeypatch.setattr(panel_cli, "load_dotenv", lambda: None)
     monkeypatch.setattr(panel_cli, "run_panel_vs_single", fake_run_panel_vs_single)
     monkeypatch.setattr(panel_cli, "_write_artifacts", lambda *args, **kwargs: {})
     monkeypatch.setattr(
-        panel_cli,
-        "preflight_tool",
-        lambda **kwargs: captured.__setitem__("preflight", kwargs["on_date"]),
+        panel_cli.budget,
+        "check_and_reserve",
+        fake_reserve,
+    )
+    monkeypatch.setattr(
+        panel_cli.budget,
+        "mark_dispatched",
+        lambda reservation: captured.__setitem__("dispatch", reservation.on_date),
+    )
+    monkeypatch.setattr(
+        panel_cli.budget,
+        "record_actual",
+        lambda reservation, **kwargs: captured.__setitem__("actual", reservation.on_date),
+    )
+    monkeypatch.setattr(
+        panel_cli.budget,
+        "close",
+        lambda reservation, **kwargs: captured.__setitem__("close", reservation.on_date),
     )
 
     result = CliRunner().invoke(
@@ -317,8 +379,13 @@ def test_panel_vs_single_cli_uses_utc_accounting_date_for_preflight_and_run(
     )
 
     assert result.exit_code == 0, result.output
-    assert captured["preflight"] is sentinel
-    assert captured["run"] is sentinel
+    assert captured == {
+        "reserve": sentinel,
+        "dispatch": sentinel,
+        "run": sentinel,
+        "actual": sentinel,
+        "close": sentinel,
+    }
 
 
 def test_gateway_sources_never_use_local_date_today():

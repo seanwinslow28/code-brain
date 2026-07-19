@@ -40,7 +40,7 @@ def test_run_table_metrics_and_na_markers():
 def test_spend_section_uses_caps():
     html = _render(sessions=_rows(SUCCESS_SESSION),
                    days=[SpendDay("2026-07-07", 1.0485, [{"amount": 1.0485}])])
-    assert "$10.00/day" in html and "$50.00/mo" in html
+    assert "$30.00/day" in html and "$100.00/mo" in html
     assert "1.05" in html
     # per-run tier cap from tiers.py (standard = $1.50), never hardcoded prose
     assert "1.50" in html
