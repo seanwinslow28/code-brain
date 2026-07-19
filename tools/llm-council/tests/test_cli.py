@@ -1,17 +1,24 @@
 import json
-from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, MagicMock, patch
 
-import pytest
 from click.testing import CliRunner
 
 from council.cli import _render_markdown, main
 from council.client import ModelResponse
+from council.profiles import PROFILES
 
 
 def _r(model: str, content: str) -> ModelResponse:
-    return ModelResponse(model_id=model, content=content, tokens_in=10, tokens_out=10, latency_ms=10)
+    return ModelResponse(
+        model_id=model,
+        content=content,
+        tokens_in=10,
+        tokens_out=10,
+        latency_ms=10,
+        generation_id=f"gen-{model}-{content}",
+        cost=0.01,
+    )
 
 
 def test_cli_help_shows_profiles(fake_api_key):
@@ -26,22 +33,19 @@ def test_cli_writes_markdown_output(fake_api_key, tmp_path, tmp_spend_dir, monke
     prompt_file.write_text("What's the best way to test async code?")
     out_file = tmp_path / "out.md"
 
+    profile = PROFILES["variance"]
+    m1, m2, m3, m4 = profile.models
     valid = '{"ranking": ["A","B","C"], "reasoning": "ok"}'
     fake_responses = [
-        _r("m1", "Use pytest-asyncio."),
-        _r("m2", "Use anyio."),
-        _r("m3", "Use trio test."),
-        _r("m4", "Use unittest IsolatedAsyncioTestCase."),
-        _r("m1", valid), _r("m2", valid), _r("m3", valid), _r("m4", valid),
-        _r("m1", "Synthesis: pytest-asyncio is most idiomatic..."),
+        _r(m1, "Use pytest-asyncio."),
+        _r(m2, "Use anyio."),
+        _r(m3, "Use trio test."),
+        _r(m4, "Use unittest IsolatedAsyncioTestCase."),
+        _r(m1, valid), _r(m2, valid), _r(m3, valid), _r(m4, valid),
+        _r(m1, "Synthesis: pytest-asyncio is most idiomatic..."),
     ]
 
-    with patch("council.cli.OpenRouterClient") as mock_client_cls, \
-         patch("council.cli.get_profile") as mock_get_profile:
-        from council.profiles import Profile
-        mock_get_profile.return_value = Profile(
-            name="variance", models=("m1","m2","m3","m4"), chairman="m1", max_cost_per_query=10.0,
-        )
+    with patch("council.cli.OpenRouterClient") as mock_client_cls:
         mock_inst = MagicMock()
         mock_inst.complete = AsyncMock(side_effect=fake_responses)
         mock_inst.aclose = AsyncMock()
@@ -53,7 +57,6 @@ def test_cli_writes_markdown_output(fake_api_key, tmp_path, tmp_spend_dir, monke
             "--prompt-file", str(prompt_file),
             "--output", str(out_file),
             "--tag", "test-tag",
-            "--skip-budget-check",
         ])
 
     assert result.exit_code == 0, result.output
@@ -63,6 +66,16 @@ def test_cli_writes_markdown_output(fake_api_key, tmp_path, tmp_spend_dir, monke
     assert "Use pytest-asyncio." in text                       # m1 response
     assert "Synthesis: pytest-asyncio is most idiomatic..." in text  # chairman
     assert "test-tag" in text                                  # tag echoed
+    ledger_path = next(tmp_spend_dir.glob("council-spend-????-??-??.json"))
+    ledger = json.loads(ledger_path.read_text())
+    assert ledger["total"] == 5.069952
+    assert len(ledger["runs"]) == 1
+    assert ledger["runs"][0]["kind"] == "reservation"
+    assert ledger["runs"][0]["amount"] == 5.069952
+    assert ledger["runs"][0]["status"] == "settled"
+    assert len(ledger["actuals"]) == 9
+    assert all(actual["status"] == "settled" for actual in ledger["actuals"])
+    assert all(actual["provenance"] == "authoritative" for actual in ledger["actuals"])
 
 
 def test_render_markdown_handles_null_content():

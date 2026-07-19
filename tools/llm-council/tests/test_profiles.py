@@ -1,5 +1,5 @@
 import pytest
-from council.profiles import Profile, PROFILES, get_profile
+from council.profiles import get_profile
 
 
 def test_premium_profile_exists():
@@ -49,4 +49,4 @@ def test_interview_grader_profile_exists():
     assert p.name == "interview_grader"
     assert len(p.models) == 4, "Pipeline requires 4 panelists; do not change without prompts.py refactor"
     assert p.chairman in p.models, "Chairman must be one of the panelists"
-    assert p.max_cost_per_query == 0.40
+    assert p.max_cost_per_query == 13.00

@@ -7,9 +7,16 @@ from dataclasses import dataclass, field
 import httpx
 
 from council.discovery.evidence import EvidenceBundle
+from council.discovery.textbudget import clamp_utf8_bytes
 from council.discovery.tiers import TierConfig
+from council.pricing import provider_price_policy
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+# Task 3c reservation inputs, Sean-disclosed at the Task 3c STOP.
+FUSION_JUDGE_MAX_TOKENS = 8192
+TOPIC_EMBED_MAX_BYTES = 2048
+EVIDENCE_EMBED_MAX_BYTES = 131072
 
 
 class FusionError(Exception):
@@ -110,10 +117,30 @@ class FusionResult:
 
 
 def _evidence_block(bundle: EvidenceBundle) -> str:
-    lines = []
-    for r in bundle.records:
-        lines.append(f"[{r.source_type}/{r.source_name} | {r.date} | {r.url}] {r.quote}")
-    return "\n".join(lines)
+    lines = [
+        f"[{r.source_type}/{r.source_name} | {r.date} | {r.url}] {r.quote}"
+        for r in bundle.records
+    ]
+    full = "\n".join(lines)
+    if len(full.encode("utf-8")) <= EVIDENCE_EMBED_MAX_BYTES:
+        return full
+
+    selected: list[str] = []
+    total = len(lines)
+    for line in lines:
+        shown = len(selected) + 1
+        marker = (
+            f"[evidence truncated for bound: showing {shown} of {total} records]"
+        )
+        candidate = "\n".join([*selected, line, marker])
+        if len(candidate.encode("utf-8")) > EVIDENCE_EMBED_MAX_BYTES:
+            break
+        selected.append(line)
+
+    marker = (
+        f"[evidence truncated for bound: showing {len(selected)} of {total} records]"
+    )
+    return "\n".join([*selected, marker])
 
 
 _JUDGE_INSTRUCTION = (
@@ -128,19 +155,29 @@ _JUDGE_INSTRUCTION = (
 
 
 def _build_body(bundle: EvidenceBundle, tier: TierConfig, topic: str) -> dict:
+    topic = clamp_utf8_bytes(topic, TOPIC_EMBED_MAX_BYTES)
     user = (
         f"TOPIC: {topic}\n\nEVIDENCE (real, fetched):\n{_evidence_block(bundle)}\n\n"
         "Find the highest-signal user pain points. Use web_search only to fill gaps."
     )
+    provider = provider_price_policy(tier.judge)
+    # Fusion's parameter-support matrix is OpenRouter-side and opaque. Requiring
+    # parameter support can refuse for functionality reasons; the spend guards are
+    # max_price plus disabled fallbacks.
+    provider.pop("require_parameters")
     # Shape confirmed correct against a live 200 response (see FUSION_SCHEMA.md).
     return {
         "model": tier.judge,
+        "max_tokens": FUSION_JUDGE_MAX_TOKENS,
+        "provider": provider,
         "messages": [
             {"role": "system", "content": _JUDGE_INSTRUCTION},
             {"role": "user", "content": user},
         ],
         "tools": [{"type": "openrouter:fusion"}],
         "tool_choice": "required",
+        # The panel and its server-side web-tool spend are not client-boundable;
+        # only max_tool_calls caps them. Task 3c prices/discloses this residual.
         "fusion": {
             "analysis_models": list(tier.panel),
             "max_tool_calls": tier.max_tool_calls,

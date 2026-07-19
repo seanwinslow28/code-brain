@@ -2,8 +2,10 @@
 
 import asyncio
 import json
+import math
 import os
 import time
+import uuid
 from dataclasses import asdict
 from pathlib import Path
 
@@ -11,15 +13,17 @@ import click
 from dotenv import load_dotenv
 from rich.console import Console
 
-from council.budget import BudgetExceeded, preflight_tool, utc_accounting_date
-from council.discovery.fusion import FusionResult
+from council import budget, policy, reservations
+from council.budget import BudgetExceeded, utc_accounting_date
+from council.discovery.fusion import FusionError, FusionResult
 from council.discovery.tiers import get_tier
 from experiments.blind_rating import build_blind_rating
 from experiments.panel_vs_single_core import run_panel_vs_single
 
 console = Console()
-DISCOVERY_DAILY_CAP = 10.0
-DISCOVERY_MONTHLY_CAP = 50.0
+# The documented experiment per-query cap intentionally has the same semantic value
+# as discovery's daily cap and is enumerated separately in the policy registry.
+EXPERIMENT_PER_QUERY_CAP = 30.00
 DEFAULT_TOPIC = ("artists, writers, and designers who say AI is a slot machine — the same prompt never "
                  "gives the same result twice — and who have stopped chasing prompts in favor of "
                  "building a repeatable system they can trust")
@@ -51,33 +55,76 @@ def _write_artifacts(out_dir: Path, result: dict, topic: str) -> dict:
 @click.option("--single-model", default="anthropic/claude-opus-4.7")
 @click.option("--out", type=click.Path(file_okay=False, path_type=Path), default=None)
 @click.option("--yes", is_flag=True, help="Auto-confirm the dual-fuse cost.")
-@click.option("--skip-budget-check", is_flag=True, hidden=True)
-def main(topic, tier_name, single_model, out, yes, skip_budget_check):
+def main(topic, tier_name, single_model, out, yes):
     load_dotenv()
     tcfg = get_tier(tier_name)
-    # Two fuse calls intentionally exceed a single-run cap, so gate on the DAILY cap, not per-run.
-    estimated = round(tcfg.max_cost_per_run * 1.5, 4)
-    if not skip_budget_check:
-        try:
-            preflight_tool(estimated=estimated, per_query_cap=DISCOVERY_DAILY_CAP,
-                           daily_cap=DISCOVERY_DAILY_CAP, monthly_cap=DISCOVERY_MONTHLY_CAP,
-                           on_date=utc_accounting_date(), tool="discovery")
-        except BudgetExceeded as e:
-            console.print(f"[red]Budget rejected: {e}[/red]")
-            raise SystemExit(2)
+    reserved_cost = reservations.experiment_worst_case_reservation(tcfg)
 
-    console.print(f"[yellow]Dual-fuse (panel vs {single_model}) — estimated up to ${estimated:.2f} "
+    console.print(f"[yellow]Dual-fuse (panel vs {single_model}) — reserved up to ${reserved_cost:.2f} "
                   f"(2 real OpenRouter calls).[/yellow]")
     if not yes and not click.confirm("Proceed with the paid run?"):
         console.print("[yellow]Aborted.[/yellow]")
         raise SystemExit(1)
 
+    cap_registry = policy.load_policy()
+    discovery_caps = cap_registry["tools"]["discovery"]
+    aggregate_caps = cap_registry["aggregate"]
+    accounting_date = utc_accounting_date()
+    run_id = uuid.uuid4().hex
+    try:
+        reservation = budget.check_and_reserve(
+            reserved_cost=reserved_cost,
+            tool="discovery",
+            tag="discovery-experiment",
+            profile=tier_name,
+            run_id=run_id,
+            on_date=accounting_date,
+            per_query_cap=EXPERIMENT_PER_QUERY_CAP,
+            tool_daily_cap=discovery_caps["daily_cap"],
+            tool_monthly_cap=discovery_caps["monthly_cap"],
+            aggregate_daily_cap=aggregate_caps["daily_cap"],
+            aggregate_monthly_cap=aggregate_caps["monthly_cap"],
+        )
+    except BudgetExceeded as e:
+        console.print(f"[red]Budget rejected: {e}[/red]")
+        raise SystemExit(2)
+
     out_dir = out or Path("experiments/runs") / f"panel-vs-single-{time.strftime('%Y%m%d-%H%M%S')}"
     api_key = os.environ.get("OPENROUTER_API_KEY", "")
-    result = asyncio.run(run_panel_vs_single(
-        topic=topic, tier_name=tier_name, single_model=single_model,
-        api_key=api_key, on_date=utc_accounting_date(),
-    ))
+    budget.mark_dispatched(reservation)
+    attempt_count = 0
+
+    def _record_estimate(*, amount, **kwargs):
+        nonlocal attempt_count
+        attempt_count += 1
+        usable_cost = (
+            not isinstance(amount, bool)
+            and isinstance(amount, (int, float))
+            and math.isfinite(amount)
+            and amount >= 0
+        )
+        budget.record_actual(
+            reservation,
+            attempt_id=f"{run_id}-{attempt_count:02d}",
+            generation_id=None,
+            usage_cost=amount if usable_cost else None,
+            status="settled" if usable_cost else "unknown",
+            provenance="estimated" if usable_cost else None,
+        )
+
+    try:
+        result = asyncio.run(run_panel_vs_single(
+            topic=topic, tier_name=tier_name, single_model=single_model,
+            api_key=api_key, on_date=accounting_date, record_fn=_record_estimate,
+        ))
+    except FusionError:
+        budget.close(reservation, status="unknown")
+        raise
+    except Exception:
+        budget.close(reservation, status="unknown")
+        raise
+    budget.close(reservation, status="unknown")
+
     paths = _write_artifacts(out_dir, result, topic)
     console.print(f"[green]Done.[/green] ${result['cost']:.4f} across both arms.")
     console.print(f"[dim]Artifacts: {out_dir}[/dim]")

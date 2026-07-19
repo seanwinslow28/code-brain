@@ -6,7 +6,7 @@ explicit n/a markers (pre-E1 / pre-E4 vintage), never zeros; skipped files are l
 import html
 from pathlib import Path
 
-from council.discovery.__main__ import DISCOVERY_DAILY_CAP, DISCOVERY_MONTHLY_CAP
+from council import policy
 from council.discovery.dashboard import (
     SpendDay, collector_yield, discrepancies, fuse_stats, month_totals, rerun_command,
 )
@@ -110,6 +110,9 @@ def _run_rows(sessions: list[dict]) -> str:
 def render_dashboard(sessions: list[dict], skipped_sessions: list[tuple[str, str]],
                      spend_days: list[SpendDay], skipped_spend: list[tuple[str, str]],
                      *, generated_at: str, sessions_dir: Path) -> str:
+    discovery_caps = policy.load_policy()["tools"]["discovery"]
+    daily_cap = discovery_caps["daily_cap"]
+    monthly_cap = discovery_caps["monthly_cap"]
     n = len(sessions)
     thin = f'<span class="badge">⚠ thin: {n} runs</span>' if n < THIN_THRESHOLD else ""
     parts = [f"<style>{_CSS}</style>",
@@ -124,18 +127,18 @@ def render_dashboard(sessions: list[dict], skipped_sessions: list[tuple[str, str
             "new runs will appear here automatically.</p>")
 
     # Spend vs caps
-    parts.append(f"<h2>Spend vs caps <span class='dim'>(${DISCOVERY_DAILY_CAP:.2f}/day · "
-                 f"${DISCOVERY_MONTHLY_CAP:.2f}/mo)</span></h2>")
+    parts.append(f"<h2>Spend vs caps <span class='dim'>(${daily_cap:.2f}/day · "
+                 f"${monthly_cap:.2f}/mo)</span></h2>")
     if spend_days:
         day_rows = "".join(
-            f"<tr><td>{_e(d.date)}</td><td>{_cap_bar(d.discovery_total, DISCOVERY_DAILY_CAP)}</td>"
+            f"<tr><td>{_e(d.date)}</td><td>{_cap_bar(d.discovery_total, daily_cap)}</td>"
             f"<td class='dim'>{len(d.runs)} run(s)</td></tr>" for d in spend_days)
         parts.append(f"<table><tr><th>day</th><th>discovery spend vs $"
-                     f"{DISCOVERY_DAILY_CAP:.2f}/day</th><th></th></tr>{day_rows}</table>")
+                     f"{daily_cap:.2f}/day</th><th></th></tr>{day_rows}</table>")
         months = "".join(
-            f"<tr><td>{_e(m)}</td><td>{_cap_bar(total, DISCOVERY_MONTHLY_CAP)}</td></tr>"
+            f"<tr><td>{_e(m)}</td><td>{_cap_bar(total, monthly_cap)}</td></tr>"
             for m, total in sorted(month_totals(spend_days).items()))
-        parts.append(f"<table><tr><th>month</th><th>vs ${DISCOVERY_MONTHLY_CAP:.2f}/mo</th></tr>"
+        parts.append(f"<table><tr><th>month</th><th>vs ${monthly_cap:.2f}/mo</th></tr>"
                      f"{months}</table>")
     else:
         parts.append("<p class='dim'>No discovery spend recorded in the ledgers.</p>")

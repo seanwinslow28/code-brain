@@ -172,7 +172,7 @@ def _run_cli(sessions_dir: Path | None, spend_dir: Path | None) -> tuple[str, Pa
     remain importable without pulling the whole pipeline."""
     from datetime import datetime
 
-    from council.budget import _spend_dir as _default_spend_dir
+    from council.budget import spend_dir as _default_spend_dir
     from council.discovery.dashboard_render import render_dashboard
     from council.discovery.pipeline import _default_sessions_dir
 
