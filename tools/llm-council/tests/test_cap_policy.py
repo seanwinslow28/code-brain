@@ -576,36 +576,28 @@ def test_enforcement_on_without_activation_preserves_legacy_null_policy(
     assert row["policy_hash"] is None
 
 
-def test_shipped_enforcement_off_never_consults_policy_and_does_not_stamp(
+def test_shipped_enforcement_on_consults_policy_and_stamps_omitted_identity(
     tmp_spend_dir, monkeypatch
 ):
-    """OFF is proven by absence of consultation, not just by a successful admission
-    (review finding 4): any read of the activation file while the flag is False trips
-    the bomb, so a regression that partially un-gates the policy path fails loudly."""
-    assert budget.POLICY_ENFORCEMENT_ENABLED is False
-    policy.activate_policy(root=tmp_spend_dir)
+    """Task 5 flips the Task 2 OFF guard into executable activation enforcement."""
+    assert budget.POLICY_ENFORCEMENT_ENABLED is True
+    active = policy.activate_policy(root=tmp_spend_dir)
+    real_load = policy.load_active_policy
+    consulted_roots = []
 
-    def _bomb(root):
-        raise AssertionError("policy.load_active_policy consulted while enforcement is OFF")
+    def _spy(root):
+        consulted_roots.append(root)
+        return real_load(root)
 
-    monkeypatch.setattr(policy, "load_active_policy", _bomb)
+    monkeypatch.setattr(policy, "load_active_policy", _spy)
     today = budget.utc_accounting_date()
 
-    budget.check_and_reserve(
-        **_activated_reserve_kwargs(
-            today,
-            tool="not-registered",
-            per_query_cap=99.0,
-            tool_daily_cap=99.0,
-            tool_monthly_cap=99.0,
-            aggregate_daily_cap=99.0,
-            aggregate_monthly_cap=99.0,
-        )
-    )
+    budget.check_and_reserve(**_activated_reserve_kwargs(today))
 
     row = _reservation_rows(tmp_spend_dir, today)[0]
-    assert row["policy_version"] is None
-    assert row["policy_hash"] is None
+    assert consulted_roots == [tmp_spend_dir.resolve()]
+    assert row["policy_version"] == active["policy_version"]
+    assert row["policy_hash"] == active["policy_hash"]
 
 
 # --- Review-round regressions (Task 2 round 2) ------------------------------
