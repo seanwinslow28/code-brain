@@ -378,7 +378,11 @@ def test_settle_rejects_illegal_transition(tmp_spend_dir):
         settle(r, attempt_id="a1", generation_id="g1", usage_cost=0.1, status="settled")
 
 
-def test_reconcile_stale_retains_debit_as_unknown(tmp_spend_dir):
+def test_reconcile_stale_retains_debit_as_unknown(tmp_spend_dir, monkeypatch):
+    # Explicit legacy/degraded-owner path: Task 5 gives positively identified live owners
+    # precedence over reconciliation, while an unavailable OS start query preserves the
+    # older_than=None behavior this regression has always specified.
+    monkeypatch.setattr(budget, "_process_start_time", lambda _pid: None)
     today = date(2026, 7, 14)
     r1 = _reserve(today, reserved_cost=1.0, run_id="r1")
     r2 = _reserve(today, reserved_cost=2.0, run_id="r2")

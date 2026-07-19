@@ -2,19 +2,18 @@
 
 from dataclasses import replace
 
-from council.budget import record_spend as _record_spend
 from council.discovery.fusion import FusionError, fuse as _fuse
 from council.discovery.gather import gather_evidence
 from council.discovery.tiers import get_tier
 
 
 async def run_panel_vs_single(*, topic, tier_name, single_model, api_key, on_date,
-                              gather_fn=None, fuse_fn=None, record_fn=None) -> dict:
+                              record_fn, gather_fn=None, fuse_fn=None) -> dict:
     tcfg = get_tier(tier_name)
     single_cfg = replace(tcfg, panel=(single_model,))
     gather = gather_fn or gather_evidence
     fuse = fuse_fn or _fuse
-    record = record_fn or _record_spend
+    record = record_fn
 
     def _bill(fr_cost: float) -> None:
         record(amount=round(fr_cost or 0.0, 6), profile=tier_name,
