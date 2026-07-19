@@ -38,6 +38,7 @@ _SETTLED = "settled"
 _UNKNOWN = "unknown"
 _LIFECYCLE_STATES = (_RESERVED, _DISPATCHED, _SETTLED, _UNKNOWN)
 _NONTERMINAL = (_RESERVED, _DISPATCHED)
+_PROVENANCE = ("authoritative", "estimated", "unknown")
 
 # Task 5 flips it.
 POLICY_ENFORCEMENT_ENABLED = False
@@ -96,6 +97,14 @@ def _spend_dir() -> Path:
         d = here.parents[3] / "vault" / "health"
     d.mkdir(parents=True, exist_ok=True)
     return d
+
+
+def spend_dir() -> Path:
+    """Public reporting/tooling accessor for the configured spend directory.
+
+    Enforcement transactions continue to pin one resolved root via ``_resolve_root``.
+    """
+    return _spend_dir()
 
 
 def _daily_file(on_date: date) -> Path:
@@ -366,6 +375,22 @@ def _to_decimal(value, *, field: str) -> Decimal:
     return dec
 
 
+def _resolve_provenance(provenance: str | None, usage_cost: float | None) -> str:
+    """Resolve and validate additive actual-cost provenance."""
+    resolved = (
+        "authoritative" if usage_cost is not None else "unknown"
+    ) if provenance is None else provenance
+    if resolved not in _PROVENANCE:
+        raise ReservationError(
+            f"provenance must be one of {_PROVENANCE!r}, got {provenance!r}"
+        )
+    if resolved in ("authoritative", "estimated") and usage_cost is None:
+        raise ReservationError(f"{resolved} provenance requires a known usage_cost")
+    if resolved == "unknown" and usage_cost is not None:
+        raise ReservationError("unknown provenance requires usage_cost None")
+    return resolved
+
+
 @dataclass(frozen=True)
 class _ParsedFile:
     aggregate: Decimal
@@ -487,6 +512,10 @@ def _strict_parse_file(path: Path) -> _ParsedFile:
         cost = act.get("usage_cost")
         if cost is not None:
             _to_decimal(cost, field=f"{path.name}: usage_cost")
+        if "provenance" in act and act["provenance"] not in _PROVENANCE:
+            raise LedgerCorrupt(
+                f"{path.name}: invalid actual provenance {act['provenance']!r}"
+            )
     if len(set(attempt_ids)) != len(attempt_ids):
         raise LedgerCorrupt(f"{path.name}: duplicate attempt_id")
 
@@ -569,15 +598,16 @@ def check_and_reserve(
     reservation_id: str | None = None,
     policy_version=None,
     policy_hash=None,
+    force: bool = False,
 ) -> Reservation:
     """One locked transaction: strict-check the caps, then durably reserve.
 
     Under the canonical month lock (over a spend root pinned once for the whole
     transaction): strict-parse the ledger (fail closed on corruption), enforce the
-    per-tool per-query/daily/monthly caps HARD — there is NO ``force`` override, the
-    per-tool cap is hard (finding 2) — CHECK the cross-tool aggregate daily/monthly
-    ceiling (refuse if the-oracle would breach it — checked but not airtight until F8b),
-    then write a durable ``reserved`` row (atomic rename + fsync of file and parent dir).
+    per-tool per-query/daily/monthly caps and the cross-tool aggregate daily/monthly
+    ceiling, then write a durable ``reserved`` row (atomic rename + fsync of file and
+    parent dir). ``force=True`` skips ONLY the per-query comparison when policy permits;
+    it still debits the full reserved cost. Daily and monthly caps are NEVER bypassed.
     The reserved cost is the sole enforcement debit.
     """
     if not isinstance(run_id, str) or not run_id:
@@ -624,6 +654,10 @@ def check_and_reserve(
                 if tool not in active_tools:
                     raise ReservationError(f"tool {tool!r} is not in active policy")
                 active_tool = active_tools[tool]
+                if force and not active_tool["force_per_query_allowed"]:
+                    raise ReservationError(
+                        f"force is not allowed for tool {tool!r} by the active policy"
+                    )
 
                 requested_per_query = _to_decimal(per_query_cap, field="per_query_cap")
                 active_per_query = {
@@ -666,7 +700,7 @@ def check_and_reserve(
         state = strict_ledger_state(on_date, root=root)
         if rid in state["reservation_ids"]:
             raise ReservationError(f"reservation_id {rid!r} already exists")
-        if cost > _to_decimal(per_query_cap, field="per_query_cap"):
+        if not force and cost > _to_decimal(per_query_cap, field="per_query_cap"):
             raise BudgetExceeded(
                 f"per-query cap exceeded: reserved ${cost} > cap ${per_query_cap}"
             )
@@ -754,6 +788,7 @@ def settle(
     generation_id: str | None,
     usage_cost: float | None,
     status: str = _SETTLED,
+    provenance: str | None = None,
 ) -> None:
     """Terminal ``dispatched -> settled | unknown``; record the NON-debit actual.
 
@@ -763,6 +798,13 @@ def settle(
     """
     if status not in (_SETTLED, _UNKNOWN):
         raise ReservationError(f"settle status must be settled|unknown, got {status!r}")
+    if status == _UNKNOWN and usage_cost is not None:
+        raise ReservationError("an unknown actual must carry usage_cost None")
+    resolved_provenance = _resolve_provenance(provenance, usage_cost)
+    if status == _SETTLED and resolved_provenance != "authoritative":
+        raise ReservationError(
+            "cannot settle settled with non-authoritative provenance — use unknown"
+        )
     on_date = _normalize_account_date(reservation.on_date)
     root = _resolve_root()
     with month_lock(on_date, root=root):
@@ -785,6 +827,7 @@ def settle(
             "generation_id": generation_id,
             "usage_cost": usage_cost,
             "status": status,
+            "provenance": resolved_provenance,
             "recorded_at": datetime.now(timezone.utc).isoformat(),
         })
         _atomic_write_json_fsync(_daily_file_in(root, on_date), data)
@@ -837,6 +880,7 @@ def record_actual(
     generation_id: str | None,
     usage_cost: float | None,
     status: str = _SETTLED,
+    provenance: str | None = None,
 ) -> None:
     """Append ONE non-debit per-attempt actual; DO NOT transition the reservation.
 
@@ -862,6 +906,7 @@ def record_actual(
         raise ReservationError("a settled actual requires a known usage_cost (got None)")
     if status == _UNKNOWN and usage_cost is not None:
         raise ReservationError("an unknown actual must carry usage_cost None")
+    resolved_provenance = _resolve_provenance(provenance, usage_cost)
     on_date = _normalize_account_date(reservation.on_date)
     root = _resolve_root()
     with month_lock(on_date, root=root):
@@ -884,6 +929,7 @@ def record_actual(
             "generation_id": generation_id,
             "usage_cost": usage_cost,
             "status": status,
+            "provenance": resolved_provenance,
             "recorded_at": datetime.now(timezone.utc).isoformat(),
         })
         _atomic_write_json_fsync(_daily_file_in(root, on_date), data)
@@ -921,9 +967,15 @@ def close(reservation: Reservation, *, status: str) -> None:
             ]
             if not own:
                 raise ReservationError("cannot close settled with zero actuals — use unknown")
-            if any(a.get("status") != _SETTLED or a.get("usage_cost") is None for a in own):
+            if any(
+                a.get("status") != _SETTLED
+                or a.get("usage_cost") is None
+                or a.get("provenance", "authoritative") != "authoritative"
+                for a in own
+            ):
                 raise ReservationError(
-                    "cannot close settled while an actual is unknown/uncosted — use unknown"
+                    "cannot close settled while an actual is unknown/uncosted/"
+                    "non-authoritative — use unknown"
                 )
         row["status"] = status
         _atomic_write_json_fsync(_daily_file_in(root, on_date), data)

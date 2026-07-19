@@ -1,10 +1,10 @@
-import asyncio
+import json
 from click.testing import CliRunner
 from council.discovery.__main__ import main
 from council.discovery.pipeline import DiscoveryResult
 
 
-def test_cli_writes_ledger(tmp_path, monkeypatch, fake_api_key):
+def test_cli_writes_ledger(tmp_path, monkeypatch, fake_api_key, tmp_spend_dir):
     out = tmp_path / "ledger.md"
 
     async def fake_run(**kw):
@@ -14,7 +14,7 @@ def test_cli_writes_ledger(tmp_path, monkeypatch, fake_api_key):
 
     res = CliRunner().invoke(main, [
         "roadmap tools", "--lens", "pm", "--tier", "quick",
-        "--output", str(out), "--skip-budget-check",
+        "--output", str(out),
     ])
     assert res.exit_code == 0, res.output
     assert out.read_text().startswith("# Idea Ledger")
@@ -27,12 +27,11 @@ def test_cli_deep_requires_confirmation(tmp_path, monkeypatch, fake_api_key):
     monkeypatch.setattr("council.discovery.__main__.run_discovery", fake_run)
     res = CliRunner().invoke(main, [
         "x", "--tier", "deep", "--output", str(tmp_path / "o.md"),
-        "--skip-budget-check",
     ], input="n\n")
     assert res.exit_code != 0 or "aborted" in res.output.lower()
 
 
-def test_cli_writes_substack_brief(tmp_path, monkeypatch, fake_api_key):
+def test_cli_writes_substack_brief(tmp_path, monkeypatch, fake_api_key, tmp_spend_dir):
     out = tmp_path / "2026-06-20-x-substack-idea-ledger.md"
 
     async def fake_run(**kw):
@@ -42,7 +41,7 @@ def test_cli_writes_substack_brief(tmp_path, monkeypatch, fake_api_key):
     monkeypatch.setattr("council.discovery.__main__.run_discovery", fake_run)
 
     res = CliRunner().invoke(main, [
-        "x", "--lens", "substack", "--tier", "quick", "--output", str(out), "--skip-budget-check",
+        "x", "--lens", "substack", "--tier", "quick", "--output", str(out),
     ])
     assert res.exit_code == 0, res.output
     brief = tmp_path / "2026-06-20-x-substack-brief.md"
@@ -51,7 +50,7 @@ def test_cli_writes_substack_brief(tmp_path, monkeypatch, fake_api_key):
     assert "brief" in res.output.lower()
 
 
-def test_cli_pm_lens_writes_no_brief(tmp_path, monkeypatch, fake_api_key):
+def test_cli_pm_lens_writes_no_brief(tmp_path, monkeypatch, fake_api_key, tmp_spend_dir):
     out = tmp_path / "led.md"
 
     async def fake_run(**kw):
@@ -59,13 +58,13 @@ def test_cli_pm_lens_writes_no_brief(tmp_path, monkeypatch, fake_api_key):
     monkeypatch.setattr("council.discovery.__main__.run_discovery", fake_run)
 
     res = CliRunner().invoke(main, [
-        "x", "--lens", "pm", "--tier", "quick", "--output", str(out), "--skip-budget-check",
+        "x", "--lens", "pm", "--tier", "quick", "--output", str(out),
     ])
     assert res.exit_code == 0, res.output
     assert not (tmp_path / "led-brief.md").exists()
 
 
-def test_cli_passes_segment_to_pipeline(tmp_path, monkeypatch, fake_api_key):
+def test_cli_passes_segment_to_pipeline(tmp_path, monkeypatch, fake_api_key, tmp_spend_dir):
     captured = {}
 
     async def fake_run(**kw):
@@ -75,13 +74,15 @@ def test_cli_passes_segment_to_pipeline(tmp_path, monkeypatch, fake_api_key):
 
     res = CliRunner().invoke(main, [
         "x", "--lens", "pm", "--tier", "quick", "--segment", "designers",
-        "--output", str(tmp_path / "o.md"), "--skip-budget-check",
+        "--output", str(tmp_path / "o.md"),
     ])
     assert res.exit_code == 0, res.output
     assert captured["segment"] == "designers"
 
 
-def test_cli_supplement_flag_defaults_off_and_can_enable(tmp_path, monkeypatch, fake_api_key):
+def test_cli_supplement_flag_defaults_off_and_can_enable(
+    tmp_path, monkeypatch, fake_api_key, tmp_spend_dir
+):
     # As of the 2026-06-28 agent-layer pivot, the in-CLI Exa/Brave BACKFILL is OPT-IN: the
     # default flow leaves it OFF (the orchestrating agent backfills via WebSearch/WebFetch on
     # the subscription, $0). --supplement keeps the deterministic CLI backfill for the headless
@@ -95,7 +96,7 @@ def test_cli_supplement_flag_defaults_off_and_can_enable(tmp_path, monkeypatch, 
 
     # default: supplement off
     res = CliRunner().invoke(main, [
-        "x", "--lens", "pm", "--tier", "quick", "--output", str(tmp_path / "a.md"), "--skip-budget-check",
+        "x", "--lens", "pm", "--tier", "quick", "--output", str(tmp_path / "a.md"),
     ])
     assert res.exit_code == 0, res.output
     assert captured["supplement"] is False
@@ -103,15 +104,13 @@ def test_cli_supplement_flag_defaults_off_and_can_enable(tmp_path, monkeypatch, 
     # --supplement enables the opt-in CLI backfill
     res2 = CliRunner().invoke(main, [
         "x", "--lens", "pm", "--tier", "quick", "--supplement",
-        "--output", str(tmp_path / "b.md"), "--skip-budget-check",
+        "--output", str(tmp_path / "b.md"),
     ])
     assert res2.exit_code == 0, res2.output
     assert captured["supplement"] is True
 
 
 def test_cli_records_spend_and_echoes_status_on_failure(tmp_path, monkeypatch, fake_api_key, tmp_spend_dir):
-    from datetime import date
-    from council import budget
     from council.discovery.pipeline import DiscoveryFailed
 
     async def boom(**kw):
@@ -124,4 +123,10 @@ def test_cli_records_spend_and_echoes_status_on_failure(tmp_path, monkeypatch, f
     ])
     assert res.exit_code == 3
     assert "Gather status" in res.output
-    assert round(budget.tool_total_for_day(date.today(), "discovery"), 2) == 0.42
+    ledger = json.loads(
+        next(tmp_spend_dir.glob("council-spend-????-??-??.json")).read_text()
+    )
+    assert ledger["total"] == 3.23256
+    assert ledger["runs"][0]["status"] == "unknown"
+    assert ledger["actuals"][0]["usage_cost"] == 0.42
+    assert ledger["actuals"][0]["provenance"] == "estimated"
