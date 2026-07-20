@@ -5,8 +5,8 @@ connects:
   - The Verification-Governance Inversion in Agentic Workflows
   - Throughput vs. Taste Memory Tension
   - Velocity vs. Judgment in MCP Strengthening
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-15
+updated: 2026-07-15
 ---
 
 ## Synthesis
@@ -17,7 +17,7 @@ This connection reveals a critical paradox where the pursuit of automated effici
 
 ### [[The Verification-Governance Inversion in Agentic Workflows]]
 
-> As Sean scales his fleet's sampling capacity, the system generates more 'slop' that requires manual verification, creating a trust deficit.
+> This connection reveals a critical paradox where the pursuit of automated efficiency in Sean's knowledge vault leads to a decrease in overall system utility due to the verification-governance inversion.
 
 ### [[Throughput vs. Taste Memory Tension]]
 

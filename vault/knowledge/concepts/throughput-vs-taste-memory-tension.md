@@ -2,31 +2,31 @@
 title: "Throughput vs. Taste Memory Tension"
 type: concept
 sources:
-  - knowledge/connections/velocity-vs-judgment-in-agentic-synthesis.md
+  - knowledge/connections/cross-domain-tension-automated-throughput-vs-epistemic-hygiene-in-gap-analysis.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-20
+updated: 2026-07-20
 ---
 
 ## Definition
 
-This invariant captures the systemic conflict where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. The mechanism operates by prioritizing quantity of output over the nuanced quality required for creative fidelity, causing the operator to lose confidence in the system's ability to maintain aesthetic standards. This tension manifests as a growing gap between the volume of generated content and the operator's capacity to verify its strategic alignment.
+This mechanism describes the inverse relationship between the volume of automated sampling and the fidelity of human aesthetic judgment. As agent fleets scale their clusters_sampled to maximize throughput, they inevitably dilute the signal-to-noise ratio because the system lacks a robust taste memory to filter low-validity content. The consequence is that Sean's trust in the vault erodes as he is forced to manually verify outputs that should have been pre-filtered by quality standards rather than volume metrics.
 
 ## Context
 
-Sean faces a trust deficit as his automated systems produce more content that fails to meet his creative standards, forcing him to spend more time verifying outputs rather than creating new ones. This erosion of trust undermines the utility of the automation pipeline for high-stakes creative work.
+Sean must recognize that scaling his agent fleet without corresponding increases in epistemic hygiene will lead to 'slop,' where the absence of evidence is misinterpreted as a signal for action. This tension is critical because it directly impacts his ability to maintain high-quality insights and prevents him from relying on automated gap analysis for strategic decisions.
 
 ## Evidence
 
-> There is a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
+> As the fleet scales its sampling capacity (clusters_sampled), there is a latent tension between generating more connections and maintaining the signal-to-noise ratio.
 
-> Creatives in the comments echo that this material is impossible to build good narratives or campaigns on.
+> The fundamental tension lies between the drive for automated throughput and the preservation of epistemic hygiene, leading to a systemic trust deficit.
 
 ## Examples
 
-- leading to a systemic trust deficit
-- impossible to build good narratives or campaigns on
+- Agents treating gaps as opportunities leads to 'solutioneering,' building features for non-existent needs rather than investigating the gap.
+- 98% of people write opportunities as solutions, and solution-framing is the dominant failure mode of gap mapping.
 
 ## Related Concepts
 
-[[The Efficiency-Quality Inversion in Automated Synthesis]] [[Tacit Knowledge Erosion vs. Automation Scale]]
+[[Slop as a Trust Deficit]] [[The Verification-Governance Inversion]]

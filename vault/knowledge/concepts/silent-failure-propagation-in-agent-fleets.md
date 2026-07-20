@@ -2,31 +2,31 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/the-decoupling-of-operational-health-from-strategic-efficacy.md
+  - knowledge/connections/operational-health-masks-strategic-stagnation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-20
+updated: 2026-07-20
 ---
 
 ## Definition
 
-This mechanism describes how a failure in one agent's semantic output propagates downstream as a silent dependency block, rather than an explicit error. When the synthesizer fails to produce high-quality concepts due to infrastructure limitations or model constraints, subsequent agents that rely on this data inherit stale or empty context. The failure is invisible in each agent's source because the health check passes, but the strategic efficacy of the entire fleet degrades.
+This pattern occurs when the desire for autonomous synthesis conflicts with the lack of observable intermediate states in headless agents. Failures propagate silently because there is no feedback loop to validate the semantic completeness of the data pipeline. The consequence is that the user notices the staleness before the brief flags the failure, creating a dependency gap.
 
 ## Context
 
-Sean's daily routine and job hunt strategies rely on accurate, up-to-date information from his vault. Silent failures mean he might make career decisions based on outdated or low-quality synthesis, unaware that the underlying data pipeline is broken.
+Sean faces a critical inversion where the governance of his professional output is delegated to systems that only verify operational health. This leads to undetected productivity loss when agents are idle or blocked by infrastructure limitations like missing MCP connections.
 
 ## Evidence
 
 > There is a critical tension between the desire for autonomous synthesis and the lack of observable intermediate states in headless agents.
 
-> When the synthesizer fails silently overnight, the morning brief inherits stale context, and the user notices the staleness before the brief flags the failure.
+> The fleet's health monitoring mechanism validates process existence and network connectivity but fails to validate the semantic completeness of the data pipeline.
 
 ## Examples
 
-- A synthesizer run completes with 103 concepts but 47 connections, yet the next day's agent finds no new insights because the semantic graph was not updated.
-- The health of the autonomous agent fleet, such as vault-indexer and vault-synthesizer, is directly tied to the overall infrastructure health, masking individual semantic failures.
+- Agents report 'healthy' with an empty queue
+- The monitoring system validates existence rather than value
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Agent Health Monitoring]]
+[[The Illusion of Health in Autonomous Systems]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]

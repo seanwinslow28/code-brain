@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/harness-engineering-invariant.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-20
+updated: 2026-07-20
 ---
 
 ## Definition
 
-This invariant asserts that the reliability of an agentic evaluation is determined not by the intelligence of the individual agents, but by the strict isolation of their inputs and the blindness of their judgment criteria. When evidence bundles are frozen and mappings are kept in separate key files, the system prevents 'judge self-preference' and 'authorship bias.' The mechanism relies on deterministic shuffling (sha256) to ensure that any observed quality difference is attributable to the analysis method (panel vs. single model) rather than positional artifacts or prior knowledge of the source.
+This invariant posits that agent reliability is inversely proportional to the complexity of its surrounding harness, as every added tool or permission expands the failure surface non-linearly. The maintenance burden scales with the number of external dependencies rather than the intelligence of the underlying model, making simplification a more potent optimization strategy than scaling compute. Consequently, reducing the number of active tools often yields greater stability gains than upgrading to larger language models.
 
 ## Context
 
-Sean's research into 'Panel-vs-single-model gate' relies on this invariant to validate his infrastructure decisions. Without this rigorous harness, he cannot distinguish between a better model and a better prompt position, making it impossible to justify the cost of a multi-model fleet over a single strong one.
+Sean's vault synthesizer has shifted from qwen3-14b to qwen3.6-35b-a3b-32k, yet the primary metric for success is not raw output volume but the reduction of rejected concepts and debugging time. Understanding this invariant explains why the newer model does not automatically solve previous reliability issues if the input context remains overly complex.
 
 ## Evidence
 
-> The two pain-point sets were anonymized + shuffled (sha256-deterministic), then rated by the variance LLM-council... The mapping (Set→arm) was kept in a separate key file; raters were blind.
+> Whether the harness is small or large, the parts that need care are the same, and they are more specific than “keep it healthy” suggests.
 
-> Held everything constant except panel breadth: Same evidence bundle — gathered once (46 real-URL records), frozen to disk, fused by both arms.
+> You are investing in the long-term maintenance of an agent and harness system.
 
 ## Examples
 
-- Using sha256-deterministic shuffling to anonymize pain-point sets before rating.
-- Keeping the Set-to-arm mapping in a separate key file inaccessible to raters.
+- Adding a new MCP server to an agent's configuration increases its potential failure modes from 10 to 50, requiring new logging and error handling for each connection point.
+- Removing three rarely-used tools from an agent's definition reduces the time spent debugging 'why did it do that?' by half because there are fewer possible actions to trace.
 
 ## Related Concepts
 
-[[Control Architecture as Evangelism]] [[Operational Readiness Review]]
+[[Agent Health]] [[SRE Error Budget for Agents]]

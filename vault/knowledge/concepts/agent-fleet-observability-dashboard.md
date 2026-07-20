@@ -4,28 +4,29 @@ type: concept
 sources:
   - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-20
+updated: 2026-07-20
 ---
 
 ## Definition
 
-This concept defines the necessary architectural shift from monitoring operational metrics (uptime, latency) to monitoring semantic integrity and verification gaps. A true observability layer for agentic work must treat silence, missing data, or unverified outputs as critical errors rather than successes. It requires a feedback loop where the system explicitly flags when human judgment is required, rather than assuming that completion equals correctness.
+An observability dashboard is a monitoring interface that aggregates system metrics to provide visibility into agent performance and health. The mechanism involves collecting data points such as concept counts, connection rates, and rejection ratios to create a holistic view of the fleet's activity. Effective dashboards must prioritize signals of semantic integrity and user trust over mere throughput to prevent the illusion of health.
 
 ## Context
 
-Sean's current metrics show 'concepts_written' and 'duration', but lack a clear signal for 'semantic verification needed'. The dashboard needs to highlight when the ratio of rejected concepts or unverified clusters exceeds a threshold, forcing a pause in automation.
+Sean needs a dashboard that highlights missing data or silence as critical errors, rather than just successful completions. This would help him identify when the fleet is generating volume without value, allowing for timely intervention.
 
 ## Evidence
 
 > Automated dashboards should be designed to highlight missing data or silence as critical errors, not just successful completions.
 
-> The tension between operational visibility and semantic value reveals a critical flaw: agents can report 'healthy' status while the knowledge pipeline is effectively stalled.
+> The fundamental tension lies between the drive for automated throughput and the preservation of epistemic hygiene, leading to a systemic trust deficit.
 
 ## Examples
 
-- The current manifest shows 'concepts_written' counts but does not indicate whether those concepts were verified by Sean, leaving the 'health' metric ambiguous.
+- A dashboard showing a high 'concepts_written' count but low 'connections_written' would indicate a legibility debt issue.
+- Tracking the ratio of 'clusters_sampled' to 'concepts_written' could reveal inefficiencies in the sampling process.
 
 ## Related Concepts
 
-[[Legibility Debt as a Supervision Failure Mode]] [[Agent Health Monitoring]]
+[[Legibility Debt as a Supervision Failure Mode]] [[The Illusion of Health in Autonomous Systems]]

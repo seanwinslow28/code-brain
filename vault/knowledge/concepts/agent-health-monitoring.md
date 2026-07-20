@@ -2,10 +2,10 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/connections/silent-infrastructure-decay-masks-operational-stagnation.md
+  - knowledge/concepts/agent-health-monitoring.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-15
+updated: 2026-07-15
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ This concept defines the architectural necessity of distinguishing between the c
 
 ## Context
 
-Sean needs to ensure his agent fleet's health checks actually verify data availability and physical connectivity, rather than just process uptime, to prevent silent knowledge decay.
+Sean needs to ensure his agent fleet's health checks actually verify data availability and physical connectivity, rather than just process uptime, to prevent silent knowledge decay. This is critical because the current infrastructure relies on agents that may appear healthy while operating on stale or missing context.
 
 ## Evidence
 
