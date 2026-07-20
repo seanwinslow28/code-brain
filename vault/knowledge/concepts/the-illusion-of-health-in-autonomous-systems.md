@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-20
+updated: 2026-07-20
 ---
 
 ## Definition
 
-This invariant captures the phenomenon where robust protocol instrumentation and high completion rates mask underlying epistemic blindness, creating a false sense of system stability. Agents report success based on technical criteria (e.g., file written, API call returned), but these metrics do not correlate with semantic value or strategic alignment. The danger is acute in creative contexts because the lack of immediate negative feedback allows low-quality output to accumulate silently until it overwhelms the user's capacity to filter.
+This pattern occurs when extensive logging and status reporting create a false sense of system stability, obscuring the fact that the core semantic value is degrading or missing. The mechanism exploits the user's reliance on binary success/failure metrics, which remain green even when the qualitative output is useless or unverified. It is dangerous in creative contexts because the absence of errors prevents the user from noticing the gradual erosion of trust and utility.
 
 ## Context
 
-Sean's fleet runs consistently for days with high 'concepts_written' counts, but the 'rejected_count' and 'clusters_sampled' metrics reveal that much of this activity is noise. The system feels healthy because it never crashes, but the semantic integrity of the vault is degrading due to the sheer volume of unverified output.
+Sean's vault synthesizer logs show high 'clusters sampled' and low 'rejected_count', suggesting a healthy system, yet the actual value (connections written) remains low or stagnant. This illusion prevents him from addressing the root cause: the lack of semantic integrity in the generated concepts.
 
 ## Evidence
 
@@ -24,8 +24,9 @@ Sean's fleet runs consistently for days with high 'concepts_written' counts, but
 
 ## Examples
 
-- On 2026-07-06, the system wrote 103 concepts and sampled 193 clusters with a rejection rate of 106, yet the run completed successfully in 2725 seconds, masking the high failure rate within the 'success' metric.
+- The run on 2026-07-02 sampled 272 clusters but only wrote 40 connections, yet the system reported no errors.
+- The 'rejected_count' of 50 in July is low compared to earlier runs, but this may reflect a change in filtering criteria rather than improved quality.
 
 ## Related Concepts
 
-[[Legibility Debt as a Supervision Failure Mode]] [[Agent Health Monitoring]]
+[[Legibility Debt as a Supervision Failure Mode]] [[Agent Fleet Observability Dashboard]]

@@ -2,31 +2,31 @@
 title: "Signal vs. Safety Trade-off in Resume Architecture"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/assets/older/Sean_Winslow_Resume_DESIGN_NOTES.md
+  - knowledge/concepts/signal-vs-safety-trade-off-in-resume-architecture.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-07-20
+updated: 2026-07-20
 ---
 
 ## Definition
 
-This concept describes the strategic tension between optimizing for traditional recruiter expectations (safety) and maximizing visibility for AI-forward hiring managers (signal). It manifests when a candidate deliberately reorders sections to place technical artifacts before professional experience, accepting the risk of ATS parsing errors or recruiter confusion in exchange for immediate proof of capability. The mechanism relies on the assumption that the target audience's evaluation criteria have shifted from title-based hierarchy to artifact-based verification.
+This mechanism governs the tension between presenting a candidate as a versatile generalist (safe) versus a specialized expert (high signal). Automated job feeds often default to 'safe' matching by prioritizing title keywords and broad industry tags, which dilutes the unique value proposition of niche expertise like AI-native product design. The trade-off emerges when the system suppresses high-variance, high-reward opportunities in favor of statistically probable but low-impact matches, effectively optimizing for acceptance probability rather than career trajectory alignment.
 
 ## Context
 
-Sean is targeting AI-forward companies where proving he 'actually builds with AI' is more valuable than holding a senior title at a traditional firm. This trade-off is critical because it defines how he positions his Open Source contributions relative to his employment history, directly impacting his ability to bypass gatekeepers who rely on legacy scanning habits.
+Sean is targeting specific roles (AI PM, Security Controls) where generic 'Product Manager' titles may obscure his specialized edge. The job feed's tendency to include 'weak fits' like Insurance PMs highlights the risk of over-generalization in automated screening.
 
 ## Evidence
 
-> Explicit Teal / Resume Worded guidance: when public artifacts (npm package, OSS toolkit) are stronger signal than the last job title, they belong in the first third of page 1 where AI hiring managers scan for 'this person actually builds with AI' proof.
+> Liberate role scored 2/5 because it requires 'deep insurance domain expertise rather than Sean's AI/creative tools background', yet it was surfaced at all.
 
-> Safer for traditional recruiters but weaker positioning for AI-forward roles. Sean prioritized signal over safety.
+> OpenAI roles scored 5/4 based on 'Perfect alignment with Sean's AI-native side portfolio', demonstrating a successful signal match when domain specificity is preserved.
 
 ## Examples
 
-- Placing 'Selected AI Artifacts' before 'Work Experience' in the resume section order
-- Using a single accent color (Navy #0C447C) to denote confidence without triggering 'designed in Canva' perceptions
+- The Liberate role was included in the feed despite being a 'Group Agent Product Manager' (Director level), which contradicts the exclusion criteria for EXL roles.
+- OpenAI's Cyber Defense role was scored 4/5 despite 'unspecified location', prioritizing industry fit over logistical constraints.
 
 ## Related Concepts
 
-[[Agentic Engineering Signal]] [[Market Positioning]] [[Two Audiences]]
+[[Job Hunt as Sales Pipeline]] [[Defensible Edge Mapping]]

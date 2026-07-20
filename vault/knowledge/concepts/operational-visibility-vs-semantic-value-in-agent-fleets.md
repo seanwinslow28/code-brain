@@ -2,31 +2,31 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-operational-visibility-and-semantic-value-in-agent-fleets.md
+  - knowledge/connections/the-tension-between-operational-visibility-and-semantic-completeness.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-20
+updated: 2026-07-20
 ---
 
 ## Definition
 
-This invariant defines the structural gap between metrics that confirm an agent is running (uptime, token cost, API response time) and metrics that confirm the agent is thinking correctly (semantic coherence, factual accuracy, strategic relevance). The system prioritizes the former because they are easy to measure and automate, while the latter requires human judgment or complex secondary validation. This creates a false positive state where the infrastructure appears robust and healthy, masking the fact that the knowledge base is stagnating or degrading in quality.
+This concept describes a systemic decoupling where binary operational metrics (status=success, cost=$0.00) are optimized independently of strategic value (insight density, connection strength). Agents report success based on process liveness and network connectivity, yet they fail silently when semantic execution requires external dependencies like MCP servers or offline hardware. This creates a trust deficit because the user perceives robust automation while the system is actually producing shallow or context-poor outputs due to infrastructure fragmentation.
 
 ## Context
 
-Sean's fleet memory index shows consistent 'success' metrics (e.g., '87c/21x') across many runs, yet the underlying semantic value varies wildly. This concept helps Sean understand why his dashboard looks green even when his vault feels empty of useful insights.
+Sean's vault synthesizer relies on automated runs to maintain his knowledge base. When the fleet reports 'healthy' but fails to access critical data sources, Sean wastes time debugging non-existent process errors instead of addressing the underlying semantic isolation caused by hardware or network issues.
 
 ## Evidence
 
-> There is a fundamental tension between monitoring an agent fleet's operational status (uptime, resource usage) and its semantic value (the quality and accuracy of its outputs).
+> The agent fleet’s ability to autonomously reach required MCP servers (e.g., Adobe/Figma) remains a functional blocker for advanced creative tasks.
 
-> Systems often prioritize visibility into the former while neglecting the latter, leading to a situation where agents appear healthy but are producing meaningless or incorrect data.
+> Alienware workstation reported offline, hindering the goal of three-machine synchronization for the vault SSoT.
 
 ## Examples
 
-- The manifest lists '87c/21x via qwen3.6-35b-a3b-32k' as a success metric without indicating semantic quality.
-- The primary file notes that 'agents appear healthy through standard metrics while the knowledge pipeline is effectively stalled.'
+- status=success · 5.8h ago · notes='concepts=91 connections=17 rejected=17 edges=9'
+- The fleet's health monitoring mechanism validates process existence and network connectivity but fails to validate the semantic completeness of the data pipeline.
 
 ## Related Concepts
 
-[[Accountability Gap]] [[The Automation Paradox in Personal Knowledge Infrastructure]]
+[[The Illusion of Health in Autonomous Systems]] [[Infrastructure Fragmentation and Semantic Isolation]]

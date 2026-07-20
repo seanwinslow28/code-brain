@@ -2,30 +2,31 @@
 title: "Context Compounding"
 type: concept
 sources:
-  - knowledge/connections/the-scalability-paradox-in-agentic-creative-workflows.md
+  - knowledge/concepts/context-compounding.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-20
+updated: 2026-07-20
 ---
 
 ## Definition
 
-This pattern occurs when the accumulation of memory artifacts exceeds the model's effective attention window, causing it to ignore critical instructions or recent context. A bloated memory makes the model ignore the real instructions, leading to outputs that are technically correct but contextually irrelevant. This compounding effect worsens over time as the vault grows, requiring active pruning strategies to maintain operational clarity. The mechanism highlights the non-linear cost of memory in agentic systems.
+This pattern occurs when a bloated memory makes the model ignore the real instructions, causing semantic drift as irrelevant data accumulates in the context window. The agent's ability to follow specific creative directives degrades because the signal-to-noise ratio drops below a functional threshold. This leads to a systemic trust deficit because the output becomes voluminous but stylistically hollow, forcing Sean to intervene more frequently rather than less.
 
 ## Context
 
-Sean's runs show increasing duration and cluster sampling counts, which likely contribute to context bloat. Understanding this helps him manage the lifecycle of his knowledge vault to prevent performance degradation.
+Sean must manage the lifecycle of his memory core actively, recognizing that accumulation without pruning is a form of entropy that degrades creative authority and increases supervision costs. The value of the 'Creative Partner' is contingent on the agent's ability to prune irrelevant taste signals, not just accumulate them.
 
 ## Evidence
 
 > A bloated memory makes the model ignore the real instructions.
 
-> The value of the 'Creative Partner' is contingent on the agent's ability to prune irrelevant taste signals, not just accumulate them.
+> This leads to a systemic trust deficit because the output becomes voluminous but stylistically hollow, forcing Sean to intervene more frequently rather than less.
 
 ## Examples
 
-- Run 2026-07-01 sampled 236 clusters and wrote 125 concepts, a high volume that likely strained context retention compared to later runs with fewer samples.
+- The consequence is that automation, intended to free up creative time, instead creates a new bottleneck of curation and correction.
+- The value of the 'Creative Partner' is contingent on the agent's ability to prune irrelevant taste signals, not just accumulate them.
 
 ## Related Concepts
 
-[[Throughput vs. Taste Memory Tension]] [[Memory Rot and Lifecycle Management]]
+[[Throughput vs. Taste Memory Tension]] [[The Taste-Fidelity Decoupling in Creative Production]]

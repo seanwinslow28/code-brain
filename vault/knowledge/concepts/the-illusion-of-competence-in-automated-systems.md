@@ -2,31 +2,31 @@
 title: "The Illusion of Competence in Automated Systems"
 type: concept
 sources:
-  - knowledge/connections/self-validation-vs-external-validity-in-agentic-evaluation.md
+  - knowledge/connections/the-taste-throughput-trade-off-in-agentic-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-20
+updated: 2026-07-20
 ---
 
 ## Definition
 
-This pattern describes a structural failure mode where an evaluation system optimizes for internal consistency rather than external truth because the judge is part of the candidate pool. When the evaluator shares architectural DNA with the candidates, it disproportionately favors outputs that mirror its own biases and limitations. This creates a false signal of robustness, masking actual performance gaps against diverse or superior inputs.
+This pattern occurs when an automated system's robustness is measured by its internal consistency and activity levels rather than its alignment with external truth or user intent. When Sean relies on 'activity proof' (high run counts) as a metric, he falls into the trap of the Illusion of Competence, where the system appears robust because it is consistent with itself, not because it is correct. This leads to a false sense of progress, as high throughput masks the underlying lack of semantic value or taste alignment in the generated content.
 
 ## Context
 
-Sean must recognize this in his agentic evaluation pipelines to prevent crediting his own tools for capabilities they do not possess. If he relies on self-grading artifacts, his professional claims about system robustness will be epistemically unsound.
+Sean must be wary of using metrics like 'concepts_written' or 'clusters_sampled' as primary indicators of system health, as these can mask the degradation of output quality over time.
 
 ## Evidence
 
-> GPT-3.5/GPT-4/Llama-2 disproportionately favor their own outputs over other LLMs' and humans'
+> When Sean relies on 'activity proof' (high run counts) as a metric, he falls into the trap of the Illusion of Competence, where the system appears robust because it is consistent with itself, not because it is correct.
 
-> the FUSE judge `anthropic/claude-opus-4.7` was a *literal member* of its own panel in every tier
+> The core tension exists between the operational efficiency of using a single model family for both generation and evaluation versus the epistemic integrity required for genuine discovery.
 
 ## Examples
 
-- A synthesizer using Qwen3.6-35b evaluating its own output quality without external validation
-- An eval suite where the judge model is drawn from the same family as the candidate models
+- Run 2026-06-29 used qwen3-14b and wrote 109 concepts with 49 connections, but had a high rejected_count of 76.
+- Run 2026-07-01 used qwen3-14b and wrote 125 concepts with 50 connections, but had a high rejected_count of 76.
 
 ## Related Concepts
 
-[[Synthesizer fix]] [[Vault Synthesizer Eval Suite]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Taste as Evaluation Function vs. Activity Proof]]

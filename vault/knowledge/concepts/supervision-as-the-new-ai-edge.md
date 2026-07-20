@@ -2,31 +2,31 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - knowledge/connections/the-efficiency-quality-inversion-in-automated-synthesis.md
+  - knowledge/connections/tacit-knowledge-erosion-vs-automation-scale.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-20
+updated: 2026-07-20
 ---
 
 ## Definition
 
-In an era where generative models are commoditized, the competitive advantage shifts from the ability to produce content to the ability to curate and correct it with high-fidelity taste. This mechanism posits that 'supervision' is no longer a passive review step but an active, skill-intensive layer of production that requires deep domain expertise and aesthetic judgment. The edge comes not from faster generation but from the supervisor's capacity to maintain 'taste fidelity' across diverse outputs, preventing homogenization and ensuring strategic alignment.
+This concept defines the shift in competitive advantage from execution capability to judgment quality, where AI tools commoditize the former but leave the latter as the scarce resource. The edge is no longer in generating content or code, but in defining the constraints and taste metrics that filter the output. As automation scales, the value of human supervision increases not because it is more frequent, but because it is more critical to preventing systemic drift.
 
 ## Context
 
-Sean is investing in larger models (qwen3.6-35b) but must realize that the real value lies in his own ability to supervise and refine. The 'edge' is his taste, not the model's speed.
+Sean's increasing use of larger models (qwen3.6-35b-a3b-32k) suggests a strategy to improve execution quality, but the persistent need for 'taste memory' and 'judgment' indicates that supervision remains the primary differentiator in his workflow.
 
 ## Evidence
 
-> Investment in 'evaluation loops' and 'taste preservation' tools will yield higher returns than investing in larger or more numerous models.
+> AI is dissolving a lot of that scarcity. It has not dissolved the judgment underneath it.
 
-> Sean should cap agent fleet scaling at a level where human supervision can maintain high fidelity, rather than maximizing raw output volume.
+> The cost of automation increases if tacit knowledge is not explicitly codified into machine-readable rules.
 
 ## Examples
 
-- The focus on 'bad context discipline' and 'vague prompts' as failure modes indicates that supervision quality is directly tied to prompt precision and context management.
-- The shift in Sean's strategy from mere volume to 'taste preservation' tools reflects the recognition of supervision as the key differentiator.
+- Agents executing tasks correctly but missing strategic intent
+- Manual audit of outputs that should have been self-correcting
 
 ## Related Concepts
 
-[[The Efficiency-Quality Inversion in Automated Synthesis]] [[The Calibration Bottleneck in Scalable Creative Production]]
+[[Tacit Knowledge Erosion vs. Automation Scale]] [[Legibility Debt as a Supervision Failure Mode]]

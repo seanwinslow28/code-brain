@@ -2,32 +2,32 @@
 title: "The Verification-Governance Inversion in Agentic Workflows"
 type: connection
 connects:
-  - The Efficiency-Quality Inversion in Automated Synthesis
-  - Velocity vs. Judgment in MCP Strengthening
-  - Taste as Evaluation Function vs. Activity Proof
-created: 2026-07-13
-updated: 2026-07-13
+  - The Illusion of Health in Autonomous Systems
+  - Control Plane / Data Plane Split for Agent Fleets
+  - Agent Health and Daily Routine Automation
+created: 2026-07-20
+updated: 2026-07-20
 ---
 
 ## Synthesis
 
-This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. As Sean scales his fleet's sampling capacity, the system generates more 'slop' that requires manual verification, creating a trust deficit. The consequence is that the human becomes the bottleneck for quality assurance, effectively negating the time savings of automation and leading to a systemic inversion where efficiency gains are offset by increased cognitive load.
+There is a fundamental tension between the velocity of automation and the depth of verification required to maintain semantic integrity. As Sean scales his agent fleet, the cost of verifying data plane connectivity grows exponentially relative to the control plane's ability to issue commands. This inversion means that traditional health checks become insufficient, forcing a shift from monitoring process state to monitoring data availability, which requires deeper infrastructure instrumentation.
 
 ## Threads
 
-### [[The Efficiency-Quality Inversion in Automated Synthesis]]
+### [[The Illusion of Health in Autonomous Systems]]
 
-> As Sean scales his fleet's sampling capacity, the system generates more 'slop' that requires manual verification, creating a trust deficit.
+> This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local logic.
 
-### [[Velocity vs. Judgment in MCP Strengthening]]
+### [[Control Plane / Data Plane Split for Agent Fleets]]
 
-> As the fleet scales its sampling capacity (clusters_sampled), there is a latent tension between generating more connections and maintaining the signal-to-noise ratio.
+> Effective monitoring requires verifying that the data plane has successfully accessed its dependencies, not just that the control plane issued a command.
 
-### [[Taste as Evaluation Function vs. Activity Proof]]
+### [[Agent Health and Daily Routine Automation]]
 
-> The high rejection rates in earlier runs indicate that the system is generating significant 'slop' that requires manual cleanup.
+> This concept defines a latent failure mode where an agent's operational status is decoupled from its data freshness, creating a dependency chain that propagates stale context to downstr
 
 ## Implications
 
-- Sean must implement stricter constraints on cluster sampling to prevent the generation of low-fidelity content that requires excessive manual review.
-- The current automation strategy is unsustainable as it creates a verification-governance inversion that negates the time savings of automation.
+- Sean must implement physical layer monitoring that triggers alerts independent of agent health checks to detect silent sync failures.
+- The definition of 'healthy' for an agent must shift from process uptime to data plane accessibility and freshness.

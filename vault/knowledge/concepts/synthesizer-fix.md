@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/self-validation-vs-external-validity-in-agentic-evaluation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-20
+updated: 2026-07-20
 ---
 
 ## Definition
 
-This concept defines the architectural intervention of enforcing strict separation between the generation model and the evaluation judge. It identifies family separation as the highest-leverage mechanism for breaking self-referential bias loops in automated synthesis. By ensuring the judge cannot be a candidate, the system forces genuine external validation rather than internal preference optimization.
+A strategic intervention where the separation of model families for generation and evaluation is identified as the highest-leverage mechanism for restoring epistemic integrity. This fix addresses the core tension between operational efficiency and truth-seeking by enforcing architectural boundaries that prevent self-validation artifacts. It requires explicitly decoupling the judge from the candidate panel to ensure that performance metrics reflect genuine capability rather than internal alignment.
 
 ## Context
 
-Sean's transition from Qwen3-14b to Qwen3.6-35b showed improved metrics but masked underlying validity issues until explicit separation was enforced. This fix is critical for maintaining epistemic integrity in his personal knowledge vault.
+Sean's recent runs show a shift in model usage, but without explicit separation, the quality of insights may be artificially inflated by self-preference. Implementing this fix is necessary to validate the robustness of his synthesizer across diverse inputs.
 
 ## Evidence
 
@@ -24,8 +24,8 @@ Sean's transition from Qwen3-14b to Qwen3.6-35b showed improved metrics but mask
 
 ## Examples
 
-- Using Claude Opus as the judge while Qwen3.6 generates the content
-- Architectural separation of the judge from the candidate panel in every tier
+- Using Qwen for synthesis and Claude for evaluation
+- Using Llama for generation and GPT-4 for grading
 
 ## Related Concepts
 

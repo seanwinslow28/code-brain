@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/epistemic-artifacts-as-strategic-proof.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-20
+updated: 2026-07-20
 ---
 
 ## Definition
