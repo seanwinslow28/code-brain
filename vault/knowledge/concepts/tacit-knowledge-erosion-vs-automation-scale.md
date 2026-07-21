@@ -2,30 +2,30 @@
 title: "Tacit Knowledge Erosion vs. Automation Scale"
 type: concept
 sources:
-  - knowledge/connections/tacit-knowledge-erosion-vs-automation-scale.md
+  - knowledge/connections/the-tacit-knowledge-bottleneck-in-scaling-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition
 
-This mechanism describes the structural decay of uncodified expertise as operational throughput increases, creating a dependency gap where agents execute explicit rules but fail to replicate the strategic intent held in human memory. The erosion occurs because scarcity previously wrote these norms into muscle memory or social context, rendering them invisible until automation exposes their absence. When the volume of automated actions outpaces the rate of codification, the system accumulates silent misalignment that only becomes visible through manual audit loops.
+This mechanism describes the inverse relationship between the velocity of agent fleet expansion and the preservation of uncodified human expertise. As Sean delegates more operational tasks to automated systems, the tacit knowledge required to supervise those systems atrophies because it is no longer exercised or articulated. The erosion occurs not through loss of data, but through the absence of explicit codification, creating a dependency on memory that agents cannot access. This creates a fragile state where automation scales efficiently while the human capacity to correct course diminishes silently.
 
 ## Context
 
-Sean is scaling his agent fleet using models like qwen3.6-35b-a3b-32k, which increases the velocity of concept generation but risks decoupling output from his specific taste and strategic judgment. Without explicit codification of these 'commandments,' the fleet produces high-volume but low-fidelity artifacts that require increasing supervision to correct.
+Sean's vault shows a clear progression from small-scale experiments (3 concepts) to large-scale fleet operations (100+ clusters sampled). The risk is that as he relies on `qwen3.6-35b-a3b-32k` for higher throughput, the 'commandments' governing its behavior become less explicit, leading to silent misalignment in strategic intent.
 
 ## Evidence
 
 > Most were never written down, because scarcity wrote them for you.
 
-> A rule that lives only in the head of your longest-tenured director does not exist, as far as your stack is concerned.
+> AI is dissolving a lot of that scarcity. It has not dissolved the judgment underneath it.
 
 ## Examples
 
-- Agents executing tasks correctly but missing strategic intent
-- Manual audit of outputs that should have been self-correcting
+- The shift from 3 concepts written in May to 109 concepts in June indicates scaling automation without proportional increases in explicit rule codification.
+- The high rejection count (78) in early June runs suggests agents are generating output that lacks the specific tacit taste required for approval.
 
 ## Related Concepts
 

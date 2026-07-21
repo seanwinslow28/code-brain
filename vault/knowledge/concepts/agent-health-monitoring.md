@@ -2,31 +2,31 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/concepts/agent-health-monitoring.md
+  - knowledge/connections/operational-uptime-vs-strategic-stagnation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-15
-updated: 2026-07-15
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition
 
-This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local logic. Effective monitoring requires verifying that the data plane has successfully accessed its dependencies, not just that the control plane issued a command. Without this distinction, failures in physical connectivity or resource availability are masked by successful control-plane acknowledgments.
+This concept defines the practice of verifying agent operational status through binary metrics such as uptime, connectivity, and process completion rates. While essential for detecting technical failures, this monitoring approach often fails to capture the semantic completeness or strategic relevance of an agent's output. The mechanism creates a blind spot where agents can be technically 'healthy' but functionally inert, leading to a misalignment between perceived system robustness and actual cognitive utility.
 
 ## Context
 
-Sean needs to ensure his agent fleet's health checks actually verify data availability and physical connectivity, rather than just process uptime, to prevent silent knowledge decay. This is critical because the current infrastructure relies on agents that may appear healthy while operating on stale or missing context.
+Sean needs to move beyond binary health checks to understand if his agents are actually generating value. Current monitoring tells him if an agent is running, but not if it is doing useful work, which is critical for cost-effectiveness and strategic progress.
 
 ## Evidence
 
-> This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local logic.
+> The operational health of agents directly impacts the cost-effectiveness of agentic workflows. If an agent is unhealthy, it may incur unnecessary costs or disrupt other automation tasks.
 
-> Sean must implement physical layer monitoring that triggers alerts independent of agent health checks to detect silent sync failures.
+> Health checks verify that agents are running and connected, but they do not validate the semantic completeness of the data pipeline.
 
 ## Examples
 
-- A health check verifies that a specific file exists on a remote mount before reporting success.
-- Alerts are triggered when the data plane fails to read from a dependency, even if the control plane is healthy.
+- Sean perceives his infrastructure as robust because agents report 'healthy' status, even when producing empty or stale content.
+- The core tension lies in the decoupling of operational health metrics from actual semantic progress.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Control Plane / Data Plane Split for Agent Fleets]]
+[[Agent Health]] [[Control Room Observability]]

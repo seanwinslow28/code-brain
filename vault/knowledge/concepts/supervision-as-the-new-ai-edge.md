@@ -2,7 +2,7 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - knowledge/concepts/supervision-as-the-new-ai-edge.md
+  - knowledge/connections/the-tacit-knowledge-bottleneck-in-scaling-agent-fleets.md
 tags: [auto-generated, phase-6]
 created: 2026-07-21
 updated: 2026-07-21
@@ -10,23 +10,23 @@ updated: 2026-07-21
 
 ## Definition
 
-This concept defines the structural shift in competitive advantage from execution capability to judgment quality, where AI tools commoditize the former but leave the latter as the scarce resource. The edge is no longer in generating content or code, but in defining the constraints and taste metrics that filter the output. As automation scales, the value of human supervision increases not because it is more frequent, but because it is more critical to preventing systemic drift.
+As AI tools democratize execution capabilities, the competitive advantage shifts from the ability to produce output to the ability to evaluate and direct that output. Supervision becomes the primary value-generating activity because it requires the specific judgment and taste that AI cannot replicate. This edge is maintained only if the supervisor actively preserves their own tacit knowledge through explicit articulation and rigorous feedback loops. The mechanism relies on the operator remaining the 'taste-maker' rather than becoming a passive consumer of automated content.
 
 ## Context
 
-Sean's increasing use of larger models (qwen3.6-35b-a3b-32k) suggests a strategy to improve execution quality, but the persistent need for 'taste memory' and 'judgment' indicates that supervision remains the primary differentiator in his workflow.
+Sean's focus on 'taste memory' and 'synthesizer' roles indicates an understanding that his value lies in curation and direction. The run logs show him actively refining the synthesizer's output, suggesting he is leveraging supervision as his core differentiator against generic AI generation.
 
 ## Evidence
 
 > AI is dissolving a lot of that scarcity. It has not dissolved the judgment underneath it.
 
-> The cost of automation increases if tacit knowledge is not explicitly codified into machine-readable rules.
+> The consequence is a bottleneck where the speed of automation is capped by the slowness of codifying human judgment into machine-readable rules.
 
 ## Examples
 
-- Agents executing tasks correctly but missing strategic intent
-- Manual audit of outputs that should have been self-correcting
+- The 'concepts_written' metric reflects Sean's active supervision and articulation of taste, which is the source of his edge.
+- The 'clusters_sampled' vs 'concepts_written' ratio shows the efficiency of his supervisory loop in filtering noise from signal.
 
 ## Related Concepts
 
-[[Tacit Knowledge Erosion vs. Automation Scale]] [[Legibility Debt as a Supervision Failure Mode]]
+[[Tacit Knowledge Erosion vs. Automation Scale]] [[Curation as the New Scarcity]]

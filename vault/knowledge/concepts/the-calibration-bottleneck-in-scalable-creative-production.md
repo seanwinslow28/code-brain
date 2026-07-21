@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/the-calibration-bottleneck-in-scalable-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition
 
-This concept defines the structural limit where the velocity of automated synthesis outpaces the fidelity required for creative authority, creating a bottleneck at the point of human calibration. As the agent fleet scales, the system generates more clusters and concepts, but the human supervisor's ability to accurately calibrate these outputs against their internal 'taste' standards becomes the limiting factor. This bottleneck is not a failure of the agents but a feature of the coupling between high-velocity generation and low-velocity judgment, requiring explicit management of the 'supervision budget'.
+This mechanism defines the structural limit where the velocity of automated synthesis outpaces the fidelity required for creative authority, creating a bottleneck at the point of human calibration. As the agent fleet scales, the system generates more clusters and concepts, but the human supervisor's ability to accurately calibrate these outputs against their internal 'taste' standards becomes the limiting factor. This bottleneck is not a failure of the agents but a feature of the coupling between high-velocity generation and low-velocity judgment, requiring explicit management of the 'supervision budget'.
 
 ## Context
 

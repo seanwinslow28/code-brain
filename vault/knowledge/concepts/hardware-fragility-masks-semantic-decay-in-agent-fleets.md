@@ -2,7 +2,7 @@
 title: "Hardware Fragility Masks Semantic Decay in Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/hardware-fragility-masks-semantic-decay-in-agent-fleets.md
+  - knowledge/connections/operational-uptime-vs-cognitive-utility-tension.md
 tags: [auto-generated, phase-6]
 created: 2026-07-21
 updated: 2026-07-21
@@ -10,23 +10,23 @@ updated: 2026-07-21
 
 ## Definition
 
-This invariant describes a structural failure mode where physical infrastructure limitations, such as network drops or hardware failures, obscure the underlying decay of semantic quality within the agent fleet. The mechanism operates by forcing the synthesis engine into lower-complexity operational modes when parallel processing capacity is lost, creating an illusion of stability while insight density silently erodes. This dependency means that semantic decay is often a symptom of infrastructure fragmentation rather than a failure of the agents' logic or algorithms.
+This pattern identifies how physical hardware limitations obscure the deeper issue of semantic decay within automated systems. The fragility of components like the MBP creates a visible failure mode that distracts from the silent loss of knowledge quality. When hardware fails, it halts automation, but when it succeeds, it may still produce low-value output due to underlying semantic issues. This masking effect prevents Sean from addressing the root cause of stagnation in his knowledge vault.
 
 ## Context
 
-Sean’s reliance on a single Mac Mini for critical synthesis tasks creates a bottleneck where any hardware issue immediately halts semantic growth. The offline status of Alienware and ComfyUI limits the fleet's ability to handle complex, multi-modal research, forcing it into simpler, less valuable operations.
+Sean must address hardware dependencies to prevent them from masking the true state of his knowledge synthesis quality and preventing silent degradation.
 
 ## Evidence
 
-> System stability is currently reliant solely on the Mac Mini, contradicting the need for reliable three-machine synchronization.
+> Hardware dependencies like the MBP create single points of failure that undermine the reliability of the entire automation pipeline.
 
-> Alienware and ComfyUI are offline, hindering multi-machine context and sync capability.
+> The tension lies between the agent's need for continuous, high-bandwidth context to maintain semantic integrity and the physical reality of infrastructure instability.
 
 ## Examples
 
-- The loss of Alienware prevents the use of local LLMs for heavy lifting, forcing reliance on cloud APIs which may have different cost or privacy constraints.
-- ComfyUI's offline status blocks any image-based research or creative synthesis, limiting the vault to text-only insights.
+- Physical infrastructure instability prevents agents from maintaining the context needed for high-quality synthesis.
+- Hardware failures expose rather than solve the underlying issues of semantic decay in agent fleets.
 
 ## Related Concepts
 
-[[Infrastructure Fragmentation and Semantic Isolation]] [[Vault as Agent Infrastructure]]
+[[The Illusion of Health in Autonomous Systems]] [[Infrastructure Fragmentation and Semantic Isolation]]

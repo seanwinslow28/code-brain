@@ -2,15 +2,15 @@
 title: "The Tension Between Automation Velocity and Creative Friction"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-automation-velocity-and-creative-friction.md
+  - knowledge/concepts/the-tension-between-automation-velocity-and-creative-friction.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition
 
-This invariant describes the paradox where increasing the throughput of automated agents fails to improve effective output because the underlying infrastructure lacks semantic stability. When hardware or network reliability degrades, the agent fleet's ability to maintain context across domains collapses, creating a gap between perceived activity and actual creative authority. The system appears healthy in terms of process completion metrics, but the user experiences increased friction due to broken dependencies and stale context.
+This invariant describes a structural paradox where increasing the throughput of automated agents fails to improve effective output because the underlying infrastructure lacks semantic stability. When hardware or network reliability degrades, the agent fleet's ability to maintain context across domains collapses, creating a gap between perceived activity and actual creative authority. The system appears healthy in terms of process completion metrics, but the user experiences increased friction due to broken dependencies and stale context.
 
 ## Context
 
@@ -21,8 +21,6 @@ Sean is observing that despite scaling up his agent fleet (moving from qwen3-14b
 > The pursuit of high-velocity automation through agent fleets often exacerbates creative friction when underlying infrastructure is unstable.
 
 > Alienware workstation reported offline, hindering the goal of three-machine synchronization for the vault SSoT.
-
-> The agent fleet’s ability to autonomously reach required MCP servers remains a functional blocker for advanced creative tasks.
 
 ## Examples
 

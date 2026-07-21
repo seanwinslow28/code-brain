@@ -5,8 +5,8 @@ connects:
   - Throughput vs. Taste Memory Tension
   - The Taste-Fidelity Decoupling in Creative Production
   - Context Compounding
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Synthesis

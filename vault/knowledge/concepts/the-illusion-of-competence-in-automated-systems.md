@@ -2,7 +2,7 @@
 title: "The Illusion of Competence in Automated Systems"
 type: concept
 sources:
-  - 00_inbox/I asked Fable and Codex what my business should automate. They disagreed..md
+  - knowledge/connections/cross-domain-tension-automation-velocity-vs-creative-friction-in-synthesis.md
 tags: [auto-generated, phase-6]
 created: 2026-07-21
 updated: 2026-07-21
@@ -10,23 +10,23 @@ updated: 2026-07-21
 
 ## Definition
 
-This pattern occurs when the ease of interaction with an automated system is misinterpreted as the depth or correctness of its output. Smooth operational experiences create a false sense of comprehensive problem-solving, leading users to overlook gaps in strategic coverage because the tool did not require them to engage with the difficulty of the core problem. The absence of friction masks the absence of insight.
+This pattern occurs when a system's robustness is measured by its internal consistency and activity levels rather than its external correctness or value. When Sean relies on 'activity proof' (high run counts) as a metric, he falls into the trap where the system appears robust because it is consistent with itself, not because it is correct. This leads to a false sense of progress while the underlying quality of output degrades.
 
 ## Context
 
-Sean notes that he still reaches for Codex more often despite its shallower insights. Recognizing this illusion prevents him from over-indexing on tools that feel good but fail to address the hardest parts of his business, such as story selection.
+Sean's early runs with qwen3-14b showed high activity (250+ clusters sampled) but also high rejection rates, indicating that the system was 'busy' but not necessarily 'effective'. The shift to qwen3.6-35b reduced activity but improved quality, revealing that the previous high activity was an illusion of competence.
 
 ## Evidence
 
-> One run. No drama. This is a large part of why I spend so much of my working day in Codex now.
+> When Sean relies on 'activity proof' (high run counts) as a metric, he falls into the trap of the Illusion of Competence, where the system appears robust because it is consistent with itself, not because it is correct.
 
-> I could not dismiss the result either. It kept pulling me back to a question I had not taken seriously enough.
+> The probability of generating low-value content increases, requiring more rigorous and computationally expensive evaluation mechanisms.
 
 ## Examples
 
-- Codex understood the boundary and used the tools it needed without making Sean babysit every permission request.
-- Sean was divided about Fable's victory because he still preferred working inside Codex's harness on most days.
+- Run 2026-07-01: 125 concepts written, 76 rejected (high activity, low fidelity)
+- Run 2026-07-20: 91 concepts written, 20 rejected (lower activity, high fidelity)
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Legibility Debt as a Supervision Failure Mode]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Taste as Evaluation Function vs. Activity Proof]]

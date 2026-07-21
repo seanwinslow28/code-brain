@@ -2,7 +2,7 @@
 title: "Signal vs. Safety Trade-off in Resume Architecture"
 type: concept
 sources:
-  - knowledge/concepts/signal-vs-safety-trade-off-in-resume-architecture.md
+  - knowledge/connections/automation-velocity-vs-creative-friction-in-job-search.md
 tags: [auto-generated, phase-6]
 created: 2026-07-21
 updated: 2026-07-21
@@ -10,23 +10,23 @@ updated: 2026-07-21
 
 ## Definition
 
-This mechanism governs the tension between presenting a candidate as a versatile generalist (safe) versus a specialized expert (high signal). Automated job feeds often default to 'safe' matching by prioritizing title keywords and broad industry tags, which dilutes the unique value proposition of niche expertise like AI-native product design. The trade-off emerges when the system suppresses high-variance, high-reward opportunities in favor of statistically probable but low-impact matches, effectively optimizing for acceptance probability rather than career trajectory alignment.
+This mechanism defines the tension between maximizing the probability of passing automated screening filters (safety) and maintaining a coherent, high-signal narrative that attracts human recruiters (signal). When automation prioritizes safety, it tends to generalize language and dilute specific domain expertise to avoid keyword mismatches, resulting in a 'safe' but indistinguishable profile. The trade-off emerges because the system cannot distinguish between a keyword match that indicates true competence and one that indicates mere exposure, forcing a choice between broad visibility and precise targeting.
 
 ## Context
 
-Sean is targeting specific roles (AI PM, Security Controls) where generic 'Product Manager' titles may obscure his specialized edge. The job feed's tendency to include 'weak fits' like Insurance PMs highlights the risk of over-generalization in automated screening.
+Sean's job hunt suffers when the system prioritizes safety by surfacing roles that are technically 'fits' based on loose keywords but lack strategic alignment with his actual AI/creative tools background. This forces him to manually filter out these 'safe' but irrelevant opportunities, negating the automation's value.
 
 ## Evidence
 
 > Liberate role scored 2/5 because it requires 'deep insurance domain expertise rather than Sean's AI/creative tools background', yet it was surfaced at all.
 
-> OpenAI roles scored 5/4 based on 'Perfect alignment with Sean's AI-native side portfolio', demonstrating a successful signal match when domain specificity is preserved.
+> The tension lies between the system's drive to maximize throughput (surfacing more fits) and the user's need for high-fidelity signal (fewer, better fits).
 
 ## Examples
 
-- The Liberate role was included in the feed despite being a 'Group Agent Product Manager' (Director level), which contradicts the exclusion criteria for EXL roles.
-- OpenAI's Cyber Defense role was scored 4/5 despite 'unspecified location', prioritizing industry fit over logistical constraints.
+- A role requiring 'deep insurance domain expertise' is surfaced as a fit despite Sean's background being in AI/creative tools.
+- The system prioritizes 'likely remote flexibility' over verified constraints when scoring job fits.
 
 ## Related Concepts
 
-[[Job Hunt as Sales Pipeline]] [[Defensible Edge Mapping]]
+[[Job Hunt as Sales Pipeline]] [[The Calibration Bottleneck in Scalable Creative Production]]

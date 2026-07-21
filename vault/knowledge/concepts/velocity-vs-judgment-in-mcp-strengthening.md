@@ -2,10 +2,10 @@
 title: "Velocity vs. Judgment in MCP Strengthening"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-automation-velocity-vs-epistemic-hygiene-in-knowledge-synthesis.md
+  - knowledge/concepts/velocity-vs-judgment-in-mcp-strengthening.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition

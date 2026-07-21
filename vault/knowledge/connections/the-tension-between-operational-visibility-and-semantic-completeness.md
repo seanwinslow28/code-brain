@@ -2,26 +2,26 @@
 title: "The Tension Between Operational Visibility and Semantic Completeness"
 type: connection
 connects:
-  - Operational Visibility vs. Semantic Value in Agent Fleets
   - The Illusion of Health in Autonomous Systems
+  - Operational Visibility vs. Semantic Value in Agent Fleets
   - Infrastructure Fragmentation and Semantic Isolation
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Synthesis
 
-There is a critical divergence between the operational visibility of agents (which reports binary health) and their semantic completeness (the actual quality and scope of data they can access). Agents report 'healthy' because their local processes execute without error, yet they are semantically incomplete because they cannot reach external resources like MCP servers or offline hardware. This tension creates a dangerous blind spot where Sean believes his automation is robust, while in reality, it is producing shallow or context-poor outputs due to infrastructure fragmentation.
+The core tension lies in the divergence between operational health metrics and semantic data quality, where agents report success despite lacking critical context. This illusion of health masks underlying infrastructure fragmentation, causing the vault to produce shallow outputs while appearing robust. The consequence is a false sense of security that prevents Sean from addressing the root causes of semantic decay, such as offline hardware or unreachable MCP servers.
 
 ## Threads
-
-### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
-
-> status=success · 5.8h ago · notes='concepts=91 connections=17 rejected=17 edges=9'
 
 ### [[The Illusion of Health in Autonomous Systems]]
 
 > There is a critical divergence between the operational visibility of agents (which reports binary health) and their semantic completeness (the actual quality and scope of data they can access).
+
+### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+
+> status=success · 5.8h ago · notes='concepts=91 connections=17 rejected=17 edges=9'
 
 ### [[Infrastructure Fragmentation and Semantic Isolation]]
 

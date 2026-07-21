@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/the-director-intern-invariant-in-creative-and-professional-identity.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition

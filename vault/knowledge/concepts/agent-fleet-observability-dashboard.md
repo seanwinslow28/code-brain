@@ -2,7 +2,7 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/concepts/agent-fleet-observability-dashboard.md
+  - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
 tags: [auto-generated, phase-6]
 created: 2026-07-21
 updated: 2026-07-21
@@ -10,22 +10,22 @@ updated: 2026-07-21
 
 ## Definition
 
-An observability dashboard is a monitoring interface that aggregates system metrics to provide visibility into agent performance and health. The mechanism involves collecting data points such as concept counts, connection rates, and rejection ratios to create a holistic view of the fleet's activity. Effective dashboards must prioritize signals of semantic integrity and user trust over mere throughput to prevent the illusion of health.
+An observability dashboard is a monitoring interface that tracks the operational status of automated agents, but it often fails to capture the semantic quality or strategic alignment of their outputs. When designed poorly, it reinforces the illusion of health by focusing on throughput metrics rather than the absence of value or the presence of errors. Effective dashboards must highlight missing data or silence as critical errors to prevent the user from being misled by activity.
 
 ## Context
 
-Sean needs a dashboard that highlights missing data or silence as critical errors, rather than just successful completions. This would help him identify when the fleet is generating volume without value, allowing for timely intervention.
+Sean's current dashboard likely shows successful runs and concept counts, but it does not alert him when the concepts are irrelevant or low-quality. This misalignment between what is measured and what matters leads to a false sense of security and eventual abandonment of the tool.
 
 ## Evidence
 
 > Automated dashboards should be designed to highlight missing data or silence as critical errors, not just successful completions.
 
-> The fundamental tension lies between the drive for automated throughput and the preservation of epistemic hygiene, leading to a systemic trust deficit.
+> Sean must treat manual tickets as the single source of truth for system health, rather than a reflection of agent activity.
 
 ## Examples
 
-- A dashboard showing a high 'concepts_written' count but low 'connections_written' would indicate a legibility debt issue.
-- Tracking the ratio of 'clusters_sampled' to 'concepts_written' could reveal inefficiencies in the sampling process.
+- The dashboard shows 157 clusters sampled but does not indicate if any were rejected due to low quality.
+- Manual tickets are treated as the single source of truth for system health, overriding automated metrics.
 
 ## Related Concepts
 

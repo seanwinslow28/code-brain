@@ -2,7 +2,7 @@
 title: "Synthesizer fix"
 type: concept
 sources:
-  - knowledge/concepts/synthesizer-fix.md
+  - knowledge/connections/self-validation-vs-external-validity-in-agentic-evaluation.md
 tags: [auto-generated, phase-6]
 created: 2026-07-21
 updated: 2026-07-21
@@ -10,22 +10,22 @@ updated: 2026-07-21
 
 ## Definition
 
-This mechanism identifies the separation of model families for generation and evaluation as the highest-leverage intervention for restoring epistemic integrity in agentic workflows. It addresses the core tension between operational efficiency and truth-seeking by enforcing architectural boundaries that prevent self-validation artifacts, ensuring that performance metrics reflect genuine capability rather than internal alignment. The fix requires explicitly decoupling the judge from the candidate panel to eliminate the illusion of competence that arises when a single model family evaluates its own outputs.
+A strategic intervention where the separation of model families for generation and evaluation is identified as the highest-leverage mechanism for restoring epistemic integrity. This fix addresses the structural flaw where a judge is part of its own candidate panel, creating a self-referential loop that guarantees false confidence in automated systems. By enforcing architectural separation, the system optimizes for external truth rather than internal consistency.
 
 ## Context
 
-Sean's recent runs show a shift in model usage, but without explicit separation, the quality of insights may be artificially inflated by self-preference. Implementing this fix is necessary to validate the robustness of his synthesizer across diverse inputs and prevent the degradation of taste fidelity as automation scales.
+Sean's vault synthesizer has been running on qwen3.6-35b-a3b-32k for the last several runs, which risks the 'illusion of competence' if that same model family is used to evaluate its own output quality without external validation.
 
 ## Evidence
 
 > family separation is the single highest-leverage, lowest-cost lever
 
-> The core tension exists between the operational efficiency of using a single model family for both generation and evaluation versus the epistemic integrity required for genuine discovery
+> the FUSE judge `anthropic/claude-opus-4.7` was a *literal member* of its own panel in every tier
 
 ## Examples
 
-- Using Qwen for synthesis and Claude for evaluation
-- Using Llama for generation and GPT-4 for grading
+- Using qwen3.6-35b-a3b-32k for both generating concepts and evaluating them creates a self-grading artifact.
+- The rejection of 106 clusters in run-2026-07-06 despite high sampling indicates a need for better external validation criteria.
 
 ## Related Concepts
 

@@ -5,13 +5,13 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - Signal vs. Safety Trade-off in Resume Architecture
   - Job Hunt as Sales Pipeline
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Synthesis
 
-The tension lies between the system's drive to maximize throughput (surfacing more fits) and the user's need for high-fidelity signal (fewer, better fits). As automation velocity increases, the creative friction required to validate each opportunity is bypassed, leading to a dilution of quality. This results in a 'slop' effect where the volume of applications masks the decline in strategic alignment, forcing Sean to manually re-apply the judgment that the system has abdicated.
+The core tension arises from the system's drive to maximize throughput by reducing filtering rigor, which directly conflicts with the user's need for high-fidelity signal. As automation velocity increases and rejected counts drop, the creative friction required to validate each opportunity is bypassed, leading to a dilution of quality where volume masks strategic misalignment. This results in a 'slop' effect that forces Sean to manually re-apply the judgment the system has abdicated, effectively negating the efficiency gains of automation.
 
 ## Threads
 
