@@ -2,7 +2,7 @@
 title: "Infrastructure Fragmentation and Semantic Isolation"
 type: concept
 sources:
-  - knowledge/concepts/infrastructure-fragmentation-and-semantic-isolation.md
+  - knowledge/connections/the-decoupling-of-operational-health-from-semantic-integrity.md
 tags: [auto-generated, phase-6]
 created: 2026-07-21
 updated: 2026-07-21
@@ -10,23 +10,23 @@ updated: 2026-07-21
 
 ## Definition
 
-This mechanism defines how physical disconnection of key hardware creates a fragmented agent mesh that cannot support complex, cross-domain reasoning. When critical nodes like the Alienware workstation go offline, the resulting semantic isolation prevents the fleet from synchronizing its single source of truth (SSoT). This fragmentation directly causes semantic decay because agents lose access to the high-bandwidth context required for deep synthesis, forcing them to rely on stale or incomplete local data.
+This pattern describes how physical hardware limitations and network fragmentation create isolated silos within an otherwise unified agent fleet. When specific hosts become unreachable, the agents dependent on them are logically blocked, even if their software components are healthy. This fragmentation prevents the seamless flow of information across the vault, leading to semantic isolation where parts of the knowledge system cannot interact due to physical constraints.
 
 ## Context
 
-Sean's goal of three-machine synchronization for his vault is hindered by the offline status of his Alienware workstation. This physical disconnection breaks the agent mesh, preventing the seamless flow of semantic data needed for advanced creative and professional tasks.
+Sean's multi-machine setup (Alienware, ComfyUI) creates points of failure that directly impact the synthesizer's ability to function. Recognizing these physical dependencies is essential for diagnosing why semantic synthesis fails despite operational health.
 
 ## Evidence
 
-> Alienware workstation reported offline, hindering the goal of three-machine synchronization for the vault SSoT.
+> Alienware and ComfyUI reported offline status, blocking crucial multi-machine sync/testing.
 
-> The physical disconnection of key hardware creates a fragmented agent mesh that cannot support complex, cross-domain reasoning.
+> vault-synthesizer failed (deferred) due to 'tier2-host-unreachable,' hindering SSoT capability.
 
 ## Examples
 
-- When the network fails or hardware goes offline, agents lose access to critical external dependencies like MCP servers.
-- Infrastructure instability directly causes semantic isolation by breaking the continuous data pipeline required for high-fidelity synthesis.
+- The synthesizer silently defers due to hardware unavailability.
+- Blocking crucial multi-machine sync/testing.
 
 ## Related Concepts
 
-[[Operational Visibility vs. Semantic Value in Agent Fleets]] [[The Illusion of Health in Autonomous Systems]]
+[[The Illusion of Health in Autonomous Systems]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]

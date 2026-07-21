@@ -2,7 +2,7 @@
 title: "Agent Health and Daily Routine Automation"
 type: concept
 sources:
-  - knowledge/concepts/agent-health-and-daily-routine-automation.md
+  - knowledge/connections/semantic-blind-spots-in-agent-fleet-monitoring.md
 tags: [auto-generated, phase-6]
 created: 2026-07-21
 updated: 2026-07-21
@@ -10,21 +10,21 @@ updated: 2026-07-21
 
 ## Definition
 
-This pattern identifies a dependency chain where the failure of semantic freshness in one agent propagates stale context to downstream processes. This concept defines a latent failure mode where an agent's operational status is decoupled from its data freshness, creating a dependency chain that propagates stale context to downstream processes. The mechanism is that daily routine automation assumes deterministic completion, but distributed dependencies introduce partial failures that binary success/failure states cannot capture.
+This pattern describes a dependency chain where an agent's operational status is decoupled from its data freshness, creating a latent failure mode that propagates stale context to downstream processes. The core tension lies between the orchestration layer's binary health reporting and the execution layer's physical and semantic failures, creating a blind spot where Sean perceives his infrastructure as healthy while execution layers fail physically or semantically. This results in a trust deficit because the user relies on binary indicators that do not reflect the actual utility of the output.
 
 ## Context
 
-Sean must implement semantic validation checks in his monitoring pipeline to detect silent failures before they propagate to daily notes. This ensures that the trust deficit in automation does not lead to incorrect decisions based on stale data.
+Sean's agent fleet suffers from this critical decoupling, leading to a situation where manual verification becomes necessary, effectively nullifying the automation benefits and creating a bottleneck at the human level. The consequence is that Sean perceives his infrastructure as healthy based on binary indicators, yet the output layers are producing stale or incorrect data.
 
 ## Evidence
 
 > This concept defines a latent failure mode where an agent's operational status is decoupled from its data freshness, creating a dependency chain that propagates stale context to downstream processes.
 
-> Sean must implement semantic validation checks in his monitoring pipeline to detect silent failures before they propagate to daily notes.
+> Sean's current monitoring setup validates process existence and network connectivity but fails to validate semantic completeness.
 
 ## Examples
 
-- The consequence is that manual verification becomes necessary, effectively nullifying the automation benefits and creating a bottleneck at the human level.
+- Operational dashboards are misleading and may encourage complacency regarding data quality and freshness.
 
 ## Related Concepts
 

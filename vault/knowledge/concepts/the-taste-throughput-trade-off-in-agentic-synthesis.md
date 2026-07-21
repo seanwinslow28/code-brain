@@ -2,7 +2,7 @@
 title: "The Taste-Throughput Trade-off in Agentic Synthesis"
 type: concept
 sources:
-  - 00_inbox/I asked Fable and Codex what my business should automate. They disagreed..md
+  - knowledge/connections/cross-domain-tension-automation-velocity-vs-epistemic-hygiene-in-knowledge-synthesis.md
 tags: [auto-generated, phase-6]
 created: 2026-07-21
 updated: 2026-07-21
@@ -10,23 +10,23 @@ updated: 2026-07-21
 
 ## Definition
 
-This invariant describes the inverse relationship between the quality of an agent's strategic insight and the friction required to elicit it. High-value insights that bypass surface-level automation require agents to navigate complex permission structures and interruptions, creating a negative correlation between user experience smoothness and output significance. Conversely, low-friction interactions tend to produce functional but less consequential artifacts because they operate within established, safe boundaries rather than challenging underlying assumptions.
+This mechanism describes the inverse relationship between the volume of semantic artifacts produced by an agent fleet and the fidelity of those artifacts to human judgment standards. As the sampling capacity scales, the system shifts from a craft mode requiring deep, high-latency evaluation to a production mode optimized for throughput, causing the rejection rate to drop not because quality improves, but because the validation threshold lowers or becomes structurally blind to nuance. The consequence is a systemic trust deficit where operational metrics indicate health while semantic value decays silently.
 
 ## Context
 
-Sean is currently optimizing his fleet for efficiency, but this pattern suggests that the most valuable business insights may require deliberately accepting higher operational friction. Understanding this trade-off helps him allocate resources: using smooth agents for execution and high-friction agents for strategic discovery.
+Sean must recognize that his current vault accumulation is driven by this trade-off rather than genuine insight growth. By monitoring the ratio of concepts written to clusters sampled, he can detect when the system has crossed the threshold into 'slop' production, allowing him to intervene before the vault becomes a repository of low-signal data.
 
 ## Evidence
 
-> The tool I enjoyed using more had completed the less consequential job, while the tool that annoyed me had seen farther into the business.
+> As Sean scales from 3 concepts to 150+ concepts per run, the system shifts from a 'craft' mode requiring deep judgment to a 'production' mode optimized for volume.
 
-> Fable decided that was the problem worth attacking. Codex built something useful.
+> Systems often prioritize visibility into the former while neglecting the latter, leading to a situation where agents appear healthy but are producing meaningless or incorrect data.
 
 ## Examples
 
-- Codex moved through files without permission requests and finished one run with no drama.
-- Fable required fighting through permission dialogues and interruptions to reach deeper insights.
+- The run on 2026-07-06 showed 103 concepts written with 106 rejections, indicating a high rejection rate that likely reflects strict adherence to taste standards during the transition to the larger model.
+- By 2026-07-08, the same model produced 96 concepts with only 14 rejections, suggesting a relaxation of judgment criteria or a shift toward volume optimization as operational visibility increased.
 
 ## Related Concepts
 
-[[The Paradox of Agentic Efficiency vs. Creative Authority]] [[Friction-Killing Wedge]]
+[[Operational Visibility vs. Semantic Value in Agent Fleets]] [[The Efficiency-Quality Inversion in Automated Synthesis]]

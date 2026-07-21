@@ -2,31 +2,31 @@
 title: "The Taste-Fidelity Decoupling in Creative Production"
 type: concept
 sources:
-  - knowledge/connections/model-cost-vs-supervision-latency-trade-off.md
+  - knowledge/connections/the-scalability-paradox-in-agentic-creative-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition
 
-This pattern identifies the growing gap between the volume of creative output and the depth of strategic connections as automation scales. As Sean increases concept generation, the 'taste memory' required to maintain high-fidelity style transfer becomes a bottleneck that is not automatically scaled by the agent fleet. The decoupling occurs when the system prioritizes throughput over the nuanced understanding of Sean's aesthetic standards, leading to outputs that are structurally correct but stylistically hollow.
+This pattern occurs when the instruction to adopt a specific creative style is decoupled from the memory infrastructure's ability to retain and apply that style during generation. The agent receives the taste parameters but fails to enforce them against the noise of its expanded context window, resulting in output that is technically correct but stylistically generic. This creates a gap between the user's intent and the machine's execution that widens as the system scales.
 
 ## Context
 
-This connection reveals a critical tension between the increasing volume of automated output and the stagnating depth of strategic connections. As Sean scales the concept generation, the risk of losing his unique voice in the process increases unless explicitly managed through model selection and supervision strategies.
+Sean notes that simply teaching an agent his taste is insufficient if the underlying memory architecture cannot preserve those signals during high-throughput operations. This insight challenges the assumption that better prompting alone can solve scalability issues in creative workflows.
 
 ## Evidence
 
-> This connection reveals a critical tension between the increasing volume of automated output and the stagnating depth of strategic connections. As Sean scales the concept generation, the
+> teaching an agent your taste means nothing if it cannot remember it.
 
-> There is a direct tension between the computational cost of high-fidelity models and the human supervision latency they reduce.
+> The value of the 'Creative Partner' is contingent on the agent's ability to prune irrelevant taste signals, not just accumulate them.
 
 ## Examples
 
-- run-2026-07-01T02:30:02.md shows 125 concepts written but with a rejection rate that suggests a struggle to maintain taste fidelity at scale.
-- The shift to qwen3.6-35b-a3b-32k correlates with a stabilization of concept quality, as seen in the consistent 'concepts_written' counts around 80-90 with lower rejection rates in July runs.
+- The output becomes voluminous but stylistically hollow.
+- forcing Sean to intervene more frequently rather than less.
 
 ## Related Concepts
 
-[[The Efficiency-Quality Inversion in Automated Synthesis]] [[Slop as a Trust Deficit]]
+[[Throughput vs. Taste Memory Tension]] [[Context Compounding]]

@@ -2,7 +2,7 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md
+  - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
 tags: [auto-generated, phase-6]
 created: 2026-07-21
 updated: 2026-07-21
@@ -10,11 +10,11 @@ updated: 2026-07-21
 
 ## Definition
 
-Legibility debt is the structural gap that emerges when automated concept generation throughput outpaces the human capacity for semantic verification, creating a false equivalence between operational activity and perceived value. This debt accumulates silently because standard observability metrics track volume rather than trust, allowing the system to appear healthy while the user's ability to validate its output degrades into an unsustainable forensic mode of supervision. The mechanism relies on the user mistaking high cluster sampling counts for meaningful insight, forcing them to abandon the tool not due to failure, but due to the inability to confirm its worth without manual intervention.
+Legibility debt emerges when the rate of automated concept generation outpaces the human capacity to verify semantic integrity, creating a gap between operational activity and perceived value. This debt accumulates silently because standard observability metrics report successful completions rather than the quality or relevance of the output. The supervisor is forced into a forensic mode where they must manually audit the system's health, leading to a systemic trust deficit as the tool appears healthy while generating noise.
 
 ## Context
 
-Sean's fleet runs have demonstrated a dramatic increase in concepts written (from 3 to 153) while his ability to verify them has not scaled proportionally. This creates a specific risk where he abandons the tool not because it fails, but because he can no longer confirm its worth without manual intervention.
+Sean is scaling his agent fleet from 3 concepts per run to over 150, yet his ability to verify the quality of these outputs has not scaled proportionally. This creates a critical bottleneck where the value of the automation is obscured by the sheer volume of unverified data, threatening the long-term viability of the vault as a trusted knowledge base.
 
 ## Evidence
 
@@ -24,8 +24,8 @@ Sean's fleet runs have demonstrated a dramatic increase in concepts written (fro
 
 ## Examples
 
-- The jump from 3 concepts written in May to 153 in July represents a 50x increase in output volume without a corresponding increase in verification capacity.
-- The 'illusion of health' where high cluster sampling counts (e.g., 272 clusters) mask the fact that only 40 connections were successfully written.
+- The fleet generates 103 concepts in one run but Sean cannot verify their quality without manual intervention.
+- Dashboards highlight successful completions while ignoring the missing data or silence that indicates a lack of value.
 
 ## Related Concepts
 

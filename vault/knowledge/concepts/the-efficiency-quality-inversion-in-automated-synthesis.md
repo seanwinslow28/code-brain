@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/connections/model-cost-vs-supervision-latency-trade-off.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition
 
-This mechanism describes a non-linear relationship where increasing the throughput of automated synthesis agents initially reduces per-unit cost but eventually triggers a disproportionate rise in human supervision latency. As the volume of generated concepts scales, the rejection rate often increases due to diminishing taste fidelity, creating a feedback loop where the 'cheap' output becomes more expensive to curate than high-fidelity alternatives. The inversion point occurs when the marginal cost of correcting low-quality drafts exceeds the marginal savings of using lower-cost models or higher sampling rates.
+This pattern defines the non-linear relationship where increasing the throughput of automated synthesis agents initially reduces per-unit cost but eventually triggers a disproportionate increase in human supervision time. The mechanism operates on the principle that low-fidelity models (like qwen3-14b) generate 'slop' that requires more correction than high-fidelity models (like qwen3.6-35b-a3b-32k), effectively making the cheaper model more expensive in total workflow cost. The inversion point is reached when the time spent verifying and correcting low-quality outputs exceeds the token cost savings of using the smaller model.
 
 ## Context
 
-Sean's vault data shows a clear transition from high-volume, high-rejection runs with qwen3-14b to lower-volume, lower-rejection runs with qwen3.6-35b-a3b-32k. Understanding this inversion is critical for deciding when to scale agent fleets versus when to invest in higher-fidelity models to preserve creative authority.
+Sean's data shows a clear shift from qwen3-14b to qwen3.6-35b-a3b-32k around July 6th, coinciding with a drop in rejected concepts and duration. This concept validates that strategic investment in model fidelity is necessary to maintain operational velocity.
 
 ## Evidence
 
 > While qwen3-14b offers lower token costs, its higher rejection rates force Sean into a 'supervision trap' where he spends hours correcting low-quality drafts.
 
-> There is a fundamental tension between the apparent efficiency of scaling agent fleets and the hidden quality costs that emerge as supervision becomes the bottleneck.
+> Conversely, qwen3.6-35b-a3b-32k incurs higher per-run costs but drastically reduces the 'curation tax,' effectively buying back creative time.
 
 ## Examples
 
-- run-2026-07-02T02:30:05.md recorded 141 concepts written with only 50 rejections, but required 2618 seconds of duration, indicating a high supervision load relative to output.
-- run-2026-07-15T02:30:05.md recorded 89 concepts with only 20 rejections in 1740 seconds, showing improved efficiency per concept despite higher model costs.
+- Run 2026-07-02 (qwen3-14b) had a rejected_count of 50 and duration of 2618 seconds.
+- Run 2026-07-08 (qwen3.6-35b-a3b-32k) had a rejected_count of 14 and duration of 1649 seconds.
 
 ## Related Concepts
 
-[[Slop as a Trust Deficit]] [[The Taste-Fidelity Decoupling in Creative Production]]
+[[Model Cost vs. Supervision Latency Trade-off]] [[The Calibration Bottleneck in Scalable Creative Production]]
