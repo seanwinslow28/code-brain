@@ -2,31 +2,31 @@
 title: "The Illusion of Competence in Automated Systems"
 type: concept
 sources:
-  - knowledge/connections/the-taste-throughput-trade-off-in-agentic-synthesis.md
+  - 00_inbox/I asked Fable and Codex what my business should automate. They disagreed..md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition
 
-This pattern occurs when an automated system's robustness is measured by its internal consistency and activity levels rather than its alignment with external truth or user intent. When Sean relies on 'activity proof' (high run counts) as a metric, he falls into the trap of the Illusion of Competence, where the system appears robust because it is consistent with itself, not because it is correct. This leads to a false sense of progress, as high throughput masks the underlying lack of semantic value or taste alignment in the generated content.
+This pattern occurs when the ease of interaction with an automated system is misinterpreted as the depth or correctness of its output. Smooth operational experiences create a false sense of comprehensive problem-solving, leading users to overlook gaps in strategic coverage because the tool did not require them to engage with the difficulty of the core problem. The absence of friction masks the absence of insight.
 
 ## Context
 
-Sean must be wary of using metrics like 'concepts_written' or 'clusters_sampled' as primary indicators of system health, as these can mask the degradation of output quality over time.
+Sean notes that he still reaches for Codex more often despite its shallower insights. Recognizing this illusion prevents him from over-indexing on tools that feel good but fail to address the hardest parts of his business, such as story selection.
 
 ## Evidence
 
-> When Sean relies on 'activity proof' (high run counts) as a metric, he falls into the trap of the Illusion of Competence, where the system appears robust because it is consistent with itself, not because it is correct.
+> One run. No drama. This is a large part of why I spend so much of my working day in Codex now.
 
-> The core tension exists between the operational efficiency of using a single model family for both generation and evaluation versus the epistemic integrity required for genuine discovery.
+> I could not dismiss the result either. It kept pulling me back to a question I had not taken seriously enough.
 
 ## Examples
 
-- Run 2026-06-29 used qwen3-14b and wrote 109 concepts with 49 connections, but had a high rejected_count of 76.
-- Run 2026-07-01 used qwen3-14b and wrote 125 concepts with 50 connections, but had a high rejected_count of 76.
+- Codex understood the boundary and used the tools it needed without making Sean babysit every permission request.
+- Sean was divided about Fable's victory because he still preferred working inside Codex's harness on most days.
 
 ## Related Concepts
 
-[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Taste as Evaluation Function vs. Activity Proof]]
+[[The Illusion of Health in Autonomous Systems]] [[Legibility Debt as a Supervision Failure Mode]]

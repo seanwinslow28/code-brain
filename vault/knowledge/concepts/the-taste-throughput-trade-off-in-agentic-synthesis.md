@@ -2,31 +2,31 @@
 title: "The Taste-Throughput Trade-off in Agentic Synthesis"
 type: concept
 sources:
-  - knowledge/connections/the-taste-throughput-trade-off-in-agentic-synthesis.md
+  - 00_inbox/I asked Fable and Codex what my business should automate. They disagreed..md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition
 
-This invariant describes the inverse relationship between the volume of generated artifacts and their semantic fidelity, driven by the computational cost of high-fidelity evaluation. As Sean shifts from qwen3-14b to qwen3.6-35b-a3b-32k, the system's ability to reject low-value outputs improves, but the total number of concepts written decreases significantly. This trade-off forces a decision: prioritize the illusion of competence through high activity proof, or accept lower throughput for higher conceptual value. The mechanism relies on the fact that rigorous taste-based filtering requires more computational resources and time than simple generation, creating a bottleneck where quality scales inversely with speed.
+This invariant describes the inverse relationship between the quality of an agent's strategic insight and the friction required to elicit it. High-value insights that bypass surface-level automation require agents to navigate complex permission structures and interruptions, creating a negative correlation between user experience smoothness and output significance. Conversely, low-friction interactions tend to produce functional but less consequential artifacts because they operate within established, safe boundaries rather than challenging underlying assumptions.
 
 ## Context
 
-Sean is currently optimizing his vault synthesizer runs, balancing the need for a robust knowledge base against the diminishing returns of high-volume, low-quality synthesis. Understanding this trade-off is critical for deciding when to scale up cluster sampling versus when to deepen individual concept evaluation.
+Sean is currently optimizing his fleet for efficiency, but this pattern suggests that the most valuable business insights may require deliberately accepting higher operational friction. Understanding this trade-off helps him allocate resources: using smooth agents for execution and high-friction agents for strategic discovery.
 
 ## Evidence
 
-> Sean's recent operational data reveals a critical tension between the desire for high-volume concept generation and the necessity of rigorous taste-based filtering.
+> The tool I enjoyed using more had completed the less consequential job, while the tool that annoyed me had seen farther into the business.
 
-> As he shifts from using qwen3-14b to qwen3.6-35b-a3b-32k, the system's ability to reject low-value outputs improves, but the total number of concepts written decreases significantly.
+> Fable decided that was the problem worth attacking. Codex built something useful.
 
 ## Examples
 
-- Run 2026-07-06 used qwen3.6-35b-a3b-32k and wrote 103 concepts with 47 connections.
-- Run 2026-07-15 used qwen3.6-35b-a3b-32k and wrote 89 concepts with 19 connections.
+- Codex moved through files without permission requests and finished one run with no drama.
+- Fable required fighting through permission dialogues and interruptions to reach deeper insights.
 
 ## Related Concepts
 
-[[The Illusion of Competence in Automated Systems]] [[Taste as Evaluation Function vs. Activity Proof]]
+[[The Paradox of Agentic Efficiency vs. Creative Authority]] [[Friction-Killing Wedge]]

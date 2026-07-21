@@ -2,15 +2,15 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - knowledge/connections/tacit-knowledge-erosion-vs-automation-scale.md
+  - knowledge/concepts/supervision-as-the-new-ai-edge.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition
 
-This concept defines the shift in competitive advantage from execution capability to judgment quality, where AI tools commoditize the former but leave the latter as the scarce resource. The edge is no longer in generating content or code, but in defining the constraints and taste metrics that filter the output. As automation scales, the value of human supervision increases not because it is more frequent, but because it is more critical to preventing systemic drift.
+This concept defines the structural shift in competitive advantage from execution capability to judgment quality, where AI tools commoditize the former but leave the latter as the scarce resource. The edge is no longer in generating content or code, but in defining the constraints and taste metrics that filter the output. As automation scales, the value of human supervision increases not because it is more frequent, but because it is more critical to preventing systemic drift.
 
 ## Context
 

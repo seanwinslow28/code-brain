@@ -2,31 +2,31 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: concept
 sources:
-  - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
+  - 20_projects/prj-job-hunt-2026/job-feed/2026-07-20.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition
 
-This pattern occurs when extensive logging and status reporting create a false sense of system stability, obscuring the fact that the core semantic value is degrading or missing. The mechanism exploits the user's reliance on binary success/failure metrics, which remain green even when the qualitative output is useless or unverified. It is dangerous in creative contexts because the absence of errors prevents the user from noticing the gradual erosion of trust and utility.
+This pattern describes a state where automated systems appear to be functioning correctly based on superficial metrics, such as successful API calls or file writes, while silently failing to produce meaningful output. The system maintains its operational rhythm and completes its scheduled tasks, but the core value proposition—such as generating novel insights or identifying viable opportunities—is absent. This creates a dangerous feedback loop where the user trusts the infrastructure because it is 'alive,' even though the semantic content has degraded to zero.
 
 ## Context
 
-Sean's vault synthesizer logs show high 'clusters sampled' and low 'rejected_count', suggesting a healthy system, yet the actual value (connections written) remains low or stagnant. This illusion prevents him from addressing the root cause: the lack of semantic integrity in the generated concepts.
+Sean's job hunt relies on daily synthesis of market signals. If the synthesizer runs but produces no new fits, the system looks healthy (logs show success), but the strategic value is null. Recognizing this distinction prevents Sean from wasting time debugging infrastructure when the issue is actually a lack of input data or model capability.
 
 ## Evidence
 
-> Robust protocol instrumentation masks epistemic blindness, creating an illusion of health that is particularly dangerous in creative contexts.
+> MBP could not be reached during today's roll-up, resulting in 0 new fits and multiple unscored items.
 
-> Automated dashboards should be designed to highlight missing data or silence as critical errors, not just successful completions.
+> The job feed reports 0 strong fits, 0 medium fits, and 0 weak fits, indicating a complete absence of viable market signals rather than a processing error.
 
 ## Examples
 
-- The run on 2026-07-02 sampled 272 clusters but only wrote 40 connections, yet the system reported no errors.
-- The 'rejected_count' of 50 in July is low compared to earlier runs, but this may reflect a change in filtering criteria rather than improved quality.
+- A daily job feed that completes its run in under 2 seconds with zero new entries, masking the fact that no relevant jobs were found or scored.
+- An agent that successfully writes a 'complete: true' status to a file despite failing to extract any actionable data from the source feeds.
 
 ## Related Concepts
 
-[[Legibility Debt as a Supervision Failure Mode]] [[Agent Fleet Observability Dashboard]]
+[[The Illusion of Competence in Automated Systems]] [[Silent Failure Propagation in Agent Fleets]]

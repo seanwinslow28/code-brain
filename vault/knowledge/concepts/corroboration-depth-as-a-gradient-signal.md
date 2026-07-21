@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/corroboration-depth-as-a-gradient-signal.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition

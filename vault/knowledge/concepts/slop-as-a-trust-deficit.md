@@ -2,10 +2,10 @@
 title: "Slop as a Trust Deficit"
 type: concept
 sources:
-  - knowledge/connections/model-cost-vs-supervision-latency-trade-off.md
+  - knowledge/concepts/slop-as-a-trust-deficit.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition

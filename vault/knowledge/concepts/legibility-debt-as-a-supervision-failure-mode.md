@@ -2,19 +2,19 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
+  - knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition
 
-Legibility debt emerges when the rate of automated concept generation outpaces the human capacity for semantic verification, creating a gap between operational activity and perceived value. This debt accumulates silently because standard observability metrics track throughput rather than trust, allowing the system to appear healthy while the user's ability to validate its output degrades. The mechanism relies on the user mistaking volume for validity, forcing them into a forensic mode of supervision that is unsustainable at scale.
+Legibility debt is the structural gap that emerges when automated concept generation throughput outpaces the human capacity for semantic verification, creating a false equivalence between operational activity and perceived value. This debt accumulates silently because standard observability metrics track volume rather than trust, allowing the system to appear healthy while the user's ability to validate its output degrades into an unsustainable forensic mode of supervision. The mechanism relies on the user mistaking high cluster sampling counts for meaningful insight, forcing them to abandon the tool not due to failure, but due to the inability to confirm its worth without manual intervention.
 
 ## Context
 
-Sean's fleet runs have shown a dramatic increase in concepts written (from 3 to 153) while his ability to verify them has not scaled proportionally. This creates a specific risk where he abandons the tool not because it fails, but because he can no longer confirm its worth without manual intervention.
+Sean's fleet runs have demonstrated a dramatic increase in concepts written (from 3 to 153) while his ability to verify them has not scaled proportionally. This creates a specific risk where he abandons the tool not because it fails, but because he can no longer confirm its worth without manual intervention.
 
 ## Evidence
 
