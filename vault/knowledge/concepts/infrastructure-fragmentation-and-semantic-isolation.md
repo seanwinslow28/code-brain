@@ -2,10 +2,10 @@
 title: "Infrastructure Fragmentation and Semantic Isolation"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-operational-visibility-and-semantic-completeness.md
+  - knowledge/concepts/infrastructure-fragmentation-and-semantic-isolation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition

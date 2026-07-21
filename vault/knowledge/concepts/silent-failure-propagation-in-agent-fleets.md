@@ -2,15 +2,15 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/operational-health-masks-strategic-stagnation.md
+  - knowledge/concepts/silent-failure-propagation-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition
 
-This pattern occurs when the desire for autonomous synthesis conflicts with the lack of observable intermediate states in headless agents. Failures propagate silently because there is no feedback loop to validate the semantic completeness of the data pipeline. The consequence is that the user notices the staleness before the brief flags the failure, creating a dependency gap.
+This pattern occurs when the desire for autonomous synthesis conflicts with the lack of observable intermediate states in headless agents. Failures propagate silently because there is no feedback loop to validate the semantic completeness of the data pipeline. The consequence is that the user notices the staleness before the brief flags the failure, creating a dependency gap where operational health masks strategic stagnation.
 
 ## Context
 

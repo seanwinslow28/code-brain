@@ -2,10 +2,10 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
+  - knowledge/concepts/agent-fleet-observability-dashboard.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition

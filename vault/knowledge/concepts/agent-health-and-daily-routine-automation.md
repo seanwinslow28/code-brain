@@ -2,10 +2,10 @@
 title: "Agent Health and Daily Routine Automation"
 type: concept
 sources:
-  - knowledge/connections/semantic-blind-spots-in-agent-fleet-monitoring.md
+  - knowledge/concepts/agent-health-and-daily-routine-automation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition

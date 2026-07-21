@@ -2,19 +2,19 @@
 title: "Synthesizer fix"
 type: concept
 sources:
-  - knowledge/connections/self-validation-vs-external-validity-in-agentic-evaluation.md
+  - knowledge/concepts/synthesizer-fix.md
 tags: [auto-generated, phase-6]
-created: 2026-07-20
-updated: 2026-07-20
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition
 
-A strategic intervention where the separation of model families for generation and evaluation is identified as the highest-leverage mechanism for restoring epistemic integrity. This fix addresses the core tension between operational efficiency and truth-seeking by enforcing architectural boundaries that prevent self-validation artifacts. It requires explicitly decoupling the judge from the candidate panel to ensure that performance metrics reflect genuine capability rather than internal alignment.
+This mechanism identifies the separation of model families for generation and evaluation as the highest-leverage intervention for restoring epistemic integrity in agentic workflows. It addresses the core tension between operational efficiency and truth-seeking by enforcing architectural boundaries that prevent self-validation artifacts, ensuring that performance metrics reflect genuine capability rather than internal alignment. The fix requires explicitly decoupling the judge from the candidate panel to eliminate the illusion of competence that arises when a single model family evaluates its own outputs.
 
 ## Context
 
-Sean's recent runs show a shift in model usage, but without explicit separation, the quality of insights may be artificially inflated by self-preference. Implementing this fix is necessary to validate the robustness of his synthesizer across diverse inputs.
+Sean's recent runs show a shift in model usage, but without explicit separation, the quality of insights may be artificially inflated by self-preference. Implementing this fix is necessary to validate the robustness of his synthesizer across diverse inputs and prevent the degradation of taste fidelity as automation scales.
 
 ## Evidence
 
