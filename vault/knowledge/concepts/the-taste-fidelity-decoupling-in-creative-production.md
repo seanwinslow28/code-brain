@@ -2,7 +2,7 @@
 title: "The Taste-Fidelity Decoupling in Creative Production"
 type: concept
 sources:
-  - knowledge/concepts/the-taste-fidelity-decoupling-in-creative-production.md
+  - knowledge/connections/the-scalability-paradox-in-agentic-creative-workflows.md
 tags: [auto-generated, phase-6]
 created: 2026-07-22
 updated: 2026-07-22
@@ -10,22 +10,22 @@ updated: 2026-07-22
 
 ## Definition
 
-This pattern occurs when the instruction to adopt a specific creative style is decoupled from the memory infrastructure's ability to retain and apply that style during generation. The agent receives the taste parameters but fails to enforce them against the noise of its expanded context window, resulting in output that is technically correct but stylistically generic. This creates a gap between the user's intent and the machine's execution that widens as the system scales.
+This pattern identifies the failure mode where the instruction to encode creative taste is structurally decoupled from the agent's ability to retain those signals over time. The mechanism operates on the principle that taste is not a static attribute but a dynamic constraint that must be actively maintained against the entropy of accumulating context. When the memory core grows without corresponding pruning, the taste signal becomes indistinguishable from noise, rendering the initial instruction ineffective regardless of its clarity.
 
 ## Context
 
-Sean notes that simply teaching an agent his taste is insufficient if the underlying memory architecture cannot preserve those signals during high-throughput operations. This insight challenges the assumption that better prompting alone can solve scalability issues in creative workflows.
+Sean faces this because his creative output relies on consistent voice, yet the agent's memory bloat causes it to ignore specific stylistic constraints in favor of generic patterns.
 
 ## Evidence
 
 > teaching an agent your taste means nothing if it cannot remember it.
 
-> The value of the 'Creative Partner' is contingent on the agent's ability to prune irrelevant taste signals, not just accumulate them.
+> A bloated memory makes the model ignore the real instructions.
 
 ## Examples
 
-- The output becomes voluminous but stylistically hollow.
-- forcing Sean to intervene more frequently rather than less.
+- The value of the 'Creative Partner' is contingent on the agent's ability to prune irrelevant taste signals, not just accumulate them.
+- Sean must implement a strict reconciliation protocol to prevent his creative partner's output from degrading as the memory core grows.
 
 ## Related Concepts
 

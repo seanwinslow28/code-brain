@@ -5,8 +5,8 @@ connects:
   - The Taste-Throughput Trade-off in Agentic Synthesis
   - Operational Visibility vs. Semantic Value in Agent Fleets
   - The Efficiency-Quality Inversion in Automated Synthesis
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Synthesis

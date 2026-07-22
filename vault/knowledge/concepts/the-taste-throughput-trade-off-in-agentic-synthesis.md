@@ -2,7 +2,7 @@
 title: "The Taste-Throughput Trade-off in Agentic Synthesis"
 type: concept
 sources:
-  - knowledge/concepts/the-taste-throughput-trade-off-in-agentic-synthesis.md
+  - knowledge/connections/cross-domain-tension-automation-velocity-vs-creative-friction-in-synthesis.md
 tags: [auto-generated, phase-6]
 created: 2026-07-22
 updated: 2026-07-22
@@ -10,23 +10,23 @@ updated: 2026-07-22
 
 ## Definition
 
-This mechanism describes the inverse relationship between the volume of semantic artifacts produced by an agent fleet and the fidelity of those artifacts to human judgment standards. As the sampling capacity scales, the system shifts from a craft mode requiring deep, high-latency evaluation to a production mode optimized for throughput, causing the rejection rate to drop not because quality improves, but because the validation threshold lowers or becomes structurally blind to nuance. The consequence is a systemic trust deficit where operational metrics indicate health while semantic value decays silently.
+This mechanism describes the inverse relationship between the volume of automated concept generation and the fidelity of aesthetic filtering. As the synthesizer scales its output to maximize throughput, the computational cost of rigorous taste-based evaluation becomes a bottleneck, forcing a choice between high-volume low-fidelity synthesis or lower-volume high-fidelity curation. The system's efficiency is measured by activity proof (run counts), which masks the degradation of conceptual value when the judge is coupled with the candidate pool.
 
 ## Context
 
-Sean must recognize that his current vault accumulation is driven by this trade-off rather than genuine insight growth. By monitoring the ratio of concepts written to clusters sampled, he can detect when the system has crossed the threshold into 'slop' production, allowing him to intervene before the vault becomes a repository of low-signal data.
+Sean must recognize that his current scaling strategy using qwen3.6-35b-a3b-32k increases run duration and concept count but does not inherently improve the quality of connections. The tension lies in whether he prioritizes the illusion of progress (more runs) or the actual preservation of taste memory, which requires decoupling evaluation from generation.
 
 ## Evidence
 
-> As Sean scales from 3 concepts to 150+ concepts per run, the system shifts from a 'craft' mode requiring deep judgment to a 'production' mode optimized for volume.
+> Sean's recent operational data reveals a critical tension between the desire for high-volume concept generation and the necessity of rigorous taste-based filtering.
 
-> Systems often prioritize visibility into the former while neglecting the latter, leading to a situation where agents appear healthy but are producing meaningless or incorrect data.
+> When Sean relies on 'activity proof' (high run counts) as a metric, he falls into the trap of the Illusion of Competence, where the system appears robust because it is consistent with itself, not because it is correct.
 
 ## Examples
 
-- The run on 2026-07-06 showed 103 concepts written with 106 rejections, indicating a high rejection rate that likely reflects strict adherence to taste standards during the transition to the larger model.
-- By 2026-07-08, the same model produced 96 concepts with only 14 rejections, suggesting a relaxation of judgment criteria or a shift toward volume optimization as operational visibility increased.
+- The shift in creative labor from generating artifacts to evaluating them against a personal aesthetic standard
+- The probability of generating low-value content increases as the synthesizer scales up
 
 ## Related Concepts
 
-[[Operational Visibility vs. Semantic Value in Agent Fleets]] [[The Efficiency-Quality Inversion in Automated Synthesis]]
+[[The Illusion of Competence in Automated Systems]] [[Taste as Evaluation Function vs. Activity Proof]]

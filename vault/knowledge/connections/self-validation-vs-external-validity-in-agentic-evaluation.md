@@ -5,8 +5,8 @@ connects:
   - The Illusion of Competence in Automated Systems
   - Synthesizer fix
   - Vault Synthesizer Eval Suite
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Synthesis

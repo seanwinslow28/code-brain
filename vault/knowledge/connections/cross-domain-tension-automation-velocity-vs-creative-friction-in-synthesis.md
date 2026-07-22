@@ -5,8 +5,8 @@ connects:
   - The Taste-Throughput Trade-off in Agentic Synthesis
   - The Illusion of Competence in Automated Systems
   - Taste as Evaluation Function vs. Activity Proof
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Synthesis

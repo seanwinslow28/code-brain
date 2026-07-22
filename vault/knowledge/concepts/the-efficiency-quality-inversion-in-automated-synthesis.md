@@ -2,7 +2,7 @@
 title: "The Efficiency-Quality Inversion in Automated Synthesis"
 type: concept
 sources:
-  - knowledge/concepts/the-efficiency-quality-inversion-in-automated-synthesis.md
+  - knowledge/connections/the-tacit-knowledge-bottleneck-in-scaling-agent-fleets.md
 tags: [auto-generated, phase-6]
 created: 2026-07-22
 updated: 2026-07-22
@@ -10,23 +10,23 @@ updated: 2026-07-22
 
 ## Definition
 
-This pattern defines the non-linear relationship where increasing the throughput of automated synthesis agents initially reduces per-unit cost but eventually triggers a disproportionate increase in human supervision time. The mechanism operates on the principle that low-fidelity models generate 'slop' that requires more correction than high-fidelity models, effectively making the cheaper model more expensive in total workflow cost. The inversion point is reached when the time spent verifying and correcting low-quality outputs exceeds the token cost savings of using the smaller model.
+This pattern describes a non-linear relationship where increasing automation throughput initially improves output quality by reducing manual friction, but eventually triggers an inversion point. Beyond this threshold, the marginal cost of verifying low-fidelity agent outputs exceeds the value of the content itself, causing net utility to decline despite higher raw production numbers. The system shifts from being a force multiplier for Sean's intent to a generator of noise that requires more human labor to filter than it produces.
 
 ## Context
 
-Sean's data shows a clear shift from qwen3-14b to qwen3.6-35b-a3b-32k around July 6th, coinciding with a drop in rejected concepts and duration. This concept validates that strategic investment in model fidelity is necessary to maintain operational velocity.
+Sean’s vault data shows a clear inflection point around July 6th when switching from qwen3-14b to qwen3.6-35b-a3b-32k. While the larger model increased concepts written, the rejection rate and cluster sampling volume spiked, indicating that higher capacity without tighter constraints leads to semantic drift rather than precision.
 
 ## Evidence
 
-> While qwen3-14b offers lower token costs, its higher rejection rates force Sean into a 'supervision trap' where he spends hours correcting low-quality drafts.
+> As Sean scales his agent fleet, the erosion of tacit knowledge creates a critical tension: automation requires explicit rules, but human expertise often resides in unspoken norms.
 
-> Conversely, qwen3.6-35b-a3b-32k incurs higher per-run costs but drastically reduces the 'curation tax,' effectively buying back creative time.
+> This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
 
 ## Examples
 
-- Run 2026-07-02 (qwen3-14b) had a rejected_count of 50 and duration of 2618 seconds.
-- Run 2026-07-08 (qwen3.6-35b-a3b-32k) had a rejected_count of 14 and duration of 1649 seconds.
+- The jump from 45 concepts written on June 23 to 109 on June 29 using qwen3-14b resulted in 76 rejections, showing that volume without quality control generates more work for the supervisor.
+- The switch to qwen3.6-35b-a3b-32k on July 6 increased concepts to 103 but also increased rejected_count to 106, demonstrating that raw model power can amplify errors if the underlying tacit knowledge isn't codified.
 
 ## Related Concepts
 
-[[Model Cost vs. Supervision Latency Trade-off]] [[The Calibration Bottleneck in Scalable Creative Production]]
+[[Tacit Knowledge Erosion vs. Automation Scale]] [[Legibility Debt as a Supervision Failure Mode]]

@@ -2,21 +2,20 @@
 title: "Cross-Domain Tension: Automated Throughput vs. Epistemic Hygiene in Gap Analysis"
 type: connection
 connects:
-  - Throughput vs. Taste Memory Tension
+  - The Taste-Throughput Trade-off in Agentic Synthesis
   - Slop as a Trust Deficit
   - The Verification-Governance Inversion
-  - Negative Space Calibration
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Synthesis
 
-The fundamental tension lies between the drive for automated throughput and the preservation of epistemic hygiene, leading to a systemic trust deficit. As agent fleets scale their sampling capacity, they often prioritize opportunity hunting over rigorous gap analysis, resulting in low-validity content. This pattern manifests as 'slop,' where the absence of evidence is misinterpreted as a signal for action rather than a call for investigation. The consequence is an erosion of Sean's trust in his vault's reliability and a degradation of the quality of his insights.
+The core tension lies in the conflict between the drive for automated throughput and the preservation of epistemic hygiene, leading to a systemic trust deficit. As agent fleets scale their sampling capacity, they often prioritize opportunity hunting over rigorous gap analysis, resulting in low-validity content known as 'slop'. This pattern manifests as a 'solutioneering' trap where gaps are filled with speculative solutions rather than investigated, eroding Sean's trust in his vault's reliability. The consequence is that automation becomes a liability unless explicitly governed by verification mechanisms that prioritize quality over quantity.
 
 ## Threads
 
-### [[Throughput vs. Taste Memory Tension]]
+### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
 > As the fleet scales its sampling capacity (clusters_sampled), there is a latent tension between generating more connections and maintaining the signal-to-noise ratio.
 
@@ -27,10 +26,6 @@ The fundamental tension lies between the drive for automated throughput and the 
 ### [[The Verification-Governance Inversion]]
 
 > 98% of people write opportunities as solutions and solution-framing is the dominant failure mode of gap mapping.
-
-### [[Negative Space Calibration]]
-
-> Every strong gap presentation does the same three things to each gap: (1) states it as a need/pain, not a solution.
 
 ## Implications
 
