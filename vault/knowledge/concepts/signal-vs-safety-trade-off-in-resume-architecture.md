@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/connections/automation-velocity-vs-creative-friction-in-job-search.md
 tags: [auto-generated, phase-6]
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This mechanism defines the tension between maximizing the probability of passing automated screening filters (safety) and maintaining a coherent, high-signal narrative that attracts human recruiters (signal). When automation prioritizes safety, it tends to generalize language and dilute specific domain expertise to avoid keyword mismatches, resulting in a 'safe' but indistinguishable profile. The trade-off emerges because the system cannot distinguish between a keyword match that indicates true competence and one that indicates mere exposure, forcing a choice between broad visibility and precise targeting.
+This mechanism defines the tension between surfacing opportunities that are broadly safe (matching general keywords or remote preferences) versus those that are high-signal (requiring specific, deep domain expertise). When automation prioritizes safety to avoid rejection, it surfaces roles that are technically 'fits' but strategically misaligned, forcing the user to manually filter out low-value noise. The trade-off is that higher precision requires accepting lower recall, as strict filtering reduces the total number of opportunities.
 
 ## Context
 
-Sean's job hunt suffers when the system prioritizes safety by surfacing roles that are technically 'fits' based on loose keywords but lack strategic alignment with his actual AI/creative tools background. This forces him to manually filter out these 'safe' but irrelevant opportunities, negating the automation's value.
+Sean's resume and job hunt strategy require deep AI/creative tools expertise, yet the automated system often surfaces roles requiring 'deep insurance domain expertise.' This mismatch highlights the cost of prioritizing broad safety over specific signal in his career transition.
 
 ## Evidence
 
 > Liberate role scored 2/5 because it requires 'deep insurance domain expertise rather than Sean's AI/creative tools background', yet it was surfaced at all.
 
-> The tension lies between the system's drive to maximize throughput (surfacing more fits) and the user's need for high-fidelity signal (fewer, better fits).
+> The core tension arises from the system's drive to maximize throughput by reducing filtering rigor, which directly conflicts with the user's need for high-fidelity signal.
 
 ## Examples
 
-- A role requiring 'deep insurance domain expertise' is surfaced as a fit despite Sean's background being in AI/creative tools.
-- The system prioritizes 'likely remote flexibility' over verified constraints when scoring job fits.
+- A role scored 2/5 due to domain mismatch but was still included in the output.
+- The system prioritizes 'likely remote flexibility' over verified constraints, reducing signal quality.
 
 ## Related Concepts
 
-[[Job Hunt as Sales Pipeline]] [[The Calibration Bottleneck in Scalable Creative Production]]
+[[The Illusion of Health in Autonomous Systems]] [[Job Hunt as Sales Pipeline]]

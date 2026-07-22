@@ -2,10 +2,10 @@
 title: "Hardware Fragility Masks Semantic Decay in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/operational-uptime-vs-cognitive-utility-tension.md
+  - knowledge/concepts/hardware-fragility-masks-semantic-decay-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition

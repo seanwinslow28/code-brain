@@ -2,10 +2,10 @@
 title: "The Verification-Governance Inversion"
 type: concept
 sources:
-  - knowledge/connections/self-validation-as-a-structural-failure-mode.md
+  - knowledge/concepts/the-verification-governance-inversion.md
 tags: [auto-generated, phase-6]
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition

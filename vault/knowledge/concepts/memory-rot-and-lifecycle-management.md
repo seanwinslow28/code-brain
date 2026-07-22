@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/memory-rot-and-lifecycle-management.md
 tags: [auto-generated, phase-6]
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition

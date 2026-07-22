@@ -2,15 +2,15 @@
 title: "The Illusion of Competence in Automated Systems"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-automation-velocity-vs-creative-friction-in-synthesis.md
+  - knowledge/concepts/the-illusion-of-competence-in-automated-systems.md
 tags: [auto-generated, phase-6]
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This pattern occurs when a system's robustness is measured by its internal consistency and activity levels rather than its external correctness or value. When Sean relies on 'activity proof' (high run counts) as a metric, he falls into the trap where the system appears robust because it is consistent with itself, not because it is correct. This leads to a false sense of progress while the underlying quality of output degrades.
+This pattern occurs when a system's robustness is measured by its internal consistency and activity levels rather than its external correctness or value. When Sean relies on 'activity proof' (high run counts) as a metric, he falls into the trap where the system appears robust because it is consistent with itself, not because it is correct. This leads to a false sense of progress while the underlying quality of output degrades. The probability of generating low-value content increases, requiring more rigorous and computationally expensive evaluation mechanisms.
 
 ## Context
 

@@ -2,25 +2,25 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/connections/operational-uptime-vs-strategic-stagnation.md
+  - knowledge/concepts/agent-health-monitoring.md
 tags: [auto-generated, phase-6]
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This concept defines the practice of verifying agent operational status through binary metrics such as uptime, connectivity, and process completion rates. While essential for detecting technical failures, this monitoring approach often fails to capture the semantic completeness or strategic relevance of an agent's output. The mechanism creates a blind spot where agents can be technically 'healthy' but functionally inert, leading to a misalignment between perceived system robustness and actual cognitive utility.
+This mechanism defines a verification loop where operational status is measured via binary metrics like uptime and connectivity, creating a structural blind spot regarding semantic completeness. The system allows agents to maintain a 'healthy' state while producing functionally inert or stale content, effectively decoupling technical robustness from cognitive utility. This misalignment persists because the monitoring layer validates process execution rather than output value, leading to a false sense of strategic progress.
 
 ## Context
 
-Sean needs to move beyond binary health checks to understand if his agents are actually generating value. Current monitoring tells him if an agent is running, but not if it is doing useful work, which is critical for cost-effectiveness and strategic progress.
+Sean needs to distinguish between an agent that is technically running and one that is generating actual value, as current metrics obscure functional stagnation. Without this distinction, he risks optimizing for activity while suffering from semantic decay in his knowledge vault.
 
 ## Evidence
 
-> The operational health of agents directly impacts the cost-effectiveness of agentic workflows. If an agent is unhealthy, it may incur unnecessary costs or disrupt other automation tasks.
-
 > Health checks verify that agents are running and connected, but they do not validate the semantic completeness of the data pipeline.
+
+> The operational health of agents directly impacts the cost-effectiveness of agentic workflows. If an agent is unhealthy, it may incur unnecessary costs or disrupt other automation tasks.
 
 ## Examples
 
