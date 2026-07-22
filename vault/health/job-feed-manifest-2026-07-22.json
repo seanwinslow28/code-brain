@@ -1,0 +1,34 @@
+{
+  "date": "2026-07-22",
+  "runs": [
+    {
+      "fired_at": "2026-07-22T08:00:04.187076",
+      "fetch_total": 5868,
+      "rules_passed": 9,
+      "rules_rejected": 158,
+      "llm_scored": 9,
+      "llm_failed": 0,
+      "mbp_reachable": true,
+      "duration_sec": 72.8,
+      "failed_pollers": [
+        "ats:lindy (all 404)",
+        "ats:captions (all 404)",
+        "ats:luma-ai (all 404)",
+        "ats:chainalysis (all 404)",
+        "ats:characterai (all 404)",
+        "ats:crewai (all 404)",
+        "ats:weights-and-biases (all 404)",
+        "ats:wayfair (all 404)",
+        "ats:sourcegraph (all 404)",
+        "ats:arize (all 404)",
+        "ats:fireworks-ai (all 404)",
+        "ats:hebbia (ReadTimeout)",
+        "ats:anthropic (ReadTimeout)",
+        "ats:vercel (ReadTimeout)"
+      ],
+      "short_circuited": false,
+      "emailed": 4,
+      "pushed": 1
+    }
+  ]
+}
