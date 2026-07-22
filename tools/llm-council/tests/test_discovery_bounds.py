@@ -124,13 +124,16 @@ async def test_fusion_request_enforces_judge_bounds_and_preserves_tool_shape(
     assert fusion.TOPIC_EMBED_MAX_BYTES == 2_048
     assert fusion.EVIDENCE_EMBED_MAX_BYTES == 131_072
     assert body["max_tokens"] == 8_192
-    assert body["provider"] == {
-        "max_price": {"prompt": 6.25, "completion": 37.5, "request": 0},
-        "allow_fallbacks": False,
-    }
+    # 2026-07-22: max_price is dropped from the fusion provider block — OpenRouter's
+    # openrouter:fusion tool 500s when it's attached (see fusion._build_body comment).
+    # Cost safety for the fusion call rests on model pinning + max_tool_calls + the
+    # enforced ledger caps, not this now-provider-broken per-call ceiling.
+    assert body["provider"] == {"allow_fallbacks": False}
     assert "require_parameters" not in body["provider"]
+    assert "max_price" not in body["provider"]
     expected_from_pricing = provider_price_policy(tier.judge)
     expected_from_pricing.pop("require_parameters")
+    expected_from_pricing.pop("max_price")
     assert body["provider"] == expected_from_pricing
     assert {
         "tools": body["tools"],
@@ -170,10 +173,9 @@ async def test_fusion_parse_retry_reuses_judge_bounds_on_both_attempts(httpx_moc
 
     bodies = [json.loads(request.content) for request in httpx_mock.get_requests()]
     assert len(bodies) == 2
-    expected_provider = {
-        "max_price": {"prompt": 6.25, "completion": 37.5, "request": 0},
-        "allow_fallbacks": False,
-    }
+    # 2026-07-22: max_price dropped from the fusion provider block (OpenRouter
+    # openrouter:fusion 500s when it's attached) — see fusion._build_body.
+    expected_provider = {"allow_fallbacks": False}
     assert [body["max_tokens"] for body in bodies] == [8_192, 8_192]
     assert [body["provider"] for body in bodies] == [
         expected_provider,
