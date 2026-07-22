@@ -2,31 +2,31 @@
 title: "Velocity vs. Judgment in MCP Strengthening"
 type: concept
 sources:
-  - knowledge/concepts/velocity-vs-judgment-in-mcp-strengthening.md
+  - knowledge/connections/velocity-vs-judgment-in-mcp-strengthening.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This pattern captures the structural tension where increasing the volume of automated concept generation outpaces the human operator's capacity for strategic synthesis and quality control. As sampling capacity grows, the latent conflict between generating more connections and maintaining signal integrity becomes a critical bottleneck. The mechanism reveals that velocity without corresponding judgment leads to a degradation in the overall quality of the knowledge vault, as the human reviewer becomes the limiting factor.
+This tension defines the trade-off between the speed of automated execution and the depth of semantic reasoning required for robust system strengthening. As velocity increases through larger cluster sampling or more complex models, the agent's ability to apply rigorous taste-based filtering often decreases unless explicitly constrained. The mechanism here is that raw compute power expands the failure surface faster than the judgment layer can be hardened, leading to a net loss in productivity despite higher throughput.
 
 ## Context
 
-Sean's transition from qwen3-14b to qwen3.6-35b-a3b-32k shows an attempt to improve quality, but the core issue remains the imbalance between generation speed and review capacity. He must align his model selection and sampling parameters with his actual ability to process and validate the output, rather than chasing higher raw numbers.
+Sean's recent runs show a clear correlation between model upgrades (qwen3-14b to qwen3.6-35b) and changes in output quality metrics. He must decide whether to prioritize the volume of concepts generated or the precision of the connections made, as optimizing for one often degrades the other.
 
 ## Evidence
 
-> As the fleet scales its sampling capacity (clusters_sampled), there is a latent tension between generating more connections and maintaining the signal-to-noise ratio.
+> Sean's transition from small, high-quality runs to large, low-quality runs reveals a critical tension between operational velocity and semantic judgment.
 
-> The current automation strategy is unsustainable as it creates a verification-governance inversion that negates the time savings of automation.
+> As the system scales up concept generation, the lack of rigorous filtering leads to a surplus of low-fidelity output that requires more manual supervision to correct.
 
 ## Examples
 
-- Run 2026-07-01 sampled 236 clusters and wrote 125 concepts, but required 2641 seconds to process.
-- Run 2026-07-11 sampled 149 clusters and wrote only 83 concepts, reducing the verification load significantly.
+- The run on 2026-07-21 produced 97 concepts and 21 connections via qwen3.6-35b, whereas the run on 2026-07-02 produced 141 concepts and only 40 connections via qwen3-14b.
+- The rejection count dropped from 80 in early July to 15 in late July, suggesting a change in filtering rigor or model behavior rather than an improvement in taste.
 
 ## Related Concepts
 
-[[The Efficiency-Quality Inversion in Automated Synthesis]] [[Slop as a Trust Deficit]]
+[[The Illusion of Health in Autonomous Systems]] [[Harness Engineering Invariant]]

@@ -2,31 +2,31 @@
 title: "The Efficiency-Quality Inversion in Automated Synthesis"
 type: concept
 sources:
-  - knowledge/connections/velocity-vs-judgment-in-agentic-synthesis.md
+  - knowledge/connections/the-tacit-knowledge-bottleneck-in-scaling-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This invariant describes a structural trade-off where increasing the volume of automated concept generation (velocity) outpaces the capacity for strategic synthesis (judgment). As Sean scales the concept generation, the system's ability to maintain judgment and fidelity degrades, leading to a 'verification-governance inversion' where more time is spent checking work than doing it. This pattern forces Sean to confront the limit of automation in creative domains, where quality cannot be scaled linearly with speed.
+This pattern describes a non-linear relationship where increasing automation throughput initially improves output quality by reducing manual friction, but eventually triggers an inversion point. Beyond this threshold, the marginal cost of verifying low-fidelity agent outputs exceeds the value of the content itself, causing net utility to decline despite higher raw production numbers. The system shifts from being a force multiplier for Sean's intent to a generator of noise that requires more human labor to filter than it produces.
 
 ## Context
 
-Sean must reduce his synthesizer's output volume to prioritize depth over breadth, accepting lower velocity for higher strategic value. The 'Solution' slot in his Value-Gate must focus on specific techniques for injecting intent into AI outputs, rather than just prompt engineering.
+Sean’s vault data shows a clear inflection point around July 6th when switching from qwen3-14b to qwen3.6-35b-a3b-32k. While the larger model increased concepts written, the rejection rate and cluster sampling volume spiked, indicating that higher capacity without tighter constraints leads to semantic drift rather than precision.
 
 ## Evidence
 
-> There is a fundamental tension between the speed of AI generation and the depth of creative narrative.
+> As Sean scales his agent fleet, the erosion of tacit knowledge creates a critical tension: automation requires explicit rules, but human expertise often resides in unspoken norms.
 
-> As Sean scales the concept generation, the system's ability to maintain judgment and fidelity degrades, leading to a 'verification-governance inversion' where more time is spent checking work than doing it.
+> This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
 
 ## Examples
 
-- Sean must reduce his synthesizer's output volume to prioritize depth over breadth
-- quality cannot be scaled linearly with speed
+- The jump from 45 concepts written on June 23 to 109 on June 29 using qwen3-14b resulted in 76 rejections, showing that volume without quality control generates more work for the supervisor.
+- The switch to qwen3.6-35b-a3b-32k on July 6 increased concepts to 103 but also increased rejected_count to 106, demonstrating that raw model power can amplify errors if the underlying tacit knowledge isn't codified.
 
 ## Related Concepts
 
-[[Throughput vs. Taste Memory Tension]] [[Tacit Knowledge Erosion vs. Automation Scale]]
+[[Tacit Knowledge Erosion vs. Automation Scale]] [[Legibility Debt as a Supervision Failure Mode]]

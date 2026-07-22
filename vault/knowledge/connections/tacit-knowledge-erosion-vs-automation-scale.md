@@ -2,32 +2,32 @@
 title: "Tacit Knowledge Erosion vs. Automation Scale"
 type: connection
 connects:
-  - The Skill Atrophy Trap in Agentic Workflows
-  - Control Architecture as Evangelism
+  - Legibility Debt as a Supervision Failure Mode
+  - Tacit Knowledge Erosion vs. Automation Scale
   - Supervision as the New AI Edge
-created: 2026-07-03
-updated: 2026-07-03
+created: 2026-07-15
+updated: 2026-07-15
 ---
 
 ## Synthesis
 
-The core tension lies between the efficiency gains of scaling agent fleets and the erosion of Sean's tacit knowledge required to maintain them. As the number of concepts and clusters processed increases, the complexity of the system outpaces Sean's ability to hold its mental model. This leads to a 'black box' effect where failures become harder to diagnose because the underlying logic is no longer fully internalized by the human operator. The consequence is a growing vulnerability to silent failures that only manifest as output quality degradation.
+As Sean scales his agent fleet, the erosion of tacit knowledge creates a critical tension: automation requires explicit rules, but human expertise often resides in unspoken norms. This leads to a supervision failure where agents execute tasks correctly but miss the strategic intent, forcing Sean to manually audit outputs that should have been self-correcting. The consequence is a bottleneck where the speed of automation is capped by the slowness of codifying human judgment.
 
 ## Threads
 
-### [[The Skill Atrophy Trap in Agentic Workflows]]
+### [[Legibility Debt as a Supervision Failure Mode]]
 
-> as automation improves, humans get worse positioned to intervene because they lose practice, context, and situational awareness.
+> A rule that lives only in the head of your longest-tenured director does not exist, as far as your stack is concerned.
 
-### [[Control Architecture as Evangelism]]
+### [[Tacit Knowledge Erosion vs. Automation Scale]]
 
-> Reframe the fleet not as tools executing workflows, but as a human-agent joint system where reliability depends on coordination, observability, handoff, and graceful degradation.
+> Most were never written down, because scarcity wrote them for you.
 
 ### [[Supervision as the New AI Edge]]
 
-> It also gives you hiring language for AI-PM roles: designing the cockpit, not just wiring the automations.
+> AI is dissolving a lot of that scarcity. It has not dissolved the judgment underneath it.
 
 ## Implications
 
-- Sean must implement regular 'manual override' drills to maintain his own operational competence in the system.
-- The design of the vault must prioritize explainability and traceability over pure automation speed to preserve Sean's ability to intervene.
+- Sean must prioritize writing down 'commandments' before scaling agent fleets to prevent silent misalignment.
+- The cost of automation increases if tacit knowledge is not explicitly codified into machine-readable rules.

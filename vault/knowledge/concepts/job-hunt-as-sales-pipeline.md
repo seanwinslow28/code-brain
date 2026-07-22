@@ -2,31 +2,31 @@
 title: "Job Hunt as Sales Pipeline"
 type: concept
 sources:
-  - knowledge/concepts/job-hunt-as-sales-pipeline.md
+  - knowledge/connections/automation-velocity-vs-creative-friction-in-job-search.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This concept frames the job search not as a passive application process but as an active sales funnel where each role is a prospect and the candidate's profile is the product. The mechanism relies on continuous lead generation (job feeds), qualification scoring (fit scores), and conversion tracking (application status). The tension lies in balancing the volume of outreach against the precision of targeting, as low-fit applications dilute the perceived value of high-fit opportunities.
+This concept frames the job search not as a passive application process but as an active sales pipeline where each opportunity is a lead that must be qualified. The system's role is to generate leads (fits) and provide initial qualification scores, but the final validation requires human judgment to verify constraints like remote flexibility or domain fit. The pipeline's health is determined by the quality of leads, not just the volume of applications submitted.
 
 ## Context
 
-Sean's daily job feed roll-ups explicitly track fit scores and status mutations. The data shows a consistent pattern of 'medium fits' dominating the pipeline, suggesting that while lead generation is active, qualification criteria may be too loose or market alignment is misconfigured, requiring tighter filtering to improve conversion rates.
+Sean's job hunt is treated as a sales pipeline where '4 new fits' are generated, but the underlying rationale for these fits often relies on unverified assumptions. This requires Sean to act as the sales manager, validating the lead quality before proceeding.
 
 ## Evidence
 
-> The job feed for 2026-07-11 lists 4 new fits with a status of 'medium (3)' and 'weak (0)', indicating a pipeline full of prospects that require further qualification.
+> The job feed reports 4 new fits with 2 strong scores, yet the underlying rationale relies on 'likely remote flexibility' rather than verified constraints.
 
-> Concerns listed for Webflow include 'YOE: Staff/Principal roles typically require 7+ years; Sean has 2', highlighting a mismatch between the prospect's requirements and the product's capabilities.
+> Sean must implement a manual 'friction checkpoint' where he reviews only the top 10% of auto-surfaced roles to prevent signal dilution.
 
 ## Examples
 
-- OpenAI Hardware PM role scored 3/5 due to 'geo: location unspecified (risk of non-US or high RTO)', showing how uncertainty acts as a friction point in the sales process.
-- Figma PM role marked with 'salary_undisclosed' and 'location: SF/NY only', creating two distinct barriers to entry that reduce the likelihood of conversion.
+- The system reports '4 new fits' with '2 strong scores' based on unverified remote flexibility.
+- Sean must manually review the top 10% of roles to prevent signal dilution.
 
 ## Related Concepts
 
-[[Defensible Edge Mapping]] [[Signal vs. Safety Trade-off in Resume Architecture]]
+[[Signal vs. Safety Trade-off in Resume Architecture]] [[The Illusion of Health in Autonomous Systems]]

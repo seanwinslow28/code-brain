@@ -4,28 +4,29 @@ type: concept
 sources:
   - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This pattern describes the structural decay of operational trust that occurs when automated throughput outpaces the human operator's capacity for semantic verification. As the volume of generated artifacts increases, the signal-to-noise ratio in status reporting degrades, forcing supervision to shift from strategic oversight to forensic debugging. The system appears healthy because it is active, but the user cannot verify the quality or relevance of the output without manual intervention, creating a hidden debt that must be paid later.
+Legibility debt is the accumulating gap between the volume of automated output and the human capacity to verify its semantic integrity, forcing supervision into inefficient forensic mode. As agent fleets scale their sampling capacity beyond manual verification thresholds, the system generates more data than can be meaningfully processed, leading to a loss of confidence in the tool's utility. This debt manifests not as system failure, but as a gradual erosion of trust where the user can no longer distinguish between valuable insight and automated noise without exhaustive manual auditing.
 
 ## Context
 
-Sean's fleet has scaled from 3 concepts per run to over 150, yet his ability to manually audit each concept has not scaled linearly. This creates a dangerous gap where he assumes the system is working because it is running, but he cannot confirm the value of the work until it is too late to correct course efficiently.
+Sean's transition from small runs (3 concepts) to large runs (153 concepts) illustrates this debt; the mechanisms for reporting status lag behind the output volume, making it impossible for him to maintain a clear mental model of what is actually being stored in his vault.
 
 ## Evidence
 
 > As Sean scales the concept generation from 3 to 153 concepts per run, the mechanisms for reporting status lag behind, creating a legibility gap.
 
-> This forces supervision to shift from strategic oversight to forensic debugging, eroding trust in the system's health metrics because the user cannot verify the system's state without manual intervention.
+> Sean must treat manual tickets as the single source of truth for system health, rather than a reflection of agent activity.
 
 ## Examples
 
-- The jump from 3 concepts written on 2026-05-27 to 153 concepts written on 2026-07-05, while duration increased only from 47s to 2728s, indicates a massive increase in automation density without proportional increases in human-readable insight.
+- The jump from 45 concepts in June to 153 in early July represents a tipping point where Sean can no longer manually verify the quality of every cluster sampled.
+- The reliance on 'rejected_count' as a proxy for health is insufficient because it does not capture the semantic quality of the accepted outputs.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Agent Fleet Observability Dashboard]]
+[[Taste as Evaluation Function vs. Activity Proof]] [[The Verification-Governance Inversion]]

@@ -2,26 +2,26 @@
 title: "Velocity vs. Legibility in Agent Fleets"
 type: connection
 connects:
-  - Legibility Debt as a Supervision Failure Mode
   - The Illusion of Health in Autonomous Systems
+  - Legibility Debt as a Supervision Failure Mode
   - Agent Fleet Observability Dashboard
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Synthesis
 
-This connection reveals the fundamental tension where the drive for automated throughput directly conflicts with the preservation of semantic integrity and human trust. As Sean scales his fleet's sampling capacity, the system generates more output than he can verify, creating a legibility gap that forces supervision into forensic mode. The consequence is a systemic trust deficit: the system appears healthy because it is active, but the user cannot confirm its value without manual intervention, leading to eventual burnout or abandonment of the tool.
+The core tension is that increasing the velocity of automated concept generation directly degrades the legibility of the system for human supervisors, creating a trust deficit where activity metrics mask semantic decay. As Sean scales his fleet's sampling capacity, the volume of output exceeds his ability to verify quality, forcing him into forensic supervision mode and eroding confidence in the tool. This pattern reveals that operational health (high throughput) is inversely correlated with functional value (verified insight) when verification mechanisms do not scale proportionally.
 
 ## Threads
-
-### [[Legibility Debt as a Supervision Failure Mode]]
-
-> As Sean scales the concept generation from 3 to 153 concepts per run, the mechanisms for reporting status lag behind, creating a legibility gap.
 
 ### [[The Illusion of Health in Autonomous Systems]]
 
 > Robust protocol instrumentation masks epistemic blindness, creating an illusion of health that is particularly dangerous in creative contexts.
+
+### [[Legibility Debt as a Supervision Failure Mode]]
+
+> As Sean scales the concept generation from 3 to 153 concepts per run, the mechanisms for reporting status lag behind, creating a legibility gap.
 
 ### [[Agent Fleet Observability Dashboard]]
 
@@ -29,5 +29,5 @@ This connection reveals the fundamental tension where the drive for automated th
 
 ## Implications
 
-- Sean must treat manual tickets as the single source of truth for system health, rather than a reflection of agent activity.
-- Automated dashboards should be designed to highlight missing data or silence as critical errors, not just successful completions.
+- Sean must redesign his observability layer to flag semantic gaps rather than just execution success, preventing the illusion of health from masking quality loss.
+- He should cap automated throughput at a level that allows for manual verification, prioritizing legibility over volume to maintain trust in the vault.

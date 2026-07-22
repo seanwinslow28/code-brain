@@ -2,30 +2,31 @@
 title: "Slop as a Trust Deficit"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-automated-throughput-vs-epistemic-hygiene-in-gap-analysis.md
+  - knowledge/connections/cross-domain-the-calibration-bottleneck-in-scalable-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-Slop is not merely low-quality content but a symptom of a deeper trust deficit where agents treat knowledge gaps as opportunities for solutioneering rather than signals for investigation. This pattern occurs when the absence of evidence is misinterpreted as a call to action, leading to the construction of features or insights for non-existent needs. The mechanism here is a failure of negative space calibration, where the system cannot distinguish between a void that requires filling and a void that requires understanding.
+This concept defines the erosion of trust in automated systems when they produce low-quality, generic outputs. While qwen3-14b offers lower token costs, its higher rejection rates force Sean into a 'supervision trap' where he spends hours correcting low-quality drafts. The consequence is that the perceived value of the automation decreases as the cost of correction increases.
 
 ## Context
 
-Sean's vault suffers from this deficit when agents generate connections based on assumed gaps rather than verified evidence, eroding his trust in the reliability of his own knowledge infrastructure.
+Sean must benchmark total cost (token cost + estimated supervision hours) rather than just token cost when selecting models for creative tasks. High-fidelity models may be justified even at higher per-unit costs if they reduce the rejection rate below a critical threshold of human attention.
 
 ## Evidence
 
-> When agents treat gaps as opportunities, they fall into the 'solutioneering' trap, building features for non-existent needs.
+> While qwen3-14b offers lower token costs, its higher rejection rates force Sean into a 'supervision trap' where he spends hours correcting low-quality drafts.
 
-> The absence of evidence is misinterpreted as a signal for action rather than a call for investigation.
+> The consequence is that the perceived value of the automation decreases as the cost of correction increases.
 
 ## Examples
 
-- building features for non-existent needs
+- The 'supervision trap' caused by high rejection rates.
+- The decrease in perceived automation value due to correction costs.
 
 ## Related Concepts
 
-[[Throughput vs. Taste Memory Tension]] [[Negative Space Calibration]]
+[[The Taste-Fidelity Decoupling in Creative Production]] [[The Efficiency-Quality Inversion in Automated Synthesis]]
