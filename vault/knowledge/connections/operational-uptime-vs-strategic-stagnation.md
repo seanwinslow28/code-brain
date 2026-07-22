@@ -5,8 +5,8 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - Infrastructure Fragmentation and Semantic Isolation
   - Agent Health Monitoring
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Synthesis

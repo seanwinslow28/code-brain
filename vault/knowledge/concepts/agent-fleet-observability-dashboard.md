@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-An observability dashboard is a monitoring interface that tracks the operational status of automated agents, but it often fails to capture the semantic quality or strategic alignment of their outputs. When designed poorly, it reinforces the illusion of health by focusing on throughput metrics rather than the absence of value or the presence of errors. Effective dashboards must highlight missing data or silence as critical errors to prevent the user from being misled by activity.
+An observability framework that prioritizes the detection of silence, missing data, and semantic gaps over the confirmation of successful task completion. Instead of celebrating high throughput or low error rates in execution, this design pattern treats the absence of expected insight or the presence of unverified output as critical system errors. It shifts the metric of health from 'did the agent finish?' to 'did the agent produce something verifiable and valuable?', thereby aligning automated monitoring with human supervisory needs.
 
 ## Context
 
-Sean's current dashboard likely shows successful runs and concept counts, but it does not alert him when the concepts are irrelevant or low-quality. This misalignment between what is measured and what matters leads to a false sense of security and eventual abandonment of the tool.
+Sean's current dashboard likely highlights successful run completions, but he needs a view that flags when the synthesizer produces high volume with low semantic density or when manual tickets are ignored, indicating a breakdown in the feedback loop.
 
 ## Evidence
 
 > Automated dashboards should be designed to highlight missing data or silence as critical errors, not just successful completions.
 
-> Sean must treat manual tickets as the single source of truth for system health, rather than a reflection of agent activity.
+> The fundamental tension lies in the trade-off between the drive for automated throughput and the preservation of semantic integrity, leading to a systemic trust deficit.
 
 ## Examples
 
-- The dashboard shows 157 clusters sampled but does not indicate if any were rejected due to low quality.
-- Manual tickets are treated as the single source of truth for system health, overriding automated metrics.
+- A dashboard alert that triggers when 'rejected_count' exceeds a threshold relative to 'concepts_written', indicating a collapse in output quality.
+- A visual indicator showing the time delta between concept generation and manual verification, highlighting where legibility debt is accumulating.
 
 ## Related Concepts
 
-[[Legibility Debt as a Supervision Failure Mode]] [[The Illusion of Health in Autonomous Systems]]
+[[Agent Health Monitoring]] [[Control Room Observability]]

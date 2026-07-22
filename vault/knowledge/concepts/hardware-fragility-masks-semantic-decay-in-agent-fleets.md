@@ -2,7 +2,7 @@
 title: "Hardware Fragility Masks Semantic Decay in Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/hardware-fragility-masks-semantic-decay-in-agent-fleets.md
+  - knowledge/connections/operational-uptime-vs-cognitive-utility-tension.md
 tags: [auto-generated, phase-6]
 created: 2026-07-22
 updated: 2026-07-22
@@ -10,23 +10,23 @@ updated: 2026-07-22
 
 ## Definition
 
-This pattern identifies how physical hardware limitations obscure the deeper issue of semantic decay within automated systems. The fragility of components like the MBP creates a visible failure mode that distracts from the silent loss of knowledge quality. When hardware fails, it halts automation, but when it succeeds, it may still produce low-value output due to underlying semantic issues. This masking effect prevents Sean from addressing the root cause of stagnation in his knowledge vault.
+This invariant describes how physical hardware limitations, such as the reliance on a single MBP, obscure the gradual decay of semantic quality in agent outputs. When hardware fails or becomes unstable, it is often blamed for operational errors, while the underlying issue of semantic stagnation goes unnoticed because the agents are still 'running'. This masking effect prevents Sean from addressing the root cause of knowledge degradation, which is actually a lack of deep synthesis rather than just technical uptime.
 
 ## Context
 
-Sean must address hardware dependencies to prevent them from masking the true state of his knowledge synthesis quality and preventing silent degradation.
+Sean's personal vault depends on his local machine for processing. If he focuses only on keeping the machine running, he misses the opportunity to improve the quality of his insights, leading to a 'slop' of low-value content.
 
 ## Evidence
 
 > Hardware dependencies like the MBP create single points of failure that undermine the reliability of the entire automation pipeline.
 
-> The tension lies between the agent's need for continuous, high-bandwidth context to maintain semantic integrity and the physical reality of infrastructure instability.
+> The fundamental tension arises from the decoupling of operational health metrics from actual semantic progress.
 
 ## Examples
 
-- Physical infrastructure instability prevents agents from maintaining the context needed for high-quality synthesis.
-- Hardware failures expose rather than solve the underlying issues of semantic decay in agent fleets.
+- Run 2026-07-06 had a high rejected count (106) possibly due to hardware constraints affecting quality control.
+- The shift from qwen3-14b to qwen3.6-35b-a3b-32k did not significantly reduce the rejected count, suggesting hardware or network issues rather than model capability.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Infrastructure Fragmentation and Semantic Isolation]]
+[[Infrastructure Fragmentation and Semantic Isolation]] [[The Illusion of Health in Autonomous Systems]]

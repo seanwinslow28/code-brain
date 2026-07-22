@@ -2,7 +2,7 @@
 title: "Harness Engineering Invariant"
 type: concept
 sources:
-  - knowledge/concepts/harness-engineering-invariant.md
+  - knowledge/connections/velocity-vs-judgment-in-mcp-strengthening.md
 tags: [auto-generated, phase-6]
 created: 2026-07-22
 updated: 2026-07-22
@@ -10,23 +10,23 @@ updated: 2026-07-22
 
 ## Definition
 
-This invariant posits that an agent's reliability is inversely proportional to the complexity of its surrounding harness, as every added tool or permission expands the failure surface non-linearly. The mechanism suggests that increasing capability through expansion inevitably degrades stability because the model cannot compensate for the combinatorial explosion of potential interaction points. Consequently, pruning the harness often yields greater reliability gains than upgrading the model's raw intelligence.
+This invariant posits that agent reliability is inversely proportional to the complexity of its surrounding harness, as every added tool, permission, or reference file expands the failure surface non-linearly. The mechanism involves the introduction of new variables that the agent must manage simultaneously, increasing the probability of context drift or instruction following errors. Simplifying the harness by removing redundant tools often yields greater reliability gains than upgrading the underlying model.
 
 ## Context
 
-Sean's transition from qwen3-14b to qwen3.6-35b did not solve his quality issues because the larger model operated within a complex harness that masked underlying drift. He must prioritize reducing the number of tools and reference files to stabilize the synthesizer before attempting further capability upgrades.
+Sean is considering upgrading models to improve output quality, but the data suggests that reducing the harness complexity (e.g., fewer clusters sampled, less noise) might be more effective. He needs to audit his synthesizer's toolset to identify which components are contributing to the 'illusion of health' rather than actual semantic value.
 
 ## Evidence
 
 > This invariant posits that agent reliability is inversely proportional to complexity of its surrounding harness, as every added tool or permission expands the failure surface non-linearly.
 
-> There is a fundamental tension between increasing an agent's capability by adding tools and maintaining its reliability, as the harness complexity grows faster than model intelligence can compensate.
+> Sean should prioritize pruning his synthesizer's toolset and reference files before attempting to upgrade models, as reducing the harness surface area will improve reliability more than raw compute power.
 
 ## Examples
 
-- The synthesizer sampling 253 clusters but writing only 109 concepts, indicating that the harness complexity overwhelmed the model's ability to filter effectively.
-- Upgrading from qwen3-14b to qwen3.6-35b while maintaining a large toolset resulted in higher rejection counts rather than improved semantic quality.
+- The reduction in 'clusters_sampled' from ~250 (qwen3-14b era) to ~150 (qwen3.6-35b era) coinciding with a drop in 'rejected_count' suggests that limiting input scope improved output quality.
+- The duration of runs remained relatively stable (~1700s) despite model changes, indicating that the bottleneck is not compute time but the complexity of the decision-making process within the harness.
 
 ## Related Concepts
 
-[[Maintenance Surface vs. Model Capability Trade-off]] [[Context Management as a Bottleneck]]
+[[Velocity vs. Judgment in MCP Strengthening]] [[The Illusion of Health in Autonomous Systems]]

@@ -2,7 +2,7 @@
 title: "Infrastructure Fragmentation and Semantic Isolation"
 type: concept
 sources:
-  - knowledge/concepts/infrastructure-fragmentation-and-semantic-isolation.md
+  - knowledge/connections/the-tension-between-operational-visibility-and-semantic-completeness.md
 tags: [auto-generated, phase-6]
 created: 2026-07-22
 updated: 2026-07-22
@@ -10,23 +10,23 @@ updated: 2026-07-22
 
 ## Definition
 
-Distributed agent architectures suffer from semantic isolation when hardware dependencies are not strictly synchronized, causing agents to operate on divergent states of truth. The reliance on multiple machines with inconsistent availability creates a fragmented control plane where data consistency is assumed rather than enforced. This fragmentation forces agents to make assumptions about shared resources that may be unavailable or stale, leading to isolated operational silos.
+This mechanism describes how physical or network fragmentation of hardware resources leads to isolated pockets of data that cannot be synthesized into a unified whole. When critical dependencies like remote hosts or MCP servers are offline, the agent fleet loses access to essential context, creating semantic islands that prevent coherent knowledge synthesis. This fragmentation is often invisible to operational monitoring tools that only check for process execution.
 
 ## Context
 
-Sean's setup relies on a Mac Mini, MBP, and Alienware, but the Alienware is frequently offline. This physical fragmentation directly impacts the logical coherence of the agent fleet, requiring workarounds like centralizing endpoints to maintain semantic integrity.
+Sean's goal of three-machine synchronization is hindered by this fragmentation, leading to a state where his vault cannot maintain a single source of truth. He must address the physical connectivity issues to restore semantic integrity across his system.
 
 ## Evidence
 
-> Alienware machine status remains OFFLINE, blocking full three-machine agent mesh.
+> Alienware workstation reported offline, hindering the goal of three-machine synchronization for the vault SSoT.
 
-> Establish the Mac Mini as the single, always-on source of truth endpoint to reduce reliance on flaky MBP/Alienware syncs.
+> The consequence is a false sense of security that prevents Sean from addressing the root causes of semantic decay, such as offline hardware or unreachable MCP servers.
 
 ## Examples
 
-- ComfyUI is offline; pipeline testing requires re-establishment or postponement.
-- Audit agent dependencies: Focus on migrating services that require multiple machines into the vault.
+- Agents reporting 'success' while missing critical context from offline hardware or unreachable MCP servers.
+- High concept counts masking low semantic value due to fragmented infrastructure.
 
 ## Related Concepts
 
-[[Control Plane / Data Plane Split for Agent Fleets]] [[Vault as Agent Infrastructure]]
+[[Operational Visibility vs. Semantic Value in Agent Fleets]] [[The Illusion of Health in Autonomous Systems]]

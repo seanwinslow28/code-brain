@@ -2,11 +2,11 @@
 title: "The Tension Between Operational Visibility and Semantic Completeness"
 type: connection
 connects:
-  - The Illusion of Health in Autonomous Systems
   - Operational Visibility vs. Semantic Value in Agent Fleets
+  - The Illusion of Health in Autonomous Systems
   - Infrastructure Fragmentation and Semantic Isolation
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Synthesis
@@ -15,13 +15,13 @@ The core tension lies in the divergence between operational health metrics and s
 
 ## Threads
 
-### [[The Illusion of Health in Autonomous Systems]]
+### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
 
 > There is a critical divergence between the operational visibility of agents (which reports binary health) and their semantic completeness (the actual quality and scope of data they can access).
 
-### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+### [[The Illusion of Health in Autonomous Systems]]
 
-> status=success · 5.8h ago · notes='concepts=91 connections=17 rejected=17 edges=9'
+> The core tension lies in the divergence between operational health metrics and semantic data quality, where agents report success despite lacking critical context.
 
 ### [[Infrastructure Fragmentation and Semantic Isolation]]
 

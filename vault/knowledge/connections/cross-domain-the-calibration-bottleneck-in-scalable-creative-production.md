@@ -2,32 +2,32 @@
 title: "Cross-Domain: The Calibration Bottleneck in Scalable Creative Production"
 type: connection
 connects:
-  - The Taste-Fidelity Decoupling in Creative Production
-  - The Efficiency-Quality Inversion in Automated Synthesis
-  - Slop as a Trust Deficit
-created: 2026-07-21
-updated: 2026-07-21
+  - The Illusion of Health in Autonomous Systems
+  - Velocity vs. Judgment in MCP Strengthening
+  - Harness Engineering Invariant
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Synthesis
 
-This connection reveals a critical tension between the increasing volume of automated output and the stagnating depth of strategic connections. As Sean scales the concept generation, the ability to maintain high-fidelity links between disparate domains (life-systems, creative-studio, job-hunt) degrades unless supervised by a high-fidelity model. The consequence is that without this calibration, the vault becomes a repository of isolated facts rather than a network of actionable insights.
+This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. As Sean scales his agent fleet, the 'illusion of health' masks a decay in semantic fidelity, forcing him to spend more time supervising low-quality output than he saves in generation time. The consequence is that velocity gains are negated by the increasing cost of judgment, creating a bottleneck where the human operator becomes the limiting factor for system reliability.
 
 ## Threads
 
-### [[The Taste-Fidelity Decoupling in Creative Production]]
+### [[The Illusion of Health in Autonomous Systems]]
 
-> There is a direct tension between the computational cost of high-fidelity models and the human supervision latency they reduce.
+> The agents you have already built will keep producing work long after they stop being right.
 
-### [[The Efficiency-Quality Inversion in Automated Synthesis]]
+### [[Velocity vs. Judgment in MCP Strengthening]]
 
-> Sean's workflow reveals a fundamental tension between the desire for immediate control (explicit prompts) and the reality of complex style transfer (implicit learning).
+> Sean's transition from small, high-quality runs to large, low-quality runs reveals a critical tension between operational velocity and semantic judgment.
 
-### [[Slop as a Trust Deficit]]
+### [[Harness Engineering Invariant]]
 
-> While qwen3-14b offers lower token costs, its higher rejection rates force Sean into a 'supervision trap' where he spends hours correcting low-quality drafts.
+> This invariant posits that agent reliability is inversely proportional to complexity of its surrounding harness, as every added tool or permission expands the failure surface non-linearly.
 
 ## Implications
 
-- Sean must benchmark total cost (token cost + estimated supervision hours) rather than just token cost when selecting models for creative tasks.
-- High-fidelity models may be justified even at higher per-unit costs if they reduce the rejection rate below a critical threshold of human attention.
+- Sean must implement semantic verification metrics for his synthesizer runs, not just operational ones like duration or exit codes, to detect when the system 'stops being right' while still completing successfully.
+- Prioritizing harness simplification (reducing clusters_sampled and tool count) may yield higher reliability gains than upgrading to larger models like qwen3.6-35b, as it reduces the failure surface area.

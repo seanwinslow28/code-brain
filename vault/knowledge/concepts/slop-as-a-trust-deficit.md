@@ -2,7 +2,7 @@
 title: "Slop as a Trust Deficit"
 type: concept
 sources:
-  - knowledge/concepts/slop-as-a-trust-deficit.md
+  - knowledge/connections/cross-domain-the-calibration-bottleneck-in-scalable-creative-production.md
 tags: [auto-generated, phase-6]
 created: 2026-07-22
 updated: 2026-07-22
@@ -10,23 +10,23 @@ updated: 2026-07-22
 
 ## Definition
 
-Slop is defined here not merely as low-quality text, but as a systemic erosion of trust between the user and the agent fleet caused by inconsistent style transfer and lack of implicit learning. When agents produce output that fails to capture Sean's specific taste memory, it signals a failure in the underlying model's ability to internalize creative constraints, leading to a 'trust deficit' where every piece of output requires explicit, manual verification. This deficit manifests as increased cognitive load for Sean, who must constantly re-establish context and correct deviations rather than reviewing final products.
+This concept defines the erosion of trust in automated systems when they produce low-quality, generic outputs. While qwen3-14b offers lower token costs, its higher rejection rates force Sean into a 'supervision trap' where he spends hours correcting low-quality drafts. The consequence is that the perceived value of the automation decreases as the cost of correction increases.
 
 ## Context
 
-Sean's workflow reveals a fundamental tension between the desire for immediate control (explicit prompts) and the reality of complex style transfer (implicit learning). The shift to qwen3.6-35b-a3b-32k appears to mitigate this deficit by producing more consistent outputs, thereby restoring trust in the automated synthesis process.
+Sean must benchmark total cost (token cost + estimated supervision hours) rather than just token cost when selecting models for creative tasks. High-fidelity models may be justified even at higher per-unit costs if they reduce the rejection rate below a critical threshold of human attention.
 
 ## Evidence
 
-> Sean's workflow reveals a fundamental tension between the desire for immediate control (explicit prompts) and the reality of complex style transfer (implicit learning).
+> While qwen3-14b offers lower token costs, its higher rejection rates force Sean into a 'supervision trap' where he spends hours correcting low-quality drafts.
 
-> This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
+> The consequence is that the perceived value of the automation decreases as the cost of correction increases.
 
 ## Examples
 
-- The rejection count dropped from 78 in run-2026-06-23T02:30:05.md (qwen3-14b) to 12 in run-2026-07-11T02:30:06.md (qwen3.6-35b-a3b-32k), indicating a significant reduction in trust-deficit-inducing errors.
-- The duration per concept decreased from ~32 seconds/concept in early qwen3-14b runs to ~19 seconds/concept in later qwen3.6 runs, suggesting less time spent on corrective supervision.
+- The 'supervision trap' caused by high rejection rates.
+- The decrease in perceived automation value due to correction costs.
 
 ## Related Concepts
 
-[[The Efficiency-Quality Inversion in Automated Synthesis]] [[The Taste-Fidelity Decoupling in Creative Production]]
+[[The Taste-Fidelity Decoupling in Creative Production]] [[The Efficiency-Quality Inversion in Automated Synthesis]]
