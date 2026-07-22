@@ -1,0 +1,18 @@
+{
+  "id": "20260722-115105-a0c592",
+  "topic": "AI coding assistants",
+  "lens": "pm",
+  "tier": "standard",
+  "segment": "",
+  "evidence_count": 115,
+  "gather_status": {
+    "last30": "ok: 91 records (91 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 10 records (10 found)",
+    "reviews": "ok: 6 records (6 found)",
+    "github": "ok: 8 records (8 found)"
+  },
+  "failed_stage": "fuse",
+  "error": "OpenRouter 500 on Fusion call (judge=anthropic/claude-opus-4.7): Internal Server Error",
+  "cost_usd": 0.0
+}

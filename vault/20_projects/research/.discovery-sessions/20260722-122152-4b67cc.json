@@ -1,0 +1,36 @@
+{
+  "id": "20260722-122152-4b67cc",
+  "topic": "AI coding assistants",
+  "lens": "pm",
+  "tier": "standard",
+  "segment": "",
+  "evidence_count": 116,
+  "verified": 6,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 6.8144,
+  "gather_status": {
+    "last30": "ok: 92 records (92 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 10 records (10 found)",
+    "reviews": "ok: 6 records (6 found)",
+    "github": "ok: 8 records (8 found)"
+  },
+  "blind_spots": [
+    "No differentiation in pain points across different programming languages or tech stacks (e.g., Python vs. Rust vs. Web Dev).",
+    "No hard analytical tracking of long-term maintainability or technical debt accumulation metrics; heavily relies on anecdotal frustration.",
+    "Missing serious coverage of legal, IP, copyright, and compliance risks surrounding enterprise ingestion of AI-generated code.",
+    "Lack of discussion about QA/Tester perspectives, completely ignoring how AI is writing, modifying, or breaking testing frameworks."
+  ],
+  "contradictions": [
+    "The reality of Developer Productivity directly contradicts the expectation: Users assert 'AI use makes programmers think they're more efficient, but actually slows them down', yet some professionals claim 'Literally every professional programmer I know uses AI', implying massive sustained adoption.",
+    "Leadership Mandates vs. Ground Truth Efficiency: Companies are fiercely gatekeeping promotions by tying them to 'prompt engineering' adoption, despite engineering floors universally concluding that multi-modal enterprise AI attempts have 'achieved literally nothing'.",
+    "The Vibe Coding philosophy ('You used AI? That's not real programming') contradicts rigorous engineering standards ('You need to understand line by line what it's doing') while both groups claim to be part of the modern developer ecosystem."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 0.1667,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}
