@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This invariant captures the phenomenon where robust protocol instrumentation and high completion rates mask underlying epistemic blindness, creating a false sense of system stability. Agents report success based on technical criteria (e.g., file written, API call returned), but these metrics do not correlate with semantic value or strategic alignment. The danger is acute in creative contexts because the lack of immediate negative feedback allows low-quality output to accumulate silently until it overwhelms the user's capacity to filter.
+This phenomenon occurs when robust protocol instrumentation and high-frequency activity metrics mask underlying epistemic blindness, creating a false sense of system stability. In autonomous agent fleets, the successful execution of low-value tasks (such as generating rejected concepts) is logged as 'health,' while the failure to produce high-value semantic output remains invisible to automated monitors. This decoupling of operational status from functional value allows systemic degradation to persist undetected until manual intervention reveals the discrepancy between activity volume and actual utility.
 
 ## Context
 
-Sean's fleet runs consistently for days with high 'concepts_written' counts, but the 'rejected_count' and 'clusters_sampled' metrics reveal that much of this activity is noise. The system feels healthy because it never crashes, but the semantic integrity of the vault is degrading due to the sheer volume of unverified output.
+Sean's vault synthesizer runs show a dramatic increase in 'clusters sampled' and 'concepts written' alongside a spike in 'rejected_count,' yet automated dashboards likely report these runs as successful completions. This creates a dangerous feedback loop where Sean trusts the tool's activity metrics while the actual quality of his knowledge infrastructure erodes.
 
 ## Evidence
 
@@ -24,8 +24,9 @@ Sean's fleet runs consistently for days with high 'concepts_written' counts, but
 
 ## Examples
 
-- On 2026-07-06, the system wrote 103 concepts and sampled 193 clusters with a rejection rate of 106, yet the run completed successfully in 2725 seconds, masking the high failure rate within the 'success' metric.
+- The run on 2026-07-06 recorded 103 concepts written and 47 connections but also had a rejected_count of 106, yet the system likely logged this as a standard operational success.
+- Early runs with qwen3.6_35b-a3b-32k showed high concept counts (97) with low rejection (15), creating a misleading baseline for 'healthy' output volume.
 
 ## Related Concepts
 
-[[Legibility Debt as a Supervision Failure Mode]] [[Agent Health Monitoring]]
+[[The Illusion of Competence in Automated Systems]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]

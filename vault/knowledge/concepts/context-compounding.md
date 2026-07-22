@@ -4,28 +4,29 @@ type: concept
 sources:
   - knowledge/connections/the-scalability-paradox-in-agentic-creative-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Definition
 
-This pattern occurs when the accumulation of memory artifacts exceeds the model's effective attention window, causing it to ignore critical instructions or recent context. A bloated memory makes the model ignore the real instructions, leading to outputs that are technically correct but contextually irrelevant. This compounding effect worsens over time as the vault grows, requiring active pruning strategies to maintain operational clarity. The mechanism highlights the non-linear cost of memory in agentic systems.
+This mechanism refers to the degradation of instruction adherence caused by the accumulation of irrelevant or low-signal data in the agent's context window. As the memory core grows, the model's attention is diluted, causing it to ignore critical constraints in favor of more recent or statistically probable patterns. This leads to a loss of strategic depth and specific user intent as the system prioritizes breadth over precision.
 
 ## Context
 
-Sean's runs show increasing duration and cluster sampling counts, which likely contribute to context bloat. Understanding this helps him manage the lifecycle of his knowledge vault to prevent performance degradation.
+Sean identifies that a bloated memory makes the model ignore real instructions, which is a direct consequence of scaling without proper pruning protocols. This explains why his synthesizer's output quality may stagnate or decline despite increased sampling efforts.
 
 ## Evidence
 
 > A bloated memory makes the model ignore the real instructions.
 
-> The value of the 'Creative Partner' is contingent on the agent's ability to prune irrelevant taste signals, not just accumulate them.
+> As Sean scales the concept generation, the depth of strategic connections stagnates.
 
 ## Examples
 
-- Run 2026-07-01 sampled 236 clusters and wrote 125 concepts, a high volume that likely strained context retention compared to later runs with fewer samples.
+- The system generates more data but loses the specific 'taste' signals that define his creative voice.
+- forcing Sean to intervene more frequently rather than less.
 
 ## Related Concepts
 
-[[Throughput vs. Taste Memory Tension]] [[Memory Rot and Lifecycle Management]]
+[[Throughput vs. Taste Memory Tension]] [[The Taste-Fidelity Decoupling in Creative Production]]

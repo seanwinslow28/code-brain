@@ -2,30 +2,31 @@
 title: "The Taste-Fidelity Decoupling in Creative Production"
 type: concept
 sources:
-  - knowledge/connections/the-supervisory-cost-of-taste-transfer.md
+  - knowledge/connections/the-scalability-paradox-in-agentic-creative-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This mechanism describes the inverse relationship between agent throughput and aesthetic alignment, where the complexity of constraints required to maintain taste fidelity grows non-linearly with scale. As Sean attempts to make the agent think like him, he must define increasingly complex constraints to prevent drift, which creates a 'taste-fidelity decoupling' where the agent produces volume efficiently but loses the specific aesthetic signal that defines Sean's unique value. The consequence is that automation becomes a liability if the supervisory overhead exceeds the efficiency gains, forcing a choice between generic scale and high-fidelity niche.
+This pattern identifies the failure mode where the instruction to encode creative taste is structurally decoupled from the agent's ability to retain those signals over time. The mechanism operates on the principle that taste is not a static attribute but a dynamic constraint that must be actively maintained against the entropy of accumulating context. When the memory core grows without corresponding pruning, the taste signal becomes indistinguishable from noise, rendering the initial instruction ineffective regardless of its clarity.
 
 ## Context
 
-Sean must allocate specific time for rubric refinement as a primary deliverable, not just a preparatory step, to prevent taste drift. Success metrics should shift from volume of generated content to the reduction in editorial overhead and the preservation of taste fidelity.
+Sean faces this because his creative output relies on consistent voice, yet the agent's memory bloat causes it to ignore specific stylistic constraints in favor of generic patterns.
 
 ## Evidence
 
-> As Sean attempts to make the agent think like him, he must define increasingly complex constraints to prevent drift.
+> teaching an agent your taste means nothing if it cannot remember it.
 
-> The consequence is that automation becomes a liability if the supervisory overhead exceeds the efficiency gains, forcing Sean to choose between generic scale and high-fidelity niche.
+> A bloated memory makes the model ignore the real instructions.
 
 ## Examples
 
-- The old cadence strangled because three posts waited on unbuilt tools.
+- The value of the 'Creative Partner' is contingent on the agent's ability to prune irrelevant taste signals, not just accumulate them.
+- Sean must implement a strict reconciliation protocol to prevent his creative partner's output from degrading as the memory core grows.
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Constraint-First Automation vs. General Efficiency]]
+[[Throughput vs. Taste Memory Tension]] [[Context Compounding]]

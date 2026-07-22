@@ -2,31 +2,31 @@
 title: "Operational Readiness Review"
 type: concept
 sources:
-  - knowledge/concepts/operational-readiness-review.md
+  - knowledge/connections/operational-visibility-vs-semantic-value-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-An operational readiness review functions as a governance gate that shifts the definition of completion from execution to observability. It requires treating unattended automation not as a script but as a service with explicit failure modes, alert classes, and rollback paths. This mechanism forces the engineer to define SLO-style promises for agents, ensuring that when an agent fails, the system's state is bounded and recoverable rather than silently corrupted. The core invariant is that an agent is only 'done' when its potential for harm is fully mapped and contained.
+A verification step where the structural integrity and health of data tiers are confirmed before or after automated processes run. It serves as a checkpoint to ensure that the underlying knowledge base is stable and ready for synthesis, preventing errors from propagating through the system. This review acts as a safeguard against semantic decay by validating that the data being processed is current and complete.
 
 ## Context
 
-Sean is preparing for senior IC roles where demonstrating governance of production systems is a key differentiator. By framing his agent infrastructure through this lens, he moves beyond showing he can build tools to proving he can operate them safely at scale. This provides concrete evidence of seniority that generic portfolio projects lack.
+Sean uses Knowledge Lint to confirm data tier health, which helps mitigate the risks of running agents on stale or fragmented data. This step is crucial for maintaining the integrity of his personal knowledge vault.
 
 ## Evidence
 
-> This agent is not done when it runs; it is done when its failure mode is observable, bounded, and recoverable.
+> Knowledge Lint confirmed data tier health after review of concept batches.
 
-> Add a section that treats Code-Brain as an operated service: dependencies, failure modes, alert classes, rollback paths, runbooks, toil, and SLO-style promises.
+> The tension between operational health metrics and actual semantic value creation is exacerbated by infrastructure fragmentation.
 
 ## Examples
 
-- Code-Brain Operational Readiness Review
-- SLO-style promises for agent reliability
+- Confirming data tier health after review of concept batches.
+- Preventing further semantic decay across the fleet through stabilization efforts.
 
 ## Related Concepts
 
-[[Agent Fleet Observability Dashboard]] [[Infrastructure Status]] [[The Illusion of Health in Autonomous Systems]]
+[[The Illusion of Health in Autonomous Systems]] [[Infrastructure Fragmentation and Semantic Isolation]]

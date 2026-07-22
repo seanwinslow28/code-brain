@@ -5,13 +5,13 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - Operational Visibility vs. Semantic Value in Agent Fleets
   - Silent Failure Propagation in Agent Fleets
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-21
+updated: 2026-07-21
 ---
 
 ## Synthesis
 
-Sean's agent fleet exhibits a critical decoupling where operational metrics (status=success, cost=$0.00) are optimized independently of strategic value (insight density, connection strength). This creates a blind spot where the infrastructure appears robust but is functionally limited, leading to undetected productivity loss. The consequence is that Sean cannot identify when his vault is stagnating despite appearing active, as the monitoring system validates existence rather than value.
+Sean's agent fleet exhibits a critical decoupling where operational metrics are optimized independently of strategic value. This creates a blind spot where the infrastructure appears robust but is functionally limited, leading to undetected productivity loss. The consequence is that Sean cannot identify when his vault is stagnating despite appearing active, as the monitoring system validates existence rather than value.
 
 ## Threads
 

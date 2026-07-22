@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/the-context-memory-bottleneck-in-personalized-ai.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition

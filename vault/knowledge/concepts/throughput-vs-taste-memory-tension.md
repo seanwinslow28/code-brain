@@ -2,31 +2,31 @@
 title: "Throughput vs. Taste Memory Tension"
 type: concept
 sources:
-  - knowledge/connections/velocity-vs-judgment-in-agentic-synthesis.md
+  - knowledge/connections/the-scalability-paradox-in-agentic-creative-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This invariant captures the systemic conflict where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. The mechanism operates by prioritizing quantity of output over the nuanced quality required for creative fidelity, causing the operator to lose confidence in the system's ability to maintain aesthetic standards. This tension manifests as a growing gap between the volume of generated content and the operator's capacity to verify its strategic alignment.
+This mechanism describes a structural conflict where the expansion of automated sampling capacity directly degrades the fidelity of creative taste signals within the system's memory core. As the agent fleet scales its clusters_sampled and concepts_written metrics, the density of high-signal 'taste' data dilutes against the volume of low-signal output, creating a systemic trust deficit. The underlying invariant is that taste preservation requires active pruning and constraint, whereas throughput optimization naturally encourages accumulation and expansion, making them mutually exclusive goals without explicit reconciliation protocols.
 
 ## Context
 
-Sean faces a trust deficit as his automated systems produce more content that fails to meet his creative standards, forcing him to spend more time verifying outputs rather than creating new ones. This erosion of trust undermines the utility of the automation pipeline for high-stakes creative work.
+Sean must navigate this tension because his creative authority depends on the specificity of his taste signals, yet his operational efficiency relies on scaling agent throughput. Without addressing this, his vault becomes voluminous but stylistically hollow, forcing him to intervene more frequently rather than less.
 
 ## Evidence
 
-> There is a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
+> This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
 
-> Creatives in the comments echo that this material is impossible to build good narratives or campaigns on.
+> teaching an agent your taste means nothing if it cannot remember it.
 
 ## Examples
 
-- leading to a systemic trust deficit
-- impossible to build good narratives or campaigns on
+- The system generates more data but loses the specific 'taste' signals that define his creative voice.
+- forcing Sean to intervene more frequently rather than less
 
 ## Related Concepts
 
-[[The Efficiency-Quality Inversion in Automated Synthesis]] [[Tacit Knowledge Erosion vs. Automation Scale]]
+[[The Taste-Fidelity Decoupling in Creative Production]] [[Context Compounding]]

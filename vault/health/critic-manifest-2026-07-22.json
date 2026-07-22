@@ -1,0 +1,22 @@
+{
+  "antigravity_calls": 0,
+  "antigravity_failures": 0,
+  "antigravity_last_error": "",
+  "antigravity_skipped": 8,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 0,
+  "backfill_articles_critiqued": 0,
+  "backfill_expansions_written": [],
+  "codex_calls": 8,
+  "codex_failures": 8,
+  "codex_last_error": "codex binary missing: [Errno 2] No such file or directory: '/opt/homebrew/bin/codex'",
+  "codex_tokens_total": 0,
+  "duration_seconds": 0.04,
+  "error": "",
+  "expansions_written": [],
+  "run_id": "2026-07-22T03:30:03",
+  "status": "error",
+  "warnings": [
+    "antigravity disabled (codex-only mode)"
+  ]
+}

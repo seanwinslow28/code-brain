@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/self-validation-vs-external-validity-in-agentic-evaluation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-14
-updated: 2026-07-14
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This concept defines the architectural intervention of enforcing strict separation between the generation model and the evaluation judge. It identifies family separation as the highest-leverage mechanism for breaking self-referential bias loops in automated synthesis. By ensuring the judge cannot be a candidate, the system forces genuine external validation rather than internal preference optimization.
+A strategic intervention where the separation of model families for generation and evaluation is identified as the highest-leverage mechanism for restoring epistemic integrity. This fix requires decoupling the judge from the candidate pool to prevent self-grading artifacts, ensuring that validation metrics reflect external truth rather than internal consistency. The mechanism relies on architectural diversity to break the self-referential loops that compromise automated assessment reliability.
 
 ## Context
 
-Sean's transition from Qwen3-14b to Qwen3.6-35b showed improved metrics but masked underlying validity issues until explicit separation was enforced. This fix is critical for maintaining epistemic integrity in his personal knowledge vault.
+Sean identified this separation as the single highest-leverage lever for fixing his synthesizer's evaluation flaws, moving from a monolithic model family to a diverse panel to ensure genuine discovery and robustness across inputs.
 
 ## Evidence
 
@@ -24,8 +24,8 @@ Sean's transition from Qwen3-14b to Qwen3.6-35b showed improved metrics but mask
 
 ## Examples
 
-- Using Claude Opus as the judge while Qwen3.6 generates the content
-- Architectural separation of the judge from the candidate panel in every tier
+- Switching from qwen3.6-35b-a3b-32k for both synthesis and validation to using external judges
+- Implementing a blind judge panel that excludes the primary synthesis model
 
 ## Related Concepts
 
