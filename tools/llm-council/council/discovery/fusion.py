@@ -162,9 +162,21 @@ def _build_body(bundle: EvidenceBundle, tier: TierConfig, topic: str) -> dict:
     )
     provider = provider_price_policy(tier.judge)
     # Fusion's parameter-support matrix is OpenRouter-side and opaque. Requiring
-    # parameter support can refuse for functionality reasons; the spend guards are
-    # max_price plus disabled fallbacks.
+    # parameter support can refuse for functionality reasons.
     provider.pop("require_parameters")
+    # 2026-07-22: OpenRouter's `openrouter:fusion` tool began returning HTTP 500
+    # ("Internal Server Error") whenever a `max_price` provider filter is attached.
+    # Confirmed by A/B on an otherwise-identical body (with max_price -> 500, popped
+    # -> 200); t0 on 2026-06-30 ran fine WITH max_price, so this is a provider-side
+    # change, not a payload/model issue. Drop it here — scoped to the fusion call
+    # ONLY, never provider_price_policy (the regular council's non-fusion calls still
+    # rely on max_price and are unaffected). Cost safety for the fusion call is
+    # preserved by model pinning (judge unit price is fixed), max_tool_calls (bounds
+    # the panel's server-side web-tool spend), and the enforced F8b daily/monthly
+    # ledger caps (bound accumulated spend). max_price only bounded the pinned judge's
+    # unit token price, which is already fixed — so this removes a now-redundant,
+    # provider-broken ceiling, not real cost safety.
+    provider.pop("max_price", None)
     # Shape confirmed correct against a live 200 response (see FUSION_SCHEMA.md).
     return {
         "model": tier.judge,
