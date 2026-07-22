@@ -2,19 +2,19 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - knowledge/connections/the-tacit-knowledge-bottleneck-in-scaling-agent-fleets.md
+  - knowledge/concepts/supervision-as-the-new-ai-edge.md
 tags: [auto-generated, phase-6]
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-As AI tools democratize execution capabilities, the competitive advantage shifts from the ability to produce output to the ability to evaluate and direct that output. Supervision becomes the primary value-generating activity because it requires the specific judgment and taste that AI cannot replicate. This edge is maintained only if the supervisor actively preserves their own tacit knowledge through explicit articulation and rigorous feedback loops. The mechanism relies on the operator remaining the 'taste-maker' rather than becoming a passive consumer of automated content.
+This mechanism describes a structural inversion where the competitive advantage shifts from execution capability to evaluation authority as AI tools democratize production. The supervisor maintains their edge by actively preserving tacit knowledge through explicit articulation and rigorous feedback loops, rather than becoming a passive consumer of automated content. This requires the operator to remain the 'taste-maker' because the bottleneck for scaling automation is the slowness of codifying human judgment into machine-readable rules. The value-generating activity becomes the specific judgment and taste that AI cannot replicate, creating a defensible moat around curation rather than creation.
 
 ## Context
 
-Sean's focus on 'taste memory' and 'synthesizer' roles indicates an understanding that his value lies in curation and direction. The run logs show him actively refining the synthesizer's output, suggesting he is leveraging supervision as his core differentiator against generic AI generation.
+Sean's focus on 'taste memory' and synthesizer roles indicates an understanding that his value lies in curation and direction. The run logs show him actively refining the synthesizer's output, suggesting he is leveraging supervision as his core differentiator against generic AI generation. This aligns with his broader strategy of maintaining creative authority while delegating execution to agent fleets.
 
 ## Evidence
 

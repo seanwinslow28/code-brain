@@ -2,15 +2,15 @@
 title: "The Efficiency-Quality Inversion in Automated Synthesis"
 type: concept
 sources:
-  - knowledge/connections/model-cost-vs-supervision-latency-trade-off.md
+  - knowledge/concepts/the-efficiency-quality-inversion-in-automated-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This pattern defines the non-linear relationship where increasing the throughput of automated synthesis agents initially reduces per-unit cost but eventually triggers a disproportionate increase in human supervision time. The mechanism operates on the principle that low-fidelity models (like qwen3-14b) generate 'slop' that requires more correction than high-fidelity models (like qwen3.6-35b-a3b-32k), effectively making the cheaper model more expensive in total workflow cost. The inversion point is reached when the time spent verifying and correcting low-quality outputs exceeds the token cost savings of using the smaller model.
+This pattern defines the non-linear relationship where increasing the throughput of automated synthesis agents initially reduces per-unit cost but eventually triggers a disproportionate increase in human supervision time. The mechanism operates on the principle that low-fidelity models generate 'slop' that requires more correction than high-fidelity models, effectively making the cheaper model more expensive in total workflow cost. The inversion point is reached when the time spent verifying and correcting low-quality outputs exceeds the token cost savings of using the smaller model.
 
 ## Context
 

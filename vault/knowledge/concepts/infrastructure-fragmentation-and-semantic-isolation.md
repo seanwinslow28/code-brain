@@ -2,31 +2,31 @@
 title: "Infrastructure Fragmentation and Semantic Isolation"
 type: concept
 sources:
-  - knowledge/connections/the-decoupling-of-operational-health-from-semantic-integrity.md
+  - knowledge/concepts/infrastructure-fragmentation-and-semantic-isolation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This pattern describes how physical hardware limitations and network fragmentation create isolated silos within an otherwise unified agent fleet. When specific hosts become unreachable, the agents dependent on them are logically blocked, even if their software components are healthy. This fragmentation prevents the seamless flow of information across the vault, leading to semantic isolation where parts of the knowledge system cannot interact due to physical constraints.
+Distributed agent architectures suffer from semantic isolation when hardware dependencies are not strictly synchronized, causing agents to operate on divergent states of truth. The reliance on multiple machines with inconsistent availability creates a fragmented control plane where data consistency is assumed rather than enforced. This fragmentation forces agents to make assumptions about shared resources that may be unavailable or stale, leading to isolated operational silos.
 
 ## Context
 
-Sean's multi-machine setup (Alienware, ComfyUI) creates points of failure that directly impact the synthesizer's ability to function. Recognizing these physical dependencies is essential for diagnosing why semantic synthesis fails despite operational health.
+Sean's setup relies on a Mac Mini, MBP, and Alienware, but the Alienware is frequently offline. This physical fragmentation directly impacts the logical coherence of the agent fleet, requiring workarounds like centralizing endpoints to maintain semantic integrity.
 
 ## Evidence
 
-> Alienware and ComfyUI reported offline status, blocking crucial multi-machine sync/testing.
+> Alienware machine status remains OFFLINE, blocking full three-machine agent mesh.
 
-> vault-synthesizer failed (deferred) due to 'tier2-host-unreachable,' hindering SSoT capability.
+> Establish the Mac Mini as the single, always-on source of truth endpoint to reduce reliance on flaky MBP/Alienware syncs.
 
 ## Examples
 
-- The synthesizer silently defers due to hardware unavailability.
-- Blocking crucial multi-machine sync/testing.
+- ComfyUI is offline; pipeline testing requires re-establishment or postponement.
+- Audit agent dependencies: Focus on migrating services that require multiple machines into the vault.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+[[Control Plane / Data Plane Split for Agent Fleets]] [[Vault as Agent Infrastructure]]

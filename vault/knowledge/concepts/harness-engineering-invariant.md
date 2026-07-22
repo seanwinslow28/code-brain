@@ -2,15 +2,15 @@
 title: "Harness Engineering Invariant"
 type: concept
 sources:
-  - knowledge/connections/maintenance-surface-vs-model-capability-trade-off.md
+  - knowledge/concepts/harness-engineering-invariant.md
 tags: [auto-generated, phase-6]
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This invariant posits that an agent's reliability is inversely proportional to the complexity of its surrounding harness, as every added tool, permission, or reference file expands the failure surface non-linearly. The mechanism suggests that increasing capability through expansion inevitably degrades stability because the model cannot compensate for the combinatorial explosion of potential interaction points. Consequently, pruning the harness often yields greater reliability gains than upgrading the model's raw intelligence.
+This invariant posits that an agent's reliability is inversely proportional to the complexity of its surrounding harness, as every added tool or permission expands the failure surface non-linearly. The mechanism suggests that increasing capability through expansion inevitably degrades stability because the model cannot compensate for the combinatorial explosion of potential interaction points. Consequently, pruning the harness often yields greater reliability gains than upgrading the model's raw intelligence.
 
 ## Context
 

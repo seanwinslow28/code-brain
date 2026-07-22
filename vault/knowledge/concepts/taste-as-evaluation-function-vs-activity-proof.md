@@ -2,25 +2,25 @@
 title: "Taste as Evaluation Function vs. Activity Proof"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-automation-velocity-vs-creative-friction-in-synthesis.md
+  - knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md
 tags: [auto-generated, phase-6]
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-07-22
+updated: 2026-07-22
 ---
 
 ## Definition
 
-This concept defines the shift in creative labor from generating artifacts to evaluating them against a personal aesthetic standard. As AI lowers the cost of generation, the value chain shifts from production capacity to aesthetic judgment. The bottleneck moves from the ability to create to the ability to discern what is worth creating.
+This mechanism describes a structural inversion in creative labor where the primary bottleneck shifts from production capacity to aesthetic judgment as AI lowers generation costs. The value chain moves from generating artifacts to evaluating them against a personal standard, requiring Sean to decouple the judge from the candidate pool to ensure metrics reflect external truth rather than internal consistency. This shift transforms the human role from creator to curator, making discernment the scarce resource instead of execution speed.
 
 ## Context
 
-Sean's synthesizer runs demonstrate this shift: the early runs focused on volume (activity proof), while the later runs focused on quality (taste evaluation). This reflects a broader trend in agentic work where the human role becomes more of a curator than a creator.
+Sean's synthesizer runs demonstrate this transition: early runs focused on volume as activity proof, while later runs prioritized quality through taste evaluation. This reflects a broader trend in agentic work where the ability to evaluate becomes more valuable than the ability to produce.
 
 ## Evidence
 
 > This concept defines the shift in creative labor from generating artifacts to evaluating them against a personal aesthetic standard
 
-> Sean must decouple the judge from the candidate pool to ensure that evaluation metrics reflect external truth rather than internal consistency.
+> Sean must decouple the judge from the candidate pool to ensure that evaluation metrics reflect external truth rather than internal consistency
 
 ## Examples
 
