@@ -1,0 +1,14 @@
+[
+  {
+    "interaction_id": "v1_ChZkZXByYXJ6dEo4VFZfdU1QOWFQRVdREhZkZXByYXJ6dEo4VFZfdU1QOWFQRVdR",
+    "agent_id": "deep-research-preview-04-2026",
+    "tier": "dr",
+    "cost_predicted_usd": 2.8,
+    "cost_actual_usd": null,
+    "cost_usd": 2.8,
+    "wall_seconds": 461,
+    "query": "How do existing systems use AI/LLMs as a creative thinking partner rather than a text generator? Survey commercial products, HCI/creativity-support research papers, and open-source projects across three areas: (1) partner-loop interaction design - propose/challenge/decide patterns, honest critique, devil's-advocate agents, and anti-sycophancy mechanisms in brainstorming or ideation assistants; (2) divergence mechanics - techniques for increasing idea diversity and novelty (persona or cognitive-frame prompting, parallel isolated sampling, tree search, conceptual blending, constraint injection, temperature/sampling interventions) and empirical evidence on which measurably work versus which are hype; (3) ideation personalization - systems that capture a user's accept/reject decisions, selections, or stated reasons on AI-proposed ideas and use them to improve future ideation suggestions for that user. For each area name concrete systems, papers, or repos, what was actually demonstrated, and known limitations. Prefer 2023-2026 sources. Cite sources.",
+    "created": "2026-07-31T00:28:50.958312Z",
+    "output_path": "/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-07-30-how-do-existing-systems-use-aillms-as-a-creative-thinking-pa.md"
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "id": "20260730-200945-c1c785",
+  "topic": "AI ideation, brainstorming, and creative-partner tools failing creative professionals in concept development, story development, and visual direction",
+  "lens": "pm",
+  "tier": "standard",
+  "segment": "creative",
+  "evidence_count": 30,
+  "verified": 9,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 5.6324,
+  "gather_status": {
+    "last30": "ok: 16 records (16 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 10 records (10 found)",
+    "reviews": "ok: 4 records (4 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "The evidence does not directly address story-specific failures such as character consistency, narrative causality, long-range continuity, canon management, pacing, theme, voice, or revision across drafts.",
+    "Pricing, usage limits, latency, accessibility, onboarding effort, collaboration permissions, version history, export formats, and interoperability are largely unexamined.",
+    "Several positive or comparative claims come from vendors or tool-oriented publishers, creating possible promotional and selection bias.",
+    "There is no evidence about intellectual-property risk, confidentiality, training-data provenance, creator consent, attribution, plagiarism, or ownership of generated concepts.",
+    "Dates extend into 2026, but the evidence provides no methodology for validating the claimed testing, sample sizes, or representativeness of the sources.",
+    "Most AI-specific criticism comes from one Reddit discussion about agents and business software, so its applicability to creative-partner tools is suggestive rather than demonstrated.",
+    "Several excerpts are visibly truncated, limiting confidence in their full meaning and context.",
+    "The evidence does not distinguish solo ideation from facilitated group brainstorming or synchronous collaboration from asynchronous development.",
+    "There is almost no firsthand evidence from explicitly identified screenwriters, directors, art directors, illustrators, concept artists, game writers, or other named creative-professional roles.",
+    "There is no longitudinal evidence showing whether context retention, reliability, trust, or creative value improves with repeated use.",
+    "There is no controlled comparison of AI-assisted ideation against human-only practice, nor evidence about originality, quality, diversity, time saved, or downstream acceptance of concepts.",
+    "The evidence does not directly address visual-direction failures such as style consistency, composition control, reference-image fidelity, art-direction vocabulary, spatial continuity, or translating concepts into production-ready briefs."
+  ],
+  "contradictions": [
+    "Creative workflows are described as too slow, yet brainstorming tools themselves are also reported to slow the room down; automation may address cycle time while introducing interaction and cleanup costs.",
+    "Early-stage companies are said to need help because they cannot hire large creative departments, while other evidence says many professionals are content with existing workflows and do not want to offload control.",
+    "AI generation is described as magical and immediate during building, but its output is also described as slop, inaccurate, not quite working, and burdensome to maintain.",
+    "Traditional brainstorming is characterized as repetitive and limited in perspective, but the evidence does not establish that AI produces more diverse or original ideas rather than reproducing the same weakness.",
+    "Tool marketing and guides imply that AI can improve ideation, while the academic evidence says designers still lack a comprehensive methodology for co-ideation with LLMs.",
+    "Feature-rich tools are implicitly positioned as valuable, but evidence says feature depth does not compensate for interrupting active brainstorming.",
+    "The stated desire for faster creative iteration conflicts with the stated professional preference to retain control; the evidence does not resolve which tasks users want accelerated versus kept human-led.",
+    "Storyflow claims full-board context as a differentiator, while also asserting that most AI tools do not understand context; the evidence does not independently verify either the claimed advantage or the market-wide failure."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 0.5556,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}
