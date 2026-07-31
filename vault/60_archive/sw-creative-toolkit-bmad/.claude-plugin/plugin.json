@@ -1,0 +1,18 @@
+{
+  "name": "sw-creative-toolkit",
+  "version": "0.1.0",
+  "description": "Creative-strategy toolkit for PMs — design thinking, innovation strategy, problem solving, storytelling, presentation, and structured brainstorming workflows distilled from BMad CIS.",
+  "author": {
+    "name": "Sean Winslow",
+    "email": "sean.winslow28@gmail.com"
+  },
+  "keywords": [
+    "product-management",
+    "design-thinking",
+    "innovation-strategy",
+    "problem-solving",
+    "storytelling",
+    "brainstorming",
+    "presentation"
+  ]
+}
