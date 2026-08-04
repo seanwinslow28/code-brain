@@ -43,12 +43,13 @@ Write the piece. Chain mode: the beat map binds — author every sentence fresh 
 
 ### Step 4 — Gate: the pre-handoff drift check (self-edit; fix in place)
 
-Before calling the draft done, walk four checks. Any failure → fix in place, then re-check. This is a self-edit against this file's own rules, not a second critique gate: no analyzer, no verdict, no findings list. Measurement stays owned by `writing-critique`, one stage later — this gate exists so obvious drift never reaches it.
+Before calling the draft done, walk five checks. Any failure → fix in place, then re-check. This is a self-edit against this file's own rules, not a second critique gate: no analyzer, no verdict, no findings list. Measurement stays owned by `writing-critique`, one stage later — this gate exists so obvious drift never reaches it.
 
-1. **Register hold (House Style).** Still dive-bar, or has it slid refined / literary / villa-in-golden-hour? Check against the House Style bullets, not instinct. Slid → cut back toward the bar.
-2. **90/10 spine check.** Point at the connective tissue between the highlights: is it Sean's own narration, with a borrowed technique surfacing here and there? If any single author's register owns a paragraph or more, the mix is wrong (over-Sedaris is the usual offender) — rewrite that stretch as Sean.
-3. **Anti-pattern sweep.** Walk the Anti-Patterns table against the draft. The high-frequency catches: Reference Gorging (run the woven-vs-swappable test on every reference), Lexical Repetition, Prop Recycling, Limp Deflation, Clever-Metaphor Wit.
-4. **Do-Not-Promote sweep.** Confirm no suppressed-by-default topic appears — as stakes, motivation, aside, or ask — unless Sean explicitly asked for it in THIS piece (if he did, name that ask in the record).
+1. **Mechanics sweep (G1–G5, Hard Sentence Mechanics).** Colons/semicolons gone or rare and earned, contractions throughout, zero em dashes, no padding a punchline or a technical necessity didn't buy, no and-then chronicle between beats.
+2. **Register hold (House Style).** Still dive-bar, or has it slid refined / literary / villa-in-golden-hour? Check against the House Style bullets, not instinct. Slid → cut back toward the bar.
+3. **90/10 spine check.** Point at the connective tissue between the highlights: is it Sean's own narration, with a borrowed technique surfacing here and there? If any single author's register owns a paragraph or more, the mix is wrong (over-Sedaris is the usual offender) — rewrite that stretch as Sean.
+4. **Anti-pattern sweep.** Walk the Anti-Patterns table against the draft. The high-frequency catches: Reference Gorging (run the woven-vs-swappable test on every reference), Lexical Repetition, Prop Recycling, Limp Deflation, Clever-Metaphor Wit, the Interior-Translation Tell.
+5. **Do-Not-Promote sweep.** Confirm no suppressed-by-default topic appears — as stakes, motivation, aside, or ask — unless Sean explicitly asked for it in THIS piece (if he did, name that ask in the record).
 
 ### Step 5 — State: emit the Voice Decision Record with the draft
 
@@ -152,7 +153,7 @@ First-person participant-observer-critic. Frame everything as a quest: solving a
 Sean's **sentence engine**. Use for momentum, sensory cascading, and making technical explanations feel alive.
 
 **Core Mechanics:**
-- **Breath-mark rhythm:** Use commas and periods as breath marks between phrases, connecting a technical concept to its human implication in a single beat. (No em dashes; `writing-humanity-pass` enforces this. Use commas, periods, colons, or parentheses for the same rhythm.)
+- **Breath-mark rhythm:** Use commas and periods as breath marks between phrases, connecting a technical concept to its human implication in a single beat. (Use commas, periods, or parentheses for the same rhythm — not colons (G1) and never em dashes (G3); see Hard Sentence Mechanics.)
 - **Polysyndeton:** Stack "and" to create drumbeat accumulation. Every item gets equal weight. The reader *feels* the complexity.
 - **The jewel center:** Anchor abstract concepts to one hyper-specific concrete image (a blinking cursor, a weathered Logitech, a ferry horn). Everything radiates outward from that image.
 - **Sensory cascading:** Never write "AI improves productivity." Write the smells, the sounds, the sweat, the pupils dilating.
@@ -197,6 +198,22 @@ Concretely, the baseline register:
 - **Dialing down means SUBSTITUTION, not subtraction (Round 7, validated on Sean's own recruiter pass).** Grit is NOT the profanity itself; it's the physical comedy, the folksy blue-collar diction, and the personification. To make a piece recruiter-safe, swap each curse for its folksy/cartoon equivalent and keep the bite: "bullshit" → "hogwash", "bullshitting me" → "pulling the rug out from under me", "the little bastard" → "the little demon", "worth a damn" → "worth it". A machine "twiddling its thumbs, shrugging, saying 'Who? Me?'" carries more grit than "thumb up its ass" and a recruiter can read it. Never sterilize on the way down; trade the cusses for blue-collar/cartoon register.
 
 This is the layer the calibration corpus was thinnest on, which is why early drafts skewed refined. The fix lives in the exemplars: the **Raw Stories** section of `references/voice-samples.md` is the register anchor. When in doubt about texture, match those, not the polished March mode-applied essays.
+
+## Hard Sentence Mechanics — the Refine-Loop Rules (G1–G5, 2026-08)
+
+Five global rules earned through the VoicePrint refine loop (4 closed rounds, ~24 reason-backed contrasts; the verbatim evidence lives in `references/voice-samples.md`, VoicePrint section). These are hard defaults, not stylistic suggestions.
+
+- **G1 — Colons and semicolons: sparingly or not at all.** Sean reads a colon-dense draft as a Claude tell. Split the clause into its own sentence or paragraph instead.
+- **G2 — Always contract.** Spelled-out forms ("did not", "it is") read robotic. Contract the way speech does.
+- **G3 — No em dashes, anywhere.** Interaction warning: `writing-humanity-pass` substitutes a colon when it drops a dash; skip that substitution step for Sean or G3 trades into a G1 violation.
+- **G4 — Brevity outranks every other rule here, and it's about PADDING, not word count.** Short enough to explain the thing or land the idea, then stop. Only two things earn length: technical detail that genuinely has to be said, and a funny story whose punchline pays for the runway. One refine edit ran 50% longer than the draft and was still tight — the rule is no word that isn't doing work, not "write less."
+- **G5 (candidate) — No and-then chronicle; beats have to turn.** Restating events in sequence ("this happened, then this happened") is dead prose even in a working doc like a post-mortem. Between adjacent beats, "but" or "therefore" must fit — `storytelling-architecture`'s beat test applies to prose documents, not just chain pieces. Stated twice in one session; treat as binding until contradicted.
+
+Three companion findings from the same rounds, same weight:
+
+- **Content model before voice.** Name the document type, its purpose, and who reads it before drafting. Voice rules can't fix a wrong content model — the loop's worst diff (89.6%) was a purpose miss, not a voice miss, and naming the model first cut the next round to 52.8%.
+- **Speak the world the piece is set in — domain words yes, part numbers no.** Surrounding language comes from the craft the piece lives in (an art director who says "nah," final cut privilege), never from spec vocabulary (graphite arcs, construction midlines, hex codes). Evidence numbers survive (a 3%→97% lift); spec numbers die (a color hex, an attempt count). When two words mean the same thing, pick the one that makes the authority figure look like a dope.
+- **Tools and agents are a cast.** Writing about his own systems, the agents get bodies, gestures, and at most one line of dialogue each; the register may borrow from what the project IS (a cartoon pipeline earns slightly cartoon post-mortems). And the writer stays the biggest fool in the room — a complaint about a tool converts into self-implication, because he built the mess he's complaining about.
 
 ## Sean's Signature Moves
 
@@ -305,6 +322,8 @@ Use these when combining modes within a single piece.
 | Any mode | **Narrator Pun** | A pun in Sean's own narrator voice is a register error. Across 11 scripts, puns exist ONLY as characterization of hacks — quoted and punished in-world ("Try and KETCHUP!" / "Do you guys write your own material?"). Licensed wordplay is slang-literalization ("'COOK'") or the Fumbled Idiom — never a pun played straight. |
 | Any mode | **Reference Gorging (the Family Guy cut-to)** | The anti-pattern is the *cut-to gag*, NOT the reference itself. Distinguish two kinds. **Cut-to gorging (the real enemy):** a reference yanked in from the arsenal because you HAVE it — the story is rolling, then a quote or character appears out of thin air, out of place, in a "that reminds me of the time… *cut to* [bit]" cadence. Even ONE of these is a violation, regardless of count; it reads as the writer reaching for a quotable instead of staying in the moment. **Woven/diction reference (the good kind):** one that grows out of the feel of THIS moment and the specific topic — folded in as diction, an image, or a structural label, so it belongs where it lands and you'd miss it if it were gone. **The discriminating test:** does the reference grow out of what's being said right here, or could you swap it for a different one and drop it anywhere? Grows out of the moment, swap breaks it → keep. Swappable / placeable-anywhere → cut-to garnish → cut it. The reference universe is a PANTRY, not a MENU — you don't cook with every ingredient. **Density governor: 2–3 *woven* references per piece, max; most paragraphs ZERO, running on Sean's own lived specifics instead.** A reference must do real work (land a joke, sharpen an image). **Stronger still (Round 7): Sean cuts even an apt reference when a fresh ORIGINAL image (physical comedy, personification, a cartoon gag) serves the sentence. Generate the original before reaching for the quotable.** |
 | Any mode | **Lexical Repetition (incl. near-synonyms)** | The same word, or a near-synonym of it, recurring across a piece: "garbage" then "trash" then "junk." Sean's rule (Round 7): one instance of a concept-word per piece; at most one early and a *different* one late if truly needed, never a third. Repeating a word OR its synonym reads as thin vocabulary. Pick the single strongest word for the idea; vary or cut the rest. Generalizes "Bad Sean" (over-using one sensory detail) from props to lexis. |
+| Any mode | **Interior-Translation Tell (VoicePrint R1)** | The construction family `which is <someone>'s way of saying <punchline>` and its variants ("a polite way of saying..."). Traced to the Sedaris calibration; banned on sight. It claims access to another party's interior and then performs the translation — the opposite posture from Sean's under-reaction and flat-report comedy. |
+| Any mode | **Nature-Documentary Voice (VoicePrint R3)** | Hushed, reverent, third-person observation of his own work at spec-sheet altitude with the writer absent from the page — Sean's name for it: "a boring documentary narrated by Morgan Freeman." Reverence toward his own work is a pose; he doesn't take himself seriously. Fix: lead with the felt reference and the real thing it copies, stay first person (he made it, he's in the record), and let the closer be warm when the piece is warm — bite is not a universal closer rule. |
 
 ## Do-Not-Promote Topics
 
@@ -322,7 +341,7 @@ Some true facts about Sean are not material to showcase. A real detail being tru
 `references/cheese-bank.md`: Labeled negative specimens — the cheese taxonomy, banned YouTube-hook register, the limp-deflation test, the satire-redemption rule, the prop-recycling ban, and the clever-metaphor-wit ≠ Sean-wit diagnosis. Check the draft against it.
 
 **When matching Sean's voice closely** (blog posts, essays, newsletters), read:
-`references/voice-samples.md`: Real writing samples tagged by mode and signature move. The calibration anchors — when the samples and this file's rules conflict, the samples win. The "Elicited Raw Voice" section is the closest record of how Sean actually talks.
+`references/voice-samples.md`: Real writing samples tagged by mode and signature move. The calibration anchors — when the samples and this file's rules conflict, the samples win. The "Elicited Raw Voice" section is the closest record of how Sean actually talks. The **VoicePrint Refine Loop** section (2026-08) holds the edit-diffs behind G1–G5 with Sean's verbatim reasons — the highest-signal calibration data, because each diff shows exactly where the generated voice missed and how he corrected it.
 
 **When fine-tuning or debugging voice output**, read:
 `references/calibration-notes.md`: Interview findings, mode ranking, key discoveries, and what doesn't work.
