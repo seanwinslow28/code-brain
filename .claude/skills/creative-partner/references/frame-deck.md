@@ -12,9 +12,12 @@ Udit Akhouri).
 forcing move (what you must do / are banned from) · provenance · authored.
 
 **Per-run selection:** 4 frames — 2 native to the axis's domain, 1 foreign,
-1 wild — logged in the `### diverge:` block header. Sean may override the
-selection. A frame's home domain describes where it came from, not where it
-may be used: cross-domain application is the point.
+1 wild — logged in the `### diverge:` block header. Sean confirms or swaps
+before dispatch. A frame's home domain describes where it came from, not
+where it may be used: cross-domain application is the point. An axis outside
+the four home domains maps to the closest one by the kind of thinking
+required — the mapping is stated aloud with the proposed cards and defines
+"native" for that run (rule detail in `divergence-stage.md`).
 
 **The deck is not frozen.** Every option a run produces is stamped with its
 frame id, so rulings accumulate per frame; frames earn or lose their slots by
@@ -53,8 +56,9 @@ Sean's call, on evidence. Machines propose deck changes as candidates only.
 ### silhouette-first
 - **Persona:** a 1950s animation layout artist staging the wide shot.
 - **Forcing move:** every option must read in silhouette, in one
-  establishing frame, on mute. Ban anything that needs a paragraph to
-  visualize.
+  establishing frame, on mute. Ban any option whose defining distinction
+  depends on color, texture, dialogue, labels, or explanatory context
+  rather than shape, pose, and staging.
 - **Provenance:** staging/silhouette principle (2d-animation principles;
   Tartakovsky visual-storytelling lineage). Authored 2026-08-03.
 
@@ -80,9 +84,10 @@ Sean's call, on evidence. Machines propose deck changes as candidates only.
 ### pre-mortem
 - **Persona:** a PM writing the post-mortem of this idea's failed launch,
   dated one year out.
-- **Forcing move:** assume the current lean shipped and failed; name the
-  causes of death, then derive each option from a cause. Ban optimism that
-  doesn't answer a named cause.
+- **Forcing move:** backcast a dated causal sequence from launch to
+  failure. Every option must be an early intervention, gate, or cheapest
+  test tied to one named link in that sequence. Ban any option without an
+  explicit cause-to-intervention link.
 - **Provenance:** pre-mortem (pm-skills, pm-execution). Authored 2026-08-03.
 
 ### north-star
@@ -112,9 +117,10 @@ Sean's call, on evidence. Machines propose deck changes as candidates only.
 
 ### inversion
 - **Persona:** a saboteur designing the guaranteed failure. *(wild)*
-- **Forcing move:** first specify how to make the thing fail with certainty,
-  then invert each failure cause into an option. Ban starting from what
-  would work.
+- **Forcing move:** design deliberate anti-goal behaviors — what we would
+  do on purpose to guarantee the wrong outcome — then reverse ONE hidden
+  operating assumption per option into a design principle. Ban mitigations,
+  gates, tests, and contingency plans; those belong to `pre-mortem`.
 - **Provenance:** Reversal/Inversion + Reverse Brainstorming (brainstorm
   catalog). Authored 2026-08-03.
 

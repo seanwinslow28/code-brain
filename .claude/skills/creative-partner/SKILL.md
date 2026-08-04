@@ -1,6 +1,6 @@
 ---
 name: creative-partner
-description: Use when Sean brings a problem, idea, or decision to think through with a partner — any domain (story, art direction, product/work execution, frontend, or anything else). Triggers - "help me think through X", "let's ideate on", "partner session", "I'm stuck on", "challenge this idea", "cast a wide net". USER-INVOKED. NOT for anima brief sessions (brainstorm-front-door owns those), plan stress-tests (grilling owns those), or prose voice work (writing-voice-modes owns that).
+description: Use only when Sean explicitly asks for an interactive partner session or collaborative option-and-decision deliberation — "partner session", "help me think through these options", "let's ideate on", "challenge this idea" — in any domain (story, art direction, product/work execution, frontend, or anything else). Do not trigger merely because a request mentions a problem, a decision, being stuck, or casting a wide net; requests to execute, diagnose, review, research, answer a factual question, or produce an artifact stay with their owning workflow. USER-INVOKED. NOT for anima brief sessions (brainstorm-front-door owns those), plan stress-tests (grilling owns those), or prose voice work (writing-voice-modes owns that).
 ---
 
 # Creative Partner — the session orchestrator
@@ -34,24 +34,43 @@ version and which pack version shaped a session.
 ## Step 0 — open the session sidecar
 
 Create one file per session at
-`$CREATIVE_HARNESS_HOME/partner-sessions/<YYYY-MM-DD>-<slug>.md`
-(`$CREATIVE_HARNESS_HOME` defaults to `~/.creative-harness/`). Never place a
-sidecar inside a repository working tree — sidecars carry Sean's verbatim
-words and live only in the harness home. If the file can't be written, keep
-the identical discipline inline in the conversation and say so.
+`$CREATIVE_HARNESS_HOME/partner-sessions/<YYYY-MM-DD>-<slug>.md`.
+
+**Location preflight — before any create, read, or append:** resolve the
+harness home and the target file to canonical absolute paths, following
+symlinks. If `CREATIVE_HARNESS_HOME` is unset or empty, use
+`~/.creative-harness/`; treat the environment value as a quoted literal
+path. Refuse to start unless the resolved target is under
+`<harness-home>/partner-sessions/` AND outside every git working tree
+(`git -C <dir> rev-parse` on the target's directory must fail). If either
+property cannot be proved, report the resolved path immediately and write
+nothing — sidecars carry Sean's verbatim words and land in a tracked tree
+never.
+
+**Write failures fail stop, not soft.** If initial creation, any append or
+header update, or any required read-back fails, tell Sean immediately and
+pause before the next proposal, question, lock, or divergence call. Retry
+only the failed operation; resume only after re-reading the file from disk
+proves the last durable entry and the failed mutation has landed.
+Conversation text is not a substitute sidecar and never counts as the
+deliverable.
 
 Full shape: `references/sidecar-contract.md`. The essentials:
 
-- **Header stamps:** skill name + SKILL.md content hash (`shasum -a 256`,
-  short form), pack name + hash or `pack: none`, the launched model, date,
-  the project this session serves, and a running `modes:` line.
+- **Header stamps** (exact grammar in the contract): full sha256 hashes of
+  all four skill files (SKILL.md + the three references), pack identity or
+  `pack: none`, the launched model, `date:`, the project this session
+  serves, and a running `modes:` list.
 - **LOCKED DECISIONS** — append-only, written only by you, only after Sean
   decides. History is never edited; a change is a `SUPERSEDES` entry.
 - **PROPOSALS LOG** — one block per axis, four content kinds only:
   `observations`, `options`, `recommendation`, `open_questions`.
 
 Record Sean's opening ask verbatim as the first locked entry. His words, not
-your paraphrase — the paraphrase is where the first drift happens.
+your paraphrase — the paraphrase is where the first drift happens. `[L1] ASK`
+is the session-origin lock, not a Sean decision: it is the sole exception to
+the reason-ask and only-after-Sean-decides rules, but it counts in lock
+numbering and the checkpoint cadence.
 
 ## The loop — one question at a time, recommendation first
 
@@ -65,8 +84,10 @@ Work the problem one axis at a time:
 3. **Ask one question.** One. Multiple questions at once is bewildering and
    produces mush the sidecar can't use. (The specific-push and the why-ask
    below are short follow-ups inside the same axis, not new questions.)
-4. **Sean decides; you lock.** Write the lock as a named specific, then
-   capture the reason (next section).
+4. **Sean decides; you complete reason capture, then lock.** Apply the
+   reason rules first (including the volunteered-reason and silence paths),
+   then append the decision and its optional why sub-line in ONE durable
+   mutation — never the lock first with the reason to follow.
 5. **Detect generic answers.** If Sean's decision is a category ("the second
    one", "something warmer"), push once for the specific before locking —
    same reflex as the reason rules' one-guess.
@@ -116,10 +137,18 @@ In-context rules drift over long sessions. Mechanically, at every 5th lock
    `<!-- honesty checkpoint @L10 — rules re-read -->`
 
 The trace is not optional — an unverifiable safety rule is a vibe, not a
-mechanism. **Soft bound:** at ~25 locks, or if context auto-compacts
-mid-session, say so plainly and recommend wrapping or splitting into a fresh
-session (the sidecar makes resumption trivial). Recommendation only; Sean
-decides.
+mechanism. **Soft bound:** at ~25 locks, say so plainly and recommend
+wrapping or splitting into a fresh session (resume procedure in the
+contract). Recommendation only; Sean decides.
+
+**After any context compaction:** do not continue the loop until you have
+re-read the loop + reason rules and re-read the sidecar from disk top to
+bottom, reconstructing the next lock ID, checkpoint and mode state, the
+current axis, any pending decision or reason, and frame confirmations. If
+the record cannot prove whether the current axis's one guess was already
+spent, take the stricter path and do not guess again. Then say compaction
+occurred and recommend wrapping or splitting; Sean still decides. Do not
+add the 5-lock audit comment unless that checkpoint is actually due.
 
 ## The divergence stage — default OFF
 
@@ -128,19 +157,22 @@ different frames, then a separate critic pass. It costs ~5–10x a single
 answer, so **the spend is always Sean's choice, never a default.**
 
 - **Triggers:** Sean invokes it by name ("diverge", "go wide", "cast a wide
-  net") — or you offer it when the loop's stall condition hits, phrased as an
-  option with its cost ("this looks like a divergence candidate — ~5 extra
-  calls, want it?").
+  net") **on an axis already in this session** — a wide-net ask about
+  outside work is a routing question, not a divergence trigger — or you
+  offer it when the loop's stall condition hits, phrased as an option with
+  its cost ("this looks like a divergence candidate — ~5 extra calls, want
+  it?").
 - **Budget:** 5 calls per run (4 isolated generators + 1 critic), one axis
   per run, one run per session by default; a second run requires Sean asking
   again explicitly.
 - **Frames:** 4 per run from `references/frame-deck.md` — 2 native to the
-  axis's domain, 1 foreign, 1 wild. You assign the axis's domain; offer the
-  selection to Sean in one line before dispatch (he may swap any card) —
+  axis's domain, 1 foreign, 1 wild. You assign the axis's domain (stated
+  aloud; out-of-domain axes map per the deck's rule); offer the selection to
+  Sean and **wait for his confirm-or-swap reply before dispatch** —
   selection logged, never silent.
-- **Mode tag:** the run lands as one `### diverge:<axis> — frames: [ids],
-  calls: 5` proposals block, and the sidecar header's `modes:` line records
-  every run.
+- **Mode tag:** the run lands as one `### diverge:<axis> — round: <n> —
+  frames: [ids], calls: 5` proposals block, and the sidecar header's
+  `modes:` list records every run.
 - **Critic traps are machine hypotheses only** — labeled
   `machine_fate_hypothesis`, never Sean-authored verdicts. Machines write
   candidates; Sean writes fates.
