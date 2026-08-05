@@ -46,6 +46,8 @@ Topic 2 classifies **temperature/top-p tuning** and **"think outside the box" pr
 
 Topic 2 is unambiguous: homogeneous multi-agent debate (many instances of one model) hits **consensus collapse** and rarely beats single-agent self-consistency while burning far more compute. Heterogeneous debate — genuinely different foundation architectures — is what forces traversal of non-overlapping semantic regions. Reported: 91% vs 82% accuracy on GSM-8K.
 
+> ⚠️ **Date caveat (Move C).** The 91%/82% figure is real and quoted accurately, but it is [Hegazy 2024, arXiv:2410.12853](https://arxiv.org/abs/2410.12853) — a **2024 result on 2024-era models** (Gemini-Pro, Mixtral 7Bx8, PaLM 2-M vs GPT-4), and neither DR-cited source is the paper. Do not present it as current. The mechanism claim stands; the number needs its vintage attached.
+
 Sean already operates exactly this: `llm-council` (4 vendors + chairman) and `fusion-discovery-council` (OpenRouter Fusion panel + judge). The mechanism with the strongest evidence in the entire map is one he has running infrastructure for and lived incidents about.
 
 **What changes:** this is the strongest candidate for **rung #1**. It satisfies the value gate's Solution slot with an artifact that already exists, and it lands in the native-fleet-experience lane approved on 2026-08-04. The baseline experiment writes itself: same prompt, homogeneous panel vs heterogeneous panel, measured on semantic rather than lexical diversity.
@@ -65,6 +67,8 @@ The reports openly conflict here — *AI EDAM* (2025) found GPT-4 with SCAMPER m
 **What changes:** "which human creativity techniques survive the port, and why" is a Building the Ladder arc rather than a single rung. The conflict is a feature — publishing it with the disagreement intact is exactly the honest-failure posture the masthead promises.
 
 ## Finding 7 — The masthead thesis needs a sharper edge than "convergent output"
+
+> ⚠️ **PARTIALLY SUPERSEDED — read [the Finding 7 amendment](#amendment-to-finding-7--the-masthead-re-cut-cannot-be-carried-by-d--0414) before acting on this.** Move C found *d* = 0.414 rests on only 2 studies with a null during-vs-after moderator test (*p* = .141). The task-type contrast below stands; the "lead with stickiness" recommendation does not, in its original form.
 
 The homogenization meta-analysis (19 studies, 61 effect sizes) shows the effect is strongly task-dependent, and the dependency cuts against the loose version of the thesis:
 
@@ -93,7 +97,7 @@ Notably, under effective semantic diversity, **preference-tuned models look more
 2. **Rung #1: heterogeneous vs homogeneous panels** (Finding 4) — strongest evidence, infrastructure already exists, native to Sean's lane.
 3. **Rung #2: morphological analysis** (Finding 5) — concrete effect sizes, travels to readers without a fleet.
 4. **The folklore post** (Finding 3) — can run early and independently; it's the credibility opener.
-5. Re-cut the masthead toward persistence (Finding 7) before the doc re-anchor ticket runs.
+5. ~~Re-cut the masthead toward persistence (Finding 7) before the doc re-anchor ticket runs.~~ **Revised 2026-08-05 (Move C):** do NOT re-cut the masthead onto *d* = 0.414 — 2 studies, null moderator test. Either ship stickiness with the *n* and hedge attached, demote it from thesis to open question, or make it a rung ("the field has two studies on whether this sticks; here is a third"). See the [Finding 7 amendment](#amendment-to-finding-7--the-masthead-re-cut-cannot-be-carried-by-d--0414).
 
 ## Verification debt — PARTIALLY CLEARED 2026-08-05
 
