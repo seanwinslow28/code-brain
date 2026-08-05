@@ -19,8 +19,15 @@ Usage:
     python3 scripts/gemini_dr.py --query "Your question" --tier max --no-confirm
 
 Note: Status values from the Interactions API are:
-    "in_progress", "requires_action", "completed", "failed", "cancelled", "incomplete"
+    "in_progress", "requires_action", "completed", "failed", "cancelled",
+    "incomplete", "budget_exceeded", "queued"
     The plan spec referenced "running" — this helper uses the actual SDK values.
+
+Requires google-genai >= 2.0.0. Google hard-rejects the legacy 1.x Interactions
+schema with a 400 ("no longer supported... upgrade to >= 2.0.0"), so the 1.x
+pin failed on every live call. The 2.x Interaction model returns `.steps`
+(a typed union including ModelOutputStep) instead of the old flat `.outputs`
+list — see _extract_report_text().
 """
 
 from __future__ import annotations
@@ -49,10 +56,23 @@ from lib.vault_io import daily_note_path, inject_at_anchor
 AGENT_NAME = "gemini-dr"
 ANCHOR_FALLBACK_HEADING = "## Gemini Research"
 
-# Terminal statuses from the Interactions API (v1.74.0).
+# Terminal statuses from the Interactions API (google-genai 2.x).
 # Anything NOT in _TERMINAL_STATUSES is treated as still-running, including
 # unknown future status values (e.g. "queued", "requires_action", "running").
-_TERMINAL_STATUSES = {"completed", "failed", "cancelled", "incomplete"}
+# "budget_exceeded" is new in 2.x and is terminal — without it the helper would
+# poll a dead interaction until the 65-minute wall.
+_TERMINAL_STATUSES = {
+    "completed",
+    "failed",
+    "cancelled",
+    "incomplete",
+    "budget_exceeded",
+}
+
+# Keychain slot name (service: com.sean.agents.gemini_api_key) and the
+# environment / .env variable used as the fresh-machine fallback.
+CREDENTIAL_NAME = "gemini_api_key"
+ENV_VAR_NAME = "GEMINI_API_KEY"
 
 
 # ─── Config loading ─────────────────────────────────────────────────────────
@@ -68,6 +88,74 @@ def _load_gemini_cfg() -> dict:
     with open(config_path, "rb") as f:
         raw = tomllib.load(f)
     return raw.get("gemini", {})
+
+
+# ─── Credential resolution ───────────────────────────────────────────────────
+
+
+def _read_env_file_var(env_path: Path, var: str) -> str | None:
+    """Read a single VAR=value out of a .env file. Returns None if absent.
+
+    Deliberately does NOT mutate os.environ and does NOT import python-dotenv —
+    the file may hold several unrelated third-party keys, and we want exactly
+    one of them. Handles optional `export ` prefixes and quoted values.
+    """
+    try:
+        text = env_path.read_text(encoding="utf-8")
+    except OSError:
+        return None
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[len("export "):].lstrip()
+        key, sep, value = line.partition("=")
+        if not sep or key.strip() != var:
+            continue
+        value = value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in ("'", '"'):
+            value = value[1:-1]
+        return value.strip() or None
+    return None
+
+
+def env_file_candidates(repo_root: Path) -> list[Path]:
+    """.env files searched for the fallback key, in precedence order."""
+    return [
+        Path(__file__).parent.parent / ".env",  # agents-sdk/.env
+        repo_root / ".env",                     # repo root .env
+    ]
+
+
+def resolve_api_key(repo_root: Path) -> tuple[str | None, str]:
+    """Resolve the Gemini API key, returning (key, source_label).
+
+    Order:
+      1. macOS Keychain slot ``com.sean.agents.gemini_api_key`` — the documented
+         and preferred home for fleet credentials.
+      2. ``GEMINI_API_KEY`` in the process environment.
+      3. ``GEMINI_API_KEY`` in agents-sdk/.env, then repo-root .env — the
+         fresh-machine fallback (reference-runner pattern), so a box without a
+         populated Keychain can still run.
+
+    Returns (None, "none") when nothing resolves. The key value is never logged,
+    printed, or included in the source label.
+    """
+    key = get_credential(CREDENTIAL_NAME)
+    if key:
+        return key, "keychain"
+
+    env_key = os.environ.get(ENV_VAR_NAME, "").strip()
+    if env_key:
+        return env_key, f"env:{ENV_VAR_NAME}"
+
+    for env_path in env_file_candidates(repo_root):
+        file_key = _read_env_file_var(env_path, ENV_VAR_NAME)
+        if file_key:
+            return file_key, f"dotenv:{env_path}"
+
+    return None, "none"
 
 
 # ─── Cost / budget helpers ───────────────────────────────────────────────────
@@ -317,6 +405,52 @@ def inject_or_append_digest(
     return "appended-section"
 
 
+# ─── Report extraction ───────────────────────────────────────────────────────
+
+
+def _extract_report_text(interaction) -> str | None:
+    """Pull the final report body out of a completed 2.x Interaction.
+
+    google-genai 2.x replaced the flat ``interaction.outputs`` list with
+    ``interaction.steps`` — a typed union where each step carries a ``type``
+    discriminator ("thought", "google_search_call", "model_output", ...). The
+    Deep Research report lands in the LAST ``model_output`` step, whose
+    ``.content`` is itself a list of typed parts (TextContent for the answer
+    body, and typically a second TextContent for the sources block).
+
+    Two invariants preserved from the 1.x helper:
+      * ALL text-bearing content parts of that step are concatenated — taking
+        only ``content[0]`` would drop the sources block, the mirror image of
+        the Phase 4 night 1 TD5 bug where ``outputs[-1]`` dropped the answer.
+      * Non-text parts (thought summaries, images) carry no ``.text`` and are
+        skipped rather than crashing.
+
+    Falls back to ``interaction.output_text`` (2.x convenience aggregate) when
+    no model_output step is present. Returns None when nothing textual exists.
+    """
+    steps = getattr(interaction, "steps", None) or []
+
+    model_output_steps = [
+        step for step in steps
+        if str(getattr(step, "type", "")) == "model_output"
+    ]
+    # Fall back to the last step of any type when the discriminator is absent
+    # (defensive: an UnknownStep from a future API revision still has .content).
+    candidates = model_output_steps or ([steps[-1]] if steps else [])
+
+    for step in reversed(candidates):
+        parts = getattr(step, "content", None) or []
+        text_parts = [
+            part.text for part in parts
+            if getattr(part, "text", None)
+        ]
+        if text_parts:
+            return "\n\n".join(text_parts)
+
+    output_text = getattr(interaction, "output_text", None)
+    return output_text or None
+
+
 # ─── Polling ─────────────────────────────────────────────────────────────────
 
 
@@ -338,14 +472,17 @@ def poll_interaction(
         RuntimeError: On timeout.
 
     Note: Actual SDK status values are "in_progress", "requires_action",
-    "completed", "failed", "cancelled", "incomplete" — not "running".
+    "completed", "failed", "cancelled", "incomplete", "budget_exceeded",
+    "queued" — not "running".
     """
     deadline = time.time() + max_poll_seconds
     last_status = None
 
     while time.time() < deadline:
         interaction = client.interactions.get(interaction_id)
-        status = interaction.status
+        # 2.x can return an UnrecognizedStr for future status values; str() it
+        # so set membership and equality work on both.
+        status = str(interaction.status)
 
         if status != last_status:
             logger.info(f"  interaction={interaction_id[:8]} status={status}")
@@ -357,19 +494,7 @@ def poll_interaction(
                 usage = interaction.usage
 
             if status == "completed":
-                # Concatenate ALL outputs that carry .text (skips ThoughtContent
-                # which has no text attribute — that's Gemini's internal reasoning).
-                # Deep Research returns 3 outputs: [ThoughtContent, TextContent
-                # (answer), TextContent (sources)]. Earlier code grabbed
-                # outputs[-1] which is the sources block only — answer body
-                # was silently discarded. See Phase 4 night 1 handoff TD5.
-                outputs = getattr(interaction, "outputs", None) or []
-                text_parts = [
-                    out.text for out in outputs
-                    if getattr(out, "text", None)
-                ]
-                report_text = "\n\n".join(text_parts) if text_parts else None
-                return status, report_text, usage
+                return status, _extract_report_text(interaction), usage
             else:
                 error = getattr(interaction, "error", None)
                 err_msg = str(error) if error else f"status={status}"
@@ -480,15 +605,17 @@ def run(
         print("=== END DRY RUN ===")
         return 0
 
-    # Load API key from Keychain
-    api_key = get_credential("gemini_api_key")
+    # Resolve API key: Keychain first, then env / .env fallback.
+    api_key, key_source = resolve_api_key(config.repo_root)
     if not api_key:
         print(
-            "ERROR: gemini_api_key not found in Keychain. "
-            "Set with: python3 agents-sdk/lib/keychain.py set gemini_api_key <key>",
+            f"ERROR: {CREDENTIAL_NAME} not found. Set the Keychain slot with:\n"
+            f"  python3 agents-sdk/lib/keychain.py set {CREDENTIAL_NAME} <key>\n"
+            f"or export {ENV_VAR_NAME} / add it to agents-sdk/.env or the repo-root .env.",
             file=sys.stderr,
         )
         return 2
+    logger.info(f"API key resolved from: {key_source}")
 
     # Live run
     t_start = time.time()
@@ -496,12 +623,16 @@ def run(
         client = genai.Client(api_key=api_key)
 
         logger.info(f"Calling Gemini DR: agent={agent_id} query={query[:80]!r}")
+        # google-genai 2.x call shape, validated against the live API 2026-07-30.
+        # `store` and `agent_config` are dropped: background=True already
+        # persists the interaction for polling, and the extra agent_config keys
+        # only requested thinking summaries, which _extract_report_text() skips
+        # anyway. Keeping the payload minimal is what the working reference
+        # runner used, so it is the shape known to pass the 2.x schema check.
         interaction = client.interactions.create(
             input=query,
             agent=agent_id,
             background=True,
-            store=True,
-            agent_config={"type": "deep-research", "thinking_summaries": "auto"},
         )
         interaction_id = interaction.id
         logger.info(f"Interaction created: id={interaction_id}")

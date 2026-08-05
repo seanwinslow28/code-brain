@@ -1,7 +1,13 @@
-"""Tests for scripts.gemini_dr — Phase 1 (v3.25.0).
+"""Tests for scripts.gemini_dr — google-genai 2.x Interactions API.
 
 All tests are fully mocked — no real API calls, no vault writes to production.
 Mock target: scripts.gemini_dr.genai.Client
+
+Every test that reaches run() must patch BOTH ``scripts.gemini_dr.genai`` and
+the credential path, and assert ``mock_genai.Client.assert_not_called()``. A
+2026-06-18 regression let a stale ledger date defeat a cap refusal and fall
+through to a real 65-minute Deep Research call; the guards below exist so that
+cannot recur.
 """
 
 from __future__ import annotations
@@ -21,16 +27,72 @@ if str(SDK_ROOT) not in sys.path:
     sys.path.insert(0, str(SDK_ROOT))
 
 from scripts.gemini_dr import (
+    _extract_report_text,
+    _read_env_file_var,
     append_ledger,
     build_topical_note,
     check_caps,
     ledger_totals,
     poll_interaction,
     predicted_cost,
+    resolve_api_key,
     run,
     slugify,
     warn_if_approaching_cap,
 )
+
+
+# ─── 2.x Interaction shape builders ──────────────────────────────────────────
+#
+# google-genai 2.x returns Interaction.steps — a typed union discriminated on
+# `.type` — instead of the 1.x flat Interaction.outputs list. The report body
+# lives in the last "model_output" step, whose .content is a list of typed
+# parts (TextContent for the answer, usually a second TextContent for sources).
+
+
+def _text_part(text: str):
+    """A TextContent-shaped content part."""
+    part = MagicMock()
+    part.type = "text"
+    part.text = text
+    return part
+
+
+def _model_output_step(*texts: str):
+    """A ModelOutputStep carrying one TextContent part per argument."""
+    step = MagicMock()
+    step.type = "model_output"
+    step.content = [_text_part(t) for t in texts]
+    return step
+
+
+def _thought_step(text: str = "Let me search for sources..."):
+    """A ThoughtStep — text-bearing, but Gemini's internal reasoning.
+
+    Must never appear in the report body.
+    """
+    step = MagicMock()
+    step.type = "thought"
+    step.content = [_text_part(text)]
+    return step
+
+
+def _search_call_step():
+    """A GoogleSearchCallStep — a tool call with no text content at all."""
+    step = MagicMock()
+    step.type = "google_search_call"
+    step.content = None
+    return step
+
+
+def _interaction(status: str, steps=None, output_text=None, usage=None):
+    """A 2.x Interaction with the fields the helper reads."""
+    interaction = MagicMock()
+    interaction.status = status
+    interaction.steps = steps
+    interaction.output_text = output_text
+    interaction.usage = usage
+    return interaction
 
 
 # ─── Fixtures ────────────────────────────────────────────────────────────────
@@ -413,20 +475,14 @@ def test_cap_refusal_per_task(tmp_path: Path, gemini_cfg_default: dict):
 
 
 def test_polling_happy_path():
-    """Mock returns in_progress twice, then completed with text."""
+    """Mock returns in_progress twice, then completed with a model_output step."""
     mock_client = MagicMock()
 
-    # First two calls: in_progress; third: completed with text
-    running_interaction = MagicMock()
-    running_interaction.status = "in_progress"
-    running_interaction.outputs = None
-
-    completed_interaction = MagicMock()
-    completed_interaction.status = "completed"
-    completed_text = MagicMock()
-    completed_text.text = "This is the research report."
-    completed_interaction.outputs = [completed_text]
-    completed_interaction.usage = None
+    running_interaction = _interaction("in_progress", steps=None)
+    completed_interaction = _interaction(
+        "completed",
+        steps=[_model_output_step("This is the research report.")],
+    )
 
     mock_client.interactions.get.side_effect = [
         running_interaction,
@@ -451,43 +507,103 @@ def test_polling_happy_path():
     assert mock_client.interactions.get.call_count == 3
 
 
-def test_polling_concatenates_multiple_text_outputs():
-    """Regression for Phase 4 night 1 TD5 bug: Deep Research returns
-    [ThoughtContent (no text), TextContent (answer), TextContent (sources)].
-    Helper must concatenate ALL .text-bearing outputs; earlier code grabbed
-    outputs[-1] which lost the answer body. See Phase 4 handoff TD5."""
+def test_polling_reads_steps_not_outputs():
+    """2.x migration guard: the helper must read Interaction.steps.
+
+    google-genai 2.x removed the flat ``.outputs`` list. An interaction that
+    only exposes the legacy attribute must NOT yield a report — otherwise a
+    future refactor could silently fall back to the dead 1.x shape.
+    """
+    legacy_only = MagicMock()
+    legacy_only.status = "completed"
+    legacy_only.steps = None
+    legacy_only.output_text = None
+    legacy_only.outputs = [_text_part("1.x-shaped body that must be ignored")]
+
+    assert _extract_report_text(legacy_only) is None
+
+
+def test_extract_concatenates_all_text_parts_of_model_output():
+    """Regression for Phase 4 night 1 TD5, carried into the 2.x shape.
+
+    Deep Research puts the answer and the sources block in two separate
+    TextContent parts of the same model_output step. Taking content[0] alone
+    would drop the sources; taking content[-1] would drop the answer.
+    """
+    step = _model_output_step(
+        "# The Answer\n\nThis is the actual research body.",
+        "**Sources:**\n1. example.com",
+    )
+    report_text = _extract_report_text(_interaction("completed", steps=[step]))
+
+    assert report_text == (
+        "# The Answer\n\nThis is the actual research body."
+        "\n\n**Sources:**\n1. example.com"
+    )
+
+
+def test_extract_skips_thought_and_tool_call_steps():
+    """Only model_output steps contribute — thoughts and tool calls never do."""
+    steps = [
+        _thought_step("internal reasoning that must not ship"),
+        _search_call_step(),
+        _model_output_step("# Report\n\nThe findings."),
+    ]
+    report_text = _extract_report_text(_interaction("completed", steps=steps))
+
+    assert report_text == "# Report\n\nThe findings."
+    assert "internal reasoning" not in report_text
+
+
+def test_extract_uses_last_model_output_step():
+    """When several model_output steps exist, the final one is the report."""
+    steps = [
+        _model_output_step("interim plan"),
+        _thought_step(),
+        _model_output_step("# Final Report\n\nThe real body."),
+    ]
+    report_text = _extract_report_text(_interaction("completed", steps=steps))
+
+    assert report_text == "# Final Report\n\nThe real body."
+
+
+def test_extract_falls_back_to_output_text():
+    """No model_output step → fall back to the 2.x output_text aggregate."""
+    interaction = _interaction(
+        "completed",
+        steps=None,
+        output_text="Aggregated report body.",
+    )
+    assert _extract_report_text(interaction) == "Aggregated report body."
+
+
+def test_extract_returns_none_when_empty():
+    """Nothing textual anywhere → None (run() writes '_(no report returned)_')."""
+    assert _extract_report_text(_interaction("completed", steps=[])) is None
+
+
+def test_polling_budget_exceeded_is_terminal():
+    """2.x added 'budget_exceeded' — it must raise, not poll to the wall."""
     mock_client = MagicMock()
-
-    completed = MagicMock()
-    completed.status = "completed"
-
-    thought = MagicMock(spec=['summary', 'type'])  # no .text
-    answer = MagicMock()
-    answer.text = "# The Answer\n\nThis is the actual research body."
-    sources = MagicMock()
-    sources.text = "**Sources:**\n1. example.com"
-
-    completed.outputs = [thought, answer, sources]
-    completed.usage = None
-    mock_client.interactions.get.return_value = completed
+    exceeded = _interaction("budget_exceeded", steps=None)
+    exceeded.error = "budget exhausted"
+    mock_client.interactions.get.return_value = exceeded
 
     import logging
     logger = logging.getLogger("test")
 
     with patch("time.sleep"):
-        status, report_text, usage = poll_interaction(
-            mock_client,
-            interaction_id="test-iid",
-            poll_interval=0,
-            max_poll_seconds=60,
-            logger=logger,
-        )
+        with pytest.raises(RuntimeError, match="non-success state"):
+            poll_interaction(
+                mock_client,
+                interaction_id="budget-iid",
+                poll_interval=0,
+                max_poll_seconds=60,
+                logger=logger,
+            )
 
-    assert status == "completed"
-    assert "The Answer" in report_text
-    assert "actual research body" in report_text
-    assert "Sources:" in report_text
-    assert report_text == "# The Answer\n\nThis is the actual research body.\n\n**Sources:**\n1. example.com"
+    # Terminal on the FIRST poll — no spin.
+    assert mock_client.interactions.get.call_count == 1
 
 
 # ─── 9. Polling — timeout ────────────────────────────────────────────────────
@@ -825,3 +941,189 @@ def test_run_warn_called_with_mtd_plus_pred(tmp_path: Path):
     )
     # The daily-cap refusal must fire before any API call — never hit the network.
     mock_genai.Client.assert_not_called()
+
+
+# ─── 19. Credential resolution: Keychain first, .env fallback ────────────────
+
+
+def test_resolve_api_key_prefers_keychain(tmp_path: Path, monkeypatch):
+    """Keychain slot wins over both the environment and any .env file."""
+    monkeypatch.setenv("GEMINI_API_KEY", "env-key")
+    (tmp_path / ".env").write_text("GEMINI_API_KEY=dotenv-key\n", encoding="utf-8")
+
+    with patch("scripts.gemini_dr.get_credential", return_value="keychain-key"):
+        key, source = resolve_api_key(tmp_path)
+
+    assert key == "keychain-key"
+    assert source == "keychain"
+
+
+def test_resolve_api_key_falls_back_to_env_var(tmp_path: Path, monkeypatch):
+    """Empty Keychain → GEMINI_API_KEY from the process environment."""
+    monkeypatch.setenv("GEMINI_API_KEY", "env-key")
+
+    with patch("scripts.gemini_dr.get_credential", return_value=None):
+        key, source = resolve_api_key(tmp_path)
+
+    assert key == "env-key"
+    assert source == "env:GEMINI_API_KEY"
+
+
+def test_resolve_api_key_falls_back_to_dotenv(tmp_path: Path, monkeypatch):
+    """Empty Keychain and no env var → repo-root .env (fresh-machine path)."""
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    env_file = tmp_path / ".env"
+    env_file.write_text(
+        "# comment line\n"
+        "OPENAI_API_KEY=some-other-key\n"
+        "GEMINI_API_KEY=dotenv-key\n",
+        encoding="utf-8",
+    )
+
+    with (
+        patch("scripts.gemini_dr.get_credential", return_value=None),
+        patch("scripts.gemini_dr.env_file_candidates", return_value=[env_file]),
+    ):
+        key, source = resolve_api_key(tmp_path)
+
+    assert key == "dotenv-key"
+    assert source.startswith("dotenv:")
+
+
+def test_resolve_api_key_none_when_nothing_set(tmp_path: Path, monkeypatch):
+    """Nothing anywhere → (None, 'none') so run() can exit 2 cleanly."""
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+
+    with (
+        patch("scripts.gemini_dr.get_credential", return_value=None),
+        patch("scripts.gemini_dr.env_file_candidates", return_value=[tmp_path / "nope.env"]),
+    ):
+        key, source = resolve_api_key(tmp_path)
+
+    assert key is None
+    assert source == "none"
+
+
+@pytest.mark.parametrize(
+    "line,expected",
+    [
+        ("GEMINI_API_KEY=plain", "plain"),
+        ('GEMINI_API_KEY="double-quoted"', "double-quoted"),
+        ("GEMINI_API_KEY='single-quoted'", "single-quoted"),
+        ("export GEMINI_API_KEY=exported", "exported"),
+        ("GEMINI_API_KEY =  spaced  ", "spaced"),
+        ("#GEMINI_API_KEY=commented", None),
+        ("GEMINI_API_KEY=", None),
+        ("OTHER_KEY=nope", None),
+    ],
+)
+def test_read_env_file_var_parsing(tmp_path: Path, line: str, expected):
+    """.env parsing handles quotes, export prefixes, comments, and blanks."""
+    env_file = tmp_path / ".env"
+    env_file.write_text(f"{line}\n", encoding="utf-8")
+    assert _read_env_file_var(env_file, "GEMINI_API_KEY") == expected
+
+
+def test_read_env_file_var_missing_file(tmp_path: Path):
+    """A missing .env is not an error — it just yields None."""
+    assert _read_env_file_var(tmp_path / "absent.env", "GEMINI_API_KEY") is None
+
+
+# ─── 20. Live call shape pinned to google-genai 2.x ──────────────────────────
+
+
+def test_run_success_uses_2x_create_shape(tmp_path: Path, monkeypatch):
+    """End-to-end success path pins the 2.x create() kwargs and steps parsing.
+
+    Guards the migration: `store` and `agent_config` are gone, and the report
+    body comes from a model_output step. Hermetic — genai is a MagicMock, so
+    no network is touched even though the cap check passes.
+    """
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    ledger = tmp_path / "gemini-spend.json"
+    output_dir = tmp_path / "research"
+    output_dir.mkdir()
+
+    completed = _interaction(
+        "completed",
+        steps=[
+            _thought_step("internal reasoning"),
+            _model_output_step("# Findings\n\nBody.", "**Sources:**\n1. example.com"),
+        ],
+    )
+
+    with (
+        patch("scripts.gemini_dr._load_gemini_cfg") as mock_cfg,
+        patch("scripts.gemini_dr.load_config") as mock_load_config,
+        patch("scripts.gemini_dr.setup_logger") as mock_logger,
+        patch("scripts.gemini_dr.record_run"),
+        patch("scripts.gemini_dr.get_credential", return_value="fake-api-key"),
+        patch("scripts.gemini_dr.genai") as mock_genai,
+        patch("time.sleep"),
+    ):
+        mock_cfg.return_value = {
+            "agent_id_dr": "deep-research-preview-04-2026",
+            "agent_id_max": "deep-research-max-preview-04-2026",
+            "poll_interval_seconds": 0,
+            "max_poll_seconds": 60,
+            "output_dir": str(output_dir),
+            "output_anchor": "research-digest",
+            "ledger_dir": str(tmp_path),
+            "budget": {
+                "max_per_task_usd": 7.00,
+                "monthly_cap_usd": 50.00,
+                "daily_cap_usd": 20.00,
+                "dr_predicted_usd": 2.00,
+                "max_predicted_usd": 5.00,
+                "prediction_multiplier": 1.4,
+            },
+        }
+        mock_config = MagicMock()
+        mock_config.repo_root = tmp_path
+        mock_config.vault_root = tmp_path
+        mock_config.log_dir = tmp_path / "90_system" / "agent-logs"
+        mock_config.log_dir.mkdir(parents=True, exist_ok=True)
+        mock_config.log_level = "INFO"
+        mock_load_config.return_value = mock_config
+        mock_logger.return_value = MagicMock()
+
+        client = mock_genai.Client.return_value
+        created = MagicMock()
+        created.id = "iid-2x-001"
+        client.interactions.create.return_value = created
+        client.interactions.get.return_value = completed
+
+        result = run(
+            query="does the 2x shape work",
+            tier="dr",
+            dry_run=False,
+            no_confirm=False,
+            ledger_path_override=ledger,
+        )
+
+    assert result == 0
+
+    # --- create() call shape is the validated 2.x one ---
+    _, kwargs = client.interactions.create.call_args
+    assert kwargs == {
+        "input": "does the 2x shape work",
+        "agent": "deep-research-preview-04-2026",
+        "background": True,
+    }, f"unexpected create() kwargs: {kwargs}"
+    assert "store" not in kwargs
+    assert "agent_config" not in kwargs
+
+    # --- report body came from the model_output step, thoughts excluded ---
+    notes = list(output_dir.glob("*.md"))
+    assert len(notes) == 1
+    body = notes[0].read_text(encoding="utf-8")
+    assert "# Findings" in body
+    assert "**Sources:**" in body
+    assert "internal reasoning" not in body
+    assert "interaction_id: iid-2x-001" in body
+
+    # --- ledger got exactly one entry at the predicted DR cost ---
+    entries = json.loads(ledger.read_text(encoding="utf-8"))
+    assert len(entries) == 1
+    assert entries[0]["interaction_id"] == "iid-2x-001"
+    assert entries[0]["cost_usd"] == pytest.approx(2.80)
