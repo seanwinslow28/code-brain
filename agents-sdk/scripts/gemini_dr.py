@@ -413,42 +413,49 @@ def _extract_report_text(interaction) -> str | None:
 
     google-genai 2.x replaced the flat ``interaction.outputs`` list with
     ``interaction.steps`` — a typed union where each step carries a ``type``
-    discriminator ("thought", "google_search_call", "model_output", ...). The
-    Deep Research report lands in the LAST ``model_output`` step, whose
-    ``.content`` is itself a list of typed parts (TextContent for the answer
-    body, and typically a second TextContent for the sources block).
+    discriminator ("user_input", "thought", "google_search_call",
+    "model_output", ...).
 
-    Two invariants preserved from the 1.x helper:
-      * ALL text-bearing content parts of that step are concatenated — taking
-        only ``content[0]`` would drop the sources block, the mirror image of
-        the Phase 4 night 1 TD5 bug where ``outputs[-1]`` dropped the answer.
-      * Non-text parts (thought summaries, images) carry no ``.text`` and are
-        skipped rather than crashing.
+    CRITICAL: Deep Research emits the report across MULTIPLE ``model_output``
+    steps, not one. Measured on interaction v1_ChdvQ (2026-08-05, a real DR
+    run): 3 model_output steps of 12160 + 6273 + 25569 chars. Keeping only the
+    last step silently dropped 42% of the report — the whole first half of the
+    body — while still producing a long, well-formed, entirely plausible note.
+    So: concatenate EVERY model_output step, in order, and every text-bearing
+    content part within each. This is the same failure class as the Phase 4
+    night 1 TD5 bug (``outputs[-1]`` dropped the answer body), one level up.
 
-    Falls back to ``interaction.output_text`` (2.x convenience aggregate) when
-    no model_output step is present. Returns None when nothing textual exists.
+    ``interaction.output_text`` is NOT a whole-report aggregate — on that same
+    run it equalled only the final chunk (25569 chars). It is kept purely as a
+    degraded last resort for a response that carries no model_output step at
+    all, never as an equivalent source.
+
+    Non-text parts (thought summaries, images, citation blobs) carry no
+    ``.text`` and are skipped rather than crashing. Thought and tool-call steps
+    are excluded by type so internal reasoning never reaches the vault.
+
+    Returns None when nothing textual exists.
     """
     steps = getattr(interaction, "steps", None) or []
 
-    model_output_steps = [
-        step for step in steps
-        if str(getattr(step, "type", "")) == "model_output"
-    ]
-    # Fall back to the last step of any type when the discriminator is absent
-    # (defensive: an UnknownStep from a future API revision still has .content).
-    candidates = model_output_steps or ([steps[-1]] if steps else [])
+    text_parts: list[str] = []
+    for step in steps:
+        if str(getattr(step, "type", "")) != "model_output":
+            continue
+        for part in getattr(step, "content", None) or []:
+            text = getattr(part, "text", None)
+            if text and text.strip():
+                # Chunks arrive with leading "\n\n" separators; normalise so
+                # the joined body does not accumulate blank-line runs.
+                text_parts.append(text.strip())
 
-    for step in reversed(candidates):
-        parts = getattr(step, "content", None) or []
-        text_parts = [
-            part.text for part in parts
-            if getattr(part, "text", None)
-        ]
-        if text_parts:
-            return "\n\n".join(text_parts)
+    if text_parts:
+        return "\n\n".join(text_parts)
 
     output_text = getattr(interaction, "output_text", None)
-    return output_text or None
+    if output_text and output_text.strip():
+        return output_text
+    return None
 
 
 # ─── Polling ─────────────────────────────────────────────────────────────────

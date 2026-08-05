@@ -77,6 +77,14 @@ def _thought_step(text: str = "Let me search for sources..."):
     return step
 
 
+def _user_input_step(text: str = "the original question"):
+    """A UserInputStep — the echoed prompt. Must never appear in the report."""
+    step = MagicMock()
+    step.type = "user_input"
+    step.content = [_text_part(text)]
+    return step
+
+
 def _search_call_step():
     """A GoogleSearchCallStep — a tool call with no text content at all."""
     step = MagicMock()
@@ -555,20 +563,65 @@ def test_extract_skips_thought_and_tool_call_steps():
     assert "internal reasoning" not in report_text
 
 
-def test_extract_uses_last_model_output_step():
-    """When several model_output steps exist, the final one is the report."""
+def test_extract_concatenates_every_model_output_step():
+    """Deep Research chunks the report across MULTIPLE model_output steps.
+
+    Regression for the 2026-08-05 live run (interaction v1_ChdvQ): the report
+    arrived as 3 model_output steps of 12160 + 6273 + 25569 chars. Keeping only
+    the last dropped 42% of the body — Parts 1 through 3 — while still writing
+    a long, well-formed, entirely plausible note. Silent truncation, so the
+    only defence is an explicit test.
+    """
     steps = [
-        _model_output_step("interim plan"),
-        _thought_step(),
-        _model_output_step("# Final Report\n\nThe real body."),
+        _user_input_step("the original question"),
+        _model_output_step("# Report\n\n## Part 1\nFirst chunk."),
+        _thought_step("internal reasoning"),
+        _model_output_step("\n\n## Part 2\nSecond chunk."),
+        _model_output_step("\n\n## Part 3\nThird chunk."),
     ]
     report_text = _extract_report_text(_interaction("completed", steps=steps))
 
-    assert report_text == "# Final Report\n\nThe real body."
+    # Every chunk present, in order.
+    assert "## Part 1" in report_text
+    assert "## Part 2" in report_text
+    assert "## Part 3" in report_text
+    assert report_text.index("Part 1") < report_text.index("Part 2") < report_text.index("Part 3")
+    # Question and reasoning still excluded.
+    assert "original question" not in report_text
+    assert "internal reasoning" not in report_text
+    # Leading separators normalised — no blank-line runs at the seams.
+    assert "\n\n\n" not in report_text
+    assert report_text == (
+        "# Report\n\n## Part 1\nFirst chunk."
+        "\n\n## Part 2\nSecond chunk."
+        "\n\n## Part 3\nThird chunk."
+    )
+
+
+def test_extract_does_not_prefer_output_text_over_steps():
+    """output_text is NOT a whole-report aggregate — steps always win.
+
+    On the 2026-08-05 live run output_text equalled only the FINAL chunk, so
+    preferring it (or falling back to it while steps exist) truncates the
+    report exactly the way the original bug did.
+    """
+    steps = [
+        _model_output_step("# Full Report\n\nChunk one."),
+        _model_output_step("\n\nChunk two."),
+    ]
+    interaction = _interaction(
+        "completed",
+        steps=steps,
+        output_text="Chunk two.",  # what the real API returned: last chunk only
+    )
+    report_text = _extract_report_text(interaction)
+
+    assert "Chunk one." in report_text
+    assert "Chunk two." in report_text
 
 
 def test_extract_falls_back_to_output_text():
-    """No model_output step → fall back to the 2.x output_text aggregate."""
+    """No model_output step at all → output_text as a degraded last resort."""
     interaction = _interaction(
         "completed",
         steps=None,

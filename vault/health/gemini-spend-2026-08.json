@@ -1,0 +1,14 @@
+[
+  {
+    "interaction_id": "v1_ChdvQkZ6YXZ5OEpMNlYxTWtQbnRMMjJRZxIXb0JGemF2eThKTDZWMU1rUG50TDIyUWc",
+    "agent_id": "deep-research-preview-04-2026",
+    "tier": "dr",
+    "cost_predicted_usd": 2.8,
+    "cost_actual_usd": null,
+    "cost_usd": 2.8,
+    "wall_seconds": 538,
+    "query": "What exists today (weight post-2025 sources heavily) across these five areas, and does any of it publish per-entry tested verdicts with honest failures?\n\n1. Prompt or technique libraries that publish evaluation results per individual entry\n2. Versioned prompt registries with test suites attached\n3. 'Prompt pack' marketplaces \u2014 and the documented reasons buyers do or do not trust them\n4. Public benchmarks for creative, divergent, or open-ended LLM output quality\n5. Retraction and changelog practices in prompt-engineering communities\n\nDeliver two things: (a) a landscape matrix covering who each player is, what they publish per entry, what evidence standard they hold themselves to, and where the gaps are; (b) a directly cited answer to the question 'does any existing library publish per-entry tested verdicts that include honest failures and public retractions?'",
+    "created": "2026-08-05T10:43:06.614772Z",
+    "output_path": "/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-05-what-exists-today-weight-post-2025-sources-heavily-across-th.md"
+  }
+]
