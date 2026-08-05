@@ -95,10 +95,34 @@ Notably, under effective semantic diversity, **preference-tuned models look more
 4. **The folklore post** (Finding 3) — can run early and independently; it's the credibility opener.
 5. Re-cut the masthead toward persistence (Finding 7) before the doc re-anchor ticket runs.
 
-## Verification debt (must clear before anything ships)
+## Verification debt — PARTIALLY CLEARED 2026-08-05
 
-- Resolve the grounding-redirect citations for every figure quoted publicly: 91%/82%, +18.5%, *d* = 1.03, *d* = 0.70, *d* = 0.414, D = 16.50/13.60, $2.51B.
-- Confirm the named frameworks exist as described: iDesignGPT, IDEAFix, Genie, SELF-PARAM, xRAG, CreativityPrism, NoveltyBench, INFINITY-CHAT, Springboards/Flint, Techpresso AI Academy, Aksoy Capital.
-- Topic 1 is known-unreliable in detail (it asserts "Claude 3.7's 2M tokens, Gemini 2.0's 10M tokens", both false). Treat its specifics as unsourced until checked.
+A $0 [citation tier audit](deep-dives/2026-08-05-citation-tier-audit.md) resolved all 108 grounding-redirect URLs and classified them. **It materially changes how much of the above you can lean on. Read it before the reconvene.**
 
-A publication whose product is *tested verdicts with honest failures* cannot ship unverified numbers in the post that announces it. Clearing this debt is part of rung #1, not a chore after it.
+**The redirects resolve.** 108/108. DR output is cheaply auditable, and tier-auditing should become a standing pre-citation step for every future run.
+
+**The two reports are not equally trustworthy — not close:**
+
+| | Defensible sourcing (academic + primary) |
+|---|---|
+| Topic 2 (divergence evidence) | **43 / 48 = 90%** — NeurIPS, ACL, EACL, AAAI, PNAS, TACL, INFORMS, 4× Cambridge *AI EDAM*, ~15 arXiv |
+| Topic 1 (library prior art) | **14 / 60 = 23%** — against 39 vendor-marketing / SEO pages |
+
+**Findings 1 and 2 are now on probation.** Both derive from Topic 1, and the audit found two disqualifying defects: nine of its sixty citations are `futureagi.com`'s own SEO marketing (Future AGI is also row 1 of the landscape matrix — a vendor ranked first using its own comparison content), and **both load-bearing examples are self-reported**. The Techpresso "honest failures" claim rests on three of Techpresso's own product pages; the Aksoy Capital retraction-SLA claim rests on Aksoy Capital's own policy pages. Zero third-party verification for the finding the product bet leans on.
+
+The *shape* of Findings 1–2 may still be right — the seam thesis is plausible and Finding 2's split matches how the market obviously works. But it is currently unevidenced, and it must not be published until independently checked.
+
+**Findings 3–8 stand.** All derive from Topic 2's 90%-defensible base. Individual figures still need their primary source resolved before publication, but that is a lookup against a named paper, not archaeology.
+
+### Remaining debt
+
+- **Resolve primary sources for every publicly quoted figure:** 91%/82%, +18.5%, *d* = 1.03, *d* = 0.70, *d* = 0.414, D = 16.50/13.60. (Topic 2 — tractable; the papers are named and the URLs resolve.)
+- **Independently verify Techpresso and Aksoy Capital** actually do what their own pages claim. Free, and it settles whether the positioning claim is "nobody does this" or "two adjacent players do."
+- **Replace Topic 1 with a named-candidate falsification pass** rather than re-running the same landscape question. Merge with refocus-ticket item 2 (competitive checks). Detail in the audit note.
+- Drop the `$2.51B` market-size figure and the `10–30× creative diversity` claim unless independently sourced — the first traces to SEO content, the second to `springboards.ai`'s own blog.
+
+### The methodological lesson (worth a post on its own)
+
+Query shape determined source tier. A research-shaped question pulled 88% academic sources; a market-shaped question pulled 65% vendor marketing — same model, same tier, same day, same recency instruction. And the bad sources were not *stale*, they were aggressively fresh 2026 marketing, which recency filters cannot catch.
+
+A publication whose product is *tested verdicts with honest failures* cannot ship unverified numbers in the post announcing it. Clearing this debt is part of rung #1, not a chore after it.
