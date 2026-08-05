@@ -20,14 +20,14 @@ backfill is $0 (your subscription).
 READ FIRST:
 - .claude/skills/fusion-discovery-council/SKILL.md — the skill contract. Pay attention to §0
   (paths), §3 (flags — --supplement is OFF by default and stays off here), §4 + §4.1 (the exact
-  CLI invocation AND the single-session agent-driven flow), §5 (cost discipline + the $10/day cap),
+  CLI invocation AND the single-session agent-driven flow), §5 (cost discipline + the $30/day cap),
   §6 (the verification gate — relevance is yours to judge, verbatim-ness is the backstop's),
   §7 (NEVER git add/commit the vault).
 
 STEP 1 — RUN THE COUNCIL CLI (paid). One at a time, from the CLI working dir. Capture each printed
 "Verified ideas: N · dropped: M · $X.XX" line and keep a running daily total. If any run prints
 "Budget rejected", STOP, report what completed, and do NOT pass --force or raise tiers — resume
-tomorrow (the $10/day cap is checked against ACTUAL spend; it's the real guardrail).
+tomorrow (the $30/day cap is checked against ACTUAL spend; it's the real guardrail).
 
   cd /Users/seanwinslow/Code-Brain/code-brain/tools/llm-council
 
@@ -64,7 +64,7 @@ STEP 3 — VERIFY (the backstop). For EACH ledger, prove every quote is verbatim
 === REPORT BACK (one compact table) ===
 Columns: Topic | Verified ideas | Dropped | Cost | Gaps filled/total | verify_supplement (clean?)
          | Highest-signal pain point (1 line) | Sharpest blind-spot line (next-topic fuel)
-Then: total spend vs the $10/day cap.
+Then: total spend vs the $30/day cap.
 
 === DO NOT ===
 - git add / git commit anything under vault/ — just write the ledgers (+ briefs) and stop;

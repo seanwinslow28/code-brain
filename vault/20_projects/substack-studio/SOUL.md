@@ -1,104 +1,92 @@
-# Pencil & Prompt, the Soul (refocused 2026-06-29)
-## Have the agent think like me
+# Pencil & Prompt, the Soul (refocused 2026-08-04)
+## Push the agent past the median
 
-**Status:** The masthead. Read before the spec. This re-anchors the publication to the soul it started with, after the 2026-06-28 prompts-to-systems pivot drifted the masthead onto the *system framework*. The framework is not wrong. It was standing in the wrong place: the destination, not the front door. [POSITIONING-AND-EDITORIAL-SPEC.md](POSITIONING-AND-EDITORIAL-SPEC.md), [README.md](README.md), and [CLAUDE.md](CLAUDE.md) now derive from this doc. Where they disagree, this wins until explicitly revised.
+**Status:** The masthead. Read before the spec. This re-anchors the publication onto the divergence thesis after the taste-transfer premise died by Sean's own hand: one GPT Image 2 test with a simple prompt and a reference proved the thing the old masthead preached was a step nobody needed. The premise died; the honesty that killed it is the publication's DNA and it stays. Decisions and verbatim reasons: the partner-session sidecar (`~/.creative-harness/partner-sessions/2026-08-04-pencil-and-prompt-refocus.md`, locks L1-L7). [POSITIONING-AND-EDITORIAL-SPEC.md](POSITIONING-AND-EDITORIAL-SPEC.md), [SERIES-COMMAND-CENTER.md](SERIES-COMMAND-CENTER.md), [SKILL-PACKAGING-PLAN.md](SKILL-PACKAGING-PLAN.md), [README.md](README.md), and [CLAUDE.md](CLAUDE.md) derive from this doc. Where they disagree, this wins until explicitly revised.
 
-> Reconciles: the refocus continuation ([CONTINUATION-2026-06-29-refocus-partner-then-system.md](CONTINUATION-2026-06-29-refocus-partner-then-system.md)), the A/B/C lock + research (kept as evidence and destination), and Sean's two scoping calls on 2026-06-29 (the opener demo shape, and the both-tiers reader correction).
+> Evidence base: three independent research passes on 2026-08-05, all pointing the same direction: the [prior-art synthesis](research/2026-08-05-prior-art-synthesis.md) (two Gemini DR runs, tier-audited, Moves A/B/C verified), the [six-territory competitive check](research/2026-08-05-competitive-check-six-territories.md) ($0, every claim URL-backed), and the [territory pain validation](research/discovery/2026-08-05-territory-pain-validation.md) (six discovery runs, $23.04).
 
 ---
 
 ## 1. The north star
 
-**Have the agent think like me.**
+**The models got good. Now everything they make is the same. Build the partners and mechanisms that push agents past the median, and publish what actually happened.**
 
-You do not one-shot the thing that makes the work yours. You build a creative partner and teach it your taste, by brainstorming and interviewing with it, the same way this very publication was built. Then you build the system on top of that partner. Then you make art that is unmistakably yours. The journey is the product.
+Every serious user has felt it: the same artificial tone, the same obvious phrasing, the same brainstorm list everyone else got. The publication's job is not to complain about it (that observation is free everywhere) and not to sell a trick (tricks are free everywhere too). The job is to run the experiments: take a real job, show the median the model gives everyone, run one named divergence mechanism against it, and publish the verdict, including the weeks the mechanism loses.
 
-The line descends from Pi (pi.dev): *"there are many agent harnesses, but this one is yours,"* a Rifleman's-Creed riff about **control**, adapt the tool to you, not you to the tool. We keep the cadence and move the axis from control to **taste**. Pi makes the harness yours. Pencil & Prompt makes the agent's taste yours.
+Model-agnostic by construction: Claude, Codex, open-source models are interchangeable engines. When the mechanism is the product, the model is just the motor you swap.
 
-Spin seeds (not locked): "There are many agents. This one thinks like me." / "Many models. One taste: mine." / "This one's mine." (already the post-01 closer, so the line has continuity).
+**Precision rules for stating the thesis** (from the research round, non-negotiable):
 
-## 2. The arc: partner, then system, then art
+- The homogenization evidence is strongest on constrained, real-work ideation (d = 0.70) and weakest on free-form creative play (d = 0.12). State the thesis where it is strong: the sameness bites hardest on the work people actually get paid for.
+- **Do not lean on the "stickiness" number.** The persistence effect (d = 0.414, convergence following the human out of the session) rests on 2 studies with a null moderator test. It is an open question or a future rung ("the field has two studies on whether this sticks; here is a third"), never masthead support.
+- Do not use the $2.51B market figure or the 10-30x diversity claim. Both trace to vendor SEO.
 
-Three movements, in order. The order is the whole point.
+## 2. The claim underneath (what nobody else does)
 
-1. **Build the partner.** Brainstorm and interview the agent into your taste. Bounce ideas off it. Teach it what you like, what you reject, the rules of your hand. Hand it specifics and watch the median output become yours. This is the on-ramp, and the first posts.
-2. **Build the system.** Once you have a partner whose taste you can name, you can spec it, gate it, version it, benchmark it. This is where the A/B/C research lands, as the destination the partner arc earns, not the front door.
-3. **Make the art.** The work that is unmistakably yours, on top of the partner and the system.
+Three research passes, three different methods, one seam: **the mechanism is the commodity, the verdict is the product.** Free equivalents cover the mechanism in five of six territories we checked, and publish an evaluation of it in zero. The best free adversarial-review tool says it in its own README: "this project has not independently benchmarked review quality."
 
-Never sell step 3 as a one-shot. The honesty is the differentiator. Not "prompt this and it is you," but "here is how you build the partner, then the system, then the art."
+And the precise form of the library claim, stated so it survives a skeptic (broad versions are falsifiable; Nate Jones already publishes one-off tested verdicts with honest failures):
 
-## 3. The reader (refocused: both tiers, brought along)
+> **No prompt or technique library publishes per-entry tested verdicts against a published measurement protocol.** The rigor exists in three places and none of them accumulate: private enterprise eval tooling, out-of-domain financial retraction discipline, and one-off practitioner experiments. Nobody makes it cumulative.
 
-The blocked, skeptical creative is still the front door: the illustrator, writer, animator, musician, designer who tried AI, got the soulless median, and walked. We still meet them at eye level and change their mind by showing.
+So the differentiation is **cumulation**: per-entry, versioned, retractable verdicts against a protocol the reader can read. That is why the measurement protocol publishes before Rung 1 (three independent passes landed on this build-order inversion). A verdict is only as credible as its published metric.
 
-What changed (2026-06-29): we no longer wall them off from the technical. The old "non-coder only" rule was quietly steering the publication toward solved, already-covered problems, because anything a non-coder can run in thirty seconds is, almost by definition, already done. The new stance is to bring them **in**. Teach them something new. The promise is not "permission to use AI." It is "I will teach you the new craft, prompt-level and agent-level, so you work with a creative partner and do not get left behind."
+## 3. The honest-arc DNA (preserved)
 
-So every artifact ships in two tiers:
+The old soul's real asset was never taste-transfer. It was the posture, and it carries over whole:
 
-- **The copy-paste tier**, so anyone can start today in the tool they already have.
-- **The skill tier** (symlinkable to `.claude`), for the reader ready to level up.
+- **The founding story is a failure report.** Sean disproved his own newsletter with one test. The origin confession is the flagship, and it buys the anti-hype credibility everything else spends.
+- **Funny first, useful always.** A post opens with a short true story that makes a person laugh, then delivers value they come back for. Parents telling stories about their psychotic kids, except the kids are agents.
+- **Published failures are the trust currency.** The Graveyard policy: every mechanism carries a standing verdict (beat / tied / lost), and losers get public retractions. "Everyone ships the prompt; nobody reports back" is the industry failure this publication exists to not commit.
+- **Anti-hype, dive-bar grit, no em dashes.** The voice chain is mandatory and unchanged: `substack-value-engine` then `storytelling-architecture` then `writing-voice-modes` (Sean Mode) then `writing-critique` then `writing-humanity-pass`. Sean hand-rewrites every chain draft.
 
-The non-coder is the on-ramp, not the ceiling.
+## 4. The reader (both tiers, brought along)
 
-## 4. The value model
+Anyone building or living with AI, in creative work or in getting things done, who has hit the median: the writer whose drafts all sound the same, the builder whose brainstorms converge, the daily user who suspects the "advice" they keep reading is folklore. Tips-fatigued and rightly skeptical.
 
-- **Demo in Sean's lane; teach a method that travels.** Still demo-first. Still the moat. The demo is specific; the method is universal.
-- **Ship both tiers, every time.** Copy-paste kit plus the symlinkable skill. Teach the why and the how of the technical layer, not just the result.
-- **The value gate stays a hard gate.** Itch (genuinely Sean's), Solution (a real captured artifact: a run, a before/after, a number), Transfer (un-covered, not free elsewhere). The capture is the post.
-- **Differentiate, never duplicate.** Plenty teach Higgsfield, ComfyUI, Pi. The moat is the taste-transfer method and the partner-then-system philosophy wrapped around them, never the bare tutorial.
-- **Anti-hype, dive-bar grit, no em dashes.** The voice chain is mandatory and unchanged: `substack-value-engine` then `storytelling-architecture` then `writing-voice-modes` (Sean Mode) then `writing-critique` then `writing-humanity-pass`.
+The both-tiers rule survives the refocus intact. Every mechanism ships as:
+
+- **The copy-paste tier**, runnable today in whatever chat window the reader already has.
+- **The skill tier** (symlinkable `.claude` skill), for the reader ready to level up.
+
+The non-coder is the on-ramp, not the ceiling. And the reader is never asked to trust: every entry carries its verdict and its receipts.
 
 ## 5. The formats
 
-- **The Spine (the teaching demos).** One creative job, the partner taking it from soulless to yours, move by move, ending in the transferable method plus both-tier artifacts. The signature. The spine follows a single creative project across media as the partner brings it to life (see the cascade in section 6).
-- **Back to Basics (working name; "Tim the Tool Man" is in the running).** The tool-onboarding series. Introduce a technical partner (skills and `.claude` first, then Pi, Hermes, Higgsfield, ComfyUI, and whatever ships next), why it is a superpower, how it works at a basic level, wired to the taste-transfer method. This is the bridge that walks the non-coder reader into the technical world. Recurring, lighter, newcomer-facing. It is NOT a generic tutorial. The spin is always "this tool, in service of making the agent's taste yours."
-- **The Tool Drop.** Ship a skill, packaged for both tiers. Periodic, tentpole, the portfolio proof and the natural premium line.
-- **Fix My Mess** is flagged for re-evaluation under the refocus (it may fold into the System arc's public gate, Direction C). Not a launch format.
+- **Building the Ladder** (the weekly spine): numbered rungs. Each rung is one live Expedition: one real job, the median shown (run it ~20x, show the sameness grid), ONE named divergence mechanism run against it, escaped-vs-median contrast captured, mechanism shipped both tiers, honest verdict published. The value gate made flesh.
+- **Raising Agents** (the sibling series): short funny true stories about living with and raising agents, each carrying a navigation lesson. The pencil-character mascots are the cast (the parenting metaphor needs kids; the characters are the kids).
+- **Unlock Hunts** (occasional tentpoles): "can an agent be made to do X?" attempts, documented whole, failures included. Only when a real unlock lands, never the weekly bar.
+- **The Graveyard** (standing policy, not a format): the verdict field on every mechanism, public retractions for losers, "Steelman, Then Shoot" re-runs of past winners.
 
-## 6. The first arc (the lineup)
+"Building the ladder as I climb it" is the About-page frame and ritual sign-off; the series carries the name.
 
-The Partner movement, interleaving two formats. Each maps to a pain already verified in discovery; the value gate is run per post as it is built.
+## 6. The product: the library
 
-| # | Piece | Format | Ships (both tiers) | The pain |
-|---|---|---|---|---|
-| 1 | **Make the Agent's Taste Yours** | Spine (foundational) | taste-context kit + the interview/brainstorm partner skill | cold prompts return the median; no path to "mine" |
-| 2 | **Back to Basics #1** | Tool-onboarding (new) | a starter `.claude` setup + the copy-paste equivalent | newcomers do not know what a skill is or why it gives them superpowers |
-| 3 | **Steal Like an Artist** | Spine | references-to-bespoke-prompt kit + skill | references do not stop revert-to-average; can't enforce a personal style |
-| 4 | **The Partner That Pushes Back: Build a World (Comics)** | Spine (cascade begins) | world / character / dialogue ideation skill | ideation flattens to tropes; the agent is a yes-man |
-| 5+ | **Bring It to Life (Animation)** then **Give It Sound (Music & Voice)** then **Cut It Together (Editing)** | Spine (the cascade) | per-medium skills, Anima assets hardened | each medium's "AI looks generic / dead" pain |
-| ~ | **Back to Basics #2+** (Pi, Hermes, Higgsfield, ComfyUI, the next thing) | Tool-onboarding | per-tool starter kit + skill | "everyone says use X; how, and why for creativity?" |
-| bridge | **What AI Can't Flatten About You (Edge Spec)** | Spine into System | the Edge Spec kit | the sameness / flattening fear |
+The public, versioned, tested mechanism library IS the product and the lead magnet. The Substack is its changelog wearing the funny story. Every entry: the mechanism (both tiers), its verdict (beat / tied / lost), its version, and its receipts, scored against the published measurement protocol. Catalog and build order: [SKILL-PACKAGING-PLAN.md](SKILL-PACKAGING-PLAN.md). Where the library lives (public repo vs claude.ai skills vs plugin) is decided at the protocol session (map S5); the Pocock-style public repo is the research-favored shape.
 
-**The cascade is the serialization hook.** The Spine follows one creative project as it comes to life: Comics (world, characters, dialogue) then Animation (bring it to life) then Music and Voice (give it sound) then Editing (cut it together) and onward. Readers follow the world being built. Back to Basics instances are interleaved to onboard the tool each medium needs.
+## 7. Identity
 
-**The bridge.** "What AI Can't Flatten About You" (the Edge Spec, formerly Direction B) is the seam from Partner into System. The spec you build there is partner-fuel now and the first draft of the intent spec the System arc consumes.
+- **Name: Pencil & Prompt, kept** (L4). The name survived a real naming pass and never said "images" or "Claude". Pencil = the human hand, prompt = the machine; the origin story of ideas, old way and new way. A third rename would be the circling this refocus exists to end.
+- **Subtitle: "Push your AI past the average, one tested experiment at a time."** (naming pass run 2026-08-05, S1). Reason for the pick: it is the reader's transformation stated plainly (the locked subtitle rule), it keeps the cadence of the old subtitle through the third refocus, "past the average" carries the thesis, and "tested" plants the verdict promise without jargon. Runner-up ("Real experiments that push AI past the average. Verdicts published, failures included.") leads with the publication instead of the reader; its verdict language lives on Start Here and About instead.
+- **Mascots:** the pencil-character lineage converts from vestige to asset as the Raising Agents cast. Visual identity review is session S2.
 
-## 7. The A/B/C remap (the destination, intact)
+## 8. What is preserved, what changed (the refocus ledger)
 
-Nothing in the deep research is wasted. It all lands one movement later than the pivot had it.
-
-- **B, "What AI Can't Flatten About You,"** moves to the partner arc as the bridge (section 6). Same research, re-pointed: its Edge Spec feeds the partner first, then the system.
-- **A, intent-engineering** (declare a brief, gate the output), becomes the System arc's weekly engine, once readers have a partner whose taste they can spec.
-- **C, "The Gate"** (the public benchmark fed by Sean's fleet), stays the serialization franchise, once there are A runs to publish.
-
-The throughline still holds: it is all one primitive, a spec plus a gate, at three scopes. The partner arc is what earns the reader the right to care about it.
-
-## 8. What is preserved, what changed
-
-**Preserved as evidence and destination:** the three direction-research docs and the A/B/C lock; the prompts-to-systems pivot (its insight that technique is commodity and control/system is the deeper craft is true and feeds the destination); posts 01-07 + bonus (01 and 02 are on-soul partner material, 03-07 are System-arc / audience-B back catalog); the playbook; the image house style.
+**Preserved:** the voice chain + Sean-hand-rewrite loop; the value gate (Itch / Solution / Transfer), sharpened by "the verdict is the product"; the both-tiers rule; the anti-hype stance; the pencil-test image house style (pending S2 review); the name and the account.
 
 **Changed:**
-- The masthead moves from "system framework" to "have the agent think like me, partner then system."
-- The reader is brought into the technical (both tiers), not walled off. This revises spec section 2 (reader), section 6 (value model), and CLAUDE.md section 4.
-- The format set gains the **Back to Basics** tool-onboarding series.
-- The system framework is re-cast as the destination, not the opener.
+- The masthead moves from "have the agent think like me" (taste-transfer) to the divergence thesis. The GPT Image 2 test killed the old premise; the confession is the new flagship.
+- The reader widens from the blocked skeptical artist to anyone building or living with AI who has hit the median.
+- Take Two and Back to Basics retire as structures. Take Two's before/after muscle becomes the median-vs-escaped contrast inside every rung; Back to Basics' tool-onboarding DNA folds into rungs as needed (a rung that needs a tool teaches the tool).
+- The back catalog moves to [_archive/](_archive/) as quarry: incidents feed Raising Agents, creative jobs become Expedition subjects, nothing publishes without a current-voice rewrite.
+- Six working territories adopted as a LOOSE lock (L6/L7), with evidence-side fates applied: see the spec §4 and the command center. Any territory may be reshaped at draft time; reshapes route back to a partner-session reconvene, never silently.
 
 ## 9. Lineage and moat
 
-**Aspirational model: Matt Pocock's skills repo** (github.com/mattpocock/skills), "skills for real engineers, straight from my .claude directory": small, composable, model-agnostic skills organized by failure mode, "make them your own," shipped one-command and used as the lead magnet for his newsletter. His single most popular skill is `grill-me`: get the agent to interview you into alignment before you build. Pencil & Prompt is that, in the creative realm: get the agent to interview you into your **taste**.
+**Aspirational model, unchanged:** Matt Pocock's skills repo (small, composable, model-agnostic, shipped one-command, the newsletter's lead magnet). Pencil & Prompt is that shape with the thing Pocock's shelf and every other shelf lacks: a tested verdict on every entry. 23,600+ skills on the biggest marketplace carry install counts and zero test results; install count is popularity wearing an evidence costume.
 
-**The moat:** the taste-transfer method, plus Sean's agent fleet (Anima, VoicePrint, the writing chain, the design-team agents), the live worked examples nobody else has. Commodity tools get better underneath the method; the partner-and-taste layer stays valuable.
+**The moat:** the published measurement protocol plus the cumulative verdict record (the only thing on the list competitors are not already giving away), Sean's running fleet as the live apparatus (llm-council and fusion-discovery-council are the heterogeneous-panel infrastructure the best-evidenced mechanism requires), the lived incidents nobody else can write, and the dark-started Sourdough collaborator whose receipts compound privately until the first blind comparison exists.
 
 ---
 
-*Next docs to derive from this: the surgical reworks of the spec (section 0, section 7), CLAUDE.md (section 0, section 2, section 4), README, and SERIES-COMMAND-CENTER; then the Post 1 build sheet.*
+*Derived docs: the spec (strategy detail), the command center (running order), the packaging plan (the library catalog), CLAUDE.md (session law). The working order for the whole revamp: [REVAMP-2026-08-05-SESSION-MAP.md](REVAMP-2026-08-05-SESSION-MAP.md).*

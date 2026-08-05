@@ -22,7 +22,7 @@ Starts the clock on the months-long experiment. Nothing publishes.
 
 > **Kickoff:** Set up the Pencil & Prompt "sourdough" collaborator per lock L7 (dark start) in the sidecar at `~/.creative-harness/partner-sessions/2026-08-04-pencil-and-prompt-refocus.md`. Design and create: (1) a private home for the aged collaborator's memory — local-only, NEVER in the public repo (candidate: a gitignored dir or under `~/.creative-harness/sourdough/`); (2) a memory file schema (what it accumulates: rejected drafts, Sean's corrections, house-style rules, its own mistakes); (3) a 15-minute weekly feeding ritual Sean can actually sustain, written as a checklist; (4) a log format that timestamps every feeding so the eventual series has receipts; (5) the blind-comparison protocol sketch (same job to aged vs fresh instance at week N, judged blind). Keep it model-agnostic in design even if v1 runs on one model. Deliverable: the running setup + first feeding done in-session.
 
-## S1 — Doc re-anchor + hygiene (next writing-free session; ~2 hrs; $0)
+## S1 — Doc re-anchor + hygiene — ✅ DONE 2026-08-05 (all six docs rewritten; subtitle locked: "Push your AI past the average, one tested experiment at a time."; old docs + back catalog → `_archive/`; discovery-cap hygiene fixed)
 
 Every future session reads these docs first; until they're rewritten, every session boots on the dead premise. Discharges the existing "doc re-anchor" ticket.
 

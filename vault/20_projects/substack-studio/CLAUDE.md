@@ -4,9 +4,9 @@ The operating manual for any session working in this folder. Rules here are stan
 
 ## 0. Read first, every time
 
-**[SOUL.md](SOUL.md) before any work, it is the masthead.** "Have the agent think like me; build the partner, then the system, then the art." Then [POSITIONING-AND-EDITORIAL-SPEC.md](POSITIONING-AND-EDITORIAL-SPEC.md) for the strategic detail (the one reader, the white space, the voice, the value model, the formats, the relaunch plan). If anything here disagrees with SOUL.md, SOUL.md wins; the spec wins over this file. Do not re-litigate locked decisions (the name, the reader, the arc); pick up the active task.
+**[SOUL.md](SOUL.md) before any work, it is the masthead.** "The models got good, now everything they make is the same; push the agent past the median and publish what actually happened." Then [POSITIONING-AND-EDITORIAL-SPEC.md](POSITIONING-AND-EDITORIAL-SPEC.md) for the strategic detail (the reader, the verified white space, the six territories, the voice, the value model, the relaunch plan), and [SERIES-COMMAND-CENTER.md](SERIES-COMMAND-CENTER.md) for the running order. If anything here disagrees with SOUL.md, SOUL.md wins; the spec wins over this file. Do not re-litigate locked decisions (the name, the subtitle, the two series, the protocol-before-Rung-1 order); pick up the active task. Decisions and verbatim reasons live in the partner-session sidecar (locks L1-L7); the session order lives in [REVAMP-2026-08-05-SESSION-MAP.md](REVAMP-2026-08-05-SESSION-MAP.md).
 
-**The arc is partner first, system as destination (re-anchored 2026-06-29).** The first posts build a creative partner (brainstorm + interview the agent into your taste); the **system framework** (spec it, test it, version it, gate it) is the destination they earn, not the front door. [`2026-06-28-pivot-prompts-to-systems.md`](2026-06-28-pivot-prompts-to-systems.md) is now read as **evidence** (its insight that isolated techniques are commodity is true and feeds the destination), not as the masthead. Do not lead with the framework, and do not default back to "hand out a prompt / teach a technique." Lead with the partner and the demo.
+**The unit of work is the Expedition (refocused 2026-08-04).** A Building the Ladder rung = one real job, the median shown (~20-run census), ONE named divergence mechanism run against it, the contrast captured, the mechanism shipped both tiers into the library with an honest verdict (beat / tied / lost, public retractions per the Graveyard policy). Raising Agents episodes are the sibling series (funny true fleet stories with a navigation lesson). The territory set (d1-d6) is a LOOSE lock: build sessions may surface reshapes, and reshapes route back to a partner-session reconvene, never silently. The taste-transfer era (partner-then-system arc, Take Two, Back to Basics) is retired; its material is quarry in [_archive/](_archive/).
 
 ## 1. The voice chain is mandatory
 
@@ -17,20 +17,23 @@ Every post, the manifesto, and the About page run through the chain, in this ord
 - **No em dashes.** Ever. The humanity pass enforces it; do not let any in upstream.
 - **Dive-bar grit stays.** That is the humor and the style, non-negotiable.
 - **Anti-hype always.** The fastest way to lose a skeptic is to sound like an AI hype-bro.
-- **The ask lands sideways.** The reader promise is the headline; "look what I built" repels the artist.
+- **The ask lands sideways.** The reader promise is the headline; "look what I built" repels the reader.
 
 (Image generation and the voice-modes skill run on the Mac, not inside Cowork; the sandbox is firewalled off the image APIs.)
 
-## 2. Positioning guardrails (from the 2026-06-22 discovery run)
+## 2. Positioning guardrails (from the 2026-08-05 research round)
 
-These are the traps the research surfaced. Hold the line:
+These are the traps three independent research passes surfaced. Hold the line:
 
-- **Empathetic-believer stance.** "I know exactly why you bounced. You quit one step early. Here is the step." Never scold, never preach.
-- **Never lead with the abstract premise.** "Soulless output" and "you won't be replaced" are already-claimed angles (Nate Jones owns both). Lead with a concrete demo, every time. The demonstration is the moat, not the thesis statement.
-- **One craft lane per post.** Demo in one discipline. Do not sprawl.
-- **Do not lump the failure modes.** A technical glitch, an off-brand tone, and philosophical soullessness are three different problems with three different fixes. Each is its own post. Conflating them is the gap the whole field falls into; we don't.
-- **The whitespace question is the method:** "Does feeding the model your references and taste kill the AI look?" Nobody is answering it. Answering it, by showing it, is what Pencil & Prompt is for.
-- **Lead with the partner and the demo; the system is the destination (re-anchored 2026-06-29).** "Differentiate, never duplicate" has teeth: the isolated technique/prompt lane is saturated and commodity, so a post whose only takeaway is a free-elsewhere prompt is value-gate-blocked (it already blocked the old flagship how-to). But the answer is not to lead with the framework. Lead with building the partner (brainstorm + interview the agent into your taste) and the live demo; the system (spec/test/version/gate) is where the arc *leads*, earned over the partner posts. The moat is the taste-transfer method, not the architecture diagram.
+- **The mechanism is the commodity; the verdict is the product.** Free equivalents cover the mechanism in five of six territories and publish an evaluation in zero. A post whose deliverable is a technique competes with GitHub; a post whose deliverable is a tested verdict on a technique competes with nobody. Every rung ends in a verdict; no verdict, not done.
+- **State the library claim precisely, always:** "no prompt or technique library publishes per-entry tested verdicts against a published measurement protocol." Broad versions ("nobody tests", "nobody admits failures") are falsifiable: Nate Jones already publishes one-off tested verdicts with honest failures. The differentiator is CUMULATION (per-entry, versioned, retractable, against a published protocol), not testing posture.
+- **Never lean the masthead on the "stickiness" number.** The persistence effect (d = 0.414) rests on 2 studies with a null moderator test. It is an open question or a future rung, never masthead support. The defensible task-type framing: convergence is strongest on constrained, real-work ideation (d = 0.70) and negligible on free-form play (d = 0.12).
+- **Banned figures:** the $2.51B market size and the 10-30x diversity claim (both trace to vendor SEO). The 91%/82% heterogeneous-debate figure is Hegazy 2024 (arXiv 2410.12853) and must always carry its 2024-era-models vintage.
+- **Cite only from the tier-audited syntheses**, never raw DR grounding URLs. Every published figure resolves to its primary source first; `agents-sdk/scripts/audit_dr_citations.py` is the standing pre-citation step. The contaminated T3 (Input Axis) discovery ledger is not citable; the reframed ~$1.50 re-run gates any d4 pain claim.
+- **Territory rules with teeth:** a d3 draft whose takeaway is "add constraints" gets killed. d1 Cartography is the instrument inside posts, never a standalone beat (Wikipedia owns the free field guide; visual-tell claims are currently unevidenced). The folklore rung (temperature, "think outside the box") sells on protocol and scale, not surprise (a free Medium experiment already published the n=20 version).
+- **Never lead with the abstract premise.** "AI makes everything samey" is a universal observation and a claimed angle. Lead with the captured experiment, every time. The capture is the moat, not the thesis statement.
+- **One job per rung.** One real job, one named mechanism. Do not sprawl.
+- **Empathetic stance, re-pointed.** The reader's skepticism about AI advice is correct; most of it is folklore and some of that is now measured. Never scold, never preach, never hype. And never ship the industry default this publication exists against: "here's a prompt, I never reported back."
 
 ## 3. The value gate (hard block)
 
@@ -43,7 +46,7 @@ The capture of the real work is the post. Write from the build, not after it.
 
 ## 4. Demo in Sean's lane; teach a method that travels; ship both tiers
 
-Demonstrate in animation, writing, or visual design, where Sean has provable taste. Then strip the lesson of its craft so a musician or copywriter can run it on theirs. The demo is specific; the method is universal. **Tools ship in two tiers, every time (revised 2026-06-29):** a copy-paste kit so anyone can start in the tool they already have, AND the symlinkable `.claude` skill for the reader ready to level up. Teach the why and how of the technical layer; do not wall the reader off from it. The non-coder is the on-ramp, not the ceiling. (Masthead rationale: SOUL.md §3-4.)
+Run the Expedition on real jobs from Sean's own lanes (animation, writing, visual design, the fleet itself), where the median and the escape are both provable. Then strip the mechanism of its craft so a musician or copywriter can run it on theirs. The demo is specific; the mechanism is universal. **Mechanisms ship in two tiers, every time (rule survives the refocus):** a copy-paste kit so anyone can start in the tool they already have, AND the symlinkable `.claude` skill for the reader ready to level up. Teach the why and how of the technical layer; do not wall the reader off from it. The non-coder is the on-ramp, not the ceiling. (Masthead rationale: SOUL.md §4; catalog: [SKILL-PACKAGING-PLAN.md](SKILL-PACKAGING-PLAN.md).)
 
 ## 5. Privacy and repo rules
 

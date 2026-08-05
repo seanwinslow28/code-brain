@@ -1,155 +1,137 @@
 # Pencil & Prompt — Editorial Command Center
 
-The live editorial queue. What publishes, in what order, in what format, and what state it's in. Strategy lives in **[POSITIONING-AND-EDITORIAL-SPEC.md](POSITIONING-AND-EDITORIAL-SPEC.md)** (source of truth) and the rules in **[CLAUDE.md](CLAUDE.md)**; this doc is the running order.
+The live editorial queue. What publishes, in what order, in what format, and what state it's in. Strategy lives in **[POSITIONING-AND-EDITORIAL-SPEC.md](POSITIONING-AND-EDITORIAL-SPEC.md)** (source of truth) and the rules in **[CLAUDE.md](CLAUDE.md)**; the masthead is **[SOUL.md](SOUL.md)**; this doc is the running order. Session order for the relaunch: [REVAMP-2026-08-05-SESSION-MAP.md](REVAMP-2026-08-05-SESSION-MAP.md).
 
-> Supersedes the old "Raising Claude" command center (7 tool-paired posts on a Mon/Thu calendar), retired with the 2026-06-22 repositioning.
-
-> **Re-anchored 2026-06-29: partner, then system.** The masthead is [`SOUL.md`](SOUL.md) ("have the agent think like me"). The live queue is now the **partner arc** (build a creative partner by brainstorming + interviewing the agent into your taste), which leads into the **system arc** (the A/B/C research, re-cast as the destination). The earlier 2026-06-28 "system framework as masthead" framing was demoted: the framework is the destination, not the opener. The queue below is rebuilt around the partner arc + the new **Back to Basics** tool-onboarding series; the old "Take Two #1, Teach the model your hand" is recast (it leaned system: declare a rubric, gate drift) into the partner-arc opener "Make the Agent's Taste Yours." Full refocus: [`CONTINUATION-2026-06-29-refocus-partner-then-system.md`](CONTINUATION-2026-06-29-refocus-partner-then-system.md).
+> **Rebuilt 2026-08-05 for the divergence refocus** (sidecar locks L1-L7). Supersedes the taste-transfer queue (Take Two spine, Back to Basics, the comics-to-editing cascade), which is retired below with its lineage noted. The old queue's post folders live in [_archive/back-catalog/](_archive/back-catalog/) as quarry.
 
 ## The model in one screen
 
-- **Three recurring formats.** The signature is **Take Two** (named 2026-06-23). The other two are concepts whose names get locked when their sections ship.
-- **Cadence is gated by spine quality, not tool-build time.** The old cadence strangled because three posts waited on unbuilt tools. The spine runs in plain Claude with no install, so it never blocks on a build. Quality over speed; no forced calendar.
-- **Ratio about 3:1** (three spine posts per tool drop).
-- **Notes run from day zero** as the variety, reach, and interaction layer. Discovery research (and every Substack-growth source we checked) says Notes drive the majority of new subscribers. Main posts stay disciplined on the spine; Notes carry the experiments.
+- **Two series plus a tentpole genre plus a standing policy.** Building the Ladder carries the thesis; Raising Agents carries the stories; Unlock Hunts land when a real unlock exists; the Graveyard applies to every mechanism ever shipped.
+- **Cadence is gated by capture quality.** Every rung costs a real captured run. No forced calendar; a rung without a real run does not exist yet.
+- **Hard order at launch:** origin confession (Rung 0) → measurement protocol (S5) → Rung 1. Three independent research passes converged on protocol-before-rung-1; a verdict is only as credible as its published metric.
+- **Notes run from day zero** as the variety, reach, and interaction layer.
 
 | Format | Name | Job | Cadence |
 |---|---|---|---|
-| The Spine | **Take Two** | One creative job, the partner taking it soulless to yours move by move, ending in the transferable method + both-tier artifacts. Follows one project across media (comics, animation, music & voice, editing). The signature. | Weekly-ish |
-| Tool-onboarding | **Back to Basics** *(working: Tim the Tool Man)* | Introduce a technical partner (skills/`.claude`, Pi, Hermes, Higgsfield, ComfyUI): why it is a superpower, how it works, wired to taste-transfer. Brings non-coders into the technical. NEW 2026-06-29. | Recurring, light |
-| Tool drop | *(name at ship)* working: Build Logs / The Workshop | "I built you a thing," shipped both tiers (copy-paste + symlinkable skill). Portfolio proof + the paywall line. | Periodic, tentpole |
-| Reader fix | *(name at ship)* working: Fix My Mess | Fix a botched AI output in public. Flagged for re-evaluation (may fold into the System arc's Gate). | TBD |
+| The spine | **Building the Ladder** | Numbered rungs. One live Expedition per rung: one real job, the median shown (~20-run census, the d1 instrument), ONE named divergence mechanism run against it, escaped-vs-median contrast captured, mechanism shipped both tiers into the library with its verdict. Failures published. | Weekly-ish |
+| The stories | **Raising Agents** | Short funny true stories about raising a fleet of agents, each with a navigation lesson. The pencil mascots are the cast. The change-up between rungs. | Interleaved |
+| Tentpole | **Unlock Hunts** | "Can an agent be made to do X?" attempts, documented whole, failures included. Only when a real unlock lands, never the weekly bar. | Occasional |
+| Standing policy | **The Graveyard** | Not a format: the verdict field (beat / tied / lost) on every shipped mechanism, public retraction notices for losers, "Steelman, Then Shoot" re-runs of past winners. | Always on |
 
-## The relaunch arc (the live queue)
+**Retired structures, and what each fed into (2026-08-05):**
 
-**Launch bundle** ships together the day the publication relaunches, so a reader arriving on the flagship can orient immediately.
+- **Take Two** (the taste-transfer spine): its before/after muscle survives as the median-vs-escaped contrast inside every rung; its backlog items become Expedition subjects or rung candidates (see quarry table below). The name retires.
+- **Back to Basics** (tool onboarding): retires as a standalone series; its walk-the-reader-into-the-technical DNA folds into rungs (a rung that needs a tool teaches the tool) and into the skill-tier packaging of every mechanism.
+- **Fix My Mess / the reader-fix format**: never shipped; its interactive DNA waits until there are readers to submit messes. Re-proposal goes through a partner-session reconvene.
 
-| Order | Piece | Format | Ships (both tiers) | Status | Notes |
-|---|---|---|---|---|---|
-| Bundle | **Post 1, "Make the Agent's Taste Yours"** | Spine (opener) | taste-context kit + the interview/brainstorm partner skill | plan-locked, build sheet next | The relaunch flagship. The no-context vs with-your-taste contrast; "making the agent's taste yours." Recasts the old "Teach the model your hand" capture ([`take-two-01-…/capture-plan-and-beats.md`](take-two-01-teach-the-model-your-hand/capture-plan-and-beats.md)) into the partner frame. |
-| Bundle | **Start Here** (page) | Page | n/a | drafted (revisit vs SOUL) | Orientation: the mantra + the partner-then-system arc + where to begin. |
-| Bundle | **About** (page) | Page | n/a | drafted (revisit vs SOUL) | Deep bio: the creative technologist, the pencil-character lineage, the agent fleet. |
-| #2 | **Back to Basics #1** *(Tim the Tool Man)* | Tool-onboarding | starter `.claude` setup + copy-paste equivalent | idea | Why a technical partner is a superpower + how a skill works, basic level. Onboards the reader to use Post 1's skill. |
-| #3 | **Steal Like an Artist** | Spine | references to bespoke-prompt kit + skill | idea | Drop a mix of references + a description, the agent emits a unique prompt for that mix. The new skill idea. |
-| #4 | **The Partner That Pushes Back, Build a World (Comics)** | Spine (cascade begins) | world/character/dialogue ideation skill | idea | The partner builds a world, characters, dialogue (one post or split). Begins the comics, animation, music & voice, editing cascade. |
-| Day 0 → | **Notes** | n/a | n/a | ongoing | Variety, reach, interaction. Runs continuously from relaunch. |
+## The relaunch queue (the live order)
 
-**Sequencing logic (researched 2026-06-23):** lead with the pillar series, do not diversify the main feed early. A recognizable series drives ~80% of growth; mixing formats up front muddies the "what is this about" signal. Reach comes from Notes, not from front-loading the interactive format. Sources: spec §11, plus the 2026-06-23 launch-sequencing scan (Build to Launch, The 2hour Creator, Write Build Scale, and Nate Jones's June 2026 move from daily variety to a focused weekly spine).
+**Launch bundle** ships together: pages + the flagship, so a cold reader can orient immediately.
 
-## Take Two backlog (ranked, from 2026-06-27 discovery)
-
-Six new council runs + a web-search supplement gave each lane a *pain paired with a fix*, so the value gate is pre-cleared. Full synthesis + sources: [`research/discovery/2026-06-27-discovery-synthesis-backlog-and-web-supplement.md`](research/discovery/2026-06-27-discovery-synthesis-backlog-and-web-supplement.md).
-
-| Rank | Take Two | Lane | The move it demonstrates | Status |
+| Order | Piece | Format | Status | Notes |
 |---|---|---|---|---|
-| 1 | **Teach the model your hand** (flagship) | visual | anchor identity + name the rubric as visual logic; correct drift by drift | **capture-pending** — fresh self-portrait, bust; plan at [`take-two-01-…/capture-plan-and-beats.md`](take-two-01-teach-the-model-your-hand/capture-plan-and-beats.md) |
-| 2 | **Write in your own voice** | writing | feed 3-5 samples → Style Block + negative list (VoicePrint) | idea |
-| 3 | **Keep a character alive across a series** | visual | reference anchoring + style-lock across many outputs (Character Bible) | idea |
-| 4 | **Make AI motion feel alive** | animation | human owns timing: keyframe / first-last-frame, bind subject | idea |
-| 5 | **Use the intern upstream, not just at the end** | process | AI as adversarial partner: ideate-first, diverge/converge, make it ask you questions | idea |
-| 6 | **Keep the intern in a bounded role** | process / writing | feed your context + confine AI to a *welcome* role (brainstorm / outline / mechanic / sparring partner), preserve authorship; generic-ghostwriter slop → the bounded-role version that's recognizably yours | idea (from 2026-06-28 T3) |
-| 7 | **Cut the correction burden** | process / tool-drop | the re-roll/cleanup tax is the real cost; anchor-once-reuse + the taste rubric so you stop fixing the same drift | idea (from 2026-06-28 T1 v2) |
-| 8 | **Build a repeatable system, not a casino** | process / tool-drop | seeds / versioning / Character Bibles → a process you can trust, vs slot-machine prompting | idea (from 2026-06-28 T4 v2) |
+| S3/bundle | **Start Here** (page) | Page | to write | From the re-anchored SOUL. Old drafts at `pages/` are quarry, not base (they predate the refocus and the voice-modes G1-G5 update). |
+| S3/bundle | **About** (page) | Page | to write | The experimenter who publishes verdicts; "building the ladder as I climb it" as the frame. |
+| S4/bundle | **Rung 0: the origin confession** | Building the Ladder (flagship) | to write | Sean preached taste-transfer, one GPT Image 2 test disproved his own newsletter, the real problem is the median. Ends on the promise: rungs, episodes, the library with verdicts. Itch = the dead premise (documented); Solution = the captured test itself; Transfer = permission to distrust technique-sellers + the tested-verdict promise. |
+| S5 | **The scoreboard** (protocol post + artifact) | Building the Ladder (protocol) | to write | The versioned measurement protocol: what an entry is, what beat/tied/lost mean, the baseline, the metric with its stated limits, blind judging where feasible, the retraction rule. Stress-tested before publish (grilling / pre-mortem + one llm-council pass). Also decides where the library lives. |
+| S6 | **Rung 1: does arguing help?** | Building the Ladder | to write | Manufactured Opposition (d5). Baseline = agreeable default (~20-run grid). Contenders: the free "disagree with me" persona prompts (the commodity) vs the stakes version run heterogeneously on Sean's council infrastructure. Scored against the protocol; theater-detection named. Verdict published whatever it is. |
+| any after S1 | **Raising Agents ep. 1 candidate: "The Night My Vault Said Nothing"** | Raising Agents | rewrite required | Open ticket: full rewrite under current writing-voice-modes ("sounds nothing like me"). Publishes after the launch bundle. Draft in `_archive/back-catalog/bonus-the-night-my-vault-said-nothing/`. |
+| Day 0 → | **Notes** | n/a | ongoing | First candidates: the two-isolated-AIs-wrote-the-same-three-examples anecdote; the em-dash-as-tell irony; "the models got good and that's the problem." |
 
-**Thesis backbone (not a post):** "fighting the regression to the mean" (mode collapse, peer-reviewed) is Start Here's whitespace claim + recurring Notes, the *why* under every demo. Never lead with it.
+## The territory roster (feeds the rung queue)
 
-## Discovery-angle map
+Working set per L6/L7 (LOOSE lock; reshapes route back to a reconvene). Full evidence per territory: spec §5.
 
-Which sourced pain feeds which format. Original cluster from `research/discovery/2026-06-22-…`; the six lane/theme runs from `2026-06-27-…` (synthesis doc above).
+| # | Territory | Role | Next action |
+|---|---|---|---|
+| d5 | Manufactured Opposition | Rung #1 source | S6, after the protocol |
+| d2 | Stolen Methods | Recurring spine source | Rung candidates: morphological analysis (the sleeper: +18.5% diversity, travels without a fleet), the folklore kill (temperature + "think outside the box", sold on protocol and scale, not surprise), Six-Hats-as-agent-partition, the SCAMPER conflict (publish the disagreement intact). Every port ships a translation-failure report. |
+| d1 | Cartography | Instrument inside every rung | The ~20-run median census. Not a beat. Accuracy-of-the-tells is a future rung; visual tells currently unevidenced. |
+| d3 | Import Duty | Story engine | Feeds cold opens and Raising Agents texture. "Add constraints" takeaway = kill the draft. |
+| d4 | Data-hole probe | Deep lane | Gated: reframed ~$1.50 discovery re-run before citing pain evidence. Fires only when a data-hole draft actually starts. |
+| d6 | Sourdough | Serialized arc, dark-started | Feeding weekly since 2026-08-05 (private, local-only). Announces itself when the first blind comparison exists. |
 
-- **Take Two (spine):** Angle 2 (soulless / no human POV), Angle 3 (the same-y "AI look"), Angle 4 (layout / tone / narrative depth). The craft-demo fuel.
-- **Fix My Mess:** Angle 1 (clients reject AI prototypes), plus reader submissions.
-- **Tool drops:** emerge from a pain that recurs across spine posts (e.g., a packaged taste-rubric or reference-kit), and Angle 7 (correction burden erodes time savings) is natural tool-drop justification.
-- **Start Here / manifesto fuel:** Angle 5 ("you're prompting it wrong" → reframed: "you're not prompting it wrong, you quit one step early"). Foil, not a post.
-- **Skip:** Angle 6 (income-drop doom) — off-thesis, off-voice.
+## Quarry map (the old material, re-pointed)
 
-From the 2026-06-27 runs:
+Everything below lives in [_archive/](_archive/). Consult the well; never rely on it as the source. Nothing publishes without the current voice chain + Sean rewrite.
 
-- **Take Two (spine):** A visual (style enforcement, character consistency) → flagship #1 + #3; B writing (blandification, lost voice) → #2; C animation (drift, dead timing) → #4; F partner-upstream (generic ideation) → #5.
-- **Fix My Mess:** E series/brand (brand systems not enforced, content-policy campaign breaks); the false-positive "accused of AI" cluster (B#3, A#6) as a defend-the-human angle.
-- **Start Here / manifesto + Notes:** D losing-your-style + the mode-collapse mechanism = "fighting the regression to the mean."
-- **Skip:** F#2 ("AI fundamentally can't feel") — the doomer frame; foil only, never a claim.
-
-From the 2026-06-28 runs (synthesis: [`research/discovery/2026-06-28-discovery-synthesis-T2-T3-backlog.md`](research/discovery/2026-06-28-discovery-synthesis-T2-T3-backlog.md)):
-
-- **Take Two (spine):** T3 "bounded role + absorb my context" → new Take Two #6 above.
-- **Defend-the-human (Fix My Mess-adjacent) + Tool Drop:** T2 "no fair standard of evidence for AI accusations" → a defend-the-human essay AND a candidate Tool Drop (ship a standard-of-evidence / disclosure kit); T2 "evidence-free witch hunts" (Ben Moran, 100 hrs, suspended from r/Art) = the cold-open.
-- **Start Here / manifesto + Notes:** T3#1 sharpens the whitespace claim — *the skeptic isn't a technophobe; they quit the generic ghostwriter; the bounded-role version is the second chance.* T3#2 (the "NPC trap" — AI drafts stunt your growth) = a standalone essay/Notes.
-- **Cut the correction burden (T1 v2, now mine-able):** "AI sheen / lacks voice" (the *why* behind the rewriting) + "hidden cleanup erases the time savings" → Take Two / Tool Drop #7.
-- **Build a repeatable system (T4 v2, now mine-able):** "give me seeds/versioning, not a casino" (the opportunity) + "same prompt never twice" (the itch) → Take Two / Tool Drop #8.
+| Old item | Re-pointed as |
+|---|---|
+| bonus "The Night My Vault Said Nothing" | Raising Agents ep. 1 candidate (rewrite ticket open) |
+| 01 "Make the Agent's Taste Yours" + the GPT Image 2 test | Source material for Rung 0 (the confession) |
+| 02 "Machine to Sound Like You" / VoicePrint | Future rung: escape the median of your OWN drafts |
+| 04 "Eval Tools Wrong People" / 05 "Content Tripled" | Later rungs, gate-build-dependent; the thesis in the wild |
+| 06 "Stop Building Agents" | Raising Agents episode + advisor tool-drop later |
+| 07 "The Judgment Layer" | Capstone essay, lands late |
+| Take Two backlog #5 intern-upstream / #6 bounded-role / #8 repeatable-system | Direct rung candidates |
+| The comics/animation/music cascade + "Steal Like an Artist" | No longer posts: their creative jobs become Expedition SUBJECTS |
+| 03 "Correct Was Never Defined" + Back to Basics | Shelved; tool onboarding folds into rungs as needed |
+| CREATIVE-PARTNER-MEMORY-SPEC (archived doc) | Raw material for d6's collaborator-aging kit |
 
 ## Page scaffolding & nav
 
-Custom homepage (not the default feed): flagship featured, *Start Here* pinned, recent posts below. Modeled on In the Weeds (hannahstulberg.substack.com).
+Custom homepage (not the default feed): flagship featured, Start Here pinned, recent below.
 
-**Launch-lean nav** (don't build empty rooms; add sections as they fill):
+**Launch-lean nav** (sections only get added when content exists):
 
-- Live at launch: `Home` · `Start Here` · `Take Two` · `About` · `GitHub` (https://github.com/seanwinslow28) · `Portfolio` (https://seanwinslow.com/)
-- Add when content exists: a `Tool Drops` section (first drop), a `Fix My Mess` section (pilot), and `YouTube` / `Chat` if/when real.
+- Live at launch: `Home` · `Start Here` · `Building the Ladder` · `About` · `GitHub` (https://github.com/seanwinslow28) · `Portfolio` (https://seanwinslow.com/)
+- Add when content exists: `Raising Agents` (first episode), the library link (when it has a public home, decided at S5), `YouTube` / `Chat` if/when real.
 
-**Start Here vs About:** Start Here is the manifesto-lite orientation page (stance + whitespace claim + where to begin). About is the deep personal bio. They are pages, not posts.
+## Profile cleanup (S3 checklist)
 
-## Profile cleanup (relaunch checklist)
+Same account `@seanpwins`, re-pointed. Sean confirms each irreversible-looking action.
 
-Same account `@seanpwins`, rebranded. See spec §10.
-
-- [ ] Set publication name to **Pencil & Prompt** + subtitle "Teach the machine your taste, one creative job at a time."
-- [ ] Rewrite the bio from the old PM line to the empathetic-believer positioning.
-- [ ] Curate restacks: keep the animation / creative-AI ones; drop the PM-job-interview restack; re-restack the best with a one-line take.
-- [ ] Unpublish (revert to draft, don't delete) the 3 live posts.
+- [ ] Set subtitle to **"Push your AI past the average, one tested experiment at a time."** (locked, S1 naming pass)
+- [ ] Rewrite the bio: the experimenter who publishes verdicts, funny first, anti-hype. Kill any remaining PM-recruiter voice.
+- [ ] Curate restacks: keep the creative-AI/animation ones; drop the PM-job-interview outlier; re-restack the best with a one-line take.
+- [ ] Unpublish (revert to draft, never delete) the 3 old live posts.
 - [ ] Build the custom homepage + the launch-lean nav.
-
-## Recasting the old "Raising Claude" posts
-
-The migrated `01-…` through `07-…` + `bonus-…` folders are the back catalog, not the front sequence. Re-evaluate, don't auto-publish:
-
-- **01 You Can't Prompt Taste** → recast as a back-catalog Take Two entry (on-thesis: taste). Strong title, on-voice.
-- **02 Machine to Sound Like You** → recast (writing / voice); can seed Take Two #2's method.
-- **03 Correct Was Never Defined** (intent-MCP) → most off-thesis; rework toward the creative angle or shelve for audience B.
-- **04 / 05 / 06 / 07 / bonus** → analyst / agent-flavored, lean audience B. Hold and re-evaluate. Some shipped tools (VoicePrint, the gates) may resurface later as Tool Drops, shipped in both tiers.
 
 ## Status legend
 
-`idea` → `drafting` → `voice-pass` (chain not yet run) → `ready` → `scheduled` → `published`. Pages: `to write` → `ready` → `live`.
+`idea` → `capture` (the run is happening) → `drafting` → `voice-pass` → `ready` → `scheduled` → `published`. Pages: `to write` → `ready` → `live`. Mechanisms additionally carry: `verdict: beat | tied | lost` and `retracted: y/n`.
 
 ## Voice chain & the value gate (the publish bar)
 
-Every post, the manifesto, and About clear the chain before publish (full rules in [CLAUDE.md](CLAUDE.md)):
+Every post and page clears the chain before publish (full rules in [CLAUDE.md](CLAUDE.md)):
 
 `substack-value-engine` → `storytelling-architecture` → `writing-voice-modes` (Sean Mode) → `writing-critique` → `writing-humanity-pass`
 
-- No em dashes. Dive-bar grit. Anti-hype. The ask lands sideways.
-- **The value gate blocks** any piece whose Itch is not genuinely Sean's, or whose Solution is not a real artifact (a run, an eval, a before/after, a number). The captured real work *is* the post.
+- No em dashes. Dive-bar grit. Anti-hype. The ask lands sideways. Sean hand-rewrites every chain draft.
+- **The value gate blocks** any piece whose Itch is not genuinely Sean's, or whose Solution is not a real captured artifact. For rungs, the Solution is the captured run and the Transfer includes the verdict: an Expedition without a verdict is not done.
 
 ## Image house style
 
-Pencil-test look (cream paper, graphite + cross-hatching, faint blue construction lines, ONE accent color, absurd caricature, minimal watercolor bloom). Accent per post: amber for human / personal, teal for technical / system. Engine: `openai-image-gen` (GPT Image 2) or ChatGPT, run on the Mac (image APIs are firewalled off Cowork). Full recipe: [`playbook/image-house-style.md`](playbook/image-house-style.md). Hero lives at each post's `images/hero.png`; old versions in `images/_superseded/`.
+Pencil-test look (cream paper, graphite + cross-hatching, faint blue construction lines, ONE accent color, absurd caricature, minimal watercolor bloom). Accent per post: amber for human / personal, teal for technical / system. **Flagged for S2 review against the relaunched identity** (does the look survive; how the two series read differently; the mascots as the Raising Agents cast). Engine: `openai-image-gen` (GPT Image 2), run on the Mac. Full recipe: [`playbook/image-house-style.md`](playbook/image-house-style.md). Hero at each post's `images/hero.png`; superseded versions in `images/_superseded/`, never deleted.
 
 ## Folder & frontmatter conventions
 
 ```
-<slug>/                     one folder per new piece (descriptive slug; the queue, not the folder name, holds order)
+<slug>/                     one folder per new piece (descriptive slug; the queue holds order)
   post.md                   the draft. Carries the frontmatter block below.
   images/hero.png           the final hero
   images/_superseded/       old/test versions, never deleted
-01-… through 07-…, bonus-…  the Raising Claude back catalog (recast candidates, see above)
+_archive/                   the pre-divergence era: superseded docs + the old post folders (quarry)
 _assets/                    references + style anchors
 _private/                   gitignored, local-only sensitive lane
+pages/                      Start Here / About drafts (pre-refocus drafts = quarry)
+research/                   the evidence base (syntheses, deep-dives, discovery ledgers)
 ```
 
 ### Standard frontmatter (every `post.md`)
 
 ```yaml
 publication: pencil-and-prompt
-format: take-two | tool-drop | fix-my-mess
+series: building-the-ladder | raising-agents | unlock-hunt | page
+rung: 0                                       # rungs only; numbered
 title: "..."
-status: idea | drafting | voice-pass | ready | scheduled | published
+status: idea | capture | drafting | voice-pass | ready | scheduled | published
 publish_date: TBD
-craft_lane: visual | writing | motion        # ONE lane per post (guardrail)
+mechanism: "the named divergence mechanism"   # rungs only
+verdict: pending | beat | tied | lost         # rungs only (Graveyard policy)
 hero_image: images/hero.png                   # or "MISSING — needs generation"
-discovery_angle: "which sourced pain it answers"
 itch: "the genuinely-Sean problem (value gate slot 1)"
-solution_artifact: "the real run / eval / before-after (value gate slot 2 — blocks if absent)"
-transfer: "what the reader can do for themselves after (value gate slot 3)"
+solution_artifact: "the captured run / eval / before-after (value gate slot 2 — blocks if absent)"
+transfer: "what the reader takes away, incl. the shipped mechanism + verdict (slot 3)"
 voice_chain_run: y | n
 ```
