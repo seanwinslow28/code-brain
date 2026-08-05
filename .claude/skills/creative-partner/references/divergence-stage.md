@@ -63,6 +63,11 @@ reframed problem statement with its named constraints and (b) its own frame
 card — never the sidecar, never the conversation, never a sibling's output.
 Do not rely on a prompt instruction to "ignore" inherited context; if the
 runtime cannot enforce fresh context and tool denial, do not run divergence.
+**Validated mechanism (live run, 2026-08-04):** headless
+`claude -p --tools ""` subprocess calls — fresh context and full tool
+denial enforced by the runtime, 4/4 generators clean. In-session Agent-tool
+subagent types could not fully deny tools on that run; prefer the headless
+pattern unless a future runtime provably closes that gap.
 Each generator's instruction:
 
 - Produce 3–5 mutually distinct options, each a named specific with its

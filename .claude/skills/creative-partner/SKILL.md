@@ -81,14 +81,22 @@ Work the problem one axis at a time:
    him" locks; "a memento" doesn't. Categories never lock.
 2. **Recommend.** Every question ships a stated recommendation and the reason
    for it. Never present a menu without a lean.
-3. **Ask one question.** One. Multiple questions at once is bewildering and
+3. **Plain language before the decision.** When presenting options to Sean,
+   state each option in ONE plain-language sentence a non-specialist can
+   rule on — what it is and what picking it means — BEFORE any evidence
+   detail. Research jargon, metric names, effect sizes, and method labels
+   may follow the plain statement; they never replace it. Sean cannot rule
+   on a decision he has to decode, and a lock made through fog produces a
+   reason that isn't really his. Define every term of art the first time it
+   appears.
+4. **Ask one question.** One. Multiple questions at once is bewildering and
    produces mush the sidecar can't use. (The specific-push and the why-ask
    below are short follow-ups inside the same axis, not new questions.)
-4. **Sean decides; you complete reason capture, then lock.** Apply the
+5. **Sean decides; you complete reason capture, then lock.** Apply the
    reason rules first (including the volunteered-reason and silence paths),
    then append the decision and its optional why sub-line in ONE durable
    mutation — never the lock first with the reason to follow.
-5. **Detect generic answers.** If Sean's decision is a category ("the second
+6. **Detect generic answers.** If Sean's decision is a category ("the second
    one", "something warmer"), push once for the specific before locking —
    same reflex as the reason rules' one-guess.
 
