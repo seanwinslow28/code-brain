@@ -1,0 +1,33 @@
+{
+  "id": "20260805-120331-e3f4a6",
+  "topic": "creatives and makers frustrated that AI brainstorming hands everyone the same obvious ideas, and that prompt tips, frameworks, and 'be more creative' instructions do not fix the sameness",
+  "lens": "substack",
+  "tier": "standard",
+  "segment": "creative",
+  "evidence_count": 28,
+  "verified": 3,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 4.2008,
+  "gather_status": {
+    "last30": "ok: 16 records (16 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 7 records (7 found)",
+    "reviews": "ok: 5 records (6 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "The evidence highlights the symptom of 'sameness' but does not specify if certain AI models (e.g., Claude 3 vs. GPT-4) suffer from this equally.",
+    "While the sources heavily critique AI outputs and lazy workflows, they offer almost no concrete alternative workflows that successfully bypass these limitations for true ideation."
+  ],
+  "contradictions": [
+    "There is a fundamental disagreement over who is to blame for 'slop': some argue it is entirely human error ('It's the people using it that's the problem, not the technology'), while other sources explicitly state that 'the lack of diversity in LLMs is transmissible to users,' blaming the inherent structural limits of the models.",
+    "While creators and devs are highly sensitive to and repulsed by 'AI slop', there is an acknowledgement that end-consumers might be entirely indifferent ('Devs hate AI slop, players could not care less')."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 0.7143,
+  "citation_recall": 0.3333,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

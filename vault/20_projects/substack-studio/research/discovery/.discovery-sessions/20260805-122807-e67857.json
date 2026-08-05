@@ -1,0 +1,33 @@
+{
+  "id": "20260805-122807-e67857",
+  "topic": "people running long-lived AI assistants with persistent memory over months, asking whether the collaborator actually gets better over time or just gets more agreeable and more stale",
+  "lens": "substack",
+  "tier": "standard",
+  "segment": "maker",
+  "evidence_count": 14,
+  "verified": 4,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 3.8614,
+  "gather_status": {
+    "last30": "ok: 4 records (4 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 8 records (8 found)",
+    "reviews": "ok: 2 records (2 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "The sources highlight the pain of outdated context but lack specific details on technical mitigation strategies (e.g., vector database pruning techniques, time-weighting algorithms).",
+    "The evidence completely omits any discussion regarding the privacy or security implications of a persistent memory store accumulating months of deeply personal user data.",
+    "There is no mention of the computational, financial, or token-usage costs associated with retaining and parsing an ever-growing long-term context window."
+  ],
+  "contradictions": [
+    "While some sources highlight memory as a frustrating liability requiring manual human intervention ('Anything that fails gets flagged for a human to cut', 'making your agent worse'), others praise the seamless magic of unprompted recall ('brought that context up without me asking'), indicating a massive variance in how well current frameworks actually implement persistence."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 1.0,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

@@ -1,0 +1,40 @@
+{
+  "id": "20260805-122320-ea7d5a",
+  "topic": "people who can instantly recognize the AI look and the AI writing voice and are trying to name the specific recurring tells, patterns, and defaults that give it away",
+  "lens": "substack",
+  "tier": "standard",
+  "segment": "creative",
+  "evidence_count": 17,
+  "verified": 5,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 3.6088,
+  "gather_status": {
+    "last30": "ok: 5 records (5 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 8 records (8 found)",
+    "reviews": "ok: 4 records (4 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "Most Reddit evidence consists only of post titles, so the underlying examples, contexts, and degree of community agreement are unavailable.",
+    "No publication dates, sample sizes, model versions, genres, or controlled human-versus-AI comparisons are supplied.",
+    "There is no evidence about whether recognized tells generalize across languages, cultures, platforms, professional domains, or different LLM providers.",
+    "No accuracy data establish whether people who feel AI writing is obvious are correctly identifying it rather than producing false positives.",
+    "The evidence contains almost no concrete inventory of recurring lexical tells; it primarily names structural predictability, missing voice, cadence, depth, and the em dash.",
+    "Despite the topic including the recognizable 'AI look,' the supplied evidence addresses writing and speech only, not visual-generation tells.",
+    "The evidence does not distinguish raw model output from heavily prompted, edited, or human-AI collaborative writing."
+  ],
+  "contradictions": [
+    "The em dash is implicitly treated as an AI sign by the source context, yet the quoted writer says they personally love using it, demonstrating that a supposed tell can also be authentic human style.",
+    "One source says the decisive patterns reside in structural 'shape,' while another offers surface-level interventions such as contractions and sentence-length variation; the latter may improve voice but may not remove deeper structural tells.",
+    "Claims that AI writing is immediately obvious sit in tension with the methodological warning that recognition systems can rely on familiarity or memory rather than structure, leaving confidence and actual detection accuracy unresolved.",
+    "AI is described as capable of 'sounding like a person' while also being described as obviously recognizable; the evidence suggests the apparent conflict may depend on whether prose is skimmed for fluency or examined closely for depth and structure."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 0.9091,
+  "citation_recall": 0.6,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}
