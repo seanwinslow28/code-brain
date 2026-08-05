@@ -89,7 +89,7 @@ Notably, under effective semantic diversity, **preference-tuned models look more
 
 ## Build order implied by the above
 
-1. **Publish the measurement protocol** (Finding 8) — what counts as beat/tied/lost, on what metric, with what baseline. The library's credibility is bounded by this, so it cannot come second.
+1. **Publish the measurement protocol** (Finding 8) — what counts as beat/tied/lost, on what metric, with what baseline. The library's credibility is bounded by this, so it cannot come second. **Upgraded 2026-08-05:** post-Move-B this is not merely a credibility gate, it is the *entire* differentiation (see amendments below).
 2. **Rung #1: heterogeneous vs homogeneous panels** (Finding 4) — strongest evidence, infrastructure already exists, native to Sean's lane.
 3. **Rung #2: morphological analysis** (Finding 5) — concrete effect sizes, travels to readers without a fleet.
 4. **The folklore post** (Finding 3) — can run early and independently; it's the credibility opener.
@@ -116,12 +116,48 @@ The *shape* of Findings 1–2 may still be right — the seam thesis is plausibl
 
 **Findings 3–8 stand.** All derive from Topic 2's 90%-defensible base. Individual figures still need their primary source resolved before publication, but that is a lookup against a named paper, not archaeology.
 
-### Remaining debt
+### Remaining debt — CLEARED 2026-08-05 (Moves B and C, $0 each)
 
-- **Resolve primary sources for every publicly quoted figure:** 91%/82%, +18.5%, *d* = 1.03, *d* = 0.70, *d* = 0.414, D = 16.50/13.60. (Topic 2 — tractable; the papers are named and the URLs resolve.)
-- **Independently verify Techpresso and Aksoy Capital** actually do what their own pages claim. Free, and it settles whether the positioning claim is "nobody does this" or "two adjacent players do."
-- **Replace Topic 1 with a named-candidate falsification pass** rather than re-running the same landscape question. Merge with refocus-ticket item 2 (competitive checks). Detail in the audit note.
-- Drop the `$2.51B` market-size figure and the `10–30× creative diversity` claim unless independently sourced — the first traces to SEO content, the second to `springboards.ai`'s own blog.
+- ~~Resolve primary sources for every publicly quoted figure~~ → **DONE.** [Figures resolved](deep-dives/2026-08-05-divergence-mechanisms-evidence-map.md#figures-resolved-2026-08-05-move-c-0). All six real and quoted accurately; three corrections carry forward (see Finding 7 update below and Finding 4's date caveat). All eight named frameworks confirmed to exist.
+- ~~Independently verify Techpresso and Aksoy Capital~~ → **DONE** ([Move A](deep-dives/2026-08-05-move-a-verification-two-named-examples.md)).
+- ~~Replace Topic 1 with a named-candidate falsification pass~~ → **DONE** ([Move B](deep-dives/2026-08-05-move-b-candidate-falsification.md)). Also discharges refocus-ticket item 2 (Executive Circle competitive checks).
+- Drop the `$2.51B` market-size figure and the `10–30× creative diversity` claim unless independently sourced — the first traces to SEO content, the second to `springboards.ai`'s own blog. **Still open; simplest fix is not to use them.**
+
+---
+
+## Post-verification amendments — READ BEFORE THE RECONVENE
+
+Two of the eight findings changed materially once the primaries were read. Both changes are the round working as designed: caught at $0, before publication.
+
+### Amendment to Findings 1–2 — the white space is CUMULATION, not testing
+
+[Move B](deep-dives/2026-08-05-move-b-candidate-falsification.md) checked twelve named candidates directly. Eleven are clean NOs with URLs behind each: Anthropic's prompt library, DAIR.AI, promptingguide.ai, LangSmith Hub, PromptHub, PromptLayer, Braintrust, DSPy, OpenAI Cookbook, awesome-chatgpt-prompts, and HF `finephrase`. LangSmith states the standard's absence outright: its hub prompts are **"user-generated and unverified."**
+
+The twelfth is the finding. The Executive Circle pass surfaced **Nate Jones** — the incumbent the project CLAUDE.md already names — running a real controlled experiment on 2026-07-15: 742-word brief vs 5,197-word method, three runs each, two blind scorers, and a binary delivery contract. His richer artifact scored better on content (19.67 vs 17.5 / 20) and **failed delivery two runs out of three**. He publishes the loss, refuses to over-claim from it, and ships an evidence-labelling vocabulary (`VERIFIED` / `INFERRED` / `INACCESSIBLE` / `NOT_EXPOSED`).
+
+**So "we publish tested verdicts with honest failures" is no longer a differentiator.** It is falsified as a novelty claim by the nearest competitor in Sean's exact lane.
+
+What survives, and it is narrower and better: **nobody makes it cumulative.** Nate's rigor is per-post and inconsistent (the same author's "I Tested OpenAI's 200 Prompt Templates" publishes zero measurements). The rigor exists in three places and none of them accumulate — private enterprise eval tooling, out-of-domain financial retraction discipline, and one-off practitioner experiments. A per-entry, versioned, retractable library against a *published* measurement protocol does not exist.
+
+**This makes Finding 8 load-bearing rather than merely prudent.** The measurement protocol is not a credibility prerequisite for the library; it *is* the differentiation. A library of verdicts without a published protocol is Nate's posts with worse distribution.
+
+### Amendment to Finding 7 — the masthead re-cut cannot be carried by *d* = 0.414
+
+The number is real (95% CI [.235, .593]) but three facts the DR report omitted break the framing:
+
+1. It rests on **two studies, six effect sizes**.
+2. The during-vs-after moderator test was **not significant** (*Q*ₘ(1) = 2.17, *p* = .141). The authors' own words: *"This finding offers no evidence for a difference in homogenization during and after human–AI co-creation."*
+3. The authors hedge: persistence *"might"* occur, *"tentative due to the small number of studies."*
+
+Finding 7 called persistence "the single most defensible claim." It is closer to the least defensible of the four task-type figures. Also: the report's "writing & design *d* = 0.27" silently merges two separate moderator levels (writing 0.27, visual art/design 0.27) with very different confidence intervals.
+
+The stickiness re-cut is not dead. But it must either ship with the n and the hedge attached, drop from thesis to open question, or become a rung — *"the field has two studies on whether this sticks; here is a third"* is a strong Building the Ladder move and fits the masthead better than borrowing a number that cannot hold the weight.
+
+### Smaller corrections that travel with any published post
+
+- **Finding 4's 91%/82%** is real but comes from **Hegazy 2024** ([arXiv:2410.12853](https://arxiv.org/abs/2410.12853)), not from either cited source, and it is a **2024 result on 2024-era models** (Gemini-Pro, PaLM 2-M, Mixtral 7B×8 vs GPT-4). Do not present it as current. The mechanism claim stands; the number needs its date.
+- **The NoveltyBench D = 16.50 vs 13.60 figure is not xRAG's.** It belongs to continuous context sampling (ACL 2026 SRW) measured against the **G2** baseline. The paper explicitly calls xRAG's goal "orthogonal to ours." Drop it from any "parametric context injection" claim.
+- **Findings 3, 5, 6 and 8 are unamended.** iDesignGPT's +18.5% / +11.4% / *d* ≈ 1.03 / 48 participants all confirmed verbatim in **Nature Communications**.
 
 ### The methodological lesson (worth a post on its own)
 
