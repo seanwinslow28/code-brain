@@ -1,5 +1,12 @@
 # Pencil & Prompt — Mascot Prompt Playground (v1, 2026-06-23)
 
+> **SUPERSEDED 2026-08-06 (kept for reference, never delete).** The mentor-pencil +
+> single-intern duo below personified the retired taste-transfer premise. The live cast is
+> the **Parent & the Brood** — pencil parent + three monitor-headed agent kids, sitcom
+> register — anchored at `_assets/mascot-candidates/parent-and-the-brood-v3.png` and
+> specified in `playbook/image-house-style.md` (v3). Decisions: partner-session sidecar
+> `2026-08-05-pencil-and-prompt-visual-identity`, locks L3/L4.
+
 Prompts to play with for the **signature masthead motif**: the duo. Run them on your Mac
 (GPT Image 2 via `openai-image-gen`, or the ChatGPT web app). Image gen can't run in Cowork,
 so these are copy-paste fodder for you to experiment with and dial in.

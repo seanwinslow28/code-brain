@@ -30,6 +30,16 @@ Every future session reads these docs first; until they're rewritten, every sess
 
 ## S2 — Theme & image pass (after S1; Mac session — image APIs; ~$2-5)
 
+> **✅ DONE 2026-08-06** (partner-session sidecar `2026-08-05-pencil-and-prompt-visual-identity`,
+> L1-L7 + one divergence run on the mascot axis; engines: Higgsfield CLI + GPT Image 2).
+> Locks: pencil-test medium survives whole, re-captioned lab-notebook; cast = **Parent & the
+> Brood** (pencil parent + 3 monitor-headed kids, sitcom register, anchor
+> `_assets/mascot-candidates/parent-and-the-brood-v3.png`); accent = SERIES (BtL teal / RA
+> amber, homepage homogeneous); hole punches removed house-wide. Shipped to
+> `_assets/launch-2026-08/`: masthead, both series cards, About + Start Here + origin-confession
+> heroes (v2, self-portrait sheet), 1:1 avatar. House-style doc updated to v3; old mascot
+> playground marked superseded. Remaining open thread: none — S3/S4 consume these assets.
+
 The sidecar flagged all images for review against the new theme.
 
 > **Kickoff:** SKILLS: run the DECISIONS through `creative-partner` (this is the map's one true partner session — "does the pencil-test look survive?", "how do the two series read differently?", "what do the mascots become as the Raising Agents cast?" are open taste decisions, and it is the skill's first live test on a visual axis; new sidecar, locks with reasons). Image generation stays OUTSIDE the partner loop per the skill's house rules — after the locks, execute in the same or a follow-on run with `openai-image-gen` (primary) + `prompt-how-much` / `image-generator-prompt-science`. Then: review the Pencil & Prompt image house style (`vault/20_projects/substack-studio/playbook/image-house-style.md`, style anchors in `_assets/style-anchors/`) against the relaunched identity (sidecar locks L4/L5: keep the name; Building the Ladder + Raising Agents series; divergence thesis). Decide with Sean: does the pencil-test look survive (it fits the name and the mascot lineage — the mascots are now the Raising Agents cast), and what visual language marks the two series apart (rung numbering treatment; the ladder motif; the existing amber/teal accent split)? Then generate: masthead/banner candidates, a Building the Ladder series card, a Raising Agents series card, and hero images for the launch bundle (About, Start Here, origin-confession post). `openai-image-gen` primary. New assets to `_assets/` + per-post `images/`; superseded versions to `images/_superseded/`, never deleted.
