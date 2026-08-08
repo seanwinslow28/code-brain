@@ -1,0 +1,209 @@
+{
+  "model": "gemini-3.5-flash",
+  "recall": 1.0,
+  "false_alarm": 0.18181818181818182,
+  "haircut": {
+    "with_ok": 2,
+    "without_ok": 3,
+    "control_ok": true
+  },
+  "bars": {
+    "recall": true,
+    "false_alarm": true,
+    "haircut": true
+  },
+  "per_case": {
+    "X01": {
+      "verdict": "consistent",
+      "truth": "consistent",
+      "label": "clean",
+      "correct": true
+    },
+    "X02": {
+      "verdict": "consistent",
+      "truth": "consistent",
+      "label": "clean",
+      "correct": true
+    },
+    "X03": {
+      "verdict": "consistent",
+      "truth": "consistent",
+      "label": "clean",
+      "correct": true
+    },
+    "X04": {
+      "verdict": "consistent",
+      "truth": "consistent",
+      "label": "clean-view-trap-3q-back",
+      "correct": true
+    },
+    "X05": {
+      "verdict": "consistent",
+      "truth": "consistent",
+      "label": "clean",
+      "correct": true
+    },
+    "X06": {
+      "verdict": "consistent",
+      "truth": "consistent",
+      "label": "clean",
+      "correct": true
+    },
+    "X07": {
+      "verdict": "drifted",
+      "truth": "consistent",
+      "label": "clean",
+      "correct": false
+    },
+    "X08": {
+      "verdict": "consistent",
+      "truth": "consistent",
+      "label": "clean",
+      "correct": true
+    },
+    "X09": {
+      "verdict": "consistent",
+      "truth": "consistent",
+      "label": "clean",
+      "correct": true
+    },
+    "X10": {
+      "verdict": "drifted",
+      "truth": "consistent",
+      "label": "clean",
+      "correct": false
+    },
+    "X11": {
+      "verdict": "consistent",
+      "truth": "consistent",
+      "label": "clean",
+      "correct": true
+    },
+    "X12": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "proportion",
+      "correct": true
+    },
+    "X13": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "proportion",
+      "correct": true
+    },
+    "X14": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "palette",
+      "correct": true
+    },
+    "X15": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "palette",
+      "correct": true
+    },
+    "X16": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "shading-register",
+      "correct": true
+    },
+    "X17": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "construction-lines",
+      "correct": true
+    },
+    "X18": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "hard-identity-drift",
+      "correct": true
+    },
+    "X19": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "proportion",
+      "correct": true
+    },
+    "X20": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "proportion",
+      "correct": true
+    },
+    "X21": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "anatomy-count",
+      "correct": true
+    },
+    "X22": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "anatomy-count",
+      "correct": true
+    },
+    "X23": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "palette",
+      "correct": true
+    },
+    "X24": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "shading-register",
+      "correct": true
+    },
+    "X25": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "hard-identity-drift",
+      "correct": true
+    },
+    "X26": {
+      "verdict": "consistent",
+      "truth": "consistent",
+      "label": "haircut-with-note",
+      "correct": true
+    },
+    "X27": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "haircut-without-note",
+      "correct": true
+    },
+    "X28": {
+      "verdict": "consistent",
+      "truth": "consistent",
+      "label": "haircut-with-note",
+      "correct": true
+    },
+    "X29": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "haircut-without-note",
+      "correct": true
+    },
+    "X30": {
+      "verdict": "drifted",
+      "truth": "consistent",
+      "label": "haircut-with-note",
+      "correct": false
+    },
+    "X31": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "haircut-without-note",
+      "correct": true
+    },
+    "X32": {
+      "verdict": "drifted",
+      "truth": "drifted",
+      "label": "haircut-adversarial-control",
+      "correct": true
+    }
+  }
+}

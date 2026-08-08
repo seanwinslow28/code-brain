@@ -1,0 +1,1020 @@
+{
+  "model": "gemini-3.5-flash",
+  "n": 3,
+  "results": [
+    {
+      "id": "X01",
+      "majority": "consistent",
+      "votes": [
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The character's facial features, hair style, clothing, and overall sketch-and-wash art style perfectly match the canon model sheets.",
+          "confidence": 0.98
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate image perfectly maintains the character's design, clothing, color palette, and sketchy art style within a new scene context.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The character's clothing, hairstyle, facial features, body proportions, and sketchy line-art style perfectly match the turnaround reference sheets.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 0,
+      "n_consistent": 3
+    },
+    {
+      "id": "X02",
+      "majority": "consistent",
+      "votes": [
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate image perfectly maintains the character's distinct facial structure, hairstyle, clothing design, and sketchy artistic style as established in the turnaround sheets.",
+          "confidence": 0.98
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The character in the candidate image maintains the identical facial structure, messy blonde hair, navy t-shirt, cuffed grey jeans, and overall sketchy art style established in the turnaround sheets.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The character's design, including his blonde hair, facial features, dark blue t-shirt, and cuffed grey jeans, is perfectly consistent with the turnaround sheets in both style and proportions.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 0,
+      "n_consistent": 3
+    },
+    {
+      "id": "X03",
+      "majority": "consistent",
+      "votes": [
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate image perfectly maintains the character's design, proportions, color palette, and sketch-style register from the canon model sheets.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate image perfectly maintains the character's design, including his blonde hairstyle, facial profile, black t-shirt, cuffed grey jeans, and the sketch-like art style on peg-hole paper.",
+          "confidence": 0.98
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate image depicts the character walking in profile with identical clothing, hair, facial features, and sketch art style as established in the canon turnaround references.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 0,
+      "n_consistent": 3
+    },
+    {
+      "id": "X04",
+      "majority": "consistent",
+      "votes": [
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The character's outfit, hair style, facial profile, and the overall sketch art style match the canon model sheets perfectly.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate image perfectly maintains the character's design details\u2014such as the blonde swept-up hair, navy t-shirt, cuffed grey jeans, and grey sneakers\u2014rendered in the exact same sketchy, watercolor-shaded art style.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate image perfectly maintains the character's clothing, blonde hairstyle, facial stubble, and sketch-like artistic style established in the model sheets.",
+          "confidence": 0.98
+        }
+      ],
+      "n_drift": 0,
+      "n_consistent": 3
+    },
+    {
+      "id": "X05",
+      "majority": "consistent",
+      "votes": [
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The character's hairstyle, facial stubble, dark navy t-shirt, cuffed grey jeans, and sneakers perfectly match the design and art style of the canon reference sheets.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The character's design, including his blond hair, stubble, navy t-shirt, cuffed gray jeans, and the sketch-like art style, matches the canon references perfectly.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate image perfectly maintains the character's signature sketchy art style, facial profile with stubble, blond hair shape, dark blue t-shirt, cuffed grey jeans, and grey sneakers.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 0,
+      "n_consistent": 3
+    },
+    {
+      "id": "X06",
+      "majority": "consistent",
+      "votes": [
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate image perfectly maintains the character's distinctive blond hair, blue eyes, facial stubble, and the sketchy, semi-realistic art style seen in the canon references.",
+          "confidence": 0.98
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate image perfectly matches the character's facial features, hair structure, eye color, stubble pattern, and sketch art style shown in the 3/4 views of the canon reference sheets.",
+          "confidence": 0.98
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The character's facial features, hair style, eye color, stubble, and art style perfectly match the 3/4 turn view of the canon model sheets.",
+          "confidence": 0.98
+        }
+      ],
+      "n_drift": 0,
+      "n_consistent": 3
+    },
+    {
+      "id": "X07",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "anatomy",
+            "style-register"
+          ],
+          "receipt": "The candidate features splayed, outward-pointing legs instead of the canon's four vertical stumps, and introduces shiny white highlights to the eyes.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "style-register"
+          ],
+          "receipt": "The candidate character's eyes feature prominent white specular highlights, whereas the canon reference establishes them as solid dark spots with no highlights.",
+          "confidence": 0.9
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "anatomy"
+          ],
+          "receipt": "The candidate's legs are splayed outwards with hollow-looking circular ends instead of the four solid, vertically-oriented peg legs established in the canon references.",
+          "confidence": 0.95
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X08",
+      "majority": "consistent",
+      "votes": [
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate image perfectly matches the character's rounded-cube shape, terracotta color, stubby legs, cylindrical side limbs, and pencil-sketch art style shown in the turnaround sheet.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate image perfectly maintains the character's rounded-cube geometry, terracotta palette, pencil-test sketch style, and distinctive facial construction lines as established in the references.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The character in the candidate image perfectly maintains the sketchy art style, construction lines, color palette, and anatomy of the four-legged block creature established in the model sheets.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 0,
+      "n_consistent": 3
+    },
+    {
+      "id": "X09",
+      "majority": "consistent",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "anatomy"
+          ],
+          "receipt": "The candidate's back view shows four legs with their soles facing the viewer, which is anatomically inconsistent with the vertical, non-bending peg legs established in the canon turnaround.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate image depicts a consistent back-view pose of the character sitting down, maintaining the correct anatomy of four legs, blocky proportions, and sketchy art style.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate image depicts the character from behind in a consistent sketch style and color palette, showing a natural sitting pose where all four legs are visible.",
+          "confidence": 0.95
+        }
+      ],
+      "n_drift": 1,
+      "n_consistent": 2
+    },
+    {
+      "id": "X10",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "style-register"
+          ],
+          "receipt": "The candidate image introduces detailed, human-like eyes with eyelids and creases, deviating from the simple, solid-black oval eyes established in the canon references.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "style-register"
+          ],
+          "receipt": "The candidate image introduces detailed, human-like eyelids with wrinkles and a mouth line, which deviates from the character's established design of simple bead eyes and no mouth.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "style-register"
+          ],
+          "receipt": "The candidate image introduces detailed eyelids, eye bags, and a mouth on a character whose canon design strictly features simple solid-black oval eyes and no mouth.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X11",
+      "majority": "consistent",
+      "votes": [
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate character perfectly preserves the sketchy line-work style, facial construction lines, four-legged anatomy, and brown color palette established in the model sheets.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The character in the candidate image perfectly maintains the rounded cuboid shape, stubby limbs, terracotta color palette, and sketchy pencil-drawn art style with visible construction lines shown in the turnaround.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The character design, including its four stubby legs, side pegs, construction lines, and sketch-like style, is perfectly preserved in the candidate scene.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 0,
+      "n_consistent": 3
+    },
+    {
+      "id": "X12",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion",
+            "style-register"
+          ],
+          "receipt": "The candidate image features the character in a chibi style with an extremely enlarged head and shrunken body, which deviates from the realistic proportions established in the canon references.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion",
+            "style-register"
+          ],
+          "receipt": "The character in the candidate image is drawn in a chibi or super-deformed style with an extremely large head and small body, violating the realistic proportions established in the canon model sheet.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion"
+          ],
+          "receipt": "The candidate image depicts the character with chibi-style proportions, featuring an extremely oversized head and a shrunken body compared to the realistic proportions established in the canon reference sheets.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X13",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion",
+            "style-register"
+          ],
+          "receipt": "The candidate image depicts the character in a chibi style with an oversized head and shortened, stubby limbs that violate the established realistic proportions in the canon reference sheet.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion",
+            "style-register"
+          ],
+          "receipt": "The candidate image depicts the character with highly exaggerated chibi proportions where the head is disproportionately large compared to the body, deviating from the established canon proportions.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion",
+            "style-register"
+          ],
+          "receipt": "The candidate image depicts the character in an exaggerated chibi style with a disproportionately large head and shortened limbs compared to the realistic proportions established in the canon references.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X14",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "palette",
+            "style-register"
+          ],
+          "receipt": "The candidate image changes from the fully colored, clean digital line art style of the canon reference to a monochrome graphite pencil sketch with cross-hatched shading.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "palette",
+            "style-register"
+          ],
+          "receipt": "The candidate image is an uncolored pencil sketch, lacking the established color palette (such as blue eyes and blonde hair) and the clean, colored art-style register of the canon references.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "palette",
+            "style-register"
+          ],
+          "receipt": "The candidate image is an uncolored graphite pencil sketch with cross-hatching, whereas the canon references establish a fully-colored digital illustration style.",
+          "confidence": 0.95
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X15",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "palette"
+          ],
+          "receipt": "The character's hair has changed from a light sandy blonde in the canon references to a dark brown in the candidate image.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "palette"
+          ],
+          "receipt": "The character's hair and eyebrow color has drifted from blond in the canon references to brown in the candidate image.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "palette"
+          ],
+          "receipt": "The character's hair color has changed from the light blonde established in the canon references to a dark brown.",
+          "confidence": 0.95
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X16",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register",
+            "proportion"
+          ],
+          "receipt": "The candidate image has shifted from a 2D stylized cartoon art style with clean line-art to a semi-realistic digital render with realistic facial proportions.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register",
+            "identity"
+          ],
+          "receipt": "The candidate image shifts from a 2D sketched comic art style to a highly realistic, 3D digital portrait style.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register"
+          ],
+          "receipt": "The candidate image shifts from a 2D sketched cartoon art style to a highly realistic, photographic digital painting style.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X17",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register"
+          ],
+          "receipt": "The candidate image shifts from the sketchy, hand-drawn pencil-and-watercolor texture of the canon references to a flat, clean digital cel-shaded art style with thick solid outlines.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register",
+            "identity"
+          ],
+          "receipt": "The art style has drifted from a sketchy, hand-drawn pencil register with distinct facial stubble to a clean, flat-colored digital cartoon style without facial hair.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register"
+          ],
+          "receipt": "The art style has shifted from a textured, hand-drawn sketch-and-watercolor look with visible construction lines to a clean, flat digital cel-shaded aesthetic with uniform black outlines.",
+          "confidence": 0.95
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X18",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "palette",
+            "style-register"
+          ],
+          "receipt": "The candidate image depicts a clean-shaven character with highly realistic facial proportions and a middle-parted hairstyle, which deviates from the cartoonish style, stubbled jaw, and swept-back hair of the canon character.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "proportion",
+            "palette",
+            "style-register"
+          ],
+          "receipt": "The candidate image shows a highly realistic, chiseled face with dark thick eyebrows and a different hairstyle, lacking the cartoon proportions, light stubble, and blue eyes established in the canon.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "style-register"
+          ],
+          "receipt": "The candidate features a completely different middle-parted hairstyle, lacks the characteristic stubble, and has highly realistic, angular facial features instead of the canon's soft, cartoony design.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X19",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion",
+            "anatomy"
+          ],
+          "receipt": "The character's body is stretched horizontally into a wide rectangular shape rather than the square-like proportions of the canon reference, and the legs are angled forward instead of pointing straight down.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion",
+            "anatomy"
+          ],
+          "receipt": "The character's body has been significantly stretched into a wide rectangular shape rather than its canon cube-like proportions, and the legs are now forward-pointing pegs instead of vertical stubs under the body.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion",
+            "anatomy"
+          ],
+          "receipt": "The candidate's main blocky body is significantly wider horizontally than its established square-like proportions, and its legs are depicted as cylindrical pegs pointing forward rather than standing vertically.",
+          "confidence": 0.95
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X20",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "proportion"
+          ],
+          "receipt": "The character's body shape has drifted from its established rounded-cube geometry in the canon references to a completely spherical shape in the candidate image.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion",
+            "identity"
+          ],
+          "receipt": "The candidate character's body shape has drifted from a rounded block/cube in the canon references to an entirely spherical shape.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion"
+          ],
+          "receipt": "The character's body shape has drifted from a blocky, rounded cube into a sphere.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X21",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "anatomy"
+          ],
+          "receipt": "The candidate image introduces an extra leg positioned centrally at the front, contradicting the four-cornered leg anatomy established in the canon turnaround.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "anatomy"
+          ],
+          "receipt": "The candidate character features a prominent third leg in the front center, which contradicts the quadrapedal four-legged design established in the canon turnaround.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "anatomy"
+          ],
+          "receipt": "The candidate image depicts a central front leg, whereas the canon design features a four-legged arrangement with a clear gap in the middle from the front view.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X22",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "anatomy"
+          ],
+          "receipt": "The candidate character is depicted with five visible legs arranged around its base, whereas the canon reference model sheet establishes that it only has four legs.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "anatomy"
+          ],
+          "receipt": "The candidate image shows the character with at least five radially splayed-out legs instead of its established four vertical peg-like legs.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "anatomy"
+          ],
+          "receipt": "The candidate image depicts five splayed legs arranged in a radial pattern, whereas the canon reference establishes that the character has four simple vertical legs.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X23",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "palette",
+            "anatomy"
+          ],
+          "receipt": "The candidate character's color palette has shifted from warm terracotta to blue-gray, and its limbs have changed from stubby cylindrical appendages to longer, downward-angled arms and forward-facing seated legs.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "palette",
+            "anatomy"
+          ],
+          "receipt": "The character's color has changed from terracotta to a bluish-grey, and its stubby cylindrical side-pegs and legs have been replaced with longer, angled arms and forward-facing feet.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "palette",
+            "anatomy"
+          ],
+          "receipt": "The character's color palette has shifted from terracotta orange to slate gray, and the limb structure has changed from short, straight pegs to longer, downward-slanted arms and forward-facing sitting legs.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X24",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register"
+          ],
+          "receipt": "The candidate replaces the sketchy hand-drawn pencil style and cross-hatched shading with smooth, digital gradient rendering and adds reflective white catchlights to the eyes.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register"
+          ],
+          "receipt": "The candidate image replaces the sketchy, hand-hatched pencil shading of the canon reference with smooth, digital airbrush gradients and adds glossy white highlights to the eyes.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register"
+          ],
+          "receipt": "The candidate image shifts from the sketchy, hand-drawn cross-hatched pencil shading of the canon reference to a smooth, digitally airbrushed gradient style with polished eye highlights.",
+          "confidence": 0.95
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X25",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "proportion",
+            "anatomy",
+            "style-register"
+          ],
+          "receipt": "The candidate image shifts from a hand-drawn sketch of a quadrapedal, single-block creature to a pixel-art style of a bipedal character with a distinct head and torso.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "proportion",
+            "anatomy",
+            "style-register"
+          ],
+          "receipt": "The candidate image alters the character's hand-drawn, quadrupedal block design into a bipedal pixel-art figure with a distinct head and torso, and adds an undeclared mouth.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "anatomy",
+            "style-register"
+          ],
+          "receipt": "The candidate has a distinct head, body, and two legs rendered in pixel art, whereas the canon character is a single-unit four-legged sketched creature.",
+          "confidence": 0.8
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X26",
+      "majority": "consistent",
+      "votes": [
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate correctly depicts the character with the updated headband, sleeveless shirt, and no glasses, while maintaining the original art style.",
+          "confidence": 0.8
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate aligns with the declared update, maintaining the original art style, hair, and footwear while adding the new headband and sleeveless shirt.",
+          "confidence": 0.8
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The character incorporates all declared training-arc updates while perfectly maintaining core facial features, hair, and footwear.",
+          "confidence": 0.7
+        }
+      ],
+      "n_drift": 0,
+      "n_consistent": 3
+    },
+    {
+      "id": "X27",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity"
+          ],
+          "receipt": "The character in the candidate image is missing his signature black-rimmed glasses, has significantly thicker eyebrows, and wears a red bandana and a ripped sleeveless tank top instead of his canon white t-shirt.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity"
+          ],
+          "receipt": "The candidate character is missing his signature black-rimmed glasses and features much thicker, bushier eyebrows than established in the canon references.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity"
+          ],
+          "receipt": "The character is missing his signature black rectangular glasses, has significantly thicker eyebrows, and is wearing an unestablished red headband and sleeveless shirt.",
+          "confidence": 0.95
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X28",
+      "majority": "consistent",
+      "votes": [
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate perfectly adapts the character fifty years into the future with graying hair, wrinkles, a heavier build, and elderly clothing, while accurately retaining her signature facial structure, thick eyebrows, and the 2D illustration style.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate character retains key facial features such as the thick eyebrows and round nose while successfully implementing all the aged attributes declared in the canon update note.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The candidate perfectly implements the fifty-year age jump with gray hair, wrinkles, a heavier build, and updated clothing while maintaining her signature facial features and the series' art style.",
+          "confidence": 0.98
+        }
+      ],
+      "n_drift": 0,
+      "n_consistent": 3
+    },
+    {
+      "id": "X29",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "palette",
+            "proportion"
+          ],
+          "receipt": "The character has been aged significantly with grey hair and wrinkles, her body proportions are wider, and her historical fantasy garb has been replaced with modern clothing.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "palette",
+            "proportion"
+          ],
+          "receipt": "The character has drifted from a young, brown-haired figure in historical robes to an elderly woman with grey hair, wrinkles, a stockier build, and modern clothing.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "proportion",
+            "palette"
+          ],
+          "receipt": "The character in the candidate image has aged into an elderly woman with grey hair, facial wrinkles, a much heavier body proportion, and entirely different modern clothing compared to the young character in the canon reference.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X30",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "anatomy"
+          ],
+          "receipt": "The candidate pixel sprite features four legs aligned in a single row from a side profile, which contradicts the canon character's four-legged square arrangement.",
+          "confidence": 0.9
+        },
+        {
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The character's terracotta color, four legs, and cylindrical arm are accurately preserved in the simplified 8-bit pixel art style.",
+          "confidence": 0.95
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "anatomy"
+          ],
+          "receipt": "The candidate pixel art character features a prominent snout-like protrusion on its face, whereas the canon character has a completely flat face with no nose or beak.",
+          "confidence": 0.95
+        }
+      ],
+      "n_drift": 2,
+      "n_consistent": 1
+    },
+    {
+      "id": "X31",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register",
+            "anatomy"
+          ],
+          "receipt": "The candidate image changes the art style from a hand-drawn, sketched animation model to low-resolution pixel art.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register",
+            "anatomy",
+            "proportion"
+          ],
+          "receipt": "The candidate image shifts from a hand-drawn pencil-sketch style to a low-resolution pixel art style without an authorized canon update.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register",
+            "proportion",
+            "anatomy"
+          ],
+          "receipt": "The candidate image depicts the character in a low-resolution pixel art style that drastically departs from the established hand-drawn pencil sketch and watercolor aesthetic.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    },
+    {
+      "id": "X32",
+      "majority": "drifted",
+      "votes": [
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "proportion",
+            "anatomy"
+          ],
+          "receipt": "The candidate features a humanoid anatomy with a separate head and torso, two legs, and a mouth, whereas the canon design is a single cube-shaped body with four stubby legs and no mouth.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "proportion",
+            "anatomy"
+          ],
+          "receipt": "The candidate character has a humanoid anatomy with a distinct separate head, torso, two arms, and a mouth, which directly contradicts the canon design of a single-block cuboid with four legs and no mouth.",
+          "confidence": 1.0
+        },
+        {
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "anatomy",
+            "proportion"
+          ],
+          "receipt": "The candidate features a two-segmented body with a distinct head and torso, two legs, and a mouth, which deviates from the canon mascot's single-block body, four legs, and mouthless face.",
+          "confidence": 1.0
+        }
+      ],
+      "n_drift": 3,
+      "n_consistent": 0
+    }
+  ]
+}

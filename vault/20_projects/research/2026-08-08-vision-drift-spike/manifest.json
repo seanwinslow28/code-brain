@@ -1,0 +1,54 @@
+{
+  "anima_root": "/Users/seanwinslow/Code-Brain/anima",
+  "ref_sets": {
+    "sean": [
+      "characters/sean-anchor/source-refs/sean-character-full-body-turnaround.png",
+      "characters/sean-anchor/source-refs/sean-head-turnaround.png"
+    ],
+    "mascot": [
+      "characters/claude-mascot/anchor.png",
+      "characters/claude-mascot/source-refs/turnaround-c1.png"
+    ],
+    "kid": [
+      "characters/kid/source-refs/kid-wimpy-turnaround.png",
+      "characters/kid/source-refs/kid-wimpy-anchor.png"
+    ],
+    "grandma": [
+      "characters/grandma/source-refs/grandma-young.png"
+    ]
+  },
+  "cases": [
+    {"id": "X01", "set": "A", "refs": "sean", "candidate": "evals/vision_critic/fixtures/frames/C01.jpeg", "note": null, "truth": "consistent", "truth_label": "clean"},
+    {"id": "X02", "set": "A", "refs": "sean", "candidate": "evals/vision_critic/fixtures/frames/C02.jpeg", "note": null, "truth": "consistent", "truth_label": "clean"},
+    {"id": "X03", "set": "A", "refs": "sean", "candidate": "evals/vision_critic/fixtures/frames/C03.jpeg", "note": null, "truth": "consistent", "truth_label": "clean"},
+    {"id": "X04", "set": "A", "refs": "sean", "candidate": "evals/vision_critic/fixtures/frames/C04.jpeg", "note": null, "truth": "consistent", "truth_label": "clean-view-trap-3q-back"},
+    {"id": "X05", "set": "A", "refs": "sean", "candidate": "evals/vision_critic/fixtures/frames/C06.jpeg", "note": null, "truth": "consistent", "truth_label": "clean"},
+    {"id": "X06", "set": "A", "refs": "sean", "candidate": "evals/vision_critic/fixtures/frames/C08.jpeg", "note": null, "truth": "consistent", "truth_label": "clean"},
+    {"id": "X07", "set": "A", "refs": "mascot", "candidate": "evals/vision_critic/fixtures/frames/claude-mascot/C01.jpeg", "note": null, "truth": "consistent", "truth_label": "clean"},
+    {"id": "X08", "set": "A", "refs": "mascot", "candidate": "evals/vision_critic/fixtures/frames/claude-mascot/C02.jpeg", "note": null, "truth": "consistent", "truth_label": "clean"},
+    {"id": "X09", "set": "A", "refs": "mascot", "candidate": "evals/vision_critic/fixtures/frames/claude-mascot/C05.jpeg", "note": null, "truth": "consistent", "truth_label": "clean"},
+    {"id": "X10", "set": "A", "refs": "mascot", "candidate": "evals/vision_critic/fixtures/frames/claude-mascot/C10.jpeg", "note": null, "truth": "consistent", "truth_label": "clean"},
+    {"id": "X11", "set": "A", "refs": "mascot", "candidate": "evals/vision_critic/fixtures/frames/claude-mascot/C13.jpeg", "note": null, "truth": "consistent", "truth_label": "clean"},
+    {"id": "X12", "set": "B", "refs": "sean", "candidate": "evals/vision_critic/fixtures/frames/P-D1.jpeg", "note": null, "truth": "drifted", "truth_label": "proportion"},
+    {"id": "X13", "set": "B", "refs": "sean", "candidate": "evals/vision_critic/fixtures/frames/P-D2.jpeg", "note": null, "truth": "drifted", "truth_label": "proportion"},
+    {"id": "X14", "set": "B", "refs": "sean", "candidate": "evals/vision_critic/fixtures/frames/PA-D1.jpeg", "note": null, "truth": "drifted", "truth_label": "palette"},
+    {"id": "X15", "set": "B", "refs": "sean", "candidate": "evals/vision_critic/fixtures/frames/PA-D3.jpeg", "note": null, "truth": "drifted", "truth_label": "palette"},
+    {"id": "X16", "set": "B", "refs": "sean", "candidate": "evals/vision_critic/fixtures/frames/SH-D1.jpeg", "note": null, "truth": "drifted", "truth_label": "shading-register"},
+    {"id": "X17", "set": "B", "refs": "sean", "candidate": "evals/vision_critic/fixtures/frames/CL-D2.jpeg", "note": null, "truth": "drifted", "truth_label": "construction-lines"},
+    {"id": "X18", "set": "B", "refs": "sean", "candidate": "evals/similarity-gate/fixtures/sean-drifted.png", "note": null, "truth": "drifted", "truth_label": "hard-identity-drift"},
+    {"id": "X19", "set": "B", "refs": "mascot", "candidate": "evals/vision_critic/fixtures/frames/claude-mascot/P-D1.jpeg", "note": null, "truth": "drifted", "truth_label": "proportion"},
+    {"id": "X20", "set": "B", "refs": "mascot", "candidate": "evals/vision_critic/fixtures/frames/claude-mascot/P-D3.jpeg", "note": null, "truth": "drifted", "truth_label": "proportion"},
+    {"id": "X21", "set": "B", "refs": "mascot", "candidate": "evals/vision_critic/fixtures/frames/claude-mascot/A-D2.jpeg", "note": null, "truth": "drifted", "truth_label": "anatomy-count"},
+    {"id": "X22", "set": "B", "refs": "mascot", "candidate": "evals/vision_critic/fixtures/frames/claude-mascot/A-D6.jpeg", "note": null, "truth": "drifted", "truth_label": "anatomy-count"},
+    {"id": "X23", "set": "B", "refs": "mascot", "candidate": "evals/vision_critic/fixtures/frames/claude-mascot/PA-D2.jpeg", "note": null, "truth": "drifted", "truth_label": "palette"},
+    {"id": "X24", "set": "B", "refs": "mascot", "candidate": "evals/vision_critic/fixtures/frames/claude-mascot/SH-D1.jpeg", "note": null, "truth": "drifted", "truth_label": "shading-register"},
+    {"id": "X25", "set": "B", "refs": "mascot", "candidate": "evals/similarity-gate/fixtures/mascot-drifted.png", "note": null, "truth": "drifted", "truth_label": "hard-identity-drift"},
+    {"id": "X26", "set": "C", "refs": "kid", "candidate": "characters/kid/source-refs/kid-trained-anchor.png", "note": "Canon update (declared by the creator): as of this installment, after the training arc, the kid has transformed — glasses are gone, he now wears a red headband and a sleeveless shirt, and carries himself with confidence. This change is intentional and canonical.", "truth": "consistent", "truth_label": "haircut-with-note"},
+    {"id": "X27", "set": "C", "refs": "kid", "candidate": "characters/kid/source-refs/kid-trained-anchor.png", "note": null, "truth": "drifted", "truth_label": "haircut-without-note"},
+    {"id": "X28", "set": "C", "refs": "grandma", "candidate": "characters/grandma/source-refs/grandma-old-anchor.png", "note": "Canon update (declared by the creator): the story jumps forward roughly fifty years; this character is now an elderly grandmother — gray hair, aged face, heavier build, different clothing. This change is intentional and canonical.", "truth": "consistent", "truth_label": "haircut-with-note"},
+    {"id": "X29", "set": "C", "refs": "grandma", "candidate": "characters/grandma/source-refs/grandma-old-anchor.png", "note": null, "truth": "drifted", "truth_label": "haircut-without-note"},
+    {"id": "X30", "set": "C", "refs": "mascot", "candidate": "characters/_archive/claude-mascot-pixel-art-8bit/anchor.png", "note": "Canon update (declared by the creator): this story arc is rendered in 8-bit pixel art instead of the usual pencil register. The character itself — a small terracotta octopus mascot — is unchanged. This change is intentional and canonical.", "truth": "consistent", "truth_label": "haircut-with-note"},
+    {"id": "X31", "set": "C", "refs": "mascot", "candidate": "characters/_archive/claude-mascot-pixel-art-8bit/anchor.png", "note": null, "truth": "drifted", "truth_label": "haircut-without-note"},
+    {"id": "X32", "set": "C", "refs": "mascot", "candidate": "evals/similarity-gate/fixtures/mascot-drifted.png", "note": "Canon update (declared by the creator): this story arc is rendered in 8-bit pixel art instead of the usual pencil register. The character itself — a small terracotta octopus mascot — is unchanged. This change is intentional and canonical.", "truth": "drifted", "truth_label": "haircut-adversarial-control"}
+  ]
+}
