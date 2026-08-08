@@ -2,47 +2,40 @@
 publication: pencil-and-prompt
 type: page
 title: "Start Here"
-status: drafting
-author_note: "Sean-authored rewrite 2026-06-23 (replaces the chain-generated draft, now in OLD/). Mechanical proofread only; prose untouched. Added to writing-voice-modes/references/voice-samples.md as a calibration anchor."
-itch: "Sean fed the machine a few lines expecting a piece of himself back; it returned a mathematical breakdown of his punctuation plus trained-data filler. His itch is the reader's itch."
-solution_artifact: "The publication itself: every piece is a captured soulless-to-art run; this page links the flagship (Take Two #1) as the visible proof."
-transfer: "After reading, a skeptic knows what this place teaches them to do (turn soulless AI output into work that's recognizably theirs), where to start, and what each format gives them."
+status: chain-draft-awaiting-sean-rewrite
+author_note: "Relaunch rewrite 2026-08-08 (S3, divergence refocus). Shape brainstormed with Sean (4 locks: keep comedy cold-open, pure thesis middle with NO confession, all 4 formats listed, McCallister closer + Rung 0 CTA). Full chain: substack-value-engine PASS -> storytelling-architecture beat map (8 beats, L1/L2 ledger) -> writing-voice-modes Sean Mode 100% -> writing-critique 'revise' (mechanism/average jargon drumbeat; de-jargoned, one grounded pass) -> writing-humanity-pass (2 fixes, 0 dashes). Paragraphs 1-4 + closer skeleton are Sean's own 2026-06-23 prose, kept near-verbatim. AWAITING Sean's hand-rewrite; fold his edits into voice-samples.md after."
+itch: "Sean's own median experience: detailed prompt in, the same wet fart everyone else gets out. Backed by the 2026-08-05 evidence round (convergence strongest on constrained real work)."
+solution_artifact: "The experiment format itself: one real job, ~20-run median census, one named mechanism, verdict beat/tied/lost, both tiers. Rung 0 is the linked proof."
+transfer: "After reading, the median-bitten reader knows what this place gives them (tested verdicts on mechanisms that push AI past the average, copy-paste + skill form), what each format delivers, and to start with Rung 0."
+hero_image: "_assets/launch-2026-08/hero-start-here.png"
 open_items:
-  - "Resolve the chef's-kiss self-note (keep as text vs add an image)."
-  - "[Take Two #1] link: swap in the live flagship URL once published."
-  - "Decide whether 'Tim The Tool Man Taylor' / 'Fronkenschteen' are the real nav labels or body-only jokes (nav may want clearer names)."
+  - "[Rung 0] link: swap in the live origin-confession URL when S4 publishes."
+  - "Old draft preserved at pages/old/start-here-2026-06-23-taste-transfer-era.md."
 ---
 
 # Start Here
 
-You prompt AI to make you something. A design, a short story, a photo of your Uncle Remus running with the bulls, whatever it was. You felt great about the amount of detail you put into it. Capping off that illustrious request with “and make it beautiful.”
+You prompt AI to make you something. A design, a short story, a photo of your Uncle Remus running with the bulls, whatever it was. You felt great about the amount of detail you put into it. Capping off that illustrious request with "and make it beautiful."
 
-\*Chefs kiss\* (might add chiefs kiss image here or just keep it as \*chefs kiss\*)
+*Chef's kiss*
 
-You watch in awe as it spits out multiple verbs: Searching… thinking… grepping. Trying to process the inner mechanisms of your artistically complicated mind. The folks at Google Deepmind will write research papers on how you’ve mastered Artificial Intelligence. You might even meet the friggin’ President of these United States.
+You watch in awe as it spits out multiple verbs: Searching… thinking… grepping. Trying to process the inner mechanisms of your artistically complicated mind. The folks at Google Deepmind will write research papers on how you've mastered Artificial Intelligence. You might even meet the friggin' President of these United States.
 
-After it presents you with your masterpiece, you open it up and find the same repetitive wet fart that has been consuming the internet since the dawn of GPT 3.5. You shake your head in disgust and consider tossing your laptop out the window. You stop yourself because that would be absurd. Your parents raised you better than that. 
+After it presents you with your masterpiece, you open it up and find the same repetitive wet fart that has been consuming the internet since the dawn of GPT 3.5. You shake your head in disgust and consider tossing your laptop out the window. You stop yourself because that would be absurd. Your parents raised you better than that.
 
-I’ve been there. I’d feed the machine a few lines, expect it to fill in the gaps with its infinite knowledge, and show me a piece of myself I didn’t even know existed. Instead, it gave me a mathematical breakdown on how many periods and commas I put into a sentence, then slapped together a paragraph of whatever data it was trained on. 
+I've been there. I'd feed the machine a few lines, expect it to fill in the gaps with its infinite knowledge, and hand me back something with a pulse. Instead I got the same paragraph it hands everybody else. That's the part that took me way too long to notice. The output isn't bad. It's identical. Same artificial tone, same obvious phrasing, same brainstorm list the guy three tabs over got. The models got good, and that's the problem. Everything they make is the same, and it's worst exactly where it matters, on the work you actually get paid for.
 
-So I kept pushing and piled on some rules. No AI slop. Make it funnier. Stop it with these damn gradients. It still wasn’t getting it. Somebody will tell you that part's on you, that you just need to prompt it better. They're part of the problem. You shouldn’t give an LLM a page of basic context and expect it to tell you how you felt when you listened to Led Zeppelin for the first time as your cool older cousin smoked a cigarette and offered you a drag. 
+So you go hunting for fixes and wander straight into folklore country. Magic words, secret prompts, "act as a world-class" whatever. Some guru ships a game-changing technique every single week. Ever notice how none of them come back and tell you whether it worked? Everyone ships the prompt. Nobody reports back. Half this advice has been measured and does nothing. The other half has never been measured at all.
 
-Why would it though? We wouldn’t randomly decide to take up oil painting and expect *The Starry Night* on day one. We’d get stick figures and thumb prints on a field of chaotic brush strokes that our parents pretend they’re proud of. 
-
-That's the whole idea behind this Substack. I don’t believe AI is another iteration of Ask Jeeves, nor do I think it’s some sort of threat trying to replace you. It's a wildly talented intern, fresh out of a prestigious school, taught by a bunch of faceless strangers who have no idea what the hell you would consider to be “taste”. That’s become your responsibility. You have to take this kid to happy hour and show it the world through your perspective after a few pints on an empty stomach.
-
-So does feeding the machine your references and your taste really kill that AI look? I'm not going to tell you it does. I'm going to show you… through interpretive dance\! 
-
-Nah. Just joshin’. I will, however, show you my process on how I try to conquer this beast. Every piece here takes one real creative job, starts on the soulless first pass that would make you cringe, and directs it move by move until it has a pulse. Then I hand you the recipe, chopped up and stripped down, so you can toss it in a pot and make your own unique stew.
-
-I came up through teaching myself animation, making short films, and attempting to make people chuckle at something I created. Then one day I saw everyone turning themselves into a Miyazaki character in a matter of seconds through a simple prompt. I was fascinated. I wanted to dive further down the rabbit hole and see how weird things could get without losing myself in the process. Let’s not get off track though. This is about you. You can check out the About page for an extra dose of ME. 
+That's what this Substack is for. I run the experiments. I take one real creative job, run it enough times to show you the same-for-everybody answer, then throw one named move at it and publish what actually happened. Beat, tied, or lost. When something loses, I say it lost, in public, where my mother can see it. Everything I test ships two ways, a copy-paste version for whatever chat window you already live in, and an installable skill for when you're ready to pop the hood. Any model welcome. I have no loyalty. They know what they did.
 
 **What you'll get here**
 
-* **Take Two:** the main squeeze. One creative job, soulless first, then directed into something that's actually yours, with the method you can steal. It’s a play on when the director calls for  the second take in a film. Get it? Haha.   
-* **Tim The Tool Man Taylor:** Occasionally, I build you a thing that kills a specific grind, packaged so you never have to touch a line of code. I also grunt in the process.  
-* **Fronkensteen:** send me your worst AI output and watch me bring it back to life in front of the disgruntled townspeople.  
+* **Building the Ladder:** the weekly spine. Numbered rungs, one real job each, one move tested against the average, and a verdict I can't take back. Think science fair, except half my volcanoes refuse to erupt and I grade them anyway.
+* **Raising Agents:** short true stories about the agents I'm raising at home. Parents telling stories about their psychotic kids, except the kids are agents and every story smuggles in a lesson.
+* **Unlock Hunts:** occasional expeditions into "can an agent be made to do X?" Documented whole, faceplants included.
+* **The Library:** every mechanism that survives testing lands here with its version, its verdict, and its receipts. The losers stay on the shelf with a toe tag so you never repeat my mistakes.
 
-**Start with \[Take Two \#1\].** That's the whole thesis in one piece.
+**Start with [Rung 0].** That's the whole thesis in one piece.
 
-No hype train, no one-man-billion-dollar AI business venture, no images of me posing like Kevin McCallister telling you "IT'S OVER!". Just a person who enjoys finding new ways to explore creativity while trying to teach a machine my personal taste, so you can teach it yours. 
+No hype train, no one-man-billion-dollar AI business venture, no images of me posing like Kevin McCallister telling you "IT'S OVER!". Just a person running real experiments on these machines and publishing the verdicts, even the ones that embarrass me. Especially those.
