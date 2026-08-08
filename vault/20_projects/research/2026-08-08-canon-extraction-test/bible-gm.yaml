@@ -1,0 +1,130 @@
+series_bible:
+  source_set: GM-01 … GM-12 (12 design stills)
+
+  characters:
+
+    - id: CHAR-A
+      working_name: "The Boy (protagonist)"
+      role: "Protagonist; isolated kid at a backyard birthday party, comforted by elderly woman; apparent transformation arc into a headband-wearing, confident state [INFERRED from state progression across GM-01/04/09 → GM-07 → GM-02]"
+      identity:
+        species_build: "Human boy, roughly 7–10 years old; small, skinny frame, thin arms and legs, slightly slouched posture in sad states [OBSERVED: GM-01, GM-04, GM-06, GM-09]"
+        silhouette: "Round head with oversized messy hair mass; narrow shoulders; knee-length shorts; chunky sneakers [OBSERVED: GM-02, GM-06]"
+        face_hair: "Black, thick, unruly mop of hair with flyaway spikes at the crown; large dark eyes; thick expressive eyebrows; small flat nose; light freckles/smudge dots on cheeks [OBSERVED: GM-05, GM-06, GM-07]; round wire-frame glasses in most states [OBSERVED: GM-01, GM-04, GM-05, GM-06, GM-07, GM-09, GM-11, GM-12]"
+        palette: "Warm tan/light-brown skin; black hair; tee ranges beige-tan (GM-06, GM-09) to off-white (GM-02, GM-04, GM-07); medium denim-blue shorts constant across all states [OBSERVED]"
+        distinctive_features: "Round glasses + downcast eyes + hands clasped low in front is his signature 'lonely' pose [OBSERVED: GM-04, GM-05, GM-09]"
+        anatomy_notes: "Head ~1/4 of total height (kid proportions); slouchy bunched white socks in every appearance [OBSERVED: GM-02, GM-04, GM-06, GM-09]"
+      states:
+        - state_id: A1
+          name: "Lonely party kid (baseline)"
+          images: [GM-01, GM-04, GM-05, GM-06, GM-09]
+          costume:
+            - "Plain crew-neck tee, tan/beige (GM-06, GM-09) or pale off-white under amber light (GM-04) [OBSERVED]"
+            - "Medium-blue shorts, above-knee [OBSERVED: GM-01, GM-04, GM-06, GM-09]"
+            - "White slouch socks; low/mid off-white sneakers with navy stripe accent [OBSERVED: GM-06, GM-09]"
+            - "Round wire glasses [OBSERVED: all A1 images]"
+          evidence: "GM-01 shows him standing apart at left of party while five kids play at right; GM-09 shows him alone by a wooden post holding a paper cup while the party continues behind; GM-04/GM-05 show identical solo sad pose in the same backyard in two different art registers; GM-06 is his 4-view model sheet with the same sad brows [OBSERVED]"
+        - state_id: A2
+          name: "With grandmother figure (comforted)"
+          images: [GM-07, GM-11, GM-12]
+          costume:
+            - "Off-white/cream tee, blue shorts (visible in GM-07, GM-12) — same baseline outfit [OBSERVED]"
+            - "Round glasses retained [OBSERVED: GM-07, GM-11, GM-12]"
+          evidence_same_character: "Identical messy black hair with crown spikes, round glasses, freckled cheeks, sad-neutral mouth, same tee+blue-shorts outfit as A1 [OBSERVED]. Rendered inside the aged-photo frame device in all three images [OBSERVED]."
+        - state_id: A3
+          name: "Headband kid (confident / roughed-up)"
+          images: [GM-02]
+          costume:
+            - "Red cloth headband tied at the side with hanging tails [OBSERVED: GM-02]"
+            - "Off-white tee, heavily dirt-smudged, small tear at hem [OBSERVED: GM-02]"
+            - "Blue-gray shorts with dirt marks and frayed/nicked hem [OBSERVED: GM-02]"
+            - "Dirty white high-top sneakers with red zigzag accent; white socks with red banding [OBSERVED: GM-02]"
+            - "No glasses [OBSERVED: GM-02]"
+          physical_condition: "Dirt smudges on face, arms, legs; confident smirk; determined angled brows; clenched fists in all four turnaround views [OBSERVED: GM-02]"
+      same_vs_different_reasoning: |
+        A3 vs A1/A2 is the hard call. FOR same character: identical black hair color and comparable messy cut (spikier styling), same skin tone, same age/build/proportions, same blue-shorts + light-tee palette, same slouchy-sock/sneaker formula, and both get the model-sheet register treatment (GM-02 mirrors GM-06's four-view format) — a paired before/after sheet is a standard design-phase artifact [OBSERVED similarities; INFERRED pairing]. The red headband exactly matches the one worn by the young martial artist (CHAR-B young state, GM-03/08/10), reading as an inherited token that motivates the removal of glasses and the new confidence [INFERRED]. AGAINST: no glasses, no freckle emphasis, hair silhouette spikier, high-tops vs low-tops, expression flipped from timid to cocky. VERDICT: same character in a later/transformed state — confidence MODERATE-HIGH; the alternative (a separate rival/friend character) is not supported by any image showing the two designs together.
+
+    - id: CHAR-B
+      working_name: "The Grandmother / The Young Martial Artist"
+      role: "Mentor-comforter to CHAR-A [OBSERVED: arm around boy, GM-07/11/12]; her younger self appears as a dynamic martial artist in keepsake-style images [INFERRED — see reasoning]"
+      identity:
+        species_build: "Human woman. Elder state: heavyset, soft rounded build, seated [OBSERVED: GM-07, GM-11, GM-12]. Young state: lean, athletic, muscular arms [OBSERVED: GM-03, GM-08, GM-10]"
+        face_hair: "Elder: gray wavy hair pulled into a loose low bun with escaping strands; deep smile lines, crow's feet, forehead creases; warm closed-mouth smile; strong dark eyebrows retained [OBSERVED: GM-07, GM-11, GM-12]. Young: long, wild, wavy black hair flying loose behind a headband; intense focused expression, strong straight brows, set jaw [OBSERVED: GM-03, GM-08, GM-10]"
+        palette: "Warm tan skin (both states); cream/white garments over dark bottoms in both states; red headband accent in young state only [OBSERVED]"
+        distinctive_features: "Mandarin-collar shirt with 4–6 dark frog-button closures down the front — worn by the elder in all three of her images AND by the young martial artist in GM-08 [OBSERVED]; dark waist sash in both states [OBSERVED: GM-07/11/12 elder; GM-03/08/10 young]"
+        anatomy_notes: "Young state drawn with full-extension flying side kick — long limb reach, pointed lead foot, both fists chambered [OBSERVED: GM-03, GM-08, GM-10]"
+      states:
+        - state_id: B1
+          name: "Elder (present day)"
+          images: [GM-07, GM-11, GM-12]
+          costume:
+            - "Cream/white long-sleeve mandarin-collar shirt with dark frog buttons, sleeves pushed/rolled at forearm [OBSERVED: GM-07, GM-11, GM-12]"
+            - "Dark brown/charcoal long skirt (or wide trousers) [OBSERVED: GM-07, GM-11, GM-12]"
+            - "Dark red-brown waist sash [OBSERVED: GM-07]"
+          evidence: "Seated on a porch of a wooden house with potted plant, arm wrapped around CHAR-A's shoulders, smiling down at him; identical composition repeated in three art registers [OBSERVED: GM-07, GM-11, GM-12]"
+        - state_id: B2
+          name: "Young martial artist (past / keepsake)"
+          images: [GM-03, GM-08, GM-10]
+          costume:
+            - "Variant 1 (GM-03, GM-10): white short-sleeve tee; dark high-waisted martial-arts pants; black tied sash with hanging tails; white low sneakers + white socks [OBSERVED]"
+            - "Variant 2 (GM-08): white long-sleeve frog-button kung-fu shirt with rolled cuffs; dark sash; dark pants; sneakers [OBSERVED] — costume varies between registers, likely a design-phase wardrobe experiment [INFERRED]"
+            - "Red headband knotted at the side, long tails flying [OBSERVED: GM-03, GM-08, GM-10]"
+          evidence: "Same flying-kick pose, same sunset backyard backdrop (wood fence, telephone pole with wires, palm tree, low houses) repeated in three registers [OBSERVED]"
+      same_vs_different_reasoning: |
+        B1 = B2 (one person, two ages) is INFERRED, moderate-high confidence. FOR: (1) the frog-button mandarin shirt is the elder's constant garment and the young fighter wears the identical garment in GM-08 [OBSERVED overlap]; (2) both wear a dark waist sash [OBSERVED]; (3) all six images share the same aged-photograph frame device, and the frame reads as "keepsake/memory" — the young-fighter images are framed exactly like the grandmother images, unlike any boy-only party image [OBSERVED framing, INFERRED meaning]; (4) the kick backdrop is the same neighborhood (palm tree, utility pole, fence line) seen in the boy's present-day yard (GM-01, GM-04), consistent with an old photo taken in the same place [OBSERVED setting match]; (5) facial structure: strong straight brows and wide cheekbones persist between young and old faces [OBSERVED]. AGAINST: no single image shows both ages together; hair texture differs (wavy loose vs bun — consistent with aging). ALTERNATIVE readings (the fighter is the boy's mother, or an unrelated hero) have no supporting costume overlap. Additionally, the red headband worn by young-B2 matches the headband CHAR-A wears in GM-02, supporting a passed-down-token / inspiration motif [INFERRED].
+
+    - id: CHAR-GROUP-C
+      working_name: "Party kids (background ensemble)"
+      role: "Peer group / party guests; function is to contrast with CHAR-A's isolation [OBSERVED: GM-01, GM-09]"
+      identity:
+        composition: "5–10 children, mixed ethnicities and hair colors, ages similar to CHAR-A [OBSERVED: GM-01, GM-09]"
+        recurring_members_possible:
+          - "Dark-skinned boy with short curly black hair (green tee GM-01; orange tee background GM-09) [OBSERVED both; same-child link INFERRED, low confidence]"
+          - "Black-haired girl with side ponytail (pink tee GM-01; purple dress GM-09) [OBSERVED both; link INFERRED, low confidence]"
+          - "Light-brown-haired boy, navy tee + tan shorts [OBSERVED: GM-01]"
+          - "Black-haired girl in denim overall-dress over yellow tee [OBSERVED: GM-01]"
+          - "Boy in red-orange tee + khaki shorts [OBSERVED: GM-01]"
+          - "Blond boy in gray tee + blue shorts; red-party-hat redhead boy; brunette girl in lilac dress [OBSERVED: GM-09]"
+      states:
+        - state_id: C1
+          name: "Playing / celebrating"
+          images: [GM-01, GM-09]
+          evidence: "Ring-game cluster under tree with balloons and gift table (GM-01); clustered at streamer-decorated food table with cups and balloons (GM-09) [OBSERVED]"
+      same_vs_different_reasoning: "Costumes and lineups are not consistent between GM-01 and GM-09; treated as an interchangeable ensemble rather than fixed named characters — design-phase crowd fill [OBSERVED inconsistency; INFERRED conclusion]"
+
+  art_registers:
+
+    - id: REG-1
+      name: "Storybook ink-and-color (narrative scenes)"
+      images: [GM-01, GM-04, GM-09]
+      description: "Detailed inked linework with full naturalistic color; dense environment detail (grass blades, fence-plank wood grain, foliage); realistic suburban backyard staging; full-bleed frames with no border device. GM-01/GM-09 use clear daylight with blue sky; GM-04 is the same linework under a heavy amber golden-hour grade (silhouetted foliage, glowing sky) [OBSERVED]"
+
+    - id: REG-2
+      name: "Character model-sheet register"
+      images: [GM-02, GM-06]
+      description: "Four-view turnarounds (front / 3-4 / profile / back) on plain cream background; clean contour lines, flat color with grain/texture fill, small contact shadows under feet; no environment. GM-06 = CHAR-A baseline (sad); GM-02 = CHAR-A headband state (confident) [OBSERVED]"
+
+    - id: REG-3
+      name: "Pencil / colored-pencil sketch on toned paper"
+      images: [GM-05]
+      description: "Loose graphite-and-colored-pencil rendering on warm cream paper; visible hatch strokes in fence, tree, and grass; muted desaturated color; no frame device; same composition as GM-04 — an art-style experiment on the identical shot [OBSERVED]"
+
+    - id: REG-4
+      name: "Aged-keepsake photo series (frame device)"
+      images: [GM-03, GM-07, GM-08, GM-10, GM-11, GM-12]
+      description: "All six images are presented as old bordered photographs/prints: warm sepia palette, stained and worn paper border, creases and foxing at corners [OBSERVED]. Two subjects only — the flying-kick young woman (GM-03, GM-08, GM-10) and the grandmother-with-boy porch scene (GM-07, GM-11, GM-12) — each rendered in three matched sub-registers [OBSERVED]:"
+      sub_registers:
+        - name: "Clean anime line + flat sepia color"
+          images: [GM-03, GM-07]
+          description: "Crisp uniform line weight, flat cel-style color under sepia wash [OBSERVED]"
+        - name: "Etched crosshatch / ink-wash"
+          images: [GM-08, GM-11]
+          description: "Scratchy engraving-like hatching, textured tonal buildup, rougher edges [OBSERVED]"
+        - name: "Flat graphic / cut-paper vector"
+          images: [GM-10, GM-12]
+          description: "Hard-edged flat shapes, minimal linework, posterized foliage and faces, geometric shape language [OBSERVED]"
+      note: "The 3x2 matrix (2 subjects x 3 sub-styles) reads as a deliberate style bake-off for how in-story memory/photograph inserts will be rendered [INFERRED]"
+
+  cross_image_motifs:
+    - "Red side-knotted headband appears on young CHAR-B (GM-03, GM-08, GM-10) and on CHAR-A state A3 (GM-02) — likely a passed-down token marking the mentor-student arc [OBSERVED occurrences; INFERRED meaning]"
+    - "Same suburban backyard geography (wood plank fence, single palm tree, utility pole with sagging wires, low ranch houses, large shade tree) recurs in GM-01, GM-03, GM-04, GM-05, GM-08, GM-10 — present-day scenes and 'past' keepsake images share one location [OBSERVED]"
+    - "Frog-button mandarin shirt is the costume thread linking elder CHAR-B (GM-07, GM-11, GM-12) to young CHAR-B (GM-08) [OBSERVED]"
