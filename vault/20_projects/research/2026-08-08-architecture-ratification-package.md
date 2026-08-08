@@ -3,11 +3,18 @@ title: "Architecture ratification package — campaign step 4 (awaiting Sean's l
 date: 2026-08-08
 project: agent-company-founding
 type: ratification-package
-status: awaiting-sean
+status: ratified
 tags: [agent-company, architecture, ratification, L10-campaign]
 ---
 
 # Architecture ratification package — the L10 gate
+
+> **RATIFIED by Sean 2026-08-08** ("Signed."), together with the six amendments
+> and six additions in the [second opinion](2026-08-08-architecture-second-opinion.md),
+> which are incorporated by reference. D2/D4/D5 carry the standing condition
+> that the canon-extraction test may reopen them if it falsifies
+> canon-extractability. The [L10] research gate is satisfied; build may follow
+> the amended sequencing.
 
 Step 4 of the campaign. The [proposal v1](2026-08-08-architecture-proposal-v1.md)
 went through an LLM-council pre-mortem (premium profile: Opus 4.7 + GPT-5.5 +
