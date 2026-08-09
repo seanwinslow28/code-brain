@@ -2,18 +2,21 @@
 publication: pencil-and-prompt
 type: page
 title: "About"
-status: chain-draft-awaiting-sean-rewrite
-author_note: "Relaunch rewrite 2026-08-08 (S3, divergence refocus). Shape brainstormed with Sean (2 locks: bookends verbatim from his 2026-06-27 hand-rewrite; NO reference to the dead taste-transfer premise anywhere, 'none of these were posted'). Full chain: substack-value-engine PASS -> storytelling-architecture beat map (Pixar bent, 5 beats) -> writing-voice-modes Sean Mode ~80% warm grit -> writing-critique 'revise' (average/mechanism repetition; fixed) -> writing-humanity-pass (1 fix, 0 dashes). Paragraphs 1, 2 (re-ended), and 5 are Sean's own prose. 'Building the ladder as I climb it' = the locked About frame + ritual sign-off. AWAITING Sean's hand-rewrite; fold his edits into voice-samples.md after."
+status: sean-approved-ready-to-publish
+author_note: "Relaunch rewrite 2026-08-08 (S3, divergence refocus). Shape brainstormed with Sean (2 locks: bookends verbatim from his 2026-06-27 hand-rewrite; NO reference to the dead taste-transfer premise anywhere, 'none of these were posted'). Full chain: substack-value-engine PASS -> storytelling-architecture beat map (Pixar bent, 5 beats) -> writing-voice-modes Sean Mode ~80% warm grit -> writing-critique 'revise' (average/mechanism repetition; fixed) -> writing-humanity-pass (1 fix, 0 dashes). Paragraphs 1, 2 (re-ended), and 5 are Sean's own prose. 'Building the ladder as I climb it' = the locked About frame + ritual sign-off. SEAN APPROVED 2026-08-08 with one hand-edit ('grown a few grays' -> 'grown a couple of chin hairs'); edit folded into voice-samples.md as a calibration anchor. His new matched-angle image pair added same day."
 itch: "The tips-fatigued skeptic's real question before subscribing: who is this guy and why would I trust his verdicts?"
 solution_artifact: "The running apparatus shown sideways: Anima (agents propose, 'they never get to say cut'), the agent crew, the animated shorts on YouTube."
 transfer: "After reading, the reader knows who's talking, sees the lifelong appetite through-line, trusts the apparatus is real, and knows the frame: building the ladder as he climbs it."
-hero_image: "_assets/launch-2026-08/hero-about.png"
+hero_image: "_assets/launch-2026-08/new-about-images/hero-about-1.png (top, under title) + hero-about-2.png (bottom, after closer, before links line). Sean-generated 2026-08-08, matched-angle pair: kid-at-static-TV opens, same room aged into multi-monitor builder closes — the appetite spine made literal. Supersedes hero-about.png (kept in _assets, not deleted)."
 open_items:
   - "[Rung 0] link: swap in the live origin-confession URL when S4 publishes."
   - "Old draft preserved at pages/old/about-2026-06-27-taste-transfer-era.md."
+  - "Image placement is a starting point ('we'll play around with it'); adjust at publish time."
 ---
 
 # About
+
+![Husky youth, three feet from a static TV, cereal bowl in lap](../_assets/launch-2026-08/new-about-images/hero-about-1.png)
 
 I was a husky youth with an appetite for stupidity. I'd plant myself three feet from a static TV with an extra large bowl of Cinnamon Toast Crunch and mainline whatever the networks were pushing. Saturday mornings were a sacrament. My parents' living room was the church. Years went by and I used that same appetite to teach myself animation, write multiple screenplays, and piece together a few short films.
 
@@ -23,6 +26,8 @@ So that became the job. Not prompting harder. Shoving the thing off the middle o
 
 That's the whole idea here, really. I take one real creative job, show you the flat average everyone else is settling for, and drag it move by move until it has a pulse. Then I hand you the recipe with an honest grade on the box, so you can run it on your own work. I'm building the ladder as I climb it. Some rungs hold. The ones that snap get written up too.
 
-I'm still that husky youth itching to make the thing I can't stop thinking about. I've just grown a few grays and the screens have multiplied, but the appetite is the exact same. If you've still got yours, grab a bowl of cereal and pull up a spot on the floor.
+I'm still that husky youth itching to make the thing I can't stop thinking about. I've just grown a couple of chin hairs and the screens have multiplied, but the appetite is the exact same. If you've still got yours, grab a bowl of cereal and pull up a spot on the floor.
+
+![Same room, same appetite: the multi-monitor desk, pencil behind the ear](../_assets/launch-2026-08/new-about-images/hero-about-2.png)
 
 *Check out the animated shorts on [YouTube](https://www.youtube.com/@seanpwinslow) · [GitHub](https://github.com/seanwinslow28) · [seanwinslow.com](https://seanwinslow.com/) · or start with [Rung 0].*

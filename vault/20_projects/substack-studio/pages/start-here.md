@@ -2,8 +2,8 @@
 publication: pencil-and-prompt
 type: page
 title: "Start Here"
-status: chain-draft-awaiting-sean-rewrite
-author_note: "Relaunch rewrite 2026-08-08 (S3, divergence refocus). Shape brainstormed with Sean (4 locks: keep comedy cold-open, pure thesis middle with NO confession, all 4 formats listed, McCallister closer + Rung 0 CTA). Full chain: substack-value-engine PASS -> storytelling-architecture beat map (8 beats, L1/L2 ledger) -> writing-voice-modes Sean Mode 100% -> writing-critique 'revise' (mechanism/average jargon drumbeat; de-jargoned, one grounded pass) -> writing-humanity-pass (2 fixes, 0 dashes). Paragraphs 1-4 + closer skeleton are Sean's own 2026-06-23 prose, kept near-verbatim. AWAITING Sean's hand-rewrite; fold his edits into voice-samples.md after."
+status: sean-approved-ready-to-publish
+author_note: "Relaunch rewrite 2026-08-08 (S3, divergence refocus). Shape brainstormed with Sean (4 locks: keep comedy cold-open, pure thesis middle with NO confession, all 4 formats listed, McCallister closer + Rung 0 CTA). Full chain: substack-value-engine PASS -> storytelling-architecture beat map (8 beats, L1/L2 ledger) -> writing-voice-modes Sean Mode 100% -> writing-critique 'revise' (mechanism/average jargon drumbeat; de-jargoned, one grounded pass) -> writing-humanity-pass (2 fixes, 0 dashes). Paragraphs 1-4 + closer skeleton are Sean's own 2026-06-23 prose, kept near-verbatim. SEAN APPROVED 2026-08-08 with one hand-edit (added '(hi mom)' after 'where my mother can see it'); edit folded into voice-samples.md as a calibration anchor."
 itch: "Sean's own median experience: detailed prompt in, the same wet fart everyone else gets out. Backed by the 2026-08-05 evidence round (convergence strongest on constrained real work)."
 solution_artifact: "The experiment format itself: one real job, ~20-run median census, one named mechanism, verdict beat/tied/lost, both tiers. Rung 0 is the linked proof."
 transfer: "After reading, the median-bitten reader knows what this place gives them (tested verdicts on mechanisms that push AI past the average, copy-paste + skill form), what each format delivers, and to start with Rung 0."
@@ -27,7 +27,7 @@ I've been there. I'd feed the machine a few lines, expect it to fill in the gaps
 
 So you go hunting for fixes and wander straight into folklore country. Magic words, secret prompts, "act as a world-class" whatever. Some guru ships a game-changing technique every single week. Ever notice how none of them come back and tell you whether it worked? Everyone ships the prompt. Nobody reports back. Half this advice has been measured and does nothing. The other half has never been measured at all.
 
-That's what this Substack is for. I run the experiments. I take one real creative job, run it enough times to show you the same-for-everybody answer, then throw one named move at it and publish what actually happened. Beat, tied, or lost. When something loses, I say it lost, in public, where my mother can see it. Everything I test ships two ways, a copy-paste version for whatever chat window you already live in, and an installable skill for when you're ready to pop the hood. Any model welcome. I have no loyalty. They know what they did.
+That's what this Substack is for. I run the experiments. I take one real creative job, run it enough times to show you the same-for-everybody answer, then throw one named move at it and publish what actually happened. Beat, tied, or lost. When something loses, I say it lost, in public, where my mother can see it (hi mom). Everything I test ships two ways, a copy-paste version for whatever chat window you already live in, and an installable skill for when you're ready to pop the hood. Any model welcome. I have no loyalty. They know what they did.
 
 **What you'll get here**
 
