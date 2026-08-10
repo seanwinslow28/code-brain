@@ -1,0 +1,41 @@
+{
+  "id": "20260807-192606-db3ff4",
+  "topic": "job search tracking, application tailoring, and interview prep",
+  "lens": "pm",
+  "tier": "standard",
+  "segment": "career changers and laid-off tech workers",
+  "evidence_count": 13,
+  "verified": 7,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 3.6768,
+  "gather_status": {
+    "last30": "ok: 5 records (5 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 5 records (5 found)",
+    "reviews": "ok: 3 records (4 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "No interview-preparation evidence addresses practice interviews, question generation, feedback quality, anxiety, scheduling, coding practice, or offer negotiation.",
+    "There is little segmentation by geography, industry, seniority, disability, age, or employment status beyond tech workers and students.",
+    "Several items are headlines, questions, marketing-style claims, or service offers rather than detailed first-person accounts of pain.",
+    "The evidence does not define the unit behind Huntr's 'median sat in the high 60s,' so its magnitude cannot be interpreted precisely.",
+    "No evidence measures how widespread the filtering, note-taking, networking, or app-reliability problems are.",
+    "No outcome data shows whether resume tailoring, AI-generated resumes, manual application assistance, or cover letters improve interview or hiring rates.",
+    "No evidence directly evaluates dedicated job-search trackers, status pipelines, reminders, follow-up scheduling, duplicate detection, or cross-platform application history.",
+    "The Dice review has no date, and the Glassdoor reliability quote appears to originate in 2020 despite the evidence entry being dated 2026."
+  ],
+  "contradictions": [
+    "The market is explicitly heterogeneous: it 'still works fast for some' while being 'grindingly slow for others,' so prolonged searches are not universal.",
+    "One item questions whether tailoring every resume makes a big difference, while other items promote rapid AI tailoring or ATS tailoring services; the evidence does not resolve effectiveness.",
+    "AI content claims tailoring can be completed 'in 2 minutes,' while a separate offer markets paid manual applications and tailoring, suggesting competing automation-heavy and labor-heavy workflows rather than a settled approach.",
+    "The Glassdoor evidence is labeled 2026-08-04, but the quoted review text says June 8, 2020, creating a recency mismatch."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 1.0,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

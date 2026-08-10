@@ -2,7 +2,18 @@
 
 > *One engineer's working second brain — skills, an agent fleet, and a knowledge graph that thinks back.*
 
-An open-source agentic engineering practitioner's toolkit — **125** skills, 13 subagents, **14** hooks, **18** autonomous SDK agents (9 currently running on launchd by default, 2 opt-in disabled-by-default, 1 manual-trigger), **3 primary domains**, an Obsidian vault, and a Claude Agent SDK runtime, all auto-loaded. Every component is in active use; every scheduled agent has a launchd schedule; every skill is a prompt and every prompt has a job. A local verbatim TTS pipeline (Kokoro-82M ONNX, $0/run on Apple Silicon) turns vault docs into MP3s for commute listening. If you've read Karpathy's "agentic engineering" framing and wondered what one looks like in the wild, this is one.
+An open-source agentic engineering practitioner's toolkit, in daily production use by one person. An autonomous agent fleet runs every morning on launchd schedules whether I'm watching or not: indexing a knowledge vault, synthesizing articles from it, running research, writing the daily note, and monitoring its own health. Every agent runs under a spend cap and a turn cap, the highest-risk one runs behind an eval gate, and a human owns judgement at every publish boundary. Around the fleet: a large skill library organized into export groups, an Obsidian vault, hooks, subagents, and a Claude Agent SDK runtime, all auto-loaded (live counts come from `ls .claude/{skills,agents,hooks}/` — the numbers drift, the commands don't). A local verbatim TTS pipeline (Kokoro-82M ONNX, $0/run on Apple Silicon) turns vault docs into MP3s for commute listening. If you've read Karpathy's "agentic engineering" framing and wondered what one looks like in the wild, this is one.
+
+## Governed by design
+
+The fleet runs unattended, so the interesting engineering is the part that keeps it honest:
+
+- **An eval suite that shipped red on purpose.** When the nightly synthesizer silently regressed for nine days behind green dashboards, the fix was a measurement layer: a 10-case eval suite built from a 6-mode failure taxonomy mined out of 17 days of real production logs, shipped at an honest 1/10 baseline and climbed to 7/10 in public. No synthesizer change ships without passing it. [`evals/vault-synthesizer/`](evals/vault-synthesizer/)
+- **A judge layer between intent and action.** Before acting, an agent declares its intent in an 8-field ActionProposal (target surface, authorization basis, exposure, expected consequence). A declarative policy, four rules, each traceable to a real incident, is evaluated by a local model at $0 per decision, which is the only reason every call gets checked instead of sampled. It fails open by design, because the human publish gate stays the canonical control. [`tools/governance-demo/`](tools/governance-demo/) · [`agents-sdk/docs/CONTROL_ARCHITECTURE.md`](agents-sdk/docs/CONTROL_ARCHITECTURE.md)
+- **Spend and blast-radius limits on every run.** 30-turn caps, per-run dollar budgets, no Bash access for scheduled agents, a block-secrets hook inherited fleet-wide, and local models on the default path so the free path is the rule and the paid path is the exception.
+- **A hard privacy boundary.** The machinery is public, the operating data is private, and git history was rewritten to enforce it retroactively. Details in the Privacy Boundary section below.
+
+Agents own decomposition. A human owns judgement.
 
 ## What's Inside
 
@@ -95,9 +106,9 @@ Skills and agents prefer native MCPs over Zapier where both exist. Currently con
 
 Zapier retained only for services with no native MCP: Salesforce, GA4, Webhooks, Code execution.
 
-### 121 Skills Across 12 Export Groups
+### Skills Across 12 Export Groups
 
-> The 12 export groups roll up 117 of the 121 base skills. The `llm-council` skill (v3.35.0), `fusion-discovery-council` skill, `openai-image-gen` skill (v4.1.2), `writing-humanity-pass` skill, `writing-critique` skill, and `creative-partner` skill are not in any export group. All six are personal-use companions that depend on in-tree assets or pair with another skill, so they don't ship via the installer. See [`tools/llm-council/README.md`](tools/llm-council/README.md) and [`.claude/skills/openai-image-gen/SKILL.md`](.claude/skills/openai-image-gen/SKILL.md).
+> The 12 export groups roll up most of the base skills; live counts come from `ls .claude/skills/`. The `llm-council` skill (v3.35.0), `fusion-discovery-council` skill, `openai-image-gen` skill (v4.1.2), `writing-humanity-pass` skill, `writing-critique` skill, and `creative-partner` skill are not in any export group. All six are personal-use companions that depend on in-tree assets or pair with another skill, so they don't ship via the installer. See [`tools/llm-council/README.md`](tools/llm-council/README.md) and [`.claude/skills/openai-image-gen/SKILL.md`](.claude/skills/openai-image-gen/SKILL.md).
 
 All skills auto-load from `.claude/skills/`. Reference them naturally in prompts.
 

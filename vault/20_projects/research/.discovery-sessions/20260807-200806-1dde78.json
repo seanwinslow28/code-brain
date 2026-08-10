@@ -1,0 +1,42 @@
+{
+  "id": "20260807-200806-1dde78",
+  "topic": "where job-search tools fail their users \u2014 application trackers, AI resume tailoring, interview prep tools: abandoned tools, broken workflows, results that didn't improve hire rates",
+  "lens": "pm",
+  "tier": "deep",
+  "segment": "career changers and laid-off workers",
+  "evidence_count": 27,
+  "verified": 7,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 4.4135,
+  "gather_status": {
+    "last30": "ok: 16 records (16 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 9 records (9 found)",
+    "reviews": "ok: 2 records (2 found)",
+    "github": "error: HTTPStatusError: HTTPStatusError(\"Client error '422 Unprocessable Entity' for url 'https://api.github.com/search/issues?q=where+job-search+tools+fail+their+users+%E2%80%94+application+trackers%2C+AI+resume+tailoring%2C+interview+prep+tools%3A+abandoned+tools%2C+broken+workflows%2C+results+that+didn%27t+improve+hire+rates+career+changers+and+laid-off+in%3Atitle%2Cbody+is%3Aissue&sort=reactions&order=desc&per_page=12'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422\")",
+    "qa": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "Privacy is mentioned only in a combined heading and is not substantiated with a specific privacy failure or user account.",
+    "No evidence directly evaluates application-tracker features such as status accuracy, reminders, deduplication, integrations, or workflow usability.",
+    "Several auto-apply and ATS claims come from one commercial publisher, creating possible vendor bias.",
+    "There is little evidence segmented by occupation, seniority, geography, disability, race, or other candidate characteristics.",
+    "The emotional-cost claim relies partly on promotional copy rather than independent user research.",
+    "The evidence does not quantify how common prompt injection is or how often it successfully changes screening outcomes.",
+    "No evidence directly addresses interview-preparation tools, including realism, feedback quality, bias, or whether practice improves interview outcomes.",
+    "The evidence provides no controlled comparisons of application, interview, or hiring outcomes between manual and AI-assisted workflows."
+  ],
+  "contradictions": [
+    "Slate states, \"The old system is broken and a functioning replacement has yet to fully emerge.\" but also reports a veteran job coach saying, \"It's not broken; it's just different.\"",
+    "Prompt injection is described as gaming and undermining screening, while some commenters endorse it: \"Then pick them if they're smart enough to know how AI works and game the system. Turn a red flag into a green one.\"",
+    "One commenter reports a positive recruiter reaction to an explicit injection\u2014\"I did this, but made it very obvious and explicit. It got a lot of laughs from recruiters and I think in itself put my resume at the top\"\u2014which conflicts with treating every such tactic as harmful or disqualifying.",
+    "Automation is presented as relieving the burden of job hunting by scanning roles and tailoring resumes continuously, while other evidence says automated applications are generic, error-prone, repetitive, and spam-flagged."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 0.9412,
+  "citation_recall": 0.7143,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

@@ -1,0 +1,18 @@
+{
+  "id": "20260807-193553-da0f2d",
+  "topic": "admin and back office work for one-person businesses",
+  "lens": "pm",
+  "tier": "standard",
+  "segment": "freelancers, tradespeople, solo professionals",
+  "evidence_count": 28,
+  "gather_status": {
+    "last30": "ok: 18 records (18 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 7 records (7 found)",
+    "reviews": "ok: 3 records (4 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "failed_stage": "fuse",
+  "error": "Fusion response was not decodable JSON (after SSE-padding strip).",
+  "cost_usd": 0.0
+}

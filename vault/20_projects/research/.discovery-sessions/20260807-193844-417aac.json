@@ -1,0 +1,39 @@
+{
+  "id": "20260807-193844-417aac",
+  "topic": "solo creator publishing workflows and production pipelines",
+  "lens": "pm",
+  "tier": "standard",
+  "segment": "newsletter writers, indie animators, serial content creators",
+  "evidence_count": 21,
+  "verified": 5,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 3.9056,
+  "gather_status": {
+    "last30": "ok: 4 records (4 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 11 records (11 found)",
+    "reviews": "ok: 6 records (7 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "Most sources are vendor blogs, product comparisons, or isolated reviews; only a few direct creator voices are present, and the Reddit evidence consists only of post titles.",
+    "There is little evidence about ideation, research, rights management, approvals, analytics, repurposing, monetization, or cross-platform version control.",
+    "The evidence provides almost no quantified data on time lost, publishing frequency, costs, revenue impact, or prevalence of each pain.",
+    "Creator maturity, budget, team size, geography, accessibility needs, and technical skill are largely unspecified.",
+    "The evidence does not distinguish workflows by medium, such as newsletters, long-form video, podcasts, short-form social content, or visual assets.",
+    "No evidence establishes which integrations, automation features, or human roles would resolve the workflow problems most effectively."
+  ],
+  "contradictions": [
+    "The evidence frames solo operation as a scaling trap while also warning that team-distributed content has predictable failure modes; delegation may relieve capacity constraints but introduces coordination and quality risks.",
+    "AI is portrayed as enabling an entire team while taste becomes the bottleneck, yet other evidence describes raw AI output as shallow, unclean, or broken; the evidence does not establish whether judgment or tool reliability is the dominant constraint.",
+    "Managed platforms reduce technical maintenance, but the ownership evidence warns of lock-in and weaker data control; self-hosting offers more control while creating its own maintenance burden.",
+    "No direct factual contradictions are established because most claims address different products, workflow stages, or creator segments."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 0.6,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

@@ -1,0 +1,40 @@
+{
+  "id": "20260807-194312-e5b450",
+  "topic": "admin and back office work for one-person businesses",
+  "lens": "pm",
+  "tier": "standard",
+  "segment": "freelancers, tradespeople, solo professionals",
+  "evidence_count": 28,
+  "verified": 5,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 3.9677,
+  "gather_status": {
+    "last30": "ok: 18 records (18 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 7 records (7 found)",
+    "reviews": "ok: 3 records (4 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "The evidence provides almost no direct detail about bookkeeping, invoicing, expense capture, payroll, taxes, compliance filings, insurance, or bank reconciliation.",
+    "Several evidence dates are in the future relative to the current date, and their validity was not independently verified.",
+    "The software complaints do not establish that every reviewer is a one-person business; two concern coworking reservations rather than dedicated back-office tools.",
+    "The evidence does not compare manual workflows with automation or identify which administrative tasks are safe, accurate, or cost-effective to automate.",
+    "Most client-acquisition evidence comes from one subreddit thread focused on remote work in the Philippines, limiting generalizability to other solo-business segments and regions.",
+    "There is no evidence quantifying how frequently leads are missed, how much revenue is lost, or which follow-up tasks fail most often.",
+    "Only one item directly measures time spent on admin, and it is a single anecdote rather than a representative sample."
+  ],
+  "contradictions": [
+    "One account says recurring admin took three and a half hours, while the AI-company post claims one person handed coding, support, refunds, and subscription chasing to AI; the evidence does not establish whether that automation claim is representative or independently verified.",
+    "Client-acquisition comments encourage developing multiple high-value skills and extensive proof of results, while the freelance survey advises turning down work when capacity is exhausted; this reflects tension between expanding marketability and limiting workload.",
+    "Platform-support evidence is mixed: the HoneyBook summary says some users appreciate its help center and chat options, while others report long response times and confusing changes.",
+    "The evidence simultaneously depicts client acquisition as highly competitive and cites examples of extraordinary solo-business revenue, without showing how typical either experience is."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 0.8,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}
