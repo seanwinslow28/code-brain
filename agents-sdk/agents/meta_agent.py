@@ -46,7 +46,12 @@ from lib.config import Config, load_config
 
 # ─── Constants ────────────────────────────────────────────────────────
 
-ACTIVE_AGENTS = ["vault_indexer", "vault_synthesizer", "deep_researcher", "daily_driver", "knowledge_lint", "flush", "meta_agent"]
+# 2026-08-11: vault_critic and job_feed were both absent from this list, so the
+# meta-agent never health-checked them. vault_critic then failed every night
+# from 2026-07-04 to 2026-08-11 (38 nights, broken codex symlink) and the fleet
+# report never noticed. job_feed had 12 pollers 404ing for 52 consecutive runs
+# with the same silence. Both are now checked.
+ACTIVE_AGENTS = ["vault_indexer", "vault_synthesizer", "vault_critic", "deep_researcher", "daily_driver", "job_feed", "knowledge_lint", "flush", "meta_agent"]
 DISABLED_AGENT_COUNT = 5  # process_inbox, daily_driver evening/weekly, pr_digest, sprint_health
 
 # Descriptive metadata per active agent — drives the fleet report template.
@@ -54,7 +59,9 @@ DISABLED_AGENT_COUNT = 5  # process_inbox, daily_driver evening/weekly, pr_diges
 AGENT_METADATA: dict[str, dict[str, str | float]] = {
     "vault_indexer":     {"display": "vault-indexer",         "schedule": "2:00 AM daily",     "machine": "Mac Mini",        "cost_label": "$0.00/run",   "monthly_usd": 0.00},
     "vault_synthesizer": {"display": "vault-synthesizer",     "schedule": "2:30 AM daily",     "machine": "MBP (when awake)","cost_label": "$0.00/run",   "monthly_usd": 0.00},
+    "vault_critic":      {"display": "vault-critic",          "schedule": "3:30 AM daily",     "machine": "Mac Mini",        "cost_label": "$0.00/run",   "monthly_usd": 0.00},
     "deep_researcher":   {"display": "deep-researcher",       "schedule": "2:45 AM daily",     "machine": "Mac Mini",        "cost_label": "$0.00/run",   "monthly_usd": 0.00},
+    "job_feed":          {"display": "job-feed",              "schedule": "8:00-11:00 AM x7",  "machine": "Mac Mini",        "cost_label": "$0.00/run",   "monthly_usd": 0.00},
     "daily_driver":      {"display": "daily-driver morning",  "schedule": "8:45 AM daily",     "machine": "Claude API",      "cost_label": "~$0.40/run",  "monthly_usd": 12.00},
     "knowledge_lint":    {"display": "knowledge-lint",        "schedule": "Sunday 22:00",      "machine": "Mac Mini / MBP",  "cost_label": "$0.00/run",   "monthly_usd": 0.00},
     "flush":             {"display": "session-end-flush",     "schedule": "hook-triggered",    "machine": "Mac Mini / MBP",  "cost_label": "$0.00/run",   "monthly_usd": 0.00},

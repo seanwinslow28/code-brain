@@ -1,0 +1,24 @@
+{
+  "antigravity_calls": 0,
+  "antigravity_failures": 0,
+  "antigravity_last_error": "",
+  "antigravity_skipped": 1,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 1,
+  "backfill_articles_critiqued": 0,
+  "backfill_expansions_written": [],
+  "codex_calls": 1,
+  "codex_failures": 0,
+  "codex_last_error": "",
+  "codex_tokens_total": 30868,
+  "duration_seconds": 69.72,
+  "error": "",
+  "expansions_written": [
+    "vault/knowledge/expansions/the-illusion-of-health-in-autonomous-systems.md"
+  ],
+  "run_id": "2026-08-11T11:20:37",
+  "status": "ok",
+  "warnings": [
+    "antigravity disabled (codex-only mode)"
+  ]
+}

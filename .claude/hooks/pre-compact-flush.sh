@@ -40,8 +40,13 @@ if [ -n "${TRANSCRIPT_PATH:-}" ] && [ -f "$TRANSCRIPT_PATH" ]; then
 fi
 
 # Fire and forget. PYTHONPATH is required for `lib.*` imports.
-CLAUDE_INVOKED_BY=flush \
-    nohup env PYTHONPATH="$REPO_ROOT/agents-sdk" \
+#
+# 2026-08-11: CLAUDE_INVOKED_BY=flush was removed from this spawn — see the
+# long note in session-end-flush.sh. Setting it here made flush.py's own
+# recursion guard (agents/flush.py:314) fire immediately, so this hook never
+# produced a pre-compact flush either. The guard remains intact via
+# flush.py:339-347 and the check at the top of this hook.
+nohup env PYTHONPATH="$REPO_ROOT/agents-sdk" \
     "$VENV_PY" "$AGENT" $FLUSH_ARG --trigger pre-compact \
     >"$LOG_DIR/pre-compact-flush.log" 2>&1 &
 disown

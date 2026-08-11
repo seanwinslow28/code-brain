@@ -31,6 +31,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import logging
 import os
 import sys
 import time
@@ -60,6 +61,21 @@ MAX_TURNS = 15
 MAX_BUDGET_USD = 0.00
 
 COMPLEX_MESSAGE_THRESHOLD = 100  # §7.3 decision (locked)
+
+# 2026-08-11: the extraction call used to time out at 60s on the Ollama path.
+# That ceiling was never reached in practice before this date because the
+# SessionEnd hook was setting CLAUDE_INVOKED_BY=flush on flush's own process,
+# so flush self-cancelled on every run and never called a model at all. With
+# that fixed, the first real runs hit the 60s wall exactly (60,069ms /
+# 60,072ms) and the bare `except` below turned the timeout into a silent
+# `status=ok, sections=0`.
+#
+# Measured 2026-08-11 on the MBP: a 373-message session (22.5K-char prompt)
+# against qwen3.6_35b-a3b-32k takes 50.9s WITHOUT the SOUL prepend and
+# returns a full extraction (8 decisions / 5 lessons / 5 actions / 4 patterns
+# / 3 quotes). With the prepend it exceeds 60s. 300s gives real headroom for
+# a 35B model on a laptop while still bounding the SessionEnd path.
+LLM_TIMEOUT_S = 300.0
 
 DAILY_LOG_TEMPLATE_HEADER = """# Daily Log — {date}
 
@@ -250,7 +266,7 @@ def _default_llm_caller(prompt: str, tier: RoutingTier) -> dict[str, list[str]]:
             resp = httpx.post(
                 f"{decision.base_url}/api/generate",
                 json={"model": decision.model, "prompt": prompt, "stream": False},
-                timeout=60.0,
+                timeout=LLM_TIMEOUT_S,
             )
             resp.raise_for_status()
             text = resp.json().get("response", "")
@@ -262,11 +278,18 @@ def _default_llm_caller(prompt: str, tier: RoutingTier) -> dict[str, list[str]]:
                     "messages": [{"role": "user", "content": prompt}],
                     "stream": False,
                 },
-                timeout=120.0,
+                timeout=LLM_TIMEOUT_S,
             )
             resp.raise_for_status()
             text = resp.json()["choices"][0]["message"]["content"]
     except Exception:
+        # Empty extraction stays the safe default — flush must never crash the
+        # SessionEnd path. But log it: this handler silently converted a 60s
+        # timeout into `status=ok, sections=0`, which is indistinguishable from
+        # "the session genuinely had nothing worth keeping".
+        logging.getLogger(f"agent.{AGENT_NAME}").warning(
+            "flush extraction call failed — returning empty extraction", exc_info=True
+        )
         return {"decisions": [], "lessons": [], "actions": [], "patterns": [], "quotes": []}
 
     start = text.find("{")

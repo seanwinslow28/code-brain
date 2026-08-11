@@ -19,6 +19,28 @@ DEDUPE_NEW = "new"
 DEDUPE_SCORED = "scored"
 DEDUPE_CARRYOVER = "carryover"
 
+# 2026-08-11: raised 500 -> 20,000. The old cap stored only the opening of each
+# posting, which is boilerplate ("About us", HTML intro blocks) — measured
+# across 14,779 stored rows, 63% contained company-blurb text and only 5.6%
+# reached a responsibilities/requirements header at all. That made the corpus
+# unusable for mining requirement language (the WS1 credibility audit could not
+# test whether postings name evals, cost governance, or the "equivalent
+# experience" phrase, because that text was never persisted).
+#
+# Measured live across 2,792 postings from 12 watchlist companies:
+#   median 6,863 chars · mean 7,171 · p90 10,051 · p99 14,267 · max 25,626
+#   cap    500: 0.0% of postings stored whole,  7.0% of all text retained
+#   cap 20,000: 99.9% stored whole,           100.0% retained
+#
+# Storage cost is real and worth knowing: ~7.2 KB/row vs ~0.5 KB, so at the
+# current ~118 new rows/day the DB grows ~25 MB/month instead of ~1.8 MB.
+# Applies to NEW rows only — existing rows keep their truncated excerpts and
+# cannot be recovered from the DB.
+#
+# The column is still named `description_excerpt` for schema compatibility;
+# renaming it would need a migration and buys nothing.
+DESCRIPTION_MAX_CHARS = 20_000
+
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS job_postings (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -111,7 +133,7 @@ class JobDB:
                     posting.salary_disclosed,
                     posting.posted_at.isoformat() if posting.posted_at else None,
                     now,
-                    (posting.description or "")[:500],
+                    (posting.description or "")[:DESCRIPTION_MAX_CHARS],
                     reason,
                 ),
             )
@@ -130,7 +152,7 @@ class JobDB:
                     posting.salary_disclosed,
                     posting.posted_at.isoformat() if posting.posted_at else None,
                     now,
-                    (posting.description or "")[:500],
+                    (posting.description or "")[:DESCRIPTION_MAX_CHARS],
                 ),
             )
             # Inline the score update inside the same lock window to avoid

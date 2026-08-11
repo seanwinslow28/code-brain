@@ -7,6 +7,7 @@ import pytest
 from lib.job_db import (
     JobDB,
     DEDUPE_NEW, DEDUPE_SCORED, DEDUPE_CARRYOVER,
+    DESCRIPTION_MAX_CHARS,
 )
 from lib.job_types import Posting, ScoringResult
 
@@ -79,15 +80,29 @@ def test_persist_rejected_stores_reason(db: JobDB):
     assert row == (0, "not a PM role")
 
 
-def test_description_excerpt_truncated_to_500(db: JobDB):
-    long_desc = "x" * 2000
+def test_typical_posting_is_stored_whole(db: JobDB):
+    """A normal posting must survive intact — the old 500-char cap stored only
+    the boilerplate intro and made the corpus useless for requirement mining.
+    Real postings measured 2026-08-11: median 6,863 chars, p99 14,267."""
+    long_desc = "x" * 7000  # ~ the measured median/mean
     p = _p(source="x", source_role_id="6", description=long_desc)
     db.persist_rules_passed(p, scored=None)
     with sqlite3.connect(db.path) as conn:
         excerpt = conn.execute(
             "SELECT description_excerpt FROM job_postings WHERE source='x' AND source_role_id='6'"
         ).fetchone()[0]
-    assert len(excerpt) == 500
+    assert len(excerpt) == 7000, "a median-length posting must not be truncated"
+
+
+def test_description_truncated_at_cap(db: JobDB):
+    """The cap still bounds pathological postings."""
+    p = _p(source="x", source_role_id="6b", description="x" * (DESCRIPTION_MAX_CHARS + 5000))
+    db.persist_rules_passed(p, scored=None)
+    with sqlite3.connect(db.path) as conn:
+        excerpt = conn.execute(
+            "SELECT description_excerpt FROM job_postings WHERE source='x' AND source_role_id='6b'"
+        ).fetchone()[0]
+    assert len(excerpt) == DESCRIPTION_MAX_CHARS
 
 
 def test_unscored_query(db: JobDB):
