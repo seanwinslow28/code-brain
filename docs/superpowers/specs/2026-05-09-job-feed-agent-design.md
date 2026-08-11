@@ -137,7 +137,14 @@ Stored in `vault/20_projects/prj-job-hunt-2026/job-feed/watchlist.yaml`. The age
 reads it on every run; no code change to add/remove companies.
 
 ```yaml
-# REDACTED 2026-08-11 (history scrubbed). Private target list.
+# REDACTED 2026-08-11 — the watchlist contents are private.
+# 48 company slugs across 6 buckets previously appeared here in full.
+# Bucket names alone disclosed geography and network strategy, so the
+# names are removed too. Live file (gitignored, CLAUDE.md rule 9):
+#   vault/20_projects/prj-job-hunt-2026/job-feed/watchlist.yaml
+
+<bucket_name>:
+  - <company-ats-slug>, <company-ats-slug>, ...
 ```
 
 ATS auto-detection at runtime: agent attempts Greenhouse, Lever, then Ashby endpoints
