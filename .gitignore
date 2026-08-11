@@ -132,6 +132,15 @@ vault/20_projects/prj-job-hunt-2026/
 # 2026-08 revamp home (resumes, campaign strategy) — same private class as above.
 vault/20_projects/prj-job-hunt-2026-REVAMP/
 
+# Job-feed run manifests — added 2026-08-11 after an independent privacy pass.
+# These were TRACKED AND PUSHED, and their runs[].failed_pollers entries name
+# target companies as literal `ats:<slug>` values — 69 distinct companies, i.e.
+# the whole watchlist above, leaked through a side channel while watchlist.yaml
+# itself was correctly ignored. The fleet board reads these from disk
+# (build.py: VAULT = Path.home()/"Code-Brain/code-brain/vault"), never from git,
+# so untracking them costs the board nothing. History scrubbed the same day.
+vault/health/job-feed-manifest-*.json
+
 # Substack Studio private lane — the project at vault/20_projects/substack-studio/ is TRACKED
 # (public); only its _private/ subdir is local-only, for sensitive drafts/source kept off GitHub.
 vault/20_projects/substack-studio/_private/
