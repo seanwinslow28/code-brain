@@ -133,7 +133,9 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Cla
 
 **Process Inbox: paused 2026-04-29 pending Path B rewrite to local `gemma4:e4b`.** Cloud-Sonnet path validated as working (~3 files/run) but cost-inefficient ($1.16/file vs $0/file local). Manual triage via the `process-inbox` skill in interactive sessions is the working alternative. Full history + Path B scope: [`agents-sdk/AUDIT-2026-04-28-process-inbox-reenable.md`](agents-sdk/AUDIT-2026-04-28-process-inbox-reenable.md).
 
-**6 agents disabled 2026-04-09 remain disabled** — `daily-driver` evening, `daily-driver` weekly, `pr-digest`, `spending-analysis`, `health-audit`, `md-to-anki`. Do NOT re-enable without Sean's explicit approval. See [`agents-sdk/AUDIT-2026-04-09-agent-downsizing.md`](agents-sdk/AUDIT-2026-04-09-agent-downsizing.md).
+**8 agents disabled 2026-04-09 remain disabled** — `process-inbox`, `daily-driver` evening, `daily-driver` weekly, `pr-digest`, `sprint-health`, `meeting-defender`, `preserve-session`, `spending-analysis`. Do NOT re-enable without Sean's explicit approval. See [`agents-sdk/AUDIT-2026-04-09-agent-downsizing.md`](agents-sdk/AUDIT-2026-04-09-agent-downsizing.md) — its summary is unambiguous: *"Of 10 enabled agents, only 2 were producing value. The other 8 were disabled."*
+
+*(Corrected 2026-08-11 during WS2 archaeology. This line previously said "6" and named `health-audit` and `md-to-anki`, which the audit never mentions and which have **never existed as code** — `git log --diff-filter=AD` returns nothing for `agents/health_audit.py` or `agents/md_to_anki.py`; they are unimplemented entrypoints in `pyproject.toml` and stanzas in `config.toml` only. This is a public-facing count on the fleet board, so the audit's eight is canonical.)*
 
 **Key limitation:** Headless SDK agents cannot access MCP servers (Slack, Google Calendar, Gmail, etc.) — those require browser-based OAuth only available in interactive sessions. The morning agent creates the daily-note skeleton; Slack/calendar data is backfilled when Sean starts an interactive session.
 

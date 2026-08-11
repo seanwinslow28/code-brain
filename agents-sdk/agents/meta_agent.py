@@ -52,7 +52,15 @@ from lib.config import Config, load_config
 # report never noticed. job_feed had 12 pollers 404ing for 52 consecutive runs
 # with the same silence. Both are now checked.
 ACTIVE_AGENTS = ["vault_indexer", "vault_synthesizer", "vault_critic", "deep_researcher", "daily_driver", "job_feed", "knowledge_lint", "flush", "meta_agent"]
-DISABLED_AGENT_COUNT = 5  # process_inbox, daily_driver evening/weekly, pr_digest, sprint_health
+# 2026-08-11: was 5. AUDIT-2026-04-09-agent-downsizing.md disabled EIGHT agents,
+# not five — meeting_defender, preserve_session, and spending_analysis were
+# missing from this count. The number is public-facing on the fleet board, so it
+# tracks the audit.
+DISABLED_AGENT_COUNT = 8
+DISABLED_AGENT_NAMES = (
+    "process-inbox, daily-driver evening, daily-driver weekly, pr-digest, "
+    "sprint-health, meeting-defender, preserve-session, spending-analysis"
+)
 
 # Descriptive metadata per active agent — drives the fleet report template.
 # Tuple order: (display_name, schedule, machine, cost_label, monthly_cost_usd)
@@ -554,7 +562,7 @@ def generate_fleet_report(
 ## Disabled Agents Reminder
 
 {DISABLED_AGENT_COUNT} agents disabled per AUDIT-2026-04-09-agent-downsizing.md:
-- process-inbox, daily-driver evening/weekly, pr-digest, sprint-health
+- {DISABLED_AGENT_NAMES}
 - **Root causes:** CLIConnectionError in SDK transport, MCP servers unavailable in headless mode
 - **Do NOT re-enable** without Sean's explicit approval and fixing the underlying SDK bug
 
