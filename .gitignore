@@ -129,6 +129,8 @@ AGENTS.md
 # Runtime writers: job_feed.py, daily_driver.py, mock_interview_loop.py,
 # substack_drafter.py (paths unchanged; they read/write on-disk, not via git).
 vault/20_projects/prj-job-hunt-2026/
+# 2026-08 revamp home (resumes, campaign strategy) — same private class as above.
+vault/20_projects/prj-job-hunt-2026-REVAMP/
 
 # Substack Studio private lane — the project at vault/20_projects/substack-studio/ is TRACKED
 # (public); only its _private/ subdir is local-only, for sensitive drafts/source kept off GitHub.
