@@ -7,14 +7,15 @@ ai-context: "Comprehension artifact for the vault-synthesizer eval suite. 4-ques
 # Vault Synthesizer Eval Suite — Explanation
 
 ## What is this?
-A 10-case binary pass/fail eval suite for a local Qwen3-14B vault synthesizer
-agent. Cases were derived from open-coding 17 days of production logs
+A binary pass/fail eval suite for a local Qwen3-14B vault synthesizer agent —
+**14 active cases plus 11 deferred**, built as 10 and grown on 2026-05-27.
+Cases were derived from open-coding 17 days of production logs
 (2026-04-24 → 2026-05-10), not from imagined failure modes. The suite catches
 the failure class that production monitoring missed: silent regressions where
 the agent reports success while producing zero output.
 
 ## Why this approach?
-Pytest + YAML over Braintrust / Langfuse — at 10 cases, platform infra is
+Pytest + YAML over Braintrust / Langfuse — at this size, platform infra is
 overhead. Code-based and rubric graders before LLM-as-judge (Hamel's cost-
 economics rule). Binary pass/fail over Likert (Husain-Shankar canon — Likert
 destroys inter-rater reliability). The case library is grounded in real-log
