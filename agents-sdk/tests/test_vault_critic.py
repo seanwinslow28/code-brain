@@ -998,3 +998,59 @@ def test_main_explicit_context_appends_to_defaults(tmp_repo, monkeypatch, capsys
     assert "1 default + 1 explicit = 2 total" in out
     assert "default: PROJECT_NOTES.md" in out
     assert "explicit: EXTRA.md" in out
+
+
+# ---------------------------------------------------------------------------
+# D7: main() exit code — a total failure must exit non-zero
+#
+# Regression guard for the 2026-07-04 -> 2026-08-11 outage: the critic failed
+# every night for 38 nights (broken codex symlink) while main() returned 0
+# unconditionally, so `launchctl list` reported last exit status 0 and no
+# exit-code-driven monitor could see it.
+# ---------------------------------------------------------------------------
+
+def _fake_config_for(tmp_repo):
+    from lib.config import Config, SafetyConfig
+    return Config(
+        repo_root=tmp_repo, vault_root=tmp_repo / "vault",
+        skills_dir=tmp_repo / ".claude/skills",
+        life_systems_scripts=tmp_repo / "life-systems/scripts",
+        log_dir=tmp_repo / "vault/90_system/agent-logs",
+        log_level="INFO",
+        safety=SafetyConfig(),
+        agents={}, anthropic_api_key=None, artifacts={},
+    )
+
+
+def _run_main_with_status(tmp_repo, monkeypatch, status):
+    from agents.vault_critic import CritiqueResult
+    today = "2026-08-11"
+    p = _make_concept_at(tmp_repo, "x")
+    _make_manifest(tmp_repo, today)
+    monkeypatch.setattr("agents.vault_critic.select_target_articles",
+                        lambda root, date_iso, max_targets: [p])
+    monkeypatch.setattr("agents.vault_critic.load_config",
+                        lambda: _fake_config_for(tmp_repo))
+
+    async def fake_run(*a, **k):
+        return CritiqueResult(
+            status=status, run_id="test", articles_critiqued=0,
+            codex_calls=8, codex_failures=8 if status == "error" else 0,
+        )
+    monkeypatch.setattr("agents.vault_critic.run", fake_run)
+    return main(["--date", today])
+
+
+def test_main_returns_nonzero_when_run_status_is_error(tmp_repo, monkeypatch, capsys):
+    """A total failure must be visible to launchd as a non-zero exit."""
+    rc = _run_main_with_status(tmp_repo, monkeypatch, "error")
+    assert rc == 1, "status=error must exit non-zero so launchctl shows the failure"
+    assert "FAILED" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("status", ["ok", "partial", "success-empty"])
+def test_main_returns_zero_for_non_failure_statuses(tmp_repo, monkeypatch, capsys, status):
+    """Degraded-but-productive runs are not failures and still exit 0."""
+    rc = _run_main_with_status(tmp_repo, monkeypatch, status)
+    assert rc == 0
+    assert "OK" in capsys.readouterr().out

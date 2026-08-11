@@ -37,8 +37,19 @@ if [ -n "${TRANSCRIPT_PATH:-}" ] && [ -f "$TRANSCRIPT_PATH" ]; then
 fi
 
 # Fire and forget. PYTHONPATH is required for `lib.*` imports.
-CLAUDE_INVOKED_BY=flush \
-    nohup env PYTHONPATH="$REPO_ROOT/agents-sdk" \
+#
+# 2026-08-11: do NOT set CLAUDE_INVOKED_BY=flush on this spawn. flush.py's own
+# recursion guard (agents/flush.py:314) reads that variable and returns
+# immediately when it is set — so setting it on the child made flush
+# self-cancel on every single invocation. It did: 885 consecutive
+# `recursion-guard messages=0 duration=0ms` runs across both machines with
+# zero completions, from at least 2026-04-23 until this fix.
+#
+# The guard is still fully intact. flush.py sets the marker itself around its
+# LLM call (flush.py:339-347) — which is the only place nested re-entry can
+# happen — and the check at the top of this hook stops a hook fired from
+# inside that subtree. Neither needs this line.
+nohup env PYTHONPATH="$REPO_ROOT/agents-sdk" \
     "$VENV_PY" "$AGENT" $FLUSH_ARG \
     >"$LOG_DIR/session-end-flush.log" 2>&1 &
 disown

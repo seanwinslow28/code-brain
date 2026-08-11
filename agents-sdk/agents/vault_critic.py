@@ -788,6 +788,21 @@ def main(argv: list[str] | None = None) -> int:
         result.codex_failures, result.antigravity_failures,
         result.duration_seconds,
     )
+    # 2026-08-11: this used to `return 0` unconditionally, including when
+    # run() reported STATUS_ERROR. The agent failed every night from
+    # 2026-07-04 to 2026-08-11 (broken codex symlink) while `launchctl list`
+    # showed last exit status 0 — so nothing exit-code-driven could see it.
+    # A total failure must exit non-zero. Degraded-but-productive runs
+    # (partial / success-empty) still exit 0; they are not failures.
+    if result.status == STATUS_ERROR:
+        print(
+            f"FAILED — vault_critic {result.status}: {result.articles_critiqued} articles "
+            f"({result.codex_failures + result.antigravity_failures} CLI failures, "
+            f"{result.duration_seconds:.1f}s)",
+            file=sys.stderr,
+        )
+        return 1
+
     print(
         f"OK — vault_critic {result.status}: {result.articles_critiqued} articles "
         f"({result.codex_failures + result.antigravity_failures} CLI failures, "
