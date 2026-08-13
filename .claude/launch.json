@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "revamp-lab",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8123", "-d", "/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026-REVAMP"],
+      "port": 8123
+    },
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/seanwinslow/Code-Brain/seanwinslow.com"],
+      "port": 4321
+    }
+  ]
+}
