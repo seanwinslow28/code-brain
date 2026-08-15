@@ -22,7 +22,8 @@
         "--prefix",
         "/Users/seanwinslow/Code-Brain/seanwinslow.com"
       ],
-      "port": 4321
+      "port": 4321,
+      "autoPort": true
     },
     {
       "name": "ws3-review",
@@ -59,6 +60,18 @@
         "/Users/seanwinslow/Code-Brain/seanwinslow.com/dist"
       ],
       "port": 8132
+    },
+    {
+      "name": "intro-sprites",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8133",
+        "-d",
+        "/Users/seanwinslow/Code-Brain/seanwinslow.com/motion-review/task10/console"
+      ],
+      "port": 8133
     }
   ]
 }
