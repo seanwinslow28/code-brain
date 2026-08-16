@@ -1,7 +1,7 @@
 ---
-title: Product Candidate Scorecard (v1, draft-for-sean)
+title: Product Candidate Scorecard (v1 + decision record)
 type: decision-doc
-status: draft-for-sean
+status: decided (Sean, 2026-08-16) — see Decision Record at bottom
 created: 2026-08-16
 evidence: ../../research/2026-08-16-ai-product-post-launch-loops-pm-idea-ledger.md
 rubric: evidence strength · systems-thinking surface area · buildable in 5 wk @ 5-8 hrs/wk · recruiter demo-ability (1-5 each)
@@ -35,3 +35,22 @@ Checklist-as-code: golden-dataset eval run + rollout guardrails + rollback condi
 ## Recommendation
 
 **C3 (Flight Simulator), C2 as runner-up.** C3 wins on the two dimensions that can't be faked later: demo-ability to the actual hiring audience and honest systems-thinking surface (both the *content* it simulates and the *harness* it needs). Its main risk — "is it a toy?" — is countered by the eval harness + decision log being production-grade artifacts, and by the falsification pass (if a serious AI-PM simulator already exists, C2 takes the slot).
+
+---
+
+## Decision Record (2026-08-16)
+
+**Chosen: C2 — "Golden Loop", with a playable teaching layer.** Council pre-mortem (premium, 4 models) voted C2 over C3 3–1 and exposed a scoring bug that produced the v1 recommendation.
+
+**The scorecard bug, acknowledged:** "recruiter demo-ability" collapsed two anti-correlated signals — 5-minute screen-share appeal and 45-minute hiring-loop conviction. C3's advantage lived almost entirely in the first; the job offer lives in the second. Re-scored with the split column, C2 wins.
+
+**Decisive arguments:**
+1. *"M7's exercise is already a thin C2"* (Grok) — the curriculum capstone (golden dataset + champion/challenger on a real agent) is the build's week-4 starting artifact. C2 continues the curriculum; C3 forks it.
+2. C2's weakness (hard to feel quickly) is solvable — a 2-min walkthrough: production trace → failure → dataset addition → challenger run → holdout regression caught → shipped. C3's "toy" weakness is not solvable in the B2B-heavy segment Sean is targeting.
+3. All four models predicted C3's scenario engine eats the 5-week budget and its eval harness becomes "a simulation of rigor about a simulation."
+
+**The teaching layer (C3's energy, preserved):** the cockpit ships with a playable "how a PM uses this" walkthrough — Sean's game/frontend craft as the *teaching layer of a real tool*, not the artifact itself.
+
+**Standing condition (Opus dissent):** if the target-company list shifts consumer/creative/games-heavy (>5 of top 15), the C3 case reopens. Current pipeline (Clipboard, Crunchbase, Makai) is B2B-leaning, consistent with C2.
+
+**Falsification pass still owed before week-4 build start:** 5-tool teardown of adjacent incumbents (Braintrust, Langfuse datasets, promptfoo, Statsig, Freeplay) to sharpen the PM-grade-vs-dev-grade differentiation; optionally show the C2 mock to 2–3 recent AI-PM hiring managers.

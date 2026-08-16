@@ -1,46 +1,49 @@
 ---
-title: Curriculum Map — Systems Thinking AI PM (v1, research-refined)
+title: Curriculum Map — Systems Thinking AI PM (v2, council-revised, LOCKED)
 type: curriculum
-status: draft-for-sean
+status: locked (Sean, 2026-08-16)
 created: 2026-08-16
+revised: 2026-08-16 (council pre-mortem folded — see ../2026-08-16-council-premortem-curriculum-and-candidate.md)
 inputs:
   - research/2026-08-16-last30days-practitioner-discourse.md
-  - ../research/2026-08-16-what-do-the-academic-literature-and-authoritative-practition.md (Gemini DR, $2.80, tier mix 17%A/60%C/20%D — A-tier claims weighted, trade claims treated as leads)
+  - ../research/2026-08-16-what-do-the-academic-literature-and-authoritative-practition.md (Gemini DR)
   - ../research/2026-08-16-ai-product-post-launch-loops-pm-idea-ledger.md (discovery)
+  - ../2026-08-16-council-premortem-curriculum-and-candidate.md (premium council, 4 models)
 ---
 
-# Curriculum Map v1 — research-refined
+# Curriculum Map v2 — council-revised
 
-**Change from the spec's draft:** research promoted one new module (M7) and materially reshaped M2, M3, M5, M6. Weeks 1–3 now carry 7 modules (2–3/week). Every module keeps the audio-first artifact set (audio overview, quiz, flashcards, mind map, study guide) + one real-system exercise.
+**v1 → v2 surgery (all four council models aligned):**
+- **M3 (archetypes) folded into M2 + M4** as a pattern library — archetype recognition is cheaper than a module; the freed slot funds the biggest gap.
+- **New M3: Cost, Latency & Unit Economics as System Variables** — the council's #1 missing topic, "table-stakes AI PM work in 2026," previously absent.
+- **Organizational/stakeholder systems** made first-class inside M5 (stakeholder-incentive CLDs, winning the meeting where the fix gets resourced).
+- **HITL design** made first-class inside M6 (when/where to insert humans, confidence thresholds, escalation UX, reviewer drift).
+- **Decision policies** added to M5 (ship/no-ship with thresholds, rollback triggers, written decision records — "diagnosis without disposition is academic").
+- **Metrics architecture** added to M7 (offline/online/guardrail/business/trust; proxy choice that won't Goodhart; threshold setting).
+- **Prediction-before-exercise, every module:** before diagnosing, Sean writes predicted mechanism, time horizon, falsifier, expected side-effects — then diagnoses, then gets Claude critique, then calibrates against the prediction. Moves exercises from lexical to judgmental.
+- **Honest gates:** week 3 = *fluency* (vocabulary + recognition). *Judgment* is gated at week 6+ via spaced re-quizzes, cold-case drills during build weeks, and build decisions that cite concepts correctly. The v1 "second nature by week 3" claim contradicted its own spaced-retrieval pedagogy.
+- **Curriculum feeds the product:** M7's capstone exercise IS the seed of the C2 build (golden dataset + champion/challenger round on a real agent). No forked effort.
 
-**Pedagogy findings that shape the mechanics (evidence-backed, DR Part III):**
-- **Spaced retrieval practice** beats massed consumption — so quizzes/flashcards are re-run on a spaced schedule (fresh quiz at module close, retrieval quiz ~1 week later, cumulative quiz at week 6), not one-and-done. Validates the audio+flashcard loop Sean already planned.
-- **Management flight simulators** are the strongest documented way to build systemic judgment — the Phase 2 build *is* the simulator, and M4's exercise adds a small simulated-loop exercise so consequences of interventions are felt, not read.
-- **Cognitive offloading warning**: using AI purely for speed atrophies the judgment being trained. Exercises therefore require Sean's own diagnosis first, AI critique second.
+## Modules (7, weeks 1–3, then drilled through week 8)
 
-## Modules
+| # | Module | Anchor concepts | Case anchor | Exercise (prediction-first, real system) |
+|---|--------|----------------|-------------|------------------------------------------|
+| M1 | Systems Thinking Foundations | stocks/flows, reinforcing vs balancing loops, delays, Meadows' leverage points (shallow→deep), iceberg model | OpenAI Nov-2023 board crisis through the iceberg | Iceberg-model a real fleet incident (e.g., the 2026-04 agent downsizing) — predict the structural cause before digging |
+| M2 | AI Product Feedback Loops **+ archetype pattern library I** | data flywheels, model/concept drift, degenerate loops & performativity, RLHF reward hacking & distribution shift; *fixes-that-fail, shifting-the-burden as AI loop patterns* | Zillow Offers ($881M concept-drift + adverse-selection collapse) | CLD one 16BitFit/portfolio loop; predict where drift or adverse selection enters, then trace it |
+| M3 | **Cost, Latency & Unit Economics as System Variables** *(new)* | cost-quality-latency triangle, token economics, routing/caching loops, verification tax as $/quality-point, latency budgets, cost caps as balancing loops | "The bill goes down, the quality goes down with it, and you find out from customer tickets two or three days later"; Sean's own fleet cost-cap architecture | Model the unit economics of one of Sean's paid pipelines (discovery/DR/council caps) as stocks & flows; find the loop that would blow the budget if uncapped |
+| M4 | Causal Loop Diagramming & Systems Mapping **+ archetype pattern library II** | CLD notation/polarity, stock-and-flow modeling, boundary setting, delayed feedback; *success-to-the-successful, limits-to-growth as mapping drills* | Unity fee-per-install (exogenous shock); Knight Capital (open-loop automation) | Full systems map of the Code-Brain fleet **including a stakeholder-incentive CLD** — the map becomes a portfolio artifact; N=3 mapping drills with decreasing scaffolding |
+| M5 | Second-Order Effects, Organizational Systems & Decision Policies | 2nd/3rd-order mapping, Goodhart's law, verification tax, model monoculture, cognitive offloading; **stakeholder/org leverage points (winning the resourcing meeting)**; **kill criteria, rollback triggers, written decision records** | Air Canada / NYC MyCity (epistemic uncertainty → liability); the pre-mortem that predicts who blocks the fix | Pre-mortem a real upcoming change ending in a **ship/no-ship disposition with thresholds**, plus the org map of who must say yes |
+| M6 | AI Architecture as Systems: the Harness **& HITL Design** | model→harness (planning × context × evals), RAG as system, long-horizon context decay, multi-agent commons dynamics; **where/when to insert humans, confidence thresholds, escalation UX, reviewer drift & fatigue** | "There is no compiler for PRDs"; Zillow as HITL-removal disaster | Diagram agents-sdk as a harness; identify the weakest loop AND design its HITL insertion point (threshold + escalation path) |
+| M7 | Evals, Metrics Architecture & Loop Engineering *(capstone → C2 seed)* | evals as PM-core; loop anatomy (goal/context/evals/memory/guardrails/stop); champion/challenger + holdouts; weak-judge Goodharting; epistemic vs aleatoric uncertainty; golden datasets (build/version/maintain); **metrics architecture: offline/online/guardrail/business/trust; proxy selection; threshold & stop-the-line criteria**; offline↔online gap; diagnosis over delivery | Rechat "whack-a-mole" (Hamel Husain); champion-loop holdout-regression story | **The C2 seed:** build a 25/15 golden dataset + binary rubric for one real agent (job-feed relevance), run one champion/challenger round, write the decision record. This artifact carries directly into week 4 |
 
-| # | Module | Anchor concepts | Case anchor | Exercise (real system) |
-|---|--------|----------------|-------------|------------------------|
-| M1 | Systems Thinking Foundations | stocks/flows, reinforcing vs balancing loops, delays, Meadows' leverage points (shallow→deep), iceberg model | OpenAI Nov-2023 board crisis read through the iceberg (events→patterns→structures→mental models) | Iceberg-model a real incident from Sean's agent fleet (e.g., the 2026-04 agent downsizing: 8 of 10 agents producing no value) |
-| M2 | AI Product Feedback Loops | data flywheels, model/concept drift, degenerate loops & performativity (rec systems, synthetic-text recursion), RLHF reward hacking & distribution shift | Zillow Offers: concept drift + adverse selection + HITL removal = $881M write-down | Draw the CLD of one 16BitFit or portfolio-site loop; identify where drift or adverse selection could enter |
-| M3 | System Archetypes in AI Failures | fixes-that-fail, shifting the burden (prompt-engineering-as-symptomatic-fix), success-to-the-successful, limits to growth (data/energy ceilings, model collapse) | Unity fee-per-install (exogenous ecosystem shock); Knight Capital (open-loop automation, runtime awareness) | Written teardown of one public AI failure using an archetype template: name the archetype, the loops, the leverage point that would have prevented it |
-| M4 | Causal Loop Diagramming & Systems Mapping | CLD notation & polarity, stock-and-flow modeling, boundary setting, mapping delayed feedback | Taiwan smart-medical-device ecosystem CLD (funding loops vs validation bottlenecks) | Full systems map of Sean's Code-Brain fleet: agents, caps, manifests, drift risks — the map that later becomes a portfolio artifact |
-| M5 | Second-Order Effects, Pre-mortems & the Omitted Topics | second/third-order mapping, Goodhart's law, **verification tax & true ROI**, **model monoculture risk**, **cognitive offloading**, exogenous shocks | Air Canada / NYC MyCity: epistemic uncertainty → legal liability; the "verification tax" that flips AI ROI negative | Pre-mortem a real upcoming change (fleet or portfolio) mapping 1st/2nd/3rd-order effects; council pre-mortem cross-check |
-| M6 | AI Architecture as Systems: the Harness | model→harness shift (planning × context × evals), RAG as a system, long-horizon context decay, multi-agent dynamics & tragedy of the commons, observability/tracing | "There is no compiler for PRDs" — why learning loops break outside coding | Diagram Sean's own agents-sdk as a harness: where planning, context, evals, and stop conditions live; find the weakest loop |
-| **M7 (new)** | **Evals & Loop Engineering** | evals as PM-core; loop anatomy (goal/context/evals/memory/guardrails/stop = target+budget+stall); champion/challenger with holdout sets; weak-judge Goodharting; **epistemic vs aleatoric uncertainty**; golden datasets (build/version/maintain); offline↔online gap; **diagnosis over delivery** | Rechat "whack-a-mole" case (Hamel Husain); champion-loop holdout-regression story | Build a 25/15 split golden dataset + binary rubric for one of Sean's own agents (e.g., job-feed relevance) and run one champion/challenger round |
+## Cadence & gates
 
-**Why M7 earned promotion (module expansion rule):** it recurs across every independent research stream — r/ProductManagement threads, the Maven course ecosystem (Husain/Shankar), YouTube practitioner explainers, the DR competency map's "Evaluation & QA" domain, AND the discovery run's top pain ("AI quality is difficult to define and measure", 3 domains). No other candidate topic came close to that convergence.
+- **Week 1:** M1 + M2 · **Week 2:** M3 + M4 · **Week 3:** M5 + M6 + M7 (M7 last — it hands off to the build)
+- Per module: audio overview (source-selected, never whole-notebook) → quiz ≥80% → prediction-first exercise → Claude critique + calibration → spaced re-quiz ~1 week later
+- **Week 3 gate (fluency):** narrate one fleet decision in systems vocabulary, cold
+- **Week 6 gate (judgment):** cumulative cold-case quiz (unfamiliar incident, no scaffolding: name mechanism, loop, leverage point, disposition) + build decision log audited for correct concept citations
+- **Build weeks 4–8 carry weekly 20-min archetype cold-read drills** (one unfamiliar public AI incident each week) so recognition→generation keeps compounding after the curriculum weeks end
 
-**Folded rather than promoted:** verification tax, model monoculture, cognitive offloading → M5; epistemic uncertainty, golden datasets, diagnosis-over-delivery → M7; multi-agent commons dynamics → M6. Each recurred but shares mechanism and pedagogy with an existing module — a module is a coherent mental move, not a topic list.
+## Feedback honesty rule
 
-## Weekly cadence (weeks 1–3)
-
-- Week 1: M1 + M2 (foundations + AI loops)
-- Week 2: M3 + M4 (archetypes + mapping practice)
-- Week 3: M5 + M6 + M7 (judgment + architecture + evals) — M7 lands last deliberately: it's the bridge into the build, and its exercise (golden dataset + champion round) is the build's first real muscle
-- Spaced retrieval: week-later quizzes for M1–M4 land in weeks 2–4; cumulative quiz at week 6
-
-## Success gates per module
-
-Audio listened → quiz ≥80% → exercise submitted → Claude review → spaced re-quiz passed. Vocabulary check at week 3: Sean narrates one fleet decision in systems vocabulary, cold.
+Claude is the default reviewer but rewards coherent explanation, not decision quality (council: Gemini). Counterweights: prediction-first calibration (the falsifier is written before the diagnosis), spaced cold-cases with objective answer keys, and the build's decision log — where reality, not Claude, grades the call.
