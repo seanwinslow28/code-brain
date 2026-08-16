@@ -101,6 +101,7 @@ vault/health/.council-spend-*.lock
 agents-sdk/models/**/*.onnx
 agents-sdk/models/**/*.bin
 vault/90_system/audio/*.mp3
+vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/*/*.mp3
 !vault/90_system/audio/.gitkeep
 
 # Discovery E1 NLI entailment model weights — optional local model, never commit
