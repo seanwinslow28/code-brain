@@ -36,8 +36,8 @@ One row per generated artifact (audio overview, quiz, flashcards, mind map, stud
 | 2026-08-16 | M7 | Study guide report | 8f91ced4 | downloaded | m7-artifacts/m7-study-guide.md |
 
 | 2026-08-16 | M1 | Explainer video (whiteboard) | c88da7c4 | downloaded | m1-artifacts/m1-explainer.mp4 (local-only/gitignored; also in notebook) |
-| 2026-08-16 | M2 | Explainer video (whiteboard) | c8be4071 | stuck-pending → rescue armed (wait 2h then regen) | m2-artifacts/m2-explainer.mp4 (pending) |
-| 2026-08-16 | M3 | Explainer video (whiteboard) | 5ef96503 | stuck-pending → rescue armed (wait 2h then regen) | m3-artifacts/m3-explainer.mp4 (pending) |
+| 2026-08-16 | M2 | Explainer video (whiteboard) | 0a2c676a (regen; original c8be4071 abandoned stuck-pending) | downloaded | m2-artifacts/m2-explainer.mp4 (local-only) |
+| 2026-08-16 | M3 | Explainer video (whiteboard) | 8df8c531 (regen; original 5ef96503 abandoned stuck-pending) | downloaded | m3-artifacts/m3-explainer.mp4 (local-only) |
 | 2026-08-16 | M4 | Explainer video (whiteboard) | (see video-tasks) | downloaded | m4-artifacts/m4-explainer.mp4 (local-only) |
 | 2026-08-16 | M5 | Explainer video (whiteboard) | (see video-tasks) | downloaded | m5-artifacts/m5-explainer.mp4 (local-only) |
 | 2026-08-16 | M6 | Explainer video (whiteboard) | (see video-tasks) | downloaded | m6-artifacts/m6-explainer.mp4 (local-only) |
