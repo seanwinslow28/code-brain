@@ -1,7 +1,7 @@
 ---
 title: "Wince — the taste interview skill (design spec)"
 type: spec
-status: awaiting-sean-review
+status: approved
 created: 2026-08-10
 domain: [substack-studio, creative-studio]
 tags: [pencil-and-prompt, wince, taste-block, divergence-mechanism, skill-design]
@@ -10,7 +10,7 @@ ai-context: "Design for the skill Rung 0 promises. Brainstormed with Sean 2026-0
 
 # Wince
 
-**The one job.** It shows you things, reads which ones you flinch at, and writes the block that makes the machine draw like you.
+**The one job.** It shows you things, reads which ones you wince at, and writes the block that makes the machine draw like you.
 
 **The pain it is organized by.** You can't describe what you want, so you argue with the model one adjective at a time and land on the average. Documented, with receipts: [the Rung 0 capture](../../../vault/20_projects/substack-studio/rung-0-taste-experiment/capture/prompts.md), six generations, five rounds of plain language before the thing Sean actually wanted showed up.
 
