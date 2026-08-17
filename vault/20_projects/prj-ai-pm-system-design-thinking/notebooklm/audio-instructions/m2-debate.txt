@@ -1,0 +1,23 @@
+Audience: one listener, Sean — a product manager with NO engineering background who runs a 12-agent autonomous AI system in production every day. He builds harnesses, routers, circuit breakers and budget caps by instinct.
+
+CALIBRATION FOR THIS MODULE SPECIFICALLY: he HAS hands-on experience with the mechanics of a data pipeline — he runs an embedding pipeline, he chunks documents, he stores chunk-level provenance, he built quality gates that reject thin articles with logged reasons, and he built a gate that refuses any claim not traceable to a fetched URL. Do NOT teach him what an embedding or a chunk is. He has NOT touched anything involving other humans: labeling by other people, instructions written for strangers, inter-rater agreement, selection effects created by a product own behaviour, feedback that changes the training distribution, or data contracts. Teach that half properly, from the ground up, without flattering him that he already knows it.
+
+- Never explain what an AI agent, a harness, a model or an API is.
+- DO define every technical term in plain language on first use: ground truth, labels, inter-rater agreement, labeler drift, datasheet, selection effect, adverse selection, concept drift, distribution shift, degenerate loop, data contract, provenance, freshness, chunking, embedding drift, position-of-gold bias.
+- CRITICAL RULE: never mention a company, incident, paper or researcher without a one-sentence setup first explaining what it is and why it is being mentioned. Assume no prior familiarity. This is the single most important instruction.
+
+Format: a genuine DEBATE, argued forcefully from both sides, no premature resolution.
+
+The motion: "BUY THE LABELS."
+
+A team needs a labeled dataset to evaluate and improve an AI feature. They can pay an external labeling vendor to produce 10,000 labeled examples in three weeks, or they can build an internal loop where their own domain experts label a few hundred examples a week alongside their day jobs, indefinitely.
+
+Side A argues BUY: volume is the point and 10,000 beats 300; a vendor has managed labeling workforces, quality-control tooling and inter-rater measurement you would otherwise build from scratch; your domain experts are your most expensive people and their time is better spent on the ambiguous 5% than the obvious 95%; and the internal loop has a way of quietly stopping the moment a quarter gets busy.
+
+Side B argues BUILD: labels encode judgment, and judgment is exactly the thing you cannot outsource to someone who has never met your customer; the vendor will hand back a dataset that is internally consistent and subtly wrong, and you will not find out for months; writing the instructions well enough for a stranger forces you to discover that your own definition is ambiguous, which is worth more than the labels; and the internal loop produces something the purchased set never will, which is a team that agrees on what good looks like.
+
+Have them genuinely engage. Side A should press hard on the fact that a stalled internal loop produces zero labels and zero learning. Side B should press on the fact that 10,000 confidently wrong labels are worse than 300 right ones, because they look like a solved problem.
+
+Land not on a winner but on what would settle it — the specific facts that turn this from an argument into a decision. Make clear that being able to name those facts, rather than pick a side, is what competence looks like here.
+
+Two distinct voices, real disagreement, no strawmen.

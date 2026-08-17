@@ -23,7 +23,18 @@ One row per generated artifact. Update on every generate and every download.
 | 2026-08-17 | M1 | Audio — deep-dive (long) | `5f88a198` | completed (in notebook) | not downloaded — Sean listens in the notebook |
 | 2026-08-17 | M1 | Audio — debate | `164db4c4` | completed (in notebook) | not downloaded — Sean listens in the notebook |
 
+| 2026-08-17 | M2 | Audio — pre-brief (brief/short) | `b7b84c07` | generating | not downloaded — listen in the notebook |
+| 2026-08-17 | M2 | Audio — deep-dive (long) | `afd5322f` | generating | not downloaded — listen in the notebook |
+| 2026-08-17 | M2 | Audio — debate | `d1583ba7` | generating | not downloaded — listen in the notebook |
+
 M1 source selection: `2251b249` (lesson) · `bb367054` (PAIR guidebook) · `f0988a1f` (ML thresholds) · `66c038cd` (Amazon case).
+M2 source selection: `5b756d4b` (lesson) · `1ab0974b` (PAIR data chapter) · `9ac74ee9` (Datasheets) · `dbb721bc` (RAG taxonomy) · `d269db15` (Zillow).
+
+## Verify the queue, don't trust the exit code
+
+**`generate audio` can fail and still exit 0.** On 2026-08-17 a loop queued three M2 episodes and reported all three "queued"; `artifact list` showed only one had been created. The other two produced an error payload that a lazy JSON parse read as success.
+
+**Always confirm against `artifact list` after generating**, and count. Expect `modules × 3`. A generate command that printed something is not a generate command that did something — same lesson as the source-fetch rule in `source-manifest.md`.
 
 ## Known flakes
 
