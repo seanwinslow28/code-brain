@@ -60,8 +60,10 @@ Approved: **$15–25 total.**
 | 2026-08-16 | Gemini DR (curriculum) | $1–3 | $2.80 |
 | 2026-08-16 | fusion-discovery-council deep | $4.00 | $0.53 |
 | 2026-08-16 | llm-council premium (pre-mortem gate) | $0.30–1 | $0.79 |
-| Week 3/4 | falsification pass + optional 2nd council | — | reserved |
-| **Spent** | | | **$4.12 of $15–25** |
+| 2026-08-17 | Phase B falsification pass: n=15 teardown (in-session agents) | $0 | $0.00 |
+| 2026-08-17 | Gemini DR (demand-side eval-governance evidence) | ~$3 | $2.80 |
+| Phase D | 2nd council pre-mortem at systems-map/PRD gate | — | reserved |
+| **Spent** | | | **$6.92 of $15–25** |
 
 Note: `council-spend-2026-08-16.json` shows reservation amounts ($7.30/$11.19), not the settled actuals above — ticketed for verification (2026-08-16).
 
