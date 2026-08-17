@@ -73,16 +73,19 @@ The council flagged single-anchor fragility: the Claude Code "three lines missin
 
 ## How each module runs
 
-**Diagnose → learn → gym → label → calibrate.** Note what changed: mirror-on-self is no longer the universal opener.
+**Diagnose → listen → watch one worked → do one → label → shift.**
+
+Two things changed from the v1 draft, both on evidence: mirror-on-self is no longer the universal opener, and **prediction-before-exercise is gone entirely** (Sean, 2026-08-17). The teach-first rule that governs the Golden Loop build governs the modules too — worked examples precede faded scaffolding, and asking someone to predict a move they have not been taught is difficulty without learning. Calibration still happens; it happens **after** the attempt, by comparing his work against a worked answer, instead of before it by testing an instinct he has no reason to have yet.
 
 1. **Diagnose (2 min).** The module states whether Sean's fleet forced this decision. If yes, open on the thing he already built, named. If no, say plainly: *your fleet never made you solve this, so this is new.* The v1 draft's universal mirror reintroduced the retired curriculum's inward-pointing defect and would have masked exactly the gaps that matter from M4 onward.
-2. **Predict (written, before anything).** Predicted mechanism, expected failure, falsifier.
-3. **Gym — and half of them are forward design.** Alternating:
+2. **Listen.** The three-episode audio arc — pre-brief, deep-dive, debate. This is the primary teaching channel and the format Sean confirmed works (2026-08-17, mid-M1: *"MUCH better and what I was expecting"*).
+3. **Watch one worked.** Claude runs a full example out loud first, narrating *why* each move is made, not just the conclusion. Sean watches a competent person think before being asked to do it.
+4. **Then do one, on the same shape, with support available and no gate.** Alternating:
    - **Forward:** a dirty brief (*"40k support tickets, two engineers, compliance review in Q1 — what do we build?"*) → architecture out, with rejected alternatives, kill criteria, and a defended bet. **This is the most common AI PM interview format and v1 never practiced it once.**
    - **Teardown:** an unfamiliar real product, never his fleet.
-4. **Label the mode.** In every teardown Sean states **observed / inferred / designed** for each claim. Public teardowns without ground truth otherwise become architecture fanfic, and the labeling is itself a maturity signal.
-5. **Constraint-shift drill.** One constraint changes mid-exercise — traffic 10×, latency budget halves, the vector store dies, the data becomes regulated — and he re-derives live. The documented discriminator between real and memorized competence.
-6. **Calibrate.** Against the prediction. Claude critiques structure and reasoning, not correctness.
+5. **Label the mode.** In every teardown Sean states **observed / inferred / designed** for each claim. Public teardowns without ground truth otherwise become architecture fanfic, and the labeling is itself a maturity signal. This is a habit to build, not a test to pass.
+6. **Constraint-shift drill.** One constraint changes mid-exercise — traffic 10×, latency budget halves, the vector store dies, the data becomes regulated — and the design has to be re-derived. **The first time in each module, Claude walks the re-derivation out loud with him**; later ones he takes himself. This is the documented discriminator between real and memorized competence, so it stays — but it is taught before it is asked for.
+7. **Then compare.** Claude shows how it would have answered and where the two diverge, critiquing structure and reasoning rather than correctness. Divergence is the lesson; there is no score.
 
 ### Written artifacts — one per module
 
@@ -98,13 +101,17 @@ Verbal training was scheduled to the hour in v1 while written articulation was a
 
 ## Verbal training
 
-No interviews booked (confirmed 2026-08-17), so the evidence-backed ramp stands. Concurrent narration degrades expert performance (success 47% → 37%) and the expertise-reversal effect makes it worse for practitioners running on automated routines — so the hard condition is trained last, deliberately.
+**Deferred by Sean's call (2026-08-17): verbal reps start when he says he's ready, not on a week number.** His words: *"I'd rather listen to M1 and then work on setting up the remaining modules so that I feel comfortable before working on the verbal reps."* No interviews are booked, so nothing forces the issue, and starting a hard practice before the vocabulary is in place is the same mistake as prediction-first. **Do not schedule these. Ask occasionally; wait for a yes.**
 
-| Weeks | Mode | Why |
+When he does start, the ramp shape below is the evidence-backed sequence and its ordering still matters. Concurrent narration degrades expert performance (success 47% → 37%) and the expertise-reversal effect makes it worse for practitioners running on automated routines — so the hard condition is trained last, deliberately.
+
+| Stage | Mode | Why |
 |---|---|---|
-| 1–3 | Retrospective, untimed — design in silence, then narrate the finished design | Lowest cognitive load; builds vocabulary and structure without the dual-task penalty |
-| 4–6 | Retrospective, timed | Pressure on delivery only, not on reasoning |
-| 7–8+ | Concurrent, timed, interrupted with constraint shifts | Pressure Training (meta-analytic g = 0.77); the interview condition |
+| 1 | Retrospective, untimed — design in silence, then narrate the finished design | Lowest cognitive load; builds vocabulary and structure without the dual-task penalty |
+| 2 | Retrospective, timed | Pressure on delivery only, not on reasoning |
+| 3 | Concurrent, timed, interrupted with constraint shifts | Pressure Training (meta-analytic g = 0.77); the interview condition |
+
+Each stage runs until it feels unremarkable, not for a fixed number of weeks.
 
 **Override clause:** if an interview lands inside weeks 1–6, the ramp is abandoned immediately and concurrent practice starts that week. Training the wrong condition is worse than paying the expertise-reversal penalty.
 
@@ -112,9 +119,12 @@ Delivery rules from the articulation research: reach conceptual clarity **before
 
 ## Gates
 
-- **Week 4 — fluency.** Narrate a full system design for an unfamiliar product, retrospectively, under 10 minutes, labeling observed/inferred/designed throughout.
-- **Week 6 — judgment.** Cold **forward design** from a dirty brief he has not seen, with two constraint shifts injected, ending in a ship/no-ship disposition with written thresholds. Forward, not teardown — because that is the failure mode v1 would have produced.
-- **Weekly:** one 20-minute cold exercise, alternating forward and teardown.
+**Gates are checkpoints, not exams, and the two spoken ones wait on the verbal ramp** (deferred above). Nothing here is a pass/fail that blocks progress; they exist so the program can tell whether it is working.
+
+- **Written, after M3 — forward design.** A dirty brief he has not seen, worked in writing, ending in a ship/no-ship disposition with written thresholds. Forward rather than teardown, because teardown-only fluency was the council's single loudest warning.
+- **Spoken, once the ramp has started — fluency.** Narrate a full system design for an unfamiliar product, retrospectively, under 10 minutes, labeling observed/inferred/designed throughout.
+- **Spoken, later — judgment.** The same, concurrent, with two constraint shifts injected mid-flight.
+- **Ongoing:** one 20-minute exercise a week, alternating forward and teardown. Worked-then-attempted, never cold.
 
 **Success criterion, Sean's words verbatim:** *look at an AI product or a regular product and fully envision how it runs under the hood, what could go wrong, how to fix it, and how to apply judgement — out loud, cold, unrehearsed.*
 

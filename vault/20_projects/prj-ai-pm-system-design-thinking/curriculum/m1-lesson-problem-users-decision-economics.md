@@ -164,7 +164,7 @@ Run the module's questions against it:
 
 ## Exercises
 
-Prediction goes first, in writing, before you look at anything. Then the work. Then we compare.
+**How these run:** I work one example fully out loud first — narrating *why* each move happens, not just what I concluded — and then you do one of the same shape, with me available throughout. No cold starts, no predictions written before you've been taught the move, no score at the end. When you're done we compare, and where we diverge is the lesson.
 
 ### Exercise A — Forward design from a dirty brief *(the format the last curriculum never practiced once)*
 
@@ -172,11 +172,11 @@ Prediction goes first, in writing, before you look at anything. Then the work. T
 >
 > **What do you build?**
 
-**Predict first (15 min, written).** Before designing: what will the binding constraint turn out to be — data, compliance, engineering capacity, or the error asymmetry? Name your falsifier: what would you observe that proves you picked wrong?
+**First, I work it.** I'll take this brief and design it out loud, start to finish, saying why at every step — where I'd look for the binding constraint, how I'd get the error costs out of a legal team that hasn't thought about them in those terms, why I'd pick the threshold I pick. Interrupt whenever a term or a move isn't obvious. That's the point of watching.
 
-**Then design (60 min).** Produce: the non-AI baseline and what AI must beat; the error-cost table for both error types with who bears each; your threshold and its reasoning; an error budget with a number; kill criteria; the recourse path for a wrongly-flagged claimant; and **at least two alternatives you rejected, with why.** Take a defended position. "It depends" is not an answer; "it depends on X, and here's how I'd find out X in a week" is.
+**Then you take a second brief of the same shape.** Produce: the non-AI baseline and what AI must beat; the error-cost table for both error types with who bears each; your threshold and its reasoning; an error budget with a number; kill criteria; the recourse path for a wrongly-flagged claimant; and **at least two alternatives you rejected, with why.** Take a defended position — "it depends" isn't an answer, but "it depends on X, and here's how I'd find out X in a week" is. Ask me anything mid-flight; there's no penalty for it.
 
-**Then the constraint shift.** I'll change one thing and you re-derive live.
+**Then the constraint shift.** I'll change one thing — the compliance review moves to next month, or the fraud rate turns out to be 0.3% instead of 4% — and the first time, I'll walk the re-derivation with you rather than watch you do it. Later ones are yours.
 
 ### Exercise B — Teardown, with modes labeled
 
@@ -195,11 +195,13 @@ That labeling is not pedantry. Public teardowns without ground truth become arch
 
 This becomes **Golden Loop's PRD.** Not an exercise you throw away.
 
-### The verbal rep
+### The verbal rep — *deferred, and not on a schedule*
 
-**Retrospective and untimed** — that's deliberate for weeks 1–3. Finish the design in silence *first*, then narrate the finished thing. Narrating while designing degrades performance, and it degrades it more for people who work on instinct, which is you.
+**Skip this for now.** You said you'd rather get through the modules and feel comfortable before speaking any of it out loud, and that's the right instinct — starting a hard practice before the vocabulary is in place is the same mistake as being asked to predict a move you haven't been taught.
 
-Five minutes, out loud, dictated into a file. Cover: what it's for, what a wrong answer costs and to whom, what you'd ship, and what would make you turn it off. I'll critique structure and reasoning — where you rambled, what you skipped, where you stated something as observed that was actually inferred. Not whether you were right.
+When you want it, here's the shape, and it starts easy on purpose: **retrospective and untimed.** Finish the design in silence *first*, then narrate the finished thing. Narrating while designing measurably degrades performance, and it degrades it more for people who work on instinct — which is you. The hard version comes much later, deliberately.
+
+Five minutes, out loud, however you want to capture it. Cover: what it's for, what a wrong answer costs and to whom, what you'd ship, and what would make you turn it off. I'd critique structure and reasoning — where it rambled, what got skipped, where something got stated as observed that was actually inferred. Never whether you were right.
 
 ---
 
