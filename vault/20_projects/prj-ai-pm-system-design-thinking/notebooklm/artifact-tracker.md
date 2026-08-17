@@ -19,9 +19,9 @@ One row per generated artifact. Update on every generate and every download.
 
 | Date | Module | Type | Artifact ID | Status | Downloaded to |
 |------|--------|------|-------------|--------|---------------|
-| 2026-08-17 | M1 | Audio — pre-brief (brief/short) | `747416f7` | generating | `m1-artifacts/m1-prebrief.mp3` |
-| 2026-08-17 | M1 | Audio — deep-dive (long) | `5f88a198` | generating | `m1-artifacts/m1-deep-dive.mp3` |
-| 2026-08-17 | M1 | Audio — debate | `164db4c4` | generating | `m1-artifacts/m1-debate.mp3` |
+| 2026-08-17 | M1 | Audio — pre-brief (brief/short) | `747416f7` | completed (in notebook) | not downloaded — Sean listens in the notebook |
+| 2026-08-17 | M1 | Audio — deep-dive (long) | `5f88a198` | completed (in notebook) | not downloaded — Sean listens in the notebook |
+| 2026-08-17 | M1 | Audio — debate | `164db4c4` | completed (in notebook) | not downloaded — Sean listens in the notebook |
 
 M1 source selection: `2251b249` (lesson) · `bb367054` (PAIR guidebook) · `f0988a1f` (ML thresholds) · `66c038cd` (Amazon case).
 
