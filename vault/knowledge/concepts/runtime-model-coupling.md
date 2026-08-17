@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/runtime-model-coupling.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition

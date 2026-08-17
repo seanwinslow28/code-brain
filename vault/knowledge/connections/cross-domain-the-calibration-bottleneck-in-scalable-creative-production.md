@@ -2,30 +2,30 @@
 title: "Cross-Domain: The Calibration Bottleneck in Scalable Creative Production"
 type: connection
 connects:
-  - The Illusion of Health in Autonomous Systems
+  - The Taste-Throughput Trade-off in Agentic Synthesis
+  - Legibility Debt as a Supervision Failure Mode
   - Velocity vs. Judgment in MCP Strengthening
-  - Harness Engineering Invariant
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Synthesis
 
-This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. As Sean scales his agent fleet, the 'illusion of health' masks a decay in semantic fidelity, forcing him to spend more time supervising low-quality output than he saves in generation time. The consequence is that velocity gains are negated by the increasing cost of judgment, creating a bottleneck where the human operator becomes the limiting factor for system reliability.
+The core tension lies in the misalignment between the exponential growth of automated concept generation and the linear capacity of human taste to curate them. This creates a calibration bottleneck where the operator's judgment becomes the limiting factor for system reliability, as the agent fleet produces more noise than signal. The consequence is a systemic trust deficit that forces Sean to revert to manual oversight, negating the efficiency gains of automation and creating a hidden cost in cognitive load.
 
 ## Threads
 
-### [[The Illusion of Health in Autonomous Systems]]
-
-> The agents you have already built will keep producing work long after they stop being right.
-
-### [[Velocity vs. Judgment in MCP Strengthening]]
+### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
 > Sean's transition from small, high-quality runs to large, low-quality runs reveals a critical tension between operational velocity and semantic judgment.
 
-### [[Harness Engineering Invariant]]
+### [[Legibility Debt as a Supervision Failure Mode]]
 
-> This invariant posits that agent reliability is inversely proportional to complexity of its surrounding harness, as every added tool or permission expands the failure surface non-linearly.
+> This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
+
+### [[Velocity vs. Judgment in MCP Strengthening]]
+
+> The agents you have already built will keep producing work long after they stop being right.
 
 ## Implications
 

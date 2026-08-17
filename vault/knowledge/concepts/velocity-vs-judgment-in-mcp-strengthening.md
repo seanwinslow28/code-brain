@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/connections/velocity-vs-judgment-in-mcp-strengthening.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-This tension defines the trade-off between the speed of automated execution and the depth of semantic reasoning required for robust system strengthening. As velocity increases through larger cluster sampling or more complex models, the agent's ability to apply rigorous taste-based filtering often decreases unless explicitly constrained. The mechanism here is that raw compute power expands the failure surface faster than the judgment layer can be hardened, leading to a net loss in productivity despite higher throughput.
+This mechanism describes the structural tension where the exponential increase in automated synthesis velocity outpaces the linear capacity of human taste to curate and verify high-stakes outputs. As Sean scales concept generation, the system prioritizes speed over the nuanced filtering required for career differentiation, leading to de-differentiated content that fails to stand out in competitive markets. This creates a paradox where increasing efficiency actually reduces the strategic value of the output, forcing the introduction of artificial friction to maintain quality.
 
 ## Context
 
-Sean's recent runs show a clear correlation between model upgrades (qwen3-14b to qwen3.6-35b) and changes in output quality metrics. He must decide whether to prioritize the volume of concepts generated or the precision of the connections made, as optimizing for one often degrades the other.
+Sean is navigating a critical inflection point in his job hunt and creative studio operations where raw throughput is no longer the bottleneck; rather, the ability to distinguish high-signal work from 'slop' is. The fleet's increasing capacity to generate concepts (e.g., 125c/34x) risks overwhelming his taste calibration, making it harder to produce the unique, high-fidelity artifacts required for senior-level differentiation.
 
 ## Evidence
 
-> Sean's transition from small, high-quality runs to large, low-quality runs reveals a critical tension between operational velocity and semantic judgment.
+> There is a fundamental tension between the velocity of automated synthesis and the costliness of signals required for career differentiation.
 
-> As the system scales up concept generation, the lack of rigorous filtering leads to a surplus of low-fidelity output that requires more manual supervision to correct.
+> High-velocity automation tends to produce de-differentiated content that fails to stand out in competitive job markets.
 
 ## Examples
 
-- The run on 2026-07-21 produced 97 concepts and 21 connections via qwen3.6-35b, whereas the run on 2026-07-02 produced 141 concepts and only 40 connections via qwen3-14b.
-- The rejection count dropped from 80 in early July to 15 in late July, suggesting a change in filtering rigor or model behavior rather than an improvement in taste.
+- The fleet's ability to generate 125 concepts in a single run (run-2026-08-13) versus the earlier 3 concepts (run-2026-05-27) illustrates the scale shift that necessitates this tension.
+- The need for 'explicit aesthetic standardization as a supervisory mechanism' to prevent homogenization in job hunt materials.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Harness Engineering Invariant]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Performative Taste Drift]] [[The Calibration Bottleneck in Scalable Creative Production]]

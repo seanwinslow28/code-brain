@@ -2,32 +2,32 @@
 title: "Velocity vs. Legibility in Agent Fleets"
 type: connection
 connects:
-  - The Illusion of Health in Autonomous Systems
+  - The Taste-Throughput Trade-off in Agentic Synthesis
   - Legibility Debt as a Supervision Failure Mode
-  - Agent Fleet Observability Dashboard
-created: 2026-07-22
-updated: 2026-07-22
+  - The Illusion of Health in Autonomous Systems
+created: 2026-08-16
+updated: 2026-08-16
 ---
 
 ## Synthesis
 
-The core tension is that increasing the velocity of automated concept generation directly degrades the legibility of the system for human supervisors, creating a trust deficit where activity metrics mask semantic decay. As Sean scales his fleet's sampling capacity, the volume of output exceeds his ability to verify quality, forcing him into forensic supervision mode and eroding confidence in the tool. This pattern reveals that operational health (high throughput) is inversely correlated with functional value (verified insight) when verification mechanisms do not scale proportionally.
+The core tension is that scaling automated concept generation directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. As Sean increases throughput from 3 to 125+ concepts per run, the rejection rate drops, indicating that quality gates are being bypassed to maintain volume. This creates an illusion of health where operational metrics suggest improvement while semantic integrity decays, forcing Sean to choose between high-velocity noise and low-velocity insight.
 
 ## Threads
 
-### [[The Illusion of Health in Autonomous Systems]]
-
-> Robust protocol instrumentation masks epistemic blindness, creating an illusion of health that is particularly dangerous in creative contexts.
-
-### [[Legibility Debt as a Supervision Failure Mode]]
+### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
 > As Sean scales the concept generation from 3 to 153 concepts per run, the mechanisms for reporting status lag behind, creating a legibility gap.
 
-### [[Agent Fleet Observability Dashboard]]
+### [[Legibility Debt as a Supervision Failure Mode]]
 
-> Automated dashboards should be designed to highlight missing data or silence as critical errors, not just successful completions.
+> Robust protocol instrumentation masks epistemic blindness, creating an illusion of health that is particularly dangerous in creative contexts.
+
+### [[The Illusion of Health in Autonomous Systems]]
+
+> This pattern forces a trade-off: either cap velocity to maintain legibility and trust, or accept that operational metrics no longer reflect functional value.
 
 ## Implications
 
-- Sean must redesign his observability layer to flag semantic gaps rather than just execution success, preventing the illusion of health from masking quality loss.
-- He should cap automated throughput at a level that allows for manual verification, prioritizing legibility over volume to maintain trust in the vault.
+- Sean must cap automated throughput at a level that allows for manual verification, prioritizing legibility over volume to maintain trust in the vault.
+- He should redesign his observability layer to flag semantic gaps rather than just execution success, preventing the illusion of health from masking quality loss.

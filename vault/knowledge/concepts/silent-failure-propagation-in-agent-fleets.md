@@ -2,31 +2,31 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/silent-failure-propagation-in-agent-fleets.md
+  - knowledge/expansions/connections/agent-health-and-automation-failure.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-This pattern occurs when the desire for autonomous synthesis conflicts with the lack of observable intermediate states in headless agents. Failures propagate silently because there is no feedback loop to validate the semantic completeness of the data pipeline. The consequence is that the user notices the staleness before the brief flags the failure, creating a dependency gap where operational health masks strategic stagnation.
+This pattern describes how a minor, undetected failure in one agent (such as a missing credential or empty output) propagates through the fleet by corrupting the context passed to downstream agents. Because each agent assumes its input is valid, it produces garbage that appears structurally correct but semantically void, making the failure invisible until the final user-facing artifact is reviewed. This creates a cascading effect where the root cause is buried deep in the dependency chain, requiring manual reconstruction to identify.
 
 ## Context
 
-Sean faces a critical inversion where the governance of his professional output is delegated to systems that only verify operational health. This leads to undetected productivity loss when agents are idle or blocked by infrastructure limitations like missing MCP connections.
+Sean’s fleet relies on a chain of agents (synthesizer, daily drive, etc.) where each depends on the previous day's note. A silent failure in the synthesizer means the daily drive agent has nothing to work with, leading to empty or stale outputs that Sean only notices when he checks his morning brief.
 
 ## Evidence
 
-> There is a critical tension between the desire for autonomous synthesis and the lack of observable intermediate states in headless agents.
+> Complex systems normally operate in degraded states, catastrophes require multiple contributing conditions, and 'root cause' stories are usually hindsight compression.
 
-> The fleet's health monitoring mechanism validates process existence and network connectivity but fails to validate the semantic completeness of the data pipeline.
+> Every automated recovery path must preserve diagnosis evidence and periodically exercise the operator’s manual recovery path.
 
 ## Examples
 
-- Agents report 'healthy' with an empty queue
-- The monitoring system validates existence rather than value
+- The transition from log-only monitoring to black-box SLOs is necessary because logs can show success while the artifact is missing.
+- A portfolio-grade incident reconstruction showing how individually reasonable components combine to miss a note.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+[[Agent Health and Automation Failure]] [[Control Room Observability]]

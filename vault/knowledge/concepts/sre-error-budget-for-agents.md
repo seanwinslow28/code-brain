@@ -2,31 +2,31 @@
 title: "SRE Error Budget for Agents"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-reliability-metrics-and-adaptive-capacity-in-agent-fleets.md
+  - knowledge/expansions/connections/agent-health-and-cost-efficiency.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-This mechanism establishes a quantitative threshold for acceptable failure in probabilistic systems, treating error not as a binary state but as a managed resource. It requires defining explicit limits on failure rates, recovery paths, and operator attention costs to prevent the 'illusion of health' where an agent appears functional but is actually degrading system stability. The invariant here is that a creative agent's health is determined by its ability to stay within these bounds during stress, rather than achieving perfect uptime which is often uninformative about underlying fragility.
+This concept reframes agent reliability not as a binary state of uptime but as a managed economic resource where failures are permitted within a calculated tolerance. It establishes that excessive reliability consumes infrastructure and opportunity cost, meaning the acceptable failure budget is determined by comparing the cost of prevention against the cost of recovery. This approach unlocks an agent SLO and error-budget policy specifying successful-output rate, maximum stale-output age, and tolerated deferred runs.
 
 ## Context
 
-Sean needs to apply this concept to his job hunt by framing his agent fleets as systems with managed error budgets. This demonstrates to potential employers that he understands the trade-offs between reliability and adaptive capacity, a key differentiator for senior engineering roles involving autonomous systems.
+Sean's vault relies on automated synthesis; understanding that occasional failures are economically rational prevents over-engineering fragile systems for marginal gains in consistency.
 
 ## Evidence
 
-> A creative agent is not healthy when it succeeds once; it is healthy when its failure rate, recovery path, and operator attention cost stay inside an explicit error budget.
+> Google’s Marc Alvidrez and Mark Roth argue the opposite in “Embracing Risk,” Chapter 3 of Site Reliability Engineering: excessive reliability consumes infrastructure and opportunity cost.
 
-> The tension lies between defining strict Service Level Objectives for context availability and the reality that agents will inevitably fail to meet them.
+> This unlocks an agent SLO and error-budget policy specifying successful-output rate, maximum stale-output age, tolerated deferred runs, and when reliability work should displace feature work.
 
 ## Examples
 
-- Tracking operator attention cost during agent failures
-- Defining recovery paths within an explicit error budget
+- Allowing a local agent to occasionally defer execution rather than incurring the high cost of a cloud fallback for non-critical tasks.
+- Defining a specific error budget percentage that triggers a shift from feature development to reliability engineering.
 
 ## Related Concepts
 
-[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[The Illusion of Health in Autonomous Systems]]
+[[Agent Health and Cost Efficiency]] [[Operational Uptime vs. Cognitive Utility Tension]]

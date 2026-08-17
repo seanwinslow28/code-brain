@@ -2,31 +2,31 @@
 title: "The Efficiency-Quality Inversion in Automated Synthesis"
 type: concept
 sources:
-  - knowledge/connections/the-tacit-knowledge-bottleneck-in-scaling-agent-fleets.md
+  - knowledge/index.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-This pattern describes a non-linear relationship where increasing automation throughput initially improves output quality by reducing manual friction, but eventually triggers an inversion point. Beyond this threshold, the marginal cost of verifying low-fidelity agent outputs exceeds the value of the content itself, causing net utility to decline despite higher raw production numbers. The system shifts from being a force multiplier for Sean's intent to a generator of noise that requires more human labor to filter than it produces.
+This pattern describes a phase transition where increasing automation throughput initially yields high-quality, novel insights, but eventually triggers a degradation loop. As the system scales to process more clusters, the rejection rate rises not because of better filtering, but because the model's context window becomes saturated with noise, leading to 'slop'—plausible but shallow connections that fail semantic verification. The mechanism is a trade-off where speed consumes the cognitive depth required for genuine synthesis.
 
 ## Context
 
-Sean’s vault data shows a clear inflection point around July 6th when switching from qwen3-14b to qwen3.6-35b-a3b-32k. While the larger model increased concepts written, the rejection rate and cluster sampling volume spiked, indicating that higher capacity without tighter constraints leads to semantic drift rather than precision.
+Sean observes this directly in his vault synthesizer runs: early 2026 runs with fewer concepts produced higher relative quality, while later runs with massive concept counts (150+) saw stability but lower novelty. Understanding this inversion prevents him from optimizing for raw output volume at the expense of intellectual value.
 
 ## Evidence
 
-> As Sean scales his agent fleet, the erosion of tacit knowledge creates a critical tension: automation requires explicit rules, but human expertise often resides in unspoken norms.
+> The failure of vault-synthesizer directly impacts cross-domain knowledge integration, linking domains like 'Indexing and Synthesis' with 'Automation Failure and Daily Note Disruption'.
 
-> This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
+> Every new Claude Code session begins with awareness of the synthesized knowledge graph.
 
 ## Examples
 
-- The jump from 45 concepts written on June 23 to 109 on June 29 using qwen3-14b resulted in 76 rejections, showing that volume without quality control generates more work for the supervisor.
-- The switch to qwen3.6-35b-a3b-32k on July 6 increased concepts to 103 but also increased rejected_count to 106, demonstrating that raw model power can amplify errors if the underlying tacit knowledge isn't codified.
+- Run on 2026-07-03 produced 150 concepts but only 42 connections, indicating a saturation point where concept generation outpaced meaningful linking.
+- Run on 2026-08-15 produced 123 concepts and 43 connections, showing a recovery in connection density after earlier drops.
 
 ## Related Concepts
 
-[[Tacit Knowledge Erosion vs. Automation Scale]] [[Legibility Debt as a Supervision Failure Mode]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Slop as a Trust Deficit]]

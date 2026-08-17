@@ -2,31 +2,31 @@
 title: "The Calibration Bottleneck in Scalable Creative Production"
 type: concept
 sources:
-  - knowledge/concepts/the-calibration-bottleneck-in-scalable-creative-production.md
+  - knowledge/connections/the-calibration-bottleneck-in-scalable-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-This mechanism defines the structural limit where the velocity of automated synthesis outpaces the fidelity required for creative authority, creating a bottleneck at the point of human calibration. As the agent fleet scales, the system generates more clusters and concepts, but the human supervisor's ability to accurately calibrate these outputs against their internal 'taste' standards becomes the limiting factor. This bottleneck is not a failure of the agents but a feature of the coupling between high-velocity generation and low-velocity judgment, requiring explicit management of the 'supervision budget'.
+This mechanism describes the structural limit where human verification capacity fails to scale linearly with automated synthesis volume, creating a systemic trust deficit. As agent fleets increase concept generation throughput, the ratio of verified semantic value to total output declines because manual taste calibration becomes the hard constraint. This forces a choice between accepting unverified 'slop' or halting production to restore quality control, effectively capping the utility of automation at the level of human attention.
 
 ## Context
 
-Sean's data shows that as clusters sampled increase (e.g., 272 in July), the rejected count does not necessarily decrease proportionally, suggesting that the calibration process is struggling to keep pace with the input volume. This tension forces a strategic choice between raw throughput and the preservation of creative integrity.
+Sean is observing his own fleet metrics where concept counts are rising while rejection rates and duration fluctuate, indicating that he is hitting the edge of what he can meaningfully curate. This bottleneck explains why increasing cluster sampling does not automatically yield higher-quality vault content without a corresponding increase in verification bandwidth.
 
 ## Evidence
 
-> As Sean's agent fleet scales up concept volume (e.g., 153 concepts in July), the rejection rate drops but the cognitive load of supervision increases, creating a bottleneck where the cost of correction exceeds the value of generation.
+> There is a fundamental tension between the scalability of agent fleets and the human capacity to calibrate their output quality.
 
-> This connection reveals a fundamental tension between the velocity of automated synthesis and the fidelity required for creative authority.
+> Scaling agent fleets without scaling verification capacity leads to diminishing returns on creative authority.
 
 ## Examples
 
-- Sean must implement a 'supervision budget' that limits concept volume to a level where he can maintain high-fidelity oversight, preventing taste degradation.
-- He should prioritize tools that enhance 'taste preservation' and 'evaluation loops' over raw model scaling, as these directly address the fidelity gap.
+- The fleet writes 125 concepts in one run but Sean can only effectively verify a fraction, leading to a reliance on automated rejection metrics rather than taste-based curation.
+- Sean must periodically audit the 'taste' of his outputs against a small, high-fidelity baseline to detect drift.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[The Efficiency-Quality Inversion in Automated Synthesis]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Slop as a Trust Deficit]]

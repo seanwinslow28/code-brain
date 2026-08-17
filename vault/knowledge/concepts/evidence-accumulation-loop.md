@@ -2,31 +2,31 @@
 title: "Evidence Accumulation Loop"
 type: concept
 sources:
-  - 20_projects/substack-studio/01-cant-prompt-taste/ships-with-cheese-gauntlet-kit.md
+  - knowledge/concepts/evidence-accumulation-loop.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-A calibration mechanism where voice fidelity is treated as a function of accumulated, high-fidelity data points rather than immediate instruction following. The system requires the user to perform iterative 'reps' over multiple sessions, allowing the model to infer stylistic patterns from raw, unedited outputs instead of relying on static, one-shot prompts that fail to capture nuance. This shifts the burden of precision from the prompt engineer to the data collector, creating a compounding effect where each session refines the previous context.
+A cognitive mechanism where information is gathered and stored without a structured process for hypothesis testing or schema modification, resulting in a 'shoebox' of data that lacks explanatory power. This loop prioritizes the collection of source snippets and competing hypotheses over the active construction of evidence-supported stories or the invalidation of governing assumptions. The invariant here is that accumulation without synthesis creates cognitive load rather than clarity, as the system fails to distinguish between relevant evidence and noise.
 
 ## Context
 
-Sean is building a 'Cheese Gauntlet' kit for his Substack audience to help them calibrate their own AI voices. He explicitly rejects the 'magic prompt' paradigm in favor of a long-term evidence pile, recognizing that one-time instructions cannot replicate the depth of personal taste and cultural reference required for authentic voice.
+Sean’s recent runs show a massive increase in clusters sampled (up to 272) but a stagnation in meaningful connections written, indicating a bottleneck where data collection outpaces sensemaking. This imbalance threatens his ability to produce defensible insights for his job hunt or creative projects, as he may have vast amounts of data but no clear narrative or decision framework derived from it.
 
 ## Evidence
 
-> You're not pasting these in and walking away with your voice on tap. You're starting a pile of evidence the model gets to learn you from.
+> Store intermediate objects—not only finished notes: source snippets, competing hypotheses, disconfirming evidence, and the schema each finding modifies.
 
-> The first session gets you a sharper outline. The tenth gets you something that sounds like you wrote it.
+> Classify every research consequence as either single-loop—change execution while preserving the objective—or double-loop—challenge the objective, policy, metric, or governing assumption itself.
 
 ## Examples
 
-- Prompt 1: The Reference-Universe Interview
-- Prompt 3: Mine Your Pre-AI Writing
+- The critique suggests modeling integration as two coupled loops: a foraging loop for search/filtering and a sensemaking loop for schema building.
+- A compelling portfolio demo would involve inspecting an evidence shoebox and tracing the winning hypothesis into an implementation artifact.
 
 ## Related Concepts
 
-[[Cultural Reference Mapping]] [[Negative Space Calibration]]
+[[Double-loop learning]] [[Tacit Knowledge Erosion vs. Automation Scale]]

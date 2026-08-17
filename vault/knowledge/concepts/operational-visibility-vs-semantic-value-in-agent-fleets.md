@@ -2,31 +2,31 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-operational-visibility-and-semantic-completeness.md
+  - knowledge/connections/operational-metrics-mask-semantic-stagnation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-This concept describes a systemic decoupling where binary health metrics indicate successful process execution while semantic data quality degrades due to inaccessible dependencies. Agents report success based on their ability to run, not on the integrity of the context they consume or produce. This creates a feedback loop where operational stability masks semantic starvation, preventing the detection of critical infrastructure failures until downstream outputs become unusable.
+This tension arises from the fundamental misalignment between what is easily measurable (logs, counts, durations) and what actually matters (synthesis quality, connection depth). The mechanism involves a visibility bias where high-frequency operational data overwhelms the observer, obscuring the low-fidelity nature of the semantic output. As sampling rates increase, the volume of noise grows faster than the signal, making it harder to detect when the system is merely spinning its wheels rather than advancing knowledge.
 
 ## Context
 
-Sean needs to distinguish between an agent that is 'alive' and one that is 'useful'. Without this distinction, he risks optimizing for uptime while his knowledge vault suffers from silent data loss or stale context, leading to a false sense of security about the system's actual utility.
+Sean's recent runs show a dramatic increase in clusters sampled (from ~140 to ~190) and duration (from ~1600s to ~2700s), yet the concept count only modestly increases. This visibility of increased activity masks the stagnation in actual knowledge production, making it difficult to assess true progress.
 
 ## Evidence
 
-> There is a critical divergence between the operational visibility of agents (which reports binary health) and their semantic completeness (the actual quality and scope of data they can access).
+> There is a fundamental tension between the visibility of agent operations (logs, counts, durations) and the actual semantic value of their outputs.
 
-> status=success · 5.8h ago · notes='concepts=91 connections=17 rejected=17 edges=9'
+> The current monitoring dashboard is insufficient for detecting semantic decay because it does not correlate agent status with data flow integrity.
 
 ## Examples
 
-- Agents reporting 'success' while missing critical context from offline hardware or unreachable MCP servers.
-- High concept counts masking low semantic value due to fragmented infrastructure.
+- Run 2026-08-15 sampled 186 clusters and took 2733 seconds but only wrote 123 concepts, whereas earlier runs with fewer samples had similar output volumes.
+- The fleet reports 'healthy' status based on process execution while knowledge integrity depends on successful synthesis and connection writing.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Infrastructure Fragmentation and Semantic Isolation]]
+[[The Illusion of Health in Autonomous Systems]] [[Throughput vs. Taste Memory Tension]]

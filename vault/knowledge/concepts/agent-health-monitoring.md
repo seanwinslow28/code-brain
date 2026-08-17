@@ -2,31 +2,30 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/concepts/agent-health-monitoring.md
+  - knowledge/connections/operational-uptime-vs-strategic-stagnation.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-12
+updated: 2026-08-12
 ---
 
 ## Definition
 
-This mechanism defines a verification loop where operational status is measured via binary metrics like uptime and connectivity, creating a structural blind spot regarding semantic completeness. The system allows agents to maintain a 'healthy' state while producing functionally inert or stale content, effectively decoupling technical robustness from cognitive utility. This misalignment persists because the monitoring layer validates process execution rather than output value, leading to a false sense of strategic progress.
+This concept defines the practice of evaluating agent viability based on binary operational states (up/down) rather than semantic output quality or strategic alignment. It establishes a dependency where the cost-effectiveness and reliability of agentic workflows are contingent upon the continuous availability of specific agents, yet this monitoring often fails to detect when an agent is 'alive' but producing no value. The mechanism creates a false sense of security by prioritizing process continuity over outcome integrity.
 
 ## Context
 
-Sean needs to distinguish between an agent that is technically running and one that is generating actual value, as current metrics obscure functional stagnation. Without this distinction, he risks optimizing for activity while suffering from semantic decay in his knowledge vault.
+Sean's current monitoring approach tracks whether agents are running and completing tasks, but it does not adequately distinguish between healthy agents that generate insight and those that are merely executing empty loops.
 
 ## Evidence
 
-> Health checks verify that agents are running and connected, but they do not validate the semantic completeness of the data pipeline.
+> The operational health of agents directly impacts the cost-effectiveness of agentic workflows if an agent is unhealthy, it may incur unnecessary costs or disrupt other automation tasks.
 
-> The operational health of agents directly impacts the cost-effectiveness of agentic workflows. If an agent is unhealthy, it may incur unnecessary costs or disrupt other automation tasks.
+> Agents report success based on process execution while knowledge integrity depends on successful semantic integration.
 
 ## Examples
 
-- Sean perceives his infrastructure as robust because agents report 'healthy' status, even when producing empty or stale content.
-- The core tension lies in the decoupling of operational health metrics from actual semantic progress.
+- A synthesizer agent continues to run and consume tokens without writing any new concepts, yet its health status remains 'Green' because the process did not crash.
 
 ## Related Concepts
 
-[[Agent Health]] [[Control Room Observability]]
+[[Agent Health]] [[SRE Error Budget for Agents]]

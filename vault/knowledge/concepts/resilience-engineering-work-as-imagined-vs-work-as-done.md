@@ -2,30 +2,31 @@
 title: "Resilience Engineering: Work-as-Imagined vs Work-as-Done"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-06-08-task-26-research-reference-brief.md
+  - knowledge/concepts/resilience-engineering-work-as-imagined-vs-work-as-done.md
 tags: [auto-generated, phase-6]
-created: 2026-06-09
-updated: 2026-06-09
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-This concept describes the structural gap between idealized automation flows and the reality of exception handling. In AP systems, the 'work-as-done' is dominated by manual interventions for edge cases like duplicate detection failures or tolerance threshold breaches, rather than the seamless 'work-as-imagined' flow. The system's reliability depends not on preventing all errors, but on how efficiently it routes these exceptions to human judgment when automated controls fail.
+This framework scores system resilience by analyzing successful adaptations under degraded conditions rather than assuming healthy components guarantee success. It measures four specific potentials—respond, monitor, learn, anticipate—and records nights when the routine succeeded despite unavailable hardware or stale inputs. This approach treats resilience as a dynamic capability of the system to preserve outcomes during failure, not a static property of its health.
 
 ## Context
 
-Sean is building an Enterprise AP Agent Spec where correctness-critical claims must be verified against primary sources. Understanding that the 'work-as-done' involves significant exception routing helps him design agents that prioritize robust error handling and verification loops over pure automation speed, ensuring the system remains trustworthy when it deviates from the ideal path.
+Sean’s current monitoring likely focuses on whether agents are running. By adopting this lens, he can identify which adaptations preserved his daily note integrity when the MBP was unavailable or an agent delayed, providing deeper insight into his system's actual robustness than uptime metrics alone.
 
 ## Evidence
 
-> Exceptions (price/qty mismatch, missing PO, duplicate, fraud flag) route to a human; track exception rate by type + resolution time.
+> Reject the concept’s implied equation `healthy agents → reliable routine`. Score four resilience potentials instead: respond, monitor, learn, anticipate.
 
-> The bank-account-change event is the single highest-risk moment in AP and needs dedicated controls (dual approval + independent verification) beyond normal workflow.
+> Hollnagel treats resilience as something a system does, not a health property it possesses.
 
 ## Examples
 
-- Automated duplicate detection can catch a large share pre-payment (one vendor claims 'up to 95%' — marketing ceiling).
+- Recording nights when the routine succeeded despite an unavailable MBP, stale input, delayed agent, or partial manifest.
+- Identifying which specific adaptation preserved the outcome when standard components failed.
 
 ## Related Concepts
 
-[[Automation Reliability]] [[Supervision as the New AI Edge]]
+[[Agent Health]] [[The Illusion of Competence in Automated Systems]]

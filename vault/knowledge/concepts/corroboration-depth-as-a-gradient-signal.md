@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/corroboration-depth-as-a-gradient-signal.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-This mechanism defines how the reliability of an automated judgment scales with the number and diversity of independent verification methods applied. A single signal, no matter how sophisticated, provides low confidence because it lacks orthogonal validation. As more distinct matchers (lexical, semantic, LLM-based) converge on the same result, the probability of a shared systematic error decreases. The depth of corroboration acts as a gradient that determines whether an automated output is safe to persist or requires human intervention.
+This mechanism defines a continuous reliability metric where automated decision confidence scales with the density of independent evidence sources converging on a single conclusion, rather than relying on binary thresholds. The underlying invariant is that convergence among distinct matchers reduces shared-error probability only if those matchers do not share common failure pathways or upstream assumptions. Systems must modulate their trust levels based on this gradient, treating corroboration count as a signal of epistemic safety rather than mere volume. This approach prevents the illusion of competence by forcing a dependency audit that distinguishes genuine independent verification from correlated errors arising from shared ontologies or model-derived assumptions.
 
 ## Context
 
-Sean's research shows that no single matcher meets the 80% bar alone. He must design his system to require multiple converging signals before accepting a pain-point match, effectively using corroboration depth as the gatekeeper for automation trust.
+Sean relies on this mechanism to determine when to trust automated synthesis outputs without manual review as his agent fleet grows. Distinguishing between genuine independent verification and correlated errors becomes critical for maintaining the integrity of his knowledge vault and job-hunt pipelines. Without this gradient, high-confidence but badly calibrated outputs can silently corrupt the system.
 
 ## Evidence
 
-> Shared source URL is a strong hint even when Jaccard score is low
+> Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-Gravity CLI) of [[corroboration-depth-as-a-gradient-signal]]. The synthesizer describes what the concept is; this expansion proposes what's missing.
 
-> Evaluated the two-stage architecture proposed after pass 1: cheap candidate generation followed by rigorous judgment
+> Replace “distinct matchers imply independent evidence” with a dependency audit. Lexical, embedding, and LLM judges can share the same source text, candidate generator, ontology, or model-derived assumptions.
 
 ## Examples
 
-- Scoring precision/recall against the 80% campaign bar for each individual matcher
-- Running within-run sanity probes to detect internal consistency issues
+- Count *independent failure pathways*, not matcher types.
+- The shippable artifact is a dependency matrix—`matcher × upstream assumption × observed joint-error rate`
 
 ## Related Concepts
 
-[[SRE Error Budget for Agents]] [[Verification-Governance Inversion]]
+[[The Illusion of Competence in Automated Systems]] [[SRE Error Budget for Agents]]

@@ -2,31 +2,31 @@
 title: "The Taste-Throughput Trade-off in Agentic Synthesis"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-automation-velocity-vs-creative-friction-in-synthesis.md
+  - knowledge/connections/the-calibration-bottleneck-in-scalable-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-This mechanism describes the inverse relationship between the volume of automated concept generation and the fidelity of aesthetic filtering. As the synthesizer scales its output to maximize throughput, the computational cost of rigorous taste-based evaluation becomes a bottleneck, forcing a choice between high-volume low-fidelity synthesis or lower-volume high-fidelity curation. The system's efficiency is measured by activity proof (run counts), which masks the degradation of conceptual value when the judge is coupled with the candidate pool.
+This invariant defines the inverse relationship between the volume of automated concept generation and the depth of strategic integration, where high throughput suppresses the novel connections required for true synthesis. Persistent global context causes anchoring effects that bury relevant evidence, forcing the system to prioritize quantity over the rare, high-value insights that require deep, non-linear thinking. The mechanism reveals that automation velocity often degrades the very 'taste' it aims to preserve by overwhelming the signal with noise.
 
 ## Context
 
-Sean must recognize that his current scaling strategy using qwen3.6-35b-a3b-32k increases run duration and concept count but does not inherently improve the quality of connections. The tension lies in whether he prioritizes the illusion of progress (more runs) or the actual preservation of taste memory, which requires decoupling evaluation from generation.
+Sean's runs show a pattern where higher concept counts correlate with lower connection density or higher rejection rates, suggesting that the system is generating more content but less valuable insight. This trade-off is critical for Sean to recognize when deciding whether to scale up fleet size or slow down to improve semantic depth.
 
 ## Evidence
 
-> Sean's recent operational data reveals a critical tension between the desire for high-volume concept generation and the necessity of rigorous taste-based filtering.
+> Persistent global context can cause anchoring, suppress novelty, and bury relevant evidence.
 
-> When Sean relies on 'activity proof' (high run counts) as a metric, he falls into the trap of the Illusion of Competence, where the system appears robust because it is consistent with itself, not because it is correct.
+> The architecture is currently a circulation loop, not necessarily a learning loop.
 
 ## Examples
 
-- The shift in creative labor from generating artifacts to evaluating them against a personal aesthetic standard
-- The probability of generating low-value content increases as the synthesizer scales up
+- A run might sample 191 clusters but only write 118 concepts, indicating that the system is filtering for volume rather than strategic fit.
+- Sean's rejection count rises as concept count increases, showing that the verification bottleneck is actively filtering out low-quality output.
 
 ## Related Concepts
 
-[[The Illusion of Competence in Automated Systems]] [[Taste as Evaluation Function vs. Activity Proof]]
+[[The Calibration Bottleneck in Scalable Creative Production]] [[Double-loop learning]]

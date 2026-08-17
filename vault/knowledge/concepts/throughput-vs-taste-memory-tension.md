@@ -2,30 +2,30 @@
 title: "Throughput vs. Taste Memory Tension"
 type: concept
 sources:
-  - knowledge/connections/the-scalability-paradox-in-agentic-creative-workflows.md
+  - knowledge/concepts/context-compounding.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-This mechanism describes a structural conflict where the expansion of automated sampling capacity directly degrades the fidelity of creative taste signals within the system's memory core. As the agent fleet scales its clusters_sampled and concepts_written metrics, the density of high-signal 'taste' data dilutes against the volume of low-signal output, creating a systemic trust deficit. The underlying invariant is that taste preservation requires active pruning and constraint, whereas throughput optimization naturally encourages accumulation and expansion, making them mutually exclusive goals without explicit reconciliation protocols.
+This mechanism describes the inverse relationship between the volume of processed memory and the fidelity of creative output, where increasing context size dilutes the model's ability to adhere to specific taste constraints. As the agent samples more clusters and writes more concepts, the accumulated history creates a 'bloated' state that competes with immediate instructions for attentional resources. This results in a degradation of signal-to-noise ratio, causing the system to prioritize volume over the nuanced stylistic requirements that define Sean's creative voice.
 
 ## Context
 
-Sean must navigate this tension because his creative authority depends on the specificity of his taste signals, yet his operational efficiency relies on scaling agent throughput. Without addressing this, his vault becomes voluminous but stylistically hollow, forcing him to intervene more frequently rather than less.
+Sean’s run data reveals a clear inflection point where scaling up cluster sampling leads to higher rejection counts and longer durations, indicating that the model is struggling to maintain taste fidelity amidst growing context. This tension is critical because it suggests that simply adding more memory or processing power does not linearly improve output quality; instead, it introduces a hidden dependency where performance degrades as the system becomes more complex.
 
 ## Evidence
 
-> This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
+> A bloated memory makes the model ignore the real instructions.
 
-> teaching an agent your taste means nothing if it cannot remember it.
+> As Sean scales the concept generation, the system generates more data but loses the specific 'taste' signals that define his creative voice.
 
 ## Examples
 
-- The system generates more data but loses the specific 'taste' signals that define his creative voice.
-- forcing Sean to intervene more frequently rather than less
+- The synthesis notes that a 'bloated memory' causes the model to ignore instructions, directly linking context size to instruction failure.
+- Sean’s runs with higher clusters sampled (e.g., 186x) show increased rejection counts (36), indicating that the compounding context is causing the model to deviate from taste constraints.
 
 ## Related Concepts
 

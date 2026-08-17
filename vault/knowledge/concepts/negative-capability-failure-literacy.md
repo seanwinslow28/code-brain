@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/negative-capability-failure-literacy.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-This mechanism defines the strategic acceptance of an agent's inherent limitations as a creative constraint rather than a bug, requiring the user to develop 'failure literacy'—the ability to recognize when a model is hallucinating or failing and to pivot the prompt strategy accordingly. It involves treating the output not as a direct translation of intent but as a collaborative material that must be shaped through iterative correction, specifically by avoiding the urge to make outputs 'more realistic' when they are stiff, and instead embracing exaggeration. This literacy prevents the user from fighting the model's nature and instead leverages its strengths in stylistic abstraction.
+This concept defines the capacity to remain effective amidst uncertainty and incomplete information, specifically by treating failure data as a primary signal of competence. It requires documenting not just successful outcomes but the specific traces of how errors were detected, routed, and resolved in agentic systems. This literacy transforms potential liabilities into defensible evidence of senior engineering judgment.
 
 ## Context
 
-Sean is training himself to work with GPT Image 2 and ChatGPT image gen, where direct control is limited. He must learn to 'iterate, never restart' and use specific levers like 'warmer bloom' or 'heavier construction lines' to guide the output, accepting that the model's 'clueless' nature can be a feature of the aesthetic.
+Sean's vault synthesizer logs show significant rejection counts and duration variances. Instead of hiding these failures, he can use them as 'residue' to demonstrate his ability to handle complex agent fleet dynamics, turning the 'rejected_count' metric into a portfolio piece about governance and reliability.
 
 ## Evidence
 
-> When a render is stiff, the lever is always 'crank the caricature, more exaggerated and absurd,' never 'make it more realistic.'
+> Do not claim the capability; publish the residue only that capability would leave.
 
-> Other dials: 'warmer bloom,' 'heavier construction lines,' 'goofier pixel face.'
+> Sean needs evidence that is difficult to produce without the claimed capability: a replayable agent failure incident...
 
 ## Examples
 
-- Choosing to exaggerate the intern's 'pixel face' rather than trying to fix a stiff pose.
-- Using a single reference image to prevent style muddiness, acknowledging that multiple references degrade fidelity.
+- Documenting rejected_count metrics as proof of governance
+- Publishing duration_seconds variance as proof of complexity handling
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[Tacit Knowledge Erosion vs. Automation Scale]]
+[[Demonstration Over Declaration]] [[SRE Error Budget for Agents]]

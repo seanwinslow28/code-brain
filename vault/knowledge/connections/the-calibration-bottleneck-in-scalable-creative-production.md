@@ -2,33 +2,33 @@
 title: "The Calibration Bottleneck in Scalable Creative Production"
 type: connection
 connects:
-  - Supervision as the New AI Edge
-  - The Paradox of Agentic Efficiency vs. Creative Authority
-  - The Taste-Fidelity Decoupling in Creative Production
-created: 2026-07-13
-updated: 2026-07-13
+  - The Taste-Throughput Trade-off in Agentic Synthesis
+  - Double-loop learning
+  - Slop as a Trust Deficit
+created: 2026-08-16
+updated: 2026-08-16
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the velocity of automated synthesis and the fidelity required for creative authority. As Sean's agent fleet scales up concept volume (e.g., 153 concepts in July), the rejection rate drops but the cognitive load of supervision increases, creating a bottleneck where the cost of correction exceeds the value of generation. This pattern suggests that scalable creative production is not limited by tool capability but by the human capacity to maintain 'taste' as an evaluation function against homogenized outputs.
+There is a fundamental tension between the scalability of agent fleets and the human capacity to calibrate their output quality. As Sean increases the volume of automated synthesis (concepts written), his ability to manually verify the 'taste' and accuracy of each output becomes the bottleneck, leading to either unchecked 'slop' or paralysis. The consequence is that without a mechanism for automated truth maintenance or double-loop learning, the vault's semantic value per unit of effort declines as scale increases.
 
 ## Threads
 
-### [[Supervision as the New AI Edge]]
+### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
-> The reported failures cluster around bad context discipline, vague prompts, missing eval loops, and unmonitored tool output
+> Persistent global context can cause anchoring, suppress novelty, and bury relevant evidence.
 
-### [[The Paradox of Agentic Efficiency vs. Creative Authority]]
+### [[Double-loop learning]]
 
-> This connection reveals a critical inversion where the efficiency of AI generation is directly offset by the increasing cognitive load of supervision, creating a bottleneck that undermines creative authority.
+> Add a periodic rule: 'When outcomes repeatedly contradict an assumption, revise the rule that produced it—not merely the concept article.'
 
-### [[The Taste-Fidelity Decoupling in Creative Production]]
+### [[Slop as a Trust Deficit]]
 
-> they often spend more time fixing tone, structure, and accuracy than they would have spent drafting themselves.
+> The architecture is currently a circulation loop, not necessarily a learning loop.
 
 ## Implications
 
-- Sean must prioritize 'evaluation loops' over 'prompt engineering' in his Substack content to address the true bottleneck of creative authority.
-- Agent fleet scaling should be capped by human supervision capacity rather than computational throughput to prevent quality degradation.
-- The value proposition for Sean's audience shifts from efficiency to 'creative sovereignty' and 'taste preservation'.
+- Sean must implement automated 'truth maintenance' systems to prevent semantic decay at scale.
+- He should periodically audit the 'taste' of his outputs against a small, high-fidelity baseline to detect drift.
+- Scaling agent fleets without scaling verification capacity leads to diminishing returns on creative authority.

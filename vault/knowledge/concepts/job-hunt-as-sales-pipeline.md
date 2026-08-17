@@ -2,31 +2,31 @@
 title: "Job Hunt as Sales Pipeline"
 type: concept
 sources:
-  - knowledge/connections/automation-velocity-vs-creative-friction-in-job-search.md
+  - knowledge/concepts/job-hunt-as-sales-pipeline.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-This concept frames the job search not as a passive application process but as an active sales pipeline where each opportunity is a lead that must be qualified. The system's role is to generate leads (fits) and provide initial qualification scores, but the final validation requires human judgment to verify constraints like remote flexibility or domain fit. The pipeline's health is determined by the quality of leads, not just the volume of applications submitted.
+This concept reframes the job hunt not as a creative or technical exercise, but as a constrained distribution system where the primary bottleneck is recruiter discovery rather than artifact production. It requires treating interview throughput as the system objective and applying constraint-first portfolio management to identify the specific friction point—such as lack of external legibility—and subordinating all other work to resolving that single constraint. The mechanism relies on explicit WIP limits and a stop-doing list to prevent the accumulation of inventory (demos, dashboards) that does not directly increase the probability of a technical conversation or offer.
 
 ## Context
 
-Sean's job hunt is treated as a sales pipeline where '4 new fits' are generated, but the underlying rationale for these fits often relies on unverified assumptions. This requires Sean to act as the sales manager, validating the lead quality before proceeding.
+Sean has spent months building complex agentic infrastructure and portfolio artifacts, yet the external feedback loop remains weak. By shifting from an internal coherence mindset to a sales-pipeline mindset, he can stop producing 'inventory' that doesn't convert and focus entirely on the signal that triggers recruiter interest.
 
 ## Evidence
 
-> The job feed reports 4 new fits with 2 strong scores, yet the underlying rationale relies on 'likely remote flexibility' rather than verified constraints.
+> Treat interview throughput—not artifact production—as the system objective.
 
-> Sean must implement a manual 'friction checkpoint' where he reviews only the top 10% of auto-surfaced roles to prevent signal dilution.
+> If the constraint is recruiter discovery, another agent demo is inventory; if it is technical credibility after screening, the governance demo or intent-engineering executable becomes the constraint-breaking work.
 
 ## Examples
 
-- The system reports '4 new fits' with '2 strong scores' based on unverified remote flexibility.
-- Sean must manually review the top 10% of roles to prevent signal dilution.
+- Weekly constraint memo identifying the current bottleneck (e.g., 'recruiters don't see the GitHub repo')
+- Explicit stop-doing list removing non-essential agent demos that do not strengthen the hiring signal
 
 ## Related Concepts
 
-[[Signal vs. Safety Trade-off in Resume Architecture]] [[The Illusion of Health in Autonomous Systems]]
+[[Constraint-First Automation vs. General Efficiency]] [[Demonstration Over Declaration]]

@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/constraint-first-automation-vs-general-efficiency.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-This pattern identifies the structural trade-off between optimizing for broad operational throughput and optimizing for specific, taste-encoded constraints. General efficiency seeks to minimize cost and time per unit of output by lowering the complexity of the rubric, whereas constraint-first automation accepts higher per-unit costs to ensure the output adheres to a narrow, high-fidelity aesthetic standard. The mechanism prioritizes signal fidelity over noise reduction, effectively treating taste as a hard constraint rather than a soft preference.
+This principle dictates that system health is determined solely by the throughput of the current limiting stage, not by the aggregate activity of all stages. It requires identifying the specific constraint and subordinating all other processes to its relief, rather than optimizing for uniform efficiency across the entire pipeline. When automation ignores constraints, it produces output that cannot be consumed, creating inventory waste and masking the true state of the system. The fleet is healthy only if it increases throughput at the current constraint.
 
 ## Context
 
-Sean's prior runs with qwen3-14b optimized for general efficiency by writing more concepts, while his recent runs with qwen3.6-35b optimize for constraint-first automation by writing fewer concepts with significantly fewer rejections. He must decide which metric aligns with his current strategic goal of building a high-fidelity knowledge vault rather than a large, low-signal one.
+Sean's agent fleet often operates under a general efficiency model, attempting to maintain all components (resume, portfolio, applications) simultaneously. This approach fails during critical phases like interview preparation, where the bottleneck shifts and requires immediate reallocation of resources away from non-constraining activities.
 
 ## Evidence
 
-> The old cadence strangled because three posts waited on unbuilt tools.
+> A pipeline is not a feed; it is a sequence of conversions with one limiting stage.
 
-> Sean must allocate specific time for rubric refinement as a primary deliverable, not just a preparatory step, to prevent taste drift.
+> The fleet is healthy only if it increases throughput at the current constraint.
 
 ## Examples
 
-- The qwen3-14b runs sampled 250+ clusters but wrote ~100 concepts, indicating a broad, less constrained approach.
-- The qwen3.6-35b runs sampled ~140 clusters and wrote ~80 concepts with only ~20 rejections, indicating a tighter, constraint-first approach.
+- Subordinating portfolio production efforts to interview drills when interview conversions drop, even if the portfolio is incomplete.
+- Identifying the weekly bottleneck and tracking conversion rates at each stage rather than monitoring the uptime of application feeds.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[Supervision as the New AI Edge]]
+[[Throughput vs. Activity Illusion in Job Hunt Operations]] [[Job Hunt as Sales Pipeline]]

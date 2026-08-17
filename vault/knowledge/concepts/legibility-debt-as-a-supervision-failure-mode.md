@@ -2,31 +2,31 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
+  - knowledge/connections/cross-domain-the-calibration-bottleneck-in-scalable-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-17
+updated: 2026-08-17
 ---
 
 ## Definition
 
-Legibility debt is the accumulating gap between the volume of automated output and the human capacity to verify its semantic integrity, forcing supervision into inefficient forensic mode. As agent fleets scale their sampling capacity beyond manual verification thresholds, the system generates more data than can be meaningfully processed, leading to a loss of confidence in the tool's utility. This debt manifests not as system failure, but as a gradual erosion of trust where the user can no longer distinguish between valuable insight and automated noise without exhaustive manual auditing.
+Legibility debt emerges when the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. This pattern occurs because the agent fleet produces more noise than signal, making it difficult for Sean to verify the semantic integrity of the vault without manual inspection. The consequence is that Sean must revert to manual oversight, negating the efficiency gains of automation and creating a hidden cost in cognitive load.
 
 ## Context
 
-Sean's transition from small runs (3 concepts) to large runs (153 concepts) illustrates this debt; the mechanisms for reporting status lag behind the output volume, making it impossible for him to maintain a clear mental model of what is actually being stored in his vault.
+Sean's vault is accumulating legibility debt as the agent fleet scales. The increasing volume of concepts and connections makes it harder for Sean to maintain a clear mental model of the vault's state, leading to a reliance on operational metrics that do not reflect semantic quality.
 
 ## Evidence
 
-> As Sean scales the concept generation from 3 to 153 concepts per run, the mechanisms for reporting status lag behind, creating a legibility gap.
+> This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
 
-> Sean must treat manual tickets as the single source of truth for system health, rather than a reflection of agent activity.
+> The core tension lies in the misalignment between the exponential growth of automated concept generation and the linear capacity of human taste to curate them.
 
 ## Examples
 
-- The jump from 45 concepts in June to 153 in early July represents a tipping point where Sean can no longer manually verify the quality of every cluster sampled.
-- The reliance on 'rejected_count' as a proxy for health is insufficient because it does not capture the semantic quality of the accepted outputs.
+- Run 2026-07-06 had 103 concepts written but a rejection count of 106, indicating a high volume of low-signal output.
+- Run 2026-08-15 had 123 concepts written and 43 connections, but the duration was 2733 seconds, suggesting a complex and potentially noisy process.
 
 ## Related Concepts
 
-[[Taste as Evaluation Function vs. Activity Proof]] [[The Verification-Governance Inversion]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Velocity vs. Judgment in MCP Strengthening]]
