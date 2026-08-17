@@ -1,0 +1,17 @@
+Audience: one listener, Sean — a product manager with no engineering background who runs a 12-agent AI system in production daily. Never explain what an agent or a model is. DO define statistical terms plainly on first use. CRITICAL: never mention a company, incident, or paper without a one-sentence setup first.
+
+Format: a genuine DEBATE, argued honestly and forcefully from both sides, with no premature resolution.
+
+The motion: "SHIP IT AT 85%."
+
+A team has an AI feature measured at roughly 85% accuracy. The launch window is now.
+
+Side A argues SHIP: real-world value is delivered now rather than theoretically later; the non-AI status quo it replaces is itself error-prone and nobody audits human error rates the way they audit model error rates; you learn more from production in two weeks than from six months of offline evaluation; you can bound the damage with a narrow scope, a human review step, and a rollback trigger; and waiting has its own cost that never appears on anyone's dashboard.
+
+Side B argues DO NOT SHIP: 85% of what, measured on which distribution, and how does that decompose into the two error types — because if the 15% falls entirely on the expensive error, the headline number is a lie of omission. Nobody has stated who bears the cost of a wrong answer or whether they have any recourse. There is no error budget agreed in advance, so degradation will produce an argument rather than a decision. And once it ships, the throughput metric will arrive daily while the quality signal arrives in two months, which means the incentive to look closely disappears the moment it launches.
+
+Have them genuinely engage: Side A should press on the cost of delay and on the double standard applied to human error; Side B should press on the fact that "85%" without an error breakdown is not yet a number you can reason about.
+
+Land, at the end, not on a winner but on what would settle it — the specific facts that turn this from an argument into a decision. Make clear that the ability to name those facts, rather than to pick a side, is what competence looks like here.
+
+Two distinct voices, real disagreement, no strawmen.
