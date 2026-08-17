@@ -1,7 +1,7 @@
 # KICKOFF PROMPT — Golden Loop (paste into a fresh Claude Code session)
 
 > **Launcher:** start a fresh session in `/Users/seanwinslow/Code-Brain/code-brain` and say:
-> *"/creative-partner — read `vault/20_projects/prj-ai-pm-system-thinking-strategy/product/kickoff-prompt-golden-loop.md` and run this kickoff with me."*
+> *"/creative-partner — read `vault/20_projects/prj-ai-pm-system-design-thinking/product/kickoff-prompt-golden-loop.md` and run this kickoff with me."*
 
 ---
 
@@ -23,12 +23,14 @@ Chosen over an "AI PM flight simulator" (C3) by a 4-model council pre-mortem, 3�
 
 ## Read these before the first question (in order)
 
-1. `vault/20_projects/prj-ai-pm-system-thinking-strategy/00-strategy.md` — program spec, status, budget
-2. `vault/20_projects/prj-ai-pm-system-thinking-strategy/product/candidate-scorecard.md` — the full decision record
-3. `vault/20_projects/prj-ai-pm-system-thinking-strategy/2026-08-16-council-premortem-curriculum-and-candidate.md` — §2 (the scenario-engine finding), §3 (assumptions), §5 (C2-vs-C3 argument + "M7's exercise is already a thin C2")
-4. `vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/curriculum-map.md` — v2; M7 capstone = build's first artifact
-5. `vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m7-lesson-evals-metrics-loop-engineering.md` — the domain content the product operationalizes
-6. `vault/20_projects/prj-ai-pm-system-thinking-strategy/research/2026-08-16-ai-product-post-launch-loops-pm-idea-ledger.md` — the verified pain evidence
+> **Path note (2026-08-17):** Golden Loop moved from `prj-ai-pm-system-thinking-strategy/` to `prj-ai-pm-system-design-thinking/` when the curriculum program was rebuilt. The **product** files moved; the **retired curriculum** stayed behind. Items 1, 3, 4 and 5 below therefore still point at the old project on purpose — they are retired reference material, not live spec.
+
+1. `vault/20_projects/prj-ai-pm-system-thinking-strategy/00-strategy.md` — **RETIRED program spec.** Its curriculum plan is superseded; its Golden Loop history and budget ledger are still accurate context.
+2. `vault/20_projects/prj-ai-pm-system-design-thinking/product/candidate-scorecard.md` — the full decision record
+3. `vault/20_projects/prj-ai-pm-system-thinking-strategy/2026-08-16-council-premortem-curriculum-and-candidate.md` — **retired project, still binding on the product decision.** §2 (the scenario-engine finding), §3 (assumptions), §5 (C2-vs-C3 argument + "M7's exercise is already a thin C2")
+4. `vault/20_projects/prj-ai-pm-system-design-thinking/curriculum/curriculum-map.md` — **the LIVE curriculum map (v2, 2026-08-17): five modules, not seven. There is no M7.** The evals content is now **M5 — Evidence & Operations**. Read this, not the retired seven-module map.
+5. `vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m7-lesson-evals-metrics-loop-engineering.md` — **retired lesson, kept as the domain-vocabulary source** (golden dataset, improvement/holdout split, binary rubric, champion/challenger, promotion, decision record). The vocabulary survives; the module numbering does not. M5 has not been written yet.
+6. `vault/20_projects/research/2026-08-16-ai-product-post-launch-loops-pm-idea-ledger.md` — the verified pain evidence. *(Corrected 2026-08-17: this previously pointed inside the project's own `research/`, where the file has never existed — it lives in the shared `vault/20_projects/research/`.)*
 
 ## Non-negotiables (program rules, enforced throughout)
 

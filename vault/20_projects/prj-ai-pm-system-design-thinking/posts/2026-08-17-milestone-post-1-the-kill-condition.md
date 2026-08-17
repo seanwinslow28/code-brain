@@ -45,7 +45,7 @@ Here's the procedure, because it's the part you can steal today. One day of work
 4. **Sweep a second ring before claiming any negative.** "Nobody does X" is exactly as strong as the list you tried to break it against.
 5. **Publish the near-misses.** The three tools that almost close your gap make the most credible sentence in your positioning. Hide them and you're betting nobody checks. They check.
 
-The [full verdict is public](https://github.com/seanwinslow28/code-brain/blob/main/vault/20_projects/prj-ai-pm-system-thinking-strategy/research/2026-08-17-phase-b-falsification-verdict.md), scoreboard and citations and near-misses and all. Steal the format.
+The [full verdict is public](https://github.com/seanwinslow28/code-brain/blob/main/vault/20_projects/prj-ai-pm-system-design-thinking/research/2026-08-17-phase-b-falsification-verdict.md), scoreboard and citations and near-misses and all. Steal the format.
 
 Golden Loop has a decision log now. The first entry is still the sentence that was built to kill it. That's the entry I trust most.
 

@@ -1,11 +1,25 @@
 ---
 title: Systems Thinking AI PM — Program Strategy
 type: spec
-status: active
+status: superseded
+superseded_by: ../prj-ai-pm-system-design-thinking/curriculum/curriculum-map.md
+superseded_on: 2026-08-17
 created: 2026-08-16
 owner: Sean Winslow
 notebook: https://notebook.google.com/notebook/0abf9bb0-6a82-4838-a639-a3f9dd03e963
 ---
+
+> # ⚠ SUPERSEDED 2026-08-17 — retired, not deleted
+>
+> **The curriculum described below was consumed at M1 and rejected by Sean.** Three defects: too abstract (its architecture module taught RAG as "retrieval quality is measurable," which does not let you draw a pipeline); no design-thinking half despite the seed doc's Design Thinking × Systems Thinking thesis; and every exercise pointed at Sean's own agent fleet, so nothing transferred to unfamiliar systems.
+>
+> **The live program is [`../prj-ai-pm-system-design-thinking/curriculum/curriculum-map.md`](../prj-ai-pm-system-design-thinking/curriculum/curriculum-map.md)** — five modules over eight weeks, rebuilt after a four-model council pre-mortem. **There is no M7 in the live program;** the evals content is M5.
+>
+> **What is still live and moved out of here:** all Golden Loop material — `product/`, `posts/`, the Phase B falsification verdict and the five competitor teardowns — now lives in `../prj-ai-pm-system-design-thinking/`. Golden Loop survives as the portfolio piece; only the curriculum was retired.
+>
+> **What stays here and is still useful:** the seven module lessons and their NotebookLM artifacts (the *vocabulary* survives even though the structure did — `m7-lesson-evals-metrics-loop-engineering.md` in particular is still the product's domain-language source), the 2026-08-16 council pre-mortem, the curriculum research, and **notebook `0abf9bb0`, which holds $4.12 of paid research and should not be deleted.**
+>
+> Everything below this box is preserved as of 2026-08-16 and describes the retired plan. Read it as history.
 
 # Systems Thinking AI PM — Program Strategy
 
