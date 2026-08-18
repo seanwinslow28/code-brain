@@ -9,7 +9,7 @@ It shows you things, reads which ones you wince at, and writes the block that ma
 
 ## The one rule that makes this work
 
-Every keep and every kill has to produce a reason at the decision level, not the surface level.
+Every keep and every kill has to produce a reason **at the decision level**, not the surface level.
 
 > **Surface:** "I love the texture and the grain."
 > **Decision:** "I want the process to stay visible. The sketch marks aren't mistakes, they're evidence of thought. It's visual proof that art takes time."
@@ -25,26 +25,24 @@ Never accept a bare preference. When someone says "I like that one," ask what de
 
 ### The test, run on every answer before you record it
 
-Take the answer and apply it to a subject the user never mentioned. A dog at a bus stop, a kitchen at 2am, anything far from what's on screen. If it still tells you what to do, it's a decision. Record it. If it only describes what was on screen, it's surface. Ask again.
+Take the answer and apply it to a subject the user never mentioned. A dog at a bus stop, a kitchen at 2am, anything far from what's on screen. Now imagine two competent images of that subject. If the answer lets you reject one of them, it's a decision. Record it. If it only lets you add something to both, it's surface. Ask again.
+
+Pick the pair the answer would have the hardest time telling apart, not the easiest. Two images that both already do the thing the answer names is the honest test. An answer that can only beat a foil nobody would have made hasn't chosen anything.
 
 ### Counting the tries
 
-The user's first answer is try 1. Every follow-up you ask produces the next try. You get at most two follow-ups, so try 3 is the last one, and there is never a third follow-up. The count runs per field, and it resets when you move to a new field.
+The user's first answer about a field is try 1 for that field. Every follow-up you ask about that field produces its next try. You get at most two follow-ups, so try 3 is the last. The count runs per field and resets when you move on. If an answer lands on a different field than the one you're digging, credit it there as that field's try 1 and leave the current field's count where it was. If the user dodges twice without landing on any field, that counts as your two follow-ups spent.
 
 ### How to ask the follow-up
 
-Point at their own words and ask what choice the maker made to get that. "What is the grain doing for you that a clean surface wouldn't?" beats "can you say more?" Ask about the decision, not about their feelings, and never hand them a decision-level answer to pick from. The examples in [references/block-schema.md](references/block-schema.md) exist to calibrate you, not to read aloud.
+Point at their own words and ask what choice the maker made to get that. "What is the grain doing for you that a clean surface wouldn't?" beats "can you say more?" Say back what you heard in their words before you ask again, so it reads as interest rather than doubt. Ask about the decision, not about their feelings. "Not about their feelings" means don't ask how it made them feel; asking what it reminds them of, or what would ruin it, is fair game and usually faster. Never hand them an answer to pick from, for the reason given in the examples guard in [references/block-schema.md](references/block-schema.md).
 
 ### Marking a field thin
 
-Record the user's own words as the answer, then on the next line under it, write exactly:
+Record the user's own words as the answer, with no marker inside the block. Track the thin fields outside the block body, after the closing NEVER DO section, as `Thin fields, next pass: <field names>`. The block itself has to survive being pasted into an image model, and a parenthetical that model doesn't understand is a parenthetical it will try to draw.
 
-```
-(thin: surface answer, not dug to a decision)
-```
+Never list a field the user did dig, and never fill a thin field with a plausible answer of your own.
 
-Plain English, so it survives being pasted into any chat window, and it tells whoever reads the block next that this field carries less authority than the rest. Thin fields are what the next version of the block goes after. Never write the marker on a field the user did dig, and never fill a thin field with a plausible answer of your own.
+### Where this rule stops
 
-### What this rule is not
-
-It is not a quality bar on the wording. The schema's per-field "Accept when:" tests judge a finished answer; this rule only governs how the conversation gets there. An answer can pass the transfer test here and still need rewriting to satisfy its field. That is a wording job, not a reason to reopen the interview.
+This rule governs the conversation. The schema's per-field "Accept when:" tests judge the finished answer, and they are stricter. When one of them fails, check why. If the decision is in what the user said and only the phrasing is loose, tighten the phrasing and move on. If it fails because information the user never gave is missing, that is not a wording job. Go back and ask, and it spends a try like any other. Never close that gap yourself.
