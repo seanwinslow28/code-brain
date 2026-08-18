@@ -48,7 +48,70 @@ Never list a field the user did dig, and never fill a thin field with a plausibl
 This rule governs the conversation. The schema's per-field "Accept when:" tests judge the finished answer, and they are stricter. When one of them fails, check why. If the decision is in what the user said and only the phrasing is loose, tighten the phrasing and move on. If it fails because information the user never gave is missing, that is not a wording job. Go back and ask, and it spends a try like any other. Never close that gap yourself.
 
 
+## Three operations
+
+Wince runs one of three things, and which one it is gets settled before the interview starts.
+
+| Operation | Runs when | What it does | Exit when |
+|---|---|---|---|
+| **new** | no block is named, or the name given has no file yet | The full four-stage run below. | The block is written to `taste-blocks/<slug>.md` at version 1 and the path is stated, or a gate failure is reported and no file is written. |
+| **list** | the user asks what blocks they have | Reads `taste-blocks/` and prints one line per block: slug, version, and the first sentence of its CORE THESIS verbatim. | The lines are printed, or the empty or missing directory is reported. Generates nothing, asks nothing, writes nothing. |
+| **refine `<name>`** | the name given has a file | Loads the block, runs it as a picture, digs only what changed and what was thin, bumps the version, keeps the old one in the file. | The next version is written above the old one and the path is stated, or a no-op is reported and nothing is written, or a gate failure is reported and the existing version is left standing as current. |
+
+**Blocks live in `taste-blocks/` at the root of whatever project Wince was invoked from**, one file
+per block, named `<slug>.md`. No hidden directory, no dotfile. The user has to be able to find these
+and copy one out without running anything. The current version is the first fenced block in the
+file; superseded versions sit below it under `## Previous versions`, kept verbatim. Full layout in
+[references/library.md](references/library.md).
+
+**Never let one operation become another quietly.**
+
+- `refine` on a name with no file is not a `new` run. Say the name doesn't exist, list what does, and
+  offer to start one.
+- `new` with a name that's already taken is not a `refine`. Say so and ask, per the collision
+  handling in the reference. Never overwrite a file.
+- A name matching more than one block gets a question, never a guess.
+- `refine` with no name at all is the common phrasing and it isn't an operation. Run `list`, ask
+  which one, then refine that. If the directory holds exactly one block, still name it back before
+  you start, because the user may be thinking of a block they made somewhere else.
+- `list` never falls through into an interview.
+
+**Refine is not Fork and Push bolted onto an old block.** It runs Diff, Fork, Push, and Negate, and
+the only stage it drops is Widen, because a block that exists has already killed the dead
+directions. Negate stays because it costs nothing and it owns NEVER DO, and a refine that can't
+sharpen the ban list can't touch the field this skill calls the spine. Any of the ten fields can be
+in play, REGISTER included, but only the ones the user names as changed and the ones the last
+version marked thin. Everything else carries forward verbatim, not re-asked and not "confirmed."
+
+**A refine runs both Emit gates, and Gate 1 counts only what the refine itself spent.** Version 1's
+generations don't carry. A refine done entirely in conversation is spec editing, which is the thing
+this skill exists to replace. Gate 2 runs on the whole new version with inherited fields counted,
+and it can only fail if the refine subtracts something, since the previous version already passed
+it. Both cases are worked out in the reference.
+
+### Refine never rewrites a block from scratch
+
+Taste sharpens; it rarely reverses. Load what exists, ask what has changed since, and edit. A refine
+that produces a completely different block means the user has a second style, not a revised one. Say
+so and offer to make a new one instead.
+
+**When to say it.** Stop and ask the question when the refine would replace six or more of the ten
+fields, or when it would replace CORE THESIS and THE ONE MOVE together, or when it retracts more
+bans than it adds. The middle one is the sharpest signal, because those two are what Gate 2
+hard-fails on and they are the block's identity. Retracted bans are the quietest, because each one
+looks reasonable on its own.
+
+Ask it plainly and let the user decide:
+
+> This is turning into a different block rather than a sharper one. Do you want to keep the old one
+> as it is and start a second style, or is the old one genuinely wrong now?
+
+Both answers are fine. What's not fine is landing on a second style by accident and losing the first
+one to a version bump.
+
 ## The four stages
+
+These four are `new`. Refine reuses them per the reference; `list` runs none of them.
 
 Four stages, then Emit. A full run finishes in under ten minutes and spends three or four
 generations. Widen and Negate spend zero. Fork spends two or three. Push spends exactly one.
@@ -355,7 +418,9 @@ Otherwise, emit the block exactly per the template in
 [references/block-schema.md](references/block-schema.md). Then:
 
 1. **Name it.** Ask the user. The name names the style, not the person, because they'll have more
-   than one. If they shrug, offer two names built out of their own words and let them pick.
+   than one. If they shrug, offer two names built out of their own words and let them pick. If the
+   name is already taken in `taste-blocks/`, don't overwrite and don't rename it yourself; handle it
+   per the collision rules in [references/library.md](references/library.md).
 2. **Stamp `version: 1 · <today's date>`.** Version 1 on a first run. Refinement bumps it.
 3. **Run the ten "Accept when:" tests** from the schema against the ten answers before the block
    goes on screen. When one fails, handle it per "Where this rule stops" above: loose phrasing gets
@@ -369,3 +434,7 @@ Otherwise, emit the block exactly per the template in
 
    Names only, no marker of any kind inside the block. If nothing is thin, the line is absent
    entirely. Never write it empty, and never list a field the user actually dug.
+5. **Write it to `taste-blocks/<slug>.md`** and tell the user the path, so the block outlives the
+   window it was made in and `refine` has something to load. Create `taste-blocks/` if it isn't
+   there. On a refine, the new version goes in above the old one rather than replacing the file, per
+   [references/library.md](references/library.md).
