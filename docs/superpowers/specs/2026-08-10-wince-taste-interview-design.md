@@ -82,7 +82,11 @@ Then **Emit**.
 | Can it say "leave the construction lines visible"? | yes | no |
 | Can it say why any of it matters? | no | yes |
 
-Neither is sufficient. Their NEVER DO lists overlap almost completely, which is the tell that negation is the stable spine under both.
+Neither is sufficient. And the negation layer is the spine under both, though not for the reason the first draft of this spec claimed.
+
+> **Corrected 2026-08-10, during Task 2 quality review.** This spec originally asserted the two NEVER DO lists "overlap almost completely." That is false and I had not checked it. Only *symmetry* appears on both. The intent block bans meaning failures (empty symmetry, obvious metaphors, over-explained emotion, pasted-on whimsy); the execution block bans rendering failures (gradients, airbrush, glossy 3D, Pixar polish). Five items per side have no counterpart.
+>
+> The true claim is stronger. The two lists share almost no wording, and every item on both is the same rule applied at a different altitude: nothing survives that has no decision behind it. The intent block even states that rule outright in its closing line, "If an element can be removed without changing the idea, it does not belong." The positive halves had to be rewritten in entirely different vocabulary to move between altitudes. The negation only changed register. That is why it is the spine.
 
 **So the block has two parts and a shared spine:**
 
