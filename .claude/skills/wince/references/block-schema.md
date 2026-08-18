@@ -34,6 +34,7 @@ user's own words, dug down to the decision level.
 ```
 # TASTE BLOCK — <name>
 version: <n> · <date>
+mode: words-only          (this line only when no image was ever generated; omit otherwise)
 
 ## INTENT
 1. CORE THESIS       what the thing should feel like before it announces itself

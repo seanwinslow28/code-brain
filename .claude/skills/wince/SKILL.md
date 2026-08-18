@@ -89,8 +89,16 @@ judging from words. If both are refused you're at zero generations with generati
 fails at Emit, and the run is over. Before you get there, check whether it's the subject rather than
 the ask: in the measured case the same frame passed a plain darkening and the fix was changing who
 was in the picture. The subject is already a control variable this skill lets you choose, so
-re-aiming at a different subject is in bounds. One swap, before any push, and it does not buy back
-an attempt already spent on the ask that was refused.
+a different subject is in bounds. But you do not pick it. Tell the user what was refused, tell them
+the fence is around the figure and not the picture, and ask whether they want to run the exercise on
+a different subject. If they say yes, they choose it. One swap, before any push, and it does not buy
+back an attempt already spent on the ask that was refused.
+
+The reason the user chooses is not politeness. Swapping a subject yourself to get a request through
+is the evasion this section bans, wearing a different hat. Swapping because the person decided they
+would rather draw something else is a creative call, and it is theirs. The measured case went that
+way: a person looked at the refusals, decided to age the character up, and the exercise got better
+for it. Nobody slipped anything past anything.
 
 ## When there are no pictures at all
 
