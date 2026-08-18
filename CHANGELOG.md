@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### New skill: `wince`, the taste interview (2026-08-10)
+
+**What it does.** Shows a person options, reads which ones they wince at, and writes a reusable ten-field taste block they paste into any image model. User-invoked only. Ships in `03-creative-projects` and carries its own proof images, so an exported copy is self-contained. Both tiers per CLAUDE.md §4: the installable skill, and a 296-line pasteable prompt at [`references/copy-paste-kit.md`](.claude/skills/wince/references/copy-paste-kit.md) that needs no repo, no install, and no idea what a skill is.
+
+**The block has two altitudes, and that shape came from Sean's own artifacts rather than from a design.** He had independently written two taste blocks that turned out to sit at different heights: an INTENT one (core thesis, emotional mode, register, structure, narrative stance) and an EXECUTION one (medium, the hand, color, finish, the one move), sharing a NEVER DO spine. Neither works alone. The intent block cannot say "leave the construction lines visible"; the execution block cannot say why any of it matters. INTENT is medium-agnostic, so adding prose or music later means writing one new EXECUTION template and nothing else.
+
+**Verdict: ships unscored.** The measurement protocol lands before the first scored rung of Building the Ladder. Stated rather than faked.
+
+**Dogfood gates, both passed and both honest about their limits.** The finished interview was run as two personas who are not Sean. A lo-fi video editor who has never drawn anything produced *Late Tape* (phone sensor pushed too far at night, dubbed through VHS, one band of tracking distortion that must be intermittent because constant reads as a filter); 8 of 10 fields differ from Sean's in substance, zero leakage. A commercial product photographer who considers grain a defect produced *Cold Weight* (medium-format digital, one feathered source and one flag, the mold seam stays because if I've redrawn the product I haven't photographed it); 10 of 10 differ from Sean's and 10 of 10 from the first persona. Both testers reported the pull toward Sean's calibration examples was real and named where they felt it, which is worth more than the greps.
+
+**What the gates found and what got fixed.** Fork's questions were hard-coded to drawing and asked a video editor what made those marks; they now branch three ways (drawing, camera, synthetic) with an escape hatch built from the schema's own construction rule for media outside the three. The camera branch then misfired for a studio shooter by assuming taste lives in gear shortcomings, and now asks what the camera and lights had to do and what the person refused to do, which covers both kinds of camera person. And the schema was printing the same clean-digital voice as the opposite-direction example in three separate fields, so anyone wanting things tidy had three pre-written sentences waiting; THE FINISH now sits on a letterpress operator's even-impression boundary, which refuses the axis instead of taking its far end.
+
+**Neither gate exercised the refusal branches**, because a night street and a cosmetics jar are both safe subjects. `references/degraded-paths.md` remains untested by a real refusal. Ticketed.
+
+
 ### Three silent fleet failures found and fixed — vault-critic, flush, job_feed pollers (2026-08-11)
 
 **Found during read-only WS2 fleet archaeology for the job-hunt campaign, not by monitoring.** All three agents were reporting healthy: every one exits 0 while doing nothing. This is the same failure class as the May 1–10 nine-day synthesizer regression, three times over.
