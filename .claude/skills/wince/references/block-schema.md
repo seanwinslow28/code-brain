@@ -24,6 +24,14 @@ does not. Never quote them to a user, never offer them as options, never fill a 
 when the user is vague. If a user's answer is thin, ask again. The correct output of this schema
 looks nothing like these examples unless the user's taste happens to be identical.
 
+**"Opposite direction" means a different person, not the first answer run backwards.** Where the
+strong answer sits on an obvious axis, the second one is deliberately taken off that axis rather
+than to its far end, and anyone editing this file should keep it that way. A printed inverse is a
+magnet. Someone who wants the clean version of whatever the strong answer wants messy will reach
+for the sentence already written for them instead of finding their own, and a run that ends in this
+file's wording is a run that learned nothing. Dogfooding caught exactly that pull on THE FINISH,
+which is why its second answer is now a third thing.
+
 ---
 
 ## The template
@@ -110,8 +118,10 @@ Every field entry below follows this pattern. Read this one first.
 > paper grain stays visible. It should look like it was caught mid-decision, not delivered."
 > *Weak:* "Hand-drawn style." That names a category, not a boundary, and the model will resolve the
 > ambiguity toward its own average every time.
-> *Also strong, opposite direction:* "Immaculate. No visible tooling, no grain, no brushwork. Any
-> evidence of process is a defect."
+> *Also strong, opposite direction:* "Finished means the impression is even. The same depth of bite
+> on every letter across the whole sheet, ink solid, no salting, no halo where it squeezed out. You
+> can always see it was printed, so that was never the question. A deep punch that varies is a worse
+> print than a light kiss that doesn't."
 >
 > The field is doing its job when a stranger reading the answer could reject a candidate image
 > with it.
@@ -206,8 +216,8 @@ ambiguity anywhere about what just happened."
 
 ## EXECUTION (visual)
 
-The examples in this section run from hand-drawing to flat vector, because the two blocks this
-schema was built from were both drawing blocks. The fields are not. For camera work, SUBSTRATE is
+The examples in this section run from hand-drawing through cut paper to flat vector, because the
+two blocks this schema was built from were both drawing blocks. The fields are not. For camera work, SUBSTRATE is
 the stock, sensor, or capture format and THE HAND is the lens, the exposure, the camera move, and
 what the operator does or refuses to do. For 3D, SUBSTRATE is the renderer and THE HAND is the
 shading and topology discipline. The question each field asks does not change. Only the vocabulary
@@ -231,8 +241,9 @@ How the marks get made.
 underdrawing left visible."
 *Weak:* "Loose, sketchy linework." Two adjectives that describe a hundred incompatible hands.
 Sketchy how, with what, leaving what behind.
-*Also strong, opposite direction:* "No hand at all. Uniform line weight, mechanically even, zero
-pressure variation, nothing that betrays a wrist."
+*Also strong, opposite direction:* "Nothing is drawn and nothing is blended. Every shape is cut
+from painted paper, the edge is whatever the scissors did, and shapes are butted against each other
+or laid flat on top, never feathered into each other."
 
 **Accept when:** it names a tool or a specific behavior, not a mood the marks are in. How far the
 hand exaggerates its subject is not this field's business; that is REGISTER, and stating it twice
@@ -262,8 +273,10 @@ repeated in place so the entry can be read on its own.
 paper grain stays visible. It should look like it was caught mid-decision, not delivered."
 *Weak:* "Hand-drawn style." That names a category, not a boundary, and the model will resolve the
 ambiguity toward its own average every time.
-*Also strong, opposite direction:* "Immaculate. No visible tooling, no grain, no brushwork. Any
-evidence of process is a defect."
+*Also strong, opposite direction:* "Finished means the impression is even. The same depth of bite
+on every letter across the whole sheet, ink solid, no salting, no halo where it squeezed out. You
+can always see it was printed, so that was never the question. A deep punch that varies is a worse
+print than a light kiss that doesn't."
 
 **Accept when:** a stranger reading the answer could reject a candidate image with it.
 
@@ -306,8 +319,9 @@ Every item carries its why. See hard rule 2.
 keeps the fingerprints in, and a flawless surface means the process was hidden or never happened."
 *Weak item:* "No AI look." It names a feeling about the output and gives the model no test it can
 run. The model does not know which of its own habits produced the feeling.
-*Also strong, opposite direction:* "No visible construction, no stray marks, no texture. Evidence
-of effort reads as an unfinished job, and I want it to look like it arrived."
+*Also strong, opposite direction:* "No eased motion anywhere. Everything starts and stops on a
+frame. Ease-in-out is what software adds to make a move look considered, and this has to look
+operated rather than designed."
 
 **Accept when:** a reader could correctly apply the list to something nobody listed. If every item
 only rules out the exact thing it names, the whys are missing and the list will not generalize past

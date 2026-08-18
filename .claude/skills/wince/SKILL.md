@@ -192,6 +192,18 @@ One routing note, because it comes up unprompted and early: when a user voluntee
 reaches the viewer. Hold it for **5. NARRATIVE STANCE** two stages later. Only the count and the
 bans belong to **8. COLOR / LIGHT**.
 
+### The examples stay in the box
+
+Two finished blocks ship with this skill, the schema carries a calibration answer for every field,
+and a worked run tells one interview end to end. **Do not show any of them, quote them, paraphrase
+them, or describe them during Widen, Fork, Push, or Negate.** Showing a finished block mid-interview
+hands the user someone else's answer at the exact moment they are forming their own, which is the
+failure this whole skill exists to avoid. The worked run is under the same rule and says so about
+itself: it is the most contaminating file here.
+
+You read these files. The user doesn't see them until their own block is written. Emit's last step
+points them at the paths, and by then nothing in the box can steer anything.
+
 ---
 
 ### Widen (0 generations)
@@ -318,15 +330,29 @@ learning theirs.
 
 | Field | Drawing and painting | Camera work | Synthetic (3D, motion, vector) |
 |---|---|---|---|
-| **6. MEDIUM / SUBSTRATE** | "What is that surface, if you had to go buy it?" | "What was it shot on, and what has it been through since?" | "What's rendering this, and what gives it away as rendered?" |
-| **7. THE HAND** | "What made those marks?" | "What did the camera do that a better camera wouldn't?" | "What did you have to do to those surfaces to stop them looking like the default?" |
+| **6. MEDIUM / SUBSTRATE** | "What is that surface, if you had to go buy it?" | "What was it shot on, and what happens to it between the shutter and the finished picture, if anything?" | "What's rendering this, and what gives it away as rendered?" |
+| **7. THE HAND** | "What made those marks?" | "What did the camera and the lights have to do to get that, and what did you refuse to do?" | "What did you have to do to those surfaces to stop them looking like the default?" |
 | **8. COLOR / LIGHT** | "How many colors are allowed in here, and which one is never allowed?" | "How many sources are lighting this, and what is never allowed to be lit?" | "How many colors in the palette, and which one is never allowed?" For 3D, count the rig instead. |
+
+**Neither camera question assumes anything went wrong.** Both used to, and both misfired on the
+same person: a studio shooter who owns their gear's behavior rather than working around it. "What
+did the camera do that a better camera wouldn't" tells them their taste is supposed to live in a
+shortcoming, and the honest answer is "nothing, a better camera would be better and I'd buy it
+tomorrow," which costs an exchange teaching them the premise instead of learning theirs. Ask what
+the gear had to do and what they refused to do, and both camera people answer it: no tripod, no
+stabilization, let focus hunt is a refusal, and so is one source, one flag, no fill card.
+
+Same on substrate. "Nothing happens to it, sensor to print, clean file" is a complete answer and a
+real discipline, not a person who failed to have a process. Record it as the ban it is and don't go
+looking for a chain that isn't there.
 
 COLOR / LIGHT is the one that misfires quietly rather than loudly. Asked about colors, a camera
 person answers "however many are in the shot, I don't pick colors, I point at stuff," which is a
 sane answer to the wrong question. The rule underneath is **count the thing this person actually
 chooses**. A painter chooses pigments. A photographer chooses lights, and the shadow rule tends to
-arrive with the count in the same breath. Whichever you count, the field still needs a number, an
+arrive with the count in the same breath. Lights turning up in both rows is fine and not a
+collision: THE HAND takes what the gear was made to do and what the operator won't do with it,
+COLOR / LIGHT takes the count and the never. Whichever you count, the field still needs a number, an
 "only," or a "never" to be worth recording.
 
 If none of the three columns fit, and plenty of media don't, don't jam them into one. Build the
@@ -464,3 +490,9 @@ Otherwise, emit the block exactly per the template in
    window it was made in and `refine` has something to load. Create `taste-blocks/` if it isn't
    there. On a refine, the new version goes in above the old one rather than replacing the file, per
    [references/library.md](references/library.md).
+6. **Then, and only then, hand them the box.** Their block exists now, so nothing in it can steer
+   anything. Point them at the two finished blocks from other people's runs,
+   [references/examples/lofi-video.md](references/examples/lofi-video.md) and
+   [references/examples/product-photography.md](references/examples/product-photography.md), and at
+   [references/worked-example.md](references/worked-example.md), which walks one full run from the
+   cold prompt to the block that fixed it. Paths, not contents. Paste nothing in unless they ask.
