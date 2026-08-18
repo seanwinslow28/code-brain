@@ -1,6 +1,6 @@
 ---
 name: wince
-description: Interview someone's visual taste out of them by showing options and reading their reactions, then emit a reusable taste block they can paste into any image model. Use when asked to "figure out my style", "build my taste block", "what's my aesthetic", "the model won't draw like me", "make it look like mine", "run the taste interview". If someone is stuck arguing an image toward what they want one adjective at a time, offer it, do not start the interview unasked. USER-INVOKED — do not invoke from another skill. Not for generating final art (use the image-gen skills); not for prose voice (use writing-voice-modes); not for fixing a single prompt or a drifted generation (use prompt-how-much).
+description: Interview someone's visual taste out of them by showing options and reading their reactions, then emit a reusable taste block they can paste into any image model. Use when asked to "figure out my style", "build my taste block", "what's my aesthetic", "the model won't draw like me", "make it look like mine", "run the taste interview". Also owns the block library, so use it for "what taste blocks do I have", "list my blocks", "refine <name>", "update my taste block", "my style has changed since I made this". If someone is stuck arguing an image toward what they want one adjective at a time, offer it, do not start the interview unasked. USER-INVOKED — do not invoke from another skill. Not for generating final art (use the image-gen skills); not for prose voice (use writing-voice-modes); not for fixing a single prompt or a drifted generation (use prompt-how-much).
 ---
 
 # Wince
@@ -54,9 +54,9 @@ Wince runs one of three things, and which one it is gets settled before the inte
 
 | Operation | Runs when | What it does | Exit when |
 |---|---|---|---|
-| **new** | no block is named, or the name given has no file yet | The full four-stage run below. | The block is written to `taste-blocks/<slug>.md` at version 1 and the path is stated, or a gate failure is reported and no file is written. |
+| **new** | the user asks to build one, and the name they give has no file yet | The full four-stage run below. | The block is written to `taste-blocks/<slug>.md` at version 1 and the path is stated, or a gate failure is reported and no file is written. |
 | **list** | the user asks what blocks they have | Reads `taste-blocks/` and prints one line per block: slug, version, and the first sentence of its CORE THESIS verbatim. | The lines are printed, or the empty or missing directory is reported. Generates nothing, asks nothing, writes nothing. |
-| **refine `<name>`** | the name given has a file | Loads the block, runs it as a picture, digs only what changed and what was thin, bumps the version, keeps the old one in the file. | The next version is written above the old one and the path is stated, or a no-op is reported and nothing is written, or a gate failure is reported and the existing version is left standing as current. |
+| **refine `<name>`** | the user asks to change one they already have, and the name has a file | Loads the block, runs it as a picture, digs only what changed and what was thin, bumps the version, keeps the old one in the file. | The next version is written above the old one and the path is stated, or a no-op is reported and nothing is written, or a gate failure is reported and the existing version is left standing as current. |
 
 **Blocks live in `taste-blocks/` at the root of whatever project Wince was invoked from**, one file
 per block, named `<slug>.md`. No hidden directory, no dotfile. The user has to be able to find these
@@ -76,18 +76,9 @@ file; superseded versions sit below it under `## Previous versions`, kept verbat
   you start, because the user may be thinking of a block they made somewhere else.
 - `list` never falls through into an interview.
 
-**Refine is not Fork and Push bolted onto an old block.** It runs Diff, Fork, Push, and Negate, and
-the only stage it drops is Widen, because a block that exists has already killed the dead
-directions. Negate stays because it costs nothing and it owns NEVER DO, and a refine that can't
-sharpen the ban list can't touch the field this skill calls the spine. Any of the ten fields can be
-in play, REGISTER included, but only the ones the user names as changed and the ones the last
-version marked thin. Everything else carries forward verbatim, not re-asked and not "confirmed."
-
-**A refine runs both Emit gates, and Gate 1 counts only what the refine itself spent.** The previous
-version's generations don't carry. A refine done in conversation alone is spec editing, which is the
-thing this skill exists to replace. Gate 2 runs on the whole new version with inherited fields counted,
-and it can only fail if the refine subtracts something, since the previous version already passed
-it. Both cases are worked out in the reference.
+**Refine is a different stage shape, not the four stages run again**, and it runs both Emit gates on
+its own generations. Don't run one out of this file; the mechanics are all in
+[references/library.md](references/library.md).
 
 ### Refine never rewrites a block from scratch
 
@@ -95,11 +86,9 @@ Taste sharpens; it rarely reverses. Load what exists, ask what has changed since
 that produces a completely different block means the user has a second style, not a revised one. Say
 so and offer to make a new one instead.
 
-**When to say it.** Stop and ask the question when the refine would replace six or more of the ten
-fields, or when it would replace CORE THESIS and THE ONE MOVE together, or when it retracts more
-bans than it adds. The middle one is the sharpest signal, because those two are what Gate 2
-hard-fails on and they are the block's identity. Retracted bans are the quietest, because each one
-looks reasonable on its own.
+**When to say it** is a counted thing, checked at the end of Diff before any generation is spent and
+again at Negate as a backstop. The thresholds and the arithmetic are in the reference, because both
+are computed off the target list and neither is available here.
 
 Ask it plainly and let the user decide:
 
@@ -420,7 +409,9 @@ Otherwise, emit the block exactly per the template in
 1. **Name it.** Ask the user. The name names the style, not the person, because they'll have more
    than one. If they shrug, offer two names built out of their own words and let them pick. If the
    name is already taken in `taste-blocks/`, don't overwrite and don't rename it yourself; handle it
-   per the collision rules in [references/library.md](references/library.md).
+   per the collision rules in [references/library.md](references/library.md). **A refine skips this
+   step.** The block is already named, the slug is the filename, and renaming at Emit orphans the
+   file the user just refined.
 2. **Stamp `version: 1 · <today's date>`.** Version 1 on a first run. Refinement bumps it.
 3. **Run the ten "Accept when:" tests** from the schema against the ten answers before the block
    goes on screen. When one fails, handle it per "Where this rule stops" above: loose phrasing gets
