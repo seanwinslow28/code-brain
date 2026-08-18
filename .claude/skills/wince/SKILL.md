@@ -48,6 +48,88 @@ Never list a field the user did dig, and never fill a thin field with a plausibl
 This rule governs the conversation. The schema's per-field "Accept when:" tests judge the finished answer, and they are stricter. When one of them fails, check why. If the decision is in what the user said and only the phrasing is loose, tighten the phrasing and move on. If it fails because information the user never gave is missing, that is not a wording job. Go back and ask, and it spends a try like any other. Never close that gap yourself.
 
 
+## When the model refuses
+
+Push is the stage most likely to be refused, because "make it ugly, go too far" is exactly the shape
+safety filters catch. Measured 2026-08-09 on GPT Image 2: enhancement language aimed at an image
+containing a child was refused 3 of 3 times and again after a reword, while a plain compositional
+edit on the same image passed. With a described likeness of a real person in the chain, the model
+refused to make the subject prettier (3 of 3) and refused to make them uglier (2 of 2), while "strip
+the room out" and "make it look hand drawn" passed untouched. The face is fenced. Everything around
+it is not.
+
+So: on a refusal, say so out loud, then re-aim the push once at composition, palette, or finish
+rather than the figure. If that is also refused, skip Push, tell the user the block will be thinner
+for it, and continue. Do not reword a request until it slips past a filter. That is not a
+workaround, it is evasion, and the block you would get is not worth it.
+
+**The cap, stated so it can't be argued with.** Two attempts per generation, ever. Attempt 1 is the
+ask you meant to make. Attempt 2 is one re-aim that changes the *target*, to composition, palette,
+finish, ground, or crop, and leaves the figure alone. There is no attempt 3. A reword is not a new
+attempt, it's the same attempt in a different coat, and the measured reword failed anyway. The count
+runs per generation, not per stage, and it doesn't reset because a stage did.
+
+**What "skip Push" means, and what it must never mean.** It means skip Push's picture. It does not
+mean skip Push. Push owns **4. STRUCTURE**, **9. THE FINISH**, and **10. THE ONE MOVE**, and the
+Emit gate below hard-fails when THE ONE MOVE is thin, so a stage actually skipped is a run that cannot
+ship, and telling the user "the block will be thinner for it" would be a lie by a wide margin. Run
+Push against Fork's winner in words instead. That image is on screen, the user already picked it,
+and Push already carries a verbal fallback for the case where the picture fails to produce a
+ceiling. Aim it at all three fields, not only the finish: what would you cut out of this, and what
+would you still protect if everything else went wrong. Expect **9. THE FINISH** to go thin, because
+a ceiling imagined is weaker than a ceiling the user flinched at. Expect the other two to hold. If
+THE ONE MOVE won't come out in words either, the run fails at Emit, and it should.
+
+A refused Push doesn't put the no-pictures gate in play. Fork already spent two, and that gate only
+fires at zero.
+
+**Refusals before Push.** Same cap, same re-aim. If one of Fork's two images is refused twice, the
+fork runs on one image against one described direction, and you say out loud which half the user is
+judging from words. If both are refused you're at zero generations with generation available, which
+fails at Emit, and the run is over. Before you get there, check whether it's the subject rather than
+the ask: in the measured case the same frame passed a plain darkening and the fix was changing who
+was in the picture. The subject is already a control variable this skill lets you choose, so
+re-aiming at a different subject is in bounds. One swap, before any push, and it does not buy back
+an attempt already spent on the ask that was refused.
+
+## When there are no pictures at all
+
+If the session can't generate images, say so in your first message, not at Fork. Someone who agrees
+to a taste interview and finds out four stages in that nothing is going to be drawn has spent their
+time on a promise you knew you couldn't keep.
+
+Then run all four stages in words. Widen and Negate are unaffected because they never spent
+anything. Fork picks between two directions described rather than drawn. Push overshoots the winning
+description in words. The exchange budget below doesn't change.
+
+**The no-pictures gate is waived, and waived out loud.** It's conditioned on image generation having
+been available precisely so this mode has somewhere to stand, which means a words-only run passes it
+by construction and not by merit. Say that when you announce the mode, so nobody mistakes a waiver
+for a pass.
+
+**Stamp `mode: words-only` in the block header, on its own line directly under `version:`.** This one
+goes inside the block body, unlike the thin-fields line, because it's provenance rather than a
+to-do. Whoever pastes this block a year from now needs to know it was never tested against a
+picture, and the header already carries a line no image model tries to draw. Then name the two
+fields to trust least: **7. THE HAND** and **9. THE FINISH**. THE HAND's whole fallback is pointing
+at a region of a real generated image and asking what tool would leave that mark, and there's no
+image to point at. THE FINISH's ceiling comes from watching an overshoot break, and nothing broke.
+Neither is judgeable from a description, by them or by you.
+
+**The decisions gate does not relax, and the arithmetic still works.** It fails a run at more than
+four thin fields, or a thin CORE THESIS, or a thin THE ONE MOVE, or fewer than five NEVER DO items.
+Words-only costs you THE HAND and THE FINISH more or less by default, so you start two thin with two
+left, not four. But nothing that gate hard-fails on is a field that needed a picture: CORE THESIS
+comes off why one direction beat another, THE ONE MOVE comes off the pullback, and NEVER DO comes
+off kills. All three are reachable in words. A words-only run can pass, with about one field of
+slack.
+
+So spend for that margin. In this mode the degradation order below gains a fourth entry: let
+**9. THE FINISH** go thin alongside MEDIUM / SUBSTRATE, THE HAND, and COLOR / LIGHT, and hold
+everything else harder than you would in a normal run. If it comes apart anyway it fails at Emit
+like any other run. Words-only is a thinner run, not an excused one.
+
+
 ## The four stages
 
 Four stages, then Emit. A full run finishes in under ten minutes and spends three or four
@@ -314,7 +396,9 @@ Two gates run before anything is emitted. They fail the same way and for the sam
 
 **Gate 1, no pictures.** If image generation was available in this run and Emit is reached with zero
 generations spent, the run failed. A block built from words the user never tested against a picture
-is a spec, and specs are what this skill exists to replace.
+is a spec, and specs are what this skill exists to replace. In a declared words-only run this gate is
+waived rather than passed, per "When there are no pictures at all" above, and the block says so in
+its header.
 
 **Gate 2, no decisions.** If more than four of the ten fields are thin, or if CORE THESIS or THE ONE
 MOVE is thin, or if NEVER DO holds fewer than five items, the run failed the same way a
