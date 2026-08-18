@@ -2,32 +2,32 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: connection
 connects:
-  - Silent Failure Propagation in Agent Fleets
-  - Eval Vocabulary as Control Mechanism
-  - Infrastructure Status
-created: 2026-06-23
-updated: 2026-06-23
+  - SRE Error Budget for Agents
+  - Resilience Engineering: Work-as-Imagined vs Work-as-Done
+  - The Illusion of Health in Autonomous Systems
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Synthesis
 
-A tension exists between the desire for autonomous, hands-off automation and the reality of silent failures that propagate through dependent systems without explicit notification. When an agent like the vault synthesizer reports 'ok' despite producing partial or no output, it creates a false sense of security that masks the degradation of the underlying knowledge infrastructure. This disconnect forces Sean to confront the fact that his current monitoring mechanisms are insufficient for detecting quality loss, only binary success/failure.
+There is a critical tension between binary operational uptime and semantic value in agent fleets. When systems prioritize continuous availability over outcome fidelity, they create an illusion of health that masks underlying semantic decay or stale context. This leads to a trust deficit where users cannot distinguish between successful completion and silent failure propagation.
 
 ## Threads
 
-### [[Silent Failure Propagation in Agent Fleets]]
+### [[SRE Error Budget for Agents]]
 
-> There is a moment, somewhere around the eighth night that an automated system has been quietly producing nothing while reporting that everything is fine, when you start to wonder which of you is the real problem.
+> An offline endpoint is not automatically unhealthy: the question is whether it consumed an agreed reliability budget or prevented a promised outcome.
 
-### [[Eval Vocabulary as Control Mechanism]]
+### [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
 
-> The theme of all of it, repeated until it became a kind of liturgy, was this: **evals are the new PRDs.** A product manager who can't write evals is a product manager who can't specify what their AI is supposed to do.
+> When Tier C disappears, preserve manifest truth and bounded backlog growth; shed visual QA before provenance, and never disguise deferred work as successful work.
 
-### [[Infrastructure Status]]
+### [[The Illusion of Health in Autonomous Systems]]
 
-> According to the manifest files it dutifully wrote each morning, 70% of those nights were `partial` — meaning it ran out of its 45-minute budget — and 30% of those nights were `ok`, meaning everything went fine.
+> Your Agent Fleet Is Not Resilient Because Everything Is Online.
 
 ## Implications
 
-- Sean must redesign his monitoring to detect output quality degradation, not just execution success, to prevent silent knowledge decay.
-- The current 'ok' status is a misleading metric that obscures the 70% partial run rate, requiring a shift from binary to graded health indicators.
+- Sean must redefine success metrics for his fleet to include freshness and integrity rather than just uptime, preventing false confidence in automated outputs.
+- Operational dashboards need to shift from binary health indicators to SLO-based error budget consumption rates to accurately reflect system state.

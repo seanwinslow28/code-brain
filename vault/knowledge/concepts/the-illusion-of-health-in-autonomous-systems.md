@@ -2,7 +2,7 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-and-daily-note-automation-failure.md
+  - knowledge/expansions/fleet-status.md
 tags: [auto-generated, phase-6]
 created: 2026-08-18
 updated: 2026-08-18
@@ -10,23 +10,23 @@ updated: 2026-08-18
 
 ## Definition
 
-This concept describes the phenomenon where automated systems appear functional based on internal health checks, yet fail to deliver their intended purpose due to silent failures or misaligned success metrics. The mechanism involves a decoupling between operational signals (logs, exit codes) and semantic outcomes (content quality, user utility). This illusion persists because monitoring often focuses on the machinery rather than the promise made to the user.
+A failure mode where individual component health metrics mask systemic collapse because dependencies and shared failure domains are ignored. Treating '7 healthy agents' as sufficient evidence ignores interaction failures, such as an indexer delay causing a synthesizer to read old state, leading to a green dashboard despite obsolete output. This illusion persists because standard observability tools measure local state rather than global coherence.
 
 ## Context
 
-Sean's vault synthesizer has experienced silent failures where notes were not generated or updated. Recognizing this illusion helps him design better failure detection mechanisms that alert users to actual workflow disruptions rather than just technical errors.
+Sean's current status checks may report green while the underlying knowledge synthesis is broken. Recognizing this tension prevents him from trusting superficial health indicators that do not reflect the actual integrity of his personal knowledge infrastructure.
 
 ## Evidence
 
-> A valid daily note exists by 08:35, contains the overnight digest, and is visible at session start.
+> Treat '7 healthy agents' as insufficient evidence that the fleet is healthy.
 
-> Component signals explain failures but cannot establish success.
+> Model incidents as interaction failures: indexer delay → synthesizer reads old state → critic validates obsolete output → dashboard reports green.
 
 ## Examples
 
-- Replacing agent health as the primary signal with a user-visible SLI.
-- Treating 'No baton found' as a workflow-state problem rather than merely a monitoring problem.
+- Indexer delay causes synthesizer to read old state.
+- Dashboard reports green despite obsolete output.
 
 ## Related Concepts
 
-[[Operational Uptime vs. Cognitive Utility Tension]] [[Silent Failure Propagation in Agent Fleets]]
+[[Silent Failure Propagation in Agent Fleets]] [[Operational Uptime vs. Cognitive Utility Tension]]

@@ -2,7 +2,7 @@
 title: "Operational Uptime vs. Cognitive Utility Tension"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-and-creative-output-synergy.md
+  - knowledge/expansions/connections/agent-health-and-infrastructure-reliability.md
 tags: [auto-generated, phase-6]
 created: 2026-08-18
 updated: 2026-08-18
@@ -10,23 +10,23 @@ updated: 2026-08-18
 
 ## Definition
 
-This tension arises when an agent fleet achieves high operational availability metrics while simultaneously failing to produce meaningful creative progress for the user. The mechanism is a decoupling of system health from workflow value, where successful execution of automated tasks does not translate into usable premises or resolved editorial decisions. This creates a false sense of productivity because the infrastructure appears robust even as the human's cognitive momentum stalls due to irrelevant or low-signal outputs.
+This tension arises when infrastructure availability metrics (uptime) diverge from the semantic integrity of the knowledge base. A system can be technically 'online' while delivering stale or erroneous context, creating a false sense of health that masks cognitive decay. The mechanism is a decoupling of signal reliability from service availability, where the user must manually verify the truthfulness of automated outputs rather than trusting their mere existence.
 
 ## Context
 
-Sean is building a personal knowledge vault and creative studio that relies heavily on autonomous agents. If his fleet runs successfully but generates 'slop' or irrelevant drafts, he suffers from supervision fatigue without gaining any actual writing progress. Recognizing this tension allows him to prioritize 'creative continuity' and 'meaningful next states' over simple uptime dashboards.
+Sean's fleet relies on daily synthesis to maintain a coherent narrative. If agents produce content while offline or with corrupted state, the resulting notes are structurally present but semantically void, forcing Sean to spend cognitive energy auditing rather than creating.
 
 ## Evidence
 
-> A perfectly healthy agent that generates irrelevant drafts can reduce that perception of progress.
+> Alienware being off is therefore not necessarily a fleet failure—especially under Sean’s Pattern-E, manual-wake operating model.
 
-> Measure whether automation created a meaningful next state, not whether it completed a run.
+> Offline infrastructure is diagnostic evidence, not proof of impact.
 
 ## Examples
 
-- The fleet reports green status after processing 100 clusters, but the user accepts zero paragraphs for publication.
-- An agent completes its scheduled research task but fails to capture a usable premise for the current Substack draft.
+- A synthesizer completes its run but writes to a stale cache because the previous day's note was never successfully ingested due to a silent network drop.
+- An agent reports 'success' for a job application submission, but the payload was malformed due to a schema drift in the MCP server.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
+[[The Illusion of Health in Autonomous Systems]] [[Coordinated Omission in Agent Observability]]

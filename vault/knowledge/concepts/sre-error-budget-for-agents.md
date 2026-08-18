@@ -2,7 +2,7 @@
 title: "SRE Error Budget for Agents"
 type: concept
 sources:
-  - knowledge/concepts/sre-error-budget-for-agents.md
+  - knowledge/expansions/fleet-status.md
 tags: [auto-generated, phase-6]
 created: 2026-08-18
 updated: 2026-08-18
@@ -10,23 +10,23 @@ updated: 2026-08-18
 
 ## Definition
 
-This concept reframes agent reliability not as a binary state of uptime but as a managed economic resource where failures are permitted within a calculated tolerance. It establishes that excessive reliability consumes infrastructure and opportunity cost, meaning the acceptable failure budget is determined by comparing the cost of prevention against the cost of recovery. This approach unlocks an agent SLO and error-budget policy specifying successful-output rate, maximum stale-output age, and tolerated deferred runs.
+An SLO-based reliability contract where agent performance is measured by observable outcomes like timeliness and correctness rather than binary active/disabled states. When an agent exhausts its error budget through repeated misses, feature work freezes to trigger reliability engineering, shifting the focus from mere process reachability to value delivery. This mechanism treats fleet health as a dynamic resource management problem rather than a static status check.
 
 ## Context
 
-Sean's vault relies on automated synthesis; understanding that occasional failures are economically rational prevents over-engineering fragile systems for marginal gains in consistency. By treating reliability as a budget rather than an absolute, Sean can allocate engineering effort to feature work until the error rate exceeds the cost of recovery.
+Sean needs to move beyond counting processes to judging whether his fleet delivers actual value. By implementing error budgets, he gains an executable framework to decide whether to improve prompts, repair infrastructure, or retire agents based on data rather than intuition.
 
 ## Evidence
 
-> Google’s Marc Alvidrez and Mark Roth argue the opposite in “Embracing Risk,” Chapter 3 of Site Reliability Engineering: excessive reliability consumes infrastructure and opportunity cost.
+> Attach an error-budget policy: repeated misses freeze feature work and trigger reliability work.
 
-> This unlocks an agent SLO and error-budget policy specifying successful-output rate, maximum stale-output age, tolerated deferred runs, and when reliability work should displace feature work.
+> Define each agent by an observable outcome: completion, timeliness, coverage, and correctness.
 
 ## Examples
 
-- Allowing a local agent to occasionally defer execution rather than incurring the high cost of a cloud fallback for non-critical tasks.
-- Defining a specific error budget percentage that triggers a shift from feature development to reliability engineering.
+- Daily Driver publishes a validated note by 08:40 on 29 of 30 mornings.
+- Agent X was last observed producing valid artifact Y at T; this claim expires at T+n.
 
 ## Related Concepts
 
-[[Agent Health and Cost Efficiency]] [[Operational Uptime vs. Cognitive Utility Tension]]
+[[Fleet Status]] [[Agent Health Monitoring]]

@@ -1,0 +1,32 @@
+{
+  "antigravity_calls": 0,
+  "antigravity_failures": 0,
+  "antigravity_last_error": "",
+  "antigravity_skipped": 8,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 3,
+  "backfill_articles_critiqued": 5,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/connections/agent-health-monitoring-agent-health.md",
+    "vault/knowledge/expansions/connections/agent-health-monitoring-and-automation-reliability.md",
+    "vault/knowledge/expansions/connections/agent-health-monitoring-and-cost-capped-agentic-workflows-synergy.md",
+    "vault/knowledge/expansions/connections/agent-health-monitoring-and-cost-capped-agentic-workflows.md",
+    "vault/knowledge/expansions/connections/agent-health-monitoring-and-daily-note-generation-interdependence.md"
+  ],
+  "codex_calls": 8,
+  "codex_failures": 0,
+  "codex_last_error": "",
+  "codex_tokens_total": 299025,
+  "duration_seconds": 325.43,
+  "error": "",
+  "expansions_written": [
+    "vault/knowledge/expansions/supervision-fatigue-as-the-hard-cap-on-fleet-scaling.md",
+    "vault/knowledge/expansions/capability-aware-scheduling.md",
+    "vault/knowledge/expansions/coordinated-omission-in-agent-observability.md"
+  ],
+  "run_id": "2026-08-18T03:30:05",
+  "status": "ok",
+  "warnings": [
+    "antigravity disabled (codex-only mode)"
+  ]
+}
