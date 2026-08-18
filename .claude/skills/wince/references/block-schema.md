@@ -95,7 +95,7 @@ reasons an interviewed block beats a hand-written one.
 
 Every field entry below follows this pattern. Read this one first.
 
-> **9. THE FINISH** — how finished it should look, and how finished it must NOT look.
+> **9. THE FINISH.** How finished it should look, and how finished it must NOT look.
 >
 > *Strong:* "Unfinished on purpose. Construction lines stay in, the searching marks stay in, the
 > paper grain stays visible. It should look like it was caught mid-decision, not delivered."

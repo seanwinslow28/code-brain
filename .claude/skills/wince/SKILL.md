@@ -47,6 +47,7 @@ Never list a field the user did dig, and never fill a thin field with a plausibl
 
 This rule governs the conversation. The schema's per-field "Accept when:" tests judge the finished answer, and they are stricter. When one of them fails, check why. If the decision is in what the user said and only the phrasing is loose, tighten the phrasing and move on. If it fails because information the user never gave is missing, that is not a wording job. Go back and ask, and it spends a try like any other. Never close that gap yourself.
 
+
 ## The four stages
 
 Four stages, then Emit. A full run finishes in under ten minutes and spends three or four
@@ -54,26 +55,62 @@ generations. Widen and Negate spend zero. Fork spends two or three. Push spends 
 
 | Stage | Job | Generations | Exit when |
 |---|---|---|---|
-| **Widen** | Five named directions in words, deliberately far apart. Kill the dead ends before spending anything. | 0 | At least three of the five are dead **and** both fields Widen owns are recorded or marked thin. |
-| **Fork** | Generate the survivors against the user's real subject. Pick one, then dig. | 2-3 | One direction is chosen with a decision-level reason **and** all four fields Fork owns are recorded or marked thin. |
-| **Push** | Overshoot the winner on purpose so the user pulls it back. | 1 | The user has named a ceiling, liked or not, **and** all three fields Push owns are recorded or marked thin. |
-| **Negate** | Walk back through every kill and ask why it was wrong. | 0 | Five to ten banned items, each with its why, **and** the field Negate owns is recorded or marked thin. |
+| **Widen** | Five named directions in words, deliberately far apart. Kill the dead ends before spending anything. | 0 | At least three of the five are dead, and REGISTER has been asked for and dug. |
+| **Fork** | Generate the survivors against the user's real subject. Pick one, then dig. | 2-3 | One direction is chosen with a decision-level reason, and all five fields Fork owns have been asked for and dug. |
+| **Push** | Overshoot the winner on purpose so the user pulls it back. | 1 | The user has named a ceiling that passes the test below, and all three fields Push owns have been asked for and dug. |
+| **Negate** | Walk back through every kill and ask why it was wrong. | 0 | Five to ten banned items each carrying its why, and NARRATIVE STANCE has been asked for and dug. |
 
-Rough clock: two minutes on Widen, four on Fork, two on Push, two on Negate. If you're past minute
-seven and Negate hasn't started, stop digging, take first answers, and mark them thin. Negate is the
-one stage you can't shorten, because it's the only one that produces the spine.
+**What "asked for and dug" guarantees, and what it doesn't.** It guarantees you actually put the
+question to the user and followed the rule above before recording anything. It does not guarantee
+the answer is any good, because a field marked thin satisfies it too. That is deliberate. Quality
+has one floor and it sits at Emit, where both gates run. Don't treat a stage exit as evidence the
+block is working.
+
+### The user who likes everything
+
+Most of this section assumes someone who will tell you a thing is bad. Plenty of people won't. In a
+taste interview the agreeable user is the common case, not an edge case: you are a stranger showing
+them work and asking them to pass judgment on it, and the reflex is to be nice. "Yeah, that one's
+good" to all five directions. "That's cool too" to the deliberate overshoot.
+
+Every gate here leaks under that user, so each stage carries a move for it and the moves all work
+the same way. **Stop asking for a verdict and ask for an order.** Ranking, choosing between exactly
+two, and naming what they'd regret losing are all easy for someone who finds rejection rude, and
+they yield the same information a kill does. The stages below mark where to reach for this.
+
+If the moves fail too, the run does not quietly produce a block anyway. It fails at Emit and says
+what it couldn't get.
+
+### The budget you can actually count
+
+You have no clock. In a turn-based interview you can't observe wall time between turns, so run the
+budget in **exchanges**, where one exchange is one user message plus your reply.
+
+| Stage | Exchanges |
+|---|---|
+| Widen | 5 |
+| Fork | 13 |
+| Push | 6 |
+| Negate | 8 |
+
+**At exchange 26 with Negate unstarted, stop digging and start Negate.** Ten minutes is the target
+and this is how you hit it.
+
+When you have to degrade, degrade in this order rather than letting everything go thin at once:
+
+1. **Protect CORE THESIS and THE ONE MOVE.** Emit hard-fails if either is thin, so spending your
+   last follow-ups anywhere else is spending them on a block that won't ship.
+2. **Let MEDIUM / SUBSTRATE, THE HAND, and COLOR / LIGHT go thin first.** They're the three most
+   likely to be thin anyway, and they're the three a refinement pass can recover from a single
+   image later.
 
 ### Which stage owns which field
-
-Every field in [references/block-schema.md](references/block-schema.md) has exactly one owner. A
-stage does not exit until each field it owns has an answer in the user's own words or is marked thin
-per the rule above. Nothing gets filled in later from memory, and nothing gets filled in by you.
 
 | Field | Owner | Why that stage can actually answer it |
 |---|---|---|
 | 3. REGISTER | Widen | The spread crosses register on purpose, so a kill is a position on the scale. |
-| 2. EMOTIONAL MODE | Widen | A kill is a sacrifice. The direction they gave up is the OVER clause, which is the half people can't state cold. |
-| 1. CORE THESIS | Fork | The decision-level reason for the pick, dug per the rule, is what the thing should feel like before it announces itself. |
+| 1. CORE THESIS | Fork | The decision-level reason the winner won is what the thing should feel like before it announces itself. |
+| 2. EMOTIONAL MODE | Fork | The loser is a direction they liked enough to keep through Widen and then gave up after seeing it. That's a real sacrifice, which is what the OVER clause needs. |
 | 6. MEDIUM / SUBSTRATE | Fork | Same subject, different directions. Substrate is the first thing that visibly differs. |
 | 7. THE HAND | Fork | You can point at the marks in a specific image and ask what made them. |
 | 8. COLOR / LIGHT | Fork | Counts and bans come from looking. Nobody says "exactly one accent" from memory. |
@@ -83,9 +120,19 @@ per the rule above. Nothing gets filled in later from memory, and nothing gets f
 | 5. NARRATIVE STANCE | Negate | The whys pile up into forbidden routes to meaning. Ask for the positive route while the negatives are on the table. |
 | NEVER DO | Negate | Bans come from real kills, and by Negate every kill in the run is on record. |
 
+Owning a field means that stage is responsible for coming back with it. It doesn't mean the answer
+can only arrive there. Under the rule above, an answer that lands on a different field gets credited
+to that field wherever it turns up, and the owning stage confirms it rather than asking again from
+scratch. What you must never do is fill a field nobody asked about.
+
+One routing note, because it comes up unprompted and early: when a user volunteers what color is
+*for* ("the color carries the whole feeling, it never decorates"), that's a claim about how meaning
+reaches the viewer. Hold it for **5. NARRATIVE STANCE** two stages later. Only the count and the
+bans belong to **8. COLOR / LIGHT**.
+
 ---
 
-### Widen — 0 generations
+### Widen (0 generations)
 
 Before anything else, ask one line: what are you going to be making pictures of? You need it for
 Fork. If they don't have one, pick a subject, say you're picking it, and keep it fixed. The subject
@@ -102,18 +149,37 @@ mechanical: no two of the five may match on more than one of those three axes. I
 them is filler and you have four directions, not five.
 
 Ask why each kill is a kill, and dig it per the rule above. Kills are cheaper to explain than keeps
-and they carry more, so this is where the interview is fast.
+and they carry more, so this is where the interview is fast when it is fast at all.
 
-Record **3. REGISTER** and **2. EMOTIONAL MODE** before you leave. For EMOTIONAL MODE, say back what
-they gave up: "so you're giving up X to get Y" is the OVER clause, in their words, and it's usually
-one question.
+Record **3. REGISTER** before you leave. That is Widen's only field. Widen used to own EMOTIONAL MODE
+as well and no longer does, because reading two independent axes out of one set of kills is how they
+get collapsed, and the schema is emphatic that they are independent. If a kill reads as "too much" or
+"too loud" rather than "too stylized," that's an emotional-mode signal and it belongs to Fork.
+Note it, don't record it.
 
-If fewer than three die, the spread was too narrow. Replace the near-duplicate survivors with
-sharper opposites, once, and ask which of these is closest to something they'd never make. If all
-five die, ask what all five got wrong, then offer three new ones built out of that answer. One
-reoffer either way, then take the top two survivors and move.
+**When the kills don't come.** If fewer than three die, the spread was too narrow. Replace the
+near-duplicate survivors with sharper opposites, once, and ask which of these is closest to
+something they'd never make. If all five die, ask what all five got wrong, then offer three new ones
+built out of that answer. One reoffer either way.
 
-### Fork — 2-3 generations
+**When the second round still produces no kills, stop asking for kills and force a ranking:**
+
+> Rank all five, worst first. You don't have to hate any of them, I just need the order.
+
+Ranking is far easier than rejecting for someone who doesn't want to be rude, it costs nothing, and
+the bottom three of a ranking are your kill list. Dig them exactly as you would dig a kill: "what
+puts that one last?"
+
+Only if the ranking is refused too may Widen exit thin, and when it does, say so out loud:
+
+> Nothing's been ruled out yet, so the block we end up with is going to be vague. I'll keep going,
+> but I'm going to push harder on the next few.
+
+A thin Widen still has to hand Fork two directions. Pick the two furthest apart yourself, say you're
+picking them and why, and mark **3. REGISTER** thin. Choosing which two get drawn is a control
+decision like choosing the subject. Choosing what the user thinks of them is not.
+
+### Fork (2-3 generations)
 
 At most two directions survive Widen, so generate one image per survivor. If only one survived,
 generate it and then generate one variant that changes a single dimension of it, because a fork with
@@ -126,15 +192,53 @@ time, so the delta reads as style and not composition. Say that out loud:
 Spend a third generation only to break a tie the user can't break in words, or to split a winner
 they liked in halves. Never a third for tidiness. Four is not available at this stage.
 
-Get a pick, then dig it per the rule until the reason would still be useful on a subject that was
-never on screen. That reason is **1. CORE THESIS**.
+**When they like both**, don't ask again in the same words. Force the binary, which is the easiest
+question in the whole interview to answer:
 
-Then work the picture in front of you for the other three. Point at the image, not at categories.
-"What is that surface, if you had to go buy it" gets **6. MEDIUM / SUBSTRATE**. "What made those
-marks" gets **7. THE HAND**. "How many colors are allowed in here, and which one is never allowed"
-gets **8. COLOR / LIGHT**, which needs a number, an "only," or a "never" to be worth recording.
+> You only get one. Which one is going in the block?
 
-### Push — 1 generation
+If they still won't choose, choose for them, say out loud that you're choosing and that it weakens
+the block, and mark **1. CORE THESIS** and **2. EMOTIONAL MODE** thin. Push needs a winner to
+overshoot, so the run continues. It will not survive the Emit gate, and it shouldn't.
+
+**Fork owns five fields and gets six follow-ups total across all of them**, not two each. The
+per-field cap in the rule above still applies as a ceiling, but patience doesn't reset when you
+change subject, and twelve questions in one stage is the interrogation that rule exists to prevent.
+Spend the six on CORE THESIS and EMOTIONAL MODE first. MEDIUM / SUBSTRATE, THE HAND, and
+COLOR / LIGHT absorb the shortfall and go thin.
+
+**Two fields come off the pick, and they come from opposite sides of it.**
+
+- **1. CORE THESIS** comes from the winner. Ask why that one, and dig until the reason would still
+  be useful on a subject that was never on screen. Fork may exit with this provisional. Negate
+  sharpens it, because a thesis with five bans around it has edges a thesis alone doesn't, and
+  forcing it closed inside Fork's clock is how it goes thin for no reason.
+- **2. EMOTIONAL MODE** comes from the loser. The loser is not a discard, it's a thing they kept
+  through Widen, saw drawn, and then gave up. That's the sacrifice the OVER clause needs. Ask it
+  straight:
+
+  > The other one made it this far. What did it have that you're now giving up?
+
+  Do not offer them the two halves and ask them to nod. "So you're giving up X to get Y" is you
+  writing the field. If the answer names how literal it looks rather than what it favors, that's
+  REGISTER again and it's already recorded, so ask again.
+
+  **Check before recording:** these two must come from different sides of the pick. If both are the
+  same sentence about the winner, you have one answer wearing two hats, and the second one is thin.
+
+**Then work the picture in front of you** for the other three. Point at the image, not at
+categories. "What is that surface, if you had to go buy it" gets **6. MEDIUM / SUBSTRATE**. "What
+made those marks" gets **7. THE HAND**. "How many colors are allowed in here, and which one is never
+allowed" gets **8. COLOR / LIGHT**, which needs a number, an "only," or a "never" to be worth
+recording.
+
+**THE HAND goes thin more than any other field**, because its test demands a tool or a specific
+behavior and most people's first three answers are a mood. "Loose" and "sketchy" are the schema's
+weak example word for word. The fallback needs no vocabulary from them: point at one region of the
+generated image, small and specific, and ask what would have to be true of the tool to leave *that*
+mark there. They can answer that without knowing what any of it is called.
+
+### Push (1 generation)
 
 Push always spends its generation. It may take Fork's winner as the input image and go further from
 there, which is what "reuse" means here. It never means skipping the generation.
@@ -147,25 +251,35 @@ it win, too much of it, on purpose. Tell the user that's what you're doing befor
 
 Then read the pullback. Three things come out of it and you ask for each one:
 
-- **9. THE FINISH** — "where exactly did it stop being right?" The ceiling, stated as a boundary.
-- **4. STRUCTURE** — "what would you cut out of that?" A structure rule that deletes nothing is
+- **9. THE FINISH.** "Where exactly did it stop being right?" The ceiling, stated as a boundary.
+- **4. STRUCTURE.** "What would you cut out of that?" A structure rule that deletes nothing is
   decoration, so keep asking until something gets deleted.
-- **10. THE ONE MOVE** — "in all that mess, what's the one thing still worth keeping?" One move, not
+- **10. THE ONE MOVE.** "In all that mess, what's the one thing still worth keeping?" One move, not
   a list. If they name three, ask which one they'd protect when the three fight.
 
-Push exits on a named ceiling whether or not they liked the result. Liking it is not the point. A
-user who says "actually that's better" has still named a ceiling, it's just further out than you
-thought, and that's the finding.
+**What counts as a ceiling.** A ceiling counts when the user has named a point past which the image
+is wrong, in words that would let a stranger reject an image neither of you has seen. "That's too
+much" is not one. "It stopped working once the figure wouldn't resolve" is. Liking the overshoot
+doesn't fail Push, but it doesn't pass it either, because "actually that's better" gives you nothing
+to write into THE FINISH.
+
+Push has one generation and doesn't get a second, so when the picture doesn't produce a ceiling, ask
+for the boundary in words instead:
+
+> Forget this one. What would I have to do to that image to actually wreck it?
+
+If that doesn't land either, mark **9. THE FINISH** thin and move. Do not record a ceiling the user
+didn't name.
 
 **Why Push is not optional.** Push is the only stage that finds something the user did not know to
 ask for. Every other stage narrows what they already brought. Cut it and this becomes an interview
 about a spec, which is the thing that does not work.
 
-### Negate — 0 generations
+### Negate (0 generations)
 
 No images. Walk back through everything killed in Widen, Fork, and Push, in order, and ask why each
-one was wrong. You have the list already: three or more Widen kills, one or two Fork losers, and
-whatever broke in the Push image.
+one was wrong. You have the list already: three or more Widen kills or the bottom of the ranking,
+one or two Fork losers, and whatever broke in the Push image.
 
 > Back to the ones you killed. This one, early on. What was actually wrong with it?
 
@@ -174,14 +288,21 @@ the why is the negative of a value the keeps demonstrated. Five to ten items. Fe
 you're taking bans at face value and not asking why. More than ten and the list stops generalizing
 and starts being a log.
 
-If the kills don't reach five items, don't invent the rest. Restate the negative half of fields
-you already recorded: the finish ceiling from Push, the color count from Fork, and the one move all
+**If the kills don't reach five, don't invent the rest.** Restate the negative half of fields you
+already recorded: the finish ceiling from Push, the color count from Fork, and the one move all
 carry a ban on their far side, and the schema wants those bans written here anyway. Restating a ban
 is not redundancy. Inventing one is.
 
-While the forbidden routes to meaning are on the table, ask for the positive one: "so if the face
-isn't doing the work, where does the feeling come from?" That answer is **5. NARRATIVE STANCE**.
-Ask it, don't derive it. Inverting a ban yourself is filling in a field for them.
+**If it still won't reach five after that, Negate has failed and you say so.** Do not pad the list
+to hit a number. Report the count you actually got, carry it to Emit, and let the gate there fail
+the run. A short ban list is the single loudest signal that the interview stayed on the surface,
+which is exactly what the gate is for.
+
+**5. NARRATIVE STANCE** comes out of the same material while it's on the table. Look at the bans you
+just wrote, find a route to meaning that they close off, name that route back to the user, and ask
+where the meaning goes instead. Build the question out of this run's bans, never out of an example
+from the schema file, or you'll be handing them somebody else's taste to agree with. Ask it, don't
+derive it. Inverting a ban yourself is filling in a field for them.
 
 A closing principle is welcome as a last line, and it doesn't replace the per-item whys.
 
@@ -189,10 +310,20 @@ A closing principle is welcome as a last line, and it doesn't replace the per-it
 
 ### Emit
 
-**Gate first.** If image generation was available in this run and Emit is reached with zero
-generations spent, the run failed. Say so plainly, name the stage that never happened, and do not
-emit a block. A block built from words the user never tested against a picture is a spec, and specs
-are what this skill exists to replace.
+Two gates run before anything is emitted. They fail the same way and for the same reason.
+
+**Gate 1, no pictures.** If image generation was available in this run and Emit is reached with zero
+generations spent, the run failed. A block built from words the user never tested against a picture
+is a spec, and specs are what this skill exists to replace.
+
+**Gate 2, no decisions.** If more than four of the ten fields are thin, or if CORE THESIS or THE ONE
+MOVE is thin, or if NEVER DO holds fewer than five items, the run failed the same way a
+zero-generation run failed. Three generations were spent and nothing was decided, which is the more
+likely of the two failures and the quieter one.
+
+On either gate: say so plainly, name exactly what you could not get, and offer to re-run Fork with
+harder options. Do not emit a block. A re-run is a fresh run with a fresh budget, and say that too,
+so three generations don't quietly become six.
 
 Otherwise, emit the block exactly per the template in
 [references/block-schema.md](references/block-schema.md). Then:
@@ -207,7 +338,7 @@ Otherwise, emit the block exactly per the template in
    only if thin fields exist:
 
    ```
-   Thin fields, next pass: CORE THESIS, THE HAND
+   Thin fields, next pass: THE HAND, COLOR / LIGHT
    ```
 
    Names only, no marker of any kind inside the block. If nothing is thin, the line is absent
