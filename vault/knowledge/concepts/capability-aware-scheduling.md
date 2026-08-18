@@ -2,10 +2,10 @@
 title: "Capability-Aware Scheduling"
 type: concept
 sources:
-  - knowledge/expansions/infrastructure.md
+  - knowledge/concepts/capability-aware-scheduling.md
 tags: [auto-generated, phase-6]
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Definition

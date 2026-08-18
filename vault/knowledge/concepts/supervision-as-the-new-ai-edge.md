@@ -2,10 +2,10 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-automation-velocity-vs-creative-friction.md
+  - knowledge/concepts/supervision-as-the-new-ai-edge.md
 tags: [auto-generated, phase-6]
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Definition

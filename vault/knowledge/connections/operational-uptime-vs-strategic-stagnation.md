@@ -5,8 +5,8 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - Infrastructure Fragmentation and Semantic Isolation
   - The Verification-Governance Inversion
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Synthesis

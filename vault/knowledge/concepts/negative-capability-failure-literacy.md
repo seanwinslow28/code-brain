@@ -2,31 +2,31 @@
 title: "Negative Capability / Failure Literacy"
 type: concept
 sources:
-  - knowledge/concepts/negative-capability-failure-literacy.md
+  - knowledge/concepts/silent-failure-propagation-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Definition
 
-This concept defines the capacity to remain effective amidst uncertainty and incomplete information, specifically by treating failure data as a primary signal of competence. It requires documenting not just successful outcomes but the specific traces of how errors were detected, routed, and resolved in agentic systems. This literacy transforms potential liabilities into defensible evidence of senior engineering judgment.
+This concept defines the capacity to remain effective amidst uncertainty and incomplete information, specifically by treating failure data as a primary signal of competence rather than a nuisance to be eliminated. It requires an agent or operator to hold conflicting states of knowledge without reaching for premature resolution, allowing the system to adapt to dynamic contexts where static assumptions would lead to catastrophic misalignment. This literacy transforms failure from a binary success/failure metric into a gradient of informational value that guides subsequent actions.
 
 ## Context
 
-Sean's vault synthesizer logs show significant rejection counts and duration variances. Instead of hiding these failures, he can use them as 'residue' to demonstrate his ability to handle complex agent fleet dynamics, turning the 'rejected_count' metric into a portfolio piece about governance and reliability.
+Sean's job hunt and creative studio workflows require this capability because automated systems often fail not due to reasoning errors but due to intent failures or vague specs. By treating failure data as a primary signal, Sean can distinguish between activity disguised as state and genuine progress, preventing the illusion of competence that plagues many agentic workflows.
 
 ## Evidence
 
-> Do not claim the capability; publish the residue only that capability would leave.
+> This concept defines the capacity to remain effective amidst uncertainty and incomplete information, specifically by treating failure data as a primary signal of competence.
 
-> Sean needs evidence that is difficult to produce without the claimed capability: a replayable agent failure incident...
+> Most agent failures aren't reasoning failures — they're intent failures. The spec is vague, the stop rules are missing, the outcome is an activity disguised as a state.
 
 ## Examples
 
-- Documenting rejected_count metrics as proof of governance
-- Publishing duration_seconds variance as proof of complexity handling
+- Treating a high rejection rate in the synthesizer not as a bug but as a signal that the indexing strategy needs semantic refinement
+- Recognizing that a 'successful' run with low-quality outputs is a failure of intent rather than execution
 
 ## Related Concepts
 
-[[Demonstration Over Declaration]] [[SRE Error Budget for Agents]]
+[[The Illusion of Competence in Automated Systems]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]

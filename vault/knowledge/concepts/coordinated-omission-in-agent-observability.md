@@ -2,10 +2,10 @@
 title: "Coordinated Omission in Agent Observability"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-and-cost-efficiency.md
+  - knowledge/concepts/coordinated-omission-in-agent-observability.md
 tags: [auto-generated, phase-6]
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ This phenomenon occurs when a stalled system stops generating the very observati
 
 ## Context
 
-Sean's dashboard metrics may falsely indicate high agent health if they only measure successful runs, masking the silent decay of the automation infrastructure.
+Sean's dashboard metrics may falsely indicate high agent health if they only measure successful runs, masking the silent decay of the automation infrastructure. Without a ledger that records absent and stale states, Sean cannot distinguish between a healthy fleet and one that has simply stopped reporting.
 
 ## Evidence
 

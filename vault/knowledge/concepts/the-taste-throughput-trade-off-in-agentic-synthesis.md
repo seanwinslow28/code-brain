@@ -2,31 +2,31 @@
 title: "The Taste-Throughput Trade-off in Agentic Synthesis"
 type: concept
 sources:
-  - knowledge/connections/the-calibration-bottleneck-in-scalable-creative-production.md
+  - knowledge/connections/velocity-vs-judgment-in-mcp-strengthening.md
 tags: [auto-generated, phase-6]
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Definition
 
-This invariant defines the inverse relationship between the volume of automated concept generation and the depth of strategic integration, where high throughput suppresses the novel connections required for true synthesis. Persistent global context causes anchoring effects that bury relevant evidence, forcing the system to prioritize quantity over the rare, high-value insights that require deep, non-linear thinking. The mechanism reveals that automation velocity often degrades the very 'taste' it aims to preserve by overwhelming the signal with noise.
+This mechanism defines the inverse relationship between the volume of automated concept generation and the depth of strategic curation available to the human operator. As Sean scales the concept generation, the system prioritizes speed over the nuanced filtering required for high-stakes outputs like job applications. The throughput of ideas grows exponentially while the capacity for taste-based selection remains linearly constrained by human attention.
 
 ## Context
 
-Sean's runs show a pattern where higher concept counts correlate with lower connection density or higher rejection rates, suggesting that the system is generating more content but less valuable insight. This trade-off is critical for Sean to recognize when deciding whether to scale up fleet size or slow down to improve semantic depth.
+Sean's recent runs show a massive increase in clusters_sampled (e.g., 191 in run-2026-08-16) and concepts_written (118), yet the rejected_count remains low relative to the volume. This suggests that while velocity has increased, the judgment filter may be overwhelmed, leading to a lower signal-to-noise ratio in his knowledge vault.
 
 ## Evidence
 
-> Persistent global context can cause anchoring, suppress novelty, and bury relevant evidence.
+> As Sean scales the concept generation, the system prioritizes speed over the nuanced filtering required for high-stakes outputs like job applications.
 
-> The architecture is currently a circulation loop, not necessarily a learning loop.
+> This mechanism describes the endogenous change in an evaluator's standards caused by repeated exposure to generated outputs.
 
 ## Examples
 
-- A run might sample 191 clusters but only write 118 concepts, indicating that the system is filtering for volume rather than strategic fit.
-- Sean's rejection count rises as concept count increases, showing that the verification bottleneck is actively filtering out low-quality output.
+- The fleet does not merely overwhelm pre-existing standards; it actively reshapes them through volume.
+- Sean must introduce artificial friction to maintain quality when automation velocity exceeds taste capacity.
 
 ## Related Concepts
 
-[[The Calibration Bottleneck in Scalable Creative Production]] [[Double-loop learning]]
+[[Velocity vs. Judgment in MCP Strengthening]] [[Performative Taste Drift]]

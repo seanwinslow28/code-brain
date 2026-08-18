@@ -2,10 +2,10 @@
 title: "Failure Amplification in Agentic Chains"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-and-cost-efficiency.md
+  - knowledge/concepts/failure-amplification-in-agentic-chains.md
 tags: [auto-generated, phase-6]
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean's agent fleet involves multiple subprocess wrappers and routers; uncontroll
 
 ## Related Concepts
 
-[[Coupling Fragility vs Adaptive Capacity in Agent Fleets]] [[Silent Failure Propagation in Agent Fleets]]
+[[Coupling Fragility vs Adaptive Capacity in Agent Fleets]] [[Silent Failure Propagation in Agent Fleats]]

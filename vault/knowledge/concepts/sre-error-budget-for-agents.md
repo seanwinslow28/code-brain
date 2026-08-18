@@ -2,10 +2,10 @@
 title: "SRE Error Budget for Agents"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-and-cost-efficiency.md
+  - knowledge/concepts/sre-error-budget-for-agents.md
 tags: [auto-generated, phase-6]
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ This concept reframes agent reliability not as a binary state of uptime but as a
 
 ## Context
 
-Sean's vault relies on automated synthesis; understanding that occasional failures are economically rational prevents over-engineering fragile systems for marginal gains in consistency.
+Sean's vault relies on automated synthesis; understanding that occasional failures are economically rational prevents over-engineering fragile systems for marginal gains in consistency. By treating reliability as a budget rather than an absolute, Sean can allocate engineering effort to feature work until the error rate exceeds the cost of recovery.
 
 ## Evidence
 

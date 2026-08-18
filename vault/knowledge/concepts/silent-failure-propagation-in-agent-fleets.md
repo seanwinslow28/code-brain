@@ -2,31 +2,31 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-and-automation-failure.md
+  - knowledge/concepts/silent-failure-propagation-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Definition
 
-This pattern describes how a minor, undetected failure in one agent (such as a missing credential or empty output) propagates through the fleet by corrupting the context passed to downstream agents. Because each agent assumes its input is valid, it produces garbage that appears structurally correct but semantically void, making the failure invisible until the final user-facing artifact is reviewed. This creates a cascading effect where the root cause is buried deep in the dependency chain, requiring manual reconstruction to identify.
+This pattern describes how a minor, undetected failure in one agent propagates through the fleet by corrupting the context passed to downstream agents, creating a cascade of incorrect or missing data that only becomes apparent when the final output is visibly wrong. The lack of explicit error signaling between agents masks the root cause because each individual agent reports a successful status while assuming its inputs are valid without verification. This structural opacity makes debugging complex and time-consuming, as the failure mode is distributed across the dependency chain rather than localized to a single point of breakdown.
 
 ## Context
 
-Sean’s fleet relies on a chain of agents (synthesizer, daily drive, etc.) where each depends on the previous day's note. A silent failure in the synthesizer means the daily drive agent has nothing to work with, leading to empty or stale outputs that Sean only notices when he checks his morning brief.
+Sean needs to understand these silent failure modes to design better inter-agent validation protocols, particularly given the dependency chain from vault-indexer to vault-synthesizer to vault-critic. When the indexer produces poor embeddings without flagging an issue, the synthesizer may generate low-quality concepts, leading to high rejection rates that appear as noise rather than systemic failure.
 
 ## Evidence
 
-> Complex systems normally operate in degraded states, catastrophes require multiple contributing conditions, and 'root cause' stories are usually hindsight compression.
+> Failures in one agent's output can propagate silently through dependent agents, causing downstream errors that are difficult to trace because each individual agent reports a successful status.
 
-> Every automated recovery path must preserve diagnosis evidence and periodically exercise the operator’s manual recovery path.
+> This occurs when agents assume their inputs are valid without verification, leading to a cascade of incorrect or missing data that only becomes apparent when the final output is visibly wrong.
 
 ## Examples
 
-- The transition from log-only monitoring to black-box SLOs is necessary because logs can show success while the artifact is missing.
-- A portfolio-grade incident reconstruction showing how individually reasonable components combine to miss a note.
+- Indexer reporting 0 errors while producing low-quality chunks that lead to high rejection rates in synthesizer
+- Synthesizer accepting all indexed data without validating its semantic coherence
 
 ## Related Concepts
 
-[[Agent Health and Automation Failure]] [[Control Room Observability]]
+[[Failure Amplification in Agentic Chains]] [[Coupling Fragility vs Adaptive Capacity in Agent Fleets]]

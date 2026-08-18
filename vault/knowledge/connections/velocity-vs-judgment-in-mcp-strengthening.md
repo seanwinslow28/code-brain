@@ -2,11 +2,11 @@
 title: "Velocity vs. Judgment in MCP Strengthening"
 type: connection
 connects:
+  - Velocity vs. Judgment in MCP Strengthening
   - The Taste-Throughput Trade-off in Agentic Synthesis
   - Performative Taste Drift
-  - The Calibration Bottleneck in Scalable Creative Production
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Synthesis
@@ -15,20 +15,19 @@ There is a fundamental tension between the velocity of automated synthesis and t
 
 ## Threads
 
+### [[Velocity vs. Judgment in MCP Strengthening]]
+
+> There is a fundamental tension between the velocity of automated synthesis and the costliness of signals required for career differentiation.
+
 ### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
 > As Sean scales the concept generation, the system prioritizes speed over the nuanced filtering required for high-stakes outputs like job applications.
 
 ### [[Performative Taste Drift]]
 
-> This mechanism describes the endogenous change in an evaluator's standards caused by repeated exposure to generated outputs. The fleet does not merely overwhelm pre-existing standards;
-
-### [[The Calibration Bottleneck in Scalable Creative Production]]
-
-> This mechanism describes a structural misalignment where the exponential growth of automated concept generation outpaces the linear capacity of human taste to curate and verify them.
+> This mechanism describes the endogenous change in an evaluator's standards caused by repeated exposure to generated outputs.
 
 ## Implications
 
-- Sean must implement explicit aesthetic standardization as a supervisory mechanism to prevent homogenization.
-- The cost of maintaining unique authorship increases non-linearly with automation scale.
-- Job hunt materials require higher friction loops than internal knowledge management.
+- Sean must implement explicit aesthetic standardization as a supervisory mechanism to prevent homogenization of his knowledge vault.
+- The cost of maintaining unique authorship increases non-linearly with automation scale, requiring deliberate friction in the workflow.

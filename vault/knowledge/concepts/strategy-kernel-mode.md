@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/strategy-kernel-mode.md
 tags: [auto-generated, phase-6]
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Definition
 
-A decision-making framework anchored on Richard Rumelt’s kernel of good strategy, requiring every strategic choice to follow the pattern: diagnosis → guiding policy → coherent actions. It contradicts the assumption that integration itself is strategy by forcing a clear diagnosis of the constraint (e.g., insufficient externally legible IC evidence) and a guiding policy to address it (e.g., prioritize demonstrations of agent reliability). This mode unlocks role-selection criteria and defensible explanations for why specific technical work deserves the next week of effort.
+A decision-making framework anchored on Richard Rumelt’s kernel of good strategy, requiring every strategic choice to follow the pattern: diagnosis → guiding policy → coherent actions. It contradicts the assumption that integration itself is strategy by forcing a clear diagnosis of the constraint (e.g., insufficient externally legible IC evidence) and a guiding policy to address it. This mode unlocks role-selection criteria and defensible explanations for why specific technical work deserves the next week of effort.
 
 ## Context
 

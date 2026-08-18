@@ -5,8 +5,8 @@ connects:
   - Slop as a Trust Deficit
   - Velocity vs. Judgment in MCP Strengthening
   - Implementation Architecture
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Synthesis

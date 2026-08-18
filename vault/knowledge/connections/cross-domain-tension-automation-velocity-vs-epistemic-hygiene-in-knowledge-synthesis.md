@@ -5,8 +5,8 @@ connects:
   - The Calibration Bottleneck in Scalable Creative Production
   - The Taste-Throughput Trade-off in Agentic Synthesis
   - Slop as a Trust Deficit
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Synthesis

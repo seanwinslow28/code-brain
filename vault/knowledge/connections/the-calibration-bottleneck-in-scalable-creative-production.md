@@ -2,33 +2,32 @@
 title: "The Calibration Bottleneck in Scalable Creative Production"
 type: connection
 connects:
-  - The Taste-Throughput Trade-off in Agentic Synthesis
-  - Double-loop learning
-  - Slop as a Trust Deficit
-created: 2026-08-16
-updated: 2026-08-16
+  - The Taste-Fidelity Decoupling in Creative Production
+  - Supervision Fatigue as the Hard Cap on Fleet Scaling
+  - The Verification-Governance Inversion
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the scalability of agent fleets and the human capacity to calibrate their output quality. As Sean increases the volume of automated synthesis (concepts written), his ability to manually verify the 'taste' and accuracy of each output becomes the bottleneck, leading to either unchecked 'slop' or paralysis. The consequence is that without a mechanism for automated truth maintenance or double-loop learning, the vault's semantic value per unit of effort declines as scale increases.
+There is a fundamental tension between the desire for high-throughput agent fleets and the low-trust nature of style transfer, where the cost of verification scales faster than the volume of output. As Sean attempts to scale his creative studio operations, the 'rejected_count' metric reveals that raw generation capacity is decoupled from aesthetic utility; more concepts do not equal better content if the voice calibration fails. This forces a strategic decision: either accept lower fidelity at higher volume or impose strict sampling limits that cap scalability to preserve the 'Sean Mode' integrity.
 
 ## Threads
 
-### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
+### [[The Taste-Fidelity Decoupling in Creative Production]]
 
-> Persistent global context can cause anchoring, suppress novelty, and bury relevant evidence.
+> The prompt explicitly forbids repeating the 'missed' drafts, indicating that previous iterations failed to capture the necessary aesthetic nuance.
 
-### [[Double-loop learning]]
+### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
 
-> Add a periodic rule: 'When outcomes repeatedly contradict an assumption, revise the rule that produced it—not merely the concept article.'
+> The tension arises when the cost of verifying AI-generated content exceeds the value of the content itself, forcing a shift from production-centric to supervision-centric workflows.
 
-### [[Slop as a Trust Deficit]]
+### [[The Verification-Governance Inversion]]
 
-> The architecture is currently a circulation loop, not necessarily a learning loop.
+> Sean Mode + the House Style grit register + the signature-moves table
 
 ## Implications
 
-- Sean must implement automated 'truth maintenance' systems to prevent semantic decay at scale.
-- He should periodically audit the 'taste' of his outputs against a small, high-fidelity baseline to detect drift.
-- Scaling agent fleets without scaling verification capacity leads to diminishing returns on creative authority.
+- Sean must cap the number of concurrent synthesizer runs to prevent taste drift, prioritizing quality over quantity in his creative studio pipeline.
+- The fleet architecture needs a 'taste guardrail' layer that rejects outputs before they enter the vault if they fail negative constraint checks.

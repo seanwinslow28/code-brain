@@ -5,8 +5,8 @@ connects:
   - Velocity vs. Judgment in MCP Strengthening
   - MCP Server Hardening
   - The Illusion of Competence in Automated Systems
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Synthesis
@@ -29,5 +29,5 @@ There is a fundamental tension between the desire for high-throughput automation
 
 ## Implications
 
-- Sean should prioritize model upgrades over infrastructure scaling when security precision becomes a bottleneck.
-- Portfolio demos must demonstrate capability-based access control rather than just input filtering to prove robustness.
+- Sean should prioritize model upgrades over infrastructure scaling when security precision becomes a bottleneck, as larger models provide better judgment at lower rejection rates.
+- Portfolio demos must demonstrate capability-based access control rather than just input filtering to prove robustness against semantic attacks.

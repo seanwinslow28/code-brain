@@ -5,8 +5,8 @@ connects:
   - The Taste-Throughput Trade-off in Agentic Synthesis
   - The Illusion of Health in Autonomous Systems
   - Velocity vs. Judgment in MCP Strengthening
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Synthesis

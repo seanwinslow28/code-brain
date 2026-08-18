@@ -2,31 +2,31 @@
 title: "The Calibration Bottleneck in Scalable Creative Production"
 type: concept
 sources:
-  - knowledge/connections/the-calibration-bottleneck-in-scalable-creative-production.md
+  - knowledge/connections/cross-domain-tension-automation-velocity-vs-epistemic-hygiene-in-knowledge-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Definition
 
-This mechanism describes the structural limit where human verification capacity fails to scale linearly with automated synthesis volume, creating a systemic trust deficit. As agent fleets increase concept generation throughput, the ratio of verified semantic value to total output declines because manual taste calibration becomes the hard constraint. This forces a choice between accepting unverified 'slop' or halting production to restore quality control, effectively capping the utility of automation at the level of human attention.
+This concept defines the structural limit where the exponential growth of automated concept generation outpaces the linear capacity of human taste to curate them. It creates a calibration gap where Sean cannot effectively distinguish high-signal insights from low-signal noise, leading to a systemic trust deficit. The mechanism is driven by the fact that creative authority depends on the ability to apply consistent standards, which becomes impossible when input volume overwhelms cognitive bandwidth.
 
 ## Context
 
-Sean is observing his own fleet metrics where concept counts are rising while rejection rates and duration fluctuate, indicating that he is hitting the edge of what he can meaningfully curate. This bottleneck explains why increasing cluster sampling does not automatically yield higher-quality vault content without a corresponding increase in verification bandwidth.
+Sean faces a critical choice between paralysis (stopping generation) and slop (accepting low-quality output). This tension is central to his job-hunt-2026 strategy, as maintaining high-fidelity outputs is essential for demonstrating creative authority to potential employers.
 
 ## Evidence
 
-> There is a fundamental tension between the scalability of agent fleets and the human capacity to calibrate their output quality.
+> The core tension lies in the misalignment between the exponential growth of automated concept generation and the linear capacity of human taste to curate them.
 
-> Scaling agent fleets without scaling verification capacity leads to diminishing returns on creative authority.
+> This creates a calibration gap where Sean cannot effectively distinguish high-signal insights from low-signal noise, leading to a systemic trust deficit.
 
 ## Examples
 
-- The fleet writes 125 concepts in one run but Sean can only effectively verify a fraction, leading to a reliance on automated rejection metrics rather than taste-based curation.
-- Sean must periodically audit the 'taste' of his outputs against a small, high-fidelity baseline to detect drift.
+- The 'Velocity vs. Judgment in MCP Strengthening' connection shows how operational metrics can mask semantic stagnation.
+- The 'Efficiency-Quality Inversion in Automated Synthesis' concept illustrates the phase transition where automation yields diminishing returns.
 
 ## Related Concepts
 
-[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Slop as a Trust Deficit]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Velocity vs. Judgment in MCP Strengthening]]

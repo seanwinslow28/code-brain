@@ -2,31 +2,31 @@
 title: "The Taste-Fidelity Decoupling in Creative Production"
 type: concept
 sources:
-  - knowledge/concepts/the-taste-fidelity-decoupling-in-creative-production.md
+  - knowledge/concepts/voice-calibrations-in-creative-and-professional-outputs.md
 tags: [auto-generated, phase-6]
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Definition
 
-This pattern defines the failure mode where an agent's ability to generate content becomes decoupled from its ability to retain and apply the nuanced taste constraints of the user. Teaching an agent your taste is insufficient if the underlying memory architecture cannot preserve those signals against the noise of increasing context volume. The mechanism relies on a fragile dependency: the agent must actively prune irrelevant taste signals to maintain fidelity, but standard scaling practices often prioritize accumulation over curation. This decoupling results in output that is technically correct but creatively inert.
+This mechanism describes the inverse relationship between the volume of generated artifacts and the fidelity to a specific human voice, where increased throughput necessitates a proportional increase in negative constraints to prevent generic drift. The cost of maintaining aesthetic integrity rises non-linearly as sampling expands, because each new iteration introduces more variance that must be actively suppressed rather than naturally filtered. This creates a structural bottleneck where the user's capacity to articulate precise stylistic boundaries becomes the limiting factor for scalable creative production, forcing a shift from volume-based metrics to supervision-intensive workflows.
 
 ## Context
 
-Sean’s experience with the vault synthesizer highlights that simply 'teaching' the model his taste does not guarantee consistent application. The agent's performance degrades as it samples more clusters, suggesting that the taste signals are being diluted or ignored by the expanding context window rather than reinforced.
+Sean's fleet runs demonstrate that while model upgrades (qwen3-14b to qwen3.6-35b) increase raw concept generation, they do not automatically resolve the fidelity gap; instead, they often require tighter calibration loops to maintain the 'House Style' grit register without succumbing to homogenization.
 
 ## Evidence
 
-> teaching an agent your taste means nothing if it cannot remember it.
+> The prompt explicitly forbids repeating the 'missed' drafts, indicating that previous iterations failed to capture the necessary aesthetic nuance.
 
-> The value of the 'Creative Partner' is contingent on the agent's ability to prune irrelevant taste signals, not just accumulate them.
+> Sean Mode + the House Style grit register + the signature-moves table
 
 ## Examples
 
-- The synthesis explicitly states that teaching taste is meaningless without memory retention, highlighting a gap between instruction and execution in agentic workflows.
-- Sean must implement a strict reconciliation protocol to prevent his creative partner's output from degrading as the memory core grows, indicating that passive accumulation fails.
+- Run 2026-07-07 reduced concepts_written to 86 but also reduced rejected_count to 33, suggesting that tighter calibration or smaller sampling improved fidelity.
+- The tension arises when the cost of verifying AI-generated content exceeds the value of the content itself, forcing a shift from production-centric to supervision-centric workflows.
 
 ## Related Concepts
 
-[[Throughput vs. Taste Memory Tension]] [[Context Compounding]]
+[[The Verification-Governance Inversion]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]

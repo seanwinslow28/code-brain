@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/velocity-vs-judgment-in-mcp-strengthening.md
 tags: [auto-generated, phase-6]
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Definition
 
-This mechanism describes the structural tension where the exponential increase in automated synthesis velocity outpaces the linear capacity of human taste to curate and verify high-stakes outputs. As Sean scales concept generation, the system prioritizes speed over the nuanced filtering required for career differentiation, leading to de-differentiated content that fails to stand out in competitive markets. This creates a paradox where increasing efficiency actually reduces the strategic value of the output, forcing the introduction of artificial friction to maintain quality.
+This mechanism describes the structural tension where the exponential increase in automated synthesis velocity outpaces the linear capacity of human taste to curate and verify high-stakes outputs. As Sean scales the concept generation, the system prioritizes speed over the nuanced filtering required for high-stakes outputs like job applications. This creates a paradox where increasing efficiency actually reduces the strategic value of the output, forcing Sean to introduce artificial friction to maintain quality.
 
 ## Context
 
-Sean is navigating a critical inflection point in his job hunt and creative studio operations where raw throughput is no longer the bottleneck; rather, the ability to distinguish high-signal work from 'slop' is. The fleet's increasing capacity to generate concepts (e.g., 125c/34x) risks overwhelming his taste calibration, making it harder to produce the unique, high-fidelity artifacts required for senior-level differentiation.
+Sean is currently scaling his fleet using qwen3.6-35b-a3b-32k, which has significantly increased concepts_written and clusters_sampled compared to earlier runs. However, this velocity creates a risk of 'de-differentiated content' that fails to stand out in competitive job markets, directly threatening his career differentiation strategy.
 
 ## Evidence
 
@@ -24,9 +24,9 @@ Sean is navigating a critical inflection point in his job hunt and creative stud
 
 ## Examples
 
-- The fleet's ability to generate 125 concepts in a single run (run-2026-08-13) versus the earlier 3 concepts (run-2026-05-27) illustrates the scale shift that necessitates this tension.
-- The need for 'explicit aesthetic standardization as a supervisory mechanism' to prevent homogenization in job hunt materials.
+- Sean must implement explicit aesthetic standardization as a supervisory mechanism to prevent homogenization.
+- The cost of maintaining unique authorship increases non-linearly with automation scale.
 
 ## Related Concepts
 
-[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Performative Taste Drift]] [[The Calibration Bottleneck in Scalable Creative Production]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Performative Taste Drift]]

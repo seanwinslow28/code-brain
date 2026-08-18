@@ -2,31 +2,31 @@
 title: "Supervision Fatigue as the Hard Cap on Fleet Scaling"
 type: concept
 sources:
-  - knowledge/connections/taste-calibration-as-the-new-efficiency-metric.md
+  - knowledge/connections/cross-domain-tension-automation-velocity-vs-creative-friction.md
 tags: [auto-generated, phase-6]
-created: 2026-08-17
-updated: 2026-08-17
+created: 2026-08-18
+updated: 2026-08-18
 ---
 
 ## Definition
 
-This pattern defines the biological limit of human supervision where the rate of concept generation exceeds the user's capacity to meaningfully integrate them, leading to a systemic trust deficit. The mechanism involves a decoupling between the theoretical scalability of agent fleets and the practical constraints of Sean's cognitive load, causing him to notice staleness or generic output before the system can flag failures. This creates a hard cap on scaling because the cost of manual verification eventually outweighs the utility of the automated output.
+This invariant defines the biological limit of human oversight where the cognitive load of reviewing and calibrating agent output grows non-linearly with the volume of generated artifacts. When the rate of automated synthesis exceeds the user's capacity for meaningful integration, a trust deficit emerges because the user perceives the high-volume output as low-value despite its statistical correctness. This fatigue acts as a hard cap on scaling because it forces a decoupling of automation from creativity, requiring manual taste tournaments to realign the system.
 
 ## Context
 
-Sean's job hunt and creative studio workflows rely on high-trust automation; when supervision fatigue sets in, he must revert to manual processes, breaking the flow of his daily drive agent and deep research queue. Understanding this cap is essential for determining the optimal batch size for future synthesizer runs.
+Sean's run logs show a clear correlation between increased duration and higher rejection counts, suggesting that his ability to supervise effectively diminishes as the fleet generates more clusters, ultimately limiting the effective scale of the automated system.
 
 ## Evidence
 
 > This connection reveals a fundamental tension between the theoretical scalability of agent fleets and the biological limits of human supervision.
 
-> As Sean increases concept volume, the cost of manual verification outweighs the utility of the automated output.
+> The consequence is a forced decoupling of automation from creativity, requiring Sean to implement taste tournaments to realign the system's objective function with his strategic goals.
 
 ## Examples
 
-- The synthesis highlights that increased volume leads to decreased creative authority, forcing Sean to spend more time correcting generic outputs.
-- Sean may be unable to specify why an opening works, yet can reliably choose A over B, indicating tacit knowledge erosion as volume increases.
+- Run 2026-07-05: Duration of 2728.6 seconds with only 39 connections written, indicating diminishing returns on supervision time as clusters sampled increased.
+- Run 2026-08-17: Duration of 2408.1 seconds with 25 connections, showing that even with optimized models, the supervision bottleneck remains a limiting factor for connection density.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[Operational Uptime vs. Cognitive Utility Tension]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Tacit Knowledge Erosion vs. Automation Scale]]
