@@ -34,7 +34,6 @@ user's own words, dug down to the decision level.
 ```
 # TASTE BLOCK — <name>
 version: <n> · <date>
-mode: words-only          (this line only when no image was ever generated; omit otherwise)
 
 ## INTENT
 1. CORE THESIS       what the thing should feel like before it announces itself
@@ -53,6 +52,15 @@ mode: words-only          (this line only when no image was ever generated; omit
 ## NEVER DO
    the ban list; every item carries its why
 ```
+
+**A note on the version line.** It carries the version number and the date, and nothing else by
+default. When a run produced the block under a limitation worth knowing about later, the limitation
+goes in a parenthetical on that same line, written as plain prose a person would say:
+`version: 1 · 2026-08-17 (interview ran without generated references; THE HAND and THE FINISH
+untested)`. Never as a config token. A line reading `mode: words-only` looks like a directive to the
+model reading this block, and "words-only" is a phrase an image model can act on by returning
+typography or dropping the subject. Prose describing what happened is inert. A token naming a mode
+is not.
 
 **`<name>`** names the style, not the person. One block per style, because taste is not one
 setting. **`version`** starts at 1 and bumps on refinement, so re-running sharpens a block instead
