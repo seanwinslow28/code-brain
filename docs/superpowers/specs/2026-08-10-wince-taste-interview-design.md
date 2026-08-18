@@ -1,7 +1,7 @@
 ---
 title: "Wince — the taste interview skill (design spec)"
 type: spec
-status: awaiting-sean-review
+status: approved
 created: 2026-08-10
 domain: [substack-studio, creative-studio]
 tags: [pencil-and-prompt, wince, taste-block, divergence-mechanism, skill-design]
@@ -10,7 +10,7 @@ ai-context: "Design for the skill Rung 0 promises. Brainstormed with Sean 2026-0
 
 # Wince
 
-**The one job.** It shows you things, reads which ones you flinch at, and writes the block that makes the machine draw like you.
+**The one job.** It shows you things, reads which ones you wince at, and writes the block that makes the machine draw like you.
 
 **The pain it is organized by.** You can't describe what you want, so you argue with the model one adjective at a time and land on the average. Documented, with receipts: [the Rung 0 capture](../../../vault/20_projects/substack-studio/rung-0-taste-experiment/capture/prompts.md), six generations, five rounds of plain language before the thing Sean actually wanted showed up.
 
@@ -82,7 +82,11 @@ Then **Emit**.
 | Can it say "leave the construction lines visible"? | yes | no |
 | Can it say why any of it matters? | no | yes |
 
-Neither is sufficient. Their NEVER DO lists overlap almost completely, which is the tell that negation is the stable spine under both.
+Neither is sufficient. And the negation layer is the spine under both, though not for the reason the first draft of this spec claimed.
+
+> **Corrected 2026-08-10, during Task 2 quality review.** This spec originally asserted the two NEVER DO lists "overlap almost completely." That is false and I had not checked it. Only *symmetry* appears on both. The intent block bans meaning failures (empty symmetry, obvious metaphors, over-explained emotion, pasted-on whimsy); the execution block bans rendering failures (gradients, airbrush, glossy 3D, Pixar polish). Five items per side have no counterpart.
+>
+> The true claim is stronger. The two lists share almost no wording, and every item on both is the same rule applied at a different altitude: nothing survives that has no decision behind it. The intent block even states that rule outright in its closing line, "If an element can be removed without changing the idea, it does not belong." The positive halves had to be rewritten in entirely different vocabulary to move between altitudes. The negation only changed register. That is why it is the spine.
 
 **So the block has two parts and a shared spine:**
 
@@ -93,18 +97,21 @@ version: <n> · <date>
 ## INTENT            (medium-agnostic; survives into prose, music, anything)
 1. CORE THESIS       what the thing should feel like before it announces itself
 2. EMOTIONAL MODE    what it favors, and what it favors it OVER
-3. STRUCTURE         the focal discipline; what gets room, what gets cut
-4. NARRATIVE STANCE  how the meaning reaches the audience
+3. REGISTER          how stylized, relative to reality
+4. STRUCTURE         the focal discipline; what gets room, what gets cut
+5. NARRATIVE STANCE  how the meaning reaches the audience
 
 ## EXECUTION         (medium-specific; visual is the only v1 template)
-5. MEDIUM / SUBSTRATE   what it's made of and made on
-6. THE HAND             how the marks get made
-7. COLOR / LIGHT        the palette discipline, stated as a constraint
-8. THE FINISH           how finished it should look, and how finished it must NOT look
-9. THE ONE MOVE         the single decision that carries the meaning
+6. MEDIUM / SUBSTRATE   what it's made of and made on
+7. THE HAND             how the marks get made
+8. COLOR / LIGHT        the palette discipline, stated as a constraint
+9. THE FINISH           how finished it should look, and how finished it must NOT look
+10. THE ONE MOVE        the single decision that carries the meaning
 
 ## NEVER DO          (the spine; each item carries its why)
 ```
+
+**REGISTER added 2026-08-10, during Task 2 verification.** The first draft of this schema mapped six execution-block fields into five slots and silently dropped REGISTER, which is a real field in Sean's real block ("wildly exaggerated, absurd cartoon caricature. Never realistic, never photographic"). It sits in INTENT rather than EXECUTION because "how stylized, relative to reality" survives into prose and music unchanged, which is the test this section uses for the split. It is a separate axis from EMOTIONAL MODE: Sean's own taste is quiet and patient AND wildly exaggerated at once.
 
 **This resolves the extend-later problem for free.** INTENT is already medium-agnostic, as Sean's own intent block proves. Adding prose or music in v2 means writing a new EXECUTION template and nothing else. Decision 1 gets easier, not harder.
 
