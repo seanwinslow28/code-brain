@@ -16,8 +16,10 @@ The body of the block is plain readable English that a person could have typed t
 filled block only works when this skill is in the room, the block failed and the schema is being
 used wrong.
 
-**About the examples below.** Every *Strong* answer is one real person's real block, in one narrow
-style. They exist to calibrate the boundary between an answer that decides something and one that
+**About the examples below.** Every *Strong:* answer is lifted from one real person's real block,
+in one narrow style. The *Also strong, opposite direction:* answers are invented, deliberately, to
+sketch a taste nothing like the first one so the fields visibly fit somebody else. Both kinds exist
+to calibrate the boundary between an answer that decides something and one that
 does not. Never quote them to a user, never offer them as options, never fill a field with them
 when the user is vague. If a user's answer is thin, ask again. The correct output of this schema
 looks nothing like these examples unless the user's taste happens to be identical.
