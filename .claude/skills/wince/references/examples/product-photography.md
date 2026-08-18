@@ -3,7 +3,7 @@
 A real block produced by running the four-stage interview end to end against a persona who is not the
 repo owner: a commercial product photographer who shoots skincare and cosmetics packaging in a
 studio, on strobes, tethered, focus-stacked. The subject held constant through the run was a 50ml
-frosted glass moisturizer jar with a brushed aluminum lid. Kept here as evidence that the schema
+frosted glass moisturizer jar with a brushed aluminum lid. The persona was played by a model rather than interviewed from a real person, so read this as a shape test and not as proof. Kept here as a demonstration that the schema
 survives the taste furthest from the calibration samples — someone for whom every trace of process is
 a defect to be removed rather than a thing to preserve.
 

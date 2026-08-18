@@ -253,6 +253,13 @@ at two altitudes gets it averaged.
 The palette discipline, stated as a constraint. The word constraint is load-bearing. Palettes
 stated as vibes get widened; palettes stated as counts and bans get obeyed.
 
+Count the thing this person actually chooses. A painter chooses pigments, so the count is colors. A
+photographer chooses lights, so the count is sources and the ban is what never gets lit. A 3D artist
+counts the rig. The field is not about color the way a painter means it, it is about the small
+number of decisions that govern everything else in the frame, and asking a photographer how many
+colors are allowed gets you "however many are in the shot, I don't pick colors, I point at stuff."
+That answer is a misfire, not a thin field. Re-aim it and the count arrives.
+
 *Strong:* "Monochrome graphite and ink throughout, with exactly ONE restrained warm amber accent.
 Never a second accent color."
 *Weak:* "Warm, muted, earthy palette." The model reads this as permission for five warm muted

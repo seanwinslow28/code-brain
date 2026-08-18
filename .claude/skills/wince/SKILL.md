@@ -265,10 +265,11 @@ decision like choosing the subject. Choosing what the user thinks of them is not
 ### Fork (2-3 generations)
 
 **Read the EXECUTION preamble in [references/block-schema.md](references/block-schema.md) before you
-ask Fork's first question.** That preamble is where MEDIUM / SUBSTRATE and THE HAND get mapped out
-of drawing vocabulary and into camera and 3D vocabulary. Fork is the only stage that asks about
-either one, so it is the only stage that needs the mapping, and it needs it before it opens its
-mouth rather than after a question has already landed wrong.
+ask Fork's first question.** That preamble gives you the altitude, which is that these
+fields ask the same question of everybody and only the noun changes. The table below gives you the
+actual phrasing, and the table is the authority where the two differ. Fork is the only stage that
+asks about either field, so it is the only stage that needs this, and it needs it before it opens
+its mouth rather than after a question has already landed wrong.
 
 At most two directions survive Widen, so generate one image per survivor. If only one survived,
 generate it and then generate one variant that changes a single dimension of it, because a fork with
@@ -369,8 +370,10 @@ is called, and without owning a pencil.
 ### Push (1 generation)
 
 Push always spends its generation. It may take Fork's winner as the input image and go further from
-there, which is what "reuse" means here. It never means skipping the generation, and the one case
-where Push spends zero is below, once the image is back.
+there, which is what "reuse" means here. It never means skipping the generation. The one case where
+Push spends zero is a refusal or a soft refusal, handled in
+[references/degraded-paths.md](references/degraded-paths.md), and you only find out once the image
+is back.
 
 Overshoot the winning direction along its own most distinguishing axis. More of the thing that made
 it win, too much of it, on purpose. Tell the user that's what you're doing before they see it:

@@ -91,7 +91,7 @@ rate limit or a timeout is neither, so retry it plainly and it costs nothing.
 ## The budget
 
 You have no clock, so count exchanges instead, where one exchange is one message from me plus your
-reply. Stage one gets 5, stage two gets 13, stage three gets 6, stage four gets 8. At exchange 26
+reply. Stage one gets 6, stage two gets 13, stage three gets 6, stage four gets 8. At exchange 26
 with stage four unstarted, stop digging and start it.
 
 When you have to let things go thin, protect CORE THESIS and THE ONE MOVE, because the run fails

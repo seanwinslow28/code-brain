@@ -2,7 +2,7 @@
 
 A real block produced by running the four-stage interview end to end against a persona who is not
 the repo owner: someone who makes lo-fi music videos in After Effects, has never drawn anything by
-hand, and does not think of themselves as an artist. Kept here as evidence that the schema fits a
+hand, and does not think of themselves as an artist. The persona was played by a model rather than interviewed from a real person, so read this as a shape test and not as proof. Kept here as a demonstration that the schema fits a
 taste built out of camera artifacts rather than marks on paper, and that a run can end somewhere the
 calibration examples never point.
 

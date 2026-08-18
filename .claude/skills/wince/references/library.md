@@ -86,7 +86,7 @@ is there.
 
 Two things this operation owns:
 
-1. **Write the file.** After Emit's four numbered steps, write `taste-blocks/<slug>.md` with the
+1. **Write the file.** After Emit's acceptance tests and thin-fields line, write `taste-blocks/<slug>.md` with the
    block as the first and only fence, and the thin-fields line under it if there is one. Create
    `taste-blocks/` if it doesn't exist. Tell the user the path.
 2. **Never overwrite.** If `taste-blocks/<slug>.md` already exists, stop before writing and handle
@@ -221,6 +221,10 @@ Either way the sentence to say is the same. They now have two blocks, and neithe
 Read the file. Say back three things and no more: the name and current version, CORE THESIS in the
 user's own words, and the thin-fields line if there is one. Don't recite all ten fields at them;
 they wrote it, and a wall of their own text is a wall they'll skim.
+
+Read the loaded block's MEDIUM / SUBSTRATE to yourself while you're in there. It tells you which
+column of Fork's question table this person needs, which a first run gets free from Widen and a
+refine has no other source for. Don't ask them what medium they work in. It's written down.
 
 **Ask for the subject in the same breath, as a change question.** Fork's generation renders the
 block against a subject and the block has no subject in it, by construction: it's style-only, and
