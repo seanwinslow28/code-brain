@@ -145,13 +145,18 @@ budget in **exchanges**, where one exchange is one user message plus your reply.
 
 | Stage | Exchanges |
 |---|---|
-| Widen | 5 |
+| Widen | 6 |
 | Fork | 13 |
 | Push | 6 |
 | Negate | 8 |
 
-**At exchange 26 with Negate unstarted, stop digging and start Negate.** Ten minutes is the target
-and this is how you hit it.
+**At exchange 26 with Negate unstarted, stop digging and start Negate.** That number is derived,
+not picked: the three stages ahead of Negate sum to 25, so 26 is exactly where Negate should be
+opening anyway. Ten minutes is the target and this is how you hit it.
+
+Widen gets six rather than five because the agreeable path is the common path, and it structurally
+costs one failed ask plus one reoffer before the forced ranking lands. Budgeting for the rare
+cooperative user and calling the normal one an overrun is how a budget starts lying to you.
 
 When you have to degrade, degrade in this order rather than letting everything go thin at once:
 
@@ -200,6 +205,10 @@ Then ask one line: what are you going to be making pictures of? You need it for
 Fork. If they don't have one, pick a subject, say you're picking it, and keep it fixed. The subject
 is a control variable, not a taste answer, so choosing it for them costs nothing.
 
+Note what they make them **in**, too. You get this free from the five directions and their
+reactions, and Fork can't phrase half its questions without it. Drawing and painting, camera work,
+or synthetic. It's not a field and you don't dig it.
+
 Then say roughly this:
 
 > I'm going to name five directions. They're deliberately far apart and most of them are wrong.
@@ -242,6 +251,12 @@ picking them and why, and mark **3. REGISTER** thin. Choosing which two get draw
 decision like choosing the subject. Choosing what the user thinks of them is not.
 
 ### Fork (2-3 generations)
+
+**Read the EXECUTION preamble in [references/block-schema.md](references/block-schema.md) before you
+ask Fork's first question.** That preamble is where MEDIUM / SUBSTRATE and THE HAND get mapped out
+of drawing vocabulary and into camera and 3D vocabulary. Fork is the only stage that asks about
+either one, so it is the only stage that needs the mapping, and it needs it before it opens its
+mouth rather than after a question has already landed wrong.
 
 At most two directions survive Widen, so generate one image per survivor. If only one survived,
 generate it and then generate one variant that changes a single dimension of it, because a fork with
@@ -294,16 +309,36 @@ COLOR / LIGHT absorb the shortfall and go thin.
   same sentence about the winner, you have one answer wearing two hats, and the second one is thin.
 
 **Then work the picture in front of you** for the other three. Point at the image, not at
-categories. "What is that surface, if you had to go buy it" gets **6. MEDIUM / SUBSTRATE**. "What
-made those marks" gets **7. THE HAND**. "How many colors are allowed in here, and which one is never
-allowed" gets **8. COLOR / LIGHT**, which needs a number, an "only," or a "never" to be worth
-recording.
+categories.
+
+**Ask in the medium the person actually works in.** The question underneath is identical in all
+three columns below; only the noun changes. Ask a video editor what made the marks and you get "what
+marks, it's a camera," and you've spent an exchange teaching them your vocabulary instead of
+learning theirs.
+
+| Field | Drawing and painting | Camera work | Synthetic (3D, motion, vector) |
+|---|---|---|---|
+| **6. MEDIUM / SUBSTRATE** | "What is that surface, if you had to go buy it?" | "What was it shot on, and what has it been through since?" | "What's rendering this, and what gives it away as rendered?" |
+| **7. THE HAND** | "What made those marks?" | "What did the camera do that a better camera wouldn't?" | "What did you have to do to those surfaces to stop them looking like the default?" |
+| **8. COLOR / LIGHT** | "How many colors are allowed in here, and which one is never allowed?" | "How many sources are lighting this, and what is never allowed to be lit?" | "How many colors in the palette, and which one is never allowed?" For 3D, count the rig instead. |
+
+COLOR / LIGHT is the one that misfires quietly rather than loudly. Asked about colors, a camera
+person answers "however many are in the shot, I don't pick colors, I point at stuff," which is a
+sane answer to the wrong question. The rule underneath is **count the thing this person actually
+chooses**. A painter chooses pigments. A photographer chooses lights, and the shadow rule tends to
+arrive with the count in the same breath. Whichever you count, the field still needs a number, an
+"only," or a "never" to be worth recording.
+
+If none of the three columns fit, and plenty of media don't, don't jam them into one. Build the
+question the way the preamble does: name the thing they physically control, then ask what they do
+with it and what they refuse to do with it.
 
 **THE HAND goes thin more than any other field**, because its test demands a tool or a specific
 behavior and most people's first three answers are a mood. "Loose" and "sketchy" are the schema's
-weak example word for word. The fallback needs no vocabulary from them: point at one region of the
-generated image, small and specific, and ask what would have to be true of the tool to leave *that*
-mark there. They can answer that without knowing what any of it is called.
+weak example word for word. The fallback needs no vocabulary from them, and it has to stay clear of
+medium words too: point at one region of the generated image, small and specific, and ask what had
+to happen for *that bit* to come out like that. They can answer that without knowing what any of it
+is called, and without owning a pencil.
 
 ### Push (1 generation)
 
