@@ -7,7 +7,7 @@ status: drafting
 publish_date: TBD
 mechanism: "the taste interview (a skill that interviews the reader and emits their taste block)"
 verdict: pending
-hero_image: "images/capture/05-block.png (candidate) or _assets/launch-2026-08/hero-origin-confession-v2.png — undecided"
+hero_image: "images/capture/05-block.png (image 6 — decided 2026-08-18; confession-era hero retired with its framing)"
 itch: "Sean sat down certain he knew the picture he wanted, and five rounds of plain prompting proved he didn't know it in words. Nobody can hand a machine taste they haven't met yet."
 solution_artifact: "The captured run, 2026-08-09: six GPT Image 2 generations, five plain-language rounds then the taste block, Sean's own reaction logged per image. Plus the end animation (the gargoyle returning on the TV)."
 transfer: "A skill that interviews the reader about their likes, dislikes, and examples and emits a reusable taste block, so they never have to argue a picture into existence one adjective at a time."
@@ -15,8 +15,9 @@ voice_chain_run: y
 author_note: "Chain run 2026-08-09 (value-engine PASS -> storytelling beat map, 7 beats + handoff block -> voice-modes Sean Mode 100% -> critique 'revise', 5 findings, one grounded revise pass -> humanity-pass, 0 dashes). SEAN REWROTE AND PIVOTED 2026-08-10: the post is no longer a walkthrough of his prompt journey, it is the exploration used as a demo for a SKILL that interviews the reader and builds their taste block. His reason, verbatim: 'why would anyone care about how I prompted to get to something that I personally wanted? People want to learn from my mistakes and have something that can help themselves not make the same ones.' Body below is Sean's own prose, mechanically proofread only (smart quotes, escape artifacts, one unclosed quote). Prose untouched."
 open_items:
   - "RESOLVED 2026-08-10: the skill exists. `wince` shipped and merged to main (89f314b), 2,296 lines at `.claude/skills/wince/`, registered in export-group 03-creative-projects, both tiers (installable skill + 296-line copy-paste kit). Both dogfood gates passed. The post's Transfer now points at something real."
-  - "BLOCKER: timeline contradiction. The grill-me pivot is placed BEFORE image 6, but image 6 came from the June hand-written taste block pasted cold into a fresh thread. Line 20 ('since then') says the opposite. Resolve by running the interview for real and regenerating image 6, or by re-sequencing so the interview lands after image 6."
-  - "Continuity orphan at 'I didn't know I wanted the math notebook' — leftover from the chain draft; Sean's own line now says 'the back of my textbooks'. Same sentence says 'five rounds', which no longer matches the arc. Sean's call, prose left untouched."
+  - "RESOLVED 2026-08-18 (Sean's call): timeline re-sequenced. Image 6 is now credited to the June hand-written block pasted cold (true per capture/prompts.md Thread B); the grill-me/interview move lands AFTER image 6 as the 'I don't want to hand-write these every time' step. NEW BRIDGE PROSE awaiting Sean's rewrite pass: the June-block pivot sentences before image 6, and the two hand-writing bridge sentences in the interview paragraph. Verify 'June' is the right month. Grill-me sentences moved verbatim; 'since then' dropped."
+  - "RESOLVED 2026-08-18 (Sean's call): continuity orphan aligned — 'math notebook' now reads 'the back of my textbooks' to match the image-4 line. 'Five rounds' left as-is: it checks out against the capture (5 plain-language rounds, images 1-5, then the block)."
+  - "DECIDED 2026-08-18 (Sean's call): images 1-6 run bare; the prose carries the narration. Prompt set stays available for the mechanism/kit section, not as captions."
   - "Images 1-6 live at images/capture/. Full prompt set + Sean's per-image reactions: capture/prompts.md."
   - "End animation at images/capture/06-end-animation-video.mp4 (character screams at the gargoyle on the TV). Functions as the closer."
 ---
@@ -49,7 +50,7 @@ Huh… pretty interesting. Nobody's tracing THAT gargoyle. I didn't realize I as
 
 [IMAGE 5]
 
-JESUS. Ok. Got the color. Got a horror movie with it. This is giving off "Scary Stories To Tell In The Dark". Not really the vibe I'm going for. Let's pivot. I'd rather not do this all day. Let me think. I recall Matt Pocock having a skill called /grill-me that interviews you relentlessly until it understands the project you're trying to build. Let's give that a whirl, but make it ART.
+JESUS. Ok. Got the color. Got a horror movie with it. This is giving off "Scary Stories To Tell In The Dark". Not really the vibe I'm going for. Let's pivot. I'd rather not do this all day. Let me think. Back in June I'd written my taste down by hand. The paper, the pencil lines, the one splash of color, the list of things I never want to see. A taste block, sitting in a note this whole time. I opened a fresh thread, no history, no images, and pasted the whole thing in cold.
 
 (A few moments later)
 
@@ -57,9 +58,9 @@ JESUS. Ok. Got the color. Got a horror movie with it. This is giving off "Scary 
 
 There we go. Hanna Barbera-esque hand-drawn, beautifully flawed, and a splash of watercolor to add some life.
 
-I'd spent five rounds making the machine guess when I could've just told it. Except I couldn't have. Not at the start. Not one of those five sentences existed before I saw something wrong sitting in front of me. I didn't know I wanted the math notebook until it showed up. I didn't know I wanted color until the drawing was gray. I didn't know silly was the line until somebody handed me disgusting.
+I'd spent five rounds making the machine guess when I could've just told it. Except I couldn't have. Not at the start. Not one of those five sentences existed before I saw something wrong sitting in front of me. I didn't know I wanted the back of my textbooks until it showed up. I didn't know I wanted color until the drawing was gray. I didn't know silly was the line until somebody handed me disgusting.
 
-No more arguing with the model. I don't want to be that significant other sulking in the corner because it couldn't understand what I was thinking. So I had it interview me multiple times since then. Really dig into the animation that I like and the artists I admire. More importantly, I told it what I was trying to make people feel when they gaze upon its pixelated beauty.
+No more arguing with the model. I don't want to be that significant other sulking in the corner because it couldn't understand what I was thinking. But I also don't want to hand-write one of those blocks every time I care about something new. That block took its own long road to exist. I recall Matt Pocock having a skill called /grill-me that interviews you relentlessly until it understands the project you're trying to build. Let's give that a whirl, but make it ART. So I had it interview me. Multiple times. Really dig into the animation that I like and the artists I admire. More importantly, I told it what I was trying to make people feel when they gaze upon its pixelated beauty.
 
 I've created a skill that will help you do the same.
 
