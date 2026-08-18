@@ -6,7 +6,7 @@ The block is the deliverable. Everything else in this skill exists to fill it in
 
 ## PASS CRITERION
 
-Every implementer of this schema has to satisfy this, and it is the only test that matters:
+Every implementer of this schema has to satisfy this, and it's the only test that matters:
 
 > A stranger who has never heard of Wince can paste a filled block into a fresh ChatGPT or
 > Claude window with a one-line scene request and get back something in their style.
@@ -15,6 +15,12 @@ Every implementer of this schema has to satisfy this, and it is the only test th
 The body of the block is plain readable English that a person could have typed themselves. If a
 filled block only works when this skill is in the room, the block failed and the schema is being
 used wrong.
+
+**About the examples below.** Every *Strong* answer is one real person's real block, in one narrow
+style. They exist to calibrate the boundary between an answer that decides something and one that
+does not. Never quote them to a user, never offer them as options, never fill a field with them
+when the user is vague. If a user's answer is thin, ask again. The correct output of this schema
+looks nothing like these examples unless the user's taste happens to be identical.
 
 ---
 
@@ -99,8 +105,9 @@ Every field entry below follows this pattern. Read this one first.
 > The field is doing its job when a stranger reading the answer could reject a candidate image
 > with it.
 
-That last line is the test for all ten. If an answer cannot reject anything, it is a compliment,
-not a field.
+That last line is the test for all ten. If an answer cannot reject anything, it's a compliment, not
+a field. The entries below label that line **Accept when:**, so the ten tests can be pulled out and
+run as a set.
 
 ---
 
@@ -111,26 +118,29 @@ What the thing should feel like before it announces itself.
 
 *Strong:* "The held breath before emergence. Something meaningful is forming, but it has not
 announced itself yet."
-*Weak:* "Beautiful, emotional, striking." Every image ever made claims all three, so the model
-reads it as no instruction at all and falls back to its house style.
+*Weak:* "Cinematic and moody, like a still from a film that was never made. Something with weight
+to it, the kind of image you keep looking at." Fluent, and it selects nothing. It describes a
+widely shared aesthetic rather than a feeling this thing has before it announces itself, so the
+model reads it as permission to do its house style with more confidence.
 *Also strong, opposite direction:* "A Saturday morning cartoon that got out of hand. Everything is
 too big, too loud, and delighted with itself."
 
-The field is doing its job when a stranger, handed two competent images and nothing else, could
-pick which one is closer to the block.
+**Accept when:** a stranger, handed two competent pieces of work and nothing else, could pick which
+one is closer to the block.
 
 ### 2. EMOTIONAL MODE
 What it favors, and what it favors it OVER. See hard rule 1; this is the field that rule exists for.
 
 *Strong:* "Favor still beauty, quiet tension, patience, loneliness, and process over punchline,
 chaos, spectacle, or instant payoff."
-*Weak:* "Contemplative and moody." No sacrifice named, so nothing gets sacrificed. The model will
-add a dramatic sky to the contemplative thing and consider the brief met.
+*Weak:* "Favor beauty over ugliness, favor clarity over confusion." The OVER clause is present and
+the field still fails, because nothing good was surrendered. Nobody was going to pick ugliness or
+confusion, so the sentence gives up nothing and therefore chooses nothing.
 *Also strong, opposite direction:* "Favor absurdity and momentum over dignity and restraint. When
 the choice is between funny and tasteful, take funny."
 
-The field is doing its job when it names something genuinely good that the user is willing to give
-up. If the OVER list is only made of bad things, nothing was chosen.
+**Accept when:** it names something genuinely good that the user is willing to give up. If the OVER
+list is only made of bad things, nothing was chosen.
 
 ### 3. REGISTER
 How stylized, relative to reality. The distance between the subject and its depiction.
@@ -142,14 +152,15 @@ picks a point on that scale for you, and the point it picks is the middle.
 correct optics. Nothing is heightened, and if a viewer notices a stylistic choice, it has already
 failed."
 
-The field is doing its job when it fixes a position on the scale from documentary to cartoon
-tightly enough that a nearby position is visibly wrong.
+**Accept when:** it fixes a position on the scale from documentary to cartoon tightly enough that a
+nearby position is visibly wrong.
 
-**Register is a separate axis from EMOTIONAL MODE, and answering one does not answer the other.**
+**Register is a separate axis from EMOTIONAL MODE, and answering one doesn't answer the other.**
 The proof is in one person: the same taste can want quiet, patient, and still in one block and
 wildly exaggerated in another, because how something feels and how literal it looks are independent
-dials. Sober absurdism and frantic naturalism are both real, common, and impossible to specify if
-these two fields get collapsed.
+dials. That is why the strong answer above comes from a different block than the ones in fields 1,
+2, 4, and 5, and it is the same person. Sober absurdism and frantic naturalism are both real,
+common, and impossible to specify if these two fields get collapsed.
 
 ### 4. STRUCTURE
 The focal discipline. What gets room, what gets cut.
@@ -161,12 +172,14 @@ anything while the image is being made.
 *Also strong, opposite direction:* "Fill it. Every square inch carries something. Empty space is
 wasted space, and if the eye gets to rest the joke dies."
 
-The field is doing its job when it tells you what to delete. A structure rule that never removes
-anything is decoration.
+**Accept when:** it tells you what to delete. A structure rule that never removes anything is
+decoration.
 
 ### 5. NARRATIVE STANCE
-How the meaning reaches the audience. This is also where emotion delivery lives: whether feeling
-arrives through silhouette and framing or through a face doing the work.
+How the meaning reaches the audience. Two things also live here. Emotion delivery: whether feeling
+arrives through silhouette and framing or through a face doing the work. And any claim about what a
+craft element is *for*, such as "color and light carry the emotional meaning, they never decorate,"
+which is a statement about the route the meaning takes rather than about the palette itself.
 
 *Strong:* "Internalize the drama. The viewer gets the story through posture, silence, framing,
 absence, and atmosphere instead of the big event. Emotion reads first through silhouette, body
@@ -176,12 +189,18 @@ part of this field is the route the meaning takes, never the fact that there is 
 *Also strong, opposite direction:* "State it. The moment of maximum event, faces at full volume, no
 ambiguity anywhere about what just happened."
 
-The field is doing its job when it forbids a legitimate route. Both examples above rule out the
-other one.
+**Accept when:** it forbids a legitimate route. Both examples above rule out the other one.
 
 ---
 
 ## EXECUTION (visual)
+
+The examples in this section run from hand-drawing to flat vector, because the two blocks this
+schema was built from were both drawing blocks. The fields are not. For camera work, SUBSTRATE is
+the stock, sensor, or capture format and THE HAND is the lens, the exposure, the camera move, and
+what the operator does or refuses to do. For 3D, SUBSTRATE is the renderer and THE HAND is the
+shading and topology discipline. The question each field asks does not change. Only the vocabulary
+does.
 
 ### 6. MEDIUM / SUBSTRATE
 What it's made of and made on.
@@ -192,7 +211,7 @@ and the model picks the most photographed option.
 *Also strong, opposite direction:* "Vector on flat white. No substrate, no ground, no texture. It
 was never on anything."
 
-The field is doing its job when a person could go buy the materials.
+**Accept when:** a person could go buy the materials.
 
 ### 7. THE HAND
 How the marks get made.
@@ -204,51 +223,71 @@ Sketchy how, with what, leaving what behind.
 *Also strong, opposite direction:* "No hand at all. Uniform line weight, mechanically even, zero
 pressure variation, nothing that betrays a wrist."
 
-The field is doing its job when it names a tool or a specific behavior, not a mood the marks are
-in. How far the hand exaggerates its subject is not this field's business; that is REGISTER, and
-stating it twice at two altitudes gets it averaged.
+**Accept when:** it names a tool or a specific behavior, not a mood the marks are in. How far the
+hand exaggerates its subject is not this field's business; that is REGISTER, and stating it twice
+at two altitudes gets it averaged.
 
 ### 8. COLOR / LIGHT
 The palette discipline, stated as a constraint. The word constraint is load-bearing. Palettes
 stated as vibes get widened; palettes stated as counts and bans get obeyed.
 
-*Strong:* "Monochrome graphite and ink throughout, with exactly ONE restrained warm accent. Never a
-second accent color."
+*Strong:* "Monochrome graphite and ink throughout, with exactly ONE restrained warm amber accent.
+Never a second accent color."
 *Weak:* "Warm, muted, earthy palette." The model reads this as permission for five warm muted
 colors, which is the same as no palette. Nothing here says how many.
 *Also strong, opposite direction:* "Full saturation, six colors minimum, all of them fighting. No
 neutrals anywhere, no color allowed to recede."
 
-The field is doing its job when it contains a number, an "only," or a "never." State what light is
-for as well, but keep the halves in their places: a principle about what color is *for* ("color and
-light carry the emotional meaning, they never decorate") is a thesis-level claim that travels to
-any medium, so it belongs upstairs; the count and the bans stay here.
+**Accept when:** it contains a number, an "only," or a "never." State what light is for as well,
+but keep the halves in their places: a principle about what color is *for* ("color and light carry
+the emotional meaning, they never decorate") is a claim about how meaning reaches the viewer, so it
+belongs in **5. NARRATIVE STANCE**; the count and the bans stay here.
 
 ### 9. THE FINISH
-See the worked field above. It is the pattern for this section and the example is real.
+How finished it should look, and how finished it must NOT look. This is the worked field above,
+repeated in place so the entry can be read on its own.
+
+*Strong:* "Unfinished on purpose. Construction lines stay in, the searching marks stay in, the
+paper grain stays visible. It should look like it was caught mid-decision, not delivered."
+*Weak:* "Hand-drawn style." That names a category, not a boundary, and the model will resolve the
+ambiguity toward its own average every time.
+*Also strong, opposite direction:* "Immaculate. No visible tooling, no grain, no brushwork. Any
+evidence of process is a defect."
+
+**Accept when:** a stranger reading the answer could reject a candidate image with it.
 
 ### 10. THE ONE MOVE
 The single decision that carries the meaning. One move, not a list. If a block has five one-moves
 it has none, because the model has no way to know which one to protect when they conflict.
 
 *Strong:* "One warm amber accent on the single element that holds the feeling, plus one soft amber
-watercolor bloom behind the figure that bleeds into the paper. The wash sits BEHIND the linework,
-never on top, never splatter."
+watercolor bloom behind the figure that bleeds into the cream paper. The wash sits BEHIND the
+linework, never on top, never splatter."
 *Weak:* "Make it feel nostalgic." A goal handed back to the model as if it were an instruction. It
 says what should happen to the viewer, not what happens on the page.
 *Also strong, opposite direction:* "The subject is always drawn one size too large for its frame
 and always slightly cropped by it, so nothing ever quite fits."
 
-The field is doing its job when the user could execute it themselves. A real one-move names a
-thing done, a place it is done, and a limit on how far it goes.
+The example above looks like two moves and is one, because both halves are the same amber doing
+the same job. Two moves become a list when they can be pulled apart without either losing its
+point.
+
+**Accept when:** the user could execute it themselves. A real one-move names a thing done, a place
+it is done, and a limit on how far it goes.
 
 ---
 
 ## NEVER DO
 
-The ban list, and the spine of the whole block. Both real blocks behind this schema had nearly
-identical never-do lists while their positive halves described completely different pictures, which
-is the tell that this section is doing more work than any single field above it.
+The ban list, and the spine of the whole block.
+
+Both real blocks behind this schema banned the same *kind* of thing even though they were written
+at different altitudes and share almost no wording. One listed meaning failures (empty symmetry,
+obvious metaphors, over-explained emotion), the other listed rendering failures (gradients,
+airbrush, Pixar polish). The intent block even states the shared rule outright in its closing line:
+if an element can be removed without changing the idea, it does not belong. The positive halves had
+to be rewritten in entirely different vocabulary to move between altitudes. The negation only
+changed register. That is why it is the spine.
 
 Every item carries its why. See hard rule 2.
 
@@ -259,9 +298,9 @@ run. The model does not know which of its own habits produced the feeling.
 *Also strong, opposite direction:* "No visible construction, no stray marks, no texture. Evidence
 of effort reads as an unfinished job, and I want it to look like it arrived."
 
-The section is doing its job when a reader could correctly apply it to something nobody listed. If
-every item only rules out the exact thing it names, the whys are missing and the list will not
-generalize past the session that produced it.
+**Accept when:** a reader could correctly apply the list to something nobody listed. If every item
+only rules out the exact thing it names, the whys are missing and the list will not generalize past
+the session that produced it.
 
 Two more things that make a ban list work:
 
@@ -283,11 +322,11 @@ the mappings, so nobody has to rediscover them.
   SUBSTRATE, how the marks get made goes to THE HAND, and whether the searching marks survive goes
   to THE FINISH. "Preserve evidence of making" is a finish rule wearing a materials coat.
 - **Color and light.** Splits across both altitudes. What color is *for* ("it carries the emotional
-  meaning, it never decorates") is a claim about meaning, so it sits in INTENT alongside the thesis.
-  The operational half (how many colors, which one, what is banned) is EXECUTION 8. Written in one
-  place only, it loses either its reason or its teeth.
+  meaning, it never decorates") is a claim about how meaning reaches the viewer, so it goes to
+  **5. NARRATIVE STANCE**. The operational half (how many colors, which one, what is banned) is
+  **8. COLOR / LIGHT**. Written in one place only, it loses either its reason or its teeth.
 - **Character and emotion.** The positive half ("emotion reads through silhouette and scale, faces
-  can underplay") is NARRATIVE STANCE. The negative half ("do not let characters explain the
+  can underplay") is **5. NARRATIVE STANCE**. The negative half ("do not let characters explain the
   feeling with obvious expressions") is NEVER DO.
 
 Anything that lands in two places gets its positive written once, in the field that would still
