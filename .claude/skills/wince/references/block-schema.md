@@ -30,15 +30,16 @@ version: <n> · <date>
 ## INTENT
 1. CORE THESIS       what the thing should feel like before it announces itself
 2. EMOTIONAL MODE    what it favors, and what it favors it OVER
-3. STRUCTURE         the focal discipline; what gets room, what gets cut
-4. NARRATIVE STANCE  how the meaning reaches the audience
+3. REGISTER          how stylized, relative to reality
+4. STRUCTURE         the focal discipline; what gets room, what gets cut
+5. NARRATIVE STANCE  how the meaning reaches the audience
 
 ## EXECUTION (visual)
-5. MEDIUM / SUBSTRATE   what it's made of and made on
-6. THE HAND             how the marks get made
-7. COLOR / LIGHT        the palette discipline, stated as a constraint
-8. THE FINISH           how finished it should look, and how finished it must NOT look
-9. THE ONE MOVE         the single decision that carries the meaning
+6. MEDIUM / SUBSTRATE   what it's made of and made on
+7. THE HAND             how the marks get made
+8. COLOR / LIGHT        the palette discipline, stated as a constraint
+9. THE FINISH           how finished it should look, and how finished it must NOT look
+10. THE ONE MOVE        the single decision that carries the meaning
 
 ## NEVER DO
    the ban list; every item carries its why
@@ -55,6 +56,11 @@ visible." EXECUTION cannot say why any of it matters, which is what lets a model
 to a scene nobody described. NEVER DO sits under both because negation is the one part that stays
 stable across altitudes.
 
+**The test for which half a field belongs to** is whether it survives into prose and music
+unchanged. That is why REGISTER is upstairs: broad comedy versus naturalism is a live decision for
+a writer, and cartoonish versus sincere is one for a composer. Nothing about it is specific to
+marks on a surface.
+
 ---
 
 ## The two hard rules
@@ -70,13 +76,18 @@ extend to cases nobody listed. "No glossy 3D" bans glossy 3D. "No glossy 3D, bec
 surface means the process was hidden or never happened" bans glossy 3D and also bans the
 airbrushed thing and the smooth gradient thing that were never on the list.
 
+This rule is deliberately stricter than what a person writing alone at a keyboard produces.
+Hand-written blocks routinely skip the whys, because the writer already knows them and never has to
+say them out loud. Extracting them is exactly what the interview is for, and it is one of the
+reasons an interviewed block beats a hand-written one.
+
 ---
 
 ## The worked field
 
 Every field entry below follows this pattern. Read this one first.
 
-> **8. THE FINISH** — how finished it should look, and how finished it must NOT look.
+> **9. THE FINISH** — how finished it should look, and how finished it must NOT look.
 >
 > *Strong:* "Unfinished on purpose. Construction lines stay in, the searching marks stay in, the
 > paper grain stays visible. It should look like it was caught mid-decision, not delivered."
@@ -88,7 +99,7 @@ Every field entry below follows this pattern. Read this one first.
 > The field is doing its job when a stranger reading the answer could reject a candidate image
 > with it.
 
-That last line is the test for all nine. If an answer cannot reject anything, it is a compliment,
+That last line is the test for all ten. If an answer cannot reject anything, it is a compliment,
 not a field.
 
 ---
@@ -121,7 +132,26 @@ the choice is between funny and tasteful, take funny."
 The field is doing its job when it names something genuinely good that the user is willing to give
 up. If the OVER list is only made of bad things, nothing was chosen.
 
-### 3. STRUCTURE
+### 3. REGISTER
+How stylized, relative to reality. The distance between the subject and its depiction.
+
+*Strong:* "Wildly exaggerated, absurd cartoon caricature. Never realistic, never photographic."
+*Weak:* "Stylized." A word that covers everything between a police sketch and a Muppet. The model
+picks a point on that scale for you, and the point it picks is the middle.
+*Also strong, opposite direction:* "Straight naturalism. Correct proportion, correct anatomy,
+correct optics. Nothing is heightened, and if a viewer notices a stylistic choice, it has already
+failed."
+
+The field is doing its job when it fixes a position on the scale from documentary to cartoon
+tightly enough that a nearby position is visibly wrong.
+
+**Register is a separate axis from EMOTIONAL MODE, and answering one does not answer the other.**
+The proof is in one person: the same taste can want quiet, patient, and still in one block and
+wildly exaggerated in another, because how something feels and how literal it looks are independent
+dials. Sober absurdism and frantic naturalism are both real, common, and impossible to specify if
+these two fields get collapsed.
+
+### 4. STRUCTURE
 The focal discipline. What gets room, what gets cut.
 
 *Strong:* "One focal idea, given room to breathe. Negative space is intentional, never just empty.
@@ -134,7 +164,7 @@ wasted space, and if the eye gets to rest the joke dies."
 The field is doing its job when it tells you what to delete. A structure rule that never removes
 anything is decoration.
 
-### 4. NARRATIVE STANCE
+### 5. NARRATIVE STANCE
 How the meaning reaches the audience. This is also where emotion delivery lives: whether feeling
 arrives through silhouette and framing or through a face doing the work.
 
@@ -153,7 +183,7 @@ other one.
 
 ## EXECUTION (visual)
 
-### 5. MEDIUM / SUBSTRATE
+### 6. MEDIUM / SUBSTRATE
 What it's made of and made on.
 
 *Strong:* "Warm cream paper, graphite and ink, animator's pencil-test feel, visible paper grain."
@@ -164,10 +194,8 @@ was never on anything."
 
 The field is doing its job when a person could go buy the materials.
 
-### 6. THE HAND
-How the marks get made. Also the place for how much the hand exaggerates its subject, when the
-exaggeration is a drawing habit rather than the point of the picture (when it is the point, it
-belongs in CORE THESIS).
+### 7. THE HAND
+How the marks get made.
 
 *Strong:* "Graphite linework, fine cross-hatching for shadow, a faint light-blue construction
 underdrawing left visible."
@@ -176,9 +204,11 @@ Sketchy how, with what, leaving what behind.
 *Also strong, opposite direction:* "No hand at all. Uniform line weight, mechanically even, zero
 pressure variation, nothing that betrays a wrist."
 
-The field is doing its job when it names a tool or a specific behavior, not a mood the marks are in.
+The field is doing its job when it names a tool or a specific behavior, not a mood the marks are
+in. How far the hand exaggerates its subject is not this field's business; that is REGISTER, and
+stating it twice at two altitudes gets it averaged.
 
-### 7. COLOR / LIGHT
+### 8. COLOR / LIGHT
 The palette discipline, stated as a constraint. The word constraint is load-bearing. Palettes
 stated as vibes get widened; palettes stated as counts and bans get obeyed.
 
@@ -189,13 +219,15 @@ colors, which is the same as no palette. Nothing here says how many.
 *Also strong, opposite direction:* "Full saturation, six colors minimum, all of them fighting. No
 neutrals anywhere, no color allowed to recede."
 
-The field is doing its job when it contains a number, an "only," or a "never." Also state what
-light is for. "Light carries the emotional meaning" is a rule; "nice lighting" is not.
+The field is doing its job when it contains a number, an "only," or a "never." State what light is
+for as well, but keep the halves in their places: a principle about what color is *for* ("color and
+light carry the emotional meaning, they never decorate") is a thesis-level claim that travels to
+any medium, so it belongs upstairs; the count and the bans stay here.
 
-### 8. THE FINISH
+### 9. THE FINISH
 See the worked field above. It is the pattern for this section and the example is real.
 
-### 9. THE ONE MOVE
+### 10. THE ONE MOVE
 The single decision that carries the meaning. One move, not a list. If a block has five one-moves
 it has none, because the model has no way to know which one to protect when they conflict.
 
@@ -244,21 +276,20 @@ Two more things that make a ban list work:
 
 ## Fields that land in more than one place
 
-Filling this out on real material, three things reliably show up not knowing where to go. These are
+Filling this out on real material, a few things reliably show up not knowing where to go. These are
 the mappings, so nobody has to rediscover them.
 
-- **Material and texture.** Splits three ways. What it is made on goes to MEDIUM / SUBSTRATE, how
-  the marks get made goes to THE HAND, and whether the searching marks survive goes to THE FINISH.
-  "Preserve evidence of making" is a finish rule wearing a materials coat.
+- **Material and texture.** Splits three ways inside EXECUTION. What it is made on goes to MEDIUM /
+  SUBSTRATE, how the marks get made goes to THE HAND, and whether the searching marks survive goes
+  to THE FINISH. "Preserve evidence of making" is a finish rule wearing a materials coat.
+- **Color and light.** Splits across both altitudes. What color is *for* ("it carries the emotional
+  meaning, it never decorates") is a claim about meaning, so it sits in INTENT alongside the thesis.
+  The operational half (how many colors, which one, what is banned) is EXECUTION 8. Written in one
+  place only, it loses either its reason or its teeth.
 - **Character and emotion.** The positive half ("emotion reads through silhouette and scale, faces
   can underplay") is NARRATIVE STANCE. The negative half ("do not let characters explain the
   feeling with obvious expressions") is NEVER DO.
-- **Register**, meaning how far from literal the depiction sits. Caricature versus life drawing is
-  a CORE THESIS decision when the exaggeration is the point, an EMOTIONAL MODE decision when it is
-  the attitude ("favors absurdity over dignity"), and a THE HAND decision when it is only a drawing
-  habit. Its negative half ("never realistic, never photographic") always goes to NEVER DO. Pick
-  one home and state it once; a register scattered across three fields gets averaged.
 
-Anything that lands in two places gets written once, in the field that would still need it if the
-other were deleted, and its negative gets restated in NEVER DO. Restating a ban is not redundancy.
-It is the only part of the block that survives an aggressive summarizer.
+Anything that lands in two places gets its positive written once, in the field that would still
+need it if the other were deleted, and its negative restated in NEVER DO. Restating a ban is not
+redundancy. It is the only part of the block that survives an aggressive summarizer.
