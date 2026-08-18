@@ -145,7 +145,7 @@ The target list is the set of fields this refine is allowed to change. It's buil
 from two sources:
 
 1. **Every field the user names as changed.**
-2. **Every field on version 1's thin-fields line.**
+2. **Every field on the loaded version's thin-fields line.**
 
 Everything not on the list carries forward verbatim into version 2. Not re-asked, not re-worded, not
 "confirmed." Carried.
@@ -297,10 +297,10 @@ the most common contents of a thin-fields line. If they're what this refine came
 front and offer to come back when generation works, rather than spending the user's afternoon on the
 three fields nobody can judge from a description.
 
-**Gate 2 runs on the whole of version 2, inherited fields counted, and it cannot fail on inheritance
-alone.** Version 1 passed it, so version 1 held at most four thin fields with CORE THESIS and THE
-ONE MOVE dug and five or more bans. Refine never un-digs a field it doesn't touch, and a field it
-does touch either gets dug or stays where it was. The thin count can only hold or fall.
+**Gate 2 runs on the whole new version, inherited fields counted, and it cannot fail on inheritance
+alone.** The version you loaded passed it, so it held at most four thin fields with CORE THESIS and
+THE ONE MOVE dug and five or more bans. Refine never un-digs a field it doesn't touch, and a field
+it does touch either gets dug or stays where it was. The thin count can only hold or fall.
 
 So Gate 2 fails a refine in exactly one way: **the refine subtracts.** A retracted answer with
 nothing put in its place, or bans dropped under five. If the user pulls CORE THESIS or THE ONE MOVE
@@ -337,7 +337,7 @@ Plain prose on all three, per the rule in [block-schema.md](block-schema.md). Ne
 
 - Dug to decision level in this refine: off the line.
 - On the list, worked, still surface: stays on the line.
-- Not on the target list and thin in version 1: stays on the line, because nothing happened to it.
+- Not on the target list and thin in the loaded version: stays on the line, nothing happened to it.
 - Never asked in either run: stays on the line.
 
 If nothing is thin, the line is absent entirely. Never write it empty.
@@ -347,9 +347,9 @@ describes that version and it's still true of it.
 
 ### The no-op
 
-If the user names nothing changed and version 1 has no thin fields, there's nothing for the refine
-to do. Don't bump the version. Say the block still stands, and offer `new` in case what they're
-actually holding is a second style.
+If the user names nothing changed and the loaded version has no thin fields, there's nothing for
+the refine to do. Don't bump the version. Say the block still stands, and offer `new` in case what
+they're actually holding is a second style.
 
 Writing a version 2 identical to version 1 is version noise, and a few rounds of it makes the
 history unreadable, which is the one job the history has.

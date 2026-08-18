@@ -83,9 +83,9 @@ sharpen the ban list can't touch the field this skill calls the spine. Any of th
 in play, REGISTER included, but only the ones the user names as changed and the ones the last
 version marked thin. Everything else carries forward verbatim, not re-asked and not "confirmed."
 
-**A refine runs both Emit gates, and Gate 1 counts only what the refine itself spent.** Version 1's
-generations don't carry. A refine done entirely in conversation is spec editing, which is the thing
-this skill exists to replace. Gate 2 runs on the whole new version with inherited fields counted,
+**A refine runs both Emit gates, and Gate 1 counts only what the refine itself spent.** The previous
+version's generations don't carry. A refine done in conversation alone is spec editing, which is the
+thing this skill exists to replace. Gate 2 runs on the whole new version with inherited fields counted,
 and it can only fail if the refine subtracts something, since the previous version already passed
 it. Both cases are worked out in the reference.
 
