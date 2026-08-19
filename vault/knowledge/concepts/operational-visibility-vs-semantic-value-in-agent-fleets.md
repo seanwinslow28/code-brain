@@ -2,19 +2,19 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/operational-metrics-mask-semantic-stagnation.md
+  - knowledge/concepts/operational-visibility-vs-semantic-value-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
 
-This concept defines the fundamental tension between the ease of measuring agent operations (logs, counts, durations) and the difficulty of measuring the actual semantic value of their outputs. The mechanism involves a bias toward quantifiable metrics because they are immediately visible and easy to aggregate, while semantic value requires qualitative assessment that is harder to automate or scale. This imbalance causes infrastructure improvements focused on throughput to exacerbate noise without improving signal quality, as the system optimizes for what can be counted rather than what matters.
+This mechanism describes the structural distortion where high-resolution operational metrics (cluster counts, token usage, duration) create a false signal of semantic health, masking the actual decay or stagnation of knowledge quality. The system optimizes for throughput because these variables are easily quantifiable and aggregatable, while semantic value requires qualitative assessment that is difficult to automate at scale. This imbalance causes infrastructure improvements focused on speed or volume to exacerbate noise without improving signal quality, as the feedback loop reinforces activity over insight.
 
 ## Context
 
-Sean monitors his vault runs via metrics like concepts written and duration. However, these metrics do not reflect the quality of the insights generated. This makes it difficult for him to know if an increase in run frequency or cluster sampling is actually improving his knowledge base or just increasing computational waste.
+Sean monitors his vault runs via metrics like concepts written and duration, but these numbers do not reflect the quality of the insights generated. This makes it difficult for him to know if an increase in run frequency or cluster sampling is actually improving his knowledge base or just increasing computational waste. The tension is critical because it obscures the true state of his personal knowledge infrastructure.
 
 ## Evidence
 

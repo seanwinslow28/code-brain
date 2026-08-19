@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/coupling-fragility-vs-adaptive-capacity-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition

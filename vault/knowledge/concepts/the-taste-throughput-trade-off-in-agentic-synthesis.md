@@ -2,31 +2,30 @@
 title: "The Taste-Throughput Trade-off in Agentic Synthesis"
 type: concept
 sources:
-  - knowledge/connections/velocity-vs-judgment-in-mcp-strengthening.md
+  - knowledge/connections/cross-domain-tension-automation-velocity-vs-epistemic-hygiene-in-knowledge-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
 
-This mechanism defines the inverse relationship between the volume of automated concept generation and the depth of strategic curation available to the human operator. As Sean scales the concept generation, the system prioritizes speed over the nuanced filtering required for high-stakes outputs like job applications. The throughput of ideas grows exponentially while the capacity for taste-based selection remains linearly constrained by human attention.
+This mechanism describes the inverse relationship between the volume of automated concept generation and the fidelity of human curation. As agent fleets scale to produce higher throughput, the semantic density of individual outputs declines because the verification capacity does not scale linearly with production. This creates a systemic trust deficit where Sean must choose between accepting low-fidelity 'slop' or halting automation to preserve epistemic hygiene.
 
 ## Context
 
-Sean's recent runs show a massive increase in clusters_sampled (e.g., 191 in run-2026-08-16) and concepts_written (118), yet the rejected_count remains low relative to the volume. This suggests that while velocity has increased, the judgment filter may be overwhelmed, leading to a lower signal-to-noise ratio in his knowledge vault.
+Sean's vault relies on high-fidelity synthesis to maintain strategic clarity. When automation velocity outpaces his ability to calibrate quality, the value per unit of effort declines, forcing a choice between paralysis and semantic decay.
 
 ## Evidence
 
-> As Sean scales the concept generation, the system prioritizes speed over the nuanced filtering required for high-stakes outputs like job applications.
+> The core tension arises from the conflict between the drive for automated throughput and the preservation of epistemic hygiene, leading to a systemic trust deficit.
 
-> This mechanism describes the endogenous change in an evaluator's standards caused by repeated exposure to generated outputs.
+> As agent fleets scale, the speed of concept generation exceeds the rate at which Sean can meaningfully integrate them into his strategic framework, causing semantic decay.
 
 ## Examples
 
-- The fleet does not merely overwhelm pre-existing standards; it actively reshapes them through volume.
-- Sean must introduce artificial friction to maintain quality when automation velocity exceeds taste capacity.
+- Scaling agent fleets without scaling verification capacity leads to diminishing returns on creative authority.
 
 ## Related Concepts
 
-[[Velocity vs. Judgment in MCP Strengthening]] [[Performative Taste Drift]]
+[[Slop as a Trust Deficit]] [[The Calibration Bottleneck in Scalable Creative Production]]

@@ -2,10 +2,10 @@
 title: "Velocity vs. Judgment in MCP Strengthening"
 type: concept
 sources:
-  - knowledge/connections/velocity-vs-judgment-in-mcp-strengthening.md
+  - knowledge/concepts/velocity-vs-judgment-in-mcp-strengthening.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition

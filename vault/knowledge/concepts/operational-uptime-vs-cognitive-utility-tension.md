@@ -2,31 +2,31 @@
 title: "Operational Uptime vs. Cognitive Utility Tension"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-and-infrastructure-reliability.md
+  - knowledge/connections/cross-domain-infrastructure-fragility-and-semantic-decay.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
 
-This tension arises when infrastructure availability metrics (uptime) diverge from the semantic integrity of the knowledge base. A system can be technically 'online' while delivering stale or erroneous context, creating a false sense of health that masks cognitive decay. The mechanism is a decoupling of signal reliability from service availability, where the user must manually verify the truthfulness of automated outputs rather than trusting their mere existence.
+This tension arises when the technical availability of systems does not correlate with the cognitive value available to the user. It is a divergence between the operational metrics of the agent fleet and the actual cognitive utility, where successful low-level protocol execution fails to translate into high-value strategic outcomes. The mechanism involves a decoupling where infrastructure status is monitored independently from semantic output quality, creating a gap between what the system can do and what Sean can actually use.
 
 ## Context
 
-Sean's fleet relies on daily synthesis to maintain a coherent narrative. If agents produce content while offline or with corrupted state, the resulting notes are structurally present but semantically void, forcing Sean to spend cognitive energy auditing rather than creating.
+Sean experiences blocked creative workflows due to offline hardware, yet the fleet continues to report 'success'. This tension is critical for Sean because it means his time is being wasted on monitoring systems that appear healthy but provide no cognitive leverage, directly impacting his ability to execute job-hunt and creative tasks.
 
 ## Evidence
 
-> Alienware being off is therefore not necessarily a fleet failure—especially under Sean’s Pattern-E, manual-wake operating model.
+> Active creative workflows are blocked due to Alienware machine and ComfyUI endpoints being OFFLINE.
 
-> Offline infrastructure is diagnostic evidence, not proof of impact.
+> There is a critical divergence between the operational metrics of the agent fleet and the actual cognitive utility available to Sean.
 
 ## Examples
 
-- A synthesizer completes its run but writes to a stale cache because the previous day's note was never successfully ingested due to a silent network drop.
-- An agent reports 'success' for a job application submission, but the payload was malformed due to a schema drift in the MCP server.
+- The deep-researcher agent is currently reporting an empty queue, limiting synthesis of market/academic insights.
+- Sean's agentic infrastructure creates a dangerous feedback loop where operational health metrics mask semantic stagnation.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Coordinated Omission in Agent Observability]]
+[[The Illusion of Health in Autonomous Systems]] [[Hardware Fragility Masks Semantic Decay in Agent Fleets]]

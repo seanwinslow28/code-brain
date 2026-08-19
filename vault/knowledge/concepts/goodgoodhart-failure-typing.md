@@ -2,10 +2,10 @@
 title: "GoodGoodhart Failure Typing"
 type: concept
 sources:
-  - knowledge/expansions/operational-uptime-vs-cognitive-utility-tension.md
+  - knowledge/concepts/goodgoodhart-failure-typing.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition

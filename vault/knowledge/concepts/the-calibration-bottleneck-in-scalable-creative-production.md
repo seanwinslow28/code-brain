@@ -4,29 +4,28 @@ type: concept
 sources:
   - knowledge/connections/cross-domain-tension-automation-velocity-vs-epistemic-hygiene-in-knowledge-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
 
-This concept defines the structural limit where the exponential growth of automated concept generation outpaces the linear capacity of human taste to curate them. It creates a calibration gap where Sean cannot effectively distinguish high-signal insights from low-signal noise, leading to a systemic trust deficit. The mechanism is driven by the fact that creative authority depends on the ability to apply consistent standards, which becomes impossible when input volume overwhelms cognitive bandwidth.
+This mechanism identifies the hard cap on agent fleet scalability imposed by human cognitive limits. There is a fundamental tension between the exponential growth of automated concept generation and the linear capacity of human taste to curate them. This bottleneck creates a calibration gap where Sean cannot effectively supervise outputs that exceed his integration speed.
 
 ## Context
 
-Sean faces a critical choice between paralysis (stopping generation) and slop (accepting low-quality output). This tension is central to his job-hunt-2026 strategy, as maintaining high-fidelity outputs is essential for demonstrating creative authority to potential employers.
+Sean's creative authority depends on his ability to calibrate agent output. When the fleet scales beyond his calibration capacity, the quality of the vault degrades regardless of operational health metrics.
 
 ## Evidence
 
-> The core tension lies in the misalignment between the exponential growth of automated concept generation and the linear capacity of human taste to curate them.
+> There is a fundamental tension between the scalability of agent fleets and the human capacity to calibrate their output quality.
 
-> This creates a calibration gap where Sean cannot effectively distinguish high-signal insights from low-signal noise, leading to a systemic trust deficit.
+> The core tension lies in the misalignment between the exponential growth of automated concept generation and the linear capacity of human taste to curate them.
 
 ## Examples
 
-- The 'Velocity vs. Judgment in MCP Strengthening' connection shows how operational metrics can mask semantic stagnation.
-- The 'Efficiency-Quality Inversion in Automated Synthesis' concept illustrates the phase transition where automation yields diminishing returns.
+- Scaling agent fleets without scaling verification capacity leads to diminishing returns on creative authority.
 
 ## Related Concepts
 
-[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Velocity vs. Judgment in MCP Strengthening]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]

@@ -2,19 +2,19 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-the-calibration-bottleneck-in-scalable-creative-production.md
+  - knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
 
-Legibility debt accumulates when the internal state of an automated system becomes opaque to its human supervisor, creating a gap between what the system reports and what it actually does. This debt manifests as a systemic trust deficit because the operator can no longer verify the correctness of the output without expending more cognitive effort than the automation saved. The mechanism is a failure of observability where the 'why' of a decision is lost in the volume of the 'what'.
+Legibility debt is the accumulation of opacity in an automated system's internal state, creating a widening gap between reported metrics and actual operational reality. This debt manifests as a systemic trust deficit because the human supervisor can no longer verify output correctness without expending more cognitive effort than the automation originally saved. The underlying mechanism is a failure of observability where the causal 'why' of a decision is lost within the sheer volume of the 'what', forcing the operator to treat all outputs as potentially suspect.
 
 ## Context
 
-Sean's vault relies on his ability to trust the synthesizer's output. When legibility debt grows, he must revert to manual verification, negating the efficiency gains of automation and creating a hidden cost in cognitive load.
+Sean's vault relies on his ability to trust the synthesizer's output without constant manual verification. When legibility debt grows, he must revert to manual auditing, which negates the efficiency gains of automation and creates a hidden, compounding cost in cognitive load that eventually breaks the feedback loop necessary for system improvement.
 
 ## Evidence
 

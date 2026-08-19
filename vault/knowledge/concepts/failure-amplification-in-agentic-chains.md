@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/failure-amplification-in-agentic-chains.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ This mechanism describes how recovery attempts in distributed systems can expone
 
 ## Context
 
-Sean's agent fleet involves multiple subprocess wrappers and routers; uncontrolled retries in these chains risk cascading failures that degrade the entire knowledge synthesis pipeline.
+Sean's agent fleet involves multiple subprocess wrappers and routers; uncontrolled retries in these chains risk cascading failures that degrade the entire knowledge synthesis pipeline. The transition from qwen3-14b to qwen3.6-35b-a3b-32k shows a shift in how these amplification effects are managed, with varying success rates in concept retention despite similar cluster sampling depths.
 
 ## Evidence
 

@@ -2,10 +2,10 @@
 title: "Supervision Fatigue as the Hard Cap on Fleet Scaling"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-automation-velocity-vs-creative-friction.md
+  - knowledge/concepts/supervision-fatigue-as-the-hard-cap-on-fleet-scaling.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ This invariant defines the biological limit of human oversight where the cogniti
 
 ## Context
 
-Sean's run logs show a clear correlation between increased duration and higher rejection counts, suggesting that his ability to supervise effectively diminishes as the fleet generates more clusters, ultimately limiting the effective scale of the automated system.
+Sean's run logs show a clear correlation between increased duration and higher rejection counts, suggesting that his ability to supervise effectively diminishes as the fleet generates more clusters, ultimately limiting the effective scale of the automated system. The consequence is a forced decoupling of automation from creativity, requiring Sean to implement taste tournaments to realign the system's objective function with his strategic goals.
 
 ## Evidence
 

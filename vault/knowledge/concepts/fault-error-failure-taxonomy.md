@@ -2,15 +2,15 @@
 title: "Fault → Error → Failure Taxonomy"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-and-infrastructure-reliability.md
+  - knowledge/concepts/fault-error-failure-taxonomy.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
 
-A dependability framework that distinguishes between internal state anomalies (faults), incorrect intermediate computations (errors), and the deviation of delivered service from its specification (failures). This taxonomy prevents the conflation of component unavailability with functional failure, allowing for precise attribution of blame and recovery strategies. It requires defining SLIs based on user-visible capabilities rather than internal component status.
+This framework distinguishes between internal state anomalies (faults), incorrect intermediate computations (errors), and the deviation of delivered service from its specification (failures). It prevents the conflation of component unavailability with functional failure, allowing for precise attribution of blame and recovery strategies. This taxonomy requires defining SLIs based on user-visible capabilities rather than internal component status to avoid masking semantic decay behind operational uptime.
 
 ## Context
 

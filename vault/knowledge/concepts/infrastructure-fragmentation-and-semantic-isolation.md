@@ -2,10 +2,10 @@
 title: "Infrastructure Fragmentation and Semantic Isolation"
 type: concept
 sources:
-  - knowledge/connections/operational-uptime-vs-strategic-stagnation.md
+  - knowledge/concepts/infrastructure-fragmentation-and-semantic-isolation.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition

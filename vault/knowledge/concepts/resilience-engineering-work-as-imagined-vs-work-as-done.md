@@ -2,19 +2,19 @@
 title: "Resilience Engineering: Work-as-Imagined vs Work-as-Done"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-and-operational-resilience.md
+  - knowledge/concepts/resilience-engineering-work-as-imagined-vs-work-as-done.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
 
-A design philosophy that prioritizes graceful extensibility over hardening, asking what the system does after its assumptions fail rather than how to stop failure. It requires defining essential versus nonessential capability tiers and establishing load-shedding orders when capacity saturates. This approach prevents the disguise of deferred work as successful work by explicitly managing degraded modes.
+This concept defines a design philosophy that prioritizes graceful extensibility over hardening, fundamentally shifting the focus from preventing failure to managing system behavior after assumptions break. It requires explicitly defining essential versus nonessential capability tiers and establishing strict load-shedding orders when capacity saturates. This approach prevents the dangerous disguise of deferred work as successful work by forcing explicit management of degraded modes rather than relying on implicit stability.
 
 ## Context
 
-Sean's current infrastructure often fails silently or produces incorrect outputs when dependencies disappear. Implementing this concept forces explicit definitions of what can be shed (e.g., visual QA) versus what must be preserved (e.g., provenance), reducing the cognitive load of debugging silent failures.
+Sean's current infrastructure often fails silently or produces incorrect outputs when dependencies disappear, creating a gap between perceived health and actual utility. Implementing this concept forces explicit definitions of what can be shed (e.g., visual QA) versus what must be preserved (e.g., provenance), reducing the cognitive load of debugging silent failures.
 
 ## Evidence
 
@@ -24,7 +24,7 @@ Sean's current infrastructure often fails silently or produces incorrect outputs
 
 ## Examples
 
-- A degraded-mode specification for Code-Brain: essential/nonessential capability tiers, load-shedding order, backlog ceilings, recovery semantics, and dependency-loss drills.
+- A degraded-mode specification for Code-Brain that defines essential/nonessential capability tiers, load-shedding order, backlog ceilings, recovery semantics, and dependency-loss drills.
 
 ## Related Concepts
 

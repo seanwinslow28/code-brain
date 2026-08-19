@@ -2,15 +2,15 @@
 title: "Throughput vs. Taste Memory Tension"
 type: concept
 sources:
-  - knowledge/connections/the-efficiency-quality-inversion-in-automated-synthesis.md
+  - knowledge/concepts/throughput-vs-taste-memory-tension.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
 
-This concept defines the inverse relationship between the volume of automated synthesis and the preservation of specific creative voice signals. When the memory footprint expands beyond a certain threshold, the model's attention mechanism dilutes the nuanced instructions that define Sean's taste, causing the output to drift toward generic patterns. The tension arises because the very mechanism used to increase throughput (context accumulation) is the same mechanism that erodes the fidelity of the creative signal.
+This mechanism defines the inverse relationship between the volume of automated synthesis and the preservation of specific creative voice signals. When the memory footprint expands beyond a certain threshold, the model's attention mechanism dilutes the nuanced instructions that define Sean's taste, causing the output to drift toward generic patterns. The tension arises because the very mechanism used to increase throughput (context accumulation) is the same mechanism that erodes the fidelity of the creative signal.
 
 ## Context
 

@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/throughput-vs-activity-illusion-in-job-hunt-operations.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
 
-This pattern describes a systemic failure mode where aggregate operational metrics, such as agent uptime or application volume, falsely indicate system health while the actual conversion rate at the critical bottleneck stagnates. The mechanism relies on the decoupling of activity from value creation, allowing noise to mask signal until the constraint becomes insurmountable. True system health is determined solely by the throughput of the limiting stage, not by the efficiency of non-constraining stages. When agents optimize for general efficiency rather than constraint relief, they generate waste that accumulates as legibility debt.
+This pattern describes a systemic failure mode where aggregate operational metrics, such as agent uptime or application volume, falsely indicate system health while the actual conversion signal remains null. The illusion persists because the automation layer validates its own execution logic—confirming that fetches occurred and scripts ran—rather than verifying external market engagement. Consequently, the operator mistakes tool reliability for strategic progress, continuing to invest cognitive energy in debugging a working pipeline instead of adjusting search parameters or targeting strategies.
 
 ## Context
 
-Sean's job hunt infrastructure has historically prioritized high-volume automation (e.g., 150+ concepts per run) over conversion quality. This illusion leads to resource misallocation, where the fleet continues to feed saturated stages while starving the current bottleneck, ultimately reducing offer velocity despite high operational activity.
+Sean's job-hunt-2026 strategy depends on finding relevant roles, yet his current infrastructure reports success even when returning zero results. This disconnect creates a dangerous feedback loop where the daily note generator confirms routine automation works while strategic outputs like job scores remain zero, leading Sean to waste time investigating the tool rather than the market.
 
 ## Evidence
 
-> Sean's job hunt suffers from an illusion of health where high activity levels mask a lack of conversion at the critical bottleneck.
+> Job Feed report noted 'scored=0 mbp=False,' suggesting the pipeline may not be actively finding or scoring opportunities.
 
-> The mechanism here is that general efficiency across all stages creates noise, while constraint-first focus creates signal.
+> Daily note summary mentions 'Daily note for 2026-08-18 created and verified', showing routine automation works while strategic outputs like job scores remain zero.
 
 ## Examples
 
-- Agents continue to generate portfolio content and update status feeds even when interview conversions drop, because the automation pipeline treats all stages as equally valuable rather than identifying the limiting stage.
-- Monitoring application feed uptime instead of conversion rates provides a false sense of progress while the actual bottleneck remains unaddressed.
+- The job-feed agent logs 'fetch=0 scored=0' as a success, implying the system is working correctly even though no jobs were identified.
+- Sean might waste time investigating the tool rather than adjusting his search parameters or targeting strategies, mistaking tool uptime for market engagement.
 
 ## Related Concepts
 
-[[Constraint-First Automation vs. General Efficiency]] [[Job Hunt as Sales Pipeline]]
+[[Job Hunt as Sales Pipeline]] [[Operational Uptime vs. Cognitive Utility Tension]]

@@ -2,10 +2,10 @@
 title: "Audience Capture via Alignment Loops"
 type: concept
 sources:
-  - knowledge/expansions/audience-capture-via-alignment-loops.md
+  - knowledge/concepts/audience-capture-via-alignment-loops.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
@@ -21,8 +21,6 @@ Sean is building a personal knowledge vault and agent fleet that requires high-f
 > The article’s crucial mechanism is identity substitution: the audience rewards a persona until the creator begins experiencing that persona as himself.
 
 > Audience capture is therefore not just vanity or weak character; it is the predictable outcome of unequal feedback latency.
-
-> Novelty can be an escape response just as repetition can be capture.
 
 ## Examples
 

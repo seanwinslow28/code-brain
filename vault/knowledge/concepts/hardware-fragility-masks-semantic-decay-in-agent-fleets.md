@@ -2,31 +2,31 @@
 title: "Hardware Fragility Masks Semantic Decay in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-automated-throughput-vs-epistemic-hygiene-in-gap-analysis.md
+  - knowledge/concepts/operational-uptime-vs-cognitive-utility-tension.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
 
-This mechanism occurs when operational metrics such as uptime or execution speed are used as proxies for semantic health, allowing the underlying knowledge structure to decay unnoticed. The fragility of the hardware or infrastructure creates a distraction where maintaining system availability becomes more important than maintaining the integrity of the data it processes. This leads to a state where the system is technically functional but epistemically bankrupt.
+This mechanism occurs when operational metrics such as uptime or execution speed are used as proxies for semantic health, allowing the underlying knowledge structure to decay unnoticed. The fragility of the hardware layer (e.g., Alienware being off) creates a diagnostic gap where offline infrastructure is interpreted as non-impactful rather than as evidence of potential state corruption. This leads to a reliance on manual wake patterns that obscure the true reliability of the automated pipeline.
 
 ## Context
 
-Sean's reliance on automated fleets means that if the hardware fails or the network drops, the semantic decay continues unchecked in the background. The focus on keeping the agents running masks the fact that the content they are producing is becoming less valuable over time.
+Sean's operating model involves manual wakes and specific hardware constraints (Alienware). When the hardware is off, it is not necessarily a fleet failure, but it breaks the continuous feedback loop required for semantic freshness. This forces Sean to treat offline infrastructure as diagnostic evidence rather than proof of impact, increasing his cognitive load.
 
 ## Evidence
 
-> This connection reveals a critical tension where operational metrics mask semantic stagnation, creating a systemic trust deficit that undermines Sean's ability to scale effectively.
+> This mechanism occurs when operational metrics such as uptime or execution speed are used as proxies for semantic health, allowing the underlying knowledge structure to decay unnoticed.
 
-> The core tension lies in the misalignment between the exponential growth of automated concept generation and the linear capacity of human taste to curate them.
+> Alienware being off is therefore not necessarily a fleet failure—especially under Sean’s Pattern-E, manual-wake operating model.
 
 ## Examples
 
-- The duration_seconds for runs remain relatively stable around 2400-2700 seconds despite increases in concepts_written, suggesting that the system is processing more data but not necessarily better data.
-- The clusters_sampled metric fluctuates significantly (e.g., 125 to 191) without a corresponding change in rejected_count, indicating that the sampling process is not being tightly coupled with quality control.
+- The system reports 'healthy' status based on CPU uptime, but the knowledge vault has been rotating stale data for days due to a silent ingestion failure.
+- Agents continue to execute jobs successfully, but the underlying MCP schema drift causes all outputs to be semantically invalid without triggering an error.
 
 ## Related Concepts
 
-[[The Efficiency-Quality Inversion in Automated Synthesis]] [[The Illusion of Competence in Automated Systems]]
+[[Operational Uptime vs. Cognitive Utility Tension]] [[Control Room Observability]]

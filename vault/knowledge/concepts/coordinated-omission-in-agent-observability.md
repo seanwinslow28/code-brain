@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/coordinated-omission-in-agent-observability.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
 
-This phenomenon occurs when a stalled system stops generating the very observations that would reveal the stall, causing health metrics to appear improved during actual failure. It arises because health denominators come from expected work rather than observed logs, meaning sleeping machines or missing batons produce no duration samples. This creates an illusion of competence where averages improve precisely when the system is failing to execute its scheduled tasks.
+Observability systems fail when they only record events that occur, ignoring the absence of expected events which may signal critical failures. In agent fleets, if a component stops producing output due to a silent error or resource constraint, the monitoring layer sees no anomaly because it is not tracking the *absence* of data as a failure condition. This omission creates blind spots where systemic decay goes undetected until the missing data causes a downstream dependency to fail.
 
 ## Context
 
-Sean's dashboard metrics may falsely indicate high agent health if they only measure successful runs, masking the silent decay of the automation infrastructure. Without a ledger that records absent and stale states, Sean cannot distinguish between a healthy fleet and one that has simply stopped reporting.
+Sean’s daily driver and job feed agents depend on consistent data flows. If their monitoring only logs 'success' upon completion, it misses the critical signal of 'no results found', which is often more informative than a successful fetch of irrelevant data.
 
 ## Evidence
 
-> Coordinated omission occurs when a stalled system stops generating the very observations that would reveal the stall.
+> Deep Researcher is currently in an empty queue state, indicating a lapse in continuous background research necessary for insight generation.
 
-> Health denominators come from expected work, not observed logs.
+> Job Feed report noted 'scored=0 mbp=False,' suggesting the pipeline may not be actively finding or scoring opportunities.
 
 ## Examples
 
-- A sleeping machine producing no duration or cost sample, making averages improve during failure.
-- An expected-run ledger that records scheduled, started, completed, deferred, absent, and stale states to capture the full picture of agent health.
+- The fleet status reports 'status=empty-queue' for Deep Researcher, which is a factual statement of state but omits the implication that no research insights were generated.
+- The Job Feed agent logs 'fetch=0 scored=0', which records the action taken (or not taken) but does not explicitly flag the lack of opportunities as a potential system or market issue.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[The Illusion of Competence in Automated Systems]]
+[[The Illusion of Health in Autonomous Systems]] [[Agent Health Monitoring]]

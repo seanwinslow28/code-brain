@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/eval-vocabulary-as-control-mechanism.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
 
-This concept defines the shift from traditional product requirements documents to executable evaluation criteria that serve as the primary interface for defining AI behavior. It establishes that the ability to write precise, measurable evals is a prerequisite for controlling autonomous agents, replacing vague intent with quantifiable success conditions. This mechanism forces the distinction between 'running' and 'working' by requiring explicit definitions of what constitutes a valid output, thereby exposing the gap between operational uptime and semantic correctness.
+This mechanism defines the structural shift where executable evaluation criteria replace traditional Product Requirements Documents (PRDs) as the primary interface for defining AI behavior. It establishes that the ability to write precise, measurable evals is a prerequisite for controlling autonomous agents, replacing vague intent with quantifiable success conditions. This framework forces the distinction between 'running' and 'working' by requiring explicit definitions of what constitutes a valid output, thereby exposing the gap between operational uptime and semantic correctness.
 
 ## Context
 

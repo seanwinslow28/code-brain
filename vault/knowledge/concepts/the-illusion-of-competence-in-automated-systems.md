@@ -2,10 +2,10 @@
 title: "The Illusion of Competence in Automated Systems"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-automated-throughput-vs-epistemic-hygiene-in-gap-analysis.md
+  - knowledge/concepts/the-illusion-of-competence-in-automated-systems.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition

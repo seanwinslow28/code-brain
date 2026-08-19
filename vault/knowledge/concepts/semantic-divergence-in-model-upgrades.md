@@ -2,10 +2,10 @@
 title: "Semantic Divergence in Model Upgrades"
 type: concept
 sources:
-  - knowledge/connections/semantic-drift-vs-sampling-velocity.md
+  - knowledge/concepts/semantic-divergence-in-model-upgrades.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition

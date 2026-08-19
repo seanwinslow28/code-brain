@@ -2,11 +2,11 @@
 title: "Cross-Domain Tension: Automation Velocity vs. Semantic Integrity"
 type: connection
 connects:
-  - Automation Pipeline
-  - Silent Failure Propagation in Agent Fleets
   - The Efficiency-Quality Inversion in Automated Synthesis
-created: 2026-08-18
-updated: 2026-08-18
+  - Silent Failure Propagation in Agent Fleets
+  - Structural Integrity vs. Automation Velocity
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Synthesis
@@ -15,17 +15,17 @@ There is a fundamental tension between the velocity of automated knowledge inges
 
 ## Threads
 
-### [[Automation Pipeline]]
+### [[The Efficiency-Quality Inversion in Automated Synthesis]]
 
-> The process of organizing raw data into coherent knowledge chunks (indexing) and combining them to form new insights or connections (synthesis).
+> There is a fundamental tension between the efficiency of automated synthesis and the quality of the resulting knowledge. As the fleet scales to produce more content, the semantic depth available for synthesis becomes diluted by noise, leading to a systemic trust deficit where the user must manually audit the very outputs intended to save time.
 
 ### [[Silent Failure Propagation in Agent Fleets]]
 
 > The failure of vault-synthesizer directly impacts cross-domain knowledge integration, linking domains like 'Indexing and Synthesis' with 'Automation Failure and Daily Note Disruption'.
 
-### [[The Efficiency-Quality Inversion in Automated Synthesis]]
+### [[Structural Integrity vs. Automation Velocity]]
 
-> Increasing automation throughput initially yields high-quality insights, but beyond a certain threshold of scale or model capability, the marginal value of additional output decreases while the cost of verification and correction increases.
+> There is a fundamental tension between the velocity of automated knowledge ingestion and the integrity of the resulting semantic graph.
 
 ## Implications
 

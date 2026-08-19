@@ -2,10 +2,10 @@
 title: "The Verification-Governance Inversion in Agentic Workflows"
 type: concept
 sources:
-  - knowledge/connections/the-verification-governance-inversion-in-agentic-workflows.md
+  - knowledge/concepts/the-verification-governance-inversion-in-agentic-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
@@ -22,8 +22,6 @@ Sean's fleet metrics provide high-resolution operational data but mask semantic 
 
 > Failures in one agent's output can propagate silently through dependent agents, causing downstream errors that are difficult to trace because each individual agent reports a successful status.
 
-> Most agent failures aren't reasoning failures — they're intent failures. The spec is vague, the stop rules are missing, the outcome is an activity disguised as a state.
-
 ## Examples
 
 - Agents report health based on process execution, while knowledge integrity depends on successful semantic synthesis.
@@ -31,4 +29,4 @@ Sean's fleet metrics provide high-resolution operational data but mask semantic 
 
 ## Related Concepts
 
-[[Operational Visibility vs. Semantic Value in Agent Fleets]] [[Silent Failure Propagation in Agent Fleets]] [[The Illusion of Competence in Automated Systems]]
+[[Operational Visibility vs. Semantic Value in Agent Fleets]] [[Silent Failure Propagation in Agent Fleets]]
