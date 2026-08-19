@@ -2,7 +2,7 @@
 title: "Capability-Aware Scheduling"
 type: concept
 sources:
-  - knowledge/concepts/capability-aware-scheduling.md
+  - knowledge/expansions/capability-aware-scheduling.md
 tags: [auto-generated, phase-6]
 created: 2026-08-19
 updated: 2026-08-19
@@ -10,23 +10,23 @@ updated: 2026-08-19
 
 ## Definition
 
-This mechanism shifts resource allocation from static machine assignment to dynamic capability matching. Jobs declare their requirements (latency, resources, constraints), and the scheduler matches them against available node capabilities rather than fixed endpoints. This allows for flexible placement, preemption, and fallback policies based on real-time capacity and task urgency.
+A resource allocation mechanism that decouples the matching phase from the claiming phase, allowing heterogeneous nodes to publish hard requirements and soft rankings rather than accepting one-way dispatch. This approach treats a match as a tentative proposal that must be revalidated against current availability and policy constraints before execution begins. By separating intent publication from resource acquisition, the system tolerates stale advertisements and enables dynamic negotiation between job needs and machine capabilities.
 
 ## Context
 
-Sean has heterogeneous hardware (Mini, MacBook, Alienware) with varying availability and power states. Static assignment leads to inefficiency or failure when the designated machine is unavailable. Capability-aware scheduling ensures tasks are routed to the best available resource, improving reliability and utilization.
+Sean's agent fleet operates across diverse hardware (Alienware, MacBook) with conflicting operational modes (interactive vs. batch). Without this separation, urgent jobs can starve creative workloads by seizing scarce resources without regard for fairness or node state, leading to silent failures in non-critical pipelines.
 
 ## Evidence
 
-> Model each machine as a pool of schedulable capabilities rather than a named endpoint
+> Their crucial move is separating matching from claiming, which tolerates stale advertisements and lets resource owners express whom they will serve—not merely what they can run.
 
-> Jobs declare resources, latency class, placement constraints, fallback policy, and whether interruption is acceptable
+> The current concept cannot express machine-side intent or detect a node whose advertised capability became stale before dispatch.
 
 ## Examples
 
-- A high-latency-tolerant batch job is scheduled on the MacBook only when it wakes.
-- A low-latency task is preempted from the Mini to run on the always-on Alienware.
+- Alienware accepts interruptible GPU work only during its manual-awake window
+- MacBook rejects batch claims during interactive use
 
 ## Related Concepts
 
-[[Infrastructure]] [[Agent Fleet Observability Dashboard]]
+[[Dominant Resource Fairness]] [[HTCondor ClassAds]]

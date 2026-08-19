@@ -2,30 +2,31 @@
 title: "Agent Health Monitoring"
 type: concept
 sources:
-  - knowledge/connections/operational-uptime-vs-strategic-stagnation.md
+  - knowledge/index.md
 tags: [auto-generated, phase-6]
-created: 2026-08-12
-updated: 2026-08-12
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
 
-This concept defines the practice of evaluating agent viability based on binary operational states (up/down) rather than semantic output quality or strategic alignment. It establishes a dependency where the cost-effectiveness and reliability of agentic workflows are contingent upon the continuous availability of specific agents, yet this monitoring often fails to detect when an agent is 'alive' but producing no value. The mechanism creates a false sense of security by prioritizing process continuity over outcome integrity.
+Agent health monitoring is the continuous verification of an autonomous system's operational state against expected behavioral baselines, distinguishing between transient errors and systemic decay. It requires explicit instrumentation that captures not just whether a process completed, but whether it completed with semantic integrity, as silent failures are more dangerous than loud ones. The mechanism functions as a supervisory layer that detects when an agent’s internal logic has diverged from its intended purpose, often due to context drift or resource constraints.
 
 ## Context
 
-Sean's current monitoring approach tracks whether agents are running and completing tasks, but it does not adequately distinguish between healthy agents that generate insight and those that are merely executing empty loops.
+Sean manages a complex fleet of agents including the vault synthesizer and daily drive agents. Without rigorous health monitoring, failures in one component (like the synthesizer) can silently propagate to others (like the daily note generator), leading to a gradual erosion of trust in the entire infrastructure.
 
 ## Evidence
 
-> The operational health of agents directly impacts the cost-effectiveness of agentic workflows if an agent is unhealthy, it may incur unnecessary costs or disrupt other automation tasks.
+> Agent Health Monitoring is a concept that tracks the operational status and semantic integrity of autonomous agents over time.
 
-> Agents report success based on process execution while knowledge integrity depends on successful semantic integration.
+> The dependency is invisible in each agent's source, making silent failure propagation a critical risk.
 
 ## Examples
 
-- A synthesizer agent continues to run and consume tokens without writing any new concepts, yet its health status remains 'Green' because the process did not crash.
+- The use of 'lint reports' to identify structural issues like broken wikilinks serves as a proxy for health monitoring, catching errors before they affect downstream consumers.
+- The distinction between 'Agent Health' and 'Agent Health Monitoring' highlights the difference between a state and the process of verifying that state.
 
 ## Related Concepts
 
-[[Agent Health]] [[SRE Error Budget for Agents]]
+[[Silent Failure Propagation in Agent Fleets]] [[Operational Uptime vs. Cognitive Utility Tension]]

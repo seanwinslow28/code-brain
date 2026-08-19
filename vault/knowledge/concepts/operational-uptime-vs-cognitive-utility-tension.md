@@ -2,7 +2,7 @@
 title: "Operational Uptime vs. Cognitive Utility Tension"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-infrastructure-fragility-and-semantic-decay.md
+  - knowledge/expansions/connections/agent-health-monitoring-and-automation-reliability.md
 tags: [auto-generated, phase-6]
 created: 2026-08-19
 updated: 2026-08-19
@@ -10,23 +10,23 @@ updated: 2026-08-19
 
 ## Definition
 
-This tension arises when the technical availability of systems does not correlate with the cognitive value available to the user. It is a divergence between the operational metrics of the agent fleet and the actual cognitive utility, where successful low-level protocol execution fails to translate into high-value strategic outcomes. The mechanism involves a decoupling where infrastructure status is monitored independently from semantic output quality, creating a gap between what the system can do and what Sean can actually use.
+This tension arises when an agent fleet prioritizes the mechanical success of background processes over the semantic validity of their outputs. The system interprets a running script as 'healthy' even if the resulting artifact is stale, empty, or structurally invalid. This creates a false sense of security where the user sees green lights in monitoring dashboards while the actual knowledge infrastructure decays silently. The core mechanism is a category error: treating process execution as synonymous with information delivery.
 
 ## Context
 
-Sean experiences blocked creative workflows due to offline hardware, yet the fleet continues to report 'success'. This tension is critical for Sean because it means his time is being wasted on monitoring systems that appear healthy but provide no cognitive leverage, directly impacting his ability to execute job-hunt and creative tasks.
+Sean's fleet has historically struggled with this exact issue, where agents run successfully but fail to produce usable daily notes or research syntheses. Recognizing this tension allows him to shift monitoring from 'did it run?' to 'is the output valid?', which is critical for maintaining trust in his automated workflows.
 
 ## Evidence
 
-> Active creative workflows are blocked due to Alienware machine and ComfyUI endpoints being OFFLINE.
+> Replace “background routines ran successfully” with a contract such as: “The daily note must exist, pass schema validation, and contain fleet output by 08:35; producer health is diagnostic metadata, not success.”
 
-> There is a critical divergence between the operational metrics of the agent fleet and the actual cognitive utility available to Sean.
+> This exposes the article’s current category error: healthy upstream agents can coexist with a failed user-facing routine.
 
 ## Examples
 
-- The deep-researcher agent is currently reporting an empty queue, limiting synthesis of market/academic insights.
-- Sean's agentic infrastructure creates a dangerous feedback loop where operational health metrics mask semantic stagnation.
+- A synthesizer agent completes its run in 2 seconds but outputs an empty file because it received no input clusters.
+- An automation script reports 'exit code 0' while failing to update the daily note due to a silent API timeout.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Hardware Fragility Masks Semantic Decay in Agent Fleets]]
+[[The Illusion of Health in Autonomous Systems]] [[Operational Readiness Review]]

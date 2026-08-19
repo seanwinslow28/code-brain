@@ -2,7 +2,7 @@
 title: "SRE Error Budget for Agents"
 type: concept
 sources:
-  - knowledge/concepts/sre-error-budget-for-agents.md
+  - knowledge/expansions/connections/agent-health-monitoring-and-daily-note-generation-interdependence.md
 tags: [auto-generated, phase-6]
 created: 2026-08-19
 updated: 2026-08-19
@@ -10,23 +10,23 @@ updated: 2026-08-19
 
 ## Definition
 
-An SLO-based reliability contract where agent performance is measured by observable outcomes like timeliness and correctness rather than binary active/disabled states. When an agent exhausts its error budget through repeated misses, feature work freezes to trigger reliability engineering, shifting the focus from mere process reachability to value delivery. This mechanism treats fleet health as a dynamic resource management problem rather than a static status check.
+An SRE error budget is a quantitative allowance for failure, defined as the difference between desired availability and actual achieved reliability over a specific period. In agentic systems, this shifts the metric of success from binary health checks to a probabilistic assessment of whether the consumer-facing service met its Service Level Indicators (SLIs). When the accumulated suspicion score exceeds the budgeted threshold, the system must pause expansion and fund reliability work rather than continuing to generate artifacts that degrade in quality. This mechanism forces a trade-off between velocity and trust, treating missed deadlines or stale context as financial debt against future capability.
 
 ## Context
 
-Sean needs to move beyond counting processes to judging whether his fleet delivers actual value. By implementing error budgets, he gains an executable framework to decide whether to improve prompts, repair infrastructure, or retire agents based on data rather than intuition.
+Sean's daily note generation has historically suffered from silent failures where agents run but produce unusable output. By defining an error budget for the synthesizer, Sean can objectively decide when to stop adding new agents and instead harden the existing fleet, preventing the accumulation of 'legibility debt' that makes debugging impossible.
 
 ## Evidence
 
-> Attach an error-budget policy: repeated misses freeze feature work and trigger reliability work.
+> If the monthly error budget exceeds Z, pause fleet expansion and fund reliability work.
 
-> Define each agent by an observable outcome: completion, timeliness, coverage, and correctness.
+> The consumer-facing SLI is X; agent heartbeat Y is only a diagnostic signal.
 
 ## Examples
 
-- Daily Driver publishes a validated note by 08:40 on 29 of 30 mornings.
-- Agent X was last observed producing valid artifact Y at T; this claim expires at T+n.
+- Allowing 5 failed or degraded mornings per month before triggering a reliability sprint.
+- Using the φ Accrual Failure Detector to model health as accumulated evidence rather than a binary state.
 
 ## Related Concepts
 
-[[Fleet Status]] [[Agent Health Monitoring]]
+[[Agent Health Monitoring]] [[Operational Uptime vs. Cognitive Utility Tension]]

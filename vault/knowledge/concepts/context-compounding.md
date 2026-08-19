@@ -2,31 +2,31 @@
 title: "Context Compounding"
 type: concept
 sources:
-  - knowledge/connections/the-efficiency-quality-inversion-in-automated-synthesis.md
+  - knowledge/connections/the-scalability-paradox-in-agentic-creative-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Definition
 
-This mechanism refers to the cumulative effect of adding new information to a context window without proportional pruning, leading to a degradation of signal-to-noise ratio. Each new concept or cluster adds to the total context, but the model's ability to attend to the most relevant instructions diminishes as the total length grows. This compounding effect creates a hidden cost that is not immediately visible in the output until the taste fidelity drops below an acceptable threshold.
+Context compounding is the phenomenon where the accumulation of generated artifacts and metadata progressively consumes available context window space, leaving less room for critical instruction following. This leads to a degradation in the model's ability to adhere to specific constraints or stylistic guidelines as the session lengthens. The mechanism is not merely storage exhaustion but a dilution of signal-to-noise ratio within the active working memory.
 
 ## Context
 
-Sean's runs demonstrate that as he samples more clusters, the rejected count increases, indicating that the compounding context is causing the model to deviate from taste constraints. This suggests that the current memory management strategy is insufficient for handling large-scale synthesis tasks.
+For Sean, this means that long-running synthesis runs risk producing generic output unless he implements dynamic pruning strategies. It highlights the need for strict limits on cluster sampling to prevent the loss of specific 'taste' signals.
 
 ## Evidence
 
 > As Sean scales the concept generation, the system generates more data but loses the specific 'taste' signals that define his creative voice.
 
-> Sean’s runs with higher clusters sampled (e.g., 186x) show increased rejection counts (36), indicating that the compounding context is causing the model to deviate from taste constraints.
+> This connection reveals a critical tension where the pursuit of automated throughput directly undermines the preservation of taste memory, creating a scalability paradox.
 
 ## Examples
 
-- The increase in rejected concepts correlates with the increase in clusters sampled, highlighting the impact of context compounding.
-- Scaling agentic creative workflows requires implementing dynamic memory pruning strategies to prevent context dilution from degrading output quality.
+- Sean must implement dynamic memory pruning strategies to prevent context dilution from degrading output quality.
+- Scaling agentic creative workflows requires setting strict limits on cluster sampling to maintain taste consistency in his outputs.
 
 ## Related Concepts
 
-[[The Efficiency-Quality Inversion in Automated Synthesis]] [[Throughput vs. Taste Memory Tension]]
+[[Throughput vs. Taste Memory Tension]] [[The Efficiency-Quality Inversion in Automated Synthesis]]

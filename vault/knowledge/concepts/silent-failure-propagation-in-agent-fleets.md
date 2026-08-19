@@ -2,7 +2,7 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-automation-velocity-vs-semantic-integrity.md
+  - knowledge/connections/the-tension-between-operational-visibility-and-semantic-value-in-agent-fleets.md
 tags: [auto-generated, phase-6]
 created: 2026-08-19
 updated: 2026-08-19
@@ -10,23 +10,22 @@ updated: 2026-08-19
 
 ## Definition
 
-This mechanism refers to the phenomenon where a failure in one agent's output (such as the vault-synthesizer) goes undetected by upstream or downstream agents, causing stale or incorrect context to propagate through the system. The dependency is invisible in each agent's source because the failure does not raise an exception but rather produces a null or low-quality result that is accepted as valid input. This leads to a compounding error state where the entire knowledge graph becomes misaligned with reality without any immediate alert.
+This mechanism occurs when a failure in one agent's output is not detected by downstream consumers, allowing errors to accumulate and amplify across the system. The lack of inter-agent validation protocols means that semantic decay or missing data is treated as valid input, leading to compounding inaccuracies. This propagation is silent because each individual agent operates within its own success criteria, unaware of the broader systemic impact.
 
 ## Context
 
-Sean's daily note generation and job hunt tracking rely on accurate context from previous days. A silent failure in the synthesizer means his morning briefs are based on stale data, leading to incorrect strategic decisions in his job hunt or creative work.
+Sean's infrastructure fragments knowledge into isolated processes, where errors in indexing or synthesis are not caught until they manifest as strategic stagnation. This lack of cross-domain validation allows semantic decay to mask itself behind operational uptime.
 
 ## Evidence
 
-> The failure of vault-synthesizer directly impacts cross-domain knowledge integration, linking domains like 'Indexing and Synthesis' with 'Automation Failure and Daily Note Disruption'.
+> vault-indexer ... notes='chunks=323, embeddings=323, errors=0'
 
-> When a synthesizer fails silently overnight, the morning brief inherits stale context, and the user notices the staleness before the brief flags the failure.
+> The fleet's binary health reporting creates a dangerous blind spot where semantic decay is invisible to the operator.
 
 ## Examples
 
-- The run on 2026-07-06 had a high rejected_count (106) but no explicit error flag, suggesting silent degradation.
-- The run on 2026-08-15 had a high rejected_count (36) and a long duration, indicating potential processing issues that were not immediately visible.
+- When agents report 'success' or 'empty-queue', they mask the lack of semantic value
 
 ## Related Concepts
 
-[[Automation Failure and Daily Note Disruption]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+[[The Illusion of Health in Autonomous Systems]] [[Operational Uptime vs. Cognitive Utility Tension]]

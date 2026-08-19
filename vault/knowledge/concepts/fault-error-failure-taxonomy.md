@@ -2,7 +2,7 @@
 title: "Fault → Error → Failure Taxonomy"
 type: concept
 sources:
-  - knowledge/concepts/fault-error-failure-taxonomy.md
+  - knowledge/expansions/connections/agent-health-monitoring-agent-health.md
 tags: [auto-generated, phase-6]
 created: 2026-08-19
 updated: 2026-08-19
@@ -10,23 +10,23 @@ updated: 2026-08-19
 
 ## Definition
 
-This framework distinguishes between internal state anomalies (faults), incorrect intermediate computations (errors), and the deviation of delivered service from its specification (failures). It prevents the conflation of component unavailability with functional failure, allowing for precise attribution of blame and recovery strategies. This taxonomy requires defining SLIs based on user-visible capabilities rather than internal component status to avoid masking semantic decay behind operational uptime.
+This mechanism distinguishes between the root cause (fault), the internal state deviation (error), and the externally visible service deviation (failure). It prevents the conflation of all issues into a single 'health' scalar by requiring explicit mapping of how latent errors become observable failures only when a consumer detects the discrepancy. This taxonomy enables rigorous incident analysis by clarifying whether an issue is a transient hardware glitch, a state corruption, or a genuine service outage.
 
 ## Context
 
-Sean's current monitoring likely treats any offline node as a critical failure. By adopting this taxonomy, he can distinguish between a hardware fault (Alienware off) and a service failure (synthesis not completed), enabling more nuanced alerting and less panic-driven intervention.
+Sean's vault infrastructure deals with complex dependencies between agents; without this taxonomy, it is difficult to determine if a missed daily note was due to a sleeping laptop (fault) or a broken index (error). Applying this framework allows for precise incident reporting and better fault isolation in his automated knowledge pipeline.
 
 ## Evidence
 
-> A fault may create an erroneous internal state, but a failure occurs only when delivered service deviates from its specification.
+> “Agent Health Monitoring” and “Agent Health” are currently synonyms. The Avižienis taxonomy supplies the missing distinctions
 
-> Define SLIs around delivered capabilities: 'nightly synthesis completed by 08:00,' 'sprite job began within its declared execution window,' or 'deferred work remained queued without paid fallback.'
+> Fault X created latent error Y; it became service failure Z only when consumer C observed the deviation.
 
 ## Examples
 
-- The ComfyUI node crashes (fault), causing a generated image to be missing (error), but the text synthesis completes on time, so the overall service failure is partial.
-- A model provider rate limits requests (fault), leading to truncated outputs (error), which constitutes a service failure only if the truncation violates the defined quality SLI.
+- Distinguishing between wol-deferred, partial outputs, and citation corruption as distinct event types
+- Mapping availability, reliability, integrity, safety, and maintainability as separate dependability attributes
 
 ## Related Concepts
 
-[[SRE Error Budget for Agents]] [[Agent Health Monitoring]]
+[[Silent Failure Propagation in Agent Fleets]] [[Agent Hazard Analysis via STPA]]

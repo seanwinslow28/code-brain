@@ -2,32 +2,32 @@
 title: "The Calibration Bottleneck in Scalable Creative Production"
 type: connection
 connects:
-  - The Taste-Fidelity Decoupling in Creative Production
-  - Supervision Fatigue as the Hard Cap on Fleet Scaling
-  - The Verification-Governance Inversion
-created: 2026-08-18
-updated: 2026-08-18
+  - The Calibration Bottleneck in Scalable Creative Production
+  - Legibility Debt as a Supervision Failure Mode
+  - Throughput vs. Activity Illusion in Job Hunt Operations
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the desire for high-throughput agent fleets and the low-trust nature of style transfer, where the cost of verification scales faster than the volume of output. As Sean attempts to scale his creative studio operations, the 'rejected_count' metric reveals that raw generation capacity is decoupled from aesthetic utility; more concepts do not equal better content if the voice calibration fails. This forces a strategic decision: either accept lower fidelity at higher volume or impose strict sampling limits that cap scalability to preserve the 'Sean Mode' integrity.
+This connection reveals a fundamental tension between the scalability of automated synthesis and the human capacity to verify its output. As Sean’s vault synthesizer scales up concept production (evidenced by the jump from 45 to 125+ concepts), the verification burden shifts entirely to the user, creating a bottleneck where cognitive utility is capped by Sean’s ability to audit the graph. The consequence is that automation velocity can outpace semantic value, leading to a 'legibility debt' where the graph appears robust but contains hidden structural or semantic errors.
 
 ## Threads
 
-### [[The Taste-Fidelity Decoupling in Creative Production]]
+### [[The Calibration Bottleneck in Scalable Creative Production]]
 
-> The prompt explicitly forbids repeating the 'missed' drafts, indicating that previous iterations failed to capture the necessary aesthetic nuance.
+> The calibration bottleneck emerges when the rate of automated insight generation exceeds the human capacity to verify and integrate those insights into a coherent worldview.
 
-### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
+### [[Legibility Debt as a Supervision Failure Mode]]
 
-> The tension arises when the cost of verifying AI-generated content exceeds the value of the content itself, forcing a shift from production-centric to supervision-centric workflows.
+> Legibility debt accumulates when automated systems produce outputs that are structurally valid but semantically hollow, masking decay behind a veneer of productivity.
 
-### [[The Verification-Governance Inversion]]
+### [[Throughput vs. Activity Illusion in Job Hunt Operations]]
 
-> Sean Mode + the House Style grit register + the signature-moves table
+> High activity metrics in job hunting often mask low strategic value, creating an illusion of progress while actual outcomes remain stagnant.
 
 ## Implications
 
-- Sean must cap the number of concurrent synthesizer runs to prevent taste drift, prioritizing quality over quantity in his creative studio pipeline.
-- The fleet architecture needs a 'taste guardrail' layer that rejects outputs before they enter the vault if they fail negative constraint checks.
+- Sean must implement stricter quality gates for the vault synthesizer to prevent semantic decay from outpacing his ability to audit it.
+- The definition of 'success' for the synthesizer should shift from concepts written to verified connections made, aligning automation goals with cognitive utility.

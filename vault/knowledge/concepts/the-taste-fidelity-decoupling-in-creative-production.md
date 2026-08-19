@@ -2,7 +2,7 @@
 title: "The Taste-Fidelity Decoupling in Creative Production"
 type: concept
 sources:
-  - knowledge/concepts/the-taste-fidelity-decoupling-in-creative-production.md
+  - knowledge/connections/the-calibration-bottleneck-in-scalable-creative-production.md
 tags: [auto-generated, phase-6]
 created: 2026-08-19
 updated: 2026-08-19
@@ -10,23 +10,23 @@ updated: 2026-08-19
 
 ## Definition
 
-This mechanism describes the inverse relationship between the volume of generated artifacts and the fidelity to a specific human voice, where increased throughput necessitates a proportional increase in negative constraints to prevent generic drift. The cost of maintaining aesthetic integrity rises non-linearly as sampling expands, because each new iteration introduces more variance that must be actively suppressed rather than naturally filtered. This creates a structural bottleneck where the user's capacity to articulate precise stylistic boundaries becomes the limiting factor for scalable creative production, forcing a shift from volume-based metrics to supervision-intensive workflows.
+This pattern identifies the divergence between the quantity of generated artifacts and their qualitative alignment with established aesthetic standards. It posits that automated systems can produce volume independently of taste, but the utility of that volume is strictly gated by the fidelity of style transfer. As volume increases, the signal-to-noise ratio degrades unless explicit 'taste guardrails' are implemented to reject low-fidelity outputs before they enter the vault.
 
 ## Context
 
-Sean's fleet runs demonstrate that while model upgrades (qwen3-14b to qwen3.6-35b) increase raw concept generation, they do not automatically resolve the fidelity gap; instead, they often require tighter calibration loops to maintain the 'House Style' grit register without succumbing to homogenization.
+Sean's creative studio operations suffer from this decoupling as he scales. The data shows that while concept generation has increased dramatically, the consistency of 'Sean Mode' is threatened by the sheer volume of variations, requiring strategic capping of concurrent runs to preserve quality.
 
 ## Evidence
 
-> The prompt explicitly forbids repeating the 'missed' drafts, indicating that previous iterations failed to capture the necessary aesthetic nuance.
+> This connection reveals a critical tension between the increasing volume of automated output and the stagnating depth of strategic connections.
 
-> Sean Mode + the House Style grit register + the signature-moves table
+> Sean must cap the number of concurrent synthesizer runs to prevent taste drift, prioritizing quality over quantity in his creative studio pipeline.
 
 ## Examples
 
-- Run 2026-07-07 reduced concepts_written to 86 but also reduced rejected_count to 33, suggesting that tighter calibration or smaller sampling improved fidelity.
-- The tension arises when the cost of verifying AI-generated content exceeds the value of the content itself, forcing a shift from production-centric to supervision-centric workflows.
+- The prompt explicitly forbids repeating the 'missed' drafts, indicating that previous iterations failed to capture the necessary aesthetic nuance.
+- The fleet architecture needs a 'taste guardrail' layer that rejects outputs before they enter the vault if they fail negative constraint checks.
 
 ## Related Concepts
 
-[[The Verification-Governance Inversion]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
+[[The Calibration Bottleneck in Scalable Creative Production]] [[Performative Taste Drift]]

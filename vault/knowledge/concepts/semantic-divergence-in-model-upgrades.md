@@ -2,7 +2,7 @@
 title: "Semantic Divergence in Model Upgrades"
 type: concept
 sources:
-  - knowledge/concepts/semantic-divergence-in-model-upgrades.md
+  - knowledge/connections/the-semantic-velocity-trap-in-agent-fleet-scaling.md
 tags: [auto-generated, phase-6]
 created: 2026-08-19
 updated: 2026-08-19
@@ -10,21 +10,22 @@ updated: 2026-08-19
 
 ## Definition
 
-This phenomenon occurs when a system's underlying interpretive weights shift due to model version changes, causing identical input data to generate structurally different outputs. The resulting 'semantic heterogeneity' means that historical consistency cannot be guaranteed without explicit schema versioning or manual intervention. This creates a latent risk where newer, more capable models misinterpret older insights by applying updated linguistic priors that were not present in the original context.
+This phenomenon occurs when a system upgrades its underlying interpretive engine, causing identical input data to be processed through different semantic weights. The result is not merely new information, but a structural shift in how historical context is understood, creating 'semantic heterogeneity' where past insights are no longer reliably aligned with current logic. This divergence undermines the continuity of the knowledge base because the newer model's definitions and associations differ from those established by the previous version.
 
 ## Context
 
-Sean is actively migrating his agent fleet from qwen3-14b to qwen3.6-35b-a3b-32k. This transition introduces a critical risk where the vault synthesizer's output quality degrades not because of logic errors, but because the model's semantic baseline has shifted, making past connections potentially invalid or misleading.
+Sean is actively migrating his agent fleet from qwen3-14b to qwen3.6-35b-a3b-32k. This transition creates a risk where his existing vault, built on older semantic assumptions, becomes increasingly misaligned with the new model's interpretive framework, requiring manual correction of historical insights.
 
 ## Evidence
 
 > The transition from qwen3-14b to qwen3.6-35b-a3b-32k introduces a semantic divergence risk where the same input data is processed with different interpretive weights, leading to 'semantic heterogeneity' rather than simple state inconsistency.
 
-> Sean faces a critical trade-off where increasing the sampling velocity of his agent fleet to capture more insights simultaneously accelerates semantic divergence caused by model upgrades.
+> Sean must implement a schema versioning strategy to ensure that older insights are not misinterpreted by newer, more capable models.
 
 ## Examples
 
-- A concept written on 2026-06-23 using qwen3-14b might be re-interpreted incorrectly if processed by qwen3.6-35b-a3b-32k in a later run without explicit version constraints.
+- The transition from qwen3-14b to qwen3.6-35b-a3b-32k introduces a semantic divergence risk where the same input data is processed with different interpretive weights
+- Sean must implement a schema versioning strategy to ensure that older insights are not misinterpreted by newer, more capable models
 
 ## Related Concepts
 

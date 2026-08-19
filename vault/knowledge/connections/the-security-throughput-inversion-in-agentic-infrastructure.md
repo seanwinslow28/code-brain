@@ -5,8 +5,8 @@ connects:
   - Velocity vs. Judgment in MCP Strengthening
   - MCP Server Hardening
   - The Illusion of Competence in Automated Systems
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Synthesis

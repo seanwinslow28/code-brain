@@ -2,32 +2,32 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: connection
 connects:
-  - SRE Error Budget for Agents
-  - Resilience Engineering: Work-as-Imagined vs Work-as-Done
-  - The Illusion of Health in Autonomous Systems
-created: 2026-08-18
-updated: 2026-08-18
+  - Coordinated Omission in Agent Observability
+  - Failure Suspicion State Machine
+  - Operational Visibility vs. Semantic Value in Agent Fleets
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Synthesis
 
-There is a critical tension between binary operational uptime and semantic value in agent fleets. When systems prioritize continuous availability over outcome fidelity, they create an illusion of health that masks underlying semantic decay or stale context. This leads to a trust deficit where users cannot distinguish between successful completion and silent failure propagation.
+Standard observability metrics create an illusion of health by ignoring the silent failures that actually disrupt user workflows, such as missed daily notes or stale indexes. When agents fail to report due to sleep or network issues, the system appears healthy because it only measures successful requests, not the cost of missed deadlines. This tension between operational visibility and semantic value means that high throughput can coexist with low utility, requiring a shift from request-based metrics to deadline-based SLOs.
 
 ## Threads
 
-### [[SRE Error Budget for Agents]]
+### [[Coordinated Omission in Agent Observability]]
 
-> An offline endpoint is not automatically unhealthy: the question is whether it consumed an agreed reliability budget or prevented a promised outcome.
+> Your article currently says the defect arises when denominators come from expected work; that is backwards. Expected work is the correction—the defective denominator contains only observed work.
 
-### [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
+### [[Failure Suspicion State Machine]]
 
-> When Tier C disappears, preserve manifest truth and bounded backlog growth; shed visual QA before provenance, and never disguise deferred work as successful work.
+> An expected-run ledger that immediately converts silence into failure therefore manufactures certainty.
 
-### [[The Illusion of Health in Autonomous Systems]]
+### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
 
-> Your Agent Fleet Is Not Resilient Because Everything Is Online.
+> Translate 'request success' into 'artifact delivered by deadline': daily note ready by 08:30, index fresh before synthesis
 
 ## Implications
 
-- Sean must redefine success metrics for his fleet to include freshness and integrity rather than just uptime, preventing false confidence in automated outputs.
-- Operational dashboards need to shift from binary health indicators to SLO-based error budget consumption rates to accurately reflect system state.
+- Sean must redesign his health checks to include synthetic traffic and deadline-relative latency measurements to detect silent failures.
+- The fleet's SLOs should be based on artifact delivery times rather than agent heartbeat counts to align with user needs.

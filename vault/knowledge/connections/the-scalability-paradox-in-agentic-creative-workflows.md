@@ -5,8 +5,8 @@ connects:
   - The Efficiency-Quality Inversion in Automated Synthesis
   - Throughput vs. Taste Memory Tension
   - Context Compounding
-created: 2026-08-18
-updated: 2026-08-18
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Synthesis

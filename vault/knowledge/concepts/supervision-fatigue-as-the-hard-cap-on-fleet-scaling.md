@@ -2,7 +2,7 @@
 title: "Supervision Fatigue as the Hard Cap on Fleet Scaling"
 type: concept
 sources:
-  - knowledge/concepts/supervision-fatigue-as-the-hard-cap-on-fleet-scaling.md
+  - knowledge/expansions/supervision-fatigue-as-the-hard-cap-on-fleet-scaling.md
 tags: [auto-generated, phase-6]
 created: 2026-08-19
 updated: 2026-08-19
@@ -10,23 +10,25 @@ updated: 2026-08-19
 
 ## Definition
 
-This invariant defines the biological limit of human oversight where the cognitive load of reviewing and calibrating agent output grows non-linearly with the volume of generated artifacts. When the rate of automated synthesis exceeds the user's capacity for meaningful integration, a trust deficit emerges because the user perceives the high-volume output as low-value despite its statistical correctness. This fatigue acts as a hard cap on scaling because it forces a decoupling of automation from creativity, requiring manual taste tournaments to realign the system.
+This concept defines a non-linear failure mode where human cognitive load, specifically 'supervision fatigue,' acts as the absolute bottleneck for agent fleet utility. Rather than scaling linearly with automation, the value of additional agents diminishes once the human reviewer's capacity to maintain taste and calibration is exhausted. The mechanism relies on the tension between automated throughput and the finite bandwidth of human judgment, creating a hard ceiling on effective system size.
 
 ## Context
 
-Sean's run logs show a clear correlation between increased duration and higher rejection counts, suggesting that his ability to supervise effectively diminishes as the fleet generates more clusters, ultimately limiting the effective scale of the automated system. The consequence is a forced decoupling of automation from creativity, requiring Sean to implement taste tournaments to realign the system's objective function with his strategic goals.
+Sean is currently running a fleet of synthesizer agents that generate significant volume (100+ concepts/run). Without accounting for his review capacity, he risks accumulating 'legibility debt' or accepting lower-quality outputs simply to clear the queue. Understanding this cap prevents him from over-investing in automation that outpaces his ability to curate.
 
 ## Evidence
 
-> This connection reveals a fundamental tension between the theoretical scalability of agent fleets and the biological limits of human supervision.
+> Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-Gravity CLI) of [[supervision-fatigue-as-the-hard-cap-on-fleet-scaling]].
 
-> The consequence is a forced decoupling of automation from creativity, requiring Sean to implement taste tournaments to realign the system's objective function with his strategic goals.
+> The cited runs measure machine duration and artifact count—not Sean’s attention, fatigue, rejection rate, or trust.
+
+> Supervision fatigue is currently an untested causal story.
 
 ## Examples
 
-- Run 2026-07-05: Duration of 2728.6 seconds with only 39 connections written, indicating diminishing returns on supervision time as clusters sampled increased.
-- Run 2026-08-17: Duration of 2408.1 seconds with 25 connections, showing that even with optimized models, the supervision bottleneck remains a limiting factor for connection density.
+- Instrument three nightly conditions—5, 15, and 30 candidates—and record review time, raw TLX, acceptance rate, and delayed usefulness after seven days.
+- Specify periodic blind ranking, manually authored synthesis rounds, and recovery drills where Sean must diagnose a deliberately corrupted connection without agent explanation.
 
 ## Related Concepts
 
-[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Tacit Knowledge Erosion vs. Automation Scale]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Legibility Debt as a Supervision Failure Mode]]

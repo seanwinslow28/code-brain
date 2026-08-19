@@ -2,7 +2,7 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-infrastructure-fragility-and-semantic-decay.md
+  - knowledge/expansions/connections/agent-health-monitoring-and-daily-note-generation-interdependence.md
 tags: [auto-generated, phase-6]
 created: 2026-08-19
 updated: 2026-08-19
@@ -10,23 +10,23 @@ updated: 2026-08-19
 
 ## Definition
 
-This pattern describes a systemic blind spot where operational metrics, such as process execution success or binary health reporting, diverge from semantic integrity and actual utility. When agents report 'healthy' status based solely on protocol adherence rather than output quality, the operator perceives progress while the knowledge base stagnates. This decoupling creates a dangerous feedback loop where volume is mistaken for value, masking the underlying decay of cognitive assets until the system becomes functionally useless despite appearing fully operational.
+The illusion of health occurs when an autonomous system reports operational status based on internal metrics that do not correlate with the user's actual experience of value. This happens because infrastructure proxies, such as log files or process heartbeats, are mistaken for Service Level Indicators (SLIs) that measure user-visible behavior. The system appears healthy because it is running, but it fails to deliver the required outcome, creating a gap between operational visibility and semantic value. This disconnect allows failures to propagate silently until they become catastrophic to the user's workflow.
 
 ## Context
 
-Sean's fleet currently reports success while key infrastructure like Alienware and ComfyUI remains offline, blocking creative workflows. This specific instance highlights how the current monitoring setup fails to capture the true state of Sean's ability to produce high-value work, leading to a false sense of security about the vault's vitality.
+Sean's prior runs show high concept counts with low connection rates, suggesting agents are 'healthy' in terms of execution but failing to produce meaningful synthesis. Recognizing this illusion prevents Sean from trusting surface-level metrics when evaluating his fleet's performance.
 
 ## Evidence
 
-> The fleet's binary health reporting creates a dangerous blind spot where semantic decay is invisible to the operator.
+> A log file is not evidence that the daily note service succeeded.
 
-> Agents report success based on process execution, while knowledge integrity depends on successful synthesis and connection.
+> The current article commits exactly that proxy error: a log file is not evidence that the daily note service succeeded.
 
 ## Examples
 
-- Deep-researcher agent reports an empty queue, limiting synthesis of market/academic insights despite being 'active'.
-- Hardware fragility masks semantic decay in agent fleets, leading to a false sense of operational health.
+- An agent completes 100 tasks but fails to incorporate overnight artifacts, resulting in a stale morning brief.
+- A process returns exit code 0 while producing output that lacks the required sections for validity.
 
 ## Related Concepts
 
-[[Operational Uptime vs. Cognitive Utility Tension]] [[Silent Failure Propagation in Agent Fleets]]
+[[Operational Visibility vs. Semantic Value in Agent Fleets]] [[Legibility Debt as a Supervision Failure Mode]]

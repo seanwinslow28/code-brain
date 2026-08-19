@@ -2,7 +2,7 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/operational-visibility-vs-semantic-value-in-agent-fleets.md
+  - knowledge/connections/operational-metrics-mask-semantic-stagnation.md
 tags: [auto-generated, phase-6]
 created: 2026-08-19
 updated: 2026-08-19
@@ -10,23 +10,23 @@ updated: 2026-08-19
 
 ## Definition
 
-This mechanism describes the structural distortion where high-resolution operational metrics (cluster counts, token usage, duration) create a false signal of semantic health, masking the actual decay or stagnation of knowledge quality. The system optimizes for throughput because these variables are easily quantifiable and aggregatable, while semantic value requires qualitative assessment that is difficult to automate at scale. This imbalance causes infrastructure improvements focused on speed or volume to exacerbate noise without improving signal quality, as the feedback loop reinforces activity over insight.
+This concept defines the structural gap between the observability of agent operations and the actual utility of their outputs. It arises because monitoring systems are typically designed to track execution metrics—such as logs, counts, durations, and completion rates—which are easy to measure but do not correlate with semantic quality. The mechanism creates a distortion where increasing operational visibility (more logs, more detailed metrics) can actually obscure the lack of semantic value, as the noise of activity drowns out the silence of stagnation.
 
 ## Context
 
-Sean monitors his vault runs via metrics like concepts written and duration, but these numbers do not reflect the quality of the insights generated. This makes it difficult for him to know if an increase in run frequency or cluster sampling is actually improving his knowledge base or just increasing computational waste. The tension is critical because it obscures the true state of his personal knowledge infrastructure.
+Sean's fleet memory index tracks runs with metrics like 'concepts_written' and 'duration_seconds'. These metrics provide high visibility into the *activity* of the synthesizer but offer no direct insight into whether the generated concepts are valuable, novel, or correctly connected. This makes it difficult for Sean to assess the true health of his knowledge infrastructure based solely on these operational dashboards.
 
 ## Evidence
 
 > There is a fundamental tension between the visibility of agent operations (logs, counts, durations) and the actual semantic value of their outputs.
 
-> The consequence is that infrastructure improvements focused on throughput (more clusters, faster runs) may actually exacerbate the problem by increasing noise without improving signal quality.
+> Monitoring dashboards need to prioritize synthesis quality over operational volume to prevent false signals of productivity from masking infrastructure issues.
 
 ## Examples
 
-- A run sampling 253 clusters and writing 109 concepts appears more productive than one sampling 144 clusters and writing 86, but if the latter produces higher-quality connections, the metric-driven view is misleading.
-- Monitoring dashboards prioritize synthesis quality over operational volume to prevent false signals of productivity from masking infrastructure issues.
+- A run logs 108 concepts written but only 26 connections, indicating high activity but low integration.
+- The fleet memory index shows '108c/26x' for a run, providing a count of outputs without evaluating their semantic density.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Metric Distortion vs. Semantic Decay]]
+[[The Illusion of Health in Autonomous Systems]] [[Legibility Debt as a Supervision Failure Mode]]

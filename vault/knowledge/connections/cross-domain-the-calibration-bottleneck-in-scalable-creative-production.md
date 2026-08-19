@@ -2,32 +2,32 @@
 title: "Cross-Domain: The Calibration Bottleneck in Scalable Creative Production"
 type: connection
 connects:
-  - The Taste-Throughput Trade-off in Agentic Synthesis
-  - Legibility Debt as a Supervision Failure Mode
-  - Velocity vs. Judgment in MCP Strengthening
-created: 2026-08-18
-updated: 2026-08-18
+  - The Calibration Bottleneck in Scalable Creative Production
+  - Supervision Fatigue as the Hard Cap on Fleet Scaling
+  - The Taste-Fidelity Decoupling in Creative Production
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Synthesis
 
-The core tension lies in the misalignment between the exponential growth of automated concept generation and the linear capacity of human taste to curate them. This creates a calibration bottleneck where the operator's judgment becomes the limiting factor for system reliability, as the agent fleet produces more noise than signal. The consequence is a systemic trust deficit that forces Sean to revert to manual oversight, negating the efficiency gains of automation and creating a hidden cost in cognitive load.
+The core tension lies in the misalignment between the exponential growth of automated concept generation and the linear capacity of human taste to curate them. This creates a calibration bottleneck where scaling the fleet does not scale the creative output proportionally, but instead amplifies the cost of verification. The consequence is a strategic imperative to limit concurrency and enforce strict taste guardrails, as unchecked scaling leads to aesthetic degradation rather than increased value.
 
 ## Threads
 
-### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
+### [[The Calibration Bottleneck in Scalable Creative Production]]
 
-> Sean's transition from small, high-quality runs to large, low-quality runs reveals a critical tension between operational velocity and semantic judgment.
+> There is a fundamental tension between the desire for high-throughput agent fleets and the low-trust nature of style transfer, where the cost of verification scales faster than the volume of output.
 
-### [[Legibility Debt as a Supervision Failure Mode]]
+### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
 
-> This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
+> The tension arises when the cost of verifying AI-generated content exceeds the value of the content itself, forcing a shift from production-centric to supervision-centric workflows.
 
-### [[Velocity vs. Judgment in MCP Strengthening]]
+### [[The Taste-Fidelity Decoupling in Creative Production]]
 
-> The agents you have already built will keep producing work long after they stop being right.
+> This connection reveals a critical tension between the increasing volume of automated output and the stagnating depth of strategic connections.
 
 ## Implications
 
-- Sean must implement semantic verification metrics for his synthesizer runs, not just operational ones like duration or exit codes, to detect when the system 'stops being right' while still completing successfully.
-- Prioritizing harness simplification (reducing clusters_sampled and tool count) may yield higher reliability gains than upgrading to larger models like qwen3.6-35b, as it reduces the failure surface area.
+- Sean must cap the number of concurrent synthesizer runs to prevent taste drift, prioritizing quality over quantity in his creative studio pipeline.
+- The fleet architecture needs a 'taste guardrail' layer that rejects outputs before they enter the vault if they fail negative constraint checks.
