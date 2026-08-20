@@ -2,31 +2,33 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-monitoring-and-daily-note-generation-interdependence.md
+  - 02_Areas/Agent-Fleet/fleet-state.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-The illusion of health occurs when an autonomous system reports operational status based on internal metrics that do not correlate with the user's actual experience of value. This happens because infrastructure proxies, such as log files or process heartbeats, are mistaken for Service Level Indicators (SLIs) that measure user-visible behavior. The system appears healthy because it is running, but it fails to deliver the required outcome, creating a gap between operational visibility and semantic value. This disconnect allows failures to propagate silently until they become catastrophic to the user's workflow.
+System observability metrics often report binary success states (e.g., 'status=success') that mask underlying semantic decay or functional degradation. When an agent reports a healthy status while failing to produce meaningful output—such as an empty research queue or stale daily notes—the user receives false confidence in the system's operational integrity. This disconnect arises because standard health checks verify process execution rather than outcome validity, allowing silent failures to persist undetected until they disrupt downstream dependencies.
 
 ## Context
 
-Sean's prior runs show high concept counts with low connection rates, suggesting agents are 'healthy' in terms of execution but failing to produce meaningful synthesis. Recognizing this illusion prevents Sean from trusting surface-level metrics when evaluating his fleet's performance.
+Sean relies on the fleet for critical daily routines like job hunting and knowledge synthesis. If these agents report 'healthy' while producing no value (e.g., zero job scores or empty research), Sean wastes time assuming the system is working when it has actually stalled, leading to missed opportunities in his job hunt.
 
 ## Evidence
 
-> A log file is not evidence that the daily note service succeeded.
+> Deep-researcher queue is empty. The highest leverage activity (Deep-research synthesis) was dormant today.
 
-> The current article commits exactly that proxy error: a log file is not evidence that the daily note service succeeded.
+> Job-feed actively aggregated multiple boards... notes='fetch=0 scored=0 mbp=False'
+
+> status=success · mode=morning · 0.2h ago · cost=$0.2497 · notes='Done. vault/10_timeline/daily/2026-08-19.md created.'
 
 ## Examples
 
-- An agent completes 100 tasks but fails to incorporate overnight artifacts, resulting in a stale morning brief.
-- A process returns exit code 0 while producing output that lacks the required sections for validity.
+- The deep-researcher agent reports 'healthy' status despite having an empty queue and no unchecked items, indicating a lack of active research rather than system failure.
+- The job-feed agent reports 'success' with zero scored jobs, masking the potential issue of missing or irrelevant job listings without explicit error flags.
 
 ## Related Concepts
 
-[[Operational Visibility vs. Semantic Value in Agent Fleets]] [[Legibility Debt as a Supervision Failure Mode]]
+[[Operational Uptime vs. Cognitive Utility Tension]] [[Coordinated Omission in Agent Observability]]

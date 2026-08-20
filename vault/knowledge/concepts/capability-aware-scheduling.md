@@ -2,19 +2,19 @@
 title: "Capability-Aware Scheduling"
 type: concept
 sources:
-  - knowledge/expansions/capability-aware-scheduling.md
+  - knowledge/concepts/capability-aware-scheduling.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-A resource allocation mechanism that decouples the matching phase from the claiming phase, allowing heterogeneous nodes to publish hard requirements and soft rankings rather than accepting one-way dispatch. This approach treats a match as a tentative proposal that must be revalidated against current availability and policy constraints before execution begins. By separating intent publication from resource acquisition, the system tolerates stale advertisements and enables dynamic negotiation between job needs and machine capabilities.
+This mechanism decouples the matching phase from the claiming phase, allowing heterogeneous nodes to publish hard requirements and soft rankings rather than accepting one-way dispatch. By treating a match as a tentative proposal that must be revalidated against current availability and policy constraints before execution begins, the system tolerates stale advertisements and enables dynamic negotiation between job needs and machine capabilities. This separation prevents urgent jobs from starving creative workloads by seizing scarce resources without regard for fairness or node state.
 
 ## Context
 
-Sean's agent fleet operates across diverse hardware (Alienware, MacBook) with conflicting operational modes (interactive vs. batch). Without this separation, urgent jobs can starve creative workloads by seizing scarce resources without regard for fairness or node state, leading to silent failures in non-critical pipelines.
+Sean's agent fleet operates across diverse hardware (Alienware, MacBook) with conflicting operational modes (interactive vs. batch). Without this separation, silent failures occur in non-critical pipelines when nodes reject claims due to stale capability advertisements or active user interference.
 
 ## Evidence
 

@@ -2,31 +2,33 @@
 title: "Operational Uptime vs. Cognitive Utility Tension"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-monitoring-and-automation-reliability.md
+  - 02_Areas/Agent-Fleet/fleet-state.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-This tension arises when an agent fleet prioritizes the mechanical success of background processes over the semantic validity of their outputs. The system interprets a running script as 'healthy' even if the resulting artifact is stale, empty, or structurally invalid. This creates a false sense of security where the user sees green lights in monitoring dashboards while the actual knowledge infrastructure decays silently. The core mechanism is a category error: treating process execution as synonymous with information delivery.
+There is a fundamental trade-off between maintaining high availability of automated processes and ensuring those processes generate actionable, high-value insights. Systems optimized for uptime often prioritize low-cost, routine tasks (like indexing or status updates) over high-effort, high-variance activities (like deep research), leading to a state where the infrastructure is robust but cognitively inert. This tension forces users to choose between reliable but shallow automation and fragile but potentially profound agentic work.
 
 ## Context
 
-Sean's fleet has historically struggled with this exact issue, where agents run successfully but fail to produce usable daily notes or research syntheses. Recognizing this tension allows him to shift monitoring from 'did it run?' to 'is the output valid?', which is critical for maintaining trust in his automated workflows.
+Sean's vault synthesizer and indexer run daily with near-zero cost, providing reliable structure, but the deep-researcher—a high-value agent—remains dormant. This reflects a broader pattern where Sean's infrastructure supports maintenance more effectively than innovation, limiting his ability to generate novel insights for his job hunt or creative projects.
 
 ## Evidence
 
-> Replace “background routines ran successfully” with a contract such as: “The daily note must exist, pass schema validation, and contain fleet output by 08:35; producer health is diagnostic metadata, not success.”
+> vault-indexer ... notes='chunks=185, embeddings=185, errors=0'
 
-> This exposes the article’s current category error: healthy upstream agents can coexist with a failed user-facing routine.
+> Deep-researcher queue is empty. The highest leverage activity (Deep-research synthesis) was dormant today.
+
+> job-feed ... notes='fetch=0 scored=0 mbp=False'
 
 ## Examples
 
-- A synthesizer agent completes its run in 2 seconds but outputs an empty file because it received no input clusters.
-- An automation script reports 'exit code 0' while failing to update the daily note due to a silent API timeout.
+- The vault-indexer successfully processes 185 chunks with zero errors, demonstrating high operational reliability but low cognitive novelty compared to deep research.
+- The job-feed agent runs successfully but scores zero jobs, indicating that while the process is operational, it fails to deliver utility in the current market context.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Operational Readiness Review]]
+[[The Illusion of Health in Autonomous Systems]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
