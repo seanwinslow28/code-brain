@@ -2,10 +2,10 @@
 title: "The Verification-Governance Inversion in Agentic Workflows"
 type: concept
 sources:
-  - knowledge/connections/the-verification-governance-inversion-in-agentic-workflows.md
+  - knowledge/concepts/the-verification-governance-inversion-in-agentic-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean's fleet metrics provide high-resolution operational data but fail to correl
 
 ## Related Concepts
 
-[[Operational Visibility vs. Semantic Value in Agent Fleets]] [[Silent Failure Propagation in Agent Fleets]] [[The Illusion of Competence in Automated Systems]]
+[[Operational Visibility vs. Semantic Value in Agent Fleets]] [[Silent Failure Propagation in Agent Fleets]]

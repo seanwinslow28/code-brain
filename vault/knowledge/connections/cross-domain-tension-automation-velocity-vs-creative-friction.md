@@ -5,13 +5,13 @@ connects:
   - The Taste-Throughput Trade-off in Agentic Synthesis
   - Supervision Fatigue as the Hard Cap on Fleet Scaling
   - Performative Taste Drift
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Synthesis
 
-The core tension lies in the misalignment between the exponential growth of automated concept generation and the linear capacity of human taste to curate them. This creates a calibration bottleneck where the agent fleet's optimization for throughput metrics directly conflicts with the preservation of Sean's specific creative voice. The consequence is a systemic trust deficit, forcing Sean to manually intervene with taste tournaments to prevent the homogenization of his knowledge vault.
+The primary tension is the misalignment between the exponential growth of automated concept generation and the linear capacity of human taste to curate them. This creates a calibration bottleneck where the agent fleet's optimization for throughput metrics directly conflicts with the preservation of Sean's specific creative voice. The consequence is a systemic trust deficit, forcing Sean to manually intervene with taste tournaments to prevent the homogenization of his knowledge vault.
 
 ## Threads
 

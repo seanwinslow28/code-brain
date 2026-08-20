@@ -2,33 +2,31 @@
 title: "Supervision Fatigue as the Hard Cap on Fleet Scaling"
 type: concept
 sources:
-  - knowledge/expansions/supervision-fatigue-as-the-hard-cap-on-fleet-scaling.md
+  - knowledge/connections/the-automation-paradox-in-personal-knowledge-infrastructure.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-This concept defines a non-linear failure mode where human cognitive load, specifically 'supervision fatigue,' acts as the absolute bottleneck for agent fleet utility. Rather than scaling linearly with automation, the value of additional agents diminishes once the human reviewer's capacity to maintain taste and calibration is exhausted. The mechanism relies on the tension between automated throughput and the finite bandwidth of human judgment, creating a hard ceiling on effective system size.
+This concept defines the limit of automation where the cognitive load of monitoring exceeds the value of the generated output. As fleet size increases, the user must spend more time filtering noise, creating a dependency on visibility that undermines creative authority. The mechanism is a feedback loop where increased automation necessitates increased supervision, eventually making manual intervention less efficient than doing the work oneself.
 
 ## Context
 
-Sean is currently running a fleet of synthesizer agents that generate significant volume (100+ concepts/run). Without accounting for his review capacity, he risks accumulating 'legibility debt' or accepting lower-quality outputs simply to clear the queue. Understanding this cap prevents him from over-investing in automation that outpaces his ability to curate.
+Sean's data shows that as concept counts rise, connection quality often drops, requiring more manual review. This fatigue sets a hard limit on how much he can delegate without losing creative control or burning out from constant oversight.
 
 ## Evidence
 
-> Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-Gravity CLI) of [[supervision-fatigue-as-the-hard-cap-on-fleet-scaling]].
+> Monitoring and automation intended to protect creative work can inadvertently damage it by creating a dependency on operational visibility rather than semantic value.
 
-> The cited runs measure machine duration and artifact count—not Sean’s attention, fatigue, rejection rate, or trust.
-
-> Supervision fatigue is currently an untested causal story.
+> The cost of monitoring is weighed against the loss of creative momentum during failures.
 
 ## Examples
 
-- Instrument three nightly conditions—5, 15, and 30 candidates—and record review time, raw TLX, acceptance rate, and delayed usefulness after seven days.
-- Specify periodic blind ranking, manually authored synthesis rounds, and recovery drills where Sean must diagnose a deliberately corrupted connection without agent explanation.
+- Deleting agents that produce healthy but irrelevant outputs
+- Implementing degraded Thursday drills to test creative loop survival
 
 ## Related Concepts
 
-[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Legibility Debt as a Supervision Failure Mode]]
+[[Operational Uptime vs. Cognitive Utility Tension]] [[The Automation Paradox in Personal Knowledge Infrastructure]]

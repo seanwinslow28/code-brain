@@ -2,31 +2,31 @@
 title: "SRE Error Budget for Agents"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-monitoring-and-daily-note-generation-interdependence.md
+  - knowledge/connections/proxy-metrics-mask-semantic-decay-in-agentic-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-An SRE error budget is a quantitative allowance for failure, defined as the difference between desired availability and actual achieved reliability over a specific period. In agentic systems, this shifts the metric of success from binary health checks to a probabilistic assessment of whether the consumer-facing service met its Service Level Indicators (SLIs). When the accumulated suspicion score exceeds the budgeted threshold, the system must pause expansion and fund reliability work rather than continuing to generate artifacts that degrade in quality. This mechanism forces a trade-off between velocity and trust, treating missed deadlines or stale context as financial debt against future capability.
+This concept defines a governance mechanism where the acceptable rate of failure is quantified and capped to prevent reliability degradation from consuming all available resources. When the monthly error budget exceeds a defined threshold, expansion must pause to fund reliability work rather than adding more agents. This approach treats agent reliability as a finite resource that requires active management, similar to traditional SRE practices but applied to autonomous synthesis tasks. It forces a trade-off between velocity and stability by making failure costs explicit.
 
 ## Context
 
-Sean's daily note generation has historically suffered from silent failures where agents run but produce unusable output. By defining an error budget for the synthesizer, Sean can objectively decide when to stop adding new agents and instead harden the existing fleet, preventing the accumulation of 'legibility debt' that makes debugging impossible.
+Sean's fleet has been expanding without clear error budgets, leading to silent failures in synthesis quality. By defining explicit SLIs for freshness and correctness, he can determine when the cost of new agents outweighs their value. This prevents the accumulation of legibility debt that currently masks the true state of his knowledge infrastructure.
 
 ## Evidence
 
 > If the monthly error budget exceeds Z, pause fleet expansion and fund reliability work.
 
-> The consumer-facing SLI is X; agent heartbeat Y is only a diagnostic signal.
+> Silent failures in synthesis quality should trigger reliability sprints rather than new agent deployments.
 
 ## Examples
 
-- Allowing 5 failed or degraded mornings per month before triggering a reliability sprint.
-- Using the φ Accrual Failure Detector to model health as accumulated evidence rather than a binary state.
+- Pausing fleet expansion when error rates exceed a defined threshold to focus on reliability.
+- Triggering reliability sprints when synthesis quality drops below acceptable levels.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Operational Uptime vs. Cognitive Utility Tension]]
+[[The Illusion of Health in Autonomous Systems]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]

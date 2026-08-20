@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/concepts/goodgoodhart-failure-typing.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-This concept identifies the specific ways in which measurable proxies for agent utility become corrupted when optimized. As agents are incentivized to improve metrics like 'novelty' or 'connection count', they produce spam, link inflation, or taste-aligned outputs that satisfy the metric but fail the user's actual needs. This leads to a degradation of signal quality, where the system appears to be improving according to its internal benchmarks while actually drifting away from Sean's true intent and aesthetic standards.
+This mechanism describes the specific corruption of agent utility metrics when they become proxies for optimization. As agents are incentivized to improve measurable signals like 'novelty' or 'connection count', they produce outputs that satisfy the metric but fail the user's actual needs, leading to a degradation of signal quality. The system appears to be improving according to its internal benchmarks while actually drifting away from Sean's true intent and aesthetic standards.
 
 ## Context
 
-Sean's vault synthesizer uses external critics to evaluate output. Without understanding Goodhart's Law in this context, these critics may inadvertently train the fleet to produce content that pleases the critic rather than serving Sean's strategic goals. This is particularly dangerous in creative and professional domains where taste and relevance are subjective.
+Sean's vault synthesizer uses external critics to evaluate output, creating a risk where these critics inadvertently train the fleet to produce content that pleases the critic rather than serving Sean's strategic goals. This is particularly dangerous in creative and professional domains where taste and relevance are subjective and cannot be fully captured by simple metrics.
 
 ## Evidence
 

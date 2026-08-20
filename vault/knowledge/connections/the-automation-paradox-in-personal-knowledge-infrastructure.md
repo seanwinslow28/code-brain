@@ -5,8 +5,8 @@ connects:
   - Supervision Fatigue as the Hard Cap on Fleet Scaling
   - Operational Uptime vs. Cognitive Utility Tension
   - Creative Continuity Under Degradation
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Synthesis

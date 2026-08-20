@@ -2,7 +2,7 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/concepts/agent-fleet-observability-dashboard.md
+  - knowledge/connections/the-semantic-velocity-trap-in-agent-fleet-scaling.md
 tags: [auto-generated, phase-6]
 created: 2026-08-20
 updated: 2026-08-20
@@ -10,22 +10,22 @@ updated: 2026-08-20
 
 ## Definition
 
-This mechanism redefines system health by prioritizing the detection of semantic gaps and missing data over simple execution success, treating silence or absence as critical errors rather than neutral states. It serves as a counterbalance to the illusion of health by making epistemic blindness visible through explicit flagging of unverified or low-confidence outputs. This design shifts the focus from monitoring process completion to monitoring knowledge integrity, ensuring that the system highlights where verification has failed rather than just where it has succeeded.
+This concept refers to the critical dependency where a synthesizer must never read an index older than the flush it consumed, creating a strict temporal coupling between data ingestion and processing. The mechanism enforces a 'freshness invariant' that prevents the system from operating on stale state, which would otherwise lead to cascading errors in semantic alignment. When this invariant is violated, the system produces artifacts based on outdated context, rendering them useless for downstream decision-making. The consequence is a systemic trust deficit, as users cannot rely on the output without verifying the freshness of the underlying index.
 
 ## Context
 
-Sean needs a dashboard that flags semantic gaps rather than just execution success, preventing the illusion of health from masking quality loss. This requires redefining what constitutes a 'failure' in the fleet's metrics to include lack of insight generation.
+Sean's fleet memory index is auto-generated and updated regularly, but the risk of reading stale data remains if the flush mechanism fails or is delayed. This requires robust monitoring to ensure that the synthesizer always operates on the most recent state of the vault.
 
 ## Evidence
 
-> Automated dashboards should be designed to highlight missing data or silence as critical errors, not just successful completions.
+> A synthesizer must never read an index older than the flush it consumed
 
-> He should redesign his observability layer to flag semantic gaps rather than just execution success.
+> The consequence is a systemic trust deficit, as users cannot rely on the output without verifying the freshness of the underlying index.
 
 ## Examples
 
-- Redesigning the observability layer to flag semantic gaps prevents the illusion of health from masking quality loss.
+- If the fleet memory index is not updated before the synthesizer runs, it may process concepts that have already been superseded, leading to redundant or contradictory insights.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Legibility Debt as a Supervision Failure Mode]]
+[[Control Room Observability]] [[Infrastructure Status and Agent Failure]]

@@ -2,10 +2,10 @@
 title: "Failure Suspicion State Machine"
 type: concept
 sources:
-  - knowledge/expansions/coordinated-omission-in-agent-observability.md
+  - knowledge/concepts/failure-suspicion-state-machine.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition

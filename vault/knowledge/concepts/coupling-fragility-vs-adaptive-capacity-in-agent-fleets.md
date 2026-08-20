@@ -2,31 +2,31 @@
 title: "Coupling Fragility vs Adaptive Capacity in Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/coupling-fragility-vs-adaptive-capacity-in-agent-fleets.md
+  - knowledge/expansions/connections/agent-interdependence-in-personal-knowledge-workflow.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-This mechanism describes the inverse relationship between the structural rigidity of an automated workflow and its ability to recover from environmental drift. As automation pipelines deepen their dependencies on specific model outputs or file formats, they gain efficiency but lose the semantic flexibility required to handle ambiguity. When a downstream agent encounters a malformed artifact or a context shift it cannot parse, the system fails not because of logic errors, but because the coupling is too tight to allow for improvisation. The mechanism reveals that high-throughput automation creates a 'fragility debt' where every new integration point becomes a potential single point of failure.
+This concept defines the tension between rigid functional dependencies and the system's ability to degrade gracefully under load or failure. It posits that agent fleets often operate with high coupling, where a single point of failure (like credential expiration) halts downstream processes, rather than exhibiting adaptive capacity where minimal viable outputs are preserved. The mechanism involves identifying 'latent conditions'—such as timing variance or environment drift—that do not break individual components but resonate to cause systemic failure when they coincide.
 
 ## Context
 
-Sean's vault synthesizer runs show a clear trade-off: switching from qwen3-14b to qwen3.6-35b-a3b-32k reduced rejection rates but increased duration, suggesting that higher-capacity models are more sensitive to the structural integrity of their inputs. Understanding this tension helps Sean decide when to prioritize speed (loose coupling) versus accuracy (tight coupling) in his job-hunt and creative workflows.
+Sean's vault synthesizer runs show a clear shift from high-throughput/high-rejection (qwen3-14b era) to lower-throughput/lower-rejection (qwen3.6-35b era). Understanding this trade-off is critical for determining whether the fleet should prioritize volume of synthesis or reliability of output, especially as the job hunt and creative studio domains require consistent, albeit smaller, signals.
 
 ## Evidence
 
-> As automation pipelines deepen their dependencies on specific model outputs or file formats, they gain efficiency but lose the semantic flexibility required to handle ambiguity.
+> The missing note was the visible boundary crossing; contributing conditions included credential validity, launchd environment, schedule ordering, write-path availability, and absent fallback generation.
 
-> The system fails not because of logic errors, but because the coupling is too tight to allow for improvisation.
+> When the morning agent cannot produce the full note, the fleet crosses from base capacity into adaptive capacity: create a minimal skeleton, preserve queued captures, mark provenance and staleness, then reconcile later.
 
 ## Examples
 
-- The shift from qwen3-14b to qwen3.6-35b-a3b-32k in July 2026 coincided with a drop in rejected concepts from ~70 to ~15, indicating that model capacity directly impacts the system's tolerance for noisy input.
-- The 'intent under ambiguity' demo mentioned in the expansion highlights how agents must repair plans when the environment invalidates declared intent.
+- The transition from qwen3-14b (avg 120+ concepts written, ~60 rejected) to qwen3.6-35b (avg 100 concepts written, ~20 rejected) demonstrates a shift toward higher fidelity and lower rejection rates, suggesting improved adaptive capacity despite lower raw throughput.
+- The 'rejected_count' metric in the manifest serves as a proxy for coupling fragility; high rejection counts indicate that the system is failing to adapt to latent conditions (e.g., cluster quality variance) rather than gracefully degrading.
 
 ## Related Concepts
 
-[[SRE Error Budget for Agents]] [[Silent Failure Propagation in Agent Fleets]]
+[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[The Illusion of Health in Autonomous Systems]] [[SRE Error Budget for Agents]]

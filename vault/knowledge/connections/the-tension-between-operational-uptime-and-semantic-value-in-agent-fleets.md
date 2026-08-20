@@ -5,8 +5,8 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - Coordinated Omission in Agent Observability
   - Silent Failure Propagation in Agent Fleets
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Synthesis

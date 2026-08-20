@@ -5,8 +5,8 @@ connects:
   - Semantic Divergence in Model Upgrades
   - Velocity vs. Judgment in MCP Strengthening
   - Agent Fleet Observability Dashboard
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Synthesis

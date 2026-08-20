@@ -2,31 +2,31 @@
 title: "Coordinated Omission in Agent Observability"
 type: concept
 sources:
-  - knowledge/expansions/coordinated-omission-in-agent-observability.md
+  - knowledge/connections/the-tension-between-operational-uptime-and-semantic-value-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-This is a sampling bias where latency measurements exclude periods of system unavailability because the monitoring agent itself fails to issue requests during those outages. When an agent sleeps or stalls, it stops generating telemetry, creating a blind spot that makes the observed performance appear artificially robust compared to the actual user experience. The defect arises when denominators contain only observed work rather than expected scheduled intervals, effectively hiding the cost of missed deadlines from the distribution.
+This mechanism occurs when monitoring systems fail to record events that did not happen, specifically the absence of expected outputs or actions. It creates a gap where the lack of activity is invisible because the system only logs successful completions rather than tracking the presence or absence of work items. This leads to a distorted view of system health where silence is interpreted as stability rather than potential failure.
 
 ## Context
 
-Sean's fleet relies on precise timing for daily notes and synthesis; if the synthesizer silently misses a run due to sleep or network issues, standard metrics will not reflect this failure, leading to false confidence in system health. Understanding this bias is critical for designing SLOs that measure artifact delivery by deadline rather than just request success rates.
+The fleet’s monitoring dashboard needs to distinguish between 'no work done' and 'work completed successfully' to prevent false confidence. Sean should implement semantic health checks that flag empty or low-quality outputs as critical failures, not just operational successes.
 
 ## Evidence
 
-> Coordinated omission is specifically a sampling error: a blocked load generator stops issuing requests, so the missing requests never enter the latency distribution.
+> Job Feed report noted 'scored=0 mbp=False,' suggesting the pipeline may not be actively finding or scoring opportunities.
 
-> Your article currently says the defect arises when denominators come from expected work; that is backwards. Expected work is the correction—the defective denominator contains only observed work.
+> The fleet's binary health reporting creates a dangerous blind spot where semantic decay is invisible to the operator.
 
 ## Examples
 
-- A fault-injection demo showing the naïve and corrected p50/p99 while an MBP sleeps or a baton stalls.
-- For every missed scheduled interval, record a deadline-relative synthetic latency or explicit omission, never zero samples.
+- Pipeline not actively finding or scoring opportunities
+- Semantic decay being invisible to the operator
 
 ## Related Concepts
 
-[[SRE Error Budget for Agents]] [[Agent Health Monitoring]]
+[[The Illusion of Health in Autonomous Systems]] [[Silent Failure Propagation in Agent Fleets]]

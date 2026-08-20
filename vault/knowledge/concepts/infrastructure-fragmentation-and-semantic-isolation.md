@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/operational-uptime-vs-strategic-stagnation.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-This concept defines the constraint where physical hardware limitations or offline endpoints directly limit the capacity of an agent mesh to perform complex, multi-step semantic tasks. The mechanism involves a hard dependency between available compute resources (such as Alienware or ComfyUI endpoints) and the ability to execute high-fidelity synthesis or research workflows. When these critical infrastructure components are unavailable, the system cannot scale its semantic output, leading to isolated pockets of functionality that cannot be integrated into a cohesive knowledge base.
+This pattern emerges when physical or logical gaps in the agent mesh prevent the seamless flow of information, leading to isolated pockets of activity that cannot synthesize into a coherent whole. The mechanism involves critical infrastructure components going offline or becoming inaccessible, which limits the fleet's capacity to maintain a unified semantic state. As a result, the system suffers from fragmentation where individual agents operate successfully in isolation, but the collective knowledge base fails to integrate these outputs due to broken connectivity or missing endpoints.
 
 ## Context
 
-Sean’s agent mesh capacity is currently limited by offline Alienware and ComfyUI endpoints, which prevents him from scaling his creative or research workflows. This fragmentation creates a bottleneck where the theoretical capability of the fleet is not realized in practice, forcing Sean to rely on less capable models or manual intervention for complex tasks.
+Sean’s current infrastructure has specific gaps, such as offline Alienware and ComfyUI endpoints, which directly limit his agent mesh capacity. This fragmentation exacerbates the semantic decay by preventing the fleet from leveraging its full potential for cross-domain synthesis.
 
 ## Evidence
 
@@ -24,9 +24,9 @@ Sean’s agent mesh capacity is currently limited by offline Alienware and Comfy
 
 ## Examples
 
-- Alienware and ComfyUI endpoints are offline
-- Hardware fragility masks semantic decay
+- Offline Alienware and ComfyUI endpoints limiting agent mesh capacity.
+- Hardware fragility masking semantic decay in agent fleets.
 
 ## Related Concepts
 
-[[Infrastructure Status]] [[SRE Error Budget for Agents]]
+[[The Illusion of Health in Autonomous Systems]] [[The Verification-Governance Inversion]]

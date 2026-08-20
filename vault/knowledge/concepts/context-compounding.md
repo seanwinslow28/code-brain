@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/connections/the-scalability-paradox-in-agentic-creative-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-Context compounding is the phenomenon where the accumulation of generated artifacts and metadata progressively consumes available context window space, leaving less room for critical instruction following. This leads to a degradation in the model's ability to adhere to specific constraints or stylistic guidelines as the session lengthens. The mechanism is not merely storage exhaustion but a dilution of signal-to-noise ratio within the active working memory.
+Context compounding is the phenomenon where the accumulation of generated data and metadata within a fixed context window progressively dilutes the salience of initial instructions and taste parameters. As the system processes more clusters, the relative weight of the original creative constraints decreases, leading to a drift in output style and content relevance. This effect is non-linear, meaning that small increases in volume can lead to disproportionate losses in fidelity.
 
 ## Context
 
-For Sean, this means that long-running synthesis runs risk producing generic output unless he implements dynamic pruning strategies. It highlights the need for strict limits on cluster sampling to prevent the loss of specific 'taste' signals.
+Sean's vault synthesizer relies on maintaining a consistent 'taste' across all generated concepts. The compounding nature of context loss means that even with powerful models, the sheer volume of data being processed can overwhelm the system's ability to adhere to specific creative guidelines, necessitating active management of context size.
 
 ## Evidence
 
 > As Sean scales the concept generation, the system generates more data but loses the specific 'taste' signals that define his creative voice.
 
-> This connection reveals a critical tension where the pursuit of automated throughput directly undermines the preservation of taste memory, creating a scalability paradox.
+> The core tension is that scaling automated concept generation directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
 
 ## Examples
 
-- Sean must implement dynamic memory pruning strategies to prevent context dilution from degrading output quality.
-- Scaling agentic creative workflows requires setting strict limits on cluster sampling to maintain taste consistency in his outputs.
+- The shift from 14b to 35b models did not prevent context dilution, as the larger model simply processed more data without retaining the specific taste signals as effectively.
+- Runs with higher cluster sampling counts (e.g., 253 clusters in June) showed higher rejection rates compared to runs with lower sampling counts (e.g., 125 clusters in July), despite similar concept counts.
 
 ## Related Concepts
 
-[[Throughput vs. Taste Memory Tension]] [[The Efficiency-Quality Inversion in Automated Synthesis]]
+[[Throughput vs. Taste Memory Tension]] [[The Scalability Paradox in Agentic Creative Workflows]]

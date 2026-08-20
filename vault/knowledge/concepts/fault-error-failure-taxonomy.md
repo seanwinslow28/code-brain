@@ -2,10 +2,10 @@
 title: "Fault → Error → Failure Taxonomy"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-monitoring-agent-health.md
+  - knowledge/concepts/fault-error-failure-taxonomy.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
@@ -18,7 +18,7 @@ Sean's vault infrastructure deals with complex dependencies between agents; with
 
 ## Evidence
 
-> “Agent Health Monitoring” and “Agent Health” are currently synonyms. The Avižienis taxonomy supplies the missing distinctions
+> Agent Health Monitoring and Agent Health are currently synonyms. The Avižienis taxonomy supplies the missing distinctions
 
 > Fault X created latent error Y; it became service failure Z only when consumer C observed the deviation.
 

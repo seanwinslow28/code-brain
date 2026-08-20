@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/intent-engineering.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
@@ -14,15 +14,13 @@ Intent engineering is an architectural discipline that compiles high-level secur
 
 ## Context
 
-Sean is building a personal knowledge vault that interacts with external APIs and MCP servers, exposing him to the risk of 'confused deputies' where an agent might inadvertently use credentials for the wrong resource due to prompt injection. This concept provides the structural solution to maintain authority over his own infrastructure by ensuring that GitHub issue text may influence classification but never selects a credential-reading or outbound-network action. It shifts the paradigm from telling an AI agent how to do things to encoding what it should want, capturing not just the prompt but the boundaries and success criteria.
+Sean is building a personal knowledge vault that interacts with external APIs and MCP servers, exposing him to the risk of 'confused deputies' where an agent might inadvertently use credentials for the wrong resource due to prompt injection. This concept provides the structural solution to maintain authority over his own infrastructure by ensuring that GitHub issue text may influence classification but never selects a credential-reading or outbound-network action.
 
 ## Evidence
 
 > Intent engineering is the architectural practice of compiling high-level security policies into executable constraints that govern agent behavior, rather than relying on natural language instructions which are vulnerable to context drift.
 
 > The seven-part intent specification compiles into capabilities and flow constraints: 'GitHub issue text may influence classification but may never select a credential-reading or outbound-network action.'
-
-> Required pattern: one audience-bound token per resource; never relay an inbound bearer token downstream; record consent per client.
 
 ## Examples
 

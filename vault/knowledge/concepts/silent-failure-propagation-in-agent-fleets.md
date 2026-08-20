@@ -2,30 +2,31 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-operational-visibility-and-semantic-value-in-agent-fleets.md
+  - knowledge/connections/the-tension-between-operational-uptime-and-semantic-value-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-This mechanism occurs when a failure in one agent's output is not detected by downstream consumers, allowing errors to accumulate and amplify across the system. The lack of inter-agent validation protocols means that semantic decay or missing data is treated as valid input, leading to compounding inaccuracies. This propagation is silent because each individual agent operates within its own success criteria, unaware of the broader systemic impact.
+This pattern describes how failures in one part of an agentic system can propagate without triggering explicit error states, leading to degraded performance across the network. It arises when dependencies between agents are not monitored for semantic validity, allowing empty or incorrect data to flow silently through the pipeline. The consequence is a gradual erosion of output quality that goes undetected until significant downstream damage occurs.
 
 ## Context
 
-Sean's infrastructure fragments knowledge into isolated processes, where errors in indexing or synthesis are not caught until they manifest as strategic stagnation. This lack of cross-domain validation allows semantic decay to mask itself behind operational uptime.
+Sean’s fleet monitors operational uptime (status=success) but lacks robust mechanisms to detect semantic decay (empty queues, zero scores). This tension arises because the system is designed to verify execution rather than outcome quality. The consequence is that Sean may believe his knowledge vault and job hunt are active and healthy, while they are actually stagnant or empty.
 
 ## Evidence
 
-> vault-indexer ... notes='chunks=323, embeddings=323, errors=0'
+> Deep Researcher is currently in an empty queue state, indicating a lapse in continuous background research necessary for insight generation.
 
 > The fleet's binary health reporting creates a dangerous blind spot where semantic decay is invisible to the operator.
 
 ## Examples
 
-- When agents report 'success' or 'empty-queue', they mask the lack of semantic value
+- Lapse in continuous background research
+- Semantic decay being invisible to the operator
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Operational Uptime vs. Cognitive Utility Tension]]
+[[The Illusion of Health in Autonomous Systems]] [[Coordinated Omission in Agent Observability]]

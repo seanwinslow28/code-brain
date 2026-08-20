@@ -2,31 +2,31 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/operational-metrics-mask-semantic-stagnation.md
+  - knowledge/connections/proxy-metrics-mask-semantic-decay-in-agentic-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-This concept defines the structural gap between the observability of agent operations and the actual utility of their outputs. It arises because monitoring systems are typically designed to track execution metrics—such as logs, counts, durations, and completion rates—which are easy to measure but do not correlate with semantic quality. The mechanism creates a distortion where increasing operational visibility (more logs, more detailed metrics) can actually obscure the lack of semantic value, as the noise of activity drowns out the silence of stagnation.
+This tension arises from the decoupling of operational metrics from semantic integrity, where high-volume activity metrics create an illusion of progress while knowledge synthesis stagnates. Agents report success based on process execution rather than the quality or relevance of their output. This misalignment leads to a state where systems appear healthy and productive, but the actual value generated for the user is diminishing. The core issue is that operational visibility is easier to measure than semantic value, leading to a prioritization of the former over the latter.
 
 ## Context
 
-Sean's fleet memory index tracks runs with metrics like 'concepts_written' and 'duration_seconds'. These metrics provide high visibility into the *activity* of the synthesizer but offer no direct insight into whether the generated concepts are valuable, novel, or correctly connected. This makes it difficult for Sean to assess the true health of his knowledge infrastructure based solely on these operational dashboards.
+Sean's fleet generates high volumes of data, but the actual insights are becoming less useful due to silent decay in synthesis quality. This tension prevents him from scaling effectively because he cannot accurately assess the value of his agents' work. Resolving this requires decoupling health checks from output validity to prevent masking semantic decay.
 
 ## Evidence
 
-> There is a fundamental tension between the visibility of agent operations (logs, counts, durations) and the actual semantic value of their outputs.
+> Agentic fleets often prioritize operational visibility over semantic value, leading to a state where systems appear healthy while their output degrades.
 
-> Monitoring dashboards need to prioritize synthesis quality over operational volume to prevent false signals of productivity from masking infrastructure issues.
+> This tension arises because internal health checks, such as heartbeat logs, are easier to measure than user-visible outcomes like freshness or correctness.
 
 ## Examples
 
-- A run logs 108 concepts written but only 26 connections, indicating high activity but low integration.
-- The fleet memory index shows '108c/26x' for a run, providing a count of outputs without evaluating their semantic density.
+- Prioritizing heartbeat logs over user-visible outcomes like freshness or correctness.
+- Systems appearing healthy while their output degrades due to silent failures in synthesis quality.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Legibility Debt as a Supervision Failure Mode]]
+[[The Illusion of Health in Autonomous Systems]] [[SRE Error Budget for Agents]]

@@ -2,11 +2,11 @@
 title: "The Scalability Paradox in Agentic Creative Workflows"
 type: connection
 connects:
-  - The Efficiency-Quality Inversion in Automated Synthesis
   - Throughput vs. Taste Memory Tension
+  - The Efficiency-Quality Inversion in Automated Synthesis
   - Context Compounding
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Synthesis
@@ -15,17 +15,17 @@ This connection reveals a critical tension where the pursuit of automated throug
 
 ## Threads
 
+### [[Throughput vs. Taste Memory Tension]]
+
+> As Sean scales the concept generation, the system generates more data but loses the specific 'taste' signals that define his creative voice.
+
 ### [[The Efficiency-Quality Inversion in Automated Synthesis]]
 
 > This connection reveals a structural tension where the pursuit of operational efficiency (higher throughput, more concepts) actively undermines the quality metric (taste fidelity) it is meant to serve.
 
-### [[Throughput vs. Taste Memory Tension]]
-
-> A bloated memory makes the model ignore the real instructions.
-
 ### [[Context Compounding]]
 
-> As Sean scales the concept generation, the system generates more data but loses the specific 'taste' signals that define his creative voice.
+> A bloated memory makes the model ignore the real instructions.
 
 ## Implications
 

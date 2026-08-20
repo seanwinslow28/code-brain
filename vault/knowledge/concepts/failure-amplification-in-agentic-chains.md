@@ -2,10 +2,10 @@
 title: "Failure Amplification in Agentic Chains"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-health-monitoring-and-cost-capped-agentic-workflows-synergy.md
+  - knowledge/concepts/failure-amplification-in-agentic-chains.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition

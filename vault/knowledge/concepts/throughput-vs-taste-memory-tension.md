@@ -4,28 +4,28 @@ type: concept
 sources:
   - knowledge/connections/the-scalability-paradox-in-agentic-creative-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-This tension arises from the finite capacity of context windows to hold both operational instructions and nuanced aesthetic preferences simultaneously. As the volume of generated data increases, the specific 'taste' signals that define Sean's creative voice become diluted within the broader context. The model begins to ignore these subtle instructions in favor of generic patterns, leading to a systemic trust deficit where higher automation yields lower fidelity.
+This tension arises from the finite capacity of context windows to hold both operational instructions and nuanced aesthetic preferences simultaneously. As the volume of generated data increases, the specific 'taste' signals that define Sean's creative voice become diluted within the broader context, causing the model to ignore these subtle instructions in favor of generic patterns. The mechanism is a resource competition where the signal-to-noise ratio degrades as the system scales, forcing a trade-off between the quantity of output and the fidelity of its stylistic alignment.
 
 ## Context
 
-Sean must manage this tension because his personal vault relies on high-fidelity synthesis to maintain the integrity of his knowledge base. When taste memory is lost, the output becomes indistinguishable from generic AI text, undermining the unique value of his curated insights.
+Sean's agent fleet has been scaling up concept generation significantly, moving from small batches to hundreds of clusters. This growth exposes the fragility of his taste memory when forced into a fixed context window, directly impacting the quality of his creative outputs and requiring dynamic pruning strategies to maintain consistency.
 
 ## Evidence
 
-> A bloated memory makes the model ignore the real instructions.
+> As Sean scales the concept generation, the system generates more data but loses the specific 'taste' signals that define his creative voice.
 
-> The core tension lies in the misalignment between the exponential growth of automated concept generation and the linear capacity of human taste to curate them.
+> A bloated memory makes the model ignore the real instructions.
 
 ## Examples
 
-- Higher volume leads to lower quality, forcing Sean to choose between efficiency and fidelity.
-- Scaling agentic creative workflows requires setting strict limits on cluster sampling to maintain taste consistency in his outputs.
+- The transition from qwen3-14b to qwen3.6-35b-a3b-32k did not resolve the dilution issue, as the larger context window simply allowed for more data accumulation without improving taste fidelity.
+- Rejection rates dropped significantly in later runs (e.g., 7 rejections in July vs. 29 in August), but this coincided with a decrease in concepts written, suggesting a correlation between lower volume and higher perceived quality rather than an improvement in the mechanism itself.
 
 ## Related Concepts
 

@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/connections/the-calibration-bottleneck-in-scalable-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-This mechanism describes the non-linear scaling of verification costs relative to generation volume, where the fidelity of style transfer becomes the primary constraint on throughput. As agent fleets increase output, the probability of 'taste drift' rises exponentially, forcing a trade-off between raw concept quantity and aesthetic utility. The system hits a hard cap not when compute is exhausted, but when the human supervisor's ability to detect subtle deviations in voice or nuance is overwhelmed by the volume of low-signal noise.
+This mechanism describes the structural limit where automated insight generation outpaces human verification capacity, creating a dependency on Sean's cognitive bandwidth for quality control. As the volume of synthesized concepts increases, the marginal utility of each new node decreases because the audit cost rises non-linearly with complexity. The system shifts from a value-creation engine to a liability generator when semantic decay occurs faster than the user can correct it, effectively turning the vault into a source of noise rather than signal.
 
 ## Context
 
-Sean faces this bottleneck directly as his fleet moves from small batches (3 concepts) to large-scale sampling (100+ concepts). The data shows that while generation capacity has grown, the 'rejected_count' and duration metrics indicate that maintaining 'Sean Mode' integrity requires increasingly expensive supervision, effectively capping scalable creative output.
+Sean is currently scaling his vault synthesizer from ~90 to 125+ concepts per run while using larger models. This creates a direct risk where the graph's structural integrity degrades because he cannot manually verify the increasing number of connections, leading to 'legibility debt' where the system looks healthy but contains hidden errors.
 
 ## Evidence
 
-> There is a fundamental tension between the desire for high-throughput agent fleets and the low-trust nature of style transfer, where the cost of verification scales faster than the volume of output.
+> The calibration bottleneck emerges when the rate of automated insight generation exceeds the human capacity to verify and integrate those insights into a coherent worldview.
 
-> The 'rejected_count' metric reveals that raw generation capacity is decoupled from aesthetic utility; more concepts do not equal better content if the voice calibration fails.
+> Legibility debt accumulates when automated systems produce outputs that are structurally valid but semantically hollow, masking decay behind a veneer of productivity.
 
 ## Examples
 
-- Run 2026-05-27 produced only 3 concepts with 1 rejection, while Run 2026-08-18 produced 108 concepts with 26 rejections, showing a shift from precision to volume.
-- The duration of runs increased from ~47 seconds for small batches to over 2400 seconds for large batches, indicating the computational and supervisory overhead of scaling.
+- The jump from 45 concepts in June to 125+ concepts in August without a corresponding increase in Sean's verification time.
+- The shift from 'concepts written' as a success metric to 'verified connections made' as the required standard.
 
 ## Related Concepts
 
-[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[The Taste-Fidelity Decoupling in Creative Production]]
+[[Legibility Debt as a Supervision Failure Mode]] [[Throughput vs. Activity Illusion in Job Hunt Operations]]

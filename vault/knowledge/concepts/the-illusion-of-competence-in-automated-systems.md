@@ -2,7 +2,7 @@
 title: "The Illusion of Competence in Automated Systems"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/job-feed/2026-08-19.md
+  - knowledge/concepts/the-illusion-of-competence-in-automated-systems.md
 tags: [auto-generated, phase-6]
 created: 2026-08-20
 updated: 2026-08-20

@@ -2,10 +2,10 @@
 title: "The Out-of-the-Loop Performance Problem"
 type: concept
 sources:
-  - knowledge/expansions/supervision-fatigue-as-the-hard-cap-on-fleet-scaling.md
+  - knowledge/concepts/the-out-of-the-loop-performance-problem.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition

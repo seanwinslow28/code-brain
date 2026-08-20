@@ -2,19 +2,19 @@
 title: "Structural Integrity vs. Automation Velocity"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-automation-velocity-vs-semantic-integrity.md
+  - knowledge/concepts/structural-integrity-vs-automation-velocity.md
 tags: [auto-generated, phase-6]
-created: 2026-08-19
-updated: 2026-08-19
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-This tension arises from the trade-off between the speed at which data is ingested and processed by automated agents and the structural coherence of the resulting knowledge graph. Higher velocity leads to more fragmented concepts and weaker connections, reducing the overall utility of the vault for complex reasoning tasks. Sean must balance the desire for real-time updates with the need for a stable, well-connected knowledge base that supports his creative and professional goals.
+This tension describes a phase transition in agent fleet operations where increasing ingestion throughput initially yields high novelty but eventually triggers semantic fragmentation, as the validation layers fail to keep pace with the write speed. The underlying mechanism is a dependency inversion: the structural coherence of the knowledge graph becomes inversely proportional to the velocity of automated synthesis when supervision costs exceed the marginal value of new connections. Sean must balance the desire for real-time updates with the need for a stable, well-connected knowledge base that supports his creative and professional goals.
 
 ## Context
 
-Sean's job hunt and creative studio workflows require deep, interconnected insights. If the vault becomes too fragmented due to high-velocity ingestion, it loses its value as a strategic tool.
+Sean's job hunt and creative studio workflows require deep, interconnected insights rather than isolated data points. If the vault becomes too fragmented due to high-velocity ingestion, it loses its value as a strategic tool for complex reasoning tasks, forcing Sean to manually reconstruct context that agents should have preserved.
 
 ## Evidence
 

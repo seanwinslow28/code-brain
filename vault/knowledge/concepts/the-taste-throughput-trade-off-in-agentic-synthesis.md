@@ -2,7 +2,7 @@
 title: "The Taste-Throughput Trade-off in Agentic Synthesis"
 type: concept
 sources:
-  - knowledge/concepts/context-compounding.md
+  - knowledge/connections/velocity-vs-judgment-in-mcp-strengthening.md
 tags: [auto-generated, phase-6]
 created: 2026-08-20
 updated: 2026-08-20
@@ -10,23 +10,22 @@ updated: 2026-08-20
 
 ## Definition
 
-This invariant describes the structural tension where increasing the volume of generated artifacts directly degrades the fidelity of stylistic constraints. As the system scales cluster sampling to maximize throughput, the specific 'taste' signals that define Sean's creative voice are diluted by the noise of generic output. The mechanism is not merely a loss of data but a dilution of signal-to-noise ratio within the active working memory, forcing the model to default to statistical averages rather than precise intent.
+This mechanism describes the structural tension where the exponential increase in automated synthesis velocity outpaces the linear capacity of human taste to curate and verify high-stakes outputs. As Sean scales the concept generation, the system prioritizes speed over the nuanced filtering required for career differentiation. This creates a paradox where increasing efficiency actually reduces the strategic value of the output, forcing Sean to introduce artificial friction to maintain quality.
 
 ## Context
 
-For Sean, this means that long-running synthesis runs risk producing generic output unless he implements dynamic pruning strategies. It highlights the need for strict limits on cluster sampling to prevent the loss of specific 'taste' signals.
+Sean is managing a fleet of agents that generate knowledge vault entries. The tension between generating more content and maintaining the 'taste' required for job-hunt differentiation is critical because high-velocity automation tends to produce de-differentiated content that fails to stand out in competitive markets.
 
 ## Evidence
 
-> As Sean scales the concept generation, the system generates more data but loses the specific 'taste' signals that define his creative voice.
+> There is a fundamental tension between the velocity of automated synthesis and the costliness of signals required for career differentiation.
 
-> This connection reveals a critical tension where the pursuit of automated throughput directly undermines the preservation of taste memory, creating a scalability paradox.
+> As Sean scales the concept generation, the system prioritizes speed over the nuanced filtering required for high-stakes outputs like job applications.
 
 ## Examples
 
-- Sean must implement dynamic memory pruning strategies to prevent context dilution from degrading output quality.
-- Scaling agentic creative workflows requires setting strict limits on cluster sampling to maintain taste consistency in his outputs.
+- High-velocity automation tends to produce de-differentiated content that fails to stand out in competitive job markets.
 
 ## Related Concepts
 
-[[Throughput vs. Taste Memory Tension]] [[The Efficiency-Quality Inversion in Automated Synthesis]]
+[[Performative Taste Drift]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
