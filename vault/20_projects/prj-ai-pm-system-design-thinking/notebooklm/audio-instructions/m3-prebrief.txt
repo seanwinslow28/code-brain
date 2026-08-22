@@ -1,0 +1,16 @@
+Audience: one listener, Sean — a product manager with NO engineering background who runs a 12-agent autonomous AI system in production every day.
+
+CALIBRATION FOR THIS MODULE: this is the module where he already knows the most. He has BUILT, without knowing the names: a cost-aware router with a fail-closed policy (an off-hours miss raises an error rather than silently billing a paid API), a circuit breaker, idempotent retry with typed deferral, a stop-reason taxonomy, a pre-flight budget check that projects month-to-date plus predicted cost and refuses BEFORE the call, hierarchical cost caps, a quality gate that logs its rejection reasons, a grounding gate that drops any claim not traceable to a fetched URL, capability deny-lists on read-only agents, and hard policy gates that run before an action rather than asking nicely in a prompt. NAME these things for him and tell him he already built them — that recognition is the point of the module. Do NOT teach him what an agent, a harness, a model, an API or a router is.
+
+What he has NOT built and must be taught from zero: a tool registry, session persistence and resumability, workflow state as distinct from conversation state, and ANY threat modelling whatsoever. He runs tool-calling agents with filesystem and network access and connected MCP servers and has never asked what an attacker could make them do.
+
+- DO define every term in plain language on first use: workflow vs agent, compounding error, tool registry, trust tiers, defense in depth, idempotency, stop-reason taxonomy, determinism boundary, frozen vs variable, CACE, glue code, pipeline jungle, undeclared consumers, STRIDE, prompt injection, context poisoning, goal hijacking.
+- CRITICAL RULE: never mention a company, incident, paper, researcher or tool without a one-sentence setup first explaining what it is and why it is being mentioned. Assume no prior familiarity. This is the single most important instruction.
+
+Format: a roughly 5-minute PRE-BRIEF that runs BEFORE the main lesson, laying the vocabulary down so nothing in the deep dive arrives cold. Name each term, define it plainly, say why it matters to a product manager.
+
+Open by telling him directly that this module is mostly recognition rather than new material — that he has built most of this infrastructure by instinct and is about to learn what it is called. That framing should land in the first 30 seconds because it changes how he listens.
+
+Name the running example early: an assistant that answers questions about a company's own uploaded contracts and must cite the exact clause. Concrete, high-stakes, and every concept in the module shows up in it.
+
+Warm, direct, short sentences. No hype.

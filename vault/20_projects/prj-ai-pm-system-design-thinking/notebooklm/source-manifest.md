@@ -27,8 +27,12 @@ Notebook: `bcb4e6aa-9da7-49fe-8c65-46d27110313e` — "System Design Thinking for
 | 13 | `dbb721bc` | *A Systematic Taxonomy of Failure Modes in RAG Systems* (ACL TrustNLP 2026, **PDF**) | web | A | M2/M3 | 2026-08-17 |
 | 14 | `d269db15` | *Exploring the Role of AI in the Closure of Zillow Offers* (JISE 2024, **PDF**) | web | A | M2 | 2026-08-17 |
 | 15 | `5b756d4b` | M2 — Lesson: Data, Feedback & the Model Path | file | — | M2 | 2026-08-17 |
+| 16 | `8641160f` | Anthropic — *Building Effective Agents* | web | B | M3 | 2026-08-22 |
+| 17 | `ce870d74` | Sculley et al., *Hidden Technical Debt in ML Systems* (NeurIPS 2015, **PDF**) | web | A | M3/M5 | 2026-08-22 |
+| 18 | `a06dd429` | Microsoft — *Taxonomy of Failure Modes in Agentic AI Systems v2.0* (**PDF**) | web | B | M3 | 2026-08-22 |
+| 19 | `37b21bfc` | M3 — Lesson: Architecture Under Constraints | file | — | M3 | 2026-08-22 |
 
-**Count: 15.**
+**Count: 19.**
 
 ## Fetch-quality rule — learned the hard way, 2026-08-17
 

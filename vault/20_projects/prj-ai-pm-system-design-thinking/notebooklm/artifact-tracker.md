@@ -23,12 +23,16 @@ One row per generated artifact. Update on every generate and every download.
 | 2026-08-17 | M1 | Audio — deep-dive (long) | `5f88a198` | completed (in notebook) | not downloaded — Sean listens in the notebook |
 | 2026-08-17 | M1 | Audio — debate | `164db4c4` | completed (in notebook) | not downloaded — Sean listens in the notebook |
 
-| 2026-08-17 | M2 | Audio — pre-brief (brief/short) | `b7b84c07` | generating | not downloaded — listen in the notebook |
-| 2026-08-17 | M2 | Audio — deep-dive (long) | `afd5322f` | generating | not downloaded — listen in the notebook |
-| 2026-08-17 | M2 | Audio — debate | `d1583ba7` | generating | not downloaded — listen in the notebook |
+| 2026-08-17 | M2 | Audio — pre-brief (brief/short) | `b7b84c07` | completed (in notebook) | not downloaded — listen in the notebook |
+| 2026-08-17 | M2 | Audio — deep-dive (long) | `afd5322f` | completed (in notebook) | not downloaded — listen in the notebook |
+| 2026-08-17 | M2 | Audio — debate | `d1583ba7` | completed (in notebook) | not downloaded — listen in the notebook |
+| 2026-08-22 | M3 | Audio — pre-brief (brief/short) | `63351ebb` | generating | not downloaded — listen in the notebook |
+| 2026-08-22 | M3 | Audio — deep-dive (long) | `5671f806` | generating | not downloaded — listen in the notebook |
+| 2026-08-22 | M3 | Audio — debate | `5d9b1bef` | generating | not downloaded — listen in the notebook |
 
 M1 source selection: `2251b249` (lesson) · `bb367054` (PAIR guidebook) · `f0988a1f` (ML thresholds) · `66c038cd` (Amazon case).
 M2 source selection: `5b756d4b` (lesson) · `1ab0974b` (PAIR data chapter) · `9ac74ee9` (Datasheets) · `dbb721bc` (RAG taxonomy) · `d269db15` (Zillow).
+M3 source selection: `37b21bfc` (lesson) · `8641160f` (Anthropic agents) · `ce870d74` (Sculley) · `a06dd429` (MS agentic taxonomy) · `9d283700` (Harrison Chase harness).
 
 ## Verify the queue, don't trust the exit code
 
