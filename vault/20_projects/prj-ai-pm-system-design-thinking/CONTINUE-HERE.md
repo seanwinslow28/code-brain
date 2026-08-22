@@ -3,7 +3,7 @@
 > **Launcher:** start a fresh session in `/Users/seanwinslow/Code-Brain/code-brain` and say:
 > *"Read `vault/20_projects/prj-ai-pm-system-design-thinking/CONTINUE-HERE.md` and pick up where we left off."*
 
-**Written 2026-08-22, end of the session that built M1–M3.** Last commit: `2051ede`.
+**Written 2026-08-22, end of the session that built M1–M3. Updated 2026-08-22 (later that day) after M4 shipped.**
 
 ---
 
@@ -64,15 +64,16 @@ Read `curriculum/curriculum-map.md` for the full locked map and `curriculum/2026
 
 ## 4. State — what exists right now
 
-**Notebook: `bcb4e6aa-9da7-49fe-8c65-46d27110313e`** ("System Design Thinking for AI PM"). 19 sources, all fetch-verified. Sean listens in the notebook; **nothing is downloaded**, by his choice.
+**Notebook: `bcb4e6aa-9da7-49fe-8c65-46d27110313e`** ("System Design Thinking for AI PM"). 25 sources, all fetch-verified. Sean listens in the notebook; **nothing is downloaded**, by his choice.
 
-### Modules built: M1, M2, M3 — all nine audio episodes complete
+### Modules built: M1, M2, M3, M4 — all twelve audio episodes complete
 
 | Module | Lesson file | Audio (pre-brief / deep-dive / debate) |
 |---|---|---|
 | **M1** Problem, Users & Decision Economics | `curriculum/m1-lesson-problem-users-decision-economics.md` | `747416f7` *Who Pays for Inevitable System Mistakes* · `5f88a198` *Choosing Which AI Mistakes You Can Afford* · `164db4c4` *Should you ship AI at 85% accuracy* |
 | **M2** Data, Feedback & the Model Path | `curriculum/m2-lesson-data-feedback-model-path.md` | `b7b84c07` *Why human messiness breaks AI pipelines* · `afd5322f` *Why your data pipeline feeds on poison* · `d1583ba7` *Buying Versus Building Your Data Labels* |
 | **M3** Architecture Under Constraints | `curriculum/m3-lesson-architecture-under-constraints.md` | `63351ebb` *Hardening Agentic Systems with Threat Modeling* · `5671f806` *The Invisible Plumbing of Production AI* · `5d9b1bef` *AI Agents versus Workflows for Legal Contracts* |
+| **M4** Interaction, Trust & Control | `curriculum/m4-lesson-interaction-trust-control.md` | `02650839` *Why Maximizing AI Trust Is a Trap* · `1bd75057` *Calibrating User Trust in AI Systems* · `a92ed175` *Should users see AI confidence scores* |
 
 **Sean's feedback on M1, mid-deep-dive:** *"this is MUCH better and what I was expecting."* Calibration confirmed. Keep the format.
 
@@ -81,29 +82,30 @@ Read `curriculum/curriculum-map.md` for the full locked map and `curriculum/2026
 - **M1:** `2251b249` lesson · `bb367054` PAIR User Needs · `f0988a1f` Google ML thresholds · `66c038cd` Amazon case
 - **M2:** `5b756d4b` lesson · `1ab0974b` PAIR Data Collection · `9ac74ee9` Datasheets for Datasets · `dbb721bc` RAG failure taxonomy · `d269db15` Zillow (JISE)
 - **M3:** `37b21bfc` lesson · `8641160f` Anthropic Building Effective Agents · `ce870d74` Sculley Hidden Technical Debt · `a06dd429` Microsoft agentic failure taxonomy · `9d283700` Harrison Chase harness talk
+- **M4:** `7a8e6894` lesson · `a7548548` Amershi CHI 2019 · `d98b596c` PAIR Errors + Graceful Failure · `ff6fd6a9` PAIR Explainability + Trust · `230a9929` Intercom Fin outcomes · `8fa09511` Zhang/Liao/Bellamy FAT\* 2020
 
 Full manifest with tiers: `notebooklm/source-manifest.md`. Artifact log: `notebooklm/artifact-tracker.md`. Audio prompts, reusable as templates: `notebooklm/audio-instructions/`.
 
 ---
 
-## 5. What still needs building — M4 and M5
+## 5. What still needs building — M5 only
 
-Both specs come from the locked map. **Neither lesson, sources, nor audio exists yet.**
+The spec comes from the locked map. **M4 shipped 2026-08-22; M5's lesson, sources and audio do not exist yet.**
 
-### M4 — Interaction, Trust & Control
+### M4 — SHIPPED 2026-08-22 (read this before answering questions about it)
 
-**Mirror eligibility: NO. Teach from zero, and say so.** A single-operator fleet never forced him to design a trust surface. This is the design-thinking half the retired program lacked entirely — and the council warned that claiming error-cost tables *are* the human half is asserting it, not installing it. Ethnography of who gets hurt, incentive analysis of why teams ship anyway, and the politics of model ownership belong here with real depth.
+Lesson at `curriculum/m4-lesson-interaction-trust-control.md`, five sources added and fetch-verified, three episodes generated and confirmed against `artifact list`.
 
-**Covers:** the five relationship pairings (Human↔Software / Human↔LLM / Human↔Agent / **Agent↔Agent** / **Agent↔Software**) each with primary mode, design levers, failure modes and metrics · trust **calibration, not maximization** · communicating uncertainty · failure UX, recovery and escalation · HITL insertion points, confidence thresholds, reviewer drift and fatigue · Wizard-of-Oz prototyping *before* training · Amershi's 18 validated guidelines · the three relational metrics (relational trust, behavioural alignment, friction recovery) which are longitudinal rather than task-completion.
+**Built as specified, with these decisions worth carrying forward:**
 
-**Anchor:** Intercom Fin (published confidence + handoff design). **Backup:** GitHub Copilot accept/reject.
-**Debate:** show confidence scores to users, or hide them.
-**Artifact:** failure-UX spec + model card → **closes one of Grok's three Golden Loop gaps.**
+- **Mirror eligibility NO was honoured, not softened.** §0 says plainly that his fleet has one human in it and that human is him, then names exactly **three narrow transfers** — the portfolio's honesty-preserving fallback (a real uncertainty surface built for strangers), abstention built for machines in the discovery council's URL gate, and having personally been burned by the fabricated-entity LDR run. Everything else is taught from zero. The audio prompts carry an inverted calibration block that explicitly instructs the hosts *not* to tell him he already knows this.
+- **The anchor turned out better than expected.** Intercom Fin publishes its full eight-outcome taxonomy *with prices attached*, because it bills on outcomes. "Assumed resolution" — the customer stops replying, it counts as resolved, and it bills — is the cleanest example in the whole curriculum of *why teams ship things that hurt people*, and it needs no villain. It also doubles as a customer-facing stop-reason taxonomy, which is the structural bridge from M3.
+- **The debate got sharper than "show confidence or hide it."** Zhang/Liao/Bellamy (FAT\* 2020) found confidence *does* calibrate trust and yet did *not* improve joint accuracy, because the humans had no complementary knowledge. So the motion is argued on a concrete case — should the nurse reviewer in a prior-authorization system see the number — and lands on the facts that would settle it, including whether anyone has checked the model's confidence against its real accuracy.
+- **The running example is the prior-authorization assistant** (12,000 requests/week, 40 nurse reviewers, a hard legal rule that a denial may never be model-only). It carries the operator/subject/absorber split, the review queue, the escalation and the confidence-display question in one brief, and it is also Exercise B.
+- **Length deviates from the recipe: 5,516 words against the stated 2,300–3,500.** Three tables account for roughly 700 of that, and the module carries ten sections because it is the only one teaching from zero *and* carrying the design-thinking half the council demanded. Flag it to Sean; if he wants it shorter, §1's grid and §8's guideline list are the compressible parts.
+- **The Nate/Ryan pairings post was deliberately NOT imported.** Grid and three relational metrics extracted into the lesson with tier-C provenance stated inline; the "Reflexive Intelligence" coinage left behind, and the lesson tells him never to say it in a room.
 
-**Candidate sources** (verify before use — see §6):
-- Amershi et al., *Guidelines for Human-AI Interaction*, CHI 2019 — 18 guidelines, validated with 49 practitioners against 20 products. PDF at `microsoft.com/en-us/research/wp-content/uploads/2019/01/Guidelines-for-Human-AI-Interaction-camera-ready.pdf`
-- Google PAIR chapters on Mental Models, Explainability + Trust, Feedback + Control, **Errors + Graceful Failure** — use `/guidebook-v2/chapters/<slug>/`, **not** `/guidebook/chapters/`, which redirects to the homepage
-- Nate B Jones + Ryan Wilson, *Stop Designing AI Chatbots, Start Designing AI Relationships* — **take the 5×5 pairings grid and the three relational metrics; leave the "Reflexive Intelligence" framing**, which is coinage and ChatGPT-assisted by disclosure. Reachable via the Executive Circle MCP, post id `b87d7b60-b804-482a-b502-0e07c2deeb1b`
+**Not yet done, and it is Sean's to do, not yours:** the module's written artifact — the failure-UX spec plus model card. That is what closes one of Grok's three Golden Loop gaps; the module that produces it now exists, the artifact does not.
 
 ### M5 — Evidence & Operations
 
@@ -176,14 +178,15 @@ All of it lives in this project now (`product/`, `posts/`, `research/`), migrate
 | **Combined** | **$17.58**, near the ceiling. ~$7 left |
 | Gemini fleet-wide caps | **$50/month, $20/day** per `agents-sdk/config.toml` `[gemini.budget]` — **not** the $20/$10 the skill doc quotes. August MTD **$21.00 of $50** |
 
-Everything since 2026-08-17 has been **$0** — hand-curation and `yt-dlp`. M4 and M5 need no paid research.
+Everything since 2026-08-17 has been **$0** — hand-curation, `yt-dlp`, and (for M4) the free Executive Circle MCP plus direct source fetches. **M4 cost $0. M5 needs no paid research either.**
 
 ---
 
 ## 9. Open items
 
 1. **Phase C wayfinder session** — prompt ready, not run.
-2. **M4 and M5** — §5.
+2. **M5 — Evidence & Operations** — §5. Last module; M4 shipped 2026-08-22.
+2b. **Sean has not yet consumed M4.** Three episodes are in the notebook waiting. He also has not written the M1–M4 artifacts (PRD, data contract, ADR, failure-UX spec + model card) — those are the Golden Loop planning spine and the thing the modules exist to produce.
 3. **Two Golden Loop status questions** Phase C asks at start: has the mock one-pager gone to 2–3 hiring managers, and is milestone post #1 published?
 4. **Transcription for verbal reps** — Sean said don't bother setting it up. Leave it.
 5. Sean is saving a **YouTube playlist** built 2026-08-22 from `yt-dlp` searches — real titles/IDs/view counts, in that session's chat. Not in the notebook by his choice. Regenerate with `yt-dlp --flat-playlist --print "%(duration)s|%(channel)s|%(view_count)s|%(id)s|%(title)s" "ytsearchN:<query>"` if he wants more.

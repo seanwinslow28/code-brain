@@ -31,8 +31,14 @@ Notebook: `bcb4e6aa-9da7-49fe-8c65-46d27110313e` — "System Design Thinking for
 | 17 | `ce870d74` | Sculley et al., *Hidden Technical Debt in ML Systems* (NeurIPS 2015, **PDF**) | web | A | M3/M5 | 2026-08-22 |
 | 18 | `a06dd429` | Microsoft — *Taxonomy of Failure Modes in Agentic AI Systems v2.0* (**PDF**) | web | B | M3 | 2026-08-22 |
 | 19 | `37b21bfc` | M3 — Lesson: Architecture Under Constraints | file | — | M3 | 2026-08-22 |
+| 20 | `a7548548` | Amershi et al., *Guidelines for Human-AI Interaction* (CHI 2019, **PDF**) | web | A | M4 | 2026-08-22 |
+| 21 | `d98b596c` | Google PAIR — *Errors + Graceful Failure* | web | B | M4 | 2026-08-22 |
+| 22 | `ff6fd6a9` | Google PAIR — *Explainability + Trust* | web | B | M4 | 2026-08-22 |
+| 23 | `230a9929` | Intercom — *Fin AI Agent outcomes* | web | B | M4 | 2026-08-22 |
+| 24 | `8fa09511` | Zhang, Liao & Bellamy, *Effect of Confidence and Explanation on Accuracy and Trust Calibration* (FAT\* 2020, **PDF**) | web | A | M4 | 2026-08-22 |
+| 25 | `7a8e6894` | M4 — Lesson: Interaction, Trust & Control | file | — | M4 | 2026-08-22 |
 
-**Count: 19.**
+**Count: 25.**
 
 ## Fetch-quality rule — learned the hard way, 2026-08-17
 
@@ -47,6 +53,11 @@ Three failures caught this way in one sitting, all of which would have silently 
 1. **`pair.withgoogle.com/guidebook/chapters/data-collection` redirected to the guidebook homepage** and imported 11,456 characters of site navigation under the title "People + AI Guidebook - Home." Zero hits on *label*, *bias*, *training data*. The working URL is the pre-generative edition at `/guidebook-v2/chapters/data-collection/` — 54,761 chars, *label* ×102. The current guidebook reorganised that chapter into "Data + Model Evolution."
 2. **arXiv and ACL Anthology landing pages import the abstract, not the paper.** The RAG taxonomy landing page had zero hits on *chunking* — one of its own 33 failure modes. Both were re-added as `/pdf/` URLs: 56,696 and 48,199 chars respectively, with the real content.
 3. Terminal-rendered `source fulltext` output is truncated. **Use `--json` and parse from the first `{`** or you will measure the renderer instead of the source.
+
+**Two more, learned 2026-08-22 while sourcing M4:**
+
+4. **The PAIR guidebook's canonical chapter path is singular — `/guidebook-v2/chapter/<slug>/`, not `/chapters/`** — and the Errors chapter's slug is **`errors-failing`**, not the guessable `errors-graceful-failure`, which 404s. Both `/chapter/` and `/chapters/` resolve for *some* slugs, which is how the plural form got into the M1/M2 notes. Pull the nav links off any working chapter page rather than guessing: `curl -sL <chapter-url> | grep -oE 'href="[^"]*"'`.
+5. **`curl` 403 is not the CLI's verdict.** `microsoft.com/en-us/research/wp-content/uploads/.../Guidelines-for-Human-AI-Interaction-camera-ready.pdf` refuses `curl` with a 403 under any user-agent, and imported cleanly through `notebooklm source add` — 92,269 characters, the full paper. Probe with curl to *find* URLs, but let the CLI make the final call, then verify content the usual way.
 
 Also note: PDFs import with the URL as their title. Cosmetic, but it means `source list` alone can't tell you what a source is.
 
@@ -70,14 +81,13 @@ Held for their own modules, or held deliberately:
 
 | Source | Tier | Held for |
 |---|---|---|
-| Amershi et al., *Guidelines for Human-AI Interaction*, CHI 2019 | A | M4 |
 | Sculley et al., *Hidden Technical Debt in ML Systems*, NeurIPS 2015 | A | M3 / M5 |
 | *A Systematic Taxonomy of Failure Modes in RAG Systems*, ACL TrustNLP 2026 | A | M2 / M3 |
 | Microsoft, *Taxonomy of Failure Modes in Agentic AI Systems v2.0*, June 2026 | B | M3 |
 | Amershi et al., *Software Engineering for ML: A Case Study*, ICSE 2019 | A | M2 |
 | Nate B Jones — "Your Agent Is 80% Plumbing" (12 primitives) | B | M3 |
 | Nate B Jones — the Moat Audit (12 questions) | B | M3 / M5 |
-| Nate B Jones + Ryan Wilson — "Stop Designing AI Chatbots, Start Designing AI Relationships" | C | M4 — **take the 5×5 pairings grid and the three relational metrics; leave the Reflexive Intelligence framing, which is coinage and ChatGPT-assisted by disclosure** |
+| Nate B Jones + Ryan Wilson — "Stop Designing AI Chatbots, Start Designing AI Relationships" | C | **M4 — used, but deliberately NOT imported.** The 5×5 pairings grid and the three relational metrics are extracted into the M4 lesson with tier-C provenance stated inline; the "Reflexive Intelligence" coinage is left behind. Fetched via the Executive Circle MCP, post `b87d7b60-b804-482a-b502-0e07c2deeb1b` |
 | ASTRIDE (arXiv 2512.04785) / STRIDE-AI (arXiv 2605.17163) | A | M3 — **teach STRIDE plus the agentic threat categories; ASTRIDE is a platform paper and the area is unsettled** |
 | Hydari, Iqbal & Ramasubbu, *Stochastic Tax* (arXiv 2605.27320) | A | M1 (cited) / M5 — fresh preprint, date it when spoken |
 | The two Gemini DR reports (2026-08-17) | mixed | Program reference; **DR §4 on interview assessment is vendor SEO — hypothesis only** |
