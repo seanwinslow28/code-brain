@@ -44,8 +44,12 @@ EXPECTED_DOMAINS = [
 # still be scanned for secrets. Existence is NOT enforced.
 # `the-block` is archived reference content (2026-05) — kept on disk for
 # history, no longer an active domain.
+# `systemcraft` is the AI PM system design studio (2026-08-22, map GitHub
+# #142) — cross-domain by mandate, so root-level; its corpus/ and ledger/
+# are gitignored local-only and the tracked machinery gets the secret scan.
 ADDITIONAL_WORKSPACES_TO_SCAN = [
     "claude-mastery",
+    "systemcraft",
     "the-block",
 ]
 

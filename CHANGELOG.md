@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Systemcraft workspace scaffold — public machinery, private brain (2026-08-22)
+
+Root workspace `systemcraft/` ("an AI PM system design studio") scaffolded per the wayfinder build map (GitHub #142), resolving its "Workspace scaffold and public/private plumbing" ticket (#143). Tracked as public machinery: `systemcraft/CLAUDE.md` (layout, non-negotiable rules) and a placeholder `README.md` (portfolio-grade version owned by ticket #156). Private lanes plumbed **before any private content exists**: `systemcraft/corpus/` and `systemcraft/ledger/` added to the PRIVATE LAYER block in `.gitignore`, each holding a local-only README pointing at the map ticket that owns its internal layout. `scripts/validate.py` blesses the workspace via `ADDITIONAL_WORKSPACES_TO_SCAN` (existence warned, secret-scanned; not a primary domain). Bench seats, master skill, templates, and corpus content all arrive via their own map tickets.
+
 ### New skill: `wince`, the taste interview (2026-08-10)
 
 **What it does.** Shows a person options, reads which ones they wince at, and writes a reusable ten-field taste block they paste into any image model. User-invoked only. Ships in `03-creative-projects` and carries its own proof images, so an exported copy is self-contained. Both tiers per CLAUDE.md §4: the installable skill, and a 296-line pasteable prompt at [`references/copy-paste-kit.md`](.claude/skills/wince/references/copy-paste-kit.md) that needs no repo, no install, and no idea what a skill is.

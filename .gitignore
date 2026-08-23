@@ -197,6 +197,15 @@ vault/00_inbox/Claude-Hermes-Inspired-Memory-Plan.md
 vault/00_inbox/PM-SKILLS-2.0.md
 vault/**/Executive-Circle-*.md
 
+# Systemcraft private brain (2026-08-22, build map GitHub #142) — the studio's
+# machinery (bench, skill scaffold, templates, README) is tracked publicly;
+# its corpus (free-canon distillates + book-to-skill ingests, derivative of
+# licensed sources) and decision ledger (real product and eventually
+# employer-confidential designs) are local-only. Never `git add` these;
+# book-derived text never lands in tracked files.
+systemcraft/corpus/
+systemcraft/ledger/
+
 # ════════════════════════════════════════════════════════════════════════
 # BLOAT GUARDS — recruiter-readiness cleanup 2026-06-10
 # ════════════════════════════════════════════════════════════════════════
