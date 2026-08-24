@@ -210,6 +210,22 @@ systemcraft/ledger/
 systemcraft/books/
 *.epub
 
+# Content Machine private brain (2026-08-24, build map GitHub #158) — the
+# machine itself (.claude/skills/content-machine/, README, contracts) is
+# tracked publicly; its private brain is local-only. The corpus is verbatim
+# Sean — raw interview answers, hand-edits, pre-AI prose — and is the
+# irreplaceable input the whole machine reads from. The ledger holds the
+# consent-gated lessons loop, the cheese bank the labeled negative specimens,
+# do-not-promote.md the subjects Sean has ruled off-limits.
+# Given its own home (NOT under .claude/skills/writing-voice-modes/references/,
+# which L2/L10 schedule for demolition) per wayfinder ticket #160.
+# Never `git add` these; never paste their contents into a tracked file or a
+# GitHub issue.
+creative-studio/content-machine/corpus/
+creative-studio/content-machine/ledger/
+creative-studio/content-machine/cheese-bank/
+creative-studio/content-machine/do-not-promote.md
+
 # ════════════════════════════════════════════════════════════════════════
 # BLOAT GUARDS — recruiter-readiness cleanup 2026-06-10
 # ════════════════════════════════════════════════════════════════════════
