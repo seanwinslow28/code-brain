@@ -37,6 +37,7 @@ Cross-cutting (no domain CLAUDE.md):
 | **agents-sdk/** | Autonomous Claude Agent SDK layer (Python + launchd) |
 | **evals/vault-synthesizer/** | 10-case binary eval suite for the vault synthesizer agent (v3.30.1) |
 | **tools/** | Sidecar tools (non-skill, non-agent): `llm-council/` (multi-vendor council) and `governance-demo/` (Authority/Recovery/Audit demo, pairs with `agents-sdk/docs/CONTROL_ARCHITECTURE.md`) |
+| **systemcraft/** | AI PM system design studio — five-seat bench, artifact templates, lane manifests (public machinery; corpus + decision ledger local-only). First engagement: the [fleet knowledge-loop audit](https://github.com/seanwinslow28/code-brain/issues/157). See [systemcraft/README.md](systemcraft/README.md) |
 | **.claude/** | Canonical skills, agents, hooks, settings (auto-loaded) |
 
 ### Privacy Boundary
