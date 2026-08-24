@@ -20,7 +20,7 @@ import time
 import urllib.error
 import urllib.request
 
-MBP_IP = "192.168.68.50"
+MBP_IP = "Seans-MacBook-Pro.local"  # mDNS per eng-001.d10
 MBP_MAC = "50:F2:65:EF:AC:3D"
 MBP_LMSTUDIO_URL = f"http://{MBP_IP}:1234/v1/models"
 TIMEOUT_S = 90

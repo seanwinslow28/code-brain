@@ -295,7 +295,7 @@ health_check_interval_secs = 60
 fallback_to_api = true
 
 [routing.machines.mac_mini]
-host = "192.168.68.200"
+host = "seans-mac-mini.local"  # mDNS per eng-001.d10 (LAN renumbered 2026-08-21; same remedy as the MBP entry below)
 port = 11434
 tier = 1
 runtime = "ollama"

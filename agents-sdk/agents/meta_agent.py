@@ -97,7 +97,7 @@ _ERROR_CSV_STATUSES = {"error"}
 VAULT_ROOT = Path.home() / "Code-Brain" / "code-brain" / "vault"
 FLEET_STATE_DIR = VAULT_ROOT / "02_Areas" / "Agent-Fleet"
 
-MAC_MINI_OLLAMA = "http://192.168.68.200:11434"
+MAC_MINI_OLLAMA = "http://seans-mac-mini.local:11434"  # mDNS per eng-001.d10
 ALIENWARE_OLLAMA = "http://192.168.68.201:11434"
 ALIENWARE_COMFYUI = "http://192.168.68.201:8188"
 
