@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### New skill: `systemcraft` — the studio's master orchestrator (2026-08-24)
+
+Authors the master skill the build map designed but never ticketed for build (gap caught at map close, filed and executed same day). `.claude/skills/systemcraft/SKILL.md` owns orchestration only, per the ratified division ("the skill knows the process, the seats know the craft, CLAUDE.md knows the law"): the four engagement types with their routing, the five-phase lifecycle (Open → Route → Run → Gate → Close) with the close checklist, the named escalate/downshift triggers from Per-seat model delegation (#145/#146), the full-artifacts-forward + fresh-context handoff protocol, and when ledger writes happen. Hybrid trigger (explicit summons or unambiguous studio-shaped work; one clarifying line on ambiguous matches; defers generic PM artifacts to the pm-* plugins). Excluded from export groups — useless without this repo's corpus and bench. The first engagement (eng-001, the fleet knowledge-loop audit) ran this process manually and validated it end-to-end before the skill existed.
+
 ### Systemcraft workspace scaffold — public machinery, private brain (2026-08-22)
 
 Root workspace `systemcraft/` ("an AI PM system design studio") scaffolded per the wayfinder build map (GitHub #142), resolving its "Workspace scaffold and public/private plumbing" ticket (#143). Tracked as public machinery: `systemcraft/CLAUDE.md` (layout, non-negotiable rules) and a placeholder `README.md` (portfolio-grade version owned by ticket #156). Private lanes plumbed **before any private content exists**: `systemcraft/corpus/` and `systemcraft/ledger/` added to the PRIVATE LAYER block in `.gitignore`, each holding a local-only README pointing at the map ticket that owns its internal layout. `scripts/validate.py` blesses the workspace via `ADDITIONAL_WORKSPACES_TO_SCAN` (existence warned, secret-scanned; not a primary domain). Bench seats, master skill, templates, and corpus content all arrive via their own map tickets.
