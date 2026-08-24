@@ -205,6 +205,10 @@ vault/**/Executive-Circle-*.md
 # book-derived text never lands in tracked files.
 systemcraft/corpus/
 systemcraft/ledger/
+# Guard: purchased ebook files must never enter the tree (canonical home is
+# ~/Books/systemcraft/, outside the repo; Sean dropped them here once, 2026-08-24)
+systemcraft/books/
+*.epub
 
 # ════════════════════════════════════════════════════════════════════════
 # BLOAT GUARDS — recruiter-readiness cleanup 2026-06-10
