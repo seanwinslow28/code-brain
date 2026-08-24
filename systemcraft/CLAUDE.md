@@ -14,6 +14,7 @@ Scaffold only. The studio is being built along the [Systemcraft build map](https
 |---|---|---|
 | `bench/` | public | Five specialist seat definitions: Design Strategist, Architecture Advisor, Interaction & Trust Designer, Evals & Evidence Architect, Ops & Economics Modeler |
 | `templates/` | public | Artifact templates: PRD, ADR, failure-UX spec + model card, eval plan, ops/economics model + incident runbook |
+| `lanes/` | public | Five lane manifests — topic-organized tables of contents (title + pointer + one-line when-to-read) into the private corpus. Shelf labels, never the books: an entry that paraphrases a source's substance belongs in the private lane |
 | `corpus/` | **private — gitignored** | Two-layer reference corpus: free-canon distillates + book-to-skill ingests |
 | `ledger/` | **private — gitignored** | The decision ledger — every design the studio produces, accreting per engagement |
 | master skill | public | Lives in `.claude/skills/` per the house rule; its design is owned by the map's Master skill design ticket |
