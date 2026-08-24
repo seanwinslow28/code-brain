@@ -3,7 +3,7 @@
 > **Launcher:** start a fresh session in `/Users/seanwinslow/Code-Brain/code-brain` and say:
 > *"Read `vault/20_projects/prj-ai-pm-system-design-thinking/CONTINUE-HERE.md` and pick up where we left off."*
 
-**Written 2026-08-22, end of the session that built M1–M3. Updated 2026-08-22 (later that day) after M4 shipped.**
+**Written 2026-08-22, end of the session that built M1–M3. Updated 2026-08-24: M4 and M5 shipped. All five modules are built — the curriculum is complete and unconsumed.**
 
 ---
 
@@ -64,9 +64,9 @@ Read `curriculum/curriculum-map.md` for the full locked map and `curriculum/2026
 
 ## 4. State — what exists right now
 
-**Notebook: `bcb4e6aa-9da7-49fe-8c65-46d27110313e`** ("System Design Thinking for AI PM"). 25 sources, all fetch-verified. Sean listens in the notebook; **nothing is downloaded**, by his choice.
+**Notebook: `bcb4e6aa-9da7-49fe-8c65-46d27110313e`** ("System Design Thinking for AI PM"). 31 sources, all fetch-verified. Sean listens in the notebook; **nothing is downloaded**, by his choice.
 
-### Modules built: M1, M2, M3, M4 — all twelve audio episodes complete
+### Modules built: ALL FIVE — fifteen audio episodes complete
 
 | Module | Lesson file | Audio (pre-brief / deep-dive / debate) |
 |---|---|---|
@@ -74,6 +74,7 @@ Read `curriculum/curriculum-map.md` for the full locked map and `curriculum/2026
 | **M2** Data, Feedback & the Model Path | `curriculum/m2-lesson-data-feedback-model-path.md` | `b7b84c07` *Why human messiness breaks AI pipelines* · `afd5322f` *Why your data pipeline feeds on poison* · `d1583ba7` *Buying Versus Building Your Data Labels* |
 | **M3** Architecture Under Constraints | `curriculum/m3-lesson-architecture-under-constraints.md` | `63351ebb` *Hardening Agentic Systems with Threat Modeling* · `5671f806` *The Invisible Plumbing of Production AI* · `5d9b1bef` *AI Agents versus Workflows for Legal Contracts* |
 | **M4** Interaction, Trust & Control | `curriculum/m4-lesson-interaction-trust-control.md` | `02650839` *Why Maximizing AI Trust Is a Trap* · `1bd75057` *Calibrating User Trust in AI Systems* · `a92ed175` *Should users see AI confidence scores* |
+| **M5** Evidence & Operations | `curriculum/m5-lesson-evidence-operations.md` | `3de16887` *Manual trace reviews and AI unit economics* · `251be81c` *AI Unit Economics and Production Evaluation* · `48c5e959` *Should AI agents judge their own work* |
 
 **Sean's feedback on M1, mid-deep-dive:** *"this is MUCH better and what I was expecting."* Calibration confirmed. Keep the format.
 
@@ -82,42 +83,44 @@ Read `curriculum/curriculum-map.md` for the full locked map and `curriculum/2026
 - **M1:** `2251b249` lesson · `bb367054` PAIR User Needs · `f0988a1f` Google ML thresholds · `66c038cd` Amazon case
 - **M2:** `5b756d4b` lesson · `1ab0974b` PAIR Data Collection · `9ac74ee9` Datasheets for Datasets · `dbb721bc` RAG failure taxonomy · `d269db15` Zillow (JISE)
 - **M3:** `37b21bfc` lesson · `8641160f` Anthropic Building Effective Agents · `ce870d74` Sculley Hidden Technical Debt · `a06dd429` Microsoft agentic failure taxonomy · `9d283700` Harrison Chase harness talk
+- **M5:** `f7b99e57` lesson · `bc1cf6c0` Hamel *Your AI Product Needs Evals* · `4301f4c3` Hamel *Using LLM-as-a-Judge* · `af5b612b` Breck et al. *ML Test Score* · `1dfcc9f0` LLM-as-judge survey · `0d1f0ebd` ICONIQ 2026 · plus `ce870d74` Sculley, carried from M3
 - **M4:** `7a8e6894` lesson · `a7548548` Amershi CHI 2019 · `d98b596c` PAIR Errors + Graceful Failure · `ff6fd6a9` PAIR Explainability + Trust · `230a9929` Intercom Fin outcomes · `8fa09511` Zhang/Liao/Bellamy FAT\* 2020
 
 Full manifest with tiers: `notebooklm/source-manifest.md`. Artifact log: `notebooklm/artifact-tracker.md`. Audio prompts, reusable as templates: `notebooklm/audio-instructions/`.
 
 ---
 
-## 5. What still needs building — M5 only
+## 5. Nothing left to build — both remaining modules shipped 2026-08-24
 
-The spec comes from the locked map. **M4 shipped 2026-08-22; M5's lesson, sources and audio do not exist yet.**
+**The curriculum is complete.** M4 and M5 were built on 2026-08-24, both at $0. What follows is what a future session needs to know about them; the build recipe below is preserved because it still governs any revision.
 
-### M4 — SHIPPED 2026-08-22 (read this before answering questions about it)
+### M4 — SHIPPED 2026-08-22
 
-Lesson at `curriculum/m4-lesson-interaction-trust-control.md`, five sources added and fetch-verified, three episodes generated and confirmed against `artifact list`.
+Lesson at `curriculum/m4-lesson-interaction-trust-control.md`. Five sources, three episodes, verified.
 
-**Built as specified, with these decisions worth carrying forward:**
+- **Mirror eligibility NO was honoured, not softened.** §0 says his fleet has one human in it and that human is him, then names exactly **three narrow transfers** — the portfolio's honesty-preserving fallback, abstention built into the discovery council's URL gate, and having been burned by the fabricated-entity LDR run. The audio calibration block explicitly instructs the hosts *not* to tell him he already knows this.
+- **The anchor beat expectations.** Intercom Fin publishes its eight-outcome taxonomy *with prices attached*, because it bills on outcomes. "Assumed resolution" — the customer stops replying, it counts as resolved, it bills — is the curriculum's cleanest example of why teams ship things that hurt people, with no villain required. It doubles as a customer-facing stop-reason taxonomy, bridging from M3.
+- **The debate is sharper than the map's version.** Zhang/Liao/Bellamy (FAT\* 2020) found confidence *does* calibrate trust and did *not* improve joint accuracy, because the humans had no complementary knowledge. The motion is argued on whether a nurse reviewer should see the number.
+- **Running example:** the prior-authorization assistant — 12,000 requests/week, 40 nurse reviewers, a hard rule that a denial is never model-only.
+- **The Nate/Ryan pairings post was deliberately NOT imported** — grid and three relational metrics extracted with tier-C provenance stated inline; the "Reflexive Intelligence" coinage left behind.
 
-- **Mirror eligibility NO was honoured, not softened.** §0 says plainly that his fleet has one human in it and that human is him, then names exactly **three narrow transfers** — the portfolio's honesty-preserving fallback (a real uncertainty surface built for strangers), abstention built for machines in the discovery council's URL gate, and having personally been burned by the fabricated-entity LDR run. Everything else is taught from zero. The audio prompts carry an inverted calibration block that explicitly instructs the hosts *not* to tell him he already knows this.
-- **The anchor turned out better than expected.** Intercom Fin publishes its full eight-outcome taxonomy *with prices attached*, because it bills on outcomes. "Assumed resolution" — the customer stops replying, it counts as resolved, and it bills — is the cleanest example in the whole curriculum of *why teams ship things that hurt people*, and it needs no villain. It also doubles as a customer-facing stop-reason taxonomy, which is the structural bridge from M3.
-- **The debate got sharper than "show confidence or hide it."** Zhang/Liao/Bellamy (FAT\* 2020) found confidence *does* calibrate trust and yet did *not* improve joint accuracy, because the humans had no complementary knowledge. So the motion is argued on a concrete case — should the nurse reviewer in a prior-authorization system see the number — and lands on the facts that would settle it, including whether anyone has checked the model's confidence against its real accuracy.
-- **The running example is the prior-authorization assistant** (12,000 requests/week, 40 nurse reviewers, a hard legal rule that a denial may never be model-only). It carries the operator/subject/absorber split, the review queue, the escalation and the confidence-display question in one brief, and it is also Exercise B.
-- **Length deviates from the recipe: 5,516 words against the stated 2,300–3,500.** Three tables account for roughly 700 of that, and the module carries ten sections because it is the only one teaching from zero *and* carrying the design-thinking half the council demanded. Flag it to Sean; if he wants it shorter, §1's grid and §8's guideline list are the compressible parts.
-- **The Nate/Ryan pairings post was deliberately NOT imported.** Grid and three relational metrics extracted into the lesson with tier-C provenance stated inline; the "Reflexive Intelligence" coinage left behind, and the lesson tells him never to say it in a room.
+### M5 — SHIPPED 2026-08-24
 
-**Not yet done, and it is Sean's to do, not yours:** the module's written artifact — the failure-UX spec plus model card. That is what closes one of Grok's three Golden Loop gaps; the module that produces it now exists, the artifact does not.
+Lesson at `curriculum/m5-lesson-evidence-operations.md`. Five new sources plus Sculley carried from M3; three episodes.
 
-### M5 — Evidence & Operations
+**Sean asked for a research pass before the build** ("use your own web search or deep-research skill to fill in any potential gaps and updates"). It was run free, via web search plus direct source verification, and it changed the module in three ways:
 
-**Mirror eligibility: PARTIAL.** He has telemetry and budget caps. He has never run an experiment, set a rollout gate, or negotiated ownership with another person.
+1. **It found a genuine gap the locked map did not name: error analysis via open coding → axial coding.** This is Hamel Husain's current teaching and it is the methodological centre of the module — read traces, write free-form notes, group 30–50 hand-coded notes into 5–10 failure modes, count, prioritise by frequency × cost. It is the coding process from grounded theory applied to LLM traces, it requires **zero engineering**, and Husain's own framing is aimed straight at Sean: *"the people best positioned to improve your AI system are often the ones who know the least about AI."* §2 is now the longest section in the lesson and the pre-brief opens on it.
+2. **It replaced the map's vague backup anchor** ("published routing/caching cost architectures") **with real, current numbers.** ICONIQ Growth surveyed ~300 executives building AI products; expected AI-product gross margin **~52% in 2026**, and pricing split 58% subscription / 35% consumption / 18% outcome-based / 37% planning a change within twelve months. Verified against ICONIQ's own page, not a blog retelling. **Tier C and labelled as such** in the lesson — a VC surveying a population including its own portfolio, self-reported and projected, fieldwork in 2025 published under a 2026 title.
+3. **It surfaced the ML Test Score** (Breck, Cai, Nielsen, Salib and Sculley, IEEE Big Data 2017) — 28 tests in four sections of seven, half a point manual and a full point automated, and **the final score is the minimum of the four sections, not the sum**, because a system is exactly as production-ready as its weakest area. That rubric is the backbone of the launch-criteria artifact and it was not in the map's candidate list.
 
-**Covers:** instrumentation, unit of analysis, sampling for human review · **day-one invariants → golden datasets → holdout hygiene** (the progression matters; M3 already planted the invariant suite as a day-one primitive) · champion/challenger · LLM-as-judge and its failure modes, including weak-judge Goodharting · rollout, A/B, kill switches · drift types (covariate / label / concept) · **unit economics at product level, not per-hop** — gross margin, pricing, when inference cost exceeds LTV · org ownership, review boards, incident response.
+**The mirror is partial and drawn sharply.** What he has: instrumentation, a rejection-logging quality gate, a scheduled automated critic, projecting cost caps — and, the strongest one, **a real launch gate with numeric thresholds and a named human sign-off**, which he built for `seanwinslow.com` by instinct (three engines green, 7/7 route sweep, p95 ≤ 16.7 ms, settle seam ≤ 1 px, pinned byte budget, nothing merges until he wheels through every band). **The distinction that carries the module: cost control is not unit economics.** He is excellent at the first and has never done the second.
 
-**Anchor:** Rechat (Hamel Husain's "whack-a-mole" story). **Backup:** published routing/caching cost architectures.
-**Debate:** LLM-as-judge vs. human eval.
-**Artifact:** launch criteria + cost model + incident runbook → **closes the other two Golden Loop gaps.**
+**Exercise A is the one deliberate mirror exercise in the curriculum**, and it settles an open question from the map: Golden Loop's demo dataset should be **real job_feed traces, not fiction**. Error analysis can only be learned on data whose domain you understand, and the real data is the stronger honesty story.
 
-**Candidate sources:** Hamel Husain's eval writing; Sculley (`ce870d74`, already in the notebook); the Stochastic Tax preprint (arXiv 2605.27320 — **fresh preprint, date it when spoken**); Nate B Jones' Moat Audit (12 questions, Executive Circle post `de715ba3-14b2-4a90-8279-2ef06ad78507`).
+### Both lessons run long, and it is a known, flagged deviation
+
+M4 is 5,516 words and M5 is 5,405, against the recipe's stated 2,300–3,500. Roughly 700 words of each is tables. Both carry more sections than M1–M3 (ten and eleven). If Sean wants them cut, the compressible parts are M4 §1's pairings grid and §8's guideline list, and M5 §6's rubric rows and §11's vocabulary block. **Flagged to him at hand-off both times; no instruction to cut has been given.**
 
 ### The build recipe — exactly what M1–M3 did
 
@@ -178,15 +181,15 @@ All of it lives in this project now (`product/`, `posts/`, `research/`), migrate
 | **Combined** | **$17.58**, near the ceiling. ~$7 left |
 | Gemini fleet-wide caps | **$50/month, $20/day** per `agents-sdk/config.toml` `[gemini.budget]` — **not** the $20/$10 the skill doc quotes. August MTD **$21.00 of $50** |
 
-Everything since 2026-08-17 has been **$0** — hand-curation, `yt-dlp`, and (for M4) the free Executive Circle MCP plus direct source fetches. **M4 cost $0. M5 needs no paid research either.**
+Everything since 2026-08-17 has been **$0** — hand-curation, `yt-dlp`, the free Executive Circle MCP, and direct source fetches. **M4 and M5 both cost $0**, including M5's pre-build research pass (free web search plus direct verification against primary pages, no Gemini DR). **The curriculum is finished inside the original approval with ~$7 still unspent.**
 
 ---
 
 ## 9. Open items
 
-1. **Phase C wayfinder session** — prompt ready, not run.
-2. **M5 — Evidence & Operations** — §5. Last module; M4 shipped 2026-08-22.
-2b. **Sean has not yet consumed M4.** Three episodes are in the notebook waiting. He also has not written the M1–M4 artifacts (PRD, data contract, ADR, failure-UX spec + model card) — those are the Golden Loop planning spine and the thing the modules exist to produce.
+1. **THE BOTTLENECK IS NO LONGER BUILDING. It is consumption.** All five modules exist; Sean has consumed M1 through M3 and has not started M4 or M5 — six episodes are sitting in the notebook. **He has written none of the five artifacts** (PRD, data contract, ADR, failure-UX spec + model card, launch criteria + cost model + incident runbook). Those five documents *are* Golden Loop's planning spine and the entire reason the modules were built in this order. Building a sixth thing is not the next move; ask about the artifacts.
+2. **Phase C wayfinder session** — prompt ready, not run.
+2b. **Sean started a sentence on 2026-08-24 and did not finish it:** *"I'm very interested in learning all of this myself and having it drilled into my brain so I understand everything that's happening, but…"* — then redirected to building M5. **The "but" was never resolved and may be the most important open item in this document.** Ask him. It sounds like a tension between wanting to internalise the material and wanting the work shipped, which is exactly the tension the artifacts sit on top of.
 3. **Two Golden Loop status questions** Phase C asks at start: has the mock one-pager gone to 2–3 hiring managers, and is milestone post #1 published?
 4. **Transcription for verbal reps** — Sean said don't bother setting it up. Leave it.
 5. Sean is saving a **YouTube playlist** built 2026-08-22 from `yt-dlp` searches — real titles/IDs/view counts, in that session's chat. Not in the notebook by his choice. Regenerate with `yt-dlp --flat-playlist --print "%(duration)s|%(channel)s|%(view_count)s|%(id)s|%(title)s" "ytsearchN:<query>"` if he wants more.
@@ -195,14 +198,18 @@ Everything since 2026-08-17 has been **$0** — hand-curation, `yt-dlp`, and (fo
 
 ## 10. Answering his questions
 
-He will ask about the material, not just ask you to build. The three lessons are the substance — **read the relevant one before answering**, and the audio prompts in `notebooklm/audio-instructions/` show how each concept was framed for him.
+He will ask about the material, not just ask you to build. The five lessons are the substance — **read the relevant one before answering**, and the audio prompts in `notebooklm/audio-instructions/` show how each concept was framed for him.
 
 The through-lines worth holding in your head:
 
 - **M1:** a single accuracy number destroys the only information that matters, because the two errors are never equally expensive. The threshold is where the decision physically lives, and it is a product decision. Diagnosis without disposition is academic.
 - **M2:** *if your product's behaviour decides which data comes back, your data is not a sample of the world — it is a sample of your product's mistakes.* That is the Zillow mechanism, and it generalises to every system with a human choosing.
 - **M3:** the model call is ~20% of a production system; the other 80% is plumbing. Workflows beat agents whenever the structure is stable enough to encode, because compounding error is arithmetic — 95% per step over ten steps is ~60% end to end.
+- **M4:** trust is a dial you calibrate, not a number you maximise — **model calibration is a property of the number, trust calibration is a property of the person**, and you can ship a perfectly calibrated model and still produce badly calibrated users because the interface rendered every answer in the same confident prose. The errors that matter most are the ones *nobody notices*.
+- **M5:** the plateau is not a capability ceiling. Rechat's whack-a-mole meant the team had no measurement, so every fix was a blind bet — and reaching for a bigger model at that moment is the most expensive available way to avoid writing an eval. **The highest-leverage act available to a non-engineer PM is reading traces one at a time and writing down what went wrong.** And: cost control is not unit economics.
 
 **Things he already built, named** — this table is the highest-value page in the curriculum for him and worth having ready: `fallback = "none"` is a **fail-closed degradation policy**; the synthesizer's `partial` is a **circuit breaker**; `wol-deferred` is **idempotent retry**; `check_caps` projecting `mtd + predicted` is a **pre-flight budget check**; PreToolUse hooks exiting 2 are a **policy enforcement point**; the discovery council's URL rule is a **grounding verification gate** and also a **precision-over-recall decision**.
 
-**Things he has genuinely never done:** written labeling instructions for a stranger, measured inter-rater agreement, threat-modelled his own agents, built session resumability, run an experiment, or negotiated data ownership with another person. Teach those from zero without flattering him that he half-knows them.
+**One more he already built, added by M5:** his `seanwinslow.com` merge gates — three engines green, 7/7 route sweep, p95 ≤ 16.7 ms, settle seam ≤ 1 px, a pinned byte budget, and nothing merging until he has wheeled through every band — are **launch criteria with numeric thresholds and a named human sign-off.** He made one by instinct, for a website. M5's artifact asks him to make the same thing for a model.
+
+**Things he has genuinely never done:** written labeling instructions for a stranger, measured inter-rater agreement, threat-modelled his own agents, built session resumability, designed for someone who cannot check the answer, run an experiment, measured whether a judge agrees with a human, priced anything, or negotiated data ownership with another person. Teach those from zero without flattering him that he half-knows them.

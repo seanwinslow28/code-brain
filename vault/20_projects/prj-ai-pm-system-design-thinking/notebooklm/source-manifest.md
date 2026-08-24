@@ -37,8 +37,14 @@ Notebook: `bcb4e6aa-9da7-49fe-8c65-46d27110313e` — "System Design Thinking for
 | 23 | `230a9929` | Intercom — *Fin AI Agent outcomes* | web | B | M4 | 2026-08-22 |
 | 24 | `8fa09511` | Zhang, Liao & Bellamy, *Effect of Confidence and Explanation on Accuracy and Trust Calibration* (FAT\* 2020, **PDF**) | web | A | M4 | 2026-08-22 |
 | 25 | `7a8e6894` | M4 — Lesson: Interaction, Trust & Control | file | — | M4 | 2026-08-22 |
+| 26 | `bc1cf6c0` | Hamel Husain — *Your AI Product Needs Evals* | web | B | M5 | 2026-08-24 |
+| 27 | `4301f4c3` | Hamel Husain — *Using LLM-as-a-Judge For Evaluation* | web | B | M5 | 2026-08-24 |
+| 28 | `af5b612b` | Breck et al., *The ML Test Score* (IEEE Big Data 2017, **PDF**) | web | A | M5 | 2026-08-24 |
+| 29 | `1dfcc9f0` | *A Survey on LLM-as-a-Judge* (arXiv 2411.15594, revised through 2026, **PDF**) | web | A | M5 | 2026-08-24 |
+| 30 | `0d1f0ebd` | ICONIQ — *2026 State of AI: Bi-Annual Snapshot* (**PDF**) | web | C | M5 | 2026-08-24 |
+| 31 | `f7b99e57` | M5 — Lesson: Evidence & Operations | file | — | M5 | 2026-08-24 |
 
-**Count: 25.**
+**Count: 31.** Sculley (`ce870d74`) is shared M3/M5 and is included in M5's `-s` selection without being re-added.
 
 ## Fetch-quality rule — learned the hard way, 2026-08-17
 
@@ -58,6 +64,8 @@ Three failures caught this way in one sitting, all of which would have silently 
 
 4. **The PAIR guidebook's canonical chapter path is singular — `/guidebook-v2/chapter/<slug>/`, not `/chapters/`** — and the Errors chapter's slug is **`errors-failing`**, not the guessable `errors-graceful-failure`, which 404s. Both `/chapter/` and `/chapters/` resolve for *some* slugs, which is how the plural form got into the M1/M2 notes. Pull the nav links off any working chapter page rather than guessing: `curl -sL <chapter-url> | grep -oE 'href="[^"]*"'`.
 5. **`curl` 403 is not the CLI's verdict.** `microsoft.com/en-us/research/wp-content/uploads/.../Guidelines-for-Human-AI-Interaction-camera-ready.pdf` refuses `curl` with a 403 under any user-agent, and imported cleanly through `notebooklm source add` — 92,269 characters, the full paper. Probe with curl to *find* URLs, but let the CLI make the final call, then verify content the usual way.
+
+**One more, 2026-08-24 while sourcing M5:** a source's imported **title can differ from what the URL slug implies**, because the page was renamed after publication. `hamel.dev/blog/posts/llm-judge/` imports as *"Using LLM-as-a-Judge For Evaluation: A Complete Guide"* — the piece was retitled from the "Creating a LLM-as-a-Judge That Drives Business Results" name the curriculum map recorded. Cite the title the page currently carries, not the one in an older note.
 
 Also note: PDFs import with the URL as their title. Cosmetic, but it means `source list` alone can't tell you what a source is.
 
@@ -86,7 +94,7 @@ Held for their own modules, or held deliberately:
 | Microsoft, *Taxonomy of Failure Modes in Agentic AI Systems v2.0*, June 2026 | B | M3 |
 | Amershi et al., *Software Engineering for ML: A Case Study*, ICSE 2019 | A | M2 |
 | Nate B Jones — "Your Agent Is 80% Plumbing" (12 primitives) | B | M3 |
-| Nate B Jones — the Moat Audit (12 questions) | B | M3 / M5 |
+| Nate B Jones — the Moat Audit (12 questions) | C | **Considered for M5 on 2026-08-24 and SKIPPED as off-spine.** It sits inside a Dec-2025 "9 bets for 2026" post and is about competitive positioning, not evidence or operations. Fetched and read via the Executive Circle MCP (post `de715ba3-14b2-4a90-8279-2ef06ad78507`); nothing in it displaced a source that teaches measurement, rollout, cost or ownership |
 | Nate B Jones + Ryan Wilson — "Stop Designing AI Chatbots, Start Designing AI Relationships" | C | **M4 — used, but deliberately NOT imported.** The 5×5 pairings grid and the three relational metrics are extracted into the M4 lesson with tier-C provenance stated inline; the "Reflexive Intelligence" coinage is left behind. Fetched via the Executive Circle MCP, post `b87d7b60-b804-482a-b502-0e07c2deeb1b` |
 | ASTRIDE (arXiv 2512.04785) / STRIDE-AI (arXiv 2605.17163) | A | M3 — **teach STRIDE plus the agentic threat categories; ASTRIDE is a platform paper and the area is unsettled** |
 | Hydari, Iqbal & Ramasubbu, *Stochastic Tax* (arXiv 2605.27320) | A | M1 (cited) / M5 — fresh preprint, date it when spoken |
