@@ -36,6 +36,7 @@ The machine is tracked here and in `.claude/skills/content-machine/`. Its brain 
 | `corpus/` | **no** | Verbatim writing by the author — the evidence every voice decision is checked against. |
 | `ledger/` | **no** | The consent-gated lessons loop. |
 | `cheese-bank/` | **no** | Labeled negative specimens: registers to never emit. |
+| `reference-universe.md` | **no** | The author's personal-history and pop-culture library — the only place a reference may be sourced from. |
 | `do-not-promote.md` | **no** | Subjects ruled off-limits. |
 
 The private directories are git-ignored (`.gitignore`, "Content Machine private brain"). The corpus

@@ -216,7 +216,9 @@ systemcraft/books/
 # Sean — raw interview answers, hand-edits, pre-AI prose — and is the
 # irreplaceable input the whole machine reads from. The ledger holds the
 # consent-gated lessons loop, the cheese bank the labeled negative specimens,
-# do-not-promote.md the subjects Sean has ruled off-limits.
+# do-not-promote.md the subjects Sean has ruled off-limits, and
+# reference-universe.md the personal-history and pop-culture library the
+# voice pass draws anchors from (merged from two elicitations per #174).
 # Given its own home (NOT under .claude/skills/writing-voice-modes/references/,
 # which L2/L10 schedule for demolition) per wayfinder ticket #160.
 # Never `git add` these; never paste their contents into a tracked file or a
@@ -224,6 +226,7 @@ systemcraft/books/
 creative-studio/content-machine/corpus/
 creative-studio/content-machine/ledger/
 creative-studio/content-machine/cheese-bank/
+creative-studio/content-machine/reference-universe.md
 creative-studio/content-machine/do-not-promote.md
 
 # ════════════════════════════════════════════════════════════════════════
