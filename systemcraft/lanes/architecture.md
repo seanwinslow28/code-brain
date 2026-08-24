@@ -1,6 +1,6 @@
 # Lane manifest — Architecture
 
-Mandatory first read for the [Architecture Advisor](../bench/architecture-advisor.md). Entries are title + pointer + one-line when-to-read — shelf labels, never the books: the content lives in the private corpus (`../corpus/`, gitignored), so pointers resolve only on a machine that has it (degradation ladder otherwise). Follow only the pointers relevant to the task. Book-layer pointers land with Book ingestion.
+Mandatory first read for the [Architecture Advisor](../bench/architecture-advisor.md). Entries are title + pointer + one-line when-to-read — shelf labels, never the books: the content lives in the private corpus (`../corpus/`, gitignored), so pointers resolve only on a machine that has it (degradation ladder otherwise). Follow only the pointers relevant to the task.
 
 ## System shape: prompts, flows, agents
 
@@ -30,3 +30,11 @@ Mandatory first read for the [Architecture Advisor](../bench/architecture-adviso
 - **Evaluating RAG, Agents, and Multi-Turn Systems** — [`hamel-evals.md`](../corpus/canon/hamel-evals.md) — architecting a compound system so it stays evaluable.
 - **Research Line: Data Systems for LLM Pipelines** — [`sh-reya.md`](../corpus/canon/sh-reya.md) — pipeline decomposition and cost/quality co-optimization, with academic backing.
 - **resources.md chapter-by-chapter pointers** — [`aie-book-repo.md`](../corpus/canon/aie-book-repo.md) — citation quarry for primary sources per architecture topic.
+
+## Book layer
+
+- **Huyen, *AI Engineering* — ch. 2, 6, 10** — [`books/huyen-ai-engineering/`](../corpus/books/huyen-ai-engineering/) — model mechanics, RAG and agent patterns, and the progressive production architecture.
+- **Alammar & Grootendorst, *Hands-On Large Language Models* — ch. 2, 3, 7, 8, 9** — [`books/alammar-hands-on-large-language-models/`](../corpus/books/alammar-hands-on-large-language-models/) — tokenizer and transformer internals, system composition, semantic search, multimodal bridges.
+- **Berryman & Ziegler, *Prompt Engineering for LLMs* — ch. 4, 5, 6, 9** — [`books/berryman-prompt-engineering-for-llms/`](../corpus/books/berryman-prompt-engineering-for-llms/) — the application loop, prompt content and assembly, workflow topologies.
+- **Huyen, *Designing Machine Learning Systems* — ch. 3, 7, 10** — [`books/huyen-designing-machine-learning-systems/`](../corpus/books/huyen-designing-machine-learning-systems/) — data systems, prediction serving, and infrastructure layers.
+- **Nika, *Building AI-Powered Products* — ch. 3, 5, 8** — [`books/nika-building-ai-powered-products/`](../corpus/books/nika-building-ai-powered-products/) — the trade-space method, build-vs-buy technical factors, agent architecture choices.

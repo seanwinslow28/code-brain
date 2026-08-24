@@ -1,6 +1,6 @@
 # Lane manifest — Design Strategy
 
-Mandatory first read for the [Design Strategist](../bench/design-strategist.md). Entries are title + pointer + one-line when-to-read — shelf labels, never the books: the content lives in the private corpus (`../corpus/`, gitignored), so pointers resolve only on a machine that has it (degradation ladder otherwise). Follow only the pointers relevant to the task. Book-layer pointers land with Book ingestion.
+Mandatory first read for the [Design Strategist](../bench/design-strategist.md). Entries are title + pointer + one-line when-to-read — shelf labels, never the books: the content lives in the private corpus (`../corpus/`, gitignored), so pointers resolve only on a machine that has it (degradation ladder otherwise). Follow only the pointers relevant to the task.
 
 ## Framing and problem selection
 
@@ -31,3 +31,11 @@ Mandatory first read for the [Design Strategist](../bench/design-strategist.md).
 - **The AI-native PM operating model** — [`lennys-aakash-ai-pm.md`](../corpus/canon/lennys-aakash-ai-pm.md) — shaping team and process for AI-native building.
 - **Team, Roles, and Process** — [`applied-llms.md`](../corpus/canon/applied-llms.md) — staffing and sequencing roles on an AI product team.
 - **Process Over Tools: Eval-Driven Development** — [`eugeneyan.md`](../corpus/canon/eugeneyan.md) — when someone proposes a tool as the fix for a process gap.
+
+## Book layer
+
+- **Huyen, *AI Engineering* — ch. 1, 4** — [`books/huyen-ai-engineering/`](../corpus/books/huyen-ai-engineering/) — use-case risk framing, staged autonomy, build-vs-buy, and moats.
+- **Nika, *Building AI-Powered Products* — ch. 1, 2, 5, 9** — [`books/nika-building-ai-powered-products/`](../corpus/books/nika-building-ai-powered-products/) — the AI PM role, product lifecycle, when-not-to-use-AI gates, and the worksheet appendix.
+- **Huyen, *Designing Machine Learning Systems* — ch. 1, 2, 11** — [`books/huyen-designing-machine-learning-systems/`](../corpus/books/huyen-designing-machine-learning-systems/) — project gating, translating business objectives into system objectives, team shape.
+- **Berryman & Ziegler, *Prompt Engineering for LLMs* — ch. 1, 4, 9** — [`books/berryman-prompt-engineering-for-llms/`](../corpus/books/berryman-prompt-engineering-for-llms/) — the application as a transformation layer and the generality–strength trade-off.
+- **Alammar & Grootendorst, *Hands-On Large Language Models* — ch. 1, 4** — [`books/alammar-hands-on-large-language-models/`](../corpus/books/alammar-hands-on-large-language-models/) — model-class decisions and the cheapest-approach-that-works ladder.

@@ -1,6 +1,6 @@
 # Lane manifest — Interaction & Trust
 
-Mandatory first read for the [Interaction & Trust Designer](../bench/interaction-trust-designer.md). This is the studio's free-canon-carried lane — HAX and PAIR are its spine and got the corpus build's deepest pass. Entries are title + pointer + one-line when-to-read — shelf labels, never the books: the content lives in the private corpus (`../corpus/`, gitignored), so pointers resolve only on a machine that has it (degradation ladder otherwise). Follow only the pointers relevant to the task. Book-layer pointers land with Book ingestion.
+Mandatory first read for the [Interaction & Trust Designer](../bench/interaction-trust-designer.md). This is the studio's free-canon-carried lane — HAX and PAIR are its spine and got the corpus build's deepest pass. Entries are title + pointer + one-line when-to-read — shelf labels, never the books: the content lives in the private corpus (`../corpus/`, gitignored), so pointers resolve only on a machine that has it (degradation ladder otherwise). Follow only the pointers relevant to the task.
 
 ## The HAX spine (Amershi 18 guidelines)
 
@@ -35,3 +35,13 @@ Mandatory first read for the [Interaction & Trust Designer](../bench/interaction
 - **Critique Shadowing: Building an LLM Judge** — [`hamel-evals.md`](../corpus/canon/hamel-evals.md) — auditing whether a judge reflects real user judgment.
 - **Binary Pass/Fail Beats Likert Scales** — [`hamel-evals.md`](../corpus/canon/hamel-evals.md) — pushing back on rubrics that hide the metric-vs-user gap.
 - **Who Validates the Validators (EvalGen and Criteria Drift)** — [`sh-reya.md`](../corpus/canon/sh-reya.md) — why evaluation criteria shift as humans grade, and what that does to trust claims.
+
+## Book layer
+
+This lane remains free-canon-carried (HAX + PAIR above are the spine); the books below supplement it.
+
+- **Huyen, *AI Engineering* — ch. 5, 6, 10** — [`books/huyen-ai-engineering/`](../corpus/books/huyen-ai-engineering/) — prompt attacks and defenses, write-action gating, guardrails and feedback-loop hazards.
+- **Berryman & Ziegler, *Prompt Engineering for LLMs* — ch. 3, 7, 8, 11** — [`books/berryman-prompt-engineering-for-llms/`](../corpus/books/berryman-prompt-engineering-for-llms/) — injection defense, system-message discipline, dangerous-tool sign-off, agent UX.
+- **Nika, *Building AI-Powered Products* — ch. 1, 3, 8** — [`books/nika-building-ai-powered-products/`](../corpus/books/nika-building-ai-powered-products/) — probabilistic UX, responsible-AI practice, the autonomy dial and interaction patterns.
+- **Huyen, *Designing Machine Learning Systems* — ch. 8, 11** — [`books/huyen-designing-machine-learning-systems/`](../corpus/books/huyen-designing-machine-learning-systems/) — degenerate feedback loops and ML UX patterns.
+- **Alammar & Grootendorst, *Hands-On Large Language Models* — ch. 6, 7, 8** — [`books/alammar-hands-on-large-language-models/`](../corpus/books/alammar-hands-on-large-language-models/) — output verification, agent provenance, grounded citations as a trust mechanism.

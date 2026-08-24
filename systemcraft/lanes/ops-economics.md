@@ -1,6 +1,6 @@
 # Lane manifest — Ops & Economics
 
-Mandatory first read for the [Ops & Economics Modeler](../bench/ops-economics-modeler.md). Entries are title + pointer + one-line when-to-read — shelf labels, never the books: the content lives in the private corpus (`../corpus/`, gitignored), so pointers resolve only on a machine that has it (degradation ladder otherwise). Follow only the pointers relevant to the task. Book-layer pointers land with Book ingestion.
+Mandatory first read for the [Ops & Economics Modeler](../bench/ops-economics-modeler.md). Entries are title + pointer + one-line when-to-read — shelf labels, never the books: the content lives in the private corpus (`../corpus/`, gitignored), so pointers resolve only on a machine that has it (degradation ladder otherwise). Follow only the pointers relevant to the task.
 
 ## Cost and unit economics
 
@@ -31,3 +31,11 @@ Mandatory first read for the [Ops & Economics Modeler](../bench/ops-economics-mo
 - **Human Annotation: The Benevolent Dictator** — [`hamel-evals.md`](../corpus/canon/hamel-evals.md) — the labor economics of labeling.
 - **Team, Roles, and Process** — [`applied-llms.md`](../corpus/canon/applied-llms.md) — staffing an AI product operation.
 - **Why AI Projects Fail: The Missing Process** — [`sh-reya.md`](../corpus/canon/sh-reya.md) — the continuous-improvement process a launch must fund.
+
+## Book layer
+
+- **Huyen, *AI Engineering* — ch. 7, 8, 9, 10** — [`books/huyen-ai-engineering/`](../corpus/books/huyen-ai-engineering/) — inference cost and latency, fine-tuning memory math, data-budget economics, observability.
+- **Huyen, *Designing Machine Learning Systems* — ch. 7, 8, 9, 10** — [`books/huyen-designing-machine-learning-systems/`](../corpus/books/huyen-designing-machine-learning-systems/) — monitoring, drift, retraining cadence and freshness economics, infrastructure cost.
+- **Alammar & Grootendorst, *Hands-On Large Language Models* — ch. 1, 3, 10–12** — [`books/alammar-hands-on-large-language-models/`](../corpus/books/alammar-hands-on-large-language-models/) — hardware constraints, latency economics, training-cost regimes.
+- **Berryman & Ziegler, *Prompt Engineering for LLMs* — ch. 7** — [`books/berryman-prompt-engineering-for-llms/`](../corpus/books/berryman-prompt-engineering-for-llms/) — model choice criteria and token/cost/latency budgeting.
+- **Nika, *Building AI-Powered Products* — ch. 2, 5, 6, 7** — [`books/nika-building-ai-powered-products/`](../corpus/books/nika-building-ai-powered-products/) — ROI and monetization, build/buy cost structure, financial metrics, tooling economics.

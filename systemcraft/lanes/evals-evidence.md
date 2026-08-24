@@ -1,6 +1,6 @@
 # Lane manifest — Evals & Evidence
 
-Mandatory first read for the [Evals & Evidence Architect](../bench/evals-evidence-architect.md). The hamel.dev distillate is this lane's interim spine until the Shankar/Husain book lands (~Oct 2026, watch-ticket standing). Entries are title + pointer + one-line when-to-read — shelf labels, never the books: the content lives in the private corpus (`../corpus/`, gitignored), so pointers resolve only on a machine that has it (degradation ladder otherwise). Follow only the pointers relevant to the task. Book-layer pointers land with Book ingestion.
+Mandatory first read for the [Evals & Evidence Architect](../bench/evals-evidence-architect.md). The hamel.dev distillate is this lane's interim spine until the Shankar/Husain book lands (~Oct 2026, watch-ticket standing). Entries are title + pointer + one-line when-to-read — shelf labels, never the books: the content lives in the private corpus (`../corpus/`, gitignored), so pointers resolve only on a machine that has it (degradation ladder otherwise). Follow only the pointers relevant to the task.
 
 ## The lifecycle (start here)
 
@@ -35,3 +35,13 @@ Mandatory first read for the [Evals & Evidence Architect](../bench/evals-evidenc
 - **Evaluation Design Rules of Thumb** — [`hamel-evals.md`](../corpus/canon/hamel-evals.md) — quick-reference judgment calls.
 - **Evaluating RAG, Agents, and Multi-Turn Systems** — [`hamel-evals.md`](../corpus/canon/hamel-evals.md) — when the system under eval is compound.
 - **Course Map (AI Evals for Engineers & PMs)** — [`hamel-evals.md`](../corpus/canon/hamel-evals.md) — sequencing the lane's own curriculum against the source course.
+
+## Book layer
+
+The Shankar/Husain evals book is still unpublished (~Oct 2026, watch-ticket standing); until it lands, the hamel.dev spine above plus the chapters below carry the lane.
+
+- **Huyen, *AI Engineering* — ch. 3, 4** — [`books/huyen-ai-engineering/`](../corpus/books/huyen-ai-engineering/) — the book's strongest pair: judge discipline, eval-pipeline design and sizing, contamination.
+- **Huyen, *Designing Machine Learning Systems* — ch. 4, 5, 6, 9** — [`books/huyen-designing-machine-learning-systems/`](../corpus/books/huyen-designing-machine-learning-systems/) — training-data quality, leakage prevention, baselines and slice evaluation, the test-in-production ladder.
+- **Alammar & Grootendorst, *Hands-On Large Language Models* — ch. 4, 8, 12** — [`books/alammar-hands-on-large-language-models/`](../corpus/books/alammar-hands-on-large-language-models/) — classification metrics, retrieval and RAG evaluation, the generative eval stack.
+- **Berryman & Ziegler, *Prompt Engineering for LLMs* — ch. 7, 10** — [`books/berryman-prompt-engineering-for-llms/`](../corpus/books/berryman-prompt-engineering-for-llms/) — logprob quality gates and the eval-first doctrine.
+- **Nika, *Building AI-Powered Products* — ch. 2, 6** — [`books/nika-building-ai-powered-products/`](../corpus/books/nika-building-ai-powered-products/) — Go/No-Go gates and the product/system/AI metric blend.
