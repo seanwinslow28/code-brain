@@ -99,23 +99,63 @@ def test_emit_baseline_has_mean_and_stdev_per_metric():
         assert json.loads(out.read_text(encoding="utf-8"))["schema_version"] == 1
 
 
-def test_baseline_flags_fire_below_range():
-    metrics = {
-        "sentence_length": {"cv": 0.10, "monotony_flag": True},
-        "lexical_diversity": {"mattr": 0.50},
-        "pronouns": {"first_person_rate": 0.1},
-        "openers": {"other_pct": 5.0},
+def _metrics(cv=0.10, mattr=0.50, fp=0.1, opener=5.0):
+    return {
+        "sentence_length": {"cv": cv, "monotony_flag": True},
+        "lexical_diversity": {"mattr": mattr},
+        "pronouns": {"first_person_rate": fp},
+        "openers": {"other_pct": opener},
     }
-    baseline = {"metrics": {
-        "cv": {"mean": 0.70, "stdev": 0.10},
-        "mattr": {"mean": 0.80, "stdev": 0.03},
-        "first_person_rate": {"mean": 4.0, "stdev": 1.0},
-        "opener_other_pct": {"mean": 40.0, "stdev": 8.0},
-    }}
-    flags = analyze.baseline_flags(metrics, baseline)
+
+
+_BASELINE_METRICS = {
+    "cv": {"mean": 0.70, "stdev": 0.10},
+    "mattr": {"mean": 0.80, "stdev": 0.03},
+    "first_person_rate": {"mean": 4.0, "stdev": 1.0},
+    "opener_other_pct": {"mean": 40.0, "stdev": 8.0},
+}
+
+
+def test_baseline_flags_fire_below_range():
+    flags = analyze.baseline_flags(_metrics(), {"metrics": _BASELINE_METRICS})
     assert any("monotonous" in f for f in flags)
     assert any("vocabulary" in f for f in flags)
     assert any("pronoun" in f for f in flags)
+    # opener variety is REPORT-ONLY by default (#177): it was the last
+    # false-positive source once the gate moved to 2 sigma.
+    assert not any("open the same way" in f for f in flags)
+
+
+def test_default_gate_is_two_sigma():
+    """A value inside 2 sigma but outside 1 must NOT flag.
+
+    This is the #177 regression: the old 1-sigma gate flagged 5 of 6 passages of
+    Sean's own verbatim prose under leave-one-out.
+    """
+    between = 0.80 - 1.5 * 0.03  # 1.5 sigma below the mattr mean
+    flags = analyze.baseline_flags(_metrics(mattr=between), {"metrics": _BASELINE_METRICS})
+    assert not any("vocabulary" in f for f in flags)
+
+
+def test_gate_sigma_is_read_from_the_baseline():
+    """The gate shape travels in the baseline, so a rebuild can change it."""
+    between = 0.80 - 1.5 * 0.03
+    loose = analyze.baseline_flags(_metrics(mattr=between), {"metrics": _BASELINE_METRICS})
+    tight = analyze.baseline_flags(
+        _metrics(mattr=between),
+        {"metrics": _BASELINE_METRICS, "gate": {"sigma": 1.0}},
+    )
+    assert not any("vocabulary" in f for f in loose)
+    assert any("vocabulary" in f for f in tight)
+
+
+def test_gate_can_re_enable_opener_variety():
+    flags = analyze.baseline_flags(
+        _metrics(),
+        {"metrics": _BASELINE_METRICS,
+         "gate": {"flag_metrics": ["cv", "mattr", "first_person_rate",
+                                   "opener_other_pct"]}},
+    )
     assert any("open the same way" in f for f in flags)
 
 

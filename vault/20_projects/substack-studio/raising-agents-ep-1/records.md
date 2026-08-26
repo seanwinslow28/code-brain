@@ -58,12 +58,14 @@ Value (substack-value-engine)  — hand-run, not skill-loaded. Itch real and his
 Structure (storytelling-arch)  — hand-run, not skill-loaded. Beat-turn check on all
                                  12 seams, no and-then chronicle. PASS
 Shape (writing-voice-modes)    — skill loaded and run. 5-step workflow followed.
-Critique (writing-critique)    — skill loaded and run. Analyzer: CV 0.872, inside
-                                 baseline. 2 major + 4 minor findings. ONE grounded
-                                 revise pass applied. Verdict was revise, now clear.
-                                 Residual: MATTR 0.793 vs baseline mean 0.844
-                                 (narrower vocabulary). NOT fixed, deliberately:
+Critique (writing-critique)    — skill loaded and run. 2 major + 4 minor findings.
+                                 ONE grounded revise pass applied. Verdict was
+                                 revise, now clear. Residual: narrower vocabulary
+                                 than his own prose. NOT fixed, deliberately:
                                  widening it means words he did not say.
+                                 ANALYZER NUMBERS FROM THIS RUN ARE VOID (#177) —
+                                 the baseline was contaminated and the gate
+                                 mis-shaped. Corrected re-measurement below.
 Humanity (writing-humanity-pass) — skill loaded and run. Voice-safe register.
                                  5 spans scrubbed. Em/en dashes: 0. Critique fixes
                                  preserved.
@@ -98,10 +100,21 @@ Resolutions to the open items:
 Mechanical proofread only, per the house workflow: markdown export escapes (`\!`, `\-`, `\*`),
 one mismatched quote pair, curly apostrophes normalized, trailing whitespace. Prose untouched.
 
-**Analyzer, chain draft vs his rewrite:** MATTR 0.793 (outside baseline range) vs 0.812 (inside).
-CV 0.872 vs 0.767. His rewrite clears the range the chain draft missed, which falsifies the
+**Analyzer, chain draft vs his rewrite — RE-MEASURED 2026-08-26, and the reading below is the
+corrected one.** MATTR 0.788 (flagged) vs 0.812 (clean); CV 0.832 vs 0.767 (both clean).
+
+The conclusion stands: his rewrite clears the range the chain draft missed, which falsifies the
 "the law caps the register" claim made in the earlier gate record. The gap was the shaper's, not
-the law's. Ticket premise corrected.
+the law's.
+
+**The instrument that produced the original numbers did not stand.** The baseline in use that day
+was built entirely from quarantined material and was gated at 1 sigma across four metrics OR'd
+together, a shape that flagged 5 of 6 passages of Sean's own verbatim prose under leave-one-out.
+The original flag also fired by 0.0056, a margin inside the noise. So the reading was right by
+luck. Re-run against the baseline rebuilt on 2026-08-26 (five tier-A segments, 2-sigma gate,
+0 of 5 false flags), the same comparison comes out the same way, on ground that holds:
+[#177](https://github.com/seanwinslow28/code-brain/issues/177). The 0.793 figure quoted elsewhere
+was measured on a slightly earlier version of the draft; 0.788 is the current file.
 
 **Lessons loop input (#168 is not built, so this is the hand-carried version).** The single
 highest-value finding from the run: the origin check cut a comic under-reaction beat for having

@@ -141,7 +141,7 @@ Cut: describe the thing as it is. Ex: "This function was added to replace the ol
 The 30 patterns above are useful editing triggers, but they are not equally
 well-supported as "AI detection." This section stratifies them by how strong the
 evidence is, and wires the measurable ones to the `writing-critique` analyzer
-(`.claude/skills/writing-critique/references/analyze.py`; its `baseline.json` was withdrawn 2026-08-26 as contaminated, so these report without flagging until [#177](https://github.com/seanwinslow28/code-brain/issues/177) rebuilds it). The
+(`.claude/skills/writing-critique/references/analyze.py`; its `baseline.json` was rebuilt 2026-08-26 after the original proved contaminated, and now gates at 2 sigma with opener variety report-only, per [#177](https://github.com/seanwinslow28/code-brain/issues/177)). The
 honest framing matters: an over-claimed tell that flags Sean's own voice destroys
 trust in the whole catalog.
 
