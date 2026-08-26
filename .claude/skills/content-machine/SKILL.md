@@ -45,7 +45,7 @@ grounded revise request; the author decides everything else.
 | 3 | **Shape** — the transcript becomes prose | `writing-voice-modes` | live |
 | 4 | **Gates** — value, structure, critique, humanity, origin | chain skills + `gates/` | live |
 | 5 | **Ship** — the author publishes | the author | live |
-| 6 | **Lessons** — his corrections become rules, with his consent | `ledger/` | not built ([#168](https://github.com/seanwinslow28/code-brain/issues/168)) |
+| 6 | **Lessons** — his corrections become rules, with his consent | `lessons/` + `ledger/` | live |
 
 Stage 0 is skippable by design: a hand-picked topic is a legitimate input. Stage 6 is not skippable
 once built, because a machine that never learns from his rewrites makes the same mistake weekly.
@@ -179,6 +179,44 @@ Final text, images, frontmatter, and the open items the author has to settle him
 4. Shape. Gate. Hand him the draft with both records attached.
 5. He rewrites by hand. That rewrite is the highest-value artifact the machine produces — it is
    corpus, and once the lessons loop exists it is also the lesson.
+
+## The lessons loop
+
+The machine learns only from what he actually changed, and only with his reason attached.
+
+**1. Diff** (`lessons/diff_pieces.py`, stdlib, $0):
+
+```bash
+python3 .claude/skills/content-machine/lessons/diff_pieces.py <handoff.md> <final.md>
+```
+
+Sentence-aligned, not word-aligned, because a lesson is about a beat rather than a token. A reworded
+sentence arrives as one change to ratify instead of six insertions and four deletions. Block-quote
+markers and smart quotes are normalized away so formatting never registers as an edit he made.
+
+**2. Propose.** The machine reads the change list and writes one candidate lesson per change into
+`ledger/lessons.md` with `Status: pending`. A pending candidate has changed nothing.
+
+**3. Ratify.** He supplies the two things the machine may not infer: **his reason, verbatim**, and a
+**scope tag** (permanent rule vs one-off exception). No lesson enters any file without both.
+
+**4. Route.** A ratified permanent lesson goes to exactly one home:
+
+| Lesson is about | Home |
+|---|---|
+| How he writes | the voice guide |
+| How this medium works | `contracts/<lane>/<medium>.md` |
+| Something never to say again | `cheese-bank/cheese-bank.md` |
+
+Write the ledger entry first, then make the edit, then record the amended file back in the entry.
+Ledger-first means a failed edit still leaves a record of what he ratified.
+
+**Rejected candidates stay in the ledger.** A rejection is the more useful of the two records: it
+stops the machine proposing the same wrong lesson next week. Deleting rejections means re-learning
+them forever.
+
+**Run it on Professional-lane documents too.** His edits to a resume carry the same signal, under
+the facts-only form of the law.
 
 ## The private brain
 
