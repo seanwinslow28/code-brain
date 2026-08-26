@@ -43,7 +43,7 @@ grounded revise request; the author decides everything else.
 | 1 | **Topic** — one piece, one lane, one medium, named before anything else | this skill | live |
 | 2 | **Interview** — one lens, one question at a time, read-back at the close | `interview/` | storyteller lens only ([#165](https://github.com/seanwinslow28/code-brain/issues/165)) |
 | 3 | **Shape** — the transcript becomes prose | `writing-voice-modes` | live |
-| 4 | **Gates** — value, structure, critique, humanity, origin | chain skills | origin gate hand-run ([#164](https://github.com/seanwinslow28/code-brain/issues/164)) |
+| 4 | **Gates** — value, structure, critique, humanity, origin | chain skills + `gates/` | live |
 | 5 | **Ship** — the author publishes | the author | live |
 | 6 | **Lessons** — his corrections become rules, with his consent | `ledger/` | not built ([#168](https://github.com/seanwinslow28/code-brain/issues/168)) |
 
@@ -100,12 +100,63 @@ ORIGIN LEDGER
 Traced: <count> vivid phrases, each to a transcript line
 Untraced: <every phrase that entered the draft from somewhere other than the transcript>
   - "<phrase>" — <where it came from, and why it was kept or cut>
+ASK LIST: <untraced phrases the draft is better with. One question each, for him to answer.>
+  - "<phrase>" — <what the beat is doing, and the question that would get him to say it>
 Verdict: clean | <n> leaks
 ```
 
 Untraced does not mean "delete silently". It means show the author, so he can say the line himself
-or strike it. The leaks are the signal — they are what the automated origin gate ([#164](https://github.com/seanwinslow28/code-brain/issues/164))
-gets built to catch.
+or strike it.
+
+**The ASK LIST exists because deleting is the more expensive mistake.** On the first real run the
+gate cut a flat under-reaction after a bad output ("Cool. Thanks.") for having no transcript source.
+Sean put the beat back on rewrite, in his own words, better. The beat was right; only the invented
+wording was wrong. A gate that silently cuts loses material the interview simply failed to reach.
+So: anything the draft is genuinely better with goes on the ASK LIST as a question, not into a
+diff as a deletion.
+
+## The origin gate
+
+Two layers, because the law has two halves and only one of them is mechanical.
+
+**Layer 1, mechanical** (`gates/origin_check.py`, stdlib, no model, $0):
+
+```bash
+python3 .claude/skills/content-machine/gates/origin_check.py <draft.md> <transcript.md> --lane expressive
+```
+
+It reports every atom in the draft with no counterpart in the transcript, ranked by how hard the
+law is on that kind of atom. Numbers, dates, and proper nouns are **claims** (the law names them
+explicitly). Everything else is an **image** at most. Connective tissue is exempt by construction,
+via a stoplist, because the law already permits it.
+
+**Layer 2, reading.** The mechanical layer cannot tell an invention from a legitimate connective
+phrase, and it is blind to the whole class below. Whoever shapes the draft reads the flags, writes
+the ORIGIN LEDGER, and puts anything worth keeping on the ASK LIST.
+
+### What layer 1 can and cannot see
+
+Measured against the first real run, whose leaks are pinned in `gates/test_origin_check.py`:
+
+- **7 of 10** real inventions caught, **0** false positives on Sean's own material.
+- **Blind to recombination.** All three misses were built entirely from words he did say, put
+  together in a way he never did: "it had no table to get anything from" (a pun on his phrase),
+  "the research, the ideas, the notes" (his word, wrong speaker), "the actual thinking". A token
+  check cannot see these and never will. **Layer 2 owns recombination.** When reading, the question
+  is not "is this word his" but "did he put these words in this order."
+- It also caught a leak the hand-check missed: the draft had expanded his "WOL" into "wake-on-LAN",
+  a word he never said.
+
+Re-run the fixture after any change to the checker: `python3 gates/test_origin_check.py`.
+
+### Lane behavior
+
+| Lane | On an untraced claim | Why |
+|---|---|---|
+| **Expressive** | Advises. Never blocks, never rewrites. | L8. Sean ratifies; a made-up joke costs a rewrite. |
+| **Professional** | **Blocks delivery** (exit 1) while any claim is untraced. | A fabricated number on a resume is a different class of harm. The block is on the document, not on his judgment: he clears it by confirming the fact or striking it. |
+
+The gate reports. It does not revise, does not score, and does not loop.
 
 ### Stage 4 → GATE RECORD
 

@@ -63,8 +63,8 @@ Inherited from `writing-voice-modes` G1–G5, restated because Substack drafts b
 
 Value → structure → shape → critique → humanity → origin → do-not-promote.
 
-The origin check is hand-run until [#164](https://github.com/seanwinslow28/code-brain/issues/164)
-automates it. Its output — the untraced phrases — is the spec for that gate.
+The origin check runs `gates/origin_check.py` (mechanical layer) plus a reading pass for
+recombination, which the mechanical layer is blind to. Expressive lane advises and never blocks.
 
 ## Delivery
 
