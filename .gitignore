@@ -163,6 +163,12 @@ vault/05_atlas/operating-models/
 # future notes stay local-only.
 vault/10_timeline/
 
+# Daily notes moved out of vault/10_timeline/daily/ to vault/daily/ on
+# 2026-08-11 and the rule above did not follow them, leaving the personal
+# log outside the private layer for two weeks (never committed; caught
+# 2026-08-26). Same content, same reason, so the same rule applies here.
+vault/daily/
+
 # Personal source material & profiles (consolidated into the job-hunt home
 # on disk; rules guard against re-staging from any path)
 _inputs/

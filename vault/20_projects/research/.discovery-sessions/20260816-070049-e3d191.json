@@ -1,0 +1,42 @@
+{
+  "id": "20260816-070049-e3d191",
+  "topic": "evaluating, monitoring, and improving AI product features after launch",
+  "lens": "pm",
+  "tier": "deep",
+  "segment": "product manager",
+  "evidence_count": 32,
+  "verified": 5,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 0.5287,
+  "gather_status": {
+    "last30": "ok: 7 records (7 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 15 records (15 found)",
+    "reviews": "ok: 2 records (2 found)",
+    "github": "ok: 8 records (8 found)",
+    "qa": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "No evidence on online experimentation, A/B testing, rollout controls, or rollback procedures.",
+    "No direct accounts from end users or practitioners; the evidence consists of secondary guidance and interview-oriented material.",
+    "No evidence distinguishing needs by product type, model architecture, company size, or regulated industry.",
+    "No evidence on latency, reliability, infrastructure cost, or trade-offs among quality, speed, and cost.",
+    "No evidence on evaluation thresholds, statistical confidence, or how offline eval results correlate with production outcomes.",
+    "No evidence on privacy, security, regulatory compliance, red teaming, or adversarial misuse after launch.",
+    "No evidence on human review workflows, escalation paths, incident response, or ownership of AI quality.",
+    "No evidence on monitoring model drift, data drift, or quality degradation over time.",
+    "No evidence on how teams build, label, version, or maintain evaluation datasets."
+  ],
+  "contradictions": [
+    "The evidence characterizes traditional bugs as predictable and AI failures as requiring a distinct lens, while the trace example identifies a conventional, fixable retrieval bug inside an AI product. This suggests AI systems combine probabilistic failures with ordinary software defects rather than replacing one with the other.",
+    "Aggregate trace analysis is presented as a way to connect technical patterns with user happiness, while other evidence says important qualitative context and user frustration do not show up in data. The sources differ on the limits of instrumentation but are not directly incompatible.",
+    "No direct factual contradictions appear in the evidence."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 0.4,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

@@ -57,6 +57,14 @@ cost: $0 (web research; no paid research invoked)
 - **OpenAI Cookbook / Anthropic docs & courses** — canonical, continuously updated; more current than any book.
 - **chiphuyen/aie-book repo** — free maintained companion to purchase #1.
 
+## Addendum 2026-08-23 — Evals-book bridge plan (until final release ~Oct 25, 2026)
+
+Purchases made: the five buyable books via ebooks.com (DRM-free EPUB+PDF, $299.95). *Evals for AI Engineers* has no purchasable file yet (early release = O'Reilly-subscription online reading only; only ch. 1–2 published). Bridge findings ($0 research):
+
+- **~80% of the book's method is freely reconstructible today from the authors' own publications**: hamel.dev "Your AI Product Needs Evals" + the ~50-question AI Evals FAQ (hamel.dev/blog/posts/evals-faq) + the free 17-part email course (ai.hamel.dev/eval-course, incl. 2 free e-books) + "Using LLM-as-a-Judge: A Complete Guide" (hamel.dev/blog/posts/llm-judge) + Shankar's "Who Validates the Validators?" (arxiv 2404.12272) + the two Lenny's pieces + the free half of the Pragmatic Engineer evals guide. These join the free-canon layer NOW as the evals lane's interim spine.
+- **True book-only gaps until October**: (1) statistical correction of success rates for imperfect judges (TPR/TNR + confidence intervals), (2) cost/latency optimization of eval pipelines, (3) production-monitoring depth (online evals, drift, sampling), (4) end-to-end worked code, (5) the single ordered pedagogical sequence.
+- **Gap-fill plan**: gaps 1–3 are single-shape research topics → $0 lanes (local deep-research queue / web agents); paid Gemini DR only if a $0 pass proves insufficient, with cost confirmation. Gap 4 is partially covered by the Arize skill set (evaluator/dataset/experiment/annotation/instrumentation) as the *practice* half of the lane. Gap 5 resolves itself when the final EPUB is purchased in October (watch ebooks.com).
+
 ## Decision requested (Sean)
 
 1. Ratify the six-book purchase list and order (~$250 total), with Nudelman as a contingent seventh.
