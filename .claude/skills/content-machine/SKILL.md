@@ -41,7 +41,7 @@ grounded revise request; the author decides everything else.
 |---|---|---|---|
 | 0 | **Oracle** — proposes what's worth writing from the author's recent work | `/content-oracle` | not built ([#169](https://github.com/seanwinslow28/code-brain/issues/169)) |
 | 1 | **Topic** — one piece, one lane, one medium, named before anything else | this skill | live |
-| 2 | **Interview** — one lens, one question at a time, read-back at the close | `interview/` | storyteller lens only ([#165](https://github.com/seanwinslow28/code-brain/issues/165)) |
+| 2 | **Interview** — one lens, one question at a time, read-back at the close | `interview/` | live, six lenses |
 | 3 | **Shape** — the transcript becomes prose | `writing-voice-modes` | live |
 | 4 | **Gates** — value, structure, critique, humanity, origin | chain skills + `gates/` | live |
 | 5 | **Ship** — the author publishes | the author | live |

@@ -29,6 +29,9 @@ INVENTIONS = [
     "come back with the research, the ideas, the notes",
     "to do the actual thinking",
     "Nothing about this is finished.",
+    # Contamination class: "report" entered the room in the interviewer's Q11/Q12
+    # and the draft adopted it. A word the interviewer supplied is not his word.
+    "And I'd been reading a report every morning.",
 ]
 
 # Sean's own material. A flag on any of these is a false positive.
@@ -38,6 +41,10 @@ SOURCED = [
     "The research covers agentic frameworks.",
     "No concepts. No connections. Nada.",
     "It only checked if the process exited, not if it produced anything.",
+    # His A1 opened with a literal "Q1:" of his own. A naive parser reads that as the
+    # interviewer talking and drops "clean" from his vocabulary, turning his own line
+    # into a false leak.
+    "Each of those mornings it told me everything ran clean.",
 ]
 
 
@@ -63,7 +70,7 @@ def main():
             print(f"  - {p}")
 
     # The gate reports; the bar is honesty about its reach, not a high score.
-    assert len(caught) >= 6, f"recall regressed: {len(caught)}/{len(INVENTIONS)}"
+    assert len(caught) >= 7, f"recall regressed: {len(caught)}/{len(INVENTIONS)}"
     assert not false_pos, f"false positives on sourced material: {false_pos}"
     print("\nOK")
 

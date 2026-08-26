@@ -71,11 +71,22 @@ def stem(w):
 
 
 def variants(w):
-    """A stem plus the silent-e form it may have come from. Without this,
-    "synthesizing" fails to match "synthesize" and the gate reports a leak that
-    is really just a suffix."""
-    st = stem(w)
-    return {st, st + "e"}
+    """Every form a word might reduce to, plus the silent-e it may have come from.
+
+    Stemming has to repeat, not run once. A single pass sent "morning" to "morn"
+    but "mornings" only as far as "morning", so his own word failed to match
+    itself and the gate reported his line as a leak. Bounded at two extra passes,
+    which is enough for a plural of a gerund and short of collapsing real words
+    into each other.
+    """
+    out, cur = set(), w
+    for _ in range(3):
+        st = stem(cur)
+        out |= {st, st + "e"}
+        if st == cur:
+            break
+        cur = st
+    return out
 
 
 def strip_frontmatter(text):
@@ -99,8 +110,44 @@ def sentences(text):
     return out
 
 
+def author_only(transcript):
+    """Strip the interviewer out of the transcript.
+
+    The lens forbids the interviewer contributing a phrase, because a word that
+    entered the room in a QUESTION is not the author's word. Indexing the whole
+    file quietly launders that contamination into "traced": on the first real run
+    the draft used "digging", which appears nowhere except in the interviewer's
+    own Q8. Answers and his corrections count. Nothing else does.
+    """
+    keep, in_answer, last_q = [], False, 0
+    for line in transcript.splitlines():
+        m_a = re.match(r"^A(\d+):", line)
+        m_q = re.match(r"^Q(\d+):", line)
+        if m_a:
+            in_answer = True
+            keep.append(re.sub(r"^A\d+:\s*", "", line))
+        elif m_q:
+            n = int(m_q.group(1))
+            # An author quoting the question number back at us is NOT a new question.
+            # Sean's first answer opened with a literal "Q1:" of his own, and a naive
+            # parser read his words as the interviewer's and dropped them from his
+            # vocabulary, which turns his own lines into false leaks. A question only
+            # counts when its number advances.
+            if n > last_q:
+                last_q, in_answer = n, False
+            elif in_answer:
+                keep.append(re.sub(r"^Q\d+:\s*", "", line))
+        elif re.match(r"^(READ-BACK|TRANSCRIPT|Lens:|Duration:)", line):
+            in_answer = False
+        elif re.match(r"^CORRECTIONS", line):
+            in_answer = True          # corrections are his, and they outrank the answers
+        elif in_answer:
+            keep.append(line)
+    return "\n".join(keep)
+
+
 def build_index(transcript):
-    raw = transcript.lower().replace("’", "'")
+    raw = author_only(transcript).lower().replace("’", "'")
     words = WORD_RE.findall(raw)
     stems = set()
     for w in words:

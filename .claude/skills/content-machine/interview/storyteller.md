@@ -4,37 +4,31 @@ For a piece whose material is something that happened to the author. Fleet incid
 failures, the night a thing broke. The lens that draws out a lived story with enough concrete
 material that the shaper never has to invent any.
 
-Five other lenses are planned ([#165](https://github.com/seanwinslow28/code-brain/issues/165)) and
-do not exist. If a piece isn't a story, say so rather than forcing it through this one.
+Everything on [ENGINE.md](ENGINE.md) applies: thesis-first open, one question at a time, the
+interviewer's words are not his words, and the read-back close. This page is only what this lens
+probes for. If a piece isn't a story, say so rather than forcing it through this one, and check the
+lens table in ENGINE.md for the one that fits.
 
-## Standing rules
+## Standing rules for this lens
 
-- **One question at a time.** Ask, wait, read the answer, ask the next one from what he said.
-- **Never supply the answer.** No multiple choice, no "was it something like X?", no writing his
-  line for him to approve. The moment the interviewer contributes a phrase, that phrase is
-  contaminated and can never legitimately enter the draft.
-- **Never tidy.** Record verbatim, false starts and all.
+The engine's rules bind first. These are the ones a story interview adds:
+
 - **Follow the energy.** When an answer gets specific and fast, that vein is the piece. Dig there
-  before moving down the list.
+  before moving down the list. On the first run, every strong line in the finished post came from a
+  question asked off the previous answer, not from the arc below.
 - **Refuse abstractions.** "It kept failing" is not material. Ask which time, what it said, where he
   was sitting. The rule of thumb: if he hasn't named a noun you could photograph, keep asking.
 - **Interview for the material, not the sentence.** The goal is to make him *say* the vivid thing,
   never to hand him one. A question that makes him laugh usually just harvested the best line in
   the piece.
-- **Twelve questions is a long interview.** If you're at twenty and still going, the piece is too
-  big or the questions are too soft.
+- **Twelve questions is a smell, not a cap.** If you're at twenty, the piece is too big or the
+  questions are too soft. Thirteen was right for a story with two failures in it.
 
 ## The arc
 
 ### 1. Thesis first, in his words
 
-Before any story question:
-
-> Before we get into what happened — in your own words, what's this one actually about?
-
-Capture it verbatim. It is the spine, and at the end it is what the read-back gets checked against.
-If his answer is abstract, ask once more for the version he'd say out loud to a friend. Don't
-correct it, don't sharpen it, and don't reuse the version he rejected.
+The engine's fixed opening move. See ENGINE.md.
 
 ### 2. Cold open material
 
@@ -77,16 +71,9 @@ Cheaper to ask than to discover at the do-not-promote sweep.
 
 ## The read-back (mandatory close)
 
-Tell the story back to him, out loud, in five to ten lines. Plain summary, no voice, no attempt at
-prose — a prose read-back invites him to react to *your* writing instead of correcting *his* facts.
-
-Then ask exactly this:
-
-> What did I get wrong?
-
-Record his corrections verbatim under `CORRECTIONS` in the transcript. They outrank the original
-answers wherever they conflict, and they are the single highest-signal calibration data the machine
-produces: a correction is him telling you precisely where the machine's understanding drifted.
+The engine owns the move, including the rule that it covers the **order** of events and not only the
+facts. See ENGINE.md. For a story specifically: the order is the thing most likely to be wrong,
+because a story interview is answered out of sequence and the interviewer reassembles it.
 
 ## Done when
 
