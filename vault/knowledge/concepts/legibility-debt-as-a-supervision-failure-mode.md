@@ -2,10 +2,10 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/connections/the-calibration-bottleneck-in-scalable-creative-production.md
+  - knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md
 tags: [auto-generated, phase-6]
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Definition

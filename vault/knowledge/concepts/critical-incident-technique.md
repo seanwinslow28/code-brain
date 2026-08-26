@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/concepts/critical-incident-technique.md
 tags: [auto-generated, phase-6]
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Definition
 
-This is a filtering invariant that restricts the promotion of knowledge artifacts to only those instances where a consequential choice was made or disconfirming evidence was encountered. It acts as a gatekeeper against 'slop' by ensuring that only high-variance, high-judgment events enter the permanent record. The mechanism relies on the principle that routine operations are statistically insignificant for differentiation, while anomalies contain the causal logic of expertise.
+This mechanism functions as a high-variance filter that restricts knowledge promotion to instances containing consequential choices or disconfirming evidence, thereby preventing the permanent record from being diluted by routine operational noise. It operates on the invariant that statistical insignificance in daily logs masks the causal logic of expertise, which only emerges during anomalies where judgment was actively exercised. By enforcing this gatekeeping rule, the system forces a trade-off between automation velocity and signal quality, ensuring that only artifacts demonstrating strategic depth rather than mere activity enter the career narrative.
 
 ## Context
 
-Sean's automated synthesizer currently processes hundreds of daily notes. Without this filter, his vault becomes a noisy dump of routine status updates. Applying this technique forces him to manually or algorithmically identify the 'critical incidents' that matter for his career narrative, ensuring his public portfolio reflects strategic depth rather than operational breadth.
+Sean's automated synthesizer currently processes hundreds of daily notes, creating a risk of 'slop' where high-velocity automation produces descriptive, easily faked artifacts like configuration counts. Without this filter, his vault becomes a noisy dump of routine status updates that fail to communicate judgment to external audiences. Applying this technique ensures his public portfolio reflects the specific decisions that defined his professional trajectory, rather than just the volume of work he completed.
 
 ## Evidence
 
@@ -24,8 +24,8 @@ Sean's automated synthesizer currently processes hundreds of daily notes. Withou
 
 ## Examples
 
-- His portfolio strategy should prioritize a few deep, traceable case studies over a broad survey of automated workflows that lack verifiable outcomes.
-- Sean must sacrifice some automation efficiency in his daily notes to capture high-fidelity decision traces, accepting lower volume for higher signal quality.
+- Prioritizing a few deep, traceable case studies over a broad survey of automated workflows that lack verifiable outcomes.
+- Sacrificing some automation efficiency in daily notes to capture high-fidelity decision traces, accepting lower volume for higher signal quality.
 
 ## Related Concepts
 

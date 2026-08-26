@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/negative-capability-failure-literacy.md
 tags: [auto-generated, phase-6]
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Definition
 
-This mechanism defines the capacity to remain effective amidst uncertainty by treating failure data as a primary signal of competence rather than a nuisance to be eliminated. It requires an agent or operator to hold conflicting states of knowledge without reaching for premature resolution, allowing the system to adapt to dynamic contexts where static assumptions would lead to catastrophic misalignment. This literacy transforms failure from a binary success/failure metric into a gradient of informational value that guides subsequent actions.
+This mechanism defines the capacity to remain effective amidst uncertainty and incomplete information, specifically by treating failure data as a primary signal of competence rather than a nuisance to be eliminated. It requires an agent or operator to hold conflicting states of knowledge without reaching for premature resolution, allowing the system to adapt to dynamic contexts where static assumptions would lead to catastrophic misalignment. This literacy transforms failure from a binary success/failure metric into a gradient of informational value that guides subsequent actions.
 
 ## Context
 

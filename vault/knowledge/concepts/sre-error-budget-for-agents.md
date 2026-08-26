@@ -2,31 +2,31 @@
 title: "SRE Error Budget for Agents"
 type: concept
 sources:
-  - knowledge/connections/proxy-metrics-mask-semantic-decay-in-agentic-fleets.md
+  - knowledge/connections/operational-metrics-mask-semantic-decay-in-agentic-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Definition
 
-This concept defines a governance mechanism where the acceptable rate of failure is quantified and capped to prevent reliability degradation from consuming all available resources. When the monthly error budget exceeds a defined threshold, expansion must pause to fund reliability work rather than adding more agents. This approach treats agent reliability as a finite resource that requires active management, similar to traditional SRE practices but applied to autonomous synthesis tasks. It forces a trade-off between velocity and stability by making failure costs explicit.
+This concept applies Site Reliability Engineering principles to agentic workflows by defining a threshold of acceptable semantic error before halting expansion. It posits that if the rate of low-quality or irrelevant output exceeds a defined budget, the system must pause new deployments and fund reliability work instead. This prevents the accumulation of legibility debt by forcing a trade-off between velocity and integrity.
 
 ## Context
 
-Sean's fleet has been expanding without clear error budgets, leading to silent failures in synthesis quality. By defining explicit SLIs for freshness and correctness, he can determine when the cost of new agents outweighs their value. This prevents the accumulation of legibility debt that currently masks the true state of his knowledge infrastructure.
+Sean needs a concrete metric to decide when to stop adding agents or increasing their frequency. The error budget provides a data-driven trigger for intervention, shifting the focus from 'how much can we automate' to 'how much quality are we willing to lose'.
 
 ## Evidence
 
 > If the monthly error budget exceeds Z, pause fleet expansion and fund reliability work.
 
-> Silent failures in synthesis quality should trigger reliability sprints rather than new agent deployments.
+> Health checks must be decoupled from output validity to prevent masking semantic decay.
 
 ## Examples
 
-- Pausing fleet expansion when error rates exceed a defined threshold to focus on reliability.
-- Triggering reliability sprints when synthesis quality drops below acceptable levels.
+- The rejection rate for cross-domain connections has exceeded 20% for three consecutive weeks, triggering a halt in new agent onboarding.
+- The system pauses daily note generation when the semantic similarity score drops below a defined threshold.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+[[Operational Visibility vs. Semantic Value in Agent Fleets]] [[The Illusion of Health in Autonomous Systems]]

@@ -37,7 +37,7 @@ MAX_TURNS = 20
 MAX_BUDGET_USD = 0.00
 
 # Embedding config
-OLLAMA_HOST = "192.168.68.200"
+OLLAMA_HOST = "seans-mac-mini.local"  # mDNS, never a raw IP (eng-001.d10)
 OLLAMA_PORT = 11434
 EMBEDDING_MODEL = "nomic-embed-text"
 CHUNK_SIZE = 500  # tokens (~2000 chars)

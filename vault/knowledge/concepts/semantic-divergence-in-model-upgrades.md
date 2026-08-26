@@ -2,10 +2,10 @@
 title: "Semantic Divergence in Model Upgrades"
 type: concept
 sources:
-  - knowledge/connections/the-semantic-velocity-trap-in-agent-fleet-scaling.md
+  - knowledge/concepts/semantic-divergence-in-model-upgrades.md
 tags: [auto-generated, phase-6]
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Definition

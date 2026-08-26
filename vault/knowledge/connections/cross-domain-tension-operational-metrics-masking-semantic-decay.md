@@ -5,8 +5,8 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - Operational Visibility vs. Semantic Value in Agent Fleets
   - Silent Failure Propagation in Agent Fleets
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Synthesis

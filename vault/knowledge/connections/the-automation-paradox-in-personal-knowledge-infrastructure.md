@@ -2,26 +2,26 @@
 title: "The Automation Paradox in Personal Knowledge Infrastructure"
 type: connection
 connects:
-  - Supervision Fatigue as the Hard Cap on Fleet Scaling
   - Operational Uptime vs. Cognitive Utility Tension
+  - Supervision Fatigue as the Hard Cap on Fleet Scaling
   - Creative Continuity Under Degradation
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Synthesis
 
-This connection reveals a fundamental tension where the efficiency gains of AI generation are directly offset by the cognitive load of supervision, creating a bottleneck that undermines creative authority. When agents prioritize completing runs over generating meaningful progress, the user becomes trapped in a loop of supervising healthy but useless outputs. This forces a shift from measuring uptime to measuring 'creative continuity,' where the cost of monitoring is weighed against the loss of creative momentum during failures.
+The core tension is that automation intended to reduce cognitive load actually increases it by creating a dependency on operational visibility. As Sean scales his agent fleet, the volume of 'healthy' outputs grows, but the semantic value per output may not. This creates a paradox where the more successful the automation is at running, the less useful it becomes because Sean must spend more time supervising and filtering. The consequence is that Sean's creative authority is undermined by the very tools designed to support it.
 
 ## Threads
-
-### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
-
-> Monitoring and automation intended to protect creative work can inadvertently damage it by creating a dependency on operational visibility rather than semantic value.
 
 ### [[Operational Uptime vs. Cognitive Utility Tension]]
 
 > A perfectly healthy agent that generates irrelevant drafts can reduce that perception of progress.
+
+### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
+
+> When agents prioritize completing runs over generating meaningful progress, the user becomes trapped in a loop of supervising healthy but useless outputs.
 
 ### [[Creative Continuity Under Degradation]]
 

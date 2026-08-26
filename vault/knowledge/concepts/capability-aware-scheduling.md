@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/capability-aware-scheduling.md
 tags: [auto-generated, phase-6]
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Definition

@@ -5,8 +5,8 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - Hardware Fragility Masks Semantic Decay in Agent Fleets
   - Silent Failure Propagation in Agent Fleets
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Synthesis
@@ -17,7 +17,7 @@ There is a critical tension between the agents' successful execution of low-leve
 
 ### [[The Illusion of Health in Autonomous Systems]]
 
-> The fleet's binary health reporting creates a dangerous blind spot where semantic decay is invisible to the operator.
+> The fleet reports 'healthy' status based on process completion, while knowledge integrity depends on the synthesis of novel connections that require specific hardware and active research queues.
 
 ### [[Hardware Fragility Masks Semantic Decay in Agent Fleets]]
 

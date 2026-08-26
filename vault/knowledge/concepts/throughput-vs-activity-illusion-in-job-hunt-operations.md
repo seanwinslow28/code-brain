@@ -2,10 +2,10 @@
 title: "Throughput vs. Activity Illusion in Job Hunt Operations"
 type: concept
 sources:
-  - knowledge/connections/the-calibration-bottleneck-in-scalable-creative-production.md
+  - knowledge/concepts/throughput-vs-activity-illusion-in-job-hunt-operations.md
 tags: [auto-generated, phase-6]
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Definition

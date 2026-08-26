@@ -5,8 +5,8 @@ connects:
   - Operational Visibility vs. Semantic Value in Agent Fleets
   - The Illusion of Health in Autonomous Systems
   - Supervision Fatigue as the Hard Cap on Fleet Scaling
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Synthesis

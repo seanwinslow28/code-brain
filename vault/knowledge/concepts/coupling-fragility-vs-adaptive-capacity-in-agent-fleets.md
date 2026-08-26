@@ -2,10 +2,10 @@
 title: "Coupling Fragility vs Adaptive Capacity in Agent Fleets"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-interdependence-in-personal-knowledge-workflow.md
+  - knowledge/concepts/coupling-fragility-vs-adaptive-capacity-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean's vault synthesizer runs show a clear shift from high-throughput/high-rejec
 
 ## Related Concepts
 
-[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[The Illusion of Health in Autonomous Systems]] [[SRE Error Budget for Agents]]
+[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[The Illusion of Health in Autonomous Systems]]

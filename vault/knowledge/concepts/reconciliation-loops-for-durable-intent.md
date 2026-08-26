@@ -2,10 +2,10 @@
 title: "Reconciliation Loops for Durable Intent"
 type: concept
 sources:
-  - knowledge/expansions/connections/agent-infrastructure-and-cross-domain-workflow-inefficiency.md
+  - knowledge/concepts/reconciliation-loops-for-durable-intent.md
 tags: [auto-generated, phase-6]
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Definition

@@ -2,31 +2,31 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/proxy-metrics-mask-semantic-decay-in-agentic-fleets.md
+  - knowledge/connections/the-efficiency-quality-inversion-in-automated-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Definition
 
-This tension arises from the decoupling of operational metrics from semantic integrity, where high-volume activity metrics create an illusion of progress while knowledge synthesis stagnates. Agents report success based on process execution rather than the quality or relevance of their output. This misalignment leads to a state where systems appear healthy and productive, but the actual value generated for the user is diminishing. The core issue is that operational visibility is easier to measure than semantic value, leading to a prioritization of the former over the latter.
+This pattern defines the tension between metrics that are easily observable by automation (such as duration, cluster count, and success status) and those that require human judgment to validate (such as insight novelty and connection strength). Agents report health based on process execution, while knowledge integrity depends on successful semantic integration. The mechanism reveals that operational success can mask semantic stagnation because the system optimizes for the former while ignoring the latter.
 
 ## Context
 
-Sean's fleet generates high volumes of data, but the actual insights are becoming less useful due to silent decay in synthesis quality. This tension prevents him from scaling effectively because he cannot accurately assess the value of his agents' work. Resolving this requires decoupling health checks from output validity to prevent masking semantic decay.
+Sean needs to distinguish between 'busy' agents and 'useful' agents. When operational metrics look good but semantic value is low, he risks building a fragile infrastructure that appears robust but lacks strategic depth. This distinction is critical for evaluating the true ROI of his agentic workflows.
 
 ## Evidence
 
-> Agentic fleets often prioritize operational visibility over semantic value, leading to a state where systems appear healthy while their output degrades.
+> This connection reveals a critical tension where operational metrics mask semantic stagnation. Agents report health based on process execution, while knowledge integrity depends on successful semantic integration.
 
-> This tension arises because internal health checks, such as heartbeat logs, are easier to measure than user-visible outcomes like freshness or correctness.
+> Sean's agent fleet exhibits a critical decoupling where operational metrics (status=success, cost=$0.00) are optimized independently of strategic value (insight density, connection strength).
 
 ## Examples
 
-- Prioritizing heartbeat logs over user-visible outcomes like freshness or correctness.
-- Systems appearing healthy while their output degrades due to silent failures in synthesis quality.
+- A run completes in 1600 seconds with 90% success rate but produces no novel connections.
+- A run takes 2700 seconds with lower success rate but yields high-value strategic insights.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[SRE Error Budget for Agents]]
+[[The Illusion of Health in Autonomous Systems]] [[Supervision as the New AI Edge]]

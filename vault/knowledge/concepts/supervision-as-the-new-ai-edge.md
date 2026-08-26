@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/supervision-as-the-new-ai-edge.md
 tags: [auto-generated, phase-6]
-created: 2026-08-20
-updated: 2026-08-20
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Definition
 
-This concept defines the shift in competitive advantage from raw computational power to the quality of human oversight and evaluation loops. In agentic systems, the edge is no longer defined by who can generate the most content, but by who can best curate, correct, and contextualize that content. The mechanism relies on 'taste preservation' tools and rigorous eval loops to prevent the degradation of semantic value as automation scales.
+This mechanism defines a competitive inversion where value shifts from raw generative capacity to the quality of human oversight and evaluation loops. In agentic systems, the edge is no longer defined by who can generate the most content, but by who can best curate, correct, and contextualize that content. The system relies on 'taste preservation' tools and rigorous eval loops to prevent the degradation of semantic value as automation scales, making human judgment the primary bottleneck rather than model capacity.
 
 ## Context
 
