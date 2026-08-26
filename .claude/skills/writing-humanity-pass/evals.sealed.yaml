@@ -19,7 +19,7 @@ cases:
 
   - id: sealed_clean_verdict_does_not_manufacture_tells
     register: voice
-    input: "[chain run, critique fix list present] Final scrub on a draft whose only remaining patterns are a polysyndetic run and one deliberately blunt sentence a critique finding introduced."
+    input: "[chain run, critique fix list present] Final scrub on a draft whose only remaining patterns are an Anaphoric Stack and one deliberately blunt sentence a critique finding introduced."
     expect:
       - "verdict is clean: a protected move and a protected critique fix are not surviving tells"
       - "does not flag either in order to justify not clean"

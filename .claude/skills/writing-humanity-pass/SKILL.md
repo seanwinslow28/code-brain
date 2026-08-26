@@ -9,7 +9,7 @@ description: Remove the documented "Signs of AI writing" from a draft and rebuil
 
 Remove the 30 documented "Signs of AI writing" from a draft and rebuild human texture, calibrated to Sean Winslow's voice. This is an editing pass, not a composition skill. It pairs with `writing-voice-modes` (runs as the final pass after a voice write) and runs standalone for cleaning agent-generated or foreign drafts.
 
-The core rule: Sean's voice is the authority. A pattern is only a tell when it is NOT one of his 13 signature moves. The "do-not-flag" allowlist IS the signature-move list in `writing-voice-modes`.
+The core rule: Sean's voice is the authority. A pattern is only a tell when it is NOT one of his attested moves. The "do-not-flag" allowlist IS the move roster in `writing-voice-modes` — 36 moves as of 2026-08-24, 23 Signature Moves plus 13 Technique Moves, every one attested against his own corpus.
 
 ## When to Use
 
@@ -68,7 +68,7 @@ Headless verdict block, mirroring `writing-critique`:
 
 ## VOICE-SAFE vs FULL: The Difference
 
-VOICE-SAFE. Cut the `[SLOP]` tells; DEFER to Sean's 13 signature moves (see `references/voice-safe-exceptions.md`). Never flatten a deliberate move into "clean" prose. Match Sean's codified voice from `writing-voice-modes` references instead of producing generic clean output. No sample-pasting needed; his calibration is already codified.
+VOICE-SAFE. Cut the `[SLOP]` tells; DEFER to Sean's attested moves (see `references/voice-safe-exceptions.md`). Never flatten a deliberate move into "clean" prose. Match Sean's codified voice from `writing-voice-modes` references instead of producing generic clean output. No sample-pasting needed; his calibration is already codified.
 
 FULL. Plain, neutral register IS the correct human voice here. Cut everything in `references/ai-tells.md`. Add NO personality and NO first person. (This mirrors humanizer's own gating: encyclopedic, technical, or reference text wants neutral-and-plain, not injected voice.)
 

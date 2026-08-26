@@ -46,11 +46,12 @@ cases:
       - "left essentially unchanged"
       - "mixed-feelings human signal preserved (no clustering of tells present)"
 
-  - id: polysyndeton_preserved
+  - id: anaphoric_stack_preserved
     register: voice
     input: "The dashboard lit up and started screaming and the alerts piled up and I just sat there and watched."
     expect:
-      - "polysyndeton PRESERVED (deliberate Beat Flow drumbeat, not 'and' overuse)"
+      - "the repeated structure is PRESERVED (Anaphoric Stack, compounding shape, not 'and' overuse)"
+      - "not flagged as repetition or listing"
       - "no em dashes introduced"
 
   - id: final_verdict_is_binary
