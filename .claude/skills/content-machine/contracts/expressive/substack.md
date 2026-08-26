@@ -49,6 +49,18 @@ the medium the roster was calibrated on. Two carve-outs:
 Sourced from `reference-universe.md` or the piece's own subject. Never invented. A reference that
 could be swapped for a different one and dropped anywhere is garnish — cut it.
 
+## Ratified lessons from shipped pieces
+
+Routed here by the lessons loop. Reasons live in the gitignored ledger.
+
+- **The navigation lesson has to show real capability, not a routine.** "I check it and I ask Claude
+  to check it too" is a boring cap on a Raising Agents episode. Name the actual practice: what gets
+  evaluated, what gets traced, what watches what. The lesson is where the reader decides whether the
+  author knows what he is doing.
+- **Closer register for this series: honest realist, wit, a dash of professionalism.** The ending
+  admits the breakage is inevitable and shows the thing that keeps it survivable. It never resolves
+  into a tidy win.
+
 ## Hard mechanics
 
 Inherited from `writing-voice-modes` G1–G5, restated because Substack drafts break them most:

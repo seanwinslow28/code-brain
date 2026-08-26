@@ -205,8 +205,18 @@ markers and smart quotes are normalized away so formatting never registers as an
 | Lesson is about | Home |
 |---|---|
 | How he writes | the voice guide |
+| How a story is built | `storytelling-architecture` |
 | How this medium works | `contracts/<lane>/<medium>.md` |
 | Something never to say again | `cheese-bank/cheese-bank.md` |
+
+The structure home was added on the first ratification (2026-08-25), when three of nine lessons
+turned out to be about beat order and none of the original three homes fit. A but/therefore rule
+filed in the voice guide is filed where nobody will look for it.
+
+**A ratified lesson is not automatically a new rule.** On that same run, the lesson Sean cared most
+about turned out to already exist in two skills, and the draft had broken it anyway. The honest
+routing was to promote the existing rule and record that a self-run gate had missed it, not to add
+a duplicate. Check whether the rule already exists before writing one.
 
 Write the ledger entry first, then make the edit, then record the amended file back in the entry.
 Ledger-first means a failed edit still leaves a record of what he ratified.

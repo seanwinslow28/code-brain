@@ -207,7 +207,22 @@ Five global rules earned through the VoicePrint refine loop (4 closed rounds, ~2
 - **G2 — Always contract.** Spelled-out forms ("did not", "it is") read robotic. Contract the way speech does.
 - **G3 — No em dashes, anywhere.** Interaction warning: `writing-humanity-pass` substitutes a colon when it drops a dash; skip that substitution step for Sean or G3 trades into a G1 violation.
 - **G4 — Brevity outranks every other rule here, and it's about PADDING, not word count.** Short enough to explain the thing or land the idea, then stop. Only two things earn length: technical detail that genuinely has to be said, and a funny story whose punchline pays for the runway. One refine edit ran 50% longer than the draft and was still tight — the rule is no word that isn't doing work, not "write less."
-- **G5 (candidate) — No and-then chronicle; beats have to turn.** Restating events in sequence ("this happened, then this happened") is dead prose even in a working doc like a post-mortem. Between adjacent beats, "but" or "therefore" must fit — `storytelling-architecture`'s beat test applies to prose documents, not just chain pieces. Stated twice in one session; treat as binding until contradicted.
+- **G5 — No and-then chronicle; beats have to turn.** Restating events in sequence ("this happened, then this happened") is dead prose even in a working doc like a post-mortem. Between adjacent beats, "but" or "therefore" must fit — `storytelling-architecture`'s beat test applies to prose documents, not just chain pieces. Stated twice in one session, then independently re-derived by Sean in 2026-08 when he rewrote a chain draft and named the rule with his own citations. Promoted from candidate to binding. Note the failure mode it was promoted on: the drafting session read this rule, self-assessed the seams as passing, and shipped a broken one anyway. A self-run structure check is not enforcement.
+
+### Ratified lessons from shipped pieces
+
+Routed here by the content-machine lessons loop. Each carries Sean's ratified reason in the
+gitignored ledger; only the rule travels into this file.
+
+- **Detail serves placing the reader, and stops the moment the sentence stops flowing.** He will cut
+  his own true details for rhythm. One good locating detail beats three stacked ones. (Raising
+  Agents ep. 1, 2026-08-25: he struck "some random weekday before lunch", which he had said himself
+  in the interview.)
+- **Never restate what the image already implies.** A kid opening a present on Christmas morning is
+  already unwrapping a box; saying so twice is the redundancy, not the emphasis.
+- **Indefinite article for anything he owns more than one of.** "The Qwen model" asserts there is
+  only one. He runs several. This generalizes past models to any tool, agent, or machine in his
+  setup.
 
 Three companion findings from the same rounds, same weight:
 
