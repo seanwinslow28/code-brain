@@ -10,7 +10,10 @@ law governs — do not invent a rule here to fill a gap.
 2. The publication's `POSITIONING-AND-EDITORIAL-SPEC.md` — strategy.
 3. The publication's `CLAUDE.md` — standing house law (voice chain, no em dashes, anti-hype, value
    gate, privacy).
-4. This contract — what the machine does differently because the medium is Substack.
+4. [`LANE.md`](LANE.md) — Expressive-lane law, inherited by every contract in this lane (the
+   first-screen test, the reply-hook memo).
+5. This contract — what the machine does differently because the medium is Substack. It may narrow
+   anything in `LANE.md`; it may not delete it.
 
 For Pencil & Prompt those live under `vault/20_projects/substack-studio/`. Read them before the
 interview. A machine that reads the house rules after drafting has already wasted the interview.
@@ -23,6 +26,21 @@ interview. A machine that reads the house rules after drafting has already waste
   navigation lesson: what the author does differently now.
 - **Transfer.** The reader can do something with it that they couldn't before they read it.
 - **The ask lands sideways.** Never a closing pitch, never "I need", never "you can hire me".
+
+## First screen
+
+The surface the [lane's first-screen test](LANE.md#the-first-screen-test) runs against. Substack has
+two and the piece has to clear both, because most readers meet it in the first one:
+
+- **In the inbox.** The title as subject line, the subtitle as preview text, and roughly the first
+  two or three lines of body before the reader decides to read or archive. No image has loaded yet
+  in most clients. This is the harder screen and it is the one to write for.
+- **On the web and in the app.** Title, subtitle, hero image, and the first paragraph above the
+  fold.
+
+**Reply surface: yes.** Post comments, plus replies to the email, which arrive in Sean's inbox as
+mail. The [reply-hook memo](LANE.md#the-reply-hook-memo-advisory-never-a-gate) ships with every
+piece.
 
 ## Shape
 
@@ -74,6 +92,10 @@ Inherited from `writing-voice-modes` G1–G5, restated because Substack drafts b
 ## Gates, in order
 
 Value → structure → shape → critique → humanity → origin → do-not-promote.
+
+The **first-screen test** runs inside the shape gate, on the assembled draft. A failure returns as a
+reorder, never as new material (see `LANE.md`). The **reply-hook memo** is not a gate at all; it is
+written after do-not-promote and travels with the ship packet.
 
 The origin check runs `gates/origin_check.py` (mechanical layer) plus a reading pass for
 recombination, which the mechanical layer is blind to. Expressive lane advises and never blocks.

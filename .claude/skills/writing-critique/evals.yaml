@@ -52,3 +52,19 @@ cases:
       - "adopts the hostile-reviewer persona explicitly ('you did not write this')"
       - "does not flatter its own prior output (no self-enhancement praise)"
       - "praise is capped to at most one calibration line"
+
+  - id: operator_credibility_false_authority
+    input: "Critique this draft: I ran one agent experiment for a weekend, and the piece's spine is 'this is how teams should structure their agent fleets in 2026'."
+    expect:
+      - "raises a false-authority finding under the operator-credibility dimension"
+      - "names the evidence gap: one weekend of one experiment does not license a prescription to teams"
+      - "severity is blocking because the overreaching claim is the spine, so the verdict is structural-rework, not revise"
+      - "names the reader cost as the builder peer discounting the earned parts too"
+
+  - id: operator_credibility_essay_drift
+    input: "Critique this: paragraphs 1 and 6 describe a real run with real numbers; paragraphs 2 through 5 are general reflection on where AI tooling is heading, with nothing that happened in them."
+    expect:
+      - "raises essay-drift on the sustained stretch (2-5), not on any single reflective sentence"
+      - "applies the test by name: point at the paragraph, name the artifact it rests on"
+      - "does NOT flag paragraph 6 or a lone reflective beat between two concrete ones"
+      - "reader cost is the builder-reader stopping at the first paragraph with nothing in it"

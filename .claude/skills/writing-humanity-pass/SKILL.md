@@ -1,6 +1,6 @@
 ---
 name: writing-humanity-pass
-description: Remove the documented "Signs of AI writing" from a draft and rebuild human texture, calibrated to Sean's voice. Auto-detects voice-bearing vs neutral text and scrubs accordingly. Cuts em dashes, significance inflation, -ing padding, copula avoidance, chatbot artifacts, filler, hedging, and 24 more tells. Pairs with writing-voice-modes (runs as the final pass after a voice write) and runs standalone. Use when asked to "scrub the AI out of this", "make this less AI", "de-slop this draft", "humanize this", "this sounds like AI", "remove AI tells", or when reviewing any draft (yours or agent-generated) that reads like a machine.
+description: Remove the documented "Signs of AI writing" from a draft and rebuild human texture, calibrated to Sean's voice. Auto-detects voice-bearing vs neutral text and scrubs accordingly. Cuts em dashes, significance inflation, -ing padding, copula avoidance, chatbot artifacts, filler, hedging, and 24 more tells, then closes on a binary clean / not clean verdict. Pairs with writing-voice-modes (runs as the final pass after a voice write) and runs standalone. Use when asked to "scrub the AI out of this", "make this less AI", "de-slop this draft", "humanize this", "this sounds like AI", "remove AI tells", or when reviewing any draft (yours or agent-generated) that reads like a machine.
 ---
 
 # Writing Humanity Pass
@@ -38,11 +38,33 @@ Classification signals, in priority order:
 1. Draft rewrite. Apply `references/ai-tells.md` for the chosen register. Cover everything the original covered (N paragraphs in, N paragraphs out). Preserve meaning.
 2. Audit. Ask explicitly: "What makes this still read as AI-generated?" Answer in brief bullets (remaining tells, too-tidy rhythm, slogan-y closer). Treat the documented catalog as a **living floor, not a closed set**: models emit new tells faster than `references/ai-tells.md` is updated, so when a passage clusters as machine-written but matches no listed tell, flag it as a *suspected new tell* and scrub it in the current register rather than passing it because it is not on the list. The catalog's logic (over-tidy, over-hedged, over-signposted, texture-free) generalizes past its entries.
 3. Final rewrite. Fix the audit bullets. Scan the result for `—`, `–`, and ` -- `; any hit means it is not done.
+4. Final re-detect. Run detection once more on the final rewrite and answer one question, binary: **is this clean?** See below. The pass does not end without that verdict.
 
 ### Step 3. Deliver
 
-- Interactive: draft, then brief "still-AI" bullets, then final rewrite, then a short change summary.
-- Headless / agent chain (e.g. substack-drafter): return final clean text plus a one-line change summary in a trailing HTML comment. No interactive audit prompt (nobody can answer it in a launchd run). Detect non-interactive context and switch to this mode.
+- Interactive: draft, then brief "still-AI" bullets, then final rewrite, then the binary verdict, then a short change summary.
+- Headless / agent chain (e.g. substack-drafter): return the final text plus the verdict block and a one-line change summary in a trailing HTML comment. No interactive audit prompt (nobody can answer it in a launchd run). Detect non-interactive context and switch to this mode.
+
+## The Final Re-Detect Is Binary
+
+The pass ends on a verdict with exactly two available answers.
+
+- **`clean`** — no surviving tell that is not a protected Sean move or a protected critique fix, and the em-dash scan returns nothing.
+- **`not clean`** — anything else. One surviving tell is not clean.
+
+**"Mostly clean" is not an available verdict.** Neither is "much better", "a few minor tells remain", or "clean enough for a first draft". Those are the shape a pass takes when it wants to stop working, and they are worse than a bad verdict, because they hand the author a draft he now has to re-audit himself while believing it was checked. A gradient verdict is a gate that does not gate. The binary is the whole point: it forces the pass to either finish the work or name what it could not finish.
+
+**`not clean` does not start another loop.** No autonomous revision loops: the pass has already had its draft rewrite and its final rewrite, and a third self-judged pass degrades prose toward the generic without an external target. So on `not clean` the pass delivers the text it has, states the verdict, and lists every surviving tell by name and location, in a form the author can act on. Silence is not available and neither is a third rewrite.
+
+The two ways to lose here are equal and opposite. Softening the verdict to deliver a clean-looking result is the failure this amendment exists to stop. Flagging a protected move or a protected critique fix in order to justify `not clean` is the other one, and it is worse: it invents work and undoes a decision an earlier gate already made. When a surviving pattern is on the protected list, the draft is `clean` and the pattern is not a tell.
+
+Headless verdict block, mirroring `writing-critique`:
+
+```
+<!-- writing-humanity-pass: {"verdict":"clean","surviving_tells":[],"register":"voice","summary":"<one line>"} -->
+```
+
+`surviving_tells` is `[]` if and only if `verdict` is `clean`. Each entry names the tell and where it survives.
 
 ## VOICE-SAFE vs FULL: The Difference
 
@@ -113,6 +135,10 @@ Adapted from [`blader/humanizer`](https://github.com/blader/humanizer) (MIT, v2.
 - [ ] Meaning preserved; paragraph count matches the original.
 - [ ] No tell survives that is not a protected Sean move; suspected new tells (clustered but unlisted) are caught, not passed because they are not in `ai-tells.md`.
 - [ ] Real human prose (no clusters of tells) is left largely alone, not gutted.
+- [ ] The pass ends on a binary verdict: `clean` or `not clean`, never a gradient.
+- [ ] `not clean` delivers the text anyway, names every surviving tell, and does
+      not trigger a third rewrite.
+- [ ] No protected move or critique fix was flagged as a surviving tell.
 
 ## Copy/Paste Ready
 

@@ -1,6 +1,6 @@
 ---
 name: writing-critique
-description: Adversarially red-team a draft and return triaged, directable findings plus an explicit verdict and the single highest-leverage fix. Critiques execution across structure, value, voice, prose/line, and hiring signal; never rewrites. Runs standalone (on-demand red-team) and as the chain gate between writing-voice-modes and writing-humanity-pass, with the same interactive-vs-headless detection as writing-humanity-pass. Ships a stdlib analyzer (sentence-length burstiness, MATTR, opener variety) with a baseline captured from Sean's voice corpus. Use when asked to "red-team this draft", "what's weak here", "critique this", "find what doesn't work", "is this ready to ship", "what would a skeptical reader catch", or "review my draft".
+description: Adversarially red-team a draft and return triaged, directable findings plus an explicit verdict and the single highest-leverage fix. Critiques execution across structure, value, voice, prose/line, hiring signal, and operator credibility; never rewrites. Runs standalone (on-demand red-team) and as the chain gate between writing-voice-modes and writing-humanity-pass, with the same interactive-vs-headless detection as writing-humanity-pass. Ships a stdlib analyzer (sentence-length burstiness, MATTR, opener variety) with a baseline captured from Sean's voice corpus. Use when asked to "red-team this draft", "what's weak here", "critique this", "find what doesn't work", "is this ready to ship", "what would a skeptical reader catch", or "review my draft".
 ---
 
 # Writing Critique
@@ -42,7 +42,7 @@ to hit a count). Load that rubric before critiquing.
 
 1. Read the draft. Adopt the reviewer persona (you did not write this).
 2. Detect or take the stage (early → structure + value; late → line + flatness).
-3. Apply `references/finding-rubric.md` across the five dimensions.
+3. Apply `references/finding-rubric.md` across the six dimensions.
 4. Optionally run the analyzer for line-level evidence (see below).
 5. Return: overall assessment → findings by severity → verdict + the one fix.
    **No rewrite.**
@@ -68,7 +68,7 @@ baseline), never "make it better." Un-anchored self-judged iteration degrades
 prose toward bland/generic. Any second pass would require **new external input**
 (a human note, a new finding from a different source), never a self-judged re-roll.
 
-## The five dimensions
+## The six dimensions
 
 Each critiques execution and defers to the owning skill; never re-litigates the
 premise.
@@ -90,6 +90,51 @@ premise.
 5. **Hiring signal** (Sean-specific) → defers to `substack-value-engine`
    (judgment shown not claimed, artifact + blameless self-post-mortem, ask stays
    sideways).
+6. **Operator credibility** → does the author read as someone who actually builds
+   this, to a reader who already does. **The one dimension this skill owns
+   outright** (see below): every other dimension has an upstream owner; operator
+   credibility is a property of the author-reader relationship rather than of any
+   single stage, so nobody upstream can hold it. Three named tells: **essay-drift**,
+   **false authority**, **keyword-stuffing**.
+
+### Operator credibility, in full
+
+The reader this dimension protects against is the one who already has a platform
+and already ships — a builder peer. That reader forgives a rough sentence and
+does not forgive being lectured by someone who has done less than they have. A
+piece can pass all five other dimensions and still lose them.
+
+| Tell | What it is | The question that catches it | Reader cost |
+|---|---|---|---|
+| **Essay-drift** | The piece slides from what ran to what one *could* do. Commentary about the work replaces the work. | Point at the paragraph and name the artifact it rests on. None? Drift. | The builder-reader stops at the first paragraph with nothing in it. They came for the run, not for the reflection on runs. |
+| **False authority** | A claim whose scope outruns the evidence in the piece. One experiment licensing "teams should"; a week of use licensing "the right way to". | Name the evidence *in this draft* that licenses the claim's scope. | The reader with more scars catches the overreach and discounts everything else, including what was earned. This is the expensive one: it costs the relationship, not the paragraph. |
+| **Keyword-stuffing** | Term density written for a search index rather than a reader. Inherited from the LinkedIn field-tolerance finding ([#170](https://github.com/seanwinslow28/code-brain/issues/170)): the same term load reads as normal in one field and as gaming in another. | Would this term still be here if nobody searched for it? | The reader concludes the piece was optimized rather than written, and re-reads every other claim as optimization too. |
+
+**Severity.** Operator-credibility findings are reader-cost findings like any
+other and rank the same way. **False authority is blocking when the overreaching
+claim is load-bearing** — when the piece's spine is a prescription the evidence
+does not support, no line fix rescues it and the verdict is `structural-rework`.
+
+**The guard, and it is the load-bearing half.** The failure mode of this
+dimension is flagging earned authority as overreach, which is the same class of
+error as flagging a signature move as a defect: it destroys the critique. Before
+raising one, check all three:
+
+- A first-person claim backed by an artifact **in the draft** is not false
+  authority. It is the thing the piece is for.
+- Sean's self-deprecation is a signature move, not a credibility defect. He
+  undersells on purpose; do not read it as a confession of thin evidence.
+- A deliberate reflective beat is not essay-drift. The tell is the *sustained*
+  slide, several paragraphs with no artifact under any of them, never one
+  paragraph of thinking between two concrete ones.
+
+**Where it defers.** It owns the dimension, but not the specifics others already
+hold. Essay-drift's floor is the medium contract's artifact rule (a piece with no
+captured artifact is the contract's block, not this skill's finding);
+false-authority's overlap with resume-speak defers to `substack-value-engine`'s
+hiring signal; keyword tolerance per surface belongs to the medium contract.
+Where none of those is in context — a standalone red-team — this skill applies
+the dimension on its own.
 
 ## The analyzer (optional, advisory)
 
@@ -175,6 +220,10 @@ them.
 - `writing-voice-modes`: owns the sentences and Sean's signature moves; this skill
   routes a grounded revise request back here, and treats signature moves as
   defensible choices, not defects.
+- `content-machine`: when a piece runs through the machine, the medium contract in
+  `contracts/<lane>/<medium>.md` is in context. Operator credibility defers to it
+  on the artifact rule and on per-surface keyword tolerance; the lane file owns
+  the first-screen test, which is a shape-stage check, not a critique finding.
 - `writing-humanity-pass`: runs after this skill. It consumes this skill's
   **critique fix list** and protects those fixes from the scrub. Its
   `references/ai-tells.md` evidence stratification shares this skill's measurable
@@ -193,7 +242,7 @@ the baseline pipeline are new additions, not ports.
 ## References
 
 - `references/finding-rubric.md`: the adversarial mindset, persona separation, the
-  four-quality finding rubric, the five dimensions, stage calibration, and the
+  four-quality finding rubric, the six dimensions, stage calibration, and the
   report + headless-verdict format. Load before critiquing.
 - `references/analyze.py`: the stdlib mechanical analyzer (advisory).
 - `references/baseline.json`: Sean's precomputed voice baseline (regenerable).
@@ -212,6 +261,9 @@ the baseline pipeline are new additions, not ports.
       finding; a failed structure/value gate forces `structural-rework`.
 - [ ] The single highest-leverage fix is the highest reader-cost × reach finding,
       validated by the "if only this were fixed, would it ship?" test.
+- [ ] Operator credibility is read on every Sean-authored draft: essay-drift,
+      false authority, keyword-stuffing — with earned first-person authority and
+      deliberate self-deprecation explicitly NOT flagged.
 - [ ] The critique fix list is emitted for `writing-humanity-pass` to preserve.
 - [ ] The skill never rewrites; fixes route to voice-modes / humanity-pass / Sean.
 - [ ] Headless runs emit the machine-readable verdict block.
@@ -226,6 +278,7 @@ the baseline pipeline are new additions, not ports.
 "Critique this, find what doesn't work"
 "Is this ready to ship?"
 "What would a skeptical reader catch?"
+"Does this read like an operator or like someone writing about operators?"
 "Run the analyzer against my voice baseline"
 "Critique gate this before humanity-pass"
 ```

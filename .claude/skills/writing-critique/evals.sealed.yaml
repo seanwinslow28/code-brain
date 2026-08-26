@@ -23,3 +23,12 @@ surprise_cases:
       - "emits ONE revise request phrased as 'revise against [the specific finding]', routed to writing-voice-modes"
       - "does not rewrite the draft itself"
       - "states that any second pass would require new external input, not a self-judged re-roll"
+
+  - id: operator_credibility_does_not_flag_earned_authority
+    input: "Critique this draft: Sean states flatly that his fleet's nightly critic ran for a week in a failed state, links the manifest, gives the cost, then says 'do not let a partial verdict stand in for a pass', and undercuts himself twice on the way through."
+    expect:
+      - "does NOT raise false authority: the claim is first-person and the artifact is in the draft"
+      - "does NOT read the self-deprecation as thin evidence (it is a signature move)"
+      - "if operator credibility is mentioned at all, it is as a pass, not a manufactured finding"
+      - "honors the severity-ranked floor rather than inventing a dimension-6 finding to look thorough"
+

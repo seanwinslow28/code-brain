@@ -1,6 +1,6 @@
 ---
 name: substack-value-engine
-description: The gate that makes a post worth reading and worth coming back for. Enforces that every piece solves a real problem the author actually had, then hands the reader a concrete, usable solution. Owns the Value Gate (Itch / Solution / Transfer), the narrative-to-value seam, Rule-of-One, over-deliver-on-a-narrow-promise, scratch-your-own-itch sourcing, and hiring-signal-without-pitching. Use when asked to "is this worth posting", "what's the takeaway", "make this useful", "does this solve a real problem", "check the value", "add the so-can-you", "will this land with recruiters", or as the second stage of the Substack chain (after storytelling-architecture, before writing-voice-modes and writing-humanity-pass). Blocks content-for-content's-sake.
+description: The gate that makes a post worth reading and worth coming back for. Enforces that every piece solves a real problem the author actually had, then hands the reader a concrete, usable solution. Owns the Value Gate (Itch / Solution / Transfer), the narrative-to-value seam, Rule-of-One, over-deliver-on-a-narrow-promise, scratch-your-own-itch sourcing, the durability question, and hiring-signal-without-pitching. Use when asked to "is this worth posting", "what's the takeaway", "make this useful", "does this solve a real problem", "check the value", "add the so-can-you", "will this land with recruiters", "will this still be worth reading in a year", or as the second stage of the Substack chain (after storytelling-architecture, before writing-voice-modes and writing-humanity-pass). Blocks content-for-content's-sake.
 ---
 
 # Substack Value Engine
@@ -28,7 +28,8 @@ A post may not proceed unless it names all three slots. If any slot is empty or 
 
 Output the **Value Gate verdict** explicitly: PASS (with the three slots filled) or BLOCK (with the missing slot named). A draft that started from "what's trending" or "I should post something" almost always fails the Itch slot, and that is the gate working. This named verdict travels forward through the (locked) voice stage: `writing-critique` re-checks the same three slots against the voiced draft (it verifies the slots actually landed; it does not re-run the gate).
 
-On PASS, **lock the Transfer as the single takeaway** and hand it to the voice stage: one sentence, the capability welded to its delivering artifact, marked as the spine every section serves. Sharpen it until the draft nearly writes itself from it. This locked takeaway is what shapes the draft downstream; a fuzzy takeaway here becomes a fuzzy piece four stages later, when it is far more expensive to fix.
+On PASS, ask the **durability question** of the Transfer (supporting rule 4) before
+locking it. Then **lock the Transfer as the single takeaway** and hand it to the voice stage: one sentence, the capability welded to its delivering artifact, marked as the spine every section serves. Sharpen it until the draft nearly writes itself from it. This locked takeaway is what shapes the draft downstream; a fuzzy takeaway here becomes a fuzzy piece four stages later, when it is far more expensive to fix.
 
 ## The Narrative-to-Value Seam
 
@@ -40,7 +41,7 @@ The single highest-craft moment. After the story crests (the beat map's turn/pay
 
 Anti-pattern: a clean essay that stops, then a bolted-on "Here are 5 tips." The teaching must be the payoff of the specific story, not a generic appendix.
 
-## The Four Supporting Rules
+## The Five Supporting Rules
 
 1. **Rule of One (one itch, hard).** One idea, one reader, one promise, one CTA per piece. The title/hook makes a promise; the body over-delivers on *exactly that* and nothing else. Scope-creep is a broken promise. Test: state the promise in one sentence; does every section serve it? **The common failure is three half-itches wearing one title.** If triage surfaces more than one candidate itch, the gate BLOCKS until exactly one survives: pick the realest and cut the rest, or split them into separate posts. Three half-solved problems is three broken promises, not one rich piece; depth on one itch beats coverage of three.
 
@@ -48,7 +49,33 @@ Anti-pattern: a clean essay that stops, then a bolted-on "Here are 5 tips." The 
 
 3. **Scratch-your-own-itch sourcing.** Topics come from a running log of things that irritated or cost the author, problems actually solved, things found valuable. Reject any topic sourced from "what would rank / what's trending / what the audience wants to hear" (the audience-chasing failure mode). The first-person, real, specific itch IS the structural anti-AI-slop guardrail: a generic draft with no lived itch cannot fill the Itch slot.
 
-4. **Brevity is the growth loop; cadence is the trust asset.** Default to the shortest form that keeps the promise (short reads get forwarded, and the forward is the growth loop). Pair with a predictable cadence: showing up reliably is itself a retention asset, independent of any single piece. Consistency beats intensity.
+4. **Durability: the lesson has to outlive the artifact.** One question, asked of
+   the locked Transfer before it locks: *is this still worth reading in a year, or
+   does it expire with the news cycle?*
+
+   **This does not block the piece.** A publication built on running experiments
+   with this month's tools is *supposed* to be pinned to this month's tools; a
+   durability gate on the piece would block the publication's own premise. What
+   may not expire is the **Transfer**. If the capability the reader gains dies
+   with a model version, a pricing page, or a product release, the Transfer is
+   pinned, and the durable capability underneath it has to be named before the
+   lock. The question binds the Transfer, not the piece.
+
+   Worked shape. Pinned: *"the reader can cut their image-gen bill using the
+   draft-then-pro escalation in gemini-2.9."* Durable underneath: *"the reader can
+   cut a generation bill by routing the cheap model first and escalating only on
+   the keeper — shown here in gemini-2.9."* Same artifact, same numbers, same
+   dated specifics. The capability survives the version.
+
+   Two failure modes, and the second is the sneaky one. **Expiring**: the Transfer
+   is a fact about a product that will be false next quarter. **Laundered**: the
+   Transfer is rewritten so vague it cannot expire because it never said anything
+   ("the reader can think more carefully about cost"). A durable Transfer is
+   specific *and* survives the version; buying durability with vagueness fails the
+   Transfer slot instead. Never strip the dated specifics to sound timeless — the
+   version numbers, prices and dates are the evidence, and they stay.
+
+5. **Brevity is the growth loop; cadence is the trust asset.** Default to the shortest form that keeps the promise (short reads get forwarded, and the forward is the growth loop). Pair with a predictable cadence: showing up reliably is itself a retention asset, independent of any single piece. Consistency beats intensity.
 
 ## Hiring Signal Without Pitching
 
@@ -91,6 +118,9 @@ Handoff is in-context, not a saved file.
 - [ ] Transfer is one concrete sentence welded to a delivering artifact ("the reader can now ___ using ___"), not vague.
 - [ ] On PASS, the Transfer is locked as the single takeaway and handed forward as the draft's spine.
 - [ ] The seam is marked: the value reads as fulfilling the hook, closing storytelling's central loop, not a bolted-on appendix.
+- [ ] The durability question was asked of the Transfer before it locked; a
+      Transfer that dies with a version names the durable capability underneath
+      it, without laundering into vagueness or stripping the dated evidence.
 - [ ] Rule of One holds: exactly one itch survives (multi-itch pieces are blocked or split); over-deliver test passes (one usable thing in 10 minutes).
 - [ ] Hiring signal is shown via artifact + decision reasoning, never claimed.
 - [ ] The ask stays sideways; the piece ends on work or lesson, never a request.
@@ -103,6 +133,7 @@ Handoff is in-context, not a saved file.
 "Is this worth posting, or is it content for content's sake?"
 "What's the Transfer? What can the reader do after reading?"
 "Mark the narrative-to-value seam"
+"Will this still be worth reading in a year?"
 "Check the hiring signal, keep the ask sideways"
 "Triage my idea backlog by real itch"
 ```

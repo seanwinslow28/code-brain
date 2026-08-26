@@ -164,15 +164,20 @@ One line per gate: which ran, verdict, what changed. A gate that could not run s
 
 ### Stage 5 → SHIP PACKET
 
-Final text, images, frontmatter, and the open items the author has to settle himself.
+Final text, images, frontmatter, and the open items the author has to settle himself. On an
+Expressive medium with a reply surface, the **REPLY-HOOK MEMO** rides along: three lines of advice
+about what would draw a reply, binding on nothing (`contracts/expressive/LANE.md`).
 
 ## Running a piece
 
 1. Name the topic and emit the TOPIC CARD. If the medium has no contract yet, say so and write the
    piece against the lane's general rules rather than inventing a contract mid-run.
-2. Read the medium contract in `contracts/<lane>/<medium>.md` and the publication's own house rules
+2. Read the medium contract in `contracts/<lane>/<medium>.md`, the lane law it inherits
+   (`contracts/expressive/LANE.md` for the Expressive lane), and the publication's own house rules
    before the interview, not after. The contract decides which moves are licensed and what the
-   piece has to deliver; the interview has to go get that material.
+   piece has to deliver; the interview has to go get that material. The lane's **first-screen test**
+   is an interview instruction as much as a shape rule: if no beat in the transcript can carry the
+   first screen, the interview did not reach far enough.
 3. Interview with one lens. One question at a time. Never answer for him, never offer him a menu of
    answers to pick from, never write his line and ask him to approve it. A lens that answers its own
    questions has broken the machine as thoroughly as a draft written from nothing.

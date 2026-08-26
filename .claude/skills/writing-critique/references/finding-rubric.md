@@ -46,7 +46,7 @@ author catches you inventing a flaw, every finding is discounted.
 ## Every finding is a tuple
 
 ```
-quoted span  →  why it fails (which of the 5 dimensions)  →  severity (blocking / major / minor)  →  the directed fix
+quoted span  →  why it fails (which of the 6 dimensions)  →  severity (blocking / major / minor)  →  the directed fix
 ```
 
 If you cannot fill all four cells, you do not have a finding yet.
@@ -65,7 +65,7 @@ Do not write a "what works" section. At most one calibration line naming the
 draft's single real strength, and only if it is true. Praise is the slot the
 model uses to discharge its agreement bias; remove the slot.
 
-## The five dimensions (each defers to the owning skill)
+## The six dimensions (each defers to the owning skill, except the sixth)
 
 Critique the *execution* of each; never re-litigate the committed premise.
 
@@ -84,6 +84,54 @@ Critique the *execution* of each; never re-litigate the committed premise.
 5. **Hiring signal** (Sean-specific): judgment shown not claimed, artifact +
    blameless self-post-mortem present, the ask stays sideways. Defers to
    `substack-value-engine`.
+6. **Operator credibility**: does the author read as someone who actually builds
+   this, to a reader who already does. **Owned here** — no upstream skill holds
+   it. Three tells, below.
+
+### Dimension 6: operator credibility
+
+The reader in question is a builder peer: someone with their own platform and
+their own shipped work. They forgive a rough sentence. They do not forgive being
+lectured by someone who has done less than they have, and once they decide that,
+they do not come back. A draft can clear the other five dimensions and still lose
+them.
+
+**Essay-drift.** The piece slides from what ran to what one *could* do; commentary
+about the work replaces the work. Catch it by pointing at a paragraph and naming
+the artifact it rests on — if nothing in it happened, it drifted. Reader cost: the
+builder-reader stops at the first paragraph with nothing in it. *Not* essay-drift:
+a single reflective beat between two concrete ones. The tell is the sustained
+slide, several paragraphs deep.
+
+**False authority.** A claim whose scope outruns the evidence the draft actually
+contains. One experiment licensing "teams should"; a fortnight of use licensing
+"the right way to do X". Catch it by naming the evidence *in this draft* that
+licenses the scope. Reader cost: the reader with more scars catches the overreach
+and discounts everything else in the piece, including what was earned. This is the
+most expensive finding in the rubric — it costs the relationship rather than the
+paragraph. **Blocking when the overreaching claim is load-bearing**: if the spine
+of the piece is a prescription the evidence does not support, no line fix rescues
+it, and the verdict is `structural-rework`.
+
+**Keyword-stuffing.** Term density written for a search index rather than for a
+reader. Catch it by asking whether the term would still be there if nobody
+searched for it. Reader cost: the reader concludes the piece was optimized rather
+than written, then re-reads every other claim as optimization. Per-surface
+tolerance is the medium contract's call, not this rubric's — the same term load
+reads as normal in one field and as gaming in another.
+
+**The guard (read before raising any of the three).** The failure mode here is
+flagging *earned* authority as overreach, which is the same class of error as
+flagging a signature move as a defect, with the same consequence: once the author
+catches you doing it, every finding is discounted.
+
+- A first-person claim backed by an artifact **in the draft** is not false
+  authority. It is what the piece is for.
+- Self-deprecation is a signature move, not thin evidence. Sean undersells on
+  purpose.
+- Where a medium contract or a Value Gate verdict is in context, defer to it on
+  its own specifics (the artifact rule, the hiring signal, keyword tolerance) and
+  critique only the execution.
 
 ## Critique the execution, not the premise
 
@@ -107,6 +155,8 @@ assigned stage.
 - Praising what works (capped above).
 - Re-litigating a committed premise.
 - Flagging a signature move as a defect (defensible choice, not a flaw).
+- Flagging earned first-person authority as overreach (dimension 6's own failure
+  mode, and the same class of error).
 - Inventing issues to look rigorous.
 
 ## Report format

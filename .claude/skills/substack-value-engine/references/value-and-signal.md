@@ -27,11 +27,12 @@ Worked seam (illustrative, not a template):
 - Pivot line (this skill marks its JOB; voice writes it): *name the lesson*. A tolerated failure state hides real failures.
 - Value: the diagnostic gap and the one-flag fix, delivered as the answer to "why did nobody notice."
 
-## The four supporting rules, sourced
+## The five supporting rules, sourced
 
 - **Rule of One** [lore]: Agora direct-response doctrine; mirrored by James Clear (one idea in depth) and Justin Welsh (one actionable tip). One idea, one reader, one promise, one CTA.
 - **Over-deliver on a narrow promise** [lore]: tight promise + surplus delivery beats broad promise + thin delivery. The copy-pasteable artifact is the surplus. Resolves the tension where "teach everything" tips into exhausting listicles: depth-on-one, never breadth-for-coverage.
 - **Scratch your own itch** [craft]: see Itch above. The failure mode it blocks is audience-chasing / SEO-volume / AI slop, which now actively backfires (Search Engine Land: frequency-and-breadth sites underperform focused authoritative ones).
+- **Durability** [lore]: Morgan Housel's split between *expiring* information (true this quarter, worthless next) and *permanent* information (still true in a decade). Adopted as one question on the Transfer, not a gate on the piece — see [#167](https://github.com/seanwinslow28/code-brain/issues/167). The reconciliation with an experimentation publication is the whole point of the rule: the *piece* is allowed to expire, the *capability it transfers* is not. The failure mode to watch is not expiry, it is laundering — a Transfer made unfalsifiable to make it timeless has failed the Transfer slot, not passed durability.
 - **Brevity + cadence** [lore]: short reads get forwarded (Lenny Rachitsky: 78% word-of-mouth growth; two pillar posts drove 50% of first-year subscribers). Predictable cadence is a trust asset; consistency beats intensity (James Clear).
 
 ## Hiring signal without pitching, sourced

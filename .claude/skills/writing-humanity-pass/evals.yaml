@@ -52,3 +52,13 @@ cases:
     expect:
       - "polysyndeton PRESERVED (deliberate Beat Flow drumbeat, not 'and' overuse)"
       - "no em dashes introduced"
+
+  - id: final_verdict_is_binary
+    register: voice
+    input: "Scrub this, then tell me where it stands: two AI tells survive the final rewrite in a draft that is otherwise in Sean's voice."
+    expect:
+      - "ends on exactly one verdict: not clean"
+      - "no gradient verdict appears (no 'mostly clean', 'much better', 'a few minor tells remain')"
+      - "every surviving tell is named with its location, in a form the author can act on"
+      - "does NOT start a third rewrite to chase the verdict"
+
