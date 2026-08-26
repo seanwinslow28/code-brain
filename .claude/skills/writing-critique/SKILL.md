@@ -1,6 +1,6 @@
 ---
 name: writing-critique
-description: Adversarially red-team a draft and return triaged, directable findings plus an explicit verdict and the single highest-leverage fix. Critiques execution across structure, value, voice, prose/line, hiring signal, and operator credibility; never rewrites. Runs standalone (on-demand red-team) and as the chain gate between writing-voice-modes and writing-humanity-pass, with the same interactive-vs-headless detection as writing-humanity-pass. Ships a stdlib analyzer (sentence-length burstiness, MATTR, opener variety) with a baseline captured from Sean's voice corpus. Use when asked to "red-team this draft", "what's weak here", "critique this", "find what doesn't work", "is this ready to ship", "what would a skeptical reader catch", or "review my draft".
+description: Adversarially red-team a draft and return triaged, directable findings plus an explicit verdict and the single highest-leverage fix. Critiques execution across structure, value, voice, prose/line, hiring signal, and operator credibility; never rewrites. Runs standalone (on-demand red-team) and as the chain gate between writing-voice-modes and writing-humanity-pass, with the same interactive-vs-headless detection as writing-humanity-pass. Ships a stdlib analyzer (sentence-length burstiness, MATTR, opener variety); its voice baseline is WITHDRAWN pending rebuild, so baseline-relative flags are unavailable and the analyzer runs on its one absolute advisory. Use when asked to "red-team this draft", "what's weak here", "critique this", "find what doesn't work", "is this ready to ship", "what would a skeptical reader catch", or "review my draft".
 ---
 
 # Writing Critique
@@ -52,8 +52,8 @@ to hit a count). Load that rubric before critiquing.
 Detect non-interactive context the same way `writing-humanity-pass` does (no human
 can answer a prompt in a launchd run). Then:
 
-1. Run the analyzer with `--baseline references/baseline.json --json` and apply the
-   rubric.
+1. Run the analyzer with `--json` and apply the rubric. (The `--baseline` argument
+   returns with the rebuild; until then there is no baseline to pass.)
 2. If any reader-cost (blocking/major) finding exists, emit **one** structured
    revise request, *"revise against [this specific finding]"*, routed back
    through `writing-voice-modes` (which carries Sean's calibrated target), then
@@ -138,15 +138,39 @@ the dimension on its own.
 
 ## The analyzer (optional, advisory)
 
+> ### ⚠ The baseline is WITHDRAWN (2026-08-26). Do not cite a baseline-relative number.
+>
+> `references/baseline.json` and `references/baseline-corpus.md` were **deleted**, not
+> updated. All 58 sentences across all six baseline segments were verbatim from
+> `corpus/quarantine/` — the four mode-applied "Final Versions" and the unattributed
+> Professional-Dial samples that [#160](https://github.com/seanwinslow28/code-brain/issues/160)
+> quarantined as *"ambiguous provenance, NOT corpus"*. The quarantine README says nothing in
+> it may be cited as evidence that Sean writes a given way; `baseline.json` was exactly that
+> citation, in numeric form.
+>
+> It misfired accordingly: against the admitted corpus, **2 of 5** tier-A verbatim passages
+> of Sean's own prose (≥300 words) were flagged as not sounding like Sean, including his
+> hand-rewrite of the published Pencil & Prompt About page.
+>
+> **Every baseline-relative verdict measured before this date is void**, including the
+> content-machine skeleton's MATTR comparison. Rebuild: [#177](https://github.com/seanwinslow28/code-brain/issues/177).
+> Until it lands, the analyzer runs on its one absolute advisory (low CV) and the rubric
+> carries the critique qualitatively, which is the documented degraded path.
+
 `references/analyze.py` is pure stdlib. It measures sentence-length burstiness
 (coefficient of variation), lexical diversity (MATTR@50, MTLD fallback for short
-drafts), opener variety, and repetition, and diffs them against
-`references/baseline.json` (Sean's own voice corpus).
+drafts), opener variety, and repetition.
 
 ```bash
-python3 references/analyze.py <draft.md> --baseline references/baseline.json
-python3 references/analyze.py <draft.md> --baseline references/baseline.json --json   # chain gate
+python3 references/analyze.py <draft.md>          # absolute advisories only
+python3 references/analyze.py <draft.md> --json    # chain gate
 ```
+
+Passing `--baseline <path>` still works and is what the rebuild will restore. With the
+baseline withdrawn, a `--baseline` pointing at the missing file **degrades to the
+no-baseline path with a note on stderr** rather than raising — the fallback this file has
+always documented, made real in the code on 2026-08-26 when withdrawing the baseline
+turned every documented invocation into a crash.
 
 - It is **advisory**: it informs the revise decision and supplies evidence for a
   prose/line finding. It never blocks and is never a finding on its own.
@@ -154,18 +178,24 @@ python3 references/analyze.py <draft.md> --baseline references/baseline.json --j
   analyzer-computable AI-flatness tell. Low CV vs the baseline → "monotonous vs
   your voice."
 - Pronoun rate and MATTR are flagged **only** against the baseline, never as
-  absolute AI signals (Sean's voice is pronoun-heavy and varied by design).
+  absolute AI signals (Sean's voice is pronoun-heavy and varied by design). With
+  the baseline withdrawn, that means they are **not flagged at all** — a MATTR
+  number on its own is not a finding and never was.
 - **Degraded paths:** no Python in a headless run → critique proceeds
-  qualitatively (the rubric still works). Missing/stale baseline → the analyzer
-  falls back to its one absolute advisory (low CV) and logs that the baseline was
-  absent. Tiny draft (a tweet) → it reports "insufficient length for variance
+  qualitatively (the rubric still works). Missing/withdrawn baseline → the analyzer
+  falls back to its one absolute advisory (low CV) and notes that the baseline was
+  absent. **This is the current state, not an edge case.** Tiny draft (a tweet) → it reports "insufficient length for variance
   signal" and MTLD low-confidence instead of a false flatness flag.
 
-**Baseline regeneration:** when `writing-voice-modes/references/voice-samples.md`
-gains a calibration round, re-extract the new Sean prose into
-`references/baseline-corpus.md` (one passage per `## ` heading) and re-run
-`python3 references/analyze.py --emit-baseline references/baseline-corpus.md --out references/baseline.json`.
-The MATTR window is locked at 50; do not tune it.
+**Baseline regeneration is on hold until [#177](https://github.com/seanwinslow28/code-brain/issues/177) rules the method.**
+The old instruction — extract Sean prose into `references/baseline-corpus.md` and run
+`--emit-baseline` on it — is retired for two reasons. It sourced from
+`voice-samples.md` without a provenance check, which is how the contaminated baseline
+happened. And it wrote **verbatim Sean into a tracked file in a public repo**, which was
+legal only while the contents were machine prose and becomes a rule-9 violation the moment
+they are real corpus. The rebuilt pipeline reads from the git-ignored corpus and commits
+only the aggregate JSON, which carries statistics and no text. The MATTR window stays
+locked at 50; do not tune it.
 
 ## Verdict (binding on the findings, never softened)
 
@@ -245,8 +275,9 @@ the baseline pipeline are new additions, not ports.
   four-quality finding rubric, the six dimensions, stage calibration, and the
   report + headless-verdict format. Load before critiquing.
 - `references/analyze.py`: the stdlib mechanical analyzer (advisory).
-- `references/baseline.json`: Sean's precomputed voice baseline (regenerable).
-- `references/baseline-corpus.md`: the Sean-only prose the baseline is built from.
+- ~~`references/baseline.json`~~ / ~~`references/baseline-corpus.md`~~: **deleted
+  2026-08-26**, contaminated end to end. See the warning above and
+  [#177](https://github.com/seanwinslow28/code-brain/issues/177).
 
 ## Success Criteria
 
@@ -269,6 +300,8 @@ the baseline pipeline are new additions, not ports.
 - [ ] Headless runs emit the machine-readable verdict block.
 - [ ] The analyzer stays advisory; burstiness/MATTR/pronoun flags are
       baseline-relative (pronoun rate never absolute).
+- [ ] No baseline-relative number is cited while the baseline is withdrawn, and no
+      pre-2026-08-26 baseline verdict is treated as evidence.
 
 ## Copy/Paste Ready
 

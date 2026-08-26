@@ -516,9 +516,20 @@ def main() -> int:
     flags: list[str] = []
     has_baseline = False
     if args.baseline:
-        baseline = json.loads(Path(args.baseline).read_text(encoding="utf-8"))
-        flags = baseline_flags(metrics, baseline)
-        has_baseline = True
+        # A missing baseline degrades to the no-baseline path (absolute low-CV
+        # advisory only). SKILL.md has always documented this fallback; until
+        # 2026-08-26 the code raised FileNotFoundError instead, which mattered
+        # the moment the contaminated baseline was withdrawn and every
+        # documented invocation still passed --baseline.
+        try:
+            baseline = json.loads(Path(args.baseline).read_text(encoding="utf-8"))
+        except FileNotFoundError:
+            print(f"note: no baseline at {args.baseline}; "
+                  "baseline-relative flags are unavailable this run.",
+                  file=sys.stderr)
+        else:
+            flags = baseline_flags(metrics, baseline)
+            has_baseline = True
 
     if args.json:
         print(json.dumps({"metrics": metrics, "baseline_flags": flags}, indent=2))

@@ -79,8 +79,10 @@ Critique the *execution* of each; never re-litigate the committed premise.
 4. **Prose / line**: rhythm, sentence variety, repetition, clarity,
    show-don't-summarize, tidy-summary endings, AI-flatness. **The analyzer plugs
    in here** (sentence-length CV / burstiness, MATTR, opener variety; see
-   `analyze.py` and `baseline.json`). Analyzer output is advisory evidence for a
-   finding, never a finding on its own.
+   `analyze.py`). Analyzer output is advisory evidence for a finding, never a
+   finding on its own. **The voice baseline is withdrawn** (2026-08-26, see
+   SKILL.md), so only the absolute low-CV advisory fires; a bare MATTR number is
+   not evidence of anything and must not be quoted as one.
 5. **Hiring signal** (Sean-specific): judgment shown not claimed, artifact +
    blameless self-post-mortem present, the ask stays sideways. Defers to
    `substack-value-engine`.
