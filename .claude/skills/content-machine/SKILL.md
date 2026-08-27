@@ -158,6 +158,30 @@ Re-run the fixture after any change to the checker: `python3 gates/test_origin_c
 
 The gate reports. It does not revise, does not score, and does not loop.
 
+### The one-artifact rule for coined lines
+
+**A coined line lives in exactly one artifact and is never recycled across mediums.** Reusing the
+good line is the most tempting thing the machine can do, because it already worked once. It is also
+what turns a body of work into a bag of catchphrases.
+
+Recorded in `coined-lines.md` in the private brain, git-ignored, in the same shape as the corpus so
+there is one convention to remember: a `## ` heading names the artifact, every `>` line beneath it is
+a coined line that artifact spent.
+
+```bash
+python3 .claude/skills/content-machine/gates/coined_lines.py <draft.md> \
+    --lane expressive --artifact <this-piece-slug>
+```
+
+Stdlib, $0, no model. It catches exact reuse and the more likely case, a line lightly reworded:
+below 80% token overlap a shared phrase is just shared vocabulary. `--artifact` exempts the piece's
+own lines, so a draft can be re-checked as it evolves. Lane behaviour matches the origin gate:
+Expressive advises, Professional exits 1.
+
+It runs inside the **do-not-promote sweep** rather than as a gate of its own. Both ask the same
+question at the same moment: is there something in this draft that is true, and good, and still
+should not be here.
+
 ### Stage 4 → GATE RECORD
 
 One line per gate: which ran, verdict, what changed. A gate that could not run says so.
@@ -172,7 +196,8 @@ about what would draw a reply, binding on nothing (`contracts/expressive/LANE.md
 
 1. Name the topic and emit the TOPIC CARD. If the medium has no contract yet, say so and write the
    piece against the lane's general rules rather than inventing a contract mid-run.
-2. Read the medium contract in `contracts/<lane>/<medium>.md`, the lane law it inherits
+2. Read the medium contract in `contracts/<lane>/<medium>.md`, the licensing matrix it inherits
+   (`contracts/move-licensing.md`), the lane law it inherits
    (`contracts/expressive/LANE.md` for the Expressive lane), and the publication's own house rules
    before the interview, not after. The contract decides which moves are licensed and what the
    piece has to deliver; the interview has to go get that material. The lane's **first-screen test**
@@ -242,6 +267,7 @@ Read-only inputs, all git-ignored, all local:
 | `creative-studio/content-machine/corpus/` | Calibrating any claim about how the author writes |
 | `creative-studio/content-machine/reference-universe.md` | The piece will use a pop-culture anchor or a personal-history detail. References come from here or from the piece's actual subject. Never invented. |
 | `creative-studio/content-machine/cheese-bank/` | Before shipping any Expressive draft |
+| `creative-studio/content-machine/coined-lines.md` | Every piece, at the final sweep. The one-artifact rule: a coined line lives in exactly one artifact and is never recycled. |
 | `creative-studio/content-machine/do-not-promote.md` | Every piece, at the final sweep |
 | `creative-studio/content-machine/transcripts/` | The interview record, and later corpus |
 | `creative-studio/content-machine/ledger/` | Ratified lessons (once #168 lands) |

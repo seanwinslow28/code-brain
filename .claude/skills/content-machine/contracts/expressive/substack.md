@@ -54,14 +54,16 @@ Length is bounded by padding, not word count: long enough to tell it, then stop.
 
 ## Licensed moves
 
-The full attested roster in `writing-voice-modes` is licensed here, prose forms only — Substack is
-the medium the roster was calibrated on. Two carve-outs:
+**Licensing is not this contract's call.** [`move-licensing.md`](../move-licensing.md) is the shared
+matrix ([#162](https://github.com/seanwinslow28/code-brain/issues/162)); this contract inherits it and
+may narrow it, never widen it. Substack's budget is **heat 3, room 4** — the widest in the set, which
+is right: it is the medium the roster was calibrated on. **34 of 36 moves licensed.**
 
-- **Screenplay-only forms are not licensed.** All-caps as script format convention is not the prose
-  Shout-Caps move.
-- **Per-move licensing is not this contract's call.** The audit ([#162](https://github.com/seanwinslow28/code-brain/issues/162))
-  will assign moves per medium properly. Until it lands, this contract licenses broadly and relies
-  on the anti-pattern sweep to catch overreach.
+The two it does not get:
+
+- **Equation / Formula Defamiliarizer** — banned, short-form only.
+- **Screenwriting Cut-To** — **conditional**. The juxtaposition is licensed; the literal screenplay
+  notation is not. Write the hard turn in prose, never with `HARD CUT TO:` or a bare italic *cut to*.
 
 **References are rationed: two to three woven references per piece, maximum, most paragraphs zero.**
 Sourced from `reference-universe.md` or the piece's own subject. Never invented. A reference that
@@ -99,6 +101,9 @@ written after do-not-promote and travels with the ship packet.
 
 The origin check runs `gates/origin_check.py` (mechanical layer) plus a reading pass for
 recombination, which the mechanical layer is blind to. Expressive lane advises and never blocks.
+
+The do-not-promote sweep runs `gates/coined_lines.py` alongside the suppressed-topic check: a coined
+line lives in exactly one artifact and is never recycled here.
 
 ## Delivery
 
