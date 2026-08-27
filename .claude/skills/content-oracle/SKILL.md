@@ -127,10 +127,23 @@ than a product roundup.
 
 | Shape | Template | What it's for |
 |---|---|---|
-| **Recantation** | `people switching back from {thing}` · `gave up on {thing}` | The strongest single shape. Nobody writes a recantation unless the cost was real, so the arc — adopted, hurt, left — arrives already a story. Scores high on Story and Emotion before you read a word. |
+| **Recantation** | `people switching back from {thing}` · `gave up on {thing}` · `{thing} removed` | The strongest single shape. It selects for **the thing stopped** — and the stop can be a choice or a removal. Either way the arc arrives already a story. |
 | **Friction** | `{thing} problems in production` · `what breaks with {thing}` | Sorts practitioners from vendors. "In production" and "six months in" are the phrases marketing copy cannot fake. |
 | **Contested claim** | `is {claim} actually true` · `{claim} disagreement` | Finds the fault line rather than the consensus. The best of these is a claim repeated everywhere that **nobody has measured** — which is Sean's opening, because he has a running fleet with cost caps, failure manifests and six months of receipts. A claim he can settle with evidence he already owns is worth more than any trend. |
 | **Silence probe** | the specific mechanism, not its category — `origin fidelity LLM drafting`, not `AI writing tools` | Deliberately aimed where results should be thin. See below. |
+
+**The recantation shape catches forced removals, and they are usually the better
+anchor.** Measured on the first live run (2026-08-27, the author-mode deletion): the
+probe was aimed at practitioners who *chose* to abandon author-style prompting and
+instead returned OpenAI removing the capability for legal reasons, plus the backlash.
+Louder, better documented, and precisely dated, where a voluntary recantation is
+diffuse and usually undated.
+
+Take the removal, but do not let it become the piece. **A removal is a news event;
+the piece is the difference between a capability being taken away and a capability
+being tested and found wanting.** Sean's side of that comparison is what the card is
+for — and it only exists because he ran the test first. Where he has no such test,
+the removal is somebody else's story and Spine should say so.
 
 ### Thin results are a finding, not a failed query
 
@@ -142,12 +155,44 @@ strongest card the Oracle can deck: he has the story, and nobody has the coverag
 Say so on the card. "Four threads in thirty days, no write-up" is evidence, and it
 belongs in *Why it's a piece*.
 
+### What each source can and cannot carry
+
+**Read the per-source counts before synthesizing, and record which source actually
+carried the card.** On the first live run one source of four carried the entire
+result, and the report's own shape hides that — a stats block showing four sources
+reads as four sources agreeing.
+
+| Source | First-run result | Why |
+|---|---|---|
+| **Reddit** | Carried all of it. Found the artifact *and* the thesis — the sharpest line was a 123-upvote comment, not any post body. | Recantations get written where the cost gets discussed. |
+| **X** | Nothing. Every result under 0.3 relevance; the engine warned and kept the top three anyway. | X search is entity- and event-shaped. A practice question has no handle to resolve, so it degrades to loose keyword noise. |
+| **YouTube** | Worse than nothing — returned *pro*-mimicry tutorials, the opposite of the query. | The YouTube corpus for any tool is overwhelmingly how-to-use-it, because that is what gets made and monetised. Nobody films the recantation. |
+| **Hacker News** | Zero stories. | Real signal in itself: the story never reached the engineering community. |
+
+**One run is one run.** The evidence standard the machine already uses is two
+instances from two sources (#175), and this is one instance from one — so nothing
+here is a rule yet, and no source gets switched off. It is a measurement, and the
+`Query:` field on every external card is what accumulates the rest. If X and YouTube
+contribute nothing across six probation weeks, *then* the shape is Reddit-only and
+the table says so on evidence.
+
+**One hard warning, not a preference.** The engine reported *"Found 19 videos (2
+within date range, keeping all)"* and kept every one. **YouTube results are not
+window-bounded** — a 2024 tutorial can land in a scan labelled "last 30 days," and
+nothing in the report flags it. Check the publish date on any YouTube item before it
+reaches a card. Everything the Oracle emits claims recency by construction, and this
+is the one place that claim silently breaks.
+
 ### Read at comment depth
 
 The post's thesis is what everyone reacts to and therefore what everyone has already
 written. The sharp dissent is three replies down. Reddit comments are live in this
-setup (the ScrapeCreators key is configured), and the skill's own docs are blunt
-that the top-voted replies beat the posts.
+setup (the ScrapeCreators key is configured), and the skill's own docs claim
+top-voted replies beat the posts.
+
+**Measured, first run:** they do. The card that came out of it was built on a
+123-upvote comment; the post it sat under was a news headline anyone could have
+found. The post gave the event, the comment gave the thesis.
 
 Related: **recency is not the signal — unanswered is.** A three-week-old thread with
 four hundred comments and nothing written about it beats yesterday's news with forty
