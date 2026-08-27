@@ -98,6 +98,61 @@ actually did, or a reaction candidate that must clear Spine on its own merits. T
 question to ask of every external item is "which of his internal spikes does this
 give a reason to publish *this week*" — not "what's trending."
 
+### The sweep supplies the nouns
+
+**Run the internal sweep first, then derive every external query from it.** The
+usual order — scan the zeitgeist, then ask whether Sean has anything to say — is
+what produces detours, and it is why Spine needed a veto. Inverting it makes the
+editorial law mechanical: a query built from his own week cannot return a card about
+someone else's.
+
+Pick the **two** internal spikes where the take already exists but the *reason to
+publish now* does not — high Story and Depth, thin on nothing else. Those are the
+ones an external anchor can actually improve. Two queries, not five: each
+`last30days` run takes 2–8 minutes, and a deck is not worth forty.
+
+### Query the friction, never the category
+
+`last30days` branches on how the question is phrased, so phrasing decides the report
+you get before any source is touched:
+
+| Never ask | Why |
+|---|---|
+| "best X", "top X", "what X should I use" | Parses as RECOMMENDATIONS → a list of tools. Pulls vendor SEO and affiliate content. This is #170's documented failure reproduced on a different engine. |
+| "X vs Y" | Parses as COMPARISON → a head-to-head buyer's guide. Answers a purchasing question, not a writer's. (Fine to run deliberately outside the Oracle.) |
+| "latest on X", "X news" | Parses as NEWS → what everyone else already read, and therefore already wrote about. |
+
+Everything below parses as GENERAL, which is the mode that returns discussion rather
+than a product roundup.
+
+| Shape | Template | What it's for |
+|---|---|---|
+| **Recantation** | `people switching back from {thing}` · `gave up on {thing}` | The strongest single shape. Nobody writes a recantation unless the cost was real, so the arc — adopted, hurt, left — arrives already a story. Scores high on Story and Emotion before you read a word. |
+| **Friction** | `{thing} problems in production` · `what breaks with {thing}` | Sorts practitioners from vendors. "In production" and "six months in" are the phrases marketing copy cannot fake. |
+| **Contested claim** | `is {claim} actually true` · `{claim} disagreement` | Finds the fault line rather than the consensus. The best of these is a claim repeated everywhere that **nobody has measured** — which is Sean's opening, because he has a running fleet with cost caps, failure manifests and six months of receipts. A claim he can settle with evidence he already owns is worth more than any trend. |
+| **Silence probe** | the specific mechanism, not its category — `origin fidelity LLM drafting`, not `AI writing tools` | Deliberately aimed where results should be thin. See below. |
+
+### Thin results are a finding, not a failed query
+
+**Do not broaden a query that returns little.** The reflex — no hits, try a wider
+term — walks straight back onto crowded ground, which is the opposite of what the
+scan is for. An unoccupied space with real internal material behind it is the
+strongest card the Oracle can deck: he has the story, and nobody has the coverage.
+
+Say so on the card. "Four threads in thirty days, no write-up" is evidence, and it
+belongs in *Why it's a piece*.
+
+### Read at comment depth
+
+The post's thesis is what everyone reacts to and therefore what everyone has already
+written. The sharp dissent is three replies down. Reddit comments are live in this
+setup (the ScrapeCreators key is configured), and the skill's own docs are blunt
+that the top-voted replies beat the posts.
+
+Related: **recency is not the signal — unanswered is.** A three-week-old thread with
+four hundred comments and nothing written about it beats yesterday's news with forty
+takes on it already.
+
 **3. Score and deck.** Read the sweep, apply the six signals, emit roughly ten cards
 ranked by total. Label each internal or external, and say the split out loud —
 if external is crowding the deck, that is a fact he should see rather than a shape
@@ -111,6 +166,7 @@ he has to reverse-engineer.
 SPIKE <n> — <title>
 Source: internal:<git|issue|daily|sidecar|fleet|tickets> | external:<where>
 Evidence: <sha | issue # | path | URL>
+Query: <external cards only — the shape and the exact query that surfaced it>
 Signals: POV <n> · Story <n> · Emotion <n> · Framework <n> · Depth <n> · Spine <n> = <total>/18
 The moment: <the specific thing that happened, one or two lines>
 Why it's a piece: <the take or the shape it would carry>
@@ -164,4 +220,13 @@ a schedule would have smuggled itself past its own probation, and the reminder w
 have become the thing it was supposed to be testing.
 
 Record each run in the bank (a run with zero picks still happened). The graduation
-decision reads that record.
+decision reads that record, and it is reading for two things:
+
+- **Did he pick anything?** Six weeks of decks he never picked from is the answer,
+  and the answer is no schedule.
+- **Which query shapes produced picked cards?** Every external card carries the
+  exact query that surfaced it, so the bank accumulates evidence about the shapes
+  rather than opinion. If recantation probes produce every pick and silence probes
+  produce none in six weeks, that is a finding worth more than the schedule
+  decision itself — it is how the query table above gets corrected by use instead
+  of by argument.
