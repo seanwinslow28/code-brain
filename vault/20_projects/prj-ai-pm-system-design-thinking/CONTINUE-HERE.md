@@ -192,7 +192,8 @@ Everything since 2026-08-17 has been **$0** — hand-curation, `yt-dlp`, the fre
 2b. **Sean started a sentence on 2026-08-24 and did not finish it:** *"I'm very interested in learning all of this myself and having it drilled into my brain so I understand everything that's happening, but…"* — then redirected to building M5. **The "but" was never resolved and may be the most important open item in this document.** Ask him. It sounds like a tension between wanting to internalise the material and wanting the work shipped, which is exactly the tension the artifacts sit on top of.
 3. **Two Golden Loop status questions** Phase C asks at start: has the mock one-pager gone to 2–3 hiring managers, and is milestone post #1 published?
 4. **Transcription for verbal reps** — Sean said don't bother setting it up. Leave it.
-5. Sean is saving a **YouTube playlist** built 2026-08-22 from `yt-dlp` searches — real titles/IDs/view counts, in that session's chat. Not in the notebook by his choice. Regenerate with `yt-dlp --flat-playlist --print "%(duration)s|%(channel)s|%(view_count)s|%(id)s|%(title)s" "ytsearchN:<query>"` if he wants more.
+5. **YouTube watch-list — built 2026-08-27, saved at `youtube-watchlist.md`.** Sean asked for it on 2026-08-22; it was not done then, and an earlier version of this file wrongly claimed it had been. Corrected. Not in the notebook, by his choice — it is a YouTube playlist he curates himself. Extend with:
+   `yt-dlp --flat-playlist --print "%(duration)s|%(channel)s|%(view_count)s|%(id)s|%(title)s" "ytsearchN:<query>"`
 
 ---
 
