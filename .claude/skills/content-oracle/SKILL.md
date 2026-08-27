@@ -125,6 +125,20 @@ you get before any source is touched:
 Everything below parses as GENERAL, which is the mode that returns discussion rather
 than a product roundup.
 
+**The phrasing rules govern the report, not the platforms — and the banned shape
+re-enters through the platforms.** Measured twice, from two sources, which is the
+evidence standard this machine uses (#175): run 3's GENERAL query got tool roundups
+back from **YouTube** ("Best AI Tools for Writing Fiction," "The Perfect AI Writing
+System"), and run 4's GENERAL query got them back from the **web leg** ("Best Open
+Source LLMs 2026," "Top 5 Local LLM Tools," "Top 7 Local LLMs That Will Replace
+Coding").
+
+Roundups are what those platforms reward, so they are served whatever was asked.
+Banning the phrasing stops `last30days` from *formatting* a buyer's guide; it cannot
+stop a platform from *returning* one. **Nothing prevents this but reading the titles**
+— which is the same instrument the thick-results diagnostic needs, and the reason it
+is worth doing once, deliberately, before scoring anything.
+
 | Shape | Template | What it's for |
 |---|---|---|
 | **Recantation** | `people switching back from {thing}` · `gave up on {thing}` · `{thing} removed` | The strongest single shape. It selects for **the thing stopped** — and the stop can be a choice or a removal. Either way the arc arrives already a story. |
@@ -186,6 +200,20 @@ to re-aim it — not to conclude the space is taken and not to score what came b
 if it answered. A false negative on silence is the expensive one, because it retires
 the strongest card the Oracle can produce on evidence that was never about it.
 
+**This is not a silence-probe problem. It is a gravity problem, and it has taken two
+of the four shapes.** Run 4's contested-claim probe asked whether local open models
+are good enough to replace cloud LLMs — a task-level question — and came back with a
+culture-war thread about an uncensored model explaining how to make meth, top comment
+*"the propaganda to stop open source models is in full force."*
+
+**Any probe aimed at a specific question sitting next to a culturally loud one gets
+dragged to the loud one.** Contested-claim is the most exposed of the four, because
+`is {claim} actually true` is the exact phrasing the loud neighbour already owns.
+When a probe lands in the attractor, re-aim at something the argument cannot be had
+about in the abstract — a number, a mechanism, a named artifact — or drop the probe
+and say so. Do not deck the culture war; Spine will not save you, because an
+attractor thread genuinely is about the topic.
+
 ### What each source can and cannot carry
 
 **Read the per-source counts before synthesizing, and record which source actually
@@ -194,18 +222,29 @@ agreeing, and twice now it has not been.
 
 Two live runs, opposite profiles:
 
-| Source | Run 1 — recantation | Run 2 — friction | Run 3 — silence |
-|---|---|---|---|
-| **Reddit** | Carried all of it; the thesis was a 123-upvote comment. | Carried it again — the *shape* of the threads was the finding. | Carried it a third time, and produced the card even though the probe missed. |
-| **X** | Nothing. All results under 0.3 relevance. | Real material, buried — the post with a real number at **1 like**, under promos at 35+. | Present, off-topic. |
-| **YouTube** | Out-of-window tutorials, opposite of the query. | In window, dense transcripts, provenance hazard. | **0 of 6 in window**, and all category roundups. |
-| **Hacker News** | Zero stories. | One story — a YC launch. Vendor, not practitioner. | Zero stories. |
+| Source | Run 1 — recantation | Run 2 — friction | Run 3 — silence | Run 4 — contested claim |
+|---|---|---|---|---|
+| **Reddit** | Carried it; thesis was a 123-upvote comment. | Carried it; thread *shape* was the finding. | Carried it, though the probe missed. | **Failed.** 22 threads found, **21 culled**; survivor was a viral culture-war post. |
+| **X** | Nothing; all under 0.3 relevance. | Real material, buried at 1 like under promos at 35+. | Present, off-topic. | Answered a **different question** — see silent degradation below. |
+| **YouTube** | Out-of-window tutorials, opposite of the query. | In window; dense transcripts; provenance hazard. | **0 of 6 in window**; category roundups. | 1 survivor, **out of window** (2026-07-24 vs a window opening 07-28). |
+| **Hacker News** | Zero. | One story — a YC launch. Vendor, not practitioner. | Zero. | Zero. |
 
-**Reddit has carried every card across all three runs.** That is not yet a rule — it
-is three instances of one source outperforming, which is worth acting on as a reading
-order (start with Reddit, read the rest against it) and not yet as a source policy.
+**Correction, and it retires a claim made after run 3.** After three runs the note
+here read *"Reddit has carried every card in all three,"* offered as a reading order.
+Run 4 falsified it. The engine discovered exactly the right subreddits — `r/LocalLLM`,
+`r/LocalLLaMA`, `r/ArtificialInteligence` — searched all three, returned 22 threads,
+and **discarded 21**. The practitioners were found and then thrown away by
+engagement-ranked scoring, in favour of a single 1,435-point argument about an
+uncensored model explaining how to make meth.
 
-**The conclusion from three runs is that source yield tracks the topic, not the
+So **Reddit's three-run record was a property of those three topics, not of Reddit.**
+Where a topic has a high-engagement culture-war attractor beside it, Reddit's scoring
+layer selects the attractor and culls the practitioners — the same
+engagement-inverse-to-specificity disease already recorded on X, operating one layer
+deeper where it is harder to see, because the discarded threads never appear in the
+report at all.
+
+**The conclusion from four runs is that source yield tracks the topic, not the
 shape.** Author-style mimicry lives on Reddit and nowhere else; agents-in-production
 lives everywhere. So **no source is ever switched off** — the counts get read fresh
 every run. The `Query:` field on every external card accumulates the rest.
@@ -215,7 +254,7 @@ every run. The `Query:` field on every external card accumulates the rest.
 the two posts framing agents as a lifestyle had seventy between them. Sort by
 specificity yourself; the engine cannot.
 
-**Hard rule: a statistic from a YouTube transcript never enters a card.** Quote a
+**Hard rule: a statistic from a low-provenance source never enters a card.** Quote a
 person, never a number.
 
 Run 2's YouTube transcripts were the most quotable-looking material in the entire
@@ -229,8 +268,24 @@ is checkable from the transcript.
 This is the machine's own founding lesson pointed at its front door: **a number with
 no provenance outlives a wrong sentence** (#177), because nobody re-derives it. An
 Oracle card is the first thing the interview is built on, so an unsourced statistic
-entering here is laundered by every honest stage downstream. Statistics get sourced
-independently or they do not appear.
+entering here is laundered by every honest stage downstream — and the origin gate
+cannot catch it, because by then the number is something Sean said in an interview,
+having been told by the card that it was true.
+
+**The rule is not about YouTube.** Run 4's web leg returned the same hazard in a
+different wrapper — *"Devstral 2 hit 72.2%," "Kimi K2.6 hit 87/100"* — from SEO
+listicles. Low provenance is the property that matters, not the platform: a figure
+whose source cannot be reached and checked *from the item itself*. That covers
+transcripts, roundup blogs, and any post citing an unnamed survey. Statistics get
+sourced independently or they do not appear.
+
+A person's account of what happened to them is not a statistic and is not covered by
+this. "We killed it after six months" is quotable; "68% of teams kill it" is not.
+
+**Two ways the report claims coverage it did not deliver.** Both are silent, both
+appear in the stats block as ordinary success, and neither is visible unless you look
+for it on purpose. The stats block is a record of what the engine *did*, not of what
+it *answered*.
 
 **The YouTube date trap is query-dependent, and it bites on exactly the queries the
 Oracle is built to run.** Run 2, on a well-populated topic: *"Found 4 videos within
@@ -245,6 +300,25 @@ crowded one does not — and the starvation is not partial, it can be total. Nic
 where the good cards are. **Check the publish date on every YouTube item before it
 reaches a card**, and treat a YouTube-only finding on a niche query as unsourced
 until the date is confirmed.
+
+**The engine can silently substitute a degraded query and report the answers as if
+they were yours.** Run 4's X leg hit a JSON parse error and retried on its own:
+
+```
+[Bird] Bird error: Invalid JSON response: Unterminated string ...
+[Bird] 0 results for 'local open source models actually', retrying with 'local open'
+```
+
+All four X results answered **`local open`** — a two-word fragment that means almost
+nothing — and the report presented them under the original question. That is why they
+were generic and all dated the same day. Nothing in the stats block says so; it reads
+"X: 4 posts."
+
+**Read the engine's own stderr, not just its results.** The retry lines, the
+relevance warnings (*"All results below relevance 0.3, keeping top 3"*), and the
+window notes are where the engine admits what it actually ran. A source that answered
+a different question is worse than a source that returned nothing, because nothing is
+legible and a wrong answer is not.
 
 **YouTube also collapses to category, which is the banned shape re-entering by a
 route the phrasing rules cannot block.** Run 3's query parsed GENERAL and YouTube
