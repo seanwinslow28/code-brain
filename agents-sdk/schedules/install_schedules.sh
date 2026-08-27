@@ -22,6 +22,15 @@
 #     2. Sean reviews drafts before committing to weekly cadence (C9 pilot loop)
 #   To enable: edit config.toml to set enabled = true, then:
 #     INSTALL_SUBSTACK_DRAFTER=1 ./schedules/install_schedules.sh
+#
+# Not an agent:
+#   com.sean.oracle-reminder.plist is a plain weekly reminder for the Content
+#   Oracle's probation (GitHub #169). It sends one fixed email on /usr/bin/python3
+#   and reads nothing but Keychain — no model, no SDK, no repo reads. Its label
+#   omits `.agent.` on purpose: an Oracle that reached the inbox on a schedule
+#   would have smuggled itself past its own probation. Installed by default;
+#   remove it after probation with `launchctl unload` if the Oracle graduates
+#   to a real schedule.
 
 set -euo pipefail
 
@@ -125,4 +134,4 @@ for plist in "$SCHEDULES_DIR"/*.plist; do
     echo "  Installed: $name"
 done
 
-echo "Done. Verify with: launchctl list | grep com.sean.agent"
+echo "Done. Verify with: launchctl list | grep com.sean."

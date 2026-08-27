@@ -238,6 +238,11 @@ creative-studio/content-machine/transcripts/
 # Coined-lines ledger (#162): the one-artifact rule needs a record of his best
 # lines and which piece spent each one. Public repo, so the record stays local.
 creative-studio/content-machine/coined-lines.md
+# Oracle ideas bank (#169): banked spike cards quote Sean's commits, dailies,
+# partner-session sidecars and fleet manifests. It lives here rather than in a
+# vault note because vault/20_projects/substack-studio/ is a tracked public
+# path, and an ideas note there would publish the sweep a card at a time.
+creative-studio/content-machine/ideas-bank.md
 
 # ════════════════════════════════════════════════════════════════════════
 # BLOAT GUARDS — recruiter-readiness cleanup 2026-06-10

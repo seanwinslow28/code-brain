@@ -39,7 +39,7 @@ grounded revise request; the author decides everything else.
 
 | # | Stage | Owner | Status |
 |---|---|---|---|
-| 0 | **Oracle** — proposes what's worth writing from the author's recent work | `/content-oracle` | not built ([#169](https://github.com/seanwinslow28/code-brain/issues/169)) |
+| 0 | **Oracle** — proposes what's worth writing from the author's recent work | [`content-oracle`](../content-oracle/SKILL.md) | live, on probation (on-demand only until 2026-10-04) |
 | 1 | **Topic** — one piece, one lane, one medium, named before anything else | this skill | live |
 | 2 | **Interview** — one lens, one question at a time, read-back at the close | `interview/` | live, six lenses |
 | 3 | **Shape** — the transcript becomes prose | `writing-voice-modes` | live |
@@ -270,7 +270,8 @@ Read-only inputs, all git-ignored, all local:
 | `creative-studio/content-machine/coined-lines.md` | Every piece, at the final sweep. The one-artifact rule: a coined line lives in exactly one artifact and is never recycled. |
 | `creative-studio/content-machine/do-not-promote.md` | Every piece, at the final sweep |
 | `creative-studio/content-machine/transcripts/` | The interview record, and later corpus |
-| `creative-studio/content-machine/ledger/` | Ratified lessons (once #168 lands) |
+| `creative-studio/content-machine/ledger/` | Ratified lessons |
+| `creative-studio/content-machine/ideas-bank.md` | Every Oracle run, **before** scoring — a thin spike from three weeks ago may have an ending now |
 
 Nothing from these paths is ever quoted into a tracked file, a GitHub issue, or a commit message.
 The repo is public.
@@ -282,4 +283,5 @@ The repo is public.
 - `substack-value-engine` — the value gate. Owns whether the piece is worth a reader's time.
 - `writing-critique` — adversarial gate. Never rewrites; routes one grounded revise.
 - `writing-humanity-pass` — final scrub. Owns the AI-tell sweep and the no-em-dash rule.
+- `content-oracle` — Stage 0. Sweeps his own systems for spikes and decks ~10 cards.
 - `grilling` — when the author wants the *plan* stress-tested rather than the story drawn out.
