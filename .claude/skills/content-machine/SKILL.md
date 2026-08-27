@@ -198,7 +198,7 @@ about what would draw a reply, binding on nothing (`contracts/expressive/LANE.md
    piece against the lane's general rules rather than inventing a contract mid-run.
 2. Read the medium contract in `contracts/<lane>/<medium>.md`, the licensing matrix it inherits
    (`contracts/move-licensing.md`), the lane law it inherits
-   (`contracts/expressive/LANE.md` for the Expressive lane), and the publication's own house rules
+   (`contracts/<lane>/LANE.md`), and the publication's or the application's own house rules
    before the interview, not after. The contract decides which moves are licensed and what the
    piece has to deliver; the interview has to go get that material. The lane's **first-screen test**
    is an interview instruction as much as a shape rule: if no beat in the transcript can carry the
