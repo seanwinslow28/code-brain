@@ -132,6 +132,22 @@ than a product roundup.
 | **Contested claim** | `is {claim} actually true` · `{claim} disagreement` | Finds the fault line rather than the consensus. The best of these is a claim repeated everywhere that **nobody has measured** — which is Sean's opening, because he has a running fleet with cost caps, failure manifests and six months of receipts. A claim he can settle with evidence he already owns is worth more than any trend. |
 | **Silence probe** | the specific mechanism, not its category — `origin fidelity LLM drafting`, not `AI writing tools` | Deliberately aimed where results should be thin. See below. |
 
+**Open question — how to phrase a silence probe so it does not get rerouted.**
+Unanswered, and the next silence probe's job.
+
+Run 3 failed at exactly this. Describing the mechanism in plain practitioner English
+got absorbed into the crowded neighbouring field, and the run came back full of
+material about something else. Two known-bad options bracket the problem: the
+author's own coined name for a mechanism (`origin fidelity`) tests whether the *word*
+is private rather than whether the space is empty, and a neutral description of the
+same thing collides with whatever large literature sits next door.
+
+The untested hypothesis is to search for **the artifact the mechanism produces, or a
+phrase only someone already doing it would write** — on the theory that practitioners
+name their outputs before anyone names the category. One data point and no test, so
+it is written here as a hypothesis and not as a rule. Try it, record which phrasing
+was used in the card's `Query:` field, and let the bank settle it.
+
 **The recantation shape catches forced removals, and they are usually the better
 anchor.** Measured on the first live run (2026-08-27, the author-mode deletion): the
 probe was aimed at practitioners who *chose* to abandon author-style prompting and
@@ -155,6 +171,21 @@ strongest card the Oracle can deck: he has the story, and nobody has the coverag
 Say so on the card. "Four threads in thirty days, no write-up" is evidence, and it
 belongs in *Why it's a piece*.
 
+**The inverse does not hold: thick results are not proof the space is occupied.**
+
+A probe aimed at a specific mechanism can collapse into the crowded field next door
+and come back full. Run 3 asked about diffing an AI draft against the human rewrite
+to extract lessons, and returned 24 results across three sources — **not one of them
+about that mechanism.** The query had been absorbed into AI-writing-as-culture-war:
+detection, authenticity, is-it-cheating. The stats block said three sources answered.
+It read like success. The probe had not run.
+
+**Diagnostic: read the titles against the mechanism, not the counts.** If no result
+names the thing you asked about, the probe did not execute, and the correct move is
+to re-aim it — not to conclude the space is taken and not to score what came back as
+if it answered. A false negative on silence is the expensive one, because it retires
+the strongest card the Oracle can produce on evidence that was never about it.
+
 ### What each source can and cannot carry
 
 **Read the per-source counts before synthesizing, and record which source actually
@@ -163,14 +194,18 @@ agreeing, and twice now it has not been.
 
 Two live runs, opposite profiles:
 
-| Source | Run 1 — recantation, author-mode mimicry | Run 2 — friction, agents in production |
-|---|---|---|
-| **Reddit** | Carried all of it. The thesis was a 123-upvote comment, not any post body. | Carried it again — and this time the *shape* of the threads was the finding (see below). |
-| **X** | Nothing. Every result under 0.3 relevance; the engine warned and kept three anyway. | Real material, buried. The specific practitioner claim ("2,363 sessions in production") sat at **1 like** beneath two promos at 35+. |
-| **YouTube** | Worse than nothing — returned *pro*-mimicry tutorials, the opposite of the query. | Dense transcripts, near-zero views, and a provenance hazard (see below). |
-| **Hacker News** | Zero stories. | One story, and it was a YC launch. A vendor, not a practitioner. |
+| Source | Run 1 — recantation | Run 2 — friction | Run 3 — silence |
+|---|---|---|---|
+| **Reddit** | Carried all of it; the thesis was a 123-upvote comment. | Carried it again — the *shape* of the threads was the finding. | Carried it a third time, and produced the card even though the probe missed. |
+| **X** | Nothing. All results under 0.3 relevance. | Real material, buried — the post with a real number at **1 like**, under promos at 35+. | Present, off-topic. |
+| **YouTube** | Out-of-window tutorials, opposite of the query. | In window, dense transcripts, provenance hazard. | **0 of 6 in window**, and all category roundups. |
+| **Hacker News** | Zero stories. | One story — a YC launch. Vendor, not practitioner. | Zero stories. |
 
-**The conclusion from two runs is that source yield tracks the topic, not the
+**Reddit has carried every card across all three runs.** That is not yet a rule — it
+is three instances of one source outperforming, which is worth acting on as a reading
+order (start with Reddit, read the rest against it) and not yet as a source policy.
+
+**The conclusion from three runs is that source yield tracks the topic, not the
 shape.** Author-style mimicry lives on Reddit and nowhere else; agents-in-production
 lives everywhere. So **no source is ever switched off** — the counts get read fresh
 every run. The `Query:` field on every external card accumulates the rest.
@@ -198,12 +233,26 @@ entering here is laundered by every honest stage downstream. Statistics get sour
 independently or they do not appear.
 
 **The YouTube date trap is query-dependent, and it bites on exactly the queries the
-Oracle is built to run.** Run 1: *"Found 19 videos (2 within date range, keeping
-all)"* — and it kept all nineteen, including a 2024 tutorial, in a scan labelled
-"last 30 days." Run 2, on a well-populated topic: *"Found 4 videos within date
-range"*, no override. So a **niche** query starves the window and the engine widens
-silently, while a crowded one does not. Niche is where the good cards are. Check the
-publish date on every YouTube item before it reaches a card.
+Oracle is built to run.** Run 2, on a well-populated topic: *"Found 4 videos within
+date range"*, no override. Run 1, niche: *"19 videos (2 within date range, keeping
+all)"* — and it kept all nineteen. Run 3, the most niche of the three: **zero of six
+inside the window**, spanning 2025-01-27 to 2026-06-10, the top result nineteen
+months outside a scan labelled "last 30 days" and ranked first because it has two
+million views.
+
+So a **niche** query starves the window and the engine widens silently, while a
+crowded one does not — and the starvation is not partial, it can be total. Niche is
+where the good cards are. **Check the publish date on every YouTube item before it
+reaches a card**, and treat a YouTube-only finding on a niche query as unsourced
+until the date is confirmed.
+
+**YouTube also collapses to category, which is the banned shape re-entering by a
+route the phrasing rules cannot block.** Run 3's query parsed GENERAL and YouTube
+answered with "Best AI Tools for Writing Fiction," "The Perfect AI Writing System,"
+"Learn to Prompt Like a PRO." The RECOMMENDATIONS report was banned at the query
+layer; YouTube's own SEO serves it anyway, because tool roundups are what the
+platform rewards. Nothing in the phrasing table prevents this — only reading the
+titles does.
 
 ### Read at comment depth
 
