@@ -158,30 +158,52 @@ belongs in *Why it's a piece*.
 ### What each source can and cannot carry
 
 **Read the per-source counts before synthesizing, and record which source actually
-carried the card.** On the first live run one source of four carried the entire
-result, and the report's own shape hides that — a stats block showing four sources
-reads as four sources agreeing.
+carried the card.** A stats block listing four sources reads as four sources
+agreeing, and twice now it has not been.
 
-| Source | First-run result | Why |
+Two live runs, opposite profiles:
+
+| Source | Run 1 — recantation, author-mode mimicry | Run 2 — friction, agents in production |
 |---|---|---|
-| **Reddit** | Carried all of it. Found the artifact *and* the thesis — the sharpest line was a 123-upvote comment, not any post body. | Recantations get written where the cost gets discussed. |
-| **X** | Nothing. Every result under 0.3 relevance; the engine warned and kept the top three anyway. | X search is entity- and event-shaped. A practice question has no handle to resolve, so it degrades to loose keyword noise. |
-| **YouTube** | Worse than nothing — returned *pro*-mimicry tutorials, the opposite of the query. | The YouTube corpus for any tool is overwhelmingly how-to-use-it, because that is what gets made and monetised. Nobody films the recantation. |
-| **Hacker News** | Zero stories. | Real signal in itself: the story never reached the engineering community. |
+| **Reddit** | Carried all of it. The thesis was a 123-upvote comment, not any post body. | Carried it again — and this time the *shape* of the threads was the finding (see below). |
+| **X** | Nothing. Every result under 0.3 relevance; the engine warned and kept three anyway. | Real material, buried. The specific practitioner claim ("2,363 sessions in production") sat at **1 like** beneath two promos at 35+. |
+| **YouTube** | Worse than nothing — returned *pro*-mimicry tutorials, the opposite of the query. | Dense transcripts, near-zero views, and a provenance hazard (see below). |
+| **Hacker News** | Zero stories. | One story, and it was a YC launch. A vendor, not a practitioner. |
 
-**One run is one run.** The evidence standard the machine already uses is two
-instances from two sources (#175), and this is one instance from one — so nothing
-here is a rule yet, and no source gets switched off. It is a measurement, and the
-`Query:` field on every external card is what accumulates the rest. If X and YouTube
-contribute nothing across six probation weeks, *then* the shape is Reddit-only and
-the table says so on evidence.
+**The conclusion from two runs is that source yield tracks the topic, not the
+shape.** Author-style mimicry lives on Reddit and nowhere else; agents-in-production
+lives everywhere. So **no source is ever switched off** — the counts get read fresh
+every run. The `Query:` field on every external card accumulates the rest.
 
-**One hard warning, not a preference.** The engine reported *"Found 19 videos (2
-within date range, keeping all)"* and kept every one. **YouTube results are not
-window-bounded** — a 2024 tutorial can land in a scan labelled "last 30 days," and
-nothing in the report flags it. Check the publish date on any YouTube item before it
-reaches a card. Everything the Oracle emits claims recency by construction, and this
-is the one place that claim silently breaks.
+**X is read against its own ranking, not skipped.** Engagement on this material runs
+*inverse* to specificity: the post with a real number in it had a single like, and
+the two posts framing agents as a lifestyle had seventy between them. Sort by
+specificity yourself; the engine cannot.
+
+**Hard rule: a statistic from a YouTube transcript never enters a card.** Quote a
+person, never a number.
+
+Run 2's YouTube transcripts were the most quotable-looking material in the entire
+scan — confident, dense, stacked with figures: *68% of deployed agents executed no
+more than ten steps*, *53% of organizations saw agents exceed intended permissions*,
+*59.5% are already running agents autonomously*. The videos had **6, 8, 3 and 0
+views**, channel names like "Orange Banana," and read as machine-generated synthesis.
+The surveys they cite may well be real; none of them was verified, and none of them
+is checkable from the transcript.
+
+This is the machine's own founding lesson pointed at its front door: **a number with
+no provenance outlives a wrong sentence** (#177), because nobody re-derives it. An
+Oracle card is the first thing the interview is built on, so an unsourced statistic
+entering here is laundered by every honest stage downstream. Statistics get sourced
+independently or they do not appear.
+
+**The YouTube date trap is query-dependent, and it bites on exactly the queries the
+Oracle is built to run.** Run 1: *"Found 19 videos (2 within date range, keeping
+all)"* — and it kept all nineteen, including a 2024 tutorial, in a scan labelled
+"last 30 days." Run 2, on a well-populated topic: *"Found 4 videos within date
+range"*, no override. So a **niche** query starves the window and the engine widens
+silently, while a crowded one does not. Niche is where the good cards are. Check the
+publish date on every YouTube item before it reaches a card.
 
 ### Read at comment depth
 
@@ -197,6 +219,17 @@ found. The post gave the event, the comment gave the thesis.
 Related: **recency is not the signal — unanswered is.** A three-week-old thread with
 four hundred comments and nothing written about it beats yesterday's news with forty
 takes on it already.
+
+**Comment-to-upvote inversion is the mechanical form of that**, and it is checkable
+from the stats block without reading a word. A thread at **0–3 points with 17–29
+comments** is not a thread nobody cared about; it is an argument in progress. Upvotes
+mean *this is settled and I agree*. Comments mean *it isn't, and here's mine*.
+
+Run 2 was almost entirely made of them — 1 point and 29 comments, 2 and 19, 0 and 22,
+3 and 17 — and one thread carried the probe's own query as its title, drawing 19
+answers and 2 upvotes. That subreddit is arguing about what breaks and nobody has
+published a ledger, which is the whole card. Scan for the inversion first; it finds
+unoccupied ground faster than reading does.
 
 **3. Score and deck.** Read the sweep, apply the six signals, emit roughly ten cards
 ranked by total. Label each internal or external, and say the split out loud —
@@ -275,3 +308,12 @@ decision reads that record, and it is reading for two things:
   produce none in six weeks, that is a finding worth more than the schedule
   decision itself — it is how the query table above gets corrected by use instead
   of by argument.
+
+**Watch item: are the six signals separating?** Both pre-probation probes returned a
+best card at **17 of 18**. If every card tops out, the ranking is decorative and the
+scale is too generous at the top. The likely innocent explanation is that a probe
+produces one best card while a real run decks ten, and ten will spread — so this is
+recorded to be checked against real decks, not corrected in advance. If week 3's deck
+is still nine cards clustered at 16–18, the scale is wrong, and #162's lesson applies:
+the ratings are load-bearing, so the fix is a move rated one step too hot, not a new
+tier.
