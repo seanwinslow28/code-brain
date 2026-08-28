@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/coordinated-omission-in-agent-observability.md
 tags: [auto-generated, phase-6]
-created: 2026-08-25
-updated: 2026-08-25
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition

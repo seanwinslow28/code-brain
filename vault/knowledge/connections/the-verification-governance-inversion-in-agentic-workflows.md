@@ -2,32 +2,32 @@
 title: "The Verification-Governance Inversion in Agentic Workflows"
 type: connection
 connects:
-  - Silent Failure Propagation in Agent Fleets
-  - Operational Visibility vs. Semantic Value in Agent Fleets
-  - The Illusion of Competence in Automated Systems
-created: 2026-08-18
-updated: 2026-08-18
+  - The Taste-Throughput Trade-off in Agentic Synthesis
+  - The Skill Atrophy Trap in Agentic Workflows
+  - Supervision Fatigue as the Hard Cap on Fleet Scaling
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Synthesis
 
-There is a tension between operational visibility and semantic value in agent fleets, where high throughput metrics mask the erosion of quality due to silent failure propagation. This inversion occurs because governance mechanisms focus on whether agents are running (visibility) rather than whether their outputs are coherent (semantic value), leading to a system that appears healthy while degrading in utility. The consequence is that Sean must implement explicit validation protocols at each dependency node to prevent the accumulation of low-quality artifacts that look like progress.
+There is a fundamental tension between the fleet's drive for throughput and Sean's need for 'taste' maintenance. As the system scales up automation to reduce manual intervention, it simultaneously erodes the very skill set required to evaluate that output. The consequence is a 'verification-governance inversion' where the user must spend more time auditing low-effort automated outputs than they saved by automating them, creating a hidden cost that grows non-linearly with scale.
 
 ## Threads
 
-### [[Silent Failure Propagation in Agent Fleets]]
+### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
-> Failures in one agent's output can propagate silently through dependent agents, causing downstream errors that are difficult to trace because each individual agent reports a successful status.
+> test whether automated drafting, synthesis, and daily-note assembly weaken Sean’s ability to detect banal prose, invented connections, or silent pipeline decay
 
-### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+### [[The Skill Atrophy Trap in Agentic Workflows]]
 
-> The failure is not only that the agent starts with incomplete context; it is that the agent treats its startup context as authoritative after the situation has changed.
+> automation often removes routine practice while leaving the human responsible for the rarest, hardest failures—precisely when their situational awareness and skill are weakest
 
-### [[The Illusion of Competence in Automated Systems]]
+### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
 
-> Most agent failures aren't reasoning failures — they're intent failures. The spec is vague, the stop rules are missing, the outcome is an activity disguised as a state.
+> This automates ___, but leaves Sean responsible for ___ under degraded visibility; preserve readiness through ___.
 
 ## Implications
 
-- Sean must design validation checkpoints that measure semantic coherence rather than just execution success to detect silent degradation.
-- The fleet's health metrics need to include rejection rates and quality gradients to surface hidden failures before they compound.
+- Sean must implement 'automation handback' protocols where he periodically performs manual tasks to maintain skill readiness, even if it reduces short-term efficiency.
+- The fleet's success metrics should include a 'taste decay' indicator, not just throughput, to warn when automation is outpacing Sean's ability to verify.

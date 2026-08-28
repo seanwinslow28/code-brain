@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/agent-health-monitoring.md
 tags: [auto-generated, phase-6]
-created: 2026-08-25
-updated: 2026-08-25
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-Agent health monitoring functions as a supervisory layer that distinguishes between transient execution errors and systemic semantic decay by verifying operational state against expected behavioral baselines. It requires explicit instrumentation to capture whether a process completed with semantic integrity, because silent failures are more dangerous than loud ones in autonomous systems. This mechanism detects when an agent’s internal logic has diverged from its intended purpose, often due to context drift or resource constraints that degrade the quality of output without triggering standard error codes.
+This mechanism functions as a supervisory layer that distinguishes between transient execution errors and systemic semantic decay by verifying operational state against expected behavioral baselines. It requires explicit instrumentation to capture whether a process completed with semantic integrity, because silent failures are more dangerous than loud ones in autonomous systems. This mechanism detects when an agent’s internal logic has diverged from its intended purpose, often due to context drift or resource constraints that degrade the quality of output without triggering standard error codes.
 
 ## Context
 

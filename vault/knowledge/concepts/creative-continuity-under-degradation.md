@@ -2,30 +2,32 @@
 title: "Creative Continuity Under Degradation"
 type: concept
 sources:
-  - knowledge/connections/the-automation-paradox-in-personal-knowledge-infrastructure.md
+  - knowledge/expansions/creative-continuity-under-degradation.md
 tags: [auto-generated, phase-6]
-created: 2026-08-25
-updated: 2026-08-25
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-A creative system is defined by its ability to preserve the smallest valuable creative loop even when components fail. The mechanism is resilience through minimal viable output: if an agent fails, the user should still have enough context or partial output to continue their work without starting from scratch. This contrasts with 'perfect health' systems that provide no value when they do work, and 'fragile' systems that collapse entirely on failure.
+This concept defines operational reliability not by total output volume, but by the latency of task resumption after an interruption or system failure. It posits that a degraded run must leave a machine-readable packet containing the active goal, last trustworthy state, and unresolved tension to minimize the cognitive load required to restart. The core mechanism is the distinction between retrospective rehearsal (recovering what was done) and prospective encoding (preparing for what comes next), ensuring that partial output remains executable rather than becoming dead weight.
 
 ## Context
 
-Sean's job hunt and creative studio workflows require continuity. If the synthesizer fails silently, Sean loses the thread of his ideas. The 'lessons remembered' show that some runs have very low concept counts (e.g., 3 concepts), which might indicate a degraded state that still preserves some value, or a healthy state that provides none.
+Sean's fleet relies on continuous synthesis across multiple agents; when one agent fails or saturates, the continuity of his creative work depends on how quickly he can re-engage with the remaining state. By treating 'restart latency' as the unit of reliability, Sean shifts from measuring success by concept count to measuring it by the speed of recovery, which is critical for maintaining momentum in a high-variance agentic environment.
 
 ## Evidence
 
-> A creative system is healthy only if partial failure preserves the smallest valuable creative loop.
+> The unit of creative reliability is not output; it is restart latency.
 
-> Agents that consistently produce healthy but irrelevant outputs should be deleted rather than maintained.
+> Their interruption-lag research distinguishes retrospective rehearsal—“what state was I in?”—from prospective encoding—“what should I do next?”
+
+> Degradation preserves function inside the known envelope; extensibility changes the envelope.
 
 ## Examples
 
-- The run-2026-05-27T16-55-00.md shows 3 concepts written, which might represent a 'degraded' state that still preserved some creative continuity.
-- The run-2026-08-20T02-30-06.md shows 122 concepts written, representing a 'healthy' state that may or may not preserve creative continuity depending on semantic value.
+- Defining continuity operationally as low resumption cost where every degraded run leaves a machine-readable packet containing active goal, last trustworthy state, unresolved tension, next executable move, and retrieval cue.
+- Replacing graceful degradation with graceful extensibility to recruit different capacity or change strategy when the normal pipeline saturates.
 
 ## Related Concepts
 

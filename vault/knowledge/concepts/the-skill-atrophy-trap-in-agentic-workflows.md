@@ -2,31 +2,31 @@
 title: "The Skill Atrophy Trap in Agentic Workflows"
 type: concept
 sources:
-  - knowledge/connections/the-tacit-knowledge-trap-in-scaling-agent-fleets.md
+  - knowledge/connections/the-efficiency-quality-inversion-in-automated-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This mechanism describes the inverse relationship between automation fidelity and human operational competence, where increased reliance on agent fleets systematically degrades the user's ability to diagnose failures or intervene effectively. As agents handle more complex clusters and concepts, the human operator loses the granular context required for manual override, creating a dependency loop where the system becomes opaque precisely when it is most critical. The consequence is that the user transitions from an active supervisor to a passive recipient of output quality, unable to distinguish between systemic errors and minor deviations without significant retraining effort.
+This pattern emerges when automation removes routine cognitive practice while leaving the human responsible for the rarest, hardest failures. The operator's situational awareness and critical evaluation skills degrade precisely when they are most needed to catch subtle pipeline decay or semantic drift. This creates a dependency loop where the user can no longer verify the system's output without retraining their own skills, which the automation has actively suppressed.
 
 ## Context
 
-Sean's vault synthesizer runs are increasing in complexity (from 3 concepts to 150+), yet his ability to verify the underlying logic is diminishing. This creates a vulnerability where silent failures in the fleet go undetected until they manifest as degraded output, because he no longer holds the mental model of the intermediate steps.
+Sean's reliance on Qwen3.6-35b for synthesis means he is outsourcing the core intellectual labor of pattern recognition. If he stops manually synthesizing or critically reviewing these outputs, he loses the 'taste' required to direct the fleet effectively.
 
 ## Evidence
 
-> as automation improves, humans get worse positioned to intervene because they lose practice, context, and situational awareness.
+> automation often removes routine practice while leaving the human responsible for the rarest, hardest failures—precisely when their situational awareness and skill are weakest
 
-> The core tension lies between the efficiency gains of scaling agent fleets and the erosion of Sean's tacit knowledge required to maintain them.
+> This automates ___, but leaves Sean responsible for ___ under degraded visibility; preserve readiness through ___.
 
 ## Examples
 
-- Sean processes 150 concepts in a single run but cannot verify the logic behind each connection due to lack of direct experience.
-- The fleet scales from 3 concepts to 146+ concepts, increasing opacity while reducing Sean's manual oversight capacity.
+- Sean must implement 'automation handback' protocols where he periodically performs manual tasks to maintain skill readiness.
+- The fleet's success metrics should include a 'taste decay' indicator, not just throughput.
 
 ## Related Concepts
 
-[[Tacit Knowledge Erosion vs. Automation Scale]] [[Control Architecture as Evangelism]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Tacit Knowledge Erosion vs. Automation Scale]]

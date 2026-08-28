@@ -2,32 +2,32 @@
 title: "The Efficiency-Quality Inversion in Automated Synthesis"
 type: connection
 connects:
-  - Operational Visibility vs. Semantic Value in Agent Fleets
-  - Coupling Fragility vs Adaptive Capacity in Agent Fleets
-  - Throughput vs. Activity Illusion in Job Hunt Operations
-created: 2026-08-20
-updated: 2026-08-20
+  - The Skill Atrophy Trap in Agentic Workflows
+  - The Taste-Throughput Trade-off in Agentic Synthesis
+  - Supervision Fatigue as the Hard Cap on Fleet Scaling
+created: 2026-08-27
+updated: 2026-08-27
 ---
 
 ## Synthesis
 
-There is a critical tension between the operational visibility of agent fleets and the semantic value they produce. As Sean's fleet scales its sampling effort (clusters_sampled), the marginal gain in valid concepts diminishes, while the cost in computational resources increases. This inversion suggests that optimizing for throughput or visibility can lead to a degradation in the quality of insights, which is particularly dangerous in high-stakes domains like job hunting where signal-to-noise ratio is paramount.
+There is a fundamental tension between the fleet's drive for throughput (concepts written, connections made) and Sean's need for 'taste' maintenance. As the system scales up automation to reduce manual intervention, it simultaneously erodes the very skill set required to evaluate that output. The consequence is a 'verification-governance inversion' where the user must spend more time auditing low-effort automated outputs than they saved by automating them, creating a hidden cost that grows non-linearly with scale.
 
 ## Threads
 
-### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+### [[The Skill Atrophy Trap in Agentic Workflows]]
 
-> run-2026-07-01T02:30:02: concepts_written: 125, clusters_sampled: 236, rejected_count: 76, duration_seconds: 2641.4
+> automation often removes routine practice while leaving the human responsible for the rarest, hardest failures—precisely when their situational awareness and skill are weakest
 
-### [[Coupling Fragility vs Adaptive Capacity in Agent Fleets]]
+### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
-> The missing note was the visible boundary crossing; contributing conditions included credential validity, launchd environment, schedule ordering, write-path availability, and absent fallback generation.
+> test whether automated drafting, synthesis, and daily-note assembly weaken Sean’s ability to detect banal prose, invented connections, or silent pipeline decay
 
-### [[Throughput vs. Activity Illusion in Job Hunt Operations]]
+### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
 
-> The run on 2026-08-19 sampled 185 clusters, wrote 122 concepts, and had a much lower rejection rate (29), indicating higher semantic yield despite similar sampling volume.
+> This automates ___, but leaves Sean responsible for ___ under degraded visibility; preserve readiness through ___.
 
 ## Implications
 
-- Sean should prioritize metrics that correlate with semantic value (e.g., connection quality, concept novelty) over operational metrics (e.g., clusters sampled, duration).
-- The fleet's configuration should be tuned to reduce rejection rates by improving preconditions and resources, rather than simply increasing sampling volume.
+- Sean must implement 'automation handback' protocols where he periodically performs manual tasks to maintain skill readiness, even if it reduces short-term efficiency.
+- The fleet's success metrics should include a 'taste decay' indicator, not just throughput, to warn when automation is outpacing Sean's ability to verify.

@@ -2,31 +2,30 @@
 title: "The Efficiency-Quality Inversion in Automated Synthesis"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-automation-velocity-vs-semantic-integrity.md
+  - knowledge/expansions/connections/cost-capped-workflows-and-agent-health-monitoring.md
 tags: [auto-generated, phase-6]
-created: 2026-08-25
-updated: 2026-08-25
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This mechanism describes a non-linear degradation curve where increasing automation throughput without proportional increases in model judgment capability leads to a net loss of cognitive utility. As the volume of processed clusters scales, the rejection rate remains stubbornly high for smaller models, forcing the user to perform manual verification that exceeds the time saved by automation. The system creates an illusion of progress through activity metrics while actively eroding semantic integrity, effectively inverting the intended efficiency gains into increased supervision costs.
+This pattern describes the inverse relationship between raw throughput metrics and the actual utility of generated artifacts, where increasing agent activity often degrades the signal-to-noise ratio of the output. As agents process more clusters or write more concepts without corresponding increases in human acceptance rates, the marginal cost per durable insight rises rather than falls. The system optimizes for activity volume while the user experiences a decline in meaningful synthesis.
 
 ## Context
 
-Sean is currently operating a fleet that has scaled from 3 concepts to over 120 concepts per run, yet the underlying model capability (qwen3.6-35b) shows diminishing returns in rejection handling compared to earlier, smaller runs. This inversion means that his current high-volume synthesis is likely generating more 'slop' that requires his attention than it saves him from writing manually.
+Sean's prior runs show significant variance in concepts written versus rejected counts. Understanding this inversion helps him recognize that higher concept counts do not equate to better vault health, and that monitoring 'cost per accepted artifact' is a more accurate proxy for system value than total output volume.
 
 ## Evidence
 
-> The 14b model processed 272 clusters with a rejection rate of 50, while the 35b model processed only 149 clusters with just 12 rejections.
+> Stop reporting dollars per agent or month as the primary efficiency measure.
 
-> There is a critical divergence between the operational metrics of the agent fleet and the actual cognitive utility available to Sean.
+> Track cost per accepted artifact, cost per novel connection retained after 30 days, and human correction minutes per usable output.
 
 ## Examples
 
-- Run on 2026-07-02 used qwen3-14b, sampling 272 clusters but rejecting 50 (18.3% rejection rate) over 2618 seconds.
-- Run on 2026-08-20 used qwen3.6-35b-a3b-32k, sampling 178 clusters and rejecting only 28 (15.7% rejection rate) but writing 122 concepts.
+- Agent A costs more per run but less per accepted, durable artifact.
 
 ## Related Concepts
 
-[[Operational Uptime vs. Cognitive Utility Tension]] [[The Illusion of Competence in Automated Systems]]
+[[Throughput vs. Activity Illusion in Job Hunt Operations]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]

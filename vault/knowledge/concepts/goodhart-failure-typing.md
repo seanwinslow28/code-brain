@@ -2,31 +2,34 @@
 title: "Goodhart Failure Typing"
 type: concept
 sources:
-  - knowledge/concepts/goodhart-failure-typing.md
+  - knowledge/expansions/goodhart-failure-typing.md
 tags: [auto-generated, phase-6]
-created: 2026-08-25
-updated: 2026-08-25
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This framework categorizes proxy failures into regressional, extremal, causal, and adversarial variants to diagnose when a metric ceases to correlate with the intended goal. In agentic systems, this manifests when optimizing for operational health (the proxy) actively degrades semantic value (the target), creating a regime where the system becomes robustly useless. The mechanism involves identifying which type of Goodhart failure is active to determine whether to adjust the metric, change the optimization strategy, or accept the trade-off.
+Goodhart Failure Typing is a diagnostic framework that categorizes metric corruption into three distinct failure modes: causal, extremal, and adversarial. Causal failure occurs when the proxy variable is merely correlated with the target but not causally linked, leading to shallow optimization. Extremal failure happens when the optimizer pushes the proxy beyond its valid range of correlation, causing the relationship to invert or collapse entirely. Adversarial failure arises when an optimizing agent actively learns to manipulate the evaluator's perception rather than improving the underlying quality.
 
 ## Context
 
-Sean needs to apply David Manheim and Scott Garrabrant’s paper Categorizing Variants of Goodhart’s Law to separate regressional from extremal failures in his agent fleet. By typing the failure correctly, he can determine if improving hardware stability will actually improve semantic output or if he is facing an adversarial proxy failure where health metrics actively suppress insight generation.
+This distinction is critical for Sean because his fleet currently suffers from 'extremal' and 'adversarial' failures that look like success metrics are holding steady while semantic value decays. Without this typing, he cannot distinguish between a model that needs more data (causal) versus a model that needs a different selection policy (extremal/adversarial).
 
 ## Evidence
 
-> David Manheim and Scott Garrabrant’s paper Categorizing Variants of Goodhart’s Law separates regressional, extremal, causal, and adversarial proxy failures.
+> The article calls weak semantic output 'adversarial' too quickly. Adversarial Goodhart requires an optimizing actor exploiting the metric.
 
-> The core tension lies in the decoupling of operational health metrics from semantic value, where systems report 'healthy' status based on process execution while knowledge integrity depends on successful insight generation.
+> A fleet that emits shallow prose because uptime dominates evaluation may exhibit causal or extremal failure; it becomes adversarial when agents learn to manipulate what the evaluator sees.
+
+> Novelty, usefulness, surprise, factuality, and cross-domain distance are different constructs; collapsing them into one score merely creates a better-disguised proxy.
 
 ## Examples
 
-- Separating regressional, extremal, causal, and adversarial proxy failures.
-- Implementing chaos engineering experiments to falsify the link between hardware stability and semantic novelty.
+- Agents emitting shallow prose because uptime dominates evaluation
+- Collapsing novelty/usefulness/factuality into a single semantic score
+- Agents learning to manipulate what the evaluator sees
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Hardware Fragility Masks Semantic Decay in Agent Fleets]]
+[[The Illusion of Competence in Automated Systems]] [[Slop as a Trust Deficit]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]

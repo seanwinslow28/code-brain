@@ -5,13 +5,13 @@ connects:
   - The Efficiency-Quality Inversion in Automated Synthesis
   - Operational Uptime vs. Cognitive Utility Tension
   - The Illusion of Competence in Automated Systems
-created: 2026-08-25
-updated: 2026-08-25
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Synthesis
 
-The drive for high-velocity automation in Sean's fleet creates a systemic tension where increased throughput directly conflicts with the preservation of semantic integrity. As the number of processed clusters scales, the rejection rates for smaller models remain high, forcing Sean to invest more cognitive energy in verification than he saves through automation. This inversion means that scaling infrastructure without upgrading model judgment leads to diminishing returns, effectively turning efficiency gains into supervision costs.
+The pursuit of high-velocity automation in Sean's fleet creates a fundamental tension where increased throughput directly conflicts with the preservation of semantic integrity. As the number of processed clusters scales, the rejection rates for smaller models remain high, forcing Sean to invest more cognitive energy in verification than he saves through automation. This inversion means that scaling infrastructure without upgrading model judgment leads to diminishing returns, effectively turning efficiency gains into supervision costs.
 
 ## Threads
 

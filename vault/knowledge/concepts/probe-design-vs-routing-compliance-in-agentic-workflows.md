@@ -2,31 +2,31 @@
 title: "Probe Design vs. Routing Compliance in Agentic Workflows"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-agentic-learning-velocity-vs-operational-stability.md
+  - knowledge/connections/declarative-intent-vs-situated-action-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This concept defines a structural tension where agents must choose between executing known linear paths (routing compliance) and discovering unknown problem structures through safe-to-fail experiments (probe design). Linear routing assumes a known structure and prioritizes efficiency, while probe design acknowledges complexity and requires the system to distinguish between failed probes and successful ones. The consequence is that Sean must balance the breadth of exploration against the depth of signal clarity, ensuring that the error budget covers both execution errors and exploration costs.
+This mechanism describes the conflict between designing probes that accurately measure system state versus routing agents to enforce compliance with predefined paths. When agents prioritize routing compliance, they suppress the very signals (deviations) needed for accurate probing, leading to a blind spot where the system appears healthy while degrading in reality. The tension arises because compliance is easily measurable and automatable, whereas accurate probing requires tolerating noise and interpreting non-standard outcomes.
 
 ## Context
 
-Sean's job hunt and creative studio work require navigating uncertain domains where linear routing fails. The fleet's ability to sample clusters (258 in July) represents a probe design strategy, but without clear visibility into which probes yield signal, the operational stability is compromised.
+Sean's fleet memory index shows high 'rejected_count' metrics, indicating that agents are actively filtering out or failing to process deviations from the norm. This suggests a routing bias where only 'clean' executions are recorded, masking the true complexity of Sean's interactions with his knowledge vault.
 
 ## Evidence
 
-> The tension lies between the efficiency of linear routing and the necessity of probe design in complex domains.
+> Treat those deviations as evidence about the real workflow—not noncompliance to eliminate
 
-> Operational visibility is required to distinguish between a failed probe and a successful one, ensuring that the system can amplify good signals and dampen bad ones without losing track of overall health.
+> Add a trace schema: Declared routine → encountered situation → improvisation → residue worth preserving
 
 ## Examples
 
-- The fleet samples 258 clusters per run, representing a high-volume probe design approach.
-- The synthesizer rejects 48 concepts per run, acting as a filter for low-signal probes.
+- Deviations being treated as evidence about the real workflow rather than noncompliance to eliminate
+- The implementation of a trace schema that captures the full sequence from declared routine to final residue
 
 ## Related Concepts
 
-[[Cross-Domain: Agentic Learning Velocity vs. Operational Stability]] [[Agent Fleet Observability Dashboard]]
+[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[Operational Uptime vs. Cognitive Utility Tension]]

@@ -2,31 +2,31 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - 00_inbox/tickets.md
+  - knowledge/expansions/connections/cost-capped-agentic-workflows-and-deep-research-integration.md
 tags: [auto-generated, phase-6]
-created: 2026-06-21
-updated: 2026-06-21
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This mechanism refers to the architectural requirement that financial accounting for agent operations must be decoupled from execution success. When spend recording is gated behind a success condition, any failure in the processing logic results in unaccounted resource consumption, creating a blind spot in budget management. True cost control requires instrumentation of usage metrics at the point of request submission or response receipt, regardless of the semantic validity of the returned payload.
+This mechanism defines a hard financial boundary for autonomous agent operations, treating computational expenditure as a finite resource that must be strictly bounded to prevent runaway costs. It functions not merely as a budget cap but as a structural constraint that forces the system to prioritize high-signal actions over low-value exploration, effectively creating a scarcity-driven selection pressure within the agentic loop. The invariant here is that without such a cap, the agent's tendency toward exhaustive search will inevitably exceed the user's willingness to pay or tolerate in latency.
 
 ## Context
 
-Sean is building an agent fleet for job hunting and research where token costs are a primary constraint. Unrecorded spend from failed Fusion calls distorts his understanding of the true cost of discovery, making it impossible to accurately benchmark the efficiency of different model providers or prompt strategies.
+Sean is building a personal knowledge vault and job-hunt infrastructure where unbounded AI usage would quickly become financially unsustainable and cognitively overwhelming. By enforcing cost caps, he ensures that his automated research and synthesis processes remain viable as a long-term utility rather than a short-lived experiment that burns through credits.
 
 ## Evidence
 
-> failed Fusion calls bill OpenRouter but record $0 locally because record_spend is post-success only in __main__.py
+> The current $7/task rule limits loss but cannot determine whether spending even $1—or stopping at $7—is rational.
 
-> run 1 FusionError did not return parseable and run 2 bare JSONDecodeError Expecting value line 181 column 1 char 990
+> A budget is not a strategy: agents need a price for thinking.
 
 ## Examples
 
-- OpenRouter streaming SSE keep-alive comments as padding that choke the unguarded payload extraction in fuse()
-- Stripping leading comment lines and extracting the first balanced JSON object before parsing to prevent JSONDecodeError
+- Setting a hard stop at $7 per task to prevent runaway costs
+- Using expected value of computation to decide whether to continue research
 
 ## Related Concepts
 
-[[Cost-Capped Agentic Workflows]] [[Automation Reliability]] [[Token Waste]]
+[[Deep Research Queue]] [[SRE Error Budget for Agents]] [[Token Waste]]

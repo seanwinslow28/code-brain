@@ -3,32 +3,32 @@ title: "The Automation Paradox in Personal Knowledge Infrastructure"
 type: connection
 connects:
   - Operational Uptime vs. Cognitive Utility Tension
-  - Supervision Fatigue as the Hard Cap on Fleet Scaling
-  - Creative Continuity Under Degradation
-created: 2026-08-25
-updated: 2026-08-25
+  - Recovery-Oriented Computing
+  - The Automation Paradox in Personal Knowledge Infrastructure
+created: 2026-08-27
+updated: 2026-08-27
 ---
 
 ## Synthesis
 
-The core tension is that automation intended to reduce cognitive load actually increases it by creating a dependency on operational visibility. As Sean scales his agent fleet, the volume of 'healthy' outputs grows, but the semantic value per output may not. This creates a paradox where the more successful the automation is at running, the less useful it becomes because Sean must spend more time supervising and filtering. The consequence is that Sean's creative authority is undermined by the very tools designed to support it.
+Sean's automation efforts create a paradox where increased reliability monitoring leads to decreased cognitive utility because the system optimizes for process completion rather than semantic value. This tension is exacerbated by the 'Ironies of Automation,' where routine work disappears and Sean receives only rare anomalies, making it harder to detect gradual semantic decay. The consequence is a vault that appears healthy in telemetry but is functionally useless due to stale context and lack of recovery mechanisms.
 
 ## Threads
 
 ### [[Operational Uptime vs. Cognitive Utility Tension]]
 
-> A perfectly healthy agent that generates irrelevant drafts can reduce that perception of progress.
+> The current concept cannot distinguish “seven healthy agents produced stale sludge” from “Sean received a useful morning briefing.”
 
-### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
+### [[Recovery-Oriented Computing]]
 
-> When agents prioritize completing runs over generating meaningful progress, the user becomes trapped in a loop of supervising healthy but useless outputs.
+> Every daily-output producer must support detection, bounded replay, verification, and rollback; a killed dependency at 08:29 must yield either a verified artifact or an explicit degraded-state manifest by 08:45.
 
-### [[Creative Continuity Under Degradation]]
+### [[The Automation Paradox in Personal Knowledge Infrastructure]]
 
-> A creative system is healthy only if partial failure preserves the smallest valuable creative loop.
+> Reliable automation can make the overall human system less resilient. As routine work disappears, Sean receives only rare anomalies precisely when he needs to intervene.
 
 ## Implications
 
-- Sean must implement 'degraded Thursday' drills to test if his creative loop survives agent failures.
-- He should replace uptime dashboards with a 'Creative Progress Ledger' that tracks human acceptance rates.
-- Agents that consistently produce healthy but irrelevant outputs should be deleted rather than maintained.
+- Sean must redefine 'reliability' not as uptime but as the ability to recover semantic value after failure.
+- Telemetry dashboards should be replaced with burn-rate monitors that track error budgets for cognitive utility.
+- Agent health checks must include content verification, not just process completion.

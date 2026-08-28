@@ -2,31 +2,32 @@
 title: "Intent Engineering"
 type: concept
 sources:
-  - knowledge/concepts/intent-engineering.md
+  - knowledge/expansions/intent-engineering.md
 tags: [auto-generated, phase-6]
-created: 2026-08-25
-updated: 2026-08-25
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-Intent engineering is an architectural discipline that compiles high-level security policies into executable constraints, thereby governing agent behavior through structural enforcement rather than relying on natural language instructions which are inherently vulnerable to context drift. This approach functions by strictly separating the control plane, where trusted planners operate, from the data plane, where untrusted tool output resides, ensuring that even if an attacker manipulates the data, the control flow remains bound to the original intent specification. By treating prompt injection as an architectural information-flow problem rather than a mere prompting issue, it creates a provable security boundary where specific capabilities are delegated only when explicitly authorized by the intent charter.
+A mechanism where high-level user intent is compiled into executable tool handles that carry specific, attenuated authorities rather than ambient credentials. This approach replaces broad access with task-scoped, revocable capabilities, ensuring that an agent can act only through authorities explicitly passed into the current task. The system enforces a boundary where naming a resource does not confer authority over it, requiring explicit declassification rules for data to cross security zones.
 
 ## Context
 
-Sean is building a personal knowledge vault that interacts with external APIs and MCP servers, exposing him to the risk of 'confused deputies' where an agent might inadvertently use credentials for the wrong resource due to prompt injection. This concept provides the structural solution to maintain authority over his own infrastructure by ensuring that GitHub issue text may influence classification but never selects a credential-reading or outbound-network action.
+Sean is building a portfolio artifact that demonstrates provable security boundaries in agentic systems. By implementing this mechanism, he can show that injected payloads cannot acquire Keychain or filesystem authority, turning abstract security rhetoric into an inspectable, testable system architecture.
 
 ## Evidence
 
-> Intent engineering is the architectural practice of compiling high-level security policies into executable constraints that govern agent behavior, rather than relying on natural language instructions which are vulnerable to context drift.
+> The agent can act only through authorities explicitly passed into this task; naming a resource does not confer authority over it.
 
-> The seven-part intent specification compiles into capabilities and flow constraints: 'GitHub issue text may influence classification but may never select a credential-reading or outbound-network action.'
+> Permission governs actions; information-flow policy governs what influenced those actions and where derived data may travel.
 
 ## Examples
 
-- Treating prompt injection as an 'architectural information-flow problem' rather than a prompting issue.
-- Using 'capability-based enforcement' to report provable security on agent tasks.
+- Compile an Intent Charter into short-lived tool handles for an MCP server
+- Run adversarial GitHub-issue payloads to test authority boundaries
+- Attach labels such as source=github_issue and integrity=untrusted to values
 
 ## Related Concepts
 
-[[Control Plane / Data Plane Split for Agent Fleets]] [[Liability Routing in Agentic Product Design]]
+[[MCP Server Hardening]] [[Privacy-Aware Data Routing]] [[The Verification-Governance Inversion]]

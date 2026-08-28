@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/slop-as-a-trust-deficit.md
 tags: [auto-generated, phase-6]
-created: 2026-08-25
-updated: 2026-08-25
+created: 2026-08-27
+updated: 2026-08-27
 ---
 
 ## Definition
