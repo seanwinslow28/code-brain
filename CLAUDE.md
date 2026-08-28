@@ -77,11 +77,13 @@ Skills and agents prefer native MCPs over Zapier. When both exist, always use na
 
 ## Connected External Research APIs
 
-**Gemini Deep Research** — `agents-sdk/scripts/gemini_dr.py` + `.claude/skills/gemini-deep-research` skill. API key in Keychain (`com.sean.agents.gemini_api_key`). Caps: $7/task, $20/day, $50/month — tracked in `vault/health/gemini-spend-{YYYY-MM}.json`. Autonomous agent (`gemini_researcher.py`) is default-disabled; opt in with `INSTALL_GEMINI=1` when running `install_schedules.sh`.
+**Gemini Deep Research** — `agents-sdk/scripts/gemini_dr.py` + `.claude/skills/gemini-deep-research` skill. **Requires `google-genai >= 2.0.0`** (2026-08-05: Google hard-rejects the legacy 1.x Interactions schema with a 400; 2.x returns `interaction.steps`, and a DR report is chunked across *multiple* `model_output` steps — all of them must be concatenated or the note silently loses part of its body). Credential resolution: Keychain (`com.sean.agents.gemini_api_key`) → `GEMINI_API_KEY` env → `agents-sdk/.env` → repo-root `.env`. Caps: $7/task, $20/day, $50/month — tracked in `vault/health/gemini-spend-{YYYY-MM}.json`. Autonomous agent (`gemini_researcher.py`) is default-disabled; opt in with `INSTALL_GEMINI=1` when running `install_schedules.sh`.
+
+**Before citing any DR figure, tier-audit it** — `agents-sdk/scripts/audit_dr_citations.py <report.md>` resolves the opaque `vertexaisearch` grounding-redirect URLs and classifies each source (A academic / B primary / C trade / D forum). $0, read-only. **Query shape drives source tier:** research-shaped questions ("what does the literature measure") pull ~90% academic sources; market-shaped questions ("what exists in this category") pull mostly vendor SEO marketing — fresh marketing, which recency instructions cannot filter out. DR also cannot prove a negative; for "does anything like X exist", falsify a named candidate list instead.
 
 **LLM Council** — `tools/llm-council/council/` + `.claude/skills/llm-council/` skill. Two profiles: `premium` (Opus 4.7 + GPT-5.5 + Gemini Pro + Grok 4.20, Opus 4.7 chairman, ~$0.29/run) and `variance` (Sonnet + GPT-5.4-mini + DeepSeek v4-pro + Mistral medium-3-5, Sonnet chairman, ~$0.14/run). Caps: $1.00 / $0.40 per query, $7/day, $40/month — tracked in `vault/health/council-spend-*.json`. Use for high-variance critique (voice calibration, cover-letter critique, decision pre-mortem, PRD stress-test) where vendor RLHF spread gives independent blind-spot coverage. Karpathy's original web app remains usable at `tools/llm-council/upstream/`.
 
-**fusion-discovery-council** — `tools/llm-council/` (`uv run python -m council.discovery`) + `.claude/skills/fusion-discovery-council/` skill. Evidence→idea discovery: mines real, freshly-fetched user pain points and frames them as ranked, evidence-linked PM opportunities. Four stages — GATHER (last30days + Perplexity Sonar + web) → FUSE (OpenRouter Fusion panel + judge) → VERIFY (anti-fabrication gate, drops any pain point not traceable to a real fetched URL) → FRAME (pm lens → idea ledger; substack lens → post-angle ledger + substack-value-engine handoff brief). Tiers: `quick` $0.50 / `standard` $1.50 / `deep` $4.00 per run; caps $10/day, $50/month, **separate from council** — spend lands in the shared `vault/health/council-spend-*.json` tagged `tool="discovery"`. Reuses the council client/budget spine (`client.py`/`budget.py`) under the new `council/discovery/` subpackage. Run history persists to vault/20_projects/research/.discovery-sessions/ by default ($DISCOVERY_SESSIONS_DIR overrides); render the run-history dashboard with 'uv run python -m council.discovery.dashboard --output <path>' ($0, self-contained HTML).
+**fusion-discovery-council** — `tools/llm-council/` (`uv run python -m council.discovery`) + `.claude/skills/fusion-discovery-council/` skill. Evidence→idea discovery: mines real, freshly-fetched user pain points and frames them as ranked, evidence-linked PM opportunities. Four stages — GATHER (last30days + Perplexity Sonar + web) → FUSE (OpenRouter Fusion panel + judge) → VERIFY (anti-fabrication gate, drops any pain point not traceable to a real fetched URL) → FRAME (pm lens → idea ledger; substack lens → post-angle ledger + substack-value-engine handoff brief). Tiers: `quick` $0.50 / `standard` $1.50 / `deep` $4.00 per run; caps $30/day, $100/month (cap policy v3, enforced from `tools/llm-council/council/cap_policy.json`), **separate from council** — spend lands in the shared `vault/health/council-spend-*.json` tagged `tool="discovery"`. Reuses the council client/budget spine (`client.py`/`budget.py`) under the new `council/discovery/` subpackage. Run history persists to vault/20_projects/research/.discovery-sessions/ by default ($DISCOVERY_SESSIONS_DIR overrides); render the run-history dashboard with 'uv run python -m council.discovery.dashboard --output <path>' ($0, self-contained HTML).
 
 **Local TTS** — [`agents-sdk/scripts/doc_to_audio.py`](agents-sdk/scripts/doc_to_audio.py) renders vault markdown to verbatim narration via Kokoro-82M ONNX (Apache 2.0, $0/run on Apple Silicon). Single voice (default `af_heart`); structural markdown is flattened or spoken-cued; output at `vault/90_system/audio/<source-stem>.mp3`; CLI is idempotent on mtime. Fresh-machine setup: [`agents-sdk/scripts/install_tts_models.sh`](agents-sdk/scripts/install_tts_models.sh). Decision record: [`agents-sdk/docs/local-tts-decision-record.md`](agents-sdk/docs/local-tts-decision-record.md). Spotify handoff sketched at [`agents-sdk/docs/local-tts-spotify-handoff.md`](agents-sdk/docs/local-tts-spotify-handoff.md), deferred until 10+ clean pipeline runs.
 
@@ -131,7 +133,9 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the Cla
 
 **Process Inbox: paused 2026-04-29 pending Path B rewrite to local `gemma4:e4b`.** Cloud-Sonnet path validated as working (~3 files/run) but cost-inefficient ($1.16/file vs $0/file local). Manual triage via the `process-inbox` skill in interactive sessions is the working alternative. Full history + Path B scope: [`agents-sdk/AUDIT-2026-04-28-process-inbox-reenable.md`](agents-sdk/AUDIT-2026-04-28-process-inbox-reenable.md).
 
-**6 agents disabled 2026-04-09 remain disabled** — `daily-driver` evening, `daily-driver` weekly, `pr-digest`, `spending-analysis`, `health-audit`, `md-to-anki`. Do NOT re-enable without Sean's explicit approval. See [`agents-sdk/AUDIT-2026-04-09-agent-downsizing.md`](agents-sdk/AUDIT-2026-04-09-agent-downsizing.md).
+**8 agents disabled 2026-04-09 remain disabled** — `process-inbox`, `daily-driver` evening, `daily-driver` weekly, `pr-digest`, `sprint-health`, `meeting-defender`, `preserve-session`, `spending-analysis`. Do NOT re-enable without Sean's explicit approval. See [`agents-sdk/AUDIT-2026-04-09-agent-downsizing.md`](agents-sdk/AUDIT-2026-04-09-agent-downsizing.md) — its summary is unambiguous: *"Of 10 enabled agents, only 2 were producing value. The other 8 were disabled."*
+
+*(Corrected 2026-08-11 during WS2 archaeology. This line previously said "6" and named `health-audit` and `md-to-anki`, which the audit never mentions and which have **never existed as code** — `git log --diff-filter=AD` returns nothing for `agents/health_audit.py` or `agents/md_to_anki.py`; they are unimplemented entrypoints in `pyproject.toml` and stanzas in `config.toml` only. This is a public-facing count on the fleet board, so the audit's eight is canonical.)*
 
 **Key limitation:** Headless SDK agents cannot access MCP servers (Slack, Google Calendar, Gmail, etc.) — those require browser-based OAuth only available in interactive sessions. The morning agent creates the daily-note skeleton; Slack/calendar data is backfilled when Sean starts an interactive session.
 
@@ -210,6 +214,8 @@ life-systems/                         # DOMAIN 3 — personal systems
 └── (existing reference/)
 
 claude-mastery/      # cross-cutting Claude Code meta-reference (stays at root)
+systemcraft/         # AI PM system design studio — public machinery (bench, templates, README);
+                     # corpus/ + ledger/ gitignored local-only. Build map: GitHub issue #142
 tools/                                # sidecar tools (non-skill, non-agent)
 ├── llm-council/                      # Multi-vendor LLM council (inspired by karpathy/llm-council)
 │   ├── upstream/                     # Karpathy's reference web app, unmodified
@@ -238,3 +244,17 @@ docs/                # Ecosystem documentation
 - New domain-specific content goes inside the correct domain folder (`the-block/`, `creative-studio/`, or `life-systems/`)
 - Cross-cutting kickoff/continuation prompts go in `docs/prompts/`; cross-cutting plans/audits in `docs/plans/` (`YYYY-MM-DD-slug.md`). Never at repo root. Project-local prompts/plans stay co-located (`agents-sdk/docs/plans/`, `creative-studio/16bitfit-battle-mode/prompts-and-summaries/`, `docs/superpowers/`)
 - **Doc updates on new Skill/Agent/Hook/Script**: add a CHANGELOG.md entry and update any count tables in CLAUDE.md and README.md
+
+## Agent skills
+
+### Issue tracker
+
+Issues, PRDs, and wayfinder maps live in GitHub Issues (`seanwinslow28/code-brain`) via the `gh` CLI; external PRs are NOT a triage surface. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Canonical vocabulary, unmodified: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Multi-context: `CONTEXT-MAP.md` at root routes to per-domain `CONTEXT.md` files (created lazily by `/domain-modeling`). See `docs/agents/domain.md`.

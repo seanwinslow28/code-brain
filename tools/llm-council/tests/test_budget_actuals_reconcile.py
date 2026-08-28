@@ -28,6 +28,8 @@ from council.budget import (
     mark_dispatched,
     reconcile_generations,
     record_actual,
+    settle,
+    strict_ledger_state,
 )
 
 
@@ -333,3 +335,196 @@ def test_reconcile_sub_micro_difference_is_corrected():
     assert [c["generation_id"] for c in result.corrected] == ["g1"]
     assert result.confirmed == []
     assert result.reconciled_total == Decimal("0.10000049")
+
+
+# --- F8b Task 3b: additive actual provenance -------------------------------
+
+def test_record_actual_stores_explicit_and_derived_provenance(tmp_spend_dir):
+    r = _dispatched(TODAY)
+    record_actual(
+        r,
+        attempt_id="a1",
+        generation_id="g1",
+        usage_cost=0.10,
+        provenance="estimated",
+    )
+    record_actual(r, attempt_id="a2", generation_id="g2", usage_cost=0.20)
+    record_actual(
+        r,
+        attempt_id="a3",
+        generation_id=None,
+        usage_cost=None,
+        status="unknown",
+    )
+
+    actuals = _read(_daily(tmp_spend_dir, TODAY))["actuals"]
+    assert {row["attempt_id"]: row["provenance"] for row in actuals} == {
+        "a1": "estimated",
+        "a2": "authoritative",
+        "a3": "unknown",
+    }
+
+
+def test_settle_settled_refuses_estimated_provenance(tmp_spend_dir):
+    r = _dispatched(TODAY)
+
+    with pytest.raises(ReservationError, match=r"cannot settle settled.*use unknown"):
+        settle(
+            r,
+            attempt_id="a1",
+            generation_id="g1",
+            usage_cost=0.10,
+            provenance="estimated",
+        )
+
+    data = _read(_daily(tmp_spend_dir, TODAY))
+    row = next(x for x in data["runs"] if x.get("reservation_id") == r.reservation_id)
+    assert row["status"] == "dispatched"
+    assert data.get("actuals", []) == []
+
+
+def test_settle_unknown_refuses_known_cost(tmp_spend_dir):
+    r = _dispatched(TODAY)
+
+    with pytest.raises(
+        ReservationError, match="an unknown actual must carry usage_cost None"
+    ):
+        settle(
+            r,
+            attempt_id="a1",
+            generation_id="g1",
+            usage_cost=0.10,
+            status="unknown",
+        )
+
+    settle(
+        r,
+        attempt_id="a2",
+        generation_id=None,
+        usage_cost=None,
+        status="unknown",
+    )
+
+    actual = _read(_daily(tmp_spend_dir, TODAY))["actuals"][0]
+    assert actual["status"] == "unknown"
+    assert actual["provenance"] == "unknown"
+
+
+@pytest.mark.parametrize("bad", ["provider", "", 1])
+def test_record_actual_rejects_invalid_supplied_provenance(tmp_spend_dir, bad):
+    r = _dispatched(TODAY)
+    with pytest.raises(ReservationError):
+        record_actual(
+            r,
+            attempt_id="a1",
+            generation_id="g1",
+            usage_cost=0.10,
+            provenance=bad,
+        )
+
+
+def test_record_actual_rejects_estimated_without_cost(tmp_spend_dir):
+    r = _dispatched(TODAY)
+    with pytest.raises(ReservationError):
+        record_actual(
+            r,
+            attempt_id="a1",
+            generation_id=None,
+            usage_cost=None,
+            status="unknown",
+            provenance="estimated",
+        )
+
+
+def test_record_actual_rejects_unknown_provenance_with_cost(tmp_spend_dir):
+    r = _dispatched(TODAY)
+    with pytest.raises(ReservationError):
+        record_actual(
+            r,
+            attempt_id="a1",
+            generation_id="g1",
+            usage_cost=0.10,
+            provenance="unknown",
+        )
+
+
+@pytest.mark.parametrize("provenance", ["estimated", "unknown"])
+def test_close_settled_refuses_non_authoritative_actual(tmp_spend_dir, provenance):
+    r = _dispatched(TODAY)
+    if provenance == "estimated":
+        record_actual(
+            r,
+            attempt_id="a1",
+            generation_id="g1",
+            usage_cost=0.10,
+            provenance=provenance,
+        )
+    else:
+        record_actual(
+            r,
+            attempt_id="a1",
+            generation_id=None,
+            usage_cost=None,
+            status="unknown",
+            provenance=provenance,
+        )
+
+    with pytest.raises(ReservationError, match=r"cannot close settled.*use unknown"):
+        close(r, status="settled")
+
+
+def test_close_settled_allows_all_authoritative_actuals(tmp_spend_dir):
+    r = _dispatched(TODAY)
+    record_actual(
+        r,
+        attempt_id="a1",
+        generation_id="g1",
+        usage_cost=0.10,
+        provenance="authoritative",
+    )
+    record_actual(r, attempt_id="a2", generation_id="g2", usage_cost=0.20)
+
+    close(r, status="settled")
+
+    data = _read(_daily(tmp_spend_dir, TODAY))
+    row = next(x for x in data["runs"] if x.get("reservation_id") == r.reservation_id)
+    assert row["status"] == "settled"
+
+
+def test_legacy_actual_without_provenance_can_close_settled(tmp_spend_dir):
+    r = _dispatched(TODAY)
+    record_actual(r, attempt_id="a1", generation_id="g1", usage_cost=0.10)
+    path = _daily(tmp_spend_dir, TODAY)
+    data = _read(path)
+    del data["actuals"][0]["provenance"]
+    path.write_text(json.dumps(data))
+
+    close(r, status="settled")
+
+    row = next(x for x in _read(path)["runs"] if x.get("reservation_id") == r.reservation_id)
+    assert row["status"] == "settled"
+
+
+def test_strict_parser_accepts_absent_actual_provenance(tmp_spend_dir):
+    r = _dispatched(TODAY)
+    record_actual(r, attempt_id="a1", generation_id="g1", usage_cost=0.10)
+    path = _daily(tmp_spend_dir, TODAY)
+    data = _read(path)
+    del data["actuals"][0]["provenance"]
+    path.write_text(json.dumps(data))
+
+    state = strict_ledger_state(TODAY)
+
+    assert state["attempt_ids"] == {"a1"}
+
+
+def test_strict_parser_refuses_junk_actual_provenance(tmp_spend_dir):
+    r = _dispatched(TODAY)
+    record_actual(r, attempt_id="a1", generation_id="g1", usage_cost=0.10)
+    path = _daily(tmp_spend_dir, TODAY)
+    data = _read(path)
+    data["actuals"][0]["provenance"] = "provider-ish"
+    path.write_text(json.dumps(data))
+
+    with pytest.raises(LedgerCorrupt, match="provenance"):
+        strict_ledger_state(TODAY)

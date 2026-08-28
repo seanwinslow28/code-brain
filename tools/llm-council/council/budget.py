@@ -3,31 +3,38 @@
 Spend files live at $COUNCIL_SPEND_DIR (default: vault/health/) and are append-only
 JSON written atomically via tmp + rename.
 
+The spend root MUST be a LOCAL filesystem. flock on NFS is unsupported; a second
+machine writing the ledger is out of scope (F8b finding 10 deferral).
+
 F8a.3 adds the-oracle's locked reserve-before-dispatch surface on this same ledger:
 a canonical month-scoped ``flock`` (``month_lock``), a locked ``record_spend`` for
 *every* writer (so an unmigrated sibling's stale read-modify-write can never clobber a
 durably-appended oracle reservation), a strict fail-closed enforcement parser
 (``strict_ledger_state``), the ``check_and_reserve`` transaction, and a crash-safe
-``reserved -> dispatched -> settled | unknown`` reservation lifecycle. Siblings keep
-their tolerant preflight/settlement lifecycle until F8b; only their *mutation* is now
-serialized. The reserved-cost is the sole enforcement debit (``amount``/``total``);
-actual ``usage.cost`` is recorded in a non-debit ``actuals`` array keyed by
-``run_id``+``attempt_id``. The schema is versioned so F8b is additive.
+``reserved -> dispatched -> settled | unknown`` reservation lifecycle. F8b Task 5 flips
+activation enforcement on: an activation snapshot makes ``check_and_reserve`` the only
+admissible debit writer, while activation absence preserves the legacy path for old tests
+and pre-activation history. The reserved-cost is the sole enforcement debit
+(``amount``/``total``); actual ``usage.cost`` is recorded in a non-debit ``actuals`` array
+keyed by ``run_id``+``attempt_id``.
 """
 
 import contextlib
 import fcntl
 import json
 import os
+import socket
+import subprocess
+import sys
 import tempfile
 import uuid
 from dataclasses import dataclass
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from decimal import ROUND_CEILING, Decimal, InvalidOperation
 from pathlib import Path
 
-# Additive schema contract (F8b populates the nullable policy_* fields + adds writers
-# without rewriting F8a rows or changing the lock kernel).
+# Additive schema contract: nullable policy identity and optional owner metadata keep
+# pre-activation F8a rows parseable without rewriting history or changing the lock kernel.
 LEDGER_SCHEMA_VERSION = 2
 _SUPPORTED_SCHEMA_VERSIONS = (1, 2)
 _MICRO = Decimal("0.000001")
@@ -38,6 +45,12 @@ _SETTLED = "settled"
 _UNKNOWN = "unknown"
 _LIFECYCLE_STATES = (_RESERVED, _DISPATCHED, _SETTLED, _UNKNOWN)
 _NONTERMINAL = (_RESERVED, _DISPATCHED)
+_PROVENANCE = ("authoritative", "estimated", "unknown")
+RECONCILE_LEGACY_TTL = timedelta(hours=24)
+PS_START_TIME_TIMEOUT_SECONDS = 5
+
+# Flipped by F8b Task 5; the activation file's presence is the runtime switch.
+POLICY_ENFORCEMENT_ENABLED = True
 
 
 @dataclass(frozen=True)
@@ -63,6 +76,48 @@ class ReservationError(Exception):
     """An illegal reservation lifecycle transition or a missing reservation row."""
 
 
+def utc_accounting_date() -> date:
+    """Return the UTC calendar day used by every ledger writer.
+
+    This is the ONLY sanctioned accounting-date source for ledger writers, matching the
+    derivation used inline by the-oracle's ``oracle/spend.py::reserve_sync``. A local date
+    is a correctness bug (residual 2): a sibling writing at 17:00 PDT on August 31 uses
+    2026-08-31 locally even though the instant is 2026-09-01 UTC. Its spend then never
+    appears in the UTC September aggregate, and it takes August's month lock while a UTC
+    writer holds September's, so mutual exclusion is lost across the boundary.
+
+    Month-boundary contract: THE ADMISSION MONTH OWNS THE RUN. A ``Reservation`` carries
+    its ``on_date``; actuals and ``close`` write to that month's file under that month's
+    lock (the existing kernel behavior). This is sound precisely because reservation is a
+    pre-dispatch bound: cash from a run reserved August 31 and settled September 1 was
+    already admitted against August's caps and cannot exceed its August debit. Never take
+    two month locks in one transaction.
+    """
+    return datetime.now(timezone.utc).date()
+
+
+def _process_start_time(pid: int) -> str | None:
+    """Return ``pid``'s OS-reported start time, or ``None`` when unavailable.
+
+    This asks the operating system via ``ps``; it is an identity query, not a wall-clock
+    read and is intentionally independent of ``datetime``/``date``.
+    """
+    try:
+        result = subprocess.run(
+            ["ps", "-p", str(pid), "-o", "lstart="],
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=PS_START_TIME_TIMEOUT_SECONDS,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    if result.returncode != 0:
+        return None
+    started_at = result.stdout.strip()
+    return started_at or None
+
+
 def _spend_dir() -> Path:
     raw = os.environ.get("COUNCIL_SPEND_DIR")
     if raw:
@@ -73,6 +128,14 @@ def _spend_dir() -> Path:
         d = here.parents[3] / "vault" / "health"
     d.mkdir(parents=True, exist_ok=True)
     return d
+
+
+def spend_dir() -> Path:
+    """Public reporting/tooling accessor for the configured spend directory.
+
+    Enforcement transactions continue to pin one resolved root via ``_resolve_root``.
+    """
+    return _spend_dir()
 
 
 def _daily_file(on_date: date) -> Path:
@@ -128,13 +191,24 @@ def record_spend(*, amount: float, profile: str, tag: str, on_date: date, tool: 
     """Append a run to today's daily spend file under the canonical month lock.
 
     F8a.3 (finding 1): the read-modify-write acquires the month lock on *every*
-    mutation, including legacy sibling calls, so an unmigrated sibling's stale snapshot
-    can never clobber a durably-appended oracle reservation. The signature and on-disk
-    shape are unchanged, so siblings need no code change.
+    mutation, so a stale snapshot can never clobber a durable reservation. F8b Task 5
+    refuses this plain debit whenever an activation exists; without activation, its
+    signature and on-disk bytes remain unchanged for pre-activation compatibility.
     """
     on_date = _normalize_account_date(on_date)
     root = _resolve_root()
     with month_lock(on_date, root=root):
+        if POLICY_ENFORCEMENT_ENABLED:
+            from council import policy
+
+            active = policy.load_active_policy(root)
+            if active is not None:
+                if tool not in active["policy"]["tools"]:
+                    raise ReservationError(f"tool {tool!r} is not in active policy")
+                raise ReservationError(
+                    f"plain record_spend debit is not admissible for governed tool {tool!r}; "
+                    "use check_and_reserve"
+                )
         f = _daily_file_in(root, on_date)
         if f.exists():
             data = json.loads(f.read_text())
@@ -171,7 +245,10 @@ def preflight_tool(
     *, estimated: float, per_query_cap: float, daily_cap: float, monthly_cap: float,
     on_date: date, tool: str, force: bool = False,
 ) -> None:
-    """Like preflight, but daily/monthly totals are scoped to one tool."""
+    """Like preflight, but daily/monthly totals are scoped to one tool.
+
+    DEPRECATED: not a production admission path (F8b Task 5); importable for tests only.
+    """
     if not force and estimated > per_query_cap:
         raise BudgetExceeded(
             f"per-run cap exceeded: estimated ${estimated:.4f} > cap ${per_query_cap:.4f}. "
@@ -201,6 +278,8 @@ def preflight(
     force: bool = False,
 ) -> None:
     """Reject the query if any cap would be breached.
+
+    DEPRECATED: not a production admission path (F8b Task 5); importable for tests only.
 
     `force=True` bypasses per-query cap (but still respects daily/monthly).
     Daily and monthly caps are NEVER bypassed.
@@ -343,6 +422,22 @@ def _to_decimal(value, *, field: str) -> Decimal:
     return dec
 
 
+def _resolve_provenance(provenance: str | None, usage_cost: float | None) -> str:
+    """Resolve and validate additive actual-cost provenance."""
+    resolved = (
+        "authoritative" if usage_cost is not None else "unknown"
+    ) if provenance is None else provenance
+    if resolved not in _PROVENANCE:
+        raise ReservationError(
+            f"provenance must be one of {_PROVENANCE!r}, got {provenance!r}"
+        )
+    if resolved in ("authoritative", "estimated") and usage_cost is None:
+        raise ReservationError(f"{resolved} provenance requires a known usage_cost")
+    if resolved == "unknown" and usage_cost is not None:
+        raise ReservationError("unknown provenance requires usage_cost None")
+    return resolved
+
+
 @dataclass(frozen=True)
 class _ParsedFile:
     aggregate: Decimal
@@ -373,8 +468,9 @@ def _strict_parse_file(path: Path) -> _ParsedFile:
     (truncation), non-finite/negative money, a reservation row missing ``tool``/``run_id``/
     ``status``/``reservation_id``, a stored ``total`` inconsistent with the summed runs
     (beyond a per-run micro tolerance), an illegal reservation ``status``, or a duplicate
-    reservation/attempt id within the file. The reserved-cost ``amount`` is the debit for
-    every run regardless of lifecycle status (``total`` is reserved-only).
+    reservation/attempt id within the file, or malformed optional owner metadata. The
+    reserved-cost ``amount`` is the debit for every run regardless of lifecycle status
+    (``total`` is reserved-only).
     """
     try:
         raw = path.read_text()
@@ -437,6 +533,31 @@ def _strict_parse_file(path: Path) -> _ParsedFile:
             run_id = row.get("run_id")
             if not isinstance(run_id, str) or not run_id:
                 raise LedgerCorrupt(f"{path.name}: reservation missing run_id")
+            if "owner_pid" in row:
+                owner_pid = row["owner_pid"]
+                if (
+                    isinstance(owner_pid, bool)
+                    or not isinstance(owner_pid, int)
+                    or owner_pid <= 0
+                ):
+                    raise LedgerCorrupt(
+                        f"{path.name}: reservation owner_pid must be a positive integer"
+                    )
+            if "owner_host" in row:
+                owner_host = row["owner_host"]
+                if not isinstance(owner_host, str) or not owner_host:
+                    raise LedgerCorrupt(
+                        f"{path.name}: reservation owner_host must be a nonempty string"
+                    )
+            if "owner_started_at" in row:
+                owner_started_at = row["owner_started_at"]
+                if owner_started_at is not None and (
+                    not isinstance(owner_started_at, str) or not owner_started_at
+                ):
+                    raise LedgerCorrupt(
+                        f"{path.name}: reservation owner_started_at must be a "
+                        "nonempty string or null"
+                    )
             reservation_ids.append(rid)
 
     if len(set(reservation_ids)) != len(reservation_ids):
@@ -464,6 +585,10 @@ def _strict_parse_file(path: Path) -> _ParsedFile:
         cost = act.get("usage_cost")
         if cost is not None:
             _to_decimal(cost, field=f"{path.name}: usage_cost")
+        if "provenance" in act and act["provenance"] not in _PROVENANCE:
+            raise LedgerCorrupt(
+                f"{path.name}: invalid actual provenance {act['provenance']!r}"
+            )
     if len(set(attempt_ids)) != len(attempt_ids):
         raise LedgerCorrupt(f"{path.name}: duplicate attempt_id")
 
@@ -546,15 +671,16 @@ def check_and_reserve(
     reservation_id: str | None = None,
     policy_version=None,
     policy_hash=None,
+    force: bool = False,
 ) -> Reservation:
     """One locked transaction: strict-check the caps, then durably reserve.
 
     Under the canonical month lock (over a spend root pinned once for the whole
     transaction): strict-parse the ledger (fail closed on corruption), enforce the
-    per-tool per-query/daily/monthly caps HARD — there is NO ``force`` override, the
-    per-tool cap is hard (finding 2) — CHECK the cross-tool aggregate daily/monthly
-    ceiling (refuse if the-oracle would breach it — checked but not airtight until F8b),
-    then write a durable ``reserved`` row (atomic rename + fsync of file and parent dir).
+    per-tool per-query/daily/monthly caps and the cross-tool aggregate daily/monthly
+    ceiling, then write a durable ``reserved`` row (atomic rename + fsync of file and
+    parent dir). ``force=True`` skips ONLY the per-query comparison when policy permits;
+    it still debits the full reserved cost. Daily and monthly caps are NEVER bypassed.
     The reserved cost is the sole enforcement debit.
     """
     if not isinstance(run_id, str) or not run_id:
@@ -567,10 +693,87 @@ def check_and_reserve(
     rid = reservation_id or uuid.uuid4().hex
     root = _resolve_root()
     with month_lock(on_date, root=root):
+        if POLICY_ENFORCEMENT_ENABLED:
+            # Lazy import keeps budget <-> policy import-safe. The activation snapshot is
+            # enforcement state and must be read from this transaction's pinned shared
+            # root while the canonical month lock is held.
+            from council import policy
+
+            active = policy.load_active_policy(root)
+            if active is not None:
+                active_version = active["policy_version"]
+                active_hash = active["policy_hash"]
+                if policy_version is None and policy_hash is None:
+                    policy_version = active_version
+                    policy_hash = active_hash
+                elif policy_version is None or policy_hash is None:
+                    raise ReservationError(
+                        "both policy_version and policy_hash are required when either is supplied"
+                    )
+                else:
+                    # True == 1 in Python: exact-type checks must precede the equality
+                    # comparison or a boolean version launders through (review finding 1).
+                    if isinstance(policy_version, bool) or not isinstance(policy_version, int):
+                        raise ReservationError("policy_version must be an integer")
+                    if not isinstance(policy_hash, str):
+                        raise ReservationError("policy_hash must be a string")
+                    if policy_version != active_version or policy_hash != active_hash:
+                        raise ReservationError(
+                            f"caller policy does not match active policy version {active_version} "
+                            f"hash {active_hash}"
+                        )
+
+                active_tools = active["policy"]["tools"]
+                if tool not in active_tools:
+                    raise ReservationError(f"tool {tool!r} is not in active policy")
+                active_tool = active_tools[tool]
+                if force and not active_tool["force_per_query_allowed"]:
+                    raise ReservationError(
+                        f"force is not allowed for tool {tool!r} by the active policy"
+                    )
+
+                requested_per_query = _to_decimal(per_query_cap, field="per_query_cap")
+                active_per_query = {
+                    Decimal(str(value)) for value in active_tool["per_query_caps"]
+                }
+                if requested_per_query not in active_per_query:
+                    raise ReservationError(
+                        f"per_query_cap drift: {per_query_cap!r} is not in activated "
+                        f"per_query_caps {active_tool['per_query_caps']!r}"
+                    )
+
+                cap_pairs = (
+                    ("tool_daily_cap", tool_daily_cap, active_tool["daily_cap"]),
+                    ("tool_monthly_cap", tool_monthly_cap, active_tool["monthly_cap"]),
+                    (
+                        "aggregate_daily_cap",
+                        aggregate_daily_cap,
+                        active["policy"]["aggregate"]["daily_cap"],
+                    ),
+                    (
+                        "aggregate_monthly_cap",
+                        aggregate_monthly_cap,
+                        active["policy"]["aggregate"]["monthly_cap"],
+                    ),
+                )
+                for field, supplied, activated in cap_pairs:
+                    if _to_decimal(supplied, field=field) != Decimal(str(activated)):
+                        raise ReservationError(
+                            f"{field} drift: caller {supplied!r} != activated {activated!r}"
+                        )
+
+                # Admission always uses the activated snapshot. The caller chooses one
+                # enumerated per-query tier; every other cap has exactly one active value.
+                per_query_cap = float(requested_per_query)
+                tool_daily_cap = active_tool["daily_cap"]
+                tool_monthly_cap = active_tool["monthly_cap"]
+                aggregate_daily_cap = active["policy"]["aggregate"]["daily_cap"]
+                aggregate_monthly_cap = active["policy"]["aggregate"]["monthly_cap"]
+
         state = strict_ledger_state(on_date, root=root)
         if rid in state["reservation_ids"]:
             raise ReservationError(f"reservation_id {rid!r} already exists")
-        if cost > _to_decimal(per_query_cap, field="per_query_cap"):
+        if not force and cost > _to_decimal(per_query_cap, field="per_query_cap"):
             raise BudgetExceeded(
                 f"per-query cap exceeded: reserved ${cost} > cap ${per_query_cap}"
             )
@@ -601,6 +804,7 @@ def check_and_reserve(
 
         data = _load_daily_in(root, on_date)
         data["schema_version"] = LEDGER_SCHEMA_VERSION
+        owner_pid = os.getpid()
         data["runs"].append({
             "amount": float(cost),
             "profile": profile,
@@ -611,6 +815,9 @@ def check_and_reserve(
             "run_id": run_id,
             "status": _RESERVED,
             "created_at": datetime.now(timezone.utc).isoformat(),
+            "owner_pid": owner_pid,
+            "owner_host": socket.gethostname(),
+            "owner_started_at": _process_start_time(owner_pid),
             "policy_version": policy_version,
             "policy_hash": policy_hash,
         })
@@ -658,6 +865,7 @@ def settle(
     generation_id: str | None,
     usage_cost: float | None,
     status: str = _SETTLED,
+    provenance: str | None = None,
 ) -> None:
     """Terminal ``dispatched -> settled | unknown``; record the NON-debit actual.
 
@@ -667,6 +875,13 @@ def settle(
     """
     if status not in (_SETTLED, _UNKNOWN):
         raise ReservationError(f"settle status must be settled|unknown, got {status!r}")
+    if status == _UNKNOWN and usage_cost is not None:
+        raise ReservationError("an unknown actual must carry usage_cost None")
+    resolved_provenance = _resolve_provenance(provenance, usage_cost)
+    if status == _SETTLED and resolved_provenance != "authoritative":
+        raise ReservationError(
+            "cannot settle settled with non-authoritative provenance — use unknown"
+        )
     on_date = _normalize_account_date(reservation.on_date)
     root = _resolve_root()
     with month_lock(on_date, root=root):
@@ -689,49 +904,139 @@ def settle(
             "generation_id": generation_id,
             "usage_cost": usage_cost,
             "status": status,
+            "provenance": resolved_provenance,
             "recorded_at": datetime.now(timezone.utc).isoformat(),
         })
         _atomic_write_json_fsync(_daily_file_in(root, on_date), data)
 
 
+def _created_at(row: dict) -> datetime | None:
+    created = row.get("created_at")
+    if not isinstance(created, str):
+        return None
+    try:
+        created_at = datetime.fromisoformat(created)
+    except ValueError:
+        return None
+    if created_at.tzinfo is None:
+        return created_at.replace(tzinfo=timezone.utc)
+    return created_at
+
+
+def _row_is_older_than(row: dict, cutoff: datetime) -> bool:
+    """Treat absent, malformed, or otherwise incomparable timestamps as old."""
+    created = _created_at(row)
+    if created is None:
+        return True
+    try:
+        return created < cutoff
+    except TypeError:
+        return True
+
+
+def _legacy_reconcile_allowed(row: dict, older_than: datetime | None) -> bool:
+    if older_than is None:
+        return True
+    return _row_is_older_than(row, older_than - RECONCILE_LEGACY_TTL)
+
+
+def _reconcile_row(
+    row: dict, *, older_than: datetime | None, local_host: str
+) -> bool:
+    """Apply the Task 5 owner-liveness matrix to one candidate row."""
+    rid = row["reservation_id"]
+    has_owner_identity = all(
+        field in row for field in ("owner_pid", "owner_host", "owner_started_at")
+    )
+    if not has_owner_identity:
+        return _legacy_reconcile_allowed(row, older_than)
+
+    owner_host = row["owner_host"]
+    if owner_host != local_host:
+        print(
+            f"[reconcile] foreign-host reservation {rid} from {owner_host} "
+            "— cannot verify liveness; skipped",
+            file=sys.stderr,
+        )
+        return False
+
+    owner_pid = row["owner_pid"]
+    try:
+        os.kill(owner_pid, 0)
+    except ProcessLookupError:
+        return True
+    except PermissionError:
+        print(
+            f"[reconcile] reservation {rid} owner pid {owner_pid} permission denied "
+            "— assumed alive; skipped",
+            file=sys.stderr,
+        )
+        return False
+
+    recorded_start = row["owner_started_at"]
+    if recorded_start is None:
+        return _legacy_reconcile_allowed(row, older_than)
+    current_start = _process_start_time(owner_pid)
+    if current_start is None:
+        print(
+            f"[reconcile] cannot verify owner start time for pid {owner_pid} "
+            "— degraded to TTL",
+            file=sys.stderr,
+        )
+        return _legacy_reconcile_allowed(row, older_than)
+    if current_start != recorded_start:
+        return True
+
+    age_reference = older_than or datetime.now(timezone.utc)
+    if _row_is_older_than(row, age_reference - RECONCILE_LEGACY_TTL):
+        print(
+            f"[reconcile] reservation {rid} held by live pid {owner_pid} for >24h "
+            "— investigate",
+            file=sys.stderr,
+        )
+    return False
+
+
 def reconcile_stale(accounting_date: date, *, older_than: datetime | None = None) -> list:
-    """Startup reconciliation under the lock: retain crash-orphaned reservations.
+    """Retain verified crash orphans as ``unknown`` across two UTC ledger months.
 
-    Any ``reserved``/``dispatched`` row left by a crash becomes terminal ``unknown`` and
-    KEEPS its debit (consumed budget >= the retained reservation). A refund requires
-    affirmative provider evidence of no charge — the generation-id reconciliation query is
-    deferred to just before F8a.4, so F8a.3 conservatively retains.
-
-    ``older_than`` guards against clobbering a *live* dispatch owned by another process
-    (finding 8): only rows whose ``created_at`` predates the cutoff are reconciled. The
-    single-user sequential model calls this at startup before any in-flight dispatch;
-    cross-process liveness is F8b. A row with an unparseable/absent ``created_at`` is
-    reconciled (conservative retain).
+    Sweep the immediately previous month, then the accounting month, taking one canonical
+    month lock at a time and never nesting locks. Rows predating ``older_than`` are resolved
+    with OS owner identity: a positively identified live owner always wins over TTL; dead
+    owners and reused PIDs reconcile. Legacy rows have a 24-hour grace period when a cutoff
+    is supplied, while ``older_than=None`` preserves their unconditional historic behavior.
     """
     accounting_date = _normalize_account_date(accounting_date)
     root = _resolve_root()
-    with month_lock(accounting_date, root=root):
-        _strict_parse_file(_daily_file_in(root, accounting_date))
-        data = _load_daily_in(root, accounting_date)
-        reconciled = []
-        for row in data["runs"]:
-            if row.get("kind") != _RESERVATION_KIND or row.get("status") not in _NONTERMINAL:
-                continue
-            if older_than is not None:
-                created = row.get("created_at")
-                created_dt = None
-                if isinstance(created, str):
-                    try:
-                        created_dt = datetime.fromisoformat(created)
-                    except ValueError:
-                        created_dt = None
-                if created_dt is not None and created_dt >= older_than:
-                    continue  # too new — a live dispatch, not a crash orphan
-            row["status"] = _UNKNOWN
-            reconciled.append(row["reservation_id"])
-        if reconciled:
-            _atomic_write_json_fsync(_daily_file_in(root, accounting_date), data)
-        return reconciled
+    current_month = accounting_date.replace(day=1)
+    previous_month = (current_month - timedelta(days=1)).replace(day=1)
+    reconciled: list = []
+    local_host = socket.gethostname()
+
+    for month_date in (previous_month, current_month):
+        with month_lock(month_date, root=root):
+            for path in _month_files_in(root, month_date):
+                _strict_parse_file(path)
+                data = json.loads(path.read_text())
+                changed = False
+                for row in data["runs"]:
+                    if (
+                        row.get("kind") != _RESERVATION_KIND
+                        or row.get("status") not in _NONTERMINAL
+                    ):
+                        continue
+                    if older_than is not None and not _row_is_older_than(row, older_than):
+                        continue
+                    if not _reconcile_row(
+                        row, older_than=older_than, local_host=local_host
+                    ):
+                        continue
+                    row["status"] = _UNKNOWN
+                    reconciled.append(row["reservation_id"])
+                    changed = True
+                if changed:
+                    _atomic_write_json_fsync(path, data)
+    return reconciled
 
 
 def record_actual(
@@ -741,6 +1046,7 @@ def record_actual(
     generation_id: str | None,
     usage_cost: float | None,
     status: str = _SETTLED,
+    provenance: str | None = None,
 ) -> None:
     """Append ONE non-debit per-attempt actual; DO NOT transition the reservation.
 
@@ -766,6 +1072,7 @@ def record_actual(
         raise ReservationError("a settled actual requires a known usage_cost (got None)")
     if status == _UNKNOWN and usage_cost is not None:
         raise ReservationError("an unknown actual must carry usage_cost None")
+    resolved_provenance = _resolve_provenance(provenance, usage_cost)
     on_date = _normalize_account_date(reservation.on_date)
     root = _resolve_root()
     with month_lock(on_date, root=root):
@@ -788,6 +1095,7 @@ def record_actual(
             "generation_id": generation_id,
             "usage_cost": usage_cost,
             "status": status,
+            "provenance": resolved_provenance,
             "recorded_at": datetime.now(timezone.utc).isoformat(),
         })
         _atomic_write_json_fsync(_daily_file_in(root, on_date), data)
@@ -825,9 +1133,15 @@ def close(reservation: Reservation, *, status: str) -> None:
             ]
             if not own:
                 raise ReservationError("cannot close settled with zero actuals — use unknown")
-            if any(a.get("status") != _SETTLED or a.get("usage_cost") is None for a in own):
+            if any(
+                a.get("status") != _SETTLED
+                or a.get("usage_cost") is None
+                or a.get("provenance", "authoritative") != "authoritative"
+                for a in own
+            ):
                 raise ReservationError(
-                    "cannot close settled while an actual is unknown/uncosted — use unknown"
+                    "cannot close settled while an actual is unknown/uncosted/"
+                    "non-authoritative — use unknown"
                 )
         row["status"] = status
         _atomic_write_json_fsync(_daily_file_in(root, on_date), data)

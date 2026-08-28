@@ -1,0 +1,78 @@
+characters:
+  - name: Pepper (named in dialogue "Hey look, it's Pepper" E03P02; "Pepper & Carrot" title cards)
+    identity:
+      species_build: {fact: "Human girl, child/young-teen, slight build, short stature relative to adults and market stalls", evidence: [E01P01, E01P02, E02P01, E02P02, E03P01, E03P02, E03P04], status: OBSERVED}
+      face_hair: {fact: "Long straight dark hair (very dark brown/near-black with blue-violet sheen), center-parted with side strands framing the face; large round dark eyes; small nose; expressive cartoon face; light-tan skin", evidence: [E01P01, E01P02, E02P02, E03P01, E03P02, E03P04], status: OBSERVED}
+      palette: {fact: "Skin warm light tan; hair blue-black/dark violet; hat and most garments in browns/olive/khaki earth tones; accents of rust-red and cream", evidence: [E01P01, E02P02, E03P02, E03P04], status: OBSERVED}
+      costume: {fact: "Signature oversized floppy wide-brimmed witch hat, brown leather-like with a buckle band (buckle clearly visible E03P04, E03P03); outfit varies by scene but stays rustic-patchwork: E01 dark olive-green long-sleeved top/cloak + khaki ruffled knee-length skirt + striped stockings + shoulder satchel; E03 white puff-sleeved blouse + brown laced vest/bodice + dark-red knit wrist-warmers + brown skirt; E03P05 adds green cape, red plaid boots, patched green dress; flying goggles worn on flight scenes (E01P03); carries a wooden broom tagged with a small '18' plate whose bristles glow gold after the flight potion (E01P02, E01P03)", evidence: [E01P01, E01P02, E01P03, E02P01, E03P02, E03P03, E03P04, E03P05], status: OBSERVED}
+      distinctive: {fact: "Constant companion is an orange tabby cat (Carrot); brews potions in a large black cauldron; broom with numbered '18' tag; shoulder bag/satchel; lives in a treehouse-cottage marked 'WARNING WITCH PROPERTY' mailbox 33", evidence: [E01P01, E01P02, E02P01, E03P03, E03P04], status: OBSERVED}
+      anatomy: {fact: "Stylized proportions, head roughly 1/4–1/5 of body height; large eyes, small hands; realistic-ish limbs in painterly episodes", evidence: [E01P01, E02P05, E03P04], status: OBSERVED}
+    states:
+      - "Potion-brewing at home: hat + olive/brown work clothes (E01P01, E01P02, E02P01, E02P02)"
+      - "Flying: goggles over eyes, satchel, broom '18' with glowing bristles (E01P03, E03P03, E03P04, E03P05)"
+      - "Market day: blouse + vest outfit, carrying produce bag (E03P01, E03P02)"
+      - "Bath: hair covered in rainbow-colored foam, no hat (E02P05)"
+    role: "Protagonist; novice countryside witch and potion-maker preparing for the Komona Potion Challenge (poster E03P03)"
+
+  - name: Carrot (named in dialogue "Carrot!" E03P04; title cards)
+    identity:
+      species_build: {fact: "Domestic cat, small, slightly chubby kitten-like proportions with big head and huge round eyes", evidence: [E01P01, E02P02, E02P03, E03P04], status: OBSERVED}
+      face_hair: {fact: "Orange/ginger tabby; darker orange stripes on head, back and legs; ringed banded tail; white/cream muzzle area; wide expressive eyes (black pupils, occasionally white sclera when startled)", evidence: [E01P02, E02P02, E02P03, E03P04, E03P05], status: OBSERVED}
+      palette: {fact: "Body warm orange/ginger; stripes darker rust-orange; tail rings alternating cream/orange", evidence: [E02P02, E02P03, E03P04], status: OBSERVED}
+      costume: {fact: "None normally; wears small round goggles in flying state (E01P03)", evidence: [E01P03], status: OBSERVED}
+      distinctive: {fact: "Mischievous — drinks/steals potions (jumps into flight-potion cauldron E01P02; pours mixed potions into one flask and drinks E02P03–E02P04); reacts with iconic wide-eyed 'rainbow vision' wonder (E02P02)", evidence: [E01P02, E02P02, E02P03, E02P04], status: OBSERVED}
+      anatomy: {fact: "Moves bipedally in comedic beats (standing, pointing, carrying flasks) but sits/sleeps as a normal cat", evidence: [E01P02, E02P03, E03P04], status: OBSERVED}
+    states:
+      - "Normal orange tabby (most pages)"
+      - "Flight-potion state: glowing golden, sparkling, floats/swims through the air, goggles on (E01P03)"
+      - "Post-potion mess: drenched in orange/multicolor goo dripping rainbow liquid (E02P05)"
+    role: "Deuteragonist; Pepper's cat and comic troublemaker"
+
+  - name: Saffron (named in dialogue "Miss Saffron" E03P02)
+    identity:
+      species_build: {fact: "Human girl, similar age/height to Pepper, carries herself haughtily (eyes-closed poses, hand on hip)", evidence: [E03P02], status: OBSERVED}
+      face_hair: {fact: "Bright orange curly hair with two prominent side ringlets, short at back; freckles across nose; blue-grey eyes; fair skin", evidence: [E03P02], status: OBSERVED}
+      palette: {fact: "Hair saturated orange; outfit plum/burgundy-purple with gold/mustard trim; gold coin purse; pink-red gem brooch", evidence: [E03P02], status: OBSERVED}
+      costume: {fact: "Plum wide-brimmed witch hat with buckle band; tailored plum jacket with high gold-collared blouse and round pink-gem gold brooch; light gloves; broom carried over shoulder; handful of gold coins", evidence: [E03P02], status: OBSERVED}
+      distinctive: {fact: "Wealth signaling (orders 'two dozen of everything... premium quality, as usual', pays in gold); condescending rivalry with Pepper ('business is booming in the countryside?')", evidence: [E03P02], status: OBSERVED}
+      anatomy: {fact: "Same stylization register as Pepper (large eyes, small nose, expressive brows)", evidence: [E03P02], status: OBSERVED}
+    states:
+      - "Market appearance E03P02 (only clear appearance)"
+      - "Possibly the curly-orange-haired witch silhouette with a white cat racing beside Pepper in E01P03 — INFERRED, single distant glimpse, could be a different witch"
+    role: "Rival witch — wealthy city witch, presumably competing in the potion challenge (INFERRED from E03P02 dialogue)"
+
+  - name: Neighborhood cats (unnamed quartet)
+    identity:
+      species_build: {fact: "Four domestic cats: (1) slim spiky-furred orange tabby with banded tail; (2) brown/grey tabby with large green eyes; (3) cream cat with brown patches over ears/eye and blue eyes, goat-like tuft; (4) large fluffy white/cream cat with small ears and red-brown eyes, grumpy jowly face", evidence: [E02P03, E02P04, E02P05], status: OBSERVED}
+      face_hair: {fact: "Each visually distinct by coat and eye color as above; expressive cartoon faces matching Carrot's register", evidence: [E02P04], status: OBSERVED}
+      palette: {fact: "Orange; brown-grey; cream+brown patches; white-cream respectively", evidence: [E02P03, E02P04], status: OBSERVED}
+      costume: {fact: "None", evidence: [E02P04], status: OBSERVED}
+      distinctive: {fact: "Recipients of Carrot's 'rainbow potions' sales pitch (imagined as green/orange/pink/blue super-cats in a shared thought bubble E02P03); drink the potions and comically vomit colored slime (E02P04); watch Pepper's bath through the window (E02P05)", evidence: [E02P03, E02P04, E02P05], status: OBSERVED}
+      anatomy: {fact: "Bipedal-capable comedic cats like Carrot", evidence: [E02P04], status: OBSERVED}
+    states:
+      - "Normal (E02P03–E02P05)"
+      - "Imagined potion-empowered forms: green plant-cat, orange fire-cat, pink flower-cat, blue water/wing-cat inside thought bubble (E02P03) — imaginary, not literal"
+    role: "Recurring background/comic-relief animals; the large white cat MAY be the same white cat accompanying Saffron in E03P02 and the heart-eyed white cat in E01P03 (INFERRED, uncertain)"
+
+  - name: Beast-man fruit vendor (descriptive label)
+    identity:
+      species_build: {fact: "Large anthropomorphic beast (goat/rat-like muzzle, heavy brow, massive furred torso and arms), towers over Pepper", evidence: [E03P01, E03P02], status: OBSERVED}
+      face_hair: {fact: "Grey/tan striped fur, long muzzle with small beard, gold hoop earring, small eyes", evidence: [E03P01, E03P02], status: OBSERVED}
+      palette: {fact: "Grey-cream fur with darker grey stripes", evidence: [E03P01, E03P02], status: OBSERVED}
+      costume: {fact: "None visible (fur only) behind produce stall with red awning", evidence: [E03P01, E03P02], status: OBSERVED}
+      distinctive: {fact: "Sells 'pumpkinstars' (star-shaped orange gourds); growls ('Grrr...') when Pepper downgrades her order; fawns over Saffron ('It's always a pleasure to serve you, Miss Saffron')", evidence: [E03P01, E03P02], status: OBSERVED}
+      anatomy: {fact: "Huge clawed hands; hunched posture over the stall", evidence: [E03P01, E03P02], status: OBSERVED}
+    states: ["Market stall only (E03P01, E03P02)"]
+    role: "Minor recurring-in-episode merchant; establishes Komona's mixed human/creature population"
+
+world_notes:
+  - {fact: "Setting: Pepper's cottage is a whimsical treehouse on a hill, mailbox '33', sign 'WARNING WITCH PROPERTY'", evidence: [E02P01], status: OBSERVED}
+  - {fact: "Komona City: dense fantasy market town with towers, dragons/wyverns in the sky, mixed species crowd; currency 'Ko' (footnote E03P01); 'Komona Potion Challenge, 50 000 Ko grand prize' poster (E03P03)", evidence: [E03P01, E03P03], status: OBSERVED}
+  - {fact: "Witch broom races/flights happen in numbered groups (Pepper's broom tag '18', checkered banner finish line, other witches on brooms)", evidence: [E01P03], status: INFERRED}
+
+art_register:
+  line: {fact: "Two blended registers: E01 is nearly lineless painterly digital painting (soft edges, concept-art brushwork); E02–E03 show visible loose ink/pencil linework with hatching under watercolor-style washes; lines are organic, sketchy, variable-weight, never ruled", evidence: [E01P01, E01P02, E02P01, E02P02, E03P01, E03P02]}
+  color: {fact: "Warm storybook palettes with strong scene-wide color scripting: teal/green candlelit interior (E01), sepia/amber golds (E02 interiors), warm terracotta market and airy blue skies (E03); saturated rainbow accents reserved for magic/potions which glow against muted surroundings", evidence: [E01P01, E01P02, E02P02, E02P03, E03P01, E03P03]}
+  shading: {fact: "Soft painterly light-driven shading — volumetric window light shafts, glow/bloom around magical effects and sparkle particles; watercolor granulation and wash textures in E02–E03; no cel-shading, no screentone", evidence: [E01P01, E01P02, E02P01, E02P05, E03P04]}
+  lettering: {fact: "Rounded friendly handwritten-style comic font in white/pale-mint oval balloons with thin outlines; wavering thin tails; thought balloons cloud-style ('...Oh dear.' E03P01); yellow parchment caption boxes for place/time ('Komona City; Market day' E03P01); footnotes with asterisk in italic at page bottom; onomatopoeia hand-drawn in colors matching their source (orange 'PLOP'/'Glup', yellow 'SPLASH', red/blue/tan 'Gulp', pink music notes)", evidence: [E01P01, E01P02, E02P01, E02P04, E03P01, E03P03]}
+  panels: {fact: "Wide full-page-width horizontal panels stacked 2–3 per page with clean white gutters and thin borders is the default; frequent full-page or half-page splash panels (E02P01, E02P05, E03P03); occasional grids of 2–3 vertical panels for beats (E03P01 bottom, E03P04 bottom); each episode opens with a standalone hand-lettered 'Pepper & Carrot' title card whose ink color matches the episode palette (teal E01, brown E02, dark brown E03); artist signature/URL small in-panel (www.peppercarrot.com E01P03)", evidence: [E01P00, E01P01, E02P00, E02P01, E02P05, E03P00, E03P01, E03P04]}

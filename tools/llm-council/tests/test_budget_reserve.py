@@ -254,6 +254,46 @@ def test_reserve_refuses_over_per_query_cap(tmp_spend_dir):
         _reserve(date(2026, 7, 14), reserved_cost=5.0, per_query_cap=1.0)
 
 
+def test_force_skips_only_per_query_cap(tmp_spend_dir):
+    reservation = _reserve(
+        date(2026, 7, 14), reserved_cost=5.0, per_query_cap=1.0, force=True
+    )
+
+    assert reservation.amount == 5.0
+
+
+@pytest.mark.parametrize(
+    ("prior", "cap_name", "cap_value", "message"),
+    [
+        (6.5, "tool_daily_cap", 7.0, "daily"),
+        (39.5, "tool_monthly_cap", 40.0, "monthly"),
+        (6.5, "aggregate_daily_cap", 7.0, "aggregate daily"),
+        (39.5, "aggregate_monthly_cap", 40.0, "aggregate monthly"),
+    ],
+)
+def test_force_never_skips_daily_monthly_or_aggregate_caps(
+    tmp_spend_dir, prior, cap_name, cap_value, message
+):
+    today = date(2026, 7, 14)
+    prior_date = today if "daily" in cap_name else date(2026, 7, 1)
+    record_spend(
+        amount=prior,
+        profile="p",
+        tag="prior",
+        on_date=prior_date,
+        tool="oracle-forecast",
+    )
+
+    with pytest.raises(BudgetExceeded, match=message):
+        _reserve(
+            today,
+            reserved_cost=1.0,
+            per_query_cap=0.5,
+            force=True,
+            **{cap_name: cap_value},
+        )
+
+
 def test_reserve_refuses_over_tool_monthly_cap(tmp_spend_dir):
     record_spend(amount=39.5, profile="p", tag="prior", on_date=date(2026, 7, 1),
                  tool="oracle-forecast")
@@ -338,7 +378,11 @@ def test_settle_rejects_illegal_transition(tmp_spend_dir):
         settle(r, attempt_id="a1", generation_id="g1", usage_cost=0.1, status="settled")
 
 
-def test_reconcile_stale_retains_debit_as_unknown(tmp_spend_dir):
+def test_reconcile_stale_retains_debit_as_unknown(tmp_spend_dir, monkeypatch):
+    # Explicit legacy/degraded-owner path: Task 5 gives positively identified live owners
+    # precedence over reconciliation, while an unavailable OS start query preserves the
+    # older_than=None behavior this regression has always specified.
+    monkeypatch.setattr(budget, "_process_start_time", lambda _pid: None)
     today = date(2026, 7, 14)
     r1 = _reserve(today, reserved_cost=1.0, run_id="r1")
     r2 = _reserve(today, reserved_cost=2.0, run_id="r2")

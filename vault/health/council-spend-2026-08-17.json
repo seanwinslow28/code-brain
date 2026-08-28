@@ -1,0 +1,125 @@
+{
+  "date": "2026-08-17",
+  "total": 11.18976,
+  "runs": [
+    {
+      "amount": 11.18976,
+      "profile": "premium",
+      "tag": "premortem-aipm-curriculum",
+      "tool": "council",
+      "kind": "reservation",
+      "reservation_id": "a93ae6270c1c4cf48f52479c86b9060a",
+      "run_id": "74d12c51d42a4babb26e914e7f99214a",
+      "status": "settled",
+      "created_at": "2026-08-17T16:21:28.334407+00:00",
+      "owner_pid": 21197,
+      "owner_host": "Seans-MacBook-Pro.local",
+      "owner_started_at": "Mon Aug 17 12:21:28 2026",
+      "policy_version": 3,
+      "policy_hash": "1389632ab717ed1f981bb8eac4879061ca7998bc958a0590679a6e742aac23f2"
+    }
+  ],
+  "actuals": [
+    {
+      "reservation_id": "a93ae6270c1c4cf48f52479c86b9060a",
+      "run_id": "74d12c51d42a4babb26e914e7f99214a",
+      "attempt_id": "74d12c51d42a4babb26e914e7f99214a-01",
+      "generation_id": "gen-1786983689-qcVfswSj922PlPq28ZWJ",
+      "usage_cost": 0.04210875,
+      "status": "settled",
+      "provenance": "authoritative",
+      "recorded_at": "2026-08-17T16:22:13.403129+00:00"
+    },
+    {
+      "reservation_id": "a93ae6270c1c4cf48f52479c86b9060a",
+      "run_id": "74d12c51d42a4babb26e914e7f99214a",
+      "attempt_id": "74d12c51d42a4babb26e914e7f99214a-02",
+      "generation_id": "gen-1786983689-PjvqH098y61O4X1mIROj",
+      "usage_cost": 0.13093,
+      "status": "settled",
+      "provenance": "authoritative",
+      "recorded_at": "2026-08-17T16:22:24.831119+00:00"
+    },
+    {
+      "reservation_id": "a93ae6270c1c4cf48f52479c86b9060a",
+      "run_id": "74d12c51d42a4babb26e914e7f99214a",
+      "attempt_id": "74d12c51d42a4babb26e914e7f99214a-03",
+      "generation_id": "gen-1786983689-yzdc9EQNA7ntxG3421Km",
+      "usage_cost": 0.11043,
+      "status": "settled",
+      "provenance": "authoritative",
+      "recorded_at": "2026-08-17T16:22:38.638890+00:00"
+    },
+    {
+      "reservation_id": "a93ae6270c1c4cf48f52479c86b9060a",
+      "run_id": "74d12c51d42a4babb26e914e7f99214a",
+      "attempt_id": "74d12c51d42a4babb26e914e7f99214a-04",
+      "generation_id": "gen-1786983689-VCRkIjbW4gabE7CDARJd",
+      "usage_cost": 0.0310084,
+      "status": "settled",
+      "provenance": "authoritative",
+      "recorded_at": "2026-08-17T16:23:09.794930+00:00"
+    },
+    {
+      "reservation_id": "a93ae6270c1c4cf48f52479c86b9060a",
+      "run_id": "74d12c51d42a4babb26e914e7f99214a",
+      "attempt_id": "74d12c51d42a4babb26e914e7f99214a-05",
+      "generation_id": "gen-1786983789-k6vwx7G64zVAfE88jTJq",
+      "usage_cost": 0.106905,
+      "status": "settled",
+      "provenance": "authoritative",
+      "recorded_at": "2026-08-17T16:23:18.480971+00:00"
+    },
+    {
+      "reservation_id": "a93ae6270c1c4cf48f52479c86b9060a",
+      "run_id": "74d12c51d42a4babb26e914e7f99214a",
+      "attempt_id": "74d12c51d42a4babb26e914e7f99214a-06",
+      "generation_id": "gen-1786983790-yquIUv2bEqO2Tz99mHSn",
+      "usage_cost": 0.06882,
+      "status": "settled",
+      "provenance": "authoritative",
+      "recorded_at": "2026-08-17T16:23:18.505883+00:00"
+    },
+    {
+      "reservation_id": "a93ae6270c1c4cf48f52479c86b9060a",
+      "run_id": "74d12c51d42a4babb26e914e7f99214a",
+      "attempt_id": "74d12c51d42a4babb26e914e7f99214a-07",
+      "generation_id": "gen-1786983790-eOjIis0Q6RxCt4OOLr2K",
+      "usage_cost": 0.02701625,
+      "status": "settled",
+      "provenance": "authoritative",
+      "recorded_at": "2026-08-17T16:23:23.133647+00:00"
+    },
+    {
+      "reservation_id": "a93ae6270c1c4cf48f52479c86b9060a",
+      "run_id": "74d12c51d42a4babb26e914e7f99214a",
+      "attempt_id": "74d12c51d42a4babb26e914e7f99214a-08",
+      "generation_id": "gen-1786983803-97QIInT5b1nXOoP06XXP",
+      "usage_cost": 0.02703375,
+      "status": "settled",
+      "provenance": "authoritative",
+      "recorded_at": "2026-08-17T16:23:35.279667+00:00"
+    },
+    {
+      "reservation_id": "a93ae6270c1c4cf48f52479c86b9060a",
+      "run_id": "74d12c51d42a4babb26e914e7f99214a",
+      "attempt_id": "74d12c51d42a4babb26e914e7f99214a-09",
+      "generation_id": "gen-1786983790-lX6NbCuNO75Xjh1s1Q8y",
+      "usage_cost": 0.0282984,
+      "status": "settled",
+      "provenance": "authoritative",
+      "recorded_at": "2026-08-17T16:23:36.876370+00:00"
+    },
+    {
+      "reservation_id": "a93ae6270c1c4cf48f52479c86b9060a",
+      "run_id": "74d12c51d42a4babb26e914e7f99214a",
+      "attempt_id": "74d12c51d42a4babb26e914e7f99214a-10",
+      "generation_id": "gen-1786983816-bizQbO125apqojnlSwx7",
+      "usage_cost": 0.28584,
+      "status": "settled",
+      "provenance": "authoritative",
+      "recorded_at": "2026-08-17T16:25:27.867450+00:00"
+    }
+  ],
+  "schema_version": 2
+}

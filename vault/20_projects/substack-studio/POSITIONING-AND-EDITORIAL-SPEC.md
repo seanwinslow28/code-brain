@@ -1,162 +1,125 @@
-# Substack Studio — Positioning & Editorial Spec
+# Pencil & Prompt — Positioning & Editorial Spec
 
-**Status:** Foundation (2026-06-22), re-anchored 2026-06-29. The masthead philosophy now lives in [SOUL.md](SOUL.md) ("have the agent think like me; partner, then system"); read it first. This doc is the strategic detail beneath it. Where the two disagree, SOUL.md wins.
-**Purpose:** The strategic heart of this publication. Read this before writing a post, naming anything, or planning research. The README and CLAUDE.md derive from this doc; if they ever disagree, this wins until explicitly revised.
+**Status:** Rewritten 2026-08-05 for the divergence refocus (sidecar locks L1-L7; three research syntheses). The masthead lives in [SOUL.md](SOUL.md) ("push the agent past the median"); read it first. This doc is the strategic detail beneath it. Where the two disagree, SOUL.md wins. The README and CLAUDE.md derive from this doc; if they ever disagree, this wins until explicitly revised.
 
-> Note: this doc contains competitive positioning, not personal data. If you'd rather keep the white-space analysis off the public repo, move it to `_private/`. It's written clean either way.
+**Evidence base for every claim here:** [research/2026-08-05-prior-art-synthesis.md](research/2026-08-05-prior-art-synthesis.md) · [research/2026-08-05-competitive-check-six-territories.md](research/2026-08-05-competitive-check-six-territories.md) · [research/discovery/2026-08-05-territory-pain-validation.md](research/discovery/2026-08-05-territory-pain-validation.md). Cite from these (tier-audited) and never from raw DR grounding URLs.
+
+> Note: this doc contains competitive positioning, not personal data. It is written clean for the public repo.
 
 ---
 
-## 0. Strategic arc, partner first, system as destination (re-anchored 2026-06-29)
-
-> Read this before §1, alongside [SOUL.md](SOUL.md) (the masthead). This section was rewritten on 2026-06-29. The earlier "compete on a system framework" framing (2026-06-28) over-rotated and put the *architecture* at the front door. The framework is kept, as the **destination**, not the opener. History: [`2026-06-28-pivot-prompts-to-systems.md`](2026-06-28-pivot-prompts-to-systems.md) (the pivot, now read as evidence) and [`CONTINUATION-2026-06-29-refocus-partner-then-system.md`](CONTINUATION-2026-06-29-refocus-partner-then-system.md) (the refocus).
-
-The masthead is **have the agent think like me**, and the arc is **partner, then system, then art**: build a creative partner by brainstorming and interviewing the agent into your taste, *then* build the system on top of it, *then* make the art that is yours. The first posts are the partner on-ramp; the system framework (spec it, test it, version it, gate it) is the destination they earn.
-
-The pivot's core insight survives and feeds the destination: isolated techniques are commodity (the flagship how-to was value-gate **blocked** because its Transfer was already free), and the deeper, un-commoditized craft is **control**, treating creative AI as a system. That is true. It is just not the front door. Leading the masthead with the framework front-loaded the architecture and lost the thing the publication set out to preach. The reader transformation is "you build a partner that thinks like you, then the system that scales it," and the directions A / B / C (in the locked docs) are the **system arc**, re-mapped in SOUL.md §7.
-
 ## 1. What this publication is (one paragraph)
 
-A Substack for **creatives who are skeptical that AI can be a real creative partner** — the ones who tried it, got soulless output from a prompt or two, and walked away convinced it can't make anything with taste. The publication's job is to change their mind by *showing*, not preaching: take a creative task from soulless to genuinely good, live, and teach the method that got it there. The thesis underneath every post: **AI isn't here to replace the artist — it's a wildly talented intern with no taste yet, and your job is to teach it yours until it produces work that's recognizably *you*, on demand.** The guide is a creative technologist (Sean) who came up through real craft — animation, writing, character design — not an analyst who discovered creativity on the way to a take.
+A Substack for anyone building or living with AI who has hit the median: the models got good, and now everything they make is the same. Pencil & Prompt runs real experiments that push agents past the average, in public, and publishes the verdicts, including the failures. Each week, one real job: show the answer the model gives everyone, run one named divergence mechanism against it, capture what came out that the median run never would have produced, ship the mechanism in both tiers, and file an honest verdict. Underneath the posts sits the product: a public, versioned mechanism library where every entry carries a tested verdict against a published measurement protocol. Told funny first, useful always, by a creative PM raising a self-built fleet of agents at home, model-agnostic the whole way.
 
 ---
 
 ## 2. The reader (the one reader)
 
-**Primary — "the blocked/skeptical artist."** Non-coding creatives: illustrators, writers, animators, musicians, designers, marketers. AI-curious but burned. They believe AI output is inherently soulless and that using it is a little shameful. They start in the tools they already have (copy-paste, no install), but we **bring them into the technical**, not wall them off from it (revised 2026-06-29). Value to them = permission, method, proof, and the new craft itself. The non-coder is the on-ramp, not the ceiling (see the both-tiers value model in §6 and SOUL.md §3).
+**Primary: the median-bitten practitioner.** Writers, builders, designers, PMs, daily AI users. They use AI seriously, they have felt the convergence ("the same artificial tone, the same obvious phrasing", "I cannot stress enough how obvious it is"), and they are tips-fatigued: they have read a hundred prompt listicles and rightly suspect most of the advice is folklore. Some of it measurably is (temperature tuning and "think outside the box" directives have negligible effect on semantic diversity). What they cannot get anywhere is evidence about what actually works.
 
-**The guide, not the audience — Sean (the creative technologist).** Tony Stark + Motoko Kusanagi: a creative who learned to think like a systems architect. He's the one on screen showing them how to build their own JARVIS for their craft *without forcing them to become engineers*.
+**The guide, not the audience: Sean.** A creative PM who runs a self-built fleet of agents (the council infrastructure, the creative harness, the vault) and lives the incidents he writes about. The apparatus is real and running; the posts are captures from it, not thought experiments.
 
-**Future evolution — "the creative technologist" (audience B).** Makers who both create and build small tools. We earn them later, once the skeptic audience is established. Not a launch target.
+**Both tiers, brought along (preserved rule):** every artifact ships copy-paste for the reader in a plain chat window AND as a symlinkable `.claude` skill for the reader leveling up. The non-coder is the on-ramp, not the ceiling.
 
-**Niche discipline:** tool-agnostic (Claude / Codex / Cursor — never exclude on tool), but **not** audience-agnostic. The niche that excludes is what makes the right reader feel it's *for them*. We do not water this down to "all creators."
-
----
-
-## 3. The core belief (the soul)
-
-- AI is a **creative partner across the whole process** — brainstorm, storyboard, ideate, edit, produce — not a vending machine for finished art.
-- The skeptic's experience is **real and respected**: two prompts, mediocre output, dismissal. They didn't fail; they **quit one step too early**. The missing step is taste-transfer.
-- **Taste is teachable to the machine.** Treat it like an intern: take it under your wing, feed it the right references, tell it what good looks like, steer it off the pitfalls. It grows into a senior-level creative you can summon with one command.
-- **The demonstration is the moat.** Anyone can write "taste matters." Almost no one *shows* soulless → art in a real craft, move by move. That's the defensible thing.
+**Niche discipline:** model-agnostic (Claude / Codex / open-source, never exclude on tool), but not promise-agnostic. The promise that excludes is the evidence standard: readers who want vibes and hype have a hundred other newsletters.
 
 ---
 
-## 4. The wedge / white space (uncontested)
+## 3. The core belief (the soul, short form)
 
-Mapped against the three closest comparables (research 2026-06-22):
+- The models got good, and that is the problem: competent output that converges on the same average, strongest exactly where people do paid, constrained work.
+- Escaping the median is a buildable, testable capability, not a vibe. Mechanisms can be run, measured, and given verdicts.
+- **The mechanism is the commodity; the verdict is the product.** A post whose deliverable is a technique competes with GitHub. A post whose deliverable is a tested verdict on a technique competes with nobody.
+- Honesty is structural, not tonal: published failures, public retractions, and a measurement protocol the reader can audit.
 
-- **In The Frame / "AI for Creatives" (Don Giannatti)** — *curates* tools for creatives, weekly. Great gritty anti-hype voice; doesn't teach a deep method or build his own tools.
-- **The Creative Possible (Gabe Michael)** — *makes* AI films at an award-winning master level. Talks to other makers; never meets a skeptic where they are.
-- **Nate's Newsletter (Nate Jones)** — *teaches* AI power-use and ships a companion guide every post. Validates the tool-shipping model at scale, but the lens is analyst/power-user, not a maker's soul.
+## 4. The wedge / white space (verified 2026-08-05)
 
-**The empty intersection Sean owns:** maker's soul (real craft demos) + skeptic's-eye-level (empathetic believer) + a *teachable taste-transfer method* (not just "taste matters") + a shipped tool that kills the grind + dive-bar anti-hype voice. None of the three stand here.
+Three independent passes (DR prior-art + falsification moves, the six-territory competitive check, six discovery runs) converge on one seam:
 
-**Two cautions (from research):**
-1. "Taste" and "you won't be replaced" are **already-claimed angles** (Nate has both). Never *lead* the masthead with them — they read me-too. The moat is the demonstration + method, not the abstract premise.
-2. The technical side is **encroaching** (Nate's "Creative Just Became a Command Line"). Defense = always lead with the craft. Sean's edge is that he's a real creative first, not an analyst discovering creativity.
+- **Enterprise eval rigor is real but private** (CI eval gates, version snapshots, regression tests) and never published as a public library.
+- **Public artifacts have no evidence standard.** Prompt marketplaces, skill marketplaces (23,600+ entries, install counts as the only signal), and free adversarial tools all ship mechanisms with zero evaluation. The sharpest specimen writes it in its own README: "this project has not independently benchmarked review quality."
+- **Nate Jones (the nearest incumbent) already publishes one-off tested verdicts with honest failures.** So "we test and admit failures" is dead as a novelty claim. What he does not do, and nobody does: **cumulate**. Per-entry, versioned, retractable verdicts against a published protocol.
 
----
+**The precise claim (use this form only):** no prompt or technique library publishes per-entry tested verdicts against a published measurement protocol. Broad versions ("nobody tests", "nobody admits failures") are falsifiable and will be falsified.
 
-## 5. Voice & stance
+**Consequences:**
+1. The measurement protocol is the differentiation, not a chore before it. It publishes before Rung 1 (hard order; map S5).
+2. The credible comparison class is eval infrastructure, not prompt packs. Borrow its vocabulary: regression, gate, verdict, retraction.
+3. Nate encroaches on angle, not artifact: his tactical artifacts are paywalled, and the genuinely free equivalents (GitHub repos, Wikipedia's Signs-of-AI-writing, SEO content) are uniformly unevaluated.
 
-**Stance (locked):** empathetic believer as the **spine** — "I know exactly why you bounced; you quit one step early; here's the step." Carrying a **director's authority** inside the demos, with an **irreverent edge** that refuses to oversell (anti-hype is a trust currency with skeptics). **The dive-bar grit stays** — that's the humor and the style.
+## 5. The six territories (working set, LOOSE lock L6/L7)
 
-**Mechanics (existing system):** runs through the voice-modes chain — `storytelling-architecture` → `writing-voice-modes` (Sean Mode) → `writing-critique` → `writing-humanity-pass`. Rules: no em dashes; the ask lands sideways; ≤2 pop-culture refs from the real reference universe; no recruiter-facing self-censorship here (this is the place to let loose); anti-hype always.
+Adopted with evidence-side fates applied (f2). Any territory may be reshaped at draft time; reshapes route to a partner-session reconvene.
 
-**Anti-pattern:** sounding like an AI hype-bro. The fastest way to lose a skeptic.
+| # | Territory | Role | Fate + the rule that rides with it |
+|---|---|---|---|
+| d5 | Manufactured Opposition | **Rung #1 mechanism source** | Strongest keep: pain precision 1.00, three defensible gaps (stakes, theater-detection, heterogeneity). The free shelf ships persona prompts, all homogeneous, none measured; heterogeneous panels are the best-evidenced mechanism and Sean already runs the infrastructure. Theater-detection is a named check: did the disagreement change the output, or just perform? |
+| d2 | Stolen Methods | **Spine mechanism source** | Keep with the claim inverted: forum pain says prompt *tips* fail; the literature says structured *protocols* measurably win (CoT + personas outperforming humans on idea diversity, arXiv 2602.20408). The tips-vs-protocols gap IS the thesis. Condition: every port ships a translation-failure report, or it collapses into Zoe Scaman's unmeasured shape. |
+| d1 | Cartography of the Default | **Instrument, not a beat** | Two independent demotions (critic structural + competitive: Wikipedia's field guide cannot be out-catalogued by one person). The premise "nobody has mapped the tells" is false; what nobody has is accuracy data, and detectors "frequently flag even minimally polished text as AI-generated" (APT-Eval). The instrument: the ~20-run median census inside every rung. Evidence is writing-only; visual-tell claims are currently unevidenced. |
+| d3 | Import Duty | **Story engine only** | Demand claim killed on a perfect-precision run (zero first-person constraint-failure evidence). Survives as the comedic story engine: smuggled real-world constraints, customs-violation reports. Hard rule: a draft whose takeaway is "add constraints" gets killed. No library rung on Import Duty demand. |
+| d4 | The Input Axis | **Deep lane, reshaped to the data-hole probe** | Corpus half is the most saturated shelf checked and the closest relative of the dead premise; it must not lead. The data-hole probe (what the model confidently invents where no data exists, practitioner-facing) is CLEAR. Gate: the contaminated T3 ledger is not citable; a reframed ~$1.50 discovery re-run fires before any pain-evidence claim. |
+| d6 | Sourdough | **Serialized arc, dark-started** | Strongest evidence in the round (precision/recall 1.00/1.00; "memory amplifies sycophantic behavior... up to 25x higher sycophancy rates", Writer/ICLR 2026). The surviving white space is narrower than the old claim: benchmarks exist; a personal, longitudinal, published aged-vs-fresh record does not. Feeding started 2026-08-05, privately; the series goes public only when the first week-N blind comparison exists, debuting with receipts. |
 
----
+**Unpredicted pains logged for future angles:** fragility of centralized memory state; dependence ("a fresh session feels broken"); being falsely accused of AI as its own pain; reliability (not constraint-blindness) as what breaks deadlines; the privacy cost of feeding a personal corpus to a hosted model (the first objection a professional reader will raise, absent from all six panels).
 
-## 6. The value model (two-tier)
+## 6. Voice & stance
 
-Every post is some blend of **method + transformation + tool**, but not all three every time — that's what strangled the old cadence.
+**Stance:** the experimenter who publishes verdicts. Empathetic to the median-bitten reader (their experience is real and their skepticism is correct), carrying a builder's authority inside the captures, with the irreverent edge that refuses to oversell. **Dive-bar grit stays.** Funny first, useful always: the L1 bar is a post that opens with a story that makes a person laugh, then delivers value they come back for.
 
-- **Demo in your lane; teach a method that travels.** Demonstrate in animation/writing/visual design (where Sean has real, provable taste). Then strip the lesson of its specific craft so a musician or copywriter can run it on theirs. *The demo is specific; the method is universal.*
-- **Tools ship in both tiers, every time (revised 2026-06-29).** A copy-paste kit so anyone can start today in the tool they already have, AND the symlinkable `.claude` skill for the reader ready to level up. We teach the why and how of the technical layer, not just the result. The old "non-coder only" rule was quietly steering us toward already-solved problems; the new rule brings the reader into the craft. (Detail: SOUL.md §3-4.)
-- **Sean's growth is texture, never the pitch.** Building in public, learning to ship, the AI-PM portfolio — all of it shows through as *proof he did the work*. The reader promise is always the headline; the moment a post's headline becomes "look what I built," it repels the artist.
+**Mechanics (unchanged):** the mandatory chain, `substack-value-engine` → `storytelling-architecture` → `writing-voice-modes` (Sean Mode) → `writing-critique` → `writing-humanity-pass`. No em dashes; the ask lands sideways; anti-hype always; Sean hand-rewrites every chain draft.
 
----
+**Anti-pattern:** sounding like an AI hype-bro, or like a growth-hacker who ships the prompt and never reports back. The second is now the sharper danger, because it is the industry default this publication defines itself against.
 
-## 7. The recurring formats
+## 7. The value model
 
-> Re-anchored 2026-06-29. The current format set + the first-arc lineup live in [SOUL.md](SOUL.md) §5-6 (the partner arc + the comics-to-animation-to-music-to-editing cascade). This section keeps the detail. The set is: **the Spine** (teaching demos), **Back to Basics** (the new tool-onboarding series), **the Tool Drop**, and **Fix My Mess** (flagged for re-evaluation, may fold into the System arc's public Gate). Names are working pending a `pm-marketing-growth:product-name` pass.
+- **The Expedition is the value gate made flesh.** Median shown (Itch), mechanism run and captured (Solution), mechanism shipped both tiers with its verdict (Transfer). The capture is the post; write from the build, not after it.
+- **The verdict is the product.** Every shipped mechanism enters the library versioned, with beat / tied / lost, receipts, and the retraction rule. An entry without a verdict does not ship.
+- **Both tiers, every time.** Copy-paste kit AND the symlinkable skill.
+- **Published failures are trust currency.** A mechanism that loses to the median in public buys more credibility than three wins.
+- **Sean's growth is texture, never the pitch.** The reader promise is the headline; "look what I built" repels the reader.
 
-### Format 0 — Back to Basics *(working: "Tim the Tool Man")* — recurring, newcomer-facing — NEW 2026-06-29
-The tool-onboarding series, and the bridge that walks a non-coder into the technical world. Introduce a technical partner (skills + `.claude` first, then Pi, Hermes, Higgsfield, ComfyUI, and whatever ships next): why it is a superpower, how it works at a basic level, wired to the taste-transfer method. NOT a generic tutorial. The spin is always "this tool, in service of making the agent's taste yours." Ships both tiers.
-**Job:** onboard newcomers to the tools the Spine teaches with; a bottomless idea well as new tools ship.
+## 8. The recurring formats
 
-### Format 1 — The teaching spine *(working: "The Re-Roll" / "Direction")* — frequent, signature
-One creative task, shown **soulless first** (the exact output a skeptic would quit on), then directed move-by-move to something with a pulse. Every correction narrated = the taste being transferred. Ends with the **transferable recipe** — the method stripped of craft, runnable in plain Claude today, no install. Method + transformation fused.
-**Job:** convert skeptics, build the weekly habit, carry the relationship.
+Detail and running order live in [SERIES-COMMAND-CENTER.md](SERIES-COMMAND-CENTER.md). The set: **Building the Ladder** (weekly Expedition rungs, numbered), **Raising Agents** (sibling story series), **Unlock Hunts** (occasional tentpoles), and **the Graveyard** (standing verdict policy, not a format). Take Two and Back to Basics are retired as structures: Take Two's before/after muscle lives on as the median-vs-escaped contrast inside every rung; Back to Basics' tool-onboarding DNA folds into rungs that need a tool.
 
-### Format 2 — The tool drop *(working: "Build Logs" / "The Workshop")* — periodic, tentpole
-The "I built you a thing so you stop hand-grinding this" post. Seeded by prior teaching posts, so it lands on a primed audience. Shows the build-in-public mess (texture), then ships the tool in both tiers (copy-paste + the symlinkable skill).
-**Job:** deepest reader value, portfolio proof, the natural paywall line.
+## 9. Cadence & structure
 
-### Format 3 — The reach format: **"Fix My Mess" / Office Hours** *(locked as the concept)* — frequent, light
-A reader (or Sean, early on) submits soulless AI output; Sean directs it to good, in public. Living proof on tap, interactive (turns readers into participants), and a bottomless content well fed by real reader pain — which pairs directly with the `fusion-discovery-council` pain-mining round.
-**Job:** discovery + Notes reach, community, the path to eventually speaking to / working with the audience.
+- **Rhythm:** one rung weekly-ish, cadence gated by capture quality, never by a forced calendar. Raising Agents episodes interleave as the change-up. Unlock Hunts land when a real unlock exists.
+- **Notes run from day zero** as the reach layer (first candidates already listed in the session map).
+- **Subtitle = value prop** (locked research rule, upheld in the 2026-08-05 naming pass).
+- **The launch bundle:** Start Here + About + the origin confession (Rung 0), live together; then the protocol post (S5) before Rung 1 (S6). Hard order.
 
----
+## 10. Naming (locked)
 
-## 8. Cadence & structure
+- **Publication: Pencil & Prompt** (locked 2026-06-22, kept at the 2026-08-04 refocus, L4). The name never said "images" or "Claude"; the premise died, the name did not. A third rename would be the circling the refocus exists to end.
+- **Subtitle: "Push your AI past the average, one tested experiment at a time."** Locked 2026-08-05 (S1 naming pass, Sean's pick). Reason: it states the reader's transformation plainly (the locked subtitle rule), keeps the old subtitle's cadence for continuity through the refocus, carries the thesis in "past the average", and plants the verdict promise in "tested" without jargon. Runner-up ("Real experiments that push AI past the average. Verdicts published, failures included.") was publication-facing rather than reader-facing; its verdict language goes to Start Here and About.
+- **Series names:** Building the Ladder (the Expedition spine; Sean's own recurring phrase on the highest-attachment surface, L5) and Raising Agents (L2). "Building the ladder as I climb it" is the About frame and ritual sign-off.
+- **Back pocket:** Saturday Morning Machine, reserved as a future series name for nostalgic childhood-coded creative content. Retired bench unchanged from the 2026-06-22 pass.
 
-- **Rhythm:** teaching spine weekly · "Fix My Mess" weekly-ish (Notes/discovery) · tool drop on its own clock. **Ratio ≈ 3:1** (three teaching posts per tool drop), adjustable once real build time is known. Seeding makes the ratio self-reinforcing.
-- **Why this shape:** research is unambiguous — a recurring format readers attach to drives ~80% of audience growth and makes a publication "bingeable." This is the proven structure, with Sean's soul in every slot.
-- **Subtitle = value prop.** The masthead subtitle must state the transformation, not be clever. (Refined at naming.)
-- **"Season 1":** the existing published posts become the founding arc rather than being erased (see §10).
+## 11. The relaunch plan
 
----
+Same publication (`@seanpwins`), re-pointed; not a new account. Working order lives in [REVAMP-2026-08-05-SESSION-MAP.md](REVAMP-2026-08-05-SESSION-MAP.md):
 
-## 9. Naming
+1. ~~S1: this doc re-anchor + subtitle~~ (done 2026-08-05).
+2. **S2:** theme and image pass (does the pencil-test look survive; the mascots become the Raising Agents cast).
+3. **S3:** pages + profile cleanup (new subtitle and bio, curate restacks, unpublish the 3 old posts to drafts, custom homepage, launch-lean nav: Home · Start Here · Building the Ladder · About · GitHub · Portfolio).
+4. **S4:** the origin confession (Rung 0, launch flagship): Sean preached taste-transfer, one GPT Image 2 test disproved his own newsletter, and the real problem underneath is the median.
+5. **S5:** the measurement protocol (the artifact + the post). Hard-ordered before Rung 1; also decides where the library lives.
+6. **S6:** Rung 1, Manufactured Opposition: does arguing actually help, scored against the protocol, theater-detection named.
 
-**Direction (locked leanings):** *craft-command fusion* + *Sean's own DNA*. Tool-agnostic; should evoke direction / taste / partnership and carry the pencil-character lineage.
+## 12. What the research validated (2026-08-05 round)
 
-**Naming pass run (2026-06-22, `pm-marketing-growth:product-name`) → LOCKED.**
+- The library bet survives with the claim narrowed to cumulation (Move B: eleven clean NOs, one incumbent doing one-off rigor).
+- Heterogeneous panels are the best-evidenced divergence mechanism; homogeneous debate hits consensus collapse. Cite Hegazy 2024 (arXiv 2410.12853) WITH its vintage: a 2024 result on 2024-era models, never presented as current.
+- Morphological analysis is the sleeper rung-#2 candidate (+18.5% diversity, d ≈ 1.03, Nature Communications, confirmed verbatim): it travels to readers with one chat window.
+- Temperature tuning and "think outside the box" are folklore (negligible semantic-diversity effect). Partial encroachment exists (a free 2026-03 Medium experiment reached the same conclusion at n=20), so the rung sells on protocol and scale, not surprise.
+- Metric choice flips findings (preference-tuned models look more diverse until quality-restricted). The protocol must state its metric and its limits, honestly, at solo scale.
+- Query shape drives source quality (research-shaped 88% academic vs market-shaped 65% marketing): every published figure resolves to a primary source first, and the tier-audit (`agents-sdk/scripts/audit_dr_citations.py`) is a standing pre-citation step.
 
-- **Publication name: Pencil & Prompt** ✅ (locked 2026-06-22)
-- **Subtitle / value prop:** *"Teach the machine your taste, one creative job at a time."*
-- *Why:* fits the brand, alliterative and catchy, and branches beyond the launch niche as it grows — it plainly reads "artist working with AI." Craft-command fusion + own DNA.
+## 13. Open questions
 
-**Back pocket — Saturday Morning Machine.** Kept as a future **series** name (a sub-brand inside Pencil & Prompt, NOT the masthead), reserved for nostalgic / childhood-coded creative content: cartoons, illustrations, comic strips, newspaper-funnies — anything that reminds us of Saturday-morning childhood.
-
-**Bench (retired):** Hand-Drawn Machine, Raised by Cartoons, Intern to Auteur, Craft & Command, Studio of One, Soul in the Machine. (Skip "The Taste Layer" — "taste" is semi-claimed by Nate.)
-
-**Next:** verify domain/handle availability, then write the masthead subtitle + bio from the locked line.
-
----
-
-## 10. The relaunch plan (current Substack → new publication)
-
-Same publication (`@seanpwins`), rebranded — **not** a new account. Zero followers = nothing to lose by relaunching, no reason to abandon the handle.
-
-**Live profile audit (2026-06-22, via browser):** bio currently reads *"Product manager utilizing creativity and AI to produce results"* (off-positioning — recruiter/PM voice); 1 subscriber; 3 posts live; restacks are mostly **on-thesis** (animation + creative-AI), not noise.
-
-1. **Rewrite the bio.** The current PM line is the buttoned-up voice we're leaving. Replace with the empathetic-believer positioning once the name/subtitle lands.
-2. **Curate the restacks — don't nuke them.** Most signal exactly the right taste (Animation Obsessive's Scavengers Reign / Samurai Jack, Rohan McDonald's Risograph + desk.gif, PosterLad, "I Built a Design Team Out of AI Agents," "Designer's Essential Skills for Claude Code," the Claude Design portfolio). Keep those — ideally re-restack the best with a one-line take (a Note with a take beats a silent restack). Drop the one off-brand outlier: *"Practical PM Skill Test for a job interview"* (job-hunt frame leaking through).
-3. **Unpublish the 3 live posts (don't delete-and-lose).** Already preserved in `substack-studio`; revert to drafts so the feed is clean. Reversible. Titles for posts 1 & 2 are strong and on-voice already.
-4. **Recast, don't trash.** Posts 1 (*You Can't Prompt Taste…*) & 2 (*…Sound Like You / tomato plants*) are on-thesis → rewrite as early spine entries. Post 3 (*Correct Was Never Defined*, intent-MCP) is the most off-thesis → rework toward the creative angle or shelve for audience B.
-5. **Build the front door.** Write (a) the About page and (b) an origin/manifesto post as the new #1, straight from the soul in §3. *The single highest-impact fix.*
-
-**Order:** lock positioning + name → write About + manifesto → relaunch with the new format → re-release recast posts.
-
----
-
-## 11. What research validated (2026-06-22)
-
-- Recurring format → ~80% of growth; niche = audience + value prop reinforced every post; subtitle states the transformation.
-- Successful creative-AI publications monetize with **free spine + tools/templates behind the paywall** (Don, Nate both do this). Suggests Sean's tool drops are the natural premium tier — *monetization is an open question, parked below.*
-- Anti-hype is a growth strategy, not just a vibe.
-
-**Sources:** In The Frame (Don Giannatti); The Creative Possible (Gabe Michael); Nate's Newsletter — "The Universal AI Skill: Good Taste," "If You're Worried AI Will Replace You," "Creative Just Became a Command Line"; Build to Launch — "How to Grow on Substack in 2026"; Nate's Newsletter archive (Executive Circle MCP).
-
----
-
-## 12. Open questions / next steps
-
-1. **Naming pass** — `pm-marketing-growth:product-name` → publication name + subtitle.
-2. **Research round** — `fusion-discovery-council --lens substack` to mine real blocked-creative pain into ranked post angles (the engine for the teaching spine + "Fix My Mess"); `last30days` optional for what's hot now.
-3. **Monetization** — free spine + premium tool drops is the research-suggested shape; not yet decided. Park until naming + first relaunch.
-4. **Author the heart docs** — rewrite `README.md` and `CLAUDE.md` from this spec so any session/agent starting in `substack-studio` understands the goal and the rules.
-5. **First builds** — recast posts 1 & 2; write About + manifesto.
+1. **Where the library lives** (public repo vs claude.ai skills vs plugin): decided at S5. Research favors the Pocock-style public repo as lead magnet.
+2. **Monetization:** free spine + premium tier remains the research-suggested shape; parked until the launch bundle is live.
+3. **Stickiness as a rung:** "the field has two studies on whether homogenization persists; here is a third" is a strong future Expedition. Not masthead material (see SOUL §1).
+4. **Rung numbering vs Substack UI** (from L5's open question): settle at S3 when the section pages are built.

@@ -1,0 +1,39 @@
+{
+  "id": "20260807-201555-2a73cc",
+  "topic": "maintaining consistent quality and style across AI-assisted creative production \u2014 creators struggling to reproduce their quality bar, QA-ing AI output, keeping a series coherent over time",
+  "lens": "pm",
+  "tier": "deep",
+  "segment": "solo creators publishing serially \u2014 newsletter writers, indie animators, video creators",
+  "evidence_count": 18,
+  "verified": 3,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 3.1189,
+  "gather_status": {
+    "last30": "ok: 6 records (6 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 8 records (8 found)",
+    "reviews": "ok: 4 records (5 found)",
+    "github": "error: HTTPStatusError: HTTPStatusError(\"Client error '422 Unprocessable Entity' for url 'https://api.github.com/search/issues?q=maintaining+consistent+quality+and+style+across+AI-assisted+creative+production+%E2%80%94+creators+struggling+to+reproduce+their+quality+bar%2C+QA-ing+AI+output%2C+keeping+a+series+coherent+over+time+solo+creators+publishing+in%3Atitle%2Cbody+is%3Aissue&sort=reactions&order=desc&per_page=12'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422\")",
+    "qa": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "The supplied dates extend into 2026 and were not independently verified.",
+    "The Reddit and several social posts provide titles or unrelated statements but no usable findings about quality-control pain points.",
+    "Much of the workflow evidence comes from commercial vendor blogs, limiting independent validation.",
+    "There are no longitudinal comparisons, failure-rate metrics, or quantified estimates of how much human QA is required.",
+    "No substantive evidence measures character, visual, voice, or brand consistency across multiple installments of a series.",
+    "The evidence contains little direct creator testimony about reproducing a specific personal quality bar or house style."
+  ],
+  "contradictions": [
+    "The claim that AI output requires knowledgeable review is qualified by niche evidence that a set-it-and-forget-it email capability was considered a major time-saver for small businesses.",
+    "Version confusion is not universal: the G2 evidence says real-time co-editing and inline collaboration can eliminate version confusion and slow email chains.",
+    "The evidence credits AI tools with time-saving batch processing and broad editing options even while reporting that they can lack professional depth and be unintuitive."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 0.6667,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

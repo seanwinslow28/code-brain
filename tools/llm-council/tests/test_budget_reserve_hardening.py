@@ -65,12 +65,24 @@ def test_datetime_on_date_is_normalized_to_calendar_day(tmp_spend_dir):
     assert not list(tmp_spend_dir.glob("council-spend-2026-07-14T*.json"))
 
 
-# Finding 2 — the per-tool cap is HARD; there is no force override on check_and_reserve.
-def test_check_and_reserve_has_no_force_override(tmp_spend_dir):
-    with pytest.raises(TypeError):
-        check_and_reserve(reserved_cost=2.0, tool="oracle-forecast", tag="t",
-                          profile="p", run_id="r", on_date=date(2026, 7, 14),
-                          force=True, **_ROOMY)
+# F8b-4 — force is additive and may skip only the per-query comparison.
+def test_check_and_reserve_force_skips_per_query_and_keeps_full_debit(tmp_spend_dir):
+    reservation = check_and_reserve(
+        reserved_cost=2.0,
+        tool="oracle-forecast",
+        tag="t",
+        profile="p",
+        run_id="r",
+        on_date=date(2026, 7, 14),
+        per_query_cap=1.0,
+        tool_daily_cap=1000.0,
+        tool_monthly_cap=1000.0,
+        aggregate_daily_cap=1000.0,
+        aggregate_monthly_cap=1000.0,
+        force=True,
+    )
+
+    assert reservation.amount == 2.0
     with pytest.raises(BudgetExceeded, match="per-query"):
         _reserve(date(2026, 7, 14), reserved_cost=2.0, per_query_cap=1.0)
 

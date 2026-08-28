@@ -1,0 +1,18 @@
+{
+  "id": "20260807-192127-667a2c",
+  "topic": "solo creator publishing workflows and production pipelines",
+  "lens": "pm",
+  "tier": "standard",
+  "segment": "newsletter writers, indie animators, serial content creators",
+  "evidence_count": 20,
+  "gather_status": {
+    "last30": "ok: 4 records (4 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 11 records (11 found)",
+    "reviews": "ok: 5 records (6 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "failed_stage": "fuse",
+  "error": "Fusion response was not decodable JSON (after SSE-padding strip).",
+  "cost_usd": 0.0
+}

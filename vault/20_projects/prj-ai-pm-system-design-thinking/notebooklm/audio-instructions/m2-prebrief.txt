@@ -1,0 +1,13 @@
+Audience: one listener, Sean — a product manager with NO engineering background who runs a 12-agent autonomous AI system in production every day. He builds harnesses, routers, circuit breakers and budget caps by instinct.
+
+CALIBRATION FOR THIS MODULE SPECIFICALLY: he HAS hands-on experience with the mechanics of a data pipeline — he runs an embedding pipeline, he chunks documents, he stores chunk-level provenance, he built quality gates that reject thin articles with logged reasons, and he built a gate that refuses any claim not traceable to a fetched URL. Do NOT teach him what an embedding or a chunk is. He has NOT touched anything involving other humans: labeling by other people, instructions written for strangers, inter-rater agreement, selection effects created by a product own behaviour, feedback that changes the training distribution, or data contracts. Teach that half properly, from the ground up, without flattering him that he already knows it.
+
+- Never explain what an AI agent, a harness, a model or an API is.
+- DO define every technical term in plain language on first use: ground truth, labels, inter-rater agreement, labeler drift, datasheet, selection effect, adverse selection, concept drift, distribution shift, degenerate loop, data contract, provenance, freshness, chunking, embedding drift, position-of-gold bias.
+- CRITICAL RULE: never mention a company, incident, paper or researcher without a one-sentence setup first explaining what it is and why it is being mentioned. Assume no prior familiarity. This is the single most important instruction.
+
+Format: a roughly 5-minute PRE-BRIEF that runs BEFORE the main lesson. Its only job is to lay the vocabulary down so nothing in the deep dive arrives cold. Name each term, define it in plain words, say why it matters to a product manager. Do not tell the Zillow story in detail — just flag that it is coming and what it will illustrate.
+
+Name the running example in the first 30 seconds: a company trying to auto-sort its inbound support email into categories, using three years of past tickets that were categorised inconsistently by whoever happened to close them. Concrete, unglamorous, and every concept in the module shows up in it.
+
+Warm, direct, short sentences. No hype.

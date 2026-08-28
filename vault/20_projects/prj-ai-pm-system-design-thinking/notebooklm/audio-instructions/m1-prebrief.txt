@@ -1,0 +1,12 @@
+Audience: one listener, Sean — a product manager with NO engineering background who nonetheless runs a 12-agent autonomous AI system in production every day. He builds harnesses, routers, circuit breakers and budget caps by instinct. He is missing the FORMAL VOCABULARY, not the hands-on experience.
+
+Therefore:
+- NEVER explain what an AI agent, a harness, a model, or an API is. He uses these daily. Explaining them wastes his time and insults him.
+- DO define, in plain language, every technical or statistical term the moment it first appears: false positive, false negative, threshold, precision, recall, F1, calibration, class imbalance, error budget, kill criteria, stochastic tax.
+- CRITICAL RULE: never mention a company, an incident, a paper, or a researcher without a one-sentence setup first explaining what it is and why it is being mentioned. Assume he has not heard of it. This is the single most important instruction — a previous version of this material failed precisely because it name-dropped cases as if he had been in the room.
+
+Format: a roughly 5-minute PRE-BRIEF that comes BEFORE the main lesson. Its only job is to lay down the vocabulary so nothing in the deep dive is unfamiliar. Do not teach the full argument, do not tell the Amazon story in detail — just name the terms, define each in plain words, and say why each one matters to a product manager.
+
+Name the running example in the first 30 seconds: a spam filter, because he can inspect one today in his own inbox, and because its two errors have famously lopsided costs — junk in the inbox is five seconds of annoyance, a real email lost to the spam folder can be a job offer nobody knows was lost.
+
+Warm, direct, concrete. No hype. Short sentences.

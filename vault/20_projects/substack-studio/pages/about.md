@@ -2,27 +2,32 @@
 publication: pencil-and-prompt
 type: page
 title: "About"
-status: draft
-author_note: "Sean-authored rewrite 2026-06-27 (replaces the two earlier drafts, preserved in git history + pages/_council/). Built via brainstorm (locked husky-youth opening verbatim; dial B warm-grit; one sideways format line, no list; hybrid callback closer; Angle A 'same appetite, new feed' entry that introduces AI once in sequence, no chronology whiplash), then the full voice chain: substack-value-engine PASS -> storytelling-architecture beat map (Pixar scaffold, bent) -> writing-voice-modes Sean Mode -> writing-critique 'revise: minor' (flat-noun repetition + opener variety) -> writing-humanity-pass (zero em dashes). Sean then hand-rewrote paragraphs 2 and 5; that rewrite IS this page and is logged as a calibration anchor in writing-voice-modes/references/voice-samples.md. Mechanical proofread only (apostrophes normalized, link unescaped); prose untouched."
-itch: "Sean kept feeding the machine his own taste expecting something that felt like him; it relentlessly handed back the generic perfection it was trained on. His itch is the skeptical reader's itch."
-solution_artifact: "Anima (built it: human keeps timing/casting/taste, agents propose, never decide), the animated shorts, the agent fleet -- credibility shown sideways. The flagship Take Two #1 is the linked proof."
-transfer: "After reading, a skeptical maker knows who's talking, trusts the journey is real, sees the through-line (the childhood appetite now aimed at teaching the machine his taste), and feels invited along, not pitched at."
-visual_asset_idea: "Matched-angle transition (image pair or looping video): the back of a husky kid's head three feet from a static TV, pencil and notebook on the carpet -> the SAME angle of adult Sean at a wall of displays, agents grinding, pencil behind his ear. The appetite spine made literal; loops with the cereal-on-the-floor closer."
+status: sean-approved-ready-to-publish
+author_note: "Relaunch rewrite 2026-08-08 (S3, divergence refocus). Shape brainstormed with Sean (2 locks: bookends verbatim from his 2026-06-27 hand-rewrite; NO reference to the dead taste-transfer premise anywhere, 'none of these were posted'). Full chain: substack-value-engine PASS -> storytelling-architecture beat map (Pixar bent, 5 beats) -> writing-voice-modes Sean Mode ~80% warm grit -> writing-critique 'revise' (average/mechanism repetition; fixed) -> writing-humanity-pass (1 fix, 0 dashes). Paragraphs 1, 2 (re-ended), and 5 are Sean's own prose. 'Building the ladder as I climb it' = the locked About frame + ritual sign-off. SEAN APPROVED 2026-08-08 with one hand-edit ('grown a few grays' -> 'grown a couple of chin hairs'); edit folded into voice-samples.md as a calibration anchor. His new matched-angle image pair added same day."
+itch: "The tips-fatigued skeptic's real question before subscribing: who is this guy and why would I trust his verdicts?"
+solution_artifact: "The running apparatus shown sideways: Anima (agents propose, 'they never get to say cut'), the agent crew, the animated shorts on YouTube."
+transfer: "After reading, the reader knows who's talking, sees the lifelong appetite through-line, trusts the apparatus is real, and knows the frame: building the ladder as he climbs it."
+hero_image: "_assets/launch-2026-08/new-about-images/hero-about-1.png (top, under title) + hero-about-2.png (bottom, after closer, before links line). Sean-generated 2026-08-08, matched-angle pair: kid-at-static-TV opens, same room aged into multi-monitor builder closes — the appetite spine made literal. Supersedes hero-about.png (kept in _assets, not deleted)."
 open_items:
-  - "[Take Two #1] link: swap in the live flagship URL once published."
-  - "Capitalization: Sean wrote 'Anima'; the project's canonical name is lowercase 'anima' -- confirm which to use on the page."
+  - "[Rung 0] link: swap in the live origin-confession URL when S4 publishes."
+  - "Old draft preserved at pages/old/about-2026-06-27-taste-transfer-era.md."
+  - "Image placement is a starting point ('we'll play around with it'); adjust at publish time."
 ---
 
 # About
 
+![Husky youth, three feet from a static TV, cereal bowl in lap](../_assets/launch-2026-08/new-about-images/hero-about-1.png)
+
 I was a husky youth with an appetite for stupidity. I'd plant myself three feet from a static TV with an extra large bowl of Cinnamon Toast Crunch and mainline whatever the networks were pushing. Saturday mornings were a sacrament. My parents' living room was the church. Years went by and I used that same appetite to teach myself animation, write multiple screenplays, and piece together a few short films.
 
-It never quit. I just kept circling back for the next thing to consume and take apart. My most recent obsession has put me in front of multiple screens this time. Each one riddled with markdown files and an exhausted terminal. I went down the AI rabbit hole expecting a pulsing red eye with infinite knowledge that could read my mind and spit out perfection. Instead, I found something that would relentlessly hand over the perfection it was trained to create. This beast could draw all day. It just couldn't draw like me.
+It never quit. I just kept circling back for the next thing to consume and take apart. My most recent obsession has put me in front of multiple screens this time. Each one riddled with markdown files and an exhausted terminal. I went down the AI rabbit hole expecting a pulsing red eye with infinite knowledge that could read my mind and spit out perfection. Instead, I found something that would relentlessly hand over the perfection it was trained to create. This beast could draw all day. It just drew the same drawing for everybody.
 
-So that became the job. Not prompting harder, but teaching it my taste until what came back was recognizably mine. I believed that enough to build an entire pipeline around it, called Anima, where I keep the timing, the casting, and the taste, and a fleet of agents does the grunt work and proposes. They never get to say cut. That's mine.
+So that became the job. Not prompting harder. Shoving the thing off the middle of the road and keeping the receipts. I run the experiment, show the answer the machine hands everyone, try one move against it, and publish what actually happened. Some weeks the move wins. Some weeks the machine's first instinct wins, and I write that down too, sighing the whole time. I built an animation pipeline called Anima where a crew of agents does the grunt work and proposes. They never get to say cut. That's mine.
 
-That's the whole idea here, really. I take one real creative job, start it on the soulless first pass you'd normally bail on, and drag it move by move until it has a pulse. Then I hand you the recipe so you can run it on your own work.
+That's the whole idea here, really. I take one real creative job, show you the flat average everyone else is settling for, and drag it move by move until it has a pulse. Then I hand you the recipe with an honest grade on the box, so you can run it on your own work. I'm building the ladder as I climb it. Some rungs hold. The ones that snap get written up too.
 
-I'm still that husky youth itching to make the thing I can't stop thinking about. I've just grown a few grays and the screens have multiplied, but the appetite is the exact same. If you've still got yours, grab a bowl of cereal and pull up a spot on the floor.
+I'm still that husky youth itching to make the thing I can't stop thinking about. I've just grown a couple of chin hairs and the screens have multiplied, but the appetite is the exact same. If you've still got yours, grab a bowl of cereal and pull up a spot on the floor.
 
-*Check out the animated shorts on [YouTube](https://www.youtube.com/@seanpwinslow) · [GitHub](https://github.com/seanwinslow28) · [seanwinslow.com](https://seanwinslow.com/) · or just start with [Take Two #1].*
+![Same room, same appetite: the multi-monitor desk, pencil behind the ear](../_assets/launch-2026-08/new-about-images/hero-about-2.png)
+
+*Check out the animated shorts on [YouTube](https://www.youtube.com/@seanpwinslow) · [GitHub](https://github.com/seanwinslow28) · [seanwinslow.com](https://seanwinslow.com/) · or start with [Rung 0].*

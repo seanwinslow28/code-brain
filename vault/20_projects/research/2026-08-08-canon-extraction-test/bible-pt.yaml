@@ -1,0 +1,120 @@
+characters:
+  - id: pencil_animator_guy
+    label: "Blond stubbled young man with pencil"
+    appears_in: [PT-01, PT-02, PT-03, PT-04, PT-05, PT-06, PT-07, PT-08, PT-09, PT-10, PT-11, PT-12, PT-13, PT-14]
+    identity:
+      species_build:
+        - fact: "Human male, young adult; slim/lean build with slightly oversized head and hands relative to body (stylized cartoon proportions, roughly 5.5–6 heads tall)"
+          status: OBSERVED
+          evidence: [PT-01, PT-05, PT-09, PT-13]
+      silhouette:
+        - fact: "Narrow torso, tapered slim legs, large expressive hands; voluminous swept-up hair mass reads clearly in silhouette"
+          status: OBSERVED
+          evidence: [PT-01, PT-06, PT-11, PT-14]
+      face_hair:
+        - fact: "Dark-blond/sandy hair, tall swept-up-and-back quiff with loose strands, shorter darker undercut at sides and temples"
+          status: OBSERVED
+          evidence: [PT-01, PT-04, PT-06, PT-09, PT-12]
+        - fact: "Short scruffy stubble beard and mustache (light brown, sketchy strokes) along jaw and chin"
+          status: OBSERVED
+          evidence: [PT-01, PT-04, PT-08, PT-10]
+        - fact: "Large blue-green eyes with defined upper lids; thick brown eyebrows; long straight nose; pink-flushed cheeks"
+          status: OBSERVED
+          evidence: [PT-01, PT-06, PT-07, PT-12]
+        - fact: "Small ears mostly covered by hair sides"
+          status: INFERRED
+          evidence: [PT-04, PT-11]
+      palette:
+        hair: "warm ochre/dark blond (~#b9985f highlights, ~#8a6f45 shadows/undercut)"
+        skin: "light warm peach (~#f0d5bd) with rose cheek tint"
+        eyes: "blue-teal (~#5fa8b5)"
+        tshirt: "dark navy (~#252e45)"
+        jeans: "medium blue-gray (~#8b93a1) with darker rolled cuffs (~#5f6673)"
+        shoes: "gray-green/olive-gray canvas (~#9aa08e) with cream soles and laces"
+        pencil: "pale yellow-cream shaft, graphite tip"
+        status: OBSERVED
+        evidence: [PT-01, PT-05, PT-09, PT-13]
+      costume:
+        - item: "Plain dark navy crew-neck T-shirt, short-sleeved, loose fit, sketchy fold lines"
+          status: OBSERVED
+          evidence: [PT-01, PT-05, PT-09, PT-13]
+        - item: "Slim gray-blue jeans with visible front pockets, button/fly stitching, rolled/cuffed hems showing darker denim interior"
+          status: OBSERVED
+          evidence: [PT-01, PT-04, PT-09, PT-13]
+        - item: "Low canvas sneakers, gray-green with light soles, laces, textured side panels (one foot often shown in profile, one in 3/4)"
+          status: OBSERVED
+          evidence: [PT-01, PT-08, PT-13]
+        - item: "No accessories: no watch, hat, glasses, or jewelry visible in any frame"
+          status: OBSERVED
+          evidence: [PT-01, PT-07, PT-14]
+      distinctive_features:
+        - fact: "Signature prop: a single yellow pencil, held in right hand in nearly every frame; also tucked behind back (PT-09) and wielded like a wand/brush during the drawing action (PT-11 through PT-14)"
+          status: OBSERVED
+          evidence: [PT-01, PT-06, PT-09, PT-11, PT-14]
+        - fact: "Faint circular construction/joint marks remain visible on elbows, knees, and hand knuckles in the finished frames"
+          status: OBSERVED
+          evidence: [PT-01, PT-05, PT-11, PT-13]
+      anatomy_notes:
+        - fact: "Two arms, two legs in all frames; 5 fingers per hand (thumb + 4 fingers countable on splayed left hand in PT-11, PT-12, PT-13, PT-14 and on thumbs-up right hand in PT-09, PT-10)"
+          status: OBSERVED
+          evidence: [PT-09, PT-10, PT-11, PT-12, PT-13, PT-14]
+        - fact: "PT-11 shows FIVE apparent right arms — one solid + four ghosted/faded duplicates fanned along an arc; these are animation smear-multiples of the single right arm, not extra anatomy (fully opaque single arm in adjacent frames PT-12 through PT-14)"
+          status: OBSERVED
+          evidence: [PT-11, PT-12, PT-13]
+        - fact: "Per-view visibility: in front/idle poses both arms visible (PT-01 to PT-08); PT-09 hides the left arm behind the back (pencil tip peeking at hip); PT-11 to PT-14 are 3/4-back torso views with both arms extended"
+          status: OBSERVED
+          evidence: [PT-01, PT-09, PT-11, PT-14]
+    states:
+      - name: idle_fidget
+        description: "Standing, weight on left leg, right toe pointed; both hands at chest fiddling with pencil; expressions cycle smile → glance down → concerned frown"
+        evidence: [PT-01, PT-02, PT-03, PT-04, PT-05]
+        status: OBSERVED
+      - name: realization_gesture
+        description: "Looks up, mouth open, left hand raised open-palmed; pencil held loosely in right hand; shifts to grin (A-3b/A-4 labels)"
+        evidence: [PT-06, PT-07]
+        status: OBSERVED
+      - name: thumbs_up_confidence
+        description: "Thumbs-up poses — over-shoulder thumb jerk, full arm-extended wink + thumb, and squint/determined near-chest thumb; pencil kept in other hand or behind back"
+        evidence: [PT-08, PT-09, PT-10]
+        status: OBSERVED
+      - name: drawing_flourish
+        description: "Dynamic 3/4-back action pose, right arm sweeping the pencil through large arcs with speed-lines and (in PT-11) multiple ghosted arm positions; left arm trailing behind, knees bent, grinning"
+        evidence: [PT-11, PT-12, PT-13, PT-14]
+        status: OBSERVED
+    role:
+      - fact: "Protagonist/solo performer of this act; an artist-animator figure whose pencil is the central prop and whose act arcs from nervous fidgeting → resolve → exuberant drawing"
+        status: INFERRED
+        evidence: [PT-01, PT-04, PT-09, PT-14]
+
+  - note: "No other recurring characters observed; all 14 frames contain only this one figure."
+    status: OBSERVED
+    evidence: [PT-01, PT-14]
+
+art_register:
+  line_quality:
+    - fact: "Loose graphite/pencil-style digital linework: variable-weight sketchy contours, multiple overlapping strokes, hatching for stubble/hair/fabric folds; lines left rough rather than cleaned"
+      status: OBSERVED
+      evidence: [PT-01, PT-04, PT-11, PT-13]
+  color_treatment:
+    - fact: "Soft flat color washes laid under the sketch lines (tinted-sketch register); colors slightly desaturated, edges loose and not fully contained by linework; graphite shading visible through the color"
+      status: OBSERVED
+      evidence: [PT-01, PT-05, PT-09, PT-13]
+  shading_style:
+    - fact: "Minimal shading: pencil hatch/tone on shirt folds and jean creases, light blush tint on cheeks/nose; no hard cast shadows on the figure; simple loose horizontal pencil-line ground shadow beneath the feet"
+      status: OBSERVED
+      evidence: [PT-01, PT-04, PT-08, PT-13]
+  background_paper:
+    - fact: "Cream/off-white animation-paper background with visible paper grain, speckles, smudges and edge-stains; three round registration punch holes along the bottom edge of every frame; no scenery"
+      status: OBSERVED
+      evidence: [PT-01, PT-07, PT-10, PT-14]
+  construction_line_conventions:
+    - fact: "Construction geometry deliberately left visible: circle joints at elbows/knees/knuckles, faint eyeline/guide ticks near the head, rough underdrawing strokes beneath final lines"
+      status: OBSERVED
+      evidence: [PT-01, PT-05, PT-06, PT-11]
+    - fact: "Frame labels hand-written top-left in circled pencil notation (A-2, A-2b, A-2c, A-2d, A-3, A-3b, A-4, A-4b, A-5, A-4c, A-4d, A-6) — scene-A numbering with letter suffixes for in-betweens; A-4b appears on two frames (PT-08, PT-10) and A-6 on two frames (PT-13, PT-14)"
+      status: OBSERVED
+      evidence: [PT-01, PT-02, PT-06, PT-08, PT-10, PT-13, PT-14]
+  motion_conventions:
+    - fact: "Fast action drawn with traditional-animation devices: sweeping pencil arc/speed lines around the moving arm and body, and ghosted semi-transparent multiples of the limb within one frame"
+      status: OBSERVED
+      evidence: [PT-11, PT-12, PT-13, PT-14]

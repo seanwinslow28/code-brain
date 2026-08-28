@@ -2561,8 +2561,18 @@ git commit -m "feat(job-feed): markdown roll-up renderer with frontmatter idempo
 Create `vault/20_projects/prj-job-hunt-2026/job-feed/watchlist.yaml` exactly as the spec lists:
 
 ```yaml
-# Job-feed agent watchlist — REDACTED 2026-08-11 (history scrubbed).
-# Private target list; lives only at the gitignored watchlist.yaml path.
+# Job-feed agent watchlist — REDACTED 2026-08-11.
+#
+# The real file lives at
+#   vault/20_projects/prj-job-hunt-2026/job-feed/watchlist.yaml
+# which is gitignored under the PRIVACY LAYER block (CLAUDE.md rule 9).
+# It previously appeared here in full: 48 company slugs across 6
+# buckets, i.e. the private target-employer list reproduced verbatim in
+# a public planning doc. The structure below is what the agent needs;
+# the contents are deliberately not in this repo.
+
+<bucket_name>:          # e.g. a sector or geography grouping
+  - <company-ats-slug>  # Greenhouse -> Lever -> Ashby auto-detection
 ```
 
 - [ ] **Step 13.2: Write failing test**

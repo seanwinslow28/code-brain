@@ -1,0 +1,32 @@
+{
+  "pt": {
+    "PT-01.png": "PT_A1_F01_key.png",
+    "PT-02.png": "PT_A1_F01toF06_IB01.png",
+    "PT-03.png": "PT_A1_F01toF06_IB02.png",
+    "PT-04.png": "PT_A1_F01toF06_IB03.png",
+    "PT-05.png": "PT_A1_F06_key.png",
+    "PT-06.png": "PT_A1_F06toF10_IB01.png",
+    "PT-07.png": "PT_A1_F10_key.png",
+    "PT-08.png": "PT_A1_F10toF13_IB01.png",
+    "PT-09.png": "PT_A1_F13_key.png",
+    "PT-10.png": "PT_A1_F13toF18_IB01.png",
+    "PT-11.png": "PT_A1_F13toF18_IB02.png",
+    "PT-12.png": "PT_A1_F13toF18_IB03.png",
+    "PT-13.png": "PT_A1_F18_key.png",
+    "PT-14.png": "PT_A1_F20_key.png"
+  },
+  "gm": {
+    "GM-01.png": "kid-daytime-wide.png",
+    "GM-02.png": "kid-daytime-master_turnaround.png",
+    "GM-03.png": "grandma-register-primal_cartoon.png",
+    "GM-04.png": "kid-wimpy-primal.png",
+    "GM-05.png": "kid-wimpy-warm.png",
+    "GM-06.png": "kid-daytime-turnaround.png",
+    "GM-07.png": "register-primal_cartoon--grandma-old_with_kid.png",
+    "GM-08.png": "grandma-young-warrior.png",
+    "GM-09.png": "kid-daytime-candid.png",
+    "GM-10.png": "grandma-old_with_kid.png",
+    "GM-11.png": "grandma-register-jack.png",
+    "GM-12.png": "register-jack--grandma-old_with_kid.png"
+  }
+}

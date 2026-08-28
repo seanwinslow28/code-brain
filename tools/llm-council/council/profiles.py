@@ -11,8 +11,8 @@ class Profile:
     max_cost_per_query: float
 
 
-# Model IDs and caps are sourced from model-selection-2026-05-14.md.
-# Update both files together; this is the single source of truth at runtime.
+# Model IDs are sourced from model-selection-2026-05-14.md. Per-query caps were resized
+# by Sean's F8b Task 3c approval on 2026-07-18 and must remain enumerated in cap_policy.json.
 PROFILES: dict[str, Profile] = {
     "premium": Profile(
         name="premium",
@@ -23,7 +23,7 @@ PROFILES: dict[str, Profile] = {
             "x-ai/grok-4.5",
         ),
         chairman="anthropic/claude-opus-4.7",
-        max_cost_per_query=1.00,
+        max_cost_per_query=11.50,
     ),
     "variance": Profile(
         name="variance",
@@ -34,12 +34,13 @@ PROFILES: dict[str, Profile] = {
             "mistralai/mistral-medium-3-5",
         ),
         chairman="~anthropic/claude-sonnet-latest",
-        max_cost_per_query=0.40,
+        max_cost_per_query=5.50,
     ),
     # Task 19 (A6) — Mock Interview grader. 4 panelists, Sonnet swapped in for Grok
     # ("speed over variance" per the roadmap spec note); keeping 4 avoids a prompts.py
     # refactor (FANOUT/CHAIRMAN system prompts hardcode "four"). Different RLHF lineages
-    # (Opus / GPT / Gemini / Sonnet) give calibrated interview scores. $0.40/query cap.
+    # (Opus / GPT / Gemini / Sonnet) give calibrated interview scores. The F8b Task 3c
+    # approval on 2026-07-18 resized this profile's per-query cap to $13.00.
     "interview_grader": Profile(
         name="interview_grader",
         models=(
@@ -49,7 +50,7 @@ PROFILES: dict[str, Profile] = {
             "~anthropic/claude-sonnet-latest",   # speed proxy (replaces Grok 4.20)
         ),
         chairman="anthropic/claude-opus-4.7",
-        max_cost_per_query=0.40,
+        max_cost_per_query=13.00,
     ),
 }
 

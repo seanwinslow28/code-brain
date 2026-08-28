@@ -1,0 +1,24 @@
+Audience: one listener, Sean — a product manager with NO engineering background who runs a 12-agent autonomous AI system in production every day.
+
+CALIBRATION FOR THIS MODULE: this is the module where he already knows the most. He has BUILT, without knowing the names: a cost-aware router with a fail-closed policy (an off-hours miss raises an error rather than silently billing a paid API), a circuit breaker, idempotent retry with typed deferral, a stop-reason taxonomy, a pre-flight budget check that projects month-to-date plus predicted cost and refuses BEFORE the call, hierarchical cost caps, a quality gate that logs its rejection reasons, a grounding gate that drops any claim not traceable to a fetched URL, capability deny-lists on read-only agents, and hard policy gates that run before an action rather than asking nicely in a prompt. NAME these things for him and tell him he already built them — that recognition is the point of the module. Do NOT teach him what an agent, a harness, a model, an API or a router is.
+
+What he has NOT built and must be taught from zero: a tool registry, session persistence and resumability, workflow state as distinct from conversation state, and ANY threat modelling whatsoever. He runs tool-calling agents with filesystem and network access and connected MCP servers and has never asked what an attacker could make them do.
+
+- DO define every term in plain language on first use: workflow vs agent, compounding error, tool registry, trust tiers, defense in depth, idempotency, stop-reason taxonomy, determinism boundary, frozen vs variable, CACE, glue code, pipeline jungle, undeclared consumers, STRIDE, prompt injection, context poisoning, goal hijacking.
+- CRITICAL RULE: never mention a company, incident, paper, researcher or tool without a one-sentence setup first explaining what it is and why it is being mentioned. Assume no prior familiarity. This is the single most important instruction.
+
+Format: a genuine DEBATE, argued forcefully from both sides, with no premature resolution.
+
+The motion: "BUILD IT AS AN AGENT."
+
+A team is building the contract-question assistant described in the pre-brief. They can build it as a WORKFLOW — fixed steps they choose: classify the question, retrieve clauses, draft an answer, verify every citation resolves, return or escalate — or as an AGENT that is given the tools and decides its own sequence.
+
+Side A argues AGENT: real contract questions are not uniform and a fixed pipeline will be wrong for the long tail; users ask compound questions no predetermined sequence anticipates; the agent can recover from a bad retrieval by trying a different query where a workflow just returns nothing; capability is improving fast enough that a rigid pipeline is technical debt on arrival; and you cannot enumerate the steps for a task you do not yet understand.
+
+Side B argues WORKFLOW: the structure here IS stable — every question is retrieve, ground, cite, verify — so the flexibility is being bought for a case that may not exist; compounding error is arithmetic, and ten autonomous steps at 95 percent each is about 60 percent end to end, which in a legal context means a wrong citation with a confident tone; a workflow fails at a step you can name while an agent fails by taking nineteen individually-reasonable steps to somewhere expensive; and every failure mode gets harder to attribute the moment the model chooses the sequence.
+
+Have them genuinely engage. Side A should press on the real cost of a system that cannot handle the question the user actually asked. Side B should press on attributability and on the fact that in a regulated context an unexplainable path is not merely inconvenient.
+
+Land not on a winner but on what would settle it — the specific facts that turn this into a decision. What proportion of real questions the fixed path actually handles; what a wrong citation costs and who bears it; whether the team can attribute a failure when it happens. Make clear that naming those facts, rather than picking a side, is what competence looks like.
+
+Two distinct voices, real disagreement, no strawmen.

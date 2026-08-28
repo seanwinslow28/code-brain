@@ -1,15 +1,31 @@
 # Vault Synthesizer — Eval Suite
 
-A 10-case binary pass/fail eval suite for a local Qwen3-14B vault synthesizer
-agent. Cases were grounded in 17 days of real production logs, not imagined
-failure modes. Built solo over two days as a portfolio artifact during a job
-search; the discipline transferred from Hamel Husain and Shreya Shankar's
-canon and Anthropic's "Demystifying Agent Evals" playbook.
+A binary pass/fail eval suite for a local Qwen3-14B vault synthesizer agent.
+**14 active cases** (`vs-012`…`vs-025`) plus **11 deferred** in
+[`deferred-cases.yaml`](deferred-cases.yaml) — 25 written. Cases were grounded
+in 17 days of real production logs, not imagined failure modes. Built solo over
+two days as a portfolio artifact during a job search; the discipline
+transferred from Hamel Husain and Shreya Shankar's canon and Anthropic's
+"Demystifying Agent Evals" playbook.
 
-> **This suite ships intentionally red.** ~80% of cases fail today by design
-> — each ❌ is a real production failure mode the suite catches, not a broken
-> eval. The pass rate jumps after the Workstream B synthesizer fix lands. See
-> `EXPLANATION.md` for the why.
+**Current: 10/14 passing (71%)** — 1 fail (`vs-017`), 3 skipped with named
+`skip_reason` fields. Last run 2026-08-11; see [`last-run.md`](last-run.md).
+
+> **This suite shipped intentionally red** and is still partly red by design.
+> Each ❌ is a real production failure mode the suite catches, not a broken
+> eval. See [`EXPLANATION.md`](EXPLANATION.md) for the why.
+
+> **Suite size, stated honestly.** Anthropic's own guidance is that *"20-50
+> simple tasks drawn from real failures is a great start,"* and their
+> multi-agent eval began at about 20 queries. 14 wired cases is below that
+> floor. It is the same order of magnitude, not the same sport — and the
+> deferred 11 are named blockers, not aspirations.
+
+> **The run record is not continuous.** `last-run.md` stood at 2026-05-28
+> across a 192-line synthesizer change (commit `0f0213b`, 2026-07-05) before a
+> 2026-08-11 audit re-ran it. Nothing had regressed — the result was identical
+> — but this suite is a manual pre-ship gate, not a scheduled job, and
+> "no synthesizer change ships without it" would overstate the discipline.
 
 ## Quickstart
 
@@ -22,6 +38,10 @@ cd agents-sdk && PYTHONPATH=. .venv/bin/python3 -m pytest \
 prefix is mandatory.)
 
 ## Current baseline
+
+**Now (2026-08-11): 10/14 (71%)** on the 14 active cases — 1 fail (`vs-017`), 3
+skipped. The history below is what got it here; the suite was 10 cases until
+2026-05-27, so the `/10` denominators are period-correct, not stale.
 
 **Pre-fix (Workstream A ship, 2026-05-22): 1/10 (10%).** 7 cases red by design + vs-020 passing on the static fixture parity check. Each red case named a specific failure mode the synthesizer fix needed to address. See [`traces/baseline-run-2026-05-12.md`](traces/baseline-run-2026-05-12.md) for the per-case classification.
 

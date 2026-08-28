@@ -95,11 +95,14 @@ agents-sdk/logs/*.log
 
 # LLM Council spend tracking — private cost data
 vault/health/council-spend-*.json
+vault/health/.council-spend-*.lock
 
 # Local TTS — model weights and generated audio
 agents-sdk/models/**/*.onnx
 agents-sdk/models/**/*.bin
 vault/90_system/audio/*.mp3
+vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/*/*.mp3
+vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/*/*.mp4
 !vault/90_system/audio/.gitkeep
 
 # Discovery E1 NLI entailment model weights — optional local model, never commit
@@ -128,6 +131,17 @@ AGENTS.md
 # Runtime writers: job_feed.py, daily_driver.py, mock_interview_loop.py,
 # substack_drafter.py (paths unchanged; they read/write on-disk, not via git).
 vault/20_projects/prj-job-hunt-2026/
+# 2026-08 revamp home (resumes, campaign strategy) — same private class as above.
+vault/20_projects/prj-job-hunt-2026-REVAMP/
+
+# Job-feed run manifests — added 2026-08-11 after an independent privacy pass.
+# These were TRACKED AND PUSHED, and their runs[].failed_pollers entries name
+# target companies as literal `ats:<slug>` values — 69 distinct companies, i.e.
+# the whole watchlist above, leaked through a side channel while watchlist.yaml
+# itself was correctly ignored. The fleet board reads these from disk
+# (build.py: VAULT = Path.home()/"Code-Brain/code-brain/vault"), never from git,
+# so untracking them costs the board nothing. History scrubbed the same day.
+vault/health/job-feed-manifest-*.json
 
 # Substack Studio private lane — the project at vault/20_projects/substack-studio/ is TRACKED
 # (public); only its _private/ subdir is local-only, for sensitive drafts/source kept off GitHub.
@@ -149,6 +163,12 @@ vault/05_atlas/operating-models/
 # future notes stay local-only.
 vault/10_timeline/
 
+# Daily notes moved out of vault/10_timeline/daily/ to vault/daily/ on
+# 2026-08-11 and the rule above did not follow them, leaving the personal
+# log outside the private layer for two weeks (never committed; caught
+# 2026-08-26). Same content, same reason, so the same rule applies here.
+vault/daily/
+
 # Personal source material & profiles (consolidated into the job-hunt home
 # on disk; rules guard against re-staging from any path)
 _inputs/
@@ -163,6 +183,7 @@ personal-context-v2-interview-prompt.md
 .claude/skills/life-admin/references/
 .claude/skills/writing-voice-modes/references/
 .claude/skills/writing-voice-modes/drafts/
+.claude/skills/creative-partner/references/private/
 
 # Employer-confidential (The Block) — archived reference, local-only
 vault/30_domains/product-management/the-block-meetings-granola-notes/
@@ -171,6 +192,57 @@ vault/60_archive/operating-models-the-block-2026-05/
 
 # Archived personal notes (Apple Notes import)
 vault/60_archive/apple-notes-personal/
+
+# Paid/subscriber source clips (2026-07-16) — full-text captures of paid
+# newsletter/community content (Nate B Jones Executive Circle, paid course
+# material). Short attributed quotes in briefs/ledgers are fine; the full
+# clips carry the publisher's do-not-share terms and stay local-only.
+# Guards against vault auto-commit sweeps (root cause of the 2026-07-14
+# exposure removed in PR #131).
+vault/00_inbox/Claude-Hermes-Inspired-Memory-Plan.md
+vault/00_inbox/PM-SKILLS-2.0.md
+vault/**/Executive-Circle-*.md
+
+# Systemcraft private brain (2026-08-22, build map GitHub #142) — the studio's
+# machinery (bench, skill scaffold, templates, README) is tracked publicly;
+# its corpus (free-canon distillates + book-to-skill ingests, derivative of
+# licensed sources) and decision ledger (real product and eventually
+# employer-confidential designs) are local-only. Never `git add` these;
+# book-derived text never lands in tracked files.
+systemcraft/corpus/
+systemcraft/ledger/
+# Guard: purchased ebook files must never enter the tree (canonical home is
+# ~/Books/systemcraft/, outside the repo; Sean dropped them here once, 2026-08-24)
+systemcraft/books/
+*.epub
+
+# Content Machine private brain (2026-08-24, build map GitHub #158) — the
+# machine itself (.claude/skills/content-machine/, README, contracts) is
+# tracked publicly; its private brain is local-only. The corpus is verbatim
+# Sean — raw interview answers, hand-edits, pre-AI prose — and is the
+# irreplaceable input the whole machine reads from. The ledger holds the
+# consent-gated lessons loop, the cheese bank the labeled negative specimens,
+# do-not-promote.md the subjects Sean has ruled off-limits, and
+# reference-universe.md the personal-history and pop-culture library the
+# voice pass draws anchors from (merged from two elicitations per #174).
+# Given its own home (NOT under .claude/skills/writing-voice-modes/references/,
+# which L2/L10 schedule for demolition) per wayfinder ticket #160.
+# Never `git add` these; never paste their contents into a tracked file or a
+# GitHub issue.
+creative-studio/content-machine/corpus/
+creative-studio/content-machine/ledger/
+creative-studio/content-machine/cheese-bank/
+creative-studio/content-machine/reference-universe.md
+creative-studio/content-machine/do-not-promote.md
+creative-studio/content-machine/transcripts/
+# Coined-lines ledger (#162): the one-artifact rule needs a record of his best
+# lines and which piece spent each one. Public repo, so the record stays local.
+creative-studio/content-machine/coined-lines.md
+# Oracle ideas bank (#169): banked spike cards quote Sean's commits, dailies,
+# partner-session sidecars and fleet manifests. It lives here rather than in a
+# vault note because vault/20_projects/substack-studio/ is a tracked public
+# path, and an ideas note there would publish the sweep a card at a time.
+creative-studio/content-machine/ideas-bank.md
 
 # ════════════════════════════════════════════════════════════════════════
 # BLOAT GUARDS — recruiter-readiness cleanup 2026-06-10

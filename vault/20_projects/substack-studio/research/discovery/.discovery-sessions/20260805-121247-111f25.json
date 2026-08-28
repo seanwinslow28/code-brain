@@ -1,0 +1,34 @@
+{
+  "id": "20260805-121247-111f25",
+  "topic": "people whose AI output sounds generic because the model has never met them, who cannot figure out how to build and feed it a personal corpus of their own work, and who hit confident fabrication in the places where no data exists",
+  "lens": "substack",
+  "tier": "standard",
+  "segment": "writer",
+  "evidence_count": 39,
+  "verified": 3,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 4.3621,
+  "gather_status": {
+    "last30": "ok: 9 records (9 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 12 records (12 found)",
+    "reviews": "ok: 3 records (4 found)",
+    "github": "error: HTTPStatusError: HTTPStatusError(\"Client error '422 Unprocessable Entity' for url 'https://api.github.com/search/issues?q=people+whose+AI+output+sounds+generic+because+the+model+has+never+met+them%2C+who+cannot+figure+out+how+to+build+and+feed+it+a+personal+corpus+of+their+own+work%2C+and+who+hit+confident+fabrication+in+the+places+where+no+in%3Atitle%2Cbody+is%3Aissue&sort=reactions&order=desc&per_page=12'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422\")"
+  },
+  "blind_spots": [
+    "Data privacy and intellectual property concerns are surprisingly absent; there is no discussion regarding the risks of feeding highly personal viewpoints, writing samples, or proprietary business logic into external LLMs to fix the generic output.",
+    "The diagnosis treats 'voice' largely as an injection of static parameters (samples and banned phrases) but ignores that a writer's authentic voice dynamically evolves based on audience and changing emotional context.",
+    "The evidence thoroughly diagnoses the need to supply a personal corpus ('samples, positions, and banned phrases') but entirely glosses over the severe technical friction (RAG orchestration, context limits, privacy concerns) that prevents non-developers from safely building and managing this memory bank."
+  ],
+  "contradictions": [
+    "Accountability contradiction: Multiple sources blame the user's lack of inputs ('the problem was never the model, it was the memory' and 'The tools didn't fail'), which directly contradicts other sources reporting fundamental reasoning failures within the model itself ('lack of common sense on the AI's part' and the fact that it 'fabricates confident details exactly where their own data runs out').",
+    "Prompting methodology contradiction: While the community continually questions test methods regarding prompts ('Why are AI model tests always the same generic prompts?'), another source definitively rejects prompting-by-description altogether, stating 'Adjectives cannot fix it : describing a voice produces beige,' suggesting standard conversational prompting is fundamentally the wrong paradigm for solving tone."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 0.5652,
+  "citation_recall": 0.0,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

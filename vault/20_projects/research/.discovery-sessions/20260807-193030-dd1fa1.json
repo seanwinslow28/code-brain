@@ -1,0 +1,40 @@
+{
+  "id": "20260807-193030-dd1fa1",
+  "topic": "gamifying everyday life \u2014 habits, chores, learning, parenting, fitness, work",
+  "lens": "pm",
+  "tier": "deep",
+  "segment": "",
+  "evidence_count": 24,
+  "verified": 3,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 3.5523,
+  "gather_status": {
+    "last30": "ok: 16 records (16 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 3 records (3 found)",
+    "reviews": "ok: 5 records (5 found)",
+    "github": "ok: 0 records (0 found)",
+    "qa": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "There is no evidence about pricing, subscriptions, privacy, notifications, accessibility, social competition, rewards, cheating, or cross-device synchronization.",
+    "The statement that an avatar is harmed after missed tasks describes a mechanic but does not establish that users experience it as painful or demotivating.",
+    "Most dated evidence is labeled 2026, so its chronology or availability cannot be independently verified from the supplied material.",
+    "The evidence provides almost no longitudinal user outcomes, retention metrics, adherence rates, or comparisons with non-gamified approaches.",
+    "No direct evidence describes pain points specific to chores, learning, parenting, fitness, or workplace gamification.",
+    "Several positive claims about gamification come from social posts or editorial pages rather than detailed user accounts."
+  ],
+  "contradictions": [
+    "Gamification is described positively as making habits \u201ceasy to engage\u201d and routines healthier, while another source says long-term retention remains a struggle; the evidence does not establish whether initial engagement persists.",
+    "The Self Control review says the product helped stop random YouTube browsing while simultaneously reporting a missing schedule feature, showing efficacy despite limited flexibility.",
+    "Punishing missed tasks through avatar damage may increase stakes, but the evidence contains no user reaction establishing whether this is motivating or discouraging.",
+    "The habit post advises not taking a phone to bed while apparently depicting phone use in bed, which commenters identify as internally inconsistent."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 0.3333,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

@@ -1,0 +1,33 @@
+{
+  "id": "20260805-120825-38c6b7",
+  "topic": "people frustrated that AI plans, proposals, and drafts ignore real-world constraints like budget, deadlines, team politics, physical limits, and social cost, so the frictionless output is unusable in practice",
+  "lens": "substack",
+  "tier": "standard",
+  "segment": "maker",
+  "evidence_count": 31,
+  "verified": 3,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 3.5584,
+  "gather_status": {
+    "last30": "ok: 24 records (24 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 5 records (5 found)",
+    "reviews": "ok: 2 records (2 found)",
+    "github": "error: HTTPStatusError: HTTPStatusError(\"Client error '422 Unprocessable Entity' for url 'https://api.github.com/search/issues?q=people+frustrated+that+AI+plans%2C+proposals%2C+and+drafts+ignore+real-world+constraints+like+budget%2C+deadlines%2C+team+politics%2C+physical+limits%2C+and+social+cost%2C+so+the+frictionless+output+is+unusable+in+practice+maker+in%3Atitle%2Cbody+is%3Aissue&sort=reactions&order=desc&per_page=12'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422\")"
+  },
+  "blind_spots": [
+    "No direct, first-person testimonials from practitioners describing a specific instance where an AI-generated plan failed strictly due to budget or political constraints; the available evidence relies on conceptual articles.",
+    "The generic r/antiai venting heavily focuses on moral issues, ecological impact, 'soulless' quality, and hallucinations, failing to provide actionable signal regarding the specific topic of real-world business constraints like budgets or deadlines.",
+    "There is no evidence discussing the financial cost or wasted labor required for human workers to manually correct or constrain AI-generated plans."
+  ],
+  "contradictions": [
+    "While the core topic assumes the flaw lies with the AI models ignoring real-world constraints, one source directly contradicts this by stating 'The AI Bottleneck Isn't the Model. It's Your Team.' (https://x.com/hectorarriolai/status/2080829336295207200), shifting the blame for practical failure from the AI to human implementation."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 0.3333,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

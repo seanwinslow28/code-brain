@@ -1,8 +1,6 @@
 # tests/discovery/test_panel_vs_single_cli.py
 import json
-from pathlib import Path
 
-import pytest
 from click.testing import CliRunner
 
 from council.budget import BudgetExceeded
@@ -22,7 +20,7 @@ def _result():
 
 
 def test_write_artifacts_emits_all_files_and_blind_key(tmp_path):
-    paths = _write_artifacts(tmp_path, _result(), topic="t")
+    _write_artifacts(tmp_path, _result(), topic="t")
     for name in ("bundle.json", "arm-A.json", "arm-B.json", "blind-rating.md", "key.json"):
         assert (tmp_path / name).exists(), name
     # bundle round-trips
@@ -45,9 +43,9 @@ def test_write_artifacts_emits_all_files_and_blind_key(tmp_path):
 # ---------------------------------------------------------------------------
 
 def test_cli_preflight_rejection_exits_2(monkeypatch):
-    """When preflight_tool raises BudgetExceeded the CLI must exit with code 2."""
+    """When locked admission raises BudgetExceeded the CLI must exit with code 2."""
     monkeypatch.setattr(
-        "experiments.panel_vs_single.preflight_tool",
+        "experiments.panel_vs_single.budget.check_and_reserve",
         lambda **kw: (_ for _ in ()).throw(BudgetExceeded("nope")),
     )
     res = CliRunner().invoke(main, ["--yes"])
@@ -55,13 +53,13 @@ def test_cli_preflight_rejection_exits_2(monkeypatch):
 
 
 def test_cli_decline_exits_1():
-    """With --skip-budget-check and the user answering 'n', exit code must be 1."""
-    res = CliRunner().invoke(main, ["--skip-budget-check"], input="n\n")
+    """Answering 'n' exits before creating a durable reservation."""
+    res = CliRunner().invoke(main, [], input="n\n")
     assert res.exit_code == 1, res.output
 
 
-def test_cli_happy_path_writes_artifacts(tmp_path, monkeypatch):
-    """With --yes --skip-budget-check the CLI writes blind-rating.md and key.json."""
+def test_cli_happy_path_writes_artifacts(tmp_path, monkeypatch, tmp_spend_dir):
+    """With --yes the reserve-backed CLI writes blind-rating.md and key.json."""
     b = EvidenceBundle()
     b.add(EvidenceRecord(source_type="web", source_name="X",
                          url="https://e.com/a", date="", quote="q"))
@@ -84,7 +82,7 @@ def test_cli_happy_path_writes_artifacts(tmp_path, monkeypatch):
 
     out_dir = tmp_path / "run-out"
     res = CliRunner().invoke(main, [
-        "--yes", "--skip-budget-check", "--out", str(out_dir),
+        "--yes", "--out", str(out_dir),
     ])
     assert res.exit_code == 0, res.output
     assert (out_dir / "blind-rating.md").exists()

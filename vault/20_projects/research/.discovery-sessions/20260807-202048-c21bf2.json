@@ -1,0 +1,35 @@
+{
+  "id": "20260807-202048-c21bf2",
+  "topic": "bookkeeping, invoicing, expense tracking, tax prep, and compliance paperwork pain for one-person businesses \u2014 where they still use spreadsheets, paper, and memory",
+  "lens": "pm",
+  "tier": "deep",
+  "segment": "solo operators, freelancers, tradespeople",
+  "evidence_count": 17,
+  "verified": 4,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 3.894,
+  "gather_status": {
+    "last30": "ok: 4 records (4 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 10 records (10 found)",
+    "reviews": "ok: 3 records (3 found)",
+    "github": "ok: 0 records (0 found)",
+    "qa": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "The Reddit evidence only provides thread titles; the actual user comments, lived experiences, and specific tool setups from those communities are completely missing.",
+    "There is no evidence regarding the specific pricing or affordability thresholds of these bookkeeping tools for one-person businesses.",
+    "The evidence fails to detail the specific workflows causing trouble, such as how solo business owners currently handle the commingling of personal and business expenses."
+  ],
+  "contradictions": [
+    "Users complain that solo bookkeeping software lacks essential features like payroll and tax filing, yet simultaneously complain that enterprise solutions with more features slow them down with settings they will never use.",
+    "One user expresses a desire to have native invoicing functionality within their app, but immediately contradicts the utility of this feature by stating that 'in the long run, that would not be a good choice in my business.'"
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 0.5,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

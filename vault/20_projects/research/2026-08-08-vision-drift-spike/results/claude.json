@@ -1,0 +1,467 @@
+{
+  "model": "claude-fable-5-blind-subagents",
+  "n": 1,
+  "results": [
+    {
+      "id": "X03",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X03",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "Same blond quiffed hair, stubble, navy tee, cuffed gray jeans and sneakers as the char-a turnaround; only the walking pose and profile camera differ.",
+          "confidence": 0.95
+        }
+      ]
+    },
+    {
+      "id": "X12",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X12",
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion",
+            "style-register"
+          ],
+          "receipt": "Character is redrawn in chibi register with an oversized head, enlarged eyes, and a shrunken ~2.5-head-tall body versus the canon slender adult proportions.",
+          "confidence": 0.93
+        }
+      ]
+    },
+    {
+      "id": "X26",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X26",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "Glasses removed, red headband, sleeveless shirt, and confident stance all match the declared canon update, while hair, blue shorts, slouchy socks, chunky sneakers, and art style match the original refs.",
+          "confidence": 0.88
+        }
+      ]
+    },
+    {
+      "id": "X09",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X09",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "Rear view matches the char-b turnaround's back pose: same terracotta clay palette, blank faceless back panel, cylindrical side arms, and stubby legs on cream paper.",
+          "confidence": 0.82
+        }
+      ]
+    },
+    {
+      "id": "X23",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X23",
+          "verdict": "drifted",
+          "drift_axes": [
+            "palette",
+            "anatomy"
+          ],
+          "receipt": "The creature is rendered in blue-gray instead of canon terracotta, and its limbs are elongated bendable tubes in a sitting pose rather than the short stub legs of the refs.",
+          "confidence": 0.9
+        }
+      ]
+    },
+    {
+      "id": "X18",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X18",
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register",
+            "proportion",
+            "identity"
+          ],
+          "receipt": "Portrait shifts to a realistic life-drawing register with naturalistic adult facial proportions, wavy center-parted hair, and no stubble, abandoning char-a's cartoon construction and signature quiff/beard.",
+          "confidence": 0.85
+        }
+      ]
+    },
+    {
+      "id": "X01",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X01",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "Same blond quiff, blue eyes, stubble, navy tee, cuffed gray jeans and sketch register as the char-a turnaround; only scene context (drafting table) is new.",
+          "confidence": 0.8
+        }
+      ]
+    },
+    {
+      "id": "X19",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X19",
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion"
+          ],
+          "receipt": "Body is stretched into a wide landscape rectangle roughly twice as wide as tall, versus the near-square torso in both char-b reference sheets.",
+          "confidence": 0.7
+        }
+      ]
+    },
+    {
+      "id": "X29",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X29",
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "palette"
+          ],
+          "receipt": "Candidate is an elderly gray-haired, wrinkled woman in a red sweater and blue skirt, versus canon char-d's brown-haired younger face and brown wrap tunic with sash.",
+          "confidence": 0.9
+        }
+      ]
+    },
+    {
+      "id": "X06",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X06",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "Three-quarter portrait matches char-a's canon hair shape, blue eyes, sparse chin stubble, navy crew neck, and pencil-sketch register.",
+          "confidence": 0.9
+        }
+      ]
+    },
+    {
+      "id": "X16",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X16",
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register"
+          ],
+          "receipt": "Character is rendered as a photorealistic painted portrait with real skin texture and hair strands, abandoning the series' loose pencil-sketch cartoon register.",
+          "confidence": 0.95
+        }
+      ]
+    },
+    {
+      "id": "X24",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X24",
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register"
+          ],
+          "receipt": "Close-up is soft airbrushed 3D-style shading with no pencil hatching or construction linework, unlike the hatched terracotta sketch treatment in both char-b refs.",
+          "confidence": 0.6
+        }
+      ]
+    },
+    {
+      "id": "X10",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X10",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "Heavy-lidded droopy eyes read as a sleepy expression in an extreme close-up while the pencil hatching, terracotta palette, side-arm anatomy, and cel peg-hole format all match char-b canon.",
+          "confidence": 0.55
+        }
+      ]
+    },
+    {
+      "id": "X07",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X07",
+          "verdict": "drifted",
+          "drift_axes": [
+            "anatomy"
+          ],
+          "receipt": "Frontal view shows only two splayed cylindrical legs where canon front views consistently show four-plus stubby legs beneath the body, with no hidden-leg occlusion to explain the loss.",
+          "confidence": 0.6
+        }
+      ]
+    },
+    {
+      "id": "X13",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X13",
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion",
+            "style-register"
+          ],
+          "receipt": "Character is rendered as a chibi roughly three heads tall with an oversized head and eyes and heavier ink-cartoon finish, versus the canon adult ~6.5-head proportions in soft pencil register.",
+          "confidence": 0.85
+        }
+      ]
+    },
+    {
+      "id": "X30",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X30",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The 8-bit pixel register is covered by the declared canon update, and the character itself keeps its terracotta color, cube body, side arm-stubs, and multiple short legs.",
+          "confidence": 0.7
+        }
+      ]
+    },
+    {
+      "id": "X02",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X02",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "Same blond hair, blue eyes, beard, navy tee, cuffed grey jeans, and body proportions as the canon turnaround; only pose (mid-gesture talking) and framing differ.",
+          "confidence": 0.85
+        }
+      ]
+    },
+    {
+      "id": "X21",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X21",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "Front view matches canon: terracotta squarish body with center seam, eyebrow-and-oval-eye face, side arm stubs, and a cluster of short legs in the pencil register.",
+          "confidence": 0.8
+        }
+      ]
+    },
+    {
+      "id": "X15",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X15",
+          "verdict": "drifted",
+          "drift_axes": [
+            "palette",
+            "identity"
+          ],
+          "receipt": "Hair is dark brown and noticeably fuller/wavier than the canon dirty-blond swept style, an undeclared change to a core identity trait despite matching eyes, beard, and shirt.",
+          "confidence": 0.85
+        }
+      ]
+    },
+    {
+      "id": "X04",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X04",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "Back-view reaching pose retains char-a's blond quiff, short beard, navy tee, cuffed grey jeans, grey sneakers, and the same pencil-and-wash register \u2014 only pose/scene changed.",
+          "confidence": 0.9
+        }
+      ]
+    },
+    {
+      "id": "X27",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X27",
+          "verdict": "drifted",
+          "drift_axes": [
+            "identity",
+            "other"
+          ],
+          "receipt": "The boy's signature black square glasses are gone, replaced by an undeclared red headband, sleeveless tank, and spikier hair with thicker confident brows \u2014 an undeclared identity/costume redesign.",
+          "confidence": 0.92
+        }
+      ]
+    },
+    {
+      "id": "X20",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X20",
+          "verdict": "drifted",
+          "drift_axes": [
+            "proportion"
+          ],
+          "receipt": "Char-b's canon rounded-square slab body with corner seams has become a fully spherical ball; arms, legs, eyes, and color match but the core silhouette shape is undeclaredly changed.",
+          "confidence": 0.85
+        }
+      ]
+    },
+    {
+      "id": "X08",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X08",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "Rounded-square terracotta body with center cross seam, cylindrical stub arms, matching stubby legs, and identical pencil-hatched shading \u2014 a legitimate 3/4 view on a tabletop.",
+          "confidence": 0.9
+        }
+      ]
+    },
+    {
+      "id": "X14",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X14",
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register",
+            "palette"
+          ],
+          "receipt": "Portrait drops the canon colored wash (blond hair, blue eyes, navy tee) for pure graphite and shifts to a more realistic rendering register with smaller eyes and naturalistic facial modeling than char-a's cartoon canon.",
+          "confidence": 0.75
+        }
+      ]
+    },
+    {
+      "id": "X31",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X31",
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register",
+            "anatomy"
+          ],
+          "receipt": "Char-b is re-rendered as flat pixel art instead of the canon pencil-sketch register, and gains an undeclared snout-like block protrusion absent from the model sheet.",
+          "confidence": 0.9
+        }
+      ]
+    },
+    {
+      "id": "X05",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X05",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "Same blond-quiffed, stubbled man in navy tee, cuffed gray jeans and sneakers rendered in the same pencil-sketch register; only pose (leaning on a drafting table) and scene differ.",
+          "confidence": 0.92
+        }
+      ]
+    },
+    {
+      "id": "X17",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X17",
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register"
+          ],
+          "receipt": "The character's identity and outfit match, but the pencil-sketch register of the refs is replaced by clean uniform flat-color vector linework with hard outlines and no sketch texture, an undeclared register change.",
+          "confidence": 0.88
+        }
+      ]
+    },
+    {
+      "id": "X28",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X28",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "Gray bun, aged face, heavier build, and new sweater/skirt outfit are all covered by the declared time-jump note, while the retained dark round eyes, thick brows, messy bun and gentle smile match the canon identity.",
+          "confidence": 0.8
+        }
+      ]
+    },
+    {
+      "id": "X11",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X11",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "Same terracotta cube-bodied mascot with two side stubs, small arched brows over oval eyes, and six stub legs in the same pencil register; standing on a table edge is scene variation.",
+          "confidence": 0.9
+        }
+      ]
+    },
+    {
+      "id": "X22",
+      "majority": "consistent",
+      "votes": [
+        {
+          "id": "X22",
+          "verdict": "consistent",
+          "drift_axes": [],
+          "receipt": "The back/side circular boss and single visible eye match the ref turnaround's rear-quarter view, with the same terracotta palette and pencil register; the splayed stub legs read as a sitting pose variation.",
+          "confidence": 0.65
+        }
+      ]
+    },
+    {
+      "id": "X25",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X25",
+          "verdict": "drifted",
+          "drift_axes": [
+            "style-register",
+            "anatomy"
+          ],
+          "receipt": "With no canon update, the pencil-sketch register is replaced by 8-bit pixel art, and the six-stub-legged cube mascot is redrawn as a bipedal humanoid with two arms, two legs and an added mouth.",
+          "confidence": 0.95
+        }
+      ]
+    },
+    {
+      "id": "X32",
+      "majority": "drifted",
+      "votes": [
+        {
+          "id": "X32",
+          "verdict": "drifted",
+          "drift_axes": [
+            "anatomy"
+          ],
+          "receipt": "The note only declares the 8-bit register and says the octopus mascot is unchanged, but the candidate swaps the six stub legs and side-mounted arm stubs for a two-armed, two-legged humanoid body plan with an added mouth \u2014 undeclared anatomy drift.",
+          "confidence": 0.85
+        }
+      ]
+    }
+  ]
+}

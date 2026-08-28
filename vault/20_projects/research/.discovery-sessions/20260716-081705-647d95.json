@@ -1,0 +1,37 @@
+{
+  "id": "20260716-081705-647d95",
+  "topic": "Company OS and org-wide AI agent adoption for non-engineering teams",
+  "lens": "pm",
+  "tier": "standard",
+  "segment": "founders, COOs, and ops/PM leaders rolling out Claude Code, Codex, or Cursor beyond engineering",
+  "evidence_count": 32,
+  "verified": 5,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 1.9355,
+  "gather_status": {
+    "last30": "ok: 4 records (4 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 11 records (11 found)",
+    "reviews": "ok: 2 records (3 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "Governance, compliance, and data-privacy specifics for regulated functions like finance are mentioned only abstractly.",
+    "Cost, pricing, and ROI quantification for non-engineering teams is barely addressed beyond one metrics-focused source.",
+    "Change management, training, and end-user resistance (fear, skill gaps) among non-technical staff is only lightly touched.",
+    "Little direct first-person evidence from finance, marketing, or CS practitioners themselves; most non-engineering pain is described secondhand by ops/PM leaders, vendors, or analysts.",
+    "No evidence on vendor/platform selection tradeoffs or build-vs-buy decisions from the non-engineering buyer's perspective.",
+    "Much of the 'Claude Code' evidence is engineering-tool-centric and may not cleanly generalize to non-engineering workflows."
+  ],
+  "contradictions": [
+    "Framing tension: some sources locate the failure in implementation and missing context ('the tech is powerful, but the implementation is broken'), while others locate it in the technology/model reliability itself ('reliability as the #1 concern').",
+    "Optimism split: vendor/platform pieces imply a turnkey company OS can solve adoption, whereas ops/executive voices warn that no tool fixes underlying broken operations and bad data ('agents amplify the mess')."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 0.9412,
+  "citation_recall": 0.4,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

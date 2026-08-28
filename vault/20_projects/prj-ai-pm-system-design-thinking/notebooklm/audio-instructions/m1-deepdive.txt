@@ -1,0 +1,19 @@
+Audience: one listener, Sean — a product manager with NO engineering background who runs a 12-agent autonomous AI system in production daily. He built routers, circuit breakers, fail-closed cost guards and budget caps by instinct, without knowing their names. The gap is vocabulary and formal structure, NOT hands-on experience — but do not over-flatter him either: eliciting error costs from a stakeholder, setting an error budget, calibration, and class imbalance are genuinely new to him.
+
+Therefore:
+- NEVER explain what an agent, harness, model, or API is.
+- DO define every statistical term in plain language on first use.
+- CRITICAL RULE: never mention a company, incident, paper, or researcher without a one-sentence setup first, explaining what it is and why it is relevant. Assume no prior familiarity. A previous version of this material failed exactly here.
+
+Cover, in this order:
+1. The question that comes before architecture: does this need a probabilistic system at all? What is the non-AI baseline, and what must AI beat? Introduce the "stochastic tax" — the ongoing operating burden a probabilistic system imposes even when nothing is broken — and note it comes from a 2026 research preprint, so it is fresh thinking rather than settled canon.
+2. Automate versus augment, and why that is a product decision rather than an engineering one.
+3. Error economics as the heart of the module: false positives and false negatives are almost never equally expensive, and a single accuracy number destroys the only information that matters. Use the spam filter as the running example throughout — a false negative is junk in the inbox, five seconds of annoyance; a false positive is a real message silently quarantined, and if it was a job offer the cost is unbounded AND invisible. Then invert it with cancer screening to show the same two errors with opposite costs.
+4. Where the decision physically lives: the threshold. You cannot reduce both errors at once; you choose which one you would rather have. This is a product manager's decision and is most often left by default to whoever writes the code.
+5. Turning diagnosis into disposition — threshold with reasoning, error budget with a number, kill criteria, and somewhere the number is actually visible. Stress that a system design answer ending at "and then we would measure it" is unfinished.
+6. Who gets hurt and why teams ship anyway. When the person harmed is not the operator, the incentive loop is broken by construction. Name the organizational reasons known-flawed systems ship: launch dates, throughput metrics, quality signals arriving months after ship signals.
+7. The anchor: Amazon's résumé screening tool. Set it up properly — in 2014 Amazon began building an internal tool to score job applicants automatically; Reuters reporter Jeffrey Dastin revealed in October 2018 that it had been scrapped. It was trained on ten years of past résumés, most from men, and it learned that preference; it reportedly penalised the word "women's". Run the module's questions against it. Be explicit that Reuters' account is single-sourced, Amazon disputed that it was ever used to evaluate candidates, and the details are not independently verifiable — then point out that separating what is observed from what is inferred is itself the skill being taught.
+
+End by connecting it back: he already made a precision-over-recall decision when he built a gate that drops any research finding not traceable to a real fetched URL. He chose to lose true findings rather than publish fabricated ones. He has never called it that. Now he can.
+
+Warm, direct, concrete, unhurried. No hype.

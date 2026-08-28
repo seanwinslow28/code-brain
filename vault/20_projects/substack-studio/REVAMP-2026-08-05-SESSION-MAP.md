@@ -1,0 +1,96 @@
+---
+title: "Pencil & Prompt Revamp — Session Map"
+type: plan
+status: active
+created: 2026-08-05
+domain: [substack-studio]
+tags: [pencil-and-prompt, refocus-2026-08, relaunch, session-map]
+ai-context: "The working order for the full Substack revamp, produced at the close of the 2026-08-04/05 partner session (sidecar ~/.creative-harness/partner-sessions/2026-08-04-pencil-and-prompt-refocus.md, locks L1-L7). Each session below has a paste-ready kickoff prompt. Sessions read the sidecar for decisions and this map for order. The L6/L7 territory set stays a LOOSE lock until real posts prove the value — build sessions may surface reshapes; route them back to a partner-session reconvene, never silently."
+---
+
+# Pencil & Prompt Revamp — Session Map
+
+**The locked shape (plain terms):** Pencil & Prompt stays the name. The claim: models got good, everything they make is the same — this publication runs real experiments that push AI past the average and publishes the verdicts, including the failures. Weekly experiment series = **Building the Ladder** (numbered rungs). Funny-true-story series = **Raising Agents**. The product underneath = a public, versioned mechanism library where every entry carries a tested verdict (beat / tied / lost, public retractions). Full decisions + reasons: the sidecar (locks L1–L7).
+
+**Standing rules for every session here:** substack-studio CLAUDE.md governs (voice chain mandatory, no em dashes, anti-hype, value gate, privacy rules). Sean hand-rewrites every chain draft. Notes practice runs continuously from today — it does not wait for any session below.
+
+---
+
+## S0 — Sourdough dark start (TODAY; ~1 hr; $0; private)
+
+Starts the clock on the months-long experiment. Nothing publishes.
+
+> **Kickoff:** Set up the Pencil & Prompt "sourdough" collaborator per lock L7 (dark start) in the sidecar at `~/.creative-harness/partner-sessions/2026-08-04-pencil-and-prompt-refocus.md`. Design and create: (1) a private home for the aged collaborator's memory — local-only, NEVER in the public repo (candidate: a gitignored dir or under `~/.creative-harness/sourdough/`); (2) a memory file schema (what it accumulates: rejected drafts, Sean's corrections, house-style rules, its own mistakes); (3) a 15-minute weekly feeding ritual Sean can actually sustain, written as a checklist; (4) a log format that timestamps every feeding so the eventual series has receipts; (5) the blind-comparison protocol sketch (same job to aged vs fresh instance at week N, judged blind). Keep it model-agnostic in design even if v1 runs on one model. Deliverable: the running setup + first feeding done in-session.
+
+## S1 — Doc re-anchor + hygiene — ✅ DONE 2026-08-05 (all six docs rewritten; subtitle locked: "Push your AI past the average, one tested experiment at a time."; old docs + back catalog → `_archive/`; discovery-cap hygiene fixed)
+
+Every future session reads these docs first; until they're rewritten, every session boots on the dead premise. Discharges the existing "doc re-anchor" ticket.
+
+> **Kickoff:** Run the "substack-studio doc re-anchor" ticket in `vault/00_inbox/tickets.md`. SKILLS: this is execution (transcribing locked decisions), not a decision session — no creative-partner. EXCEPTION: the subtitle wording is a genuine open taste decision; either run it as a short creative-partner mini-session (one axis, fresh sidecar, good harvest data) before the doc pass, or use `superpowers:brainstorming` one-question-at-a-time inside this session and record the pick + reason in the doc. Rewrite `vault/20_projects/substack-studio/` SOUL.md (masthead: divergence thesis replaces taste-transfer; keep the honest-arc DNA), POSITIONING-AND-EDITORIAL-SPEC.md, SERIES-COMMAND-CENTER.md (formats: Building the Ladder rungs + Raising Agents episodes; Graveyard verdict policy; retire Take Two/Back to Basics as structures, note what each fed into), SKILL-PACKAGING-PLAN.md (catalog swaps from taste-transfer skills to divergence mechanisms; library-as-product answers its §6.1), and CLAUDE.md §0/§2 guardrails. Source of truth: the sidecar locks L1–L7 + the three research syntheses (`research/2026-08-05-prior-art-synthesis.md`, `research/2026-08-05-competitive-check-six-territories.md`, `research/discovery/2026-08-05-territory-pain-validation.md`). Carry the research caveats INTO the docs: the masthead claim must not lean on the weak "stickiness" number (2 studies — state it as an open question or a future rung); the precise library claim is "no prompt or technique library publishes per-entry tested verdicts against a published protocol" (broad versions are falsifiable); never use the $2.51B or 10–30x figures. Hygiene in the same pass: fix the stale discovery-cap figures ($10/day/$50/month → policy v3's $30/day/$100/month) in code-brain CLAUDE.md + the fusion-discovery-council skill doc. Subtitle wording: run the naming pass here (subtitle = plain value prop, thesis-facing).
+
+## S2 — Theme & image pass (after S1; Mac session — image APIs; ~$2-5)
+
+> **✅ DONE 2026-08-06** (partner-session sidecar `2026-08-05-pencil-and-prompt-visual-identity`,
+> L1-L7 + one divergence run on the mascot axis; engines: Higgsfield CLI + GPT Image 2).
+> Locks: pencil-test medium survives whole, re-captioned lab-notebook; cast = **Parent & the
+> Brood** (pencil parent + 3 monitor-headed kids, sitcom register, anchor
+> `_assets/mascot-candidates/parent-and-the-brood-v3.png`); accent = SERIES (BtL teal / RA
+> amber, homepage homogeneous); hole punches removed house-wide. Shipped to
+> `_assets/launch-2026-08/`: masthead, both series cards, About + Start Here + origin-confession
+> heroes (v2, self-portrait sheet), 1:1 avatar. House-style doc updated to v3; old mascot
+> playground marked superseded. Remaining open thread: none — S3/S4 consume these assets.
+
+The sidecar flagged all images for review against the new theme.
+
+> **Kickoff:** SKILLS: run the DECISIONS through `creative-partner` (this is the map's one true partner session — "does the pencil-test look survive?", "how do the two series read differently?", "what do the mascots become as the Raising Agents cast?" are open taste decisions, and it is the skill's first live test on a visual axis; new sidecar, locks with reasons). Image generation stays OUTSIDE the partner loop per the skill's house rules — after the locks, execute in the same or a follow-on run with `openai-image-gen` (primary) + `prompt-how-much` / `image-generator-prompt-science`. Then: review the Pencil & Prompt image house style (`vault/20_projects/substack-studio/playbook/image-house-style.md`, style anchors in `_assets/style-anchors/`) against the relaunched identity (sidecar locks L4/L5: keep the name; Building the Ladder + Raising Agents series; divergence thesis). Decide with Sean: does the pencil-test look survive (it fits the name and the mascot lineage — the mascots are now the Raising Agents cast), and what visual language marks the two series apart (rung numbering treatment; the ladder motif; the existing amber/teal accent split)? Then generate: masthead/banner candidates, a Building the Ladder series card, a Raising Agents series card, and hero images for the launch bundle (About, Start Here, origin-confession post). `openai-image-gen` primary. New assets to `_assets/` + per-post `images/`; superseded versions to `images/_superseded/`, never deleted.
+
+## S3 — Pages + profile cleanup (after S1, can parallel S2; ~2-3 hrs)
+
+> **✅ DONE 2026-08-08 except publish + nav** (same sitting, three passes).
+> **(A) PAGES — APPROVED.** Both chain drafts written, Sean hand-rewrote and signed off same day ("both are solid. Ready to go"; two edits, both folded into voice-samples as calibration anchors: 'a few grays' → 'a couple of chin hairs'; '(hi mom)' added). Statuses `sean-approved-ready-to-publish`. Old drafts date-suffixed into `pages/old/`, nothing deleted; shape locks in `docs/superpowers/specs/2026-08-08-substack-pages-relaunch-design.md`. Sean generated a matched-angle About image pair (`_assets/launch-2026-08/new-about-images/`: kid-at-static-TV opens the page, same room aged into multi-monitor builder closes it) — wired into about.md, placement provisional.
+> **(B) PROFILE — DONE.** 3 old posts unpublished (drafts, not deleted); ALL 9 restacks removed (Sean widened scope: clean slate, not curation); bio replaced ("I run experiments on AI so you don't have to trust anybody's magic prompt. Verdicts published, faceplants included."); theme switched Profile → Custom; Introduction set (subtitle line + verdict promise).
+> **(C) WORDMARK — GENERATED + LIVE** (pulled forward from the S2-assets remainder): 5 GPT Image 2 candidates via Higgsfield in the v3 house style (`_assets/launch-2026-08/wordmark-candidates/`: amber, teal, dual, dual-v2 script-vs-slab-mono, dual-v3 rough-vs-code); Sean picked **dual-v2** for the header (holds at 44px; the licensed exception to the no-text-in-art rule — the wordmark IS the title element); strip cropped to 3.9:1 and uploaded to the site Wordmark slot, saved, verified live: the header now reads Pencil & Prompt. **dual-v3** reserved for large surfaces (banner, social cards, Rung 0 title card).
+> **Platform finding:** @seanpwins is Substack's newer profile-publication type — NO publication-name/subtitle text fields exist (checked Settings, website editor, Edit Profile); profile Name + Bio double as site name + subtitle, so the wordmark image IS how "Pencil & Prompt" appears on the site (profile name stays "Sean Winslow").
+> **REMAINING** (rides in the tickets.md S3-remainder ticket): publish the two approved pages with their images ([Rung 0] links stay placeholder until S4); build launch-lean nav (needs pages/sections live); remaining opt-in S2 applications (avatar → Logo slot, masthead → profile banner).
+
+> **Kickoff:** SKILLS: no creative-partner (decisions locked; this is writing + browser work). Shape each page with `superpowers:brainstorming` first, then the mandatory voice chain end-to-end. Execute the Pencil & Prompt relaunch surface prep. (A) PAGES: rewrite Start Here and About from the re-anchored SOUL.md (S1 must be done) — existing drafts at `pages/` are the raw material but predate the refocus AND the writing-voice-modes G1-G5 update, so treat as quarry, not base. Full writing workflow: brainstorm the shape first, then the voice chain, then Sean hand-rewrites, then fold his rewrite into voice-samples. (B) PROFILE (browser, `@seanpwins`, same account — never a new one): set the new subtitle from S1's naming pass; rewrite the bio (kill any remaining PM-recruiter voice; the new positioning is the experimenter who publishes verdicts, funny first, anti-hype); curate restacks (keep the creative-AI/animation ones, drop the PM-job-interview outlier, re-restack the best with a one-line take); unpublish (revert to draft, never delete) the 3 old live posts; build the custom homepage + launch-lean nav: Home · Start Here · Building the Ladder · About · GitHub · Portfolio — sections only get added when content exists. Sean confirms each irreversible-looking profile action before it happens.
+
+## S4 — The origin confession (Rung 0 / launch flagship; after S1+S3 shape work)
+
+The launch bundle = S3's pages + this post, live together.
+
+> **Kickoff:** SKILLS: no creative-partner (the story is chosen; the craft is in the telling). `superpowers:brainstorming` for the shape, full voice chain for the draft — and this is the post where Sean's hand-rewrite matters most, since it sets the relaunch voice; fold his rewrite back into voice-samples per §8. Write the Pencil & Prompt relaunch flagship: the origin confession. The true story, funny first: Sean preached taste-transfer, ran one GPT Image 2 test with a simple prompt + reference, and disproved his own newsletter — then found the real problem (everything the models make converges on the same average) and the real job (run the experiments, publish the verdicts, build the ladder in public). Beats end on the promise + what ships every week (rungs, episodes, the library with verdicts). Full workflow per substack-studio CLAUDE.md §8: Stage-0 preflight is substantially pre-paid by the 2026-08-05 research round (cite from the syntheses, tier-audited sources only); brainstorm the shape with Sean before drafting; full voice chain; Sean hand-rewrites. Value gate: the Itch is Sean's own dead premise (documented), the Solution artifact is the captured GPT Image 2 test itself, the Transfer is the reader's permission to distrust technique-sellers + the promise of tested verdicts. Frontmatter per SERIES-COMMAND-CENTER conventions.
+
+## S5 — The scoreboard (protocol post + artifact; before Rung 1 — hard order, three research passes converged on this)
+
+> **Kickoff:** SKILLS: no creative-partner — the metric and the library home are product-design decisions, not taste decisions. Design with `superpowers:brainstorming`, then STRESS-TEST BEFORE PUBLISHING (non-negotiable — the protocol is the entire bet, and an un-stress-tested measurement standard is the irony that kills the publication): `grilling` or `pm-execution:pre-mortem` on the scoring rules, plus one `llm-council` premium pass (~$0.30 — four vendors adversarially poking the protocol is exactly what the protocol preaches). Only then the voice chain for the post. Build and write the Pencil & Prompt measurement protocol — the thing the entire research round says is the actual product ("the mechanism is the commodity, the verdict is the product"; a verdict is only as credible as its published metric). (A) THE ARTIFACT: a short, versioned protocol doc — what a mechanism entry is, what beat/tied/lost mean, the baseline (the default/median run, shown), the metric (semantic diversity with the known traps from Finding 8 of `research/2026-08-05-prior-art-synthesis.md`: lexical metrics insufficient; naive embedding-cosine conflates novelty with incoherence; quality-restriction flips findings — pick something honest and defensible at solo scale, state its limits), blind judging where feasible, and the retraction rule (d10 Graveyard: losers get public retractions). Decide with Sean where the library lives (open question from the sidecar: public repo vs claude.ai skills vs plugin — the Pocock-style public repo is the research-favored lead-magnet shape). (B) THE POST: the funny-first story of why a newsletter needs a lab notebook ("everyone ships the prompt; nobody reports back" — Sean's own L7 reason is the seed), ending with the protocol as the takeaway. Full voice chain + Sean rewrite.
+
+## S6 — Rung 1: does arguing help? (after S5)
+
+> **Kickoff:** SKILLS: no creative-partner — this is the experiment itself. `llm-council` / `fusion-discovery-council` are the APPARATUS (the heterogeneous panel under test), not helpers; voice chain for the write-up. Run and write Building the Ladder, Rung 1: Manufactured Opposition. The experiment: does making AI argue with you actually improve the work? Baseline = the agreeable default on one real creative job (d1 instrument: run it ~20x, show the sameness grid). Contenders: the free public "disagree with me" persona prompts (the commodity), and the stakes version (an opponent with something to lose) run heterogeneously via Sean's llm-council/fusion-discovery-council infrastructure (the evidence-favored variant — homogeneous panels hit consensus collapse; cite Hegazy 2024 WITH its 2024-era-models vintage). Score against the S5 protocol; theater-detection is a named check (did the disagreement CHANGE the output, or just perform?). Publish the verdict whatever it is; failures per the Graveyard policy. Ship the mechanism both tiers (copy-paste + installable skill) into the library with its verdict attached. Full voice chain + Sean rewrite. NOTE: if any claim needs the contaminated T3 pain evidence, run the reframed ~$1.50 discovery re-run first (sidecar L7 gate) — otherwise it is not needed for this rung.
+
+## S7 — First Unlock Hunt (creative-partner session; scope the hunt itself)
+
+Added 2026-08-08 at S3: Sean wants Unlock Hunts promised on Start Here from day one and the first hunt started ASAP.
+
+> **Kickoff:** SKILLS: `creative-partner` — "what is the first Unlock Hunt?" is an open taste decision (new sidecar, locks with reasons). Scope the first "can an agent be made to do X?" tentpole: candidate X's from Sean's lanes (animation, writing, visual design, the fleet), the failure-documentation format (attempts documented whole, failures included, per SOUL §5), what makes a hunt worth publishing vs shelving, and how a landed unlock feeds the library (does an unlock mechanism get a verdict entry?). Constraint from the masthead: only publish when a real unlock lands or the failure itself is the story; never the weekly bar. Deliverable: the chosen hunt + its capture plan.
+
+## Ongoing / parallel
+
+- **Notes, starting today.** No session needed. First candidates: the two-isolated-AIs-wrote-the-same-three-examples anecdote (the thesis in one story); the em-dash-as-tell irony; "the models got good and that's the problem."
+- **"The Night My Vault Said Nothing" rewrite** (existing ticket) — first Raising Agents episode; needs current voice modes; publishes after the launch bundle. Any-time session after S1.
+- **d4 data-hole re-run** (~$1.50) — only when a data-hole draft actually starts (L7 gate).
+- **Sourdough feeding** — weekly ritual from S0; the series announces itself when the first blind comparison exists.
+
+## Carried forward from the pre-refocus sessions (verified against the old docs)
+
+| Old item | Status in this map |
+|---|---|
+| Profile cleanup checklist (subtitle, bio, restacks, unpublish 3 posts, homepage/nav) | S3, updated to new positioning |
+| Start Here + About drafts (2026-06-27, proven workflow) | S3 quarry — workflow survives; copy predates refocus + voice-modes update |
+| Image house style (pencil-test, amber/teal) + mascot lineage | S2 review — mascots recast as the Raising Agents cast |
+| Voice chain + Sean-hand-rewrite + fold-back-to-voice-samples loop | Unchanged, every writing session |
+| Value gate (Itch/Solution/Transfer) | Unchanged; sharpened by "verdict is the product" |
+| Old back catalog (01–07, bonus, Take Two backlog) | Quarry per sidecar: incidents → Raising Agents; jobs → rung subjects; all rewrites go through current voice modes |
+| Notes from day zero | Ongoing, starts now |
+| Naming (Pencil & Prompt locked 2026-06-22) | Kept (L4); subtitle re-cut in S1 |
