@@ -198,3 +198,9 @@ vault/70_apple-notes/
 # main carries the same rule; this branch runs production and must not re-add
 # them. The fleet board reads these from disk, never from git.
 vault/health/job-feed-manifest-*.json
+
+# Daily notes moved out of vault/10_timeline/daily/ to vault/daily/ on
+# 2026-08-11 and the rule above did not follow them. This branch never
+# received the rule and pushed six personal notes to the public repo
+# (eng-002.d146, 2026-08-26 -> 08-28). Same content, same reason, same rule.
+vault/daily/
