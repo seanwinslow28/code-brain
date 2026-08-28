@@ -77,6 +77,11 @@ Routed here by the lessons loop. Reasons live in the gitignored ledger.
   to check it too" is a boring cap on a Raising Agents episode. Name the actual practice: what gets
   evaluated, what gets traced, what watches what. The lesson is where the reader decides whether the
   author knows what he is doing.
+- **Introduce an unfamiliar tool the first time it appears.** Naming one of Sean's own skills bare
+  ("the creative-partner skill") assumes a reader who already knows it. A possessive does the
+  introduction at zero cost: *"my /creative-partner skill"*. The bar is recognition, not obscurity:
+  *"It's not like the viral /last30days skill that a lot of people in this space would immediately
+  recognize."* (Run #2, 2026-08-28.)
 - **Closer register for this series: honest realist, wit, a dash of professionalism.** The ending
   admits the breakage is inevitable and shows the thing that keeps it survivable. It never resolves
   into a tidy win.

@@ -7,7 +7,9 @@ description: Story shape that makes someone keep reading. Designs the narrative 
 
 ## Purpose
 
-Own the WHAT-order and WHAT-shape of a story so a reader cannot stop. This skill decides the beat sequence, where loops open and close, and how tension escalates. It does NOT write sentences. Its output is a **beat map**: a McKee-style step-outline (one or two lines per beat saying what happens and how it turns), handed downstream to the voice layer that writes the actual prose.
+Own the WHAT-order and WHAT-shape of a story so a reader cannot stop. This skill decides the beat sequence, where loops open and close, and how tension escalates. It does NOT write sentences. Its output is a **beat map**: a step-outline (one or two lines per beat saying what happens and how it turns), handed downstream to the voice layer that writes the actual prose.
+
+**Terminology, corrected 2026-08-28.** What this skill calls a **beat** is what McKee calls a **scene** — a unit whose value-charge changes end to end. McKee's *beat* is an action/reaction exchange **inside** a scene. The file used to say "McKee-style beat", which made the citation wrong and, worse, hid mechanic 7 from view: if the unit is a scene, then McKee's gate on it is the **turn**, and nothing here was testing for it.
 
 The load-bearing rule (from the research, McKee/Truby/the broetry failure): **structure owns ORDER, voice owns SENTENCES.** If this skill writes finished sentences, its default phrasing survives into the final draft and flattens the writer's voice. So it emits beats, never lines.
 
@@ -41,16 +43,28 @@ The beat map is stage 1 of a five-stage chain, and its decisions have to survive
 - **Central loop.** Which ledger loop is the story's spine: the half-told problem the hook opens and the payoff closes. `substack-value-engine` lands its value payoff on exactly this loop.
 - **Crest beat.** The beat where tension peaks and the turn lands. `substack-value-engine` attaches its pivot line here; don't make it re-find the crest.
 - **Seam beat.** The beat where value / the Transfer lands (the SO-CAN-YOU beat).
+- **The spine, in one sentence.** Gornick's distinction: the **situation** is what happened; the **story** is what the writer has come to say about it. The other four fields are positional coordinates and none of them states this. A map with no spine produces a competent sequence of events that is about nothing, which is the flat-draft failure wearing a different mask. Write it as a sentence, not a topic.
+- **Opening stage-set.** Whatever concrete material the opening puts on stage has to recur. The open-loop ledger tracks *questions*; nothing tracked the *props*. An opening that introduces a thing the piece then abandons is a bait-and-switch the reader feels even when every loop closes.
 
-Name all four explicitly. The downstream stages are instructed to consume this block by name; when it is missing they re-derive it by eye and drift, which is the "explicit handoff notes the next stage actually consumes" this skill exists to provide.
+Name all six explicitly. The downstream stages are instructed to consume this block by name; when it is missing they re-derive it by eye and drift, which is the "explicit handoff notes the next stage actually consumes" this skill exists to provide.
 
-## The Six Enforced Mechanics
+## The Eight Enforced Mechanics
 
-Each is a gate. Run the beat map against all six.
+Each is a gate. Run the beat map against all eight.
 
 1. **But/Therefore beat test.** Between any two adjacent beats you must be able to insert *but* (conflict) or *therefore* (consequence). If only *and then* fits, the seam is dead: merge the beats, cut one, or add a reversal/consequence. Flag additive-only logic ("Also", "Additionally", "Next", "And then").
 
-2. **Cold open / in medias res.** Open on a concrete moment, scene, or live tension. Never on context, definitions, or "In this piece I'll...". The first beat raises ONE specific unanswered question. Throat-clearing openings are a fail.
+2. **Cold open / in medias res.** Two obligations in one opening, and the skill used to gate only the first.
+
+   **(a) The question.** Open on a concrete moment, scene, or live tension. Never on context, definitions, or "In this piece I'll...". The first beat raises ONE specific unanswered question. Throat-clearing openings are a fail.
+
+   **(b) The promise, and orientation.** An opening also signs a contract about what the whole piece will *feel* like — Poe's unity of effect, 1846: *"If his very initial sentence tend not to the outbringing of this effect, then he has failed in his first step."* And it has to orient: who, when, what is happening right now.
+
+   **The dimension asymmetry (the actionable part).** Readers measurably slow at temporal, causal, protagonist and goal discontinuities, and **not** at spatial ones (event-indexing model; Rinck & Weber). So **place is the one thing you can leave vague cheaply. Protagonist, time, causality and goal are not.**
+
+   **The given-new check.** Every referent the opening treats as already-known must actually be known to a cold reader. Anything else forces a *bridging inference* (Clark & Haviland 1977), which costs measurable processing time and eventually fails outright. This is the precise mechanism behind an opening that reads as rambling: the writer holds a complete situation model and packages all of it as given; the reader holds none and bridges on every clause until they quit. Run it literally, referent by referent, on the first beat.
+
+   **In medias res is licensed. Entering after the turn is not.** The enforceable test is not scene-vs-result, it is: **is the reader inside something still happening, or being told about something that already finished?** Vonnegut's "start as close to the end as possible" and enter-late/leave-early both mean late *within an unresolved moment*. A result can open a piece; a *finished* result cannot.
 
 3. **Open-loop budget.** Every loop the map opens must be closed by a later beat. In short form, a loop closes within ~1-3 beats/paragraphs or the reader disengages from frustration. Record each loop in the **open-loop ledger** (emitted in the Handoff Block above), not just in your head; flag any left open at the end. Tracking a loop only in reasoning is the failure mode: it dies at the locked voice stage and `writing-critique` has nothing to check closure against four stages later. (Justify loops by *motivational tension*, not memory. The Zeigarnik "you'll remember it" claim fails replication: see `references/story-mechanics.md`.)
 
@@ -58,7 +72,11 @@ Each is a gate. Run the beat map against all six.
 
 5. **Withhold the rescue.** Don't resolve the central tension in the first beat and then merely explain. Escalate (progressive complication) before the payoff. The opening question must outlive its introduction.
 
-6. **Slippery-slide section ends.** The last beat of each section creates forward pull (a teased turn, a withheld answer), not a clean summary that gives the reader permission to stop. (When the voice layer realizes this, the natural punctuation is an em dash, which is banned downstream. Note it as "forward-pull line"; let `writing-humanity-pass` enforce the punctuation. Don't pre-solve it.)
+6. **The turn test (inside a beat).** But/therefore tests the seam *between* beats. This tests *inside* one. McKee: if the value-charged condition is unchanged from one end of a scene to the other, nothing meaningful happened — it is a nonevent. **A map of well-connected nonevents passes every but/therefore seam and still reads as "I did this, then this, then this."** That is not a hypothetical; it is the diagnosed failure of the 2026-08-27 draft, whose seams all passed. For each beat, name what is charged at the start and what is charged at the end. Same value → merge it, cut it, or find the turn that is actually in the material.
+
+7. **Scene / summary budget.** Mark every beat SCENE or SUMMARY. Turning points, confrontations and crises must be SCENE. Summary is legitimate and necessary for background, motive, pacing, transitions and time-leaps — this is not a rule against it. **A map that is all SUMMARY is the flat draft; a map that is all SCENE is hooptedoodle.** Per beat, the Le Guin framing is the useful one: is this a moment to *crowd* (slow down, dramatize) or to *leap* (compress, move)?
+
+8. **Slippery-slide section ends.** The last beat of each section creates forward pull (a teased turn, a withheld answer), not a clean summary that gives the reader permission to stop. (When the voice layer realizes this, the natural punctuation is an em dash, which is banned downstream. Note it as "forward-pull line"; let `writing-humanity-pass` enforce the punctuation. Don't pre-solve it.)
 
 ## Ratified lessons from shipped pieces
 
@@ -77,6 +95,23 @@ ledger; only the rule travels into this file.
   and the title turned out to be one decision, both built off the strongest image in the middle of
   the story rather than off the lesson at the end.
 
+- **The through-line is this skill's job, not the reader's.** A map that hands over a set of true
+  events and expects the reader to assemble the story has not done the work. (Run #2, 2026-08-28:
+  *"You hopped all over the place and expected the reader to keep up and understand."* Stated three
+  separate times about three different passages, which is why it is filed as structural rather than
+  local.) The failure is invisible to the but/therefore test and is what mechanics 6 and 7 exist to
+  catch.
+- **In medias res is licensed; a bad execution of it is not a reason to retire it.** The author's
+  standard is an opening that tells you in one sentence what the whole ride will feel like. A cold
+  open that drops the reader into a result with no runway is not the technique failing, it is
+  mechanic 2(b) unrun. Do not respond to a bad in-medias-res draft by going chronological by
+  default.
+- **Do not re-establish what the piece already established.** A beat that re-states a point an
+  earlier beat already landed is a nonevent by mechanic 6, and it reads as padding even when every
+  sentence is true. (Run #2: *"We already established the I didn't think the jokes were funny and
+  they were trying to hard with the David Sedaris lines earlier."*) The map is where this gets
+  caught, because by the sentence stage it looks like emphasis.
+
 ## Story Scaffolds (pick one, apply as form not formula)
 
 These set beat ORDER. Treat them as a checklist of pressures the piece should satisfy, never as slots to fill with canonical connective tissue ("and that's when I realized..."). If a beat can only be hit one canonical way, it has become formula. See `references/story-mechanics.md` for the full set and when each fits.
@@ -91,6 +126,8 @@ These set beat ORDER. Treat them as a checklist of pressures the piece should sa
 The failure mode is structure leaking into the surface until a reader can name your template (the LinkedIn broetry trap). Two checks, applied to the beat map:
 
 - **Specificity gate (hard — McKee archetype vs stereotype):** each beat must carry a detail specific to THIS story, not a generality any template would produce. Generic beat = formula has leaked. Concrete, lived, idiosyncratic beat = sound. This is a blocking output gate, not an advisory pass: the map is not done while any beat is a generic shape (hook/tension/payoff boilerplate) that would fit any post. A beat you could paste into a different piece unchanged is tension not yet welded to THIS material; rewrite it before emitting the map.
+
+  **The abstraction-rung half (added 2026-08-28).** The gate above catches *generic* beats. It does not catch **mid-rung reporting** — a beat that is entirely specific to this piece and still inert, because it sits at the altitude of summary-about-events rather than at either the concrete moment or the earned meaning. "The model kept producing bad output" is specific to the piece and dead on the page. Reject beats written on the middle rung; send them down to the moment or up to the point.
 - **Nameable-template check:** if the beat order is the obvious canonical shape with nothing bent, vary it (start later, reorder a reveal, fold two beats). The reader should *feel* the structure, never name it.
 
 ## The Chain Contract (what this skill must NOT do)

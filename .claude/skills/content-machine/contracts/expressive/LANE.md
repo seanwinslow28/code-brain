@@ -48,6 +48,27 @@ abstract one does not.
 
 ---
 
+## An outside fact has to arrive inside the story
+
+Research context, news, a competitor's announcement — anything the piece did not get from the
+author. It is not invented, so the origin gate will not stop it, and it is often the reason the
+piece is timely. It still cannot be dropped in as a bare fact.
+
+**The rule: an external fact enters as an event in the author's own life, or it does not enter.**
+"I read an article about X" is a beat in his story. "X happened" is a different piece interrupting
+this one.
+
+Earned run #2 (2026-08-28). The draft went from the author working on his own skill straight into
+a bare three-sentence statement about an OpenAI policy change. His verdict: *"you wrote it out of
+nowhere and stated a fact as if I wasn't telling a whole story... How the hell does it go from me
+working on my skill to a ChatGPT story."* His fix was a single clause of attribution, which cost
+nothing and put the fact inside the narrative.
+
+This is a lane law rather than a Substack rule because every Expressive medium can import an
+outside fact, and the seam fails the same way in all of them.
+
+---
+
 ## The reply-hook memo (advisory, never a gate)
 
 Any Expressive medium with a reply surface gets one short memo, emitted after the gates and attached
