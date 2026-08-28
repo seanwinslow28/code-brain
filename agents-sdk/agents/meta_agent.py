@@ -76,6 +76,12 @@ AGENT_METADATA: dict[str, dict[str, str | float]] = {
     "meta_agent":        {"display": "meta-agent",            "schedule": "8:35 AM daily",     "machine": "local",           "cost_label": "$0.00/run",   "monthly_usd": 0.00},
 }
 BATON_DIR = Path.home() / ".claude" / "batons"
+# eng-001.d40 / eng-002 B3: one JSONL line per meta-agent run, so seven
+# consecutive nights of a *healthy* fleet still prove the delivery path is
+# alive. A night with nothing to send is not evidence that sending works.
+ALERT_DELIVERY_LOG = (
+    Path.home() / "Code-Brain" / "code-brain" / "vault" / "health" / "fleet-alert-delivery.jsonl"
+)
 LOG_DIR_BASE = Path.home() / "Code-Brain" / "code-brain" / "vault" / "90_system" / "agent-logs"
 HISTORY_FILE_NAME = "agent-run-history.csv"
 HEALTH_WINDOW_HOURS = 26  # default: 24h + 2h buffer for schedule variance
@@ -92,7 +98,11 @@ _STALE_AFTER_HOURS: dict[str, int] = {
 # health. recursion-guard rows come from flush.py self-protecting against
 # re-entry on rapid SessionEnd hook fires — that's normal idle behavior.
 # empty-queue is deep-researcher with no work to do.
-_HEALTHY_CSV_STATUSES = {"success", "empty-queue", "recursion-guard"}
+# "ok" is flush.py's own healthy token (flush.py:392). Its absence here made
+# every healthy flush run fall to the else-branch and trip the alert baton —
+# eng-001.d21, the crying-wolf defect: the channel guaranteed a false positive
+# on every run, indistinguishable in form from a real one.
+_HEALTHY_CSV_STATUSES = {"success", "empty-queue", "recursion-guard", "ok"}
 _ERROR_CSV_STATUSES = {"error"}
 VAULT_ROOT = Path.home() / "Code-Brain" / "code-brain" / "vault"
 FLEET_STATE_DIR = VAULT_ROOT / "02_Areas" / "Agent-Fleet"
@@ -577,6 +587,77 @@ def generate_fleet_report(
 
 # ─── Main ─────────────────────────────────────────────────────────────
 
+
+# ── eng-001.d40 — the alert's delivery path ─────────────────────────────────
+# The meta-agent detected the synthesizer outage same-day and wrote its baton.
+# MTTD was fine; MTTA was three nights, and it was closed by an external audit
+# rather than by the fleet's own monitoring. Detection without delivery is not
+# awareness. The Pushover credentials were already provisioned for job-feed, so
+# this costs no new secret.
+
+def collect_fleet_alerts(config: dict, dry_run: bool) -> list[tuple[str, str, str]]:
+    """Return (agent, status, detail) for every active agent that is not healthy."""
+    alerts: list[tuple[str, str, str]] = []
+    for agent_name in ACTIVE_AGENTS:
+        health = check_agent_health(agent_name, config, dry_run)
+        if health["status"] not in ("healthy", "healthy (dry-run)"):
+            alerts.append((agent_name, health["status"], health.get("detail", "")))
+    return alerts
+
+
+def _send_fleet_push(*, title: str, message: str) -> bool:
+    """Thin seam over lib.pushover so the delivery path is testable in isolation."""
+    from lib.pushover import send_push
+
+    send_push(title=title, message=message, priority=1)
+    return True
+
+
+def _record_alert_delivery(*, alerts: int, delivered: bool, detail: str) -> None:
+    record = {
+        "ts": datetime.now().isoformat(timespec="seconds"),
+        "alerts": alerts,
+        "delivered": delivered,
+        "detail": detail,
+    }
+    try:
+        ALERT_DELIVERY_LOG.parent.mkdir(parents=True, exist_ok=True)
+        with open(ALERT_DELIVERY_LOG, "a", encoding="utf-8") as f:
+            f.write(json.dumps(record) + "\n")
+    except OSError as exc:  # never let bookkeeping break the run
+        print(f"  Alert delivery record failed: {exc}")
+
+
+def deliver_fleet_alert(alerts: list[tuple[str, str, str]], dry_run: bool) -> bool:
+    """Page a human once for the whole unhealthy set; record the attempt either way.
+
+    One baton, one page. A push per unhealthy agent would reproduce d21's noise
+    problem in a new place — a dead Mini would fire nine.
+
+    Returns True when nothing needed sending or the send succeeded, False when a
+    send was attempted and failed. Never raises: the surface whose job is
+    reporting failure must not itself fail loudly at the moment of reporting.
+    """
+    if dry_run:
+        return True
+
+    if not alerts:
+        _record_alert_delivery(alerts=0, delivered=True, detail="fleet healthy — nothing to send")
+        return True
+
+    lines = [f"{name}: {status}" for name, status, _detail in alerts]
+    message = "\n".join(lines)
+    try:
+        _send_fleet_push(title=f"Fleet alert — {len(alerts)} unhealthy", message=message[:900])
+    except Exception as exc:  # PushoverError, config error, transport, anything
+        print(f"  ALERT DELIVERY FAILED: {exc}")
+        _record_alert_delivery(alerts=len(alerts), delivered=False, detail=str(exc)[:200])
+        return False
+
+    _record_alert_delivery(alerts=len(alerts), delivered=True, detail="; ".join(lines)[:200])
+    return True
+
+
 def main():
     parser = argparse.ArgumentParser(description="Meta-Agent fleet health monitor")
     parser.add_argument("--dry-run", action="store_true", help="Skip real health checks")
@@ -612,20 +693,24 @@ def main():
     print(f"Fleet state updated: {state_path}")
 
     # Check for alerts
-    alert_needed = False
-    for agent_name in ACTIVE_AGENTS:
-        health = check_agent_health(agent_name, {}, args.dry_run)
-        if health["status"] not in ("healthy", "healthy (dry-run)"):
-            alert_needed = True
-            print(f"  ALERT: {agent_name} status is {health['status']}")
+    alerts = collect_fleet_alerts({}, args.dry_run)
+    for agent_name, status, _detail in alerts:
+        print(f"  ALERT: {agent_name} status is {status}")
 
-    if alert_needed:
+    if alerts:
         BATON_DIR.mkdir(parents=True, exist_ok=True)
         alert_path = BATON_DIR / "fleet_alert.flag"
         alert_path.write_text(f"Fleet alert at {datetime.now().isoformat()}\n")
         print(f"  Alert baton created: {alert_path}")
     else:
         print("  No alerts — all active agents healthy")
+
+    # eng-001.d40 — the baton now has a path to a human.
+    if deliver_fleet_alert(alerts, args.dry_run):
+        if alerts:
+            print(f"  Alert delivered to Pushover ({len(alerts)} unhealthy)")
+    else:
+        print("  Alert delivery FAILED — see fleet-alert-delivery.jsonl")
 
     print(f"\n{'─' * 60}")
     print("META-AGENT COMPLETE")

@@ -38,6 +38,10 @@ SCHEDULES_DIR="$(cd "$(dirname "$0")" && pwd)"
 LAUNCH_AGENTS="$HOME/Library/LaunchAgents"
 GEMINI_PLIST="com.sean.agent.gemini-researcher.plist"
 SUBSTACK_DRAFTER_PLIST="com.sean.agent.substack-drafter.plist"
+# eng-002.d49 / ADR-04 — the critic's nightly schedule is disabled at Phase 0
+# (eng-002.d15); manual mode is untouched. Opt-in, so a re-run of this
+# installer cannot silently restore it.
+VAULT_CRITIC_PLIST="com.sean.agent.vault-critic.plist"
 
 # LaunchDaemon-class plists (system-level, require sudo install at /Library/LaunchDaemons/)
 # These must NOT be loaded as user-level LaunchAgents — they reference paths like
@@ -67,6 +71,8 @@ if [[ "${1:-}" == "--list" ]]; then
             echo "  $name  (default disabled — INSTALL_GEMINI=1 to enable)"
         elif [[ "$name" == "$SUBSTACK_DRAFTER_PLIST" ]]; then
             echo "  $name  (default disabled — INSTALL_SUBSTACK_DRAFTER=1 to enable)"
+        elif [[ "$name" == "$VAULT_CRITIC_PLIST" ]]; then
+            echo "  $name  (default disabled — INSTALL_VAULT_CRITIC=1 to enable)"
         elif is_launch_daemon "$name"; then
             echo "  $name  (LaunchDaemon — install manually with sudo, see plist header)"
         else
@@ -91,6 +97,23 @@ if [[ "${1:-}" == "--remove" ]]; then
     exit 0
 fi
 
+# eng-002.d49 / ADR-04 — convergent removal. The old behaviour merely *skipped* a
+# default-disabled plist, so a symlink and launchd label installed before the
+# opt-in existed survived every subsequent run. That left the disable living in
+# a human's memory of which commands not to run. Skipping now enforces absence:
+# the formerly dangerous command is the one that converges the state.
+skip_disabled() {
+    local name="$1" hint="$2"
+    local target="$LAUNCH_AGENTS/$name"
+    if [[ -L "$target" || -e "$target" ]]; then
+        launchctl unload "$target" 2>/dev/null || true
+        rm -f "$target"
+        echo "  Removed $name (default disabled — set $hint=1 to enable)"
+    else
+        echo "  Skipping $name (default disabled — set $hint=1 to enable)"
+    fi
+}
+
 echo "Installing agent schedules..."
 for plist in "$SCHEDULES_DIR"/*.plist; do
     name=$(basename "$plist")
@@ -105,7 +128,7 @@ for plist in "$SCHEDULES_DIR"/*.plist; do
     # Skip gemini-researcher unless INSTALL_GEMINI=1 is set
     if [[ "$name" == "$GEMINI_PLIST" ]]; then
         if [[ "${INSTALL_GEMINI:-0}" != "1" ]]; then
-            echo "  Skipping $name (default disabled — set INSTALL_GEMINI=1 to enable)"
+            skip_disabled "$name" "INSTALL_GEMINI"
             continue
         fi
     fi
@@ -114,7 +137,16 @@ for plist in "$SCHEDULES_DIR"/*.plist; do
     # Sean reviews drafts before committing to weekly cadence (C9 pilot loop).
     if [[ "$name" == "$SUBSTACK_DRAFTER_PLIST" ]]; then
         if [[ "${INSTALL_SUBSTACK_DRAFTER:-0}" != "1" ]]; then
-            echo "  Skipping $name (default disabled — set INSTALL_SUBSTACK_DRAFTER=1 to enable)"
+            skip_disabled "$name" "INSTALL_SUBSTACK_DRAFTER"
+            continue
+        fi
+    fi
+
+    # Skip vault-critic unless INSTALL_VAULT_CRITIC=1 is set (eng-002.d15/d49).
+    # Manual mode (--target/--from-list/--force) is unaffected.
+    if [[ "$name" == "$VAULT_CRITIC_PLIST" ]]; then
+        if [[ "${INSTALL_VAULT_CRITIC:-0}" != "1" ]]; then
+            skip_disabled "$name" "INSTALL_VAULT_CRITIC"
             continue
         fi
     fi
