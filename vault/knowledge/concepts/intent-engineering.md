@@ -2,31 +2,32 @@
 title: "Intent Engineering"
 type: concept
 sources:
-  - knowledge/concepts/intent-engineering.md
+  - knowledge/expansions/intent-engineering.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This discipline defines the mechanism of translating ambiguous human desires into precise, machine-readable constraints. It operates on the invariant that understanding intent is an 80% problem of elicitation rather than a 20% problem of reformatting words. The value lies in bridging the gap between technical precision and creative intuition through better elicitation tools. This approach shifts the focus from merely executing commands to solving the underlying specification problem.
+A mechanism where high-level user intent is compiled into executable tool handles that carry specific, attenuated authorities rather than ambient credentials. This approach replaces broad access with task-scoped, revocable capabilities, ensuring that an agent can act only through authorities explicitly passed into the current task. The system enforces a boundary where naming a resource does not confer authority over it, requiring explicit declassification rules for data to cross security zones.
 
 ## Context
 
-Sean's ability to engineer intent is a key differentiator in his job hunt and product design. By mastering this skill, he can bridge the gap between creative vision and technical execution, making him more effective in collaborative environments. This capability allows him to act as a translator between vague stakeholder requests and concrete agent behaviors.
+Sean is building a portfolio artifact that demonstrates provable security boundaries in agentic systems. By implementing this mechanism, he can show that injected payloads cannot acquire Keychain or filesystem authority, turning abstract security rhetoric into an inspectable, testable system architecture.
 
 ## Evidence
 
-> Getting useful intent out of someone who says 'make it pop' is the unsolved 80%; reformatting their words is the easy 20%.
+> The agent can act only through authorities explicitly passed into this task; naming a resource does not confer authority over it.
 
-> The market opportunity lies in bridging the gap between technical precision and creative intuition through better elicitation tools.
+> Permission governs actions; information-flow policy governs what influenced those actions and where derived data may travel.
 
 ## Examples
 
-- Converting a client's vague feedback into a detailed style guide for an AI agent.
-- Creating a template for 'creative intent' that forces users to specify tone, audience, and constraints.
+- Compile an Intent Charter into short-lived tool handles for an MCP server
+- Run adversarial GitHub-issue payloads to test authority boundaries
+- Attach labels such as source=github_issue and integrity=untrusted to values
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[The Verification-Governance Inversion in Agentic Workflows]]
+[[MCP Server Hardening]] [[Privacy-Aware Data Routing]] [[The Verification-Governance Inversion]]

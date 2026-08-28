@@ -2,30 +2,31 @@
 title: "Resilience Engineering: Work-as-Imagined vs Work-as-Done"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-06-08-task-26-research-reference-brief.md
+  - knowledge/connections/declarative-intent-vs-situated-action-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-06-09
-updated: 2026-06-09
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This concept describes the structural gap between idealized automation flows and the reality of exception handling. In AP systems, the 'work-as-done' is dominated by manual interventions for edge cases like duplicate detection failures or tolerance threshold breaches, rather than the seamless 'work-as-imagined' flow. The system's reliability depends not on preventing all errors, but on how efficiently it routes these exceptions to human judgment when automated controls fail.
+This concept defines the structural gap between prescribed operational protocols and the actual, adaptive behaviors required to maintain system integrity under stress. It posits that rigid adherence to 'work-as-imagined' creates a false sense of security, while true resilience emerges from the 'work-as-done'—the improvisational adjustments agents and users make when automated routines fail or misalign with reality. The mechanism relies on treating deviations not as errors to be eliminated, but as essential data points that reveal the latent complexity of the system.
 
 ## Context
 
-Sean is building an Enterprise AP Agent Spec where correctness-critical claims must be verified against primary sources. Understanding that the 'work-as-done' involves significant exception routing helps him design agents that prioritize robust error handling and verification loops over pure automation speed, ensuring the system remains trustworthy when it deviates from the ideal path.
+Sean's agent fleet has historically optimized for compliance with static plans (e.g., daily note generation) rather than adapting to the dynamic nature of his creative and professional workflows. This misalignment causes the system to log 'success' when it is actually just following a broken script, while ignoring the valuable adaptive work Sean performs manually to correct course.
 
 ## Evidence
 
-> Exceptions (price/qty mismatch, missing PO, duplicate, fraud flag) route to a human; track exception rate by type + resolution time.
+> plans do not determine action; they are resources people reinterpret while responding to circumstances
 
-> The bank-account-change event is the single highest-risk moment in AP and needs dedicated controls (dual approval + independent verification) beyond normal workflow.
+> The core tension lies between the agent fleet's reliance on 'declared routines' (static plans) and Sean's actual 'situated actions' (dynamic improvisation)
 
 ## Examples
 
-- Automated duplicate detection can catch a large share pre-payment (one vendor claims 'up to 95%' — marketing ceiling).
+- Agents enforcing rigid workflows that force Sean to deviate, with deviations logged as errors rather than analyzed as adaptive responses
+- The system optimizing for compliance with an imaginary workflow while the real value is generated in the 'residue' of those deviations
 
 ## Related Concepts
 
-[[Automation Reliability]] [[Supervision as the New AI Edge]]
+[[Probe Design vs. Routing Compliance in Agentic Workflows]] [[The Tension Between Automation Velocity and Creative Friction]]

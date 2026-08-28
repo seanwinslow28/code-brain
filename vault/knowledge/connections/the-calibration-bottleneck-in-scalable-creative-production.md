@@ -2,33 +2,32 @@
 title: "The Calibration Bottleneck in Scalable Creative Production"
 type: connection
 connects:
-  - Supervision as the New AI Edge
-  - The Paradox of Agentic Efficiency vs. Creative Authority
-  - The Taste-Fidelity Decoupling in Creative Production
-created: 2026-07-13
-updated: 2026-07-13
+  - The Calibration Bottleneck in Scalable Creative Production
+  - Legibility Debt as a Supervision Failure Mode
+  - Throughput vs. Activity Illusion in Job Hunt Operations
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the velocity of automated synthesis and the fidelity required for creative authority. As Sean's agent fleet scales up concept volume (e.g., 153 concepts in July), the rejection rate drops but the cognitive load of supervision increases, creating a bottleneck where the cost of correction exceeds the value of generation. This pattern suggests that scalable creative production is not limited by tool capability but by the human capacity to maintain 'taste' as an evaluation function against homogenized outputs.
+This connection reveals a fundamental tension between the scalability of automated synthesis and the human capacity to verify its output. As Sean’s vault synthesizer scales up concept production (evidenced by the jump from 45 to 125+ concepts), the verification burden shifts entirely to the user, creating a bottleneck where cognitive utility is capped by Sean’s ability to audit the graph. The consequence is that automation velocity can outpace semantic value, leading to a 'legibility debt' where the graph appears robust but contains hidden structural or semantic errors.
 
 ## Threads
 
-### [[Supervision as the New AI Edge]]
+### [[The Calibration Bottleneck in Scalable Creative Production]]
 
-> The reported failures cluster around bad context discipline, vague prompts, missing eval loops, and unmonitored tool output
+> The calibration bottleneck emerges when the rate of automated insight generation exceeds the human capacity to verify and integrate those insights into a coherent worldview.
 
-### [[The Paradox of Agentic Efficiency vs. Creative Authority]]
+### [[Legibility Debt as a Supervision Failure Mode]]
 
-> This connection reveals a critical inversion where the efficiency of AI generation is directly offset by the increasing cognitive load of supervision, creating a bottleneck that undermines creative authority.
+> Legibility debt accumulates when automated systems produce outputs that are structurally valid but semantically hollow, masking decay behind a veneer of productivity.
 
-### [[The Taste-Fidelity Decoupling in Creative Production]]
+### [[Throughput vs. Activity Illusion in Job Hunt Operations]]
 
-> they often spend more time fixing tone, structure, and accuracy than they would have spent drafting themselves.
+> High activity metrics in job hunting often mask low strategic value, creating an illusion of progress while actual outcomes remain stagnant.
 
 ## Implications
 
-- Sean must prioritize 'evaluation loops' over 'prompt engineering' in his Substack content to address the true bottleneck of creative authority.
-- Agent fleet scaling should be capped by human supervision capacity rather than computational throughput to prevent quality degradation.
-- The value proposition for Sean's audience shifts from efficiency to 'creative sovereignty' and 'taste preservation'.
+- Sean must implement stricter quality gates for the vault synthesizer to prevent semantic decay from outpacing his ability to audit it.
+- The definition of 'success' for the synthesizer should shift from concepts written to verified connections made, aligning automation goals with cognitive utility.

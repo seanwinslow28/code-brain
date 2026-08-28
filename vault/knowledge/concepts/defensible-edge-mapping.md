@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/defensible-edge-mapping.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-13
+updated: 2026-08-13
 ---
 
 ## Definition

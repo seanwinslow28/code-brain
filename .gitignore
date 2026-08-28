@@ -264,3 +264,15 @@ vault/knowledge/private/
 # Late finds (2026-06-10 marker sweep): personal medical note + Apple Notes import
 vault/40_knowledge/references/ref-dr-cat-medical-transition-boston.md
 vault/70_apple-notes/
+
+# Job-feed run manifests — added 2026-08-11 on this branch after the privacy
+# scrub. runs[].failed_pollers names target companies as literal ats:<slug>.
+# main carries the same rule; this branch runs production and must not re-add
+# them. The fleet board reads these from disk, never from git.
+vault/health/job-feed-manifest-*.json
+
+# Daily notes moved out of vault/10_timeline/daily/ to vault/daily/ on
+# 2026-08-11 and the rule above did not follow them. This branch never
+# received the rule and pushed six personal notes to the public repo
+# (eng-002.d146, 2026-08-26 -> 08-28). Same content, same reason, same rule.
+vault/daily/

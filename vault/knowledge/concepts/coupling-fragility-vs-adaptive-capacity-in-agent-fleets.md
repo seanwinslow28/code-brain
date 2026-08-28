@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/coupling-fragility-vs-adaptive-capacity-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This tension exists between the engineering desire for deterministic reliability through strict uptime metrics and the operational reality that complex agent fleets fail normally due to hidden dependencies. A failure is not merely an agent-health incident but a coupling incident where one agent's success condition creates an unsafe context for another, leading to silent propagation of errors. The system prioritizes the appearance of continuity over the actual ability to recover from novel states, eroding trust in the automated workflow.
+This concept defines the tension between rigid functional dependencies and the system's ability to degrade gracefully under load or failure. It posits that agent fleets often operate with high coupling, where a single point of failure (like credential expiration) halts downstream processes, rather than exhibiting adaptive capacity where minimal viable outputs are preserved. The mechanism involves identifying 'latent conditions'—such as timing variance or environment drift—that do not break individual components but resonate to cause systemic failure when they coincide.
 
 ## Context
 
-Sean's vault synthesizer and memory index depend on each other; if the synthesizer writes malformed concepts, the index may fail or produce garbage, yet both might report 'success' in isolation. This coupling fragility means that standard health checks are insufficient for maintaining the integrity of his personal knowledge base.
+Sean's vault synthesizer runs show a clear shift from high-throughput/high-rejection (qwen3-14b era) to lower-throughput/lower-rejection (qwen3.6-35b era). Understanding this trade-off is critical for determining whether the fleet should prioritize volume of synthesis or reliability of output, especially as the job hunt and creative studio domains require consistent, albeit smaller, signals.
 
 ## Evidence
 
-> This failure is not an agent-health incident; it is a coupling incident where A’s success condition creates B’s unsafe context.
+> The missing note was the visible boundary crossing; contributing conditions included credential validity, launchd environment, schedule ordering, write-path availability, and absent fallback generation.
 
-> The core tension lies between the engineering desire for deterministic reliability through strict uptime metrics and the operational reality that complex agent fleets fail normally due to hidden dependencies.
+> When the morning agent cannot produce the full note, the fleet crosses from base capacity into adaptive capacity: create a minimal skeleton, preserve queued captures, mark provenance and staleness, then reconcile later.
 
 ## Examples
 
-- Minor semantic mismatches accumulate as 'legibility debt,' eventually causing catastrophic failures that require manual intervention.
-- Sean needs to create incident review templates that distinguish between component failures and coupling failures in his agent fleet.
+- The transition from qwen3-14b (avg 120+ concepts written, ~60 rejected) to qwen3.6-35b (avg 100 concepts written, ~20 rejected) demonstrates a shift toward higher fidelity and lower rejection rates, suggesting improved adaptive capacity despite lower raw throughput.
+- The 'rejected_count' metric in the manifest serves as a proxy for coupling fragility; high rejection counts indicate that the system is failing to adapt to latent conditions (e.g., cluster quality variance) rather than gracefully degrading.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Silent Failure Propagation in Agent Fleets]]
+[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[The Illusion of Health in Autonomous Systems]]

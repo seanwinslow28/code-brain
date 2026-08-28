@@ -2,32 +2,32 @@
 title: "Velocity vs. Judgment in MCP Strengthening"
 type: connection
 connects:
-  - Velocity vs. Judgment in MCP Strengthening
-  - The Illusion of Health in Autonomous Systems
-  - Harness Engineering Invariant
-created: 2026-07-21
-updated: 2026-07-21
+  - The Taste-Throughput Trade-off in Agentic Synthesis
+  - Performative Taste Drift
+  - Supervision Fatigue as the Hard Cap on Fleet Scaling
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Synthesis
 
-Sean's transition from small, high-quality runs to large, low-quality runs reveals a critical tension between operational velocity and semantic judgment. As the system scales up concept generation, the lack of rigorous filtering leads to a surplus of low-fidelity output that requires more manual supervision to correct. This paradox means that increasing throughput without strengthening the judgment layer actually decreases net productivity by amplifying the supervisory burden.
+The core tension lies in the trade-off between maintaining high reliability in automation to avoid errors in critical job-hunt tasks and the need for velocity in a fast-moving market. As Sean scales his creative output via the fleet, the pursuit of automated velocity creates friction when infrastructure dependencies are unstable. This leads to a situation where the cost of maintaining unique authorship increases non-linearly with automation scale, requiring deliberate friction in the workflow.
 
 ## Threads
 
-### [[Velocity vs. Judgment in MCP Strengthening]]
+### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
-> Sean's transition from small, high-quality runs to large, low-quality runs reveals a critical tension between operational velocity and semantic judgment.
+> There is a fundamental tension between the velocity of automated synthesis and the costliness of signals required for career differentiation.
 
-### [[The Illusion of Health in Autonomous Systems]]
+### [[Performative Taste Drift]]
 
-> The agents you have already built will keep producing work long after they stop being right.
+> This mechanism describes the endogenous change in an evaluator's standards caused by repeated exposure to generated outputs.
 
-### [[Harness Engineering Invariant]]
+### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
 
-> This invariant posits that agent reliability is inversely proportional to complexity of its surrounding harness, as every added tool or permission expands the failure surface non-linearly.
+> The cost of maintaining unique authorship increases non-linearly with automation scale, requiring deliberate friction in the workflow.
 
 ## Implications
 
-- Sean should prioritize pruning his synthesizer's toolset and reference files before attempting to upgrade models, as reducing the harness surface area will improve reliability more than raw compute power.
-- Monitoring 'health' metrics like run duration or error codes is insufficient; Sean must implement semantic verification of the synthesizer's output to detect when it 'stops being right' while still completing successfully.
+- Sean must implement explicit aesthetic standardization as a supervisory mechanism to prevent homogenization of his knowledge vault.
+- The cost of maintaining unique authorship increases non-linearly with automation scale, requiring deliberate friction in the workflow.

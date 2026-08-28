@@ -2,30 +2,29 @@
 title: "Synthesizer fix"
 type: concept
 sources:
-  - knowledge/connections/self-validation-vs-external-validity-in-agentic-evaluation.md
+  - knowledge/concepts/synthesizer-fix.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-A strategic intervention where the separation of model families for generation and evaluation is identified as the highest-leverage mechanism for restoring epistemic integrity. This fix requires decoupling the judge from the candidate pool to prevent self-grading artifacts, ensuring that validation metrics reflect external truth rather than internal consistency. The mechanism relies on architectural diversity to break the self-referential loops that compromise automated assessment reliability.
+This mechanism defines the strategic imperative of decoupling generation and evaluation models to prevent self-referential bias. It posits that family separation is the single highest-leverage, lowest-cost lever for improving epistemic hygiene in agentic workflows. By ensuring the evaluator is not a member of the candidate pool, the system can detect genuine novelty rather than reinforcing existing patterns.
 
 ## Context
 
-Sean identified this separation as the single highest-leverage lever for fixing his synthesizer's evaluation flaws, moving from a monolithic model family to a diverse panel to ensure genuine discovery and robustness across inputs.
+Sean needs to implement this fix to stop the vault synthesizer from overestimating its own output quality due to model homogeneity. The current reliance on qwen3.6-35b-a3b-32k for both tasks creates a closed loop where internal consistency is mistaken for external truth.
 
 ## Evidence
 
 > family separation is the single highest-leverage, lowest-cost lever
 
-> The core tension exists between the operational efficiency of using a single model family for both generation and evaluation versus the epistemic integrity required for genuine discovery
+> When Sean relies on a single model family for both generation and evaluation, he risks optimizing for internal consistency rather than external truth.
 
 ## Examples
 
-- Switching from qwen3.6-35b-a3b-32k for both synthesis and validation to using external judges
-- Implementing a blind judge panel that excludes the primary synthesis model
+- Switching from qwen3.6-35b-a3b-32k to a different model family for the FUSE judge in the Vault Synthesizer Eval Suite.
 
 ## Related Concepts
 

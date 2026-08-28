@@ -1,0 +1,19 @@
+{
+  "clusters_sampled": 0,
+  "concept_paths": [],
+  "concepts_written": 0,
+  "connection_paths": [],
+  "connections_written": 0,
+  "duration_seconds": 0.0,
+  "edges_rejected": 0,
+  "edges_written": 0,
+  "files_processed": 0,
+  "host_probe": "unreachable",
+  "model_used": "none",
+  "rejected_count": 0,
+  "rejected_reasons": {},
+  "run_id": "2026-08-14T02:31:37",
+  "skipped_thin_source": 0,
+  "status": "wol-deferred",
+  "wol_status": "wol_deferred"
+}

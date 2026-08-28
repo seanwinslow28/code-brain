@@ -2,31 +2,31 @@
 title: "Slop as a Trust Deficit"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-the-calibration-bottleneck-in-scalable-creative-production.md
+  - knowledge/concepts/slop-as-a-trust-deficit.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-27
+updated: 2026-08-27
 ---
 
 ## Definition
 
-This concept defines the erosion of trust in automated systems when they produce low-quality, generic outputs. While qwen3-14b offers lower token costs, its higher rejection rates force Sean into a 'supervision trap' where he spends hours correcting low-quality drafts. The consequence is that the perceived value of the automation decreases as the cost of correction increases.
+Slop is defined here not as low-quality content, but as the structural outcome of a system where verification capacity lags behind production capacity. It manifests when the architecture becomes a circulation loop rather than a learning loop, meaning that outputs are generated and consumed without meaningful integration or truth maintenance. This deficit erodes Sean's ability to trust the vault as a source of strategic insight, forcing him to manually audit for drift.
 
 ## Context
 
-Sean must benchmark total cost (token cost + estimated supervision hours) rather than just token cost when selecting models for creative tasks. High-fidelity models may be justified even at higher per-unit costs if they reduce the rejection rate below a critical threshold of human attention.
+Sean needs to understand that 'slop' is a symptom of infrastructure fragility in the verification layer, not just a content quality issue. The drop in rejected concepts in recent runs indicates a failure in the taste mechanism, not an improvement in quality.
 
 ## Evidence
 
-> While qwen3-14b offers lower token costs, its higher rejection rates force Sean into a 'supervision trap' where he spends hours correcting low-quality drafts.
+> The architecture is currently a circulation loop, not necessarily a learning loop.
 
-> The consequence is that the perceived value of the automation decreases as the cost of correction increases.
+> Scaling agent fleets without scaling verification capacity leads to diminishing returns on creative authority.
 
 ## Examples
 
-- The 'supervision trap' caused by high rejection rates.
-- The decrease in perceived automation value due to correction costs.
+- The increase in concepts_written from 82 (July 9) to 125 (August 13) without a proportional increase in connections_written suggests a dilution of signal.
+- The duration_seconds for runs increased significantly after switching to qwen3.6-35b-a3b-32k, yet the connection density did not improve proportionally.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[The Efficiency-Quality Inversion in Automated Synthesis]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Operational Metrics Mask Semantic Decay in Agent Fleets]]

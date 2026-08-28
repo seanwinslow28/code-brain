@@ -2,31 +2,31 @@
 title: "Context Compounding"
 type: concept
 sources:
-  - knowledge/connections/the-scalability-paradox-in-agentic-creative-workflows.md
+  - knowledge/concepts/context-compounding.md
 tags: [auto-generated, phase-6]
-created: 2026-07-21
-updated: 2026-07-21
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This mechanism refers to the degradation of instruction adherence caused by the accumulation of irrelevant or low-signal data in the agent's context window. As the memory core grows, the model's attention is diluted, causing it to ignore critical constraints in favor of more recent or statistically probable patterns. This leads to a loss of strategic depth and specific user intent as the system prioritizes breadth over precision.
+Context compounding is a non-linear degradation mechanism where the accumulation of generated data and metadata within a fixed context window progressively dilutes the salience of initial instructions and taste parameters. As the system processes more clusters, the relative weight of the original creative constraints decreases, leading to a drift in output style and content relevance that disproportionately affects fidelity even with small volume increases. This effect creates a systemic trust deficit because scaling automated concept generation directly conflicts with the preservation of taste memory, forcing active management of context size to prevent the loss of specific voice signals.
 
 ## Context
 
-Sean identifies that a bloated memory makes the model ignore real instructions, which is a direct consequence of scaling without proper pruning protocols. This explains why his synthesizer's output quality may stagnate or decline despite increased sampling efforts.
+Sean's vault synthesizer relies on maintaining a consistent 'taste' across all generated concepts, but the compounding nature of context loss means that even powerful models cannot retain specific taste signals when processing large volumes of data. This tension necessitates a shift from pure throughput optimization to context-aware sampling strategies that prioritize signal preservation over volume.
 
 ## Evidence
 
-> A bloated memory makes the model ignore the real instructions.
+> As Sean scales the concept generation, the system generates more data but loses the specific 'taste' signals that define his creative voice.
 
-> As Sean scales the concept generation, the depth of strategic connections stagnates.
+> The core tension is that scaling automated concept generation directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
 
 ## Examples
 
-- The system generates more data but loses the specific 'taste' signals that define his creative voice.
-- forcing Sean to intervene more frequently rather than less.
+- Runs with higher cluster sampling counts (e.g., 253 clusters in June) showed higher rejection rates compared to runs with lower sampling counts (e.g., 125 clusters in July), despite similar concept counts.
+- The shift from 14b to 35b models did not prevent context dilution, as the larger model simply processed more data without retaining the specific taste signals as effectively.
 
 ## Related Concepts
 
-[[Throughput vs. Taste Memory Tension]] [[The Taste-Fidelity Decoupling in Creative Production]]
+[[Throughput vs. Taste Memory Tension]] [[The Scalability Paradox in Agentic Creative Workflows]]

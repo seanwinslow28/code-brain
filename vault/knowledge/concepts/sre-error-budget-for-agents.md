@@ -2,31 +2,30 @@
 title: "SRE Error Budget for Agents"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-reliability-metrics-and-adaptive-capacity-in-agent-fleets.md
+  - knowledge/expansions/connections/cost-capped-workflows-and-agent-health-monitoring.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This mechanism establishes a quantitative threshold for acceptable failure in probabilistic systems, treating error not as a binary state but as a managed resource. It requires defining explicit limits on failure rates, recovery paths, and operator attention costs to prevent the 'illusion of health' where an agent appears functional but is actually degrading system stability. The invariant here is that a creative agent's health is determined by its ability to stay within these bounds during stress, rather than achieving perfect uptime which is often uninformative about underlying fragility.
+An SRE error budget transforms agent reliability from a binary health check into a quantifiable tolerance for failure, allowing the system to trade off availability against cost or quality based on remaining slack. When the burn rate of failures exceeds a defined threshold, the system must execute predetermined remediation steps rather than merely logging errors. This mechanism shifts the operational focus from preventing all errors to managing the acceptable rate of error-induced disruption within a specific time window.
 
 ## Context
 
-Sean needs to apply this concept to his job hunt by framing his agent fleets as systems with managed error budgets. This demonstrates to potential employers that he understands the trade-offs between reliability and adaptive capacity, a key differentiator for senior engineering roles involving autonomous systems.
+Sean's agent fleet has historically suffered from silent failures and inconsistent outputs. By defining an explicit error budget, Sean can automate decisions about when to suspend non-critical synthesis runs or escalate to human review, preventing the accumulation of low-quality artifacts that degrade his knowledge vault over time.
 
 ## Evidence
 
-> A creative agent is not healthy when it succeeds once; it is healthy when its failure rate, recovery path, and operator attention cost stay inside an explicit error budget.
+> Define a user-visible SLO—such as “95% of scheduled runs produce a usable artifact by its deadline”—then treat the remaining failure allowance as an error budget.
 
-> The tension lies between defining strict Service Level Objectives for context availability and the reality that agents will inevitably fail to meet them.
+> Its crucial move is converting telemetry into predetermined operating decisions.
 
 ## Examples
 
-- Tracking operator attention cost during agent failures
-- Defining recovery paths within an explicit error budget
+- When burn rate exceeds X, suspend Y and execute Z.
 
 ## Related Concepts
 
-[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[The Illusion of Health in Autonomous Systems]]
+[[Agent Health Monitoring]] [[Operational Readiness Review]]

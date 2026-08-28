@@ -2,32 +2,32 @@
 title: "The Efficiency-Quality Inversion in Automated Synthesis"
 type: connection
 connects:
-  - The Calibration Bottleneck in Scalable Creative Production
-  - Supervision as the New AI Edge
-  - The Taste-Fidelity Decoupling in Creative Production
-created: 2026-07-14
-updated: 2026-07-14
+  - The Skill Atrophy Trap in Agentic Workflows
+  - The Taste-Throughput Trade-off in Agentic Synthesis
+  - Supervision Fatigue as the Hard Cap on Fleet Scaling
+created: 2026-08-27
+updated: 2026-08-27
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the apparent efficiency of scaling agent fleets and the hidden quality costs that emerge as supervision becomes the bottleneck. As Sean increases concept volume, the marginal cost of generation drops, but the marginal cost of correction rises due to the taste-fidelity decoupling. This inversion means that beyond a certain scale, automation actually reduces net creative output because the human supervisor cannot maintain fidelity across all outputs. The consequence is that 'efficiency' metrics become misleading unless they account for the full lifecycle of creation and correction.
+There is a fundamental tension between the fleet's drive for throughput (concepts written, connections made) and Sean's need for 'taste' maintenance. As the system scales up automation to reduce manual intervention, it simultaneously erodes the very skill set required to evaluate that output. The consequence is a 'verification-governance inversion' where the user must spend more time auditing low-effort automated outputs than they saved by automating them, creating a hidden cost that grows non-linearly with scale.
 
 ## Threads
 
-### [[The Calibration Bottleneck in Scalable Creative Production]]
+### [[The Skill Atrophy Trap in Agentic Workflows]]
 
-> As Sean's agent fleet scales up concept volume (e.g., 153 concepts in July), the rejection rate drops but the cognitive load of supervision increases, creating a bottleneck where the cost of correction exceeds the value of generation.
+> automation often removes routine practice while leaving the human responsible for the rarest, hardest failures—precisely when their situational awareness and skill are weakest
 
-### [[Supervision as the New AI Edge]]
+### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
-> The reported failures cluster around bad context discipline, vague prompts, missing eval loops, and unmonitored tool output
+> test whether automated drafting, synthesis, and daily-note assembly weaken Sean’s ability to detect banal prose, invented connections, or silent pipeline decay
 
-### [[The Taste-Fidelity Decoupling in Creative Production]]
+### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
 
-> they often spend more time fixing tone, structure, and accuracy than they would have spent drafting themselves.
+> This automates ___, but leaves Sean responsible for ___ under degraded visibility; preserve readiness through ___.
 
 ## Implications
 
-- Sean should cap agent fleet scaling at a level where human supervision can maintain high fidelity, rather than maximizing raw output volume.
-- Investment in 'evaluation loops' and 'taste preservation' tools will yield higher returns than investing in larger or more numerous models.
+- Sean must implement 'automation handback' protocols where he periodically performs manual tasks to maintain skill readiness, even if it reduces short-term efficiency.
+- The fleet's success metrics should include a 'taste decay' indicator, not just throughput, to warn when automation is outpacing Sean's ability to verify.

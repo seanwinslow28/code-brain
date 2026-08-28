@@ -2,31 +2,31 @@
 title: "The Tension Between Automation Velocity and Creative Friction"
 type: concept
 sources:
-  - knowledge/concepts/the-tension-between-automation-velocity-and-creative-friction.md
+  - knowledge/connections/declarative-intent-vs-situated-action-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This invariant describes a structural paradox where increasing the throughput of automated agents fails to improve effective output because the underlying infrastructure lacks semantic stability. When hardware or network reliability degrades, the agent fleet's ability to maintain context across domains collapses, creating a gap between perceived activity and actual creative authority. The system appears healthy in terms of process completion metrics, but the user experiences increased friction due to broken dependencies and stale context.
+This concept identifies the inverse relationship between the speed of automated processes and the quality of creative output, where excessive velocity eliminates the 'friction' necessary for deep cognitive engagement. Automation reduces the effort required to execute tasks, but it also removes the opportunities for serendipitous discovery and critical reflection that occur during manual execution. The mechanism suggests that a certain level of friction is not a bug to be fixed, but a feature that preserves creative authority and semantic depth.
 
 ## Context
 
-Sean is observing that despite scaling up his agent fleet (moving from qwen3-14b to qwen3.6-35b), his effective creative output is not linearly correlated with automation speed. The Alienware workstation going offline directly hinders the goal of three-machine synchronization, proving that software velocity cannot outperform hardware availability.
+Sean's job hunt and creative studio workflows require high-fidelity output that cannot be achieved through pure automation. The fleet's tendency to maximize 'concepts_written' and 'connections_written' without regard for the quality of the underlying thought process risks homogenizing his output and eroding his unique voice.
 
 ## Evidence
 
-> The pursuit of high-velocity automation through agent fleets often exacerbates creative friction when underlying infrastructure is unstable.
+> The consequence is a misalignment where the system optimizes for compliance with an imaginary workflow, while the real value is generated in the 'residue' of those deviations
 
-> Alienware workstation reported offline, hindering the goal of three-machine synchronization for the vault SSoT.
+> Sean should design his agents to capture 'deviation logs' as first-class data, not just 'success logs', to understand the true shape of his creative process
 
 ## Examples
 
-- Run on 2026-07-06 used qwen3.6-35b-a3b-32k but had 106 rejections and 103 concepts, indicating high noise despite powerful models.
-- The Alienware workstation being offline prevents the synchronization of the vault Single Source of Truth across machines.
+- The system optimizing for compliance with an imaginary workflow while the real value is generated in the 'residue' of those deviations
+- Designing agents to capture 'deviation logs' as first-class data rather than just 'success logs'
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Infrastructure Fragmentation and Semantic Isolation]]
+[[Resilience Engineering: Work-as-Imagined vs Work-as-Done]] [[The Taste-Fidelity Decoupling in Creative Production]]

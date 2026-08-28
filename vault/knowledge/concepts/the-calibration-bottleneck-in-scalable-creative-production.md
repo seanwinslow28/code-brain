@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/the-calibration-bottleneck-in-scalable-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This mechanism defines the structural limit where the velocity of automated synthesis outpaces the fidelity required for creative authority, creating a bottleneck at the point of human calibration. As the agent fleet scales, the system generates more clusters and concepts, but the human supervisor's ability to accurately calibrate these outputs against their internal 'taste' standards becomes the limiting factor. This bottleneck is not a failure of the agents but a feature of the coupling between high-velocity generation and low-velocity judgment, requiring explicit management of the 'supervision budget'.
+This mechanism describes the structural limit where automated insight generation outpaces human verification capacity, creating a dependency on Sean's cognitive bandwidth for quality control. As the volume of synthesized concepts increases, the marginal utility of each new node decreases because the audit cost rises non-linearly with complexity. The system shifts from a value-creation engine to a liability generator when semantic decay occurs faster than the user can correct it, effectively turning the vault into a source of noise rather than signal.
 
 ## Context
 
-Sean's data shows that as clusters sampled increase (e.g., 272 in July), the rejected count does not necessarily decrease proportionally, suggesting that the calibration process is struggling to keep pace with the input volume. This tension forces a strategic choice between raw throughput and the preservation of creative integrity.
+Sean is currently scaling his vault synthesizer from ~90 to 125+ concepts per run while using larger models. This creates a direct risk where the graph's structural integrity degrades because he cannot manually verify the increasing number of connections, leading to 'legibility debt' where the system looks healthy but contains hidden errors.
 
 ## Evidence
 
-> As Sean's agent fleet scales up concept volume (e.g., 153 concepts in July), the rejection rate drops but the cognitive load of supervision increases, creating a bottleneck where the cost of correction exceeds the value of generation.
+> The calibration bottleneck emerges when the rate of automated insight generation exceeds the human capacity to verify and integrate those insights into a coherent worldview.
 
-> This connection reveals a fundamental tension between the velocity of automated synthesis and the fidelity required for creative authority.
+> Legibility debt accumulates when automated systems produce outputs that are structurally valid but semantically hollow, masking decay behind a veneer of productivity.
 
 ## Examples
 
-- Sean must implement a 'supervision budget' that limits concept volume to a level where he can maintain high-fidelity oversight, preventing taste degradation.
-- He should prioritize tools that enhance 'taste preservation' and 'evaluation loops' over raw model scaling, as these directly address the fidelity gap.
+- The jump from 45 concepts in June to 125+ concepts in August without a corresponding increase in Sean's verification time.
+- The shift from 'concepts written' as a success metric to 'verified connections made' as the required standard.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[The Efficiency-Quality Inversion in Automated Synthesis]]
+[[Legibility Debt as a Supervision Failure Mode]] [[Throughput vs. Activity Illusion in Job Hunt Operations]]

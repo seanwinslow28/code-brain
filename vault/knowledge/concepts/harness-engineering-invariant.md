@@ -2,19 +2,19 @@
 title: "Harness Engineering Invariant"
 type: concept
 sources:
-  - knowledge/connections/velocity-vs-judgment-in-mcp-strengthening.md
+  - knowledge/concepts/harness-engineering-invariant.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-13
+updated: 2026-08-13
 ---
 
 ## Definition
 
-This invariant posits that agent reliability is inversely proportional to the complexity of its surrounding harness, as every added tool, permission, or reference file expands the failure surface non-linearly. The mechanism involves the introduction of new variables that the agent must manage simultaneously, increasing the probability of context drift or instruction following errors. Simplifying the harness by removing redundant tools often yields greater reliability gains than upgrading the underlying model.
+This invariant posits that agent reliability is inversely proportional to the complexity of its surrounding harness, as every added tool or permission expands the failure surface non-linearly. The mechanism suggests that simplifying the operational environment (fewer tools, stricter constraints) yields higher semantic fidelity than increasing computational power. When the harness becomes too permissive, the agent drifts into low-judgment modes because it lacks the structural friction necessary to enforce quality standards.
 
 ## Context
 
-Sean is considering upgrading models to improve output quality, but the data suggests that reducing the harness complexity (e.g., fewer clusters sampled, less noise) might be more effective. He needs to audit his synthesizer's toolset to identify which components are contributing to the 'illusion of health' rather than actual semantic value.
+Sean's recent runs show a correlation between reduced rejection rates and reduced connection depth, implying that his current harness is too permissive for high-quality synthesis. This suggests that upgrading models without pruning tools may degrade performance rather than improve it.
 
 ## Evidence
 
@@ -24,8 +24,8 @@ Sean is considering upgrading models to improve output quality, but the data sug
 
 ## Examples
 
-- The reduction in 'clusters_sampled' from ~250 (qwen3-14b era) to ~150 (qwen3.6-35b era) coinciding with a drop in 'rejected_count' suggests that limiting input scope improved output quality.
-- The duration of runs remained relatively stable (~1700s) despite model changes, indicating that the bottleneck is not compute time but the complexity of the decision-making process within the harness.
+- The drop in rejected_count from 78 (qwen3-14b) to 7 (qwen3.6-35b-a3b-32k) despite similar concept counts.
+- The increase in duration_seconds from 47s to 1700s as the harness complexity grew with model size.
 
 ## Related Concepts
 

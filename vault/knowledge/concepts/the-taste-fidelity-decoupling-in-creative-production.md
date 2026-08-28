@@ -2,31 +2,31 @@
 title: "The Taste-Fidelity Decoupling in Creative Production"
 type: concept
 sources:
-  - knowledge/connections/the-scalability-paradox-in-agentic-creative-workflows.md
+  - knowledge/concepts/the-taste-fidelity-decoupling-in-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-25
+updated: 2026-08-25
 ---
 
 ## Definition
 
-This pattern identifies the failure mode where the instruction to encode creative taste is structurally decoupled from the agent's ability to retain those signals over time. The mechanism operates on the principle that taste is not a static attribute but a dynamic constraint that must be actively maintained against the entropy of accumulating context. When the memory core grows without corresponding pruning, the taste signal becomes indistinguishable from noise, rendering the initial instruction ineffective regardless of its clarity.
+This pattern identifies the divergence between the quantity of generated artifacts and their qualitative alignment with established aesthetic standards. It posits that automated systems can produce volume independently of taste, but the utility of that volume is strictly gated by the fidelity of style transfer. As volume increases, the signal-to-noise ratio degrades unless explicit 'taste guardrails' are implemented to reject low-fidelity outputs before they enter the vault.
 
 ## Context
 
-Sean faces this because his creative output relies on consistent voice, yet the agent's memory bloat causes it to ignore specific stylistic constraints in favor of generic patterns.
+Sean's creative studio operations suffer from this decoupling as he scales. The data shows that while concept generation has increased dramatically, the consistency of 'Sean Mode' is threatened by the sheer volume of variations, requiring strategic capping of concurrent runs to preserve quality.
 
 ## Evidence
 
-> teaching an agent your taste means nothing if it cannot remember it.
+> This connection reveals a critical tension between the increasing volume of automated output and the stagnating depth of strategic connections.
 
-> A bloated memory makes the model ignore the real instructions.
+> Sean must cap the number of concurrent synthesizer runs to prevent taste drift, prioritizing quality over quantity in his creative studio pipeline.
 
 ## Examples
 
-- The value of the 'Creative Partner' is contingent on the agent's ability to prune irrelevant taste signals, not just accumulate them.
-- Sean must implement a strict reconciliation protocol to prevent his creative partner's output from degrading as the memory core grows.
+- The prompt explicitly forbids repeating the 'missed' drafts, indicating that previous iterations failed to capture the necessary aesthetic nuance.
+- The fleet architecture needs a 'taste guardrail' layer that rejects outputs before they enter the vault if they fail negative constraint checks.
 
 ## Related Concepts
 
-[[Throughput vs. Taste Memory Tension]] [[Context Compounding]]
+[[The Calibration Bottleneck in Scalable Creative Production]] [[Performative Taste Drift]]

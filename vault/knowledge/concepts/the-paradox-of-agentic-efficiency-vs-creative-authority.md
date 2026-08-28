@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/the-paradox-of-agentic-efficiency-vs-creative-authority.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This mechanism describes a structural inversion where the marginal cost of content generation approaches zero, thereby shifting the primary bottleneck from production capacity to editorial discernment. As tools lower the barrier to entry for creation, they simultaneously raise the cognitive load required to evaluate and curate that output. This dynamic forces creators into a supervisory role that erodes their strategic perspective and flow state, effectively trading creative authority for operational maintenance.
+This pattern describes an inverse relationship between automation velocity and perceived professional value, where high-throughput systems produce easily replicable artifacts that fail to communicate strategic judgment. To maintain creative authority in a role evaluating insight over execution, Sean must intentionally reduce throughput to increase the production cost of evidence, thereby proving his judgment drives outcomes rather than just his infrastructure. This requires sacrificing daily automation efficiency to capture high-fidelity decision traces, accepting lower volume for higher signal quality.
 
 ## Context
 
-Sean is navigating a market where 'taste' is becoming the scarce resource, yet his current tooling (the vault synthesizer) is optimized for volume rather than evaluation. Understanding this paradox is critical for positioning his Substack content not as a tutorial on generation, but as a guide to preserving creative authority in an age of infinite supply.
+Sean is transitioning from a builder role to an AI Product Manager where hiring managers evaluate 'judgment' and 'strategic insight.' If his vault appears as a stream of low-cost automated logs, it signals commodity labor rather than high-value strategic oversight. He needs to curate his public-facing evidence to reflect the scarcity of good decisions, not the abundance of processed data.
 
 ## Evidence
 
-> This connection reveals a fundamental tension where the efficiency gains of AI generation are directly offset by the cognitive load of supervision, creating a bottleneck that undermines creative authority.
+> High-velocity automation tends to produce descriptive, easily faked artifacts like configuration counts or routine logs, which fail to communicate judgment.
 
-> The reported failures cluster around bad context discipline, vague prompts, missing eval loops, and unmonitored tool output.
+> This corrects the current concept’s assumption that “having unusual infrastructure” automatically communicates “AI-PM judgment.”
 
 ## Examples
 
-- Sean's Substack series must focus on teaching 'evaluation loops' and 'context discipline' rather than just prompting techniques, as these are the true bottlenecks for creative professionals.
-- The value proposition for Sean's audience is not saving time on generation, but preserving creative authority and avoiding the 'soulless' trap of AI-generated content.
+- A 250-agent configuration count is descriptive; a replayable failure investigation with traces, trade-offs, and a shipped correction is a signal.
+- Sean must sacrifice some automation efficiency in his daily notes to capture high-fidelity decision traces, accepting lower volume for higher signal quality.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[Supervision as the New AI Edge]]
+[[Demonstration Over Declaration]] [[Critical Incident Technique]]

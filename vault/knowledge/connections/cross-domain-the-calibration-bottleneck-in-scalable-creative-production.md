@@ -2,32 +2,32 @@
 title: "Cross-Domain: The Calibration Bottleneck in Scalable Creative Production"
 type: connection
 connects:
-  - The Illusion of Health in Autonomous Systems
-  - Velocity vs. Judgment in MCP Strengthening
-  - Harness Engineering Invariant
-created: 2026-07-22
-updated: 2026-07-22
+  - The Calibration Bottleneck in Scalable Creative Production
+  - Supervision Fatigue as the Hard Cap on Fleet Scaling
+  - The Taste-Fidelity Decoupling in Creative Production
+created: 2026-08-19
+updated: 2026-08-19
 ---
 
 ## Synthesis
 
-This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit. As Sean scales his agent fleet, the 'illusion of health' masks a decay in semantic fidelity, forcing him to spend more time supervising low-quality output than he saves in generation time. The consequence is that velocity gains are negated by the increasing cost of judgment, creating a bottleneck where the human operator becomes the limiting factor for system reliability.
+The core tension lies in the misalignment between the exponential growth of automated concept generation and the linear capacity of human taste to curate them. This creates a calibration bottleneck where scaling the fleet does not scale the creative output proportionally, but instead amplifies the cost of verification. The consequence is a strategic imperative to limit concurrency and enforce strict taste guardrails, as unchecked scaling leads to aesthetic degradation rather than increased value.
 
 ## Threads
 
-### [[The Illusion of Health in Autonomous Systems]]
+### [[The Calibration Bottleneck in Scalable Creative Production]]
 
-> The agents you have already built will keep producing work long after they stop being right.
+> There is a fundamental tension between the desire for high-throughput agent fleets and the low-trust nature of style transfer, where the cost of verification scales faster than the volume of output.
 
-### [[Velocity vs. Judgment in MCP Strengthening]]
+### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
 
-> Sean's transition from small, high-quality runs to large, low-quality runs reveals a critical tension between operational velocity and semantic judgment.
+> The tension arises when the cost of verifying AI-generated content exceeds the value of the content itself, forcing a shift from production-centric to supervision-centric workflows.
 
-### [[Harness Engineering Invariant]]
+### [[The Taste-Fidelity Decoupling in Creative Production]]
 
-> This invariant posits that agent reliability is inversely proportional to complexity of its surrounding harness, as every added tool or permission expands the failure surface non-linearly.
+> This connection reveals a critical tension between the increasing volume of automated output and the stagnating depth of strategic connections.
 
 ## Implications
 
-- Sean must implement semantic verification metrics for his synthesizer runs, not just operational ones like duration or exit codes, to detect when the system 'stops being right' while still completing successfully.
-- Prioritizing harness simplification (reducing clusters_sampled and tool count) may yield higher reliability gains than upgrading to larger models like qwen3.6-35b, as it reduces the failure surface area.
+- Sean must cap the number of concurrent synthesizer runs to prevent taste drift, prioritizing quality over quantity in his creative studio pipeline.
+- The fleet architecture needs a 'taste guardrail' layer that rejects outputs before they enter the vault if they fail negative constraint checks.

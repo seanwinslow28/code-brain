@@ -1,0 +1,85 @@
+# Fleet Status — 2026-08-24
+
+**Generated:** 2026-08-24 08:45 by Meta-Agent
+**Active agents:** 9 of 14 | **Disabled:** 5
+
+## Active Agent Health
+
+### vault-indexer (2:00 AM daily, Mac Mini, $0.00/run)
+- **Status:** healthy
+- **Last run:** 2026-08-24T04:00:08
+- **Details:** status=success · 4.7h ago · notes='chunks=240, embeddings=0, errors=0'
+
+### vault-synthesizer (2:30 AM daily, MBP (when awake), $0.00/run)
+- **Status:** error
+- **Last run:** 2026-08-24T03:15:07
+- **Details:** status=error · 5.5h ago · notes='concepts=0 connections=0 rejected=0 edges=0'
+
+### vault-critic (3:30 AM daily, Mac Mini, $0.00/run)
+- **Status:** healthy
+- **Last run:** 2026-08-24T03:34:39
+- **Details:** status=success · 5.2h ago · notes='status=partial articles=0 codex_fail=1 ag_fail=0'
+
+### deep-researcher (2:45 AM daily, Mac Mini, $0.00/run)
+- **Status:** healthy
+- **Last run:** 2026-08-24T02:45:04
+- **Details:** status=empty-queue · mode=queue · 6.0h ago · notes='no unchecked items'
+
+### daily-driver morning (8:45 AM daily, Claude API, ~$0.40/run)
+- **Status:** healthy
+- **Last run:** 2026-08-24T08:31:33
+- **Details:** status=success · mode=morning · 0.2h ago · cost=$0.2752 · notes='Daily note for 2026-08-24 created successfully.  **Summary of what was done:*...'
+- **Daily note exists:** Yes (`/Users/seanwinslow/Code-Brain/code-brain/vault/10_timeline/daily/2026-08-24.md`)
+
+### job-feed (8:00-11:00 AM x7, Mac Mini, $0.00/run)
+- **Status:** healthy
+- **Last run:** 2026-08-24T08:30:04
+- **Details:** status=success · 0.2h ago · notes='fetch=0 scored=0 mbp=False'
+
+### knowledge-lint (Sunday 22:00, Mac Mini / MBP, $0.00/run)
+- **Status:** healthy
+- **Last run:** 2026-08-23T22:07:59
+- **Details:** status=success · 10.6h ago · notes='tier1=1079 tier2=232 | Tier-2 LLM scan: reviewed 3/3 concept batches.'
+
+### session-end-flush (hook-triggered, Mac Mini / MBP, $0.00/run)
+- **Status:** ok
+- **Last run:** 2026-08-21T18:39:30
+- **Details:** status=ok · mode=simple · 62.1h ago · notes='57 msgs'
+
+### meta-agent (8:35 AM daily, local, $0.00/run)
+- **Status:** healthy
+- **Last run:** 2026-08-24T08:45:02.012412
+- **Details:** Generating this report now
+
+## Domain-Aware Insights
+
+_Local summary unavailable — gemma4:e4b call returned no parseable JSON. Static fleet snapshot above remains authoritative._
+
+
+## Infrastructure
+
+| Machine | Endpoint | Status |
+|---------|----------|--------|
+| Mac Mini | http://192.168.68.200:11434 | OFFLINE |
+| Alienware | http://192.168.68.201:11434 | OFFLINE |
+| ComfyUI | http://192.168.68.201:8188 | OFFLINE |
+
+## Disabled Agents Reminder
+
+5 agents disabled per AUDIT-2026-04-09-agent-downsizing.md:
+- process-inbox, daily-driver evening/weekly, pr-digest, sprint-health
+- **Root causes:** CLIConnectionError in SDK transport, MCP servers unavailable in headless mode
+- **Do NOT re-enable** without Sean's explicit approval and fixing the underlying SDK bug
+
+## Cost Projection
+
+- vault-indexer: $0.00/month (local)
+- vault-synthesizer: $0.00/month (local)
+- vault-critic: $0.00/month (local)
+- deep-researcher: $0.00/month (local)
+- daily-driver morning: ~$12.00/month
+- job-feed: $0.00/month (local)
+- knowledge-lint: $0.00/month (local)
+- session-end-flush: $0.00/month (local)
+- meta-agent: $0.00/month (local)
+- **Total active fleet:** ~$12.00/month

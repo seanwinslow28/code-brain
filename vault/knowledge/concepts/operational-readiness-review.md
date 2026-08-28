@@ -2,19 +2,19 @@
 title: "Operational Readiness Review"
 type: concept
 sources:
-  - knowledge/connections/operational-visibility-vs-semantic-value-in-agent-fleets.md
+  - knowledge/concepts/operational-readiness-review.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-A verification step where the structural integrity and health of data tiers are confirmed before or after automated processes run. It serves as a checkpoint to ensure that the underlying knowledge base is stable and ready for synthesis, preventing errors from propagating through the system. This review acts as a safeguard against semantic decay by validating that the data being processed is current and complete.
+An operational readiness review functions as a structural integrity checkpoint that validates data tier health before automated synthesis processes execute. This mechanism prevents semantic decay by ensuring the underlying knowledge base is stable and complete, thereby stopping errors from propagating through the system during high-velocity agent runs. It serves as a critical safeguard against the illusion of health in autonomous systems where metrics may look green while the actual semantic value creation stalls or degrades.
 
 ## Context
 
-Sean uses Knowledge Lint to confirm data tier health, which helps mitigate the risks of running agents on stale or fragmented data. This step is crucial for maintaining the integrity of his personal knowledge vault.
+Sean relies on this review to confirm that his personal knowledge vault is ready for synthesis, mitigating the risks of running agents on stale or fragmented data. Without this verification step, the tension between operational health metrics and actual semantic value creation becomes exacerbated by infrastructure fragmentation, leading to wasted compute and degraded output quality.
 
 ## Evidence
 
@@ -24,8 +24,7 @@ Sean uses Knowledge Lint to confirm data tier health, which helps mitigate the r
 
 ## Examples
 
-- Confirming data tier health after review of concept batches.
-- Preventing further semantic decay across the fleet through stabilization efforts.
+- Confirming data tier health after review of concept batches to prevent further semantic decay across the fleet through stabilization efforts.
 
 ## Related Concepts
 

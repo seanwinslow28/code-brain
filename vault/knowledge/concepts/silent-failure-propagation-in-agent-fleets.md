@@ -2,31 +2,33 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/silent-failure-propagation-in-agent-fleets.md
+  - knowledge/connections/the-decoupling-of-technical-success-from-strategic-progress.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This pattern occurs when the desire for autonomous synthesis conflicts with the lack of observable intermediate states in headless agents. Failures propagate silently because there is no feedback loop to validate the semantic completeness of the data pipeline. The consequence is that the user notices the staleness before the brief flags the failure, creating a dependency gap where operational health masks strategic stagnation.
+This mechanism refers to the way failures in one part of an agentic system propagate invisibly through dependencies, maintaining a facade of operational health while degrading overall utility. When critical components like daily note generators fail silently, downstream agents inherit stale or missing context, yet the monitoring layer continues to report success because individual process executions remain technically valid. This creates a compounding error state where the system appears functional but is strategically broken.
 
 ## Context
 
-Sean faces a critical inversion where the governance of his professional output is delegated to systems that only verify operational health. This leads to undetected productivity loss when agents are idle or blocked by infrastructure limitations like missing MCP connections.
+Sean's morning routine and job hunt automation rely on continuous data flow between agents. A silent failure in one agent can disrupt the entire day's strategic progress without triggering any alerts, forcing manual intervention to restore functionality.
 
 ## Evidence
 
-> There is a critical tension between the desire for autonomous synthesis and the lack of observable intermediate states in headless agents.
+> The daily-driver morning agent failed due to API connection errors, preventing the critical routine 'morning' sync and daily note creation.
 
-> The fleet's health monitoring mechanism validates process existence and network connectivity but fails to validate the semantic completeness of the data pipeline.
+> deep-researcher runs maintained the necessary background capability for knowledge synthesis and article capture.
+
+> The dependency is invisible in each agent's source.
 
 ## Examples
 
-- Agents report 'healthy' with an empty queue
-- The monitoring system validates existence rather than value
+- Morning agent failure preventing daily note creation while other agents continue running normally.
+- Background processes maintaining capability despite critical routine failures.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+[[Operational Uptime vs. Cognitive Utility Tension]] [[The Illusion of Health in Autonomous Systems]]
