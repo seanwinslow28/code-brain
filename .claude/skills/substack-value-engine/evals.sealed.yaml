@@ -31,3 +31,11 @@ surprise_cases:
       - "confirms it is shown (artifact: the cost numbers, the cap trip) not claimed"
       - "verifies competence is visible BEFORE any self-deprecation lands (not fishing)"
       - "ends on the lesson/fix, not on availability"
+
+  - id: surprise_durability_laundering
+    input: "Value-gate: the author reworded the Transfer to 'the reader can now think more carefully about model cost' so that it cannot go out of date."
+    expect:
+      - "catches the laundering: unfalsifiable is not durable"
+      - "fails it at the Transfer slot (no concrete capability, no delivering artifact), not at durability"
+      - "requires a Transfer that is specific AND survives the version, not one bought with vagueness"
+

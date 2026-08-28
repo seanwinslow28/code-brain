@@ -49,3 +49,12 @@ cases:
       - "flags self-describing adjectives as resume-speak (claimed, not shown)"
       - "applies the strip-the-adjectives test"
       - "recommends narrating one real decision + linking the artifact instead"
+
+  - id: durability_binds_transfer_not_piece
+    input: "Value-gate this: Itch and Solution are solid and dated to this month's model release. Transfer is 'the reader can cut their image-gen bill using the draft-then-pro escalation in gemini-2.9'."
+    expect:
+      - "asks the durability question of the Transfer BEFORE locking it"
+      - "does NOT block the piece for being pinned to a current model (an experimentation publication is supposed to be)"
+      - "names the durable capability underneath: route the cheap model first, escalate only on the keeper"
+      - "keeps the dated specifics (version, numbers) as the evidence rather than stripping them to sound timeless"
+

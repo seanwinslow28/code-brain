@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Vault Embedding Indexer Agent — semantic search index for vault notes.
 
-Runs on Mac Mini (192.168.68.200), 100% local via nomic-embed-text.
+Runs on Mac Mini (seans-mac-mini.local), 100% local via nomic-embed-text.
 Indexes all vault markdown notes into a SQLite vector store.
 Incremental: only re-indexes files that changed since last run.
 
@@ -37,7 +37,7 @@ MAX_TURNS = 20
 MAX_BUDGET_USD = 0.00
 
 # Embedding config
-OLLAMA_HOST = "seans-mac-mini.local"  # mDNS, never a raw IP (eng-001.d10)
+OLLAMA_HOST = "seans-mac-mini.local"  # mDNS, never a raw IP — the 2026-08-21 LAN renumbering orphaned the old 192.168.68.200 (eng-001.d10)
 OLLAMA_PORT = 11434
 EMBEDDING_MODEL = "nomic-embed-text"
 CHUNK_SIZE = 500  # tokens (~2000 chars)
@@ -496,7 +496,7 @@ async def run(dry_run: bool = False) -> None:
             print(f"Files already indexed: {summary['files_already_indexed']}")
             print(f"Files deleted from index: {summary['files_deleted']}")
             print(f"\n--- Routing ---")
-            print(f"Target machine: Mac Mini (192.168.68.200)")
+            print(f"Target machine: Mac Mini (seans-mac-mini.local)")
             print(f"Target model: nomic-embed-text via Ollama")
             print(f"Cost: $0.00 (100% local)")
             print(f"Schedule: nightly 02:00 via launchd")

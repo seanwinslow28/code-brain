@@ -222,6 +222,7 @@ The warmth-under-darkness worldview survives at every level. Strip the gore befo
 - **The quiet, handed-over win.** The small victory has to be *clawed* — the word is load-bearing. The character earns it through escalating, disproportionate, often absurd obstacles and commitment (he argues till his face turns blue; he breaks into the closed shop to make the sandwich he could've made at home, because the place is symbolic to him). The comedy AND the earning live in the escalation; a win that arrives quietly or too fast under-delivers. Build the momentum first.
 - **Sanding down the darkness.** The dark beat usually carries the comedy.
 - **Clever abstraction-wit.** Bodies, props, food, named people, timing — not metaphors about concepts.
+- **Prose-context in an action line.** Action lines carry only what the camera films — the action occurring on screen and the feelings being displayed. Never narrate history the audience can't see ("a harmonica from the two days he was going to be a harmonica guy" — the screen can't say "two days"; the chaotic room has to imply the dead phase instead). Props must read visually in one shot. A short reader-facing joke is legal but rationed — Sean (2026-08-01): "Every now and again I might toss in a joke for the reader, but mostly, you should stick with the action and emotion."
 
 ## The Format Pass (how the voice reaches the page)
 

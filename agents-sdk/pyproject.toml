@@ -9,7 +9,11 @@ dependencies = [
     "pandas>=2.0.0",
     "tomli>=2.0.0; python_version < '3.11'",
     "wakeonlan>=3.1,<4",
-    "google-genai>=1.74.0,<2.0.0",
+    # Bumped to 2.x 2026-08-05: Google hard-rejects the legacy (1.x) Interactions
+    # API schema with a 400 "no longer supported... upgrade to >= 2.0.0", so
+    # scripts/gemini_dr.py failed on every live call. The 2.x Interaction model
+    # replaces `.outputs` with `.steps` (see gemini_dr._extract_report_text).
+    "google-genai>=2.0.0,<3.0.0",
     "feedparser==6.0.12",
     "markdownify==1.2.2",
     "pyyaml==6.0.3",

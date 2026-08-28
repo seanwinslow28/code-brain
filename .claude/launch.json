@@ -1,0 +1,77 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "revamp-lab",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8123",
+        "-d",
+        "/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026-REVAMP"
+      ],
+      "port": 8123
+    },
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "/Users/seanwinslow/Code-Brain/seanwinslow.com"
+      ],
+      "port": 4321,
+      "autoPort": true
+    },
+    {
+      "name": "ws3-review",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8129",
+        "-d",
+        "/private/tmp/claude-501/-Users-seanwinslow-Code-Brain-code-brain/2cee38f8-badf-4c6d-a44a-19655074facf/scratchpad/ws3/review"
+      ],
+      "port": 8129
+    },
+    {
+      "name": "night-console",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8131",
+        "-d",
+        "/private/tmp/claude-501/-Users-seanwinslow-Code-Brain-code-brain/08b329c0-58f7-4fd9-b001-9e71038d8dba/scratchpad/night"
+      ],
+      "port": 8131
+    },
+    {
+      "name": "portfolio-dist",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8132",
+        "-d",
+        "/Users/seanwinslow/Code-Brain/seanwinslow.com/dist"
+      ],
+      "port": 8132
+    },
+    {
+      "name": "intro-sprites",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8133",
+        "-d",
+        "/Users/seanwinslow/Code-Brain/seanwinslow.com/motion-review/task10/console"
+      ],
+      "port": 8133
+    }
+  ]
+}

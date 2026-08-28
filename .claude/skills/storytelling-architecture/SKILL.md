@@ -60,6 +60,23 @@ Each is a gate. Run the beat map against all six.
 
 6. **Slippery-slide section ends.** The last beat of each section creates forward pull (a teased turn, a withheld answer), not a clean summary that gives the reader permission to stop. (When the voice layer realizes this, the natural punctuation is an em dash, which is banned downstream. Note it as "forward-pull line"; let `writing-humanity-pass` enforce the punctuation. Don't pre-solve it.)
 
+## Ratified lessons from shipped pieces
+
+Routed here by the content-machine lessons loop. Sean's ratified reasons live in the gitignored
+ledger; only the rule travels into this file.
+
+- **A quoted bit needs framing before it and a response after it.** Quote, aside about the quote,
+  quote again reads as a random jump. The narrator has to react to what he just showed the reader,
+  or the bit sits there unclaimed. (Raising Agents ep. 1, 2026-08-25: the chain draft ran two
+  quoted exchanges back to back with only a description between them; his rewrite added a setup
+  line and a reaction.)
+- **The callback closer is licensed, never automatic.** Returning to the opening image is a
+  favourite move and a real wink, but a forced callback is worse than a plain ending. If it does
+  not fit, do not build one.
+- **When the callback does fit, it can carry the retitle with it.** On the same piece the closer
+  and the title turned out to be one decision, both built off the strongest image in the middle of
+  the story rather than off the lesson at the end.
+
 ## Story Scaffolds (pick one, apply as form not formula)
 
 These set beat ORDER. Treat them as a checklist of pressures the piece should satisfy, never as slots to fill with canonical connective tissue ("and that's when I realized..."). If a beat can only be hit one canonical way, it has become formula. See `references/story-mechanics.md` for the full set and when each fits.

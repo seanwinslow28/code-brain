@@ -370,41 +370,68 @@ def emit_baseline(corpus_path: str, out_path: str) -> dict:
 
 
 def baseline_flags(metrics: dict, baseline: dict) -> list[str]:
-    """Baseline-RELATIVE deviation flags. Fire only when a metric sits below its
-    own baseline mean minus one population stdev. Pronoun rate is intentionally
-    baseline-relative ONLY (Sean's voice is pronoun-heavy by design)."""
+    """Baseline-RELATIVE deviation flags: a metric sitting below its own baseline
+    mean minus N population stdevs. Pronoun rate is intentionally
+    baseline-relative ONLY (Sean's voice is pronoun-heavy by design).
+
+    The gate shape lives in the baseline, not here, so a rebuilt baseline can
+    change it without a code edit (`gate: {sigma, flag_metrics}`; see
+    build_baseline.py). Defaults match the 2026-08-26 ruling.
+
+    Why 2 sigma and not 1 (#177). The original gate was one-sided 1 sigma across
+    all four metrics, OR'd. Four such tests together flag roughly half of any
+    population by construction, and it showed: under leave-one-out it flagged 5
+    of 6 passages of Sean's own verbatim prose as not sounding like Sean. At 2
+    sigma with opener variety demoted to report-only, that is 0 of 5, and it
+    still separates the machine draft from his hand-rewrite of the same piece.
+    opener_other_pct was the last false-positive source, so it reports and never
+    flags.
+    """
     flags: list[str] = []
     bm = baseline.get("metrics", {})
+    gate = baseline.get("gate", {})
+    sigma = float(gate.get("sigma", 2.0))
+    enabled = gate.get("flag_metrics", ["cv", "mattr", "first_person_rate"])
+
+    def band(key):
+        """Lower bound for `key`, or None if it is absent or not a flag metric."""
+        if key not in bm or key not in enabled:
+            return None
+        return bm[key]["mean"] - sigma * bm[key]["stdev"]
+
+    sig = f"-{sigma:g}sigma"
+
     cv = metrics["sentence_length"].get("cv")
-    if cv is not None and "cv" in bm:
-        lo = bm["cv"]["mean"] - bm["cv"]["stdev"]
-        if cv < lo:
-            flags.append(
-                f"monotonous vs your voice: sentence-length CV {cv} below your "
-                f"baseline range (mean {bm['cv']['mean']}, -1sigma {round(lo, 3)})")
+    lo = band("cv")
+    if cv is not None and lo is not None and cv < lo:
+        flags.append(
+            f"monotonous vs your voice: sentence-length CV {cv} below your "
+            f"baseline range (mean {bm['cv']['mean']}, {sig} {round(lo, 3)})")
+
     mt = metrics["lexical_diversity"].get("mattr")
-    if mt is not None and "mattr" in bm:
-        lo = bm["mattr"]["mean"] - bm["mattr"]["stdev"]
-        if mt < lo:
-            flags.append(
-                f"narrower vocabulary vs your voice: MATTR@{MATTR_WINDOW} "
-                f"{round(mt, 3)} below your baseline range (mean {bm['mattr']['mean']})")
+    lo = band("mattr")
+    if mt is not None and lo is not None and mt < lo:
+        flags.append(
+            f"narrower vocabulary vs your voice: MATTR@{MATTR_WINDOW} "
+            f"{round(mt, 3)} below your baseline range "
+            f"(mean {bm['mattr']['mean']}, {sig} {round(lo, 3)})")
+
     fp = metrics["pronouns"].get("first_person_rate")
-    if fp is not None and "first_person_rate" in bm:
-        lo = bm["first_person_rate"]["mean"] - bm["first_person_rate"]["stdev"]
-        if fp < lo:
-            flags.append(
-                f"fewer personal pronouns than your norm: first-person rate {fp}% "
-                f"below your baseline range (mean {bm['first_person_rate']['mean']}%). "
-                "Baseline-relative, not an absolute AI signal.")
+    lo = band("first_person_rate")
+    if fp is not None and lo is not None and fp < lo:
+        flags.append(
+            f"fewer personal pronouns than your norm: first-person rate {fp}% "
+            f"below your baseline range (mean {bm['first_person_rate']['mean']}%, "
+            f"{sig} {round(lo, 3)}%). Baseline-relative, not an absolute AI signal.")
+
     other = metrics["openers"].get("other_pct")
-    if other is not None and "opener_other_pct" in bm:
-        lo = bm["opener_other_pct"]["mean"] - bm["opener_other_pct"]["stdev"]
-        if other < lo:
-            flags.append(
-                f"too many sentences open the same way: 'other' opener variety "
-                f"{other}% below your baseline range "
-                f"(mean {bm['opener_other_pct']['mean']}%)")
+    lo = band("opener_other_pct")
+    if other is not None and lo is not None and other < lo:
+        flags.append(
+            f"too many sentences open the same way: 'other' opener variety "
+            f"{other}% below your baseline range "
+            f"(mean {bm['opener_other_pct']['mean']}%)")
+
     return flags
 
 
@@ -516,9 +543,20 @@ def main() -> int:
     flags: list[str] = []
     has_baseline = False
     if args.baseline:
-        baseline = json.loads(Path(args.baseline).read_text(encoding="utf-8"))
-        flags = baseline_flags(metrics, baseline)
-        has_baseline = True
+        # A missing baseline degrades to the no-baseline path (absolute low-CV
+        # advisory only). SKILL.md has always documented this fallback; until
+        # 2026-08-26 the code raised FileNotFoundError instead, which mattered
+        # the moment the contaminated baseline was withdrawn and every
+        # documented invocation still passed --baseline.
+        try:
+            baseline = json.loads(Path(args.baseline).read_text(encoding="utf-8"))
+        except FileNotFoundError:
+            print(f"note: no baseline at {args.baseline}; "
+                  "baseline-relative flags are unavailable this run.",
+                  file=sys.stderr)
+        else:
+            flags = baseline_flags(metrics, baseline)
+            has_baseline = True
 
     if args.json:
         print(json.dumps({"metrics": metrics, "baseline_flags": flags}, indent=2))

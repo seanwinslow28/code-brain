@@ -186,6 +186,7 @@ The load-bearing artifact for Phase 4. Mechanics as *annotation* over the sample
 - **Sanding down the darkness.** His ceiling is high; the dark beat usually carries the comedy.
 - **Clever abstraction-wit.** Bodies, props, food, named people, timing — not metaphors about concepts.
 - **Format-naïve drafting treated as a mistake.** He drafts voice-first, format-second (run-on prose dialogue blocks), and has for ~7 years. Build the format pass into the workflow; don't train the looseness out.
+- **Prose-context in an action line** (added 2026-08-01, ai-guru-pilot scene work). Action lines carry only filmable action and displayed emotion — never backstory the audience can't see on screen ("a harmonica from the two days he was going to be a harmonica guy" fails; the audience can't know "two days" — the chaotic room must imply the dead phase). Props must read visually in one shot (a game controller, a chef's hat — not props that need narration). Sean, verbatim: "Every now and again I might toss in a joke for the reader, but mostly, you should stick with the action and emotion."
 
 ---
 

@@ -1,28 +1,79 @@
 {
   "schema_version": 1,
-  "generated_from": "baseline-corpus.md",
+  "generated_from": "content-machine corpus (git-ignored); see provenance",
   "mattr_window": 50,
-  "segments": 6,
+  "segments": 5,
   "metrics": {
     "cv": {
-      "mean": 0.8575,
-      "stdev": 0.1795,
-      "n": 6
+      "mean": 0.7712,
+      "stdev": 0.2116,
+      "n": 5
     },
     "mattr": {
-      "mean": 0.8443,
-      "stdev": 0.0502,
-      "n": 6
+      "mean": 0.8398,
+      "stdev": 0.0162,
+      "n": 5
     },
     "first_person_rate": {
-      "mean": 4.6433,
-      "stdev": 2.0329,
-      "n": 6
+      "mean": 4.7,
+      "stdev": 1.4719,
+      "n": 5
     },
     "opener_other_pct": {
-      "mean": 51.6167,
-      "stdev": 21.5403,
-      "n": 6
+      "mean": 48.34,
+      "stdev": 7.7572,
+      "n": 5
     }
+  },
+  "gate": {
+    "sigma": 2.0,
+    "flag_metrics": [
+      "cv",
+      "mattr",
+      "first_person_rate"
+    ],
+    "report_only": [
+      "opener_other_pct"
+    ]
+  },
+  "provenance": {
+    "ruled": "2026-08-26",
+    "ticket": "https://github.com/seanwinslow28/code-brain/issues/177",
+    "tier": "A (unmixed verbatim, per corpus MANIFEST)",
+    "min_words": 300,
+    "excludes": "anything produced through the content machine, to avoid calibrating the yardstick on what it measures",
+    "rebuild": "python3 build_baseline.py   (needs the local corpus)",
+    "segments": [
+      {
+        "file": "03-prose-anchors.md",
+        "heading_prefix": "\"Start Here\"",
+        "words": 808,
+        "sha256": "e2b625fcfa979a748e041da559da2c1b661f4c521c566319df88e3e34b0a43fa"
+      },
+      {
+        "file": "03-prose-anchors.md",
+        "heading_prefix": "\"About\"",
+        "words": 325,
+        "sha256": "5b162cbf62bafe015d1b06e917191a1f81791d007227522fe6d3fa87b281ef7b"
+      },
+      {
+        "file": "03-prose-anchors.md",
+        "heading_prefix": "Pre-AI screenplay prose",
+        "words": 497,
+        "sha256": "c9381a5bd2590ccc78673e42af071585f4985995358f7d413ead12db6b795cc1"
+      },
+      {
+        "file": "06-short-form-and-exercises.md",
+        "heading_prefix": "Exercise rewrites",
+        "words": 956,
+        "sha256": "4eb15ea1f582a53027a290abcb759951df8f76815ee828fed1197f1cd73e5ebb"
+      },
+      {
+        "file": "04-hand-edits-and-reasons.md",
+        "heading_prefix": "VoicePrint refine loop",
+        "words": 1327,
+        "sha256": "7c93e4023a987b71cde22fbd5e524506d9a6663b271b5d5e996e16d7c8faac09"
+      }
+    ]
   }
 }

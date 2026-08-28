@@ -189,6 +189,11 @@ schedule = "02:45"
 # vault_synthesizer (02:30) and deep_researcher (02:45), before daily_driver
 # (08:30) and meta_agent (08:45).
 enabled = true
+# eng-002.d15/d49 — the nightly schedule is OFF at Phase 0 pending the
+# reliability-then-consumption re-entry test. Manual mode is preserved and
+# unaffected. This flag is the declared state; install_schedules.sh converges
+# launchd to it on every run, so the disable no longer lives in memory.
+schedule_enabled = false
 skills = []
 max_turns = 0                          # decorative — no Claude SDK loop in this agent
 max_budget_usd = 0.00                  # decorative — costs absorbed by ChatGPT Plus + Google personal OAuth
@@ -295,7 +300,7 @@ health_check_interval_secs = 60
 fallback_to_api = true
 
 [routing.machines.mac_mini]
-host = "seans-mac-mini.local"  # mDNS per eng-001.d10
+host = "seans-mac-mini.local"  # mDNS per eng-001.d10 (LAN renumbered 2026-08-21; same remedy as the MBP entry below)
 port = 11434
 tier = 1
 runtime = "ollama"

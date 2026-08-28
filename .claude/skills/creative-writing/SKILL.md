@@ -14,7 +14,7 @@ Write polished, well-crafted content across formats — blog posts, fiction, soc
 On "write a blog post" — and most prose asks — this skill and `writing-voice-modes` fire together. They own different layers; keep them from colliding:
 
 - **This skill owns CRAFT** — what the piece is *made of*: scene, concrete image, sentence rhythm, structure, the shape of the argument or narrative, the hook, the turn, the close.
-- **`writing-voice-modes` owns VOICE** — register and diction: Sean Mode's dive-bar grit, the author-technique borrows, what the sentences *sound like*.
+- **`writing-voice-modes` owns VOICE** — register and diction: the dive-bar grit register, the 36-move roster, what the sentences *sound like*.
 
 **Order of operations when both fire:** shape and sharpen the craft here first, then hand the craft-strong draft to `writing-voice-modes` for the voice pass. Do **not** bake a competing authorial voice into the draft — leave the register for voice-modes to set, or the two will fight and voice-modes will overwrite your diction anyway. Running standalone (no voice pass coming)? The Voice Consistency section below is your fallback; when voice-modes *is* loaded, defer to it.
 

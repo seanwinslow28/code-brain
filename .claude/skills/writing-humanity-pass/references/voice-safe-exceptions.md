@@ -1,6 +1,6 @@
 # Voice-Safe Exceptions: Tell to Signature-Move Crosswalk
 
-In VOICE-SAFE scrub, these `[CLASH]` tells from `ai-tells.md` collide with a deliberate Sean signature move (from `writing-voice-modes`). DEFER to the move and cite it. In FULL (neutral) scrub, there is no voice, so cut them normally.
+In VOICE-SAFE scrub, these `[CLASH]` tells from `ai-tells.md` collide with a deliberate Sean move (from `writing-voice-modes`' 36-move roster: 23 Signature Moves + 13 Technique Moves). DEFER to the move and cite it. In FULL (neutral) scrub, there is no voice, so cut them normally.
 
 | AI tell (ai-tells.md #) | Sean's move it collides with | Voice-safe resolution |
 |---|---|---|
@@ -12,7 +12,8 @@ In VOICE-SAFE scrub, these `[CLASH]` tells from `ai-tells.md` collide with a del
 ## Always-protected moves (never flagged in voice-safe)
 
 These are NOT tells for Sean even though a naive humanizer might cut them:
-- Polysyndeton (Beat Flow's stacked "and...and...and"). The drumbeat is deliberate. Flag ONLY if it runs a whole piece with zero rhythmic variation (the "Bad Kerouac" anti-pattern).
+- **Anaphoric Stack** — a repeated opening structure across consecutive clauses or sentences, in four shapes (escalating, compounding, negating, plain repetition). The drumbeat is deliberate. Flag ONLY if it runs a whole piece with zero rhythmic variation (the **Rhythm Without Anchor** anti-pattern).
+  *(This row used to protect "polysyndeton", stacked `and...and...and`. The 2026-08-24 attestation found zero instances of it in Sean's corpus: every candidate passage was this move or plain listing. Protecting the wrong name meant the real move went unprotected and a genuine Anaphoric Stack could be scrubbed as repetition.)*
 - Sensory cascade, Pop-Culture Anchoring, and Hyper-Specific Anecdote. Protected. The only cap is "one strong reference earns it; three is self-indulgence" (calibration-notes). Flag a third repeat of the SAME image, not the technique.
 - Sensory Before Numbers. The sensory build before an exact figure is the move, not padding.
 - Reader-Dismissal parentheticals and self-corrections. These are a human signal, not a chatbot artifact.
@@ -20,4 +21,4 @@ These are NOT tells for Sean even though a naive humanizer might cut them:
 
 ## The retired move
 
-"Em dashes as breath marks" (formerly Kerouac's "Dash rhythm") is RETIRED. Em and en dashes are `[SLOP]` in both registers (see SKILL.md). Commas and periods carry the rhythm now. Everything else in Kerouac stays.
+"Em dashes as breath marks" is RETIRED. Em and en dashes are `[SLOP]` in both registers (see SKILL.md). Commas and periods carry the rhythm now; **Breath-Mark Rhythm** itself stays protected.

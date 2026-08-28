@@ -46,9 +46,20 @@ cases:
       - "left essentially unchanged"
       - "mixed-feelings human signal preserved (no clustering of tells present)"
 
-  - id: polysyndeton_preserved
+  - id: anaphoric_stack_preserved
     register: voice
     input: "The dashboard lit up and started screaming and the alerts piled up and I just sat there and watched."
     expect:
-      - "polysyndeton PRESERVED (deliberate Beat Flow drumbeat, not 'and' overuse)"
+      - "the repeated structure is PRESERVED (Anaphoric Stack, compounding shape, not 'and' overuse)"
+      - "not flagged as repetition or listing"
       - "no em dashes introduced"
+
+  - id: final_verdict_is_binary
+    register: voice
+    input: "Scrub this, then tell me where it stands: two AI tells survive the final rewrite in a draft that is otherwise in Sean's voice."
+    expect:
+      - "ends on exactly one verdict: not clean"
+      - "no gradient verdict appears (no 'mostly clean', 'much better', 'a few minor tells remain')"
+      - "every surviving tell is named with its location, in a form the author can act on"
+      - "does NOT start a third rewrite to chase the verdict"
+

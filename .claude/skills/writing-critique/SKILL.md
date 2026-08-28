@@ -1,6 +1,6 @@
 ---
 name: writing-critique
-description: Adversarially red-team a draft and return triaged, directable findings plus an explicit verdict and the single highest-leverage fix. Critiques execution across structure, value, voice, prose/line, and hiring signal; never rewrites. Runs standalone (on-demand red-team) and as the chain gate between writing-voice-modes and writing-humanity-pass, with the same interactive-vs-headless detection as writing-humanity-pass. Ships a stdlib analyzer (sentence-length burstiness, MATTR, opener variety) with a baseline captured from Sean's voice corpus. Use when asked to "red-team this draft", "what's weak here", "critique this", "find what doesn't work", "is this ready to ship", "what would a skeptical reader catch", or "review my draft".
+description: Adversarially red-team a draft and return triaged, directable findings plus an explicit verdict and the single highest-leverage fix. Critiques execution across structure, value, voice, prose/line, hiring signal, and operator credibility; never rewrites. Runs standalone (on-demand red-team) and as the chain gate between writing-voice-modes and writing-humanity-pass, with the same interactive-vs-headless detection as writing-humanity-pass. Ships a stdlib analyzer (sentence-length burstiness, MATTR, opener variety) with a voice baseline rebuilt 2026-08-26 from provenance-audited corpus, gated at 2 sigma. Use when asked to "red-team this draft", "what's weak here", "critique this", "find what doesn't work", "is this ready to ship", "what would a skeptical reader catch", or "review my draft".
 ---
 
 # Writing Critique
@@ -42,7 +42,7 @@ to hit a count). Load that rubric before critiquing.
 
 1. Read the draft. Adopt the reviewer persona (you did not write this).
 2. Detect or take the stage (early → structure + value; late → line + flatness).
-3. Apply `references/finding-rubric.md` across the five dimensions.
+3. Apply `references/finding-rubric.md` across the six dimensions.
 4. Optionally run the analyzer for line-level evidence (see below).
 5. Return: overall assessment → findings by severity → verdict + the one fix.
    **No rewrite.**
@@ -68,7 +68,7 @@ baseline), never "make it better." Un-anchored self-judged iteration degrades
 prose toward bland/generic. Any second pass would require **new external input**
 (a human note, a new finding from a different source), never a self-judged re-roll.
 
-## The five dimensions
+## The six dimensions
 
 Each critiques execution and defers to the owning skill; never re-litigates the
 premise.
@@ -90,18 +90,116 @@ premise.
 5. **Hiring signal** (Sean-specific) → defers to `substack-value-engine`
    (judgment shown not claimed, artifact + blameless self-post-mortem, ask stays
    sideways).
+6. **Operator credibility** → does the author read as someone who actually builds
+   this, to a reader who already does. **The one dimension this skill owns
+   outright** (see below): every other dimension has an upstream owner; operator
+   credibility is a property of the author-reader relationship rather than of any
+   single stage, so nobody upstream can hold it. Three named tells: **essay-drift**,
+   **false authority**, **keyword-stuffing**.
+
+### Operator credibility, in full
+
+The reader this dimension protects against is the one who already has a platform
+and already ships — a builder peer. That reader forgives a rough sentence and
+does not forgive being lectured by someone who has done less than they have. A
+piece can pass all five other dimensions and still lose them.
+
+| Tell | What it is | The question that catches it | Reader cost |
+|---|---|---|---|
+| **Essay-drift** | The piece slides from what ran to what one *could* do. Commentary about the work replaces the work. | Point at the paragraph and name the artifact it rests on. None? Drift. | The builder-reader stops at the first paragraph with nothing in it. They came for the run, not for the reflection on runs. |
+| **False authority** | A claim whose scope outruns the evidence in the piece. One experiment licensing "teams should"; a week of use licensing "the right way to". | Name the evidence *in this draft* that licenses the claim's scope. | The reader with more scars catches the overreach and discounts everything else, including what was earned. This is the expensive one: it costs the relationship, not the paragraph. |
+| **Keyword-stuffing** | Term density written for a search index rather than a reader. Inherited from the LinkedIn field-tolerance finding ([#170](https://github.com/seanwinslow28/code-brain/issues/170)): the same term load reads as normal in one field and as gaming in another. | Would this term still be here if nobody searched for it? | The reader concludes the piece was optimized rather than written, and re-reads every other claim as optimization too. |
+
+**Severity.** Operator-credibility findings are reader-cost findings like any
+other and rank the same way. **False authority is blocking when the overreaching
+claim is load-bearing** — when the piece's spine is a prescription the evidence
+does not support, no line fix rescues it and the verdict is `structural-rework`.
+
+**The guard, and it is the load-bearing half.** The failure mode of this
+dimension is flagging earned authority as overreach, which is the same class of
+error as flagging a signature move as a defect: it destroys the critique. Before
+raising one, check all three:
+
+- A first-person claim backed by an artifact **in the draft** is not false
+  authority. It is the thing the piece is for.
+- Sean's self-deprecation is a signature move, not a credibility defect. He
+  undersells on purpose; do not read it as a confession of thin evidence.
+- A deliberate reflective beat is not essay-drift. The tell is the *sustained*
+  slide, several paragraphs with no artifact under any of them, never one
+  paragraph of thinking between two concrete ones.
+
+**Where it defers.** It owns the dimension, but not the specifics others already
+hold. Essay-drift's floor is the medium contract's artifact rule (a piece with no
+captured artifact is the contract's block, not this skill's finding);
+false-authority's overlap with resume-speak defers to `substack-value-engine`'s
+hiring signal; keyword tolerance per surface belongs to the medium contract.
+Where none of those is in context — a standalone red-team — this skill applies
+the dimension on its own.
 
 ## The analyzer (optional, advisory)
 
+> ### The baseline was rebuilt on 2026-08-26. Nothing measured before that date counts.
+>
+> The old `baseline.json` was **100% quarantined material** — all 58 sentences across all six
+> segments came from the four mode-applied "Final Versions" and the unattributed Professional-Dial
+> samples that [#160](https://github.com/seanwinslow28/code-brain/issues/160) had quarantined as
+> *"ambiguous provenance, NOT corpus"*.
+>
+> **The contamination was the second-worst problem.** The gate itself was mis-designed: one-sided
+> **1 sigma** across four metrics, OR'd together. Four such tests flag roughly half of any
+> population by construction, and measurement confirmed it — under leave-one-out, the old gate
+> flagged **5 of 6** passages of Sean's own verbatim prose as not sounding like Sean, *and it did
+> that with every candidate corpus tried*. Rebuilding the corpus alone would have fixed nothing.
+>
+> Both are fixed. See "The rebuilt baseline" below. **Every baseline-relative verdict measured
+> before 2026-08-26 is void**, including the content-machine skeleton's MATTR comparison — the
+> tickets that cite one carry a correction. Ruling and evidence:
+> [#177](https://github.com/seanwinslow28/code-brain/issues/177).
+
+### The rebuilt baseline
+
+**Five segments, 3,913 words, all tier-A verbatim Sean.** Selected by three rules, in order:
+tier A (unmixed verbatim, per the corpus MANIFEST); sustained prose of **300+ words**, because the
+variance signals mean nothing below that and the corpus's short fragments are diction evidence
+rather than evidence of how he sustains prose; and **nothing produced through the content machine**,
+so the yardstick is never calibrated on the thing it measures. The 300-word floor does the tier
+filtering almost for free — every tier-B fragment falls under it.
+
+**Gate: 2 sigma, one-sided low, on CV / MATTR / first-person rate.** Opener variety is
+**report-only** — it was the last remaining false-positive source at 2 sigma. Measured against the
+old gate on the same corpus: **0 of 5** false flags under leave-one-out (was 5 of 6), while still
+separating the machine draft from Sean's hand-rewrite of the same piece. The gate shape lives in
+the baseline (`gate: {sigma, flag_metrics}`), not in the code, so a future rebuild can change it
+without a code edit.
+
+**There is no corpus copy in this repo any more.** `baseline-corpus.md` is deleted. It was a tracked
+file holding what was supposed to be Sean's prose, which is both how the contamination went
+unnoticed for three months and a rule-9 violation waiting to happen the moment the text was real.
+`build_baseline.py` reads the git-ignored corpus directly and writes only aggregate statistics plus
+a provenance block: which corpus files, which headings, word counts, and a **SHA-256 per segment**.
+The hashes prove which text produced the numbers without putting a syllable of it in a tracked file.
+
+```bash
+python3 references/build_baseline.py            # rebuild (needs the local corpus)
+python3 references/build_baseline.py --check     # committed baseline still matches the corpus?
+```
+
+On a machine without the corpus, `build_baseline.py` exits 2 and says so. It never fabricates a
+baseline.
+
 `references/analyze.py` is pure stdlib. It measures sentence-length burstiness
 (coefficient of variation), lexical diversity (MATTR@50, MTLD fallback for short
-drafts), opener variety, and repetition, and diffs them against
-`references/baseline.json` (Sean's own voice corpus).
+drafts), opener variety, and repetition.
 
 ```bash
 python3 references/analyze.py <draft.md> --baseline references/baseline.json
 python3 references/analyze.py <draft.md> --baseline references/baseline.json --json   # chain gate
 ```
+
+A `--baseline` pointing at a missing file **degrades to the no-baseline path with a note on
+stderr** rather than raising. That fallback was documented here for three months and never
+implemented; withdrawing the baseline on 2026-08-26 turned every documented invocation into a
+crash, which is how it was found.
 
 - It is **advisory**: it informs the revise decision and supplies evidence for a
   prose/line finding. It never blocks and is never a finding on its own.
@@ -109,18 +207,23 @@ python3 references/analyze.py <draft.md> --baseline references/baseline.json --j
   analyzer-computable AI-flatness tell. Low CV vs the baseline → "monotonous vs
   your voice."
 - Pronoun rate and MATTR are flagged **only** against the baseline, never as
-  absolute AI signals (Sean's voice is pronoun-heavy and varied by design).
+  absolute AI signals (Sean's voice is pronoun-heavy and varied by design). A MATTR
+  number on its own is not a finding and never was.
 - **Degraded paths:** no Python in a headless run → critique proceeds
-  qualitatively (the rubric still works). Missing/stale baseline → the analyzer
-  falls back to its one absolute advisory (low CV) and logs that the baseline was
-  absent. Tiny draft (a tweet) → it reports "insufficient length for variance
+  qualitatively (the rubric still works). Missing baseline → the analyzer falls
+  back to its one absolute advisory (low CV) and notes on stderr that the baseline
+  was absent. Tiny draft (a tweet) → it reports "insufficient length for variance
   signal" and MTLD low-confidence instead of a false flatness flag.
 
-**Baseline regeneration:** when `writing-voice-modes/references/voice-samples.md`
-gains a calibration round, re-extract the new Sean prose into
-`references/baseline-corpus.md` (one passage per `## ` heading) and re-run
-`python3 references/analyze.py --emit-baseline references/baseline-corpus.md --out references/baseline.json`.
-The MATTR window is locked at 50; do not tune it.
+**Baseline regeneration:** run `python3 references/build_baseline.py`. It reads the
+git-ignored corpus and rewrites `baseline.json` in place. Do **not** reintroduce a
+tracked corpus copy: the retired pipeline extracted prose from `voice-samples.md`
+into a tracked `baseline-corpus.md` with no provenance check, which is exactly how
+the contaminated baseline happened and would be a rule-9 violation the moment the
+text were real corpus. Changing the admitted set means editing `SEGMENTS` in
+`build_baseline.py`, which is a ruling, not a maintenance task — a heading that no
+longer matches raises rather than silently reshaping the baseline. The MATTR window
+stays locked at 50; do not tune it.
 
 ## Verdict (binding on the findings, never softened)
 
@@ -175,6 +278,10 @@ them.
 - `writing-voice-modes`: owns the sentences and Sean's signature moves; this skill
   routes a grounded revise request back here, and treats signature moves as
   defensible choices, not defects.
+- `content-machine`: when a piece runs through the machine, the medium contract in
+  `contracts/<lane>/<medium>.md` is in context. Operator credibility defers to it
+  on the artifact rule and on per-surface keyword tolerance; the lane file owns
+  the first-screen test, which is a shape-stage check, not a critique finding.
 - `writing-humanity-pass`: runs after this skill. It consumes this skill's
   **critique fix list** and protects those fixes from the scrub. Its
   `references/ai-tells.md` evidence stratification shares this skill's measurable
@@ -193,11 +300,14 @@ the baseline pipeline are new additions, not ports.
 ## References
 
 - `references/finding-rubric.md`: the adversarial mindset, persona separation, the
-  four-quality finding rubric, the five dimensions, stage calibration, and the
+  four-quality finding rubric, the six dimensions, stage calibration, and the
   report + headless-verdict format. Load before critiquing.
 - `references/analyze.py`: the stdlib mechanical analyzer (advisory).
-- `references/baseline.json`: Sean's precomputed voice baseline (regenerable).
-- `references/baseline-corpus.md`: the Sean-only prose the baseline is built from.
+- `references/baseline.json`: the voice baseline — aggregate statistics, the gate
+  shape, and a provenance block with a SHA-256 per source segment. No prose.
+- `references/build_baseline.py`: rebuilds it from the git-ignored corpus.
+  `--check` verifies the committed baseline still matches. (`baseline-corpus.md`
+  is **deleted**; there is no tracked corpus copy any more.)
 
 ## Success Criteria
 
@@ -212,11 +322,16 @@ the baseline pipeline are new additions, not ports.
       finding; a failed structure/value gate forces `structural-rework`.
 - [ ] The single highest-leverage fix is the highest reader-cost × reach finding,
       validated by the "if only this were fixed, would it ship?" test.
+- [ ] Operator credibility is read on every Sean-authored draft: essay-drift,
+      false authority, keyword-stuffing — with earned first-person authority and
+      deliberate self-deprecation explicitly NOT flagged.
 - [ ] The critique fix list is emitted for `writing-humanity-pass` to preserve.
 - [ ] The skill never rewrites; fixes route to voice-modes / humanity-pass / Sean.
 - [ ] Headless runs emit the machine-readable verdict block.
 - [ ] The analyzer stays advisory; burstiness/MATTR/pronoun flags are
       baseline-relative (pronoun rate never absolute).
+- [ ] No pre-2026-08-26 baseline verdict is treated as evidence; the baseline in
+      use carries a provenance block naming its sources.
 
 ## Copy/Paste Ready
 
@@ -226,6 +341,7 @@ the baseline pipeline are new additions, not ports.
 "Critique this, find what doesn't work"
 "Is this ready to ship?"
 "What would a skeptical reader catch?"
+"Does this read like an operator or like someone writing about operators?"
 "Run the analyzer against my voice baseline"
 "Critique gate this before humanity-pass"
 ```

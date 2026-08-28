@@ -495,6 +495,34 @@ _AUTH_FAILURE_MARKERS = (
 )
 
 
+
+# ── the daily-driver note assertion (eng-001 P0, eng-002 Phase 0) ───────────
+# The SDK can return subtype="success" on a morning run that never wrote the
+# daily note — the meta-agent then reports a green row beside "Daily note
+# exists: No". _resolve_status already catches the 401-behind-a-green-tick
+# case; this catches the same shape one level out: the record says the work
+# happened, the vault says it did not. Only the morning mode creates the note,
+# so only the morning mode is asserted.
+
+_NOTE_WRITING_MODES = {"morning"}
+
+
+def assert_daily_note(status: str, *, mode: str, vault_root) -> tuple[str, str]:
+    """Downgrade a reported success to error_no_note when the note is absent.
+
+    Returns (status, note) — the note is appended to the run-history row so the
+    failure names itself. A run that already failed keeps its own status: this
+    adds a failure mode, it never renames one.
+    """
+    if mode not in _NOTE_WRITING_MODES:
+        return status, ""
+    if status not in ("success", "ok"):
+        return status, ""
+    if daily_note_path(vault_root).exists():
+        return status, ""
+    return "error_no_note", "daily note absent after a reported success"
+
+
 def _resolve_status(result_msg) -> str:
     """Map an SDK ResultMessage to the status recorded in run history.
 
@@ -555,15 +583,21 @@ async def run(mode: str, dry_run: bool = False) -> None:
                     f"cost=${message.total_cost_usd}"
                 )
 
+        status, note_defect = assert_daily_note(
+            _resolve_status(result_msg), mode=mode, vault_root=config.vault_root
+        )
+        if note_defect:
+            logger.error(note_defect)
+        notes = result_msg.result[:200] if result_msg and result_msg.result else ""
         record_run(
             log_dir=config.log_dir,
             agent_name=AGENT_NAME,
             mode=mode,
-            status=_resolve_status(result_msg),
+            status=status,
             cost_usd=result_msg.total_cost_usd if result_msg else None,
             duration_ms=result_msg.duration_ms if result_msg else None,
             turns=result_msg.num_turns if result_msg else None,
-            notes=result_msg.result[:200] if result_msg and result_msg.result else "",
+            notes=(note_defect + " | " + notes)[:200] if note_defect else notes,
         )
 
     except Exception as e:
