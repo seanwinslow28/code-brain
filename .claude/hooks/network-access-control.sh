@@ -6,12 +6,24 @@
 # Read hook context from stdin (JSON)
 HOOK_DATA=$(cat)
 
-# Extract tool name and command
-TOOL_NAME=$(echo "$HOOK_DATA" | grep -o '"tool"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 || echo "")
-COMMAND=$(echo "$HOOK_DATA" | grep -o '"command"[[:space:]]*:[[:space:]]*"[^"]*"' | cut -d'"' -f4 || echo "")
+# Extract tool name and command.
+# Contract (measured 2026-08-28): the tool name is `tool_name`, NOT `tool`,
+# and the command lives at `tool_input.command`, NOT top level. Parsed with
+# python3 so escaped quotes cannot truncate the value.
+PARSED=$(printf '%s' "$HOOK_DATA" | python3 -c '
+import json, sys
+try:
+    d = json.loads(sys.stdin.read())
+except Exception:
+    print(""); print(""); sys.exit(0)
+print(d.get("tool_name", ""))
+print((d.get("tool_input") or {}).get("command", "").replace("\n", " "))
+' 2>/dev/null)
+TOOL_NAME=$(printf '%s\n' "$PARSED" | sed -n '1p')
+COMMAND=$(printf '%s\n' "$PARSED" | sed -n '2p')
 
-# Only check bash/terminal commands
-if [ "$TOOL_NAME" != "run_terminal_cmd" ] && [ "$TOOL_NAME" != "bash" ]; then
+# Only check shell commands
+if [ "$TOOL_NAME" != "Bash" ]; then
     exit 0
 fi
 
