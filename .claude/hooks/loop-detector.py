@@ -41,7 +41,7 @@ def main() -> None:
     except (json.JSONDecodeError, EOFError):
         sys.exit(0)
 
-    tool = hook_data.get("tool", "")
+    tool = hook_data.get("tool_name", "")
     tool_input = json.dumps(hook_data.get("tool_input", {}), sort_keys=True)
     session_id = hook_data.get("session_id", os.environ.get("CLAUDE_SESSION_ID", "default"))
 

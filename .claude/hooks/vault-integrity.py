@@ -65,7 +65,7 @@ def main() -> None:
     except (json.JSONDecodeError, EOFError):
         sys.exit(0)
 
-    tool = hook_data.get("tool", "").lower()
+    tool = hook_data.get("tool_name", "").lower()
     tool_input = hook_data.get("tool_input", {})
 
     # Only check write operations
