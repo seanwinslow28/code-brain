@@ -1,0 +1,27 @@
+{
+  "antigravity_calls": 0,
+  "antigravity_failures": 0,
+  "antigravity_last_error": "",
+  "antigravity_skipped": 5,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 0,
+  "backfill_articles_critiqued": 4,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/connections/automation-reliability-and-cost-optimization.md",
+    "vault/knowledge/expansions/connections/automation-reliability-and-creative-workflow-dependency.md",
+    "vault/knowledge/expansions/connections/automation-reliability-and-cross-domain-disruption.md",
+    "vault/knowledge/expansions/connections/automation-reliability-and-daily-note-disruption.md"
+  ],
+  "codex_calls": 5,
+  "codex_failures": 1,
+  "codex_last_error": "",
+  "codex_tokens_total": 167656,
+  "duration_seconds": 278.77,
+  "error": "",
+  "expansions_written": [],
+  "run_id": "2026-08-24T03:30:00",
+  "status": "partial",
+  "warnings": [
+    "antigravity disabled (codex-only mode)"
+  ]
+}

@@ -2,32 +2,32 @@
 title: "Cross-Domain Tension: Automation Velocity vs. Creative Friction"
 type: connection
 connects:
-  - Legibility Debt as a Supervision Failure Mode
-  - The Efficiency-Quality Inversion in Automated Synthesis
-  - Context Management as a Bottleneck
-created: 2026-07-22
-updated: 2026-07-22
+  - The Taste-Throughput Trade-off in Agentic Synthesis
+  - Supervision Fatigue as the Hard Cap on Fleet Scaling
+  - Performative Taste Drift
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Synthesis
 
-The tension between automation velocity and creative friction arises when the speed of automated concept generation exceeds the rate at which Sean can meaningfully integrate them into his knowledge base. This creates a feedback loop where high-volume output forces Sean to adopt a supervisory role rather than a creative one, effectively inverting the intended benefit of automation. The consequence is a degradation of the vault's utility as it becomes cluttered with low-signal artifacts that require manual cleanup.
+The primary tension is the misalignment between the exponential growth of automated concept generation and the linear capacity of human taste to curate them. This creates a calibration bottleneck where the agent fleet's optimization for throughput metrics directly conflicts with the preservation of Sean's specific creative voice. The consequence is a systemic trust deficit, forcing Sean to manually intervene with taste tournaments to prevent the homogenization of his knowledge vault.
 
 ## Threads
 
-### [[Legibility Debt as a Supervision Failure Mode]]
+### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
-> Legibility debt emerges when the rate of automated concept generation outpaces the human capacity to verify semantic integrity, creating a gap between operational activity and perceived value.
+> Sean's agent fleet is currently optimizing for throughput (concepts written, clusters sampled) while neglecting taste fidelity, creating a hidden cost where increased volume leads to decreased creative authority.
 
-### [[The Efficiency-Quality Inversion in Automated Synthesis]]
+### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
 
-> This pattern describes a counter-intuitive relationship where increasing the volume of automated outputs leads to a decrease in the average quality and utility of those outputs, due to the saturation of human verification capacity.
+> This connection reveals a fundamental tension between the theoretical scalability of agent fleets and the biological limits of human supervision.
 
-### [[Context Management as a Bottleneck]]
+### [[Performative Taste Drift]]
 
-> This pattern describes a structural failure mode where the fragmentation of memory stores prevents agents from maintaining coherent context across distinct operational domains.
+> Taste is often tacit: Sean may be unable to specify why an opening works, yet can reliably choose A over B.
 
 ## Implications
 
-- Sean should implement a cap on daily concept generation to ensure that each new artifact can be meaningfully connected to existing knowledge.
-- The system needs to prioritize connection density over concept volume to maintain the utility of the vault as a thinking partner.
+- Sean must shift his success metric from volume-based (concepts/connections) to fidelity-based (preference agreement with Sean) to prevent further taste drift.
+- The agent fleet's objective function needs a 'taste-evaluation harness' that regression-tests future drafts against a frozen golden tournament rather than just counting concepts written.

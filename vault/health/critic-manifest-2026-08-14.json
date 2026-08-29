@@ -1,0 +1,28 @@
+{
+  "antigravity_calls": 0,
+  "antigravity_failures": 0,
+  "antigravity_last_error": "",
+  "antigravity_skipped": 5,
+  "antigravity_tokens_total": 0,
+  "articles_critiqued": 0,
+  "backfill_articles_critiqued": 5,
+  "backfill_expansions_written": [
+    "vault/knowledge/expansions/research-workflow-integration.md",
+    "vault/knowledge/expansions/connections/ai-driven-content-creation-and-product-strategy-integration.md",
+    "vault/knowledge/expansions/connections/ai-pm-role-strategy-with-daily-note-generation-and-portfolio-differentiation.md",
+    "vault/knowledge/expansions/daily-drive-agent.md",
+    "vault/knowledge/expansions/connections/automation-routines-daily-drive-agent-and-agent-health-monitoring-synergy.md"
+  ],
+  "codex_calls": 5,
+  "codex_failures": 0,
+  "codex_last_error": "",
+  "codex_tokens_total": 188320,
+  "duration_seconds": 262.17,
+  "error": "",
+  "expansions_written": [],
+  "run_id": "2026-08-14T03:30:05",
+  "status": "ok",
+  "warnings": [
+    "antigravity disabled (codex-only mode)"
+  ]
+}

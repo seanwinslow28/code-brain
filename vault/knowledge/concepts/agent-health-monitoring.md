@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/agent-health-monitoring.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This mechanism defines a verification loop where operational status is measured via binary metrics like uptime and connectivity, creating a structural blind spot regarding semantic completeness. The system allows agents to maintain a 'healthy' state while producing functionally inert or stale content, effectively decoupling technical robustness from cognitive utility. This misalignment persists because the monitoring layer validates process execution rather than output value, leading to a false sense of strategic progress.
+This mechanism functions as a supervisory layer that distinguishes between transient execution errors and systemic semantic decay by verifying operational state against expected behavioral baselines. It requires explicit instrumentation to capture whether a process completed with semantic integrity, because silent failures are more dangerous than loud ones in autonomous systems. This mechanism detects when an agent’s internal logic has diverged from its intended purpose, often due to context drift or resource constraints that degrade the quality of output without triggering standard error codes.
 
 ## Context
 
-Sean needs to distinguish between an agent that is technically running and one that is generating actual value, as current metrics obscure functional stagnation. Without this distinction, he risks optimizing for activity while suffering from semantic decay in his knowledge vault.
+Sean manages a complex fleet of agents including the vault synthesizer and daily drive agents. Without rigorous health monitoring, failures in one component can silently propagate to others, leading to a gradual erosion of trust in the entire infrastructure. The distinction between mere operational uptime and actual cognitive utility is critical for maintaining the reliability of his personal knowledge system.
 
 ## Evidence
 
-> Health checks verify that agents are running and connected, but they do not validate the semantic completeness of the data pipeline.
+> Agent health monitoring is the continuous verification of an autonomous system's operational state against expected behavioral baselines, distinguishing between transient errors and systemic decay.
 
-> The operational health of agents directly impacts the cost-effectiveness of agentic workflows. If an agent is unhealthy, it may incur unnecessary costs or disrupt other automation tasks.
+> The dependency is invisible in each agent's source, making silent failure propagation a critical risk.
 
 ## Examples
 
-- Sean perceives his infrastructure as robust because agents report 'healthy' status, even when producing empty or stale content.
-- The core tension lies in the decoupling of operational health metrics from actual semantic progress.
+- Using lint reports to identify structural issues like broken wikilinks serves as a proxy for health monitoring, catching errors before they affect downstream consumers.
+- Distinguishing between 'Agent Health' (a state) and 'Agent Health Monitoring' (the process of verifying that state) clarifies the need for active supervision rather than passive observation.
 
 ## Related Concepts
 
-[[Agent Health]] [[Control Room Observability]]
+[[Silent Failure Propagation in Agent Fleets]] [[Operational Uptime vs. Cognitive Utility Tension]]

@@ -5,8 +5,8 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - Signal vs. Safety Trade-off in Resume Architecture
   - Job Hunt as Sales Pipeline
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-16
+updated: 2026-08-16
 ---
 
 ## Synthesis

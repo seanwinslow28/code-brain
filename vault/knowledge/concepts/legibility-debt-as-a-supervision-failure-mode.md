@@ -2,31 +2,31 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
+  - knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-Legibility debt is the accumulating gap between the volume of automated output and the human capacity to verify its semantic integrity, forcing supervision into inefficient forensic mode. As agent fleets scale their sampling capacity beyond manual verification thresholds, the system generates more data than can be meaningfully processed, leading to a loss of confidence in the tool's utility. This debt manifests not as system failure, but as a gradual erosion of trust where the user can no longer distinguish between valuable insight and automated noise without exhaustive manual auditing.
+This pattern occurs when automated systems prioritize structural validity (correct syntax, valid links) over semantic integrity (meaningful, accurate connections), creating a hidden deficit that only manifests during high-stakes retrieval or auditing. The debt accumulates silently because the system appears functional to superficial checks, but the underlying knowledge graph loses its utility as noise dilutes signal. It is a failure of supervision because the human overseer cannot detect the decay until the cost of correction exceeds the value of the accumulated data.
 
 ## Context
 
-Sean's transition from small runs (3 concepts) to large runs (153 concepts) illustrates this debt; the mechanisms for reporting status lag behind the output volume, making it impossible for him to maintain a clear mental model of what is actually being stored in his vault.
+Sean's vault synthesizer has been running for months with increasing throughput. The risk is that the 'structure' of his knowledge base remains intact (files exist, links work) while the 'meaning' degrades because he hasn't had the time to audit the deeper semantic connections, creating a fragile foundation for future creative or professional work.
 
 ## Evidence
 
-> As Sean scales the concept generation from 3 to 153 concepts per run, the mechanisms for reporting status lag behind, creating a legibility gap.
+> Legibility debt accumulates when automated systems produce outputs that are structurally valid but semantically hollow, masking decay behind a veneer of productivity.
 
-> Sean must treat manual tickets as the single source of truth for system health, rather than a reflection of agent activity.
+> High activity metrics in job hunting often mask low strategic value, creating an illusion of progress while actual outcomes remain stagnant.
 
 ## Examples
 
-- The jump from 45 concepts in June to 153 in early July represents a tipping point where Sean can no longer manually verify the quality of every cluster sampled.
-- The reliance on 'rejected_count' as a proxy for health is insufficient because it does not capture the semantic quality of the accepted outputs.
+- The synthesizer producing 122 concepts in one run with only 31 connections, suggesting a high volume of isolated nodes rather than a dense, verified graph.
+- The rejection of 29 concepts in the latest run, indicating that even the system's own filters are struggling to maintain quality thresholds.
 
 ## Related Concepts
 
-[[Taste as Evaluation Function vs. Activity Proof]] [[The Verification-Governance Inversion]]
+[[The Calibration Bottleneck in Scalable Creative Production]] [[Throughput vs. Taste Memory Tension]]

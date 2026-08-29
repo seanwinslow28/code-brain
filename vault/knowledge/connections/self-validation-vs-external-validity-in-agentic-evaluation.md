@@ -5,8 +5,8 @@ connects:
   - The Illusion of Competence in Automated Systems
   - Synthesizer fix
   - Vault Synthesizer Eval Suite
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-15
+updated: 2026-08-15
 ---
 
 ## Synthesis
@@ -17,7 +17,7 @@ The core tension exists between the operational efficiency of using a single mod
 
 ### [[The Illusion of Competence in Automated Systems]]
 
-> GPT-3.5/GPT-4/Llama-2 disproportionately favor their own outputs over other LLMs' and humans'
+> When the judge is structurally part of the candidate panel, the system optimizes for internal consistency and self-preference rather than external truth.
 
 ### [[Synthesizer fix]]
 

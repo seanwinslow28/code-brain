@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/demonstration-over-declaration.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This mechanism posits that complex aesthetic standards cannot be effectively communicated through declarative instructions alone, but must be demonstrated through exemplars. The underlying pattern is that 'description' lacks the granularity to capture tacit knowledge, leading to a gap between intent and execution in agentic systems. Consequently, high-fidelity models are required not just for processing power, but for their ability to approximate the nuanced patterns found in demonstration data.
+Professional credibility is established through the replayability of specific, high-friction operational events rather than through declarative statements about capability. This mechanism requires the operator to preserve failure traces and trade-offs, which serve as immutable proof of expertise because they cannot be fabricated without significant effort. The value lies in the difficulty of replication: if an outcome is easy to fake, it has no market value; if it is hard to fake, it proves unique competence.
 
 ## Context
 
-Sean's transition to qwen3.6-35b-a3b-32k aligns with this principle, as larger models are better at pattern matching from demonstrations than smaller ones. The drop in rejections suggests that the model is better approximating his taste through its training data rather than through explicit prompting.
+In Sean's job hunt, declaring 'I am an expert in agentic workflows' is cheap and ignored. Demonstrating a specific, complex failure mode he resolved provides verifiable proof of his seniority. This concept guides him to prioritize the documentation of difficult problems over the documentation of smooth successes.
 
 ## Evidence
 
-> You don't get a person from a description of a person, and you sure as hell don't get one out of a single prompt.
+> A 250-agent configuration count is descriptive; a replayable failure investigation with traces, trade-offs, and a shipped correction is a signal.
 
-> Not prompting harder, but teaching it my taste until what came back was recognizably mine.
+> Only promote entries containing a consequential choice or disconfirming evidence.
 
 ## Examples
 
-- Sean's reliance on 'dragging' the output to have a pulse indicates that declaration (the initial prompt) is insufficient for creative fidelity.
-- The use of qwen3.6-35b-a3b-32k suggests a preference for models with larger context windows and better pattern recognition capabilities.
+- His portfolio strategy should prioritize a few deep, traceable case studies over a broad survey of automated workflows that lack verifiable outcomes.
+- Sean must sacrifice some automation efficiency in his daily notes to capture high-fidelity decision traces, accepting lower volume for higher signal quality.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[Taste as Evaluation Function vs. Activity Proof]]
+[[The Paradox of Agentic Efficiency vs. Creative Authority]] [[Critical Incident Technique]]

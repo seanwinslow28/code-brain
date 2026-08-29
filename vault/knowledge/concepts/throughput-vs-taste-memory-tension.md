@@ -2,31 +2,30 @@
 title: "Throughput vs. Taste Memory Tension"
 type: concept
 sources:
-  - knowledge/connections/the-scalability-paradox-in-agentic-creative-workflows.md
+  - knowledge/connections/cross-domain-tension-operational-metrics-masking-semantic-decay-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-27
+updated: 2026-08-27
 ---
 
 ## Definition
 
-This mechanism describes a structural conflict where the expansion of automated sampling capacity directly degrades the fidelity of creative taste signals within the system's memory core. As the agent fleet scales its clusters_sampled and concepts_written metrics, the density of high-signal 'taste' data dilutes against the volume of low-signal output, creating a systemic trust deficit. The underlying invariant is that taste preservation requires active pruning and constraint, whereas throughput optimization naturally encourages accumulation and expansion, making them mutually exclusive goals without explicit reconciliation protocols.
+This tension emerges when the operational metric of concept generation volume diverges from the strategic requirement for semantic fidelity, creating a trust deficit where high activity masks stagnation. As agent fleets scale their sampling rates to maximize output counts, the rejection rate often spikes because the generated concepts fail to meet Sean's specific taste thresholds, forcing manual intervention that negates the automation benefit. The mechanism is a feedback loop where increased throughput demands higher supervisory attention to filter low-signal noise, effectively inverting the expected efficiency gains of automation into a net loss of cognitive bandwidth.
 
 ## Context
 
-Sean must navigate this tension because his creative authority depends on the specificity of his taste signals, yet his operational efficiency relies on scaling agent throughput. Without addressing this, his vault becomes voluminous but stylistically hollow, forcing him to intervene more frequently rather than less.
+Sean's vault synthesizer has historically oscillated between high-volume/low-quality runs (e.g., qwen3-14b era) and lower-volume/higher-fidelity runs (qwen3.6-35b era). Understanding this tension is critical because it dictates the optimal model selection strategy: prioritizing semantic precision over raw cluster sampling to prevent supervision fatigue.
 
 ## Evidence
 
-> This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
+> This tension arises from the fundamental misalignment between the operational metrics used to monitor agent health and the semantic integrity of the knowledge vault they produce.
 
-> teaching an agent your taste means nothing if it cannot remember it.
+> Agents report success based on process execution and volume, while Sean's strategic goals depend on the quality and relevance of synthesized insights.
 
 ## Examples
 
-- The system generates more data but loses the specific 'taste' signals that define his creative voice.
-- forcing Sean to intervene more frequently rather than less
+- The qwen3-14b runs in June 2026 generated up to 153 concepts but required significant manual filtering, whereas later qwen3.6-35b runs stabilized around 80-120 concepts with higher acceptance rates.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[Context Compounding]]
+[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[The Illusion of Health in Autonomous Systems]]

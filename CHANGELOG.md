@@ -7,6 +7,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed — hook payload contract (2026-08-28)
+
+All four registered Claude Code hooks had never executed their logic. Each read a
+phantom `"tool"` field; the real PreToolUse/PostToolUse payload key is `tool_name`,
+with arguments under `tool_input`. Contract measured against live Claude Code
+2.1.251 rather than assumed. Evidence: 16,888 of 16,936 rows in
+`.claude/tool-use.log` (2026-02-15 → 2026-08-28) recorded an empty `tool=`.
+
+- `require-confirm-highrisk.sh` — never blocked a command. Rewritten: correct
+  parsing, fails **closed** on an unparseable payload, and tiers decisions into
+  deny (exit 2) vs ask (JSON `permissionDecision`). Pattern list retuned — the
+  original `format`, `> /dev/`, and `chmod +x /` entries would have blocked
+  `git log --format=`, `2>/dev/null`, and `chmod +x /Users/...` the moment
+  parsing was fixed. Written for bash 3.2 (macOS ships 3.2.57, which has no
+  `local -n` namerefs — the first rewrite failed open exactly like the original).
+- `block-secrets.py` — never blocked a write. Three independent defects, each
+  fatal alone: phantom field, lowercase `write_tools` vs the real `Write`/`Edit`,
+  and a top-level `target` that does not exist. Separately, every `**/` glob was
+  string-compared with its asterisks intact, so `**/secrets/**` matched nothing.
+  Rewritten with real glob translation plus an exemption pass; calibrated against
+  all 6,883 tracked files for **0** false positives. The broader `**/*key*`,
+  `**/*secret*`, `**/*credential*` patterns that shipped in `shared/` and
+  `plugin/` are deliberately not adopted — they block `lib/keychain.py`,
+  `block-secrets.py` itself, and vault notes about credentials.
+- `log-tool-use.sh` — audit trail recorded no tool names. Fixed.
+- `format-on-edit.sh` — never formatted a file: a `grep | cut` pipeline exits 0
+  when grep matches nothing, so its `||` fallback never fired. Fixed (inert
+  unless `prettier`/`black` are installed).
+- Same fix applied to four unregistered hooks (`network-access-control.sh`,
+  `cost-watchdog.py`, `loop-detector.py`, `vault-integrity.py`) and synced to
+  `shared/hooks/` and `plugin/hooks/`, which ship via `scripts/install.sh` and
+  the plugin marketplace.
+
+### Added
+
+- `.claude/hooks/tests/test-hooks.sh` — 42-case regression suite asserting the
+  hooks **fire**, not merely exit cleanly. A hook that always exits 0 passes a
+  "does it run" check and fails every test here. Pins the payload contract, the
+  fail-closed path, and the false-positive calibration.
+
+### Fixed — settings.json permissions schema (2026-08-28)
+
+`.claude/settings.json` used `{"default": "ask", "rules": [{"pattern",
+"permission"}]}`, which Claude Code does not recognise: the 2.1.251 binary
+references `allow`/`deny`/`ask`/`defaultMode`/`additionalDirectories` and
+contains no `permissions.rules` or `permissions.default` string. All three deny
+rules enforced nothing — in a file `scripts/install.sh` exports to every preset
+consumer. Replaced with a real `deny` array covering `.env`, `secrets/`,
+`credentials/`, `.ssh/`, `.aws/` for both `Read()` and `Edit()`. Verified live by
+A/B: two identical files in one directory, only the one carrying a `Read()` deny
+rule was blocked, with enforcement following the rule when swapped. `defaultMode`
+is deliberately omitted — setting it overrode the running session's permission
+mode, a behaviour change beyond the port.
+
+
+## [Unreleased]
+
 ### New skill: `content-oracle` — stage 0 of the content machine (2026-08-26)
 
 Closes wayfinder ticket [#169](https://github.com/seanwinslow28/code-brain/issues/169) on build map [#158](https://github.com/seanwinslow28/code-brain/issues/158). The Oracle ends "what do I write about": it sweeps the last seven days of Sean's own systems, scores candidates on six spike signals, and decks ~10 cards for him to pick from.

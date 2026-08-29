@@ -2,30 +2,30 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-operational-visibility-and-semantic-completeness.md
+  - knowledge/concepts/operational-visibility-vs-semantic-value-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This concept describes a systemic decoupling where binary health metrics indicate successful process execution while semantic data quality degrades due to inaccessible dependencies. Agents report success based on their ability to run, not on the integrity of the context they consume or produce. This creates a feedback loop where operational stability masks semantic starvation, preventing the detection of critical infrastructure failures until downstream outputs become unusable.
+This pattern describes a decoupling where system health metrics reflect process uptime and execution success, while semantic integrity reflects the actual evolution of knowledge content. When an agent completes its task but produces stale or incorrect output, the operational layer registers success while the semantic layer suffers silent decay. This creates a blind spot because standard monitoring tools cannot distinguish between a healthy agent producing garbage and a failed agent producing nothing.
 
 ## Context
 
-Sean needs to distinguish between an agent that is 'alive' and one that is 'useful'. Without this distinction, he risks optimizing for uptime while his knowledge vault suffers from silent data loss or stale context, leading to a false sense of security about the system's actual utility.
+Sean's vault synthesizer runs daily to update his knowledge graph. If the model generates low-quality connections or fails to write new concepts due to subtle errors, the system appears 'healthy' in logs but the vault stagnates. This matters because Sean relies on this infrastructure for strategic clarity; silent semantic decay undermines his ability to make informed decisions about his career and creative work.
 
 ## Evidence
 
-> There is a critical divergence between the operational visibility of agents (which reports binary health) and their semantic completeness (the actual quality and scope of data they can access).
+> There is a critical tension between the operational visibility of agent health and the semantic integrity of the knowledge vault.
 
-> status=success · 5.8h ago · notes='concepts=91 connections=17 rejected=17 edges=9'
+> When agents like the vault-synthesizer fail silently, the system continues to generate metrics that suggest normalcy, but the underlying knowledge graph stops evolving.
 
 ## Examples
 
-- Agents reporting 'success' while missing critical context from offline hardware or unreachable MCP servers.
-- High concept counts masking low semantic value due to fragmented infrastructure.
+- The vault synthesizer reports 100% success rate for daily runs while the number of new concepts written drops to zero.
+- Monitoring dashboards show green status for all agent processes despite the knowledge graph having no new connections for weeks.
 
 ## Related Concepts
 

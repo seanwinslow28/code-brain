@@ -5,8 +5,8 @@ connects:
   - Operational Visibility vs. Semantic Value in Agent Fleets
   - The Illusion of Health in Autonomous Systems
   - Infrastructure Fragmentation and Semantic Isolation
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-12
+updated: 2026-08-12
 ---
 
 ## Synthesis

@@ -2,19 +2,19 @@
 title: "Signal vs. Safety Trade-off in Resume Architecture"
 type: concept
 sources:
-  - knowledge/connections/automation-velocity-vs-creative-friction-in-job-search.md
+  - knowledge/concepts/signal-vs-safety-trade-off-in-resume-architecture.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This mechanism defines the tension between surfacing opportunities that are broadly safe (matching general keywords or remote preferences) versus those that are high-signal (requiring specific, deep domain expertise). When automation prioritizes safety to avoid rejection, it surfaces roles that are technically 'fits' but strategically misaligned, forcing the user to manually filter out low-value noise. The trade-off is that higher precision requires accepting lower recall, as strict filtering reduces the total number of opportunities.
+This mechanism defines the structural tension between maximizing the probability of passing automated screening filters (safety) and preserving the unique, high-signal narrative that distinguishes a candidate (signal). When automation prioritizes safety, it tends to homogenize content to match broad keyword distributions, which dilutes the specific value proposition of the individual. This trade-off forces a choice between being invisible but safe within algorithmic bounds or visible but risky outside them, often resulting in a 'slop' effect where volume masks strategic misalignment.
 
 ## Context
 
-Sean's resume and job hunt strategy require deep AI/creative tools expertise, yet the automated system often surfaces roles requiring 'deep insurance domain expertise.' This mismatch highlights the cost of prioritizing broad safety over specific signal in his career transition.
+Sean's resume and application strategy must balance the need to pass ATS filters with the need to stand out to human reviewers. The current automation trend toward lower rejection rates suggests a drift toward safety at the expense of signal, potentially making his applications blend in rather than stand out.
 
 ## Evidence
 
@@ -24,9 +24,9 @@ Sean's resume and job hunt strategy require deep AI/creative tools expertise, ye
 
 ## Examples
 
-- A role scored 2/5 due to domain mismatch but was still included in the output.
-- The system prioritizes 'likely remote flexibility' over verified constraints, reducing signal quality.
+- A role requiring deep insurance domain expertise was incorrectly flagged as a fit due to keyword overlap.
+- Automation velocity increases and rejected counts drop, leading to a dilution of quality where volume masks strategic misalignment.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Job Hunt as Sales Pipeline]]
+[[The Illusion of Health in Autonomous Systems]] [[Throughput vs. Taste Memory Tension]]

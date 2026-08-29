@@ -47,7 +47,7 @@ def main() -> None:
         sys.exit(0)
 
     session_id = hook_data.get("session_id", os.environ.get("CLAUDE_SESSION_ID", "default"))
-    tool = hook_data.get("tool", "").lower()
+    tool = hook_data.get("tool_name", "").lower()
     budget = float(os.environ.get("AGENT_BUDGET_USD", DEFAULT_BUDGET))
 
     # Use explicit cost if provided, otherwise estimate

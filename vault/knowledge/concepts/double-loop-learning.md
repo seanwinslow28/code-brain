@@ -2,31 +2,31 @@
 title: "Double-loop learning"
 type: concept
 sources:
-  - knowledge/connections/the-volume-insight-tension-in-agent-fleets.md
+  - knowledge/concepts/double-loop-learning.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This mechanism refers to the process by which a system identifies that its governing rules or mental models are flawed and adjusts them accordingly, rather than merely optimizing within existing constraints. In the context of agent fleets, it requires the system to notice when the rules themselves are wrong, not just when the outputs are noisy. This is critical for maintaining long-term utility as the complexity of the knowledge base grows.
+A meta-cognitive mechanism where the system does not merely correct errors within existing rules (single-loop) but questions and revises the underlying assumptions, policies, or ontologies that generated those rules. This requires a periodic review process that compares predicted outcomes against observed reality to identify when the governing theory of the system is itself flawed. It transforms the vault from a static repository into an adaptive organism capable of evolving its own definition of 'value' and 'truth'.
 
 ## Context
 
-Sean needs a mechanism by which the fleet notices that the rules themselves are wrong. Without this, the fleet continues to produce high-volume, low-value outputs, reinforcing the trust deficit rather than resolving it.
+Sean's current agent fleet operates primarily in single-loop mode (correcting facts, updating status). Introducing double-loop learning would allow him to detect when his automation strategies are no longer serving his strategic goals, preventing the 'illusion of competence' where busy work masks stagnation.
 
 ## Evidence
 
-> What is missing is the mechanism by which the fleet notices that the rules themselves are wrong.
+> Add a periodic rule: 'When outcomes repeatedly contradict an assumption, revise the rule that produced it—not merely the concept article.'
 
-> Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-Gravity CLI) of agent-fleets-supporting-knowledge-synthesis.
+> Argyris distinguishes correcting errors within existing rules from questioning the rules themselves.
 
 ## Examples
 
-- Sean must implement a 'Synthesis Policy Change Record' to track when the fleet's rules need adjustment, not just its outputs.
-- The fleet's evaluation metrics should shift from 'concepts written' to 'rival hypotheses considered' to prevent shallow synthesis.
+- Revising the prompt for the synthesizer when it consistently misses cross-domain patterns
+- Changing the routing logic for job-hunt agents when application success rates drop despite higher volume
 
 ## Related Concepts
 
-[[Slop as a Trust Deficit]] [[Agent Fleet Observability Dashboard]]
+[[Knowledge-Centered Service]] [[Epistemic Artifacts as Strategic Proof]]

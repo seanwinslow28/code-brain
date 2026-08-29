@@ -2,31 +2,31 @@
 title: "Agent Fleet Observability Dashboard"
 type: concept
 sources:
-  - knowledge/connections/velocity-vs-legibility-in-agent-fleets.md
+  - knowledge/concepts/agent-fleet-observability-dashboard.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-An observability framework that prioritizes the detection of silence, missing data, and semantic gaps over the confirmation of successful task completion. Instead of celebrating high throughput or low error rates in execution, this design pattern treats the absence of expected insight or the presence of unverified output as critical system errors. It shifts the metric of health from 'did the agent finish?' to 'did the agent produce something verifiable and valuable?', thereby aligning automated monitoring with human supervisory needs.
+This concept defines a strict temporal coupling mechanism where a synthesizer's validity is contingent upon reading an index that is no older than the flush it consumed. This 'freshness invariant' acts as a gatekeeper against semantic drift, ensuring that downstream artifacts are built on current state rather than superseded context. When this invariant holds, the system maintains a baseline of trust; when it breaks, the resulting stale outputs create a systemic trust deficit because users cannot verify the temporal grounding of the insights without external checks.
 
 ## Context
 
-Sean's current dashboard likely highlights successful run completions, but he needs a view that flags when the synthesizer produces high volume with low semantic density or when manual tickets are ignored, indicating a breakdown in the feedback loop.
+Sean's vault relies on auto-generated fleet memory indices to maintain coherence across his knowledge base. If the synthesizer reads an outdated index due to flush delays or failures, it processes obsolete concepts, leading to redundant or contradictory insights that degrade the utility of the entire system. Monitoring this freshness is not just an operational task but a critical quality assurance step for his personal knowledge infrastructure.
 
 ## Evidence
 
-> Automated dashboards should be designed to highlight missing data or silence as critical errors, not just successful completions.
+> A synthesizer must never read an index older than the flush it consumed
 
-> The fundamental tension lies in the trade-off between the drive for automated throughput and the preservation of semantic integrity, leading to a systemic trust deficit.
+> The consequence is a systemic trust deficit, as users cannot rely on the output without verifying the freshness of the underlying index.
 
 ## Examples
 
-- A dashboard alert that triggers when 'rejected_count' exceeds a threshold relative to 'concepts_written', indicating a collapse in output quality.
-- A visual indicator showing the time delta between concept generation and manual verification, highlighting where legibility debt is accumulating.
+- Processing concepts that have already been superseded by newer runs, leading to redundant or contradictory insights.
+- Operating on stale state which would otherwise lead to cascading errors in semantic alignment.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Control Room Observability]]
+[[Control Room Observability]] [[Infrastructure Status and Agent Failure]]

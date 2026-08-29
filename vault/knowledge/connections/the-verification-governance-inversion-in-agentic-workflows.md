@@ -2,32 +2,32 @@
 title: "The Verification-Governance Inversion in Agentic Workflows"
 type: connection
 connects:
-  - The Illusion of Health in Autonomous Systems
-  - Control Plane / Data Plane Split for Agent Fleets
-  - Agent Health and Daily Routine Automation
-created: 2026-07-20
-updated: 2026-07-20
+  - The Taste-Throughput Trade-off in Agentic Synthesis
+  - The Skill Atrophy Trap in Agentic Workflows
+  - Supervision Fatigue as the Hard Cap on Fleet Scaling
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the velocity of automation and the depth of verification required to maintain semantic integrity. As Sean scales his agent fleet, the cost of verifying data plane connectivity grows exponentially relative to the control plane's ability to issue commands. This inversion means that traditional health checks become insufficient, forcing a shift from monitoring process state to monitoring data availability, which requires deeper infrastructure instrumentation.
+There is a fundamental tension between the fleet's drive for throughput and Sean's need for 'taste' maintenance. As the system scales up automation to reduce manual intervention, it simultaneously erodes the very skill set required to evaluate that output. The consequence is a 'verification-governance inversion' where the user must spend more time auditing low-effort automated outputs than they saved by automating them, creating a hidden cost that grows non-linearly with scale.
 
 ## Threads
 
-### [[The Illusion of Health in Autonomous Systems]]
+### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
-> This concept defines the architectural necessity of distinguishing between the control plane, which dictates desired state and routing policies, and the data plane, which executes local logic.
+> test whether automated drafting, synthesis, and daily-note assembly weaken Sean’s ability to detect banal prose, invented connections, or silent pipeline decay
 
-### [[Control Plane / Data Plane Split for Agent Fleets]]
+### [[The Skill Atrophy Trap in Agentic Workflows]]
 
-> Effective monitoring requires verifying that the data plane has successfully accessed its dependencies, not just that the control plane issued a command.
+> automation often removes routine practice while leaving the human responsible for the rarest, hardest failures—precisely when their situational awareness and skill are weakest
 
-### [[Agent Health and Daily Routine Automation]]
+### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
 
-> This concept defines a latent failure mode where an agent's operational status is decoupled from its data freshness, creating a dependency chain that propagates stale context to downstr
+> This automates ___, but leaves Sean responsible for ___ under degraded visibility; preserve readiness through ___.
 
 ## Implications
 
-- Sean must implement physical layer monitoring that triggers alerts independent of agent health checks to detect silent sync failures.
-- The definition of 'healthy' for an agent must shift from process uptime to data plane accessibility and freshness.
+- Sean must implement 'automation handback' protocols where he periodically performs manual tasks to maintain skill readiness, even if it reduces short-term efficiency.
+- The fleet's success metrics should include a 'taste decay' indicator, not just throughput, to warn when automation is outpacing Sean's ability to verify.

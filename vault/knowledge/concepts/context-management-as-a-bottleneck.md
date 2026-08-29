@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/context-management-as-a-bottleneck.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This pattern describes a structural failure mode where the fragmentation of memory stores prevents agents from maintaining coherent context across distinct operational domains. When knowledge bases are siloed, the system exhibits 'context blindness,' processing vast amounts of data without connecting related concepts because the underlying graph structure lacks explicit cross-referencing mechanisms. This bottleneck manifests not as a compute limitation but as a failure to leverage prior insights, leading to redundant work and missed opportunities for synthesis across life-systems and professional workflows.
+This mechanism defines the finite capacity of the context window as a hard constraint on the complexity and specificity of instructions an agent can process. When operational instructions compete with nuanced aesthetic preferences for space in the context window, the latter is often truncated or diluted, leading to a loss of taste fidelity. This bottleneck forces a trade-off where scaling up data processing necessarily reduces the depth of creative guidance available to the agent.
 
 ## Context
 
-Sean's vault spans multiple domains including life-systems, creative-studio, and job-hunt-2026, yet the current synthesizer runs treat each domain independently. This concept identifies why cross-domain insights are rare and suggests that the bottleneck is not compute power but the structural integrity of the knowledge graph.
+Sean's current scaling strategy relies on larger context windows, but this approach only accelerates data accumulation without solving the underlying capacity issue. He must address this bottleneck by externalizing taste memory or implementing dynamic pruning to preserve critical aesthetic signals.
 
 ## Evidence
 
-> The capacity to maintain coherent context across multiple runs and domains is limited by the fragmentation of memory stores and the lack of explicit cross-referencing between disparate knowledge bases.
+> As the fleet scales (sampling hundreds of clusters), the probability of homogenization increases because the context window cannot hold both operational instructions and nuanced aesthetic preferences simultaneously.
 
-> When agents operate in silos (e.g., job-hunt vs. creative-studio), they fail to leverage prior insights, leading to redundant work and missed opportunities for synthesis.
+> Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-Gravity CLI) of [[context-management-as-a-bottleneck]]. The synthesizer describes what the concept is;
 
 ## Examples
 
-- The synthesizer must manually specify 'source_folders' for connections, indicating that automatic cross-domain linking is not yet robust.
-- The 'Whitespce Map' identifies 'Limited non-English and enterprise-procurement perspective' as a gap, showing how context scope limits insight generation.
+- The August 20 run sampled 185 clusters and wrote 122 concepts, but the context window likely struggled to maintain taste fidelity across such a high volume.
+- The June 29 run sampled 253 clusters and wrote 109 concepts, indicating a significant strain on context management capabilities.
 
 ## Related Concepts
 
-[[Context Compounding]] [[Vault as Agent Infrastructure]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Aesthetic Standardization as a Supervisory Mechanism]]

@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/control-room-observability.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-08-28
+updated: 2026-08-28
 ---
 
 ## Definition
 
-This architecture enforces a strict separation between passive telemetry monitoring and active intervention authority, preventing the ambiguity that arises when agents drift from nominal paths without clear escalation triggers. It establishes distinct roles for mission control versus incident command to ensure that recovery protocols activate before silent failures cause reputational damage in high-stakes contexts like job applications. By defining these boundaries explicitly, the system avoids the trap of micromanaging healthy states while guaranteeing that critical deviations are caught by a designated authority rather than left to resolve themselves.
+This mechanism treats system health not as a binary state but as a defeasible claim supported by explicit subclaims, context, evidence, assumptions, and unresolved rebuttals. It requires the infrastructure to expose the specific conditions under which its outputs are valid, rather than hiding behind aggregate success rates. The core pattern is that observability must extend beyond process execution to include the provenance and validity of the data being processed.
 
 ## Context
 
-Sean is building an autonomous infrastructure where agents operate with significant independence; without this governance layer, he risks either over-intervening in stable systems or missing subtle behavioral drifts that could harm his professional reputation during active job hunting phases.
+Sean needs to move beyond simple uptime monitoring to understand the conditions under which his agents fail semantically. This allows him to identify when a system is 'healthy' in operation but 'unhealthy' in its contribution to his knowledge vault.
 
 ## Evidence
 
-> Separate “mission control” roles from “incident command” roles: observer, operator, incident commander, comms owner, recovery owner, postmortem owner.
+> Treat the fleet's health as a defeasible claim supported by explicit subclaims, context, evidence, assumptions, and unresolved rebuttals.
 
-> Mission control monitors a planned operation; incident command takes over when the system leaves nominal bounds.
+> The cost of verification increases significantly, requiring Sean to balance the depth of proof against the frequency of agent runs.
 
 ## Examples
 
-- agent-fleet-incident-command.md with severity classes and escalation templates
-- portfolio-grade one-pager showing how his fleet prevents unsafe autonomous behavior
+- Logging the specific semantic clusters sampled during a run rather than just the count of concepts written.
+- Recording the rejection reasons for concepts that failed semantic verification to identify patterns in knowledge decay.
 
 ## Related Concepts
 
-[[Agent Fleet Observability Dashboard]] [[SRE Error Budget for Agents]] [[The Illusion of Health in Autonomous Systems]]
+[[The Illusion of Health in Autonomous Systems]] [[SRE Error Budget for Agents]]

@@ -3,31 +3,31 @@ title: "Taste as the Bottleneck of Agentic Scale"
 type: connection
 connects:
   - The Taste-Fidelity Decoupling in Creative Production
-  - Tacit Knowledge Erosion vs. Automation Scale
-  - Taste as Evaluation Function vs. Activity Proof
-created: 2026-07-06
-updated: 2026-07-06
+  - Performative Taste Drift
+  - Aesthetic Standardization as a Supervisory Mechanism
+created: 2026-08-27
+updated: 2026-08-27
 ---
 
 ## Synthesis
 
-The tension lies between the infinite scalability of automated creative production and the finite, non-transferable nature of human taste. As Sean scales his 'Skill-Packaging Plan,' he encounters a bottleneck where automation increases output volume but risks diluting quality unless taste is explicitly encoded. This creates a strategic imperative to prioritize 'taste-transfer' mechanisms over pure efficiency gains, as the latter are easily commoditized while the former remains a defensible moat.
+There is a fundamental tension between the infinite scalability of automated creative production and the finite, non-transferable nature of human taste. As Sean scales his 'Skill-Packaging Plan,' the fleet's ability to sample clusters increases, but the probability of homogenized or low-fidelity outputs also rises. This creates a supervisory burden where the cost of maintaining aesthetic standards grows faster than the volume of generated artifacts, effectively capping the utility of automation unless taste is encoded as a hard constraint rather than a soft preference.
 
 ## Threads
 
 ### [[The Taste-Fidelity Decoupling in Creative Production]]
 
-> The answer is always the same two things, and they are the moat: the taste-transfer method, and Sean's fleet as the live worked example.
+> This pattern identifies the divergence between the quantity of generated artifacts and their qualitative alignment with established aesthetic standards.
 
-### [[Tacit Knowledge Erosion vs. Automation Scale]]
+### [[Performative Taste Drift]]
 
-> Nobody ships a creative-taste interview. The moat is the elicitation method (B research: a self-authored edge map works where reassura
+> This mechanism describes the endogenous change in an evaluator's standards caused by repeated exposure to generated outputs.
 
-### [[Taste as Evaluation Function vs. Activity Proof]]
+### [[Aesthetic Standardization as a Supervisory Mechanism]]
 
-> The rule Pocock enforces and we adopt: a user-invoked skill may call model-invoked skills, never another user-invoked one.
+> This concept identifies the risk that automated systems, when scaled, tend to homogenize creative output by defaulting to statistically probable patterns.
 
 ## Implications
 
-- Sean must prioritize the development of 'elicitation' skills over 'generation' skills to maintain competitive advantage in a commoditized market.
-- The value of his fleet lies not in its automation capabilities but in its ability to preserve and transfer his specific aesthetic judgments.
+- Sean must implement negative constraint checks in the fleet architecture to reject low-fidelity outputs before they enter the vault.
+- The strategic value of the knowledge base is determined by taste fidelity, not volume, requiring a shift from throughput metrics to quality metrics.

@@ -2,31 +2,30 @@
 title: "Velocity vs. Judgment in MCP Strengthening"
 type: concept
 sources:
-  - knowledge/connections/velocity-vs-judgment-in-mcp-strengthening.md
+  - knowledge/connections/the-semantic-velocity-trap-in-agent-fleet-scaling.md
 tags: [auto-generated, phase-6]
-created: 2026-07-22
-updated: 2026-07-22
+created: 2026-08-20
+updated: 2026-08-20
 ---
 
 ## Definition
 
-This tension defines the trade-off between the speed of automated execution and the depth of semantic reasoning required for robust system strengthening. As velocity increases through larger cluster sampling or more complex models, the agent's ability to apply rigorous taste-based filtering often decreases unless explicitly constrained. The mechanism here is that raw compute power expands the failure surface faster than the judgment layer can be hardened, leading to a net loss in productivity despite higher throughput.
+This tension describes the inverse relationship between the operational throughput of an automated system and the cognitive load required to maintain its semantic integrity. As the sampling velocity increases, the volume of generated artifacts outpaces the human's capacity for verification, forcing a trade-off where judgment is sacrificed for speed. The mechanism relies on the assumption that higher fidelity models can compensate for lower human oversight, but this fails when the model introduces 'semantic drift' that requires nuanced correction rather than binary acceptance. The consequence is a degradation in trustworthiness, as the user must manually intervene to correct misinterpretations rather than relying on automated synthesis.
 
 ## Context
 
-Sean's recent runs show a clear correlation between model upgrades (qwen3-14b to qwen3.6-35b) and changes in output quality metrics. He must decide whether to prioritize the volume of concepts generated or the precision of the connections made, as optimizing for one often degrades the other.
+Sean's agent fleet scaling efforts have led to increased sampling rates (e.g., 185 clusters sampled in run-2026-08-19) but also higher rejection counts and longer durations. This suggests that the current velocity is generating noise that requires significant human judgment to filter, undermining the efficiency gains of automation.
 
 ## Evidence
 
-> Sean's transition from small, high-quality runs to large, low-quality runs reveals a critical tension between operational velocity and semantic judgment.
+> There is a fundamental tension between the operational velocity of the agent fleet and the judgment required to maintain semantic integrity.
 
-> As the system scales up concept generation, the lack of rigorous filtering leads to a surplus of low-fidelity output that requires more manual supervision to correct.
+> The consequence is a degradation in trustworthiness, as Sean must now manually intervene to correct misinterpretations rather than relying on automated synthesis.
 
 ## Examples
 
-- The run on 2026-07-21 produced 97 concepts and 21 connections via qwen3.6-35b, whereas the run on 2026-07-02 produced 141 concepts and only 40 connections via qwen3-14b.
-- The rejection count dropped from 80 in early July to 15 in late July, suggesting a change in filtering rigor or model behavior rather than an improvement in taste.
+- Run-2026-08-19 sampled 185 clusters but rejected 29, indicating that higher velocity is not linearly improving signal-to-noise ratio without corresponding increases in verification capacity.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Harness Engineering Invariant]]
+[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[The Efficiency-Quality Inversion in Automated Synthesis]]
