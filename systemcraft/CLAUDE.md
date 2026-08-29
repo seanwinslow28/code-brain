@@ -13,7 +13,8 @@ Scaffold only. The studio is being built along the [Systemcraft build map](https
 | Path | Lane | What lives here |
 |---|---|---|
 | `bench/` | public | Five specialist seat definitions: Design Strategist, Architecture Advisor, Interaction & Trust Designer, Evals & Evidence Architect, Ops & Economics Modeler |
-| `templates/` | public | Artifact templates: PRD, ADR, failure-UX spec + model card, eval plan, ops/economics model + incident runbook |
+| `templates/` | public | Artifact templates: PRD, ADR, failure-UX spec + model card, eval plan, ops/economics model + incident runbook — plus ratified law surfaces: status vocabulary, close-digest format |
+| `MODEL-CARD.md` | public | The studio's honest self-description: supported claims, UNPROVEN list, refusals, and the public evidence-boundary disclosure (eng-003.d53) |
 | `lanes/` | public | Five lane manifests — topic-organized tables of contents (title + pointer + one-line when-to-read) into the private corpus. Shelf labels, never the books: an entry that paraphrases a source's substance belongs in the private lane |
 | `corpus/` | **private — gitignored** | Two-layer reference corpus: free-canon distillates + book-to-skill ingests |
 | `ledger/` | **private — gitignored** | The decision ledger — every design the studio produces, accreting per engagement |
@@ -27,3 +28,5 @@ Scaffold only. The studio is being built along the [Systemcraft build map](https
 2. **Graceful degradation.** On a machine where the private lanes are absent (fresh clone, employer machine), seats say so plainly and continue on tracked knowledge — they never fabricate citations into a corpus they cannot read.
 3. **Explain why.** Every material choice ships with a one-breath why-A-over-B. That behavior is the studio's teaching surface.
 4. **Audits run fresh.** An audit is a fresh-context invocation that never sees the drafting conversation; cross-seat audit is preferred where lanes touch; milestone red-team gate passes run on Codex via the codex plugin.
+5. **One invocation, one seat** *(eng-003.d30, ratified 2026-08-29)*. Provider availability never changes craft ownership: an invocation carries exactly one seat identity, its seat contract, one lane manifest, and its declared target. If the planned provider is unavailable, use only a dated owner-approved vendor substitution that preserves that identity; otherwise write a dated deferral and stop the dependent branch. Never merge lanes or draft seat-owned substance in coordinator context.
+6. **Summaries never outrun the record** *(eng-003.d50–d53, ratified 2026-08-29)*. Gate findings own gate verdicts; every navigation surface is derived and says so; statuses, proof results, and cost lines render per [templates/status-vocabulary.md](templates/status-vocabulary.md); the studio claims about itself only what [MODEL-CARD.md](MODEL-CARD.md) permits, and its evidence-boundary disclosure travels with any public showing of the machinery.

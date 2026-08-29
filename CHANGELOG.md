@@ -7,6 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — Systemcraft law package ratified and applied (2026-08-29)
+
+eng-003 (the studio's self-audit — five fresh-context Codex seat passes, one
+inverted-vendor Fable close gate, AUDIT PASS WITH ACCEPTANCES) produced a
+zero-build law package, ratified by Sean 2026-08-29 and applied to the tracked
+surfaces:
+
+- `systemcraft/templates/red-team-protocol.md` — three typed gates (PRD
+  sign-off · design-complete · pre-launch) with IMPLEMENTATION HOLD; a paper
+  gate may no longer demand runtime evidence; typed verdicts.
+- `.claude/skills/systemcraft/SKILL.md` — routing by question/output with a
+  bounded one-off row and self-targeted modifier; standing success measure
+  (outside use at D+14, administrative Close); aggregate pass budget and
+  availability ladder as words (defer, never cross lanes; coordinator inside
+  the budget).
+- `systemcraft/templates/status-vocabulary.md` (new) — authority/DERIVED
+  convention, STATUS CONFLICT fail-closed, proof-scope blocks ("all proofs
+  green" banned), typed statuses, cost riders.
+- `systemcraft/templates/close-digest.md` (new) — Close digest format and the
+  one-question ratification protocol.
+- `systemcraft/MODEL-CARD.md` (new) — the studio's honest self-description:
+  supported claims, UNPROVEN list, refusals, public evidence-boundary
+  disclosure.
+- `systemcraft/CLAUDE.md` — rules 5 (one invocation, one seat) and 6
+  (summaries never outrun the record); layout rows for the new surfaces.
+
+The control-plane tooling proposed by the same engagement is deliberately NOT
+built: gated on the studio passing its own outside-use test for two
+consecutive observed months (eng-003.d61, the close gate's steel-man adopted).
+
 ### Fixed — hook payload contract (2026-08-28)
 
 All four registered Claude Code hooks had never executed their logic. Each read a
