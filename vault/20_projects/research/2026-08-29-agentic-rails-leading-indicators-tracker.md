@@ -10,8 +10,10 @@ tags: [agentic-web, odlyzko, leading-indicators, rails-timing, tracker]
 
 # Agentic-rails leading-indicators tracker
 
-Extends the [Odlyzko-check verdict](2026-08-29-agentic-rails-odlyzko-check.md): six
-indicators whose crossing would reopen the rails-timing question, each with an
+Extends the [Odlyzko-check verdict](2026-08-29-agentic-rails-odlyzko-check.md): the
+verdict's six indicators whose crossing would reopen the rails-timing question, plus
+two ratified additions (7: EDGAR filing-language transition; 8: measurement-series
+health — ratified by Sean 2026-08-29), each with an
 authoritative series, a re-verified baseline, a threshold, and a $0 checking recipe
 runnable in under 10 minutes. **Designed to be re-run and appended to** — add a dated
 row to each indicator's log on every check; never overwrite a prior reading.
@@ -282,29 +284,96 @@ company (per-publisher brackets don't count).
 
 ---
 
-## Proposed additional indicators (for Sean's ratification — not yet part of the tracker)
+## Indicator 7 — EDGAR filing-language transition (risk-factor → quantified)
 
-**Proposed Indicator 7 — EDGAR filing-language transition (risk-factor → quantified).**
-The 45-filing "agentic commerce" mention count is a free, 1-minute, [independent]
-diffusion curve, and each filer's individual transition from narrative/risk language
-to numbers is the GAAP indicator's early-warning system (Visa is furthest along;
-Coinbase's 8-K decks are the most likely first mover to dollars). Absorbs the
-"Stripe/Shopify earnings-call language shift" candidate: Shopify publishes relative
-multipliers every quarter (3x orders YoY, 2x catalog conversion) — the quarter
-multipliers become dollars is Indicator 1 firing, and the multiplier series is
-trackable now. Already wired into Indicator 2's recipe at zero marginal cost.
+*Ratified by Sean 2026-08-29 (proposed and ratified same evening).*
 
-**Proposed Indicator 8 — measurement-series health (meta-indicator).**
-The tracker depends on four ongoing series, and *their* death or degradation is
-itself evidence (a vendor that stops publishing a flattering series usually stopped
-because it stopped flattering): HUMAN monthly (latest Jul 2026; >6 weeks stale =
-warning), TollBit State of the Bots (already slipped quarterly→semiannual),
-Adobe AI-traffic reports (already showing an unexplained cumulative restatement),
-Dune/agenteconomy x402 dashboards (community-run; could vanish without notice —
-log cumulative USD each check so a dead dashboard doesn't orphan the series).
-Checked implicitly by running recipes 3–6; just log staleness explicitly.
+**What it measures:** the diffusion of agentic commerce through SEC filings, and each
+filer's individual transition from narrative/risk-factor language to numbers — the
+early-warning system for Indicator 2. Absorbs the earnings-call language-shift
+candidate: Shopify publishes relative multipliers every quarter (orders 3x YoY,
+catalog conversion 2x, new-buyer orders 2x); the quarter any multiplier becomes a
+dollar figure, Indicator 1 fires.
 
-**Secondary candidates surfaced (log-only unless ratified):** a second Etsy-class
+**What fires it:** (a) any filer moving from risk/strategy language to a quantified
+agentic figure in a filing or earnings deck (even a non-GAAP one — Coinbase's
+market-share slides and Rezolve's TCV claim are the current frontier); (b) a sharp
+inflection in the mention count (baseline-doubling inside two quarters); (c) Shopify
+(or any platform) converting its relative-multiplier series to absolute numbers.
+
+**Series:** EDGAR full-text search [independent], same endpoint as Indicator 2 —
+zero marginal cost, run in the same curl session. Companion venues: Shopify/Etsy
+quarterly transcripts (fool.com fetches cleanly), Coinbase earnings decks
+(`q=%22agentic%22&forms=8-K`).
+
+**Baseline 2026-08-29:** 45 "agentic commerce" hits in 10-K/10-Q (265 all forms);
+0 quantified. Per-filer frontier: Visa most advanced (named products + live-pilot
+claim + dedicated risk factor); Coinbase quantifies third-party market shares in 8-K
+decks; Rezolve quantifies non-GAAP TCV with a disclaimer; Etsy — the day-one
+Instant-Checkout merchant — mentions agentic only as competition/fraud risk.
+Shopify multiplier set (Q2-2026): AI traffic/orders 3x YoY, catalog-conversion 2x,
+new-buyer 2x, 75% of AI-attributed orders outside top-100 categories.
+
+**Recipe (<5 min, piggybacks on Indicator 2's curl):**
+1. From Indicator 2's queries, log the 10-K/10-Q mention count and the all-forms count.
+2. Diff the filer list against the last log row — for each NEW filer, grep ±300 chars
+   around "agentic": classify risk-factor / strategy / quantified.
+3. `q=%22agentic%22&forms=8-K` — check Coinbase's (and any newcomer's) latest deck
+   for dollar figures replacing market-share percentages.
+4. Quarterly: log Shopify's multiplier set from the earnings transcript; note any
+   multiplier that became a dollar.
+
+**Log:**
+| Date | 10-K/10-Q mentions | All forms | Quantified filers | Frontier notes |
+|---|---|---|---|---|
+| 2026-08-29 | 45 | 265 | 0 | Visa furthest; Coinbase 8-K shares; Rezolve TCV; Shopify multipliers 3x/2x/2x |
+
+---
+
+## Indicator 8 — measurement-series health (meta-indicator)
+
+*Ratified by Sean 2026-08-29 (proposed and ratified same evening).*
+
+**What it measures:** the tracker's own instruments. A vendor that stops publishing a
+flattering series usually stopped because it stopped flattering — so the death,
+cadence slip, methodology restatement, or silent disappearance of any watched series
+is evidence in its own right, in either direction (a series discontinued while
+flat-lining reads as capitulation; one discontinued mid-acceleration reads as
+strategic withholding).
+
+**Watched series and their health baselines (2026-08-29):**
+| Series | Publisher | Expected cadence | Health status | Stale-alarm |
+|---|---|---|---|---|
+| State of Agentic Traffic | HUMAN Security [vendor] | monthly | OK — latest Jul 2026 (Aug due ~early Sep) | >6 weeks without a new edition |
+| State of the Bots | TollBit [vendor] | quarterly → **already slipped to semiannual** | DEGRADED — two consecutive combined editions | a skipped H2-2026 edition = gone-silent signal |
+| AI-traffic reports | Adobe [vendor] | ~monthly | DEGRADED — unexplained cumulative restatement (+1,324% → +1,219%) | restatement without methodology note, or >2 months silent |
+| x402 dashboards (Dune `thechriscen` + agenteconomy.to) | community [independent] | live | OK — mutually consistent within 0.3% | either dashboard 404s or diverges >5% from the other |
+
+**What fires it:** any row hitting its stale-alarm, a series being formally
+discontinued, or a second unexplained restatement in the same series. A firing here
+doesn't reopen the rails-timing question by itself — it degrades or upgrades the
+confidence of the indicator that depends on the affected series, and the
+*circumstances* of the death are the datum to record.
+
+**Recipe (~2 min, runs implicitly with recipes 3–6):** while executing Indicators
+3–6, fill in this indicator's log row: latest-edition date per series, any cadence
+or methodology change, and the Dune-vs-agenteconomy divergence %. **Always log the
+x402 cumulative USD in Indicator 3's row** so a dead dashboard can't orphan the
+series history.
+
+**Log:**
+| Date | HUMAN latest | TollBit latest | Adobe latest | x402 dashboards | Notes |
+|---|---|---|---|---|---|
+| 2026-08-29 | Jul 2026 | 2026 Q1&Q2 "The Bad Bots" | Aug 19 (Jul data) | both live, Δ0.3% | TollBit cadence halved; Adobe restatement flagged |
+
+---
+
+## Secondary candidates (log-only unless ratified)
+
+Ratification record: Indicators 7 and 8 were proposed here 2026-08-29 and ratified by
+Sean the same evening — promoted to full sections above.
+
+**Still log-only:** a second Etsy-class
 integration exit or a contradicting success (Walmart's "3x lower conversion" is the
 one to watch); Cloudflare's Sept-15 enforcement outcome (dated binary event); x402
 unique-counterparty monthly deltas (harder to farm than volume); Adobe's YoY
@@ -315,8 +384,10 @@ direct-licensing norm (4–5 LLM partners) substituting for per-crawl tolls.
 
 ## Cadence recommendation (recommendation only — no automation wired)
 
-**Monthly manual re-check, ~30–40 min, first business day of the month.** The six
-recipes are each <10 min and several are <2 min (EDGAR curl, Dune fetch); monthly
+**Monthly manual re-check, ~30–40 min, first business day of the month.** The eight
+recipes are each <10 min and several are <2 min (EDGAR curl, Dune fetch; 7 piggybacks
+on 2's curl session and 8 runs implicitly with 3–6, so the additions cost ~5 extra
+minutes); monthly
 matches the fastest-moving series (HUMAN, Adobe) and is well ahead of every
 threshold's realistic crossing speed — the widest gap is ~2 orders of magnitude
 (Indicator 3) and the narrowest ~4x (Indicator 5, decelerating). Two async
