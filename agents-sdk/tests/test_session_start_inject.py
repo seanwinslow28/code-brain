@@ -18,8 +18,11 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 from pathlib import Path
+
+import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 HOOK = REPO_ROOT / ".claude" / "hooks" / "session-start-inject-index.sh"
@@ -283,3 +286,58 @@ def test_unparseable_rows_pass_through_rather_than_vanish(tmp_path: Path) -> Non
     ctx = out["hookSpecificOutput"]["additionalContext"]
     assert "- normal" in ctx
     assert "some hand-written note that is not a wikilink row" in ctx
+
+
+REAL_INDEX = REPO_ROOT / "vault" / "knowledge" / "index.md"
+
+
+def _default_cap() -> int:
+    """The cap the hook ships with, read from the script itself."""
+    text = HOOK.read_text(encoding="utf-8")
+    match = re.search(r"^DEFAULT_MAX_CHARS=(\d+)", text, re.MULTILINE)
+    assert match, "DEFAULT_MAX_CHARS not found in the hook"
+    return int(match.group(1))
+
+
+@pytest.mark.skipif(not REAL_INDEX.exists(), reason="no tracked knowledge index")
+def test_the_whole_tracked_graph_reaches_a_session(tmp_path: Path) -> None:
+    """Nothing in the real index is dropped at the shipped cap.
+
+    #202 raised the cap so every connection article arrives. This is the
+    assertion that says so against the actual vault rather than a
+    fixture, because fixtures are what let the original defect hide.
+    """
+    out = _run_hook(index_path=REAL_INDEX, max_chars=_default_cap())
+    ctx = out["hookSpecificOutput"]["additionalContext"]
+    assert TRUNCATION_MARKER not in ctx, "the tracked graph no longer fits the cap"
+    index_rows = len(
+        re.findall(r"^- \[\[", REAL_INDEX.read_text(encoding="utf-8"), re.MULTILINE)
+    )
+    emitted = len([ln for ln in ctx.splitlines() if ln.startswith("- ")])
+    assert emitted == index_rows, f"emitted {emitted} of {index_rows} rows"
+
+
+@pytest.mark.skipif(not REAL_INDEX.exists(), reason="no tracked knowledge index")
+def test_default_cap_keeps_headroom_over_the_tracked_index() -> None:
+    """Fail while there is still room, not after the graph has outgrown it.
+
+    The knowledge graph grows ~180 articles a month, so a cap that fits
+    exactly today is a cap that silently truncates in weeks. That is the
+    #202 failure precisely: the injection crossed its budget on
+    2026-07-22 and nobody heard about it for five weeks.
+
+    This test is the smoke alarm. When it goes red the fix is a decision
+    about token spend at every session start, not an emergency: either
+    raise DEFAULT_MAX_CHARS again, or accept truncation and let the
+    hook's notice do its job.
+    """
+    cap = _default_cap()
+    out = _run_hook(index_path=REAL_INDEX, max_chars=cap)
+    rendered = len(_index_body(out["hookSpecificOutput"]["additionalContext"]))
+    headroom = 1 - rendered / cap
+    assert headroom >= 0.20, (
+        f"the tracked index renders to {rendered} of a {cap} cap "
+        f"({headroom:.0%} headroom, floor 20%). At ~180 articles/month "
+        f"(~9,000 chars) this truncates soon. Raise DEFAULT_MAX_CHARS or "
+        f"decide to accept truncation."
+    )

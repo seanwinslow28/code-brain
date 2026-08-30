@@ -7,6 +7,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed — the knowledge index reached sessions two-thirds empty (2026-08-29)
+
+`.claude/hooks/session-start-inject-index.sh` had been injecting **190 of 218
+concepts and 0 of 694 connection articles** since 2026-07-22, and saying nothing
+about it. A `content[:15000]` slice met a 106,066-char alphabetically-ordered
+index whose Connections heading sits at character 17,427. The entire producer
+side — synthesizer, `concept_edges`, vault critic — writes connections that no
+session had seen for five weeks. Found while writing the Code Brain 4Q artifact
+([#199](https://github.com/seanwinslow28/code-brain/issues/199)); fixed as
+[#202](https://github.com/seanwinslow28/code-brain/issues/202).
+
+- **Compact rows.** The index's wikilinks average 116.2 chars and spend the
+  budget saying the slug twice, once as a path and once as a title; a bare slug
+  averages 49.8 and is what you need to `Read` the file. `slugify(title)`
+  reproduces the real slug for 903 of 912 rows. Rendering happens in the hook —
+  `index.md` keeps its wikilinks so Obsidian still navigates it, and
+  `regenerate_index` is untouched.
+- **Cap raised 15,000 → 80,000** so the whole graph lands: **218/218 concepts,
+  694/694 connections, 45,671 chars (~11.4K tokens), 43% headroom.** The cap is a
+  ceiling, not a cost — the hook injects whatever the graph renders to.
+- **Truncation is announced** and, when it happens, selects by
+  `updated:`/`created:` frontmatter rather than mtime. The first cut used mtime
+  and produced a "newest kept" claim that was *false* against real data: a
+  checkout or Mini sync rewrites every mtime at once, and all 694 connections
+  then claimed the same day. Reading 912 file heads costs 40ms against a 5s
+  budget.
+- **Rows the parser cannot read pass through verbatim.** Dropping what you fail
+  to parse is the same defect in miniature.
+- **Tests 4 → 14.** Two were rewritten because they encoded the defect as the
+  contract: `test_oversize_index_truncated_to_exact_char_cap` asserted the
+  emitted slice was *exactly* the cap, which is blind prefix truncation restated
+  as a spec. Two new tests read the real tracked vault, including a headroom
+  guard that fails at 20% so the next crossing is loud instead of silent.
+
 ### Changed — Systemcraft law package ratified and applied (2026-08-29)
 
 eng-003 (the studio's self-audit — five fresh-context Codex seat passes, one

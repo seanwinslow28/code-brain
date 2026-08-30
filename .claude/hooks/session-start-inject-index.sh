@@ -18,7 +18,15 @@ set -u
 
 REPO_ROOT="/Users/seanwinslow/Code-Brain/code-brain"
 DEFAULT_INDEX="$REPO_ROOT/vault/knowledge/index.md"
-DEFAULT_MAX_CHARS=15000
+# Raised from 15,000 on 2026-08-29 (#202 follow-up) so the whole graph
+# fits: 912 articles render to 45,412 chars, and all 694 connections were
+# the half that never arrived. This is a CEILING, not a cost. The hook
+# injects whatever the graph renders to, so headroom above the current
+# size is free until the vault grows into it. At the measured ~180
+# articles/month that is roughly four months, and
+# test_default_cap_keeps_headroom_over_the_tracked_index fails loudly
+# before it runs out, which is the warning #202 never got.
+DEFAULT_MAX_CHARS=80000
 
 INDEX_PATH="${KNOWLEDGE_INDEX_PATH:-$DEFAULT_INDEX}"
 MAX_CHARS="${KNOWLEDGE_INDEX_MAX_CHARS:-$DEFAULT_MAX_CHARS}"
