@@ -3,7 +3,7 @@ title: "Historical patterns of technological revolutions — Stage-0 synthesis (
 date: 2026-08-29
 project: agentic-web-startup
 type: research-synthesis
-status: stage-1-complete
+status: stage-2-complete-premortem-applied
 tags: [agentic-web, history, micropayments, perez, protocols, measurement, research-sprint]
 ---
 
@@ -268,6 +268,83 @@ published work.
 
 **Next gate:** Stage 2 council pre-mortem (~$0.29) attacks this whole synthesis before
 anything feeds the Sept-1 scoring. Fire only on Sean's explicit go.
+
+---
+
+# Stage 2 — council pre-mortem verdict (2026-08-29 ~20:45, $0.75 actual)
+
+Premium council (Opus 4.7 + GPT-5.5 + Gemini 2.5 Pro + Grok 4.5; Opus chairman) ran the
+ratified pre-mortem. Full transcript:
+[2026-08-29-tech-revolution-patterns-council-premortem.md](2026-08-29-tech-revolution-patterns-council-premortem.md).
+Convergence was unusually high — all four models attacked the same three load-bearing
+sentences. **The corrections below supersede the corresponding claims above.** (First
+run crashed on a council-CLI null-content bug, fixed + regression-tested same evening,
+commit 0df999b1; one dangling $11.19 cap *reservation* in the 08-30 UTC ledger is not
+actual spend.)
+
+## Downgrades this note accepts
+
+1. **Finding 3's "currency quadrant" claim is DOWNGRADED from pattern-with-precedent to
+   contested hypothesis.** Unanimous: the Nielsen/ABC → journey-evals mapping breaks on
+   fungibility (Nielsen priced a homogeneous, substitutable unit across sellers
+   competing for one budget; agent conduct is per-vendor and non-substitutable), on the
+   missing market-clearing metric (no one allocates spend on agent-conduct scores), and
+   on the fraud object (Air Canada is content/advice tort, not allocation fraud). The
+   closer ancestors are **UL certification, SOC 2, escrow, pen-testing** — real but
+   smaller, per-vendor, lower-margin attestation businesses. Accordingly the **1.5–2.5%
+   intermediary-tax "sizing law" does not port** — it is one industry's number
+   (broadcast TV), and compliance-certification economics are not
+   percentage-of-spend-shaped.
+2. **Finding 1's "history endorsing Sean's standing constraint" is RETRACTED as stated.**
+   Grok's cut stands: consolidation-through-chokepoints is a *location forecast*, not a
+   *strategy endorsement* — RSS readers, ad-tech middle layers, and SSL CAs all
+   correctly predicted where volume would sit and were margin-compressed anyway. Opus
+   adds: the 1990s payments record actually resolved into an adjacent incumbent
+   (Visa/MC via SSL) plus an unpredicted orthogonal model (AdWords), not the era's
+   pitched aggregators. The complement-the-rails constraint may still be right; history
+   does not *endorse* it.
+3. **The neutrality-as-moat assumption is DELETED.** Documented complementor survivors
+   (Adobe, Intuit, Bloomberg) were never solo and had distribution or data assets at
+   founding scale; MRC neutrality is enforced by consortium + regulatory teeth, not
+   virtue; Datadog needed ~$600M and a decade to out-staff the infra vendors' "good
+   enough." Replacement claim (GPT-5.5's formulation, adopted): *independent
+   verification becomes valuable only after recurring adversarial economic allocation
+   exists that neither side can credibly self-report and platforms cannot cheaply
+   bundle — a condition not yet proven for the agent web.* Two named victims in two
+   years is not the 1961–63-grade pressure H-B's own preconditions describe; treating
+   misrepresentation-pain-now as the precondition partially met was a bridge narrative,
+   and "the bridge is the business you get stuck in."
+4. **Self-audit accepted:** the note's epistemic hygiene (Amara/Perez/vendor-number
+   caveats) was in places functioning as a license for the flattering claims to stand.
+   The three attacked sentences each converted a base rate into a positive product
+   warrant for the territory the author already favored.
+
+## What survives at high confidence
+
+- **The negative screen — unanimous across four vendors:** don't build passive agent
+  analytics (free-ification quadrant), don't bet on an open micropayment mesh, don't
+  depend on WebMCP, don't take the Nortel seat (tools sold to a thin capex-correlated
+  cohort of agent-builders), and Perez/hype-cycle/Amara stay inadmissible as evidence.
+- **The falsifiable consolidation forecast itself** (volume routes through
+  aggregator/MoR chokepoints) — as a forecast, not an endorsement.
+- **The eval/timing base rates** feeding the rails-timing rubric dimension.
+
+## What the council leaves genuinely open (Sept-1 work, not history's)
+
+The four models DIVERGE on the positive alternative: principal-side agent control plane
+(Opus — pairs with the ChatGPT DR finding that delegation-control is the binding
+behavioral constraint), vertical application on cheap inference or a narrow buy-side
+compliance product (Grok), or wait-and-run-the-demand-check (GPT-5.5). Council
+convergence is real only on the negative screen; the positive pick belongs to the
+Sept-1 evidence and sitting.
+
+**Council's process recommendation, flagged for Sean:** three of four models argue the
+**Odlyzko demand-vs-buildout check on agentic rails** ($0-ish, method already validated
+on railways/fiber/3G) should run as a **gate before** the Sept-1 pick, not as a
+post-decision publication.
+
+**Standing use of this document:** a filter on what NOT to build, plus base rates for
+rails-timing scoring. Not a warrant for any territory.
 
 ## Provenance
 
