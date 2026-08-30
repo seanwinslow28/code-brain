@@ -2,31 +2,31 @@
 title: "Tacit Knowledge Erosion vs. Automation Scale"
 type: concept
 sources:
-  - knowledge/concepts/tacit-knowledge-erosion-vs-automation-scale.md
+  - knowledge/expansions/tacit-knowledge-erosion-vs-automation-scale.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-This mechanism describes an inverse dependency where increased automation reliability systematically degrades the human operator's ability to detect anomalies and execute manual recovery procedures. As the agent fleet handles routine tasks with higher fidelity, the frequency of failure events drops, removing the necessary practice loops that maintain operational literacy. This creates a latent risk: the system becomes fragile not because of code defects, but because the human fallback has atrophied from disuse, making the time-to-notice and time-to-manual-recovery metrics critical indicators of long-term viability.
+This concept describes a non-linear degradation of human expertise where the specific cognitive stage automated determines the nature of the resulting skill gap. When automation displaces execution, diagnostic capability often remains intact; however, when it automates interpretation or decision selection, the operator loses the ability to verify the system's internal logic. This creates a structural vulnerability where the human supervisor becomes cognitively dependent on the agent's output without possessing the mental models required to detect subtle failures or mode errors.
 
 ## Context
 
-For Sean, who is positioning himself as a technical leader rather than just a tool user, this erosion is dangerous. If he relies entirely on the fleet's seamless operation, he loses the deep diagnostic intuition required to demonstrate competence in high-stakes job interviews or complex system architecture reviews. He must actively preserve his 'failure literacy' to maintain his professional edge.
+Sean is building an autonomous agent fleet that handles significant portions of his knowledge work and job hunt infrastructure. As he scales this system, he risks losing the 'taste' and diagnostic intuition necessary to supervise these agents effectively. Understanding which cognitive stages are being displaced allows him to intentionally preserve manual practice in high-leverage areas like interpretation and decision-making, preventing a total loss of agency.
 
 ## Evidence
 
-> The more reliably the fleet performs routine X, the less practiced Sean becomes at detecting and repairing X when automation fails.
+> Automating execution preserves diagnosis differently from automating interpretation; the debt belongs to the displaced cognitive stage, not to automation in general.
 
-> Track time-to-notice, time-to-manual-recovery, and whether the fallback procedure was recently exercised.
+> Before diagnosing deskilling, test whether the system made competent supervision cognitively impossible: could the operator state what the automation was doing, why, and what it would do next?
 
 ## Examples
 
-- Modeling automation as a dependency that can weaken its human fallback over time.
-- Measuring the degradation of manual repair skills as automated reliability increases.
+- Mapping agent functions to Parasuraman's levels of automation to identify which stages Sean must perform manually.
+- Designing an Observability Contract that requires agents to expose mode, evidence, decision, uncertainty, and next_action.
 
 ## Related Concepts
 
-[[The Skill Atrophy Trap in Agentic Workflows]] [[Supervision as the New AI Edge]]
+[[Supervision as the New AI Edge]] [[The Illusion of Competence in Automated Systems]] [[Control Room Observability]]

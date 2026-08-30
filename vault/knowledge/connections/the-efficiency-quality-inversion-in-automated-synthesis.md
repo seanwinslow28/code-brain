@@ -2,32 +2,32 @@
 title: "The Efficiency-Quality Inversion in Automated Synthesis"
 type: connection
 connects:
-  - The Skill Atrophy Trap in Agentic Workflows
-  - The Taste-Throughput Trade-off in Agentic Synthesis
-  - Supervision Fatigue as the Hard Cap on Fleet Scaling
-created: 2026-08-27
-updated: 2026-08-27
+  - The Illusion of Competence in Automated Systems
+  - Context Compounding
+  - Operational Visibility vs. Semantic Value in Agent Fleets
+created: 2026-08-29
+updated: 2026-08-29
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the fleet's drive for throughput (concepts written, connections made) and Sean's need for 'taste' maintenance. As the system scales up automation to reduce manual intervention, it simultaneously erodes the very skill set required to evaluate that output. The consequence is a 'verification-governance inversion' where the user must spend more time auditing low-effort automated outputs than they saved by automating them, creating a hidden cost that grows non-linearly with scale.
+There is a fundamental tension between the operational efficiency of batch-generating standardized artifacts and the qualitative depth required for strategic mastery. By automating the creation of quizzes, flashcards, and audio overviews for six modules simultaneously, Sean maximizes throughput but minimizes the 'friction' necessary for deep learning. The consequence is that the system optimizes for *coverage* of material rather than *comprehension*, creating a high-volume, low-retention loop where the user feels productive but remains cognitively passive.
 
 ## Threads
 
-### [[The Skill Atrophy Trap in Agentic Workflows]]
+### [[The Illusion of Competence in Automated Systems]]
 
-> automation often removes routine practice while leaving the human responsible for the rarest, hardest failures—precisely when their situational awareness and skill are weakest
+> One row per generated artifact (audio overview, quiz, flashcards, mind map, study guide, report). Update on every generate/download.
 
-### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
+### [[Context Compounding]]
 
-> test whether automated drafting, synthesis, and daily-note assembly weaken Sean’s ability to detect banal prose, invented connections, or silent pipeline decay
+> Notebook: `0abf9bb0-6a82-4838-a639-a3f9dd03e963` One row per generated artifact (audio overview, quiz, flashcards, mind map, study guide, report).
 
-### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
+### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
 
-> This automates ___, but leaves Sean responsible for ___ under degraded visibility; preserve readiness through ___.
+> m1-artifacts/m1-audio-overview.mp3 (local-only/gitignored; also in notebook)
 
 ## Implications
 
-- Sean must implement 'automation handback' protocols where he periodically performs manual tasks to maintain skill readiness, even if it reduces short-term efficiency.
-- The fleet's success metrics should include a 'taste decay' indicator, not just throughput, to warn when automation is outpacing Sean's ability to verify.
+- Sean may need to implement a 'friction layer' that forces manual review or synthesis of each module's artifacts before proceeding to the next, breaking the illusion of automatic mastery.
+- The current batch approach risks creating a 'knowledge debt' where the volume of materials obscures gaps in understanding that only surface during application or interview scenarios.

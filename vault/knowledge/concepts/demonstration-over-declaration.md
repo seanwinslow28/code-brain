@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/demonstration-over-declaration.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-Professional credibility is established through the replayability of specific, high-friction operational events rather than through declarative statements about capability. This mechanism requires the operator to preserve failure traces and trade-offs, which serve as immutable proof of expertise because they cannot be fabricated without significant effort. The value lies in the difficulty of replication: if an outcome is easy to fake, it has no market value; if it is hard to fake, it proves unique competence.
+This principle asserts that credibility in complex domains is established by exposing the process of reasoning and decision-making, rather than by stating conclusions or showcasing final outputs. In high-stakes professional contexts, the 'how' is more valuable than the 'what' because it allows observers to verify the quality of the underlying mental models. Systems that hide their internal logic (black boxes) may appear efficient but fail to build trust or demonstrate expertise.
 
 ## Context
 
-In Sean's job hunt, declaring 'I am an expert in agentic workflows' is cheap and ignored. Demonstrating a specific, complex failure mode he resolved provides verifiable proof of his seniority. This concept guides him to prioritize the documentation of difficult problems over the documentation of smooth successes.
+Sean's job hunt and portfolio must prove his systems thinking capability. He cannot just declare he is a systems thinker; he must design artifacts that make his reasoning visible and verifiable, avoiding the trap of 'slop' or polished but empty outputs.
 
 ## Evidence
 
-> A 250-agent configuration count is descriptive; a replayable failure investigation with traces, trade-offs, and a shipped correction is a signal.
+> Exercises therefore require Sean's own diagnosis first, AI critique second.
 
-> Only promote entries containing a consequential choice or disconfirming evidence.
+> Management flight simulators are the strongest documented way to build systemic judgment... so consequences of interventions are felt, not read.
 
 ## Examples
 
-- His portfolio strategy should prioritize a few deep, traceable case studies over a broad survey of automated workflows that lack verifiable outcomes.
-- Sean must sacrifice some automation efficiency in his daily notes to capture high-fidelity decision traces, accepting lower volume for higher signal quality.
+- Requiring Sean to write his own diagnosis before getting AI feedback.
+- Using flight simulators to make the consequences of decisions visible and felt.
 
 ## Related Concepts
 
-[[The Paradox of Agentic Efficiency vs. Creative Authority]] [[Critical Incident Technique]]
+[[The Illusion of Competence in Automated Systems]] [[Tacit Knowledge Erosion vs. Automation Scale]]

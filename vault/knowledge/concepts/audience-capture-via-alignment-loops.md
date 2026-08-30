@@ -2,31 +2,31 @@
 title: "Audience Capture via Alignment Loops"
 type: concept
 sources:
-  - knowledge/concepts/audience-capture-via-alignment-loops.md
+  - knowledge/connections/semantic-decay-vs-operational-uptime-in-ai-product-strategy.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-This mechanism describes a psychological feedback loop where an external audience's reward structure reinforces a specific persona until the creator internalizes that persona as their authentic self. The divergence between the creator's original intent and the audience's expected output creates a 'false frontier' of novelty, which is actually an escape response to the disappointments of the current mode of involvement. This capture is not merely editorial repetition but identity substitution, where the creator begins to experience the rewarded persona as themselves, making it difficult to distinguish between genuine learning and performative alignment.
+This pattern occurs when a system's optimization for user engagement inadvertently trains the model on specific, narrow preferences, which then surfaces more targeted content that further drives up those same metrics. The system becomes captured by its most active or vocal users, creating a feedback loop that reinforces existing biases and limits exposure to novel or challenging ideas. This leads to a homogenization of output where the system optimizes for comfort rather than growth.
 
 ## Context
 
-Sean is building a personal knowledge vault and agent fleet that requires high-fidelity self-representation for effective synthesis. If his outputs become optimized for audience expectations rather than epistemic truth, the 'Audience Capture' mechanism will corrupt the very data integrity he is trying to establish. Recognizing this allows him to implement 'illegible exploration' budgets to protect against the predictable outcome of unequal feedback latency.
+Sean must be wary of his own agent fleets becoming 'captured' by his past preferences or immediate gratification signals. If he consistently engages with certain types of content or feedback, his agents may start to prioritize those patterns, reducing the diversity and depth of his knowledge vault and limiting his ability to discover new opportunities in his job hunt or creative work.
 
 ## Evidence
 
-> The article’s crucial mechanism is identity substitution: the audience rewards a persona until the creator begins experiencing that persona as himself.
+> High user engagement trains the model on specific preferences, surfaces more targeted content, and further drives up engagement metrics.
 
-> Audience capture is therefore not just vanity or weak character; it is the predictable outcome of unequal feedback latency.
+> As the model changes user behavior, the historical training data becomes less representative of real-world interactions, causing a drop in model performance.
 
 ## Examples
 
-- Tracking divergence between 'I publish X because I believe Y' and 'Persona-Sean publishes X because his audience expects Y.'
-- Reserving 20% of Substack drafts for subjects selected without engagement, portfolio-coherence, or job-market scoring.
+- An agent that starts recommending only safe, conventional job applications because Sean previously clicked on similar ones, ignoring more innovative but riskier opportunities.
+- A creative writing assistant that begins to mimic Sean's earlier, less refined style because it was trained on his older drafts.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[Throughput vs. Activity Illusion in Job Hunt Operations]]
+[[Silent Decay in Strategic Pipelines]] [[The Illusion of Health in Autonomous Systems]]

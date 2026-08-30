@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/liability-routing-in-agentic-product-design.md
 tags: [auto-generated, phase-6]
-created: 2026-07-05
-updated: 2026-07-05
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-This structural constraint defines the boundary of viable agentic products by requiring a clear mechanism to assign residual responsibility when autonomous agents operate outside deterministic control. It posits that human-in-the-loop checkpoints are not merely operational best practices but legal necessities required to resolve the accountability gap in corporate structures. The mechanism forces a design pattern where successful products are defined by their capacity to clearly assign blame and accountability back to the human architect rather than the agent executing the intent.
+This mechanism describes a structural failure mode where an AI system generates confident, plausible falsehoods due to epistemic uncertainty, inducing user action that legally binds the deploying organization. Unlike standard technical errors which may trigger error codes or refusals, this specific failure path bypasses safety filters because the model does not recognize its own ignorance as a boundary condition. The organization becomes legally bound by these outputs regardless of Terms-of-Service disclaimers, creating a direct causal link between model calibration and corporate legal exposure.
 
 ## Context
 
-Sean must frame his portfolio projects around 'auditable intent' rather than just 'autonomous execution' to demonstrate he solves this liability problem for potential employers. Job descriptions for AI PM roles will increasingly require explicit experience with governance frameworks and risk mitigation strategies, not just product metrics.
+Sean is building an AI PM curriculum and product strategy; understanding this liability routing is critical because it defines the hard boundary where 'product quality' ends and 'legal risk' begins. It forces a shift from purely technical metrics (accuracy) to legal defensibility metrics (refusal behavior, grounding).
 
 ## Evidence
 
-> The tension between autonomous agent capability and organizational risk tolerance creates a 'liability routing' problem that defines the boundary of viable agentic products.
+> The 2nd-order chain PMs must pre-write: hallucination → user acts on it → the company is legally bound by it.
 
-> When agents operate autonomously, the traditional product management model breaks down because the 'who absorbs the residual responsibility' question becomes unanswerable within existing corporate structures.
+> Terms-of-service disclaimers do not survive contact with a judge.
 
 ## Examples
 
-- Sean's 'intent-engineering' approach can address this by creating auditable trails of decision-making, effectively re-assigning accountability to the human architect of the intent rather than the agent executing it.
-- Legal teams in marketing organizations are 'hesitant to approve AI-generated content without extensive review,' citing potential copyright and defamation risks.
+- Air Canada chatbot invented a bereavement-fare policy, leading to a tribunal ruling the airline fully liable.
+- NYC's MyCity bot confidently advised small businesses to break labor law without firing any error codes.
 
 ## Related Concepts
 
-[[Accountability Gap]] [[Human-in-the-loop]]
+[[Epistemic Artifacts as Strategic Proof]] [[The Illusion of Competence in Automated Systems]]

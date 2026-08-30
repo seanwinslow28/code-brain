@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/the-calibration-bottleneck-in-scalable-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-This mechanism describes the structural limit where automated insight generation outpaces human verification capacity, creating a dependency on Sean's cognitive bandwidth for quality control. As the volume of synthesized concepts increases, the marginal utility of each new node decreases because the audit cost rises non-linearly with complexity. The system shifts from a value-creation engine to a liability generator when semantic decay occurs faster than the user can correct it, effectively turning the vault into a source of noise rather than signal.
+As AI systems shift from deterministic logic to probabilistic generation, the primary constraint on quality ceases to be the model's raw capability and becomes the verifier's ability to distinguish signal from noise. This creates a bottleneck where the cost of verification scales non-linearly with the complexity of the output, forcing a re-evaluation of what constitutes 'quality' in automated workflows. The system must therefore prioritize corrective data loops over static benchmarks to maintain fidelity as scale increases.
 
 ## Context
 
-Sean is currently scaling his vault synthesizer from ~90 to 125+ concepts per run while using larger models. This creates a direct risk where the graph's structural integrity degrades because he cannot manually verify the increasing number of connections, leading to 'legibility debt' where the system looks healthy but contains hidden errors.
+Sean is building an AI PM curriculum and personal knowledge vault that relies on automated synthesis. Understanding that the verifier is the bottleneck explains why his fleet's output quality fluctuates despite using powerful models like qwen3.6-35b-a3b-32k, and highlights the need for robust eval infrastructure.
 
 ## Evidence
 
-> The calibration bottleneck emerges when the rate of automated insight generation exceeds the human capacity to verify and integrate those insights into a coherent worldview.
+> According to Senior AI PMs, what component in an AI loop acts as the primary bottleneck rather than the model? A: The verifier
 
-> Legibility debt accumulates when automated systems produce outputs that are structurally valid but semantically hollow, masking decay behind a veneer of productivity.
+> What is considered the most valuable telemetry or data point an AI product can collect from users? A: Corrective data from expert users
 
 ## Examples
 
-- The jump from 45 concepts in June to 125+ concepts in August without a corresponding increase in Sean's verification time.
-- The shift from 'concepts written' as a success metric to 'verified connections made' as the required standard.
+- The shift from prompt engineering to 'loop engineering' where the focus moves from single-turn prompts to multi-step verification cycles.
+- The formula Harness Quality = Plan Quality × Context Quality × Eval Quality, which treats evaluation as a multiplicative factor rather than an additive one.
 
 ## Related Concepts
 
-[[Legibility Debt as a Supervision Failure Mode]] [[Throughput vs. Activity Illusion in Job Hunt Operations]]
+[[Supervision as the New AI Edge]] [[The Verification-Governance Inversion]]

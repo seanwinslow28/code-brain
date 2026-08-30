@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/ai-product-manager.md
 tags: [auto-generated, phase-6]
-created: 2026-05-17
-updated: 2026-05-17
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-A specialized role in product management focused on leveraging AI to shape and execute product strategies. This role is emphasized as a distinct hiring target for companies like Anthropic.
+This role functions as a translator between the probabilistic evolution of model behavior and the deterministic requirements of user trust. The core mechanism involves actively deciding which AI properties constitute the user experience and which must be concealed behind product constraints to prevent instability. This requires a dual mental framework that bridges human-centric empathy with architectural rigor, treating the product not as a static feature set but as a dynamic network of stakeholders and feedback loops.
 
 ## Context
 
-This concept aligns with Sean's job-hunt-2026 strategy, which targets AI-native roles and the intersection of automation and agent systems.
+Sean is navigating a 2026 job hunt where distinguishing himself as a strategic bridge is critical. Understanding this definition allows him to articulate his value proposition beyond technical execution, specifically highlighting his ability to manage the inherent tension between model evolution and user reliability.
 
 ## Evidence
 
-> A specialized role in product management focused on leveraging AI to shape and execute product strategies. This is emphasized as a distinct hiring target for companies like Anthropic.
+> An AI PM does not merely decide where to insert AI; they decide which AI properties should become part of the user experience and which must be hidden behind product constraints.
 
-> Anthropic pays competitively for FDE roles. Sierra runs a vibe-coding interview as part of their loop.
+> Unlike deterministic software, AI models are probabilistic, constantly changing based on live datasets and environment loops.
 
 ## Examples
 
-- Anthropic's FDE roles
-- Sierra's vibe-coding interviews
+- Mapping every stakeholder and data producer within the environment during the empathize phase, rather than focusing strictly on the end-user.
+- Viewing the product not as a static feature set but as an interconnected network of stakeholders, data pipelines, model mechanics, and feedback dynamics.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Automation Routines]]
+[[Product Management]] [[Liability Routing in Agentic Product Design]]

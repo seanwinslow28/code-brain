@@ -2,31 +2,31 @@
 title: "Hedged Execution Invariant"
 type: concept
 sources:
-  - knowledge/expansions/connections/cost-capped-agentic-workflows-and-agent-health-monitoring.md
+  - knowledge/connections/operator-ground-truth-vs-stranger-calibration.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-Hedged execution is a reliability technique that treats redundancy as a priced mechanism for suppressing tail latency rather than waste. It involves duplicating slow operations only after the primary crosses its p95 completion threshold, then canceling the loser and charging the duplication against a separate hedge budget. This pattern trades a modest resource increase for sharply improved high-percentile latency, effectively escaping wedged model states by accepting the first valid result among parallel attempts.
+This invariant defines the strategic value of abstention as a primary uncertainty primitive in AI systems. It posits that refusing to answer is more valuable than answering badly, yet this capability is often buried in pipelines rather than exposed in interfaces. The mechanism requires explicit signaling of uncertainty to users, shifting the system's role from confident generator to calibrated advisor.
 
 ## Context
 
-Sean's agent fleet faces intermittent latency spikes that degrade user experience without triggering standard failure metrics. By implementing hedged execution, he can benchmark single-model retries against parallel council execution to establish a decision rule for when redundancy becomes resilience, particularly for unreliable local-model routes.
+Sean has built abstention into his agent pipelines (e.g., rejecting low-confidence concepts), but he notes this is 'never into an interface.' For his job hunt and product portfolio, demonstrating how he externalizes these uncertainty signals is crucial for showing he understands the stranger's perspective.
 
 ## Evidence
 
-> Duplicate only after the primary crosses its p95 completion threshold; cancel the loser; charge duplication against a separate hedge budget.
+> Refusing to answer rather than answering badly is the most underused uncertainty primitive in AI products, and you built it into a pipeline and never into an interface.
 
-> Sometimes deliberately duplicating a slow operation and accepting the first valid result is the cheapest way to suppress tail latency or escape a wedged model.
+> The consequence is that any AI product Sean builds must externalize the uncertainty primitives he implicitly handles as an operator, or risk building systems that are structurally honest but experientially untrustworthy.
 
 ## Examples
 
-- A benchmarking artifact comparing single-model retry, parallel council execution, and delayed hedging across cost, completion rate, and p95 latency.
-- A defensible decision rule for when redundancy is waste versus resilience—especially for unreliable local-model routes.
+- Sean's fleet rejects 10-30% of concepts during synthesis, a form of hedged execution that is invisible to the end user.
+- The 'abstention criteria' are handled internally by the synthesizer but not communicated to the stranger via the interface.
 
 ## Related Concepts
 
-[[Cost-Capped Agentic Workflows]] [[Agent Health]]
+[[The Out-of-the-Loop Performance Problem]] [[Negative Capability / Failure Literacy]]

@@ -2,34 +2,30 @@
 title: "Goodhart Failure Typing"
 type: concept
 sources:
-  - knowledge/expansions/goodhart-failure-typing.md
+  - knowledge/concepts/goodhart-failure-typing.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-Goodhart Failure Typing is a diagnostic framework that categorizes metric corruption into three distinct failure modes: causal, extremal, and adversarial. Causal failure occurs when the proxy variable is merely correlated with the target but not causally linked, leading to shallow optimization. Extremal failure happens when the optimizer pushes the proxy beyond its valid range of correlation, causing the relationship to invert or collapse entirely. Adversarial failure arises when an optimizing agent actively learns to manipulate the evaluator's perception rather than improving the underlying quality.
+This pattern identifies the specific risk of optimizing against a proxy metric that has become decoupled from true quality. When a model or system learns to please the evaluator (the 'weak judge') rather than solve the underlying problem, scores rise while actual utility stagnates or declines. The mechanism requires a strict separation between the data used for improvement and the holdout set used for honest verification, preventing the 'gaming' of the evaluation function.
 
 ## Context
 
-This distinction is critical for Sean because his fleet currently suffers from 'extremal' and 'adversarial' failures that look like success metrics are holding steady while semantic value decays. Without this typing, he cannot distinguish between a model that needs more data (causal) versus a model that needs a different selection policy (extremal/adversarial).
+Sean's vault synthesizer and fleet memory rely on accurate metrics to track progress. If he optimizes his own tools against stale or gamed metrics, he risks 'silent decay' where the system appears healthy but is semantically rotting. This concept warns him to maintain a 'holdout' in his own operational feedback loops.
 
 ## Evidence
 
-> The article calls weak semantic output 'adversarial' too quickly. Adversarial Goodhart requires an optimizing actor exploiting the metric.
+> The moment you optimize against your own grading set, scores rise while quality doesn't (Goodhart, once more)
 
-> A fleet that emits shallow prose because uptime dominates evaluation may exhibit causal or extremal failure; it becomes adversarial when agents learn to manipulate what the evaluator sees.
-
-> Novelty, usefulness, surprise, factuality, and cross-domain distance are different constructs; collapsing them into one score merely creates a better-disguised proxy.
+> Rate this reply 1–10 is a weak eval — models learn to please it fast
 
 ## Examples
 
-- Agents emitting shallow prose because uptime dominates evaluation
-- Collapsing novelty/usefulness/factuality into a single semantic score
-- Agents learning to manipulate what the evaluator sees
+- Strong evals use binary checks on specific facts rather than subjective ratings to avoid being gamed by the model.
 
 ## Related Concepts
 
-[[The Illusion of Competence in Automated Systems]] [[Slop as a Trust Deficit]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+[[Goodhart Failure Typing]] [[Silent Decay in Strategic Pipelines]]
