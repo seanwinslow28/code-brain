@@ -6,7 +6,7 @@
 #   ./schedules/install_schedules.sh              # Install all (except gemini + substack-drafter — default disabled)
 #   INSTALL_GEMINI=1 ./schedules/install_schedules.sh  # Install all including gemini-researcher
 #   INSTALL_SUBSTACK_DRAFTER=1 ./schedules/install_schedules.sh  # Install all including substack-drafter
-#   ./schedules/install_schedules.sh --list       # Show what would be installed (opt-in agents marked as default disabled)
+#   ./schedules/install_schedules.sh --list       # Show what would be installed (disabled schedules marked)
 #   ./schedules/install_schedules.sh --remove     # Unload and remove ALL symlinks (including gemini if opted in)
 #
 # Gemini opt-in:
@@ -42,6 +42,13 @@ SUBSTACK_DRAFTER_PLIST="com.sean.agent.substack-drafter.plist"
 # (eng-002.d15); manual mode is untouched. Opt-in, so a re-run of this
 # installer cannot silently restore it.
 VAULT_CRITIC_PLIST="com.sean.agent.vault-critic.plist"
+# ADR-12: generated only after all three registration values are set and
+# [agents.claim6_drill].schedule_enabled=true. The checked-in template has no
+# invented day, device, or label.
+CLAIM6_PLIST="com.sean.agent.claim6-drill.plist"
+CLAIM6_RENDERER="$SCHEDULES_DIR/render_claim6_plist.py"
+CLAIM6_CONFIG="$SCHEDULES_DIR/../config.toml"
+CLAIM6_PYTHON="$SCHEDULES_DIR/../.venv/bin/python3"
 
 # LaunchDaemon-class plists (system-level, require sudo install at /Library/LaunchDaemons/)
 # These must NOT be loaded as user-level LaunchAgents — they reference paths like
@@ -65,6 +72,7 @@ mkdir -p "$LAUNCH_AGENTS"
 
 if [[ "${1:-}" == "--list" ]]; then
     echo "Available schedules:"
+    echo "  $CLAIM6_PLIST  (default disabled — register config values and set schedule_enabled=true)"
     for plist in "$SCHEDULES_DIR"/*.plist; do
         name=$(basename "$plist")
         if [[ "$name" == "$GEMINI_PLIST" ]]; then
@@ -84,6 +92,12 @@ fi
 
 if [[ "${1:-}" == "--remove" ]]; then
     echo "Removing agent schedules..."
+    claim6_target="$LAUNCH_AGENTS/$CLAIM6_PLIST"
+    if [[ -e "$claim6_target" || -L "$claim6_target" ]]; then
+        launchctl unload "$claim6_target" 2>/dev/null || true
+        rm -f "$claim6_target"
+        echo "  Removed: $CLAIM6_PLIST"
+    fi
     for plist in "$SCHEDULES_DIR"/*.plist; do
         name=$(basename "$plist")
         target="$LAUNCH_AGENTS/$name"
@@ -113,6 +127,23 @@ skip_disabled() {
         echo "  Skipping $name (default disabled — set $hint=1 to enable)"
     fi
 }
+
+# ADR-12 pre-arm convergence. False means absence, not "skip and leave an old
+# loaded label behind." Once registered, the ordinary installer renders the
+# concrete monthly plist directly into LaunchAgents and loads it.
+if PYTHONPATH="$SCHEDULES_DIR/.." "$CLAIM6_PYTHON" "$CLAIM6_RENDERER" \
+    --config "$CLAIM6_CONFIG" --check-enabled; then
+    claim6_target="$LAUNCH_AGENTS/$CLAIM6_PLIST"
+    if [[ -e "$claim6_target" || -L "$claim6_target" ]]; then
+        launchctl unload "$claim6_target" 2>/dev/null || true
+    fi
+    PYTHONPATH="$SCHEDULES_DIR/.." "$CLAIM6_PYTHON" "$CLAIM6_RENDERER" \
+        --config "$CLAIM6_CONFIG" "$claim6_target"
+    launchctl load "$claim6_target"
+    echo "  Installed: $CLAIM6_PLIST"
+else
+    skip_disabled "$CLAIM6_PLIST" "config [agents.claim6_drill].schedule_enabled"
+fi
 
 echo "Installing agent schedules..."
 for plist in "$SCHEDULES_DIR"/*.plist; do

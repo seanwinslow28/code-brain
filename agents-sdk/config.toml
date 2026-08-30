@@ -6,7 +6,7 @@ life_systems_scripts = "life-systems/scripts"
 
 [agents.daily_driver]
 # Re-enabled 2026-05-04 after Block-to-job-hunt migration Steps 1-8 + the
-# Step 11 sanitization sweep landed. The 8:45 AM SDK agent now surfaces
+# Step 11 sanitization sweep landed. The 8:30 AM SDK agent now surfaces
 # the job-hunt + deep-work brief (see daily-driver/SKILL.md Step 1a) and
 # loads the 3 active operating-model HEARTBEATs (creative-studio,
 # life-systems, job-hunt-2026 — no the-block). The job-hunt-2026 HEARTBEAT
@@ -14,7 +14,7 @@ life_systems_scripts = "life-systems/scripts"
 # the brief pulls job-hunt status from prj-job-hunt-2026/README.md.
 enabled = true
 skills = ["daily-driver", "vault-read-write"]
-morning_time = "08:45"
+morning_time = "08:30"
 evening_time = "17:00"
 weekly_day = "Friday"
 weekly_time = "16:00"
@@ -149,8 +149,23 @@ enabled = true
 skills = ["vault-read-write"]
 max_turns = 10
 max_budget_usd = 0.10
-schedule = "06:30"
+schedule = "08:45"
 target_machine = "mac_mini"
+
+[agents.claim6_drill]
+# ADR-12 deploy-time registration. Keep disabled and unregistered until B3's
+# seven-night window is dated. All three blank/sentinel values must be replaced
+# before schedules/install_schedules.sh will render or load the monthly plist.
+schedule_enabled = false
+day_of_month = 0
+launchd_label = ""
+acknowledged_device = ""
+hour = 8
+minute = 15
+grace_minutes = 30
+retry_seconds = 300
+expire_seconds = 900
+receipt_poll_seconds = 5
 
 [agents.health_audit]
 enabled = false

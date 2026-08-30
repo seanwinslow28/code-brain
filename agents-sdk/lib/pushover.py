@@ -14,6 +14,7 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
+from urllib.parse import quote
 
 import httpx
 
@@ -22,6 +23,7 @@ from lib.keychain import get_credential
 logger = logging.getLogger(__name__)
 
 PUSHOVER_URL = "https://api.pushover.net/1/messages.json"
+PUSHOVER_RECEIPT_URL = "https://api.pushover.net/1/receipts/{receipt}.json"
 _TIMEOUT = 10.0
 
 
@@ -79,6 +81,8 @@ def send_push(
     title: str,
     message: str,
     priority: int = 0,
+    retry: int | None = None,
+    expire: int | None = None,
     user_key: str | None = None,
     app_token: str | None = None,
 ) -> dict:
@@ -105,11 +109,40 @@ def send_push(
         "message": message,
         "priority": priority,
     }
+    if retry is not None:
+        data["retry"] = retry
+    if expire is not None:
+        data["expire"] = expire
     try:
         resp = httpx.post(PUSHOVER_URL, data=data, timeout=_TIMEOUT)
         resp.raise_for_status()
     except httpx.HTTPError as exc:
         raise PushoverError(f"Pushover send failed: {exc}") from exc
+    return resp.json()
+
+
+def read_receipt_status(
+    receipt: str,
+    *,
+    app_token: str | None = None,
+) -> dict:
+    """Read one emergency-priority receipt from Pushover.
+
+    The caller owns polling cadence. This function performs exactly one read
+    and raises ``PushoverError`` on missing credentials or HTTP failure.
+    """
+    token = app_token or get_credential("pushover_app_token")
+    if not receipt:
+        raise PushoverError("Missing Pushover receipt")
+    if not token:
+        raise PushoverError("Missing Pushover app token in Keychain")
+
+    url = PUSHOVER_RECEIPT_URL.format(receipt=quote(receipt, safe=""))
+    try:
+        resp = httpx.get(url, params={"token": token}, timeout=_TIMEOUT)
+        resp.raise_for_status()
+    except httpx.HTTPError as exc:
+        raise PushoverError(f"Pushover receipt read failed: {exc}") from exc
     return resp.json()
 
 

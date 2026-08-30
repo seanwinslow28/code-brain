@@ -11,7 +11,7 @@ IMPORTANT: Only the 7 currently-active agents in ACTIVE_AGENTS run.
 Do NOT attempt to monitor, restart, or re-enable disabled agents.
 
 Machine: Mac Mini (gemma4:e4b for summary generation, local Ollama)
-Schedule: Daily at 08:35 (before Daily Driver at 08:45)
+Schedule: Daily at 08:45 (after Daily Driver at 08:30)
 Safety: max 10 turns, $0.10 budget cap (LLM call is local → $0.00 actual)
 
 Usage:
@@ -41,6 +41,7 @@ SDK_ROOT = SCRIPT_DIR.parent
 sys.path.insert(0, str(SDK_ROOT))
 
 from lib.artifact_loader import DOMAINS, load_artifact
+from lib.claim6_drill import render_drill_report_block
 from lib.config import Config, load_config
 
 
@@ -70,10 +71,10 @@ AGENT_METADATA: dict[str, dict[str, str | float]] = {
     "vault_critic":      {"display": "vault-critic",          "schedule": "3:30 AM daily",     "machine": "Mac Mini",        "cost_label": "$0.00/run",   "monthly_usd": 0.00},
     "deep_researcher":   {"display": "deep-researcher",       "schedule": "2:45 AM daily",     "machine": "Mac Mini",        "cost_label": "$0.00/run",   "monthly_usd": 0.00},
     "job_feed":          {"display": "job-feed",              "schedule": "8:00-11:00 AM x7",  "machine": "Mac Mini",        "cost_label": "$0.00/run",   "monthly_usd": 0.00},
-    "daily_driver":      {"display": "daily-driver morning",  "schedule": "8:45 AM daily",     "machine": "Claude API",      "cost_label": "~$0.40/run",  "monthly_usd": 12.00},
+    "daily_driver":      {"display": "daily-driver morning",  "schedule": "8:30 AM daily",     "machine": "Claude API",      "cost_label": "~$0.40/run",  "monthly_usd": 12.00},
     "knowledge_lint":    {"display": "knowledge-lint",        "schedule": "Sunday 22:00",      "machine": "Mac Mini / MBP",  "cost_label": "$0.00/run",   "monthly_usd": 0.00},
     "flush":             {"display": "session-end-flush",     "schedule": "hook-triggered",    "machine": "Mac Mini / MBP",  "cost_label": "$0.00/run",   "monthly_usd": 0.00},
-    "meta_agent":        {"display": "meta-agent",            "schedule": "8:35 AM daily",     "machine": "local",           "cost_label": "$0.00/run",   "monthly_usd": 0.00},
+    "meta_agent":        {"display": "meta-agent",            "schedule": "8:45 AM daily",     "machine": "local",           "cost_label": "$0.00/run",   "monthly_usd": 0.00},
 }
 BATON_DIR = Path.home() / ".claude" / "batons"
 # eng-001.d40 / eng-002 B3: one JSONL line per meta-agent run, so seven
@@ -509,6 +510,18 @@ def generate_fleet_report(
 
     agents_block = "\n\n".join(agent_sections)
 
+    # ADR-12: reconcile the registered 08:15 monthly drill into the retained
+    # file report. main() writes this report to both vault surfaces before it
+    # attempts its own Pushover delivery, so missed-fire visibility does not
+    # depend on the channel under test.
+    drill_config = config.agents.get("claim6_drill", {}) if config else {}
+    drill_vault_root = config.vault_root if config else VAULT_ROOT
+    drill_block = render_drill_report_block(
+        config=drill_config,
+        log_path=drill_vault_root / "health" / "claim6-drills.jsonl",
+        now=datetime.now().astimezone(),
+    )
+
     # Cost projection
     cost_lines: list[str] = []
     total_monthly = 0.0
@@ -564,6 +577,8 @@ def generate_fleet_report(
 ## Active Agent Health
 
 {agents_block}
+
+{drill_block}
 {domain_aware_block}
 ## Infrastructure
 
