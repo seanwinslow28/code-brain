@@ -33,9 +33,14 @@ depends on agents transacting.**
 3. **A real measurement void, found independently:** *nobody* publishes agent task/
    purchase completion — Adobe sees referral clicks, HUMAN sees checkout arrivals,
    no one measures completion. Passive analytics is NOT a void (Profound at $1B,
-   Reaudit, cside, Cloudflare AI Crawl Control); **active journey-testing surfaced no
-   incumbent** in recon or the tracker sweeps — but see the falsification task below
-   before treating that as established.
+   Reaudit, cside, Cloudflare AI Crawl Control); active journey-testing initially
+   surfaced no incumbent — **UPDATE 2026-08-30 ~04:00: the falsification sweep ran
+   and FALSIFIED the void.** Agent Checker (£19/audit, horizontal, real agent
+   through checkout, graded + monitored), Stiplo (hotels — the exact free-mystery-
+   shop → graded-score → monthly-monitoring model), and Vercel's free "Is Agentic"
+   (118 checks + an observed agent journey) all exist. Surviving sliver: no funded
+   horizontal player bundles journeys + answers + monitoring. Full evidence:
+   [seam recon](2026-08-30-seam-recon-last30days-falsification.md).
 4. **Three independent lines converge on the same artifact:** the software-factory
    literature's #1 finding (verification, not generation, is the scarce capability);
    the wave-1 wedge quote ("no tool you own will ever tell you it happened"); Sean's
@@ -66,34 +71,44 @@ evidence for the human seam launder the timing risk of the agent seam.
 **Run B (creative-license) expectation:** going in, the license seam should outscore
 compatibility on rails-timing — the pain is compliance-shaped and felt today.
 
-**Wave-2 primary deep — sharpening directives:**
-- Aim the prompt at **misrepresentation + active journey-failure testimony with
-  named-business specificity** (who noticed, what it cost, what they tried), and what
-  owners have actually PAID (monitoring tools, AEO consultants, agencies).
+**Wave-2 primary deep — sharpening directives (REVISED 2026-08-30 after the seam
+recon; supersedes the original three bullets):**
+- The falsification sweep and last30days scan (both run 2026-08-30, [evidence](2026-08-30-seam-recon-last30days-falsification.md))
+  moved the sharpest open ground one seam over: journey testing is real but already
+  priced (£19 Agent Checker, free Vercel tool, Stiplo in hotels); **the unowned seam
+  is the correction workflow for when assistants are WRONG about a business** —
+  claim-level accuracy monitoring, retrieval-vs-weights diagnosis, upstream
+  syndicated-source tracing, control-grouped fix attribution, recurrence watching,
+  buyer-impact triage. An r/DigitalMarketing practitioner thread (Aug 16) is
+  effectively a product spec written by future customers; the only tool named in it
+  covers one step (seoforgpt).
+- Aim the wave-2 deep prompt at **correction-process pain with named-business
+  specificity**: who discovered an assistant was wrong about them, what it cost, what
+  they tried, what they PAID (consultants, seoforgpt-class tools, agency retainers),
+  and where the process broke (attribution, syndication, recurrence, timelines).
+- Score journey testing as a **feature/probe inside the offering**, not the wedge;
+  score the competition-void dimension against the named-incumbent table in the seam
+  recon, not against "nothing found."
 - Do NOT spend prompt aperture on agent-transaction telemetry or A2A payment pain —
   the tracker owns that question now.
-- Before declaring the active journey-testing void open, run the **named-incumbent
-  falsification sweep** (standing rule: you can't prove a negative by searching; you
-  falsify a named list): northquery, Reaudit, cside, xSeek, Profound's feature pages,
-  recent YC batches, "agent experience monitoring"/"AI mystery shopper" as terms.
-  $0, before or during the sitting.
 
-## Proposed additional instruments (Sean's call — not yet ratified)
+## Additional instruments (status as of 2026-08-30 ~04:15)
 
-The discovery council mines present-tense pain; three open questions are shaped so no
-pain scan can answer them:
-
-1. **Willingness-to-pay on the primary → the screenshot pre-sale test.** Run real
-   mystery-shopper probes against 5–10 real businesses with the existing fleet ($0),
-   write the graded report, show it to owners. The only instrument that answers WTP
-   is a buyer looking at the artifact — and it doubles as the first live use of the
-   fleet + evals (the learning goal) and a portfolio piece.
-2. **Competitive freshness → a last30days run** on the seam ("AI assistants giving
-   customers wrong information about businesses / agent analytics / AEO monitoring") —
-   catches incumbent formation and operator complaints from the last 30 days, feeds
-   the falsification list and the Sept-1 prompt language. Last run of that skill is
-   80+ days stale; this space moves monthly.
-3. **Timing → already instrumented.** The tracker's monthly cadence + mid-Sept and
+1. **Willingness-to-pay on the primary → the screenshot pre-sale test.** Still
+   proposed, Sean's call — and the seam-recon results sharpen it: the artifact to
+   pre-sell is now more likely the **claim-level accuracy report** ("here are the 3
+   untrue things assistants say about you that cost buyers") than the pure journey
+   grade (which Agent Checker sells at £19 and Vercel gives away). Run against 5–10
+   real businesses with the existing fleet ($0); a buyer looking at the artifact is
+   the only WTP instrument. Doubles as first live fleet+evals use and a portfolio
+   piece.
+2. **Competitive freshness → last30days run: ✅ DONE 2026-08-30** — found the
+   r/DigitalMarketing wedge thread and the commoditizing low-end
+   hallucination-checker vendors. Results in the [seam recon](2026-08-30-seam-recon-last30days-falsification.md).
+   Worth re-running monthly alongside the tracker cadence.
+3. **Named-incumbent falsification sweep: ✅ DONE 2026-08-30** — void FALSIFIED
+   (Agent Checker, Stiplo, Vercel Is Agentic). Same evidence file.
+4. **Timing → already instrumented.** The tracker's monthly cadence + mid-Sept and
    early-Nov date triggers. No new spend.
 
 ## Provenance
