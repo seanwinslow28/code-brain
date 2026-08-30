@@ -268,6 +268,15 @@ class TestParseRankingStrictShape:
 
         assert _parse_ranking(json.dumps({"ranking": ["A", "B"], "reasoning": 7})) is None
 
+    @pytest.mark.parametrize("content", [None, 7, ["A"]])
+    def test_null_or_non_string_content_is_rejected_not_raised(self, content):
+        # Regression: a judge returning null content crashed the whole run with
+        # AttributeError -> CLI exit 3 (observed 2026-08-29, premortem run).
+        # Same upstream cause as the 2026-06-18 null-content render fix in cli.py.
+        from council.pipeline import _parse_ranking
+
+        assert _parse_ranking(content) is None
+
     def test_valid_ranking_is_accepted_and_stripped_to_contract_keys(self):
         from council.pipeline import _parse_ranking
 

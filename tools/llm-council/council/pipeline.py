@@ -165,7 +165,7 @@ def _deliver_attempt(on_attempt: Callable[[dict], None] | None, attempt: dict) -
         on_attempt(attempt)
 
 
-def _parse_ranking(content: str) -> dict | None:
+def _parse_ranking(content: str | None) -> dict | None:
     """Parse and shape-validate the cross-rank JSON. Returns the dict or None on failure.
 
     The CROSSRANK_SYSTEM contract is a list of unique single-letter labels plus a string
@@ -173,7 +173,13 @@ def _parse_ranking(content: str) -> dict | None:
     ' > '.join(ranking) and embeds reasoning verbatim, so an unvalidated ranking value
     (e.g. one long string) would expand a bounded judge response into an unbounded
     chairman input. Junk keys are stripped for the same reason.
+
+    A judge can return null content (same upstream cause as the null-content render
+    crash fixed 2026-06-18 in cli.py); that must read as an unparseable ranking, not
+    an AttributeError that kills the whole council run with exit 3.
     """
+    if not isinstance(content, str):
+        return None
     try:
         # Strip optional markdown fence if present
         text = content.strip()
