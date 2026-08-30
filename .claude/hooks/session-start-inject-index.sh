@@ -39,8 +39,6 @@ head -c 65536 >/dev/null 2>&1 || true
 # stub rather than blocking session start.
 python3 - "$INDEX_PATH" "$MAX_CHARS" <<'PYEOF' || cat <<'JSONFALLBACK'
 import json
-import json
-import os
 import re
 import sys
 from pathlib import Path
