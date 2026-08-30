@@ -2,31 +2,31 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - knowledge/concepts/supervision-as-the-new-ai-edge.md
+  - knowledge/connections/the-tacit-explicit-gap-in-ai-product-leadership.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-This mechanism defines a competitive inversion where value shifts from raw generative capacity to the quality of human oversight and evaluation loops. In agentic systems, the edge is no longer defined by who can generate the most content, but by who can best curate, correct, and contextualize that content. The system relies on 'taste preservation' tools and rigorous eval loops to prevent the degradation of semantic value as automation scales, making human judgment the primary bottleneck rather than model capacity.
+This concept defines the shift in competitive advantage from model capability to human oversight quality. As models become commoditized and more capable, the differentiator becomes the ability to supervise, correct, and guide agentic systems effectively. This requires a deep, explicit understanding of system behavior and failure modes, moving beyond mere usage to active architectural control and strategic alignment.
 
 ## Context
 
-Sean's experience with fleet failures highlights that bad context discipline and vague prompts are the primary sources of low-quality output. Investing in supervision mechanisms yields higher returns than investing in larger models, as the bottleneck is human judgment, not model capacity.
+Sean's current edge is his ability to run a complex fleet, but this edge is only valuable if he can articulate the supervisory principles behind it. For AI PM roles, the 'edge' is not just running agents, but designing the supervision framework that makes them reliable and scalable.
 
 ## Evidence
 
-> The reported failures cluster around bad context discipline, vague prompts, missing eval loops, and unmonitored tool output.
+> He runs a 12-agent autonomous fleet in production (circuit breakers, fail-closed cost guards, hybrid model routing, budget caps, grounding gates).
 
-> Investment in 'evaluation loops' and 'taste preservation' tools will yield higher returns than investing in larger or more numerous models.
+> The curriculum must avoid using his own fleet as the sole exercise, as this reinforces tacit knowledge rather than building explicit, transferable models.
 
 ## Examples
 
-- The transition from qwen3-14b to qwen3.6-35b-a3b-32k did not eliminate the need for supervision, as rejection counts remained significant.
-- Sean must balance the efficiency gains of automation with the creative friction necessary for high-fidelity synthesis.
+- Sean's use of hybrid model routing and grounding gates as examples of active supervision.
+- The need to map tacit operational decisions to formal design principles to bridge the gap between technician and strategist.
 
 ## Related Concepts
 
-[[The Calibration Bottleneck in Scalable Creative Production]] [[Taste as Evaluation Function vs. Activity Proof]]
+[[Tacit Knowledge Erosion vs. Automation Scale]] [[The Illusion of Competence in Automated Systems]]

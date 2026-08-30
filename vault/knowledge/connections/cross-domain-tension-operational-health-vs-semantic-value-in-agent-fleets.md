@@ -3,31 +3,31 @@ title: "Cross-Domain Tension: Operational Health vs. Semantic Value in Agent Fle
 type: connection
 connects:
   - The Taste-Throughput Trade-off in Agentic Synthesis
-  - The Illusion of Health in Autonomous Systems
-  - Velocity vs. Judgment in MCP Strengthening
-created: 2026-08-20
-updated: 2026-08-20
+  - Goodhart Failure Typing
+  - Supervision Fatigue as the Hard Cap on Fleet Scaling
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Synthesis
 
-This connection reveals a critical tension where operational metrics mask semantic stagnation, creating a systemic trust deficit that undermines Sean's ability to scale effectively. Agents report health based on process execution, while knowledge integrity depends on successful semantic verification, leading to a decoupling of activity from value. The consequence is that the infrastructure appears healthy while producing diminishing strategic insights, forcing Sean to implement semantic verification to detect when the synthesizer 'stops being right' despite completing successfully.
+This connection reveals a critical tension where operational metrics mask semantic stagnation, creating a systemic trust deficit that undermines Sean's ability to scale effectively. Agents optimize for throughput and uptime, which are easy to measure, while semantic value and novelty decay silently because they require human supervision to detect. This divergence means that the fleet appears healthy from an infrastructure perspective while becoming epistemically hollow.
 
 ## Threads
 
 ### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
-> The primary tension lies in the inverse correlation between automated throughput and human-verifiable insight quality, where scaling up concept generation creates a legibility debt.
+> There is a fundamental tension between the agent fleet's drive to maximize throughput (clusters sampled, concepts written) and the human operator's capacity for verification (supervision).
 
-### [[The Illusion of Health in Autonomous Systems]]
+### [[Goodhart Failure Typing]]
 
-> Monitoring 'health' metrics like run duration or error codes is insufficient for assessing the true value of automated synthesis runs.
+> Optimizing against the holdout set is the only way to avoid 'gaming the metric' (Goodhart’s Law).
 
-### [[Velocity vs. Judgment in MCP Strengthening]]
+### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
 
-> There is a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
+> This connection reveals a critical tension where the scalability of Sean's agent fleet is limited by his cognitive capacity to supervise outputs, rather than by computational constraints.
 
 ## Implications
 
-- Sean must implement semantic verification of the synthesizer's output to detect when it 'stops being right' while still completing successfully.
-- Monitoring 'health' metrics like run duration or error codes is insufficient for assessing the true value of automated synthesis runs.
+- Sean must prioritize semantic verification over throughput metrics in his daily routine to prevent epistemic decay.
+- The job-hunt strategy should highlight experience with holdout sets and Goodhart-resistant evaluation methods to demonstrate maturity.

@@ -154,6 +154,12 @@ vault/20_projects/prj-addictive-storytelling-skill/
 vault/20_projects/prj-boston-move/
 vault/20_projects/prj-personal-finance/
 
+# Personal travel notes (2026-08-30) — itineraries name travelers by full
+# name and pin exact dates the house is empty, plus card/spend detail. Same
+# private class as the move and finance projects above; the vault holds them
+# on disk, git never sees them.
+vault/30_domains/2026-trips/
+
 # Operating-model artifacts (SOUL/USER/HEARTBEAT/schedule-recs) —
 # read at runtime by agents-sdk/lib/artifact_loader.py from disk.
 vault/05_atlas/operating-models/

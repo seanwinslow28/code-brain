@@ -1,0 +1,3 @@
+{"ts": "2026-08-29T08:45:57", "alerts": 0, "delivered": true, "detail": "fleet healthy \u2014 nothing to send"}
+{"ts": "2026-08-30T08:46:00", "alerts": 0, "attempted": false, "delivered": false, "probe": "ok", "dry_run": false, "detail": "fleet healthy \u2014 nothing to send; credentials resolved"}
+{"ts": "2026-08-30T11:25:03", "alerts": 0, "attempted": false, "delivered": false, "probe": "ok", "dry_run": false, "detail": "fleet healthy \u2014 nothing to send; credentials resolved"}

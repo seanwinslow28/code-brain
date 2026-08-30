@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/context-compounding.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-Context compounding is a non-linear degradation mechanism where the accumulation of generated data and metadata within a fixed context window progressively dilutes the salience of initial instructions and taste parameters. As the system processes more clusters, the relative weight of the original creative constraints decreases, leading to a drift in output style and content relevance that disproportionately affects fidelity even with small volume increases. This effect creates a systemic trust deficit because scaling automated concept generation directly conflicts with the preservation of taste memory, forcing active management of context size to prevent the loss of specific voice signals.
+Long-horizon autonomous tasks suffer from structural context decay where accumulated irrelevance and contradictions silently degrade plan quality over time. This creates a hard limit on agent performance that cannot be solved by larger models alone, but requires explicit scope constraints to match the honest capacity of the context window. Agents must implement active pruning or summarization mechanisms to prevent this silent degradation from poisoning downstream decisions.
 
 ## Context
 
-Sean's vault synthesizer relies on maintaining a consistent 'taste' across all generated concepts, but the compounding nature of context loss means that even powerful models cannot retain specific taste signals when processing large volumes of data. This tension necessitates a shift from pure throughput optimization to context-aware sampling strategies that prioritize signal preservation over volume.
+Sean's personal knowledge vault and fleet memory index rely on accurate context retention across thousands of runs. Understanding context decay helps him design better retrieval strategies and manage the 'poison' that accumulates in long-running agent chains, ensuring his automated systems remain reliable rather than drifting into confident falsity.
 
 ## Evidence
 
-> As Sean scales the concept generation, the system generates more data but loses the specific 'taste' signals that define his creative voice.
+> Over long tasks, context accumulates irrelevance, contradictions, and poison; plan quality degrades with horizon length.
 
-> The core tension is that scaling automated concept generation directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
+> Scope harness tasks to what context can hold honestly — long-horizon autonomy claims deserve your M1 skepticism about stocks (context is a stock; its quality drains).
 
 ## Examples
 
-- Runs with higher cluster sampling counts (e.g., 253 clusters in June) showed higher rejection rates compared to runs with lower sampling counts (e.g., 125 clusters in July), despite similar concept counts.
-- The shift from 14b to 35b models did not prevent context dilution, as the larger model simply processed more data without retaining the specific taste signals as effectively.
+- RAG as a system, not a feature. Retrieval-augmented generation bolts a retrieval loop onto generation.
+- Its failure modes are systemic: incomplete or contradictory context in → confident falsity out.
 
 ## Related Concepts
 
-[[Throughput vs. Taste Memory Tension]] [[The Scalability Paradox in Agentic Creative Workflows]]
+[[The Context-Memory Bottleneck in Personalized AI]] [[Silent Decay in Strategic Pipelines]]

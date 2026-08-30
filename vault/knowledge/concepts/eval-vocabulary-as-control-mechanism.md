@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/eval-vocabulary-as-control-mechanism.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-This mechanism defines the structural shift where executable evaluation criteria replace traditional Product Requirements Documents (PRDs) as the primary interface for defining AI behavior. It establishes that the ability to write precise, measurable evals is a prerequisite for controlling autonomous agents, replacing vague intent with quantifiable success conditions. This framework forces the distinction between 'running' and 'working' by requiring explicit definitions of what constitutes a valid output, thereby exposing the gap between operational uptime and semantic correctness.
+The standardization of evaluation terminology (dataset, task, scorer) serves as a control mechanism that allows engineers to decompose complex AI behaviors into measurable dimensions. By forcing the separation of 'Dataset' (inputs), 'Task' (system), and 'Scorers' (metrics), this vocabulary prevents accidental optimization where improving one dimension like tone causes regression in another like accuracy. It transforms subjective quality assessments into objective, trackable variables.
 
 ## Context
 
-Sean is transitioning from manual oversight to agentic automation in his job hunt and creative studio. Without a robust eval vocabulary, he cannot distinguish between an agent that successfully generated content and one that generated useful content, leaving him vulnerable to the illusion of health described in the primary file.
+Sean's job hunt and curriculum development require him to articulate AI product management rigorously. Mastering this vocabulary allows him to frame his experience not just as 'using AI' but as engineering verifiable systems, which is critical for senior roles.
 
 ## Evidence
 
-> The theme of all of it, repeated until it became a kind of liturgy, was this: **evals are the new PRDs.** A product manager who can't write evals is a product manager who can't specify what their AI is supposed to do.
+> The standardization of evaluation terminology (dataset, task, scorer) serves as a control mechanism that allows engineers to decompose complex AI behaviors into measurable dimensions.
 
-> Sean must redesign his monitoring to detect output quality degradation, not just execution success, to prevent silent knowledge decay.
+> It leads to accidental optimization where one dimension (like tone) improves while another (like accuracy) regresses.
 
 ## Examples
 
-- Treating evals as the new PRDs implies that the specification of AI behavior must be testable and binary-pass/fail rather than descriptive.
-- The requirement to specify what the AI is supposed to do shifts the burden from post-hoc review to pre-execution definition.
+- Defining a 'Golden Dataset' as a curated, trusted set of test cases used to evaluate an AI application before every meaningful change.
+- Distinguishing between 'benchmarks' which measure raw model capability on fixed sets, and 'evals' which measure system performance on specific application tasks.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[SRE Error Budget for Agents]]
+[[The Calibration Bottleneck in Scalable Creative Production]] [[Goodhart Failure Typing]]

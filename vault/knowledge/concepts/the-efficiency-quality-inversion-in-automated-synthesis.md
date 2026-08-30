@@ -2,30 +2,31 @@
 title: "The Efficiency-Quality Inversion in Automated Synthesis"
 type: concept
 sources:
-  - knowledge/expansions/connections/cost-capped-workflows-and-agent-health-monitoring.md
+  - knowledge/connections/the-paradox-of-agentic-efficiency-vs-creative-authority.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-This pattern describes the inverse relationship between raw throughput metrics and the actual utility of generated artifacts, where increasing agent activity often degrades the signal-to-noise ratio of the output. As agents process more clusters or write more concepts without corresponding increases in human acceptance rates, the marginal cost per durable insight rises rather than falls. The system optimizes for activity volume while the user experiences a decline in meaningful synthesis.
+This mechanism describes a structural inversion where the reduction of marginal costs for content generation removes the natural friction that enforces editorial discipline. As AI tools lower the barrier to entry, the 'brakes' created by high manual effort disappear, leading to an overflow of low-signal output that requires disproportionate cognitive resources to filter. The system becomes efficient in volume but inefficient in value, forcing the human operator to shift from creator to critic.
 
 ## Context
 
-Sean's prior runs show significant variance in concepts written versus rejected counts. Understanding this inversion helps him recognize that higher concept counts do not equate to better vault health, and that monitoring 'cost per accepted artifact' is a more accurate proxy for system value than total output volume.
+Sean's vault shows a clear trend where agent runs produce significantly more concepts and connections than he can effectively digest or verify, creating a backlog of unverified knowledge that dilutes the signal-to-noise ratio of his personal brand.
 
 ## Evidence
 
-> Stop reporting dollars per agent or month as the primary efficiency measure.
+> It removes the natural pauses or 'brakes' created by the high cost of manual engineering.
 
-> Track cost per accepted artifact, cost per novel connection retained after 30 days, and human correction minutes per usable output.
+> The tension lies between the agent fleet's drive to maximize throughput and Sean's need for high-fidelity product judgment.
 
 ## Examples
 
-- Agent A costs more per run but less per accepted, durable artifact.
+- Run 2026-07-01 produced 125 concepts and 50 connections in 2641 seconds, whereas Run 2026-08-29 produced only 84 concepts via a faster model but with lower total volume.
+- The shift from qwen3-14b to qwen3.6-35b-a3b-32k increased concept counts significantly (e.g., 103 vs 45 in June) while reducing rejection rates, suggesting the model is less critical of its own output quality.
 
 ## Related Concepts
 
-[[Throughput vs. Activity Illusion in Job Hunt Operations]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
+[[Comprehension Debt]] [[Shifting the Burden]]

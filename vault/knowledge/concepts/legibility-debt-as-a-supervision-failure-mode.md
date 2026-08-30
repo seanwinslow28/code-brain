@@ -2,31 +2,31 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md
+  - knowledge/connections/the-tension-between-operational-mastery-and-architectural-clarity.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-This pattern occurs when automated systems prioritize structural validity (correct syntax, valid links) over semantic integrity (meaningful, accurate connections), creating a hidden deficit that only manifests during high-stakes retrieval or auditing. The debt accumulates silently because the system appears functional to superficial checks, but the underlying knowledge graph loses its utility as noise dilutes signal. It is a failure of supervision because the human overseer cannot detect the decay until the cost of correction exceeds the value of the accumulated data.
+This concept defines the accumulation of unarticulated decision logic that occurs when an operator relies on implicit knowledge to supervise automated systems. As the system scales, the gap between what the operator can do and what they can explain widens, creating a debt that must be paid in future debugging, collaboration, or career transitions. This debt is a form of supervision failure because the operator cannot effectively audit or improve the system without explicit documentation of its design principles.
 
 ## Context
 
-Sean's vault synthesizer has been running for months with increasing throughput. The risk is that the 'structure' of his knowledge base remains intact (files exist, links work) while the 'meaning' degrades because he hasn't had the time to audit the deeper semantic connections, creating a fragile foundation for future creative or professional work.
+Sean's fleet has grown significantly, but his ability to supervise it explicitly has not kept pace. This creates a risk that he will be unable to explain his system's design to others or adapt it to new requirements.
 
 ## Evidence
 
-> Legibility debt accumulates when automated systems produce outputs that are structurally valid but semantically hollow, masking decay behind a veneer of productivity.
+> The gap is vocabulary plus the decision surfaces his production path never forced him to touch.
 
-> High activity metrics in job hunting often mask low strategic value, creating an illusion of progress while actual outcomes remain stagnant.
+> His ability to run the system successfully masks the lack of explicit vocabulary and decision-making frameworks.
 
 ## Examples
 
-- The synthesizer producing 122 concepts in one run with only 31 connections, suggesting a high volume of isolated nodes rather than a dense, verified graph.
-- The rejection of 29 concepts in the latest run, indicating that even the system's own filters are struggling to maintain quality thresholds.
+- Sean cannot articulate why he chose specific rejection criteria for clusters, relying instead on intuition.
+- He has not documented the architectural decisions behind his fleet's model selection process.
 
 ## Related Concepts
 
-[[The Calibration Bottleneck in Scalable Creative Production]] [[Throughput vs. Taste Memory Tension]]
+[[Tacit Knowledge Erosion vs. Automation Scale]] [[The Illusion of Competence in Automated Systems]]
