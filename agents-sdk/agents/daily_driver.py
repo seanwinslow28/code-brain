@@ -324,7 +324,7 @@ def build_prompt(mode: str, config) -> str:
             f"  - Replace '<% tp.file.title %>' with '{today}'\n"
             f"\n"
             f"Step 4: Inject the Fleet Overnight Digest. Locate the line\n"
-            f"  '_Auto-filled by Daily Driver at 08:45. Do not edit manually._'\n"
+            f"  '_Auto-filled by Daily Driver at 08:30. Do not edit manually._'\n"
             f"  in today's daily note (directly under the <!-- fleet-overnight --> anchor)\n"
             f"  and REPLACE it with the following block, verbatim. Do not paraphrase,\n"
             f"  summarize, or reformat — copy the markdown exactly as shown between\n"

@@ -10,6 +10,7 @@ import pytest
 from lib.pushover import (
     PushoverError,
     notify_wol_failure,
+    read_receipt_status,
     send_push,
 )
 
@@ -89,3 +90,47 @@ def test_send_push_priority_passed_through(
     send_push(title="X", message="Y", priority=1)
     data = mock_post.call_args.kwargs["data"]
     assert data["priority"] == 1
+
+
+@patch("lib.pushover.get_credential")
+@patch("lib.pushover.httpx.post")
+def test_send_push_emergency_retry_and_expire_passed_through(
+    mock_post: MagicMock, mock_get_cred: MagicMock
+) -> None:
+    mock_get_cred.side_effect = lambda name: "FAKE"
+    mock_post.return_value = _mock_ok_response()
+
+    send_push(
+        title="Scheduled claim-6 drill",
+        message="Acknowledge this scheduled drill.",
+        priority=2,
+        retry=300,
+        expire=900,
+    )
+
+    data = mock_post.call_args.kwargs["data"]
+    assert data["priority"] == 2
+    assert data["retry"] == 300
+    assert data["expire"] == 900
+
+
+@patch("lib.pushover.get_credential")
+@patch("lib.pushover.httpx.get")
+def test_read_receipt_status_uses_receipts_api_and_app_token(
+    mock_get: MagicMock, mock_get_cred: MagicMock
+) -> None:
+    mock_get_cred.return_value = "APP_TOKEN"
+    response = _mock_ok_response()
+    response.json.return_value = {
+        "status": 1,
+        "acknowledged": 1,
+        "acknowledged_at": 1788092400,
+        "acknowledged_by_device": "registered-device",
+    }
+    mock_get.return_value = response
+
+    result = read_receipt_status("receipt-123")
+
+    assert result["acknowledged_by_device"] == "registered-device"
+    assert mock_get.call_args.args[0].endswith("/receipts/receipt-123.json")
+    assert mock_get.call_args.kwargs["params"] == {"token": "APP_TOKEN"}

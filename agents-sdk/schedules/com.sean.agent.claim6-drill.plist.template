@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>__CLAIM6_LAUNCHD_LABEL__</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/.venv/bin/python3</string>
+        <string>/Users/seanwinslow/Code-Brain/code-brain/agents-sdk/agents/claim6_drill.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/seanwinslow/Code-Brain/code-brain</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/Users/seanwinslow/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>PYTHONPATH</key>
+        <string>/Users/seanwinslow/Code-Brain/code-brain/agents-sdk</string>
+        <key>CLAIM6_LAUNCHD_LABEL</key>
+        <string>__CLAIM6_LAUNCHD_LABEL__</string>
+    </dict>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Day</key>
+        <integer>__CLAIM6_DRILL_DAY__</integer>
+        <key>Hour</key>
+        <integer>8</integer>
+        <key>Minute</key>
+        <integer>15</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/seanwinslow/Code-Brain/code-brain/vault/90_system/agent-logs/claim6-drill-stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/seanwinslow/Code-Brain/code-brain/vault/90_system/agent-logs/claim6-drill-stderr.log</string>
+</dict>
+</plist>

@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added — ADR-12 scheduled claim-6 drill (2026-08-30)
+
+- Added a default-unarmed monthly 08:15 launchd drill runner with PPID, label,
+  and calendar-slot provenance guards; there is no manual production send mode.
+- Added priority-2 retry/expiry support and receipt reads to the Pushover helper.
+  Only the registered-device acknowledgment triple qualifies.
+- Added the drill-only `vault/health/claim6-drills.jsonl` schema, incident-field
+  rejection, B3 transport row, retained negative outcomes, and the 08:45 fleet
+  report's independent missed-fire block.
+- Added plist-backed schedule-truth tests and corrected Daily Driver to 08:30
+  and Meta-Agent to 08:45 in metadata, config, docstrings, and daily-note copy.
+- Registration and the later separate-table 1A migration contract are documented
+  in `agents-sdk/docs/claim6-drill-registration.md`.
+
 ### Fixed — a quiet night could not be told from a dead pager (2026-08-29)
 
 `meta_agent.deliver_fleet_alert()` wrote `delivered: true` on any night with

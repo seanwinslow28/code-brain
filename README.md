@@ -68,6 +68,7 @@ The `agents-sdk/` directory adds scheduled, autonomous agents powered by the [Cl
 | Knowledge Lint | Sunday 22:00 | Two-tier vault health scan (structural + semantic). Reports surface in the morning brief. |
 | Flush (SessionEnd) | on session close | Extracts decisions/lessons/actions/quotes from transcripts into `vault/daily/YYYY-MM-DD.md` |
 | Job Feed (v3.28.0) | 8:00–11:00 AM (7 fires) | Scrapes 4 public feeds + ~40-company ATS watchlist, scores PM/APM roles with Qwen3-14B, writes daily roll-up into the private job-hunt home (gitignored) and surfaces 3-line summary in morning brief. 100% local, $0/run |
+| Claim-6 Drill (default disabled) | Registered day-of-month at 8:15 AM monthly | ADR-12 scheduled-only Pushover acknowledgment drill. Registration is required before install; lifecycle evidence stays in a drill-only JSONL and the 8:45 Meta-Agent reports a missed fire without relying on Pushover. |
 
 **Key design:** Skills are prompts, agents are runners. SKILL.md files are loaded as system prompts — no content duplication. Skill improvements automatically flow to autonomous agents.
 
