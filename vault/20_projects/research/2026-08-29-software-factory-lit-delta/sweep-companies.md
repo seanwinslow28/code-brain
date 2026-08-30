@@ -127,6 +127,30 @@ replace) the 2026-08-08 sweeps in `2026-08-08-software-factory-lit-review/`.
   - Customer logos (NVIDIA, EY, Adobe, Adyen…) but **no quantified metrics anywhere** — the tell vs the practitioner pieces above
 - **One honest caveat:** "Not every process should use long-horizon autonomous tasks."
 
+## 10. exe.dev — "How Antithesis Turned exe into a Sandbox for Agentic Software Tests"
+
+- **URL:** https://blog.exe.dev/how-antithesis-turned-exe-into-a-sandbox-for-agentic-software-tests — Zoe (exe.dev), Jul 22, 2026. *Added 2026-08-29 evening (loose-ends pass).*
+- **CLASSIFICATION: Practitioner-testimony wrapped in vendor packaging** — a customer-story interview with Carl Sverre (Antithesis engineer) on exe.dev's own blog; concrete workflow detail, but the venue sells the sandbox.
+- **Mechanism:** disposable exe VMs as agent test environments — spin up, run Claude with root inside, point it at an open-source project to test, discard; persistent dedicated VMs for continuous work; per-user pools of stateless VMs.
+- Key quote (Sverre, on capability tension): "Give them too little, and they can't do real work."
+- On the sandbox's appeal: "The AI can do basically whatever it needs to accomplish some task."
+- **Quantified:** $25/user/month for a 50-VM pool — the only price point in the file cheaper than practitioner subscription stacks; security-fix turnaround "two or three days."
+- **Adopt:** per-user resource pooling (kills idle-VM billing anxiety); root access inside disposables rather than capability-whitelisting; matches the convergent architecture in the synthesis (remote disposable sandboxes).
+- **Beware:** VMs were publicly shareable *by default* (security fix came after a customer asked); VM-spawning-VMs scaling explicitly unresolved; no throughput/failure metrics.
+- **Evals:** none stated — this is sandbox plumbing, not verification.
+
+## 11. exe.dev — "OAuth for Agents"
+
+- **URL:** https://blog.exe.dev/oauth-for-agents — Maisem Ali, Aug 11, 2026. *Added 2026-08-29 evening (loose-ends pass).*
+- **CLASSIFICATION: Vendor design proposal** (announces exe.dev's Workload Identity Federation feature), but the pattern is standard and portable — Ali grounds it in prior Kubernetes practice.
+- **Mechanism:** no long-lived secrets on agents. Agent asks exe.dev's OIDC issuer for a short-lived signed identity token → exchanges it with the cloud's STS (GCP/AWS) for a temporary federated credential → calls the resource. Integrations attach to VM tags for fleet-wide policy.
+- Key quote: "Giving an agent a long-lived secret means trusting not only the agent itself, but every tool it invokes."
+- The prescription: "establish trust between systems, and mint short-lived access when actually needed."
+- **Quantified:** nothing — no latency, adoption, or failure numbers.
+- **Adopt:** the principle directly answers this repo's own enforcement-parity caution (a runtime that mediates credentials governs any model); short-lived-token federation is the credential-side twin of disposable sandboxes.
+- **Beware:** trust-chain complexity (VM → issuer → STS → IAM → resource); zero discussion of revocation latency or issuer compromise; only AWS/GCP supported at publication.
+- **Evals:** n/a — identity plumbing.
+
 ---
 
 ## Negative findings / gaps
@@ -135,7 +159,7 @@ replace) the 2026-08-08 sweeps in `2026-08-08-software-factory-lit-review/`.
 - **Figma:** no first-person engineering post found; Figma appears only as a surface Uber drives via Figma Console MCP.
 - **Databricks:** only Agent Bricks product announcements — vendor, not fleet-operations testimony.
 - **Airbnb:** a third-party Medium recap claims 64% of PRs involve agentic sessions and 12+ internal MCP servers "by Nov 2026" (date internally inconsistent — treat as unverified lead, not evidence). No first-party Airbnb post found.
-- **exe.dev follow-ups not read:** "How Antithesis Turned exe into a Sandbox for Agentic Software Tests," "OAuth for Agents" (blog.exe.dev).
+- ~~**exe.dev follow-ups not read:** "How Antithesis Turned exe into a Sandbox for Agentic Software Tests," "OAuth for Agents" (blog.exe.dev).~~ Read 2026-08-29 evening — now §10 and §11 above.
 
 ## Cross-cutting synthesis (research agent)
 

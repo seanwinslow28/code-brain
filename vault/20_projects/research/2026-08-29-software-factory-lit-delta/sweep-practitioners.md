@@ -112,6 +112,33 @@ and the two best pieces are explicitly negative results.
 - "Agents are coming. Vast fleets of them." Six-wave model ending in agent fleets (2026) with AI supervisors managing leaf-node agents.
 - **Caveat:** his widely-cited per-dev token-cost figures could not be verified from a fetched source — do not cite without getting past the 403.
 
+### Addendum 2026-08-29 (evening): original read in full via interactive browser — cost figures now citable
+
+Read end-to-end at https://sourcegraph.com/blog/revenge-of-the-junior-developer (post
+dated **March 22, 2025**; server-side fetch still 403s behind a Cloudflare bot check —
+an interactive Chrome session passed it automatically). The per-developer cost figures,
+verbatim numbers with paraphrased framing:
+
+- Coding-agent token burn: **$10–$12/hour** at (March-2025) rates.
+- A company he spoke to had budgeted **$25/developer/day** and he calls that merely on
+  the right track; his recommendation is **$80–$100 of LLM spend per developer per day**
+  ("$30 a day" buys only ~3 hours). At that spend a dev "nannies" 2 agents and doubles output.
+- Agent-clusters wave (his H2-2025): a dev averaging 5 concurrent agents ≈ **$50/hour
+  ≈ ~$100k/year** token burn, cloud costs excluded; net incremental cost he amortizes
+  to **~$50k/year per developer** in year one for ~5x productivity.
+- Agent-fleets wave (his 2026): 100+ agents per dev via AI supervisors — devs spending
+  "thousands of dollars a day," justified by Jevons-paradox usage growth.
+- Rule of thumb: one kept-busy agent instance ≈ one additional junior developer at
+  ~$10/hour; each modality wave (chat → agents → clusters) ≈ conservatively 5x the
+  productivity of the previous.
+- His own hedge, previously unquotable: he argued with Claude about the timeline and
+  conceded it's "plausible" only if all his estimates are stretched by six months.
+
+Classification unchanged: commentary/prediction, zero operational receipts — the cost
+math is budget forecasting, not measured spend. But the numbers are now cited from the
+primary source, and the §Cross-cutting "claim-vs-count gap" holds: his "vast fleets"
+remain a forecast with no documented fleet behind them.
+
 ## 12. Allie K. Miller — "Behind The Agentic AI Experiment"
 
 - **URL:** https://www.alliekmiller.com/behind-the-agentic-ai-experiment — undated
@@ -129,4 +156,4 @@ and the two best pieces are explicitly negative results.
 4. **Cost discipline is subscription arbitrage + local caps:** $1k/month subs ≈ 10x cheaper than API (Steinberger); $15.98/feature (Hashimoto); $297 MVP (Huntley). Model mixing modest: cheap-fast default, rare escalation.
 5. **Citable negative results:** Ronacher's scaffolding that didn't pay; Cognition's parallel-writer conflict; Steinberger's orchestrator abandonment; Huntley's duplicate-implementation and context-clipping failures; Hashimoto's human-restructured foundation; Cursor FastRender skepticism at the thousand-agent extreme.
 
-**Gaps for follow-up:** Yegge original (needs a browser past the 403); Carson fleet specifics (video-only — `watch` skill could transcribe); Every's paywalled guide internals (public plugin repo exists).
+**Gaps for follow-up:** ~~Yegge original (needs a browser past the 403)~~ — resolved 2026-08-29 evening, see §11 addendum; Carson fleet specifics (video-only — `watch` skill could transcribe); Every's paywalled guide internals (public plugin repo exists).

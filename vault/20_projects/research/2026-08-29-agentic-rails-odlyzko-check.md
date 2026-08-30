@@ -23,7 +23,8 @@ ignored — applied to the agent web. Two $0 evidence sweeps, every number tagge
 data is not being hidden by absence of measurement; it is being outrun by redefined
 metrics and selective disclosure.** Three findings carry the verdict:
 
-**1. The measured gap is 100–500x.** Genuinely agent-*executed* commerce (software or
+**1. The measured gap is 100–500x.** *(x402 figures in this paragraph corrected same
+night — see the 2026-08-29 addendum at the bottom; the correction widens the gap.)* Genuinely agent-*executed* commerce (software or
 in-chat flow completes checkout) brackets at roughly **$100–500M/month globally** —
 ~0.01–0.1% of online retail — against **$50–70B/month** of "AI-influenced" sales by
 Salesforce's definition. Machine-native payments are smaller still: the entire x402
@@ -112,3 +113,16 @@ numbers were good, the incentive structure of these companies says we would see 
   per [sweep-phase-structure.md](2026-08-29-tech-revolution-patterns/sweep-phase-structure.md)
 - Companions: [historical-patterns synthesis](2026-08-29-tech-revolution-patterns-stage0-synthesis.md) (status: stage-2-complete) ·
   [idea ledger](2026-08-29-agent-web-observability-pm-idea-ledger.md)
+
+## Addendum 2026-08-29 (late evening) — x402 baseline corrected during the leading-indicators pass
+
+On-chain re-verification (Dune `thechriscen` dashboard + agenteconomy.to, both
+[independent] and mutually consistent within 0.3%) shows the "~$24M/month nominal"
+figure was ~20x too high — it appears to be a misread of the **$24.77M
+cumulative-through-Nov-2025** waypoint (lifetime cumulative is $41.37M as of Aug
+2026). Actual current run-rate: **~$0.9–1.3M/month nominal, ~$0.5–0.7M/month
+organic**; lifetime avg tx ≈ $0.25. The organic estimate of $10–15M/mo corrects to
+~$0.5–0.7M/mo, and the >$100M/mo reopening threshold sits ~150–200x above reality,
+not ~10x. Direction of the verdict unchanged; magnitude strengthened. Full workings
+and the ongoing series:
+[leading-indicators tracker](2026-08-29-agentic-rails-leading-indicators-tracker.md).
