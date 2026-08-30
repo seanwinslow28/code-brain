@@ -70,5 +70,30 @@
     "query": "What do first-person practitioner accounts, team postmortems, industry surveys, conference talks, and academic or industry literature from 2024-2026 document about how AI/LLM product teams govern OFFLINE evaluation while iterating on prompts, models, and configurations? Exclude vendor product-feature marketing; prioritize accounts of what teams actually do and what goes wrong. Cover four areas with citations: (1) HOLDOUT DISCIPLINE: documented practices and incidents around held-out or sealed evaluation sets for LLM features \u2014 do teams maintain a split their iteration loop cannot see, and what documented cases exist of teams overfitting to their own eval set (offline scores rising while production quality did not)? (2) CHANGE ISOLATION: is one-change-at-a-time iteration practiced when tuning prompts/models, what do practitioners report happens when multiple changes are bundled, and what vocabulary do teams use for this discipline (champion/challenger, A/B of versions, ablation)? (3) SHIP/NO-SHIP DOCUMENTATION: how do real teams document and review decisions to promote an AI quality change \u2014 decision records, approval workflows, audit trails, rationale requirements \u2014 and what do practitioners and governance/compliance sources say about gaps when no such record exists? (4) ROLE DIVISION: what do practitioner accounts and surveys document about the split between product managers and engineers in operating eval workflows \u2014 which parts PMs own, where PMs report being blocked by tooling or by engineering dependency, and any accounts of PMs wanting but lacking direct control of eval iteration. Deliverable: (a) a cited synthesis distinguishing documented team practice from aspirational best-practice advice; (b) named incidents or first-person accounts for each area where they exist; (c) an explicit note on which of the four areas has the thinnest real-world evidence.",
     "created": "2026-08-17T16:02:33.683183Z",
     "output_path": "/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-17-what-do-first-person-practitioner-accounts-team-postmortems.md"
+  },
+  {
+    "interaction_id": "v1_ChdjblNUYW9ldE9acU1qckVQanV6Rm9BURIXY25TVGFvZXRPWnFNanJFUGp1ekZvQVE",
+    "agent_id": "deep-research-preview-04-2026",
+    "tier": "dr",
+    "cost_predicted_usd": 2.8,
+    "cost_actual_usd": null,
+    "cost_usd": 2.8,
+    "wall_seconds": 455,
+    "query": "What does the scholarly and serious empirical literature say about long-run realized investment returns by layer across technological revolutions \u2014 infrastructure operators versus equipment suppliers versus application-layer businesses \u2014 for the British railway mania, US electrification, and the telecom/dot-com cycle? And what does the platform-economics literature (platform envelopment, complementor outcomes \u2014 Gawer, Cusumano, Eisenmann lineage) find about when complements built on non-commodity platform rails retain durable value versus get absorbed by the platform? Prioritize peer-reviewed economics and business-history sources; separate measured returns from narrative claims. Deliverable: (a) a per-episode account of who actually captured returns by layer, with measured evidence distinguished from narrative; (b) the evidenced conditions under which platform complementors survive envelopment; (c) explicit notes where the literature is silent or contested.",
+    "created": "2026-08-30T00:17:21.568375Z",
+    "output_path": "/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-what-does-the-scholarly-and-serious-empirical-literature-say.md",
+    "note": "recovered poll; interaction created by killed run same evening"
+  },
+  {
+    "interaction_id": "v1_ChdrbmFUYXB1b0pZYXQxTWtQdnBtZXFBTRIXa25hVGFwdW9KWWF0MU1rUHZwbWVxQU0",
+    "agent_id": "deep-research-preview-04-2026",
+    "tier": "dr",
+    "cost_predicted_usd": 2.8,
+    "cost_actual_usd": null,
+    "cost_usd": 2.8,
+    "wall_seconds": 657,
+    "query": "What does the scholarly literature on audience measurement and audit/certification intermediaries find about the economics of measurement businesses: their revenue relative to the spend they measure, the conditions under which a measurement becomes a market 'currency' with pricing power versus a commoditized tool, who pays first (buy-side versus sell-side) and how that migrates over a medium's life, and what happens when platforms give measurement away free? Anchor sources: Beville's Audience Ratings (1988), Balnaves/O'Regan/Goldsmith Rating the Audience (2011), academic papers on audience-measurement economics, histories of the Audit Bureau of Circulations and Nielsen, and web-analytics industry economics including SEC-filing-based accounts of WebSideStory, Omniture, and the impact of free Google Analytics. Prioritize academic and primary sources over trade commentary. Deliverable: (a) measurement-industry revenue as a fraction of measured spend across episodes where computable; (b) the evidenced preconditions for currency status versus tool status; (c) documented outcomes when an incumbent free-ified measurement; (d) explicit notes where evidence is thin.",
+    "created": "2026-08-30T00:28:19.427338Z",
+    "output_path": "/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-what-does-the-scholarly-literature-on-audience-measurement-a.md"
   }
 ]

@@ -3,7 +3,7 @@ title: "Historical patterns of technological revolutions — Stage-0 synthesis (
 date: 2026-08-29
 project: agentic-web-startup
 type: research-synthesis
-status: stage-0-complete
+status: stage-1-complete
 tags: [agentic-web, history, micropayments, perez, protocols, measurement, research-sprint]
 ---
 
@@ -166,6 +166,108 @@ with a century of precedent.
 Post-run: tier-audit both Gemini outputs (`audit_dr_citations.py`, $0). Stage 2 council
 pre-mortem (~$0.29 premium) attacks this synthesis + DR findings before anything feeds
 the Sept-1 scoring.
+
+---
+
+# Stage 1 — deep-research results (added same evening, 2026-08-29 ~20:30)
+
+All three Stage-1 runs ratified and executed: Gemini DR H-A and H-B fired ($2.80 each,
+August ledger now $26.60 of $50; H-A's poll was recovered after a shell-timeout kill —
+one interaction, one charge), and Sean ran the ChatGPT Deep Research brief manually.
+Reports:
+
+- **H-A:** [2026-08-29-what-does-the-scholarly-and-serious-empirical-literature-say.md](2026-08-29-what-does-the-scholarly-and-serious-empirical-literature-say.md)
+- **H-B:** [2026-08-29-what-does-the-scholarly-literature-on-audience-measurement-a.md](2026-08-29-what-does-the-scholarly-literature-on-audience-measurement-a.md)
+- **ChatGPT:** [2026-08-29-tech-revolution-patterns/chatgpt-dr-agent-spend-economics.md](2026-08-29-tech-revolution-patterns/chatgpt-dr-agent-spend-economics.md)
+
+**Tier audits:** H-A: 4 A / 42 C / 9 D (7% academic headline); H-B: 9 A / 31 C / 1 D / 2 X
+(20% academic). Both headlines UNDERCOUNT — the domain classifier files academic PDFs on
+non-journal hosts (HBS working papers, U Chicago Law, Harvard DASH, SF Fed, NBER, MPRA,
+econstor, sec.gov primary filings) as C. Real dross exists in H-A (Facebook posts,
+Medium, personal sites) — its narrative-history claims should be treated as
+sweep-corroborated rather than independently authoritative; its platform-economics
+citations are solid. ChatGPT report is self-tiering and unusually honest about status
+(NBER/arXiv flagged as non-peer-reviewed throughout).
+
+## What Stage 1 adds to the five findings
+
+**1. The "rails lose" pattern has TWO evidenced exceptions that matter (H-A).**
+(a) *Regulated-monopoly infrastructure wins*: US electric utilities defied the
+winner's-curse — 94% beat T-bills vs 41% of all firms; ~10.4%/yr for nearly a century —
+because cost-of-service regulation insulated them from the price wars that killed
+railway capital. Rails lose *when overbuilt and competitive*, not categorically.
+(b) *The equipment layer splits by demand structure*: Beyer, Peacock (locomotives) and
+GE (electrical oligopoly) captured century-scale value serving **diverse, global,
+ongoing demand**, while Nortel/Lucent evaporated because their revenue hung on a small
+cohort of debt-fueled domestic operators. The AI-era translation: picks-and-shovels
+positions are only durable if the buyer base is wide and self-renewing — selling tools
+to a narrow leveraged cohort (e.g., agent-builders funded by the same capex wave) is
+the Nortel seat. This adds a mechanism to the 8/07 decision to avoid selling
+agent-tooling to agent-builders.
+
+**2. The envelopment playbook is now concrete (H-A §5, Eisenmann/Gawer/Cusumano).**
+Platforms absorb complements when: user bases overlap heavily, the complement
+commoditizes, or the platform distrusts complement quality. Complements survive via:
+**asymmetric user overlap** (serve users the platform doesn't reach — Adobe PDF's
+cross-ecosystem network), **defensive opening**, cross-parry, or platform-leadership
+governance — and Amazon empirics show platforms are *less likely to absorb spaces
+requiring intense continuous effort*. Mapped to the venture: a measurement/certification
+business's survival against Cloudflare-class envelopment rests on exactly the two
+defenses available to a solo founder — **neutrality across ALL agent operators and
+rails** (the asymmetric-overlap analogue: Cloudflare can only ever audit its own pipes)
+and **continuous-effort work** (fresh journey evals, human-calibrated verdicts) that
+infra vendors won't staff.
+
+**3. The measurement-currency thesis is quantified and sharpened (H-B).**
+- **The intermediary tax:** currency-grade measurement historically extracts **~1.5–2.5%
+  of the ad spend it settles** (Nielsen/TV, derived from SEC filings + Coen data). That
+  gives the observability territory a sizing law: the audit seat's revenue ceiling is a
+  small percentage of the *adversarial money flow it settles* — which makes agent-commerce
+  GMV the single number that sizes the market, and rails-timing the governing dimension,
+  again.
+- **The payment-migration law:** buy-side initiates (distrust with a P&L), sell-side pays
+  at maturity for certification — "he who needs the currency to sell the asset pays for
+  the minting of the coin." Pricing roadmap for the venture: first checks come from
+  whoever is LOSING money to agent misbehavior; site-side certification revenue is the
+  maturity phase, not the entry.
+- **Three currency preconditions:** buy+sell socio-technical consensus (JIC/MRC-style
+  accreditation), a standardized *exposure-grade* metric, and the state's "raised
+  eyebrow" (the MRC itself was born from 1961–63 congressional pressure). The agent-web
+  analogue of the third precondition is plausibly assistant-misrepresentation consumer
+  law (Air Canada precedent) and EU AI-Act-class pressure — worth tracking as a
+  viability signal, not just a compliance nuisance.
+- **Free-ification, quantified:** GA's 2005 launch destroyed the mid-market but Omniture
+  grew 48% CAGR *through* the shock via the enterprise pivot ($14.8M→$32.6M, then $1.8B
+  to Adobe). Free-ification kills the commodity tier, not the high-complexity tier —
+  the survivable seat against free Cloudflare classification is upmarket, evidence-heavy,
+  and neutral.
+- **The independence argument now has a name:** platform-owned measurement is "direct
+  marketization" — the seller grading its own delivery. Cloudflare giving away agent
+  analytics is structurally the same collapse of auditor/seller roles the ABC and MRC
+  were created to fix. That is the third-party opening.
+
+**4. The agent-spend frontier is behaviorally early and theoretically open (ChatGPT).**
+Real-world financial *execution* delegation is rare (1.5M-interaction study) even as
+judgment delegation is common; delegation willingness drops when perceived control
+drops; the emerging architecture is bounded mandates (AP2-style), i.e. the mental-cost
+relocation our micropayments sweep predicted is exactly where practice and protocol are
+converging. Flat-vs-metered is unresolved at market level (seat/fixed still 71% of the
+adjacent enterprise market); the plausible equilibrium is metering at the wholesale
+layer under bundles/caps at the principal layer. Seller-side bundling equilibrium
+against agent buyers: **no literature exists** — confirmed open field. And ACES-class
+experiments show agent demand is manipulable by machine-readable presentation, which is
+named-academic-evidence for the journey-testing demand seam.
+
+**5. Honest tensions Stage 1 leaves standing.** H-A confirms the literature has *no
+precedent* for today's compressed, simultaneous multi-layer buildout (semis + DCs +
+power + networking at once) — the phase-clock analogies are weakest exactly where AI is
+most unusual. Infrastructure risk itself is contested (stable-utility view vs
+idiosyncratic-risk view). And every quantitative claim about agent-web adoption remains
+vendor-reported; the Odlyzko demand-vs-buildout check on agentic rails is still nobody's
+published work.
+
+**Next gate:** Stage 2 council pre-mortem (~$0.29) attacks this whole synthesis before
+anything feeds the Sept-1 scoring. Fire only on Sean's explicit go.
 
 ## Provenance
 
