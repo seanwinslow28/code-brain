@@ -2,31 +2,31 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/operational-visibility-vs-semantic-value-in-agent-fleets.md
+  - knowledge/connections/the-legibility-trap-in-automated-oversight.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-This pattern describes a decoupling where system health metrics reflect process uptime and execution success, while semantic integrity reflects the actual evolution of knowledge content. When an agent completes its task but produces stale or incorrect output, the operational layer registers success while the semantic layer suffers silent decay. This creates a blind spot because standard monitoring tools cannot distinguish between a healthy agent producing garbage and a failed agent producing nothing.
+This tension defines the inverse relationship between the velocity of automated execution and the latency of human-readable observability. As agents increase their throughput to satisfy structural metrics, the semantic value of their output often degrades because the cost of oversight exceeds the cost of generating placeholder data. The mechanism creates a dependency where Sean must manually verify the truthfulness of outputs that are structurally perfect but semantically hollow, effectively shifting the burden of proof from the agent to the human.
 
 ## Context
 
-Sean's vault synthesizer runs daily to update his knowledge graph. If the model generates low-quality connections or fails to write new concepts due to subtle errors, the system appears 'healthy' in logs but the vault stagnates. This matters because Sean relies on this infrastructure for strategic clarity; silent semantic decay undermines his ability to make informed decisions about his career and creative work.
+Sean’s job hunt and creative studio workflows require high-fidelity output. When operational visibility masks semantic stagnation, he spends more time auditing low-value artifacts than creating new ones, reducing his effective leverage and increasing supervision fatigue.
 
 ## Evidence
 
-> There is a critical tension between the operational visibility of agent health and the semantic integrity of the knowledge vault.
+> There is a fundamental tension between the velocity of automated execution and the latency of human-readable observability.
 
-> When agents like the vault-synthesizer fail silently, the system continues to generate metrics that suggest normalcy, but the underlying knowledge graph stops evolving.
+> The fleet reports 'healthy' status based on process execution, while knowledge integrity depends on successful semantic synthesis.
 
 ## Examples
 
-- The vault synthesizer reports 100% success rate for daily runs while the number of new concepts written drops to zero.
-- Monitoring dashboards show green status for all agent processes despite the knowledge graph having no new connections for weeks.
+- High concept counts in vault_synthesizer runs with low connection quality
+- Agents producing valid YAML files that contain no new insights
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Infrastructure Fragmentation and Semantic Isolation]]
+[[The Illusion of Health in Autonomous Systems]] [[Legibility Debt as a Supervision Failure Mode]]

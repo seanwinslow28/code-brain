@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/structural-integrity-vs-automation-velocity.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-This tension describes a phase transition in agent fleet operations where increasing ingestion throughput initially yields high novelty but eventually triggers semantic fragmentation, as the validation layers fail to keep pace with the write speed. The underlying mechanism is a dependency inversion: the structural coherence of the knowledge graph becomes inversely proportional to the velocity of automated synthesis when supervision costs exceed the marginal value of new connections. Sean must balance the desire for real-time updates with the need for a stable, well-connected knowledge base that supports his creative and professional goals.
+This concept defines the inverse relationship between the speed of knowledge capture and the robustness of the resulting mental models. High-velocity automation, measured by clusters sampled and concepts written, often bypasses the deep structural analysis required for durable learning, leading to 'shallow' connections that are numerous but weak. Conversely, lower velocity allows for higher rejection rates and more deliberate connection writing, which strengthens the underlying graph topology at the cost of throughput.
 
 ## Context
 
-Sean's job hunt and creative studio workflows require deep, interconnected insights rather than isolated data points. If the vault becomes too fragmented due to high-velocity ingestion, it loses its value as a strategic tool for complex reasoning tasks, forcing Sean to manually reconstruct context that agents should have preserved.
+Sean's data reveals a clear trade-off: early runs with qwen3-14b prioritized volume (250+ clusters), while later runs with the larger model prioritized precision (fewer clusters, higher rejection rates). This tension is central to his curriculum design and vault maintenance.
 
 ## Evidence
 
-> There is a fundamental tension between the velocity of automated knowledge ingestion and the integrity of the resulting semantic graph.
+> During the qwen3-14b era, runs consistently sampled over 200 clusters and wrote nearly 150 concepts, with rejection counts hovering around 50-80.
 
-> Scaling agent fleets requires proportional investment in validation layers to prevent silent failure propagation.
+> In August 2026, runs sampled fewer than 200 clusters but maintained high concept counts (100+) while increasing rejection counts to 20-30, indicating stricter filtering.
 
 ## Examples
 
-- The run on 2026-07-02 produced 141 concepts with only 40 connections, showing a high velocity but low structural integrity.
-- The run on 2026-08-12 produced 117 concepts with 29 connections, indicating a continued struggle to maintain integrity at scale.
+- Run 2026-07-05: 153 concepts written from 255 clusters sampled.
+- Run 2026-08-28: 118 concepts written from an unspecified cluster count (implied lower) with 23 rejections.
 
 ## Related Concepts
 
-[[The Efficiency-Quality Inversion in Automated Synthesis]] [[Silent Failure Propagation in Agent Fleets]]
+[[The Efficiency-Quality Inversion in Automated Synthesis]] [[Throughput vs. Taste Memory Tension]]

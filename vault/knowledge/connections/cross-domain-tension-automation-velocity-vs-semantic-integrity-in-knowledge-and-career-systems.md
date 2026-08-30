@@ -2,32 +2,32 @@
 title: "Cross-Domain Tension: Automation Velocity vs. Semantic Integrity in Knowledge and Career Systems"
 type: connection
 connects:
-  - The Calibration Bottleneck in Scalable Creative Production
-  - Legibility Debt as a Supervision Failure Mode
-  - Throughput vs. Activity Illusion in Job Hunt Operations
-created: 2026-08-20
-updated: 2026-08-20
+  - The Taste-Throughput Trade-off in Agentic Synthesis
+  - Structural Integrity vs. Automation Velocity
+  - The Illusion of Competence in Automated Systems
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Synthesis
 
-This connection reveals a fundamental tension where the velocity of automated knowledge ingestion directly conflicts with the integrity of the resulting semantic graph, creating a systemic trust deficit that undermines Sean's ability to scale effectively. As Sean scales his agent fleet to process more data, the marginal cost of verification increases exponentially, leading to a 'legibility debt' where the system appears robust but contains hidden structural or semantic errors. The consequence is that automation velocity can outpace semantic value, creating a bottleneck where cognitive utility is capped by Sean’s ability to audit the graph, ultimately threatening both his creative output and professional positioning.
+This connection reveals a fundamental tension where the velocity of automated knowledge ingestion directly conflicts with the integrity of the resulting semantic graph, creating a systemic trust deficit across Sean's life-systems and professional pipelines. As agent fleets scale up concept production, the lack of proportional supervisory depth leads to silent failures that degrade the utility of both creative and job-hunt artifacts. The consequence is a 'Fixes that Fail' loop where high activity masks semantic decay, forcing Sean to manually audit his vault to restore coherence.
 
 ## Threads
 
-### [[The Calibration Bottleneck in Scalable Creative Production]]
+### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
-> The calibration bottleneck emerges when the rate of automated insight generation exceeds the human capacity to verify and integrate those insights into a coherent worldview.
+> There is a fundamental tension between the velocity of automated knowledge synthesis and the structural integrity of the resulting system.
 
-### [[Legibility Debt as a Supervision Failure Mode]]
+### [[Structural Integrity vs. Automation Velocity]]
 
-> Legibility debt accumulates when automated systems produce outputs that are structurally valid but semantically hollow, masking decay behind a veneer of productivity.
+> As Sean increases the throughput of his fleet (e.g., from 3 to 125 concepts), the system risks entering a 'Fixes that Fail' loop where high volume masks semantic decay.
 
-### [[Throughput vs. Activity Illusion in Job Hunt Operations]]
+### [[The Illusion of Competence in Automated Systems]]
 
-> High activity metrics in job hunting often mask low strategic value, creating an illusion of progress while actual outcomes remain stagnant.
+> Systems thinking is required because component-level optimization is insufficient for systems where behavior arises from interacting, dynamic elements.
 
 ## Implications
 
-- Sean must implement stricter quality gates for the vault synthesizer to prevent semantic decay from outpacing his ability to audit it.
-- The definition of 'success' for the synthesizer should shift from concepts written to verified connections made, aligning automation goals with cognitive utility.
+- Sean must implement periodic 'structural audits' of his vault to detect semantic decay before it becomes systemic and affects professional outputs.
+- Increasing fleet velocity without corresponding increases in supervisory depth will lead to diminishing returns on knowledge value across all domains.

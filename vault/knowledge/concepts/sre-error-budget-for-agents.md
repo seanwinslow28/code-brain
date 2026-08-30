@@ -2,30 +2,31 @@
 title: "SRE Error Budget for Agents"
 type: concept
 sources:
-  - knowledge/expansions/connections/cost-capped-workflows-and-agent-health-monitoring.md
+  - knowledge/expansions/connections/cross-domain-bridging-through-agent-health-monitoring.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-An SRE error budget transforms agent reliability from a binary health check into a quantifiable tolerance for failure, allowing the system to trade off availability against cost or quality based on remaining slack. When the burn rate of failures exceeds a defined threshold, the system must execute predetermined remediation steps rather than merely logging errors. This mechanism shifts the operational focus from preventing all errors to managing the acceptable rate of error-induced disruption within a specific time window.
+An SLO-driven enforcement policy that treats agent reliability as a finite resource rather than a binary health state. When the error budget is exhausted, the system triggers specific remediation actions—such as freezing new agent deployments or degrading to minimal output—rather than merely logging failures. This shifts the operational focus from passive monitoring of uptime to active prioritization of cognitive utility against infrastructure cost.
 
 ## Context
 
-Sean's agent fleet has historically suffered from silent failures and inconsistent outputs. By defining an explicit error budget, Sean can automate decisions about when to suspend non-critical synthesis runs or escalate to human review, preventing the accumulation of low-quality artifacts that degrade his knowledge vault over time.
+Sean's fleet runs daily synthesizer jobs that consume significant compute and model tokens. Without an error budget, he risks over-investing in marginal reliability gains while ignoring the opportunity cost of failed runs. Defining a burn-rate alert allows him to make trade-off decisions about when to stop spending resources on a failing pipeline.
 
 ## Evidence
 
-> Define a user-visible SLO—such as “95% of scheduled runs produce a usable artifact by its deadline”—then treat the remaining failure allowance as an error budget.
+> Replace “failure detected” with a user-centered SLI, an SLO, and an enforcement policy.
 
-> Its crucial move is converting telemetry into predetermined operating decisions.
+> Define what happens when the budget is exhausted: freeze new agents, repair the highest-consuming dependency, or degrade to a minimal note.
 
 ## Examples
 
-- When burn rate exceeds X, suspend Y and execute Z.
+- By 08:35, the daily note contains a complete overnight digest and current fleet status on 29 of 30 days.
+- Freeze new agents when the error budget is exhausted.
 
 ## Related Concepts
 
-[[Agent Health Monitoring]] [[Operational Readiness Review]]
+[[Agent Health Monitoring]] [[Operational Uptime vs. Cognitive Utility Tension]]

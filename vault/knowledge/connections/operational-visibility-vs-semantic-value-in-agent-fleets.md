@@ -2,32 +2,32 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: connection
 connects:
-  - The Illusion of Health in Autonomous Systems
-  - Silent Failure Propagation in Agent Fleets
-  - Accountability Gap
-created: 2026-08-28
-updated: 2026-08-28
+  - The Taste-Throughput Trade-off in Agentic Synthesis
+  - Supervision as the New AI Edge
+  - The Illusion of Competence in Automated Systems
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Synthesis
 
-The core tension lies in the misalignment between operational health metrics and semantic integrity, where high activity levels mask strategic stagnation. This decoupling creates a systemic risk where Sean's vault appears healthy due to low error rates but is actually suffering from silent semantic decay. The consequence is a loss of trust in the vault's outputs because the system no longer fails visibly but instead produces plausible yet incorrect data.
+The core tension lies in the decoupling of operational health metrics from semantic value, where systems report 'healthy' status based on process execution while knowledge integrity depends on rejection rates that are often hidden by robust error handling. This creates a blind spot where Sean perceives his infrastructure as stable because it is running without crashing, even though the semantic quality of the output is degrading due to lowered taste thresholds. The consequence is that Sean must build new supervisory mechanisms—specifically 'taste-based' quality gates—to detect when operational efficiency has decoupled from strategic utility.
 
 ## Threads
 
-### [[The Illusion of Health in Autonomous Systems]]
+### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
-> The reduction in visible errors (lower rejected_count) creates a dangerous illusion of health that masks underlying semantic decay.
+> As the system scales its sampling capacity, the rejection rate typically drops not because quality improves, but because the supervisory threshold for 'taste' is lowered to maintain throughput.
 
-### [[Silent Failure Propagation in Agent Fleets]]
+### [[Supervision as the New AI Edge]]
 
-> Current health checks do not catch downstream semantic corruption because they rely on operational uptime rather than content verification.
+> evaluate_article_depth() emitting rejected_reasons into the manifest
 
-### [[Accountability Gap]]
+### [[The Illusion of Competence in Automated Systems]]
 
-> Reliability metrics do not address who is accountable for semantic errors, allowing silent failures to persist unchecked.
+> You have built, by instinct, most of the infrastructure that makes an AI system survive contact with production.
 
 ## Implications
 
-- Sean must implement semantic verification steps in the synthesizer pipeline to detect quality issues that operational metrics miss.
-- The drop in rejected_count from June to August indicates a loss of diagnostic sensitivity, requiring a re-evaluation of rejection thresholds to restore visibility into semantic drift.
+- Sean must stop measuring success by 'concepts_written' and start measuring it by 'rejected_reasons' that indicate high-taste filtering.
+- The current fleet's health metrics are misleading; they signal stability but do not signal strategic alignment.

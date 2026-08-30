@@ -2,31 +2,31 @@
 title: "The Taste-Fidelity Decoupling in Creative Production"
 type: concept
 sources:
-  - knowledge/concepts/the-taste-fidelity-decoupling-in-creative-production.md
+  - knowledge/connections/the-curation-bottleneck-in-agentic-scalability.md
 tags: [auto-generated, phase-6]
-created: 2026-08-25
-updated: 2026-08-25
+created: 2026-08-30
+updated: 2026-08-30
 ---
 
 ## Definition
 
-This pattern identifies the divergence between the quantity of generated artifacts and their qualitative alignment with established aesthetic standards. It posits that automated systems can produce volume independently of taste, but the utility of that volume is strictly gated by the fidelity of style transfer. As volume increases, the signal-to-noise ratio degrades unless explicit 'taste guardrails' are implemented to reject low-fidelity outputs before they enter the vault.
+This pattern emerges when the quality of generated content (fidelity) no longer correlates with the user's aesthetic or strategic standards (taste). As models improve, they produce more plausible but less distinctive output, forcing the human to act as a taste filter rather than a correctness checker. The decoupling creates a supervisory bottleneck where the cost of identifying 'good enough' vs 'great' increases disproportionately to the gain in raw volume.
 
 ## Context
 
-Sean's creative studio operations suffer from this decoupling as he scales. The data shows that while concept generation has increased dramatically, the consistency of 'Sean Mode' is threatened by the sheer volume of variations, requiring strategic capping of concurrent runs to preserve quality.
+Sean's job hunt and creative studio workflows require high-taste output. The logs show that as concepts written increased (e.g., 153 on 2026-07-05), connections written did not scale proportionally, indicating a bottleneck in creating meaningful links rather than just generating nodes.
 
 ## Evidence
 
-> This connection reveals a critical tension between the increasing volume of automated output and the stagnating depth of strategic connections.
+> There is a fundamental tension between the 'memoryless' nature of current AI generation and the 'persistent identity' requirements of professional creative work
 
-> Sean must cap the number of concurrent synthesizer runs to prevent taste drift, prioritizing quality over quantity in his creative studio pipeline.
+> This connection reveals a critical tension where the efficiency of AI generation is directly offset by the increasing cognitive load of supervision
 
 ## Examples
 
-- The prompt explicitly forbids repeating the 'missed' drafts, indicating that previous iterations failed to capture the necessary aesthetic nuance.
-- The fleet architecture needs a 'taste guardrail' layer that rejects outputs before they enter the vault if they fail negative constraint checks.
+- Run on 2026-07-05 wrote 153 concepts but only 39 connections, showing a disconnect between volume and structural integrity
+- Run on 2026-08-15 wrote 123 concepts and 43 connections, a higher ratio suggesting improved taste alignment or reduced rejection
 
 ## Related Concepts
 
-[[The Calibration Bottleneck in Scalable Creative Production]] [[Performative Taste Drift]]
+[[The Taste-Fidelity Decoupling as a Supervisory Bottleneck]] [[Taste as Evaluation Function vs. Activity Proof]]

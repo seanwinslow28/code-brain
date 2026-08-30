@@ -2,32 +2,32 @@
 title: "Structural Integrity vs. Automation Velocity"
 type: connection
 connects:
-  - Knowledge-Lint
-  - Automation Pipeline
-  - Daily Note Generation
-created: 2026-06-29
-updated: 2026-06-29
+  - The Illusion of Competence in Automated Systems
+  - Throughput vs. Taste Memory Tension
+  - Silent Decay in Strategic Pipelines
+created: 2026-08-29
+updated: 2026-08-29
 ---
 
 ## Synthesis
 
-The drive for automation velocity often conflicts with the structural integrity required by Knowledge-Lint. Agents can rapidly generate daily notes, but without the Luhmannian invariant of making durable atomic claims, this output becomes noise rather than signal. This tension manifests when Sean's job-hunt or creative workflows prioritize speed of information capture over the rigor needed for long-term knowledge compounding.
+There is a fundamental tension between the velocity of automated synthesis and the structural integrity of the resulting knowledge graph. High-velocity runs (like those using qwen3-14b with 250+ clusters) produce large volumes of concepts but often suffer from high rejection rates or low connection density, indicating that speed compromises the 'taste' or filtering mechanism. Conversely, slower, more deliberate runs (using qwen3.6-35b) reduce cluster sampling but may increase the depth of connections, suggesting that integrity requires a reduction in throughput to allow for deeper processing.
 
 ## Threads
 
-### [[Knowledge-Lint]]
+### [[The Illusion of Competence in Automated Systems]]
 
-> Add a “fleet output must become a zettel or die” rule: each agent observation should become either a permanent note, a contradiction edge, a project decision, or a discarded transient.
+> Systems thinking is the practice of explaining behavior by the structure that produces it. For an AI Product Manager, this shifts focus from isolated features to interconnected ecosystems where data, models, user behaviors, and infrastructure influence one another.
 
-### [[Automation Pipeline]]
+### [[Throughput vs. Taste Memory Tension]]
 
-> This would let Sean ship a knowledge-ingestion protocol or agent memory spec that explains how nightly automation becomes intellectual compound interest.
+> Emergence: Outcomes like model drift or algorithmic bias are emergent behaviors that cannot be predicted by looking at single components.
 
-### [[Daily Note Generation]]
+### [[Silent Decay in Strategic Pipelines]]
 
-> Current failure mode: “knowledge infrastructure” sounds like better filing. This adds a theory of idea survivability.
+> Stocks buffer and hide; they change slowly even if flows are cut.
 
 ## Implications
 
-- Sean needs to implement pre-commit checks in his automation pipeline to enforce the 'zettel or die' rule before data enters the vault.
-- The velocity of daily note generation must be capped by the capacity for synthesis, preventing the vault from becoming an unmanageable archive.
+- Sean should monitor the 'connection density' (connections/concepts) rather than just total volume to detect when velocity is compromising quality.
+- Switching models (e.g., from 14b to 35b) changes the underlying structure of the synthesis, not just the speed, requiring a re-evaluation of what 'success' looks like in each run.
