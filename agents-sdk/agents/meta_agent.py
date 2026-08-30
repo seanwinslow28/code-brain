@@ -103,8 +103,35 @@ _STALE_AFTER_HOURS: dict[str, int] = {
 # every healthy flush run fall to the else-branch and trip the alert baton —
 # eng-001.d21, the crying-wolf defect: the channel guaranteed a false positive
 # on every run, indistinguishable in form from a real one.
-_HEALTHY_CSV_STATUSES = {"success", "empty-queue", "recursion-guard", "ok"}
-_ERROR_CSV_STATUSES = {"error"}
+# ── the status-token registry (eng-002.d158) ────────────────────────────────
+# This was an allow-list with an else-branch, and the else-branch turned every
+# token nobody had registered into an accusation against the agent. It has now
+# mislabelled three: "ok" (flush's healthy token, eng-001.d21), "deferred" (the
+# synthesizer's *designed* off-LAN deferral — BT5 taught the agent to defer
+# honestly and nobody taught the monitor), and "error_max_budget_usd" (a real
+# failure reported as "unknown").
+#
+# One registry, three classes, and an unregistered token is the MONITOR's
+# defect rather than the agent's. Census from production 2026-08-30.
+STATUS_VOCABULARY: dict[str, str] = {
+    # healthy — the agent did its job, including deciding there was none to do
+    "success":              "healthy",
+    "ok":                   "healthy",   # flush (eng-001.d21)
+    "empty-queue":          "healthy",   # deep-researcher, nothing queued
+    "recursion-guard":      "healthy",   # flush self-protecting on rapid hook fires
+    "deferred":             "healthy",   # synthesizer, Tier-2 host off-LAN — by design
+    # error — the agent failed and the work did not happen
+    "error":                "error",
+    "error_max_budget_usd": "error",     # daily-driver hit its cap; the note may be absent
+    # degraded — it ran and produced too little to trust; still pages, but named
+    "partial":              "degraded",  # job-feed: fetched thousands, scored none
+    "partial-empty":        "degraded",  # synthesizer: concepts=0 connections=0
+}
+
+# Derived, so the sets and the registry can never disagree.
+_HEALTHY_CSV_STATUSES = {t for t, c in STATUS_VOCABULARY.items() if c == "healthy"}
+_ERROR_CSV_STATUSES = {t for t, c in STATUS_VOCABULARY.items() if c == "error"}
+_DEGRADED_CSV_STATUSES = {t for t, c in STATUS_VOCABULARY.items() if c == "degraded"}
 VAULT_ROOT = Path.home() / "Code-Brain" / "code-brain" / "vault"
 FLEET_STATE_DIR = VAULT_ROOT / "02_Areas" / "Agent-Fleet"
 
@@ -222,15 +249,29 @@ def check_agent_health(agent_name: str, config: dict, dry_run: bool = False) -> 
         age_str = "age unknown"
 
     stale_threshold = _STALE_AFTER_HOURS.get(agent_name, HEALTH_WINDOW_HOURS)
-    if csv_status in _ERROR_CSV_STATUSES:
+    classification = STATUS_VOCABULARY.get(csv_status)
+    if classification == "error":
         result["status"] = "error"
-    elif csv_status in _HEALTHY_CSV_STATUSES:
+    elif classification == "healthy":
         if age_hours is not None and age_hours > stale_threshold:
             result["status"] = "stale"
         else:
             result["status"] = "healthy"
+    elif classification == "degraded":
+        result["status"] = "degraded"
+    elif not csv_status:
+        result["status"] = "unknown"
     else:
-        result["status"] = csv_status or "unknown"
+        # Not the agent's fault: the monitor has no entry for this token, so it
+        # cannot say whether the run was fine. Say that, loudly, instead of
+        # reporting the token as though it were a diagnosis.
+        result["status"] = "unclassified-status"
+        result["details"] = (
+            f"monitor has no entry for status {csv_status!r} — classify it in "
+            f"meta_agent.STATUS_VOCABULARY; this is a monitoring defect, not "
+            f"evidence about {agent_name}"
+        )
+        return result
 
     detail_bits = [f"status={csv_status}", age_str]
     if mode:

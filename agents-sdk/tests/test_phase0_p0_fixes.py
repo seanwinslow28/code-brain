@@ -72,10 +72,15 @@ def test_ok_still_ages_into_stale(history_dir: Path):
 @pytest.mark.parametrize(
     "status,expected",
     [("error", "error"), ("success", "healthy"), ("empty-queue", "healthy"),
-     ("recursion-guard", "healthy"), ("banana", "banana")],
+     ("recursion-guard", "healthy"), ("banana", "unclassified-status")],
 )
 def test_existing_status_vocabulary_unchanged(history_dir: Path, status: str, expected: str):
-    """The d21 fix widens the healthy set by exactly one token."""
+    """The d21 fix widens the healthy set by exactly one token.
+
+    Amended 2026-08-30 (eng-002.d158): "banana" used to expect "banana" —
+    an unregistered token becoming the agent's reported status. That echo is
+    the defect itself, so the expectation now names the monitor instead.
+    """
     _write_history(history_dir / meta_agent.HISTORY_FILE_NAME, [_row("flush", status)])
     assert meta_agent.check_agent_health("flush", {}, False)["status"] == expected
 

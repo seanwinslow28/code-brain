@@ -176,13 +176,22 @@ class TestCheckAgentHealth:
         assert "mode=morning" in out["details"]
         assert "cost=$0.5161" in out["details"]
 
-    def test_unknown_status_passes_through(self, history_dir: Path):
+    def test_unregistered_status_accuses_the_monitor(self, history_dir: Path):
+        """Amended 2026-08-30 (eng-002.d158). This was
+        `test_unknown_status_passes_through`, asserting that an unregistered
+        token became the agent's reported status. That pass-through is the
+        defect: it turned flush's "ok" and the synthesizer's designed
+        "deferred" into false accusations against healthy agents. An
+        unclassified token is now reported as the monitor's own gap, and still
+        surfaces so the fix cannot trade a false positive for a false negative.
+        """
         _write_history(
             history_dir / meta_agent.HISTORY_FILE_NAME,
             [_now_row("deep-researcher", "weird-status")],
         )
         out = meta_agent.check_agent_health("deep_researcher", {})
-        assert out["status"] == "weird-status"
+        assert out["status"] == "unclassified-status"
+        assert "weird-status" in out["details"]
 
     def test_long_notes_get_truncated(self, history_dir: Path):
         long_note = "x" * 200
