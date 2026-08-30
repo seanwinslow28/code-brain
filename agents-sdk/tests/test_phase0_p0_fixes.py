@@ -16,6 +16,7 @@ Three defects, one file:
 from __future__ import annotations
 
 import csv
+import json
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -112,10 +113,94 @@ def test_alert_delivers_one_aggregated_push(monkeypatch: pytest.MonkeyPatch, tmp
 def test_healthy_fleet_sends_nothing(monkeypatch: pytest.MonkeyPatch, tmp_path: Path):
     sent: list[dict] = []
     monkeypatch.setattr(meta_agent, "_send_fleet_push", lambda **kw: sent.append(kw) or True)
+    monkeypatch.setattr(meta_agent, "_probe_fleet_push_credentials", lambda: None)
     monkeypatch.setattr(meta_agent, "ALERT_DELIVERY_LOG", tmp_path / "delivery.jsonl")
 
     assert meta_agent.deliver_fleet_alert([], dry_run=False) is True
     assert sent == []
+
+
+def test_a_quiet_night_is_never_recorded_as_a_delivery(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+):
+    """The d149 defect: `delivered: true` for a send that never happened.
+
+    The comment over ALERT_DELIVERY_LOG has always said "a night with
+    nothing to send is not evidence that sending works". The code wrote
+    `delivered=True` on exactly that night, so seven healthy nights gave
+    B3 seven green rows proving only that the decision path ran. A dead
+    pager and a healthy fleet were the same row.
+    """
+    log = tmp_path / "delivery.jsonl"
+    monkeypatch.setattr(meta_agent, "_send_fleet_push", lambda **kw: True)
+    monkeypatch.setattr(meta_agent, "_probe_fleet_push_credentials", lambda: None)
+    monkeypatch.setattr(meta_agent, "ALERT_DELIVERY_LOG", log)
+
+    meta_agent.deliver_fleet_alert([], dry_run=False)
+
+    row = json.loads(log.read_text().splitlines()[0])
+    assert row["alerts"] == 0
+    assert row["attempted"] is False, "nothing was sent, so nothing was attempted"
+    assert row["delivered"] is False, "delivered must mean a send succeeded"
+
+
+def test_a_quiet_night_probes_the_credentials(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+):
+    """A quiet night still has to produce evidence, so it probes send-free."""
+    probes: list[int] = []
+    monkeypatch.setattr(meta_agent, "_send_fleet_push", lambda **kw: True)
+    monkeypatch.setattr(
+        meta_agent, "_probe_fleet_push_credentials", lambda: probes.append(1)
+    )
+    monkeypatch.setattr(meta_agent, "ALERT_DELIVERY_LOG", tmp_path / "delivery.jsonl")
+
+    meta_agent.deliver_fleet_alert([], dry_run=False)
+
+    assert len(probes) == 1, "a quiet night must still exercise the credential path"
+    row = json.loads((tmp_path / "delivery.jsonl").read_text().splitlines()[0])
+    assert row["probe"] == "ok"
+
+
+def test_a_failed_probe_on_a_quiet_night_is_loud(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+):
+    """Missing credentials must not read as a healthy night.
+
+    This is the live incident: the Pushover credentials resolve on the
+    MacBook and are absent from the Mac Mini that runs the fleet, so
+    every real send has failed and no Mini log has ever recorded a
+    success. Before this change the Mini's quiet nights still wrote
+    `delivered: true`.
+    """
+    def _missing():
+        raise RuntimeError("Pushover credentials missing from environment + keychain")
+
+    log = tmp_path / "delivery.jsonl"
+    monkeypatch.setattr(meta_agent, "_send_fleet_push", lambda **kw: True)
+    monkeypatch.setattr(meta_agent, "_probe_fleet_push_credentials", _missing)
+    monkeypatch.setattr(meta_agent, "ALERT_DELIVERY_LOG", log)
+
+    assert meta_agent.deliver_fleet_alert([], dry_run=False) is False
+
+    row = json.loads(log.read_text().splitlines()[0])
+    assert row["probe"] == "failed"
+    assert row["delivered"] is False
+    assert "credentials missing" in row["detail"]
+
+
+def test_only_a_real_send_records_delivered_true(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+):
+    log = tmp_path / "delivery.jsonl"
+    monkeypatch.setattr(meta_agent, "_send_fleet_push", lambda **kw: True)
+    monkeypatch.setattr(meta_agent, "_probe_fleet_push_credentials", lambda: None)
+    monkeypatch.setattr(meta_agent, "ALERT_DELIVERY_LOG", log)
+
+    meta_agent.deliver_fleet_alert([("flush", "error", "x")], dry_run=False)
+
+    row = json.loads(log.read_text().splitlines()[0])
+    assert row["attempted"] is True and row["delivered"] is True
 
 
 def test_dry_run_never_pushes(monkeypatch: pytest.MonkeyPatch, tmp_path: Path):
@@ -140,11 +225,19 @@ def test_send_failure_never_raises_into_the_run(monkeypatch: pytest.MonkeyPatch,
     assert '"delivered": false' in (tmp_path / "delivery.jsonl").read_text()
 
 
-def test_every_run_writes_one_delivery_record(monkeypatch: pytest.MonkeyPatch, tmp_path: Path):
-    """B3 needs seven consecutive nights of evidence that the path works. A
-    healthy night sends nothing, so the record — not the push — is the trial."""
+def test_every_run_writes_one_delivery_record(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+):
+    """B3 needs seven consecutive nights of evidence that the path works.
+
+    A healthy night sends nothing, so the record is the trial. What makes
+    it a real trial is the probe plus an honest `attempted` flag, not the
+    row's mere existence: a row that says `delivered` without a send is
+    evidence of nothing.
+    """
     log = tmp_path / "delivery.jsonl"
     monkeypatch.setattr(meta_agent, "_send_fleet_push", lambda **kw: True)
+    monkeypatch.setattr(meta_agent, "_probe_fleet_push_credentials", lambda: None)
     monkeypatch.setattr(meta_agent, "ALERT_DELIVERY_LOG", log)
 
     meta_agent.deliver_fleet_alert([], dry_run=False)
@@ -153,6 +246,63 @@ def test_every_run_writes_one_delivery_record(monkeypatch: pytest.MonkeyPatch, t
     lines = [l for l in log.read_text().splitlines() if l.strip()]
     assert len(lines) == 2
     assert '"alerts": 0' in lines[0] and '"alerts": 1' in lines[1]
+
+
+def test_a_dry_run_leaves_a_record_that_cannot_pass_for_evidence(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+):
+    """A dry run used to write nothing at all.
+
+    A night the agent skipped and a night it never ran looked identical
+    in this log, which is the same defect in a second place. The row is
+    now written and self-identifying, and carries neither a delivery nor
+    a probe, so no count of healthy nights can absorb it.
+    """
+    log = tmp_path / "delivery.jsonl"
+    probes: list[int] = []
+    monkeypatch.setattr(meta_agent, "_send_fleet_push", lambda **kw: True)
+    monkeypatch.setattr(
+        meta_agent, "_probe_fleet_push_credentials", lambda: probes.append(1)
+    )
+    monkeypatch.setattr(meta_agent, "ALERT_DELIVERY_LOG", log)
+
+    assert meta_agent.deliver_fleet_alert([("flush", "error", "x")], dry_run=True) is True
+
+    row = json.loads(log.read_text().splitlines()[0])
+    assert row["dry_run"] is True
+    assert row["attempted"] is False and row["delivered"] is False
+    assert row["probe"] == "not-run"
+    assert probes == [], "a dry run must not touch the credential path either"
+
+
+def test_seven_quiet_nights_can_be_told_from_a_dead_pager(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+):
+    """The question B3's clock actually needs to ask.
+
+    Seven healthy nights on a machine with working credentials and seven
+    on a machine with none must not produce the same log. Before this
+    change they did: fourteen identical `delivered: true` rows.
+    """
+    log = tmp_path / "delivery.jsonl"
+    monkeypatch.setattr(meta_agent, "_send_fleet_push", lambda **kw: True)
+    monkeypatch.setattr(meta_agent, "ALERT_DELIVERY_LOG", log)
+
+    monkeypatch.setattr(meta_agent, "_probe_fleet_push_credentials", lambda: None)
+    for _ in range(7):
+        meta_agent.deliver_fleet_alert([], dry_run=False)
+
+    def _missing():
+        raise RuntimeError("no credentials on this machine")
+
+    monkeypatch.setattr(meta_agent, "_probe_fleet_push_credentials", _missing)
+    for _ in range(7):
+        meta_agent.deliver_fleet_alert([], dry_run=False)
+
+    rows = [json.loads(l) for l in log.read_text().splitlines() if l.strip()]
+    healthy = [r for r in rows if r["probe"] == "ok"]
+    dead = [r for r in rows if r["probe"] == "failed"]
+    assert len(healthy) == 7 and len(dead) == 7
 
 
 # ── the daily-driver note assertion ─────────────────────────────────────────

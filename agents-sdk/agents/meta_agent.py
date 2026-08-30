@@ -613,11 +613,47 @@ def _send_fleet_push(*, title: str, message: str) -> bool:
     return True
 
 
-def _record_alert_delivery(*, alerts: int, delivered: bool, detail: str) -> None:
+def _probe_fleet_push_credentials() -> None:
+    """Resolve the Pushover credentials without sending anything.
+
+    The send-free half of the delivery path. It proves the credentials
+    exist on *this* machine, which is the failure actually in play: they
+    resolve on the MacBook and are absent from the Mac Mini that runs the
+    fleet, so every real send from the machine that matters has failed.
+
+    It does not prove the network or the Pushover API works. That is a
+    real limit and the record says `probe`, never `delivered`.
+    """
+    from lib.pushover import ensure_credentials_or_raise
+
+    ensure_credentials_or_raise()
+
+
+def _record_alert_delivery(
+    *,
+    alerts: int,
+    delivered: bool,
+    detail: str,
+    attempted: bool,
+    probe: str,
+    dry_run: bool = False,
+) -> None:
+    """One JSONL row per run.
+
+    `delivered` means a send was made and succeeded. Nothing else may set
+    it. `attempted` says whether a send was tried at all, and `probe`
+    carries the quiet-night credential check (`ok` / `failed` /
+    `not-run`). Before these fields existed a healthy night wrote
+    `delivered: true` without touching the transport, so a dead pager and
+    a healthy fleet produced identical rows (eng-002.d149).
+    """
     record = {
         "ts": datetime.now().isoformat(timespec="seconds"),
         "alerts": alerts,
+        "attempted": attempted,
         "delivered": delivered,
+        "probe": probe,
+        "dry_run": dry_run,
         "detail": detail,
     }
     try:
@@ -629,20 +665,53 @@ def _record_alert_delivery(*, alerts: int, delivered: bool, detail: str) -> None
 
 
 def deliver_fleet_alert(alerts: list[tuple[str, str, str]], dry_run: bool) -> bool:
-    """Page a human once for the whole unhealthy set; record the attempt either way.
+    """Page a human once for the whole unhealthy set; record what really happened.
 
     One baton, one page. A push per unhealthy agent would reproduce d21's noise
     problem in a new place — a dead Mini would fire nine.
 
-    Returns True when nothing needed sending or the send succeeded, False when a
-    send was attempted and failed. Never raises: the surface whose job is
+    Returns True when the delivery path looks alive: a send succeeded, or a
+    quiet night's credential probe passed, or the run was a dry run. Returns
+    False when a send was attempted and failed, or when a quiet night's probe
+    could not find credentials. Never raises: the surface whose job is
     reporting failure must not itself fail loudly at the moment of reporting.
     """
     if dry_run:
+        # Previously this returned without writing anything, so a skipped
+        # night and a night the agent never ran were indistinguishable in
+        # the log. The row is written and self-identifying instead.
+        _record_alert_delivery(
+            alerts=len(alerts),
+            delivered=False,
+            detail="dry run — no send, no probe",
+            attempted=False,
+            probe="not-run",
+            dry_run=True,
+        )
         return True
 
     if not alerts:
-        _record_alert_delivery(alerts=0, delivered=True, detail="fleet healthy — nothing to send")
+        # A quiet night is not free evidence. Exercise the credential path
+        # so seven healthy nights say something about the transport.
+        try:
+            _probe_fleet_push_credentials()
+        except Exception as exc:
+            print(f"  ALERT CREDENTIAL PROBE FAILED: {exc}")
+            _record_alert_delivery(
+                alerts=0,
+                delivered=False,
+                detail=str(exc)[:200],
+                attempted=False,
+                probe="failed",
+            )
+            return False
+        _record_alert_delivery(
+            alerts=0,
+            delivered=False,
+            detail="fleet healthy — nothing to send; credentials resolved",
+            attempted=False,
+            probe="ok",
+        )
         return True
 
     lines = [f"{name}: {status}" for name, status, _detail in alerts]
@@ -651,10 +720,22 @@ def deliver_fleet_alert(alerts: list[tuple[str, str, str]], dry_run: bool) -> bo
         _send_fleet_push(title=f"Fleet alert — {len(alerts)} unhealthy", message=message[:900])
     except Exception as exc:  # PushoverError, config error, transport, anything
         print(f"  ALERT DELIVERY FAILED: {exc}")
-        _record_alert_delivery(alerts=len(alerts), delivered=False, detail=str(exc)[:200])
+        _record_alert_delivery(
+            alerts=len(alerts),
+            delivered=False,
+            detail=str(exc)[:200],
+            attempted=True,
+            probe="not-run",
+        )
         return False
 
-    _record_alert_delivery(alerts=len(alerts), delivered=True, detail="; ".join(lines)[:200])
+    _record_alert_delivery(
+        alerts=len(alerts),
+        delivered=True,
+        detail="; ".join(lines)[:200],
+        attempted=True,
+        probe="not-run",
+    )
     return True
 
 
@@ -706,11 +787,21 @@ def main():
         print("  No alerts — all active agents healthy")
 
     # eng-001.d40 — the baton now has a path to a human.
-    if deliver_fleet_alert(alerts, args.dry_run):
-        if alerts:
+    delivery_ok = deliver_fleet_alert(alerts, args.dry_run)
+    if delivery_ok:
+        if args.dry_run:
+            print("  Dry run — no send, no probe (recorded, counts as no evidence)")
+        elif alerts:
             print(f"  Alert delivered to Pushover ({len(alerts)} unhealthy)")
-    else:
+        else:
+            print("  No alerts — credential probe passed (send-free)")
+    elif alerts:
         print("  Alert delivery FAILED — see fleet-alert-delivery.jsonl")
+    else:
+        print(
+            "  CREDENTIAL PROBE FAILED — the fleet is healthy but could not be "
+            "paged if it were not. See fleet-alert-delivery.jsonl"
+        )
 
     print(f"\n{'─' * 60}")
     print("META-AGENT COMPLETE")

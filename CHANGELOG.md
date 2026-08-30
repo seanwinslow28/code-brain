@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed — a quiet night could not be told from a dead pager (2026-08-29)
+
+`meta_agent.deliver_fleet_alert()` wrote `delivered: true` on any night with
+nothing to send, without attempting a send. Seven consecutive healthy nights
+therefore produced seven green rows proving the decision path ran and nothing
+about whether the transport works, so eng-002 B3's clock could not distinguish a
+healthy fleet from a dead pager. The comment over `ALERT_DELIVERY_LOG` had said
+*"a night with nothing to send is not evidence that sending works"* since
+eng-001.d40; the code underneath it did the opposite.
+
+- **`delivered` is now set only by a send that actually succeeded.** The record
+  gained `attempted` (was a send tried), `probe` (`ok`/`failed`/`not-run`) and
+  `dry_run`.
+- **A quiet night probes send-free**, via the existing
+  `lib.pushover.ensure_credentials_or_raise()`. It proves the credentials exist
+  on the machine actually running the fleet, which is the live failure: they
+  resolve on the MacBook and are absent from the Mac Mini. It does not prove the
+  network or the Pushover API works, which is why the field is `probe` and never
+  `delivered`. Verified live on the MacBook: PASS, nothing sent.
+- **A dry run used to write no row at all**, so a skipped night and a night the
+  agent never ran looked identical. It now writes a self-identifying row
+  carrying neither a delivery nor a probe, so no count of healthy nights can
+  absorb it.
+- The run output distinguishes a failed *probe* from a failed *delivery*.
+- Tests 15 → 23 in `test_phase0_p0_fixes.py`, including one that runs seven
+  quiet nights with credentials and seven without and proves the two logs differ.
+
+Inert until the Mac Mini picks up the code. On that machine the first run should
+write `probe: failed`, which is the standing Pushover credentials incident
+appearing in the log for the first time rather than as a green row.
+
 ### Fixed — the knowledge index reached sessions two-thirds empty (2026-08-29)
 
 `.claude/hooks/session-start-inject-index.sh` had been injecting **190 of 218
