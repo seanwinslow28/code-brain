@@ -83,6 +83,7 @@ def send_push(
     priority: int = 0,
     retry: int | None = None,
     expire: int | None = None,
+    device: str | None = None,
     user_key: str | None = None,
     app_token: str | None = None,
 ) -> dict:
@@ -113,6 +114,11 @@ def send_push(
         data["retry"] = retry
     if expire is not None:
         data["expire"] = expire
+    if device:
+        # Target one device. Omitted, Pushover broadcasts to every device on
+        # the account — which for an emergency-priority drill means any of them
+        # may acknowledge, while only the registered one counts (eng-002.d160).
+        data["device"] = device
     try:
         resp = httpx.post(PUSHOVER_URL, data=data, timeout=_TIMEOUT)
         resp.raise_for_status()
