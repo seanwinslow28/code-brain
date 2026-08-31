@@ -134,3 +134,39 @@ def test_read_receipt_status_uses_receipts_api_and_app_token(
     assert result["acknowledged_by_device"] == "registered-device"
     assert mock_get.call_args.args[0].endswith("/receipts/receipt-123.json")
     assert mock_get.call_args.kwargs["params"] == {"token": "APP_TOKEN"}
+
+
+# ── eng-002.d160 — the drill must reach exactly one device ──────────────────
+# Without `device`, Pushover broadcasts to every device on the account. The
+# drill's own acknowledgment rule then contradicts its send: any device may
+# acknowledge, but only the registered one counts, so an ack from the wrong
+# device is a NEGATIVE row. Discovered 2026-08-31 when the Mini's registration
+# revealed two devices exist — `sean-phone` and `fleet-pager` (the Mini itself).
+
+@patch("lib.pushover.get_credential")
+@patch("lib.pushover.httpx.post")
+def test_send_push_targets_one_device_when_given(
+    mock_post: MagicMock, mock_get_cred: MagicMock
+) -> None:
+    mock_get_cred.side_effect = ["user-key", "app-token"]
+    mock_post.return_value = MagicMock(
+        status_code=200, json=MagicMock(return_value={"status": 1})
+    )
+    send_push(title="t", message="m", priority=2, retry=300, expire=900,
+              device="sean-phone")
+    assert mock_post.call_args.kwargs["data"]["device"] == "sean-phone"
+
+
+@patch("lib.pushover.get_credential")
+@patch("lib.pushover.httpx.post")
+def test_send_push_omits_device_when_not_given(
+    mock_post: MagicMock, mock_get_cred: MagicMock
+) -> None:
+    """Omitted, not empty — an empty `device` is not the same request to
+    Pushover as no `device` at all, and every other caller broadcasts."""
+    mock_get_cred.side_effect = ["user-key", "app-token"]
+    mock_post.return_value = MagicMock(
+        status_code=200, json=MagicMock(return_value={"status": 1})
+    )
+    send_push(title="t", message="m")
+    assert "device" not in mock_post.call_args.kwargs["data"]

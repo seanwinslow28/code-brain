@@ -202,6 +202,11 @@ def test_fake_transport_lifecycle_persists_qualified_registered_device_ack(
             "priority": 2,
             "retry": 300,
             "expire": 900,
+            # eng-002.d160 — the send names the same device the ack rule
+            # requires. Broadcasting let any device acknowledge while only the
+            # registered one qualified, so silencing the repeat on the nearest
+            # screen wrote a negative row and failed the drill.
+            "device": "registered-device",
         }
     ]
     assert sleeps == [5]
@@ -266,6 +271,12 @@ def test_meta_agent_report_contains_drill_block_before_delivery(tmp_path) -> Non
 
     config = load_config()
     config.vault_root = tmp_path
+    # State the precondition instead of inheriting it from whatever this
+    # machine's config.toml happens to say. Amended 2026-08-31 (eng-002.d160):
+    # this read the live file, so arming the drill on the Mini turned the
+    # production suite red for the whole B3 window.
+    config.agents = dict(config.agents)
+    config.agents["claim6_drill"] = {}
 
     report = meta_agent.generate_fleet_report(dry_run=True, config=config)
 
@@ -399,3 +410,30 @@ def test_reconciliation_does_not_let_malformed_rows_hide_a_missing_fire(
     )
 
     assert "DRILL RECORD READ FAILED" in block
+
+
+def test_drill_send_targets_only_the_registered_device(tmp_path) -> None:
+    """eng-002.d160, stated on its own so it cannot be lost in a shape diff.
+
+    Two devices exist on the live account — `sean-phone` and `fleet-pager`,
+    the Mac Mini that runs the fleet. An untargeted priority-2 drill repeats
+    on both until someone silences it, and acknowledging on the Mini would be
+    both a negative row and the exact circularity ADR-12 exists to avoid:
+    the machine under test certifying its own pager.
+    """
+    sent: list[dict] = []
+    log_path = tmp_path / "claim6-drills.jsonl"
+    run_test_drill(
+        _registered_config(acknowledged_device="sean-phone"),
+        log_path=log_path,
+        now=datetime(2026, 9, 3, 8, 15),
+        sender=lambda **kwargs: sent.append(kwargs)
+        or {"status": 1, "request": "r", "receipt": "rc"},
+        receipt_reader=lambda receipt: {
+            "acknowledged": 1, "acknowledged_at": 111,
+            "acknowledged_by_device": "sean-phone",
+        },
+        sleep=lambda _s: None,
+        writer_build="test-build",
+    )
+    assert sent[0]["device"] == "sean-phone"

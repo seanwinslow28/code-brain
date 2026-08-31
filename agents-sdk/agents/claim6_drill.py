@@ -136,6 +136,12 @@ def _run_lifecycle(
             priority=2,
             retry=config.retry_seconds,
             expire=config.expire_seconds,
+            # The send and the acknowledgment rule must name the same device.
+            # Broadcasting let any device acknowledge while only the registered
+            # one qualified, so the likeliest human action — silencing the
+            # repeat on whichever screen is nearest — wrote a NEGATIVE row and
+            # failed the drill. eng-002.d160.
+            device=config.acknowledged_device,
         )
         if response.get("status") != 1 or not response.get("request") or not response.get(
             "receipt"
