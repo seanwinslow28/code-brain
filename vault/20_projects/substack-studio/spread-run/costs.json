@@ -1,0 +1,104 @@
+[
+  {
+    "arm": "a04-gpt55-api",
+    "model": "openai/gpt-5.5",
+    "provider": "Azure",
+    "words": 764,
+    "seconds": 32.0,
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "cost_usd": 0
+  },
+  {
+    "arm": "a05-gemini31pro",
+    "model": "google/gemini-3.1-pro-preview",
+    "error": "HTTP 404: {\"error\":{\"message\":\"No endpoints found matching your data policy (Zero data retention). Configure: https://openrouter.ai/settings/privacy\",\"code\":404}}"
+  },
+  {
+    "arm": "a06-grok46",
+    "model": "x-ai/grok-4.6",
+    "provider": "xAI",
+    "words": 628,
+    "seconds": 193.6,
+    "prompt_tokens": 54265,
+    "completion_tokens": 10438,
+    "cost_usd": 0.170966
+  },
+  {
+    "arm": "a07-kimi-k3",
+    "model": "moonshotai/kimi-k3",
+    "provider": "Together",
+    "words": 0,
+    "seconds": 140.0,
+    "prompt_tokens": 57731,
+    "completion_tokens": 7065,
+    "cost_usd": 0
+  },
+  {
+    "arm": "a08-glm53",
+    "model": "z-ai/glm-5.3",
+    "provider": "DeepInfra",
+    "words": 0,
+    "seconds": 221.5,
+    "prompt_tokens": 54621,
+    "completion_tokens": 8000,
+    "cost_usd": 0.0975452
+  },
+  {
+    "arm": "a09-deepseek-v4",
+    "model": "deepseek/deepseek-v4-pro",
+    "provider": "BaseTen",
+    "words": 928,
+    "seconds": 18.1,
+    "prompt_tokens": 55081,
+    "completion_tokens": 2109,
+    "cost_usd": 0.10318026
+  },
+  {
+    "arm": "a10-mistral-lg",
+    "model": "mistralai/mistral-large-2512",
+    "provider": "Mistral",
+    "words": 670,
+    "seconds": 21.7,
+    "prompt_tokens": 56247,
+    "completion_tokens": 877,
+    "cost_usd": 0.029439
+  },
+  {
+    "arm": "a05-gemini31pro",
+    "model": "google/gemini-3.1-pro-preview",
+    "provider": "Google",
+    "words": 775,
+    "seconds": 37.7,
+    "prompt_tokens": 56662,
+    "completion_tokens": 7096,
+    "cost_usd": 0.198476,
+    "reasoning_chars": 7847,
+    "finish": "stop",
+    "zdr": false
+  },
+  {
+    "arm": "a07-kimi-k3",
+    "model": "moonshotai/kimi-k3",
+    "provider": "Fireworks",
+    "words": 1012,
+    "seconds": 268.8,
+    "prompt_tokens": 54215,
+    "completion_tokens": 16076,
+    "cost_usd": 0.6056775,
+    "reasoning_chars": 63933,
+    "finish": "stop"
+  },
+  {
+    "arm": "a08-glm53",
+    "model": "z-ai/glm-5.3",
+    "provider": "DeepInfra",
+    "words": 0,
+    "seconds": 1125.4,
+    "prompt_tokens": 54621,
+    "completion_tokens": 32000,
+    "cost_usd": 0.1935452,
+    "reasoning_chars": 135628,
+    "finish": "length"
+  }
+]
