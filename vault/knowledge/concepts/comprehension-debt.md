@@ -2,10 +2,10 @@
 title: "Comprehension Debt"
 type: concept
 sources:
-  - knowledge/connections/the-paradox-of-agentic-efficiency-vs-creative-authority.md
+  - knowledge/concepts/comprehension-debt.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ Comprehension debt is the accumulation of unverified or poorly understood artifa
 
 ## Context
 
-Sean's job hunt and creative studio workflows rely on high-fidelity artifacts; if his vault accumulates low-comprehension entries, his ability to leverage this data for interviews or creative projects degrades rapidly.
+Sean's job hunt and creative studio workflows rely on high-fidelity artifacts; if his vault accumulates low-comprehension entries, his ability to leverage this data for interviews or creative projects degrades rapidly. The primary risk is that the vault becomes a repository of 'slop'—content that looks structured but lacks the semantic density required for strategic decision-making.
 
 ## Evidence
 

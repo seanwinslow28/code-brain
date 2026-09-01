@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/control-architecture-as-evangelism.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-This mechanism describes a strategic pivot where professional authority is derived not from accessible creative techniques, but from the complexity of the underlying engineering infrastructure. By teaching a repeatable system framework that others cannot easily replicate, Sean establishes a defensible moat based on the difficulty of maintaining complex agent fleets rather than the rarity of creative insight. This approach evangelizes the necessity of engineering rigor in creative domains where it is typically absent, redefining competence as the ability to build and maintain these systems.
+This mechanism transforms the structural design of information verification into a public marketing asset by making the underlying control logic visible and auditable. When an organization publishes its scoring methodologies, rejection rates, and capacity metrics, it forces competitors to adopt similar transparency or appear opaque by comparison. The architecture itself becomes the primary signal of competence, attracting users who prioritize epistemic integrity over mere convenience because they can verify the system's claims against raw data rather than trusting marketing copy.
 
 ## Context
 
-Sean must reframe his Substack curriculum to teach system architecture rather than prompt tutorials, positioning himself as a thought leader in the engineering of creative workflows. This strategy leverages his unique position at the intersection of creative production and agentic infrastructure to signal authority in a market saturated with generic AI outputs.
+Sean is leveraging this to position his future company as the authority on truth in agentic commerce analysis. By publishing the 'leading-indicators scoreboard' and the 'Odlyzko check,' he creates a durable content asset that generates return traffic and establishes a new standard for evaluating AI capabilities, effectively turning his infrastructure into a competitive moat.
 
 ## Evidence
 
-> The divergence: stop competing on techniques the reader can already get free, and compete on the one thing almost nobody brings to creative AI, engineering discipline, by teaching a repeatable system framework.
+> The leading-indicators scoreboard creates return traffic. A dated, periodically updated scoreboard ('has anyone disclosed ACP GMV yet?') is durable content with a built-in reason to revisit.
 
-> The consequence is a fundamental redefinition of professional authority, where the ability to build and maintain complex agent fleets becomes the primary signal of competence.
+> Whatever the Sept-1 pick, the company's identity is evidence-grade verification of the agent web.
 
 ## Examples
 
-- Publishing a curriculum that details the architecture of a 17-agent fleet rather than individual prompt recipes.
-- Demonstrating how engineering constraints prevent 'slop' in creative outputs, thereby establishing trust in the system's reliability.
+- Publishing the 'capacity-without-utilization table' and 'growth-claim audit' as part of the Odlyzko check to demonstrate discipline.
+- Using the 'six leading indicators as a standing public scoreboard' to force market participants to disclose data they might otherwise hide.
 
 ## Related Concepts
 
-[[The Taste-Fidelity Decoupling in Creative Production]] [[Supervision as the New AI Edge]]
+[[Supervision as the New AI Edge]] [[Public Benchmarking Infrastructure]] [[Demonstration Over Declaration]]

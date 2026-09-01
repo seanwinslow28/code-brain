@@ -2,31 +2,33 @@
 title: "Constraint-First Automation vs. General Efficiency"
 type: concept
 sources:
-  - knowledge/concepts/constraint-first-automation-vs-general-efficiency.md
+  - 20_projects/research/2026-08-29-software-factory-lit-delta/sweep-companies.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-This principle dictates that system health is determined solely by the throughput of the current limiting stage, not by the aggregate activity of all stages. It requires identifying the specific constraint and subordinating all other processes to its relief, rather than optimizing for uniform efficiency across the entire pipeline. When automation ignores constraints, it produces output that cannot be consumed, creating inventory waste and masking the true state of the system. The fleet is healthy only if it increases throughput at the current constraint.
+Reliability in agentic systems is achieved by placing LLMs into contained boxes with strict deterministic boundaries, rather than optimizing for general-purpose flexibility. By pre-warming environments, capping CI iterations, and using curated tool subsets, the system prevents error amplification. This approach treats constraints not as limitations on capability, but as essential components of a robust production pipeline that compounds reliability through confinement.
 
 ## Context
 
-Sean's agent fleet often operates under a general efficiency model, attempting to maintain all components (resume, portfolio, applications) simultaneously. This approach fails during critical phases like interview preparation, where the bottleneck shifts and requires immediate reallocation of resources away from non-constraining activities.
+Sean's 'Fleet Memory Index' and 'vault_synthesizer' runs show varying success rates based on model capacity and context management. Applying constraint-first principles—such as capping iterations and pre-gathering context—can stabilize his automated synthesis processes, reducing the 'rejected_count' and improving the consistency of his knowledge vault updates.
 
 ## Evidence
 
-> A pipeline is not a feed; it is a sequence of conversions with one limiting stage.
+> Putting LLMs into contained boxes compounds reliability
 
-> The fleet is healthy only if it increases throughput at the current constraint.
+> Standardized on Cursor's rule format, synced across Claude Code and minions
+
+> diminishing marginal returns if an LLM is running against indefinitely many rounds
 
 ## Examples
 
-- Subordinating portfolio production efforts to interview drills when interview conversions drop, even if the portfolio is incomplete.
-- Identifying the weekly bottleneck and tracking conversion rates at each stage rather than monitoring the uptime of application feeds.
+- Stripe uses a 'smaller box' subset of tools for agents to reduce errors compared to the full 500-tool Toolshed.
+- Runs on isolated devboxes pre-warmed in ~10 seconds with local linting less than five seconds.
 
 ## Related Concepts
 
-[[Throughput vs. Activity Illusion in Job Hunt Operations]] [[Job Hunt as Sales Pipeline]]
+[[Context Management as a Bottleneck]] [[The Calibration Bottleneck in Scalable Creative Production]]

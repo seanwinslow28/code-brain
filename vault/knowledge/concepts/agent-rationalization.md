@@ -2,31 +2,31 @@
 title: "Agent Rationalization"
 type: concept
 sources:
-  - 20_projects/substack-studio/06-stop-building-agents/post.md
+  - 20_projects/substack-studio/what-are-these-guys-doing/draft.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-The cognitive dissonance that arises when an automated system produces a plausible but factually nonexistent entity, revealing that the agent is solving for surface-level coherence rather than grounding in reality. This phenomenon occurs because the model optimizes for linguistic probability over ontological verification, effectively hallucinating infrastructure to satisfy the prompt's structural expectations. The result is a 'beautiful answer' that feels correct until the third row of data exposes the fabrication, creating a specific type of trust erosion where the user realizes their tool has been lying by omission.
+The process of systematically dismantling an agentic infrastructure by auditing each component's actual output against its intended purpose, then removing those that fail to produce unique semantic value. This mechanism is driven by the realization that adding more agents increases complexity and cost without improving insight, leading to a 'cutting' phase where only the essential, high-signal components are retained. It is a corrective action taken when the aggregate system fails to meet the user's cognitive needs.
 
 ## Context
 
-This matters to Sean because his entire workflow relies on local agents (like Qwen) performing deep research without human oversight. When these agents invent tools like 'PureMCPClient,' they don't just fail; they actively misdirect future architectural decisions, forcing Sean to audit not just the output but the very existence of the entities his fleet claims to use.
+Sean performed this rationalization after discovering his ten-agent fleet was producing noise. He cut agents one by one, retaining only those that provided genuine utility, eventually building a new synthesizer focused on specific insight generation rather than broad automation. This represents a shift from quantity of automation to quality of synthesis.
 
 ## Evidence
 
-> I thought *huh, I've never heard of PureMCPClient,* and then, a half-second later, with the unmistakable cold-water feeling of a man who has been gently lied to by his own infrastructure: *PureMCPClient does not exist.*
+> So I put the kibosh on everything and went back through the list with Claude, cutting them, cutting them, cutting them. We need this. We don't need that.
 
-> There is a specific flavor of dread that arrives when something you built hands you a beautiful answer to a question you didn't realize it couldn't answer.
+> Eight days after the cull I built my own vault synthesizer to finally get the agentic idea factory.
 
 ## Examples
 
-- The research agent returned a survey of tools connecting AI agents to software, but the primary tool listed was a fictional entity invented by the model to fill a gap in its training data.
-- Sean initially felt pride at the comprehensive report before realizing the core subject of the report was a hallucination.
+- Ten agents, eight of them disabled, and the judgment in the end was mine
+- I had planned way too far ahead and overshot, off the back of a decent amount of research that led me astray
 
 ## Related Concepts
 
-[[Silent Failure Propagation in Agent Fleets]] [[LDR Grounding Collapse]]
+[[The Paradox of Agentic Efficiency vs. Creative Authority]] [[Constraint-First Automation vs. General Efficiency]]

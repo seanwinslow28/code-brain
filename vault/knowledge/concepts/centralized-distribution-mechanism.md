@@ -2,32 +2,30 @@
 title: "Centralized Distribution Mechanism"
 type: concept
 sources:
-  - health/tier-c-soak/2026-05-26/2026-05-21-topic-14-pi-extensions-plugins-catalog-in-2026-enumerate-eve.md
+  - knowledge/concepts/centralized-distribution-mechanism.md
 tags: [auto-generated, phase-6]
-created: 2026-05-28
-updated: 2026-05-28
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-A control pattern where a single administrative entity creates a curated marketplace to distribute plugins to an organization, allowing for version control and automatic overwriting of existing entries. This mechanism enforces consistency and reduces discovery friction by providing a unified surface for plugin management, contrasting sharply with decentralized models. The system relies on the authority of the marketplace owner to validate and propagate updates across all connected clients.
+This invariant posits that technological revolutions, despite their initial promise of decentralization or open access, inevitably consolidate value and control through a few critical chokepoints. These chokepoints emerge not as accidental failures but as necessary solutions to coordination problems like trust, settlement, and identity verification. The 'open mesh' is structurally unstable because the costs of maintaining trust in a frictionless environment exceed the benefits, leading to the rise of 'Merchant of Record' or aggregator layers that capture the majority of the surplus.
 
 ## Context
 
-Sean utilizes Claude Cowork for organizational plugin management. Recognizing this centralized model highlights the contrast with his personal infrastructure, where he must manually curate and integrate tools, affecting his approach to scaling and maintaining his personal knowledge vault.
+Sean's startup thesis relies on the Agentic-to-Agent (A2A) economy. Understanding this mechanism is critical because it predicts that his platform will not be a frictionless open mesh but must integrate with or become one of the few 'aggregator/merchant-of-record chokepoints' like Cloudflare or Coinbase. It reframes his competitive strategy from building an open protocol to securing a seat at the table of centralized distributors.
 
 ## Evidence
 
-> Plugin marketplaces allow Team and Enterprise plan owners to distribute curated plugins to everyone in the organization through Claude Cowork.
+> machine payments become real but consolidate through a few aggregator/merchant-of-record chokepoints — Cloudflare, Coinbase, the model providers — not a frictionless open mesh
 
-> If you upload a plugin with the same name as an existing one, it overwrites the previous version automatically—no need to delete the old one first.
+> Cloudflare's design concedes identity-first and re-creates the aggregator as 'Merchant of Record'
 
 ## Examples
 
-- Creating a marketplace to add plugins
-- Distributing curated plugins to everyone in the organization
-- Automatic overwriting of previous versions upon upload
+- The prediction that 'volume, when it comes, routes through exactly the rails vendors he already decided to complement rather than fight' suggests a strategic pivot from fighting incumbents to leveraging their infrastructure.
 
 ## Related Concepts
 
-[[Vault as Agent Infrastructure]] [[Automation Pipeline]]
+[[Decentralized Ecosystem Invariant]] [[Liability Routing in Agentic Product Design]]

@@ -2,31 +2,31 @@
 title: "Context Compounding"
 type: concept
 sources:
-  - knowledge/concepts/context-compounding.md
+  - knowledge/connections/local-model-viability-depends-on-external-memory-anchoring.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-Long-horizon autonomous tasks suffer from structural context decay where accumulated irrelevance and contradictions silently degrade plan quality over time. This creates a hard limit on agent performance that cannot be solved by larger models alone, but requires explicit scope constraints to match the honest capacity of the context window. Agents must implement active pruning or summarization mechanisms to prevent this silent degradation from poisoning downstream decisions.
+Context compounding is the exponential degradation of semantic integrity that occurs when an agent fails to retain prior instructions or outputs, forcing it to repeat work or contradict itself. This mechanism creates a feedback loop where each error increases the cognitive load on subsequent steps, leading to rapid divergence from the original intent. It is a primary driver of rejection in automated synthesis pipelines, as the system loses its anchor to the initial prompt.
 
 ## Context
 
-Sean's personal knowledge vault and fleet memory index rely on accurate context retention across thousands of runs. Understanding context decay helps him design better retrieval strategies and manage the 'poison' that accumulates in long-running agent chains, ensuring his automated systems remain reliable rather than drifting into confident falsity.
+For Sean's creative-studio workflows, understanding context compounding explains why long-running agents often produce low-quality outputs despite high computational power. Addressing this requires explicit memory management rather than just increasing model size, which is a key lesson from his prior runs with qwen3-14b versus qwen3.6-35b-a3b-32k.
 
 ## Evidence
 
-> Over long tasks, context accumulates irrelevance, contradictions, and poison; plan quality degrades with horizon length.
+> when the model starts contradicting itself or it has to redo the work because it forgot it did that task in the first place or it starts to drift from your questions because it forgot them
 
-> Scope harness tasks to what context can hold honestly — long-horizon autonomy claims deserve your M1 skepticism about stocks (context is a stock; its quality drains).
+> There is a critical tension between the desire to use cost-effective local models and their inherent inability to maintain long-horizon coherence without external support.
 
 ## Examples
 
-- RAG as a system, not a feature. Retrieval-augmented generation bolts a retrieval loop onto generation.
-- Its failure modes are systemic: incomplete or contradictory context in → confident falsity out.
+- A synthesizer agent forgetting its initial constraints after processing 50 clusters.
+- An agent contradicting its own previous output due to context window overflow.
 
 ## Related Concepts
 
-[[The Context-Memory Bottleneck in Personalized AI]] [[Silent Decay in Strategic Pipelines]]
+[[Harness Engineering Invariant]] [[Memory Rot and Lifecycle Management]]

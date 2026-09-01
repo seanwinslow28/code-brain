@@ -2,15 +2,15 @@
 title: "SRE Error Budget for Agents"
 type: concept
 sources:
-  - knowledge/expansions/connections/cross-domain-bridging-through-agent-health-monitoring.md
+  - knowledge/concepts/sre-error-budget-for-agents.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-An SLO-driven enforcement policy that treats agent reliability as a finite resource rather than a binary health state. When the error budget is exhausted, the system triggers specific remediation actions—such as freezing new agent deployments or degrading to minimal output—rather than merely logging failures. This shifts the operational focus from passive monitoring of uptime to active prioritization of cognitive utility against infrastructure cost.
+This mechanism functions as an SLO-driven enforcement policy that treats agent reliability as a finite resource rather than a binary health state. When the error budget is exhausted, the system triggers specific remediation actions—such as freezing new agent deployments or degrading to minimal output—rather than merely logging failures. This shifts the operational focus from passive monitoring of uptime to active prioritization of cognitive utility against infrastructure cost.
 
 ## Context
 

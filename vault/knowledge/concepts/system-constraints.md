@@ -2,25 +2,25 @@
 title: "System Constraints"
 type: concept
 sources:
-  - knowledge/connections/probabilistic-reality-vs-deterministic-expectation.md
+  - knowledge/concepts/system-constraints.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-System constraints refer to the structural boundaries and feedback loops that define how a probabilistic model interacts with its environment, distinct from the use case itself. These constraints act as a supervisory layer that enforces consistency by limiting the output space of the model, effectively creating a deterministic wrapper around non-deterministic logic. The invariant here is that reliability is not a property of the model alone, but of the constraint architecture surrounding it.
+System constraints function as a supervisory architecture that enforces consistency by limiting the output space of a probabilistic model, effectively creating a deterministic wrapper around non-deterministic logic. This mechanism shifts the locus of reliability from the model's internal weights to the structural boundaries and feedback loops defined in the surrounding environment. The invariant here is that reliability is not an inherent property of the model alone, but a product of the constraint architecture that actively hides variability from the user.
 
 ## Context
 
-Sean needs to articulate how he designs these constraints in his portfolio projects to show he can manage 'probabilistic' products effectively. This moves his narrative from simply using AI tools to engineering reliable systems that hide their complexity.
+Sean needs to articulate how he designs these constraints in his portfolio projects to show he can manage 'probabilistic' products effectively. This moves his narrative from simply using AI tools to engineering reliable systems that hide their complexity, which is critical for demonstrating senior-level product management skills in job-hunt-2026.
 
 ## Evidence
 
-> Unlike deterministic software, AI models are probabilistic, constantly changing based on live datasets and environment loops.
+> System constraints refer to the structural boundaries and feedback loops that define how a probabilistic model interacts with its environment, distinct from the use case itself.
 
-> System constraints in AI product design refer to the structural boundaries and feedback loops that define how a probabilistic model interacts with its environment.
+> These constraints act as a supervisory layer that enforces consistency by limiting the output space of the model, effectively creating a deterministic wrapper around non-deterministic logic.
 
 ## Examples
 

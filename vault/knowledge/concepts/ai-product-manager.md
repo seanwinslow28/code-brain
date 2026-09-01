@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/ai-product-manager.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean is navigating a 2026 job hunt where distinguishing himself as a strategic b
 
 ## Related Concepts
 
-[[Product Management]] [[Liability Routing in Agentic Product Design]]
+[[Probabilistic Reality vs. Deterministic Expectation]] [[Liability Routing in Agentic Product Design]]

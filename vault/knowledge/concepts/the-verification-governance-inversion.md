@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/the-verification-governance-inversion.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
