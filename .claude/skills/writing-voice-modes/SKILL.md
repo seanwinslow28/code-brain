@@ -40,6 +40,13 @@ Follow the References section's reading rules — they are conditional (which fi
 
 ### Step 3 — Compose
 
+> **Content-machine scope change (2026-08-31).** The machine's Stage 3 no longer loads this file:
+> its shaper drafts in a clean context (transcript + corpus + `references/voice-samples.md` +
+> reference universe) under a claims-locked/texture-free law, ratified on the rules-off
+> experiment's 86% survival result (`content-machine/SKILL.md`, The shaping context). This
+> workflow now governs **standalone** voice asks only. The paragraph below describes the machine's
+> retired all-words law and is kept for the archaeology.
+
 **Shaping is not transcription. Use the whole permitted range.** In a content-machine run the law
 says the transcript is the only source of *words*; it explicitly permits **cut, compress, reorder,
 re-punctuate**. Run #2 (2026-08-28) reproduced the author's answers nearly whole, in roughly the

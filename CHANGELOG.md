@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — content machine re-founded on the rules-off experiment (2026-08-31)
+
+Sean's run-#3 verdict ("you're summarizing and re-reading my brain dump notes back
+to me") triggered a research pause: a Lieberman source re-read, a field survey of
+shipped AI writing systems plus the instruction-count compliance literature, and
+craft research on the brain-dump-to-prose gap (notes at
+`vault/20_projects/research/2026-08-31-*`). All three legs converged: rules belong
+after the draft, not in the drafting context, and the origin law's cost was in
+banning texture while its value was in locking claims. A controlled A/B on
+transcript #2 (clean-context arms, no rule files; Arm B adding one
+claims-locked/texture-free rule) ended with Sean hand-rewriting Arm B at **86%
+sentence survival vs the rule-stack machine's best 64%** (record:
+`vault/20_projects/substack-studio/rules-off-experiment/session-record.md`).
+
+Ratified and applied:
+
+- `content-machine/SKILL.md` — the law re-scoped (substance transcript-locked,
+  texture is the writer's job), a clean shaping-context spec (fresh subagent;
+  roster/anti-patterns/licensing matrix/contracts banned from drafting context),
+  origin gate post-draft advisory on the claims tier, hand-rewrite stays
+  mandatory, and a new mechanical-only proofread step on Sean's final.
+- `writing-voice-modes/SKILL.md` — scope note: no longer the machine's Stage 3;
+  standalone voice work only; remains custodian of `voice-samples.md`.
+- `vault/20_projects/substack-studio/CLAUDE.md` §1 — the sequential five-skill
+  chain retired to post-draft advisory gates.
+- Run-#4 ledger entries (L4-01…L4-06) recorded; lessons remain the only rule
+  layer that grows.
+
 ### Added — ADR-12 scheduled claim-6 drill (2026-08-30)
 
 - Added a default-unarmed monthly 08:15 launchd drill runner with PPID, label,

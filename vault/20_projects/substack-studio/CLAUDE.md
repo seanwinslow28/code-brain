@@ -10,7 +10,9 @@ The operating manual for any session working in this folder. Rules here are stan
 
 ## 1. The voice chain is mandatory
 
-Every post, the manifesto, and the About page run through the chain, in this order. No skipping a stage, no reordering.
+**Amended 2026-08-31, ratified by Sean on the rules-off experiment (86% hand-rewrite survival vs the chain-machine's best 64%; record: `rules-off-experiment/session-record.md`).** Drafting now runs through the content machine's clean-context shaper (`content-machine/SKILL.md`, "The shaping context"): transcript + corpus + voice-samples + reference universe, one claims-locked/texture-free law, no rule files in the drafting context. The chain skills below are no longer sequential drafting stages; they run **post-draft, advisory** — value gate, structure read, critique, humanity scrub — and Sean's hand-rewrite plus a mechanical-only proofread close every piece. Do not reintroduce the rule stack into the drafting context.
+
+The retired sequential order, for the archaeology:
 
 `substack-value-engine` → `storytelling-architecture` → `writing-voice-modes` (Sean Mode) → `writing-critique` → `writing-humanity-pass`
 

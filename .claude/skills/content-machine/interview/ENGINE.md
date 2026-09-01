@@ -50,6 +50,8 @@ invites him to react to your writing instead of correcting his facts. Then ask e
 
 Record corrections verbatim under `CORRECTIONS`. They outrank the answers wherever they conflict.
 
+**Dictated answers: the read-back also catches transcription errors.** A word the microphone got wrong is not a word he said, but the transcript records it as his and the origin gate will clear it as traced. This is the same class of leak as the interviewer's own nouns reaching the draft, arriving by a different door. Watch technical vocabulary hardest — tool names, model names and commands are what generic dictation mangles, and they are exactly the atoms the gate treats as claims. Do not silently correct one; surface it, because a mis-transcription that changes the meaning is a correction only he can make.
+
 **Read back the order, not only the facts.** The first run's read-back checked every fact and still
 missed that the draft had put "two weeks of that" after the check-in scene, which asserts he checked
 repeatedly for two weeks. He checked once, after two weeks of silence. Every word was his; the
