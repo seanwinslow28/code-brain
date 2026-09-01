@@ -2,33 +2,31 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/the-decoupling-of-technical-success-from-strategic-progress.md
+  - knowledge/connections/silent-decay-in-strategic-pipelines.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-This mechanism refers to the way failures in one part of an agentic system propagate invisibly through dependencies, maintaining a facade of operational health while degrading overall utility. When critical components like daily note generators fail silently, downstream agents inherit stale or missing context, yet the monitoring layer continues to report success because individual process executions remain technically valid. This creates a compounding error state where the system appears functional but is strategically broken.
+This mechanism describes how localized infrastructure failures cascade into systemic semantic decay without triggering explicit error states. When critical nodes go offline, dependent agents continue processing with stale or partial data, propagating the deficiency through subsequent synthesis steps. The failure is 'silent' because the orchestration layer interprets protocol completion as success, masking the loss of informational depth.
 
 ## Context
 
-Sean's morning routine and job hunt automation rely on continuous data flow between agents. A silent failure in one agent can disrupt the entire day's strategic progress without triggering any alerts, forcing manual intervention to restore functionality.
+Sean's fleet status reports show 'healthy' agents even when key infrastructure components are down, leading to a gradual erosion of his vault's strategic utility for job hunting and creative work.
 
 ## Evidence
 
-> The daily-driver morning agent failed due to API connection errors, preventing the critical routine 'morning' sync and daily note creation.
+> When critical infrastructure components like Alienware and ComfyUI go offline, the resulting gap in data coverage is not immediately visible in the daily fleet status reports
 
-> deep-researcher runs maintained the necessary background capability for knowledge synthesis and article capture.
-
-> The dependency is invisible in each agent's source.
+> This creates a silent decay in the strategic pipelines for job hunting and creative work, as the agents continue to report 'success' based on incomplete or stale inputs
 
 ## Examples
 
-- Morning agent failure preventing daily note creation while other agents continue running normally.
-- Background processes maintaining capability despite critical routine failures.
+- The consequence is a gradual erosion of the vault's utility, where the user may not realize the depth of the degradation until a critical failure occurs
+- The tension lies between the orchestration layer's perception of health and the execution layer's physical reality
 
 ## Related Concepts
 
-[[Operational Uptime vs. Cognitive Utility Tension]] [[The Illusion of Health in Autonomous Systems]]
+[[The Illusion of Health in Autonomous Systems]] [[Operational Uptime vs. Cognitive Utility Tension]]

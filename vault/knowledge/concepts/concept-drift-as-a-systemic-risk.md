@@ -4,23 +4,23 @@ type: concept
 sources:
   - knowledge/concepts/concept-drift-as-a-systemic-risk.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-Concept drift is the phenomenon where the statistical relationship between input variables and the target output changes over time, rendering historical models obsolete. Unlike data drift, which is merely a shift in input distribution, concept drift implies that the fundamental rules governing the domain have shifted. This requires active monitoring of model performance against ground truth, not just input validation, to detect when the system's internal logic no longer matches reality.
+Concept drift represents a fundamental shift in the causal relationship between input variables and target outputs, rendering historical predictive models obsolete not because the data changed, but because the underlying rules of the domain have altered. Unlike simple data drift, which is merely a statistical shift in input distribution, concept drift implies that the system's internal logic no longer matches reality, requiring active monitoring of performance against ground truth rather than just input validation. This phenomenon creates a hidden risk where systems appear operational while their predictive validity decays silently, leading to strategic errors when past success patterns are assumed to continue without adjustment.
 
 ## Context
 
-In Sean's job hunt and product strategy, market conditions (e.g., AI tooling standards, hiring criteria) are shifting rapidly. Assuming past success patterns will continue without adjusting for these drifts leads to strategic errors. Recognizing this allows him to pivot his approach before his 'model' of the market becomes invalid.
+In Sean's job hunt and product strategy, market conditions such as AI tooling standards and hiring criteria are shifting rapidly. Assuming past success patterns will continue without adjusting for these drifts leads to strategic errors because the 'model' of the market becomes invalid before it is detected. Recognizing this allows him to pivot his approach before his historical data loses its predictive power.
 
 ## Evidence
 
-> Data drift is a shift in input distribution; concept drift is a shift in the relationship between inputs and outputs
+> Concept drift implies that the fundamental rules governing the domain have shifted, requiring active monitoring of model performance against ground truth, not just input validation, to detect when the system's internal logic no longer matches reality.
 
-> Concept drift in housing markets and the reinforcing loop of adverse selection
+> Data drift is a shift in input distribution; concept drift is a shift in the relationship between inputs and outputs.
 
 ## Examples
 

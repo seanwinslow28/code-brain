@@ -2,10 +2,10 @@
 title: "The Masking Effect of Structural Completeness in Failed Automation"
 type: concept
 sources:
-  - knowledge/connections/the-trap-of-structural-completeness-in-failed-automation.md
+  - knowledge/concepts/the-masking-effect-of-structural-completeness-in-failed-automation.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition

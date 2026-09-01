@@ -2,31 +2,31 @@
 title: "Friction-Killing Wedge"
 type: concept
 sources:
-  - 20_projects/substack-studio/playbook/tool-shipping-playbook.md
+  - knowledge/concepts/friction-killing-wedge.md
 tags: [auto-generated, phase-6]
-created: 2026-06-23
-updated: 2026-06-23
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-A strategic positioning mechanism where defensibility is derived not from feature breadth but from the explicit elimination of a single, high-friction point that competitors ignore or treat as table stakes. This wedge requires identifying what nobody else does and leading every artifact with that specific constraint-killing capability, rather than competing on general utility. It functions as a filter against 'feature dumps,' ensuring that the tool exists solely because it killed a specific friction that others leave intact.
+A structural advantage where a protocol or platform wins not by superior technical specifications, but by lowering the marginal cost of participation for creators and users. This wedge operates through three mechanisms: removing licensing barriers that create trust deficits, embedding navigation directly into content rather than separating it via external menus, and providing a graphical interface that reduces cognitive load compared to text-only alternatives. The winner exploits the asymmetry between 'free/available' and 'expensive/restricted' to achieve critical mass before incumbents can leverage committee-based standardization.
 
 ## Context
 
-In the crowded MCP and creative tool market, Sean cannot compete on generic capabilities like 'build a skill' or 'interview me.' He must identify a narrow, high-value gap—such as 'learn-from-what-you-reject' or 'works-with-no-corpus'—to create a defensible niche that signals deep judgment rather than just technical execution.
+Sean is building agent fleets and protocols (MCP, A2A) in a market where incumbent vendors (Anthropic, OpenAI) control the underlying models. Understanding how TCP/IP and HTTP won against OSI and Gopher reveals that 'running code' and open access beat committee consensus and licensing restrictions. This informs his strategy for Superuser Pack: he must prioritize immediate utility and open interoperability over perfect governance or closed ecosystems to avoid the fate of Gopher.
 
 ## Evidence
 
-> Your defensibility is the thing nobody else does. For VoicePrint it was learn-from-what-you-reject + works-with-no-corpus + honest-loop + local/free.
+> On one side you have something that's free, available, you just have to load it. And on the other side... expensive.
 
-> every tool exists because it killed a specific friction. If you can't name the one friction in a sentence, it's a feature dump.
+> HTML let document creators place links within documents, whereas Gopher provided pointers to documents through menu files, which existed separate from the documents themselves.
 
 ## Examples
 
-- Assuming obvious framings like 'write like me' are table stakes owned by others like Skill Creator or Grill Me.
-- Mining gaps with the blunt prompt: 'From the research — not from what I'm telling you — what are the loudest unmet needs and the gaps nobody's filling?'
+- TCP/IP won because ARPA subsidized implementations and forced adoption via the 'flag day' transition, creating a running code base that OSI's committee process could not match.
+- Gopher died after the University of Minnesota announced licensing fees, which destroyed developer trust despite the protocol's technical merits.
 
 ## Related Concepts
 
-[[Market Positioning]] [[Competitive Analysis]]
+[[Decentralized Ecosystem Invariant]] [[Control Architecture as Evangelism]]

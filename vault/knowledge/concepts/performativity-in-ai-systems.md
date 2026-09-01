@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/performativity-in-ai-systems.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-Performativity describes a dynamic where a model's outputs actively influence the very reality it attempts to measure or predict, creating a self-reinforcing cycle of homogenization. The system does not just observe the world; it shapes it by restricting future data collection to its own biased outputs. This creates a closed loop where diversity is lost, and the system becomes increasingly detached from external truth.
+This mechanism describes a dynamic where a model's outputs actively influence the very reality it attempts to measure or predict, creating a self-reinforcing cycle of homogenization. The system does not just observe the world; it shapes it by restricting future data collection to its own biased outputs. This creates a closed loop where diversity is lost, and the system becomes increasingly detached from external truth.
 
 ## Context
 

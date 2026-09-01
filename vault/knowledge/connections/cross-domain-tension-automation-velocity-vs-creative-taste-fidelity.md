@@ -5,8 +5,8 @@ connects:
   - The Taste-Throughput Trade-off in Agentic Synthesis
   - Harness Engineering Invariant
   - Silent Decay in Strategic Pipelines
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Synthesis

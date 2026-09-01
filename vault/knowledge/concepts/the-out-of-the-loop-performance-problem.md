@@ -2,15 +2,15 @@
 title: "The Out-of-the-Loop Performance Problem"
 type: concept
 sources:
-  - knowledge/connections/operator-ground-truth-vs-stranger-calibration.md
+  - knowledge/concepts/the-out-of-the-loop-performance-problem.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-This mechanism describes the epistemic asymmetry where an operator's internal verification loop renders their own competence invisible to external observers. Because the operator possesses ground truth, they cannot simulate the stranger's lack of context, leading to a structural blind spot in interface design. The consequence is that systems optimized for operator efficiency often fail to provide the necessary signals for user trust, creating a gap between actual reliability and perceived reliability.
+This mechanism describes an epistemic asymmetry where an operator's internal verification loop renders their own competence invisible to external observers. Because the operator possesses ground truth, they cannot simulate the stranger's lack of context, leading to a structural blind spot in interface design. The consequence is that systems optimized for operator efficiency often fail to provide the necessary signals for user trust, creating a gap between actual reliability and perceived reliability.
 
 ## Context
 

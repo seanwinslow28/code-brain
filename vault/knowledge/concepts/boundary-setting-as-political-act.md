@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/boundary-setting-as-political-act.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
@@ -21,8 +21,6 @@ This matters to Sean because his AI PM curriculum explicitly warns that teams wh
 > Every map has a boundary: what's inside (you model it) and outside (you treat it as given).
 
 > Two failure modes: Too narrow — Unity's boundary excluded its own developer ecosystem's feedback loops... the pricing model was modeled in a vacuum, the retaliation was not.
-
-> Too wide — a map of everything persuades no one and predicts nothing.
 
 ## Examples
 
