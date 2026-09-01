@@ -10,6 +10,19 @@ it rather than re-deriving it.
 
 ---
 
+## What a contract is, after 2026-08-31
+
+The rules-off re-scope changed **who reads this file**, and every contract in this lane inherits the
+change. A contract is read by the **orchestrator**: it shapes the TOPIC CARD, tells the interview how
+far it has to reach, and supplies the post-draft check. **It is never loaded into the shaping
+context** — the drafting subagent gets the transcript, the corpus, the voice samples, the reference
+universe and the do-not-promote list, and nothing else (`SKILL.md`, "The shaping context").
+
+So a contract's **licensed-move roster is a statement of the register this medium lands in**, for the
+orchestrator and for the post-draft read. It is not a checklist handed to a drafter, and it is not a
+compliance target. Nothing here is a drafting-time constraint any more; the deliverables, the format
+bounds and the negative specimens are what the orchestrator and the reader hold the piece against.
+
 ## The seam this lane exists to hold
 
 **The transcript owns the claims. Convention owns the sentences.**
@@ -80,4 +93,7 @@ explanation. The work stands on its own, and the reader is deciding about the wo
   [L8](https://github.com/seanwinslow28/code-brain/issues/158). Where a Professional medium has a
   scan pattern that matters — and most do — it belongs in that contract as a **format** rule, stated
   as what the reader sees in the first few seconds, not as the lane test under another name.
-- **The reply-hook memo.** These documents are not conversation surfaces.
+- **The reply-hook memo.** These documents are not conversation surfaces — **except LinkedIn**,
+  which has comments and an anatomy that ends in a CTA. `linkedin.md` adopts the Expressive
+  lane's memo by name (wave 2, [#171](https://github.com/seanwinslow28/code-brain/issues/171)).
+  Adopting an advisory artifact adds something the lane omitted; it deletes nothing.

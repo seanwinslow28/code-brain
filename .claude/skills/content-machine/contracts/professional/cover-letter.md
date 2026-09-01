@@ -73,8 +73,7 @@ revise request that makes the document worse.
 
 ## Gates, in order
 
-Value → structure → shape → critique → humanity (neutral register) → **origin (blocks)** →
-do-not-promote.
+**Post-draft and advisory as of 2026-08-31** (the rules-off re-scope: nothing below is a drafting-time constraint any more). Order: **origin (claims tier) → do-not-promote + coined-lines sweep → humanity scrub → critique / analyzer**. Professional lane: **origin blocks delivery** while any claim is untraced.
 
 `writing-humanity-pass` runs **FULL** scrub. The six licensed moves are structural rather than
 voice-bearing, so there is no signature-move layer to protect — but a licensed move is still a

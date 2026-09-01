@@ -13,6 +13,19 @@ copied into four contracts.
 
 ---
 
+## What a contract is, after 2026-08-31
+
+The rules-off re-scope changed **who reads this file**, and every contract in this lane inherits the
+change. A contract is read by the **orchestrator**: it shapes the TOPIC CARD, tells the interview how
+far it has to reach, and supplies the post-draft check. **It is never loaded into the shaping
+context** — the drafting subagent gets the transcript, the corpus, the voice samples, the reference
+universe and the do-not-promote list, and nothing else (`SKILL.md`, "The shaping context").
+
+So a contract's **licensed-move roster is a statement of the register this medium lands in**, for the
+orchestrator and for the post-draft read. It is not a checklist handed to a drafter, and it is not a
+compliance target. Nothing here is a drafting-time constraint any more; the deliverables, the format
+bounds and the negative specimens are what the orchestrator and the reader hold the piece against.
+
 ## The first-screen test
 
 **The first screen is everything the reader sees before choosing to continue.** Before the scroll,
@@ -39,8 +52,11 @@ material the transcript already contains. If nothing in the transcript can carry
 that is not a shape problem, it is an interview that did not reach far enough — the beat goes on the
 **ASK LIST** as a question for the author, and the piece waits for his answer.
 
-**Where it runs.** At the shape stage, on the assembled draft, before critique. A failure returns as
-a shape fix, not as a block on the piece: the piece is fine, the order is wrong.
+**Where it runs.** Post-draft, on the assembled draft, before critique (2026-08-31: the shaper no
+longer holds this file, so the test runs on what came out rather than as a rule going in). A
+failure returns as a shape fix, not as a block on the piece: the piece is fine, the order is
+wrong. It also stays an **interview instruction** — if no beat in the transcript can carry the
+first screen, the interview did not reach far enough.
 
 **What it is not.** Not a rule that the first screen must be dramatic, and not a licence to
 front-load a punchline the piece has not earned. A quiet, concrete first screen passes. A loud,

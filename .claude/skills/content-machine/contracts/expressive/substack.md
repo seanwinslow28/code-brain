@@ -98,9 +98,10 @@ Inherited from `writing-voice-modes` G1–G5, restated because Substack drafts b
 
 ## Gates, in order
 
-Value → structure → shape → critique → humanity → origin → do-not-promote.
+**Post-draft and advisory as of 2026-08-31** (the rules-off re-scope: nothing below is a drafting-time constraint any more). Order: **origin (claims tier) → do-not-promote + coined-lines sweep → humanity scrub → critique / analyzer**.
+The publication's **value gate** and the **structure read** also run here, post-draft and advisory, rather than as stages the draft must pass through first.
 
-The **first-screen test** runs inside the shape gate, on the assembled draft. A failure returns as a
+The **first-screen test** runs post-draft on the assembled draft (see LANE.md; the shape gate that used to host it is retired). A failure returns as a
 reorder, never as new material (see `LANE.md`). The **reply-hook memo** is not a gate at all; it is
 written after do-not-promote and travels with the ship packet.
 
