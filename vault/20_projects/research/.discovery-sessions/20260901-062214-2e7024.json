@@ -1,0 +1,37 @@
+{
+  "id": "20260901-062214-2e7024",
+  "topic": "product fitment and compatibility mistakes when buying parts and accessories",
+  "lens": "pm",
+  "tier": "standard",
+  "segment": "ecommerce sellers and DIY shoppers",
+  "evidence_count": 48,
+  "verified": 4,
+  "dropped": 1,
+  "merged_count": 0,
+  "cost_usd": 0.6061,
+  "gather_status": {
+    "last30": "ok: 21 records (21 found)",
+    "sonar": "ok: 15 records (15 found)",
+    "web": "ok: 8 records (8 found)",
+    "reviews": "ok: 4 records (4 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "There is little direct buyer testimony describing the purchase, installation, return, and resolution process.",
+    "The evidence does not compare the accuracy of specific marketplaces, fitment standards, catalog providers, or compatibility tools.",
+    "There is no evidence establishing which interventions measurably reduce wrong-part purchases.",
+    "The evidence does not quantify the overall frequency of fitment errors, return rates specifically caused by incompatibility, or total financial impact.",
+    "Most evidence concerns automotive parts; there is little substantive evidence about fitment mistakes in other accessory categories."
+  ],
+  "contradictions": [
+    "Some evidence attributes errors to inaccurate or incomplete seller compatibility data, while other evidence says customers select the wrong trim or engine type.",
+    "One seller attributes poor performance to broad advertising rather than the product page, whereas other sources identify unclear product pages and listings as central causes.",
+    "The Amazon return-rate claim says returns can be unrelated to product quality, but it does not establish that those returns are caused by fitment mistakes."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 0.25,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

@@ -1,0 +1,42 @@
+{
+  "id": "20260901-062556-e58e70",
+  "topic": "commercial-use and licensing confusion with AI creative tools",
+  "lens": "pm",
+  "tier": "standard",
+  "segment": "working creatives and studios",
+  "evidence_count": 30,
+  "verified": 5,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 0.5558,
+  "gather_status": {
+    "last30": "ok: 13 records (13 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 7 records (7 found)",
+    "reviews": "ok: 10 records (10 found)",
+    "github": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "No jurisdictional comparison is provided; most legal statements appear oriented toward U.S. copyright doctrine but the geographic scope is not stated.",
+    "No resolution data show whether users successfully obtained permissions, removed infringing material, received refunds, or enforced rights.",
+    "The Suno excerpt establishes confusion about watermarking but does not state what the watermarking policy actually is.",
+    "The evidence does not quote the actual license terms, commercial-use policies, or indemnification clauses of any named AI tool.",
+    "The evidence does not distinguish copyright ownership from licenses, trademarks, publicity rights, consent, or contractual usage restrictions in a systematic way.",
+    "The Reddit evidence consists only of post titles, so the users' specific circumstances, questions, and outcomes are unknown.",
+    "There is no evidence about whether paid and free plans grant different commercial rights or whether rights change after cancellation.",
+    "No evidence explains how much or what kind of human contribution is sufficient for copyright protection.",
+    "The pricing and billing complaints establish trust problems but do not directly show commercial-use or licensing restrictions."
+  ],
+  "contradictions": [
+    "The evidence says prompt-only or AI-generated portions cannot receive copyright protection, while also saying copyright can attach to substantial human contributions; these are compatible claims but create an unresolved boundary for mixed human-AI works.",
+    "The evidence frames limited direct creative control as a problem while suggesting AI artists might be \"Creative Directors\"; this reflects competing conceptions of whether directing a system constitutes authorship.",
+    "Large rights holders are described as being courted to license IP for AI, while ordinary commercial users are warned that tools may offer no indemnification, suggesting an asymmetry in how licensing risk is managed.",
+    "Users describe products as overpriced and billing as opaque, despite paid plans implicitly being expected to support useful commercial production; the evidence does not establish what commercial rights those payments actually purchase."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 0.6,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}
