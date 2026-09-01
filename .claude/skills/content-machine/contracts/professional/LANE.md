@@ -18,9 +18,10 @@ far it has to reach, and supplies the post-draft check. **It is never loaded int
 context** — the drafting subagent gets the transcript, the corpus, the voice samples, the reference
 universe and the do-not-promote list, and nothing else (`SKILL.md`, "The shaping context").
 
-So a contract's **licensed-move roster is a statement of the register this medium lands in**, for the
-orchestrator and for the post-draft read. It is not a checklist handed to a drafter, and it is not a
-compliance target. Nothing here is a drafting-time constraint any more; the deliverables, the format
+So a contract's **licensed-move roster is a statement of the register this medium lands in**, and its
+reader is the orchestrator at contract-authoring time ([#222](https://github.com/seanwinslow28/code-brain/issues/222)).
+It is not a checklist handed to a drafter, it is not a compliance target, and **nothing post-draft
+reads it** — the roster is advisory in all nine mediums and no gate checks a move against it. Nothing here is a drafting-time constraint any more; the deliverables, the format
 bounds and the negative specimens are what the orchestrator and the reader hold the piece against.
 
 ## The seam this lane exists to hold
@@ -80,6 +81,11 @@ the design, not an oversight.
 
 **A banned move is banned even when it would be good.** The move that would land beautifully in a
 Substack post is the exact move that reads as a candidate who does not know where he is.
+
+That is a statement of the register, not an enforced rule. No gate checks a draft against the matrix
+in this lane or any other ([#222](https://github.com/seanwinslow28/code-brain/issues/222)); what
+guards a Professional document is the origin gate, which **blocks** on any untraced claim, and
+`writing-critique`'s Voice dimension, which owns register drift.
 
 ## The do-not-promote sweep runs harder here
 

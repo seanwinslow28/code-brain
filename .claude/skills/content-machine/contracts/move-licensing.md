@@ -6,6 +6,12 @@
 
 The roster is read from `writing-voice-modes/SKILL.md` at generation time, so this file cannot drift from the guide. An unrated move is an unlicensed move and fails the build.
 
+## What this file does, and does not, do
+
+**Advisory in all nine mediums. Nothing enforces it** ([#222](https://github.com/seanwinslow28/code-brain/issues/222), 2026-09-01). Its reader is the orchestrator at contract-authoring time: this is the input when a medium contract is written or rewritten, and the durable record of the 324 rulings so a rewrite cannot quietly drift. It has no per-run role. It is not loaded into the shaping context, no gate checks a draft against it, and the GATE RECORD has no line for it — including in the Professional lane, where the origin gate already blocks on any untraced claim.
+
+**What would give it teeth.** Two ratified permanent lessons routed to a medium contract (`contracts/<lane>/<medium>.md`) whose reason is that a move was wrong for the room. One is noise; two is a pattern, and it reopens the enforcement question as a fresh ticket. The instrument is the lessons ledger, which already records that route and that reason — nothing new is tagged and nothing new is counted. Until then a flag here would be a claim that a check knows something the author does not, made with zero runs behind it, which is the shape [#219](https://github.com/seanwinslow28/code-brain/issues/219) retired.
+
 ## How a cell is decided
 
 Two axes settle 318 of the 324 cells. Six are ruled directly, on evidence the axes cannot see.

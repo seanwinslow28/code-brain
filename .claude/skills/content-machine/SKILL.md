@@ -309,6 +309,12 @@ a duplicate. Check whether the rule already exists before writing one.
 Write the ledger entry first, then make the edit, then record the amended file back in the entry.
 Ledger-first means a failed edit still leaves a record of what he ratified.
 
+**One count rides on this route.** The move-licensing matrix is advisory in all nine mediums and
+nothing enforces it ([#222](https://github.com/seanwinslow28/code-brain/issues/222)). It earns the
+enforcement question back on **two ratified permanent lessons routed to a medium contract whose
+reason is that a move was wrong for the room** — one is noise, two is a pattern. When the second
+lands, file a fresh ticket; do not arm anything before it.
+
 **Rejected candidates stay in the ledger.** A rejection is the more useful of the two records: it
 stops the machine proposing the same wrong lesson next week. Deleting rejections means re-learning
 them forever.
