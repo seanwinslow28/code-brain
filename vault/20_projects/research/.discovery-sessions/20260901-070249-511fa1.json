@@ -1,0 +1,32 @@
+{
+  "id": "20260901-070249-511fa1",
+  "topic": "correcting wrong AI assistant information about a business",
+  "lens": "pm",
+  "tier": "deep",
+  "segment": "business owners, marketers, and SEO consultants",
+  "evidence_count": 22,
+  "verified": 4,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 0.5167,
+  "gather_status": {
+    "last30": "ok: 5 records (5 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 14 records (14 found)",
+    "reviews": "ok: 3 records (3 found)",
+    "github": "ok: 0 records (0 found)",
+    "qa": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "Lack of details on how long an AI 'snapshot' takes to update once the web consensus is corrected.",
+    "No precise quantification of the revenue or lead loss scale caused by incorrect AI claims.",
+    "No evidence provided on proactive tools or methodologies businesses can use to monitor AI search results before a customer complains."
+  ],
+  "contradictions": [],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 0.7273,
+  "citation_recall": 0.75,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}
