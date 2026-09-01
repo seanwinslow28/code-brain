@@ -2,31 +2,31 @@
 title: "The Paradox of Agentic Efficiency vs. Creative Authority"
 type: concept
 sources:
-  - knowledge/concepts/the-paradox-of-agentic-efficiency-vs-creative-authority.md
+  - 20_projects/research/2026-08-29-tech-revolution-patterns-council-premortem.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-This pattern describes an inverse relationship between automation velocity and perceived professional value, where high-throughput systems produce easily replicable artifacts that fail to communicate strategic judgment. To maintain creative authority in a role evaluating insight over execution, Sean must intentionally reduce throughput to increase the production cost of evidence, thereby proving his judgment drives outcomes rather than just his infrastructure. This requires sacrificing daily automation efficiency to capture high-fidelity decision traces, accepting lower volume for higher signal quality.
+As agents become more efficient at executing tasks, they can erode the human's sense of creative authority and ownership over the outcome. This paradox arises because efficiency often standardizes processes, reducing the unique 'friction' that fosters creativity and personal investment. The consequence is a potential loss of user engagement or satisfaction despite improved technical performance.
 
 ## Context
 
-Sean is transitioning from a builder role to an AI Product Manager where hiring managers evaluate 'judgment' and 'strategic insight.' If his vault appears as a stream of low-cost automated logs, it signals commodity labor rather than high-value strategic oversight. He needs to curate his public-facing evidence to reflect the scarcity of good decisions, not the abundance of processed data.
+Sean is building tools for creators/founders. If his agents are too efficient, they might disempower users. This insight suggests he needs to design for 'collaborative authority' rather than pure automation.
 
 ## Evidence
 
-> High-velocity automation tends to produce descriptive, easily faked artifacts like configuration counts or routine logs, which fail to communicate judgment.
+> The synthesis argues from four historical evidence bases: micropayment failures, technological-revolution phase structure, protocol-adoption wars, and the economics of audience-measurement/audit businesses.
 
-> This corrects the current concept’s assumption that “having unusual infrastructure” automatically communicates “AI-PM judgment.”
+> ACES-class experiments show agent demand is manipulable by machine-readable presentation, which is named-academic-evidence for the journey-testing demand seam.
 
 ## Examples
 
-- A 250-agent configuration count is descriptive; a replayable failure investigation with traces, trade-offs, and a shipped correction is a signal.
-- Sean must sacrifice some automation efficiency in his daily notes to capture high-fidelity decision traces, accepting lower volume for higher signal quality.
+- The 'micropayment failures' suggest that users resist systems that feel too transactional or devoid of personal value.
+- The 'protocol-adoption wars' indicate that users adopt technologies that enhance their agency, not just their efficiency.
 
 ## Related Concepts
 
-[[Demonstration Over Declaration]] [[Critical Incident Technique]]
+[[The Director-Intern Invariant in Creative and Professional Identity]] [[Taste as Evaluation Function vs. Activity Proof]]

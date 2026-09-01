@@ -2,10 +2,10 @@
 title: "Audience Capture via Alignment Loops"
 type: concept
 sources:
-  - knowledge/connections/semantic-decay-vs-operational-uptime-in-ai-product-strategy.md
+  - knowledge/concepts/audience-capture-via-alignment-loops.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition

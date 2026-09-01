@@ -2,33 +2,31 @@
 title: "The Taste-Throughput Trade-off in Agentic Synthesis"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-automation-velocity-and-creative-friction.md
+  - knowledge/connections/cross-domain-tension-operational-health-vs-semantic-value-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-This mechanism describes the inverse relationship between the volume of automated knowledge production and the fidelity of semantic verification. As agent fleets increase their concept generation rate, the 'harness' required to maintain quality must scale disproportionately, often leading to a systemic trust deficit where high velocity bypasses the human-in-the-loop checks necessary for taste preservation. The core tension lies in the fact that while automation can generate vast quantities of structured data, it cannot inherently distinguish between high-signal insights and low-signal noise without explicit, costly evaluation layers.
+This mechanism describes a structural inversion where the agent fleet's optimization for operational volume (clusters sampled, concepts written) actively degrades semantic value because human supervision capacity remains fixed. As throughput increases, the ratio of verified novelty to total output collapses, creating a 'Silent Decay' where high activity masks epistemic stagnation. The system appears healthy via uptime metrics while the knowledge graph accumulates noise that exceeds Sean's ability to filter, effectively turning the synthesizer into a source of context pollution rather than clarity.
 
 ## Context
 
-Sean's vault synthesizer runs show a clear progression from low-volume, high-fidelity outputs (3 concepts) to high-volume, lower-fidelity outputs (125+ concepts). This trade-off is critical for Sean because his professional identity as an AI Product Manager relies on 'taste' and 'semantic integrity,' which are eroded when automation prioritizes throughput over verification. Understanding this trade-off allows him to calibrate his agent fleets to avoid the 'Illusion of Competence' where systems appear robust but lack underlying semantic validity.
+Sean must recognize that scaling fleet output without scaling verification creates a trust deficit in his own infrastructure. This insight is critical for his job hunt, as it demonstrates an understanding that 'more data' is not equivalent to 'better signal' when human cognitive load is the bottleneck.
 
 ## Evidence
 
-> There is a direct inverse relationship between the speed of automated synthesis and the depth of semantic verification.
+> There is a fundamental tension between the agent fleet's drive to maximize throughput (clusters sampled, concepts written) and the human operator's capacity for verification (supervision).
 
-> As Sean's agents increase their throughput (e.g., from 3 concepts to 125 concepts per run), the 'harness' required to maintain quality must scale disproportionately.
-
-> High-velocity automation often bypasses the 'human-in-the-loop' checks that prevent the 'Illusion of Competence,' leading to a system that is fast but potentially unreliable.
+> This connection reveals a critical tension where the scalability of Sean's agent fleet is limited by his cognitive capacity to supervise outputs, rather than by computational constraints.
 
 ## Examples
 
-- The run on 2026-05-27 produced only 3 concepts with 2 connections, representing high-fidelity, low-throughput synthesis.
-- The run on 2026-08-13 produced 125 concepts with 34 connections, representing high-throughput synthesis where the ratio of connections to concepts dropped significantly.
+- The fleet samples 191 clusters and writes 118 concepts in one run, yet Sean cannot verify the semantic value of all 118 entries before the next cycle begins.
+- Operational metrics like 'clusters sampled' rise while 'rejected_count' drops, indicating that the filter is becoming less effective relative to the volume generated.
 
 ## Related Concepts
 
-[[The Illusion of Competence in Automated Systems]] [[Harness Engineering Invariant]] [[Silent Decay in Strategic Pipelines]]
+[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[Goodhart Failure Typing]]

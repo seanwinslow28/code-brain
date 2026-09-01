@@ -2,31 +2,31 @@
 title: "Cost-Capped Agentic Workflows"
 type: concept
 sources:
-  - knowledge/expansions/connections/cost-capped-agentic-workflows-and-deep-research-integration.md
+  - knowledge/concepts/cost-capped-agentic-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-This mechanism defines a hard financial boundary for autonomous agent operations, treating computational expenditure as a finite resource that must be strictly bounded to prevent runaway costs. It functions not merely as a budget cap but as a structural constraint that forces the system to prioritize high-signal actions over low-value exploration, effectively creating a scarcity-driven selection pressure within the agentic loop. The invariant here is that without such a cap, the agent's tendency toward exhaustive search will inevitably exceed the user's willingness to pay or tolerate in latency.
+A resource-allocation mechanism where task routing is determined by a cost-benefit analysis of model tiers rather than capability uniformity. This approach treats computational expense as a primary constraint, forcing the system to distinguish between high-stakes reasoning tasks that require frontier models and low-stakes execution tasks suitable for lightweight or local alternatives. The invariant here is that economic efficiency is achieved not by optimizing individual model performance, but by minimizing the aggregate spend across a heterogeneous stack of specialized agents.
 
 ## Context
 
-Sean is building a personal knowledge vault and job-hunt infrastructure where unbounded AI usage would quickly become financially unsustainable and cognitively overwhelming. By enforcing cost caps, he ensures that his automated research and synthesis processes remain viable as a long-term utility rather than a short-lived experiment that burns through credits.
+Sean is currently operating a fleet with significant variance in cost-per-run (from 3c to 125c). Understanding how to deliberately route tasks to cheaper models for non-critical steps is essential for maintaining the economic viability of his automated synthesis and job-hunt pipelines.
 
 ## Evidence
 
-> The current $7/task rule limits loss but cannot determine whether spending even $1—or stopping at $7—is rational.
+> Practitioners have shifted away from searching for a single 'best' model. Instead, they design multi-tiered model stacks, choosing specific models based on task economics, specialized capabilities, or latency
 
-> A budget is not a strategy: agents need a price for thinking.
+> He organizes his factory into three distinct tiers: State-of-the-Art (frontier models), Workhorse (fast, highly capable models), and Lightweight/Local models
 
 ## Examples
 
-- Setting a hard stop at $7 per task to prevent runaway costs
-- Using expected value of computation to decide whether to continue research
+- Using Kimmy K3 for UX/UI design tasks while reserving GPT 5.6 Soul/High for core implementation
+- Running parallel 'Best of N' sandbox fleets with mixed configurations to evaluate performance against a single task
 
 ## Related Concepts
 
-[[Deep Research Queue]] [[SRE Error Budget for Agents]] [[Token Waste]]
+[[Cost Control vs. Unit Economics]] [[Capability-Aware Scheduling]]

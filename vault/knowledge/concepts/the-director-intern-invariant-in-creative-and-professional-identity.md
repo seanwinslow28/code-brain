@@ -4,31 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/the-director-intern-invariant-in-creative-and-professional-identity.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-This invariant describes a structural shift in professional value where human agency is decoupled from manual execution and re-coupled to supervisory taste. It posits that as AI agents become capable of high-fidelity production, the primary bottleneck shifts from generation capacity to aesthetic judgment. The human role evolves from 'maker' to 'director,' leveraging automation to scale creative authority rather than replacing it with mere output volume. This transition requires a demonstrable portfolio that proves the user's taste is a viable evaluation function for AI agents.
+This invariant describes a structural tension where an agent's autonomy is deliberately capped not by technical limitation, but by the requirement to produce a 'legible world' that allows for human review. The model supplies raw intelligence, but the harness must enforce a workflow where the agent acts like a junior employee submitting work-in-progress rather than a black box announcing completion. This creates a dependency on explicit surfacing of assumptions and unresolved questions, ensuring that professional review remains efficient and that authority structures are preserved despite the abundance of automated capability.
 
 ## Context
 
-Sean faces a professional identity crisis where his traditional 'maker' skills are commoditized by AI. He must reframe his job hunt and creative output (Pencil & Prompt) to demonstrate that his 'earned taste' serves as the critical supervisory layer. This shift is essential for positioning himself as a strategic leader rather than a tactical executor in an agentic future.
+Sean is building a personal knowledge vault and agent fleet that must scale without him becoming the bottleneck. If agents operate with too much autonomy, he loses the ability to steer the 'ontology' (the legible world). If they operate with too little, he falls into the trap of manual supervision. This concept defines the precise boundary where his role shifts from operator to supervisor of a 'junior employee' whose output is always partially formed and requires his taste to finalize.
 
 ## Evidence
 
-> Sean’s professional identity crisis is resolved by reframing the human-AI relationship through the 'Director-Intern' invariant, where human value is decoupled from manual execution and re-coupled to supervisory taste.
+> His definition of autonomous work is also more conservative than “the agent acted without a human.” For Basis, autonomy means the agent can carry a job from initiation to a reviewable completion state, while surfacing its assumptions, important decisions, unresolved questions, and evidence in a form that makes professional review efficient.
 
-> AI isn't here to replace the artist, it's a wildly talented intern with no taste yet
-
-> the realization that he didn't get replaced, he got promoted to director
+> The model supplies intelligence. The harness supplies agency and execution mechanics. The ontology supplies a legible world.
 
 ## Examples
 
-- Sean’s job hunt strategy must prioritize case studies of supervisory workflows over traditional coding or design portfolios.
-- Pencil & Prompt’s content must focus on the 'taste-transfer' methodology as a teachable skill rather than just tool reviews.
+- An agent completes a deep research task but outputs a draft with explicit 'unresolved questions' sections rather than a final report, forcing Sean to engage with the gaps.
+- The system rejects an agent's attempt to execute a tool call because the 'governance' layer determines the action exceeds the current authority spectrum defined for that specific job type.
 
 ## Related Concepts
 
-[[Taste as Evaluation Function vs. Activity Proof]] [[Supervision as the New AI Edge]]
+[[Supervision as the New AI Edge]] [[Legibility Debt as a Supervision Failure Mode]]

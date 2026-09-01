@@ -5,8 +5,8 @@ connects:
   - The Taste-Throughput Trade-off in Agentic Synthesis
   - Structural Integrity vs. Automation Velocity
   - The Illusion of Competence in Automated Systems
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Synthesis
@@ -17,15 +17,15 @@ This connection reveals a fundamental tension where the velocity of automated kn
 
 ### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
 
-> There is a fundamental tension between the velocity of automated knowledge synthesis and the structural integrity of the resulting system.
+> As Sean increases the throughput of his fleet (e.g., from 3 to 125 concepts), the system risks entering a 'Fixes that Fail' loop where high volume masks semantic decay.
 
 ### [[Structural Integrity vs. Automation Velocity]]
 
-> As Sean increases the throughput of his fleet (e.g., from 3 to 125 concepts), the system risks entering a 'Fixes that Fail' loop where high volume masks semantic decay.
+> Systems thinking is required because component-level optimization is insufficient for systems where behavior arises from interacting, dynamic elements.
 
 ### [[The Illusion of Competence in Automated Systems]]
 
-> Systems thinking is required because component-level optimization is insufficient for systems where behavior arises from interacting, dynamic elements.
+> This connection reveals a fundamental tension where the velocity of automated knowledge ingestion directly conflicts with the integrity of the resulting semantic graph.
 
 ## Implications
 

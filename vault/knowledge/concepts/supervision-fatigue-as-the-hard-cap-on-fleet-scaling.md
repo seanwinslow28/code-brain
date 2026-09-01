@@ -2,31 +2,31 @@
 title: "Supervision Fatigue as the Hard Cap on Fleet Scaling"
 type: concept
 sources:
-  - knowledge/connections/the-legibility-trap-in-automated-oversight.md
+  - knowledge/connections/cross-domain-tension-operational-health-vs-semantic-value-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-This invariant describes the limit at which human attention becomes the bottleneck for agent fleet productivity, not due to technical constraints, but due to the cognitive load of verifying silent failures. When agents fail silently or produce low-value output, the dependency propagates through the observability chain invisibly until Sean notices the staleness in his daily briefs. The mechanism forces Sean to internalize the cost of oversight, meaning that scaling the fleet without improving semantic verification directly increases his personal supervision fatigue.
+This invariant defines the boundary condition where the marginal cost of verifying agent output exceeds the marginal utility of that output, forcing a hard stop on scaling regardless of computational resources. It establishes that Sean's cognitive bandwidth is the true constraint on his knowledge infrastructure, not the model's context window or API rate limits. When verification becomes the bottleneck, the system must prioritize depth over breadth to maintain semantic integrity.
 
 ## Context
 
-Sean’s capacity for deep work is finite. When he must constantly audit agent outputs for truthfulness rather than trusting their structural integrity, his ability to scale his job hunt and creative projects is capped by his own attention span, not his compute resources.
+This concept explains why Sean cannot simply 'add more agents' to solve his job hunt or creative problems. It reframes his role from a producer of content to a curator of signal, requiring him to design systems that respect his limited attention span.
 
 ## Evidence
 
-> The dependency is invisible in each agent's source, meaning the failure propagates silently through the entire observability chain.
+> The consequence is that Sean cannot scale his knowledge infrastructure effectively because the cost of verifying novelty exceeds the marginal gain of additional output.
 
-> Sean must implement 'semantic verification' checks that go beyond structural completeness to ensure agents are producing meaningful output.
+> This connection reveals a critical tension where the scalability of Sean's agent fleet is limited by his cognitive capacity to supervise outputs, rather than by computational constraints.
 
 ## Examples
 
-- Daily briefs inheriting stale context from failed overnight synthesizer runs
-- Sean noticing gaps in his job application tracking only after manual review
+- Sean spends 2733 seconds on a run that produces 123 concepts, but only has time to deeply review a fraction of them before the next day's demands arise.
+- The 'rejected_count' metric serves as a proxy for Sean's unspoken supervision limits, showing how many outputs were deemed insufficiently novel or valuable.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Legibility Debt as a Supervision Failure Mode]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Silent Decay in Strategic Pipelines]]

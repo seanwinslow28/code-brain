@@ -2,10 +2,10 @@
 title: "Hedged Execution Invariant"
 type: concept
 sources:
-  - knowledge/connections/operator-ground-truth-vs-stranger-calibration.md
+  - knowledge/concepts/hedged-execution-invariant.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition

@@ -2,31 +2,31 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-operational-mastery-and-architectural-clarity.md
+  - knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-This concept defines the accumulation of unarticulated decision logic that occurs when an operator relies on implicit knowledge to supervise automated systems. As the system scales, the gap between what the operator can do and what they can explain widens, creating a debt that must be paid in future debugging, collaboration, or career transitions. This debt is a form of supervision failure because the operator cannot effectively audit or improve the system without explicit documentation of its design principles.
+Legibility debt is the structural gap between automated production velocity and human verification capacity, where the volume of commits exceeds the operator's ability to inspect them directly. This forces reliance on indirect proofs—such as tags or audit logs—to establish trust in system state rather than direct observation. Without these cryptographic anchors, the operator cannot distinguish intentional design changes from accidental drift, leading to a loss of control over the system's history and an erosion of epistemic authority.
 
 ## Context
 
-Sean's fleet has grown significantly, but his ability to supervise it explicitly has not kept pace. This creates a risk that he will be unable to explain his system's design to others or adapt it to new requirements.
+Sean audits the vault to ensure that deleted branches did not result in data loss, specifically resolving uncertainty created by the agent fleet's high-velocity commits. By proving that content exists in `main` or archives via tags, he mitigates the risk of silent failure propagation where automated noise masks critical state changes.
 
 ## Evidence
 
-> The gap is vocabulary plus the decision surfaces his production path never forced him to touch.
+> the proof is now a tag rather than a branch: archive/mini-pre-b8-2026-08-28
 
-> His ability to run the system successfully masks the lack of explicit vocabulary and decision-making frameworks.
+> Content audit of that snapshot against main — 24 of its 27 commits are vault: auto-commit noise from the Obsidian-Git owner retired 2026-07-05
 
 ## Examples
 
-- Sean cannot articulate why he chose specific rejection criteria for clusters, relying instead on intuition.
-- He has not documented the architectural decisions behind his fleet's model selection process.
+- of the 65 files unique to it, 64 are byte-identical blobs on main
+- the 3 real commits are all on main (da4856fb's 2026-08-11 production repairs are present verbatim
 
 ## Related Concepts
 
-[[Tacit Knowledge Erosion vs. Automation Scale]] [[The Illusion of Competence in Automated Systems]]
+[[Epistemic Artifacts as Strategic Proof]] [[The Illusion of Competence in Automated Systems]]

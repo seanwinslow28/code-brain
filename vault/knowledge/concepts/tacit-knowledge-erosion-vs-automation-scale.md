@@ -2,15 +2,15 @@
 title: "Tacit Knowledge Erosion vs. Automation Scale"
 type: concept
 sources:
-  - knowledge/expansions/tacit-knowledge-erosion-vs-automation-scale.md
+  - knowledge/concepts/tacit-knowledge-erosion-vs-automation-scale.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-This concept describes a non-linear degradation of human expertise where the specific cognitive stage automated determines the nature of the resulting skill gap. When automation displaces execution, diagnostic capability often remains intact; however, when it automates interpretation or decision selection, the operator loses the ability to verify the system's internal logic. This creates a structural vulnerability where the human supervisor becomes cognitively dependent on the agent's output without possessing the mental models required to detect subtle failures or mode errors.
+This mechanism describes a non-linear degradation of human expertise where the specific cognitive stage automated determines the nature of the resulting skill gap. When automation displaces execution, diagnostic capability often remains intact; however, when it automates interpretation or decision selection, the operator loses the ability to verify the system's internal logic. This creates a structural vulnerability where the human supervisor becomes cognitively dependent on the agent's output without possessing the mental models required to detect subtle failures or mode errors.
 
 ## Context
 
@@ -29,4 +29,4 @@ Sean is building an autonomous agent fleet that handles significant portions of 
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[The Illusion of Competence in Automated Systems]] [[Control Room Observability]]
+[[Supervision as the New AI Edge]] [[The Illusion of Competence in Automated Systems]]

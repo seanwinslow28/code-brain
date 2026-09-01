@@ -2,32 +2,32 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: connection
 connects:
-  - The Taste-Throughput Trade-off in Agentic Synthesis
-  - Supervision as the New AI Edge
-  - The Illusion of Competence in Automated Systems
-created: 2026-08-30
-updated: 2026-08-30
+  - The Extraction Fidelity Trap in Knowledge Infrastructure
+  - Operational Visibility vs. Semantic Value in Agent Fleets
+  - Tacit Knowledge Erosion vs. Automation Scale
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Synthesis
 
-The core tension lies in the decoupling of operational health metrics from semantic value, where systems report 'healthy' status based on process execution while knowledge integrity depends on rejection rates that are often hidden by robust error handling. This creates a blind spot where Sean perceives his infrastructure as stable because it is running without crashing, even though the semantic quality of the output is degrading due to lowered taste thresholds. The consequence is that Sean must build new supervisory mechanisms—specifically 'taste-based' quality gates—to detect when operational efficiency has decoupled from strategic utility.
+There is a critical tension between the observable metric of automation velocity (concepts written) and the unobservable metric of semantic integrity (conceptual depth). As Sean's fleet scales, the infrastructure appears healthy due to high concept counts, but it silently discards non-textual data that contains core intellectual value. This creates a 'fidelity trap' where the system's operational reliability masks a profound loss of semantic completeness, leading to a knowledge base that is accurate but hollowed out.
 
 ## Threads
 
-### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
+### [[The Extraction Fidelity Trap in Knowledge Infrastructure]]
 
-> As the system scales its sampling capacity, the rejection rate typically drops not because quality improves, but because the supervisory threshold for 'taste' is lowered to maintain throughput.
+> One caveat either way: figures/diagrams are never extracted (text baked into images is lost, by design), and scanned PDFs hard-abort with an "OCR first" message.
 
-### [[Supervision as the New AI Edge]]
+### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
 
-> evaluate_article_depth() emitting rejected_reasons into the manifest
+> The tension lies between the observable metric of automation velocity (concepts written) and the unobservable metric of semantic integrity (conceptual depth).
 
-### [[The Illusion of Competence in Automated Systems]]
+### [[Tacit Knowledge Erosion vs. Automation Scale]]
 
-> You have built, by instinct, most of the infrastructure that makes an AI system survive contact with production.
+> The output is not a summary; the spec explicitly extracts *structure*: named frameworks ("preserve the author's exact naming"), decision rules, techniques, anti-patterns, glossary terms
 
 ## Implications
 
-- Sean must stop measuring success by 'concepts_written' and start measuring it by 'rejected_reasons' that indicate high-taste filtering.
-- The current fleet's health metrics are misleading; they signal stability but do not signal strategic alignment.
+- Sean must implement manual verification steps for any automated ingestion pipeline to detect missing visual or structural data that automated tools silently discard.
+- The choice of input format (EPUB vs PDF) becomes a strategic decision about what types of knowledge are preserved versus lost in the semantic graph.

@@ -2,31 +2,31 @@
 title: "Silent Decay in Strategic Pipelines"
 type: concept
 sources:
-  - knowledge/connections/the-tension-between-automation-velocity-and-creative-friction.md
+  - knowledge/connections/cross-domain-tension-automation-velocity-vs-creative-taste-fidelity.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
 
-This pattern describes the gradual erosion of system reliability and strategic alignment due to unobserved failures in automated workflows. It occurs when underlying structures, such as RAG pipelines with poor retrieval precision or broken agent dependencies, degrade over time without triggering immediate, visible errors. The mechanism is characterized by a 'trust deficit' where users continue to rely on the system because it appears functional, but its outputs become increasingly misaligned with reality or intent. This decay is 'silent' because it bypasses standard error logs and manifests only as a slow decline in the quality of insights or decisions derived from the system.
+This pattern describes the gradual erosion of system value when automated processes fail to maintain semantic integrity over time. Unlike immediate failures, silent decay is characterized by a slow drift in quality that goes unnoticed until the underlying structures become too fragile to support strategic goals. It is caused by a lack of deep observability into the 'work-as-done' versus 'work-as-imagined' gap in agent workflows.
 
 ## Context
 
-Sean's vault synthesizer runs show periods where 'rejected_count' spikes or 'connections_written' drop disproportionately, indicating potential silent decay in the synthesis logic. For Sean, this is critical because his professional work depends on accurate and timely information; silent decay in his personal knowledge infrastructure could lead to flawed strategic decisions or missed opportunities in his job hunt. Recognizing this pattern allows him to implement proactive monitoring and recovery mechanisms.
+Sean's knowledge vault is his primary asset for job hunting and creative work. If silent decay sets in, his synthesized insights will lose their strategic value, making him less competitive in the market. Recognizing this pattern allows him to intervene before the decay becomes irreversible.
 
 ## Evidence
 
 > To manage AI effectively, PMs must look below the surface of observable events... Underlying Structures: The workflows and architectures (e.g., a RAG pipeline with poor retrieval precision).
 
-> This connection reveals a fundamental tension where the drive for automated throughput directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
+> The core tension lies in the trade-off between maintaining high reliability in automation to avoid errors in critical job-hunt tasks and the need for velocity in a fast-moving market.
 
 ## Examples
 
-- A run where 125 concepts were generated but only 34 connections were made, suggesting a failure in the synthesis logic that was not immediately flagged as an error.
-- Periods where 'rejected_count' is low but 'connections_written' also drops, indicating that the system is producing shallow or irrelevant outputs without explicit failure signals.
+- Sean notices that his synthesizer outputs are becoming less nuanced over time, indicating silent decay.
+- He identifies 'poor retrieval precision' as a root cause of the decay in his RAG pipeline.
 
 ## Related Concepts
 
-[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Failure Suspicion State Machine]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Harness Engineering Invariant]]

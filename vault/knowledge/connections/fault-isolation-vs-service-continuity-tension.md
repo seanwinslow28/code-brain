@@ -5,13 +5,13 @@ connects:
   - Fault → Error → Failure Taxonomy
   - Graceful Extensibility
   - Agent Health Monitoring
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-08-31
+updated: 2026-08-31
 ---
 
 ## Synthesis
 
-The tension lies between detecting infrastructure faults (like Alienware being offline) and maintaining service continuity through graceful extensibility. If agents conflate fault with failure, they will either panic unnecessarily or fail to adapt, leading to silent decay in workflow reliability. This pattern dictates that health monitoring must separate telemetry from user-visible outcomes.
+The core tension lies between detecting infrastructure faults and maintaining service continuity through graceful extensibility. If agents conflate fault with failure, they will either panic unnecessarily or fail to adapt, leading to silent decay in workflow reliability. This pattern dictates that health monitoring must separate telemetry from user-visible outcomes, ensuring that operational health metrics do not mask semantic integrity issues.
 
 ## Threads
 

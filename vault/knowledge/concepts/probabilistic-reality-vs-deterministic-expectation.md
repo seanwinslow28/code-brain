@@ -2,10 +2,10 @@
 title: "Probabilistic Reality vs. Deterministic Expectation"
 type: concept
 sources:
-  - knowledge/connections/probabilistic-reality-vs-deterministic-expectation.md
+  - knowledge/concepts/probabilistic-reality-vs-deterministic-expectation.md
 tags: [auto-generated, phase-6]
-created: 2026-08-30
-updated: 2026-08-30
+created: 2026-09-01
+updated: 2026-09-01
 ---
 
 ## Definition
