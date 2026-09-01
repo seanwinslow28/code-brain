@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — the writing-critique analyzer is a dashboard, not a gate (2026-09-01, #219)
+
+`flag_metrics` is now **empty**: no metric flags, every one reports beside its band.
+The gate lost its customer and its evidence in the same week. The rules-off ruling
+retired the headless revise route, so no code path reads a flag; and tested against
+the only outcome that matters — whether Sean kept the draft — MATTR was at chance
+over four runs (fired on ep1 at 64% survival and run3 at 38%, silent on run2 at 25%
+and Arm B at 86%). CV and first-person were never live at all: they fire below 0.348
+and 1.76, and nothing this machine or this author has produced comes near. As a
+dashboard the same instrument does separate the runs — the run-3 draft sits outside
+four of seven bands and he gutted it; the Arm B draft sits inside six and he kept 86%.
+
+- **Two bands, deliberately apart.** `baseline.json` is Sean's prose written
+  *outside* the machine (the yardstick, n=5, rebuilt only on his ruling).
+  New `references/rewrite-band.json` + `build_rewrite_band.py` hold his hand-rewrites
+  *through* it (the track record, recomputed every ship, `--check` like the baseline).
+  Keeping them apart lets the record grow without the yardstick ever being calibrated
+  on what it measures — the failure #177 was created to fix. Hand-rewrites never enter
+  the corpus band.
+- **Split by series, n≥3 floor.** Raising Agents runs a 43% short-sentence share and
+  no long sentences; Pencil & Prompt runs 10–20% and 3–9%. Pooling them is what made
+  "Sean's rewrites" look like an eight-word span anchored to nothing. A series under
+  three rewrites prints as points, never as a range.
+- **New metrics:** ≤6-word and ≥35-word sentence shares, in `analyze.py` and both
+  bands. Every register discussion since the rules-off experiment reached for these
+  and computed them by hand outside the tool.
+- `baseline.json` schema 1 → 2 (observed min/max per metric, plus the three new
+  sentence-shape metrics). Numbers for the existing metrics are unchanged; the
+  corpus and its five segments did not move.
+- **Rebuild triggers are now stated and different:** the rewrite band is maintenance
+  (one line in `SERIES`, rerun); the corpus band is a ruling Sean makes, stamped in
+  the provenance block, never a schedule. Adding to `voice-samples.md`,
+  `reference-universe.md`, `do-not-promote.md`, or a new corpus heading needs no
+  ruling and does not touch the gauge.
+- Analyzer tests 16 → 19, all passing.
+
 ### Changed — content machine re-founded on the rules-off experiment (2026-08-31)
 
 Sean's run-#3 verdict ("you're summarizing and re-reading my brain dump notes back

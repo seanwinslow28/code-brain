@@ -62,7 +62,15 @@ SEGMENTS = [
 SIGMA = 2.0
 # Metrics that may raise a flag. opener_other_pct is REPORT-ONLY: it was the
 # last remaining false-positive source at 2 sigma.
-FLAG_METRICS = ["cv", "mattr", "first_person_rate"]
+# EMPTY since #219 (2026-09-01). Every metric is report-only; the analyzer is a
+# dashboard, not a gate. Two reasons, and either alone would be enough. The gate
+# lost its customer: the rules-off ruling retired the headless revise route, so
+# no code path reads a flag. And it lost its evidence: over four runs MATTR was
+# at chance against whether Sean kept the draft, while the CV and first-person
+# bands (fire below 0.348 and 1.76) could never fire on anything this machine or
+# this author has produced. The keys stay named here so re-arming one is a
+# one-line edit to data, not a rewrite of analyze.baseline_flags().
+FLAG_METRICS: list[str] = []
 
 MIN_WORDS = 300
 
@@ -134,16 +142,29 @@ def main() -> int:
         baseline = analyze.emit_baseline(str(corpus_file), str(out_file))
 
     baseline["generated_from"] = "content-machine corpus (git-ignored); see provenance"
-    baseline["gate"] = {"sigma": SIGMA, "flag_metrics": FLAG_METRICS,
-                        "report_only": ["opener_other_pct"]}
+    baseline["gate"] = {
+        "sigma": SIGMA,
+        "flag_metrics": FLAG_METRICS,
+        "report_only": ["cv", "mattr", "first_person_rate", "opener_other_pct",
+                        "mean_len", "short_share", "long_share"],
+    }
     baseline["provenance"] = {
         "ruled": "2026-08-26",
+        "gate_retired": "2026-09-01",
         "ticket": "https://github.com/seanwinslow28/code-brain/issues/177",
+        "gate_ticket": "https://github.com/seanwinslow28/code-brain/issues/219",
         "tier": "A (unmixed verbatim, per corpus MANIFEST)",
         "min_words": MIN_WORDS,
         "excludes": "anything produced through the content machine, to avoid "
                     "calibrating the yardstick on what it measures",
         "rebuild": "python3 build_baseline.py   (needs the local corpus)",
+        "rebuild_trigger": "Not a schedule. This band rebuilds only on Sean's "
+                           "ruling: new sustained prose written outside the "
+                           "content machine, or a promotion he decides on. "
+                           "Every promotion is stamped here. `--check` runs with "
+                           "each dashboard render, so a moved corpus is loud. "
+                           "His hand-rewrites do NOT come here; they are the "
+                           "second band (rewrite-band.json). See #219.",
         "segments": manifest,
     }
 

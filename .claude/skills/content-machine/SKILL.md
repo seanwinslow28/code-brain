@@ -75,7 +75,7 @@ grounded revise request; the author decides everything else.
 | 1 | **Topic** — one piece, one lane, one medium, named before anything else | this skill | live |
 | 2 | **Interview** — one lens, one question at a time, read-back at the close | `interview/` | live, six lenses |
 | 3 | **Shape** — clean-context draft (see The shaping context) | fresh subagent, this skill orchestrates | live, re-scoped 2026-08-31 |
-| 4 | **Gates** — post-draft, advisory: origin (claims tier), do-not-promote + coined-lines sweep, humanity scrub, critique/analyzer | `gates/` + chain skills as reference | live, all post-draft as of 2026-08-31 |
+| 4 | **Gates** — post-draft, advisory: origin (claims tier), do-not-promote + coined-lines sweep, humanity scrub, critique + the analyzer **dashboard** (no metric flags since #219) | `gates/` + chain skills as reference | live, all post-draft as of 2026-08-31 |
 | 5 | **Ship** — the author hand-rewrites (mandatory), a mechanical proofread runs on his final, he publishes | the author + one proofread pass | live, proofread added 2026-08-31 |
 | 6 | **Lessons** — his corrections become rules, with his consent | `lessons/` + `ledger/` | live |
 
@@ -261,6 +261,12 @@ about what would draw a reply, binding on nothing (`contracts/expressive/LANE.md
    Typos, doubled words, spacing, apostrophes/escapes, punctuation only — flag each fix, change no
    phrasing, no word choice, no rhythm. His eye skips his own typos ("self depreciating" survived
    two of his finals); the pass exists to catch those, never to edit him.
+7. **Register the final in the rewrite band** (added 2026-09-01, #219). One line in `SERIES` in
+   `.claude/skills/writing-critique/references/build_rewrite_band.py`, under the piece's series,
+   then rerun it. That band is the analyzer dashboard's second column — his rewrites, as opposed
+   to his prose written outside the machine — and "recomputes on every ship" is this step. It is
+   maintenance, not a ruling. The corpus band never takes a hand-rewrite; promoting prose into the
+   corpus or `voice-samples.md` is a separate act and the only one that changes what gets written.
 
 ## The lessons loop
 
