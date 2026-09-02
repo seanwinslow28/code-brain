@@ -415,6 +415,29 @@ evidence of those weeks, and not before. Test before committing.
 - A **weekly email reminder** fires Sunday 08:00 so a probation week cannot quietly
   get skipped — `agents-sdk/scripts/oracle_reminder.py`, on launchd.
 
+### Week 1 failed, and the mechanism changed mid-probation on purpose
+
+**Sean denied every card in the first real deck** (2026-08-30). His reason: it pulled
+boring topics out of the week's codebase work, and *"me tweaking things in my codebase
+isn't always going to be a story."* The cause was structural rather than a scoring miss
+— an external hit was defined as timeliness attached to something he had already done,
+and the sweep supplied the nouns for every external query, so **the Oracle could not
+propose a subject he had not already worked on.** A quiet week produced boring nouns,
+boring queries, and a deck that could only anchor back to them.
+
+**The clock does not reset. Probation still runs to 2026-10-04** (Sean's ruling,
+2026-09-02). The change is not an escape from the probation record, it is the record:
+*"It would have definitely failed the probation if we kept going down the path we were
+on... Week 1 was a failure, so we made the change immediately to see if it can produce
+better results rather than allowing it to continue producing failures."*
+
+Read the graduation evidence accordingly. Weeks 2 onward test a **different mechanism**
+than week 1 did, and the honest question at graduation is whether the changed Oracle
+earns a schedule — not whether a six-week average clears a bar. Week 1 is kept in the
+record as the failure that caused the change, never averaged away. Changes ruled in
+that session are tracked at
+[#227](https://github.com/seanwinslow28/code-brain/issues/227).
+
 The reminder is deliberately the dumbest thing that works: no model, no SDK, no
 agent, no repo reads. It sends one fixed email. An Oracle that reached the inbox on
 a schedule would have smuggled itself past its own probation, and the reminder would
