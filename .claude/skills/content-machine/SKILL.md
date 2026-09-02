@@ -67,6 +67,13 @@ enough to live in the law itself (L4-06 above).
 score-until-good cycle, no persona panel, no numeric quality mean. A gate may route exactly one
 grounded revise request; the author decides everything else.
 
+**L8 binds judges, not generators** (ruled 2026-09-02). The rejected machine is one thing: personas
+that *score* output and iterate to a numeric mean. Frames, lenses or personas used to **generate
+candidates the author then rules on** are the sentence above, not a violation of it — that is
+`creative-partner`'s divergence stage, which Sean ratified, and it never writes a fate, a lock or a
+verdict. The test is whether the persona produces a *score* or a *candidate*. A candidate is legal at
+any count; a score is banned at any count.
+
 ## Stages
 
 | # | Stage | Owner | Status |
