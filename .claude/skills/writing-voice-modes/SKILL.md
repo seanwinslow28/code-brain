@@ -1,6 +1,6 @@
 ---
 name: writing-voice-modes
-description: Writing voice and tone control calibrated to Sean's personal style. One voice, his own dive-bar-grit register, written through a roster of 36 moves attested against his own corpus. The SENTENCE author of the Substack chain and the transcript-shaper of the content machine; every voice write commits to a dial before composing, self-checks for register drift before handoff, and states its voice decisions with the draft. Use when asked to "write in my voice", "write a blog post" (pairs with creative-writing), "make this sound like me", "add voice to this", "rewrite with personality", "dial this to 60%", "make this recruiter-safe", or any writing task where tone and style matter.
+description: Sean Winslow's voice, as a reference and as a composer. One voice, his own dive-bar-grit register, with an intensity control (the Professional Dial) and a roster of 36 moves attested against his own corpus. THREE STANDING JOBS, none of which is drafting inside the content machine: it is the ROSTER OF RECORD (`contracts/build_licensing.py` generates the move-licensing matrix by reading this file, and an unrated move fails the build), the HOST of `references/voice-samples.md` (the calibration authority the machine's clean-context shaper does read), and the REGISTER LAW that `writing-critique` and `writing-humanity-pass` consult for what to protect. It also still composes directly for work OUTSIDE the content machine. **This file is explicitly banned from the content machine's shaping context** (see `content-machine/SKILL.md`, "The shaping context") — voice there is induced from samples, never complied into from a rulebook; do not load it into a drafting subagent. Use when asked to "write in my voice", "make this sound like me", "add voice to this", "rewrite with personality", "dial this to 60%", "make this recruiter-safe", or when a gate, contract or build step needs the authoritative move roster or register law.
 ---
 
 # Writing Voice Modes
@@ -17,9 +17,9 @@ The skill has two jobs, and the second is as binding as the first: **compose** p
 
 - Writing blog posts, essays, newsletters, or social media with a distinct voice
 - Rewriting flat or generic text to sound like Sean
-- Shaping an interview transcript into prose as the content machine's Stage 3
+- Composing for work **outside** the content machine (its Stage 3 shaper is a clean-context subagent that is barred from reading this file)
 - Dialing voice intensity up or down for professional vs. personal contexts
-- As the SENTENCE author in the Substack chain: a beat map arrives from `storytelling-architecture` + `substack-value-engine`, and this skill writes every line against it (see Related Skills)
+- As the **register law** the post-draft gates consult, and the **roster of record** `build_licensing.py` generates the matrix from (see Related Skills)
 - Any writing task where "make this sound like me" is the goal
 
 ## The Voice Write Workflow (five steps, every run)
@@ -322,7 +322,7 @@ The moves in this file teach the HOW; the reference files carry the WHAT (lexico
 
 ## Related Skills
 
-This skill is the SENTENCE author in the Substack chain: `storytelling-architecture` → `substack-value-engine` → **`writing-voice-modes`** → `writing-critique` → `writing-humanity-pass`. The two upstream skills emit a beat map (story shape + value gate); voice-modes writes 100% of the prose fresh against it and must never reorder beats. The downstream `writing-critique` gate may route ONE grounded revise request back here ("revise against [this specific finding]"); voice-modes writes that revision, still without reordering beats. At the seam, this skill's output is two things: the voiced draft and the Voice Decision Record (Workflow Step 5). Carrying them forward belongs to whoever invoked the skill — Sean in an interactive session, the orchestrating agent in a chain run. This skill states its decisions; it does not own the transport.
+**The sequential Substack chain was retired 2026-08-31** (substack-studio CLAUDE.md §1). Drafting now runs through the content machine's clean-context shaper, which is **banned from reading this file**; the skills below run post-draft and advisory. This skill's standing jobs are the roster of record, the host of `references/voice-samples.md`, and the register law. The retired order, for the archaeology: `storytelling-architecture` → `substack-value-engine` → **`writing-voice-modes`** → `writing-critique` → `writing-humanity-pass`. The two upstream skills emit a beat map (story shape + value gate); voice-modes writes 100% of the prose fresh against it and must never reorder beats. The downstream `writing-critique` gate may route ONE grounded revise request back here ("revise against [this specific finding]"); voice-modes writes that revision, still without reordering beats. At the seam, this skill's output is two things: the voiced draft and the Voice Decision Record (Workflow Step 5). Carrying them forward belongs to whoever invoked the skill — Sean in an interactive session, the orchestrating agent in a chain run. This skill states its decisions; it does not own the transport.
 
 - `storytelling-architecture`: Upstream. Owns story ORDER and the beat map; voice-modes owns the SENTENCES. The handoff is lossy on prose by design (no drafted lines come forward), so voice is not flattened. Receive the beat map, author every line.
 - `substack-value-engine`: Upstream. Owns the Value Gate (Itch/Solution/Transfer) and the narrative-to-value seam. It decides the pivot line's JOB; voice-modes writes the line. Its "ask lands sideways" rule defers to this skill's **Desperation Posing as Self-Deprecation** anti-pattern (this skill owns the tone; value-engine owns the structural gate).
