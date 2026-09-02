@@ -79,7 +79,7 @@ any count; a score is banned at any count.
 | # | Stage | Owner | Status |
 |---|---|---|---|
 | 0 | **Oracle** — proposes what's worth writing from the author's recent work | [`content-oracle`](../content-oracle/SKILL.md) | live, on probation (on-demand only until 2026-10-04) |
-| 1 | **Topic** — one piece, one lane, one medium, named before anything else | this skill | live |
+| 1 | **Topic + value gate** — one piece, one lane, one medium, named before anything else; the publication's value gate clears here as a **hard block**, never post-draft | this skill + `substack-value-engine` | live |
 | 2 | **Interview** — one lens, one question at a time, read-back at the close | `interview/` | live, six lenses |
 | 3 | **Shape** — clean-context draft (see The shaping context) | fresh subagent, this skill orchestrates | live, re-scoped 2026-08-31 |
 | 4 | **Gates** — post-draft, advisory: origin (claims tier), do-not-promote + coined-lines sweep, humanity scrub, critique + the analyzer **dashboard** (no metric flags since #219) | `gates/` + chain skills as reference | live, all post-draft as of 2026-08-31 |
