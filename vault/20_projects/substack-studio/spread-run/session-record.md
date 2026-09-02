@@ -122,6 +122,95 @@ The generalizable rule: **a derived file inherits the privacy class of its most 
 nothing in the machine enforced that. Assembling private files into a bundle silently stripped their
 ignore rules, because ignore rules attach to paths and this was a new path.
 
+## The read (2026-09-02)
+
+Results: [`blind-read-results.json`](blind-read-results.json). Letters unsealed only after submission.
+
+| | Model | Harness | Samples | Bucket | Rank |
+|---|---|---|---|---|---|
+| **D** | **Claude Opus 5** | Claude Code subagent | full | **keep** | **1** |
+| B | Grok 4.6 | OpenRouter | full | keep | 2 |
+| A | Claude Opus 5 | Claude Code subagent | **stripped** | keep | 3 |
+| F | Qwen3.6 35B-A3B | local Ollama @64K | full | keep | 4 |
+| H | Gemini 3.1 Pro | OpenRouter | full | keep | 5 |
+| C | GPT-5.5 | OpenRouter | full | maybe | — |
+| E | Kimi K3 | OpenRouter | full | maybe | — |
+| G | GPT-5.5 | Codex CLI | full | cut | — |
+| I | Mistral Large 2512 | OpenRouter | full | cut | — |
+| **J** | **Claude Opus 5** | Claude Code subagent | full | **cut** | — |
+| K | DeepSeek v4 Pro | OpenRouter | full | cut | — |
+
+**Read caveat, his:** the ranking stage gave no way to re-open a draft, so he ranked the keep pile
+from memory. He stands behind **D** as the winner and states the order below it is skewed. The
+**buckets** were set while every draft was readable and are the reliable data. Console defect, not
+a reader defect; the ordering below D is not used for any claim here.
+
+## What the run actually found
+
+**1. The noise floor swamps the vendor spread. This is the finding.**
+**D and J are the same model, the same harness, byte-identical input and the same prompt** — two
+Opus 5 runs differing only in session. He ranked D **first of eleven** and **cut** J. Within-model
+variance spans the entire range of his judgment, which means **every vendor gap in this experiment
+is uninterpretable against it**. The slot spent on a hidden twin is the only reason we know that,
+and without it this run would have shipped a confident vendor ranking built on dice.
+
+The ticket asked how much of 86% is the configuration and how much is the writer. The answer this
+run supports is **neither, substantially** — the same writer in the same configuration produced his
+favourite draft and a cut draft on the same afternoon.
+
+**2. The analyzer cannot see what he sees, and the twins prove it.**
+
+| | D (rank 1) | J (cut) |
+|---|---:|---:|
+| mean sentence | 13.71 | 13.86 |
+| CV | 0.623 | 0.664 |
+| MATTR | 0.858 | 0.843 |
+
+Metrically indistinguishable; opposite ends of his judgment. Independent corroboration of #219's
+retirement of the analyzer gates, arriving from a direction #219 could not have tested: not "the
+metric fires at chance against survival" but "the metric reports two drafts as identical when the
+author considers one the best of eleven and the other unusable."
+
+**3. The difference is beat integration, not sentence quality.**
+D puts the Kerouac observation *inside* the ferry scene: "watching Kerouac keep a single sentence
+going long enough to punch me in the face four times." J stops the scene to explain Kerouac in a
+standalone declarative, then cannot get back — "I'd found Nate B. Jones' YouTube around then too" —
+which is precisely what he flagged. Same writer, same inputs, and the whole gap is where the beat
+sits. That is `storytelling-architecture` territory and invisible to every instrument we own.
+
+**4. Three vendors independently made the same structural mistake.**
+The mother/sisters ordering defect was flagged on **C (GPT-5.5), E (Kimi K3) and J (Opus 5)** — three
+labs, same paragraph, same error: the punchlines-land-on-mother-and-sisters line followed by the
+Mom-callback-in-a-technical-essay line, which re-introduces something already introduced. Model
+independence makes this a property of **the material's beat order**, so the remedy is an interview
+instruction and a `storytelling-architecture` lesson, never a model choice.
+
+**5. The corpus teaches the em-dash ban with no rule stating it.**
+The shaping context contains no style rules of any kind and never mentions em-dashes. Eight of
+eleven drafts still returned **zero**. The two that did not were Mistral (10) and DeepSeek (9), and
+both were cut; the local model used 2. This is the rules-off premise working as designed — voice
+induced from samples rather than complied into — and it is the first measurement of it across
+vendors.
+
+**6. The $0 local tier is a real fallback.** qwen3.6 35B-A3B placed **4th of 11 and made the keep
+pile**, beating both GPT-5.5 arms, DeepSeek, Mistral, and one of the two Opus runs, at $0 and 182
+seconds.
+
+**7. The stripped-samples arm placed 3rd and made the keep pile.** Cutting #160's quarantined 2,734
+words from `voice-samples.md` did not hurt the draft. Live evidence for #224, though note finding 1:
+one draft against a noise floor this wide is suggestive, not conclusive.
+
+**8. Harness axis: no claim.** GPT-5.5 was `maybe` single-shot (C) and `cut` agentic (G). n=1 per
+cell against a noise floor that spans the whole range. Recorded, not concluded.
+
+## Design implication, for Sean to rule
+
+If two runs of the same model land at rank 1 and cut, then **a machine that generates one draft is
+gambling**, and the cheapest available fix is to generate two or three candidates per piece from the
+incumbent and let him pick — which is what this run accidentally demonstrated. That is candidate
+*selection*, explicitly not the score-until-good revision loop L8 bans: machines write candidates,
+the author ratifies. It would change stage 3 of the machine and is his call, not this ticket's.
+
 ## Instruments
 
 `analyze.py` (writing-critique dashboard, verified in-session: it reproduces the predecessor record's
