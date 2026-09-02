@@ -211,6 +211,59 @@ incumbent and let him pick — which is what this run accidentally demonstrated.
 *selection*, explicitly not the score-until-good revision loop L8 bans: machines write candidates,
 the author ratifies. It would change stage 3 of the machine and is his call, not this ticket's.
 
+## The survival number (2026-09-02)
+
+Sean hand-rewrote D. `diff_pieces.py`: **44 of 70 sentences untouched — 62.9%**, 11 change blocks.
+His rewrite: [`sean-final.md`](sean-final.md).
+
+| Run | Config | Survival |
+|---|---|---:|
+| run #2 | rules-on | 25% |
+| run #3 | rules-on | 38% |
+| ep. 1 | rules-on | 64% |
+| Arm B | rules-off, blinded | **86%** |
+| **D (this run)** | rules-off, blinded | **62.9%** |
+
+**Read it with the confound, which grew between the two measurements.** Of the 23 sentences he added
+to D, **6 are verbatim from his earlier Arm B final** — a document D was deliberately blinded to. In
+his words: *"I just made similar changes to the ones that I made in a previous transcript 2 edit."*
+Under production rules the shaper would have had that prior hand-rewrite (shaping-context rule 6
+exists for exactly this), so those six are very likely not changes a production run would have
+incurred. Crediting them gives an **estimated ~71%**, stated as an estimate and not a measurement.
+
+**The conclusion is methodological, and it retires the substrate: transcript #2 is spent.**
+He now holds three finals of this story. Every further blinded draft is scored against an
+accumulating set of settled decisions it cannot see, and the penalty compounds with each pass. The
+blinding that made 86% comparable is now the thing suppressing the number. **A story the author has
+already finalized cannot be used to measure survival again** — a re-run measures his memory, not the
+machine. Any future spread work needs a fresh transcript, which also means it cannot be anchored,
+which is the trade #221 chose deliberately and has now used up.
+
+Note this does **not** rescue a vendor ranking. Finding 1 stands: the within-model noise floor spans
+rank-1-to-cut, so 62.9% and 86% are two draws from a distribution nobody has characterised, on a
+substrate that changed underneath them. Neither number should be quoted as the machine's score.
+
+### Two things his rewrite confirmed independently
+
+**The mother/sisters defect is real and he fixed it the way his own flaw notes prescribed** — split
+into "The punch lines kept coming back aimed at my wacky sisters." and a standalone "I'm an only
+child." Flagged on C, E and J by three different vendors, then corrected by hand here: **four
+independent confirmations**. It is a beat-order property of the material, so it routes to the
+interview and to `storytelling-architecture`, never to model selection.
+
+**His inventions are durable.** The hot-cocoa/Mother detail appears in no transcript, no corpus file
+and no sample. It arrived at his Arm B rewrite (recorded there as a fresh invention, L3-05) and came
+back **verbatim** here. L3-05 said the best material arrives at the rewrite; this adds that once it
+arrives it persists across rewrites, which is an argument for routing rewrite inventions into the
+corpus rather than treating each one as a one-off.
+
+### Not done here, on purpose
+
+The 11 change blocks were **not** proposed into the lessons ledger. The lessons loop is for shipped
+pieces, and this is an experimental re-draft of an already-published story; seeding pending
+candidates from it would pollute the ledger with edits that are partly re-imports rather than
+reactions. Sean's call if he wants them.
+
 ## Instruments
 
 `analyze.py` (writing-critique dashboard, verified in-session: it reproduces the predecessor record's
