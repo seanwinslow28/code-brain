@@ -1,23 +1,65 @@
 ---
 name: content-oracle
-description: Stage 0 of the content machine. Sweeps the author's own systems (git, dailies, closed issues, partner-session sidecars, fleet manifests) plus a last30days external scan, scores candidates on six spike signals, and emits ~10 decision cards so a writing session starts from a concrete idea instead of a blank page. Unused cards bank rather than evaporate. Use when asked "what should I write about", "find me content spikes", "what's worth writing this week", or to "run the content oracle". NOT the separate `the-oracle` capture/reminders project at ~/Code-Brain/the-oracle/ — a bare "run the oracle" is ambiguous between the two, so ask which one. On-demand only: it is on probation and has no schedule.
+description: Stage 0 of the content machine. Three supplies — a sweep of the author's own systems (git, dailies, closed issues, partner-session sidecars, fleet manifests), a news lane (AI news of the week, gisted), and a frame stage (four tool-denied lenses proposing experiments he could run) — plus a last30days anchor scan; one scoring pass; two decks ("worth a piece this week" on six signals, "worth posting" on five) so a writing session starts from a concrete idea instead of a blank page. Unused cards bank rather than evaporate. Use when asked "what should I write about", "find me content spikes", "what's worth writing this week", or to "run the content oracle". NOT the separate `the-oracle` capture/reminders project at ~/Code-Brain/the-oracle/ — a bare "run the oracle" is ambiguous between the two, so ask which one. On-demand only: it is on probation and has no schedule.
 ---
 
 # Content Oracle
 
 The Oracle ends "what do I write about." It does not write anything.
 
-It reads what the author actually did in the last seven days, ranks what has a
-piece in it, and hands him a short deck to pick from. Stage 1 of
-[`content-machine`](../content-machine/SKILL.md) takes it from there.
+It reads what the author actually did in the last seven days, what happened in AI
+that week, and what four different lenses say he could go find out — then scores the
+lot once and hands him two short decks to pick from: **worth a piece this week** and
+**worth posting**. Stage 1 of [`content-machine`](../content-machine/SKILL.md) takes
+it from there.
 
-Build ticket: [GitHub #169](https://github.com/seanwinslow28/code-brain/issues/169).
-Pattern source: Alex Lieberman's content machine (the five signals below are his,
-transcribed verbatim; the sixth is Sean's addition).
+Build tickets: [#169](https://github.com/seanwinslow28/code-brain/issues/169) (the
+sweep and the six signals), [#227](https://github.com/seanwinslow28/code-brain/issues/227)
+(the rulings after week 1 failed), [#238](https://github.com/seanwinslow28/code-brain/issues/238)
+(frame stage, two decks), [#239](https://github.com/seanwinslow28/code-brain/issues/239)
+(news lane, listening report). Pattern source: Alex Lieberman's content machine (the
+five long-form signals are his, transcribed verbatim; the sixth is Sean's addition).
+
+## The card bar: an experiment he could run
+
+**A topic becomes a card when it names an experiment Sean could run.** Not when it
+names something he did.
+
+The experimentation thesis is *what he would go find out*, not *what he did*. Week 1
+read it the other way — the sweep supplied every noun, so every card was a commit
+wearing a story — and he denied all twelve, because *"me tweaking things in my
+codebase isn't always going to be a story."* Commits are boring because commits are
+not experiments. A card proposes a subject and an experiment; the interview happens
+after he has run it.
+
+This keeps the origin law whole. A card **never asserts he did something**. A
+synthesized spike claiming he found X is still banned, and it is banned for a reason
+the gates cannot fix: by interview time he really will say the words, so the origin
+gate downstream passes the fake premise as his. The only thing a card may claim is
+"do this, expect that," and everything on it is a hypothesis until he runs it.
+
+Two shapes of card follow, and the deck is mostly the first:
+
+- **Experiment cards** — an experiment he could run this week, from a frame angle, a
+  news item, or a sweep item that has an open question in it.
+- **Done-thing cards** — the #169 shape: a moment that already happened, with an
+  artifact behind it. Still legal, still scored the same way; just no longer the only
+  shape, and no longer the default.
+
+And a bar on the first, in his words: not *"Fable 5.1 dropped, can it one-shot X."*
+That is the easy content the publication exists against. *"Exploration and seeing what
+it's capable of that people might not have thought about... instead of one-shot
+prompting."*
 
 ## The evidence rule
 
-**Every card points at one artifact. A card with no evidence pointer is an invention.**
+**Every card carries an evidence pointer. A card with none is an invention.** The
+pointer takes one of two forms, and the form says which shape of card it is:
+
+| Card | `Evidence:` holds | Plus |
+|---|---|---|
+| **Done thing** | the artifact: a commit sha, a `vault/daily/<date>.md`, an issue number, a sidecar filename, a URL | — |
+| **Experiment** | the **provocation**: the news URL, or the sweep item, that prompted it | `Status: unrun` |
 
 This is the origin law (`content-machine`'s L2) applied one stage earlier. The
 machine exists so drafts come from things the author said; an Oracle that
@@ -25,15 +67,19 @@ synthesized plausible-sounding spikes out of metadata would poison the well at t
 source, and the origin gate downstream cannot catch it — by the time the interview
 runs, the fake premise is what he is being interviewed *about*.
 
-So: a commit sha, a `vault/daily/<date>.md`, an issue number, a sidecar filename, a
-URL. If the sweep did not surface it, it is not a card.
+An experiment card cannot point at an artifact, because nothing has been done yet.
+So it points at what prompted it, and says so with `Status: unrun`. A frame angle
+with no provocation — nothing in the week and nothing in the news that it answers —
+is still an invention, and it still banks. If neither the sweep nor the news lane
+nor a frame surfaced it, it is not a card.
 
-## The six signals
+## Deck one — worth a piece this week (six signals)
 
 Five are Lieberman's, from the founders transcript — the Oracle "hunts for spikes,
 and spikes are basically how much point of view is there, how much story potential
 is there, how much emotional intensity is there, how much lesson or framework is
-there, and how much depth is there." The sixth is the L7 amendment.
+there, and how much depth is there." The sixth is the L7 amendment. These were all
+built for long-form, which is why they are one deck and not the only one.
 
 | Signal | The question | 0 | 3 |
 |---|---|---|---|
@@ -58,12 +104,69 @@ card in the deck, because it is the one he'll pick.
 revise until the number is good. Ranking *candidates* is what an Oracle is for, and
 the author picks from the deck — the number orders the list, it decides nothing.
 
+**Spine for this deck means a capture is required**: a past spike, or an experiment
+he would run. *Not* "a model dropped, can it one-shot X" — that scores 0 here
+however loud the release was.
+
+## Deck two — worth posting (five signals)
+
+An X card scores near zero on Story and Depth **by construction**: the X contract
+gives the medium room 1 and no arc. In a shared ranking it sinks under every
+long-form card, and the ranking is meaningless anyway — a Substack card and an X card
+are not competing for one slot. So posts get their own deck, scored on what actually
+makes a post land. Two definitions are reused from
+[`contracts/expressive/LANE.md`](../content-machine/contracts/expressive/LANE.md)
+rather than reinvented: the first screen on X is the post to the fold plus the
+attached image, and the reply-hook question is "where would a reader want to argue."
+
+| Signal | The question | 0 | 3 |
+|---|---|---|---|
+| **Angle** | Is there a turn? | it happened | the reader expects one thing and gets another: funny, unexpected, or teaching what's possible |
+| **Clock** | Is there a reason this posts this week? | could post any week | the thing it reacts to is live now and stale by next Sunday |
+| **Fit** | Does it land in one sentence? | needs a thread to make sense | one landed sentence, no setup (the contract's room 1) |
+| **Image** | Does a picture carry the first screen? | nothing to show | an artifact that already exists *is* the post and the words are its caption |
+| **Reply-hook** | What does a reader say back? | "nice," or nothing | they argue with it, or add their own instance |
+
+Score each 0–3. Rank by the sum, out of 15.
+
+**Spine-X is the veto, with its own bar: an angle exists, and the post is not an
+announcement.** A pure take is legal here. *"Fable 5.1 just dropped!! It's OVER"* is
+not, however many people would like it. Two guards are written into the scale:
+
+- **An engagement question scores 0 on Reply-hook.** The lane law already says a CTA
+  is the absence of a hook; scoring it 0 stops the deck drifting toward "what do you
+  think?"
+- **Image scores only what already exists.** "Could generate a chart" is a 1, because
+  that is writing-from-nothing in picture form, and #172 already treats on-screen
+  content as a claim.
+
+Why five and not three: Fit and Image decide *which subject* becomes an X card, not
+how it is formatted. A spike with a screenshot behind it is a different X candidate
+from the same spike without one. That is card-time information.
+
+## The LinkedIn credibility tag
+
+LinkedIn is not a Spine column. L4 holds: it is a syndication target, never a
+composition surface, and *"here's how I'm using it in my workflow as an AI PM"* is
+native composition, which `contracts/professional/linkedin.md` bans outright.
+
+Instead, **AI-PM credibility is a tag on the card**: `Cuts to LinkedIn: yes | no`. It
+labels both decks and it **never moves a rank** — a tag, not an addend. Same lesson
+as Spine-as-veto: a summed score lets the wrong cards climb on quiet weeks, and a
+model release is the textbook case, maximally cuttable to LinkedIn and often a thin
+story. The tag shapes *which Substack or X piece gets written*; the LinkedIn cut
+follows whichever artifact ships, last, per L4.
+
 ## Interviewability
 
 Not a signal — a gate on the card's usefulness. The machine can only write from what
 he says, so a spike he cannot be interviewed about is worth nothing however it
-scores. Every card therefore names its lens and what the interview has to go get. If
-that field cannot be filled, the card is not ready and it banks.
+scores. Every card therefore names its interview lens and what the interview has to
+go get. If that field cannot be filled, the card is not ready and it banks.
+
+For an experiment card the interview happens *after* he runs it. The field still has
+to be fillable now: what the interview will have to go get once there is a result.
+An experiment nobody could be interviewed about is a benchmark, not a piece.
 
 ## Running it
 
@@ -91,20 +194,88 @@ The sweep gathers and does not judge. Same split as the origin gate: mechanical
 collection, then a reading pass. A harvester that scored would be guessing at
 stories from metadata.
 
-**2. External scan** — the `last30days` skill, every run (Sean's ruling, 2026-08-26).
+**2. News pull** — AI news of the week, big and small, across the subject branches
+ruled on #227: AI news, tools, agents, system design, and creativity with AI. Built
+on [#239](https://github.com/seanwinslow28/code-brain/issues/239). It is a
+NEWS-shaped pull on purpose (see the query table below: this is the one place
+"latest on X" is allowed). Each item yields a **two-line gist** for the frame stage —
+what happened, and what the thing can now do that it could not last week — written
+to a git-ignored `gists.json`:
 
-An external hit is **not a topic**. It is timeliness attached to something he
+```json
+[{"happened": "<what happened, one line>",
+  "can_now": "<what it can now do that it could not last week>",
+  "source": "<URL — kept for the card's Evidence field; generators never see it>"}]
+```
+
+A news item is a card candidate in its own right (a **news card**: Sean consumes the
+article or video, an angle forms, the interview follows) *and* a provocation for
+the frame stage. The listening report that renders the week's news to local TTS is
+#239's other half.
+
+**3. Frame stage** — four fresh, tool-denied lenses on a stripped week (#227 rulings
+18–19; built on #238). This is the supply the sweep cannot reach: a quiet week
+produces boring nouns, and a lens applied to those nouns plus the news produces
+experiments the nouns alone never would.
+
+```bash
+python3 .claude/skills/content-oracle/frame_stage.py --summary <ignored path> --gists <ignored path> [--dry-run]
+```
+
+- **The payload is stripped, and the script checks it.** The session writes a short
+  summary of the week — nouns and shapes, no quotes, no paths, no identifiers — and
+  the script refuses to dispatch if the summary carries a path, an email, a sha, a
+  line lifted verbatim from a daily, a sidecar, the corpus or a transcript, or is
+  simply too long to be a summary. `--dry-run` prints exactly what would be sent and
+  sends nothing; **inspect it before the first live run of a new week.**
+- **Four generators, each seeing only the summary, the gists, and its own lens
+  card.** Headless `claude --print --tools ""`, the pattern validated in
+  `creative-partner/references/divergence-stage.md`: fresh context and full tool
+  denial enforced by the runtime, not by a prompt. Two natives + one foreign + one
+  wild per run, natives from [`references/frames.md`](references/frames.md), foreign
+  and wild from the creative-partner deck by reference. Rotates by week unless
+  overridden. Each returns 3–5 experiment angles stamped with its lens id.
+- **No critic call.** Divergence in `creative-partner` runs a fifth call to cluster
+  and shortlist. Here the scoring pass (step 5) already clusters and ranks, so a
+  critic would be a second judge. Four calls, roughly $0.20 on top of the $0 sweep.
+- **A failed slot stays failed.** It is never re-rolled or replaced; the run header
+  says how many of four returned.
+
+**Where do fresh ideas come from if the generators have no tools, and does the
+model's cutoff make them stale?** Freshness comes through the payload, not the
+helper. A generator applies a forcing move — structural, cutoff-proof — to material
+it is handed: this week's nouns and the news gists. The cutoff bites only if a
+generator has to *know* a capability exists, which is why the news pull runs first
+and each gist says what the thing can now do. Giving generators tools would make it
+worse on three counts already measured in this repo: search pulls the vendor-SEO
+shape (#170, and the query table below), tools are convergence pressure (the
+2026-08-04 live run validated tool denial as the only pattern that kept four
+generators different), and a helper with file access can read sidecars. The honest
+limit, already on the record in `divergence-stage.md`: this samples the training
+distribution more widely, it does not escape it. Four lenses on fresh material beats
+one; it is not a web search and is not trying to be.
+
+**4. External anchor scan** — the `last30days` skill, every run (Sean's ruling,
+2026-08-26).
+
+An anchor hit is **not a topic**. It is timeliness attached to something he
 actually did, or a reaction candidate that must clear Spine on its own merits. The
-question to ask of every external item is "which of his internal spikes does this
-give a reason to publish *this week*" — not "what's trending."
+question to ask of every anchor item is "which of his internal spikes does this
+give a reason to publish *this week*" — not "what's trending." Subjects he has not
+worked on enter through steps 2 and 3, not through this one.
 
-### The sweep supplies the nouns
+### The sweep supplies the nouns — for anchor queries only
 
-**Run the internal sweep first, then derive every external query from it.** The
+**Run the internal sweep first, then derive every *anchor* query from it.** The
 usual order — scan the zeitgeist, then ask whether Sean has anything to say — is
 what produces detours, and it is why Spine needed a veto. Inverting it makes the
-editorial law mechanical: a query built from his own week cannot return a card about
-someone else's.
+editorial law mechanical: an anchor query built from his own week cannot return a
+card about someone else's.
+
+This rule used to govern *every* external query, and that is what made week 1 fail:
+the Oracle was architecturally unable to propose a subject he had not already worked
+on. It now governs anchor queries and nothing else. The news lane runs on its own
+phrasing, and the frame stage phrases no search at all.
 
 Pick the **two** internal spikes where the take already exists but the *reason to
 publish now* does not — high Story and Depth, thin on nothing else. Those are the
@@ -116,14 +287,16 @@ ones an external anchor can actually improve. Two queries, not five: each
 `last30days` branches on how the question is phrased, so phrasing decides the report
 you get before any source is touched:
 
-| Never ask | Why |
-|---|---|
-| "best X", "top X", "what X should I use" | Parses as RECOMMENDATIONS → a list of tools. Pulls vendor SEO and affiliate content. This is #170's documented failure reproduced on a different engine. |
-| "X vs Y" | Parses as COMPARISON → a head-to-head buyer's guide. Answers a purchasing question, not a writer's. (Fine to run deliberately outside the Oracle.) |
-| "latest on X", "X news" | Parses as NEWS → what everyone else already read, and therefore already wrote about. |
+One table, two columns — the ban is scoped, not lifted (#227, ruling 18):
+
+| Shape | Anchor queries (step 4, derived from his week) | News queries (step 2, the news lane) |
+|---|---|---|
+| "best X", "top X", "what X should I use" | **Banned.** Parses as RECOMMENDATIONS → a list of tools. Pulls vendor SEO and affiliate content. This is #170's documented failure reproduced on a different engine. | **Banned.** A roundup is not news. |
+| "X vs Y" | **Banned.** Parses as COMPARISON → a head-to-head buyer's guide. Answers a purchasing question, not a writer's. (Fine to run deliberately outside the Oracle.) | **Banned.** Same reason. |
+| "latest on X", "X news" | **Banned.** Parses as NEWS → what everyone else already read, and therefore already wrote about. An anchor wants the discussion *under* the news, not the news. | **Required.** The news lane is a NEWS-shaped pull by definition and uses this phrasing on purpose. |
 
 Everything below parses as GENERAL, which is the mode that returns discussion rather
-than a product roundup.
+than a product roundup — and it governs anchor queries only.
 
 **The phrasing rules govern the report, not the platforms — and the banned shape
 re-enters through the platforms.** Measured twice, from two sources, which is the
@@ -354,30 +527,64 @@ answers and 2 upvotes. That subreddit is arguing about what breaks and nobody ha
 published a ledger, which is the whole card. Scan for the inversion first; it finds
 unoccupied ground faster than reading does.
 
-**3. Score and deck.** Read the sweep, apply the six signals, emit roughly ten cards
-ranked by total. Label each internal or external, and say the split out loud —
-if external is crowding the deck, that is a fact he should see rather than a shape
-he has to reverse-engineer.
+**5. Score and deck — one pass, two decks.** Everything from steps 1 to 4 goes into
+**one pile**: sweep items, news items, anchor hits, frame angles. Score each once. A
+candidate with long-form shape goes to the piece deck on the six signals; a candidate
+that lands in one sentence goes to the post deck on the five; a candidate may sit in
+both, scored separately, and **nothing is ranked across decks**. A card banks only if
+it is dead on both bars.
 
-**4. He picks one.** Never pick for him. The rest bank.
+Frame angles get **no lane of their own**. A merged ranking is exactly the shape the
+Spine veto was built to stop, and the only way a frame angle cannot launder past
+Spine is if it has nowhere else to go. It enters the pile like everything else and
+faces the same veto.
+
+Roughly ten cards across the two decks. Label each by source — `internal`,
+`external`, `news`, `frame` — and say the split out loud. If news or frames are
+crowding the pile, that is a fact he should see rather than a shape he has to
+reverse-engineer; the majority of the deck stays experiment cards, and a deck that
+is mostly news cards has drifted.
+
+**6. He picks.** Never pick for him. A piece card and a post card may be the same
+subject — one interview, then a fresh subagent per artifact, drafted in the order
+the clocks close (#227, rulings 14–16). The rest bank.
 
 ## Card format
 
 ```
 SPIKE <n> — <title>
-Source: internal:<git|issue|daily|sidecar|fleet|tickets> | external:<where>
-Evidence: <sha | issue # | path | URL>
+Deck: piece | post
+Source: internal:<git|issue|daily|sidecar|fleet|tickets> | external:<where> | news:<where> | frame:<lens id>
+Evidence: <sha | issue # | path | URL>                              ← done-thing cards
+Evidence: <provocation — the news URL or the sweep item> · Status: unrun   ← experiment cards
 Query: <external cards only — the shape and the exact query that surfaced it>
-Signals: POV <n> · Story <n> · Emotion <n> · Framework <n> · Depth <n> · Spine <n> = <total>/18
-The moment: <the specific thing that happened, one or two lines>
-Why it's a piece: <the take or the shape it would carry>
+Signals: POV <n> · Story <n> · Emotion <n> · Framework <n> · Depth <n> · Spine <n> = <total>/18      ← piece deck
+Signals: Angle <n> · Clock <n> · Fit <n> · Image <n> · Reply-hook <n> = <total>/15 · Spine-X: pass   ← post deck
+Cuts to LinkedIn: yes | no
+The moment | The experiment: <one or two lines — what happened, or "do this, expect that">
+Why it's a piece | Why it posts: <the take or the shape it would carry>
 Lane / medium: <suggested contract under contracts/>
 Lens: <which interview lens — and what the interview has to go get>
 ```
 
+Field rules:
+
+- `Deck:` says which bar the `Signals:` line was scored on. A subject in both decks
+  is two cards.
+- `Source: frame:<lens id>` is how a frame-sourced card carries its lens — the same
+  way an external card carries its query shape on `Query:`. The bank reads it (see
+  Probation). `Lens:` stays the **interview** lens, because the interview engine
+  requires one on every card (#231) and a field carrying two meanings would break
+  both the engine and the record.
+- `Status: unrun` is mandatory on every experiment card and forbidden on a
+  done-thing card. It is the line that says "nothing here is a claim yet."
+- `Cuts to LinkedIn:` is a tag. It never appears in a sum.
+
 A picked card becomes the TOPIC CARD at stage 1. It is a proposal, not a brief: he
 can overrule the lane, the medium, and the angle, and the interview outranks all of
-it.
+it. A picked *experiment* card becomes a TOPIC CARD only after he has run the
+experiment — the interview is about what happened, and until then there is nothing
+to interview about.
 
 ## The ideas bank
 
@@ -436,7 +643,11 @@ than week 1 did, and the honest question at graduation is whether the changed Or
 earns a schedule — not whether a six-week average clears a bar. Week 1 is kept in the
 record as the failure that caused the change, never averaged away. Changes ruled in
 that session are tracked at
-[#227](https://github.com/seanwinslow28/code-brain/issues/227).
+[#227](https://github.com/seanwinslow28/code-brain/issues/227); the rebuild shipped
+on #238 (the card bar, the frame stage, two decks) and #239 (the news lane, the
+listening report). **Week 2, 2026-09-06, is the first run of the changed mechanism.**
+The Oracle's reminder fires on the Mac Mini, and a ruling written here reaches that
+machine only when it pulls — verify the pull before the Sunday run, never assume it.
 
 The reminder is deliberately the dumbest thing that works: no model, no SDK, no
 agent, no repo reads. It sends one fixed email. An Oracle that reached the inbox on
@@ -454,6 +665,13 @@ decision reads that record, and it is reading for two things:
   produce none in six weeks, that is a finding worth more than the schedule
   decision itself — it is how the query table above gets corrected by use instead
   of by argument.
+- **Which lenses produced picked cards?** Every frame-sourced card carries its lens
+  on `Source: frame:<id>`, and every run records the four lenses it dispatched
+  (the script prints a bank-record stub), so the bank accumulates the same evidence
+  about lenses that it accumulates about query shapes. A lens earns or loses its
+  slot on that evidence, by Sean's ruling. A run where no frame angle was picked is
+  a finding about the deck, not a reason to skip the stage.
+- **Did a news item become a card?** Same record, third column, once #239 is live.
 
 **Watch item: are the six signals separating?** Both pre-probation probes returned a
 best card at **17 of 18**. If every card tops out, the ranking is decorative and the

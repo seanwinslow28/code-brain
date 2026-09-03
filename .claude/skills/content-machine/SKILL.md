@@ -78,7 +78,7 @@ any count; a score is banned at any count.
 
 | # | Stage | Owner | Status |
 |---|---|---|---|
-| 0 | **Oracle** — proposes what's worth writing from the author's recent work | [`content-oracle`](../content-oracle/SKILL.md) | live, on probation (on-demand only until 2026-10-04) |
+| 0 | **Oracle** — proposes what's worth writing: experiments he could run (frame stage + news lane) and done things from his own week (sweep), scored once into two decks | [`content-oracle`](../content-oracle/SKILL.md) | live, on probation (on-demand only until 2026-10-04); rebuilt after week 1 failed (#227, #238, #239) |
 | 1 | **Topic + value gate** — one piece, one lane, one medium, named before anything else; the publication's value gate clears here as a **hard block**, never post-draft | this skill + `substack-value-engine` | live |
 | 2 | **Interview** — one lens, one question at a time, read-back at the close | `interview/` | live, six lenses |
 | 3 | **Shape** — clean-context draft (see The shaping context) | fresh subagent, this skill orchestrates | live, re-scoped 2026-08-31 |
@@ -356,5 +356,7 @@ The repo is public.
 - `substack-value-engine` — the value gate. Owns whether the piece is worth a reader's time.
 - `writing-critique` — adversarial gate. Never rewrites; routes one grounded revise.
 - `writing-humanity-pass` — final scrub. Owns the AI-tell sweep and the no-em-dash rule.
-- `content-oracle` — Stage 0. Sweeps his own systems for spikes and decks ~10 cards.
+- `content-oracle` — Stage 0. Three supplies (sweep, news lane, frame stage), one scoring pass, two
+  decks: worth a piece this week, worth posting. A card names an experiment he could run, or a done
+  thing with an artifact behind it; it never asserts he did something he did not.
 - `grilling` — when the author wants the *plan* stress-tested rather than the story drawn out.

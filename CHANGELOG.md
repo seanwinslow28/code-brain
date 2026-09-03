@@ -7,6 +7,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added — the Oracle's frame stage and two decks (2026-09-03, #238; ruled on #227)
+
+Week 1 of the Oracle's probation produced twelve cards and zero picks, because the
+sweep supplied every noun and the Oracle could not propose a subject Sean had not
+already worked on. The rebuild ruled on #227 ships here; #239 carries the news lane
+and the listening report.
+
+- **The card bar moved**: a topic becomes a card when it names an *experiment he
+  could run*, not a thing he did. The evidence rule gains a second form — an
+  experiment card's `Evidence:` is its provocation, with `Status: unrun` — and a
+  card still never asserts he did something (the #169 core survives intact).
+- **New `content-oracle/frame_stage.py`**: four fresh, tool-denied `claude --print`
+  generators per run (two natives + one foreign + one wild; natives in the new
+  `references/frames.md`: off-label, falsifier, studio; foreign and wild by reference
+  to the creative-partner deck), each receiving only a stripped week summary, the
+  news gists, and its own lens card. No critic call; the in-session scoring pass is
+  the one judge. `inspect_payload` refuses to dispatch a summary carrying a path, an
+  email, a sha, or a line lifted verbatim from a daily, sidecar, corpus or
+  transcript; `--dry-run` prints the exact payload. 16 unit tests, no model calls.
+- **Two decks in `SKILL.md`**: *worth a piece this week* (the six signals, Spine veto
+  now stated as "a capture is required") and *worth posting* (angle / clock / fit /
+  image / reply-hook out of 15, Spine-X veto: an angle exists and it is not an
+  announcement; engagement questions score 0 on reply-hook; image scores only what
+  exists). One scoring pass, nothing ranked across decks; frame angles get no lane
+  of their own so they cannot launder past Spine. `Cuts to LinkedIn:` is a tag on
+  both decks and never an addend (L4 holds).
+- **The query table has two columns**: the "latest on X" ban is scoped to anchor
+  queries; the news lane is a NEWS-shaped pull by definition. "The sweep supplies
+  the nouns" now governs anchor queries only, and says why.
+- **Bank record** gains a lens column beside the query-shape column; the script
+  prints the stub.
+- Runtime-impact protocol followed: `content-machine/SKILL.md` stage table and
+  skill list, and the reminder email body, updated; registry entry
+  `oracle-sweep-supplies-every-noun` added; scan clean.
+
+
 ### Changed — the writing-critique analyzer is a dashboard, not a gate (2026-09-01, #219)
 
 `flag_metrics` is now **empty**: no metric flags, every one reports beside its band.

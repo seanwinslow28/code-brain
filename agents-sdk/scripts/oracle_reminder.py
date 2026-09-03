@@ -45,9 +45,10 @@ Run the Oracle.
     /content-oracle
 
 It sweeps the last 7 days of your own systems (git, closed issues, dailies,
-partner-session sidecars, fleet manifests), runs the last30days external scan,
-and hands you ~10 ranked spike cards. Pick one; the rest bank to
-creative-studio/content-machine/ideas-bank.md.
+partner-session sidecars, fleet manifests), pulls the week's AI news, runs four
+lenses over both for experiments you could go run, anchors with last30days, and
+hands you two decks: worth a piece this week, worth posting. Pick; the rest bank
+to creative-studio/content-machine/ideas-bank.md.
 
 {probation}
 
