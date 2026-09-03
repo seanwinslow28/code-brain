@@ -1,4 +1,21 @@
-"""Load configuration from config.toml and environment variables."""
+"""Load configuration from config.toml and environment variables.
+
+Local overrides (2026-09-03)
+----------------------------
+`config.toml` is TRACKED and public. Deploy-time state that must never enter
+this repo — the claim-6 drill registration, whose `acknowledged_device` is a
+personal device name — lives in a gitignored sibling `config.local.toml` that
+is deep-merged OVER the tracked file by `load_raw_config()`.
+
+This replaces three pieces of invisible local-only state that used to hold the
+registration in a permanently dirty working tree: a `skip-worktree` mask on
+`config.toml`, and the `.git/hooks/{pre-commit,post-merge}` guards that
+existed to police it. The tracked config can now ship unarmed and committable
+while the machine stays armed.
+
+A malformed override raises rather than being skipped: an override silently
+ignored is the exact failure mode this mechanism exists to end.
+"""
 
 from __future__ import annotations
 
@@ -16,6 +33,59 @@ from dotenv import load_dotenv
 
 CONFIG_PATH = Path(__file__).parent.parent / "config.toml"
 ENV_PATH = Path(__file__).parent.parent.parent / ".env"
+
+
+def local_config_path_for(config_path: Path) -> Path:
+    """Return the `config.local.toml` sibling that overrides `config_path`.
+
+    Derived from the given path rather than hardcoded so a test pointing at a
+    tmp_path config never picks up the real machine's override.
+    """
+    return config_path.with_name(f"{config_path.stem}.local{config_path.suffix}")
+
+
+def deep_merge(base: dict, override: dict) -> dict:
+    """Recursively merge `override` into `base`, returning a NEW dict.
+
+    Nested tables merge key-by-key so an override may set a single key (e.g.
+    `[agents.claim6_drill].schedule_enabled`) without restating its table.
+    Non-table values — including lists — replace wholesale.
+    """
+    merged = dict(base)
+    for key, value in override.items():
+        existing = merged.get(key)
+        if isinstance(value, dict) and isinstance(existing, dict):
+            merged[key] = deep_merge(existing, value)
+        else:
+            merged[key] = value
+    return merged
+
+
+def load_raw_config(
+    config_path: Path | None = None,
+    *,
+    local_path: Path | None = None,
+) -> tuple[dict, Path | None]:
+    """Load `config.toml` deep-merged under its `config.local.toml` sibling.
+
+    Returns `(merged_mapping, applied_local_path_or_None)`. The second element
+    is the provenance the callers surface so the override is never silent.
+
+    Raises:
+        FileNotFoundError: if `config_path` is missing.
+        tomllib.TOMLDecodeError: if EITHER file is malformed. A broken override
+            fails loud on purpose — see the module docstring.
+    """
+    config_path = config_path or CONFIG_PATH
+    with open(config_path, "rb") as f:
+        raw = tomllib.load(f)
+
+    local_path = local_path or local_config_path_for(config_path)
+    if not local_path.exists():
+        return raw, None
+    with open(local_path, "rb") as f:
+        overrides = tomllib.load(f)
+    return deep_merge(raw, overrides), local_path
 
 
 @dataclass
@@ -53,6 +123,9 @@ class Config:
     artifacts: dict = field(default_factory=dict)
     fleet_memory: dict = field(default_factory=dict)
     portfolio: dict = field(default_factory=dict)
+    # Provenance: the config.local.toml applied over config.toml, or None.
+    # Surfaced by the meta-agent so a local override is never invisible.
+    local_config_path: Path | None = None
 
     def agent_config(self, name: str) -> AgentConfig:
         """Get configuration for a named agent."""
@@ -86,7 +159,8 @@ def load_config(
         env_path: Path to .env file. Defaults to repo root .env.
 
     Returns:
-        Populated Config dataclass.
+        Populated Config dataclass, with `local_config_path` recording any
+        `config.local.toml` override that was merged in.
 
     Raises:
         FileNotFoundError: If config.toml is missing.
@@ -98,9 +172,8 @@ def load_config(
     if env_path.exists():
         load_dotenv(env_path)
 
-    # Load TOML
-    with open(config_path, "rb") as f:
-        raw = tomllib.load(f)
+    # Load TOML, deep-merged under any gitignored config.local.toml sibling
+    raw, applied_local = load_raw_config(config_path)
 
     paths = raw.get("paths", {})
     repo_root = Path(paths.get("repo_root", Path(__file__).parent.parent.parent))
@@ -141,4 +214,5 @@ def load_config(
         artifacts=artifacts,
         fleet_memory=fleet_memory,
         portfolio=portfolio,
+        local_config_path=applied_local,
     )

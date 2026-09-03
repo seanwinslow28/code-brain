@@ -1,0 +1,27 @@
+# Example local config override. Copy to `config.local.toml` (gitignored) to
+# supply machine-specific or deploy-time values without touching the tracked,
+# public `config.toml`.
+#
+#   cp config.local.toml.example config.local.toml
+#
+# lib/config.py:load_raw_config() deep-merges this file OVER config.toml, so
+# you only restate the keys you are changing — nested tables merge key-by-key.
+# `Config.local_config_path` records which override was applied, so the merge
+# is never silent; `render_claim6_plist.py --check-enabled` prints its source.
+#
+# Malformed TOML here RAISES. That is deliberate: the whole point of this file
+# is to stop deploy state from depending on invisible local conditions.
+#
+# WHY THIS EXISTS: the claim-6 drill registration is production deploy state
+# whose `acknowledged_device` is a personal device name. It cannot enter this
+# public repo, and committing it turns the suite red — tests/test_claim6_
+# schedule.py asserts the COMMITTED config ships disarmed. Before this file,
+# the registration survived only as a permanently dirty working tree held in
+# place by a `skip-worktree` mask and two untracked `.git/hooks` guards, none
+# of which showed in `git status` or survived a fresh clone.
+
+# [agents.claim6_drill]
+# schedule_enabled = true
+# day_of_month = 2
+# launchd_label = "com.sean.agent.claim6-drill"
+# acknowledged_device = "your-device-name"

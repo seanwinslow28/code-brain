@@ -562,6 +562,15 @@ def generate_fleet_report(
         log_path=drill_vault_root / "health" / "claim6-drills.jsonl",
         now=datetime.now().astimezone(),
     )
+    # Make the config override visible (2026-09-03). The drill registration
+    # lives in a gitignored config.local.toml, so nothing in `git status`
+    # reveals that this machine is armed. Say so in the daily report instead
+    # of letting deploy state stay invisible.
+    if config is not None and config.local_config_path is not None:
+        drill_block += (
+            f"\nConfig source: `{config.local_config_path.name}` overrides "
+            "the tracked `config.toml` on this machine."
+        )
 
     # Cost projection
     cost_lines: list[str] = []

@@ -143,16 +143,22 @@ vault/20_projects/prj-job-hunt-2026-REVAMP/
 # so untracking them costs the board nothing. History scrubbed the same day.
 vault/health/job-feed-manifest-*.json
 
-# Knowledge-lint reports — added 2026-09-03 as a TEMPORARY guard while
-# Obsidian-Git auto-commit is on. Their `soul-tier-a-conflict` findings inline
-# the matched SOUL text verbatim; the 2026-08-30 report quotes a base-salary
-# relocation threshold and a named target employer, i.e. exactly the material
-# vault/05_atlas/operating-models/ is ignored to keep local (rule 9).
-# The 8 reports already committed (2026-07-05..2026-08-23) stay tracked --
-# gitignore does not untrack -- and they happen to quote non-sensitive lines.
-# REMOVE THIS RULE once knowledge_lint.py redacts / references-by-id the
-# tier_a_item payload instead of inlining it. Tracked in vault/00_inbox/tickets.md.
-vault/health/*-lint-report.md
+# Agent SDK local config override (2026-09-03) — deep-merged OVER the tracked
+# config.toml by lib/config.py:load_raw_config(). Holds deploy-time state that
+# must never enter this public repo: the claim-6 drill registration, whose
+# acknowledged_device is a personal device name. The tracked config.toml now
+# ships unarmed and committable, which retired the skip-worktree mask and both
+# .git/hooks guards that used to police it. See config.local.toml.example.
+agents-sdk/config.local.toml
+
+# Knowledge-lint SOUL sidecars (2026-09-03). The lint reports themselves are
+# TRACKED again -- knowledge_lint.py now routes every `soul-tier-a-conflict`
+# finding out of the public report and into this directory, because both the
+# quoted `tier_a_item` AND the model's own prose about it reproduce SOUL text.
+# (The 2026-08-30 report leaked a base-salary relocation threshold and a named
+# target employer through both halves.) A verbatim-quote scrub backstops every
+# other issue kind. Contract: agents-sdk/tests/test_knowledge_lint_soul_privacy.py
+vault/health/private/
 
 # Substack Studio private lane — the project at vault/20_projects/substack-studio/ is TRACKED
 # (public); only its _private/ subdir is local-only, for sensitive drafts/source kept off GitHub.

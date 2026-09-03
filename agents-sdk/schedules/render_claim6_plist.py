@@ -8,12 +8,8 @@ import plistlib
 from pathlib import Path
 from typing import Mapping
 
-try:
-    import tomllib
-except ModuleNotFoundError:  # Python 3.10 support
-    import tomli as tomllib
-
 from agents.claim6_drill import DrillConfig, validate_registration
+from lib.config import load_raw_config
 
 
 SDK_ROOT = Path(__file__).parent.parent
@@ -43,10 +39,16 @@ def main() -> None:
     parser.add_argument("--check-enabled", action="store_true")
     args = parser.parse_args()
 
-    with args.config.open("rb") as stream:
-        raw = tomllib.load(stream)["agents"]["claim6_drill"]
+    # Read the EFFECTIVE registration: config.toml deep-merged under its
+    # gitignored config.local.toml sibling. The tracked config ships unarmed,
+    # so on a registered machine the arming values come from the override.
+    merged, applied_local = load_raw_config(args.config)
+    raw = merged["agents"]["claim6_drill"]
     if args.check_enabled:
-        raise SystemExit(0 if raw.get("schedule_enabled", False) else 1)
+        enabled = bool(raw.get("schedule_enabled", False))
+        source = applied_local.name if applied_local else args.config.name
+        print(f"claim6 schedule_enabled={enabled} (source: {source})")
+        raise SystemExit(0 if enabled else 1)
     if args.output is None:
         parser.error("output is required unless --check-enabled is used")
     render_claim6_plist(
