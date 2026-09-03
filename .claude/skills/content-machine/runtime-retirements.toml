@@ -1,0 +1,207 @@
+version = 1
+
+[[retirement]]
+id = "author-mode-machinery"
+name = "Author-mode machinery"
+source = "https://github.com/seanwinslow28/code-brain/issues/176"
+scan_paths = [
+  ".claude/skills/writing-voice-modes/SKILL.md",
+  ".claude/skills/writing-humanity-pass/SKILL.md",
+  "vault/20_projects/substack-studio/CLAUDE.md",
+]
+
+[[retirement.pattern]]
+literal = "Domestic Observer mode"
+reason = "The Sedaris-derived author mode was deleted; surviving moves use functional names."
+
+[[retirement.pattern]]
+literal = "Gonzo mode"
+reason = "The Thompson-derived author mode was deleted; surviving moves use functional names."
+
+[[retirement.pattern]]
+literal = "Beat Flow mode"
+reason = "The Kerouac-derived author mode was deleted; surviving moves use functional names."
+
+[[retirement.pattern]]
+literal = "Vonnegut mode"
+reason = "The author mode was deleted; surviving moves use functional names."
+
+[[retirement.pattern]]
+literal = "Sean Mode"
+reason = "Sean's voice is not a mode or an author blend."
+
+[[retirement.pattern]]
+literal = "tagged by mode"
+reason = "Calibration samples are organized by function and evidence, not author modes."
+
+[[retirement.pattern]]
+literal = "mode ranking"
+reason = "The active calibration question is register behavior, not author-mode ranking."
+
+[[retirement.pattern]]
+literal = "the mode can reshape"
+reason = "The single voice may adapt to a format; no selectable mode remains."
+
+[[retirement.allow]]
+path = "vault/20_projects/substack-studio/CLAUDE.md"
+line_contains = "`substack-value-engine` → `storytelling-architecture` → `writing-voice-modes` (Sean Mode)"
+reason = "This line is retained only as the explicitly labelled historical order immediately above it."
+
+[[retirement]]
+id = "quarantined-exercise-prose"
+name = "Quarantined Full Exercise Passages"
+source = "https://github.com/seanwinslow28/code-brain/issues/224"
+scan_paths = [
+  ".claude/skills/writing-voice-modes/references/voice-samples.md",
+]
+
+[[retirement.pattern]]
+literal = "Full Exercise Passages"
+reason = "The unlabelled machine-written bodies were removed from the calibration authority."
+
+[[retirement]]
+id = "polysyndeton-protection"
+name = "Polysyndeton as a protected Sean move"
+source = "https://github.com/seanwinslow28/code-brain/issues/224"
+scan_paths = [
+  ".claude/skills/writing-voice-modes/SKILL.md",
+  ".claude/skills/writing-humanity-pass/SKILL.md",
+  ".claude/skills/writing-humanity-pass/references/voice-safe-exceptions.md",
+]
+
+[[retirement.pattern]]
+literal = "polysyndeton"
+reason = "Polysyndeton had zero corpus instances and must not be protected as a voice move."
+
+[[retirement.allow]]
+path = ".claude/skills/writing-voice-modes/SKILL.md"
+line_contains = "Deleted in the same pass, do not reintroduce."
+reason = "This is the authoritative deletion notice."
+
+[[retirement.allow]]
+path = ".claude/skills/writing-humanity-pass/SKILL.md"
+line_contains = "this sentence named an author mode and protected **polysyndeton**"
+reason = "This is a historical correction note, not a live protection."
+
+[[retirement.allow]]
+path = ".claude/skills/writing-humanity-pass/references/voice-safe-exceptions.md"
+line_contains = "This row used to protect \"polysyndeton\""
+reason = "This explains why Anaphoric Stack replaced the retired label."
+
+[[retirement]]
+id = "sentence-author-role"
+name = "writing-voice-modes as Content Machine sentence author"
+source = "https://github.com/seanwinslow28/code-brain/issues/224"
+scan_paths = [
+  ".claude/skills/writing-voice-modes/SKILL.md",
+  ".claude/skills/writing-humanity-pass/SKILL.md",
+]
+
+[[retirement.pattern]]
+literal = "SENTENCE author"
+reason = "The Content Machine uses a clean-context shaper; writing-voice-modes is not its drafter."
+
+[[retirement.pattern]]
+literal = "voice-modes writes 100% of the prose"
+reason = "The Content Machine uses a clean-context shaper; writing-voice-modes is not its drafter."
+
+[[retirement.pattern]]
+literal = "voice-modes owns the SENTENCES"
+reason = "The Content Machine uses a clean-context shaper; writing-voice-modes is not its drafter."
+
+[[retirement.pattern]]
+literal = "writing-voice-modes composes every sentence"
+reason = "The Content Machine uses a clean-context shaper; writing-voice-modes is register law only."
+
+[[retirement]]
+id = "sequential-voice-chain"
+name = "Sequential Substack voice chain"
+source = "https://github.com/seanwinslow28/code-brain/issues/224"
+scan_paths = [
+  ".claude/skills/writing-voice-modes/SKILL.md",
+  ".claude/skills/writing-humanity-pass/SKILL.md",
+  "vault/20_projects/substack-studio/CLAUDE.md",
+]
+
+[[retirement.pattern]]
+literal = "## 1. The voice chain is mandatory"
+reason = "The Content Machine replaced the sequential drafting chain."
+
+[[retirement.pattern]]
+literal = "This skill runs LAST in the chain"
+reason = "writing-humanity-pass is a post-draft Content Machine gate, not a chain terminus."
+
+[[retirement.pattern]]
+literal = "The full Substack pipeline:"
+reason = "The retired sequential chain is not the live Substack pipeline."
+
+[[retirement.pattern]]
+literal = "Chaining order:"
+reason = "The orchestrator owns stage order; the old skill chain is retired."
+
+[[retirement.pattern]]
+literal = "The two upstream skills emit a beat map"
+reason = "The clean-context shaper receives a transcript and form, not the retired chain's beat map."
+
+[[retirement.pattern]]
+literal = "The chain draft"
+reason = "The live artifact is a Content Machine draft, not output from the retired chain."
+
+[[retirement]]
+id = "automatic-rewrite-promotion"
+name = "Automatic promotion of every hand-rewrite into voice samples"
+source = "https://github.com/seanwinslow28/code-brain/issues/219"
+scan_paths = [
+  "vault/20_projects/substack-studio/CLAUDE.md",
+]
+
+[[retirement.pattern]]
+literal = "Fold Sean's rewrite back into"
+reason = "Every final updates the rewrite band; corpus or sample promotion is a separate ruling."
+
+[[retirement]]
+id = "all-words-transcript-law"
+name = "All draft words must come from the transcript"
+source = "https://github.com/seanwinslow28/code-brain/issues/158"
+scan_paths = [
+  ".claude/skills/content-machine/SKILL.md",
+  "vault/20_projects/substack-studio/CLAUDE.md",
+]
+
+[[retirement.pattern]]
+literal = "sources every word from an interview transcript"
+reason = "The current law locks substance to the transcript and permits fresh texture."
+
+[[retirement]]
+id = "oracle-sweep-supplies-every-noun"
+name = "The sweep supplies the nouns for every external query; every card points at a done artifact"
+source = "https://github.com/seanwinslow28/code-brain/issues/227"
+scan_paths = [
+  ".claude/skills/content-oracle/SKILL.md",
+  ".claude/skills/content-machine/SKILL.md",
+  "agents-sdk/scripts/oracle_reminder.py",
+]
+
+[[retirement.pattern]]
+literal = "derive every external query from it"
+reason = "The sweep supplies nouns for anchor queries only; the news lane and the frame stage are separate supplies (#227 ruling 18)."
+
+[[retirement.pattern]]
+literal = "Every card points at one artifact"
+reason = "The evidence rule has a second form: an experiment card points at its provocation with Status: unrun (#227 ruling 18)."
+
+[[retirement.pattern]]
+literal = "An external hit is **not a topic**"
+reason = "Only an anchor hit is not a topic; news items and frame angles are card candidates in their own right (#227 rulings 5 and 18)."
+
+[[retirement.pattern]]
+literal = "from the author's recent work"
+reason = "The Oracle proposes experiments he could run, not only things he already did (#227 rulings 4 and 9)."
+
+[[retirement.pattern]]
+literal = "decks ~10 cards"
+reason = "The Oracle emits two decks scored on different bars, never one ranked list (#227 ruling 11)."
+
+[[retirement.pattern]]
+literal = "~10 ranked spike cards"
+reason = "The reminder must describe the changed mechanism: two decks, experiments first (#227 ruling 11)."

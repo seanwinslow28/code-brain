@@ -18,6 +18,7 @@ from agents.knowledge_lint import (
     find_camelcase_filenames,
     find_missing_frontmatter,
     find_orphan_files,
+    find_retired_runtime_instructions,
     recall_against_oracle,
     run_tier1,
     run_tier2,
@@ -152,6 +153,41 @@ def test_run_tier1_aggregates_all_structural_issues(tmp_path: Path) -> None:
     assert "orphan" in kinds
     assert "missing-frontmatter" in kinds
     assert "camelcase-filename" in kinds
+
+
+def test_runtime_retirement_scan_uses_canonical_checker_without_leaking_line(
+    tmp_path: Path,
+) -> None:
+    repo = tmp_path / "repo"
+    registry = repo / ".claude" / "skills" / "content-machine" / "runtime-retirements.toml"
+    registry.parent.mkdir(parents=True)
+    registry.write_text(
+        """\
+version = 1
+
+[[retirement]]
+id = "old-route"
+name = "Old route"
+source = "https://example.test/decision"
+scan_paths = ["live.md"]
+
+[[retirement.pattern]]
+literal = "run the old route"
+reason = "retired"
+""",
+        encoding="utf-8",
+    )
+    _touch(repo / "live.md", "Always run the old route with private payload 123.")
+
+    issues = find_retired_runtime_instructions(repo)
+
+    assert len(issues) == 1
+    issue = issues[0]
+    assert issue.kind == "retired-runtime-instruction"
+    assert issue.severity == LintSeverity.HIGH
+    assert issue.file == Path("live.md")
+    assert "line 1" in issue.detail
+    assert "private payload" not in issue.detail
 
 
 def test_build_synthetic_vault_has_20_planted_issues(tmp_path: Path) -> None:
