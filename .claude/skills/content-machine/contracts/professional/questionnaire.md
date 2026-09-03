@@ -2,6 +2,16 @@
 
 Wave 2 ([#171](https://github.com/seanwinslow28/code-brain/issues/171)).
 
+**Lens: Recruiter, once per box → Cold Reader, once across the whole set.**
+[`recruiter.md`](../../interview/recruiter.md) names this medium. The split is this contract's
+narrowing and exists nowhere else in the lane, because the two properties above are what make it a
+different document: the question is given, so the Recruiter pass runs against each box's own question
+instead of choosing a frame; and the set is read as one document in one sitting, so the Cold Reader
+pass runs across all of the answers at once — which is also where a claim, an anecdote or an opening
+shape appearing twice gets caught.
+
+**Status: unproven.** No application has run through it.
+
 ## Governing documents, in precedence order
 
 1. [`LANE.md`](LANE.md) — Professional-lane law.

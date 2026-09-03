@@ -2,6 +2,14 @@
 
 Wave 1 ([#166](https://github.com/seanwinslow28/code-brain/issues/166)).
 
+**Lens: Skeptic.** Ruled in [#226](https://github.com/seanwinslow28/code-brain/issues/226). Room 1
+means a post is one landed claim with no arc to soften it, and this contract's own negative specimens
+are false authority and the lecture — which is the Skeptic's failure mode. X is the cheapest surface
+in the machine on which to find out that a claim is too broad.
+
+**Status: unproven.** No post has run through it; the wave-1 run
+([#232](https://github.com/seanwinslow28/code-brain/issues/232)) is the first.
+
 ## Governing documents, in precedence order
 
 1. [`LANE.md`](LANE.md) — Expressive-lane law (the first-screen test, the reply-hook memo).

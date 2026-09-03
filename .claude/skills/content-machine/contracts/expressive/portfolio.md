@@ -2,6 +2,19 @@
 
 Wave 2 ([#171](https://github.com/seanwinslow28/code-brain/issues/171)).
 
+**Lens: project write-up — Technical Peer → Cold Reader. About page — Stakes → Cold Reader.** The
+About assignment is ruled in [#226](https://github.com/seanwinslow28/code-brain/issues/226) and is
+deliberately **not** Recruiter: that lens runs the facts-only form of the law, which is
+Professional-lane machinery, and importing it into an Expressive page produces the **resume bullet**
+this contract lists as a negative specimen. A project write-up is the other case — its five beats
+each carry a verbatim `number` and the `date` it was measured, which is the Technical Peer's
+transcript. Cold Reader closes both, because every surface on the site is dense with internal nouns:
+fleet, Driftgate, Groundwork, ontology.
+
+**Status: unproven.** Neither form has run through it. The About page is the wave-1 run
+([#234](https://github.com/seanwinslow28/code-brain/issues/234)), and the section of this contract
+that governs it lands with that ticket.
+
 ## Governing documents, in precedence order
 
 1. **The site's own data contract** — `seanwinslow.com/src/data/projects.ts` and the tests in

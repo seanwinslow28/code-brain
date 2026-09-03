@@ -2,6 +2,14 @@
 
 Wave 1 ([#166](https://github.com/seanwinslow28/code-brain/issues/166)).
 
+**Lens: Recruiter → Cold Reader.** Ruled in
+[#226](https://github.com/seanwinslow28/code-brain/issues/226). Recruiter probes the decision he owned
+as opposed to the project he was near, which is the entire content of this document. Cold Reader
+closes, because a hiring manager is the coldest reader that exists.
+
+**Status: unproven.** The wave-1 run ([#230](https://github.com/seanwinslow28/code-brain/issues/230))
+is the first piece through it.
+
 ## Governing documents, in precedence order
 
 1. [`LANE.md`](LANE.md) — Professional-lane law.

@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — every medium contract names its interview lens and its status (2026-09-03, #231; ruled on #226)
+
+`interview/ENGINE.md` requires the medium contract to name the lens ("the interviewer
+does not pick by feel") and not one of the nine contracts did. Every run to date was
+Storyteller because a Substack story series makes the choice obvious; three unfamiliar
+mediums were about to run.
+
+- **A `Lens:` line on all nine contracts.** Three ruled in #226 (cover letter
+  Recruiter → Cold Reader, X Skeptic, portfolio About page Stakes → Cold Reader); the
+  other six assigned from the ENGINE table plus the contract's own text — Substack
+  Storyteller → Stakes for the story series and Technical Peer → Skeptic for the spine
+  series, YouTube long form inheriting the Substack assignment and short form
+  Stakes → Cold Reader, resume Recruiter → Cold Reader, questionnaire Recruiter per box
+  then Cold Reader across the whole set, email Stakes → Cold Reader (the one
+  Professional document `recruiter.md` does not name), and **LinkedIn: none** — a cut
+  runs no interview, so it inherits the source artifact's transcript and therefore its
+  lens.
+- **A standardized `Status:` line on all nine** — `unproven` until a real piece runs,
+  `corrected by <piece>` after. Eight are unproven; Substack is corrected by four runs.
+  Retirement entry `unstandardized-contract-status` retires the ad-hoc `Status: thin`.
+- **Oracle propagation:** a card's `Lens:` field is now copied from the medium contract
+  named on `Lane / medium:` rather than chosen by the Oracle.
+
+
 ### Added — the Oracle's news lane and listening report (2026-09-03, #239; ruled on #227)
 
 The other half of the Oracle rebuild: what happened in AI that week, gisted for the

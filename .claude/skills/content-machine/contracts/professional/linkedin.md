@@ -4,6 +4,16 @@ Wave 2 ([#171](https://github.com/seanwinslow28/code-brain/issues/171)). Every m
 comes from the pre-LinkedIn research ([#170](https://github.com/seanwinslow28/code-brain/issues/170))
 and is sourced there; nothing in this file is guessed.
 
+**Lens: none — a cut inherits the source artifact's transcript, and therefore its lens.** This is the
+only contract of the nine that names no lens of its own, and it follows from
+[L4](https://github.com/seanwinslow28/code-brain/issues/158) rather than being a gap: nothing is
+originated here, a cut may not add a claim the source did not carry, and the origin gate runs the cut
+against the source's transcript. There is no interview to point a lens at. If a cut wants a claim the
+source lacks, it is not a cut — it goes back to stage 1 as a new piece, under that medium's contract
+and that contract's lens.
+
+**Status: unproven.** No cut has run through it.
+
 ## Governing documents, in precedence order
 
 1. [`LANE.md`](LANE.md) — Professional-lane law.

@@ -2,6 +2,16 @@
 
 Wave 2 ([#171](https://github.com/seanwinslow28/code-brain/issues/171)).
 
+**Lens: Stakes → Cold Reader.** This is the one Professional document
+[`recruiter.md`](../../interview/recruiter.md) does not name, and the omission is right: most of these
+emails are not about a decision he owned. What an unrequested email has to earn is **consequence** —
+what was different afterwards, and for whom — which is Stakes. Cold Reader closes because the
+recipient is doing something else and has none of his context. When the whole job of the email *is* to
+restate a decision he owned, such as an interview follow-up, run Recruiter first. The lane's
+facts-only law governs the draft either way; the lens only shapes the interview.
+
+**Status: unproven.** No email has run through it.
+
 ## Governing documents, in precedence order
 
 1. [`LANE.md`](LANE.md) — Professional-lane law.

@@ -205,3 +205,23 @@ reason = "The Oracle emits two decks scored on different bars, never one ranked 
 [[retirement.pattern]]
 literal = "~10 ranked spike cards"
 reason = "The reminder must describe the changed mechanism: two decks, experiments first (#227 ruling 11)."
+
+[[retirement]]
+id = "unstandardized-contract-status"
+name = "Ad-hoc medium-contract status tokens"
+source = "https://github.com/seanwinslow28/code-brain/issues/231"
+scan_paths = [
+  ".claude/skills/content-machine/contracts/expressive/substack.md",
+  ".claude/skills/content-machine/contracts/expressive/x.md",
+  ".claude/skills/content-machine/contracts/expressive/portfolio.md",
+  ".claude/skills/content-machine/contracts/expressive/youtube-reels.md",
+  ".claude/skills/content-machine/contracts/professional/resume.md",
+  ".claude/skills/content-machine/contracts/professional/cover-letter.md",
+  ".claude/skills/content-machine/contracts/professional/questionnaire.md",
+  ".claude/skills/content-machine/contracts/professional/email.md",
+  ".claude/skills/content-machine/contracts/professional/linkedin.md",
+]
+
+[[retirement.pattern]]
+literal = "Status: thin"
+reason = "A contract's status is `unproven` until a real piece runs and `corrected by <piece>` after; `thin` is a mood, not a status the machine can read (#231)."

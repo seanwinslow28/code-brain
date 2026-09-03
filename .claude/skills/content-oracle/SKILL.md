@@ -689,6 +689,11 @@ Field rules:
   Probation). `Lens:` stays the **interview** lens, because the interview engine
   requires one on every card (#231) and a field carrying two meanings would break
   both the engine and the record.
+- `Lens:` is **copied from the medium contract named on `Lane / medium:`**, never chosen
+  by the Oracle — every contract now names its lens or lens sequence
+  ([#231](https://github.com/seanwinslow28/code-brain/issues/231)), and where a contract
+  names one per form or per series, the card takes the one its form falls under. The
+  Oracle's job in this field is the second half: what the interview has to go get.
 - `Status: unrun` is mandatory on every experiment card and forbidden on a
   done-thing card. It is the line that says "nothing here is a claim yet."
 - `Cuts to LinkedIn:` is a tag. It never appears in a sum.

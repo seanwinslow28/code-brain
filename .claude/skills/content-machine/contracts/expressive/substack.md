@@ -1,8 +1,15 @@
 # Medium contract: Substack (Expressive lane)
 
-**Status: thin.** Written for the walking skeleton ([#163](https://github.com/seanwinslow28/code-brain/issues/163)).
-It hardens in wave 1 once real posts have run through it. Where it is silent, the publication's own
-law governs — do not invent a rule here to fill a gap.
+**Lens: story series — Storyteller → Stakes. Spine series — Technical Peer → Skeptic.** The two
+series need different transcripts. A story episode needs the lived incident and then why it mattered,
+which is the sequence [`ENGINE.md`](../../interview/ENGINE.md) already names as the default for a
+Raising Agents episode. A spine piece ends in a tested verdict, so it needs the mechanism at engineer
+depth first and then the narrow version of the claim that survives a hostile reader.
+
+**Status: corrected by four runs**, most recently *I Deleted the Authors* (run #4, 2026-08-31); the
+first was *An Agent's Gift* (Raising Agents ep. 1, 2026-08-25). Written for the walking skeleton
+([#163](https://github.com/seanwinslow28/code-brain/issues/163)) and hardened by every run since.
+Where it is silent, the publication's own law governs — do not invent a rule here to fill a gap.
 
 ## Governing documents, in precedence order
 

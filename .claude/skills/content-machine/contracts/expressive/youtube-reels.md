@@ -2,6 +2,12 @@
 
 Wave 3 ([#172](https://github.com/seanwinslow28/code-brain/issues/172)). The last of the nine.
 
+**Lens: long form — the Substack assignment for the series the video belongs to (Storyteller →
+Stakes for a story, Technical Peer → Skeptic for a spine piece). Short form — Stakes → Cold Reader.**
+A long video is a post read aloud, so it needs the same transcript the post would need. A sixty-second
+cut has room 2 and about 150 spoken words: there is no space to build, so the interview has to arrive
+with the consequence already found, and a listener cannot scroll back over an undefined noun.
+
 **Status: unproven.** No channel exists — the only trace of one in the publication is a line in
 `SERIES-COMMAND-CENTER.md` reading *add YouTube "if/when real"* — and no video has run through this
 contract. Every rule below is reasoned, none is measured. Where this file is silent,

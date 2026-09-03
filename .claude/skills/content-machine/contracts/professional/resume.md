@@ -2,6 +2,16 @@
 
 Wave 1 ([#166](https://github.com/seanwinslow28/code-brain/issues/166)).
 
+**Lens: Recruiter → Cold Reader.** [`recruiter.md`](../../interview/recruiter.md) names this document
+by name, and it is the whole interview: the decision he owned rather than the project he was near,
+what he was accountable for, and the outcome with a number he can source. Cold Reader closes because
+a resume is scanned in seconds by a stranger, and an internal noun that needs explaining has already
+cost the line it sits on.
+
+**Status: unproven.** No resume has been tailored through it. It has no scheduled slot
+([#226](https://github.com/seanwinslow28/code-brain/issues/226)) and rides along the next time one is
+written.
+
 ## Governing documents, in precedence order
 
 1. [`LANE.md`](LANE.md) — Professional-lane law. The seam, the origin block, borrow-structure-never-strings.
