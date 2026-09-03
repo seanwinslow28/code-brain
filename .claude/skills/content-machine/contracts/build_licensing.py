@@ -113,14 +113,16 @@ def roster_from_guide() -> list[tuple[str, str]]:
     """(move, origin) pairs, read from the voice guide's two tables."""
     text = GUIDE.read_text(encoding="utf-8")
     out = []
-    for section, nxt, origin in (
-        ("## Technique Moves", "**Deleted in the same pass", "technique"),
-        ("## Sean's Signature Moves", "Nine of these rows were mined", "signature"),
+    for section, origin in (
+        ("## Technique Moves", "technique"),
+        ("## Sean's Signature Moves", "signature"),
     ):
         if section not in text:
             raise SystemExit(f"ERROR: '{section}' missing from {GUIDE.name}. "
                              "The guide moved; fix this script rather than the matrix.")
-        body = text.split(section, 1)[1].split(nxt, 1)[0]
+        # Each roster runs from its heading to the next "## " heading, so the
+        # guide's prose can change freely without touching this parser.
+        body = text.split(section, 1)[1].split("\n## ", 1)[0]
         for line in body.splitlines():
             m = re.match(r"\| \*\*(.+?)\*\*", line)
             if m:

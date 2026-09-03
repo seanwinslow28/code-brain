@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — writing-voice-modes packaged for Cowork; the guide stops narrating its own history (2026-09-03)
+
+The Cowork upload of `writing-voice-modes` was failing because the folder held two `SKILL.md`
+files, and the copy Cowork already had (commit `40d4d765`, uploaded 2026-08-06) carried the
+author modes and, inside it, the git-ignored `references/` and `drafts/` folders.
+
+- **`SKILL.md` rewritten in the present tense.** Every passage that described what the file used
+  to be (the retired author modes, the retired drafting chain, the retired all-words law) is
+  gone. The 36-move roster, register law, G1–G5, ratified lessons, anti-patterns and
+  Do-Not-Promote rules are unchanged in substance. The frontmatter description now fits the
+  platform's 1,024-character limit (it was 1,233). A new "When the reference files are absent"
+  paragraph tells a copy that ships without `references/` and `drafts/` how to behave, because
+  those folders are private and never travel.
+- **`contracts/build_licensing.py` parses each roster to the next `## ` heading** instead of
+  keying on two prose sentences, so the guide's prose can change without breaking the build.
+  Output byte-identical; `--check` clean.
+- **`runtime-retirements.toml`:** the `polysyndeton-protection` allowance for the guide's
+  deletion notice goes with the notice. Scan clean.
+- **The VoicePrint corpus-sources snapshot moved** from `writing-voice-modes/references/` to
+  `creative-studio/content-machine/corpus/sources/`, already covered by the corpus ignore rule;
+  all 28 checksums re-verified after the move. It carried a second, VoicePrint-generated
+  `SKILL.md` (`name: sean-voice`) that made the folder un-uploadable, and it was the corpus
+  manifest's standing open risk. Nothing reads it; it stays as provenance.
+- **Cowork bundle:** `writing-voice-modes/SKILL.md` alone, zipped with the folder as the single
+  top-level entry. `evals.yaml` and `evals.sealed.yaml` stay out (optimizer inputs, and their
+  prompts still name the retired modes). The old Cowork skill is deleted in the Cowork UI before
+  the new zip goes up; there is no replace.
+
 ### Changed — every medium contract names its interview lens and its status (2026-09-03, #231; ruled on #226)
 
 `interview/ENGINE.md` requires the medium contract to name the lens ("the interviewer

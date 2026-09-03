@@ -74,11 +74,6 @@ literal = "polysyndeton"
 reason = "Polysyndeton had zero corpus instances and must not be protected as a voice move."
 
 [[retirement.allow]]
-path = ".claude/skills/writing-voice-modes/SKILL.md"
-line_contains = "Deleted in the same pass, do not reintroduce."
-reason = "This is the authoritative deletion notice."
-
-[[retirement.allow]]
 path = ".claude/skills/writing-humanity-pass/SKILL.md"
 line_contains = "this sentence named an author mode and protected **polysyndeton**"
 reason = "This is a historical correction note, not a live protection."
