@@ -1,0 +1,8 @@
+# Append-only files written from both machines (MacBook Pro and Mac Mini).
+# Every new entry lands at the same anchor line, so ordinary three-way merges
+# stop on every overlapping insert. `union` keeps both sides' lines instead.
+# Known limit: entries inside a section may interleave, and a bullet deleted on
+# one machine at the exact lines the other inserted can reappear (visible, not
+# silent). Decided 2026-09-03 after a week of hand-resolved merges.
+vault/00_inbox/tickets.md merge=union
+CHANGELOG.md merge=union
