@@ -316,3 +316,10 @@ vault/health/job-feed-manifest-*.json
 # received the rule and pushed six personal notes to the public repo
 # (eng-002.d146, 2026-08-26 -> 08-28). Same content, same reason, same rule.
 vault/daily/
+
+# Local-only scratch and third-party material (2026-09-03, PR #240 left these out
+# on purpose). _to_delete/ holds tailored-resume previews and office temp/lock
+# files that name an employer (rule 9). The ARMS guide is a web-printed
+# third-party PDF: read locally, never redistributed from a public repo.
+_to_delete/
+vault/30_domains/claude-mastery/ARMS-Agentic-OS-Guide.pdf
