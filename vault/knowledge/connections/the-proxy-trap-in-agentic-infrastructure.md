@@ -5,8 +5,8 @@ connects:
   - The Illusion of Competence in Automated Systems
   - Silent Decay in Strategic Pipelines
   - Agentic Engineering Signal
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-02
+updated: 2026-09-02
 ---
 
 ## Synthesis

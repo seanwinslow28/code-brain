@@ -987,13 +987,202 @@ def recall_against_oracle(issues: list[LintIssue], oracle: list[dict]) -> float:
 
 # ─── report writer ────────────────────────────────────────────────────────
 
+# The kind whose every field is derived from private operating-model text.
+SOUL_CONFLICT_KIND = "soul-tier-a-conflict"
+
+# Local-only home for private-derived findings. Gitignored; `vault/health/`
+# itself stays tracked so the public report keeps publishing.
+PRIVATE_HEALTH_SUBDIR = "private"
+
+# Vault subtrees that are gitignored under the CLAUDE.md rule-9 PRIVATE LAYER.
+# A finding ABOUT a file in one of these leaks that file's existence and its
+# slug into a tracked report — the same side channel that leaked 69 target
+# companies through job-feed manifests in 2026-08. Mirrors .gitignore; keep the
+# two in step. Matched against the vault-relative POSIX path.
+PRIVATE_VAULT_PREFIXES: tuple[str, ...] = (
+    "knowledge/private/",
+    "05_atlas/operating-models/",
+    "20_projects/prj-job-hunt-2026/",
+    "20_projects/prj-job-hunt-2026-REVAMP/",
+    "20_projects/prj-boston-move/",
+    "20_projects/prj-personal-finance/",
+    "20_projects/substack-studio/_private/",
+    "30_domains/2026-trips/",
+    "30_domains/product-management/the-block-meetings-granola-notes/",
+    "10_timeline/",
+    "daily/",
+    "health/private/",
+)
+
+_SOUL_WITHHELD = (
+    "detail withheld from this tracked report (SOUL-derived); "
+    "see the local-only sidecar named in the header"
+)
+_PRIVATE_PATH_WITHHELD = (
+    "private-subtree finding; path and detail withheld from this tracked "
+    "report — see the local-only sidecar named in the header"
+)
+_PRIVATE_PATH_PLACEHOLDER = "<private vault path withheld>"
+
+
+def _vault_relative(file: Path) -> str:
+    """Best-effort vault-relative POSIX path for a finding's file.
+
+    Tier-1 findings carry absolute paths, Tier-2 vault-relative ones. Anchor on
+    the `vault/` segment when present so both shapes compare alike.
+    """
+    posix = file.as_posix()
+    marker = "/vault/"
+    if marker in posix:
+        return posix.rsplit(marker, 1)[1]
+    return posix.lstrip("/")
+
+
+def is_private_finding(issue: LintIssue) -> bool:
+    """True when a finding must not appear in the tracked report.
+
+    Two independent reasons, both observed live in 2026-08 reports:
+      1. Its KIND is SOUL-derived — both the quoted `tier_a_item` and the
+         model's prose about it reproduce private operating-model text.
+      2. Its FILE lives in a gitignored subtree, so merely naming it leaks a
+         private note's existence and slug.
+    """
+    if issue.kind == SOUL_CONFLICT_KIND:
+        return True
+    rel = _vault_relative(issue.file)
+    return any(rel.startswith(prefix) for prefix in PRIVATE_VAULT_PREFIXES)
+
+# Shortest SOUL line worth treating as a fingerprint. Below this, lines are
+# generic enough ("Sacred Cows", "Tier-A Truths") that matching them would
+# redact ordinary prose.
+_SOUL_FINGERPRINT_MIN_CHARS = 40
+
+
+def _soul_fingerprints(soul_context: str) -> list[str]:
+    """Verbatim SOUL lines long enough to identify as quoted private text."""
+    seen: set[str] = set()
+    for raw in (soul_context or "").splitlines():
+        line = raw.strip().lstrip("-*# ").strip()
+        if len(line) >= _SOUL_FINGERPRINT_MIN_CHARS:
+            seen.add(line)
+    return sorted(seen, key=len, reverse=True)
+
+
+# `health/private/` is deliberately EXCLUDED from the path scrub: the report's
+# own header note names the sidecar there, and redacting it would hide the
+# pointer to the withheld detail. It stays in the file classifier.
+_SCRUBBED_PREFIXES: tuple[str, ...] = tuple(
+    prefix for prefix in PRIVATE_VAULT_PREFIXES if prefix != "health/private/"
+)
+
+
+def scrub_private_paths(report: str) -> tuple[str, int]:
+    """Redact private vault paths quoted anywhere in the tracked report.
+
+    The file-level classifier only inspects a finding's `file`. A private path
+    can also arrive inside the DETAIL of a finding about a PUBLIC file — a
+    broken wikilink whose target text is `20_projects/prj-job-hunt-2026/...`,
+    for instance, which is how one such reference survived the 2026-09-03
+    backfill. Returns `(scrubbed_report, redaction_count)`.
+    """
+    redactions = 0
+    for prefix in _SCRUBBED_PREFIXES:
+        pattern = re.compile(r"\S*" + re.escape(prefix) + r"\S*")
+        report, n = pattern.subn(_PRIVATE_PATH_PLACEHOLDER, report)
+        redactions += n
+    return report, redactions
+
+
+def scrub_soul_quotes(report: str, soul_context: str) -> tuple[str, int]:
+    """Redact any verbatim SOUL line that survived into the public report.
+
+    Defence in depth behind the structural split. The split routes the one
+    KIND whose content is SOUL-derived into a private sidecar; this catches
+    private text quoted from anywhere else — a `contradiction` detail that
+    happens to cite SOUL, or a future issue kind nobody remembered to route.
+
+    Returns `(scrubbed_report, redaction_count)`.
+    """
+    redactions = 0
+    for fingerprint in _soul_fingerprints(soul_context):
+        if fingerprint in report:
+            report = report.replace(fingerprint, "[SOUL text redacted]")
+            redactions += 1
+    return report, redactions
+
+
+def partition_private_issues(
+    issues: list[LintIssue],
+) -> tuple[list[LintIssue], list[LintIssue]]:
+    """Split `issues` into (public, private) preserving order.
+
+    Every issue lands in exactly one half — see `is_private_finding`.
+    """
+    public = [i for i in issues if not is_private_finding(i)]
+    private = [i for i in issues if is_private_finding(i)]
+    return public, private
+
+
+def format_private_sidecar(issues: list[LintIssue], *, today: str) -> str:
+    """Render the local-only companion holding every withheld finding in full.
+
+    This file is gitignored. It exists so the findings keep their analytical
+    value on the machine that can read them, while the tracked report carries
+    only the file paths — which are already public in the knowledge graph.
+    """
+    lines = [
+        f"# Knowledge Lint — Withheld (Private) Findings — {today}",
+        "",
+        "**LOCAL-ONLY.** Gitignored (`vault/health/private/`). Each finding below "
+        "either quotes `vault/05_atlas/operating-models/` SOUL text or names a "
+        "file in a gitignored subtree — both private under CLAUDE.md rule 9. Do "
+        "not paste this content into a tracked file, an issue, or a PR.",
+        "",
+        f"_{len(issues)} finding(s)._",
+        "",
+    ]
+    for it in issues:
+        rel = it.file.as_posix() if it.file.is_absolute() else str(it.file)
+        lines.append(f"- **{it.kind}** (T{it.tier}): `{rel}` — {it.detail}")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def write_private_sidecar(vault_root: Path, content: str, *, today: str) -> Path:
+    """Write the sidecar into the gitignored private health directory."""
+    private_dir = vault_root / "health" / PRIVATE_HEALTH_SUBDIR
+    private_dir.mkdir(parents=True, exist_ok=True)
+    out = private_dir / f"{today}-private-findings.md"
+    out.write_text(content, encoding="utf-8")
+    return out
+
+
 def format_report(
     *,
     tier1: Tier1Report,
     tier2: list[LintIssue],
     today: str,
     tier2_notes: list[str] | None = None,
+    private_sidecar_path: Path | None = None,
 ) -> str:
+    """Render the TRACKED, public lint report.
+
+    Privacy (2026-09-03), two withholding shapes:
+
+    * `soul-tier-a-conflict` keeps its file path — concepts are already public
+      in the knowledge graph — but drops its detail, because the `tier_a_item`
+      quote AND the model's own prose both reproduce private SOUL text. The
+      2026-08-30 report leaked a base-salary relocation threshold and a named
+      target employer through both halves.
+    * A finding about a file in a gitignored subtree drops its PATH too: the
+      slug alone discloses a private note. Ten reports named
+      `knowledge/private/connections/...` this way.
+
+    Full detail for both goes to the gitignored `private_sidecar_path`.
+
+    Counts are unaffected: withheld findings stay in their severity bucket, so
+    `lib/lint_report.py:vault_health_summary` still reports them.
+    """
     lines = [f"# Knowledge Lint Report — {today}", ""]
     total = tier1.total_issues + len(tier2)
     lines.append(f"_{total} issues found ({tier1.total_issues} structural, {len(tier2)} semantic)._")
@@ -1004,6 +1193,18 @@ def format_report(
     if tier2_notes:
         for note in tier2_notes:
             lines.append(f"_{note}_")
+        lines.append("")
+
+    _, private_issues = partition_private_issues(list(tier1.issues) + list(tier2))
+    if private_issues:
+        target = private_sidecar_path.as_posix() if private_sidecar_path else (
+            f"vault/health/{PRIVATE_HEALTH_SUBDIR}/{today}-private-findings.md"
+        )
+        lines.append(
+            f"_{len(private_issues)} finding(s) withheld from this tracked report "
+            f"(SOUL-derived, or about a file in a gitignored subtree). They remain "
+            f"counted below; full detail is in `{target}` (local-only, gitignored)._"
+        )
         lines.append("")
 
     buckets: dict[LintSeverity, list[LintIssue]] = {s: [] for s in LintSeverity}
@@ -1018,7 +1219,18 @@ def format_report(
         lines.append("")
         for it in items:
             rel = it.file.as_posix() if it.file.is_absolute() else str(it.file)
-            lines.append(f"- **{it.kind}** ({'T1' if it.tier == 1 else 'T2'}): `{rel}` — {it.detail}")
+            detail = it.detail
+            if it.kind == SOUL_CONFLICT_KIND:
+                # The concept path is already public in the knowledge graph;
+                # only the SOUL-derived detail is withheld.
+                detail = _SOUL_WITHHELD
+            elif is_private_finding(it):
+                # Here the PATH is the leak — naming the file discloses a
+                # private note's existence and slug. Withhold both, but keep
+                # the row so severity counts stay truthful.
+                rel = _PRIVATE_PATH_PLACEHOLDER
+                detail = _PRIVATE_PATH_WITHHELD
+            lines.append(f"- **{it.kind}** ({'T1' if it.tier == 1 else 'T2'}): `{rel}` — {detail}")
         lines.append("")
 
     if total == 0:
@@ -1134,6 +1346,9 @@ def main() -> int:
 
     tier2: list[LintIssue] = []
     tier2_notes: list[str] = []
+    # Bound unconditionally: the gate below can skip, and the post-report SOUL
+    # scrub reads this on every path.
+    soul_context = ""
     if tier1.total_issues > 0 or args.full:
         soul_context = build_soul_context(cfg)
         # BT5 C3 — wire the Tier-2 LLM leg for real (probe-first). A down host
@@ -1159,11 +1374,53 @@ def main() -> int:
         tier2_notes.append("Tier-2 LLM scan: skipped by gate (Tier 1 clean, no --full).")
 
     today = date.today().isoformat()
-    report = format_report(tier1=tier1, tier2=tier2, today=today, tier2_notes=tier2_notes)
+
+    # Privacy split (2026-09-03): findings that are SOUL-derived, or that name
+    # a file in a gitignored subtree, never enter the tracked report. Both
+    # classes leaked live in the 2026-07/08 reports (CLAUDE.md rule 9).
+    _, private_issues = partition_private_issues(list(tier1.issues) + list(tier2))
+    sidecar_path = (
+        cfg.vault_root / "health" / PRIVATE_HEALTH_SUBDIR / f"{today}-private-findings.md"
+        if private_issues
+        else None
+    )
+    report = format_report(
+        tier1=tier1,
+        tier2=tier2,
+        today=today,
+        tier2_notes=tier2_notes,
+        private_sidecar_path=sidecar_path,
+    )
+
+    # Defence in depth behind the structural split, for private text that
+    # arrives in a field the classifier does not inspect.
+    report, soul_redactions = scrub_soul_quotes(report, soul_context)
+    report, path_redactions = scrub_private_paths(report)
+    if soul_redactions:
+        logger.warning(
+            "Redacted %d verbatim SOUL quote(s) from the public report — a "
+            "non-soul issue kind is leaking private text; fix its emitter.",
+            soul_redactions,
+        )
+    if path_redactions:
+        logger.info(
+            "Redacted %d private vault path(s) quoted in finding details.",
+            path_redactions,
+        )
 
     if not args.dry_run:
         path = write_report(cfg.vault_root, report, today=today)
         logger.info("Report: %s", path)
+        if private_issues:
+            written = write_private_sidecar(
+                cfg.vault_root,
+                format_private_sidecar(private_issues, today=today),
+                today=today,
+            )
+            logger.info(
+                "Private sidecar (local-only): %s — %d finding(s) withheld from %s",
+                written, len(private_issues), path.name,
+            )
 
     # Exit code 0 regardless; daily_driver surfaces CRITICAL/HIGH in morning brief
     notes = f"tier1={tier1.total_issues} tier2={len(tier2)}"

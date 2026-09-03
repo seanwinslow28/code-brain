@@ -5,13 +5,13 @@ connects:
   - Operational Visibility vs. Semantic Value in Agent Fleets
   - Supervision Fatigue as the Hard Cap on Fleet Scaling
   - The Illusion of Competence in Automated Systems
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-02
+updated: 2026-09-02
 ---
 
 ## Synthesis
 
-The tension between operational visibility and semantic value reveals that infrastructure health is a poor proxy for business success. When Sean connects 'Operational Visibility vs. Semantic Value' with 'Supervision Fatigue,' he identifies that the missing link is automated verification. Without it, fleets scale into inefficiency; with it, they scale into value. This pattern suggests that the real opportunity lies not in building more agents, but in building the 'truth layer' that confirms their work.
+The core tension lies in the gap between operational health and semantic value, where infrastructure metrics mask the lack of actual insight generation. This pattern reveals that scaling agent fleets without a verification layer leads to inefficiency rather than value, as human supervision becomes the bottleneck. The consequence is that Sean must prioritize building a 'truth layer' to ensure his automated systems produce meaningful outputs rather than just completing tasks.
 
 ## Threads
 
@@ -21,7 +21,7 @@ The tension between operational visibility and semantic value reveals that infra
 
 ### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
 
-> Three independent lines converge on the same artifact: the software-factory literature's #1 finding (verification, not generation, is the scarce capability); the wave-1 wedge quote ('no tool you own will ever tell you it happened'); Sean's unfair advantages (running fleet, eval muscle, PM/QA).
+> the software-factory literature's #1 finding (verification, not generation, is the scarce capability)
 
 ### [[The Illusion of Competence in Automated Systems]]
 

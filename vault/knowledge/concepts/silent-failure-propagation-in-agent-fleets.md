@@ -2,10 +2,10 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/silent-decay-in-strategic-pipelines.md
+  - knowledge/concepts/silent-failure-propagation-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ This mechanism describes how localized infrastructure failures cascade into syst
 
 ## Context
 
-Sean's fleet status reports show 'healthy' agents even when key infrastructure components are down, leading to a gradual erosion of his vault's strategic utility for job hunting and creative work.
+Sean's fleet status reports show 'healthy' agents even when key infrastructure components are down, leading to a gradual erosion of his vault's strategic utility for job hunting and creative work. This creates a dangerous gap between perceived operational health and actual cognitive output quality.
 
 ## Evidence
 

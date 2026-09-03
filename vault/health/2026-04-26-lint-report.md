@@ -3,6 +3,8 @@
 
 _154 issues found (148 structural, 6 semantic)._
 
+_21 finding(s) withheld from this tracked report (SOUL-derived, or about a file in a gitignored subtree). They remain counted below; full detail is in `vault/health/private/2026-04-26-private-findings.md` (local-only, gitignored). Backfilled 2026-09-03._
+
 ## HIGH (55)
 
 - **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/00_inbox/Deep Research Max a step change for autonomous research agents.md` — Lukas Haas
@@ -25,23 +27,23 @@ _154 issues found (148 structural, 6 semantic)._
 - **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/health/2026-04-19-lint-report.md` — health/2026-04-19-lint-report.md
 - **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/Excalidraw/Drawing 2026-04-19 09.38.16.excalidraw.md` — Excalidraw/Drawing 2026-04-19 09.38.16.excalidraw.md
 - **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/30_domains/product-management/prompts/ref- bi-weekly-update-prompt.md` — 30_domains/product-management/prompts/ref- bi-weekly-update-prompt.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/05_atlas/operating-models/INTERVIEW-PLAYBOOK.md` — 05_atlas/operating-models/INTERVIEW-PLAYBOOK.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/05_atlas/operating-models/the-block/operating-model.md` — 05_atlas/operating-models/the-block/operating-model.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/05_atlas/operating-models/the-block/schedule-recommendations.md` — 05_atlas/operating-models/the-block/schedule-recommendations.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/05_atlas/operating-models/the-block/HEARTBEAT.md` — 05_atlas/operating-models/the-block/HEARTBEAT.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/05_atlas/operating-models/the-block/USER.md` — 05_atlas/operating-models/the-block/USER.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/05_atlas/operating-models/the-block/SOUL.md` — 05_atlas/operating-models/the-block/SOUL.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/05_atlas/operating-models/life-systems/operating-model.md` — 05_atlas/operating-models/life-systems/operating-model.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/05_atlas/operating-models/life-systems/schedule-recommendations.md` — 05_atlas/operating-models/life-systems/schedule-recommendations.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/05_atlas/operating-models/life-systems/HEARTBEAT.md` — 05_atlas/operating-models/life-systems/HEARTBEAT.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/05_atlas/operating-models/life-systems/USER.md` — 05_atlas/operating-models/life-systems/USER.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/05_atlas/operating-models/life-systems/SOUL.md` — 05_atlas/operating-models/life-systems/SOUL.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/10_timeline/weekly/2026-W10.md` — 10_timeline/weekly/2026-W10.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/10_timeline/weekly/2026-W11.md` — 10_timeline/weekly/2026-W11.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/10_timeline/weekly/2026-W15.md` — 10_timeline/weekly/2026-W15.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/10_timeline/weekly/2026-W12.md` — 10_timeline/weekly/2026-W12.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/10_timeline/weekly/2026-W16.md` — 10_timeline/weekly/2026-W16.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/10_timeline/weekly/2026-W13.md` — 10_timeline/weekly/2026-W13.md
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
 - **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/40_knowledge/references/ref-move-checklist-2026-q1.md` — 40_knowledge/references/ref-move-checklist-2026-q1.md
 - **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/40_knowledge/references/ref-open-brain-ob1-obsidian-vault-import.md` — 40_knowledge/references/ref-open-brain-ob1-obsidian-vault-import.md
 - **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/40_knowledge/references/ref-q2-roadmap-brainstorm-2026.md` — 40_knowledge/references/ref-q2-roadmap-brainstorm-2026.md
@@ -97,10 +99,10 @@ _154 issues found (148 structural, 6 semantic)._
 - **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-campus-201/prj-campus-201.md` — 20_projects/prj-campus-201/prj-campus-201.md
 - **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-campus-201/prj-campus-product-knowledge-base-builder.md` — 20_projects/prj-campus-201/prj-campus-product-knowledge-base-builder.md
 - **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-campus-201/prj-campus-notes.md` — 20_projects/prj-campus-201/prj-campus-notes.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-boston-move/ref-move-out-checklist.md` — 20_projects/prj-boston-move/ref-move-out-checklist.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-boston-move/prj-mary-and-sean-eat-drink-poop-around-the-world.md` — 20_projects/prj-boston-move/prj-mary-and-sean-eat-drink-poop-around-the-world.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-personal-finance/prj-personal-finance.md` — 20_projects/prj-personal-finance/prj-personal-finance.md
-- **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-personal-finance/prj-ive-built-out-a-notebook-within-notebooklm-called-claud.md` — 20_projects/prj-personal-finance/prj-ive-built-out-a-notebook-within-notebooklm-called-claud.md
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
 - **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-sw-portfolio-and-hubs-designs/ref-how-to-use-project.md` — 20_projects/prj-sw-portfolio-and-hubs-designs/ref-how-to-use-project.md
 - **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-16bitfit/prj-16bitfit-2.md` — 20_projects/prj-16bitfit/prj-16bitfit-2.md
 - **orphan** (T1): `/Users/seanwinslow/Code-Brain/claude-code-superuser-pack/vault/20_projects/prj-16bitfit/prj-16bit-fit-color-palette.md` — 20_projects/prj-16bitfit/prj-16bit-fit-color-palette.md

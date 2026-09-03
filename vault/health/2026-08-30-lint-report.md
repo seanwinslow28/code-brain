@@ -1,0 +1,1552 @@
+# Knowledge Lint Report — 2026-08-30
+
+_1531 issues found (1278 structural, 253 semantic)._
+
+_315 finding(s) withheld from this tracked report (SOUL-derived, or about a file in a gitignored subtree). They remain counted below; full detail is in `vault/health/private/2026-08-30-private-findings.md` (local-only, gitignored). Backfilled 2026-09-03._
+
+
+_Tier-2 LLM scan: reviewed 4/4 concept batches._
+
+## CRITICAL (227)
+
+- **contradiction** (T2): `knowledge/concepts/access-vs-meaning.md` — contradicts the-illusion-of-competence-in-automated-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/accountability-gap.md` — contradicts automation-reliability (source=sql)
+- **contradiction** (T2): `knowledge/concepts/accountability-gap.md` — contradicts automation-routines (source=sql)
+- **contradiction** (T2): `knowledge/concepts/accountability-gap.md` — contradicts supervision-as-the-new-ai-edge (source=sql)
+- **contradiction** (T2): `knowledge/concepts/agent-health.md` — contradicts context-management-as-a-bottleneck (source=sql)
+- **contradiction** (T2): `knowledge/concepts/agent-health.md` — contradicts daily-note-generation (source=sql)
+- **contradiction** (T2): `knowledge/concepts/agent-health-monitoring.md` — contradicts infrastructure-status (source=sql)
+- **contradiction** (T2): `knowledge/concepts/agent-health-monitoring.md` — contradicts infrastructure-status-and-agent-failure (source=sql)
+- **contradiction** (T2): `knowledge/concepts/agent-health-monitoring.md` — contradicts operational-visibility-vs-semantic-value-in-agent-fleets (source=sql)
+- **contradiction** (T2): `knowledge/concepts/agent-health-monitoring.md` — contradicts resilience-engineering-work-as-imagined-vs-work-as-done (source=sql)
+- **contradiction** (T2): `knowledge/concepts/agent-health-monitoring.md` — contradicts silent-failure-propagation-in-agent-fleets (source=sql)
+- **contradiction** (T2): `knowledge/concepts/agent-health-monitoring.md` — contradicts sre-error-budget-for-agents (source=sql)
+- **contradiction** (T2): `knowledge/concepts/agent-health-monitoring.md` — contradicts synthesizer-fix (source=sql)
+- **contradiction** (T2): `knowledge/concepts/agent-health-monitoring.md` — contradicts the-illusion-of-competence-in-automated-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/agent-health-monitoring.md` — contradicts the-illusion-of-health-in-autonomous-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/agentic-engineering.md` — contradicts boundary-object-theory (source=sql)
+- **contradiction** (T2): `knowledge/concepts/ai-fluency.md` — contradicts context-management-as-a-bottleneck (source=sql)
+- **contradiction** (T2): `knowledge/concepts/audience-capture-via-alignment-loops.md` — contradicts market-positioning (source=sql)
+- **contradiction** (T2): `knowledge/concepts/automation-pipeline.md` — contradicts agent-health-monitoring (source=sql)
+- **contradiction** (T2): `knowledge/concepts/automation-reliability.md` — contradicts accountability-gap (source=sql)
+- **contradiction** (T2): `knowledge/concepts/automation-reliability.md` — contradicts automation-failure-and-daily-note-disruption (source=sql)
+- **contradiction** (T2): `knowledge/concepts/automation-reliability.md` — contradicts cost-capped-agentic-workflows (source=sql)
+- **contradiction** (T2): `knowledge/concepts/automation-reliability.md` — contradicts eval-vocabulary (source=sql)
+- **contradiction** (T2): `knowledge/concepts/automation-reliability.md` — contradicts supervision-as-the-new-ai-edge (source=sql)
+- **contradiction** (T2): `knowledge/concepts/automation-routines.md` — contradicts accountability-gap (source=sql)
+- **contradiction** (T2): `knowledge/concepts/automation-routines.md` — contradicts writing-voice-modes (source=sql)
+- **contradiction** (T2): `knowledge/concepts/benchmarking-artifact.md` — contradicts agent-health (source=sql)
+- **contradiction** (T2): `knowledge/concepts/benchmarking-artifact.md` — contradicts automation-reliability (source=sql)
+- **contradiction** (T2): `knowledge/concepts/benchmarking-artifact.md` — contradicts context-management-as-a-bottleneck (source=sql)
+- **contradiction** (T2): `knowledge/concepts/benchmarking-artifact.md` — contradicts convivial-automation (source=sql)
+- **contradiction** (T2): `knowledge/concepts/benchmarking-artifact.md` — contradicts infrastructure-status (source=sql)
+- **contradiction** (T2): `knowledge/concepts/boundary-object-theory.md` — contradicts confluence-overhaul-plan (source=sql)
+- **contradiction** (T2): `knowledge/concepts/comprehension-audit.md` — contradicts automation-reliability (source=sql)
+- **contradiction** (T2): `knowledge/concepts/constraint-first-automation-vs-general-efficiency.md` — contradicts the-taste-fidelity-decoupling-in-creative-production (source=sql)
+- **contradiction** (T2): `knowledge/concepts/context-compounding.md` — contradicts memory-rot-and-lifecycle-management (source=sql)
+- **contradiction** (T2): `knowledge/concepts/context-compounding.md` — contradicts slop-as-a-trust-deficit (source=sql)
+- **contradiction** (T2): `knowledge/concepts/context-compounding.md` — contradicts throughput-vs-taste-memory-tension (source=sql)
+- **contradiction** (T2): `knowledge/concepts/context-compounding.md` — contradicts token-waste (source=sql)
+- **contradiction** (T2): `knowledge/concepts/context-management-as-a-bottleneck.md` — contradicts agent-health (source=sql)
+- **contradiction** (T2): `knowledge/concepts/context-management-as-a-bottleneck.md` — contradicts intent-engineering (source=sql)
+- **contradiction** (T2): `knowledge/concepts/context-management-as-a-bottleneck.md` — contradicts supervision-as-the-new-ai-edge (source=sql)
+- **contradiction** (T2): `knowledge/concepts/context-management-as-a-bottleneck.md` — contradicts the-governance-building-bifurcation (source=sql)
+- **contradiction** (T2): `knowledge/concepts/control-architecture-as-evangelism.md` — contradicts humor-and-status-dynamics (source=sql)
+- **contradiction** (T2): `knowledge/concepts/control-architecture-as-evangelism.md` — contradicts tacit-knowledge-erosion-vs-automation-scale (source=sql)
+- **contradiction** (T2): `knowledge/concepts/corroboration-depth-as-a-gradient-signal.md` — contradicts slop-as-a-trust-deficit (source=sql)
+- **contradiction** (T2): `knowledge/concepts/corroboration-depth-as-a-gradient-signal.md` — contradicts the-illusion-of-competence-in-automated-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/cost-capped-agentic-workflows.md` — contradicts agent-health-monitoring (source=sql)
+- **contradiction** (T2): `knowledge/concepts/cost-capped-agentic-workflows.md` — contradicts automation-reliability (source=sql)
+- **contradiction** (T2): `knowledge/concepts/cost-capped-agentic-workflows.md` — contradicts provider-fallback-mechanism (source=sql)
+- **contradiction** (T2): `knowledge/concepts/cost-capped-agentic-workflows.md` — contradicts the-efficiency-quality-inversion-in-automated-synthesis (source=sql)
+- **contradiction** (T2): `knowledge/concepts/cost-capped-agentic-workflows.md` — contradicts vault-maintenance (source=sql)
+- **contradiction** (T2): `knowledge/concepts/craft-in-product-design.md` — contradicts supervision-as-the-new-ai-edge (source=sql)
+- **contradiction** (T2): `knowledge/concepts/creative-continuity-under-degradation.md` — contradicts operational-uptime-vs-cognitive-utility-tension (source=sql)
+- **contradiction** (T2): `knowledge/concepts/creative-studio-workflows.md` — contradicts automation-failure-and-daily-note-disruption (source=sql)
+- **contradiction** (T2): `knowledge/concepts/credential-rotency-vs-infrastructure-stability.md` — contradicts silent-failure-propagation-in-agent-fleets (source=sql)
+- **contradiction** (T2): `knowledge/concepts/cross-domain-bridging.md` — contradicts automation-routines (source=sql)
+- **contradiction** (T2): `knowledge/concepts/cross-domain-bridging.md` — contradicts daily-note-generation (source=sql)
+- **contradiction** (T2): `knowledge/concepts/curation-as-the-new-scarcity.md` — contradicts negative-capability-failure-literacy (source=sql)
+- **contradiction** (T2): `knowledge/concepts/curation-as-the-new-scarcity.md` — contradicts slop-as-a-trust-deficit (source=sql)
+- **contradiction** (T2): `knowledge/concepts/decentralized-ecosystem-invariant.md` — contradicts centralized-distribution-mechanism (source=sql)
+- **contradiction** (T2): `knowledge/concepts/deep-research-queue.md` — contradicts negative-capability-failure-literacy (source=sql)
+- **contradiction** (T2): `knowledge/concepts/deep-work.md` — contradicts two-audiences (source=sql)
+- **contradiction** (T2): `knowledge/concepts/demonstration-over-declaration.md` — contradicts the-illusion-of-competence-in-automated-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/do-not-promote-framing.md` — contradicts privacy-aware-data-routing (source=sql)
+- **contradiction** (T2): `knowledge/concepts/double-loop-learning.md` — contradicts the-efficiency-quality-inversion-in-automated-synthesis (source=sql)
+- **contradiction** (T2): `knowledge/concepts/energy-management.md` — contradicts runtime-model-coupling (source=sql)
+- **contradiction** (T2): `knowledge/concepts/eval-vocabulary.md` — contradicts automation-reliability (source=sql)
+- **contradiction** (T2): `knowledge/concepts/eval-vocabulary.md` — contradicts infrastructure-status (source=sql)
+- **contradiction** (T2): `knowledge/concepts/eval-vocabulary.md` — contradicts the-taste-fidelity-decoupling-in-creative-production (source=sql)
+- **contradiction** (T2): `knowledge/concepts/eval-vocabulary-as-control-mechanism.md` — contradicts infrastructure-status (source=sql)
+- **contradiction** (T2): `knowledge/concepts/evidence-accumulation-loop.md` — contradicts craft-in-product-design (source=sql)
+- **contradiction** (T2): `knowledge/concepts/evidence-accumulation-loop.md` — contradicts exemplar-distance (source=sql)
+- **contradiction** (T2): `knowledge/concepts/evidence-accumulation-loop.md` — contradicts negative-space-calibration (source=sql)
+- **contradiction** (T2): `knowledge/concepts/evidence-accumulation-loop.md` — contradicts operational-visibility-vs-semantic-value-in-agent-fleets (source=sql)
+- **contradiction** (T2): `knowledge/concepts/execution-strategy-decoupling.md` — contradicts ooda-loop-tempo-trap (source=sql)
+- **contradiction** (T2): `knowledge/concepts/gemini-deep-research.md` — contradicts research-agents (source=sql)
+- **contradiction** (T2): `knowledge/concepts/graceful-extensibility.md` — contradicts the-illusion-of-health-in-autonomous-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/hardware-dependency-as-a-semantic-bottleneck.md` — contradicts the-efficiency-quality-inversion-in-automated-synthesis (source=sql)
+- **contradiction** (T2): `knowledge/concepts/hardware-fragility-masks-semantic-decay-in-agent-fleets.md` — contradicts job-hunt-as-sales-pipeline (source=sql)
+- **contradiction** (T2): `knowledge/concepts/harness-engineering-invariant.md` — contradicts the-illusion-of-competence-in-automated-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/harness-engineering-invariant.md` — contradicts velocity-vs-judgment-in-mcp-strengthening (source=sql)
+- **contradiction** (T2): `knowledge/concepts/infrastructure-fragility-masks-semantic-decay-in-agent-fleets.md` — contradicts agent-health-monitoring (source=sql)
+- **contradiction** (T2): `knowledge/concepts/infrastructure-fragmentation-and-semantic-isolation.md` — contradicts the-illusion-of-health-in-autonomous-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/infrastructure-status.md` — contradicts access-vs-meaning (source=sql)
+- **contradiction** (T2): `knowledge/concepts/infrastructure-status.md` — contradicts automation-reliability (source=sql)
+- **contradiction** (T2): `knowledge/concepts/infrastructure-status.md` — contradicts the-illusion-of-health-in-autonomous-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/infrastructure-status-and-agent-failure.md` — contradicts agent-health-monitoring (source=sql)
+- **contradiction** (T2): `knowledge/concepts/infrastructure-status-and-agent-failure.md` — contradicts creative-studio-workflows (source=sql)
+- **contradiction** (T2): `knowledge/concepts/intent-engineering.md` — contradicts negative-capability-failure-literacy (source=sql)
+- **contradiction** (T2): `knowledge/concepts/job-hunt-as-sales-pipeline.md` — contradicts the-efficiency-quality-inversion-in-automated-synthesis (source=sql)
+- **contradiction** (T2): `knowledge/concepts/job-hunt-as-sales-pipeline.md` — contradicts the-illusion-of-competence-in-automated-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/job-hunt-as-sales-pipeline.md` — contradicts the-taste-throughput-trade-off-in-agentic-synthesis (source=sql)
+- **contradiction** (T2): `knowledge/concepts/knowledge-centered-service.md` — contradicts confluence-overhaul-plan (source=sql)
+- **contradiction** (T2): `knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md` — contradicts boundary-object-theory (source=sql)
+- **contradiction** (T2): `knowledge/concepts/liability-routing-in-agentic-product-design.md` — contradicts the-illusion-of-competence-in-automated-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/mcp-server-hardening.md` — contradicts agent-health-monitoring (source=sql)
+- **contradiction** (T2): `knowledge/concepts/mcp-server-hardening.md` — contradicts friction-killing-wedge (source=sql)
+- **contradiction** (T2): `knowledge/concepts/mcp-server-hardening.md` — contradicts the-illusion-of-competence-in-automated-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/motivational-tension-via-open-loops.md` — contradicts humor-and-status-dynamics (source=sql)
+- **contradiction** (T2): `knowledge/concepts/negative-capability-failure-literacy.md` — contradicts the-illusion-of-health-in-autonomous-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/negative-constraints.md` — contradicts creative-studio-workflows (source=sql)
+- **contradiction** (T2): `knowledge/concepts/negative-space-calibration.md` — contradicts the-taste-fidelity-decoupling-in-creative-production (source=sql)
+- **contradiction** (T2): `knowledge/concepts/negative-space-calibration.md` — contradicts the-verification-governance-inversion (source=sql)
+- **contradiction** (T2): `knowledge/concepts/normal-accident-critique.md` — contradicts resilience-engineering-work-as-imagined-vs-work-as-done (source=sql)
+- **contradiction** (T2): `knowledge/concepts/ooda-loop-tempo-trap.md` — contradicts execution-strategy-decoupling (source=sql)
+- **contradiction** (T2): `knowledge/concepts/operational-readiness-review.md` — contradicts the-illusion-of-health-in-autonomous-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/operational-readiness-review.md` — contradicts wardley-mapping-for-career-leverage (source=sql)
+- **contradiction** (T2): `knowledge/concepts/operational-uptime-vs-cognitive-utility-tension.md` — contradicts creative-continuity-under-degradation (source=sql)
+- **contradiction** (T2): `knowledge/concepts/operational-uptime-vs-cognitive-utility-tension.md` — contradicts recovery-oriented-computing (source=sql)
+- **contradiction** (T2): `knowledge/concepts/operational-uptime-vs-cognitive-utility-tension.md` — contradicts the-illusion-of-health-in-autonomous-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/operational-visibility-vs-semantic-value-in-agent-fleets.md` — contradicts agent-health-monitoring (source=sql)
+- **contradiction** (T2): `knowledge/concepts/operational-visibility-vs-semantic-value-in-agent-fleets.md` — contradicts silent-failure-propagation-in-agent-fleets (source=sql)
+- **contradiction** (T2): `knowledge/concepts/operational-visibility-vs-semantic-value-in-agent-fleets.md` — contradicts the-illusion-of-health-in-autonomous-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/operational-visibility-vs-semantic-value-in-agent-fleets.md` — contradicts velocity-vs-judgment-in-mcp-strengthening (source=sql)
+- **contradiction** (T2): `knowledge/concepts/privacy-aware-data-routing.md` — contradicts vault-as-agent-infrastructure (source=sql)
+- **contradiction** (T2): `knowledge/concepts/probe-design-vs-routing-compliance-in-agentic-workflows.md` — contradicts the-tension-between-automation-velocity-and-creative-friction (source=sql)
+- **contradiction** (T2): `knowledge/concepts/project-room-workflow.md` — contradicts creative-studio-workflows (source=sql)
+- **contradiction** (T2): `knowledge/concepts/research-prompt-autoresearch-agentic-polymarket-crypto-cash-flow.md` — contradicts deep-research-queue (source=sql)
+- **contradiction** (T2): `knowledge/concepts/resilience-engineering-work-as-imagined-vs-work-as-done.md` — contradicts agent-fleet-observability-dashboard (source=sql)
+- **contradiction** (T2): `knowledge/concepts/resilience-engineering-work-as-imagined-vs-work-as-done.md` — contradicts agent-health-monitoring (source=sql)
+- **contradiction** (T2): `knowledge/concepts/resilience-engineering-work-as-imagined-vs-work-as-done.md` — contradicts operational-uptime-vs-cognitive-utility-tension (source=sql)
+- **contradiction** (T2): `knowledge/concepts/resilience-engineering-work-as-imagined-vs-work-as-done.md` — contradicts the-illusion-of-competence-in-automated-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/resilience-engineering-work-as-imagined-vs-work-as-done.md` — contradicts the-illusion-of-health-in-autonomous-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/resilience-engineering-work-as-imagined-vs-work-as-done.md` — contradicts vibe-coding-interview-canon (source=sql)
+- **contradiction** (T2): `knowledge/concepts/runtime-model-coupling.md` — contradicts agent-health-monitoring (source=sql)
+- **contradiction** (T2): `knowledge/concepts/runtime-model-coupling.md` — contradicts benchmarking-artifact (source=sql)
+- **contradiction** (T2): `knowledge/concepts/runtime-model-coupling.md` — contradicts control-plane-data-plane-split-for-agent-fleets (source=sql)
+- **contradiction** (T2): `knowledge/concepts/runtime-model-coupling.md` — contradicts energy-management (source=sql)
+- **contradiction** (T2): `knowledge/concepts/runtime-model-coupling.md` — contradicts privacy-aware-data-routing (source=sql)
+- **contradiction** (T2): `knowledge/concepts/screenplay-craft-architect.md` — contradicts personal-agentic-intent-engineering (source=sql)
+- **contradiction** (T2): `knowledge/concepts/screenplay-craft-architect.md` — contradicts vibe-coding-playbook (source=sql)
+- **contradiction** (T2): `knowledge/concepts/selection-effects-created-by-product-architecture.md` — contradicts supervision-as-the-new-ai-edge (source=sql)
+- **contradiction** (T2): `knowledge/concepts/semantic-divergence-in-model-upgrades.md` — contradicts velocity-vs-judgment-in-mcp-strengthening (source=sql)
+- **contradiction** (T2): `knowledge/concepts/signal-vs-safety-trade-off-in-resume-architecture.md` — contradicts job-hunt-as-sales-pipeline (source=sql)
+- **contradiction** (T2): `knowledge/concepts/silent-failure-propagation-in-agent-fleets.md` — contradicts agent-fleet-observability-dashboard (source=sql)
+- **contradiction** (T2): `knowledge/concepts/silent-failure-propagation-in-agent-fleets.md` — contradicts agent-health-monitoring (source=sql)
+- **contradiction** (T2): `knowledge/concepts/silent-failure-propagation-in-agent-fleets.md` — contradicts automation-reliability (source=sql)
+- **contradiction** (T2): `knowledge/concepts/silent-failure-propagation-in-agent-fleets.md` — contradicts eval-vocabulary-as-control-mechanism (source=sql)
+- **contradiction** (T2): `knowledge/concepts/silent-failure-propagation-in-agent-fleets.md` — contradicts resilience-engineering-work-as-imagined-vs-work-as-done (source=sql)
+- **contradiction** (T2): `knowledge/concepts/silent-failure-propagation-in-agent-fleets.md` — contradicts sre-error-budget-for-agents (source=sql)
+- **contradiction** (T2): `knowledge/concepts/slop-as-a-trust-deficit.md` — contradicts double-loop-learning (source=sql)
+- **contradiction** (T2): `knowledge/concepts/slop-as-a-trust-deficit.md` — contradicts job-hunt-as-sales-pipeline (source=sql)
+- **contradiction** (T2): `knowledge/concepts/slop-as-a-trust-deficit.md` — contradicts negative-capability-failure-literacy (source=sql)
+- **contradiction** (T2): `knowledge/concepts/slop-as-a-trust-deficit.md` — contradicts supervision-as-the-new-ai-edge (source=sql)
+- **contradiction** (T2): `knowledge/concepts/slop-as-a-trust-deficit.md` — contradicts the-extra-hour (source=sql)
+- **contradiction** (T2): `knowledge/concepts/slop-as-a-trust-deficit.md` — contradicts the-taste-throughput-trade-off-in-agentic-synthesis (source=sql)
+- **contradiction** (T2): `knowledge/concepts/sre-error-budget-for-agents.md` — contradicts control-room-observability (source=sql)
+- **contradiction** (T2): `knowledge/concepts/sre-error-budget-for-agents.md` — contradicts negative-capability-failure-literacy (source=sql)
+- **contradiction** (T2): `knowledge/concepts/sre-error-budget-for-agents.md` — contradicts normal-accident-critique (source=sql)
+- **contradiction** (T2): `knowledge/concepts/sre-error-budget-for-agents.md` — contradicts resilience-engineering-work-as-imagined-vs-work-as-done (source=sql)
+- **contradiction** (T2): `knowledge/concepts/sre-error-budget-for-agents.md` — contradicts silent-failure-propagation-in-agent-fleets (source=sql)
+- **contradiction** (T2): `knowledge/concepts/substack-drafter-agent.md` — contradicts automation-reliability (source=sql)
+- **contradiction** (T2): `knowledge/concepts/supervision-as-the-new-ai-edge.md` — contradicts accountability-gap (source=sql)
+- **contradiction** (T2): `knowledge/concepts/supervision-as-the-new-ai-edge.md` — contradicts context-compounding (source=sql)
+- **contradiction** (T2): `knowledge/concepts/supervision-as-the-new-ai-edge.md` — contradicts context-management-as-a-bottleneck (source=sql)
+- **contradiction** (T2): `knowledge/concepts/supervision-as-the-new-ai-edge.md` — contradicts legibility-debt-as-a-supervision-failure-mode (source=sql)
+- **contradiction** (T2): `knowledge/concepts/supervision-as-the-new-ai-edge.md` — contradicts raising-vs-describing (source=sql)
+- **contradiction** (T2): `knowledge/concepts/supervision-as-the-new-ai-edge.md` — contradicts runtime-model-coupling (source=sql)
+- **contradiction** (T2): `knowledge/concepts/supervision-as-the-new-ai-edge.md` — contradicts tacit-knowledge-erosion-vs-automation-scale (source=sql)
+- **contradiction** (T2): `knowledge/concepts/supervision-as-the-new-ai-edge.md` — contradicts the-efficiency-quality-inversion-in-automated-synthesis (source=sql)
+- **contradiction** (T2): `knowledge/concepts/supervision-as-the-new-ai-edge.md` — contradicts the-illusion-of-competence-in-automated-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/supervision-as-the-new-ai-edge.md` — contradicts the-skill-atrophy-trap-in-agentic-workflows (source=sql)
+- **contradiction** (T2): `knowledge/concepts/supervision-fatigue-as-the-hard-cap-on-fleet-scaling.md` — contradicts creative-continuity-under-degradation (source=sql)
+- **contradiction** (T2): `knowledge/concepts/synthesizer-fix.md` — contradicts the-illusion-of-competence-in-automated-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/synthesizer-fix.md` — contradicts throughput-vs-taste-memory-tension (source=sql)
+- **contradiction** (T2): `knowledge/concepts/system-constraints.md` — contradicts research-workflow-integration (source=sql)
+- **contradiction** (T2): `knowledge/concepts/tacit-knowledge-erosion-vs-automation-scale.md` — contradicts agentic-engineering-signal (source=sql)
+- **contradiction** (T2): `knowledge/concepts/tacit-knowledge-erosion-vs-automation-scale.md` — contradicts supervision-as-the-new-ai-edge (source=sql)
+- **contradiction** (T2): `knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md` — contradicts the-illusion-of-competence-in-automated-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-calibration-bottleneck-in-scalable-creative-production.md` — contradicts job-hunt-as-sales-pipeline (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-calibration-bottleneck-in-scalable-creative-production.md` — contradicts throughput-vs-activity-illusion-in-job-hunt-operations (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-context-memory-bottleneck-in-personalized-ai.md` — contradicts throughput-vs-taste-memory-tension (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-efficiency-quality-inversion-in-automated-synthesis.md` — contradicts coupling-fragility-vs-adaptive-capacity-in-agent-fleets (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-efficiency-quality-inversion-in-automated-synthesis.md` — contradicts hardware-fragility-masks-semantic-decay-in-agent-fleets (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-efficiency-quality-inversion-in-automated-synthesis.md` — contradicts job-hunt-as-sales-pipeline (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-efficiency-quality-inversion-in-automated-synthesis.md` — contradicts silent-failure-propagation-in-agent-fleets (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-efficiency-quality-inversion-in-automated-synthesis.md` — contradicts supervision-as-the-new-ai-edge (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-efficiency-quality-inversion-in-automated-synthesis.md` — contradicts the-illusion-of-health-in-autonomous-systems (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-efficiency-quality-inversion-in-automated-synthesis.md` — contradicts velocity-vs-judgment-in-mcp-strengthening (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-engineer-creative-divide-in-tooling.md` — contradicts control-architecture-as-evangelism (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-engineer-creative-divide-in-tooling.md` — contradicts job-hunt-as-sales-pipeline (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-homogenization-trap-in-agentic-creative-workflows.md` — contradicts negative-space-calibration (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-competence-in-automated-systems.md` — contradicts harness-engineering-invariant (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-competence-in-automated-systems.md` — contradicts infrastructure-status (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-competence-in-automated-systems.md` — contradicts job-hunt-as-sales-pipeline (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-competence-in-automated-systems.md` — contradicts negative-capability-failure-literacy (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-competence-in-automated-systems.md` — contradicts sre-error-budget-for-agents (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-competence-in-automated-systems.md` — contradicts supervision-as-the-new-ai-edge (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-competence-in-automated-systems.md` — contradicts synthesizer-fix (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-competence-in-automated-systems.md` — contradicts taste-as-evaluation-function-vs-activity-proof (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-health-in-autonomous-systems.md` — contradicts agent-fleet-observability-dashboard (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-health-in-autonomous-systems.md` — contradicts agent-health-monitoring (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-health-in-autonomous-systems.md` — contradicts control-room-observability (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-health-in-autonomous-systems.md` — contradicts hardware-dependency-as-a-semantic-bottleneck (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-health-in-autonomous-systems.md` — contradicts job-hunt-as-sales-pipeline (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-health-in-autonomous-systems.md` — contradicts market-positioning (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-health-in-autonomous-systems.md` — contradicts negative-capability-failure-literacy (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-health-in-autonomous-systems.md` — contradicts signal-vs-safety-trade-off-in-resume-architecture (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-illusion-of-health-in-autonomous-systems.md` — contradicts supervision-as-the-new-ai-edge (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-skill-atrophy-trap-in-agentic-workflows.md` — contradicts control-architecture-as-evangelism (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-taste-fidelity-decoupling-in-creative-production.md` — contradicts negative-space-calibration (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-taste-fidelity-decoupling-in-creative-production.md` — contradicts supervision-as-the-new-ai-edge (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-taste-fidelity-decoupling-in-creative-production.md` — contradicts the-automation-paradox-in-personal-knowledge-infrastructure (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-taste-throughput-trade-off-in-agentic-synthesis.md` — contradicts job-hunt-as-sales-pipeline (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-taste-throughput-trade-off-in-agentic-synthesis.md` — contradicts operational-visibility-vs-semantic-value-in-agent-fleets (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-verification-governance-inversion.md` — contradicts negative-space-calibration (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-verification-governance-inversion.md` — contradicts supervision-as-the-new-ai-edge (source=sql)
+- **contradiction** (T2): `knowledge/concepts/the-verification-governance-inversion.md` — contradicts supervision-fatigue-as-the-hard-cap-on-fleet-scaling (source=sql)
+- **contradiction** (T2): `knowledge/concepts/throughput-vs-activity-illusion-in-job-hunt-operations.md` — contradicts audience-capture-via-alignment-loops (source=sql)
+- **contradiction** (T2): `knowledge/concepts/token-waste.md` — contradicts creative-studio-workflows (source=sql)
+- **contradiction** (T2): `knowledge/concepts/token-waste.md` — contradicts mcp-server-hardening (source=sql)
+- **contradiction** (T2): `knowledge/concepts/velocity-vs-judgment-in-mcp-strengthening.md` — contradicts job-hunt-as-sales-pipeline (source=sql)
+- **contradiction** (T2): `knowledge/concepts/velocity-vs-judgment-in-mcp-strengthening.md` — contradicts operational-visibility-vs-semantic-value-in-agent-fleets (source=sql)
+- **contradiction** (T2): `knowledge/concepts/velocity-vs-judgment-in-mcp-strengthening.md` — contradicts the-taste-throughput-trade-off-in-agentic-synthesis (source=sql)
+- **contradiction** (T2): `knowledge/concepts/vibe-coding-interview.md` — contradicts cultural-fit-assessment (source=sql)
+- **contradiction** (T2): `knowledge/concepts/vibe-coding-interview-canon.md` — contradicts resilience-engineering-work-as-imagined-vs-work-as-done (source=sql)
+- **contradiction** (T2): `knowledge/concepts/vibe-coding-interview-format.md` — contradicts deep-work (source=sql)
+- **contradiction** (T2): `knowledge/concepts/writing-voice-modes.md` — contradicts automation-reliability (source=sql)
+- **contradiction** (T2): `knowledge/concepts/agent-health.md` — These articles define 'agent health' as a metric of operational continuity where an agent can be 'healthy' (running) while producing empty, stale, or semantically decayed outputs. This contradicts the implicit definition in `knowledge/concepts/automation-reliability.md` and `knowledge/concepts/control-room-observability.md`, which argue that system health must be verified by output alignment with intent and provenance, not just process execution. The former set normalizes a 'silent failure' state as 'healthy,' while the latter sets define health strictly by the validity of the output.
+- **contradiction** (T2): `knowledge/concepts/aesthetic-standardization-as-a-supervisory-mechanism.md` — `aesthetic-standardization...` posits that automated systems converge on the mean, suppressing idiosyncratic taste. `curation-as-the-new-scarcity` argues that curation is the primary value shift in information abundance. The contradiction lies in the mechanism of curation: if agents inherently standardize output to the mean (as per the first article), then 'curation' cannot be an automated process; it must be a strictly human, anti-algorithmic act of selection. The articles do not reconcile how one curates effectively when the underlying generation layer is structurally biased toward homogenization.
+- **contradiction** (T2): `knowledge/concepts/agent-rationalization.md` — `agent-rationalization` describes agents hallucinating entities to satisfy structural expectations (optimizing for linguistic probability). `citation-quality` notes that citation quality collapses into fabricated entities when topics are complex. The contradiction is in the attribution of cause: `agent-rationalization` frames this as a cognitive/optimization failure of the model's architecture, while `citation-quality` frames it as a capacity limitation of specific tools (LDR) or topic complexity. They disagree on whether hallucination is a universal structural trait of agentic systems or a specific failure mode of under-resourced research agents.
+- **contradiction** (T2): `knowledge/concepts/defensible-edge-mapping.md` — Semantic contradiction regarding the value of 'process' vs 'taste'. `demonstration-over-declaration` asserts that credibility is established by exposing the *process* of reasoning (the 'how'). However, `defensible-edge-mapping` and `market-positioning.md` argue that in an AI-saturated landscape, raw process/output is commoditized, and value shifts to *taste* and *intent* (the 'why' and 'what'). While not a direct logical contradiction, they present conflicting strategic priorities: one suggests the mechanism of creation is the differentiator, while the other suggests the curation/judgment behind it is the only defensible moat. `epistemic-artifacts-as-strategic-proof` attempts to bridge this by valuing 'construction lines' (process) as proof of humanity, but `defensible-edge-mapping` implies that even those can be faked or are less valuable than pure taste if not anchored in unique human intent.
+- **contradiction** (T2): `knowledge/concepts/energy-management.md` — Contradiction in infrastructure philosophy. `domain-ownership-and-hosting-strategy` emphasizes 'stability and reliability' as the primary drivers for hosting decisions. `energy-management.md` introduces a tension where stability/reliability is actively traded off against financial cost, requiring a hybrid architecture that may introduce latency (waking cold systems) or complexity (Wake-on-LAN dependencies). The former suggests a preference for consistent availability, while the latter explicitly accepts operational fragility/latency as a necessary condition for cost efficiency.
+- **contradiction** (T2): `knowledge/concepts/the-automation-paradox-in-agentic-efficiency-vs-creative-authority.md` — These concepts posit an inverse relationship between automation velocity and quality/judgment, suggesting that high-throughput systems produce low-signal artifacts and that high-velocity automation bypasses deep structural analysis. This contradicts the 'Sacred Cows' in creative-studio which prioritize 'Latest-and-greatest over LoRA specialization' and testing new generalists on merit, implying that modern closed-source models (high velocity/capability) can beat specialized workflows if tested correctly. Furthermore, it conflicts with the life-systems principle of 'Every win counts' and the strategy of compounding small income streams via automation, which assumes high-velocity execution is beneficial rather than inherently degrading.
+- **contradiction** (T2): `knowledge/concepts/the-taste-throughput-trade-off-in-agentic-synthesis.md` — These articles argue that increased throughput demands higher supervisory attention to filter low-signal noise, inverting efficiency gains. This contradicts the creative-studio operational goal of 'Engine Truth' where the pipeline is designed to ship when the loop plays smoothly at 12fps with recognizable style, implying a successful decoupling of taste from continuous manual verification. It also conflicts with the life-systems goal of building autonomous agents (daily-driver, vault synthesizer) to reduce Sean's cognitive load, rather than increasing it through mandatory filtering loops.
+- **contradiction** (T2): `knowledge/concepts/the-skill-atrophy-trap-in-agentic-workflows.md` — These concepts warn that automation displaces execution and interpretation, leading to skill atrophy and loss of diagnostic capability. This directly contradicts the creative-studio 'Sacred Cows' which state 'Always be willing to pivot' and 'Create for ourselves,' relying on AI as a primary collaborator to expand creative scope rather than preserve manual execution skills. It also conflicts with the life-systems approach of using local models (gemma4, phi4-mini) for finance categorization, which is an explicit delegation of interpretation to AI.
+- **contradiction** (T2): `knowledge/concepts/vault-as-agent-infrastructure.md` — Semantic tension regarding the 'active' nature of the vault. `vault-as-agent-infrastructure.md` defines the vault as an 'active system' and 'control plane' requiring explicit design for state survival, implying a complex, potentially high-overhead architecture. `vault-maintenance.md` advocates for '$0-run solutions' and 'automated, low-cost processes' to prevent technical debt. While not a direct logical contradiction, there is a tension between the complexity required for true 'control plane' behavior (which often requires significant infrastructure) and the strict constraint of '$0-run' maintenance tools which may lack the sophistication to handle complex state handoffs reliably without external costs.
+
+## HIGH (174)
+
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/2026-06-08-best-ai-tools-to-write-in-your-own-voice-last30days.md` — writing-humanity-pass
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/2026-06-08-best-ai-tools-to-write-in-your-own-voice-last30days.md` — writing-humanity-pass
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-creative-marketing-team-adoption.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-creative-marketing-team-adoption.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-creative-marketing-team-adoption.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-creative-marketing-team-adoption.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-ai-creative-tools-frustrations-and-gaps-last30days.md` — writing-critique
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-ai-creative-tools-frustrations-and-gaps-last30days.md` — writing-humanity-pass
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — substack-value-engine
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — writing-critique
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — writing-humanity-pass
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — writing-critique
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — writing-humanity-pass
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-spec-driven-eval-gaps.md` — writing-critique
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-spec-driven-eval-gaps.md` — writing-humanity-pass
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-spec-driven-eval-gaps.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-spec-driven-eval-gaps.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-spec-driven-eval-gaps.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — writing-critique
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — writing-humanity-pass
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — writing-critique
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/negative-constraints-and-daily-note-generation.md` — Negative Constraints
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/cross-domain-synthesis-epistemic-artifacts-agentic-signals-and-strategic-kernels.md` — Strategy Kernel Check
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/the-tension-between-automated-recovery-and-systemic-trust.md` — Saga / Compensation Patterns for Agent Workflows
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/cross-domain-tension-automation-velocity-vs-epistemic-hygiene-in-gap-analysis.md` — Overfitting via Optimization Visibility
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/temporal-gating-vs-agentic-scale.md` — Resume Council Lock
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/temporal-gating-vs-agentic-scale.md` — Intent Engineering MCP Server
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/optimization-visibility-and-generalization-failure.md` — Overfitting via Optimization Visibility
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/execution-strategy-decoupling.md` — Companion Completion Log
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/execution-strategy-decoupling.md` — Task Verification
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/strategic-tactical-coupling-via-amendments.md` — Amendments Log
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/strategic-tactical-coupling-via-amendments.md` — Strategic Input
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/internal-coherence-vs-external-legibility-in-job-hunt-strategy.md` — XYZ Hypothesis Ledger
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/strategic-adaptation-via-amendment-logging.md` — Amendments Log
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/semantic-divergence-in-model-upgrades.md` — Consistency Guarantees as Intent
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/infrastructure-evaluation-and-roadmap-integration.md` — Track-C MCP Server / Portfolio Differentiation
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/protocolization-of-career-pivot.md` — Self-Audit as Validation
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/infrastructure-stability-and-automation-reliability-in-creative-and-job-hunt-workflows.md` — Job-Hunt 2026
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/agent-resilience-across-travel-and-work-setup.md` — Deep Researcher Fleet Reinstall
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/the-tension-between-automation-reliability-and-adaptive-capacity.md` — Premortem Before Automation
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/tension-between-strict-reliability-targets-and-adaptive-capacity-in-job-hunt-automation.md` — Graceful Extensibility in Adaptive Systems
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/tension-between-protocol-instrumentation-and-regulatory-ambiguity.md` — Mock Interview rig
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/tension-between-protocol-instrumentation-and-regulatory-ambiguity.md` — Judge Layer Retrofit
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/the-tension-between-artifact-completeness-and-distribution-latency.md` — The Bottleneck of Visibility
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/taste-standardization-vs-creative-agency-in-automated-pipelines.md` — Convivial Automation
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/taste-standardization-vs-creative-agency-in-automated-pipelines.md` — Model Cards for Creative Pipelines
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/automation-and-travel-resilience-in-job-hunt-infrastructure.md` — MBP Travel Fallback Strategy
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/snapshot-integrity-vs-iterative-fluidity-in-agentic-workflows.md` — Snapshot-Based Versioning vs. Continuous Traceability
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/preparation-as-bottleneck-for-ai-generated-content.md` — Project Room Workflow
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/the-fragility-of-coupled-delivery.md` — Cadence-Gated Dependency
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/standardization-of-ai-interaction.md` — Intent Engineering MCP Server
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/standardization-of-ai-interaction.md` — Resume Council Lock
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/automation-reliability-and-job-hunt-workflows.md` — Job Hunt 2026
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/the-tension-between-automation-velocity-and-reputational-risk-in-job-hunt-execution.md` — Release Train
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/the-tension-between-automation-velocity-and-reputational-risk-in-job-hunt-execution.md` — OODA Loop / Tempo Trap
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/liability-routing-in-agentic-product-design.md` — Human-in-the-loop
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/the-alignment-trap-in-agentic-design.md` — Reward Hacking
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/validation-pre-commitment-in-product-strategy.md` — Assumption Ledger
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/mcp-server-pattern-repeatability.md` — MCP Server
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/tension-between-automated-recovery-and-systemic-trust.md` — Saga / Compensation Patterns for Agent Workflows
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/product-management-and-ai-system-delivery-integration.md` — Strategic Roadmap
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/the-verification-governance-inversion-in-agentic-fallback.md` — Behavioral Substitutability Contracts
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/strategic-sequencing-via-wardley-mapping.md` — Wardley Map Roadmap Mode
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/agent-health-monitoring-and-job-hunt-2026-automation-reliability.md` — Job-Hunt-2026
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/the-holdout-imperative-in-loop-engineering.md` — Golden Dataset
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/sre-error-budgets-and-resilience-engineering-in-agent-fleets.md` — Graceful Extensibility in Adaptive Systems
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/the-integration-paradox-in-agentic-animation.md` — Stacked-Tooling Friction
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/agent-health-and-professional-role-automation.md` — Integration of Agentic Systems in Professional Roles
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/tonal-consistency-across-content-and-career-strategy.md` — creative-writing
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/epistemic-artifacts-as-strategic-proof.md` — Portfolio as Epistemic Artifact
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/epistemic-artifacts-as-strategic-proof.md` — Strategy Kernel Check
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/engineering-bottleneck-vs-distribution-cadence.md` — Cadence-Gated Dependency
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/reliability-contract-vs-agentic-intent.md` — MAPE-K Closed-Loop Controller
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/connections/cost-vs-reliability-trade-off-in-agent-design.md` — Human-in-the-Loop Gate
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/scalability.md` — Availability
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/scalability.md` — Reliability
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/agentic-engineering.md` — Dynamic Workflows
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/open-source-contributions.md` — MCP Server / Portfolio Differentiation
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/background-processing.md` — Daily-routine automation
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/research-prompt-autoresearch-agentic-polymarket-crypto-cash-flow.md` — Prompt Engineering
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/concept-drift-as-a-systemic-risk.md` — Adverse Selection
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/ladder-of-inference-walkthrough.md` — Epistemic Hygiene
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/dominant-resource-fairness.md` — Fairness Policy RFC
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/motivational-tension-via-open-loops.md` — Addictive Storytelling
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/capability-aware-scheduling.md` — HTCondor ClassAds
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/vibe-coding-interview-format.md` — The Agentic Role Inversion Tension
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/agent-rationalization.md` — LDR Grounding Collapse
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/batch-export.md` — Export
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/jitter-ai.md` — Animation
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/ref-opus-4-8-prompting-playbook-2026.md` — Linas Beliūnas
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/ref-thinking-in-threads-claude-code.md` — @IndyDevDan
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/ref-anthropic-pm-interview-guide.md` — Insider Loops·Last updated Jun 2026
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/ref-top-2-percent-agentic-engineering-roadmap-2026.md` — @IndyDevDan
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/ref-pi-coding-agent-claude-code-competitor.md` — @IndyDevDan
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/ref-ai-writing-tell-humanaizer-skill.md` — AI Skill of the Week
+- **broken-wikilink** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **broken-wikilink** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **broken-wikilink** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **broken-wikilink** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **broken-wikilink** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **broken-wikilink** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **broken-wikilink** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **broken-wikilink** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **broken-wikilink** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **broken-wikilink** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/_archive/back-catalog/07-the-judgment-layer/post.md` — docs/MEANING_OVER_ACCESS
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/_archive/back-catalog/take-two-01-teach-the-model-your-hand/likeness-lock-style-logic-research-and-scaffold.md` — anima/docs/research/2026-05-30-nb2-editing-character-consistency-template
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/_archive/back-catalog/take-two-01-teach-the-model-your-hand/character-sheet-method-and-experiment.md` — anima/docs/research/2026-05-30-nb2-editing-character-consistency-template
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/_archive/back-catalog/take-two-01-teach-the-model-your-hand/character-sheet-method-and-experiment.md` — anima/characters/sean-anchor/character.yaml
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/last30days/2026-06-08-best-ai-tools-to-write-in-your-own-voice-last30days.md` — writing-humanity-pass
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/last30days/2026-06-08-best-ai-tools-to-write-in-your-own-voice-last30days.md` — writing-humanity-pass
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/last30days/2026-06-09-ai-creative-tools-frustrations-and-gaps-last30days.md` — writing-critique
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/last30days/2026-06-09-ai-creative-tools-frustrations-and-gaps-last30days.md` — writing-humanity-pass
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-creative-marketing-team-adoption.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-creative-marketing-team-adoption.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-creative-marketing-team-adoption.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-creative-marketing-team-adoption.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — substack-value-engine
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — writing-critique
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — writing-humanity-pass
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — writing-critique
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — writing-humanity-pass
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-spec-driven-eval-gaps.md` — writing-critique
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-spec-driven-eval-gaps.md` — writing-humanity-pass
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-spec-driven-eval-gaps.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-spec-driven-eval-gaps.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-spec-driven-eval-gaps.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — writing-critique
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — writing-humanity-pass
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — writing-critique
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — vault-knowledge
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — voiceprint-plugin-build-spec
+- **broken-wikilink** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — vault-knowledge
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/product-management/media-team-ideas/Perplexity-Computer-Overview.md` — sonnet 4.5
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/ref-nate-claude-chrome-extension-browser-as-employee.md` — sonnet 4.5
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/ref-top-2-percent-agentic-engineering-roadmap-2026.md` — opus 4.1
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/ref-top-2-percent-agentic-engineering-roadmap-2026.md` — sonnet 4.5
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/intent-engineering/ref-intent-engineering-landscape-survey-2026.md` — sonnet 4.5
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/references/intent-engineering/ref-personal-agentic-intent-engineering.md` — claude-3-
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-21-topic-18-pi-chatgpt-codex-integration-chatgpt-manual.md` — claude-3-
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-21-topic-15-pi-openrouter-integration-gemini-dr-manual.md` — claude-3-
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md` — opus 4.1
+- **stale-reference** (T2): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **stale-reference** (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/43-ontology-agent-setup.md` — claude-3-
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/audience-capture-via-alignment-loops.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/boundary-setting-as-political-act.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/capability-maturity-model-for-agent-work.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/deep-work.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/job_feed.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/performative-taste-drift.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/hardware-fragility-masks-semantic-decay-in-agent-fleets.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/the-automation-paradox-in-agentic-efficiency-vs-creative-authority.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/the-director-intern-invariant-in-creative-and-professional-identity.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/tier-a-relocation-exception-clauses.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/supervision-as-the-new-ai-edge.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/the-illusion-of-health-in-autonomous-systems.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/vibe-coding-interview-format.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/voice-calibrations-in-creative-and-professional-outputs.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+- **soul-tier-a-conflict** (T2): `knowledge/concepts/wardley-mapping-for-career-leverage.md` — detail withheld from this tracked report (SOUL-derived); see the local-only sidecar named in the header
+
+## MEDIUM (1118)
+
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/SCORECARD.md` — SCORECARD.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/Excalidraw/Drawing 2026-04-19 09.38.16.excalidraw.md` — Excalidraw/Drawing 2026-04-19 09.38.16.excalidraw.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/2026-06-09-ai-agent-frameworks-people-wish-existed-last30days.md` — 30_domains/creative-studio/2026-06-09-ai-agent-frameworks-people-wish-existed-last30days.md
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/product-management/prompts/ref- bi-weekly-update-prompt.md` — 30_domains/product-management/prompts/ref- bi-weekly-update-prompt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/PROMPT-KIT-agentic-engineering-last30days.md` — 30_domains/creative-studio/substack-research/PROMPT-KIT-agentic-engineering-last30days.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-creative-marketing-team-adoption.md` — 30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-creative-marketing-team-adoption.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-spec-driven-eval-gaps.md` — 30_domains/creative-studio/substack-research/2026-06-09-agentic-engineering-spec-driven-eval-gaps.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/30_domains/creative-studio/substack-research/2026-06-09-opportunity-report-creative-agentic.md` — 30_domains/creative-studio/substack-research/2026-06-09-opportunity-report-creative-agentic.md
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/operational-uptime-vs-cognitive-utility-tension.md` — knowledge/concepts/operational-uptime-vs-cognitive-utility-tension.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/velocity-vs-judgment-in-mcp-strengthening.md` — knowledge/concepts/velocity-vs-judgment-in-mcp-strengthening.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-taste-fidelity-decoupling-in-creative-production.md` — knowledge/concepts/the-taste-fidelity-decoupling-in-creative-production.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/probabilistic-reality-vs-deterministic-expectation.md` — knowledge/concepts/probabilistic-reality-vs-deterministic-expectation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-illusion-of-competence-in-automated-systems.md` — knowledge/concepts/the-illusion-of-competence-in-automated-systems.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/silent-failure-propagation-in-agent-fleets.md` — knowledge/concepts/silent-failure-propagation-in-agent-fleets.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-automation-paradox-in-personal-knowledge-infrastructure.md` — knowledge/concepts/the-automation-paradox-in-personal-knowledge-infrastructure.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-verification-governance-inversion-in-agentic-workflows.md` — knowledge/concepts/the-verification-governance-inversion-in-agentic-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/aesthetic-standardization-as-a-supervisory-mechanism.md` — knowledge/concepts/aesthetic-standardization-as-a-supervisory-mechanism.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/semantic-divergence-in-model-upgrades.md` — knowledge/concepts/semantic-divergence-in-model-upgrades.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-skill-atrophy-trap-in-agentic-workflows.md` — knowledge/concepts/the-skill-atrophy-trap-in-agentic-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/cost-capped-agentic-workflows.md` — knowledge/concepts/cost-capped-agentic-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-context-memory-bottleneck-in-personalized-ai.md` — knowledge/concepts/the-context-memory-bottleneck-in-personalized-ai.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/agent-health-and-daily-routine-automation.md` — knowledge/concepts/agent-health-and-daily-routine-automation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/tacit-knowledge-erosion-vs-automation-scale.md` — knowledge/concepts/tacit-knowledge-erosion-vs-automation-scale.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/throughput-vs-taste-memory-tension.md` — knowledge/concepts/throughput-vs-taste-memory-tension.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/resilience-engineering-work-as-imagined-vs-work-as-done.md` — knowledge/concepts/resilience-engineering-work-as-imagined-vs-work-as-done.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/throughput-vs-activity-illusion-in-job-hunt-operations.md` — knowledge/concepts/throughput-vs-activity-illusion-in-job-hunt-operations.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/strategic-inflection-vs-activity-system-in-competitive-analysis.md` — knowledge/concepts/strategic-inflection-vs-activity-system-in-competitive-analysis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-paradox-of-agentic-efficiency-vs-creative-authority.md` — knowledge/concepts/the-paradox-of-agentic-efficiency-vs-creative-authority.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/constraint-first-automation-vs-general-efficiency.md` — knowledge/concepts/constraint-first-automation-vs-general-efficiency.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-abstraction-tax-on-creative-authority.md` — knowledge/concepts/the-abstraction-tax-on-creative-authority.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-taste-throughput-trade-off-in-agentic-synthesis.md` — knowledge/concepts/the-taste-throughput-trade-off-in-agentic-synthesis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-efficiency-quality-inversion-in-automated-synthesis.md` — knowledge/concepts/the-efficiency-quality-inversion-in-automated-synthesis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/probe-design-vs-routing-compliance-in-agentic-workflows.md` — knowledge/concepts/probe-design-vs-routing-compliance-in-agentic-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/standardization-of-ai-interaction.md` — knowledge/concepts/standardization-of-ai-interaction.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/silent-decay-in-strategic-pipelines.md` — knowledge/concepts/silent-decay-in-strategic-pipelines.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-tension-between-automation-velocity-and-creative-friction.md` — knowledge/concepts/the-tension-between-automation-velocity-and-creative-friction.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-verification-governance-inversion.md` — knowledge/concepts/the-verification-governance-inversion.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/voice-calibrations-in-creative-and-professional-outputs.md` — knowledge/concepts/voice-calibrations-in-creative-and-professional-outputs.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/coupling-fragility-vs-adaptive-capacity-in-agent-fleets.md` — knowledge/concepts/coupling-fragility-vs-adaptive-capacity-in-agent-fleets.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md` — knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-director-intern-invariant-in-creative-and-professional-identity.md` — knowledge/concepts/the-director-intern-invariant-in-creative-and-professional-identity.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/liability-routing-in-agentic-product-design.md` — knowledge/concepts/liability-routing-in-agentic-product-design.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/supervision-fatigue-as-the-hard-cap-on-fleet-scaling.md` — knowledge/concepts/supervision-fatigue-as-the-hard-cap-on-fleet-scaling.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/infrastructure-fragmentation-and-semantic-isolation.md` — knowledge/concepts/infrastructure-fragmentation-and-semantic-isolation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/automation-failure-and-daily-note-disruption.md` — knowledge/concepts/automation-failure-and-daily-note-disruption.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md` — knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/operational-visibility-vs-semantic-value-in-agent-fleets.md` — knowledge/concepts/operational-visibility-vs-semantic-value-in-agent-fleets.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-masking-effect-of-structural-completeness-in-failed-automation.md` — knowledge/concepts/the-masking-effect-of-structural-completeness-in-failed-automation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-homogenization-trap-in-agentic-creative-workflows.md` — knowledge/concepts/the-homogenization-trap-in-agentic-creative-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/structural-integrity-vs-automation-velocity.md` — knowledge/concepts/structural-integrity-vs-automation-velocity.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-tension-between-protocol-instrumentation-and-regulatory-ambiguity.md` — knowledge/concepts/the-tension-between-protocol-instrumentation-and-regulatory-ambiguity.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-illusion-of-health-in-autonomous-systems.md` — knowledge/concepts/the-illusion-of-health-in-autonomous-systems.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/epistemic-artifacts-as-strategic-proof.md` — knowledge/concepts/epistemic-artifacts-as-strategic-proof.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/hardware-fragility-masks-semantic-decay-in-agent-fleets.md` — knowledge/concepts/hardware-fragility-masks-semantic-decay-in-agent-fleets.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/concepts/the-calibration-bottleneck-in-scalable-creative-production.md` — knowledge/concepts/the-calibration-bottleneck-in-scalable-creative-production.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/vault-knowledge-mcp-research.md` — knowledge/expansions/vault-knowledge-mcp-research.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/negative-space-calibration.md` — knowledge/expansions/negative-space-calibration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/job_feed.md` — knowledge/expansions/job_feed.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/operational-uptime-vs-cognitive-utility-tension.md` — knowledge/expansions/operational-uptime-vs-cognitive-utility-tension.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/agent-fleet-observability-dashboard.md` — knowledge/expansions/agent-fleet-observability-dashboard.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/eval-vocabulary.md` — knowledge/expansions/eval-vocabulary.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/memory-rot-and-lifecycle-management.md` — knowledge/expansions/memory-rot-and-lifecycle-management.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/automation-reliability.md` — knowledge/expansions/automation-reliability.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/writing-voice-modes.md` — knowledge/expansions/writing-voice-modes.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/exemplar-distance.md` — knowledge/expansions/exemplar-distance.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/creative-continuity-under-degradation.md` — knowledge/expansions/creative-continuity-under-degradation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/claude-skills.md` — knowledge/expansions/claude-skills.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/curation-as-the-new-scarcity.md` — knowledge/expansions/curation-as-the-new-scarcity.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/execution-strategy-decoupling.md` — knowledge/expansions/execution-strategy-decoupling.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/the-illusion-of-competence-in-automated-systems.md` — knowledge/expansions/the-illusion-of-competence-in-automated-systems.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/slop-as-a-trust-deficit.md` — knowledge/expansions/slop-as-a-trust-deficit.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/evidence-accumulation-loop.md` — knowledge/expansions/evidence-accumulation-loop.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/agentic-engineering.md` — knowledge/expansions/agentic-engineering.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/portfolio-projects.round2.md` — knowledge/expansions/portfolio-projects.round2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/vault-synthesizer-v2-retrofit-plan.md` — knowledge/expansions/vault-synthesizer-v2-retrofit-plan.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/runtime-model-coupling.md` — knowledge/expansions/runtime-model-coupling.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/failure-amplification-in-agentic-chains.md` — knowledge/expansions/failure-amplification-in-agentic-chains.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/harness-engineering-invariant.md` — knowledge/expansions/harness-engineering-invariant.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/daily-driver-agent.md` — knowledge/expansions/daily-driver-agent.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/silent-failure-propagation-in-agent-fleets.md` — knowledge/expansions/silent-failure-propagation-in-agent-fleets.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/ai-product-manager.md` — knowledge/expansions/ai-product-manager.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/control-architecture-as-evangelism.md` — knowledge/expansions/control-architecture-as-evangelism.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/practice-confidence-plan.md` — knowledge/expansions/practice-confidence-plan.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/open-source-contributions.md` — knowledge/expansions/open-source-contributions.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/portfolio-projects.round3.md` — knowledge/expansions/portfolio-projects.round3.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/goodhart-failure-typing.md` — knowledge/expansions/goodhart-failure-typing.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/aesthetic-standardization-as-a-supervisory-mechanism.md` — knowledge/expansions/aesthetic-standardization-as-a-supervisory-mechanism.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/vault-knowledge-mcp.md` — knowledge/expansions/vault-knowledge-mcp.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/karpathy-single-top-rec.md` — knowledge/expansions/karpathy-single-top-rec.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/signal-vs-safety-trade-off-in-resume-architecture.md` — knowledge/expansions/signal-vs-safety-trade-off-in-resume-architecture.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/interpersonal-dynamics.md` — knowledge/expansions/interpersonal-dynamics.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/corroboration-depth-as-a-gradient-signal.md` — knowledge/expansions/corroboration-depth-as-a-gradient-signal.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/agentic-engineering-signal.md` — knowledge/expansions/agentic-engineering-signal.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/accountability-gap.md` — knowledge/expansions/accountability-gap.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/critical-incident-technique.md` — knowledge/expansions/critical-incident-technique.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/audience-capture-via-alignment-loops.md` — knowledge/expansions/audience-capture-via-alignment-loops.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/cost-capped-agentic-workflows.md` — knowledge/expansions/cost-capped-agentic-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/comprehension-debt.md` — knowledge/expansions/comprehension-debt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/citation-quality.md` — knowledge/expansions/citation-quality.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/gemini-deep-research.md` — knowledge/expansions/gemini-deep-research.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/concept_edges.md` — knowledge/expansions/concept_edges.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/friction-killing-wedge.md` — knowledge/expansions/friction-killing-wedge.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/autonomous-agent-fleets.round2.md` — knowledge/expansions/autonomous-agent-fleets.round2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/tacit-knowledge-erosion-vs-automation-scale.md` — knowledge/expansions/tacit-knowledge-erosion-vs-automation-scale.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/portfolio-walkthrough.md` — knowledge/expansions/portfolio-walkthrough.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/track-c-mcp-server-portfolio-differentiation.md` — knowledge/expansions/track-c-mcp-server-portfolio-differentiation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/daily-routine-automation.md` — knowledge/expansions/daily-routine-automation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/portfolio-projects.md` — knowledge/expansions/portfolio-projects.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/throughput-vs-taste-memory-tension.md` — knowledge/expansions/throughput-vs-taste-memory-tension.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/adops-automation.md` — knowledge/expansions/adops-automation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/daily-note-generation.md` — knowledge/expansions/daily-note-generation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/benchmarking-artifact.md` — knowledge/expansions/benchmarking-artifact.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/resilience-engineering-work-as-imagined-vs-work-as-done.md` — knowledge/expansions/resilience-engineering-work-as-imagined-vs-work-as-done.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/take-home-assessment.md` — knowledge/expansions/take-home-assessment.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/personal-agentic-intent-engineering.round1.md` — knowledge/expansions/personal-agentic-intent-engineering.round1.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/comprehension-as-currency.md` — knowledge/expansions/comprehension-as-currency.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/implementation-architecture.md` — knowledge/expansions/implementation-architecture.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/demonstration-over-declaration.md` — knowledge/expansions/demonstration-over-declaration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/pushover-keychain-creds.md` — knowledge/expansions/pushover-keychain-creds.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/failure-suspicion-state-machine.md` — knowledge/expansions/failure-suspicion-state-machine.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/privacy-aware-data-routing.md` — knowledge/expansions/privacy-aware-data-routing.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/throughput-vs-activity-illusion-in-job-hunt-operations.md` — knowledge/expansions/throughput-vs-activity-illusion-in-job-hunt-operations.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/cultural-fit-assessment.md` — knowledge/expansions/cultural-fit-assessment.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/token-waste.md` — knowledge/expansions/token-waste.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/ciia-keyword-sanity-checks.md` — knowledge/expansions/ciia-keyword-sanity-checks.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/fault-error-failure-taxonomy.md` — knowledge/expansions/fault-error-failure-taxonomy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/provider-fallback-mechanism.md` — knowledge/expansions/provider-fallback-mechanism.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/vault-as-agent-infrastructure.md` — knowledge/expansions/vault-as-agent-infrastructure.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/constraint-first-automation-vs-general-efficiency.md` — knowledge/expansions/constraint-first-automation-vs-general-efficiency.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/mcp-server-hardening.md` — knowledge/expansions/mcp-server-hardening.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/confluence-overhaul-plan.md` — knowledge/expansions/confluence-overhaul-plan.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/cross-domain-bridging.md` — knowledge/expansions/cross-domain-bridging.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/context-management-as-a-bottleneck.md` — knowledge/expansions/context-management-as-a-bottleneck.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/autonomous-agent-fleets.round3.md` — knowledge/expansions/autonomous-agent-fleets.round3.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/research-workflow-integration.md` — knowledge/expansions/research-workflow-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/real-time-problem-solving.md` — knowledge/expansions/real-time-problem-solving.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/vibe-coding-rep-familiarity.md` — knowledge/expansions/vibe-coding-rep-familiarity.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/double-loop-learning.md` — knowledge/expansions/double-loop-learning.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/research-prompt-autoresearch-agentic-polymarket-crypto-cash-flow.md` — knowledge/expansions/research-prompt-autoresearch-agentic-polymarket-crypto-cash-flow.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/the-taste-throughput-trade-off-in-agentic-synthesis.md` — knowledge/expansions/the-taste-throughput-trade-off-in-agentic-synthesis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/ai-prototyping.md` — knowledge/expansions/ai-prototyping.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/eval-vocabulary-as-control-mechanism.md` — knowledge/expansions/eval-vocabulary-as-control-mechanism.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/personal-agentic-intent-engineering.round3.md` — knowledge/expansions/personal-agentic-intent-engineering.round3.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/personal-agentic-intent-engineering.md` — knowledge/expansions/personal-agentic-intent-engineering.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/capability-maturity-model-for-agent-work.md` — knowledge/expansions/capability-maturity-model-for-agent-work.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/agent-health.md` — knowledge/expansions/agent-health.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/substack-drafter-agent.md` — knowledge/expansions/substack-drafter-agent.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/domain-ownership-and-hosting-strategy.md` — knowledge/expansions/domain-ownership-and-hosting-strategy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/vibe-coding-interview-canon.md` — knowledge/expansions/vibe-coding-interview-canon.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/silent-decay-in-strategic-pipelines.md` — knowledge/expansions/silent-decay-in-strategic-pipelines.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/competitive-analysis.md` — knowledge/expansions/competitive-analysis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/coupling-fragility-vs-adaptive-capacity-in-agent-fleets.md` — knowledge/expansions/coupling-fragility-vs-adaptive-capacity-in-agent-fleets.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/fleet-status.md` — knowledge/expansions/fleet-status.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/humor-and-status-dynamics.md` — knowledge/expansions/humor-and-status-dynamics.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/autonomous-agent-fleets.round1.md` — knowledge/expansions/autonomous-agent-fleets.round1.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/supervision-as-the-new-ai-edge.md` — knowledge/expansions/supervision-as-the-new-ai-edge.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/deep-research-queue.md` — knowledge/expansions/deep-research-queue.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/revenue-integration.md` — knowledge/expansions/revenue-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/confidence-rituals.md` — knowledge/expansions/confidence-rituals.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/supervision-fatigue-as-the-hard-cap-on-fleet-scaling.md` — knowledge/expansions/supervision-fatigue-as-the-hard-cap-on-fleet-scaling.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/autonomous-agent-fleets.md` — knowledge/expansions/autonomous-agent-fleets.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/concept-drift-as-a-systemic-risk.md` — knowledge/expansions/concept-drift-as-a-systemic-risk.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/agent-health-monitoring.md` — knowledge/expansions/agent-health-monitoring.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/personal-agentic-intent-engineering.round2.md` — knowledge/expansions/personal-agentic-intent-engineering.round2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/infrastructure-status.md` — knowledge/expansions/infrastructure-status.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/synthesizer-fix.md` — knowledge/expansions/synthesizer-fix.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/coordinated-omission-in-agent-observability.md` — knowledge/expansions/coordinated-omission-in-agent-observability.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/vibe-coding-playbook.md` — knowledge/expansions/vibe-coding-playbook.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/infrastructure-fragmentation-and-semantic-isolation.md` — knowledge/expansions/infrastructure-fragmentation-and-semantic-isolation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/context-compounding.md` — knowledge/expansions/context-compounding.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/automation-failure-and-daily-note-disruption.md` — knowledge/expansions/automation-failure-and-daily-note-disruption.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/provider-preference-configuration.md` — knowledge/expansions/provider-preference-configuration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/dominant-resource-fairness.md` — knowledge/expansions/dominant-resource-fairness.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/motivational-tension-via-open-loops.md` — knowledge/expansions/motivational-tension-via-open-loops.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/capability-aware-scheduling.md` — knowledge/expansions/capability-aware-scheduling.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/indexing-and-synthesis.md` — knowledge/expansions/indexing-and-synthesis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/access-vs-meaning.md` — knowledge/expansions/access-vs-meaning.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/daily-drive-agent.md` — knowledge/expansions/daily-drive-agent.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/boundary-setting-as-political-act.md` — knowledge/expansions/boundary-setting-as-political-act.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/operational-visibility-vs-semantic-value-in-agent-fleets.md` — knowledge/expansions/operational-visibility-vs-semantic-value-in-agent-fleets.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/vibe-coding-interview-format.md` — knowledge/expansions/vibe-coding-interview-format.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/knowledge_loop.md` — knowledge/expansions/knowledge_loop.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/spaced-repetition.md` — knowledge/expansions/spaced-repetition.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/infrastructure-status-and-agent-failure.md` — knowledge/expansions/infrastructure-status-and-agent-failure.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/agent-rationalization.md` — knowledge/expansions/agent-rationalization.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/batch-export.md` — knowledge/expansions/batch-export.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/goodgoodhart-failure-typing.md` — knowledge/expansions/goodgoodhart-failure-typing.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/negative-capability-failure-literacy.md` — knowledge/expansions/negative-capability-failure-literacy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/infrastructure.md` — knowledge/expansions/infrastructure.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/the-extra-hour.md` — knowledge/expansions/the-extra-hour.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/comprehension-audit.md` — knowledge/expansions/comprehension-audit.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/the-illusion-of-health-in-autonomous-systems.md` — knowledge/expansions/the-illusion-of-health-in-autonomous-systems.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/ai-fluency.md` — knowledge/expansions/ai-fluency.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/daily-note-gener.md` — knowledge/expansions/daily-note-gener.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/double-monetization-invariant.md` — knowledge/expansions/double-monetization-invariant.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/boundary-object-theory.md` — knowledge/expansions/boundary-object-theory.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/control-plane-data-plane-split-for-agent-fleets.md` — knowledge/expansions/control-plane-data-plane-split-for-agent-fleets.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/product-management.md` — knowledge/expansions/product-management.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/complexity-override.md` — knowledge/expansions/complexity-override.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/system-constraints.md` — knowledge/expansions/system-constraints.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/intent-engineering.md` — knowledge/expansions/intent-engineering.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/jitter-ai.md` — knowledge/expansions/jitter-ai.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/epistemic-artifacts-as-strategic-proof.md` — knowledge/expansions/epistemic-artifacts-as-strategic-proof.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/two-audiences.md` — knowledge/expansions/two-audiences.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/hardware-fragility-masks-semantic-decay-in-agent-fleets.md` — knowledge/expansions/hardware-fragility-masks-semantic-decay-in-agent-fleets.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/research-agents.md` — knowledge/expansions/research-agents.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/unified-roadmap.md` — knowledge/expansions/unified-roadmap.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/daily-note-generators.md` — knowledge/expansions/daily-note-generators.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/job-hunt-as-sales-pipeline.md` — knowledge/expansions/job-hunt-as-sales-pipeline.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/the-calibration-bottleneck-in-scalable-creative-production.md` — knowledge/expansions/the-calibration-bottleneck-in-scalable-creative-production.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/control-room-observability.md` — knowledge/expansions/control-room-observability.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/portfolio-projects.round1.md` — knowledge/expansions/portfolio-projects.round1.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/mcp-security-framework.md` — knowledge/expansions/connections/mcp-security-framework.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/vibe-coding-interview-and-career-artifact-integration.md` — knowledge/expansions/connections/vibe-coding-interview-and-career-artifact-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/research-as-input-for-mcp-servers.md` — knowledge/expansions/connections/research-as-input-for-mcp-servers.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/ai-driven-content-creation-and-product-strategy-integration.md` — knowledge/expansions/connections/ai-driven-content-creation-and-product-strategy-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/contextual-accuracy-and-automation-reliability.md` — knowledge/expansions/connections/contextual-accuracy-and-automation-reliability.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-infrastructure-and-interview-preparation.md` — knowledge/expansions/connections/automation-infrastructure-and-interview-preparation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-fleet-observability-and-infrastructure-health.md` — knowledge/expansions/connections/agent-fleet-observability-and-infrastructure-health.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agentic-engineering-and-open-source-synergy.md` — knowledge/expansions/connections/agentic-engineering-and-open-source-synergy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/substack-drafter-agent-and-daily-note-generation.md` — knowledge/expansions/connections/substack-drafter-agent-and-daily-note-generation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round3.md` — knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round3.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/portfolio-development-through-agent-health.md` — knowledge/expansions/connections/portfolio-development-through-agent-health.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-automation-reliability-and-daily-routine-interdependence.md` — knowledge/expansions/connections/agent-health-automation-reliability-and-daily-routine-interdependence.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-routines-agent-health-and-daily-notes.md` — knowledge/expansions/connections/automation-routines-agent-health-and-daily-notes.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-operational-efficiency.md` — knowledge/expansions/connections/agent-health-and-operational-efficiency.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-failure-and-syntactic-knowledge-disconnection.md` — knowledge/expansions/connections/automation-failure-and-syntactic-knowledge-disconnection.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-monitoring-and-cost-capped-agentic-workflows-synergy.md` — knowledge/expansions/connections/agent-health-monitoring-and-cost-capped-agentic-workflows-synergy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-and-operational-efficiency-cross-domain-synergy.md` — knowledge/expansions/connections/automation-and-operational-efficiency-cross-domain-synergy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/ai-product-manager-and-vibe-coding-interview-integration.md` — knowledge/expansions/connections/ai-product-manager-and-vibe-coding-interview-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-failure-and-daily-note-disruption-creative-studio-workflows.md` — knowledge/expansions/connections/automation-failure-and-daily-note-disruption-creative-studio-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/cross-domain-optimization-through-cost-capping-and-automation.md` — knowledge/expansions/connections/cross-domain-optimization-through-cost-capping-and-automation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-automation-interdependence.md` — knowledge/expansions/connections/agent-health-automation-interdependence.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/cost-capped-workflows-and-agent-health-monitoring.md` — knowledge/expansions/connections/cost-capped-workflows-and-agent-health-monitoring.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/ai-career-path-integration-with-daily-routine-automation.md` — knowledge/expansions/connections/ai-career-path-integration-with-daily-routine-automation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/cross-domain-roadmap-synthesis.md` — knowledge/expansions/connections/cross-domain-roadmap-synthesis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-reliability-and-daily-note-generation.md` — knowledge/expansions/connections/automation-reliability-and-daily-note-generation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-routines-and-daily-note-generation.md` — knowledge/expansions/connections/automation-routines-and-daily-note-generation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/infrastructure-and-agent-health-monitoring.md` — knowledge/expansions/connections/infrastructure-and-agent-health-monitoring.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agentic-engineering-and-professional-roles.md` — knowledge/expansions/connections/agentic-engineering-and-professional-roles.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/personal-brand-credibility-ecosystem.md` — knowledge/expansions/connections/personal-brand-credibility-ecosystem.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/gemini-deep-research-and-eval-vocabulary-synergy.md` — knowledge/expansions/connections/gemini-deep-research-and-eval-vocabulary-synergy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round2.md` — knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-fleet-reliability-and-automation-pipeline.md` — knowledge/expansions/connections/agent-fleet-reliability-and-automation-pipeline.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/audit-and-synthesis-integration.md` — knowledge/expansions/connections/audit-and-synthesis-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/competitive-analysis-market-positioning-and-product-management.md` — knowledge/expansions/connections/competitive-analysis-market-positioning-and-product-management.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-failure-affects-daily-note-generation-and-job-hunt-2026.md` — knowledge/expansions/connections/automation-failure-affects-daily-note-generation-and-job-hunt-2026.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-routines-and-creative-workflow-integration.md` — knowledge/expansions/connections/automation-routines-and-creative-workflow-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-monitoring-and-daily-note-generation.md` — knowledge/expansions/connections/agent-health-monitoring-and-daily-note-generation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-and-daily-workflow-interdependence.md` — knowledge/expansions/connections/automation-and-daily-workflow-interdependence.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/vibe-coding-interview-ecosystem.md` — knowledge/expansions/connections/vibe-coding-interview-ecosystem.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-monitoring-agent-health.md` — knowledge/expansions/connections/agent-health-monitoring-agent-health.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/cross-domain-bridging-as-a-retrofit-tier-objective.md` — knowledge/expansions/connections/cross-domain-bridging-as-a-retrofit-tier-objective.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/creative-automation-pipeline.md` — knowledge/expansions/connections/creative-automation-pipeline.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-routines-agent-health-interdependence.md` — knowledge/expansions/connections/automation-routines-agent-health-interdependence.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-routines-daily-drive-agent-and-agent-health-monitoring-synergy.md` — knowledge/expansions/connections/automation-routines-daily-drive-agent-and-agent-health-monitoring-synergy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/research-methodology-integration.md` — knowledge/expansions/connections/research-methodology-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/mcp-server-and-knowledge-graph-synergy.md` — knowledge/expansions/connections/mcp-server-and-knowledge-graph-synergy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-cost-efficiency.md` — knowledge/expansions/connections/agent-health-and-cost-efficiency.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-fleets-supporting-knowledge-synthesis.md` — knowledge/expansions/connections/agent-fleets-supporting-knowledge-synthesis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-pipeline-and-daily-note-disruption.md` — knowledge/expansions/connections/automation-pipeline-and-daily-note-disruption.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/infrastructure-evaluation-and-roadmap-integration.md` — knowledge/expansions/connections/infrastructure-evaluation-and-roadmap-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/open-source-contributions-creative-studio-workflows-through-automation.md` — knowledge/expansions/connections/open-source-contributions-creative-studio-workflows-through-automation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-reliability-and-infrastructure-health.md` — knowledge/expansions/connections/automation-reliability-and-infrastructure-health.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-job-hunt-and-observability-integration.md` — knowledge/expansions/connections/automation-job-hunt-and-observability-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/graceful-fallback-during-agent-absence.md` — knowledge/expansions/connections/graceful-fallback-during-agent-absence.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-reliability-and-daily-note-integrity.md` — knowledge/expansions/connections/agent-reliability-and-daily-note-integrity.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/vibe-coding-rituals-and-confidence-building.md` — knowledge/expansions/connections/vibe-coding-rituals-and-confidence-building.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/token-optimization-across-creative-and-professional-workflows.md` — knowledge/expansions/connections/token-optimization-across-creative-and-professional-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-monitoring-and-automation-reliability.md` — knowledge/expansions/connections/agent-health-monitoring-and-automation-reliability.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agentic-system-integration-for-job-hunt.md` — knowledge/expansions/connections/agentic-system-integration-for-job-hunt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/context-assembly-as-a-cross-domain-failure-point.md` — knowledge/expansions/connections/context-assembly-as-a-cross-domain-failure-point.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/cost-capped-agentic-workflows-and-agent-health-monitoring.md` — knowledge/expansions/connections/cost-capped-agentic-workflows-and-agent-health-monitoring.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-knowledge-retrieval-interdependence.md` — knowledge/expansions/connections/agent-health-and-knowledge-retrieval-interdependence.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/cross-domain-agent-synergy-and-automation-failures.md` — knowledge/expansions/connections/cross-domain-agent-synergy-and-automation-failures.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-and-agentic-tooling-synergy.md` — knowledge/expansions/connections/automation-and-agentic-tooling-synergy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-monitoring-and-cost-capped-agentic-workflows.md` — knowledge/expansions/connections/agent-health-monitoring-and-cost-capped-agentic-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/fleet-status-and-agent-fleet-observability-dashboard.md` — knowledge/expansions/connections/fleet-status-and-agent-fleet-observability-dashboard.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agentic-engineering-signal-ai-fluency-and-portfolio-projects-for-interview-prep.md` — knowledge/expansions/connections/agentic-engineering-signal-ai-fluency-and-portfolio-projects-for-interview-prep.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-monitoring-automation-reliability.md` — knowledge/expansions/connections/agent-health-monitoring-automation-reliability.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/operational-health-automation-consistency.md` — knowledge/expansions/connections/operational-health-automation-consistency.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-and-operational-efficiency-synergy.md` — knowledge/expansions/connections/automation-and-operational-efficiency-synergy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/implementation-architecture-and-enterprise-ai-workflow.md` — knowledge/expansions/connections/implementation-architecture-and-enterprise-ai-workflow.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-automation-reliability-for-daily-notes.md` — knowledge/expansions/connections/agent-health-and-automation-reliability-for-daily-notes.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-routines-and-interview-preparation.md` — knowledge/expansions/connections/automation-routines-and-interview-preparation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-failure-affects-daily-contextual-continuity.md` — knowledge/expansions/connections/automation-failure-affects-daily-contextual-continuity.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-automation-integration.md` — knowledge/expansions/connections/agent-health-and-automation-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-routines-and-daily-workflows.md` — knowledge/expansions/connections/automation-routines-and-daily-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-failure-and-daily-note-disruption-automation-reliability.md` — knowledge/expansions/connections/automation-failure-and-daily-note-disruption-automation-reliability.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/infrastructure-monitoring-and-daily-routines.md` — knowledge/expansions/connections/infrastructure-monitoring-and-daily-routines.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-failure-agent-health-and-daily-note-disruption.md` — knowledge/expansions/connections/automation-failure-agent-health-and-daily-note-disruption.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/eval-vocabulary-and-vibe-coding-interview-canon-synergy.md` — knowledge/expansions/connections/eval-vocabulary-and-vibe-coding-interview-canon-synergy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-resilience-across-travel-and-work-setup.md` — knowledge/expansions/connections/agent-resilience-across-travel-and-work-setup.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-failure-daily-note-disruption-affecting-creative-and-job-hunt-workflows.md` — knowledge/expansions/connections/automation-failure-daily-note-disruption-affecting-creative-and-job-hunt-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-reliability-and-creative-workflow-dependency.md` — knowledge/expansions/connections/automation-reliability-and-creative-workflow-dependency.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-and-daily-agentic-systems-integration.md` — knowledge/expansions/connections/automation-and-daily-agentic-systems-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-and-knowledge-synchronization.md` — knowledge/expansions/connections/automation-and-knowledge-synchronization.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-daily-note-automation-failure.md` — knowledge/expansions/connections/agent-health-and-daily-note-automation-failure.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/cost-capped-agentic-workflows-and-deep-research-integration.md` — knowledge/expansions/connections/cost-capped-agentic-workflows-and-deep-research-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agentic-commerce-and-daily-routine-automation.md` — knowledge/expansions/connections/agentic-commerce-and-daily-routine-automation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/ai-product-management-ecosystem.md` — knowledge/expansions/connections/ai-product-management-ecosystem.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-creative-output-synergy.md` — knowledge/expansions/connections/agent-health-and-creative-output-synergy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/ai-fluency-agentic-engineering-signal-and-portfolio-projects-for-interview-prep.md` — knowledge/expansions/connections/ai-fluency-agentic-engineering-signal-and-portfolio-projects-for-interview-prep.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-failure-and-creative-studio-workflow-interdependence.md` — knowledge/expansions/connections/automation-failure-and-creative-studio-workflow-interdependence.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/deep-research-queue-integration-across-folders.md` — knowledge/expansions/connections/deep-research-queue-integration-across-folders.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agentic-trust-layering-in-daily-operations.md` — knowledge/expansions/connections/agentic-trust-layering-in-daily-operations.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/cross-domain-backup-and-documentation-strategy.md` — knowledge/expansions/connections/cross-domain-backup-and-documentation-strategy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/cross-domain-bridging-through-agent-health-monitoring.md` — knowledge/expansions/connections/cross-domain-bridging-through-agent-health-monitoring.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-reliability-and-agent-health-monitoring.md` — knowledge/expansions/connections/automation-reliability-and-agent-health-monitoring.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-and-travel-resilience-in-job-hunt-infrastructure.md` — knowledge/expansions/connections/automation-and-travel-resilience-in-job-hunt-infrastructure.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/cost-capping-and-automation-workflows.md` — knowledge/expansions/connections/cost-capping-and-automation-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-and-daily-routine-interdependence.md` — knowledge/expansions/connections/automation-and-daily-routine-interdependence.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agentic-engineering-signal-and-portfolio-projects-for-interview-prep.md` — knowledge/expansions/connections/agentic-engineering-signal-and-portfolio-projects-for-interview-prep.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/cost-sensitivity-of-agent-workflows.md` — knowledge/expansions/connections/cost-sensitivity-of-agent-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agentic-research-infrastructure.md` — knowledge/expansions/connections/agentic-research-infrastructure.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-reliability-and-agent-health-cross-dependencies.md` — knowledge/expansions/connections/automation-reliability-and-agent-health-cross-dependencies.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/deferred-deployment-and-portfolio-readiness.md` — knowledge/expansions/connections/deferred-deployment-and-portfolio-readiness.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-infrastructure-and-cross-domain-workflow-inefficiency.md` — knowledge/expansions/connections/agent-infrastructure-and-cross-domain-workflow-inefficiency.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agentic-systems-across-personal-creative-and-professional-workflows.md` — knowledge/expansions/connections/agentic-systems-across-personal-creative-and-professional-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-reliability-and-daily-outputs.md` — knowledge/expansions/connections/automation-reliability-and-daily-outputs.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-monitoring-infrastructure-interdependence.md` — knowledge/expansions/connections/agent-health-monitoring-infrastructure-interdependence.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-reliability-and-job-hunt-workflows.md` — knowledge/expansions/connections/automation-reliability-and-job-hunt-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/research-agent-stagnation-and-systemic-constraints.md` — knowledge/expansions/connections/research-agent-stagnation-and-systemic-constraints.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-reliability-and-cross-domain-disruption.md` — knowledge/expansions/connections/automation-reliability-and-cross-domain-disruption.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/voice-calibrations-in-creative-and-professional-outputs.md` — knowledge/expansions/connections/voice-calibrations-in-creative-and-professional-outputs.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/vibe-coding-synergy-for-cultural-and-technical-alignment.md` — knowledge/expansions/connections/vibe-coding-synergy-for-cultural-and-technical-alignment.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/rag-s-emerging-layered-architecture-as-a-cross-domain-pattern.md` — knowledge/expansions/connections/rag-s-emerging-layered-architecture-as-a-cross-domain-pattern.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/ai-driven-creative-automation-for-job-hunting.md` — knowledge/expansions/connections/ai-driven-creative-automation-for-job-hunting.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/fleet-observability-and-automation-reliability-in-job-hunt-and-creative-workflows.md` — knowledge/expansions/connections/fleet-observability-and-automation-reliability-in-job-hunt-and-creative-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/intent-engineering-and-agentic-systems-in-professional-roles.md` — knowledge/expansions/connections/intent-engineering-and-agentic-systems-in-professional-roles.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-reliability-and-agent-fleet-health.md` — knowledge/expansions/connections/automation-reliability-and-agent-fleet-health.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/infrastructure-and-agent-health-cross-dependencies.md` — knowledge/expansions/connections/infrastructure-and-agent-health-cross-dependencies.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/knowledge-infrastructure-and-strategic-alignment.md` — knowledge/expansions/connections/knowledge-infrastructure-and-strategic-alignment.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/ai-prototyping-and-vibe-coding-interview-format-synergy.md` — knowledge/expansions/connections/ai-prototyping-and-vibe-coding-interview-format-synergy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-automation-reliability-daily-routine.md` — knowledge/expansions/connections/agent-health-automation-reliability-daily-routine.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-infrastructure-reliability.md` — knowledge/expansions/connections/agent-health-and-infrastructure-reliability.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-automation-routines-and-daily-notes.md` — knowledge/expansions/connections/agent-health-automation-routines-and-daily-notes.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/research-system-integration-and-constraints.md` — knowledge/expansions/connections/research-system-integration-and-constraints.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/portfolio-projects-as-strategic-interview-preparation.md` — knowledge/expansions/connections/portfolio-projects-as-strategic-interview-preparation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-automation-reliability-daily-note-generation.md` — knowledge/expansions/connections/agent-health-automation-reliability-daily-note-generation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/provider-fallback-and-automation-reliability.md` — knowledge/expansions/connections/provider-fallback-and-automation-reliability.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/operational-storytelling-for-agent-ops-credibility.md` — knowledge/expansions/connections/operational-storytelling-for-agent-ops-credibility.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/creative-workflow-automation-via-agentic-engineering.md` — knowledge/expansions/connections/creative-workflow-automation-via-agentic-engineering.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/ai-pm-role-strategy-with-daily-note-generation-and-portfolio-differentiation.md` — knowledge/expansions/connections/ai-pm-role-strategy-with-daily-note-generation-and-portfolio-differentiation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-and-accountability-systems-in-organizational-restructuring.md` — knowledge/expansions/connections/automation-and-accountability-systems-in-organizational-restructuring.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/ai-pm-recruitment-strategy-integration.md` — knowledge/expansions/connections/ai-pm-recruitment-strategy-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-automation-routines-and-daily-drive-agent-interdependence.md` — knowledge/expansions/connections/agent-health-automation-routines-and-daily-drive-agent-interdependence.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/infrastructure-connectivity-and-agent-health.md` — knowledge/expansions/connections/infrastructure-connectivity-and-agent-health.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/mcp-server-pattern-repeatability.md` — knowledge/expansions/connections/mcp-server-pattern-repeatability.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/product-management-and-ai-system-delivery-integration.md` — knowledge/expansions/connections/product-management-and-ai-system-delivery-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/impact-of-agent-health-on-daily-note-and-research-synthesis.md` — knowledge/expansions/connections/impact-of-agent-health-on-daily-note-and-research-synthesis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-failure-and-daily-note-disruption-cross-domain-influence.md` — knowledge/expansions/connections/automation-failure-and-daily-note-disruption-cross-domain-influence.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agentic-engineering-and-daily-driver-agent-optimization.md` — knowledge/expansions/connections/agentic-engineering-and-daily-driver-agent-optimization.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round1.md` — knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round1.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-failure-and-daily-note-disruption.md` — knowledge/expansions/connections/automation-failure-and-daily-note-disruption.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/provider-preference-configuration-and-cost-capped-workflows.md` — knowledge/expansions/connections/provider-preference-configuration-and-cost-capped-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-disruption-affects-daily-contextual-continuity.md` — knowledge/expansions/connections/automation-disruption-affects-daily-contextual-continuity.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/open-source-contributions-to-agentic-research.md` — knowledge/expansions/connections/open-source-contributions-to-agentic-research.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/autonomous-agent-fleets-and-agent-health-monitoring.md` — knowledge/expansions/connections/autonomous-agent-fleets-and-agent-health-monitoring.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/impact-of-automation-failure-on-daily-planning-and-research.md` — knowledge/expansions/connections/impact-of-automation-failure-on-daily-planning-and-research.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-reliability-and-job-hunt-infrastructure.md` — knowledge/expansions/connections/automation-reliability-and-job-hunt-infrastructure.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-automation-failure.md` — knowledge/expansions/connections/agent-health-and-automation-failure.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-monitoring-and-daily-note-generation-interdependence.md` — knowledge/expansions/connections/agent-health-monitoring-and-daily-note-generation-interdependence.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/vibe-coding-interviews-as-cultural-fit-gateways.md` — knowledge/expansions/connections/vibe-coding-interviews-as-cultural-fit-gateways.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agentic-engineering-signal-in-product-development.md` — knowledge/expansions/connections/agentic-engineering-signal-in-product-development.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-daily-drive-agent-automation-success.md` — knowledge/expansions/connections/agent-health-daily-drive-agent-automation-success.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/self-hosted-research-and-portfolio-integration.md` — knowledge/expansions/connections/self-hosted-research-and-portfolio-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/research-integration-and-mcp-server-infrastructure.md` — knowledge/expansions/connections/research-integration-and-mcp-server-infrastructure.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-reliability-and-daily-note-disruption.md` — knowledge/expansions/connections/automation-reliability-and-daily-note-disruption.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/ai-product-management-and-vibe-coding-interview-integration.md` — knowledge/expansions/connections/ai-product-management-and-vibe-coding-interview-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agentic-engineering-and-ai-product-management-integration.md` — knowledge/expansions/connections/agentic-engineering-and-ai-product-management-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/model-context-protocol-mcp-and-knowledge-vault-integration.md` — knowledge/expansions/connections/model-context-protocol-mcp-and-knowledge-vault-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/deep-research-ecosystem-constraints-and-alternatives.md` — knowledge/expansions/connections/deep-research-ecosystem-constraints-and-alternatives.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-monitoring-and-job-hunt-2026-automation-reliability.md` — knowledge/expansions/connections/agent-health-monitoring-and-job-hunt-2026-automation-reliability.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/deep-research-system-constraints.md` — knowledge/expansions/connections/deep-research-system-constraints.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-automation-routines-and-daily-driver-agent-interplay.md` — knowledge/expansions/connections/agent-health-automation-routines-and-daily-driver-agent-interplay.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/cost-optimization-and-automation-reliability.md` — knowledge/expansions/connections/cost-optimization-and-automation-reliability.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/ai-pm-and-autonomous-agent-synergy.md` — knowledge/expansions/connections/ai-pm-and-autonomous-agent-synergy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-and-daily-note-interdependence.md` — knowledge/expansions/connections/automation-and-daily-note-interdependence.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/job-hunt-automation-and-knowledge-vault-integration.md` — knowledge/expansions/connections/job-hunt-automation-and-knowledge-vault-integration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-monitoring-and-creative-studio-workflows.md` — knowledge/expansions/connections/agent-health-monitoring-and-creative-studio-workflows.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/cognitive-optimization-in-job-hunt-and-daily-routine.md` — knowledge/expansions/connections/cognitive-optimization-in-job-hunt-and-daily-routine.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/intent-engineering-provider-fallback-and-eval-vocabulary-cross-system-resilience.md` — knowledge/expansions/connections/intent-engineering-provider-fallback-and-eval-vocabulary-cross-system-resilience.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/citation-quality-and-research-system-limitations.md` — knowledge/expansions/connections/citation-quality-and-research-system-limitations.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/ai-prototyping-and-vibe-coding-interview-synergy.md` — knowledge/expansions/connections/ai-prototyping-and-vibe-coding-interview-synergy.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/contextual-agent-failures-across-automation-systems.md` — knowledge/expansions/connections/contextual-agent-failures-across-automation-systems.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-interdependencies-across-system-creative-and-job-hunt-domains.md` — knowledge/expansions/connections/automation-interdependencies-across-system-creative-and-job-hunt-domains.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/autonomous-agent-fleets-and-daily-routine-automation.md` — knowledge/expansions/connections/autonomous-agent-fleets-and-daily-routine-automation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-professional-role-automation.md` — knowledge/expansions/connections/agent-health-and-professional-role-automation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/automation-reliability-and-cost-optimization.md` — knowledge/expansions/connections/automation-reliability-and-cost-optimization.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/observability-and-personal-knowledge-infrastructure.md` — knowledge/expansions/connections/observability-and-personal-knowledge-infrastructure.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-operational-resilience.md` — knowledge/expansions/connections/agent-health-and-operational-resilience.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-interdependence-in-personal-knowledge-workflow.md` — knowledge/expansions/connections/agent-interdependence-in-personal-knowledge-workflow.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/operational-readiness-through-agent-and-daily-systems.md` — knowledge/expansions/connections/operational-readiness-through-agent-and-daily-systems.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/tier-1-tier-2-separation-for-cross-domain-insight-integrity.md` — knowledge/expansions/connections/tier-1-tier-2-separation-for-cross-domain-insight-integrity.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/adops-automation-and-daily-drive-agent-synergy.md` — knowledge/expansions/connections/adops-automation-and-daily-drive-agent-synergy.md
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/writing-voice-modes.md` — 40_knowledge/concepts/writing-voice-modes.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/research-hermes-prompt-caching-spike-2026-05-11.md` — 40_knowledge/concepts/research-hermes-prompt-caching-spike-2026-05-11.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/research-autoresearch-agentic-polymarket-crypto-2026-04-26.md` — 40_knowledge/concepts/research-autoresearch-agentic-polymarket-crypto-2026-04-26.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/ref-idea-ga4-analytics-saas.md` — 40_knowledge/concepts/ref-idea-ga4-analytics-saas.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/Gemini-AI-Crypto-Trading-Agent-Viability.md` — 40_knowledge/concepts/Gemini-AI-Crypto-Trading-Agent-Viability.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/idea-autoresearch-agentic-polymarket-crypto-v2-2026-04-28.md` — 40_knowledge/concepts/idea-autoresearch-agentic-polymarket-crypto-v2-2026-04-28.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/idea-agent-evals-templates.md` — 40_knowledge/concepts/idea-agent-evals-templates.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/intent-engineering.md` — 40_knowledge/concepts/intent-engineering.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/concepts/perplexity-research-autoresearch-agentic-polymarket-crypto-2026-04-26.md` — 40_knowledge/concepts/perplexity-research-autoresearch-agentic-polymarket-crypto-2026-04-26.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/40_knowledge/templates/EXPLANATION-template.md` — 40_knowledge/templates/EXPLANATION-template.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Work/pr-digest-2026-04-08.md` — 02_Areas/Work/pr-digest-2026-04-08.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-31.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-31.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-28.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-28.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-21.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-21.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-01.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-01.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-15.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-15.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-21.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-21.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-15.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-15.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-01.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-01.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-18.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-18.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-11.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-11.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-05.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-05.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-25.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-25.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-20.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-20.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-14.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-14.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-19.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-19.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-10.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-10.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-04.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-04.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-24.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-24.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-10.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-10.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-30.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-30.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-29.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-29.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-20.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-20.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-14.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-14.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-15.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-15.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-16.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-16.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-22.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-22.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-21.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-21.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-25.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-25.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-05.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-05.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-25.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-25.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-26.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-26.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-12.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-12.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-01.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-01.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-21.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-21.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-24.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-24.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-30.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-30.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-27.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-27.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-13.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-13.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-10.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-10.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-20.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-20.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-14.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-14.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-17.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-17.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-23.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-23.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-20.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-20.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-30.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-30.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-24.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-24.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-04.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-04.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-24.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-24.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-27.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-27.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-09.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-09.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/fleet-state.md` — 02_Areas/Agent-Fleet/fleet-state.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-13.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-13.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-03.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-03.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-19.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-19.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-23.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-23.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-19.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-19.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-14.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-14.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-17.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-17.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-23.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-23.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-20.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-20.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-30.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-30.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-27.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-27.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-29.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-29.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-07.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-07.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-09.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-09.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-18.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-18.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-15.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-15.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-16.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-16.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-26.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-26.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-28.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-28.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-06.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-06.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-08.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-08.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-25.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-25.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-26.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-26.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-08.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-08.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-12.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-12.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-08-11.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-08-11.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-02.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-02.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-18.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-18.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-22.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-22.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-19.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-19.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-03.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-03.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-17.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-17.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-07.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-07.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-13.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-13.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-09.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-09.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-27.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-27.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-29.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-29.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-09.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-09.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-13.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-13.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-07.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-07.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-29.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-29.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-17.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-17.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-03.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-03.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-19.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-19.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-12.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-12.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-06.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-06.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-28.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-28.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-22.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-22.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-16.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-16.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-02.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-02.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-18.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-18.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-22.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-22.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-18.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-18.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-02.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-02.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-16.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-16.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-07-06.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-07-06.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-12.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-12.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-06-08.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-06-08.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-05-26.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-05-26.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/02_Areas/Agent-Fleet/daily-fleet-status-2026-04-28.md` — 02_Areas/Agent-Fleet/daily-fleet-status-2026-04-28.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/50_sources/finance/The Block Day 1 Information/The Block - New Hire Landing Plan-Sean Winslow.md` — 50_sources/finance/The Block Day 1 Information/The Block - New Hire Landing Plan-Sean Winslow.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/50_sources/finance/The Block Day 1 Information/The Block - Seans 30-60-90 Roadmap.md` — 50_sources/finance/The Block Day 1 Information/The Block - Seans 30-60-90 Roadmap.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/50_sources/finance/The Block Day 1 Information/The Block's Employee Handbook-Letter from the CEO.md` — 50_sources/finance/The Block Day 1 Information/The Block's Employee Handbook-Letter from the CEO.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/50_sources/finance/2026-feb-financial-analysis/extraction-report.md` — 50_sources/finance/2026-feb-financial-analysis/extraction-report.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/50_sources/finance/2026-feb-financial-analysis/financial-review-2026-02-27.md` — 50_sources/finance/2026-feb-financial-analysis/financial-review-2026-02-27.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/50_sources/finance/the-block-severance-docs/severance-agreement-doc.md` — 50_sources/finance/the-block-severance-docs/severance-agreement-doc.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/50_sources/finance/The Block Day 1 Information/TheBlock-Fidelity 401k set up /Gemini-401k-Enrollment-Prompt.md` — 50_sources/finance/The Block Day 1 Information/TheBlock-Fidelity 401k set up /Gemini-401k-Enrollment-Prompt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-24-pre-linkedin-research-gupta-executive-circle-isenberg.md` — 20_projects/research/2026-08-24-pre-linkedin-research-gupta-executive-circle-isenberg.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-07-topic-3-open-source-model-tool-calling-qwen3-14b-phi-4-gemma.md` — 20_projects/research/2026-05-07-topic-3-open-source-model-tool-calling-qwen3-14b-phi-4-gemma.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-22-systemcraft-book-to-skill-evaluation.md` — 20_projects/research/2026-08-22-systemcraft-book-to-skill-evaluation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-07-chatgpt-mcp-server-production-patterns.md` — 20_projects/research/2026-05-07-chatgpt-mcp-server-production-patterns.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-07-solo-money-paperwork-pm-idea-ledger.md` — 20_projects/research/2026-08-07-solo-money-paperwork-pm-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-16-ai-product-post-launch-loops-pm-idea-ledger.md` — 20_projects/research/2026-08-16-ai-product-post-launch-loops-pm-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-09-gemini-ai-eval-fluency-primer-and-reference-cases.md` — 20_projects/research/2026-05-09-gemini-ai-eval-fluency-primer-and-reference-cases.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-07-gamification-wide-aperture-pm-idea-ledger.md` — 20_projects/research/2026-08-07-gamification-wide-aperture-pm-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-software-factory-literature-review.md` — 20_projects/research/2026-08-08-software-factory-literature-review.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-15-topic-11-openrouter-image-generation-models-for-the-creative.md` — 20_projects/research/2026-05-15-topic-11-openrouter-image-generation-models-for-the-creative.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-06-29-whitespace-gap-map-presentation-research.md` — 20_projects/research/2026-06-29-whitespace-gap-map-presentation-research.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-18-vault-knowledge-mcp-research-chatgpt.md` — 20_projects/research/2026-05-18-vault-knowledge-mcp-research-chatgpt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-06-topic-1b-cli-driven-agentic-workflow-repo-audit-pinning-patt.md` — 20_projects/research/2026-05-06-topic-1b-cli-driven-agentic-workflow-repo-audit-pinning-patt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-14-Agent-Fleet-Observability-Dashboard-ChatGPT.md` — 20_projects/research/2026-05-14-Agent-Fleet-Observability-Dashboard-ChatGPT.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-21-topic-19c-optimal-ollama-models-pi-chatgpt.md` — 20_projects/research/2026-05-21-topic-19c-optimal-ollama-models-pi-chatgpt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-18-mcp-prompt-injection-hardening.md` — 20_projects/research/2026-05-18-mcp-prompt-injection-hardening.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-21-topic-14-pi-extensions-plugins-catalog-in-2026-enumerate-eve.md` — 20_projects/research/2026-05-21-topic-14-pi-extensions-plugins-catalog-in-2026-enumerate-eve.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-architecture-proposal-v1.md` — 20_projects/research/2026-08-08-architecture-proposal-v1.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-21-topic-20-fleet-model-refresh-benchmarks.md` — 20_projects/research/2026-05-21-topic-20-fleet-model-refresh-benchmarks.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-architecture-second-opinion.md` — 20_projects/research/2026-08-08-architecture-second-opinion.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-06-21-claude-skills-2d-animation-pipelines-substack-deep-idea-ledger.md` — 20_projects/research/2026-06-21-claude-skills-2d-animation-pipelines-substack-deep-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-06-30-panel-vs-single-model-gate.md` — 20_projects/research/2026-06-30-panel-vs-single-model-gate.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-17-what-do-the-peer-reviewed-software-engineering-requirements.md` — 20_projects/research/2026-08-17-what-do-the-peer-reviewed-software-engineering-requirements.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-07-career-transition-ops-pm-idea-ledger.md` — 20_projects/research/2026-08-07-career-transition-ops-pm-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-21-topic-16-pi-ollama-integration-chatgpt-manual.md` — 20_projects/research/2026-05-21-topic-16-pi-ollama-integration-chatgpt-manual.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-architecture-proposal-v1-council-premortem.md` — 20_projects/research/2026-08-08-architecture-proposal-v1-council-premortem.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-literature-synthesis.md` — 20_projects/research/2026-08-29-software-factory-literature-synthesis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-07-30-how-do-existing-systems-use-aillms-as-a-creative-thinking-pa.md` — 20_projects/research/2026-07-30-how-do-existing-systems-use-aillms-as-a-creative-thinking-pa.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-03-you-are-a-senior-research-analyst-at-the-intersection-of-ai.md` — 20_projects/research/2026-05-03-you-are-a-senior-research-analyst-at-the-intersection-of-ai.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-07-solo-back-office-pm-idea-ledger.md` — 20_projects/research/2026-08-07-solo-back-office-pm-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-22-systemcraft-best-books-findings.md` — 20_projects/research/2026-08-22-systemcraft-best-books-findings.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-06-02-topic-28-addictive-storytelling-and-reader-value-mechanics-for-substack.md` — 20_projects/research/2026-06-02-topic-28-addictive-storytelling-and-reader-value-mechanics-for-substack.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-06-29-opportunity-scoring-frameworks-research.md` — 20_projects/research/2026-06-29-opportunity-scoring-frameworks-research.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-06-30-citation-entailment-nli-verification-research.md` — 20_projects/research/2026-06-30-citation-entailment-nli-verification-research.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-06-21-claude-skills-2d-animation-pipelines-substack-deep-brief.md` — 20_projects/research/2026-06-21-claude-skills-2d-animation-pipelines-substack-deep-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-09-gemini-ai-vibe-coding-interview-canon.md` — 20_projects/research/2026-05-09-gemini-ai-vibe-coding-interview-canon.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-18-vault-knowledge-mcp-research-gemini.md` — 20_projects/research/2026-05-18-vault-knowledge-mcp-research-gemini.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-02-compare-gguf-vs-mlx-inference-speed-on-apple-m4-pro-for-14b.md` — 20_projects/research/2026-05-02-compare-gguf-vs-mlx-inference-speed-on-apple-m4-pro-for-14b.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-17-what-do-first-person-practitioner-accounts-team-postmortems.md` — 20_projects/research/2026-08-17-what-do-first-person-practitioner-accounts-team-postmortems.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-26-topic-27-long-term-memory-backends-perplexity-dr-manual.md` — 20_projects/research/2026-05-26-topic-27-long-term-memory-backends-perplexity-dr-manual.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-07-22-ai-coding-assistants-pm-idea-ledger.md` — 20_projects/research/2026-07-22-ai-coding-assistants-pm-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-28-story-hooks-and-narrative-through-line.md` — 20_projects/research/2026-08-28-story-hooks-and-narrative-through-line.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-vision-drift-feasibility-spike-go-no-go.md` — 20_projects/research/2026-08-08-vision-drift-feasibility-spike-go-no-go.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-24-allie-k-miller-ai-workforce-extraction.md` — 20_projects/research/2026-08-24-allie-k-miller-ai-workforce-extraction.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-06-30-llm-judge-self-preference-debias-research.md` — 20_projects/research/2026-06-30-llm-judge-self-preference-debias-research.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-06-30-ai-coding-assistants-pm-standard-idea-ledger.md` — 20_projects/research/2026-06-30-ai-coding-assistants-pm-standard-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-22-systemcraft-bench-composition-findings.md` — 20_projects/research/2026-08-22-systemcraft-bench-composition-findings.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-06-29-mmr-dedup-similarity-research.md` — 20_projects/research/2026-06-29-mmr-dedup-similarity-research.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-07-solo-creator-publishing-ops-pm-idea-ledger.md` — 20_projects/research/2026-08-07-solo-creator-publishing-ops-pm-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-06-21-claude-skills-2d-animation-pipelines-pm-deep-idea-ledger.md` — 20_projects/research/2026-06-21-claude-skills-2d-animation-pipelines-pm-deep-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-07-30-ai-creative-partner-tool-failures-pm-idea-ledger.md` — 20_projects/research/2026-07-30-ai-creative-partner-tool-failures-pm-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-groundwork-v1-audit.md` — 20_projects/research/2026-08-08-groundwork-v1-audit.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-20-topic-13-pi-pidev-platform-overview-in-2026-what-the-develop.md` — 20_projects/research/2026-05-20-topic-13-pi-pidev-platform-overview-in-2026-what-the-develop.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-06-21-claude-skills-2d-animation-pipelines-pm-standard-idea-ledger.md` — 20_projects/research/2026-06-21-claude-skills-2d-animation-pipelines-pm-standard-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md` — 20_projects/research/2026-05-09-perplexity-ai-eval-fluency-primer-and-reference-cases.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-17-what-do-peer-reviewed-research-and-authoritative-primary-eng.md` — 20_projects/research/2026-08-17-what-do-peer-reviewed-research-and-authoritative-primary-eng.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-07-job-search-tool-failures-pm-idea-ledger.md` — 20_projects/research/2026-08-07-job-search-tool-failures-pm-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-13-topic-9-openrouter-free-tier-models-that-support-openai-form.md` — 20_projects/research/2026-05-13-topic-9-openrouter-free-tier-models-that-support-openai-form.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-18-enterprise-ai-pm-skill-gaps.md` — 20_projects/research/2026-05-18-enterprise-ai-pm-skill-gaps.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-07-16-company-os-org-adoption-pm-idea-ledger.md` — 20_projects/research/2026-07-16-company-os-org-adoption-pm-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-07-mcp-server-production-patterns.md` — 20_projects/research/2026-05-07-mcp-server-production-patterns.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-eval-stack-implementation-design.md` — 20_projects/research/2026-08-08-eval-stack-implementation-design.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-06-29-receipts-provenance-ui-research.md` — 20_projects/research/2026-06-29-receipts-provenance-ui-research.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-16-topic-12-openrouter-vs-direct-provider-economics-for-a-perso.md` — 20_projects/research/2026-05-16-topic-12-openrouter-vs-direct-provider-economics-for-a-perso.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-03-what-are-the-practical-differences-between-ollama-modelfile.md` — 20_projects/research/2026-05-03-what-are-the-practical-differences-between-ollama-modelfile.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-21-topic-20-fleet-benchmark-planning-prompt.md` — 20_projects/research/2026-05-21-topic-20-fleet-benchmark-planning-prompt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-16-what-do-the-academic-literature-and-authoritative-practition.md` — 20_projects/research/2026-08-16-what-do-the-academic-literature-and-authoritative-practition.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-21-pi-research-prompts-for-gemini-dr.md` — 20_projects/research/2026-05-21-pi-research-prompts-for-gemini-dr.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-07-creative-quality-reproducibility-pm-idea-ledger.md` — 20_projects/research/2026-08-07-creative-quality-reproducibility-pm-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-architecture-ratification-package.md` — 20_projects/research/2026-08-08-architecture-ratification-package.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-groundwork-fit-check-agentic-web.md` — 20_projects/research/2026-08-29-groundwork-fit-check-agentic-web.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-06-27-fusion-discovery-council-improvement-idea-ledger.md` — 20_projects/research/2026-06-27-fusion-discovery-council-improvement-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-canon-extraction-test.md` — 20_projects/research/2026-08-08-canon-extraction-test.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-05-09-perplexity-ai-vibe-coding-interview-canon.md` — 20_projects/research/2026-05-09-perplexity-ai-vibe-coding-interview-canon.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-07-22-pm3-t1-trend-noise-verdict.md` — 20_projects/research/2026-07-22-pm3-t1-trend-noise-verdict.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-tech-revolution-patterns-stage0-synthesis.md` — 20_projects/research/2026-08-29-tech-revolution-patterns-stage0-synthesis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/SERIES-COMMAND-CENTER.md` — 20_projects/substack-studio/SERIES-COMMAND-CENTER.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/POSITIONING-AND-EDITORIAL-SPEC.md` — 20_projects/substack-studio/POSITIONING-AND-EDITORIAL-SPEC.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/SKILL-PACKAGING-PLAN.md` — 20_projects/substack-studio/SKILL-PACKAGING-PLAN.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/SOUL.md` — 20_projects/substack-studio/SOUL.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/CLAUDE.md` — 20_projects/substack-studio/CLAUDE.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/REVAMP-2026-08-05-SESSION-MAP.md` — 20_projects/substack-studio/REVAMP-2026-08-05-SESSION-MAP.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/2026-08-16-council-premortem-curriculum-and-candidate.md` — 20_projects/prj-ai-pm-system-thinking-strategy/2026-08-16-council-premortem-curriculum-and-candidate.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/00-strategy.md` — 20_projects/prj-ai-pm-system-thinking-strategy/00-strategy.md
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-campus-201/prj-campus-201.md` — 20_projects/prj-campus-201/prj-campus-201.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-campus-201/prj-campus-product-knowledge-base-builder.md` — 20_projects/prj-campus-201/prj-campus-product-knowledge-base-builder.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-campus-201/prj-campus-notes.md` — 20_projects/prj-campus-201/prj-campus-notes.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/youtube-watchlist.md` — 20_projects/prj-ai-pm-system-design-thinking/youtube-watchlist.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/CONTINUE-HERE.md` — 20_projects/prj-ai-pm-system-design-thinking/CONTINUE-HERE.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/AI-PM-system-design-thinking.md` — 20_projects/prj-ai-pm-system-design-thinking/AI-PM-system-design-thinking.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/prj-agent-wiring-rollout.md` — 20_projects/prj-code-brain/prj-agent-wiring-rollout.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/prj-knowledge-loop-consumer.md` — 20_projects/prj-code-brain/prj-knowledge-loop-consumer.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/adobe-mcp-synthesis-v2.md` — 20_projects/prj-code-brain/adobe-mcp-synthesis-v2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/prj-automode.md` — 20_projects/prj-code-brain/prj-automode.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/phase-2-soak-closeout-2026-05-01.md` — 20_projects/prj-code-brain/phase-2-soak-closeout-2026-05-01.md
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-sw-portfolio-and-hubs-designs/ref-how-to-use-project.md` — 20_projects/prj-sw-portfolio-and-hubs-designs/ref-how-to-use-project.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-16bitfit/prj-16bitfit-2.md` — 20_projects/prj-16bitfit/prj-16bitfit-2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-16bitfit/prj-16bit-fit-color-palette.md` — 20_projects/prj-16bitfit/prj-16bit-fit-color-palette.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/open-source-deep-research/2026-05-04-fleet-reinstall-summary.md` — 20_projects/prj-code-brain/open-source-deep-research/2026-05-04-fleet-reinstall-summary.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/ref-voice-mechanics-research.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/ref-voice-mechanics-research.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/writing-voice-modes-research-playbook.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/writing-voice-modes-research-playbook.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/screenplay-craft-research-pipeline.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/screenplay-craft-research-pipeline.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/voice-modes-integration-and-upgrade-plan.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/voice-modes-integration-and-upgrade-plan.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/notebooklm-system-prompts.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/notebooklm-system-prompts.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/phase-3-session-guide.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/phase-3-session-guide.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/writing-voice-modes/SKILL.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/writing-voice-modes/SKILL.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/animation-pipeline/SKILL.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/animation-pipeline/SKILL.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/Context Files For Creative Skill Building/script-writing/SKILL.md` — 20_projects/prj-code-brain/Context Files For Creative Skill Building/script-writing/SKILL.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-code-brain/open-source-deep-research/archive/gemini-deep-research-integration-plan-2026-05-03.md` — 20_projects/prj-code-brain/open-source-deep-research/archive/gemini-deep-research-integration-plan-2026-05-03.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/research/2026-08-17-phase-b-falsification-verdict.md` — 20_projects/prj-ai-pm-system-design-thinking/research/2026-08-17-phase-b-falsification-verdict.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/curriculum/m1-lesson-problem-users-decision-economics.md` — 20_projects/prj-ai-pm-system-design-thinking/curriculum/m1-lesson-problem-users-decision-economics.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/curriculum/m5-lesson-evidence-operations.md` — 20_projects/prj-ai-pm-system-design-thinking/curriculum/m5-lesson-evidence-operations.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/curriculum/m3-lesson-architecture-under-constraints.md` — 20_projects/prj-ai-pm-system-design-thinking/curriculum/m3-lesson-architecture-under-constraints.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/curriculum/2026-08-17-council-premortem-curriculum-map.md` — 20_projects/prj-ai-pm-system-design-thinking/curriculum/2026-08-17-council-premortem-curriculum-map.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/curriculum/curriculum-map.md` — 20_projects/prj-ai-pm-system-design-thinking/curriculum/curriculum-map.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/curriculum/m4-lesson-interaction-trust-control.md` — 20_projects/prj-ai-pm-system-design-thinking/curriculum/m4-lesson-interaction-trust-control.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/curriculum/m2-lesson-data-feedback-model-path.md` — 20_projects/prj-ai-pm-system-design-thinking/curriculum/m2-lesson-data-feedback-model-path.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/curriculum/curriculum-map-draft.md` — 20_projects/prj-ai-pm-system-design-thinking/curriculum/curriculum-map-draft.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/product/decision-log.md` — 20_projects/prj-ai-pm-system-design-thinking/product/decision-log.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/product/candidate-scorecard.md` — 20_projects/prj-ai-pm-system-design-thinking/product/candidate-scorecard.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/product/kickoff-prompt-golden-loop.md` — 20_projects/prj-ai-pm-system-design-thinking/product/kickoff-prompt-golden-loop.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/product/kickoff-prompt-phase-c-wayfinder.md` — 20_projects/prj-ai-pm-system-design-thinking/product/kickoff-prompt-phase-c-wayfinder.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/notebooklm/artifact-tracker.md` — 20_projects/prj-ai-pm-system-design-thinking/notebooklm/artifact-tracker.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/notebooklm/source-manifest.md` — 20_projects/prj-ai-pm-system-design-thinking/notebooklm/source-manifest.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/research/teardowns-2026-08-17/freeplay.md` — 20_projects/prj-ai-pm-system-design-thinking/research/teardowns-2026-08-17/freeplay.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/research/teardowns-2026-08-17/statsig.md` — 20_projects/prj-ai-pm-system-design-thinking/research/teardowns-2026-08-17/statsig.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/research/teardowns-2026-08-17/promptfoo.md` — 20_projects/prj-ai-pm-system-design-thinking/research/teardowns-2026-08-17/promptfoo.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/research/teardowns-2026-08-17/braintrust.md` — 20_projects/prj-ai-pm-system-design-thinking/research/teardowns-2026-08-17/braintrust.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-design-thinking/research/teardowns-2026-08-17/langfuse.md` — 20_projects/prj-ai-pm-system-design-thinking/research/teardowns-2026-08-17/langfuse.md
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `<private vault path withheld>` — private-subtree finding; path and detail withheld from this tracked report — see the local-only sidecar named in the header
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/research/2026-08-16-last30days-practitioner-discourse.md` — 20_projects/prj-ai-pm-system-thinking-strategy/research/2026-08-16-last30days-practitioner-discourse.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/research/2026-08-16-seed-google-ai-search-systems-thinking.md` — 20_projects/prj-ai-pm-system-thinking-strategy/research/2026-08-16-seed-google-ai-search-systems-thinking.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m5-lesson-second-order-org-systems-decision-policies.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m5-lesson-second-order-org-systems-decision-policies.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m1-lesson-systems-thinking-foundations.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m1-lesson-systems-thinking-foundations.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m7-lesson-evals-metrics-loop-engineering.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m7-lesson-evals-metrics-loop-engineering.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m3-lesson-cost-latency-unit-economics.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m3-lesson-cost-latency-unit-economics.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/curriculum-map.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/curriculum-map.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m6-lesson-harness-and-hitl.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m6-lesson-harness-and-hitl.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m2-lesson-ai-product-feedback-loops.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m2-lesson-ai-product-feedback-loops.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m4-lesson-systems-mapping.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m4-lesson-systems-mapping.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/notebooklm/artifact-tracker.md` — 20_projects/prj-ai-pm-system-thinking-strategy/notebooklm/artifact-tracker.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/notebooklm/source-manifest.md` — 20_projects/prj-ai-pm-system-thinking-strategy/notebooklm/source-manifest.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m5-artifacts/m5-flashcards.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m5-artifacts/m5-flashcards.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m5-artifacts/m5-study-guide.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m5-artifacts/m5-study-guide.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m5-artifacts/m5-quiz.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m5-artifacts/m5-quiz.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m3-artifacts/m3-quiz.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m3-artifacts/m3-quiz.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m3-artifacts/m3-flashcards.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m3-artifacts/m3-flashcards.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m3-artifacts/m3-study-guide.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m3-artifacts/m3-study-guide.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m4-artifacts/m4-flashcards.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m4-artifacts/m4-flashcards.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m4-artifacts/m4-study-guide.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m4-artifacts/m4-study-guide.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m4-artifacts/m4-quiz.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m4-artifacts/m4-quiz.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m2-artifacts/m2-flashcards.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m2-artifacts/m2-flashcards.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m2-artifacts/m2-quiz.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m2-artifacts/m2-quiz.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m2-artifacts/m2-study-guide.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m2-artifacts/m2-study-guide.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m7-artifacts/m7-quiz.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m7-artifacts/m7-quiz.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m7-artifacts/m7-flashcards.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m7-artifacts/m7-flashcards.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m7-artifacts/m7-study-guide.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m7-artifacts/m7-study-guide.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m1-artifacts/m1-quiz.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m1-artifacts/m1-quiz.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m1-artifacts/m1-flashcards.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m1-artifacts/m1-flashcards.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m1-artifacts/m1-study-guide.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m1-artifacts/m1-study-guide.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m6-artifacts/m6-flashcards.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m6-artifacts/m6-flashcards.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m6-artifacts/m6-quiz.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m6-artifacts/m6-quiz.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m6-artifacts/m6-study-guide.md` — 20_projects/prj-ai-pm-system-thinking-strategy/curriculum/m6-artifacts/m6-study-guide.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/2026-08-05-competitive-check-six-territories.md` — 20_projects/substack-studio/research/2026-08-05-competitive-check-six-territories.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/opportunity-report-creative-agentic.md` — 20_projects/substack-studio/research/opportunity-report-creative-agentic.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/playbook/image-house-style.md` — 20_projects/substack-studio/playbook/image-house-style.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/continuation-prompts/CONTINUATION-2026-06-22-pencil-and-prompt-revamp.md` — 20_projects/substack-studio/continuation-prompts/CONTINUATION-2026-06-22-pencil-and-prompt-revamp.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/continuation-prompts/KICKOFF-2026-08-05-B-discovery-pain-mining.md` — 20_projects/substack-studio/continuation-prompts/KICKOFF-2026-08-05-B-discovery-pain-mining.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/continuation-prompts/CONTINUATION-2026-06-17-substack-posts.md` — 20_projects/substack-studio/continuation-prompts/CONTINUATION-2026-06-17-substack-posts.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/continuation-prompts/KICKOFF-2026-08-05-D-deep-research-prior-art.md` — 20_projects/substack-studio/continuation-prompts/KICKOFF-2026-08-05-D-deep-research-prior-art.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/continuation-prompts/KICKOFF-2026-08-05-A-gemini-dr-migration.md` — 20_projects/substack-studio/continuation-prompts/KICKOFF-2026-08-05-A-gemini-dr-migration.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/continuation-prompts/KICKOFF-2026-08-05-E-verification-pass.md` — 20_projects/substack-studio/continuation-prompts/KICKOFF-2026-08-05-E-verification-pass.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/continuation-prompts/KICKOFF-2026-08-05-C-competitive-checks.md` — 20_projects/substack-studio/continuation-prompts/KICKOFF-2026-08-05-C-competitive-checks.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/continuation-prompts/CONTINUATION-2026-06-28-prompts-to-systems-pivot.md` — 20_projects/substack-studio/continuation-prompts/CONTINUATION-2026-06-28-prompts-to-systems-pivot.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/continuation-prompts/CONTINUATION-2026-06-17-mcp-strengthening.md` — 20_projects/substack-studio/continuation-prompts/CONTINUATION-2026-06-17-mcp-strengthening.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/continuation-prompts/CONTINUATION-2026-06-10-posts-1-2-voice-chain.md` — 20_projects/substack-studio/continuation-prompts/CONTINUATION-2026-06-10-posts-1-2-voice-chain.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/continuation-prompts/2026-06-28-pivot-prompts-to-systems.md` — 20_projects/substack-studio/continuation-prompts/2026-06-28-pivot-prompts-to-systems.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/continuation-prompts/CONTINUATION-2026-08-10-rung-0-publish.md` — 20_projects/substack-studio/continuation-prompts/CONTINUATION-2026-08-10-rung-0-publish.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/continuation-prompts/CONTINUATION-2026-06-27-flagship-profile-postideas.md` — 20_projects/substack-studio/continuation-prompts/CONTINUATION-2026-06-27-flagship-profile-postideas.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/author-modes-deleted/draft.md` — 20_projects/substack-studio/author-modes-deleted/draft.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/author-modes-deleted/records.md` — 20_projects/substack-studio/author-modes-deleted/records.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/raising-agents-ep-1/draft.md` — 20_projects/substack-studio/raising-agents-ep-1/draft.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/raising-agents-ep-1/final.md` — 20_projects/substack-studio/raising-agents-ep-1/final.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/raising-agents-ep-1/records.md` — 20_projects/substack-studio/raising-agents-ep-1/records.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/pages/start-here.md` — 20_projects/substack-studio/pages/start-here.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/pages/about.md` — 20_projects/substack-studio/pages/about.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/rung-0-taste-experiment/post-v2.md` — 20_projects/substack-studio/rung-0-taste-experiment/post-v2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/rung-0-taste-experiment/post.md` — 20_projects/substack-studio/rung-0-taste-experiment/post.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/rung-0-taste-experiment/capture/prompts.md` — 20_projects/substack-studio/rung-0-taste-experiment/capture/prompts.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/rung-0-taste-experiment/capture/taste-blocks/sean-intent-layer.md` — 20_projects/substack-studio/rung-0-taste-experiment/capture/taste-blocks/sean-intent-layer.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/pages/old/about-rewrite-kickoff-prompt.md` — 20_projects/substack-studio/pages/old/about-rewrite-kickoff-prompt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/pages/old/start-here.md` — 20_projects/substack-studio/pages/old/start-here.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/pages/old/about-draft-v2.md` — 20_projects/substack-studio/pages/old/about-draft-v2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/pages/old/about-council-version-short-2026-06-27.md` — 20_projects/substack-studio/pages/old/about-council-version-short-2026-06-27.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/pages/old/about-2026-06-27-taste-transfer-era.md` — 20_projects/substack-studio/pages/old/about-2026-06-27-taste-transfer-era.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/pages/old/start-here-2026-06-23-taste-transfer-era.md` — 20_projects/substack-studio/pages/old/start-here-2026-06-23-taste-transfer-era.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/pages/old/about-council-version.md` — 20_projects/substack-studio/pages/old/about-council-version.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/pages/_council/about-council-short-2026-06-27.md` — 20_projects/substack-studio/pages/_council/about-council-short-2026-06-27.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/pages/_council/about-council-kickoff-prompt.md` — 20_projects/substack-studio/pages/_council/about-council-kickoff-prompt.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/_assets/style-anchors/about-matched-angle-prompts.md` — 20_projects/substack-studio/_assets/style-anchors/about-matched-angle-prompts.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/_assets/style-anchors/portfolio-pencil-anchor-prompts.md` — 20_projects/substack-studio/_assets/style-anchors/portfolio-pencil-anchor-prompts.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/_assets/style-anchors/pencil-and-prompt-mascot-prompts.md` — 20_projects/substack-studio/_assets/style-anchors/pencil-and-prompt-mascot-prompts.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/CLAUDE-CODE-RUN-PROMPT-six-discovery-runs.md` — 20_projects/substack-studio/research/discovery/CLAUDE-CODE-RUN-PROMPT-six-discovery-runs.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-27-writing-ai-voice-not-generic-prose-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-06-27-writing-ai-voice-not-generic-prose-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-27-series-brand-consistency-ai-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-06-27-series-brand-consistency-ai-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-28-ai-iteration-tax-v2-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-06-28-ai-iteration-tax-v2-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-28-accused-of-ai-legitimacy-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-06-28-accused-of-ai-legitimacy-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-27-ai-as-creative-partner-upstream-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-06-27-ai-as-creative-partner-upstream-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-27-discovery-synthesis-backlog-and-web-supplement.md` — 20_projects/substack-studio/research/discovery/2026-06-27-discovery-synthesis-backlog-and-web-supplement.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-08-05-t6-sourdough-longitudinal-memory-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-08-05-t6-sourdough-longitudinal-memory-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-27-losing-your-style-to-ai-average-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-06-27-losing-your-style-to-ai-average-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-28-ai-iteration-tax-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-06-28-ai-iteration-tax-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-27-visual-ai-match-style-character-consistency-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-06-27-visual-ai-match-style-character-consistency-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-21-claude-skills-2d-animation-pipelines-substack-deep-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-06-21-claude-skills-2d-animation-pipelines-substack-deep-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-28-discovery-synthesis-T2-T3-backlog.md` — 20_projects/substack-studio/research/discovery/2026-06-28-discovery-synthesis-T2-T3-backlog.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-27-animation-ai-video-motion-timing-drift-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-06-27-animation-ai-video-motion-timing-drift-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-28-ai-reproducibility-v2-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-06-28-ai-reproducibility-v2-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-08-05-t1-stolen-methods-same-ideas-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-08-05-t1-stolen-methods-same-ideas-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-28-ai-reproducibility-v2-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-06-28-ai-reproducibility-v2-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-08-05-t4-manufactured-opposition-sycophancy-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-08-05-t4-manufactured-opposition-sycophancy-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-08-05-t5-cartography-of-the-default-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-08-05-t5-cartography-of-the-default-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-02-topic-28-addictive-storytelling-and-reader-value-mechanics-for-substack.md` — 20_projects/substack-studio/research/discovery/2026-06-02-topic-28-addictive-storytelling-and-reader-value-mechanics-for-substack.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-27-animation-ai-video-motion-timing-drift-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-06-27-animation-ai-video-motion-timing-drift-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-27-ai-as-creative-partner-upstream-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-06-27-ai-as-creative-partner-upstream-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-08-05-t1-stolen-methods-same-ideas-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-08-05-t1-stolen-methods-same-ideas-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-22-soulless-ai-creative-output-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-06-22-soulless-ai-creative-output-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-08-05-t6-sourdough-longitudinal-memory-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-08-05-t6-sourdough-longitudinal-memory-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-08-05-t3-input-axis-personal-corpus-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-08-05-t3-input-axis-personal-corpus-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-08-05-t3-input-axis-personal-corpus-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-08-05-t3-input-axis-personal-corpus-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-08-05-t2-import-duty-constraint-blind-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-08-05-t2-import-duty-constraint-blind-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-28-ai-iteration-tax-v2-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-06-28-ai-iteration-tax-v2-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-08-05-territory-pain-validation.md` — 20_projects/substack-studio/research/discovery/2026-08-05-territory-pain-validation.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-22-soulless-ai-creative-output-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-06-22-soulless-ai-creative-output-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-27-visual-ai-match-style-character-consistency-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-06-27-visual-ai-match-style-character-consistency-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-28-accused-of-ai-legitimacy-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-06-28-accused-of-ai-legitimacy-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-27-series-brand-consistency-ai-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-06-27-series-brand-consistency-ai-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-28-ai-reproducibility-slot-machine-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-06-28-ai-reproducibility-slot-machine-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-28-skeptics-quit-ai-re-entry-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-06-28-skeptics-quit-ai-re-entry-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-08-05-t4-manufactured-opposition-sycophancy-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-08-05-t4-manufactured-opposition-sycophancy-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-08-05-t2-import-duty-constraint-blind-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-08-05-t2-import-duty-constraint-blind-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-28-skeptics-quit-ai-re-entry-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-06-28-skeptics-quit-ai-re-entry-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-08-05-t5-cartography-of-the-default-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-08-05-t5-cartography-of-the-default-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-27-losing-your-style-to-ai-average-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-06-27-losing-your-style-to-ai-average-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-28-ai-iteration-tax-substack-brief.md` — 20_projects/substack-studio/research/discovery/2026-06-28-ai-iteration-tax-substack-brief.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-27-writing-ai-voice-not-generic-prose-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-06-27-writing-ai-voice-not-generic-prose-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/discovery/2026-06-28-ai-reproducibility-slot-machine-substack-idea-ledger.md` — 20_projects/substack-studio/research/discovery/2026-06-28-ai-reproducibility-slot-machine-substack-idea-ledger.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/last30days/2026-06-08-best-ai-tools-to-write-in-your-own-voice-last30days.md` — 20_projects/substack-studio/research/last30days/2026-06-08-best-ai-tools-to-write-in-your-own-voice-last30days.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/last30days/2026-06-09-ai-agent-frameworks-people-wish-existed-last30days.md` — 20_projects/substack-studio/research/last30days/2026-06-09-ai-agent-frameworks-people-wish-existed-last30days.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/last30days/2026-06-09-ai-creative-tools-frustrations-and-gaps-last30days.md` — 20_projects/substack-studio/research/last30days/2026-06-09-ai-creative-tools-frustrations-and-gaps-last30days.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/last30days/2026-06-08-best-claude-code-plugin-marketplaces-how-people-find-plugins.md` — 20_projects/substack-studio/research/last30days/2026-06-08-best-claude-code-plugin-marketplaces-how-people-find-plugins.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/last30days/2026-06-09-ai-tools-creatives-marketers-wish-existed-last30days.md` — 20_projects/substack-studio/research/last30days/2026-06-09-ai-tools-creatives-marketers-wish-existed-last30days.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/last30days/2026-06-08-best-claude-code-skills-and-plugins-last30days.md` — 20_projects/substack-studio/research/last30days/2026-06-08-best-claude-code-skills-and-plugins-last30days.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/PROMPT-KIT-agentic-engineering-last30days.md` — 20_projects/substack-studio/research/deep-dives/PROMPT-KIT-agentic-engineering-last30days.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-08-05-move-b-candidate-falsification.md` — 20_projects/substack-studio/research/deep-dives/2026-08-05-move-b-candidate-falsification.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-creative-marketing-team-adoption.md` — 20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-creative-marketing-team-adoption.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md` — 20_projects/substack-studio/research/deep-dives/2026-06-09-claude-code-skills-mcp-gaps-and-opportunities.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-08-05-move-a-verification-two-named-examples.md` — 20_projects/substack-studio/research/deep-dives/2026-08-05-move-a-verification-two-named-examples.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-spec-driven-eval-gaps.md` — 20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-spec-driven-eval-gaps.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-08-05-divergence-mechanisms-evidence-map.md` — 20_projects/substack-studio/research/deep-dives/2026-08-05-divergence-mechanisms-evidence-map.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-08-05-tested-mechanism-library-prior-art.md` — 20_projects/substack-studio/research/deep-dives/2026-08-05-tested-mechanism-library-prior-art.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md` — 20_projects/substack-studio/research/deep-dives/2026-06-09-agentic-engineering-intent-eval-governance-gaps.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/substack-studio/research/deep-dives/2026-08-05-citation-tier-audit.md` — 20_projects/substack-studio/research/deep-dives/2026-08-05-citation-tier-audit.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-tech-revolution-patterns/sweep-protocol-adoption.md` — 20_projects/research/2026-08-29-tech-revolution-patterns/sweep-protocol-adoption.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-tech-revolution-patterns/sweep-measurement-industry.md` — 20_projects/research/2026-08-29-tech-revolution-patterns/sweep-measurement-industry.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-tech-revolution-patterns/sweep-phase-structure.md` — 20_projects/research/2026-08-29-tech-revolution-patterns/sweep-phase-structure.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-tech-revolution-patterns/sweep-micropayments.md` — 20_projects/research/2026-08-29-tech-revolution-patterns/sweep-micropayments.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-architecture-second-opinion/research-orchestration-2026.md` — 20_projects/research/2026-08-08-architecture-second-opinion/research-orchestration-2026.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-architecture-second-opinion/research-arize-stack.md` — 20_projects/research/2026-08-08-architecture-second-opinion/research-arize-stack.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-architecture-second-opinion/research-visual-consistency-sota.md` — 20_projects/research/2026-08-08-architecture-second-opinion/research-visual-consistency-sota.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-architecture-second-opinion/research-llm-judge-evidence.md` — 20_projects/research/2026-08-08-architecture-second-opinion/research-llm-judge-evidence.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/sweep-practitioners.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/sweep-practitioners.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/sweep-companies.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/sweep-companies.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/notebooklm-q3-evals.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/notebooklm-q3-evals.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/codex-delta-synthesis.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/codex-delta-synthesis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/sweep-labs.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/sweep-labs.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/notebooklm-q4-models-cost.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/notebooklm-q4-models-cost.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-groundwork-v1-audit/gw-gap-analysis.md` — 20_projects/research/2026-08-08-groundwork-v1-audit/gw-gap-analysis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-groundwork-v1-audit/gw-inventory.md` — 20_projects/research/2026-08-08-groundwork-v1-audit/gw-inventory.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-software-factory-lit-review/notebooklm-q2.md` — 20_projects/research/2026-08-08-software-factory-lit-review/notebooklm-q2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-software-factory-lit-review/sweep-anthropic.md` — 20_projects/research/2026-08-08-software-factory-lit-review/sweep-anthropic.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-software-factory-lit-review/codex-synthesis.md` — 20_projects/research/2026-08-08-software-factory-lit-review/codex-synthesis.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-software-factory-lit-review/notebooklm-q3.md` — 20_projects/research/2026-08-08-software-factory-lit-review/notebooklm-q3.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-software-factory-lit-review/sweep-ramp.md` — 20_projects/research/2026-08-08-software-factory-lit-review/sweep-ramp.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-software-factory-lit-review/sweep-openai.md` — 20_projects/research/2026-08-08-software-factory-lit-review/sweep-openai.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-software-factory-lit-review/notebooklm-q4.md` — 20_projects/research/2026-08-08-software-factory-lit-review/notebooklm-q4.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-software-factory-lit-review/sweep-stripe.md` — 20_projects/research/2026-08-08-software-factory-lit-review/sweep-stripe.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-software-factory-lit-review/notebooklm-q1.md` — 20_projects/research/2026-08-08-software-factory-lit-review/notebooklm-q1.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-canon-extraction-test/bible-pc-v2.md` — 20_projects/research/2026-08-08-canon-extraction-test/bible-pc-v2.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-canon-extraction-test/change-report-pc-e34.md` — 20_projects/research/2026-08-08-canon-extraction-test/change-report-pc-e34.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-canon-extraction-test/PROTOCOL.md` — 20_projects/research/2026-08-08-canon-extraction-test/PROTOCOL.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-08-vision-drift-spike/PROTOCOL.md` — 20_projects/research/2026-08-08-vision-drift-spike/PROTOCOL.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/49-thariq-anthropic.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/49-thariq-anthropic.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/23-ryan-carson-15-agents.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/23-ryan-carson-15-agents.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/53-databricks-playbook.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/53-databricks-playbook.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/52-domain-specific-agents.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/52-domain-specific-agents.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/43-ontology-agent-setup.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/43-ontology-agent-setup.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/25-basis-long-horizon.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/25-basis-long-horizon.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/39-agent-workforce-secrets.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/39-agent-workforce-secrets.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/24-hedge-fund-250-agents.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/24-hedge-fund-250-agents.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/36-memory-harnesses-sakana.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/36-memory-harnesses-sakana.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/41-basis-ontologies-evals.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/41-basis-ontologies-evals.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/27-build-software-factory.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/27-build-software-factory.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/16-ex-uber-multi-agent.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/16-ex-uber-multi-agent.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/26-saas-without-slop.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/26-saas-without-slop.md
+- **orphan** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/13-exe-agent-sandboxes.md` — 20_projects/research/2026-08-29-software-factory-lit-delta/transcripts/13-exe-agent-sandboxes.md
+
+## LOW (12)
+
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/portfolio-projects.round2.md` — portfolio-projects.round2.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/portfolio-projects.round3.md` — portfolio-projects.round3.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/autonomous-agent-fleets.round2.md` — autonomous-agent-fleets.round2.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/personal-agentic-intent-engineering.round1.md` — personal-agentic-intent-engineering.round1.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/autonomous-agent-fleets.round3.md` — autonomous-agent-fleets.round3.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/personal-agentic-intent-engineering.round3.md` — personal-agentic-intent-engineering.round3.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/autonomous-agent-fleets.round1.md` — autonomous-agent-fleets.round1.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/personal-agentic-intent-engineering.round2.md` — personal-agentic-intent-engineering.round2.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/portfolio-projects.round1.md` — portfolio-projects.round1.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round3.md` — agent-health-and-daily-routine-automation-interdependence.round3.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round2.md` — agent-health-and-daily-routine-automation-interdependence.round2.md
+- **camelcase-filename** (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/knowledge/expansions/connections/agent-health-and-daily-routine-automation-interdependence.round1.md` — agent-health-and-daily-routine-automation-interdependence.round1.md
+

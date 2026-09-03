@@ -5,8 +5,8 @@ connects:
   - The Taste-Throughput Trade-off in Agentic Synthesis
   - Supervision Fatigue as the Hard Cap on Fleet Scaling
   - Goodhart Failure Typing
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-02
+updated: 2026-09-02
 ---
 
 ## Synthesis

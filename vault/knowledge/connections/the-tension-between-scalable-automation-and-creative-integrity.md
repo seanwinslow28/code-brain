@@ -2,11 +2,11 @@
 title: "The Tension Between Scalable Automation and Creative Integrity"
 type: connection
 connects:
-  - The Paradox of Agentic Efficiency vs. Creative Authority
   - Supervision Fatigue as the Hard Cap on Fleet Scaling
+  - The Paradox of Agentic Efficiency vs. Creative Authority
   - Legibility Debt as a Supervision Failure Mode
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-02
+updated: 2026-09-02
 ---
 
 ## Synthesis
@@ -15,13 +15,13 @@ This connection reveals the fundamental tension between scaling agent fleets for
 
 ## Threads
 
-### [[The Paradox of Agentic Efficiency vs. Creative Authority]]
-
-> Run #3 (dictated) achieved 145 words per answer with only 11 questions, whereas Run #2 (typed) had 59 words per answer with 16 questions, showing that fewer, higher-quality interactions yielded better results.
-
 ### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
 
 > His A1 said twelve or thirteen; the audit says ten enabled, eight disabled. He ruled the audit authoritative. This is what surfacing the documents was for.
+
+### [[The Paradox of Agentic Efficiency vs. Creative Authority]]
+
+> As Sean increased the number of agents and clusters sampled, the volume of content grew, but so did the need for human correction, indicating that scalability in this context comes at the cost of creative authority.
 
 ### [[Legibility Debt as a Supervision Failure Mode]]
 

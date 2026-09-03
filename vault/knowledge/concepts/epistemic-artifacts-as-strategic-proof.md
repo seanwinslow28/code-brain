@@ -2,15 +2,15 @@
 title: "Epistemic Artifacts as Strategic Proof"
 type: concept
 sources:
-  - 20_projects/research/2026-08-29-tech-revolution-patterns/build-in-public-candidate-odlyzko-check.md
+  - knowledge/concepts/epistemic-artifacts-as-strategic-proof.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Definition
 
-An epistemic artifact is a tangible, independently verifiable data structure that serves as proof of competence and methodological rigor, rather than merely describing it. In the context of agentic infrastructure, these artifacts function as high-signal differentiators because they expose the underlying mechanics of value creation—such as demand-side constraints versus supply-side capacity—that are typically obscured by vendor marketing. By publishing raw denominators and audit trails, an agent or founder transforms abstract claims into a public scoreboard that competitors cannot easily replicate without exposing their own data hygiene.
+An epistemic artifact functions as a tangible, independently verifiable data structure that serves as proof of competence and methodological rigor, rather than merely describing it. In the context of agentic infrastructure, these artifacts operate as high-signal differentiators because they expose the underlying mechanics of value creation—such as demand-side constraints versus supply-side capacity—that are typically obscured by vendor marketing. By publishing raw denominators and audit trails, an agent or founder transforms abstract claims into a public scoreboard that competitors cannot easily replicate without exposing their own data hygiene.
 
 ## Context
 

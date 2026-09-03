@@ -2,31 +2,33 @@
 title: "Supervision Fatigue as the Hard Cap on Fleet Scaling"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-operational-health-vs-semantic-value-in-agent-fleets.md
+  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-09-02.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Definition
 
-This invariant defines the boundary condition where the marginal cost of verifying agent output exceeds the marginal utility of that output, forcing a hard stop on scaling regardless of computational resources. It establishes that Sean's cognitive bandwidth is the true constraint on his knowledge infrastructure, not the model's context window or API rate limits. When verification becomes the bottleneck, the system must prioritize depth over breadth to maintain semantic integrity.
+As the number of autonomous agents increases, the cognitive load required to monitor their collective state grows non-linearly. This creates a hard cap on scalability because the user's capacity to interpret and act on fleet status reports becomes the bottleneck. The system shifts from being an extension of the user's will to a source of noise that requires active management, effectively reducing the net productivity gain of adding more agents.
 
 ## Context
 
-This concept explains why Sean cannot simply 'add more agents' to solve his job hunt or creative problems. It reframes his role from a producer of content to a curator of signal, requiring him to design systems that respect his limited attention span.
+Sean's fleet has grown from 7 active agents in June to 9 active and 8 disabled in September. The increasing complexity of managing 'stale' vs 'healthy' states across multiple domains (creative, job hunt, infrastructure) suggests that Sean is approaching the limit of his ability to supervise this system effectively without automated intervention or simplification.
 
 ## Evidence
 
-> The consequence is that Sean cannot scale his knowledge infrastructure effectively because the cost of verifying novelty exceeds the marginal gain of additional output.
+> Active agents: 9 of 17 | Disabled: 8
 
-> This connection reveals a critical tension where the scalability of Sean's agent fleet is limited by his cognitive capacity to supervise outputs, rather than by computational constraints.
+> Misaligned or Touching Decline - Vault critic and knowledge-lint agents are stale; need immediate ex
+
+> Daily morning routine successfully executed; planning complete for today.
 
 ## Examples
 
-- Sean spends 2733 seconds on a run that produces 123 concepts, but only has time to deeply review a fraction of them before the next day's demands arise.
-- The 'rejected_count' metric serves as a proxy for Sean's unspoken supervision limits, showing how many outputs were deemed insufficiently novel or valuable.
+- The fleet status report explicitly categorizes agents as 'Aligned with Protect / Automate' vs 'Misaligned or Touching Decline', requiring Sean to manually triage.
+- The presence of 8 disabled agents indicates a history of failed experiments that are no longer monitored, adding to the cognitive overhead of understanding the current system state.
 
 ## Related Concepts
 
-[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Silent Decay in Strategic Pipelines]]
+[[Supervision as the New AI Edge]] [[Context Management as a Bottleneck]]
