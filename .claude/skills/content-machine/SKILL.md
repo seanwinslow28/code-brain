@@ -11,6 +11,55 @@ said. Everything below exists to keep that constraint enforced.
 Background and the public/private split: [`creative-studio/content-machine/README.md`](../../../creative-studio/content-machine/README.md).
 Build map: [GitHub #158](https://github.com/seanwinslow28/code-brain/issues/158).
 
+## Runtime-impact rulings
+
+A **runtime-impact ruling** is a ratified decision that adds, removes, changes, or moves behavior
+in the live machine. It is not complete when only its ticket, map, or reference record is correct;
+it is complete when every operating file that loads or enforces the behavior agrees with it.
+
+Every runtime-impact ruling therefore has two minimum checks: a human impact inventory that names
+the live consumers and verifies each required update, plus a mechanical retirement check whenever
+the ruling makes an existing instruction, term, or route invalid. The mechanical check is a floor:
+it can find retired vocabulary, but it cannot prove that a rule runs at the right stage.
+
+**Scope:** the Content Machine operating surface — this skill, Content Oracle, and every skill or
+file the machine directly loads or invokes. Unrelated skills elsewhere in `.claude/skills/` are
+outside this check until evidence justifies widening it.
+
+Mechanical retirement rules live in one canonical registry at
+`runtime-retirements.toml` beside this file. Each record names the retirement's source decision,
+scan scope, forbidden patterns, and any intentional historical mentions. Content Oracle and other
+consumers are targets of this registry; they do not maintain copies of it.
+
+The two checks run before a runtime-impact ruling is resolved: the human inventory first, then the
+registry scan. Either may keep the ruling open. Knowledge Lint reruns the same mechanical scan on
+Sunday as a drift backstop; it reports findings and never edits operating files automatically.
+
+### Resolution protocol
+
+The session making the ruling owns its propagation. Before resolving it, add this block to the
+resolution comment:
+
+```text
+RUNTIME IMPACT
+Ruling: <one sentence>
+Operating files checked:
+- <path> — updated | no change needed: <reason>
+Retirement registry: <entry id added or "no retirement">
+Mechanical check: clean
+```
+
+If the ruling retires an instruction, term, or route, add its entry to
+`runtime-retirements.toml` before running:
+
+```bash
+python3 .claude/skills/content-machine/check_runtime_retirements.py --repo-root .
+```
+
+Every match must either be removed or declared as a narrow, reasoned historical allowance in the
+registry. A broad directory exclusion is not an allowance. A missing scan target is an error, not
+a clean result.
+
 ## The law
 
 **The transcript is the only permitted source of substance. Texture is the writer's job.**

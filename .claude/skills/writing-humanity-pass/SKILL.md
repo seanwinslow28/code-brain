@@ -105,17 +105,11 @@ When you see these, lean toward leaving the prose alone. Over-editing destroys w
 
 ## Integration
 
-This skill runs LAST in the chain. The full Substack pipeline:
+Inside the Content Machine, the orchestrator invokes this skill during Stage 4 as a post-draft scrub. The draft came from the clean-context shaper, not from `writing-voice-modes`; this skill consults `writing-voice-modes` only as the register law and protected-move roster. It emits its binary verdict and never starts an autonomous revision loop.
 
-```
-storytelling-architecture → substack-value-engine → writing-voice-modes → writing-critique → writing-humanity-pass
-   (beat SHAPE + order)       (value GATE + payoff)    (every SENTENCE)      (RED-TEAM, advisory)  (scrub + no em dash)
-```
+Outside the Content Machine, it can still run after a direct voice write or stand alone on any supplied text. In either context:
 
-`storytelling-architecture` and `substack-value-engine` shape a beat map (story + value, no prose); `writing-voice-modes` composes every sentence; this skill scrubs.
-
-- Chaining order: shape with `storytelling-architecture` + `substack-value-engine`, compose with `writing-voice-modes` (plus `creative-writing` for format, `technical-writing` for clarity), red-team with `writing-critique` (advisory; one grounded revise pass max), then run `writing-humanity-pass` LAST.
-- This skill is where two upstream story mechanics get their punctuation enforced: a slippery-slide "forward-pull" line and a parenthetical particular both gravitate toward the em dash by default. The engagement pass leaves the *function*; this pass realizes it without the dash (period-fragment, colon, restructure). Never assume the dash away upstream; clean it up here.
+- This skill is where story mechanics get their punctuation enforced: a slippery-slide "forward-pull" line and a parenthetical particular both gravitate toward the em dash by default. Preserve the *function* while realizing it without the dash (period-fragment, colon, restructure).
 - It never overrides a format constraint (`creative-writing`), a signature move (`writing-voice-modes`), a story beat (`storytelling-architecture`), or a critique fix (`writing-critique`).
 - It consumes `writing-critique`'s **critique fix list** and treats every prose change made to satisfy a critique finding as protected input, on the same footing as a signature move: never scrub a critique fix back out. A fix can *look* like a tell (a deliberately blunt sentence, a repeated word kept for emphasis) but was a reader-cost decision the gate already made; undoing it silently regresses the draft that just passed the gate. When the fix list is present, check the final scrub against it before delivering.
 - For neutral text it agrees with `technical-writing` (plain, front-loaded, no slop).

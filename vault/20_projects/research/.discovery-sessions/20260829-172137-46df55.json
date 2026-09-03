@@ -1,0 +1,40 @@
+{
+  "id": "20260829-172137-46df55",
+  "topic": "AI agents and assistants misrepresenting businesses or failing to complete tasks on their websites \u2014 owner pain: wrong pricing and policies quoted to customers, failed bookings and checkouts, no visibility into which AI agents visit or what they did, traffic and leads dropping as customers ask assistants instead",
+  "lens": "pm",
+  "tier": "deep",
+  "segment": "",
+  "evidence_count": 22,
+  "verified": 4,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 0.5342,
+  "gather_status": {
+    "last30": "ok: 16 records (16 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "error: HTTPStatusError: HTTPStatusError(\"Client error '422 Unprocessable Entity' for url 'https://api.search.brave.com/res/v1/web/search?q=AI+agents+and+assistants+misrepresenting+businesses+or+failing+to+complete+tasks+on+their+websites+%E2%80%94+owner+pain%3A+wrong+pricing+and+policies+quoted+to+customers%2C+failed+bookings+and+checkouts%2C+no+visibility+into+which+AI+agents+visit+or+what+they+did%2C+traffic+and+leads+dropping+as+customers+ask+assistants+instead+user+complaints+problems+frustrations+2026&count=8'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422\")",
+    "reviews": "ok: 6 records (7 found)",
+    "github": "error: HTTPStatusError: HTTPStatusError(\"Client error '422 Unprocessable Entity' for url 'https://api.github.com/search/issues?q=AI+agents+and+assistants+misrepresenting+businesses+or+failing+to+complete+tasks+on+their+websites+%E2%80%94+owner+pain%3A+wrong+pricing+and+policies+quoted+to+customers%2C+failed+bookings+and+checkouts%2C+no+visibility+into+in%3Atitle%2Cbody+is%3Aissue&sort=reactions&order=desc&per_page=12'\\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/422\")",
+    "qa": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "Several sources are only post titles or unrelated social posts and provide no substantive evidence about the stated topic.",
+    "No evidence compares agent behavior across industries, business sizes, website platforms, or assistant providers.",
+    "No evidence measures declines in website traffic, leads, or conversions caused by customers using assistants instead of visiting businesses directly.",
+    "No evidence addresses whether website owners can identify which external AI agents visited, what pages they accessed, or what actions they attempted.",
+    "No evidence captures business-owner testimony about reputational damage, customer complaints, refunds, or lost revenue caused by assistant misrepresentation.",
+    "Most evidence concerns general AI adoption or AI-product reviews rather than third-party agents interacting with business websites.",
+    "No evidence documents an AI assistant quoting a business\u2019s pricing or policies incorrectly.",
+    "No evidence documents an AI agent failing a booking or checkout on a business website."
+  ],
+  "contradictions": [
+    "One comment says companies treat AI mainly as a chat widget, while another says every company the commenter worked for in the past two years was heavily pushing AI use; these can coexist, but they differ on the apparent depth of adoption.",
+    "The evidence raises pricing and booking friction but does not attribute it to AI agents, so it cannot support a causal claim that assistants misrepresented prices or caused transaction failures."
+  ],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 1.0,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

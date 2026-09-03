@@ -24,7 +24,7 @@ The skill has two jobs, and the second is as binding as the first: **compose** p
 
 ## The Voice Write Workflow (five steps, every run)
 
-Everything below this section is reference material — modes, register, moves, anti-patterns. This is the procedure that uses them. It applies to standalone asks and chain runs alike; headless runs (e.g. Substack-Drafter) walk the same steps with nobody to interrupt, which makes Step 1's statement and Step 5's record more important, not less.
+Everything below this section is reference material — register, moves, anti-patterns. This is the procedure that uses them. It applies to standalone asks; the Content Machine does not run this workflow because its clean-context shaper is barred from reading this file.
 
 ### Step 1 — Commit: name the dial before any prose exists
 
@@ -60,7 +60,7 @@ diction, what to **cut** (an interview says far more than a piece should carry),
 material arrives in. None of that invents anything. Under-shaping is a real failure mode and it
 hides behind the law, because a draft that adds nothing looks maximally compliant.
 
-Write the piece. Chain mode: the beat map binds — author every sentence fresh against it, never reorder beats. Standalone: format constraints bind per Integration Rules. As each section lands, pressure its last line (scene-button discipline, per Success Criteria) — and while stopped there, run Step 4's register checks on that section. Drift is cheapest to catch at the section boundary you're already standing on, not in a full-draft rewrite at the end.
+Write the piece. When a standalone request includes an approved beat map, its order binds — author every sentence fresh against it, never reorder beats. Otherwise, format constraints bind per Integration Rules. As each section lands, pressure its last line (scene-button discipline, per Success Criteria) — and while stopped there, run Step 4's register checks on that section. Drift is cheapest to catch at the section boundary you're already standing on, not in a full-draft rewrite at the end.
 
 ### Step 4 — Gate: the pre-handoff drift check (self-edit; fix in place)
 
@@ -267,7 +267,7 @@ This skill controls HOW writing sounds. `creative-writing` controls FORMAT (stru
 | Sensory Cascade wants room, format says brevity (tweet, Slack) | One sensory image maximum. Pick the Jewel Center. Cut the cascade. |
 | Inverted Refrain wants repetition, format is short-form | Deploy it twice maximum (setup + payoff). Three needs runway. |
 
-**The one exception:** Personal essays and blog posts on Sean's own site. Here, voice leads and format follows: the piece's own shape can override the template. `creative-writing` provides the skeleton (hook, sections, closer), but the mode can reshape that skeleton if the piece demands it. That license covers `creative-writing`'s format skeleton only: a beat map arriving from `storytelling-architecture` is never a skeleton this skill may reshape — beat order binds at every dial (see Related Skills).
+**The one exception:** Personal essays and blog posts on Sean's own site. Here, voice leads and format follows: the piece's own shape can override the template. `creative-writing` provides the skeleton (hook, sections, closer), but the voice can reshape that skeleton if the piece demands it. That license covers `creative-writing`'s format skeleton only: an approved beat map is never a skeleton this skill may reshape — beat order binds at every dial (see Related Skills).
 
 ## Anti-Patterns: When a Move Becomes Parody
 
@@ -309,10 +309,10 @@ Some true facts about Sean are not material to showcase. A real detail being tru
 `references/cheese-bank.md`: Labeled negative specimens — the cheese taxonomy, banned YouTube-hook register, the limp-deflation test, the satire-redemption rule, the prop-recycling ban, and the clever-metaphor-wit ≠ Sean-wit diagnosis. Check the draft against it.
 
 **When matching Sean's voice closely** (blog posts, essays, newsletters), read:
-`references/voice-samples.md`: Real writing samples tagged by mode and signature move. The calibration anchors — when the samples and this file's rules conflict, the samples win. The "Elicited Raw Voice" section is the closest record of how Sean actually talks. The **VoicePrint Refine Loop** section (2026-08) holds the edit-diffs behind G1–G5 with Sean's verbatim reasons — the highest-signal calibration data, because each diff shows exactly where the generated voice missed and how he corrected it.
+`references/voice-samples.md`: Real writing samples tagged by evidence class and functional move. The calibration anchors — when the samples and this file's rules conflict, the samples win. The "Elicited Raw Voice" section is the closest record of how Sean actually talks. The **VoicePrint Refine Loop** section (2026-08) holds the edit-diffs behind G1–G5 with Sean's verbatim reasons — the highest-signal calibration data, because each diff shows exactly where the generated voice missed and how he corrected it.
 
 **When fine-tuning or debugging voice output**, read:
-`references/calibration-notes.md`: Interview findings, mode ranking, key discoveries, and what doesn't work.
+`references/calibration-notes.md`: Interview findings, register discoveries, historical mode archaeology, and what does not work.
 
 **Historical only, and not a source to write from.**
 `vault/40_knowledge/references/ref-voice-mechanics-research.md` holds the original author profiles (Kerouac, Thompson, Vonnegut, Sedaris) that the deleted modes were built on. It is kept as the archaeology behind the 2026-08-24 attestation pass, **not** as a technique source: twenty of its techniques were tested against Sean's corpus, twelve survived under functional names, and three did not survive at all. Read it to understand where a move came from. Never read it to add one.
@@ -322,15 +322,15 @@ The moves in this file teach the HOW; the reference files carry the WHAT (lexico
 
 ## Related Skills
 
-**The sequential Substack chain was retired 2026-08-31** (substack-studio CLAUDE.md §1). Drafting now runs through the content machine's clean-context shaper, which is **banned from reading this file**; the skills below run post-draft and advisory. This skill's standing jobs are the roster of record, the host of `references/voice-samples.md`, and the register law. The retired order, for the archaeology: `storytelling-architecture` → `substack-value-engine` → **`writing-voice-modes`** → `writing-critique` → `writing-humanity-pass`. The two upstream skills emit a beat map (story shape + value gate); voice-modes writes 100% of the prose fresh against it and must never reorder beats. The downstream `writing-critique` gate may route ONE grounded revise request back here ("revise against [this specific finding]"); voice-modes writes that revision, still without reordering beats. At the seam, this skill's output is two things: the voiced draft and the Voice Decision Record (Workflow Step 5). Carrying them forward belongs to whoever invoked the skill — Sean in an interactive session, the orchestrating agent in a chain run. This skill states its decisions; it does not own the transport.
+**The sequential Substack chain was retired 2026-08-31** (substack-studio CLAUDE.md §1). Inside the Content Machine, the clean-context shaper is **banned from reading this file**. This skill supplies the roster of record, hosts `references/voice-samples.md`, and defines the register law consulted by post-draft gates; it does not draft or revise the piece. Outside the Content Machine, it can still compose directly and emit the Voice Decision Record in Workflow Step 5.
 
-- `storytelling-architecture`: Upstream. Owns story ORDER and the beat map; voice-modes owns the SENTENCES. The handoff is lossy on prose by design (no drafted lines come forward), so voice is not flattened. Receive the beat map, author every line.
-- `substack-value-engine`: Upstream. Owns the Value Gate (Itch/Solution/Transfer) and the narrative-to-value seam. It decides the pivot line's JOB; voice-modes writes the line. Its "ask lands sideways" rule defers to this skill's **Desperation Posing as Self-Deprecation** anti-pattern (this skill owns the tone; value-engine owns the structural gate).
+- `storytelling-architecture`: In the Content Machine, a post-draft advisory structure read. Outside it, may provide an approved beat map whose order binds a direct voice write.
+- `substack-value-engine`: In the Content Machine, owns the hard value gate before the interview. Outside it, may supply value requirements for a direct write. Its "ask lands sideways" rule defers to this skill's **Desperation Posing as Self-Deprecation** anti-pattern.
 - `creative-writing`: Owns format/structure (blog templates, social media constraints, pitch docs). Voice modes control HOW content sounds within those formats.
 - `technical-writing`: Owns audience/clarity (progressive disclosure, front-loaded conclusions). Voice modes add personality within those constraints.
 - `script-writing`: Sean's other medium, and one of the two corpora every move is attested against. Screenwriting Cut-To crosses into prose, but only just: one prose instance, flagged as a contested cell for the licensing audit.
-- `writing-humanity-pass`: The final editing pass. Run it AFTER composing to strip AI tells (and enforce the no-em-dash rule). Voice-modes composes; humanity-pass scrubs.
-- `writing-critique`: the adversarial gate that runs after voice and before humanity-pass. It never rewrites; when it finds a reader-cost defect it sends a single grounded revise request back to this skill. It treats Sean's signature moves as defensible choices, not defects.
+- `writing-humanity-pass`: A post-draft Content Machine scrub that reads this skill as register law. Outside the machine, it may follow a direct voice write.
+- `writing-critique`: The post-draft advisory reader. It consults this skill's register law, treats Sean's signature moves as defensible choices rather than defects, and never makes this skill the Content Machine drafter.
 
 ## Success Criteria
 

@@ -6,6 +6,7 @@ Tier 1 (Mac Mini, structural Python checks, ~5 min):
   • orphan files      — files with 0 inbound wikilinks
   • missing YAML frontmatter in vault/knowledge/
   • CamelCase filenames in vault/knowledge/ (kebab-case only)
+  • retired Content Machine instructions reappearing in its operating surface
 
 Tier 2 (semantic, ~15 min):
   • staleness detection (time-sensitive model/API refs) — Mac-Mini-local regex
@@ -37,6 +38,7 @@ import json
 import logging
 import re
 import sqlite3
+import subprocess
 import sys
 import time
 from dataclasses import dataclass, field
@@ -67,6 +69,17 @@ AGENT_NAME = "knowledge-lint"
 MAX_TURNS_TIER1 = 20
 MAX_TURNS_TIER2 = 30
 MAX_BUDGET_USD = 0.00
+
+_RUNTIME_RETIREMENT_CHECKER = (
+    Path(__file__).resolve().parents[2]
+    / ".claude"
+    / "skills"
+    / "content-machine"
+    / "check_runtime_retirements.py"
+)
+_RUNTIME_RETIREMENT_REGISTRY = Path(
+    ".claude/skills/content-machine/runtime-retirements.toml"
+)
 
 _WIKILINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]")
 _FRONTMATTER_RE = re.compile(r"^---\n.*?\n---", re.DOTALL)
@@ -368,12 +381,90 @@ def find_camelcase_filenames(vault_root: Path) -> list[LintIssue]:
     return issues
 
 
-def run_tier1(vault_root: Path) -> Tier1Report:
+def find_retired_runtime_instructions(repo_root: Path) -> list[LintIssue]:
+    """Run the Content Machine's canonical retirement scan.
+
+    The subprocess is intentional: resolution-time checks and Sunday lint use
+    the same scanner rather than carrying two implementations. Its JSON output
+    omits matched source lines so private calibration text cannot leak into the
+    tracked lint report.
+    """
+    if not _RUNTIME_RETIREMENT_CHECKER.is_file():
+        return [
+            LintIssue(
+                kind="runtime-retirement-check-error",
+                severity=LintSeverity.HIGH,
+                file=_RUNTIME_RETIREMENT_REGISTRY,
+                detail="Canonical checker is missing; run the Content Machine resolution check locally.",
+            )
+        ]
+
+    try:
+        completed = subprocess.run(
+            [
+                sys.executable,
+                str(_RUNTIME_RETIREMENT_CHECKER),
+                "--repo-root",
+                str(repo_root),
+                "--json",
+            ],
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=60,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return [
+            LintIssue(
+                kind="runtime-retirement-check-error",
+                severity=LintSeverity.HIGH,
+                file=_RUNTIME_RETIREMENT_REGISTRY,
+                detail="Canonical checker could not complete; run it locally for the private error detail.",
+            )
+        ]
+    try:
+        payload = json.loads(completed.stdout)
+    except json.JSONDecodeError:
+        payload = {"status": "error"}
+
+    if completed.returncode not in {0, 1} or payload.get("status") == "error":
+        return [
+            LintIssue(
+                kind="runtime-retirement-check-error",
+                severity=LintSeverity.HIGH,
+                file=_RUNTIME_RETIREMENT_REGISTRY,
+                detail="Canonical checker could not complete; run it locally for the private error detail.",
+            )
+        ]
+
+    issues: list[LintIssue] = []
+    for finding in payload.get("findings", []):
+        path = finding.get("path")
+        line = finding.get("line")
+        name = finding.get("retirement_name")
+        pattern = finding.get("pattern")
+        source = finding.get("source")
+        if not isinstance(path, str) or not isinstance(line, int):
+            continue
+        issues.append(
+            LintIssue(
+                kind="retired-runtime-instruction",
+                severity=LintSeverity.HIGH,
+                file=Path(path),
+                detail=f"line {line}: {name} matches {pattern!r}; decision: {source}",
+            )
+        )
+    return issues
+
+
+def run_tier1(vault_root: Path, *, repo_root: Path | None = None) -> Tier1Report:
     all_issues: list[LintIssue] = []
     all_issues.extend(find_broken_wikilinks(vault_root))
     all_issues.extend(find_orphan_files(vault_root))
     all_issues.extend(find_missing_frontmatter(vault_root))
     all_issues.extend(find_camelcase_filenames(vault_root))
+    if repo_root is not None:
+        all_issues.extend(find_retired_runtime_instructions(repo_root))
     return Tier1Report(issues=all_issues)
 
 
@@ -1246,6 +1337,11 @@ def main() -> int:
     logger = setup_logger(AGENT_NAME, cfg.log_dir, cfg.log_level)
 
     tier1 = run_tier1(cfg.vault_root)
+    # Keep run_tier1's historical one-argument call shape in main so tests and
+    # external callers that replace it remain compatible. Production Config
+    # always has repo_root; lightweight test doubles from older suites may not.
+    if hasattr(cfg, "repo_root"):
+        tier1.issues.extend(find_retired_runtime_instructions(cfg.repo_root))
     logger.info("Tier 1: %d issues", tier1.total_issues)
 
     tier2: list[LintIssue] = []
