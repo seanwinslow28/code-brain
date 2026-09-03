@@ -1,6 +1,6 @@
 ---
 name: content-machine
-description: Interview-first writing orchestrator. Runs a piece from topic to shipped draft through five stages - topic, interview, shape, gates, ship - under one law, that the draft's words come only from the interview transcript. Use when writing anything for publication in the author's own voice, and when asked to "run the content machine", "interview me about", "write this the interview-first way", or "draft from my transcript". Not for neutral technical docs, code, or anything the author has no first-person stake in.
+description: Interview-first writing orchestrator. Runs a piece from topic to shipped draft through five stages - topic, interview, shape, gates, ship - under one law, that the piece's substance (every fact, number, name, place, and event) comes only from the interview transcript, while texture is the writer's job. Use when writing anything for publication in the author's own voice, and when asked to "run the content machine", "interview me about", "write this the interview-first way", or "draft from my transcript". Not for neutral technical docs, code, or anything the author has no first-person stake in.
 ---
 
 # Content Machine
@@ -13,38 +13,77 @@ Build map: [GitHub #158](https://github.com/seanwinslow28/code-brain/issues/158)
 
 ## The law
 
-**The interview transcript is the only permitted source of draft words.**
+**The transcript is the only permitted source of substance. Texture is the writer's job.**
 
-A model asked to write about a topic fills the gaps with the average of its training data. The
-output passes every style rule and still belongs to nobody. Removing the gap-fill step is the
-entire design.
+*(Re-scoped 2026-08-31 by Sean's ratification of the rules-off experiment: the Arm B
+configuration scored 86% hand-rewrite survival with zero fabricated claims against the old
+machine's best of 64%. Evidence and design:
+[`vault/20_projects/research/2026-08-31-content-machine-rules-off-research.md`](../../../vault/20_projects/research/2026-08-31-content-machine-rules-off-research.md)
+and the run-#4 ledger entries. The previous all-words form of the law is preserved in git
+history; do not reintroduce it.)*
 
-What the law permits and forbids:
+A model asked to write about a topic fills the gaps with the average of its training data —
+locking **substance** to the transcript removes that failure. But a machine forbidden to write
+texture can only hand back an organized brain dump; the author's own rewrites proved the best
+material (images, dramatization, jokes) arrives at the writing, not the interview.
 
 | | |
 |---|---|
-| **Permitted** | Anything the author said in the interview, in any order, cut, compressed, re-punctuated, or re-cased. Connective tissue that carries no claim and no image ("and then", "so", "the next morning"). Facts the author stated. Structural labels the contract requires (a title, a section header). |
-| **Forbidden** | Any image, joke, metaphor, number, name, place, or claim the author did not say. A better verb for a thing he described plainly, where the better verb adds color he didn't supply. A reference he didn't reach for. A closing line assembled from nothing. |
-| **The test** | Point at any vivid phrase in the draft and name the transcript line it came from. Can't name one? It's an invention. Cut it or go ask him. |
+| **Substance — transcript-locked** | Every fact, number, name, place, event, and claim about what happened. If a fact the piece needs is missing from the transcript, leave it out or put it on the ASK LIST — never invent it. |
+| **Texture — the writer's job** | Images, jokes, metaphors, comparisons, framing, the hook, the closer. Written fresh, no transcript source needed. Texture must stay consistent with what he said happened and sound like the corpus. |
+| **The test** | For a claim: name the transcript line it came from; can't → cut or ask. For texture: does it contradict anything he said, and would the corpus plausibly say it that way? |
+
+Two riders, both his: **in-band instructions bind** (his CORRECTIONS and in/out calls inside the
+transcript are instructions), and **echo is not fidelity** (when new framing collides with his
+spoken wording, re-say the line rather than bolting onto it — L4-06).
 
 Professional-lane documents (resume, cover letter, questionnaire) run the **facts-only** form of the
 law: every claim traces to the transcript, phrasing may be conventional. Nobody wants a resume
 written in dive-bar register.
 
+## The shaping context (standing as of 2026-08-31)
+
+Stage 3 runs in a **clean context** — a fresh subagent that reads exactly this and nothing else:
+
+1. The interview transcript (the story)
+2. `creative-studio/content-machine/corpus/01–06` (his verbatim words)
+3. `.claude/skills/writing-voice-modes/references/voice-samples.md` (the calibration authority)
+4. `creative-studio/content-machine/reference-universe.md` (his cultural library)
+5. `creative-studio/content-machine/do-not-promote.md` (hard constraint, not style)
+6. Any prior hand-rewrite of the **same** piece, when one exists (his proven beats outrank
+   fresh texture on the same beat — the run-#4 confound, L4-01)
+
+The shaper gets the law's one substance rule, stated positively, the sentence "there are no
+style rules to follow," and **the medium's deliverable form only** — the format bounds from the
+contract's delivery spec (a title and length for an essay; the typed fields and word caps for a
+portfolio write-up), never its register notes, roster, or move guidance. Form is task, not style. **Banned from the shaping context:** this file, `writing-voice-modes/SKILL.md`,
+the anti-pattern table, the licensing matrix, the medium contracts, the gate chain, and the
+lessons ledger. Voice is induced from the samples, not complied into. Rationale: instruction-count
+compliance collapse plus three measured runs — see the research note. Ratified lessons reach the
+shaper only when Sean routes one into the corpus or samples, or when a lesson's rider is short
+enough to live in the law itself (L4-06 above).
+
 **No autonomous revision loops.** The machine writes candidates; the author ratifies. There is no
 score-until-good cycle, no persona panel, no numeric quality mean. A gate may route exactly one
 grounded revise request; the author decides everything else.
+
+**L8 binds judges, not generators** (ruled 2026-09-02). The rejected machine is one thing: personas
+that *score* output and iterate to a numeric mean. Frames, lenses or personas used to **generate
+candidates the author then rules on** are the sentence above, not a violation of it — that is
+`creative-partner`'s divergence stage, which Sean ratified, and it never writes a fate, a lock or a
+verdict. The test is whether the persona produces a *score* or a *candidate*. A candidate is legal at
+any count; a score is banned at any count.
 
 ## Stages
 
 | # | Stage | Owner | Status |
 |---|---|---|---|
-| 0 | **Oracle** — proposes what's worth writing from the author's recent work | [`content-oracle`](../content-oracle/SKILL.md) | live, on probation (on-demand only until 2026-10-04) |
-| 1 | **Topic** — one piece, one lane, one medium, named before anything else | this skill | live |
+| 0 | **Oracle** — proposes what's worth writing: experiments he could run (frame stage + news lane) and done things from his own week (sweep), scored once into two decks | [`content-oracle`](../content-oracle/SKILL.md) | live, on probation (on-demand only until 2026-10-04); rebuilt after week 1 failed (#227, #238, #239) |
+| 1 | **Topic + value gate** — one piece, one lane, one medium, named before anything else; the publication's value gate clears here as a **hard block**, never post-draft | this skill + `substack-value-engine` | live |
 | 2 | **Interview** — one lens, one question at a time, read-back at the close | `interview/` | live, six lenses |
-| 3 | **Shape** — the transcript becomes prose | `writing-voice-modes` | live |
-| 4 | **Gates** — value, structure, critique, humanity, origin | chain skills + `gates/` | live |
-| 5 | **Ship** — the author publishes | the author | live |
+| 3 | **Shape** — clean-context draft (see The shaping context) | fresh subagent, this skill orchestrates | live, re-scoped 2026-08-31 |
+| 4 | **Gates** — post-draft, advisory: origin (claims tier), do-not-promote + coined-lines sweep, humanity scrub, critique + the analyzer **dashboard** (no metric flags since #219) | `gates/` + chain skills as reference | live, all post-draft as of 2026-08-31 |
+| 5 | **Ship** — the author hand-rewrites (mandatory), a mechanical proofread runs on his final, he publishes | the author + one proofread pass | live, proofread added 2026-08-31 |
 | 6 | **Lessons** — his corrections become rules, with his consent | `lessons/` + `ledger/` | live |
 
 Stage 0 is skippable by design: a hand-picked topic is a legitimate input. Stage 6 is not skippable
@@ -116,6 +155,18 @@ So: anything the draft is genuinely better with goes on the ASK LIST as a questi
 diff as a deletion.
 
 ## The origin gate
+
+**Post-draft advisory as of 2026-08-31, by Sean's ruling.** The gate is now the law's *sole
+enforcement point*: the shaper composes without carrying the law as a composition-time constraint,
+and the gate runs after the draft exists, producing the Origin Ledger and ASK LIST as a
+traceability record. Expressive lane stays advisory (as it always was); Professional lane still
+blocks on untraced claims. What changed is that the drafting context no longer holds the rule —
+the research behind the move (instruction-count collapse, field practice, the craft add/never-add
+boundary) is in
+[`vault/20_projects/research/2026-08-31-content-machine-rules-off-research.md`](../../../vault/20_projects/research/2026-08-31-content-machine-rules-off-research.md).
+The law's scope was re-ruled the same day, on the experiment's result: **claims tier only**.
+Texture flags from the mechanical layer are informational; only untraced claims (numbers, dates,
+names, events) are findings.
 
 Two layers, because the law has two halves and only one of them is mechanical.
 
@@ -196,19 +247,33 @@ about what would draw a reply, binding on nothing (`contracts/expressive/LANE.md
 
 1. Name the topic and emit the TOPIC CARD. If the medium has no contract yet, say so and write the
    piece against the lane's general rules rather than inventing a contract mid-run.
-2. Read the medium contract in `contracts/<lane>/<medium>.md`, the licensing matrix it inherits
-   (`contracts/move-licensing.md`), the lane law it inherits
-   (`contracts/<lane>/LANE.md`), and the publication's or the application's own house rules
-   before the interview, not after. The contract decides which moves are licensed and what the
-   piece has to deliver; the interview has to go get that material. The lane's **first-screen test**
-   is an interview instruction as much as a shape rule: if no beat in the transcript can carry the
-   first screen, the interview did not reach far enough.
+2. The **orchestrator** (not the shaper) reads the medium contract in
+   `contracts/<lane>/<medium>.md` and the lane law (`contracts/<lane>/LANE.md`) for what the piece
+   has to deliver — length, structural labels, the first-screen test, the reply-hook memo. Those
+   requirements inform the TOPIC CARD, the interview's reach, and the post-draft check. **They are
+   never loaded into the shaping context** (2026-08-31): the licensing matrix and per-move rules
+   are retired from drafting entirely. The lane's **first-screen test** stays an interview
+   instruction: if no beat in the transcript can carry the first screen, the interview did not
+   reach far enough.
 3. Interview with one lens. One question at a time. Never answer for him, never offer him a menu of
    answers to pick from, never write his line and ask him to approve it. A lens that answers its own
    questions has broken the machine as thoroughly as a draft written from nothing.
-4. Shape. Gate. Hand him the draft with both records attached.
-5. He rewrites by hand. That rewrite is the highest-value artifact the machine produces — it is
-   corpus, and once the lessons loop exists it is also the lesson.
+4. Shape in the clean context (see The shaping context): spawn a fresh subagent with the listed
+   files, the substance rule, and nothing else. Then run the post-draft gates and hand him the
+   draft with the records attached.
+5. He rewrites by hand — mandatory, not remedial: three of four runs put his best new material
+   (images, dramatization, jokes) into existence at the rewrite (L3-05, L4-02). That rewrite is
+   corpus and lesson both.
+6. **Mechanical proofread on his final, prose untouched** (added 2026-08-31 at his request).
+   Typos, doubled words, spacing, apostrophes/escapes, punctuation only — flag each fix, change no
+   phrasing, no word choice, no rhythm. His eye skips his own typos ("self depreciating" survived
+   two of his finals); the pass exists to catch those, never to edit him.
+7. **Register the final in the rewrite band** (added 2026-09-01, #219). One line in `SERIES` in
+   `.claude/skills/writing-critique/references/build_rewrite_band.py`, under the piece's series,
+   then rerun it. That band is the analyzer dashboard's second column — his rewrites, as opposed
+   to his prose written outside the machine — and "recomputes on every ship" is this step. It is
+   maintenance, not a ruling. The corpus band never takes a hand-rewrite; promoting prose into the
+   corpus or `voice-samples.md` is a separate act and the only one that changes what gets written.
 
 ## The lessons loop
 
@@ -251,6 +316,12 @@ a duplicate. Check whether the rule already exists before writing one.
 Write the ledger entry first, then make the edit, then record the amended file back in the entry.
 Ledger-first means a failed edit still leaves a record of what he ratified.
 
+**One count rides on this route.** The move-licensing matrix is advisory in all nine mediums and
+nothing enforces it ([#222](https://github.com/seanwinslow28/code-brain/issues/222)). It earns the
+enforcement question back on **two ratified permanent lessons routed to a medium contract whose
+reason is that a move was wrong for the room** — one is noise, two is a pattern. When the second
+lands, file a fresh ticket; do not arm anything before it.
+
 **Rejected candidates stay in the ledger.** A rejection is the more useful of the two records: it
 stops the machine proposing the same wrong lesson next week. Deleting rejections means re-learning
 them forever.
@@ -278,10 +349,14 @@ The repo is public.
 
 ## Related skills
 
-- `writing-voice-modes` — Stage 3. The transcript-shaper. Owns sentences, not story order.
+- `writing-voice-modes` — **no longer Stage 3 drafting context** (2026-08-31): the shaper induces
+  voice from `references/voice-samples.md`, which that skill remains custodian of. The skill itself
+  stays live for standalone voice asks (dial work, recruiter-safe swaps) outside the machine.
 - `storytelling-architecture` — beat map. Owns story order.
 - `substack-value-engine` — the value gate. Owns whether the piece is worth a reader's time.
 - `writing-critique` — adversarial gate. Never rewrites; routes one grounded revise.
 - `writing-humanity-pass` — final scrub. Owns the AI-tell sweep and the no-em-dash rule.
-- `content-oracle` — Stage 0. Sweeps his own systems for spikes and decks ~10 cards.
+- `content-oracle` — Stage 0. Three supplies (sweep, news lane, frame stage), one scoring pass, two
+  decks: worth a piece this week, worth posting. A card names an experiment he could run, or a done
+  thing with an artifact behind it; it never asserts he did something he did not.
 - `grilling` — when the author wants the *plan* stress-tested rather than the story drawn out.

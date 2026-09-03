@@ -10,7 +10,9 @@ The operating manual for any session working in this folder. Rules here are stan
 
 ## 1. The voice chain is mandatory
 
-Every post, the manifesto, and the About page run through the chain, in this order. No skipping a stage, no reordering.
+**Amended 2026-08-31, ratified by Sean on the rules-off experiment (86% hand-rewrite survival vs the chain-machine's best 64%; record: `rules-off-experiment/session-record.md`).** Drafting now runs through the content machine's clean-context shaper (`content-machine/SKILL.md`, "The shaping context"): transcript + corpus + voice-samples + reference universe, one claims-locked/texture-free law, no rule files in the drafting context. The chain skills below are no longer sequential drafting stages; they run **post-draft, advisory** — structure read, critique, humanity scrub — and Sean's hand-rewrite plus a mechanical-only proofread close every piece. **The value gate is the one exception and still runs BEFORE the interview, as the hard block §3 describes** (corrected 2026-09-02, [#224](https://github.com/seanwinslow28/code-brain/issues/224)): the 8/31 re-scope was about *drafting*, and `substack-value-engine` was never a drafting stage. A value gate run post-draft is not a gate, because the interview and the draft have already been paid for by the time it answers. Do not reintroduce the rule stack into the drafting context.
+
+The retired sequential order, for the archaeology:
 
 `substack-value-engine` → `storytelling-architecture` → `writing-voice-modes` (Sean Mode) → `writing-critique` → `writing-humanity-pass`
 
@@ -62,11 +64,12 @@ This folder rides **code-brain's public repo.** Treat everything tracked here as
 | Step | Skill |
 |------|-------|
 | Mine real reader pain into ranked angles | `fusion-discovery-council` (costed; `--lens substack`), `last30days` (fresh complaints) |
-| Value gate (start the chain) | `substack-value-engine` |
-| Shape the narrative | `storytelling-architecture` |
-| Voice it (Sean Mode) | `writing-voice-modes` |
-| Red-team the draft | `writing-critique` |
-| Final scrub (kills em dashes + AI tells) | `writing-humanity-pass` |
+| **Value gate — BEFORE the interview, hard block** (§3) | `substack-value-engine` |
+| Interview, then draft in a clean context | `content-machine` (stages 2–3) |
+| Structure read — post-draft, advisory | `storytelling-architecture` |
+| Red-team the draft — post-draft, advisory | `writing-critique` |
+| Final scrub (kills em dashes + AI tells) — post-draft | `writing-humanity-pass` |
+| Move roster + register law (**never loaded into drafting**) | `writing-voice-modes` |
 | High-variance critique (optional) | `llm-council` |
 | Hero image (pencil-test house style, on the Mac) | `openai-image-gen` (primary), `gemini-image-gen` |
 
@@ -91,7 +94,7 @@ The reliable loop for any Pencil & Prompt piece, page or post. Use it by default
 Capture the pre-flight findings (with sources) at the top of the piece's working doc, so the draft is built on them. Then the writing loop:
 
 1. **Brainstorm the shape first** (`superpowers:brainstorming`): one question at a time, lock a short skeleton (structure, length, tone dial, the opening line, the closer) BEFORE drafting. No draft until Sean approves the shape.
-2. **Run the voice chain** to write it: `substack-value-engine` → `storytelling-architecture` → `writing-voice-modes` (Sean Mode) → `writing-critique` → `writing-humanity-pass`.
+2. **Run the content machine** to write it (`content-machine`): the value gate clears first (§3, a hard block *before* the interview), then interview → clean-context shaper → post-draft gates. **The sequential voice chain was retired 2026-08-31** (§1) — do not reintroduce the rule stack into the drafting context; voice is induced from `voice-samples.md`, never complied into from a rulebook. The retired order, for the archaeology: `substack-value-engine` → `storytelling-architecture` → `writing-voice-modes` → `writing-critique` → `writing-humanity-pass`.
 3. **Sean hand-rewrites.** The chain draft is a strong starting point, never the ship. Sean's edits are the real voice (on Start Here and About, his rewrites were the decisive lift).
    **Why it stays mandatory under the Content Machine (amended 2026-08-25, ticket #173).** The machine now sources every word from an interview transcript, so this rule is no longer a net for invented sentences; the origin gate is that. It stays because the rewrite is the *calibration input*. On the first machine-run piece Sean left 38 of 59 sentences untouched and still retitled it, rebuilt the closer, cut a line and added two beats, and those nine edits became the first nine ratified lessons. The rewrite is where the machine learns, which makes it the most valuable step in the chain rather than the remedial one. Re-evaluate the rule after several pieces, never on one.
 4. **Fold Sean's rewrite back into** `.claude/skills/writing-voice-modes/references/voice-samples.md` as a calibration anchor, so the next piece starts closer to his voice.

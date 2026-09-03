@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "generated_from": "content-machine corpus (git-ignored); see provenance",
   "mattr_window": 50,
   "segments": 5,
@@ -7,42 +7,76 @@
     "cv": {
       "mean": 0.7712,
       "stdev": 0.2116,
+      "min": 0.615,
+      "max": 1.185,
       "n": 5
     },
     "mattr": {
       "mean": 0.8398,
       "stdev": 0.0162,
+      "min": 0.82,
+      "max": 0.8666,
       "n": 5
     },
     "first_person_rate": {
       "mean": 4.7,
       "stdev": 1.4719,
+      "min": 3.2,
+      "max": 6.78,
       "n": 5
     },
     "opener_other_pct": {
       "mean": 48.34,
       "stdev": 7.7572,
+      "min": 35.7,
+      "max": 59.6,
+      "n": 5
+    },
+    "mean_len": {
+      "mean": 14.912,
+      "stdev": 2.0506,
+      "min": 12.26,
+      "max": 17.39,
+      "n": 5
+    },
+    "short_share": {
+      "mean": 29.02,
+      "stdev": 9.3414,
+      "min": 11.5,
+      "max": 39.3,
+      "n": 5
+    },
+    "long_share": {
+      "mean": 4.58,
+      "stdev": 5.2511,
+      "min": 0.0,
+      "max": 14.3,
       "n": 5
     }
   },
   "gate": {
     "sigma": 2.0,
-    "flag_metrics": [
+    "flag_metrics": [],
+    "report_only": [
       "cv",
       "mattr",
-      "first_person_rate"
-    ],
-    "report_only": [
-      "opener_other_pct"
+      "first_person_rate",
+      "opener_other_pct",
+      "mean_len",
+      "short_share",
+      "long_share"
     ]
   },
   "provenance": {
     "ruled": "2026-08-26",
+    "gate_retired": "2026-09-01",
     "ticket": "https://github.com/seanwinslow28/code-brain/issues/177",
+    "gate_ticket": "https://github.com/seanwinslow28/code-brain/issues/219",
     "tier": "A (unmixed verbatim, per corpus MANIFEST)",
     "min_words": 300,
     "excludes": "anything produced through the content machine, to avoid calibrating the yardstick on what it measures",
     "rebuild": "python3 build_baseline.py   (needs the local corpus)",
+    "rebuild_trigger": "Not a schedule. This band rebuilds only on Sean's ruling: new sustained prose written outside the content machine, or a promotion he decides on. Every promotion is stamped here. `--check` runs with each dashboard render, so a moved corpus is loud. His hand-rewrites do NOT come here; they are the second band (rewrite-band.json). See #219.",
     "segments": [
       {
         "file": "03-prose-anchors.md",

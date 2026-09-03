@@ -1,0 +1,314 @@
+<title>Blind Read: Twelve Drafts</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F4F4F2; --card:#FFFFFF; --ink:#1B1D22; --ink-soft:#3E434B;
+  --graphite:#6B6F76; --rule:#DCDBD6; --rule-soft:#E9E8E3;
+  --pencil:#B4402C; --keep:#3F6B5E; --maybe:#A87A24; --cut:#8C6A63;
+  --on-accent:#FFFFFF;
+  --shadow:0 1px 2px rgba(27,29,34,.06), 0 8px 24px rgba(27,29,34,.06);
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#15171B; --card:#1D2026; --ink:#EDECE7; --ink-soft:#C2C0B9;
+  --graphite:#8D9199; --rule:#31353D; --rule-soft:#262A31;
+  --pencil:#E0705A; --keep:#6FA793; --maybe:#D2A249; --cut:#B2938C;
+  --on-accent:#14161A;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+}}
+:root[data-theme="dark"]{
+  --paper:#15171B; --card:#1D2026; --ink:#EDECE7; --ink-soft:#C2C0B9;
+  --graphite:#8D9199; --rule:#31353D; --rule-soft:#262A31;
+  --pencil:#E0705A; --keep:#6FA793; --maybe:#D2A249; --cut:#B2938C;
+  --on-accent:#14161A;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:none}
+:focus-visible{outline:2px solid var(--pencil);outline-offset:2px;border-radius:3px}
+code{font-family:var(--mono);font-size:.9em;background:var(--rule-soft);padding:.1em .3em;border-radius:3px}
+
+/* ---------- masthead ---------- */
+.head{border-bottom:1px solid var(--rule);background:var(--card);position:sticky;top:0;z-index:20}
+.head-in{max-width:1180px;margin:0 auto;padding:14px 24px;display:flex;align-items:baseline;
+  gap:16px;flex-wrap:wrap}
+.mast{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--pencil);font-weight:600}
+.head h1{font-family:var(--serif);font-size:20px;font-weight:600;margin:0;letter-spacing:-.01em}
+.head .note{color:var(--graphite);font-size:12.5px;margin-left:auto}
+
+/* ---------- letter strip ---------- */
+.strip{max-width:1180px;margin:0 auto;padding:14px 24px 0;display:flex;gap:6px;flex-wrap:wrap;
+  align-items:center}
+.chip{font-family:var(--mono);font-weight:600;font-size:13px;width:34px;height:34px;
+  border:1px solid var(--rule);border-radius:4px;background:var(--card);color:var(--graphite);
+  display:grid;place-items:center;position:relative;transition:transform .12s ease}
+.chip:hover{transform:translateY(-1px)}
+.chip.here{border-color:var(--ink);color:var(--ink);box-shadow:0 0 0 2px var(--rule-soft)}
+.chip[data-b="keep"]{background:var(--keep);border-color:var(--keep);color:var(--on-accent)}
+.chip[data-b="maybe"]{background:var(--maybe);border-color:var(--maybe);color:var(--on-accent)}
+.chip[data-b="cut"]{background:var(--card);border-color:var(--cut);color:var(--cut);
+  text-decoration:line-through;text-decoration-thickness:1.5px}
+.strip .tally{font-family:var(--mono);font-size:12px;color:var(--graphite);margin-left:8px}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:20px 24px 80px;display:grid;
+  grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:start}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}}
+
+/* ---------- the draft ---------- */
+.sheet{background:var(--card);border:1px solid var(--rule);border-radius:6px;
+  box-shadow:var(--shadow);padding:44px 52px 52px;position:relative}
+@media (max-width:640px){.sheet{padding:28px 22px 34px}}
+.sheet::before{content:attr(data-letter);position:absolute;top:18px;right:22px;
+  font-family:var(--mono);font-size:34px;font-weight:600;color:var(--rule);line-height:1}
+.d-title{font-family:var(--serif);font-size:clamp(26px,3.4vw,34px);font-weight:600;
+  line-height:1.15;letter-spacing:-.02em;margin:0 0 10px;text-wrap:balance;max-width:22ch}
+.d-sub{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--ink-soft);
+  margin:0 0 26px;max-width:52ch;line-height:1.45}
+.body{font-family:var(--serif);font-size:17.5px;line-height:1.62;max-width:65ch}
+.body p{margin:0 0 1.05em}
+.body .d-h{font-family:var(--sans);font-size:12px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--graphite);margin:2em 0 .7em;font-weight:600}
+.body blockquote{margin:1.2em 0;padding-left:18px;border-left:2px solid var(--pencil);
+  font-style:italic;color:var(--ink-soft)}
+.meta{margin-top:30px;padding-top:14px;border-top:1px solid var(--rule-soft);
+  font-family:var(--mono);font-size:11.5px;color:var(--graphite);
+  display:flex;gap:18px;flex-wrap:wrap;font-variant-numeric:tabular-nums}
+
+/* ---------- rail ---------- */
+.rail{position:sticky;top:78px;display:flex;flex-direction:column;gap:16px}
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:16px 16px 18px;
+  box-shadow:var(--shadow)}
+.panel h2{font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--graphite);margin:0 0 12px;font-weight:600}
+.buckets{display:grid;gap:7px}
+.bk{border:1px solid var(--rule);border-radius:5px;padding:9px 12px;text-align:left;
+  display:flex;align-items:center;gap:10px;font-size:14px;transition:background .12s,border-color .12s}
+.bk:hover{background:var(--rule-soft)}
+.bk .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.bk[data-k="keep"] .dot{background:var(--keep)} .bk[data-k="maybe"] .dot{background:var(--maybe)}
+.bk[data-k="cut"] .dot{background:var(--cut)}
+.bk kbd{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--graphite);
+  border:1px solid var(--rule);border-radius:3px;padding:1px 5px}
+.bk.on{border-color:var(--ink);background:var(--rule-soft);font-weight:500}
+textarea{width:100%;min-height:104px;resize:vertical;font-family:var(--sans);font-size:13.5px;
+  line-height:1.5;color:var(--ink);background:var(--paper);border:1px solid var(--rule);
+  border-radius:5px;padding:9px 10px}
+textarea::placeholder{color:var(--graphite)}
+.nav{display:flex;gap:8px}
+.nav button{flex:1;border:1px solid var(--rule);border-radius:5px;padding:9px;font-size:13.5px;
+  background:var(--card)}
+.nav button:hover{background:var(--rule-soft)}
+.nav button:disabled{opacity:.4;cursor:default}
+.go{width:100%;background:var(--pencil);color:var(--on-accent);border-radius:5px;padding:11px;font-weight:600;
+  font-size:14px}
+.go:disabled{background:var(--graphite);cursor:default}
+.hint{font-size:12.5px;color:var(--graphite);line-height:1.45;margin:10px 0 0}
+
+/* ---------- stage 2 / reveal ---------- */
+.stage{max-width:820px;margin:0 auto;padding:28px 24px 90px}
+.stage h2{font-family:var(--serif);font-size:26px;font-weight:600;margin:0 0 6px;letter-spacing:-.01em}
+.stage .lede{color:var(--graphite);margin:0 0 26px;max-width:60ch}
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rank li{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--rule);
+  border-radius:6px;padding:12px 14px;box-shadow:var(--shadow)}
+.rank .pos{font-family:var(--mono);font-size:12px;color:var(--graphite);width:24px;
+  font-variant-numeric:tabular-nums}
+.rank .L{font-family:var(--mono);font-weight:600;font-size:16px;width:22px}
+.rank .t{font-family:var(--serif);font-size:16px;flex:1;min-width:0;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.rank .mv{border:1px solid var(--rule);border-radius:4px;width:30px;height:28px;line-height:1}
+.rank .mv:hover{background:var(--rule-soft)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+.scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:6px;background:var(--card)}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--rule-soft);white-space:nowrap}
+th{font-family:var(--sans);font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--graphite);font-weight:600}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:none}
+.twin td{background:color-mix(in srgb,var(--pencil) 8%,transparent)}
+details{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:14px 16px;
+  margin-top:22px}
+summary{cursor:pointer;font-weight:600;font-size:14px}
+.out{font-family:var(--mono);font-size:12px;white-space:pre-wrap;word-break:break-word;
+  background:var(--paper);border:1px solid var(--rule);border-radius:5px;padding:12px;margin-top:12px;
+  max-height:340px;overflow:auto}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<header class="head">
+  <div class="head-in">
+    <span class="mast">Pencil &amp; Prompt · spread run</span>
+    <h1 id="hTitle">Blind read</h1>
+    <span class="note" id="hNote"></span>
+  </div>
+</header>
+
+<div id="stage1">
+  <div class="strip" id="strip"></div>
+  <div class="wrap">
+    <article class="sheet" id="sheet"></article>
+    <aside class="rail">
+      <div class="panel">
+        <h2>Bucket this draft</h2>
+        <div class="buckets">
+          <button class="bk" data-k="keep"><span class="dot"></span>Keep<kbd>1</kbd></button>
+          <button class="bk" data-k="maybe"><span class="dot"></span>Maybe<kbd>2</kbd></button>
+          <button class="bk" data-k="cut"><span class="dot"></span>Cut<kbd>3</kbd></button>
+        </div>
+        <p class="hint">First pass is triage, not ranking. You rank the Keep pile next.</p>
+      </div>
+      <div class="panel">
+        <h2>Flaws you caught</h2>
+        <textarea id="flaws" placeholder="One per line. Doubled words, dead phrases, anything that made you wince."></textarea>
+        <p class="hint">Counted per draft. This is the cheap stand-in for a rewrite.</p>
+      </div>
+      <div class="panel">
+        <h2>Move</h2>
+        <div class="nav">
+          <button id="prev">← Prev</button>
+          <button id="next">Next →</button>
+        </div>
+        <p class="hint" id="left"></p>
+      </div>
+      <button class="go" id="toRank" disabled>Rank the Keep pile</button>
+    </aside>
+  </div>
+</div>
+
+<div id="stage2" hidden class="stage">
+  <h2>Rank what you kept</h2>
+  <p class="lede">Best at the top. Only this order gets recorded; Maybe and Cut keep their bucket.</p>
+  <ul class="rank" id="rankList"></ul>
+  <button class="go" id="reveal" style="margin-top:22px">Submit and unseal</button>
+  <p class="hint">Unsealing shows which model wrote what, the analyzer numbers, and your published final. None of it is visible until now, on purpose.</p>
+</div>
+
+<div id="stage3" hidden class="stage">
+  <h2>Unsealed</h2>
+  <p class="lede" id="revNote"></p>
+  <div class="scroll"><table id="revTable"></table></div>
+  <details>
+    <summary>Your published final, for comparison</summary>
+    <div class="body" style="margin-top:16px"><!--__FINAL__--></div>
+  </details>
+  <details open>
+    <summary>Results to paste back</summary>
+    <div class="out" id="json"></div>
+  </details>
+</div>
+
+<script>
+const DRAFTS = /*__DATA__*/;
+const KEY = "spread-run-v1";
+let S = {b:{}, f:{}, order:null, i:0};
+try{const r=localStorage.getItem(KEY); if(r) S=Object.assign(S,JSON.parse(r));}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}};
+const $=id=>document.getElementById(id);
+
+function strip(){
+  const el=$("strip"); el.innerHTML="";
+  DRAFTS.forEach((d,n)=>{
+    const b=document.createElement("button");
+    b.className="chip"+(n===S.i?" here":""); b.textContent=d.letter;
+    if(S.b[d.letter]) b.dataset.b=S.b[d.letter];
+    b.setAttribute("aria-label",`Draft ${d.letter}${S.b[d.letter]?", "+S.b[d.letter]:", unrated"}`);
+    b.onclick=()=>{S.i=n;save();render();};
+    el.appendChild(b);
+  });
+  const done=Object.keys(S.b).length;
+  const t=document.createElement("span"); t.className="tally";
+  t.textContent=`${done} of ${DRAFTS.length} bucketed`; el.appendChild(t);
+}
+
+function render(){
+  const d=DRAFTS[S.i];
+  $("sheet").dataset.letter=d.letter;
+  $("sheet").innerHTML=`<div class="body">${d.html}</div>
+    <div class="meta"><span>Draft ${d.letter}</span><span>identity sealed</span>
+    <span>length, model and metrics hidden until you submit</span></div>`;
+  $("hNote").textContent=`Draft ${S.i+1} of ${DRAFTS.length}`;
+  $("flaws").value=S.f[d.letter]||"";
+  document.querySelectorAll(".bk").forEach(b=>b.classList.toggle("on",S.b[d.letter]===b.dataset.k));
+  $("prev").disabled=S.i===0; $("next").disabled=S.i===DRAFTS.length-1;
+  const keeps=DRAFTS.filter(x=>S.b[x.letter]==="keep").length;
+  const all=Object.keys(S.b).length===DRAFTS.length;
+  $("toRank").disabled=!(all&&keeps>0);
+  $("left").textContent=all?(keeps?`${keeps} in the Keep pile.`:"Nothing kept — bucket at least one Keep."):
+    `${DRAFTS.length-Object.keys(S.b).length} left to bucket.`;
+  strip();
+  window.scrollTo({top:0,behavior:"instant"});
+}
+
+document.querySelectorAll(".bk").forEach(btn=>btn.onclick=()=>{
+  const d=DRAFTS[S.i]; S.b[d.letter]=btn.dataset.k; save();
+  if(S.i<DRAFTS.length-1){S.i++;} render();
+});
+$("flaws").oninput=e=>{S.f[DRAFTS[S.i].letter]=e.target.value;save();};
+$("prev").onclick=()=>{S.i=Math.max(0,S.i-1);save();render();};
+$("next").onclick=()=>{S.i=Math.min(DRAFTS.length-1,S.i+1);save();render();};
+document.addEventListener("keydown",e=>{
+  if(e.target.tagName==="TEXTAREA"||$("stage1").hidden) return;
+  if(e.key==="1"||e.key==="2"||e.key==="3"){
+    document.querySelectorAll(".bk")[+e.key-1].click();
+  }
+  if(e.key==="ArrowLeft") $("prev").click();
+  if(e.key==="ArrowRight") $("next").click();
+});
+
+function rankUI(){
+  if(!S.order) S.order=DRAFTS.filter(d=>S.b[d.letter]==="keep").map(d=>d.letter);
+  const ul=$("rankList"); ul.innerHTML="";
+  S.order.forEach((L,n)=>{
+    const d=DRAFTS.find(x=>x.letter===L);
+    const li=document.createElement("li");
+    const title=new DOMParser().parseFromString(d.html,"text/html")
+      .querySelector(".d-title").textContent;
+    li.innerHTML=`<span class="pos">${n+1}</span><span class="L">${L}</span>
+      <span class="t">${title}</span>`;
+    const up=document.createElement("button"); up.className="mv"; up.textContent="↑";
+    up.setAttribute("aria-label",`Move ${L} up`); up.disabled=n===0;
+    up.onclick=()=>{[S.order[n-1],S.order[n]]=[S.order[n],S.order[n-1]];save();rankUI();};
+    const dn=document.createElement("button"); dn.className="mv"; dn.textContent="↓";
+    dn.setAttribute("aria-label",`Move ${L} down`); dn.disabled=n===S.order.length-1;
+    dn.onclick=()=>{[S.order[n+1],S.order[n]]=[S.order[n],S.order[n+1]];save();rankUI();};
+    li.append(up,dn); ul.appendChild(li);
+  });
+}
+$("toRank").onclick=()=>{$("stage1").hidden=true;$("stage2").hidden=false;
+  $("hTitle").textContent="Rank the keepers";$("hNote").textContent="";rankUI();
+  window.scrollTo({top:0,behavior:"instant"});};
+
+$("reveal").onclick=()=>{
+  $("stage2").hidden=true;$("stage3").hidden=false;
+  $("hTitle").textContent="Unsealed";
+  const rows=DRAFTS.map(d=>{
+    const rank=S.order.indexOf(d.letter);
+    const flaws=(S.f[d.letter]||"").split("\n").filter(x=>x.trim()).length;
+    return {...d, bucket:S.b[d.letter]||"—", rank:rank<0?null:rank+1, flaws};
+  }).sort((a,b)=>(a.rank||99)-(b.rank||99));
+  const twins=DRAFTS.filter(d=>d.model==="Claude Opus 5"&&d.samples==="full").map(d=>d.letter);
+  const tp=twins.map(L=>rows.find(r=>r.letter===L));
+  $("revNote").textContent=twins.length===2
+    ? `Drafts ${twins[0]} and ${twins[1]} are the same model on identical input — the noise floor. You placed them ${tp[0].rank||"unranked"} and ${tp[1].rank||"unranked"}.`
+    : "Identities and metrics below.";
+  const cols=["Rank","","Model","Harness","Samples","Bucket","Flaws","Words","Sent.","Mean","CV","MATTR","≤6w","≥35w"];
+  let h="<thead><tr>"+cols.map(c=>`<th>${c}</th>`).join("")+"</tr></thead><tbody>";
+  rows.forEach(r=>{const m=r.metrics||{};
+    h+=`<tr class="${twins.includes(r.letter)?"twin":""}">`+
+      `<td class="n">${r.rank??"—"}</td><td class="n"><strong>${r.letter}</strong></td>`+
+      `<td>${r.model}</td><td>${r.harness}</td><td>${r.samples}</td><td>${r.bucket}</td>`+
+      `<td class="n">${r.flaws}</td><td class="n">${r.words}</td><td class="n">${m.sentences??"—"}</td>`+
+      `<td class="n">${m.mean??"—"}</td><td class="n">${m.cv??"—"}</td><td class="n">${m.mattr||"—"}</td>`+
+      `<td class="n">${m.short??"—"}</td><td class="n">${m.long??"—"}</td></tr>`;});
+  $("revTable").innerHTML=h+"</tbody>";
+  $("json").textContent=JSON.stringify({buckets:S.b,ranking:S.order,flaws:S.f},null,2);
+  window.scrollTo({top:0,behavior:"instant"});
+};
+render();
+</script>

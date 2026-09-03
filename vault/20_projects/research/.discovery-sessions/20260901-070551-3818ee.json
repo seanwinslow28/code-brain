@@ -1,0 +1,36 @@
+{
+  "id": "20260901-070551-3818ee",
+  "topic": "licensing risk when delivering AI-generated work to clients",
+  "lens": "pm",
+  "tier": "deep",
+  "segment": "freelance creatives, agencies, and studios",
+  "evidence_count": 26,
+  "verified": 4,
+  "dropped": 0,
+  "merged_count": 0,
+  "cost_usd": 0.475,
+  "gather_status": {
+    "last30": "ok: 17 records (17 found)",
+    "sonar": "ok: 0 records (0 found)",
+    "web": "ok: 6 records (6 found)",
+    "reviews": "ok: 3 records (3 found)",
+    "github": "ok: 0 records (0 found)",
+    "qa": "ok: 0 records (0 found)"
+  },
+  "blind_spots": [
+    "The freelancer evidence is anecdotal and comes from a single Reddit discussion; prevalence across the market is unknown.",
+    "The technical API excerpts do not establish a licensing pain point, despite appearing in an article about licensing traps.",
+    "Ownership and copyrightability of AI-generated outputs are not directly addressed.",
+    "The evidence does not specify recommended indemnity, disclosure, attribution, audit-trail, or model-training consent clauses.",
+    "The evidence does not identify specific AI vendor license terms, commercial-use restrictions, or differences between free and paid plans.",
+    "There is no evidence of an actual infringement claim, takedown, client dispute, denied insurance claim, or financial loss arising from an AI-generated deliverable.",
+    "No evidence establishes who should bear licensing risk among freelancer, agency, client, and AI vendor."
+  ],
+  "contradictions": [],
+  "supplement": null,
+  "verify_mode": "nli",
+  "citation_precision": 1.0,
+  "citation_recall": 0.75,
+  "velocity_mode": "off",
+  "why_now_coverage": 0.0
+}

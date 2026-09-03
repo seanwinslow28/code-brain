@@ -1,0 +1,287 @@
+# Spread run — session 1 record (2026-09-01)
+
+Ticket: [#221](https://github.com/seanwinslow28/code-brain/issues/221). Map: [#158](https://github.com/seanwinslow28/code-brain/issues/158).
+Predecessor: [`../rules-off-experiment/session-record.md`](../rules-off-experiment/session-record.md).
+
+**The question.** Hold the inputs constant and vary the writer. How much of Arm B's 86%
+hand-rewrite survival is the *configuration*, and how much is the *writer*? And is there a
+fallback tier if the primary writer is unavailable?
+
+## Design, as ratified in session
+
+Every decision below was put to Sean one at a time and answered before anything ran.
+
+| Decision | Ruling | Why |
+|---|---|---|
+| Transcript | **#2, `deleted-the-author-modes`** | The only transcript with two known scores on the same words (rules-on control 25%, Arm B 86%). A spread with no anchor is a spread against nothing. |
+| Blinding | **No prior hand-rewrite in any arm** | Arm B's 86% was produced blinded. Hand a model the finished prose and it converges toward it, so the spread compresses and you measure who copies best. Verified before firing: no line of `arm-b-sean-final.md` appears in `voice-samples.md`, the corpus, or either bundle. |
+| Noise floor | **Two identical Opus 5 arms, hidden from the reader** | Arms A and B differed in *prompt*, never in nothing. Without a within-model variance measurement, every vendor gap is uninterpretable. |
+| Roster | **7 vendors** | Vendor spread beats sibling spread. Two vendors is one comparison and a possible fluke. |
+| Harness axis | **GPT-5.5 in two harnesses** | The only model on this machine reachable both agentically (Codex CLI) and single-shot (API). No Anthropic API key exists, so Opus cannot be run in two harnesses. Arms 3/4 calibrate the offset that lets the single-shot arms be read against the agentic anchor. |
+| Sample folding | **One stripped-samples arm on the incumbent** | Turned from an arbitrary trim into a principled one by the #224 finding. Inherits the twins as its noise floor for free. |
+| Measurement | **Blind two-stage read, rewrite the winner only, flaw-count on all** | Human ranking degrades past ~7 items; triage-then-rank scales. One survival number on the 86/64/38/25 scale. |
+| Closure | **Rank + survival %** | The #163 pattern: close on the machine's evidence, not on the publish. |
+
+## Setup
+
+Identical across all twelve arms: transcript #2, the standing shaping context, the one
+claims-locked substance law, `there are no style rules to follow`, and the Substack deliverable
+form. Prompt at [`PROMPT.md`](PROMPT.md) (single-shot) and `PROMPT-agentic-*.md` (file-list form).
+
+**The prompt is a faithful reconstruction, not the original.** The Arm B prompt was never saved to
+disk; the session record only paraphrased it. It was rebuilt from `content-machine/SKILL.md`'s
+standing "The shaping context" spec plus the predecessor record's Arm B description. This is a real
+limitation on comparing to 86% and is recorded rather than smoothed over. **Save the prompt with the
+run from now on.**
+
+Context bundle: **37,882 words / 56,487 tokens**. The stripped variant is 35,148 words.
+
+## Privacy controls
+
+Every OpenRouter call was pinned to `provider.data_collection: "deny"`, with `zdr: true` where a
+zero-retention endpoint existed, and the three Chinese-lab open-weight arms additionally restricted
+to a US-host allowlist (Fireworks / Together / BaseTen / DeepInfra / Parasail / Modal / CoreWeave).
+Verified empirically before the run, not assumed: a probe call to GLM 5.3 under those flags routed
+to Fireworks, not Z.AI.
+
+**Gemini has no ZDR endpoint at all** and hard-failed the first attempt with HTTP 404. It ran on the
+fallback tier — non-collecting, first-party Google — which is a real and deliberate weakening of the
+control for that one arm.
+
+## The arms
+
+| # | Model | Harness | Samples | Result |
+|---|---|---|---|---|
+| 1 | Claude Opus 5 | Claude Code subagent | full | 914 w |
+| 2 | Claude Opus 5 | Claude Code subagent | full | 945 w — **hidden twin** |
+| 3 | GPT-5.5 | Codex CLI (agentic) | full | 872 w |
+| 4 | GPT-5.5 | OpenRouter (single-shot) | full | 764 w |
+| 5 | Gemini 3.1 Pro | OpenRouter | full | 775 w (ZDR fallback) |
+| 6 | Grok 4.6 | OpenRouter | full | 628 w |
+| 7 | Kimi K3 | OpenRouter (Fireworks, US) | full | 1,012 w — on retry |
+| 8 | GLM 5.3 | OpenRouter (DeepInfra, US) | full | **FAILED — see finding 2** |
+| 9 | DeepSeek v4 Pro | OpenRouter, US host | full | 928 w |
+| 10 | Mistral Large 2512 | OpenRouter | full | 670 w |
+| 11 | Claude Opus 5 | Claude Code subagent | **stripped** | 1,062 w |
+| 12 | Qwen3.6 35B-A3B | local Ollama @ 64K | full | 720 w — **$0** |
+
+## Findings before the read
+
+These do not depend on Sean's ranking and are already banked.
+
+**1. A $0 local fallback tier exists, with two conditions nobody had established.**
+qwen3.6 35B-A3B held all 56,245 prompt tokens at 64K context on a 48 GB machine (24.1 GB resident)
+and wrote a real 720-word essay in 182 seconds. But the stock `qwen3.6_35b-a3b-32k` Modelfile caps
+context at **32K and could not have held the bundle at all** — the model's native limit is 262,144,
+so the cap is ours, not the model's. And on the first attempt it burned all 4,000 output tokens
+reasoning and returned an **empty string**; it needed 20,571 characters of thinking headroom before
+a single word of essay appeared.
+
+**2. Reasoning models are a live blind spot in headless drafting, and it bills for nothing.**
+Four of the five thinking models returned zero words on the first pass against an 8,000-token output
+budget that was generous for every non-reasoner — the essay is ~900 words. The reasoning is not
+inside that budget in any useful sense: Kimi needed **63,933 characters** of thinking before its
+first word of prose, and the local model needed 20,571. Raising the ceiling to 32,000 recovered
+Kimi (1,012 w, $0.606, the most expensive arm) and the local arm (720 w, $0).
+
+**GLM 5.3 is a genuine negative result, not a mis-configuration.** Two attempts:
+
+| Attempt | Cap | Completion tokens | Reasoning chars | Finish | Words | Cost |
+|---|---:|---:|---:|---|---:|---:|
+| 1 | 8,000 | 8,000 | — | cap | 0 | $0.098 |
+| 2 | 32,000 | **32,000** | **135,628** | `length` | 0 | $0.194 |
+
+Quadrupling the budget quadrupled the spend and produced the same zero words. It does not terminate
+on this task. **$0.291 for nothing**, and no third attempt was made unilaterally.
+
+The generalizable defect: a drafting harness that treats `max_tokens` as an essay budget will
+silently emit empty drafts and real invoices on any reasoning model, and a runaway reasoner will
+consume the entire ceiling you give it. Grok 4.6 masked this only because xAI's endpoint accounts
+for reasoning outside the cap. Nothing in the content machine currently guards either case.
+
+**3. Five of the first six arms independently reached for the same beat.** Different vendors,
+different harnesses, no shared context beyond the transcript, and the sisters moment landed in the
+title or subtitle of nearly all of them. The transcript's strongest beat appears to dominate writer
+choice — which, if it holds across the full twelve, says the interview matters more than the writer.
+
+**4. The harness built a privacy exposure and it was caught before the first commit.**
+To give the single-shot arms byte-identical input, the run assembled `context-full.md` — a verbatim
+concatenation of the interview transcript, all six corpus files, `voice-samples.md` and
+`reference-universe.md`, **every one of them git-ignored** — into
+`vault/20_projects/substack-studio/spread-run/`, which is a **tracked public path**. 37,882 words of
+private material, one `git add -A` away from a public repo. Nothing was committed; the directory was
+still entirely untracked when this was found.
+
+Fixed the way #160 and #169 fixed theirs: three targeted rules under the `.gitignore` private-layer
+block, then a **canary** proving `git add` actually refuses all three, then a probe of 16 randomly
+sampled private strings against `git grep` (tracked files only) — 15 clean. The 16th is pre-existing
+and runs the other way: `corpus/03-prose-anchors.md` was built *from* Sean's published Start Here
+page, so his own published prose appearing in a tracked page is not a leak.
+
+The generalizable rule: **a derived file inherits the privacy class of its most private input**, and
+nothing in the machine enforced that. Assembling private files into a bundle silently stripped their
+ignore rules, because ignore rules attach to paths and this was a new path.
+
+## The read (2026-09-02)
+
+Results: [`blind-read-results.json`](blind-read-results.json). Letters unsealed only after submission.
+
+| | Model | Harness | Samples | Bucket | Rank |
+|---|---|---|---|---|---|
+| **D** | **Claude Opus 5** | Claude Code subagent | full | **keep** | **1** |
+| B | Grok 4.6 | OpenRouter | full | keep | 2 |
+| A | Claude Opus 5 | Claude Code subagent | **stripped** | keep | 3 |
+| F | Qwen3.6 35B-A3B | local Ollama @64K | full | keep | 4 |
+| H | Gemini 3.1 Pro | OpenRouter | full | keep | 5 |
+| C | GPT-5.5 | OpenRouter | full | maybe | — |
+| E | Kimi K3 | OpenRouter | full | maybe | — |
+| G | GPT-5.5 | Codex CLI | full | cut | — |
+| I | Mistral Large 2512 | OpenRouter | full | cut | — |
+| **J** | **Claude Opus 5** | Claude Code subagent | full | **cut** | — |
+| K | DeepSeek v4 Pro | OpenRouter | full | cut | — |
+
+**Read caveat, his:** the ranking stage gave no way to re-open a draft, so he ranked the keep pile
+from memory. He stands behind **D** as the winner and states the order below it is skewed. The
+**buckets** were set while every draft was readable and are the reliable data. Console defect, not
+a reader defect; the ordering below D is not used for any claim here.
+
+## What the run actually found
+
+**1. The noise floor swamps the vendor spread. This is the finding.**
+**D and J are the same model, the same harness, byte-identical input and the same prompt** — two
+Opus 5 runs differing only in session. He ranked D **first of eleven** and **cut** J. Within-model
+variance spans the entire range of his judgment, which means **every vendor gap in this experiment
+is uninterpretable against it**. The slot spent on a hidden twin is the only reason we know that,
+and without it this run would have shipped a confident vendor ranking built on dice.
+
+The ticket asked how much of 86% is the configuration and how much is the writer. The answer this
+run supports is **neither, substantially** — the same writer in the same configuration produced his
+favourite draft and a cut draft on the same afternoon.
+
+**2. The analyzer cannot see what he sees, and the twins prove it.**
+
+| | D (rank 1) | J (cut) |
+|---|---:|---:|
+| mean sentence | 13.71 | 13.86 |
+| CV | 0.623 | 0.664 |
+| MATTR | 0.858 | 0.843 |
+
+Metrically indistinguishable; opposite ends of his judgment. Independent corroboration of #219's
+retirement of the analyzer gates, arriving from a direction #219 could not have tested: not "the
+metric fires at chance against survival" but "the metric reports two drafts as identical when the
+author considers one the best of eleven and the other unusable."
+
+**3. The difference is beat integration, not sentence quality.**
+D puts the Kerouac observation *inside* the ferry scene: "watching Kerouac keep a single sentence
+going long enough to punch me in the face four times." J stops the scene to explain Kerouac in a
+standalone declarative, then cannot get back — "I'd found Nate B. Jones' YouTube around then too" —
+which is precisely what he flagged. Same writer, same inputs, and the whole gap is where the beat
+sits. That is `storytelling-architecture` territory and invisible to every instrument we own.
+
+**4. Three vendors independently made the same structural mistake.**
+The mother/sisters ordering defect was flagged on **C (GPT-5.5), E (Kimi K3) and J (Opus 5)** — three
+labs, same paragraph, same error: the punchlines-land-on-mother-and-sisters line followed by the
+Mom-callback-in-a-technical-essay line, which re-introduces something already introduced. Model
+independence makes this a property of **the material's beat order**, so the remedy is an interview
+instruction and a `storytelling-architecture` lesson, never a model choice.
+
+**5. The corpus teaches the em-dash ban with no rule stating it.**
+The shaping context contains no style rules of any kind and never mentions em-dashes. Eight of
+eleven drafts still returned **zero**. The two that did not were Mistral (10) and DeepSeek (9), and
+both were cut; the local model used 2. This is the rules-off premise working as designed — voice
+induced from samples rather than complied into — and it is the first measurement of it across
+vendors.
+
+**6. The $0 local tier is a real fallback.** qwen3.6 35B-A3B placed **4th of 11 and made the keep
+pile**, beating both GPT-5.5 arms, DeepSeek, Mistral, and one of the two Opus runs, at $0 and 182
+seconds.
+
+**7. The stripped-samples arm placed 3rd and made the keep pile.** Cutting #160's quarantined 2,734
+words from `voice-samples.md` did not hurt the draft. Live evidence for #224, though note finding 1:
+one draft against a noise floor this wide is suggestive, not conclusive.
+
+**8. Harness axis: no claim.** GPT-5.5 was `maybe` single-shot (C) and `cut` agentic (G). n=1 per
+cell against a noise floor that spans the whole range. Recorded, not concluded.
+
+## Design implication, for Sean to rule
+
+If two runs of the same model land at rank 1 and cut, then **a machine that generates one draft is
+gambling**, and the cheapest available fix is to generate two or three candidates per piece from the
+incumbent and let him pick — which is what this run accidentally demonstrated. That is candidate
+*selection*, explicitly not the score-until-good revision loop L8 bans: machines write candidates,
+the author ratifies. It would change stage 3 of the machine and is his call, not this ticket's.
+
+## The survival number (2026-09-02)
+
+Sean hand-rewrote D. `diff_pieces.py`: **44 of 70 sentences untouched — 62.9%**, 11 change blocks.
+His rewrite: [`sean-final.md`](sean-final.md).
+
+| Run | Config | Survival |
+|---|---|---:|
+| run #2 | rules-on | 25% |
+| run #3 | rules-on | 38% |
+| ep. 1 | rules-on | 64% |
+| Arm B | rules-off, blinded | **86%** |
+| **D (this run)** | rules-off, blinded | **62.9%** |
+
+**Read it with the confound, which grew between the two measurements.** Of the 23 sentences he added
+to D, **6 are verbatim from his earlier Arm B final** — a document D was deliberately blinded to. In
+his words: *"I just made similar changes to the ones that I made in a previous transcript 2 edit."*
+Under production rules the shaper would have had that prior hand-rewrite (shaping-context rule 6
+exists for exactly this), so those six are very likely not changes a production run would have
+incurred. Crediting them gives an **estimated ~71%**, stated as an estimate and not a measurement.
+
+**The conclusion is methodological, and it retires the substrate: transcript #2 is spent.**
+He now holds three finals of this story. Every further blinded draft is scored against an
+accumulating set of settled decisions it cannot see, and the penalty compounds with each pass. The
+blinding that made 86% comparable is now the thing suppressing the number. **A story the author has
+already finalized cannot be used to measure survival again** — a re-run measures his memory, not the
+machine. Any future spread work needs a fresh transcript, which also means it cannot be anchored,
+which is the trade #221 chose deliberately and has now used up.
+
+Note this does **not** rescue a vendor ranking. Finding 1 stands: the within-model noise floor spans
+rank-1-to-cut, so 62.9% and 86% are two draws from a distribution nobody has characterised, on a
+substrate that changed underneath them. Neither number should be quoted as the machine's score.
+
+### Two things his rewrite confirmed independently
+
+**The mother/sisters defect is real and he fixed it the way his own flaw notes prescribed** — split
+into "The punch lines kept coming back aimed at my wacky sisters." and a standalone "I'm an only
+child." Flagged on C, E and J by three different vendors, then corrected by hand here: **four
+independent confirmations**. It is a beat-order property of the material, so it routes to the
+interview and to `storytelling-architecture`, never to model selection.
+
+**His inventions are durable.** The hot-cocoa/Mother detail appears in no transcript, no corpus file
+and no sample. It arrived at his Arm B rewrite (recorded there as a fresh invention, L3-05) and came
+back **verbatim** here. L3-05 said the best material arrives at the rewrite; this adds that once it
+arrives it persists across rewrites, which is an argument for routing rewrite inventions into the
+corpus rather than treating each one as a one-off.
+
+### Not done here, on purpose
+
+The 11 change blocks were **not** proposed into the lessons ledger. The lessons loop is for shipped
+pieces, and this is an experimental re-draft of an already-published story; seeding pending
+candidates from it would pollute the ledger with edits that are partly re-imports rather than
+reactions. Sean's call if he wants them.
+
+## Instruments
+
+`analyze.py` (writing-critique dashboard, verified in-session: it reproduces the predecessor record's
+Arm B row exactly), `origin_check.py` (claims tier, advisory per L8), `diff_pieces.py` for the
+survival number on the winner. All $0, all local. Costs recorded from live API responses in
+[`costs.json`](costs.json), never estimated. **Total spend $1.3988** against a ~$1.00 estimate; the
+overrun is Kimi's $0.606 and GLM's $0.291 of nothing.
+
+## Open
+
+- Sean's blind two-stage read via [`console.html`](console.html) — **11 arms, letters A–K** —
+  published as an artifact. Letters sealed in `SEALED-MAPPING.json` (seeded shuffle, not opened
+  before the read).
+- **Whether GLM 5.3 gets a third attempt** with `reasoning.effort` lowered rather than the budget
+  raised. Sean's call: it would change the mechanism rather than the budget, which makes that arm
+  non-comparable to the other ten, so the honest default is to keep the negative result.
+- His hand-rewrite of the winner, then `diff_pieces.py` for the survival %.
+- **De-blinding hazard, recorded:** word counts per arm were visible in session before the read.
+  They were removed from the console's blind view and moved behind the reveal, but a determined
+  reader could still match a remembered length to a draft. Next run: do not surface per-arm word
+  counts until after ranking.

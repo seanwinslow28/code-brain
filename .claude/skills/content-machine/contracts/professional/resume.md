@@ -65,8 +65,7 @@ know what this document is for.
 
 ## Gates, in order
 
-Value → structure → shape → critique → humanity (neutral register) → **origin (blocks)** →
-do-not-promote.
+**Post-draft and advisory as of 2026-08-31** (the rules-off re-scope: nothing below is a drafting-time constraint any more). Order: **origin (claims tier) → do-not-promote + coined-lines sweep → humanity scrub → critique / analyzer**. Professional lane: **origin blocks delivery** while any claim is untraced.
 
 `writing-humanity-pass` runs its **FULL** scrub here, not voice-safe: plain neutral register is the
 correct human voice for this document, and there are no signature moves to protect.

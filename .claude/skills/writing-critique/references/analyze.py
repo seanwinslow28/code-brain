@@ -56,6 +56,14 @@ MIN_MATTR_TOKENS = 60
 # stronger signal, is not available in stdlib).
 CV_MONOTONY_FLAG = 0.45
 
+# Short/long sentence shares. The pair that most cleanly separates Sean's two
+# series (Raising Agents runs a 43% short share and no long sentences at all;
+# Pencil & Prompt runs 10-20% short and 3-9% long). Added by #219 because every
+# register discussion since the rules-off experiment reached for these numbers
+# and computed them by hand outside the tool. Report-only, like everything else.
+SHORT_MAX = 6
+LONG_MIN = 35
+
 WORD_RE = re.compile(r"[A-Za-z]+(?:'[A-Za-z]+)?")
 SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?])\s+")
 
@@ -135,7 +143,8 @@ def sentence_length_stats(sentences: list[str]) -> dict:
     n = len(lengths)
     if n == 0:
         return {"n": 0, "mean": None, "median": None, "min": None, "max": None,
-                "pstdev": None, "cv": None, "monotony_flag": False,
+                "pstdev": None, "cv": None, "short_share": None,
+                "long_share": None, "monotony_flag": False,
                 "note": "no sentences found"}
     mean_value = statistics.fmean(lengths)
     pstdev_value = statistics.pstdev(lengths) if n > 1 else 0.0
@@ -148,6 +157,8 @@ def sentence_length_stats(sentences: list[str]) -> dict:
         "max": max(lengths),
         "pstdev": round(pstdev_value, 2),
         "cv": round(cv, 3) if cv is not None else None,
+        "short_share": round(100 * sum(1 for x in lengths if x <= SHORT_MAX) / n, 1),
+        "long_share": round(100 * sum(1 for x in lengths if x >= LONG_MIN) / n, 1),
         "monotony_flag": cv is not None and cv < CV_MONOTONY_FLAG,
         "note": ("insufficient length for variance signal (need >= 2 sentences)"
                  if n < 2 else None),
@@ -339,11 +350,16 @@ def emit_baseline(corpus_path: str, out_path: str) -> dict:
     raw = Path(corpus_path).read_text(encoding="utf-8", errors="ignore")
     body = strip_frontmatter_and_fences(raw)
     segments = segment_corpus(body) or [body]
-    buckets = {"cv": [], "mattr": [], "first_person_rate": [], "opener_other_pct": []}
+    buckets = {"cv": [], "mattr": [], "first_person_rate": [], "opener_other_pct": [],
+               "mean_len": [], "short_share": [], "long_share": []}
     for seg in segments:
         m = metrics_from_raw(seg)
         if m["sentence_length"]["cv"] is not None:
             buckets["cv"].append(m["sentence_length"]["cv"])
+        for key, src in (("mean_len", "mean"), ("short_share", "short_share"),
+                         ("long_share", "long_share")):
+            if m["sentence_length"][src] is not None:
+                buckets[key].append(m["sentence_length"][src])
         if m["lexical_diversity"]["mattr"] is not None:
             buckets["mattr"].append(m["lexical_diversity"]["mattr"])
         if m["pronouns"]["first_person_rate"] is not None:
@@ -356,10 +372,12 @@ def emit_baseline(corpus_path: str, out_path: str) -> dict:
             metrics[key] = {
                 "mean": round(statistics.fmean(vals), 4),
                 "stdev": round(statistics.pstdev(vals), 4) if len(vals) > 1 else 0.0,
+                "min": round(min(vals), 4),
+                "max": round(max(vals), 4),
                 "n": len(vals),
             }
     baseline = {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_from": Path(corpus_path).name,
         "mattr_window": MATTR_WINDOW,
         "segments": len(segments),
@@ -386,6 +404,17 @@ def baseline_flags(metrics: dict, baseline: dict) -> list[str]:
     still separates the machine draft from his hand-rewrite of the same piece.
     opener_other_pct was the last false-positive source, so it reports and never
     flags.
+
+    Why the list is now EMPTY (#219, 2026-09-01). The gate lost its customer and
+    its evidence in the same week. The rules-off ruling retired the headless
+    revise route, so nothing downstream reads a flag; and tested against the only
+    outcome that matters -- whether Sean kept the draft -- MATTR was at chance
+    over four runs (fired on ep1 at 64% survival and run3 at 38%, stayed quiet on
+    run2 at 25% and armB at 86%). CV and first-person were never live at all: on
+    this corpus they fire below 0.348 and 1.76, and nothing measured has ever come
+    within reach. So every metric is report-only and prints with its band instead.
+    This function is kept, not deleted: the gate shape still lives in the baseline,
+    so re-arming a metric is a one-line data edit, not a code change.
     """
     flags: list[str] = []
     bm = baseline.get("metrics", {})
@@ -457,6 +486,8 @@ def print_report(metrics: dict, flags: list[str], has_baseline: bool) -> None:
         print(f"  CV (sigma/mu): {sl['cv']}"
               + ("   [FLAG: monotonous, CV < %.2f]" % CV_MONOTONY_FLAG
                  if sl["monotony_flag"] else ""))
+        print(f"  <={SHORT_MAX}-word share: {sl['short_share']}%   "
+              f">={LONG_MIN}-word share: {sl['long_share']}%")
         if sl["note"]:
             print(f"  note: {sl['note']}")
         print()
@@ -502,12 +533,87 @@ def print_report(metrics: dict, flags: list[str], has_baseline: bool) -> None:
         print("  (no baseline supplied: only CV is flagged absolutely; "
               "MATTR/pronouns need a baseline to flag)")
     elif not flags:
-        print("  (within your baseline ranges)")
+        print("  (no metric is gated -- see Bands below)")
     else:
         for f in flags:
             print(f"  - {f}")
     print()
     print("  Analyzer is advisory. It informs the revise decision; it never blocks.")
+
+
+# --- Bands -----------------------------------------------------------------
+
+# The dashboard rows, in print order: (baseline key, label, draft-value lookup).
+BAND_ROWS = [
+    ("mean_len", "mean sentence length", lambda m: m["sentence_length"]["mean"]),
+    ("cv", "CV (burstiness)", lambda m: m["sentence_length"]["cv"]),
+    ("short_share", f"<={SHORT_MAX}-word share %", lambda m: m["sentence_length"]["short_share"]),
+    ("long_share", f">={LONG_MIN}-word share %", lambda m: m["sentence_length"]["long_share"]),
+    ("mattr", f"MATTR@{MATTR_WINDOW}", lambda m: m["lexical_diversity"]["mattr"]),
+    ("first_person_rate", "first-person rate %", lambda m: m["pronouns"]["first_person_rate"]),
+    ("opener_other_pct", "opener 'other' %", lambda m: m["openers"]["other_pct"]),
+]
+
+
+def _range_cell(stat: dict | None, floor: int = 1) -> str:
+    """Render one band cell. Below `floor` observations there is no range to show,
+    only points -- a single piece dressed up as a range is exactly how the
+    contaminated 2026-05 baseline read as authoritative on one sample (#177)."""
+    if not stat:
+        return "-"
+    if stat.get("n", 0) < floor:
+        return "-"
+    lo, hi = stat.get("min"), stat.get("max")
+    if lo is None or hi is None:
+        return f"mean {stat['mean']} (n={stat['n']})"
+    return f"{round(lo, 3)}-{round(hi, 3)} (n={stat['n']})"
+
+
+def print_bands(metrics: dict, baseline: dict | None, rewrite: dict | None) -> None:
+    """The dashboard (#219). Every number report-only, each beside two bands:
+    Sean's prose written outside this machine, and his hand-rewrites through it.
+    Nothing here is a verdict, and nothing downstream reads it."""
+    print("## Bands -- report-only, nothing here is a verdict")
+    if not baseline and not rewrite:
+        print("  (no baseline and no rewrite band supplied)\n")
+        return
+    bm = (baseline or {}).get("metrics", {})
+    series = (rewrite or {}).get("series", {})
+    floor = (rewrite or {}).get("n_floor", 3)
+    named = [(name, blk) for name, blk in series.items() if blk.get("n", 0) >= floor]
+    points = [(name, blk) for name, blk in series.items() if blk.get("n", 0) < floor]
+
+    head = f"  {'':<24}{'this draft':>12}   {'outside the machine':<26}"
+    for name, _ in named:
+        head += f"{name + ' rewrites':<28}"
+    print(head.rstrip())
+    for key, label, get in BAND_ROWS:
+        try:
+            val = get(metrics)
+        except (KeyError, TypeError):
+            val = None
+        cell = "-" if val is None else (
+            f"{round(val, 3):g}" if isinstance(val, float) else str(val))
+        row = f"  {label:<24}{cell:>12}   {_range_cell(bm.get(key)):<26}"
+        for _, blk in named:
+            row += f"{_range_cell(blk.get('metrics', {}).get(key)):<28}"
+        print(row.rstrip())
+
+    for name, blk in points:
+        pieces = blk.get("pieces", [])
+        print(f"\n  {name}: n={blk.get('n', 0)}, below the n>={floor} floor -- "
+              f"points, not a band")
+        for pc in pieces:
+            vals = ", ".join(
+                f"{label} {pc['metrics'].get(key)}"
+                for key, label, _ in BAND_ROWS if pc.get("metrics", {}).get(key) is not None)
+            print(f"    {pc.get('label', '?')}: {vals}")
+
+    prov = (baseline or {}).get("provenance", {})
+    if prov.get("ruled"):
+        print(f"\n  Outside-the-machine band: {bm.get('cv', {}).get('n', '?')} segments, "
+              f"unchanged since {prov['ruled']}. A yardstick that has not moved is a feature.")
+    print()
 
 
 def main() -> int:
@@ -517,6 +623,9 @@ def main() -> int:
     p.add_argument("--emit-baseline", help="corpus.md to compute a baseline from")
     p.add_argument("--out", help="output path for --emit-baseline (default: sibling baseline.json)")
     p.add_argument("--json", action="store_true", help="machine-readable output")
+    p.add_argument("--rewrite-band", nargs="?", const="", default=None,
+                   help="rewrite-band.json for the second dashboard band "
+                        "(bare flag uses the sibling file)")
     p.add_argument("--rep-window", type=int, default=5,
                    help="repetition paragraph window (NOT the MATTR token window)")
     args = p.parse_args()
@@ -541,7 +650,17 @@ def main() -> int:
 
     metrics = compute_metrics(str(path), args.rep_window)
     flags: list[str] = []
+    baseline = None
     has_baseline = False
+    rewrite = None
+    if args.rewrite_band is not None:
+        rw_path = Path(args.rewrite_band) if args.rewrite_band else \
+            Path(__file__).with_name("rewrite-band.json")
+        try:
+            rewrite = json.loads(rw_path.read_text(encoding="utf-8"))
+        except FileNotFoundError:
+            print(f"note: no rewrite band at {rw_path}; the second band is "
+                  "unavailable this run.", file=sys.stderr)
     if args.baseline:
         # A missing baseline degrades to the no-baseline path (absolute low-CV
         # advisory only). SKILL.md has always documented this fallback; until
@@ -559,9 +678,13 @@ def main() -> int:
             has_baseline = True
 
     if args.json:
-        print(json.dumps({"metrics": metrics, "baseline_flags": flags}, indent=2))
+        print(json.dumps({"metrics": metrics, "baseline_flags": flags,
+                          "bands": {"outside_the_machine": (baseline or {}).get("metrics"),
+                                    "through_the_machine": (rewrite or {}).get("series")}},
+                         indent=2))
     else:
         print_report(metrics, flags, has_baseline)
+        print_bands(metrics, baseline, rewrite)
     return 0
 
 

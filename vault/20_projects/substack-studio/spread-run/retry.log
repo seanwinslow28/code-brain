@@ -1,0 +1,9 @@
+[a05-gemini31pro] google/gemini-3.1-pro-preview ...
+    no ZDR endpoint; retrying non-collecting only
+    {"arm": "a05-gemini31pro", "model": "google/gemini-3.1-pro-preview", "provider": "Google", "words": 775, "seconds": 37.7, "prompt_tokens": 56662, "completion_tokens": 7096, "cost_usd": 0.198476, "reasoning_chars": 7847, 
+[a07-kimi-k3] moonshotai/kimi-k3 ...
+    {"arm": "a07-kimi-k3", "model": "moonshotai/kimi-k3", "provider": "Fireworks", "words": 1012, "seconds": 268.8, "prompt_tokens": 54215, "completion_tokens": 16076, "cost_usd": 0.6056775, "reasoning_chars": 63933, "finish
+[a08-glm53] z-ai/glm-5.3 ...
+    {"arm": "a08-glm53", "model": "z-ai/glm-5.3", "provider": "DeepInfra", "words": 0, "seconds": 1125.4, "prompt_tokens": 54621, "completion_tokens": 32000, "cost_usd": 0.1935452, "reasoning_chars": 135628, "finish": "lengt
+
+TOTAL THIS BATCH: $0.9977

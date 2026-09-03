@@ -84,7 +84,7 @@ The surface the [lane's first-screen test](LANE.md#the-first-screen-test) runs a
 
 ## Gates, in order
 
-Value → structure → shape → critique → humanity → origin → do-not-promote.
+**Post-draft and advisory as of 2026-08-31** (the rules-off re-scope: nothing below is a drafting-time constraint any more). Order: **origin (claims tier) → do-not-promote + coined-lines sweep → humanity scrub → critique / analyzer**.
 
 The origin check runs `gates/origin_check.py` plus the reading pass for recombination. Expressive
 lane advises and never blocks. The do-not-promote sweep runs `gates/coined_lines.py` alongside the

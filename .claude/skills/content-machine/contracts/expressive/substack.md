@@ -98,9 +98,12 @@ Inherited from `writing-voice-modes` G1–G5, restated because Substack drafts b
 
 ## Gates, in order
 
-Value → structure → shape → critique → humanity → origin → do-not-promote.
+**Post-draft and advisory as of 2026-08-31** (the rules-off re-scope: nothing below is a drafting-time constraint any more). Order: **origin (claims tier) → do-not-promote + coined-lines sweep → humanity scrub → critique / analyzer**.
+The **structure read** also runs here, post-draft and advisory, rather than as a stage the draft must pass through first.
 
-The **first-screen test** runs inside the shape gate, on the assembled draft. A failure returns as a
+**The value gate is the exception, and it runs BEFORE the interview** (corrected 2026-09-02, [#224](https://github.com/seanwinslow28/code-brain/issues/224)). This line previously swept it in with the rest. The 2026-08-31 re-scope retired the *drafting* chain to post-draft advisory; `substack-value-engine` was never a drafting stage, it is the publication's pre-writing hard block (substack-studio CLAUDE.md §3: *"Before a post is worth writing... If there is no real artifact, the gate blocks and the angle waits until Sean has done the work."*). A value gate run post-draft is not a gate — the interview and the draft have already been paid for by the time it answers. It clears at stage 1, and the Oracle's card bar is the same test one stage earlier still ([#227](https://github.com/seanwinslow28/code-brain/issues/227)).
+
+The **first-screen test** runs post-draft on the assembled draft (see LANE.md; the shape gate that used to host it is retired). A failure returns as a
 reorder, never as new material (see `LANE.md`). The **reply-hook memo** is not a gate at all; it is
 written after do-not-promote and travels with the ship packet.
 

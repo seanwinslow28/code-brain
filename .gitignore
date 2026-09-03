@@ -258,6 +258,23 @@ creative-studio/content-machine/cheese-bank/
 creative-studio/content-machine/reference-universe.md
 creative-studio/content-machine/do-not-promote.md
 creative-studio/content-machine/transcripts/
+# Spread-run (#221) assembled shaping contexts. `context-full.md` and
+# `context-stripped.md` are verbatim concatenations of the transcript, all six
+# corpus files, voice-samples.md and reference-universe.md — every one of them
+# ignored above — written into a TRACKED public path so single-shot API arms
+# could be given byte-identical input. `voice-samples-stripped.md` is likewise a
+# verbatim copy minus the quarantined sections (#224). The drafts, scripts,
+# measurements and session record in that folder stay tracked; these three
+# never do. Caught 2026-09-01 before the first commit.
+vault/20_projects/substack-studio/spread-run/context-full.md
+vault/20_projects/substack-studio/spread-run/context-stripped.md
+vault/20_projects/substack-studio/spread-run/voice-samples-stripped.md
+# Agentic-CLI reasoning traces. Codex's stderr quotes the private files it was
+# told to read — 240KB carrying the transcript, corpus excerpts and Sean's
+# verbatim answers. Any CLI that reads the private brain writes its own copy of
+# it into whatever log you capture. The OpenRouter/local logs here are clean
+# (JSON usage summaries only) and stay tracked.
+vault/20_projects/substack-studio/spread-run/codex.log
 # Coined-lines ledger (#162): the one-artifact rule needs a record of his best
 # lines and which piece spent each one. Public repo, so the record stays local.
 creative-studio/content-machine/coined-lines.md

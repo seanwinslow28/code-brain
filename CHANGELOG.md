@@ -7,6 +7,105 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added — the Oracle's frame stage and two decks (2026-09-03, #238; ruled on #227)
+
+Week 1 of the Oracle's probation produced twelve cards and zero picks, because the
+sweep supplied every noun and the Oracle could not propose a subject Sean had not
+already worked on. The rebuild ruled on #227 ships here; #239 carries the news lane
+and the listening report.
+
+- **The card bar moved**: a topic becomes a card when it names an *experiment he
+  could run*, not a thing he did. The evidence rule gains a second form — an
+  experiment card's `Evidence:` is its provocation, with `Status: unrun` — and a
+  card still never asserts he did something (the #169 core survives intact).
+- **New `content-oracle/frame_stage.py`**: four fresh, tool-denied `claude --print`
+  generators per run (two natives + one foreign + one wild; natives in the new
+  `references/frames.md`: off-label, falsifier, studio; foreign and wild by reference
+  to the creative-partner deck), each receiving only a stripped week summary, the
+  news gists, and its own lens card. No critic call; the in-session scoring pass is
+  the one judge. `inspect_payload` refuses to dispatch a summary carrying a path, an
+  email, a sha, or a line lifted verbatim from a daily, sidecar, corpus or
+  transcript; `--dry-run` prints the exact payload. 16 unit tests, no model calls.
+- **Two decks in `SKILL.md`**: *worth a piece this week* (the six signals, Spine veto
+  now stated as "a capture is required") and *worth posting* (angle / clock / fit /
+  image / reply-hook out of 15, Spine-X veto: an angle exists and it is not an
+  announcement; engagement questions score 0 on reply-hook; image scores only what
+  exists). One scoring pass, nothing ranked across decks; frame angles get no lane
+  of their own so they cannot launder past Spine. `Cuts to LinkedIn:` is a tag on
+  both decks and never an addend (L4 holds).
+- **The query table has two columns**: the "latest on X" ban is scoped to anchor
+  queries; the news lane is a NEWS-shaped pull by definition. "The sweep supplies
+  the nouns" now governs anchor queries only, and says why.
+- **Bank record** gains a lens column beside the query-shape column; the script
+  prints the stub.
+- Runtime-impact protocol followed: `content-machine/SKILL.md` stage table and
+  skill list, and the reminder email body, updated; registry entry
+  `oracle-sweep-supplies-every-noun` added; scan clean.
+
+
+### Changed — the writing-critique analyzer is a dashboard, not a gate (2026-09-01, #219)
+
+`flag_metrics` is now **empty**: no metric flags, every one reports beside its band.
+The gate lost its customer and its evidence in the same week. The rules-off ruling
+retired the headless revise route, so no code path reads a flag; and tested against
+the only outcome that matters — whether Sean kept the draft — MATTR was at chance
+over four runs (fired on ep1 at 64% survival and run3 at 38%, silent on run2 at 25%
+and Arm B at 86%). CV and first-person were never live at all: they fire below 0.348
+and 1.76, and nothing this machine or this author has produced comes near. As a
+dashboard the same instrument does separate the runs — the run-3 draft sits outside
+four of seven bands and he gutted it; the Arm B draft sits inside six and he kept 86%.
+
+- **Two bands, deliberately apart.** `baseline.json` is Sean's prose written
+  *outside* the machine (the yardstick, n=5, rebuilt only on his ruling).
+  New `references/rewrite-band.json` + `build_rewrite_band.py` hold his hand-rewrites
+  *through* it (the track record, recomputed every ship, `--check` like the baseline).
+  Keeping them apart lets the record grow without the yardstick ever being calibrated
+  on what it measures — the failure #177 was created to fix. Hand-rewrites never enter
+  the corpus band.
+- **Split by series, n≥3 floor.** Raising Agents runs a 43% short-sentence share and
+  no long sentences; Pencil & Prompt runs 10–20% and 3–9%. Pooling them is what made
+  "Sean's rewrites" look like an eight-word span anchored to nothing. A series under
+  three rewrites prints as points, never as a range.
+- **New metrics:** ≤6-word and ≥35-word sentence shares, in `analyze.py` and both
+  bands. Every register discussion since the rules-off experiment reached for these
+  and computed them by hand outside the tool.
+- `baseline.json` schema 1 → 2 (observed min/max per metric, plus the three new
+  sentence-shape metrics). Numbers for the existing metrics are unchanged; the
+  corpus and its five segments did not move.
+- **Rebuild triggers are now stated and different:** the rewrite band is maintenance
+  (one line in `SERIES`, rerun); the corpus band is a ruling Sean makes, stamped in
+  the provenance block, never a schedule. Adding to `voice-samples.md`,
+  `reference-universe.md`, `do-not-promote.md`, or a new corpus heading needs no
+  ruling and does not touch the gauge.
+- Analyzer tests 16 → 19, all passing.
+
+### Changed — content machine re-founded on the rules-off experiment (2026-08-31)
+
+Sean's run-#3 verdict ("you're summarizing and re-reading my brain dump notes back
+to me") triggered a research pause: a Lieberman source re-read, a field survey of
+shipped AI writing systems plus the instruction-count compliance literature, and
+craft research on the brain-dump-to-prose gap (notes at
+`vault/20_projects/research/2026-08-31-*`). All three legs converged: rules belong
+after the draft, not in the drafting context, and the origin law's cost was in
+banning texture while its value was in locking claims. A controlled A/B on
+transcript #2 (clean-context arms, no rule files; Arm B adding one
+claims-locked/texture-free rule) ended with Sean hand-rewriting Arm B at **86%
+sentence survival vs the rule-stack machine's best 64%** (record:
+`vault/20_projects/substack-studio/rules-off-experiment/session-record.md`).
+
+Ratified and applied:
+
+- `content-machine/SKILL.md` — the law re-scoped (substance transcript-locked,
+  texture is the writer's job), a clean shaping-context spec (fresh subagent;
+  roster/anti-patterns/licensing matrix/contracts banned from drafting context),
+  origin gate post-draft advisory on the claims tier, hand-rewrite stays
+  mandatory, and a new mechanical-only proofread step on Sean's final.
+- `writing-voice-modes/SKILL.md` — scope note: no longer the machine's Stage 3;
+  standalone voice work only; remains custodian of `voice-samples.md`.
+- `vault/20_projects/substack-studio/CLAUDE.md` §1 — the sequential five-skill
+  chain retired to post-draft advisory gates.
+- Run-#4 ledger entries (L4-01…L4-06) recorded; lessons remain the only rule
+  layer that grows.
 ### Fixed — knowledge-lint report privacy + config.local.toml override (2026-09-03)
 
 - **Knowledge Lint no longer writes private material into a tracked, public path.**

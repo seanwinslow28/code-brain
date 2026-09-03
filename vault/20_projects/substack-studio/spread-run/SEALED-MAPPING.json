@@ -1,0 +1,68 @@
+{
+  "A": {
+    "arm": "a11-opus5-cc-stripped",
+    "model": "Claude Opus 5",
+    "harness": "Claude Code subagent",
+    "samples": "stripped"
+  },
+  "B": {
+    "arm": "a06-grok46",
+    "model": "Grok 4.6",
+    "harness": "OpenRouter API",
+    "samples": "full"
+  },
+  "C": {
+    "arm": "a04-gpt55-api",
+    "model": "GPT-5.5",
+    "harness": "OpenRouter API",
+    "samples": "full"
+  },
+  "D": {
+    "arm": "a02-opus5-cc-twin",
+    "model": "Claude Opus 5",
+    "harness": "Claude Code subagent",
+    "samples": "full"
+  },
+  "E": {
+    "arm": "a07-kimi-k3",
+    "model": "Kimi K3",
+    "harness": "OpenRouter API",
+    "samples": "full"
+  },
+  "F": {
+    "arm": "a12-qwen36-local",
+    "model": "Qwen3.6 35B-A3B",
+    "harness": "local Ollama @64K",
+    "samples": "full"
+  },
+  "G": {
+    "arm": "a03-gpt55-codex",
+    "model": "GPT-5.5",
+    "harness": "Codex CLI",
+    "samples": "full"
+  },
+  "H": {
+    "arm": "a05-gemini31pro",
+    "model": "Gemini 3.1 Pro",
+    "harness": "OpenRouter API",
+    "samples": "full"
+  },
+  "I": {
+    "arm": "a10-mistral-lg",
+    "model": "Mistral Large 2512",
+    "harness": "OpenRouter API",
+    "samples": "full"
+  },
+  "J": {
+    "arm": "a01-opus5-cc",
+    "model": "Claude Opus 5",
+    "harness": "Claude Code subagent",
+    "samples": "full"
+  },
+  "K": {
+    "arm": "a09-deepseek-v4",
+    "model": "DeepSeek v4 Pro",
+    "harness": "OpenRouter API",
+    "samples": "full"
+  }
+}

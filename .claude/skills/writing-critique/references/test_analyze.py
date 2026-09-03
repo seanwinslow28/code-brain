@@ -96,7 +96,54 @@ def test_emit_baseline_has_mean_and_stdev_per_metric():
         assert bl["mattr_window"] == 50
         assert "cv" in bl["metrics"]
         assert "mean" in bl["metrics"]["cv"] and "stdev" in bl["metrics"]["cv"]
-        assert json.loads(out.read_text(encoding="utf-8"))["schema_version"] == 1
+        # Observed min/max, added by #219: the dashboard prints the range the
+        # segments actually occupy, not a +/-sigma envelope around their mean.
+        assert bl["metrics"]["cv"]["min"] <= bl["metrics"]["cv"]["max"]
+        # The register pair the rules-off experiment kept computing by hand.
+        for key in ("mean_len", "short_share", "long_share"):
+            assert key in bl["metrics"], key
+        assert json.loads(out.read_text(encoding="utf-8"))["schema_version"] == 2
+
+
+def test_short_and_long_shares_are_percentages_of_sentences():
+    # Five sentences: three <=6 words, one >=35, one in between.
+    text = ("Short one. Short two. Short three. "
+            + " ".join(f"word{i}" for i in range(40)) + ". "
+            + " ".join(f"mid{i}" for i in range(15)) + ".")
+    m = analyze.metrics_from_raw(text)["sentence_length"]
+    assert m["n"] == 5
+    assert m["short_share"] == 60.0
+    assert m["long_share"] == 20.0
+
+
+def test_empty_committed_gate_flags_nothing():
+    """The #219 ruling, asserted against the committed baseline rather than a
+    fixture: with flag_metrics empty, no draft can raise a flag however far it
+    sits from the band. Re-arming a metric stays a data edit."""
+    committed = json.loads(
+        (Path(__file__).with_name("baseline.json")).read_text(encoding="utf-8"))
+    assert committed["gate"]["flag_metrics"] == []
+    flat = _metrics(cv=0.01, mattr=0.05, fp=0.0, opener=0.0)
+    assert analyze.baseline_flags(flat, committed) == []
+
+
+def test_rewrite_band_holds_no_prose():
+    """Same discipline as baseline.json: aggregates and labels only. A verbatim
+    line leaking into a tracked file is how the contaminated baseline happened."""
+    path = Path(__file__).with_name("rewrite-band.json")
+    if not path.is_file():
+        return
+    band = json.loads(path.read_text(encoding="utf-8"))
+    for name, blk in band["series"].items():
+        for piece in blk["pieces"]:
+            assert set(piece) == {"label", "source", "metrics"}, (name, piece.keys())
+            assert all(isinstance(v, (int, float, type(None)))
+                       for v in piece["metrics"].values()), piece["label"]
+        # Below the floor there is no band, only points.
+        if blk["n"] < band["n_floor"]:
+            assert blk["metrics"] is None, name
+        else:
+            assert blk["metrics"] is not None, name
 
 
 def _metrics(cv=0.10, mattr=0.50, fp=0.1, opener=5.0):

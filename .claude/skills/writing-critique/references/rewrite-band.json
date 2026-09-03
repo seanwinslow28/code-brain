@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "generated_from": "vault/20_projects/substack-studio (aggregate statistics only)",
+  "n_floor": 3,
+  "ticket": "https://github.com/seanwinslow28/code-brain/issues/219",
+  "what_this_is": "Sean's hand-rewrites through the content machine. The track record, not the yardstick, and not a gate. Recomputed on every ship by adding one line to SERIES in build_rewrite_band.py.",
+  "shared_story": [
+    "run2 'The Pulitzer Prize Won't Save You'",
+    "run4 'I Deleted the Authors'"
+  ],
+  "series": {
+    "Pencil & Prompt": {
+      "n": 3,
+      "pieces": [
+        {
+          "label": "run2 'The Pulitzer Prize Won't Save You'",
+          "source": "author-modes-deleted/final.md",
+          "metrics": {
+            "mean_len": 17.34,
+            "cv": 0.57,
+            "short_share": 10.0,
+            "long_share": 8.0,
+            "mattr": 0.8433,
+            "first_person_rate": 6.81,
+            "opener_other_pct": 30.0,
+            "sentences": 50
+          }
+        },
+        {
+          "label": "run3 'What Are These Guys Even Doing?'",
+          "source": "what-are-these-guys-doing/final.md",
+          "metrics": {
+            "mean_len": 16.7,
+            "cv": 0.788,
+            "short_share": 18.2,
+            "long_share": 9.1,
+            "mattr": 0.8206,
+            "first_person_rate": 7.76,
+            "opener_other_pct": 27.3,
+            "sentences": 44
+          }
+        },
+        {
+          "label": "run4 'I Deleted the Authors'",
+          "source": "rules-off-experiment/arm-b-sean-final.md",
+          "metrics": {
+            "mean_len": 14.24,
+            "cv": 0.654,
+            "short_share": 19.7,
+            "long_share": 3.0,
+            "mattr": 0.8555,
+            "first_person_rate": 6.17,
+            "opener_other_pct": 47.0,
+            "sentences": 66
+          }
+        }
+      ],
+      "metrics": {
+        "mean_len": {
+          "mean": 16.0933,
+          "stdev": 1.3363,
+          "min": 14.24,
+          "max": 17.34,
+          "n": 3
+        },
+        "cv": {
+          "mean": 0.6707,
+          "stdev": 0.0898,
+          "min": 0.57,
+          "max": 0.788,
+          "n": 3
+        },
+        "short_share": {
+          "mean": 15.9667,
+          "stdev": 4.2633,
+          "min": 10.0,
+          "max": 19.7,
+          "n": 3
+        },
+        "long_share": {
+          "mean": 6.7,
+          "stdev": 2.6546,
+          "min": 3.0,
+          "max": 9.1,
+          "n": 3
+        },
+        "mattr": {
+          "mean": 0.8398,
+          "stdev": 0.0145,
+          "min": 0.8206,
+          "max": 0.8555,
+          "n": 3
+        },
+        "first_person_rate": {
+          "mean": 6.9133,
+          "stdev": 0.6532,
+          "min": 6.17,
+          "max": 7.76,
+          "n": 3
+        },
+        "opener_other_pct": {
+          "mean": 34.7667,
+          "stdev": 8.7202,
+          "min": 27.3,
+          "max": 47.0,
+          "n": 3
+        }
+      }
+    },
+    "Raising Agents": {
+      "n": 1,
+      "pieces": [
+        {
+          "label": "ep1 'An Agent's Gift'",
+          "source": "raising-agents-ep-1/final.md",
+          "metrics": {
+            "mean_len": 9.82,
+            "cv": 0.767,
+            "short_share": 42.9,
+            "long_share": 0.0,
+            "mattr": 0.8119,
+            "first_person_rate": 4.91,
+            "opener_other_pct": 53.6,
+            "sentences": 56
+          }
+        }
+      ],
+      "metrics": null
+    }
+  }
+}

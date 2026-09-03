@@ -1,6 +1,6 @@
 ---
 name: writing-critique
-description: Adversarially red-team a draft and return triaged, directable findings plus an explicit verdict and the single highest-leverage fix. Critiques execution across structure, value, voice, prose/line, hiring signal, and operator credibility; never rewrites. Runs standalone (on-demand red-team) and as the chain gate between writing-voice-modes and writing-humanity-pass, with the same interactive-vs-headless detection as writing-humanity-pass. Ships a stdlib analyzer (sentence-length burstiness, MATTR, opener variety) with a voice baseline rebuilt 2026-08-26 from provenance-audited corpus, gated at 2 sigma. Use when asked to "red-team this draft", "what's weak here", "critique this", "find what doesn't work", "is this ready to ship", "what would a skeptical reader catch", or "review my draft".
+description: Adversarially red-team a draft and return triaged, directable findings plus an explicit verdict and the single highest-leverage fix. Critiques execution across structure, value, voice, prose/line, hiring signal, and operator credibility; never rewrites. Runs standalone (on-demand red-team) and as the chain gate between writing-voice-modes and writing-humanity-pass, with the same interactive-vs-headless detection as writing-humanity-pass. Ships a stdlib analyzer (sentence-length burstiness, MATTR, short/long sentence shares, opener variety) that reports every metric beside two bands - Sean's prose written outside the content machine, and his hand-rewrites through it, split by series. Gates nothing since 2026-09-01. Use when asked to "red-team this draft", "what's weak here", "critique this", "find what doesn't work", "is this ready to ship", "what would a skeptical reader catch", or "review my draft".
 ---
 
 # Writing Critique
@@ -52,8 +52,10 @@ to hit a count). Load that rubric before critiquing.
 Detect non-interactive context the same way `writing-humanity-pass` does (no human
 can answer a prompt in a launchd run). Then:
 
-1. Run the analyzer with `--baseline references/baseline.json --json` and apply the
-   rubric.
+1. Run the analyzer with `--baseline references/baseline.json --rewrite-band --json`
+   and apply the rubric. Since #219 the analyzer returns **no flags** — `bands` in the
+   JSON is the readout, and a band a draft sits outside is evidence for a prose/line
+   finding you argue, never a finding on its own.
 2. If any reader-cost (blocking/major) finding exists, emit **one** structured
    revise request, *"revise against [this specific finding]"*, routed back
    through `writing-voice-modes` (which carries Sean's calibrated target), then
@@ -138,6 +140,20 @@ the dimension on its own.
 
 ## The analyzer (optional, advisory)
 
+> ### The gate was retired on 2026-09-01. The analyzer is a dashboard now.
+>
+> `flag_metrics` is **empty**. No metric flags; every one reports with its band. The gate lost
+> its customer and its evidence in the same week. The rules-off ruling retired the headless
+> revise route, so no code path reads a flag; and tested against the only outcome that matters —
+> whether Sean kept the draft — MATTR was **at chance over four runs**: it fired on ep1 (64%
+> survival, he kept it) and run3 (38%), and stayed quiet on run2 (25%, he gutted it) and Arm B
+> (86%). CV and first-person were never live at all — they fire below 0.348 and 1.76, and nothing
+> this machine or this author has produced comes within reach.
+>
+> A flag is a claim that a number knows something the author does not. This one had four chances
+> to show that and did not. Ruling and evidence:
+> [#219](https://github.com/seanwinslow28/code-brain/issues/219).
+
 > ### The baseline was rebuilt on 2026-08-26. Nothing measured before that date counts.
 >
 > The old `baseline.json` was **100% quarantined material** — all 58 sentences across all six
@@ -203,17 +219,50 @@ crash, which is how it was found.
 
 - It is **advisory**: it informs the revise decision and supplies evidence for a
   prose/line finding. It never blocks and is never a finding on its own.
-- **Burstiness (sentence-length CV) is the headline signal**: the best-supported,
-  analyzer-computable AI-flatness tell. Low CV vs the baseline → "monotonous vs
-  your voice."
-- Pronoun rate and MATTR are flagged **only** against the baseline, never as
-  absolute AI signals (Sean's voice is pronoun-heavy and varied by design). A MATTR
-  number on its own is not a finding and never was.
+- **Nothing flags (#219).** Every metric prints beside two bands and the reader
+  judges. A number outside a band is a question, not a verdict — the run-3 draft
+  sits outside four of seven and he gutted it; the Arm B draft sits inside six and
+  he kept 86% of it. That separation is what the single MATTR flag could not do.
+- **Two bands, and the distinction is the point.** *Outside the machine* is
+  `baseline.json` — Sean's prose written without it, the yardstick, n=5. *Through
+  the machine* is `rewrite-band.json` — his hand-rewrites, the track record,
+  recomputed every ship. Bands are labelled by series and split by it, because the
+  two registers genuinely differ (Raising Agents runs a 43% short-sentence share and
+  no long sentences; Pencil & Prompt runs 10–20% and 3–9%). Read a draft against its
+  own series. A series under **n=3** prints as points, never as a range.
+- **Burstiness (sentence-length CV) is still the best-supported single signal** —
+  the analyzer-computable AI-flatness tell — but it reports rather than flags, and on
+  this corpus it has never once approached its old firing threshold.
+- Pronoun rate and MATTR are read **only** against the bands, never as absolute AI
+  signals (Sean's voice is pronoun-heavy and varied by design). A MATTR number on its
+  own is not a finding and never was.
+- **The rewrite band is a gauge, not an input.** No drafting context reads it.
+  The only channel into future writing is the corpus and `voice-samples.md`; if a
+  band reading suggests a change, the act that makes it is promoting prose there.
 - **Degraded paths:** no Python in a headless run → critique proceeds
   qualitatively (the rubric still works). Missing baseline → the analyzer falls
   back to its one absolute advisory (low CV) and notes on stderr that the baseline
   was absent. Tiny draft (a tweet) → it reports "insufficient length for variance
   signal" and MTLD low-confidence instead of a false flatness flag.
+
+**Rebuild triggers (#219), and they are deliberately different.** The rewrite band
+recomputes on **every ship** — add one line to `SERIES` in `build_rewrite_band.py`
+and rerun; it is a maintenance task. The corpus band rebuilds **only on Sean's
+ruling**: new sustained prose written outside the machine, or a promotion he decides
+on, each stamped in the provenance block. It is not on a schedule, and a calendar
+does not know whether he wrote anything. His hand-rewrites never enter it — that is
+what the second band is for, and keeping them apart is what lets the record grow
+without the yardstick being calibrated on what it measures. Run
+`build_baseline.py --check` and `build_rewrite_band.py --check` with each dashboard
+render so a moved corpus is loud rather than silent. Expect the corpus band to read
+"n=5, unchanged since 2026-08-26" for a long time; a yardstick that has not moved is
+a feature.
+
+**Adding to the inputs needs no ruling.** `voice-samples.md`,
+`reference-universe.md`, `do-not-promote.md`, and new corpus headings take additions
+at any time and do not touch the gauge — `build_baseline.py` reads five named
+headings and nothing else. Only an edit landing under one of those five is a ruling,
+and `--check` catches it.
 
 **Baseline regeneration:** run `python3 references/build_baseline.py`. It reads the
 git-ignored corpus and rewrites `baseline.json` in place. Do **not** reintroduce a
@@ -303,11 +352,17 @@ the baseline pipeline are new additions, not ports.
   four-quality finding rubric, the six dimensions, stage calibration, and the
   report + headless-verdict format. Load before critiquing.
 - `references/analyze.py`: the stdlib mechanical analyzer (advisory).
-- `references/baseline.json`: the voice baseline — aggregate statistics, the gate
-  shape, and a provenance block with a SHA-256 per source segment. No prose.
+- `references/baseline.json`: the **outside-the-machine** band — Sean's prose
+  written without it. Aggregate statistics, the gate shape (`flag_metrics` empty
+  since #219), and a provenance block with a SHA-256 per source segment. No prose.
 - `references/build_baseline.py`: rebuilds it from the git-ignored corpus.
   `--check` verifies the committed baseline still matches. (`baseline-corpus.md`
   is **deleted**; there is no tracked corpus copy any more.)
+- `references/rewrite-band.json`: the **through-the-machine** band — his
+  hand-rewrites, by series, with an n≥3 floor below which pieces print as points.
+  Aggregates and labels only, same discipline as the baseline.
+- `references/build_rewrite_band.py`: rebuilds it from the registered finals.
+  `--check` verifies the committed band still matches.
 
 ## Success Criteria
 
@@ -328,8 +383,13 @@ the baseline pipeline are new additions, not ports.
 - [ ] The critique fix list is emitted for `writing-humanity-pass` to preserve.
 - [ ] The skill never rewrites; fixes route to voice-modes / humanity-pass / Sean.
 - [ ] Headless runs emit the machine-readable verdict block.
-- [ ] The analyzer stays advisory; burstiness/MATTR/pronoun flags are
-      baseline-relative (pronoun rate never absolute).
+- [ ] The analyzer stays advisory and, since #219, flags nothing: metrics report
+      beside their bands, and a band a draft sits outside is argued into a finding
+      or dropped, never quoted as a verdict.
+- [ ] A draft is read against **its own series'** band, and no series under n=3 is
+      shown as a range.
+- [ ] The two bands are never conflated: the corpus is the input to writing, the
+      bands are the gauge, and a hand-rewrite never enters the corpus band.
 - [ ] No pre-2026-08-26 baseline verdict is treated as evidence; the baseline in
       use carries a provenance block naming its sources.
 
@@ -343,5 +403,6 @@ the baseline pipeline are new additions, not ports.
 "What would a skeptical reader catch?"
 "Does this read like an operator or like someone writing about operators?"
 "Run the analyzer against my voice baseline"
+"Show me the bands for this draft"
 "Critique gate this before humanity-pass"
 ```
