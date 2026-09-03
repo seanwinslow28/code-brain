@@ -194,13 +194,28 @@ The sweep gathers and does not judge. Same split as the origin gate: mechanical
 collection, then a reading pass. A harvester that scored would be guessing at
 stories from metadata.
 
-**2. News pull** — AI news of the week, big and small, across the subject branches
-ruled on #227: AI news, tools, agents, system design, and creativity with AI. Built
-on [#239](https://github.com/seanwinslow28/code-brain/issues/239). It is a
-NEWS-shaped pull on purpose (see the query table below: this is the one place
-"latest on X" is allowed). Each item yields a **two-line gist** for the frame stage —
-what happened, and what the thing can now do that it could not last week — written
-to a git-ignored `gists.json`:
+**2. News pull** — AI news of the week, big and small, across the five subject
+branches ruled on #227: AI news, tools, agents, system design, and creativity with
+AI. Built on [#239](https://github.com/seanwinslow28/code-brain/issues/239). It is
+a NEWS-shaped pull on purpose (see the query table below: this is the one place
+"latest on X" is allowed).
+
+```bash
+python3 .claude/skills/content-oracle/news_lane.py pull --date <sunday>   # five queries, free legs, ~3 min, $0
+```
+
+`pull` runs one fixed NEWS-shaped query per branch through `last30days` on its
+**free legs only** (`hn,youtube,web`) — Reddit and X spend ScrapeCreators credits
+and answer a different question, so they stay with the anchor scan — and writes two
+files to the git-ignored `creative-studio/content-machine/oracle-reports/`:
+`<date>-pull.md` (everything fetched, transcripts included) and
+`<date>-pull-index.md` (titles and URLs only; read this one first). The script
+refuses any path git does not ignore. It gathers and does not judge, same as the
+sweep.
+
+**Read the index, then write the gists.** Each item worth carrying yields a
+**two-line gist** for the frame stage — what happened, and what the thing can now
+do that it could not last week — in a git-ignored `<date>-gists.json`:
 
 ```json
 [{"happened": "<what happened, one line>",
@@ -208,10 +223,38 @@ to a git-ignored `gists.json`:
   "source": "<URL — kept for the card's Evidence field; generators never see it>"}]
 ```
 
-A news item is a card candidate in its own right (a **news card**: Sean consumes the
-article or video, an angle forms, the interview follows) *and* a provocation for
-the frame stage. The listening report that renders the week's news to local TTS is
-#239's other half.
+```bash
+python3 .claude/skills/content-oracle/news_lane.py gists --check <gists.json> --pull <pull.md> [--report <report.md>]
+```
+
+`gists --check` is the anti-fabrication gate one stage upstream of the frame
+stage: every gist's `source` must be a URL the pull actually fetched (or one the
+report's audited Sources fence carries), the two lines may carry no URL, path,
+sha or address, and the frame stage's field caps apply. **A gist with no fetched
+URL behind it is an invention**, and it would become a card's `Evidence:` line.
+
+A news item is a card candidate in its own right (a **news card**: Sean consumes
+the article or video, an angle forms, the interview follows) *and* a provocation
+for the frame stage. The listening report that renders the week's news to local
+TTS is the other half of this step — see [The listening report](#the-listening-report).
+
+**Measured on the first pull (2026-09-03), three things about the engine:**
+
+- **The legs are different instruments, so each gets its own phrasing.** YouTube
+  and the web leg answer NEWS phrasing; the Hacker News leg is a literal keyword
+  search over the window, and "this week" in the query finds nothing there. Each
+  branch therefore carries two phrasings (`BRANCHES` in the script): the NEWS shape
+  for YouTube and the web, bare nouns for HN.
+- **HN runs through the `last30days` library, not its CLI.** With Reddit and X both
+  off, the CLI takes a fallback path that never starts the HN search at all — the
+  section silently does not exist. The library call works, and it hands back the
+  story's own URL beside the thread URL, which is the primary source the tier audit
+  wants. The web leg, by contrast, answers NEWS phrasing with aggregator trackers
+  and category landing pages (tier C), so the primary usually has to be found by
+  following the item.
+- **YouTube ignores the window.** On NEWS phrasing it ranks by relevance and returns
+  evergreen roundups from months ago whatever `--days` says. The index lists
+  out-of-window items apart; they are not this week's news.
 
 **3. Frame stage** — four fresh, tool-denied lenses on a stripped week (#227 rulings
 18–19; built on #238). This is the supply the sweep cannot reach: a quiet week
@@ -549,6 +592,76 @@ is mostly news cards has drifted.
 subject — one interview, then a fresh subagent per artifact, drafted in the order
 the clocks close (#227, rulings 14–16). The rest bank.
 
+## The listening report
+
+The news lane's other half (#227 ruling 21, built on #239): a prose brief of the
+week's AI news that Sean absorbs by ear. He absorbs best by listening (ruling 6),
+and the brief exists so a news pick is made on the news itself rather than on a
+headline in a card. It is machine-written, and that is the hazard it is built
+around: a synthesis he listens to becomes his interview material, the origin gate
+passes it because he really said the words, and a wrong figure ships in his voice.
+**Provenance is therefore mandatory and mechanical** (ruling 8).
+
+The shape is fixed by what `markdown_to_speech.py` actually does — headings are
+spoken as section titles after a short pause, links collapse to their text, tables
+are read row by row with commas, a code fence is spoken once as "Code block
+omitted", bullets flatten into run-on prose:
+
+- **1,200 to 1,500 words, hard cap 2,000; at most six items.** Kokoro reads at
+  roughly 150 words a minute, so that is eight to thirteen minutes. An item that
+  needs more than 250 words is a piece, not a brief: it gets a card, not more
+  narration.
+- **One `##` per item, then exactly three paragraphs**: what happened, with the
+  source named *in the sentence*; what it can now do that it could not last week;
+  the one or two experiment cards it spawned, one line each. No tables, no code in
+  the body, no sub-headings, no list longer than three.
+- **Spoken-safe by construction**: dates and large numbers are written as words
+  ("twenty twenty-six", "sixty-two percent"); short numerals in names ("GLM 5.3")
+  survive because Kokoro reads them correctly.
+- **A figure is spoken only with a tier A or B source behind it. A figure from a
+  tier C or D source is dropped from the narration outright** — "quote a person,
+  never a number" extended to this surface. Percentages, sums of money,
+  magnitudes and multipliers count as figures; a count under a hundred does not.
+- **The Sources list sits at the foot inside a code fence**, one line per source,
+  numbered by item (`2. title — https://…`; an item may have several). Readable
+  in the markdown, spoken once as "Code block omitted" instead of six URLs read
+  aloud.
+
+Commands, in order:
+
+```bash
+NL=.claude/skills/content-oracle/news_lane.py
+python3 $NL template --date <sunday> --items 6                          # skeleton → oracle-reports/<date>-oracle-report.md
+# write the report from the pull index, then:
+python3 $NL check   --report <report> --gists <gists> --pull <pull>    # lint + tier audit; exit 2 on any failure
+python3 $NL preview --report <report>                                   # exactly what the flattener will speak
+python3 $NL render  --report <report> --gists <gists> --pull <pull>    # checks again, then MP3 → vault/90_system/audio/
+```
+
+`check` is the gate: it lints the shape above, tier-audits every source in the
+fence through `agents-sdk/scripts/audit_dr_citations.py` (extended on #239 to read
+plain URLs, not only Gemini's redirect list), fails any item that carries a figure
+with no tier A/B source, and verifies the gists. `render` refuses to run until it
+is clean. The report lives at `creative-studio/content-machine/oracle-reports/`,
+git-ignored with a canary test, because it names his spikes and the cards; the MP3
+goes to `vault/90_system/audio/`, already ignored.
+
+**Measured on the first render (2026-09-03, six items, first real use of the pipeline):**
+1,257 words rendered to 7 minutes 59 seconds of audio, which is **158 words a minute**
+at speed 1.0 — so the 2,000-word cap lands at about 12 minutes 40 seconds, inside the
+13-minute ceiling. 28 segments, 61 seconds of wall clock on the MacBook Pro, $0. The
+flattener did exactly what ruling 21 predicted: the H1 and each `##` were spoken as
+titles after the pause, the Sources fence became one "Code block omitted", and
+nothing in the body was mangled — because the shape was written for it (no tables,
+no lists, no links, numbers as words). Spelled-out resolutions ("ten-eighty", "four
+K") and model names with dots ("GLM 5.3") read correctly. The one thing to watch is
+the template, not the flattener: an item that drifts past three paragraphs reads as
+run-on, and `check` catches that before the render does.
+
+Declined on #227: a three-minute headline brief (loses the absorb-by-listening
+point) and twenty-to-thirty-minute full read-throughs (the tier audit cannot strip
+figures from someone else's prose without rewriting it).
+
 ## Card format
 
 ```
@@ -671,7 +784,10 @@ decision reads that record, and it is reading for two things:
   about lenses that it accumulates about query shapes. A lens earns or loses its
   slot on that evidence, by Sean's ruling. A run where no frame angle was picked is
   a finding about the deck, not a reason to skip the stage.
-- **Did a news item become a card?** Same record, third column, once #239 is live.
+- **Did a news item become a card?** Same record, third column. A news card carries
+  `Source: news:<where>` and its provocation URL on `Evidence:`, so the bank reads
+  whether the lane earns picks the way it reads query shapes and lenses — and
+  whether he listened to the report at all, which is the week-2 question on #239.
 
 **Watch item: are the six signals separating?** Both pre-probation probes returned a
 best card at **17 of 18**. If every card tops out, the ranking is decorative and the

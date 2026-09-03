@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added — the Oracle's news lane and listening report (2026-09-03, #239; ruled on #227)
+
+The other half of the Oracle rebuild: what happened in AI that week, gisted for the
+frame stage and rendered to a prose brief Sean absorbs by ear. First real use of the
+local TTS pipeline, which had zero renders since it shipped.
+
+- **New `content-oracle/news_lane.py`** (stdlib): `pull` runs one NEWS-shaped query
+  per ruled subject branch (AI news, tools, agents, system design, creativity with
+  AI) through `last30days` on its free legs and writes a pull plus a titles-only
+  index to the git-ignored `creative-studio/content-machine/oracle-reports/`;
+  `gists --check` is the anti-fabrication gate (every gist traces to a fetched URL
+  or an audited report source; no URL, path, sha or address in the two lines);
+  `template` / `check` / `preview` / `render` carry the listening report from
+  skeleton to MP3. `check` lints ruling 21's shape (1,200–1,500 words, cap 2,000,
+  six items, three paragraphs each, no tables/code/sub-headings, dates and large
+  numbers as words, Sources in a code fence at the foot) and **fails any item that
+  carries a figure with no tier A/B source behind it**. `render` refuses until the
+  check is clean. 18 unit tests, no network, no model, no render.
+- **`agents-sdk/scripts/audit_dr_citations.py` reads plain-URL source lists** as
+  well as Gemini's grounding redirects (auto-detected), gains `--json` and
+  `--no-resolve`, and tiers first-party vendor news surfaces and the two
+  investigating labs (METR, Redwood) as primary; Hacker News threads are forum
+  tier. 7 tests.
+- **`.gitignore`**: `creative-studio/content-machine/oracle-reports/` joins the
+  private brain, canary-tested before the first report existed.
+- **Measured, first render (2026-09-03):** 1,257 words → 7 min 59 s at 158 words a
+  minute, 28 segments, 61 s wall, $0; the flattener mangled nothing. Three things the
+  pull taught about the engine: YouTube ignores the date window on NEWS phrasing
+  (the index lists out-of-window items apart); the web leg answers NEWS phrasing
+  with aggregator trackers and category landing pages, so the primary source
+  usually has to be found by following the item, which the tier audit forces; and
+  the `last30days` CLI never starts its Hacker News search when Reddit and X are
+  off, so the HN leg runs through the library with bare-noun queries and returns
+  the story URL beside the thread URL.
+
 ### Added — the Oracle's frame stage and two decks (2026-09-03, #238; ruled on #227)
 
 Week 1 of the Oracle's probation produced twelve cards and zero picks, because the

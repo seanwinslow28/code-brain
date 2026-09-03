@@ -283,6 +283,13 @@ creative-studio/content-machine/coined-lines.md
 # vault note because vault/20_projects/substack-studio/ is a tracked public
 # path, and an ideas note there would publish the sweep a card at a time.
 creative-studio/content-machine/ideas-bank.md
+# Oracle listening reports (#239): the week's AI-news brief the Oracle renders
+# to local TTS, plus the raw news pull and the gists feed beside it. The report
+# names his spikes and the experiment cards each news item spawned, so it is
+# private for the same reason the ideas bank is. The MP3 goes to
+# vault/90_system/audio/, ignored above. Canary-tested before the first report
+# existed: `git add` refuses the directory.
+creative-studio/content-machine/oracle-reports/
 
 # ════════════════════════════════════════════════════════════════════════
 # BLOAT GUARDS — recruiter-readiness cleanup 2026-06-10
