@@ -2,30 +2,30 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: concept
 sources:
-  - knowledge/connections/silent-decay-in-strategic-pipelines.md
+  - knowledge/concepts/the-illusion-of-health-in-autonomous-systems.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Definition
 
-This pattern describes a state where operational metrics indicate success while semantic integrity degrades, creating a false sense of system viability. Agents report binary status codes like 'success' based on protocol completion rather than output quality or data relevance. The mechanism relies on the decoupling of execution fidelity from informational utility, allowing silent failures to propagate through the pipeline without triggering immediate alerts.
+This phenomenon occurs when an automated agent reports a successful execution status while silently failing to produce its intended semantic output or update the necessary downstream state. The system appears healthy because the control plane (status logs) is green, but the data plane (actual knowledge artifacts) remains stale or incorrect. This creates a dangerous feedback loop where the user trusts the automation's reliability precisely because it rarely alerts, leading to undetected decay in the integrity of the personal knowledge vault.
 
 ## Context
 
-Sean's fleet reports daily success despite critical infrastructure gaps (Alienware/ComfyUI offline), masking the erosion of his strategic job-hunt and creative data coverage. This illusion prevents him from detecting the root cause of declining synthesis quality until a total failure occurs.
+Sean relies on his fleet for daily planning and job hunting; if the synthesizer or indexer fails silently, his morning brief becomes based on stale data without him realizing the source is broken until much later. This concept explains why 'healthy' status indicators are insufficient proxies for actual cognitive utility.
 
 ## Evidence
 
-> deep-researcher reported an empty queue, failing to execute the high-leverage Deep-research synthesis
+> job-feed ... Status: healthy ... Last run: 2026-09-02T08:30:04 ... notes='fetch=0 scored=0 mbp=False'
 
-> status=success · 8.2h ago · notes='concepts=90 connections=27 rejected=32 edges=24'
+> vault-critic ... Status: stale ... Last run: 2026-08-31T03:37:57 ... notes='status=partial articles=3 codex_fail=1 ag_fail=0'
 
 ## Examples
 
-- Agents continue to report 'success' based on incomplete or stale inputs while the vault's utility gradually erodes
-- The user may not realize the depth of the degradation until a critical failure occurs
+- The job-feed reports 'fetch=0 scored=0' but maintains a 'healthy' status, implying success where no actual job data was processed.
+- The vault-critic agent has not run in over 53 hours, yet its status is listed as 'stale' rather than 'failed', masking the lack of critical review.
 
 ## Related Concepts
 

@@ -2,19 +2,19 @@
 title: "Operational Uptime vs. Cognitive Utility Tension"
 type: concept
 sources:
-  - knowledge/connections/silent-decay-in-strategic-pipelines.md
+  - knowledge/connections/infrastructure-fragility-masks-semantic-decay-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Definition
 
-This tension arises when the availability of compute resources does not correlate with the semantic value of the generated knowledge. High operational uptime on specific nodes creates a bottleneck where data coverage gaps remain invisible to the orchestration layer. The mechanism forces a trade-off between maintaining active agent counts and ensuring comprehensive, multi-source input for high-leverage synthesis tasks.
+This tension arises when an agent fleet maintains high availability metrics while suffering from semantic decay due to infrastructure fragmentation. The system prioritizes the execution of scheduled tasks over the integrity of the data sources, creating a false sense of completeness. Agents report success based on process completion rather than content validity, masking the loss of critical context from offline hardware.
 
 ## Context
 
-Sean's reliance on a single machine (MBP) for critical synthesis tasks creates a single point of failure that is not mitigated by the current fleet architecture, directly impacting his ability to maintain a robust personal knowledge vault.
+Sean relies on his fleet for comprehensive job-hunt and creative synthesis. When Alienware or ComfyUI go offline, the resulting gap in data coverage is not immediately visible in daily reports, leading to strategic blind spots in his professional development.
 
 ## Evidence
 
@@ -24,9 +24,9 @@ Sean's reliance on a single machine (MBP) for critical synthesis tasks creates a
 
 ## Examples
 
-- The resulting gap in data coverage is not immediately visible in the daily fleet status reports
-- Sean must implement a 'semantic health' check that goes beyond binary success/failure metrics to assess the quality and relevance of agent outputs
+- Agents continue to report 'success' based on incomplete or stale inputs when key infrastructure components go offline
+- The gap in data coverage is not immediately visible in the daily fleet status reports
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Silent Failure Propagation in Agent Fleets]]
+[[Silent Failure Propagation in Agent Fleets]] [[The Illusion of Health in Autonomous Systems]]

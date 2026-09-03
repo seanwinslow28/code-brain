@@ -2,32 +2,32 @@
 title: "Structural Integrity vs. Automation Velocity"
 type: connection
 connects:
-  - The Illusion of Competence in Automated Systems
-  - Throughput vs. Taste Memory Tension
-  - Silent Decay in Strategic Pipelines
-created: 2026-08-29
-updated: 2026-08-29
+  - The Masking Effect of Structural Completeness in Failed Automation
+  - Legibility Debt as a Supervision Failure Mode
+  - Privacy-Aware Data Routing
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Synthesis
 
-There is a fundamental tension between the velocity of automated synthesis and the structural integrity of the resulting knowledge graph. High-velocity runs (like those using qwen3-14b with 250+ clusters) produce large volumes of concepts but often suffer from high rejection rates or low connection density, indicating that speed compromises the 'taste' or filtering mechanism. Conversely, slower, more deliberate runs (using qwen3.6-35b) reduce cluster sampling but may increase the depth of connections, suggesting that integrity requires a reduction in throughput to allow for deeper processing.
+The tension between the need for high-velocity operational visibility and the requirement for semantic integrity in sensitive data handling creates a systemic risk of strategic disclosure. When automation prioritizes the production of valid, legible artifacts over content safety, it masks the underlying privacy failures with structural completeness. This leads to a 'luck-based' privacy model where exposure depends on whether the leaked data happens to be non-sensitive, rather than being prevented by design. The consequence is a growing legibility debt that undermines the strategic advantage of Sean's job-hunt efforts.
 
 ## Threads
 
-### [[The Illusion of Competence in Automated Systems]]
+### [[The Masking Effect of Structural Completeness in Failed Automation]]
 
-> Systems thinking is the practice of explaining behavior by the structure that produces it. For an AI Product Manager, this shifts focus from isolated features to interconnected ecosystems where data, models, user behaviors, and infrastructure influence one another.
+> Eight prior reports (`2026-07-05` through `2026-08-23`) are already committed carrying `tier_a_item` quotes; they happened to quote non-sensitive SOUL lines, so the exposure so far is luck, not design.
 
-### [[Throughput vs. Taste Memory Tension]]
+### [[Legibility Debt as a Supervision Failure Mode]]
 
-> Emergence: Outcomes like model drift or algorithmic bias are emergent behaviors that cannot be predicted by looking at single components.
+> The `soul-tier-a-conflict` issue kind was wired into production by BT5 C3 on 2026-07-05, which is exactly when those reports start.
 
-### [[Silent Decay in Strategic Pipelines]]
+### [[Privacy-Aware Data Routing]]
 
-> Stocks buffer and hide; they change slowly even if flows are cut.
+> The operating-model source (`vault/05_atlas/operating-models/`) is gitignored precisely so this material stays local.
 
 ## Implications
 
-- Sean should monitor the 'connection density' (connections/concepts) rather than just total volume to detect when velocity is compromising quality.
-- Switching models (e.g., from 14b to 35b) changes the underlying structure of the synthesis, not just the speed, requiring a re-evaluation of what 'success' looks like in each run.
+- Sean must implement a hard redaction layer in the emitter (`knowledge_lint.py`) that prevents any raw SOUL text from entering the report, regardless of whether the report itself is committed or untracked.
+- The existing eight committed reports with potential leaks need a scrubbing protocol to remove sensitive data before they become permanent public artifacts.

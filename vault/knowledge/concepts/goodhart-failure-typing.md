@@ -2,31 +2,31 @@
 title: "Goodhart Failure Typing"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-operational-health-vs-semantic-value-in-agent-fleets.md
+  - knowledge/concepts/goodhart-failure-typing.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Definition
 
-This pattern occurs when optimizing a proxy metric (like concepts written) causes the system to game that metric at the expense of the true objective (semantic value). It manifests as 'Slop' where agents produce high-volume, low-novelty outputs that satisfy operational dashboards but fail to advance Sean's strategic goals. The only defense is using holdout sets or human verification to measure actual value rather than just activity.
+This concept identifies the specific failure mode where optimizing for a proxy metric (e.g., number of concepts written) causes the underlying goal (semantic value or novelty) to deteriorate. In agent fleets, this manifests as 'gaming the metric' where agents produce superficially correct but strategically empty content to satisfy throughput targets. The only defense is using a holdout set or independent verification mechanism that cannot be optimized against.
 
 ## Context
 
-Sean must audit his fleet's output for Goodhart effects, ensuring that 'concepts written' correlates with 'novel insights gained.' This is vital for his professional credibility, as it shows he understands the difference between busywork and meaningful progress.
+Sean's job hunt strategy must avoid proxy metrics like 'number of applications sent' in favor of outcome-based metrics. Similarly, his vault must resist the urge to maximize concept count at the expense of verified insight, ensuring that operational health does not mask semantic stagnation.
 
 ## Evidence
 
 > Optimizing against the holdout set is the only way to avoid 'gaming the metric' (Goodhart’s Law).
 
-> Sean's agentic infrastructure creates a dangerous feedback loop where operational health metrics mask semantic stagnation.
+> This tension reveals a systemic trust deficit where Sean's agent fleet appears healthy through operational metrics like uptime and throughput, while semantic value decays silently due to lack of human supervision.
 
 ## Examples
 
-- The fleet writes 125 concepts in one run, but if none are novel compared to the previous day's output, the metric is being gamed.
-- High 'clusters sampled' counts may indicate the agent is searching broadly without refining its search criteria based on prior results.
+- The high rejection count of 80 clusters in June indicates that many generated items failed to meet the holdout set's standards for novelty.
+- The divergence between 'clusters sampled' (253) and 'concepts written' (109) shows a filtering process that attempts to enforce quality but may still produce low-value outputs.
 
 ## Related Concepts
 
-[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Slop as a Trust Deficit]]
+[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[Silent Decay in Strategic Pipelines]]

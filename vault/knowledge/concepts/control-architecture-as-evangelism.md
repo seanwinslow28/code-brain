@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/control-architecture-as-evangelism.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean is leveraging this to position his future company as the authority on truth
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Public Benchmarking Infrastructure]] [[Demonstration Over Declaration]]
+[[Supervision as the New AI Edge]] [[Public Benchmarking Infrastructure]]

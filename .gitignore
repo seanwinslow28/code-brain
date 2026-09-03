@@ -143,6 +143,17 @@ vault/20_projects/prj-job-hunt-2026-REVAMP/
 # so untracking them costs the board nothing. History scrubbed the same day.
 vault/health/job-feed-manifest-*.json
 
+# Knowledge-lint reports — added 2026-09-03 as a TEMPORARY guard while
+# Obsidian-Git auto-commit is on. Their `soul-tier-a-conflict` findings inline
+# the matched SOUL text verbatim; the 2026-08-30 report quotes a base-salary
+# relocation threshold and a named target employer, i.e. exactly the material
+# vault/05_atlas/operating-models/ is ignored to keep local (rule 9).
+# The 8 reports already committed (2026-07-05..2026-08-23) stay tracked --
+# gitignore does not untrack -- and they happen to quote non-sensitive lines.
+# REMOVE THIS RULE once knowledge_lint.py redacts / references-by-id the
+# tier_a_item payload instead of inlining it. Tracked in vault/00_inbox/tickets.md.
+vault/health/*-lint-report.md
+
 # Substack Studio private lane — the project at vault/20_projects/substack-studio/ is TRACKED
 # (public); only its _private/ subdir is local-only, for sensitive drafts/source kept off GitHub.
 vault/20_projects/substack-studio/_private/

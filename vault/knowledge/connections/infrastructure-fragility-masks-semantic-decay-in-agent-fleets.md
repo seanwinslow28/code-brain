@@ -2,26 +2,26 @@
 title: "Infrastructure Fragility Masks Semantic Decay in Agent Fleets"
 type: connection
 connects:
-  - The Illusion of Health in Autonomous Systems
   - Operational Uptime vs. Cognitive Utility Tension
+  - The Illusion of Health in Autonomous Systems
   - Silent Failure Propagation in Agent Fleets
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Synthesis
 
-The core tension exists between the logical abstraction of the agent fleet and the physical reality of hardware availability, where infrastructure fragmentation directly causes semantic decay. When key infrastructure components like Alienware and ComfyUI go offline, the resulting gap in data coverage is not immediately visible in the daily fleet status reports. This creates a silent decay in the strategic pipelines for job hunting and creative work, as the agents continue to report 'success' based on incomplete or stale inputs. The consequence is a gradual erosion of the vault's utility, where the user may not realize the depth of the degradation until a critical failure occurs.
+The core tension exists between the logical abstraction of the agent fleet and the physical reality of hardware availability, where infrastructure fragmentation directly causes semantic decay. When key infrastructure components like Alienware and ComfyUI go offline, the resulting gap in data coverage is not immediately visible in the daily fleet status reports. This creates a silent decay in the strategic pipelines for job hunting and creative work, as the agents continue to report 'success' based on incomplete or stale inputs.
 
 ## Threads
-
-### [[The Illusion of Health in Autonomous Systems]]
-
-> deep-researcher reported an empty queue, failing to execute the high-leverage Deep-research synthesis
 
 ### [[Operational Uptime vs. Cognitive Utility Tension]]
 
 > Alienware and ComfyUI are offline, creating a critical gap in the multi-machine agent mesh needed for comprehensive data coverage
+
+### [[The Illusion of Health in Autonomous Systems]]
+
+> deep-researcher reported an empty queue, failing to execute the high-leverage Deep-research synthesis
 
 ### [[Silent Failure Propagation in Agent Fleets]]
 

@@ -3,3 +3,5 @@
 {"ts": "2026-08-30T11:25:03", "alerts": 0, "attempted": false, "delivered": false, "probe": "ok", "dry_run": false, "detail": "fleet healthy \u2014 nothing to send; credentials resolved"}
 {"ts": "2026-08-31T08:45:59", "alerts": 0, "attempted": false, "delivered": false, "probe": "ok", "dry_run": false, "detail": "fleet healthy \u2014 nothing to send; credentials resolved"}
 {"ts": "2026-09-01T08:45:50", "alerts": 1, "attempted": true, "delivered": true, "probe": "not-run", "dry_run": false, "detail": "vault_critic: stale"}
+{"ts": "2026-09-02T08:46:02", "alerts": 1, "attempted": true, "delivered": true, "probe": "not-run", "dry_run": false, "detail": "vault_critic: stale"}
+{"ts": "2026-09-03T08:46:02", "alerts": 2, "attempted": true, "delivered": true, "probe": "not-run", "dry_run": false, "detail": "vault_critic: stale; job_feed: degraded"}

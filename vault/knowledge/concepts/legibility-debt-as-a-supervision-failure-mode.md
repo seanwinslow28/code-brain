@@ -2,31 +2,31 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md
+  - knowledge/connections/the-privacy-velocity-trade-off-in-automated-observability.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Definition
 
-Legibility debt is the structural gap between automated production velocity and human verification capacity, where the volume of commits exceeds the operator's ability to inspect them directly. This forces reliance on indirect proofs—such as tags or audit logs—to establish trust in system state rather than direct observation. Without these cryptographic anchors, the operator cannot distinguish intentional design changes from accidental drift, leading to a loss of control over the system's history and an erosion of epistemic authority.
+Legibility debt accumulates when the drive for operational visibility forces the exposure of sensitive data into public or semi-public channels, bypassing necessary human supervision. This occurs when automation prioritizes the velocity of data extraction over the latency of semantic filtering, creating a gap between what is observable and what is safe to observe. The debt manifests as a growing collection of artifacts that contain high-risk information because the system was designed to be legible rather than secure. This failure mode reveals that supervision cannot be automated away; it must be enforced through structural constraints that prevent sensitive data from entering the observability pipeline in the first place.
 
 ## Context
 
-Sean audits the vault to ensure that deleted branches did not result in data loss, specifically resolving uncertainty created by the agent fleet's high-velocity commits. By proving that content exists in `main` or archives via tags, he mitigates the risk of silent failure propagation where automated noise masks critical state changes.
+Sean's job-hunt pipeline requires strict semantic isolation, but the agent fleet's need for daily status updates has created a conflict. The `soul-tier-a-conflict` issue kind was introduced to manage this tension, but the underlying mechanism of automated extraction continues to bypass privacy controls. This creates a dependency on manual scrubbing and luck, rather than a robust system that respects the boundary between operational health and strategic secrecy.
 
 ## Evidence
 
-> the proof is now a tag rather than a branch: archive/mini-pre-b8-2026-08-28
+> The `soul-tier-a-conflict` issue kind was wired into production by BT5 C3 on 2026-07-05, which is exactly when those reports start.
 
-> Content audit of that snapshot against main — 24 of its 27 commits are vault: auto-commit noise from the Obsidian-Git owner retired 2026-07-05
+> There is a fundamental tension between the velocity of automated data extraction and the latency of human-led privacy review.
 
 ## Examples
 
-- of the 65 files unique to it, 64 are byte-identical blobs on main
-- the 3 real commits are all on main (da4856fb's 2026-08-11 production repairs are present verbatim
+- The introduction of `soul-tier-a-conflict` as a specific issue kind to track conflicts between operational visibility and job-hunt privacy.
+- The daily generation of reports by the agent fleet that inadvertently include sensitive SOUL lines due to lack of semantic filtering.
 
 ## Related Concepts
 
-[[Epistemic Artifacts as Strategic Proof]] [[The Illusion of Competence in Automated Systems]]
+[[The Masking Effect of Structural Completeness in Failed Automation]] [[Privacy-Aware Data Routing]]

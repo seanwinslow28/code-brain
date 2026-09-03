@@ -2,32 +2,32 @@
 title: "Cross-Domain Tension: Automation Velocity vs. Semantic Integrity in Knowledge and Career Systems"
 type: connection
 connects:
-  - The Taste-Throughput Trade-off in Agentic Synthesis
-  - Structural Integrity vs. Automation Velocity
-  - The Illusion of Competence in Automated Systems
-created: 2026-09-01
-updated: 2026-09-01
+  - The Extraction Fidelity Trap in Knowledge Infrastructure
+  - Operational Visibility vs. Semantic Value in Agent Fleets
+  - Tacit Knowledge Erosion vs. Automation Scale
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Synthesis
 
-This connection reveals a fundamental tension where the velocity of automated knowledge ingestion directly conflicts with the integrity of the resulting semantic graph, creating a systemic trust deficit across Sean's life-systems and professional pipelines. As agent fleets scale up concept production, the lack of proportional supervisory depth leads to silent failures that degrade the utility of both creative and job-hunt artifacts. The consequence is a 'Fixes that Fail' loop where high activity masks semantic decay, forcing Sean to manually audit his vault to restore coherence.
+The core tension is that scaling automated knowledge ingestion to increase operational velocity directly conflicts with the preservation of semantic integrity, creating a 'hollowed out' vault that supports routine tasks but fails to preserve the deep, non-textual insights required for high-level creative or strategic decision-making. As Sean's agent fleet processes more content faster, the system's inability to extract visual or structural nuance (the fidelity trap) causes a silent erosion of tacit knowledge, which is the very foundation of his unique professional value in the job market and creative studio. This results in a dangerous divergence where operational metrics indicate health and growth, while the actual semantic graph degrades into a shallow, text-only representation that lacks the depth necessary for competitive advantage.
 
 ## Threads
 
-### [[The Taste-Throughput Trade-off in Agentic Synthesis]]
+### [[The Extraction Fidelity Trap in Knowledge Infrastructure]]
 
-> As Sean increases the throughput of his fleet (e.g., from 3 to 125 concepts), the system risks entering a 'Fixes that Fail' loop where high volume masks semantic decay.
+> figures/diagrams are never extracted (text baked into images is lost, by design), and scanned PDFs hard-abort with an 'OCR first' message.
 
-### [[Structural Integrity vs. Automation Velocity]]
+### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
 
-> Systems thinking is required because component-level optimization is insufficient for systems where behavior arises from interacting, dynamic elements.
+> The tension lies between the observable metric of automation velocity (concepts written) and the unobservable metric of semantic integrity (conceptual depth).
 
-### [[The Illusion of Competence in Automated Systems]]
+### [[Tacit Knowledge Erosion vs. Automation Scale]]
 
-> This connection reveals a fundamental tension where the velocity of automated knowledge ingestion directly conflicts with the integrity of the resulting semantic graph.
+> The output is not a summary; the spec explicitly extracts *structure*: named frameworks ('preserve the author's exact naming'), decision rules, techniques, anti-patterns, glossary terms
 
 ## Implications
 
-- Sean must implement periodic 'structural audits' of his vault to detect semantic decay before it becomes systemic and affects professional outputs.
-- Increasing fleet velocity without corresponding increases in supervisory depth will lead to diminishing returns on knowledge value across all domains.
+- Sean must implement manual verification steps for any automated ingestion pipeline to detect missing visual or structural data that automated tools silently discard.
+- The choice of input format (EPUB vs PDF) becomes a strategic decision about what types of knowledge are preserved versus lost in the semantic graph.
