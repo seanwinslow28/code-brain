@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/comprehension-debt.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Definition

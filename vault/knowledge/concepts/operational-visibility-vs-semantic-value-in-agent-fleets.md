@@ -2,31 +2,31 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/operational-visibility-vs-semantic-value-in-agent-fleets.md
+  - knowledge/connections/cross-domain-tension-automation-velocity-vs-semantic-integrity-in-knowledge-and-career-systems.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Definition
 
-This pattern describes a decoupling between the binary health signals of an automated system and the qualitative utility of its output. When agents prioritize process execution metrics over insight generation, the infrastructure appears robust while strategic value stagnates. The mechanism relies on high-fidelity operational visibility masking low-fidelity semantic value, creating a false sense of productivity that diverts attention from curation to maintenance.
+This tension arises because agent fleets optimize for observable operational metrics such as concept count, connection density, and run duration, while semantic value—the depth, nuance, and fidelity of the extracted knowledge—remains unobservable to the automation itself. The system interprets high throughput and low rejection rates as indicators of health, masking the underlying degradation of semantic integrity where concepts are generated rapidly but lack the necessary context or structural fidelity to be useful for strategic decision-making. This creates a feedback loop where increasing velocity exacerbates the loss of nuance, yet the dashboard continues to report 'success' based on volume rather than quality.
 
 ## Context
 
-Sean's fleet runs daily with high success rates, yet his actual strategic output remains stagnant because he optimizes for the visible health dashboard rather than the invisible quality of knowledge. This tension forces him to choose between maintaining a complex, fragile infrastructure or simplifying his system to regain cognitive clarity and focus on high-value synthesis.
+Sean monitors his fleet's health via metrics like concepts written and duration; if these metrics improve while semantic value drops (due to fidelity traps or abstraction shifts), he receives false signals of progress, leading him to scale a system that is actually eroding his unique professional insights.
 
 ## Evidence
 
-> The fleet's health dashboard provides high-fidelity operational visibility (uptime, success rates) but low-fidelity semantic value (quality of insights).
+> The tension lies between the observable metric of automation velocity (concepts written) and the unobservable metric of semantic integrity (conceptual depth).
 
-> This disconnect allows Sean to feel productive because the system is 'working' while his actual strategic output stagnates.
+> There is a fundamental tension where the velocity of automated knowledge ingestion directly conflicts with the integrity of the resulting semantic graph, creating a system that appears robust but is structurally fragile.
 
 ## Examples
 
-- Sean should prioritize reducing the number of active agents to improve the signal-to-noise ratio of his daily insights.
-- The health dashboard needs a semantic quality metric, not just an operational success metric, to accurately reflect fleet value.
+- A run reporting 125 concepts written in 2386 seconds with low rejection rates, yet containing no visual or structural nuance from the source material.
+- Dashboard metrics showing 'healthy' agent uptime and high throughput while the actual knowledge graph suffers from silent semantic decay due to ignored visual context.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
+[[The Extraction Fidelity Trap in Knowledge Infrastructure]] [[Silent Decay in Strategic Pipelines]]

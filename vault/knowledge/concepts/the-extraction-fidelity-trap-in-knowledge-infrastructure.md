@@ -2,30 +2,31 @@
 title: "The Extraction Fidelity Trap in Knowledge Infrastructure"
 type: concept
 sources:
-  - knowledge/connections/the-extraction-fidelity-trap-in-knowledge-infrastructure.md
+  - knowledge/connections/cross-domain-tension-automation-velocity-vs-semantic-integrity-in-knowledge-and-career-systems.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Definition
 
-This mechanism describes a systemic risk where automated ingestion pipelines prioritize operational reliability and semantic completeness over structural fidelity, resulting in the silent loss of non-textual intellectual assets. The system creates an illusion of health by successfully parsing text-based structures while discarding figures, diagrams, or scanned content that contain core expertise. This leads to a knowledge base that is technically accurate but semantically hollowed out, undermining the depth required for high-stakes creative or professional work because the infrastructure cannot distinguish between surface-level summary and deep structural insight.
+This mechanism describes a structural asymmetry where automated ingestion pipelines prioritize text-based semantic extraction while systematically discarding non-textual data modalities such as visual diagrams, spatial layouts, and embedded image content. The system creates an illusion of completeness by processing the available text, but the resulting knowledge graph is fundamentally incomplete because the 'baked-in' visual context is lost by design during the OCR or parsing phase. This leads to a silent decay in semantic integrity where the agent fleet operates on a degraded representation of the source material without any operational visibility into what was omitted.
 
 ## Context
 
-Sean's vault synthesizer relies on tools like book-to-skill which hard-abort on scanned PDFs and ignore figures in EPUBs. This creates a blind spot where his knowledge base appears robust but lacks the visual or structural data that distinguishes deep expertise from surface-level summary, directly impacting the quality of his creative output and professional positioning.
+Sean's vault synthesizer relies on automated fleets to ingest books and articles; if these tools silently discard visual frameworks or diagrams, his 'taste memory' and strategic insights derived from those visuals are permanently lost to the graph, creating a hollowed-out knowledge base that supports operational tasks but fails high-level creative synthesis.
 
 ## Evidence
 
-> One caveat either way: figures/diagrams are never extracted (text baked into images is lost, by design), and scanned PDFs hard-abort with an "OCR first" message.
+> figures/diagrams are never extracted (text baked into images is lost, by design), and scanned PDFs hard-abort with an 'OCR first' message.
 
-> The output is not a summary; the spec explicitly extracts *structure*: named frameworks ("preserve the author's exact naming"), decision rules, techniques, anti-patterns, glossary terms
+> The output is not a summary; the spec explicitly extracts *structure*: named frameworks ('preserve the author's exact naming'), decision rules, techniques, anti-patterns, glossary terms
 
 ## Examples
 
-- EPUB reflowable HTML inside a zip: no page headers/footers to strip, no scanned-page risk, and chapter boundaries survive extraction (their Moby-Dick EPUB test auto-detected all 133 chapters via its ToC).
+- A book containing a critical architectural diagram where the text description is insufficient to reconstruct the logic, resulting in a concept entry that lacks the core visual insight.
+- Scanned PDFs triggering hard-aborts that prevent ingestion entirely, forcing manual intervention or loss of the source material from the automated pipeline.
 
 ## Related Concepts
 
-[[The Illusion of Competence in Automated Systems]] [[Tacit Knowledge Erosion vs. Automation Scale]]
+[[Tacit Knowledge Erosion vs. Automation Scale]] [[The Illusion of Competence in Automated Systems]]

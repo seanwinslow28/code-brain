@@ -5,8 +5,8 @@ connects:
   - Harness Engineering Invariant
   - Context Compounding
   - Operational Visibility vs. Semantic Value in Agent Fleets
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-02
+updated: 2026-09-02
 ---
 
 ## Synthesis

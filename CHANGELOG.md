@@ -106,6 +106,39 @@ Ratified and applied:
   chain retired to post-draft advisory gates.
 - Run-#4 ledger entries (L4-01…L4-06) recorded; lessons remain the only rule
   layer that grows.
+### Fixed — knowledge-lint report privacy + config.local.toml override (2026-09-03)
+
+- **Knowledge Lint no longer writes private material into a tracked, public path.**
+  `vault/health/*-lint-report.md` had been publishing two classes of private
+  content. (1) `soul-tier-a-conflict` findings inlined the matched SOUL text: the
+  2026-08-30 report quoted a base-salary relocation threshold and a named target
+  employer, in the `tier_a_item` field *and* again in the model's own prose, so
+  redacting the field alone would not have fixed it. That report was staged for
+  commit and held back; `git grep` confirms the figure was in no committed file.
+  (2) Findings *about* files in gitignored subtrees named those files: measured
+  across the corpus, **3341 findings** referenced `prj-job-hunt-2026/` (2662),
+  `05_atlas/operating-models/` (196), `knowledge/private/` (180), `10_timeline/`
+  (123), and the personal-finance, boston-move, and 2026-trips projects — the
+  same side channel that leaked 69 target companies through job-feed manifests
+  in 2026-08. Both classes now route to `vault/health/private/` (gitignored);
+  the tracked report keeps every finding's row and severity count, withholding
+  the SOUL detail and, where the path itself is the leak, the path. Two scrubs
+  back the structural split for private text arriving in fields the classifier
+  does not inspect. `PRIVATE_VAULT_PREFIXES` mirrors `.gitignore` and a test
+  fails if they drift. All 18 existing reports were backfilled through the same
+  classifier the emitter uses.
+- **Added `agents-sdk/config.local.toml`**, a gitignored override deep-merged
+  over the tracked config by `lib/config.py:load_raw_config()`. The claim-6
+  drill registration moved into it, so `config.toml` ships unarmed and
+  committable. This retired three pieces of invisible local-only state that had
+  been holding the registration in a permanently dirty working tree: a
+  `skip-worktree` mask and the `.git/hooks/{pre-commit,post-merge}` guards
+  (`post-merge` would have false-positived on every merge once the tracked
+  config went unarmed). A malformed override raises rather than being skipped;
+  `Config.local_config_path` records the applied override and the meta-agent
+  prints it. `config.local.toml.example` is tracked so the mechanism is
+  discoverable from a fresh clone.
+- Suite: 1087 passed (+37 new: 11 override, 26 report-privacy).
 
 ### Added — ADR-12 scheduled claim-6 drill (2026-08-30)
 

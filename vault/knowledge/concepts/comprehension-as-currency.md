@@ -2,10 +2,10 @@
 title: "Comprehension as Currency"
 type: concept
 sources:
-  - 20_projects/research/2026-08-29-what-does-the-scholarly-literature-on-audience-measurement-a.md
+  - knowledge/concepts/comprehension-as-currency.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Definition

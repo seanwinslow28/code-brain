@@ -2,31 +2,31 @@
 title: "The Taste-Throughput Trade-off in Agentic Synthesis"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-operational-health-vs-semantic-value-in-agent-fleets.md
+  - knowledge/concepts/the-taste-throughput-trade-off-in-agentic-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Definition
 
-This mechanism describes a structural inversion where the agent fleet's optimization for operational volume (clusters sampled, concepts written) actively degrades semantic value because human supervision capacity remains fixed. As throughput increases, the ratio of verified novelty to total output collapses, creating a 'Silent Decay' where high activity masks epistemic stagnation. The system appears healthy via uptime metrics while the knowledge graph accumulates noise that exceeds Sean's ability to filter, effectively turning the synthesizer into a source of context pollution rather than clarity.
+This pattern describes the inverse relationship between the speed of automated content generation and the quality of human curation. As agents prioritize maximizing clusters sampled and concepts written, the signal-to-noise ratio degrades because the human operator's 'taste'—the ability to discern novel, high-value insights—becomes the scarce resource. The system optimizes for operational completeness while the user optimizes for semantic clarity, creating a fundamental misalignment in success metrics.
 
 ## Context
 
-Sean must recognize that scaling fleet output without scaling verification creates a trust deficit in his own infrastructure. This insight is critical for his job hunt, as it demonstrates an understanding that 'more data' is not equivalent to 'better signal' when human cognitive load is the bottleneck.
+Sean's job hunt and creative work require high-fidelity insights, not just volume. When the fleet prioritizes throughput (e.g., 150+ concepts per run), it risks overwhelming his ability to apply 'taste,' leading to a backlog of unverified or low-value entries that dilute the vault's strategic utility.
 
 ## Evidence
 
 > There is a fundamental tension between the agent fleet's drive to maximize throughput (clusters sampled, concepts written) and the human operator's capacity for verification (supervision).
 
-> This connection reveals a critical tension where the scalability of Sean's agent fleet is limited by his cognitive capacity to supervise outputs, rather than by computational constraints.
+> This tension reveals a systemic trust deficit where Sean's agent fleet appears healthy through operational metrics like uptime and throughput, while semantic value decays silently due to lack of human supervision.
 
 ## Examples
 
-- The fleet samples 191 clusters and writes 118 concepts in one run, yet Sean cannot verify the semantic value of all 118 entries before the next cycle begins.
-- Operational metrics like 'clusters sampled' rise while 'rejected_count' drops, indicating that the filter is becoming less effective relative to the volume generated.
+- The run on 2026-07-03 wrote 150 concepts but only 42 connections, suggesting a high volume of isolated insights that may lack cross-domain integration.
+- The duration of runs increased from ~47 seconds to over 2700 seconds as complexity grew, reflecting the increasing cost of managing larger outputs.
 
 ## Related Concepts
 
-[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[Goodhart Failure Typing]]
+[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[Silent Decay in Strategic Pipelines]]

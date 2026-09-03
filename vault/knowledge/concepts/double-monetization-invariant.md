@@ -2,15 +2,15 @@
 title: "Double-Monetization Invariant"
 type: concept
 sources:
-  - 20_projects/research/2026-08-29-agentic-rails-odlyzko-check/supply-side.md
+  - knowledge/concepts/double-monetization-invariant.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-03
+updated: 2026-09-03
 ---
 
 ## Definition
 
-A structural condition where infrastructure providers capture value twice: first by charging for access to their network (tolls, pay-per-crawl), and second by capturing the transactional flow that occurs on top of that access (payments, tokenization). This invariant emerges when the cost of verification is shifted from the end-user to the platform layer, creating a dependency where revenue generation requires both connectivity and identity resolution. The mechanism relies on the fragmentation of trust, forcing agents to route through multiple proprietary chokepoints rather than a single open standard.
+This invariant describes a structural condition where infrastructure providers capture value twice: first by charging for access to their network (tolls, pay-per-crawl), and second by capturing the transactional flow that occurs on top of that access (payments, tokenization). The mechanism relies on the fragmentation of trust, forcing agents to route through multiple proprietary chokepoints rather than a single open standard. This creates a dependency where revenue generation requires both connectivity and identity resolution, shifting the cost of verification from the end-user to the platform layer.
 
 ## Context
 
