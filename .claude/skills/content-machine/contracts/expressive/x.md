@@ -96,7 +96,24 @@ Three consequences, and the third is the one that changes how the test is run:
    test of how the post arrives *in a feed*, and reading your own permalink will not run it.
 
 **Reply surface: yes.** Replies and quote-posts. The
-[reply-hook memo](LANE.md#the-reply-hook-memo-advisory-never-a-gate) ships with every post.
+[reply-hook memo](LANE.md#the-reply-hook-memo-advisory-never-a-gate) ships with every post — it is
+about *inbound* replies to this piece, and is untouched by everything below.
+
+**Reply and quote-post are not the same surface** (established 2026-09-04,
+[#247](https://github.com/seanwinslow28/code-brain/issues/247), read off the current ranking code
+`xai-org/x-algorithm`; `twitter/the-algorithm` is superseded and its published weights are all
+zeroed defaults, so the "reply = 13.5" figures in circulation quote a training file, not production).
+
+A **reply** is filtered out of the feed of anyone who does not already follow the author, **with no
+exemption for who was replied to** — the retired Scala stack had exactly that exemption and it is
+gone. It also takes the 0.75× out-of-network discount *even in-network*, and the +15.0 mutual-follow
+boost on replies applies to originals only.
+
+A **quote-post** carries no `in_reply_to_tweet_id`. The filter never sees it, the discount never
+applies, and it is ranked as an original. Both are weighted 5.0; a like is 0.5.
+
+So the same sentence, aimed at the same post, travels or does not travel depending on which button
+made it.
 
 ## Format
 
@@ -107,6 +124,15 @@ Three consequences, and the third is the one that changes how the test is run:
   is, and attached media costs 0. See `## First screen` for what the fold is; it is measured in
   rendered lines and it is the one that binds first.
 - No hashtags. No engagement questions. No "🧵" as a promise the thread does not keep.
+- **Quote-post when the line should travel; reply when you actually want the conversation.** This is
+  the one format rule that is about the button rather than the words, and it exists because the
+  asymmetry above is large and invisible. It is not a rule to always quote-post: a reply is a remark
+  *to* a person, a quote-post is a remark *about* them in front of an audience, and at heat 3 that
+  distinction has teeth. An Affectionate-Insult Epithet lands as banter in a reply and can land as
+  a pile-on when broadcast. Pick the surface for what the line is doing, then know what it costs.
+- **The craft survives the switch.** A quote-post still displays the post it answers, so the
+  stimulus-as-setup mechanic is intact: the thing being answered is doing the work a standalone post
+  would have to spend words building. Nothing about the joke changes.
 - **Links do not currently suppress reach.** Corrected 2026-09-04 against the current ranking code
   ([#247](https://github.com/seanwinslow28/code-brain/issues/247)); this line previously asserted
   that they did. The claim was **true history stated in the present tense**: NDSS 2026 measured

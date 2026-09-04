@@ -43,12 +43,25 @@ a loose version of one.
 No retirement entry accompanies this one: nothing false was removed, only imprecise framing sharpened,
 and an entry with no forbidden vocabulary to scan for would be another dead registry line.
 
-**One correction from the same research is filed, not made.** The reply surface
-is materially wrong: the current `OONRetweetReplyFilter` deletes every reply from the feed of anyone
-not already following the author, with no exemption for who was replied to, while a quote-post ranks
-as an original — which makes the reply-hook memo's premise mechanically false. That memo lives in the
-Expressive `LANE.md`, and a contract may narrow lane law but never delete it, so it is a ruling rather
-than a correction.
+**The reply surface was corrected in the same pass, and one claim about it was withdrawn.** The
+research asserted that the reply-hook memo's premise — that reactive one-liners on big accounts buy
+reach — is mechanically false. Reading the memo shows it has no such premise: it is about *inbound*
+replies to Sean's own piece and whether that piece leaves a reader room to argue. Lane law needed no
+change and none was made.
+
+The real defect was an omission in `x.md`, which named replies and quote-posts as one surface. They
+are not. A reply is filtered out of the feed of anyone not already following the author, **with no
+exemption for who was replied to** (the retired Scala stack had that exemption), takes the 0.75×
+out-of-network discount even in-network, and is excluded from the +15.0 mutual-follow reply boost. A
+quote-post carries no `in_reply_to_tweet_id`, so the filter and the discount both miss it and it
+ranks as an original. Both are weighted 5.0.
+
+The contract now carries the asymmetry and a format rule about the button rather than the words —
+**quote-post when the line should travel, reply when you actually want the conversation** — with the
+caveat that this is not "always quote-post": a reply is a remark *to* a person, a quote-post is a
+remark *about* them in front of an audience, and at heat 3 an Affectionate-Insult Epithet lands as
+banter in one and as a pile-on in the other. It also records that the craft survives the switch,
+since a quote-post still displays the post it answers and the stimulus keeps doing the setup's work.
 
 ### Changed — X's interview lens was wrong, and running it is what proved it (2026-09-04)
 
