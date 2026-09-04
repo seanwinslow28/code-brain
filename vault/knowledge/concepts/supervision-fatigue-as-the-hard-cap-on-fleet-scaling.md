@@ -2,33 +2,33 @@
 title: "Supervision Fatigue as the Hard Cap on Fleet Scaling"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-09-02.md
+  - 20_projects/substack-studio/spread-run/session-record.md
 tags: [auto-generated, phase-6]
-created: 2026-09-03
-updated: 2026-09-03
+created: 2026-09-04
+updated: 2026-09-04
 ---
 
 ## Definition
 
-As the number of autonomous agents increases, the cognitive load required to monitor their collective state grows non-linearly. This creates a hard cap on scalability because the user's capacity to interpret and act on fleet status reports becomes the bottleneck. The system shifts from being an extension of the user's will to a source of noise that requires active management, effectively reducing the net productivity gain of adding more agents.
+This pattern defines the inverse relationship between agent fleet size and human oversight capacity, where the cognitive load of verifying low-confidence outputs grows non-linearly with the number of agents. As the volume of generated content increases, the human supervisor becomes the bottleneck not because of lack of time, but because of the diminishing marginal utility of each verification step. The system fails not when agents break, but when the cost of validation exceeds the value of the output.
 
 ## Context
 
-Sean's fleet has grown from 7 active agents in June to 9 active and 8 disabled in September. The increasing complexity of managing 'stale' vs 'healthy' states across multiple domains (creative, job hunt, infrastructure) suggests that Sean is approaching the limit of his ability to supervise this system effectively without automated intervention or simplification.
+Sean's fleet memory shows a progression from small runs (3 concepts) to large runs (125+ concepts). He is hitting limits where the 'rejected_count' and duration_seconds spike, indicating that human triage is becoming the limiting factor in his production pipeline.
 
 ## Evidence
 
-> Active agents: 9 of 17 | Disabled: 8
+> Human ranking degrades past ~7 items; triage-then-rank scales.
 
-> Misaligned or Touching Decline - Vault critic and knowledge-lint agents are stale; need immediate ex
+> Measurement: Blind two-stage read, rewrite the winner only, flaw-count on all
 
-> Daily morning routine successfully executed; planning complete for today.
+> Closure: Rank + survival % — The #163 pattern: close on the machine's evidence, not on the publish.
 
 ## Examples
 
-- The fleet status report explicitly categorizes agents as 'Aligned with Protect / Automate' vs 'Misaligned or Touching Decline', requiring Sean to manually triage.
-- The presence of 8 disabled agents indicates a history of failed experiments that are no longer monitored, adding to the cognitive overhead of understanding the current system state.
+- Implementing a 'stripped-samples arm' to turn arbitrary trimming into a principled noise floor measurement
+- Using a 'blind two-stage read' protocol to separate initial triage from final ranking
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Context Management as a Bottleneck]]
+[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[The Calibration Bottleneck in Scalable Creative Production]] [[Context Management as a Bottleneck]]

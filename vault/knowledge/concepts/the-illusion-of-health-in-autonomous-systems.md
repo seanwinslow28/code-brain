@@ -2,7 +2,7 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/fleet-state.md
+  - health/private/2026-07-12-private-findings.md
 tags: [auto-generated, phase-6]
 created: 2026-09-04
 updated: 2026-09-04
@@ -10,26 +10,25 @@ updated: 2026-09-04
 
 ## Definition
 
-System observability metrics often register success based on binary execution states rather than semantic fidelity or output quality. When an agent reports 'status=success' while producing empty or degraded results, the monitoring layer fails to distinguish between operational uptime and functional utility. This creates a feedback loop where the infrastructure appears robust and reliable, masking the underlying decay of the knowledge base it is meant to serve. The user receives a false sense of security because the control plane reports no errors, even as the data plane silently degrades.
+A state where an automated system appears operational because its surface-level metrics (like run completion or file generation) are green, while its underlying semantic integrity is degrading. This occurs when the system fails to detect broken links, stale references, or conflicting definitions, creating a false sense of reliability. The mechanism relies on the absence of immediate user-facing errors, allowing structural decay to accumulate silently until it causes a critical failure in reasoning or retrieval.
 
 ## Context
 
-Sean's fleet shows multiple agents reporting 'success' or 'healthy' status while simultaneously exhibiting signs of functional failure, such as empty queues or zero-scored outputs. This discrepancy prevents him from accurately assessing the true state of his automated workflows and may lead to misplaced confidence in the system's ability to support his job hunt and creative work.
+Sean's agent fleet runs daily and generates reports, but the presence of hundreds of 'withheld' findings and broken links suggests that the system is masking its own degradation. This illusion prevents Sean from addressing root causes like broken wikilinks or soul-tier conflicts until they impact his workflow significantly.
 
 ## Evidence
 
-> job-feed ... status=partial · 0.2h ago · notes='fetch=0 scored=0 mbp=True'
+> 1311 issues found (1079 structural, 232 semantic).
 
-> deep-researcher ... status=empty-queue · mode=queue · 6.0h ago · notes='no unchecked items'
+> 302 finding(s) withheld from this tracked report (SOUL-derived, or about a file in a gitignored subtree).
 
-> vault-critic ... Status: stale ... Last run: 2026-08-31T03:37:57 ... details='status=partial articles=3 codex_fail=1 ag_fail=0'
+> The system acts as a diagnostic layer that exposes the gap between the intended architecture of the vault and its realized state.
 
 ## Examples
 
-- The job-feed agent reports a 'partial' status with zero jobs fetched and scored, yet the fleet dashboard lists it as 'degraded' rather than 'failed', implying it is still running but not producing value.
-- The deep-researcher reports an 'empty-queue' status, which is technically a success state for the agent's loop, but indicates a lack of input data to process, rendering the agent idle and unhelpful.
-- The vault-critic has not run in over three days (stale), yet its last known status was 'partial', suggesting a history of incomplete execution that is now obscured by its absence.
+- broken-wikilink (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/2026-05-13-agent-fleet-dashboard-spec.md` — vault-synthesizer eval suite
+- stale-reference (T2): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/source-material/personal-context/gemini-deep-think-agent-sdk-prompt.md` — sonnet 4.5
 
 ## Related Concepts
 
-[[Operational Uptime vs. Cognitive Utility Tension]] [[Silent Failure Propagation in Agent Fleets]] [[Agent Health Monitoring]]
+[[Silent Decay in Strategic Pipelines]] [[Operational Uptime vs. Cognitive Utility Tension]]

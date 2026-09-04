@@ -2,31 +2,31 @@
 title: "Tacit Knowledge Erosion vs. Automation Scale"
 type: concept
 sources:
-  - knowledge/concepts/tacit-knowledge-erosion-vs-automation-scale.md
+  - 20_projects/substack-studio/spread-run/sean-final.md
 tags: [auto-generated, phase-6]
-created: 2026-09-03
-updated: 2026-09-03
+created: 2026-09-04
+updated: 2026-09-04
 ---
 
 ## Definition
 
-This mechanism describes a non-linear degradation of human expertise where the specific cognitive stage automated determines the nature of the resulting skill gap. When automation displaces execution, diagnostic capability often remains intact; however, when it automates interpretation or decision selection, the operator loses the ability to verify the system's internal logic. This creates a structural vulnerability where the human supervisor becomes cognitively dependent on the agent's output without possessing the mental models required to detect subtle failures or mode errors.
+A systemic risk where the explicit codification of creative processes strips away the implicit, context-dependent knowledge that gives those processes meaning. As automation scales to handle more complex stylistic or structural requirements, the agent must rely increasingly on surface-level heuristics because the deep, tacit foundations cannot be fully articulated in prompts. This creates a divergence between the scale of production and the fidelity of output, where efficiency gains are offset by a loss of authentic voice.
 
 ## Context
 
-Sean is building an autonomous agent fleet that handles significant portions of his knowledge work and job hunt infrastructure. As he scales this system, he risks losing the 'taste' and diagnostic intuition necessary to supervise these agents effectively. Understanding which cognitive stages are being displaced allows him to intentionally preserve manual practice in high-leverage areas like interpretation and decision-making, preventing a total loss of agency.
+Sean's attempt to teach Claude four distinct author styles failed because the 'soul' or tacit knowledge behind those styles could not be transferred via explicit rules. The agent could parse the mechanics but not the motivation, leading to the 'imaginary sisters' hallucination as a placeholder for missing contextual grounding.
 
 ## Evidence
 
-> Automating execution preserves diagnosis differently from automating interpretation; the debt belongs to the displaced cognitive stage, not to automation in general.
+> It can read any of those four and hand you a clean breakdown of how the engine turns over. What it can't hand you is the soul underneath.
 
-> Before diagnosing deskilling, test whether the system made competent supervision cognitively impossible: could the operator state what the automation was doing, why, and what it would do next?
+> That's the part you can't hand over as a spec, because it isn't one. It's residue.
 
 ## Examples
 
-- Mapping agent functions to Parasuraman's levels of automation to identify which stages Sean must perform manually.
-- Designing an Observability Contract that requires agents to expose mode, evidence, decision, uncertainty, and next_action.
+- The agent produced 'literary gold' that was technically correct but lacked the personal resonance of Sean's actual writing.
+- Sean had to 'scrub the authors out' and feed his own writing back into the model to recover a usable voice, acknowledging the limits of external stylistic imposition.
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[The Illusion of Competence in Automated Systems]]
+[[The Homogenization Trap in Agentic Creative Workflows]] [[Taste as Evaluation Function vs. Activity Proof]]

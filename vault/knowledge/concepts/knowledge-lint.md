@@ -2,31 +2,33 @@
 title: "Knowledge-Lint"
 type: concept
 sources:
-  - 40_knowledge/references/ref-ai-supervision-skill-and-draft-review-prompt.md
+  - health/private/2026-07-12-private-findings.md
 tags: [auto-generated, phase-6]
-created: 2026-05-29
-updated: 2026-05-29
+created: 2026-09-04
+updated: 2026-09-04
 ---
 
 ## Definition
 
-Knowledge-Lint is the automated or semi-automated process of checking the integrity, relevance, and accuracy of information within a knowledge base or AI output. It involves verifying that claims are grounded in evidence, that citations are valid, and that the information is up-to-date and consistent with other parts of the system. This mechanism prevents the accumulation of 'rot' or outdated information, ensuring that the knowledge base remains a reliable source of truth. It acts as a quality control layer, catching errors or inconsistencies that might otherwise go unnoticed.
+A continuous verification mechanism that compares the structural integrity of a knowledge graph against its source material and internal consistency rules. This process identifies broken references, semantic drift, and policy violations by scanning for mismatches between linked entities and their actual existence or content. The system acts as a diagnostic layer that exposes the gap between the intended architecture of the vault and its realized state, flagging issues like stale links or conflicting definitions before they compound into systemic confusion.
 
 ## Context
 
-Sean's personal knowledge vault is a critical asset for his job hunt and professional development. Knowledge-Lint ensures that the information stored there is accurate and useful, preventing the vault from becoming a repository of stale or incorrect data. This is particularly important when using the vault as a reference for job applications or product strategy.
+Sean's vault has grown to include thousands of files across multiple domains. Without automated linting, the cognitive load of maintaining referential integrity would become unmanageable, leading to 'legibility debt' where the system becomes harder to navigate than manual notes. This concept is critical for preserving the utility of the vault as a second brain.
 
 ## Evidence
 
-> The strategy doc that used to take someone three days now shows up before lunch, and it’s not just one person — it’s everyone you work with.
+> Each finding below either quotes `vault/05_atlas/operating-models/` SOUL text or names a file in a gitignored subtree — both private under CLAUDE.md rule 9.
 
-> Knowing what to trust, what to check, what to cut, and what not to send.
+> 1112 issues found (932 structural, 180 semantic).
+
+> 265 finding(s) withheld from this tracked report (SOUL-derived, or about a file in a gitignored subtree).
 
 ## Examples
 
-- Running a script to check for broken links or outdated references in a knowledge base.
-- Using an AI agent to verify the accuracy of claims in a document against a set of trusted sources.
+- broken-wikilink (T1): `/Users/seanwinslow/Code-Brain/code-brain/vault/20_projects/prj-job-hunt-2026/README.md` — onwards-and-upwards-5-4-26/job-hunt-2026-roadmap/unified-roadmap-completion-log
+- soul-tier-a-conflict (T2): `knowledge/concepts/accountability-gap.md` — tier_a_item="SOUL — Creative Studio: 'Creative taste is Sean's, always. 90/10 delegation.' / 'Create for our"
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Indexing and Synthesis]] [[Vault Maintenance]]
+[[Legibility Debt as a Supervision Failure Mode]] [[Infrastructure Fragmentation and Semantic Isolation]]

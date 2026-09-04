@@ -2,31 +2,31 @@
 title: "Context Management as a Bottleneck"
 type: concept
 sources:
-  - knowledge/concepts/context-management-as-a-bottleneck.md
+  - health/2026-06-07-lint-report.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-09-04
+updated: 2026-09-04
 ---
 
 ## Definition
 
-This mechanism defines the finite capacity of the context window as a hard constraint on the complexity and specificity of instructions an agent can process. When operational instructions compete with nuanced aesthetic preferences for space in the context window, the latter is often truncated or diluted, leading to a loss of taste fidelity. This bottleneck forces a trade-off where scaling up data processing necessarily reduces the depth of creative guidance available to the agent.
+The phenomenon where the cognitive load of maintaining coherent context across multiple agents and domains limits the effective scale of automation. It is not merely a technical constraint but a supervisory limit, where the human must act as the glue holding disparate agent states together. This bottleneck emerges when the complexity of inter-agent dependencies exceeds the capacity for manual verification.
 
 ## Context
 
-Sean's current scaling strategy relies on larger context windows, but this approach only accelerates data accumulation without solving the underlying capacity issue. He must address this bottleneck by externalizing taste memory or implementing dynamic pruning to preserve critical aesthetic signals.
+As Sean's fleet grows, the cost of managing context shifts from computational to cognitive. This concept explains why adding more agents does not linearly increase productivity but instead increases the risk of silent failure and contradiction.
 
 ## Evidence
 
-> As the fleet scales (sampling hundreds of clusters), the probability of homogenization increases because the context window cannot hold both operational instructions and nuanced aesthetic preferences simultaneously.
+> contradiction (T2): knowledge/concepts/context-management-as-a-bottleneck.md — contradicts supervision-as-the-new-ai-edge
 
-> Critiques from two external reasoners (gpt-5.5 via Codex CLI, Gemini 3 via Anti-Gravity CLI) of [[context-management-as-a-bottleneck]]. The synthesizer describes what the concept is;
+> The working title should be retained, though slight adjustments in the README copy are necessary to emphasize the graph nature of the data.
 
 ## Examples
 
-- The August 20 run sampled 185 clusters and wrote 122 concepts, but the context window likely struggled to maintain taste fidelity across such a high volume.
-- The June 29 run sampled 253 clusters and wrote 109 concepts, indicating a significant strain on context management capabilities.
+- contradiction (T2): knowledge/concepts/agent-health.md — contradicts context-management-as-a-bottleneck
+- contradiction (T2): knowledge/concepts/benchmarking-artifact.md — contradicts context-management-as-a-bottleneck
 
 ## Related Concepts
 
-[[The Taste-Throughput Trade-off in Agentic Synthesis]] [[Aesthetic Standardization as a Supervisory Mechanism]]
+[[Supervision as the New AI Edge]] [[The Context-Memory Bottleneck in Personalized AI]]

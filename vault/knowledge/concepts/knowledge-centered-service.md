@@ -2,30 +2,31 @@
 title: "Knowledge-Centered Service"
 type: concept
 sources:
-  - knowledge/concepts/knowledge-centered-service.md
+  - 20_projects/research/2026-08-31-brain-dump-to-prose-operations.md
 tags: [auto-generated, phase-6]
-created: 2026-06-05
-updated: 2026-06-05
+created: 2026-09-04
+updated: 2026-09-04
 ---
 
 ## Definition
 
-Knowledge-Centered Service inverts the traditional documentation lifecycle by treating knowledge creation as a byproduct of operational work rather than a separate maintenance task. This model posits that documentation quality is an operational byproduct, not a documentation-team virtue, meaning that the act of solving problems generates the necessary artifacts for future reference. The system relies on the continuous improvement of these artifacts during the flow of work, especially in support, PM, engineering, and incident workflows. This approach contrasts with static documentation models where content is created in isolation from the immediate pressures of execution.
+A service model where the primary value is not the immediate answer but the structured, retrievable, and interconnected body of knowledge that supports future reasoning. In Sean's vault, this manifests as the 'Fleet Memory Index' and 'Run Lessons' which are not just logs but a curated, indexed repository of past reasoning states. The mechanism relies on the invariant that past failures and successes (e.g., rejected counts, duration seconds) are more valuable than raw output because they encode the constraints and costs of previous attempts.
 
 ## Context
 
-Sean can leverage this insight to propose agent specs that monitor operational workflows for knowledge gaps rather than auditing static documents for accuracy. His AI-PM interview narrative should emphasize the importance of modeling stakeholder intent in AI knowledge systems to avoid 'translation loss'.
+Sean's vault is not just a storage system but a 'knowledge-centered service' where the value lies in the ability to retrieve and recombine past reasoning states. This is critical for his job hunt and creative studio work, where context compounding and avoiding repeated mistakes are essential.
 
 ## Evidence
 
-> Docs are created and improved in the flow of work, especially support, PM, engineering, and incident workflows.
+> One-line summary per memory file. Used by agents for the manifest-then-top-5 retrieval pattern (Perplexity DR, Apr 2026).
 
-> KCS gives him a sharper claim: documentation quality is an operational byproduct, not a documentation-team virtue.
+> The pass between brain dump and finished piece is not one operation. Composition research and craft literature name roughly ten, and they sort into three tiers — reorganizing for the reader (the big one the current drafts skip), register conversion (speech to writing, measurable), and sentence work (rhythm, syntax, compression).
 
 ## Examples
 
-- Monitoring operational workflows for knowledge gaps rather than auditing static documents for accuracy.
+- The 'Fleet Memory Index' provides a manifest of past runs, allowing agents to retrieve relevant context without re-running full analyses.
+- The 'Run Lessons' files capture specific metrics (concepts_written, rejected_count) that inform future agent behavior.
 
 ## Related Concepts
 
-[[Boundary Object Theory]] [[Confluence Overhaul Plan]]
+[[Context Compounding]] [[Memory Rot and Lifecycle Management]]
