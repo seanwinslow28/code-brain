@@ -61,6 +61,9 @@ what order**, and asks him to correct both.
 ## Transcript format
 
 Stored under `creative-studio/content-machine/transcripts/`, git-ignored. It is verbatim author.
+**Professional-lane transcripts are the exception** — they live beside their application under
+`vault/20_projects/prj-job-hunt-2026/applications/<date>-<company>-<role>/`, because the transcript
+names an employer and is only useful next to the document it produced (#230, `SKILL.md` Stage 2).
 Never pasted into a tracked file, an issue, or a commit message.
 
 ```

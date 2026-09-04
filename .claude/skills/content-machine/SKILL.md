@@ -156,8 +156,18 @@ Constraints: <editorial law that binds this piece; series, order, house rules>
 
 ### Stage 2 → TRANSCRIPT
 
-Stored under `creative-studio/content-machine/transcripts/` (git-ignored — it is verbatim author).
-Never pasted into a tracked file, an issue, or a commit message.
+**Expressive lane:** stored under `creative-studio/content-machine/transcripts/` (git-ignored — it
+is verbatim author).
+
+**Professional lane:** stored beside its application, under
+`vault/20_projects/prj-job-hunt-2026/applications/<date>-<company>-<role>/` (git-ignored by the
+whole-directory rule on the job-hunt home). Ruled in
+[#230](https://github.com/seanwinslow28/code-brain/issues/230) before the lane's first run. A
+Professional transcript is facts about a named employer, not voice material — it belongs with the
+letter, the ORIGIN LEDGER and the ASK LIST it produced, and it is not corpus input the way an
+Expressive transcript is.
+
+Either way, never pasted into a tracked file, an issue, or a commit message.
 
 ```
 TRANSCRIPT — <slug> — <date>
@@ -389,7 +399,7 @@ Read-only inputs, all git-ignored, all local:
 | `creative-studio/content-machine/cheese-bank/` | Before shipping any Expressive draft |
 | `creative-studio/content-machine/coined-lines.md` | Every piece, at the final sweep. The one-artifact rule: a coined line lives in exactly one artifact and is never recycled. |
 | `creative-studio/content-machine/do-not-promote.md` | Every piece, at the final sweep |
-| `creative-studio/content-machine/transcripts/` | The interview record, and later corpus |
+| `creative-studio/content-machine/transcripts/` | The interview record for **Expressive** pieces, and later corpus. Professional-lane transcripts live with their application under `vault/20_projects/prj-job-hunt-2026/applications/` instead (#230). |
 | `creative-studio/content-machine/ledger/` | Ratified lessons |
 | `creative-studio/content-machine/ideas-bank.md` | Every Oracle run, **before** scoring — a thin spike from three weeks ago may have an ending now |
 

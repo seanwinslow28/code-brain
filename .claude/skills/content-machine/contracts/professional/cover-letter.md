@@ -60,8 +60,45 @@ revise request that makes the document worse.
 
 ## Format
 
-- **One page. Three or four paragraphs.** A fifth paragraph is almost always the resume being
-  restated.
+- **UNRESOLVED, and deliberately not a number. See [#243](https://github.com/seanwinslow28/code-brain/issues/243).**
+  This bound was set to "150-250 for an optional letter, 250-350 for a named reader" on 2026-09-03
+  and that was an over-correction, withdrawn 2026-09-04. The first amendment was reasoned from
+  attention economics (recruiter load, queue volume) and no measurement of letters. A second
+  research pass then found the only verified PM specimen with a stated outcome — Ask A Manager,
+  2021, "led to an interview, which led to an offer" — runs **484 words**, above both the
+  fabricated 250-400 consensus and my own replacement for it.
+
+  So the honest state is: **no evidence supports a tight word band in either direction.** Two
+  unsourced numbers were swapped for each other. The working guidance until #243 rewrites this
+  section is one page, with the real constraint being proportional rather than absolute — the
+  single concrete proof gets roughly a third of the letter (the PM specimen spends 165 of its 484
+  words on one strength). Do not enforce a band the evidence does not support.
+
+  Original amendment note, retained because the fabrication finding still stands:
+  ([#230](https://github.com/seanwinslow28/code-brain/issues/230)), which produced a 487-word draft
+  that was *in spec* under the old bound and obviously too long to anyone reading it.
+
+  The old bound was "one page, three or four paragraphs." One page is a **ceiling** and it read as a
+  target. The research behind the amendment is worth stating because the answer is unusual: **there
+  is no rigorous study on cover letter length.** The most-cited one (Journal of Applied Psychology
+  2022, Vol. 107 Issue 8) does not exist -- Crossref returns 164 JAP articles for 2022 and none is
+  about cover letters. The "ResumeGo 250-400 words / 53% more callbacks" figure is a real study
+  (7,287 applications) with its independent variable swapped: it measured **tailoring**, not length.
+  The consensus range traces to an Indie Hackers post whose data headline has no data behind it.
+
+  What *is* measured argues for the shorter end. Greenhouse's benchmark (640M applications, 6,000+
+  orgs) puts applications per recruiter per year at **746**, up from 146 in 2022. Cui, Dias & Ye
+  (2025, 5.5M bids) found the correlation between letter text quality and callbacks fell **51%**
+  after an AI writing tool shipped, with employers reweighting toward work history. One real signal
+  points the other way -- Wingate et al. (2025, n=183) found detail and structure predicted more
+  interviews -- but it describes an **engaged** reader, which is why the bound scales with who the
+  letter reaches rather than with the seniority of the role.
+
+  **Length tracks reader engagement, not role level** — that reasoning survives; the numbers
+  attached to it did not.
+
+- A fourth paragraph is almost always the resume being restated. **Also unresolved:** the verified
+  PM specimen runs five paragraphs. See #243.
 - **Addressed to a person** where a person can be found.
 - **The first paragraph is where the reader decides whether to read the second.** A format fact about
   how this document is read, not the Expressive lane's first-screen test, which does not apply here.

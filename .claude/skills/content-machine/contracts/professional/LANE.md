@@ -87,6 +87,32 @@ in this lane or any other ([#222](https://github.com/seanwinslow28/code-brain/is
 guards a Professional document is the origin gate, which **blocks** on any untraced claim, and
 `writing-critique`'s Voice dimension, which owns register drift.
 
+## Where this lane's artifacts live
+
+**Everything a Professional run produces is private, including the drafts.** The Expressive
+convention — transcript in the git-ignored private brain, drafts in tracked `substack-studio/` — is
+exactly wrong here, because this lane's output names a specific employer and its ASK LIST may quote
+compensation, dates or contacts.
+
+One folder per application, under the git-ignored job-hunt home:
+
+```
+vault/20_projects/prj-job-hunt-2026/applications/<date>-<company>-<role>/
+    posting.md          the role as advertised
+    transcript.md       Stage 2, verbatim
+    draft-N.md          every shaped candidate
+    origin-ledger.md    ORIGIN LEDGER + ASK LIST
+    final.md            what Sean actually sent
+```
+
+Nothing goes in `substack-studio/`, `creative-studio/content-machine/transcripts/`, or any other
+path. Ruled in [#230](https://github.com/seanwinslow28/code-brain/issues/230) before the lane's
+first run; canary-tested the same day (`git add` refuses each file and the directory).
+
+**Derived files inherit the privacy class of their most private input**
+([#221](https://github.com/seanwinslow28/code-brain/issues/221)): an assembled shaping context, a
+captured CLI log, a measurement artifact. They land in this folder too, never in a tracked path.
+
 ## The do-not-promote sweep runs harder here
 
 The suppressed backstory topics stay out, as everywhere. This lane adds the pressure that makes them
