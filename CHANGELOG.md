@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed — the X contract asserted a falsified platform fact (2026-09-04)
+
+`contracts/expressive/x.md` said "Links suppress reach." It was **true history stated in the present
+tense**: NDSS 2026 measured 4–8× lower normalised visibility for link posts on 2022–24 data, and Musk
+confirmed the practice in November 2024. It stopped being true since. The current ranking path
+(`xai-org/x-algorithm`; `twitter/the-algorithm` is superseded and its published weights are all
+zeroed defaults) carries no link penalty anywhere, and its only link term is `OpenLinkWeight = +0.2`,
+positive. Verified against the live repository, not taken from the research pass's word.
+
+The writing rule attached to the claim survives unchanged and on its own merits: a post that exists
+to carry a link is a cut of an artifact, and the cut still has to stand on its own as a post.
+
+- **`runtime-retirements.toml`:** entry `x-links-suppress-reach`, scanning the two Expressive
+  contracts that could carry the claim plus the LinkedIn contract. **Canary-tested** — the pattern
+  was proven to fire on an injected string and the checker to exit 1, because a registry entry that
+  matches nothing gives false confidence. An allowance drafted for the correction line turned out to
+  be dead (the corrected wording does not contain the forbidden string) and was removed rather than
+  left in as clutter implying a match.
+- Evidence: `vault/20_projects/research/2026-09-04-x-platform-mechanics.md`
+  ([#247](https://github.com/seanwinslow28/code-brain/issues/247)), 83% Tier A, 0% Tier C.
+
+**Two corrections from the same research are filed, not made.** The first-screen line still describes
+the fold as a character bound when it is a CSS `line-clamp` over rendered lines. And the reply surface
+is materially wrong: the current `OONRetweetReplyFilter` deletes every reply from the feed of anyone
+not already following the author, with no exemption for who was replied to, while a quote-post ranks
+as an original — which makes the reply-hook memo's premise mechanically false. That memo lives in the
+Expressive `LANE.md`, and a contract may narrow lane law but never delete it, so it is a ruling rather
+than a correction.
+
 ### Changed — X's interview lens was wrong, and running it is what proved it (2026-09-04)
 
 The first X run ([#232](https://github.com/seanwinslow28/code-brain/issues/232)) ran the full chain

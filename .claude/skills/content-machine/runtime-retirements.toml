@@ -239,3 +239,17 @@ reason = "X routes to the Observer lens; an evidence lens cannot reach any of X'
 path = ".claude/skills/content-machine/contracts/expressive/x.md"
 line_contains = "it was **Skeptic**, ruled in"
 reason = "The correction note has to name the lens it replaced; this is the historical record, not a live route."
+
+[[retirement]]
+id = "x-links-suppress-reach"
+name = "Links suppress reach on X"
+source = "https://github.com/seanwinslow28/code-brain/issues/247"
+scan_paths = [
+  ".claude/skills/content-machine/contracts/expressive/x.md",
+  ".claude/skills/content-machine/contracts/expressive/LANE.md",
+  ".claude/skills/content-machine/contracts/professional/linkedin.md",
+]
+
+[[retirement.pattern]]
+literal = "Links suppress reach"
+reason = "Falsified against the current ranking code: no link penalty exists and the only link term is OpenLinkWeight = +0.2 (#247). True on 2022-24 data; stated in the present tense long after it stopped being true."

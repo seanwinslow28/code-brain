@@ -84,9 +84,22 @@ The surface the [lane's first-screen test](LANE.md#the-first-screen-test) runs a
 - One post carries one thing. If it carries two, it is two posts, and probably one of them is better.
 - Length is bounded by the fold, not the character limit.
 - No hashtags. No engagement questions. No "🧵" as a promise the thread does not keep.
-- Links suppress reach, which is a fact about the platform rather than a rule about the writing.
-  Where a post exists to carry a link, that is a **cut** of an artifact, and the cut still has to
-  stand on its own as a post.
+- **Links do not currently suppress reach.** Corrected 2026-09-04 against the current ranking code
+  ([#247](https://github.com/seanwinslow28/code-brain/issues/247)); this line previously asserted
+  that they did. The claim was **true history stated in the present tense**: NDSS 2026 measured
+  4–8× lower normalised visibility for link posts on 2022–24 data, and Musk confirmed the practice
+  in November 2024. It stopped being true since. The live ranking path
+  (`xai-org/x-algorithm`, the current repo — `twitter/the-algorithm` is superseded and its published
+  weights are all zeroed defaults) carries **no link penalty anywhere**, and its only link term is
+  `OpenLinkWeight = +0.2`, positive.
+
+  This is a fact about the platform, and platform facts rot. Re-check it before leaning on it; the
+  research note records how, and the method is cheap.
+
+  The writing rule it was attached to survives on its own merits and is unchanged: **where a post
+  exists to carry a link, that is a cut of an artifact, and the cut still has to stand on its own
+  as a post.** A post that is only a delivery vehicle for a URL was never worth posting, whatever
+  the algorithm does with it.
 
 ## Negative specimens — what this must never look like
 
