@@ -2,31 +2,34 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: concept
 sources:
-  - knowledge/concepts/the-illusion-of-health-in-autonomous-systems.md
+  - 02_Areas/Agent-Fleet/fleet-state.md
 tags: [auto-generated, phase-6]
-created: 2026-09-03
-updated: 2026-09-03
+created: 2026-09-04
+updated: 2026-09-04
 ---
 
 ## Definition
 
-This phenomenon occurs when an automated agent reports a successful execution status while silently failing to produce its intended semantic output or update the necessary downstream state. The system appears healthy because the control plane (status logs) is green, but the data plane (actual knowledge artifacts) remains stale or incorrect. This creates a dangerous feedback loop where the user trusts the automation's reliability precisely because it rarely alerts, leading to undetected decay in the integrity of the personal knowledge vault.
+System observability metrics often register success based on binary execution states rather than semantic fidelity or output quality. When an agent reports 'status=success' while producing empty or degraded results, the monitoring layer fails to distinguish between operational uptime and functional utility. This creates a feedback loop where the infrastructure appears robust and reliable, masking the underlying decay of the knowledge base it is meant to serve. The user receives a false sense of security because the control plane reports no errors, even as the data plane silently degrades.
 
 ## Context
 
-Sean relies on his fleet for daily planning and job hunting; if the synthesizer or indexer fails silently, his morning brief becomes based on stale data without him realizing the source is broken until much later. This concept explains why 'healthy' status indicators are insufficient proxies for actual cognitive utility.
+Sean's fleet shows multiple agents reporting 'success' or 'healthy' status while simultaneously exhibiting signs of functional failure, such as empty queues or zero-scored outputs. This discrepancy prevents him from accurately assessing the true state of his automated workflows and may lead to misplaced confidence in the system's ability to support his job hunt and creative work.
 
 ## Evidence
 
-> job-feed ... Status: healthy ... Last run: 2026-09-02T08:30:04 ... notes='fetch=0 scored=0 mbp=False'
+> job-feed ... status=partial · 0.2h ago · notes='fetch=0 scored=0 mbp=True'
 
-> vault-critic ... Status: stale ... Last run: 2026-08-31T03:37:57 ... notes='status=partial articles=3 codex_fail=1 ag_fail=0'
+> deep-researcher ... status=empty-queue · mode=queue · 6.0h ago · notes='no unchecked items'
+
+> vault-critic ... Status: stale ... Last run: 2026-08-31T03:37:57 ... details='status=partial articles=3 codex_fail=1 ag_fail=0'
 
 ## Examples
 
-- The job-feed reports 'fetch=0 scored=0' but maintains a 'healthy' status, implying success where no actual job data was processed.
-- The vault-critic agent has not run in over 53 hours, yet its status is listed as 'stale' rather than 'failed', masking the lack of critical review.
+- The job-feed agent reports a 'partial' status with zero jobs fetched and scored, yet the fleet dashboard lists it as 'degraded' rather than 'failed', implying it is still running but not producing value.
+- The deep-researcher reports an 'empty-queue' status, which is technically a success state for the agent's loop, but indicates a lack of input data to process, rendering the agent idle and unhelpful.
+- The vault-critic has not run in over three days (stale), yet its last known status was 'partial', suggesting a history of incomplete execution that is now obscured by its absence.
 
 ## Related Concepts
 
-[[Operational Uptime vs. Cognitive Utility Tension]] [[Silent Failure Propagation in Agent Fleets]]
+[[Operational Uptime vs. Cognitive Utility Tension]] [[Silent Failure Propagation in Agent Fleets]] [[Agent Health Monitoring]]
