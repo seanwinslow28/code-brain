@@ -258,6 +258,13 @@ creative-studio/content-machine/cheese-bank/
 creative-studio/content-machine/reference-universe.md
 creative-studio/content-machine/do-not-promote.md
 creative-studio/content-machine/transcripts/
+# Handoff drafts and Sean's finals, per piece (2026-09-04, wayfinder #232 — the
+# first X run). A draft is derived entirely from git-ignored inputs (the
+# transcript, the corpus, voice-samples.md) and is unpublished until Sean ships
+# it, so it inherits their privacy class. The lessons loop needs the handoff and
+# the final side by side on disk to diff, so they get a durable private home
+# rather than a scratch directory.
+creative-studio/content-machine/pieces/
 # Spread-run (#221) assembled shaping contexts. `context-full.md` and
 # `context-stripped.md` are verbatim concatenations of the transcript, all six
 # corpus files, voice-samples.md and reference-universe.md — every one of them

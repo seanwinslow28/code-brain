@@ -220,3 +220,22 @@ scan_paths = [
 [[retirement.pattern]]
 literal = "Status: thin"
 reason = "A contract's status is `unproven` until a real piece runs and `corrected by <piece>` after; `thin` is a mood, not a status the machine can read (#231)."
+
+[[retirement]]
+id = "x-skeptic-lens"
+name = "Skeptic as the X medium's interview lens"
+source = "https://github.com/seanwinslow28/code-brain/issues/232"
+scan_paths = [
+  ".claude/skills/content-machine/contracts/expressive/x.md",
+  ".claude/skills/content-machine/interview/ENGINE.md",
+  ".claude/skills/content-machine/interview/skeptic.md",
+]
+
+[[retirement.pattern]]
+literal = "**Lens: Skeptic.**"
+reason = "X routes to the Observer lens; an evidence lens cannot reach any of X's thirteen comic moves (#232)."
+
+[[retirement.allow]]
+path = ".claude/skills/content-machine/contracts/expressive/x.md"
+line_contains = "it was **Skeptic**, ruled in"
+reason = "The correction note has to name the lens it replaced; this is the historical record, not a live route."

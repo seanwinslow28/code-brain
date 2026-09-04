@@ -2,13 +2,25 @@
 
 Wave 1 ([#166](https://github.com/seanwinslow28/code-brain/issues/166)).
 
-**Lens: Skeptic.** Ruled in [#226](https://github.com/seanwinslow28/code-brain/issues/226). Room 1
-means a post is one landed claim with no arc to soften it, and this contract's own negative specimens
-are false authority and the lecture — which is the Skeptic's failure mode. X is the cheapest surface
-in the machine on which to find out that a claim is too broad.
+**Lens: [Observer](../../interview/observer.md).** Corrected 2026-09-04 on the wave-1 run
+([#232](https://github.com/seanwinslow28/code-brain/issues/232)); it was **Skeptic**, ruled in
+[#226](https://github.com/seanwinslow28/code-brain/issues/226) on the reasoning that room 1 means one
+landed claim with no arc to soften it. The run proved the pairing incoherent. Skeptic worked exactly
+as designed — a narrow claim, a sample, a retraction condition — and the post came out as evidence.
+Sean's verdict: *"That looks more like a Resume bullet point than a funny observational tweet."*
 
-**Status: unproven.** No post has run through it; the wave-1 run
-([#232](https://github.com/seanwinslow28/code-brain/issues/232)) is the first.
+The tell was in this file the whole time: **all thirteen moves below are comic**, and an evidence
+transcript makes none of them reachable. The lens was pulling against its own roster. It also reached
+past the sentences — because Skeptic needs measured evidence, it filtered which of his week's
+material was even eligible to become a post.
+
+A room-1 post is one landed *thing*. #226 read that as a claim; it is more often a **noticing**.
+Skeptic remains right for a post that genuinely argues something, and naming a second lens for that
+case is a ruling by Sean, not a line in this file.
+
+**Status: corrected by the #232 run.** The run produced no shipped post — it was stopped at the gates
+when the shape came out wrong, which is what a first run is for. The contract has been corrected;
+X has still never shipped a post.
 
 ## Governing documents, in precedence order
 

@@ -108,6 +108,7 @@ and stops to ask if it is not.
 | [Storyteller](storyteller.md) | A lived incident with photographable nouns | Substack story series |
 | [Stakes](stakes.md) | Why any of it mattered, and to whom | Any piece that reads as flat |
 | [Skeptic](skeptic.md) | The claim that will not survive a hostile reader | Substack verdict pieces |
+| [Observer](observer.md) | A noticing, in literal detail, with no argument attached | X, short-form comic posts |
 | [Technical Peer](technical-peer.md) | The mechanism, precisely, at engineer depth | Build write-ups |
 | [Recruiter](recruiter.md) | Decisions owned, and the judgment behind them | Resume, cover letter |
 | [Cold Reader](cold-reader.md) | What a stranger will not understand | Any piece before ship |

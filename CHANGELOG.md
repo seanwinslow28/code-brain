@@ -7,6 +7,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — X's interview lens was wrong, and running it is what proved it (2026-09-04)
+
+The first X run ([#232](https://github.com/seanwinslow28/code-brain/issues/232)) ran the full chain
+and was stopped at the gates. The contract licensed **thirteen moves, every one of them comic**, and
+named **Skeptic** as its lens. Skeptic worked exactly as designed — a narrow claim, a sample, a
+retraction condition — and the post came out as evidence. Sean's verdict: *"That looks more like a
+Resume bullet point than a funny observational tweet."* An evidence transcript makes none of the
+thirteen moves reachable, so the contract's own roster went entirely unused.
+
+The lens reached past the sentences: because Skeptic needs measured evidence, it filtered which of
+the week's material was even eligible to become a post, before a question was asked.
+[#226](https://github.com/seanwinslow28/code-brain/issues/226) read room 1 as one landed *claim*; it
+is more often a **noticing**.
+
+- **New seventh lens, `interview/observer.md`.** Probes for the thing itself before any lesson, the
+  literal detail, the moment of noticing, and what is dumb about it with the author implicated.
+  Three to five questions, because the lens has one target. Its named trap is chasing the joke: the
+  joke is written at the writing, and a performed answer loses the flat detail it would stand on.
+- **`contracts/expressive/x.md` routes to Observer**, with the correction recorded in place. Skeptic
+  stays right for an X post that genuinely argues something; naming a second lens for that case is a
+  ruling, not a line in the file.
+- **No engine change for interview depth.** The thirteen-question count was a symptom of Skeptic's
+  five mandatory probes, not a missing cap; "twelve is a smell, not a cap" stands for long-form.
+- **Lens counts updated to seven** in `SKILL.md` and `contracts/expressive/LANE.md`.
+- **`runtime-retirements.toml`:** entry `x-skeptic-lens`. Scan clean (10 retirements, 19 files, 30
+  patterns).
+- **`.gitignore`:** `creative-studio/content-machine/pieces/` added. A handoff draft is derived
+  entirely from git-ignored inputs and unpublished until it ships, so it inherits their privacy
+  class, and the private brain had no home for a draft at all. Canary-tested: ignored, and `git add`
+  refuses it.
+
+**Four machine defects found only by running it**, recorded on #232 and captured in
+`vault/00_inbox/tickets.md`, none of them fixed here: the origin gate cannot see a **stripped hedge**
+(a new sub-class of its documented recombination blindness — an approximation published as a flat
+count traces clean, because a token check sees the number and never the qualifier); its connective
+stoplist hides `run`/`runs`, so an interviewer noun introduced in a question reached the draft and
+cleared, which is the same failure that earned ENGINE rule 3; `gates/coined_lines.py` has never had a
+ledger, so the one-artifact rule has never once been armed; and the analyzer flags flatness on a
+51-word draft against essay-only bands.
+
+X has still never shipped a post. Refiled as
+[#246](https://github.com/seanwinslow28/code-brain/issues/246), which now blocks #233 and #228.
+
 ### Changed — writing-voice-modes packaged for Cowork; the guide stops narrating its own history (2026-09-03)
 
 The Cowork upload of `writing-voice-modes` was failing because the folder held two `SKILL.md`

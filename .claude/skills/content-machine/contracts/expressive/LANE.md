@@ -2,7 +2,7 @@
 
 Substack, X, YouTube / Reels, portfolio write-ups. This file holds what is true of all of them, so
 each contract holds only what is true of *its* medium. Same split as `interview/ENGINE.md` and the
-six lenses: the engine carries the fixed moves, the lens carries only what it probes for.
+seven lenses: the engine carries the fixed moves, the lens carries only what it probes for.
 
 A contract may **narrow** anything here (a tighter bound, a named exception) and may not **delete**
 it. Where a contract is silent on something this file covers, this file governs.
