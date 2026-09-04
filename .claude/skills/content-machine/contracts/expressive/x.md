@@ -76,13 +76,36 @@ The surface the [lane's first-screen test](LANE.md#the-first-screen-test) runs a
 - The attached image is part of the first screen, not decoration
   ([#170](https://github.com/seanwinslow28/code-brain/issues/170)).
 
+**What the fold actually is** (corrected 2026-09-04,
+[#247](https://github.com/seanwinslow28/code-brain/issues/247)). It is a CSS `-webkit-line-clamp`:
+**rendered lines, counted after layout** — not characters, not height. Every clamp X ships is one of
+{1, 2, 3, 4, 5, 10} lines, and the stylesheet carries responsive variants keyed to viewport width, so
+**the fold genuinely differs between a phone and a desktop**. X documents it nowhere; that is a
+finding, not a gap in the searching.
+
+Three consequences, and the third is the one that changes how the test is run:
+
+1. **Do not write to a number.** The top-level timeline value is not observable without a login. The
+   only clamp large enough to be a long-post fold is `line-clamp-10`, which is *consistent with* ten
+   lines and was never seen applied. Every "the fold is at 280 characters" claim traceable through
+   search came from marketing blogs citing nothing.
+2. **Lines, not characters, means the same post folds differently at different widths.** A post that
+   clears the fold on a desktop can be cut on a phone by nothing but a narrower column.
+3. **The fold is a timeline behaviour, not a property of the post.** On a logged-out permalink a
+   ~4,000-character post rendered in full with no "Show more" at all. So the first-screen test is a
+   test of how the post arrives *in a feed*, and reading your own permalink will not run it.
+
 **Reply surface: yes.** Replies and quote-posts. The
 [reply-hook memo](LANE.md#the-reply-hook-memo-advisory-never-a-gate) ships with every post.
 
 ## Format
 
 - One post carries one thing. If it carries two, it is two posts, and probably one of them is better.
-- Length is bounded by the fold, not the character limit.
+- Length is bounded by the fold, not the character limit — and the two are independent quantities,
+  not a strict and a loose version of one bound. The character limit is 280 **weighted** characters
+  (Latin text weighs 1, CJK and emoji weigh 2), every URL counts as a flat 23 however long it really
+  is, and attached media costs 0. See `## First screen` for what the fold is; it is measured in
+  rendered lines and it is the one that binds first.
 - No hashtags. No engagement questions. No "🧵" as a promise the thread does not keep.
 - **Links do not currently suppress reach.** Corrected 2026-09-04 against the current ranking code
   ([#247](https://github.com/seanwinslow28/code-brain/issues/247)); this line previously asserted

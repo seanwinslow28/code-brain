@@ -28,8 +28,22 @@ to carry a link is a cut of an artifact, and the cut still has to stand on its o
 - Evidence: `vault/20_projects/research/2026-09-04-x-platform-mechanics.md`
   ([#247](https://github.com/seanwinslow28/code-brain/issues/247)), 83% Tier A, 0% Tier C.
 
-**Two corrections from the same research are filed, not made.** The first-screen line still describes
-the fold as a character bound when it is a CSS `line-clamp` over rendered lines. And the reply surface
+**The fold's framing was corrected in the same pass.** `## First screen` now states what the fold
+actually is: a CSS `-webkit-line-clamp` over **rendered lines counted after layout**, one of the
+{1,2,3,4,5,10} the client ships, with responsive variants keyed to viewport — so the same post folds
+differently on a phone and a desktop. No number is asserted, because the top-level timeline value is
+not observable without a login and every published figure traces to marketing blogs citing nothing.
+The sharpest consequence is that **the fold is a timeline behaviour, not a property of the post**: a
+~4,000-character post rendered in full on a logged-out permalink with no "Show more" at all, so
+reading your own permalink does not run the first-screen test. `## Format` also now records the
+documented character rules it was implicitly leaning on — 280 *weighted* characters, every URL a flat
+23, media 0 — and says plainly that the two bounds are independent quantities rather than a strict and
+a loose version of one.
+
+No retirement entry accompanies this one: nothing false was removed, only imprecise framing sharpened,
+and an entry with no forbidden vocabulary to scan for would be another dead registry line.
+
+**One correction from the same research is filed, not made.** The reply surface
 is materially wrong: the current `OONRetweetReplyFilter` deletes every reply from the feed of anyone
 not already following the author, with no exemption for who was replied to, while a quote-post ranks
 as an original — which makes the reply-hook memo's premise mechanically false. That memo lives in the
