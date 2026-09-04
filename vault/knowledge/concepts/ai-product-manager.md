@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/ai-product-manager.md
 tags: [auto-generated, phase-6]
-created: 2026-09-03
-updated: 2026-09-03
+created: 2026-09-04
+updated: 2026-09-04
 ---
 
 ## Definition
