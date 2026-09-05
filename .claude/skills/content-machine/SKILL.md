@@ -129,7 +129,7 @@ any count; a score is banned at any count.
 |---|---|---|---|
 | 0 | **Oracle** — proposes what's worth writing: experiments he could run (frame stage + news lane) and done things from his own week (sweep), scored once into two decks | [`content-oracle`](../content-oracle/SKILL.md) | live, on probation (on-demand only until 2026-10-04); rebuilt after week 1 failed (#227, #238, #239) |
 | 1 | **Topic + value gate** — one piece, one lane, one medium, named before anything else; the publication's value gate clears here as a **hard block**, never post-draft | this skill + `substack-value-engine` | live |
-| 2 | **Interview** — one lens, one question at a time, read-back at the close | `interview/` | live, seven lenses |
+| 2 | **Interview** — one lens, one question at a time, read-back at the close. **X's reactive route runs no interview**: its stage 2 is a stimulus block ([#249](https://github.com/seanwinslow28/code-brain/issues/249)) | `interview/` | live, seven lenses |
 | 3 | **Shape** — clean-context draft (see The shaping context) | fresh subagent, this skill orchestrates | live, re-scoped 2026-08-31 |
 | 4 | **Gates** — post-draft, advisory: origin (claims tier), do-not-promote + coined-lines sweep, humanity scrub, critique + the analyzer **dashboard** (no metric flags since #219) | `gates/` + chain skills as reference | live, all post-draft as of 2026-08-31 |
 | 5 | **Ship** — the author hand-rewrites (mandatory), a mechanical proofread runs on his final, he publishes | the author + one proofread pass | live, proofread added 2026-08-31 |
@@ -243,6 +243,13 @@ via a stoplist, because the law already permits it.
 **Layer 2, reading.** The mechanical layer cannot tell an invention from a legitimate connective
 phrase, and it is blind to the whole class below. Whoever shapes the draft reads the flags, writes
 the ORIGIN LEDGER, and puts anything worth keeping on the ASK LIST.
+
+**The gate inverts where there is no transcript** (X's reactive route,
+[#249](https://github.com/seanwinslow28/code-brain/issues/249)). A stimulus block is **never** passed
+in a transcript's place: the gate clears whatever it finds in the indexed region, so pointing it at
+someone else's post would license every phrase lifted from it. The block is scanned as a
+**forbidden-strings** source instead, and the question becomes *is this untraceable and about him*
+rather than *is this traced*. Full rules in `contracts/expressive/x.md`.
 
 ### What layer 1 can and cannot see
 

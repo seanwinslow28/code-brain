@@ -7,6 +7,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed — X runs no interview; its stage 2 is a stimulus block (2026-09-04)
+
+Ruled in [#249](https://github.com/seanwinslow28/code-brain/issues/249). X was the first medium to
+reach stage 2 and find nothing to excavate: a reactive post's material is **someone else's post,
+already on the screen**, so the interviewer has no advantage over the author. The reactive median is
+six words (#247). X now has **two routes, neither an interview** — *autonomous*, where the machine
+searches Sean's own logged-in X, drafts cold and hands back a deck, and *brainstorm*, divergence-first
+for when he has a seed. The routes are **ruled and unbuilt**; the build is
+[#250](https://github.com/seanwinslow28/code-brain/issues/250) and until it lands X cannot run.
+
+**The load-bearing piece is an inversion of the origin gate.** Passing a stimulus block to
+`origin_check.py` in a transcript's place would be actively dangerous: the gate clears whatever it
+finds in the indexed region, so pointing it at a stranger's post licenses every lifted phrase — the
+*borrow structure, never strings* failure (#166) in the medium where the risk is highest. The block is
+therefore a **forbidden-strings** source, and the gate's question changes from *is this traced* to *is
+this untraceable and about him*. A post-draft ASK LIST answer comes back as a separate one-line
+mini-transcript, which **is** indexed normally. The two files have opposite polarity and must never be
+merged.
+
+Also ruled: the machine keeps drafting on X (Sean's correction — the destination is an agent that
+writes in his voice with no edit, so the #248 reps are calibration fuel, not a substitute for the
+shaper); the block carries nothing from him and his own line is written **blind afterwards**, making
+*whose line got posted* the scoreboard that sentence-survival cannot be at six words; Observer survives
+provisionally at **one question** on the standalone route only, because the ASK LIST made post-draft
+asking cheaper than pre-draft guessing; and the **analyzer leaves X's gate chain** — both its bands are
+essay bands, X has no series in either, and #232 caught it firing a monotony flag on a 51-word draft
+its own docs promise to exempt.
+
+**A fact correction rides along.** #247's "no unauthenticated path to X search" is true and
+*irrelevant*: `last30days` already vendors an authenticated client that reads `auth_token` / `ct0` from
+the local browser via `@steipete/sweet-cookie` and calls X's GraphQL `SearchTimeline`, with no password
+stored. The first recommendation in this session was built on the research note instead of the repo.
+
+- **`runtime-retirements.toml`:** entry `x-interview-stage`, two patterns — `Three to five questions`
+  (Observer's retired depth note) and `critique / analyzer` (scoped to x.md; the literal stays live in
+  the seven contracts that do run the analyzer). Mechanical check clean at 12 retirements / 21 files /
+  33 patterns.
+
+
 ### Fixed — the X contract asserted a falsified platform fact (2026-09-04)
 
 `contracts/expressive/x.md` said "Links suppress reach." It was **true history stated in the present

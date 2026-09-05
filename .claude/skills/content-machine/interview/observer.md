@@ -57,12 +57,27 @@ of them was reachable from an evidence transcript. The lens was pulling against 
 - **On someone else's fault.** If the absurdity belongs to a vendor or a colleague, ask what he did
   about it, and probe there.
 
-## Depth
+## Depth — one question, plus post-draft asks
 
-**Three to five questions.** The lens has one target, and it is reached quickly. This is not the
-engine's "twelve is a smell, not a cap" — that was learned on long-form, where the arc keeps
-earning questions. Here, a sixth question is usually the interviewer trying to make the thing bigger
-than it is. Stop when the literal detail is in hand.
+**One question.** Ruled 2026-09-04 ([#249](https://github.com/seanwinslow28/code-brain/issues/249)),
+replacing the three-to-five note this lens shipped with a day earlier.
+
+Two things collapsed it. Sean's verdict on that note: *"Asking multiple questions for an X post that
+would span between 5 to 50 words is over the top."* And the same ruling put the ASK LIST live on X,
+which changes the economics of asking — the machine can ask **after** it has drafted, when it knows
+exactly which detail it is missing. Interviewing up front is guessing which details will matter;
+asking afterwards is knowing.
+
+So: one question, let the answer be flat and unfunny, draft, then ask for what the draft turns out to
+need. Everything else on this page — the pushbacks, the trap — is what makes that one question and
+those follow-ups good, and none of it ever needed an interview to be worth having.
+
+**This lens runs on the standalone route only.** A reactive post — a reply or quote-post aimed at
+something someone else published — runs no lens at all, and its stage 2 is a stimulus block. See
+[`contracts/expressive/x.md`](../contracts/expressive/x.md).
+
+**Provisional.** Sean kept the lens on the #249 ruling in these terms: *"If it feels off, I'll get rid
+of it. We'll roll with it for now though."* It has still never run.
 
 ## The trap specific to this lens
 

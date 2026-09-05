@@ -253,3 +253,21 @@ scan_paths = [
 [[retirement.pattern]]
 literal = "Links suppress reach"
 reason = "Falsified against the current ranking code: no link penalty exists and the only link term is OpenLinkWeight = +0.2 (#247). True on 2022-24 data; stated in the present tense long after it stopped being true."
+
+[[retirement]]
+id = "x-interview-stage"
+name = "X's interview stage and Observer's three-to-five-question depth"
+source = "https://github.com/seanwinslow28/code-brain/issues/249"
+scan_paths = [
+  ".claude/skills/content-machine/contracts/expressive/x.md",
+  ".claude/skills/content-machine/interview/observer.md",
+  ".claude/skills/content-machine/interview/ENGINE.md",
+]
+
+[[retirement.pattern]]
+literal = "Three to five questions"
+reason = "Observer's depth is one question plus post-draft ASK LIST follow-ups; interviewing up front guesses which details matter, asking after the draft knows (#249)."
+
+[[retirement.pattern]]
+literal = "critique / analyzer"
+reason = "The analyzer does not run on X: both its bands are essay bands, X has no series in either, and it fired a monotony flag on a 51-word draft its own docs promise to exempt (#249). The literal stays live in the seven contracts that do run it."

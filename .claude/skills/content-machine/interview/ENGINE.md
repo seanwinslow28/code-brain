@@ -103,12 +103,19 @@ The **medium contract** names the lens or the lens sequence for the session. The
 not pick by feel. A piece whose contract has no lens named defaults to Storyteller if it is a story
 and stops to ask if it is not.
 
+**A contract may also decline the interview entirely, and one does.** X's reactive route runs no
+stage-2 interview at all — its material is someone else's post, already on the screen, so there is
+nothing to excavate and no interviewer advantage to have
+([#249](https://github.com/seanwinslow28/code-brain/issues/249)). Its stage 2 is a **stimulus block**,
+and the engine on this page does not apply to it. Do not read that as a general licence: it is the one
+route where the author is not the source.
+
 | Lens | Probes for | Typical medium |
 |---|---|---|
 | [Storyteller](storyteller.md) | A lived incident with photographable nouns | Substack story series |
 | [Stakes](stakes.md) | Why any of it mattered, and to whom | Any piece that reads as flat |
 | [Skeptic](skeptic.md) | The claim that will not survive a hostile reader | Substack verdict pieces |
-| [Observer](observer.md) | A noticing, in literal detail, with no argument attached | X, short-form comic posts |
+| [Observer](observer.md) | A noticing, in literal detail, with no argument attached | X **standalone** posts only — one question ([#249](https://github.com/seanwinslow28/code-brain/issues/249)) |
 | [Technical Peer](technical-peer.md) | The mechanism, precisely, at engineer depth | Build write-ups |
 | [Recruiter](recruiter.md) | Decisions owned, and the judgment behind them | Resume, cover letter |
 | [Cold Reader](cold-reader.md) | What a stranger will not understand | Any piece before ship |
