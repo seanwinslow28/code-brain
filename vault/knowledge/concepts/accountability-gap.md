@@ -2,10 +2,10 @@
 title: "Accountability Gap"
 type: concept
 sources:
-  - health/2026-08-23-lint-report.md
+  - knowledge/concepts/accountability-gap.md
 tags: [auto-generated, phase-6]
-created: 2026-09-04
-updated: 2026-09-04
+created: 2026-09-05
+updated: 2026-09-05
 ---
 
 ## Definition

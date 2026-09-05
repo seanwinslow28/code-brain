@@ -2,31 +2,31 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - knowledge/concepts/supervision-as-the-new-ai-edge.md
+  - knowledge/connections/the-authenticity-velocity-paradox-in-personal-knowledge-infrastructure.md
 tags: [auto-generated, phase-6]
-created: 2026-09-03
-updated: 2026-09-03
+created: 2026-09-05
+updated: 2026-09-05
 ---
 
 ## Definition
 
-This concept defines a structural inversion in value creation where the marginal cost of generation approaches zero, shifting competitive advantage from production capacity to the quality of oversight. The supervisor's edge is no longer defined by the ability to generate outputs, but by the capacity to enforce taste and strategic coherence over automated artifacts. This creates a scarcity model where human judgment acts as the primary filter, making the selective rejection of low-quality work more valuable than its creation. The mechanism relies on the tension between high-volume automated sampling and the finite cognitive bandwidth required for meaningful curation.
+This pattern defines the shift from content generation to content curation as the primary value driver in agentic systems. When automation handles the mechanical execution, the human's unique advantage becomes the ability to enforce structural consistency while providing the non-replicable semantic content derived from their specific life history. The edge is no longer in speed or volume, but in the selective application of lived experience to automated structures.
 
 ## Context
 
-Sean's transition from agent operator to strategic leader requires him to leverage his 'taste' as the primary differentiator in a job market saturated with AI-generated content. His narrative must highlight his capacity to supervise and refine AI outputs, proving that human judgment remains the scarce resource despite the automation of production.
+Sean has moved away from injecting external styles into agents and is now focusing on keeping his own written content as the core input. This shift acknowledges that supervision and curation are the only scalable ways to maintain authenticity at higher automation levels.
 
 ## Evidence
 
-> As the marginal cost of generation approaches zero, the competitive advantage shifts from production capacity to the quality of oversight and curation.
+> So I nuked them. I completely removed the authors, kept everything I had actually written, and started fresh.
 
-> The core tension is that scaling automated concept generation directly conflicts with the preservation of taste memory, leading to a systemic trust deficit.
+> Scaling creative production requires a shift from style-injection to process-enforcement, where agents handle the mechanics while the human provides the unique semantic content.
 
 ## Examples
 
-- Reducing concepts_written from 125 to 87 while maintaining high rejected_count suggests improved supervisory filtering rather than reduced capability.
-- The shift from qwen3-14b to qwen3.6-35b-a3b-32k correlates with a drop in clusters_sampled but an increase in the precision of accepted outputs.
+- Removing external author styles to prevent 'soulless' output and relying on Sean's own written material.
+- Using agents to enforce structural consistency while manually curating the semantic content for personal brand building.
 
 ## Related Concepts
 
-[[Taste as Evaluation Function vs. Activity Proof]] [[The Illusion of Competence in Automated Systems]]
+[[Tacit Knowledge Erosion vs. Automation Scale]] [[The Authenticity-Velocity Paradox in Personal Knowledge Infrastructure]]

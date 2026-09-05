@@ -2,10 +2,10 @@
 title: "Context Pollution vs. Context Engineering"
 type: concept
 sources:
-  - 20_projects/research/2026-08-31-content-machine-rules-off-research.md
+  - knowledge/concepts/context-pollution-vs-context-engineering.md
 tags: [auto-generated, phase-6]
-created: 2026-09-04
-updated: 2026-09-04
+created: 2026-09-05
+updated: 2026-09-05
 ---
 
 ## Definition

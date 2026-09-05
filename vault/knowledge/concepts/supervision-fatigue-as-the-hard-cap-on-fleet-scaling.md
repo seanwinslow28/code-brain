@@ -2,10 +2,10 @@
 title: "Supervision Fatigue as the Hard Cap on Fleet Scaling"
 type: concept
 sources:
-  - 20_projects/substack-studio/spread-run/session-record.md
+  - knowledge/concepts/supervision-fatigue-as-the-hard-cap-on-fleet-scaling.md
 tags: [auto-generated, phase-6]
-created: 2026-09-04
-updated: 2026-09-04
+created: 2026-09-05
+updated: 2026-09-05
 ---
 
 ## Definition
@@ -22,8 +22,6 @@ Sean's fleet memory shows a progression from small runs (3 concepts) to large ru
 
 > Measurement: Blind two-stage read, rewrite the winner only, flaw-count on all
 
-> Closure: Rank + survival % — The #163 pattern: close on the machine's evidence, not on the publish.
-
 ## Examples
 
 - Implementing a 'stripped-samples arm' to turn arbitrary trimming into a principled noise floor measurement
@@ -31,4 +29,4 @@ Sean's fleet memory shows a progression from small runs (3 concepts) to large ru
 
 ## Related Concepts
 
-[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[The Calibration Bottleneck in Scalable Creative Production]] [[Context Management as a Bottleneck]]
+[[The Calibration Bottleneck in Scalable Creative Production]] [[Context Management as a Bottleneck]]

@@ -2,30 +2,30 @@
 title: "Context Management as a Bottleneck"
 type: concept
 sources:
-  - health/2026-06-07-lint-report.md
+  - knowledge/concepts/context-management-as-a-bottleneck.md
 tags: [auto-generated, phase-6]
-created: 2026-09-04
-updated: 2026-09-04
+created: 2026-09-05
+updated: 2026-09-05
 ---
 
 ## Definition
 
-The phenomenon where the cognitive load of maintaining coherent context across multiple agents and domains limits the effective scale of automation. It is not merely a technical constraint but a supervisory limit, where the human must act as the glue holding disparate agent states together. This bottleneck emerges when the complexity of inter-agent dependencies exceeds the capacity for manual verification.
+This mechanism describes the supervisory limit where the cognitive load of maintaining coherent context across multiple agents exceeds the human's capacity for manual verification. It is not merely a technical constraint but a structural failure mode where adding more agents increases the risk of silent contradiction rather than linear productivity gains. The bottleneck emerges when inter-agent dependencies become too complex to trace, forcing the human to act as the fragile glue holding disparate agent states together.
 
 ## Context
 
-As Sean's fleet grows, the cost of managing context shifts from computational to cognitive. This concept explains why adding more agents does not linearly increase productivity but instead increases the risk of silent failure and contradiction.
+Sean's fleet has grown significantly, with runs processing over 100 concepts and sampling hundreds of clusters. As the volume of automated synthesis increases, the cost shifts from computational resources to cognitive oversight, making this bottleneck the primary constraint on effective scaling.
 
 ## Evidence
 
-> contradiction (T2): knowledge/concepts/context-management-as-a-bottleneck.md — contradicts supervision-as-the-new-ai-edge
+> The phenomenon where the cognitive load of maintaining coherent context across multiple agents and domains limits the effective scale of automation.
 
-> The working title should be retained, though slight adjustments in the README copy are necessary to emphasize the graph nature of the data.
+> This bottleneck emerges when the complexity of inter-agent dependencies exceeds the capacity for manual verification.
 
 ## Examples
 
+- contradiction (T2): knowledge/concepts/context-management-as-a-bottleneck.md — contradicts supervision-as-the-new-ai-edge
 - contradiction (T2): knowledge/concepts/agent-health.md — contradicts context-management-as-a-bottleneck
-- contradiction (T2): knowledge/concepts/benchmarking-artifact.md — contradicts context-management-as-a-bottleneck
 
 ## Related Concepts
 

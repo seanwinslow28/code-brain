@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/boundary-object-theory.md
 tags: [auto-generated, phase-6]
-created: 2026-09-04
-updated: 2026-09-04
+created: 2026-09-05
+updated: 2026-09-05
 ---
 
 ## Definition

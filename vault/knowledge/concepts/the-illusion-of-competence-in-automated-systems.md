@@ -2,10 +2,10 @@
 title: "The Illusion of Competence in Automated Systems"
 type: concept
 sources:
-  - 20_projects/substack-studio/what-are-these-guys-doing/final.md
+  - knowledge/concepts/the-illusion-of-competence-in-automated-systems.md
 tags: [auto-generated, phase-6]
-created: 2026-09-04
-updated: 2026-09-04
+created: 2026-09-05
+updated: 2026-09-05
 ---
 
 ## Definition
@@ -25,7 +25,7 @@ Sean experienced this directly when his 'vault synthesizer' produced summaries t
 ## Examples
 
 - The synthesizer producing a one-line summary instead of a multi-sentence insight
-- Agents failing silently and telling Sean to 'figure it out on his own'
+- Agents failing silently and telling Sean to 'figure it out on their own'
 - Ten agents running with 'nothing noticeable coming out'
 
 ## Related Concepts

@@ -2,32 +2,32 @@
 title: "Structural Completeness Masks Semantic Leakage in Public Observability"
 type: connection
 connects:
+  - The Illusion of Health in Autonomous Systems
   - Legibility Debt as a Supervision Failure Mode
-  - Privacy-Aware Data Routing
-  - The Illusion of Competence in Automated Systems
-created: 2026-09-02
-updated: 2026-09-02
+  - Silent Decay in Strategic Pipelines
+created: 2026-09-05
+updated: 2026-09-05
 ---
 
 ## Synthesis
 
-The tension arises between the agent fleet's requirement for public-facing legibility and the job-hunt pipeline's need for semantic isolation. When the synthesizer prioritizes structural validity (correct markdown, valid lint) over semantic routing, it creates a 'legibility debt' where the artifact appears safe to an external observer while actively violating internal privacy constraints. This failure mode is particularly dangerous because the system's own validation metrics confirm success, preventing automatic detection of the leak until a human audit reveals the exposed sensitive data.
+The tension arises between the agent fleet's requirement for public-facing legibility and the job-hunt pipeline's need for semantic isolation. When the synthesizer prioritizes structural completeness (fixing broken links) over semantic integrity (validating content relevance), it creates a false sense of security. This leakage is not just data loss but a strategic vulnerability where critical insights are hidden from supervision, leading to decisions based on an incomplete or distorted view of Sean's knowledge assets.
 
 ## Threads
 
+### [[The Illusion of Health in Autonomous Systems]]
+
+> 302 finding(s) withheld from this tracked report (SOUL-derived, or about a file in a gitignored subtree) — the exclusion of private findings masks the true extent of semantic decay.
+
 ### [[Legibility Debt as a Supervision Failure Mode]]
 
-> Eight prior reports (`2026-07-05` through `2026-08-23`) are already committed carrying `tier_a_item` quotes; they happened to quote non-sensitive SOUL lines, so the exposure so far is luck, not design.
+> 114 issues found (110 structural, 4 semantic) — the high ratio of structural to semantic issues indicates that surface-level fixes are prioritized over deep content validation.
 
-### [[Privacy-Aware Data Routing]]
+### [[Silent Decay in Strategic Pipelines]]
 
-> The separation between Tier 1 and Tier 2 concepts, as enforced by knowledge-lint and Vault Maintenance, ensures that insights derived from different domains (e.g., job-hunt-2026 and creative-studio) remain isolated.
-
-### [[The Illusion of Competence in Automated Systems]]
-
-> Automated systems must prioritize 'deterministic execution and fault tolerance over optimal output quality' in unattended environments, which can lead to valid but semantically unsafe artifacts.
+> The separation between Tier 1 and Tier 2 concepts, as enforced by knowledge-lint and Vault Maintenance, ensures that insights derived from different domains... remain distinct.
 
 ## Implications
 
-- Sean must implement a pre-commit semantic filter that specifically checks for sensitive job-hunt keywords in public-facing outputs, rather than relying on general linting rules.
-- The agent fleet's observability dashboard needs a 'privacy health' metric that tracks the ratio of semantic violations to structural successes, not just uptime or parse rates.
+- Sean may be making strategic career decisions based on a vault that appears healthy but is actually riddled with hidden semantic gaps in his job-hunt materials.
+- The 'withheld' findings in private folders suggest a need for a separate, more rigorous audit mechanism for sensitive or complex knowledge domains to prevent silent decay.

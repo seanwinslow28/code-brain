@@ -2,32 +2,32 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: connection
 connects:
-  - The Extraction Fidelity Trap in Knowledge Infrastructure
-  - Operational Visibility vs. Semantic Value in Agent Fleets
-  - Tacit Knowledge Erosion vs. Automation Scale
-created: 2026-09-01
-updated: 2026-09-01
+  - The Illusion of Health in Autonomous Systems
+  - Operational Uptime vs. Cognitive Utility Tension
+  - Silent Failure Propagation in Agent Fleets
+created: 2026-09-05
+updated: 2026-09-05
 ---
 
 ## Synthesis
 
-There is a critical tension between the observable metric of automation velocity (concepts written) and the unobservable metric of semantic integrity (conceptual depth). As Sean's fleet scales, the infrastructure appears healthy due to high concept counts, but it silently discards non-textual data that contains core intellectual value. This creates a 'fidelity trap' where the system's operational reliability masks a profound loss of semantic completeness, leading to a knowledge base that is accurate but hollowed out.
+There is a fundamental tension between the visibility of operational health (uptime, success codes) and the actual semantic value of the output (accuracy, relevance). Agents can report 'healthy' status while producing stale or incorrect information, leading to a false sense of security. This disconnect means that Sean cannot rely on standard fleet status reports to gauge the true state of his knowledge infrastructure; he must implement deeper semantic checks to ensure the system is not just running, but working correctly.
 
 ## Threads
 
-### [[The Extraction Fidelity Trap in Knowledge Infrastructure]]
+### [[The Illusion of Health in Autonomous Systems]]
 
-> One caveat either way: figures/diagrams are never extracted (text baked into images is lost, by design), and scanned PDFs hard-abort with an "OCR first" message.
+> vault-critic ... Status: stale ... Last run: 2026-08-31T03:37:57 ... notes='status=partial articles=3 codex_fail=1 ag_fail=0'
 
-### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+### [[Operational Uptime vs. Cognitive Utility Tension]]
 
-> The tension lies between the observable metric of automation velocity (concepts written) and the unobservable metric of semantic integrity (conceptual depth).
+> daily-driver morning ... Status: healthy ... notes='Morning planning complete. --- 2026-09-04 daily note created.'
 
-### [[Tacit Knowledge Erosion vs. Automation Scale]]
+### [[Silent Failure Propagation in Agent Fleets]]
 
-> The output is not a summary; the spec explicitly extracts *structure*: named frameworks ("preserve the author's exact naming"), decision rules, techniques, anti-patterns, glossary terms
+> deep-researcher ... Status: healthy ... notes='no unchecked items'
 
 ## Implications
 
-- Sean must implement manual verification steps for any automated ingestion pipeline to detect missing visual or structural data that automated tools silently discard.
-- The choice of input format (EPUB vs PDF) becomes a strategic decision about what types of knowledge are preserved versus lost in the semantic graph.
+- Sean must develop a new metric for 'semantic health' that goes beyond simple uptime and success codes to ensure the quality of his knowledge base.
+- The current fleet status dashboard is insufficient for detecting subtle failures in the synthesis process, requiring manual intervention or more sophisticated monitoring.

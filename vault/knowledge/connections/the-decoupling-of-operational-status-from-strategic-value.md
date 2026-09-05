@@ -5,8 +5,8 @@ connects:
   - The Illusion of Health in Autonomous Systems
   - Silent Decay in Strategic Pipelines
   - Operational Uptime vs. Cognitive Utility Tension
-created: 2026-09-04
-updated: 2026-09-04
+created: 2026-09-05
+updated: 2026-09-05
 ---
 
 ## Synthesis

@@ -2,31 +2,31 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - health/private/2026-07-26-private-findings.md
+  - knowledge/connections/the-cost-of-ignored-debt-in-automated-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-09-04
-updated: 2026-09-04
+created: 2026-09-05
+updated: 2026-09-05
 ---
 
 ## Definition
 
-The accumulation of unstructured or hidden data that escapes automated monitoring because it resides outside the observable control plane. This debt grows when private or gitignored subtrees are used for critical context, creating blind spots where semantic decay can occur without triggering alerts. The supervisor loses visibility into the actual state of the system, relying on incomplete proxies for health.
+This concept defines the accumulation of unstructured or poorly documented information that makes it difficult for humans to supervise automated systems. When agents generate outputs without clear provenance or context, the supervisor (Sean) must spend more time reconstructing the logic behind each output. This debt grows as the system scales, eventually exceeding the supervisor's capacity to verify, leading to blind trust in automated processes.
 
 ## Context
 
-Sean’s use of gitignored private folders for sensitive findings creates a structural blind spot. While it protects privacy, it prevents the automated linting agents from verifying the integrity of those specific insights, leading to a false sense of completeness in the public vault.
+Sean is the primary supervisor of his agent fleet. As the vault grows, the 'legibility' of its contents decreases because the automated synthesis creates complex, non-obvious connections. This makes it harder for Sean to audit the vault's health, leading to a supervision failure where he cannot distinguish between high-quality and low-quality outputs.
 
 ## Evidence
 
-> LOCAL-ONLY. Gitignored (vault/health/private/). Each finding below either quotes vault/05_atlas/operating-models/ SOUL text or names a file in a gitignored subtree
+> This connection reveals the tension between the efficiency of automated linting and the necessity of manual curation in maintaining a high-fidelity knowledge vault.
 
-> 302 finding(s) withheld from this tracked report (SOUL-derived, or about a file in a gitignored subtree).
+> Sean must prioritize manual curation of the vault's core structure over automated expansion to prevent further degradation.
 
 ## Examples
 
-- Withheld findings regarding 'soul-tier-a-conflict' in accountability-gap.md
-- Private-subtree findings omitted from the 2026-08-23-lint-report
+- The manifest lists '62c/29x' for one run and '125c/34x' for another, showing inconsistent output quality that is hard to track without manual review.
+- The 'rejected_count' varies significantly (e.g., 7 vs 106), indicating that the system's ability to self-correct is unstable and dependent on external factors.
 
 ## Related Concepts
 
-[[Knowledge-Lint]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+[[The Illusion of Health in Autonomous Systems]] [[Silent Decay in Strategic Pipelines]]

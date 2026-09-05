@@ -2,10 +2,10 @@
 title: "The Calibration Bottleneck in Scalable Creative Production"
 type: concept
 sources:
-  - 20_projects/substack-studio/spread-run/session-record.md
+  - knowledge/concepts/the-calibration-bottleneck-in-scalable-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-09-04
-updated: 2026-09-04
+created: 2026-09-05
+updated: 2026-09-05
 ---
 
 ## Definition
@@ -22,8 +22,6 @@ Sean is attempting to scale his Substack studio by running parallel 'arms' of co
 
 > Arms A and B differed in prompt, never in nothing. Without a within-model variance measurement, every vendor gap is uninterpretable.
 
-> Human ranking degrades past ~7 items; triage-then-rank scales.
-
 ## Examples
 
 - Using GPT-5.5 in two harnesses to calibrate the offset that lets single-shot arms be read against the agentic anchor
@@ -31,4 +29,4 @@ Sean is attempting to scale his Substack studio by running parallel 'arms' of co
 
 ## Related Concepts
 
-[[The Calibration Bottleneck in Scalable Creative Production]] [[Context Management as a Bottleneck]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
+[[Context Management as a Bottleneck]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]

@@ -2,10 +2,10 @@
 title: "Gap Analysis as Epistemic Hygiene vs Opportunity Hunting"
 type: concept
 sources:
-  - 20_projects/research/2026-09-01-product-fitment-compatibility-mistakes-pm-idea-ledger.md
+  - knowledge/concepts/gap-analysis-as-epistemic-hygiene-vs-opportunity-hunting.md
 tags: [auto-generated, phase-6]
-created: 2026-09-04
-updated: 2026-09-04
+created: 2026-09-05
+updated: 2026-09-05
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean's primary file explicitly lists 'Gaps the panel/evidence missed' and instru
 
 ## Related Concepts
 
-[[Gap Analysis as Epistemic Hygiene vs Opportunity Hunting]] [[Negative Capability / Failure Literacy]]
+[[Negative Capability / Failure Literacy]] [[Negative Space Calibration]]
