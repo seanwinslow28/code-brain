@@ -258,6 +258,16 @@ creative-studio/content-machine/cheese-bank/
 creative-studio/content-machine/reference-universe.md
 creative-studio/content-machine/do-not-promote.md
 creative-studio/content-machine/transcripts/
+# X stimulus blocks (2026-09-05, wayfinder #250). X's stage 2 is not an
+# interview: the reactive route's artifact is someone else's post, fetched
+# verbatim through publish.x.com/oembed. It is ignored for two reasons. It is
+# an unpublished editorial artifact in a public repo — the file names the slug
+# of a piece that has not shipped and records what he is considering answering.
+# And it sits in a directory the gates must be able to distinguish from
+# transcripts on sight: a block has the OPPOSITE polarity (forbidden strings,
+# never permitted vocabulary), so it gets its own home beside them rather than
+# a filename convention inside theirs.
+creative-studio/content-machine/stimulus/
 # Handoff drafts and Sean's finals, per piece (2026-09-04, wayfinder #232 — the
 # first X run). A draft is derived entirely from git-ignored inputs (the
 # transcript, the corpus, voice-samples.md) and is unpublished until Sean ships

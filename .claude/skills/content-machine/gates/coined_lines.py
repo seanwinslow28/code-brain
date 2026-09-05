@@ -22,9 +22,16 @@ Every `>` line is a coined line. Everything else is metadata.
 Usage:
     python3 coined_lines.py <draft.md> [--lane expressive|professional]
                             [--artifact <slug>] [--ledger <path>]
+                            [--stimulus <block.md>]
 
 --artifact names the piece being drafted, so a line already recorded against
 THIS artifact is not a violation. Without it, every ledger hit is reported.
+
+--stimulus adds X's second input (#250): the verbatim text of the post being
+answered, checked at the same 80% threshold. Two jobs, one threshold — the
+one-artifact rule looks backwards at what he has already spent, and the
+stimulus check looks sideways at the person he is replying to. Shared
+vocabulary passes either way; a lifted run does not.
 
 Exit codes mirror origin_check.py: Expressive advises and returns 0,
 Professional returns 1 on any hit.
@@ -35,6 +42,10 @@ import argparse
 import re
 import sys
 from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+from origin_check import stimulus_post_text  # noqa: E402  -- one home for the block parser
 
 REPO = Path(__file__).resolve().parents[4]
 LEDGER = REPO / "creative-studio" / "content-machine" / "coined-lines.md"
@@ -56,9 +67,18 @@ def load_ledger(path: Path) -> list[tuple[str, str]]:
     through the machine legitimately has nothing to collide with."""
     if not path.exists():
         return []
-    entries, artifact = [], "(unattributed)"
+    entries, artifact, fenced = [], "(unattributed)", False
     for raw in path.read_text(encoding="utf-8").splitlines():
         line = raw.strip()
+        # A fenced block is documentation about the convention, not the ledger.
+        # Without this, the file's own worked example arms the gate with a line
+        # nobody ever wrote — which is the #232 failure inverted: a check that
+        # looks armed and is firing on a specimen.
+        if line.startswith("```"):
+            fenced = not fenced
+            continue
+        if fenced:
+            continue
         if line.startswith("## "):
             artifact = line[3:].strip()
         elif line.startswith(">"):
@@ -85,6 +105,25 @@ def find(draft_tokens: list[str], coined: str) -> tuple[bool, float]:
     return (False, best)
 
 
+def stimulus_lines(block_text: str) -> list[str]:
+    """The post being answered, cut into checkable units.
+
+    Sentence-sized, because `find()` windows the draft at the length of the
+    unit it is given: hand it a whole multi-sentence post and the window is
+    wider than any reply, so a genuine lift of one line scores as noise.
+    """
+    post = stimulus_post_text(block_text)
+    out = []
+    for block in post.split("\n"):
+        for s in re.split(r"(?<=[.!?])\s+", block):
+            s = s.strip()
+            if s:
+                out.append(s)
+    if post and post not in out:
+        out.append(post)          # the whole post too, for the flat exact-paste case
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("draft")
@@ -92,15 +131,23 @@ def main() -> int:
     ap.add_argument("--artifact", default=None,
                     help="slug of the piece being drafted; its own lines are not violations")
     ap.add_argument("--ledger", default=str(LEDGER))
+    ap.add_argument("--stimulus", default=None,
+                    help="X stimulus block; its post text is checked as a second input (#250)")
     args = ap.parse_args()
 
     ledger_path = Path(args.ledger)
     entries = load_ledger(ledger_path)
-    if not entries:
-        print(f"coined-lines: ledger empty or absent ({ledger_path}). Nothing to check against.")
-        return 0
-
     draft_tokens = norm(Path(args.draft).read_text(encoding="utf-8"))
+
+    # An empty ledger used to return here, before the stimulus check existed and
+    # before anyone noticed the ledger had never been created. Both halves of
+    # that were the same bug: a gate that reports "nothing to check against" and
+    # exits looks identical, in a GATE RECORD, to a gate that ran clean.
+    if not entries:
+        state = "holds no registered lines" if ledger_path.exists() else "does not exist"
+        print(f"coined-lines: ledger {state} ({ledger_path}).")
+        print("  UNARMED — the one-artifact rule cannot fire until lines are registered.")
+
     hits = []
     for artifact, coined in entries:
         if args.artifact and artifact == args.artifact:
@@ -109,15 +156,49 @@ def main() -> int:
         if exact or overlap >= NEAR:
             hits.append((artifact, coined, "exact" if exact else f"{overlap:.0%} overlap"))
 
-    if not hits:
-        print(f"coined-lines: clean against {len(entries)} recorded lines.")
+    stim_hits = []
+    if args.stimulus:
+        block_text = Path(args.stimulus).read_text(encoding="utf-8")
+        try:
+            units = stimulus_lines(block_text)
+        except ValueError as exc:
+            print(f"coined-lines: {exc}", file=sys.stderr)
+            return 2
+        whole = units[-1] if units and "\n" in units[-1] else None
+        for line in units:
+            exact, overlap = find(draft_tokens, line)
+            if exact or overlap >= NEAR:
+                stim_hits.append((line, "exact" if exact else f"{overlap:.0%} overlap"))
+        # The whole-post unit exists for the flat exact-paste case. If a single
+        # line already fired, reporting the post again is the same finding twice.
+        if whole and len(stim_hits) > 1:
+            stim_hits = [h for h in stim_hits if h[0] != whole]
+
+    if not hits and not stim_hits:
+        if entries:
+            print(f"coined-lines: clean against {len(entries)} recorded lines"
+                  + (" and the stimulus post." if args.stimulus else "."))
+        elif args.stimulus:
+            print("coined-lines: clean against the stimulus post.")
         return 0
 
-    print(f"coined-lines: {len(hits)} line(s) already spent elsewhere.\n")
-    for artifact, coined, how in hits:
-        print(f"  [{how}] \"{coined}\"")
-        print(f"          spent in: {artifact}\n")
-    print("A coined line lives in exactly one artifact. Write a new line, or cut the beat.")
+    if hits:
+        print(f"coined-lines: {len(hits)} line(s) already spent elsewhere.\n")
+        for artifact, coined, how in hits:
+            print(f"  [{how}] \"{coined}\"")
+            print(f"          spent in: {artifact}\n")
+        print("A coined line lives in exactly one artifact. Write a new line, or cut the beat.")
+
+    if stim_hits:
+        if hits:
+            print()
+        print(f"coined-lines: {len(stim_hits)} run(s) lifted from the post being answered.\n")
+        for line, how in stim_hits:
+            print(f"  [{how}] \"{line}\"")
+        print()
+        print("That is someone else's sentence. Borrow the structure, never the strings —")
+        print("the words are not invented, which is exactly why the origin gate cannot see it.")
+
     if args.lane == "professional":
         return 1
     print("(Expressive lane: advisory. Sean rules.)")
