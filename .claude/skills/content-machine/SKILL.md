@@ -435,6 +435,7 @@ Read-only inputs, all git-ignored, all local:
 | `creative-studio/content-machine/do-not-promote.md` | Every piece, at the final sweep |
 | `creative-studio/content-machine/transcripts/` | The interview record for **Expressive** pieces, and later corpus. Professional-lane transcripts live with their application under `vault/20_projects/prj-job-hunt-2026/applications/` instead (#230). |
 | `creative-studio/content-machine/stimulus/` | X's stage-2 blocks (#250). **Opposite polarity to a transcript** — forbidden strings, never permitted vocabulary — which is why it is a separate directory and why the origin gate refuses a file carrying the `STIMULUS BLOCK` sentinel. Never merge the two. |
+| `creative-studio/content-machine/watchlist.md` | The accounts X's route-1 sweep reads, in three lanes (#251). Per-machine: a fresh clone and the Mac Mini have none, and `x/stimulus.py` refuses to sweep nothing rather than reporting clean. Lane C is admitted **by eye, never by metric** — the first harvest ranked an antisemitic account top on every number available. |
 | `creative-studio/content-machine/ledger/` | Ratified lessons |
 | `creative-studio/content-machine/ideas-bank.md` | Every Oracle run, **before** scoring — a thin spike from three weeks ago may have an ending now |
 

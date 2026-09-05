@@ -61,7 +61,7 @@ import sys
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass, asdict
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -453,6 +453,128 @@ def check_block(data: dict) -> list[str]:
     return problems
 
 
+# ------------------------------------------------------------ watchlist ---
+#
+# Ruled on #251. Three lanes, each found by a different search: A experimenters
+# (second ring, outbound only), B news/watchers (artifact search), C reach
+# (accounts Lane A engages with, admitted BY EYE -- see the file for why).
+
+WATCHLIST = REPO / "creative-studio" / "content-machine" / "watchlist.md"
+_LANE_RE = re.compile(r"^##\s+Lane\s+([ABC])\b")
+_ENTRY_RE = re.compile(r"^-\s+@([A-Za-z0-9_]{1,15})\s*—\s*(.*)$")
+_CAVEAT_RE = re.compile(r"\[caveat:\s*(.*?)\]", re.DOTALL)
+
+
+@dataclass
+class Account:
+    handle: str
+    lane: str
+    note: str
+    reach: bool
+    caveat: str | None
+
+
+def parse_watchlist(text: str) -> list[Account]:
+    """Accounts, lane-scoped.
+
+    Only `- @handle — ...` lines **inside a `## Lane X` heading** count. Any
+    other `## ` heading closes the lane, which is what keeps the file's own
+    Rejected section from arming the sweep with the accounts it rejected --
+    the same failure the coined-lines ledger hit when its worked example
+    parsed as a live entry (#250).
+    """
+    out, lane = [], None
+    for raw in text.splitlines():
+        m_lane = _LANE_RE.match(raw)
+        if m_lane:
+            lane = m_lane.group(1)
+            continue
+        if raw.startswith("## "):
+            lane = None
+            continue
+        if lane is None:
+            continue
+        m = _ENTRY_RE.match(raw)
+        if not m:
+            continue
+        note = m.group(2).strip()
+        cav = _CAVEAT_RE.search(note)
+        out.append(Account(handle=m.group(1), lane=lane, note=note,
+                           reach="[reach]" in note,
+                           caveat=cav.group(1).strip() if cav else None))
+    return out
+
+
+def load_watchlist(path: Path | None = None) -> list[Account]:
+    path = path or WATCHLIST
+    if not path.exists():
+        raise FileNotFoundError(
+            f"no watchlist at {path}\n"
+            "  It is git-ignored and therefore per-machine (#251/#252): a fresh clone has none,\n"
+            "  and neither does the Mac Mini. Seed it from the 19 accounts in issue #247.\n"
+            "  Refusing to sweep nothing and report clean.")
+    return parse_watchlist(path.read_text(encoding="utf-8"))
+
+
+def _or_chain(handles: list[str]) -> str:
+    return "(" + " OR ".join(f"from:{h}" for h in handles) + ")"
+
+
+def deck_candidates(accounts: list[Account], days: int, per_account: int,
+                    want: int, timeout: int = SWEEP_TIMEOUT_S) -> tuple[list[dict], list[dict]]:
+    """Retrieve wide, one query per lane; the deck is narrowed downstream.
+
+    Per-lane queries rather than one big OR chain, because lanes are different
+    populations and a single chain returns whoever posted most: a 14-handle
+    chain measured 40 posts of which 17 were one account. `per_account` caps
+    the same way for the same reason -- a deck of eight with three from one
+    voice is not a deck.
+    """
+    since = (date.today() - timedelta(days=days)).isoformat()
+    env, _ = credentials_env()
+    by_lane: dict[str, list[Account]] = {}
+    for a in accounts:
+        by_lane.setdefault(a.lane, []).append(a)
+
+    pool: list[dict] = []
+    problems: list[dict] = []
+    for lane, accts in sorted(by_lane.items()):
+        handles = [a.handle for a in accts]
+        meta = {a.handle.lower(): a for a in accts}
+        # Batches of ten keep the query well under X's length limits and keep a
+        # single unparseable handle from taking a whole lane down with it.
+        for i in range(0, len(handles), 10):
+            batch = handles[i:i + 10]
+            q = f"{_or_chain(batch)} -filter:replies since:{since}"
+            try:
+                rows = sweep([q], count=max(want * 4, 40), timeout=timeout)
+            except RuntimeError as exc:
+                problems.append({"lane": lane, "error": str(exc)})
+                continue
+            for r in rows:
+                if "error" in r:
+                    problems.append({"lane": lane, "error": r["error"]})
+                    continue
+                acct = meta.get(r["handle"].lower())
+                pool.append({**r, "lane": lane,
+                             "reach": bool(acct and acct.reach),
+                             "caveat": acct.caveat if acct else None})
+
+    seen: set[str] = set()
+    counts: dict[str, int] = {}
+    kept: list[dict] = []
+    for r in pool:
+        if r["url"] in seen or not r["text"]:
+            continue
+        h = r["handle"].lower()
+        if counts.get(h, 0) >= per_account:
+            continue
+        seen.add(r["url"])
+        counts[h] = counts.get(h, 0) + 1
+        kept.append(r)
+    return kept, problems
+
+
 def is_ignored(path: Path, repo: Path = REPO) -> bool:
     try:
         done = subprocess.run(["git", "check-ignore", "-q", str(path)],
@@ -551,6 +673,72 @@ def _cmd_block(args) -> int:
     return 0
 
 
+def _cmd_watchlist(args) -> int:
+    try:
+        accts = load_watchlist(Path(args.path) if args.path else None)
+    except FileNotFoundError as exc:
+        print(f"watchlist: {exc}", file=sys.stderr)
+        return 2
+    if args.json:
+        print(json.dumps([asdict(a) for a in accts], indent=2))
+        return 0
+    if not accts:
+        print("watchlist: parsed 0 accounts. A lane heading is `## Lane A|B|C`,")
+        print("           and an entry is `- @handle — note`. Nothing else counts.")
+        return 1
+    names = {"A": "Experimenters", "B": "News / watchers", "C": "Reach"}
+    for lane in ("A", "B", "C"):
+        rows = [a for a in accts if a.lane == lane]
+        print(f"Lane {lane} — {names[lane]} ({len(rows)})")
+        for a in rows:
+            tags = " [reach]" if a.reach else ""
+            print(f"   @{a.handle}{tags}")
+            if a.caveat:
+                print(f"      caveat: {a.caveat[:100]}")
+        print()
+    print(f"{len(accts)} accounts. Lane C is admitted by eye, never by metric — the first")
+    print("harvest ranked an antisemitic account top on every number available (#251).")
+    return 0
+
+
+def _cmd_deck(args) -> int:
+    try:
+        accts = load_watchlist(Path(args.path) if args.path else None)
+    except FileNotFoundError as exc:
+        print(f"deck: {exc}", file=sys.stderr)
+        return 2
+    if not accts:
+        print("deck: watchlist parsed 0 accounts — refusing to sweep nothing.", file=sys.stderr)
+        return 1
+
+    pool, problems = deck_candidates(accts, args.days, args.per_account, args.size)
+    if args.json:
+        print(json.dumps({"pool": pool, "problems": problems,
+                          "accounts": len(accts), "size": args.size}, indent=2))
+        return 0
+
+    for p in problems:
+        print(f"  ! lane {p['lane']}: {p['error'][:160]}")
+    print(f"X candidate pool — {len(pool)} posts from {len(accts)} watchlist accounts, "
+          f"last {args.days} day(s)\n")
+    for r in pool:
+        tags = f"[{r['lane']}]" + (" [reach]" if r["reach"] else "")
+        print(f"  {tags} @{r['handle']}  {r['url']}")
+        print(f"      {r['text'][:200]}")
+        if r["caveat"]:
+            print(f"      caveat: {r['caveat'][:110]}")
+        print()
+    print("This is the POOL, not the deck. Retrieve wide, deck narrow (#251):")
+    print(f"  1. rank the pool and take the top {args.size} — ranking candidates is not the")
+    print("     scoring loop L8 bans (#169)")
+    print("  2. `block <url>` each pick, which re-fetches verbatim text through oEmbed")
+    print("  3. draft ONE candidate per stimulus in an isolated clean-context spawn — eight")
+    print("     drafted in one context converge into variations of the first (#221)")
+    print("  4. hand back 8 ranked pairs: each draft shown with the post it answers, because")
+    print("     a reply is unreadable without its setup")
+    return 0
+
+
 def _cmd_check(args) -> int:
     path = Path(args.path)
     text = path.read_text(encoding="utf-8")
@@ -608,6 +796,19 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--force", action="store_true")
     p.add_argument("--stdout", action="store_true", help="print instead of writing")
     p.set_defaults(fn=_cmd_block)
+
+    p = sub.add_parser("watchlist", help="parse and show the watchlist lanes")
+    p.add_argument("--path", default=None)
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(fn=_cmd_watchlist)
+
+    p = sub.add_parser("deck", help="retrieve the candidate pool across the watchlist")
+    p.add_argument("--size", type=int, default=8, help="deck size the pool is narrowed to (default 8)")
+    p.add_argument("--days", type=int, default=3, help="window in days (default 3)")
+    p.add_argument("--per-account", type=int, default=2, help="cap per account (default 2)")
+    p.add_argument("--path", default=None)
+    p.add_argument("--json", action="store_true")
+    p.set_defaults(fn=_cmd_deck)
 
     p = sub.add_parser("check", help="validate a block's shape")
     p.add_argument("path")
