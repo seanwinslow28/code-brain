@@ -268,6 +268,17 @@ creative-studio/content-machine/transcripts/
 # never permitted vocabulary), so it gets its own home beside them rather than
 # a filename convention inside theirs.
 creative-studio/content-machine/stimulus/
+# X watchlist (2026-09-05, wayfinder #251). The accounts route 1's sweep reads,
+# in three lanes: experimenters, news/watchers, and reach. Ignored even though
+# the 19-account seed is already public in a tracked research note, because the
+# curated file is not the seed. Lane C is a list of accounts Sean wants to be
+# seen next to -- a distribution strategy, in a public repo a recruiter reads --
+# and the pick record that accumulates beside it is behavioural data about his
+# own judgment. Nothing scheduled reads it: the fleet runs on the Mac Mini and
+# the Oracle has no launchd stanza, only its repo-read-free reminder. Tracking
+# it would not help the Mini either -- what blocks the Mini is the X session
+# cookies, which live outside the repo and must never enter it (#252).
+creative-studio/content-machine/watchlist.md
 # Handoff drafts and Sean's finals, per piece (2026-09-04, wayfinder #232 — the
 # first X run). A draft is derived entirely from git-ignored inputs (the
 # transcript, the corpus, voice-samples.md) and is unpublished until Sean ships

@@ -26,10 +26,11 @@ what a first run is for. The contract has been corrected; **X has still never sh
 
 Route 1 is built and smoke-tested end to end ([#250](https://github.com/seanwinslow28/code-brain/issues/250),
 2026-09-05): `x/stimulus.py` runs the authenticated sweep, fetches verbatim post text through
-oEmbed, writes the stimulus block, and both gates read the block in its inverted polarity. What the
-sweep should *search on*, and how big a deck is, is
-[#251](https://github.com/seanwinslow28/code-brain/issues/251) — so a run today needs its queries
-supplied by hand, and the script refuses to invent them.
+oEmbed, writes the stimulus block, and both gates read the block in its inverted polarity. What it
+searches on and how big a deck is were ruled the same day
+([#251](https://github.com/seanwinslow28/code-brain/issues/251)): a **27-account watchlist in three
+lanes**, and a deck of **eight ranked stimulus-and-draft pairs**. Both are below. **No post has
+run through it yet** — the first is [#246](https://github.com/seanwinslow28/code-brain/issues/246).
 
 ## How a post is sourced — X runs no interview
 
@@ -74,6 +75,72 @@ holds a second copy.
 python3 .claude/skills/content-machine/x/stimulus.py auth
 python3 .claude/skills/content-machine/x/stimulus.py sweep --query "<query>" --count 20
 ```
+
+#### What it searches on: a watchlist, in three lanes
+
+Ruled on [#251](https://github.com/seanwinslow28/code-brain/issues/251). The sweep reads
+`creative-studio/content-machine/watchlist.md` — git-ignored, per-machine, seeded from the 19
+accounts in [#247](https://github.com/seanwinslow28/code-brain/issues/247).
+
+Not the follow graph, and **not open keyword search**, which is out on measurement:
+`"claude code" -filter:replies min_faves:20` returned 8 of 8 engagement bait or non-English, and the
+engagement floor made it *worse* — high engagement on a keyword selects for bait by construction.
+That is [#170](https://github.com/seanwinslow28/code-brain/issues/170)'s vendor-SEO finding arriving
+on a third engine.
+
+| Lane | Job | Found by |
+|---|---|---|
+| **A — Experimenters** | stimulus + learning | second ring, **outbound only**: `from:<handle> filter:replies` |
+| **B — News / watchers** | learning | artifact search — the thing a watcher posts, never a ranking |
+| **C — Reach** | quote-post distribution | accounts Lane A engages with, **admitted by eye** |
+
+**Direction beats volume, measured.** `from:simonw filter:replies` returns real people he answers.
+`to:karpathy min_faves:30` returns a crypto shill and a raw ETH address — an engagement floor does
+not save it, because reply-spam aimed at a mega-account collects likes by construction. Harvest
+outbound. Never inbound.
+
+**Lane C cannot be gated by a number, and the first harvest is why.** The top-scoring candidate on
+every available metric — most vouchers, highest recent reach, ahead of every real name — was an
+antisemitic edgelord account. Two rules came out of it: **a reply is not an endorsement** (a Lane A
+account replying to someone can be an argument or banter with a shitposter, so the second ring
+generates candidates and never vouches for them), and **reach selects for outrage, because that is
+what reach means**. Harvest mechanically, admit by hand, keep the rejections so the next sweep does
+not re-propose them.
+
+The watchlist also serves a second consumer later — the Oracle's news lane, deferred to
+[#252](https://github.com/seanwinslow28/code-brain/issues/252) until Oracle graduation, so week 2
+measures one changed mechanism rather than two.
+
+#### The deck: eight ranked pairs
+
+```bash
+python3 .claude/skills/content-machine/x/stimulus.py watchlist
+python3 .claude/skills/content-machine/x/stimulus.py deck --days 3 --size 8
+```
+
+`deck` returns the **pool**, not the deck: retrieve wide across all three lanes, narrow to the top
+eight downstream. Queries run per lane and cap at two posts per account, because a single OR chain
+returns whoever posted most — a 14-handle chain measured 40 posts of which 17 were one voice, and a
+deck of eight with three from one account is not a deck.
+
+Then, in order:
+
+1. **Rank the pool, take eight.** Ranking candidates is not the draft-scoring loop L8 bans
+   ([#169](https://github.com/seanwinslow28/code-brain/issues/169)). Ranked so he can stop early.
+2. **`block` each pick**, which re-fetches verbatim text through oEmbed.
+3. **Draft one candidate per stimulus, in an isolated clean-context spawn.** One per block, not
+   eight in one context: [#221](https://github.com/seanwinslow28/code-brain/issues/221) measured that
+   same-context generation converges, so eight drafted together become variations of the first.
+   **One draft per stimulus, deliberately** — several candidates per stimulus is
+   [#228](https://github.com/seanwinslow28/code-brain/issues/228), which needs this as its baseline.
+4. **Hand back eight ranked pairs**, each draft shown with the post it answers. A reply is
+   unreadable without its setup, so the pair is the unit — roughly forty words each.
+
+**Eight is a measurement, not a ruling.** The hit rate is unknown and
+[#248](https://github.com/seanwinslow28/code-brain/issues/248) cannot supply it, because that was an
+exercise where he wrote on all twelve and rejected none. The size the record sets is the size. The
+failure being sized against is not "too long to read" — it is #227's week-1 Oracle deck being denied
+in full, and machine work is nearly free while his attention is not.
 
 **Manual paste is not a route.** A flow where Sean finds the post himself and hands it over was
 considered and rejected by him: if he is already looking at the tweet he already has the line, so the
