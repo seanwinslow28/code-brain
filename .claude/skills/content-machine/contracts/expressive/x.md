@@ -20,11 +20,17 @@ A room-1 post is one landed *thing*. #226 read that as a claim; it is more often
 Skeptic remains right for a post that genuinely argues something, and naming a second lens for that
 case is a ruling by Sean, not a line in this file.
 
-**Status: corrected by the #232 run, re-routed by the #249 ruling.** The run produced no shipped post
-— it was stopped at the gates when the shape came out wrong, which is what a first run is for. The
-contract has been corrected; X has still never shipped a post. The sourcing routes below are **ruled
-and unbuilt**: the plumbing is [#250](https://github.com/seanwinslow28/code-brain/issues/250), and
-until it lands X cannot run at all.
+**Status: corrected by the #232 run, re-routed by the #249 ruling, plumbed by the #250 build.** The
+run produced no shipped post — it was stopped at the gates when the shape came out wrong, which is
+what a first run is for. The contract has been corrected; **X has still never shipped a post.**
+
+Route 1 is built and smoke-tested end to end ([#250](https://github.com/seanwinslow28/code-brain/issues/250),
+2026-09-05): `x/stimulus.py` runs the authenticated sweep, fetches verbatim post text through
+oEmbed, writes the stimulus block, and both gates read the block in its inverted polarity. What it
+searches on and how big a deck is were ruled the same day
+([#251](https://github.com/seanwinslow28/code-brain/issues/251)): a **27-account watchlist in three
+lanes**, and a deck of **eight ranked stimulus-and-draft pairs**. Both are below. **No post has
+run through it yet** — the first is [#246](https://github.com/seanwinslow28/code-brain/issues/246).
 
 ## How a post is sourced — X runs no interview
 
@@ -45,12 +51,96 @@ exists for — posts getting out while he is busy with something else — and it
 configuration that ever tests the shaper on the thing it is meant to do. A reactive post's take *is*
 the post, so a machine handed the take is arranging six of his words, which is not a service.
 
-Authenticated access is solved and already installed: `last30days` reads the `auth_token` / `ct0`
-session cookies out of the local browser (`scripts/lib/vendor/bird-search/lib/cookies.js`, via
-`@steipete/sweet-cookie`) and calls X's GraphQL `SearchTimeline`. No password is stored. #247's "no
-unauthenticated path" finding is true and irrelevant — the path is authenticated. Three standing
-caveats: the cookies rotate and a run re-reads them, the endpoint is internal and can break without
-notice, and the session lives on whichever machine he is logged into, which is the MacBook Pro.
+Authenticated access is solved and already installed: `last30days` vendors an X client
+(`scripts/lib/vendor/bird-search/`) that calls X's GraphQL `SearchTimeline`. No password is stored.
+#247's "no unauthenticated path" finding is true and irrelevant — the path is authenticated. Three
+standing caveats: the cookies rotate and a run re-reads them, the endpoint is internal and can break
+without notice, and the session lives on whichever machine he is logged into, which is the MacBook
+Pro.
+
+**Where the cookies actually come from, corrected on the #250 build.** The ruling said the client
+reads them out of the local browser via `@steipete/sweet-cookie`. Measured on the MacBook Pro
+2026-09-05: **all three browser paths fail.** Safari returns `EPERM` on
+`Cookies.binarycookies` (the reader has no Full Disk Access), Chrome's reader throws
+`Value is too large to be represented as a JavaScript number` on a WebKit cookie timestamp — a
+`node:sqlite` integer bug, not a login problem, so it fails whether or not he is signed in — and
+Firefox has no profile. What works is the credential file `last30days`' own setup wizard writes,
+`~/.config/last30days/.env`, and `x/stimulus.py` resolves in that order (process env → project
+`.claude/last30days.env` → global `.env` → browser). One consequence worth writing down: **a
+rotated session is fixed in one place on this machine, not two.** If `stimulus.py auth` says the
+stored cookies were rejected, re-run the `last30days` setup wizard; nothing in the content machine
+holds a second copy.
+
+```bash
+python3 .claude/skills/content-machine/x/stimulus.py auth
+python3 .claude/skills/content-machine/x/stimulus.py sweep --query "<query>" --count 20
+```
+
+#### What it searches on: a watchlist, in three lanes
+
+Ruled on [#251](https://github.com/seanwinslow28/code-brain/issues/251). The sweep reads
+`creative-studio/content-machine/watchlist.md` — git-ignored, per-machine, seeded from the 19
+accounts in [#247](https://github.com/seanwinslow28/code-brain/issues/247).
+
+Not the follow graph, and **not open keyword search**, which is out on measurement:
+`"claude code" -filter:replies min_faves:20` returned 8 of 8 engagement bait or non-English, and the
+engagement floor made it *worse* — high engagement on a keyword selects for bait by construction.
+That is [#170](https://github.com/seanwinslow28/code-brain/issues/170)'s vendor-SEO finding arriving
+on a third engine.
+
+| Lane | Job | Found by |
+|---|---|---|
+| **A — Experimenters** | stimulus + learning | second ring, **outbound only**: `from:<handle> filter:replies` |
+| **B — News / watchers** | learning | artifact search — the thing a watcher posts, never a ranking |
+| **C — Reach** | quote-post distribution | accounts Lane A engages with, **admitted by eye** |
+
+**Direction beats volume, measured.** `from:simonw filter:replies` returns real people he answers.
+`to:karpathy min_faves:30` returns a crypto shill and a raw ETH address — an engagement floor does
+not save it, because reply-spam aimed at a mega-account collects likes by construction. Harvest
+outbound. Never inbound.
+
+**Lane C cannot be gated by a number, and the first harvest is why.** The top-scoring candidate on
+every available metric — most vouchers, highest recent reach, ahead of every real name — was an
+antisemitic edgelord account. Two rules came out of it: **a reply is not an endorsement** (a Lane A
+account replying to someone can be an argument or banter with a shitposter, so the second ring
+generates candidates and never vouches for them), and **reach selects for outrage, because that is
+what reach means**. Harvest mechanically, admit by hand, keep the rejections so the next sweep does
+not re-propose them.
+
+The watchlist also serves a second consumer later — the Oracle's news lane, deferred to
+[#252](https://github.com/seanwinslow28/code-brain/issues/252) until Oracle graduation, so week 2
+measures one changed mechanism rather than two.
+
+#### The deck: eight ranked pairs
+
+```bash
+python3 .claude/skills/content-machine/x/stimulus.py watchlist
+python3 .claude/skills/content-machine/x/stimulus.py deck --days 3 --size 8
+```
+
+`deck` returns the **pool**, not the deck: retrieve wide across all three lanes, narrow to the top
+eight downstream. Queries run per lane and cap at two posts per account, because a single OR chain
+returns whoever posted most — a 14-handle chain measured 40 posts of which 17 were one voice, and a
+deck of eight with three from one account is not a deck.
+
+Then, in order:
+
+1. **Rank the pool, take eight.** Ranking candidates is not the draft-scoring loop L8 bans
+   ([#169](https://github.com/seanwinslow28/code-brain/issues/169)). Ranked so he can stop early.
+2. **`block` each pick**, which re-fetches verbatim text through oEmbed.
+3. **Draft one candidate per stimulus, in an isolated clean-context spawn.** One per block, not
+   eight in one context: [#221](https://github.com/seanwinslow28/code-brain/issues/221) measured that
+   same-context generation converges, so eight drafted together become variations of the first.
+   **One draft per stimulus, deliberately** — several candidates per stimulus is
+   [#228](https://github.com/seanwinslow28/code-brain/issues/228), which needs this as its baseline.
+4. **Hand back eight ranked pairs**, each draft shown with the post it answers. A reply is
+   unreadable without its setup, so the pair is the unit — roughly forty words each.
+
+**Eight is a measurement, not a ruling.** The hit rate is unknown and
+[#248](https://github.com/seanwinslow28/code-brain/issues/248) cannot supply it, because that was an
+exercise where he wrote on all twelve and rejected none. The size the record sets is the size. The
+failure being sized against is not "too long to read" — it is #227's week-1 Oracle deck being denied
+in full, and machine work is nearly free while his attention is not.
 
 **Manual paste is not a route.** A flow where Sean finds the post himself and hands it over was
 considered and rejected by him: if he is already looking at the tweet he already has the line, so the
@@ -59,16 +149,31 @@ machinery buys nothing and costs steps.
 ### Route 2 — brainstorm
 
 When he has a seed and wants it pushed somewhere he had not thought of. **Divergence first**, many
-candidate lines, back and forth until one lands — never one output, never an interview. The model is
-`anima/.claude/skills/brainstorm-front-door` (micro-expand always on, alternate premises before any
-question is asked, every lock carrying his verbatim reason).
+candidate lines, back and forth until one lands — never one output, never an interview.
+
+**Route 2 is a pointer, not code** — confirmed on the #250 build, which is what that ticket asked
+before anything got written. It points at `creative-partner`'s **divergence stage**, and the pointer
+had to be corrected: `anima/.claude/skills/brainstorm-front-door` is the *model* the ruling named and
+it is **not invocable from here.** It lives in a different repository (`~/Code-Brain/anima`), it
+emits a brief bundle for the anima pipeline rather than candidate lines, its own header says *"do not
+invoke it from another skill"*, and `creative-partner`'s description already routes anima brief
+sessions away from itself and to it. Naming an out-of-repo skill as the route is how a session ends
+up trying to call something that is not there.
+
+The in-repo equivalent is ratified and matches the ruling's shape move for move: four isolated
+generators wearing different frames plus one critic, frame selection offered and confirmed before
+dispatch, and the sentence that makes it L8-legal written into the skill itself — *"machines write
+candidates; Sean writes fates."* Its stated cost is ~5 calls per run and the spend is always his
+choice, which is the honest reason this is a pointer: route 2 is an interactive session he opens, not
+a script the machine runs.
 
 This is L8-legal by the 2026-09-02 amendment: a persona that generates **candidates he rules on** is
 the rule's own sentence; only a persona that produces a *score* is banned.
 
 ### The stimulus block
 
-Route 1's stage-2 artifact, replacing the transcript. Git-ignored, beside the transcripts.
+Route 1's stage-2 artifact, replacing the transcript. Git-ignored, **beside** the transcripts in a
+directory of their own: `creative-studio/content-machine/stimulus/`.
 
 ```
 STIMULUS BLOCK — <slug> — <date>
@@ -78,6 +183,25 @@ Post: <verbatim text, fetched through publish.x.com/oembed>
 Media: <what any attached image or video shows>
 Surface: reply | quote-post
 ```
+
+```bash
+python3 .claude/skills/content-machine/x/stimulus.py block <status-url> \
+    --slug <slug> --surface reply|quote-post [--media "..."]
+python3 .claude/skills/content-machine/x/stimulus.py check <block.md>
+```
+
+**Its own directory, not a filename convention inside `transcripts/`** (ruled on the #250 build). The
+two files have opposite polarity, and the failure mode is a tab-complete: one wrong path argument
+turns the origin gate from a leak-catcher into a leak-licenser, silently, with a clean-looking
+report. Three independent guards, because one is not enough for a mistake that leaves no trace — a
+separate home, the `STIMULUS BLOCK` sentinel on line 1, and a hard refusal (exit 2) in
+`origin_check.py` when a file carrying that sentinel is handed over as a transcript.
+
+The sweep's own text is never the record. Every block **re-fetches** through oEmbed before writing
+anything down — the same discover-then-verify method that took #247's 79 URLs to 79 clean returns —
+and the block records what the channel could not give: oEmbed returns no media (so `Media:` is
+supplied by hand or reads `none`), and it truncates long posts at the embed limit, which the block
+flags on a `Fetch:` line rather than leaving a `…` to be read as the author's own ellipsis.
 
 **It carries nothing from Sean.** If the draft turns out to need a fact about his week, that goes on
 the ASK LIST and comes back as a one-line answer stored as a separate mini-transcript — never folded
@@ -263,6 +387,24 @@ answering, and is he claiming something about himself he never said*. Three rule
    its 80% token-overlap threshold already draws the right line — shared vocabulary passes, a lifted
    run does not.
 
+```bash
+python3 .claude/skills/content-machine/gates/origin_check.py <draft.md> \
+    --stimulus <block.md> [--transcript <mini-transcript.md>]
+python3 .claude/skills/content-machine/gates/coined_lines.py <draft.md> \
+    --lane expressive --artifact <slug> --stimulus <block.md>
+```
+
+**Two exemptions widen the claim check and neither widens the forbidden set** (built #250). A claim
+token that appears in the post is exempt, because the post supplies the subject and a number he is
+answering is not a claim about his week — and a lift of that number is caught by rule 3, which is the
+check that owns the case. The block's `Author:` handle and `Media:` gloss are exempt for the same
+reason: naming the person you are answering is the form, and describing a picture both of them can
+see is not an assertion about him. The forbidden-strings source stays the `Post:` field alone.
+
+Origin's own lift check and rule 3 overlap on purpose and measure different things: origin flags a
+contiguous run of three content words with the connective tissue collapsed out (a reworded lift),
+`coined_lines.py` windows a whole line at 80% (a paraphrased one). Neither alone is the check.
+
 The reading pass for recombination still runs. Expressive lane advises and never blocks.
 
 ### The rest of the chain
@@ -271,6 +413,14 @@ The reading pass for recombination still runs. Expressive lane advises and never
   recycled line as the medium's signature temptation, and a heat-3 six-word post is exactly where a
   suppressed topic slips out. Coined-lines does two jobs here: the one-artifact rule and the stimulus
   overlap above.
+
+  **The one-artifact half is still unarmed, and the gate now says so out loud.** `coined-lines.md`
+  had never existed ([#232](https://github.com/seanwinslow28/code-brain/issues/232)); #250 created it
+  with the convention and Sean's unregistered backlog, but a ledger with no `>` lines enforces
+  nothing. The gate used to print *"nothing to check against"* and exit 0, which in a GATE RECORD is
+  indistinguishable from a clean run; it now prints **UNARMED**. Register at least one line before
+  the amortized-ratio run ([#233](https://github.com/seanwinslow28/code-brain/issues/233)) — one
+  interview feeding five posts is exactly what manufactures this contract's own *recycled line*.
 - **Humanity scrub** — runs, expected silent. Most of its thirty tells are essay-scale.
 - **Critique — false authority / operator credibility only.** Structure and hiring signal mean nothing
   at six words. False authority means a great deal: *the lecture* is this contract's named failure,

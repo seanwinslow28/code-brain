@@ -129,7 +129,7 @@ any count; a score is banned at any count.
 |---|---|---|---|
 | 0 | **Oracle** — proposes what's worth writing: experiments he could run (frame stage + news lane) and done things from his own week (sweep), scored once into two decks | [`content-oracle`](../content-oracle/SKILL.md) | live, on probation (on-demand only until 2026-10-04); rebuilt after week 1 failed (#227, #238, #239) |
 | 1 | **Topic + value gate** — one piece, one lane, one medium, named before anything else; the publication's value gate clears here as a **hard block**, never post-draft | this skill + `substack-value-engine` | live |
-| 2 | **Interview** — one lens, one question at a time, read-back at the close. **X's reactive route runs no interview**: its stage 2 is a stimulus block ([#249](https://github.com/seanwinslow28/code-brain/issues/249)) | `interview/` | live, seven lenses |
+| 2 | **Interview** — one lens, one question at a time, read-back at the close. **X's reactive route runs no interview**: its stage 2 is a stimulus block written by `x/stimulus.py` ([#249](https://github.com/seanwinslow28/code-brain/issues/249), built [#250](https://github.com/seanwinslow28/code-brain/issues/250)) | `interview/`, `x/` | live, seven lenses |
 | 3 | **Shape** — clean-context draft (see The shaping context) | fresh subagent, this skill orchestrates | live, re-scoped 2026-08-31 |
 | 4 | **Gates** — post-draft, advisory: origin (claims tier), do-not-promote + coined-lines sweep, humanity scrub, critique + the analyzer **dashboard** (no metric flags since #219) | `gates/` + chain skills as reference | live, all post-draft as of 2026-08-31 |
 | 5 | **Ship** — the author hand-rewrites (mandatory), a mechanical proofread runs on his final, he publishes | the author + one proofread pass | live, proofread added 2026-08-31 |
@@ -245,11 +245,23 @@ phrase, and it is blind to the whole class below. Whoever shapes the draft reads
 the ORIGIN LEDGER, and puts anything worth keeping on the ASK LIST.
 
 **The gate inverts where there is no transcript** (X's reactive route,
-[#249](https://github.com/seanwinslow28/code-brain/issues/249)). A stimulus block is **never** passed
+[#249](https://github.com/seanwinslow28/code-brain/issues/249), built
+[#250](https://github.com/seanwinslow28/code-brain/issues/250)). A stimulus block is **never** passed
 in a transcript's place: the gate clears whatever it finds in the indexed region, so pointing it at
 someone else's post would license every phrase lifted from it. The block is scanned as a
 **forbidden-strings** source instead, and the question becomes *is this untraceable and about him*
-rather than *is this traced*. Full rules in `contracts/expressive/x.md`.
+rather than *is this traced*.
+
+```bash
+python3 .claude/skills/content-machine/gates/origin_check.py <draft.md> \
+    --stimulus <block.md> [--transcript <mini-transcript.md>]
+```
+
+**A block handed over as a transcript is refused (exit 2), not warned about.** The mistake is one
+wrong path argument, it leaves no trace in the output, and the report it produces looks fine — so
+the gate detects the `STIMULUS BLOCK` sentinel on line 1 and stops. The fixture pins why: index the
+post text as an answer and a run lifted straight out of it comes back clean. Full rules in
+`contracts/expressive/x.md`.
 
 ### What layer 1 can and cannot see
 
@@ -287,13 +299,21 @@ a coined line that artifact spent.
 
 ```bash
 python3 .claude/skills/content-machine/gates/coined_lines.py <draft.md> \
-    --lane expressive --artifact <this-piece-slug>
+    --lane expressive --artifact <this-piece-slug> [--stimulus <block.md>]
 ```
 
 Stdlib, $0, no model. It catches exact reuse and the more likely case, a line lightly reworded:
 below 80% token overlap a shared phrase is just shared vocabulary. `--artifact` exempts the piece's
-own lines, so a draft can be re-checked as it evolves. Lane behaviour matches the origin gate:
-Expressive advises, Professional exits 1.
+own lines, so a draft can be re-checked as it evolves. `--stimulus` adds X's second input — the post
+being answered, at the same threshold, looking sideways instead of backwards (#250). Lane behaviour
+matches the origin gate: Expressive advises, Professional exits 1.
+
+**The ledger was missing until 2026-09-05, so this gate had never once armed**
+([#232](https://github.com/seanwinslow28/code-brain/issues/232), created on #250). It now exists
+with the convention and Sean's unregistered backlog, and an empty ledger prints **UNARMED** rather
+than "nothing to check against" — the old wording exited 0 and read, in a GATE RECORD, exactly like
+a clean run. The loader also ignores fenced blocks, so the file's own worked example cannot arm the
+gate with a line nobody wrote.
 
 It runs inside the **do-not-promote sweep** rather than as a gate of its own. Both ask the same
 question at the same moment: is there something in this draft that is true, and good, and still
@@ -327,6 +347,13 @@ about what would draw a reply, binding on nothing (`contracts/expressive/LANE.md
 4. Shape in the clean context (see The shaping context): spawn a fresh subagent with the listed
    files, the substance rule, and nothing else. Then run the post-draft gates and hand him the
    draft with the records attached.
+
+   **There is no gate runner, and the chain is the contract's, not this file's.** No script
+   orchestrates stage 4 for any medium — the orchestrator runs each gate itself, in the order the
+   medium contract states, and a contract may **trim** the chain. X drops the analyzer entirely and
+   scopes critique to false authority (#249); its origin and coined-lines calls take `--stimulus`.
+   The chain listed in the stage table is the default, not a floor. Whatever ran goes in the GATE
+   RECORD, including what did not and why — a gate that could not run says so.
 5. He rewrites by hand — mandatory, not remedial: three of four runs put his best new material
    (images, dramatization, jokes) into existence at the rewrite (L3-05, L4-02). That rewrite is
    corpus and lesson both.
@@ -407,6 +434,8 @@ Read-only inputs, all git-ignored, all local:
 | `creative-studio/content-machine/coined-lines.md` | Every piece, at the final sweep. The one-artifact rule: a coined line lives in exactly one artifact and is never recycled. |
 | `creative-studio/content-machine/do-not-promote.md` | Every piece, at the final sweep |
 | `creative-studio/content-machine/transcripts/` | The interview record for **Expressive** pieces, and later corpus. Professional-lane transcripts live with their application under `vault/20_projects/prj-job-hunt-2026/applications/` instead (#230). |
+| `creative-studio/content-machine/stimulus/` | X's stage-2 blocks (#250). **Opposite polarity to a transcript** — forbidden strings, never permitted vocabulary — which is why it is a separate directory and why the origin gate refuses a file carrying the `STIMULUS BLOCK` sentinel. Never merge the two. |
+| `creative-studio/content-machine/watchlist.md` | The accounts X's route-1 sweep reads, in three lanes (#251). Per-machine: a fresh clone and the Mac Mini have none, and `x/stimulus.py` refuses to sweep nothing rather than reporting clean. Lane C is admitted **by eye, never by metric** — the first harvest ranked an antisemitic account top on every number available. |
 | `creative-studio/content-machine/ledger/` | Ratified lessons |
 | `creative-studio/content-machine/ideas-bank.md` | Every Oracle run, **before** scoring — a thin spike from three weeks ago may have an ending now |
 

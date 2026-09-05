@@ -262,6 +262,7 @@ scan_paths = [
   ".claude/skills/content-machine/contracts/expressive/x.md",
   ".claude/skills/content-machine/interview/observer.md",
   ".claude/skills/content-machine/interview/ENGINE.md",
+  ".claude/skills/content-machine/x/stimulus.py",
 ]
 
 [[retirement.pattern]]
@@ -271,3 +272,20 @@ reason = "Observer's depth is one question plus post-draft ASK LIST follow-ups; 
 [[retirement.pattern]]
 literal = "critique / analyzer"
 reason = "The analyzer does not run on X: both its bands are essay bands, X has no series in either, and it fired a monotony flag on a 51-word draft its own docs promise to exempt (#249). The literal stays live in the seven contracts that do run it."
+
+[[retirement]]
+id = "x-routes-ruled-and-unbuilt"
+name = "X's sourcing routes are ruled and unbuilt"
+source = "https://github.com/seanwinslow28/code-brain/issues/250"
+scan_paths = [
+  ".claude/skills/content-machine/contracts/expressive/x.md",
+  ".claude/skills/content-machine/SKILL.md",
+]
+
+[[retirement.pattern]]
+literal = "ruled and unbuilt"
+reason = "Route 1 is built and smoke-tested (#250): x/stimulus.py runs the sweep, fetches through oEmbed, writes the block, and both gates read it inverted. Route 2 is confirmed a pointer at creative-partner's divergence stage. A live instruction saying the routes do not exist stops a run that would now work."
+
+[[retirement.pattern]]
+literal = "until it lands X cannot run at all"
+reason = "Superseded by the #250 build. What is still missing is the query set and deck size (#251), which makes a run need hand-supplied queries -- not a medium that cannot run."
