@@ -89,18 +89,35 @@ def load_ledger(path: Path) -> list[tuple[str, str]]:
 
 
 def find(draft_tokens: list[str], coined: str) -> tuple[bool, float]:
-    """(exact, best_overlap) for one coined line against the draft."""
+    """(exact, best_overlap) for one coined line against the draft.
+
+    Two defects fixed 2026-09-05, both found the moment the ledger was first
+    armed (#251), and both of which had made the reworded case unreachable:
+
+    **The window has to shrink to fit the draft.** It used to be exactly as
+    long as the coined line, so a draft SHORTER than the line produced zero
+    windows and scored 0.0 — silently, as "clean". That is not an edge case,
+    it is X: essay lines run 18 tokens and a reactive post runs six, so the
+    medium the one-artifact rule was armed for was the one medium where a
+    reworded reuse could never fire. The denominator stays the coined line's
+    length, so a short draft is not flattered by being short.
+
+    **The denominator counted duplicates.** `n` was `len(ct)` while the
+    numerator is a set intersection, so every repeated word in a coined line
+    ("a" three times here) deflated its own score. Unique tokens both sides.
+    """
     ct = norm(coined)
     if len(ct) < MIN_TOKENS:
         return (False, 0.0)
-    n = len(ct)
     joined = " ".join(draft_tokens)
     if " ".join(ct) in joined:
         return (True, 1.0)
     cs = set(ct)
+    n = len(cs)
+    span = min(len(ct), len(draft_tokens))
     best = 0.0
-    for i in range(max(len(draft_tokens) - n + 1, 0)):
-        window = set(draft_tokens[i:i + n])
+    for i in range(max(len(draft_tokens) - span + 1, 0)):
+        window = set(draft_tokens[i:i + span])
         best = max(best, len(cs & window) / n)
     return (False, best)
 
