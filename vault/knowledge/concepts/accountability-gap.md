@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/accountability-gap.md
 tags: [auto-generated, phase-6]
-created: 2026-09-05
-updated: 2026-09-05
+created: 2026-09-06
+updated: 2026-09-06
 ---
 
 ## Definition
@@ -29,4 +29,4 @@ Sean is building a high-velocity job hunt and creative studio workflow. If he ca
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Legibility Debt as a Supervision Failure Mode]] [[The Director-Intern Invariant in Creative and Professional Identity]]
+[[Supervision as the New AI Edge]] [[Legibility Debt as a Supervision Failure Mode]]

@@ -2,33 +2,33 @@
 title: "The Efficiency-Quality Inversion in Automated Synthesis"
 type: connection
 connects:
-  - The Illusion of Health in Autonomous Systems
-  - Silent Decay in Strategic Pipelines
-  - Legibility Debt as a Supervision Failure Mode
-created: 2026-09-05
-updated: 2026-09-05
+  - Supervision Fatigue as the Hard Cap on Fleet Scaling
+  - Context Management as a Bottleneck
+  - The Illusion of Competence in Automated Systems
+created: 2026-09-06
+updated: 2026-09-06
 ---
 
 ## Synthesis
 
-This tension arises when the drive for high-velocity automation (more runs, more concepts) directly conflicts with the need for semantic integrity (accurate, non-degraded connections). As Sean's vault synthesizer scales up concept production, the human capacity to verify its output becomes the bottleneck. The consequence is that the system produces more 'noise' than 'signal', creating an illusion of productivity while actually increasing the cognitive load on Sean to filter and validate the output.
+There is a critical tension between the raw volume of knowledge production and the semantic integrity of that knowledge. As Sean's fleet increases its output (concepts written), the rejection rate and contradiction counts reveal that automated synthesis is generating 'slop'—content that is structurally valid but semantically hollow or contradictory. This creates an inversion where higher automation velocity leads to lower effective quality, forcing Sean to spend more time reviewing low-value outputs rather than gaining productivity.
 
 ## Threads
 
-### [[The Illusion of Health in Autonomous Systems]]
+### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
 
-> 93 finding(s) withheld from this tracked report (SOUL-derived, or about a file in a gitignored subtree). They path withheld>` — private-subtree finding; path and detail withheld from this tracked report
+> This bottleneck emerges when the complexity of inter-agent dependencies exceeds the capacity for manual verification.
 
-### [[Silent Decay in Strategic Pipelines]]
+### [[Context Management as a Bottleneck]]
 
-> As the volume of issues grows, the cost of ignoring them increases exponentially because each broken link or orphaned file represents a potential point of failure in Sean's job-hunt and creative pipelines.
+> The phenomenon where the cognitive load of maintaining coherent context across multiple agents and domains limits the effective scale of automation.
 
-### [[Legibility Debt as a Supervision Failure Mode]]
+### [[The Illusion of Competence in Automated Systems]]
 
-> This connection reveals the tension between the efficiency of automated linting and the necessity of manual curation in maintaining a high-fidelity knowledge vault.
+> The failure is not only that the agent starts with incomplete context; it is that the agent treats its startup context as authoritative after the situation has changed.
 
 ## Implications
 
-- Sean should reduce the frequency of automated runs to allow for deeper manual review, prioritizing quality over quantity.
-- The job-hunt pipeline may be producing low-quality outputs due to reliance on broken or outdated references in the vault.
-- Investing in better 'legibility' tools (e.g., clearer provenance tracking) is more valuable than increasing automation speed.
+- Sean must implement stricter rejection criteria for synthesized concepts to prevent semantic drift from accumulating in his knowledge base.
+- The fleet's output metrics (concepts written) are misleading indicators of value; verification latency is the true cost center.
+- Automated synthesis should be capped or gated by a higher-fidelity model until structural integrity can be guaranteed without human intervention.

@@ -2,31 +2,32 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/connections/the-cost-of-ignored-debt-in-automated-workflows.md
+  - knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md
 tags: [auto-generated, phase-6]
-created: 2026-09-05
-updated: 2026-09-05
+created: 2026-09-06
+updated: 2026-09-06
 ---
 
 ## Definition
 
-This concept defines the accumulation of unstructured or poorly documented information that makes it difficult for humans to supervise automated systems. When agents generate outputs without clear provenance or context, the supervisor (Sean) must spend more time reconstructing the logic behind each output. This debt grows as the system scales, eventually exceeding the supervisor's capacity to verify, leading to blind trust in automated processes.
+Legibility debt emerges when the structural complexity of an automated system outpaces the human operator's ability to verify its state through standard observability channels. This creates a dependency on fragile, manual workarounds—such as specific credential files or browser profiles—to maintain operational continuity. When these manual anchors fail or rotate, the system does not degrade gracefully but instead produces opaque errors that require deep forensic investigation rather than simple remediation, effectively hiding the true cost of automation from the operator until a critical failure occurs.
 
 ## Context
 
-Sean is the primary supervisor of his agent fleet. As the vault grows, the 'legibility' of its contents decreases because the automated synthesis creates complex, non-obvious connections. This makes it harder for Sean to audit the vault's health, leading to a supervision failure where he cannot distinguish between high-quality and low-quality outputs.
+Sean is currently managing a complex agent fleet where the 'X' sweep relies on a stale credential file written by a setup wizard. The lack of a robust fallback mechanism means that routine session rotations can break core functionality, forcing Sean to manually intervene or accept broken states. This debt accumulates silently as he patches around these issues rather than addressing the underlying architectural fragility.
 
 ## Evidence
 
-> This connection reveals the tension between the efficiency of automated linting and the necessity of manual curation in maintaining a high-fidelity knowledge vault.
+> When that session rotates there is no fallback: Safari returns EPERM on Cookies.binarycookies (no Full Disk Access), Firefox has no profile, and Chrome's reader throws Value is too large to be represented as a JavaScript number on a WebKit cookie timestamp
 
-> Sean must prioritize manual curation of the vault's core structure over automated expansion to prevent further degradation.
+> The machine does not pick them — which sentence is the line is his judgment, and a machine guessing would fill the ledger with lines he never rat
 
 ## Examples
 
-- The manifest lists '62c/29x' for one run and '125c/34x' for another, showing inconsistent output quality that is hard to track without manual review.
-- The 'rejected_count' varies significantly (e.g., 7 vs 106), indicating that the system's ability to self-correct is unstable and dependent on external factors.
+- Safari returns EPERM on Cookies.binarycookies due to lack of Full Disk Access
+- Chrome's reader throws Value is too large to be represented as a JavaScript number on a WebKit cookie timestamp
+- The loader ignores fenced blocks so the file's own example cannot arm it with a line nobody wrote
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Silent Decay in Strategic Pipelines]]
+[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[The Illusion of Competence in Automated Systems]]

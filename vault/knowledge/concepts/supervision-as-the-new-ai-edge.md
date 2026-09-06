@@ -2,10 +2,10 @@
 title: "Supervision as the New AI Edge"
 type: concept
 sources:
-  - knowledge/connections/the-authenticity-velocity-paradox-in-personal-knowledge-infrastructure.md
+  - knowledge/concepts/supervision-as-the-new-ai-edge.md
 tags: [auto-generated, phase-6]
-created: 2026-09-05
-updated: 2026-09-05
+created: 2026-09-06
+updated: 2026-09-06
 ---
 
 ## Definition

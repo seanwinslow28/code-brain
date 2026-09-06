@@ -2,31 +2,31 @@
 title: "Silent Decay in Strategic Pipelines"
 type: concept
 sources:
-  - knowledge/connections/the-cost-of-ignored-debt-in-automated-workflows.md
+  - knowledge/connections/the-decoupling-of-operational-status-from-strategic-value.md
 tags: [auto-generated, phase-6]
-created: 2026-09-05
-updated: 2026-09-05
+created: 2026-09-06
+updated: 2026-09-06
 ---
 
 ## Definition
 
-This mechanism refers to the gradual erosion of strategic value in automated workflows due to unaddressed technical debt and lack of manual curation. As the volume of automated outputs increases, the cost of verifying each item grows exponentially, leading to a state where only the most obvious errors are caught. The pipeline continues to produce artifacts, but these artifacts become increasingly disconnected from the user's actual strategic goals, creating a false sense of progress.
+This mechanism refers to the gradual erosion of strategic value within automated workflows due to a lack of semantic validation at the input or output layers. Unlike operational failures which are immediately visible as crashes, silent decay manifests as agents continuing to execute loops while producing irrelevant or empty results. The system remains 'online' and 'running', but the quality of the signal degrades until it is indistinguishable from noise.
 
 ## Context
 
-Sean's job-hunt and creative pipelines rely on the vault for accurate context. If the vault is decaying silently, his job applications and creative outputs are being built on outdated or incorrect information. This decay is 'silent' because the automation doesn't fail; it just produces low-value results that Sean might not immediately notice until they impact his career.
+In Sean's job hunt, a 'healthy' deep-researcher that returns no unchecked items represents a strategic blockage rather than a completed task. If the input layer fails (e.g., API changes), the agent continues to run but produces nothing, creating a gap between perceived activity and actual progress.
 
 ## Evidence
 
-> As the volume of issues grows, the cost of ignoring them increases exponentially because each broken link or orphaned file represents a potential point of failure in Sean's job-hunt and creative pipelines.
+> A failure in the input layer should trigger a higher-level alert than a simple 'degraded' status, as it represents a strategic blockage.
 
-> The consequence is that the system becomes less reliable over time, not because it stops working, but because its outputs become increasingly disconnected from reality.
+> The fleet dashboard needs to be enhanced to highlight agents that are technically running but producing zero value, rather than just those that have crashed.
 
 ## Examples
 
-- The synthesizer writes 125 concepts in one run but only 34 connections, indicating a growing gap between idea generation and structural integration.
-- Rejected counts remain low (e.g., 'rejected_count: 7') while the total volume of issues grows, suggesting that the system is filtering out errors rather than fixing them.
+- deep-researcher notes='no unchecked items'
+- job-feed fetch=0 scored=0
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Legibility Debt as a Supervision Failure Mode]]
+[[The Illusion of Health in Autonomous Systems]] [[Operational Uptime vs. Cognitive Utility Tension]]

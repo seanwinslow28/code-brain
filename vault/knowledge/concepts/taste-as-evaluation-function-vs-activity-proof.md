@@ -2,15 +2,15 @@
 title: "Taste as Evaluation Function vs. Activity Proof"
 type: concept
 sources:
-  - knowledge/connections/the-biographical-anchor-requirement-for-authentic-voice.md
+  - knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md
 tags: [auto-generated, phase-6]
-created: 2026-09-05
-updated: 2026-09-05
+created: 2026-09-06
+updated: 2026-09-06
 ---
 
 ## Definition
 
-This concept defines the tension between using taste as a rigorous evaluation function for creative output versus treating activity (volume of generated content) as proof of progress. When agents produce content that lacks authentic voice, the user's taste acts as a negative constraint, rejecting outputs that are mechanically sound but emotionally hollow. This creates a bottleneck where the scalability of production is limited by the finite capacity of human taste to verify authenticity.
+This mechanism describes the structural bottleneck where human aesthetic judgment becomes the limiting factor in agentic production systems. As automated agents increase their output volume, the user's capacity to verify authenticity does not scale linearly, creating a divergence between activity metrics and creative value. The system fails when high-volume generation is mistaken for progress, because the verification step requires deep, non-automatable taste encoding that cannot be parallelized.
 
 ## Context
 

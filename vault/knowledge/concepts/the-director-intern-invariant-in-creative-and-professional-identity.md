@@ -2,31 +2,31 @@
 title: "The Director-Intern Invariant in Creative and Professional Identity"
 type: concept
 sources:
-  - knowledge/concepts/the-director-intern-invariant-in-creative-and-professional-identity.md
+  - 20_projects/research/2026-09-04-x-comic-one-liner-specimens.md
 tags: [auto-generated, phase-6]
-created: 2026-09-03
-updated: 2026-09-03
+created: 2026-09-06
+updated: 2026-09-06
 ---
 
 ## Definition
 
-This invariant describes a structural tension where an agent's autonomy is deliberately capped not by technical limitation, but by the requirement to produce a 'legible world' that allows for human review. The model supplies raw intelligence, but the harness must enforce a workflow where the agent acts like a junior employee submitting work-in-progress rather than a black box announcing completion. This creates a dependency on explicit surfacing of assumptions and unresolved questions, ensuring that professional review remains efficient and that authority structures are preserved despite the abundance of automated capability.
+This invariant describes the structural asymmetry where the creator (Director) must maintain high-fidelity taste standards while delegating execution to lower-cost, higher-volume agents (Interns). The tension arises because the Intern's output inevitably contains 'slop' or misaligned nuance, forcing the Director into a supervisory role that consumes cognitive bandwidth. This creates a paradox where scaling creative production via automation actually increases the Director's operational load rather than reducing it, as the cost of verification scales with the volume of generated artifacts.
 
 ## Context
 
-Sean is building a personal knowledge vault and agent fleet that must scale without him becoming the bottleneck. If agents operate with too much autonomy, he loses the ability to steer the 'ontology' (the legible world). If they operate with too little, he falls into the trap of manual supervision. This concept defines the precise boundary where his role shifts from operator to supervisor of a 'junior employee' whose output is always partially formed and requires his taste to finalize.
+Sean is building an agent fleet to handle research and synthesis (job-hunt-2026, creative-studio). Understanding this invariant prevents him from assuming that 'automating writing' will free up time; instead, it highlights that he must design for 'taste verification' as a primary workflow step, not an afterthought.
 
 ## Evidence
 
-> His definition of autonomous work is also more conservative than “the agent acted without a human.” For Basis, autonomy means the agent can carry a job from initiation to a reviewable completion state, while surfacing its assumptions, important decisions, unresolved questions, and evidence in a form that makes professional review efficient.
+> The queue should preserve evidence lineage: which claims came from primary sources, which came from synthesis, and which are only leads for future verification.
 
-> The model supplies intelligence. The harness supplies agency and execution mechanics. The ontology supplies a legible world.
+> Every line quoted below came from a page or API response actually fetched on 2026-09-04. Nothing here is reconstructed from memory.
 
 ## Examples
 
-- An agent completes a deep research task but outputs a draft with explicit 'unresolved questions' sections rather than a final report, forcing Sean to engage with the gaps.
-- The system rejects an agent's attempt to execute a tool call because the 'governance' layer determines the action exceeds the current authority spectrum defined for that specific job type.
+- Sean's agent fleet sampling 155 clusters but writing only 68 concepts (run-2026-06-24) reflects the Intern generating volume while the Director filters for quality.
+- The rejection of X/Twitter data due to HTTP 402 forces a shift to Bluesky, requiring Sean to manually verify API reliability rather than trusting a single source.
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[Legibility Debt as a Supervision Failure Mode]]
+[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[Taste as Evaluation Function vs. Activity Proof]]

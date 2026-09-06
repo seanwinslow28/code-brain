@@ -2,10 +2,10 @@
 title: "Tacit Knowledge Erosion vs. Automation Scale"
 type: concept
 sources:
-  - knowledge/connections/the-biographical-anchor-requirement-for-authentic-voice.md
+  - knowledge/concepts/tacit-knowledge-erosion-vs-automation-scale.md
 tags: [auto-generated, phase-6]
-created: 2026-09-05
-updated: 2026-09-05
+created: 2026-09-06
+updated: 2026-09-06
 ---
 
 ## Definition

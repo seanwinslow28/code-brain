@@ -2,10 +2,10 @@
 title: "The Homogenization Trap in Agentic Creative Workflows"
 type: concept
 sources:
-  - knowledge/connections/the-biographical-anchor-requirement-for-authentic-voice.md
+  - knowledge/concepts/the-homogenization-trap-in-agentic-creative-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-09-05
-updated: 2026-09-05
+created: 2026-09-06
+updated: 2026-09-06
 ---
 
 ## Definition
