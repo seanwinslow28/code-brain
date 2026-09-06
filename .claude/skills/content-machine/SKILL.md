@@ -129,6 +129,26 @@ positive form the shaper gets is the X contract's rule 1 — **assert nothing ab
 the post supplies the subject. A fact the draft turns out to need goes on the ASK LIST and comes
 back as a mini-transcript, which *is* indexed normally.
 
+**One sentence of stance rides with the block** (ruled 2026-09-06 on
+[#258](https://github.com/seanwinslow28/code-brain/issues/258), against the first deck's picks). The
+shaper is told: *"Write the reply that agrees with, extends, or answers this post. If the line costs
+someone something, it costs you."* That is a description of the deliverable — what kind of object a
+reply is — in the same class as the block label and the format bounds above, and it is the entire
+budget this ruling spends on the shaping context.
+
+It is here because **nothing downstream can enforce it.** Sean cut four of the first eight drafts,
+and all four had landed *against the frame the poster posted in* — a machine called a liar under a
+post proud of it, a release week dunked under a post excited about it — while all four picks agreed
+with, extended, or answered the post. No gate can see where a joke points: origin, coined-lines,
+humanity and critique are blind to it, so the only other enforcement point is his pick step, which is
+what those four cards cost.
+
+The risk is named rather than hidden. This is the **first addition to the emptied context since the
+block label**, and every re-added rule is defensible on its own — which is how the erosion the
+2026-08-31 re-scope exists to prevent would actually happen. One sentence, and the next deck measures
+it: if stance-legal drafts do not rise above 4 of 8, the sentence is not the lever and the route is
+more paired samples rather than more rules.
+
 **No autonomous revision loops.** The machine writes candidates; the author ratifies. There is no
 score-until-good cycle, no persona panel, no numeric quality mean. A gate may route exactly one
 grounded revise request; the author decides everything else.

@@ -20,11 +20,14 @@ A room-1 post is one landed *thing*. #226 read that as a claim; it is more often
 Skeptic remains right for a post that genuinely argues something, and naming a second lens for that
 case is a ruling by Sean, not a line in this file.
 
-**Status: corrected by two runs.** ([#231](https://github.com/seanwinslow28/code-brain/issues/231)'s
+**Status: corrected by three runs.** ([#231](https://github.com/seanwinslow28/code-brain/issues/231)'s
 vocabulary, which the previous line sat outside of.) #232 ran the chain and was stopped at the gates
 when the shape came out wrong, which re-routed the lens and plumbed route 1 via #249 and #250.
 [#246](https://github.com/seanwinslow28/code-brain/issues/246) ran the standalone route under
-Observer all the way to a hand-rewritten final. **X has still never shipped a post** — #246's final
+Observer all the way to a hand-rewritten final. The third correction is the first route-1 deck
+([#255](https://github.com/seanwinslow28/code-brain/issues/255), amended by
+[#258](https://github.com/seanwinslow28/code-brain/issues/258)): eight drafts, four picked, and all
+four cuts turned out to be one thing — see `## Stance and aim`. **X has still never shipped a post** — #246's final
 is written, gated and rewritten, and waiting on a body of posts rather than on the machine.
 
 Route 1 is built and smoke-tested end to end ([#250](https://github.com/seanwinslow28/code-brain/issues/250),
@@ -225,6 +228,17 @@ exact rhythm of what it answers, so a reply written to a paraphrase is a reply t
 **The label is form, not style** — the same class as the deliverable bounds the shaper already
 gets. It says *this is the post you are replying to*; it never says what to do about it.
 
+**One sentence now rides with it** (added 2026-09-06,
+[#258](https://github.com/seanwinslow28/code-brain/issues/258)): *"Write the reply that agrees with,
+extends, or answers this post. If the line costs someone something, it costs you."* That is
+`## Stance and aim` compressed to a description of the deliverable — what kind of object a reply is —
+and it is in the context because **no gate can see where a joke points**. Origin, coined-lines,
+humanity and critique are all blind to it; without the sentence the only enforcement point is Sean's
+pick step, which is what the first deck's four cuts cost. It is the first addition to the emptied
+shaping context since the block label itself, and the whole budget this ruling spends there. See
+`SKILL.md`, "The shaping context". **If the next deck does not clear 4 of 8 stance-legal, the
+sentence is not the lever** and the route is more paired samples rather than more rules.
+
 **First measurement, same run:** eight drafts, **0 lifted runs, 0 unsourced first-person claims**,
 `coined_lines.py` clean against both the stimulus and the ledger on all eight. The unconstrained
 context did not lift, which is the evidence this ruling stands on. One run — re-read it after the
@@ -253,8 +267,18 @@ Budget heat 3, room 1. X keeps the full register and gives up all the space:
 
 Two things follow, and both are worth stating plainly.
 
-**X is the only Expressive medium that keeps heat 3.** The bodily, profane, insulting register is
-licensed here in full. Nothing about the medium asks him to behave.
+**X is the only Expressive medium that keeps heat 3, and the reason is the audience, not the
+manners.** No recruiter is reading. A joke that would end a cover letter is fine here, and that is
+exactly what heat measures — Sean, 2026-09-06: *"I'm not dealing with recruiters, so I don't have to
+worry about professional language and being buttoned up."* The bodily and profane register stays
+licensed in full.
+
+**Heat is volume. Aim is a separate axis**, ruled 2026-09-06 in `## Stance and aim` below. The
+previous version of this line said *nothing about the medium asks him to behave*, which conflated the
+two and is now wrong in a specific way: the medium does not ask, and he ruled anyway. The *insulting*
+third of the register is aimed from now on, not free. The proof that the axes are independent is his
+own: the loudest specimen in the corpus is a benchmark table swapped for his own bodily failings —
+heat 3 at full volume, with every ounce of the negative landing on himself.
 
 **X gets no whole-piece moves, so a post has no arc.** Everything that needs a beat or more is banned
 by room: no Mid-Action Open, no Callback Closer, no Self-Deprecation as Structure, no Inverted
@@ -269,6 +293,81 @@ X is its home.
 **Screenwriting Cut-To is banned**, ruled against the axes: a single post has no room to establish
 the stated intent before turning on it, so the notation ends up doing work the setup should have done
 ([#162](https://github.com/seanwinslow28/code-brain/issues/162)).
+
+## Stance and aim
+
+Ruled 2026-09-06 on [#258](https://github.com/seanwinslow28/code-brain/issues/258), against the first
+route-1 deck ([#255](https://github.com/seanwinslow28/code-brain/issues/255)). Two rules, and they do
+different jobs.
+
+**Rule 1 — the reply stands with the post.** It agrees with it, extends it, or answers it. It never
+contradicts or undercuts the frame the poster posted in.
+
+**Rule 2 — if a line leans negative, it lands on Sean.** People are never the ones put down. Machines,
+tools, companies, releases and trends are fair game; a person is not.
+
+### Why it is stance and not targeting
+
+The ticket opened on the wrong axis and the deck falsified it. The proposed rule was *who pays for
+the joke* — a machine is fine, a person is not — and the cut draft answering @steipete aimed squarely
+at a machine, while the picked draft answering @geoffreylitt aimed at a machine too. Target does not
+separate them. What separates all eight is where the reply **stands**:
+
+| | What the poster was doing | What the draft did | |
+|---|---|---|---|
+| complaint about slop | complaining | agreed, added an image | **pick** |
+| joke about his own agent | joking | extended his joke | **pick** |
+| enthusiasm about building | enthusing | agreed, then took the hit himself | **pick** |
+| a genuine question | asking | answered it | **pick** |
+| proud of a thing he built | proud | called the thing a liar | cut |
+| reporting a lab's claim | reporting | dunked the claim | cut |
+| pitching an idea | pitching | took the idea as a threat | cut |
+| excited about four releases | excited | called them all the same | cut |
+
+Self-deprecation is not the axis either: the self-directed pick agrees *first*, and one of the cuts
+is arguably self-directed too. **Agreement is the load-bearing half; the self-directed hit is what
+you do once you are standing in the right place.**
+
+Sean's ground for it was reputational rather than craft — his favourite of the eight was the
+funniest of the eight. He does not want to put anyone down or make anyone feel stupid, and a reply
+reads as hostile when it shows up to disagree with something the poster was happy about, whoever the
+joke names.
+
+### Scope
+
+**Rule 1 binds wherever a stimulus exists** — replies and quote-posts, route 1 and any reactive post
+however sourced. It is not *excluded* from the standalone route so much as **inapplicable** there: a
+standalone post has no post to stand with.
+
+**Rule 2 binds all of X.** It has nothing to do with how the post was sourced.
+
+### Aiming notes on two moves
+
+No move was delicensed. Nothing in the roster caused the four cuts, the two obvious suspects were
+never reached in sixteen cold reps ([#248](https://github.com/seanwinslow28/code-brain/issues/248)'s
+coverage note), and nothing reads the matrix at runtime anyway
+([#222](https://github.com/seanwinslow28/code-brain/issues/222)) — so a ban would have cut moves the
+failures did not use and left the failures legal. Two moves get an aiming note instead, because the
+reply surface changes their mechanism:
+
+- **Reader-Dismissal** — the move contradicts the reader's assumption. In an essay the reader is a
+  stranger; **in a reply the reader is the person being answered**, so the move collides with rule 1
+  by construction. It only lands when the objection belongs to a third party — a lurker, not the
+  addressee. This is a *form* problem, the same class as "X gets no whole-piece moves," not a heat
+  problem.
+- **Affectionate-Insult Epithet** — the vocative points anywhere except the person being replied to.
+  The construction is fine about a third party and is rule 2 when aimed at the addressee. This
+  sharpens the `## Format` note that the same epithet reads as banter in a reply and a pile-on in a
+  quote-post.
+
+**Reopen trigger.** A deck failure that a delicensing would have caught and an aiming note did not.
+One specimen, not a hunch.
+
+### On watch, not ruled
+
+All four picks were replies and **both quote-posts in the deck were cut**. Both also broke rule 1
+independently, so there is no evidence the *surface* did anything, and n=2. Watch it across the next
+few decks before anyone writes a rule about the button.
 
 ## Threads, and the honest limit
 
