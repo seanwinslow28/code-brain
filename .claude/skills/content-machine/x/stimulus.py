@@ -655,13 +655,18 @@ def _cmd_block(args) -> int:
         return 0
 
     out_dir = Path(args.out) if args.out else BLOCKS_DIR
-    if not is_ignored(out_dir, REPO):
-        print(f"block: refusing to write to {out_dir} — it is not git-ignored.\n"
+    target = out_dir / f"{date.today().isoformat()}-{args.slug}.md"
+    # Ask about the file, not the directory. A `dir/` rule in .gitignore matches
+    # directories only, and `git check-ignore` cannot tell that a path which does
+    # not exist yet is a directory — so the directory form reported "not ignored"
+    # and refused a correctly-ignored destination on every machine where
+    # `stimulus/` had not been created yet (#255, the route's first live run).
+    if not is_ignored(target, REPO):
+        print(f"block: refusing to write to {target} — it is not git-ignored.\n"
               "       A stimulus block is an unpublished editorial artifact in a public repo.",
               file=sys.stderr)
         return 2
     out_dir.mkdir(parents=True, exist_ok=True)
-    target = out_dir / f"{date.today().isoformat()}-{args.slug}.md"
     if target.exists() and not args.force:
         print(f"block: {target} exists (use --force to overwrite)", file=sys.stderr)
         return 1

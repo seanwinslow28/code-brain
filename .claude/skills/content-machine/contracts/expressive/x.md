@@ -210,6 +210,26 @@ flags on a `Fetch:` line rather than leaving a `…` to be read as the author's 
 the ASK LIST and comes back as a one-line answer stored as a separate mini-transcript — never folded
 into the block. The two files have **opposite polarity** and must never be merged; see `## Gates`.
 
+**What the shaper is handed** (ruled 2026-09-06 on
+[#255](https://github.com/seanwinslow28/code-brain/issues/255), the route's first real run). The
+block goes into the clean context **verbatim, labelled as the thing being answered**, and with no
+prohibition attached. You cannot write a reply to a post you cannot see, so the drafting context
+necessarily receives the exact text the gates treat as forbidden — the polarity trap one stage
+upstream of where a gate can look. Three shapes were considered and Sean ruled the first: the block
+as-is with the gates catching lifts afterwards; the block plus an explicit *"do not reuse its
+wording"*; or a paraphrase the shaper could not lift from. The prohibition lost because the
+2026-08-31 re-scope empties the shaping context of style rules on measured evidence, and one
+re-added rule is how that erosion starts. The paraphrase lost on craft: a reply lands against the
+exact rhythm of what it answers, so a reply written to a paraphrase is a reply to a different post.
+
+**The label is form, not style** — the same class as the deliverable bounds the shaper already
+gets. It says *this is the post you are replying to*; it never says what to do about it.
+
+**First measurement, same run:** eight drafts, **0 lifted runs, 0 unsourced first-person claims**,
+`coined_lines.py` clean against both the stimulus and the ledger on all eight. The unconstrained
+context did not lift, which is the evidence this ruling stands on. One run — re-read it after the
+next few decks rather than treating it as settled.
+
 **The blind line, optional.** When he has time, he writes his own version of a post *without reading
 the machine's*, and whichever one he posts is the scoreboard. Sentence-survival percentages are
 meaningless at six words; whose line shipped is a clean binary that accumulates weekly. Same blind

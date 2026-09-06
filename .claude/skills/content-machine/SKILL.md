@@ -112,6 +112,23 @@ compliance collapse plus three measured runs — see the research note. Ratified
 shaper only when Sean routes one into the corpus or samples, or when a lesson's rider is short
 enough to live in the law itself (L4-06 above).
 
+**Where there is no transcript, slot 1 holds the stimulus block** (ruled 2026-09-06 on
+[#255](https://github.com/seanwinslow28/code-brain/issues/255), X's reactive route). The shaper
+cannot write a reply to a post it cannot see, so the block goes into the context **verbatim and
+labelled as the thing being answered** — a task frame, the same class as the deliverable form
+above, not a permission to reuse its words. No prohibition rides with it: adding *"do not reuse
+these strings"* would put a style rule back into a context deliberately emptied of them, which is
+the instruction-count problem the 2026-08-31 re-scope exists to avoid. The two gates own the lift
+instead, **post-draft and advisory** — `origin_check.py --stimulus` for a reworded run,
+`coined_lines.py --stimulus` for a paraphrased line. Measured on that run: eight drafts, **zero
+lifted runs and zero unsourced first-person claims**, both gates clean, so the unconstrained
+context did not in fact lift.
+
+The substance rule inverts with it. With no transcript there is nothing to trace *to*, so the
+positive form the shaper gets is the X contract's rule 1 — **assert nothing about his own week**;
+the post supplies the subject. A fact the draft turns out to need goes on the ASK LIST and comes
+back as a mini-transcript, which *is* indexed normally.
+
 **No autonomous revision loops.** The machine writes candidates; the author ratifies. There is no
 score-until-good cycle, no persona panel, no numeric quality mean. A gate may route exactly one
 grounded revise request; the author decides everything else.

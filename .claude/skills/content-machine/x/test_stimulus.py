@@ -12,7 +12,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from stimulus import (  # noqa: E402
-    _post_text_from_html, canonical_status_url, check_block, is_stimulus,
+    _post_text_from_html, canonical_status_url, check_block, is_ignored, is_stimulus,
     parse_block, parse_watchlist, Post, render_block,
 )
 
@@ -146,12 +146,35 @@ def test_block_roundtrip():
     print("  block: round-trips, sentinel set, bad surfaces refused")
 
 
+def test_block_guard_checks_the_file_not_the_directory():
+    """A `dir/` rule in .gitignore matches directories only, and `git check-ignore`
+    cannot tell that a not-yet-created path is a directory. Guarding on the
+    directory therefore refused a correctly-ignored destination on any machine
+    where `stimulus/` did not exist yet (#255). Guard on the target file."""
+    import subprocess, tempfile, os
+    from pathlib import Path
+    with tempfile.TemporaryDirectory() as td:
+        repo = Path(td)
+        subprocess.run(["git", "init", "-q"], cwd=repo, check=True)
+        (repo / ".gitignore").write_text("blocks/\n")
+        missing_dir = repo / "blocks"
+        assert not missing_dir.exists()
+        # the old form: the directory does not exist, so git cannot match `blocks/`
+        assert not is_ignored(missing_dir, repo)
+        # the new form: the file the command would actually write
+        assert is_ignored(missing_dir / "2026-09-06-slug.md", repo)
+        # and it still refuses a genuinely tracked destination
+        assert not is_ignored(repo / "tracked" / "2026-09-06-slug.md", repo)
+    print("  guard: asks about the target file, so a `dir/` rule matches before the dir exists")
+
+
 def main():
     print("X route-1 fixture (offline)")
     test_watchlist_is_lane_scoped()
     test_oembed_extraction()
     test_url_validation()
     test_block_roundtrip()
+    test_block_guard_checks_the_file_not_the_directory()
     print("\nOK")
 
 
