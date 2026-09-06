@@ -270,8 +270,12 @@ Two things follow, and both are worth stating plainly.
 **X is the only Expressive medium that keeps heat 3, and the reason is the audience, not the
 manners.** No recruiter is reading. A joke that would end a cover letter is fine here, and that is
 exactly what heat measures — Sean, 2026-09-06: *"I'm not dealing with recruiters, so I don't have to
-worry about professional language and being buttoned up."* The bodily and profane register stays
-licensed in full.
+worry about professional language and being buttoned up. I'm not going to write a poop joke on a
+cover letter. But poop jokes and cursing are perfectly acceptable in X. I just don't want to be a
+dickhead to people."* The bodily and profane register stays licensed in full.
+
+That quote is the whole ruling in one breath, and the last sentence is the half this contract had
+never written down.
 
 **Heat is volume. Aim is a separate axis**, ruled 2026-09-06 in `## Stance and aim` below. The
 previous version of this line said *nothing about the medium asks him to behave*, which conflated the
