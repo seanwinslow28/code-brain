@@ -66,7 +66,12 @@ each other others another such same different
 """.split())
 
 CLAIM_RE = re.compile(r"^\d[\d,.:/-]*$")
-WORD_RE = re.compile(r"[A-Za-z][A-Za-z'’-]*|\d[\d,.:/-]*")
+# A number token must END in a digit. The separators are only meaningful between
+# digits ("1,000", "3.5", "2026-09-05", "10:30"), and letting one trail meant a
+# number at the end of a sentence tokenized as "33." and could never match the
+# transcript's "33" — an untraced CLAIM every time, which BLOCKS the Professional
+# lane. Found by the #246 X run, on a draft ending "...than books in 33."
+WORD_RE = re.compile(r"[A-Za-z][A-Za-z'’-]*|\d(?:[\d,.:/-]*\d)?")
 
 
 def stem(w):

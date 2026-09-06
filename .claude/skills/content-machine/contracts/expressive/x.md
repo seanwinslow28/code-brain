@@ -20,9 +20,12 @@ A room-1 post is one landed *thing*. #226 read that as a claim; it is more often
 Skeptic remains right for a post that genuinely argues something, and naming a second lens for that
 case is a ruling by Sean, not a line in this file.
 
-**Status: corrected by the #232 run, re-routed by the #249 ruling, plumbed by the #250 build.** The
-run produced no shipped post — it was stopped at the gates when the shape came out wrong, which is
-what a first run is for. The contract has been corrected; **X has still never shipped a post.**
+**Status: corrected by two runs.** ([#231](https://github.com/seanwinslow28/code-brain/issues/231)'s
+vocabulary, which the previous line sat outside of.) #232 ran the chain and was stopped at the gates
+when the shape came out wrong, which re-routed the lens and plumbed route 1 via #249 and #250.
+[#246](https://github.com/seanwinslow28/code-brain/issues/246) ran the standalone route under
+Observer all the way to a hand-rewritten final. **X has still never shipped a post** — #246's final
+is written, gated and rewritten, and waiting on a body of posts rather than on the machine.
 
 Route 1 is built and smoke-tested end to end ([#250](https://github.com/seanwinslow28/code-brain/issues/250),
 2026-09-05): `x/stimulus.py` runs the authenticated sweep, fetches verbatim post text through
@@ -309,6 +312,22 @@ made it.
 ## Format
 
 - One post carries one thing. If it carries two, it is two posts, and probably one of them is better.
+- **The causal link has to be structural, because there is no beat to carry it.** Two things placed
+  in sequence read as *and then*, and a room-1 post has no arc in which to turn that into *but* or
+  *therefore*. So the connection is made inside the sentence — the two things simultaneous, or one
+  plainly causing the other — or the reader is left to infer it and does not.
+
+  Earned on the Observer run ([#246](https://github.com/seanwinslow28/code-brain/issues/246)). The
+  draft listed a run of physical actions in order and then named the thing they were supposed to add
+  up to, leaving the reader to supply the link. Sean's verdict: *"it just feels like there's no
+  connection."* His rewrite put the two halves in the **same clause, at the same moment**, and the
+  connection stopped needing to be inferred. The piece itself stays in the private brain.
+
+  **This rule is not new and that is the finding.** `storytelling-architecture` mechanic 1 — the
+  but/therefore test — already names the dead *and then* seam, and mechanic 6 tests the turn inside a
+  beat. Both run on a **beat map**, and a one-sentence post never gets one, so the rule was true and
+  structurally unreachable in this medium. It is promoted here rather than duplicated there
+  (`SKILL.md`, "A ratified lesson is not automatically a new rule").
 - Length is bounded by the fold, not the character limit — and the two are independent quantities,
   not a strict and a loose version of one bound. The character limit is 280 **weighted** characters
   (Latin text weighs 1, CJK and emoji weigh 2), every URL counts as a flat 23 however long it really

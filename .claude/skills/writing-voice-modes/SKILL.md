@@ -152,6 +152,14 @@ Five global rules from the VoicePrint refine loop; the edit-diffs and Sean's ver
 Routed here by the content-machine lessons loop. Each carries Sean's ratified reason in the
 gitignored ledger; only the rule travels into this file.
 
+- **An invented aside still needs a referent the reader can resolve.** Texture is written fresh and
+  needs no source, but an address to somebody — or an apology for something — lands as a question
+  rather than a joke when the piece never established who or what. The reader stops to work out the
+  referent and the line dies there. (X, books-in-the-attic, 2026-09-05: a machine draft closed on an
+  apology to an addressee the post had never established, and both halves — who, and what for — read
+  as questions.) Distinct from the reference-universe rule above, which governs **cultural**
+  references; this one governs an addressee the piece invented.
+
 - **Detail serves placing the reader, and stops the moment the sentence stops flowing.** He will cut
   his own true details for rhythm. One good locating detail beats three stacked ones. (Raising
   Agents ep. 1, 2026-08-25: he struck "some random weekday before lunch", which he had said himself
