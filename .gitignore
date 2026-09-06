@@ -358,3 +358,12 @@ vault/daily/
 # third-party PDF: read locally, never redistributed from a public repo.
 _to_delete/
 vault/30_domains/claude-mastery/ARMS-Agentic-OS-Guide.pdf
+
+# Unemployment-appeal working directory (2026-09-06). DUA redetermination notices,
+# a wage record and employer paystubs -- real income, employer names and a claim
+# number, which CLAUDE.md rule 9 forbids in any tracked file. It landed at the repo
+# root unignored, where a single `git add -A` would have published it. Ignored as a
+# directory so anything added to it later inherits the rule rather than needing a
+# new one. `tmp/` alongside it is scratch output from the same work.
+/DUA-Appeal-Upload/
+/tmp/
