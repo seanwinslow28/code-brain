@@ -467,6 +467,77 @@ lands, file a fresh ticket; do not arm anything before it.
 stops the machine proposing the same wrong lesson next week. Deleting rejections means re-learning
 them forever.
 
+### When a stage hands him a deck instead of a piece
+
+The loop above reads a hand-rewrite: draft in, final out, diff between. A deck breaks that on its
+**majority** — he picks some cards and cuts the rest, and a cut produces no second document to diff.
+On the first route-1 deck the four cuts carried the entire lesson and none of it reached the loop; it
+reached the machine because a ticket was opened and a session spent an hour auditing eight cards
+against sixteen corpus reps ([#260](https://github.com/seanwinslow28/code-brain/issues/260)). At
+eight cards a week the cut half is most of the evidence, and the loop was blind to all of it.
+
+**1. The deck is the unit, not the card.** One entry per deck, never one per cut. On the first deck
+the signal was a single sentence about all eight and the per-card audit only confirmed it — so the
+loop asks **once, at deck close**, and never at pick time. Per-card reasons were considered and
+rejected: his attention is the expensive thing in the loop
+([#255](https://github.com/seanwinslow28/code-brain/issues/255)), and eight prompts to recover one
+sentence is the wrong trade.
+
+**2. One question, aimed at the cuts** — *what did the cards you cut have in common?* Free text,
+optional, asked **in chat** after the picks come back. His answer enters the entry as `Reason:`
+verbatim, under the same law as every other reason. A skipped question is recorded as skipped: a deck
+he declines to explain is a fact, not an absence. The question is aimed at the cuts because the picks
+already speak through the pick itself.
+
+**3. A deck entry never routes. It files.** The four homes above are closed to it; its only
+downstream move is a wayfinder ticket, and the ruling happens there. A rewrite is a fact; a deck
+sentence is a **hypothesis about several cards**. The first deck's stated axis was wrong and its own
+audit found the real one ([#258](https://github.com/seanwinslow28/code-brain/issues/258)) — routed
+directly it would have written *don't be a hater* into the X contract. The route step has no
+falsification in it, and no room for one either: that ruling touched four surfaces, and a ratified
+permanent lesson goes to exactly one home. It matters most where the natural home is the **shaping
+context**, which is deliberately emptied, budgeted, and admits one addition per measurement; a weekly
+loop with route privileges would write into it unbudgeted and unfalsified, which is the erosion the
+2026-08-31 re-scope exists to prevent.
+
+**4. His answer decides whether it files, and the bar is fault, not preference.** A card is cut for
+being wrong, for being fifth-best of eight, or for landing on a topic he did not want that week —
+only the first is a lesson. An answer naming a **fault in the cards** files a ticket; one naming a
+**preference between them**, or a topic, banks the entry and stops. Where the reading is genuinely
+ambiguous, **ask him**; never guess. The machine does not audit the cards to second-guess his claim:
+that judgment is what the ticket is for, and running it earlier on less information lets a bad
+reading suppress a real signal — the same reading that got the axis wrong on the first deck.
+
+**Scope is deferred to the ticket.** A deck entry carries `Reason:` and **no** `Scope:`. Nothing is
+amended at deck close, so there is nothing for a scope tag to protect; permanent-versus-one-off is
+ruled inside the ticket, where he ratifies it. This is the one place the ledger's two-field law
+splits across two moments.
+
+**The entry points; it never copies.** Cards, stimulus blocks and the ledger all live git-ignored on
+disk, so an entry records the deck's directory and the split by card number. Nothing is duplicated
+and nothing risks a tracked file.
+
+```
+### <id>        D-YYYY-MM-DD-NN
+Deck:           <deck directory>
+Medium:         <medium, route if it has one>
+Split:          picked <n,n,n,n> / cut <n,n,n,n>
+Reason:         <HIS words, verbatim, on the cuts. Or: skipped.>
+Read as:        fault | preference | topic | skipped
+Status:         filed | banked
+Routed to:      #<ticket> | none
+```
+
+**Current consumer: X route 1, and only it.** The Oracle's deck is out of scope — it already learns
+from its own cuts, and a cut Oracle card teaches about **supply** (what to write about) rather than
+about **writing** (how it came out). Only the second is this loop's business. The clause is written
+general because the property is a property of decks, not of tweets; the next deck-producing stage
+inherits it without a session.
+
+**Nothing runs this.** No script, no eval, no fixture, no GATE RECORD row — a ruling that nothing
+runs has nothing to test ([#222](https://github.com/seanwinslow28/code-brain/issues/222)). The
+mechanics live in `contracts/expressive/x.md`.
+
 **Run it on Professional-lane documents too.** His edits to a resume carry the same signal, under
 the facts-only form of the law.
 

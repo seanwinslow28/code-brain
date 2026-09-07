@@ -155,6 +155,38 @@ in full, and machine work is nearly free while his attention is not.
 considered and rejected by him: if he is already looking at the tweet he already has the line, so the
 machinery buys nothing and costs steps.
 
+#### Deck close: the picks, and one question about the cuts
+
+Ruled on [#260](https://github.com/seanwinslow28/code-brain/issues/260). The general rule is in
+`SKILL.md`, *When a stage hands him a deck instead of a piece*; these are X's mechanics.
+
+**The HTML pick console stays.** Eight drafts each shown against the post it answers is a comparison
+job, and comparison wants a page, not a terminal dump. The console is the **reading** surface and
+owns nothing else.
+
+**Capture happens in chat, not in the console.** His picks already come back that way, so the
+question rides a path that exists rather than adding write-back machinery to an artifact for one
+free-text field. It is also the privacy-correct shape: the ledger is git-ignored and local, and an
+answer typed in chat is written straight to disk by the session, where an answer routed through a
+published page has taken a round trip through a hosted service.
+
+In order, after the deck is handed back:
+
+5. **He picks.** Record the split by card number — the deck files are numbered `1-` through `8-` in
+   `creative-studio/content-machine/pieces/<date>-x-deck/`, and those numbers are the identifiers.
+6. **Ask the one question:** *what did the cards you cut have in common?* Once. Optional — a shrug or
+   a skip is a legitimate answer and gets recorded as `skipped`.
+7. **Write the deck entry** into `creative-studio/content-machine/ledger/lessons.md` in the deck
+   shape, with his answer as `Reason:` verbatim and **no** `Scope:` tag.
+8. **File or bank.** A fault in the cards files a wayfinder ticket on
+   [#158](https://github.com/seanwinslow28/code-brain/issues/158) carrying the split and his sentence;
+   a preference or a topic banks the entry and stops. Ambiguous means ask him.
+
+**Never route a deck lesson into this contract directly.** The first deck's own axis was falsified by
+the audit that followed it ([#258](https://github.com/seanwinslow28/code-brain/issues/258)); a
+register rule written into `## Stance and aim` at deck close would have been the wrong rule, written
+fast.
+
 ### Route 2 — brainstorm
 
 When he has a seed and wants it pushed somewhere he had not thought of. **Divergence first**, many
