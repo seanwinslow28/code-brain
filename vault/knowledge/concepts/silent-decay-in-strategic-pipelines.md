@@ -2,30 +2,30 @@
 title: "Silent Decay in Strategic Pipelines"
 type: concept
 sources:
-  - knowledge/connections/the-decoupling-of-operational-status-from-strategic-value.md
+  - knowledge/connections/operational-visibility-vs-semantic-value-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-09-06
-updated: 2026-09-06
+created: 2026-09-07
+updated: 2026-09-07
 ---
 
 ## Definition
 
-This mechanism refers to the gradual erosion of strategic value within automated workflows due to a lack of semantic validation at the input or output layers. Unlike operational failures which are immediately visible as crashes, silent decay manifests as agents continuing to execute loops while producing irrelevant or empty results. The system remains 'online' and 'running', but the quality of the signal degrades until it is indistinguishable from noise.
+This mechanism describes the gradual erosion of strategic value within an automated workflow, driven by a lack of high-fidelity feedback from the input layer. Because failures in relevance or quality are not surfaced as critical alerts, the pipeline continues to process low-value data, compounding the error over time. The decay is 'silent' because the system's health checks pass, allowing the strategic blockage to persist without triggering corrective action.
 
 ## Context
 
-In Sean's job hunt, a 'healthy' deep-researcher that returns no unchecked items represents a strategic blockage rather than a completed task. If the input layer fails (e.g., API changes), the agent continues to run but produces nothing, creating a gap between perceived activity and actual progress.
+Sean's job-hunt and creative-studio workflows are at risk of this decay if he relies solely on operational metrics. The tension between automation velocity and semantic integrity means that without explicit quality gates, his vault will accumulate noise rather than signal.
 
 ## Evidence
 
 > A failure in the input layer should trigger a higher-level alert than a simple 'degraded' status, as it represents a strategic blockage.
 
-> The fleet dashboard needs to be enhanced to highlight agents that are technically running but producing zero value, rather than just those that have crashed.
+> This decoupling allows silent decay because the feedback mechanisms only measure execution fidelity, not semantic relevance.
 
 ## Examples
 
-- deep-researcher notes='no unchecked items'
-- job-feed fetch=0 scored=0
+- Continued processing of irrelevant job applications due to lack of quality filtering.
+- Accumulation of low-quality concepts in the vault that dilute the overall knowledge graph.
 
 ## Related Concepts
 

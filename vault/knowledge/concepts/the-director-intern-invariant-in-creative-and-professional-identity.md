@@ -2,19 +2,19 @@
 title: "The Director-Intern Invariant in Creative and Professional Identity"
 type: concept
 sources:
-  - 20_projects/research/2026-09-04-x-comic-one-liner-specimens.md
+  - knowledge/concepts/the-director-intern-invariant-in-creative-and-professional-identity.md
 tags: [auto-generated, phase-6]
-created: 2026-09-06
-updated: 2026-09-06
+created: 2026-09-07
+updated: 2026-09-07
 ---
 
 ## Definition
 
-This invariant describes the structural asymmetry where the creator (Director) must maintain high-fidelity taste standards while delegating execution to lower-cost, higher-volume agents (Interns). The tension arises because the Intern's output inevitably contains 'slop' or misaligned nuance, forcing the Director into a supervisory role that consumes cognitive bandwidth. This creates a paradox where scaling creative production via automation actually increases the Director's operational load rather than reducing it, as the cost of verification scales with the volume of generated artifacts.
+This invariant describes a structural asymmetry where the creator (Director) must maintain high-fidelity taste standards while delegating execution to lower-cost, higher-volume agents (Interns). The tension arises because the Intern's output inevitably contains 'slop' or misaligned nuance, forcing the Director into a supervisory role that consumes cognitive bandwidth. This creates a paradox where scaling creative production via automation actually increases the Director's operational load rather than reducing it, as the cost of verification scales with the volume of generated artifacts.
 
 ## Context
 
-Sean is building an agent fleet to handle research and synthesis (job-hunt-2026, creative-studio). Understanding this invariant prevents him from assuming that 'automating writing' will free up time; instead, it highlights that he must design for 'taste verification' as a primary workflow step, not an afterthought.
+Sean is building an agent fleet to handle research and synthesis for his job hunt and creative studio. Understanding this invariant prevents him from assuming that 'automating writing' will free up time; instead, it highlights that he must design for 'taste verification' as a primary workflow step, not an afterthought.
 
 ## Evidence
 

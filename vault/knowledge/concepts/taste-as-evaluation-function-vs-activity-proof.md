@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md
 tags: [auto-generated, phase-6]
-created: 2026-09-06
-updated: 2026-09-06
+created: 2026-09-07
+updated: 2026-09-07
 ---
 
 ## Definition
@@ -14,7 +14,7 @@ This mechanism describes the structural bottleneck where human aesthetic judgmen
 
 ## Context
 
-Sean must recognize that his role is shifting from creator to evaluator; his 'taste' is the only remaining differentiator against homogenized AI output, making it the most critical asset in his creative workflow.
+Sean must recognize that his role is shifting from creator to evaluator; his 'taste' is the only remaining differentiator against homogenized AI output, making it the most critical asset in his creative workflow. This shift demands a re-evaluation of how success is measured in his personal knowledge vault.
 
 ## Evidence
 

@@ -2,31 +2,31 @@
 title: "Context Management as a Bottleneck"
 type: concept
 sources:
-  - knowledge/concepts/context-management-as-a-bottleneck.md
+  - knowledge/connections/infrastructure-fragility-masks-semantic-decay-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-09-05
-updated: 2026-09-05
+created: 2026-09-07
+updated: 2026-09-07
 ---
 
 ## Definition
 
-This mechanism describes the supervisory limit where the cognitive load of maintaining coherent context across multiple agents exceeds the human's capacity for manual verification. It is not merely a technical constraint but a structural failure mode where adding more agents increases the risk of silent contradiction rather than linear productivity gains. The bottleneck emerges when inter-agent dependencies become too complex to trace, forcing the human to act as the fragile glue holding disparate agent states together.
+This mechanism identifies the point where the volume of retrieved data exceeds the agent's ability to retain or process its full context, forcing truncation or summarization that loses critical nuance. The bottleneck is not just storage capacity but the semantic density of the information; as external sources become more restrictive (e.g., hiding full text), the agent must work with fragmented inputs. This forces a shift from deep analysis to surface-level aggregation, as the necessary context for complex reasoning is physically absent from the retrieved payload.
 
 ## Context
 
-Sean's fleet has grown significantly, with runs processing over 100 concepts and sampling hundreds of clusters. As the volume of automated synthesis increases, the cost shifts from computational resources to cognitive oversight, making this bottleneck the primary constraint on effective scaling.
+Sean's agents are encountering truncated content from X/Twitter, which limits their ability to perform deep synthesis. This bottleneck forces the fleet to either ignore the data or produce shallow summaries, reducing the overall value of the vault's insights and requiring manual intervention to fill gaps.
 
 ## Evidence
 
-> The phenomenon where the cognitive load of maintaining coherent context across multiple agents and domains limits the effective scale of automation.
+> 18 of the 63 quoted specimens are truncated this way... The words shown are exact; there are more after them; each is flagged inline.
 
-> This bottleneck emerges when the complexity of inter-agent dependencies exceeds the capacity for manual verification.
+> When the infrastructure required to access information becomes fragile (e.g., X blocking scrapers, forcing oEmbed workarounds), agents may over-index on the 'success' of the fetch operation while ignoring the degradation of the content itself.
 
 ## Examples
 
-- contradiction (T2): knowledge/concepts/context-management-as-a-bottleneck.md — contradicts supervision-as-the-new-ai-edge
-- contradiction (T2): knowledge/concepts/agent-health.md — contradicts context-management-as-a-bottleneck
+- The words shown are exact; there are more after them; each is flagged inline.
+- forcing oEmbed workarounds
 
 ## Related Concepts
 
-[[Supervision as the New AI Edge]] [[The Context-Memory Bottleneck in Personalized AI]]
+[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[The Illusion of Competence in Automated Systems]]

@@ -2,31 +2,31 @@
 title: "The Illusion of Competence in Automated Systems"
 type: concept
 sources:
-  - knowledge/concepts/the-illusion-of-competence-in-automated-systems.md
+  - knowledge/connections/infrastructure-fragility-masks-semantic-decay-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-09-06
-updated: 2026-09-06
+created: 2026-09-07
+updated: 2026-09-07
 ---
 
 ## Definition
 
-This mechanism describes the dangerous gap between an agent's operational uptime and its semantic accuracy. When a system like the X algorithm is updated, the old documentation remains technically 'available' but functionally obsolete. Agents relying on stale dumps produce high-confidence, low-fidelity outputs because they cannot distinguish between structural availability and functional truth. The core failure is one of epistemic hygiene where the absence of error messages masks the presence of incorrect data.
+This pattern occurs when an automated system's ability to complete its procedural steps is mistaken for the quality or completeness of its output. The system successfully executes the fetch, parse, and store operations without error, leading observers to assume the data is intact and usable. However, if the source data has been degraded by external forces (such as truncation or paywalls), the system's competence in handling the *available* data masks the failure to acquire the *required* data. The illusion persists because the error state is silent; no exception is thrown, only a diminished result.
 
 ## Context
 
-Sean's vault synthesizer relies on accurate external inputs to generate valid insights. If the underlying platform mechanics shift without Sean noticing, his creative strategy and job-hunt positioning will be based on phantom metrics. This is not just a research error; it is a strategic blind spot that could lead him to optimize for dead levers.
+Sean's fleet metrics show high success rates (e.g., '0 failures') even when the underlying data quality is poor. This makes it difficult to detect that the vault is accumulating low-signal artifacts rather than high-value insights, leading to potential misallocation of resources toward volume over depth.
 
 ## Evidence
 
-> The 2023 dump is not merely stale — it describes a different system. The old stack ranked with a Scala home-mixer calling a TensorFlow 'heavy ranker.'
+> 79 URLs went in. 79 came back. 0 failures, 0 dead links, 0 reconstructions. One returned a link-only post with no words, leaving 78 usable posts across 19 accounts.
 
-> There are now two open-sourced X algorithm repositories, and the one everybody cites is the retired one.
+> There is a critical tension between the complexity of the data acquisition layer and the quality of the resulting insight.
 
 ## Examples
 
-- Sean's prior runs using `qwen3.6-35b-a3b-32k` may have been influenced by outdated assumptions about link penalties or character counting if they relied on pre-2026 sources.
-- The 'lazy linking' policy change reported in trade press contradicts the old algorithm's explicit penalty mechanisms, creating a divergence between public perception and actual distribution mechanics.
+- One returned a link-only post with no words, leaving 78 usable posts across 19 accounts.
+- The words shown are exact; there are more after them; each is flagged inline.
 
 ## Related Concepts
 
-[[Silent Decay in Strategic Pipelines]] [[Epistemic Artifacts as Strategic Proof]]
+[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[Context Management as a Bottleneck]]

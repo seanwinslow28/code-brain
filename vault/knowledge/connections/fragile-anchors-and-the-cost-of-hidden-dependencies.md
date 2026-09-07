@@ -5,8 +5,8 @@ connects:
   - Legibility Debt as a Supervision Failure Mode
   - Operational Uptime vs. Semantic Value in Agent Fleets
   - The Illusion of Competence in Automated Systems
-created: 2026-09-06
-updated: 2026-09-06
+created: 2026-09-07
+updated: 2026-09-07
 ---
 
 ## Synthesis

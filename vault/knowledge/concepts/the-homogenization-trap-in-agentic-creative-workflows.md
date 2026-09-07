@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/the-homogenization-trap-in-agentic-creative-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-09-06
-updated: 2026-09-06
+created: 2026-09-07
+updated: 2026-09-07
 ---
 
 ## Definition

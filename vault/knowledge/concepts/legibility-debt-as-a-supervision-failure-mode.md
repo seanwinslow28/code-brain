@@ -2,31 +2,31 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md
+  - knowledge/connections/fragile-anchors-and-the-cost-of-hidden-dependencies.md
 tags: [auto-generated, phase-6]
-created: 2026-09-06
-updated: 2026-09-06
+created: 2026-09-07
+updated: 2026-09-07
 ---
 
 ## Definition
 
-Legibility debt emerges when the structural complexity of an automated system outpaces the human operator's ability to verify its state through standard observability channels. This creates a dependency on fragile, manual workarounds—such as specific credential files or browser profiles—to maintain operational continuity. When these manual anchors fail or rotate, the system does not degrade gracefully but instead produces opaque errors that require deep forensic investigation rather than simple remediation, effectively hiding the true cost of automation from the operator until a critical failure occurs.
+Legibility debt emerges when system reliability depends on opaque, environment-specific workarounds that are invisible to standard monitoring. This debt grows silently because the system appears operational while masking the fragility of its dependencies. When these hidden anchors fail, they cause catastrophic supervision failures because the root cause is not in the logic but in the unmanaged external state.
 
 ## Context
 
-Sean is currently managing a complex agent fleet where the 'X' sweep relies on a stale credential file written by a setup wizard. The lack of a robust fallback mechanism means that routine session rotations can break core functionality, forcing Sean to manually intervene or accept broken states. This debt accumulates silently as he patches around these issues rather than addressing the underlying architectural fragility.
+Sean's agent fleet relies on specific browser quirks and local file paths to function. This creates a high risk of silent failure where the system looks healthy but cannot perform its core tasks due to missing credentials or incompatible environments.
 
 ## Evidence
 
 > When that session rotates there is no fallback: Safari returns EPERM on Cookies.binarycookies (no Full Disk Access), Firefox has no profile, and Chrome's reader throws Value is too large to be represented as a JavaScript number on a WebKit cookie timestamp
 
-> The machine does not pick them — which sentence is the line is his judgment, and a machine guessing would fill the ledger with lines he never rat
+> x/stimulus.py sweep works live today only because ~/.config/last30days/.env holds AUTH_TOKEN/CT0 written by the last30days setup wizard on 2026-06-08
 
 ## Examples
 
-- Safari returns EPERM on Cookies.binarycookies due to lack of Full Disk Access
-- Chrome's reader throws Value is too large to be represented as a JavaScript number on a WebKit cookie timestamp
-- The loader ignores fenced blocks so the file's own example cannot arm it with a line nobody wrote
+- Safari returning EPERM due to missing Full Disk Access
+- Chrome throwing a JavaScript number representation error on WebKit cookie timestamps
+- Reliance on ~/.config/last30days/.env for authentication tokens
 
 ## Related Concepts
 
