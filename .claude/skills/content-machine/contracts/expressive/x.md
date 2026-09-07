@@ -140,7 +140,10 @@ Then, in order:
    **One draft per stimulus, deliberately** — several candidates per stimulus is
    [#228](https://github.com/seanwinslow28/code-brain/issues/228), which needs this as its baseline.
 4. **Hand back eight ranked pairs**, each draft shown with the post it answers. A reply is
-   unreadable without its setup, so the pair is the unit — roughly forty words each.
+   unreadable without its setup, so the pair is the unit — roughly forty words each. Once
+   `## The picture` is armed, a draft that proposed one shows its **one-line image spec beneath the
+   draft**; the deck still returns eight, and the spec is judged with the post rather than in place
+   of the line ([#259](https://github.com/seanwinslow28/code-brain/issues/259)).
 
 **Eight is a measurement, not a ruling.** The hit rate is unknown and
 [#248](https://github.com/seanwinslow28/code-brain/issues/248) cannot supply it, because that was an
@@ -391,7 +394,9 @@ The surface the [lane's first-screen test](LANE.md#the-first-screen-test) runs a
 - **The post itself**, up to the "Show more" fold. In a thread, the first post — nobody expands post
   one to decide whether to read post two.
 - The attached image is part of the first screen, not decoration
-  ([#170](https://github.com/seanwinslow28/code-brain/issues/170)).
+  ([#170](https://github.com/seanwinslow28/code-brain/issues/170)). Where the picture comes from, and
+  who specifies it, is `## The picture` below
+  ([#259](https://github.com/seanwinslow28/code-brain/issues/259)).
 
 **What the fold actually is** (corrected 2026-09-04,
 [#247](https://github.com/seanwinslow28/code-brain/issues/247)). It is a CSS `-webkit-line-clamp`:
@@ -431,6 +436,86 @@ applies, and it is ranked as an original. Both are weighted 5.0; a like is 0.5.
 
 So the same sentence, aimed at the same post, travels or does not travel depending on which button
 made it.
+
+## The picture
+
+Ruled 2026-09-07 ([#259](https://github.com/seanwinslow28/code-brain/issues/259)) against the first
+route-1 deck's picks. Since [#170](https://github.com/seanwinslow28/code-brain/issues/170) this
+contract has said an attached image is part of the first screen, and `## Delivery` has said the
+packet carries *"the image if there is one"* — while **nothing in the pipeline could produce or
+specify one.** A deck was being judged against a first-screen test it was structurally unable to
+pass in full.
+
+**The machine already made pictures; it had no channel for an attached one.** Its picked drafts work
+by putting an image in the reader's head — the `## Stance and aim` table's own row reads *"agreed,
+added an image"* — and one cut draft opened on a stage direction. What was missing was a field, a
+stage, and an output slot, not imagination.
+
+**The machine proposes, Sean overrides.** Two jobs, and he named the second: a proposal he takes, or
+a proposal that sparks his own. Route 1 exists so posts get out while he is busy with something else,
+and a route that waits on him to invent a picture puts him back in the loop at the moment it was
+built to keep him out of it.
+
+**Words, not pixels — one line, paste-ready.** The machine renders nothing. The line is the block's
+incoming `Media:` field pointed the other way, and it is written so it drops unchanged into whichever
+renderer he picks: `openai-image-gen` reaches GPT Image 2 from inside this repo and bills per image,
+and the ChatGPT desktop app reaches the same model on a subscription he already pays for. (Codex
+cannot do this — that plugin is a coding-agent rescue runtime with no image path — and it does not
+need to.) Rendering *inside* the machine is a separate decision nobody has made; it gets made, if
+ever, once the specs prove good and finding the picture proves to be the bottleneck.
+
+**The shaper writes it, as deliverable form.** The only context that knows what the joke is doing is
+the one that wrote it; anything downstream reverse-engineers the mechanism from outside. So the form
+the shaper receives gains one clause — *if a picture would make it land better, add one line saying
+what the picture shows* — permission, and nothing else. Form is task, not style (`SKILL.md`, "The
+shaping context").
+
+**ARMING GATE — the clause is not in the shaping context yet.** It lands **after** the deck that runs
+[#258](https://github.com/seanwinslow28/code-brain/issues/258)'s falsifier. That deck measures
+whether the stance sentence is the lever (under 4 of 8 stance-legal and the sentence gets pulled),
+and a second addition to the same clean context before it runs makes a 3-of-8 result unreadable —
+nobody could say which addition caused it. One deck of delay, then arm it. Until then the clause is
+written here and nowhere else.
+
+**No craft rules, deliberately.** Nothing tells the shaper what the picture may show, what it should
+add, or what it must avoid. Sean's ruling and his reason: *"I'd like the model to just shoot its shot
+if it feels like an image could make the joke funnier, but it shouldn't have to weave around rules to
+make sure it doesn't do something and forces a crappy proposal out."* This is the 2026-08-31 re-scope
+applied to a new field rather than a new exception carved out of it — rules-based phrasing measured
+64% compliance against 86% for the same instruction offered as a suggestion. The alternative on the
+table was importing the Pencil & Prompt convention (*never explain the joke*: the picture adds what
+the copy does not), and it would have cut the only specimen anyone has.
+
+**Read that specimen correctly.** #259 opened with the picture sitting under the picked line and
+repeating it. It was not: Sean's own account has the picture **replacing that line's job** — either a
+funnier line, or a deliberately flat one (*"Couldn't agree more"*) with the picture carrying the joke
+by juxtaposition. That construction is legal, and the rescue rule below is worded so it stays legal.
+
+**In the deck: a third line, and the deck stays eight pairs.** The spec shows under the draft it
+belongs to. Shown rather than held back, because the image is part of the first screen — a pair
+judged without it is half a post judged — and because the spark is worth most at the moment he is
+deciding. Cost is a dozen words on the two or three drafts that want one.
+
+**A picture does not buy a line that was trying to be funny and failing.** His ground: *"the line is
+meant to be the star. That's where I want the model to focus and thrive."* A deliberately flat line
+whose picture carries it is a **different construction and it is legal** — this rule is about rescue,
+not about which half lands. It is the link rule from `## Format` applied to a second kind of
+attachment: the post still has to stand on its own.
+
+**And it binds the pick step, not the shaper.** It is read here, by Sean and by the orchestrator that
+presents the deck; it never enters the clean context. No gate can see whether a picture rescued a
+line — the same blindness `## Stance and aim` hit — and unlike stance, this one is not answered with
+a sentence in the context.
+
+**The spec is not draft prose and is not gated as such.** It travels with the deck and the ship
+packet; the file the gates read carries the post text alone. Mechanical reason: a spec describing
+something the poster's own post showed would trip origin's lift check and `coined_lines.py`'s
+window, and dirty a GATE RECORD over a line that asserts nothing about his week. This is the
+outgoing twin of the exemption `## Gates` already grants the block's incoming `Media:` gloss.
+
+**Reopen trigger for the no-rules ruling:** a picked pair where the picture supplied the punchline
+the line should have carried, or a deck where the shaper forces pictures onto posts that plainly did
+not want them. One specimen, not a hunch.
 
 ## Format
 
@@ -576,8 +661,9 @@ The reading pass for recombination still runs. Expressive lane advises and never
 
 ## Delivery
 
-A ship packet: the post or the thread, the image if there is one, the reply-hook memo, and any open
-items. The machine never posts.
+A ship packet: the post or the thread, **the one-line image spec if the draft proposed one** (never a
+rendered image — see `## The picture`), the reply-hook memo, and any open items. The machine never
+posts, and it never renders.
 
 ## What this contract does not own
 

@@ -144,10 +144,21 @@ humanity and critique are blind to it, so the only other enforcement point is hi
 what those four cards cost.
 
 The risk is named rather than hidden. This is the **first addition to the emptied context since the
-block label**, and every re-added rule is defensible on its own — which is how the erosion the
-2026-08-31 re-scope exists to prevent would actually happen. One sentence, and the next deck measures
+block label** (a second is ruled and queued behind it, below), and every re-added rule is defensible
+on its own — which is how the erosion the 2026-08-31 re-scope exists to prevent would actually
+happen. One sentence, and the next deck measures
 it: if stance-legal drafts do not rise above 4 of 8, the sentence is not the lever and the route is
 more paired samples rather than more rules.
+
+**One clause of deliverable form is ruled and deliberately not yet installed** (2026-09-07,
+[#259](https://github.com/seanwinslow28/code-brain/issues/259), X's reactive route). When it arms,
+the X form gains *"if a picture would make it land better, add one line saying what the picture
+shows"* — permission to propose an attached image in words, with no rule about what the picture may
+show. It is form, not style, in the same class as the block label and the format bounds. **It is not
+in the context today**, and no session may install it until the deck that runs #258's falsifier has
+run: two additions to the same clean context across one measurement makes the measurement
+unreadable. The full ruling, the arming gate, and the pick-step rule that never enters this context
+live in `contracts/expressive/x.md`, `## The picture`.
 
 **No autonomous revision loops.** The machine writes candidates; the author ratifies. There is no
 score-until-good cycle, no persona panel, no numeric quality mean. A gate may route exactly one
