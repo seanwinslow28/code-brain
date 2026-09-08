@@ -2,10 +2,10 @@
 title: "The Efficiency-Quality Inversion in Automated Synthesis"
 type: concept
 sources:
-  - knowledge/connections/the-efficiency-quality-inversion-in-automated-synthesis.md
+  - knowledge/concepts/the-efficiency-quality-inversion-in-automated-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-09-07
-updated: 2026-09-07
+created: 2026-09-08
+updated: 2026-09-08
 ---
 
 ## Definition

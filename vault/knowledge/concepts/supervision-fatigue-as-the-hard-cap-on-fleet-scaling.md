@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/supervision-fatigue-as-the-hard-cap-on-fleet-scaling.md
 tags: [auto-generated, phase-6]
-created: 2026-09-07
-updated: 2026-09-07
+created: 2026-09-08
+updated: 2026-09-08
 ---
 
 ## Definition

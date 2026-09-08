@@ -2,10 +2,10 @@
 title: "Operational Uptime vs. Cognitive Utility Tension"
 type: concept
 sources:
-  - knowledge/connections/operational-visibility-vs-semantic-value-in-agent-fleets.md
+  - knowledge/concepts/operational-uptime-vs-cognitive-utility-tension.md
 tags: [auto-generated, phase-6]
-created: 2026-09-07
-updated: 2026-09-07
+created: 2026-09-08
+updated: 2026-09-08
 ---
 
 ## Definition

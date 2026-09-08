@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md
 tags: [auto-generated, phase-6]
-created: 2026-09-07
-updated: 2026-09-07
+created: 2026-09-08
+updated: 2026-09-08
 ---
 
 ## Definition
 
-This mechanism describes the structural bottleneck where human aesthetic judgment becomes the limiting factor in agentic production systems. As automated agents increase their output volume, the user's capacity to verify authenticity does not scale linearly, creating a divergence between activity metrics and creative value. The system fails when high-volume generation is mistaken for progress, because the verification step requires deep, non-automatable taste encoding that cannot be parallelized.
+This mechanism describes a structural bottleneck where human aesthetic judgment becomes the limiting factor in agentic production systems. As automated agents increase their output volume, the user's capacity to verify authenticity does not scale linearly, creating a divergence between activity metrics and creative value. The system fails when high-volume generation is mistaken for progress because the verification step requires deep, non-automatable taste encoding that cannot be parallelized.
 
 ## Context
 
-Sean must recognize that his role is shifting from creator to evaluator; his 'taste' is the only remaining differentiator against homogenized AI output, making it the most critical asset in his creative workflow. This shift demands a re-evaluation of how success is measured in his personal knowledge vault.
+Sean must recognize that his role is shifting from creator to evaluator; his 'taste' is the only remaining differentiator against homogenized AI output. This shift demands a re-evaluation of how success is measured in his personal knowledge vault, moving away from volume-based metrics toward fidelity-based ones.
 
 ## Evidence
 

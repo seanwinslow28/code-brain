@@ -2,31 +2,31 @@
 title: "Silent Decay in Strategic Pipelines"
 type: concept
 sources:
-  - knowledge/connections/operational-visibility-vs-semantic-value-in-agent-fleets.md
+  - knowledge/connections/operational-uptime-vs-semantic-value-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-09-07
-updated: 2026-09-07
+created: 2026-09-08
+updated: 2026-09-08
 ---
 
 ## Definition
 
-This mechanism describes the gradual erosion of strategic value within an automated workflow, driven by a lack of high-fidelity feedback from the input layer. Because failures in relevance or quality are not surfaced as critical alerts, the pipeline continues to process low-value data, compounding the error over time. The decay is 'silent' because the system's health checks pass, allowing the strategic blockage to persist without triggering corrective action.
+Strategic pipelines degrade not through catastrophic failure but through the gradual cessation of supervisory agents that validate output quality. When high-level review mechanisms stop running, the system continues to produce artifacts at scale, but these artifacts accumulate errors and irrelevance without triggering any alert. The invariant here is that absence of error messages does not imply presence of value; it often implies the absence of the very checks that would have caught the drift.
 
 ## Context
 
-Sean's job-hunt and creative-studio workflows are at risk of this decay if he relies solely on operational metrics. The tension between automation velocity and semantic integrity means that without explicit quality gates, his vault will accumulate noise rather than signal.
+Sean's job hunt and creative studio workflows depend on accurate tracking of applications and project states. If the agents generating these updates stop being critiqued, he may believe his pipeline is healthy while actually losing track of critical deadlines or opportunities due to uncorrected data errors.
 
 ## Evidence
 
-> A failure in the input layer should trigger a higher-level alert than a simple 'degraded' status, as it represents a strategic blockage.
+> The `vault-critic` has not run since 2026-08-31, leaving no recent assessment of the quality or coherence of the synthesized concepts and connections.
 
-> This decoupling allows silent decay because the feedback mechanisms only measure execution fidelity, not semantic relevance.
+> The reliance on 'healthy' status metrics is misleading; Sean should monitor the staleness of quality assurance agents as a primary health indicator.
 
 ## Examples
 
-- Continued processing of irrelevant job applications due to lack of quality filtering.
-- Accumulation of low-quality concepts in the vault that dilute the overall knowledge graph.
+- Sean may need to manually trigger a 'deep clean' or re-indexing of the vault to restore semantic integrity, as automated processes are no longer sufficient.
+- The `knowledge-lint` agent last ran on 2026-08-30, reviewing only 4/4 concept batches, which suggests a limited scope of review that may not catch broader semantic drift in the vault.
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Operational Uptime vs. Cognitive Utility Tension]]
+[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[The Illusion of Health in Autonomous Systems]]

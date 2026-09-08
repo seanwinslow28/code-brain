@@ -5,13 +5,13 @@ connects:
   - Legibility Debt as a Supervision Failure Mode
   - Operational Uptime vs. Semantic Value in Agent Fleets
   - The Illusion of Competence in Automated Systems
-created: 2026-09-07
-updated: 2026-09-07
+created: 2026-09-08
+updated: 2026-09-08
 ---
 
 ## Synthesis
 
-The tension between operational uptime and semantic value is exacerbated by fragile manual anchors that mask underlying system complexity. When agents rely on hidden credentials or browser-specific quirks to function, they create a legibility debt that grows silently until it manifests as a critical failure. This dependency on manual workarounds undermines the very automation it seeks to support, forcing Sean to spend more time managing these anchors than deriving value from the agent outputs themselves.
+The core tension lies between the apparent reliability of automated systems and the hidden fragility of their dependencies. When agents rely on opaque, environment-specific workarounds to function, they create a legibility debt that grows silently until it manifests as a critical failure. This dependency on manual anchors undermines the very automation it seeks to support, forcing Sean to spend more time managing these hidden states than deriving value from the agent outputs themselves. The consequence is a system that appears competent but is actually brittle, requiring constant human intervention to maintain its illusion of autonomy.
 
 ## Threads
 

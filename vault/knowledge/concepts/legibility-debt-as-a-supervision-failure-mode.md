@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/fragile-anchors-and-the-cost-of-hidden-dependencies.md
 tags: [auto-generated, phase-6]
-created: 2026-09-07
-updated: 2026-09-07
+created: 2026-09-08
+updated: 2026-09-08
 ---
 
 ## Definition
 
-Legibility debt emerges when system reliability depends on opaque, environment-specific workarounds that are invisible to standard monitoring. This debt grows silently because the system appears operational while masking the fragility of its dependencies. When these hidden anchors fail, they cause catastrophic supervision failures because the root cause is not in the logic but in the unmanaged external state.
+Legibility debt emerges when system reliability depends on opaque, environment-specific workarounds that are invisible to standard monitoring. This debt accumulates because the failure modes are tied to external state rotations or permission boundaries rather than internal logic errors. Consequently, supervision fails not because the agent is incompetent, but because the necessary context for its operation is hidden behind fragile manual anchors. The system appears functional until a boundary condition changes, at which point the lack of explicit dependency management causes immediate and unexplained failure.
 
 ## Context
 
-Sean's agent fleet relies on specific browser quirks and local file paths to function. This creates a high risk of silent failure where the system looks healthy but cannot perform its core tasks due to missing credentials or incompatible environments.
+Sean's fleet relies on browser-specific quirks and local file states to maintain authentication and session continuity. When these anchors break, the cost is not just downtime but the loss of trust in the automated system's ability to handle complex, stateful interactions without human intervention.
 
 ## Evidence
 
@@ -24,10 +24,10 @@ Sean's agent fleet relies on specific browser quirks and local file paths to fun
 
 ## Examples
 
-- Safari returning EPERM due to missing Full Disk Access
-- Chrome throwing a JavaScript number representation error on WebKit cookie timestamps
-- Reliance on ~/.config/last30days/.env for authentication tokens
+- Safari's EPERM error due to missing Full Disk Access permissions
+- Chrome's JavaScript number overflow on WebKit cookie timestamps
+- Firefox lacking a defined profile directory for session storage
 
 ## Related Concepts
 
-[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[The Illusion of Competence in Automated Systems]]
+[[The Illusion of Competence in Automated Systems]] [[Operational Uptime vs. Semantic Value in Agent Fleets]]

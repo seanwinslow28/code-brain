@@ -5,13 +5,13 @@ connects:
   - Operational Uptime vs. Semantic Value in Agent Fleets
   - The Illusion of Competence in Automated Systems
   - Context Management as a Bottleneck
-created: 2026-09-07
-updated: 2026-09-07
+created: 2026-09-08
+updated: 2026-09-08
 ---
 
 ## Synthesis
 
-The core tension lies between the agent's need for continuous, high-bandwidth context to maintain semantic integrity and the physical reality of infrastructure instability. When the network or API becomes restrictive (e.g., HTTP 402 errors), the system continues to report 'success' based on connection uptime, but the actual data retrieved is truncated or incomplete. This creates a false positive in operational metrics, where the fleet appears healthy and productive while silently accumulating low-signal artifacts. The consequence is that Sean must audit not just for completion rates but for semantic richness, as high completion on degraded data sources indicates wasted compute rather than progress.
+This connection reveals a critical tension where hardware and API fragility masks semantic decay in agent fleets, leading to a false sense of operational health. When key infrastructure components like Nitter mirrors fail or X enforces HTTP 402 errors, the agents continue to report 'success' based on protocol compliance rather than data quality. This creates a dangerous blind spot where Sean's fleet appears productive while silently accumulating low-signal artifacts, effectively decoupling technical reliability from strategic progress.
 
 ## Threads
 
@@ -29,5 +29,5 @@ The core tension lies between the agent's need for continuous, high-bandwidth co
 
 ## Implications
 
-- Sean should audit his fleet's 'success' metrics not just for completion rates but for semantic richness, as high completion on degraded data sources may indicate wasted compute.
+- Sean must audit his fleet's 'success' metrics not just for completion rates but for semantic richness, as high completion on degraded data sources may indicate wasted compute.
 - When external APIs become hostile or restrictive, the agent's strategy must shift from volume-based scraping to value-based curation to avoid accumulating low-signal artifacts.
