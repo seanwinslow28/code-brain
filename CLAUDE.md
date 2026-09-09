@@ -217,6 +217,8 @@ life-systems/                         # DOMAIN 3 — personal systems
 claude-mastery/      # cross-cutting Claude Code meta-reference (stays at root)
 systemcraft/         # AI PM system design studio — public machinery (bench, templates, README);
                      # corpus/ + ledger/ gitignored local-only. Build map: GitHub issue #142
+productcraft/        # Product leadership studio — second studio on the Systemcraft method (2026-09-09);
+                     # seven-seat bench, templates, lanes tracked; corpus/ + ledger/ + books/ gitignored. Map: #264
 tools/                                # sidecar tools (non-skill, non-agent)
 ├── llm-council/                      # Multi-vendor LLM council (inspired by karpathy/llm-council)
 │   ├── upstream/                     # Karpathy's reference web app, unmodified

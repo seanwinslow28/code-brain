@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Productcraft workspace scaffold — public machinery, private brain (2026-09-09)
+
+Root workspace `productcraft/` ("a product leadership studio") scaffolded per the wayfinder build map (GitHub [#264](https://github.com/seanwinslow28/code-brain/issues/264)), resolving its "Workspace scaffold and public/private plumbing" ticket ([#265](https://github.com/seanwinslow28/code-brain/issues/265)). It is the second studio built by the Systemcraft method — a seven-seat product leadership bench (Product Strategist, Discovery Lead, Insights & Analytics, Growth & Distribution Architect, Business & Economics Modeler, Delivery & Execution Lead, Product Leadership & Org Designer; roster ratified 2026-09-09) that hands AI-system questions to Systemcraft through a typed contract. Tracked as public machinery: `productcraft/CLAUDE.md` (layout, eight non-negotiable rules — including graceful degradation, "Insights measures, never decides", full-artifacts-forward, and the two closed audit cycles) and a placeholder `README.md`, plus placeholder READMEs in `bench/`, `templates/`, `lanes/` pointing at the map tickets that fill them. Private lanes plumbed **before any private content exists**: `productcraft/corpus/`, `productcraft/ledger/`, and the `productcraft/books/` guard added to the PRIVATE LAYER block in `.gitignore` (the global `*.epub` rule already covers the tree), each holding a local-only README; canary drops under all three paths plus a stray `.epub` verified ignored. `scripts/validate.py` blesses the workspace via `ADDITIONAL_WORKSPACES_TO_SCAN` (existence warned, secret-scanned; not a primary domain). Seat contracts, model delegation, ledger schema, templates, lanes, corpus, and the master skill all arrive via their own map tickets.
+
+
 ### Changed — X runs no interview; its stage 2 is a stimulus block (2026-09-04)
 
 Ruled in [#249](https://github.com/seanwinslow28/code-brain/issues/249). X was the first medium to

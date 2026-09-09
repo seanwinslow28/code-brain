@@ -239,6 +239,19 @@ systemcraft/ledger/
 systemcraft/books/
 *.epub
 
+# Productcraft private brain (2026-09-09, build map GitHub #264) — the second
+# studio built by the Systemcraft method, same public/private split: bench,
+# templates, lanes, README, CLAUDE.md are tracked; the two-layer corpus
+# (free-canon distillates + book-to-skill ingests, derivative of licensed
+# sources) and the decision ledger (real product designs, each entry carrying
+# a "from the canon" line; eventually employer-confidential) are local-only.
+# Never `git add` these; book-derived text never lands in a tracked file or
+# a GitHub issue. books/ is a guard only — ebooks live at ~/Books/productcraft/
+# outside the repo, and the global *.epub rule above covers this tree too.
+productcraft/corpus/
+productcraft/ledger/
+productcraft/books/
+
 # Content Machine private brain (2026-08-24, build map GitHub #158) — the
 # machine itself (.claude/skills/content-machine/, README, contracts) is
 # tracked publicly; its private brain is local-only. The corpus is verbatim

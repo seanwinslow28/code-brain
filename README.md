@@ -38,6 +38,7 @@ Cross-cutting (no domain CLAUDE.md):
 | **evals/vault-synthesizer/** | 10-case binary eval suite for the vault synthesizer agent (v3.30.1) |
 | **tools/** | Sidecar tools (non-skill, non-agent): `llm-council/` (multi-vendor council) and `governance-demo/` (Authority/Recovery/Audit demo, pairs with `agents-sdk/docs/CONTROL_ARCHITECTURE.md`) |
 | **systemcraft/** | AI PM system design studio — five-seat bench, artifact templates, lane manifests (public machinery; corpus + decision ledger local-only). First engagement: the [fleet knowledge-loop audit](https://github.com/seanwinslow28/code-brain/issues/157). See [systemcraft/README.md](systemcraft/README.md) |
+| **productcraft/** | Product leadership studio — seven-seat bench (strategy, discovery, insights, growth, business, delivery, leadership), artifact templates, lane manifests (public machinery; corpus + decision ledger local-only). Second studio on the Systemcraft method; scaffold only, built along the [Productcraft build map](https://github.com/seanwinslow28/code-brain/issues/264). See [productcraft/README.md](productcraft/README.md) |
 | **.claude/** | Canonical skills, agents, hooks, settings (auto-loaded) |
 
 ### Privacy Boundary

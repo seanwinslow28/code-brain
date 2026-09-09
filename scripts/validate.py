@@ -47,8 +47,12 @@ EXPECTED_DOMAINS = [
 # `systemcraft` is the AI PM system design studio (2026-08-22, map GitHub
 # #142) — cross-domain by mandate, so root-level; its corpus/ and ledger/
 # are gitignored local-only and the tracked machinery gets the secret scan.
+# `productcraft` is the product leadership studio (2026-09-09, map GitHub
+# #264) — second studio on the Systemcraft method, same split: corpus/,
+# ledger/, and books/ are gitignored local-only; tracked machinery is scanned.
 ADDITIONAL_WORKSPACES_TO_SCAN = [
     "claude-mastery",
+    "productcraft",
     "systemcraft",
     "the-block",
 ]
