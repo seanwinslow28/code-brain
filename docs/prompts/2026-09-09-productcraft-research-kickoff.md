@@ -33,6 +33,23 @@ Research reports land in `vault/20_projects/research/` per house convention (fin
 
 After ratification, start /wayfinder to chart the Productcraft build map. The map should cover at minimum: workspace scaffold + validate.py blessing + .gitignore PRIVATE LAYER extension for `productcraft/corpus/` and `productcraft/ledger/`; the master skill (`.claude/skills/productcraft/`, portable interface, explain-why baked in); the ratified bench (seat definitions with why-A-over-B and the "from the canon" line as standing behavior); artifact templates per seat, including the leadership seat's hard contracts; decision-ledger schema (private lane) with the canon line; corpus pipeline (free layer + book-to-skill private layer, graceful degradation when absent); lane manifests that double as reading paths; the **Systemcraft handoff contract** (what crosses, in which direction, in what form, and how a ledger entry on each side references the other); the evals-and-trace design shared with #261; README as portfolio surface; the 16BitFit full-train revisit as the closing milestone, with the startup pass and the `craftwork` method extraction as the two tickets that follow it.
 
+## Model delegation (this session runs on Fable 5.1)
+
+You are the session driver and the only model that talks to me. Keep for yourself everything that needs the whole session in context or a judgment call: synthesizing each pass's raw material into its findings brief and headline recommendation, the ratification conversation (one question at a time, recommendation first), and all of Phase 2. Delegate the mechanical, parallel work via the Agent tool, in one batch per pass so it runs concurrently, and specify the model on each dispatch:
+
+| Work | Model | Why |
+|---|---|---|
+| `last30days` sweeps for pass 1 (field practice on product-org structure, PM competency debates) | **Sonnet 5** | Retrieval and grouping of fresh posts; no judgment needed until synthesis |
+| Web sweeps for pass 1 (SVPG, Reforge, Lenny surveys, Product School, university syllabi) — one agent per source family, returning sources with URLs and a two-line summary each | **Opus 5** | Reads long primary sources and has to tell a competency framework from a course brochure |
+| Book research for pass 2 — one agent per seat, scoring every candidate that touches that seat on depth, author standing, free-canon overlap, readability, audiobook availability | **Opus 5** | Comparative judgment across reviews and tables of contents; the seat-by-book grid is only as good as these scores |
+| Free-canon survey for pass 2 (which blog/essay/course covers what, per seat) | **Sonnet 5** | Cataloguing, not ranking |
+| Plugin inventory for pass 3 — read every pm-* and sw-creative-toolkit SKILL.md, map to a seat, flag duplicates and Systemcraft-owned items, diff against the Cowork mirror | **Sonnet 5** | Large read volume, fixed rubric, $0-shaped work |
+| `/watch` on the Torres + Husain talk and the first-draft findings note | **Opus 5** | Transcript comprehension plus deciding what feeds discovery versus evals |
+| Optional single Deep Research run on pass 1 | a subscription web app (ChatGPT or Gemini DR), run by me if you ask for it — not a Claude model | $0 incremental; audit its source list with `audit_dr_citations.py` before citing |
+| Any citation audit or tier check on a source list | **Sonnet 5** | Runs the script and reports; no judgment |
+
+Rules for delegation: subagents return sources and scores, never verdicts — the recommendation in every brief is yours. Give each subagent the seat list and the binding decisions it needs and nothing else (a subagent that knows my preferred answer will find it). Never dispatch a subagent to write a brief, to rule on the seventh seat, or to draft any part of the Wayfinder map. If a subagent's output contradicts another's, resolve it yourself by reading the sources, not by picking the longer answer. Note in each brief's frontmatter which models did which work, alongside the `cost:` line.
+
 ## Standing constraints
 
 - Never `git add` corpus or ledger content; book-derived text never lands in tracked files. Public repo — assume every tracked file is read by a recruiter. The startup stays unnamed in tracked files; its details live in the sidecar and its own private repo.
