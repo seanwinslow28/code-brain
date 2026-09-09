@@ -5,8 +5,8 @@ connects:
   - Operational Uptime vs. Semantic Value in Agent Fleets
   - The Illusion of Competence in Automated Systems
   - Context Management as a Bottleneck
-created: 2026-09-08
-updated: 2026-09-08
+created: 2026-09-09
+updated: 2026-09-09
 ---
 
 ## Synthesis

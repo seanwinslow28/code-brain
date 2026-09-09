@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/the-efficiency-quality-inversion-in-automated-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-09-08
-updated: 2026-09-08
+created: 2026-09-09
+updated: 2026-09-09
 ---
 
 ## Definition

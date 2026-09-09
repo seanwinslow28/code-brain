@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/connections/infrastructure-fragility-masks-semantic-decay-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-09-08
-updated: 2026-09-08
+created: 2026-09-09
+updated: 2026-09-09
 ---
 
 ## Definition
 
-This concept identifies the limit of an agent's ability to maintain semantic integrity when external data sources provide truncated or incomplete information. When the input context is fragmented—such as when posts are cut off mid-sentence or lack full text—the agent cannot perform accurate synthesis or connection-making, leading to a degradation in the quality of the output. This bottleneck is not caused by computational limits but by the *fidelity* of the incoming data stream, which forces the agent to work with incomplete premises.
+This mechanism defines the limit of an agent's utility imposed by the finite capacity of its context window, where critical information is truncated or lost not due to retrieval failure but due to volume overflow. The bottleneck arises when the system successfully retrieves data but fails to preserve the structural integrity of that data within the active reasoning space, forcing the agent to operate on partial or fragmented evidence. This creates a reliability gap where the agent 'has' the information technically but cannot 'use' it effectively because the necessary context was cut off during transmission or storage.
 
 ## Context
 
-Sean's research agents are encountering truncated specimens from X/Twitter due to API restrictions. This truncation prevents the agents from fully understanding the context of the posts they are analyzing, leading to potential misinterpretations or shallow insights in his 'Superuser Pack' content.
+Sean's synthesizer encounters truncated specimens in its output, meaning that even when data is fetched, the lack of full context prevents accurate synthesis or citation, degrading the quality of the final knowledge artifacts.
 
 ## Evidence
 
 > 18 of the 63 quoted specimens are truncated this way... The words shown are exact; there are more after them; each is flagged inline.
 
-> The core tension lies between the agent's need for continuous, high-bandwidth context to maintain semantic integrity and the physical reality of infrastructure instability.
+> The Nitter mirror network is gone: nitter.net serves an 'is offline' page, xcancel.com serves a cease-and-desist notice, nitter.poast.org does not resolve.
 
 ## Examples
 
-- 18 out of 63 quoted specimens were found to be truncated, with the visible words being exact but incomplete, requiring manual flagging to indicate missing content.
-- The agent's need for continuous, high-bandwidth context is directly challenged by infrastructure instability, which forces a trade-off between data volume and semantic richness.
+- Quoted specimens being truncated mid-sentence with inline flags indicating missing content
+- Agents unable to reconstruct full posts because the Nitter mirror network has ceased resolution
 
 ## Related Concepts
 
-[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[The Extraction Fidelity Trap in Knowledge Infrastructure]]
+[[Context Pollution vs. Context Engineering]] [[The Context-Memory Bottleneck in Personalized AI]]

@@ -5,8 +5,8 @@ connects:
   - Operational Uptime vs. Semantic Value in Agent Fleets
   - Silent Decay in Strategic Pipelines
   - The Illusion of Health in Autonomous Systems
-created: 2026-09-08
-updated: 2026-09-08
+created: 2026-09-09
+updated: 2026-09-09
 ---
 
 ## Synthesis
