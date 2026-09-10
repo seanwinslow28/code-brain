@@ -45,8 +45,12 @@ The label the Insights seat attaches to each claim in a Discovery evidence secti
 _Avoid_: confidence score, rating
 
 **Red-team gate**:
-A milestone check run as a stateless Codex protocol, not by a seat; fires at strategy sign-off, before the handoff crosses, and at close.
+A milestone check run as a stateless protocol, not by a seat, on the vendor that did not last write its anchor artifact; fires at strategy sign-off, before the handoff crosses, and at close.
 _Avoid_: audit, review
+
+**Anchor artifact**:
+The one artifact a gate or a packet audit is answerable for: the Strategy & POV doc at strategy sign-off, the handoff brief before it crosses, the whole train at close. It decides which vendor runs the gate.
+_Avoid_: primary artifact, focus
 
 ### Engagements
 
@@ -87,3 +91,41 @@ _Avoid_: audience, reviewer
 **Canon line**:
 The one-breath statement of which title and idea a seat leaned on for a material choice. Names the book and the idea; never quotes the book.
 _Avoid_: citation, source, reference
+
+### Models
+
+**Baseline**:
+The runtime a seat runs on unless a named trigger fires: vendor, model, and reasoning effort, declared in the seat file. It names what actually runs, never a nominal tier.
+_Avoid_: default model, preferred model, tier
+
+**Deviation**:
+A per-pass change from a seat's baseline, made against a named trigger and recorded with a one-line why. Never silent, never per-engagement.
+_Avoid_: override, swap, exception
+
+**Escalation**:
+A deviation one tier up, made only on evidence of failure: a gate FAIL, an audit that bounced substance, or the seat's own thin-corpus flag. Never at draft time, and never because the artifact feeds a gate.
+_Avoid_: upgrade, bump, boost
+
+**Escalation target**:
+The runtime an escalation lands on. The top of the ladder is a different vendor from the seat's baseline, so a redraft gets a different brain; the ceiling model is never entered without the owner's say-so.
+_Avoid_: fallback, backup model
+
+**Downshift**:
+A deviation one tier down, for mechanical work only: transforms of existing substance, single-source lookups, checklist application, clerical filing. The file-or-defer decision itself stays at baseline.
+_Avoid_: downgrade, cheap mode
+
+**Pass budget**:
+The integer count of funded invocations an engagement declares at Open: the base manifest plus two pre-authorized rounds per scheduled gate, the coordinator's own session included. Exhaustion is a stop and a question to the owner, never a silent overrun.
+_Avoid_: token budget, cost cap
+
+**Meter line**:
+What every invocation records about itself: runtime, runtime-reported tokens, and wall-clock, or UNMEASURED. A partial total is stated as a known subtotal plus the number of unmeasured passes, never as a precise figure.
+_Avoid_: cost line, usage
+
+**Substitution**:
+A dated, owner-approved change of vendor for a pass whose planned runtime is unavailable, preserving the seat's identity: same seat contract, lane, target, and audit duty, in a fresh invocation.
+_Avoid_: fallback, reroute
+
+**Deferral**:
+A dated stop of one seat's branch when its runtime is unavailable and no substitution is approved. The dependent work waits; lanes are never merged to keep moving.
+_Avoid_: skip, pause
