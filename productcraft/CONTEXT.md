@@ -89,8 +89,24 @@ A stakeholder that assesses the outcome after the fact: hiring managers for port
 _Avoid_: audience, reviewer
 
 **Canon line**:
-The one-breath statement of which title and idea a seat leaned on for a material choice. Names the book and the idea; never quotes the book.
+The one-breath statement of which title and idea a seat leaned on for a material choice, in the seat's own words. Names the book and the idea; never quotes the book. Present on every ledger entry, including the ones where it reads "none".
 _Avoid_: citation, source, reference
+
+**Entry**:
+One material decision in the ledger, owned by one seat, carrying a permanent id that is never renamed or suffixed. A changed mind is a new entry that supersedes the old one.
+_Avoid_: log line, note, record
+
+**Grounding**:
+How much of the private corpus a seat could actually read for an entry: the corpus itself, only the tracked shelf label, or nothing. Declared on the entry so a reader knows whether the canon line was read this pass or named from the shelf.
+_Avoid_: confidence, coverage
+
+**Ratification**:
+Sean's dated sign-off on an entry. A fact recorded on the entry, not a state of it; a superseded entry keeps the fact that it was once signed.
+_Avoid_: approval, ratified state
+
+**Cross-reference**:
+An id from one studio's ledger written into the other studio's entry. Each studio writes only its own side; ids cross, reasoning never does.
+_Avoid_: link, backlink, shared index
 
 ### Models
 
