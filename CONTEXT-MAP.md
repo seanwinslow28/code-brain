@@ -10,6 +10,7 @@ not an error. Consumer rules live in `docs/agents/domain.md`.
 | Creative Studio (Phaser, Remotion, pixel art, design team) | `creative-studio/` | `creative-studio/CONTEXT.md` |
 | Life Systems (finance, health, learning, time) | `life-systems/` | `life-systems/CONTEXT.md` |
 | LLM Council & Discovery (council, fusion-discovery, budgets) | `tools/llm-council/` | `tools/llm-council/CONTEXT.md` |
+| Productcraft (seven-seat product leadership studio) | `productcraft/` | `productcraft/CONTEXT.md` |
 | Vault & knowledge loop (PARA, synthesizer, critic, lint) | `vault/` | `vault/CONTEXT.md` |
 
 System-wide ADRs: `docs/adr/`. Context-scoped ADRs: `<context>/docs/adr/`.
