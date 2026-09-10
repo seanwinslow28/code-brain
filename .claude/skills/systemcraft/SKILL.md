@@ -40,6 +40,7 @@ The studio's orchestrator. **The skill knows the process, the seats know the cra
 - [ ] Corpus inbox sweep (`systemcraft/corpus/inbox.md`): file each entry or consciously defer — never silently skip.
 - [ ] Live deferred work → one rule-8 ticket per item in `vault/00_inbox/tickets.md` (CLAUDE.md rule 8); everything else stays in the ledger for pull.
 - [ ] Verify `git status` shows nothing under `systemcraft/{corpus,ledger,books}/` — the private layer never reaches git.
+- [ ] Commit and push the ledger's own repo: `git -C systemcraft/ledger add -A && git -C systemcraft/ledger commit -m "<eng-id>: <close gist>" && git -C systemcraft/ledger push` — the ledger is its own git repo with a **private** remote (`seanwinslow28/systemcraft-ledger`, 2026-09-10); an unpushed ledger exists on one laptop only. Sessions are one per ticket, so every session that touched the ledger pushes before it ends, not just Close.
 - [ ] Freeze the P0-equivalent denominator (Sean ratifies) and name the D+14 outcome-record date; Close is declared as `ADMINISTRATIVE CLOSE — OUTCOME PENDING D+14`, never success.
 - [ ] Explain-why digest to Sean per [templates/close-digest.md](../../../systemcraft/templates/close-digest.md) — recommendation first, one question, statuses rendered per [templates/status-vocabulary.md](../../../systemcraft/templates/status-vocabulary.md).
 

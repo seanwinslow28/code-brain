@@ -24,7 +24,7 @@ Scaffold only. The studio is being built along the [Systemcraft build map](https
 
 ## Non-negotiable rules
 
-1. **Public machinery, private brain.** `corpus/` and `ledger/` are local-only via the PRIVATE LAYER block in the root `.gitignore`. Never `git add` them, never weaken those rules, and never let book-derived text land in a tracked file. Assume every tracked file in this folder is read by a recruiter.
+1. **Public machinery, private brain.** `corpus/` and `ledger/` are local-only via the PRIVATE LAYER block in the root `.gitignore`. Never `git add` them, never weaken those rules, and never let book-derived text land in a tracked file. Assume every tracked file in this folder is read by a recruiter. `ledger/` is its own git repo backed up to a **private** remote (`seanwinslow28/systemcraft-ledger`): any session that writes to it commits and pushes there before ending (`git -C systemcraft/ledger push`), never to this repo.
 2. **Graceful degradation.** On a machine where the private lanes are absent (fresh clone, employer machine), seats say so plainly and continue on tracked knowledge — they never fabricate citations into a corpus they cannot read.
 3. **Explain why.** Every material choice ships with a one-breath why-A-over-B. That behavior is the studio's teaching surface.
 4. **Audits run fresh.** An audit is a fresh-context invocation that never sees the drafting conversation; cross-seat audit is preferred where lanes touch; milestone red-team gate passes run on Codex via the codex plugin.
