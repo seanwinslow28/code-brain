@@ -1,0 +1,1635 @@
+{
+  "engagement": {
+    "id": "pc-eng-000",
+    "name": "Callboard",
+    "kind": "full train",
+    "opened": "2026-10-06",
+    "closed": "2026-10-06",
+    "pass_budget": 26,
+    "note": "Synthetic engagement, invented for the viewer design (#292). No seat wrote any of this."
+  },
+  "stages": {
+    "1": "Strategist",
+    "2": "Discovery",
+    "3": "Insights",
+    "4": "Growth",
+    "5": "Business",
+    "6": "Delivery",
+    "7": "Leadership"
+  },
+  "passes": [
+    {
+      "pass_id": "pass-01",
+      "seat": "Strategist",
+      "kind": "draft",
+      "stage": 1,
+      "runtime": "claude-opus-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 2040,
+      "meter": {
+        "input": 182400,
+        "output": 21300,
+        "cached": 96000
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "engagement/brief.md",
+          "sha256:0001\u20261eef"
+        ],
+        [
+          "corpus/strategy/shelf.md",
+          "sha256:0002\u20263dde"
+        ],
+        [
+          "corpus/strategy/good-strategy-bad-strategy.md",
+          "sha256:0003\u20265ccd"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "artifacts/01-strategy-pov.md",
+        "pc-eng-000.d01",
+        "pc-eng-000.d02"
+      ],
+      "raw_log": "logs/pass-01.jsonl",
+      "checks": [
+        [
+          "pass-02",
+          "gate",
+          "FAIL"
+        ],
+        [
+          "pass-04",
+          "gate",
+          "PASS"
+        ],
+        [
+          "pass-10",
+          "audit",
+          "PASS"
+        ]
+      ],
+      "corpus_read": [
+        "corpus/strategy/good-strategy-bad-strategy.md",
+        "corpus/strategy/shelf.md",
+        "engagement/brief.md"
+      ],
+      "moves": {
+        "origin": true,
+        "leaned_on": [
+          "Rumelt's kernel: diagnosis, guiding policy, coherent action"
+        ]
+      },
+      "notes": "Origin draft. Named the casting bottleneck as the diagnosis; two candidate guiding policies drafted, one chosen.",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T08:12"
+    },
+    {
+      "pass_id": "pass-02",
+      "seat": "Red-team gate",
+      "kind": "gate",
+      "stage": 1,
+      "runtime": "codex gpt-5.6-sol (high)",
+      "launch": "codex exec --model gpt-5.6-sol -c reasoning.effort=high",
+      "effort": "high",
+      "wall_clock_s": 540,
+      "meter": {
+        "input": 61200,
+        "output": 4800,
+        "cached": 0
+      },
+      "meter_source": "codex footer",
+      "inputs": [
+        [
+          "artifacts/01-strategy-pov.md",
+          "sha256:0004\u20267bbc"
+        ],
+        [
+          "templates/red-team-protocol.md",
+          "sha256:0005\u20269aab"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements",
+        "the corpus"
+      ],
+      "outputs": [
+        "gates/g1-strategy-signoff-r1.md"
+      ],
+      "raw_log": "logs/pass-02.txt",
+      "checks": [],
+      "corpus_read": [],
+      "moves": null,
+      "notes": "Gate FAIL: guiding policy rests on an unstated assumption that directors control the rehearsal calendar.",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T08:51"
+    },
+    {
+      "pass_id": "pass-03",
+      "seat": "Strategist",
+      "kind": "repair",
+      "stage": 1,
+      "runtime": "claude-opus-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 1080,
+      "meter": {
+        "input": 96700,
+        "output": 9900,
+        "cached": 88000
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/01-strategy-pov.md",
+          "sha256:0004\u20267bbc"
+        ],
+        [
+          "gates/g1-strategy-signoff-r1.md",
+          "sha256:0006\u2026b99a"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "artifacts/01-strategy-pov.md",
+        "pc-eng-000.d03"
+      ],
+      "raw_log": "logs/pass-03.jsonl",
+      "checks": [
+        [
+          "pass-04",
+          "gate",
+          "PASS"
+        ]
+      ],
+      "corpus_read": [
+        "corpus/strategy/good-strategy-bad-strategy.md",
+        "gates/g1-strategy-signoff-r1.md"
+      ],
+      "moves": {
+        "kept": 6,
+        "added": 2,
+        "split": 1,
+        "merged": 0,
+        "dropped": 1,
+        "lines": [
+          [
+            "split",
+            "Guiding policy \u2192 GP-a (directors own the calendar) and GP-b (the tool proposes, the director accepts)",
+            "from GP-1, sources S3, S7"
+          ],
+          [
+            "added",
+            "Assumption register A1\u2013A2",
+            "from gate finding 1"
+          ],
+          [
+            "dropped",
+            "Action 4 (venue integration)",
+            "no source survived the split"
+          ]
+        ]
+      },
+      "notes": "Repair against gate r1. Calendar-ownership assumption now explicit and testable.",
+      "triggered_by": "pass-02",
+      "shadow_of": null,
+      "launched": "2026-10-06T09:05"
+    },
+    {
+      "pass_id": "pass-04",
+      "seat": "Red-team gate",
+      "kind": "gate",
+      "stage": 1,
+      "runtime": "codex gpt-5.6-sol (high)",
+      "launch": "codex exec --model gpt-5.6-sol -c reasoning.effort=high",
+      "effort": "high",
+      "wall_clock_s": 420,
+      "meter": {
+        "input": 58900,
+        "output": 3100,
+        "cached": 0
+      },
+      "meter_source": "codex footer",
+      "inputs": [
+        [
+          "artifacts/01-strategy-pov.md",
+          "sha256:0007\u2026d889"
+        ],
+        [
+          "templates/red-team-protocol.md",
+          "sha256:0005\u20269aab"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements",
+        "the corpus"
+      ],
+      "outputs": [
+        "gates/g1-strategy-signoff-r2.md"
+      ],
+      "raw_log": "logs/pass-04.txt",
+      "checks": [],
+      "corpus_read": [],
+      "moves": null,
+      "notes": "Gate PASS on round 2.",
+      "triggered_by": "pass-03",
+      "shadow_of": null,
+      "launched": "2026-10-06T09:30"
+    },
+    {
+      "pass_id": "pass-05",
+      "seat": "Discovery",
+      "kind": "draft",
+      "stage": 2,
+      "runtime": "claude-opus-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 2460,
+      "meter": {
+        "input": 240100,
+        "output": 28700,
+        "cached": 120000
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/01-strategy-pov.md",
+          "sha256:0007\u2026d889"
+        ],
+        [
+          "engagement/evidence/interviews-01-08.md",
+          "sha256:0008\u2026f778"
+        ],
+        [
+          "corpus/discovery/shelf.md",
+          "sha256:0009\u20261668"
+        ],
+        [
+          "corpus/discovery/continuous-discovery-habits.md",
+          "sha256:000a\u20263557"
+        ],
+        [
+          "corpus/discovery/the-mom-test.md",
+          "sha256:000b\u20265446"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "artifacts/02-discovery-packet.md",
+        "pc-eng-000.d04",
+        "pc-eng-000.d05"
+      ],
+      "raw_log": "logs/pass-05.jsonl",
+      "checks": [
+        [
+          "pass-06",
+          "co-sign",
+          "BOUNCED 2"
+        ],
+        [
+          "pass-08",
+          "co-sign",
+          "PASS"
+        ],
+        [
+          "pass-21",
+          "audit",
+          "\u2014"
+        ]
+      ],
+      "corpus_read": [
+        "corpus/discovery/continuous-discovery-habits.md",
+        "engagement/evidence/interviews-01-08.md",
+        "artifacts/01-strategy-pov.md"
+      ],
+      "moves": {
+        "kept": 9,
+        "added": 5,
+        "split": 0,
+        "merged": 2,
+        "dropped": 0,
+        "lines": [
+          [
+            "merged",
+            "Opportunities O2 + O5 \u2192 O2 (\"the callback scramble\")",
+            "from interviews 3, 4, 6"
+          ],
+          [
+            "added",
+            "Evidence claims E1\u2013E5",
+            "from interviews 1\u20138"
+          ]
+        ]
+      },
+      "notes": "Eight interviews read in full. Opportunity tree drafted with five evidence claims.",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T10:02"
+    },
+    {
+      "pass_id": "pass-06",
+      "seat": "Insights",
+      "kind": "co-sign",
+      "stage": 2,
+      "runtime": "claude-opus-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 840,
+      "meter": {
+        "input": 131400,
+        "output": 6200,
+        "cached": 0
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/02-discovery-packet.md",
+          "sha256:000c\u20267335"
+        ],
+        [
+          "artifacts/01-strategy-pov.md",
+          "sha256:0007\u2026d889"
+        ],
+        [
+          "engagement/evidence/interviews-01-08.md",
+          "sha256:0008\u2026f778"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "cosigns/02-evidence-r1.md"
+      ],
+      "raw_log": "logs/pass-06.jsonl",
+      "checks": [],
+      "corpus_read": [
+        "engagement/evidence/interviews-01-08.md",
+        "artifacts/02-discovery-packet.md"
+      ],
+      "moves": null,
+      "notes": "Bounced E2 (\"directors want fewer emails\": no interviewee said it unprompted) and E4 (count stated as six, transcripts show four).",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T10:48"
+    },
+    {
+      "pass_id": "pass-07",
+      "seat": "Discovery",
+      "kind": "repair",
+      "stage": 2,
+      "runtime": "claude-opus-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 960,
+      "meter": {
+        "input": 88300,
+        "output": 11000,
+        "cached": 110000
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/02-discovery-packet.md",
+          "sha256:000c\u20267335"
+        ],
+        [
+          "cosigns/02-evidence-r1.md",
+          "sha256:000d\u20269224"
+        ],
+        [
+          "engagement/evidence/interviews-01-08.md",
+          "sha256:0008\u2026f778"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "artifacts/02-discovery-packet.md",
+        "pc-eng-000.d06"
+      ],
+      "raw_log": "logs/pass-07.jsonl",
+      "checks": [
+        [
+          "pass-08",
+          "co-sign",
+          "PASS"
+        ]
+      ],
+      "corpus_read": [
+        "engagement/evidence/interviews-01-08.md",
+        "cosigns/02-evidence-r1.md"
+      ],
+      "moves": {
+        "kept": 12,
+        "added": 1,
+        "split": 0,
+        "merged": 0,
+        "dropped": 1,
+        "lines": [
+          [
+            "dropped",
+            "E2",
+            "no unprompted source"
+          ],
+          [
+            "added",
+            "E4 restated at four of eight, transcripts 2, 3, 5, 8 linked",
+            "from co-sign bounce"
+          ]
+        ]
+      },
+      "notes": "Repair against co-sign r1.",
+      "triggered_by": "pass-06",
+      "shadow_of": null,
+      "launched": "2026-10-06T11:06"
+    },
+    {
+      "pass_id": "pass-08",
+      "seat": "Insights",
+      "kind": "co-sign",
+      "stage": 2,
+      "runtime": "claude-opus-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 660,
+      "meter": {
+        "input": 128800,
+        "output": 4900,
+        "cached": 0
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/02-discovery-packet.md",
+          "sha256:000e\u2026b113"
+        ],
+        [
+          "engagement/evidence/interviews-01-08.md",
+          "sha256:0008\u2026f778"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "cosigns/02-evidence-r2.md"
+      ],
+      "raw_log": "logs/pass-08.jsonl",
+      "checks": [],
+      "corpus_read": [
+        "engagement/evidence/interviews-01-08.md",
+        "artifacts/02-discovery-packet.md"
+      ],
+      "moves": null,
+      "notes": "All four remaining claims graded; packet done.",
+      "triggered_by": "pass-07",
+      "shadow_of": null,
+      "launched": "2026-10-06T11:24"
+    },
+    {
+      "pass_id": "pass-09",
+      "seat": "Insights",
+      "kind": "draft",
+      "stage": 3,
+      "runtime": "claude-opus-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 1740,
+      "meter": {
+        "input": 176500,
+        "output": 19800,
+        "cached": 130000
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/01-strategy-pov.md",
+          "sha256:0007\u2026d889"
+        ],
+        [
+          "artifacts/02-discovery-packet.md",
+          "sha256:000e\u2026b113"
+        ],
+        [
+          "corpus/insights/shelf.md",
+          "sha256:000f\u2026d002"
+        ],
+        [
+          "corpus/insights/trustworthy-online-experiments.md",
+          "sha256:0010\u2026eef1"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "artifacts/03-metrics-evidence-plan.md",
+        "pc-eng-000.d07"
+      ],
+      "raw_log": "logs/pass-09.jsonl",
+      "checks": [
+        [
+          "pass-12",
+          "audit",
+          "BOUNCED"
+        ],
+        [
+          "pass-22",
+          "audit",
+          "\u2014"
+        ]
+      ],
+      "corpus_read": [
+        "corpus/insights/trustworthy-online-experiments.md",
+        "artifacts/02-discovery-packet.md",
+        "artifacts/01-strategy-pov.md"
+      ],
+      "moves": {
+        "kept": 8,
+        "added": 4,
+        "split": 1,
+        "merged": 0,
+        "dropped": 0,
+        "lines": [
+          [
+            "split",
+            "Outcome OC-1 \u2192 OC-1a (time-to-cast) and OC-1b (callback no-shows)",
+            "from OC-1, sources E1, E3"
+          ],
+          [
+            "added",
+            "Metrics M1\u2013M4 with instrumentation notes",
+            "from OC-1a, OC-1b, OC-2"
+          ]
+        ]
+      },
+      "notes": "Metrics plan drafted. No acquisition metric: the Strategy doc names none (bounced OC-3 back to Strategist as unmeasurable).",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T12:10"
+    },
+    {
+      "pass_id": "pass-10",
+      "seat": "Discovery",
+      "kind": "audit",
+      "stage": 1,
+      "runtime": "claude-opus-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 720,
+      "meter": {
+        "input": 119000,
+        "output": 5400,
+        "cached": 0
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/01-strategy-pov.md",
+          "sha256:0007\u2026d889"
+        ],
+        [
+          "artifacts/02-discovery-packet.md",
+          "sha256:000e\u2026b113"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "audits/01-strategy-by-discovery.md"
+      ],
+      "raw_log": "logs/pass-10.jsonl",
+      "checks": [],
+      "corpus_read": [
+        "artifacts/01-strategy-pov.md",
+        "artifacts/02-discovery-packet.md"
+      ],
+      "moves": null,
+      "notes": "Stake: does the diagnosis survive the evidence? Yes; one wording note.",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T12:55"
+    },
+    {
+      "pass_id": "pass-11",
+      "seat": "Growth",
+      "kind": "draft",
+      "stage": 4,
+      "runtime": "claude-sonnet-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 1320,
+      "meter": {
+        "input": 151200,
+        "output": 17400,
+        "cached": 140000
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/01-strategy-pov.md",
+          "sha256:0007\u2026d889"
+        ],
+        [
+          "artifacts/02-discovery-packet.md",
+          "sha256:000e\u2026b113"
+        ],
+        [
+          "artifacts/03-metrics-evidence-plan.md",
+          "sha256:0011\u20260de1"
+        ],
+        [
+          "corpus/growth/shelf.md",
+          "sha256:0012\u20262cd0"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "artifacts/04-distribution-plan.md",
+        "pc-eng-000.d08"
+      ],
+      "raw_log": "logs/pass-11.jsonl",
+      "checks": [
+        [
+          "pass-12",
+          "audit",
+          "BOUNCED"
+        ]
+      ],
+      "corpus_read": [
+        "corpus/growth/shelf.md",
+        "artifacts/03-metrics-evidence-plan.md"
+      ],
+      "moves": {
+        "kept": 10,
+        "added": 3,
+        "split": 0,
+        "merged": 1,
+        "dropped": 0,
+        "lines": [
+          [
+            "added",
+            "Loop L1 (director invites cast) with a target number",
+            "from OC-2"
+          ],
+          [
+            "merged",
+            "Channels C2 + C3 \u2192 C2 (regional theatre associations)",
+            "from E5"
+          ]
+        ]
+      },
+      "notes": "Grounding manifest-only for Growth's corpus (shelf label read; book not opened).",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T13:20"
+    },
+    {
+      "pass_id": "pass-12",
+      "seat": "Insights",
+      "kind": "audit",
+      "stage": 4,
+      "runtime": "claude-opus-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 780,
+      "meter": {
+        "input": 141900,
+        "output": 6800,
+        "cached": 0
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/04-distribution-plan.md",
+          "sha256:0013\u20264bbf"
+        ],
+        [
+          "artifacts/03-metrics-evidence-plan.md",
+          "sha256:0011\u20260de1"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "audits/04-growth-by-insights.md"
+      ],
+      "raw_log": "logs/pass-12.jsonl",
+      "checks": [],
+      "corpus_read": [
+        "artifacts/04-distribution-plan.md",
+        "artifacts/03-metrics-evidence-plan.md"
+      ],
+      "moves": null,
+      "notes": "Stake: can every loop target be measured by the plan? No: L1 has a target and no metric, because the plan has no acquisition metric.",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T13:50"
+    },
+    {
+      "pass_id": "pass-13",
+      "seat": "Business",
+      "kind": "draft",
+      "stage": 5,
+      "runtime": "claude-sonnet-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 1560,
+      "meter": {
+        "input": 163000,
+        "output": 18900,
+        "cached": 150000
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/01-strategy-pov.md",
+          "sha256:0007\u2026d889"
+        ],
+        [
+          "artifacts/02-discovery-packet.md",
+          "sha256:000e\u2026b113"
+        ],
+        [
+          "artifacts/03-metrics-evidence-plan.md",
+          "sha256:0011\u20260de1"
+        ],
+        [
+          "artifacts/04-distribution-plan.md",
+          "sha256:0013\u20264bbf"
+        ],
+        [
+          "corpus/business/shelf.md",
+          "sha256:0014\u20266aae"
+        ],
+        [
+          "corpus/business/monetizing-innovation.md",
+          "sha256:0015\u2026899d"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "artifacts/05-economics-model.md",
+        "pc-eng-000.d09"
+      ],
+      "raw_log": "logs/pass-13.jsonl",
+      "checks": [
+        [
+          "pass-14",
+          "audit",
+          "PASS"
+        ]
+      ],
+      "corpus_read": [
+        "corpus/business/monetizing-innovation.md",
+        "artifacts/04-distribution-plan.md",
+        "artifacts/01-strategy-pov.md"
+      ],
+      "moves": {
+        "kept": 11,
+        "added": 4,
+        "split": 0,
+        "merged": 0,
+        "dropped": 2,
+        "lines": [
+          [
+            "added",
+            "Pricing hypotheses PH-1 (per-production) and PH-2 (per-season)",
+            "from E1, C2"
+          ],
+          [
+            "dropped",
+            "Channel C4 (app stores)",
+            "gatekeeper cost exceeds season revenue"
+          ]
+        ]
+      },
+      "notes": "",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T14:10"
+    },
+    {
+      "pass_id": "pass-14",
+      "seat": "Growth",
+      "kind": "audit",
+      "stage": 5,
+      "runtime": "claude-sonnet-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 540,
+      "meter": {
+        "input": 122400,
+        "output": 4100,
+        "cached": 0
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/05-economics-model.md",
+          "sha256:0016\u2026a88c"
+        ],
+        [
+          "artifacts/04-distribution-plan.md",
+          "sha256:0013\u20264bbf"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "audits/05-business-by-growth.md"
+      ],
+      "raw_log": "logs/pass-14.jsonl",
+      "checks": [],
+      "corpus_read": [
+        "artifacts/05-economics-model.md"
+      ],
+      "moves": null,
+      "notes": "Stake: does the model price the loop it depends on? Yes.",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T14:48"
+    },
+    {
+      "pass_id": "pass-15",
+      "seat": "Delivery",
+      "kind": "draft",
+      "stage": 6,
+      "runtime": "claude-sonnet-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 1860,
+      "meter": {
+        "input": 198700,
+        "output": 24200,
+        "cached": 160000
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/01-strategy-pov.md",
+          "sha256:0007\u2026d889"
+        ],
+        [
+          "artifacts/02-discovery-packet.md",
+          "sha256:000e\u2026b113"
+        ],
+        [
+          "artifacts/03-metrics-evidence-plan.md",
+          "sha256:0011\u20260de1"
+        ],
+        [
+          "artifacts/04-distribution-plan.md",
+          "sha256:0013\u20264bbf"
+        ],
+        [
+          "artifacts/05-economics-model.md",
+          "sha256:0016\u2026a88c"
+        ],
+        [
+          "corpus/delivery/shelf.md",
+          "sha256:0017\u2026c77b"
+        ],
+        [
+          "corpus/delivery/shape-up.md",
+          "sha256:0018\u2026e66a"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "artifacts/06-roadmap.md",
+        "pc-eng-000.d10",
+        "pc-eng-000.d11"
+      ],
+      "raw_log": "logs/pass-15.jsonl",
+      "checks": [
+        [
+          "pass-16",
+          "co-sign",
+          "PASS"
+        ],
+        [
+          "pass-18",
+          "audit",
+          "PASS"
+        ]
+      ],
+      "corpus_read": [
+        "corpus/delivery/shape-up.md",
+        "artifacts/05-economics-model.md",
+        "artifacts/03-metrics-evidence-plan.md"
+      ],
+      "moves": {
+        "kept": 14,
+        "added": 6,
+        "split": 2,
+        "merged": 0,
+        "dropped": 1,
+        "lines": [
+          [
+            "split",
+            "OC-1a \u2192 KR-1 (median time-to-cast) and KR-2 (share of productions cast within a week)",
+            "from OC-1a, M1, M2"
+          ],
+          [
+            "added",
+            "Bets B1\u2013B3 with appetites",
+            "from PH-1, L1, O2"
+          ]
+        ]
+      },
+      "notes": "Baseline pass of a shadow pair (pass-17 is the trial).",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T15:05"
+    },
+    {
+      "pass_id": "pass-16",
+      "seat": "Strategist",
+      "kind": "co-sign",
+      "stage": 6,
+      "runtime": "claude-opus-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 600,
+      "meter": {
+        "input": 117300,
+        "output": 4600,
+        "cached": 0
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/06-roadmap.md",
+          "sha256:0019\u2026055a"
+        ],
+        [
+          "artifacts/01-strategy-pov.md",
+          "sha256:0007\u2026d889"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "cosigns/06-okr-r1.md"
+      ],
+      "raw_log": "logs/pass-16.jsonl",
+      "checks": [],
+      "corpus_read": [
+        "artifacts/06-roadmap.md",
+        "artifacts/01-strategy-pov.md"
+      ],
+      "moves": null,
+      "notes": "Every key result passed against its outcome.",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T15:44"
+    },
+    {
+      "pass_id": "pass-17",
+      "seat": "Delivery",
+      "kind": "trial",
+      "stage": 6,
+      "runtime": "HIDDEN",
+      "launch": "HIDDEN",
+      "effort": "high",
+      "wall_clock_s": 1440,
+      "meter": {
+        "input": 171900,
+        "output": 22800,
+        "cached": 0
+      },
+      "meter_source": "codex footer",
+      "inputs": [
+        [
+          "artifacts/01-strategy-pov.md",
+          "sha256:0007\u2026d889"
+        ],
+        [
+          "artifacts/02-discovery-packet.md",
+          "sha256:000e\u2026b113"
+        ],
+        [
+          "artifacts/03-metrics-evidence-plan.md",
+          "sha256:0011\u20260de1"
+        ],
+        [
+          "artifacts/04-distribution-plan.md",
+          "sha256:0013\u20264bbf"
+        ],
+        [
+          "artifacts/05-economics-model.md",
+          "sha256:0016\u2026a88c"
+        ],
+        [
+          "corpus/delivery/shelf.md",
+          "sha256:0017\u2026c77b"
+        ],
+        [
+          "corpus/delivery/shape-up.md",
+          "sha256:0018\u2026e66a"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "trials/06-roadmap-trial.md"
+      ],
+      "raw_log": "logs/pass-17.txt",
+      "checks": [],
+      "corpus_read": [
+        "corpus/delivery/shape-up.md",
+        "artifacts/05-economics-model.md"
+      ],
+      "moves": {
+        "kept": 13,
+        "added": 5,
+        "split": 1,
+        "merged": 1,
+        "dropped": 2,
+        "lines": [
+          [
+            "split",
+            "OC-1a \u2192 KR-1 and KR-2",
+            "from OC-1a, M1, M2"
+          ],
+          [
+            "merged",
+            "B2 + B3 \u2192 B2",
+            "from PH-1, L1"
+          ]
+        ]
+      },
+      "notes": "Shadow pass on identical inputs. Label blind.",
+      "triggered_by": null,
+      "shadow_of": "pass-15",
+      "launched": "2026-10-06T15:06"
+    },
+    {
+      "pass_id": "pass-18",
+      "seat": "Business",
+      "kind": "audit",
+      "stage": 6,
+      "runtime": "claude-sonnet-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 660,
+      "meter": {
+        "input": 126800,
+        "output": 5000,
+        "cached": 0
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/06-roadmap.md",
+          "sha256:0019\u2026055a"
+        ],
+        [
+          "artifacts/05-economics-model.md",
+          "sha256:0016\u2026a88c"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "audits/06-delivery-by-business.md"
+      ],
+      "raw_log": "logs/pass-18.jsonl",
+      "checks": [],
+      "corpus_read": [
+        "artifacts/06-roadmap.md"
+      ],
+      "moves": null,
+      "notes": "Stake: does the first bet pay for the second? Yes, on PH-1.",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T16:02"
+    },
+    {
+      "pass_id": "pass-19",
+      "seat": "Red-team gate",
+      "kind": "gate",
+      "stage": 6,
+      "runtime": "codex gpt-5.6-sol (high)",
+      "launch": "codex exec --model gpt-5.6-sol -c reasoning.effort=high",
+      "effort": "high",
+      "wall_clock_s": 480,
+      "meter": {
+        "input": 64100,
+        "output": 3900,
+        "cached": 0
+      },
+      "meter_source": "codex footer",
+      "inputs": [
+        [
+          "artifacts/06-handoff-brief.md",
+          "sha256:001a\u20262449"
+        ],
+        [
+          "templates/red-team-protocol.md",
+          "sha256:0005\u20269aab"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements",
+        "the corpus"
+      ],
+      "outputs": [
+        "gates/g2-handoff-r1.md"
+      ],
+      "raw_log": "logs/pass-19.txt",
+      "checks": [],
+      "corpus_read": [],
+      "moves": null,
+      "notes": "Gate PASS. Brief crosses to Systemcraft with a return date.",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T16:30"
+    },
+    {
+      "pass_id": "pass-20",
+      "seat": "Leadership",
+      "kind": "draft",
+      "stage": 7,
+      "runtime": "claude-opus-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 1980,
+      "meter": {
+        "input": 205300,
+        "output": 26100,
+        "cached": 170000
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/01-strategy-pov.md",
+          "sha256:0007\u2026d889"
+        ],
+        [
+          "artifacts/02-discovery-packet.md",
+          "sha256:000e\u2026b113"
+        ],
+        [
+          "artifacts/03-metrics-evidence-plan.md",
+          "sha256:0011\u20260de1"
+        ],
+        [
+          "artifacts/04-distribution-plan.md",
+          "sha256:0013\u20264bbf"
+        ],
+        [
+          "artifacts/05-economics-model.md",
+          "sha256:0016\u2026a88c"
+        ],
+        [
+          "artifacts/06-roadmap.md",
+          "sha256:0019\u2026055a"
+        ],
+        [
+          "artifacts/06-handoff-brief.md",
+          "sha256:001a\u20262449"
+        ],
+        [
+          "corpus/leadership/shelf.md",
+          "sha256:001b\u20264338"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "artifacts/07-leadership-packet.md",
+        "pc-eng-000.d12"
+      ],
+      "raw_log": "logs/pass-20.jsonl",
+      "checks": [
+        [
+          "pass-21",
+          "audit",
+          "\u2014"
+        ]
+      ],
+      "corpus_read": [
+        "corpus/leadership/shelf.md",
+        "artifacts/06-handoff-brief.md",
+        "artifacts/06-roadmap.md"
+      ],
+      "moves": {
+        "kept": 15,
+        "added": 7,
+        "split": 0,
+        "merged": 0,
+        "dropped": 0,
+        "lines": [
+          [
+            "added",
+            "Stakeholder rows: venue managers, the regional association, app-store review (gatekeeper)",
+            "from C2, C4, E5"
+          ],
+          [
+            "added",
+            "Team topology with two agents as their own entity type",
+            "from B1\u2013B3"
+          ]
+        ]
+      },
+      "notes": "Grounding manifest-only.",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T16:50"
+    },
+    {
+      "pass_id": "pass-21",
+      "seat": "Strategist",
+      "kind": "audit",
+      "stage": 7,
+      "runtime": "claude-opus-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 720,
+      "meter": {
+        "input": 139500,
+        "output": 5700,
+        "cached": 0
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/07-leadership-packet.md",
+          "sha256:001c\u20266227"
+        ],
+        [
+          "artifacts/01-strategy-pov.md",
+          "sha256:0007\u2026d889"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "audits/07-leadership-by-strategist.md"
+      ],
+      "raw_log": "logs/pass-21.jsonl",
+      "checks": [],
+      "corpus_read": [
+        "artifacts/07-leadership-packet.md"
+      ],
+      "moves": null,
+      "notes": "Stake: does the operating model serve the guiding policy? One bounce on the decision-rights table.",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T17:35"
+    },
+    {
+      "pass_id": "pass-22",
+      "seat": "Delivery",
+      "kind": "audit",
+      "stage": 3,
+      "runtime": "claude-sonnet-5",
+      "launch": "Agent tool, fresh context",
+      "effort": "high",
+      "wall_clock_s": 600,
+      "meter": {
+        "input": 118200,
+        "output": 4400,
+        "cached": 0
+      },
+      "meter_source": "Agent-tool usage",
+      "inputs": [
+        [
+          "artifacts/03-metrics-evidence-plan.md",
+          "sha256:0011\u20260de1"
+        ],
+        [
+          "artifacts/06-roadmap.md",
+          "sha256:0019\u2026055a"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements"
+      ],
+      "outputs": [
+        "audits/03-insights-by-delivery.md"
+      ],
+      "raw_log": "logs/pass-22.jsonl",
+      "checks": [],
+      "corpus_read": [
+        "artifacts/03-metrics-evidence-plan.md"
+      ],
+      "moves": null,
+      "notes": "Stake: can the roadmap's key results be read off the plan's metrics? Yes for KR-1, KR-2; KR-3 has no metric.",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T17:58"
+    },
+    {
+      "pass_id": "pass-23",
+      "seat": "Red-team gate",
+      "kind": "gate",
+      "stage": 7,
+      "runtime": "codex gpt-5.6-sol (high)",
+      "launch": "codex exec --model gpt-5.6-sol -c reasoning.effort=high",
+      "effort": "high",
+      "wall_clock_s": 840,
+      "meter": {
+        "input": 92600,
+        "output": 6200,
+        "cached": 0
+      },
+      "meter_source": "codex footer",
+      "inputs": [
+        [
+          "artifacts/",
+          "sha256:001d\u20268116"
+        ],
+        [
+          "templates/red-team-protocol.md",
+          "sha256:0005\u20269aab"
+        ]
+      ],
+      "withheld": [
+        "the drafting conversation",
+        "ledger entries of other engagements",
+        "the corpus"
+      ],
+      "outputs": [
+        "gates/g3-close-r1.md"
+      ],
+      "raw_log": "logs/pass-23.txt",
+      "checks": [],
+      "corpus_read": [],
+      "moves": null,
+      "notes": "Gate at close. Anchor: the whole train.",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T18:20"
+    },
+    {
+      "pass_id": "pass-24",
+      "seat": "Coordinator",
+      "kind": "close",
+      "stage": 0,
+      "runtime": "claude-fable-5-1 (interactive)",
+      "launch": "interactive session",
+      "effort": "\u2014",
+      "wall_clock_s": 0,
+      "meter": {
+        "input": 0,
+        "output": 0,
+        "cached": 0
+      },
+      "meter_source": "UNMEASURED",
+      "inputs": [],
+      "withheld": [
+        "nothing"
+      ],
+      "outputs": [
+        "engagement/close.md"
+      ],
+      "raw_log": "\u2014",
+      "checks": [],
+      "corpus_read": [],
+      "moves": null,
+      "notes": "Coordinator's own session. Deviations: Growth and Leadership ran grounding manifest-only (corpus not yet ingested for those seats).",
+      "triggered_by": null,
+      "shadow_of": null,
+      "launched": "2026-10-06T18:40"
+    }
+  ],
+  "labels": {
+    "pass-01": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "Diagnosis is one sentence and names the constraint. A new hire could restate it.",
+      "failure_code": ""
+    },
+    "pass-02": {
+      "verdict": "fail",
+      "first_failing_stage": 1,
+      "critique": "Gate was right to fail it: the calendar assumption was load-bearing and unstated. The gate's own write-up buries the finding under three minor ones; lead with it.",
+      "failure_code": ""
+    },
+    "pass-03": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "The split is honest and the register is testable. Dropping action 4 was correct.",
+      "failure_code": ""
+    },
+    "pass-04": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "",
+      "failure_code": ""
+    },
+    "pass-05": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "Reads the interviews rather than the brief's summary of them. Merge of O2 and O5 is defensible.",
+      "failure_code": ""
+    },
+    "pass-06": {
+      "verdict": "fail",
+      "first_failing_stage": 2,
+      "critique": "Right to bounce E2 and E4, but E4's bounce is the packet's fault, not the co-sign's; this row fails because the co-sign let E3 through with a count nobody can find in the transcripts.",
+      "failure_code": ""
+    },
+    "pass-07": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "",
+      "failure_code": ""
+    },
+    "pass-08": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "",
+      "failure_code": ""
+    },
+    "pass-09": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "Bouncing OC-3 to the Strategist instead of inventing a metric is exactly the rule.",
+      "failure_code": ""
+    },
+    "pass-10": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "",
+      "failure_code": ""
+    },
+    "pass-11": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "Manifest-only grounding declared, not hidden. Loop L1 target has no metric, which surfaces at pass-12.",
+      "failure_code": ""
+    },
+    "pass-12": {
+      "verdict": "fail",
+      "first_failing_stage": 3,
+      "critique": "The audit is correct and the failure is upstream: the metrics plan (stage 3) has no acquisition metric, so Growth could not have measured L1. Fix the plan, not the loop.",
+      "failure_code": ""
+    },
+    "pass-13": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "",
+      "failure_code": ""
+    },
+    "pass-14": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "",
+      "failure_code": ""
+    },
+    "pass-15": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "Appetites are stated in weeks with a circuit breaker each. KR-3 is unmeasured; see pass-22.",
+      "failure_code": ""
+    },
+    "pass-16": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "",
+      "failure_code": ""
+    },
+    "pass-17": {
+      "verdict": null,
+      "first_failing_stage": null,
+      "critique": "",
+      "failure_code": ""
+    },
+    "pass-18": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "",
+      "failure_code": ""
+    },
+    "pass-19": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "",
+      "failure_code": ""
+    },
+    "pass-20": {
+      "verdict": "fail",
+      "first_failing_stage": 6,
+      "critique": "The stakeholder map is fine. The topology names a return date that the handoff brief (stage 6) never set, so the packet inherited a constraint that does not exist.",
+      "failure_code": ""
+    },
+    "pass-21": {
+      "verdict": null,
+      "first_failing_stage": null,
+      "critique": "",
+      "failure_code": ""
+    },
+    "pass-22": {
+      "verdict": null,
+      "first_failing_stage": null,
+      "critique": "",
+      "failure_code": ""
+    },
+    "pass-23": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "",
+      "failure_code": ""
+    },
+    "pass-24": {
+      "verdict": "pass",
+      "first_failing_stage": null,
+      "critique": "",
+      "failure_code": ""
+    }
+  },
+  "rung0": [
+    [
+      "Every pass has a record",
+      "24 of 24",
+      true
+    ],
+    [
+      "Every pass has a label row",
+      "21 of 24",
+      false
+    ],
+    [
+      "Input hashes match disk",
+      "24 of 24",
+      true
+    ],
+    [
+      "Cited corpus files appear in the transcript's file reads",
+      "22 of 22",
+      true
+    ],
+    [
+      "Every move names an existing upstream item; splits are subsets",
+      "31 of 31",
+      true
+    ],
+    [
+      "Meter present or UNMEASURED",
+      "24 of 24",
+      true
+    ],
+    [
+      "Each drafting stage has one draft, one audit, required co-signs",
+      "7 of 7",
+      true
+    ],
+    [
+      "Trials blind-labeled before their runtime is shown",
+      "0 of 1",
+      false
+    ]
+  ]
+}
