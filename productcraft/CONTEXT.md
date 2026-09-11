@@ -108,6 +108,28 @@ _Avoid_: approval, ratified state
 An id from one studio's ledger written into the other studio's entry. Each studio writes only its own side; ids cross, reasoning never does.
 _Avoid_: link, backlink, shared index
 
+### The shelf
+
+**Lane manifest**:
+The one tracked file per lane that a seat reads first on every invocation: shelf labels into the private corpus for the seat, then a reading path for the owner. Never the books.
+_Avoid_: reading list, index, bibliography
+
+**Shelf label**:
+One manifest entry: a title, a pointer into the private corpus, and a one-line when-to-read. It names where knowledge sits and never paraphrases what the source says.
+_Avoid_: summary, note, excerpt
+
+**Reading path**:
+The owner's ordered route through a lane's books, held at the end of its manifest and never read by the seat. Its when-line describes the owner's situation, not the book's idea.
+_Avoid_: syllabus, curriculum, book list
+
+**Next shelf**:
+The titles a lane holds in reserve beyond its corpus, listed under the reading path with only a reason they wait. Rows move up into the path when bought; nothing on it is read or ingested.
+_Avoid_: wishlist, backlog, tier 2
+
+**Listen-only title**:
+A book the owner hears but the studio never ingests. It appears only on a reading path, never as a shelf label, so no seat can name it.
+_Avoid_: audiobook, reference, supplementary reading
+
 ### Models
 
 **Baseline**:
