@@ -16,6 +16,8 @@ artifact: ../artifacts/adr-001-retrieval.md   # the artifact this decision shape
 model: opus                          # baseline, or "opus→fable: milestone artifact"
 status: decided                      # decided | superseded | reopened
 supersedes: null                     # id of the entry this replaces, if any
+originates_from: null                # <studio-prefix>-eng-NNN.handoff when this engagement opened from a handoff (Productcraft #271)
+supersedes_external: null            # the other studio's entry id this decision overturns (pc-eng-NNN.dNN); it flips its own entry on the return
 publishable: no                      # no | candidate | published (Sean's per-entry call)
 tags: [retrieval, cost]
 ---
@@ -47,3 +49,7 @@ Auditor seat · verdict · material defects raised and how they were resolved.
 
 Named conditions that reopen this decision (a cost threshold, a model release, a scale mark).
 ```
+
+## Cross-studio references
+
+Only ids cross; each studio writes its own side, never the other's ledger ([the handoff contract](../../productcraft/templates/handoff-contract.md), ratified 2026-09-11). Systemcraft writes `originates_from` on the brief and every entry of an engagement opened from a handoff, and `supersedes_external` on the entry that overturns one of the sender's assumptions; the sender flips its own entry to `superseded` when it reads the return. The sender's side (`hands_off_to`, `informed_by`) is written by the sender.

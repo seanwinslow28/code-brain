@@ -20,7 +20,7 @@ Scaffold only. The studio is being built along the [Productcraft build map](http
 | `books/` | **private — gitignored** | Guard directory only: purchased ebooks live at `~/Books/productcraft/`, outside the repo. Nothing should ever sit here |
 | master skill | public | Lives in `.claude/skills/` per the house rule; its design is owned by the map's Master skill design ticket |
 
-`bench/`, `templates/`, and `lanes/` hold only a placeholder README each; their contents are created by their own map tickets.
+`bench/` and `lanes/` hold only a placeholder README each; `templates/` holds the ledger entry and the handoff contract with its brief. The rest is created by their own map tickets.
 
 ## Non-negotiable rules
 
@@ -31,4 +31,4 @@ Scaffold only. The studio is being built along the [Productcraft build map](http
 5. **Full artifacts forward, never summaries.** The seven seats run as a sequential pipeline; each seat receives the complete artifacts of the seats before it.
 6. **Audits run fresh, in two closed cycles.** An audit is a fresh-context invocation that never sees the drafting conversation. Strategist → Leadership → Discovery → Strategist; Insights → Growth → Business → Delivery → Insights. Every seat audits exactly one artifact and is audited by exactly one peer. The red-team gate is a Codex-run protocol, not a seat.
 7. **One invocation, one seat** *(inherited from Systemcraft eng-003.d30)*. An invocation carries exactly one seat identity, its seat contract, one lane manifest, and its declared target. Provider outages never merge lanes; a planned provider that is unavailable gets a dated, owner-approved substitution or a dated deferral — never a silent swap and never an escalation to Fable without asking.
-8. **Systemcraft owns the AI-system layer.** Platform, technical, and AI-fluency questions route to Systemcraft through the handoff contract; Productcraft crosses typed artifacts and references, never its reasoning.
+8. **Systemcraft owns the AI-system layer.** Platform, technical, and AI-fluency questions route to Systemcraft through [the handoff contract](templates/handoff-contract.md): the Delivery seat crosses a typed brief plus frozen, hashed copies of the six design-train artifacts when the first shipping slice has a Systemcraft-owned layer (a no-handoff verdict is written otherwise); the receiving seat issues one of five typed crossing states; the return after Systemcraft's design-complete gate lands on Delivery for the execution breakdown. Productcraft crosses typed artifacts and references, never its reasoning, and never reads or writes inside Systemcraft's ledger.

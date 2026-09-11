@@ -63,8 +63,36 @@ The Delivery-only engagement that turns a design returned from the Systemcraft h
 _Avoid_: sprint planning, grooming, ticketing
 
 **Handoff brief**:
-The typed packet the Delivery seat produces after its roadmap is co-signed, carrying the ask, referenced artifacts by id, constraints, and a return date across to Systemcraft. It never carries reasoning.
+The typed packet the Delivery seat produces after its roadmap is co-signed, carrying the ask as questions with ids, the six referenced artifacts by permanent id, constraints, and a return date across to Systemcraft. It never carries reasoning, and the artifacts travel beside it as frozen copies, never inside it.
 _Avoid_: spec, handoff doc, PRD
+
+**Crossing**:
+One movement of a typed packet between two studios: the brief going out, or the return coming back. Each crossing is logged on both sides with a typed state; a material change to what crossed is a new crossing.
+_Avoid_: transfer, sync, share
+
+**Frozen copy**:
+A referenced artifact's bytes at the moment of crossing, stamped with its source id and a content hash, so the receiving studio designs against a fixed version. Six travel with a brief, five with a return; raw evidence never freezes.
+_Avoid_: snapshot, attachment, export
+
+**Crossing state**:
+The one typed outcome a receiving seat issues for a crossing: accepted, input-required, rejected, returned, or returned-partial. Written into both studios' handoff folders; never prose-only, never silent.
+_Avoid_: status, acknowledgement
+
+**Intake check**:
+The receiving seat's fresh-context pass over a crossing at its own Open, asking only whether it can do its job from the packet and issuing the crossing state. A check, not an audit: it never judges the other studio's decision.
+_Avoid_: review, audit, acceptance test
+
+**Return note**:
+The typed packet Systemcraft sends back after its design-complete gate: one answer per ask id, the gate verdict, the assumptions it overturned by entry id, the implementation holds the build must close, and the state. Its mirror of the brief.
+_Avoid_: report, summary, deliverable
+
+**No-handoff verdict**:
+The ledger entry Delivery writes when a full train's first shipping slice has no Systemcraft-owned layer, so the absence of a brief is a recorded decision and never a silence.
+_Avoid_: skip, n/a
+
+**Systemcraft-owned layer**:
+An AI system, a platform, or a technical architecture inside the thing being designed. Its presence in the first shipping slice is the handoff trigger; its questions are never answered by a Productcraft seat.
+_Avoid_: tech, the backend, engineering
 
 **Ledger**:
 The private, accreting record of every material decision the studio makes, one entry per decision, each with its "from the canon" line.

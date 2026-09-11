@@ -16,6 +16,7 @@ model: opus                          # baseline, or "opus→fable: <why>"
 status: draft                        # draft | co-signed | audited | final
 evals_cosign: pending                # pending | co-signed <date> — blocks "done"
 auditor: evals-evidence-architect    # fixed by the audit cycle
+originates_from: null                # the handoff brief id when opened from another studio — problem, users, assumptions inherit its graded evidence
 ---
 
 ## Problem
