@@ -1,6 +1,6 @@
 # DESIGN.md — the eval viewer
 
-**Status:** PROPOSED 2026-09-11, on ticket #292. Awaiting Sean's reaction to the sample render and his ratification; nothing below is law until the ticket closes. Two facts are already confirmed by Sean (2026-09-11): labels are entered on the page and exported, and the page is one scrolling document.
+**Status:** APPROVED 2026-09-11 (Sean ratified all five §13 choices on #292 after reacting to the sample render). This is the renderer's design authority. Two facts were confirmed the same day before the write: labels are entered on the page and exported, and the page is one scrolling document.
 **Scope:** every HTML file the trace kit's renderer (#290) emits — one per engagement, into that engagement's folder in the private ledger. The renderer follows this document; if the two disagree, this document is the intent and the renderer is the bug.
 **Sample to react to:** [`samples/pc-eng-000-callboard/eval.html`](samples/pc-eng-000-callboard/eval.html), rendered from an invented engagement by [`samples/render_sample.py`](samples/render_sample.py). Product truth for this family of pages: [`PRODUCT.md`](PRODUCT.md).
 **Provenance:** the #272 resolution (record, labels, ladder, blind trials); Husain's viewer rules (`vault/20_projects/research/2026-09-11-husain-evals-method-for-seat-pipelines.md` §2, §5); the tier-audited viewer prior art (`vault/20_projects/research/2026-09-11-eval-viewer-design-prior-art.md`, twelve recurring principles); the portfolio's design authority (`/Users/seanwinslow/Code-Brain/seanwinslow.com/DESIGN.md` §2, §2.1, §4, §9).
@@ -159,7 +159,7 @@ Every state below has a designed rendering; none is an error message.
 - Size: the empty page is roughly 150 KB (fonts) plus data. An engagement of thirty passes renders under 400 KB. If a render passes 1 MB, something is being embedded that belongs one pointer away.
 - The page says what it was rendered from and when, and that the records are the truth.
 
-## 13 · Unratified choices, put to Sean on #292
+## 13 · Ratified choices (Sean, 2026-09-11, #292)
 
 1. Ink-only verdicts (no red for fail) — §3.
 2. The reading line as prose rather than a KPI row — §5.2.
