@@ -52,7 +52,18 @@ Seat slugs, as used in `seat:` and `auditor:`: `product-strategist`, `discovery-
 
 ## The two closing sections, on every artifact
 
-**`## Moves`** — what this pass did to the upstream material, one line each, from the fixed vocabulary **kept / added / split / merged / dropped**, each line naming the upstream item and its source artifact; a split names every source. The Strategist's origin draft writes "origin draft, no upstream" and lists what it leaned on. Moves are claims until a replay confirms them (#272).
+**`## Moves`** — what this pass did to the upstream material, one line each, from the fixed vocabulary **kept / added / split / merged / dropped**, each line naming the upstream item and its source artifact; a split names every source. The Strategist's origin draft writes "origin draft, no upstream" and lists what it leaned on. Moves are claims until a replay confirms them (#272). The lines are machine-read by the trace kit's rung-0 checker ([productcraft/trace/](../trace/README.md), #290), so they follow one grammar — an em dash after the op, ` from ` before the source:
+
+```markdown
+- kept — O1 from pc-eng-001.strategy
+- added — E1–E5 from evidence/interviews-01-08.md
+- split — OC-1 → OC-1a, OC-1b from pc-eng-001.strategy
+- merged — C2 + C3 → C2 from pc-eng-001.strategy
+- dropped — Action 4 from pc-eng-001.strategy; no source survived the split
+origin draft, no upstream — leaned on: Rumelt's kernel; the brief §2
+```
+
+Items are the ids the artifacts already use (`O2`, `OC-1a`, `KR-2`; ranges `E1–E5` expand) or a short quoted phrase; the checker looks for each in the pass's inputs, and for a split's children in the artifact itself.
 
 **Meter line** — the last line of the file: `meter: <runtime> · <tokens as reported> · <wall-clock>` or `meter: UNMEASURED`. Never an estimate.
 

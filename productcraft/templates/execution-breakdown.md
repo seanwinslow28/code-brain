@@ -78,7 +78,9 @@ Which stories, once shipped, constitute the candidate Systemcraft's Gate 3 will 
 
 - kept — <upstream item> from pc-eng-001.roadmap
 - added — <story> from eng-004.return ask Q2
-- …
+- split — <upstream item> → <story>, <story> from pc-eng-001.roadmap
+- merged — <upstream item> + <upstream item> → <epic> from pc-eng-001.roadmap
+- dropped — <upstream item> from pc-eng-001.roadmap; <why — an overturned assumption by entry id>
 
 meter: <runtime> · <tokens> · <wall-clock>
 ```

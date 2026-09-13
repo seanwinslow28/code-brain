@@ -74,7 +74,10 @@ The claims the team wanted to make and could not. Named, so the Strategist and G
 ## Moves
 
 - kept — <upstream item> from pc-eng-001.strategy
-- …
+- added — <new item> from <source: evidence file, check record, gate finding, brief section>
+- split — <upstream item> → <child>, <child> from pc-eng-001.strategy
+- merged — <upstream item> + <upstream item> → <item> from pc-eng-001.strategy
+- dropped — <upstream item> from pc-eng-001.strategy; <why>
 
 meter: <runtime> · <tokens> · <wall-clock>
 ```

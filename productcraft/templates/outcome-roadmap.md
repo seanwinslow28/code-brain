@@ -58,7 +58,10 @@ Three, observable, each with the roadmap change it would force.
 ## Moves
 
 - kept — <upstream item> from pc-eng-001.business
-- …
+- added — <new item> from <source: evidence file, check record, gate finding, brief section>
+- split — <upstream item> → <child>, <child> from pc-eng-001.business
+- merged — <upstream item> + <upstream item> → <item> from pc-eng-001.business
+- dropped — <upstream item> from pc-eng-001.business; <why>
 
 meter: <runtime> · <tokens> · <wall-clock>
 ```

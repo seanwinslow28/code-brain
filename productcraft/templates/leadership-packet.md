@@ -100,7 +100,10 @@ What changes in who, what, and when, versus how the org runs now; the first chan
 ## Moves
 
 - kept — <upstream item> from pc-eng-001.roadmap
-- …
+- added — <new item> from <source: evidence file, check record, gate finding, brief section>
+- split — <upstream item> → <child>, <child> from pc-eng-001.roadmap
+- merged — <upstream item> + <upstream item> → <item> from pc-eng-001.roadmap
+- dropped — <upstream item> from pc-eng-001.roadmap; <why>
 
 meter: <runtime> · <tokens> · <wall-clock>
 ```

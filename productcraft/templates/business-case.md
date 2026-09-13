@@ -63,7 +63,10 @@ The three ways this case fails, the observable sign of each, and the number at w
 ## Moves
 
 - kept — <upstream item> from pc-eng-001.growth
-- …
+- added — <new item> from <source: evidence file, check record, gate finding, brief section>
+- split — <upstream item> → <child>, <child> from pc-eng-001.growth
+- merged — <upstream item> + <upstream item> → <item> from pc-eng-001.growth
+- dropped — <upstream item> from pc-eng-001.growth; <why>
 
 meter: <runtime> · <tokens> · <wall-clock>
 ```

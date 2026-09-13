@@ -72,6 +72,7 @@ Could any outcome above reward hurting the customer or a third party (the "assum
 ## Moves
 
 origin draft, no upstream — leaned on: <ledger ids, brief sections>
+<!-- a repair after Gate 1 or a loopback uses the five move lines instead, against pc-eng-001.strategy revision N and the finding: grammar in artifact-header.md § Moves -->
 
 meter: <runtime> · <tokens> · <wall-clock>
 ```

@@ -3,6 +3,7 @@
 **Status:** APPROVED 2026-09-11 (Sean ratified all five §13 choices on #292 after reacting to the sample render). This is the renderer's design authority. Two facts were confirmed the same day before the write: labels are entered on the page and exported, and the page is one scrolling document.
 **Scope:** every HTML file the trace kit's renderer (#290) emits — one per engagement, into that engagement's folder in the private ledger. The renderer follows this document; if the two disagree, this document is the intent and the renderer is the bug.
 **Sample to react to:** [`samples/pc-eng-000-callboard/eval.html`](samples/pc-eng-000-callboard/eval.html), rendered from an invented engagement by [`samples/render_sample.py`](samples/render_sample.py). Product truth for this family of pages: [`PRODUCT.md`](PRODUCT.md).
+**Renderer:** built on #290 (2026-09-13) as [`render.py`](render.py) → [`tracekit/viewer.py`](tracekit/viewer.py); its own render of the same invented engagement is at [`samples/synthetic-engagement/trace/eval.html`](samples/synthetic-engagement/trace/eval.html).
 **Provenance:** the #272 resolution (record, labels, ladder, blind trials); Husain's viewer rules (`vault/20_projects/research/2026-09-11-husain-evals-method-for-seat-pipelines.md` §2, §5); the tier-audited viewer prior art (`vault/20_projects/research/2026-09-11-eval-viewer-design-prior-art.md`, twelve recurring principles); the portfolio's design authority (`/Users/seanwinslow/Code-Brain/seanwinslow.com/DESIGN.md` §2, §2.1, §4, §9).
 
 ---

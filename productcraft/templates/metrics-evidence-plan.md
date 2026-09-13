@@ -62,7 +62,10 @@ What is looked at, by whom, how often, and the decision each view feeds. The ope
 ## Moves
 
 - kept — <upstream item> from pc-eng-001.discovery
-- …
+- added — <new item> from <source: evidence file, check record, gate finding, brief section>
+- split — <upstream item> → <child>, <child> from pc-eng-001.discovery
+- merged — <upstream item> + <upstream item> → <item> from pc-eng-001.discovery
+- dropped — <upstream item> from pc-eng-001.discovery; <why>
 
 meter: <runtime> · <tokens> · <wall-clock>
 ```

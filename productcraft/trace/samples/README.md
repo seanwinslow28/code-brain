@@ -1,9 +1,6 @@
-# samples — synthetic renders for the viewer design
+# samples — synthetic renders for the viewer
 
-Everything here is invented. `pc-eng-000` "Callboard" is a fictional casting tool for community theatre; no seat wrote any of it, no book was read for it, no ledger entry exists. It exists so the eval viewer's `DESIGN.md` (#292) had a page to react to.
+Everything here is invented. `pc-eng-000` "Callboard" is a fictional casting tool for community theatre; no seat wrote any of it, no book was read for it, no ledger entry exists. Never point either script at the real ledger.
 
-- `render_sample.py` — the hand-built prototype that emits the sample. It is **not** the trace kit's renderer; #290 builds that, to `../DESIGN.md`, and may lift what it wants from here. Run from `productcraft/trace/`: `python3 samples/render_sample.py`.
-- `pc-eng-000-callboard/eval.html` — the rendered page. Open it from disk; it needs no network.
-- `pc-eng-000-callboard/synthetic-data.json` — the same invented records and labels as data, for #290's tests.
-
-Never point this script at the real ledger.
+- `synthetic-engagement/` — the Callboard engagement as a real folder in the kit's layout (`brief.md`, `artifacts/`, `audits/`, `dNN-*.md`, `trace/pass-NN-*.md`, `trace/labels.md`, `trace/notes.md`) built by [`../tests/synth.py`](../tests/synth.py), with `trace/eval.html` rendered by the kit's own renderer ([`../render.py`](../render.py), #290). Its records carry a real hash chain: repairs overwrite artifacts in place, one bounce loop per stage 1 and 2, a blind shadow pair at stage 6, one coordinator close record. Open `trace/eval.html` from disk. Regenerate from `productcraft/trace/` with `python3 tests/synth.py samples/synthetic-engagement && python3 render.py samples/synthetic-engagement`.
+- `pc-eng-000-callboard/eval.html` — the **#292 prototype render** Sean reacted to and ratified (2026-09-11), emitted by `render_sample.py` from `synthetic-data.json`. Kept as the ratification record; the kit's renderer descends from it. `render_sample.py` is **not** the kit's renderer and is not maintained.

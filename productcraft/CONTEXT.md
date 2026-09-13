@@ -217,3 +217,33 @@ _Avoid_: fallback, reroute
 **Deferral**:
 A dated stop of one seat's branch when its runtime is unavailable and no substitution is approved. The dependent work waits; lanes are never merged to keep moving.
 _Avoid_: skip, pause
+
+### The trace
+
+**Pass**:
+One invocation of one seat, the coordinator's session, or the red-team gate, numbered in launch order across the engagement. The unit the trace records, the viewer rows, and the labels key on.
+_Avoid_: run, call, step
+
+**Pass record**:
+The one immutable markdown file written per pass into the engagement's trace folder: runtime and launch form, instants, meter, hashed inputs and outputs, what was withheld, the checks that later touched it, and what the transcript shows the seat read. It indexes the transcript and never replaces it.
+_Avoid_: trace, log, span
+
+**Labels file**:
+The one file per engagement where Sean's verdicts live, apart from the records: one row per pass, pass or fail with the first failing stage and a critique a new hire could act on. The file is the record; the viewer only drafts rows for it.
+_Avoid_: scorecard, eval results
+
+**Move**:
+One line in an artifact's closing section stating what the pass did to an upstream item, from a vocabulary of five words: kept, added, split, merged, dropped. A claim until a replay confirms it.
+_Avoid_: change, edit, diff
+
+**Shadow pass**:
+A trial: the same inputs as a baseline pass, by hash, run on a different runtime beside the train and labeled blind, its runtime hidden on the page until both rows carry a verdict.
+_Avoid_: A/B, experiment, rerun
+
+**Rung**:
+One step of the earned evals ladder: rung 0 is the deterministic checker with no model; rung 1 the hand-built failure taxonomy after about thirty labels; rung 2 a judge per recurring failure mode, validated against Sean's labels before it gates anything.
+_Avoid_: level, tier, phase
+
+**First failing stage**:
+On a fail, the stage where the problem entered the train, which may be upstream of the pass being read. The one column that builds the transition-failure matrix.
+_Avoid_: root cause, blame
