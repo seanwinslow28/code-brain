@@ -20,7 +20,7 @@ Machinery landing. The studio is being built along the [Productcraft build map](
 | `books/` | **private — gitignored** | Guard directory only: purchased ebooks live at `~/Books/productcraft/`, outside the repo. Nothing should ever sit here |
 | master skill | public | [`.claude/skills/productcraft/SKILL.md`](../.claude/skills/productcraft/SKILL.md), per the house rule — the coordinator: five phases, five engagement types, the stage table with trailing audits and the stale cascade, the three gates, the pass budget, the Close checklist (design ratified 2026-09-13, map ticket #273) |
 
-`bench/` and `lanes/` hold only a placeholder README each; `templates/` is complete — the shared artifact header, the seven seat artifacts (with the seven gap templates as required sections or their own file), the execution breakdown, the check record, the gate findings, the ledger entry, the handoff contract with its brief, and the seat preamble (map ticket #274, 2026-09-13); the master skill is live. The rest is created by their own map tickets.
+`lanes/` holds only a placeholder README; `bench/` is complete — the README and seven seat files carrying each seat's contract, stake, co-sign duty, baseline and toolbelt (map ticket #275, 2026-09-13); `templates/` is complete — the shared artifact header, the seven seat artifacts (with the seven gap templates as required sections or their own file), the execution breakdown, the check record, the gate findings, the ledger entry, the handoff contract with its brief, and the seat preamble (map ticket #274, 2026-09-13); the master skill is live. The rest is created by their own map tickets.
 
 ## Non-negotiable rules
 
