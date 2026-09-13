@@ -588,6 +588,15 @@ crowding the pile, that is a fact he should see rather than a shape he has to
 reverse-engineer; the majority of the deck stays experiment cards, and a deck that
 is mostly news cards has drifted.
 
+**Then the cold read, and nothing is decked until it passes.** Go back over every
+card as a stranger to this repo who was not in the session that wrote it, against the
+rules in [Write the card to him, not to the machine](#write-the-card-to-him-not-to-the-machine):
+no identifier he has to resolve, no abstract noun standing in for a real thing, no
+term of art the card has not defined, and on every experiment card a `What you'd
+actually do:` he could follow tomorrow morning. **A card that fails the cold read is
+not a card with a writing problem — it is a card he cannot pick**, and the deck it
+sits in has already failed. Rewrite it or bank it.
+
 **6. He picks.** Never pick for him. A piece card and a post card may be the same
 subject — one interview, then a fresh subagent per artifact, drafted in the order
 the clocks close (#227, rulings 14–16). The rest bank.
@@ -662,22 +671,69 @@ Declined on #227: a three-minute headline brief (loses the absorb-by-listening
 point) and twenty-to-thirty-minute full read-throughs (the tier audit cannot strip
 figures from someone else's prose without rewriting it).
 
+## Write the card to him, not to the machine
+
+**The card's first reader is Sean, deciding. The machine-readable record is the bank
+entry, and it already carries every sha, issue number and file path.** The card format
+was designed as a handoff object — a picked card becomes stage 1's TOPIC CARD — and the
+Oracle drifted into writing it for the next stage rather than for the person choosing.
+
+Ruled 2026-09-13, on week 3's deck, in his words: *"I'm having trouble understanding
+what the hell these spikes are even proposing. Filled with a shit ton of jargon and AI
+speak... It's writing these down as if it's communicating it to another agent."* He
+could not pick, which means the deck failed at its only job however well it scored.
+
+Three habits caused it. Each has a rule, and each rule is checkable by reading.
+
+**1. Name the thing. Never make him resolve an identifier.** A sha, an issue number, a
+ticket or a file path may appear on `Evidence:` and nowhere else. In the prose, say what
+the thing *is*: not *"#258 ruled the axis was wrong,"* but *"the week I found three of my
+own sample posts were teaching the machine to be a jerk."* The same goes for names only
+this repo knows — *the astra drift*, *the corpus*, *the shaping context*, *route 1* — say
+what happened, then name it if the name earns its place.
+
+**2. No abstract noun standing in for a concrete thing.** *The axis. The keeper. The
+provocation. The instrument. The surface. Drift vectors. The acceptance pass.* Every one
+of those is a real, describable thing, and the abstraction is always shorter for the
+writer and longer for the reader. A term of art is allowed only when the card says what
+it means the first time it appears in that card. **A card may not use a word he would
+have to ask about.** His own machine's vocabulary — deck, bank, spike, lane, lens — is
+his and stays; everything else earns its place in the sentence or goes.
+
+**3. An experiment card says what he would physically do, and what it costs.** *"Do this,
+expect that"* is not enough when *this* cannot be pictured. Every experiment card carries
+`What you'd actually do:` — the real steps, in order, in the order he would take them,
+ending with roughly how long it takes. An experiment he cannot start on a Tuesday morning
+from the card alone is a research direction, not an experiment, and it banks.
+
+**The cold-read check, before anything is decked.** Read every card as somebody who has
+never seen this repo and was not in the session that produced it. Any sentence that only
+parses for someone who was there gets rewritten. Any sentence that needs a lookup to mean
+anything gets rewritten. This runs at step 5, on the whole deck, before the console is
+built — it is not a polish pass, it is the gate that decides whether a card is pickable.
+
+**The bank keeps the readable card, not a machine version of it.** There is no second,
+denser copy. If the terse phrasing carried information the plain one lost, the plain one
+was written badly; write it again rather than keeping both.
+
 ## Card format
 
 ```
-SPIKE <n> — <title>
+SPIKE <n> — <title, in plain words — what the piece or post is actually about>
 Deck: piece | post
 Source: internal:<git|issue|daily|sidecar|fleet|tickets> | external:<where> | news:<where> | frame:<lens id>
 Evidence: <sha | issue # | path | URL>                              ← done-thing cards
-Evidence: <provocation — the news URL or the sweep item> · Status: unrun   ← experiment cards
+Evidence: <what prompted it — the news URL or the sweep item> · Status: unrun   ← experiment cards
 Query: <external cards only — the shape and the exact query that surfaced it>
 Signals: POV <n> · Story <n> · Emotion <n> · Framework <n> · Depth <n> · Spine <n> = <total>/18      ← piece deck
 Signals: Angle <n> · Clock <n> · Fit <n> · Image <n> · Reply-hook <n> = <total>/15 · Spine-X: pass   ← post deck
 Cuts to LinkedIn: yes | no
-The moment | The experiment: <one or two lines — what happened, or "do this, expect that">
-Why it's a piece | Why it posts: <the take or the shape it would carry>
+The moment | The idea: <what happened, or what the experiment would find out — plain words, no identifiers>
+What you'd actually do: <experiment cards only — the real steps in order, ending with how long it takes>
+What you'd expect | Why it's a piece | Why it posts: <experiment cards state the prediction AND what result
+                                                      would prove it wrong; done-thing cards state the take>
 Lane / medium: <suggested contract under contracts/>
-Lens: <which interview lens — and what the interview has to go get>
+Lens: <which interview lens — and, in plain words, what the interview has to go get>
 ```
 
 Field rules:
@@ -696,6 +752,12 @@ Field rules:
   Oracle's job in this field is the second half: what the interview has to go get.
 - `Status: unrun` is mandatory on every experiment card and forbidden on a
   done-thing card. It is the line that says "nothing here is a claim yet."
+- `What you'd actually do:` is mandatory on every experiment card and absent from
+  done-thing cards. Steps he could follow without asking a question, in the order he
+  would take them, ending with a rough time cost — an afternoon, a week of nights, two
+  hours. **If the steps cannot be written, the experiment is not specified and the card
+  banks** (see "Write the card to him, not to the machine"). This is the same bar
+  `Interviewability` sets for the interview, applied to the doing.
 - `Cuts to LinkedIn:` is a tag. It never appears in a sum.
 
 A picked card becomes the TOPIC CARD at stage 1. It is a proposal, not a brief: he
