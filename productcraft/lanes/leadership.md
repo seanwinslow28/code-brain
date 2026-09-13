@@ -57,13 +57,30 @@ concluding this lane has an answer.
 
 ## Book layer
 
-Empty until [book ingestion](https://github.com/seanwinslow28/code-brain/issues/277) runs —
-and this lane feels that emptiness hardest, because its four books are the apparatus rather
-than the supplement. They are in hand at `~/Books/productcraft/` and appear in the reading
-path below with `pending` corpus state; chapter pointers land here once they are ingested.
-Until then, when a task needs a charter, a planning cadence, a six-page narrative or the
-managerial-leverage arithmetic, say the lane cannot reach it rather than citing a chapter
-you could not open.
+All four of this lane's books are ingested. This is the lane the emptiness hit hardest,
+because here the books are the apparatus rather than the supplement — the charter, the
+planning cadence, the six-page narrative and the managerial-leverage arithmetic all now
+resolve.
+
+- **Grove, *High Output Management* — ch. 3, 4, 12, 13** — [`books/high-output-management/`](../corpus/books/high-output-management/) — leverage, one-on-ones, matching supervision to task-relevant maturity, and running a real performance review.
+- **Bryar & Carr, *Working Backwards* — ch. 1, 3** — [`books/working-backwards/`](../corpus/books/working-backwards/) — codifying operating principles, designing accountable structures, or replacing exhortation with enforceable mechanism.
+- **Cagan & Jones, *EMPOWERED* — ch. 3, 7–11, 26–35** — [`books/empowered/`](../corpus/books/empowered/) — standing up PM coaching, assessing a struggling report, or making staffing a manager's own job.
+- **Hughes Johnson, *Scaling People* — ch. 1, 5** — [`books/scaling-people/`](../corpus/books/scaling-people/) — coaching a struggling report, running reviews or calibration, or managing someone out.
+- **Torres, *Continuous Discovery Habits* — ch. 3, 13, 14** — [`books/continuous-discovery-habits/`](../corpus/books/continuous-discovery-habits/) — negotiating team goals, bringing stakeholders along, or changing practice without authority.
+- **Lombardo, McCarthy, Ryan & Connors, *Product Roadmaps Relaunched* — ch. 8, 11** — [`books/product-roadmaps-relaunched/`](../corpus/books/product-roadmaps-relaunched/) — driving stakeholder alignment one-on-one, or relaunching a broken planning process org-wide.
+- **Bland & Osterwalder, *Testing Business Ideas* — ch. 12, 13** — [`books/testing-business-ideas/`](../corpus/books/testing-business-ideas/) — leader language that makes evidence beat opinion, and staged innovation funding.
+
+**One gap this lane must not paper over.** The reading path below sends you to *Scaling
+People* for a real artifact to copy rather than a principle — and the artifacts are the
+part that survived capture worst. Its templates (the interview rubric's poor/good/strong
+bands, the promotion proposal, the compensation guide, the PIP and managing-out checklists)
+are held as *structure*, not band-by-band text, and Table 4's job-level ladder is
+unrecoverable beyond the six level names. Copy from it expecting a skeleton, not a form.
+
+Two live tensions worth knowing rather than resolving: Grove's 1995 Introduction argues for
+fewer levels and wider spans, contradicting his own ch. 3 six-to-eight rule; and *Working
+Backwards* carries Amazon's **retraction of the two-pizza team**, which is the part of that
+model most often cited without it. EMPOWERED's case study is a composite, not one quarter.
 
 ## Reading path
 
@@ -73,10 +90,10 @@ supplement.
 
 | # | Title | Read this when | Format | Audio | Corpus |
 |---|---|---|---|---|---|
-| 1 | Grove, *High Output Management* (1983/1995) | before your first Leadership engagement | Apple Books | Marc Cashman · 8:02 | pending |
-| 2 | Bryar & Carr, *Working Backwards* (2021) | before you write a decision memo or a business case | Apple Books | Robert Petkoff · 10:41 | pending |
-| 3 | Cagan & Jones, *EMPOWERED* (2020) | when an engagement's question is about the team, not the product | Apple Books | Marty Cagan · 11:09 | pending |
-| 4 | Hughes Johnson, *Scaling People* (2023) | when the operating-model doc needs a real artifact to copy, not a principle | Apple Books | Claire Hughes Johnson · 11:32 | pending |
+| 1 | Grove, *High Output Management* (1983/1995) | before your first Leadership engagement | Apple Books | Marc Cashman · 8:02 | ingested |
+| 2 | Bryar & Carr, *Working Backwards* (2021) | before you write a decision memo or a business case | Apple Books | Robert Petkoff · 10:41 | ingested |
+| 3 | Cagan & Jones, *EMPOWERED* (2020) | when an engagement's question is about the team, not the product | Apple Books | Marty Cagan · 11:09 | ingested |
+| 4 | Hughes Johnson, *Scaling People* (2023) | when the operating-model doc needs a real artifact to copy, not a principle | Apple Books | Claire Hughes Johnson · 11:32 | ingested |
 
 ### Next
 

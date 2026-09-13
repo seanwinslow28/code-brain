@@ -55,11 +55,21 @@ first for definitions and the second for whether a number can be believed.
 
 ## Book layer
 
-Empty until [book ingestion](https://github.com/seanwinslow28/code-brain/issues/277) runs.
-The lane's books are in hand at `~/Books/productcraft/` and appear in the reading path below
-with `pending` corpus state; chapter pointers land here once they are ingested. Kohavi's
-free papers above are the argument and the evidence — the book is the systematic treatment,
-so until it is ingested, say so rather than citing a chapter you could not open.
+Kohavi is ingested, and it is the systematic treatment the free papers argue toward.
+
+- **Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* — ch. 3, 6, 7, 21** — [`books/trustworthy-online-controlled-experiments/`](../corpus/books/trustworthy-online-controlled-experiments/) — defining metrics, building an OEC, or deciding whether a measured result can be trusted at all.
+- **Ellis & Brown, *Hacking Growth* — ch. 2, 3, 6** — [`books/hacking-growth/`](../corpus/books/hacking-growth/) — designing user surveys, finding a behavioral threshold, or diagnosing where users drop off.
+- **Rumelt, *Good Strategy Bad Strategy* — ch. 2, 16** — [`books/good-strategy-bad-strategy/`](../corpus/books/good-strategy-bad-strategy/) — hunting the reframe or anomaly that turns a known situation into advantage.
+
+**Read the Kohavi equations with care.** Every numbered equation was flattened in capture.
+Where the surrounding prose named every variable the formula was reconstructed and is
+labelled as a reconstruction in that chapter's OCR note. Where it did not — the
+delta-method variance estimator (18.5–18.6) and the dilution formulas (20.2–20.6) — **no
+formula is given at all**, by design; go to the original for those two. Table 2.1's cells
+are gone though its narrative result survives, and subscript notation (Yᵀ/Yᶜ) is mangled
+throughout, which is why chs. 18, 19 and 23 describe some notation in words. The *Hacking
+Growth* cohort worksheet is corrupted and contradicts its own prose — its numbers come
+from the narration, not the table.
 
 ## Reading path
 
@@ -67,7 +77,7 @@ Corpus states are as of the `updated:` date in the header.
 
 | # | Title | Read this when | Format | Audio | Corpus |
 |---|---|---|---|---|---|
-| 1 | Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* (2020) | before you sign off on any experiment design | Apple Books | — none | pending |
+| 1 | Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* (2020) | before you sign off on any experiment design | Apple Books | — none | ingested |
 | 2 | Knaflic, *Storytelling with Data* | when a metrics plan has to be read by people who did not build it | listen | Cole Nussbaumer Knaflic · 5:43 | not in corpus |
 | 3 | Bland & Osterwalder, *Testing Business Ideas* | — read on the discovery path | | | |
 | 4 | Ellis & Brown, *Hacking Growth* | — read on the growth path | | | |

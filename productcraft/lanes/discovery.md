@@ -48,12 +48,25 @@ when it is absent the lane degrades all at once — declare `manifest-only` and 
 
 ## Book layer
 
-Empty until [book ingestion](https://github.com/seanwinslow28/code-brain/issues/277) runs.
-The lane's books are in hand at `~/Books/productcraft/` and appear in the reading path below
-with `pending` corpus state; chapter pointers land here once they are ingested. Two known
-holes in the free layer until then: sample size and experiment design (Torres's hypothesis-
-testing page is a link hub with no body), and the experiment library itself, which is
-Bland & Osterwalder's. Say so rather than citing a chapter you could not open.
+All three of this lane's books are ingested, and between them they close both holes the
+free layer left open — experiment design with success criteria agreed in advance, and the
+experiment library itself.
+
+- **Torres, *Continuous Discovery Habits* — ch. 2, 5, 6, 7, 9, 10** — [`books/continuous-discovery-habits/`](../corpus/books/continuous-discovery-habits/) — framing an opportunity space, running customer interviews, or testing a solution's assumptions.
+- **Fitzpatrick, *The Mom Test* — ch. 1, 2, 3, 7** — [`books/the-mom-test/`](../corpus/books/the-mom-test/) — interviews return praise and hypotheticals, or answers contradict because the segment is too broad.
+- **Bland & Osterwalder, *Testing Business Ideas* — ch. 3, 8, 9** — [`books/testing-business-ideas/`](../corpus/books/testing-business-ideas/) — prioritizing assumptions, selecting an experiment by rule, or picking from the experiment library.
+- **Singer, *Shape Up* — ch. 3, 4, 5** — [`books/shape-up/`](../corpus/books/shape-up/) — narrowing a vague request into a bounded problem and roughing out a de-risked solution.
+- **Patton, *User Story Mapping* — ch. 13, 14, 15** — [`books/user-story-mapping/`](../corpus/books/user-story-mapping/) — framing opportunities, or designing the smallest test of an assumption.
+- **Bryar & Carr, *Working Backwards* — ch. 5, 10** — [`books/working-backwards/`](../corpus/books/working-backwards/) — defining a product before building it, or sizing a market by subtraction.
+- **Ramanujam & Tacke, *Monetizing Innovation* — ch. 4, 5** — [`books/monetizing-innovation/`](../corpus/books/monetizing-innovation/) — testing what customers will actually pay before committing to a build.
+
+One loss to know before you lean on it: **every experiment card's dot ratings in *Testing
+Business Ideas* are unreadable** — evidence strength, cost, setup and run time, and the
+desirability/feasibility/viability coverage were dot glyphs the capture reduced to noise.
+All 44 experiments are catalogued by name and method, and the rating *scales* survive in
+ch. 8, but no per-experiment rating is claimed anywhere. The library's built-in triage
+layer is missing; select by ch. 8's three questions and four rules of thumb instead. Eleven
+figures in Torres are prose reconstructions, flagged chapter by chapter.
 
 ## Reading path
 
@@ -61,9 +74,9 @@ Corpus states are as of the `updated:` date in the header.
 
 | # | Title | Read this when | Format | Audio | Corpus |
 |---|---|---|---|---|---|
-| 1 | Torres, *Continuous Discovery Habits* (2021) | before your first Discovery engagement | Apple Books | Teresa Torres · 7:09 | pending |
-| 2 | Fitzpatrick, *The Mom Test* (2013) | before you talk to a single customer | EPUB | Rob Fitzpatrick · 3:50 | pending |
-| 3 | Bland & Osterwalder, *Testing Business Ideas* (2019) | when an engagement needs an experiment picked, not invented | Apple Books | — none | pending |
+| 1 | Torres, *Continuous Discovery Habits* (2021) | before your first Discovery engagement | Apple Books | Teresa Torres · 7:09 | ingested |
+| 2 | Fitzpatrick, *The Mom Test* (2013) | before you talk to a single customer | EPUB | Rob Fitzpatrick · 3:50 | ingested |
+| 3 | Bland & Osterwalder, *Testing Business Ideas* (2019) | when an engagement needs an experiment picked, not invented | Apple Books | — none | ingested |
 
 ### Next
 

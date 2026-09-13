@@ -62,12 +62,24 @@ and Cutler the flow, sizing and diagnostic material no other source in the studi
 
 ## Book layer
 
-Empty until [book ingestion](https://github.com/seanwinslow28/code-brain/issues/277) runs.
-The lane's books are in hand at `~/Books/productcraft/` and appear in the reading path below
-with `pending` corpus state; chapter pointers land here once they are ingested. The free
-layer above is strong on goals and flow and silent on story mapping and the theme-based
-roadmap artifact — those are Patton's and Lombardo's — so until they are ingested, say so
-rather than citing a chapter you could not open.
+All three of this lane's books are ingested, and they close the two silences the free layer
+named — story mapping, and the theme-based roadmap artifact.
+
+- **Singer, *Shape Up* — ch. 8, 11, 12, 13, 14** — [`books/shape-up/`](../corpus/books/shape-up/) — sizing cycles, slicing work into scopes, reporting progress, or cutting scope to a deadline.
+- **Patton, *User Story Mapping* — ch. 4, 11, 16, 17** — [`books/user-story-mapping/`](../corpus/books/user-story-mapping/) — sizing, splitting, sequencing or planning work into buildable, risk-aware slices.
+- **Lombardo, McCarthy, Ryan & Connors, *Product Roadmaps Relaunched* — ch. 2, 6, 10** — [`books/product-roadmaps-relaunched/`](../corpus/books/product-roadmaps-relaunched/) — composing the roadmap artifact, signalling confidence and stage, or absorbing mid-flight change.
+- **Grove, *High Output Management* — ch. 1, 2, 6** — [`books/high-output-management/`](../corpus/books/high-output-management/) — bottleneck scheduling, indicator design and forecasting, and the planning process that became OKRs.
+- **Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* — ch. 4, 12, 15** — [`books/trustworthy-online-controlled-experiments/`](../corpus/books/trustworthy-online-controlled-experiments/) — planning a staged rollout, release safety rings, or platform maturity investment.
+- **Hughes Johnson, *Scaling People* — ch. 2, 4** — [`books/scaling-people/`](../corpus/books/scaling-people/) — setting goals and cadence, structuring teams, or unblocking cross-team dependencies.
+
+All three primary books are diagram-led and **every figure was lost in extraction** — the
+hill charts and breadboards in *Shape Up*, 134 images in Patton (map anatomies, the
+Opportunity Canvas layout, the skateboard-to-car illustration), 92 in Lombardo, whose
+roadmap exhibits *are* images. Each is reconstructed from prose and flagged in place; treat
+any visual-layout claim as inference from text. The sharpest single loss is Lombardo's ROI
+scorecards — the narrative explains why feature A beat B and C, but the numeric cells are
+gone. Patton also reports two contested statistics as the book states them (Standish's
+64–75% unused features, the 75–90% startup-failure figure), both flagged with their vintage.
 
 ## Reading path
 
@@ -75,9 +87,9 @@ Corpus states are as of the `updated:` date in the header.
 
 | # | Title | Read this when | Format | Audio | Corpus |
 |---|---|---|---|---|---|
-| 1 | Singer, *Shape Up* (2019) | first on this path — short, free, and the cheapest way to see the whole shape of the lane | PDF | — none | pending |
-| 2 | Patton, *User Story Mapping* (2014) | before you slice a backlog into releases | EPUB | Roy McCrerey · 8:19 | pending |
-| 3 | Lombardo et al., *Product Roadmaps Relaunched* (2017) | before your first outcome roadmap | EPUB | Theodore O'Brien · 6:41 | pending |
+| 1 | Singer, *Shape Up* (2019) | first on this path — short, free, and the cheapest way to see the whole shape of the lane | PDF | — none | ingested |
+| 2 | Patton, *User Story Mapping* (2014) | before you slice a backlog into releases | EPUB | Roy McCrerey · 8:19 | ingested |
+| 3 | Lombardo et al., *Product Roadmaps Relaunched* (2017) | before your first outcome roadmap | EPUB | Theodore O'Brien · 6:41 | ingested |
 | 4 | Doerr, *Measure What Matters* | when you want the provenance behind the OKR translation, not the method | listen | narrator not captured · 7:56 | not in corpus |
 | 5 | Bryar & Carr, *Working Backwards* | — read on the leadership path | | | |
 

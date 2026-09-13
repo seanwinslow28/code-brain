@@ -60,10 +60,21 @@ published — carry that year forward or do not carry the number.
 
 ## Book layer
 
-Empty until [book ingestion](https://github.com/seanwinslow28/code-brain/issues/277) runs.
-The lane's books are in hand at `~/Books/productcraft/` and appear in the reading path below
-with `pending` corpus state; chapter pointers land here once they are ingested. Say so rather
-than citing a chapter you could not open.
+Ellis & Brown is ingested and anchors the lane; Dunford and Fitzpatrick reach in from
+their own lanes for positioning and for early-funnel qualification.
+
+- **Ellis & Brown, *Hacking Growth* — ch. 3, 4, 5, 7** — [`books/hacking-growth/`](../corpus/books/hacking-growth/) — choosing a growth metric, setting experiment cadence, picking acquisition channels, or diagnosing churn.
+- **Dunford, *Obviously Awesome* — ch. 8, 10** — [`books/obviously-awesome/`](../corpus/books/obviously-awesome/) — defining target accounts, or validating a pitch against real prospects.
+- **Fitzpatrick, *The Mom Test* — ch. 5, 6** — [`books/the-mom-test/`](../corpus/books/the-mom-test/) — early meetings end without next steps, or pipeline depends entirely on cold outreach.
+
+Two cautions on *Hacking Growth*. Its vintage is **2017, with examples from 2008–2016 and
+entirely pre-GDPR, pre-CCPA and pre-ATT** — the personalization, retargeting and push
+tactics in chs. 6–8 are written for a consent regime that no longer exists. And the book's
+own viral-coefficient worked example does not reconcile arithmetically as captured (3,125
+new users on a 25,000 base is called 50% growth; it is 12.5%), flagged in ch. 5 rather than
+repaired, because it cannot be told whether that is capture damage or a published error.
+The ch. 8 persona cards have transposed lifetime-value figures that invert the chapter's
+argument; only the prices and CAC there are reliable.
 
 ## Reading path
 
@@ -71,7 +82,7 @@ Corpus states are as of the `updated:` date in the header.
 
 | # | Title | Read this when | Format | Audio | Corpus |
 |---|---|---|---|---|---|
-| 1 | Ellis & Brown, *Hacking Growth* (2017) | before your first Growth engagement | Apple Books | Sean Ellis & Morgan Brown · 10:43 | pending |
+| 1 | Ellis & Brown, *Hacking Growth* (2017) | before your first Growth engagement | Apple Books | Sean Ellis & Morgan Brown · 10:43 | ingested |
 | 2 | Dunford, *Obviously Awesome* | — read on the strategy path | | | |
 | 3 | Ramanujam & Tacke, *Monetizing Innovation* | — read on the business path | | | |
 | 4 | Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* | — read on the insights path | | | |

@@ -56,12 +56,19 @@ the vintage with it — a threshold without a year is a defect, not a shortcut.
 
 ## Book layer
 
-Empty until [book ingestion](https://github.com/seanwinslow28/code-brain/issues/277) runs.
-The lane's books are in hand at `~/Books/productcraft/` and appear in the reading path below
-with `pending` corpus state; chapter pointers land here once they are ingested. The free
-layer above covers unit economics well and pricing *design* barely — willingness-to-pay
-research and the nine-step method are Ramanujam & Tacke's, so until they are ingested, say
-so rather than citing a chapter you could not open.
+Ramanujam & Tacke is ingested, and it supplies exactly what the free layer lacked: pricing
+*design* rather than unit-economics arithmetic.
+
+- **Ramanujam & Tacke, *Monetizing Innovation* — ch. 7, 8** — [`books/monetizing-innovation/`](../corpus/books/monetizing-innovation/) — choosing how to charge, setting a pricing strategy, or defending a price. Ch. 6 carries the bundling arithmetic the other two lean on.
+
+Two material losses. **Figure 4.2 lost its entire dollar column** — the per-feature
+willingness-to-pay figures — leaving only the ten feature names and their ranking, so the
+WTP *method* is intact in ch. 4 while its worked numbers are not. Figure 14.1's RACI grid
+lost its column-to-letter mapping, and no accountabilities were invented to fill it. On
+vintage: 2016 publication on 2014–15 data, and several marquee cases have aged badly as
+examples — Uber pre-IPO, LinkedIn pre-Microsoft, Optimizely pre-acquisition, Evernote. The
+frameworks hold; the company outcomes are snapshots, and the SaaS pricing landscape the
+book treats as novel has since inverted.
 
 ## Reading path
 
@@ -69,7 +76,7 @@ Corpus states are as of the `updated:` date in the header.
 
 | # | Title | Read this when | Format | Audio | Corpus |
 |---|---|---|---|---|---|
-| 1 | Ramanujam & Tacke, *Monetizing Innovation* (2016) | before an engagement where price is still an open question | Apple Books | Darren Stephens · 7:28 | pending |
+| 1 | Ramanujam & Tacke, *Monetizing Innovation* (2016) | before an engagement where price is still an open question | Apple Books | Darren Stephens · 7:28 | ingested |
 | 2 | Bryar & Carr, *Working Backwards* | — read on the leadership path | | | |
 
 ### Next

@@ -36,11 +36,21 @@ the task. Seats stop at `## Reading path`; that section is the owner's.
 
 ## Book layer
 
-Empty until [book ingestion](https://github.com/seanwinslow28/code-brain/issues/277) runs.
-The lane's books are in hand at `~/Books/productcraft/` and appear in the reading path below
-with `pending` corpus state; chapter pointers land here once they are ingested. Until then
-this lane's positioning method in particular has no free-canon entry — Dunford carries it
-and is not yet readable, so say so rather than citing a chapter you could not open.
+Both of this lane's books are ingested. Rumelt supplies the instrument you write with and
+the instrument you audit with; Dunford supplies the positioning method the free layer has
+no entry for at all.
+
+- **Rumelt, *Good Strategy Bad Strategy* — ch. 3, 5** — [`books/good-strategy-bad-strategy/`](../corpus/books/good-strategy-bad-strategy/) — auditing a strategy document, or writing one from diagnosis through to coordinated action.
+- **Dunford, *Obviously Awesome* — ch. 2, 7, 9** — [`books/obviously-awesome/`](../corpus/books/obviously-awesome/) — choosing a market category, a competitive frame, or a differentiation claim.
+- **Cagan & Jones, *EMPOWERED* — ch. 12, 37–39, 48–51, 62–69** — [`books/empowered/`](../corpus/books/empowered/) — a company has goals and a roadmap but nothing between them, or focus needs an intervention.
+
+Read the corpus honestly: every figure in Rumelt was destroyed in capture and is described
+from prose only, and the ch. 10 policy-to-target table there is a reconstruction from the
+book's classroom dialogue, not a transcription. The *Obviously Awesome* in the corpus is
+the **second edition** (2026), which restructures the first edition's ten steps into five
+components plus five steps and adds the Pre-Work chapter — anything citing the 2019
+structure will not match. EMPOWERED's strategic-context diagram is a prose reconstruction,
+and its case study is a composite the author assembled, not one real quarter.
 
 ## Reading path
 
@@ -49,8 +59,8 @@ Corpus states are as of the `updated:` date in the header.
 | # | Title | Read this when | Format | Audio | Corpus |
 |---|---|---|---|---|---|
 | 1 | Cagan, *INSPIRED* (2nd ed.) | first, before any lane — the studio's opening listen | listen | Marty Cagan · 8:46 | not in corpus |
-| 2 | Rumelt, *Good Strategy Bad Strategy* (2011) | before your first Strategist engagement | Apple Books | Sean Runnette · 11:49 | pending |
-| 3 | Dunford, *Obviously Awesome* (2019; updated 2nd ed. 2026) | before an engagement whose positioning is unsettled or contested | Apple Books | April Dunford · 2:49 | pending |
+| 2 | Rumelt, *Good Strategy Bad Strategy* (2011) | before your first Strategist engagement | Apple Books | Sean Runnette · 11:49 | ingested |
+| 3 | Dunford, *Obviously Awesome* (2nd ed. 2026) | before an engagement whose positioning is unsettled or contested | Apple Books | April Dunford · 2:49 | ingested |
 | 4 | Cagan & Jones, *EMPOWERED* | — read on the leadership path | | | |
 | 5 | Lombardo et al., *Product Roadmaps Relaunched* | — read on the delivery path | | | |
 
