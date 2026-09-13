@@ -1,10 +1,30 @@
 # Templates
 
-**Live:**
+Public machinery; filled artifacts are private (`ledger/engagements/<eng-id>/artifacts/`). Every seat artifact opens with the shared header and closes with `## Moves` and a meter line — defined once in [artifact-header.md](artifact-header.md) — and ends with its own red-team checklist, so every attack the gate runs has a named home (ratified 2026-09-13, map ticket [#274](https://github.com/seanwinslow28/code-brain/issues/274)).
 
-- [ledger-entry.md](ledger-entry.md) — the decision-ledger entry (schema ratified 2026-09-10, map ticket #268).
-- [handoff-contract.md](handoff-contract.md) — the Systemcraft handoff contract, the law for both directions (ratified 2026-09-11, map ticket #271).
-- [handoff-brief.md](handoff-brief.md) — the outbound packet the Delivery seat crosses to Systemcraft; its mirror, the return note, lives at [systemcraft/templates/handoff-return.md](../../systemcraft/templates/handoff-return.md).
-- [seat-preamble.md](seat-preamble.md) — the standing behavior every seat invocation carries (explain-why, the canon line, grounding, `## Moves`, the meter line); the coordinator prepends it verbatim to every dispatch (ratified 2026-09-13, map ticket #273).
+**Law and standing behavior**
 
-**Pending:** One artifact template per seat-owned artifact, including the leadership seat's hard contracts, arrives here via the build map's "Artifact templates per seat" ticket. See [../CLAUDE.md](../CLAUDE.md).
+- [artifact-header.md](artifact-header.md) — the shared frontmatter (`status`, fixed `auditor`, `cosign`, `grounding`, `thin_lane`, `revision` / `stale_from`), who writes which field, the status lifecycle, the artifact-id table.
+- [seat-preamble.md](seat-preamble.md) — the standing behavior every seat invocation carries; prepended verbatim to every dispatch (#273).
+- [ledger-entry.md](ledger-entry.md) — the decision-ledger entry with the canon line (#268).
+- [handoff-contract.md](handoff-contract.md) — the Systemcraft handoff, both directions (#271).
+
+**The seven seat artifacts, in train order**
+
+| Stage | Seat | Template | Gap templates it carries |
+|---|---|---|---|
+| 1 | Product Strategist | [strategy-pov.md](strategy-pov.md) | point-of-view statement |
+| 2 | Discovery Lead | [discovery-packet.md](discovery-packet.md) | — |
+| 3 | Insights & Analytics | [metrics-evidence-plan.md](metrics-evidence-plan.md) | — |
+| 4 | Growth & Distribution Architect | [growth-gtm.md](growth-gtm.md) | activation and retention playbook; growth-experiment design |
+| 5 | Business & Economics Modeler | [business-case.md](business-case.md) | business case; unit-economics model |
+| 6 | Delivery & Execution Lead | [outcome-roadmap.md](outcome-roadmap.md), then [handoff-brief.md](handoff-brief.md) | — |
+| 7 | Product Leadership & Org Designer | [leadership-packet.md](leadership-packet.md) + [decision-memo.md](decision-memo.md) | decision memo; operating-model doc |
+
+**Engagements beyond the train, and the checks**
+
+- [execution-breakdown.md](execution-breakdown.md) — the Delivery-only engagement after Systemcraft's return: intake check, epics → stories (design set flagged, implementation set) → first sprint plan → filed issues.
+- [check-record.md](check-record.md) — the artifact of every co-sign and trailing audit, plus the four-rung evidence-strength scale.
+- [gate-findings.md](gate-findings.md) — the red-team gate's findings file with Productcraft's typed verdicts (`STRATEGY | HANDOFF | TRAIN | AUDIT`) and the whole-train attacks.
+
+Systemcraft's [red-team-protocol](../../systemcraft/templates/red-team-protocol.md), [close-digest](../../systemcraft/templates/close-digest.md) and [status-vocabulary](../../systemcraft/templates/status-vocabulary.md) are inherited by link until `craftwork` extracts them.

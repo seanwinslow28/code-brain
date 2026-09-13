@@ -60,3 +60,14 @@ Raw evidence pointers Systemcraft may follow on this disk but does not receive: 
 3. Run the Codex gate on this file; record the verdict in `gate:` and in the entry's `## Checks`.
 4. Copy `brief.md`, `manifest.md` and `artifacts/` into Systemcraft's engagement `handoff/inbound/`; open `crossing.md` on both sides with `crossed · <date> · delivery-execution · <one line>`.
 5. Wait for the state. `input-required` → repair and re-cross (re-gate only if the ask changed). `rejected` → record it, retype or drop.
+
+## Red-team checklist (Gate 2 anchor; runs on the vendor that did not last write the brief)
+
+- **Product decisions in disguise** — an ask in `## The ask` that a Productcraft seat owns (pricing, positioning, an outcome); the brief may not export its own decisions.
+- **Hash drift** — a frozen copy whose `sha256` does not match the bytes in `artifacts/`, or a referenced artifact at a revision the train has since staled.
+- **Constraints without a source** — a `## Constraints` line that no section of a referenced artifact states (first slice from the roadmap, metrics from the Insights plan, envelope from the business case, non-goals from the strategy).
+- **Reasoning that crossed** — ledger text, a transcript, a check record, or the drafting conversation inside the brief or a frozen copy.
+- **Raw evidence that crossed** — anything under `## Stays behind` also present in `artifacts/`.
+- **A return date with no variance path** — `return_by` set with no line saying what happens if it slips.
+- **The silent layer** — the roadmap's first slice names a Systemcraft-owned layer the ask does not cover, or the ask covers a layer the slice does not contain.
+- **Unanswerable asks** — a question with no id, or two questions under one id, so the return note cannot answer it.
