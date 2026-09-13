@@ -6,7 +6,7 @@ The second studio built by the Systemcraft method: a seven-seat specialist bench
 
 ## Status
 
-Scaffold only. The studio is being built along the [Productcraft build map](https://github.com/seanwinslow28/code-brain/issues/264) — the wayfinder map holds the ratified decisions and the open design tickets. Nothing in this folder is final until its owning ticket closes.
+Machinery landing. The studio is being built along the [Productcraft build map](https://github.com/seanwinslow28/code-brain/issues/264) — the wayfinder map holds the ratified decisions and the open design tickets. Nothing in this folder is final until its owning ticket closes.
 
 ## Layout
 
@@ -18,9 +18,9 @@ Scaffold only. The studio is being built along the [Productcraft build map](http
 | `corpus/` | **private — gitignored** | Two-layer reference corpus: free-canon distillates + book-to-skill ingests |
 | `ledger/` | **private — gitignored** | The decision ledger — every design the studio produces, accreting per engagement, each entry carrying its "from the canon" line |
 | `books/` | **private — gitignored** | Guard directory only: purchased ebooks live at `~/Books/productcraft/`, outside the repo. Nothing should ever sit here |
-| master skill | public | Lives in `.claude/skills/` per the house rule; its design is owned by the map's Master skill design ticket |
+| master skill | public | [`.claude/skills/productcraft/SKILL.md`](../.claude/skills/productcraft/SKILL.md), per the house rule — the coordinator: five phases, five engagement types, the stage table with trailing audits and the stale cascade, the three gates, the pass budget, the Close checklist (design ratified 2026-09-13, map ticket #273) |
 
-`bench/` and `lanes/` hold only a placeholder README each; `templates/` holds the ledger entry and the handoff contract with its brief. The rest is created by their own map tickets.
+`bench/` and `lanes/` hold only a placeholder README each; `templates/` holds the ledger entry, the handoff contract with its brief, and the seat preamble; the master skill is live. The rest is created by their own map tickets.
 
 ## Non-negotiable rules
 

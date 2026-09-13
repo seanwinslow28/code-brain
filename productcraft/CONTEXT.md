@@ -40,6 +40,14 @@ _Avoid_: review, critique, QA
 The one question an auditor is adversarially responsible for answering about the artifact it audits.
 _Avoid_: checklist, criteria
 
+**Trailing audit**:
+An audit that fires the moment its artifact is final, after any co-sign, and runs beside the next seat's draft rather than waiting for the end of the train. Discovery's audit of the Strategy doc is the one that waits, for stage two's evidence.
+_Avoid_: end-of-train review, post-mortem
+
+**Stale cascade**:
+What a loopback does to the train: a changed artifact stales every artifact below it, and those are redrafted in pipeline order from the pass budget, their own audits re-firing. The coordinator names the cascade's size before firing it.
+_Avoid_: rework, ripple, regression
+
 **Evidence-strength grade**:
 The label the Insights seat attaches to each claim in a Discovery evidence section, judged against raw-evidence pointers rather than summaries.
 _Avoid_: confidence score, rating
@@ -157,6 +165,20 @@ _Avoid_: wishlist, backlog, tier 2
 **Listen-only title**:
 A book the owner hears but the studio never ingests. It appears only on a reading path, never as a shelf label, so no seat can name it.
 _Avoid_: audiobook, reference, supplementary reading
+
+### Coordination
+
+**Coordinator**:
+The master skill's own session: it types, routes, dispatches, gates and closes an engagement and writes the Open, Route, gate and Close entries. It never drafts seat substance and never speaks for a seat.
+_Avoid_: orchestrator, the skill, the agent
+
+**Seat preamble**:
+The one tracked file of standing behavior every invocation carries, prepended verbatim by the coordinator: explain why, name the canon, declare grounding, loop back never rewrite, close with moves, meter yourself. Lives in one place; seat files never restate it.
+_Avoid_: system prompt, boilerplate, header
+
+**Return wait**:
+The gap between a full train's administrative Close and the execution breakdown's Open, while Systemcraft works the handoff. Tracked as one dated ticket line, never as an open engagement; the next Open finds the return and proposes the breakdown.
+_Avoid_: pause, hold, blocked
 
 ### Models
 
