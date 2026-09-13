@@ -168,6 +168,57 @@ For an experiment card the interview happens *after* he runs it. The field still
 to be fillable now: what the interview will have to go get once there is a result.
 An experiment nobody could be interviewed about is a benchmark, not a piece.
 
+## Was anything actually learned?
+
+The second gate, and like Interviewability it kills a card whatever the card scored.
+Two questions, and a card survives only by passing both.
+
+Ruled 2026-09-13, after the animation card banked twice. The stated reason for the
+first bank — re-deck it when the project is moving again — was tested and falsified:
+the project *was* moving, eight beats locked in one session, and he banked it anyway.
+His actual reason, in his words: *"It was something I already knew, so it wasn't
+really a learning experience about the video models, it was just a slip up on my
+end... The only reason it happened was because I didn't realize Claude was only using
+the frame where the character is turned around."* And: *"It feels like something
+that's pretty well known at this point and doesn't really need me to dig into it and
+experiment with to prove the case."*
+
+**1. Did he learn it, or did he already know it and simply fail to apply it?**
+
+**The sweep cannot tell these apart, and no better sweep ever will.** A rule he
+already held, an output that broke it, and a fix leave exactly the same trace as a
+rule he discovered by breaking something: a commit, a lesson line in the daily note,
+a working rule at the end. Only one of the two is a spike.
+
+So ask it of every done-thing card: *was the rule already in his head before the
+incident?* If it was, the only new fact is that he slipped — and **a slip is not a
+finding.** It is an operator error with a tidy write-up, and the interview would have
+nothing to get, because he knew the answer going in.
+
+**2. Would the reader be told something they do not already know?**
+
+**Depth and Framework do not ask this, and both scored 3 on the card he banked.**
+Depth measures how specific a claim is; Framework measures whether it transfers. A
+thoroughly well-known rule is specific *and* transferable *and* worth nothing to
+publish. Rediscovering something on his own project does not make it new — the test
+is not "did he write it down himself" but "would a working practitioner in that field
+raise an eyebrow."
+
+**What this gate does not kill, and the distinction is the whole of it.** It bans
+*restatement*, never *evidence*. A well-known claim that nobody has measured is the
+strongest card the Oracle can deck, and a well-known claim he can falsify with his
+own receipts is the second strongest — that is the contested-claim shape, and it is
+built for exactly this. The line: repeating a known rule fails the gate; **putting a
+number on a known rule passes it.** So does breaking one.
+
+It bites done-thing cards hardest. An experiment whose outcome is already known was
+never a legal card anyway — that is a demo, banned at the frame stage by the
+`falsifier` lens and by the card bar itself.
+
+**Honest limit.** This gate explains one of week 3's five banks and does not pretend
+to explain the rest. Two of the others were about his own writing voice and passed
+both questions comfortably. Do not stretch it to cover them.
+
 ## Running it
 
 **1. Internal sweep** (stdlib, no model, $0):
@@ -588,7 +639,13 @@ crowding the pile, that is a fact he should see rather than a shape he has to
 reverse-engineer; the majority of the deck stays experiment cards, and a deck that
 is mostly news cards has drifted.
 
-**Then the cold read, and nothing is decked until it passes.** Go back over every
+**Two gates run before anything is decked, and a card failing either one banks
+however it scored.** First [Was anything actually learned?](#was-anything-actually-learned)
+— on every done-thing card, was the rule already in his head before the incident, and
+would a practitioner in that field already know it? A slip he wrote up is not a
+finding, and a known rule restated is not a piece. Then the cold read.
+
+**The cold read.** Go back over every
 card as a stranger to this repo who was not in the session that wrote it, against the
 rules in [Write the card to him, not to the machine](#write-the-card-to-him-not-to-the-machine):
 no identifier he has to resolve, no abstract noun standing in for a real thing, no
