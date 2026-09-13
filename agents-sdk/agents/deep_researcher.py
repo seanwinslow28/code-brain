@@ -148,7 +148,7 @@ def _run_ldr(
     if not user or not pw:
         raise RuntimeError(
             "LDR credentials missing from Keychain. "
-            "Set with: python3 agents-sdk/lib/keychain.py set ldr_username <user>"
+            "Set with: pbpaste | python3 agents-sdk/lib/keychain.py set --stdin ldr_username"
         )
 
     with httpx.Client(base_url=base_url, timeout=30.0, follow_redirects=False) as client:

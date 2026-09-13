@@ -11,7 +11,13 @@ read at runtime and injected as CLAUDE_CODE_OAUTH_TOKEN into the spawned
 One-time setup (interactive — only Sean can mint the token):
 
     claude setup-token                                   # prints a long-lived token
-    python3 lib/keychain.py set claude_code_oauth_token <token>
+    pbpaste | python3 lib/keychain.py set --stdin claude_code_oauth_token
+
+Use the `--stdin` form, not `set <name> <value>`: a bare token on the command
+line has to survive a shell parse (2026-09-13 it did not — zsh threw
+`parse error near '\\n'` on the `<token>` placeholder and a truncated
+34-character value sat in the Keychain returning 401), and argv lands in
+shell history. `set` prints the stored length so truncation is visible.
 
 The token is NEVER written to a tracked file (this is a public repo); it lives
 only in the macOS Keychain. If neither the env var nor the Keychain credential

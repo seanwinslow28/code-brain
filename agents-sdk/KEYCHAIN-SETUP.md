@@ -43,6 +43,16 @@ The Mac Mini is the always-on orchestrator. It runs launchd-scheduled agents and
 | `replicate-key` | Only if running rd-animation from Mac Mini | Your Replicate dashboard |
 | `huggingface-token` | Only if downloading models to Mac Mini via `huggingface-cli` | Your HF settings |
 
+### Setting a credential
+
+Prefer the stdin form for anything secret — copy the value, then:
+
+```bash
+pbpaste | python3 agents-sdk/lib/keychain.py set --stdin <name>
+```
+
+It keeps the value off the command line, so the shell never parses it and it never reaches `~/.zsh_history`. `set` prints the stored length (never the value) — check it matches what you copied. The positional form (`set <name> <value>`) still works and is fine for non-secrets like a MAC address, but a token pasted unquoted can be truncated at a shell metacharacter and then sit there looking healthy while returning 401 (2026-09-13).
+
 ### Setup Commands (run on Mac Mini)
 
 First, copy `keychain.py` to the Mac Mini (or SSH in and access the repo):

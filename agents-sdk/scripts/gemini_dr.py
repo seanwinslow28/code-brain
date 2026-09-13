@@ -617,7 +617,7 @@ def run(
     if not api_key:
         print(
             f"ERROR: {CREDENTIAL_NAME} not found. Set the Keychain slot with:\n"
-            f"  python3 agents-sdk/lib/keychain.py set {CREDENTIAL_NAME} <key>\n"
+            f"  pbpaste | python3 agents-sdk/lib/keychain.py set --stdin {CREDENTIAL_NAME}\n"
             f"or export {ENV_VAR_NAME} / add it to agents-sdk/.env or the repo-root .env.",
             file=sys.stderr,
         )

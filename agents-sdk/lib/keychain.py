@@ -10,6 +10,7 @@ Usage as a module:
 
 Usage as a CLI:
     python3 lib/keychain.py set anthropic_api_key sk-ant-...
+    pbpaste | python3 lib/keychain.py set --stdin anthropic_api_key  # secret off argv
     python3 lib/keychain.py get anthropic_api_key
     python3 lib/keychain.py list
     python3 lib/keychain.py delete anthropic_api_key
@@ -107,28 +108,69 @@ def delete_credential(name: str) -> bool:
     return result.returncode == 0
 
 
-def _cli() -> None:
+USAGE = (
+    "Usage: python3 lib/keychain.py <set|get|list|delete> [name] [value]\n"
+    "  set --stdin <name>   read the value from stdin — keeps the secret off the\n"
+    "                       command line, so no shell parse and no shell history.\n"
+    "                       e.g. pbpaste | python3 lib/keychain.py set --stdin claude_code_oauth_token"
+)
+
+
+def _read_stdin_value() -> str:
+    """Read a single-line secret from stdin.
+
+    Strips the trailing newline a pipe adds and nothing else: leading and
+    interior characters belong to the secret. An interior newline means the
+    caller piped a transcript rather than a bare token, which is how a
+    truncated 34-character credential once ended up in the Keychain looking
+    healthy — refuse it instead of storing junk.
+    """
+    value = sys.stdin.read().rstrip("\r\n")
+    if not value:
+        raise ValueError("no value on stdin")
+    if "\n" in value or "\r" in value:
+        raise ValueError("value spans multiple lines — pipe only the secret itself")
+    return value
+
+
+def _cli(argv: list[str] | None = None) -> None:
     """CLI entry point for manual credential management."""
-    if len(sys.argv) < 2:
-        print("Usage: python3 lib/keychain.py <set|get|list|delete> [name] [value]")
+    args = list(sys.argv[1:] if argv is None else argv)
+    if not args:
+        print(USAGE)
         sys.exit(1)
 
-    command = sys.argv[1]
+    command, rest = args[0], args[1:]
 
     if command == "set":
-        if len(sys.argv) != 4:
-            print("Usage: python3 lib/keychain.py set <name> <value>")
-            sys.exit(1)
-        set_credential(sys.argv[2], sys.argv[3])
-        print(f"Stored: {sys.argv[2]}")
+        if rest[:1] == ["--stdin"]:
+            if len(rest) != 2:
+                print("Usage: <producer> | python3 lib/keychain.py set --stdin <name>")
+                sys.exit(1)
+            name = rest[1]
+            try:
+                value = _read_stdin_value()
+            except ValueError as exc:
+                print(f"Refusing to store: {exc}")
+                sys.exit(1)
+        else:
+            if len(rest) != 2:
+                print("Usage: python3 lib/keychain.py set <name> <value>")
+                print("   or: <producer> | python3 lib/keychain.py set --stdin <name>")
+                sys.exit(1)
+            name, value = rest
+        set_credential(name, value)
+        # Length only, never the value — this is the round-trip check that would
+        # have caught the truncated token years earlier.
+        print(f"Stored: {name} ({len(value)} chars)")
 
     elif command == "get":
-        if len(sys.argv) != 3:
+        if len(rest) != 1:
             print("Usage: python3 lib/keychain.py get <name>")
             sys.exit(1)
-        value = get_credential(sys.argv[2])
+        value = get_credential(rest[0])
         if value is None:
-            print(f"Not found: {sys.argv[2]}")
+            print(f"Not found: {rest[0]}")
             sys.exit(1)
         print(value)
 
@@ -141,13 +183,13 @@ def _cli() -> None:
                 print(f"  {name}")
 
     elif command == "delete":
-        if len(sys.argv) != 3:
+        if len(rest) != 1:
             print("Usage: python3 lib/keychain.py delete <name>")
             sys.exit(1)
-        if delete_credential(sys.argv[2]):
-            print(f"Deleted: {sys.argv[2]}")
+        if delete_credential(rest[0]):
+            print(f"Deleted: {rest[0]}")
         else:
-            print(f"Not found: {sys.argv[2]}")
+            print(f"Not found: {rest[0]}")
             sys.exit(1)
 
     else:
