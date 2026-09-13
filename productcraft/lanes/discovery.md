@@ -77,6 +77,10 @@ Corpus states are as of the `updated:` date in the header.
 | 1 | Torres, *Continuous Discovery Habits* (2021) | before your first Discovery engagement | Apple Books | Teresa Torres · 7:09 | ingested |
 | 2 | Fitzpatrick, *The Mom Test* (2013) | before you talk to a single customer | EPUB | Rob Fitzpatrick · 3:50 | ingested |
 | 3 | Bland & Osterwalder, *Testing Business Ideas* (2019) | when an engagement needs an experiment picked, not invented | Apple Books | — none | ingested |
+| 4 | Singer, *Shape Up* | — read on the delivery path | | | |
+| 5 | Patton, *User Story Mapping* | — read on the delivery path | | | |
+| 6 | Bryar & Carr, *Working Backwards* | — read on the leadership path | | | |
+| 7 | Ramanujam & Tacke, *Monetizing Innovation* | — read on the business path | | | |
 
 ### Next
 

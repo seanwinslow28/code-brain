@@ -81,6 +81,7 @@ Corpus states are as of the `updated:` date in the header.
 | 2 | Knaflic, *Storytelling with Data* | when a metrics plan has to be read by people who did not build it | listen | Cole Nussbaumer Knaflic · 5:43 | not in corpus |
 | 3 | Bland & Osterwalder, *Testing Business Ideas* | — read on the discovery path | | | |
 | 4 | Ellis & Brown, *Hacking Growth* | — read on the growth path | | | |
+| 5 | Rumelt, *Good Strategy Bad Strategy* | — read on the strategy path | | | |
 
 ### Next
 

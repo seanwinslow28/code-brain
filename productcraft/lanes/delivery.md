@@ -71,6 +71,9 @@ named — story mapping, and the theme-based roadmap artifact.
 - **Grove, *High Output Management* — ch. 1, 2, 6** — [`books/high-output-management/`](../corpus/books/high-output-management/) — bottleneck scheduling, indicator design and forecasting, and the planning process that became OKRs.
 - **Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* — ch. 4, 12, 15** — [`books/trustworthy-online-controlled-experiments/`](../corpus/books/trustworthy-online-controlled-experiments/) — planning a staged rollout, release safety rings, or platform maturity investment.
 - **Hughes Johnson, *Scaling People* — ch. 2, 4** — [`books/scaling-people/`](../corpus/books/scaling-people/) — setting goals and cadence, structuring teams, or unblocking cross-team dependencies.
+- **Bland & Osterwalder, *Testing Business Ideas* — ch. 7** — [`books/testing-business-ideas/`](../corpus/books/testing-business-ideas/) — running experiment ceremonies, WIP limits and a flow board alongside delivery work.
+- **Ellis & Brown, *Hacking Growth* — ch. 1, 4** — [`books/hacking-growth/`](../corpus/books/hacking-growth/) — composing a cross-functional team and holding a weekly test cadence with ICE prioritization.
+- **Cagan & Jones, *EMPOWERED* — ch. 41–46, 53–60** — [`books/empowered/`](../corpus/books/empowered/) — drawing team topology and boundaries, or setting team objectives and high-integrity commitments.
 
 All three primary books are diagram-led and **every figure was lost in extraction** — the
 hill charts and breadboards in *Shape Up*, 134 images in Patton (map anatomies, the
@@ -92,6 +95,12 @@ Corpus states are as of the `updated:` date in the header.
 | 3 | Lombardo et al., *Product Roadmaps Relaunched* (2017) | before your first outcome roadmap | EPUB | Theodore O'Brien · 6:41 | ingested |
 | 4 | Doerr, *Measure What Matters* | when you want the provenance behind the OKR translation, not the method | listen | narrator not captured · 7:56 | not in corpus |
 | 5 | Bryar & Carr, *Working Backwards* | — read on the leadership path | | | |
+| 6 | Grove, *High Output Management* | — read on the leadership path | | | |
+| 7 | Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* | — read on the insights path | | | |
+| 8 | Hughes Johnson, *Scaling People* | — read on the leadership path | | | |
+| 9 | Bland & Osterwalder, *Testing Business Ideas* | — read on the discovery path | | | |
+| 10 | Ellis & Brown, *Hacking Growth* | — read on the growth path | | | |
+| 11 | Cagan & Jones, *EMPOWERED* | — read on the leadership path | | | |
 
 ### Next
 

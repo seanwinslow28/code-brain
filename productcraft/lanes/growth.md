@@ -86,6 +86,7 @@ Corpus states are as of the `updated:` date in the header.
 | 2 | Dunford, *Obviously Awesome* | — read on the strategy path | | | |
 | 3 | Ramanujam & Tacke, *Monetizing Innovation* | — read on the business path | | | |
 | 4 | Kohavi, Tang & Xu, *Trustworthy Online Controlled Experiments* | — read on the insights path | | | |
+| 5 | Fitzpatrick, *The Mom Test* | — read on the discovery path | | | |
 
 ### Next
 

@@ -94,6 +94,9 @@ supplement.
 | 2 | Bryar & Carr, *Working Backwards* (2021) | before you write a decision memo or a business case | Apple Books | Robert Petkoff · 10:41 | ingested |
 | 3 | Cagan & Jones, *EMPOWERED* (2020) | when an engagement's question is about the team, not the product | Apple Books | Marty Cagan · 11:09 | ingested |
 | 4 | Hughes Johnson, *Scaling People* (2023) | when the operating-model doc needs a real artifact to copy, not a principle | Apple Books | Claire Hughes Johnson · 11:32 | ingested |
+| 5 | Torres, *Continuous Discovery Habits* | — read on the discovery path | | | |
+| 6 | Lombardo et al., *Product Roadmaps Relaunched* | — read on the delivery path | | | |
+| 7 | Bland & Osterwalder, *Testing Business Ideas* | — read on the discovery path | | | |
 
 ### Next
 

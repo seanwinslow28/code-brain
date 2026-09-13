@@ -60,6 +60,7 @@ Ramanujam & Tacke is ingested, and it supplies exactly what the free layer lacke
 *design* rather than unit-economics arithmetic.
 
 - **Ramanujam & Tacke, *Monetizing Innovation* — ch. 7, 8** — [`books/monetizing-innovation/`](../corpus/books/monetizing-innovation/) — choosing how to charge, setting a pricing strategy, or defending a price. Ch. 6 carries the bundling arithmetic the other two lean on.
+- **Grove, *High Output Management* — ch. 5** — [`books/high-output-management/`](../corpus/books/high-output-management/) — governing a decision: who decides, who is consulted, and the six questions to settle before the meeting.
 
 Two material losses. **Figure 4.2 lost its entire dollar column** — the per-feature
 willingness-to-pay figures — leaving only the ten feature names and their ranking, so the
@@ -78,6 +79,7 @@ Corpus states are as of the `updated:` date in the header.
 |---|---|---|---|---|---|
 | 1 | Ramanujam & Tacke, *Monetizing Innovation* (2016) | before an engagement where price is still an open question | Apple Books | Darren Stephens · 7:28 | ingested |
 | 2 | Bryar & Carr, *Working Backwards* | — read on the leadership path | | | |
+| 3 | Grove, *High Output Management* | — read on the leadership path | | | |
 
 ### Next
 

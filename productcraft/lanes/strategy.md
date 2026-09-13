@@ -43,6 +43,8 @@ no entry for at all.
 - **Rumelt, *Good Strategy Bad Strategy* — ch. 3, 5** — [`books/good-strategy-bad-strategy/`](../corpus/books/good-strategy-bad-strategy/) — auditing a strategy document, or writing one from diagnosis through to coordinated action.
 - **Dunford, *Obviously Awesome* — ch. 2, 7, 9** — [`books/obviously-awesome/`](../corpus/books/obviously-awesome/) — choosing a market category, a competitive frame, or a differentiation claim.
 - **Cagan & Jones, *EMPOWERED* — ch. 12, 37–39, 48–51, 62–69** — [`books/empowered/`](../corpus/books/empowered/) — a company has goals and a roadmap but nothing between them, or focus needs an intervention.
+- **Patton, *User Story Mapping* — ch. 2** — [`books/user-story-mapping/`](../corpus/books/user-story-mapping/) — defining an MVP by outcome rather than feature count, or slicing a release roadmap.
+- **Lombardo, McCarthy, Ryan & Connors, *Product Roadmaps Relaunched* — ch. 4, 7** — [`books/product-roadmaps-relaunched/`](../corpus/books/product-roadmaps-relaunched/) — grounding a roadmap in mission, vision and business objectives, or choosing a prioritization framework.
 
 Read the corpus honestly: every figure in Rumelt was destroyed in capture and is described
 from prose only, and the ch. 10 policy-to-target table there is a reconstruction from the
@@ -63,6 +65,7 @@ Corpus states are as of the `updated:` date in the header.
 | 3 | Dunford, *Obviously Awesome* (2nd ed. 2026) | before an engagement whose positioning is unsettled or contested | Apple Books | April Dunford · 2:49 | ingested |
 | 4 | Cagan & Jones, *EMPOWERED* | — read on the leadership path | | | |
 | 5 | Lombardo et al., *Product Roadmaps Relaunched* | — read on the delivery path | | | |
+| 6 | Patton, *User Story Mapping* | — read on the delivery path | | | |
 
 ### Next
 
