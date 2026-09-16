@@ -2,31 +2,31 @@
 title: "Liability Routing in Agentic Product Design"
 type: concept
 sources:
-  - knowledge/concepts/liability-routing-in-agentic-product-design.md
+  - 20_projects/research/2026-09-09-productcraft-research-cross-studio-handoff-prior-art.md
 tags: [auto-generated, phase-6]
-created: 2026-09-03
-updated: 2026-09-03
+created: 2026-09-16
+updated: 2026-09-16
 ---
 
 ## Definition
 
-This mechanism describes a structural failure mode where an AI system generates confident, plausible falsehoods due to epistemic uncertainty, inducing user action that legally binds the deploying organization. Unlike standard technical errors which may trigger error codes or refusals, this specific failure path bypasses safety filters because the model does not recognize its own ignorance as a boundary condition. The organization becomes legally bound by these outputs regardless of Terms-of-Service disclaimers, creating a direct causal link between model calibration and corporate legal exposure.
+This concept defines the structural mechanism by which decision authority and failure accountability are assigned to specific agents within a typed handoff protocol. It relies on explicit state transitions—such as `TASK_STATE_REJECTED` or `INPUT_REQUIRED`—to force a refusal or request for clarification rather than allowing silent degradation. The system treats these refusals not as errors but as valid, addressable outcomes that preserve the integrity of the receiving agent's context.
 
 ## Context
 
-Sean is building an AI PM curriculum and product strategy; understanding this liability routing is critical because it defines the hard boundary where 'product quality' ends and 'legal risk' begins. It forces a shift from purely technical metrics (accuracy) to legal defensibility metrics (refusal behavior, grounding).
+Sean is building Productcraft and needs to ensure that when one agent hands off work to another, the receiving agent can definitively reject invalid inputs without corrupting its own state. This prevents the 'silent decay' where bad data propagates through a chain of autonomous agents because no one explicitly claimed responsibility for rejecting it.
 
 ## Evidence
 
-> The 2nd-order chain PMs must pre-write: hallucination → user acts on it → the company is legally bound by it.
+> The typed protocol therefore encodes 'I will not do this' and 'I need more from you' as first-class outcomes, not as free text.
 
-> Terms-of-service disclaimers do not survive contact with a judge.
+> Three terminal states (completed/failed/canceled) plus a terminal refusal (REJECTED) and two interrupted-pending-you states (INPUT_REQUIRED, AUTH_REQUIRED).
 
 ## Examples
 
-- Air Canada chatbot invented a bereavement-fare policy, leading to a tribunal ruling the airline fully liable.
-- NYC's MyCity bot confidently advised small businesses to break labor law without firing any error codes.
+- An agent returns `TASK_STATE_REJECTED` with a structured error code instead of generating hallucinated content.
+- A task enters `TASK_STATE_INPUT_REQUIRED`, pausing the pipeline until the upstream provider supplies missing metadata.
 
 ## Related Concepts
 
-[[Epistemic Artifacts as Strategic Proof]] [[The Illusion of Competence in Automated Systems]]
+[[Fault → Error → Failure Taxonomy]] [[Silent Failure Propagation in Agent Fleets]]

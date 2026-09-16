@@ -2,31 +2,31 @@
 title: "Taste as Evaluation Function vs. Activity Proof"
 type: concept
 sources:
-  - knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md
+  - 20_projects/prj-job-hunt-2026/job-feed/2026-09-15.md
 tags: [auto-generated, phase-6]
-created: 2026-09-09
-updated: 2026-09-09
+created: 2026-09-16
+updated: 2026-09-16
 ---
 
 ## Definition
 
-This mechanism describes a structural bottleneck where human aesthetic judgment becomes the limiting factor in agentic production systems. As automated agents increase their output volume, the user's capacity to verify authenticity does not scale linearly, creating a divergence between activity metrics and creative value. The system fails when high-volume generation is mistaken for progress because the verification step requires deep, non-automatable taste encoding that cannot be parallelized.
+This concept defines the distinction between evaluating opportunities based on intrinsic fit and strategic alignment (taste) versus evaluating them based on the volume of effort expended (activity proof). The mechanism occurs when the metric for success shifts from 'is this role a good match for my trajectory?' to 'have I applied to enough roles?'. This shift is dangerous because activity proof is easily automated and measured, while taste requires nuanced, context-rich judgment that is difficult to scale. When taste is replaced by activity, the individual risks entering pipelines that are structurally misaligned with their goals simply because they were easy to access.
 
 ## Context
 
-Sean must recognize that his role is shifting from creator to evaluator; his 'taste' is the only remaining differentiator against homogenized AI output. This shift demands a re-evaluation of how success is measured in his personal knowledge vault, moving away from volume-based metrics toward fidelity-based ones.
+Sean's job feed shows a pattern of filtering out roles based on specific 'concerns' like salary disclosure and title seniority. This demonstrates an active use of taste as an evaluation function, preventing him from wasting time on 'weak fits'. However, the sheer volume of 'weak fits' (3/5 in the latest run) suggests that the system is still generating low-quality leads, forcing Sean to constantly exercise his taste rather than letting the system filter for him.
 
 ## Evidence
 
-> They write. They couldn't provide the actual soul behind the writing. Every output that came back felt foreign and cringy, and sounded nothing like me.
+> Strong industry fit for AI and conversational tech, but the unspecified location combined with an 'in-office' culture creates significant geo/RTO risk, and the Spanish-speaking requirement is a specific constraint not aligned with his profile.
 
-> There is a fundamental tension between the scalability of Sean's agent fleet and the specificity of his creative taste.
+> New Grad APM role is a significant step back from Sean's 2 years of PM experience and the location/salary constraints are disqualifying.
 
 ## Examples
 
-- Rejecting outputs that 'sounded nothing like me'
-- The 'finite capacity of human taste to encode itself into machine-readable constraints'
+- Sean marking Decagon as a 'weak fit' due to 'unspecified location' and 'Spanish-speaking requirement' despite strong industry alignment.
+- Sean marking Robinhood as a 'weak fit' because it is a 'New Grad' role, which is 'underqualified compared to current experience'.
 
 ## Related Concepts
 
-[[The Homogenization Trap in Agentic Creative Workflows]] [[Tacit Knowledge Erosion vs. Automation Scale]]
+[[Taste as Evaluation Function vs. Activity Proof]] [[The Director-Intern Invariant in Creative and Professional Identity]] [[Gap Analysis as Epistemic Hygiene vs Opportunity Hunting]]

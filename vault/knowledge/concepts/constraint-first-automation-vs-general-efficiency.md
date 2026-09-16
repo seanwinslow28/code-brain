@@ -2,33 +2,31 @@
 title: "Constraint-First Automation vs. General Efficiency"
 type: concept
 sources:
-  - 20_projects/research/2026-08-29-software-factory-lit-delta/sweep-companies.md
+  - 20_projects/research/2026-09-09-productcraft-book-to-seat-findings.md
 tags: [auto-generated, phase-6]
-created: 2026-09-01
-updated: 2026-09-01
+created: 2026-09-16
+updated: 2026-09-16
 ---
 
 ## Definition
 
-Reliability in agentic systems is achieved by placing LLMs into contained boxes with strict deterministic boundaries, rather than optimizing for general-purpose flexibility. By pre-warming environments, capping CI iterations, and using curated tool subsets, the system prevents error amplification. This approach treats constraints not as limitations on capability, but as essential components of a robust production pipeline that compounds reliability through confinement.
+This pattern emerges when automation is driven by strict boundary conditions (cost, format, availability) rather than broad efficiency goals. Instead of optimizing for the fastest path to information, the system optimizes for the most robust path within defined constraints, such as 'zero cost' or 'DRM-free'. This creates a more resilient infrastructure because it avoids dependencies on fragile external factors like subscription renewals or variable pricing, forcing the agent to rely on verified, static data points.
 
 ## Context
 
-Sean's 'Fleet Memory Index' and 'vault_synthesizer' runs show varying success rates based on model capacity and context management. Applying constraint-first principles—such as capping iterations and pre-gathering context—can stabilize his automated synthesis processes, reducing the 'rejected_count' and improving the consistency of his knowledge vault updates.
+Sean's research methodology explicitly rejects paid research tools in favor of web sweeps and free canon verification. By imposing a '$0 research' constraint, he forces the agents to prioritize verifiable facts over speculative insights, resulting in a more stable but potentially slower discovery process that avoids financial leakage.
 
 ## Evidence
 
-> Putting LLMs into contained boxes compounds reliability
+> Cost: $0 research (web sweeps; no paid research invoked). Estimated tier-1 purchase ~$290 in ebooks, several prices unverified at time of writing.
 
-> Standardized on Cursor's rule format, synced across Claude Code and minions
-
-> diminishing marginal returns if an LLM is running against indefinitely many rounds
+> Web-search budgets ran out in every agent's final pass, so a handful of prices and runtimes are marked unverified rather than guessed.
 
 ## Examples
 
-- Stripe uses a 'smaller box' subset of tools for agents to reduce errors compared to the full 500-tool Toolshed.
-- Runs on isolated devboxes pre-warmed in ~10 seconds with local linting less than five seconds.
+- Marking prices as 'unverified' rather than guessing prevents the introduction of hallucinated financial data into the corpus.
+- Using 'DRM-free likely' as a filter criterion ensures long-term accessibility of assets, prioritizing ownership over convenience.
 
 ## Related Concepts
 
-[[Context Management as a Bottleneck]] [[The Calibration Bottleneck in Scalable Creative Production]]
+[[Cost-Capped Agentic Workflows]] [[Operational Uptime vs. Cognitive Utility Tension]]

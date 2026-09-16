@@ -2,31 +2,31 @@
 title: "The Extraction Fidelity Trap in Knowledge Infrastructure"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-automation-velocity-vs-semantic-integrity-in-knowledge-and-career-systems.md
+  - 20_projects/research/2026-09-09-productcraft-book-to-seat-findings.md
 tags: [auto-generated, phase-6]
-created: 2026-09-03
-updated: 2026-09-03
+created: 2026-09-16
+updated: 2026-09-16
 ---
 
 ## Definition
 
-This mechanism describes a structural asymmetry where automated ingestion pipelines prioritize text-based semantic extraction while systematically discarding non-textual data modalities such as visual diagrams, spatial layouts, and embedded image content. The system creates an illusion of completeness by processing the available text, but the resulting knowledge graph is fundamentally incomplete because the 'baked-in' visual context is lost by design during the OCR or parsing phase. This leads to a silent decay in semantic integrity where the agent fleet operates on a degraded representation of the source material without any operational visibility into what was omitted.
+This mechanism describes the systemic risk where high-fidelity content extraction (such as ingesting full book texts) is conflated with low-fidelity strategic utility. When agents prioritize capturing raw data volume over curating actionable insights, they create a 'fidelity trap' where the infrastructure becomes heavy with unprocessed information that degrades retrieval precision. The invariant here is that storage capacity does not correlate with decision-making quality; instead, it often inversely correlates with the signal-to-noise ratio available to the user.
 
 ## Context
 
-Sean's vault synthesizer relies on automated fleets to ingest books and articles; if these tools silently discard visual frameworks or diagrams, his 'taste memory' and strategic insights derived from those visuals are permanently lost to the graph, creating a hollowed-out knowledge base that supports operational tasks but fails high-level creative synthesis.
+Sean is currently building a private corpus for Productcraft, explicitly choosing to ingest only rankings and facts rather than full book content. This decision highlights his awareness that storing raw text creates maintenance overhead without proportional strategic gain, allowing him to focus on 'seat' alignment rather than bibliographic completeness.
 
 ## Evidence
 
-> figures/diagrams are never extracted (text baked into images is lost, by design), and scanned PDFs hard-abort with an 'OCR first' message.
+> Book content never lands in tracked files; this brief holds rankings, facts, and citations only.
 
-> The output is not a summary; the spec explicitly extracts *structure*: named frameworks ('preserve the author's exact naming'), decision rules, techniques, anti-patterns, glossary terms
+> The kernel (diagnosis, guiding policy, coherent action) and a nameable taxonomy of bad strategy; top score for the seat, 23/25
 
 ## Examples
 
-- A book containing a critical architectural diagram where the text description is insufficient to reconstruct the logic, resulting in a concept entry that lacks the core visual insight.
-- Scanned PDFs triggering hard-aborts that prevent ingestion entirely, forcing manual intervention or loss of the source material from the automated pipeline.
+- Storing only the 'kernel' of Rumelt's strategy rather than the full text allows Sean to query specific strategic patterns without parsing irrelevant narrative.
+- Using a 'seating' system where books are assigned to specific functional roles (e.g., Strategist, Discovery) ensures that every purchased asset has a defined operational purpose.
 
 ## Related Concepts
 
-[[Tacit Knowledge Erosion vs. Automation Scale]] [[The Illusion of Competence in Automated Systems]]
+[[The Illusion of Competence in Automated Systems]] [[Comprehension Debt]]

@@ -2,31 +2,31 @@
 title: "Supervision Fatigue as the Hard Cap on Fleet Scaling"
 type: concept
 sources:
-  - knowledge/concepts/supervision-fatigue-as-the-hard-cap-on-fleet-scaling.md
+  - 20_projects/research/2026-09-09-productcraft-bench-composition-findings.md
 tags: [auto-generated, phase-6]
-created: 2026-09-09
-updated: 2026-09-09
+created: 2026-09-16
+updated: 2026-09-16
 ---
 
 ## Definition
 
-This mechanism defines the non-linear increase in cognitive overhead required to maintain coherent oversight of an agent fleet, where the cost of verification grows faster than the volume of automated output. It emerges when the human operator becomes the single point of failure for semantic integrity, forced to manually reconcile contradictions that agents silently propagate. The bottleneck is not computational capacity but the finite bandwidth of human attention available to detect and correct these silent divergences before they corrupt downstream artifacts.
+This concept defines the non-linear increase in cognitive load required to maintain quality control over automated outputs as the volume of those outputs increases. It posits that 'supervision' is not a fixed cost but a variable cost that scales with the complexity and ambiguity of the agent's domain. When agents operate in high-ambiguity domains (like creative strategy or product positioning), the supervisor must engage in 'double-loop learning' to correct not just the output, but the underlying reasoning, which is exponentially more expensive than correcting syntax. The hard cap is reached when the cost of verification exceeds the value of the automated output.
 
 ## Context
 
-Sean's fleet runs have shown a dramatic increase in concepts written (from 3 to over 120) while the model capability remained static or degraded. This suggests that without a corresponding increase in automated verification mechanisms, Sean's personal cognitive load is becoming the primary constraint on system reliability, making manual supervision unsustainable at current scales.
+Sean's research into 'Productcraft bench composition' reveals a shift from 'six seats' to 'seven seats' with a specific 'Insights & Analytics' role designed to audit evidence. This suggests an awareness that adding more automation (agents) without a dedicated, high-level auditing mechanism leads to quality degradation. The 'rejected_count' in his fleet memory shows he is already filtering out low-quality agent outputs.
 
 ## Evidence
 
-> The phenomenon where the cognitive load of maintaining coherent context across multiple agents and domains limits the effective scale of automation.
+> Adopt two boundary adjustments (positioning stays with the Strategist; OKR outcomes are co-signed by the Strategist, the roadmap belongs to Delivery).
 
-> This bottleneck emerges when the complexity of inter-agent dependencies exceeds the capacity for manual verification.
+> Run the seven seats as a sequential pipeline with two closed audit cycles.
 
 ## Examples
 
-- contradiction (T2): knowledge/concepts/context-management-as-a-bottleneck.md — contradicts supervision-as-the-new-ai-edge
-- contradiction (T2): knowledge/concepts/agent-health.md — contradicts context-management-as-a-bottleneck
+- The creation of a 'closed audit cycle' for the Insights & Analytics seat, ensuring that evidence is graded before it influences product decisions.
+- The use of 'L4 gate' to confirm or cut seats before build, preventing the accumulation of low-value automation.
 
 ## Related Concepts
 
-[[Context Management as a Bottleneck]] [[The Context-Memory Bottleneck in Personalized AI]]
+[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[Legibility Debt as a Supervision Failure Mode]] [[The Calibration Bottleneck in Scalable Creative Production]]

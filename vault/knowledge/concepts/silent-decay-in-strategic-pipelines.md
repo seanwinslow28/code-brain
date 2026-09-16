@@ -2,31 +2,31 @@
 title: "Silent Decay in Strategic Pipelines"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-operational-health-masks-semantic-decay-in-agentic-workflows.md
+  - 20_projects/research/2026-09-09-productcraft-plugin-routing-findings.md
 tags: [auto-generated, phase-6]
-created: 2026-09-09
-updated: 2026-09-09
+created: 2026-09-16
+updated: 2026-09-16
 ---
 
 ## Definition
 
-Strategic pipelines fail not through abrupt crashes but through the gradual erosion of verification layers that normally catch drift. When quality assurance or critique agents are skipped or delayed, the system continues to produce output without checking for coherence or relevance. This creates a lag between the current state of knowledge and the synthesized representation of it, where errors accumulate silently until they become too large to correct without manual intervention.
+Silent decay occurs when the semantic fidelity of a tool or skill degrades over time due to lack of active maintenance, yet the system continues to function superficially. This decay is 'silent' because the tool does not crash; it simply produces lower-fidelity outputs that are accepted as valid until a critical failure point is reached. The mechanism relies on the user's tolerance for drift, which increases as the cost of auditing the tool exceeds the perceived value of its current output.
 
 ## Context
 
-Sean's vault synthesizer relies on periodic critique to maintain semantic integrity. The absence of recent `vault-critic` runs means that any drift in his job hunt data or creative concepts goes undetected, allowing low-value or incorrect information to persist in his strategic planning tools.
+Sean has identified that his Cowork custom-skills mirror and Claude Code copy have drifted from their source repositories. This concept highlights that these are not just technical debts but strategic risks where the 'source of truth' is no longer aligned with the 'source of execution'.
 
 ## Evidence
 
-> The `vault-critic` has not run since 2026-08-31, leaving no recent assessment of the quality or coherence of the synthesized concepts and connections.
+> the Claude Code copy of the suite is one point release behind Codex, with drift confined to pm-ai-shipping
 
-> When the network or storage fails, agents may still report 'healthy' status because they are executing their local loops, but the data they produce becomes stale or incorrect.
+> eight of the fourteen repo skills mirrored into Cowork have drifted from the repo
 
 ## Examples
 
-- The daily-driver morning agent successfully generated a summary and created a daily note, indicating that the immediate operational loop is functioning as expected despite underlying infrastructure gaps.
-- Sean must implement a 'semantic health' metric that measures the freshness and coherence of outputs, not just the uptime of agents.
+- Drift confined to pm-ai-shipping affecting Systemcraft's plugin while Productcraft remains unaffected
+- Hygiene tickets filed outside the studio for skills that have drifted from the repo
 
 ## Related Concepts
 
-[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[The Illusion of Health in Autonomous Systems]]
+[[Memory Rot and Lifecycle Management]] [[Operational Uptime vs. Semantic Value in Agent Fleets]]

@@ -4,30 +4,30 @@ type: connection
 connects:
   - The Illusion of Health in Autonomous Systems
   - Silent Decay in Strategic Pipelines
-  - Operational Uptime vs. Cognitive Utility Tension
-created: 2026-09-06
-updated: 2026-09-06
+  - Operational Uptime vs. Semantic Value in Agent Fleets
+created: 2026-09-16
+updated: 2026-09-16
 ---
 
 ## Synthesis
 
-This connection reveals a critical tension where robust protocol instrumentation masks epistemic blindness, creating an illusion of health that is particularly dangerous in strategic pipelines. When agents report 'success' based on internal loop completion rather than output quality, the system appears functional while failing to deliver value. This decoupling allows silent decay because the feedback mechanisms only measure execution fidelity, not semantic relevance.
+The fleet status report provides high visibility into agent *availability* but low visibility into agent *utility*, creating a tension where Sean can see that agents are 'healthy' while their strategic output is stalled or degraded. The `vault-synthesizer` is technically 'healthy' (running) but functionally inert (deferred due to host unreachability), yet the dashboard does not distinguish between these states. This leads to a false positive in system health, where the *signal* of activity masks the *silence* of value creation, causing Sean to overestimate the freshness and integrity of his knowledge vault.
 
 ## Threads
 
 ### [[The Illusion of Health in Autonomous Systems]]
 
-> Agents like job-feed and deep-researcher report 'success' or 'degraded' statuses based on their internal execution loops, but their outputs have no direct impact on strategic outcomes.
+> vault-synthesizer ... Status: healthy ... notes='tier2-host-unreachable'
 
 ### [[Silent Decay in Strategic Pipelines]]
 
-> A failure in the input layer should trigger a higher-level alert than a simple 'degraded' status, as it represents a strategic blockage.
+> vault-critic ... Last run: 2026-08-31T03:37:57 ... status=partial articles=3
 
-### [[Operational Uptime vs. Cognitive Utility Tension]]
+### [[Operational Uptime vs. Semantic Value in Agent Fleets]]
 
-> Sean must define success metrics for his agents based on output quality and strategic relevance, not just execution status.
+> daily-driver morning ... Status: healthy ... notes='Done. `vault/10_timeline/daily/2026-09-12.md` created with fleet digest injec...'
 
 ## Implications
 
-- Sean must redefine success metrics for his agents to prioritize output quality and strategic relevance over mere execution status.
-- The fleet dashboard needs to be enhanced to highlight agents that are technically running but producing zero value, rather than just those that have crashed.
+- Sean may rely on stale synthesis for job-hunt strategy, leading to decisions based on outdated market insights.
+- The 'healthy' status of the daily-driver masks the decay in the underlying knowledge base it draws from.
