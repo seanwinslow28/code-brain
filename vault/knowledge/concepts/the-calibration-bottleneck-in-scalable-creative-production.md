@@ -4,29 +4,28 @@ type: concept
 sources:
   - knowledge/concepts/the-calibration-bottleneck-in-scalable-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-09-09
-updated: 2026-09-09
+created: 2026-09-16
+updated: 2026-09-16
 ---
 
 ## Definition
 
-This mechanism describes the structural limit where a single-shot model's output quality is constrained by its inability to iteratively refine against a ground truth, forcing reliance on external anchors for validity. When an agentic system operates without real-time feedback loops, it cannot self-correct drift, making the initial prompt engineering and context provision the sole determinants of fidelity. This creates a hard ceiling on scalability because adding more agents does not improve individual output quality; it only increases the variance that must be managed by human triage.
+This mechanism describes the structural limit where a single-shot model's output quality is constrained by its inability to iteratively refine against a ground truth, forcing reliance on manual intervention that does not scale. As production volume increases, the variance in output quality expands unless there is a rigorous, scalable calibration process. The bottleneck occurs when the human ability to define and enforce 'good' becomes the limiting factor for the entire system's throughput, creating a hard cap on automation velocity.
 
 ## Context
 
-Sean is attempting to scale his Substack studio by running parallel 'arms' of content generation. He needs to understand why simply adding more models (vendors) doesn't automatically yield better results without a rigorous calibration layer against a known high-quality anchor.
+Sean is trying to scale his creative studio operations while maintaining specific taste standards. This concept highlights why manual calibration is a bottleneck and why automated or semi-automated calibration loops are necessary for scaling without degrading quality.
 
 ## Evidence
 
-> The Arm B prompt was never saved to disk; the session record only paraphrased it. It was rebuilt from content-machine/SKILL.md's standing 'The shaping context' spec plus the predecessor record's Arm B description. This is a real limitation on comparing to 86% and is recorded rather than smoothed
+> Her practice started by reading every output by hand at a scale of fifty students per cohort, then learning error analysis from Husain's course when that stopped scaling.
 
-> Arms A and B differed in prompt, never in nothing. Without a within-model variance measurement, every vendor gap is uninterpretable.
+> An opportunity from a story-based interview outranks one from a general interview
 
 ## Examples
 
-- Using GPT-5.5 in two harnesses to calibrate the offset that lets single-shot arms be read against the agentic anchor
-- Blinding the spread by ensuring no prior hand-rewrite exists in any arm to prevent convergence toward known prose
+- of 500 teams uploading three interviews each, about eight had story-based interviews, and eight different interview types showed up
 
 ## Related Concepts
 
-[[Context Management as a Bottleneck]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
+[[Taste as Evaluation Function vs. Activity Proof]] [[The Homogenization Trap in Agentic Creative Workflows]]

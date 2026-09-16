@@ -2,7 +2,7 @@
 title: "The Director-Intern Invariant in Creative and Professional Identity"
 type: concept
 sources:
-  - 20_projects/research/2026-09-09-productcraft-bench-composition-findings.md
+  - knowledge/concepts/the-director-intern-invariant-in-creative-and-professional-identity.md
 tags: [auto-generated, phase-6]
 created: 2026-09-16
 updated: 2026-09-16
@@ -10,7 +10,7 @@ updated: 2026-09-16
 
 ## Definition
 
-This invariant describes the structural tension where a senior practitioner (the Director) must outsource execution to an agent or junior resource (the Intern), creating a dependency chain where the Director's professional identity is held hostage by the Intern's operational reliability. The mechanism relies on the Director retaining 'taste' and 'boundary setting' as the primary value drivers, while the Intern handles the 'volume' and 'formatting'. When the Intern fails silently or produces low-fidelity work, the Director faces a choice between absorbing the labor (destroying leverage) or rejecting the output (destroying velocity). This creates a specific type of 'Legibility Debt' where the Director cannot easily audit the quality of the work without re-performing it themselves.
+This invariant describes a structural asymmetry where the creator (Director) must maintain high-fidelity taste standards while delegating execution to lower-cost, higher-volume agents (the Intern). The mechanism relies on the Director retaining 'taste' and 'boundary setting' as the primary value drivers, while the Intern handles the 'volume' and 'formatting'. When the Intern fails silently or produces low-fidelity work, the Director faces a choice between absorbing the labor (destroying leverage) or rejecting the output (destroying velocity). This creates a specific type of 'Legibility Debt' where the Director cannot easily audit the quality of the work without re-performing it themselves.
 
 ## Context
 
@@ -29,4 +29,4 @@ Sean is building a 'Productcraft bench' and 'Systemcraft' infrastructure that re
 
 ## Related Concepts
 
-[[Legibility Debt as a Supervision Failure Mode]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[The Director-Intern Invariant in Creative and Professional Identity]]
+[[Legibility Debt as a Supervision Failure Mode]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]

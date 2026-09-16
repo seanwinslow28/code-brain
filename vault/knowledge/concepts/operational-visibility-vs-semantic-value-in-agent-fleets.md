@@ -2,7 +2,7 @@
 title: "Operational Visibility vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - 02_Areas/Agent-Fleet/daily-fleet-status-2026-09-09.md
+  - knowledge/concepts/operational-visibility-vs-semantic-value-in-agent-fleets.md
 tags: [auto-generated, phase-6]
 created: 2026-09-16
 updated: 2026-09-16

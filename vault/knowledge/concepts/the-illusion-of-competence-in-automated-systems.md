@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/infrastructure-fragility-masks-semantic-decay-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-09-09
-updated: 2026-09-09
+created: 2026-09-16
+updated: 2026-09-16
 ---
 
 ## Definition
 
-This pattern occurs when an automated system's internal metrics indicate perfect operational health (zero errors, 100% completion) while the external reality is a total failure to achieve the intended goal due to degraded input quality or environmental shifts. The mechanism exploits the gap between binary success/failure flags and continuous value gradients; because the system only checks for existence of output rather than quality of insight, it confidently reports success on worthless artifacts. This illusion persists until a human auditor manually inspects the semantic content, revealing that the 'work' was merely the processing of noise.
+This pattern occurs when automated systems report high reliability and completion rates despite producing outputs that are functionally useless or semantically empty. The mechanism is driven by the system's inability to distinguish between 'successful protocol execution' and 'successful information retrieval.' Because the system validates success based on binary flags (e.g., HTTP 200 OK) rather than content quality, it generates a false sense of operational health. This leads to a dangerous blind spot where the user believes their infrastructure is working correctly while it silently accumulates garbage data.
 
 ## Context
 
-Sean's synthesizer agents report high completion rates during periods where external data sources are hostile or empty, leading to a dangerous overconfidence in the fleet's ability to gather intelligence.
+Sean's job hunt and creative studio workflows depend on accurate, high-signal data. If his agents report 'success' on empty posts or paywalled content, he may waste time reviewing low-value artifacts or miss critical signals because the system failed to flag the degradation.
 
 ## Evidence
 
@@ -24,9 +24,9 @@ Sean's synthesizer agents report high completion rates during periods where exte
 
 ## Examples
 
-- Agents reporting '0 failures' while returning only link-only posts with no textual content
-- Fleet status showing 'healthy' despite the primary data source (X.com) enforcing HTTP 402 paywalls
+- Agents processing 'link-only' posts with no textual content as valid data points
+- Fleet reporting '0 failures' while ingesting paywalled or offline pages
 
 ## Related Concepts
 
-[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[Silent Decay in Strategic Pipelines]]
+[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[Context Management as a Bottleneck]]

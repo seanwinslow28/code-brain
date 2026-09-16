@@ -2,7 +2,7 @@
 title: "Taste as Evaluation Function vs. Activity Proof"
 type: concept
 sources:
-  - 20_projects/prj-job-hunt-2026/job-feed/2026-09-15.md
+  - knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md
 tags: [auto-generated, phase-6]
 created: 2026-09-16
 updated: 2026-09-16
@@ -10,7 +10,7 @@ updated: 2026-09-16
 
 ## Definition
 
-This concept defines the distinction between evaluating opportunities based on intrinsic fit and strategic alignment (taste) versus evaluating them based on the volume of effort expended (activity proof). The mechanism occurs when the metric for success shifts from 'is this role a good match for my trajectory?' to 'have I applied to enough roles?'. This shift is dangerous because activity proof is easily automated and measured, while taste requires nuanced, context-rich judgment that is difficult to scale. When taste is replaced by activity, the individual risks entering pipelines that are structurally misaligned with their goals simply because they were easy to access.
+This mechanism defines the structural tension where the metric for professional progress shifts from intrinsic strategic alignment (taste) to the quantifiable volume of effort expended (activity proof). When taste is replaced by activity, the individual risks entering pipelines that are structurally misaligned with their goals simply because they were easy to access or automate. This shift is dangerous because activity proof is easily measured and automated, while taste requires nuanced, context-rich judgment that is difficult to scale without degrading into noise.
 
 ## Context
 
@@ -29,4 +29,4 @@ Sean's job feed shows a pattern of filtering out roles based on specific 'concer
 
 ## Related Concepts
 
-[[Taste as Evaluation Function vs. Activity Proof]] [[The Director-Intern Invariant in Creative and Professional Identity]] [[Gap Analysis as Epistemic Hygiene vs Opportunity Hunting]]
+[[The Director-Intern Invariant in Creative and Professional Identity]] [[Gap Analysis as Epistemic Hygiene vs Opportunity Hunting]]
