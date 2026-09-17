@@ -2,32 +2,32 @@
 title: "The Decoupling of Operational Health from Knowledge Integrity"
 type: connection
 connects:
-  - The Illusion of Health in Autonomous Systems
-  - Infrastructure Fragmentation and Semantic Isolation
-  - Operational Visibility vs. Semantic Value in Agent Fleets
-created: 2026-08-15
-updated: 2026-08-15
+  - Supervision Fatigue as the Hard Cap on Fleet Scaling
+  - The Efficiency-Quality Inversion in Automated Synthesis
+  - Operational Uptime vs. Semantic Value in Agent Fleets
+created: 2026-09-17
+updated: 2026-09-17
 ---
 
 ## Synthesis
 
-This connection reveals a critical tension where operational metrics mask semantic stagnation. Agents report health based on process execution, while knowledge integrity depends on successful synthesis across fragmented infrastructure. The consequence is that Sean perceives his system as active when it is actually failing to produce new insights, leading to a false sense of progress and a potential loss of creative authority.
+There is a critical tension where operational metrics mask semantic stagnation. Agents report health based on process execution, while knowledge integrity depends on successful verification of semantic content. This decoupling creates a systemic trust deficit because the operator cannot distinguish between a healthy system and a failing one until significant damage has occurred.
 
 ## Threads
 
-### [[The Illusion of Health in Autonomous Systems]]
+### [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
 
-> Agents like daily-driver can report 'healthy' and 'success' while the synthesizer, which creates value through connection, remains 'deferred'.
+> As Sean's agent fleet scales in output volume (concepts written), the human capacity to supervise each output for quality degrades, leading to a reliance on flawed automated metrics that mask semantic failures.
 
-### [[Infrastructure Fragmentation and Semantic Isolation]]
+### [[The Efficiency-Quality Inversion in Automated Synthesis]]
 
-> Agent infrastructure is fragmented (Alienware/ComfyUI offline), failing key 'Machine ↔ machine' sync requirements.
+> Rejects 1-5 scales because 'a 3 and a 4' cannot be told apart; the format is binary plus a written critique that says what passed and what was wrong.
 
-### [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+### [[Operational Uptime vs. Semantic Value in Agent Fleets]]
 
-> The current monitoring setup fails to alert Sean to the loss of creative insight generation, only reporting on the availability of the reporting mechanism itself.
+> The fleet reports 'healthy' status based on process execution, while knowledge integrity depends on successful verification of semantic content.
 
 ## Implications
 
-- Sean must redefine health metrics to include synthesis completion rates, not just agent uptime, to detect knowledge stagnation early.
-- The current monitoring setup fails to alert Sean to the loss of creative insight generation, only reporting on the availability of the reporting mechanism itself.
+- Sean must design his eval viewer to explicitly surface the gap between automated metrics and human-verified quality, rather than just displaying pass/fail rates.
+- He needs to implement feedback loops where human corrections are fed back into the agent training data to reduce future semantic failures.

@@ -2,7 +2,7 @@
 title: "The Illusion of Health in Autonomous Systems"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-operational-health-masks-semantic-decay-in-agentic-workflows.md
+  - knowledge/connections/infrastructure-fragility-masks-semantic-stagnation.md
 tags: [auto-generated, phase-6]
 created: 2026-09-17
 updated: 2026-09-17
@@ -10,23 +10,23 @@ updated: 2026-09-17
 
 ## Definition
 
-Autonomous systems create an illusion of health when their immediate operational loops function correctly, masking underlying infrastructure or data integrity issues. The mechanism is the successful execution of local tasks (like generating a summary) while failing to detect or report broader systemic problems. This leads to a false sense of security for the user, who assumes the system is fully functional because it produces output, even if that output is flawed.
+This pattern occurs when autonomous agents report successful execution or healthy status despite failing to achieve their intended semantic or strategic goals, often due to silent failures in upstream dependencies or environmental constraints. The mechanism involves a misalignment between the agent's internal state reporting and the external reality of its operational environment, where technical success (e.g., completing a task) does not equate to value creation. This illusion persists because the monitoring layer lacks the granularity to distinguish between functional completion and semantic emptiness.
 
 ## Context
 
-Sean's daily-driver agent generates summaries and notes, creating an impression of a healthy system. However, this masks potential issues with data freshness or coherence, leading to strategic errors in his job hunt and creative projects.
+Sean's agents report 'healthy' status while producing zero value, such as job-feed fetching 0 items or synthesizing empty clusters, yet the system continues to operate under the assumption that it is functioning correctly. This leads to a false sense of security where Sean may overlook critical infrastructure issues or content gaps because the surface-level metrics appear normal.
 
 ## Evidence
 
-> The daily-driver morning agent successfully generated a summary and created a daily note, indicating that the immediate operational loop is functioning as expected despite underlying infrastructure gaps.
+> Sean's agent fleet exhibits a critical decoupling where technical health metrics (uptime, process existence) no longer correlate with strategic utility (knowledge synthesis, job leads).
 
-> Sean should periodically manually verify the accuracy of his job hunt and creative project data.
+> The core tension lies between the orchestration layer's binary health reporting and the execution layer's physical and semantic failures, creating a blind spot where Sean perceives his infrastructure as robust.
 
 ## Examples
 
-- Daily summaries that feel complete but are actually based on outdated information
-- Agents reporting healthy status despite infrastructure gaps
+- vault-synthesizer ... Status: healthy ... notes='tier2-host-unreachable'
+- job-feed fetching 0 items
 
 ## Related Concepts
 
-[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[Silent Decay in Strategic Pipelines]]
+[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[Silent Failure Propagation in Agent Fleets]]

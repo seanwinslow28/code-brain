@@ -2,7 +2,7 @@
 title: "Operational Uptime vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/cross-domain-tension-operational-health-masks-semantic-decay-in-agentic-workflows.md
+  - knowledge/connections/infrastructure-fragility-masks-semantic-stagnation.md
 tags: [auto-generated, phase-6]
 created: 2026-09-17
 updated: 2026-09-17
@@ -10,23 +10,23 @@ updated: 2026-09-17
 
 ## Definition
 
-This tension arises when an agent's local execution loop remains active and reports healthy status despite the underlying data context becoming stale or incorrect due to infrastructure failures. The mechanism is a decoupling of operational signal from semantic truth, where the system appears functional because it is still processing, but the content it produces is based on outdated information. This creates a dangerous feedback loop where automated summaries feel complete and coherent, yet are fundamentally disconnected from the current state of Sean's job hunt or creative projects.
+This concept describes a systemic decoupling where technical health metrics—such as process existence, network reachability, and successful API responses—are optimized independently of the actual generation of strategic insight or knowledge synthesis. The mechanism relies on binary status reporting that masks functional inertia, creating a feedback loop where Sean perceives his infrastructure as robust while the semantic pipeline remains dormant due to empty inputs or host unreachability. This divergence allows the system to maintain an illusion of productivity without delivering the cognitive utility required for decision-making.
 
 ## Context
 
-Sean relies on daily agent runs to maintain his personal knowledge vault and job hunt status. If the agents report 'healthy' while serving stale data, he may make strategic errors based on false confidence in the system's accuracy, missing critical updates in his applications or creative work.
+Sean's fleet monitoring layer reports 'healthy' status for agents that are functionally inert, leading him to invest time in maintaining a facade of operational health rather than addressing the underlying infrastructure or content generation issues. This creates a dangerous blind spot where the cost of maintaining the system is incurred without any corresponding increase in semantic value or strategic clarity.
 
 ## Evidence
 
-> The fleet's active agents maintain operational uptime by executing their defined tasks, but this masks the decay of semantic value due to the staleness of critical quality assurance agents.
+> The fleet's monitoring layer reports 'healthy' status for agents that are functionally inert due to infrastructure constraints or empty inputs.
 
-> When the network or storage fails, agents may still report 'healthy' status because they are executing their local loops, but the data they produce becomes stale or incorrect.
+> This creates a dangerous decoupling where Sean perceives his knowledge system as active and productive, while in reality, the semantic synthesis pipeline is stalled by host unreachability and the research pipeline is dormant due to lack of new data.
 
 ## Examples
 
-- Daily summaries that feel complete but are actually based on outdated information
-- Agents reporting healthy status despite infrastructure gaps
+- deep-researcher ... Status: healthy ... mode=queue ... notes='no unchecked items'
+- knowledge-lint ... Status: healthy ... notes='tier1=1387 tier2=250 | Tier-2 LLM scan: deferred (host unreachable).'
 
 ## Related Concepts
 
-[[Silent Decay in Strategic Pipelines]] [[The Illusion of Health in Autonomous Systems]]
+[[The Illusion of Health in Autonomous Systems]] [[Silent Failure Propagation in Agent Fleets]]

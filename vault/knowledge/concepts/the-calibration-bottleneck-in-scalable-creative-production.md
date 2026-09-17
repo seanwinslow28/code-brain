@@ -2,7 +2,7 @@
 title: "The Calibration Bottleneck in Scalable Creative Production"
 type: concept
 sources:
-  - knowledge/concepts/the-calibration-bottleneck-in-scalable-creative-production.md
+  - knowledge/connections/the-audit-first-architecture-of-professional-identity.md
 tags: [auto-generated, phase-6]
 created: 2026-09-17
 updated: 2026-09-17
@@ -10,22 +10,23 @@ updated: 2026-09-17
 
 ## Definition
 
-This mechanism describes the structural limit where a single-shot model's output quality is constrained by its inability to iteratively refine against a ground truth, forcing reliance on manual intervention that does not scale. As production volume increases, the variance in output quality expands unless there is a rigorous, scalable calibration process. The bottleneck occurs when the human ability to define and enforce 'good' becomes the limiting factor for the entire system's throughput, creating a hard cap on automation velocity.
+This mechanism describes the non-linear scaling of human cognitive load relative to automated output volume. As an agent fleet increases its production rate, the supervisor's capacity to verify quality does not scale linearly but rather hits a hard ceiling defined by attention span and verification latency. This creates a structural bottleneck where the value of the system is determined not by the speed of creation, but by the throughput of the human audit layer.
 
 ## Context
 
-Sean is trying to scale his creative studio operations while maintaining specific taste standards. This concept highlights why manual calibration is a bottleneck and why automated or semi-automated calibration loops are necessary for scaling without degrading quality.
+Sean is observing his own fleet runs where concept counts are skyrocketing (125+ concepts) while his ability to meaningfully engage with them remains constant. He needs to recognize that adding more agents or increasing their output is counter-productive if it exceeds his personal calibration threshold, leading to 'legibility debt' where he can no longer distinguish signal from noise.
 
 ## Evidence
 
-> Her practice started by reading every output by hand at a scale of fifty students per cohort, then learning error analysis from Husain's course when that stopped scaling.
+> This connection reveals a fundamental tension between the scalability of automated synthesis and the human capacity to verify its output. As Sean’s vault synthesizer scales up concept production, the volume of potential insights outpaces his ability to grade them effectively.
 
-> An opportunity from a story-based interview outranks one from a general interview
+> The consequence is that the marginal value of each additional concept drops precipitously once the supervisor's attention is fully saturated, turning high-volume runs into noise rather than signal.
 
 ## Examples
 
-- of 500 teams uploading three interviews each, about eight had story-based interviews, and eight different interview types showed up
+- Run on 2026-08-15 produced 123 concepts and 43 connections in 2733 seconds, yet the rejected count was only 36, suggesting a high volume of low-signal output that requires disproportionate human review time.
+- The shift from qwen3-14b to qwen3.6-35b-a3b-32k did not reduce the concept count significantly (94 vs 97 in July), indicating that model size is not the primary driver of calibration load.
 
 ## Related Concepts
 
-[[Taste as Evaluation Function vs. Activity Proof]] [[The Homogenization Trap in Agentic Creative Workflows]]
+[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[Legibility Debt as a Supervision Failure Mode]]

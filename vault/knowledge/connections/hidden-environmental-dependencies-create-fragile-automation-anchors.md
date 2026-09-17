@@ -5,8 +5,8 @@ connects:
   - The Illusion of Competence in Automated Systems
   - Legibility Debt as a Supervision Failure Mode
   - Operational Uptime vs. Semantic Value in Agent Fleets
-created: 2026-09-16
-updated: 2026-09-16
+created: 2026-09-17
+updated: 2026-09-17
 ---
 
 ## Synthesis
@@ -17,7 +17,7 @@ The core tension lies between the apparent reliability of automated systems and 
 
 ### [[The Illusion of Competence in Automated Systems]]
 
-> sweep works live today only because ~/.config/last30days/.env holds AUTH_TOKEN/CT0 written by the last30days setup wizard on 2026-06-08
+> The core tension lies between the apparent reliability of automated systems and the hidden fragility of their dependencies.
 
 ### [[Legibility Debt as a Supervision Failure Mode]]
 

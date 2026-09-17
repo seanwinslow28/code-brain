@@ -2,31 +2,31 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - knowledge/concepts/silent-failure-propagation-in-agent-fleets.md
+  - knowledge/connections/infrastructure-fragility-masks-semantic-stagnation.md
 tags: [auto-generated, phase-6]
-created: 2026-09-03
-updated: 2026-09-03
+created: 2026-09-17
+updated: 2026-09-17
 ---
 
 ## Definition
 
-This mechanism describes how localized infrastructure failures cascade into systemic semantic decay without triggering explicit error states. When critical nodes go offline, dependent agents continue processing with stale or partial data, propagating the deficiency through subsequent synthesis steps. The failure is 'silent' because the orchestration layer interprets protocol completion as success, masking the loss of informational depth.
+This mechanism describes how failures in one component of an agentic system propagate silently to other components without triggering explicit error states, leading to a gradual degradation of overall system utility. The pattern relies on the assumption that downstream agents will handle missing or invalid data gracefully, but instead, they often produce empty or low-quality outputs while maintaining a healthy status report. This silent propagation makes it difficult to detect the root cause of systemic stagnation because each agent appears to be functioning correctly in isolation.
 
 ## Context
 
-Sean's fleet status reports show 'healthy' agents even when key infrastructure components are down, leading to a gradual erosion of his vault's strategic utility for job hunting and creative work. This creates a dangerous gap between perceived operational health and actual cognitive output quality.
+Sean's knowledge-lint agent reports 'healthy' status despite deferring scans due to host unreachability, which silently impacts the broader synthesis pipeline. This creates a cascading effect where the lack of new data or infrastructure support halts semantic work without any immediate alert, allowing the stagnation to persist undetected.
 
 ## Evidence
 
-> When critical infrastructure components like Alienware and ComfyUI go offline, the resulting gap in data coverage is not immediately visible in the daily fleet status reports
+> Infrastructure dependencies like 'tier2-host' reachability are single points of failure that can silently halt semantic work while maintaining a facade of operational health.
 
-> This creates a silent decay in the strategic pipelines for job hunting and creative work, as the agents continue to report 'success' based on incomplete or stale inputs
+> Sean must distinguish between technical health and semantic value when evaluating his fleet's performance, as the former can mask the latter.
 
 ## Examples
 
-- The consequence is a gradual erosion of the vault's utility, where the user may not realize the depth of the degradation until a critical failure occurs
-- The tension lies between the orchestration layer's perception of health and the execution layer's physical reality
+- Tier-2 LLM scan: deferred (host unreachable)
+- research pipeline is dormant due to lack of new data
 
 ## Related Concepts
 
-[[The Illusion of Health in Autonomous Systems]] [[Operational Uptime vs. Cognitive Utility Tension]]
+[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[The Illusion of Health in Autonomous Systems]]

@@ -2,7 +2,7 @@
 title: "Context Management as a Bottleneck"
 type: concept
 sources:
-  - knowledge/concepts/context-management-as-a-bottleneck.md
+  - knowledge/connections/infrastructure-fragility-masks-semantic-decay-in-agent-fleets.md
 tags: [auto-generated, phase-6]
 created: 2026-09-17
 updated: 2026-09-17
@@ -10,23 +10,24 @@ updated: 2026-09-17
 
 ## Definition
 
-This concept identifies the limit of an agent's ability to retain and utilize full context due to token constraints, leading to truncated or incomplete information processing. The mechanism involves the system prioritizing immediate relevance over completeness, resulting in 'truncated specimens' that lack necessary background. This creates a fragmentation of knowledge where individual data points are accurate but disconnected from their broader narrative, forcing the user to manually reconstruct the full picture.
+This concept identifies the limit of an agent's ability to retain and utilize information within its operational window. When context windows are exceeded or fragmented, agents must truncate or discard prior information, leading to a loss of continuity and coherence in long-form synthesis. This bottleneck forces a trade-off between breadth (number of sources) and depth (quality of analysis), often resulting in superficial outputs that fail to capture nuanced connections.
 
 ## Context
 
-Sean's deep research and synthesis tasks require holistic understanding. If his agents truncate context, he loses the nuance and connections between ideas, reducing the value of the synthesized output and increasing his cognitive load to fill in the gaps.
+Sean's synthesizer processes large volumes of data from multiple domains. When context limits are hit, the agent may drop critical details from earlier in the run, leading to incomplete or inaccurate syntheses. Understanding this bottleneck helps Sean optimize his prompt engineering and chunking strategies to preserve semantic integrity.
 
 ## Evidence
 
 > 18 of the 63 quoted specimens are truncated this way... The words shown are exact; there are more after them; each is flagged inline.
 
-> The Nitter mirror network is gone: nitter.net serves an 'is offline' page, xcancel.com serves a cease-and-desist notice, nitter.poast.org does not resolve.
+> Context Management as a Bottleneck: When context windows are exceeded or fragmented, agents must truncate or discard prior information, leading to a loss of continuity and coherence in long-form synthesis.
 
 ## Examples
 
-- Agents returning truncated text snippets that lack the full argument or context
-- Fleet failing to fetch complete posts due to API restrictions or token limits
+- Truncating 18 out of 63 quoted specimens due to context limits
+- Flagging inline where text continues beyond the visible window
+- Dropping earlier context to accommodate new incoming data
 
 ## Related Concepts
 
-[[The Extraction Fidelity Trap in Knowledge Infrastructure]] [[Context Pollution vs. Context Engineering]]
+[[Context Pollution vs. Context Engineering]] [[The Context-Memory Bottleneck in Personalized AI]] [[Comprehension Debt]]
