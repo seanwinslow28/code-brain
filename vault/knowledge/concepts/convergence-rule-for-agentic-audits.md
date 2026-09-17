@@ -2,10 +2,10 @@
 title: "Convergence Rule for Agentic Audits"
 type: concept
 sources:
-  - 00_inbox/tickets.md
+  - knowledge/concepts/convergence-rule-for-agentic-audits.md
 tags: [auto-generated, phase-6]
-created: 2026-09-16
-updated: 2026-09-16
+created: 2026-09-17
+updated: 2026-09-17
 ---
 
 ## Definition
@@ -18,9 +18,9 @@ Sean is investigating whether his master skill needs a per-artifact repair cap o
 
 ## Evidence
 
-> propose a convergence rule for the master skill (a per-artifact repair cap, a severity floor tied to the P0 rule, or a 'holds / residual' verification pass instead of a fresh audit)
-
 > the ladder escalates on every material finding and has no stopping rule
+
+> propose a convergence rule for the master skill (a per-artifact repair cap, a severity floor tied to the P0 rule, or a 'holds / residual' verification pass instead of a fresh audit)
 
 ## Examples
 

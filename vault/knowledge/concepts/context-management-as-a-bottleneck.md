@@ -2,10 +2,10 @@
 title: "Context Management as a Bottleneck"
 type: concept
 sources:
-  - knowledge/connections/infrastructure-fragility-masks-semantic-decay-in-agent-fleets.md
+  - knowledge/concepts/context-management-as-a-bottleneck.md
 tags: [auto-generated, phase-6]
-created: 2026-09-16
-updated: 2026-09-16
+created: 2026-09-17
+updated: 2026-09-17
 ---
 
 ## Definition

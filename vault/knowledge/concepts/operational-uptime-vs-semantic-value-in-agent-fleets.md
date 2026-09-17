@@ -2,31 +2,31 @@
 title: "Operational Uptime vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/infrastructure-fragility-masks-semantic-decay-in-agent-fleets.md
+  - knowledge/connections/cross-domain-tension-operational-health-masks-semantic-decay-in-agentic-workflows.md
 tags: [auto-generated, phase-6]
-created: 2026-09-16
-updated: 2026-09-16
+created: 2026-09-17
+updated: 2026-09-17
 ---
 
 ## Definition
 
-This concept describes a systemic decoupling where technical success metrics (HTTP status codes, connection counts) remain green while the informational utility of the data degrades to zero or negative value. The mechanism relies on protocol-level compliance masking content-level emptiness, creating a feedback loop where agents optimize for throughput rather than insight. When external sources enforce paywalls or remove content, the agent fleet continues to process these 'successful' requests, effectively amplifying noise while believing it is gathering signal. This creates an illusion of productivity that masks strategic stagnation.
+This tension arises when an agent's local execution loop remains active and reports healthy status despite the underlying data context becoming stale or incorrect due to infrastructure failures. The mechanism is a decoupling of operational signal from semantic truth, where the system appears functional because it is still processing, but the content it produces is based on outdated information. This creates a dangerous feedback loop where automated summaries feel complete and coherent, yet are fundamentally disconnected from the current state of Sean's job hunt or creative projects.
 
 ## Context
 
-Sean's fleet relies on scraping X and Nitter mirrors for market sentiment and cultural reference mapping. If these sources become hostile (HTTP 402) or empty, his 'success' metrics will remain high while his knowledge base accumulates low-signal artifacts, leading to poor strategic decisions based on hollow data.
+Sean relies on daily agent runs to maintain his personal knowledge vault and job hunt status. If the agents report 'healthy' while serving stale data, he may make strategic errors based on false confidence in the system's accuracy, missing critical updates in his applications or creative work.
 
 ## Evidence
 
-> X itself is not fetchable. https://x.com/<handle> returns HTTP 402 without auth. The Nitter mirror network is gone: nitter.net serves an 'is offline' page, xcancel.com serves a cease-and-desist notice, nitter.poast.org does not resolve.
+> The fleet's active agents maintain operational uptime by executing their defined tasks, but this masks the decay of semantic value due to the staleness of critical quality assurance agents.
 
-> 79 URLs went in. 79 came back. 0 failures, 0 dead links, 0 reconstructions. One returned a link-only post with no words, leaving 78 usable posts across 19 accounts.
+> When the network or storage fails, agents may still report 'healthy' status because they are executing their local loops, but the data they produce becomes stale or incorrect.
 
 ## Examples
 
-- Agents reporting '0 failures' while processing HTTP 402 paywall pages from X.com
-- Fleet continuing to scrape nitter.net despite it serving an 'is offline' page
+- Daily summaries that feel complete but are actually based on outdated information
+- Agents reporting healthy status despite infrastructure gaps
 
 ## Related Concepts
 
-[[The Illusion of Competence in Automated Systems]] [[Silent Decay in Strategic Pipelines]]
+[[Silent Decay in Strategic Pipelines]] [[The Illusion of Health in Autonomous Systems]]

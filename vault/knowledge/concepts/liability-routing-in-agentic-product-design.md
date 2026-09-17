@@ -2,10 +2,10 @@
 title: "Liability Routing in Agentic Product Design"
 type: concept
 sources:
-  - 20_projects/research/2026-09-09-productcraft-research-cross-studio-handoff-prior-art.md
+  - knowledge/concepts/liability-routing-in-agentic-product-design.md
 tags: [auto-generated, phase-6]
-created: 2026-09-16
-updated: 2026-09-16
+created: 2026-09-17
+updated: 2026-09-17
 ---
 
 ## Definition

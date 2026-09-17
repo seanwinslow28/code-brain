@@ -4,29 +4,29 @@ type: concept
 sources:
   - knowledge/concepts/the-director-intern-invariant-in-creative-and-professional-identity.md
 tags: [auto-generated, phase-6]
-created: 2026-09-16
-updated: 2026-09-16
+created: 2026-09-17
+updated: 2026-09-17
 ---
 
 ## Definition
 
-This invariant describes a structural asymmetry where the creator (Director) must maintain high-fidelity taste standards while delegating execution to lower-cost, higher-volume agents (the Intern). The mechanism relies on the Director retaining 'taste' and 'boundary setting' as the primary value drivers, while the Intern handles the 'volume' and 'formatting'. When the Intern fails silently or produces low-fidelity work, the Director faces a choice between absorbing the labor (destroying leverage) or rejecting the output (destroying velocity). This creates a specific type of 'Legibility Debt' where the Director cannot easily audit the quality of the work without re-performing it themselves.
+This invariant describes a structural mismatch where a candidate's accumulated professional tenure creates an epistemic gap that makes entry-level signals feel inauthentic while simultaneously rendering them overqualified for roles lacking the necessary autonomy. The tension forces a strategic choice between suppressing one's professional identity to fit a novice narrative or rejecting the role as a category error regarding their current operational reality. This mechanism highlights how applying for internships with significant experience is not just a bad fit, but a fundamental misalignment of career stage expectations.
 
 ## Context
 
-Sean is building a 'Productcraft bench' and 'Systemcraft' infrastructure that relies heavily on agent fleets to synthesize research and manage knowledge. The risk here is not just technical failure, but the erosion of his professional authority if the agents produce 'slop' or stale context that he must manually correct before sending to clients or stakeholders.
+Sean has 10 years of professional experience but is currently targeting roles based on a '2 YOE' band, creating a vulnerability where he might be filtered out for being too senior or applying to internships that ignore his actual career stage. This concept helps him recognize when a job description is not just a bad fit, but a category error regarding his professional identity.
 
 ## Evidence
 
-> The bench is not an org chart with seven headcount; it is one PM's toolset, split into artifact-owning stages so each stage can be grounded in its own canon and audited by a different one.
+> Internship role targeting current students is fundamentally incompatible with Sean's 10 years of professional experience.
 
-> Systemcraft's Evals & Evidence Architect: it designs metrics and grades evidence, co-signs the Discovery Lead's evidence and audits the Growth seat's experiments, and never makes a product decision.
+> Senior PM title is a stretch for Sean's 2 years of experience, and the role requires on-site presence in CA or NY which violates his geographic and RTO constraints.
 
 ## Examples
 
-- Sean defining the 'Insights & Analytics' seat as an auditor that 'never makes a product decision' but 'grades evidence', mirroring how he wants his agents to grade research without making strategic choices for him.
-- The rejection of social lanes because they returned 'near-zero relevant signal', forcing a reliance on primary-source web sweeps which require more direct human oversight.
+- Applying to Duolingo's Associate Product Manager Internship despite having 10 years of professional experience.
+- Viewing Robinhood's Senior PM role as a 'stretch' due to a mismatch between the title's expectation and Sean's stated 2 YOE band.
 
 ## Related Concepts
 
-[[Legibility Debt as a Supervision Failure Mode]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
+[[Job Hunt as Sales Pipeline]] [[Taste as Evaluation Function vs. Activity Proof]]

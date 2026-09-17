@@ -2,10 +2,10 @@
 title: "Manufactured Finding"
 type: concept
 sources:
-  - 00_inbox/tickets.md
+  - knowledge/concepts/manufactured-finding.md
 tags: [auto-generated, phase-6]
-created: 2026-09-16
-updated: 2026-09-16
+created: 2026-09-17
+updated: 2026-09-17
 ---
 
 ## Definition

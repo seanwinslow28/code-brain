@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/taste-as-evaluation-function-vs-activity-proof.md
 tags: [auto-generated, phase-6]
-created: 2026-09-16
-updated: 2026-09-16
+created: 2026-09-17
+updated: 2026-09-17
 ---
 
 ## Definition

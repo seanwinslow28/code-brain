@@ -2,15 +2,15 @@
 title: "The Extraction Fidelity Trap in Knowledge Infrastructure"
 type: concept
 sources:
-  - 20_projects/research/2026-09-09-productcraft-book-to-seat-findings.md
+  - knowledge/concepts/the-extraction-fidelity-trap-in-knowledge-infrastructure.md
 tags: [auto-generated, phase-6]
-created: 2026-09-16
-updated: 2026-09-16
+created: 2026-09-17
+updated: 2026-09-17
 ---
 
 ## Definition
 
-This mechanism describes the systemic risk where high-fidelity content extraction (such as ingesting full book texts) is conflated with low-fidelity strategic utility. When agents prioritize capturing raw data volume over curating actionable insights, they create a 'fidelity trap' where the infrastructure becomes heavy with unprocessed information that degrades retrieval precision. The invariant here is that storage capacity does not correlate with decision-making quality; instead, it often inversely correlates with the signal-to-noise ratio available to the user.
+This mechanism describes the systemic risk where high-fidelity content extraction is conflated with low-fidelity strategic utility. When agents prioritize capturing raw data volume over curating actionable insights, they create a 'fidelity trap' where the infrastructure becomes heavy with unprocessed information that degrades retrieval precision. The invariant here is that storage capacity does not correlate with decision-making quality; instead, it often inversely correlates with the signal-to-noise ratio available to the user.
 
 ## Context
 

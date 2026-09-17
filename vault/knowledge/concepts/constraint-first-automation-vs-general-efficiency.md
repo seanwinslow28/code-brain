@@ -2,31 +2,31 @@
 title: "Constraint-First Automation vs. General Efficiency"
 type: concept
 sources:
-  - 20_projects/research/2026-09-09-productcraft-book-to-seat-findings.md
+  - knowledge/concepts/constraint-first-automation-vs-general-efficiency.md
 tags: [auto-generated, phase-6]
-created: 2026-09-16
-updated: 2026-09-16
+created: 2026-09-17
+updated: 2026-09-17
 ---
 
 ## Definition
 
-This pattern emerges when automation is driven by strict boundary conditions (cost, format, availability) rather than broad efficiency goals. Instead of optimizing for the fastest path to information, the system optimizes for the most robust path within defined constraints, such as 'zero cost' or 'DRM-free'. This creates a more resilient infrastructure because it avoids dependencies on fragile external factors like subscription renewals or variable pricing, forcing the agent to rely on verified, static data points.
+This mechanism defines a prioritization strategy where automation and tooling are selected not for their ability to maximize output volume, but for their capacity to enforce hard constraints such as geographic location, remote-work ratios, or role seniority bands. Unlike general efficiency tools that seek to reduce friction across all tasks, constraint-first automation acts as a filter, explicitly rejecting opportunities that violate core lifestyle or career architecture requirements before any substantive engagement occurs. This prevents the 'slop' of low-signal applications and preserves cognitive resources for roles that align with the user's defined operational boundaries.
 
 ## Context
 
-Sean's research methodology explicitly rejects paid research tools in favor of web sweeps and free canon verification. By imposing a '$0 research' constraint, he forces the agents to prioritize verifiable facts over speculative insights, resulting in a more stable but potentially slower discovery process that avoids financial leakage.
+Sean's job hunt is heavily constrained by RTO (Remote-Only vs. Quarterly Surges) and geographic limits. The daily feed process explicitly scores these constraints, allowing him to quickly dismiss high-profile companies like Coinbase or Robinhood if they violate his '0-2 day RTO' preference, rather than wasting time on applications that would lead to lifestyle conflict.
 
 ## Evidence
 
-> Cost: $0 research (web sweeps; no paid research invoked). Estimated tier-1 purchase ~$290 in ebooks, several prices unverified at time of writing.
+> Strong industry fit (crypto) and remote-US location align well, but the 'not remote-only' policy with quarterly in-person surges may conflict with Sean's preference for 0-2 days RTO.
 
-> Web-search budgets ran out in every agent's final pass, so a handful of prices and runtimes are marked unverified rather than guessed.
+> Senior PM title is a stretch for Sean's 2 years of experience, and the role requires on-site presence in CA or NY which violates his geographic and RTO constraints.
 
 ## Examples
 
-- Marking prices as 'unverified' rather than guessing prevents the introduction of hallucinated financial data into the corpus.
-- Using 'DRM-free likely' as a filter criterion ensures long-term accessibility of assets, prioritizing ownership over convenience.
+- Scoring Coinbase as a '4/5' fit but flagging the 'quarterly surges' as a primary concern.
+- Marking Robinhood as a '1/5' weak fit primarily due to the 'Menlo Park/NY only' location constraint.
 
 ## Related Concepts
 
-[[Cost-Capped Agentic Workflows]] [[Operational Uptime vs. Cognitive Utility Tension]]
+[[Job Hunt as Sales Pipeline]] [[Structural Integrity vs. Automation Velocity]]

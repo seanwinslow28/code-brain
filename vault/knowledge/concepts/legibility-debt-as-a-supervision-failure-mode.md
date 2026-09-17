@@ -2,25 +2,25 @@
 title: "Legibility Debt as a Supervision Failure Mode"
 type: concept
 sources:
-  - knowledge/connections/hidden-environmental-dependencies-create-fragile-automation-anchors.md
+  - knowledge/concepts/legibility-debt-as-a-supervision-failure-mode.md
 tags: [auto-generated, phase-6]
-created: 2026-09-16
-updated: 2026-09-16
+created: 2026-09-17
+updated: 2026-09-17
 ---
 
 ## Definition
 
-Legibility debt accumulates when the operational requirements of a system diverge from its visible documentation or code structure, forcing supervisors to rely on tacit knowledge rather than explicit rules. This debt manifests as a supervision failure because the supervisor cannot verify the system's health through standard observability tools, only through manual inspection of hidden state files. The cost of this debt is that any change to the environment breaks the implicit contract between the tool and its user, requiring deep debugging skills to resolve.
+Legibility debt is the accumulation of operational divergence between a system's actual environmental dependencies and its visible documentation, forcing supervisors to rely on tacit knowledge rather than explicit rules. This debt manifests as a supervision failure because standard observability tools cannot verify system health, requiring manual inspection of hidden state files or browser-specific quirks. The cost of this debt is that any change to the environment breaks the implicit contract between the tool and its user, necessitating deep debugging skills to resolve rather than simple configuration updates.
 
 ## Context
 
-Sean must manually inspect hidden config directories and browser cookie formats to understand why an agent failed. This prevents him from scaling his supervision because he cannot delegate fixes to other agents or junior engineers without first documenting these obscure environmental dependencies.
+Sean must manually inspect hidden config directories and browser cookie formats to understand why an agent failed, preventing him from scaling his supervision. He cannot delegate fixes to other agents or junior engineers without first documenting these obscure environmental dependencies, creating a bottleneck where only he can maintain the system's operational integrity.
 
 ## Evidence
 
-> The machine does not pick them — which sentence is the line is his judgment, and a machine guessing would fill the ledger with lines he never rat
+> Legibility debt accumulates when the operational requirements of a system diverge from its visible documentation or code structure, forcing supervisors to rely on tacit knowledge rather than explicit rules.
 
-> Safari returns EPERM on Cookies.binarycookies (no Full Disk Access), Firefox has no profile, and Chrome's reader throws Value is too large to be represented as a JavaScript number on a WebKit cookie timestamp
+> Safari returns EPERM on Cookies.binarycookies (no Full Disk Access), Firefox has no profile, and Chrome's reader throws Value is too large to be represented as a JavaScript number on a WebKit cookie timestamp.
 
 ## Examples
 
@@ -29,4 +29,4 @@ Sean must manually inspect hidden config directories and browser cookie formats 
 
 ## Related Concepts
 
-[[The Illusion of Competence in Automated Systems]] [[Tacit Knowledge Erosion vs. Automation Scale]]
+[[Tacit Knowledge Erosion vs. Automation Scale]] [[The Illusion of Competence in Automated Systems]]
