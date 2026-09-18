@@ -2,10 +2,10 @@
 title: "The Director-Intern Invariant in Creative and Professional Identity"
 type: concept
 sources:
-  - knowledge/connections/the-audit-first-architecture-of-professional-identity.md
+  - knowledge/concepts/the-director-intern-invariant-in-creative-and-professional-identity.md
 tags: [auto-generated, phase-6]
-created: 2026-09-17
-updated: 2026-09-17
+created: 2026-09-18
+updated: 2026-09-18
 ---
 
 ## Definition

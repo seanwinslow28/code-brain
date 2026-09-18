@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/constraint-first-automation-vs-general-efficiency.md
 tags: [auto-generated, phase-6]
-created: 2026-09-17
-updated: 2026-09-17
+created: 2026-09-18
+updated: 2026-09-18
 ---
 
 ## Definition

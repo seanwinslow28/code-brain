@@ -4,13 +4,13 @@ type: concept
 sources:
   - knowledge/concepts/liability-routing-in-agentic-product-design.md
 tags: [auto-generated, phase-6]
-created: 2026-09-17
-updated: 2026-09-17
+created: 2026-09-18
+updated: 2026-09-18
 ---
 
 ## Definition
 
-This concept defines the structural mechanism by which decision authority and failure accountability are assigned to specific agents within a typed handoff protocol. It relies on explicit state transitions—such as `TASK_STATE_REJECTED` or `INPUT_REQUIRED`—to force a refusal or request for clarification rather than allowing silent degradation. The system treats these refusals not as errors but as valid, addressable outcomes that preserve the integrity of the receiving agent's context.
+This mechanism assigns decision authority and failure accountability to specific agents within a typed handoff protocol by treating refusals as valid, addressable outcomes rather than errors. It relies on explicit state transitions—such as `TASK_STATE_REJECTED` or `INPUT_REQUIRED`—to force a refusal or request for clarification instead of allowing silent degradation. The system preserves the integrity of the receiving agent's context by ensuring that bad data does not propagate through a chain of autonomous agents because no one explicitly claimed responsibility for rejecting it.
 
 ## Context
 

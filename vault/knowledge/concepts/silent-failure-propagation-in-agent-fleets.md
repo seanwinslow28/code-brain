@@ -2,10 +2,10 @@
 title: "Silent Failure Propagation in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/infrastructure-fragility-masks-semantic-stagnation.md
+  - knowledge/concepts/silent-failure-propagation-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-09-17
-updated: 2026-09-17
+created: 2026-09-18
+updated: 2026-09-18
 ---
 
 ## Definition

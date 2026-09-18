@@ -4,17 +4,17 @@ type: concept
 sources:
   - knowledge/connections/infrastructure-fragility-masks-semantic-decay-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-09-17
-updated: 2026-09-17
+created: 2026-09-18
+updated: 2026-09-18
 ---
 
 ## Definition
 
-This pattern occurs when automated systems achieve high completion rates on degraded inputs, creating a false positive for system health. The mechanism relies on the agent's inability to distinguish between 'successful retrieval' and 'useful information,' leading to a state where the system is technically functional but strategically inert. This illusion persists because standard monitoring tools track connectivity and syntax rather than semantic richness or contextual relevance.
+This pattern occurs when automated systems validate their own success based on structural integrity (e.g., valid JSON, successful HTTP handshake) rather than semantic richness or actionable insight. The system interprets the absence of errors as the presence of value, masking the fact that the output is structurally sound but informationally void. This leads to a dangerous blind spot where operational health metrics mask semantic stagnation.
 
 ## Context
 
-Sean needs to detect when his agents are merely echoing back empty shells of data. Recognizing this illusion allows him to shift from volume-based scraping to value-based curation, preventing the accumulation of 'slop' that degrades his personal knowledge vault's signal-to-noise ratio.
+Sean's job hunt and creative studio workflows depend on high-fidelity data. If agents produce 'clean' but empty outputs (e.g., link-only posts with no text), the system appears competent, but the strategic pipeline is starved of meaningful content, requiring manual intervention to detect the decay.
 
 ## Evidence
 
@@ -24,10 +24,9 @@ Sean needs to detect when his agents are merely echoing back empty shells of dat
 
 ## Examples
 
-- Counting 79 successful HTTP responses despite most containing no text
-- Monitoring dashboards showing green lights while data quality drops to zero
-- Agents completing tasks without verifying the semantic integrity of the output
+- An agent successfully fetching a URL but returning only a link with no accompanying text or metadata.
+- Monitoring dashboards showing green lights for all API calls despite the data source being effectively dead or restricted.
 
 ## Related Concepts
 
-[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[Slop as a Trust Deficit]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]
+[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[Silent Decay in Strategic Pipelines]]
