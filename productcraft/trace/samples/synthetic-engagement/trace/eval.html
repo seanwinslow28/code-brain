@@ -96,9 +96,96 @@ p { margin: 0 0 0.75rem; max-width: var(--measure); }
 .fails .who b { display: block; color: var(--ink); font-weight: 600; }
 .fails .why { font-size: var(--fs-1); }
 .fails .why small { display: block; color: var(--sub); font-size: var(--fs-0); margin-top: 0.15rem; }
-.rung { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 2rem; font-size: var(--fs-0); }
-.rung li { display: grid; grid-template-columns: 1rem 1fr auto; gap: 0.5rem; align-items: baseline; }
+.rung { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.5rem; font-size: var(--fs-0); }
+.rung li { display: grid; grid-template-columns: 1rem 1fr auto; gap: 0.2rem 0.5rem; align-items: baseline; padding-bottom: 0.4rem; border-bottom: 1px solid var(--ink-hairline); }
+.rung li:last-child { border-bottom: 0; }
+.rung .what { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: baseline; }
+.rung .state { color: var(--sub); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; }
 .rung .n { color: var(--sub); }
+.rung .why { grid-column: 2 / -1; margin: 0.25rem 0 0; padding-left: 1rem; }
+.rung .why li { display: list-item; list-style: disc; border: 0; padding: 0; }
+.rung .implication { grid-column: 2 / -1; margin: 0.3rem 0 0; color: var(--sub); max-width: 60ch; }
+.term { font-size: var(--fs-0); margin-top: 0.6rem; }
+.term summary { color: var(--sub); cursor: pointer; }
+.term p { margin-top: 0.4rem; }
+
+/* what you are judging */
+.judging { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem 2rem; margin-bottom: 1.5rem; }
+.judging .stat h3 { font-size: var(--fs-0); font-family: var(--font-body); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sub); margin: 0 0 0.3rem; }
+.judging .v { font-size: var(--fs-2); margin: 0 0 0.35rem; font-variant-numeric: tabular-nums; }
+.judging .v b { font-weight: 600; }
+.judging .s { font-size: var(--fs-0); color: var(--sub); margin: 0; }
+.prompts { border-collapse: collapse; font-size: var(--fs-0); max-width: var(--measure); }
+.prompts caption { text-align: left; color: var(--ink); padding-bottom: 0.4rem; }
+.prompts th, .prompts td { border-top: 1px solid var(--ink-hairline); padding: 0.35rem 0.75rem 0.35rem 0; text-align: left; vertical-align: top; }
+.prompts th { font-weight: 600; width: 5rem; }
+.intro { font-size: var(--fs-1); max-width: var(--measure); margin-top: 0.25rem; }
+
+/* guided reading */
+.guided { margin-bottom: 1rem; }
+.guided.empty p { max-width: var(--measure); }
+.guided-intro { max-width: var(--measure); }
+.guided .cap { max-width: var(--measure); color: var(--sub); font-size: var(--fs-0); }
+.case-errors { border: 1px solid var(--ink); padding: 0.6rem 0.9rem; margin: 0.75rem 0; font-size: var(--fs-0); max-width: var(--measure); }
+.case-errors ul { margin: 0.35rem 0 0; padding-left: 1.1rem; }
+.case-links { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; font-size: var(--fs-0); margin: 0.75rem 0; }
+.guided-tools { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 1rem; font-size: var(--fs-0); }
+.btn.file { position: relative; overflow: hidden; display: inline-flex; align-items: center; }
+.btn.file input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.chapters { border-top: 1px solid var(--ink); }
+.chapter { border-bottom: 1px solid var(--ink-hairline); }
+.chapter > summary { list-style: none; display: grid; grid-template-columns: 2.5rem 1fr auto; gap: 0.75rem; align-items: baseline; padding: 0.8rem var(--row-x); cursor: pointer; }
+.chapter > summary::-webkit-details-marker { display: none; }
+.chapter > summary:hover { background: var(--ink-wash-1); }
+.chapter[open] > summary { background: var(--ink-wash-1); }
+.chapter.current > summary { box-shadow: inset 0 -2px 0 0 var(--accent); }
+.chapter .number { color: var(--sub); font-variant-numeric: tabular-nums; font-size: var(--fs-0); }
+.chapter .ct { display: block; font-size: var(--fs-2); }
+.chapter .chapter-title .sub { font-size: var(--fs-0); }
+.pid-sub { font-size: 0.75rem; color: var(--sub); margin-left: 0.35rem; font-variant-numeric: tabular-nums; }
+.assist-tag { border: 1px solid var(--ink-hairline); padding: 0 0.4rem; font-size: 0.75rem; color: var(--sub); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+.case-body { padding: 0.25rem var(--row-x) 1.75rem calc(var(--row-x) + 2.5rem + 0.75rem); max-width: 68ch; }
+.case-body h4 { font-family: var(--font-body); font-size: var(--fs-0); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--sub); margin: 1.25rem 0 0.4rem; }
+.case-body .focus { color: var(--sub); font-size: var(--fs-0); }
+.case-body .story p, .case-body .reveal p, .help p { max-width: 68ch; }
+.source { border-left: 2px solid var(--ink-wash-3); padding-left: 0.9rem; margin-bottom: 0.9rem; }
+.source .prov { font-size: var(--fs-0); color: var(--sub); margin-bottom: 0.3rem; overflow-wrap: anywhere; }
+.source blockquote { margin: 0; font-size: var(--fs-1); }
+.source blockquote::before { content: "“"; } .source blockquote::after { content: "”"; }
+.qualified { border: 1px dashed var(--ink-wash-3); padding: 0.4rem 0.6rem; font-size: var(--fs-0); }
+.fingerprint { font-size: 0.75rem; color: var(--sub); margin-top: 0.4rem; }
+.fingerprint summary { cursor: pointer; }
+.fingerprint dl { display: grid; grid-template-columns: 11rem 1fr; gap: 0.1rem 0.5rem; margin: 0.3rem 0 0; }
+.fingerprint dt { color: var(--sub); } .fingerprint dd { margin: 0; overflow-wrap: anywhere; }
+.prov.sub { font-size: var(--fs-0); }
+.reveal.open { border-top: 1px solid var(--ink-hairline); padding-top: 0.5rem; margin-top: 1rem; }
+.help { border: 1px solid var(--ink-hairline); padding: 0.55rem 0.8rem; margin: 0.9rem 0; }
+.help > summary { cursor: pointer; font-weight: 600; }
+.help[open] > summary { margin-bottom: 0.5rem; }
+.practice { border-top: 1px solid var(--ink-hairline); margin-top: 1.25rem; padding-top: 0.75rem; }
+.practice fieldset { border: 0; margin: 0; padding: 0; }
+.practice legend { padding: 0; margin-bottom: 0.4rem; }
+.practice .choice { display: block; margin: 0.2rem 0; }
+.practice .choice input { margin-right: 0.45rem; }
+.practice .note-label { display: block; color: var(--sub); font-size: var(--fs-0); margin-top: 0.75rem; }
+.practice textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 0.25rem; background: transparent; color: var(--ink); border: 1px solid var(--ink-hairline); border-radius: 2px; padding: 0.35rem 0.5rem; font-size: var(--fs-1); resize: vertical; }
+.practice .actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin: 0.6rem 0 0.4rem; }
+.practice .sub { font-size: var(--fs-0); }
+.chapter .locked[data-locked='1'] > summary { font-style: italic; }
+.diagram { margin: 1rem 0; }
+.diagram figcaption { font-size: var(--fs-0); color: var(--sub); margin-bottom: 0.35rem; }
+.diagram svg { max-width: 100%; height: auto; font-family: var(--font-body); font-size: 12px; }
+.diagram text { fill: var(--ink); }
+.diagram .d-step, .diagram .d-decision, .diagram .d-branch { fill: var(--ink-wash-1); stroke: var(--ink-wash-3); stroke-width: 1; }
+.diagram .d-decision { fill: var(--ink-wash-2); }
+.diagram .d-branch { fill: none; stroke-dasharray: 3 3; }
+.diagram .d-edge { stroke: var(--ink-wash-4); fill: none; stroke-width: 1.25; }
+.diagram-text { font-size: var(--fs-0); color: var(--sub); margin: 0.4rem 0 0; padding-left: 1.1rem; }
+.terms { display: grid; grid-template-columns: auto 1fr; gap: 0.15rem 0.75rem; font-size: var(--fs-0); margin: 1rem 0 0; border-top: 1px solid var(--ink-hairline); padding-top: 0.6rem; }
+.terms dt { font-weight: 600; } .terms dd { margin: 0; color: var(--sub); }
+.case-foot { font-size: var(--fs-0); margin-top: 1rem; }
+.practice-fallback { font-size: var(--fs-0); color: var(--sub); }
+.practice-fallback textarea { width: 100%; box-sizing: border-box; background: transparent; color: var(--ink); border: 1px solid var(--ink-hairline); margin-top: 0.4rem; }
 
 /* train */
 .train { overflow-x: auto; }
@@ -125,7 +212,9 @@ p { margin: 0 0 0.75rem; max-width: var(--measure); }
 .filters .btn { padding: 0.2rem 0.55rem; }
 .passes { border-top: 1px solid var(--ink); }
 .pass { border-bottom: 1px solid var(--ink-hairline); }
-.pass summary { list-style: none; display: grid; grid-template-columns: 4.5rem 11rem 4.5rem 6rem 9rem 4rem 4rem 5.5rem 1fr; gap: 0 0.75rem; align-items: center; padding: 0.55rem var(--row-x); cursor: pointer; font-size: var(--fs-0); position: relative; }
+.pass summary { list-style: none; display: grid; grid-template-columns: 21rem 6rem 9rem 4rem 4rem 5.5rem 1fr; gap: 0 0.75rem; align-items: center; padding: 0.55rem var(--row-x); cursor: pointer; font-size: var(--fs-0); position: relative; }
+.pass summary .run b { font-weight: 600; }
+.pass summary .run .seat { color: var(--ink); }
 .pass summary::-webkit-details-marker { display: none; }
 .pass summary:hover { background: var(--ink-wash-1); }
 .pass.current summary { box-shadow: inset 0 -2px 0 0 var(--accent); }
@@ -164,6 +253,16 @@ p { margin: 0 0 0.75rem; max-width: var(--measure); }
 .label-form .state { grid-column: 1 / -1; color: var(--sub); display: flex; gap: 1rem; align-items: center; }
 .label-form .state .draft { color: var(--ink); }
 .blind-note { grid-column: 1 / -1; color: var(--sub); }
+.record-details { grid-column: 1 / -1; border-top: 1px solid var(--ink-hairline); padding-top: 0.6rem; }
+.record-details > summary { cursor: pointer; color: var(--sub); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; font-size: var(--fs-0); }
+.record-details[open] > summary { margin-bottom: 0.7rem; }
+.record-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 1.25rem 2.5rem; }
+.takeaways { list-style: none; margin: 0.5rem 0 0; padding: 0; font-size: var(--fs-0); display: grid; gap: 0.45rem; }
+.takeaways li { border-left: 2px solid var(--ink-wash-2); padding-left: 0.6rem; }
+.takeaways b { font-weight: 600; }
+.history { font-size: var(--fs-0); margin-top: 0.7rem; }
+.history summary { cursor: pointer; color: var(--sub); }
+.history .takeaways { max-height: 28rem; overflow-y: auto; }
 
 /* slots */
 .slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; }
@@ -181,17 +280,21 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
 @media (max-width: 900px) {
-  .broke, .slots, .detail { grid-template-columns: 1fr; }
-  .pass summary { grid-template-columns: 4.5rem 7rem 5rem 1fr; }
+  .broke, .slots, .detail, .record-grid, .judging { grid-template-columns: 1fr; }
+  .judging { gap: 1rem; }
+  .pass summary { grid-template-columns: 1fr 5.5rem; }
   .pass summary .wc, .pass summary .tok, .pass summary .rt, .pass summary .ffs, .pass summary .crit { display: none; }
+  .pass summary > .kind { display: none; }
+  .case-body { padding-left: var(--row-x); }
 }
 @media print {
   :root { --ground: #FBF6EC; --ink: #2A2622; --sub: #6E655B; --accent: #2F5D7C; }
   html { font-size: 11px; }
   body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .tools, .filters, .label-form, .btn, dialog { display: none !important; }
-  .pass, .fails li, .matrix, .stages, .train { break-inside: avoid; }
-  .pass summary { cursor: default; }
+  .tools, .filters, .label-form, .btn, dialog, .guided-tools, .practice .actions, .practice-fallback { display: none !important; }
+  .pass, .fails li, .matrix, .stages, .train, .chapter, .source, .diagram { break-inside: avoid; }
+  .pass summary, .chapter > summary { cursor: default; }
+  .practice textarea { border: 1px solid var(--ink-hairline); min-height: 3rem; }
   h2 { break-after: avoid; }
 }
 </style>
@@ -218,12 +321,131 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
     <button class="btn" id="mode" type="button" aria-pressed="false" aria-label="Switch to night studio">Night</button>
   </div>
 </header>
+
+<h2>What you are judging</h2>
+<div class="judging">
+  <div class="stat">
+    <h3>Record checks</h3>
+    <p class="v"><a href="#record-checks"><b>9 of 9</b> pass</a></p>
+    <p class="s">Automated checks of the records, not a quality score. They say the paperwork adds up, never that the thinking was good.</p>
+  </div>
+  <div class="stat">
+    <h3>Reviewer findings</h3>
+    <p class="v"><b>0 material</b> · <b>11</b> notes · 1 other</p>
+    <p class="s">A seat's assessment of one artifact and revision. Evidence for you to weigh, not a verdict. Read from 4 check records in <code>audits/</code>.</p>
+  </div>
+  <div class="stat">
+    <h3>Your labels</h3>
+    <p class="v">Labeled <b>22 of 25</b></p>
+    <p class="s">Your assessment of the work of each run: pass or fail, nothing between. An empty verdict means the review is unfinished, not a pass.</p>
+  </div>
+  <div class="stat">
+    <h3>Owner decisions</h3>
+    <p class="v">No gate has put a decision to you yet.</p>
+    <p class="s">Yours alone; a gate's recommendation never fills one in.</p>
+  </div>
+</div>
+<table class="prompts">
+  <caption>What to ask of each kind of run <span class="sub">— teaching prompts to calibrate, v1 · 2026-09-20, not an automated grader</span></caption>
+  <tbody><tr><th scope='row'>draft</th><td>Does its work answer the assigned question within the evidence and constraints?</td></tr><tr><th scope='row'>audit</th><td>Is the claimed defect supported, consequential, and explained well enough to act on?</td></tr><tr><th scope='row'>repair</th><td>Does the new version resolve the identified issue without creating a material contradiction?</td></tr><tr><th scope='row'>gate</th><td>Are verification, residuals, and decision authority clear?</td></tr></tbody>
+</table>
+
+<h2>What happened in this review</h2>
+<p class="intro">A made-up studio planned a casting tool for community theatre, and this page is the record of that planning being checked. Two moments are worth reading closely. Early on, a check stopped the strategy over a sentence that was never written down. Later, a check found a real hole and pointed at the wrong document as its cause. Everything here is invented for the kit&#x27;s tests: no seat wrote it, no theatre exists, and nobody was interviewed.</p>
 <p class="reading">Of <strong>25 passes</strong>, <strong>22 are labeled</strong>: 18 pass, 4 fail. <strong>3 wait for a verdict.</strong> The train broke first at stage 1, then at stages 2, 3 and 6; the stage-3 break is the one that cost downstream work. Rung 0 is clean on 9 of 9 checks.</p>
 <div class="counter" aria-live="polite">
   <span>Labeled <b id="labeled-n">22</b> of 25<span id="draft-note"></span></span>
   <span class="track" aria-hidden="true"><i id="track-file" style="width:88%"></i></span>
   <span>Next unlabeled: <a href="#pass-18" data-jump>pass-18</a></span>
 </div>
+
+<h2>Guided reading</h2>
+<div class="guided" id="guided">
+  <p class="guided-intro">2 cases from this engagement, in the order they were written, with decreasing help. Each one names the run it comes from and quotes the record it rests on. <b>Your practice answers stay here in the browser and never touch the labels file.</b> Written 2026-09-20.</p>
+  <p class="cap">These explanations are proposed readings, checked against the sources but not yet read by you. They are not an answer key, and disagreeing with one on the evidence is a good outcome.</p>
+  
+  <div class="case-links"><a href="#case-pass-02-1" data-case-link>1. A check stops the strategy over something nobody wrote down</a><a href="#case-pass-13" data-case-link>2. A check finds a hole and names the document it is standing in</a></div>
+  <div class="guided-tools">
+    <button class="btn" type="button" id="copy-practice">Copy practice notes</button>
+    <button class="btn" type="button" id="download-practice">Download backup</button>
+    <label class="btn file"><input type="file" id="restore-practice" accept="application/json,.json">Restore backup</label>
+    <span class="sub" id="practice-status" aria-live="polite">Nothing practised yet.</span>
+  </div>
+  <div class="chapters">
+<details class="chapter" id="case-pass-02-1" data-case="pass-02-1" data-assist="worked"
+  data-title="A check stops the strategy over something nobody wrote down" data-run="Run 2 · Red-team gate" data-pass="pass-02" open>
+  <summary>
+    <span class="number" aria-hidden="true">01</span>
+    <span class="chapter-title"><span class="ct">A check stops the strategy over something nobody wrote down</span>
+      <span class="sub">Run 2 · Red-team gate <span class="pid-sub">pass-02</span> · finding 1</span></span>
+    <span class="assist-tag">worked</span>
+  </summary>
+  <div class="case-body">
+    <p class="focus">Worked example — the story, the evidence and the reasoning are open.</p>
+    
+    
+<h4>Source excerpt</h4><div class='source' data-src='Finding 1 · the gate&#x27;s first round — audits/gate-1-r1.md:16 (sha256 faf32a8a08ef…)'><p class='prov'>Source excerpt · <b>Finding 1 · the gate&#x27;s first round</b> · audits/gate-1-r1.md:16</p><blockquote>GP-1 rests on an unstated assumption that directors control the rehearsal calendar.</blockquote><details class='fingerprint'><summary>Fingerprint</summary><dl><dt>path</dt><dd>audits/gate-1-r1.md</dd><dt>sha256 when written</dt><dd>faf32a8a08ef8407981ee1df9e8f842ac296a0e11a9df3aa45e3f40e31797d25</dd><dt>sha256 now</dt><dd>faf32a8a08ef8407981ee1df9e8f842ac296a0e11a9df3aa45e3f40e31797d25</dd></dl></details></div><div class='source' data-src='What the repaired strategy says now — artifacts/strategy-pov.md:29 (sha256 4cbcb041c546…)'><p class='prov'>Source excerpt · <b>What the repaired strategy says now</b> · artifacts/strategy-pov.md:29</p><blockquote>A1 — directors control the rehearsal calendar (testable in the pilot).</blockquote><details class='fingerprint'><summary>Fingerprint</summary><dl><dt>path</dt><dd>artifacts/strategy-pov.md</dd><dt>sha256 when written</dt><dd>4cbcb041c5463d7ac95d0ea8dac43b7ed20f8aed0aecb74540ce8045c478805d</dd><dt>sha256 now</dt><dd>4cbcb041c5463d7ac95d0ea8dac43b7ed20f8aed0aecb74540ce8045c478805d</dd></dl></details></div>
+<h4>Explanation</h4><div class="story"><p>The studio wanted to end the scramble that eats two rehearsal weeks a season, so its first document promised that the tool would own the rehearsal calendar and hand directors slots to accept. That promise only works if directors are the people who decide when rehearsals happen.</p><p>Nothing in the document said so. The check read the promise, asked what had to be true for it to work, and found a belief holding up the whole plan with nothing behind it — no interview, no register entry, no way to be proved wrong. The reviewer graded that as serious enough to stop the document, and left two smaller notes about wording alone.</p><p>The repair did not argue. It wrote the belief down as something to test in the pilot, split the promise into the case where a venue shares its calendar and the case where it does not, and dropped an action that no longer had a reason. The second round of the same check passed.</p></div><p class='prov sub'>Explanation · a proposed explanation, not an answer key, until Sean has read it against its sources.</p>
+<figure class="diagram"><figcaption>One step of the decision, not the whole rule</figcaption><svg viewBox="0 0 608 162" width="608" role="img" aria-label="A small flow: A promise in the plan then Is what it depends on written down then A stop, until someone writes it down and says how to test it then A note at most, and the test goes in the register"><rect class="d-step" x="8" y="64" width="160" height="34" rx="3"/><text x="88.0" y="85" text-anchor="middle"><tspan x="88.0" dy="0">A promise in the plan</tspan></text><rect class="d-decision" x="208" y="57" width="160" height="48" rx="3"/><text x="288.0" y="78" text-anchor="middle"><tspan x="288.0" dy="0">Is what it depends on</tspan><tspan x="288.0" dy="14">written down</tspan></text><path class="d-edge" d="M168 81 C 186 81, 190 81, 205 81"/><rect class="d-branch" x="408" y="12" width="160" height="62" rx="3"/><text x="488.0" y="33" text-anchor="middle"><tspan x="488.0" dy="0">no: A stop, until</tspan><tspan x="488.0" dy="14">someone writes it down</tspan><tspan x="488.0" dy="14">and says how to test it</tspan></text><path class="d-edge" d="M368 81 C 386 81, 390 43, 405 43"/><rect class="d-branch" x="408" y="88" width="160" height="62" rx="3"/><text x="488.0" y="109" text-anchor="middle"><tspan x="488.0" dy="0">yes: A note at most, and</tspan><tspan x="488.0" dy="14">the test goes in the</tspan><tspan x="488.0" dy="14">register</tspan></text><path class="d-edge" d="M368 81 C 386 81, 390 119, 405 119"/></svg><ul class="diagram-text"><li>A promise in the plan</li><li>Is what it depends on written down?</li><li>no: A stop, until someone writes it down and says how to test it</li><li>yes: A note at most, and the test goes in the register</li></ul></figure>
+<div class="reveal open"><h4>The reviewer's reasoning, and what the record says happened</h4><p>The objection was to an unstated, untested belief, not to the choice of problem. The gate&#x27;s own words are in the excerpt: the guiding policy rested on an assumption that directors control the calendar, and the document never said it. That is why the repair is one line in an assumption register rather than a new strategy. Note what you are judging here: the gate did a good job on a document that was not yet good. Those are two separate verdicts, and only the first one is yours on this run.</p><p class='prov sub'>Explanation · a proposed explanation, not an answer key, until Sean has read it against its sources.</p></div>
+
+<div class="practice" data-practice="pass-02-1">
+  <h4>Your turn</h4>
+  <fieldset><legend>What was the gate actually objecting to?</legend><label class="choice"><input type="radio" name="opt-pass-02-1" value="a" data-choice data-label="The plan picked the wrong problem to solve">The plan picked the wrong problem to solve</label><label class="choice"><input type="radio" name="opt-pass-02-1" value="b" data-choice data-label="The plan leaned on a belief it never stated or tested">The plan leaned on a belief it never stated or tested</label><label class="choice"><input type="radio" name="opt-pass-02-1" value="c" data-choice data-label="The plan had too many actions for its budget">The plan had too many actions for its budget</label></fieldset>
+  <label class="note-label">Your note — In your own words: what would have made this a note rather than a stop?
+    <textarea data-practice-note rows="3" maxlength="20000"></textarea>
+  </label>
+  <div class="actions">
+    <button class="btn" type="button" data-practice-save>Save my answer</button>
+    <button class="btn" type="button" data-practice-bookmark aria-pressed="false">Come back to this</button>
+    <span class="sub" data-practice-state>Nothing saved yet.</span>
+  </div>
+  <p class="sub">Practice notes are yours: they stay in this browser, never in the labels file, and a saved answer never fills in a verdict.</p>
+</div>
+    <dl class='terms'><dt>guiding policy</dt><dd>the one approach a strategy commits to, out of the ones it could have chosen.</dd><dt>assumption register</dt><dd>the list of things a plan needs to be true, written so each one can be tested.</dd></dl>
+    <p class="case-foot"><a href="#pass-02" data-jump>Open Run 2 · Red-team gate’s row below</a> to label it.</p>
+  </div>
+</details>
+<details class="chapter" id="case-pass-13" data-case="pass-13" data-assist="independent"
+  data-title="A check finds a hole and names the document it is standing in" data-run="Run 13 · Insights audit" data-pass="pass-13">
+  <summary>
+    <span class="number" aria-hidden="true">02</span>
+    <span class="chapter-title"><span class="ct">A check finds a hole and names the document it is standing in</span>
+      <span class="sub">Run 13 · Insights audit <span class="pid-sub">pass-13</span></span></span>
+    <span class="assist-tag">independent</span>
+  </summary>
+  <div class="case-body">
+    <p class="focus">On your own — the goal, the evidence and the question first; the diagnosis and the reasoning stay folded until you answer or ask.</p>
+    
+    
+<div class="story goal"><p>The growth document promises a loop: a director invites the cast, and cast members become next season&#x27;s directors. It puts a number on it — thirty invites per production — which is the kind of target someone is supposed to read off a dashboard later.</p></div>
+<h4>Source excerpt</h4><div class='source' data-src='The audit of the growth document — audits/audit-growth.md:17 (sha256 88b977d4935a…)'><p class='prov'>Source excerpt · <b>The audit of the growth document</b> · audits/audit-growth.md:17</p><blockquote>Stake: can every loop target be measured by the plan? No: L1 has a target and no metric, because the plan has no acquisition metric.</blockquote><details class='fingerprint'><summary>Fingerprint</summary><dl><dt>path</dt><dd>audits/audit-growth.md</dd><dt>sha256 when written</dt><dd>88b977d4935a36b6cd8d75e60dc34b2e49d2392ad4a53c4134f449a9022beeb5</dd><dt>sha256 now</dt><dd>88b977d4935a36b6cd8d75e60dc34b2e49d2392ad4a53c4134f449a9022beeb5</dd></dl></details></div><div class='source' data-src='The metrics plan, one stage earlier — artifacts/metrics-evidence-plan.md:29 (sha256 4c3e6cad5cba…)'><p class='prov'>Source excerpt · <b>The metrics plan, one stage earlier</b> · artifacts/metrics-evidence-plan.md:29</p><blockquote>OC-3 is bounced to the Strategist as unmeasurable by this plan</blockquote><details class='fingerprint'><summary>Fingerprint</summary><dl><dt>path</dt><dd>artifacts/metrics-evidence-plan.md</dd><dt>sha256 when written</dt><dd>4c3e6cad5cbaec5f4243359b81028b7caba71f939274694cd767c8762424f530</dd><dt>sha256 now</dt><dd>4c3e6cad5cbaec5f4243359b81028b7caba71f939274694cd767c8762424f530</dd></dl></details></div>
+
+<div class="practice" data-practice="pass-13">
+  <h4>Your turn</h4>
+  <fieldset><legend>Where does the fix for this belong?</legend><label class="choice"><input type="radio" name="opt-pass-13" value="a" data-choice data-label="In the growth document, which set the target">In the growth document, which set the target</label><label class="choice"><input type="radio" name="opt-pass-13" value="b" data-choice data-label="In the metrics plan one stage earlier, which has no metric to measure it with">In the metrics plan one stage earlier, which has no metric to measure it with</label><label class="choice"><input type="radio" name="opt-pass-13" value="c" data-choice data-label="Nowhere yet — there is not enough evidence to say">Nowhere yet — there is not enough evidence to say</label></fieldset>
+  <label class="note-label">Your note — Write the sentence you would put in the critique, naming the evidence and the consequence.
+    <textarea data-practice-note rows="3" maxlength="20000"></textarea>
+  </label>
+  <div class="actions">
+    <button class="btn" type="button" data-practice-save>Save my answer</button>
+    <button class="btn" type="button" data-practice-bookmark aria-pressed="false">Come back to this</button>
+    <span class="sub" data-practice-state>Nothing saved yet.</span>
+  </div>
+  <p class="sub">Practice notes are yours: they stay in this browser, never in the labels file, and a saved answer never fills in a verdict.</p>
+</div>
+
+<details class="help locked" data-exposure="reveal" data-locked="1"><summary>Show the diagnosis and the reviewer's reasoning</summary>
+  <div class="story"><p>The check that follows asks one question of every loop: can the plan actually measure this? Read the two excerpts and answer before you read on. The metrics plan written one stage earlier lists four metrics, and none of them counts anyone arriving.</p></div>
+  
+  <p>The auditor was right that the target cannot be read, and the reviewer of this run recorded the failure one stage upstream: the metrics plan has no acquisition metric, so the growth seat could not have measured its loop no matter how it wrote the target. Fixing the growth document alone would leave the hole exactly where it is. This is the most useful line on the page when it happens — it says the work to redo is somewhere other than the pass you are reading.</p><p class='prov sub'>Explanation · a proposed explanation, not an answer key, until Sean has read it against its sources.</p></details>
+    <dl class='terms'><dt>loop</dt><dd>a way the product brings the next user in through the last one.</dd><dt>first failing stage</dt><dd>the point in the train where the problem entered, which can be earlier than the run you are reading.</dd></dl>
+    <p class="case-foot"><a href="#pass-13" data-jump>Open Run 13 · Insights audit’s row below</a> to label it.</p>
+  </div>
+</details></div>
+  <details class="practice-fallback"><summary>If copying is blocked, take the notes from here</summary><textarea id="practice-text" rows="8" readonly></textarea></details>
+</div>
+
 
 <h2>Where it broke</h2>
 <div class="broke">
@@ -242,8 +464,12 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <div>
     <h3>The 4 fails, first failure named</h3>
     <ul class="fails"><li><div class='who'><b><a href='#pass-02' data-jump>pass-02</a></b>Red-team gate gate<br>broke at 1 Strategist</div><div class='why'>Gate was right to fail it: the calendar assumption was load-bearing and unstated. The gate&#x27;s own write-up buries the finding under two notes; lead with it.<small>at the pass read</small></div></li><li><div class='who'><b><a href='#pass-06' data-jump>pass-06</a></b>Insights co-sign<br>broke at 2 Discovery</div><div class='why'>Right to bounce E2 and E4, but E4&#x27;s bounce is the packet&#x27;s fault, not the co-sign&#x27;s; this row fails because the co-sign let E3 through with a count nobody can find in the transcripts.<small>at the pass read</small></div></li><li><div class='who'><b><a href='#pass-13' data-jump>pass-13</a></b>Insights audit<br>broke at 3 Insights</div><div class='why'>The audit is correct and the failure is upstream: the metrics plan (stage 3) has no acquisition metric, so Growth could not have measured L1. Fix the plan, not the loop.<small>upstream of the pass read</small></div></li><li><div class='who'><b><a href='#pass-21' data-jump>pass-21</a></b>Leadership draft<br>broke at 6 Delivery</div><div class='why'>The stakeholder map is fine. The topology names a return date that the handoff brief (stage 6) never set as a constraint on the team, so the packet inherited a constraint that does not exist.<small>upstream of the pass read</small></div></li></ul>
-    <h3>Rung 0 checks</h3>
-    <ul class="rung"><li><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg><span>Records parse and carry every required field</span><span class='n'>25 of 25</span></li><li><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg><span>Every pass has a record</span><span class='n'>25 of 25</span></li><li><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg><span>Every pass has a label row</span><span class='n'>25 of 25</span></li><li><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg><span>Input hashes match disk or a recorded prior revision</span><span class='n'>105 of 105</span></li><li><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg><span>Cited corpus files appear in the transcript&#x27;s file reads</span><span class='n'>8 of 8</span></li><li><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg><span>Every move names an existing upstream item; splits are subsets</span><span class='n'>31 of 31</span></li><li><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg><span>Meter present or UNMEASURED</span><span class='n'>25 of 25</span></li><li><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg><span>Each drafting stage has one draft, an audit, and its required co-signs</span><span class='n'>7 of 7</span></li><li><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg><span>Trials blind-labeled before their runtime is shown</span><span class='n'>1 of 1</span></li></ul>
+    
+<h3 id="record-checks">Record checks</h3>
+<p class="cap">Automated checks of the records and their traceability. Not a quality score, and never a verdict on a seat's thinking.</p>
+<ul class="rung"><li><span class='mark'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg></span><span class='what'>Records parse and carry every required field<span class='state'>verified</span></span><span class='n'>25 of 25</span></li><li><span class='mark'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg></span><span class='what'>Every pass has a record<span class='state'>verified</span></span><span class='n'>25 of 25</span></li><li><span class='mark'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg></span><span class='what'>Every pass has a label row<span class='state'>verified</span></span><span class='n'>25 of 25</span><ul class='why'><li class='sub'>3 row(s) still wait for a verdict: pass-18, pass-22, pass-23</li></ul></li><li><span class='mark'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg></span><span class='what'>Input hashes match disk or a recorded prior revision<span class='state'>verified</span></span><span class='n'>105 of 105</span><ul class='why'><li class='sub'>4 input(s) matched a superseded revision an earlier pass recorded as its output</li></ul></li><li><span class='mark'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg></span><span class='what'>Cited corpus files appear in the transcript&#x27;s file reads<span class='state'>verified</span></span><span class='n'>8 of 8</span><ul class='why'><li class='sub'>2 superseded artifact revision(s) not on disk: their citations are not re-checked</li></ul></li><li><span class='mark'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg></span><span class='what'>Every move names an existing upstream item; splits are subsets<span class='state'>verified</span></span><span class='n'>31 of 31</span><ul class='why'><li class='sub'>2 pass(es) whose artifact was later overwritten in place, so their Moves are no longer on disk: pass-01, pass-05</li></ul></li><li><span class='mark'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg></span><span class='what'>Meter present or UNMEASURED<span class='state'>verified</span></span><span class='n'>25 of 25</span><ul class='why'><li class='sub'>1 UNMEASURED: pass-25</li></ul></li><li><span class='mark'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg></span><span class='what'>Each drafting stage has one draft, an audit, and its required co-signs<span class='state'>verified</span></span><span class='n'>7 of 7</span></li><li><span class='mark'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg></span><span class='what'>Trials blind-labeled before their runtime is shown<span class='state'>verified</span></span><span class='n'>1 of 1</span><ul class='why'><li class='sub'>pass-18 / pass-16: blind pair, runtime stays hidden until both carry a verdict</li></ul></li></ul>
+<details class="term"><summary>What the kit calls these</summary><p class="sub">Rung 0 checks are the nine deterministic checks the kit runs with no model and no network. Rung 1 is the failure taxonomy, rung 2 a judge — both listed under <em>What comes later</em>.</p></details>
+
   </div>
 </div>
 
@@ -271,9 +497,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 <div class="passes" id="passes"><details class="pass v-pass" id="pass-01" data-pass="pass-01" data-kind="draft" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-01</span>
-  <span>Strategist</span>
-  <span class="kind">draft</span>
+  <span class="run"><b>Run 1</b> · <span class="seat">Strategist</span> <span class="kind">draft</span><span class="pid-sub">pass-01</span></span>
   <span class="kind">1 Strategist</span>
   <span class="rt">claude-opus-5</span>
   <span class="wc">34 min</span>
@@ -282,6 +506,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell>Diagnosis is one sentence and names the constraint. A new hire could restate it.</span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-02</span><span class='sub'>gate</span><span>STRATEGY FAIL — QUALITY VERDICT ONLY</span></li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/strategy/good-strategy-bad-strategy.md</li><li>corpus/strategy/shelf.md</li><li>brief.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves on disk: the artifact was overwritten in place by a later pass; the pass records keep the history.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Origin draft. Named the casting bottleneck as the diagnosis; two candidate guiding policies drafted, one chosen.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -295,29 +530,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-01.jsonl</dd>
       <dt>record</dt><dd>pass-01-product-strategist-draft.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>brief.md<span class='hash'>bebf61780772…</span></li><li>corpus/strategy/shelf.md<span class='hash'>ad784bcedd88…</span></li><li>corpus/strategy/good-strategy-bad-strategy.md<span class='hash'>9d64628f9152…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>brief.md<span class='hash'>bebf61780772…</span></li><li>corpus/strategy/shelf.md<span class='hash'>ad784bcedd88…</span></li><li>corpus/strategy/good-strategy-bad-strategy.md<span class='hash'>9d64628f9152…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>artifacts/strategy-pov.md</li><li>pc-eng-000.d01</li><li>pc-eng-000.d02</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-02</span><span class='sub'>gate</span><span>STRATEGY FAIL — QUALITY VERDICT ONLY</span></li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/strategy/good-strategy-bad-strategy.md</li><li>corpus/strategy/shelf.md</li><li>brief.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves on disk: the artifact was overwritten in place by a later pass; the pass records keep the history.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Origin draft. Named the casting bottleneck as the diagnosis; two candidate guiding policies drafted, one chosen.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-01">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-01">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2">Diagnosis is one sentence and names the constraint. A new hire could restate it.</textarea>
   </label>
   
@@ -325,9 +558,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-fail" id="pass-02" data-pass="pass-02" data-kind="gate" data-verdict="fail" data-pair="">
 <summary>
-  <span class="pid">pass-02</span>
-  <span>Red-team gate</span>
-  <span class="kind">gate</span>
+  <span class="run"><b>Run 2</b> · <span class="seat">Red-team gate</span><span class="pid-sub">pass-02</span></span>
   <span class="kind">1 Strategist</span>
   <span class="rt">codex gpt-5.6-sol high</span>
   <span class="wc">9 min</span>
@@ -336,6 +567,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell>Gate was right to fail it: the calendar assumption was load-bearing and unstated. The gate&#x27;s own write-up buries the finding under two notes; lead with it.</span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li class='sub'>none (gate: corpus withheld)</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Gate FAIL: guiding policy rests on an unstated assumption that directors control the rehearsal calendar.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -349,29 +591,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-02.txt</dd>
       <dt>record</dt><dd>pass-02-red-team-gate-gate.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>2ad1b8c308d2…</span></li><li>templates/red-team-protocol.md<span class='hash'>460fc281d224…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>2ad1b8c308d2…</span></li><li>templates/red-team-protocol.md<span class='hash'>460fc281d224…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li><li>the corpus</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>audits/gate-1-r1.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li class='sub'>none (gate: corpus withheld)</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Gate FAIL: guiding policy rests on an unstated assumption that directors control the rehearsal calendar.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-02">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-02">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs ><option value="">—</option><option value='1' selected>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2">Gate was right to fail it: the calendar assumption was load-bearing and unstated. The gate&#x27;s own write-up buries the finding under two notes; lead with it.</textarea>
   </label>
   
@@ -379,9 +619,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-03" data-pass="pass-03" data-kind="repair" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-03</span>
-  <span>Strategist<span class='tag'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-loop"/></svg> pass-02</span></span>
-  <span class="kind">repair</span>
+  <span class="run"><b>Run 3</b> · <span class="seat">Strategist</span> <span class="kind">repair</span><span class='tag'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-loop"/></svg> pass-02</span><span class="pid-sub">pass-03</span></span>
   <span class="kind">1 Strategist</span>
   <span class="rt">claude-opus-5</span>
   <span class="wc">18 min</span>
@@ -390,6 +628,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell>The split is honest and the register is testable. Dropping Action 4 was correct.</span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-04</span><span class='sub'>gate</span><span>STRATEGY PASS — QUALITY VERDICT ONLY</span></li><li><span>pass-10</span><span class='sub'>audit</span><span>AUDIT CLEAN — stake held</span></li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/strategy/good-strategy-bad-strategy.md</li><li>audits/gate-1-r1.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><div class='movecounts'><span><b>1</b> kept</span> <span><b>1</b> added</span> <span><b>1</b> split</span> <span><b>0</b> merged</span> <span><b>1</b> dropped</span></div><ul class='moves'><li><b>split</b>GP-1 → GP-a, GP-b <small>· pc-eng-000.strategy revision 1</small></li><li><b>added</b>A1–A2 <small>· audits/gate-1-r1.md finding 1</small></li><li><b>dropped</b>Action 4 <small>· pc-eng-000.strategy revision 1; no source survived the split</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Repair against gate r1. Calendar-ownership assumption now explicit and testable.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -403,29 +652,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-03.jsonl</dd>
       <dt>record</dt><dd>pass-03-product-strategist-repair.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>2ad1b8c308d2…</span></li><li>audits/gate-1-r1.md<span class='hash'>faf32a8a08ef…</span></li><li>corpus/strategy/good-strategy-bad-strategy.md<span class='hash'>9d64628f9152…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>2ad1b8c308d2…</span></li><li>audits/gate-1-r1.md<span class='hash'>faf32a8a08ef…</span></li><li>corpus/strategy/good-strategy-bad-strategy.md<span class='hash'>9d64628f9152…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>artifacts/strategy-pov.md</li><li>pc-eng-000.d03</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-04</span><span class='sub'>gate</span><span>STRATEGY PASS — QUALITY VERDICT ONLY</span></li><li><span>pass-10</span><span class='sub'>audit</span><span>AUDIT CLEAN — stake held</span></li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/strategy/good-strategy-bad-strategy.md</li><li>audits/gate-1-r1.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><div class='movecounts'><span><b>1</b> kept</span> <span><b>1</b> added</span> <span><b>1</b> split</span> <span><b>0</b> merged</span> <span><b>1</b> dropped</span></div><ul class='moves'><li><b>split</b>GP-1 → GP-a, GP-b <small>· pc-eng-000.strategy revision 1</small></li><li><b>added</b>A1–A2 <small>· audits/gate-1-r1.md finding 1</small></li><li><b>dropped</b>Action 4 <small>· pc-eng-000.strategy revision 1; no source survived the split</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Repair against gate r1. Calendar-ownership assumption now explicit and testable.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-03">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-03">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2">The split is honest and the register is testable. Dropping Action 4 was correct.</textarea>
   </label>
   
@@ -433,9 +680,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-04" data-pass="pass-04" data-kind="gate" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-04</span>
-  <span>Red-team gate<span class='tag'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-loop"/></svg> pass-03</span></span>
-  <span class="kind">gate</span>
+  <span class="run"><b>Run 4</b> · <span class="seat">Red-team gate</span><span class='tag'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-loop"/></svg> pass-03</span><span class="pid-sub">pass-04</span></span>
   <span class="kind">1 Strategist</span>
   <span class="rt">codex gpt-5.6-sol high</span>
   <span class="wc">7 min</span>
@@ -444,6 +689,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li class='sub'>none (gate: corpus withheld)</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Gate PASS on round 2.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -457,29 +713,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-04.txt</dd>
       <dt>record</dt><dd>pass-04-red-team-gate-gate.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>templates/red-team-protocol.md<span class='hash'>460fc281d224…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>templates/red-team-protocol.md<span class='hash'>460fc281d224…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li><li>the corpus</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>audits/gate-1-r2.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li class='sub'>none (gate: corpus withheld)</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Gate PASS on round 2.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-04">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-04">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   
@@ -487,9 +741,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-05" data-pass="pass-05" data-kind="draft" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-05</span>
-  <span>Discovery</span>
-  <span class="kind">draft</span>
+  <span class="run"><b>Run 5</b> · <span class="seat">Discovery</span> <span class="kind">draft</span><span class="pid-sub">pass-05</span></span>
   <span class="kind">2 Discovery</span>
   <span class="rt">claude-opus-5</span>
   <span class="wc">41 min</span>
@@ -498,6 +750,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell>Reads the interviews rather than the brief&#x27;s summary of them. Splitting B2 into O2 and O3 is defensible.</span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-06</span><span class='sub'>co-sign</span><span>CO-SIGN BOUNCE — 2 claims</span></li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/discovery/continuous-discovery-habits.md</li><li>corpus/discovery/the-mom-test.md</li><li>evidence/interviews-01-08.md</li><li>artifacts/strategy-pov.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves on disk: the artifact was overwritten in place by a later pass; the pass records keep the history.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Eight interviews read in full. Opportunity tree drafted with five evidence claims.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -511,29 +774,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-05.jsonl</dd>
       <dt>record</dt><dd>pass-05-discovery-lead-draft.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>evidence/interviews-01-08.md<span class='hash'>412b748d0dad…</span></li><li>corpus/discovery/shelf.md<span class='hash'>73027f0d29e4…</span></li><li>corpus/discovery/continuous-discovery-habits.md<span class='hash'>24b308a7ce20…</span></li><li>corpus/discovery/the-mom-test.md<span class='hash'>61528ba7ca1d…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>evidence/interviews-01-08.md<span class='hash'>412b748d0dad…</span></li><li>corpus/discovery/shelf.md<span class='hash'>73027f0d29e4…</span></li><li>corpus/discovery/continuous-discovery-habits.md<span class='hash'>24b308a7ce20…</span></li><li>corpus/discovery/the-mom-test.md<span class='hash'>61528ba7ca1d…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>artifacts/discovery-packet.md</li><li>pc-eng-000.d04</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-06</span><span class='sub'>co-sign</span><span>CO-SIGN BOUNCE — 2 claims</span></li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/discovery/continuous-discovery-habits.md</li><li>corpus/discovery/the-mom-test.md</li><li>evidence/interviews-01-08.md</li><li>artifacts/strategy-pov.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves on disk: the artifact was overwritten in place by a later pass; the pass records keep the history.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Eight interviews read in full. Opportunity tree drafted with five evidence claims.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-05">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-05">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2">Reads the interviews rather than the brief&#x27;s summary of them. Splitting B2 into O2 and O3 is defensible.</textarea>
   </label>
   
@@ -541,9 +802,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-fail" id="pass-06" data-pass="pass-06" data-kind="co-sign" data-verdict="fail" data-pair="">
 <summary>
-  <span class="pid">pass-06</span>
-  <span>Insights</span>
-  <span class="kind">co-sign</span>
+  <span class="run"><b>Run 6</b> · <span class="seat">Insights</span> <span class="kind">co-sign</span><span class="pid-sub">pass-06</span></span>
   <span class="kind">2 Discovery</span>
   <span class="rt">claude-opus-5</span>
   <span class="wc">14 min</span>
@@ -552,6 +811,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell>Right to bounce E2 and E4, but E4&#x27;s bounce is the packet&#x27;s fault, not the co-sign&#x27;s; this row fails because the co-sign let E3 through with a count nobody can find in the transcripts.</span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>evidence/interviews-01-08.md</li><li>artifacts/discovery-packet.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Bounced E2 (no interviewee said it unprompted) and E4 (count stated as six, transcripts show four).</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -565,29 +835,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-06.jsonl</dd>
       <dt>record</dt><dd>pass-06-insights-analytics-co-sign.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/discovery-packet.md<span class='hash'>dde2368d03cd…</span></li><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>evidence/interviews-01-08.md<span class='hash'>412b748d0dad…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/discovery-packet.md<span class='hash'>dde2368d03cd…</span></li><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>evidence/interviews-01-08.md<span class='hash'>412b748d0dad…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>audits/cosign-discovery-r1.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>evidence/interviews-01-08.md</li><li>artifacts/discovery-packet.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Bounced E2 (no interviewee said it unprompted) and E4 (count stated as six, transcripts show four).</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-06">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-06">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs ><option value="">—</option><option value='1'>1 Strategist</option><option value='2' selected>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2">Right to bounce E2 and E4, but E4&#x27;s bounce is the packet&#x27;s fault, not the co-sign&#x27;s; this row fails because the co-sign let E3 through with a count nobody can find in the transcripts.</textarea>
   </label>
   
@@ -595,9 +863,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-07" data-pass="pass-07" data-kind="repair" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-07</span>
-  <span>Discovery<span class='tag'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-loop"/></svg> pass-06</span></span>
-  <span class="kind">repair</span>
+  <span class="run"><b>Run 7</b> · <span class="seat">Discovery</span> <span class="kind">repair</span><span class='tag'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-loop"/></svg> pass-06</span><span class="pid-sub">pass-07</span></span>
   <span class="kind">2 Discovery</span>
   <span class="rt">claude-opus-5</span>
   <span class="wc">16 min</span>
@@ -606,6 +872,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-08</span><span class='sub'>co-sign</span><span>CO-SIGN PASS</span></li><li><span>pass-11</span><span class='sub'>audit</span><span>AUDIT CLEAN — stake held</span></li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>evidence/interviews-01-08.md</li><li>audits/cosign-discovery-r1.md</li><li>corpus/discovery/the-mom-test.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><div class='movecounts'><span><b>1</b> kept</span> <span><b>1</b> added</span> <span><b>0</b> split</span> <span><b>0</b> merged</span> <span><b>1</b> dropped</span></div><ul class='moves'><li><b>dropped</b>E2 <small>· pc-eng-000.discovery revision 1; no unprompted source</small></li><li><b>added</b>E4 restated at four of eight <small>· audits/cosign-discovery-r1.md</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Repair against co-sign r1.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -619,29 +896,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-07.jsonl</dd>
       <dt>record</dt><dd>pass-07-discovery-lead-repair.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/discovery-packet.md<span class='hash'>dde2368d03cd…</span></li><li>audits/cosign-discovery-r1.md<span class='hash'>c0398802bebb…</span></li><li>evidence/interviews-01-08.md<span class='hash'>412b748d0dad…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/discovery-packet.md<span class='hash'>dde2368d03cd…</span></li><li>audits/cosign-discovery-r1.md<span class='hash'>c0398802bebb…</span></li><li>evidence/interviews-01-08.md<span class='hash'>412b748d0dad…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>artifacts/discovery-packet.md</li><li>pc-eng-000.d05</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-08</span><span class='sub'>co-sign</span><span>CO-SIGN PASS</span></li><li><span>pass-11</span><span class='sub'>audit</span><span>AUDIT CLEAN — stake held</span></li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>evidence/interviews-01-08.md</li><li>audits/cosign-discovery-r1.md</li><li>corpus/discovery/the-mom-test.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><div class='movecounts'><span><b>1</b> kept</span> <span><b>1</b> added</span> <span><b>0</b> split</span> <span><b>0</b> merged</span> <span><b>1</b> dropped</span></div><ul class='moves'><li><b>dropped</b>E2 <small>· pc-eng-000.discovery revision 1; no unprompted source</small></li><li><b>added</b>E4 restated at four of eight <small>· audits/cosign-discovery-r1.md</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Repair against co-sign r1.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-07">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-07">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   
@@ -649,9 +924,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-08" data-pass="pass-08" data-kind="co-sign" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-08</span>
-  <span>Insights<span class='tag'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-loop"/></svg> pass-07</span></span>
-  <span class="kind">co-sign</span>
+  <span class="run"><b>Run 8</b> · <span class="seat">Insights</span> <span class="kind">co-sign</span><span class='tag'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-loop"/></svg> pass-07</span><span class="pid-sub">pass-08</span></span>
   <span class="kind">2 Discovery</span>
   <span class="rt">claude-opus-5</span>
   <span class="wc">11 min</span>
@@ -660,6 +933,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>evidence/interviews-01-08.md</li><li>artifacts/discovery-packet.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">All four remaining claims graded; packet done.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -673,29 +957,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-08.jsonl</dd>
       <dt>record</dt><dd>pass-08-insights-analytics-co-sign.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>evidence/interviews-01-08.md<span class='hash'>412b748d0dad…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>evidence/interviews-01-08.md<span class='hash'>412b748d0dad…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>audits/cosign-discovery-r2.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>evidence/interviews-01-08.md</li><li>artifacts/discovery-packet.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">All four remaining claims graded; packet done.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-08">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-08">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   
@@ -703,9 +985,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-09" data-pass="pass-09" data-kind="draft" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-09</span>
-  <span>Insights</span>
-  <span class="kind">draft</span>
+  <span class="run"><b>Run 9</b> · <span class="seat">Insights</span> <span class="kind">draft</span><span class="pid-sub">pass-09</span></span>
   <span class="kind">3 Insights</span>
   <span class="rt">claude-opus-5</span>
   <span class="wc">29 min</span>
@@ -714,6 +994,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell>Bouncing OC-3 to the Strategist instead of inventing a metric is exactly the rule.</span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-23</span><span class='sub'>audit</span><span>AUDIT NOTES ONLY</span></li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/insights/trustworthy-online-experiments.md</li><li>artifacts/discovery-packet.md</li><li>artifacts/strategy-pov.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><div class='movecounts'><span><b>1</b> kept</span> <span><b>1</b> added</span> <span><b>1</b> split</span> <span><b>0</b> merged</span> <span><b>1</b> dropped</span></div><ul class='moves'><li><b>split</b>OC-1 → OC-1a, OC-1b <small>· pc-eng-000.strategy</small></li><li><b>added</b>M1–M4 <small>· OC-1a, OC-1b, OC-2</small></li><li><b>dropped</b>OC-3 <small>· pc-eng-000.strategy; unmeasurable, bounced to the Strategist</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Metrics plan drafted. No acquisition metric: the Strategy doc names none (bounced OC-3 back to Strategist as unmeasurable).</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -727,29 +1018,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-09.jsonl</dd>
       <dt>record</dt><dd>pass-09-insights-analytics-draft.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>corpus/insights/shelf.md<span class='hash'>883cc8ba6d75…</span></li><li>corpus/insights/trustworthy-online-experiments.md<span class='hash'>36e63d7ba3be…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>corpus/insights/shelf.md<span class='hash'>883cc8ba6d75…</span></li><li>corpus/insights/trustworthy-online-experiments.md<span class='hash'>36e63d7ba3be…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>artifacts/metrics-evidence-plan.md</li><li>pc-eng-000.d06</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-23</span><span class='sub'>audit</span><span>AUDIT NOTES ONLY</span></li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/insights/trustworthy-online-experiments.md</li><li>artifacts/discovery-packet.md</li><li>artifacts/strategy-pov.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><div class='movecounts'><span><b>1</b> kept</span> <span><b>1</b> added</span> <span><b>1</b> split</span> <span><b>0</b> merged</span> <span><b>1</b> dropped</span></div><ul class='moves'><li><b>split</b>OC-1 → OC-1a, OC-1b <small>· pc-eng-000.strategy</small></li><li><b>added</b>M1–M4 <small>· OC-1a, OC-1b, OC-2</small></li><li><b>dropped</b>OC-3 <small>· pc-eng-000.strategy; unmeasurable, bounced to the Strategist</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Metrics plan drafted. No acquisition metric: the Strategy doc names none (bounced OC-3 back to Strategist as unmeasurable).</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-09">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-09">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2">Bouncing OC-3 to the Strategist instead of inventing a metric is exactly the rule.</textarea>
   </label>
   
@@ -757,9 +1046,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-10" data-pass="pass-10" data-kind="audit" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-10</span>
-  <span>Discovery</span>
-  <span class="kind">audit</span>
+  <span class="run"><b>Run 10</b> · <span class="seat">Discovery</span> <span class="kind">audit</span><span class="pid-sub">pass-10</span></span>
   <span class="kind">1 Strategist</span>
   <span class="rt">claude-opus-5</span>
   <span class="wc">12 min</span>
@@ -768,6 +1055,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/strategy-pov.md</li><li>artifacts/discovery-packet.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Stake: does the diagnosis survive the evidence? Yes; one wording note.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -781,29 +1079,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-10.jsonl</dd>
       <dt>record</dt><dd>pass-10-discovery-lead-audit.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>audits/audit-strategy.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/strategy-pov.md</li><li>artifacts/discovery-packet.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Stake: does the diagnosis survive the evidence? Yes; one wording note.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-10">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-10">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   
@@ -811,9 +1107,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-11" data-pass="pass-11" data-kind="audit" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-11</span>
-  <span>Leadership</span>
-  <span class="kind">audit</span>
+  <span class="run"><b>Run 11</b> · <span class="seat">Leadership</span> <span class="kind">audit</span><span class="pid-sub">pass-11</span></span>
   <span class="kind">2 Discovery</span>
   <span class="rt">claude-opus-5</span>
   <span class="wc">11 min</span>
@@ -822,6 +1116,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/discovery-packet.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Stake: is any opportunity a stakeholder in disguise? No.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -835,29 +1140,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-11.jsonl</dd>
       <dt>record</dt><dd>pass-11-product-leadership-audit.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>audits/audit-discovery.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/discovery-packet.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Stake: is any opportunity a stakeholder in disguise? No.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-11">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-11">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   
@@ -865,9 +1168,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-12" data-pass="pass-12" data-kind="draft" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-12</span>
-  <span>Growth</span>
-  <span class="kind">draft</span>
+  <span class="run"><b>Run 12</b> · <span class="seat">Growth</span> <span class="kind">draft</span><span class="pid-sub">pass-12</span></span>
   <span class="kind">4 Growth</span>
   <span class="rt">claude-sonnet-5</span>
   <span class="wc">22 min</span>
@@ -876,6 +1177,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell>Manifest-only grounding declared, not hidden. Loop L1 target has no metric, which surfaces at the audit.</span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-13</span><span class='sub'>audit</span><span>AUDIT LOOPBACK — 1 material</span></li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/growth/shelf.md</li><li>artifacts/metrics-evidence-plan.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><div class='movecounts'><span><b>2</b> kept</span> <span><b>1</b> added</span> <span><b>0</b> split</span> <span><b>1</b> merged</span> <span><b>0</b> dropped</span></div><ul class='moves'><li><b>merged</b>C2 + C3 → C2 <small>· pc-eng-000.strategy</small></li><li><b>added</b>L1 <small>· OC-2</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Grounding manifest-only for Growth&#x27;s corpus (shelf label read; book not opened).</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -889,29 +1201,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-12.jsonl</dd>
       <dt>record</dt><dd>pass-12-growth-distribution-draft.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>artifacts/metrics-evidence-plan.md<span class='hash'>4c3e6cad5cba…</span></li><li>corpus/growth/shelf.md<span class='hash'>5079606e4b3c…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>artifacts/metrics-evidence-plan.md<span class='hash'>4c3e6cad5cba…</span></li><li>corpus/growth/shelf.md<span class='hash'>5079606e4b3c…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>artifacts/growth-gtm.md</li><li>pc-eng-000.d07</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-13</span><span class='sub'>audit</span><span>AUDIT LOOPBACK — 1 material</span></li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/growth/shelf.md</li><li>artifacts/metrics-evidence-plan.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><div class='movecounts'><span><b>2</b> kept</span> <span><b>1</b> added</span> <span><b>0</b> split</span> <span><b>1</b> merged</span> <span><b>0</b> dropped</span></div><ul class='moves'><li><b>merged</b>C2 + C3 → C2 <small>· pc-eng-000.strategy</small></li><li><b>added</b>L1 <small>· OC-2</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Grounding manifest-only for Growth&#x27;s corpus (shelf label read; book not opened).</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-12">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-12">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2">Manifest-only grounding declared, not hidden. Loop L1 target has no metric, which surfaces at the audit.</textarea>
   </label>
   
@@ -919,9 +1229,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-fail" id="pass-13" data-pass="pass-13" data-kind="audit" data-verdict="fail" data-pair="">
 <summary>
-  <span class="pid">pass-13</span>
-  <span>Insights</span>
-  <span class="kind">audit</span>
+  <span class="run"><b>Run 13</b> · <span class="seat">Insights</span> <span class="kind">audit</span><span class="pid-sub">pass-13</span></span>
   <span class="kind">4 Growth</span>
   <span class="rt">claude-opus-5</span>
   <span class="wc">13 min</span>
@@ -930,6 +1238,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell>The audit is correct and the failure is upstream: the metrics plan (stage 3) has no acquisition metric, so Growth could not have measured L1. Fix the plan, not the loop.</span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/growth-gtm.md</li><li>artifacts/metrics-evidence-plan.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Stake: can every loop target be measured by the plan? No: L1 has a target and no metric.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -943,29 +1262,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-13.jsonl</dd>
       <dt>record</dt><dd>pass-13-insights-analytics-audit.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/growth-gtm.md<span class='hash'>e4e1b502de2f…</span></li><li>artifacts/metrics-evidence-plan.md<span class='hash'>4c3e6cad5cba…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/growth-gtm.md<span class='hash'>e4e1b502de2f…</span></li><li>artifacts/metrics-evidence-plan.md<span class='hash'>4c3e6cad5cba…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>audits/audit-growth.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/growth-gtm.md</li><li>artifacts/metrics-evidence-plan.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Stake: can every loop target be measured by the plan? No: L1 has a target and no metric.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-13">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-13">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs ><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3' selected>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2">The audit is correct and the failure is upstream: the metrics plan (stage 3) has no acquisition metric, so Growth could not have measured L1. Fix the plan, not the loop.</textarea>
   </label>
   
@@ -973,9 +1290,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-14" data-pass="pass-14" data-kind="draft" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-14</span>
-  <span>Business</span>
-  <span class="kind">draft</span>
+  <span class="run"><b>Run 14</b> · <span class="seat">Business</span> <span class="kind">draft</span><span class="pid-sub">pass-14</span></span>
   <span class="kind">5 Business</span>
   <span class="rt">claude-sonnet-5</span>
   <span class="wc">26 min</span>
@@ -984,6 +1299,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-15</span><span class='sub'>audit</span><span>AUDIT CLEAN — stake held</span></li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/business/monetizing-innovation.md</li><li>artifacts/growth-gtm.md</li><li>artifacts/strategy-pov.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><div class='movecounts'><span><b>3</b> kept</span> <span><b>1</b> added</span> <span><b>0</b> split</span> <span><b>0</b> merged</span> <span><b>1</b> dropped</span></div><ul class='moves'><li><b>added</b>PH-1, PH-2 <small>· E1, C2</small></li><li><b>dropped</b>C4 <small>· pc-eng-000.growth; gatekeeper cost exceeds season revenue</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit"><span class="sub">none</span></p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -997,29 +1323,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-14.jsonl</dd>
       <dt>record</dt><dd>pass-14-business-economics-draft.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>artifacts/metrics-evidence-plan.md<span class='hash'>4c3e6cad5cba…</span></li><li>artifacts/growth-gtm.md<span class='hash'>e4e1b502de2f…</span></li><li>corpus/business/shelf.md<span class='hash'>2070baa958c5…</span></li><li>corpus/business/monetizing-innovation.md<span class='hash'>89958b9c6b04…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>artifacts/metrics-evidence-plan.md<span class='hash'>4c3e6cad5cba…</span></li><li>artifacts/growth-gtm.md<span class='hash'>e4e1b502de2f…</span></li><li>corpus/business/shelf.md<span class='hash'>2070baa958c5…</span></li><li>corpus/business/monetizing-innovation.md<span class='hash'>89958b9c6b04…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>artifacts/business-case.md</li><li>pc-eng-000.d08</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-15</span><span class='sub'>audit</span><span>AUDIT CLEAN — stake held</span></li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/business/monetizing-innovation.md</li><li>artifacts/growth-gtm.md</li><li>artifacts/strategy-pov.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><div class='movecounts'><span><b>3</b> kept</span> <span><b>1</b> added</span> <span><b>0</b> split</span> <span><b>0</b> merged</span> <span><b>1</b> dropped</span></div><ul class='moves'><li><b>added</b>PH-1, PH-2 <small>· E1, C2</small></li><li><b>dropped</b>C4 <small>· pc-eng-000.growth; gatekeeper cost exceeds season revenue</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit"><span class="sub">none</span></p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-14">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-14">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   
@@ -1027,9 +1351,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-15" data-pass="pass-15" data-kind="audit" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-15</span>
-  <span>Growth</span>
-  <span class="kind">audit</span>
+  <span class="run"><b>Run 15</b> · <span class="seat">Growth</span> <span class="kind">audit</span><span class="pid-sub">pass-15</span></span>
   <span class="kind">5 Business</span>
   <span class="rt">claude-sonnet-5</span>
   <span class="wc">9 min</span>
@@ -1038,6 +1360,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/business-case.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Stake: does the model price the loop it depends on? Yes.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -1051,29 +1384,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-15.jsonl</dd>
       <dt>record</dt><dd>pass-15-growth-distribution-audit.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/business-case.md<span class='hash'>716fdcc6d80e…</span></li><li>artifacts/growth-gtm.md<span class='hash'>e4e1b502de2f…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/business-case.md<span class='hash'>716fdcc6d80e…</span></li><li>artifacts/growth-gtm.md<span class='hash'>e4e1b502de2f…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>audits/audit-business.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/business-case.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Stake: does the model price the loop it depends on? Yes.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-15">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-15">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   
@@ -1081,9 +1412,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-16" data-pass="pass-16" data-kind="draft" data-verdict="pass" data-pair="pass-18">
 <summary>
-  <span class="pid">pass-16</span>
-  <span>Delivery<span class='tag'>baseline of pass-18</span></span>
-  <span class="kind">draft</span>
+  <span class="run"><b>Run 16</b> · <span class="seat">Delivery</span> <span class="kind">draft</span><span class='tag'>baseline of pass-18</span><span class="pid-sub">pass-16</span></span>
   <span class="kind">6 Delivery</span>
   <span class="rt"><span class='hidden-rt'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-eye"/></svg> hidden</span></span>
   <span class="wc">31 min</span>
@@ -1092,6 +1421,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell>Appetites are stated in weeks with a circuit breaker each. KR-3 is unmeasured; see the Delivery audit of stage 3.</span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-17</span><span class='sub'>co-sign</span><span>CO-SIGN PASS</span></li><li><span>pass-19</span><span class='sub'>audit</span><span>AUDIT CLEAN — stake held</span></li><li><span>pass-20</span><span class='sub'>gate</span><span>HANDOFF PASS — QUALITY VERDICT ONLY</span></li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/delivery/shape-up.md</li><li>artifacts/business-case.md</li><li>artifacts/metrics-evidence-plan.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><div class='movecounts'><span><b>1</b> kept</span> <span><b>2</b> added</span> <span><b>1</b> split</span> <span><b>0</b> merged</span> <span><b>0</b> dropped</span></div><ul class='moves'><li><b>split</b>OC-1a → KR-1, KR-2 <small>· pc-eng-000.insights</small></li><li><b>added</b>KR-3 <small>· OC-2</small></li><li><b>added</b>appetites <small>· PH-1, L1, O2</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Baseline pass of a shadow pair (the trial follows).</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -1105,29 +1445,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>hidden with the runtime</dd>
       <dt>record</dt><dd>pass-16-delivery-execution-draft.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>artifacts/metrics-evidence-plan.md<span class='hash'>4c3e6cad5cba…</span></li><li>artifacts/growth-gtm.md<span class='hash'>e4e1b502de2f…</span></li><li>artifacts/business-case.md<span class='hash'>716fdcc6d80e…</span></li><li>corpus/delivery/shelf.md<span class='hash'>34dccda322f6…</span></li><li>corpus/delivery/shape-up.md<span class='hash'>d081707ed064…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>artifacts/metrics-evidence-plan.md<span class='hash'>4c3e6cad5cba…</span></li><li>artifacts/growth-gtm.md<span class='hash'>e4e1b502de2f…</span></li><li>artifacts/business-case.md<span class='hash'>716fdcc6d80e…</span></li><li>corpus/delivery/shelf.md<span class='hash'>34dccda322f6…</span></li><li>corpus/delivery/shape-up.md<span class='hash'>d081707ed064…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>artifacts/outcome-roadmap.md</li><li>artifacts/handoff-brief.md</li><li>pc-eng-000.d09</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-17</span><span class='sub'>co-sign</span><span>CO-SIGN PASS</span></li><li><span>pass-19</span><span class='sub'>audit</span><span>AUDIT CLEAN — stake held</span></li><li><span>pass-20</span><span class='sub'>gate</span><span>HANDOFF PASS — QUALITY VERDICT ONLY</span></li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/delivery/shape-up.md</li><li>artifacts/business-case.md</li><li>artifacts/metrics-evidence-plan.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><div class='movecounts'><span><b>1</b> kept</span> <span><b>2</b> added</span> <span><b>1</b> split</span> <span><b>0</b> merged</span> <span><b>0</b> dropped</span></div><ul class='moves'><li><b>split</b>OC-1a → KR-1, KR-2 <small>· pc-eng-000.insights</small></li><li><b>added</b>KR-3 <small>· OC-2</small></li><li><b>added</b>appetites <small>· PH-1, L1, O2</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Baseline pass of a shadow pair (the trial follows).</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-16">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-16">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2">Appetites are stated in weeks with a circuit breaker each. KR-3 is unmeasured; see the Delivery audit of stage 3.</textarea>
   </label>
   <p class='blind-note'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-eye"/></svg> Blind pair with pass-18: the runtime and launch form stay hidden until both passes carry a verdict.</p>
@@ -1135,9 +1473,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-17" data-pass="pass-17" data-kind="co-sign" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-17</span>
-  <span>Strategist</span>
-  <span class="kind">co-sign</span>
+  <span class="run"><b>Run 17</b> · <span class="seat">Strategist</span> <span class="kind">co-sign</span><span class="pid-sub">pass-17</span></span>
   <span class="kind">6 Delivery</span>
   <span class="rt">claude-opus-5</span>
   <span class="wc">10 min</span>
@@ -1146,6 +1482,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/outcome-roadmap.md</li><li>artifacts/strategy-pov.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Every key result passed against its outcome.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -1159,29 +1506,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-17.jsonl</dd>
       <dt>record</dt><dd>pass-17-product-strategist-co-sign.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/outcome-roadmap.md<span class='hash'>75ce4eeb55df…</span></li><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/outcome-roadmap.md<span class='hash'>75ce4eeb55df…</span></li><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>audits/cosign-okr.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/outcome-roadmap.md</li><li>artifacts/strategy-pov.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Every key result passed against its outcome.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-17">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-17">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   
@@ -1189,9 +1534,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-unl" id="pass-18" data-pass="pass-18" data-kind="trial" data-verdict="unlabeled" data-pair="pass-16">
 <summary>
-  <span class="pid">pass-18</span>
-  <span>Delivery<span class='tag'>shadow of pass-16</span></span>
-  <span class="kind">trial</span>
+  <span class="run"><b>Run 18</b> · <span class="seat">Delivery</span> <span class="kind">trial</span><span class='tag'>shadow of pass-16</span><span class="pid-sub">pass-18</span></span>
   <span class="kind">6 Delivery</span>
   <span class="rt"><span class='hidden-rt'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-eye"/></svg> hidden</span></span>
   <span class="wc">24 min</span>
@@ -1200,6 +1543,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/delivery/shape-up.md</li><li>artifacts/business-case.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><div class='movecounts'><span><b>1</b> kept</span> <span><b>1</b> added</span> <span><b>1</b> split</span> <span><b>1</b> merged</span> <span><b>0</b> dropped</span></div><ul class='moves'><li><b>split</b>OC-1a → KR-1, KR-2 <small>· pc-eng-000.insights</small></li><li><b>merged</b>B2 + B3 → B2 <small>· pc-eng-000.strategy</small></li><li><b>added</b>appetites <small>· PH-1, L1</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Shadow pass on identical inputs. Label blind.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -1213,29 +1567,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>hidden with the runtime</dd>
       <dt>record</dt><dd>pass-18-delivery-execution-trial.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>artifacts/metrics-evidence-plan.md<span class='hash'>4c3e6cad5cba…</span></li><li>artifacts/growth-gtm.md<span class='hash'>e4e1b502de2f…</span></li><li>artifacts/business-case.md<span class='hash'>716fdcc6d80e…</span></li><li>corpus/delivery/shelf.md<span class='hash'>34dccda322f6…</span></li><li>corpus/delivery/shape-up.md<span class='hash'>d081707ed064…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>artifacts/metrics-evidence-plan.md<span class='hash'>4c3e6cad5cba…</span></li><li>artifacts/growth-gtm.md<span class='hash'>e4e1b502de2f…</span></li><li>artifacts/business-case.md<span class='hash'>716fdcc6d80e…</span></li><li>corpus/delivery/shelf.md<span class='hash'>34dccda322f6…</span></li><li>corpus/delivery/shape-up.md<span class='hash'>d081707ed064…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>trace/trials/outcome-roadmap-trial.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/delivery/shape-up.md</li><li>artifacts/business-case.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><div class='movecounts'><span><b>1</b> kept</span> <span><b>1</b> added</span> <span><b>1</b> split</span> <span><b>1</b> merged</span> <span><b>0</b> dropped</span></div><ul class='moves'><li><b>split</b>OC-1a → KR-1, KR-2 <small>· pc-eng-000.insights</small></li><li><b>merged</b>B2 + B3 → B2 <small>· pc-eng-000.strategy</small></li><li><b>added</b>appetites <small>· PH-1, L1</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Shadow pass on identical inputs. Label blind.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-18">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-18">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   <p class='blind-note'><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-eye"/></svg> Blind pair with pass-16: the runtime and launch form stay hidden until both passes carry a verdict.</p>
@@ -1243,9 +1595,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-19" data-pass="pass-19" data-kind="audit" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-19</span>
-  <span>Business</span>
-  <span class="kind">audit</span>
+  <span class="run"><b>Run 19</b> · <span class="seat">Business</span> <span class="kind">audit</span><span class="pid-sub">pass-19</span></span>
   <span class="kind">6 Delivery</span>
   <span class="rt">claude-sonnet-5</span>
   <span class="wc">11 min</span>
@@ -1254,6 +1604,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/outcome-roadmap.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Stake: does the first bet pay for the second? Yes.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -1267,29 +1628,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-19.jsonl</dd>
       <dt>record</dt><dd>pass-19-business-economics-audit.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/outcome-roadmap.md<span class='hash'>75ce4eeb55df…</span></li><li>artifacts/business-case.md<span class='hash'>716fdcc6d80e…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/outcome-roadmap.md<span class='hash'>75ce4eeb55df…</span></li><li>artifacts/business-case.md<span class='hash'>716fdcc6d80e…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>audits/audit-roadmap.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/outcome-roadmap.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Stake: does the first bet pay for the second? Yes.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-19">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-19">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   
@@ -1297,9 +1656,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-20" data-pass="pass-20" data-kind="gate" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-20</span>
-  <span>Red-team gate</span>
-  <span class="kind">gate</span>
+  <span class="run"><b>Run 20</b> · <span class="seat">Red-team gate</span><span class="pid-sub">pass-20</span></span>
   <span class="kind">6 Delivery</span>
   <span class="rt">codex gpt-5.6-sol high</span>
   <span class="wc">8 min</span>
@@ -1308,6 +1665,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li class='sub'>none (gate: corpus withheld)</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Gate PASS. Brief crosses to Systemcraft with a return date.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -1321,29 +1689,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-20.txt</dd>
       <dt>record</dt><dd>pass-20-red-team-gate-gate.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/handoff-brief.md<span class='hash'>2e1df59b1879…</span></li><li>templates/red-team-protocol.md<span class='hash'>460fc281d224…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/handoff-brief.md<span class='hash'>2e1df59b1879…</span></li><li>templates/red-team-protocol.md<span class='hash'>460fc281d224…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li><li>the corpus</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>audits/gate-2-r1.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li class='sub'>none (gate: corpus withheld)</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Gate PASS. Brief crosses to Systemcraft with a return date.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-20">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-20">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   
@@ -1351,9 +1717,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-fail" id="pass-21" data-pass="pass-21" data-kind="draft" data-verdict="fail" data-pair="">
 <summary>
-  <span class="pid">pass-21</span>
-  <span>Leadership</span>
-  <span class="kind">draft</span>
+  <span class="run"><b>Run 21</b> · <span class="seat">Leadership</span> <span class="kind">draft</span><span class="pid-sub">pass-21</span></span>
   <span class="kind">7 Leadership</span>
   <span class="rt">claude-opus-5</span>
   <span class="wc">33 min</span>
@@ -1362,6 +1726,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell>The stakeholder map is fine. The topology names a return date that the handoff brief (stage 6) never set as a constraint on the team, so the packet inherited a constraint that does not exist.</span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-22</span><span class='sub'>audit</span><span>AUDIT NOTES ONLY</span></li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/leadership/shelf.md</li><li>artifacts/handoff-brief.md</li><li>artifacts/outcome-roadmap.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><div class='movecounts'><span><b>1</b> kept</span> <span><b>2</b> added</span> <span><b>0</b> split</span> <span><b>0</b> merged</span> <span><b>0</b> dropped</span></div><ul class='moves'><li><b>added</b>stakeholder rows <small>· C2, C4, E5</small></li><li><b>added</b>team topology <small>· B1–B3</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Grounding manifest-only.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -1375,29 +1750,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-21.jsonl</dd>
       <dt>record</dt><dd>pass-21-product-leadership-draft.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>artifacts/metrics-evidence-plan.md<span class='hash'>4c3e6cad5cba…</span></li><li>artifacts/growth-gtm.md<span class='hash'>e4e1b502de2f…</span></li><li>artifacts/business-case.md<span class='hash'>716fdcc6d80e…</span></li><li>artifacts/outcome-roadmap.md<span class='hash'>75ce4eeb55df…</span></li><li>artifacts/handoff-brief.md<span class='hash'>2e1df59b1879…</span></li><li>corpus/leadership/shelf.md<span class='hash'>8ddf57b346d5…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li><li>artifacts/discovery-packet.md<span class='hash'>deea84c6861f…</span></li><li>artifacts/metrics-evidence-plan.md<span class='hash'>4c3e6cad5cba…</span></li><li>artifacts/growth-gtm.md<span class='hash'>e4e1b502de2f…</span></li><li>artifacts/business-case.md<span class='hash'>716fdcc6d80e…</span></li><li>artifacts/outcome-roadmap.md<span class='hash'>75ce4eeb55df…</span></li><li>artifacts/handoff-brief.md<span class='hash'>2e1df59b1879…</span></li><li>corpus/leadership/shelf.md<span class='hash'>8ddf57b346d5…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>artifacts/leadership-packet.md</li><li>pc-eng-000.d10</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li><span>pass-22</span><span class='sub'>audit</span><span>AUDIT NOTES ONLY</span></li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>corpus/leadership/shelf.md</li><li>artifacts/handoff-brief.md</li><li>artifacts/outcome-roadmap.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><div class='movecounts'><span><b>1</b> kept</span> <span><b>2</b> added</span> <span><b>0</b> split</span> <span><b>0</b> merged</span> <span><b>0</b> dropped</span></div><ul class='moves'><li><b>added</b>stakeholder rows <small>· C2, C4, E5</small></li><li><b>added</b>team topology <small>· B1–B3</small></li></ul><p class='sub' style='font-size:inherit;margin-top:0.4rem'>Kept items are listed in the artifact's Moves section, not here.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Grounding manifest-only.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-21">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-21">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs ><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6' selected>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2">The stakeholder map is fine. The topology names a return date that the handoff brief (stage 6) never set as a constraint on the team, so the packet inherited a constraint that does not exist.</textarea>
   </label>
   
@@ -1405,9 +1778,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-unl" id="pass-22" data-pass="pass-22" data-kind="audit" data-verdict="unlabeled" data-pair="">
 <summary>
-  <span class="pid">pass-22</span>
-  <span>Strategist</span>
-  <span class="kind">audit</span>
+  <span class="run"><b>Run 22</b> · <span class="seat">Strategist</span> <span class="kind">audit</span><span class="pid-sub">pass-22</span></span>
   <span class="kind">7 Leadership</span>
   <span class="rt">claude-opus-5</span>
   <span class="wc">12 min</span>
@@ -1416,6 +1787,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/leadership-packet.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Stake: does the operating model serve the guiding policy? One note on the decision-rights table.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -1429,29 +1811,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-22.jsonl</dd>
       <dt>record</dt><dd>pass-22-product-strategist-audit.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/leadership-packet.md<span class='hash'>cbaf4b933c7c…</span></li><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/leadership-packet.md<span class='hash'>cbaf4b933c7c…</span></li><li>artifacts/strategy-pov.md<span class='hash'>4cbcb041c546…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>audits/audit-leadership.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/leadership-packet.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Stake: does the operating model serve the guiding policy? One note on the decision-rights table.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-22">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-22">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   
@@ -1459,9 +1839,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-unl" id="pass-23" data-pass="pass-23" data-kind="audit" data-verdict="unlabeled" data-pair="">
 <summary>
-  <span class="pid">pass-23</span>
-  <span>Delivery</span>
-  <span class="kind">audit</span>
+  <span class="run"><b>Run 23</b> · <span class="seat">Delivery</span> <span class="kind">audit</span><span class="pid-sub">pass-23</span></span>
   <span class="kind">3 Insights</span>
   <span class="rt">claude-sonnet-5</span>
   <span class="wc">10 min</span>
@@ -1470,6 +1848,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/metrics-evidence-plan.md</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Stake: can the roadmap&#x27;s key results be read off the plan&#x27;s metrics? Yes for KR-1, KR-2; KR-3 has no metric.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -1483,29 +1872,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-23.jsonl</dd>
       <dt>record</dt><dd>pass-23-delivery-execution-audit.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/metrics-evidence-plan.md<span class='hash'>4c3e6cad5cba…</span></li><li>artifacts/outcome-roadmap.md<span class='hash'>75ce4eeb55df…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/metrics-evidence-plan.md<span class='hash'>4c3e6cad5cba…</span></li><li>artifacts/outcome-roadmap.md<span class='hash'>75ce4eeb55df…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>audits/audit-insights.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li>artifacts/metrics-evidence-plan.md</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Stake: can the roadmap&#x27;s key results be read off the plan&#x27;s metrics? Yes for KR-1, KR-2; KR-3 has no metric.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-23">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-23">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   
@@ -1513,9 +1900,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-24" data-pass="pass-24" data-kind="gate" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-24</span>
-  <span>Red-team gate</span>
-  <span class="kind">gate</span>
+  <span class="run"><b>Run 24</b> · <span class="seat">Red-team gate</span><span class="pid-sub">pass-24</span></span>
   <span class="kind">7 Leadership</span>
   <span class="rt">codex gpt-5.6-sol high</span>
   <span class="wc">14 min</span>
@@ -1524,6 +1909,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li class='sub'>none (gate: corpus withheld)</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Gate at close. Anchor: the whole train.</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -1537,29 +1933,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>trace/logs/pass-24.txt</dd>
       <dt>record</dt><dd>pass-24-red-team-gate-gate.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li>artifacts/<span class='hash'>268099611618…</span></li><li>templates/red-team-protocol.md<span class='hash'>460fc281d224…</span></li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li>artifacts/<span class='hash'>268099611618…</span></li><li>templates/red-team-protocol.md<span class='hash'>460fc281d224…</span></li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>the drafting conversation</li><li>ledger entries of other engagements</li><li>the corpus</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>audits/gate-close-r1.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li class='sub'>none (gate: corpus withheld)</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Gate at close. Anchor: the whole train.</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-24">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-24">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   
@@ -1567,9 +1961,7 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 </div>
 </div></details><details class="pass v-pass" id="pass-25" data-pass="pass-25" data-kind="close" data-verdict="pass" data-pair="">
 <summary>
-  <span class="pid">pass-25</span>
-  <span>Coordinator</span>
-  <span class="kind">close</span>
+  <span class="run"><b>Run 25</b> · <span class="seat">Coordinator</span> <span class="kind">close</span><span class="pid-sub">pass-25</span></span>
   <span class="kind">close</span>
   <span class="rt">claude-fable-5-1</span>
   <span class="wc">—</span>
@@ -1578,6 +1970,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   <span class="crit" data-crit-cell><span class="ffs"></span></span>
 </summary>
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li class='sub'>none</li></ul>
+  </div>
+  <div>
+    <h4>Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Coordinator&#x27;s own session. Deviations: Growth and Leadership ran grounding manifest-only (corpus not yet ingested for those seats).</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -1591,29 +1994,27 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
       <dt>raw log</dt><dd>—</dd>
       <dt>record</dt><dd>pass-25-coordinator-close.md</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul><li class='sub'>none</li></ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul><li class='sub'>none</li></ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul><li>nothing</li></ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul><li>close.md</li></ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks"><li class='sub' style='display:block'>none recorded</li></ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul><li class='sub'>none</li></ul>
-    <h4 style="margin-top:1rem">Moves</h4><p class='sub' style='font-size:inherit'>No moves: this kind hands no artifact forward.</p>
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">Coordinator&#x27;s own session. Deviations: Growth and Leadership ran grounding manifest-only (corpus not yet ingested for those seats).</p>
   </div>
+  </details>
   
 <div class="label-form" data-label-form data-pass="pass-25">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for pass-25">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="true"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-check"/></svg> pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="false"><svg class="ico" aria-hidden="true" width="14" height="14" viewBox="0 0 14 14"><use href="#i-cross"/></svg> fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs disabled><option value="">—</option><option value='1'>1 Strategist</option><option value='2'>2 Discovery</option><option value='3'>3 Insights</option><option value='4'>4 Growth</option><option value='5'>5 Business</option><option value='6'>6 Delivery</option><option value='7'>7 Leadership</option></select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2"></textarea>
   </label>
   
@@ -1625,18 +2026,17 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 <div class="slots">
   <div class="slot"><h3>Failure taxonomy</h3><p><span class="when">Arrives after about thirty labels</span>, when the critiques get grouped into named failure modes with counts. Until then this slot lists nothing and the failure_code column stays blank.</p></div>
   <div class="slot"><h3>Judge results</h3><p><span class="when">Arrives per failure mode</span>, only after a mode recurs across engagements with thirty to fifty labeled examples per class and a judge is validated against the labels on a held-out split. A judge's verdict will sit beside the human one in each row, never replace it.</p></div>
-  <div class="slot"><h3>Process notes</h3><p><span class="when">Sean's notes for this engagement</span>, read from the engagement's notes file when it exists. What he noticed while reading, what he would run differently, what to watch next time.</p>
-  <div class="notes">Synthetic process notes. The stage-3 break is the one to watch: an audit at stage 4 found a hole in the metrics plan, which is exactly the upstream-of-the-pass-read line the viewer is built to show.</div></div>
+  <div class="slot"><h3>Process notes</h3><p><span class="when">The coordinator's running notes for this engagement</span>, read from the engagement's notes file. What the run did, what was ruled, what to watch next time.</p><ul class="takeaways"><li><b>2026-10-06</b> Synthetic process notes. The stage-3 break is the one to watch: an audit at stage 4 found a hole in the metrics plan, which is exactly the upstream-of-the-pass-read line the viewer is built to show.</li><li><b>2026-10-06</b> The strategy was redrafted in place after the gate, so its first revision is no longer on disk; the pass records keep the history and the checker says so rather than passing it quietly.</li><li><b>2026-10-06</b> The roadmap ran as a shadow pair (pass-16 baseline, pass-18 trial) and both stay blind until each carries a verdict in the labels file.</li></ul><details class="history"><summary>The full dated history, 4 entries</summary><ul class="takeaways"><li><b>2026-10-06</b> Synthetic process notes. The stage-3 break is the one to watch: an audit at stage 4 found a hole in the metrics plan, which is exactly the upstream-of-the-pass-read line the viewer is built to show.</li><li><b>2026-10-06</b> The strategy was redrafted in place after the gate, so its first revision is no longer on disk; the pass records keep the history and the checker says so rather than passing it quietly.</li><li><b>2026-10-06</b> The roadmap ran as a shadow pair (pass-16 baseline, pass-18 trial) and both stay blind until each carries a verdict in the labels file.</li><li><b>2026-10-06</b> Growth and Leadership ran grounding manifest-only: the shelf labels were read, the books were not.</li></ul></details></div>
 </div>
 <footer>
-  <span>Rendered 2026-09-13 from 25 records and 22 label rows. The records are the truth; this page is a view of them.</span>
+  <span>Rendered 2026-09-20 from 25 records and 22 label rows. The records are the truth; this page is a view of them.</span>
   <span>productcraft/trace · kit 0.1.0</span>
 </footer>
 </div>
 <dialog id="keys" aria-labelledby="keys-title">
   <h3 id="keys-title" style="margin-top:0">Keys</h3>
   <dl>
-    <dt><kbd>j</kbd> <kbd>k</kbd></dt><dd>next / previous pass</dd>
+    <dt><kbd>j</kbd> <kbd>k</kbd></dt><dd>next / previous pass — or next / previous case while you are inside guided reading</dd>
     <dt><kbd>enter</kbd></dt><dd>open or fold the current pass</dd>
     <dt><kbd>1</kbd> <kbd>2</kbd></dt><dd>label the current pass pass / fail</dd>
     <dt><kbd>f</kbd></dt><dd>first failing stage</dd>
@@ -1748,6 +2148,18 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && inField()) { document.activeElement.blur(); if (curRow()) $('summary', curRow()).focus(); return; }
     if (inField() || e.metaKey || e.ctrlKey || e.altKey) return;
+    // j/k walk the guided cases while the reader is inside them, and the pass rows everywhere else
+    const inGuided = document.activeElement && document.activeElement.closest && document.activeElement.closest('#guided');
+    if (inGuided && (e.key === 'j' || e.key === 'k')) {
+      e.preventDefault();
+      const here = document.activeElement.closest('details.chapter');
+      let i = chapters.indexOf(here); if (i < 0) i = e.key === 'j' ? -1 : chapters.length;
+      i = Math.max(0, Math.min(chapters.length - 1, i + (e.key === 'j' ? 1 : -1)));
+      const next = chapters[i]; if (!next) return;
+      chapters.forEach(c => c.classList.remove('current')); next.classList.add('current');
+      next.scrollIntoView({ block: 'nearest' }); $('summary', next).focus({ preventScroll: true });
+      return;
+    }
     const vis = visible(); const vi = vis.indexOf(curRow());
     switch (e.key) {
       case 'j': case 'ArrowDown': e.preventDefault(); setCur(vi + 1); break;
@@ -1765,10 +2177,129 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
   $('#help').addEventListener('click', () => $('#keys').showModal());
   $$('[data-jump]').forEach(a => a.addEventListener('click', e => { const id = a.getAttribute('href').slice(1); const row = document.getElementById(id); if (!row) return; e.preventDefault(); row.open = true; setCur(rows.indexOf(row)); }));
 
+  // ---- practice journal: the reader's own learning notes, never the labels file ----
+  const PKEY = 'trace-practice:' + TRACE_ENG;
+  const chapters = $$('details.chapter');
+  const now = () => new Date().toISOString();
+  let practice = {}; try { practice = JSON.parse(localStorage.getItem(PKEY) || '{}'); } catch (e) { practice = {}; }
+  let practiceOK = true;
+  const psave = () => { try { localStorage.setItem(PKEY, JSON.stringify(practice)); } catch (e) { practiceOK = false; } };
+  const pentry = (k) => (practice[k] = Object.assign({ choice: '', label: '', note: '', bookmarked: false, exposures: [], first: null, latest: null }, practice[k]));
+  const chKey = (ch) => ch.dataset.case;
+
+  function unlock(ch) { $$('[data-locked]', ch).forEach(d => { d.removeAttribute('data-locked'); d.open = true; }); }
+  function expose(ch, kind) { const e = pentry(chKey(ch)); if (!e.exposures.includes(kind)) { e.exposures.push(kind); psave(); paintPractice(ch); } }
+
+  function paintPractice(ch) {
+    const e = pentry(chKey(ch));
+    const box = $('[data-practice]', ch); if (!box) return;
+    $$('[data-choice]', box).forEach(i => { i.checked = i.value === e.choice; });
+    const ta = $('[data-practice-note]', box);
+    if (ta && document.activeElement !== ta) ta.value = e.note;
+    const bm = $('[data-practice-bookmark]', box);
+    if (bm) { bm.setAttribute('aria-pressed', String(!!e.bookmarked)); bm.textContent = e.bookmarked ? 'Marked to come back to' : 'Come back to this'; }
+    const st = $('[data-practice-state]', box);
+    if (st) {
+      const dirty = e.latest && (e.latest.choice !== e.choice || e.latest.note !== e.note);
+      let msg = e.latest ? (dirty ? 'Changed since your last saved answer.' : 'Answer saved in this browser.')
+        : (e.choice || e.note ? 'Draft kept in this browser. Save it when you are ready.' : 'Nothing saved yet.');
+      if (e.first && e.latest && e.first.at !== e.latest.at) msg += ' Your first answer is kept.';
+      if (e.exposures.length) msg += ' Help opened: ' + e.exposures.join(', ') + '.';
+      if (!practiceOK) msg += ' This browser will not keep notes between visits — download a backup.';
+      st.textContent = msg;
+    }
+    if (e.choice || (e.latest && e.latest.choice)) unlock(ch);
+  }
+
+  chapters.forEach(ch => {
+    const box = $('[data-practice]', ch);
+    if (box) {
+      $$('[data-choice]', box).forEach(inp => inp.addEventListener('change', () => {
+        const e = pentry(chKey(ch)); e.choice = inp.value; e.label = inp.dataset.label || inp.value; psave(); unlock(ch); paintPractice(ch); practiceStatus();
+      }));
+      const ta = $('[data-practice-note]', box);
+      if (ta) ta.addEventListener('input', () => { pentry(chKey(ch)).note = ta.value; psave(); paintPractice(ch); practiceStatus(); });
+      const bm = $('[data-practice-bookmark]', box);
+      if (bm) bm.addEventListener('click', () => { const e = pentry(chKey(ch)); e.bookmarked = !e.bookmarked; psave(); paintPractice(ch); practiceStatus(); });
+      const sv = $('[data-practice-save]', box);
+      if (sv) sv.addEventListener('click', () => {
+        const e = pentry(chKey(ch));
+        if (!e.choice && !e.note.trim()) { $('[data-practice-state]', box).textContent = 'Write an answer, or pick an option, before saving.'; return; }
+        const snap = { choice: e.choice, label: e.label, note: e.note, at: now(), helpBefore: e.exposures.slice() };
+        if (!e.first) e.first = snap; e.latest = snap; e.bookmarked = false; psave(); paintPractice(ch); practiceStatus();
+      });
+    }
+    $$('[data-exposure]', ch).forEach(d => d.addEventListener('toggle', () => { if (d.open) expose(ch, d.dataset.exposure); }));
+    if (ch.dataset.assist === 'worked') expose(ch, 'worked-example');
+    paintPractice(ch);
+  });
+
+  function practiceMarkdown() {
+    const out = ['# Practice notes — ' + TRACE_ENG, '', 'Written while reading the guided cases. These are learning notes, not labels: no verdict on this page was set by any of them.', ''];
+    chapters.forEach(ch => {
+      const e = pentry(chKey(ch));
+      out.push('## ' + (ch.dataset.title || chKey(ch)), '', (ch.dataset.run || '') + ' · ' + (ch.dataset.pass || '') + ' · assistance: ' + ch.dataset.assist, '');
+      if (e.latest) {
+        out.push('Answer: ' + (e.latest.label || e.latest.choice || '(no option chosen)'), '', e.latest.note || '(no note)', '', 'Saved: ' + e.latest.at, 'Help opened before it: ' + (e.latest.helpBefore.join(', ') || 'none'), '');
+        if (e.first && e.first.at !== e.latest.at) out.push('First answer: ' + (e.first.label || e.first.choice || '(none)') + ' — ' + (e.first.note || '(no note)') + ' (' + e.first.at + ')', '');
+      } else if (e.choice || e.note) {
+        out.push('Unsaved draft: ' + (e.label || e.choice || '(no option chosen)'), '', e.note || '(no note)', '');
+      } else out.push('No answer yet.', '');
+      if (e.bookmarked) out.push('Marked to come back to.', '');
+      const srcs = $$('[data-src]', ch).map(s => '- ' + s.dataset.src);
+      if (srcs.length) out.push('Sources:', ...srcs, '');
+    });
+    out.push('Help opened here is a record of this page only; it cannot show what was read elsewhere.', '');
+    return out.join('\n');
+  }
+  function practiceStatus() {
+    const saved = chapters.filter(ch => pentry(chKey(ch)).latest).length;
+    const el = $('#practice-status'); if (!el) return;
+    el.textContent = saved ? saved + ' of ' + chapters.length + ' cases answered' : 'Nothing practised yet.';
+    const t = $('#practice-text'); if (t) t.value = practiceMarkdown();
+  }
+  function download(text, type, name) {
+    const url = URL.createObjectURL(new Blob([text], { type }));
+    const a = document.createElement('a'); a.href = url; a.download = name; document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  if ($('#copy-practice')) {
+    $('#copy-practice').addEventListener('click', async () => {
+      const text = practiceMarkdown();
+      try { await navigator.clipboard.writeText(text); $('#practice-status').textContent = 'Practice notes copied.'; }
+      catch (e) { const f = $('.practice-fallback'); f.open = true; $('#practice-text').value = text; $('#practice-text').select(); $('#practice-status').textContent = 'Copying is blocked here; the notes are selected below.'; }
+    });
+    $('#download-practice').addEventListener('click', () => download(JSON.stringify(practice, null, 2), 'application/json', TRACE_ENG + '-practice.json'));
+    $('#restore-practice').addEventListener('change', async ev => {
+      const f = ev.target.files && ev.target.files[0]; if (!f) return;
+      try {
+        if (f.size > 4000000) throw new Error('too large');
+        const incoming = JSON.parse(await f.text());
+        if (!incoming || typeof incoming !== 'object' || Array.isArray(incoming)) throw new Error('not a backup');
+        Object.keys(incoming).forEach(k => { if (!practice[k] || (!practice[k].latest && !practice[k].note)) practice[k] = incoming[k]; });
+        psave(); chapters.forEach(paintPractice); practiceStatus();
+        $('#practice-status').textContent = 'Backup restored. Answers already written here were kept.';
+      } catch (e) { $('#practice-status').textContent = 'That file could not be read as a practice backup. Your notes were kept.'; }
+      ev.target.value = '';
+    });
+    practiceStatus();
+  }
+  $$('[data-case-link]').forEach(a => a.addEventListener('click', e => {
+    const ch = document.getElementById(a.getAttribute('href').slice(1)); if (!ch) return;
+    e.preventDefault(); ch.open = true; ch.scrollIntoView({ block: 'start' }); $('summary', ch).focus({ preventScroll: true });
+  }));
+
   // ---- print: unfold everything, restore after ----
   let wasOpen = [];
-  window.addEventListener('beforeprint', () => { wasOpen = rows.map(r => r.open); rows.forEach(r => r.open = true); });
-  window.addEventListener('afterprint', () => { rows.forEach((r, i) => r.open = wasOpen[i]); });
+  let chaptersOpen = [];
+  window.addEventListener('beforeprint', () => {
+    wasOpen = rows.map(r => r.open); rows.forEach(r => r.open = true);
+    chaptersOpen = chapters.map(c => c.open); chapters.forEach(c => c.open = true);
+  });
+  window.addEventListener('afterprint', () => {
+    rows.forEach((r, i) => r.open = wasOpen[i]);
+    chapters.forEach((c, i) => c.open = chaptersOpen[i]);
+  });
 })();
 </script>
 </body>

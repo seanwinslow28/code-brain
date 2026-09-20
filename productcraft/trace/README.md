@@ -1,6 +1,6 @@
 # trace — the Productcraft trace kit
 
-The four public pieces the studio's evals-and-trace design needs before its first engagement opens, designed on [#272](https://github.com/seanwinslow28/code-brain/issues/272) (record, labels, ladder, blind trials) and [#292](https://github.com/seanwinslow28/code-brain/issues/292) (the viewer's [DESIGN.md](DESIGN.md)), built on [#290](https://github.com/seanwinslow28/code-brain/issues/290) (2026-09-13). Husain's order, local by law: log full traces → one expert reads them in a purpose-built viewer → binary pass/fail with a written critique → taxonomy → code checks → judges only for persistent failure modes. Nothing here ships a payload anywhere.
+The public pieces the studio's evals-and-trace design needs before its first engagement opens, designed on [#272](https://github.com/seanwinslow28/code-brain/issues/272) (record, labels, ladder, blind trials) and [#292](https://github.com/seanwinslow28/code-brain/issues/292) (the viewer's [DESIGN.md](DESIGN.md)), built on [#290](https://github.com/seanwinslow28/code-brain/issues/290) (2026-09-13). Husain's order, local by law: log full traces → one expert reads them in a purpose-built viewer → binary pass/fail with a written critique → taxonomy → code checks → judges only for persistent failure modes. Nothing here ships a payload anywhere.
 
 | Piece | File | Who uses it |
 |---|---|---|
@@ -8,6 +8,7 @@ The four public pieces the studio's evals-and-trace design needs before its firs
 | Labels-file template | [labels-template.md](labels-template.md) | Sean, one file per engagement |
 | Rung-0 checker | [check.py](check.py) | Close, and any time between |
 | Viewer renderer | [render.py](render.py) → `trace/eval.html`, to [DESIGN.md](DESIGN.md) | Sean, reading and labeling |
+| Cases template | [cases-template.md](cases-template.md) → an engagement's `trace/cases.md` | the writer pass, once a train has run |
 
 Everything runs on the system `python3` with nothing installed: no model, no network, no third-party import. Templates hold no private content; the scripts read the private ledger only at run time and write only `eval.html`.
 
@@ -22,6 +23,7 @@ Inside each engagement folder of the private ledger (`productcraft/ledger/engage
 └── trace/
     ├── pass-NN-<seat>-<kind>.md    # one immutable record per invocation
     ├── labels.md                   # Sean's verdicts, apart from the facts
+    ├── cases.md                     # the guided-reading content, apart from the records
     ├── notes.md                    # process notes; the viewer's third growth slot
     ├── logs/                       # raw transcripts the records index (subagent JSONL, codex logs)
     ├── trials/                     # a trial's artifact, beside the train, never in artifacts/
@@ -63,6 +65,12 @@ Nine deterministic lines, in this order:
 ## The viewer
 
 One self-contained HTML per engagement, to [DESIGN.md](DESIGN.md) (APPROVED 2026-09-11, the renderer's authority — if the two disagree, DESIGN.md is the intent and the renderer is the bug). Masthead → prose reading line → labeling counter → the first-failing-stage matrix beside the fails with their critiques and the rung-0 checks → the train → one folded row per pass → three growth slots → footer. Fonts embedded from [fonts/](fonts/); every string from a record, label or artifact is escaped; no `<link>`, no `<script src>`, no URLs. Labels drafted on the page live in the browser and leave through **Copy label rows**; the file is the record. **The blind rule:** a shadow pair's runtime, launch form, meter source and log path are not in the HTML at all until both rows carry a verdict in the labels file — the reveal happens on the next render, never on the page.
+
+## Guided reading
+
+The page teaches as it is read, to phase 3 of the eval learning plan (adopted 2026-09-20, recorded in [DESIGN.md §14](DESIGN.md)). Above the counts it states the four things a reader is judging, kept apart — record checks, the seats' findings, your own labels, the owner decisions that are yours alone — with the versioned review prompt for each kind of run. Below them sits **guided reading**: one chapter per case, with decreasing help, each leading with a plain `Run NN · <Seat> <kind>` line, quoting its source with the line it sits on, and offering a question, a note and a bookmark.
+
+That teaching content is **not** in the renderer. It lives in `trace/cases.md` beside the records, written by hand in a **writer pass** after a train has run, to [cases-template.md](cases-template.md): one case per pass and finding, each source pinned to the sha256 it carried at writing time. The renderer reads, checks and qualifies it, and composes nothing. No file renders an honest empty section; a source whose hash has moved renders "the source changed since this story was written" instead of a stale quote; an excerpt that is not in its file is printed as an error. Practice answers live in the browser under a key of their own and never touch `labels.md` — the page records which help was opened before each answer, so an assisted answer is never mistaken for a blind one.
 
 ## Tests and the synthetic sample
 

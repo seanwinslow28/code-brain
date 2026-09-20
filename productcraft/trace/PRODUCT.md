@@ -20,6 +20,10 @@ One reader: Sean, the studio owner, a product manager and not a developer. He op
 
 Remove the friction from looking at the run. The page is the studio's version of the custom annotation tool Husain calls the single most impactful eval investment: all context for a pass on one screen, one-click verdicts, a written critique, a counter, keyboard navigation. Success is a labeled engagement (every pass has a verdict row) and a reader who can point at the stage where the run broke without opening a single record file.
 
+## Learning Surface
+
+*(added 2026-09-20, on Sean's ruling that every eval be constructed the way the eval learning plan proposes)* The page is also where its one reader learns to review. It opens by naming the four judgments it holds apart — the deterministic record checks, the seats' own findings, Sean's labels, and the owner decisions no recommendation can fill in — and carries a short versioned prompt for each kind of run. It then offers guided reading: hand-written cases, one per pass and finding, with decreasing assistance, each quoting the record it rests on and inviting an answer in Sean's own words. The teaching content is authored separately in the engagement's `trace/cases.md` and pinned to its sources' hashes, so the page can qualify a story whose evidence has moved rather than repeat it confidently. Practice answers are learning metadata in the browser, never labels: assisted practice must never contaminate the held-out sample a future judge is validated on.
+
 ## Positioning
 
 A purpose-built viewer over the studio's own immutable markdown records and labels file. It is not a span waterfall: passes, stages, verdicts and moves are the units, and the first-failing-stage matrix is the centrepiece. It stays local and self-contained by law; hosted trace tools would ship payloads.

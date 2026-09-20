@@ -1,7 +1,8 @@
 """tracekit — the Productcraft trace kit (build map #264, ticket #290).
 
-Four public pieces designed on #272 and #292: the pass-record template, the
-labels-file template, the rung-0 checker and the viewer renderer. Stdlib only:
+Designed on #272 and #292: the pass-record template, the labels-file template,
+the rung-0 checker, the viewer renderer, and the cases template the viewer's
+guided reading is written to (DESIGN.md §14). Stdlib only:
 the Close ritual runs on whatever python3 the session has, with nothing
 installed, no model and no network. Scripts read the private ledger only at
 run time; nothing here carries engagement content.

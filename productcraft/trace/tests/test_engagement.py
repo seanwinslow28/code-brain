@@ -62,7 +62,7 @@ def test_labels_and_notes(eng_dir):
     assert len(eng.labels) == 25
     assert sum(1 for l in eng.labels.values() if l.verdict) == 22
     assert eng.labels["pass-13"].first_failing_stage == 3
-    assert eng.notes and eng.notes.startswith("Synthetic process notes.")
+    assert eng.notes and "Synthetic process notes." in eng.notes
 
 
 def test_artifact_moves_are_read_through_the_record(eng_dir):

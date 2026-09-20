@@ -16,14 +16,16 @@ import base64
 import datetime as _dt
 import html as _html
 import json
+import re
 from pathlib import Path
 from typing import Optional
 
 from . import KIT_NAME, KIT_VERSION
+from .cases import ASSIST_BLURB, Case, CasesDoc, Source, load_cases
 from .checker import Check, run_checks
 from .engagement import Engagement, Record, load_engagement
 
-__all__ = ["render", "render_html", "STAGES", "SEAT_NAMES"]
+__all__ = ["render", "render_html", "STAGES", "SEAT_NAMES", "REVIEW_PROMPTS"]
 
 STAGES = {1: "Strategist", 2: "Discovery", 3: "Insights", 4: "Growth", 5: "Business", 6: "Delivery", 7: "Leadership"}
 SEAT_NAMES = {
@@ -33,6 +35,28 @@ SEAT_NAMES = {
 }
 FONTS_DIR = Path(__file__).resolve().parents[1] / "fonts"
 HIDDEN = "hidden with the runtime"
+
+# the plan's versioned review prompts, one per kind of run (eval-learning-plan.md §2)
+REVIEW_PROMPTS_VERSION = "v1 · 2026-09-20"
+REVIEW_PROMPTS = (
+    ("draft", "Does its work answer the assigned question within the evidence and constraints?"),
+    ("audit", "Is the claimed defect supported, consequential, and explained well enough to act on?"),
+    ("repair", "Does the new version resolve the identified issue without creating a material contradiction?"),
+    ("gate", "Are verification, residuals, and decision authority clear?"),
+)
+# one sentence per rung-0 check, in CHECK_NAMES order: what a finding there means for the reading
+CHECK_IMPLICATIONS = (
+    "A record that will not parse cannot be checked at all, so treat that pass's line on this page as unread.",
+    "A pass with no record is work this page cannot show you.",
+    "A pass with no row is unfinished review, not a pass.",
+    "A hash that no longer matches means the file on disk is not the one the seat read, so a quotation into it may point at different words.",
+    "A cited corpus file the transcript never opened means the citation was not read when it was made.",
+    "A move that names nothing upstream means the artifact's history does not add up; an unverifiable move is one an overwritten revision took with it.",
+    "An unmeasured pass costs the reading nothing; it only means the token figures here are a subtotal.",
+    "A stage missing its draft, its audit or its co-sign is a train that did not run its own shape.",
+    "A blind pair whose runtime is already visible cannot produce an unbiased verdict.",
+)
+SEVERITIES = ("MATERIAL", "NOTE", "CRITICAL", "LOOPBACK", "BLOCKER")
 
 
 def esc(s: object) -> str:
@@ -71,6 +95,132 @@ def _join(items: list[str]) -> str:
     if len(items) <= 1:
         return "".join(items)
     return ", ".join(items[:-1]) + " and " + items[-1]
+
+
+def run_no(pass_id: str) -> str:
+    """`pass-10` → `10`, the plain run number a reader says out loud."""
+    digits = "".join(ch for ch in str(pass_id) if ch.isdigit())
+    return str(int(digits)) if digits else str(pass_id)
+
+
+def run_line(pass_id: str, seat: str, kind: str) -> str:
+    """`Run 10 · Discovery audit` — the plain-language name for a pass (plan §2)."""
+    who = seat_name(seat)
+    what = "" if who.lower().endswith(kind.lower()) else f" {kind}"
+    return f"Run {run_no(pass_id)} · {who}{what}".rstrip()
+
+
+# --------------------------------------------------------------------------- #
+# what the seats found, read from the check records' own tables
+# --------------------------------------------------------------------------- #
+
+
+def _cells(line: str) -> list[str]:
+    s = line.strip()
+    if s.startswith("|"):
+        s = s[1:]
+    if s.endswith("|"):
+        s = s[:-1]
+    return [c.strip() for c in s.split("|")]
+
+
+def _plain(cell: str) -> str:
+    return cell.replace("**", "").replace("`", "").replace("*", "").strip()
+
+
+def _tables(text: str):
+    """Yield (header cells, row cells) for every markdown table in a document."""
+    lines = text.split("\n")
+    i = 0
+    while i < len(lines) - 1:
+        if lines[i].lstrip().startswith("|") and re.match(r"^\s*\|?\s*:?-{3,}", lines[i + 1]):
+            header = [_plain(c).lower() for c in _cells(lines[i])]
+            rows = []
+            j = i + 2
+            while j < len(lines) and lines[j].lstrip().startswith("|"):
+                rows.append([_plain(c) for c in _cells(lines[j])])
+                j += 1
+            yield header, rows
+            i = j
+            continue
+        i += 1
+
+
+def _severity_of(row: list[str], index: Optional[int]) -> Optional[str]:
+    cells = ([row[index]] if index is not None and index < len(row) else []) + row
+    for cell in cells:
+        word = cell.strip().upper()
+        if word in SEVERITIES:
+            return word
+    return None
+
+
+def check_record_findings(eng: Engagement) -> dict[str, object]:
+    """Count MATERIAL / NOTE findings across the check records in `audits/`.
+
+    A seat's assessment of an artifact, read from the seat's own findings
+    table. Nothing is inferred: a table with no severity column is skipped,
+    and the files counted are named so the number can be traced back.
+    """
+    names: list[str] = []
+    out: dict[str, object] = {"material": 0, "note": 0, "other": 0, "files": 0, "names": names}
+    folder = eng.root / "audits"
+    if not folder.is_dir():
+        return out
+    for f in sorted(folder.glob("*.md")):
+        try:
+            text = f.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        found = 0
+        for header, rows in _tables(text):
+            idx = next((i for i, h in enumerate(header) if "severit" in h or h == "grade"), None)
+            if idx is None:
+                continue
+            for row in rows:
+                sev = _severity_of(row, idx)
+                if sev == "MATERIAL":
+                    out["material"] = int(out["material"]) + 1
+                elif sev == "NOTE":
+                    out["note"] = int(out["note"]) + 1
+                elif sev:
+                    out["other"] = int(out["other"]) + 1
+                if sev:
+                    found += 1
+        if found:
+            out["files"] = int(out["files"]) + 1
+            names.append(f.name)
+    return out
+
+
+def owner_dispositions(eng: Engagement) -> dict[str, int]:
+    """Accepted / declined / noted / pending, from the gate findings' Disposition cells."""
+    out = {"accepted": 0, "declined": 0, "noted": 0, "pending": 0}
+    folder = eng.root / "audits"
+    if not folder.is_dir():
+        return out
+    for f in sorted(folder.glob("*.md")):
+        try:
+            text = f.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        for header, rows in _tables(text):
+            if "disposition" not in header or not any("severit" in h for h in header):
+                continue  # the gate's findings table, not a residual roll-up that repeats its rows
+            idx = header.index("disposition")
+            for row in rows:
+                if idx >= len(row):
+                    continue
+                cell = row[idx].strip().lower()
+                if cell.startswith(("accepted", "ratified", "accept ")):
+                    out["accepted"] += 1
+                elif cell.startswith(("declined", "rejected")):
+                    out["declined"] += 1
+                elif cell.startswith("noted"):
+                    out["noted"] += 1
+                else:
+                    out["pending"] += 1
+    return out
 
 
 # --------------------------------------------------------------------------- #
@@ -140,6 +290,9 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
         d["ok" if v == "pass" else "fail" if v == "fail" else "unl"] += 1
 
     loops = [(r.pass_id, r.triggered_by) for r in P if r.triggered_by]
+    cases_doc = load_cases(eng)
+    findings = check_record_findings(eng)
+    dispositions = owner_dispositions(eng)
     next_unlabeled = next((r.pass_id for r in P if not verdict(r.pass_id)), None)
     eng_id = esc(eng.brief.get("id") or eng.root.name)
     eng_name = esc(eng.brief.get("name") or "")
@@ -178,12 +331,16 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
     <button class="btn" id="mode" type="button" aria-pressed="false" aria-label="Switch to night studio">Night</button>
   </div>
 </header>
+{_judging_html(eng, checks, clean, n_checks, len(labeled), total, findings, dispositions)}
+<h2>What happened in this review</h2>
+{_intro_html(cases_doc)}
 <p class="reading">{reading}</p>
 <div class="counter" aria-live="polite">
   <span>Labeled <b id="labeled-n">{len(labeled)}</b> of {total}<span id="draft-note"></span></span>
   <span class="track" aria-hidden="true"><i id="track-file" style="width:{(len(labeled) / total * 100) if total else 0:.0f}%"></i></span>
   <span>Next unlabeled: {f'<a href="#{next_unlabeled}" data-jump>{next_unlabeled}</a>' if next_unlabeled else '<span>none</span>'}</span>
 </div>
+{_guided_html(eng, cases_doc)}
 """)
 
     # ---- where it broke -----------------------------------------------------
@@ -228,8 +385,6 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
             for r, f, crit in fails)
     else:
         fails_html = "<li><div class='who sub'>—</div><div class='why sub'>No fails labeled yet.</div></li>"
-    rung_html = "".join(
-        f"<li>{icon('check') if c.ok else icon('cross')}<span>{esc(c.name)}</span><span class='n'>{esc(c.count)}</span></li>" for c in checks)
     out.append(f"""
 <h2>Where it broke</h2>
 <div class="broke">
@@ -237,8 +392,7 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
   <div>
     <h3>The {n_fail} fails, first failure named</h3>
     <ul class="fails">{fails_html}</ul>
-    <h3>Rung 0 checks</h3>
-    <ul class="rung">{rung_html}</ul>
+    {_rung_html(checks)}
   </div>
 </div>
 """)
@@ -327,14 +481,12 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
 """)
 
     # ---- slots + footer ---------------------------------------------------------
-    notes_html = f'<div class="notes">{esc(eng.notes.strip())}</div>' if eng.notes and eng.notes.strip() else '<div class="notes">No notes file yet.</div>'
     out.append(f"""
 <h2>What comes later</h2>
 <div class="slots">
   <div class="slot"><h3>Failure taxonomy</h3><p><span class="when">Arrives after about thirty labels</span>, when the critiques get grouped into named failure modes with counts. Until then this slot lists nothing and the failure_code column stays blank.</p></div>
   <div class="slot"><h3>Judge results</h3><p><span class="when">Arrives per failure mode</span>, only after a mode recurs across engagements with thirty to fifty labeled examples per class and a judge is validated against the labels on a held-out split. A judge's verdict will sit beside the human one in each row, never replace it.</p></div>
-  <div class="slot"><h3>Process notes</h3><p><span class="when">Sean's notes for this engagement</span>, read from the engagement's notes file when it exists. What he noticed while reading, what he would run differently, what to watch next time.</p>
-  {notes_html}</div>
+  {_notes_slot_html(eng)}
 </div>
 <footer>
   <span>Rendered {esc(rendered_on)} from {total} records and {n_label_rows} label rows. The records are the truth; this page is a view of them.</span>
@@ -344,7 +496,7 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
 <dialog id="keys" aria-labelledby="keys-title">
   <h3 id="keys-title" style="margin-top:0">Keys</h3>
   <dl>
-    <dt><kbd>j</kbd> <kbd>k</kbd></dt><dd>next / previous pass</dd>
+    <dt><kbd>j</kbd> <kbd>k</kbd></dt><dd>next / previous pass — or next / previous case while you are inside guided reading</dd>
     <dt><kbd>enter</kbd></dt><dd>open or fold the current pass</dd>
     <dt><kbd>1</kbd> <kbd>2</kbd></dt><dd>label the current pass pass / fail</dd>
     <dt><kbd>f</kbd></dt><dd>first failing stage</dd>
@@ -375,6 +527,345 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
 
 
 # --------------------------------------------------------------------------- #
+# what you are judging — four statements kept apart (plan §2)
+# --------------------------------------------------------------------------- #
+
+
+def _judging_html(eng: Engagement, checks: list[Check], clean: int, n_checks: int, labeled: int,
+                  total: int, findings: dict[str, object], disp: dict[str, int]) -> str:
+    if int(findings["files"]) == 0:
+        found = "No check record has a findings table yet."
+    else:
+        found = f"<b>{findings['material']} material</b> · <b>{findings['note']}</b> note{'' if findings['note'] == 1 else 's'}"
+        if findings["other"]:
+            found += f" · {findings['other']} other"
+    decided = disp["accepted"] + disp["declined"] + disp["pending"]
+    if decided + disp["noted"] == 0:
+        owner = "No gate has put a decision to you yet."
+    else:
+        owner = f"<b>{disp['pending']} pending</b> · {disp['accepted']} accepted"
+        if disp["declined"]:
+            owner += f" · {disp['declined']} declined"
+    prompts = "".join(
+        f"<tr><th scope='row'>{esc(kind)}</th><td>{esc(q)}</td></tr>" for kind, q in REVIEW_PROMPTS)
+    files_note = (f" Read from {findings['files']} check record{'' if findings['files'] == 1 else 's'} in <code>audits/</code>."
+                  if findings["files"] else "")
+    noted_note = f" {disp['noted']} more are noted and ask for nothing." if disp["noted"] else ""
+    return f"""
+<h2>What you are judging</h2>
+<div class="judging">
+  <div class="stat">
+    <h3>Record checks</h3>
+    <p class="v"><a href="#record-checks"><b>{clean} of {n_checks}</b> pass</a></p>
+    <p class="s">Automated checks of the records, not a quality score. They say the paperwork adds up, never that the thinking was good.</p>
+  </div>
+  <div class="stat">
+    <h3>Reviewer findings</h3>
+    <p class="v">{found}</p>
+    <p class="s">A seat's assessment of one artifact and revision. Evidence for you to weigh, not a verdict.{files_note}</p>
+  </div>
+  <div class="stat">
+    <h3>Your labels</h3>
+    <p class="v">Labeled <b>{labeled} of {total}</b></p>
+    <p class="s">Your assessment of the work of each run: pass or fail, nothing between. An empty verdict means the review is unfinished, not a pass.</p>
+  </div>
+  <div class="stat">
+    <h3>Owner decisions</h3>
+    <p class="v">{owner}</p>
+    <p class="s">Yours alone; a gate's recommendation never fills one in.{noted_note}</p>
+  </div>
+</div>
+<table class="prompts">
+  <caption>What to ask of each kind of run <span class="sub">— teaching prompts to calibrate, {esc(REVIEW_PROMPTS_VERSION)}, not an automated grader</span></caption>
+  <tbody>{prompts}</tbody>
+</table>
+"""
+
+
+# --------------------------------------------------------------------------- #
+# the rung-0 list: verified, failed, unverifiable — with the checker's own reasons
+# --------------------------------------------------------------------------- #
+
+
+def _rung_html(checks: list[Check]) -> str:
+    items = []
+    for i, c in enumerate(checks):
+        state = "failed" if not c.ok else ("unverifiable in part" if c.n_unverifiable else "verified")
+        glyph = icon("check") if c.ok else icon("cross")
+        why = "".join(f"<li>{esc(f)}</li>" for f in c.findings)
+        notes = "".join(f"<li class='sub'>{esc(n)}</li>" for n in c.notes)
+        implication = CHECK_IMPLICATIONS[i] if i < len(CHECK_IMPLICATIONS) else ""
+        body = ""
+        if why:
+            body += f"<ul class='why'>{why}</ul>"
+        if notes:
+            body += f"<ul class='why'>{notes}</ul>"
+        if (why or c.n_unverifiable) and implication:
+            body += f"<p class='implication'>{esc(implication)}</p>"
+        items.append(
+            f"<li><span class='mark'>{glyph}</span><span class='what'>{esc(c.name)}"
+            f"<span class='state'>{state}</span></span><span class='n'>{esc(c.count)}</span>{body}</li>")
+    return f"""
+<h3 id="record-checks">Record checks</h3>
+<p class="cap">Automated checks of the records and their traceability. Not a quality score, and never a verdict on a seat's thinking.</p>
+<ul class="rung">{''.join(items)}</ul>
+<details class="term"><summary>What the kit calls these</summary><p class="sub">Rung 0 checks are the nine deterministic checks the kit runs with no model and no network. Rung 1 is the failure taxonomy, rung 2 a judge — both listed under <em>What comes later</em>.</p></details>
+"""
+
+
+# --------------------------------------------------------------------------- #
+# process notes: three takeaways, then the dated history
+# --------------------------------------------------------------------------- #
+
+_DATED = re.compile(r"^(\d{4}-\d{2}-\d{2}(?:\s+\d{2}:\d{2})?)\s+(.*)$", re.S)
+
+
+def _notes_slot_html(eng: Engagement) -> str:
+    head = ("<h3>Process notes</h3>"
+            "<p><span class=\"when\">The coordinator's running notes for this engagement</span>, read from the "
+            "engagement's notes file. What the run did, what was ruled, what to watch next time.</p>")
+    text = (eng.notes or "").strip()
+    if not text:
+        return f'<div class="slot">{head}<div class="notes">No notes file yet.</div></div>'
+    bullets = [line.strip()[2:].strip() for line in text.split("\n") if line.strip().startswith("- ")]
+    if not bullets:
+        return f'<div class="slot">{head}<div class="notes">{esc(text)}</div></div>'
+
+    def item(b: str) -> str:
+        m = _DATED.match(b)
+        if m:
+            return f"<li><b>{esc(m.group(1))}</b> {esc(m.group(2))}</li>"
+        return f"<li>{esc(b)}</li>"
+
+    takeaways = "".join(item(b) for b in bullets[:3])
+    rest = "".join(item(b) for b in bullets)
+    return (f'<div class="slot">{head}'
+            f'<ul class="takeaways">{takeaways}</ul>'
+            f'<details class="history"><summary>The full dated history, {len(bullets)} entries</summary>'
+            f'<ul class="takeaways">{rest}</ul></details></div>')
+
+
+# --------------------------------------------------------------------------- #
+# guided reading (plan §§3, 4, 8) — the cases, with assistance by level
+# --------------------------------------------------------------------------- #
+
+
+def _guided_empty(reason: str) -> str:
+    return f"""
+<h2>Guided reading</h2>
+<div class="guided empty">
+  <p>{reason}</p>
+  <p class="sub">Teaching content lives in <code>trace/cases.md</code> beside the records — one case per pass and finding, each quoting its source with the hash that source carried when the case was written. This page never writes a story of its own: no file, no cases. The schema is <code>productcraft/trace/cases-template.md</code>.</p>
+</div>
+"""
+
+
+def _guided_html(eng: Engagement, doc: Optional[CasesDoc]) -> str:
+    if doc is None:
+        return _guided_empty("No cases have been written for this engagement yet.")
+    errors = "".join(f"<li>{esc(e)}</li>" for e in doc.errors)
+    errors_html = (f'<div class="case-errors"><b>{len(doc.errors)} line(s) in cases.md did not check out:</b>'
+                   f'<ul>{errors}</ul></div>') if doc.errors else ""
+    if not doc.cases:
+        return _guided_empty("No case in <code>cases.md</code> could be read.") if not errors_html else f"""
+<h2>Guided reading</h2>
+<div class="guided empty"><p>No case in <code>cases.md</code> could be read.</p>{errors_html}</div>
+"""
+    by_id = eng.by_id
+    chapters = "".join(_chapter_html(doc, c, i + 1, by_id.get(c.pass_id)) for i, c in enumerate(doc.cases))
+    links = "".join(
+        f'<a href="#case-{esc(c.key)}" data-case-link>{i + 1}. {esc(c.title)}</a>' for i, c in enumerate(doc.cases))
+    status = ("Every case here has been read against its sources." if doc.reviewed else
+              "These explanations are proposed readings, checked against the sources but not yet read by you. "
+              "They are not an answer key, and disagreeing with one on the evidence is a good outcome.")
+    written = f" Written {esc(doc.written)}." if doc.written else ""
+    return f"""
+<h2>Guided reading</h2>
+<div class="guided" id="guided">
+  <p class="guided-intro">{len(doc.cases)} case{'' if len(doc.cases) == 1 else 's'} from this engagement, in the order they were written, with decreasing help. Each one names the run it comes from and quotes the record it rests on. <b>Your practice answers stay here in the browser and never touch the labels file.</b>{written}</p>
+  <p class="cap">{status}</p>
+  {errors_html}
+  <div class="case-links">{links}</div>
+  <div class="guided-tools">
+    <button class="btn" type="button" id="copy-practice">Copy practice notes</button>
+    <button class="btn" type="button" id="download-practice">Download backup</button>
+    <label class="btn file"><input type="file" id="restore-practice" accept="application/json,.json">Restore backup</label>
+    <span class="sub" id="practice-status" aria-live="polite">Nothing practised yet.</span>
+  </div>
+  <div class="chapters">{chapters}</div>
+  <details class="practice-fallback"><summary>If copying is blocked, take the notes from here</summary><textarea id="practice-text" rows="8" readonly></textarea></details>
+</div>
+"""
+
+
+def _source_html(s: Source) -> str:
+    where = f"{esc(s.path)}{f':{s.line}' if s.line else ''}"
+    label = f"<b>{esc(s.label)}</b> · " if s.label else ""
+    if s.shows_excerpt:
+        body = f"<blockquote>{esc(s.excerpt)}</blockquote>"
+    else:
+        body = f"<p class='qualified'>{esc(s.qualification)}</p>"
+    fingerprint = (f"<details class='fingerprint'><summary>Fingerprint</summary><dl>"
+                   f"<dt>path</dt><dd>{esc(s.path)}</dd>"
+                   f"<dt>sha256 when written</dt><dd>{esc(s.sha256)}</dd>"
+                   f"<dt>sha256 now</dt><dd>{esc(s.current_sha256 or 'not on disk')}</dd></dl></details>")
+    return (f"<div class='source' data-src='{esc(s.label or s.path)} — {where} (sha256 {esc(s.sha256[:12])}…)'>"
+            f"<p class='prov'>Source excerpt · {label}{where}</p>{body}{fingerprint}</div>")
+
+
+def _wrap(label: str, width: int = 24) -> list[str]:
+    lines, cur = [], ""
+    for word in label.split():
+        if cur and len(cur) + len(word) + 1 > width:
+            lines.append(cur)
+            cur = word
+        else:
+            cur = f"{cur} {word}".strip()
+    lines.append(cur)
+    return lines or [""]
+
+
+def _diagram_svg(case: Case) -> str:
+    """One optional inline SVG per case, drawn from a `### Diagram` text flow. No mermaid, no library."""
+    if not case.diagram:
+        return ""
+    W, GAP, VGAP, LH = 160, 40, 14, 14
+    columns: list[list[tuple[str, str, list[str]]]] = []
+    for kind, branch, label in case.diagram:
+        text = f"{branch}: {label}" if branch else label
+        node = (kind, branch, _wrap(text))
+        if kind == "branch" and columns and columns[-1][0][0] == "branch":
+            columns[-1].append(node)
+        else:
+            columns.append([node])
+    height_of = lambda lines: max(34, LH * len(lines) + 20)
+    col_h = [sum(height_of(n[2]) for n in col) + VGAP * (len(col) - 1) for col in columns]
+    svg_h = max(col_h) + 24
+    mid = svg_h / 2
+    parts: list[str] = []
+    prev_right: Optional[tuple[float, float]] = None
+    for i, col in enumerate(columns):
+        x = 8 + i * (W + GAP)
+        y = mid - col_h[i] / 2
+        last_right = None
+        for kind, _branch, lines in col:
+            h = height_of(lines)
+            cls = {"decision": "d-decision", "branch": "d-branch"}.get(kind, "d-step")
+            tspans = "".join(
+                f'<tspan x="{x + W / 2}" dy="{0 if j == 0 else LH}">{esc(l)}</tspan>' for j, l in enumerate(lines))
+            parts.append(f'<rect class="{cls}" x="{x}" y="{y:.0f}" width="{W}" height="{h}" rx="3"/>'
+                         f'<text x="{x + W / 2}" y="{y + h / 2 - (len(lines) - 1) * LH / 2 + 4:.0f}" text-anchor="middle">{tspans}</text>')
+            if prev_right:
+                parts.append(f'<path class="d-edge" d="M{prev_right[0]:.0f} {prev_right[1]:.0f} '
+                             f'C {prev_right[0] + 18:.0f} {prev_right[1]:.0f}, {x - 18} {y + h / 2:.0f}, {x - 3} {y + h / 2:.0f}"/>')
+            last_right = (x + W, y + h / 2)
+            y += h + VGAP
+        prev_right = last_right if len(col) == 1 else None
+    width = 8 + len(columns) * (W + GAP)
+    text_equiv = "".join(
+        f"<li>{esc((branch + ': ' if branch else '') + label + ('?' if kind == 'decision' else ''))}</li>"
+        for kind, branch, label in case.diagram)
+    return (f'<figure class="diagram"><figcaption>One step of the decision, not the whole rule</figcaption>'
+            f'<svg viewBox="0 0 {width:.0f} {svg_h:.0f}" width="{width:.0f}" role="img" aria-label="A small flow: '
+            f'{esc(" then ".join(l for _, _, l in case.diagram))}">{"".join(parts)}</svg>'
+            f'<ul class="diagram-text">{text_equiv}</ul></figure>')
+
+
+def _practice_html(case: Case) -> str:
+    opts = "".join(
+        f'<label class="choice"><input type="radio" name="opt-{esc(case.key)}" value="{esc(o.key)}" '
+        f'data-choice data-label="{esc(o.label)}">{esc(o.label)}</label>' for o in case.options)
+    fieldset = (f'<fieldset><legend>{esc(case.question) or "What is your call?"}</legend>{opts}</fieldset>'
+                if case.options else f'<p class="q">{esc(case.question)}</p>')
+    prompt = case.your_turn or "Answer in your own words, and name the evidence you are using."
+    return f"""
+<div class="practice" data-practice="{esc(case.key)}">
+  <h4>Your turn</h4>
+  {fieldset}
+  <label class="note-label">Your note — {esc(prompt)}
+    <textarea data-practice-note rows="3" maxlength="20000"></textarea>
+  </label>
+  <div class="actions">
+    <button class="btn" type="button" data-practice-save>Save my answer</button>
+    <button class="btn" type="button" data-practice-bookmark aria-pressed="false">Come back to this</button>
+    <span class="sub" data-practice-state>Nothing saved yet.</span>
+  </div>
+  <p class="sub">Practice notes are yours: they stay in this browser, never in the labels file, and a saved answer never fills in a verdict.</p>
+</div>"""
+
+
+def _chapter_html(doc: CasesDoc, case: Case, n: int, rec: Optional[Record]) -> str:
+    run = run_line(case.pass_id, rec.seat if rec else "", rec.kind if rec else "") if rec else f"Run {run_no(case.pass_id)}"
+    finding = f" · finding {esc(case.finding)}" if case.finding else ""
+    evidence = "".join(_source_html(s) for s in case.sources) or "<p class='sub'>No source is named for this case.</p>"
+    story = "".join(f"<p>{esc(p)}</p>" for p in case.story)
+    goal = f"<p>{esc(case.goal)}</p>" if case.goal else ""
+    rest = "".join(f"<p>{esc(p)}</p>" for p in case.rest_of_story)
+    reveal_body = "".join(f"<p>{esc(p)}</p>" for p in case.reveal) or "<p class='sub'>Not written yet.</p>"
+    attribution = f"<p class='prov sub'>Explanation · {doc.attribution}.</p>"
+    diagram = _diagram_svg(case)
+    terms = ("".join(f"<dt>{esc(t)}</dt><dd>{esc(d)}</dd>" for t, d in case.terms))
+    terms_html = f"<dl class='terms'>{terms}</dl>" if terms else ""
+    qualified = ("<p class='qualified'>One source of this case has changed or gone missing since the case was "
+                 "written, so read it as a qualified story.</p>" if case.qualified else "")
+    notes = "".join(f"<p class='qualified'>{esc(x)}</p>" for x in case.notes)
+    row_link = f'<p class="case-foot"><a href="#{esc(case.pass_id)}" data-jump>Open {esc(run_line(case.pass_id, rec.seat, rec.kind)) if rec else esc(case.pass_id)}’s row below</a> to label it.</p>' if rec else ""
+    hint = (f'<details class="help" data-exposure="hint"><summary>Give me one hint</summary><p>{esc(case.hint)}</p></details>' 
+            if case.hint else "")
+
+    if case.assist == "worked":
+        body = f"""
+<h4>Source excerpt</h4>{evidence}
+<h4>Explanation</h4><div class="story">{story}</div>{attribution}
+{diagram}
+<div class="reveal open"><h4>The reviewer's reasoning, and what the record says happened</h4>{reveal_body}{attribution}</div>
+{_practice_html(case)}"""
+    elif case.assist == "hint":
+        body = f"""
+<h4>Source excerpt</h4>{evidence}
+<h4>Explanation</h4><div class="story">{story}</div>{attribution}
+{diagram}
+{_practice_html(case)}
+{hint}
+<details class="help" data-exposure="reveal"><summary>Read what the reviewer found and what changed</summary>{reveal_body}{attribution}</details>"""
+    else:
+        body = f"""
+<div class="story goal">{goal}</div>
+<h4>Source excerpt</h4>{evidence}
+{_practice_html(case)}
+{hint}
+<details class="help locked" data-exposure="reveal" data-locked="1"><summary>Show the diagnosis and the reviewer's reasoning</summary>
+  <div class="story">{rest}</div>
+  {diagram}
+  {reveal_body}{attribution}</details>"""
+
+    return f"""
+<details class="chapter" id="case-{esc(case.key)}" data-case="{esc(case.key)}" data-assist="{esc(case.assist)}"
+  data-title="{esc(case.title)}" data-run="{esc(run)}" data-pass="{esc(case.pass_id)}"{' open' if case.assist == 'worked' and n == 1 else ''}>
+  <summary>
+    <span class="number" aria-hidden="true">{n:02d}</span>
+    <span class="chapter-title"><span class="ct">{esc(case.title)}</span>
+      <span class="sub">{esc(run)} <span class="pid-sub">{esc(case.pass_id)}</span>{finding}</span></span>
+    <span class="assist-tag">{esc(case.assist)}</span>
+  </summary>
+  <div class="case-body">
+    <p class="focus">{esc(ASSIST_BLURB[case.assist])}</p>
+    {qualified}{notes}
+    {body}
+    {terms_html}
+    {row_link}
+  </div>
+</details>"""
+
+
+def _intro_html(doc: Optional[CasesDoc]) -> str:
+    if doc is None or not doc.intro:
+        return ('<p class="intro sub">No plain-language summary has been written for this engagement yet; it lives '
+                'in <code>trace/cases.md</code>. The counts below are composed from the records and the labels file.</p>')
+    return f'<p class="intro">{esc(doc.intro)}</p>'
+
+
+# --------------------------------------------------------------------------- #
 # one pass row
 # --------------------------------------------------------------------------- #
 
@@ -397,9 +888,7 @@ def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit:
     tok = "—" if unmeasured else fmt_tokens(int(m.get("input", 0)) + int(m.get("output", 0)))
     summary = f"""
 <summary>
-  <span class="pid">{pid}</span>
-  <span>{esc(seat_name(p.seat))}{tags}</span>
-  <span class="kind">{esc(p.kind)}</span>
+  <span class="run"><b>Run {run_no(p.pass_id)}</b> · <span class="seat">{esc(seat_name(p.seat))}</span>{'' if seat_name(p.seat).lower().endswith(p.kind.lower()) else f' <span class="kind">{esc(p.kind)}</span>'}{tags}<span class="pid-sub">{pid}</span></span>
   <span class="kind">{esc(stage_label(p.stage))}</span>
   <span class="rt">{rt_html}</span>
   <span class="wc">{fmt_minutes(p.wall_clock_s)}</span>
@@ -424,16 +913,16 @@ def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit:
     form = f"""
 <div class="label-form" data-label-form data-pass="{pid}">
   <div>
-    <h4>Verdict</h4>
+    <h4>Your verdict: pass / fail</h4>
     <div class="verdicts" role="group" aria-label="Verdict for {pid}">
       <button class="btn" type="button" data-set-verdict="pass" aria-pressed="{'true' if v == 'pass' else 'false'}">{icon('check')} pass <kbd>1</kbd></button>
       <button class="btn" type="button" data-set-verdict="fail" aria-pressed="{'true' if v == 'fail' else 'false'}">{icon('cross')} fail <kbd>2</kbd></button>
     </div>
   </div>
-  <label>First failing stage <kbd style="font-size:0.75rem">f</kbd>
+  <label>Where did the problem first enter the workflow? <kbd style="font-size:0.75rem">f</kbd>
     <select data-ffs {'disabled' if v != 'fail' else ''}><option value="">—</option>{ffs_opts}</select>
   </label>
-  <label>Critique, one to three sentences a new hire could act on <kbd style="font-size:0.75rem">c</kbd>
+  <label>What led to your judgment? Name the evidence and the consequence. <kbd style="font-size:0.75rem">c</kbd>
     <textarea data-crit rows="2">{esc(crit)}</textarea>
   </label>
   {blind_note}
@@ -441,6 +930,17 @@ def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit:
 </div>"""
     detail = f"""
 <div class="detail">
+  <div>
+    <h4>Checks on this pass</h4><ul class="checks">{checks}</ul>
+    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul>{corpus}</ul>
+  </div>
+  <div>
+    <h4>Moves</h4>{moves}
+    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">{esc(p.notes) or '<span class="sub">none</span>'}</p>
+  </div>
+  <details class="record-details">
+  <summary>Record details</summary>
+  <div class="record-grid">
   <div>
     <h4>Record</h4>
     <dl>
@@ -454,16 +954,14 @@ def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit:
       <dt>raw log</dt><dd>{raw_log}</dd>
       <dt>record</dt><dd>{esc(p.file.name)}</dd>
     </dl>
-    <h4 style="margin-top:1rem">Inputs, hashed</h4><ul>{inputs}</ul>
+  </div>
+  <div>
+    <h4>Inputs, hashed</h4><ul>{inputs}</ul>
     <h4 style="margin-top:1rem">Withheld</h4><ul>{withheld}</ul>
     <h4 style="margin-top:1rem">Outputs</h4><ul>{outputs}</ul>
   </div>
-  <div>
-    <h4>Checks on this pass</h4><ul class="checks">{checks}</ul>
-    <h4 style="margin-top:1rem">Corpus read (from the transcript)</h4><ul>{corpus}</ul>
-    <h4 style="margin-top:1rem">Moves</h4>{moves}
-    <h4 style="margin-top:1rem">Notes</h4><p style="font-size:inherit">{esc(p.notes) or '<span class="sub">none</span>'}</p>
   </div>
+  </details>
   {form}
 </div>"""
     return (f'<details class="pass v-{vcls}" id="{pid}" data-pass="{pid}" data-kind="{esc(p.kind)}" '
@@ -620,9 +1118,96 @@ p { margin: 0 0 0.75rem; max-width: var(--measure); }
 .fails .who b { display: block; color: var(--ink); font-weight: 600; }
 .fails .why { font-size: var(--fs-1); }
 .fails .why small { display: block; color: var(--sub); font-size: var(--fs-0); margin-top: 0.15rem; }
-.rung { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.25rem 2rem; font-size: var(--fs-0); }
-.rung li { display: grid; grid-template-columns: 1rem 1fr auto; gap: 0.5rem; align-items: baseline; }
+.rung { list-style: none; margin: 0.5rem 0 0; padding: 0; display: grid; gap: 0.5rem; font-size: var(--fs-0); }
+.rung li { display: grid; grid-template-columns: 1rem 1fr auto; gap: 0.2rem 0.5rem; align-items: baseline; padding-bottom: 0.4rem; border-bottom: 1px solid var(--ink-hairline); }
+.rung li:last-child { border-bottom: 0; }
+.rung .what { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: baseline; }
+.rung .state { color: var(--sub); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; }
 .rung .n { color: var(--sub); }
+.rung .why { grid-column: 2 / -1; margin: 0.25rem 0 0; padding-left: 1rem; }
+.rung .why li { display: list-item; list-style: disc; border: 0; padding: 0; }
+.rung .implication { grid-column: 2 / -1; margin: 0.3rem 0 0; color: var(--sub); max-width: 60ch; }
+.term { font-size: var(--fs-0); margin-top: 0.6rem; }
+.term summary { color: var(--sub); cursor: pointer; }
+.term p { margin-top: 0.4rem; }
+
+/* what you are judging */
+.judging { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem 2rem; margin-bottom: 1.5rem; }
+.judging .stat h3 { font-size: var(--fs-0); font-family: var(--font-body); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sub); margin: 0 0 0.3rem; }
+.judging .v { font-size: var(--fs-2); margin: 0 0 0.35rem; font-variant-numeric: tabular-nums; }
+.judging .v b { font-weight: 600; }
+.judging .s { font-size: var(--fs-0); color: var(--sub); margin: 0; }
+.prompts { border-collapse: collapse; font-size: var(--fs-0); max-width: var(--measure); }
+.prompts caption { text-align: left; color: var(--ink); padding-bottom: 0.4rem; }
+.prompts th, .prompts td { border-top: 1px solid var(--ink-hairline); padding: 0.35rem 0.75rem 0.35rem 0; text-align: left; vertical-align: top; }
+.prompts th { font-weight: 600; width: 5rem; }
+.intro { font-size: var(--fs-1); max-width: var(--measure); margin-top: 0.25rem; }
+
+/* guided reading */
+.guided { margin-bottom: 1rem; }
+.guided.empty p { max-width: var(--measure); }
+.guided-intro { max-width: var(--measure); }
+.guided .cap { max-width: var(--measure); color: var(--sub); font-size: var(--fs-0); }
+.case-errors { border: 1px solid var(--ink); padding: 0.6rem 0.9rem; margin: 0.75rem 0; font-size: var(--fs-0); max-width: var(--measure); }
+.case-errors ul { margin: 0.35rem 0 0; padding-left: 1.1rem; }
+.case-links { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; font-size: var(--fs-0); margin: 0.75rem 0; }
+.guided-tools { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 1rem; font-size: var(--fs-0); }
+.btn.file { position: relative; overflow: hidden; display: inline-flex; align-items: center; }
+.btn.file input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.chapters { border-top: 1px solid var(--ink); }
+.chapter { border-bottom: 1px solid var(--ink-hairline); }
+.chapter > summary { list-style: none; display: grid; grid-template-columns: 2.5rem 1fr auto; gap: 0.75rem; align-items: baseline; padding: 0.8rem var(--row-x); cursor: pointer; }
+.chapter > summary::-webkit-details-marker { display: none; }
+.chapter > summary:hover { background: var(--ink-wash-1); }
+.chapter[open] > summary { background: var(--ink-wash-1); }
+.chapter.current > summary { box-shadow: inset 0 -2px 0 0 var(--accent); }
+.chapter .number { color: var(--sub); font-variant-numeric: tabular-nums; font-size: var(--fs-0); }
+.chapter .ct { display: block; font-size: var(--fs-2); }
+.chapter .chapter-title .sub { font-size: var(--fs-0); }
+.pid-sub { font-size: 0.75rem; color: var(--sub); margin-left: 0.35rem; font-variant-numeric: tabular-nums; }
+.assist-tag { border: 1px solid var(--ink-hairline); padding: 0 0.4rem; font-size: 0.75rem; color: var(--sub); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+.case-body { padding: 0.25rem var(--row-x) 1.75rem calc(var(--row-x) + 2.5rem + 0.75rem); max-width: 68ch; }
+.case-body h4 { font-family: var(--font-body); font-size: var(--fs-0); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--sub); margin: 1.25rem 0 0.4rem; }
+.case-body .focus { color: var(--sub); font-size: var(--fs-0); }
+.case-body .story p, .case-body .reveal p, .help p { max-width: 68ch; }
+.source { border-left: 2px solid var(--ink-wash-3); padding-left: 0.9rem; margin-bottom: 0.9rem; }
+.source .prov { font-size: var(--fs-0); color: var(--sub); margin-bottom: 0.3rem; overflow-wrap: anywhere; }
+.source blockquote { margin: 0; font-size: var(--fs-1); }
+.source blockquote::before { content: "“"; } .source blockquote::after { content: "”"; }
+.qualified { border: 1px dashed var(--ink-wash-3); padding: 0.4rem 0.6rem; font-size: var(--fs-0); }
+.fingerprint { font-size: 0.75rem; color: var(--sub); margin-top: 0.4rem; }
+.fingerprint summary { cursor: pointer; }
+.fingerprint dl { display: grid; grid-template-columns: 11rem 1fr; gap: 0.1rem 0.5rem; margin: 0.3rem 0 0; }
+.fingerprint dt { color: var(--sub); } .fingerprint dd { margin: 0; overflow-wrap: anywhere; }
+.prov.sub { font-size: var(--fs-0); }
+.reveal.open { border-top: 1px solid var(--ink-hairline); padding-top: 0.5rem; margin-top: 1rem; }
+.help { border: 1px solid var(--ink-hairline); padding: 0.55rem 0.8rem; margin: 0.9rem 0; }
+.help > summary { cursor: pointer; font-weight: 600; }
+.help[open] > summary { margin-bottom: 0.5rem; }
+.practice { border-top: 1px solid var(--ink-hairline); margin-top: 1.25rem; padding-top: 0.75rem; }
+.practice fieldset { border: 0; margin: 0; padding: 0; }
+.practice legend { padding: 0; margin-bottom: 0.4rem; }
+.practice .choice { display: block; margin: 0.2rem 0; }
+.practice .choice input { margin-right: 0.45rem; }
+.practice .note-label { display: block; color: var(--sub); font-size: var(--fs-0); margin-top: 0.75rem; }
+.practice textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 0.25rem; background: transparent; color: var(--ink); border: 1px solid var(--ink-hairline); border-radius: 2px; padding: 0.35rem 0.5rem; font-size: var(--fs-1); resize: vertical; }
+.practice .actions { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin: 0.6rem 0 0.4rem; }
+.practice .sub { font-size: var(--fs-0); }
+.chapter .locked[data-locked='1'] > summary { font-style: italic; }
+.diagram { margin: 1rem 0; }
+.diagram figcaption { font-size: var(--fs-0); color: var(--sub); margin-bottom: 0.35rem; }
+.diagram svg { max-width: 100%; height: auto; font-family: var(--font-body); font-size: 12px; }
+.diagram text { fill: var(--ink); }
+.diagram .d-step, .diagram .d-decision, .diagram .d-branch { fill: var(--ink-wash-1); stroke: var(--ink-wash-3); stroke-width: 1; }
+.diagram .d-decision { fill: var(--ink-wash-2); }
+.diagram .d-branch { fill: none; stroke-dasharray: 3 3; }
+.diagram .d-edge { stroke: var(--ink-wash-4); fill: none; stroke-width: 1.25; }
+.diagram-text { font-size: var(--fs-0); color: var(--sub); margin: 0.4rem 0 0; padding-left: 1.1rem; }
+.terms { display: grid; grid-template-columns: auto 1fr; gap: 0.15rem 0.75rem; font-size: var(--fs-0); margin: 1rem 0 0; border-top: 1px solid var(--ink-hairline); padding-top: 0.6rem; }
+.terms dt { font-weight: 600; } .terms dd { margin: 0; color: var(--sub); }
+.case-foot { font-size: var(--fs-0); margin-top: 1rem; }
+.practice-fallback { font-size: var(--fs-0); color: var(--sub); }
+.practice-fallback textarea { width: 100%; box-sizing: border-box; background: transparent; color: var(--ink); border: 1px solid var(--ink-hairline); margin-top: 0.4rem; }
 
 /* train */
 .train { overflow-x: auto; }
@@ -649,7 +1234,9 @@ p { margin: 0 0 0.75rem; max-width: var(--measure); }
 .filters .btn { padding: 0.2rem 0.55rem; }
 .passes { border-top: 1px solid var(--ink); }
 .pass { border-bottom: 1px solid var(--ink-hairline); }
-.pass summary { list-style: none; display: grid; grid-template-columns: 4.5rem 11rem 4.5rem 6rem 9rem 4rem 4rem 5.5rem 1fr; gap: 0 0.75rem; align-items: center; padding: 0.55rem var(--row-x); cursor: pointer; font-size: var(--fs-0); position: relative; }
+.pass summary { list-style: none; display: grid; grid-template-columns: 21rem 6rem 9rem 4rem 4rem 5.5rem 1fr; gap: 0 0.75rem; align-items: center; padding: 0.55rem var(--row-x); cursor: pointer; font-size: var(--fs-0); position: relative; }
+.pass summary .run b { font-weight: 600; }
+.pass summary .run .seat { color: var(--ink); }
 .pass summary::-webkit-details-marker { display: none; }
 .pass summary:hover { background: var(--ink-wash-1); }
 .pass.current summary { box-shadow: inset 0 -2px 0 0 var(--accent); }
@@ -688,6 +1275,16 @@ p { margin: 0 0 0.75rem; max-width: var(--measure); }
 .label-form .state { grid-column: 1 / -1; color: var(--sub); display: flex; gap: 1rem; align-items: center; }
 .label-form .state .draft { color: var(--ink); }
 .blind-note { grid-column: 1 / -1; color: var(--sub); }
+.record-details { grid-column: 1 / -1; border-top: 1px solid var(--ink-hairline); padding-top: 0.6rem; }
+.record-details > summary { cursor: pointer; color: var(--sub); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; font-size: var(--fs-0); }
+.record-details[open] > summary { margin-bottom: 0.7rem; }
+.record-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 1.25rem 2.5rem; }
+.takeaways { list-style: none; margin: 0.5rem 0 0; padding: 0; font-size: var(--fs-0); display: grid; gap: 0.45rem; }
+.takeaways li { border-left: 2px solid var(--ink-wash-2); padding-left: 0.6rem; }
+.takeaways b { font-weight: 600; }
+.history { font-size: var(--fs-0); margin-top: 0.7rem; }
+.history summary { cursor: pointer; color: var(--sub); }
+.history .takeaways { max-height: 28rem; overflow-y: auto; }
 
 /* slots */
 .slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; }
@@ -705,17 +1302,21 @@ dialog kbd { border: 1px solid var(--ink-hairline); padding: 0 0.3rem; border-ra
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
 @media (max-width: 900px) {
-  .broke, .slots, .detail { grid-template-columns: 1fr; }
-  .pass summary { grid-template-columns: 4.5rem 7rem 5rem 1fr; }
+  .broke, .slots, .detail, .record-grid, .judging { grid-template-columns: 1fr; }
+  .judging { gap: 1rem; }
+  .pass summary { grid-template-columns: 1fr 5.5rem; }
   .pass summary .wc, .pass summary .tok, .pass summary .rt, .pass summary .ffs, .pass summary .crit { display: none; }
+  .pass summary > .kind { display: none; }
+  .case-body { padding-left: var(--row-x); }
 }
 @media print {
   :root { --ground: #FBF6EC; --ink: #2A2622; --sub: #6E655B; --accent: #2F5D7C; }
   html { font-size: 11px; }
   body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .tools, .filters, .label-form, .btn, dialog { display: none !important; }
-  .pass, .fails li, .matrix, .stages, .train { break-inside: avoid; }
-  .pass summary { cursor: default; }
+  .tools, .filters, .label-form, .btn, dialog, .guided-tools, .practice .actions, .practice-fallback { display: none !important; }
+  .pass, .fails li, .matrix, .stages, .train, .chapter, .source, .diagram { break-inside: avoid; }
+  .pass summary, .chapter > summary { cursor: default; }
+  .practice textarea { border: 1px solid var(--ink-hairline); min-height: 3rem; }
   h2 { break-after: avoid; }
 }
 """
@@ -820,6 +1421,18 @@ JS = r"""
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && inField()) { document.activeElement.blur(); if (curRow()) $('summary', curRow()).focus(); return; }
     if (inField() || e.metaKey || e.ctrlKey || e.altKey) return;
+    // j/k walk the guided cases while the reader is inside them, and the pass rows everywhere else
+    const inGuided = document.activeElement && document.activeElement.closest && document.activeElement.closest('#guided');
+    if (inGuided && (e.key === 'j' || e.key === 'k')) {
+      e.preventDefault();
+      const here = document.activeElement.closest('details.chapter');
+      let i = chapters.indexOf(here); if (i < 0) i = e.key === 'j' ? -1 : chapters.length;
+      i = Math.max(0, Math.min(chapters.length - 1, i + (e.key === 'j' ? 1 : -1)));
+      const next = chapters[i]; if (!next) return;
+      chapters.forEach(c => c.classList.remove('current')); next.classList.add('current');
+      next.scrollIntoView({ block: 'nearest' }); $('summary', next).focus({ preventScroll: true });
+      return;
+    }
     const vis = visible(); const vi = vis.indexOf(curRow());
     switch (e.key) {
       case 'j': case 'ArrowDown': e.preventDefault(); setCur(vi + 1); break;
@@ -837,9 +1450,128 @@ JS = r"""
   $('#help').addEventListener('click', () => $('#keys').showModal());
   $$('[data-jump]').forEach(a => a.addEventListener('click', e => { const id = a.getAttribute('href').slice(1); const row = document.getElementById(id); if (!row) return; e.preventDefault(); row.open = true; setCur(rows.indexOf(row)); }));
 
+  // ---- practice journal: the reader's own learning notes, never the labels file ----
+  const PKEY = 'trace-practice:' + TRACE_ENG;
+  const chapters = $$('details.chapter');
+  const now = () => new Date().toISOString();
+  let practice = {}; try { practice = JSON.parse(localStorage.getItem(PKEY) || '{}'); } catch (e) { practice = {}; }
+  let practiceOK = true;
+  const psave = () => { try { localStorage.setItem(PKEY, JSON.stringify(practice)); } catch (e) { practiceOK = false; } };
+  const pentry = (k) => (practice[k] = Object.assign({ choice: '', label: '', note: '', bookmarked: false, exposures: [], first: null, latest: null }, practice[k]));
+  const chKey = (ch) => ch.dataset.case;
+
+  function unlock(ch) { $$('[data-locked]', ch).forEach(d => { d.removeAttribute('data-locked'); d.open = true; }); }
+  function expose(ch, kind) { const e = pentry(chKey(ch)); if (!e.exposures.includes(kind)) { e.exposures.push(kind); psave(); paintPractice(ch); } }
+
+  function paintPractice(ch) {
+    const e = pentry(chKey(ch));
+    const box = $('[data-practice]', ch); if (!box) return;
+    $$('[data-choice]', box).forEach(i => { i.checked = i.value === e.choice; });
+    const ta = $('[data-practice-note]', box);
+    if (ta && document.activeElement !== ta) ta.value = e.note;
+    const bm = $('[data-practice-bookmark]', box);
+    if (bm) { bm.setAttribute('aria-pressed', String(!!e.bookmarked)); bm.textContent = e.bookmarked ? 'Marked to come back to' : 'Come back to this'; }
+    const st = $('[data-practice-state]', box);
+    if (st) {
+      const dirty = e.latest && (e.latest.choice !== e.choice || e.latest.note !== e.note);
+      let msg = e.latest ? (dirty ? 'Changed since your last saved answer.' : 'Answer saved in this browser.')
+        : (e.choice || e.note ? 'Draft kept in this browser. Save it when you are ready.' : 'Nothing saved yet.');
+      if (e.first && e.latest && e.first.at !== e.latest.at) msg += ' Your first answer is kept.';
+      if (e.exposures.length) msg += ' Help opened: ' + e.exposures.join(', ') + '.';
+      if (!practiceOK) msg += ' This browser will not keep notes between visits — download a backup.';
+      st.textContent = msg;
+    }
+    if (e.choice || (e.latest && e.latest.choice)) unlock(ch);
+  }
+
+  chapters.forEach(ch => {
+    const box = $('[data-practice]', ch);
+    if (box) {
+      $$('[data-choice]', box).forEach(inp => inp.addEventListener('change', () => {
+        const e = pentry(chKey(ch)); e.choice = inp.value; e.label = inp.dataset.label || inp.value; psave(); unlock(ch); paintPractice(ch); practiceStatus();
+      }));
+      const ta = $('[data-practice-note]', box);
+      if (ta) ta.addEventListener('input', () => { pentry(chKey(ch)).note = ta.value; psave(); paintPractice(ch); practiceStatus(); });
+      const bm = $('[data-practice-bookmark]', box);
+      if (bm) bm.addEventListener('click', () => { const e = pentry(chKey(ch)); e.bookmarked = !e.bookmarked; psave(); paintPractice(ch); practiceStatus(); });
+      const sv = $('[data-practice-save]', box);
+      if (sv) sv.addEventListener('click', () => {
+        const e = pentry(chKey(ch));
+        if (!e.choice && !e.note.trim()) { $('[data-practice-state]', box).textContent = 'Write an answer, or pick an option, before saving.'; return; }
+        const snap = { choice: e.choice, label: e.label, note: e.note, at: now(), helpBefore: e.exposures.slice() };
+        if (!e.first) e.first = snap; e.latest = snap; e.bookmarked = false; psave(); paintPractice(ch); practiceStatus();
+      });
+    }
+    $$('[data-exposure]', ch).forEach(d => d.addEventListener('toggle', () => { if (d.open) expose(ch, d.dataset.exposure); }));
+    if (ch.dataset.assist === 'worked') expose(ch, 'worked-example');
+    paintPractice(ch);
+  });
+
+  function practiceMarkdown() {
+    const out = ['# Practice notes — ' + TRACE_ENG, '', 'Written while reading the guided cases. These are learning notes, not labels: no verdict on this page was set by any of them.', ''];
+    chapters.forEach(ch => {
+      const e = pentry(chKey(ch));
+      out.push('## ' + (ch.dataset.title || chKey(ch)), '', (ch.dataset.run || '') + ' · ' + (ch.dataset.pass || '') + ' · assistance: ' + ch.dataset.assist, '');
+      if (e.latest) {
+        out.push('Answer: ' + (e.latest.label || e.latest.choice || '(no option chosen)'), '', e.latest.note || '(no note)', '', 'Saved: ' + e.latest.at, 'Help opened before it: ' + (e.latest.helpBefore.join(', ') || 'none'), '');
+        if (e.first && e.first.at !== e.latest.at) out.push('First answer: ' + (e.first.label || e.first.choice || '(none)') + ' — ' + (e.first.note || '(no note)') + ' (' + e.first.at + ')', '');
+      } else if (e.choice || e.note) {
+        out.push('Unsaved draft: ' + (e.label || e.choice || '(no option chosen)'), '', e.note || '(no note)', '');
+      } else out.push('No answer yet.', '');
+      if (e.bookmarked) out.push('Marked to come back to.', '');
+      const srcs = $$('[data-src]', ch).map(s => '- ' + s.dataset.src);
+      if (srcs.length) out.push('Sources:', ...srcs, '');
+    });
+    out.push('Help opened here is a record of this page only; it cannot show what was read elsewhere.', '');
+    return out.join('\n');
+  }
+  function practiceStatus() {
+    const saved = chapters.filter(ch => pentry(chKey(ch)).latest).length;
+    const el = $('#practice-status'); if (!el) return;
+    el.textContent = saved ? saved + ' of ' + chapters.length + ' cases answered' : 'Nothing practised yet.';
+    const t = $('#practice-text'); if (t) t.value = practiceMarkdown();
+  }
+  function download(text, type, name) {
+    const url = URL.createObjectURL(new Blob([text], { type }));
+    const a = document.createElement('a'); a.href = url; a.download = name; document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  if ($('#copy-practice')) {
+    $('#copy-practice').addEventListener('click', async () => {
+      const text = practiceMarkdown();
+      try { await navigator.clipboard.writeText(text); $('#practice-status').textContent = 'Practice notes copied.'; }
+      catch (e) { const f = $('.practice-fallback'); f.open = true; $('#practice-text').value = text; $('#practice-text').select(); $('#practice-status').textContent = 'Copying is blocked here; the notes are selected below.'; }
+    });
+    $('#download-practice').addEventListener('click', () => download(JSON.stringify(practice, null, 2), 'application/json', TRACE_ENG + '-practice.json'));
+    $('#restore-practice').addEventListener('change', async ev => {
+      const f = ev.target.files && ev.target.files[0]; if (!f) return;
+      try {
+        if (f.size > 4000000) throw new Error('too large');
+        const incoming = JSON.parse(await f.text());
+        if (!incoming || typeof incoming !== 'object' || Array.isArray(incoming)) throw new Error('not a backup');
+        Object.keys(incoming).forEach(k => { if (!practice[k] || (!practice[k].latest && !practice[k].note)) practice[k] = incoming[k]; });
+        psave(); chapters.forEach(paintPractice); practiceStatus();
+        $('#practice-status').textContent = 'Backup restored. Answers already written here were kept.';
+      } catch (e) { $('#practice-status').textContent = 'That file could not be read as a practice backup. Your notes were kept.'; }
+      ev.target.value = '';
+    });
+    practiceStatus();
+  }
+  $$('[data-case-link]').forEach(a => a.addEventListener('click', e => {
+    const ch = document.getElementById(a.getAttribute('href').slice(1)); if (!ch) return;
+    e.preventDefault(); ch.open = true; ch.scrollIntoView({ block: 'start' }); $('summary', ch).focus({ preventScroll: true });
+  }));
+
   // ---- print: unfold everything, restore after ----
   let wasOpen = [];
-  window.addEventListener('beforeprint', () => { wasOpen = rows.map(r => r.open); rows.forEach(r => r.open = true); });
-  window.addEventListener('afterprint', () => { rows.forEach((r, i) => r.open = wasOpen[i]); });
+  let chaptersOpen = [];
+  window.addEventListener('beforeprint', () => {
+    wasOpen = rows.map(r => r.open); rows.forEach(r => r.open = true);
+    chaptersOpen = chapters.map(c => c.open); chapters.forEach(c => c.open = true);
+  });
+  window.addEventListener('afterprint', () => {
+    rows.forEach((r, i) => r.open = wasOpen[i]);
+    chapters.forEach((c, i) => c.open = chaptersOpen[i]);
+  });
 })();
 """

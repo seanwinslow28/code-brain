@@ -1,6 +1,6 @@
 # DESIGN.md — the eval viewer
 
-**Status:** APPROVED 2026-09-11 (Sean ratified all five §13 choices on #292 after reacting to the sample render). This is the renderer's design authority. Two facts were confirmed the same day before the write: labels are entered on the page and exported, and the page is one scrolling document.
+**Status:** APPROVED 2026-09-11 (Sean ratified all five §13 choices on #292 after reacting to the sample render); **amended 2026-09-20** by §14, which adopts phase 3 of the eval learning plan into §5 and §8 and leaves §13 untouched. This is the renderer's design authority. Two facts were confirmed the same day before the write: labels are entered on the page and exported, and the page is one scrolling document.
 **Scope:** every HTML file the trace kit's renderer (#290) emits — one per engagement, into that engagement's folder in the private ledger. The renderer follows this document; if the two disagree, this document is the intent and the renderer is the bug.
 **Sample to react to:** [`samples/pc-eng-000-callboard/eval.html`](samples/pc-eng-000-callboard/eval.html), rendered from an invented engagement by [`samples/render_sample.py`](samples/render_sample.py). Product truth for this family of pages: [`PRODUCT.md`](PRODUCT.md).
 **Renderer:** built on #290 (2026-09-13) as [`render.py`](render.py) → [`tracekit/viewer.py`](tracekit/viewer.py); its own render of the same invented engagement is at [`samples/synthetic-engagement/trace/eval.html`](samples/synthetic-engagement/trace/eval.html).
@@ -63,6 +63,8 @@ Contrast, measured for the ratification record: ink on ground 13.9:1 light / 15.
 ## 5 · Anatomy, in fixed order
 
 Every render has these parts, in this order, under these headings. Nothing else appears between them.
+
+**Amended 2026-09-20:** §14 adds three parts to this order — *what you are judging*, *what happened in this review*, and *guided reading* — and changes what a row leads with and where its record metadata sits. Read this section with §14.
 
 1. **Masthead.** `pc-eng-NNN · Name` in display type, a `SYNTHETIC` badge when the data is invented (the badge is absent on a real engagement, never "REAL"). One meta line in sub: kind · opened · closed · passes of budget · rendered from N records, M label rows. On the right, three buttons: **Copy label rows** (with the draft count), **Keys ?**, and the **Night / Day** toggle. A 1px ink rule closes the masthead.
 2. **The reading line.** One paragraph at `--fs-3`, plain prose with the counts in bold: how many passes, how many labeled, pass and fail counts, how many wait for a verdict, where the train broke first and which break cost downstream work, the rung-0 clean count. It is a sentence, not a KPI row: the renderer composes it from the data with a fixed sentence template, and it must still read when every count is zero.
@@ -167,3 +169,32 @@ Every state below has a designed rendering; none is an error message.
 3. The train as order rather than time — §5.5, §7.
 4. Reveal-on-re-render for blind pairs, never on the page — §8.
 5. The fixed 16px root instead of the portfolio's proportional root — §2.
+
+## 14 · Adopted from the learning plan, 2026-09-20
+
+Sean's ruling: *"I want all of my evals constructed the way the eval learning plan proposes so I can learn how to work with evals as I review them."* Phase 3 of [the eval learning plan](../ledger/engagements/pc-eng-001-16bitfit-revisit/trace/proposals/eval-learning-plan.md) (private) therefore lands in the shared renderer, and this section is the record of what changed. **§13's five ratified choices are untouched**, and so is §12: one offline file, embedded fonts, everything escaped, no network, ink-only verdicts, counts not percentages, the blind rule, the labels export.
+
+The teaching content is **not** in this renderer. It lives in `trace/cases.md` beside the records, written by hand to [cases-template.md](cases-template.md), keyed to a pass and a finding, with each source's sha256 as it stood at writing time. The renderer reads it, checks it and says so; it never composes a story. A missing file renders an honest empty section.
+
+### Changes to §5, the fixed order
+
+The order becomes: masthead → **what you are judging** → **what happened in this review** → reading line → counter → **guided reading** → where it broke → the train → passes → what comes later → footer. Three parts are new, none is removed.
+
+1. **§5.1a "What you are judging"** — new, straight after the masthead. The plan's four statements (§2), kept apart, each with a live value and one sentence of what it is: *record checks* (N of 9 pass — automated checks of the records, not a quality score); *reviewer findings* (MATERIAL / NOTE counts parsed from the findings tables of the check records in `audits/` — a seat's assessment, evidence to weigh); *your labels* (labeled N of M); *owner decisions* (pending / accepted, read from the gate findings' Disposition cells — yours alone, and a recommendation never fills one in). Below them, the plan's versioned review prompts for draft / audit / repair / gate, as one small table, captioned as prompts to calibrate rather than a grader.
+2. **§5.2 the reading line** — unchanged as a sentence, but it now sits *under* a new "What happened in this review" heading, led by the plain-language introduction from `cases.md`. The prose introduction replaces the reading line's narrative job; the reading line keeps the counts. With no `cases.md`, the page says so and the counts sentence stands alone.
+3. **§5.3a "Guided reading"** — new, after the counter and before "Where it broke". One chapter per case in file order, with assistance by the case's `assist` field: *worked* opens story, evidence and reasoning; *hint* opens story and evidence and folds the hint and the reasoning into disclosures that record being opened; *independent* shows the goal, the evidence and the question first and keeps the diagnosis and the reasoning folded until the reader answers or asks. Each chapter carries the plain `Run NN · <Seat> <kind>` line with the pass id in small sub, a provenance-labeled evidence block (*Source excerpt* with path and line, fingerprint behind a disclosure), the *Explanation*, *Your note*, a "Come back to this" bookmark, an optional inline-SVG diagram when the case supplies a text flow, and a link to that pass's row below. A practice journal lives in `localStorage` under a key of its own, with **Copy practice notes** (markdown) and a JSON backup/restore. **Practice answers never write to the labels draft, and never fill a verdict.**
+4. **Rung 0 (§5.4, §6)** — the check list is no longer a bare count. Each line reads *verified* / *failed* / *unverifiable in part*, prints the checker's own reason lines, and adds one sentence of what a finding there means for the reading. The heading is "Record checks"; the term *rung 0* moves into an optional disclosure.
+5. **Growth slots (§5.7, §10)** — the process-notes slot, which the plan named as ~2,200 words of markdown in a narrow column, now shows the first three bullet lines as takeaways plus an expandable dated full history, and its heading names the coordinator as the author.
+
+### Changes to §8, the rows and labeling
+
+6. **Row summaries lead with the plain run line** — `Run 10 · Discovery audit`, with `pass-10` in small sub after it and the loop / shadow / baseline chips unchanged. The id remains the anchor, the jump target and the export key; only its prominence changed.
+7. **Record metadata folds once more** — launch instant, launch form, effort, meter, hashes, inputs, withheld, outputs and the raw-log pointer move behind one `<details>` labeled "Record details" *inside* the folded row, after the artifact-facing parts (checks on this pass, corpus read, moves, notes). The label form stays last and stays open. The blind rule is unaffected: a hidden runtime is still absent from the file, not merely folded.
+8. **The label form's captions become the plan's wording** — "Your verdict: pass / fail", "Where did the problem first enter the workflow?", "What led to your judgment? Name the evidence and the consequence." The field names, the schema and the export are unchanged.
+9. **§9 keyboard** — `j` / `k` walk the guided cases while the reader is inside guided reading, and the pass rows everywhere else. No new keys, and keys are still ignored inside a field.
+
+### What was not adopted, and why
+
+- **Audio (plan §7).** One pre-generated clip would be a base64 payload inside every engagement's page, and the plan itself defers the decision until the first is tested. The transcript-shaped alternative is the story, which is already there. Revisit when a case earns it.
+- **The other visuals in plan §6** (before/change/verification sequence, three-column comparison, counts by first failing stage). §7 of this document still governs which charts earn a place; the one-diagram-per-case slot is the only addition, and it is opt-in per case.
+- **A live explanatory chatbot.** Out of scope by the plan's own §9.

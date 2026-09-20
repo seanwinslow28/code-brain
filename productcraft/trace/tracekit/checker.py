@@ -17,7 +17,7 @@ from .engagement import (
 )
 from .moves import extract_ids
 
-__all__ = ["CHECK_NAMES", "Check", "run_checks", "format_report"]
+__all__ = ["CHECK_NAMES", "Check", "run_checks", "format_report", "row_block"]
 
 CHECK_NAMES = (
     "Records parse and carry every required field",
@@ -450,9 +450,25 @@ def _stages(eng: Engagement) -> Check:
 # --------------------------------------------------------------------------- #
 
 
-def _row_block(html: str, pid: str) -> str | None:
-    m = re.search(rf'<details[^>]*\bid="{re.escape(pid)}"[^>]*>.*?</details>', html, re.S)
-    return m.group(0) if m else None
+def row_block(html: str, pid: str) -> str | None:
+    """The whole `<details id="pass-NN">…</details>`, counting nested disclosures.
+
+    The row folds its record metadata into a `<details>` of its own, so a
+    non-greedy match would stop at the first inner close and the blind check
+    would read half a row.
+    """
+    m = re.search(rf'<details[^>]*\bid="{re.escape(pid)}"[^>]*>', html)
+    if not m:
+        return None
+    depth = 1
+    for tag in re.finditer(r"<details\b|</details\s*>", html[m.end():]):
+        depth += 1 if tag.group(0).startswith("<details") else -1
+        if depth == 0:
+            return html[m.start(): m.end() + tag.end()]
+    return html[m.start():]
+
+
+_row_block = row_block
 
 
 def _blind(eng: Engagement) -> Check:
