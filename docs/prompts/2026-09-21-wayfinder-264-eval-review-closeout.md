@@ -1,5 +1,7 @@
 # Paste-ready inputs — `/wayfinder 264`, eval-review closeout (2026-09-21)
 
+> **Applied 2026-09-21** by Sean's own `/wayfinder 264` run: #295 resolved and closed, the Decisions-so-far line appended, the fog patch graduated to [#299](https://github.com/seanwinslow28/code-brain/issues/299). Kept as the record of the inputs.
+
 Wayfinder is user-invoked only (`disable-model-invocation`), so this file carries everything the session needs and Sean runs it himself. One ticket per session: this is the **#295** resolution, plus the fog patch it graduates.
 
 ```
