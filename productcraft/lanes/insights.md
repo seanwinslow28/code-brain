@@ -61,15 +61,18 @@ Kohavi is ingested, and it is the systematic treatment the free papers argue tow
 - **Ellis & Brown, *Hacking Growth* — ch. 2, 3, 6** — [`books/hacking-growth/`](../corpus/books/hacking-growth/) — designing user surveys, finding a behavioral threshold, or diagnosing where users drop off.
 - **Rumelt, *Good Strategy Bad Strategy* — ch. 2, 16** — [`books/good-strategy-bad-strategy/`](../corpus/books/good-strategy-bad-strategy/) — hunting the reframe or anomaly that turns a known situation into advantage.
 
-**Read the Kohavi equations with care.** Every numbered equation was flattened in capture.
-Where the surrounding prose named every variable the formula was reconstructed and is
-labelled as a reconstruction in that chapter's OCR note. Where it did not — the
-delta-method variance estimator (18.5–18.6) and the dilution formulas (20.2–20.6) — **no
-formula is given at all**, by design; go to the original for those two. Table 2.1's cells
-are gone though its narrative result survives, and subscript notation (Yᵀ/Yᶜ) is mangled
-throughout, which is why chs. 18, 19 and 23 describe some notation in words. The *Hacking
-Growth* cohort worksheet is corrupted and contradicts its own prose — its numbers come
-from the narration, not the table.
+**Read the Kohavi equations with care — but the two that mattered most are now readable.**
+Every numbered equation was flattened in capture. Where the surrounding prose named every
+variable the formula was reconstructed and is labelled as a reconstruction in that
+chapter's OCR note. The two the distillation refused to guess at — the delta-method
+variance estimator and the dilution formulas — were **read back from the page images on
+2026-09-21 and transcribed**, each with the notation table it depends on, in chs. 18 and
+20; those are transcriptions, not reconstructions, and they are now the authority on
+notation wherever the body text's mangled subscripts disagree. Table 2.1's cells were
+recovered the same day and sit in ch. 2. Everything else still stands: the remaining
+equations are reconstructions or absent, and the *Hacking Growth* cohort worksheet is
+corrupted and contradicts its own prose — its numbers come from the narration, not the
+table.
 
 ## Reading path
 

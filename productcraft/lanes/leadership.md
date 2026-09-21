@@ -70,12 +70,18 @@ resolve.
 - **Lombardo, McCarthy, Ryan & Connors, *Product Roadmaps Relaunched* — ch. 8, 11** — [`books/product-roadmaps-relaunched/`](../corpus/books/product-roadmaps-relaunched/) — driving stakeholder alignment one-on-one, or relaunching a broken planning process org-wide.
 - **Bland & Osterwalder, *Testing Business Ideas* — ch. 12, 13** — [`books/testing-business-ideas/`](../corpus/books/testing-business-ideas/) — leader language that makes evidence beat opinion, and staged innovation funding.
 
-**One gap this lane must not paper over.** The reading path below sends you to *Scaling
-People* for a real artifact to copy rather than a principle — and the artifacts are the
-part that survived capture worst. Its templates (the interview rubric's poor/good/strong
-bands, the promotion proposal, the compensation guide, the PIP and managing-out checklists)
-are held as *structure*, not band-by-band text, and Table 4's job-level ladder is
-unrecoverable beyond the six level names. Copy from it expecting a skeleton, not a form.
+**One gap this lane must not paper over — now half closed.** The reading path below sends
+you to *Scaling People* for a real artifact to copy rather than a principle, and its
+templates (the interview rubric's three bands, the promotion proposal, the compensation
+guide, the PIP and managing-out checklists) are still held as *structure*, not
+band-by-band text. Copy from them expecting a skeleton, not a form. What changed on
+2026-09-21: the job-level ladder, previously recorded as unrecoverable beyond the six
+level names, was read back in full and now sits in ch. 3 — the rope-and-knot analogy plus
+knowledge, job complexity and supervision at every level, which is a usable levelling aid
+on its own. The same review established that the template pages are **fully legible in the
+existing capture** and named the page set for each one in that book's Scope & Limits, so
+the remaining gap is a transcription job, not a missing source. If you need one of those
+forms verbatim, say so rather than working from the skeleton.
 
 Two live tensions worth knowing rather than resolving: Grove's 1995 Introduction argues for
 fewer levels and wider spans, contradicting his own ch. 3 six-to-eight rule; and *Working

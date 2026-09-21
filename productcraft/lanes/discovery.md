@@ -60,13 +60,16 @@ experiment library itself.
 - **Bryar & Carr, *Working Backwards* — ch. 5, 10** — [`books/working-backwards/`](../corpus/books/working-backwards/) — defining a product before building it, or sizing a market by subtraction.
 - **Ramanujam & Tacke, *Monetizing Innovation* — ch. 4, 5** — [`books/monetizing-innovation/`](../corpus/books/monetizing-innovation/) — testing what customers will actually pay before committing to a build.
 
-One loss to know before you lean on it: **every experiment card's dot ratings in *Testing
-Business Ideas* are unreadable** — evidence strength, cost, setup and run time, and the
-desirability/feasibility/viability coverage were dot glyphs the capture reduced to noise.
-All 44 experiments are catalogued by name and method, and the rating *scales* survive in
-ch. 8, but no per-experiment rating is claimed anywhere. The library's built-in triage
-layer is missing; select by ch. 8's three questions and four rules of thumb instead. Eleven
-figures in Torres are prose reconstructions, flagged chapter by chapter.
+**The *Testing Business Ideas* triage layer is back** (recovered 2026-09-21). Evidence
+strength, cost, setup time, run time and the desirability/feasibility/viability coverage
+were dot glyphs the capture reduced to noise on every experiment card — but the book prints
+the same ratings for all 44 experiments on its two index spreads, and those were read back
+deterministically and checked against a card page. They live in that book's
+`experiment-index.md`; reach for it when you are choosing between experiments, and still use
+ch. 8's three questions and four rules of thumb to frame the choice. One piece stays
+missing: the two selection maps, whose per-experiment positions on the average-time axis
+could not be read back within a bounded error. Eleven figures in Torres are prose
+reconstructions, flagged chapter by chapter.
 
 ## Reading path
 
