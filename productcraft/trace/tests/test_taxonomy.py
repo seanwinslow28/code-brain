@@ -35,11 +35,34 @@ TABLE = (
 # --------------------------------------------------------------------------- #
 
 
+PROCESS_WASTE = {"manufactured", "stale-restatement", "overstated-scope", "kit-induced"}
+SEAT_MODES = {"unobservable-measure", "overclaimed-pointer"}
+
+
 def test_the_studios_own_taxonomy_carries_the_process_waste_family():
     tax = load_taxonomy()
     assert tax.open
-    assert set(tax.codes) == {"manufactured", "stale-restatement", "overstated-scope", "kit-induced"}
-    assert all(c.family == "process-waste" for c in tax.codes.values())
+    assert PROCESS_WASTE <= set(tax.codes)
+    assert all(tax.codes[c].family == "process-waste" for c in PROCESS_WASTE)
+
+
+def test_the_seat_failure_modes_opened_from_the_first_engagements_labels():
+    # #299: two modes from pc-eng-001's 33 labels, in their own table under their own heading
+    tax = load_taxonomy()
+    assert SEAT_MODES <= set(tax.codes)
+    assert all(tax.codes[c].family == "seat" for c in SEAT_MODES)
+    assert set(tax.codes) == PROCESS_WASTE | SEAT_MODES
+
+
+def test_every_code_table_in_the_file_is_read_not_only_the_first():
+    text = TABLE + "\n## Seat failure modes\n\nprose\n\n" + (
+        "| code | family | a label with this code says | quote |\n"
+        "|---|---|---|---|\n"
+        "| `unobservable-measure` | seat | a measure on an event the pilot cannot produce | — |\n"
+    )
+    tax = parse_taxonomy(text)
+    assert set(tax.codes) == {"manufactured", "kit-induced", "unobservable-measure"}
+    assert tax.codes["unobservable-measure"].family == "seat"
 
 
 def test_only_manufactured_requires_a_quote():

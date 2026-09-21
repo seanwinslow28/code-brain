@@ -24,6 +24,7 @@ from . import KIT_NAME, KIT_VERSION
 from .cases import ASSIST_BLURB, Case, CasesDoc, Source, load_cases
 from .checker import Check, run_checks
 from .engagement import Engagement, Record, load_engagement, normalize_meter
+from .taxonomy import Taxonomy, load_taxonomy
 
 __all__ = ["render", "render_html", "STAGES", "SEAT_NAMES", "REVIEW_PROMPTS"]
 
@@ -237,8 +238,10 @@ def render(path: Path | str, out: Optional[Path] = None, repo: Optional[Path] = 
     return target
 
 
-def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_on: Optional[str] = None) -> str:
-    checks = checks if checks is not None else run_checks(eng)
+def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_on: Optional[str] = None,
+                taxonomy: Optional[Taxonomy] = None) -> str:
+    tax = taxonomy if taxonomy is not None else load_taxonomy()
+    checks = checks if checks is not None else run_checks(eng, tax)
     rendered_on = rendered_on or _dt.date.today().isoformat()
     P = eng.records
     labels = eng.labels
@@ -255,6 +258,10 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
     def critique(pid: str) -> str:
         l = labels.get(pid)
         return l.critique if l else ""
+
+    def code(pid: str) -> str:
+        l = labels.get(pid)
+        return (l.failure_code or "") if l else ""
 
     labeled = [r.pass_id for r in P if verdict(r.pass_id)]
     n_pass = sum(1 for pid in labeled if verdict(pid) == "pass")
@@ -466,7 +473,7 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
 """)
 
     # ---- passes ---------------------------------------------------------------
-    rows_html = [_row(eng, r, verdict(r.pass_id), ffs(r.pass_id), critique(r.pass_id), pairs.get(r.pass_id), blind(r.pass_id)) for r in P]
+    rows_html = [_row(eng, r, verdict(r.pass_id), ffs(r.pass_id), critique(r.pass_id), pairs.get(r.pass_id), blind(r.pass_id), code(r.pass_id), tax) for r in P]
     n_pairs = sum(1 for r in P if r.shadow_of)
     out.append(f"""
 <h2>Passes</h2>
@@ -485,7 +492,7 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
     out.append(f"""
 <h2>What comes later</h2>
 <div class="slots">
-  <div class="slot"><h3>Failure taxonomy</h3><p><span class="when">Arrives after about thirty labels</span>, when the critiques get grouped into named failure modes with counts. Until then this slot lists nothing and the failure_code column stays blank.</p></div>
+  {_taxonomy_slot_html(tax, labels)}
   <div class="slot"><h3>Judge results</h3><p><span class="when">Arrives per failure mode</span>, only after a mode recurs across engagements with thirty to fifty labeled examples per class and a judge is validated against the labels on a held-out split. A judge's verdict will sit beside the human one in each row, never replace it.</p></div>
   {_notes_slot_html(eng)}
 </div>
@@ -872,6 +879,53 @@ def _intro_html(doc: Optional[CasesDoc]) -> str:
 
 
 
+def _code_state_html(code: str, tax: Optional[Taxonomy]) -> str:
+    """The row's failure_code line: a link to its mode, or an honest reason it is blank."""
+    if code:
+        if tax is not None and code in tax:
+            return f"failure_code <a href='#mode-{esc(code)}'><code>{esc(code)}</code></a>"
+        return f"failure_code <code>{esc(code)}</code> — not in the taxonomy, so free text"
+    if tax is not None and tax.open:
+        return "failure_code blank — codes are the taxonomy's, set in the labels file, never here."
+    return "failure_code stays blank until a taxonomy exists."
+
+
+def _taxonomy_slot_html(tax: Optional[Taxonomy], labels: dict) -> str:
+    """DESIGN.md §10: empty state names the threshold; filled, one line per mode with its count.
+
+    A mode is listed only when a label row carries its code — the taxonomy file
+    can name a mode no row in this engagement was, and that is not this engagement's
+    line. A code outside the taxonomy is listed apart as free text, as rung 0 reports it.
+    """
+    counts: dict[str, list[str]] = {}
+    for pid in sorted(labels):
+        c = (labels[pid].failure_code or "").strip()
+        if c:
+            counts.setdefault(c, []).append(pid)
+    if not counts:
+        return ('<div class="slot"><h3>Failure taxonomy</h3><p><span class="when">Arrives after about thirty labels</span>, '
+                'when the critiques get grouped into named failure modes with counts. Until then this slot lists nothing '
+                'and the failure_code column stays blank.</p></div>')
+    known = [c for c in (tax.codes if tax is not None else {}) if c in counts]
+    free = [c for c in counts if tax is None or c not in tax]
+    lines = []
+    for c in known:
+        k = tax.codes[c]
+        rows = counts[c]
+        lines.append(f"<li id='mode-{esc(c)}'><b><code>{esc(c)}</code></b> <span class='sub'>({esc(k.family)})</span> "
+                     f"— <b>{len(rows)}</b> row{'' if len(rows) == 1 else 's'}: {esc(', '.join(rows))}"
+                     f"<br><span class='sub'>{esc(k.means)}</span></li>")
+    for c in free:
+        rows = counts[c]
+        lines.append(f"<li><code>{esc(c)}</code> — {len(rows)} row{'' if len(rows) == 1 else 's'} "
+                     f"({esc(', '.join(rows))}), <b>not in the taxonomy</b>: free text, counted toward no mode</li>")
+    n_coded = sum(len(v) for v in counts.values())
+    return (f'<div class="slot"><h3>Failure taxonomy</h3><p><span class="when">Open</span> — {n_coded} labeled row'
+            f"{'' if n_coded == 1 else 's'} carr{'ies' if n_coded == 1 else 'y'} a code, counted here per mode from the labels file. "
+            f'The modes and their provenance live in the studio\'s taxonomy file; a row\'s code links to its mode.</p>'
+            f'<ul class="modes">{"".join(lines)}</ul></div>')
+
+
 def _meter_counts(m: dict[str, int]) -> str:
     """The split pair when the coordinator has it, otherwise the single total the runtime reported."""
     if "input" in m and "output" in m:
@@ -879,7 +933,8 @@ def _meter_counts(m: dict[str, int]) -> str:
     return f"{m.get('total', 0):,} total <span class='sub'>(as the runtime reported it, not split)</span>"
 
 
-def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit: str, pair: Optional[str], blind: bool) -> str:
+def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit: str, pair: Optional[str], blind: bool,
+         code: str = "", tax: Optional[Taxonomy] = None) -> str:
     pid = esc(p.pass_id)
     rt_html = f"<span class='hidden-rt'>{icon('eye')} hidden</span>" if blind else esc(p.runtime or "—")
     vcls = "unl" if not v else v
@@ -936,7 +991,7 @@ def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit:
     <textarea data-crit rows="2">{esc(crit)}</textarea>
   </label>
   {blind_note}
-  <div class="state"><span data-state>{'In the labels file.' if v else 'No label row yet.'}</span><span class="sub">failure_code stays blank until a taxonomy exists.</span></div>
+  <div class="state"><span data-state>{'In the labels file.' if v else 'No label row yet.'}</span><span class="sub">{_code_state_html(code, tax)}</span></div>
 </div>"""
     detail = f"""
 <div class="detail">

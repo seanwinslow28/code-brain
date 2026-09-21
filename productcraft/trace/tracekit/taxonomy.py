@@ -1,7 +1,8 @@
 """taxonomy.md — rung 1's tracked vocabulary, read so `failure_code` cannot be free text.
 
-One file per studio (#272 decision 7's ladder; the codes ratified on #296 clause 8,
-landed on #298). Studio-agnostic: the parser knows the table's shape, never which
+One file per studio (#272 decision 7's ladder; the process-waste codes ratified on
+#296 clause 8, landed on #298; the seat failure modes opened from the first
+engagement's labels on #299). Studio-agnostic: the parser knows the table's shape, never which
 codes a studio has. The default path is the kit's own folder, so the content
 machine's copy (#291) passes its own file rather than inheriting this one.
 
@@ -57,11 +58,13 @@ def _cells(line: str) -> list[str]:
 
 
 def parse_taxonomy(text: str, path: Optional[Path] = None) -> Taxonomy:
-    """Read the first table whose header is the code table's.
+    """Read every table whose header is the code table's, in file order.
 
     A file with no such table is a taxonomy with no codes — honest, not an error:
-    rung 1 has not opened. A row whose first cell holds no `code` span is skipped,
-    so prose tables elsewhere in the file are ignored.
+    rung 1 has not opened. The process-waste family and the seat failure modes
+    live in separate tables under separate headings (#299), and both count. A row
+    whose first cell holds no `code` span is skipped, so prose tables elsewhere in
+    the file are ignored; a later table that repeats a code overrides the earlier row.
     """
     codes: dict[str, Code] = {}
     lines = text.split("\n")
@@ -80,7 +83,7 @@ def parse_taxonomy(text: str, path: Optional[Path] = None) -> Taxonomy:
                         quote = "required" in cells[3].lower()
                         codes[m.group(1)] = Code(m.group(1), cells[1], cells[2], quote)
                     i += 1
-                break
+                continue
         i += 1
     return Taxonomy(codes, path)
 

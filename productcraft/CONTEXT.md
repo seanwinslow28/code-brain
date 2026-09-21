@@ -264,6 +264,22 @@ _Avoid_: A/B, experiment, rerun
 One step of the earned evals ladder: rung 0 is the deterministic checker with no model; rung 1 the hand-built failure taxonomy after about thirty labels; rung 2 a judge per recurring failure mode, validated against Sean's labels before it gates anything.
 _Avoid_: level, tier, phase
 
+**Seat failure mode**:
+A named, coded shape of seat failure in the taxonomy's `seat` family, earned by reading labeled traces and counted two ways — coded fails (rows carrying the code) and distinct defects (every separate defect of that shape the critiques name, blemishes and check findings included). Proposed by whoever read the traces, ratified by Sean, and carrying the labels' provenance with every count.
+_Avoid_: bug class, error category, root cause
+
+**Sighted shape**:
+A recurring shape in the critiques that is not yet a mode: no fail is led by it, so it has no code and stays in the taxonomy's sighted list until a later engagement's labels confirm or dissolve it. A `failure_code` is never stretched onto a fail to make a sighted shape count.
+_Avoid_: candidate code, provisional mode
+
+**Unobservable measure**:
+The seat failure mode `unobservable-measure`: a measure, kill condition, trigger or safeguard defined on an event the pilot's own rules cannot produce or deliver — no channel, no record field, no authorised contact or app open. The first train's commonest fail shape, across four drafting seats.
+_Avoid_: unmeasurable, bad metric
+
+**Overclaimed pointer**:
+The seat failure mode `overclaimed-pointer`: a citation or status claim that says more than its source holds — a clause not in the cited file, an evidence rung above what the pointer supports, a ledger state the entry does not carry.
+_Avoid_: bad citation, hallucinated reference
+
 **First failing stage**:
 On a fail, the stage where the problem entered the train, which may be upstream of the pass being read. The one column that builds the transition-failure matrix.
 _Avoid_: root cause, blame

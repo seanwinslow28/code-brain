@@ -17,9 +17,15 @@ holds the process-waste family, and a tenth rung-0 line keeps `failure_code`
 inside it — a code outside the table is free text, and `manufactured` is a
 finding unless the critique quotes the text it indicts.
 
+0.4.0 opens the seat failure modes (#299): the parser reads every code table in
+`taxonomy.md` rather than the first, so the seat family sits under its own heading
+beside the process-waste family; the viewer's *Failure taxonomy* slot fills from
+the labels file — one line per mode with its count, a row's code linking to its
+mode — and stays in its empty state until a row carries a code.
+
 First copy. The content machine's kit (#291) shares this code rather than
 forking it; `craftwork` extracts the shared home later.
 """
 
 KIT_NAME = "productcraft/trace"
-KIT_VERSION = "0.3.0"
+KIT_VERSION = "0.4.0"

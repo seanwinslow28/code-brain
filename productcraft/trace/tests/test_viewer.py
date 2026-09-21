@@ -164,6 +164,38 @@ def test_growth_slots_and_notes(html, eng_dir, tmp_path):
     assert "No notes file yet." in render_html(load_engagement(d))
 
 
+def test_taxonomy_slot_stays_empty_until_a_row_carries_a_code(html):
+    assert "Arrives after about thirty labels" in html
+    assert "id='mode-" not in html
+
+
+def test_taxonomy_slot_fills_per_mode_from_the_labels_file(eng_dir, tmp_path):
+    from tracekit.taxonomy import parse_taxonomy
+    d = copy_of(eng_dir, tmp_path)
+    p = d / "trace" / "labels.md"
+    text = p.read_text()
+    # give two fail rows a code and one row a code outside the taxonomy
+    rows = [l for l in text.splitlines() if l.startswith("| pass-") and "| fail |" in l]
+    assert len(rows) >= 2
+    a, b = rows[0], rows[1]
+    text = text.replace(a, a.rstrip("| ") + " | unobservable-measure |", 1)
+    text = text.replace(b, b.rstrip("| ") + " | vibes |", 1)
+    p.write_text(text)
+    tax = parse_taxonomy(
+        "| code | family | a label with this code says | quote |\n|---|---|---|---|\n"
+        "| `unobservable-measure` | seat | a measure on an event the pilot cannot produce | — |\n"
+    )
+    out = render_html(load_engagement(d), taxonomy=tax)
+    slot = out.split("Failure taxonomy")[1].split("Judge results")[0]
+    assert "Arrives after about thirty labels" not in slot
+    assert "id='mode-unobservable-measure'" in slot and "<b>1</b> row:" in slot
+    assert "a measure on an event the pilot cannot produce" in slot
+    assert "<code>vibes</code>" in slot and "not in the taxonomy" in slot
+    # the coded row links to its mode; the free-text row says so
+    assert "href='#mode-unobservable-measure'" in out
+    assert "failure_code <code>vibes</code> — not in the taxonomy" in out
+
+
 def test_footer_states_provenance_and_kit(html):
     assert "Rendered 2026-09-13 from 25 records and 22 label rows." in html
     assert "The records are the truth; this page is a view of them." in html
