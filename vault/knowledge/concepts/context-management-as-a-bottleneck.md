@@ -2,25 +2,25 @@
 title: "Context Management as a Bottleneck"
 type: concept
 sources:
-  - knowledge/connections/infrastructure-fragility-masks-semantic-decay-in-agent-fleets.md
+  - knowledge/concepts/context-management-as-a-bottleneck.md
 tags: [auto-generated, phase-6]
-created: 2026-09-18
-updated: 2026-09-18
+created: 2026-09-21
+updated: 2026-09-21
 ---
 
 ## Definition
 
-This mechanism refers to the limitation where the volume of raw data exceeds the agent's ability to process it into coherent context, leading to truncation or loss of nuance. As the number of sampled clusters increases, the agent must compress information, often discarding critical details in favor of structural completeness. This creates a bottleneck where the agent's output is technically complete but semantically shallow.
+This mechanism describes the structural failure mode where an agent's finite context window forces a trade-off between breadth and depth, causing critical semantic nuance to be discarded in favor of structural completeness. As the volume of sampled data increases, the agent must compress information aggressively, resulting in outputs that are technically complete but semantically shallow. This creates a bottleneck where the system prioritizes the completion of all URLs over the depth of each individual post's content, leading to a loss of 'taste' and strategic value.
 
 ## Context
 
-Sean's knowledge vault requires deep synthesis of complex topics. If agents truncate or oversimplify data to fit context windows, the resulting artifacts lose the 'taste' and nuance required for high-level strategic decisions, forcing Sean to manually re-process the raw data.
+Sean's knowledge vault requires deep synthesis of complex topics to support high-level strategic decisions. When agents truncate or oversimplify data to fit context windows, the resulting artifacts lose the nuance required for Sean's work, forcing him to manually re-process raw data. This inefficiency undermines the core value proposition of the automated fleet.
 
 ## Evidence
 
-> 18 of the 63 quoted specimens are truncated this way... The words shown are exact; there are more after them; each is flagged inline.
-
 > Context Management as a Bottleneck: When key infrastructure components like Nitter mirrors fail or X enforces HTTP 402 errors, the agents continue to report 'success' based on protocol compliance rather than data quality.
+
+> 18 of the 63 quoted specimens are truncated this way... The words shown are exact; there are more after them; each is flagged inline.
 
 ## Examples
 

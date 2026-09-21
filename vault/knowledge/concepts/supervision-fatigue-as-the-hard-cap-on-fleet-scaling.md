@@ -2,30 +2,30 @@
 title: "Supervision Fatigue as the Hard Cap on Fleet Scaling"
 type: concept
 sources:
-  - knowledge/connections/the-illusion-of-automation-in-knowledge-synthesis.md
+  - knowledge/connections/the-semantic-debt-trap-in-automated-knowledge-synthesis.md
 tags: [auto-generated, phase-6]
-created: 2026-09-18
-updated: 2026-09-18
+created: 2026-09-21
+updated: 2026-09-21
 ---
 
 ## Definition
 
-Scaling agent fleets linearly increases the cognitive load on human supervisors, creating a non-linear cost curve for verification. As the number of active agents grows, the supervisor must allocate more time to audit output quality rather than strategic direction. This fatigue acts as a hard cap because beyond a certain threshold, the marginal gain in automation is offset by the marginal loss in supervisory bandwidth, forcing a reduction in active agents or a shift in strategy.
+This mechanism defines the limit of automated scaling imposed by human cognitive bandwidth. As agent fleets increase in volume and complexity, the cost of verifying low-value artifacts exceeds the benefit of automation, forcing the user into a cycle of increasing supervision. This creates a hard cap where adding more agents reduces net productivity because the verification overhead grows faster than the output value.
 
 ## Context
 
-Sean’s fleet status shows 'Active agents: 9 of 17 | Disabled: 8', indicating that nearly half his infrastructure is inactive. This suggests he has already hit or is approaching this cap, as maintaining 17 agents likely exceeds his sustainable supervision capacity.
+Sean's experience with the vault synthesizer shows that scaling up concept production (e.g., 125 concepts in one run) leads to higher rejection rates and more stale agents, requiring manual intervention that breaks his workflow continuity.
 
 ## Evidence
 
-> The fleet status shows 'Active agents: 9 of 17 | Disabled: 8', indicating a significant portion of the infrastructure is inactive and potentially requiring maintenance or re-evaluation.
+> This illusion of progress forces Sean into a cycle of increasing supervision to verify output quality, which eventually hits the hard cap of his cognitive bandwidth.
 
-> Sean should implement a 'semantic health' metric alongside 'operational health' to detect when agents are running but not contributing value.
+> The consequence is that scaling the fleet becomes counter-productive, as the cost of verifying low-value artifacts exceeds the benefit of automation.
 
 ## Examples
 
-- The daily-driver morning agent notes 'Done. vault/10_timeline/daily/2026-09-16.md created with fleet digest injec...' indicating successful execution but not necessarily the quality of the synthesis.
-- The high number of disabled agents (8) suggests that Sean may be over-engineering his fleet, leading to unnecessary maintenance overhead.
+- Sean must implement a 'semantic health' metric alongside 'operational health' to detect when agents are running but not contributing value, preventing silent decay from accumulating into strategic debt.
+- The high number of disabled agents (8) suggests that Sean may be over-engineering his fleet, leading to unnecessary maintenance overhead that exacerbates supervision fatigue and reduces overall system efficiency.
 
 ## Related Concepts
 

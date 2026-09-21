@@ -4,29 +4,28 @@ type: concept
 sources:
   - knowledge/concepts/manufactured-finding.md
 tags: [auto-generated, phase-6]
-created: 2026-09-18
-updated: 2026-09-18
+created: 2026-09-21
+updated: 2026-09-21
 ---
 
 ## Definition
 
-A manufactured finding is a defect identified by an adversarial agent not because it exists in the artifact, but because the agent's mandate requires it to find flaws. This occurs when the evaluation protocol lacks a stopping rule for clean verdicts and escalates on every material finding, creating a feedback loop where the auditor must invent or exaggerate issues to satisfy its objective function. The mechanism relies on the asymmetry between the drafter's goal of completion and the auditor's goal of critique, causing the audit process to generate noise rather than signal.
+A structural artifact produced when an adversarial mandate forces a reviewer to identify flaws in a system that may not inherently possess them, or where the pressure to find defects overrides the discipline of verifying their existence. This mechanism creates a feedback loop where the act of searching for errors generates noise that mimics signal, leading to false positives that are indistinguishable from genuine defects without rigorous provenance tracking. The phenomenon emerges specifically when the evaluation protocol lacks a stopping rule or a severity floor, causing the reviewer to escalate minor or non-existent issues to maintain engagement with the mandate.
 
 ## Context
 
-Sean is currently reviewing pc-eng-001 where the red-team loopback sent findings back that were smaller than the last round, suggesting the system is manufacturing flaws to maintain engagement. This insight is critical for his job-hunt strategy because it reveals how automated evaluation systems can degrade quality through infinite loops if not constrained by explicit convergence rules.
+Sean is currently auditing his own creative studio's quality assurance process, where he suspects that the 'red-team' agents are generating findings simply because they are instructed to find flaws. This insight is critical for preventing the degradation of his strategic documents through unnecessary re-work and for establishing a more reliable convergence rule for future agentic audits.
 
 ## Evidence
 
 > if the red-team is going in being told it HAS to point out the flaws, then it will find them, even if it has to make them up
 
-> without his stop it would have looped audit → repair indefinitely, because the ladder escalates on every material finding and has no stopping rule
+> every round's findings were smaller than the last and two came from the same seat that raised them in its own drafting pass
 
 ## Examples
 
-- Passes 1–10 took ten passes: a drafter loopback (4 findings), an audit (7 material) and a re-audit (1 material) each sent the Strategy doc back
-- every round's findings were smaller than the last and two came from the same seat that raised them in its own drafting pass
+- A drafter loopback sent 4 findings, followed by an audit sending 7 material findings, and a re-audit sending 1 material finding, with each round's findings being smaller than the last.
 
 ## Related Concepts
 
-[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[The Illusion of Competence in Automated Systems]]
+[[Convergence Rule for Agentic Audits]] [[Supervision Fatigue as the Hard Cap on Fleet Scaling]]

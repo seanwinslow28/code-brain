@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/convergence-rule-for-agentic-audits.md
 tags: [auto-generated, phase-6]
-created: 2026-09-18
-updated: 2026-09-18
+created: 2026-09-21
+updated: 2026-09-21
 ---
 
 ## Definition

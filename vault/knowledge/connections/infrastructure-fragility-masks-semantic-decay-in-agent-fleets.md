@@ -5,8 +5,8 @@ connects:
   - Operational Uptime vs. Semantic Value in Agent Fleets
   - The Illusion of Competence in Automated Systems
   - Context Management as a Bottleneck
-created: 2026-09-18
-updated: 2026-09-18
+created: 2026-09-21
+updated: 2026-09-21
 ---
 
 ## Synthesis
@@ -17,11 +17,11 @@ This connection reveals a critical tension where hardware and API fragility mask
 
 ### [[Operational Uptime vs. Semantic Value in Agent Fleets]]
 
-> X itself is not fetchable. https://x.com/<handle> returns HTTP 402 without auth. The Nitter mirror network is gone: nitter.net serves an 'is offline' page, xcancel.com serves a cease-and-desist notice, nitter.poast.org does not resolve.
+> X itself is not fetchable. https://x.com/<handle> returns HTTP 402 without auth.
 
 ### [[The Illusion of Competence in Automated Systems]]
 
-> 79 URLs went in. 79 came back. 0 failures, 0 dead links, 0 reconstructions. One returned a link-only post with no words, leaving 78 usable posts across 19 accounts.
+> 79 URLs went in. 79 came back. 0 failures, 0 dead links, 0 reconstructions.
 
 ### [[Context Management as a Bottleneck]]
 

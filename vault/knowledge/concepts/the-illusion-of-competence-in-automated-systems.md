@@ -4,28 +4,28 @@ type: concept
 sources:
   - knowledge/connections/infrastructure-fragility-masks-semantic-decay-in-agent-fleets.md
 tags: [auto-generated, phase-6]
-created: 2026-09-18
-updated: 2026-09-18
+created: 2026-09-21
+updated: 2026-09-21
 ---
 
 ## Definition
 
-This pattern occurs when automated systems validate their own success based on structural integrity (e.g., valid JSON, successful HTTP handshake) rather than semantic richness or actionable insight. The system interprets the absence of errors as the presence of value, masking the fact that the output is structurally sound but informationally void. This leads to a dangerous blind spot where operational health metrics mask semantic stagnation.
+A failure mode where automated systems exhibit high reliability in their operational tasks but produce outputs that are structurally empty or semantically void. The system's ability to complete its workflow creates an illusion of competence, hiding the fact that the input data has decayed or been blocked. This leads to a dangerous blind spot where technical success masks strategic failure.
 
 ## Context
 
-Sean's job hunt and creative studio workflows depend on high-fidelity data. If agents produce 'clean' but empty outputs (e.g., link-only posts with no text), the system appears competent, but the strategic pipeline is starved of meaningful content, requiring manual intervention to detect the decay.
+Sean's job hunt and competitive analysis depend on high-fidelity data from X. If his agents successfully scrape 'empty' posts or error pages, he may believe his market intelligence is current when it is actually stale or non-existent.
 
 ## Evidence
 
-> 79 URLs went in. 79 came back. 0 failures, 0 dead links, 0 reconstructions. One returned a link-only post with no words, leaving 78 usable posts across 19 accounts.
+> One returned a link-only post with no words, leaving 78 usable posts across 19 accounts.
 
-> The fleet's monitoring layer reports 'status=success' for agents that produce no actionable value, creating a dangerous blind spot where technical reliability masks strategic failure.
+> The fleet's monitoring layer reports 'status=success' for agents that produce no actionable value.
 
 ## Examples
 
-- An agent successfully fetching a URL but returning only a link with no accompanying text or metadata.
-- Monitoring dashboards showing green lights for all API calls despite the data source being effectively dead or restricted.
+- A scraper returning a valid HTML document that contains no text content.
+- An agent completing a research task but failing to extract any new insights due to source degradation.
 
 ## Related Concepts
 

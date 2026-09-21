@@ -4,8 +4,8 @@ type: concept
 sources:
   - knowledge/concepts/the-calibration-bottleneck-in-scalable-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-09-18
-updated: 2026-09-18
+created: 2026-09-21
+updated: 2026-09-21
 ---
 
 ## Definition
