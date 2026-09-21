@@ -29,12 +29,14 @@ from .labels import Label, LabelsError, parse_labels
 from .moves import MovesSection, parse_moves
 
 __all__ = [
-    "KINDS", "METER_SOURCES", "REQUIRED_FIELDS", "STAGE_SEATS", "FIXED_AUDITORS", "REQUIRED_COSIGNS",
+    "KINDS", "COORDINATOR_KINDS", "METER_SOURCES", "REPO_PREFIXES", "normalize_meter", "meter_is_measured", "REQUIRED_FIELDS", "STAGE_SEATS", "FIXED_AUDITORS", "REQUIRED_COSIGNS",
     "InputRef", "OutputRef", "CheckRef", "Record", "Engagement",
     "load_engagement", "resolve_path", "sha256_path", "find_repo_root",
 ]
 
-KINDS = ("draft", "audit", "co-sign", "gate", "repair", "trial", "close")
+KINDS = ("draft", "audit", "co-sign", "gate", "repair", "trial", "open", "readout", "close")
+# the coordinator's own passes: no seat fires, so there is no drafting conversation to withhold
+COORDINATOR_KINDS = ("open", "readout", "close")
 METER_SOURCES = ("Agent-tool usage", "codex footer", "UNMEASURED")
 REQUIRED_FIELDS = (
     "pass", "seat", "kind", "stage", "runtime", "launch", "effort", "launched", "completed",
@@ -54,8 +56,11 @@ FIXED_AUDITORS = {
 # the co-sign touches that produce a pass (#266): stage → co-signing seat
 REQUIRED_COSIGNS = {2: "insights-analytics", 6: "product-strategist"}
 
-_REPO_PREFIXES = ("productcraft/", "systemcraft/", ".claude/")
-_RECORD_NAME = re.compile(r"^(pass-\d{2,})-([a-z0-9\-]+)-(draft|audit|co-sign|gate|repair|trial|close)\.md$")
+REPO_PREFIXES = ("productcraft/", "systemcraft/", ".claude/")
+_REPO_PREFIXES = REPO_PREFIXES   # the old private name, kept for callers inside this module
+_RECORD_NAME = re.compile(
+    r"^(pass-\d{2,})-([a-z0-9\-]+)-(draft|audit|co-sign|gate|repair|trial|open|readout|close)\.md$"
+)
 
 
 @dataclass(frozen=True)
@@ -223,6 +228,50 @@ class Engagement:
 
 
 # --------------------------------------------------------------------------- #
+# meters
+# --------------------------------------------------------------------------- #
+
+
+def normalize_meter(meter: Optional[dict[str, Any]]) -> tuple[dict[str, int], list[str]]:
+    """Read a `meter:` block into whole tokens, and name whatever is not a token count.
+
+    Two honest forms. **Split** — `input` and `output` (and optionally `cached`), when
+    the coordinator has the two numbers. **Total** — a single `total`, which is what the
+    Agent tool's usage field and the Codex footer each actually report: one number for
+    the pass. A total is not an estimate and never a stand-in for an unmeasured pass;
+    splitting one into input and output means summing the raw transcript by hand, which
+    the coordinator may do but is never obliged to (`trace/README.md` § Meters).
+
+    Returns the fields that parsed plus `total` (filled from input + output when the
+    split form carries both), and a list of the fields that are not whole token counts.
+    An empty meter with nothing bad is an empty dict — the caller decides whether a
+    meter was required.
+    """
+    m = meter or {}
+    out: dict[str, int] = {}
+    bad: list[str] = []
+    for key in ("input", "output", "cached", "total"):
+        if key not in m or m[key] is None:
+            continue
+        v = m[key]
+        if isinstance(v, bool) or not isinstance(v, int) or v < 0:
+            bad.append(key)
+        else:
+            out[key] = v
+    if "total" not in out and "input" in out and "output" in out:
+        out["total"] = out["input"] + out["output"]
+    for key in sorted(k for k in m if k not in ("input", "output", "cached", "total")):
+        bad.append(key)
+    return out, bad
+
+
+def meter_is_measured(meter: Optional[dict[str, Any]]) -> bool:
+    """A meter carries a real count: either the split pair, or a total."""
+    fields, _ = normalize_meter(meter)
+    return ("input" in fields and "output" in fields) or "total" in fields
+
+
+# --------------------------------------------------------------------------- #
 # paths and hashes
 # --------------------------------------------------------------------------- #
 
@@ -319,7 +368,7 @@ def _record_from(fm: dict[str, Any], body: str, file: Path) -> Record:
         r.errors.append(f"{file.name}: inputs must be a list")
     withheld = fm.get("withheld")
     r.withheld = [str(w) for w in withheld] if isinstance(withheld, list) else []
-    if "withheld" in fm and "the drafting conversation" not in r.withheld and r.kind != "close":
+    if "withheld" in fm and "the drafting conversation" not in r.withheld and r.kind not in COORDINATOR_KINDS:
         r.errors.append(f"{file.name}: withheld must include `the drafting conversation`")
     for item in fm.get("outputs") or []:
         if isinstance(item, dict) and item.get("path"):

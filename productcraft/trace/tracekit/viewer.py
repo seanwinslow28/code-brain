@@ -23,7 +23,7 @@ from typing import Optional
 from . import KIT_NAME, KIT_VERSION
 from .cases import ASSIST_BLURB, Case, CasesDoc, Source, load_cases
 from .checker import Check, run_checks
-from .engagement import Engagement, Record, load_engagement
+from .engagement import Engagement, Record, load_engagement, normalize_meter
 
 __all__ = ["render", "render_html", "STAGES", "SEAT_NAMES", "REVIEW_PROMPTS"]
 
@@ -870,6 +870,14 @@ def _intro_html(doc: Optional[CasesDoc]) -> str:
 # --------------------------------------------------------------------------- #
 
 
+
+def _meter_counts(m: dict[str, int]) -> str:
+    """The split pair when the coordinator has it, otherwise the single total the runtime reported."""
+    if "input" in m and "output" in m:
+        return f"{m['input']:,} in · {m['output']:,} out · {m.get('cached', 0):,} cached"
+    return f"{m.get('total', 0):,} total <span class='sub'>(as the runtime reported it, not split)</span>"
+
+
 def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit: str, pair: Optional[str], blind: bool) -> str:
     pid = esc(p.pass_id)
     rt_html = f"<span class='hidden-rt'>{icon('eye')} hidden</span>" if blind else esc(p.runtime or "—")
@@ -883,9 +891,10 @@ def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit:
         tags += f"<span class='tag'>shadow of {esc(p.shadow_of)}</span>"
     if pair and not p.shadow_of:
         tags += f"<span class='tag'>baseline of {esc(pair)}</span>"
-    m = p.meter or {}
-    unmeasured = p.meter_source == "UNMEASURED" or not isinstance(m.get("input"), int)
-    tok = "—" if unmeasured else fmt_tokens(int(m.get("input", 0)) + int(m.get("output", 0)))
+    m, _ = normalize_meter(p.meter)
+    # a meter is the split pair or a single `total` — what the Agent tool and the Codex footer report
+    unmeasured = p.meter_source == "UNMEASURED" or "total" not in m
+    tok = "—" if unmeasured else fmt_tokens(m["total"])
     summary = f"""
 <summary>
   <span class="run"><b>Run {run_no(p.pass_id)}</b> · <span class="seat">{esc(seat_name(p.seat))}</span>{'' if seat_name(p.seat).lower().endswith(p.kind.lower()) else f' <span class="kind">{esc(p.kind)}</span>'}{tags}<span class="pid-sub">{pid}</span></span>
@@ -903,10 +912,10 @@ def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit:
     corpus = "".join(f"<li>{esc(c)}</li>" for c in p.corpus_read) or ("<li class='sub'>none (gate: corpus withheld)</li>" if p.kind == "gate" else "<li class='sub'>none</li>")
     moves = _moves_html(eng, p)
     if blind:
-        meter_html = f"{int(m.get('input', 0)):,} in · {int(m.get('output', 0)):,} out · {int(m.get('cached', 0) or 0):,} cached <span class='sub'>(source {HIDDEN})</span>" if not unmeasured else "UNMEASURED"
+        meter_html = f"{_meter_counts(m)} <span class='sub'>(source {HIDDEN})</span>" if not unmeasured else "UNMEASURED"
         launch, raw_log = esc(HIDDEN), esc(HIDDEN)
     else:
-        meter_html = "UNMEASURED" if unmeasured else f"{int(m.get('input', 0)):,} in · {int(m.get('output', 0)):,} out · {int(m.get('cached', 0) or 0):,} cached <span class='sub'>({esc(p.meter_source)})</span>"
+        meter_html = "UNMEASURED" if unmeasured else f"{_meter_counts(m)} <span class='sub'>({esc(p.meter_source)})</span>"
         launch, raw_log = esc(p.launch or "—"), esc(p.raw_log or "—")
     ffs_opts = "".join(f"<option value='{s}'{' selected' if ffs == s else ''}>{s} {esc(stage_name(s))}</option>" for s in range(1, 8))
     blind_note = f"<p class='blind-note'>{icon('eye')} Blind pair with {esc(pair)}: the runtime and launch form stay hidden until both passes carry a verdict.</p>" if blind else ""

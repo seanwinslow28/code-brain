@@ -76,6 +76,11 @@ Which stories, once shipped, constitute the candidate Systemcraft's Gate 3 will 
 
 ## Moves
 
+<!-- MACHINE-READ. The rung-0 checker (productcraft/trace/check.py) parses this section line by line
+     against the pass's recorded inputs. Move lines only, one per line, from the five-op grammar in
+     artifact-header.md § Moves — or the single `origin draft, no upstream` line. A sentence of prose
+     here is a malformed line and a finding, not a note: put the note in the record's ## Notes. -->
+
 - kept — <upstream item> from pc-eng-001.roadmap
 - added — <story> from eng-004.return ask Q2
 - split — <upstream item> → <story>, <story> from pc-eng-001.roadmap

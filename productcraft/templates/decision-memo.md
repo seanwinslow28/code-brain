@@ -1,6 +1,6 @@
 # Decision memo template
 
-One of the **Product Leadership & Org Designer**'s three hard contracts (seat contract, [#266](https://github.com/seanwinslow28/code-brain/issues/266)) and one of the seven gap templates. **One decision per memo**, one file per memo, indexed in the [leadership packet](leadership-packet.md). It is the decision's face for Sean; the [ledger entry](ledger-entry.md) is its record — so **the fields align with the ledger schema** and the memo never carries a section the entry lacks. Leadership writes the memo and its entry in the same pass with `status: proposed`; Sean's signature sets the entry's `ratified:` date and the memo's state to `ratified`. A changed mind is a new memo and a new entry that supersedes the old — never a suffix, never an edit.
+One of the **Product Leadership & Org Designer**'s three hard contracts (seat contract, [#266](https://github.com/seanwinslow28/code-brain/issues/266)) and one of the seven gap templates. **One decision per memo**, one file per memo, indexed in the [leadership packet](leadership-packet.md). It is the decision's face for Sean; the [ledger entry](ledger-entry.md) is its record — so **the fields align with the ledger schema** and the memo never carries a section the entry lacks. Leadership writes the memo and its entry in the same pass with `status: proposed`; Sean's signature sets the entry's `ratified:` date and moves both to `decided` — the memo's `state:` is the entry's `status:` verbatim, one vocabulary, so a reader never has to translate. A changed mind is a new memo and a new entry that supersedes the old — never a suffix, never an edit.
 
 Craft rule: no sentence without a field. Header fields per [artifact-header.md](artifact-header.md), plus the memo's own.
 
@@ -17,7 +17,8 @@ revision: 1
 status: draft
 auditor: product-strategist        # the packet's auditor; the memo is its anchor
 ledger_entry: pc-eng-001.d40       # the entry this memo mirrors — same decision, same options, same why
-state: proposed                    # proposed | ratified | superseded — mirrors the entry's status + ratified: field
+state: proposed                    # proposed | decided | superseded | reopened — the entry's `status:` verbatim;
+                                   # the signature date lives on the entry's `ratified:` field, never here
 supersedes: null                   # memo id this replaces
 owner: sean                        # who carries the decision after ratification
 ---

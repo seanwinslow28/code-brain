@@ -73,3 +73,28 @@ def test_the_kit_runs_on_a_bare_interpreter(eng_dir):
     r = run("-I", "-c",
             "import sys; sys.path.insert(0, %r); import tracekit.checker, tracekit.viewer; print('ok')" % str(TRACE))
     assert r.returncode == 0 and r.stdout.strip() == "ok", r.stderr
+
+
+# --------------------------------------------------------------------------- #
+# #297 · the id helper
+# --------------------------------------------------------------------------- #
+
+
+def test_nextid_prints_the_next_id_with_its_accounting(eng_dir):
+    r = run("nextid.py", str(eng_dir))
+    assert r.returncode == 0, r.stderr
+    assert r.stdout.startswith("pc-eng-000.d11\n")
+    assert "10 entries on disk" in r.stdout
+
+
+def test_nextid_bare_is_one_line_for_a_shell_variable(eng_dir):
+    r = run("nextid.py", str(eng_dir), "--bare")
+    assert r.returncode == 0, r.stderr
+    assert r.stdout == "pc-eng-000.d11\n"
+
+
+def test_nextid_refuses_a_folder_that_is_not_an_engagement(tmp_path):
+    (tmp_path / "empty").mkdir()
+    r = run("nextid.py", str(tmp_path / "empty"))
+    assert r.returncode == 2
+    assert "not an engagement" in r.stderr

@@ -338,3 +338,20 @@ def test_the_notes_column_leads_with_three_takeaways_and_names_its_author(eng_di
     assert slot.count("<li>") >= 7                                          # three takeaways plus the full history
     assert "The full dated history, 4 entries" in slot
     assert slot.index("Third note.") < slot.index("Fourth note.")
+
+
+# --------------------------------------------------------------------------- #
+# #297 · a meter the runtime reported as one number
+# --------------------------------------------------------------------------- #
+
+
+def test_a_total_only_meter_renders_as_a_total_and_says_it_is_not_split(eng_dir, tmp_path):
+    d = copy_of(eng_dir, tmp_path)
+    rec = sorted((d / "trace").glob("pass-05-*.md"))[0]
+    text = "\n".join(x for x in rec.read_text().split("\n") if not x.startswith(("  input:", "  output:", "  cached:")))
+    rec.write_text(text.replace("meter:\n", "meter:\n  total: 203700\n"))
+    out = render_html(load_engagement(d), rendered_on="2026-09-13")
+    block = row_block(out, "pass-05")
+    assert "203,700 total" in block
+    assert "not split" in block
+    assert "UNMEASURED" not in block

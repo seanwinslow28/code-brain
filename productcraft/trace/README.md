@@ -9,6 +9,7 @@ The public pieces the studio's evals-and-trace design needs before its first eng
 | Rung-0 checker | [check.py](check.py) | Close, and any time between |
 | Viewer renderer | [render.py](render.py) → `trace/eval.html`, to [DESIGN.md](DESIGN.md) | Sean, reading and labeling |
 | Cases template | [cases-template.md](cases-template.md) → an engagement's `trace/cases.md` | the writer pass, once a train has run |
+| Entry-id helper | [nextid.py](nextid.py) | the coordinator, before writing a ledger entry |
 
 Everything runs on the system `python3` with nothing installed: no model, no network, no third-party import. Templates hold no private content; the scripts read the private ledger only at run time and write only `eval.html`.
 
@@ -20,6 +21,7 @@ Inside each engagement folder of the private ledger (`productcraft/ledger/engage
 <eng-id>/
 ├── brief.md                        # Open: the header below, then the one-paragraph brief
 ├── artifacts/  audits/  dNN-*.md   # what the seats wrote — record paths are relative to this folder
+├── readout/                        # the human versions of final, past-gate artifacts — never a pass input
 └── trace/
     ├── pass-NN-<seat>-<kind>.md    # one immutable record per invocation
     ├── labels.md                   # Sean's verdicts, apart from the facts
@@ -53,14 +55,28 @@ Nine deterministic lines, in this order:
 1. **Records parse and carry every required field** — the YAML subset parses; every field in the template is present; `kind` and `stage` are in range; `withheld` names the drafting conversation.
 2. **Every pass has a record** — the numbering has no gap; every id referenced by `checks`, `triggered_by`, `shadow_of` or the labels file has a record; each filename matches its record.
 3. **Every pass has a label row** — and every row names a real pass. Rows still waiting for a verdict are counted in a note.
-4. **Input hashes match disk or a recorded prior revision** — each input's sha256 matches the file now, or matches a hash an earlier pass recorded as its output for that path *and* the disk holds the latest recorded revision. Outputs are checked the same way. A file edited outside a pass fails here.
-5. **Cited corpus files appear in the transcript's file reads** — every `corpus/…` path an output artifact or ledger entry cites is in the record's `## Corpus read`; `grounding: full` with no corpus read, or `grounding: none` with one, is a finding.
+4. **Input hashes match disk or a recorded prior revision** — each input's sha256 matches the file now, or matches a hash an earlier pass recorded as its output for that path *and* the disk holds the latest recorded revision. Outputs are checked the same way. A file edited outside a pass fails here — with one carve-out, below.
+5. **Cited corpus files appear in the transcript's file reads** — every `corpus/…` path an output artifact or ledger entry cites is in the record's `## Corpus read`, **or in that of an earlier pass which wrote the same artifact**: a repair inherits the citations of the revision it overwrote, and charging it with those reads would be a false finding. Reads travel along one artifact's revision chain, never sideways. `grounding: full` with no corpus read, or `grounding: none` with one of this pass's own, is a finding.
 6. **Every move names an existing upstream item; splits are subsets** — each `kept` / `split` / `merged` / `dropped` item is found in an input readable at its recorded hash (ids like `O2`, `OC-1a`, `KR-2`; ranges like `E1–E5` expand; prose items are phrase-matched); a split's children are new and appear in the artifact. Malformed lines and unknown ops are findings. `added` lines are new by definition.
-7. **Meter present or UNMEASURED** — `meter_source` is in the vocabulary; a measured meter carries integer token counts; `UNMEASURED` is honest and listed.
+7. **Meter present or UNMEASURED** — `meter_source` is in the vocabulary; a measured meter carries whole token counts in one of two forms, the split `input` + `output` pair or a single `total` (which is what the Agent tool's usage field and the Codex footer each actually report); `UNMEASURED` is honest and listed, and so is a total that was never split.
 8. **Each drafting stage has one draft, an audit, and its required co-signs** — per stage reached: exactly one `draft` by the stage's seat, at least one `audit` by the fixed auditor, a `co-sign` by the co-signing seat at stages 2 and 6. Full trains only.
 9. **Trials blind-labeled before their runtime is shown** — a trial's inputs are hash-identical to its baseline's; while either lacks a verdict, the rendered page's rows for both hide runtime, launch form and log path (the check reads the pair's own rows in `eval.html`, since gates may share a runtime).
 
+**Shared machinery is provenance, not a chain link.** A seat's inputs include the studio's own files — its seat contract, a lane manifest, an artifact template — which live in the repo, outside the engagement, and keep improving after a train closes. The ticket that fixes a template is doing its job, not tampering with a record, so a repo-path input (`productcraft/…`, `systemcraft/…`, `.claude/…`) that **no pass in this engagement wrote** is counted *unverifiable* and named in a note when its hash has moved, exactly as an overwritten revision's Moves are. The recorded hash is never rewritten to match. Everything the engagement itself wrote — including a repo path some pass recorded as an output — stays strict, which is where the guarantee matters. The limit, stated plainly: this cannot tell a template edited *between* two passes of a live train from one edited a month after Close; mid-train, that belongs in the engagement's `## Notes`.
+
+**Ledger entries ride the chain.** A drafting pass lists each entry it wrote as a `- path:` block with its hash, with the `- id:` beside it — an entry with no hash is outside the chain, so an edit to it is invisible. When the coordinator marks an older entry `status: superseded`, that edit is an **output of the superseding pass**, recorded there with the new hash; otherwise the entry reads as edited outside any pass and fails line 4, correctly.
+
 **What rung 0 cannot see.** Artifacts are redrafted in place (#274), so a superseded revision is no longer on disk. The checker names this honestly rather than passing or failing it: a pass whose artifact was later overwritten has its Moves reported as no longer on disk; a move whose only possible home is an unreadable revision is counted *unverifiable*, never verified. A replay over the raw transcript is a later rung (#272 decision 4), not day one. The checker also does not read transcripts: `## Corpus read` is written by the coordinator from the transcript's file reads, and the checker trusts the record.
+
+## The next entry id
+
+Ids are permanent and bare (#268), so a gap in the `dNN` numbering is harmless — but reserving a block ahead of writing it is how two passes end up claiming one id, which is what the first engagement did. The helper hands out the next free one and shows its working:
+
+```bash
+python3 productcraft/trace/nextid.py productcraft/ledger/engagements/<eng-id>
+```
+
+An id is **claimed** by a file on disk *or* by a pass record naming it among its outputs, so a reserved-but-unwritten id is never handed out twice. The report names the gaps (left alone, never reused) and separately the ids a record reserved but no file fills — at Close, each of those is either a gap or an entry someone forgot to write. `--bare` prints the id alone, for a shell variable. Read-only: it writes nothing.
 
 ## The viewer
 

@@ -13,7 +13,8 @@ import re
 from dataclasses import dataclass, field
 
 from .engagement import (
-    FIXED_AUDITORS, METER_SOURCES, REQUIRED_COSIGNS, STAGE_SEATS, Engagement, Record, sha256_path,
+    FIXED_AUDITORS, METER_SOURCES, REPO_PREFIXES as _REPO_PREFIXES, REQUIRED_COSIGNS, STAGE_SEATS,
+    Engagement, Record, normalize_meter, sha256_path,
 )
 from .moves import extract_ids
 
@@ -160,6 +161,29 @@ def _every_pass_has_a_label(eng: Engagement) -> Check:
 # --------------------------------------------------------------------------- #
 
 
+def _machinery_paths(eng: Engagement) -> set[str]:
+    """Inputs that are shared repo machinery rather than links in this engagement's chain.
+
+    A seat's inputs include the studio's own files — its seat contract, a lane
+    manifest, an artifact template. Those live in the repo, outside the engagement,
+    and they keep improving after a train closes: the ticket that fixes a template
+    is doing its job, not tampering with a record. The recorded hash is provenance
+    (what the seat saw), not a chain link, so a moved machinery file is *unverifiable*
+    here — counted and named, never quietly passed and never failed, the same way an
+    overwritten revision's Moves are. A repo path that some pass recorded as an
+    output is not machinery: the engagement wrote it, so it stays in the chain.
+
+    The limit, stated plainly: this cannot tell a template edited *between* two
+    passes of a live train from one edited a month after Close. Mid-train, the
+    engagement's own `## Notes` is where that belongs.
+    """
+    written = {o.path for r in eng.records for o in r.artifact_outputs}
+    return {
+        i.path for r in eng.records for i in r.inputs
+        if i.path.startswith(_REPO_PREFIXES) and i.path not in written
+    }
+
+
 def _hashes(eng: Engagement) -> Check:
     """Inputs match disk, or match a revision an earlier pass recorded as its output — and in that
     case the disk must hold the *last* recorded revision, otherwise the file was edited outside a pass."""
@@ -171,6 +195,8 @@ def _hashes(eng: Engagement) -> Check:
             if o.sha256:
                 history.setdefault(o.path, {})[o.sha256] = r.pass_id
                 last[o.path] = (o.sha256, r.pass_id)
+    machinery = _machinery_paths(eng)
+    moved: dict[str, set[str]] = {}
     superseded = 0
     for r in eng.records:
         for i in r.inputs:
@@ -182,6 +208,9 @@ def _hashes(eng: Engagement) -> Check:
                 c.findings.append(f"{r.pass_id}: input {i.path} has no sha256 (got {i.sha256!r})")
             elif i.sha256 == disk:
                 c.n_ok += 1
+            elif i.path in machinery:
+                c.n_unverifiable += 1
+                moved.setdefault(i.path, set()).add(r.pass_id)
             elif i.sha256 in history.get(i.path, {}):
                 if i.path in last and disk == last[i.path][0]:
                     c.n_ok += 1
@@ -210,6 +239,12 @@ def _hashes(eng: Engagement) -> Check:
                 )
     if superseded:
         c.notes.append(f"{superseded} input(s) matched a superseded revision an earlier pass recorded as its output")
+    if moved:
+        c.notes.append(
+            f"{c.n_unverifiable} input(s) are shared repo machinery that has moved since the pass "
+            f"({len(moved)} file(s)): {', '.join(sorted(moved))}. The record keeps the hash the seat saw — "
+            f"unverifiable at rung 0, never rewritten to match."
+        )
     return c
 
 
@@ -218,20 +253,52 @@ def _hashes(eng: Engagement) -> Check:
 # --------------------------------------------------------------------------- #
 
 
+def _prior_reads(eng: Engagement) -> dict[str, dict[str, set[str]]]:
+    """Per pass, the corpus reads an earlier revision of each output path can account for.
+
+    Artifacts are redrafted in place (#274), so a repair that fixed one paragraph still
+    hands back a file carrying every citation its earlier revisions made. Charging the
+    repairing pass with reading all of them would be a false finding — the read happened,
+    in the pass that wrote the line. So a citation is satisfied by this pass's own
+    `## Corpus read` or by that of any earlier pass which recorded the same path as an
+    output. Reads never travel sideways: only along one artifact's own revision chain.
+    """
+    seen: dict[str, set[str]] = {}                  # path → reads recorded by earlier writers of it
+    out: dict[str, dict[str, set[str]]] = {}        # pass id → path → those reads
+    for r in eng.records:                           # eng.records is in pass order
+        paths = [o.path for o in r.artifact_outputs]
+        out[r.pass_id] = {path: set(seen.get(path, ())) for path in paths}
+        for path in paths:
+            seen.setdefault(path, set()).update(r.corpus_read)
+    return out
+
+
+def _same_file(a: str, b: str) -> bool:
+    """`corpus/canon/x.md` and `productcraft/corpus/canon/x.md` are the same read."""
+    return a == b or a.split("corpus/", 1)[-1] == b.split("corpus/", 1)[-1]
+
+
 def _corpus(eng: Engagement) -> Check:
     c = Check(CHECK_NAMES[4])
     skipped_superseded = 0
+    inherited = 0
+    prior = _prior_reads(eng)
     for r in eng.records:
         if not r.hands_forward:
             continue
-        cited: set[str] = set()
+        own = set(r.corpus_read)
+        cited: dict[str, set[str]] = {}   # corpus path → the reads that may account for it
         grounding = None
+        grounding_reads = set(own)
         for o in r.outputs:
             text = None
+            reads = set(own)
             if o.path:
                 if eng.output_state(o) == "superseded":
                     skipped_superseded += 1
                     continue  # a later revision is on disk; its citations are that pass's, not this one's
+                reads |= prior.get(r.pass_id, {}).get(o.path, set())
+                grounding_reads |= reads
                 text = eng.read_text(o.path)
                 if text is not None and grounding is None:
                     m = re.search(r"^grounding:\s*(\S+)", text, re.M)
@@ -240,21 +307,32 @@ def _corpus(eng: Engagement) -> Check:
                 p = eng.entry_path(o.id)
                 text = p.read_text(encoding="utf-8") if p else None
             if text:
-                cited.update(_CORPUS_PATH.findall(text))
-        opened = set(r.corpus_read)
+                for path in _CORPUS_PATH.findall(text):
+                    cited.setdefault(path, set()).update(reads)
         for path in sorted(cited):
             c.n_total += 1
-            if path in opened or path.split("corpus/", 1)[-1] in {x.split("corpus/", 1)[-1] for x in opened}:
+            accounted = [x for x in cited[path] if _same_file(x, path)]
+            if accounted:
                 c.n_ok += 1
+                if not any(_same_file(x, path) for x in own):
+                    inherited += 1
             else:
-                c.findings.append(f"{r.pass_id}: cites {path} but the transcript shows no read of it")
-        corpus_opened = [x for x in opened if "corpus/" in x]
+                c.findings.append(
+                    f"{r.pass_id}: cites {path} but neither this pass's transcript nor any earlier "
+                    f"revision of the artifact shows a read of it"
+                )
+        corpus_opened = [x for x in grounding_reads if "corpus/" in x]
         if grounding == "full" and not corpus_opened:
             c.findings.append(f"{r.pass_id}: artifact declares grounding: full but the transcript shows no corpus read")
-        if grounding == "none" and corpus_opened:
+        if grounding == "none" and [x for x in own if "corpus/" in x]:
             c.findings.append(f"{r.pass_id}: artifact declares grounding: none but the transcript shows corpus reads")
     if skipped_superseded:
         c.notes.append(f"{skipped_superseded} superseded artifact revision(s) not on disk: their citations are not re-checked")
+    if inherited:
+        c.notes.append(
+            f"{inherited} citation(s) accounted for by an earlier revision's pass, not this one's — the artifact was "
+            f"redrafted in place and kept the line"
+        )
     return c
 
 
@@ -375,6 +453,7 @@ def _moves(eng: Engagement) -> Check:
 
 def _meter(eng: Engagement) -> Check:
     c = Check(CHECK_NAMES[6], n_total=len(eng.records))
+    totals_only: list[str] = []
     for r in eng.records:
         if r.meter_source not in METER_SOURCES:
             c.findings.append(f"{r.pass_id}: meter_source {r.meter_source!r} is not one of {' | '.join(METER_SOURCES)}")
@@ -382,17 +461,28 @@ def _meter(eng: Engagement) -> Check:
         if r.meter_source == "UNMEASURED":
             c.n_ok += 1
             continue
-        m = r.meter or {}
-        bad = [k for k in ("input", "output") if not isinstance(m.get(k), int) or m.get(k) < 0]
-        if "cached" in m and m["cached"] is not None and not isinstance(m["cached"], int):
-            bad.append("cached")
+        fields, bad = normalize_meter(r.meter)
         if bad:
-            c.findings.append(f"{r.pass_id}: meter is {r.meter_source} but {', '.join(bad)} is not an integer token count")
-        else:
+            c.findings.append(
+                f"{r.pass_id}: meter is {r.meter_source} but {', '.join(bad)} is not a whole token count"
+            )
+        elif "total" in fields or ("input" in fields and "output" in fields):
             c.n_ok += 1
+            if "input" not in fields:
+                totals_only.append(r.pass_id)
+        else:
+            c.findings.append(
+                f"{r.pass_id}: meter is {r.meter_source} but carries neither `input` + `output` nor a `total` "
+                f"(the one number the Agent tool and the Codex footer each report)"
+            )
     unmeasured = [r.pass_id for r in eng.records if r.meter_source == "UNMEASURED"]
     if unmeasured:
         c.notes.append(f"{len(unmeasured)} UNMEASURED: {', '.join(unmeasured)}")
+    if totals_only:
+        c.notes.append(
+            f"{len(totals_only)} meter(s) report a total only, as the runtime reported it, not split into "
+            f"input and output: {', '.join(totals_only)}"
+        )
     return c
 
 

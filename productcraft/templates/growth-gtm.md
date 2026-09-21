@@ -64,6 +64,11 @@ One block per experiment, written so Insights can power and read it without aski
 
 ## Moves
 
+<!-- MACHINE-READ. The rung-0 checker (productcraft/trace/check.py) parses this section line by line
+     against the pass's recorded inputs. Move lines only, one per line, from the five-op grammar in
+     artifact-header.md § Moves — or the single `origin draft, no upstream` line. A sentence of prose
+     here is a malformed line and a finding, not a note: put the note in the record's ## Notes. -->
+
 - kept — <upstream item> from pc-eng-001.strategy
 - added — <new item> from <source: evidence file, check record, gate finding, brief section>
 - split — <upstream item> → <child>, <child> from pc-eng-001.strategy

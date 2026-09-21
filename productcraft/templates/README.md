@@ -27,4 +27,9 @@ Public machinery; filled artifacts are private (`ledger/engagements/<eng-id>/art
 - [check-record.md](check-record.md) — the artifact of every co-sign and trailing audit, plus the four-rung evidence-strength scale.
 - [gate-findings.md](gate-findings.md) — the red-team gate's findings file with Productcraft's typed verdicts (`STRATEGY | HANDOFF | TRAIN | AUDIT`) and the whole-train attacks.
 
+**Written for Sean, never handed to a seat**
+
+- [readout.md](readout.md) — the human version of a final, past-gate artifact; derivative, lives in the private ledger at `readout/`, never hashed as a pass input and never a trigger for a repair (ruled 2026-09-14 at pc-eng-001's Gate 1). The master skill's Gate and Close steps say when each one is written.
+- [readout-glossary.md](readout-glossary.md) — the standing language bridge every readout copies its terms from, so a term is never defined two ways.
+
 Systemcraft's [red-team-protocol](../../systemcraft/templates/red-team-protocol.md), [close-digest](../../systemcraft/templates/close-digest.md) and [status-vocabulary](../../systemcraft/templates/status-vocabulary.md) are inherited by link until `craftwork` extracts them.

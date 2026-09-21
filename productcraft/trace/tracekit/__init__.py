@@ -7,9 +7,14 @@ the Close ritual runs on whatever python3 the session has, with nothing
 installed, no model and no network. Scripts read the private ledger only at
 run time; nothing here carries engagement content.
 
+0.2.0 closes the gaps the first engagement exposed (#297): the `open` and
+`readout` record kinds, a meter that may be one total, corpus reads inherited
+along an artifact's revision chain, shared repo machinery as provenance rather
+than tampering, ledger entries hashed into the chain, and `nextid.py`.
+
 First copy. The content machine's kit (#291) shares this code rather than
 forking it; `craftwork` extracts the shared home later.
 """
 
 KIT_NAME = "productcraft/trace"
-KIT_VERSION = "0.1.0"
+KIT_VERSION = "0.2.0"

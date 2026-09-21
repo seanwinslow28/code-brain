@@ -67,10 +67,17 @@ def parse_moves(text: str) -> Optional[MovesSection]:
     section = text[start : nxt.start() if nxt else len(text)]
     base_line = text[:start].count("\n") + 1
     out = MovesSection()
+    in_comment = False
     for offset, raw in enumerate(section.split("\n")):
         line = raw.strip()
         lineno = base_line + offset
-        if not line or line.startswith("<!--"):
+        if in_comment:                       # a comment block's later lines are not move lines
+            in_comment = "-->" not in line
+            continue
+        if line.startswith("<!--"):          # the templates declare the section machine-read here
+            in_comment = "-->" not in line
+            continue
+        if not line:
             continue
         o = _ORIGIN.match(line)
         if o:

@@ -91,3 +91,28 @@ def test_extract_ids_expands_ranges_and_suffixes():
     assert extract_ids("OC-1a and OC-1b") == ["OC-1a", "OC-1b"]
     assert extract_ids("Action 4") == []
     assert extract_ids("B1-B3 with appetites") == ["B1", "B2", "B3"]
+
+
+# --------------------------------------------------------------------------- #
+# #297 · the section is declared machine-read in a comment block
+# --------------------------------------------------------------------------- #
+
+COMMENT_BLOCK = """## Moves
+
+<!-- MACHINE-READ. Move lines only, one per line, from the five-op grammar.
+     A sentence of prose here is a malformed line and a finding, not a note. -->
+
+- kept — O1 from pc-eng-001.strategy
+"""
+
+
+def test_a_multi_line_comment_block_is_not_read_as_moves():
+    mv = parse_moves(COMMENT_BLOCK)
+    assert mv.errors == []
+    assert [m.op for m in mv.lines] == ["kept"]
+
+
+def test_prose_outside_a_comment_is_still_a_malformed_line():
+    mv = parse_moves("## Moves\n\nThe seat rewrote the roadmap around the new constraint.\n")
+    assert len(mv.errors) == 1
+    assert "not a move line" in mv.errors[0]

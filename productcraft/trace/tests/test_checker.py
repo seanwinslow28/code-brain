@@ -216,3 +216,161 @@ def test_report_format(eng_dir):
     assert lines[0].startswith("PASS  Records parse")
     assert all(l.startswith(("PASS", "FAIL", "  ")) for l in lines)
     assert "25 of 25" in text
+
+
+# --------------------------------------------------------------------------- #
+# #297 · the gaps the first engagement exposed
+# --------------------------------------------------------------------------- #
+
+CORPUS = "Cited corpus files appear in the transcript's file reads"
+METER = "Meter present or UNMEASURED"
+PARSE = "Records parse and carry every required field"
+
+
+def record(eng_dir: Path, pass_id: str) -> Path:
+    hits = sorted((eng_dir / "trace").glob(f"{pass_id}-*.md"))
+    assert hits, f"no record for {pass_id}"
+    return hits[0]
+
+
+def test_a_repair_is_not_charged_with_the_citations_its_own_earlier_revision_made(eng_dir):
+    """pass-03 redrafts strategy-pov.md in place; the file keeps pass-01's citation.
+
+    Charging the repair with a read that happened in pass-01 is the false finding
+    the first engagement hit. The read is accounted for along the artifact's own
+    revision chain, and said out loud in a note.
+    """
+    cite = "corpus/strategy/good-strategy-bad-strategy.md"
+    assert cite in (eng_dir / "artifacts/strategy-pov.md").read_text()
+    edit(record(eng_dir, "pass-03"), f"- {cite}\n", "")
+    c = results(eng_dir)[CORPUS]
+    assert c.ok, c.findings
+    assert any("earlier revision" in n for n in c.notes)
+
+
+def test_an_unread_citation_is_still_a_finding_when_no_revision_accounts_for_it(eng_dir):
+    cite = "corpus/strategy/good-strategy-bad-strategy.md"
+    for pid in ("pass-01", "pass-03"):
+        edit(record(eng_dir, pid), f"- {cite}\n", "")
+    c = results(eng_dir)[CORPUS]
+    assert not c.ok
+    assert any("pass-03" in f and cite in f for f in c.findings)
+
+
+def test_reads_travel_along_one_artifact_only_never_sideways(eng_dir):
+    """pass-09 writes a different artifact, so pass-01's reads do not cover its citations."""
+    cite = "corpus/insights/trustworthy-online-experiments.md"
+    edit(record(eng_dir, "pass-09"), f"- {cite}\n", "")
+    c = results(eng_dir)[CORPUS]
+    assert not c.ok
+    assert any("pass-09" in f and cite in f for f in c.findings)
+
+
+def test_a_meter_may_report_one_total_as_the_runtime_reported_it(eng_dir):
+    """The Agent tool's usage field and the Codex footer each report one number."""
+    edit(record(eng_dir, "pass-05"), "meter:\n", "meter:\n  total: 203700\n")
+    r = record(eng_dir, "pass-05").read_text()
+    for line in ("  input:", "  output:", "  cached:"):
+        r = "\n".join(x for x in r.split("\n") if not x.startswith(line))
+    record(eng_dir, "pass-05").write_text(r)
+    c = results(eng_dir)[METER]
+    assert c.ok, c.findings
+    assert any("total only" in n for n in c.notes)
+
+
+def test_a_meter_with_neither_a_split_nor_a_total_is_a_finding(eng_dir):
+    p = record(eng_dir, "pass-05")
+    text = "\n".join(x for x in p.read_text().split("\n") if not x.startswith(("  input:", "  output:", "  cached:")))
+    p.write_text(text)
+    c = results(eng_dir)[METER]
+    assert not c.ok
+    assert any("pass-05" in f and "total" in f for f in c.findings)
+
+
+def test_a_total_that_is_not_a_whole_token_count_is_a_finding(eng_dir):
+    edit(record(eng_dir, "pass-05"), "meter:\n", "meter:\n  total: about 200k\n")
+    c = results(eng_dir)[METER]
+    assert not c.ok
+    assert any("whole token count" in f for f in c.findings)
+
+
+def test_the_coordinators_open_pass_needs_no_drafting_conversation_withheld(eng_dir):
+    """`open` anchors the chain: the brief, entries and frozen evidence, with no seat fired."""
+    src = record(eng_dir, "pass-25").read_text()
+    src = src.replace("pass: pass-25", "pass: pass-26").replace("kind: close", "kind: open")
+    src = "\n".join(x for x in src.split("\n") if x.strip() != "- the drafting conversation")
+    (eng_dir / "trace" / "pass-26-coordinator-open.md").write_text(src)
+    eng = load_engagement(eng_dir)
+    rec = eng.by_id["pass-26"]
+    assert rec.kind == "open"
+    assert rec.errors == []
+
+
+def test_readout_is_a_kind_and_an_unknown_kind_still_fails(eng_dir):
+    src = record(eng_dir, "pass-25").read_text().replace("pass: pass-25", "pass: pass-26")
+    (eng_dir / "trace" / "pass-26-coordinator-readout.md").write_text(src.replace("kind: close", "kind: readout"))
+    assert load_engagement(eng_dir).by_id["pass-26"].errors == []
+    (eng_dir / "trace" / "pass-26-coordinator-readout.md").unlink()
+    (eng_dir / "trace" / "pass-26-coordinator-debrief.md").write_text(src.replace("kind: close", "kind: debrief"))
+    c = results(eng_dir)[PARSE]
+    assert not c.ok
+    assert any("debrief" in f for f in c.findings)
+
+
+# --------------------------------------------------------------------------- #
+# #297 · shared repo machinery as a pass input
+# --------------------------------------------------------------------------- #
+
+HASHES = "Input hashes match disk or a recorded prior revision"
+
+
+@pytest.fixture
+def eng_in_repo(tmp_path) -> Path:
+    """A synthetic engagement sitting inside a repo that also holds studio machinery."""
+    (tmp_path / "CLAUDE.md").write_text("# fake repo root\n")
+    tpl = tmp_path / "productcraft" / "templates"
+    tpl.mkdir(parents=True)
+    (tpl / "strategy-pov.md").write_text("# Strategy & POV template\n\nrevision 1\n")
+    return build(tmp_path / "pc-eng-000-callboard")
+
+
+def add_input(eng_dir: Path, pass_id: str, rel: str, sha: str) -> None:
+    p = record(eng_dir, pass_id)
+    edit(p, "inputs:\n", f"inputs:\n  - path: {rel}\n    sha256: {sha}\n")
+
+
+def test_machinery_that_moved_after_the_pass_is_unverifiable_not_tampering(eng_in_repo):
+    """A template improves after a train closes; the record keeps the hash the seat saw."""
+    import hashlib
+    tpl = eng_in_repo.parent / "productcraft" / "templates" / "strategy-pov.md"
+    add_input(eng_in_repo, "pass-01", "productcraft/templates/strategy-pov.md",
+              hashlib.sha256(tpl.read_bytes()).hexdigest())
+    assert results(eng_in_repo)[HASHES].ok
+    tpl.write_text(tpl.read_text() + "\n## Diagnosis\n")      # the ticket that fixes the template
+    c = results(eng_in_repo)[HASHES]
+    assert c.ok, c.findings
+    assert c.n_unverifiable == 1
+    assert any("shared repo machinery" in n and "strategy-pov.md" in n for n in c.notes)
+
+
+def test_an_engagement_file_edited_outside_a_pass_is_still_a_finding(eng_in_repo):
+    """The guarantee that matters is unchanged: the chain's own files stay strict."""
+    (eng_in_repo / "artifacts" / "strategy-pov.md").write_text("tampered\n")
+    c = results(eng_in_repo)[HASHES]
+    assert not c.ok
+    assert any("artifacts/strategy-pov.md" in f for f in c.findings)
+
+
+def test_a_repo_path_the_engagement_itself_wrote_stays_in_the_chain(eng_in_repo):
+    """Machinery means *not written here* — a repo path some pass output is a chain link."""
+    import hashlib
+    tpl = eng_in_repo.parent / "productcraft" / "templates" / "strategy-pov.md"
+    sha = hashlib.sha256(tpl.read_bytes()).hexdigest()
+    add_input(eng_in_repo, "pass-03", "productcraft/templates/strategy-pov.md", sha)
+    p = record(eng_in_repo, "pass-01")
+    edit(p, "outputs:\n", f"outputs:\n  - path: productcraft/templates/strategy-pov.md\n    sha256: {sha}\n")
+    tpl.write_text("moved on\n")
+    c = results(eng_in_repo)[HASHES]
+    assert not c.ok
+    assert c.n_unverifiable == 0
+    assert any("productcraft/templates/strategy-pov.md" in f for f in c.findings)
