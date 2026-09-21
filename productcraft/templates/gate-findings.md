@@ -4,6 +4,8 @@ The findings file a **red-team gate** writes: stateless, on the vendor that did 
 
 Posture is inherited: *find the strongest case that this fails; being unable to find a material flaw is a finding — state what you attacked and why it held*; propose the steel-man alternative.
 
+That posture stands as written — [#296](https://github.com/seanwinslow28/code-brain/issues/296) tested it against pc-eng-001 and found it is not what made the audit ladder unbounded: it says *show your work either way*, `What was attacked and held` is the exit it provides, and one first-sight audit returned NOTES ONLY on a fresh artifact. What the gate *does* now carry is the convergence rule's reporting duty: the series table below, and the de-duplication line under Findings.
+
 ```markdown
 ---
 id: pc-eng-001.gate-1              # gate-1 | gate-2 | gate-close | gate-audit-close
@@ -32,6 +34,18 @@ Typed, so a strategy verdict can never be quoted as a train verdict: `STRATEGY |
 | 1 | CRITICAL \| MATERIAL \| NOTE | pc-eng-001.strategy § Strategic bets | | "A point of view that cannot be wrong" | redraft \| accepted by Sean <date>: <why> \| noted |
 
 CRITICAL blocks the gate. MATERIAL is fixed, or Sean explicitly accepts it with a recorded why. Every finding names the checklist line it came from — an attack with no home in a template is a finding against the templates folder.
+
+**Duplicates route, they never recount** (#296 clause 7, from the close gate's own practice on pc-eng-001). A finding that appears in more than one check — a residual an audit raised and the gate found again, the same defect in two artifacts — gets **one row, one owner, one disposition**, with every appearance named in it. The count at the top of this file is findings, not appearances.
+
+## Check series (every artifact this gate is answerable for)
+
+The stopping rule made visible (#296 clause 6). One row per check series that ran on an artifact in scope, from its check records' series lines. A series that did not shrink is a **variance question to Sean**, raised here, never another round.
+
+| Artifact | Check | Rounds | Findings by round | Repair size by round | Ended on | Gate residuals carried |
+|---|---|---|---|---|---|---|
+| pc-eng-001.strategy | audit-strategy | 2 | 7 → 1 | 9 sections → 1 clause | verification held | 3 |
+
+Every **gate residual** in that last column appears in Findings above as a candidate acceptance, with its origin check named. A residual a later round already repaired is closed here as **stale**, not dispositioned (clause 7).
 
 ## Implementation holds
 
@@ -64,3 +78,4 @@ meter: <runtime> · <tokens> · <wall-clock>
 - **The steel-man** — a competing design that reaches the same outcome cheaper, and no artifact rules it out.
 - **The quiet failure** — the six-months-on scenario with no metric that would reveal it.
 - **Reasoning that crossed** — a brief or frozen copy carrying ledger text, transcripts, or the drafting conversation.
+- **Process waste** — a series that ran past its stopping rule; a verification pass that re-audited whole text; a finding recounted per appearance; a defect the studio's own template or kit caused. Coded in the labels file from the process-waste family, not graded as a seat's failure ([trace/taxonomy.md](../trace/taxonomy.md)).

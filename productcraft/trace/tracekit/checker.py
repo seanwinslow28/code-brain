@@ -17,6 +17,7 @@ from .engagement import (
     Engagement, Record, normalize_meter, sha256_path,
 )
 from .moves import extract_ids
+from .taxonomy import Taxonomy, critique_quotes, load_taxonomy
 
 __all__ = ["CHECK_NAMES", "Check", "run_checks", "format_report", "row_block"]
 
@@ -30,6 +31,7 @@ CHECK_NAMES = (
     "Meter present or UNMEASURED",
     "Each drafting stage has one draft, an audit, and its required co-signs",
     "Trials blind-labeled before their runtime is shown",
+    "Every failure_code is in the taxonomy; a quote-required code quotes its text",
 )
 
 _CORPUS_PATH = re.compile(r"(?<![\w/])((?:productcraft/|systemcraft/)?corpus/[\w\-./]+?\.md)")
@@ -54,7 +56,7 @@ class Check:
         return f"{self.n_ok} of {self.n_total}"
 
 
-def run_checks(eng: Engagement) -> list[Check]:
+def run_checks(eng: Engagement, taxonomy: Taxonomy | None = None) -> list[Check]:
     return [
         _records_parse(eng),
         _every_pass_has_a_record(eng),
@@ -65,6 +67,7 @@ def run_checks(eng: Engagement) -> list[Check]:
         _meter(eng),
         _stages(eng),
         _blind(eng),
+        _codes(eng, taxonomy if taxonomy is not None else load_taxonomy()),
     ]
 
 
@@ -597,4 +600,50 @@ def _blind(eng: Engagement) -> Check:
         c.n_ok += 1 if ok else 0
         if not labeled:
             c.notes.append(f"{r.pass_id} / {base.pass_id}: blind pair, runtime stays hidden until both carry a verdict")
+    return c
+
+
+# --------------------------------------------------------------------------- #
+# 9 · failure codes (rung 1's vocabulary, enforced at rung 0)
+# --------------------------------------------------------------------------- #
+
+
+def _codes(eng: Engagement, tax: Taxonomy) -> Check:
+    """`failure_code` draws from the studio's tracked taxonomy, never free text.
+
+    Ratified on #296 clause 8: a lone `manufactured` code with no instances
+    invites every unwelcome finding to be filed under it, so the family is
+    written down and the serious code has to quote what it indicts. An empty
+    column is the normal state while rung 1 is unopened — only a code that is
+    *present* is checked.
+    """
+    coded = [l for l in eng.labels.values() if l.failure_code]
+    c = Check(CHECK_NAMES[9], n_total=len(coded))
+    if not coded:
+        c.notes.append(
+            "no failure codes yet — the column stays blank until the reading names a mode"
+            if tax.open else "no failure codes yet, and no taxonomy file — rung 1 is unopened"
+        )
+        return c
+    if not tax.open:
+        for l in coded:
+            c.findings.append(
+                f"{l.pass_id}: failure_code `{l.failure_code}` with no taxonomy file to draw from"
+                f" ({tax.path})"
+            )
+        return c
+    for l in coded:
+        code = tax.codes.get(l.failure_code)
+        if code is None:
+            c.findings.append(
+                f"{l.pass_id}: failure_code `{l.failure_code}` is not in the taxonomy"
+                f" ({', '.join(sorted(tax.codes))})"
+            )
+            continue
+        if code.quote_required and not critique_quotes(l.critique):
+            c.findings.append(
+                f"{l.pass_id}: `{l.failure_code}` must quote the text it indicts; the critique quotes nothing"
+            )
+            continue
+        c.n_ok += 1
     return c

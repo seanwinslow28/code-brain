@@ -55,6 +55,7 @@ CHECK_IMPLICATIONS = (
     "An unmeasured pass costs the reading nothing; it only means the token figures here are a subtotal.",
     "A stage missing its draft, its audit or its co-sign is a train that did not run its own shape.",
     "A blind pair whose runtime is already visible cannot produce an unbiased verdict.",
+    "A failure code outside the taxonomy is free text, and free text does not count toward a mode.",
 )
 SEVERITIES = ("MATERIAL", "NOTE", "CRITICAL", "LOOPBACK", "BLOCKER")
 

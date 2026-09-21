@@ -66,7 +66,7 @@ def test_reading_line_composes_from_the_data(html):
     assert "<strong>3 wait for a verdict.</strong>" in line
     assert "broke first at stage 1" in line
     assert "stage-3 break is the one that cost downstream work" in line
-    assert "Rung 0 is clean on 9 of 9 checks" in line
+    assert "Rung 0 is clean on 10 of 10 checks" in line
 
 
 def test_reading_line_still_parses_with_nothing_labeled(eng_dir, tmp_path):
@@ -200,7 +200,7 @@ def chapter(html: str, key: str) -> str:
 
 def test_the_four_statements_carry_live_values(html):
     section = html.split("<h2>What you are judging</h2>")[1].split("<h2>What happened in this review</h2>")[0]
-    assert "Record checks" in section and "<b>9 of 9</b> pass" in section
+    assert "Record checks" in section and "<b>10 of 10</b> pass" in section
     assert "Automated checks of the records, not a quality score." in section
     assert "Reviewer findings" in section and "note" in section and "check record" in section
     assert "A seat's assessment of one artifact and revision." in section

@@ -24,7 +24,7 @@ def test_check_exits_zero_and_prints_every_check(eng_dir):
     r = run("check.py", str(eng_dir))
     assert r.returncode == 0, r.stderr
     assert "PASS  Every pass has a record  25 of 25" in r.stdout
-    assert r.stdout.count("\nPASS") + r.stdout.startswith("PASS") == 9
+    assert r.stdout.count("\nPASS") + r.stdout.startswith("PASS") == 10
 
 
 def test_check_exits_one_on_a_failing_check(eng_dir):

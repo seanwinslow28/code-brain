@@ -2,7 +2,7 @@
 
 The artifact of a **co-sign** or **audit** pass: what the checking seat saw, what it passed or bounced, what it attacked and what held. Written by the checking seat in a fresh-context invocation that receives artifacts only, never the drafting conversation. Two of the train's three co-sign touches use it (Insights on the Discovery evidence, `<eng>.cosign-discovery`; the Strategist on the OKR translation, `<eng>.cosign-okr`); the third — Insights on the Strategist's outcomes — is the outcome-to-metric table inside the [metrics & evidence plan](metrics-evidence-plan.md). Every trailing audit uses it (`<eng>.audit-<artifact-slug>`). The record travels beside the checked artifact through the train (a downstream seat reads the grades) and **stays behind at a handoff**, per the contract. The coordinator transcribes the verdict into the checked artifact's `cosign:` or `audit:` field and into the pass record's `checks`.
 
-A check never edits the checked artifact: a bounce or a material defect is a loopback to its drafting seat. Header fields per [artifact-header.md](artifact-header.md).
+A check never edits the checked artifact: a bounce or a material defect is a loopback to its drafting seat, and **one repair round per artifact per check** is the cap (#296 clause 1). A `verify` pass runs on the vendor that did **not** write the repair (clause 4) — the checker changes vendor, not the repairer. Header fields per [artifact-header.md](artifact-header.md).
 
 ```markdown
 ---
@@ -11,6 +11,7 @@ engagement: pc-eng-001-16bitfit-revisit
 date: 2026-09-21
 seat: insights-analytics           # the checking seat
 kind: cosign                       # cosign | audit
+stance: first-sight                # first-sight | verify — a verify pass is round two, see below
 stage: 2                           # the checked artifact's stage
 model: claude-opus-5
 grounding: full
@@ -42,6 +43,23 @@ Being unable to find a defect is a finding: name what was attacked, how, and why
 
 The one message to the drafting seat: which rows, what evidence, what would pass. Empty on a clean check — say "none".
 
+## Verification (`stance: verify` only — omit the section entirely on a first-sight check)
+
+Round two is a **verification pass, not a fresh audit** (#296 clause 2). Exactly three duties, and the third is a duty:
+
+1. **Rule each repair** `holds` or `residual` — one row per finding the first-sight check raised, in its original numbering. `holds` closes it. `residual` says what still fails and what would pass.
+2. **Attack the text the repair changed** — that text only. A defect found outside it is a **gate residual**, recorded in the table below and carried to the next scheduled gate as a candidate acceptance; it is never a loopback and never a new material round.
+3. **Stop.** No re-reading of the whole artifact, no reopening a finding the first-sight check passed, no new checklist sweep.
+
+| # | First-sight finding | Repair | holds \| residual | If residual: what still fails, what would pass |
+|---|---|---|---|---|
+| M1 | | | holds | |
+
+| Outside the changed text | Section | Severity | Carried to | Why it is not a loopback |
+|---|---|---|---|---|
+
+**The series line**, for the coordinator's gate report: `round <n> / <findings> findings / <lines or sections> changed`. A series that does not shrink is a variance question to Sean, never another round.
+
 meter: <runtime> · <tokens> · <wall-clock>
 ```
 
@@ -65,3 +83,5 @@ A claim graded `stated-preference` or `inferred` that sits under a bet in the Di
 - **Silent pass** — `What was attacked and held` empty on a clean verdict.
 - **Severity laundering** — a material defect filed as a NOTE to avoid the cascade.
 - **The stake not answered** — an audit record whose rows never address the stake sentence.
+- **A verification pass that re-audited** — `stance: verify` with findings from text the repair never touched filed as material, or a passed first-sight finding reopened.
+- **A second loopback on one check** — the repair cap spent and a third round requested instead of a gate residual or a question to Sean.

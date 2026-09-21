@@ -10,6 +10,7 @@ The public pieces the studio's evals-and-trace design needs before its first eng
 | Viewer renderer | [render.py](render.py) → `trace/eval.html`, to [DESIGN.md](DESIGN.md) | Sean, reading and labeling |
 | Cases template | [cases-template.md](cases-template.md) → an engagement's `trace/cases.md` | the writer pass, once a train has run |
 | Entry-id helper | [nextid.py](nextid.py) | the coordinator, before writing a ledger entry |
+| Failure-code taxonomy | [taxonomy.md](taxonomy.md) | Sean, when a label carries a code; `check.py` reads it |
 
 Everything runs on the system `python3` with nothing installed: no model, no network, no third-party import. Templates hold no private content; the scripts read the private ledger only at run time and write only `eval.html`.
 
@@ -50,7 +51,7 @@ Then confirm every pass has a row with a verdict in `trace/labels.md`. The check
 
 ## Rung 0 — what the checker asserts, and what it cannot see
 
-Nine deterministic lines, in this order:
+Ten deterministic lines, in this order:
 
 1. **Records parse and carry every required field** — the YAML subset parses; every field in the template is present; `kind` and `stage` are in range; `withheld` names the drafting conversation.
 2. **Every pass has a record** — the numbering has no gap; every id referenced by `checks`, `triggered_by`, `shadow_of` or the labels file has a record; each filename matches its record.
@@ -61,6 +62,7 @@ Nine deterministic lines, in this order:
 7. **Meter present or UNMEASURED** — `meter_source` is in the vocabulary; a measured meter carries whole token counts in one of two forms, the split `input` + `output` pair or a single `total` (which is what the Agent tool's usage field and the Codex footer each actually report); `UNMEASURED` is honest and listed, and so is a total that was never split.
 8. **Each drafting stage has one draft, an audit, and its required co-signs** — per stage reached: exactly one `draft` by the stage's seat, at least one `audit` by the fixed auditor, a `co-sign` by the co-signing seat at stages 2 and 6. Full trains only.
 9. **Trials blind-labeled before their runtime is shown** — a trial's inputs are hash-identical to its baseline's; while either lacks a verdict, the rendered page's rows for both hide runtime, launch form and log path (the check reads the pair's own rows in `eval.html`, since gates may share a runtime).
+10. **Every `failure_code` is in the taxonomy; a quote-required code quotes its text** — a code in `labels.md` must appear in [taxonomy.md](taxonomy.md), so the column can never be free text, and `manufactured` is a finding unless the row's critique quotes the text it indicts. A blank column is the normal state and passes with a note (#296 clause 8, landed #298).
 
 **Shared machinery is provenance, not a chain link.** A seat's inputs include the studio's own files — its seat contract, a lane manifest, an artifact template — which live in the repo, outside the engagement, and keep improving after a train closes. The ticket that fixes a template is doing its job, not tampering with a record, so a repo-path input (`productcraft/…`, `systemcraft/…`, `.claude/…`) that **no pass in this engagement wrote** is counted *unverifiable* and named in a note when its hash has moved, exactly as an overwritten revision's Moves are. The recorded hash is never rewritten to match. Everything the engagement itself wrote — including a repo path some pass recorded as an output — stays strict, which is where the guarantee matters. The limit, stated plainly: this cannot tell a template edited *between* two passes of a live train from one edited a month after Close; mid-train, that belongs in the engagement's `## Notes`.
 
@@ -104,4 +106,4 @@ cd productcraft/trace && python3 tests/synth.py samples/synthetic-engagement && 
 
 ## Shared home
 
-This is the **first copy** (#272 decision 8). The content machine's kit ([#291](https://github.com/seanwinslow28/code-brain/issues/291)) shares the code rather than forking it: import `tracekit` from this folder (`frontmatter`, `labels`, `moves` and `checker` are studio-agnostic; `engagement.py` carries the seat, stage and auditor tables that are Productcraft's). `craftwork` extracts the shared home later. Rung 1 (the taxonomy, a tracked file per studio holding shapes of failure only) and rung 2 (a judge per failure mode, validated on TPR/TNR) land beside this README when they are earned.
+This is the **first copy** (#272 decision 8). The content machine's kit ([#291](https://github.com/seanwinslow28/code-brain/issues/291)) shares the code rather than forking it: import `tracekit` from this folder (`frontmatter`, `labels`, `moves` and `checker` are studio-agnostic; `engagement.py` carries the seat, stage and auditor tables that are Productcraft's). `craftwork` extracts the shared home later. Rung 1's file is here — [taxonomy.md](taxonomy.md), a tracked file per studio holding shapes of failure only — but only its **process-waste** family is filled, because that family was earned by [#296](https://github.com/seanwinslow28/code-brain/issues/296)'s investigation rather than by labels. The seat failure modes stay empty until one expert has read about thirty traces and named what he saw; nothing goes in there from an agent's classification of its own train. Rung 2 (a judge per failure mode, validated on TPR/TNR) lands beside this README when it is earned.

@@ -24,7 +24,7 @@ labeler: Sean
 - **`verdict`** — `pass` or `fail`, nothing between. "Mostly fine" fails. An empty cell is a row that still waits for a verdict; the checker counts it as unlabeled and the viewer's counter shows it.
 - **`first_failing_stage`** — set on every fail: the stage (1–7) where the problem *entered* the train, which may be upstream of the pass being read. This single column builds the transition-failure matrix (last good stage = first failing stage − 1 in a linear train), so it is never left blank on a fail and never set on a pass.
 - **`critique`** — one to three sentences a new hire could act on. Escape a pipe as `\|`; keep it on one line. Optional on a pass, expected on a fail.
-- **`failure_code`** — blank until the failure taxonomy exists (rung 1, after ~30 labels). Then a code from the studio's tracked taxonomy file, never free text.
+- **`failure_code`** — blank while rung 1 is unopened, which is the normal state. A code must be one in [taxonomy.md](taxonomy.md), never free text: `check.py`'s tenth line fails on a code outside it. Only the **process-waste** family is filled so far (`manufactured`, `stale-restatement`, `overstated-scope`, `kit-induced`) — the seat failure modes arrive after about thirty labels. `manufactured` is a finding unless the critique quotes the text it indicts, so the claim is checkable by someone other than its author.
 
 ## Rules the checker enforces
 

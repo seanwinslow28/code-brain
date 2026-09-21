@@ -12,9 +12,14 @@ run time; nothing here carries engagement content.
 along an artifact's revision chain, shared repo machinery as provenance rather
 than tampering, ledger entries hashed into the chain, and `nextid.py`.
 
+0.3.0 opens rung 1's vocabulary (#298, landing #296 clause 8): `taxonomy.md`
+holds the process-waste family, and a tenth rung-0 line keeps `failure_code`
+inside it — a code outside the table is free text, and `manufactured` is a
+finding unless the critique quotes the text it indicts.
+
 First copy. The content machine's kit (#291) shares this code rather than
 forking it; `craftwork` extracts the shared home later.
 """
 
 KIT_NAME = "productcraft/trace"
-KIT_VERSION = "0.2.0"
+KIT_VERSION = "0.3.0"

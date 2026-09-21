@@ -52,6 +52,26 @@ _Avoid_: rework, ripple, regression
 The label the Insights seat attaches to each claim in a Discovery evidence section, judged against raw-evidence pointers rather than summaries.
 _Avoid_: confidence score, rating
 
+**Repair cap**:
+Standing law since 2026-09-21: one repair round per artifact per check. A residual that survives it routes to the next scheduled gate as a candidate acceptance, or to Sean. Ratified from pc-eng-001's own mid-train amendment, not an exception to it.
+_Avoid_: retry limit, budget
+
+**Verification pass**:
+Round two of a check, run in `verify` stance with three duties — rule each repair holds or residual, attack the text the repair changed, stop. Not a fresh audit: a defect outside the changed text is a gate residual. Runs on the vendor that did not write the repair.
+_Avoid_: re-audit, second pass, follow-up review
+
+**Gate residual**:
+A defect a verification pass found outside the text the repair changed, or a finding the repair cap left open. It travels to the next scheduled gate as a candidate acceptance and is re-read against current state before Close — never a second loopback.
+_Avoid_: leftover, open issue, backlog item
+
+**Check series**:
+Every round a single check ran on a single artifact, reported at each gate as round / findings / repair size so shrinkage is visible. It ends at a verification pass that holds with no new material, or at the spent repair cap. A series that does not shrink is a variance question to Sean.
+_Avoid_: loop, cycle, iteration
+
+**Process waste**:
+A finding against the studio rather than the seat: a series past its stopping rule, a verification pass that re-audited, a recounted duplicate, or a defect a template or the trace kit caused. Coded from the taxonomy's process-waste family, never graded as a seat's failure.
+_Avoid_: false positive, noise, churn
+
 **Red-team gate**:
 A milestone check run as a stateless protocol, not by a seat, on the vendor that did not last write its anchor artifact; fires at strategy sign-off, before the handoff crosses, and at close.
 _Avoid_: audit, review
