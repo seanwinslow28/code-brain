@@ -11,15 +11,17 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from pathlib import Path
 
 from .engagement import (
     FIXED_AUDITORS, METER_SOURCES, REPO_PREFIXES as _REPO_PREFIXES, REQUIRED_COSIGNS, STAGE_SEATS,
     Engagement, Record, normalize_meter, sha256_path,
 )
 from .moves import extract_ids
+from .studio import PRODUCTCRAFT, Studio
 from .taxonomy import Taxonomy, critique_quotes, load_taxonomy
 
-__all__ = ["CHECK_NAMES", "Check", "run_checks", "format_report", "row_block"]
+__all__ = ["CHECK_NAMES", "STRUCTURE_CHECKS", "check_names", "Check", "run_checks", "format_report", "row_block"]
 
 CHECK_NAMES = (
     "Records parse and carry every required field",
@@ -34,8 +36,14 @@ CHECK_NAMES = (
     "Every failure_code is in the taxonomy; a quote-required code quotes its text",
 )
 
-_CORPUS_PATH = re.compile(r"(?<![\w/])((?:productcraft/|systemcraft/)?corpus/[\w\-./]+?\.md)")
-_STAGE_NAMES = {0: "close", 1: "Strategist", 2: "Discovery", 3: "Insights", 4: "Growth", 5: "Business", 6: "Delivery", 7: "Leadership"}
+_STRUCTURE_INDEX = 7   # rung-0 line 8 is the one check a studio writes for itself
+
+
+def check_names(studio: Studio = PRODUCTCRAFT) -> tuple[str, ...]:
+    """The ten line names in order, with the studio's own name on its structure line."""
+    names = list(CHECK_NAMES)
+    names[_STRUCTURE_INDEX] = studio.structure_check_name
+    return tuple(names)
 
 
 @dataclass
@@ -57,6 +65,10 @@ class Check:
 
 
 def run_checks(eng: Engagement, taxonomy: Taxonomy | None = None) -> list[Check]:
+    studio = eng.studio
+    if taxonomy is None:
+        taxonomy = load_taxonomy(studio.taxonomy_path) if studio.taxonomy_path is not None else load_taxonomy()
+    structure = STRUCTURE_CHECKS.get(studio.key, _no_structure_check)
     return [
         _records_parse(eng),
         _every_pass_has_a_record(eng),
@@ -65,10 +77,16 @@ def run_checks(eng: Engagement, taxonomy: Taxonomy | None = None) -> list[Check]
         _corpus(eng),
         _moves(eng),
         _meter(eng),
-        _stages(eng),
+        structure(eng),
         _blind(eng),
-        _codes(eng, taxonomy if taxonomy is not None else load_taxonomy()),
+        _codes(eng, taxonomy),
     ]
+
+
+def _no_structure_check(eng: Engagement) -> Check:
+    c = Check(eng.studio.structure_check_name)
+    c.notes.append(f"the {eng.studio.name} profile registers no structure check; nothing asserted on this line")
+    return c
 
 
 def format_report(checks: list[Check]) -> str:
@@ -100,7 +118,7 @@ def _records_parse(eng: Engagement) -> Check:
     if eng.labels_error:
         c.findings.append(f"labels.md: {eng.labels_error}")
     for e in eng.errors:
-        if e.startswith("brief.md"):
+        if e.startswith(eng.studio.brief_file):
             c.findings.append(e)
     return c
 
@@ -181,9 +199,10 @@ def _machinery_paths(eng: Engagement) -> set[str]:
     engagement's own `## Notes` is where that belongs.
     """
     written = {o.path for r in eng.records for o in r.artifact_outputs}
+    prefixes = eng.studio.repo_prefixes
     return {
         i.path for r in eng.records for i in r.inputs
-        if i.path.startswith(_REPO_PREFIXES) and i.path not in written
+        if i.path.startswith(prefixes) and i.path not in written
     }
 
 
@@ -283,6 +302,13 @@ def _same_file(a: str, b: str) -> bool:
 
 def _corpus(eng: Engagement) -> Check:
     c = Check(CHECK_NAMES[4])
+    corpus_re = eng.studio.corpus_path_re
+    if corpus_re is None:
+        c.notes.append(
+            f"{eng.studio.name} artifacts cite no corpus files by path; what a draft leaned on is "
+            f"checked under Moves instead"
+        )
+        return c
     skipped_superseded = 0
     inherited = 0
     prior = _prior_reads(eng)
@@ -310,7 +336,7 @@ def _corpus(eng: Engagement) -> Check:
                 p = eng.entry_path(o.id)
                 text = p.read_text(encoding="utf-8") if p else None
             if text:
-                for path in _CORPUS_PATH.findall(text):
+                for path in corpus_re.findall(text):
                     cited.setdefault(path, set()).update(reads)
         for path in sorted(cited):
             c.n_total += 1
@@ -378,9 +404,9 @@ def _text_has_id(text: str, item_id: str) -> bool:
     return False
 
 
-def _present(item: str, texts: list[str]) -> bool | None:
+def _present(item: str, texts: list[str], id_re: re.Pattern | None = None) -> bool | None:
     """True if every id in the item (or its phrase) appears in some text; None if nothing to test."""
-    ids = extract_ids(item)
+    ids = extract_ids(item, id_re)
     if ids:
         return all(any(_text_has_id(t, i) for t in texts) for i in ids)
     phrase = item.strip().strip('"“”').lower()
@@ -391,6 +417,7 @@ def _present(item: str, texts: list[str]) -> bool | None:
 
 def _moves(eng: Engagement) -> Check:
     c = Check(CHECK_NAMES[5])
+    id_re = eng.studio.id_re
     superseded_passes: list[str] = []
     for r in eng.records:
         state = eng.moves_state(r)
@@ -417,15 +444,15 @@ def _moves(eng: Engagement) -> Check:
                 c.n_ok += 1  # new by definition; the source is a claim rung 0 does not replay
                 continue
             targets = m.items if m.op == "merged" else [m.item]
-            verdicts = [_present(t, upstream) for t in targets]
+            verdicts = [_present(t, upstream, id_re) for t in targets]
             if all(v is True for v in verdicts):
                 ok = True
                 if m.op == "split":
                     for child in m.children:
-                        if _present(child, upstream) is True:
+                        if _present(child, upstream, id_re) is True:
                             c.findings.append(f"{r.pass_id}: split child {child} already exists upstream (line {m.lineno})")
                             ok = False
-                        elif _present(child, [own]) is False:
+                        elif _present(child, [own], id_re) is False:
                             c.findings.append(f"{r.pass_id}: split child {child} does not appear in {rel} (line {m.lineno})")
                             ok = False
                 c.n_ok += 1 if ok else 0
@@ -495,7 +522,9 @@ def _meter(eng: Engagement) -> Check:
 
 
 def _stages(eng: Engagement) -> Check:
-    c = Check(CHECK_NAMES[7])
+    """Productcraft's structure line: the fixed train's draft / audit / co-sign shape per stage."""
+    c = Check(PRODUCTCRAFT.structure_check_name)
+    names = eng.studio.stage_name
     etype = str(eng.brief.get("type") or "").lower()
     if etype and etype not in ("full-train", "full train"):
         c.notes.append(f"engagement type is {etype}: not a full train, the stage structure is not asserted")
@@ -509,14 +538,14 @@ def _stages(eng: Engagement) -> Check:
         rs = [r for r in eng.records if r.stage == s]
         drafts = [r for r in rs if r.kind == "draft"]
         if len(drafts) != 1:
-            c.findings.append(f"stage {s} {_STAGE_NAMES[s]}: {len(drafts)} drafts, expected exactly one (repairs are `kind: repair`)")
+            c.findings.append(f"stage {s} {names(s)}: {len(drafts)} drafts, expected exactly one (repairs are `kind: repair`)")
             ok = False
         elif drafts[0].seat != STAGE_SEATS[s]:
             c.findings.append(f"stage {s}: draft by {drafts[0].seat}; the drafting seat is {STAGE_SEATS[s]}")
             ok = False
         audits = [r for r in rs if r.kind == "audit"]
         if not audits:
-            c.findings.append(f"stage {s} {_STAGE_NAMES[s]}: no audit pass (the fixed auditor is {FIXED_AUDITORS[s]})")
+            c.findings.append(f"stage {s} {names(s)}: no audit pass (the fixed auditor is {FIXED_AUDITORS[s]})")
             ok = False
         for a in audits:
             if a.seat != FIXED_AUDITORS[s]:
@@ -536,6 +565,11 @@ def _stages(eng: Engagement) -> Check:
     if missing:
         c.notes.append(f"stages not yet reached: {', '.join(str(s) for s in missing)}")
     return c
+
+
+# the one rung-0 line a studio writes for itself, keyed by `Studio.key`; the content machine's
+# profile registers its own at import (`.claude/skills/content-machine/trace/machine.py`)
+STRUCTURE_CHECKS: dict[str, "callable"] = {PRODUCTCRAFT.key: _stages}
 
 
 # --------------------------------------------------------------------------- #
@@ -620,10 +654,13 @@ def _codes(eng: Engagement, tax: Taxonomy) -> Check:
     coded = [l for l in eng.labels.values() if l.failure_code]
     c = Check(CHECK_NAMES[9], n_total=len(coded))
     if not coded:
-        c.notes.append(
-            "no failure codes yet — the column stays blank until the reading names a mode"
-            if tax.open else "no failure codes yet, and no taxonomy file — rung 1 is unopened"
-        )
+        if tax.open:
+            note = "no failure codes yet — the column stays blank until the reading names a mode"
+        elif tax.path is not None and Path(tax.path).is_file():
+            note = "no failure codes yet, and the taxonomy holds no codes — rung 1 is unopened"
+        else:
+            note = "no failure codes yet, and no taxonomy file — rung 1 is unopened"
+        c.notes.append(note)
         return c
     if not tax.open:
         for l in coded:

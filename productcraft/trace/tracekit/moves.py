@@ -122,13 +122,17 @@ def parse_moves(text: str) -> Optional[MovesSection]:
     return out
 
 
-def extract_ids(text: str) -> list[str]:
+def extract_ids(text: str, pattern: Optional[re.Pattern] = None) -> list[str]:
     """Item ids like O2, OC-1a, KR-2 — ranges E1–E5 and B1-B3 expanded.
 
     Prose with no id ("Action 4") yields []; callers fall back to a phrase
-    search over the upstream text.
+    search over the upstream text. A studio whose items are named another way
+    (the content machine's `Rep 7e`, `Sample 3`) passes its own pattern, and
+    every whole match is an id — no range expansion.
     """
     text = text.strip().strip('"“”')
+    if pattern is not None:
+        return [m.group(0) for m in pattern.finditer(text)]
     out: list[str] = []
     covered: list[tuple[int, int]] = []
     for r in _RANGE.finditer(text):

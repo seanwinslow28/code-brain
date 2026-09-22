@@ -24,40 +24,23 @@ from . import KIT_NAME, KIT_VERSION
 from .cases import ASSIST_BLURB, Case, CasesDoc, Source, load_cases
 from .checker import Check, run_checks
 from .engagement import Engagement, Record, load_engagement, normalize_meter
+from .studio import PRODUCTCRAFT, PRODUCTCRAFT_CHECK_IMPLICATIONS, Studio
 from .taxonomy import Taxonomy, load_taxonomy
 
-__all__ = ["render", "render_html", "STAGES", "SEAT_NAMES", "REVIEW_PROMPTS"]
+__all__ = ["render", "render_html", "STAGES", "SEAT_NAMES", "REVIEW_PROMPTS", "run_line", "stage_name", "stage_label", "seat_name"]
 
-STAGES = {1: "Strategist", 2: "Discovery", 3: "Insights", 4: "Growth", 5: "Business", 6: "Delivery", 7: "Leadership"}
-SEAT_NAMES = {
-    "product-strategist": "Strategist", "discovery-lead": "Discovery", "insights-analytics": "Insights",
-    "growth-distribution": "Growth", "business-economics": "Business", "delivery-execution": "Delivery",
-    "product-leadership": "Leadership", "coordinator": "Coordinator", "red-team-gate": "Red-team gate",
-}
+# Productcraft's names, mirrored from the default studio profile (tracekit/studio.py); the renderer
+# reads `eng.studio`, so another studio's engagement renders with its own stages and seats.
+STAGES = PRODUCTCRAFT.stages
+SEAT_NAMES = PRODUCTCRAFT.seat_names
 FONTS_DIR = Path(__file__).resolve().parents[1] / "fonts"
 HIDDEN = "hidden with the runtime"
 
 # the plan's versioned review prompts, one per kind of run (eval-learning-plan.md §2)
-REVIEW_PROMPTS_VERSION = "v1 · 2026-09-20"
-REVIEW_PROMPTS = (
-    ("draft", "Does its work answer the assigned question within the evidence and constraints?"),
-    ("audit", "Is the claimed defect supported, consequential, and explained well enough to act on?"),
-    ("repair", "Does the new version resolve the identified issue without creating a material contradiction?"),
-    ("gate", "Are verification, residuals, and decision authority clear?"),
-)
+REVIEW_PROMPTS_VERSION = PRODUCTCRAFT.review_prompts_version
+REVIEW_PROMPTS = PRODUCTCRAFT.review_prompts
 # one sentence per rung-0 check, in CHECK_NAMES order: what a finding there means for the reading
-CHECK_IMPLICATIONS = (
-    "A record that will not parse cannot be checked at all, so treat that pass's line on this page as unread.",
-    "A pass with no record is work this page cannot show you.",
-    "A pass with no row is unfinished review, not a pass.",
-    "A hash that no longer matches means the file on disk is not the one the seat read, so a quotation into it may point at different words.",
-    "A cited corpus file the transcript never opened means the citation was not read when it was made.",
-    "A move that names nothing upstream means the artifact's history does not add up; an unverifiable move is one an overwritten revision took with it.",
-    "An unmeasured pass costs the reading nothing; it only means the token figures here are a subtotal.",
-    "A stage missing its draft, its audit or its co-sign is a train that did not run its own shape.",
-    "A blind pair whose runtime is already visible cannot produce an unbiased verdict.",
-    "A failure code outside the taxonomy is free text, and free text does not count toward a mode.",
-)
+CHECK_IMPLICATIONS = PRODUCTCRAFT_CHECK_IMPLICATIONS
 SEVERITIES = ("MATERIAL", "NOTE", "CRITICAL", "LOOPBACK", "BLOCKER")
 
 
@@ -65,16 +48,16 @@ def esc(s: object) -> str:
     return _html.escape("" if s is None else str(s), quote=True)
 
 
-def stage_name(n: int) -> str:
-    return "close" if n == 0 else STAGES.get(n, str(n))
+def stage_name(n: int, studio: Studio = PRODUCTCRAFT) -> str:
+    return studio.stage_name(n)
 
 
-def stage_label(n: int) -> str:
-    return "close" if n == 0 else f"{n} {stage_name(n)}"
+def stage_label(n: int, studio: Studio = PRODUCTCRAFT) -> str:
+    return studio.stage_label(n)
 
 
-def seat_name(slug: str) -> str:
-    return SEAT_NAMES.get(slug, slug)
+def seat_name(slug: str, studio: Studio = PRODUCTCRAFT) -> str:
+    return studio.seat_name(slug)
 
 
 def fmt_tokens(n: int) -> str:
@@ -105,9 +88,9 @@ def run_no(pass_id: str) -> str:
     return str(int(digits)) if digits else str(pass_id)
 
 
-def run_line(pass_id: str, seat: str, kind: str) -> str:
+def run_line(pass_id: str, seat: str, kind: str, studio: Studio = PRODUCTCRAFT) -> str:
     """`Run 10 · Discovery audit` — the plain-language name for a pass (plan §2)."""
-    who = seat_name(seat)
+    who = seat_name(seat, studio)
     what = "" if who.lower().endswith(kind.lower()) else f" {kind}"
     return f"Run {run_no(pass_id)} · {who}{what}".rstrip()
 
@@ -166,7 +149,7 @@ def check_record_findings(eng: Engagement) -> dict[str, object]:
     """
     names: list[str] = []
     out: dict[str, object] = {"material": 0, "note": 0, "other": 0, "files": 0, "names": names}
-    folder = eng.root / "audits"
+    folder = eng.root / eng.studio.checks_dir
     if not folder.is_dir():
         return out
     for f in sorted(folder.glob("*.md")):
@@ -198,7 +181,7 @@ def check_record_findings(eng: Engagement) -> dict[str, object]:
 def owner_dispositions(eng: Engagement) -> dict[str, int]:
     """Accepted / declined / noted / pending, from the gate findings' Disposition cells."""
     out = {"accepted": 0, "declined": 0, "noted": 0, "pending": 0}
-    folder = eng.root / "audits"
+    folder = eng.root / eng.studio.checks_dir
     if not folder.is_dir():
         return out
     for f in sorted(folder.glob("*.md")):
@@ -240,7 +223,8 @@ def render(path: Path | str, out: Optional[Path] = None, repo: Optional[Path] = 
 
 def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_on: Optional[str] = None,
                 taxonomy: Optional[Taxonomy] = None) -> str:
-    tax = taxonomy if taxonomy is not None else load_taxonomy()
+    S = eng.studio
+    tax = taxonomy if taxonomy is not None else (load_taxonomy(S.taxonomy_path) if S.taxonomy_path is not None else load_taxonomy())
     checks = checks if checks is not None else run_checks(eng, tax)
     rendered_on = rendered_on or _dt.date.today().isoformat()
     P = eng.records
@@ -352,7 +336,9 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
 """)
 
     # ---- where it broke -----------------------------------------------------
-    cols, rows = list(range(1, 8)), list(range(0, 7))
+    cols = S.stage_numbers                       # first failing stage
+    start_row = S.first_stage - 1                # "start": nothing good yet
+    rows = [start_row] + S.stage_numbers[:-1]    # last good stage
     th = "".join(f"<th scope='col'>{c}</th>" for c in cols)
     trs = []
     for r_ in rows:
@@ -364,7 +350,7 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
             n = matrix.get((r_, c_), 0)
             cls = "z" if n == 0 else ("c3" if n >= 3 else ("c2" if n == 2 else "c1"))
             tds.append(f"<td class='{cls}'><span>{n if n else '·'}</span></td>")
-        trs.append(f"<tr><th scope='row'>{'start' if r_ == 0 else stage_name(r_)} {'' if r_ == 0 else r_}</th>{''.join(tds)}</tr>")
+        trs.append(f"<tr><th scope='row'>{'start' if r_ == start_row else S.stage_name(r_)} {'' if r_ == start_row else r_}</th>{''.join(tds)}</tr>")
     heat_note = f"{n_fail} fails so far, which is too few for a heat: read the numbers." if n_fail < 10 else f"{n_fail} labeled fails."
     matrix_html = f"""
 <table class="matrix" aria-describedby="matrix-cap">
@@ -375,12 +361,12 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
 <p class="cap" id="matrix-cap">Counts of labeled fails. {heat_note} Hatched cells cannot occur in a linear train.</p>
 """
     stage_rows = []
-    for s in range(1, 8):
+    for s in S.stage_numbers:
         d = per_stage.get(s, dict(passes=0, ok=0, fail=0, unl=0))
         bar = ("".join("<i class='ok' style='width:14px' title='pass'></i>" for _ in range(d["ok"]))
                + "".join("<i class='fail' style='width:14px' title='fail'></i>" for _ in range(d["fail"]))
                + "".join("<i class='unl' style='width:14px' title='unlabeled'></i>" for _ in range(d["unl"])))
-        stage_rows.append(f"<li><span>{s} {stage_name(s)}</span><span class='bar' aria-hidden='true'>{bar}</span><span class='n'>{d['ok']} pass · {d['fail']} fail{' · ' + str(d['unl']) + ' open' if d['unl'] else ''}</span></li>")
+        stage_rows.append(f"<li><span>{s} {S.stage_name(s)}</span><span class='bar' aria-hidden='true'>{bar}</span><span class='n'>{d['ok']} pass · {d['fail']} fail{' · ' + str(d['unl']) + ' open' if d['unl'] else ''}</span></li>")
     stages_html = f"""
 <h3>Passes per stage</h3>
 <ul class="stages">{''.join(stage_rows)}</ul>
@@ -388,7 +374,7 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
 """
     if fails:
         fails_html = "".join(
-            f"<li><div class='who'><b><a href='#{esc(r.pass_id)}' data-jump>{esc(r.pass_id)}</a></b>{esc(seat_name(r.seat))} {esc(r.kind)}<br>broke at {f} {esc(stage_name(f))}</div>"
+            f"<li><div class='who'><b><a href='#{esc(r.pass_id)}' data-jump>{esc(r.pass_id)}</a></b>{esc(S.seat_name(r.seat))} {esc(r.kind)}<br>broke at {f} {esc(S.stage_name(f))}</div>"
             f"<div class='why'>{esc(crit) or '<span class=sub>no critique yet</span>'}<small>{'upstream of the pass read' if r.stage and f < r.stage else 'at the pass read'}</small></div></li>"
             for r, f, crit in fails)
     else:
@@ -400,35 +386,39 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
   <div>
     <h3>The {n_fail} fails, first failure named</h3>
     <ul class="fails">{fails_html}</ul>
-    {_rung_html(checks)}
+    {_rung_html(checks, S)}
   </div>
 </div>
 """)
 
     # ---- train ----------------------------------------------------------------
-    colx = {s: 150 + (s - 1) * 120 for s in range(1, 8)}
-    colx[0] = 150 + 7 * 120
+    colx = {s: 150 + i * 120 for i, s in enumerate(S.stage_numbers)}
+    columns = list(S.stage_numbers)
+    if S.coordinator_stage is not None:          # the coordinator's own passes sit in a last column
+        colx[S.coordinator_stage] = 150 + len(S.stage_numbers) * 120
+        columns.append(S.coordinator_stage)
+    last_col = max(colx.values())
     rowh, top = 26, 40
     svg_h = top + rowh * max(total, 1) + 20
-    svg_w = colx[0] + 90
+    svg_w = last_col + 90
     idx = {r.pass_id: i for i, r in enumerate(P)}
     parts = [f'<svg viewBox="0 0 {svg_w} {svg_h}" width="{svg_w}" role="img" aria-labelledby="train-title">',
              '<title id="train-title">The train: every pass in order, on its stage.</title>',
              '<defs><marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L8 4 0 8z" fill="var(--ink)"/></marker></defs>',
              '<g class="grid">']
-    for s in list(range(1, 8)) + [0]:
+    for s in columns:
         x = colx[s]
         parts.append(f'<line x1="{x}" y1="{top - 10}" x2="{x}" y2="{svg_h - 10}"/>')
-        parts.append(f'<text x="{x}" y="{top - 18}" text-anchor="middle">{esc(stage_label(s))}</text>')
+        parts.append(f'<text x="{x}" y="{top - 18}" text-anchor="middle">{esc(S.stage_label(s))}</text>')
     parts.append('</g>')
-    pts = [(colx.get(r.stage, colx[0]), top + i * rowh + rowh / 2) for i, r in enumerate(P)]
+    pts = [(colx.get(r.stage, last_col), top + i * rowh + rowh / 2) for i, r in enumerate(P)]
     if pts:
         parts.append('<polyline class="lane" fill="none" points="' + " ".join(f"{x},{y}" for x, y in pts) + '"/>')
     for i, r in enumerate(P):
         x, y = pts[i]
         v, k = verdict(r.pass_id), r.kind
         parts.append(f'<text class="pid" x="8" y="{y + 4}">{esc(r.pass_id)}</text>')
-        parts.append(f'<text x="64" y="{y + 4}">{esc("gate" if r.seat == "red-team-gate" else seat_name(r.seat))}</text>')
+        parts.append(f'<text x="64" y="{y + 4}">{esc("gate" if r.seat in S.gate_seats else S.seat_name(r.seat))}</text>')
         if k == "draft":
             parts.append(f'<rect class="m-draft" x="{x - 5}" y="{y - 5}" width="10" height="10"/>')
         elif k == "repair":
@@ -498,7 +488,7 @@ def render_html(eng: Engagement, checks: Optional[list[Check]] = None, rendered_
 </div>
 <footer>
   <span>Rendered {esc(rendered_on)} from {total} records and {n_label_rows} label rows. The records are the truth; this page is a view of them.</span>
-  <span>{esc(KIT_NAME)} · kit {esc(KIT_VERSION)}</span>
+  <span>{esc(S.name)} · {esc(KIT_NAME)} · kit {esc(KIT_VERSION)}</span>
 </footer>
 </div>
 <dialog id="keys" aria-labelledby="keys-title">
@@ -555,8 +545,8 @@ def _judging_html(eng: Engagement, checks: list[Check], clean: int, n_checks: in
         if disp["declined"]:
             owner += f" · {disp['declined']} declined"
     prompts = "".join(
-        f"<tr><th scope='row'>{esc(kind)}</th><td>{esc(q)}</td></tr>" for kind, q in REVIEW_PROMPTS)
-    files_note = (f" Read from {findings['files']} check record{'' if findings['files'] == 1 else 's'} in <code>audits/</code>."
+        f"<tr><th scope='row'>{esc(kind)}</th><td>{esc(q)}</td></tr>" for kind, q in eng.studio.review_prompts)
+    files_note = (f" Read from {findings['files']} check record{'' if findings['files'] == 1 else 's'} in <code>{esc(eng.studio.checks_dir)}/</code>."
                   if findings["files"] else "")
     noted_note = f" {disp['noted']} more are noted and ask for nothing." if disp["noted"] else ""
     return f"""
@@ -584,7 +574,7 @@ def _judging_html(eng: Engagement, checks: list[Check], clean: int, n_checks: in
   </div>
 </div>
 <table class="prompts">
-  <caption>What to ask of each kind of run <span class="sub">— teaching prompts to calibrate, {esc(REVIEW_PROMPTS_VERSION)}, not an automated grader</span></caption>
+  <caption>What to ask of each kind of run <span class="sub">— teaching prompts to calibrate, {esc(eng.studio.review_prompts_version)}, not an automated grader</span></caption>
   <tbody>{prompts}</tbody>
 </table>
 """
@@ -595,14 +585,14 @@ def _judging_html(eng: Engagement, checks: list[Check], clean: int, n_checks: in
 # --------------------------------------------------------------------------- #
 
 
-def _rung_html(checks: list[Check]) -> str:
+def _rung_html(checks: list[Check], studio: Studio = PRODUCTCRAFT) -> str:
     items = []
     for i, c in enumerate(checks):
         state = "failed" if not c.ok else ("unverifiable in part" if c.n_unverifiable else "verified")
         glyph = icon("check") if c.ok else icon("cross")
         why = "".join(f"<li>{esc(f)}</li>" for f in c.findings)
         notes = "".join(f"<li class='sub'>{esc(n)}</li>" for n in c.notes)
-        implication = CHECK_IMPLICATIONS[i] if i < len(CHECK_IMPLICATIONS) else ""
+        implication = studio.check_implications[i] if i < len(studio.check_implications) else ""
         body = ""
         if why:
             body += f"<ul class='why'>{why}</ul>"
@@ -680,7 +670,7 @@ def _guided_html(eng: Engagement, doc: Optional[CasesDoc]) -> str:
 <div class="guided empty"><p>No case in <code>cases.md</code> could be read.</p>{errors_html}</div>
 """
     by_id = eng.by_id
-    chapters = "".join(_chapter_html(doc, c, i + 1, by_id.get(c.pass_id)) for i, c in enumerate(doc.cases))
+    chapters = "".join(_chapter_html(doc, c, i + 1, by_id.get(c.pass_id), eng.studio) for i, c in enumerate(doc.cases))
     links = "".join(
         f'<a href="#case-{esc(c.key)}" data-case-link>{i + 1}. {esc(c.title)}</a>' for i, c in enumerate(doc.cases))
     status = ("Every case here has been read against its sources." if doc.reviewed else
@@ -802,8 +792,8 @@ def _practice_html(case: Case) -> str:
 </div>"""
 
 
-def _chapter_html(doc: CasesDoc, case: Case, n: int, rec: Optional[Record]) -> str:
-    run = run_line(case.pass_id, rec.seat if rec else "", rec.kind if rec else "") if rec else f"Run {run_no(case.pass_id)}"
+def _chapter_html(doc: CasesDoc, case: Case, n: int, rec: Optional[Record], studio: Studio = PRODUCTCRAFT) -> str:
+    run = run_line(case.pass_id, rec.seat if rec else "", rec.kind if rec else "", studio) if rec else f"Run {run_no(case.pass_id)}"
     finding = f" · finding {esc(case.finding)}" if case.finding else ""
     evidence = "".join(_source_html(s) for s in case.sources) or "<p class='sub'>No source is named for this case.</p>"
     story = "".join(f"<p>{esc(p)}</p>" for p in case.story)
@@ -817,7 +807,7 @@ def _chapter_html(doc: CasesDoc, case: Case, n: int, rec: Optional[Record]) -> s
     qualified = ("<p class='qualified'>One source of this case has changed or gone missing since the case was "
                  "written, so read it as a qualified story.</p>" if case.qualified else "")
     notes = "".join(f"<p class='qualified'>{esc(x)}</p>" for x in case.notes)
-    row_link = f'<p class="case-foot"><a href="#{esc(case.pass_id)}" data-jump>Open {esc(run_line(case.pass_id, rec.seat, rec.kind)) if rec else esc(case.pass_id)}’s row below</a> to label it.</p>' if rec else ""
+    row_link = f'<p class="case-foot"><a href="#{esc(case.pass_id)}" data-jump>Open {esc(run_line(case.pass_id, rec.seat, rec.kind, studio)) if rec else esc(case.pass_id)}’s row below</a> to label it.</p>' if rec else ""
     hint = (f'<details class="help" data-exposure="hint"><summary>Give me one hint</summary><p>{esc(case.hint)}</p></details>' 
             if case.hint else "")
 
@@ -935,6 +925,7 @@ def _meter_counts(m: dict[str, int]) -> str:
 
 def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit: str, pair: Optional[str], blind: bool,
          code: str = "", tax: Optional[Taxonomy] = None) -> str:
+    S = eng.studio
     pid = esc(p.pass_id)
     rt_html = f"<span class='hidden-rt'>{icon('eye')} hidden</span>" if blind else esc(p.runtime or "—")
     vcls = "unl" if not v else v
@@ -953,13 +944,13 @@ def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit:
     tok = "—" if unmeasured else fmt_tokens(m["total"])
     summary = f"""
 <summary>
-  <span class="run"><b>Run {run_no(p.pass_id)}</b> · <span class="seat">{esc(seat_name(p.seat))}</span>{'' if seat_name(p.seat).lower().endswith(p.kind.lower()) else f' <span class="kind">{esc(p.kind)}</span>'}{tags}<span class="pid-sub">{pid}</span></span>
-  <span class="kind">{esc(stage_label(p.stage))}</span>
+  <span class="run"><b>Run {run_no(p.pass_id)}</b> · <span class="seat">{esc(S.seat_name(p.seat))}</span>{'' if S.seat_name(p.seat).lower().endswith(p.kind.lower()) else f' <span class="kind">{esc(p.kind)}</span>'}{tags}<span class="pid-sub">{pid}</span></span>
+  <span class="kind">{esc(S.stage_label(p.stage))}</span>
   <span class="rt">{rt_html}</span>
   <span class="wc">{fmt_minutes(p.wall_clock_s)}</span>
   <span class="tok" title="input + output tokens">{tok}</span>
   <span class="verdict {vcls}" data-verdict-cell>{vicon}<span data-verdict-word>{vlabel}</span></span>
-  <span class="crit" data-crit-cell>{esc(crit) if crit else ('<span class="ffs">' + (f'broke at {ffs} {esc(stage_name(ffs))}' if ffs else '') + '</span>')}</span>
+  <span class="crit" data-crit-cell>{esc(crit) if crit else ('<span class="ffs">' + (f'broke at {ffs} {esc(S.stage_name(ffs))}' if ffs else '') + '</span>')}</span>
 </summary>"""
     inputs = "".join(f"<li>{esc(i.path)}<span class='hash'>{esc(i.sha256[:12])}…</span></li>" for i in p.inputs) or "<li class='sub'>none</li>"
     withheld = "".join(f"<li>{esc(w)}</li>" for w in p.withheld) or "<li class='sub'>none listed</li>"
@@ -973,7 +964,7 @@ def _row(eng: Engagement, p: Record, v: Optional[str], ffs: Optional[int], crit:
     else:
         meter_html = "UNMEASURED" if unmeasured else f"{_meter_counts(m)} <span class='sub'>({esc(p.meter_source)})</span>"
         launch, raw_log = esc(p.launch or "—"), esc(p.raw_log or "—")
-    ffs_opts = "".join(f"<option value='{s}'{' selected' if ffs == s else ''}>{s} {esc(stage_name(s))}</option>" for s in range(1, 8))
+    ffs_opts = "".join(f"<option value='{s}'{' selected' if ffs == s else ''}>{s} {esc(S.stage_name(s))}</option>" for s in S.stage_numbers)
     blind_note = f"<p class='blind-note'>{icon('eye')} Blind pair with {esc(pair)}: the runtime and launch form stay hidden until both passes carry a verdict.</p>" if blind else ""
     form = f"""
 <div class="label-form" data-label-form data-pass="{pid}">

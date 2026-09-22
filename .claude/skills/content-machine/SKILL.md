@@ -112,6 +112,21 @@ compliance collapse plus three measured runs — see the research note. Ratified
 shaper only when Sean routes one into the corpus or samples, or when a lesson's rider is short
 enough to live in the law itself (L4-06 above).
 
+**The shaper's card closes with a `## Moves` section — asked for *after* the draft, never in the
+drafting prompt** (ruled 2026-09-11 on [#261](https://github.com/seanwinslow28/code-brain/issues/261),
+built 2026-09-22 on [#291](https://github.com/seanwinslow28/code-brain/issues/291)). Once the draft is
+back, the orchestrator sends the same shaper one follow-up turn: *list what the draft took from the
+files you were given and what it made* — `kept` / `added` / `split` / `merged` / `dropped`, each
+naming its source rep exactly as the file labels it (`Rep 7e`, `Sample 2`). The section is appended
+to the card below the ORIGIN LEDGER; the record's output hash is taken after it lands. It is a
+**report about the draft**, not an instruction to the drafting, and it is elicited afterwards so the
+drafting prompt stays byte-identical to today's — the [#258](https://github.com/seanwinslow28/code-brain/issues/258)
+falsifier and the [#259](https://github.com/seanwinslow28/code-brain/issues/259) arming gate measure
+the same context they did before. The grammar and the reason it exists (the hour #258 spent
+rebuilding by hand which samples a deck had imitated) are in
+[`trace/record-template.md`](trace/record-template.md). *Not the voice-move roster*: the word is the
+trace kit's, and a `kept` line is a provenance claim, not a licence.
+
 **Where there is no transcript, slot 1 holds the stimulus block** (ruled 2026-09-06 on
 [#255](https://github.com/seanwinslow28/code-brain/issues/255), X's reactive route). The shaper
 cannot write a reply to a post it cannot see, so the block goes into the context **verbatim and
@@ -238,8 +253,10 @@ gap-fill the law exists to prevent.
 
 ### Stage 3 → DRAFT + ORIGIN LEDGER
 
-The draft ships with two attachments. The Voice Decision Record is `writing-voice-modes`' own
-(mode, dial, moves deployed, sweeps run). The Origin Ledger is this machine's:
+The draft ships with two attachments, and since #291 a third. The Voice Decision Record is
+`writing-voice-modes`' own (mode, dial, moves deployed, sweeps run). The Origin Ledger is this
+machine's; the `## Moves` section is the trace kit's, elicited from the shaper after the draft
+(see The shaping context) and read by rung 0 of [the trace](#the-trace):
 
 ```
 ORIGIN LEDGER
@@ -415,6 +432,44 @@ about what would draw a reply, binding on nothing (`contracts/expressive/LANE.md
    to his prose written outside the machine — and "recomputes on every ship" is this step. It is
    maintenance, not a ruling. The corpus band never takes a hand-rewrite; promoting prose into the
    corpus or `voice-samples.md` is a separate act and the only one that changes what gets written.
+8. **Close the trace** (added 2026-09-22, [#291](https://github.com/seanwinslow28/code-brain/issues/291)).
+   Records were written as each stage fired (see The trace, below); at deck close or ship, run the
+   rung-0 checker and the viewer, then Sean sweeps the labels so every pass has a row:
+
+   ```bash
+   python3 .claude/skills/content-machine/trace/check.py creative-studio/content-machine/pieces/<run>
+   ```
+
+   ```bash
+   python3 .claude/skills/content-machine/trace/render.py creative-studio/content-machine/pieces/<run>
+   ```
+
+## The trace
+
+Every run leaves a record of itself, per the design resolved on
+[#261](https://github.com/seanwinslow28/code-brain/issues/261) and built on
+[#291](https://github.com/seanwinslow28/code-brain/issues/291): **one immutable markdown record per
+stage invocation** — the Oracle run or sweep, each stimulus block or interview, each shape, each gate,
+the pick, the lesson — in `creative-studio/content-machine/pieces/<run>/trace/`, beside the deck or
+piece files, private because `pieces/` is. A record carries the machine's stage number, the runtime
+and verbatim launch form, exact instants, the meter as the runtime reported it or `UNMEASURED`,
+**every file handed over with a content hash** (for a shape, that is the whole clean context, which
+is how the context becomes auditable), what was withheld, the outputs with their hashes, and a pointer
+to the raw transcript. Sean's verdicts live apart in `trace/labels.md` (pass | fail, first failing
+stage 0–6, critique). A rung-0 checker asserts, with no model and no network, that every invocation
+has a record and a label row, that hashes match disk, that every rep a `## Moves` line names was in
+the clean context, and that **each shape ran in the clean context (no banned file among its inputs,
+a transcript or block among them, every slot actually opened), was gated at the hash it returned, and
+reached the pick.** A self-contained local HTML per run renders the records with the last-good ×
+first-failing transition matrix; it is never a hosted artifact, because it carries his drafts.
+
+The code is the Productcraft kit's, imported from `productcraft/trace/` through a studio profile —
+this machine's stages, kinds and seats live in [`trace/machine.py`](trace/machine.py) and nothing is
+forked. Templates, the seat and kind tables and the Moves grammar: [`trace/README.md`](trace/README.md).
+The orchestrating session writes the records (launch fields before a stage fires, completion fields
+after); the shaper writes only its `## Moves`; Sean writes only labels. Rung 1 (a failure taxonomy)
+opens after about thirty labels; rung 2 (a judge) only for a mode that recurs — [`trace/taxonomy.md`](trace/taxonomy.md)
+is deliberately empty until then.
 
 ## The lessons loop
 
@@ -557,6 +612,7 @@ Read-only inputs, all git-ignored, all local:
 | `creative-studio/content-machine/watchlist.md` | The accounts X's route-1 sweep reads, in three lanes (#251). Per-machine: a fresh clone and the Mac Mini have none, and `x/stimulus.py` refuses to sweep nothing rather than reporting clean. Lane C is admitted **by eye, never by metric** — the first harvest ranked an antisemitic account top on every number available. |
 | `creative-studio/content-machine/ledger/` | Ratified lessons |
 | `creative-studio/content-machine/ideas-bank.md` | Every Oracle run, **before** scoring — a thin spike from three weeks ago may have an ending now |
+| `creative-studio/content-machine/pieces/<run>/trace/` | Closing any run (#291): the stage records, Sean's labels and the rendered viewer. Written by the orchestrating session as stages fire; private because `pieces/` is. Never quote a record's critique into a ticket — it is the field most likely to carry his words. |
 
 Nothing from these paths is ever quoted into a tracked file, a GitHub issue, or a commit message.
 The repo is public.

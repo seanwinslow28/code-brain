@@ -41,13 +41,14 @@ def _split_row(line: str) -> list[str]:
     return [c.replace(_ESCAPED_PIPE, "|").strip() for c in cells]
 
 
-def parse_labels(text: str) -> dict[str, Label]:
+def parse_labels(text: str, stages: Optional[list[int]] = None) -> dict[str, Label]:
     """Return {pass_id: Label} for the first table whose header is COLUMNS.
 
     A file with no table (labels not started) yields {}. A table with the
     wrong header, an unknown verdict, a fail without its first failing stage,
     or a duplicated pass id raises LabelsError naming the row.
     """
+    allowed = sorted(stages) if stages else list(range(0, 8))   # Productcraft's 0–7 when no studio is named
     lines = text.split("\n")
     out: dict[str, Label] = {}
     i = 0
@@ -75,8 +76,10 @@ def parse_labels(text: str) -> dict[str, Label]:
                     raise LabelsError(f"{pid}: verdict must be pass or fail, nothing between; got {verdict!r}")
                 stage: Optional[int] = None
                 if ffs:
-                    if not re.fullmatch(r"[0-7]", ffs):
-                        raise LabelsError(f"{pid}: first_failing_stage must be a stage number 1–7, got {ffs!r}")
+                    if not re.fullmatch(r"-?\d+", ffs) or int(ffs) not in allowed:
+                        raise LabelsError(
+                            f"{pid}: first_failing_stage must be a stage number {allowed[0]}–{allowed[-1]}, got {ffs!r}"
+                        )
                     stage = int(ffs)
                 if v == "fail" and stage is None:
                     raise LabelsError(f"{pid}: a fail must name its first failing stage")

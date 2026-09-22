@@ -181,6 +181,12 @@ In order, after the deck is handed back:
 8. **File or bank.** A fault in the cards files a wayfinder ticket on
    [#158](https://github.com/seanwinslow28/code-brain/issues/158) carrying the split and his sentence;
    a preference or a topic banks the entry and stops. Ambiguous means ask him.
+9. **Close the trace** ([#291](https://github.com/seanwinslow28/code-brain/issues/291)). The
+   records for the sweep, each block, each shape (with its `## Moves` elicited after the draft), each
+   gate, the pick and the deck entry are already in `pieces/<date>-x-deck/trace/`; run
+   `trace/check.py` and `trace/render.py` on the deck folder, then he sweeps `trace/labels.md` so
+   every pass carries a verdict — a cut card is a `fail` with its first failing stage, which is the
+   deck-fault ticket's number too. `SKILL.md`, *The trace*.
 
 **Never route a deck lesson into this contract directly.** The first deck's own axis was falsified by
 the audit that followed it ([#258](https://github.com/seanwinslow28/code-brain/issues/258)); a

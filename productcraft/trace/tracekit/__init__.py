@@ -29,9 +29,17 @@ counts, the rung-0 clean count, medians over measured passes, trials and
 promotions — so no number in that public file is ever typed by hand; the
 meter-source vocabulary grows to one value per registry row, with a drift test.
 
+0.6.0 makes the kit studio-agnostic (#291): a `Studio` profile (`studio.py`)
+holds the one set of things the two studios disagree on — stages, kinds, the
+kinds that own `## Moves`, gate seats, repo path prefixes, item-id shape, the
+taxonomy file, one structure check — and the loader, checker and viewer read it
+from the engagement. `PRODUCTCRAFT` is the default profile, so nothing that
+called the kit before changes meaning; the content machine's profile lives
+beside the machine and imports `tracekit` from here.
+
 First copy. The content machine's kit (#291) shares this code rather than
 forking it; `craftwork` extracts the shared home later.
 """
 
 KIT_NAME = "productcraft/trace"
-KIT_VERSION = "0.5.0"
+KIT_VERSION = "0.6.0"

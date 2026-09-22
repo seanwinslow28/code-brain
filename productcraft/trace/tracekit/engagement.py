@@ -27,16 +27,19 @@ from typing import Any, Optional
 from .frontmatter import FrontmatterError, split_frontmatter
 from .labels import Label, LabelsError, parse_labels
 from .moves import MovesSection, parse_moves
+from .studio import PRODUCTCRAFT, Studio
 
 __all__ = [
     "KINDS", "COORDINATOR_KINDS", "METER_SOURCES", "REPO_PREFIXES", "normalize_meter", "meter_is_measured", "REQUIRED_FIELDS", "STAGE_SEATS", "FIXED_AUDITORS", "REQUIRED_COSIGNS",
     "InputRef", "OutputRef", "CheckRef", "Record", "Engagement",
-    "load_engagement", "resolve_path", "sha256_path", "find_repo_root",
+    "load_engagement", "resolve_path", "sha256_path", "find_repo_root", "Studio", "PRODUCTCRAFT",
 ]
 
-KINDS = ("draft", "audit", "co-sign", "gate", "repair", "trial", "open", "readout", "close")
+# Productcraft's vocabulary, mirrored from the default studio profile (tracekit/studio.py) for callers
+# that predate profiles; a loader reads its studio, never these.
+KINDS = PRODUCTCRAFT.kinds
 # the coordinator's own passes: no seat fires, so there is no drafting conversation to withhold
-COORDINATOR_KINDS = ("open", "readout", "close")
+COORDINATOR_KINDS = PRODUCTCRAFT.coordinator_kinds
 # one value per runtime-registry row (productcraft/templates/runtime-registry.md § Meter-source vocabulary);
 # a test fails if the two drift. A value names where the number came from, never how good it is.
 METER_SOURCES = (
@@ -67,11 +70,8 @@ FIXED_AUDITORS = {
 # the co-sign touches that produce a pass (#266): stage → co-signing seat
 REQUIRED_COSIGNS = {2: "insights-analytics", 6: "product-strategist"}
 
-REPO_PREFIXES = ("productcraft/", "systemcraft/", ".claude/")
+REPO_PREFIXES = PRODUCTCRAFT.repo_prefixes
 _REPO_PREFIXES = REPO_PREFIXES   # the old private name, kept for callers inside this module
-_RECORD_NAME = re.compile(
-    r"^(pass-\d{2,})-([a-z0-9\-]+)-(draft|audit|co-sign|gate|repair|trial|open|readout|close)\.md$"
-)
 
 
 @dataclass(frozen=True)
@@ -121,6 +121,7 @@ class Record:
     notes: str = ""
     raw: dict[str, Any] = field(default_factory=dict)
     errors: list[str] = field(default_factory=list)
+    forward_kinds: tuple[str, ...] = PRODUCTCRAFT.forward_kinds   # set by the loader from its studio
 
     @property
     def artifact_outputs(self) -> list[OutputRef]:
@@ -128,7 +129,7 @@ class Record:
 
     @property
     def hands_forward(self) -> bool:
-        return self.kind in ("draft", "repair", "trial")
+        return self.kind in self.forward_kinds
 
 
 @dataclass
@@ -136,6 +137,7 @@ class Engagement:
     root: Path
     trace_dir: Path
     repo: Optional[Path]
+    studio: Studio = PRODUCTCRAFT
     brief: dict[str, Any] = field(default_factory=dict)
     records: list[Record] = field(default_factory=list)
     labels: dict[str, Label] = field(default_factory=dict)
@@ -159,7 +161,7 @@ class Engagement:
         return str(self.brief.get("name") or self.root.name)
 
     def resolve(self, rel: str) -> Optional[Path]:
-        return resolve_path(self.root, self.repo, rel)
+        return resolve_path(self.root, self.repo, rel, self.studio.repo_prefixes)
 
     def read_text(self, rel: str) -> Optional[str]:
         """Text of a path in the engagement (or repo), cached; None if absent or binary."""
@@ -287,21 +289,22 @@ def meter_is_measured(meter: Optional[dict[str, Any]]) -> bool:
 # --------------------------------------------------------------------------- #
 
 
-def find_repo_root(start: Path) -> Optional[Path]:
+def find_repo_root(start: Path, markers: tuple[str, ...] = PRODUCTCRAFT.root_markers) -> Optional[Path]:
     for p in [start] + list(start.parents):
-        if (p / "CLAUDE.md").is_file() and (p / "productcraft").is_dir():
+        if (p / "CLAUDE.md").is_file() and any((p / m).is_dir() for m in markers):
             return p
     return None
 
 
-def resolve_path(root: Path, repo: Optional[Path], rel: str) -> Optional[Path]:
+def resolve_path(root: Path, repo: Optional[Path], rel: str,
+                 prefixes: tuple[str, ...] = PRODUCTCRAFT.repo_prefixes) -> Optional[Path]:
     rel = rel.strip()
     if not rel or rel in ("—", "-", "none"):
         return None
     candidate = root / rel
     if candidate.exists():
         return candidate
-    if repo is not None and rel.startswith(_REPO_PREFIXES):
+    if repo is not None and rel.startswith(prefixes):
         candidate = repo / rel
         if candidate.exists():
             return candidate
@@ -345,20 +348,23 @@ def _as_str(v: Any) -> str:
     return "" if v is None else str(v)
 
 
-def _record_from(fm: dict[str, Any], body: str, file: Path) -> Record:
-    r = Record(pass_id=_as_str(fm.get("pass")), file=file, raw=fm)
+def _record_from(fm: dict[str, Any], body: str, file: Path, studio: Studio = PRODUCTCRAFT) -> Record:
+    r = Record(pass_id=_as_str(fm.get("pass")), file=file, raw=fm, forward_kinds=studio.forward_kinds)
+    stage_numbers = studio.all_stage_numbers
     for key in REQUIRED_FIELDS:
         if key not in fm:
             r.errors.append(f"{file.name}: missing required field `{key}`")
     r.seat = _as_str(fm.get("seat"))
     r.kind = _as_str(fm.get("kind"))
-    if r.kind and r.kind not in KINDS:
-        r.errors.append(f"{file.name}: kind `{r.kind}` is not one of {', '.join(KINDS)}")
+    if r.kind and r.kind not in studio.kinds:
+        r.errors.append(f"{file.name}: kind `{r.kind}` is not one of {', '.join(studio.kinds)}")
     stage = fm.get("stage")
-    if isinstance(stage, int) and 0 <= stage <= 7:
+    if isinstance(stage, int) and not isinstance(stage, bool) and stage in stage_numbers:
         r.stage = stage
     elif "stage" in fm:
-        r.errors.append(f"{file.name}: stage must be an integer 0–7, got {stage!r}")
+        r.errors.append(
+            f"{file.name}: stage must be an integer {stage_numbers[0]}–{stage_numbers[-1]}, got {stage!r}"
+        )
     r.runtime, r.launch, r.effort = _as_str(fm.get("runtime")), _as_str(fm.get("launch")), _as_str(fm.get("effort"))
     r.launched, r.completed = _as_str(fm.get("launched")), _as_str(fm.get("completed"))
     wc = fm.get("wall_clock_s")
@@ -379,8 +385,9 @@ def _record_from(fm: dict[str, Any], body: str, file: Path) -> Record:
         r.errors.append(f"{file.name}: inputs must be a list")
     withheld = fm.get("withheld")
     r.withheld = [str(w) for w in withheld] if isinstance(withheld, list) else []
-    if "withheld" in fm and "the drafting conversation" not in r.withheld and r.kind not in COORDINATOR_KINDS:
-        r.errors.append(f"{file.name}: withheld must include `the drafting conversation`")
+    need = studio.withheld_required
+    if need and "withheld" in fm and need not in r.withheld and r.kind not in studio.coordinator_kinds:
+        r.errors.append(f"{file.name}: withheld must include `{need}`")
     for item in fm.get("outputs") or []:
         if isinstance(item, dict) and item.get("path"):
             r.outputs.append(OutputRef(path=str(item["path"]), sha256=_as_str(item.get("sha256")) or None))
@@ -418,23 +425,25 @@ def _locate(path: Path) -> tuple[Path, Path]:
     return path, path / "trace"
 
 
-def load_engagement(path: Path | str, repo: Optional[Path] = None) -> Engagement:
+def load_engagement(path: Path | str, repo: Optional[Path] = None, studio: Optional[Studio] = None) -> Engagement:
+    studio = studio or PRODUCTCRAFT
     root, trace_dir = _locate(Path(path))
-    eng = Engagement(root=root, trace_dir=trace_dir, repo=repo or find_repo_root(root))
-    brief = root / "brief.md"
+    eng = Engagement(root=root, trace_dir=trace_dir, repo=repo or find_repo_root(root, studio.root_markers), studio=studio)
+    record_name = studio.record_name_re()
+    brief = root / studio.brief_file
     if brief.is_file():
         try:
             eng.brief, _ = split_frontmatter(brief.read_text(encoding="utf-8"))
         except FrontmatterError as e:
-            eng.errors.append(f"brief.md: {e}")
+            eng.errors.append(f"{studio.brief_file}: {e}")
     for f in sorted(trace_dir.glob("pass-*.md")):
         try:
             fm, body = split_frontmatter(f.read_text(encoding="utf-8"))
         except (FrontmatterError, UnicodeDecodeError) as e:
             eng.errors.append(f"{f.name}: {e}")
             continue
-        rec = _record_from(fm, body, f)
-        m = _RECORD_NAME.match(f.name)
+        rec = _record_from(fm, body, f, studio)
+        m = record_name.match(f.name)
         if not m:
             rec.errors.append(f"{f.name}: filename is not pass-NN-<seat>-<kind>.md")
         elif (m.group(1), m.group(2), m.group(3)) != (rec.pass_id, rec.seat, rec.kind):
@@ -449,7 +458,7 @@ def load_engagement(path: Path | str, repo: Optional[Path] = None) -> Engagement
     labels = trace_dir / "labels.md"
     if labels.is_file():
         try:
-            eng.labels = parse_labels(labels.read_text(encoding="utf-8"))
+            eng.labels = parse_labels(labels.read_text(encoding="utf-8"), stages=studio.all_stage_numbers)
         except LabelsError as e:
             eng.labels_error = str(e)
     notes = trace_dir / "notes.md"

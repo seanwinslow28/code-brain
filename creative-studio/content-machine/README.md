@@ -39,6 +39,7 @@ The machine is tracked here and in `.claude/skills/content-machine/`. Its brain 
 | `reference-universe.md` | **no** | The author's personal-history and pop-culture library — the only place a reference may be sourced from. |
 | `do-not-promote.md` | **no** | Subjects ruled off-limits. |
 | `ideas-bank.md` | **no** | Spike cards the Oracle decked and the author did not pick. Quotes his commits, dailies and session sidecars. |
+| `pieces/<run>/trace/` | **no** | Every run's trace: one record per stage invocation, the author's labels, the rendered local viewer. The kit that writes and checks them is public at `.claude/skills/content-machine/trace/`, importing `productcraft/trace/`. |
 
 The private directories are git-ignored (`.gitignore`, "Content Machine private brain"). The corpus
 is the irreplaceable input: raw interview answers, hand-edits, and pre-AI prose, consolidated and
