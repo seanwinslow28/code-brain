@@ -11,6 +11,7 @@ The public pieces the studio's evals-and-trace design needs before its first eng
 | Cases template | [cases-template.md](cases-template.md) → an engagement's `trace/cases.md` | the writer pass, once a train has run |
 | Entry-id helper | [nextid.py](nextid.py) | the coordinator, before writing a ledger entry |
 | Failure-code taxonomy | [taxonomy.md](taxonomy.md) | Sean, when a label carries a code; `check.py` reads every code table in it; the viewer counts rows per mode |
+| Registry numbers | [registry.py](registry.py) → the runtime × seat tables pasted into [templates/runtime-registry.md](../templates/runtime-registry.md) § Numbers | the coordinator at Close, and #287's trials; counts only, never a percentage |
 
 Everything runs on the system `python3` with nothing installed: no model, no network, no third-party import. Templates hold no private content; the scripts read the private ledger only at run time and write only `eval.html`.
 
@@ -59,7 +60,7 @@ Ten deterministic lines, in this order:
 4. **Input hashes match disk or a recorded prior revision** — each input's sha256 matches the file now, or matches a hash an earlier pass recorded as its output for that path *and* the disk holds the latest recorded revision. Outputs are checked the same way. A file edited outside a pass fails here — with one carve-out, below.
 5. **Cited corpus files appear in the transcript's file reads** — every `corpus/…` path an output artifact or ledger entry cites is in the record's `## Corpus read`, **or in that of an earlier pass which wrote the same artifact**: a repair inherits the citations of the revision it overwrote, and charging it with those reads would be a false finding. Reads travel along one artifact's revision chain, never sideways. `grounding: full` with no corpus read, or `grounding: none` with one of this pass's own, is a finding.
 6. **Every move names an existing upstream item; splits are subsets** — each `kept` / `split` / `merged` / `dropped` item is found in an input readable at its recorded hash (ids like `O2`, `OC-1a`, `KR-2`; ranges like `E1–E5` expand; prose items are phrase-matched); a split's children are new and appear in the artifact. Malformed lines and unknown ops are findings. `added` lines are new by definition.
-7. **Meter present or UNMEASURED** — `meter_source` is in the vocabulary; a measured meter carries whole token counts in one of two forms, the split `input` + `output` pair or a single `total` (which is what the Agent tool's usage field and the Codex footer each actually report); `UNMEASURED` is honest and listed, and so is a total that was never split.
+7. **Meter present or UNMEASURED** — `meter_source` is one value of the [runtime registry](../templates/runtime-registry.md)'s vocabulary (one per registry row, mirrored as `METER_SOURCES` and held equal by a test); a measured meter carries whole token counts in one of two forms, the split `input` + `output` pair or a single `total` (which is what the Agent tool's usage field and the Codex footer each actually report; every other row reports the pair); `UNMEASURED` is honest and listed, and so is a total that was never split.
 8. **Each drafting stage has one draft, an audit, and its required co-signs** — per stage reached: exactly one `draft` by the stage's seat, at least one `audit` by the fixed auditor, a `co-sign` by the co-signing seat at stages 2 and 6. Full trains only.
 9. **Trials blind-labeled before their runtime is shown** — a trial's inputs are hash-identical to its baseline's; while either lacks a verdict, the rendered page's rows for both hide runtime, launch form and log path (the check reads the pair's own rows in `eval.html`, since gates may share a runtime).
 10. **Every `failure_code` is in the taxonomy; a quote-required code quotes its text** — a code in `labels.md` must appear in [taxonomy.md](taxonomy.md), so the column can never be free text, and `manufactured` is a finding unless the row's critique quotes the text it indicts. A blank column is the normal state and passes with a note (#296 clause 8, landed #298).
@@ -103,6 +104,10 @@ cd productcraft/trace && python3 tests/synth.py samples/synthetic-engagement && 
 ```
 
 [samples/synthetic-engagement/](samples/synthetic-engagement/) is that folder, committed with its rendered `trace/eval.html` so the page can be opened from a fresh clone. The #292 prototype render Sean ratified stays untouched at [samples/pc-eng-000-callboard/](samples/pc-eng-000-callboard/).
+
+## Registry numbers
+
+What each runtime has done on real work lives in the registry's § Numbers as **counts** — labeled passes as "3 of 4", the rung-0 clean count, medians over measured passes, trials and promotions — and never as a number typed by hand: `python3 productcraft/trace/registry.py productcraft/ledger/engagements/pc-eng-*` regenerates both tables (per runtime, per runtime × seat with its family) and the coordinator replaces the section at Close. The generator runs rung 0 in memory to learn which passes a finding names, counts a meter as measured only from a registered source, and reads a promotion from one `promoted:` line in the trial record's `## Notes` (#272 decision 9, built on [#286](https://github.com/seanwinslow28/code-brain/issues/286)). No percentage at any count.
 
 ## Shared home
 

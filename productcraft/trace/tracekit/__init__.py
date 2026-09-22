@@ -23,9 +23,15 @@ beside the process-waste family; the viewer's *Failure taxonomy* slot fills from
 the labels file — one line per mode with its count, a row's code linking to its
 mode — and stays in its empty state until a row carries a code.
 
+0.5.0 adds the registry numbers (#286, #272 decision 9): `registry.py` derives the
+runtime × seat table the runtime registry's § Numbers holds — labeled passes as
+counts, the rung-0 clean count, medians over measured passes, trials and
+promotions — so no number in that public file is ever typed by hand; the
+meter-source vocabulary grows to one value per registry row, with a drift test.
+
 First copy. The content machine's kit (#291) shares this code rather than
 forking it; `craftwork` extracts the shared home later.
 """
 
 KIT_NAME = "productcraft/trace"
-KIT_VERSION = "0.4.0"
+KIT_VERSION = "0.5.0"

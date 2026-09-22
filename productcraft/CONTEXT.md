@@ -238,6 +238,30 @@ _Avoid_: fallback, reroute
 A dated stop of one seat's branch when its runtime is unavailable and no substitution is approved. The dependent work waits; lanes are never merged to keep moving.
 _Avoid_: skip, pause
 
+**Runtime registry**:
+The one tracked table every -craft team shares of the runtimes a pass may run on: one row per harness and provider route, carrying the launch form, sandbox, disk reach, meter source, tier steps and standing. Owned by the master skill; the seat file's `model:` line names a row's runtime string.
+_Avoid_: model list, provider config
+
+**Runtime row**:
+One route in the registry — a harness paired with who serves the model — not a model. The model and effort are parameters of a pass and ride in the record's runtime string.
+_Avoid_: model entry, backend
+
+**Standing**:
+What a runtime row has earned: ruled (placed by a ratified ruling), unmeasured (registered, no labeled pass on real work), substitution-eligible (one blind-labeled, rung-0-clean trial), or baseline-eligible (rung 1 applied plus the count floor the trials ticket sets). A runtime never skips a standing, and a standing changes only by an edit to the row that names its numbers.
+_Avoid_: status, tier, maturity
+
+**Registry numbers**:
+The counts the registry's Numbers section holds per runtime and per runtime × seat — labeled passes as "3 of 4", the rung-0 clean count, medians over measured passes, trials and promotions — regenerated from the records and labels at Close, never typed by hand, never a percentage.
+_Avoid_: leaderboard, benchmark, score
+
+**Meter source**:
+The registry's name for where a pass's token count came from — one value per row, mirrored in the trace kit and held equal by a test. It says where the number came from, never how good it is.
+_Avoid_: cost source, usage type
+
+**Promotion**:
+A trial output entering the train in place of the baseline it shadowed, by a dated owner-approved substitution once the blind label passes the trial and fails the baseline, recorded as one `promoted:` line in the trial record's notes.
+_Avoid_: swap-in, winner
+
 ### The trace
 
 **Pass**:

@@ -12,8 +12,8 @@ pass: pass-01                          # pass-NN, two digits, launch order; the 
 seat: product-strategist               # seat slug per templates/artifact-header.md; coordinator | red-team-gate
 kind: draft                            # draft | audit | co-sign | gate | repair | trial | open | readout | close
 stage: 1                               # fixed train numbering 1–7; 0 for open, readout, close, the breakdown, a one-off
-runtime: claude-opus-5                 # the model that actually ran — a trial's real runtime too (the viewer hides it, the record never does)
-launch: "Agent tool, fresh context"    # verbatim launch form: the Agent-tool call, or the codex exec line
+runtime: claude-opus-5                 # the model that actually ran, as its registry row's `runtime:` string (templates/runtime-registry.md) — a trial's real runtime too (the viewer hides it, the record never does)
+launch: "Agent tool, fresh context"    # verbatim launch form: the registry row's form with this pass's values
 effort: high
 launched: 2026-10-06T08:12:00-04:00    # exact instant, written before the seat fires
 completed: 2026-10-06T08:46:00-04:00   # exact instant, written after it returns
@@ -24,7 +24,7 @@ meter:                                 # tokens as the runtime reported them; `m
   cached: 96000
 # meter:                               # …or the single `total`, which is what both sources actually report
 #   total: 203700
-meter_source: Agent-tool usage         # Agent-tool usage | codex footer | UNMEASURED — never an estimate
+meter_source: Agent-tool usage         # one value of the registry's vocabulary: Agent-tool usage | claude -p result.usage | codex turn.completed.usage | codex footer | pi message_end usage | hermes usage-file | gemini stats.tokens | UNMEASURED — never an estimate
 inputs:                                # every file handed over, path + content hash, relative to the engagement folder
   - path: brief.md                     # (studio-prefixed paths — productcraft/…, systemcraft/… — resolve against the repo)
     sha256: <64 hex>
@@ -62,7 +62,7 @@ artifacts/strategy-pov.md § Moves
 
 ## Notes
 
-<!-- deviations, substitutions, anything the next reader must know; never prose about what the seat "thought" -->
+<!-- deviations, substitutions, anything the next reader must know; never prose about what the seat "thought". A promoted trial carries one line here beginning `promoted: <date>` — the registry numbers read that line and nothing else -->
 ```
 
 ## The kinds

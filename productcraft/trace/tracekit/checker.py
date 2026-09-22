@@ -476,7 +476,7 @@ def _meter(eng: Engagement) -> Check:
         else:
             c.findings.append(
                 f"{r.pass_id}: meter is {r.meter_source} but carries neither `input` + `output` nor a `total` "
-                f"(the one number the Agent tool and the Codex footer each report)"
+                f"(a single total is what the Agent tool and the Codex footer report; the other registry rows report the pair)"
             )
     unmeasured = [r.pass_id for r in eng.records if r.meter_source == "UNMEASURED"]
     if unmeasured:

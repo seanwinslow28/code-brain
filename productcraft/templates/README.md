@@ -8,6 +8,7 @@ Public machinery; filled artifacts are private (`ledger/engagements/<eng-id>/art
 - [seat-preamble.md](seat-preamble.md) — the standing behavior every seat invocation carries; prepended verbatim to every dispatch (#273).
 - [ledger-entry.md](ledger-entry.md) — the decision-ledger entry with the canon line (#268).
 - [handoff-contract.md](handoff-contract.md) — the Systemcraft handoff, both directions (#271).
+- [runtime-registry.md](runtime-registry.md) — every -craft team's table of runtimes: one row per harness and provider route with its launch form, sandbox, meter source, tier steps and standing; the trial protocol by which a new runtime earns its way in; the numbers, regenerated at Close, never typed by hand (#286).
 
 **The seven seat artifacts, in train order**
 

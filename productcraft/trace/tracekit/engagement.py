@@ -37,7 +37,18 @@ __all__ = [
 KINDS = ("draft", "audit", "co-sign", "gate", "repair", "trial", "open", "readout", "close")
 # the coordinator's own passes: no seat fires, so there is no drafting conversation to withhold
 COORDINATOR_KINDS = ("open", "readout", "close")
-METER_SOURCES = ("Agent-tool usage", "codex footer", "UNMEASURED")
+# one value per runtime-registry row (productcraft/templates/runtime-registry.md § Meter-source vocabulary);
+# a test fails if the two drift. A value names where the number came from, never how good it is.
+METER_SOURCES = (
+    "Agent-tool usage",            # Claude Code, Agent tool: one total
+    "claude -p result.usage",      # Claude Code headless: the split pair
+    "codex turn.completed.usage",  # Codex CLI --json: the split pair (any provider route)
+    "codex footer",                # Codex CLI plain mode: one total on stderr
+    "pi message_end usage",        # Pi: the split pair per assistant message, summed
+    "hermes usage-file",           # Hermes --usage-file: the split pair, main loop at top level
+    "gemini stats.tokens",         # Gemini CLI --output-format json: prompt + candidates per model
+    "UNMEASURED",
+)
 REQUIRED_FIELDS = (
     "pass", "seat", "kind", "stage", "runtime", "launch", "effort", "launched", "completed",
     "wall_clock_s", "meter_source", "inputs", "withheld", "outputs", "raw_log", "checks",
