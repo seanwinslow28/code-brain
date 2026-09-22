@@ -5,8 +5,8 @@ connects:
   - Operational Uptime vs. Semantic Value in Agent Fleets
   - Supervision Fatigue as the Hard Cap on Fleet Scaling
   - Silent Decay in Strategic Pipelines
-created: 2026-09-21
-updated: 2026-09-21
+created: 2026-09-22
+updated: 2026-09-22
 ---
 
 ## Synthesis

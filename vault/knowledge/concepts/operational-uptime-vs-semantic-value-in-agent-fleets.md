@@ -2,30 +2,30 @@
 title: "Operational Uptime vs. Semantic Value in Agent Fleets"
 type: concept
 sources:
-  - knowledge/connections/the-semantic-debt-trap-in-automated-knowledge-synthesis.md
+  - knowledge/connections/the-illusion-of-productivity-in-stale-feedback-loops.md
 tags: [auto-generated, phase-6]
-created: 2026-09-21
-updated: 2026-09-21
+created: 2026-09-22
+updated: 2026-09-22
 ---
 
 ## Definition
 
-This invariant describes a decoupling where mechanical execution metrics (uptime, run counts) diverge from informational utility (concept quality, connection validity). The system maintains the appearance of health through continuous operation, while the underlying knowledge graph suffers from silent decay because agents produce low-value artifacts that require increasing human supervision to filter. This creates a false positive in system monitoring, where 'active' status masks 'stale' or 'partial' semantic states.
+This invariant describes a decoupling between technical execution metrics and epistemic utility, where agents maintain high success rates and schedule adherence while their outputs lose relevance or accuracy over time. The system interprets routine completion as health, ignoring the silent erosion of context fidelity that occurs when supervisory loops fail to correct drift. This creates a false positive in system monitoring, masking the degradation of the knowledge base's long-term utility behind a veneer of reliable automation.
 
 ## Context
 
-Sean's vault synthesizer logs show high operational frequency (e.g., 41c/4x runs) while the underlying semantic debt accumulates because the critic agent remains stale for weeks. This forces Sean to manually verify output quality, turning automation into a source of cognitive load rather than relief.
+Sean’s vault relies on the synthesizer to maintain semantic integrity across years of data. If the fleet continues to run successfully while producing stale or unverified insights, Sean accumulates 'semantic debt' that becomes increasingly expensive to audit and correct later. Recognizing this tension prevents him from mistaking activity for progress.
 
 ## Evidence
 
-> There is a critical tension between the operational uptime of agents and the semantic value they produce.
+> This connection reveals a tension where active agents continue to generate routine outputs while critical supervisory agents decay, creating a false sense of system health.
 
-> The fleet status shows 'Active agents: 9 of 17 | Disabled: 8', indicating a significant portion of the infrastructure is inactive and potentially requiring maintenance or re-evaluation.
+> The daily-driver and job-feed maintain their schedules, but the vault-critic and session-end-flush have gone stale, meaning no one is auditing the quality or closing the loops on the work being done.
 
 ## Examples
 
-- The vault-critic agent has been 'stale' for 389.1 hours, with notes indicating 'status=partial articles=3 codex_fail=1', which likely requires Sean's attention to resolve the partial state.
-- Sean’s vault synthesizer exhibits a dangerous decoupling where operational uptime masks semantic decay, creating a 'semantic debt' that accumulates silently.
+- vault-synthesizer ran successfully, identifying and surfacing concepts/connections.
+- The lack of critic feedback means the vault-synthesizer is not being corrected on its rejection rates, potentially reinforcing poor concept selection patterns.
 
 ## Related Concepts
 

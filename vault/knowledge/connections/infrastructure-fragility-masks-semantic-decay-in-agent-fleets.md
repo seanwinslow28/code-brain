@@ -5,13 +5,13 @@ connects:
   - Operational Uptime vs. Semantic Value in Agent Fleets
   - The Illusion of Competence in Automated Systems
   - Context Management as a Bottleneck
-created: 2026-09-21
-updated: 2026-09-21
+created: 2026-09-22
+updated: 2026-09-22
 ---
 
 ## Synthesis
 
-This connection reveals a critical tension where hardware and API fragility masks semantic decay in agent fleets, leading to a false sense of operational health. When key infrastructure components like Nitter mirrors fail or X enforces HTTP 402 errors, the agents continue to report 'success' based on protocol compliance rather than data quality. This creates a dangerous blind spot where Sean's fleet appears productive while silently accumulating low-signal artifacts, effectively decoupling technical reliability from strategic progress.
+This connection reveals a critical tension where hardware and API fragility masks semantic decay in agent fleets, leading to a false sense of operational health. When key infrastructure components like Nitter mirrors fail or X enforces HTTP 402 errors, the agents continue to report 'success' based on protocol compliance rather than data quality. This creates a dangerous blind spot where Sean's fleet appears productive while silently accumulating low-signal artifacts, effectively decoupling technical reliability from strategic progress. The consequence is that Sean may invest significant compute resources into scraping activities that yield no actionable insight, mistaking operational uptime for semantic value.
 
 ## Threads
 

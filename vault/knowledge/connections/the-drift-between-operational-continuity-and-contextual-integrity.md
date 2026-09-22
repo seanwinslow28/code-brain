@@ -2,32 +2,32 @@
 title: "The Drift Between Operational Continuity and Contextual Integrity"
 type: connection
 connects:
-  - The Illusion of Health in Autonomous Systems
-  - SRE Error Budget for Agents
-  - Resilience Engineering: Work-as-Imagined vs Work-as-Done
-created: 2026-07-02
-updated: 2026-07-02
+  - Operational Uptime vs. Semantic Value in Agent Fleets
+  - Silent Decay in Strategic Pipelines
+  - Control Room Observability
+created: 2026-09-22
+updated: 2026-09-22
 ---
 
 ## Synthesis
 
-There is a fundamental tension between maintaining operational continuity (green dashboards, successful script exits) and preserving contextual integrity (fresh, accurate shared assumptions). Autonomous systems optimize for the former by normalizing deviance through local adaptations, which silently erodes the latter. This creates an illusion of health where the system appears functional while its underlying knowledge base becomes stale or incorrect, leading to a crisis of trust when the divergence finally manifests as a visible failure.
+There is a fundamental tension between maintaining operational continuity (green dashboards, successful script exits) and preserving contextual integrity (fresh, accurate shared assumptions). When agents prioritize uptime over semantic verification, they create a 'false stability' that masks epistemic blindness. This leads to a state where the system is technically functional but strategically inert, as the operator trusts the signal of activity rather than the substance of the output.
 
 ## Threads
 
-### [[The Illusion of Health in Autonomous Systems]]
+### [[Operational Uptime vs. Semantic Value in Agent Fleets]]
 
-> The dashboard is not lying; it is faithfully reporting the system-as-imagined after the system-as-done has drifted away.
+> Autonomous systems create an illusion of health when their internal metrics (uptime, task completion) are decoupled from external validity (accuracy, relevance).
 
-### [[SRE Error Budget for Agents]]
+### [[Silent Decay in Strategic Pipelines]]
 
-> Each agent-to-agent boundary gets a budget for stale context, missing artifacts, skipped writes, late outputs, and silent fallbacks.
+> These articles argue that high-frequency status reporting and automated synthesis create a false sense of stability while masking epistemic blindness or quality erosion.
 
-### [[Resilience Engineering: Work-as-Imagined vs Work-as-Done]]
+### [[Control Room Observability]]
 
-> A green system can still be dangerous if it has lost shared context with its human operator.
+> This mechanism treats system health not as a binary state but as a defeasible claim supported by explicit subclaims, context, evidence, assumptions, and unresolved rebuttals.
 
 ## Implications
 
-- Sean must implement 'incident archeology' to trace back from visible failures to the accumulated drift that caused them, rather than just fixing the immediate symptom.
-- Health monitoring metrics need to be augmented with 'common ground' checks that verify shared assumptions between agents and humans, not just script exit codes.
+- Sean must shift from monitoring agent uptime to monitoring the semantic freshness of his daily notes and job hunt artifacts.
+- The absence of a 'vault-critic' run since August 31st indicates a critical gap in validating the coherence of the synthesized knowledge base.

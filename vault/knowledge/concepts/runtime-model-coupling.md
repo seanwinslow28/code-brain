@@ -2,31 +2,33 @@
 title: "Runtime-Model Coupling"
 type: concept
 sources:
-  - knowledge/concepts/runtime-model-coupling.md
+  - 20_projects/research/2026-09-21-what-jev-is.md
 tags: [auto-generated, phase-6]
-created: 2026-08-28
-updated: 2026-08-28
+created: 2026-09-22
+updated: 2026-09-22
 ---
 
 ## Definition
 
-This architectural pattern describes the strategic decision to embed the inference engine directly within the application process, thereby eliminating network latency and external service dependencies. By co-locating the model with the runtime environment, the system achieves deterministic execution times and zero marginal cost per inference cycle. This coupling transforms the model from a fragile external dependency into a robust internal invariant, ensuring that verification logic remains available even when upstream infrastructure fails.
+This invariant describes the structural dependency where a decision engine's operational viability is strictly bound to its input schema and output constraints, rather than its generative capacity. When a model like Jev is defined as 'not a drop-in replacement for the LLM' because it lacks text generation, it forces the surrounding system architecture to decouple reasoning from expression. This coupling creates a rigid boundary where the agent must handle all semantic formatting externally, turning the model into a pure logic gate rather than a creative partner.
 
 ## Context
 
-Sean's fleet operates in headless environments where network reliability is non-deterministic. Decoupling the model from the runtime introduces a single point of failure that breaks automation pipelines during intermittent outages. Embedding the model ensures that the verification gate never sleeps, which is critical for maintaining the integrity of the daily synthesis loop.
+Sean is evaluating Jev for Devcraft and Productcraft roles. Understanding this coupling prevents him from attempting to use Jev as a general-purpose synthesizer, which would fail because the model 'does not write text, code or rationales'. He must instead design hooks that feed structured state and consume typed choices.
 
 ## Evidence
 
-> No model host to be asleep/unreachable, which eliminates the fleet's documented intermittent-local-host failure mode and costs $0 recurring.
+> The docs say outright it is '**not** a drop-in replacement for the LLM behind Claude Code'
 
-> External services offer flexibility but introduce latency and failure modes that break headless automation, while expensive LLM judges create an economic barrier to scale.
+> It does not write text, code or rationales
+
+> a `state` (text or JSON) plus a map of typed questions in, one typed answer per question out
 
 ## Examples
 
-- Using an in-process ONNX model for the E1 gate instead of calling an external API endpoint
-- Eliminating the need for provider fallback mechanisms during local host downtime
+- Using Jev as a 'typed tool-call risk Noul in a PreToolUse hook'
+- Failing to use it for 'counts, dates, arithmetic' because those are modes 2 and 3 which Jev cannot produce
 
 ## Related Concepts
 
-[[Automation Reliability]] [[The Verification-Governance Inversion]]
+[[Runtime-Model Coupling]] [[Constraint-First Automation vs. General Efficiency]] [[The Calibration Bottleneck in Scalable Creative Production]]

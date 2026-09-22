@@ -4,29 +4,31 @@ type: concept
 sources:
   - knowledge/concepts/the-calibration-bottleneck-in-scalable-creative-production.md
 tags: [auto-generated, phase-6]
-created: 2026-09-21
-updated: 2026-09-21
+created: 2026-09-22
+updated: 2026-09-22
 ---
 
 ## Definition
 
-This mechanism describes the non-linear scaling of human cognitive load relative to automated output volume. As an agent fleet increases its production rate, the supervisor's capacity to verify quality does not scale linearly but rather hits a hard ceiling defined by attention span and verification latency. This creates a structural bottleneck where the value of the system is determined not by the speed of creation, but by the throughput of the human audit layer.
+This pattern emerges when a high-performance, low-cost decision model is deployed at scale but lacks the robustness to handle distribution shifts or unanswerable queries. The bottleneck is not computational throughput but epistemic stability: the model performs well on known distributions ('strong zero-shot on semantic classification') but fails silently or incorrectly when faced with ambiguity ('calibration does not survive out-of-distribution'). This creates a production risk where speed and cost advantages are negated by the need for heavy human-in-the-loop verification on edge cases.
 
 ## Context
 
-Sean is observing his own fleet runs where concept counts are skyrocketing (125+ concepts) while his ability to meaningfully engage with them remains constant. He needs to recognize that adding more agents or increasing their output is counter-productive if it exceeds his personal calibration threshold, leading to 'legibility debt' where he can no longer distinguish signal from noise.
+Sean is building automated fleets (vault synthesizer). If he integrates Jev, he must account for the fact that 'single broad questions underperform decomposed ones'. This limits the scalability of any creative or judgment pipeline that relies on Jev for initial triage or classification without rigorous decomposition steps.
 
 ## Evidence
 
-> This connection reveals a fundamental tension between the scalability of automated synthesis and the human capacity to verify its output. As Sean’s vault synthesizer scales up concept production, the volume of potential insights outpaces his ability to grade them effectively.
+> calibration does not survive out-of-distribution or unanswerable questions
 
-> The consequence is that the marginal value of each additional concept drops precipitously once the supervisor's attention is fully saturated, turning high-volume runs into noise rather than signal.
+> single broad questions underperform decomposed ones
+
+> roughly tied with a frontier LLM at 1/100–1/300 of the cost and 2–3× the speed
 
 ## Examples
 
-- Run on 2026-08-15 produced 123 concepts and 43 connections in 2733 seconds, yet the rejected count was only 36, suggesting a high volume of low-signal output that requires disproportionate human review time.
-- The shift from qwen3-14b to qwen3.6-35b-a3b-32k did not reduce the concept count significantly (94 vs 97 in July), indicating that model size is not the primary driver of calibration load.
+- The five reproducible GitHub evals showing 'strong zero-shot on semantic classification (83–96%)'
+- The requirement to use 'decomposed ones' instead of broad questions to maintain accuracy
 
 ## Related Concepts
 
-[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[Legibility Debt as a Supervision Failure Mode]]
+[[Supervision Fatigue as the Hard Cap on Fleet Scaling]] [[Silent Failure Propagation in Agent Fleets]]

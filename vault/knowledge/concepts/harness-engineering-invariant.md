@@ -2,30 +2,31 @@
 title: "Harness Engineering Invariant"
 type: concept
 sources:
-  - knowledge/concepts/harness-engineering-invariant.md
+  - 20_projects/research/2026-09-21-harnesses-per-runtime.md
 tags: [auto-generated, phase-6]
-created: 2026-09-03
-updated: 2026-09-03
+created: 2026-09-22
+updated: 2026-09-22
 ---
 
 ## Definition
 
-This invariant describes the structural necessity of a robust harnessing layer to compensate for the inherent context limitations of local models. It posits that reliability in long-horizon agentic workflows is not determined by model parameter count, but by the explicit management of routing, caching, and context cleanliness. Without these engineering controls, local models suffer from semantic drift and self-contradiction, rendering them unreliable for complex synthesis tasks despite their cost advantages.
+A structural constraint where the viability of an agentic workflow is determined not by the model's capability, but by the harness's ability to expose a verifiable meter_source and raw_log that satisfy external auditing requirements. This invariant forces a divergence between 'rich' interfaces (which may lack machine-readable usage data) and 'thin' interfaces (which provide precise telemetry but require configuration wrappers). The system must treat metering fidelity as a first-class dependency, meaning any new runtime adds a fixed wiring cost to the observability layer.
 
 ## Context
 
-Sean is actively migrating his fleet to local models (qwen3.6-35b) to reduce costs, but the run logs show significant variance in concept retention and rejection rates. Understanding this invariant helps him prioritize infrastructure investments that stabilize these cheaper models rather than chasing larger parameter counts.
+Sean is building a Productcraft seat-pass system that requires end-to-end token accounting. If the harness cannot report `input` + `output` splits or a `total` via a recognized `meter_source`, the entire trace-kit infrastructure fails to meter the work, rendering the agent's output unbillable and unobservable.
 
 ## Evidence
 
-> the way they did that was by transitioning to use many more local models but also having better practices like using better routing better caching keeping the context clean
+> Every new harness therefore adds one meter_source vocabulary entry to check.py — that is a fixed wiring cost shared by every row below.
 
-> having better visibility for what people are using and for what uh what kind of task So we are seeing the local models like crossing the line right like GLM is on everyone's minds
+> The best-shaped meter is Hermes's --usage-file (split pair, cache, reasoning, cost, an auxiliary block, written even on failure).
 
 ## Examples
 
-- The shift from qwen3-14b to qwen3.6-35b-a3b-32k in August 2026 shows a stabilization of concept counts despite the lower cost per token, provided the harnessing layer (routing/caching) is maintained.
+- Codex CLI provides `--json` output which includes split token counts, making it a credible universal harness despite config complexity.
+- Hermes writes usage data to a file even on failure, ensuring the meter is never lost if the agent crashes mid-run.
 
 ## Related Concepts
 
-[[Context Compounding]] [[Operational Visibility vs. Semantic Value in Agent Fleets]]
+[[Operational Uptime vs. Semantic Value in Agent Fleets]] [[Instrumentation vs. Traces]]
