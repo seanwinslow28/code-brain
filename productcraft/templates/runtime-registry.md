@@ -4,7 +4,7 @@ First copy, built on the Productcraft build map's [Runtime registry and model-tr
 
 **What this file is for.** Seat identity is already separate from runtime: rule 7 puts the seat contract, lane manifest and target in the prompt, and each seat file's `model:` line names the runtime that actually runs. Swapping a runtime is therefore a one-line seat-file edit plus a launch form the coordinator knows. This is the table of launch forms — and the standing each runtime has earned, so that an unmeasured runtime never becomes a seat baseline by drift.
 
-**Rulings adopted here, pending Sean's ratification** (each one is a rule-8 ticket line until he rules): the row shape below; one `meter_source` value per row in the trace kit's vocabulary, held equal by a test; Aider off the registry; Jev off the registry as a seat runtime; Pi's isolated-home form with an owner-authored `SYSTEM.md`; the subscription-auth bridges off until their terms are answered. Overruling any of them is an edit to its row, not a re-litigation of #267.
+**Rulings ratified by Sean, 2026-09-22** (adopted by recommendation on 2026-09-21, ratified as written): the row shape below; one `meter_source` value per row in the trace kit's vocabulary, held equal by a test; Aider off the registry; Jev off the registry as a seat runtime; Pi's isolated-home form with an owner-authored `SYSTEM.md`, with the subscription-auth bridges off until their terms are answered. Overruling any of them is a dated edit to its row, not a re-litigation of #267.
 
 ## A row is a route, not a model
 
